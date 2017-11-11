@@ -8,7 +8,7 @@ gh_issue_number: 1334
 <div style="float: right; width: 300px; padding: 0 0 1em 1em;">
   <div style="padding: 0.5em 1em 0em 1em; border: 1px solid #ccc; border-radius: 6px;">
     <h3>Try It Out Yourself</h3>
-    <p>The code for this project is hosted on <a href="https://github.com/manvscode/timezoner">Github and can be cloned from here.</a></p>
+    <p>The code for this project is hosted on <a href="https://github.com/manvscode/timezoner">GitHub and can be cloned from here.</a></p>
   </div>
 </div>
 
