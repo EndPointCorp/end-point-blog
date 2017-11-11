@@ -13,13 +13,13 @@ However, software testing is more complex than that: this is
 because software almost always incorporates "state" or memory that
 affects subsequent operations. For instance, the following pseudocode:
 
-> ~~~
+> ```
 > if (VALUE is not defined)
 > then
 > VALUE := 1.0
 > fi
 > FRACTION := 1.0 / VALUE
-> ~~~
+> ```
 >
 
 In this simple case, the code fragment will always operate correctly

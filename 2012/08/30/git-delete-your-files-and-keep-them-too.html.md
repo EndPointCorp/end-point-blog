@@ -20,7 +20,10 @@ So: the aim here is to make the stuff vanish from all the other clones (when the
  $ git commit ...
  $ git push ...
 ```
-Now, everything that was in the "stuff" tree remains, for "production", but every other clone will remove these files when they update from the central repository:  ~~~bash
+
+Now, everything that was in the "stuff" tree remains, for "production", but every other clone will remove these files when they update from the central repository:
+
+```bash
 $ git pull origin master
  ...
  delete mode 100644 stuff/aaa

@@ -13,11 +13,9 @@ We determined at the outset that getting the application moved into an establish
 
 I spent some time investigating and inevitably came across the well-regarded three-part blog series:
 
-
 1. [Converting Legacy Apps to CakePHP Part I](http://www.littlehart.net/atthekeyboard/2008/11/27/converting-legacy-apps-to-cakephp-part-1/)
 1. [Part II](http://www.littlehart.net/atthekeyboard/2008/12/04/converting-legacy-apps-to-cakephp-part-2/)
 1. [Part III](http://www.littlehart.net/atthekeyboard/2008/12/30/converting-legacy-apps-to-cakephp-part-3/)
-
 
 (The author of that series has a book out on the subject, as well.)
 
@@ -41,51 +39,51 @@ Getting the application to run within CakePHP in this manner does not require th
 1. Set up a new catch-all route that invokes this legacy action
 
 After these steps, you have CakePHP fronting your legacy app, but otherwise not doing much else.  A snippet of our code that deals with pulling in a legacy app page in this manner:
-  ~~~php
-    function includeLegacyPage($path = null) {
-        // map the path passed in or from the request to the legacy/ subdirectory
-        $cakeRequestPath = $path ? $path : $this->controller->params['url']['url'];
-        $path = WWW_ROOT . 'legacy/' . $cakeRequestPath;
 
-        // This just maps input arguments to globals
-        $this->prepareGlobals(array('cakeRequestPath' => $cakeRequestPath));
+```php
+function includeLegacyPage($path = null) {
+	// map the path passed in or from the request to the legacy/ subdirectory
+	$cakeRequestPath = $path ? $path : $this->controller->params['url']['url'];
+	$path = WWW_ROOT . 'legacy/' . $cakeRequestPath;
 
-        // Resolve directories to an index.php page as necessary
-        if (is_dir($path)) {
-            if(substr($path, -1) != '/')
-                $path .= '/';
-            $path .= 'index.php';
-        }
+	// This just maps input arguments to globals
+	$this->prepareGlobals(array('cakeRequestPath' => $cakeRequestPath));
 
-        if (!file_exists($path)) {
-            $this->controller->render('error');
-        }
+	// Resolve directories to an index.php page as necessary
+	if (is_dir($path)) {
+		if(substr($path, -1) != '/')
+			$path .= '/';
+		$path .= 'index.php';
+	}
 
-        try {
-            // buffer PHP output
-            ob_start();
+	if (!file_exists($path)) {
+		$this->controller->render('error');
+	}
 
-            // this "invokes" the legacy page and gathers its content
-            include $path;
+	try {
+		// buffer PHP output
+		ob_start();
 
-            // pull in the buffered content
-            $this->controller->output = ob_get_contents();
+		// this "invokes" the legacy page and gathers its content
+		include $path;
 
-            // stop output buffering
-            ob_end_clean();
-        } catch (JackExceptionRedirect $e) {
-            // We adjusted the legacy app's redirect functions to throw a custom exception
-            // class that we catch here, so we can use CakePHP's native redirection
-            $this->controller->redirect($e->location, $e->getCode(), false);
-        } catch (Exception $e) {
-            // All other errors propagate up
-            throw $e;
-        }
+		// pull in the buffered content
+		$this->controller->output = ob_get_contents();
 
-        $this->controller->autoRender = false;
-        $this->controller->autoLayout = false;
-    }
+		// stop output buffering
+		ob_end_clean();
+	} catch (JackExceptionRedirect $e) {
+		// We adjusted the legacy app's redirect functions to throw a custom exception
+		// class that we catch here, so we can use CakePHP's native redirection
+		$this->controller->redirect($e->location, $e->getCode(), false);
+	} catch (Exception $e) {
+		// All other errors propagate up
+		throw $e;
+	}
 
+	$this->controller->autoRender = false;
+	$this->controller->autoLayout = false;
+}
 ```
 
 Our PageController's "legacy" action uses the above routine to pull in the legacy page.
@@ -97,19 +95,18 @@ The second step, of getting CakePHP to control the session, the database handle,
 - And so on and so forth.
 
 For instance:
-  ~~~php
-        App::import('ConnectionManager');
-        $standard_globals = array(
-            'cakeDbh'       => ConnectionManager::getDataSource('default')->connection,
-            'cakeSession'   => $this->Session
-        );
 
-        $this->prepareGlobals($standard_globals);
+```php
+App::import('ConnectionManager');
+$standard_globals = array(
+	'cakeDbh'       => ConnectionManager::getDataSource('default')->connection,
+	'cakeSession'   => $this->Session
+);
 
+$this->prepareGlobals($standard_globals);
 ```
 
 Up until now, CakePHP's introduction into the mix hasn't added value.  Having reached this point, however, you're ready to start taking advantage of CakePHP.  From here, we refactored our special "legacy" action logic into a new "LegacyPage" component so any controller/action could use the mechanism.  Then we were able to:
-
 
 - Refactor legacy user authentication logic to use CakePHP's Auth core component
 - Refactor various legacy pages to be fronted by CakePHP controller actions, moving the high-level flow control (input validation, user validation, and associated redirects) out of the legacy page and into the controller.  This simplifies the legacy page (making it more strictly limited to presentation) and puts flow control where it belongs.

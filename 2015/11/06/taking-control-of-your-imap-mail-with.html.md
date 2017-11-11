@@ -15,14 +15,14 @@ IMAPFilter is available in most package managers and easily configured with a si
 
 A few of my favorite IMAPFilter rules (where 'endpoint' is configured as my work IMAP account):
 
- HTML generated using hilite.me ~~~
+```html
 <span style="color: #75715e">-- Mark daily timesheet reports as read, move them into a Timesheets archive mailbox</span>
 <span style="color: #f8f8f2">timesheets</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">endpoint[</span><span style="color: #e6db74">'INBOX'</span><span style="color: #f8f8f2">]:contain_from(</span><span style="color: #e6db74">'timesheet@example.com'</span><span style="color: #f8f8f2">)</span>
 <span style="color: #f8f8f2">timesheets:mark_seen()</span>
 <span style="color: #f8f8f2">timesheets:move_messages(endpoint[</span><span style="color: #e6db74">'Archive/Timesheets'</span><span style="color: #f8f8f2">])</span>
 ```
 
- HTML generated using hilite.me ~~~
+```html
 <span style="color: #75715e">-- Sort newsletters into newsletter-specific mailboxes</span>
 <span style="color: #f8f8f2">jsweekly</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">endpoint[</span><span style="color: #e6db74">'INBOX'</span><span style="color: #f8f8f2">]:contain_from(</span><span style="color: #e6db74">'jsw@peterc.org'</span><span style="color: #f8f8f2">)</span>
 <span style="color: #f8f8f2">jsweekly:move_messages(endpoint[</span><span style="color: #e6db74">'Newsletters/JavaScript Weekly'</span><span style="color: #f8f8f2">])</span>

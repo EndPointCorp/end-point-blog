@@ -5,8 +5,6 @@ tags: database, postgres
 title: Views across many similar tables
 ---
 
-
-
 An application I'm working on has a host of (a dozen or so) status tables, each containing various rows that reflect the state of associated rows in other tables. For instance:
 
 ```sql
@@ -71,7 +69,10 @@ $SQL$
 END;
 $$;
 ```
-Now it's easy to answer the question:~~~sql
+
+Now it's easy to answer the question:
+
+```sql
 select * from all_statuses where code = 'void';
 
 code | display_label |              table_name
@@ -83,5 +84,3 @@ void | Void          | pick_list_statuses
 etc.
 
 If your database uses boilerplate columns such as "last_modified" or "date_created" to record timestamps on rows, you could use similar logic to create a view that would tell you which tables were the most recently modified.
-
-

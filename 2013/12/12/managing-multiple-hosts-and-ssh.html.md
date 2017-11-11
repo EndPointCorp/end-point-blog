@@ -9,7 +9,9 @@ When I started working at End Point I was faced with the prospect of having mult
 
 Although I could have used [ssh-copy-id](http://linux.die.net/man/1/ssh-copy-id) to copy my new SSH public key to all of my old servers, I liked the idea of maintaining separate "personal" and "work" identities and decided to look for a way to automatically use the right key based on the server I was trying to connect to.
 
-For the first few days I was specifying my new identity on the command line using: ~~~
+For the first few days I was specifying my new identity on the command line using:
+
+```
 ssh -i .ssh/endpoint_rsa patrick@server.example.com
 ```
 

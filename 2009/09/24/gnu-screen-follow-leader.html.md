@@ -21,15 +21,18 @@ Sound confusing? Give some of the following commands a try. You can always just 
 
 Steps:
 
-1. start the outermost screen session (called "followme") with a non-default escape sequence (pick one that suits you):  ~~~nohighlight
+1. start the outermost screen session (called "followme") with a non-default escape sequence (pick one that suits you):
+```nohighlight
 screen -S followme -e ^ee
 ```
 
-1. from within the "followme" session, start the inner screen where actual work will be performed: ~~~nohighlight
+1. from within the "followme" session, start the inner screen where actual work will be performed:
+```nohighlight
 screen -S work
 ```
 
-1. get friends and co-workers (logged-in as the same user) to connect to your "followme" screen: ~~~nohighlight
+1. get friends and co-workers (logged-in as the same user) to connect to your "followme" screen:
+```nohighlight
 screen -x followme
 ```
 

@@ -15,9 +15,9 @@ I attended several medium-sized sessions during the day:
 
 Michael McClennen, who programs for the Geology Department at the University of Wisconsin, outlined a flexible approach to providing an API to a complex data store. This supports a [front-end used for displaying](http://paleobiodb.org/navigator/) the location of fossils around the world, which is actually quite impressive. A typical URL for a data request looks like:
 
-> ~~~nohighlight
+> ```nohighlight
 > http://paleobiodb.org/data1.1/colls/summary.json?lngmin=-180&lngmax=180&latmin=-90&latmax=90&limit=all&show=time&level=3&interval_id=14
-> ~~~
+> ```
 
 (The URL above is wrapped for our blogger format; there should be no whitespace anywhere in it.)
 

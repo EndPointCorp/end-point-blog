@@ -222,7 +222,10 @@ APP.zoomToEntity = function(name) {
     }
 };
 ```
-I've added object timespans via extended data. If you want to use the Cesium/GE default timeline, you should do it via a *TimeSpan* section in the KML's entries:  ~~~html
+
+I've added object timespans via extended data. If you want to use the Cesium/GE default timeline, you should do it via a *TimeSpan* section in the KML's entries:
+
+```html
 <timespan>
   <begin>2000-01-00T00:00:00Z</begin>
     <end>2000-02-00T00:00:00Z</end>

@@ -59,7 +59,7 @@ Getting Varnish to play nice with Radiant was a non-issue, because the relative 
 
 - The public site's domain disallows all access to the Radiant admin, meaning it's effectively a read-only site.
 - The public domain's Apache container always issues a couple of cache-related headers:
-    ~~~
+```
 Header always set Cache-Control "public; max-age=120"
 Header always set Vary "Accept-Encoding"
 ```

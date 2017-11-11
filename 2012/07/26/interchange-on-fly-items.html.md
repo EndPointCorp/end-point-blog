@@ -5,8 +5,6 @@ tags: ecommerce, interchange, json
 title: Interchange "on-the-fly" items
 ---
 
-
-
 Interchange has a handy feature (which, in my almost-seven-years of involvement, I'd not seen or suspected) allowing you to create an item "on-the-fly", without requiring any updates to your products table. Here's a recipe for making this work.
 
 First, you need to tell Interchange that you're going to make use of this feature (in catalog.cfg).
@@ -20,13 +18,15 @@ Simple, no? The "OnFly" directive names a subroutine that is called to pre-proce
 Then, you need to submit some special form parameters to set up the cart:
 
 - mv_order_item: the item number identifying this line
-- mv_order_fly: a structured string with | (vertical bar) delimiters. Each sub-field specifies something about the custom item, thus: ~~~nohighlight
+- mv_order_fly: a structured string with | (vertical bar) delimiters. Each sub-field specifies something about the custom item, thus:
+
+```nohighlight
 description=My custom item|price=12.34
 ```
 
 Now, in my particular case, I was encapsulating an XML feed of products from another site (a parts supplier) so that the client (a retail seller) could offer replacement parts, but not have to incorporate thousands of additional lines in the "products" table. So after drilling down to the appropriate model and showing the available parts, each item got the following bit of JavaScript (AJAX) code associated with its add-to-cart button:
 
-```perl
+```javascript
 var $row = $(this).parents('tr');
     $.ajax({
         url: '/cgi-bin/mycat/process',
@@ -50,5 +50,3 @@ var $row = $(this).parents('tr');
 And that's all it took. With Interchange, you don't even need a special "landing page" for your AJAX submission; Interchange handles all the cart-updating out of sight.
 
 I still need to add some post-processing to handle errors, and update the current page so I can see the new cart line count, but the basics are done.
-
-

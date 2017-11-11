@@ -25,25 +25,27 @@ Ok, so let's say you follow all the instructions and start placing test orders (
 
 1. Ensure the interceptor works by adding a value into "INTERCEPT EMAIL ADDRESS" via the admin.  If emails are being intercepted you know the the interceptor is working.  Why is that important? Because, that is also where the bcc code is.
 
-    - core/lib/spree/mail_interceptor.rb ~~~ruby
-5 module Spree
-  6   module Core
-  7     class MailInterceptor
-  8       def self.delivering_email(message)
-  9         return unless MailSettings.override?
- 10
- 11         if Config[:intercept_email].present?
- 12           message.subject = "#{message.to} #{message.subject}"
- 13           message.to = Config[:intercept_email]
- 14         end
- 15
- 16         if Config[:mail_bcc].present?
- 17           message.bcc ||= Config[:mail_bcc]
- 18         end
- 19       end
- 20     end
- 21   end
- 22 end
+    - core/lib/spree/mail_interceptor.rb
+
+```ruby
+module Spree
+  module Core
+    class MailInterceptor
+      def self.delivering_email(message)
+        return unless MailSettings.override?
+
+        if Config[:intercept_email].present?
+          message.subject = "#{message.to} #{message.subject}"
+          message.to = Config[:intercept_email]
+        end
+
+        if Config[:mail_bcc].present?
+          message.bcc ||= Config[:mail_bcc]
+        end
+      end
+    end
+  end
+end
 ```
 
 1. You can ensure that more than one email can be sent by updating
@@ -54,24 +56,26 @@ to be an array of emails, like
 
 mail(to: [@order.email, "some_other_email@somewhere.com"], from: from_address, subject: subject)
 
-    - core/app/mailers/spree/order_mailer.rb ~~~ruby
-1 module Spree
-  2   class OrderMailer < BaseMailer
-  3     def confirm_email(order, resend = false)
-  4       @order = order.respond_to?(:id) ? order : Spree::Order.find(order)
-  5       subject = (resend ? "[#{Spree.t(:resend).upcase}] " : '')
-  6       subject += "#{Spree::Config[:site_name]} #{Spree.t('order_mailer.confirm_email.subject')} ##{@order.number}"
-  7       mail(to: @order.email, from: from_address, subject: subject)
-  8     end
-  9
- 10     def cancel_email(order, resend = false)
- 11       @order = order.respond_to?(:id) ? order : Spree::Order.find(order)
- 12       subject = (resend ? "[#{Spree.t(:resend).upcase}] " : '')
- 13       subject += "#{Spree::Config[:site_name]} #{Spree.t('order_mailer.cancel_email.subject')} ##{@order.number}"
- 14       mail(to: @order.email, from: from_address, subject: subject)
- 15     end
- 16   end
- 17 end
+    - core/app/mailers/spree/order_mailer.rb
+
+```ruby
+module Spree
+  class OrderMailer < BaseMailer
+    def confirm_email(order, resend = false)
+      @order = order.respond_to?(:id) ? order : Spree::Order.find(order)
+      subject = (resend ? "[#{Spree.t(:resend).upcase}] " : '')
+      subject += "#{Spree::Config[:site_name]} #{Spree.t('order_mailer.confirm_email.subject')} ##{@order.number}"
+      mail(to: @order.email, from: from_address, subject: subject)
+    end
+
+    def cancel_email(order, resend = false)
+      @order = order.respond_to?(:id) ? order : Spree::Order.find(order)
+      subject = (resend ? "[#{Spree.t(:resend).upcase}] " : '')
+      subject += "#{Spree::Config[:site_name]} #{Spree.t('order_mailer.cancel_email.subject')} ##{@order.number}"
+      mail(to: @order.email, from: from_address, subject: subject)
+    end
+  end
+end
 ```
 
 At this point, you've verified the interceptor works, and the mailer can definitely send more than one email.  Here is the final piece that is not mentioned anywhere on the Spree site, or any resolutions for any posts I had found: you may need to contact your hosting provider and ask them to make any necessary adjustments to allow for the bcc messages.  I saw that several people have gotten hung up on this and I hope this post has saved you some time.  If you are still having trouble, please feel free to reach out in the comments.  You can refer to the [Spree issue](https://github.com/spree/spree/issues/4484) I created on this topic some time ago.

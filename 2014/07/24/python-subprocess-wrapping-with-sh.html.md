@@ -18,7 +18,9 @@ from sh import hostname
 print(hostname())
 ```
 
-In addition, you can also call the command directly by just referencing the sh namespace prior to the command name:~~~python
+In addition, you can also call the command directly by just referencing the sh namespace prior to the command name:
+
+```python
 import sh
 print(sh.hostname())
 ```
