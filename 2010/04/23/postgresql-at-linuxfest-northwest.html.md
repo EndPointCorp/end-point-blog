@@ -1,0 +1,16 @@
+---
+author: Selena Deckelmann
+gh_issue_number: 292
+tags: conference, postgres
+title: PostgreSQL at LinuxFest Northwest
+---
+
+
+
+This is my third year driving up to Bellingham for [LinuxFest Northwest](http://linuxfestnorthwest.org/), and I'm excited to be presenting two talks about PostgreSQL there. Adrian Klaver is one of the organizers of the conference, and has always been a huge supporter of PostgreSQL. He has gone out of his way to have a track of content about our favorite database.
+
+I'll be presenting an [introduction to Bucardo](http://slideshare.net/selenamarie/bucardo) and co-hosting a talk about new features in version 9.0 of PostgreSQL with Gabrielle Roth. 
+
+Talking about [Bucardo](http://bucardo.org/) and replication is always a blast.  The last time I gave this talk to a packed house in Seattle, so I'm hoping for another lively discussion about the state of replication in PostgreSQL.
+
+
