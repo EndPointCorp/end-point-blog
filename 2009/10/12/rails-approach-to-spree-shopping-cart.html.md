@@ -14,11 +14,11 @@ An important design decision that came up was how to store the four potential ca
 I created a migration file to introduce the following variants similar to the code shown below. A single product by the name of 'Special Product' contained four variants with SKUs to denote which customization component they belonged to ('supporter', 'donation', 'giftwrap', or '5cards').
 
 ```ruby
-p = Product.create(:name =&gt; 'Special Product', :description =&gt; "Discounts, Donations, Promotions", :master_price =&gt; 1.00)
-v = Variant.create(:product =&gt; p, :price =&gt; 1.00, :sku =&gt; 'supporter') # 10% discount
-v = Variant.create(:product =&gt; p, :price =&gt; 1.00, :sku =&gt; 'donation')  # donation
-v = Variant.create(:product =&gt; p, :price =&gt; 1.00, :sku =&gt; 'giftwrap')  # free giftwrap
-v = Variant.create(:product =&gt; p, :price =&gt; 1.00, :sku =&gt; '5cards')    # buy 4 get 1 free discount
+p = Product.create(:name => 'Special Product', :description => "Discounts, Donations, Promotions", :master_price => 1.00)
+v = Variant.create(:product => p, :price => 1.00, :sku => 'supporter') # 10% discount
+v = Variant.create(:product => p, :price => 1.00, :sku => 'donation')  # donation
+v = Variant.create(:product => p, :price => 1.00, :sku => 'giftwrap')  # free giftwrap
+v = Variant.create(:product => p, :price => 1.00, :sku => '5cards')    # buy 4 get 1 free discount
 ```
 
 Next, I added accessor elements to retrieve the variants shown below. Each of these accessor methods would be used throughout the code and so this would be the only location requiring an update if the variant SKU was modified.
@@ -46,7 +46,7 @@ The design to use variants makes the display of cart contents on the backend and
 
 ```ruby
 OrdersController.class_eval do
-  after_filter [:set_cards_discount, :set_free_giftwrap, :set_supporter_discount, :set_donation], :only =&gt; [:create, :edit, :update]
+  after_filter [:set_cards_discount, :set_free_giftwrap, :set_supporter_discount, :set_donation], :only => [:create, :edit, :update]
 end
 ```
 
@@ -68,8 +68,8 @@ The free giftwrap logic adds or removes the variant from the cart and sets the p
 ```ruby
 def set_free_giftwrap
   v = Variant.new.get_giftwrap_variant  # get variant
-  # remove variant if cart contains variant and order subtotal &lt; 40
-  # add variant if cart does not contain variant and order subtotal &gt;= 40
+  # remove variant if cart contains variant and order subtotal < 40
+  # add variant if cart does not contain variant and order subtotal >= 40
   # adjust price of giftwrap line item to 0.00
   # save order
 end

@@ -5,8 +5,6 @@ tags: database, open-source, perl, postgres
 title: 'Perl+Postgres: changes in DBD::Pg 2.15.1'
 ---
 
-
-
 [DBD::Pg](http://search.cpan.org/dist/DBD-Pg/), the Perl interface to [Postgres](http://postgres.org/), recently released version 2.15.1. The last two weeks has seen a quick flurry of releases: 2.14.0, 2.14.1, 2.15.0, and 2.15.1. Per the usual versioning convention, the numbers on the far right (in this case the "dot one" releases) were simply bug fixes, while 2.14.0 and 2.15.0 introduced API and/or major internal changes. Some of these changes are explained below.
 
 From the [Changes](http://cpansearch.perl.org/src/TURNSTEP/DBD-Pg-2.15.1/Changes) file for 2.15.0:
@@ -21,8 +19,8 @@ The Perl Database Interface (DBI) has a neat feature to allow you to execute man
 
 ```perl
 ## Create a simple test table with two columns
-$dbh-&gt;do('DROP TABLE IF EXISTS people');
-$dbh-&gt;do('CREATE TABLE people (id int, fname text)');
+$dbh->do('DROP TABLE IF EXISTS people');
+$dbh->do('CREATE TABLE people (id int, fname text)');
 
 ## Pass in all ids as a single array
 my @numbers = (1,2,3);
@@ -31,16 +29,16 @@ my @numbers = (1,2,3);
 my @names = ("Garrett", "Viktoria", "Basso");
 
 ## Prepare the statement
-my $sth = $dbh-&gt;prepare('INSERT INTO people VALUES (?, ?)');
+my $sth = $dbh->prepare('INSERT INTO people VALUES (?, ?)');
 
 ## Execute the statement multiple times (three times in this case)
-$sth-&gt;execute_array(undef, \@numbers, \@names);
+$sth->execute_array(undef, \@numbers, \@names);
 ## (the first argument is an optional argument hash which we don't use here)
 
 ## Pull back and display the rows from our new table
 $SQL = 'SELECT id, fname FROM people ORDER BY fname';
-for my $row (@{$dbh-&gt;selectall_arrayref($SQL)}) {
-    print "Found: $row-&gt;[0] : $row-&gt;[1]\n";
+for my $row (@{$dbh->selectall_arrayref($SQL)}) {
+    print "Found: $row->[0] : $row->[1]\n";
 }
 
 $ perl testscript.pl
@@ -52,23 +50,23 @@ Found: 2 : Viktoria
 In 2.15.0, we loosened the requirement that the number of placeholders in each array match up with the expected number. Per the DBI spec, any "missing" items are considered undef, which maps to a SQL NULL. Thus:
 
 ```perl
-$dbh-&gt;do('DROP TABLE IF EXISTS people');
-$dbh-&gt;do('CREATE TABLE people (id int, fname text)');
+$dbh->do('DROP TABLE IF EXISTS people');
+$dbh->do('CREATE TABLE people (id int, fname text)');
 
 ## Note that this time there are only two ids given, not three:
 my @numbers = (1,2);
 my @names = ("Garrett", "Viktoria", "Basso");
-my $sth = $dbh-&gt;prepare("INSERT INTO people VALUES (?, ?)");
+my $sth = $dbh->prepare("INSERT INTO people VALUES (?, ?)");
 
-$sth-&gt;execute_array(undef, \@numbers, \@names);
+$sth->execute_array(undef, \@numbers, \@names);
 
 ## Show a question mark for any null ids
 $SQL = q{
 SELECT CASE WHEN id IS NULL THEN '?' ELSE id::text END, fname 
 FROM people ORDER BY fname
 };
-for my $row (@{$dbh-&gt;selectall_arrayref($SQL)}) {
-    print "Found: $row-&gt;[0] : $row-&gt;[1]\n";
+for my $row (@{$dbh->selectall_arrayref($SQL)}) {
+    print "Found: $row->[0] : $row->[1]\n";
 }
 
 $ perl testscript2.pl
@@ -81,9 +79,9 @@ Also note that bind_param_array is an alternate way to add the list of arrays be
 
 ```perl
 ...
-$sth-&gt;bind_param_array(1, \@numbers);
-$sth-&gt;bind_param_array(2, \@names);
-$sth-&gt;execute_array(undef);
+$sth->bind_param_array(1, \@numbers);
+$sth->bind_param_array(2, \@names);
+$sth->execute_array(undef);
 ...
 ```
 
@@ -107,7 +105,7 @@ In previous versions, the mapping of Perl vars to booleans was very simple, and 
 
 ```perl
 for my $name ('0', '1', '0E0', '0 but true', 'F', 'T', 'TRUE', 'false') {
-  printf qq{Value '%s' is %s\n}, $name, $dbh-&gt;quote($name, {pg_type =&gt; PG_BOOL});
+  printf qq{Value '%s' is %s\n}, $name, $dbh->quote($name, {pg_type => PG_BOOL});
 }
 
 $ perl testscript3.pl
@@ -134,7 +132,7 @@ This one is a little more subtle. When a value is returned from the database, it
 ```perl
 ## Ask Postgres to return a string and an integer
 $SQL = 'SELECT 123::text, 123::integer';
-$info = $dbh-&gt;selectall_arrayref($SQL)-&gt;[0];
+$info = $dbh->selectall_arrayref($SQL)->[0];
 print Dumper $info;
 
 ## Older versions of DBD::Pg give:
@@ -155,5 +153,3 @@ A small difference, but not unimportant - this change came about through a [bug 
 -----------
 
 Most of the other changes to 2.14 and 2.15 are bug fixes of one sort or another. To keep up on the changes or to talk about the project more, please join the [mailing list](http://www.nntp.perl.org/group/perl.dbd.pg/)
-
-

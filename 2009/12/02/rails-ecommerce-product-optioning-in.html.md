@@ -28,13 +28,13 @@ The second step to producing a two dimensional product option table was to gener
 ```ruby
   def self.included(target)
     target.class_eval do
-      before_filter :define_2d_option_matrix, :only =&gt; :show
+      before_filter :define_2d_option_matrix, :only => :show
     end
   end
   def define_2d_option_matrix
     variants = Spree::Config[:show_zero_stock_products] ?
       object.variants.active.select { |a| !a.option_values.empty? } :
-      object.variants.active.select { |a| !a.option_values.empty? &amp;&amp; a.in_stock }
+      object.variants.active.select { |a| !a.option_values.empty? && a.in_stock }
     return if variants.empty? ||
       object.option_types.select { |a| a.presentation == 'PO_Size' }.empty? ||
       object.option_types.select { |a| a.presentation == 'PO_Color' }.empty?
@@ -45,13 +45,13 @@ The second step to producing a two dimensional product option table was to gener
       active_size = variant.option_values.select { |a| a.option_type.presentation == 'PO_Size' }.first
       active_color = variant.option_values.select { |a| a.option_type.presentation == 'PO_Color' }.first
       variant_ids[active_size.id.to_s + '_' + active_color.id.to_s] = variant.id
-      sizes &lt;&lt; active_size
-      colors &lt;&lt; active_color
+      sizes << active_size
+      colors << active_color
     end
     size_sort = Hash['S', 0, 'M', 1, 'L', 2]
-    @sc_matrix = { 'sizes' =&gt; sizes.sort_by { |s| size_sort[s.presentation] }.uniq,
- 'colors' =&gt; colors.uniq,
- 'variant_ids' =&gt; variant_ids }
+    @sc_matrix = { 'sizes' => sizes.sort_by { |s| size_sort[s.presentation] }.uniq,
+ 'colors' => colors.uniq,
+ 'variant_ids' => variant_ids }
   end
 ```
 
@@ -65,33 +65,33 @@ In the view, the output of size and color arrays is used to generate a table. In
 
 ```nohighlight
 ...
-&lt;% if @sc_matrix -%&gt;
-&lt;p&gt;Choose your colour, size and quantity below.&lt;/p&gt;
-&lt;table id="option-matrix"&gt;
-    &lt;tr&gt;
-        &lt;th&gt;&lt;/th&gt;
-        &lt;% @sc_matrix['sizes'].each do |s| %&gt;
-        &lt;th class="size"&gt;&lt;%= s.presentation %&gt;&lt;/th&gt;
-        &lt;td class="spacer"&gt;&lt;/td&gt;
-        &lt;% end -%&gt;
-    &lt;/tr&gt;
-    &lt;% @sc_matrix['colors'].each do |c| -%&gt;
-    &lt;tr&gt;
-        &lt;th class="color"&gt;&lt;%= c.presentation %&gt;&lt;/th&gt;
-        &lt;% @sc_matrix['sizes'].each do |s| -%&gt;
-        &lt;td&gt;
-            &lt;% if @sc_matrix['variant_ids'][s.id.to_s + '_' + c.id.to_s] -%&gt;
-            &lt;input type="radio" value="&lt;%= @sc_matrix['variant_ids'][s.id.to_s + '_' + c.id.to_s] %&gt;" name="products[&lt;%= @product.id %&gt;]" /&gt;
-            &lt;% else -%&gt;
-            &lt;img src="/images/radio-notavailable.png" alt="X" width="20" height="20" /&gt;
-            &lt;% end -%&gt;
-        &lt;/td&gt;
-        &lt;td class="spacer"&gt;&lt;/td&gt;
-        &lt;% end -%&gt;
-    &lt;/tr&gt;
-    &lt;% end -%&gt;
-&lt;/table&gt;
-&lt;% elsif #check for other stuff
+<% if @sc_matrix -%>
+<p>Choose your colour, size and quantity below.</p>
+<table id="option-matrix">
+    <tr>
+        <th></th>
+        <% @sc_matrix['sizes'].each do |s| %>
+        <th class="size"><%= s.presentation %></th>
+        <td class="spacer"></td>
+        <% end -%>
+    </tr>
+    <% @sc_matrix['colors'].each do |c| -%>
+    <tr>
+        <th class="color"><%= c.presentation %></th>
+        <% @sc_matrix['sizes'].each do |s| -%>
+        <td>
+            <% if @sc_matrix['variant_ids'][s.id.to_s + '_' + c.id.to_s] -%>
+            <input type="radio" value="<%= @sc_matrix['variant_ids'][s.id.to_s + '_' + c.id.to_s] %>" name="products[<%= @product.id %>]" />
+            <% else -%>
+            <img src="/images/radio-notavailable.png" alt="X" width="20" height="20" />
+            <% end -%>
+        </td>
+        <td class="spacer"></td>
+        <% end -%>
+    </tr>
+    <% end -%>
+</table>
+<% elsif #check for other stuff
 ...
 ```
 

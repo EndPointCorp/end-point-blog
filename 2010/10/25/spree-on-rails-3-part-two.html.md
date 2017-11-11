@@ -16,7 +16,7 @@ To create an extension named "foo", I ran rails g spree:extension foo. Similar t
 require 'spree_core'
 
 module Foo
-  class Engine &lt; Rails::Engine
+  class Engine < Rails::Engine
 
     config.autoload_paths += %W(#{config.root}/lib)
 
@@ -30,14 +30,14 @@ module Foo
       # development mode.)
     end
 
-    config.to_prepare &amp;method(:activate).to_proc
+    config.to_prepare &method(:activate).to_proc
   end
 end
 </pre>
 </td><td valign="top">
 <b>Old</b>
 <pre class="brush:ruby">
-class FooExtension &lt; Spree::Extension
+class FooExtension < Spree::Extension
   version "1.0"
   description "Describe your extension here"
   url "http://www.endpoint.com/"
@@ -56,7 +56,7 @@ I verified that the activate method was called in my extension with the followin
 require 'spree_core'
 
 module Foo
-  class Engine &lt; Rails::Engine
+  class Engine < Rails::Engine
 
     config.autoload_paths += %W(#{config.root}/lib)
 
@@ -66,7 +66,7 @@ module Foo
       end
     end
 
-    config.to_prepare &amp;method(:activate).to_proc
+    config.to_prepare &method(:activate).to_proc
   end
 end
 ```

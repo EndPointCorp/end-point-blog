@@ -12,7 +12,7 @@ Like many web developers, I use [Google Chrome](https://www.google.com/intl/en/c
 During a recent project, I finished up the UI so that everything looked and felt great. Then I popped open IE to see what sort of things I would need to fix. One feature of HTML that I didn't know wasn't supported by IE was that of placeholder text for form inputs. For example:
 
 ```html
-&lt;input type="text" name="user_name" placeholder="Enter your user name" /&gt;
+<input type="text" name="user_name" placeholder="Enter your user name" />
 ```
 
 This HTML generates a nice looking input box with the words "Enter your user name" already entered into the input field. When a user clicks on the field, the placeholder text disappears so that the user can begin to add their custom text. This is a popular solution for many web-sites so I was shocked to learn that IE up to version 10 doesn't support this feature. My mind turned to horrid thoughts of writing custom javascript to handle placeholder text in input fields. It didn't take long for me to think, surely someone has to have already fixed this.
@@ -34,13 +34,13 @@ From Modernizr's web site, "Modernizr is a JavaScript library that detects HTML5
 Modernizr does two things to help you detect these compatibilities and deal with them. First, it adds some custom classes to your <html> tag that indicate what features are enabled and disabled in your browser. A <html> tag in IE might look something like this:
 
 ```html
-&lt;html class="js no-borderradius no-cssgradients"&gt;
+<html class="js no-borderradius no-cssgradients">
 ```
 
 While in Chrome it would look like this:
 
 ```html
-&lt;html class="js borderradius cssgradients"&gt;
+<html class="js borderradius cssgradients">
 ```
 
 This enables you to put together some CSS code to add extra styles for incompatible browsers. For example, some SASS to deal with a css gradient issues may look like this:
@@ -90,7 +90,7 @@ Fifth, you are now ready to use Modernizr to load your polyfill. I did so in my 
 Modernizr.load
   test: Modernizr.input.placeholder
   nope: ['/assets/polyfills/Placeholders.js']
-  complete: -&gt; Placeholders.enable() if Placeholders?
+  complete: -> Placeholders.enable() if Placeholders?
 ```
 
 Now my Placeholders.js library only loads when the browser doesn't support input placeholders. Hooray! 

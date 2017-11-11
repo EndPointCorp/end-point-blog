@@ -32,12 +32,12 @@ We'd like to offer the user a form with check boxes to click so when submitted, 
 ```ruby
 # app/views/search/_results.html
 
-&lt;% @foos.each do |foo| %&gt;
-  &lt;%= check_box_tag "foo_ids[]", foo.id  %&gt;
-&lt;% end %&gt;
+<% @foos.each do |foo| %>
+  <%= check_box_tag "foo_ids[]", foo.id  %>
+<% end %>
 
 # when posted looks like
-# "foo_ids"=&gt;["4", "3", "2"]
+# "foo_ids"=>["4", "3", "2"]
 ```
 Because we now have an array of IDs selected, it becomes very easy for us to work with our user's selection.
 
@@ -45,7 +45,7 @@ Because we now have an array of IDs selected, it becomes very easy for us to wor
 # app/controller/bulk_edit_controller.rb
 
 def new
-  if params[:foo_ids].is_a?(Array) &amp;&amp; params[:foo_ids].length &gt; 1  #let's make sure we got what we expected
+  if params[:foo_ids].is_a?(Array) && params[:foo_ids].length > 1  #let's make sure we got what we expected
     @foos = Foo.find(params[:foo_ids])
   else
     redirect_to search_path
@@ -60,15 +60,15 @@ It's not just enough to have these check boxes.  We need our "Bulk Edit" button 
 ```ruby
 # app/views/search/_results.html
 
-&lt;%= form_tag new_bulk_edit_path, :method =&gt; "GET", :id =&gt; "bulk-edit-form" do %&gt;
-  &lt;%= submit_tag "Bulk Edit", :id =&gt; "bulk-edit-submit" %&gt;
-&lt;% end %&gt;
+<%= form_tag new_bulk_edit_path, :method => "GET", :id => "bulk-edit-form" do %>
+  <%= submit_tag "Bulk Edit", :id => "bulk-edit-submit" %>
+<% end %>
 
-&lt;div class="search_results"&gt;
-  &lt;% @foos.each do |foo| %&gt;
-    &lt;%= check_box_tag "foo_ids[]", foo.id, false, :class =&gt; "downloadable"  %&gt;
-  &lt;% end %&gt;
-&lt;/div&gt;
+<div class="search_results">
+  <% @foos.each do |foo| %>
+    <%= check_box_tag "foo_ids[]", foo.id, false, :class => "downloadable"  %>
+  <% end %>
+</div>
 
 # app/assets/stylesheets/search.css
 
@@ -84,7 +84,7 @@ We've added the downloadable class tag to our check boxes, while adding a simple
 
 $('.downloadable').click(function() {     //when an element of class downloadable is clicked
   var check_count = $('.downloadable:checked').size();  //count the number of checked elements
-  if( check_count &gt; 1 ) {
+  if( check_count > 1 ) {
     $("#bulk-edit-submit").show();
   } else {
     $("#bulk-edit-submit").hide();

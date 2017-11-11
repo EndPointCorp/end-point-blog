@@ -68,7 +68,7 @@ a VARCHAR(32) column named "checksum" to a TEXT column:
 ```
 ALTER TABLE foobar ALTER COLUMN checksum TYPE text;
 ALTER TABLE foobar ADD CONSTRAINT checksum_length
-  CHECK (LENGTH(checksum) &lt;= 32);
+  CHECK (LENGTH(checksum) <= 32);
 ```
 
 The data type change suffers from the same full table rewrite problem as before, but if you are using 
@@ -80,7 +80,7 @@ clause. Thus, in newer versions you can avoid the scan entirely by writing:
 
 ```
 ALTER TABLE foobar ADD CONSTRAINT checksum_length
-  CHECK (LENGTH(checksum) &lt;= 32) NOT VALID;
+  CHECK (LENGTH(checksum) <= 32) NOT VALID;
 ```
 
 This is a one-time exception for the constraint, and only applies as the constraint is 
@@ -110,7 +110,7 @@ postgres=# INSERT INTO river VALUES ('abcde');
 ERROR:  value too long for type character varying(4)
 
 postgres=# CREATE TABLE river( checksum TEXT,
-postgres-#   CONSTRAINT checksum_length CHECK (LENGTH(checksum) &lt;= 4) );
+postgres-#   CONSTRAINT checksum_length CHECK (LENGTH(checksum) <= 4) );
 CREATE TABLE
 
 postgres=# INSERT INTO river VALUES ('abcde');

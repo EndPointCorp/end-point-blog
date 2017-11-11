@@ -2,10 +2,8 @@
 author: Greg Davidson
 gh_issue_number: 876
 tags: browsers, javascript, jquery, tips
-title: IE7 &quot;Enhances&quot; href Attributes of Links Added via innerHTML
+title: "IE7 “Enhances” href Attributes of Links Added via innerHTML"
 ---
-
-
 
 I ran into this issue the other day while testing a new feature for a client site. The code worked well in Chrome, Firefox, Safari and IE (8-11) but it blew up in IE7. The page was fairly straightforward — I was using jQuery and the excellent [doT.js templating library](http://olado.github.io/doT/index.html) to build up some HTML and add it to the page after the DOM had loaded. This content included several links like so: 
 
@@ -59,5 +57,3 @@ The following screenshot demonstrates how Chrome and other modern browsers handl
 These browsers happily leave the href attributes alone :)
 
 You learn something new every day!
-
-

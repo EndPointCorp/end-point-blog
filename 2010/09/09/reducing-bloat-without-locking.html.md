@@ -91,13 +91,13 @@ I've filled the table with 1000 rows, and then deleted every other row. The last
 ```sql
 5432 josh@josh# begin;
 BEGIN
-5432 josh@josh*# update foo set a = a where ctid &gt;= '(3,0)';
+5432 josh@josh*# update foo set a = a where ctid >= '(3,0)';
 UPDATE 117
-5432 josh@josh*# update foo set a = a where ctid &gt;= '(3,0)';
+5432 josh@josh*# update foo set a = a where ctid >= '(3,0)';
 UPDATE 117
-5432 josh@josh*# update foo set a = a where ctid &gt;= '(3,0)';
+5432 josh@josh*# update foo set a = a where ctid >= '(3,0)';
 UPDATE 21
-5432 josh@josh*# update foo set a = a where ctid &gt;= '(3,0)';
+5432 josh@josh*# update foo set a = a where ctid >= '(3,0)';
 UPDATE 0
 5432 josh@josh*# commit;
 COMMIT

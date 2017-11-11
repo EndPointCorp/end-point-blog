@@ -31,7 +31,7 @@ As you can see there is no built in Promotion Rule to limit the free shipping to
 module Spree
      class Promotion
        module Rules
-         class RestrictFreeShipping &lt; PromotionRule
+         class RestrictFreeShipping < PromotionRule
            MATCH_POLICIES = %w(all)
   
            def eligible?(order, options={})

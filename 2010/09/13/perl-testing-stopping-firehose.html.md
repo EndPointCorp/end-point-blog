@@ -23,12 +23,12 @@ For now, my solution is to override some of the methods from Test::More. I have 
 use strict;
 use warnings;
 use Data::Dumper;
-use Test::More tests =&gt; 356;
+use Test::More tests => 356;
 use TestOverride;
 
 sub some_function {
        my $arr = [];
-       push @$arr =&gt; 4,9;
+       push @$arr => 4,9;
        return [$arr];
 }
 
@@ -66,7 +66,7 @@ sub is_deeply {
    my $rv = Test::More::is_deeply(@_);
    return $rv if $rv;
 
-   if ($bail_on_error and ++$total_errors &gt;= $bail_on_error) {
+   if ($bail_on_error and ++$total_errors >= $bail_on_error) {
        my ($file,$line) = (caller)[1,2];
        Test::More::diag("GOT: ".Dumper $_[0]);
        Test::More::diag("EXPECTED: ".Dumper $_[1]);
@@ -80,7 +80,7 @@ sub is_deeply {
 sub is {
    my $rv = Test::More::is(@_);
    return $rv if $rv;
-   if ($bail_on_error and ++$total_errors &gt;= $bail_on_error) {
+   if ($bail_on_error and ++$total_errors >= $bail_on_error) {
        my ($file,$line) = (caller)[1,2];
        Test::More::BAIL_OUT "Stopping on a failed 'is' test from line $line of $file.";
    }
@@ -102,8 +102,8 @@ not ok 1 - Function some_function() returns correct value when called with 'foo'
 #   Failed test 'Function some_function() returns correct value when called with 'foo''
 #   at test1.t line 18.
 #     Structures begin differing at:
-#          $got-&gt;[0] = '4'
-#     $expected-&gt;[0] = '3'
+#          $got->[0] = '4'
+#     $expected->[0] = '3'
 # Looks like you planned 356 tests but ran 1.
 # Looks like you failed 1 test of 1 run.
 ```
@@ -116,8 +116,8 @@ not ok 1 - Function some_function() returns correct value when called with 'foo'
 #   Failed test 'Function some_function() returns correct value when called with 'foo''
 #   at TestOverride.pm line 23.
 #     Structures begin differing at:
-#          $got-&gt;[0] = '4'
-#     $expected-&gt;[0] = '3'
+#          $got->[0] = '4'
+#     $expected->[0] = '3'
 # GOT: |[
 # |  4,
 # |  [

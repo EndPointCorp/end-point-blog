@@ -25,7 +25,7 @@ too short and failed to indicate to people what it was. The "rt" tag used by the
 the same. However, to produce a table showing all open tickets for user 'alois', you still write:
 
 ```
-&lt;rt u='alois'&gt;&lt;/rt&gt;
+<rt u='alois'></rt>
 ```
 
 The other major change was to modernize it. As of version 1.25 of MediaWiki,
@@ -88,7 +88,7 @@ too long.
     "descriptionmsg": "rt-desc",
     "license-name": "PostgreSQL",
     "requires" : {
-        "MediaWiki": "&gt;= 1.25.0"
+        "MediaWiki": ">= 1.25.0"
     },
     "AutoloadClasses": {
         "RequestTracker": "RequestTracker_body.php"
@@ -140,7 +140,7 @@ are inside the wfRequestTrackerParserInit function:
 ```php
 function wfRequestTrackerParserInit( Parser $parser ) {
 
-    $parser-&gt;setHook( 'rt', 'RequestTracker::wfRequestTrackerRender' );
+    $parser->setHook( 'rt', 'RequestTracker::wfRequestTrackerRender' );
 
     return true;
 }
@@ -160,16 +160,16 @@ contains English versions of all the messages used by the extension. The i18n fi
 ```
 $ cat en.json
 {
-  "rt-desc"       : "Fancy interface to RequestTracker using &lt;code&gt;&amp;lt;rt&amp;gt;&lt;/code&gt; tag",
+  "rt-desc"       : "Fancy interface to RequestTracker using <code>&lt;rt&gt;</code> tag",
   "rt-inactive"   : "The RequestTracker extension is not active",
-  "rt-badcontent" : "Invalid content args: must be a simple word. You tried: &lt;b&gt;$1&lt;/b&gt;",
+  "rt-badcontent" : "Invalid content args: must be a simple word. You tried: <b>$1</b>",
   "rt-badquery"   : "The RequestTracker extension encountered an error when talking to the RequestTracker database",
-  "rt-badlimit"   : "Invalid LIMIT (l) arg: must be a number. You tried: &lt;b&gt;$1&lt;/b&gt;",
-  "rt-badorderby" : "Invalid ORDER BY (ob) arg: must be a standard field (see documentation). You tried: &lt;b&gt;$1&lt;/b&gt;",
-  "rt-badstatus"  : "Invalid status (s) arg: must be a standard field (see documentation). You tried: &lt;b&gt;$1&lt;/b&gt;",
-  "rt-badcfield"  : "Invalid custom field arg: must be a simple word. You tried: &lt;b&gt;$1&lt;/b&gt;",
-  "rt-badqueue"   : "Invalid queue (q) arg: must be a simple word. You tried: &lt;b&gt;$1&lt;/b&gt;",
-  "rt-badowner"   : "Invalid owner (o) arg: must be a valud username. You tried: &lt;b&gt;$1&lt;/b&gt;",
+  "rt-badlimit"   : "Invalid LIMIT (l) arg: must be a number. You tried: <b>$1</b>",
+  "rt-badorderby" : "Invalid ORDER BY (ob) arg: must be a standard field (see documentation). You tried: <b>$1</b>",
+  "rt-badstatus"  : "Invalid status (s) arg: must be a standard field (see documentation). You tried: <b>$1</b>",
+  "rt-badcfield"  : "Invalid custom field arg: must be a simple word. You tried: <b>$1</b>",
+  "rt-badqueue"   : "Invalid queue (q) arg: must be a simple word. You tried: <b>$1</b>",
+  "rt-badowner"   : "Invalid owner (o) arg: must be a valud username. You tried: <b>$1</b>",
   "rt-nomatches"  : "No matching RequestTracker tickets were found"
 }
 
@@ -180,7 +180,7 @@ $ cat fr.json
          "Josh Tolley"
       ]
   },
-  "rt-desc"       : "Interface sophistiquée de RequestTracker avec l'élement &lt;code&gt;&amp;lt;rt&amp;gt;&lt;/code&gt;.",
+  "rt-desc"       : "Interface sophistiquée de RequestTracker avec l'élement <code>&lt;rt&gt;</code>.",
   "rt-inactive"   : "Le module RequestTracker n'est pas actif.",
   "rt-badcontent" : "Paramètre de contenu « $1 » est invalide: cela doit être un mot simple.",
   "rt-badquery"   : "Le module RequestTracker ne peut pas contacter sa base de données.",
@@ -198,7 +198,7 @@ One other small change I made to the extension was to allow both ticket numbers 
 to be used inside of the tag. To view a specific ticket, one was always able to do this:
 
 ```
-&lt;rt&gt;6567&lt;/rt&gt;
+<rt>6567</rt>
 ```
 
 This would produce the text "RT #6567", with information on the ticket available on mouseover,
@@ -206,14 +206,14 @@ and hyperlinked to the ticket inside of RT. However, I often found myself using 
 to view all the open tickets in a certain queue like this:
 
 ```
-&lt;rt q="dyson"&gt;&lt;/rt&gt;
+<rt q="dyson"></rt>
 ```
 
 It seems easier to simply add the queue name inside the tags, so in this new version
 one can simply do this:
 
 ```
-&lt;rt&gt;dyson&lt;/rt&gt;
+<rt>dyson</rt>
 ```
 
 If you are running MediaWiki 1.25 or better, try out the new RequestTracker extension! If

@@ -2,10 +2,10 @@
 author: Josh Lavin
 gh_issue_number: 1169
 tags: angular, dancer, javascript, perl
-title: AngularJS &amp; Dancer for Modern Web Development
+title: AngularJS & Dancer for Modern Web Development
 ---
 
-At the [Perl Dancer Conference 2015](http://perl.dance), I gave a talk on *[AngularJS &amp; Dancer for Modern Web Development](https://www.perl.dance/talks/11-angularjs-%26-dancer-for-modern-web-development)*. This is a write-up of the talk in blog post form.
+At the [Perl Dancer Conference 2015](http://perl.dance), I gave a talk on *[AngularJS & Dancer for Modern Web Development](https://www.perl.dance/talks/11-angularjs-%26-dancer-for-modern-web-development)*. This is a write-up of the talk in blog post form.
 
 ### Legacy Apps
 

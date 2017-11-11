@@ -22,7 +22,7 @@ script/rails g model RadianCallCount
 In the migration:
 
 ```ruby
-class CreateRadianCallCounts &lt; ActiveRecord::Migration
+class CreateRadianCallCounts < ActiveRecord::Migration
   def change
     create_table :radian_call_counts do |t|
       t.integer :count
@@ -37,7 +37,7 @@ In db/seeds.rb file
 ```ruby
 puts "Initializing Radian6 counter"
 RadianCallCount.delete_all
-RadianCallCount.create(:count =&gt; 0)
+RadianCallCount.create(:count => 0)
 ```
 
 Let's roll the counter!
@@ -60,7 +60,7 @@ wheneverize .
 In the model:
 
 ```ruby
-class RadianCallCount &lt; ActiveRecord::Base
+class RadianCallCount < ActiveRecord::Base
   def self.reset
     RadianCallCount.first.update_attribute(:count, 0)
   end
@@ -90,10 +90,10 @@ require 'rcapture'
 API_LIMIT = 100
 def self.included(base)
   base.extend RCapture::Interceptable
-  base.capture_pre :methods =&gt; [:authenticate,:tweet_stats] do |cs|
+  base.capture_pre :methods => [:authenticate,:tweet_stats] do |cs|
     RadianCallCount.transaction do 
       calls_per_hour = RadianCallCount.first.count 
-      allowed = (calls_per_hour &lt; Radian::API_LIMIT)
+      allowed = (calls_per_hour < Radian::API_LIMIT)
       cs.predicate = allowed
       cs.return = false 
       RadianCallCount.first.increment!(:count) if allowed
@@ -117,13 +117,13 @@ end
 The non-blocking calls are suitable for most situations. Sometimes there is a need to just keep trying...
 
 ```ruby
-def call_with_timeout(&amp;block)
+def call_with_timeout(&block)
   timeout = 0.minutes 
   results = false 
   while !results do
     results = block.call
     if !results
-      break if timeout &gt;= Radian::API_MAX_TIMEOUT
+      break if timeout >= Radian::API_MAX_TIMEOUT
       Rails.logger.info("Sleeping for 5 minutes")
       sleep(Radian::API_CALL_TIMEOUT)
       timeout += Radian::API_CALL_TIMEOUT

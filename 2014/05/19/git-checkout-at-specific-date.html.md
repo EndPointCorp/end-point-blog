@@ -55,7 +55,7 @@ This command works fine, although it is a little clunky and hard to remember. It
 SELECT repository WHERE commit_id = 
   (SELECT commit
    FROM rev-list
-   WHERE commit_date &lt;= 'Jan 10, 2014'
+   WHERE commit_date <= 'Jan 10, 2014'
    AND branch = 'master'
    ORDER BY commit_date DESC
    LIMIT 1

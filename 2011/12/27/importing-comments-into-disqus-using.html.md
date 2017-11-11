@@ -20,7 +20,7 @@ So let's get into the nitty gritty details.  First, the sample code provided in 
 I choose to place the script in the RAILS_ROOT/scripts directory and named it wxr_export.rb.  This would allow me to call the script with the Rails 2.x style syntax (ahh, the nostalgia):
 
 ```bash
-script/wxr_export.rb &gt; comments.xml
+script/wxr_export.rb > comments.xml
 ```
 
 This would fire up the full Rails enviornment, execute our Ruby code, and pipe the standard output to a file called comments.xml.  Pretty straightforward, but it's not that often Rails developers think about creating these kind of scripts, so it's worth discussing to see the setup mechanics.
@@ -48,15 +48,15 @@ Having finally loaded our Rails enviornment in a way we can use it, we are ready
 ```ruby
 # script/wxr_export.rb
 
-xml = Builder::XmlMarkup.new(:target =&gt; STDOUT, :indent =&gt; 2)
+xml = Builder::XmlMarkup.new(:target => STDOUT, :indent => 2)
 
-xml.instruct! :xml, :version=&gt;"1.0", :encoding=&gt;"UTF-8"
+xml.instruct! :xml, :version=>"1.0", :encoding=>"UTF-8"
 
-xml.rss 'version' =&gt; "2.0",
-        'xmlns:content' =&gt; "http://purl.org/rss/1.0/modules/content/",
-        'xmlns:dsq' =&gt; "http://www.disqus.com/",
-        'xmlns:dc' =&gt; "http://purl.org/dc/elements/1.1/",
-        'xmlns:wp' =&gt; "http://wordpress.org/export/1.0/" do
+xml.rss 'version' => "2.0",
+        'xmlns:content' => "http://purl.org/rss/1.0/modules/content/",
+        'xmlns:dsq' => "http://www.disqus.com/",
+        'xmlns:dc' => "http://purl.org/dc/elements/1.1/",
+        'xmlns:wp' => "http://wordpress.org/export/1.0/" do
  
   xml.channel do
     Articles.all.each do |article|
@@ -92,13 +92,13 @@ xml.title article.title
 
 xml.link create_url_for(article)
 
-xml.content(:encoded) { |x| x &lt;&lt; "<!--[CDATA[" + article.body + "]]-->" }
+xml.content(:encoded) { |x| x << "<!--[CDATA[" + article.body + "]]-->" }
 
-xml.dsq(:thread_identifier) { |x| x &lt;&lt; article.id }
+xml.dsq(:thread_identifier) { |x| x << article.id }
 
-xml.wp(:post_date_gmt) { |x| x &lt;&lt; article.created_at.utc.to_formatted_s(:db) }
+xml.wp(:post_date_gmt) { |x| x << article.created_at.utc.to_formatted_s(:db) }
 
-xml.wp(:comment_status) { |x| x &lt;&lt; "open" } #all comments open
+xml.wp(:comment_status) { |x| x << "open" } #all comments open
 ```
 
 Let's look at each of these fields one by one:
@@ -117,41 +117,41 @@ article.comments.each do |comment|
   
   xml.wp(:comment) do
 
-    xml.wp(:comment_id) { |x| x &lt;&lt; comment.id }
+    xml.wp(:comment_id) { |x| x << comment.id }
 
     xml.wp(:comment_author) do |x| 
-      if comment.user.present? &amp;&amp; comment.user.name.present?
-        x &lt;&lt; comment.user.name
+      if comment.user.present? && comment.user.name.present?
+        x << comment.user.name
       else
- x &lt;&lt; ""
+ x << ""
       end 
     end 
                   
     xml.wp(:comment_author_email) do |x| 
-      if comment.user.present? &amp;&amp; comment.user.email.present?
-        x &lt;&lt; comment.user.email
+      if comment.user.present? && comment.user.email.present?
+        x << comment.user.email
       else
-        x &lt;&lt; ""
+        x << ""
       end 
     end 
 
     xml.wp(:comment_author_url) do |x|
-      if comment.user.present? &amp;&amp; comment.user.url.present?
-        x &lt;&lt; comment.user.url
+      if comment.user.present? && comment.user.url.present?
+        x << comment.user.url
       else
-        x &lt;&lt; ""
+        x << ""
       end
     end
 
-    xml.wp(:comment_author_IP) { |x| x &lt;&lt; "255.255.255.255" }
+    xml.wp(:comment_author_IP) { |x| x << "255.255.255.255" }
 
-    xml.wp(:comment_date_gmt) { |x| x &lt;&lt; comment.created_at.utc.to_formatted_s(:db) }
+    xml.wp(:comment_date_gmt) { |x| x << comment.created_at.utc.to_formatted_s(:db) }
 
-    xml.wp(:comment_content) { |x| x &lt;&lt; "<!--[CDATA[" + comment.body + "]]-->" }
+    xml.wp(:comment_content) { |x| x << "<!--[CDATA[" + comment.body + "]]-->" }
 
-    xml.wp(:comment_approved) { |x| x &lt;&lt; 1 } #approve all comments
+    xml.wp(:comment_approved) { |x| x << 1 } #approve all comments
 
-    xml.wp(:comment_parent) { |x| x &lt;&lt; 0 }
+    xml.wp(:comment_parent) { |x| x << 0 }
 
   end #xml.wp(:comment)
 end #article.comments.each

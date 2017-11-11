@@ -23,11 +23,11 @@ TypeError: t.cssHooks is undefined
 No problem, I grab the newer compatible jQuery v1.10.2 from the website and yield it into head in that particular page.
 
 ```ruby
-&lt;% content_for :head do %&gt;
+<% content_for :head do %>
   javascript_include_tag "jquery-1.10.2.min.js"
   javascript_include_tag "jquery-ui-1.10.4.min.js"
   javascript_include_tag "jquery.editableselect.js"
-&lt;% end %&gt;
+<% end %>
 ```
 There’s good news and bad news. Good - the old error is gone. Bad - there's a new one:
 
@@ -35,10 +35,10 @@ There’s good news and bad news. Good - the old error is gone. Bad - there's a 
 TypeError: jQuery.browser is undefined
 ```
 ```javascript
-if (jQuery.browser.safari &amp;&amp; document.readyState != "complete”)
+if (jQuery.browser.safari && document.readyState != "complete”)
 function stretchbar(){
   /* the if block is for safari 4, it was disrupting the display on refresh. */
-  if (jQuery.browser.safari &amp;&amp; document.readyState != "complete")
+  if (jQuery.browser.safari && document.readyState != "complete")
     {
      setTimeout( arguments.callee, 100 );
      return;
@@ -49,12 +49,12 @@ We have a lot of old components on that page and they fail to work with the new 
 The section ["Changes of Note in jQuery 1.9"](http://jquery.com/upgrade-guide/1.9/#jquery-browser-removed) explains the particular error I got. Finally, I downloaded [jQuery Migrate plugin](https://github.com/jquery/jquery-migrate/) v1.2.1 (the most recent at the time) and put it after the script for jQuery:
 
 ```ruby
-&lt;% content_for :head do %&gt;
+<% content_for :head do %>
   javascript_include_tag "jquery-1.10.2.min.js"
   javascript_include_tag "jquery-ui-1.10.4.min.js"
   javascript_include_tag "jquery.editableselect.js"
   javascript_include_tag "jquery-migrate-1.2.1.min.js"
-&lt;% end %&gt;
+<% end %>
 ```
 
 Voila! The website gets an instant design boost with this brand new, sleek grey editable combobox:

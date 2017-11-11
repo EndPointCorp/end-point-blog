@@ -13,7 +13,7 @@ On the Liquid Galaxy, complex data sets can be explored and analyzed in a 3D imm
 
 Liquid Galaxy’s extensive capabilities include ArcGIS, Cesium, Google Maps, Google Earth, LIDAR point clouds, realtime data integration, 360 panoramic video, and more. The system always draws huge crowds at conferences; people line up to try out the system for themselves.
 
-End Point has deployed Liquid Galaxy systems around the world. This includes many high profile clients, such as Google, NOAA, CBRE, National Air &amp; Space Museum, Hyundai, and Barclays. Our clients utilize our content management system to create immersive and interactive presentations that tell engaging stories to their users.
+End Point has deployed Liquid Galaxy systems around the world. This includes many high profile clients, such as Google, NOAA, CBRE, National Air & Space Museum, Hyundai, and Barclays. Our clients utilize our content management system to create immersive and interactive presentations that tell engaging stories to their users.
 
 [GEOINT](http://geoint2017.com/) is hosted and produced by the United States Geospatial Intelligence Foundation (USGIF). It is the nation’s largest gathering of industry, academia, and government to include Defense, Intelligence and Homeland Security communities as well as commercial, Fed/Civil, State and Local geospatial intelligence stakeholders.
 

@@ -76,7 +76,7 @@ In tandem with the semantic versioning this gives us a possibility to say: "Allo
 You could specify it by placing:
 
 ```ruby
-gem 'music-beers-and-unicorns', '~&gt; 1.2.0'
+gem 'music-beers-and-unicorns', '~> 1.2.0'
 ```
 
 This allows you to use

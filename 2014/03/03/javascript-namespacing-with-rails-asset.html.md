@@ -16,9 +16,9 @@ One headache that might come up from the asset pipeline is that JavaScript funct
 First, I set the body tag in my application layout file to be related to the controller and action parameters. Here's what it looks like:
 
 ```nohighlight
-&lt;body id="&lt;%= "#{params[:controller].gsub(/\//, '_')}_#{params[:action]}" %&gt;"&gt;
+<body id="<%= "#{params[:controller].gsub(/\//, '_')}_#{params[:action]}" %>">
 ...
-&lt;/body&gt;
+</body>
 ```
 
 If I was less lazy, I could create a helper method to spit out the id.

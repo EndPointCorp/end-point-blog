@@ -25,10 +25,10 @@ I discovered that you can use the "anything" matcher as a kind of wildcard insid
 
 ```ruby
 expect(subject.targets).to eq [
-  {:id =&gt; anything, :name =&gt; 'Franchise 1'},
-  {:id =&gt; anything, :name =&gt; 'Franchise 2'},
-  {:id =&gt; anything, :name =&gt; 'Franchise 3'},
-  {:id =&gt; anything, :name =&gt; 'X-Men'},
+  {:id => anything, :name => 'Franchise 1'},
+  {:id => anything, :name => 'Franchise 2'},
+  {:id => anything, :name => 'Franchise 3'},
+  {:id => anything, :name => 'X-Men'},
 ]
 ```
 

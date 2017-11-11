@@ -42,7 +42,7 @@ instructs, create a new promotion class in a file.
 
 ```ruby
 # app/models/spree/promotion/buy_one_get_one.rb
-class BuyOneGetOne &lt; Spree::PromotionAction
+class BuyOneGetOne < Spree::PromotionAction
   def perform(options={})
     # TODO
   end
@@ -54,7 +54,7 @@ Then register this new class with Spree using an initializer.
 ```ruby
 # config/initializers/spree.rb
 
-Rails.application.config.spree.promotions.actions &lt;&lt; BuyOneGetOne
+Rails.application.config.spree.promotions.actions << BuyOneGetOne
 ```
 
 Then update your locales to provide translations for the promotion
@@ -98,7 +98,7 @@ collecting the order from the options.
 
 ```ruby
 # app/models/spree/promotion/buy_one_get_one.rb
-class BuyOneGetOne &lt; Spree::PromotionAction
+class BuyOneGetOne < Spree::PromotionAction
   def perform(options={})
     return unless order = options[:order]
   end
@@ -114,7 +114,7 @@ equivalent output.
 
 ```ruby
 # app/models/spree/promotion/buy_one_get_one.rb
-class BuyOneGetOne &lt; Spree::PromotionAction
+class BuyOneGetOne < Spree::PromotionAction
   def perform(options={})
     return unless order = options[:order]
 
@@ -142,7 +142,7 @@ rule, we'll identify the line items which have those variants.
 
 ```ruby
 # app/models/spree/promotion/buy_one_get_one.rb
-class BuyOneGetOne &lt; Spree::PromotionAction
+class BuyOneGetOne < Spree::PromotionAction
   def perform(options={})
     return unless order = options[:order]
 
@@ -197,7 +197,7 @@ of code which can then be implemented incrementally.
 
 ```ruby
 # app/models/spree/promotion/buy_one_get_one.rb
-class BuyOneGetOne &lt; Spree::PromotionAction
+class BuyOneGetOne < Spree::PromotionAction
   def perform(options={})
     return unless order = options[:order]
 
@@ -288,7 +288,7 @@ implementation of create_matching_get_one_line_item.
 
 ```ruby
 # db/migration/add_immutable_and_additional_text_to_spree_line_items.rb
-class AddImmutableAndAdditionalTextToSpreeLineItems &lt; ActiveRecord::Migration
+class AddImmutableAndAdditionalTextToSpreeLineItems < ActiveRecord::Migration
   def change
     add_column :spree_line_items, :immutable, :boolean
     add_column :spree_line_items, :additional_text, :string

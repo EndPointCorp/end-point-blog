@@ -97,7 +97,7 @@ A demonstration of the new trigger is now in order. On the database btest2, we w
 
  Jenny
 ```
-$ psql btest2 -c "update pgbench_accounts set abalance=123, phone='867-5309' where aid &lt;= 3"
+$ psql btest2 -c "update pgbench_accounts set abalance=123, phone='867-5309' where aid <= 3"
 UPDATE 3
 
 $ psql btest2 -c 'select aid,abalance,phone from pgbench_accounts order by aid limit 3'
@@ -111,7 +111,7 @@ $ psql btest2 -c 'select aid,abalance,phone from pgbench_accounts order by aid l
 So, all is as we expected: any changes made to this table have the phone number changed. Let's see what happens when the changes are done via Bucardo replication. Note that we are updating btest1 but querying btest2:
 
 ```
-$ psql btest1 -c "update pgbench_accounts set abalance=99, phone='867-5309' WHERE aid &lt;= 3"
+$ psql btest1 -c "update pgbench_accounts set abalance=99, phone='867-5309' WHERE aid <= 3"
 UPDATE 3
 
 $ psql btest2 -c 'select aid,abalance,phone from pgbench_accounts order by aid limit 3'
@@ -165,7 +165,7 @@ That is some ugly syntax for changing the triggers, eh? (To restore a trigger to
 
  Who ya gonna call?
 ```
-$ psql btest1 -c "update pgbench_accounts set abalance=11, phone='555-2368' WHERE aid &lt;= 3"
+$ psql btest1 -c "update pgbench_accounts set abalance=11, phone='555-2368' WHERE aid <= 3"
 UPDATE 3
 
 $ psql btest2 -c 'select aid,abalance,phone from pgbench_accounts order by aid limit 3'
@@ -203,7 +203,7 @@ As before, we can test it out and verify the trigger is firing:
 
  Freeze, Vegan Police!
 ```
-$ psql btest1 -c "update pgbench_accounts set abalance=22, phone='664-7665' WHERE aid &lt;= 3"
+$ psql btest1 -c "update pgbench_accounts set abalance=22, phone='664-7665' WHERE aid <= 3"
 UPDATE 3
 
 $ psql btest2 -c 'select aid,abalance,phone from pgbench_accounts order by aid limit 3'
@@ -227,19 +227,19 @@ This creates a new customcode named "nophone" that contains the code inside the 
 ```
 my $info = shift;
 
-return if ! exists $info-&gt;{rows};
+return if ! exists $info->{rows};
 
 my $schema = 'public';
 my $table = 'pgbench_accounts';
-my $rows = $info-&gt;{rows};
-if (exists $rows-&gt;{$schema} and exists $rows-&gt;{$schema}{$table}) {
-  my $dbh = $info-&gt;{dbh}{B};
+my $rows = $info->{rows};
+if (exists $rows->{$schema} and exists $rows->{$schema}{$table}) {
+  my $dbh = $info->{dbh}{B};
   my $SQL = "UPDATE $schema.$table SET phone=? "
-    . "WHERE aid = ? AND phone &lt;&gt; ?";
-  my $sth = $dbh-&gt;prepare($SQL);
+    . "WHERE aid = ? AND phone <> ?";
+  my $sth = $dbh->prepare($SQL);
   my $string = 'private';
-  for my $pk (keys %{ $rows-&gt;{$schema}{$table} }) {
-    $sth-&gt;execute($string, $pk, $string);
+  for my $pk (keys %{ $rows->{$schema}{$table} }) {
+    $sth->execute($string, $pk, $string);
   }
 }
 return;
@@ -251,13 +251,13 @@ Once we have the handle, we walk through all the rows that have changed, and set
 
 ```
 ...
-if (exists $rows-&gt;{$schema} and exists $rows-&gt;{$schema}{$table}) {
-  my $dbh = $info-&gt;{dbh}{B};
+if (exists $rows->{$schema} and exists $rows->{$schema}{$table}) {
+  my $dbh = $info->{dbh}{B};
   my $SQL = "UPDATE $schema.$table SET phone=?"
-    . "WHERE aid = ANY(?) AND phone &lt;&gt; ?";
-  my $sth = $dbh-&gt;prepare($SQL);
+    . "WHERE aid = ANY(?) AND phone <> ?";
+  my $sth = $dbh->prepare($SQL);
   my $string = 'private';
-  $sth-&gt;execute($string, [ keys %{ $rows-&gt;{$schema}{$table} } ], $string);
+  $sth->execute($string, [ keys %{ $rows->{$schema}{$table} } ], $string);
 }
 ```
 
@@ -265,7 +265,7 @@ Note that this solution requires Bucardo version 5.3.0 or better. Let's verify i
 
  800-588-2300, Em-pire!
 ```
-$ psql btest1 -c "update pgbench_accounts set abalance=33, phone='588-2300' WHERE aid &lt;= 3"
+$ psql btest1 -c "update pgbench_accounts set abalance=33, phone='588-2300' WHERE aid <= 3"
 UPDATE 3
 
 $ psql btest2 -c 'select aid,abalance,phone from pgbench_accounts order by aid limit 3'
@@ -301,7 +301,7 @@ Let's verify it:
 
  Glenn Miller hit
 ```
-$ psql btest1 -c "update pgbench_accounts set abalance=44, phone='736-5000' WHERE aid &lt;= 3"
+$ psql btest1 -c "update pgbench_accounts set abalance=44, phone='736-5000' WHERE aid <= 3"
 UPDATE 3
 
 $ psql btest2 -c 'select aid,abalance,phone from pgbench_accounts order by aid limit 3'

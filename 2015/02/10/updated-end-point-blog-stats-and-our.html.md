@@ -5,7 +5,7 @@ tags: company
 title: Updated End Point Blog Stats and Our Services
 ---
 
-Today, I sat down to read through a few recent End Point blog articles and was impressed at the depth of topics in recent posts ([PostgreSQL](http://blog.endpoint.com/2015/02/postgres-custom-casts-and-pgdump.html), [Interchange](http://blog.endpoint.com/2015/02/interchange-loop-optimization.html), [SysAdmin](http://blog.endpoint.com/2015/02/cron-wrapper-keep-your-cron-jobs.html), [Text Editors (Vim)](http://blog.endpoint.com/2015/02/vim-plugin-spotlight-ctrlp.html), [Dancer](http://blog.endpoint.com/2015/02/filling-in-header-elements-with-dancer.html), [AngularJS](http://blog.endpoint.com/2015/02/polemics-on-opinions-about-angularjs.html)) from my coworkers. The list continues if I look further back covering technologies in both front and back end web development. And, this list doesn't even cover the topics I typically write about such as Ruby on Rails &amp; JavaScript.
+Today, I sat down to read through a few recent End Point blog articles and was impressed at the depth of topics in recent posts ([PostgreSQL](http://blog.endpoint.com/2015/02/postgres-custom-casts-and-pgdump.html), [Interchange](http://blog.endpoint.com/2015/02/interchange-loop-optimization.html), [SysAdmin](http://blog.endpoint.com/2015/02/cron-wrapper-keep-your-cron-jobs.html), [Text Editors (Vim)](http://blog.endpoint.com/2015/02/vim-plugin-spotlight-ctrlp.html), [Dancer](http://blog.endpoint.com/2015/02/filling-in-header-elements-with-dancer.html), [AngularJS](http://blog.endpoint.com/2015/02/polemics-on-opinions-about-angularjs.html)) from my coworkers. The list continues if I look further back covering technologies in both front and back end web development. And, this list doesn't even cover the topics I typically write about such as Ruby on Rails & JavaScript.
 
 While 5 years ago, we may have said we predominately worked with ecommerce clients, our portfolio has evolved to include [Liquid Galaxy](https://liquidgalaxy.endpoint.com/) clients and many non-ecommerce sites as well. With the inspiration from reading through these recent posts, I decided to share some updated stats.
 
@@ -40,9 +40,9 @@ How do End Point services break down?
 
 Trying to explain the broad range and depth of our services can be challenging. Here are a few additional notes related to the pie chart:
 
-- Our [Liquid Galaxy](https://liquidgalaxy.endpoint.com/) work spans across the topics of Hardware &amp; Hosting, Cloud Systems, and Databases.
-- Our [Ecommerce](/ecommerce) services typically includes work in the topics of Backend &amp; Client Side Development, as well as Databases.
-- Our development in mobile applications spans Backend &amp; Client Side Development.
+- Our [Liquid Galaxy](https://liquidgalaxy.endpoint.com/) work spans across the topics of Hardware & Hosting, Cloud Systems, and Databases.
+- Our [Ecommerce](/ecommerce) services typically includes work in the topics of Backend & Client Side Development, as well as Databases.
+- Our development in mobile applications spans Backend & Client Side Development.
 
 All in all, I'm impressed that we've continued to maintain expertise in long-standing topics such as PostgreSQL and Interchange, but also haven't shied away from learning new technologies such as GIS as related to Liquid Galaxy and JavaScript frameworks.
 
@@ -51,5 +51,5 @@ All in all, I'm impressed that we've continued to maintain expertise in long-sta
 P.S. If you are interested in generating word statistics via command line, the following will get you the top 20 words given a text file:
 
 ```nohighlight
-tr -c '[:alnum:]' '[\n*]' &lt; some_text_file.txt | sort | uniq -c | sort -nr | head -20
+tr -c '[:alnum:]' '[\n*]' < some_text_file.txt | sort | uniq -c | sort -nr | head -20
 ```

@@ -120,13 +120,13 @@ $ export GIT_AUTHOR_EMAIL="greg@endpoint.com"
 On a shared account, just create an alias. For example:
 
 ```nohighlight
-cat &gt; .gregs_stuff
+cat > .gregs_stuff
 export GIT_AUTHOR_NAME="Greg Sabino Mullane"
 export GIT_AUTHOR_EMAIL="greg@endpoint.com"
-&lt;ctrl-D&gt;
-cat &gt;&gt; .bashrc
+<ctrl-D>
+cat >> .bashrc
 alias greg='source ~/.gregs_stuff'
-&lt;ctrl-D&gt;
+<ctrl-D>
 ```
 
 #### Editor support

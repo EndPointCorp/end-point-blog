@@ -22,7 +22,7 @@ To create a new site, I went through the standard Rails 3.0 installation steps:
 - In my gemfile, I added:
 ```ruby
 gem 'devise'
-gem 'rails_admin', :path =&gt; 'vendor/gems/rails_admin'
+gem 'rails_admin', :path => 'vendor/gems/rails_admin'
 gem 'ckeditor' # for WYSIWYG editing
 gem 'paperclip' # and installed imagemagick, for image attachments
 ```
@@ -50,7 +50,7 @@ rails_admin has a nice DSL to modify the admin interface. I applied a few update
 First, I wanted to hide Users from the /admin, which required the change below. Note that you can also pass a block to determine the visibility of a model, which may be valuable if you want to limit the visibility of models to specific roles or users.
 
 ```ruby
-class User &lt; ActiveRecord::Base
+class User < ActiveRecord::Base
   ...
 
   rails_admin do
@@ -77,7 +77,7 @@ Next, I updated my products list view with the following changes, to limit the l
 </tr>
 <tr>
 <td align="left" style="border-right:1px solid #999;" valign="top"><pre class="brush:ruby" style="margin:0px;">
-class Product &lt; ActiveRecord::Base
+class Product < ActiveRecord::Base
   rails_admin do
     list do
       field :name
@@ -87,7 +87,7 @@ class Product &lt; ActiveRecord::Base
 end
 </pre></td>
 <td align="left" style="border-right:1px solid #999;" valign="top"><pre class="brush:ruby" style="margin:0px;">
-class Product &lt; ActiveRecord::Base
+class Product < ActiveRecord::Base
   rails_admin do
     list do
       sort_by :name
@@ -98,7 +98,7 @@ class Product &lt; ActiveRecord::Base
 end
 </pre></td>
 <td align="left" valign="top"><pre class="brush:ruby" style="margin:0px;">
-class Product &lt; ActiveRecord::Base
+class Product < ActiveRecord::Base
   rails_admin do
     list do
       sort_by :name
@@ -124,7 +124,7 @@ Here's a screenshot of the Products list view after these updates:
 Next, I want to add a WYSIWYG editor for one of my fields, which can be accomplished with the following change:
 
 ```ruby
-class Page &lt; ActiveRecord::Base
+class Page < ActiveRecord::Base
   rails_admin do
     edit do
       include_all_fields
@@ -144,7 +144,7 @@ ckeditor used for content field.
 rails_admin also works nicely with [Paperclip](https://github.com/thoughtbot/paperclip), a very popular image attachment Rails gem. Paperclip requires that imagemagick be installed on the server. I add the following code to my product model, which already had the Paperclip reference to an attached image, and the migration to introduce the Paperclip required attachment fields.
 
 ```ruby
-class Product &lt; ActiveRecord::Base
+class Product < ActiveRecord::Base
   rails_admin do
     edit do
       include_all_fields
@@ -162,7 +162,7 @@ The products edit view is now a multitype form to allow for image upload.
 And to update the show view, I made this change:
 
 ```ruby
-class Product &lt; ActiveRecord::Base
+class Product < ActiveRecord::Base
   ...
   rails_admin do
     show do

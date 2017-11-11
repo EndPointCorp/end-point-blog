@@ -26,13 +26,13 @@ ControlPath ~/.ssh/multi/master-%r@%h:%p
 The above indicates that a master should be used for each connection, and the location of where to store the master's control socket file. The %r, %h, and %p are expanded to the login, host, and port respectively which is usually enough to make it unique. This should be enough to start using multiplexing, but...and you knew there had to be one...when the master's control connection is lost all of the slaves to that connection lose their's as well. With the occasional hung terminal window, or accidental closing of it (if you can remember which is master to begin with), etc. you quickly find that when you normally would not lose connection in a separate terminal window you all of a sudden have lost all of your connections (8+ in my case) which is really painful. Here is where the fun comes in, I use the "-n" and "-N" flags to SSH in a terminal window when I first load up an X session and background the process:
 
 ```bash
-&gt; ssh -Nn user@remote &amp;
+> ssh -Nn user@remote &
 ```
 
 The above redirects stdin from /dev/null (a necessary evil when backgrounding SSH procs), prevents the execution of a remote command (meaning we don't want a shell), and puts the new process in the local shell's background. Unfortunately, and the part that took me the longest to figure out, is that SSH really likes to have a TTY around (we aren't using the daemon after all) so simply killing the original terminal window will cause the SSH process to die and zap there went your control connection and all the little children. To get around this little snafu I follow the backgrounding of my SSH process with a bash specific built in disassociating it from the TTY:
 
 ```bash
-&gt; disown
+> disown
 ```
 
 Now I am free to close the original terminal window, the SSH process lives on in the background (as if it were a daemon) and keeps the control connection open so that whenever I use SSH to that remote location (or 'scp', etc.) I get an instant response.

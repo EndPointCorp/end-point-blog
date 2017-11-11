@@ -42,12 +42,12 @@ DECLARE
       'HHHH','IIII','JJJJ','KKKK','LLLL','MMMM','NNNN',
       'OOOO','PPPP','QQQQ','RRRR','SSSS','TTTT','UUUU',
       'VVVV','WWWW','XXXX','YYYY','ZZZZ',
-      '&amp;amp;', '&amp;#34;', '&amp;#39;', '&amp;#38;','&amp;#60;','&amp;#62;',
-      '&amp;#162;','&amp;#163;','&amp;#164;','&amp;#165;','&amp;#166;','&amp;#167;',
-      '&amp;#168;','&amp;#169;','&amp;#170;','&amp;#171;','&amp;#172;','&amp;#173;',
-      '&amp;#174;','&amp;#175;','&amp;#176;','&amp;#177;','&amp;#178;','&amp;#179;',
-      '&amp;#180;','&amp;#181;','&amp;#182;','&amp;#183;','&amp;#184;','&amp;#185;',
-      '&amp;#186;','&amp;#187;','&amp;#188;','&amp;#189;','&amp;#190;'
+      '&amp;', '&#34;', '&#39;', '&#38;','&#60;','&#62;',
+      '&#162;','&#163;','&#164;','&#165;','&#166;','&#167;',
+      '&#168;','&#169;','&#170;','&#171;','&#172;','&#173;',
+      '&#174;','&#175;','&#176;','&#177;','&#178;','&#179;',
+      '&#180;','&#181;','&#182;','&#183;','&#184;','&#185;',
+      '&#186;','&#187;','&#188;','&#189;','&#190;'
     ];
   length INTEGER := random(500, 1500);
   result TEXT := '';
@@ -137,27 +137,27 @@ use DBI;
 use HTML::Entities;
 use Encode;
 
-my $dbh = DBI-&gt;connect(
+my $dbh = DBI->connect(
     "DBI:Pg:dbname=test;host=localhost",
     "szymon",
     "",
-    {'RaiseError' =&gt; 1, 'pg_utf8_strings' =&gt; 1});
+    {'RaiseError' => 1, 'pg_utf8_strings' => 1});
 
-$dbh-&gt;do('BEGIN');
+$dbh->do('BEGIN');
 
-my $upd = $dbh-&gt;prepare("UPDATE script SET t = ? WHERE id = ?");
+my $upd = $dbh->prepare("UPDATE script SET t = ? WHERE id = ?");
 
-my $sth = $dbh-&gt;prepare("SELECT id, t FROM script");
-$sth-&gt;execute();
+my $sth = $dbh->prepare("SELECT id, t FROM script");
+$sth->execute();
 
-while(my $row = $sth-&gt;fetchrow_hashref()) {
-    my $t = decode_entities( $row-&gt;{'t'} );
+while(my $row = $sth->fetchrow_hashref()) {
+    my $t = decode_entities( $row->{'t'} );
     $t = encode("UTF-8", $t);
-    $upd-&gt;execute( $t, $row-&gt;{'id'} );
+    $upd->execute( $t, $row->{'id'} );
 }
 
-$dbh-&gt;do('COMMIT');
-$dbh-&gt;disconnect();
+$dbh->do('COMMIT');
+$dbh->disconnect();
 ```
 
 ### The Worst Application
@@ -173,27 +173,27 @@ use DBI;
 use HTML::Entities;
 use Encode;
 
-my $dbh = DBI-&gt;connect(
+my $dbh = DBI->connect(
     "DBI:Pg:dbname=test;host=localhost",
     "szymon",
     "",
-    {'RaiseError' =&gt; 1, 'pg_utf8_strings' =&gt; 1});
+    {'RaiseError' => 1, 'pg_utf8_strings' => 1});
 
-$dbh-&gt;do('BEGIN');
+$dbh->do('BEGIN');
 
-my $upd = $dbh-&gt;prepare("UPDATE script_all SET t = ? WHERE id = ?");
+my $upd = $dbh->prepare("UPDATE script_all SET t = ? WHERE id = ?");
 
-my $sth = $dbh-&gt;prepare("SELECT id, payload, t FROM script_all");
-$sth-&gt;execute();
+my $sth = $dbh->prepare("SELECT id, payload, t FROM script_all");
+$sth->execute();
 
-while(my $row = $sth-&gt;fetchrow_hashref()) {
-    my $t = decode_entities( $row-&gt;{'t'} );
+while(my $row = $sth->fetchrow_hashref()) {
+    my $t = decode_entities( $row->{'t'} );
     $t = encode("UTF-8", $t);
-    $upd-&gt;execute( $t, $row-&gt;{'payload'}, $row-&gt;{'id'} );
+    $upd->execute( $t, $row->{'payload'}, $row->{'id'} );
 }
 
-$dbh-&gt;do('COMMIT');
-$dbh-&gt;disconnect();
+$dbh->do('COMMIT');
+$dbh->disconnect();
 ```
 
 ## Results.

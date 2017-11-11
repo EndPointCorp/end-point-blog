@@ -23,9 +23,9 @@ Then since we wanted to keep as clean as possible the root user environment (and
 
 ```nohighlight
 git clone https://github.com/yyuu/pyenv.git ~/.pyenv
-echo 'export PYENV_ROOT="$HOME/.pyenv"' &gt;&gt; ~/.bash_profile
-echo 'export PATH="$PYENV_ROOT/bin:$PATH"' &gt;&gt; ~/.bash_profile
-echo 'eval "$(pyenv init -)"' &gt;&gt; ~/.bash_profile
+echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bash_profile
+echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bash_profile
+echo 'eval "$(pyenv init -)"' >> ~/.bash_profile
 echo $SHELL -l
 pyenv install -l  | grep 2\\.7
 pyenv install 2.7.10

@@ -36,7 +36,7 @@ Now, let's look at the data model. Since this is a bare-bones store, I have one 
 
 ```ruby
 # sinatrashop/models/order.rb
-class Order &lt; ActiveRecord::Base
+class Order < ActiveRecord::Base
   validates_presence_of :email
   validates_presence_of :bill_firstname
   validates_presence_of :bill_lastname
@@ -52,8 +52,8 @@ class Order &lt; ActiveRecord::Base
   validates_presence_of :ship_zipcode
   validates_presence_of :phone
   validates_format_of :email,
-    :with =&gt; /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i,
-    :on =&gt; :create
+    :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i,
+    :on => :create
 end
 ```
 
@@ -61,25 +61,25 @@ And here is our migration:
 
 ```ruby
 # sinatrashop/db/migrate/001_create_orders.rb
-class CreateOrders &lt; ActiveRecord::Migration
+class CreateOrders < ActiveRecord::Migration
   def self.up
     create_table :orders do |t|
-      t.string   :email, :null =&gt; false
-      t.string   :bill_firstname, :null =&gt; false
-      t.string   :bill_lastname, :null =&gt; false
-      t.string   :bill_address1, :null =&gt; false
+      t.string   :email, :null => false
+      t.string   :bill_firstname, :null => false
+      t.string   :bill_lastname, :null => false
+      t.string   :bill_address1, :null => false
       t.string   :bill_address2
-      t.string   :bill_city, :null =&gt; false
-      t.integer  :bill_state, :null =&gt; false
-      t.string   :bill_zipcode, :null =&gt; false
-      t.string   :ship_firstname, :null =&gt; false
-      t.string   :ship_lastname, :null =&gt; false
-      t.string   :ship_address1, :null =&gt; false
+      t.string   :bill_city, :null => false
+      t.integer  :bill_state, :null => false
+      t.string   :bill_zipcode, :null => false
+      t.string   :ship_firstname, :null => false
+      t.string   :ship_lastname, :null => false
+      t.string   :ship_address1, :null => false
       t.string   :ship_address2
-      t.string   :ship_city, :null =&gt; false
-      t.integer  :ship_state, :null =&gt; false
-      t.string   :ship_zipcode, :null =&gt; false
-      t.string   :phone, :null =&gt; false
+      t.string   :ship_city, :null => false
+      t.integer  :ship_state, :null => false
+      t.string   :ship_zipcode, :null => false
+      t.string   :phone, :null => false
       t.timestamps
     end
   end
@@ -99,12 +99,12 @@ namespace :db do
     require 'rubygems'
     require 'logger'
     require 'active_record'
-    ActiveRecord::Base.establish_connection :adapter =&gt; 'sqlite3',
-      :database =&gt; 'db/development.sqlite3.db'
+    ActiveRecord::Base.establish_connection :adapter => 'sqlite3',
+      :database => 'db/development.sqlite3.db'
   end
 
   desc "Migrate the database"
-  task(:migrate =&gt; :environment) do
+  task(:migrate => :environment) do
     ActiveRecord::Base.logger = Logger.new(STDOUT)
     ActiveRecord::Migration.verbose = true
     ActiveRecord::Migrator.migrate("db/migrate")
@@ -118,11 +118,11 @@ Now, let's think about the views we'll present to users. There are many template
 
 ```nohighlight
 # header information
-&lt;body&gt;
+<body>
 # product information
 # form for submission
 # errors or success message
-&lt;/body&gt;
+</body>
 ```
 
 Obviously, there will be a lot more code here, but the view needs to show the basic product information, the form fields to collection information, and errors or a success message to handle the different use cases. See the code [here](https://github.com/stephskardal/sinatrashop/blob/master/views/index.erb) to examine the contents.
@@ -178,7 +178,7 @@ post '/' do
          raise Exception, '<b>Errors:</b> ' + order.errors.full_messages.join(', ')
        end
      end
-  rescue Exception =&gt; e
+  rescue Exception => e
     @message = e.message 
   end
 end
@@ -193,13 +193,13 @@ You might notice above that there is a "settings" hash used in the payment gatew
 require 'active_merchant'
 
 configure do
-  set :authorize_credentials =&gt; {
-    :login =&gt; "LOGIN"
-    :password =&gt; "PASSWORD"
+  set :authorize_credentials => {
+    :login => "LOGIN"
+    :password => "PASSWORD"
   }
   ActiveRecord::Base.establish_connection(
-    :adapter =&gt; 'sqlite3',
-    :database =&gt;  'db/development.sqlite3.db'
+    :adapter => 'sqlite3',
+    :database =>  'db/development.sqlite3.db'
   )
   ActiveMerchant::Billing::Base.mode = :test
 end

@@ -15,7 +15,7 @@ product page</td>   <td></td>  </tr>
 Spree: 0.11.2<br/>
 Hosting: 4 cores, 512 GB RAM<br/>
 DB: MySQL<br/>
-# Products: &lt;100   </td>   <td>7.49</td>   <td>24.75</td>   <td>6.49</td>   <td>19.87</td>   <td>Requests per second</td>  </tr>
+# Products: <100   </td>   <td>7.49</td>   <td>24.75</td>   <td>6.49</td>   <td>19.87</td>   <td>Requests per second</td>  </tr>
 <tr style="background-color:#424242;">   <td>266.889</td><td>808.041</td><td>307.997</td><td>1006.552</td>   <td>Time per request (ms)</td>  </tr>
 <tr>   <td rowspan="2">    <b>Client #2</b><br/>
 Spree 0.11.2<br/>
@@ -27,13 +27,13 @@ DB: MySQL<br/>
 Spree: 0.9.0<br/>
 Hosting: 4 cores, 1 GB RAM<br/>
 DB: PostgreSQL<br/>
-# Products: &lt;100   </td>   <td>4.91</td><td>25.39</td><td>1.98</td><td>6.54</td>   <td>Requests per second</td>  </tr>
+# Products: <100   </td>   <td>4.91</td><td>25.39</td><td>1.98</td><td>6.54</td>   <td>Requests per second</td>  </tr>
 <tr style="background-color:#424242;">   <td>407.135</td><td>787.782</td><td>1011.875</td><td>3060.062</td>   <td>Time per request (ms)</td>  </tr>
 <tr>   <td rowspan="2">    <b>(Former) Client #4</b><br/>
 Spree: 0.11.2<br/>
 Hosting: Unknown<br/>
 DB: PostgreSQL<br/>
-# Products: &gt;5000   </td>   <td>20.69</td><td>8.84</td><td>10.15</td><td>19.28</td>   <td>Requests per second</td>  </tr>
+# Products: >5000   </td>   <td>20.69</td><td>8.84</td><td>10.15</td><td>19.28</td>   <td>Requests per second</td>  </tr>
 <tr>   <td>96.673</td><td>2262.105</td><td>196.996</td><td>1037.146</td>   <td>Time per request (ms)</td>  </tr>
 <tr style="background-color:#424242;">   <td rowspan="2">    <b>Client #5</b><br/>
 Spree: 0.11.2<br/>
@@ -62,7 +62,7 @@ DB: MySQL<br/>
 <tr style="background-color:#424242;">   <td rowspan="2">    <b>Interchange Demo</b><br/>
 Hosting: 4 cores, 2 GB RAM<br/>
 DB: MySQL<br/>
-# Products: &gt;500   </td>   <td>7.41</td><td>55.27</td><td>7.5</td><td>13.93</td>   <td>Requests per second</td>  </tr>
+# Products: >500   </td>   <td>7.41</td><td>55.27</td><td>7.5</td><td>13.93</td>   <td>Requests per second</td>  </tr>
 <tr style="background-color:#424242;">   <td>269.942</td><td>361.875</td><td>266.492</td><td>1435.51</td>   <td>Time per request (ms)</td>  </tr>
 <tr>   <td rowspan="2">    <b>Client #8</b><br/>
 *PHP site,<br/>

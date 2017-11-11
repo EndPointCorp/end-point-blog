@@ -49,10 +49,10 @@ ESC[1m--- a/t/03dbmethod.tESC[m
 ESC[1m+++ b/t/03dbmethod.tESC[m
 ESC[36m@@ -26,7 +26,7 @@ESC[m ESC[mmy $dbh = connect_database();ESC[m
  if (! $dbh) {ESC[m
-    plan skip_all =&gt; 'Connection to database failed, cannot continue testing';ESC[m
+    plan skip_all => 'Connection to database failed, cannot continue testing';ESC[m
  }ESC[m
-ESC[31m-plan tests =&gt; 543;ESC[m
-ESC[32m+ESC[mESC[32mplan tests =&gt; 545;ESC[m
+ESC[31m-plan tests => 543;ESC[m
+ESC[32m+ESC[mESC[32mplan tests => 545;ESC[m
 ```
 
 After poking around with terminal settings and the like, a coworker suggested I simply tell git to use an intelligent pager with the command **git config --global core.pager "less -r"**. The output immediately improved:
@@ -64,10 +64,10 @@ index 108e0c5..ffcab48 100644
 +++ b/t/03dbmethod.t</span>
 <span style="color:cyan">@@ -26,7 +26,7 @@</span> my $dbh = connect_database();
  if (! $dbh) {
-    plan skip_all =&gt; 'Connection to database failed, cannot continue testing';
+    plan skip_all => 'Connection to database failed, cannot continue testing';
  }
-<span style="color:red">-plan tests =&gt; 543;</span>
-<span style="color:green">+plan tests =&gt; 545;</span>
+<span style="color:red">-plan tests => 543;</span>
+<span style="color:green">+plan tests => 545;</span>
 ```
 
 Thanks [Josh Williams](/team/josh_williams)! The above fix worked perfectly. I'm a little unsure of this solution as I think the terminal and not git is really to blame, but it works for me and I've seen no other terminal issues yet.

@@ -16,8 +16,8 @@ end
 
 #irb
 default = Foo::DEFAULTS
-default &lt;&lt; :c
-Foo::DEFAULTS #=&gt; [:a, :b, :c]  WHOOPS!
+default << :c
+Foo::DEFAULTS #=> [:a, :b, :c]  WHOOPS!
 ```
 
 As you can see, assigning a new variable from a constant lets you modify what you thought was a constant!  Needless to say, such an assumption would be very difficult to track down in a real application.  Let's see how we might improve on this design.  First, let's [freeze](http://ruby-doc.org/core-1.9.3/Object.html#method-i-freeze) our constant.
@@ -29,15 +29,15 @@ end
 
 #irb
 default = Foo::DEFAULTS
-default &lt;&lt; :c #=&gt;  ERROR can't modify frozen array
+default << :c #=>  ERROR can't modify frozen array
 ```
 
 Now we'll get very specific feedback about offending code.  The question is how can we use our constant now as a starting point for array, and still be able to modify it later?  Let's look at some more code.
 
 ```ruby
-Foo::DEFAULTS.frozen? #=&gt; true
-Foo::DEFAULTS.clone.frozen? #=&gt; true, this was my first guess, but it turns out we need...
-Foo::DEFAULTS.dup.frozen? #=&gt; false
+Foo::DEFAULTS.frozen? #=> true
+Foo::DEFAULTS.clone.frozen? #=> true, this was my first guess, but it turns out we need...
+Foo::DEFAULTS.dup.frozen? #=> false
 ```
 
 It's worth reading the docs on [clone](http://ruby-doc.org/core-1.9.3/Object.html#method-i-clone) and [dup](http://ruby-doc.org/core-1.9.3/Object.html#method-i-dup) to understand there difference, but in short, clone replicates the internal state of the object while dup creates a new instance of the object.  There was one more question I needed to answer; what would happen when I wanted to append another frozen array to a non-frozen array?  Let's look to the code again!

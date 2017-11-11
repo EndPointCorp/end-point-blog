@@ -41,7 +41,7 @@ Copy and paste each informational list-of-links and append it to a text file. Yo
 You can sort and de-duplicate the file with something like this:
 
 ```bash
-$ sort site_urls.txt | uniq &gt; site_urls.out
+$ sort site_urls.txt | uniq > site_urls.out
 ```
 
 Inspect the site_urls.out file and when you're happy with it, rename it to "site_urls.txt".

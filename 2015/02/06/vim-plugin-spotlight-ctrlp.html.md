@@ -14,7 +14,7 @@ When I started using Vim I relied on tree-based file browsers like netrw and Ner
 After it's invoked (usually by a keyboard shortcut) CtrlP will display a list of files in your current project and will filter that list on the fly based on your text input, matching it against both directory names and file names. Pressing <control-f> with CtrlP open toggles through two other modes: most recently used files, and current buffers. This is useful when you want to narrow down the list of potential matches to only files you have worked with recently or currently have open in other buffers. I use CtrlP's buffer mode to jump between open files so often that I added a custom mapping to invoke it in my .vimrc file:
 
 ```
-map &lt;leader&gt;b :CtrlPBuffer<cr></cr>
+map <leader>b :CtrlPBuffer<cr></cr>
 ```
 
 CtrlP has many configuration options that can affect its performance and behavior, and installing additional plugins can provide different matcher engines that search through a directory more quickly and return more relevant results than the default matcher. Alternate matchers I've found include:

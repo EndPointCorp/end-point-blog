@@ -34,7 +34,7 @@ Dancer (details at the first link in this article) is a web application framewor
 package MyApp::Routes;
 use Dancer;
 
-get '/index.html' =&gt; sub {
+get '/index.html' => sub {
     print 'hello, world';
 }
 ```
@@ -43,8 +43,8 @@ Dancer sets up some easy-to-grasp syntax that lets you associate a clump of Perl
 
 ```perl
 ...
-post '/myapp/do_this.html' =&gt; sub {
-    do_this(param-&gt;{foo});
+post '/myapp/do_this.html' => sub {
+    do_this(param->{foo});
     return q{It's done.};
 };
 ```
@@ -56,13 +56,13 @@ Dancer provides quite a bit of support infrastructure: config files, database co
 Now it was pretty simple to make gradual progress: I'd eliminate one CGI script at a time, replacing it with a Dancer route (stored separately from my main processing module, so that the processing could continue to be ignorant of Dancer). Most of the routes were very simple, since the paths they had to recognize were simple and straightforward, with simple CGI parameter lists. E.g.,
 
 ```perl
-get '/notes.html' =&gt; sub {
+get '/notes.html' => sub {
     my $context = MyApp::get_notes({
-        dbh    =&gt; database(),
-        order  =&gt; params-&gt;{order},
-        raw    =&gt; 1,
+        dbh    => database(),
+        order  => params->{order},
+        raw    => 1,
     });
-    template 'notes', $context, { layout =&gt; 'plain' };
+    template 'notes', $context, { layout => 'plain' };
 };
 ```
 
@@ -73,12 +73,12 @@ This example is one of the routes that produces HTML. The "template" built-in is
 By contrast, one simple route that is designed to return JSON to the Javascript side:
 
 ```perl
-get '/orders.html' =&gt; sub {
+get '/orders.html' => sub {
     my $orders = MyApp::get_orders({
-        dbh    =&gt; database(),
-        date   =&gt; params-&gt;{date},
+        dbh    => database(),
+        date   => params->{date},
     });
-    return to_json($orders || [], { pretty =&gt; params-&gt;{pretty} // 0 });
+    return to_json($orders || [], { pretty => params->{pretty} // 0 });
 };
 ```
 

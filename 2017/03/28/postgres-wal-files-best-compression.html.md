@@ -48,7 +48,7 @@ program via the free-form archive_command parameter. Here is the canonical examp
 from the Postgres docs, showing use of the gzip program for archive_command:
 
 ```
-archive_command = 'gzip &lt; %p &gt; /var/lib/pgsql/archive/%f'
+archive_command = 'gzip < %p > /var/lib/pgsql/archive/%f'
 ```
 
 It is widely known that gzip is no longer the best compression option for most tasks,

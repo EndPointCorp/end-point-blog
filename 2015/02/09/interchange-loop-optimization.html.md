@@ -121,14 +121,14 @@ Inv:
 * Shipping: [inventory type=shipping sku=[sql-param sku]]
 [/if]
 Order details:
-    &lt;a href="[area
+    <a href="[area
                 href=order_view
                 form="
                     order=[sql-param order_number]
                     show_status=[either][cgi show_status][or]active[/either]
                     show_inventory=[cgi show_inventory]
                 "
-            ]"&gt;View [sql-param order_number]&lt;/a&gt;
+            ]">View [sql-param order_number]</a>
 [/query]
 ```
 
@@ -174,14 +174,14 @@ Inv:
 * Shipping: [inventory type=shipping sku=[sql-param sku]]
 <b>[/if-sql-param]</b>
 Order details:
-    &lt;a href="[area
+    <a href="[area
                 href=order_view
                 form="
                     order=[sql-param order_number]
                     show_status=[either][cgi show_status][or]active[/either]
                     show_inventory=[cgi show_inventory]
                 "
-            ]"&gt;View [sql-param order_number]&lt;/a&gt;
+            ]">View [sql-param order_number]</a>
 [/query]
 ```
 
@@ -207,7 +207,7 @@ Now to look at that [inventory] tag. The most direct approach assumes that the c
 [if-sql-param show_inventory]
 <b>[sql-sub show_inventory]
     my $arg = shift;
-    return $Tag-&gt;inventory({ type =&gt; $arg, sku =&gt; $Row-&gt;{sku} });
+    return $Tag->inventory({ type => $arg, sku => $Row->{sku} });
 [/sql-sub]</b>
 Inv:
 [if-sql-param show_inventory eq all]
@@ -239,16 +239,16 @@ Finally, all we have left to address is [area] and its args which themselves hav
 
 ```
 <b>[sql-sub area_order_view]
-    my $show_status = $CGI-&gt;{show_status} || 'active';
-    return $Tag-&gt;area({
-        href =&gt; 'order_view',
-        form =&gt; "order=$Row-&gt;{order_number}\n"
+    my $show_status = $CGI->{show_status} || 'active';
+    return $Tag->area({
+        href => 'order_view',
+        form => "order=$Row->{order_number}\n"
               . "show_status=$show_status\n"
-              . "show_inventory=$CGI-&gt;{show_inventory}",
+              . "show_inventory=$CGI->{show_inventory}",
     });
 [/sql-sub]</b>
 Order details:
-    &lt;a href="<b>[sql-exec area_order_view][/sql-exec]</b>"&gt;View [sql-param order_number]&lt;/a&gt;
+    <a href="<b>[sql-exec area_order_view][/sql-exec]</b>">View [sql-param order_number]</a>
 ```
 
 By packaging all of [area]'s requirements into the sub body, I can address all of the ITL at once.
@@ -278,7 +278,7 @@ Date: [sql-filter convert_date."%b %d, %Y at %T"][sql-param order_date][/sql-fil
 [if-sql-param show_inventory]
 [sql-sub show_inventory]
     my $arg = shift;
-    return $Tag-&gt;inventory({ type =&gt; $arg, sku =&gt; $Row-&gt;{sku} });
+    return $Tag->inventory({ type => $arg, sku => $Row->{sku} });
 [/sql-sub]
 Inv:
 [if-sql-param show_inventory eq all]
@@ -290,16 +290,16 @@ Inv:
 * Shipping: [sql-exec show_inventory]shipping[/sql-exec]
 [/if-sql-param]
 [sql-sub area_order_view]
-    my $show_status = $CGI-&gt;{show_status} || 'active';
-    return $Tag-&gt;area({
-        href =&gt; 'order_view',
-        form =&gt; "order=$Row-&gt;{order_number}\n"
+    my $show_status = $CGI->{show_status} || 'active';
+    return $Tag->area({
+        href => 'order_view',
+        form => "order=$Row->{order_number}\n"
               . "show_status=$show_status\n"
-              . "show_inventory=$CGI-&gt;{show_inventory}",
+              . "show_inventory=$CGI->{show_inventory}",
     });
 [/sql-sub]
 Order details:
-    &lt;a href="[sql-exec area_order_view][/sql-exec]"&gt;View [sql-param order_number]&lt;/a&gt;
+    <a href="[sql-exec area_order_view][/sql-exec]">View [sql-param order_number]</a>
 [/query]
 ```
 

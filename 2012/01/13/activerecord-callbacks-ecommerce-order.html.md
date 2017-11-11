@@ -14,20 +14,20 @@ As I recently blogged about, I introduced a new [Ruby on Rails Ecommerce Engine]
 The first thing to note is the data model and the use of nested attributes. Here's how the order model relates to its associated models:
 
 ```ruby
-class Order &lt; ActiveRecord::Base
-  has_many :line_items, :inverse_of =&gt; :order
-  has_many :payments, :inverse_of =&gt; :order
-  has_many :shipments, :inverse_of =&gt; :order
-  has_many :credits, :inverse_of =&gt; :order
+class Order < ActiveRecord::Base
+  has_many :line_items, :inverse_of => :order
+  has_many :payments, :inverse_of => :order
+  has_many :shipments, :inverse_of => :order
+  has_many :credits, :inverse_of => :order
 
-  belongs_to :billing_address, :class_name =&gt; "Piggybak::Address"
-  belongs_to :shipping_address, :class_name =&gt; "Piggybak::Address"
+  belongs_to :billing_address, :class_name => "Piggybak::Address"
+  belongs_to :shipping_address, :class_name => "Piggybak::Address"
   belongs_to :user
   
-  accepts_nested_attributes_for :billing_address, :allow_destroy =&gt; true
-  accepts_nested_attributes_for :shipping_address, :allow_destroy =&gt; true
-  accepts_nested_attributes_for :shipments, :allow_destroy =&gt; true
-  accepts_nested_attributes_for :line_items, :allow_destroy =&gt; true
+  accepts_nested_attributes_for :billing_address, :allow_destroy => true
+  accepts_nested_attributes_for :shipping_address, :allow_destroy => true
+  accepts_nested_attributes_for :shipments, :allow_destroy => true
+  accepts_nested_attributes_for :line_items, :allow_destroy => true
   accepts_nested_attributes_for :payments
 end
 ```
@@ -60,7 +60,7 @@ validates_each :payment_method_id do |record, attr, value|
     
     if !credit_card.valid?
       credit_card.errors.each do |key, value|
-        if value.any? &amp;&amp; !["first_name", "last_name", "type"].include?(key)
+        if value.any? && !["first_name", "last_name", "type"].include?(key)
           record.errors.add key, value
         end
       end

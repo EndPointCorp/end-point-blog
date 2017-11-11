@@ -11,11 +11,11 @@ I brought this up to [Jon](/team/jon_jensen, who suggested we run performance te
 
 ```ruby
 $ script/console   # This app is on Rails 2.3
-&gt; require 'benchmark'
-&gt; Rails.cache.delete("test")
-&gt; Rails.cache.fetch("test") { [SomeKlass.first, SomeKlass.last] }
-&gt; # to emulate what would potentially be stored with low-level cache
-&gt; Benchmark.bm(15) { |x| x.report("times:") { 10000.times do; Rails.cache.fetch("test"); end } }
+> require 'benchmark'
+> Rails.cache.delete("test")
+> Rails.cache.fetch("test") { [SomeKlass.first, SomeKlass.last] }
+> # to emulate what would potentially be stored with low-level cache
+> Benchmark.bm(15) { |x| x.report("times:") { 10000.times do; Rails.cache.fetch("test"); end } }
 ```
 
 We ran the console test with a few different caching configurations, with the results shown below. The size of the cached data here was ~2KB.
@@ -43,7 +43,7 @@ We ran the console test with a few different caching configurations, with the re
 </tr>
 </tbody></table>
 
-<img alt="chart1" src="http://chart.apis.google.com/chart?chxl=0:|memcached|tmpfs|ext4|netapp&amp;chxt=x&amp;chbh=a&amp;chs=600x300&amp;cht=bvg&amp;chco=A2C180&amp;chds=0,0.6&amp;chd=t:0.524,0.196,0.173,0.215&amp;chtt=Small+Cache+Raw+Caching+Performance+(time+in+sec+%2F+cache+hit)"/>
+<img alt="chart1" src="http://chart.apis.google.com/chart?chxl=0:|memcached|tmpfs|ext4|netapp&chxt=x&chbh=a&chs=600x300&cht=bvg&chco=A2C180&chds=0,0.6&chd=t:0.524,0.196,0.173,0.215&chtt=Small+Cache+Raw+Caching+Performance+(time+in+sec+%2F+cache+hit)"/>
 
 I also ran the console test with a much larger cache size of 822KB, with much different results:
 
@@ -70,7 +70,7 @@ I also ran the console test with a much larger cache size of 822KB, with much di
 </tr>
 </tbody></table>
 
-<img alt="chart2" src="http://chart.apis.google.com/chart?chxl=0:|memcached|tmpfs|ext4|netapp&amp;chxt=x&amp;chbh=a&amp;chs=600x300&amp;cht=bvg&amp;chco=A2C180&amp;chds=0,0.02&amp;chd=t:0,0.017,0.016,0.016&amp;chtt=Large+Cache+Raw+Caching+Performance+(time+in+sec+%2F+cache+hit)"/>
+<img alt="chart2" src="http://chart.apis.google.com/chart?chxl=0:|memcached|tmpfs|ext4|netapp&chxt=x&chbh=a&chs=600x300&cht=bvg&chco=A2C180&chds=0,0.02&chd=t:0,0.017,0.016,0.016&chtt=Large+Cache+Raw+Caching+Performance+(time+in+sec+%2F+cache+hit)"/>
 
 ### Conclusion
 

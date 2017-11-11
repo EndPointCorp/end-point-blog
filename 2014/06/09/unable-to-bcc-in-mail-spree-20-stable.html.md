@@ -19,7 +19,7 @@ Ok, so let's say you follow all the instructions and start placing test orders (
 
     - Check to see if Spree/Rails is attempting to send the confirmation email to your Bcc recipient
 
-1. Try development, test, &amp; production modes
+1. Try development, test, & production modes
 
     - If the Bcc email is not getting sent, keep following along for the solution
 
@@ -56,7 +56,7 @@ mail(to: [@order.email, "some_other_email@somewhere.com"], from: from_address, s
 
     - core/app/mailers/spree/order_mailer.rb ~~~ruby
 1 module Spree
-  2   class OrderMailer &lt; BaseMailer
+  2   class OrderMailer < BaseMailer
   3     def confirm_email(order, resend = false)
   4       @order = order.respond_to?(:id) ? order : Spree::Order.find(order)
   5       subject = (resend ? "[#{Spree.t(:resend).upcase}] " : '')

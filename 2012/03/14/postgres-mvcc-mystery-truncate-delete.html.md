@@ -106,28 +106,28 @@ use DBI;
 use Time::HiRes; ## so we can reliably sleep less than one second
 
 ## Connect and create a test table, populate it:
-my $dbh = DBI-&gt;connect('dbi:Pg', 'postgres', '', {AutoCommit=&gt;0});
-$dbh-&gt;do('DROP TABLE foobar');
-$dbh-&gt;do('CREATE TABLE foobar(a INT UNIQUE)');
-$dbh-&gt;do('INSERT INTO foobar VALUES (42)');
-$dbh-&gt;commit();
-$dbh-&gt;disconnect();
+my $dbh = DBI->connect('dbi:Pg', 'postgres', '', {AutoCommit=>0});
+$dbh->do('DROP TABLE foobar');
+$dbh->do('CREATE TABLE foobar(a INT UNIQUE)');
+$dbh->do('INSERT INTO foobar VALUES (42)');
+$dbh->commit();
+$dbh->disconnect();
 
 ## Fork, then have one process truncate, and the other delete+insert
 if (fork) {
-  my $dbhA = DBI-&gt;connect('dbi:Pg', 'postgres', '', {AutoCommit=&gt;0});
-  $dbhA-&gt;do('SET TRANSACTION ISOLATION LEVEL SERIALIZABLE');
-  $dbhA-&gt;do('TRUNCATE TABLE foobar');          ## 1
+  my $dbhA = DBI->connect('dbi:Pg', 'postgres', '', {AutoCommit=>0});
+  $dbhA->do('SET TRANSACTION ISOLATION LEVEL SERIALIZABLE');
+  $dbhA->do('TRUNCATE TABLE foobar');          ## 1
   sleep 0.3;                                   ## Wait for B to delete
-  $dbhA-&gt;do('INSERT INTO foobar VALUES (42)'); ## 2
-  $dbhA-&gt;commit();                             ## 2
+  $dbhA->do('INSERT INTO foobar VALUES (42)'); ## 2
+  $dbhA->commit();                             ## 2
 }
 else {
-  my $dbhB = DBI-&gt;connect('dbi:Pg', 'postgres', '', {AutoCommit=&gt;0});
-  $dbhB-&gt;do('SET TRANSACTION ISOLATION LEVEL SERIALIZABLE');
+  my $dbhB = DBI->connect('dbi:Pg', 'postgres', '', {AutoCommit=>0});
+  $dbhB->do('SET TRANSACTION ISOLATION LEVEL SERIALIZABLE');
   sleep 0.3;                                   ## Wait for A to truncate
-  $dbhB-&gt;do('DELETE FROM foobar');             ## 3
-  $dbhB-&gt;do('INSERT INTO foobar VALUES (42)'); ## 3
+  $dbhB->do('DELETE FROM foobar');             ## 3
+  $dbhB->do('INSERT INTO foobar VALUES (42)'); ## 3
 }
 ```
 

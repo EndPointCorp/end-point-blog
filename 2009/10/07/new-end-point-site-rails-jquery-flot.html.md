@@ -56,7 +56,7 @@ require 'rexml/document'
 The feed is retrieved and a REXML object created from the feed in the rake task:
 
 ```ruby
-data = open('http://blog.endpoint.com/feeds/posts/default?alt=rss&amp;max-results=10', 'User-Agent' =&gt; 'Ruby-Wget').read
+data = open('http://blog.endpoint.com/feeds/posts/default?alt=rss&max-results=10', 'User-Agent' => 'Ruby-Wget').read
 doc = REXML::Document.new(data)
 ```
 
@@ -66,14 +66,14 @@ The REXML object is iterated through. An array containing the Blogger links and 
 results = []
 doc.root.each_element('//item') do |item|
   author = item.elements['author'].text.match(/\(.+/).to_s.gsub(/\.|\(|\)/,'')
-  results &lt;&lt; '&lt;a href="' + item.elements['link'].text + '"&gt;' + item.elements['title'].text + '&lt;/a&gt;'
+  results << '<a href="' + item.elements['link'].text + '">' + item.elements['title'].text + '</a>'
 end
 ```
 
 Finally, a Rails dynamic partial is written containing the contents of the results array:
 
 ```ruby
-  File.open(#{RAILS_ROOT}/app/views/blog/_index.rhtml", 'w') { |f| f.write(results.inject('') { |s, v| s = s + '&lt;p&gt;' + v  + '&lt;/p&gt;'}) }
+  File.open(#{RAILS_ROOT}/app/views/blog/_index.rhtml", 'w') { |f| f.write(results.inject('') { |s, v| s = s + '<p>' + v  + '</p>'}) }
 ```
 
 A similar process was applied for bio and tag dynamic partials. The partials are included on pages such as the End Point service pages, End Point bio pages, and End Point home page.
@@ -125,7 +125,7 @@ Another change in the new site was importing existing functionality previously w
 The public twitter feed is retrieved using Open URI and REXML.
 
 ```ruby
-    data = open('https://twitter.com/statuses/user_timeline/endpoint.xml', 'User-Agent' =&gt; 'Ruby-Wget').read
+    data = open('https://twitter.com/statuses/user_timeline/endpoint.xml', 'User-Agent' => 'Ruby-Wget').read
     doc = REXML::Document.new(data)
 ```
 
@@ -133,26 +133,26 @@ An array containing all the titles of all tweets is created.
 
 ```ruby
     doc.each_element('statuses/status/text') do |item|
-      twitter &lt;&lt; item.text.gsub(/ http:\/\/j\.mp.*/, '')
+      twitter << item.text.gsub(/ http:\/\/j\.mp.*/, '')
     end
 ```
 
 The blogger RSS feed is retrieved and parsed. An array of hashes is created to track the un-tweeted blog articles.
 
 ```ruby
-    data = open('http://blog.endpoint.com/feeds/posts/default?alt=rss&amp;max-results=10000', 'User-Agent' =&gt; 'Ruby-Wget').read
+    data = open('http://blog.endpoint.com/feeds/posts/default?alt=rss&max-results=10000', 'User-Agent' => 'Ruby-Wget').read
     doc = REXML::Document.new(data)
     found_recent = false
     doc.root.each_element('//item') do |item|
       found_recent = true if twitter.include?(item.elements['title'].text)
-      blog &lt;&lt; { 'title' =&gt; item.elements['title'].text, 'link' =&gt; item.elements['link'].text } if !found_recent
+      blog << { 'title' => item.elements['title'].text, 'link' => item.elements['link'].text } if !found_recent
     end
 ```
 
 Using the j.mp api, a short url is generated. A Twitter message is created from the short URL.
 
 ```ruby
-      data = open('http://api.j.mp/shorten?version=2.0.1&amp;longUrl=' + blog.last['link'] + '&amp;login=**&amp;apiKey=*****&amp;format=xml')
+      data = open('http://api.j.mp/shorten?version=2.0.1&longUrl=' + blog.last['link'] + '&login=**&apiKey=*****&format=xml')
       ...
       twitter_msg = blog.last['title'] + ' ' + short_url
 ```
@@ -160,7 +160,7 @@ Using the j.mp api, a short url is generated. A Twitter message is created from 
 The twitter4r gem is used to login and update the Twitter status message.
 
 ```ruby
-      client = Twitter::Client.new(:login =&gt; **, :password =&gt; *****)
+      client = Twitter::Client.new(:login => **, :password => *****)
       begin
         status = client.status(:post, twitter_msg)
       rescue

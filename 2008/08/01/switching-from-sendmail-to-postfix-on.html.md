@@ -45,9 +45,9 @@ The sendmail compatibility is implemented by a wrapper script similar to how Deb
 
 ```
 # ls -lFa /usr/sbin/sendmail /usr/bin/newaliases /usr/bin/mailq
-lrwxr-xr-x  1 root  wheel  21 Aug  1 14:50 /usr/bin/mailq@ -&gt; /usr/sbin/mailwrapper
-lrwxr-xr-x  1 root  wheel  21 Aug  1 14:50 /usr/bin/newaliases@ -&gt; /usr/sbin/mailwrapper
-lrwxr-xr-x  1 root  wheel  21 Aug  1 14:51 /usr/sbin/sendmail@ -&gt; /usr/sbin/mailwrapper
+lrwxr-xr-x  1 root  wheel  21 Aug  1 14:50 /usr/bin/mailq@ -> /usr/sbin/mailwrapper
+lrwxr-xr-x  1 root  wheel  21 Aug  1 14:50 /usr/bin/newaliases@ -> /usr/sbin/mailwrapper
+lrwxr-xr-x  1 root  wheel  21 Aug  1 14:51 /usr/sbin/sendmail@ -> /usr/sbin/mailwrapper
 ```
 
 To make the switch to Postfix, run:

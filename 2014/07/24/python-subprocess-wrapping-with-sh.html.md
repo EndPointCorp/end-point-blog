@@ -29,8 +29,8 @@ When running this command on my linux workstation (hostname atlas) it will retur
 Python 2.7.6 (default, Mar 22 2014, 22:59:56)
 [GCC 4.8.2] on linux2
 Type "help", "copyright", "credits" or "license" for more information.
-&gt;&gt;&gt; import sh
-&gt;&gt;&gt; print(sh.hostname())
+>>> import sh
+>>> print(sh.hostname())
 atlas
 ```
 
@@ -43,7 +43,7 @@ A common use of shell scripts is to provide administrators the ability to quickl
 To pipe together commands using the sh library, you would encapsulate each command in series to create a similar syntax to bash piping:
 
 ```python
-&gt;&gt;&gt; print(sh.wc(sh.ls("-l", "/etc"), "-l"))
+>>> print(sh.wc(sh.ls("-l", "/etc"), "-l"))
 199
 ```
 
@@ -52,7 +52,7 @@ This command would have been equivalent to the bash pipe of "ls -l /etc | wc -l"
 For our log listener we will use the tail command along with a python iterator to watch for a potential error condition, which I will represent with the string "ERROR":
 
 ```python
-&gt;&gt;&gt; for line in sh.tail("-f", "/tmp/test_log", _iter=True):
+>>> for line in sh.tail("-f", "/tmp/test_log", _iter=True):
 ...     if "ERROR" in line:
 ...         print line
 ```

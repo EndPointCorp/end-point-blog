@@ -11,7 +11,7 @@ I'm in Seattle for the PostgreSQL Conference West today!  I just finished giving
 
 [Bucardo](http://www.slideshare.net/selenamarie/bucardo)
 
-<object height="355" style="margin:0px" width="425"><param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=bucardo-091017075408-phpapp02&amp;stripped_title=bucardo"/><param name="allowFullScreen" value="true"/><param name="allowScriptAccess" value="always"/><embed allowfullscreen="true" allowscriptaccess="always" height="355" src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=bucardo-091017075408-phpapp02&amp;stripped_title=bucardo" type="application/x-shockwave-flash" width="425"/></object>
+<object height="355" style="margin:0px" width="425"><param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=bucardo-091017075408-phpapp02&stripped_title=bucardo"/><param name="allowFullScreen" value="true"/><param name="allowScriptAccess" value="always"/><embed allowfullscreen="true" allowscriptaccess="always" height="355" src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=bucardo-091017075408-phpapp02&stripped_title=bucardo" type="application/x-shockwave-flash" width="425"/></object>
 
 View more [documents](http://www.slideshare.net/) from [Selena Deckelmann](http://www.slideshare.net/selenamarie).
 

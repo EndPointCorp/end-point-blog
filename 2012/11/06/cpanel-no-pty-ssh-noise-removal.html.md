@@ -24,7 +24,7 @@ That writes a warning to stderr when there’s no tty because mesg doesn’t mak
 The solution is simple, since we don’t care to hear that warning. We edit that line like this:
 
 ```bash
-mesg y 2&gt;/dev/null
+mesg y 2>/dev/null
 ```
 
 This tip that may only be useful to one or two people ever, if even that many. I hope they enjoy it. :)

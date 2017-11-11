@@ -18,10 +18,10 @@ In snapshot (Gemfile.lock):
 rails (= 5.0.0.beta3)
 
 In Gemfile:
-rails (&lt; 5.1, &gt;= 5.0.0.beta3)
+rails (< 5.1, >= 5.0.0.beta3)
 
-rails_admin (~&gt; 0.8.1) was resolved to 0.8.1, which depends on
-rails (~&gt; 4.0)
+rails_admin (~> 0.8.1) was resolved to 0.8.1, which depends on
+rails (~> 4.0)
 ```
 
 I took a look at the [GitHub page for rails_admin](https://github.com/sferik/rails_admin) and noticed that recent commits make reference to Rails 5, which is an encouraging sign that its developers are working on adding compatibility with Rails 5. Looking at the [gemspec in the master branch](https://github.com/sferik/rails_admin/blob/master/rails_admin.gemspec) on GitHub shows that the rails_admin gem dependency has been broadened to include both Rails 4 and 5, so I updated my app's Gemfile to install rails_admin directly from the master branch on GitHub:
@@ -39,25 +39,25 @@ In snapshot (Gemfile.lock):
 rack (= 2.0.0.alpha)
 
 In Gemfile:
-rails (&lt; 5.1, &gt;= 5.0.0.beta3) was resolved to 5.0.0.beta3, which depends on
+rails (< 5.1, >= 5.0.0.beta3) was resolved to 5.0.0.beta3, which depends on
 actionmailer (= 5.0.0.beta3) was resolved to 5.0.0.beta3, which depends on
 actionpack (= 5.0.0.beta3) was resolved to 5.0.0.beta3, which depends on
-rack (~&gt; 2.x)
+rack (~> 2.x)
 
 rails_admin was resolved to 0.8.1, which depends on
-rack-pjax (~&gt; 0.7) was resolved to 0.7.0, which depends on
-rack (~&gt; 1.3)
+rack-pjax (~> 0.7) was resolved to 0.7.0, which depends on
+rack (~> 1.3)
 
-rails (&lt; 5.1, &gt;= 5.0.0.beta3) was resolved to 5.0.0.beta3, which depends on
+rails (< 5.1, >= 5.0.0.beta3) was resolved to 5.0.0.beta3, which depends on
 actionmailer (= 5.0.0.beta3) was resolved to 5.0.0.beta3, which depends on
 actionpack (= 5.0.0.beta3) was resolved to 5.0.0.beta3, which depends on
-rack-test (~&gt; 0.6.3) was resolved to 0.6.3, which depends on
-rack (&gt;= 1.0)
+rack-test (~> 0.6.3) was resolved to 0.6.3, which depends on
+rack (>= 1.0)
 
 rails_admin was resolved to 0.8.1, which depends on
-sass-rails (&lt; 6, &gt;= 4.0) was resolved to 5.0.4, which depends on
-sprockets (&lt; 4.0, &gt;= 2.8) was resolved to 3.6.0, which depends on
-rack (&lt; 3, &gt; 1)
+sass-rails (< 6, >= 4.0) was resolved to 5.0.4, which depends on
+sprockets (< 4.0, >= 2.8) was resolved to 3.6.0, which depends on
+rack (< 3, > 1)
 ```
 
 This bundler output shows a conflict where Rails 5 depends on rack 2.x while rails_admin's rack-pjax dependency depends on rack 1.x. I ended up resorting to a Google search which led me to the following issue in the rails_admin repo: [https://github.com/sferik/rails_admin/issues/2532](https://github.com/sferik/rails_admin/issues/2532)

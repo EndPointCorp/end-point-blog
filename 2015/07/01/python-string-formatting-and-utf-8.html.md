@@ -16,7 +16,7 @@ Here is the code's snippet that I was previously using:
 ```python
 for e in results:                                                                                                                        
     simple_author=e['author'].split('(')[1][:-1].strip()                                                             
-    if freqs.get(simple_author,0) &lt; 1:                                                                                               
+    if freqs.get(simple_author,0) < 1:                                                                                               
         print parse(e['published']).strftime("%Y-%m-%d") , "--",simple_author, "--", e['title']
 ```
 
@@ -25,7 +25,7 @@ And here is the fixed version
 ```python
 for e in results:                                                                                                                        
     simple_author=e['author'].split('(')[1][:-1].strip().encode('UTF-8')                                                             
-    if freqs.get(simple_author,0) &lt; 1:                                                                                               
+    if freqs.get(simple_author,0) < 1:                                                                                               
         print parse(e['published']).strftime("%Y-%m-%d") , "--",simple_author, "--", e['title'].encode('UTF-8') 
 ```
 
@@ -81,16 +81,16 @@ and then another 30 characters including "Age" which has three letters, by givin
 Alternatively, it is possible to use the same indentation approach with the *format* string method:
 
 ```python
-print("{!s:&lt;{fill}}{!s:&gt;{fill}}".format("Name", "Age",fill=30))
+print("{!s:<{fill}}{!s:>{fill}}".format("Name", "Age",fill=30))
 Name                                                     Age
 ```
 
 And with the same progression, it is also possible to do something like:
 
 ```python
-print("{!s:*&lt;{fill}}{!s:&gt;{fill}}".format("Name", "Age",fill=30))
+print("{!s:*<{fill}}{!s:>{fill}}".format("Name", "Age",fill=30))
 Name**************************                           Age
-print("{!s:*&lt;{fill}}{!s:#&gt;{fill}}".format("Name", "Age",fill=30))
+print("{!s:*<{fill}}{!s:#>{fill}}".format("Name", "Age",fill=30))
 Name**************************###########################Age
 ```
 

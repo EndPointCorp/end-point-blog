@@ -51,7 +51,7 @@ components/com_morevirtuemart
 We don't need to use more than a generic controller in a main directory. Its content is not very exciting for now:
 
 ```php
-&lt;?php
+<?php
 
 // No direct access
 defined('_JEXEC') or die;
@@ -77,8 +77,8 @@ class MorevirtuemartController extends JControllerLegacy
   */
  public function display($cachable = false, $urlparams = false)
  {
-  $view = JFactory::getApplication()-&gt;input-&gt;getCmd('view', '');
-  JFactory::getApplication()-&gt;input-&gt;set('view', $view);
+  $view = JFactory::getApplication()->input->getCmd('view', '');
+  JFactory::getApplication()->input->set('view', $view);
 
   parent::display($cachable, $urlparams);
 
@@ -110,7 +110,7 @@ Now you know how to call a controller task within a browser.
 To use Virtuemart classes we need to initialize all of its logic and configuration. Look here:
 
 ```php
-&lt;?php
+<?php
 
 // No direct access
 defined('_JEXEC') or die;
@@ -145,7 +145,7 @@ What we are doing here is importing needed Virtuemart classes and initializing t
 The most difficult thing here is how to work with a Virtuemart internal authorization system. Before an every CRUD action there is a check for an authorization access. We need to find a workaround for this, there are multiple way of doing this, I will show you how I did that. Create a new file in **components/com_morevirtuemart/model and call it category.php.** Inside this file put this piece of code:
 
 ```php
-&lt;?php
+<?php
 
 // No direct access
 defined('_JEXEC') or die;
@@ -160,7 +160,7 @@ class VirtueMartModelCategoryLocal extends VirtueMartModelCategory {
 I hope it's pretty clear what we are doing here: extending a Virtuemart category model. What I'm going to do now is to copy a store function from a VirtueMartModelCategory class and put it in our local class of a category model and remove an authentication check from it (you need to secure it by yourself but using a different method). The result of this action is:
 
 ```php
-&lt;?php
+<?php
 
 // No direct access
 defined('_JEXEC') or die;
@@ -171,9 +171,9 @@ class VirtueMartModelCategoryLocal extends VirtueMartModelCategory {
     parent::__construct();
   }
 
-  public function store(&amp;$data)
+  public function store(&$data)
   {
-    $table = $this-&gt;getTable('categories');
+    $table = $this->getTable('categories');
 
     if ( !array_key_exists ('category_template' , $data ) ){
       $data['category_template'] = $data['category_layout'] = $data['category_product_layout'] = 0 ;
@@ -190,20 +190,20 @@ class VirtueMartModelCategoryLocal extends VirtueMartModelCategory {
       $data['category_product_layout'] = 0;
     }
 
-    $table-&gt;bindChecknStore($data);
+    $table->bindChecknStore($data);
 
     if(!empty($data['virtuemart_category_id'])){
       $xdata['category_child_id'] = (int)$data['virtuemart_category_id'];
       $xdata['category_parent_id'] = empty($data['category_parent_id'])? 0:(int)$data['category_parent_id'];
       $xdata['ordering'] = empty($data['ordering'])? 0: (int)$data['ordering'];
 
-        $table = $this-&gt;getTable('category_categories');
+        $table = $this->getTable('category_categories');
 
-      $table-&gt;bindChecknStore($xdata);
+      $table->bindChecknStore($xdata);
 
     }
 
-    $this-&gt;clearCategoryRelatedCaches();
+    $this->clearCategoryRelatedCaches();
 
     return $data['virtuemart_category_id'] ;
   }
@@ -251,12 +251,12 @@ class MorevirtuemartController extends JControllerLegacy
  public function createCategory ()
  {
   $catData = [
-   'category_name' =&gt; 'Brand new Virtuemart category',
-  'category_parent_id' =&gt; 0,
-   'published' =&gt; 0
+   'category_name' => 'Brand new Virtuemart category',
+  'category_parent_id' => 0,
+   'published' => 0
    ];
 
-  $catId = $this-&gt;categoryModel-&gt;store($catData);
+  $catId = $this->categoryModel->store($catData);
 
   echo 'Created a new category';
 

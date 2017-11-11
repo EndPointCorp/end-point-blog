@@ -21,11 +21,11 @@ Reliability compared to resiliency: Being resilient means success of your missio
 
 Build in monitoring during development, so it's not a bottleneck right before deployment. (John Allspaw)
 
-Data comes from the devil. Models come from God. Data + Models = Insight. Data needs to be put in a prison (a model) and made to confess the truth. Measurement is a process. Numbers aren't right. What is the error range? Visualization is helpful, but analyze the raw data looking for anomalies (such as > 100% efficiency, etc.). VAMOOS = visualize, analyze, modelize, over &amp; over till satisfied. (Neil Gunther)
+Data comes from the devil. Models come from God. Data + Models = Insight. Data needs to be put in a prison (a model) and made to confess the truth. Measurement is a process. Numbers aren't right. What is the error range? Visualization is helpful, but analyze the raw data looking for anomalies (such as > 100% efficiency, etc.). VAMOOS = visualize, analyze, modelize, over & over till satisfied. (Neil Gunther)
 
 Anycast for DNS alone tends to localize on the user's recursive resolver, not their actual location. Anycast for the actual content delivery automatically localizes on the user's actual location. (Tom Daly)
 
-To scale up, add more capacity to do X, make system do X faster, or stop doing so much X. What makes a task take time? It's utilizing a resource, it's waiting for a response, or it's waiting for synchronization. "Shard early &amp; often" is expensive &amp; unnecessary for most situations. Sharding makes sense when write demand exceeds capacity. (Baron Schwartz)
+To scale up, add more capacity to do X, make system do X faster, or stop doing so much X. What makes a task take time? It's utilizing a resource, it's waiting for a response, or it's waiting for synchronization. "Shard early & often" is expensive & unnecessary for most situations. Sharding makes sense when write demand exceeds capacity. (Baron Schwartz)
 
 [Eight fallacies of distributed computing](http://en.wikipedia.org/wiki/Fallacies_of_Distributed_Computing) were discussed by Ruslan Belkin.
 

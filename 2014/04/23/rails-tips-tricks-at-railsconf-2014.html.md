@@ -2,7 +2,7 @@
 author: Steph Skardal
 gh_issue_number: 970
 tags: conference, rails
-title: Rails Tips &amp; Tricks at RailsConf 2014
+title: Rails Tips & Tricks at RailsConf 2014
 ---
 
 <img border="0" src="/blog/2014/04/23/rails-tips-tricks-at-railsconf-2014/image-0.jpeg" style="margin-bottom:2px;" width="820"/>
@@ -20,7 +20,7 @@ One of the talks I attended on Day two of RailsConf 2014 was *Tricks that Rails 
 
 - [Relation.merge](http://apidock.com/rails/ActiveRecord/SpawnMethods/merge), e.g. Product.joins(:reviews).merge(Review.approved), allows you to utilize scope from another model rather than passing in exact SQL conditional, i.e. limiting knowledge of Review to Product.
 - Utilize [group counting](http://api.rubyonrails.org/classes/ActiveRecord/Calculations.html#method-i-count) to group results by a column and get the count. This also accepts multiple fields to group.
-- [relation.first!](http://api.rubyonrails.org/classes/ActiveRecord/FinderMethods.html#method-i-first-21) and [relation.last!](http://api.rubyonrails.org/classes/ActiveRecord/FinderMethods.html#method-i-last-21) are similar to first &amp; last but raise exception RecordNotFound if there are no records.
+- [relation.first!](http://api.rubyonrails.org/classes/ActiveRecord/FinderMethods.html#method-i-first-21) and [relation.last!](http://api.rubyonrails.org/classes/ActiveRecord/FinderMethods.html#method-i-last-21) are similar to first & last but raise exception RecordNotFound if there are no records.
 - [where.not](http://blog.remarkablelabs.com/2012/12/not-equal-support-for-active-record-queries-rails-4-countdown-to-2013) is a cool finder trick, e.g. scope :some_scope, -> { where.not status: 'draft' }
 - You can control eager or lazy loading in Rails via [eager_load](http://blog.plataformatec.com.br/tag/eager-load/) and [preload](http://blog.bigbinary.com/2013/07/01/preload-vs-eager-load-vs-joins-vs-includes.html). These are a little tricky to sum up in a small example, so hopefully those links provide more.
 - Instead of passing in SQL in finder methods or scopes, you can call with :desc, e.g. scope :some_scope, -> { order created_at: :desc }

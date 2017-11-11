@@ -43,11 +43,11 @@ DECLARE
 BEGIN
    -- Variables: tablename, full query of interest returning ctids of tablename rows, and # of rows desired.
    RAISE DEBUG 'Desired rows: %', desired;
-   &lt;&lt;outermost&gt;&gt;
+   <<outermost>>
    LOOP
 /*
    May want a sanity limit here, based on loops:
-   IF loops &gt; 10 THEN
+   IF loops > 10 THEN
        RAISE EXCEPTION 'Giving up. Try again later.';
    END IF;
 */
@@ -68,7 +68,7 @@ BEGIN
                    total := total + 1;
                    found[total] := myrec.ctid;
                    -- quit as soon as we have all requested
-                   EXIT outermost WHEN total &gt;= desired;
+                   EXIT outermost WHEN total >= desired;
                -- It did not work
                EXCEPTION
                    WHEN LOCK_NOT_AVAILABLE THEN

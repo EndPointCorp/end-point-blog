@@ -12,17 +12,17 @@ Sometimes bugs in other people's code makes me think I might be crazy. I’m not
 I have two models with a simple parent/child relationship defined with has_many and belongs_to ActiveRecord associations, respectively. Here are the pertinent bits of each:
 
 ```ruby
-class MimeTypeCategory &lt; ActiveRecord::Base
+class MimeTypeCategory < ActiveRecord::Base
   # parent class
   has_many :mime_types
 
   def self.all
     Rails.cache.fetch("mime_type_categories") do
-    MimeTypeCategory.find(:all, :include =&gt; :mime_types)
+    MimeTypeCategory.find(:all, :include => :mime_types)
   end
 end
 
-class MimeType &lt; ActiveRecord::Base
+class MimeType < ActiveRecord::Base
   # child class
   belongs_to :mime_type_category
 end

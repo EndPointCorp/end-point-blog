@@ -5,14 +5,12 @@ tags: postgres
 title: Subverting PostgreSQL Aggregates for Pentaho
 ---
 
-
-
 In a [recent post](http://blog.endpoint.com/2009/07/mdx.html) I described MDX and a project I'm working on with the Mondrian MDX engine. In this post I'll describe a system I implemented to overcome one of Mondrian's limitations.
 
 Each Mondrian measure has an associated aggregate function defined. For instance, here's a measure from the sample data that ships with Pentaho:
 
 ```nohighlight
-&lt;Measure name="Quantity" column="QUANTITYORDERED" aggregator="sum" /&gt;
+<Measure name="Quantity" column="QUANTITYORDERED" aggregator="sum" />
 ```
 
 The schema defines the database connection properties and the table this cube deals with elsewhere; this line says there's a column called QUANTITYORDERED which Mondrian can meaningfully aggregate with the sum() function. Mondrian knows about six aggregates: count, avg, sum, min, max, and distinct-count. And therein lies the problem. In this case, the client wanted to use other aggregates such as median and standard deviation, but Mondrian didn't provide them[1].  
@@ -22,11 +20,11 @@ Mondrian uses the aggregator attribute of the measure definition to generate SQL
 Measures can be defined in terms of SQL expressions, rather than simple column names, but this doesn't immediately help. If I wanted the standard deviation of the quantity ordered, I might try something like this:
 
 ```nohighlight
-&lt;Measure name="Quantity"&gt;
-    &lt;KeyExpression&gt;&lt;SQL dialect="postgres"&gt;
+<Measure name="Quantity">
+    <KeyExpression><SQL dialect="postgres">
         stddev(quantityordered)
-    &lt;/SQL&gt;&lt;/KeyExpression&gt;
-&lt;/Measure&gt;
+    </SQL></KeyExpression>
+</Measure>
 ```
 
 Here, Mondrian would complain that the measure was defined without an aggregator attribute. And if I define one, such as sum, the resulting SQL becomes "sum(stddev(quantityordered))", which is illegal and makes PostgreSQL complain about nested aggregates.
@@ -44,11 +42,11 @@ $$ LANGUAGE SQL IMMUTABLE;
 Then we define a measure like this:
 
 ```nohighlight
-&lt;Measure name="Quantity Std. Dev" aggregator="count"&gt;
-    &lt;KeyExpression&gt;&lt;SQL dialect="postgres"&gt;
+<Measure name="Quantity Std. Dev" aggregator="count">
+    <KeyExpression><SQL dialect="postgres">
         stddev(quantityordered)
-    &lt;/SQL&gt;&lt;/KeyExpression&gt;
-&lt;/Measure&gt;
+    </SQL></KeyExpression>
+</Measure>
 ```
 
 The resulting SQL is "count(stddev(quantityordered))", but in this case PostgreSQL uses our new count() function, and we get exactly the return value we want.
@@ -86,15 +84,13 @@ $$ LANGUAGE sql;
 Now our count() function will only be called when we're dealing with the dp_cust type, and we can control precisely when that happens, because the only way we make dp_cust values will be with the make_dpcust function. Our measure now looks like this:
 
 ```nohighlight
-&lt;Measure name="Quantity Std. Dev" aggregator="count"&gt;
-    &lt;KeyExpression&gt;&lt;SQL dialect="postgres"&gt;
+<Measure name="Quantity Std. Dev" aggregator="count">
+    <KeyExpression><SQL dialect="postgres">
         make_dpcust(stddev(quantityordered))
-    &lt;/SQL&gt;&lt;/KeyExpression&gt;
-&lt;/Measure&gt;
+    </SQL></KeyExpression>
+</Measure>
 ```
 
 With this new data type and our custom count() function we can use whatever PostgreSQL aggregate we want as a measure aggregate in Mondrian.
 
 [1] Note that the Mondrian developers already recognize this as a shortcoming worth removing. Allowing user-defined aggregates is on the Mondrian roadmap.
-
-

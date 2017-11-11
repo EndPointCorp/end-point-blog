@@ -8,11 +8,11 @@ title: Association Extensions in Rails for Piggybak
 I recently had a problem with Rails named scopes while working on minor refactoring in [Piggybak](http://www.piggybak.org/), an open source Ruby on Rails ecommerce platform that End Point created and maintains. The problem was that I found that [named scopes](http://guides.rubyonrails.org/active_record_querying.html#scopes) were not returning uncommitted or new records. Named scopes allow you to specify ActiveRecord query conditions and can be combined with joins and includes to query associated data. For example, based on recent [line item rearchitecture](http://blog.endpoint.com/2012/10/piggybak-update-line-item-rearchitecture.html), I wanted order.line_items.sellables, order.line_items.taxes, order.line_items.shipments to return all line items where line_item_type was sellable, tax, or shipment, respectively. With named scopes, this might look like:
 
 ```ruby
-class Piggybak::LineItem &lt; ActiveRecord::Base
-    scope :sellables, where(:line_item_type =&gt; "sellable")
-    scope :taxes, where(:line_item_type =&gt; "tax")
-    scope :shipments, where(:line_item_type =&gt; "payment")
-    scope :payments, where(:line_item_type =&gt; "payment")
+class Piggybak::LineItem < ActiveRecord::Base
+    scope :sellables, where(:line_item_type => "sellable")
+    scope :taxes, where(:line_item_type => "tax")
+    scope :shipments, where(:line_item_type => "payment")
+    scope :payments, where(:line_item_type => "payment")
   end
 ```
 
@@ -23,7 +23,7 @@ However, while processing an order, any uncommited or new records would not be r
 order.line_items.select { |li| li.line_item_type == "shipment" }.all? { |s| s.shipment.status == "shipped" }
 
 # Get number of new payments
-order.line_items.select { |li| li.new_record? &amp;&amp; li.line_item_type == "payment" }.size
+order.line_items.select { |li| li.new_record? && li.line_item_type == "payment" }.size
 ```
 
 ### Association Extensions
@@ -31,7 +31,7 @@ order.line_items.select { |li| li.new_record? &amp;&amp; li.line_item_type == "p
 I felt that the above workaround was crufty and not very readable and sent out a request to my coworkers in hopes that there was a solution for improving the readability and clarity of the code. [Kamil](/team/kamil_ciemniewski) confirmed that named scopes do not return uncommitted records, and Tim Case offered an alternative solution by suggesting [association extensions](http://guides.rubyonrails.org/association_basics.html#association-extensions). An association extension allows you to add new finders, creators or methods that are only used as part of the association. After some investigation, I settled on the following code to extend the line_items association:
 
 ```ruby
-class Piggybak::Order &lt; ActiveRecord::Base
+class Piggybak::Order < ActiveRecord::Base
   has_many :line_items, do
     def sellables
       proxy_association.proxy.select { |li| li.ilne_item_type == "sellable" }

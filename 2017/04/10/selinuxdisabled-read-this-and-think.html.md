@@ -30,32 +30,32 @@ ls -lFa
 vim wacky.php
 set
 ls -lFa
-php wacky.php 2&gt;&amp;1 | less
+php wacky.php 2>&1 | less
 vim wacky.php
-php wacky.php 2&gt;&amp;1 | less
+php wacky.php 2>&1 | less
 vim wacky.php
-php wacky.php 2&gt;&amp;1 | less
+php wacky.php 2>&1 | less
 vim wacky.php
-php wacky.php 2&gt;&amp;1 | less
+php wacky.php 2>&1 | less
 vim wacky.php
-php wacky.php 2&gt;&amp;1 | less
+php wacky.php 2>&1 | less
 fg
 ls -lFa
 vim wacky.php
-php wacky.php 2&gt;&amp;1 | less
+php wacky.php 2>&1 | less
 vim wacky.php
-php wacky.php 2&gt;&amp;1 | less
+php wacky.php 2>&1 | less
 vim wacky.php
-php wacky.php 2&gt;&amp;1 | less
+php wacky.php 2>&1 | less
 vim wacky.php
-php wacky.php 2&gt;&amp;1 | less
+php wacky.php 2>&1 | less
 vim wacky.php
-php wacky.php 2&gt;&amp;1 | less
+php wacky.php 2>&1 | less
 vim wacky.php
-php wacky.php 2&gt;&amp;1 | less
+php wacky.php 2>&1 | less
 vim wacky.php
-php wacky.php 2&gt;&amp;1 | less
-php wacky.php &gt; THE-EVIL 2&gt;&amp;1
+php wacky.php 2>&1 | less
+php wacky.php > THE-EVIL 2>&1
 vim THE-EVIL
 ls -lFA
 less wacky.php

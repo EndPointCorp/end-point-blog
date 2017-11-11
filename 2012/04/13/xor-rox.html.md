@@ -49,10 +49,10 @@ which is nothing more complex than the expanded equivalent of (A XOR B), from yo
 
 ```perl
 @sorted = sort {(
-        ($a-&gt;{flag} xor ($a-&gt;{quantity} &gt; 0 xor $delta &gt; 0))
-        &lt;=&gt;
-        ($b-&gt;{flag} xor ($b-&gt;{quantity} &gt; 0 xor $delta &gt; 0))
-) || abs($a-&gt;{quantity} &lt;=&gt; abs($b-&gt;{quantity})} @items;
+        ($a->{flag} xor ($a->{quantity} > 0 xor $delta > 0))
+        <=>
+        ($b->{flag} xor ($b->{quantity} > 0 xor $delta > 0))
+) || abs($a->{quantity} <=> abs($b->{quantity})} @items;
 ```
 
 That’s more “xor” operations in one statement than I’ve used in the last year.

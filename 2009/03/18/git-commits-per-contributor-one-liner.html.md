@@ -8,7 +8,7 @@ title: Git commits per contributor one-liner
 Just for fun, in the [Spree Git repository](http://www.spreehq.org/):
 
 ```nohighlight
-git log | grep ^Author: | sed 's/ &lt;.*//; s/^Author: //' | sort | uniq -c | sort -nr
+git log | grep ^Author: | sed 's/ <.*//; s/^Author: //' | sort | uniq -c | sort -nr
     813 Sean Schofield
      97 Brian Quinn
      81 Steph (Powell) Skardal

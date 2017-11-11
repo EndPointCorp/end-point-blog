@@ -17,4 +17,4 @@ One topic that came up repeatedly was crisis management and how locative tech mi
 
 And people who work hard together, should play hard too!  Check out this video of the PacManhattan game and other great coverage of the conference on [WebMonkey.com](http://webmonkey.com).
 
-<object height="344" width="425"><param name="movie" value="http://www.youtube.com/v/XKyuCnjVIYU&amp;color1=0xb1b1b1&amp;color2=0xcfcfcf&amp;hl=en&amp;fs=1"/><param name="allowFullScreen" value="true"/><embed allowfullscreen="true" height="344" src="http://www.youtube.com/v/XKyuCnjVIYU&amp;color1=0xb1b1b1&amp;color2=0xcfcfcf&amp;hl=en&amp;fs=1" type="application/x-shockwave-flash" width="425"/></object>
+<object height="344" width="425"><param name="movie" value="http://www.youtube.com/v/XKyuCnjVIYU&color1=0xb1b1b1&color2=0xcfcfcf&hl=en&fs=1"/><param name="allowFullScreen" value="true"/><embed allowfullscreen="true" height="344" src="http://www.youtube.com/v/XKyuCnjVIYU&color1=0xb1b1b1&color2=0xcfcfcf&hl=en&fs=1" type="application/x-shockwave-flash" width="425"/></object>

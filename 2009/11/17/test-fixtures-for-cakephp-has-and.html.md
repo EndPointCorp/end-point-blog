@@ -25,7 +25,7 @@ You can go with the usual Cake-ish model definitions:
 class Product extends AppModel {
     $name = 'Product';
     $hasAndBelongsToMany = array(
-        'Sale' =&gt; array('className' =&gt; 'Sale')
+        'Sale' => array('className' => 'Sale')
     );
 }
 
@@ -33,7 +33,7 @@ class Product extends AppModel {
 class Sale extends AppModel {
     $name = 'Sale';
     $hasAndBelongsToMany = array(
-        'Product' =&gt; array('className' =&gt; 'Product')
+        'Product' => array('className' => 'Product')
     );
 }
 ```
@@ -82,7 +82,7 @@ class Product extends AppModel {
     $name = 'Product';
     /* Use the 'with' option to join through the new model class */
     $hasAndBelongsToMany = array(
-        'Sale' =&gt; array('with' =&gt; 'ProductsSale')
+        'Sale' => array('with' => 'ProductsSale')
     );
 }
 
@@ -91,7 +91,7 @@ class Sale extends AppModel {
     $name = 'Sale';
     /* And again, the 'with' option */
     $hasAndBelongsToMany = array(
-        'Product' =&gt; array('with' =&gt; 'ProductsSale')
+        'Product' => array('with' => 'ProductsSale')
     );
 }
 ```

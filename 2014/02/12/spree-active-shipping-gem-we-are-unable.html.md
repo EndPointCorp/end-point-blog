@@ -18,17 +18,17 @@ The Active Shipping Gem makes a call to the API, the API returns a hash of vario
 Well, it would be great if it all worked out exactly as planned.  However, if you are running Spree 2-0-stable you may find yourself battling an unusual circumstance. Namely, Spree 2-0-stable will create your core/app/views/spree/checkout/edit.html.erb as
 
 ```ruby
-&lt;% content_for :head do %&gt;
-     &lt;%= javascript_include_tag '/states' %&gt;
-   &lt;% end %&gt;
+<% content_for :head do %>
+     <%= javascript_include_tag '/states' %>
+   <% end %>
 ```
 
 This will provide the incorrect path. It is intended to hit the StatesController, so update it like so:
 
 ```ruby
-&lt;% content_for :head do %&gt;
-     &lt;%= javascript_include_tag states_url %&gt;
-   &lt;% end %&gt;
+<% content_for :head do %>
+     <%= javascript_include_tag states_url %>
+   <% end %>
 ```
 
 Now, once this correction has been made you may find that you are still having an error, "We are unable to calculate shipping rates for the selected items."
@@ -41,4 +41,4 @@ At this point Chrome Dev Tools will not show any errors.  When I had this error,
 
 After a long while of searching and wondering, is it the API?  Is it the Active Shipping Gem?  Is it a blacklisted zip code?  I went through and changed one setting at a time in the Spree admin until finally arriving at the source of this error for me.  Missing product weight.  Because UPS needs the product weight in order to calculate shipping charges, make sure this is set.
 
-The "We are unable to calculate shipping rates for the selected items" error message is misleading.  If you encounter this error after correcting the javascript_include_tag, the cause is most likely a setting in the admin. Check for how insufficient inventory is handled, missing product weights, or incorrectly setup up or non-existent shipping zones &amp; associated methods.  I hope if this error message is what brought you here that this post has saved you some time.
+The "We are unable to calculate shipping rates for the selected items" error message is misleading.  If you encounter this error after correcting the javascript_include_tag, the cause is most likely a setting in the admin. Check for how insufficient inventory is handled, missing product weights, or incorrectly setup up or non-existent shipping zones & associated methods.  I hope if this error message is what brought you here that this post has saved you some time.

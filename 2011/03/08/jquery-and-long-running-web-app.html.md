@@ -73,11 +73,11 @@ Here is the display_output() function that makes Request B and gets called every
 function display_output(elementSelector, sourceUrl) {
     $(elementSelector).load(sourceUrl);
     var html = $(elementSelector).html();
-    if (html.search("EODEPLOY") &gt; 0) {
+    if (html.search("EODEPLOY") > 0) {
         window.clearInterval(poll_loop);
         alert('Deployment Finished.');
     }
-    if (html.search("DEPLOY_ERROR") &gt; 0) {
+    if (html.search("DEPLOY_ERROR") > 0) {
         window.clearInterval(poll_loop);
         alert('Deployment FAILED.');
     }

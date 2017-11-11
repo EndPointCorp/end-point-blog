@@ -11,7 +11,7 @@ One pretty common request for every web developer is to "please, make our Stone 
 
 Paired with some impressive infinite scroll which I already [covered here](http://blog.endpoint.com/2013/11/pagination-days-are-over-infinite.html) and a nice full-screen image gallery (which I will cover later), it will definitely help to bring your website up to date.
 
-Lucky for us, there is a very popular library called [BigVideo.js](http://dfcb.github.io/BigVideo.js/) which is based on another well known library [videojs](http://www.videojs.com/), which is a wrapper around HTML5 &lt;video&gt; tag.
+Lucky for us, there is a very popular library called [BigVideo.js](http://dfcb.github.io/BigVideo.js/) which is based on another well known library [videojs](http://www.videojs.com/), which is a wrapper around HTML5 <video> tag.
 
 ### Converting the video.
 

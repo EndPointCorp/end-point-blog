@@ -29,7 +29,7 @@ The admin interface includes ability to assign roles to users, another has_and_b
 And the user model has an instance method to determine if the user's rights include the current method or right:
 
 ```ruby
-class User &lt; ActiveRecord::Base
+class User < ActiveRecord::Base
   ...
   def can_do_method?(method)
     self.rights.detect { |r| r.name == method }
@@ -41,12 +41,12 @@ end
 At the controller level without abstraction, we use the access control system to determine if the user has the ability to do that particular action, by including a conditional on the rule. Note that in these examples, the user also must be logged in, which is connected to the application's authentication system ([devise](https://github.com/plataformatec/devise)).
 
 ```ruby
-class ThingsController &lt; ApplicationController
+class ThingsController < ApplicationController
   ...
   access_control do
-    allow logged_in, :to =&gt; :example_right1, :if =&gt; :allow_example_right1?
-    allow logged_in, :to =&gt; :example_right2, :if =&gt; :allow_example_right2?
-    allow logged_in, :to =&gt; :example_right3, :if =&gt; :allow_example_right3?
+    allow logged_in, :to => :example_right1, :if => :allow_example_right1?
+    allow logged_in, :to => :example_right2, :if => :allow_example_right2?
+    allow logged_in, :to => :example_right3, :if => :allow_example_right3?
   end
 
   def allow_example_right1?
@@ -74,10 +74,10 @@ end
 The controller is simplified with the following abstraction. The access control statements do not need to be modified for each new potential method/right, but the method itself must be defined.
 
 ```ruby
-class ThingsController &lt; ApplicationController
+class ThingsController < ApplicationController
   ...
   access_control do
-    allow logged_in, :to =&gt; :generic_method, :if =&gt; :allow_generic_method?
+    allow logged_in, :to => :generic_method, :if => :allow_generic_method?
   end
 
   def allow_generic_method?
@@ -103,13 +103,13 @@ end
 And don't forget the handler for Acl9::AccessDenied exceptions, inside the ApplicationController, which handles both JSON and HTML responses:
 
 ```ruby
-class ApplicationController &lt; ActionController::Base
+class ApplicationController < ActionController::Base
   ...
   # Rescuing from any Access denied messages, generic JSON response or redirect and flash message
   rescue_from Acl9::AccessDenied do |exception|
     respond_to do |format|
       format.json do
-        render :json =&gt; { :success =&gt; false, :message =&gt; "You do not have access to do this action." }
+        render :json => { :success => false, :message => "You do not have access to do this action." }
       end
       format.html do
         flash[:error] = 'You do not have access to view this page.'

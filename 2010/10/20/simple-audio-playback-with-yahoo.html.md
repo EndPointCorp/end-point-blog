@@ -12,13 +12,13 @@ Recently I had need to show a list of MP3 files with a click-to-play interface.
 I came upon a very simple self-contained audio player:
 
 ```nohighlight
-&lt;script type="text/javascript" src="http://mediaplayer.yahoo.com/js"&gt;&lt;/script&gt;
+<script type="text/javascript" src="http://mediaplayer.yahoo.com/js"></script>
 ```
 
 The code to set up my links for playing was dirt-simple:
 
 ```javascript
-&lt;script type="text/javascript"&gt;
+<script type="text/javascript">
 var player = document.getElementById('player');
 function add_to_player() {
     var link = this;
@@ -26,18 +26,18 @@ function add_to_player() {
     return false;
 }
 var links = document.getElementsByTagName('A');
-for (var i = 0; i &lt; links.length; i++) {
+for (var i = 0; i < links.length; i++) {
     if (links[i].src.match(/\.mp3$/)) {
         links.onclick = add_to_player;
     }
 }
-&lt;/script&gt;
+</script>
 ```
 
 You could use various ways to identify the links to be player-ized, but I chose to just associate the links with a class, "mp3":
 
 ```nohighlight
-&lt;a class="mp3" href="/path/to/file.mp3"&gt;Audio File 1&lt;/a&gt;
+<a class="mp3" href="/path/to/file.mp3">Audio File 1</a>
 ```
 
 Obviously, if jQuery is in use for your page, you can reduce the code to an even smaller snippet.

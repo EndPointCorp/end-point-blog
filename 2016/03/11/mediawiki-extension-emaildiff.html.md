@@ -5,8 +5,6 @@ tags: mediawiki
 title: 'MediaWiki extension EmailDiff: notification emails improved'
 ---
 
-
-
 <div class="separator" style="clear: both; float:right; padding: 0 0 .5em 1.5em; text-align: center;"><a href="/blog/2016/03/11/mediawiki-extension-emaildiff/image-0.jpeg" imageanchor="1" style="clear: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" src="/blog/2016/03/11/mediawiki-extension-emaildiff/image-0.jpeg"/></a><br/><small><a href="https://flic.kr/p/bdWyHP">Photo</a> by <a href="https://www.flickr.com/photos/karenandbrademerson/">Karen and Brad Emerson</a></small></div>
 
 One of the nice things about MediaWiki is the ability to use 
@@ -35,11 +33,11 @@ https://www.mediawiki.org/wiki/Project:Sandbox for the
 current revision. 
 
 See
-https://www.mediawiki.org/w/index.php?title=Project:Sandbox&amp;diff=next&amp;oldid=7076877
+https://www.mediawiki.org/w/index.php?title=Project:Sandbox&diff=next&oldid=7076877
 to view this change.
 
 See
-https://www.mediawiki.org/w/index.php?title=Project:Sandbox&amp;diff=0&amp;oldid=8657769
+https://www.mediawiki.org/w/index.php?title=Project:Sandbox&diff=0&oldid=8657769
 for all changes since your last visit.
 
 Editor's summary: important thoughts
@@ -62,7 +60,7 @@ To change your watchlist settings, visit
 https://www.mediawiki.org/wiki/Special:EditWatchlist
 
 To delete the page from your watchlist, visit
-https://www.mediawiki.org/w/index.php?title=Project:Sandbox&amp;action=unwatch
+https://www.mediawiki.org/w/index.php?title=Project:Sandbox&action=unwatch
 
 Feedback and further assistance:
 https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents
@@ -140,7 +138,7 @@ bottom of the **sendPersonalized** function, just before the final return:
 
 ```
 Hooks::run( 'SendPersonalizedNotificationEmail',
-    [ $watchingUser, $this-&gt;oldid, $this-&gt;title, &amp;$headers, &amp;$this-&gt;subject, &amp;$body ] );
+    [ $watchingUser, $this->oldid, $this->title, &$headers, &$this->subject, &$body ] );
 ```
 
 The final step is to modify the template used to send the notification emails. You can find it 
@@ -185,5 +183,3 @@ I also like these emails as a kind of audit trail for the wiki. On that note,
 email notifications do NOT get sent to changes you have made yourself! Well, they do 
 for me, but that has required some hacking of the core MediaWiki code. Maybe someday 
 I will attempt to make that into a user preference and/or extension as well. :)
-
-

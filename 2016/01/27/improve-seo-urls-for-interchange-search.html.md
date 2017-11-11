@@ -5,14 +5,12 @@ tags: interchange, seo
 title: Improve SEO URLs for Interchange search pages
 ---
 
-
-
 This is an article aimed at beginner-to-intermediate Interchange developers.
 
 A typical approach to a hierarchical Interchange site is:
 
 ```nohighlight
-Categories -&gt; Category -&gt; Product
+Categories -> Category -> Product
 ```
 
 I.e., you list all your categories as links, each of which opens up a search results page filtering the products by category, with links to the individual product pages via the flypage.
@@ -20,8 +18,8 @@ I.e., you list all your categories as links, each of which opens up a search res
 Recently I upgraded a site so the category URLs were a bit more SEO-friendly. The original category filtering search produced these lovely specimens:
 
 ```nohighlight
-/search.html?fi=products&amp;st=db&amp;co=1&amp;sf=category&amp;se=Shoes&amp;op=rm
-   &amp;sf=inactive&amp;se=yes&amp;op=ne&amp;tf=category&amp;ml=100
+/search.html?fi=products&st=db&co=1&sf=category&se=Shoes&op=rm
+   &sf=inactive&se=yes&op=ne&tf=category&ml=100
 ```
 
 but what I really wanted was:
@@ -66,14 +64,14 @@ In my specific case, there was additional tinkering with this tag, because I had
 In order to translate a URL containing SEO-friendly "/cat/Shoes.html" into my search, I need an actionmap. Here's mine; it's very simple.
 
 ```perl
-Actionmap cat &lt;&lt;"CODE"
+Actionmap cat <<"CODE"
 sub {
   my $url = shift;
-  my @url_parts = split '/' =&gt; $url;
+  my @url_parts = split '/' => $url;
   shift @url_parts if $url_parts[0] eq 'cat';
 
-  $CGI-&gt;{mv_nextpage} = 'catpage.html';
-  $CGI-&gt;{category} = shift @url_parts;
+  $CGI->{mv_nextpage} = 'catpage.html';
+  $CGI->{category} = shift @url_parts;
   return 1;
 }
 CODE
@@ -105,5 +103,3 @@ Now my links are the much simpler:
 In my specific case, these links were generated within a [query] loop, but the approach is the same. 
 
 Note: the [Strap demo](http://demo.icdevgroup.org/demo1/) supports SEO-friendly URLs out-of-the-box, and that it is included with the latest [Interchange 5.10](http://www.icdevgroup.org/i/dev/news?mv_arg=00060) release.
-
-

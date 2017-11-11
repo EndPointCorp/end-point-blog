@@ -13,12 +13,12 @@ To politely alert people using those older browsers, yet still refusing to trans
 
 ```nohighlight
 # Require SSLv3 or TLSv1 with at least 128-bit cipher
-&lt;Directory "/"&gt;
+<Directory "/">
     SSLRequireSSL
     # Make an exception for the error document itself
-    SSLRequire (%{SSL_PROTOCOL} != "SSLv2" and %{SSL_CIPHER_USEKEYSIZE} &gt;= 128) or %{REQUEST_URI} =~ m:^/errors/:
+    SSLRequire (%{SSL_PROTOCOL} != "SSLv2" and %{SSL_CIPHER_USEKEYSIZE} >= 128) or %{REQUEST_URI} =~ m:^/errors/:
     ErrorDocument 403 /errors/403-weak-ssl.html
-&lt;/Directory&gt;
+</Directory>
 ```
 
 That accepts their SSLv2 connection, but displays an error page explaining the problem and suggesting some links to free modern browsers they can upgrade to in order to use the secure part of the website in question.

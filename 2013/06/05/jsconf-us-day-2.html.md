@@ -5,8 +5,6 @@ tags: browsers, conference, javascript
 title: "JSConf US \u2014 Day 2"
 ---
 
-
-
 ## Choose Your Own Adventure
 
 For day two of [JSConf](http://2013.jsconf.us/), the organizers decided to try something new. Rather than a day of scheduled talks, attendees could choose from a variety of activities. There was kayaking, golf, segway tours, scavenger hunts or you could just hang out at the pool if you like. There was also the opportunity to hack on [NodeBots](http://nodebots.io/) or [Node Copters](http://nodecopter.com/). While the outdoor stuff sounded awesome, I opted to hack on and play with the nodecopters.
@@ -38,7 +36,7 @@ client
 
 I worked in a team with [Ryan Seddon](http://www.thecssninja.com/) and [John Buckley](http://jbuckley.ca/) on a challenge set out at the beginning of the day by Felix. We used [Open CV](http://opencv.org/) (Computer Vision library) initially and later the on-board compass data to have the nodecopter take off, locate a marked line on the floor, fly to the end of the line and then land in the prescribed location. We were close several times but did not successfully complete the challenge in the end. This was dissappointing *but* we still had a blast working on it throughout the day.
 
-<blockquote class="twitter-tweet"><p>Hacking on nodecopters! So rad <a href="https://twitter.com/search/%23jsconf">#jsconf</a> <a href="http://t.co/d71G94MpaJ" title="http://twitter.com/ryanseddon/status/340145777525542913/photo/1">twitter.com/ryanseddon/sta&#8230;</a></p>&mdash; Ryan Seddon (@ryanseddon) <a href="https://twitter.com/ryanseddon/status/340145777525542913">May 30, 2013</a></blockquote><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet"><p>Hacking on nodecopters! So rad <a href="https://twitter.com/search/%23jsconf">#jsconf</a> <a href="http://t.co/d71G94MpaJ" title="http://twitter.com/ryanseddon/status/340145777525542913/photo/1">twitter.com/ryanseddon/sta…</a></p>— Ryan Seddon (@ryanseddon) <a href="https://twitter.com/ryanseddon/status/340145777525542913">May 30, 2013</a></blockquote><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 ## Demos
 
@@ -47,5 +45,3 @@ At the end of the day, many of the teams demonstrated what their team had come u
 <iframe allowfullscreen="" frameborder="0" height="315" src="https://www.youtube.com/embed/PKlHj3nKA8U" width="560"></iframe>
 
 Many thanks to [Felix](http://felixge.de/) and his team, [Chris](http://voodootikigod.com/) for bringing in so many nodecopters (and batteries), and to [nodejitsu](http://nodejitsu.com/) for sponsoring this great event!
-
-

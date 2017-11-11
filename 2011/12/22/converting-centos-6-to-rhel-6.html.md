@@ -58,16 +58,16 @@ shutdown -r now
 yum install dbus-python libxml2-python m2crypto pyOpenSSL python-dmidecode python-ethtool python-gudev usermode
 mkdir rhel
 cd rhel
-wget 'https://content-web.rhn.redhat.com/rhn/public/NULL/redhat-release-server/6Server-6.2.0.3.el6/x86_64/redhat-release-server-6Server-6.2.0.3.el6.x86_64.rpm?__gda__=XXX_YYY&amp;ext=.rpm'
-wget 'https://content-web.rhn.redhat.com/rhn/public/NULL/rhn-check/1.0.0-73.el6/noarch/rhn-check-1.0.0-73.el6.noarch.rpm?__gda__=XXX_YYY&amp;ext=.rpm'
-wget 'https://content-web.rhn.redhat.com/rhn/public/NULL/rhn-client-tools/1.0.0-73.el6/noarch/rhn-client-tools-1.0.0-73.el6.noarch.rpm?__gda__=XXX_YYY&amp;ext=.rpm'
-wget 'https://content-web.rhn.redhat.com/rhn/public/NULL/rhnlib/2.5.22-12.el6/noarch/rhnlib-2.5.22-12.el6.noarch.rpm?__gda__=XXX_YYY&amp;ext=.rpm'
-wget 'https://content-web.rhn.redhat.com/rhn/public/NULL/rhnsd/4.9.3-2.el6/x86_64/rhnsd-4.9.3-2.el6.x86_64.rpm?__gda__=XXX_YYY&amp;ext=.rpm'
-wget 'https://content-web.rhn.redhat.com/rhn/public/NULL/rhn-setup/1.0.0-73.el6/noarch/rhn-setup-1.0.0-73.el6.noarch.rpm?__gda__=XXX_YYY&amp;ext=.rpm'
-wget 'https://content-web.rhn.redhat.com/rhn/public/NULL/yum/3.2.29-22.el6/noarch/yum-3.2.29-22.el6.noarch.rpm?__gda__=XXX_YYY&amp;ext=.rpm'
-wget 'https://content-web.rhn.redhat.com/rhn/public/NULL/yum-metadata-parser/1.1.2-16.el6/x86_64/yum-metadata-parser-1.1.2-16.el6.x86_64.rpm?__gda__=XXX_YYY&amp;ext=.rpm'
-wget 'https://content-web.rhn.redhat.com/rhn/public/NULL/yum-rhn-plugin/0.9.1-36.el6/noarch/yum-rhn-plugin-0.9.1-36.el6.noarch.rpm?__gda__=XXX_YYY&amp;ext=.rpm'
-wget 'https://content-web.rhn.redhat.com/rhn/public/NULL/yum-utils/1.1.30-10.el6/noarch/yum-utils-1.1.30-10.el6.noarch.rpm?__gda__=XXX_YYY&amp;ext=.rpm'
+wget 'https://content-web.rhn.redhat.com/rhn/public/NULL/redhat-release-server/6Server-6.2.0.3.el6/x86_64/redhat-release-server-6Server-6.2.0.3.el6.x86_64.rpm?__gda__=XXX_YYY&ext=.rpm'
+wget 'https://content-web.rhn.redhat.com/rhn/public/NULL/rhn-check/1.0.0-73.el6/noarch/rhn-check-1.0.0-73.el6.noarch.rpm?__gda__=XXX_YYY&ext=.rpm'
+wget 'https://content-web.rhn.redhat.com/rhn/public/NULL/rhn-client-tools/1.0.0-73.el6/noarch/rhn-client-tools-1.0.0-73.el6.noarch.rpm?__gda__=XXX_YYY&ext=.rpm'
+wget 'https://content-web.rhn.redhat.com/rhn/public/NULL/rhnlib/2.5.22-12.el6/noarch/rhnlib-2.5.22-12.el6.noarch.rpm?__gda__=XXX_YYY&ext=.rpm'
+wget 'https://content-web.rhn.redhat.com/rhn/public/NULL/rhnsd/4.9.3-2.el6/x86_64/rhnsd-4.9.3-2.el6.x86_64.rpm?__gda__=XXX_YYY&ext=.rpm'
+wget 'https://content-web.rhn.redhat.com/rhn/public/NULL/rhn-setup/1.0.0-73.el6/noarch/rhn-setup-1.0.0-73.el6.noarch.rpm?__gda__=XXX_YYY&ext=.rpm'
+wget 'https://content-web.rhn.redhat.com/rhn/public/NULL/yum/3.2.29-22.el6/noarch/yum-3.2.29-22.el6.noarch.rpm?__gda__=XXX_YYY&ext=.rpm'
+wget 'https://content-web.rhn.redhat.com/rhn/public/NULL/yum-metadata-parser/1.1.2-16.el6/x86_64/yum-metadata-parser-1.1.2-16.el6.x86_64.rpm?__gda__=XXX_YYY&ext=.rpm'
+wget 'https://content-web.rhn.redhat.com/rhn/public/NULL/yum-rhn-plugin/0.9.1-36.el6/noarch/yum-rhn-plugin-0.9.1-36.el6.noarch.rpm?__gda__=XXX_YYY&ext=.rpm'
+wget 'https://content-web.rhn.redhat.com/rhn/public/NULL/yum-utils/1.1.30-10.el6/noarch/yum-utils-1.1.30-10.el6.noarch.rpm?__gda__=XXX_YYY&ext=.rpm'
 wget https://www.redhat.com/security/fd431d51.txt
 rpm --import fd431d51.txt
 rpm -e --nodeps centos-release

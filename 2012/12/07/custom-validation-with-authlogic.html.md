@@ -33,7 +33,7 @@ If the crypted password field has changed, the current crypted password and its 
 def update_old_passwords
   if self.errors.empty? and send("#{crypted_password_field}_changed?")
     self.old_passwords ||= []
-    self.old_passwords.unshift({:password =&gt; send("#{crypted_password_field}"), :salt =&gt;  send("#{password_salt_field}") })
+    self.old_passwords.unshift({:password => send("#{crypted_password_field}"), :salt =>  send("#{password_salt_field}") })
     self.old_passwords = self.old_passwords[0, 10]
   end
 end
@@ -50,9 +50,9 @@ end
 Next, we need to determine if the password has changed, excluding the very first time when the password is set on the new record.
 
 ```ruby
-class User &lt; ActiveRecord::Base
+class User < ActiveRecord::Base
   def require_password_changed?
-    !new_record? &amp;&amp; password_changed?
+    !new_record? && password_changed?
   end
 end
 ```
@@ -73,9 +73,9 @@ end
 Now we can plug the validation into the configuration.
 
 ```ruby
-class User &lt; ActiveRecord::Base
+class User < ActiveRecord::Base
   acts_as_authentic do |c|
-    c.validate :password_repeated?, :if =&gt; :require_password_changed?
+    c.validate :password_repeated?, :if => :require_password_changed?
   end
 end
 ```

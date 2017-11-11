@@ -52,7 +52,7 @@ server closed the connection unexpectedly
         This probably means the server terminated abnormally
         before or while processing the request.
 The connection to the server was lost. Attempting reset: Failed.
-:|!&gt;?
+:|!>?
 ```
 
 Yup, there it is.  Some point after item pointer 227 on page 439, which probably actually means page 440.  At this point we can reconnect, and possibly through a bit of trial and error narrow down the affected area a little more.  But for now let's run with page 440 being suspect; let's take a closer look.  And it here it should be noted that if you're going to try anything, shut down Postgres and take a file-level backup of the data directory.  Anyway, first we need to find the underlying file for our table...
@@ -81,7 +81,7 @@ demo:~/p82$ dd if=data/base/16393/16394 bs=8192 skip=440 count=1 | hexdump -C | 
 00001020  72 00 ec 7d 69 63 1b b7  d1 f0 f3 55 fb 2b 50 8a  |r..}ic.....U.+P.|
 00001030  2d 25 96 87 24 5f 89 14  a6 a5 25 5a 56 4b 1d 8f  |-%..$_....%ZVK..|
 00001040  28 27 4e 2d 87 5a 91 2b  6a 6b 72 97 d9 25 75 c4  |('N-.Z.+jkr..%u.|
-00001050  f6 fb db df 39 00 2c b0  bb a4 28 5b 71 d2 3e 76  |....9.,...([q.&gt;v|
+00001050  f6 fb db df 39 00 2c b0  bb a4 28 5b 71 d2 3e 76  |....9.,...([q.>v|
 00001060  1b 11 8b 63 30 b8 06 83  c1 60 66 1c c6 93 41 e4  |...c0....`f...A.|
 ...
 ```

@@ -83,7 +83,7 @@ Here's a run down of some pros and cons of each option:
 
 Or, here's another way to look at things:
 
-<img src="http://chart.apis.google.com/chart?chxl=0:|Open+Source+Ecommerce|Rails|Ruby+DSL+(Sinatra)|1:|Less|More&amp;chxp=0,1,2,3|1,1,3&amp;chxr=0,0,3|1,0,3.2&amp;chxt=y,x&amp;chbh=a,4,14&amp;chs=750x300&amp;cht=bhg&amp;chco=4D89F9,97D2F0,ECBA24,376F19,80C65A&amp;chds=0,3.2,0,3.2,0,3.2,0,3.2,0,3.2&amp;chd=t:1,2,3|3,2,1|2,2,3|1,2,3|3,2,2&amp;chdl=Assumptions+Made|Flexibility|Technology+Changes+Over+Time|Conventions|Initial+Coding+Required"/>
+<img src="http://chart.apis.google.com/chart?chxl=0:|Open+Source+Ecommerce|Rails|Ruby+DSL+(Sinatra)|1:|Less|More&chxp=0,1,2,3|1,1,3&chxr=0,0,3|1,0,3.2&chxt=y,x&chbh=a,4,14&chs=750x300&cht=bhg&chco=4D89F9,97D2F0,ECBA24,376F19,80C65A&chds=0,3.2,0,3.2,0,3.2,0,3.2,0,3.2&chd=t:1,2,3|3,2,1|2,2,3|1,2,3|3,2,2&chdl=Assumptions+Made|Flexibility|Technology+Changes+Over+Time|Conventions|Initial+Coding+Required"/>
 Generalizations I've made after developing in each of the scenarios.
 
 Another thing to consider is what might happen when application changes are required a year after the project was initially implemented. Here's what might happen in each of the scenarios:

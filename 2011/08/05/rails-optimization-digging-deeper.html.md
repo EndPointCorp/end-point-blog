@@ -18,8 +18,8 @@ First, the fully-cached is loaded (quickly). Next, an AJAX request is made to re
 To cache the full page, I use the caches_page method, and cache only on requests of HTML format (other formats are not cached):
 
 ```ruby
-class ThingsController &lt; ApplicationController
- caches_page :show, :if =&gt; Proc.new { |c| c.request.format.html? }
+class ThingsController < ApplicationController
+ caches_page :show, :if => Proc.new { |c| c.request.format.html? }
  ...
 end
 ```
@@ -30,9 +30,9 @@ My access level request looks something like this:
 def accessibility
   respond_to do |format|
     format.json do
-      render :json =&gt; {
-        :logged_in =&gt; current_user ? current_user.to_json(:only =&gt; [:id, :username]) : false,
-        :can_edit =&gt; current_user ? Thing.find(params[:id]).can_edit?(current_user) : false }
+      render :json => {
+        :logged_in => current_user ? current_user.to_json(:only => [:id, :username]) : false,
+        :can_edit => current_user ? Thing.find(params[:id]).can_edit?(current_user) : false }
     end
   end
 end
@@ -42,9 +42,9 @@ My HTML has some bits of code sprinkled throughout it:
 
 ```nohighlight
 ...
-&lt;a href="#" id="edit_thing" class="requires_editability"&gt;Edit&lt;/a&gt;
+<a href="#" id="edit_thing" class="requires_editability">Edit</a>
 ...
-&lt;a href="#" id="my_account" class="requires_logged_in"&gt;&lt;!-- no username yet --&gt;&lt;/a&gt;
+<a href="#" id="my_account" class="requires_logged_in"><!-- no username yet --></a>
 ...
 ```
 
@@ -78,12 +78,12 @@ $.ajax({
 And don't forget the sweeper to clear the fully cached page after edits (or other ActiveRecord callbacks):
 
 ```ruby
-class ThingSweeper &lt; ActionController::Caching::Sweeper
+class ThingSweeper < ActionController::Caching::Sweeper
 
   observe Thing
 
   def after_save(record)
-    expire_page :controller =&gt; :things, :action =&gt; :show, :id =&gt; record.id
+    expire_page :controller => :things, :action => :show, :id => record.id
   end
 end
 ```
@@ -93,7 +93,7 @@ end
 There are some additional notes to mention:
 
 - If a user were to hack the AJAX or JavaScript, server-side validation is still being performed when an "edit" action is submitted. In other words, if a hacker somehow enabled an edit button to show up and post an edit, a server-side response would prohibit the update because the hacker does not have appropriate accessibility.
-- HTML changes were made to accommodate this caching behavior, which was a bit tricky. HTML has to handle all potential use cases (no user, user &amp; no edit access, user &amp; edit access). jQuery itself can also be used to introduce new elements per use case.
+- HTML changes were made to accommodate this caching behavior, which was a bit tricky. HTML has to handle all potential use cases (no user, user & no edit access, user & edit access). jQuery itself can also be used to introduce new elements per use case.
 - The access level AJAX request is also hitting more low-level Rails caches: For example, the array of **things** that a user has edit permissions is cached and the cache is cleared with standard Rails sweepers. With this additional caching component, the access level AJAX request is hitting the database minimally.
 - Performance optimization scenarios such as this make an argument against inline editing of resources. If there were a backend admin interface to allow editing of **things**, full-page caching would be more straight-forward to implement.
 

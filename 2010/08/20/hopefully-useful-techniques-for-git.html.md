@@ -136,7 +136,7 @@ This gives us a list of tags representing the different points in the master ont
 So, for example:
 
 ```nohighlight
-[you@yours repo] git rebase shiny_rebase_target_01 &gt;&gt; ~/shiny_rebase_work/target_01.log 2&gt;&amp;1
+[you@yours repo] git rebase shiny_rebase_target_01 >> ~/shiny_rebase_work/target_01.log 2>&1
 ```
 
 You would naturally update the tag and logfile per stage.
@@ -145,15 +145,15 @@ Review the logfile in your pager of choice.  Is there a merge conflict reported 
 
 ```nohighlight
 # Log the basic info about the current state
-[you@yours repo] git status &gt;&gt; ~/shiny_rebase_work/target_01.log 2&gt;&amp;1
+[you@yours repo] git status >> ~/shiny_rebase_work/target_01.log 2>&1
 # Log specifically what the conflicts are
-[you@yours repo] git diff &gt;&gt; ~/shiny_rebase_work/target_01.log 2&gt;&amp;1
+[you@yours repo] git diff >> ~/shiny_rebase_work/target_01.log 2>&1
 ```
 
 Now go and resolve your conflicts per usual, but remember to preserve your output when you resume:
 
 ```nohighlight
-[you@yours repo] git rebase --continue &gt;&gt; ~/shiny_rebase_work/target_01.log 2&gt;&amp;1
+[you@yours repo] git rebase --continue >> ~/shiny_rebase_work/target_01.log 2>&1
 ```
 
 This addresses point 4: keeping track of what happened as you go.

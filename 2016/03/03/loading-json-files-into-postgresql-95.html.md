@@ -87,12 +87,12 @@ for root, dirs, files in os.walk(os.path.expanduser(data_dir)):
                             WHERE NOT EXISTS (SELECT 42
                                               FROM stats_data
                                               WHERE
-                                                    ((data-&gt;&gt;'metadata')::json-&gt;&gt;'country')  = %s
-                                                AND ((data-&gt;&gt;'metadata')::json-&gt;&gt;'installation') = %s
+                                                    ((data->>'metadata')::json->>'country')  = %s
+                                                AND ((data->>'metadata')::json->>'installation') = %s
                                                 AND tstzrange(
-                                                        to_timestamp((data-&gt;&gt;'start_ts')::double precision),
-                                                        to_timestamp((data-&gt;&gt;'end_ts'  )::double precision)
-                                                    ) &amp;&amp;
+                                                        to_timestamp((data->>'start_ts')::double precision),
+                                                        to_timestamp((data->>'end_ts'  )::double precision)
+                                                    ) &&
                                                     tstzrange(
                                                         to_timestamp(%s::text::double precision),
                                                         to_timestamp(%s::text::double precision)
@@ -113,7 +113,7 @@ logger.info("Found {} empty files".format(len(empty_files)))
 if empty_files:
     logger.info("Empty files:")
     for f in empty_files:
-        logger.info(" &gt;&gt;&gt; {}".format(f))
+        logger.info(" >>> {}".format(f))
 ```
 
 I have created two example files in the 'data' directory, the output of this script is:
@@ -150,12 +150,12 @@ I changed only one query in the script, and instead of this:
                             WHERE NOT EXISTS (SELECT 42
                                               FROM stats_data
                                               WHERE
-                                                    ((data-&gt;&gt;'metadata')::json-&gt;&gt;'country')  = %s
-                                                AND ((data-&gt;&gt;'metadata')::json-&gt;&gt;'installation') = %s
+                                                    ((data->>'metadata')::json->>'country')  = %s
+                                                AND ((data->>'metadata')::json->>'installation') = %s
                                                 AND tstzrange(
-                                                        to_timestamp((data-&gt;&gt;'start_ts')::double precision),
-                                                        to_timestamp((data-&gt;&gt;'end_ts'  )::double precision)
-                                                    ) &amp;&amp;
+                                                        to_timestamp((data->>'start_ts')::double precision),
+                                                        to_timestamp((data->>'end_ts'  )::double precision)
+                                                    ) &&
                                                     tstzrange(
                                                         to_timestamp(%s::text::double precision),
                                                         to_timestamp(%s::text::double precision)

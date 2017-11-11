@@ -31,10 +31,10 @@ module R
   end
 end
 
-"".foo =&gt; error
+"".foo => error
 
 using R do
-  "".foo =&gt; ok
+  "".foo => ok
 end
 ```
 

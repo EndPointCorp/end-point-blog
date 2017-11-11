@@ -8,7 +8,7 @@ title: Version 5 of Bucardo database replication system
 
 
 <div class="separator" style="clear: both; float:right; text-align: center;"><a href="/blog/2014/06/23/bucardo-5-multimaster-postgres-released/image-0.jpeg" imageanchor="1" style="clear: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" src="/blog/2014/06/23/bucardo-5-multimaster-postgres-released/image-0.jpeg" width="350"/></a>
-<br/><small><a href="https://flic.kr/p/6GYFk5">Goat &amp; Kid</a> by Flickr user <a href="https://www.flickr.com/photos/bala_/">Bala Sivakumar</a></small></div>
+<br/><small><a href="https://flic.kr/p/6GYFk5">Goat & Kid</a> by Flickr user <a href="https://www.flickr.com/photos/bala_/">Bala Sivakumar</a></small></div>
 
 Bucardo 5, the next generation of the async multimaster replication system, has been released. This major release removes the previous two source database limitation, allowing you to have as many sources (aka masters) and as many targets (aka slaves) as you wish. Bucardo can also replicate to other targets, including MySQL, MariaDB, Oracle, SQLite, MongoDB, and Redis. Bucardo has been completely rewritten and is more powerful and efficient 
 than the previous version, known as Bucardo 4. You can always find the latest version by visiting [the Bucardo wiki](http://bucardo.org/wiki/bucardo).
@@ -60,8 +60,8 @@ replaced e.g. with "yum install bucardo" - just make sure it is using version 5 
 
 ```
 $ sudo yum install  perl-ExtUtils-MakeMaker  perl-DBD-Pg \
-&gt; perl-Encode-Locale  perl-Sys-Syslog perl-boolean \
-&gt; perl-Time-HiRes  perl-Test-Simple  perl-Pod-Parser
+> perl-Encode-Locale  perl-Sys-Syslog perl-boolean \
+> perl-Time-HiRes  perl-Test-Simple  perl-Pod-Parser
 $ sudo yum install cpan
 $ echo y | cpan DBIx::Safe
 ```
@@ -89,7 +89,7 @@ Let's make some small adjustments via the bucardorc file (which sets some global
 
 ```
 $ mkdir pid
-$ echo -e "piddir=pid\nlogdest=." &gt; .bucardorc
+$ echo -e "piddir=pid\nlogdest=." > .bucardorc
 $ bucardo install --batch --quiet
 Creating superuser 'bucardo'
 ```
@@ -132,11 +132,11 @@ to all systems involved in the sync:
 ```
 $ bucardo start
 $ psql shake1 -c \
-&gt; "update character set speechcount=123 where charname='Hamlet'"
+> "update character set speechcount=123 where charname='Hamlet'"
 UPDATE 1
 $ for i in {1,2,3}; do psql shake$i -tc "select \
-&gt; current_database(), speechcount from character \
-&gt; where charname='Hamlet'"; done | grep s
+> current_database(), speechcount from character \
+> where charname='Hamlet'"; done | grep s
  shake1       |     123
  shake2       |     123
  shake3       |     123
@@ -156,8 +156,8 @@ We will have the same row get changed on all the servers, which should lead to a
 
 ```
 $ for i in {1,2,3}; do psql shake$i -tc \
-&gt; "update character set speechcount=$i$i$i \
-&gt; where charname='Hamlet'"; done
+> "update character set speechcount=$i$i$i \
+> where charname='Hamlet'"; done
 UPDATE 1
 UPDATE 1
 UPDATE 1
@@ -175,8 +175,8 @@ $ tail log.bucardo
 (25181) KID (bard) Totals: deletes=2 inserts=2 conflicts=1
 
 $ for i in {1,2,3}; do psql shake$i -tc \
-&gt; "select current_database(), speechcount \
-&gt; from character where charname='Hamlet'"; done | grep s
+> "select current_database(), speechcount \
+> from character where charname='Hamlet'"; done | grep s
  shake1       |     333
  shake2       |     333
  shake3       |     333

@@ -5,7 +5,7 @@ tags: google-earth, liquid-galaxy
 title: Leap Motion Controller + Liquid Galaxy
 ---
 
-<object align="right" height="315" width="420"><param name="movie" value="http://www.youtube.com/v/gy9K1LEnd0Q?hl=en_US&amp;version=3"/><param name="allowFullScreen" value="true"/><param name="allowscriptaccess" value="always"/><embed allowfullscreen="true" allowscriptaccess="always" height="315" src="http://www.youtube.com/v/gy9K1LEnd0Q?hl=en_US&amp;version=3" type="application/x-shockwave-flash" width="420"/></object>
+<object align="right" height="315" width="420"><param name="movie" value="http://www.youtube.com/v/gy9K1LEnd0Q?hl=en_US&version=3"/><param name="allowFullScreen" value="true"/><param name="allowscriptaccess" value="always"/><embed allowfullscreen="true" allowscriptaccess="always" height="315" src="http://www.youtube.com/v/gy9K1LEnd0Q?hl=en_US&version=3" type="application/x-shockwave-flash" width="420"/></object>
 
 We’re constantly trying out new things with our Liquid Galaxy at End Point: new content types, new remote management scripts, new hardware.  The good people at [Leap Motion](http://www.leapmotion.com/) sent over one of their hand motion controllers and we couldn't wait to get it unpacked and driving the Liquid Galaxy that sits in our office.
 

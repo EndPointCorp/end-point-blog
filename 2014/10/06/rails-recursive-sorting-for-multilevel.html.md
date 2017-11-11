@@ -28,14 +28,14 @@ Usually, the result set of the Rails will have an array of objects and should be
 s_array =
 [  
     {
-        "date"=&gt; "2014-05-07",
-        "children"=&gt; [],
-        "fullname"=&gt; "Steve Yoman"
+        "date"=> "2014-05-07",
+        "children"=> [],
+        "fullname"=> "Steve Yoman"
     },
     {
-        "date"=&gt; "2014-05-06",
-        "children"=&gt; [],
-        "fullname"=&gt; "Josh Tolley"
+        "date"=> "2014-05-06",
+        "children"=> [],
+        "fullname"=> "Josh Tolley"
     }
 ]
 ```
@@ -70,53 +70,53 @@ Sometimes objects in an array will contain the array as element and it continues
 m_array =
 [
     {
-        "name"=&gt; "Company",
-        "children"=&gt; [
+        "name"=> "Company",
+        "children"=> [
             {
-                "name"=&gt; "Sales",
-                "children"=&gt; [
+                "name"=> "Sales",
+                "children"=> [
                     {
-                        "date"=&gt; "2014-05-07",
-                        "children"=&gt; [],
-                        "fullname"=&gt; "Steve Yoman"
+                        "date"=> "2014-05-07",
+                        "children"=> [],
+                        "fullname"=> "Steve Yoman"
                     },
                     {
-                        "date"=&gt; "2014-05-06",
-                        "children"=&gt; [],
-                        "fullname"=&gt; "Josh Tolley"
+                        "date"=> "2014-05-06",
+                        "children"=> [],
+                        "fullname"=> "Josh Tolley"
                     }
                 ]
             },
             {
-                "name"=&gt; "Change Requests",
-                "children"=&gt; [
+                "name"=> "Change Requests",
+                "children"=> [
                     {
-                        "name"=&gt; "Upgrade Software",
-                        "children"=&gt; [
+                        "name"=> "Upgrade Software",
+                        "children"=> [
                             {
-                                "date"=&gt; "2014-05-01",
-                                "children"=&gt; [],
-                                "fullname"=&gt; "Selvakumar Arumugam"
+                                "date"=> "2014-05-01",
+                                "children"=> [],
+                                "fullname"=> "Selvakumar Arumugam"
                             },
                             {
-                                "date"=&gt; "2014-05-02",
-                                "children"=&gt; [],
-                                "fullname"=&gt; "Marina Lohova"
+                                "date"=> "2014-05-02",
+                                "children"=> [],
+                                "fullname"=> "Marina Lohova"
                             }
                         ]
                     },
                     {
-                        "name"=&gt; "Install Software",
-                        "children"=&gt; [
+                        "name"=> "Install Software",
+                        "children"=> [
                             {
-                                "date"=&gt; "2014-05-01",
-                                "children"=&gt; [],
-                                "fullname"=&gt; "Selvakumar Arumugam"
+                                "date"=> "2014-05-01",
+                                "children"=> [],
+                                "fullname"=> "Selvakumar Arumugam"
                             },
                             {
-                                "date"=&gt; "2014-05-01",
-                                "children"=&gt; [],
-                                "fullname"=&gt; "Josh Williams"
+                                "date"=> "2014-05-01",
+                                "children"=> [],
+                                "fullname"=> "Josh Williams"
                             }
                         ]
                     }
@@ -136,7 +136,7 @@ In this specific example, we know each level of the data contains a “children�
 ```ruby
 def sort_multi_array(items)
   items = items.sort_by{|item| [ item['name'], item['date'], item['fullname'].to_s.downcase ]}
-  items.each{ |item| item['children'] = sort_multi_array(item['children']) if (item['children'].nil? ? [] : item['children']).size &gt; 0 }
+  items.each{ |item| item['children'] = sort_multi_array(item['children']) if (item['children'].nil? ? [] : item['children']).size > 0 }
   items
 end
 

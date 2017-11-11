@@ -18,7 +18,7 @@ In it's most simple form, the markup required for adding a basic map with marker
 **HTML**
 
 ```html
-&lt;div id="map"&gt;&lt;/div&gt;
+<div id="map"></div>
 ```
 
 **CSS**
@@ -149,7 +149,7 @@ To sort the locations by distance, I leverage jQuery sort:
 ```javascript
 var sort_by_distance = function(obj) {
   return obj.sort(function(a, b) {
-    if(a.distance &gt; b.distance) {
+    if(a.distance > b.distance) {
       return 1;
     } else {
       return -1;
@@ -205,7 +205,7 @@ geocoder.geocode({ 'address' : search }, function(results, status) {
       position: new google.maps.LatLng(loc.latitude, loc.longitude)
     });
 
-    if(loc.readable_distance &lt; 100) {
+    if(loc.readable_distance < 100) {
       current_bounds.extend(loc_position);
     }
   });
@@ -221,7 +221,7 @@ One final behavior needed was to disable map zooming and scrolling on mobile dev
 
 ```javascript
 var options_listener = google.maps.event.addListener(map, "idle", function() {
-  if($(window).width() &lt; 656) {
+  if($(window).width() < 656) {
     map.setOptions({
       draggable: false,
       zoomControl: false,

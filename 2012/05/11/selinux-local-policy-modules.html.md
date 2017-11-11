@@ -68,7 +68,7 @@ type=AVC msg=audit(1335581974.308:69047): avc:  denied  { connectto } for  pid=1
 In the logs you want to look for "AVC", which stands for Access Vector Cache and is how SELinux logs denials. You can grab all the recent denials with:
 
 ```nohighlight
-grep ^type=AVC /var/log/audit/audit.log &gt; epmail.log
+grep ^type=AVC /var/log/audit/audit.log > epmail.log
 ```
 
 and then filter it manually to contain just what you need.
@@ -76,13 +76,13 @@ and then filter it manually to contain just what you need.
 You can see a usually more informative explanation of each error by piping it into audit2why:
 
 ```nohighlight
-audit2why &lt; epmail.log
+audit2why < epmail.log
 ```
 
 Now you're ready to create your policy module:
 
 ```nohighlight
-audit2allow -m epmail &lt; epmail.log &gt; epmail.te
+audit2allow -m epmail < epmail.log > epmail.te
 checkmodule -M -m -o epmail.mod epmail.te
 semodule_package -o epmail.pp -m epmail.mod
 semodule -i epmail.pp

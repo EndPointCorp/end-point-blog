@@ -5,9 +5,9 @@ tags: graphics, browsers
 title: Supporting Apple Retina displays on the Web
 ---
 
-Apple's [Retina displays](http://en.wikipedia.org/wiki/Retina_Display) (on Mac desktop &amp; laptop computers, and on iPhones and iPads) have around twice the pixel density of traditional displays. Most recent Android phones and tablets have higher-resolution screens as well.
+Apple's [Retina displays](http://en.wikipedia.org/wiki/Retina_Display) (on Mac desktop & laptop computers, and on iPhones and iPads) have around twice the pixel density of traditional displays. Most recent Android phones and tablets have higher-resolution screens as well.
 
-I was recently given the task of adding support for these higher-resolution displays to our [End Point company website](/). Our imagery had been created prior to Retina displays being commonly used, but even now many web developers still overlook supporting high-resolution screens because it hasn't been part of the website workflow before, because they aren't simple to cope with, and since most people don't notice any lack of sharpness without comparing low &amp; high-resolution images side by side.
+I was recently given the task of adding support for these higher-resolution displays to our [End Point company website](/). Our imagery had been created prior to Retina displays being commonly used, but even now many web developers still overlook supporting high-resolution screens because it hasn't been part of the website workflow before, because they aren't simple to cope with, and since most people don't notice any lack of sharpness without comparing low & high-resolution images side by side.
 
 Most images which are not designed for Retina displays look blurry on them, like this:
 
@@ -29,7 +29,7 @@ Second, Retina.js does not use the correct image if the browser window is moved 
 
 ### Using CSS for background images
 
-Doesn't the "modern web" have a way to handle this natively in HTML &amp; CSS? For sites using CSS background images, CSS media queries will do the trick:
+Doesn't the "modern web" have a way to handle this natively in HTML & CSS? For sites using CSS background images, CSS media queries will do the trick:
 
 ```css
 @media only screen and (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {

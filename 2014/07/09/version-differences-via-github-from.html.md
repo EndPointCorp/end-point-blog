@@ -28,16 +28,16 @@ https://raw.githubusercontent.com/wikimedia/mediawiki-core/1.22.0/includes/UserM
 All that is left is to treat git as a web service and compare the two files at the command line ourselves. The program **curl** is a great tool for downloading the files, as it dumps to stdout by default. We will add a **-s** flag (for "silent") to prevent it from showing the progress meter as it usually does. The last bit of the puzzle is to use <(), bash's process substitution feature, to trick diff into comparing the curl outputs as if they were files. So our final command is:
 
 ```nohighlight
-diff &lt;(curl -s https://raw.githubusercontent.com/wikimedia/mediawiki-core/1.21.0/includes/UserMailer.php) \
-&lt;(curl -s https://raw.githubusercontent.com/wikimedia/mediawiki-core/1.22.0/includes/UserMailer.php) \
+diff <(curl -s https://raw.githubusercontent.com/wikimedia/mediawiki-core/1.21.0/includes/UserMailer.php) \
+<(curl -s https://raw.githubusercontent.com/wikimedia/mediawiki-core/1.22.0/includes/UserMailer.php) \
 | more
 ```
 
 Voila! A quick and simple glance at what changed between those two tags. This should work for any project on Github. You can also replace the branch or tag with the word "master" to see the current version. For example, the PostgreSQL project lives on github as postgres/postgres. They use the format RELX_Y_Z in their tags. To see what has changed since release 9.3.4 in the psql help file (as a context diff), run:
 
 ```sql
-diff -c &lt;(curl -s https://raw.githubusercontent.com/postgres/postgres/REL9_3_4/src/bin/psql/help.c) \
-&lt;(curl -s https://raw.githubusercontent.com/postgres/postgres/master/src/bin/psql/help.c)
+diff -c <(curl -s https://raw.githubusercontent.com/postgres/postgres/REL9_3_4/src/bin/psql/help.c) \
+<(curl -s https://raw.githubusercontent.com/postgres/postgres/master/src/bin/psql/help.c)
 ```
 
 You are not limited to diff, of course. For a final example, let's see how many times Tom Lane is mentioned in the version 9 release notes:
@@ -45,7 +45,7 @@ You are not limited to diff, of course. For a final example, let's see how many 
 ```nohighlight
 for i in {0,1,2,3,4}
 do grep -Fc 'Tom Lane' \
-&lt;(curl -s https://raw.githubusercontent.com/postgres/postgres/master/doc/src/sgml/release-9.$i.sgml)
+<(curl -s https://raw.githubusercontent.com/postgres/postgres/master/doc/src/sgml/release-9.$i.sgml)
 done
 272
 206

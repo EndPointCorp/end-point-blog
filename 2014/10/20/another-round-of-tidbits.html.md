@@ -12,9 +12,9 @@ It's [been a while](http://blog.endpoint.com/2013/11/internal-tidbits-links-reso
 <div class="separator" style="clear: both; text-align: center;"><img border="0" src="/blog/2014/10/20/another-round-of-tidbits/image-0.png" style="margin-top:3px;"/><br/>
 <a href="http://kenkeiter.com/skeuocard/">Skeuocard</a> Screenshot</div>
 
-- [StackExchange UX](http://ux.stackexchange.com/) is a Stack Overflow resource for user interface Q&amp;A.
+- [StackExchange UX](http://ux.stackexchange.com/) is a Stack Overflow resource for user interface Q&A.
 - [wpgrep](http://blogs.perl.org/users/brian_d_foy/2013/12/grepping-my-wordpress-database.html) is an available tool for grepping through WordPress databases.
-- [Here](http://sideeffect.kr/popularconvention/) is a nifty little tool that analyzes GitHub commits to report on language convention, e.g. space vs. tab indentation &amp; spacing in argument definitions.
+- [Here](http://sideeffect.kr/popularconvention/) is a nifty little tool that analyzes GitHub commits to report on language convention, e.g. space vs. tab indentation & spacing in argument definitions.
 
 <div class="separator" style="clear: both; text-align: center;"><img border="0" src="/blog/2014/10/20/another-round-of-tidbits/image-1.png" style="margin-top:3px;" width="600"/><br/>
 Example comparison of single vs. double quote convention in JavaScript.</div>

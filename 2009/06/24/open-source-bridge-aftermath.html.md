@@ -7,7 +7,7 @@ title: 'Open Source Bridge: the aftermath'
 
 [Open Source Bridge Opening Day](http://www.slideshare.net/selenamarie/open-source-bridge-opening-day?type=powerpoint)
 
-<object height="355" style="margin:0px" width="425"><param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=opensourcebridgeopening-090624181048-phpapp01&amp;stripped_title=open-source-bridge-opening-day"/><param name="allowFullScreen" value="true"/><param name="allowScriptAccess" value="always"/><embed allowfullscreen="true" allowscriptaccess="always" height="355" src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=opensourcebridgeopening-090624181048-phpapp01&amp;stripped_title=open-source-bridge-opening-day" type="application/x-shockwave-flash" width="425"/></object>
+<object height="355" style="margin:0px" width="425"><param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=opensourcebridgeopening-090624181048-phpapp01&stripped_title=open-source-bridge-opening-day"/><param name="allowFullScreen" value="true"/><param name="allowScriptAccess" value="always"/><embed allowfullscreen="true" allowscriptaccess="always" height="355" src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=opensourcebridgeopening-090624181048-phpapp01&stripped_title=open-source-bridge-opening-day" type="application/x-shockwave-flash" width="425"/></object>
 
 I've been planning the [Open Source Bridge](http://opensourcebridge.org) conference in my spare time over the past 9 months here in Portland, OR. We finally made it happen June 17-19, 2009 at the Oregon Convention Center. I had the pleasure of co-chairing the event with Audrey Eschright, and was extremely happy that End Point decided to also sponsor the event.
 

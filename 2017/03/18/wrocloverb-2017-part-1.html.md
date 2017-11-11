@@ -37,7 +37,7 @@ Author underlined that Machine Learning is a **process**and proposed following *
 1. gather you data
 1. understand your data
 1. prepare and condition the data
-1. select &amp; run your algorithms
+1. select & run your algorithms
 1. tune algorithms parameters
 1. select final model
 1. validate final model (test using production data)

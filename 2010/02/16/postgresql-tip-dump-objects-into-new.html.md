@@ -13,7 +13,7 @@ One trick that may work for you if your current database is not in use by anyone
 
 ```bash
 $ psql -c "ALTER SCHEMA public RENAME new_name"
-$ pg_dump --schema=new_name &gt; new_name_dump.sql
+$ pg_dump --schema=new_name > new_name_dump.sql
 $ psql -c "ALTER SCHEMA new_name RENAME public"
 $ # load new_name_dump.sql elsewhere
 ```

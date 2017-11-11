@@ -38,7 +38,7 @@ module DeviseRegistrationsControllerDecorator
   module InstanceMethods
     def custom_new
       resource = build_resource({})
-      if params.has_key?(:with_user) &amp;&amp; session.has_key?(:last_order)
+      if params.has_key?(:with_user) && session.has_key?(:last_order)
         last_order = Piggybak::Order.find(session[:last_order])
         resource.email = last_order.email
         resource.phone = last_order.phone

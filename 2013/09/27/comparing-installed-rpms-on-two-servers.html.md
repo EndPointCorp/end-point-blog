@@ -22,13 +22,13 @@ I noticed one of those commenters mentioned using comm instead of diff/grep/sed,
 To run it, just do:
 
 ```
-./rpmdb-compare host1 host2 &gt; mylist
+./rpmdb-compare host1 host2 > mylist
 ```
 
 With the output redirected to file mylist, you can edit it to result in a list of RPMs that need to be installed on one server, then do this on that server:
 
 ```
-&lt; mylist yum -y install
+< mylist yum -y install
 ```
 
 It's a good idea to test if first without the -y option, which will cause yum to abort the installation and gives you a chance to see if any unexpected dependencies will be dragged in.

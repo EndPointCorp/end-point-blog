@@ -21,7 +21,7 @@ From left to right, the options tell psql to not use any psqlrc file found (-X),
 The cron entry that did the work looked like this:
 
 ```
-*/5 * * * * (echo "COPY audit_mydb_stats FROM STDIN;" &amp;&amp; $PSQL_ALPHA -c "COPY (SELECT *, current_database(), now(), round(date_part('epoch'::text, now())) FROM audit_mydb_stats()) TO STDOUT" &amp;&amp; echo "\\.") | $PSQL_POSTGRES -f -
+*/5 * * * * (echo "COPY audit_mydb_stats FROM STDIN;" && $PSQL_ALPHA -c "COPY (SELECT *, current_database(), now(), round(date_part('epoch'::text, now())) FROM audit_mydb_stats()) TO STDOUT" && echo "\\.") | $PSQL_POSTGRES -f -
 ```
 
 From right to left, the command does this:

@@ -36,7 +36,7 @@ FROM
     orders o
     JOIN order_items oi
         ON (o.id = oi.order_id)
-WHERE o.status &gt;= 200 AND o.status &lt;= 400
+WHERE o.status >= 200 AND o.status <= 400
 GROUP BY o.id
 ```
 
@@ -75,7 +75,7 @@ WITH order_items_array AS (
         orders o
         JOIN order_items oi
             ON (o.id = oi.order_id)
-    WHERE o.status &gt;= 200 AND o.status &lt;= 400
+    WHERE o.status >= 200 AND o.status <= 400
     GROUP BY o.id
 )
 SELECT
@@ -110,7 +110,7 @@ WITH order_items_array AS (
         orders o
         JOIN order_items oi
             ON (o.id = oi.order_id)
-    WHERE o.status &gt;= 200 AND o.status &lt;= 400
+    WHERE o.status >= 200 AND o.status <= 400
     GROUP BY o.id
 ), order_duplicates AS (
     SELECT

@@ -73,7 +73,7 @@ determined by the
 The output I was seeing looked like this:
 
 ```
-psql:test.sql:22716: WARNING:  =&gt; is deprecated as an operator name
+psql:test.sql:22716: WARNING:  => is deprecated as an operator name
 DETAIL:  This name may be disallowed altogether in future versions of PostgreSQL.
 ```
 

@@ -12,7 +12,7 @@ One day I was reading through the documentation on [search.cpan.org](http://sear
 An example of what you could use this for is an easy way to generate a list of items in the same category. Inside the module, you would do like this:
 
 ```perl
-my $results = $dbh-&gt;selectall_arrayref(
+my $results = $dbh->selectall_arrayref(
   q{
     SELECT
       sku,
@@ -25,35 +25,35 @@ my $results = $dbh-&gt;selectall_arrayref(
       products
     WHERE
       category = ?},
-  { Slice =&gt; {} }, 
+  { Slice => {} }, 
   $category
 );
-$::Tag-&gt;tmpn("product_list", $results);
+$::Tag->tmpn("product_list", $results);
 ```
 
 In the actual HTML page, you would do this:
 
 ```nohighlight
-&lt;table cellpadding=0 cellspacing=2 border=1&gt;
-&lt;tr&gt;
-  &lt;th&gt;Image&lt;/th&gt;
-  &lt;th&gt;Description&lt;/th&gt;
-  &lt;th&gt;Product Group&lt;/th&gt;
-  &lt;th&gt;Category&lt;/th&gt;
-  &lt;th&gt;Price&lt;/th&gt;
-&lt;/tr&gt;
-[loop object.mv_results=`$Scratch-&gt;{product_list}` prefix=plist]
+<table cellpadding=0 cellspacing=2 border=1>
+<tr>
+  <th>Image</th>
+  <th>Description</th>
+  <th>Product Group</th>
+  <th>Category</th>
+  <th>Price</th>
+</tr>
+[loop object.mv_results=`$Scratch->{product_list}` prefix=plist]
 [list]
-&lt;tr&gt;
-  &lt;td&gt;&lt;a href="/cgi-bin/vlink/[plist-param sku].html"&gt;&lt;img src="[plist-param thumb]"&gt;&lt;/a&gt;&lt;/td&gt;
-  &lt;td&gt;[plist-param description]&lt;/td&gt;
-  &lt;td&gt;[plist-param prod_group]&lt;/td&gt;
-  &lt;td&gt;[plist-param category]&lt;/td&gt;
-  &lt;td&gt;[plist-param price]&lt;/td&gt;
-&lt;/tr&gt;
+<tr>
+  <td><a href="/cgi-bin/vlink/[plist-param sku].html"><img src="[plist-param thumb]"></a></td>
+  <td>[plist-param description]</td>
+  <td>[plist-param prod_group]</td>
+  <td>[plist-param category]</td>
+  <td>[plist-param price]</td>
+</tr>
 [/list]
 [/loop]
-&lt;/table&gt;
+</table>
 ```
 
 We normally use this when writing ActionMaps and using some template as our setting for mv_nextpage.

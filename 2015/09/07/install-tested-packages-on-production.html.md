@@ -55,13 +55,13 @@ acpid=1:2.0.10-1ubuntu3
 activity-log-manager-common=0.9.4-0ubuntu3.2
 
 # cat tmp/diff_server_update_selva_test.2015-09-02.txt 
-             &gt; git=1:1.7.9.5-1ubuntu0.1
-             &gt; git-man=1:1.7.9.5-1ubuntu0.1
-metacity=1:2.34.1-1ubuntu11          &lt;
+             > git=1:1.7.9.5-1ubuntu0.1
+             > git-man=1:1.7.9.5-1ubuntu0.1
+metacity=1:2.34.1-1ubuntu11          <
 mysql-client=5.43-0ubuntu0.12.04.1         | mysql-client=5.5.43-0ubuntu0.12.04.1
-ubuntu-desktop=1.267.1           &lt;
-unity-2d=5.14.0-0ubuntu1          &lt;
-             &gt; wget=1.13.4-2ubuntu1
+ubuntu-desktop=1.267.1           <
+unity-2d=5.14.0-0ubuntu1          <
+             > wget=1.13.4-2ubuntu1
 ```
 
 ### Production Server Update Process:

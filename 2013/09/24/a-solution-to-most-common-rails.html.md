@@ -26,7 +26,7 @@ The solution is to provide helpers that make it easy to unit test the authentica
 ```
 require 'test_helper'
 
-class InquiriesControllerTest &lt; ActionController::TestCase
+class InquiriesControllerTest < ActionController::TestCase
 
   verify_authentication_declared
   verify_require_authenticate :edit, :update
@@ -34,7 +34,7 @@ class InquiriesControllerTest &lt; ActionController::TestCase
 
 end
 
-class InquiriesNotifiersController &lt; ApplicationController
+class InquiriesNotifiersController < ApplicationController
   before_filter :authenticate, only: [:edit, :update]
   before_filter :do_not_authenticate, only: [:new, :create]
 
@@ -80,7 +80,7 @@ class ApplicationController
   end
 end
 
-def ProductsController &lt; ApplicationController
+def ProductsController < ApplicationController
   before_filter :authenticate, only: [:new]
 
   def new
@@ -109,7 +109,7 @@ class ApplicationController
   end
 end
 
-def ProductsController &lt; ApplicationController
+def ProductsController < ApplicationController
   before_filter :authenticate, only: [:new]
   before_filter :do_not_authenticate, only: [:edit]
   def new

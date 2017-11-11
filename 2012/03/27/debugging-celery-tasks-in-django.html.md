@@ -85,7 +85,7 @@ from celery.decorators import task
 import time
 import random
 
-# A simple task to demonstrate Celery &amp; djcelery
+# A simple task to demonstrate Celery & djcelery
 @task()
 def add(x, y):
     delay = random.randint(1,60)

@@ -23,7 +23,7 @@ The -append argument will stack the images vertically, and +append will stack th
 Recently, I needed to quickly examine the contents sent during a payment transaction. [Richard](/team/richard_templet) pointed me to [RequestBin](http://requestb.in/) a neat and quick tool for examining the contents of an external request. I was testing the Elavon payment gateway integrated in an application using [Piggybak](http://piggybak.org/). In my code, I made the following change:
 
 ```ruby
-class ElavonGateway &lt; ViaklixGateway
+class ElavonGateway < ViaklixGateway
   self.test_url = 'https://demo.myvirtualmerchant.com/VirtualMerchantDemo/process.do'
   self.live_url = 'https://www.myvirtualmerchant.com/VirtualMerchant/process.do'
 + self.test_url = 'http://requestb.in/abc1def2'

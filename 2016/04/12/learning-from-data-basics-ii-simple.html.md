@@ -126,7 +126,7 @@ end
 The inference part is also very similar to the one from the previous article. Here too the only difference are the distributions involved:
 
 ```ruby
-infer = -&gt; (age, sex, rel, loc) do
+infer = -> (age, sex, rel, loc) do
   all = category.values.map do |cat|
     pl  = loc_dist.value_for location: loc
     ps  = sex_dist.value_for sex: sex
@@ -142,13 +142,13 @@ infer = -&gt; (age, sex, rel, loc) do
     { category: cat, value: val }
   end
 
-  win      = all.max      { |a, b| a[:value] &lt;=&gt; b[:value] }
-  win_full = all_full.max { |a, b| a[:value] &lt;=&gt; b[:value] }
+  win      = all.max      { |a, b| a[:value] <=> b[:value] }
+  win_full = all_full.max { |a, b| a[:value] <=> b[:value] }
 
   puts "Best match for #{[ age, sex, rel, loc ]}:"
-  puts "   #{win[:category]} =&gt; #{win[:value]}"
+  puts "   #{win[:category]} => #{win[:value]}"
   puts "Full pointed at:"
-  puts "   #{win_full[:category]} =&gt; #{win_full[:value]}\n\n"
+  puts "   #{win_full[:category]} => #{win_full[:value]}\n\n"
 end
 ```
 
@@ -167,24 +167,24 @@ Which yields:
 
 ```nohighlight
 Best match for [:teens, :male, :single, :us]:
-   snacks =&gt; 0.020610837341908994
+   snacks => 0.020610837341908994
 Full pointed at:
-   snacks =&gt; 0.02103999999999992
+   snacks => 0.02103999999999992
 
 Best match for [:young_adults, :male, :single, :asia]:
-   meat =&gt; 0.001801062449999991
+   meat => 0.001801062449999991
 Full pointed at:
-   meat =&gt; 0.0010700000000000121
+   meat => 0.0010700000000000121
 
 Best match for [:adults, :female, :in_relationship, :europe]:
-   beauty =&gt; 0.0007693377820183494
+   beauty => 0.0007693377820183494
 Full pointed at:
-   beauty =&gt; 0.0008300000000000074
+   beauty => 0.0008300000000000074
 
 Best match for [:elders, :female, :in_relationship, :canada]:
-   veggies =&gt; 0.0024346445741176875
+   veggies => 0.0024346445741176875
 Full pointed at:
-   veggies =&gt; 0.0034199999999999886
+   veggies => 0.0034199999999999886
 ```
 
 Just as with using the Naive Bayes, we got correct values for all cases. When you look closer though, you can notice that the resulting probability values were much closer to the original, full distribution ones. The approach we took here makes the values differ only a couple times in 10000. That result could make a difference in the e-commerce shop from the example if it were visited by millions of customers each month.

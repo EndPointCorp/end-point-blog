@@ -156,7 +156,7 @@ Management of such a process is relatively easy with modern Javascript framework
 with client-side management:
 
 ```
-  &lt;span id="fname_display"&gt;&lt;/span&gt;
+  <span id="fname_display"></span>
 ```
 and in the ready() event elsewhere with our session cookie data stored in valuesData:
 

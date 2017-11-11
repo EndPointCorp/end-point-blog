@@ -44,7 +44,7 @@ posts = current_user
 We get the latest 5 posts from all the threads that a user has access to. Assuming that an action name is *show*, this is how it can looks all together (widget_controller.rb):
 
 ```ruby
-class WidgetController &lt; ApplicationController
+class WidgetController < ApplicationController
   def show
     @messages = []
 
@@ -56,7 +56,7 @@ class WidgetController &lt; ApplicationController
     posts.each do |post|
       topic = Thredded::Topic.find(post.postable_id)
 
-      @messages &lt;&lt; {
+      @messages << {
         title: topic.title,
         path: Thredded::UrlsHelper::topic_url(topic, only_path: true),
         author: User.find(post.user_id),
@@ -73,7 +73,7 @@ class WidgetController &lt; ApplicationController
       .limit(5)
 
     private_messages.each do |pm|
-      @messages &lt;&lt; {
+      @messages << {
         title: pm.title,
         path: Thredded::UrlsHelper::topic_url(pm, only_path: true),
         author: User.find(pm.user_id),
@@ -100,14 +100,14 @@ The data is ready now, the only thing that we need to do now is to create a view
       %tr
         %td
           - if message[:type] == 'pm'
-            %strong= link_to truncate('Private message', :length =&gt; 25), message[:path]
+            %strong= link_to truncate('Private message', :length => 25), message[:path]
             from
             = ' '
             = link_to message[:author].username, user_path(message[:author])
             = ' '
             = time_ago_in_words(message[:created_at])
           - else
-            %strong= link_to truncate(message[:title], :length =&gt; 25), message[:path]
+            %strong= link_to truncate(message[:title], :length => 25), message[:path]
             by
             = ' '
             = link_to message[:author].username, user_path(message[:author])

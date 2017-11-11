@@ -34,7 +34,7 @@ After I applied initial surface-level debugging without success, I decided to ad
 I output the session id and request location with the following debug statement:
 
 ```php
-$this-&gt;log($this-&gt;Session-&gt;id().':'.$this-&gt;here.':'.'/*relevant message about whatsup*/', LOG_DEBUG);
+$this->log($this->Session->id().':'.$this->here.':'.'/*relevant message about whatsup*/', LOG_DEBUG);
 ```
 
 With the debug statement shown above, I was able to compare the normal and infinite redirect output and identify a problem immediately:

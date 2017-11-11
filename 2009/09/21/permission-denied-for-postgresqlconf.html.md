@@ -51,7 +51,7 @@ Looks like SELinux did not like a symlink, and sure enough:
 ```bash
 # ls -ld /var/lib/pgsql /var/lib/pgsql/data /var/lib/pgsql/data/postgresql.conf
 
-lrwxrwxrwx. 1 postgres postgres 18 1999-12-31 23:55 /var/lib/pgsql -&gt; /mnt/newpgdisk
+lrwxrwxrwx. 1 postgres postgres 18 1999-12-31 23:55 /var/lib/pgsql -> /mnt/newpgdisk
 drwx------. 2 postgres postgres  4096 1999-12-31 23:56 /var/lib/pgsql/data
 -rw-------. 1 postgres postgres 16816 1999-12-31 23:57 /var/lib/pgsql
 /data/postgresql.conf

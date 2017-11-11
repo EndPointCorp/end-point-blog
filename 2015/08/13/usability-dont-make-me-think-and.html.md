@@ -19,10 +19,10 @@ The book inspired me to write a quick bookmarklet to demonstrate some high level
 javascript:(function() {
   var possible = " ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
   $('*:not(iframe)').contents().filter(function() {
-     return this.nodeType == Node.TEXT_NODE &amp;&amp; this.nodeValue.trim() != '';
+     return this.nodeType == Node.TEXT_NODE && this.nodeValue.trim() != '';
   }).each(function() {
      var new_content = '';
-     for(var i = 0; i&lt;this.nodeValue.trim().length; i++) {
+     for(var i = 0; i<this.nodeValue.trim().length; i++) {
        new_content += possible.charAt(Math.floor(Math.random() * possible.length));
      }
      this.nodeValue = new_content;

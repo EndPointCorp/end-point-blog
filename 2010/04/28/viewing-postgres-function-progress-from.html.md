@@ -28,7 +28,7 @@ DECLARE
 BEGIN
   RAISE NOTICE 'Start of function';
 
-  WHILE x &lt;= 5 LOOP
+  WHILE x <= 5 LOOP
     -- Random number from 1 to 10
     SELECT 1+(random()*9)::int INTO mynumber;
     RAISE NOTICE 'Start expensive step %: time to run=%', x, mynumber;
@@ -108,7 +108,7 @@ BEGIN
 
   RAISE NOTICE 'Start of function';
 
-  WHILE x &lt;= 5 LOOP
+  WHILE x <= 5 LOOP
     -- Random number from 1 to 10
     SELECT 1+(random()*9)::int INTO mynumber;
     RAISE NOTICE 'Start expensive step %: time to run=%', x, mynumber;

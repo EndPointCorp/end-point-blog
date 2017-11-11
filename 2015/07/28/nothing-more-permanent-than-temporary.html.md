@@ -15,7 +15,7 @@ As an illustration of this, I recently came across the initial commit to the sou
 
 ```nohighlight
 commit 2ee55da6ed953c049b3ef6f9f132ed3c1e0d4de9
-Author: PJ Cabreras &lt;pj@endpoint.com&gt;
+Author: PJ Cabreras <pj@endpoint.com>
 Date:   Wed Apr 18 13:07:46 2007 +0000
 
     Initial test setup of repository for mkcamp testing -- will probably throw away later

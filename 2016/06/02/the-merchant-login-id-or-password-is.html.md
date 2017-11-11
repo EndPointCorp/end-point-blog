@@ -27,7 +27,7 @@ require 'nokogiri'
 
 module ActiveMerchant #:nodoc:
   module Billing #:nodoc:
-    class AuthorizeNetGateway &lt; Gateway
+    class AuthorizeNetGateway < Gateway
       include Empty
 
       self.test_url = 'https://apitest.authorize.net/xml/v1/request.api'
@@ -49,7 +49,7 @@ How and where is this set? Spree passes the ActiveMerchant Gem some data which t
 
 module ActiveMerchant #:nodoc:
   module Billing #:nodoc:
-    class Error &lt; ActiveMerchantError #:nodoc:
+    class Error < ActiveMerchantError #:nodoc:
     end
 
     class Response
@@ -141,7 +141,7 @@ app/models/gateway_decorator.rb
 ```ruby
 ActiveMerchant::Billing::Gateway.class_eval do
   def test?
-    @options.has_key?(:test) &amp;&amp; @options[:test] || ActiveMerchant::Billing::Base.test?
+    @options.has_key?(:test) && @options[:test] || ActiveMerchant::Billing::Base.test?
   end
 end
 ```

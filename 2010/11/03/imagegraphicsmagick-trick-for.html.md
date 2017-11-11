@@ -56,14 +56,14 @@ echo -en \"\$(hostname) GPID: \$( pgrep googleearth-bin ). APPID: \$( pgrep -u r
 convert -pointsize 18 -background '#00000080' -fill white text:- -trim -bordercolor '#00000080' -border 5x5 miff:/tmp/text;
 
 DISPLAY=:0 import -window root miff:- | \
-composite -gravity south -geometry +0+3 miff:/tmp/text miff:- -resize 600 miff:-" &gt;/tmp/system${system}.miff;
+composite -gravity south -geometry +0+3 miff:/tmp/text miff:- -resize 600 miff:-" >/tmp/system${system}.miff;
 
 done
 
 #make a montage of the data
 montage -monitor -background black -tile 8x1 -geometry +5+0 \
  /tmp/system{6,7,8,1,2,3,4,5}.miff \
- /tmp/system-montage.png &amp;&amp; rm -f /tmp/system?.miff
+ /tmp/system-montage.png && rm -f /tmp/system?.miff
 ```
 
 With something so simple, we can quickly view from New York what's happening on systems installed in [California](http://www.thetech.org/), like so:

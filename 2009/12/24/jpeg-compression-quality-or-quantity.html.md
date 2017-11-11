@@ -40,15 +40,15 @@ Here is the code I wrote to make the comparison (shell script is great for this 
 ```bash
 #!/bin/bash
 HTML_OUTFILE=comparison.html
-echo '&lt;html&gt;' &gt; $HTML_OUTFILE
+echo '<html>' > $HTML_OUTFILE
 
 write_img_html () {
     size=`du -h --apparent-size $1 | cut -f 1`
     if [ -n "$2" ]; then
        qual="setting: $2"
     fi
-    cat &lt;&lt;EOF &gt;&gt;$HTML_OUTFILE
-&lt;a href="$1"&gt;&lt;img src="$1" title="size: $size $qual"&gt;&lt;/a&gt;
+    cat <<EOF >>$HTML_OUTFILE
+<a href="$1"><img src="$1" title="size: $size $qual"></a>
 EOF
 }
 

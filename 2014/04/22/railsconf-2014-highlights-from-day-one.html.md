@@ -18,7 +18,7 @@ Sean works with a Professor at George Mason University who researches bees and d
 
 - gpio, pi_piper, wiringpi-ruby
 - [dashing](http://shopify.github.io/dashing/)
-- Ruby &amp; Sinatra. Sean had previously used Rails but found it a bit too heavyweight and went with a lighter Sinatra app.
+- Ruby & Sinatra. Sean had previously used Rails but found it a bit too heavyweight and went with a lighter Sinatra app.
 - 3 Cronjobs to record data
 - passenger, isc-dhcp-server, hostapd, iw for server configuration
 
@@ -30,7 +30,7 @@ Another interesting and relevant talk I attended today was *Where did the OO go?
 
 In the [node.js](http://nodejs.org/) space, [rendrjs](https://github.com/rendrjs) is a popular tool that addresses all the main points, except it's not in Rails. Andrew then went on to discuss the current approaches in Rails:
 
-- duplicate code that lives on client &amp; server (e.g. a mustache template and an erb template). This approach doesn't follow DRY and is not written utilizing one language.
+- duplicate code that lives on client & server (e.g. a mustache template and an erb template). This approach doesn't follow DRY and is not written utilizing one language.
 - [turbolinks](https://github.com/rails/turbolinks): covers everything except thick client
 - the ember / angular / backbone approach, where the entire app lives on client. This approach is not SEO friendly and not in one language.
 

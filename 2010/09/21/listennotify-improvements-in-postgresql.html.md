@@ -34,30 +34,30 @@ use warnings;
 use DBI;
 
 my $dsn = 'dbi:Pg:dbname=test';
-my $dbh1 = DBI-&gt;connect($dsn,'test','', {AutoCommit=&gt;0,RaiseError=&gt;1,PrintError=&gt;0});
-my $dbh2 = DBI-&gt;connect($dsn,'test','', {AutoCommit=&gt;0,RaiseError=&gt;1,PrintError=&gt;0});
+my $dbh1 = DBI->connect($dsn,'test','', {AutoCommit=>0,RaiseError=>1,PrintError=>0});
+my $dbh2 = DBI->connect($dsn,'test','', {AutoCommit=>0,RaiseError=>1,PrintError=>0});
 
-print "Postgres version is $dbh1-&gt;{pg_server_version}\n";
+print "Postgres version is $dbh1->{pg_server_version}\n";
 
 my $SQL = 'SELECT pg_backend_pid(), version()';
-my $pid1 = $dbh1-&gt;selectall_arrayref($SQL)-&gt;[0][0];
-my $pid2 = $dbh2-&gt;selectall_arrayref($SQL)-&gt;[0][0];
+my $pid1 = $dbh1->selectall_arrayref($SQL)->[0][0];
+my $pid2 = $dbh2->selectall_arrayref($SQL)->[0][0];
 print "Process one has a PID of $pid1\n";
 print "Process two has a PID of $pid2\n";
 
 ## Process one listens for a notice named "jtx"
-$dbh1-&gt;do(q{LISTEN jtx});
-$dbh1-&gt;commit();
+$dbh1->do(q{LISTEN jtx});
+$dbh1->commit();
 ## Process one checks for any notices received
 print show_notices($dbh1);
 
 ## Process two sends a notice, but does not commit
-$dbh2-&gt;do(q{NOTIFY jtx});
+$dbh2->do(q{NOTIFY jtx});
 ## Process one does not see the notice yet
 print show_notices($dbh1);
 ## Process two sends the same notice again, then commits
-$dbh2-&gt;do(q{NOTIFY jtx});
-$dbh2-&gt;commit();
+$dbh2->do(q{NOTIFY jtx});
+$dbh2->commit();
 
 sleep 1; ## Ensure the notice has time to get to propogate
 ## Process two receives a single notice from process one
@@ -69,9 +69,9 @@ print show_notices($dbh1);
 sub show_notices { ## Function to return any notices received
        my $dbh = shift;
        my $messages = '';
-       $dbh-&gt;commit();
-       while (my $n = $dbh-&gt;func('pg_notifies')) {
-          $messages .= "Got notice '$n-&gt;[0]' from PID $n-&gt;[1]\n";
+       $dbh->commit();
+       while (my $n = $dbh->func('pg_notifies')) {
+          $messages .= "Got notice '$n->[0]' from PID $n->[1]\n";
        }
        return $messages || "No messages\n";
 }
@@ -98,16 +98,16 @@ Now for the aforementioned payloads. Payloads allow an arbitrary string to be at
 ```perl
 ...
 ## Process two sends two notices, but does not commit
-$dbh2-&gt;do(q{NOTIFY jtx, 'square'});
-$dbh2-&gt;do(q{NOTIFY jtx, 'square'});
+$dbh2->do(q{NOTIFY jtx, 'square'});
+$dbh2->do(q{NOTIFY jtx, 'square'});
 ## Process one does not see the notice yet
 print show_notices($dbh1);
 ## Process two sends the same notice again, then commits
-$dbh2-&gt;do(q{NOTIFY jtx, 'triangle'});
-$dbh2-&gt;commit();
+$dbh2->do(q{NOTIFY jtx, 'triangle'});
+$dbh2->commit();
 ...
  ## This part changes: we get an extra item from our array:
- $messages .= "Got notice '$n-&gt;[0]' from PID $n-&gt;[1] message is '$n-&gt;[2]'\n";
+ $messages .= "Got notice '$n->[0]' from PID $n->[1] message is '$n->[2]'\n";
 ...
 ```
 
@@ -133,13 +133,13 @@ Another large advantage to removing the pg_listener table is that systems that m
 The use of payloads also means that many application can be greatly simplified: in the past, one had to be creative in the name of your notifications in order to pass meta-information to your listener. For example, [Bucardo](http://bucardo.org/wiki/bucardo) uses a large collection of notifications, meaning that the Bucardo processes had to do the equivalent of things like this:
 
 ```perl
-$dbh-&gt;do(q{LISTEN bucardo_reload_config});
-$dbh-&gt;do(q{LISTEN bucardo_log_message});
-$dbh-&gt;do(q{LISTEN bucardo_activate_sync_$sync});
-$dbh-&gt;do(q{LISTEN bucardo_deactivate_sync_$sync});
-$dbh-&gt;do(q{LISTEN bucardo_kick_sync_$sync});
+$dbh->do(q{LISTEN bucardo_reload_config});
+$dbh->do(q{LISTEN bucardo_log_message});
+$dbh->do(q{LISTEN bucardo_activate_sync_$sync});
+$dbh->do(q{LISTEN bucardo_deactivate_sync_$sync});
+$dbh->do(q{LISTEN bucardo_kick_sync_$sync});
 ...
-while (my $notice = $dbh-&gt;func('pg_notifies')) {
+while (my $notice = $dbh->func('pg_notifies')) {
  my ($name, $pid) = @$notice;
  if ($name eq 'bucardo_reload_config') {
  ...
@@ -154,9 +154,9 @@ while (my $notice = $dbh-&gt;func('pg_notifies')) {
 We can instead do things like this:
 
 ```perl
-$dbh-&gt;do(q{LISTEN bucardo});
+$dbh->do(q{LISTEN bucardo});
 ...
-while (my $notice = $dbh-&gt;func('pg_notifies')) {
+while (my $notice = $dbh->func('pg_notifies')) {
  my ($name, $pid, $msg) = @$notice;
  if ($msg eq 'bucardo_reload_config') {
  ...

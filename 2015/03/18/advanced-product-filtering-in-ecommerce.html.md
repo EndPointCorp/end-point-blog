@@ -5,7 +5,7 @@ tags: ecommerce, interchange
 title: Advanced Product Filtering in Ecommerce
 ---
 
-One of my recent projects for [Paper Source](http://www.papersource.com/) has been to introduce advanced product filtering (or faceted filtering). Paper Source runs on [Interchange](http://www.icdevgroup.org/i/dev), a perl-based open source ecommerce platform that End Point has been involved with (as core developers &amp; maintainers) for many years.
+One of my recent projects for [Paper Source](http://www.papersource.com/) has been to introduce advanced product filtering (or faceted filtering). Paper Source runs on [Interchange](http://www.icdevgroup.org/i/dev), a perl-based open source ecommerce platform that End Point has been involved with (as core developers & maintainers) for many years.
 
 In the case of Paper Source, personalized products such as [wedding invitations](http://www.papersource.com/personalized/wedding-invitations.html) and [save the dates](http://www.papersource.com/personalized/wedding-save-the-dates/photo-save-the-dates.html) have advanced filtering to filter by print method, number of photos, style, etc. Advanced product filtering is a very common feature in ecommerce systems with a large number of products that allows a user to narrow down a set of products to meet their needs. Advanced product filtering is not unlike faceted filtering offered by many search engines, which similarly allows a user to narrow down products based on specific tags or facets (e.g. see many Amazon filters on the left column). In the case of Paper Source, I wrote the filtering code layered on top of the current navigation. Below I'll go through some of the details with small code examples.
 
@@ -36,7 +36,7 @@ Some notes on the above filtering data model:
 
 One thing to consider before coding are the business rules pertaining to filter option exclusivity. If a product is assigned to one filter option, can it also have another filter option for that same filter type? IE, if a product is marked as blue, can it also be marked as red? When a user filters by color, can they filter to select products that are both blue and red? Or, if a product is is blue, can it not have any other filter options for that filter? In the case of Paper Source product filtering, we went with the former, where filter options are not exclusive to each other.
 
-A real-life example of filter non-exclusivity is how [Paper Source](http://www.papersource.com/) filters [wedding invitations](http://www.papersource.com/personalized/wedding-invitations.html). Products are filtered by print method and style. Because some products have multiple print methods and styles, non-exclusivity allows a user to narrow down to a specific combination of filter options, e.g. a wedding invitation that is both tagged as "foil &amp; embossed" and "vintage".
+A real-life example of filter non-exclusivity is how [Paper Source](http://www.papersource.com/) filters [wedding invitations](http://www.papersource.com/personalized/wedding-invitations.html). Products are filtered by print method and style. Because some products have multiple print methods and styles, non-exclusivity allows a user to narrow down to a specific combination of filter options, e.g. a wedding invitation that is both tagged as "foil & embossed" and "vintage".
 
 <img border="0" src="/blog/2015/03/18/advanced-product-filtering-in-ecommerce/image-2.png"/>
 
@@ -93,7 +93,7 @@ My pseudocode shows that I iterate through the filters twice, first to apply the
 
 Here's a more specific example:
 
-- Let's say we have a set of shirts, with the following filters &amp; options: Style (Long Sleeve, Short Sleeve), Color (Red, Blue), Size (Large, Medium, Small).
+- Let's say we have a set of shirts, with the following filters & options: Style (Long Sleeve, Short Sleeve), Color (Red, Blue), Size (Large, Medium, Small).
 - A URL request comes in for /shirts/blue/large
 - The code recognizes this is the shirts category and retrieves all shirts.
 - First, we look at the style filter. No style filter is active in this request, so to toggle these filters on, the activation URLs must include "longsleeve" and "shortsleeve". No products are filtered out here.

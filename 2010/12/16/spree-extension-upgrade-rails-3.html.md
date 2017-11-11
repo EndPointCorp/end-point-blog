@@ -44,8 +44,8 @@ index 6cc6b70..92f2118 100644
 --- a/app/views/admin/reports/top_base.html.erb
 +++ b/app/views/admin/reports/top_base.html.erb
 @@ -1,4 +1,4 @@
--&lt;%= @report.ruportdata.to_html %&gt;
-+&lt;%= raw @report.ruportdata.to_html %&gt;
+-<%= @report.ruportdata.to_html %>
++<%= raw @report.ruportdata.to_html %>
 ```
 
 ### Common Deprecation Messages
@@ -64,12 +64,12 @@ index ba69a2e..6d9c3f9 100644
 --- a/app/views/admin/reports/_advanced_report_criteria.html.erb
 +++ b/app/views/admin/reports/_advanced_report_criteria.html.erb
 @@ -1,11 +1,11 @@
- &lt;% @reports.each do |key, value| %&gt;
--  &lt;option &lt;%= request.request_uri == "/admin/reports/#{key}" ? 'selected="selected" ' : '' %&gt;
-  value="&lt;%= send("#{key}_admin_reports_url".to_sym) %&gt;"&gt;
-+  &lt;option &lt;%= request.fullpath == "/admin/reports/#{key}" ? 'selected="selected" ' : '' %&gt;
-  value="&lt;%= send("admin_reports_#{key}_url".to_sym) %&gt;"&gt;
-     &lt;%= t(value[:name].downcase.gsub(" ","_")) %&gt;
+ <% @reports.each do |key, value| %>
+-  <option <%= request.request_uri == "/admin/reports/#{key}" ? 'selected="selected" ' : '' %>
+  value="<%= send("#{key}_admin_reports_url".to_sym) %>">
++  <option <%= request.fullpath == "/admin/reports/#{key}" ? 'selected="selected" ' : '' %>
+  value="<%= send("admin_reports_#{key}_url".to_sym) %>">
+     <%= t(value[:name].downcase.gsub(" ","_")) %>
 
 ```
 
@@ -92,17 +92,17 @@ index 0000000..71f00a8
 +  s.homepage    = 'http://www.endpoint.com'
 +  s.author = "Steph Skardal"
 +  s.email = "steph@endpoint.com"
-+  s.required_ruby_version = '&gt;= 1.8.7'
++  s.required_ruby_version = '>= 1.8.7'
 +
 +  s.files        = Dir['CHANGELOG', 'README.md', 'LICENSE', 'lib/**/*', 'app/**/*']
 +  s.require_path = 'lib'
-+  s.requirements &lt;&lt; 'none'
++  s.requirements << 'none'
 +
 +  s.has_rdoc = true
 +
-+  s.add_dependency('spree_core', '&gt;= 0.30.1')
++  s.add_dependency('spree_core', '>= 0.30.1')
 +  s.add_dependency('ruport')
-+  s.add_dependency('ruport-util') #, :lib =&gt; 'ruport/util')
++  s.add_dependency('ruport-util') #, :lib => 'ruport/util')
 +end
 ```
 
@@ -116,21 +116,21 @@ With the release of Rails 3, there was a major rewrite of the router and integra
 <b>Before</b>
 <pre class="brush:ruby">
 map.namespace :admin do |admin|
-  admin.resources :reports, :collection =&gt; {
-    :sales_total =&gt; :get,
-    :revenue   =&gt; :get,
-    :units   =&gt; :get,
-    :profit   =&gt; :get,
-    :count   =&gt; :get,
-    :top_products  =&gt; :get,
-    :top_customers  =&gt; :get,
-    :geo_revenue  =&gt; :get,
-    :geo_units  =&gt; :get,
-    :geo_profit  =&gt; :get,
+  admin.resources :reports, :collection => {
+    :sales_total => :get,
+    :revenue   => :get,
+    :units   => :get,
+    :profit   => :get,
+    :count   => :get,
+    :top_products  => :get,
+    :top_customers  => :get,
+    :geo_revenue  => :get,
+    :geo_units  => :get,
+    :geo_profit  => :get,
   }
   map.admin "/admin",
-    :controller =&gt; 'admin/advanced_report_overview',
-    :action =&gt; 'index'
+    :controller => 'admin/advanced_report_overview',
+    :action => 'index'
 end
 </pre>
 </td></tr><tr><td>
@@ -138,22 +138,22 @@ end
 <pre class="brush:ruby">
 Rails.application.routes.draw do
   #namespace :admin do
-  #  resources :reports, :only =&gt; [:index, :show] do
+  #  resources :reports, :only => [:index, :show] do
   #    collection do
   #      get :sales_total
   #    end
   #  end
   #end
-  match '/admin/reports/revenue' =&gt; 'admin/reports#revenue', :via =&gt; [:get, :post]
-  match '/admin/reports/count' =&gt; 'admin/reports#count', :via =&gt; [:get, :post]
-  match '/admin/reports/units' =&gt; 'admin/reports#units', :via =&gt; [:get, :post]
-  match '/admin/reports/profit' =&gt; 'admin/reports#profit', :via =&gt; [:get, :post]
-  match '/admin/reports/top_customers' =&gt; 'admin/reports#top_customers', :via =&gt; [:get, :post]
-  match '/admin/reports/top_products' =&gt; 'admin/reports#top_products', :via =&gt; [:get, :post]
-  match '/admin/reports/geo_revenue' =&gt; 'admin/reports#geo_revenue', :via =&gt; [:get, :post]
-  match '/admin/reports/geo_units' =&gt; 'admin/reports#geo_units', :via =&gt; [:get, :post]
-  match '/admin/reports/geo_profit' =&gt; 'admin/reports#geo_profit', :via =&gt; [:get, :post]
-  match "/admin" =&gt; "admin/advanced_report_overview#index", :as =&gt; :admin
+  match '/admin/reports/revenue' => 'admin/reports#revenue', :via => [:get, :post]
+  match '/admin/reports/count' => 'admin/reports#count', :via => [:get, :post]
+  match '/admin/reports/units' => 'admin/reports#units', :via => [:get, :post]
+  match '/admin/reports/profit' => 'admin/reports#profit', :via => [:get, :post]
+  match '/admin/reports/top_customers' => 'admin/reports#top_customers', :via => [:get, :post]
+  match '/admin/reports/top_products' => 'admin/reports#top_products', :via => [:get, :post]
+  match '/admin/reports/geo_revenue' => 'admin/reports#geo_revenue', :via => [:get, :post]
+  match '/admin/reports/geo_units' => 'admin/reports#geo_units', :via => [:get, :post]
+  match '/admin/reports/geo_profit' => 'admin/reports#geo_profit', :via => [:get, :post]
+  match "/admin" => "admin/advanced_report_overview#index", :as => :admin
 end
 </pre>
 </td></tr></tbody></table>
@@ -180,14 +180,14 @@ index f75d967..0000000
 -# Uncomment this if you reference any of your controllers in activate
 -# require_dependency 'application'
 -
--class AdvancedReportingExtension &lt; Spree::Extension
+-class AdvancedReportingExtension < Spree::Extension
 -  version "1.0"
 -  description "Advanced Reporting"
 -  url "http://www.endpoint.com/"
 -
 -  def self.require_gems(config)
 -    config.gem "ruport"
--    config.gem "ruport-util", :lib =&gt; 'ruport/util'
+-    config.gem "ruport-util", :lib => 'ruport/util'
 -  end
 -
 -  def activate
@@ -215,7 +215,7 @@ index 0000000..4e6fee6
 +require "ruport/util"
 +
 +module AdvancedReporting
-+  class Engine &lt; Rails::Engine
++  class Engine < Rails::Engine
 +    config.autoload_paths += %W(#{config.root}/lib)
 +
 +    def self.activate
@@ -231,7 +231,7 @@ index 0000000..4e6fee6
 +      end
 +    end
 +
-+    config.to_prepare &amp;method(:activate).to_proc
++    config.to_prepare &method(:activate).to_proc
 +  end
 +end
 </pre>
@@ -286,7 +286,7 @@ index fcb5ab5..0000000
 --- a/advanced_reporting_hooks.rb
 +++ /dev/null
 @@ -1,43 +0,0 @@
--class AdvancedReportingHooks &lt; Spree::ThemeSupport::HookListener
+-class AdvancedReportingHooks < Spree::ThemeSupport::HookListener
 -  # custom hooks go here
 -end
 
@@ -296,7 +296,7 @@ index 0000000..cca155e
 --- /dev/null
 +++ b/lib/advanced_reporting_hooks.rb
 @@ -0,0 +1,3 @@
-+class AdvancedReportingHooks &lt; Spree::ThemeSupport::HookListener
++class AdvancedReportingHooks < Spree::ThemeSupport::HookListener
 +  # custom hooks go here
 +end
 ```
@@ -329,14 +329,14 @@ diff --git a/lib/advanced_report.rb b/lib/advanced_report.rb
 +    params[:search] ||= {}
 +    if params[:search][:created_at_greater_than].blank?
 +      params[:search][:created_at_greater_than] =
-+        Order.first(:order =&gt; :completed_at).completed_at.to_date.beginning_of_day
++        Order.first(:order => :completed_at).completed_at.to_date.beginning_of_day
 +    else
 +      params[:search][:created_at_greater_than] =
 +        Time.zone.parse(params[:search][:created_at_greater_than]).beginning_of_day rescue ""
 +    end
 +    if params[:search][:created_at_less_than].blank?
 +      params[:search][:created_at_less_than] =
-+        Order.last(:order =&gt; :completed_at).completed_at.to_date.end_of_day
++        Order.last(:order => :completed_at).completed_at.to_date.end_of_day
 +    else
 +      params[:search][:created_at_less_than] =
 +        Time.zone.parse(params[:search][:created_at_less_than]).end_of_day rescue ""

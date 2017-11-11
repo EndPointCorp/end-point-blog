@@ -39,10 +39,10 @@ But what happens when a single page with various JavaScript-driven UI updates dr
 tagid = /* tag id */
 domainid = /* domain id */
 actionid = /* action id */
-jQuery('&lt;iframe src="//flex.atdmt.com/mstag/tag/' + tagid
-  + '/analytics.html?dedup=1&amp;domainId=' + domainid + '&amp;type=1&amp;actionid='
+jQuery('<iframe src="//flex.atdmt.com/mstag/tag/' + tagid
+  + '/analytics.html?dedup=1&domainId=' + domainid + '&type=1&actionid='
   + actionid + '" frameborder="0" scrolling="no" width="1" height="1"
-  style="visibility:hidden;display:none"&gt;&lt;0/iframe&gt;')
+  style="visibility:hidden;display:none"><0/iframe>')
   .appendTo('#hidden_tracking');
 ```
 
@@ -54,38 +54,38 @@ google_conversion_label = /* conversion label */
 var image = new Image(1,1);
 image.src = 'http://www.googleadservices.com/pagead/conversion/' +
   google_conversion_id + '/?label=' + google_conversion_label +
-  '&amp;value=1&amp;guid=ON&amp;script=0';
+  '&value=1&guid=ON&script=0';
 ```
 
 ### Floodlight Conversion
 
 ```javascript
-jQuery('&lt;img height="1" width="1" src="http://sa.jumptap.com/a/conversion?
-  event=Purchase" /&gt;').appendTo('#hidden_tracking');
+jQuery('<img height="1" width="1" src="http://sa.jumptap.com/a/conversion?
+  event=Purchase" />').appendTo('#hidden_tracking');
 ```
 
 ### AdParlor Conversion
 
 ```javascript
 adid = /* Ad Parlor id */
-jQuery('&lt;img height="1" width="1" alt="AP_pixel"
+jQuery('<img height="1" width="1" alt="AP_pixel"
   src="http://fbads.adparlor.com/conversion.php?adid="'
-  + adid + '  /&gt;').appendTo('#hidden_tracking');
+  + adid + '  />').appendTo('#hidden_tracking');
 ```
 
 ### AdKnowledge
 
 ```javascript
 adknowledgeid = /* adknowledge id */
-jQuery('&lt;iframe src="https://www.lynxtrack.com/track.frame.php?g='
-  + adknowledgeid + '&amp;o=' + /* order number */ + '&amp;s=' + /* total */
-  + '" height="1" width="1" frameborder="0"&gt;  &lt;script
+jQuery('<iframe src="https://www.lynxtrack.com/track.frame.php?g='
+  + adknowledgeid + '&o=' + /* order number */ + '&s=' + /* total */
+  + '" height="1" width="1" frameborder="0">  <script
   language="JavaScript" src="https://www.lynxtrack.com/trackjs/g-'
   + adknowledgeid + '/o-' + /* order number */ + '/s-' + /* total */
-  + '/track.js"&gt; &lt;/script&gt;&lt;noscript&gt;
-  &lt;img src="https://www.lynxtrack.com/track.php?g=' + adknowledgeid
-  + '&amp;o=' + /* order number */ + '&amp;s=' + /* total */ + '" width="1"
-  height="1" border="0"&gt;&lt;/noscript&gt;&lt;/iframe&gt;')
+  + '/track.js"> </script><noscript>
+  <img src="https://www.lynxtrack.com/track.php?g=' + adknowledgeid
+  + '&o=' + /* order number */ + '&s=' + /* total */ + '" width="1"
+  height="1" border="0"></noscript></iframe>')
   .appendTo('#hidden_tracking');
 ```
 

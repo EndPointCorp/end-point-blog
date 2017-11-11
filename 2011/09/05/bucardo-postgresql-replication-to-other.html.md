@@ -22,7 +22,7 @@ We'll go through a full example here, using a stock 64-bit RedHat 6.1 EC2 box (a
 First, let's turn off SELinux, install the [EPEL rpm](http://fedoraproject.org/wiki/EPEL), update the box, and install a few needed packages.
 
 ```bash
-echo 0 &gt; /selinux/enforce
+echo 0 > /selinux/enforce
 wget http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-5.noarch.rpm        
 rpm -ivh epel-release-6-5.noarch.rpm
 yum update
@@ -88,7 +88,7 @@ bucardo add sync wildstar herd=fherd dbs=f1=source,f2=source,f3=target,f4=target
 Before starting it up, I usually raise the debug level, as it gives a much clearer picture of what is going on in the logs. It does make the logs a lot more crowded, so it is not recommended for production use:
 
 ```bash
-echo log_level=DEBUG &gt;&gt; ~/.bucardorc
+echo log_level=DEBUG >> ~/.bucardorc
 ```
 
 Next, we start Bucardo up and make sure everything is working as it should. Scanning the log.bucardo file that is generated is a great way to do this:

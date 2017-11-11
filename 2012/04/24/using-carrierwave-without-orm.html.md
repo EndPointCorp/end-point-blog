@@ -31,7 +31,7 @@ describe CheckoutViewSetting do
       .with(CheckoutViewSetting::IMAGE_ID_CONFIG_KEY)
       .and_return nil
     @config.should_receive(:set)
-      .with({CheckoutViewSetting::IMAGE_ID_CONFIG_KEY =&gt; @uploaded_file.original_filename})
+      .with({CheckoutViewSetting::IMAGE_ID_CONFIG_KEY => @uploaded_file.original_filename})
 
     @cv.image = @uploaded_file
     @cv.image_cache.include?(@uploaded_file.original_filename).should be_true
@@ -45,10 +45,10 @@ describe CheckoutViewSetting do
       .and_return nil
 
     @config.should_receive(:set)
-      .with({CheckoutViewSetting::IMAGE_ID_CONFIG_KEY =&gt; @uploaded_file.original_filename})
+      .with({CheckoutViewSetting::IMAGE_ID_CONFIG_KEY => @uploaded_file.original_filename})
       .and_return(@uploaded_file.original_filename)
 
-    @cv.update_config(:image =&gt; @uploaded_file)
+    @cv.update_config(:image => @uploaded_file)
   end
 
   it "should be able to remove the image as form params" do
@@ -56,10 +56,10 @@ describe CheckoutViewSetting do
       .with(CheckoutViewSetting::IMAGE_ID_CONFIG_KEY)
       .and_return nil
     @config.should_receive(:set)
-      .with({CheckoutViewSetting::IMAGE_ID_CONFIG_KEY =&gt; nil})
+      .with({CheckoutViewSetting::IMAGE_ID_CONFIG_KEY => nil})
       .and_return(nil)
 
-    @cv.update_config(:remove_image =&gt; "1")
+    @cv.update_config(:remove_image => "1")
   end
 end
 ```
@@ -107,7 +107,7 @@ class CheckoutViewSetting
   # In Spree 0.60.x you cannot set attributes directly through []= like you can in the newer versions.
   # So I use the set method to assign the value
   def write_uploader(column, identifier)
-    @config.set IMAGE_ID_CONFIG_KEY =&gt; identifier
+    @config.set IMAGE_ID_CONFIG_KEY => identifier
   end
 
   def write_remove_image_identifier
@@ -167,7 +167,7 @@ def update_config(params)
       send("write_#{k}_identifier")
       send("store_#{k}!")
     end
-  rescue =&gt; e
+  rescue => e
     Rails.logger.error "Error uploading Checkout View Setting: #{e.message}"
     return false
   end
@@ -182,7 +182,7 @@ First, I do some parameter checking so that only params that I want to processed
 To use my class in my controller I just setup the following update method:
 
 ```ruby
-class Admin::CheckoutViewSettingsController &lt; Admin::BaseController
+class Admin::CheckoutViewSettingsController < Admin::BaseController
   before_filter :get_checkout_view_settings
   def update
     config = @cv.update_config(params[:checkout_view_settings])
@@ -205,17 +205,17 @@ end
 And then in my form I have the following (haml):
 
 ```nohighlight
-= form_tag admin_checkout_view_settings_path, :method =&gt; :put, :multipart =&gt; true do
+= form_tag admin_checkout_view_settings_path, :method => :put, :multipart => true do
   #formTop
     %fieldset
       .field
         = label_tag :image, t(".image.label")
         %br/
-        = file_field_tag 'checkout_view_settings[image]', :accept =&gt; 'image/png,image/gif,image/jpeg'
+        = file_field_tag 'checkout_view_settings[image]', :accept => 'image/png,image/gif,image/jpeg'
     %fieldset
       .field
         = check_box_tag "checkout_view_settings[remove_image]"
-        = label_tag "checkout_view_settings[remove_image]", t(".remove_image.label"), :style =&gt; "display: inline"
+        = label_tag "checkout_view_settings[remove_image]", t(".remove_image.label"), :style => "display: inline"
   #formBottom
     = image_tag(@cv.image.url) if @cv.configured?
     %br/

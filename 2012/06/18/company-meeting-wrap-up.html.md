@@ -35,7 +35,7 @@ Many of us End Pointers are back to work after last week's annual company meetin
 
 </td><td valign="top">
 
-<h3 style="margin-bottom:5px;">General Tips &amp; Company News</h3>
+<h3 style="margin-bottom:5px;">General Tips & Company News</h3>
 <a href="http://blog.endpoint.com/2012/06/end-points-ruby-slippers.html">End Point's Ruby Slippers</a><br/>
 <a href="http://blog.endpoint.com/2012/06/when-we-are-not-writing-in-bash-perl.html">Writing Tips</a><br/>
 <a href="http://blog.endpoint.com/2012/06/popular-mobile-apps-from-brian-and-adam.html">Popular Mobile Apps</a><br/>

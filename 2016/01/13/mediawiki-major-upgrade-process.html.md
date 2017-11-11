@@ -57,10 +57,10 @@ $ gpg mediawiki-1.26.2.tar.gz.sig
 gpg: assuming signed data in `mediawiki-1.26.2.tar.gz'
 gpg: Signature made Sun 20 Dec 2015 08:13:14 PM EST using RSA key ID 23107F8A
 gpg: please do a --check-trustdb
-gpg: Good signature from "Chad Horohoe &lt;chad@wikimedia.org&gt;"
-gpg:                 aka "keybase.io/demon &lt;demon@keybase.io&gt;"
-gpg:                 aka "Chad Horohoe (Personal e-mail) &lt;innocentkiller@gmail.com&gt;"
-gpg:                 aka "Chad Horohoe (Alias for existing email) &lt;chadh@wikimedia.org&gt;"
+gpg: Good signature from "Chad Horohoe <chad@wikimedia.org>"
+gpg:                 aka "keybase.io/demon <demon@keybase.io>"
+gpg:                 aka "Chad Horohoe (Personal e-mail) <innocentkiller@gmail.com>"
+gpg:                 aka "Chad Horohoe (Alias for existing email) <chadh@wikimedia.org>"
 gpg: WARNING: This key is not certified with a trusted signature!
 gpg:          There is no indication that the signature belongs to the owner.
 Primary key fingerprint: 41B2 ABE8 17AD D3E5 2BDA  946F 72BC 1C5D 2310 7F8A

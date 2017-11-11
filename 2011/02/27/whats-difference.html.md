@@ -15,7 +15,7 @@ Not long ago a software vendor we work with delivered a patch for a bug we'd bee
       find new -type f | sed "s/new\///" ; \
       find old -type f | sed "s/old\///" ) | \
       sort | uniq`; do \
-    md5sum old/$i new/$i 2&gt;&amp;1; \
+    md5sum old/$i new/$i 2>&1; \
   done \
 ) | uniq -u  -c -w 32
 ```
@@ -39,13 +39,13 @@ total 16
 -rw-r--r-- 1 josh josh 20 2011-03-01 10:18 5
 
 josh@eddie:~/tmp/transient$ ( \
-&gt;   for i in `( \
-&gt;       find new -type f | sed "s/new\///" ; \
-&gt;       find old -type f | sed "s/old\///" ) | \
-&gt;       sort | uniq`; do \
-&gt;     md5sum old/$i new/$i 2&gt;&amp;1; \
-&gt;   done \
-&gt; ) | uniq -u  -c -w 32
+>   for i in `( \
+>       find new -type f | sed "s/new\///" ; \
+>       find old -type f | sed "s/old\///" ) | \
+>       sort | uniq`; do \
+>     md5sum old/$i new/$i 2>&1; \
+>   done \
+> ) | uniq -u  -c -w 32
       1 432c7f1e40696b4fd77f8fd242679973  old/2
       1 a533139557d6c009ff19ae85e18b1c61  new/2
       1 md5sum: old/4: No such file or directory

@@ -13,7 +13,7 @@ There were a lot of interesting talks planned, and I could only attend some of t
 
 - Brandon Johnson on Red Hat's virtualization with [oVirt](http://www.ovirt.org/), [Spacewalk](http://spacewalk.redhat.com/), [Katello](http://katello.org/), and [Aeolus](http://www.aeolusproject.org/)
 
-- Clint Savage about RPM packaging with [Mock](http://fedoraproject.org/wiki/Projects/Mock) &amp; [Koji](http://fedoraproject.org/wiki/Koji)
+- Clint Savage about RPM packaging with [Mock](http://fedoraproject.org/wiki/Projects/Mock) & [Koji](http://fedoraproject.org/wiki/Koji)
 
 - Daniel Evans on testing web applications with [Capybara](https://github.com/jnicklas/capybara), embedded WebKit, and Selenium (which End Pointer Mike Farmer [wrote about here](http://blog.endpoint.com/2011/12/running-integration-tests-in-webkit.html) back in December)
 

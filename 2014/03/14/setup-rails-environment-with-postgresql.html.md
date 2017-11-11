@@ -46,8 +46,8 @@ RVM (Ruby Version Manager) is a must have tool to easily manage multiple Ruby en
 ```bash
 $ curl -L https://get.rvm.io | bash -s stable --ruby
 $ rvm -v
-rvm 1.25.19 (stable) by Wayne E. Seguin &lt;wayneeseguin@gmail.com&gt;, Michal Papis &lt;mpapis@gmail.com&gt; [https://rvm.io/]
-$ echo '[[ -s "$HOME/.rvm/scripts/rvm" ]] &amp;&amp; source "$HOME/.rvm/scripts/rvm"' &gt;&gt; ~/.bashrc
+rvm 1.25.19 (stable) by Wayne E. Seguin <wayneeseguin@gmail.com>, Michal Papis <mpapis@gmail.com> [https://rvm.io/]
+$ echo '[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"' >> ~/.bashrc
 $ source ~/.bashrc
 ```
 Gemsets are very helpful to manage multiple applications with different sets of gems packed. So let's create a gemset to work on:
@@ -57,7 +57,7 @@ $ rvm use ruby-2.1.1@endpoint --create
 $ rvm gemset list
 gemsets for ruby-2.1.1 (found in /Users/selva/.rvm/gems/ruby-2.1.1)
    (default)
-=&gt; endpoint
+=> endpoint
    global
 ```
 (See also the similar [rbenv](http://rbenv.org/), which some people prefer.)
@@ -77,7 +77,7 @@ Rails 4.0.3
 Download and Install PostgreSQL database from [Postgres.app](http://postgresapp.com/) which provides PostgresSQL in a single package to easily get started with Max OS X. After the installation, open Postgres located under Applications to start PostgreSQL database running. Find out the PostgreSQL bin path and append to ~/.bashrc for accessing commands through the shell.
 
 ```bash
-$ echo 'PATH="/Applications/Postgres.app/Contents/Versions/9.3/bin:$PATH"' &gt;&gt; ~/.bashrc
+$ echo 'PATH="/Applications/Postgres.app/Contents/Versions/9.3/bin:$PATH"' >> ~/.bashrc
 $ source ~/.bashrc
 ```
 Next create a user in PostgreSQL for Rails application.
@@ -120,7 +120,7 @@ It is always good to develop an application with version control system. Here I 
 ```bash
 $ cd SampleApp
 $ git init
-$ git add . &amp;&amp; git commit -m "Initial Commit"
+$ git add . && git commit -m "Initial Commit"
 ```
 
 **5. Server on https (optional)**
@@ -128,7 +128,7 @@ $ git add . &amp;&amp; git commit -m "Initial Commit"
 Sometimes the application needs to be run on the https protocol for security reasons to if third-party services require the application to be served over https. So we should setup https (SSL Security). First, create an self-signed SSL certificate. To create a self-signed certificate we should have RSA key and Certificate request in place beforehand.
 
 ```bash
-$ mkdir ~/.ssl &amp;&amp; cd ~/.ssl
+$ mkdir ~/.ssl && cd ~/.ssl
 
 # creating 2048 bit rsa key
 $ openssl genrsa -out server.key 2048 
@@ -157,22 +157,22 @@ require 'webrick'
 require 'webrick/https'
 
 module Rails
-    class Server &lt; ::Rack::Server
+    class Server < ::Rack::Server
         def default_options
             super.merge({
-                :Port =&gt; 3000,
-                :environment =&gt; (ENV['RAILS_ENV'] || "development").dup,
-                :daemonize =&gt; false,
-                :debugger =&gt; false,
-                :pid =&gt; File.expand_path("tmp/pids/server.pid"),
-                :config =&gt; File.expand_path("config.ru"),
-                :SSLEnable =&gt; true,
-                :SSLVerifyClient =&gt; OpenSSL::SSL::VERIFY_NONE,
-                :SSLPrivateKey =&gt; OpenSSL::PKey::RSA.new(
+                :Port => 3000,
+                :environment => (ENV['RAILS_ENV'] || "development").dup,
+                :daemonize => false,
+                :debugger => false,
+                :pid => File.expand_path("tmp/pids/server.pid"),
+                :config => File.expand_path("config.ru"),
+                :SSLEnable => true,
+                :SSLVerifyClient => OpenSSL::SSL::VERIFY_NONE,
+                :SSLPrivateKey => OpenSSL::PKey::RSA.new(
                        File.open("/path/to/server.key").read),
-                :SSLCertificate =&gt; OpenSSL::X509::Certificate.new(
+                :SSLCertificate => OpenSSL::X509::Certificate.new(
                        File.open("/path/to/server.crt").read),
-                :SSLCertName =&gt; [["CN", WEBrick::Utils::getservername]]
+                :SSLCertName => [["CN", WEBrick::Utils::getservername]]
             })
         end
     end

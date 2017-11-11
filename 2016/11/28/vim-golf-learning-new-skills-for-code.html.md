@@ -15,7 +15,7 @@ Similar to playing a round of golf, we tested each other with various editing ta
 
 In this post, we share some of the interesting tricks that were shown, and also some links to further learning about Vim.
 
-### Tips &amp; Tricks
+### Tips & Tricks
 
 - Indenting text: there are multiple ways to do this, but a few are:
 

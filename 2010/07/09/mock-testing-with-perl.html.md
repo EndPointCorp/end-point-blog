@@ -19,9 +19,9 @@ In the following example, the function Base::Shipping::Package::weight is called
 
 ```perl
 {
-  local *Base::Shipping::Package::weight = \&amp;test_weight
-  my $shipment = $class-&gt;create_shipment($shipment);
-  my $result = $class-&gt;process_shipment($shipment);
+  local *Base::Shipping::Package::weight = \&test_weight
+  my $shipment = $class->create_shipment($shipment);
+  my $result = $class->process_shipment($shipment);
   test $result;
 }
 

@@ -30,8 +30,8 @@ Without considering any of these issues, I had leveraged a shell command to do a
 
 ```
 $ diff -u \
-&gt; &lt;(psql -c "COPY (SELECT * FROM foo ORDER BY foo_id) TO STDOUT" -U chung chung) \
-&gt; &lt;(psql -c "COPY (SELECT * FROM foo ORDER BY foo_id) TO STDOUT" -U chung chung2)
+> <(psql -c "COPY (SELECT * FROM foo ORDER BY foo_id) TO STDOUT" -U chung chung) \
+> <(psql -c "COPY (SELECT * FROM foo ORDER BY foo_id) TO STDOUT" -U chung chung2)
 ```
 
 The above code produced exactly the results I was looking for, so I integrated it into my Perl code via qx() and ran it. Doing so produced the following surprising result:
@@ -39,7 +39,7 @@ The above code produced exactly the results I was looking for, so I integrated i
 ```
 $ ./foo.pl
 sh: -c: line 0: syntax error near unexpected token `('
-sh: -c: line 0: `diff -u &lt;(psql -c "COPY (SELECT * FROM foo ORDER BY foo_id) TO STDOUT" -U chung chung) &lt;(psql -c "COPY (SELECT * FROM foo ORDER BY foo_id) TO STDOUT" -U chung chung2)'
+sh: -c: line 0: `diff -u <(psql -c "COPY (SELECT * FROM foo ORDER BY foo_id) TO STDOUT" -U chung chung) <(psql -c "COPY (SELECT * FROM foo ORDER BY foo_id) TO STDOUT" -U chung chung2)'
 ```
 
 I worked with an End Point colleague and figured out the problem. <() is supported by bash, but not by Bourne. Further, there is no way to instruct Perl to use /bin/bash for its target shell.
@@ -47,11 +47,11 @@ I worked with an End Point colleague and figured out the problem. <() is support
 In order to access a different shell and leverage the desired features, I had to use the invocation described for PROGRAM LIST, but identify the shell itself as my program. While I'm unaware of any way to accomplish this with backticks, I was certainly able to do so using Perl's open():
 
 ```
-my $cmd = q{diff -u &lt;(psql -c "COPY (SELECT * FROM foo ORDER BY foo_id) TO STDOUT" -U chung chung) &lt;(psql -c "COPY (SELECT * FROM foo ORDER BY foo_id) TO STDOUT" -U chung chung2)};
+my $cmd = q{diff -u <(psql -c "COPY (SELECT * FROM foo ORDER BY foo_id) TO STDOUT" -U chung chung) <(psql -c "COPY (SELECT * FROM foo ORDER BY foo_id) TO STDOUT" -U chung chung2)};
 
     open (my $pipe, '-|', '/bin/bash', '-c', $cmd)
         or die "Error opening pipe from diff: $!";
-    while (&lt;$pipe&gt;) {
+    while (<$pipe>) {
         # do my stuff
     }
     close ($pipe);

@@ -10,17 +10,17 @@ title: 'Paperclip in Spree: Extending Product Image Sizes'
 Spree uses the popular gem [Paperclip](https://github.com/thoughtbot/paperclip) for assigning images as attachments to products. The basic installation requires you to install the gem, create a migration to store the paperclip-specific fields in your model, add the **has_attached_file** information to the model with the attachment, add the ability to upload the file, and display the file in a view. In Spree, the Image model has an attached file with the following properties:
 
 ```ruby
-class Image &lt; Asset
+class Image < Asset
   ...
   has_attached_file :attachment,
-                    :styles =&gt; { :mini =&gt; '48x48&gt;',
-                      :small =&gt; '100x100&gt;',
-                      :product =&gt; '240x240&gt;',
-                      :large =&gt; '600x600&gt;'
+                    :styles => { :mini => '48x48>',
+                      :small => '100x100>',
+                      :product => '240x240>',
+                      :large => '600x600>'
                     },
-                    :default_style =&gt; :product,
-                    :url =&gt; "/assets/products/:id/:style/:basename.:extension",
-                    :path =&gt; ":rails_root/public/assets/products/:id/:style/:basename.:extension"
+                    :default_style => :product,
+                    :url => "/assets/products/:id/:style/:basename.:extension",
+                    :path => ":rails_root/public/assets/products/:id/:style/:basename.:extension"
   ...
 end
 ```
@@ -41,8 +41,8 @@ First, I had to override the image attachment styles, with the code shown below.
 
 ```ruby
 Image.attachment_definitions[:attachment][:styles].merge!(
-      :newsize1 =&gt; '200x200&gt;',
-      :newsize2 =&gt; '284x284&gt;'
+      :newsize1 => '200x200>',
+      :newsize2 => '284x284>'
 )
 ```
 
@@ -58,7 +58,7 @@ Image.attachment_definitions[:attachment][:styles].each do |style, v|
         image_tag "noimage/#{style}.jpg", options
       else
         image = product.images.first
-        options.reverse_merge! :alt =&gt; image.alt.blank? ? product.name : image.alt
+        options.reverse_merge! :alt => image.alt.blank? ? product.name : image.alt
         image_tag image.attachment.url(style), options
       end
     end
@@ -75,7 +75,7 @@ But for some reason in this application, perhaps based on order of extension eva
         image_tag "noimage/#{style}.jpg", options
       else
         image = product.images.first
-        options.reverse_merge! :alt =&gt; image.alt.blank? ? product.name : image.alt
+        options.reverse_merge! :alt => image.alt.blank? ? product.name : image.alt
         image_tag image.attachment.url(style), options
       end 
     end 
@@ -105,8 +105,8 @@ done
 Finally, I added newsize1_image and newsize2_image methods throughout the views, e.g.:
 
 ```nohighlight
-&lt;%= link_to newsize1_image(product), product %&gt;
-&lt;%= link_to newsize2_image(taxon.products.first), seo_url(taxon) %&gt;
+<%= link_to newsize1_image(product), product %>
+<%= link_to newsize2_image(taxon.products.first), seo_url(taxon) %>
 ```
 
 ### Conclusion

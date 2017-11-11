@@ -5,7 +5,7 @@ tags: company, conference, ecommerce
 title: Internet Retailer exhibits of note
 ---
 
-Last night concluded [Internet Retailer Conference &amp; Exhibition 2011](http://irce.internetretailer.com/2011/) in San Diego. We had a lot of good conversations with attendees and other exhibitors at the End Point booth, and our Liquid Galaxy with Google Earth was a great draw for visitors:
+Last night concluded [Internet Retailer Conference & Exhibition 2011](http://irce.internetretailer.com/2011/) in San Diego. We had a lot of good conversations with attendees and other exhibitors at the End Point booth, and our Liquid Galaxy with Google Earth was a great draw for visitors:
 
 <a href="https://picasaweb.google.com/lh/photo/Kg-pL9cxK6hQgWTb_zeL403K0wDLmcmRqtD7mAO4ly4?feat=embedwebsite"><img height="267" src="/blog/2011/06/17/internet-retailer-exhibitors-of-note/image-0.jpeg" width="400"/></a>
 

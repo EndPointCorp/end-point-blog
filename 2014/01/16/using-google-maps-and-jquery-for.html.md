@@ -139,7 +139,7 @@ map.fitBounds(current_bounds);
 And in a mobile environment, it was desired to disable various map options such as draggability, zoomability, and scroll wheel use. This was done with the following conditional:
 
 ```javascript
-if($(window).width() &lt; 656) {
+if($(window).width() < 656) {
   map.setOptions({
     draggable: false,
     zoomControl: false,

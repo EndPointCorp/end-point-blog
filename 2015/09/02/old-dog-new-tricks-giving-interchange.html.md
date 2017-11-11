@@ -2,14 +2,14 @@
 author: Greg Hanson
 gh_issue_number: 1155
 tags: css, design, html, interchange, javascript
-title: Old Dog &amp; New Tricks - Giving Interchange a New Look with Bootstrap
+title: Old Dog & New Tricks - Giving Interchange a New Look with Bootstrap
 ---
 
 ### Introduction
 
 So your [Interchange](http://www.icdevgroup.org) based website looks like it walked out of a disco... but you spent a fortune getting the back end working with all those custom applications.... what to do?
 
-Interchange is currently being used in numerous very complex implementations. Trying to adapt another platform to replace Interchange is a formidable task, and in many cases the "problem" that users are trying to "solve" by replacing Interchange, can be remedied by a relatively simple face lift to the front end. One of the main attractions to Interchange in the past was its ability to scale from a small mom &amp; pop eCommerce application, to a mid level support system for a larger company and its related back end systems. Once the connection to those back end systems has been created, and for as long as you use those related systems, Interchange will continue to be the most economic choice for the job. But that leaves the front end, the one that your customers see and use (with their phones and tablets) that becomes the most immediate target for "modernization".
+Interchange is currently being used in numerous very complex implementations. Trying to adapt another platform to replace Interchange is a formidable task, and in many cases the "problem" that users are trying to "solve" by replacing Interchange, can be remedied by a relatively simple face lift to the front end. One of the main attractions to Interchange in the past was its ability to scale from a small mom & pop eCommerce application, to a mid level support system for a larger company and its related back end systems. Once the connection to those back end systems has been created, and for as long as you use those related systems, Interchange will continue to be the most economic choice for the job. But that leaves the front end, the one that your customers see and use (with their phones and tablets) that becomes the most immediate target for "modernization".
 
 Granted, there are new and alternate ways of accessing and presenting data and views to users, but many of those alternatives are also accessible and inter-operable with Interchange. So while there are several topics that can be investigated at length, we will focus first on a popular front end framework that can help Interchange present a modern responsive theme to the end users. That framework is [Bootstrap](http://getbootstrap.com/).  Bootstrap is a good basic start for breathing new life into your Interchange application. Bootstrap uses a reasonably generic approach to HTML, CSS, and Javascript frameworking. This blends nicely with the Interchange application approach: providing a basic, repeatable, broad based and well supported foundation that can then be crafted into whatever the developer and their client may need.
 

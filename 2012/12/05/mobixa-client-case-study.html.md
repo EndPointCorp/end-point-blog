@@ -28,19 +28,19 @@ In my search for a decent Rails MailChimp integration gem, I found [gibbon](http
 ```ruby
 # user model
 def update_mailchimp
-  gb = Gibbon.new(*api_key*, { :timeout =&gt; 30 })
+  gb = Gibbon.new(*api_key*, { :timeout => 30 })
 
-  info = gb.list_member_info({ :id =&gt; *list_id*, :email_address =&gt; self.email })
+  info = gb.list_member_info({ :id => *list_id*, :email_address => self.email })
 
   if info["success"] == 1
-    gb.listUpdateMember({ :id =&gt; *list_id*,
-                          :email_address =&gt; self.email,
-                          :merge_vars =&gt; self.mailchimp_data })
+    gb.listUpdateMember({ :id => *list_id*,
+                          :email_address => self.email,
+                          :merge_vars => self.mailchimp_data })
   else
-    gb.list_subscribe({ :id =&gt; *list_id*,
-                        :email_address =&gt; self.email,
+    gb.list_subscribe({ :id => *list_id*,
+                        :email_address => self.email,
                         # additional new user arguments #
-                        :merge_vars =&gt; self.mailchimp_data })
+                        :merge_vars => self.mailchimp_data })
   end
 end
 ```

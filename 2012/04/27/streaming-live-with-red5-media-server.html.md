@@ -51,7 +51,7 @@ Finally, some coding versus talking!
 Red5 sources are conveniently available as a [Google Code project](http://http//code.google.com/p/red5/source/browse/). It comes in [server-side ](http://code.google.com/p/red5/source/browse/java/) and the most interesting to us [flash-side](http://code.google.com/p/red5/source/browse/flash)
 
 ```nohighlight
- &gt; svn checkout http://red5.googlecode.com/svn/flash/trunk/ red5
+ > svn checkout http://red5.googlecode.com/svn/flash/trunk/ red5
 ```
 
 Step 1.
@@ -135,7 +135,7 @@ Let's look into Connector class org.red5.utils.Connector.
 
  public function makeConnection(evtObj:Object):Void
  {
-  if(uri.length &gt; 0)
+  if(uri.length > 0)
   {
     var goodURI = connection.connect(uri.text, getTimer());
     if(!goodURI) alert.show("Please check connection URI String and try again.");
@@ -163,7 +163,7 @@ public function configUI():Void
  public function makeConnection(uri:String):Boolean
  {
   var result:Boolean = false;
-  if(uri.length &gt; 0)
+  if(uri.length > 0)
   {
     result = connection.connect(uri, getTimer());
     if(!result) {
@@ -183,10 +183,10 @@ Unfortunately Red5 is written in ActionScript 2. We can't really use any of the 
 The compiler needs to be supplied with the correct MX Component libraries to compile Red5 classes. Flash CS6 has those libraries, but in case you don't have CS6 handy I put them on [GitHub](https://github.com/ftert/mtasc-mx) for you.
 
 ```nohighlight
-&gt; export PATH="/path/to/mtasc-mx/bin:/path/to/mtasc-mx/std:$PATH"
-&gt; cd "/path/to/red5/classes"
-&gt; mtasc -cp "." -swf ../simpleBroadcaster.swf -mx org/red5/samples/livestream/broadcaster/Main.as -v
-&gt; mtasc -cp "." -swf ../simpleSubscriber.swf -mx org/red5/samples/livestream/broadcaster/Main.as -v
+> export PATH="/path/to/mtasc-mx/bin:/path/to/mtasc-mx/std:$PATH"
+> cd "/path/to/red5/classes"
+> mtasc -cp "." -swf ../simpleBroadcaster.swf -mx org/red5/samples/livestream/broadcaster/Main.as -v
+> mtasc -cp "." -swf ../simpleSubscriber.swf -mx org/red5/samples/livestream/broadcaster/Main.as -v
 ```
 The compiled swf's can be found in the root of the current directory.
 
@@ -201,52 +201,52 @@ We will then download [swfobject.js](http://code.google.com/p/swfobject/) JavaSc
 We will create broadcast.html file.
 
 ```nohighlight
-&lt;html&gt;
- &lt;head&gt;
- &lt;title&gt;Red5 Demo - Simple Broadcaster&lt;/title&gt;
- &lt;meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /&gt;
- &lt;script type="text/javascript" src="swfobject.js"&gt;&lt;/script&gt;
- &lt;script type="text/javascript"&gt;
+<html>
+ <head>
+ <title>Red5 Demo - Simple Broadcaster</title>
+ <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+ <script type="text/javascript" src="swfobject.js"></script>
+ <script type="text/javascript">
  swfobject.embedSWF("simpleBroadcaster.swf","myContent","360","240","8.0.0","jwplayer/expressInstall.swf");
- &lt;/script&gt;
-&lt;style media="screen" type="text/css"&gt;#myContent {visibility:hidden}&lt;/style&gt;
- &lt;/head&gt;
- &lt;body&gt;
- &lt;div id="myContent"&gt;
- &lt;h1&gt;You need the Adobe Flash Player for this demo, download it by clicking the image below.
-&lt;/h1&gt;
- &lt;p&gt;&lt;a href="http://www.adobe.com/go/getflashplayer"&gt;
-&lt;img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash player"/&gt;
-&lt;/a&gt;&lt;/p&gt;
- &lt;/div&gt;
- &lt;/body&gt;
-&lt;/html&gt;
+ </script>
+<style media="screen" type="text/css">#myContent {visibility:hidden}</style>
+ </head>
+ <body>
+ <div id="myContent">
+ <h1>You need the Adobe Flash Player for this demo, download it by clicking the image below.
+</h1>
+ <p><a href="http://www.adobe.com/go/getflashplayer">
+<img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash player"/>
+</a></p>
+ </div>
+ </body>
+</html>
 ```
 
 Then we will create watch.html file.
 
 ```nohighlight
-&lt;html&gt;
-&lt;head&gt;
-  &lt;title&gt;Red5 Demo - Simple Subscriber&lt;/title&gt;
- &lt;meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"&gt;
- &lt;script type="text/javascript" src="swfobject.js"&gt;&lt;/script&gt;
- &lt;script type="text/javascript"&gt;
+<html>
+<head>
+  <title>Red5 Demo - Simple Subscriber</title>
+ <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+ <script type="text/javascript" src="swfobject.js"></script>
+ <script type="text/javascript">
  swfobject.embedSWF("simpleSubscriber.swf","myContent","360","240","8.0.0","assets/expressInstall.swf");
- &lt;/script&gt;
-&lt;style media="screen" type="text/css"&gt;#myContent {visibility:hidden}&lt;/style&gt;
- &lt;/head&gt;
- &lt;body&gt;
- &lt;div id="myContent"&gt;
- &lt;h1&gt;You need the Adobe Flash Player for this demo, download it by clicking the image below.
-&lt;/h1&gt;
- &lt;p&gt;&lt;a href="http://www.adobe.com/go/getflashplayer"&gt;
-&lt;img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash player"/&gt;
-&lt;/a&gt;
-&lt;/p&gt;
- &lt;/div&gt;
-&lt;/body&gt;
-&lt;/html&gt;
+ </script>
+<style media="screen" type="text/css">#myContent {visibility:hidden}</style>
+ </head>
+ <body>
+ <div id="myContent">
+ <h1>You need the Adobe Flash Player for this demo, download it by clicking the image below.
+</h1>
+ <p><a href="http://www.adobe.com/go/getflashplayer">
+<img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash player"/>
+</a>
+</p>
+ </div>
+</body>
+</html>
 ```
 
 At this point we are able to start a broadcast at http://localhost/broadcast.html and watch it at http://localhost/watch.html! In this case I am broadcasting from Macbook and streaming to Windows laptop.

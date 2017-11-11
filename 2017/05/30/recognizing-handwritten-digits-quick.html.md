@@ -121,7 +121,7 @@ function extract(frame :: DataFrame, include_label = true)
   end
 
   from = include_label ? 2 : 1
-  frame[:pixels] = map((i) -&gt; convert(Array{Float64}, frame[i, from:end]) |&gt; to_image, 1:size(frame, 1))
+  frame[:pixels] = map((i) -> convert(Array{Float64}, frame[i, from:end]) |> to_image, 1:size(frame, 1))
   images = frame[:, :pixels] ./ 255
   data = Array{Array{Float64}}(length(images))
 
@@ -252,22 +252,22 @@ function compute_bounds(number_image :: Array{Float64}) :: Bounds
     for x = 1:cols
       row_sum += number_image[y, x]
 
-      if !saw_top &amp;&amp; number_image[y, x] &gt; 0
+      if !saw_top && number_image[y, x] > 0
         saw_top = true
         top = y
       end
 
-      if !saw_left &amp;&amp; number_image[y, x] &gt; 0 &amp;&amp; x &lt; left
+      if !saw_left && number_image[y, x] > 0 && x < left
         saw_left = true
         left = x
       end
 
-      if saw_top &amp;&amp; !saw_bottom &amp;&amp; x == cols &amp;&amp; row_sum == 0
+      if saw_top && !saw_bottom && x == cols && row_sum == 0
         saw_bottom = true
         bottom = y - 1
       end
 
-      if number_image[y, x] &gt; 0 &amp;&amp; x &gt; right
+      if number_image[y, x] > 0 && x > right
         right = x
       end
     end
@@ -296,7 +296,7 @@ function compute_profile(image :: Array{Float64}, side :: Symbol) :: ProfileStat
   rows = size(image, 1)
   cols = size(image, 2)
 
-  columns = side == :left ? collect(1:cols) : (collect(1:cols) |&gt; reverse)
+  columns = side == :left ? collect(1:cols) : (collect(1:cols) |> reverse)
   at = zeros(Int64, rows)
   diff = zeros(Int64, rows)
   min = rows
@@ -307,15 +307,15 @@ function compute_profile(image :: Array{Float64}, side :: Symbol) :: ProfileStat
 
   for y = 1:rows
     for x = columns
-      if image[y, x] &gt; 0
+      if image[y, x] > 0
         at[y] = side == :left ? x : cols - x + 1
 
-        if at[y] &lt; min_val
+        if at[y] < min_val
           min_val = at[y]
           min = y
         end
 
-        if at[y] &gt; max_val
+        if at[y] > max_val
           max_val = at[y]
           max = y
         end
@@ -340,16 +340,16 @@ function compute_widths(left :: ProfileStats, right :: ProfileStats, image :: Ar
   image_width = size(image, 2)
   min_width = image_width
   max_width = 0
-  width_ats = length(left.at) |&gt; zeros
+  width_ats = length(left.at) |> zeros
 
   for row in 1:length(left.at)
     width_ats[row] = image_width - (left.at[row] - 1) - (right.at[row] - 1)
 
-    if width_ats[row] &lt; min_width
+    if width_ats[row] < min_width
       min_width = width_ats[row]
     end
 
-    if width_ats[row] &gt; max_width
+    if width_ats[row] > max_width
       max_width = width_ats[row]
     end
   end
@@ -367,9 +367,9 @@ function compute_transitions(image :: Image) :: Tuple{Array{Float64}, Array{Floa
   function next_point() :: Nullable{Point}
     point = Nullable()
 
-    for row in 1:size(image, 1) |&gt; reverse
-      for col in 1:size(image, 2) |&gt; reverse
-        if image[row, col] &gt; 0.0 &amp;&amp; history[row, col] == 0.0
+    for row in 1:size(image, 1) |> reverse
+      for col in 1:size(image, 2) |> reverse
+        if image[row, col] > 0.0 && history[row, col] == 0.0
           point = Nullable((row, col))
           history[row, col] = 1.0
 
@@ -408,8 +408,8 @@ function compute_transitions(image :: Image) :: Tuple{Array{Float64}, Array{Floa
       new_row = actual_current[1] + row_move
       new_col = actual_current[2] + col_move
 
-      if new_row &lt;= size(image, 1) &amp;&amp; new_col &lt;= size(image, 2) &amp;&amp;
-         new_row &gt;= 1 &amp;&amp; new_col &gt;= 1
+      if new_row <= size(image, 1) && new_col <= size(image, 2) &&
+         new_row >= 1 && new_col >= 1
         return Nullable((new_row, new_col))
       else
         return Nullable()
@@ -421,7 +421,7 @@ function compute_transitions(image :: Image) :: Tuple{Array{Float64}, Array{Floa
 
       if !isnull(peeked)
         actual = get(peeked)
-        if image[actual[1], actual[2]] &gt; 0.0 &amp;&amp; history[actual[1], actual[2]] == 0.0
+        if image[actual[1], actual[2]] > 0.0 && history[actual[1], actual[2]] == 0.0
           result = peeked
           history[actual[1], actual[2]] = 1
           trans = direction
@@ -546,8 +546,8 @@ library(readr)
 Loading the data into data frames is equally straight-forward:
 
 ```r
-processed_train &lt;- read_csv("processed_train.csv")
-processed_test &lt;- read_csv("processed_test.csv")
+processed_train <- read_csv("processed_train.csv")
+processed_test <- read_csv("processed_test.csv")
 ```
 
 We then move on to preparing the vector of labels for each row as well as the matrix of features:
@@ -568,15 +568,15 @@ Because Kaggle provides the test set without labels, for the sake of evaluating 
 ```r
 library(caret)
 
-index &lt;- createDataPartition(processed_train$label, p = .8,
+index <- createDataPartition(processed_train$label, p = .8,
                              list = FALSE,
                              times = 1)
 
-train_labels &lt;- labels[index]
-train_features &lt;- features[index,]
+train_labels <- labels[index]
+train_features <- features[index,]
 
-test_labels &lt;- labels[-index]
-test_features &lt;- features[-index,]
+test_labels <- labels[-index]
+test_features <- features[-index,]
 ```
 
 The above code splits the set uniformly based on the labels so that the train set is approximately 80% in size of the whole data set.
@@ -586,14 +586,14 @@ The above code splits the set uniformly based on the labels so that the train se
 We can now make our data digestible by the XGBoost library:
 
 ```r
-train &lt;- xgb.DMatrix(as.matrix(train_features), label = train_labels)
-test  &lt;- xgb.DMatrix(as.matrix(test_features),  label = test_labels)
+train <- xgb.DMatrix(as.matrix(train_features), label = train_labels)
+test  <- xgb.DMatrix(as.matrix(test_features),  label = test_labels)
 ```
 
 The next step is to make the XGBoost learn from our data. The actual parameters and their explanations are beyond the scope of this overview article, but the reader can look them up on the XGBoost pages:
 
 ```r
-model &lt;- xgboost(train,
+model <- xgboost(train,
                  max_depth = 16,
                  nrounds = 600,
                  eta = 0.2,
@@ -647,7 +647,7 @@ Overall Statistics
                Accuracy : 0.9411
                  95% CI : (0.9358, 0.946)
     No Information Rate : 0.1124
-    P-Value [Acc &gt; NIR] : &lt; 2.2e-16
+    P-Value [Acc > NIR] : < 2.2e-16
 
                   Kappa : 0.9345
  Mcnemar's Test P-Value : NA

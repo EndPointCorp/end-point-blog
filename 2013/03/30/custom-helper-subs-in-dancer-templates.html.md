@@ -5,13 +5,11 @@ tags: dancer, perl
 title: Custom helper subs in Dancer templates
 ---
 
-
-
 I recently was writing some code using the [Dancer](http://perldancer.org/) Perl web framework, and had a set of HTML links in the template:
 
 ```xml
-&lt;a href="/"&gt;Home&lt;/a&gt; |
-&lt;a href="/contact"&gt;Contact&lt;/a&gt; |
+<a href="/">Home</a> |
+<a href="/contact">Contact</a> |
 [etc.]
 ```
 
@@ -22,8 +20,8 @@ The uri_for function isn't available in templates. The easiest way to cope would
 I found [this blog post](http://quispiam.com/adding-custom-helper-methods-to-dancer-templates/) explaining how to add custom functions to be used in templates, and it worked great. Now my template can look like this:
 
 ```xml
-&lt;a href="&lt;% uri_for('/') %&gt;"&gt;Home&lt;/a&gt; |
-&lt;a href="&lt;% uri_for('contact') %&gt;"&gt;Contact&lt;/a&gt; |
+<a href="<% uri_for('/') %>">Home</a> |
+<a href="<% uri_for('contact') %>">Contact</a> |
 [etc.]
 ```
 
@@ -40,18 +38,16 @@ The only final concern is that I am using Dancer version 1.3111 and I got this w
 
 ```
 Dancer::before_template has been deprecated since version 1.3080. use hooks!
-But use hook 'before_template' =&gt; sub {} now instead.
+But use hook 'before_template' => sub {} now instead.
 ```
 
 So I updated my code, and the final result looks like this:
 
 ```perl
-hook 'before_template' =&gt; sub {
+hook 'before_template' => sub {
     my $tokens = shift;
-    $tokens-&gt;{uri_for} = \&amp;uri_for;
+    $tokens->{uri_for} = \&uri_for;
 };
 ```
 
 And that made both Dancer and me happy.
-
-

@@ -39,14 +39,14 @@ include Kamelopard
 include Kamelopard::Functions
 
 a = make_function_path(10,
-    :latitude =&gt; Line.interpolate(38.8, 40.3),
-    :longitude =&gt; Cubic.interpolate(-112.4, -111.9, -0.5, -113, 0.5, -110),
-    :altitude =&gt; Line.interpolate(10000, 2000),
-    :heading =&gt; Line.interpolate(0, 90),
-    :tilt =&gt; Line.interpolate(40.0, 90),
-    :altitudeMode =&gt; :absolute,
-    :show_placemarks =&gt; 1,
-    :duration =&gt; Quadratic.interpolate(2.0, 4.0, 0.0, 1.0),
+    :latitude => Line.interpolate(38.8, 40.3),
+    :longitude => Cubic.interpolate(-112.4, -111.9, -0.5, -113, 0.5, -110),
+    :altitude => Line.interpolate(10000, 2000),
+    :heading => Line.interpolate(0, 90),
+    :tilt => Line.interpolate(40.0, 90),
+    :altitudeMode => :absolute,
+    :show_placemarks => 1,
+    :duration => Quadratic.interpolate(2.0, 4.0, 0.0, 1.0),
 )
 
 name_document 'Functions test'

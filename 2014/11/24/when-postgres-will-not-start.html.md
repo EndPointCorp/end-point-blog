@@ -52,7 +52,7 @@ DEBUG:  transaction ID wrap limit is 2147485526, limited by database with OID 1
 DEBUG:  MultiXactId wrap limit is 2147483648, limited by database with OID 1
 
 PostgreSQL stand-alone backend 9.3.5
-backend&gt; [CTRL-d]
+backend> [CTRL-d]
 NOTICE:  shutting down
 NOTICE:  database system is shut down
 ```

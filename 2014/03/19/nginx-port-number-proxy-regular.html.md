@@ -21,7 +21,7 @@ We now have the following tidbit in our Nginx config:
 server {
     [SNIP unrelated config stuff]
 
-    server_name ~^(?&lt;portname&gt;\d\d)\.camp\.;
+    server_name ~^(?<portname>\d\d)\.camp\.;
 
     location /dwolla {
         proxy_pass        http://169.29.89.157:90${portname}$uri;

@@ -19,5 +19,5 @@ Stop by if you're here and interested in hearing more about End Point's open sou
 </tr>
 <tr>
 <td align="center" style="padding-right:10px;" valign="bottom">Rick navigates through San Diego before a team dinner.<br/><img alt="" border="0" id="BLOGGER_PHOTO_ID_5618528704018903938" src="/blog/2011/06/15/end-point-at-irce-2011/image-2.jpeg" style="display:block; margin:2px auto 10px; text-align:center;cursor:pointer; cursor:hand;width: 387px; height: 258px;"/></td>
-<td align="center" valign="bottom">Ben &amp; Carl pose in front our our Liquid Galaxy display.<img alt="" border="0" id="BLOGGER_PHOTO_ID_5618528698301201538" src="/blog/2011/06/15/end-point-at-irce-2011/image-3.jpeg" style="display:block; margin:2px auto 10px; text-align:center;cursor:pointer; cursor:hand;width: 387px; height: 258px;"/></td>
+<td align="center" valign="bottom">Ben & Carl pose in front our our Liquid Galaxy display.<img alt="" border="0" id="BLOGGER_PHOTO_ID_5618528698301201538" src="/blog/2011/06/15/end-point-at-irce-2011/image-3.jpeg" style="display:block; margin:2px auto 10px; text-align:center;cursor:pointer; cursor:hand;width: 387px; height: 258px;"/></td>
 </tr></tbody></table>

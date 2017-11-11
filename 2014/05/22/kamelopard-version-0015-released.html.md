@@ -22,7 +22,7 @@ each_placemark(XML::Document.file('waypoints.kml')) do |p, v|
 end
 
 (1..30).each do |i|
-  fly_to sp.run_function(i.to_f/30.0), :duration =&gt; 0.8, :mode =&gt; :smooth
+  fly_to sp.run_function(i.to_f/30.0), :duration => 0.8, :mode => :smooth
 end
 ```
 

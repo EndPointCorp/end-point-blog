@@ -23,7 +23,7 @@ Specify your gem requirements in the application root Gemfile directory.
 gem 'searchlogic',            '2.3.5'
 gem 'will_paginate',          '2.3.11'
 gem 'faker',                  '0.3.1'
-gem 'paperclip',              '&gt;=2.3.1.1'
+gem 'paperclip',              '>=2.3.1.1'
 ```
 
 ```ruby
@@ -39,8 +39,8 @@ ActiveRecord has some changes that affect the query interface. Some ecommerce ex
 
 ```ruby
 recent_high_value_orders = Order
-  .where("total &gt; 1000")
-  .where(["created_at &gt;= :start_date", { :start_date =&gt; params[:start_date] }])
+  .where("total > 1000")
+  .where(["created_at >= :start_date", { :start_date => params[:start_date] }])
   .order("created_at DESC")
   .limit(50)
 ```
@@ -48,12 +48,12 @@ recent_high_value_orders = Order
 An example with the use of scope:
 
 ```ruby
-class Order &lt;&lt; ActiveRecord::Base
-  scope :high_value_orders where("total &gt; 1000")
-    .where(["created_at &gt;= :start_date", { :start_date =&gt; Time.now - 5.days )])
+class Order << ActiveRecord::Base
+  scope :high_value_orders where("total > 1000")
+    .where(["created_at >= :start_date", { :start_date => Time.now - 5.days )])
     .order("created_at DESC")
 end
-class SomeController &lt;&lt; YourApplication::AdminController
+class SomeController << YourApplication::AdminController
   def index
     orders = Order.high_value_orders.limit(50)
   end
@@ -81,7 +81,7 @@ resources :users do
   end
   resources :addresses
   resources :reviews
-    post :create, :on =&gt; :member
+    post :create, :on => :member
   end
 end
 ```
@@ -89,7 +89,7 @@ end
 Another routing change on named routes allows:
 
 ```ruby
-get 'login' =&gt; 'sessions#new'   # sessions is the controller, new is the action
+get 'login' => 'sessions#new'   # sessions is the controller, new is the action
 ```
 
 ### ActionMailer
@@ -97,13 +97,13 @@ get 'login' =&gt; 'sessions#new'   # sessions is the controller, new is the acti
 Some significant changes were changed to the ActionMailer class after a reexamination of assumptions and the decision to model mailers after a Rails controller instead of a model/controller hybrid. An example of use with ActionMailer now:
 
 ```ruby
-class OrderCompleteNotifier &lt; ActionMailer::Base
-  default :from =&gt; "customerservice@myecommercesite.com"
+class OrderCompleteNotifier < ActionMailer::Base
+  default :from => "customerservice@myecommercesite.com"
 
   def order_complete_notification(recipient)
     @recipient = recipient
-    mail(:to =&gt; recipient.email_address_with_name,
-         :subject =&gt; "Order information here")
+    mail(:to => recipient.email_address_with_name,
+         :subject => "Order information here")
   end
 end
 ```

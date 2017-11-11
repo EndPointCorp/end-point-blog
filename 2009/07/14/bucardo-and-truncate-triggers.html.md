@@ -5,8 +5,6 @@ tags: database, open-source, perl, postgres
 title: Bucardo and truncate triggers
 ---
 
-
-
 Version 8.4 of Postgres was recently released. One of the [features](http://www.postgresql.org/docs/8.4/static/release-8-4.html) that hasn't gotten a lot of press, but which I'm excited about, is truncate triggers. This fixes a critical hole in trigger-based PostgreSQL replication systems, and support for these new triggers is now working in the [Bucardo replication program.](http://bucardo.org)
 
 Truncate triggers were added to Postgres by [Simon Riggs](http://wiki.postgresql.org/wiki/Simon_Riggs%27_Development_Projects) (thanks Simon!), and unlike other types of triggers (UPDATE, DELETE, and INSERT), they are statement-level only, as truncate is not a row-level action.
@@ -30,9 +28,9 @@ $ initdb -D testB
 Let's give them all unique port numbers:
 
 ```bash
-$ echo port=5400 &gt;&gt; bcdata/postgresql.conf
-$ echo port=5401 &gt;&gt; testA/postgresql.conf 
-$ echo port=5402 &gt;&gt; testB/postgresql.conf 
+$ echo port=5400 >> bcdata/postgresql.conf
+$ echo port=5401 >> testA/postgresql.conf 
+$ echo port=5402 >> testB/postgresql.conf 
 ```
 
 Now start them all up:
@@ -88,7 +86,7 @@ Change any setting by using: bucardo_ctl set foo=bar
 Because we don't want to tell the bucardo_ctl program our custom port each time we call it, we'll store that info into the ~/.bucardorc file:
 
 ```bash
-$ echo dbport=5400 &gt; ~/.bucardorc
+$ echo dbport=5400 > ~/.bucardorc
 ```
 
 Let's double check that everything went okay by checking the list of databases that Bucardo knows about:
@@ -204,5 +202,3 @@ Second proposal:
 Comments on this strategy welcome!
 
 **Update:** Clarified initdb cluster vs. database per comment #1 below, and added new truncation handling scheme for multi-master replication per comment #2.
-
-

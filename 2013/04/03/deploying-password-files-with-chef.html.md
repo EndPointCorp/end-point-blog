@@ -22,13 +22,13 @@ pw_path_gid = 0
 pw = Chef::EncryptedDataBagItem.load("bag", "item")['password']
 
 ruby_block "#{pw_path}-touch" do
-  block   { FileUtils.touch pw_path } # so that we can chown &amp; chmod it before writing the pw to it
+  block   { FileUtils.touch pw_path } # so that we can chown & chmod it before writing the pw to it
   not_if  { pw_path.file? }
 end
 
 ruby_block "#{pw_path}-chown" do
   block   { FileUtils.chown pw_path_uid, pw_path_gid, pw_path }
-  not_if  { s = pw_path.stat ; s.uid == pw_path_uid &amp;&amp; s.gid == pw_path_gid }
+  not_if  { s = pw_path.stat ; s.uid == pw_path_uid && s.gid == pw_path_gid }
 end
 
 ruby_block "#{pw_path}-chmod" do

@@ -46,7 +46,7 @@ $  mongo
 MongoDB shell version: 1.8.1
 Fri Jun 10 12:45:00
 connecting to: test
-&gt; quit()
+> quit()
 $ 
 ```
 
@@ -73,7 +73,7 @@ $ make
 cp bucardo.schema blib/share/bucardo.schema
 cp Bucardo.pm blib/lib/Bucardo.pm
 cp bucardo blib/script/bucardo
-/usr/bin/perl -MExtUtils::MY -e 'MY-&gt;fixin(shift)' -- blib/script/bucardo
+/usr/bin/perl -MExtUtils::MY -e 'MY->fixin(shift)' -- blib/script/bucardo
 Manifying blib/man1/bucardo.1pm
 Manifying blib/man3/Bucardo.3pm
 $ sudo make install
@@ -218,15 +218,15 @@ $  mongo btest1
 MongoDB shell version: 1.8.1
 Fri Jun 10 12:46:00
 connecting to: btest1
-&gt; show collections
+> show collections
 bucardo_status
 pgbench_accounts
 pgbench_branches
 pgbench_tellers
 system.indexes
-&gt;  db.pgbench_accounts.count()
+>  db.pgbench_accounts.count()
 18106
-&gt;  db.pgbench_accounts.find().sort({abalance:1}).limit(1).next()
+>  db.pgbench_accounts.find().sort({abalance:1}).limit(1).next()
 {
   "_id" : ObjectId("4df39bcb8795839660001de5"),
   "abalance" : -12071,
@@ -234,7 +234,7 @@ system.indexes
   "bid" : 1,
   "filler" : "               "
 }
-&gt; db.pgbench_accounts.find().sort({abalance:-1}).limit(1).next()
+> db.pgbench_accounts.find().sort({abalance:-1}).limit(1).next()
 {
   "_id" : ObjectId("4df39bd08795839660002fb0"),
   "abalance" : 13010,
@@ -255,8 +255,8 @@ $ echo 'db.pgbench_accounts.count()' | mongo btest1
 MongoDB shell version: 1.8.1
 Fri Jun 10 12:47:00
 connecting to: btest1
-&gt; 100000
-&gt; bye
+> 100000
+> bye
 
 ```
 

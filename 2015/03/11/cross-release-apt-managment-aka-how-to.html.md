@@ -52,7 +52,7 @@ Pin-Priority: 510
 Now, update apt and confirm higher libnss3 installation candidates:
 
 ```nohighlight
-$ sudo apt-get update &amp;&amp; sudo apt-cache policy libnss3
+$ sudo apt-get update && sudo apt-cache policy libnss3
 libnss3:
   Installed: 2:3.14.5-1+deb7u3
   Candidate: 2:3.17.2-1.1

@@ -13,10 +13,10 @@ Something simple like the following has worked well for me on several occasions:
 .table {
   display: table;
 }
-.table&gt;* {
+.table>* {
   display: table-row;
 }
-.table&gt;*&gt;* {
+.table>*>* {
   display: table-cell;
 }
 ```
@@ -39,7 +39,7 @@ Occasionally though, I've wanted to leave a column empty for one reason or anoth
 The empty elements function well enough but they feel a little out of place. Recently I came up with a solution I like better. By using the CSS ::after and ::before selectors, you can insert an arbitrary element that can take the place of a missing cell. The following CSS rule can be used to replace the empty div above.
 
 ```css
-.table&gt;*:nth-child(2)::before {
+.table>*:nth-child(2)::before {
   content: " ";
   display: table-cell;
 }

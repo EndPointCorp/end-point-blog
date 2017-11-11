@@ -12,9 +12,9 @@ I've been blogging about [RailsAdmin](https://github.com/sferik/rails_admin) a l
 Whenever you are working with a gem that introduces admin functionality (RailsAdmin, [ActiveAdmin](http://activeadmin.info/), etc.), the controllers that provide resource management do not live in your code base. In Rails, typically you will see cache expirations in the controller that provides the CRUD functionality. For example, in the code below, a PagesController will specify [caching and sweeping](http://api.rubyonrails.org/classes/ActionController/Caching/Sweeping.html) of the page which expires when a page is updated or destroyed:
 
 ```ruby
-class PagesController &lt; AdminController
+class PagesController < AdminController
   caches_action :index, :show
-  cache_sweeper :page_sweeper, :only =&gt; [ :update, :destroy ]
+  cache_sweeper :page_sweeper, :only => [ :update, :destroy ]
 
   ...
 end
@@ -27,13 +27,13 @@ While working with RailsAdmin, I've come up with a different solution for expiri
 On the front-end, I have standard full page caching on static pages. In this case, the config/routes.rb maps wildcard paths to the pages controller and show action.
 
 ```ruby
-match '*path' =&gt; 'pages#show'
+match '*path' => 'pages#show'
 ```
 
 The controller calls the standard caches_page method:
 
 ```ruby
-class PagesController &lt; ApplicationController
+class PagesController < ApplicationController
   caches_page :show
 
   def show
@@ -47,7 +47,7 @@ end
 A simple ActiveRecord callback is added to clear the page cache:
 
 ```ruby
-class Page &lt; ActiveRecord::Base
+class Page < ActiveRecord::Base
   ...
 
   after_update :clear_cache
@@ -63,17 +63,17 @@ end
 When a page can't be fully cached, I might cache a view shared across the application. In the example below, the shared view is included in the layout – it's generated dynamically but the data does not change often, which makes it suitable for fragment caching.
 
 ```ruby
-&lt;% cache "navigation" do -%&gt;
-  &lt;% Category.each do |category| -%&gt;
-    &lt;%= link_to category.name, category_url(category) %&gt;
-  &lt;% end -%&gt;
-&lt;% end -%&gt;
+<% cache "navigation" do -%>
+  <% Category.each do |category| -%>
+    <%= link_to category.name, category_url(category) %>
+  <% end -%>
+<% end -%>
 ```
 
 Inside the model, I add the following to clear the fragment cache when a category is created, updated, or destroyed:
 
 ```ruby
-class Category &lt; ActiveRecord::Base
+class Category < ActiveRecord::Base
   after_create :clear_cache
   after_update :clear_cache
   before_destroy :clear_cache

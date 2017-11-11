@@ -25,23 +25,23 @@ use lib 'blib/lib', 'blib/arch';
 binmode STDOUT, ":encoding(utf8)";
 
 my $DSN = 'DBI:Pg:dbname=postgres';
-my $dbh = DBI-&gt;connect($DSN, '', '', {AutoCommit=&gt;0,RaiseError=&gt;1,PrintError=&gt;0})
+my $dbh = DBI->connect($DSN, '', '', {AutoCommit=>0,RaiseError=>1,PrintError=>0})
   or die "Connection failed!\n";                                            
 print "DBI is version $DBI::VERSION, DBD::Pg is version $DBD::Pg::VERSION\n";
 
 ## Create some Unicode strings (perl strings with the utf8 flag enabled)
 my %dm = (
-    dotty  =&gt; "\N{CADUCEUS}",
-    chilly =&gt; "\N{SNOWMAN}",
-    stuffy =&gt; "\N{DRAGON}",
-    lambie =&gt; "\N{SHEEP}",
+    dotty  => "\N{CADUCEUS}",
+    chilly => "\N{SNOWMAN}",
+    stuffy => "\N{DRAGON}",
+    lambie => "\N{SHEEP}",
 );
 
 ## Show the strings both before and after a trip to the database
 for my $x (sort keys %dm) {
     print "\nSending $x ($dm{$x}) to the database. Length is " . length($dm{$x}) . "\n";                                                                    
     my $SQL = qq{SELECT '$dm{$x}'::TEXT};             
-    my $var = $dbh-&gt;selectall_arrayref($SQL)-&gt;[0][0];
+    my $var = $dbh->selectall_arrayref($SQL)->[0][0];
     print "Database gave us back ($var) with a length of " . length($var) . "\n";
     print DPeek $var;
     print "\n";
@@ -79,11 +79,11 @@ The second thing to notice is how badly the length of the string is computed onc
 
 ```
 ...
-my $dbh = DBI-&gt;connect($DSN, '', '', {AutoCommit=&gt;0,RaiseError=&gt;1,PrintError=&gt;0})
+my $dbh = DBI->connect($DSN, '', '', {AutoCommit=>0,RaiseError=>1,PrintError=>0})
   or die "Connection failed!\n";
 ## Needed for older versions of DBD::Pg.
 ## This is the same as setting it to 1 for DBD::Pg 2.x - see below
-$dbh-&gt;{pg_enable_utf8} = -1;
+$dbh->{pg_enable_utf8} = -1;
 ...
 ```
 
@@ -140,7 +140,7 @@ for my $x (sort keys %dm) {
 
     print "\nSending $x ($dm{$x}) to the database. Length is " . length($dm{$x}) . "\n";
     my $SQL = qq{SELECT ARRAY['$dm{$x}']};
-    my $var = $dbh-&gt;selectall_arrayref($SQL)-&gt;[0][0];
+    my $var = $dbh->selectall_arrayref($SQL)->[0][0];
     print "Database gave us back ($var) with a length of " . length($var) . "\n";
     $var = pop @$var;
     print "Inner array ($var) has a length of " . length($var) . "\n";

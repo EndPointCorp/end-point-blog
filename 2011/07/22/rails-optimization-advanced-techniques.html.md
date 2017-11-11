@@ -17,7 +17,7 @@ Next, I re-examined the debug log to see what was taking so much time. The debug
 
 ```nohighlight
 Processing ThingsController#index (for 174.111.14.48 at 2011-07-12 16:32:04) [GET]
-  Parameters: {"action"=&gt;"index", "controller"=&gt;"things"}
+  Parameters: {"action"=>"index", "controller"=>"things"}
 Thing Load (441.2ms)  SELECT * FROM "things" WHERE ("things"."id" IN (22,6,23,7,35,24,36,25,14,9,37,26,15,...)) 
 Rendering template within layouts/application
 Rendering things/index
@@ -41,7 +41,7 @@ From the debug log, we can point out:
 To rule out any database slowness due to missing indexes, I examined the query speed via console (note that this application runs on PostgreSQL):
 
 ```sql
-=&gt; EXPLAIN ANALYZE SELECT * FROM "things" WHERE ("things"."id" IN (22,6,23,7,35,24,36,25,14,9,37,26,15,...));
+=> EXPLAIN ANALYZE SELECT * FROM "things" WHERE ("things"."id" IN (22,6,23,7,35,24,36,25,14,9,37,26,15,...));
                                                  QUERY PLAN                                                 
 ------------------------------------------------------------------------------------------------------------
  Seq Scan on things  (cost=0.00..42.19 rows=24 width=760) (actual time=0.023..0.414 rows=25 loops=1)
@@ -73,13 +73,13 @@ After troubleshooting, here's what I came up with:
       with :tag_list, CGI.unescape(params[:tag])
     end
     with :active, true
-    paginate :page =&gt; params[:page], :per_page =&gt; 25
+    paginate :page => params[:page], :per_page => 25
     order_by params[:sort].to_sym, :asc
   end
   things.execute!
   t = things.hits.inject([]) { |arr, h| arr.push(h.result); arr }
-  { :results =&gt; t,  
-    :count =&gt; things.total }
+  { :results => t,  
+    :count => things.total }
 end 
 @things = WillPaginate::Collection.create(params[:page], 25, @things[:count]) { |pager| pager.replace(@things[:results]) }
 ```
@@ -104,7 +104,7 @@ end
       with :tag_list, CGI.unescape(params[:tag])
     end
     with :active, true
-    paginate :page =&gt; params[:page], :per_page =&gt; 25
+    paginate :page => params[:page], :per_page => 25
     order_by params[:sort].to_sym, :asc
   end
   things.execute!
@@ -114,8 +114,8 @@ end
 
 ```ruby
   t = things.hits.inject([]) { |arr, h| arr.push(h.result); arr }
-  { :results =&gt; t,  
-    :count =&gt; things.total }
+  { :results => t,  
+    :count => things.total }
 ```
 
 - The tricky part here is building a WillPaginate::Collection object after pulling the cached data, since a WillPaginate object is also not serializable. This needs to know what the current page is, things per page, and total number of things found to correctly build the pagination links, but it doesn't require that you have all the other "things" available:
@@ -129,14 +129,14 @@ end
 My view contains the standard will_paginate reference:
 
 ```nohighlight
-There are &lt;%= pluralize @things.total_entries, 'Thing' %&gt; Total
-&lt;%= will_paginate @things %&gt;
+There are <%= pluralize @things.total_entries, 'Thing' %> Total
+<%= will_paginate @things %>
 ```
 
 And I pass the result set in a partial as a collection to display my listed items:
 
 ```nohighlight
-&lt;%= render :partial =&gt; 'shared/single_thing', :collection =&gt; @things %&gt;
+<%= render :partial => 'shared/single_thing', :collection => @things %>
 ```
 
 ### Sweepers
@@ -144,7 +144,7 @@ And I pass the result set in a partial as a collection to display my listed item
 Another thing to get right here is clearing the low-level cache with Rails sweepers. I have a fairly standard Sweeper setup similar to the one [described here](http://api.rubyonrails.org/classes/ActionController/Caching/Sweeping.html). I utilize two ActiveRecord callbacks (after_save, before_destroy) in my sweeper to clear the cache, shown below.
 
 ```ruby
-class ThingSweeper &lt; ActionController::Caching::Sweeper
+class ThingSweeper < ActionController::Caching::Sweeper
   observe Thing
 
   def after_save(record)

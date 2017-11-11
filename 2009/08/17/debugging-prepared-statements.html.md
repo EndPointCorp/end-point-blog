@@ -56,9 +56,9 @@ Bingo! This time, the new index was *not* being used. This is the great trade-of
 While it's possible to make workarounds at the database level for the problem of prepared statements using the "wrong" plan, in this case it was simply easier to tell the existing script not to use prepared statements at all for this one query. As the script was using [DBD::Pg](http://search.cpan.org/dist/DBD-Pg/), the solution was to simply use the pg_server_prepare attribute like so:
 
 ```perl
-$dbh-&gt;{pg_server_prepare} = 0;
-my $sth = $dbh-&gt;prepare('SELECT DISTINCT id FROM containers WHERE code LIKE ?');
-$dbh-&gt;{pg_server_prepare} = 1;
+$dbh->{pg_server_prepare} = 0;
+my $sth = $dbh->prepare('SELECT DISTINCT id FROM containers WHERE code LIKE ?');
+$dbh->{pg_server_prepare} = 1;
 ```
 
 The effect of this inside of DBD::Pg is that instead of using PQprepare and then PQexecPrepared for each call to $sth->execute(), DBD::Pg will, for every call to $sth->execute(), quote the parameter itself, build a string containing the original SQL statement and the quoted literal, and send it to the backend via PQexec. Normally not something you want to do, but the slight overhead of doing it that way was completely overshadowed by the speedup of using the new index.

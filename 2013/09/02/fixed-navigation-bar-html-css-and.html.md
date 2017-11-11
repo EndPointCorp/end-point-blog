@@ -17,11 +17,11 @@ I recently implemented this functionality for [H2O](http://cyber.law.harvard.edu
 First thing's first, you need the HTML markup for this. The only tricky thing here is that the horizontal bar must be outside of any wrapping dividers on the page that are confining the content to a set width. For example, if your content is limited to 900 pixels in width, the horizontal bar markup must be outside that constraint. Here's what the HTML might look like:
 
 ```html
-&lt;div id="fixed_bar"&gt;
-  &lt;div class="wrapper"&gt;
-    Links &amp; content here.
-  &lt;/div&gt;
-&lt;/div&gt;
+<div id="fixed_bar">
+  <div class="wrapper">
+    Links & content here.
+  </div>
+</div>
 ```
 
 Note that in the above HTML, the "wrapper" div may be constraining the content width to match the remaining content, such as in the example above. This HTML may go at the beginning or end of the page HTML. I prefer to see it at the top of the page HTML. Another note is that other HTML elements may be used in place of the div, but I chose the div above because it defaults to a block element (an element where the CSS display default value is block).Finally, one more note here is that HTML5 elements can be used in place of the div as well (section or nav might make sense) if the site is HTML5 compliant.
@@ -52,7 +52,7 @@ body {
 Here are the important bits of the CSS above:
 
 - The fixed positioning setting is what keeps the bar in one place as the user scrolls up and down (line 7).
-- The body must have margin and padding settings at 0px to ensure that the fixed bar is flush against the top of the screen (line 2 &amp; 3).
+- The body must have margin and padding settings at 0px to ensure that the fixed bar is flush against the top of the screen (line 2 & 3).
 - The fixed bar spans the width of the browser, but in this case, the .wrapper element is constrained to 900 pixels wide (line 14).
 - The default state of the #fixed_bar element is none, which is hidden upon page load (line 9).
 - The background of the #fixed_bar can be a small image with a gradient to transparency, such as in the example above (line 10).
@@ -64,9 +64,9 @@ Finally, after the HTML and CSS markup is good to go, here's what the interactiv
 ```javascript
 var offset = 100; // some offset value for which when the header becomes hidden
 jQuery(window).scroll(function() { //also an option: jQuery .on('scroll') method
-  if(jQuery('#fixed_bar').is(':visible') &amp;&amp; jQuery(window).scrollTop() &lt; offset) {
+  if(jQuery('#fixed_bar').is(':visible') && jQuery(window).scrollTop() < offset) {
     jQuery('#fixed_bar').fadeOut(200);
-  } else if(!jQuery('#fixed_bar').is(':visible') &amp;&amp; jQuery(window).scrollTop() &gt; offset) {
+  } else if(!jQuery('#fixed_bar').is(':visible') && jQuery(window).scrollTop() > offset) {
     jQuery('#fixed_bar').fadeIn(200);
   }
 });
@@ -77,4 +77,4 @@ The jQuery above checks for two scenarios:
 - a) If the #fixed_bar div is visible and the scroll position is less than the offset, fade the #fixed_bar div to a hidden state.
 - b) If the #fixed_bar div is not visible and the scroll position is greater than the offset, fade the #fixed_bar div to a visible state.
 
-These two use cases will toggle the visibility of the fixed bar to a hidden and visible state. With these combined elements of HTML, CSS, and jQuery &amp; JavaScript, a nice user interactivity feature adds to the usability of the site by providing valuable links and content as the user scrolls down the page.
+These two use cases will toggle the visibility of the fixed bar to a hidden and visible state. With these combined elements of HTML, CSS, and jQuery & JavaScript, a nice user interactivity feature adds to the usability of the site by providing valuable links and content as the user scrolls down the page.

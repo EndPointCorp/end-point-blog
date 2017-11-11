@@ -79,21 +79,21 @@ module I18n::Backend
       end
       options.delete(:fallback)
 
-      return super(locale, nil, options.merge(:default =&gt; default)) if default
+      return super(locale, nil, options.merge(:default => default)) if default
 
       # If we get here, then no translation was found.
       Rails.logger.debug red("--- I18n Missing Translation: #{locale}::#{key} ---")
       throw(:exception, I18n::MissingTranslation.new(locale, key, options))
     end
 
-    # Added this method to log the fallback and decorate the text with a &lt;span&gt; tag.
+    # Added this method to log the fallback and decorate the text with a <span> tag.
     def fallback_message(locale, key, fallback_text)
       return nil if fallback_text.nil?
       keys = key.to_s.split(".")
       return fallback_text if keys.first == 'platform_ui'
 
       Rails.logger.debug yellow("--- I18n Fallback: #{locale}::#{key} ---")
-      %(&lt;span class="translation_fallback" title="translation missing: #{locale}, #{key}"&gt;#{fallback_text}&lt;/span&gt;).html_safe
+      %(<span class="translation_fallback" title="translation missing: #{locale}, #{key}">#{fallback_text}</span>).html_safe
     end
 
   end

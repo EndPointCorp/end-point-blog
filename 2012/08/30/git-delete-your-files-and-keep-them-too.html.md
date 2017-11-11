@@ -16,7 +16,7 @@ So: the aim here is to make the stuff vanish from all the other clones (when the
  $ cd stuff
  $ git rm -r --cached .
  $ cd ..
- $ echo "stuff" &gt;&gt;.gitignore
+ $ echo "stuff" >>.gitignore
  $ git commit ...
  $ git push ...
 ```

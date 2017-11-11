@@ -48,7 +48,7 @@ CREATE VIEW
 $ psql -p 5960 vtest -c \
 'create view gregtest as select count(*) from pg_class where reltuples = 0'
 CREATE VIEW
-$ diff -u &lt;(pg_dump vtest -x -p 5920 --schema-only) &lt;(pg_dump vtest -x -p 5960 --schema-only)
+$ diff -u <(pg_dump vtest -x -p 5920 --schema-only) <(pg_dump vtest -x -p 5960 --schema-only)
 
 --- /dev/fd/70          2016-09-29 12:34:56.019700912 -0400
 +++ /dev/fd/72          2016-09-29 12:34:56.019720902 -0400
@@ -163,18 +163,18 @@ argument of 0, both 9.2 and 9.5 output the same thing:
 $ psql vtest -p 5920 -tc "select pg_get_viewdef('gregtest'::regclass, 0)"
   SELECT count(*) AS count                        +
     FROM pg_class                                 +
-   WHERE pg_class.reltuples &gt; 0::double precision;
+   WHERE pg_class.reltuples > 0::double precision;
 
 $ psql vtest -p 5960 -tc "select pg_get_viewdef('gregtest'::regclass, 0)"
   SELECT count(*) AS count                        +
     FROM pg_class                                 +
-   WHERE pg_class.reltuples &gt; 0::double precision;
+   WHERE pg_class.reltuples > 0::double precision;
 ```
 
 This modified version will produce the same schema in our test database:
 
 ```
-$ diff -u &lt;(pg_dump vtest -x -p 5920 --schema-only) &lt;(pg_dump vtest -x -p 5960 --schema-only)
+$ diff -u <(pg_dump vtest -x -p 5920 --schema-only) <(pg_dump vtest -x -p 5960 --schema-only)
 
 --- /dev/fd/80               2016-09-29 12:34:56.019801980 -0400
 +++ /dev/fd/88               2016-09-29 12:34:56.019881988 -0400
@@ -200,7 +200,7 @@ $ createdb -p 5960 vtest92
 
 $ pg_dump vtest -p 5920 | psql -q -p 5960 vtest92
 
-$ diff -s -u &lt;(pg_dump vtest92 -x -p 5960 --schema-only) &lt;(pg_dump vtest -x -p 5960 --schema-only)
+$ diff -s -u <(pg_dump vtest92 -x -p 5960 --schema-only) <(pg_dump vtest -x -p 5960 --schema-only)
 Files /dev/fd/63 and /dev/fd/62 are identical
 ```
 

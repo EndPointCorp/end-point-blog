@@ -20,7 +20,7 @@ We wanted to avoid some unpleasant possibilities: (1) turn off stateful firewall
 Finally, Kiel found [this netfilter mailing list post](http://lists.netfilter.org/pipermail/netfilter/2006-September/066840.html) which describes how to enable a Linux kernel workaround for the mangled packets the Cisco generates:
 
 ```bash
-echo 1 &gt; /proc/sys/net/ipv4/netfilter/ip_conntrack_tcp_be_liberal
+echo 1 > /proc/sys/net/ipv4/netfilter/ip_conntrack_tcp_be_liberal
 ```
 
 Of course saving that in /etc/sysctl.conf so it persists after a reboot.

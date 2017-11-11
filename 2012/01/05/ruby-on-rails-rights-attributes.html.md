@@ -14,7 +14,7 @@ In this data model, right_assignments belong to a single right, and belong to a 
 In our code, there is a simple method for grabbing a user's set of rights:
 
 ```ruby
-  class User &lt; ActiveRecord::Base
+  class User < ActiveRecord::Base
     ...
     def all_rights
       rights = [self.rights +
@@ -31,7 +31,7 @@ In our code, there is a simple method for grabbing a user's set of rights:
 In the case of this data model, groups also have a boolean which specifies whether or not rights can be assigned to them. The allowed_rights method looks like this:
 
 ```ruby
-  class Group &lt; ActiveRecord::Base
+  class Group < ActiveRecord::Base
     ...
     def allowed_rights
       self.assignable_rights ? self.rights : []
@@ -55,7 +55,7 @@ The interesting part of this application is how the rights are used. In Rails, y
   end
 
   # Given an item, with attributes title, description, tags, origin
-  class Item &lt; ActiveRecord::Base
+  class Item < ActiveRecord::Base
     ...
     def custom_save(parameters)
       self.accessible = self.attr_accessible_for(current_user)
@@ -69,7 +69,7 @@ The interesting part of this application is how the rights are used. In Rails, y
       [:tags, :origin].each do |field|
         # check for if user can_set_(tags || origin)
         if current_user.all_rights.include?("can_set_#{field.to_s}")
-          attrs &lt;&lt; field
+          attrs << field
         end
       end
 
@@ -94,18 +94,18 @@ The method above is reused to define which fields are editable to the current us
   end
 
   # view
-  &lt;%= form_for @item do |f| %&gt;
-    &lt;% [:title, :description, :tag, :origin].each do |field| %&gt;
-      &lt;%= f.label field %&gt;
+  <%= form_for @item do |f| %>
+    <% [:title, :description, :tag, :origin].each do |field| %>
+      <%= f.label field %>
 
-      &lt;% if @accessible.include?(field) %&gt;
-        &lt;%= f.text_field %&gt;
-      &lt;% else -%&gt;
-        &lt;%= @item.send(field) %&gt;
-      &lt;% end -%&gt;
+      <% if @accessible.include?(field) %>
+        <%= f.text_field %>
+      <% else -%>
+        <%= @item.send(field) %>
+      <% end -%>
 
-    &lt;% end -%&gt;
-  &lt;% end -%&gt;
+    <% end -%>
+  <% end -%>
 ```
 
 The data model and rights management described in this article isn't novel, but applying it in this fashion is elegant and produces modular and reusable methods. The code shown here has been simplified for this blog post. In reality, there are a few additional complexities:

@@ -41,27 +41,27 @@ The usual output of grep:
 $ # searching inside of the ripgrep repo sources:
 $ egrep -nR Option src
 (...)
-src/search_stream.rs:46:    fn cause(&amp;self) -&gt; Option&lt;&amp;StdError&gt; {
+src/search_stream.rs:46:    fn cause(&self) -> Option<&StdError> {
 src/search_stream.rs:64:    opts: Options,
-src/search_stream.rs:71:    line_count: Option&lt;u64&gt;,
+src/search_stream.rs:71:    line_count: Option<u64>,
 src/search_stream.rs:78:/// Options for configuring search.
 src/search_stream.rs:80:pub struct Options {
-src/search_stream.rs:89:    pub max_count: Option&lt;u64&gt;,
+src/search_stream.rs:89:    pub max_count: Option<u64>,
 src/search_stream.rs:94:impl Default for Options {
-src/search_stream.rs:95:    fn default() -&gt; Options {
+src/search_stream.rs:95:    fn default() -> Options {
 src/search_stream.rs:96:        Options {
 src/search_stream.rs:113:impl Options {
 src/search_stream.rs:160:            opts: Options::default(),
-src/search_stream.rs:236:    pub fn max_count(mut self, count: Option&lt;u64&gt;) -&gt; Self {
-src/search_stream.rs:674:    pub fn next(&amp;mut self, buf: &amp;[u8]) -&gt; Option&lt;(usize, usize)&gt; {
+src/search_stream.rs:236:    pub fn max_count(mut self, count: Option<u64>) -> Self {
+src/search_stream.rs:674:    pub fn next(&mut self, buf: &[u8]) -> Option<(usize, usize)> {
 src/worker.rs:24:    opts: Options,
 src/worker.rs:28:struct Options {
-src/worker.rs:38:    max_count: Option&lt;u64&gt;,
+src/worker.rs:38:    max_count: Option<u64>,
 src/worker.rs:44:impl Default for Options {
-src/worker.rs:45:    fn default() -&gt; Options {
+src/worker.rs:45:    fn default() -> Options {
 src/worker.rs:46:        Options {
 src/worker.rs:72:            opts: Options::default(),
-src/worker.rs:148:    pub fn max_count(mut self, count: Option&lt;u64&gt;) -&gt; Self {
+src/worker.rs:148:    pub fn max_count(mut self, count: Option<u64>) -> Self {
 src/worker.rs:186:    opts: Options,
 (...)
 ```
@@ -72,44 +72,44 @@ What my eyes would like to see is more like the following:
 $ mygrep Option src
 (...)
 src/search_stream.rs:
- 46        fn cause(&amp;self) -&gt; Option&lt;&amp;StdError&gt; {
+ 46        fn cause(&self) -> Option<&StdError> {
  ⁞
  64        opts: Options,
  ⁞
- 71        line_count: Option&lt;u64&gt;,
+ 71        line_count: Option<u64>,
  ⁞
  78    /// Options for configuring search.
  ⁞
  80    pub struct Options {
  ⁞
- 89        pub max_count: Option&lt;u64&gt;,
+ 89        pub max_count: Option<u64>,
  ⁞
  94    impl Default for Options {
- 95        fn default() -&gt; Options {
+ 95        fn default() -> Options {
  96            Options {
  ⁞
  113   impl Options {
  ⁞
  160               opts: Options::default(),
  ⁞
- 236       pub fn max_count(mut self, count: Option&lt;u64&gt;) -&gt; Self {
+ 236       pub fn max_count(mut self, count: Option<u64>) -> Self {
  ⁞
- 674       pub fn next(&amp;mut self, buf: &amp;[u8]) -&gt; Option&lt;(usize, usize)&gt; {
+ 674       pub fn next(&mut self, buf: &[u8]) -> Option<(usize, usize)> {
 
 src/worker.rs:
  24        opts: Options,
  ⁞
  28    struct Options {
  ⁞
- 38        max_count: Option&lt;u64&gt;,
+ 38        max_count: Option<u64>,
  ⁞
  44    impl Default for Options {
- 45        fn default() -&gt; Options {
+ 45        fn default() -> Options {
  46            Options {
  ⁞
  72                opts: Options::default(),
  ⁞
- 148       pub fn max_count(mut self, count: Option&lt;u64&gt;) -&gt; Self {
+ 148       pub fn max_count(mut self, count: Option<u64>) -> Self {
  ⁞
  186       opts: Options,
 (...)
@@ -210,11 +210,11 @@ Armed with this simple knowledge, we can tackle the problem we stated in the ear
 BEGIN {
   # the output of grep in the simple case
   # contains:
-  # &lt;file-name&gt;:&lt;line-number&gt;:&lt;file-fragment&gt;
+  # <file-name>:<line-number>:<file-fragment>
   # let's capture these parts into columns:
   FS=":"
 
-  # we are going to need to "remember" if the &lt;file-name&gt;
+  # we are going to need to "remember" if the <file-name>
   # changes to print it's name and to do that only
   # once per file:
   file=""
@@ -235,11 +235,11 @@ BEGIN {
 !/(--|Binary)/ {
 
   # remember: $1 is the first column which in our case is
-  # the &lt;file-name&gt; part; The file variable is used to
+  # the <file-name> part; The file variable is used to
   # store the file name recently processed; if the ones
   # don't match up - then we know we encountered a new
   # file name:
-  if($1 != file &amp;&amp; $1 != "")
+  if($1 != file && $1 != "")
   {
     file=$1
     print "\n" $1 ":"
@@ -250,7 +250,7 @@ BEGIN {
   # if the line number isn't greater than the last one by
   # one then we're dealing with the result from non-consecutive
   # line; let's mark it with vertical dots:
-  if($2 &gt; ln + 1 &amp;&amp; filestarted != 0)
+  if($2 > ln + 1 && filestarted != 0)
   {
     print "⁞"
   }
@@ -265,14 +265,14 @@ BEGIN {
   out=substr($0, length($1 ":" $2 ": "))
 
   # let's deal with only the lines that make sense:
-  if($2 &gt;= ln &amp;&amp; $2 != "")
+  if($2 >= ln && $2 != "")
   {
     # sprintf function matches the one found in C lang;
     # here we're making sure the line numbers are properly
     # spaced:
     linum=sprintf("%-4s", $2)
 
-    # print &lt;line-number&gt; &lt;found-string&gt;
+    # print <line-number> <found-string>
     print linum " " out
 
     # assign last line number for later use

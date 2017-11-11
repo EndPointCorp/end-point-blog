@@ -19,7 +19,7 @@ It's been about a little over a month since the 2010 Utah Open Source Conference
 
 - There are 120 tables total in default install -- many core features don't use the EAV tables for performance reasons.
 
-- Another observation I've heard in pretty much every conversation about Magento: It is very resource intensive. Shared hosting is not recommended. Virtual servers should have a minimum of 1/2 to 1 GB RAM. Fast disk &amp; database help most. APC cache recommended with at least 128 MB.
+- Another observation I've heard in pretty much every conversation about Magento: It is very resource intensive. Shared hosting is not recommended. Virtual servers should have a minimum of 1/2 to 1 GB RAM. Fast disk & database help most. APC cache recommended with at least 128 MB.
 
 - A lot of front-end things are highly adjustable from simple back-end admin options.
 

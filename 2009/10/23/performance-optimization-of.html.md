@@ -39,13 +39,13 @@ a2enmod deflate
 
 That sets up symbolic links in /etc/apache2/mods-enabled for deflate.load and deflate.conf to enable mod_deflate. (Use a2dismod to remove them if needed.)
 
-I added two content types for CSS &amp; JavaScript to the default in deflate.conf:
+I added two content types for CSS & JavaScript to the default in deflate.conf:
 
 ```nohighlight
 AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css application/x-javascript
 ```
 
-That used to be riskier when very old browsers such as Netscape 3 and 4 claimed to support compressed CSS &amp; JavaScript but actually didn't. But those browsers are long gone.
+That used to be riskier when very old browsers such as Netscape 3 and 4 claimed to support compressed CSS & JavaScript but actually didn't. But those browsers are long gone.
 
 The next easy optimization is to enable proxy and browser caching of static content: images, CSS, and JavaScript files. By doing this we eliminate all HTTP requests for these files; the browser won't even check with the server to see if it has the current version of these files once it has loaded them into its cache, making subsequent use of those files blazingly fast.
 

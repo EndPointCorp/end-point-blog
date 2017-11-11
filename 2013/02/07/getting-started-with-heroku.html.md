@@ -57,4 +57,4 @@ For Heroku it's the Heroku Toolbelt "run" command that triggers all the usual co
 heroku run -a my_heroku_app script/rails console
 ```
 
-That's it! Nice &amp; easy!
+That's it! Nice & easy!

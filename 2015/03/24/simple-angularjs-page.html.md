@@ -19,15 +19,15 @@ Then I wrote a simple html file:
 
 ```html
 
-    &lt;html&gt;
-      &lt;head&gt;
+    <html>
+      <head>
         <script src="angular.min.js"></script>
         <script src="underscore-min.js"></script>
         <script src="github.js"></script>
         <script src="jscode.js"></script>
-      &lt;/head&gt;
+      </head>
 
-      &lt;body ng-app="githubChecker"&gt;
+      <body ng-app="githubChecker">
         <div ng-controller="mainController">
           <h3>Github Notifications</h3>
           <div ng-repeat="n in notifications">
@@ -36,8 +36,8 @@ Then I wrote a simple html file:
             </div>
           </div>
         </div>
-      &lt;/body&gt;
-    &lt;/html&gt;
+      </body>
+    </html>
 ```
 
 This is the basic structure. Now we need to have some angular code to ask Github for the notifications and fill that into the above html.

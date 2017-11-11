@@ -42,7 +42,7 @@ This subtle difference will be the key in the example I'm going to show later on
 The intersection of two sets are the elements that are common in both, and like the other set operators, it removes duplicates. To perform an intersection you use the ampersand method as an operator.
 
 ```ruby
-[1, 1, 3, 5] &amp; [1, 2, 3]   #=> [ 1, 3 ]
+[1, 1, 3, 5] & [1, 2, 3]   #=> [ 1, 3 ]
 ```
 
 #### A Practical Use Case

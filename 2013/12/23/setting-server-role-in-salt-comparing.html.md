@@ -16,7 +16,7 @@ In Puppet, once a server's "role" and "environment" variables were set, then the
 ```
     file    {
         "/etc/rsyslog.conf":
-            source  =&gt;
+            source  =>
             [
                 "puppet:///rsyslog/rsyslog.conf.$hostname",
                 "puppet:///rsyslog/rsyslog.conf.$system_environment-$system_role",
@@ -24,10 +24,10 @@ In Puppet, once a server's "role" and "environment" variables were set, then the
                 "puppet:///rsyslog/rsyslog.conf.$system_environment",
                 "puppet:///rsyslog/rsyslog.conf"
             ],
-            ensure  =&gt; present,
-            owner   =&gt; "root",
-            group   =&gt; "root",
-            mode    =&gt; "644"
+            ensure  => present,
+            owner   => "root",
+            group   => "root",
+            mode    => "644"
     }
 ```
 

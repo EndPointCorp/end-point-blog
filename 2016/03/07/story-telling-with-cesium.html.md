@@ -117,13 +117,13 @@ var layersHash = {
 }
 
 APP.setAlpha = function(layer, alpha) {
-    if(layersHash[layer] &amp;&amp; layersHash[layer].alpha !== undefined) {
+    if(layersHash[layer] && layersHash[layer].alpha !== undefined) {
         layersHash[layer].alpha = alpha;
     }
 };
 
 APP.show = function(layer) {
-    if(layersHash[layer] &amp;&amp; layers.indexOf(layersHash[layer]) < 0) {
+    if(layersHash[layer] && layers.indexOf(layersHash[layer]) < 0) {
         layers.add(layersHash[layer]);
     }
 };
@@ -142,11 +142,11 @@ For the GUI I've added a big slider for the timeline, small sliders for layer op
 ```js
 $scope.$watch('slider.value', function() {
     var v = $scope.slider.options.stepsArray[$scope.slider.value];
-    if (v >= 1723 &amp;&amp; v <= 1830) {
+    if (v >= 1723 && v <= 1830) {
         $scope.menu.layers[0].active = true;
         $scope.menu.layers[1].active = false;
     }
-    if (v > 1830 &amp;&amp; v < 1980) {
+    if (v > 1830 && v < 1980) {
         $scope.menu.layers[0].active = false;
         $scope.menu.layers[1].active = true;
     }
@@ -161,10 +161,10 @@ $scope.$watch('slider.value', function() {
 $scope.updateLayers = function() {
     for (var i = 0; i < $scope.menu.layers.length; i++) {
         if ($scope.menu.layers[i].active ) {
-            APP.show &amp;&amp; APP.show($scope.menu.layers[i].name);
+            APP.show && APP.show($scope.menu.layers[i].name);
         }
         else {
-            APP.hide &amp;&amp; APP.hide($scope.menu.layers[i].name);
+            APP.hide && APP.hide($scope.menu.layers[i].name);
         }
     }
 };
@@ -206,7 +206,7 @@ APP.filterEtityByY = function(y) {
         if(entityByName.hasOwnProperty(k)) {
             var s = entityByName[k].since;
             var t = entityByName[k].to;
-            entityByName[k].entity.show = (y >= s &amp;&amp; y <= t);
+            entityByName[k].entity.show = (y >= s && y <= t);
         }
     }
 };
@@ -217,7 +217,7 @@ var distanceMeters = 500;
 var enityHeading = new Cesium.HeadingPitchRange(heading, pitch, distanceMeters);
 
 APP.zoomToEntity = function(name) {
-    if(name &amp;&amp; entityByName[name]) {
+    if(name && entityByName[name]) {
         viewer.zoomTo(entityByName[name].entity, enityHeading);
     }
 };

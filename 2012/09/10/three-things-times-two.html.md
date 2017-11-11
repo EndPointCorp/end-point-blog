@@ -38,8 +38,8 @@ I recently had a need on a Rails application to force some pages as secure, but 
 
 ```ruby
 config.middleware.use Rack::SslEnforcer,
-        :only =&gt; [/\/checkout\/$/, /\/users$/, ‘/admin’],
-        :strict =&gt; true
+        :only => [/\/checkout\/$/, /\/users$/, ‘/admin’],
+        :strict => true
 ```
 
 The one interesting caveat I found in working with this is that you absolutely must have all CSS and JavaScript assets precompiled in order for them to be served via SSL. The JS and CSS assets would not be forced to SSL, so they must exist in the Rails public directory via the precompiling, or this gem will redirect https requests on a secure page to http, resulting in the browser reporting that some non-secure elements are being served from a secure page.

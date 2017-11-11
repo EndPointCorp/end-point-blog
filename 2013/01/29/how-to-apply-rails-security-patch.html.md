@@ -17,7 +17,7 @@ The CVE-2013-0333 patches so kindly released by [Michael Koziarski](https://twit
 cd $RAILS_FORK_PATH
 git checkout $RAILS_VERSION
 # Download attachment from announcement in browser, sorry no wget!
-git am &lt; $CVE.patch
+git am < $CVE.patch
 ```
 
 You should see the newly committed patch(es) at the HEAD of your branch. Push out to GitHub and then bundle update rails on your servers.
@@ -50,13 +50,13 @@ Now that we know where the installed gems are, we need to get our patch and appl
 ```bash
 cd /home/$USER/.rvm/gems/ree-1.8.7-2012.0/gems/activesupport-2.3.15
 # Download attachment from announcement in browser, sorry no wget!
-patch -p2 &lt; $CVE.patch
+patch -p2 < $CVE.patch
 ```
 
 Often times these patches will include changes to tests which are not included in the ActiveSupport gem installations. You may get an error like this while patching CVE-2013-0333:
 
 ```bash
-patch -p2 &lt; cve-2013-0333.patch                                                 
+patch -p2 < cve-2013-0333.patch                                                 
 patching file lib/active_support/json/backends/okjson.rb
 patching file lib/active_support/json/backends/yaml.rb
 patching file lib/active_support/json/decoding.rb
@@ -85,13 +85,13 @@ When doing any kind of security patching it is essential that you have confidenc
 # Before applying patch
 script/console
 Loading development environment (Rails 2.3.15)
-&gt;&gt; ActiveSupport::JSON::DECODERS
-=&gt; ["Yajl", "Yaml"]
+>> ActiveSupport::JSON::DECODERS
+=> ["Yajl", "Yaml"]
 
 # After applying patch
 script/console
 Loading development environment (Rails 2.3.15)
-&gt;&gt; ActiveSupport::JSON::DECODERS
-=&gt; ["Yajl", "OkJson"]
+>> ActiveSupport::JSON::DECODERS
+=> ["Yajl", "OkJson"]
 ```
 

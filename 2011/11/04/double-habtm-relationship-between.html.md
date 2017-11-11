@@ -20,7 +20,7 @@ First, let's look at the data model and discuss the business case for the data m
 The groups_users relationship is a standard has and belongs to many relationship. The User class defines its relationship to groups:
 
 ```ruby
-class User &lt; ActiveRecord::Base
+class User < ActiveRecord::Base
   ....
   has_and_belongs_to_many :groups
   ...
@@ -30,7 +30,7 @@ end
 And the Group class defines it's relationship to users:
 
 ```ruby
-class Group &lt; ActiveRecord::Base
+class Group < ActiveRecord::Base
   ...
   has_and_belongs_to_many :users
   ...
@@ -40,9 +40,9 @@ end
 Rails makes it fairly easy to define has_and_belongs_to_many associations and override the join table, class name, and foreign key, which is applicable to the groups_owners relationship. Here, the User class defines it's relationship to owned_groups, and specifies the join_table, class name, and foreign key:
 
 ```ruby
-class User &lt; ActiveRecord::Base
+class User < ActiveRecord::Base
   ....
-  has_and_belongs_to_many :owned_groups, :class_name =&gt; "Group", :join_table =&gt; "groups_owners", :foreign_key =&gt; "owner_id"
+  has_and_belongs_to_many :owned_groups, :class_name => "Group", :join_table => "groups_owners", :foreign_key => "owner_id"
   ...
 end
 ```
@@ -50,9 +50,9 @@ end
 And the Group model has similar overrides (except in this case, we override the association foreign key):
 
 ```ruby
-class Group &lt; ActiveRecord::Base
+class Group < ActiveRecord::Base
   ..
-  has_and_belongs_to_many :owners, :association_foreign_key =&gt; "owner_id", :join_table =&gt; "groups_owners", :class_name =&gt; "User"
+  has_and_belongs_to_many :owners, :association_foreign_key => "owner_id", :join_table => "groups_owners", :class_name => "User"
   ..
 end
 ```
@@ -64,7 +64,7 @@ And that's how to define the has and belong to many relationship between two of 
 Here I've also created a couple of instance methods on the Group and User model to make it easy to pull the aggregate of owners and users (Group) and owned_groups and groups (User):
 
 ```ruby
-class User &lt; ActiveRecord::Base
+class User < ActiveRecord::Base
   ...
   def all_groups
     (self.groups + self.owned_groups).uniq
@@ -76,7 +76,7 @@ end
 And:
 
 ```ruby
-class Group &lt; ActiveRecord::Base
+class Group < ActiveRecord::Base
   ...
   def all_members
     (self.owners + self.users).uniq

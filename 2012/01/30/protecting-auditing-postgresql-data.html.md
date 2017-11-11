@@ -30,14 +30,14 @@ Stepping back for one second, we can see there are actually two problems here: r
 Let's assume we have a table with some Very Important Data inside of it. Further, let's establish that regular users can only see some of that data, and that we need to know who asked for what data, and when. For this example, we will create a normal user named Alice:
 
 ```sql
-postgres=&gt; CREATE USER alice;
+postgres=> CREATE USER alice;
 CREATE ROLE
 ```
 
 We need a way to tell which rows are suitable for people like Alice to view. We will set up a quick classification scheme using the nifty [ENUM feature](http://www.postgresql.org/docs/9.1/static/datatype-enum.html) of PostgreSQL:
 
 ```sql
-postgres=&gt; CREATE TYPE classification AS ENUM (
+postgres=> CREATE TYPE classification AS ENUM (
  'unclassified',
  'restricted',
  'confidential',
@@ -50,7 +50,7 @@ CREATE TYPE
 Next, as a superuser, we create the table containing sensitive information, and populate it:
 
 ```sql
-postgres=&gt; CREATE TABLE weapon (
+postgres=> CREATE TABLE weapon (
   id              SERIAL          PRIMARY KEY,
   name            TEXT            NOT NULL,
   cost            TEXT            NOT NULL,
@@ -61,7 +61,7 @@ NOTICE:  CREATE TABLE will create implicit sequence "weapon_id_seq" for serial c
 NOTICE:  CREATE TABLE / PRIMARY KEY will create implicit index "weapon_pkey" for table "weapon"
 CREATE TABLE
 
-postgres=&gt; INSERT INTO weapon (name,cost,security_level) VALUES
+postgres=> INSERT INTO weapon (name,cost,security_level) VALUES
  ('Crowbar',  10,  'unclassified'),
  ('M9',  200,  'restricted'),
  ('M16A2',  300,  'restricted'),
@@ -75,16 +75,16 @@ INSERT 0 7
 We don't want anyone but ourselves to be able to access this table, so for safety, we make some explicit revocations. We'll examine the permissions before and after we do this:
 
 ```sql
-postgres=&gt; \dp weapon
+postgres=> \dp weapon
                           Access privileges
  Schema |  Name  | Type  | Access privileges | Column access privileges 
 --------+--------+-------+-------------------+--------------------------
  public | weapon | table |                   | 
 
-postgres=&gt; REVOKE ALL ON TABLE weapon FROM public;
+postgres=> REVOKE ALL ON TABLE weapon FROM public;
 REVOKE
 
-postgres=&gt; \dp weapon
+postgres=> \dp weapon
                                Access privileges
  Schema |  Name  | Type  |     Access privileges     | Column access privileges 
 --------+--------+-------+---------------------------+--------------------------
@@ -94,21 +94,21 @@ postgres=&gt; \dp weapon
 As you can see, what the REVOKE really does is remove the implicit "no permission" and grant explicit permissions to only the postgres user to view or modify the table. Let's confirm that Alice cannot do anything with that table:
 
 ```sql
-postgres=&gt; \c postgres alice
+postgres=> \c postgres alice
 You are now connected to database "postgres" as user "alice".
-postgres=&gt; postgres=&gt; SELECT * FROM weapon;
+postgres=> postgres=> SELECT * FROM weapon;
 ERROR:  permission denied for relation weapon
-postgres=&gt; postgres=&gt; UPDATE weapon SET id = id;
+postgres=> postgres=> UPDATE weapon SET id = id;
 ERROR:  permission denied for relation weapon
 ```
 
 Alice does need to have access to parts of this table, so we will create a "wrapper function" that will query the table for us and return some results. By declaring this function as SECURITY DEFINER, it will run as if the person who created the function invoked it  - in this case, the postgres user. For this example, we'll be letting Alice see the "cost and description" of exactly one item at a time. Further, we are not going to let her (or anyone else using this function) view certain items. Only those items classified as "confidential" or lower can be viewed (i.e. "confidential", "restricted", or "unclassified"). Here's the first version of our function:
 
 ```sql
-postgres=&gt; CREATE LANGUAGE plperlu;
+postgres=> CREATE LANGUAGE plperlu;
 CREATE LANGUAGE
 
-postgres=&gt; CREATE OR REPLACE FUNCTION weapon_details(TEXT)
+postgres=> CREATE OR REPLACE FUNCTION weapon_details(TEXT)
 RETURNS TABLE (name TEXT, cost TEXT, description TEXT)
 LANGUAGE plperlu
 SECURITY DEFINER
@@ -131,18 +131,18 @@ my $seclevel = 'confidential';
 ## by comparing a passed-in level to the security_level for that row.
 my $SQL = q{
 SELECT name,cost,description,
-  CASE WHEN security_level &lt;= $1 THEN 1 ELSE 0 END AS allowed
+  CASE WHEN security_level <= $1 THEN 1 ELSE 0 END AS allowed
 FROM weapon
 WHERE LOWER(name) = $2};
 
 ## Run the query, pull back the first row, as well as the allowed column value
 my $sth = spi_prepare($SQL, 'CLASSIFICATION', 'TEXT');
 my $rv = spi_exec_prepared($sth, $seclevel, $name);
-my $row = $rv-&gt;{rows}[0];
-my $allowed = delete $row-&gt;{allowed};
+my $row = $rv->{rows}[0];
+my $allowed = delete $row->{allowed};
 
 ## Did we find anything? If not, simply return undef
-if (! $rv-&gt;{processed}) {
+if (! $rv->{processed}) {
    return undef;
 }
 
@@ -161,21 +161,21 @@ CREATE FUNCTION
 The above should be fairly self-explanatory. We are using PL/Perl's [built-in database access functions](http://www.postgresql.org/docs/9.1/static/plperl-builtins.html), such as spi_prepare, to do the actual querying. Let's confirm that this works as it should for Alice:
 
 ```sql
-postgres=&gt; \c postgres alice
+postgres=> \c postgres alice
 You are now connected to database "postgres" as user "alice".
 
-postgres=&gt; SELECT * FROM weapon_details('crowbar');
+postgres=> SELECT * FROM weapon_details('crowbar');
   name   | cost |  description  
 ---------+------+---------------
  Crowbar | 10   | a fine weapon
 (1 row)
 
-postgres=&gt; SELECT * FROM weapon_details('anvil');
+postgres=> SELECT * FROM weapon_details('anvil');
  name | cost | description 
 ------+------+-------------
 (0 rows)
 
-postgres=&gt; SELECT * FROM weapon_details('pulse rifle');
+postgres=> SELECT * FROM weapon_details('pulse rifle');
 ERROR:  Sorry, you are not allowed to view information on that weapon!
 CONTEXT:  PL/Perl function "weapon_details"
 ```
@@ -183,7 +183,7 @@ CONTEXT:  PL/Perl function "weapon_details"
 Now that we have solved the restricted access problem, let's move on the auditing. We will create a simple table to hold information about who accessed what and when:
 
 ```sql
-postgres=&gt; CREATE TABLE data_audit (
+postgres=> CREATE TABLE data_audit (
   tablename TEXT         NOT NULL,
   arguments TEXT             NULL,
   results   INTEGER          NULL,
@@ -198,7 +198,7 @@ CREATE TABLE
 The 'tablename' column simply records which table they are getting data from. The 'arguments' is a free-form field describing what they were looking for. The 'results' column shows how many matching rows were found. The 'status' column will be used primarily to log unusual requests, such as the case where Alice looks for a forbidden item. The 'username' column records the name of the user doing the searching. Because we are using functions with SECURITY DEFINER set, this needs to be session_user, not current_user, as the latter will switch to 'postgres' within the function, and we want to log the real caller (e.g. 'alice'). The final two columns tell us then the current transaction started, and the exact time when an entry was made inside of this table. As a first attempt, we'll have our function do some simple inserts to this new data_audit table:
 
 ```sql
-postgres=&gt; CREATE OR REPLACE FUNCTION weapon_details(TEXT)
+postgres=> CREATE OR REPLACE FUNCTION weapon_details(TEXT)
 RETURNS TABLE (name TEXT, cost TEXT, description TEXT)
 LANGUAGE plperlu
 SECURITY DEFINER
@@ -221,25 +221,25 @@ my $seclevel = 'confidential';
 ## by comparing a passed-in level to the security_level for that row.
 my $SQL = q{
 SELECT name,cost,description,
-  CASE WHEN security_level &lt;= $1 THEN 1 ELSE 0 END AS allowed
+  CASE WHEN security_level <= $1 THEN 1 ELSE 0 END AS allowed
 FROM weapon
 WHERE LOWER(name) = $2};
 
 ## Run the query, pull back the first row, as well as the allowed column value
 my $sth = spi_prepare($SQL, 'CLASSIFICATION', 'TEXT');
 my $rv = spi_exec_prepared($sth, $seclevel, $name);
-my $row = $rv-&gt;{rows}[0];
-my $allowed = delete $row-&gt;{allowed};
+my $row = $rv->{rows}[0];
+my $allowed = delete $row->{allowed};
 
 ## Log this request
 $SQL = 'INSERT INTO data_audit(tablename,arguments,results,status)
   VALUES ($1,$2,$3,$4)';
-my $status = $rv-&gt;{rows}[0] ? $allowed ? 'normal' : 'forbidden' : 'na';
+my $status = $rv->{rows}[0] ? $allowed ? 'normal' : 'forbidden' : 'na';
 $sth = spi_prepare($SQL, 'TEXT', 'TEXT', 'INTEGER', 'TEXT');
-spi_exec_prepared($sth, 'weapon', $name, $rv-&gt;{processed}, $status);
+spi_exec_prepared($sth, 'weapon', $name, $rv->{processed}, $status);
 
 ## Did we find anything? If not, simply return undef
-if (! $rv-&gt;{processed}) {
+if (! $rv->{processed}) {
    return undef;
 }
 
@@ -257,32 +257,32 @@ $bc$;
 However, this fails the case pointed out in the original poster's email about viewing the data within a transaction that is then rolled back. It also fails to work at all when a forbidden item is requested, as that insert is rolled back by the die() call:
 
 ```sql
-postgres=&gt; \c postgres alice
+postgres=> \c postgres alice
 You are now connected to database "postgres" as user "alice".
 
-postgres=&gt; SELECT * FROM weapon_details('crowbar');
+postgres=> SELECT * FROM weapon_details('crowbar');
   name   | cost |  description  
 ---------+------+---------------
  Crowbar | 10   | a fine weapon
 (1 row)
 
-postgres=&gt; SELECT * FROM weapon_details('pulse rifle');
+postgres=> SELECT * FROM weapon_details('pulse rifle');
 ERROR:  Sorry, you are not allowed to view information on that weapon!
 CONTEXT:  PL/Perl function "weapon_details"
 
-postgres=&gt; BEGIN;
+postgres=> BEGIN;
 BEGIN
-postgres=&gt; SELECT * FROM weapon_details('m9');
+postgres=> SELECT * FROM weapon_details('m9');
  name | cost |  description  
 ------+------+---------------
  M9   | 200  | a fine weapon
 (1 row)
-postgres=&gt; ROLLBACK;
+postgres=> ROLLBACK;
 ROLLBACK
 
-postgres=&gt; \c postgres postgres
+postgres=> \c postgres postgres
 You are now connected to database "postgres" as user "postgres".
-postgres=&gt; SELECT * FROM data_audit \x \g
+postgres=> SELECT * FROM data_audit \x \g
 Expanded display is on.
 -[ RECORD 1 ]----------------------------
 tablename | weapon
@@ -297,7 +297,7 @@ realtime  | 2012-01-30 17:37:39.545891-05
 How do we get around this? We need a way to commit something that will survive the surrounding transaction's rollback. The closest thing Postgres has to such a thing at the moment is to connect back to the database with a new and entirely separate connection. Two such popular ways to do so are with [the dblink program](http://www.postgresql.org/docs/9.1/static/dblink.html) and [the PL/PerlU language](http://www.postgresql.org/docs/9.1/static/plperl.html). Obviously, we are going to focus on the latter, but all of this could be done with dblink as well. Here are the additional steps to connect back to the database, do the insert, and then leave again:
 
 ```sql
-postgres=&gt; CREATE OR REPLACE FUNCTION weapon_details(TEXT)
+postgres=> CREATE OR REPLACE FUNCTION weapon_details(TEXT)
 RETURNS TABLE (name TEXT, cost TEXT, description TEXT)
 LANGUAGE plperlu
 SECURITY DEFINER
@@ -308,7 +308,7 @@ AS $bc$
 ```perl
 use strict;
 use warnings;
-&gt;use DBI;
+>use DBI;
 
 ## The item they are looking for
 my $name = shift;
@@ -324,29 +324,29 @@ my $seclevel = 'confidential';
 ## by comparing a passed-in level to the security_level for that row.
 my $SQL = q{
 SELECT name,cost,description,
-  CASE WHEN security_level &lt;= $1 THEN 1 ELSE 0 END AS allowed
+  CASE WHEN security_level <= $1 THEN 1 ELSE 0 END AS allowed
 FROM weapon
 WHERE LOWER(name) = $2};
 
 ## Run the query, pull back the first row, as well as the allowed column value
 my $sth = spi_prepare($SQL, 'CLASSIFICATION', 'TEXT');
 my $rv = spi_exec_prepared($sth, $seclevel, $name);
-my $row = $rv-&gt;{rows}[0];
-my $allowed = defined $row ? delete $row-&gt;{allowed} : 1;
+my $row = $rv->{rows}[0];
+my $allowed = defined $row ? delete $row->{allowed} : 1;
 
 ## Log this request
 $SQL = 'INSERT INTO data_audit(username,tablename,arguments,results,status)
   VALUES (?,?,?,?,?)';
-my $status = $rv-&gt;{rows}[0] ? $allowed ? 'normal' : 'forbidden' : 'na';
-my $dbh = DBI-&gt;connect('dbi:Pg:service=auditor', '', '',
-  {AutoCommit=&gt;0, RaiseError=&gt;1, PrintError=&gt;0});
-$sth = $dbh-&gt;prepare($SQL);
-my $user = spi_exec_query('SELECT session_user')-&gt;{rows}[0]{session_user};
-$sth-&gt;execute($user, 'weapon', $name, $rv-&gt;{processed}, $status);
-$dbh-&gt;commit();
+my $status = $rv->{rows}[0] ? $allowed ? 'normal' : 'forbidden' : 'na';
+my $dbh = DBI->connect('dbi:Pg:service=auditor', '', '',
+  {AutoCommit=>0, RaiseError=>1, PrintError=>0});
+$sth = $dbh->prepare($SQL);
+my $user = spi_exec_query('SELECT session_user')->{rows}[0]{session_user};
+$sth->execute($user, 'weapon', $name, $rv->{processed}, $status);
+$dbh->commit();
 
 ## Did we find anything? If not, simply return undef
-if (! $rv-&gt;{processed}) {
+if (! $rv->{processed}) {
    return undef;
 }
 
@@ -367,7 +367,7 @@ Note that because we are making external changes, we marked the function as VOLA
 Once this new function is in place, and we re-run the same queries as we did before, we see three entries in our audit table:
 
 ```sql
-postgres=&gt; \c postgres postgres
+postgres=> \c postgres postgres
 You are now connected to database "postgres" as user "postgres".
 Expanded display is on.
 -[ RECORD 1 ]----------------------------
@@ -399,10 +399,10 @@ realtime  | 2012-01-30 17:56:01.574989-05
 So that's the basic premise of how to solve the auditing problem. For an actual production script, you would probably want to cache the database connection by sticking things inside of the special [%_SHARED hash available to PL/Perl and Pl/PerlU](http://www.postgresql.org/docs/9.1/static/plperl-global.html). Note that each user gets their own version of that hash, so Alice will not be able to create a function and have access to the same %_SHARED hash that the postgres user has access to. It's probably a good idea to simply not let users like Alice use the language at all. Indeed, that's the default when we do the CREATE LANGUAGE call as above:
 
 ```sql
-postgres=&gt;  \c postgres alice
+postgres=>  \c postgres alice
 You are now connected to database "postgres" as user "alice".
 
-postgres=&gt; CREATE FUNCTION showplatform()
+postgres=> CREATE FUNCTION showplatform()
 RETURNS TEXT
 LANGUAGE plperlu
 AS $bc$

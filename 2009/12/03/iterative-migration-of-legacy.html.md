@@ -44,11 +44,11 @@ After these steps, you have CakePHP fronting your legacy app, but otherwise not 
   ~~~php
     function includeLegacyPage($path = null) {
         // map the path passed in or from the request to the legacy/ subdirectory
-        $cakeRequestPath = $path ? $path : $this-&gt;controller-&gt;params['url']['url'];
+        $cakeRequestPath = $path ? $path : $this->controller->params['url']['url'];
         $path = WWW_ROOT . 'legacy/' . $cakeRequestPath;
 
         // This just maps input arguments to globals
-        $this-&gt;prepareGlobals(array('cakeRequestPath' =&gt; $cakeRequestPath));
+        $this->prepareGlobals(array('cakeRequestPath' => $cakeRequestPath));
 
         // Resolve directories to an index.php page as necessary
         if (is_dir($path)) {
@@ -58,7 +58,7 @@ After these steps, you have CakePHP fronting your legacy app, but otherwise not 
         }
 
         if (!file_exists($path)) {
-            $this-&gt;controller-&gt;render('error');
+            $this->controller->render('error');
         }
 
         try {
@@ -69,21 +69,21 @@ After these steps, you have CakePHP fronting your legacy app, but otherwise not 
             include $path;
 
             // pull in the buffered content
-            $this-&gt;controller-&gt;output = ob_get_contents();
+            $this->controller->output = ob_get_contents();
 
             // stop output buffering
             ob_end_clean();
         } catch (JackExceptionRedirect $e) {
             // We adjusted the legacy app's redirect functions to throw a custom exception
             // class that we catch here, so we can use CakePHP's native redirection
-            $this-&gt;controller-&gt;redirect($e-&gt;location, $e-&gt;getCode(), false);
+            $this->controller->redirect($e->location, $e->getCode(), false);
         } catch (Exception $e) {
             // All other errors propagate up
             throw $e;
         }
 
-        $this-&gt;controller-&gt;autoRender = false;
-        $this-&gt;controller-&gt;autoLayout = false;
+        $this->controller->autoRender = false;
+        $this->controller->autoLayout = false;
     }
 
 ```
@@ -100,11 +100,11 @@ For instance:
   ~~~php
         App::import('ConnectionManager');
         $standard_globals = array(
-            'cakeDbh'       =&gt; ConnectionManager::getDataSource('default')-&gt;connection,
-            'cakeSession'   =&gt; $this-&gt;Session
+            'cakeDbh'       => ConnectionManager::getDataSource('default')->connection,
+            'cakeSession'   => $this->Session
         );
 
-        $this-&gt;prepareGlobals($standard_globals);
+        $this->prepareGlobals($standard_globals);
 
 ```
 

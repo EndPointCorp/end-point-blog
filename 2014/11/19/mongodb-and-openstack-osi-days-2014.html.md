@@ -11,7 +11,7 @@ The 11th edition of Open Source India, 2014 was held at Bengaluru, India. The tw
 
 ## In-depth look at Architecting and Building solutions using MongoDB
 
-Aveekshith Bushan &amp; Ranga Sarvabhouman from MongoDB started off the session with a comparison of the hardware cost involved with storage systems in earlier and recent days. In earlier days, the cost of storage hardware was very expensive, so the approach was to filter the data to reduce the size before storing into the database. So we were able to generate results from filtered data and we didn’t have option to process the source data. After the storage became cheap, we can now store the raw data and then we do all our filter/processing and then distribute it.
+Aveekshith Bushan & Ranga Sarvabhouman from MongoDB started off the session with a comparison of the hardware cost involved with storage systems in earlier and recent days. In earlier days, the cost of storage hardware was very expensive, so the approach was to filter the data to reduce the size before storing into the database. So we were able to generate results from filtered data and we didn’t have option to process the source data. After the storage became cheap, we can now store the raw data and then we do all our filter/processing and then distribute it.
 
 Earlier,
 

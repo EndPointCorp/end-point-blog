@@ -53,9 +53,9 @@ This is actually a fairly tricky task, as it turns out the patch files are gener
 
 ```
 ## The -f42 may change from version to version
-$ diff -s &lt;(grep diff patchfile | cut -d' ' -f42 | cut -d/ -f2- | sort) &lt;( grep diff gitfile | cut -d' ' -f4 | cut -d/ -f2- | sort)
+$ diff -s <(grep diff patchfile | cut -d' ' -f42 | cut -d/ -f2- | sort) <( grep diff gitfile | cut -d' ' -f4 | cut -d/ -f2- | sort)
 Files /dev/fd/63 and /dev/fd/62 are identical
-$ grep diff patchfile | cut -d' ' -f24 | cut -d/ -f2- | grep -v RELEASE | xargs -L1 git diff 1.23.4 1.23.5 &gt; gitfile2
+$ grep diff patchfile | cut -d' ' -f24 | cut -d/ -f2- | grep -v RELEASE | xargs -L1 git diff 1.23.4 1.23.5 > gitfile2
 $ diff -b patchfile gitfile2
 ```
 
@@ -63,7 +63,7 @@ Okay, we have verified that the patch looks sane. The next step is to make sure 
 
 ```
 $ cd /your/wiki/directory
-$ echo -ne "images/\ncache/\n" &gt; .gitignore
+$ echo -ne "images/\ncache/\n" > .gitignore
 $ git init
 $ git add .
 $ git commit -a -q -m "Initial import of our MediaWiki directory"

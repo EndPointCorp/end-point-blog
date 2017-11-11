@@ -96,13 +96,13 @@ In this scenario, I've chosen to use open-uri to request existing files from a U
 
 ```ruby
 self.class.file_fields.each do |key|
-  if map[key] &amp;&amp; !row[map[key]].nil?
+  if map[key] && !row[map[key]].nil?
     begin
       row[map[key]] = row[map[key]].gsub(/\s+/, "")
       format = row[map[key]].match(/[a-z0-9]+$/)
-      open("#{Rails.root}/tmp/uploads/#{self.permalink}.#{format}", 'wb') { |file| file &lt;&lt; open(row[map[key]]).read }
+      open("#{Rails.root}/tmp/uploads/#{self.permalink}.#{format}", 'wb') { |file| file << open(row[map[key]]).read }
       self.send("#{key}=", File.open("#{Rails.root}/tmp/uploads/#{self.permalink}.#{format}"))
-    rescue Exception =&gt; e
+    rescue Exception => e
       self.errors.add(:base, "Import error: #{e.inspect}")
     end
   end

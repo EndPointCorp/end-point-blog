@@ -64,19 +64,19 @@ TypeError                                 Traceback (most recent call last)
 /Users/kannan/playground/date.py in <module>()
       3 
       4 print "Current date and time: " , datetime.datetime.now()
-----&gt; 5 print "Or like this: " ,datetime.datetime.strftime("%y-%m-%d-%H-%M")
+----> 5 print "Or like this: " ,datetime.datetime.strftime("%y-%m-%d-%H-%M")
       6 print "Week number of the year: ", datetime.date.today().strftime("%W")
       7 print "Weekday of the week: ", datetime.date.today().strftime("%w")
 
 TypeError: descriptor 'strftime' requires a 'datetime.date' object but received a 'str'
 
 In [16]: %debug
-&gt; /Users/kannan/playground/date.py(5)<module>()
+> /Users/kannan/playground/date.py(5)<module>()
       4 print "Current date and time: " , datetime.datetime.now()
-----&gt; 5 print "Or like this: " ,datetime.datetime.strftime("%y-%m-%d-%H-%M")
+----> 5 print "Or like this: " ,datetime.datetime.strftime("%y-%m-%d-%H-%M")
       6 print "Week number of the year: ", datetime.date.today().strftime("%W")
 
-ipdb&gt;
+ipdb>
 </module></module>
 ```
 I made a error in the line number 5, it should have to look like this. So %debug command took me into the Python debugger. 

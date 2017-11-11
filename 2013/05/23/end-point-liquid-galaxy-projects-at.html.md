@@ -13,7 +13,7 @@ We sent two of our rock stars to the show, Kiel and Matt.  This year both Liquid
 
 - WebGL Skydiving Game: In support of the creative agency [Instrument](http://weareinstrument.com/), Matt provided expert consulting leading up to the show on the Liquid-Galaxy-enabling of the WebGL game demo Instrument developed that allows people to “skydive” down thru a series of rings suspended in mid-air.  Maybe it’s just better to show the game:
 
-<object height="315" width="560"><param name="movie" value="http://www.youtube.com/v/FghhA-hLBg8?hl=en_US&amp;version=3"/><param name="allowFullScreen" value="true"/><param name="allowscriptaccess" value="always"/><embed allowfullscreen="true" allowscriptaccess="always" height="315" src="http://www.youtube.com/v/FghhA-hLBg8?hl=en_US&amp;version=3" type="application/x-shockwave-flash" width="560"/></object>
+<object height="315" width="560"><param name="movie" value="http://www.youtube.com/v/FghhA-hLBg8?hl=en_US&version=3"/><param name="allowFullScreen" value="true"/><param name="allowscriptaccess" value="always"/><embed allowfullscreen="true" allowscriptaccess="always" height="315" src="http://www.youtube.com/v/FghhA-hLBg8?hl=en_US&version=3" type="application/x-shockwave-flash" width="560"/></object>
 
 End Point’s full support included equipment rental to Instrument for development, developing and configuring the new Liquid Galaxy used in the Skydiving game, setting up the Liquid Galaxies at the show, onsite support, and repacking of the systems at the conclusion of the conference.  We make things as turnkey as possible.
 

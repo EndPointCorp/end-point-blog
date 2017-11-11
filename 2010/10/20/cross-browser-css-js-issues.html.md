@@ -87,13 +87,13 @@ According to JSON specifications, trailing commas are not permitted (e.g obj = {
 </p>
 <pre class="brush:jscript">
 {
-  "response_message"    : '&lt;?= $response_message ?&gt;',
-  "subtotal"            : &lt;?= $subtotal ?&gt;,
-  "shipping_cost"       : &lt;?= $shipping ?&gt;,
-  "carttotal"           : &lt;?= $carttotal ?&gt;,
-&lt;?php if($add_taxes) { ?&gt;
-  "taxes"               : &lt;?= $taxes ?&gt;
-&lt;?php } ?&gt;
+  "response_message"    : '<?= $response_message ?>',
+  "subtotal"            : <?= $subtotal ?>,
+  "shipping_cost"       : <?= $shipping ?>,
+  "carttotal"           : <?= $carttotal ?>,
+<?php if($add_taxes) { ?>
+  "taxes"               : <?= $taxes ?>
+<?php } ?>
 }
 </pre>
 </td>
@@ -104,13 +104,13 @@ According to JSON specifications, trailing commas are not permitted (e.g obj = {
 </p>
 <pre class="brush:jscript">
 {
-  "response_message"    : '&lt;?= $response_message ?&gt;',
-  "subtotal"            : &lt;?= $subtotal ?&gt;,
-  "shipping_cost"       : &lt;?= $shipping ?&gt;,
-&lt;?php if($add_taxes) { ?&gt;
-  "taxes"               : &lt;?= $taxes ?&gt;,
-&lt;?php } ?&gt;
-  "carttotal"           : &lt;?= $carttotal ?&gt;
+  "response_message"    : '<?= $response_message ?>',
+  "subtotal"            : <?= $subtotal ?>,
+  "shipping_cost"       : <?= $shipping ?>,
+<?php if($add_taxes) { ?>
+  "taxes"               : <?= $taxes ?>,
+<?php } ?>
+  "carttotal"           : <?= $carttotal ?>
 }
 </pre>
 </td>
@@ -122,7 +122,7 @@ According to JSON specifications, trailing commas are not permitted (e.g obj = {
 //Last element in array will end in a comma</p>
 <pre class="brush:plain">
 var fonts = {
-[loop list=`$Scratch-&gt;{fonts}`]
+[loop list=`$Scratch->{fonts}`]
     '[loop-param name]' : {
       'bold' : "[loop-param bold]",
       'italic' : "[loop-param italic]"
@@ -138,7 +138,7 @@ var fonts = {
 </p>
 <pre class="brush:plain">
 var fonts = {
-[loop list=`$Scratch-&gt;{fonts}`]
+[loop list=`$Scratch->{fonts}`]
     '[loop-param name]' : {
       'bold' : "[loop-param bold]",
       'italic' : "[loop-param italic]"
@@ -177,24 +177,24 @@ This is a pretty common scenario. In IE, if the combined widths of consecutive f
 The simplest and minimalist change I've found to work can be described in a few steps. Let's say your floating elements are <div>'s inside a <div> with an id of "products":
 
 ```nohighlight
-&lt;div id="products"&gt;
-  &lt;div class="product"&gt;product 1&lt;/div&gt;
-  &lt;div class="product"&gt;product 2&lt;/div&gt;
-  &lt;div class="product" class="last"&gt;product 3&lt;/div&gt;
-  &lt;div class="product"&gt;product 4&lt;/div&gt;
-  &lt;div class="product"&gt;product 5&lt;/div&gt;
-  &lt;div class="product" class="last"&gt;product 6&lt;/div&gt;
-&lt;/div&gt;
+<div id="products">
+  <div class="product">product 1</div>
+  <div class="product">product 2</div>
+  <div class="product" class="last">product 3</div>
+  <div class="product">product 4</div>
+  <div class="product">product 5</div>
+  <div class="product" class="last">product 6</div>
+</div>
 ```
 
 And let's assume we have the following CSS:
 
 ```css
-&lt;style&gt;
+<style>
 div#products { width: 960px; }
 div.product { float: left; width: 310px; margin-right: 15px; height: 100px; }
 div.last { margin-right: 0px; }
-&lt;/style&gt;
+</style>
 ```
 
 Complete these steps:
@@ -206,27 +206,27 @@ Complete these steps:
 Yielding:
 
 ```nohighlight
-&lt;div id="outer_products"&gt;
-  &lt;div id="products"&gt;
-    &lt;div class="product"&gt;product 1&lt;/div&gt;
-    &lt;div class="product"&gt;product 2&lt;/div&gt;
-    &lt;div class="product" class="last"&gt;product 3&lt;/div&gt;
-    &lt;div class="product"&gt;product 4&lt;/div&gt;
-    &lt;div class="product"&gt;product 5&lt;/div&gt;
-    &lt;div class="product" class="last"&gt;product 6&lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
+<div id="outer_products">
+  <div id="products">
+    <div class="product">product 1</div>
+    <div class="product">product 2</div>
+    <div class="product" class="last">product 3</div>
+    <div class="product">product 4</div>
+    <div class="product">product 5</div>
+    <div class="product" class="last">product 6</div>
+  </div>
+</div>
 ```
 
 And:
 
 ```css
-&lt;style&gt;
+<style>
 div#outer_products { width: 960px; overflow: hidden; }
 div#products { width: 980px; }
 div.product { float: left; width: 310px; margin-right: 15px; height: 100px; }
 div.last { margin-right: 0px; }
-&lt;/style&gt;
+</style>
 ```
 
 The solution is essentially creating a "display window" (outer_products), where overflow is hidden, but the contents are allowed to span a greater width in the inside <div> (products).

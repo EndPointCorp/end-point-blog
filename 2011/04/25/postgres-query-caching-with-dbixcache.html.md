@@ -38,31 +38,31 @@ use Cache::Memcached::Fast;
 
 ## Connect to an existing memcached server, 
 ## and establish a default namespace
-my $mc = Cache::Memcached::Fast-&gt;new(
+my $mc = Cache::Memcached::Fast->new(
   {
-    servers   =&gt; [ { address =&gt; 'localhost:11211' } ],
-    namespace =&gt; 'joy',
+    servers   => [ { address => 'localhost:11211' } ],
+    namespace => 'joy',
   });
 
-## Rather than DBI-&gt;connect, use DBIx-&gt;connect
+## Rather than DBI->connect, use DBIx->connect
 ## Tell it what to use as our caching source
 ## (the memcached server above)
-my $dbh = DBIx::Cache-&gt;connect('', '', '',
-  { RaiseError =&gt; 1,
-    dxc_cachehandle =&gt; $mc
+my $dbh = DBIx::Cache->connect('', '', '',
+  { RaiseError => 1,
+    dxc_cachehandle => $mc
 });
 
 ## This is an expensive query, that takes 30 seconds to run:
 my $SQL = 'SELECT * FROM analyze_sales_data()';
 
 ## Prepare this query
-my $sth = $dbh-&gt;prepare($SQL);
+my $sth = $dbh->prepare($SQL);
 
 ## Run it ten times in a row.
 ## The first time takes 30 seconds, the other nine return instantly.
 for (1..10) {
-    my $count = $sth-&gt;execute();
- my $info = $sth-&gt;fetchall_arrayref({});
+    my $count = $sth->execute();
+ my $info = $sth->fetchall_arrayref({});
     print Dumper $info;
 } 
 ```

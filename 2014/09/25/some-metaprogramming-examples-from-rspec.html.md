@@ -15,14 +15,14 @@ module RSpec
     class ExampleGroup
       # ...
 
-      def self.define_singleton_method(*a, &amp;b)
-        (class &lt;&lt; self; self; end).__send__(:define_method, *a, &amp;b)
+      def self.define_singleton_method(*a, &b)
+        (class << self; self; end).__send__(:define_method, *a, &b)
       end
 
       # ...
 
       def self.define_example_method(name, extra_options={})
-        define_singleton_method(name) do |*all_args, &amp;block|
+        define_singleton_method(name) do |*all_args, &block|
 
           # ...
 
@@ -52,36 +52,36 @@ class Dog
 end
 
 dog = Dog.new
-=&gt; #&lt;Dog:0x00000006add440&gt;
+=> #<Dog:0x00000006add440>
 dog.methods.include? :speak
-=&gt; false
+=> false
 Dog.__send__(:define_method, :speak, Proc.new { "Woof!" })
-=&gt; :speak
+=> :speak
 dog.speak
-=&gt; "Woof!"
+=> "Woof!"
 ```
 
 The block passed to the **define_method** method is used as the body of the method being defined, which in our case is the **speak** method. Note the use of **__send__** over **send**. Because some classes define their own **send** method, it's safer to use **__send__**. As another example, let's define a method that we can use to create more class methods:
 
 ```ruby
 class Cat
-  def create_method(method_name, &amp;method_body)
-    self.class.__send__(:define_method, method_name, &amp;method_body)
+  def create_method(method_name, &method_body)
+    self.class.__send__(:define_method, method_name, &method_body)
   end
 end
 
 cat = Cat.new
- =&gt; #&lt;Cat:0x00000005973c68&gt;
+ => #<Cat:0x00000005973c68>
 cat.methods.include? :speak
- =&gt; false
+ => false
 cat.create_method(:speak) { "Meow!" }
-=&gt; :speak
+=> :speak
 cat.speak
-=&gt; "Meow!"
+=> "Meow!"
 cat2 = Cat.new
-=&gt; #&lt;Cat:0x00000005962da0&gt;
+=> #<Cat:0x00000005962da0>
 cat.2.speak
-=&gt; "Meow!"
+=> "Meow!"
 ```
 
 ### Metaclasses
@@ -93,17 +93,17 @@ class Dog
 end
 
 dog = Dog.new
-=&gt; #&lt;Dog:0x00000006990e70&gt;
+=> #<Dog:0x00000006990e70>
 def dog.sit
   "I'm sitting, now gimme a treat!"
 end
-=&gt; :sit
+=> :sit
 dog.sit
-=&gt; "I'm sitting, now gimme a treat!"
+=> "I'm sitting, now gimme a treat!"
 dog2 = Dog.new
-=&gt; #&lt;Dog:0x00000006977998&gt;
+=> #<Dog:0x00000006977998>
 dog2.methods.include? :sit
-=&gt; false
+=> false
 ```
 
 When Ruby looks for a method, it first looks in the object's metaclass. If it doesn't find it there, then it looks in the object's class and upwards through the inheritance chain. To access an object's metaclass we can use the following syntax:
@@ -113,15 +113,15 @@ class Dog
 end
 
 dog = Dog.new
-=&gt; #&lt;Dog:0x00000006990e70&gt;
+=> #<Dog:0x00000006990e70>
 def dog.sit
   "I'm sitting, now gimme a treat!"
 end
-=&gt; :sit
-metaclass = class &lt;&lt; dog; self; end
-=&gt; #&lt;Class:#&lt;Dog:0x00000006990e70&gt;&gt;
+=> :sit
+metaclass = class << dog; self; end
+=> #<Class:#<Dog:0x00000006990e70>>
 metaclass.instance_methods.include? :sit
-=&gt; true
+=> true
 ```
 
 OK, with all this in mind let's define a class method that can be used to create singleton methods for that class. "Wait, wait, singleton methods for a class? But aren't singleton methods for objects?" I hear you.
@@ -129,8 +129,8 @@ In Ruby, classes are objects. If they are objects, then they can have metaclasse
 
 ```ruby
 class Cat
-  def self.define_singleton_method(method_name, &amp;method_body)
-    (class &lt;&lt; self; self; end).__send__(:define_method, method_name, &amp;method_body)
+  def self.define_singleton_method(method_name, &method_body)
+    (class << self; self; end).__send__(:define_method, method_name, &method_body)
   end
 
   define_singleton_method(:speak) {  "Meow!" }
@@ -139,11 +139,11 @@ class Cat
 end
 
 Cat.speak
-=&gt; "Meow!"
+=> "Meow!"
 Cat.methods.grep(/speak|purr|hiss/)
-=&gt; [:speak, :purr, :hiss]
+=> [:speak, :purr, :hiss]
 cat = Cat.new
-=&gt; #&lt;Cat:0x000000067e8d20&gt;
+=> #<Cat:0x000000067e8d20>
 cat.methods.grep(/speak|purr|hiss/)
 []
 ```
@@ -157,10 +157,10 @@ class Person
   end
 end
 
-metaclass = class &lt;&lt; Person; self; end
-=&gt; #&lt;Class: Person&gt;
+metaclass = class << Person; self; end
+=> #<Class: Person>
 metaclass.instance_methods.include? :greet
-=&gt; true
+=> true
 ```
 
 If we go back and look at the code block where we defined class method **define_singleton_method** for the Cat class,

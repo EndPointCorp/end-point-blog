@@ -15,7 +15,7 @@ Tag clouds have become a fairly popular way to present data on the web. One of o
 
 If you are running this as an extension on Spree pre-Rails 3.0 versions, you'll create an extension to house the custom code. If you are running this as part of a Rails 3.0 application or Spree Rails 3.0 versions, you'll want to consider creating a custom gem to house the custom code. In my case, I'm writing a Spree extension for an application running on Spree 0.11, so I create an extension with the command script/generate extension SearchTag.
 
-### Step 2: Data Model &amp; Migration
+### Step 2: Data Model & Migration
 
 First, the desired data model for the tag cloud data should be defined. Here's what mine will look like in this tutorial:
 
@@ -24,11 +24,11 @@ First, the desired data model for the tag cloud data should be defined. Here's w
 Next, a model and migration must be created to introduce the class, table and it's fields. In Spree, I run script/generate extension_model SearchTag SearchRecord and update the migration file to contain the following:
 
 ```ruby
-class CreateSearchRecords &lt; ActiveRecord::Migration
+class CreateSearchRecords < ActiveRecord::Migration
   def self.up
     create_table :search_records do |t|
       t.string :term
-      t.integer :count, :null =&gt; false, :default =&gt; 0
+      t.integer :count, :null => false, :default => 0
     end
   end
 
@@ -41,7 +41,7 @@ end
 I also add a filter method to my model to be used later:
 
 ```ruby
-class SearchRecord &lt; ActiveRecord::Base
+class SearchRecord < ActiveRecord::Base
   def self.filter(term)
     term.gsub(/\+/, ' ')
       .gsub(/\s+/, ' ')
@@ -69,7 +69,7 @@ And my custom module contains the following:
 module Spree::SearchTagCloud::ProductsController
   def self.included(controller)
     controller.class_eval do
-      controller.append_after_filter :record_search, :only =&gt; :index
+      controller.append_after_filter :record_search, :only => :index
     end
   end
 
@@ -92,14 +92,14 @@ To present the data, I create a controller with script/generate extension_contro
 
 ```ruby
 map.namespace :admin do |admin|
-  admin.resources :search_tag_clouds, :only =&gt; [:index]
+  admin.resources :search_tag_clouds, :only => [:index]
 end
 ```
 
 And I update my controller to calculate the search tag cloud data, shown below. The index method method retrieves all of the search records, sorts, and grabs the the top x results, where x is some configuration defined by the administrator. The method determines the linear solution for scaling the search_record.count to font sizes ranging from 8 pixels to 25 pixels. This order of terms is randomized ([.shuffle](http://www.ruby-doc.org/core/classes/Array.html#M000284)) and linear equation applied. This linear shift can be applied to different types of data. For example, if a tag cloud is to show products with a certain tag, the totals per tag must be calculated and scaled linearly.
 
 ```ruby
-class Admin::SearchTagCloudsController &lt; Admin::BaseController
+class Admin::SearchTagCloudsController < Admin::BaseController
   def index
     search_records = SearchRecord.all
       .collect { |r| [r.count, r.term] }
@@ -124,12 +124,12 @@ end
 The data is presented to the user in the following view:
 
 ```nohighlight
-&lt;h3&gt;Tag Cloud:&lt;/h3&gt;
-&lt;div id="tag_cloud"&gt;
-&lt;% @results.each do |b| %&gt;
-&lt;span style="font-size:&lt;%= b[0] %&gt;px;"&gt;&lt;%= b[1] %&gt;&lt;/span&gt;
-&lt;% end -%&gt;
-&lt;/div&gt;
+<h3>Tag Cloud:</h3>
+<div id="tag_cloud">
+<% @results.each do |b| %>
+<span style="font-size:<%= b[0] %>px;"><%= b[1] %></span>
+<% end -%>
+</div>
 ```
 
 ### Step 5: Adding Flexibility

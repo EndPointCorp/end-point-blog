@@ -52,7 +52,7 @@ cluster_init.sh:
 
     . slony_preamble.sh
 
-    slonik &lt;&lt;EOF
+    slonik <<EOF
     $PREAMBLE
 
     init cluster ( id = 1, comment = 'A1' );
@@ -69,7 +69,7 @@ cluster_init.sh:
     store node (id=11, comment = 'C3', event node=1);
     store node (id=12, comment = 'C4', event node=1);
 
-    # pathways from A1 -&gt; A2, A3, A4 and back
+    # pathways from A1 -> A2, A3, A4 and back
     store path (server = 1, client = 2, conninfo = 'dbname=data host=node2.datacenter-a.com');
     store path (server = 1, client = 3, conninfo = 'dbname=data host=node3.datacenter-a.com');
     store path (server = 1, client = 4, conninfo = 'dbname=data host=node4.datacenter-a.com');
@@ -77,11 +77,11 @@ cluster_init.sh:
     store path (server = 3, client = 1, conninfo = 'dbname=data host=node1.datacenter-a.com');
     store path (server = 4, client = 1, conninfo = 'dbname=data host=node1.datacenter-a.com');
 
-    # pathway from A1 -&gt; B1 and back
+    # pathway from A1 -> B1 and back
     store path (server = 1, client = 5, conninfo = 'dbname=data host=node1.datacenter-b.com');
     store path (server = 5, client = 1, conninfo = 'dbname=data host=node1.datacenter-a.com');
 
-    # pathways from B1 -&gt; B2, B3, B4 and back
+    # pathways from B1 -> B2, B3, B4 and back
     store path (server = 5, client = 6, conninfo = 'dbname=data host=node2.datacenter-b.com');
     store path (server = 5, client = 7, conninfo = 'dbname=data host=node3.datacenter-b.com');
     store path (server = 5, client = 8, conninfo = 'dbname=data host=node4.datacenter-b.com');
@@ -89,11 +89,11 @@ cluster_init.sh:
     store path (server = 7, client = 5, conninfo = 'dbname=data host=node1.datacenter-b.com');
     store path (server = 8, client = 5, conninfo = 'dbname=data host=node1.datacenter-b.com');
 
-    # pathway from A1 -&gt; C1 and back
+    # pathway from A1 -> C1 and back
     store path (server = 1, client = 9, conninfo = 'dbname=data host=node1.datacenter-c.com');
     store path (server = 9, client = 1, conninfo = 'dbname=data host=node1.datacenter-a.com');
 
-    # pathways from C1 -&gt; C2, C3, C4 and back
+    # pathways from C1 -> C2, C3, C4 and back
     store path (server = 9, client = 10, conninfo = 'dbname=data host=node2.datacenter-c.com');
     store path (server = 9, client = 11, conninfo = 'dbname=data host=node3.datacenter-c.com');
     store path (server = 9, client = 12, conninfo = 'dbname=data host=node4.datacenter-c.com');
@@ -123,7 +123,7 @@ cluster_define_set1.sh:
     # reusing our standard cluster information
     . slony_preamble.sh
 
-    slonik &lt;&lt;EOF
+    slonik <<EOF
     $PREAMBLE
 
     create set ( id = 1, origin = 1, comment = 'set 1' );
@@ -146,25 +146,25 @@ cluster_subscribe_set1.sh:
     # reusing our standard cluster information
     . slony_preamble.sh
 
-    slonik &lt;&lt;EOF
+    slonik <<EOF
     $PREAMBLE
 
-    # define our forwarding subscriptions (i.e., A1 -&gt; B1, C1)
+    # define our forwarding subscriptions (i.e., A1 -> B1, C1)
     subscribe set ( id = 1, provider = 1, receiver = 5, forward = yes);
     subscribe set ( id = 1, provider = 1, receiver = 9, forward = yes);
 
     # define the subscriptions for each of the datacenter sets
-    # A1 -&gt; A2, A3, A4
+    # A1 -> A2, A3, A4
     subscribe set ( id = 1, provider = 1, receiver = 2, forward = no);
     subscribe set ( id = 1, provider = 1, receiver = 3, forward = no);
     subscribe set ( id = 1, provider = 1, receiver = 4, forward = no);
 
-    # B1 -&gt; B2, B3, B4
+    # B1 -> B2, B3, B4
     subscribe set ( id = 1, provider = 5, receiver = 6, forward = no);
     subscribe set ( id = 1, provider = 5, receiver = 7, forward = no);
     subscribe set ( id = 1, provider = 5, receiver = 8, forward = no);
 
-    # C1 -&gt; C2, C3, C4
+    # C1 -> C2, C3, C4
     subscribe set ( id = 1, provider = 9, receiver = 10, forward = no);
     subscribe set ( id = 1, provider = 9, receiver = 11, forward = no);
     subscribe set ( id = 1, provider = 9, receiver = 12, forward = no);

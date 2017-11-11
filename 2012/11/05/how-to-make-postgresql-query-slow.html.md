@@ -25,7 +25,7 @@ The most interesting usage is adding this function into a query. Let's take this
 ```sql
 # SELECT schemaname, tablename
   FROM pg_tables
-  WHERE schemaname &lt;&gt; 'pg_catalog';
+  WHERE schemaname <> 'pg_catalog';
 
 Time: 0.985 ms
 ```
@@ -35,7 +35,7 @@ As you can see, this query is quite fast and returns data in less than 1 ms. Let
 ```sql
 # SELECT schemaname, tablename
   FROM pg_tables, pg_sleep(15)
-  WHERE schemaname &lt;&gt; 'pg_catalog';
+  WHERE schemaname <> 'pg_catalog';
 
 Time: 15002.084 ms
 ```

@@ -12,16 +12,16 @@ In Android, view layouts are usually defined in XML like this:
 layout/activity_hour_picker.xml
 
 ```
- &lt;?xml version="1.0" encoding="utf-8"?&gt;
- &lt;RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-   android:layout_width="match_parent"
-   android:layout_height="match_parent" &gt;
-   &lt;Button android:id="@+id/button"
-     android:layout_height="wrap_content"
-     android:layout_width="wrap_content"
-     android:onClick="doStuff"
-     android:text="Hello World!" /&gt;
- &lt;/RelativeLayout&gt;
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent" >
+  <Button android:id="@+id/button"
+    android:layout_height="wrap_content"
+    android:layout_width="wrap_content"
+    android:onClick="doStuff"
+    android:text="Hello World!" />
+</RelativeLayout>
 ```
 
 Simple. But, as you can imagine, not so fun when you're adding a list of 24 buttons - so, I decided to add them dynamically in the code. First, though, a ScrollView and RadioGroup (ScrollView only allows one child) need to be defined in the XML, no point in doing that programmatically. Let's add those:
@@ -29,25 +29,25 @@ Simple. But, as you can imagine, not so fun when you're adding a list of 24 butt
 layout/activity_hour_picker.xml
 
 ```
- &lt;?xml version="1.0" encoding="utf-8"?&gt;
- &lt;RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" &gt;
-    &lt;HorizontalScrollView
-         android:id="@+id/hour_scroll_view"
-         android:layout_width="match_parent"
-         android:layout_height="wrap_content"
-         android:fillViewport="true"
-         android:scrollbars="none" &gt;
-         &lt;RadioGroup
-             android:id="@+id/hour_radio_group"
-             android:layout_width="wrap_content"
-             android:layout_height="match_parent"
-             android:orientation="horizontal"&gt;
-             // This is where our buttons will be
-         &lt;/RadioGroup&gt;
-     &lt;/HorizontalScrollView&gt;
- &lt;/RelativeLayout&gt;
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+   android:layout_width="match_parent"
+   android:layout_height="match_parent" >
+   <HorizontalScrollView
+        android:id="@+id/hour_scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true"
+        android:scrollbars="none" >
+        <RadioGroup
+            android:id="@+id/hour_radio_group"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            // This is where our buttons will be
+        </RadioGroup>
+    </HorizontalScrollView>
+</RelativeLayout>
 ```
 
 Okay. So, now, in our Activity, we need to override onCreate if we haven't already and add the following code:
@@ -55,20 +55,20 @@ Okay. So, now, in our Activity, we need to override onCreate if we haven't alrea
 src/com/example/HourPickerActivity.java
 
 ```
- @Override
- public void onCreate(Bundle icicle) {
-   super.onCreate(icicle);
-   setContentView(R.layout.activity_hour_picker);  // This adds the views from the XML we wrote earlier
-   ViewGroup hourButtonLayout = (ViewGroup) findViewById(R.id.hour_radio_group);  // This is the id of the RadioGroup we defined
-   for (int i = 0; i &amp;lt; RANGE_HOURS; i++) {
-     RadioButton button = new RadioButton(this);
-     button.setId(i);
-     button.setText(Integer.toString(i));
-     button.setChecked(i == currentHours); // Only select button with same index as currently selected number of hours
-     button.setBackgroundResource(R.drawable.item_selector); // This is a custom button drawable, defined in XML
-     hourButtonLayout.addView(button);
-   }
- }
+@Override
+public void onCreate(Bundle icicle) {
+  super.onCreate(icicle);
+  setContentView(R.layout.activity_hour_picker);  // This adds the views from the XML we wrote earlier
+  ViewGroup hourButtonLayout = (ViewGroup) findViewById(R.id.hour_radio_group);  // This is the id of the RadioGroup we defined
+  for (int i = 0; i < RANGE_HOURS; i++) {
+    RadioButton button = new RadioButton(this);
+    button.setId(i);
+    button.setText(Integer.toString(i));
+    button.setChecked(i == currentHours); // Only select button with same index as currently selected number of hours
+    button.setBackgroundResource(R.drawable.item_selector); // This is a custom button drawable, defined in XML
+    hourButtonLayout.addView(button);
+  }
+}
 ```
 
 And this is what we get:
@@ -80,16 +80,16 @@ It scrolls horizontally like we want, but there's a problem - we don't want the 
 src/com/example/HourPickerActivity.java
 
 ```
- <font color="#969696">button.setId(i);</font>
- button.setBackgroundResource(R.drawable.item_selector); // This is a custom button drawable, defined in XML
- button.setOnClickListener(new OnClickListener() {
-         @Override
-         public void onClick(View view) {
-             ((RadioGroup) view.getParent()).check(view.getId());
-             currentHours = view.getId();
-         }
-     });
- <font color="#969696">button.setText(Integer.toString(i));</font>
+<font color="#969696">button.setId(i);</font>
+button.setBackgroundResource(R.drawable.item_selector); // This is a custom button drawable, defined in XML
+button.setOnClickListener(new OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            ((RadioGroup) view.getParent()).check(view.getId());
+            currentHours = view.getId();
+        }
+    });
+<font color="#969696">button.setText(Integer.toString(i));</font>
 ```
 
 So now the currently selected value is ready in our static variable currentHours for whenever the user is finished. Now we need to get rid of the standard radio button graphics. The solution I found is to use selector XML, with just one item that points to a transparent drawable:
@@ -97,10 +97,10 @@ So now the currently selected value is ready in our static variable currentHours
 drawable/null_selector.xml
 
 ```
- &lt;?xml version="1.0" encoding="utf-8"?&gt;
- &lt;selector xmlns:android="http://schemas.android.com/apk/res/android" &gt;
-   &lt;item android:drawable="@android:color/transparent" /&gt;
- &lt;/selector&gt;
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android" >
+  <item android:drawable="@android:color/transparent" />
+</selector>
 ```
 
 Set each button to use it (and to center the text) like this (R.drawable.null_selector is our selector XML):
@@ -108,10 +108,10 @@ Set each button to use it (and to center the text) like this (R.drawable.null_se
 src/com/example/HourPickerActivity.java
 
 ```
- <font color="#969696">button.setText(Integer.toString(i));</font>
- button.setGravity(Gravity.CENTER);
- button.setButtonDrawable(R.drawable.null_selector);
- <font color="#969696">button.setChecked(i == currentHours); // Only select button with same index as currently selected number of hours  </font>
+<font color="#969696">button.setText(Integer.toString(i));</font>
+button.setGravity(Gravity.CENTER);
+button.setButtonDrawable(R.drawable.null_selector);
+<font color="#969696">button.setChecked(i == currentHours); // Only select button with same index as currently selected number of hours  </font>
 ```
 
 Now, let's see how this all has pulled together.

@@ -167,9 +167,9 @@ end
 And from the view, the two methods can be called within the following block:
 
 ```nohighlight
-&lt;% @products.each do |product| -%&gt;
-&lt;%= product.master_price %&gt; vs &lt;%= product.spree_master_price.to_s %&gt;
-&lt;% end -%&gt;
+<% @products.each do |product| -%>
+<%= product.master_price %> vs <%= product.spree_master_price.to_s %>
+<% end -%>
 ```
 
 ### Extend an Existing View
@@ -187,18 +187,18 @@ The above code inserts the 'shared/promo' view to be rendered above the homepage
 Before the introduction of hooks, the standard method of overriding or extending core views was to copy the core view into your extension view directory, and apply changes. In some cases, hooks are not always in the desired location. To override the footer view since there is no footer hook, I copy the Spree gem footer view to the extension view directory. The diff below compares the Spree gem view and my extension footer view:
 
 ```diff
-- &lt;div id="footer"&gt;
--  &lt;div class="left"&gt;
--    &lt;p&gt;
--      &lt;%= t("powered_by") %&gt; &lt;a href="http://spreecommerce.com/"&gt;Spree&lt;/a&gt;
--    &lt;/p&gt;
--  &lt;/div&gt;
--  &lt;div class="right"&gt;
--    &lt;%= render 'shared/language_bar' if Spree::Config[:allow_locale_switching] %&gt;
--  &lt;/div&gt;
-- &lt;/div&gt;
-&lt;%= render 'shared/google_analytics' %&gt;
-+&lt;p&gt;&lt;a href="http://www.endpoint.com/"&gt;End Point&lt;/a&gt;&lt;/p&gt;
+- <div id="footer">
+-  <div class="left">
+-    <p>
+-      <%= t("powered_by") %> <a href="http://spreecommerce.com/">Spree</a>
+-    </p>
+-  </div>
+-  <div class="right">
+-    <%= render 'shared/language_bar' if Spree::Config[:allow_locale_switching] %>
+-  </div>
+- </div>
+<%= render 'shared/google_analytics' %>
++<p><a href="http://www.endpoint.com/">End Point</a></p>
 ```
 
 ## Sample data

@@ -19,8 +19,8 @@ When attempting to connect to Facebook with HybridAuth it kept attempting to log
         $hybridauth = new Hybrid_Auth( $config );
 
         // Set some session variables needed for HybridAuth
-        Hybrid_Auth::storage()-&gt;set( 'hauth_session.facebook.is_logged_in', 1 );
-        Hybrid_Auth::storage()-&gt;set( 'hauth_session.facebook.token.access_token', $_POST['fb_access_token'] );
+        Hybrid_Auth::storage()->set( 'hauth_session.facebook.is_logged_in', 1 );
+        Hybrid_Auth::storage()->set( 'hauth_session.facebook.token.access_token', $_POST['fb_access_token'] );
         $hybrid_config = require $config;
         $fb_config     = $hybrid_config['providers']['Facebook'];
         $fb_app_id     = $fb_config['key']['id'];
@@ -28,11 +28,11 @@ When attempting to connect to Facebook with HybridAuth it kept attempting to log
         $_SESSION['fb_'. $fb_app_id .'_user_id']      = $_POST['fb_uid'];
 
         // Now we connect to FB using the given access token for this user
-        $adapter      = $hybridauth-&gt;getAdapter( "facebook" );
-        $user_profile = $adapter-&gt;getUserProfile();
+        $adapter      = $hybridauth->getAdapter( "facebook" );
+        $user_profile = $adapter->getUserProfile();
     }
     catch( Exception $e ) {
-        return 'FB Connection Failed: <b>got an error!</b> error message=' . $e-&gt;getMessage() . ', error code='. $e-&gt;getCode();
+        return 'FB Connection Failed: <b>got an error!</b> error message=' . $e->getMessage() . ', error code='. $e->getCode();
     }
     ...
 ```

@@ -26,10 +26,10 @@ One talk I attended today was "Why We're Bad At Hiring (And How To Fix It)" by [
 
 - After a rejected interview, think about what specifically might change your mind about the candidate.
 - Also communicate the reapplication process.
-- Improve your process by measuring with the goal to prevent false negatives. One actionable item here is to keep tabs on people – are there any developers you didn't hire that went on to become very successful &amp; what did you miss?
+- Improve your process by measuring with the goal to prevent false negatives. One actionable item here is to keep tabs on people – are there any developers you didn't hire that went on to become very successful & what did you miss?
 - Read [this book](http://www.amazon.com/Smart-Gets-Things-Done-Technical/dp/1590598385).
 
-Interview practices that Kerri doesn't recommend include looking at GPA/SAT/ACT scores, requiring a Pull request to apply, speed interviews, giving puzzle questions, whiteboard coding &amp; fizzbuzz.
+Interview practices that Kerri doesn't recommend include looking at GPA/SAT/ACT scores, requiring a Pull request to apply, speed interviews, giving puzzle questions, whiteboard coding & fizzbuzz.
 
 While I'm not extremely involved in the hiring processes for End Point, I am interested in the topic of growing talent within a company. The notes specifically related to identifying your own hiring biases was compelling.
 
@@ -39,7 +39,7 @@ I also attended a few talks on testing. My favorite little gem from one of these
 
 <img border="0" src="/blog/2015/04/22/railsconf-2015-atlanta-day-two/image-0.jpeg"/>
 
-Eduardo Gutierrez gave a talk on Capybara where he went through explicit examples of balancing maintainability, readability, and performance in Capybara. I'll update this post to include links to all these talks when they become available. Here are the videos &amp; slides for these talks:
+Eduardo Gutierrez gave a talk on Capybara where he went through explicit examples of balancing maintainability, readability, and performance in Capybara. I'll update this post to include links to all these talks when they become available. Here are the videos & slides for these talks:
 
 - [Ambitious Capybara by Eduardo Gutierrez](http://confreaks.tv/videos/railsconf2015-ambitious-capybara) - [slides](https://speakerdeck.com/ecbypi/ambitious-capybara)
 - [RSpec: It's Not Actually Magic by Noel Rappin](http://confreaks.tv/videos/railsconf2015-rspec-it-s-not-actually-magic) - [slides](https://speakerdeck.com/noelrap/rspec-it-isnt-actually-magic)

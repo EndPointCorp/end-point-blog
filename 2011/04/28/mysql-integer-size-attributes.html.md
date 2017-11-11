@@ -10,15 +10,15 @@ title: MySQL Integer Size Attributes
 MySQL has those curious size attributes you can apply to integer data types. For example, when creating a table, you might see:
 
 ```sql
-mysql&gt; CREATE TABLE foo (
-    -&gt; field_ti tinyint(1),
-    -&gt; field_si smallint(2),
-    -&gt; field_int int(4),
-    -&gt; field_bi bigint(5)
-    -&gt; );
+mysql> CREATE TABLE foo (
+    -> field_ti tinyint(1),
+    -> field_si smallint(2),
+    -> field_int int(4),
+    -> field_bi bigint(5)
+    -> );
 Query OK, 0 rows affected (0.05 sec)
 
-mysql&gt; desc foo;
+mysql> desc foo;
 +-----------+-------------+------+-----+---------+-------+
 | Field     | Type        | Null | Key | Default | Extra |
 +-----------+-------------+------+-----+---------+-------+
@@ -29,7 +29,7 @@ mysql&gt; desc foo;
 +-----------+-------------+------+-----+---------+-------+
 3 rows in set (0.03 sec)
 
-mysql&gt;
+mysql>
 ```
 
 I had always assumed those size attributes were limiters, MySQL's way of providing some sort of constraint on the integers allowed in the field. While doing some recent work for a MySQL client, I attempted to enforce the range of a tinyint according to that assumption. In reality, I only wanted a sign field, and would have liked to have applied a "CHECK field IN (-1,1)", but without check constraints I figured at least keeping obviously incorrect data out would be better than nothing.
@@ -37,10 +37,10 @@ I had always assumed those size attributes were limiters, MySQL's way of providi
 I wanted to see what MySQL's behavior would be on data entry that failed the limiters. I was hoping for an error, but expecting truncation. What I discovered was neither.
 
 ```sql
-mysql&gt; INSERT INTO foo (field_ti) VALUES (-1);
+mysql> INSERT INTO foo (field_ti) VALUES (-1);
 Query OK, 1 row affected (0.00 sec)
 
-mysql&gt; SELECT field_ti FROM foo;
+mysql> SELECT field_ti FROM foo;
 +----------+
 | field_ti |
 +----------+
@@ -48,10 +48,10 @@ mysql&gt; SELECT field_ti FROM foo;
 +----------+
 1 row in set (0.00 sec)
 
-mysql&gt; INSERT INTO foo (field_ti) VALUES (1);
+mysql> INSERT INTO foo (field_ti) VALUES (1);
 Query OK, 1 row affected (0.00 sec)
 
-mysql&gt; SELECT field_ti FROM foo;
+mysql> SELECT field_ti FROM foo;
 +----------+
 | field_ti |
 +----------+
@@ -60,10 +60,10 @@ mysql&gt; SELECT field_ti FROM foo;
 +----------+
 2 rows in set (0.00 sec)
 
-mysql&gt; INSERT INTO foo (field_ti) VALUES (10);
+mysql> INSERT INTO foo (field_ti) VALUES (10);
 Query OK, 1 row affected (0.00 sec)
 
-mysql&gt; SELECT field_ti FROM foo;
+mysql> SELECT field_ti FROM foo;
 +----------+
 | field_ti |
 +----------+
@@ -73,10 +73,10 @@ mysql&gt; SELECT field_ti FROM foo;
 +----------+
 3 rows in set (0.00 sec)
 
-mysql&gt; INSERT INTO foo (field_ti) VALUES (100);
+mysql> INSERT INTO foo (field_ti) VALUES (100);
 Query OK, 1 row affected (0.00 sec)
 
-mysql&gt; SELECT field_ti FROM foo;
+mysql> SELECT field_ti FROM foo;
 +----------+
 | field_ti |
 +----------+
@@ -87,7 +87,7 @@ mysql&gt; SELECT field_ti FROM foo;
 +----------+
 4 rows in set (0.00 sec)
 
-mysql&gt;
+mysql>
 ```
 
 Two possible conclusions followed immediately: either the limiter feature was horribly broken, or those apparent sizes didn't represent a limiter feature. A full review of MySQL's [Numeric Types](http://dev.mysql.com/doc/refman/5.0/en/numeric-types.html) documentation provided the answer:

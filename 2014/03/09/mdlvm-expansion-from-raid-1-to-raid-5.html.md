@@ -88,7 +88,7 @@ Volume group "array1" successfully extended
 root@plug01:/backup# pvmove /dev/md0 /dev/md1
 /dev/md0: Moved: 0.0%
 /dev/md0: Moved: 0.0%
-&lt;snip&gt;
+<snip>
 /dev/md0: Moved: 99.9%
 /dev/md0: Moved: 100.0%
 /dev/md0: Moved: 100.0%
@@ -121,7 +121,7 @@ root@plug01:~# cat /proc/mdstat
 Personalities : [raid1] [raid6] [raid5] [raid4]
 md1 : active raid5 sdb2[3] sdd2[2] sdc2[0]
 2929253888 blocks super 1.2 level 5, 512k chunk, algorithm 2 [3/3] [UUU]
-[&gt;....................] reshape = 0.5% (16832872/2929253888) finish=9666.3min speed=5021K/sec
+[>....................] reshape = 0.5% (16832872/2929253888) finish=9666.3min speed=5021K/sec
 
 unused devices:
 ```

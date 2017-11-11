@@ -134,15 +134,15 @@ PdfExport.php, and one inside of PdfExport_body.php. The diff:
 --- /tmp/7YqvXv_PdfExport.php 2014-05-08 12:45:03 -0400
 +++ PdfExport.php             2014-05-08 12:34:39 -0400
 @@ -82,3 +82,3 @@
-   if ($img_page &gt; 0 || $img_page === false) {
+   if ($img_page > 0 || $img_page === false) {
 -        wfLoadExtensionMessages('PdfPrint');
 +        //wfLoadExtensionMessages('PdfPrint');
                 $nav_urls['pdfprint'] = array(
 @@ -92,3 +92,3 @@
- function wfSpecialPdfToolbox (&amp;$monobook) {
+ function wfSpecialPdfToolbox (&$monobook) {
 -          wfLoadExtensionMessages('PdfPrint');
 +          //wfLoadExtensionMessages('PdfPrint');
-           if (isset($monobook-&gt;data['nav_urls']['pdfprint']))
+           if (isset($monobook->data['nav_urls']['pdfprint']))
 --- /tmp/7gO8Hz_PdfExport_body.php   2014-05-08 12:45:03 -0400
 +++ PdfExport_body.php               2014-05-08 12:34:44 -0400
 @@ -44,3 +44,3 @@

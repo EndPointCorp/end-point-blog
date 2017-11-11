@@ -106,7 +106,7 @@ I also want to use the first query to use the cumulative sum I calculated before
 )
 SELECT d
 FROM temp
-WHERE d &lt; 4
+WHERE d < 4
 ORDER BY d DESC;
 
  d
@@ -127,7 +127,7 @@ WITH y AS
 SELECT g.d,
   (SELECT v
    FROM y
-   WHERE y.d &lt;= g.d
+   WHERE y.d <= g.d
    ORDER BY d DESC
    LIMIT 1)
 FROM

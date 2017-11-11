@@ -87,13 +87,13 @@ There are few configurations to enable the ActionCable on the application.
 *config/routes.rb* - The server should be mounted on specific path to serve websocket cable requests.
 
 ```ruby
-mount ActionCable.server =&gt; '/cable'
+mount ActionCable.server => '/cable'
 ```
 
 *app/views/layouts/application.html.erb* - The action_cable_meta_tag passes the WebSocket URL(which is configured on environment variable config.action_cable.url) to consumer.
 
 ```ruby
-&lt;%= action_cable_meta_tag %&gt;
+<%= action_cable_meta_tag %>
 ```
 
 *app/assets/javascripts/cable.js* - The consumer should be created to establish the WebSocket connection to specified URL in action-cable-url.
@@ -160,7 +160,7 @@ $ rails generate channel Messages
 *messages_controller.rb* - Whenever the user writes a message in the room, it will be broadcasted to 'messages' channel after the save action.
 
 ```html
-class MessagesController &lt; ApplicationController
+class MessagesController < ApplicationController
   def create
     message = Message.new(message_params)
     message.user = current_user
@@ -183,7 +183,7 @@ end
 *messages_channel.rb* - Messages channel streams those broadcasted messages to subscribed clients through established WebSocket connection.
 
 ```ruby
-class MessagesChannel &lt; ApplicationCable::Channel
+class MessagesChannel < ApplicationCable::Channel
   def subscribed
     stream_from 'messages'
   end

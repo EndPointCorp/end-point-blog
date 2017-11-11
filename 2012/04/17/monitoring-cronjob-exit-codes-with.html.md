@@ -14,7 +14,7 @@ If you're like me, you've got cronjobs that make email noise if there is an erro
 The monitoring plugin depends on being able to read some sort of log output file which includes an exit code. The plugin also assumes that the log will be truncated with every run.  Here's an example of a cronjob entry which meets those requirements:
 
 ```bash
-rsync source dest 2&gt;&amp;1 &gt; /var/log/important_rsync_job.log; echo "Exit code: $?" &gt;&gt; /var/log/important_rsync_job.log
+rsync source dest 2>&1 > /var/log/important_rsync_job.log; echo "Exit code: $?" >> /var/log/important_rsync_job.log
 ```
 
 So let's break down a couple of the more interesting points in this command:

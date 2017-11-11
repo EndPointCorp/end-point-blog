@@ -120,11 +120,11 @@ So far, so good. But we have a problem here. What do we do if the lookup up of t
 ```ruby
 def execute!
   steps = [
-    -&gt;{ lookup_order },
-    -&gt;{ update_order },
-    -&gt;{ calculate_tax },
-    -&gt;{ calculate_shipping },
-    -&gt;{ send_invoice! },
+    ->{ lookup_order },
+    ->{ update_order },
+    ->{ calculate_tax },
+    ->{ calculate_shipping },
+    ->{ send_invoice! },
   ]
 
   steps.each { |step| break unless step.call }
@@ -164,12 +164,12 @@ private
 
 def proceed; true; end
 def stop(message="")
-  @errors &lt;&lt; message if message.present?
+  @errors << message if message.present?
   false
 end
 
 def invalid(message)
-  @errors &lt;&lt; message
+  @errors << message
   proceed
 end
 
@@ -196,9 +196,9 @@ Hint:
 ```ruby
 def steps
   [
-    -&gt;(payload){ step1(payload) },
-    -&gt;(payload){ step2(payload) },
-    -&gt;(payload){ step3(payload) },
+    ->(payload){ step1(payload) },
+    ->(payload){ step2(payload) },
+    ->(payload){ step3(payload) },
   ]
 end
 

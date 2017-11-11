@@ -76,7 +76,7 @@ The grep option **-P** (aka **--perl-regexp**) instructs grep to interpret the a
 It's time to replace that bad data. We'll need to truncate the existing table, then COPY our data back in. To do this, we'll create a file that we'll feed to **psql -X -f**. Here's the top of the file:
 
 ```sql
-$ cat &gt; alpha.restore.pg
+$ cat > alpha.restore.pg
 
 \set ON_ERROR_STOP on
 \timing

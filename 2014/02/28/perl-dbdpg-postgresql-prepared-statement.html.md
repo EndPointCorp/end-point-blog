@@ -21,18 +21,18 @@ use warnings;
 use DBI;
 
 my $DSN = 'DBI:Pg:dbname=postgres';
-my $dbh = DBI-&gt;connect($DSN, '', '', {AutoCommit=&gt;0,RaiseError=&gt;1,PrintError=&gt;0})
+my $dbh = DBI->connect($DSN, '', '', {AutoCommit=>0,RaiseError=>1,PrintError=>0})
   or die "Connection failed!\n";
 print "DBI is version $DBI::VERSION, DBD::Pg is version $DBD::Pg::VERSION\n";
 
 ## We do this so we can see the version number in the logs
 my $SQL = 'SELECT ?::text';
-$dbh-&gt;do($SQL, undef, "DBD::Pg version $DBD::Pg::VERSION");
+$dbh->do($SQL, undef, "DBD::Pg version $DBD::Pg::VERSION");
 
-my $sth = $dbh-&gt;prepare('SELECT count(*) FROM pg_class WHERE relname = ?');
-$sth-&gt;execute('foobar1');
-$sth-&gt;execute('foobar2');
-$sth-&gt;execute('foobar3');
+my $sth = $dbh->prepare('SELECT count(*) FROM pg_class WHERE relname = ?');
+$sth->execute('foobar1');
+$sth->execute('foobar2');
+$sth->execute('foobar3');
 
 ```
 
@@ -40,7 +40,7 @@ When the script above is run on DBD::Pg versions 2.19.1 and 3.0.0, you can see t
 
 ```
 
-LOG:  execute &lt;unnamed&gt;: SELECT $1::text
+LOG:  execute <unnamed>: SELECT $1::text
 DETAIL:  parameters: $1 = 'DBD::Pg version 2.19.1'
 LOG:  execute dbdpg_p30462_1: SELECT count(*) FROM pg_class WHERE relname = $1
 DETAIL:  parameters: $1 = 'foobar1'
@@ -49,9 +49,9 @@ DETAIL:  parameters: $1 = 'foobar2'
 LOG:  execute dbdpg_p30462_1: SELECT count(*) FROM pg_class WHERE relname = $1
 DETAIL:  parameters: $1 = 'foobar3'
 
-LOG:  execute &lt;unnamed&gt;: SELECT $1::text
+LOG:  execute <unnamed>: SELECT $1::text
 DETAIL:  parameters: $1 = 'DBD::Pg version 3.0.0'
-LOG:  execute &lt;unnamed&gt;: SELECT count(*) FROM pg_class WHERE relname = $1
+LOG:  execute <unnamed>: SELECT count(*) FROM pg_class WHERE relname = $1
 DETAIL:  parameters: $1 = 'foobar1'
 LOG:  execute dbdpg_p30618_1: SELECT count(*) FROM pg_class WHERE relname = $1
 DETAIL:  parameters: $1 = 'foobar2'

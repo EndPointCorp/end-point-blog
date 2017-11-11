@@ -17,7 +17,7 @@ I ran the Devise generator and trimmed down the generated migration to set up on
 [phunk@work ]$ rails generate devise:install
 
 # db/migrate/20160121005233_add_devise_to_users.rb
-class AddDeviseToUsers &lt; ActiveRecord::Migration
+class AddDeviseToUsers < ActiveRecord::Migration
   def self.up
     change_table(:users) do |t|
       ## Database authenticatable
@@ -59,7 +59,7 @@ module UserAuthentication
   included do
 
   def valid_password?(password)
-    if !has_devise_password? &amp;&amp; valid_transitional_password?(password)
+    if !has_devise_password? && valid_transitional_password?(password)
       convert_password_to_devise(password)
       return true
     end
@@ -89,7 +89,7 @@ Our User model mixes in the new module:
 # app/models/user.rb
 require 'user_authentication'
 
-class User &lt; ActiveRecord::Base
+class User < ActiveRecord::Base
   include UserAuthentication
 
   devise :database_authenticatable

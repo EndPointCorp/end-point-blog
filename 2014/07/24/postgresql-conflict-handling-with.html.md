@@ -2,10 +2,8 @@
 author: Greg Sabino Mullane
 gh_issue_number: 1015
 tags: bucardo, database, postgres, replication
-title: Postgresql conflict handling with Bucardo and multiple data sources
+title: PostgreSQL conflict handling with Bucardo and multiple data sources
 ---
-
-
 
 <div class="separator" style="clear: both; float:right; text-align: center;"><a href="/blog/2014/07/24/postgresql-conflict-handling-with/image-0-big.png" imageanchor="1" style="clear: right; float: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" src="/blog/2014/07/24/postgresql-conflict-handling-with/image-0.png"/></a>
 <br/><small><a href="https://flic.kr/p/fybbDe">Image</a> by Flickr
@@ -124,12 +122,12 @@ use warnings;
 
 my $info = shift;
 ## If this table is named 'chapter', do nothing
-if ($info-&gt;{tablename} eq 'chapter') {
-    $info-&gt;{skip} = 1;
+if ($info->{tablename} eq 'chapter') {
+    $info->{skip} = 1;
 }
 else {
     ## Winning databases, in order
-    $info-&gt;{tablewinner} = 'C B A';
+    $info->{tablewinner} = 'C B A';
 }
 return;
 ```
@@ -175,10 +173,10 @@ Data::Dumper peek at it would look like this:
 
 ```
 <span class="gsm">$VAR1 = {
-  'romeojuliet' =&gt; {
-    'C' =&gt; 1,
-    'A' =&gt; 1,
-    'B' =&gt; 1,
+  'romeojuliet' => {
+    'C' => 1,
+    'A' => 1,
+    'B' => 1,
   }
 };
 </span>
@@ -188,7 +186,7 @@ The job of the conflict handling code (unless using one of the "winner" hash key
 
 ```
 <span class="gsm">$VAR1 = {
-  'romeojuliet' =&gt; 'B'
+  'romeojuliet' => 'B'
 };
 </span>
 ```
@@ -201,13 +199,13 @@ use strict;
 use warnings;
 
 my $info = shift;
-for my $row (keys %{ $info-&gt;{conflicts} }) {
+for my $row (keys %{ $info->{conflicts} }) {
   ## Equivalent to 'A C B'
-  $info-&gt;{conflicts}{$row} = exists $info-&gt;{conflicts}{$row}{A} ? 'A' : 'C';
+  $info->{conflicts}{$row} = exists $info->{conflicts}{$row}{A} ? 'A' : 'C';
 }
 
 ## We don't want any other customcodes to fire: we have handled this!
-$info-&gt;{lastcode} = 1;
+$info->{lastcode} = 1;
 return;
 ```
 
@@ -249,46 +247,46 @@ my $info = shift;
 ## What is the weather in Walla Walla, Washington?
 ## If it's really hot, we cannot trust server A
 my $max_temp = 100;
-my $weather_url = 'http://wxdata.weather.com/wxdata/weather/rss/local/USWA0476?cm_ven=LWO&amp;cm_cat=rss';
-my $ua = LWP::UserAgent-&gt;new;
-my $req = HTTP::Request-&gt;new(GET =&gt; $weather_url);
-my $response = $ua-&gt;request($req)-&gt;content();
+my $weather_url = 'http://wxdata.weather.com/wxdata/weather/rss/local/USWA0476?cm_ven=LWO&cm_cat=rss';
+my $ua = LWP::UserAgent->new;
+my $req = HTTP::Request->new(GET => $weather_url);
+my $response = $ua->request($req)->content();
 my $temp = ($response =~ /(\d+) \°/) ? $1 : 75;
 ## Store in our shared hash so we don't have to look it up every run
 ## Ideally we'd add something so we only call it if the temp has not been checked in last hour
-$info-&gt;{shared}{wallawallatemp} = $temp;
+$info->{shared}{wallawallatemp} = $temp;
 
 ## We want to count the number of sessions on each source database
 my $SQL = 'SELECT count(*) FROM pg_stat_activity';
-for my $db (sort keys %{ $info-&gt;{dbinfo} }) {
+for my $db (sort keys %{ $info->{dbinfo} }) {
     ## Only source databases can have conflicting rows
-    next if ! $info-&gt;{dbinfo}{$db}{issource};
-    ## The safe database handles are stored in $info-&gt;{dbh}
-    my $dbh = $info-&gt;{dbh}{$db};
-    my $sth = $dbh-&gt;prepare($SQL);
-    $sth-&gt;execute();
-    $info-&gt;{shared}{dbcount}{$db} = $sth-&gt;fetchall_arrayref()-&gt;[0][0];
+    next if ! $info->{dbinfo}{$db}{issource};
+    ## The safe database handles are stored in $info->{dbh}
+    my $dbh = $info->{dbh}{$db};
+    my $sth = $dbh->prepare($SQL);
+    $sth->execute();
+    $info->{shared}{dbcount}{$db} = $sth->fetchall_arrayref()->[0][0];
 }
 
-for my $row (keys %{ $info-&gt;{conflicts} }) {
+for my $row (keys %{ $info->{conflicts} }) {
     ## If the temp is too high, remove server A from consideration!
-    if ($info-&gt;{shared}{wallawallatemp} &gt; $max_temp) {
-        delete $info-&gt;{conflicts}{$row}{A}; ## May not exist, but we delete anyway
+    if ($info->{shared}{wallawallatemp} > $max_temp) {
+        delete $info->{conflicts}{$row}{A}; ## May not exist, but we delete anyway
     }
 
     ## Now we can sort by number of connections and let the least busy db win
     (my $winner) = sort {
-        $info-&gt;{shared}{dbcount}{$a} &lt;=&gt; $info-&gt;{shared}{dbcount}{$b}
+        $info->{shared}{dbcount}{$a} <=> $info->{shared}{dbcount}{$b}
         or
         ## Fallback to reverse alphabetical if the session counts are the same
         $b cmp $a
-    } keys %{ $info-&gt;{conflicts}{$row} };
+    } keys %{ $info->{conflicts}{$row} };
 
-    $info-&gt;{conflicts}{$row} = $winner;
+    $info->{conflicts}{$row} = $winner;
 }
 
 ## We don't want any other customcodes to fire: we have handled this!
-$info-&gt;{lastcode} = 1;
+$info->{lastcode} = 1;
 return;
 ```
 
@@ -299,5 +297,3 @@ with Bucardo. Suggestions for new default handlers and examples of
 real-world conflict handlers are particularly welcome, as well as any other
 questions or comments. You can find the mailing list at bucardo-general@bucardo.org, and
 subscribe by visiting [the bucardo-general Info Page](https://mail.endcrypt.com/mailman/listinfo/bucardo-general).
-
-

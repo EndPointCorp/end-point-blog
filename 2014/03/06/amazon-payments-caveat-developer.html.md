@@ -12,13 +12,13 @@ A client of ours needed me to install Amazon Payments for them.  Now there are s
 Amazon starts with a JavaScript widget that asks you to log in or create an Amazon account.  The widget returns an order reference ID:
 
 ```nohighlight
-&lt;div id="payWithAmazonDiv" style="padding-top: 1.2em;"&gt;
-   &lt;br /&gt;
-   &lt;img src="https://payments.amazon.com/gp/widgets/button?sellerId=[Amazonseller id]&amp;size=large&amp;color=orange" 
-        style="cursor: pointer;"/&gt;
-&lt;/div&gt;
+<div id="payWithAmazonDiv" style="padding-top: 1.2em;">
+   <br />
+   <img src="https://payments.amazon.com/gp/widgets/button?sellerId=[Amazonseller id]&size=large&color=orange" 
+        style="cursor: pointer;"/>
+</div>
 
-&lt;script type="text/javascript"&gt;
+<script type="text/javascript">
  var amazonOrderReferenceId;
  new OffAmazonPayments.Widgets.Button ({
    sellerId: '[Amazon seller id]',
@@ -33,7 +33,7 @@ Amazon starts with a JavaScript widget that asks you to log in or create an Amaz
      alert('Amazon error');
     }
  }).bind("payWithAmazonDiv");
-&lt;/script&gt;
+</script>
 ```
 
 The Id returned looks like “P##-#######-#######.”  and must be saved for future screens.  It's know as the Amazon Order Reference Id.  In my case, I simply passed it to the next page in the session variable of the query string.
@@ -43,14 +43,14 @@ Amazon next wants you specify a shipping address and that's when the fun begins:
 ```nohighlight
 https://mws.amazonservices.com/OffAmazonPayments
 ?AWSAccessKeyId=[Amazon ACCESS KEY]
-&amp;Action=GetOrderReferenceDetails
-&amp;AmazonOrderReferenceId=[Amazon Order Reference]
-&amp;SellerId=[Amazon Seller ID]
-&amp;SignatureMethod=HmacSHA256
-&amp;SignatureVersion=2
-&amp;Timestamp=2014-03-01T17%3A49.000Z
-&amp;Version=2013-01-01
-&amp;Signature=[Computed Signature]'
+&Action=GetOrderReferenceDetails
+&AmazonOrderReferenceId=[Amazon Order Reference]
+&SellerId=[Amazon Seller ID]
+&SignatureMethod=HmacSHA256
+&SignatureVersion=2
+&Timestamp=2014-03-01T17%3A49.000Z
+&Version=2013-01-01
+&Signature=[Computed Signature]'
 ```
 
 For this  I used a Perl module: *use Digest::SHA qw( hmac_sha256_base64 )*. This routine successfully encodes the data and converts it to base64, as Amazon requires.  Another little bit of fun comes from having to sort the options before the signature in case-sensitive alphabetical order.  Only this results in the Signature being generated properly.  Another little gotcha is to make sure your timestamp is set to the future.  I set it for six hours ahead, and it seems to work properly.

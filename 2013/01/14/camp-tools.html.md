@@ -29,18 +29,18 @@ alias ct='camp_top; pwd'
 
 function cat_root() {
   camp_top $*
-  cd catalogs/* &gt;/dev/null
+  cd catalogs/* >/dev/null
 }
 alias cr='cat_root; pwd'
 
 function pages_root() {
   cat_root $*
-  cd pages &gt;/dev/null
+  cd pages >/dev/null
 }
 alias pr='pages_root; pwd'
 
 function what_camp() {
-  c=$( camp_top $* 2&gt; /dev/null; basename $( pwd ))
+  c=$( camp_top $* 2> /dev/null; basename $( pwd ))
   echo $c
 }
 ```

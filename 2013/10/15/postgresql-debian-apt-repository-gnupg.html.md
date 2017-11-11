@@ -7,7 +7,7 @@ title: PostgreSQL Debian apt repository GnuPG key update
 
 The excellent PGDG (PostgreSQL Global Development Group) apt repositories provide current point releases of supported PostgreSQL versions for Debian and Ubuntu LTS Linux. If you'd like to use a newer version of PostgreSQL than ships with your Linux distribution, or need to use an older Postgres release, you should take a look at [http://wiki.postgresql.org/wiki/Apt](http://wiki.postgresql.org/wiki/Apt).
 
-A minor housekeeping matter arose just a few days ago: The GnuPG key used to sign the PostgreSQL packages expired on October 13. During a run of apt-get update &amp;&amp; apt-get upgrade that leads to errors such as those seen here:
+A minor housekeeping matter arose just a few days ago: The GnuPG key used to sign the PostgreSQL packages expired on October 13. During a run of apt-get update && apt-get upgrade that leads to errors such as those seen here:
 
 ```
 Get:1 http://security.debian.org wheezy/updates Release.gpg [836 B]

@@ -13,22 +13,22 @@ are very similar.
 Given branch "foo" with a sequence of commits:
 
 ```nohighlight
-foo: D --&gt; C --&gt; B --&gt; A
+foo: D --> C --> B --> A
 ```
 
 I can make a branch "bar" off of foo: (git branch bar foo)
 
 ```nohighlight
-foo: D --&gt; C --&gt; B --&gt; A
-bar: D --&gt; C --&gt; B --&gt; A
+foo: D --> C --> B --> A
+bar: D --> C --> B --> A
 ```
 
 Then I do some development on bar, and commit.  Meanwhile, somebody else
 develops on foo, and commits.  Introducing new, unrelated commit structures.
 
 ```nohighlight
-foo: E --&gt; D --&gt; C --&gt; B --&gt; A
-bar: X --&gt; D --&gt; C --&gt; B --&gt; A
+foo: E --> D --> C --> B --> A
+bar: X --> D --> C --> B --> A
 ```
 
 Now I want to take my "bar" work (in commit X) and put it back upstream
@@ -43,9 +43,9 @@ A merge will show up as a separate commit.  Meaning, merging bar into
 foo will result in commit history:
 
 ```nohighlight
-foo: M --&gt; X --&gt; D --&gt; C --&gt; B --&gt; A
+foo: M --> X --> D --> C --> B --> A
       \
-       E --&gt; D --&gt; C --&gt; B --&gt; A
+       E --> D --> C --> B --> A
 ```
 
 (The particulars may depend on conflicts in E versus X).
@@ -57,7 +57,7 @@ and applied on top of the full commit history of "foo".  Meaning, you
 get the history:
 
 ```nohighlight
-bar: X' --&gt; E --&gt; D --&gt; C --&gt; B --&gt; A
+bar: X' --> E --> D --> C --> B --> A
 ```
 
 This can be pushed directly to "foo" upstream because it contains the

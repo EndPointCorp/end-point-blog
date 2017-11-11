@@ -21,10 +21,10 @@ Following the pattern described in the [Spree documentation](http://guides.spree
 class AbilityDecorator
      include CanCan::Ability
      def initialize(user)
-       if user.respond_to?(:has_spree_role?) &amp;&amp; user.has_spree_role?('sales_manager')
+       if user.respond_to?(:has_spree_role?) && user.has_spree_role?('sales_manager')
          can [:admin, :index, :show], Spree::Order
        end
-       if user.respond_to?(:has_spree_role?) &amp;&amp; user.has_spree_role?('training')
+       if user.respond_to?(:has_spree_role?) && user.has_spree_role?('training')
          can [:admin, :manage], Spree::Training
        end
      end
@@ -42,7 +42,7 @@ The log output above shows that while I was logged in as a user with the trainin
 ```ruby
 def after_sign_in_path_for(resource)
     stored_location_for(resource) ||
-      if resource.is_a?(Spree::User) &amp;&amp; resource.has_spree_role?('training')
+      if resource.is_a?(Spree::User) && resource.has_spree_role?('training')
         admin_trainings_path
       else
         super

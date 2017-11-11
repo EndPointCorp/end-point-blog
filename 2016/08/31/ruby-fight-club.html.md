@@ -16,7 +16,7 @@ This post may get me kicked out for talking about the club, but…I was asked to
 <img align="right" alt="Poodr cover" border="0" height="250" src="/blog/2016/08/31/ruby-fight-club/image-0.jpeg" title="poodr-cover.jpg" width="191"/>
 In the past we've met together as a company and in smaller team or project focused groups but this was first time we used a book as the guiding, recurring topic with a smaller, committed group who made time for it. Attendance was optional and we did have some folks who opted out even though they loved the subject matter and the idea, because they knew they couldn't make it most of the time. I think this made the group tighter-knit.
 
-Our group of six remote engineers met weekly for one hour to discuss one chapter from the book. We worked through each chapter together which often led to Q &amp; A sessions and deeper discussions about Ruby and [CS](https://en.wikipedia.org/wiki/Computer_science) theory in general. Each week, one member of the team would lead the discussion. It required some preparation in advance and gave us all a chance to work on our presenting and moderating skills. We used Google Hangouts to meet and the presenter would share their screen to show slides and example code.
+Our group of six remote engineers met weekly for one hour to discuss one chapter from the book. We worked through each chapter together which often led to Q & A sessions and deeper discussions about Ruby and [CS](https://en.wikipedia.org/wiki/Computer_science) theory in general. Each week, one member of the team would lead the discussion. It required some preparation in advance and gave us all a chance to work on our presenting and moderating skills. We used Google Hangouts to meet and the presenter would share their screen to show slides and example code.
 
 ## Honing Our Craft
 
@@ -34,7 +34,7 @@ During one of our meetings I asked the group if anyone went to meetups local to 
 
 ## What Worked Well
 
-We stuck to the time limit (mostly) which was a good thing. We found we usually had enough time to socialize a bit, discuss the book, have a Q &amp; A time and then get back to our client work. Sharing the presenting / discussion leading role was also nice. Leading a session took a little time to prepare but because we all took turns doing this we shared the load. I'd like to personally thank Phunk (our fearless Ruby Fight Club leader) for having the idea and executing so well on it. We all really appreciate it and look forward to running more meetups like it in future.
+We stuck to the time limit (mostly) which was a good thing. We found we usually had enough time to socialize a bit, discuss the book, have a Q & A time and then get back to our client work. Sharing the presenting / discussion leading role was also nice. Leading a session took a little time to prepare but because we all took turns doing this we shared the load. I'd like to personally thank Phunk (our fearless Ruby Fight Club leader) for having the idea and executing so well on it. We all really appreciate it and look forward to running more meetups like it in future.
 
 ## What We Might Do Differently Next Time
 

@@ -20,22 +20,22 @@ We referred to [this article](http://techno-geeks.org/2009/03/using-the-security
 class StephsSecurityComponent extends Object {
     var $components = array('Security');
     function forceSecure($args) {
-        $this-&gt;Security-&gt;blackHoleCallback = 'forceSSL';
-        $this-&gt;Security-&gt;requireSecure($args);
+        $this->Security->blackHoleCallback = 'forceSSL';
+        $this->Security->requireSecure($args);
     }
     function forceSSL($controller) {
-        $redirect_location = 'https://'.HTTPS_HOST.$controller-&gt;here;
-        $params = $controller-&gt;params['url'];
+        $redirect_location = 'https://'.HTTPS_HOST.$controller->here;
+        $params = $controller->params['url'];
         unset($params['url']);
-        if(count($params) &gt; 0)
+        if(count($params) > 0)
         {
             $param_string = '';
-            foreach($params as $key =&gt; $value)
-                $param_string .= '&amp;'.$key.'='.$value;
-            $param_string = preg_replace('/^\&amp;/', '?', $param_string);
+            foreach($params as $key => $value)
+                $param_string .= '&'.$key.'='.$value;
+            $param_string = preg_replace('/^\&/', '?', $param_string);
             $redirect_location .= $param_string;
         }
-        $controller-&gt;redirect($redirect_location);
+        $controller->redirect($redirect_location);
     }
 }
 ```
@@ -44,7 +44,7 @@ This design required the following definition in the application's app_controlle
 
 ```php
 function forceSSL() {
-    $this-&gt;StephsSecurity-&gt;forceSSL($this);
+    $this->StephsSecurity->forceSSL($this);
 }
 ```
 
@@ -52,7 +52,7 @@ And any controller that required an action to be secure would call the forceSecu
 
 ```php
 function beforeFilter() {
-    $this-&gt;StephsSecurity-&gt;forceSecure('my_action');
+    $this->StephsSecurity->forceSecure('my_action');
 }
 ```
 
@@ -67,15 +67,15 @@ class ThisController extends AppController {
    ...
     var $uses = array('Security', 'StephsSecurity');
     function beforeFilter() {
-        $this-&gt;StephsSecurity-&gt;forceSecure('action_one');
+        $this->StephsSecurity->forceSecure('action_one');
     }
     function action_one() {
         //receives inputs from a cakephp form helper
-        //do stuff with $this-&gt;params
+        //do stuff with $this->params
     }
     function action_two() {
         //receives inputs from a legacy php page
-        //do stuff with $this-&gt;params -- FAIL
+        //do stuff with $this->params -- FAIL
     }
 }
 ```
@@ -84,27 +84,27 @@ We added debugging and found that $this->params (or the form parameters) to acti
 
 ```php
 function beforeFilter() {
-    $this-&gt;log($this-&gt;params, LOG_DEBUG);
+    $this->log($this->params, LOG_DEBUG);
     //some other unrelated before filtering
-    $this-&gt;log($this-&gt;params, LOG_DEBUG);
-    $this-&gt;StephsSecurity-&gt;forceSecure('action_one');
-    $this-&gt;log($this-&gt;params, LOG_DEBUG);   //parameters looked ok here!
+    $this->log($this->params, LOG_DEBUG);
+    $this->StephsSecurity->forceSecure('action_one');
+    $this->log($this->params, LOG_DEBUG);   //parameters looked ok here!
 }
 ```
 
 After more troubleshooting, we determined that if the CakePHP core Security component wasn't included in the controller, the parameters were not deleted and the action **did it's stuff**. A review of the CakePHP core Security component revealed that the component performs a validation on posts, which includes a check for a Token input. Because the post to this action originated from a legacy PHP page, it did not include any special hidden form variables included with the use of the CakePHP form helper (much like the Token inputs included via the Rails form helper):
 
 ```nohighlight
-&lt;input type="hidden" value="POST" name="_method"/&gt;
-&lt;input type="hidden" id="Token123123123 value="123123123131231231223" name="data[_Token][key]"/&gt;
+<input type="hidden" value="POST" name="_method"/>
+<input type="hidden" id="Token123123123 value="123123123131231231223" name="data[_Token][key]"/>
 ```
 
 As a result, the black hole security redirect was called before action_two was reached, then action_two was called with missing parameters. Ethan realized there was a simple fix to this post validation failure. The Security->validatePost variable was set to false inside the controller's beforeFilter to bypass the _validatePost check in the security component. No more post validation produced expected action_two behavior.
 
 ```php
 function beforeFilter() {
-    $this-&gt;Security-&gt;validatePost = false;
-    $this-&gt;StephsSecurity-&gt;forceSecure('index');
+    $this->Security->validatePost = false;
+    $this->StephsSecurity->forceSecure('index');
 }
 ```
 

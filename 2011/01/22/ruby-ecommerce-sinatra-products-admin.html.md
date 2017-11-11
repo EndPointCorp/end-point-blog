@@ -32,15 +32,15 @@ Now, let's imagine an ecommerce store with different products! **Whoa!** For thi
 <pre class="brush:ruby">
 # Products ActiveRecord migration
 require 'lib/model/product'
-class CreateProducts &lt; ActiveRecord::Migration
+class CreateProducts < ActiveRecord::Migration
   def self.up
     create_table :products do |t|
       t.string :name,
-        :null =&gt; false
+        :null => false
       t.decimal :price,
-        :null =&gt; false
+        :null => false
       t.string :description,
-        :null =&gt; false
+        :null => false
     end
   end
 
@@ -52,7 +52,7 @@ end
 </td><td valign="top">
 <pre class="brush:ruby"> 
 # Products model class
-class Product &lt; ActiveRecord::Base
+class Product < ActiveRecord::Base
   validates_presence_of :name
   validates_presence_of :price
   validates_numericality_of :price
@@ -65,11 +65,11 @@ end
 <tr><td valign="top">
 <pre class="brush:ruby">
 # Order migration update
-class CreateOrders &lt; ActiveRecord::Migration
+class CreateOrders < ActiveRecord::Migration
   def self.up
     create_table :orders do |t|
 +      t.references :product,
-+        :null =&gt; false
++        :null => false
     end
   end
 
@@ -81,7 +81,7 @@ end
 </td><td valign="top">
 <pre class="brush:diff">
 # Order model changes
-class Order &lt; ActiveRecord::Base
+class Order < ActiveRecord::Base
 ...
 + validates_presence_of :product_id
 +
@@ -119,7 +119,7 @@ app.get '/admin/:type' do |type|
     objects = klass.all
     status 200
     objects.to_json
-  rescue Exception =&gt; e
+  rescue Exception => e
     halt 500, [e.message].to_json 
   end
 end
@@ -141,7 +141,7 @@ app.delete '/admin/:type/:id' do |type, id|
       errors = instance.errors.full_messages
       [errors.first].to_json
     end
-  rescue Exception =&gt; e
+  rescue Exception => e
     halt 500, [e.message].to_json
   end
 end
@@ -165,7 +165,7 @@ app.post '/admin/:type/new' do |type|
       errors = instance.errors.full_messages
       [errors.first].to_json
     end
-  rescue Exception =&gt; e
+  rescue Exception => e
     halt 500, [e.message].to_json
   end
 end
@@ -189,7 +189,7 @@ app.post '/admin/:type/:id' do |type, id|
       errors = instance.errors.full_messages
       [errors.first].to_json
     end
-  rescue Exception =&gt; e
+  rescue Exception => e
     halt 500, [e.message].to_json
   end
 end
@@ -205,33 +205,33 @@ Next, I use jQuery to call these methods via AJAX, also in such a way that it'll
 <pre class="brush:ruby">
 functions.product = {
   edit: function(product) {
-    return '&lt;h4&gt;Editing Product: '
+    return '<h4>Editing Product: '
       + product.id
-      + '&lt;/h4&gt;'
-      + '&lt;p&gt;&lt;label for="name"&gt;Name&lt;/label&gt;'
-      + '&lt;input type="text" name="name" value="'
+      + '</h4>'
+      + '<p><label for="name">Name</label>'
+      + '<input type="text" name="name" value="'
       + product.name
-      + '" /&gt;&lt;/p&gt;'
-      + '&lt;p&gt;&lt;label for="price"&gt;Price&lt;/label&gt;'
-      + '&lt;input type="text" name="price" value="'
+      + '" /></p>'
+      + '<p><label for="price">Price</label>'
+      + '<input type="text" name="price" value="'
       + parseFloat(product.price).toFixed(2)
-      + '" /&gt;&lt;/p&gt;'
-      + '&lt;p&gt;&lt;label for="description"&gt;Description&lt;/label&gt;'
-      + '&lt;textarea name="description"&gt;'
+      + '" /></p>'
+      + '<p><label for="description">Description</label>'
+      + '<textarea name="description">'
       + product.description
-      + '&lt;/textarea&gt;&lt;/p&gt;';
+      + '</textarea></p>';
   },
   content: function(product) {
-    var inner_html = '&lt;h4&gt;Product: '
+    var inner_html = '<h4>Product: '
       + product.id
-      + '&lt;/h4&gt;'
+      + '</h4>'
       + 'Name: '
       + product.name
-      + '&lt;br /&gt;Price: $'
+      + '<br />Price: $'
       + parseFloat(product.price).toFixed(2)
-      + '&lt;br /&gt;Description: '
+      + '<br />Description: '
       + product.description
-      + '&lt;br /&gt;';
+      + '<br />';
     return inner_html;
   },
   empty: function() {
@@ -253,24 +253,24 @@ functions.product = {
 <pre class="brush:ruby">
 functions.order = {
   edit: function(order) {
-    return '&lt;b&gt;Order: '
+    return '<b>Order: '
       + order.id
-      + '&lt;/b&gt;&lt;br /&gt;'
-      + '&lt;input name="email" value="'
+      + '</b><br />'
+      + '<input name="email" value="'
       + order.email
-      + '" /&gt;'
+      + '" />'
       + ' – '
       ...
       //Order editing is limited
   },
   content: function(order) {
-    return '&lt;b&gt;Order: '
+    return '<b>Order: '
       + order.id
-      + '&lt;/b&gt;&lt;br /&gt;'
+      + '</b><br />'
       + order.email
       + ' – '
       + order.phone
-      + '&lt;br /&gt;'
+      + '<br />'
       ...
   },
   empty: function() {

@@ -79,7 +79,7 @@ place it was time to see if things worked.
 
 ```nohighlight
 $ rails console
-rb(main):001:0&gt; p = Product.new
+rb(main):001:0> p = Product.new
 ```
 
 ...and I got a big wall of error messages.  So I could not even
@@ -143,7 +143,7 @@ ActiveProduct module definition in active_product/lib/active_product/engine.rb:
 
 ```ruby
 module ActiveProduct
-  class Engine &lt; Rails::Engine
+  class Engine < Rails::Engine
     config.autoload_paths += %W(#{config.root}/lib/auto)
 
 ```

@@ -72,33 +72,33 @@ configuration_management_disclaimer="\n\
 # END multiline configuration_management_disclaimer string variable
 
 # BEGIN assembling tmp file
-echo -e "$configuration_management_disclaimer" &gt; $tmp_authorized_keys
+echo -e "$configuration_management_disclaimer" > $tmp_authorized_keys
 
-echo -e "# BEGIN STANDARD HOSTING KEYS\n" &gt;&gt; $tmp_authorized_keys
-cat $hosting_authorized_keys &gt;&gt; $tmp_authorized_keys
-echo -e "# END STANDARD HOSTING KEYS\n" &gt;&gt; $tmp_authorized_keys
+echo -e "# BEGIN STANDARD HOSTING KEYS\n" >> $tmp_authorized_keys
+cat $hosting_authorized_keys >> $tmp_authorized_keys
+echo -e "# END STANDARD HOSTING KEYS\n" >> $tmp_authorized_keys
 
 if [[ -r $local_authorized_keys ]]
 then
-  echo -e "# BEGIN LOCAL KEYS\n" &gt;&gt; $tmp_authorized_keys
-  cat $local_authorized_keys &gt;&gt; $tmp_authorized_keys
-  echo -e "# END LOCAL KEYS\n" &gt;&gt; $tmp_authorized_keys
+  echo -e "# BEGIN LOCAL KEYS\n" >> $tmp_authorized_keys
+  cat $local_authorized_keys >> $tmp_authorized_keys
+  echo -e "# END LOCAL KEYS\n" >> $tmp_authorized_keys
 fi
 
-echo -e "$configuration_management_disclaimer" &gt;&gt; $tmp_authorized_keys
+echo -e "$configuration_management_disclaimer" >> $tmp_authorized_keys
 # END assembling tmp file
 
 # BEGIN check (and do) backup of old file
-if ! cmp $tmp_authorized_keys $target_authorized_keys &amp;&gt; /dev/null
+if ! cmp $tmp_authorized_keys $target_authorized_keys &> /dev/null
 then
   mkdir -p $authorized_keys_backup_dir
 
   backup_old_auth_keys="${authorized_keys_backup_dir}/${base_authorized_key_file}_$(date '+%Y%m%dT%H%M%z')"
-  cat $target_authorized_keys &gt; $backup_old_auth_keys
+  cat $target_authorized_keys > $backup_old_auth_keys
 fi
 # END check (and do) backup of old file
 
-cat $tmp_authorized_keys &gt; $target_authorized_keys
+cat $tmp_authorized_keys > $target_authorized_keys
 
 rm $tmp_authorized_keys
 

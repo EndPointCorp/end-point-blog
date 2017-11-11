@@ -5,8 +5,6 @@ tags: rails, testing
 title: Tests are not Specs
 ---
 
-
-
 We're big fans of Test Driven Development (TDD).  However, a
 co-worker and I encountered some obstacles
 because we focused too intently on writing tests and didn't spend
@@ -107,7 +105,7 @@ describe 'creating subscriber entry' do
   end
   describe 'with a method name' do
     it 'should create a block that invokes the method name' do
-      class &lt;&lt; @subscriber                     
+      class << @subscriber                     
         attr_accessor :weakref, :last_received                      
 
         def callback(e)                         
@@ -136,7 +134,7 @@ something like
 
 ```ruby
   ...
-  class &lt;&lt; @subscriber
+  class << @subscriber
     attr_accessor :sentinel
     def callback(e)
       self.sentinel = true
@@ -163,5 +161,3 @@ We solved these problems (and more) in true Agile fashion: through good communic
 that tests alone are insufficient, and good communication needs to be maintained in the development process.
 
 Real specs can help, too.
-
-

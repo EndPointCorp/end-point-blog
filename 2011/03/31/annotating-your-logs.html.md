@@ -32,7 +32,7 @@ postgres@mothra:~$ grep -n 'LOG:  MARK' /var/log/postgresql/postgresql-9.0-main.
 19180:2011-03-31 20:20:37 EDT LOG:  MARK: 60 users
 19478:2011-03-31 20:25:48 EDT LOG:  MARK: 120 users
 20247:2011-03-31 20:32:15 EDT LOG:  MARK: 360 users
-postgres@mothra:~$ sed -n '19180,19478p' /var/log/postgresql/postgresql-9.0-main.log | bin/pgsi.pl &gt; 60users.html
+postgres@mothra:~$ sed -n '19180,19478p' /var/log/postgresql/postgresql-9.0-main.log | bin/pgsi.pl > 60users.html
 ```
 
 Oh, and the performance problem? Turns out it wasn't Postgres at all, every single query average execution time was shown to vary minimally as the concurrent user count was scaled higher and higher. But that's another story.

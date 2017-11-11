@@ -68,7 +68,7 @@ result = inbox:contain_subject('bats')
 count = 0
 for k,v in pairs(result) do 
   count = count + 1 
-  if count &lt; 10 then
+  if count < 10 then
     print(count, "Call to pairs:",k,v)
   end
 end
@@ -77,7 +77,7 @@ print("Total count for pairs: " .. count);
 count = 0
 for k,v in ipairs(result) do 
   count = count + 1 
-  if count &lt; 10 then
+  if count < 10 then
     print(count, "Call to ipairs:",k,v)
   end
 end
@@ -151,7 +151,7 @@ result = baseresult
     + inbox:contain_to('@lists.wikimedia.org')
   )
 count = 0 for k,v in ipairs(result) do count = count + 1 end
-if count &gt; 0 then
+if count > 0 then
   inbox:move_messages(myaccount['INBOX/mediawiki'], result)
 end
 print('Mediawiki emails moved:        ' .. count)
@@ -167,7 +167,7 @@ result = baseresult
   * inbox:contain_from('WikiAdmin <wikiadmin@example.com>')
   * inbox:contain_subject('has been')
 count = 0 for k,v in ipairs(result) do count = count + 1 end
-if count &gt; 0 then
+if count > 0 then
   inbox:delete_messages(result)
 end
 print('Wiki alerts deleted:           ' .. count)

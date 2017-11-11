@@ -86,7 +86,7 @@ On the old branch I want to revert the changes, after doing this I will just com
 I reverted the changes on current branch with:
 
 ```nohighlight
-$ patch -p1 &lt; down.diff
+$ patch -p1 < down.diff
 patching file test
 $ git commit -a -m "reverted the changes, moved to another branch"
 ```
@@ -107,7 +107,7 @@ $ git checkout NEW_BRANCH
 Apply the up.diff patch to the new branch:
 
 ```nohighlight
-patch -p1 &lt; up.diff
+patch -p1 < up.diff
 ```
 
 And commit the changes:

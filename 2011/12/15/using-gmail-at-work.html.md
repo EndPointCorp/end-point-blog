@@ -5,8 +5,6 @@ tags: email, mobile
 title: Using Gmail at Work
 ---
 
-
-
 ### The Short Story
 
 For those who don't care about why, just how...
@@ -45,5 +43,3 @@ One requirement here at End Point which this configuration does not meet is supp
 *There may also be resistance from crypto users – who already are a security-conscious lot – to trusting private keys and confidential messages to a set of PGP functions folded inside some JavaScript running inside a browser. *
 
 I'd have to say I agree. After following the instructions to install the plugin, I balked when it asked for my private key; I just didn't feel comfortable. Despite this shortfall, most End Point email isn't encrypted end-to-end. However, I can feel good knowing that my "last mile" connection to End Point's servers are encrypted, end-to-end using encrypted POP, SMTP, and HTTPS.
-
-

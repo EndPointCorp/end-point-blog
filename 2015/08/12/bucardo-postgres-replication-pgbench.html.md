@@ -113,7 +113,7 @@ Now that Postgres is up and running, it is time to create some test databases an
 
 ```
 $ sudo ln -s /usr/pgsql-9.4/bin/pgbench /usr/local/bin/
-$ sudo sh -c 'echo "local all all trust" &gt; /var/lib/pgsql/9.4/data/pg_hba.conf'
+$ sudo sh -c 'echo "local all all trust" > /var/lib/pgsql/9.4/data/pg_hba.conf'
 $ sudo systemctl reload postgresql-9.4
 ```
 
@@ -238,7 +238,7 @@ count | 0
 count | 0
 
 ## We want to "touch" these four rows to make sure they replicate out:
-$ psql test1 -c 'UPDATE pgbench_accounts set aid=aid where aid &lt;= 4'
+$ psql test1 -c 'UPDATE pgbench_accounts set aid=aid where aid <= 4'
 UPDATE 4
 
 $ for i in {2,3,4}; do psql test$i -xtc 'select count(*) from pgbench_accounts'; done
@@ -254,22 +254,22 @@ UPDATE 1
 ```
 
 ```
-$ psql test1 -tc 'select aid, abalance from pgbench_accounts where aid &lt;= 4 order by aid'
+$ psql test1 -tc 'select aid, abalance from pgbench_accounts where aid <= 4 order by aid'
    1 |      100
    2 |      200
    3 |      300
    4 |        0
-$ psql test2 -tc 'select aid, abalance from pgbench_accounts where aid &lt;= 4 order by aid'
+$ psql test2 -tc 'select aid, abalance from pgbench_accounts where aid <= 4 order by aid'
    1 |      100
    2 |      200
    3 |      300
    4 |        0
-$ psql test3 -tc 'select aid, abalance from pgbench_accounts where aid &lt;= 4 order by aid'
+$ psql test3 -tc 'select aid, abalance from pgbench_accounts where aid <= 4 order by aid'
    1 |      100
    2 |      200
    3 |      300
    4 |        0
-$ psql test4 -tc 'select aid, abalance from pgbench_accounts where aid &lt;= 4 order by aid'
+$ psql test4 -tc 'select aid, abalance from pgbench_accounts where aid <= 4 order by aid'
    1 |      100
    2 |      200
    3 |      300
@@ -282,7 +282,7 @@ get overwritten:
 ```
 $ psql test1 -c 'update pgbench_accounts set abalance=9999 where aid = 4'
 UPDATE 1
-$ psql test4 -tc 'select aid, abalance from pgbench_accounts where aid &lt;= 4 order by aid'
+$ psql test4 -tc 'select aid, abalance from pgbench_accounts where aid <= 4 order by aid'
    1 |      100
    2 |      200
    3 |      300
@@ -307,12 +307,12 @@ ln -s '/usr/lib/systemd/system/mariadb.service' '/etc/systemd/system/multi-user.
 $ sudo systemctl start mariadb
 
 $ sudo mysql
-mysql&gt; create user 'ec2-user'@'localhost' identified by 'sixofone';
-mysql&gt; grant all on *.* TO 'ec2-user'@'localhost';
-mysql&gt; quit
+mysql> create user 'ec2-user'@'localhost' identified by 'sixofone';
+mysql> grant all on *.* TO 'ec2-user'@'localhost';
+mysql> quit
 
 ## Store the MariaDB / MySQL password so we don't have to keep entering it:
-$ cat &gt; ~/.my.cnf 
+$ cat > ~/.my.cnf 
 [client]
 password = sixofone
 ```
@@ -348,14 +348,14 @@ CREATE TABLE pgbench_tellers (
 );
 
 $ mysql
-msyql&gt; create database pgb;
-mysql&gt; use pgb
-pgb&gt; ## add the tables here
-pgb&gt; quit
+msyql> create database pgb;
+mysql> use pgb
+pgb> ## add the tables here
+pgb> quit
 
 $ sqlite3 pgb.sqlite
-sqlite&gt; ## add the tables here
-sqlite&gt; .q
+sqlite> ## add the tables here
+sqlite> .q
 ```
 
 Teach Bucardo about these new databases, then add them to a new sync. As we do not want changes to get immediately replicated, we set this sync to "autokick off". This will ensure that the sync will only run when it is manually started via the "bucardo kick" command. Since database C is also part of another Bucardo sync and may get rows written to it that way,  we need to set it as a "makedelta" database, which ensures that the replicated rows from the other sync are replicated onwards in our new sync.
@@ -394,7 +394,7 @@ UPDATE 1
 UPDATE 1
 UPDATE 1
 
-$ psql test4 -tc 'select aid, abalance from pgbench_accounts where aid &lt;= 4 order by aid'
+$ psql test4 -tc 'select aid, abalance from pgbench_accounts where aid <= 4 order by aid'
    1 |     2222
    2 |     4444
    3 |     6666
@@ -425,12 +425,12 @@ $ mysql pgb -e 'select count(*) from pgbench_accounts'
 |        3 |
 +----------+
 
-$ sqlite3 pgb.sqlite 'select aid,abalance from pgbench_accounts where aid &lt;=4 order by aid'
+$ sqlite3 pgb.sqlite 'select aid,abalance from pgbench_accounts where aid <=4 order by aid'
 1|2222
 2|4444
 3|6666
 
-$ mysql pgb -e 'select aid,abalance from pgbench_accounts where aid &lt;=4 order by aid'
+$ mysql pgb -e 'select aid,abalance from pgbench_accounts where aid <=4 order by aid'
 +-----+----------+
 | aid | abalance |
 +-----+----------+

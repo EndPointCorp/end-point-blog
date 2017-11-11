@@ -14,7 +14,7 @@ I came up with a nifty way of using jQuery to toggle the menu bar CSS between fi
 ```javascript
 var head_offset = jQuery('#fixed_header').offset();
 jQuery(window).scroll(function() {
-    if(jQuery(window).scrollTop() &lt; head_offset.top) {
+    if(jQuery(window).scrollTop() < head_offset.top) {
         jQuery('#fixed_header').css({ position: "static"});
     } else {
         jQuery('#fixed_header').css({ position: "fixed", top: "0px" });
@@ -24,4 +24,4 @@ jQuery(window).scroll(function() {
 
 And perhaps the most effective demonstration of this behavior comes in the form of a video, created with [Screencast-O-Matic](http://www.screencast-o-matic.com/). I also tried capturing with [Jing](http://www.techsmith.com/jing/), which is another handy tool for quick Screenshots and Screencasts. Note that the header content has CSS adjustments for demo purposes only:
 
-<iframe allowfullscreen="" frameborder="0" height="447" src="http://player.vimeo.com/video/28823480?title=0&amp;byline=0&amp;portrait=0" webkitallowfullscreen="" width="745"></iframe>
+<iframe allowfullscreen="" frameborder="0" height="447" src="http://player.vimeo.com/video/28823480?title=0&byline=0&portrait=0" webkitallowfullscreen="" width="745"></iframe>

@@ -31,45 +31,45 @@ This was exactly what I needed. I did a quick search online to see if anyone had
 set -e
 
 sig () {
-  test -s "$PID" &amp;&amp; kill -$1 `cat "$PID"`
+  test -s "$PID" && kill -$1 `cat "$PID"`
 }
 
 oldsig () {
-  test -s "$OLD_PID" &amp;&amp; kill -$1 `cat "$OLD_PID"`
+  test -s "$OLD_PID" && kill -$1 `cat "$OLD_PID"`
 }
 
 cmd () {
   case $1 in
     start)
-      sig 0 &amp;&amp; echo &gt;&amp;2 "Already running" &amp;&amp; exit 0
+      sig 0 && echo >&2 "Already running" && exit 0
       echo "Starting in environment $RAILS_ENV for config $CONFIG"
       $CMD
       ;;
     stop)
-      sig QUIT &amp;&amp; echo "Stopping" &amp;&amp; exit 0
-      echo &gt;&amp;2 "Not running"
+      sig QUIT && echo "Stopping" && exit 0
+      echo >&2 "Not running"
       ;;
     force-stop)
-      sig TERM &amp;&amp; echo "Forcing a stop" &amp;&amp; exit 0
-      echo &gt;&amp;2 "Not running"
+      sig TERM && echo "Forcing a stop" && exit 0
+      echo >&2 "Not running"
       ;;
     restart|reload)
       echo "Restarting with wait 30"
-      sig USR2 &amp;&amp; sleep 30 &amp;&amp; oldsig QUIT &amp;&amp; echo "Killing old master" `cat $OLD_PID` &amp;&amp; exit 0
-      echo &gt;&amp;2 "Couldn't reload, starting '$CMD' instead"
+      sig USR2 && sleep 30 && oldsig QUIT && echo "Killing old master" `cat $OLD_PID` && exit 0
+      echo >&2 "Couldn't reload, starting '$CMD' instead"
       $CMD
       ;;
     upgrade)
-      sig USR2 &amp;&amp; echo Upgraded &amp;&amp; exit 0
-      echo &gt;&amp;2 "Couldn't upgrade, starting '$CMD' instead"
+      sig USR2 && echo Upgraded && exit 0
+      echo >&2 "Couldn't upgrade, starting '$CMD' instead"
       $CMD
       ;;
     rotate)
-      sig USR1 &amp;&amp; echo "rotated logs OK" &amp;&amp; exit 0
-      echo &gt;&amp;2 "Couldn't rotate logs" &amp;&amp; exit 1
+      sig USR1 && echo "rotated logs OK" && exit 0
+      echo >&2 "Couldn't rotate logs" && exit 1
       ;;
     *)
-      echo &gt;&amp;2 "Usage: $0 &lt;start|stop|restart|upgrade|rotate|force-stop&gt;"
+      echo >&2 "Usage: $0 <start|stop|restart|upgrade|rotate|force-stop>"
       exit 1
       ;;
     esac

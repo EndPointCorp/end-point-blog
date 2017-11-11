@@ -10,13 +10,13 @@ title: Cleaner redirection in Perl Dancer
 Recently I worked on a project using the Perl web application framework [Dancer](http://www.perldancer.org) that had multiple paths to order a product:
 
 ```nohighlight
- /product =&gt; /cart =&gt; /checkout =&gt; /receipt
+ /product => /cart => /checkout => /receipt
 ```
 
 That's the standard approach. Then there was a "phone order" approach:
 
 ```nohighlight
- /create_order =&gt; /checkout =&gt; /receipt
+ /create_order => /checkout => /receipt
 ```
 
 A "phone order" is one taken down (usually by phone), where the user who is logged in is not the same as the user who "owns" the order. Thus, one user is ordering on behalf of another: the order must be recorded as part of the second user's order history, the various shipping and billing information must come from that user's stored information, and even the product pricing has to be calculated as though that customer were doing the ordering rather than the logged-in user.
@@ -24,7 +24,7 @@ A "phone order" is one taken down (usually by phone), where the user who is logg
 As a consequence, the phone order page flow actually ended up as:
 
 ```nohighlight
- get /create_order =&gt; post /create_order =&gt; /checkout
+ get /create_order => post /create_order => /checkout
 ```
 
 The submission of the /create_order page was processed in an environment that knew about this "proxy" ordering arrangement, thus could do some particularly special-case processing, and then the idea was to pass off to the /checkout page, which would finalize the order including payment information.
@@ -34,9 +34,9 @@ All well and good, but when it came time to implement this, I was faced with a m
 Since /checkout was itself a POSTed page, I needed to reach that page with a set of form parameters in hand. So my original plan was:
 
 ```perl
- post '/create_order' =&gt; sub {
+ post '/create_order' => sub {
    ... # do my special-case processing, and then:
-   forward '/checkout', { param1 =&gt; $value1, ... };
+   forward '/checkout', { param1 => $value1, ... };
  };
 ```
 
@@ -45,7 +45,7 @@ While this works, the problem is that "forward" as a Dancer directive doesn't in
 That means you need to redirect the request, though. I.e.,
 
 ```perl
- post '/create_order' =&gt; sub {
+ post '/create_order' => sub {
    ... # do my special-case processing, and then:
    redirect '/checkout';  # hmm, something's missing here
  };
@@ -54,13 +54,13 @@ That means you need to redirect the request, though. I.e.,
 Hmm, redirect doesn't support a parameter hash. Oh, well, no problem:
 
 ```perl
-   redirect url_for('/checkout', { param1 =&gt; $value1, ... });
+   redirect url_for('/checkout', { param1 => $value1, ... });
 ```
 
 That gets the job done, but at a price: now instead of a nice, clean URL at my final destination, I get:
 
 ```nohighlight
-   .../checkout?param1=value1&amp;param2=...
+   .../checkout?param1=value1&param2=...
 ```
 
 So, still not right. Some research and mailing-list inquiries let me to:
@@ -76,12 +76,12 @@ So what's the option? Well, I can think of two approaches here:
 One: instead of redirecting with parameters, store the parameters in the session:
 
 ```perl
- post '/create_order' =&gt; sub {
+ post '/create_order' => sub {
    ... # do my special-case processing
-   session 'create_order_for_checkout' =&gt; { param1 =&gt; $value1, ... };
+   session 'create_order_for_checkout' => { param1 => $value1, ... };
    redirect '/checkout';
  };
- post '/checkout' =&gt; sub {
+ post '/checkout' => sub {
    my $params = (session 'create_order_for_checkout')
      || params();
    ...

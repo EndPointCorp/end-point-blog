@@ -30,7 +30,7 @@ Justin mentioned that it is still an on-going transition for them.  Ultimately t
 
 Daniel Evans gave an interesting presentation on retrospective meetings.  For those not familiar with these meetings, they are for discussing "what went well" and "what could be improved" over the last project/sprint/time period/etc.  I've participated in these types of meetings for many years and have seen the benefits that can come from them.  Daniel also talked about what these meetings are **not**: they are not meant for deep dives into problems, blame, or griping.  They should be focused on the good that has been done and on solutions to fix problems going forward.  And even then, if the solutions are not quickly apparent then you should not spend too much time trying to find them.  Those conversations should happen outside of this meeting.
 
-His presentation was quite short and didn't really cover much that I didn't know already.  However, at the end he then turned the rest of the time into a retrospective meeting reviewing his presentation, with everyone participating.  This turned out to be pretty fun and was a good exercise, and covered a lot more then a regular Q &amp; A session would have.
+His presentation was quite short and didn't really cover much that I didn't know already.  However, at the end he then turned the rest of the time into a retrospective meeting reviewing his presentation, with everyone participating.  This turned out to be pretty fun and was a good exercise, and covered a lot more then a regular Q & A session would have.
 
 ### Other Links
 

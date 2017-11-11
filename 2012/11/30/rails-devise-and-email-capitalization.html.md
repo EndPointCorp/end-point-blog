@@ -10,14 +10,14 @@ title: 'Rails: Devise and Email Capitalization'
 This week, I found a bug for one of our Rails clients that was worth a quick blog post. The client website runs on Rails 3.2.8 with ActiveRecord and PostgreSQL, uses [RailsAdmin](https://github.com/sferik/rails_admin) for an admin interface, [Devise](https://github.com/plataformatec/devise) for user authentication, and [CanCan](https://github.com/ryanb/cancan) for user authorization. Before we found the bug, our code looked something like this:
 
 ```ruby
-class SomeController &lt; ApplicationController
+class SomeController < ApplicationController
   def some_method
     user = User.find_or_create_by_email(params[:email])
     # do some stuff with the user provided parameters
     if user.save
-      render :json =&gt; {}
+      render :json => {}
     else
-      render :json =&gt; {}, :status =&gt; 500
+      render :json => {}, :status => 500
     end
   end
 end
@@ -48,14 +48,14 @@ if user.save
 The moral of this story is that it's important to a) understand how plugins manipulate user data automatically (in this case Devise automatically filters the email) and b) test a variety of use cases (in this case, we hadn't considered testing mixed caps emails). Our updated code looks something like this, which downcases emails and upon failure, adds more to the logs for additional unexpected user update failures:
 
 ```ruby
-class SomeController &lt; ApplicationController
+class SomeController < ApplicationController
   def some_method
     user = User.find_or_create_by_email(params[:email].downcase)
     # do some stuff with the user provided parameters
     if user.save
-      render :json =&gt; {}
+      render :json => {}
     else
-      render :json =&gt; {}, :status =&gt; 500
+      render :json => {}, :status => 500
       Rails.logger.warn "USER ERROR: #{user.errors.full_messages} #{user.attributes.inspect}"
     end
   end

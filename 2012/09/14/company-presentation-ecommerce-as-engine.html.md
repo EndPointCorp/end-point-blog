@@ -5,9 +5,9 @@ tags: ecommerce, piggybak, rails, spree, company
 title: 'Company Presentation: Ecommerce as an Engine'
 ---
 
-<iframe frameborder="0" height="500" marginheight="0" marginwidth="0" scrolling="no" src="http://www.slideshare.net/slideshow/embed_code/14290723?hostedIn=slideshare&amp;page=upload" width="750"></iframe>
+<iframe frameborder="0" height="500" marginheight="0" marginwidth="0" scrolling="no" src="http://www.slideshare.net/slideshow/embed_code/14290723?hostedIn=slideshare&page=upload" width="750"></iframe>
 
-Today, I gave the presentation to my coworkers entitled "Puppies &amp; Ecommerce as an Engine". The presentation is strongly coupled with my work on [Piggybak](http://www.piggybak.org/), and includes a discussion of traditional ecommerce platforms versus a lightweight ecommerce approach through modularity (Rails Engine). It also provides some code examples as how this does work in Piggybak.
+Today, I gave the presentation to my coworkers entitled "Puppies & Ecommerce as an Engine". The presentation is strongly coupled with my work on [Piggybak](http://www.piggybak.org/), and includes a discussion of traditional ecommerce platforms versus a lightweight ecommerce approach through modularity (Rails Engine). It also provides some code examples as how this does work in Piggybak.
 
 Below are a few more related articles to my work on Piggybak. Check them out!
 

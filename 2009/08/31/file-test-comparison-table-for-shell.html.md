@@ -15,7 +15,7 @@ There are still some blanks where I didn't find a good equivalent. Of course I'm
 
 Performance notes on avoiding multiple stats of the same file:
 
-- Starting with Perl 5.9.1, file tests can be "stacked" and will use a single stat for all tests, e.g. -f -x file. In older versions of Perl you can do -f file &amp;&amp; -x _ instead.
+- Starting with Perl 5.9.1, file tests can be "stacked" and will use a single stat for all tests, e.g. -f -x file. In older versions of Perl you can do -f file && -x _ instead.
 
 - Ruby's File::Stat class can be used to cache a stat for multiple tests.
 
@@ -169,12 +169,12 @@ All tests return boolean true or false unless otherwise noted.
 <td rowspan="2">-s file</td>
 <td rowspan="2">-s 'file' <em>(boolean and returns size in bytes)</em></td>
 <td>test ?s, 'file' <em>(boolean: returns nil if doesn't exist or has zero size, size of the file otherwise)</em></td>
-<td>os.path.getsize('file') &gt; 0</td>
+<td>os.path.getsize('file') > 0</td>
 </tr>
 
 <tr>
 <td>File.size?('file') <em>(same)</em><br/>
-</td><td>os.stat('file').st_size &gt; 0</td>
+</td><td>os.stat('file').st_size > 0</td>
 </tr>
 
 <tr>
@@ -302,7 +302,7 @@ All tests return boolean true or false unless otherwise noted.
 <td rowspan="2">-u file</td>
 <td rowspan="2">-u 'file'</td>
 <td>test ?u, 'file'</td>
-<td rowspan="2">os.stat('file').st_mode &amp; stat.S_ISGID</td>
+<td rowspan="2">os.stat('file').st_mode & stat.S_ISGID</td>
 </tr>
 
 <tr>
@@ -314,7 +314,7 @@ All tests return boolean true or false unless otherwise noted.
 <td rowspan="2">-g file</td>
 <td rowspan="2">-g 'file'</td>
 <td>test ?g, 'file'</td>
-<td rowspan="2">os.stat('file').st_mode &amp; stat.S_ISUID</td>
+<td rowspan="2">os.stat('file').st_mode & stat.S_ISUID</td>
 </tr>
 
 <tr>
@@ -326,7 +326,7 @@ All tests return boolean true or false unless otherwise noted.
 <td rowspan="2">-k file</td>
 <td rowspan="2">-k 'file'</td>
 <td>test ?k, 'file'</td>
-<td rowspan="2">os.stat('file').st_mode &amp; stat.S_ISVTX</td>
+<td rowspan="2">os.stat('file').st_mode & stat.S_ISVTX</td>
 </tr>
 
 <tr>
@@ -399,17 +399,17 @@ All tests return boolean true or false unless otherwise noted.
 <tr>
 <td>file1 is newer (according to modification date) than file2, or if file1 exists and file2 does not</td>
 <td>file1 -nt file2</td>
-<td>(stat('file1'))[9] &gt; (stat('file2'))[9]</td>
-<td>test ?&gt;, 'file1', 'file2'</td>
-<td>os.path.exists('file1') and (not os.path.exists('file2') or os.stat('file1').st_mtime &gt; os.stat('file2').st_mtime)</td>
+<td>(stat('file1'))[9] > (stat('file2'))[9]</td>
+<td>test ?>, 'file1', 'file2'</td>
+<td>os.path.exists('file1') and (not os.path.exists('file2') or os.stat('file1').st_mtime > os.stat('file2').st_mtime)</td>
 </tr>
 
 <tr>
 <td>file1 is older than file2, or if file2 exists and file1 does not</td>
 <td>file1 -ot file2</td>
-<td>(stat('file1'))[9] &lt; (stat('file2'))[9]</td>
-<td>test ?&lt;, 'file1', 'file2'</td>
-<td>os.path.exists('file2') and (not os.path.exists('file1') or os.stat('file1').st_mtime &lt; os.stat('file2').st_mtime)</td>
+<td>(stat('file1'))[9] < (stat('file2'))[9]</td>
+<td>test ?<, 'file1', 'file2'</td>
+<td>os.path.exists('file2') and (not os.path.exists('file1') or os.stat('file1').st_mtime < os.stat('file2').st_mtime)</td>
 </tr>
 
 <tr>

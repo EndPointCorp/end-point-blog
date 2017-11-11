@@ -18,7 +18,7 @@ INSERT INTO test(username, login)
 SELECT 'hey', 'ho ho ho'
 WHERE NOT EXISTS (SELECT 42 FROM test WHERE username='hey');
 
-UPDATE test SET login='ho ho ho' WHERE username='hey' AND login &lt;&gt; 'ho ho ho';
+UPDATE test SET login='ho ho ho' WHERE username='hey' AND login <> 'ho ho ho';
 ```
 
 Which was a little bit problematic. You need to make two queries, and both can have quite complicated WHERE clauses.

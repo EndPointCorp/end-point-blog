@@ -25,20 +25,20 @@ Also of note is the use of to_json, which transforms the address into JSON-ified
 ```perl
 sub list {
   my $addresses;
-  if($::Session-&gt;{username}) {    # user is logged in
+  if($::Session->{username}) {    # user is logged in
     # $results = SELECT * FROM addresses WHERE username = ?
     foreach my $key (keys %$results) {
-       push @$addresses, $results-&gt;{$key};
+       push @$addresses, $results->{$key};
     }
   }
   else {
-    $addresses = $::Session-&gt;{stored_addresses};
+    $addresses = $::Session->{stored_addresses};
   }
 
   foreach my $address (@$addresses) {
-    $address-&gt;{json} = to_json($address);
+    $address->{json} = to_json($address);
   }
-  $:Tag-&gt;tmpn("user_addresses", $addresses);
+  $:Tag->tmpn("user_addresses", $addresses);
   return;
 }
 ```
@@ -46,25 +46,25 @@ sub list {
 In the HTML template, Interchange's loop tag is used to loop through the addresses. Note: There may be a better way to avoid trailing commas in Interchange's loop tag – please share it if you know the secret!
 
 ```nohighlight
-&lt;script type="text/javascript"&gt;
+<script type="text/javascript">
 var addresses = {
-[loop object.mv_results=`$Scratch-&gt;{user_addresses}`]
+[loop object.mv_results=`$Scratch->{user_addresses}`]
     'address_[loop-param id]': [loop-param json],[/loop]
     'dummy' : ''
 };
-&lt;/script&gt;
+</script>
 ```
 
 For example, the above code might yield the JSON object shown below. These addresses are also used in the dropdowns shown in the screenshot at the beginning of this article.
 
 ```javascript
-&lt;script type="text/javascript"&gt;
+<script type="text/javascript">
 var addresses = {
  'address_116971': {"country":"US","nickname":"Sister","fname":"Jackie", ... },
  'address_116969': {"country":"US","nickname":"Personal","fname":"Stephanie", ... },
  'dummy' : ''
 };
-&lt;/script&gt;
+</script>
 ```
 
 ### Creating an Address
@@ -78,23 +78,23 @@ sub add {
   my $result;
   eval {
     my $address;
-    if($::Session-&gt;{username}) {
+    if($::Session->{username}) {
       # store address in database with INSERT
       # $address is new address, with id of last_insert_id
     }
     else {
       # determine key to store address in session
-      # store address in Session-&gt;{stored_addresses}
+      # store address in Session->{stored_addresses}
       # $address is new address, with key as id
     }
-    $result = { address =&gt; to_json($address), success =&gt; 1 };
+    $result = { address => to_json($address), success => 1 };
   };
   if($@) {
-    $result = { error_msg =&gt; "Error: ...", success =&gt; 0 };
+    $result = { error_msg => "Error: ...", success => 0 };
   }
 
-  $::Tag-&gt;tmpn("result", to_json($result));
-  $::CGI-&gt;{mv_nextpage} = "ajax/standard.html";  # sets HTML template used
+  $::Tag->tmpn("result", to_json($result));
+  $::CGI->{mv_nextpage} = "ajax/standard.html";  # sets HTML template used
 
   return;
 }
@@ -138,14 +138,14 @@ sub remove {
   my $result;
   eval {
       # database DELETE FROM addresses
-      $result-&gt;{success} = 1;
+      $result->{success} = 1;
   };
   if ($@) {
-      $result-&gt;{success} = 0;
+      $result->{success} = 0;
   }
 
-  $::Tag-&gt;tmpn("result", to_json($result));
-  $::CGI-&gt;{mv_nextpage} = 'ajax/standard.html';
+  $::Tag->tmpn("result", to_json($result));
+  $::CGI->{mv_nextpage} = 'ajax/standard.html';
   return;
 }
 ```

@@ -5,8 +5,6 @@ tags: database, perl, postgres
 title: Text sequences
 ---
 
-
-
 Somebody recently asked on the [Postgres mailing list](http://archives.postgresql.org/pgsql-general/) about "Generating random unique alphanumeric IDs". While there were some interesting solutions given, from a simple [Pl/pgsql function](http://www.postgresql.org/docs/current/static/plpgsql.html) to using mathematical transformations, I'd like to lay out a simple and powerful solution using [Pl/PerlU](http://www.postgresql.org/docs/current/static/plperl.html)
 
 First, to paraphrase the original request, the poster needed a table to have a text column be its primary key, and to have a five-character alphanumeric string used as that key. Let's knock out a quick function using Pl/PerlU that solves the generation part of the question:
@@ -19,8 +17,8 @@ LANGUAGE plperlu
 AS $_$
   use strict;
   my $numchars = 5;
-  my @chars = split // =&gt; qw/abcdefghijkmnpqrstwxyzABCDEFGHJKLMNPQRSTWXYZ23456789/;
-  my $value = join '' =&gt; @chars[map{rand @chars}(1..$numchars)];
+  my @chars = split // => qw/abcdefghijkmnpqrstwxyzABCDEFGHJKLMNPQRSTWXYZ23456789/;
+  my $value = join '' => @chars[map{rand @chars}(1..$numchars)];
   return $value;
 $_$;
 ```
@@ -56,7 +54,7 @@ CREATE TABLE seq_test (
 A quick test shows that the id column is auto-propagated with some random values:
 
 ```sql
-greg=#&lt; PREPARE abc(TEXT,TEXT) AS INSERT INTO seq_test(city,state) 
+greg=#< PREPARE abc(TEXT,TEXT) AS INSERT INTO seq_test(city,state) 
 greg=# VALUES($1,$2) RETURNING id;
 
 greg=# EXECUTE abc('King of Prussia', 'Pennsylvania');
@@ -97,7 +95,7 @@ LANGUAGE plperlu
 AS $_$
   use strict;
   my $sname = shift;
-  my @chars = split // =&gt; qw/abcdefghijkmnpqrstwxyzABCDEFGHJKLMNPQRSTWXYZ23456789/;
+  my @chars = split // => qw/abcdefghijkmnpqrstwxyzABCDEFGHJKLMNPQRSTWXYZ23456789/;
   my $numchars = 5;
   my $toomanyloops = 10000; ## Completely arbitrary pick
   my $loops = 0;
@@ -109,13 +107,13 @@ AS $_$
   SEARCHING:
   {
     ## Safety valve
-    if ($loops++ &gt;= $toomanyloops) {
+    if ($loops++ >= $toomanyloops) {
       die "Could not find a unique value, even after $toomanyloops tries!\n";
     }
     ## Build a new value, then test it out
-    $value = join '' =&gt; @chars[map{rand @chars}(1..$numchars)];
-    my $count = spi_exec_prepared($sth,$sname,$value)-&gt;{processed};
-    redo if $count &gt;= 1;
+    $value = join '' => @chars[map{rand @chars}(1..$numchars)];
+    my $count = spi_exec_prepared($sth,$sname,$value)->{processed};
+    redo if $count >= 1;
   } 
 
   ## Store it and commit the change
@@ -139,39 +137,39 @@ AS $_$
   use strict;
   use DBI;
   my $sname = shift;
-  my @chars = split // =&gt; qw/abcdefghijkmnpqrstwxyzABCDEFGHJKLMNPQRSTWXYZ23456789/;
+  my @chars = split // => qw/abcdefghijkmnpqrstwxyzABCDEFGHJKLMNPQRSTWXYZ23456789/;
   my $numchars = 5;
   my $toomanyloops = 10000;
   my $loops = 0;
 
   ## Connect to this very database, but with a new session
-  my $port = spi_exec_query('SHOW port')-&gt;{rows}[0]{port};
-  my $dbname = spi_exec_query('SELECT current_database()')-&gt;{rows}[0]{current_database};
-  my $dbuser = spi_exec_query('SELECT current_user')-&gt;{rows}[0]{current_user};
+  my $port = spi_exec_query('SHOW port')->{rows}[0]{port};
+  my $dbname = spi_exec_query('SELECT current_database()')->{rows}[0]{current_database};
+  my $dbuser = spi_exec_query('SELECT current_user')->{rows}[0]{current_user};
   my $dsn = "dbi:Pg:dbname=$dbname;port=$port";
-  my $dbh = DBI-&gt;connect($dsn, $dbuser, '', {AutoCommit=&gt;1,RaiseError=&gt;1,PrintError=&gt;0});
+  my $dbh = DBI->connect($dsn, $dbuser, '', {AutoCommit=>1,RaiseError=>1,PrintError=>0});
 
   my $SQL = 'SELECT 1 FROM alpha_sequence WHERE sname = ? AND value = ?';
-  my $sth = $dbh-&gt;prepare($SQL);
+  my $sth = $dbh->prepare($SQL);
 
   my $value = '';
   SEARCHING:
   {
     ## Safety valve
-    if ($loops++ &gt;= $toomanyloops) {
+    if ($loops++ >= $toomanyloops) {
       die "Could not find a unique value, even after $toomanyloops tries!\n";
     }
     ## Build a new value, then test it out
-    $value = join '' =&gt; @chars[map{rand @chars}(1..$numchars)];
-    my $count = $sth-&gt;execute($sname,$value);
-    $sth-&gt;finish();
-    redo if $count &gt;= 1;
+    $value = join '' => @chars[map{rand @chars}(1..$numchars)];
+    my $count = $sth->execute($sname,$value);
+    $sth->finish();
+    redo if $count >= 1;
   } 
 
   ## Store it and commit the change
   $SQL = 'INSERT INTO alpha_sequence VALUES (?,?)';
-  $sth = $dbh-&gt;prepare($SQL);
-  $sth-&gt;execute($sname,$value); ## Does a commit
+  $sth = $dbh->prepare($SQL);
+  $sth->execute($sname,$value); ## Does a commit
 
   ## Only now do we return the value to the caller
   return $value;
@@ -184,7 +182,7 @@ Postgres sequences also have a currval() function, which returns the last value 
 
 ```perl
 ...
-  $sth-&gt;execute($sname,$value); ## Does a commit
+  $sth->execute($sname,$value); ## Does a commit
   $_SHARED{nva_currval}{$sname} = $value;
   $_SHARED{nva_lastval} = $value;
 ...
@@ -290,41 +288,41 @@ AS $_$
   use strict;
   use DBI;
   my $sname = shift;
-  my @chars = split // =&gt; qw/abcdefghijkmnpqrstwxyzABCDEFGHJKLMNPQRSTWXYZ23456789/;
+  my @chars = split // => qw/abcdefghijkmnpqrstwxyzABCDEFGHJKLMNPQRSTWXYZ23456789/;
   my $numchars = 5;
   my $toomanyloops = 10000;
   my $loops = 0;
 
   ## Connect to this very database, but with a new session
   if (! exists $_SHARED{nva_dbi}) {
-    my $port = spi_exec_query('SHOW port')-&gt;{rows}[0]{port};
-      my $dbname = spi_exec_query('SELECT current_database()')-&gt;{rows}[0]{current_database};
-    my $dbuser = spi_exec_query('SELECT current_user')-&gt;{rows}[0]{current_user};
+    my $port = spi_exec_query('SHOW port')->{rows}[0]{port};
+      my $dbname = spi_exec_query('SELECT current_database()')->{rows}[0]{current_database};
+    my $dbuser = spi_exec_query('SELECT current_user')->{rows}[0]{current_user};
     my $dsn = "dbi:Pg:dbname=$dbname;port=$port";
-    $_SHARED{nva_dbi} = DBI-&gt;connect($dsn, $dbuser, '', {AutoCommit=&gt;1,RaiseError=&gt;1,PrintError=&gt;0});
+    $_SHARED{nva_dbi} = DBI->connect($dsn, $dbuser, '', {AutoCommit=>1,RaiseError=>1,PrintError=>0});
     my $dbh = $_SHARED{nva_dbi};
     my $SQL = 'SELECT 1 FROM alpha_sequence WHERE sname = ? AND value = ?';
-    $_SHARED{nva_sth_check} = $dbh-&gt;prepare($SQL);
+    $_SHARED{nva_sth_check} = $dbh->prepare($SQL);
     $SQL = 'INSERT INTO alpha_sequence VALUES (?,?)';
-    $_SHARED{nva_sth_add} = $dbh-&gt;prepare($SQL);
+    $_SHARED{nva_sth_add} = $dbh->prepare($SQL);
   }
 
   my $value = '';
   SEARCHING:
   {
     ## Safety valve
-    if ($loops++ &gt;= $toomanyloops) {
+    if ($loops++ >= $toomanyloops) {
       die "Could not find a unique value, even after $toomanyloops tries!\n";
     }
     ## Build a new value, then test it out
-    $value = join '' =&gt; @chars[map{rand @chars}(1..$numchars)];
-    my $count = $_SHARED{nva_sth_check}-&gt;execute($sname,$value);
-    $_SHARED{nva_sth_check}-&gt;finish();
-    redo if $count &gt;= 1;
+    $value = join '' => @chars[map{rand @chars}(1..$numchars)];
+    my $count = $_SHARED{nva_sth_check}->execute($sname,$value);
+    $_SHARED{nva_sth_check}->finish();
+    redo if $count >= 1;
   } 
 
   ## Store it and commit the change
-  $_SHARED{nva_sth_add}-&gt;execute($sname,$value); ## Does a commit
+  $_SHARED{nva_sth_add}->execute($sname,$value); ## Does a commit
   $_SHARED{nva_currval}{$sname} = $value;
   $_SHARED{nva_lastval} = $value;
   return $value;
@@ -332,5 +330,3 @@ $_$;
 ```
 
 Having the ability to reach outside the database in Pl/PerlU - even if simply to go back in again! - can be a powerful tool, and allows us to do things that might otherwise seem impossible.
-
-

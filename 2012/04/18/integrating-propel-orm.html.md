@@ -49,8 +49,8 @@ Propel offers very elaborate functionality for interfacing with your data-model.
 
 ```perl
 $query = new CustomerQuery();
-$customers = CustomerQuery::create()-&gt;orderByName()-&gt;limit(2)-&gt;find();
-$first_customer = $query-&gt;findPK(1); // This would give us the first in the list
+$customers = CustomerQuery::create()->orderByName()->limit(2)->find();
+$first_customer = $query->findPK(1); // This would give us the first in the list
 ```
 
 #### Custom SQL
@@ -58,8 +58,8 @@ $first_customer = $query-&gt;findPK(1); // This would give us the first in the l
 ```perl
 $con = Propel::getConnection(CustomerPeer::DATABASE_NAME);
 $sql = "SELECT * FROM customer WHERE name ilike ('%:name%');
-$stmt = $con-&gt;prepare($sql);
-$stmt-&gt;execute(array(':name' =&gt; 'Terry'));
+$stmt = $con->prepare($sql);
+$stmt->execute(array(':name' => 'Terry'));
 
 ```
 

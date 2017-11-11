@@ -46,7 +46,7 @@ pep8 test.py
 The above command prints:
 
 ```
-test.py:1:80: E501 line too long (100 &gt; 79 characters)
+test.py:1:80: E501 line too long (100 > 79 characters)
 test.py:2:1: E302 expected 2 blank lines, found 0
 test.py:2:11: E201 whitespace after '('
 test.py:2:14: E202 whitespace before ')'
@@ -114,7 +114,7 @@ pep8 --statistics -qq django | sort -k 1 -n -r
 The first 10 lines of the above command run against Django 1.5.1 code look like:
 
 ```
-4685    E501 line too long (80 &gt; 79 characters)
+4685    E501 line too long (80 > 79 characters)
 1718    E302 expected 2 blank lines, found 1
 1092    E128 continuation line under-indented for visual indent
 559     E203 whitespace before ':'
@@ -215,7 +215,7 @@ W0104:  5,4:sth1: Statement seems to have no effect
 Pylint also supports setting the options in a config file. This config file can be a little bit complicated, and I think the best way is to let pylint generate the file, this can be done with the --generate-rcfile argument:
 
 ```
-pylint --reports=n --include-ids=y --disable=C0103 --generate-rcfile &gt; .pylint
+pylint --reports=n --include-ids=y --disable=C0103 --generate-rcfile > .pylint
 ```
 
 This will create config file with all default settings and the changes from the command line.

@@ -56,7 +56,7 @@ Authorize.net has a customer information manager (CIM) which supports "profiles"
 ## Pity the fool...
 
 ```
---&gt;&gt;:[]}}}}-O
+-->>:[]}}}}-O
 ```
 
 Mr. T made several cameo appearances during the talk to keep us all engaged and interested!

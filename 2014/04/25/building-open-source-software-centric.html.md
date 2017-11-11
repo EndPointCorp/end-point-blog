@@ -27,7 +27,7 @@ Next, Leah covered some of the funding/revenue tactics of building an open sourc
 
 is to focus on consulting for those using your open source tools, as it will allow you to see real use cases of your open source project to gain perspective. The disadvantage to consulting could be that your attention is diverted from development or maintenance of the project, but Leah touched on how to mitigate this later in the talk.
 - Training: Training can provide expected, scheduled bursts of income, and can be on the spectrum of very focused content, small, high cost per attendee, to more general, large, low  cost per attendee. Leah has a preference for being on the "very focused content, small, high cost per attendee" approach because it may be more amenable to growing a passionate, involved community.
-- Events: Events are a great way to build a community around an open source tool, generate leads for the other revenue streams, and perpetuate the addiction to the good will &amp; exposure that comes with open source. In terms of events, sponsorship, affiliate training opportunities, and admissions are all potential sources of revenue here.
+- Events: Events are a great way to build a community around an open source tool, generate leads for the other revenue streams, and perpetuate the addiction to the good will & exposure that comes with open source. In terms of events, sponsorship, affiliate training opportunities, and admissions are all potential sources of revenue here.
 
 #### What Doesn't Work
 
@@ -38,7 +38,7 @@ is to focus on consulting for those using your open source tools, as it will all
 
 Building an OSS-centric company does not come without challenges. A few common challenges one might experience in building an open source company that Leah covered were:
 
-- Emotional ups &amp; downs: Leah suggests to set expectations, delegate work, track successes, don't feed the trolls, and take a break from your work to get a perspective and recharge.
+- Emotional ups & downs: Leah suggests to set expectations, delegate work, track successes, don't feed the trolls, and take a break from your work to get a perspective and recharge.
 - Understand the Distinction between Frugal vs. Cheap: There are small opportunities to build good will and contribute growing to the community, such as small sponsorships, knowing how to funnel resources to "swag" effectively, and sponsoring user groups.
 - Avoid Being a Corporate Overlord: What I took away from Leah's discussion here is to let sincerity guide your decisions.
 - Delegate: It's really important to build an open source community that will survive when you are gone. Delegating means not only building a community, but also leaders as well. Leah later added that important roles for a successful open source project might include coders, website maintainers, infrastructure folks, speakers/evangelists, and logistics/organization folks.

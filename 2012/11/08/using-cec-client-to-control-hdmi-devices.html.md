@@ -24,7 +24,7 @@ Once installed, we have access to all kinds of fun commands. [CEC-O-Matic](http:
 The syntax of a libCEC "tx" command is like this:
 
 ```nohighlight
-$ echo 'tx &lt;src-dst&gt; &lt;cmd&gt; &lt;args...&gt;' | cec-client &lt;device&gt;
+$ echo 'tx <src-dst> <cmd> <args...>' | cec-client <device>
 ```
 
 The first octet of the command will be the source and destination. The P8 CEC adapter uses device 1 by default, which is "Recording 1", and a TV is always 0, so when querying the TV our first octet will be "10".
@@ -53,16 +53,16 @@ For example, let's query the menu language of the TV connected to the first CEC 
 ```nohighlight
 $ echo 'tx 10 91' | cec-client /dev/ttyACM0
 [ . . . ]
-DEBUG:   [             492] &lt;&lt; requesting power status of 'TV' (0)
-TRAFFIC: [             492] &lt;&lt; 10:8f
-TRAFFIC: [             638] &gt;&gt; 01:90:00
-DEBUG:   [             638] &gt;&gt; TV (0) -&gt; Recorder 1 (1): report power status (90)
+DEBUG:   [             492] << requesting power status of 'TV' (0)
+TRAFFIC: [             492] << 10:8f
+TRAFFIC: [             638] >> 01:90:00
+DEBUG:   [             638] >> TV (0) -> Recorder 1 (1): report power status (90)
 DEBUG:   [             638] TV (0): power status changed from 'unknown' to 'on'
 DEBUG:   [             638] expected response received (90: report power status)
 waiting for input
-TRAFFIC: [             639] &lt;&lt; 10:91
-TRAFFIC: [             842] &gt;&gt; 0f:32:65:6e:67
-DEBUG:   [             842] &gt;&gt; TV (0) -&gt; Broadcast (F): set menu language (32)
+TRAFFIC: [             639] << 10:91
+TRAFFIC: [             842] >> 0f:32:65:6e:67
+DEBUG:   [             842] >> TV (0) -> Broadcast (F): set menu language (32)
 DEBUG:   [             842] TV (0): menu language set to 'eng'
 ```
 

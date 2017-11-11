@@ -5,8 +5,6 @@ tags: postgres
 title: More PostgreSQL and SystemTap
 ---
 
-
-
 Recently I've been working on a database with many multi-column indexes, and I've wondered how often all the columns of the index were used. Many of the indexes in question are primary key indexes, and I need all the columns to guarantee uniqueness, but for non-unique indexes, it would make sense to remove as many indexes from the column as possible. Especially with PostgreSQL 8.3 or greater, where I can take advantage of heap-only tuples[1], leaving columns out of the index would be a big win. PostgreSQL's statistics collector will already tell me how often an index is scanned. That shows up in pg_stat_all_indexes. But for a hypothetical index scanned 100 times, there's no way to know how many of those 100 scans used all the columns of the index, or, for instance, just the first column.
 
 First, an example. I'll create a table with three integer columns, and fill it with random data:
@@ -46,22 +44,22 @@ This leaves me with a three-column index on 1000 rows of the following:
 Now I need to make a query that will use the index. That's easy enough, with these two queries. As shown by the index condition, the first query uses all three columns of the index, and the second, only two.
 
 ```nohighlight
-5432 josh@josh# EXPLAIN SELECT * FROM a WHERE i &gt; 8 AND j &gt; 80 AND k &gt; 800;
+5432 josh@josh# EXPLAIN SELECT * FROM a WHERE i > 8 AND j > 80 AND k > 800;
                             QUERY PLAN                             
 -------------------------------------------------------------------
  Bitmap Heap Scan on a  (cost=5.64..10.74 rows=4 width=12)
-   Recheck Cond: ((i &gt; 8) AND (j &gt; 80) AND (k &gt; 800))
-   -&gt;  Bitmap Index Scan on a_ix  (cost=0.00..5.64 rows=4 width=0)
-         Index Cond: ((i &gt; 8) AND (j &gt; 80) AND (k &gt; 800))
+   Recheck Cond: ((i > 8) AND (j > 80) AND (k > 800))
+   ->  Bitmap Index Scan on a_ix  (cost=0.00..5.64 rows=4 width=0)
+         Index Cond: ((i > 8) AND (j > 80) AND (k > 800))
 (4 rows)
 
-5432 josh@josh*# EXPLAIN SELECT * FROM a WHERE i &gt; 8 AND j &gt; 80;
+5432 josh@josh*# EXPLAIN SELECT * FROM a WHERE i > 8 AND j > 80;
                              QUERY PLAN                             
 --------------------------------------------------------------------
  Bitmap Heap Scan on a  (cost=5.37..10.67 rows=20 width=12)
-   Recheck Cond: ((i &gt; 8) AND (j &gt; 80))
-   -&gt;  Bitmap Index Scan on a_ix  (cost=0.00..5.36 rows=20 width=0)
-         Index Cond: ((i &gt; 8) AND (j &gt; 80))
+   Recheck Cond: ((i > 8) AND (j > 80))
+   ->  Bitmap Index Scan on a_ix  (cost=0.00..5.36 rows=20 width=0)
+         Index Cond: ((i > 8) AND (j > 80))
 (4 rows)
 ```
 
@@ -77,9 +75,9 @@ probe process("/usr/local/pgsql/bin/postgres").function("_bt_first")
           /* Time of call */
         printf ("_bt_first at time %d\n", get_cycles())
           /* Number of scan keys */
-        printf("%d scan keys\n", $scan-&gt;numberOfKeys)
+        printf("%d scan keys\n", $scan->numberOfKeys)
           /* OID of index being scanned */
-        printf("%u index oid\n\n", $scan-&gt;indexRelation-&gt;rd_id)
+        printf("%u index oid\n\n", $scan->indexRelation->rd_id)
 }
 ```
 
@@ -121,5 +119,3 @@ _bt_first at time 50363763650571
 As expected, SystemTap reported first three and then two scan keys used, along with the OID of the a_ix index I created. With a technique like this I could, at least theoretically, get an exact usage profile for each index, and determine whether they need all the columns they have.
 
 [1] See, for example, [this page](http://pgsql.tapoueh.org/site/html/misc/hot.html).
-
-

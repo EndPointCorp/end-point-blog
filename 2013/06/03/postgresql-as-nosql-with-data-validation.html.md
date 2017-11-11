@@ -50,12 +50,12 @@ CREATE TABLE products (
     price DECIMAL(10,2) NOT NULL,
     currency TEXT NOT NULL,
     in_stock INTEGER NOT NULL,
-    CHECK (length(name) &gt; 0),
-    CHECK (description IS NOT NULL AND length(description) &gt; 0),
-    CHECK (price &gt;= 0.0),
+    CHECK (length(name) > 0),
+    CHECK (description IS NOT NULL AND length(description) > 0),
+    CHECK (price >= 0.0),
     CHECK (currency = 'dollars'),
-    CHECK (in_stock &gt;= 0)
-); &gt;
+    CHECK (in_stock >= 0)
+); >
 ```
 
 Now all the operations, like adding or modifying a row, which violate any of those constraints, just fail. Let's check:
@@ -173,12 +173,12 @@ The table with the constraints looks like this:
 ```sql
 CREATE TABLE products (
     data JSON,
-    CONSTRAINT validate_id CHECK ((data-&gt;&gt;'id')::integer &gt;= 1 AND (data-&gt;&gt;'id') IS NOT NULL ),
-    CONSTRAINT validate_name CHECK (length(data-&gt;&gt;'name') &gt; 0 AND (data-&gt;&gt;'name') IS NOT NULL ),
-    CONSTRAINT validate_description CHECK (length(data-&gt;&gt;'description') &gt; 0  AND (data-&gt;&gt;'description') IS NOT NULL ),
-    CONSTRAINT validate_price CHECK ((data-&gt;&gt;'price')::decimal &gt;= 0.0 AND (data-&gt;&gt;'price') IS NOT NULL),
-    CONSTRAINT validate_currency CHECK (data-&gt;&gt;'currency' = 'dollars' AND (data-&gt;&gt;'currency') IS NOT NULL),
-    CONSTRAINT validate_in_stock CHECK ((data-&gt;&gt;'in_stock')::integer &gt;= 0 AND (data-&gt;&gt;'in_stock') IS NOT NULL )
+    CONSTRAINT validate_id CHECK ((data->>'id')::integer >= 1 AND (data->>'id') IS NOT NULL ),
+    CONSTRAINT validate_name CHECK (length(data->>'name') > 0 AND (data->>'name') IS NOT NULL ),
+    CONSTRAINT validate_description CHECK (length(data->>'description') > 0  AND (data->>'description') IS NOT NULL ),
+    CONSTRAINT validate_price CHECK ((data->>'price')::decimal >= 0.0 AND (data->>'price') IS NOT NULL),
+    CONSTRAINT validate_currency CHECK (data->>'currency' = 'dollars' AND (data->>'currency') IS NOT NULL),
+    CONSTRAINT validate_in_stock CHECK ((data->>'in_stock')::integer >= 0 AND (data->>'in_stock') IS NOT NULL )
 }
 ```
 
@@ -201,21 +201,21 @@ DETAIL:  Failing row contains ({
     "id": 1,
     "name": "d",
     "price": 1.0,
-    "currency...). &gt;
+    "currency...). >
 ```
 
 There is one more validation left. The id and name fields should be unique. This can be easily done with two indexes:
 
 ```sql
-CREATE UNIQUE INDEX ui_products_id ON products((data-&gt;&gt;'id'));
-CREATE UNIQUE INDEX ui_products_name ON products((data-&gt;&gt;'name'));
+CREATE UNIQUE INDEX ui_products_id ON products((data->>'id'));
+CREATE UNIQUE INDEX ui_products_name ON products((data->>'name'));
 ```
 
 Now when you try to add a JSON document which id which already exists in database, then you will have an error like:
 
 ```sql
 ERROR:  duplicate key value violates unique constraint "ui_products_id"
-DETAIL:  Key ((data -&gt;&gt; 'id'::text))=(1) already exists.
+DETAIL:  Key ((data ->> 'id'::text))=(1) already exists.
 ERROR:  current transaction is aborted, commands ignored until end of transaction block
 ```
 
@@ -228,13 +228,13 @@ In NoSQL databases the id field is usually some UUID. This is an identifier gene
 You can search the JSON data normally like you were searching columns in a table. Let's search for the most expensive product we have in stock:
 
 ```sql
-SELECT * FROM products WHERE in_stock &gt; 0 ORDER BY price DESC LIMIT 1;
+SELECT * FROM products WHERE in_stock > 0 ORDER BY price DESC LIMIT 1;
 ```
 
 The JSON version is very similar:
 
 ```sql
-SELECT * FROM products WHERE (data-&gt;&gt;'in_stock')::integer &gt; 0 ORDER BY (data-&gt;&gt;'price')::decimal DESC LIMIT 1;
+SELECT * FROM products WHERE (data->>'in_stock')::integer > 0 ORDER BY (data->>'price')::decimal DESC LIMIT 1;
 ```
 
 This query can be very inefficient. It needs to read all the rows, parse JSON fields and check the in_stock and price fields, convert into proper types and then sort. The plan of such a query, after filling the table with 100k rows, looks like this:
@@ -243,11 +243,11 @@ This query can be very inefficient. It needs to read all the rows, parse JSON fi
                                                         QUERY PLAN
 -----------------------------------------------------------------------------------------------------------------------------
  Limit  (cost=9256.48..9256.48 rows=1 width=32) (actual time=412.911..412.912 rows=1 loops=1)
-   -&gt;  Sort  (cost=9256.48..9499.05 rows=97027 width=32) (actual time=412.910..412.910 rows=1 loops=1)
-         Sort Key: (((data -&gt;&gt; 'price'::text))::numeric)
+   ->  Sort  (cost=9256.48..9499.05 rows=97027 width=32) (actual time=412.910..412.910 rows=1 loops=1)
+         Sort Key: (((data ->> 'price'::text))::numeric)
          Sort Method: top-N heapsort  Memory: 25kB
-         -&gt;  Seq Scan on products  (cost=0.00..8771.34 rows=97027 width=32) (actual time=0.022..375.624 rows=100000 loops=1)
-               Filter: (((data -&gt;&gt; 'in_stock'::text))::integer &gt; 0)
+         ->  Seq Scan on products  (cost=0.00..8771.34 rows=97027 width=32) (actual time=0.022..375.624 rows=100000 loops=1)
+               Filter: (((data ->> 'in_stock'::text))::integer > 0)
  Total runtime: 412.939 ms
 (7 rows)
 ```
@@ -259,8 +259,8 @@ Fortunately PostgreSQL has a great feature: indexes on expressions, also named a
 The indexes I need are:
 
 ```sql
-CREATE INDEX i_products_in_stock ON products(( (data-&gt;&gt;'in_stock')::integer ));
-CREATE INDEX i_products_price ON products(( (data-&gt;&gt;'price')::decimal ));
+CREATE INDEX i_products_in_stock ON products(( (data->>'in_stock')::integer ));
+CREATE INDEX i_products_price ON products(( (data->>'price')::decimal ));
 ```
 
 Notice the double parenthesis, they are required because of the non trivial expression.
@@ -271,8 +271,8 @@ The plan now looks a little bit different, after creating indexes and running an
                                                                     QUERY PLAN
 ----------------------------------------------------------------------------------------------------------------------------------------------------
  Limit  (cost=0.42..0.55 rows=1 width=32) (actual time=0.041..0.041 rows=1 loops=1)
-   -&gt;  Index Scan Backward using i_products_price on products  (cost=0.42..13690.06 rows=100000 width=32) (actual time=0.041..0.041 rows=1 loops=1)
-         Filter: (((data -&gt;&gt; 'in_stock'::text))::integer &gt; 0)
+   ->  Index Scan Backward using i_products_price on products  (cost=0.42..13690.06 rows=100000 width=32) (actual time=0.041..0.041 rows=1 loops=1)
+         Filter: (((data ->> 'in_stock'::text))::integer > 0)
  Total runtime: 0.062 ms
 (4 rows)
 ```

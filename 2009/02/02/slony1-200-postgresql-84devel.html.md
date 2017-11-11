@@ -46,7 +46,7 @@ The MD5 checksum matches the one given on the slony website, so we can continue.
 
 ```
 jtolley@uber:~/devel/slony1-2.0.0$ ./configure --with-pgconfigdir=/home/jtolley/devel/pgdb/bin/ \
-&gt; --prefix=/home/jtolley/devel/slony --with-perltools=/home/jtolley/devel/pgdb/bin
+> --prefix=/home/jtolley/devel/slony --with-perltools=/home/jtolley/devel/pgdb/bin
 jtolley@uber:~/devel/slony1-2.0.0$ make
 jtolley@uber:~/devel/slony1-2.0.0$ make install
 ```
@@ -115,18 +115,18 @@ This file defines nodes and sets, and is written in Perl. First, a group of node
 Next we add all the nodes. In this case, there are only two nodes, defined as follows:
 
 ```
-    add_node(node     =&gt; 1,
-             host     =&gt; 'localhost',
-             dbname   =&gt; 'pgbench',
-             port     =&gt; 5432,
-             user     =&gt; 'slony',
-             password =&gt; 'slony');
-    add_node(node     =&gt; 2,
-             host     =&gt; 'localhost',
-             dbname   =&gt; 'pgbenchslave',
-             port     =&gt; 5432,
-             user     =&gt; 'slony',
-             password =&gt; 'slony');
+    add_node(node     => 1,
+             host     => 'localhost',
+             dbname   => 'pgbench',
+             port     => 5432,
+             user     => 'slony',
+             password => 'slony');
+    add_node(node     => 2,
+             host     => 'localhost',
+             dbname   => 'pgbenchslave',
+             port     => 5432,
+             user     => 'slony',
+             password => 'slony');
 ```
 
 I had to remove definitions of nodes 3 and 4 from the sample configuration.
@@ -134,7 +134,7 @@ I had to remove definitions of nodes 3 and 4 from the sample configuration.
 Now we define replication sets. This involves defining tables and the unique, not null indexes slony can use as a primary key. If the table has an explicitly defined primary key, slony will use it automatically. Because of our modifications to the history table above, all four of our tables have primary keys, so this part is simple. All our table names go in the pkeyedtables element of the $SLONY_SETS hash, as follows:
 
 ```
-        "pkeyedtables" =&gt; [     
+        "pkeyedtables" => [     
                                 'public.accounts',
                                 'public.tellers',
                                 'public.history',
@@ -145,7 +145,7 @@ Now we define replication sets. This involves defining tables and the unique, no
 We don't have any tables without primary keys, so we don't need the keyedtables element, and Slony no longer creates serial indexes for you as of v2.0.0, so we can delete the serialtables element. We do need to replicate the history_id_seq we created as part of the history table's primary key, so add that to the sequences element, as follows:
 
 ```
-        "sequences" =&gt; ['history_id_seq' ],
+        "sequences" => ['history_id_seq' ],
 ```
 
 Finally, remove the sample configuration for set 2, and save the file.
@@ -155,9 +155,9 @@ Finally, remove the sample configuration for set 2, and save the file.
 Now that we've configured the altperl stuff, we can use it to generate scripts that will be passed to slonik, that will actually set things up.
 
 ```
-jtolley@uber:~/devel/pgdb$ slonik_init_cluster &gt; initcluster
-jtolley@uber:~/devel/pgdb$ slonik_create_set 1 &gt; createset
-jtolley@uber:~/devel/pgdb$ slonik_subscribe_set 1 2 &gt; subscribeset
+jtolley@uber:~/devel/pgdb$ slonik_init_cluster > initcluster
+jtolley@uber:~/devel/pgdb$ slonik_create_set 1 > createset
+jtolley@uber:~/devel/pgdb$ slonik_subscribe_set 1 2 > subscribeset
 ```
 
 This creates three files each containing slonik code to set up a cluster and get it running. If you tried to use the serialtables stuff, you'll run into problems here with new versions of slony (not that I had that problem or anything...). Note that the arguments to slonik_subscribeset differ from those given in the documentation. This script requires two arguments: the set you're interested in, and the node that's subscribing to it.
@@ -167,7 +167,7 @@ This creates three files each containing slonik code to set up a cluster and get
 We're ready to do real work. Tell slonik to initialize the cluster:
 
 ```
-jtolley@uber:~/devel/pgdb$ slonik &lt; initcluster 
+jtolley@uber:~/devel/pgdb$ slonik < initcluster 
 <stdin>:6: Possible unsupported PostgreSQL version (80400) 8.4, defaulting to 8.3 support
 <stdin>:6: could not open file /home/jtolley/devel/slony/share/postgresql/slony1_base.sql
 </stdin></stdin>
@@ -178,7 +178,7 @@ The complaints about version 8.4 aren't surprising, as I'm using bleeding-edge P
 ```
 jtolley@uber:~/devel/pgdb$ mkdir ../slony/share
 jtolley@uber:~/devel/pgdb$ cp -r share/postgresql/ ../slony/share/
-jtolley@uber:~/devel/pgdb$ slonik &lt; initcluster 
+jtolley@uber:~/devel/pgdb$ slonik < initcluster 
 <stdin>:6: Possible unsupported PostgreSQL version (80400) 8.4, defaulting to 8.3 support
 <stdin>:9: Possible unsupported PostgreSQL version (80400) 8.4, defaulting to 8.3 support
 <stdin>:10: Set up replication nodes
@@ -193,7 +193,7 @@ This looks right, so the next step is to start the slon daemon for each node:
 ```
 jtolley@uber:~/devel/pgdb$ slon_start 1
 Invoke slon for node 1 - /home/jtolley/devel/slony/bin/slon -s 1000 -d2 replication 'host=localhost dbname=pgbench user=slony port=5432 passwor
-d=slony' &gt; /home/jtolley/devel/slony/log/slony1/node1/pgbench-2008-12-17_12:33:18.log 2&gt;&amp;1 &amp;                                                   Slon successfully started for cluster replication, node node1
+d=slony' > /home/jtolley/devel/slony/log/slony1/node1/pgbench-2008-12-17_12:33:18.log 2>&1 &                                                   Slon successfully started for cluster replication, node node1
 PID [24745]
 Start the watchdog process as well...
 jtolley@uber:~/devel/pgdb$ syntax error at /home/jtolley/devel/pgdb/bin/slon_watchdog line 47, near "open "
@@ -218,12 +218,12 @@ Change line 46 to read:
 ```
 jtolley@uber:~/devel/pgdb$ slon_start 1
 Invoke slon for node 1 - /home/jtolley/devel/slony/bin/slon -s 1000 -d2 replication 'host=localhost dbname=pgbench user=slony port=5432 passwor
-d=slony' &gt; /home/jtolley/devel/slony/log/slony1/node1/pgbench-2008-12-17_12:35:29.log 2&gt;&amp;1 &amp;                                                   Slon successfully started for cluster replication, node node1
+d=slony' > /home/jtolley/devel/slony/log/slony1/node1/pgbench-2008-12-17_12:35:29.log 2>&1 &                                                   Slon successfully started for cluster replication, node node1
 PID [24918]
 Start the watchdog process as well...
 jtolley@uber:~/devel/pgdb$ slon_start 2
 Invoke slon for node 2 - /home/jtolley/devel/slony/bin/slon -s 1000 -d2 replication 'host=localhost dbname=pgbenchslave user=slony port=5432 pa
-ssword=slony' &gt; /home/jtolley/devel/slony/log/slony1/node2/pgbenchslave-2008-12-17_12:35:31.log 2&gt;&amp;1 &amp;                                         Slon successfully started for cluster replication, node node2
+ssword=slony' > /home/jtolley/devel/slony/log/slony1/node2/pgbenchslave-2008-12-17_12:35:31.log 2>&1 &                                         Slon successfully started for cluster replication, node node2
 PID [24962]
 Start the watchdog process as well...
 ```
@@ -231,7 +231,7 @@ Start the watchdog process as well...
 Now we need to create the cluster and subscribe:
 
 ```
-jtolley@uber:~/devel/pgdb$ slonik &lt; createset 
+jtolley@uber:~/devel/pgdb$ slonik < createset 
 <stdin>:16: Subscription set 1 created
 <stdin>:17: Adding tables to the subscription set
 <stdin>:21: Add primary keyed table public.accounts
@@ -241,7 +241,7 @@ jtolley@uber:~/devel/pgdb$ slonik &lt; createset
 <stdin>:36: Adding sequences to the subscription set
 <stdin>:40: Add sequence public.history_id_seq
 <stdin>:41: All tables added
-jtolley@uber:~/devel/pgdb$ slonik &lt; subscribeset 
+jtolley@uber:~/devel/pgdb$ slonik < subscribeset 
 <stdin>:10: Subscribed nodes to set 1
 </stdin></stdin></stdin></stdin></stdin></stdin></stdin></stdin></stdin></stdin>
 ```

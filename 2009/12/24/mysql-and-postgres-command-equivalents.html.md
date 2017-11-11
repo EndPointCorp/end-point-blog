@@ -83,7 +83,7 @@ Change the current pager program</td><td>Environment variable <span style="font-
 
 Change the prompt</td><td><b>\set PROMPT1 <em>string</em></b>
 
-(same)</td><td>Note that the Postgres prompt cannot be reset by omitting an argument. A good prompt to use is:<b>\set PROMPT1 <span style="white-space: nowrap;">'%n@%`hostname`:%&gt;%R%#%x%x%x '</span></b></td></tr><tr class="alt"><td><b>\T <em>filename</em></b>
+(same)</td><td>Note that the Postgres prompt cannot be reset by omitting an argument. A good prompt to use is:<b>\set PROMPT1 <span style="white-space: nowrap;">'%n@%`hostname`:%>%R%#%x%x%x '</span></b></td></tr><tr class="alt"><td><b>\T <em>filename</em></b>
 
 Sets the tee output file</td><td>No direct equivalent</td><td>Postgres can output to a pipe, so you can do: <b><span style="white-space: nowrap;">\o | tee <em>filename</em></span></b></td></tr><tr><td><b>\W</b>
 

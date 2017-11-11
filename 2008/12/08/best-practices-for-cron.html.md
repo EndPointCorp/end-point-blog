@@ -61,7 +61,7 @@ PSQL_MASTER='/usr/local/bin/psql -X -A -q -t -d master'
 PSQL_SLAVE='/usr/local/bin/psql -X -A -q -t -d master'
 
 */15 * * * * $PSQL_MASTER -c 'VACUUM pg_listener'
-*/5 * * * * $PSQL_SLAVE -c 'VACUUM pg_listener' &amp;&amp; $PSQL_SLAVE -c 'VACUUM pg_class'
+*/5 * * * * $PSQL_SLAVE -c 'VACUUM pg_listener' && $PSQL_SLAVE -c 'VACUUM pg_class'
 
 ```
 
@@ -96,7 +96,7 @@ Consider these two examples:
 
 ```
 ## Example 2:
-30 * * * * $PSQL -c 'VACUUM abc' &amp;&amp; $PSQL -c 'VACUUM def' &amp;&amp; $PSQL -c 'ANALYZE abc'
+30 * * * * $PSQL -c 'VACUUM abc' && $PSQL -c 'VACUUM def' && $PSQL -c 'ANALYZE abc'
 ```
 
 The first example has many problems. First, it creates three separate cron processes. Second, the ANALYZE on table abc may end up running while the VACUUM is still going on - not a desired behavior. Third, the second VACUUM may start before the previous VACUUM or ANALYZE has finished. Fourth, if the database is down, there are three emailed error reports going out, and three errors in the Postgres logs.

@@ -162,7 +162,7 @@ At this point, we can do what we came here for: generate a XML dump of the wiki 
 We only wanted the actual content, and did not want to worry about the history of the pages, so the command was:
 
 ```
-$ php maintenance/dumpBackup.php --current &gt; acme.wiki.2005.xml
+$ php maintenance/dumpBackup.php --current > acme.wiki.2005.xml
 ```
 
 It ran without a hitch. However, close examination showed that it had an amazing amount of unwanted stuff from the 
@@ -181,7 +181,7 @@ get consistentCaps please MW devs?). However, this data is at least 10 years old
 
 ```
 ## 20 years should be sufficient
-$ echo '$wgRCMAxAge = 20 * 365 * 24 * 3600;' &gt;&gt; LocalSettings.php
+$ echo '$wgRCMAxAge = 20 * 365 * 24 * 3600;' >> LocalSettings.php
 $ php maintenance/rebuildrecentchanges.php
 ```
 

@@ -12,8 +12,8 @@ If you are like me you may not have given much thought to an HTML doctype other 
 For those that are not familiar with an HTML doctype, they are the very first line of an HTML document and look like this:
 
 ```
-&lt;!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" 
-  "http://www.w3.org/TR/html4/strict.dtd"&gt;
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" 
+  "http://www.w3.org/TR/html4/strict.dtd">
 ```
 
 As I mentioned before, there are a few different document types.  The reason for this is because each one corresponds to a different rule set of HTML syntax for the web browser to follow, like: HTML 4.0, HTML 4.01, XHTML 1.0, or XHTML 1.1.
@@ -25,7 +25,7 @@ When you specify an official doctype, your web browser should follow the standar
 The doctype for HTML 5 is a lot simpler and shorter than other doctypes, and may look like this:
 
 ```
-&lt;!DOCTYPE html&gt;
+<!DOCTYPE html>
 ```
 
 When you declare an unofficial doctype, the browser will not know which tag syntax rule set to use and will not render the page in a standard way.  This is called quirks mode, and the browser basically regresses to an older rules engine to support all legacy tags it knows about and attempts to handle it.  This also means that your web page may not render or behave as expected, especially if you use newer tags or features in your document.

@@ -48,7 +48,7 @@ The files belonging to this database system will be owned by user "greg".
 ...
 Data page checksums are enabled.
 ...
-~/pg/9.4$ echo port=5594 &gt;&gt; lotus/postgresql.conf
+~/pg/9.4$ echo port=5594 >> lotus/postgresql.conf
 ~/pg/9.4$ bin/pg_ctl start -D lotus -l lotus.log
 server starting
 ~/pg/9.4$ bin/createdb -p 5594 testdb
@@ -147,7 +147,7 @@ laptop I ran these tests on. :) The actual calculation is pretty simple and uses
 a fast Fowler/Noll/Vo hash - see the [src/include/storage/checksum_impl.h](https://github.com/postgres/postgres/blob/master/src/include/storage/checksum_impl.h) file. The calculation used is:
 
 ```
-hash = (hash ^ value) * FNV_PRIME ^ ((hash ^ value) &gt;&gt; 17)
+hash = (hash ^ value) * FNV_PRIME ^ ((hash ^ value) >> 17)
 ```
 
 Can you handle the performance hit? Here's a little more incentive for you: 

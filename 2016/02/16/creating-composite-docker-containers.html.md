@@ -41,12 +41,12 @@ ENV TOMCAT_VERSION 8.0.30
 ENV TOMCAT_TGZ_URL https://www.apache.org/dist/tomcat/tomcat-$TOMCAT_MAJOR/v$TOMCAT_VERSION/bin/apache-tomcat-$TOMCAT_VERSION.tar.gz
 
 RUN set -x \
- &amp;&amp; curl -fSL "$TOMCAT_TGZ_URL" -o tomcat.tar.gz \
- &amp;&amp; curl -fSL "$TOMCAT_TGZ_URL.asc" -o tomcat.tar.gz.asc \
- &amp;&amp; gpg --verify tomcat.tar.gz.asc \
- &amp;&amp; tar -xvf tomcat.tar.gz --strip-components=1 \
- &amp;&amp; rm bin/*.bat \
- &amp;&amp; rm tomcat.tar.gz*
+ && curl -fSL "$TOMCAT_TGZ_URL" -o tomcat.tar.gz \
+ && curl -fSL "$TOMCAT_TGZ_URL.asc" -o tomcat.tar.gz.asc \
+ && gpg --verify tomcat.tar.gz.asc \
+ && tar -xvf tomcat.tar.gz --strip-components=1 \
+ && rm bin/*.bat \
+ && rm tomcat.tar.gz*
 
 EXPOSE 8080
 CMD ["catalina.sh", "run"]
@@ -59,21 +59,21 @@ Here is an example of the PostgreSQL Dockerfile:
 FROM debian:jessie
 
 # explicitly set user/group IDs
-RUN groupadd -r postgres --gid=999 &amp;&amp; useradd -r -g postgres --uid=999 postgres
+RUN groupadd -r postgres --gid=999 && useradd -r -g postgres --uid=999 postgres
 
 # grab gosu for easy step-down from root
 RUN gpg --keyserver pool.sks-keyservers.net --recv-keys B42F6819007F00F88E364FD4036A9C25BF357DD4
-RUN apt-get update &amp;&amp; apt-get install -y --no-install-recommends ca-certificates wget &amp;&amp; rm -rf /var/lib/apt/lists/* \
- &amp;&amp; wget -O /usr/local/bin/gosu "https://github.com/tianon/gosu/releases/download/1.2/gosu-$(dpkg --print-architecture)" \
- &amp;&amp; wget -O /usr/local/bin/gosu.asc "https://github.com/tianon/gosu/releases/download/1.2/gosu-$(dpkg --print-architecture).asc" \
- &amp;&amp; gpg --verify /usr/local/bin/gosu.asc \
- &amp;&amp; rm /usr/local/bin/gosu.asc \
- &amp;&amp; chmod +x /usr/local/bin/gosu \
- &amp;&amp; apt-get purge -y --auto-remove ca-certificates wget
+RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates wget && rm -rf /var/lib/apt/lists/* \
+ && wget -O /usr/local/bin/gosu "https://github.com/tianon/gosu/releases/download/1.2/gosu-$(dpkg --print-architecture)" \
+ && wget -O /usr/local/bin/gosu.asc "https://github.com/tianon/gosu/releases/download/1.2/gosu-$(dpkg --print-architecture).asc" \
+ && gpg --verify /usr/local/bin/gosu.asc \
+ && rm /usr/local/bin/gosu.asc \
+ && chmod +x /usr/local/bin/gosu \
+ && apt-get purge -y --auto-remove ca-certificates wget
 
 # make the "en_US.UTF-8" locale so postgres will be utf-8 enabled by default
-RUN apt-get update &amp;&amp; apt-get install -y locales &amp;&amp; rm -rf /var/lib/apt/lists/* \
- &amp;&amp; localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
+RUN apt-get update && apt-get install -y locales && rm -rf /var/lib/apt/lists/* \
+ && localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
 ENV LANG en_US.utf8
 
 RUN mkdir /docker-entrypoint-initdb.d
@@ -83,17 +83,17 @@ RUN apt-key adv --keyserver ha.pool.sks-keyservers.net --recv-keys B97B0AFCAA1A4
 ENV PG_MAJOR 9.5
 ENV PG_VERSION 9.5.0-1.pgdg80+2
 
-RUN echo 'deb http://apt.postgresql.org/pub/repos/apt/ jessie-pgdg main' $PG_MAJOR &gt; /etc/apt/sources.list.d/pgdg.list
+RUN echo 'deb http://apt.postgresql.org/pub/repos/apt/ jessie-pgdg main' $PG_MAJOR > /etc/apt/sources.list.d/pgdg.list
 
 RUN apt-get update \
- &amp;&amp; apt-get install -y postgresql-common \
- &amp;&amp; sed -ri 's/#(create_main_cluster) .*$/\1 = false/' /etc/postgresql-common/createcluster.conf \
- &amp;&amp; apt-get install -y \
+ && apt-get install -y postgresql-common \
+ && sed -ri 's/#(create_main_cluster) .*$/\1 = false/' /etc/postgresql-common/createcluster.conf \
+ && apt-get install -y \
   postgresql-$PG_MAJOR=$PG_VERSION \
   postgresql-contrib-$PG_MAJOR=$PG_VERSION \
- &amp;&amp; rm -rf /var/lib/apt/lists/*
+ && rm -rf /var/lib/apt/lists/*
 
-RUN mkdir -p /var/run/postgresql &amp;&amp; chown -R postgres /var/run/postgresql
+RUN mkdir -p /var/run/postgresql && chown -R postgres /var/run/postgresql
 
 ENV PATH /usr/lib/postgresql/$PG_MAJOR/bin:$PATH
 ENV PGDATA /var/lib/postgresql/data
@@ -134,7 +134,7 @@ After starting the containers you should see output in 'docker ps' showing the n
 
 ```nohighlight
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                    NAMES
-3e3656879a7b        strutsdocker_web    "/usr/local/tomcat/bi"   3 weeks ago         Up 3 weeks          0.0.0.0:8080-&gt;8080/tcp   strutsdocker_web_1
+3e3656879a7b        strutsdocker_web    "/usr/local/tomcat/bi"   3 weeks ago         Up 3 weeks          0.0.0.0:8080->8080/tcp   strutsdocker_web_1
 cb756e473ed8        postgres            "/docker-entrypoint.s"   8 weeks ago         Up 3 weeks          5432/tcp                 strutsdocker_db_1
 ```
 

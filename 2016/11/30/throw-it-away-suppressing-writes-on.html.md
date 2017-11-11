@@ -33,7 +33,7 @@ Plus any permission adjustments the app user might need. On the master server th
 search_path = '"$user",replica,public'
 ```
 ```sql
-app@app:5432=&gt; UPDATE "auth_user" SET "last_login" = now() WHERE "auth_user"."id" = 13;
+app@app:5432=> UPDATE "auth_user" SET "last_login" = now() WHERE "auth_user"."id" = 13;
 UPDATE 0
 ```
 

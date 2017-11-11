@@ -12,7 +12,7 @@ This week I had a *duh* moment while working on a little jQuery-driven interface
 I've occasionally used or attempted to do image preloading in JavaScript, jQuery, and YUI. Preloading images happens after a page is loaded: follow-up image requests are made for images that may be needed, such as hover images, larger sizes of thumbnail images on the page, or images below the fold that do not need to load at page request time. Adobe Fireworks spits out this code for preloading images, which is a bit **gross** because the JavaScript is typically inline and it doesn't take advantage of common JavaScript libraries. But this is probably acceptable for standalone HTML files that get moved between various locations during design iterations.
 
 ```nohighlight
-&lt;body onload="MM_preloadImages('/images/some_image.png','/images/some_other_image.png')"&gt;
+<body onload="MM_preloadImages('/images/some_image.png','/images/some_other_image.png')">
 ```
 
 I found many examples of preloading images with jQuery that look something like this:
@@ -20,9 +20,9 @@ I found many examples of preloading images with jQuery that look something like 
 ```javascript
 jQuery.preloadImages = function()
 {
-  for(var i = 0; i&lt;arguments.length; i++)
+  for(var i = 0; i<arguments.length; i++)
   {
-    jQuery("&lt;img&gt;").attr("src", arguments[i]);
+    jQuery("<img>").attr("src", arguments[i]);
   }
 }
 ```
@@ -30,13 +30,13 @@ jQuery.preloadImages = function()
 I implemented this method, but in my code the preloading was happening asynchronously and I needed to find something that would execute some other behavior after the image was loaded. Before I found the solution I wanted, I tried using jQuery's [get](http://api.jquery.com/jQuery.get/) method and tested jQuery's [ready](http://api.jquery.com/ready/) method, but neither was suitable for the desired behavior. I came across jQuery's [load](http://api.jquery.com/load-event/) event, which binds an event handler to the "load" JavaScript event and can be used on images. So, I came up with the following bit of code to lazily load images:
 
 ```javascript
- var img = $('&lt;img&gt;')
+ var img = $('<img>')
   .attr('src', some_image_source);
  $(element).append(img);
- if($(img).height() &gt; 0) {
+ if($(img).height() > 0) {
   // do something awesome
  } else {
-  var loader = $('&lt;img&gt;')
+  var loader = $('<img>')
    .attr('src', 'images/ajax_loader.gif')
    .addClass('loader');
   $(element).append(loader); 

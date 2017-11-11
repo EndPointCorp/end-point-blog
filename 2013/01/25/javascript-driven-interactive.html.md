@@ -107,67 +107,67 @@ In the next iteration, I attempted to implement a method that added opaque, abso
 
 <img border="0" src="/blog/2013/01/25/javascript-driven-interactive/image-1.jpeg"/>
 
-In the second iteration, additional colored &amp; opaque nodes were created under the text to provide a layered highlighting effect.
+In the second iteration, additional colored & opaque nodes were created under the text to provide a layered highlighting effect.
 
 <table cellpadding="0" cellspacing="0" width="100%"><tbody><tr> <td valign="top" width="50%"><br/>
-<p>Unhighlighted markup looked like this:</p><p style="font-size:13px;font-weight:bold;">&lt;span id="e1"&gt;<br/>
-    &lt;span class="highlights"&gt;&lt;/span&gt;<br/>
+<p>Unhighlighted markup looked like this:</p><p style="font-size:13px;font-weight:bold;"><span id="e1"><br/>
+    <span class="highlights"></span><br/>
     The <br/>
-&lt;/span&gt;<br/>
-&lt;span id="e2" class="pink"&gt;<br/>
-  &lt;span class="highlights"&gt;&lt;/span&gt;<br/>
+</span><br/>
+<span id="e2" class="pink"><br/>
+  <span class="highlights"></span><br/>
     cow <br/>
-&lt;/span&gt;<br/>
-&lt;span id="e3" class="pink"&gt;<br/>
-    &lt;span class="highlights"&gt;&lt;/span&gt;<br/>
+</span><br/>
+<span id="e3" class="pink"><br/>
+    <span class="highlights"></span><br/>
     jumped<br/>
-&lt;/span&gt;<br/>
-&lt;span id="e4" class="pink blue"&gt;<br/>
-    &lt;span class="highlights"&gt;&lt;/span&gt;<br/>
+</span><br/>
+<span id="e4" class="pink blue"><br/>
+    <span class="highlights"></span><br/>
     over<br/>
-&lt;/span&gt;<br/>
-&lt;span id="e5" class="blue"&gt;<br/>
-    &lt;span class="highlights"&gt;&lt;/span&gt;<br/>
+</span><br/>
+<span id="e5" class="blue"><br/>
+    <span class="highlights"></span><br/>
     the<br/>
-&lt;/span&gt;<br/>
-&lt;span id="e6"&gt;<br/>
-    &lt;span class="highlights"&gt;&lt;/span&gt;<br/>
+</span><br/>
+<span id="e6"><br/>
+    <span class="highlights"></span><br/>
     moon.<br/>
-&lt;/span&gt;<br/>
+</span><br/>
 </p></td> <td valign="top" width="50%"><br/>
-<p>And highlighted markup looked like this:</p><p style="font-size:13px;font-weight:bold;">&lt;span id="e1"&gt;<br/>
-    &lt;span class="highlights"&gt;&lt;/span&gt;<br/>
+<p>And highlighted markup looked like this:</p><p style="font-size:13px;font-weight:bold;"><span id="e1"><br/>
+    <span class="highlights"></span><br/>
     The <br/>
-&lt;/span&gt;<br/>
-&lt;span id="e2" class="pink"&gt;<br/>
-    &lt;span class="highlights"&gt;<br/>
-        &lt;span class="highlight_pink"&gt;&lt;/span&gt;<br/>
-    &lt;/span&gt;<br/>
+</span><br/>
+<span id="e2" class="pink"><br/>
+    <span class="highlights"><br/>
+        <span class="highlight_pink"></span><br/>
+    </span><br/>
     cow <br/>
-&lt;/span&gt;<br/>
-&lt;span id="e3" class="pink"&gt;<br/>
-    &lt;span class="highlights"&gt;<br/>
-        &lt;span class="highlight_pink"&gt;&lt;/span&gt;<br/>
-    &lt;/span&gt;<br/>
+</span><br/>
+<span id="e3" class="pink"><br/>
+    <span class="highlights"><br/>
+        <span class="highlight_pink"></span><br/>
+    </span><br/>
     jumped <br/>
-&lt;/span&gt;<br/>
-&lt;span id="e4" class="pink blue"&gt;<br/>
-    &lt;span class="highlights"&gt;<br/>
-        &lt;span class="highlight_pink"&gt;&lt;/span&gt;<br/>
-        &lt;span class="highlight_blue"&gt;&lt;/span&gt;<br/>
-    &lt;/span&gt;<br/>
+</span><br/>
+<span id="e4" class="pink blue"><br/>
+    <span class="highlights"><br/>
+        <span class="highlight_pink"></span><br/>
+        <span class="highlight_blue"></span><br/>
+    </span><br/>
     over <br/>
-&lt;/span&gt;<br/>
-&lt;span id="e5" class="blue"&gt;<br/>
-    &lt;span class="highlights"&gt;<br/>
-        &lt;span class="highlight_blue"&gt;&lt;/span&gt;<br/>
-    &lt;/span&gt;<br/>
+</span><br/>
+<span id="e5" class="blue"><br/>
+    <span class="highlights"><br/>
+        <span class="highlight_blue"></span><br/>
+    </span><br/>
     the <br/>
-&lt;/span&gt;<br/>
-&lt;span id="e6"&gt;<br/>
-    &lt;span class="highlights"&gt;&lt;/span&gt;<br/>
+</span><br/>
+<span id="e6"><br/>
+    <span class="highlights"></span><br/>
     moon.<br/>
-&lt;/span&gt;<br/>
+</span><br/>
 </p></td> </tr>
 </tbody></table>
 

@@ -14,7 +14,7 @@ This blog post is intended for the folks who spent way more time displaying soci
 The appropriate format for Twitter is:
 
 ```ruby
-<a href="http://twitter.com/share?text=&lt;%= desc %&gt;&amp;url=&lt;%= url %&gt;">Twitter</a>
+<a href="http://twitter.com/share?text=<%= desc %>&url=<%= url %>">Twitter</a>
 ```
 
 Note that Twitter dialog does not include the picture, only the description.
@@ -22,7 +22,7 @@ Note that Twitter dialog does not include the picture, only the description.
 Trouble started with Facebook when I learned that custom parameters in Facebook's sharer.php url are officially not supported anymore: [https://developers.facebook.com/bugs/357750474364812](https://developers.facebook.com/bugs/357750474364812). I tried the format widely suggested on forums, and while custom image was successfully displayed, neither title, not description showed.
 
 ```ruby
-<a href="http://www.facebook.com/sharer.php?u=&lt;%= url %&gt;&amp;p[images][0]=&lt;%= img  %&gt;&amp;description=&lt;%= desc %&gt;">Facebook</a>
+<a href="http://www.facebook.com/sharer.php?u=<%= url %>&p[images][0]=<%= img  %>&description=<%= desc %>">Facebook</a>
 ```
 
 Facebook documentation hinted that addition of the OpenGraph Protocol standard tags to the  of the page may help:
@@ -39,23 +39,23 @@ I wasn't able to get it up and working with sharer.php. After spending considera
 I anticipated the same kind of trouble with the last button for Google Plus. And I wasn't mistaken. The only allowed format for G+ is:
 
 ```ruby
-<a href="https://plus.google.com/share?url=&lt;%= url %&gt;">Google+</a>
+<a href="https://plus.google.com/share?url=<%= url %>">Google+</a>
 ```
 
 Despite a few mentions on the web this does not work anymore:
 
 ```ruby
-<meta content="&lt;%= desc %&gt;" itemprop="description"/>
+<meta content="<%= desc %>" itemprop="description"/>
 ```
 
 Same here. Doesn't work:
 
 ```ruby
-<meta content="&lt;%= title %&gt;" property="og:title"/>
+<meta content="<%= title %>" property="og:title"/>
 <meta content="article" property="og:type"/>
-<meta content="&lt;%= url %&gt;" property="og:url"/>
-<meta content="&lt;%= img  %&gt;" property="og:image"/>
-<meta content="&lt;%= desc %&gt;" property="og:description"/>
+<meta content="<%= url %>" property="og:url"/>
+<meta content="<%= img  %>" property="og:image"/>
+<meta content="<%= desc %>" property="og:description"/>
 ```
 
 Eventually it turned out that it wasn't possible to use parameters for GPlus link unless you sign up for the API key and use one  of the API methods. I wasn't planning to obtain a key at that time, so I had to simply drop the custom logo and text for G+.

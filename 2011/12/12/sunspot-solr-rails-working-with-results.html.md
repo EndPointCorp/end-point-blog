@@ -14,12 +14,12 @@ Having worked with [Sunspot](http://sunspot.github.com/) and [Solr](http://lucen
 When working with Sunspot, searchable fields are defined in the model:
 
 ```ruby
-class Thing &lt; ActiveRecord::Base
+class Thing < ActiveRecord::Base
   searchable do
-    text :field1, :stored =&gt; true
+    text :field1, :stored => true
     text :field2
-    string :field3, :stored =&gt; true
-    integer :field4, :multiple =&gt; true
+    string :field3, :stored => true
+    integer :field4, :multiple => true
   end
 end
 ```
@@ -29,7 +29,7 @@ The code block above will include field1, field2, field3, and field4 in the sear
 In your controller, a new search object is created with the appropriate scoping and keyword values, shown below. Pagination is also added inside the search block.
 
 ```ruby
-class ThingsController &lt; ApplicationController
+class ThingsController < ApplicationController
   def index
     @search = Sunspot.search(Thing) do
       #fulltext search
@@ -43,7 +43,7 @@ class ThingsController &lt; ApplicationController
         with :field3, params[:field4]
       end
 
-      paginate :page =&gt; params[:page], :per_page =&gt; 25
+      paginate :page => params[:page], :per_page => 25
     end
     @search.execute!
   end
@@ -53,10 +53,10 @@ end
 In the view, one can iterate through the result set, where results is an array of Thing instances.
 
 ```nohighlight
-&lt;% @search.results.each do |result| -%&gt;
-&lt;h2&gt;&lt;%= result.field3 %&gt;&lt;/h2&gt;
-&lt;%= result.field1 %&gt;
-&lt;% end -%&gt;
+<% @search.results.each do |result| -%>
+<h2><%= result.field3 %></h2>
+<%= result.field1 %>
+<% end -%>
 ```
 
 ### Working with Hits
@@ -71,7 +71,7 @@ Thing Load (0.9ms)  SELECT "things".* FROM "things" WHERE "things"."id" IN (6, 1
 An optimized way to work with search results sets is working directly with hits. @search.hits is an array of Sunspot::Search::Hits, which represent the raw information returned by Solr for a single returned item. Hit objects provide access to stored field values, identified by the :stored option in the model's searchable definition. The model definition looks the same. The controller may now look like this:
 
 ```ruby
-class ThingsController &lt; ApplicationController
+class ThingsController < ApplicationController
   def index
     search = Sunspot.search(Thing) do
       #fulltext search
@@ -87,7 +87,7 @@ class ThingsController &lt; ApplicationController
     end
     search.execute!
 
-    @hits = search.hits.paginate :page =&gt; params[:page], :per_page =&gt; 25
+    @hits = search.hits.paginate :page => params[:page], :per_page => 25
   end
 end
 ```
@@ -95,10 +95,10 @@ end
 And working with the data in the view may look like this:
 
 ```nohighlight
-&lt;% @hits.each do |result| -%&gt;
-&lt;h2&gt;&lt;%= hit.stored(:field3) %&gt;&lt;/h2&gt;
-&lt;%= hit.stored(:field1) %&gt;
-&lt;% end -%&gt;
+<% @hits.each do |result| -%>
+<h2><%= hit.stored(:field3) %></h2>
+<%= hit.stored(:field1) %>
+<% end -%>
 ```
 
 In some cases, you may want to introduce an additional piece of logic prior pagination, which is the case with the most recent Rails application I've been working on:
@@ -111,13 +111,13 @@ In some cases, you may want to introduce an additional piece of logic prior pagi
 
     search.hits.each do |hit|
       if hit.stored(:field3) == "some arbitrary value"
-        filtered_results &lt;&lt; hit
+        filtered_results << hit
       elsif hit.stored(:field1) == "some other arbitrary value"
-        filtered_results &lt;&lt; hit
+        filtered_results << hit
       end
     end
    
-    @hits = filtered_results.paginate :page =&gt; params[:page], :per_page =&gt; 25
+    @hits = filtered_results.paginate :page => params[:page], :per_page => 25
 ```
 
 Sunspot and Solr are rich with functionality and features that can add value to a Rails application, but it's important to identify areas of the application where database calls can be minimized and lazy loading can be optimized for better performance. The standard log file and database log file are good places to start looking.

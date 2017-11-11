@@ -23,7 +23,7 @@ Another tip is to avoid using Bootstrap CSS classes directly. Instead, use the "
 ```
   .ep-btn {
     @extend .btn
-      &amp;:hover {
+      &:hover {
           @extend .btn:hover
       }
   }

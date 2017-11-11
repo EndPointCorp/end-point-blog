@@ -77,7 +77,7 @@ non-default configuration settings are:
 select version();
 \drds
 \l+
-select name, setting, source from pg_settings where source &lt;&gt; 'default' order by 1;
+select name, setting, source from pg_settings where source <> 'default' order by 1;
 ```
 
 ### Version Control (git up)
@@ -107,7 +107,7 @@ did a lot of deletions on the development server, and are now headed to producti
 .psql_history provides  a good audit trail of exactly what commands you ran. Save the file, then empty it out:
 
 ```
-$ alias clean_psql_history='cat ~/.psql_history &gt;&gt; ~/.psql_history.log; truncate -s0 ~/.psql_history'
+$ alias clean_psql_history='cat ~/.psql_history >> ~/.psql_history.log; truncate -s0 ~/.psql_history'
 ```
 
 Although the .psql_history file can be set per-database, I find it too confusing and annoying in practice to use. I  like being 
@@ -127,9 +127,9 @@ same (especially with primaries and their replicas), so you need to add a little
 consult [the documentation](https://www.postgresql.org/docs/current/static/app-psql.html#APP-PSQL-PROMPTING) to design your own.
 
 ```
-$ echo "\set PROMPT1 '%/@%m%R%#%x '" &gt;&gt; ~/.psqlrc
+$ echo "\set PROMPT1 '%/@%m%R%#%x '" >> ~/.psqlrc
 $ psql service=PROD
-product_elements@topeka=&gt; 
+product_elements@topeka=> 
 ```
 
 ### Connection Service File

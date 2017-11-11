@@ -17,15 +17,15 @@ When getting started with Scapy, it's useful to start to understand how all the 
 
 ```python
 Welcome to Scapy (2.2.0)
-&gt;&gt;&gt; a=IP(ttl=10)
-&gt;&gt;&gt; a
-&lt;IP  ttl=10 |&gt;
-&gt;&gt;&gt; a.dst="10.1.0.1"
-&gt;&gt;&gt; a
-&lt;IP  ttl=10 dst=10.1.0.1 |&gt;
-&gt;&gt;&gt; a.src
+>>> a=IP(ttl=10)
+>>> a
+<IP  ttl=10 |>
+>>> a.dst="10.1.0.1"
+>>> a
+<IP  ttl=10 dst=10.1.0.1 |>
+>>> a.src
 '10.1.0.2'
-&gt;&gt;&gt; a.ttl
+>>> a.ttl
 10
 ```
 
@@ -57,7 +57,7 @@ Within this script there is the make_test function which takes as parameters the
 ```python
 Welcome to Scapy (2.2.0)
 Scapy HTTP Tester
-&gt;&gt;&gt; make_test("www.google.com","google.com")
+>>> make_test("www.google.com","google.com")
 Begin emission:
 ...Finished to send 1 packets.
 .*
@@ -88,7 +88,7 @@ Received 5 packets, got 1 answers, remaining 0 packets
      chksum= 0x8c7e
      urgptr= 0
      options= [('MSS', 1430), (254, '\xf9\x89\xce\x04bm\x13\xd3)\xc8')]
-&gt;&gt;&gt;
+>>>
 ```
 
 ### Conclusions

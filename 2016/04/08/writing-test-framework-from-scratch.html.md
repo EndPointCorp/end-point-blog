@@ -21,7 +21,7 @@ This function is the bare minimum you need to test an application, however, it w
 
 ```nohighlight
 path/to/microtest.rb:2:in `assert': Failed test (RuntimeError)
-        from test.rb:5:in `&lt;main&gt;'
+        from test.rb:5:in `<main>'
 ```
 
 To make this more readable, we can change the raise statement a bit:
@@ -35,7 +35,7 @@ end
 A failed *assert* will now throw this error, which does a better job of explaining where things went wrong:
 
 ```nohighlight
-test.rb:5:in `&lt;main&gt;': Failed test (RuntimeError)
+test.rb:5:in `<main>': Failed test (RuntimeError)
 ```
 
 Now we’re ready to create another assertion function, *assert_equals*. A test framework can have many different types of assertions, but when testing real applications, the vast majority will be tests for equality. Writing this assertion is easy:
@@ -53,7 +53,7 @@ Great, right? Wrong! Unfortunately, the error messages have gone right back to b
 
 ```nohighlight
 path/to/microtest.rb:6:in `assert_equal': Failed test (RuntimeError)
-        from test.rb:9:in `&lt;main&gt;'
+        from test.rb:9:in `<main>'
 ```
 
 There are a couple of things we can do to improve these error messages. First, we can filter the backtrace to make it more clear where the error is coming from. Second, we can add a parameter to *assert* which will take a custom message.
@@ -70,14 +70,14 @@ def assert_equal a, b
   assert a == b, "Failed assert_equal #{a} vs #{b}"
 end
 
-#=&gt; test.rb:9:in `&lt;main&gt;': Failed assert_equal 5 vs 4 (RuntimeError)
+#=> test.rb:9:in `<main>': Failed assert_equal 5 vs 4 (RuntimeError)
 ```
 
 This is much better! We’re ready to move on to another assert function, *assert_in_delta*. The way floating point numbers are represented, comparing them for equality won’t work. Instead, we will check to see that they are within a certain range of each other. We can do this with a simple calculation: (a-b).abs < ∂, where ∂ is a very small number, like 0.001 (in reality, you will probably want a smaller delta than that). Here’s the function in Ruby:
 
 ```ruby
 def assert_in_delta a, b
-  assert (a-b).abs &lt;= 0.001, "Failed assert_in_delta #{a} vs #{b}"
+  assert (a-b).abs <= 0.001, "Failed assert_in_delta #{a} vs #{b}"
 end
 
 assert_in_delta 0.0001, 0.0002 # pass
@@ -136,10 +136,10 @@ This is still very cumbersome, but it puts us in a better position, closer to ou
 
 ```ruby
 XTest.public_instance_methods
-# =&gt; %w[some_method one_test two_test ...]
+# => %w[some_method one_test two_test ...]
 
 XTest.public_instance_methods.grep(/_test$/)
-# =&gt; %w[one_test two_test red_test blue_test]
+# => %w[one_test two_test red_test blue_test]
 ```
 
 And run those automatically.
@@ -155,17 +155,17 @@ class XTest
   # ...test methods...
 end
 
-XTest.run # =&gt; All tests run
+XTest.run # => All tests run
 ```
 
 This is much better now, but we can still improve our code. If we try to make a new set of tests, called *YTest* for example, we would have to copy these run methods over. It would be better to move the run methods into a new abstract class, *Test*, and inherit from that.
 
 ```ruby
 class Test
-  # ...run &amp; assertions...
+  # ...run & assertions...
 end
 
-class XTest &lt; Test
+class XTest < Test
   # ...test methods...
 end
 
@@ -187,7 +187,7 @@ class Test
   TESTS = []
 
   def self.inherited x
-    TESTS &lt;&lt; x
+    TESTS << x
   end
 
   def self.run_all_tests
@@ -198,7 +198,7 @@ class Test
   # ...self.run, run, and assertions...
 end
 
-Test.run_all_tests # =&gt; We can use this instead of XTest.run; YTest.run; etc.
+Test.run_all_tests # => We can use this instead of XTest.run; YTest.run; etc.
 ```
 
 We’re really making progress now. The most important feature our framework is missing now is some way of reporting test success and failure. A common way to do this is to simply print a dot when a test successfully runs.
@@ -232,7 +232,7 @@ Indicating that we had three successful tests. But what happens if a test fails?
 % ruby test.rb
 .test.rb:20:in `test_assert_equal_bad': Failed assert_equal 5 vs 4 (RuntimeError)
   [...tons of blah blah...]
-  from test.rb:30:in `&lt;main&gt;'
+  from test.rb:30:in `<main>'
 ```
 
 The very first error we come across will stop the entire test. Instead of the error being printed naturally, we can catch it and print the error message ourselves, letting other tests continue:
@@ -243,7 +243,7 @@ def self.run
     begin
       self.new.run name
       print "."
-    rescue =&gt; e
+    rescue => e
       puts
       puts "Failure: #{self}##{name}: #{e.message}"
       puts "  #{e.backtrace.first}"
@@ -268,7 +268,7 @@ def self.run
     begin
       self.new.run name
       print "."
-    rescue =&gt; e
+    rescue => e
       puts
       puts "Failure: #{self}##{name}: #{e.message}"
       puts "  #{e.backtrace.first}"
@@ -291,7 +291,7 @@ class Test
   def run name
     send name
     false
-  rescue =&gt; e
+  rescue => e
     e
   end
 
@@ -384,7 +384,7 @@ class Test
   def run name
     send name
     false
-  rescue =&gt; e
+  rescue => e
     self.failure = e
     self
   end
@@ -420,7 +420,7 @@ class Test
   def run
     send name
     false
-  rescue =&gt; e
+  rescue => e
     self.failure = e
     self
   end
@@ -454,7 +454,7 @@ class Test
 
   def run
     send name
-  rescue =&gt; e
+  rescue => e
     self.failure = e
   ensure
     return self
@@ -517,7 +517,7 @@ class Reporter
       print "."
     else
       print "F"
-      failures &lt;&lt; result
+      failures << result
     end
   end
 
@@ -539,7 +539,7 @@ One last bit of polishing on the reporter class. We’ll rename the *report* met
 ```ruby
 class Reporter
   # ...
-  def &lt;&lt; result
+  def << result
     # ...
   end
 
@@ -556,7 +556,7 @@ class Test
 
   def self.run reporter
     public_instance_methods.grep(/_test$/).each do |name|
-    reporter &lt;&lt; self.new(name).run
+    reporter << self.new(name).run
   end
 end
 ```
@@ -571,7 +571,7 @@ class Test
 
   def self.run reporter
     test_names.shuffle.each do |name|
-      reporter &lt;&lt; self.new(name).run
+      reporter << self.new(name).run
     end
   end
 end

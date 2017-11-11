@@ -11,16 +11,16 @@ Today I came across a great opportunity to illustrate dependency injection in a 
 
 ```ruby
 #app/views/fun_event/_copy_options.html.erb
-button_to(t("create_and_edit_shallow_copy"), fun_event_path(:from_event =&gt; @event.id, :return =&gt; true), :    id =&gt; "shallow_copy_btn")
+button_to(t("create_and_edit_shallow_copy"), fun_event_path(:from_event => @event.id, :return => true), :    id => "shallow_copy_btn")
 
-form_tag(fun_event_path(:return =&gt; true)) do
+form_tag(fun_event_path(:return => true)) do
   #form code
 end
 
 #app/views/boring_event/_copy_options.html.erb
-button_to(t("create_and_edit_shallow_copy"), boring_event_path(:from_event =&gt; @event.id, :return =&gt; true), :    id =&gt; "shallow_copy_btn")
+button_to(t("create_and_edit_shallow_copy"), boring_event_path(:from_event => @event.id, :return => true), :    id => "shallow_copy_btn")
 
-form_tag(boring_event_path(:return =&gt; true)) do
+form_tag(boring_event_path(:return => true)) do
   #form code
 end
 ```
@@ -31,15 +31,15 @@ To remove the duplication, I passed in a path option into the partial, replacing
 
 ```ruby
 #app/views/fun_events/copy.html.erb
-&lt;%= render :partial =&gt; "events/copy_options", :event_path =&gt; fun_event_path %&gt;
+<%= render :partial => "events/copy_options", :event_path => fun_event_path %>
 
 #app/views/boring_events/copy.html.erb
-&lt;%= render :partial =&gt; "events/copy_options, :event_path =&gt; boring_event_path %&gt;
+<%= render :partial => "events/copy_options, :event_path => boring_event_path %>
 
 #app/views/events/_copy_options.html.erb
-button_to(t("create_and_edit_shallow_copy"), event_path(:from_event =&gt; @event.id, :return =&gt; true), :    id =&gt; "shallow_copy_btn")
+button_to(t("create_and_edit_shallow_copy"), event_path(:from_event => @event.id, :return => true), :    id => "shallow_copy_btn")
 
-form_tag(event_path(:return =&gt; true)) do
+form_tag(event_path(:return => true)) do
   #form code
 end
 ```
@@ -56,15 +56,15 @@ Obviously the event_path variable I was passing was a string, not a method.  I n
 
 ```ruby
 #app/views/fun_events/copy.html.erb
-&lt;%= render :partial =&gt; "events/copy_options", :event_path =&gt; method(:fun_event_path) %&gt;
+<%= render :partial => "events/copy_options", :event_path => method(:fun_event_path) %>
 
 #app/views/boring_events/copy.html.erb
-&lt;%= render :partial =&gt; "events/copy_options, :event_path =&gt; method(:boring_event_path) %&gt;
+<%= render :partial => "events/copy_options, :event_path => method(:boring_event_path) %>
 
 #app/views/events/_copy_options.html.erb
-button_to(t("create_and_edit_shallow_copy"), event_path.call(:from_event =&gt; @event.id, :return =&gt; true), :    id =&gt; "shallow_copy_btn")
+button_to(t("create_and_edit_shallow_copy"), event_path.call(:from_event => @event.id, :return => true), :    id => "shallow_copy_btn")
 
-form_tag(event_path.call(:return =&gt; true)) do
+form_tag(event_path.call(:return => true)) do
   #form code
 end
 ```

@@ -150,7 +150,7 @@ $ git log --format=%h \
   "echo -n {}; git show {}:bucardo | head -8627 | tail -1" \
   | less
 ## About 35 lines down:
-379c9006     $dbh = DBI-&gt;connect($BDSN, 'bucardo'...
+379c9006     $dbh = DBI->connect($BDSN, 'bucardo'...
 ```
 
 Therefore, we can do a "git checkout 379c9006" and see if we can solve the user's problem.

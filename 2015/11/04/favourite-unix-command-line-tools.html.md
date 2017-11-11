@@ -93,8 +93,8 @@ $ mkdir -- $symbol_dir
 
 We can do lot with comma and braces to make our life easier when we are performing some operations, lets see few usages
 
-- Rename and backup operations with comma &amp; braces operator
-- Pattern matching with comma &amp; braces operator
+- Rename and backup operations with comma & braces operator
+- Pattern matching with comma & braces operator
 - Rename and backup (prefixing name) operations on long file names
 
 To backup the httpd.conf to httpd.conf.bak
@@ -164,7 +164,7 @@ $ ls | pbcopy
 To Paste:
 
 ```bash
-$ pbpaste &gt; lstxt.txt
+$ pbpaste > lstxt.txt
 ```
 
 ### 10. TimeMachine like Incremental Backups in Linux using rsync --link-dest

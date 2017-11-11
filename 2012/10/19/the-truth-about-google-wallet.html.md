@@ -22,18 +22,18 @@ First, one must [sign up](https://developers.google.com/checkout/developer/Googl
 I modified the code provided by Google to transfer information to Google Wallet server via the hidden fields on the form.
 
 ```php
-&lt;form method="POST" action="https://sandbox.google.com/checkout/api/checkout/v2/checkoutForm/Merchant/<merchant_id>" accept-charset="utf-8"&gt;
-&lt;input type="hidden" name="item_name_1" value=""/&gt;
-&lt;input type="hidden" name="item_description_1" value="Subscription Fees"/&gt;
-Enter Amount to Deposit:&lt;input type="text" class="normal" size="5" name="item_price_1" value=""/&gt;
-&lt;input type="hidden" name="item_currency_1" value="USD"/&gt;
-&lt;input type="hidden" name="item_quantity_1" value="1"/&gt;
-&lt;input type="hidden" name="shopping-cart.items.item-1.digital-content.display-disposition" value="OPTIMISTIC"/&gt;
-&lt;input type="hidden" name="shopping-cart.items.item-1.digital-content.description" value="It may take up to 24 hours to process your deposit. Check your account balance and notify the Commissioner if it's not updated within 24 hours."/&gt;
-&lt;input type="hidden" name="_charset_" /&gt;
-&lt;!-- Button code --&gt;
-&lt;input type="image" name="Google Checkout" alt="Fast checkout through Google" src="http://sandbox.google.com/checkout/buttons/checkout.gif?merchant_id=<merchant_id>&amp;w=180&amp;h=46&amp;style=white&amp;variant=text&amp;loc=en_US" height="46" width="180" /&gt;&gt;
-&lt;/form&gt;</merchant_id></merchant_id>
+<form method="POST" action="https://sandbox.google.com/checkout/api/checkout/v2/checkoutForm/Merchant/<merchant_id>" accept-charset="utf-8">
+<input type="hidden" name="item_name_1" value=""/>
+<input type="hidden" name="item_description_1" value="Subscription Fees"/>
+Enter Amount to Deposit:<input type="text" class="normal" size="5" name="item_price_1" value=""/>
+<input type="hidden" name="item_currency_1" value="USD"/>
+<input type="hidden" name="item_quantity_1" value="1"/>
+<input type="hidden" name="shopping-cart.items.item-1.digital-content.display-disposition" value="OPTIMISTIC"/>
+<input type="hidden" name="shopping-cart.items.item-1.digital-content.description" value="It may take up to 24 hours to process your deposit. Check your account balance and notify the Commissioner if it's not updated within 24 hours."/>
+<input type="hidden" name="_charset_" />
+<!-- Button code -->
+<input type="image" name="Google Checkout" alt="Fast checkout through Google" src="http://sandbox.google.com/checkout/buttons/checkout.gif?merchant_id=<merchant_id>&w=180&h=46&style=white&variant=text&loc=en_US" height="46" width="180" />>
+</form></merchant_id></merchant_id>
 ```
 
 ### Tweaking Google Merchant Libraries for PHP
@@ -59,12 +59,12 @@ switch ($root) {
   case "authorization-amount-notification": {
     $google_order_number = $data[$root]['google-order-number']['VALUE'];
     $GChargeRequest = new GoogleRequest($merchant_id, $merchant_key, $server_type);
-    $GChargeRequest-&gt;SendChargeAndShipOrder($google_order_number);
-    $Gresponse-&gt;sendAck($data[$root]['serial-number']);
+    $GChargeRequest->SendChargeAndShipOrder($google_order_number);
+    $Gresponse->sendAck($data[$root]['serial-number']);
     break;
   }
   default:
-    $Gresponse-&gt;sendAck($data[$root]['serial-number']);
+    $Gresponse->sendAck($data[$root]['serial-number']);
     break;
 }
 ```
@@ -82,11 +82,11 @@ case "charge-amount-notification": {
       $date = $data[$root]['timestamp']['VALUE'];
       $tmpsql = "INSERT into orders(google_id,amount,userid) VALUES('". $googleid."','".$amount."','".$userid."')";
       if(! $sqlresult=mysql_query($tmpsql)) {
-        $Gresponse-&gt;log-&gt;LogError(mysql_error());
+        $Gresponse->log->LogError(mysql_error());
       }
     }
   }
-  $Gresponse-&gt;sendAck($data[$root]['serial-number']);
+  $Gresponse->sendAck($data[$root]['serial-number']);
   break;
 }
 ```

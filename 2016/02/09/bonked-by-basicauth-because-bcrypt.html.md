@@ -52,7 +52,7 @@ the generated log file:
 [caches] LocalisationCache: using store LCStoreDB
 0.9266   9.2M  Implicit transaction open enabled.
 0.9279   9.2M  Query wikidb (1) (slave): SET /* DatabasePostgres::open  */ client_encoding='UTF8'
-0.9282   9.2M  Resource id #127: Transaction state changed from IDLE -&gt; ACTIVE
+0.9282   9.2M  Resource id #127: Transaction state changed from IDLE -> ACTIVE
 0.9268   9.2M  Query wikidb (2) (slave): SET /* DatabasePostgres::open  */ datestyle = 'ISO, YMD'
 ...
 0.9587   9.2M  Query wikidb (11) (slave): SELECT /* LCStoreDB::get  */  lc_value  FROM "l10n_cache"   WHERE lc_lang = 'en' AND lc_key = 'deps'  LIMIT 1
@@ -84,7 +84,7 @@ main wiki page. The access logs looked fairly normal:
 85.236.207.120 - greg [19/Jan/2016:12:23:22 -0500] "GET /mediawiki/extensions/balloons/js/balloon.config.js HTTP/1.1" 200 4128 "https://wiki.endpoint.com/wiki/Main_Page
 " "Mozilla/5.0 Firefox/43.0"
 ...
-85.236.207.120 - greg [19/Jan/2016:12:23:22 -0500] "GET /mediawiki/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cmediawiki.sectionAnchor%7Cmediawiki.skinning.interface%7Cskins.vector.styles&amp;only=styles&amp;skin=vector HTTP/1.1" 200 58697 "https://wiki.endpoint.com/wiki/Main_Page" "Mozilla/5.0 Firefox/43.0"
+85.236.207.120 - greg [19/Jan/2016:12:23:22 -0500] "GET /mediawiki/load.php?debug=false&lang=en&modules=mediawiki.legacy.commonPrint%2Cshared%7Cmediawiki.sectionAnchor%7Cmediawiki.skinning.interface%7Cskins.vector.styles&only=styles&skin=vector HTTP/1.1" 200 58697 "https://wiki.endpoint.com/wiki/Main_Page" "Mozilla/5.0 Firefox/43.0"
 85.236.207.120 - greg [19/Jan/2016:12:23:22 -0500] "GET /mediawiki/resources/assets/poweredby_mediawiki_88x31.png HTTP/1.1" 200 3525 "https://wiki.endpoint.com/wiki/Main_Page" "Mozilla/5.0 Firefox/43.0"
 ```
 

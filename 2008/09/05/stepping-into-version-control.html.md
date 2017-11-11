@@ -32,7 +32,7 @@ find $AUTO_ADD_DIRS -print0 | xargs -0 git add
 
 DATE=`date`
 
-git commit -q -a -m "Acme Co git heartbeat - $DATE" &gt; /dev/null
+git commit -q -a -m "Acme Co git heartbeat - $DATE" > /dev/null
 ```
 
 A couple notes:

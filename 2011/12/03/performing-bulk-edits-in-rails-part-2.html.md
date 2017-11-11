@@ -27,13 +27,13 @@ end
 
 # app/views/bulk_edit/new.html.erb
 
-&lt;%= form_for @foo, :url =&gt; "/bulk_edits" do |f| %&gt;
-  &lt;% @foos.each do |foo| %&gt;
-    &lt;%= hidden_field_tag "foo_ids[]", foo.id %&gt;
-  &lt;% end %&gt;
-  &lt;%= render "foos/form", :f =&gt; f %&gt;
-  &lt;%= f.submit %&gt;
-&lt;% end %&gt;
+<%= form_for @foo, :url => "/bulk_edits" do |f| %>
+  <% @foos.each do |foo| %>
+    <%= hidden_field_tag "foo_ids[]", foo.id %>
+  <% end %>
+  <%= render "foos/form", :f => f %>
+  <%= f.submit %>
+<% end %>
 ```
 
 Let's first look at how we formed our form_for tag.  Although this is a form for a Foo object, we don't want to POST to foos_controller#create so we add :url => "/bulk_edits" which will POST to the bulk_edits_controller#create.  Additionally, we need to send along the foo_ids we eventually want to bulk update.  Finally, we don't want to re-create the form we already have for Foo.  By modifying one master form, we'll make long term maintenance easier.  Now that we've got our form posting to the right place, let's see what modifications will need to make to our standard form to allow the user to highlight attributes they want to modify.
@@ -41,9 +41,9 @@ Let's first look at how we formed our form_for tag.  Although this is a form for
 ```ruby
 # app/views/foos/_form.html.erb
 
-&lt;%= check_box_tag "bulk_edit[]", :bar %&gt;
-&lt;%= f.label :bar %&gt;
-&lt;%= f.text_field :bar %&gt;
+<%= check_box_tag "bulk_edit[]", :bar %>
+<%= f.label :bar %>
+<%= f.text_field :bar %>
 ```
 
 <div class="separator" style="text-align: center;"><img border="0" height="52" src="/blog/2011/12/03/performing-bulk-edits-in-rails-part-2/image-0.png" width="320"/><br/>
@@ -54,9 +54,9 @@ We've added another [check_box_tag](http://api.rubyonrails.org/classes/ActionVie
 ```ruby
 # app/views/foos/_form.html.erb
 
-&lt;%= bulk_edit_tag :bar %&gt;
-&lt;%= f.label :bar %&gt;
-&lt;%= f.text_field :bar %&gt;
+<%= bulk_edit_tag :bar %>
+<%= f.label :bar %>
+<%= f.text_field :bar %>
 
 # app/helpers/foos_helper.rb
 
@@ -125,7 +125,7 @@ def create
         params[:bulk_edit].each do |eligible_attr|
 
             #create hash of eligible_attributes and the user's value
-            eligible_params.merge! { eligible_attr =&gt; params[:foo][eligible_attr] } 
+            eligible_params.merge! { eligible_attr => params[:foo][eligible_attr] } 
 
         end
 

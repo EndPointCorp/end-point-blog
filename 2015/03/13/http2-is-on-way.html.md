@@ -35,7 +35,7 @@ However, the skeptics were wrong! HTTP/2 was completed over about 3 years, and i
 - Backward-compatibility with HTTP/1.1 and autodiscovery of HTTP/2 support (transparent upgrading for users)
 - When TLS is used, require TLS 1.2 and minimum acceptable cipher strength (to help retire weak TLS setups)
 
-For front-end web developers, these back-end plumbing changes have some very nice consequences. As described in [HTTP2 for front-end web developers](https://mattwilcox.net/web-development/http2-for-front-end-web-developers), you will soon be able to stop using many of the annoying workarounds for HTTP/1.1’s weaknesses: no more sprites, combining CSS &amp; JavaScript files, inlining images in CSS, sharding across many subdomains, etc.
+For front-end web developers, these back-end plumbing changes have some very nice consequences. As described in [HTTP2 for front-end web developers](https://mattwilcox.net/web-development/http2-for-front-end-web-developers), you will soon be able to stop using many of the annoying workarounds for HTTP/1.1’s weaknesses: no more sprites, combining CSS & JavaScript files, inlining images in CSS, sharding across many subdomains, etc.
 
 This practically means that the web can largely go back to working the way it was designed, with different files for different things, independent caching of small files, serve assets from the same place.
 

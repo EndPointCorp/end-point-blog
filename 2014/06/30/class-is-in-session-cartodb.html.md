@@ -19,7 +19,7 @@ Andrew Hill from CartoDB led the 4 hour class and provided us with a detailed su
 
 We spent a significant amount of time creating our own visualizations, and I was astounded by the application's ability to deliver beautiful visualizations in a matter of seconds. Below is an example.
 
-<iframe allowfullscreen="" frameborder="0" height="520" mozallowfullscreen="" msallowfullscreen="" oallowfullscreen="" src="https://academy51.cartodb.com/viz/a5854ec8-ec3c-11e3-9a4a-0edbca4b5057/embed_map?title=true&amp;description=true&amp;search=false&amp;shareable=true&amp;cartodb_logo=true&amp;layer_selector=false&amp;legends=false&amp;scrollwheel=true&amp;fullscreen=true&amp;sublayer_options=1&amp;sql=" webkitallowfullscreen="" width="100%"></iframe>
+<iframe allowfullscreen="" frameborder="0" height="520" mozallowfullscreen="" msallowfullscreen="" oallowfullscreen="" src="https://academy51.cartodb.com/viz/a5854ec8-ec3c-11e3-9a4a-0edbca4b5057/embed_map?title=true&description=true&search=false&shareable=true&cartodb_logo=true&layer_selector=false&legends=false&scrollwheel=true&fullscreen=true&sublayer_options=1&sql=" webkitallowfullscreen="" width="100%"></iframe>
 
 Have you used CartoDB in your applications? We'd love to see your examples!
 

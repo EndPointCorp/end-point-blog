@@ -9,4 +9,4 @@ This has been frequently mentioned around the web already, but it's important en
 
 Technically this is not a complicated matter, but font foundries (almost all of whom have a proprietary software business model) have tried to hold it back hoping for magical DRM to keep people from using fonts without paying for them, which of course isn't possible. As one of the original Netscape developers mentioned, if they had waited for such a thing for images, the web would still be plain-text only.
 
-The quickest way to get a feel for the impact this change can have is to look at [Ian Lynam &amp; Craig Mod's article demonstrating @font-face](http://craigmod.com/journal/font-face/) in Firefox 3.5 side-by-side with any of the other current browsers. It is exciting to finally see this ability in a mainstream browser after all these years.
+The quickest way to get a feel for the impact this change can have is to look at [Ian Lynam & Craig Mod's article demonstrating @font-face](http://craigmod.com/journal/font-face/) in Firefox 3.5 side-by-side with any of the other current browsers. It is exciting to finally see this ability in a mainstream browser after all these years.

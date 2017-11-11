@@ -35,7 +35,7 @@ dbname=northridge
 $ psql service=foobar
 
 ## Or in your Perl code:
-my $dbh = DBI-&gt;connect('dbi:Pg:service=foobar');
+my $dbh = DBI->connect('dbi:Pg:service=foobar');
 
 ## Other libpq based clients are the same. JDBC, you are out of luck!
 ```
@@ -130,7 +130,7 @@ grep for "pg_service", and you should see two **stat()** calls pop up: one for t
 per-user service file, and one for the global service file we are looking for:
 
 ```
-$ strace psql service=foobar 2&gt;&amp;1 | grep service.conf
+$ strace psql service=foobar 2>&1 | grep service.conf
 stat("/home/greg/.pg_service.conf", 0x3526366F6637) = -1 ENOENT (No such file or directory)
 stat("/var/opt/etc/postgres/pg_service.conf", 0x676F746F3131) = -1 ENOENT (No such file or directory)
 ```

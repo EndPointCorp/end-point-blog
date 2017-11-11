@@ -10,8 +10,8 @@ title: has_many filter in RailsAdmin
 I enjoyed using the RailsAdmin record filtering abilities until one day I needed to find all the orders with the specific product. 
 
 ```ruby
-class Order &lt; ActiveRecord::Base
-   has_many :products, :through =&gt; :orders_products
+class Order < ActiveRecord::Base
+   has_many :products, :through => :orders_products
 end
 ```
 
@@ -50,16 +50,16 @@ module RailsAdmin
   MainController.class_eval do
     def get_collection(model_config, scope, pagination)
       associations = model_config.list.fields
-        .select {|f| f.type == :belongs_to_association || f.type == :has_many_association &amp;&amp; !f.polymorphic?}
+        .select {|f| f.type == :belongs_to_association || f.type == :has_many_association && !f.polymorphic?}
         .map {|f| f.association[:name] } 
       options = {}
-      options = options.merge(:page =&gt; (params[:page] || 1).to_i,
-        :per =&gt; (params[:per] || model_config.list.items_per_page)) if pagination
-      options = options.merge(:include =&gt; associations) unless associations.blank?
+      options = options.merge(:page => (params[:page] || 1).to_i,
+        :per => (params[:per] || model_config.list.items_per_page)) if pagination
+      options = options.merge(:include => associations) unless associations.blank?
       options = options.merge(get_sort_hash(model_config))
-      options = options.merge(:query =&gt; params[:query]) if params[:query].present?
-      options = options.merge(:filters =&gt; params[:f]) if params[:f].present?
-      options = options.merge(:bulk_ids =&gt; params[:bulk_ids]) if params[:bulk_ids]
+      options = options.merge(:query => params[:query]) if params[:query].present?
+      options = options.merge(:filters => params[:f]) if params[:f].present?
+      options = options.merge(:bulk_ids => params[:bulk_ids]) if params[:bulk_ids]
       objects = model_config.abstract_model.all(options, scope)
     end
   end
@@ -69,7 +69,7 @@ Take a look at the very first line of the method. It used to be:
 
 ```ruby
 associations = model_config.list.fields.
-select {|f| f.type == :belongs_to_association &amp;&amp; !f.polymorphic? }
+select {|f| f.type == :belongs_to_association && !f.polymorphic? }
 ```
 I allowed for :has_many_association to pass through... and it turned out that RailsAdmin search works perfectly with it!
 

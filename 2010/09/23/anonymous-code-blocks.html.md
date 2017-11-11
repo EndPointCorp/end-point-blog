@@ -64,10 +64,10 @@ DO $$
         SELECT quote_ident(table_schema) || '.' || quote_ident(table_name) AS relname
         FROM information_schema.tables WHERE table_type = 'VIEW' AND table_schema = 'public'
     });
-    my $nrows = $rv-&gt;{processed};
+    my $nrows = $rv->{processed};
     foreach my $i (0 .. $nrows - 1) {
-        my $row = $rv-&gt;{rows}[$rn];
-        spi_exec_query("GRANT ALL ON $row-&gt;{relname} TO webuser");
+        my $row = $rv->{rows}[$rn];
+        spi_exec_query("GRANT ALL ON $row->{relname} TO webuser");
     }
 $$ LANGUAGE plperl;
 ```

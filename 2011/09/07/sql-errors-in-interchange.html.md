@@ -16,7 +16,7 @@ Interchange has a little feature whereby errors in a [query] tag are reported ba
 Interchange will paste the error from your database in
 
 ```perl
-  $Session-&gt;{errors}{'table foo'}
+  $Session->{errors}{'table foo'}
 ```
 
 That's great, but it comes with a price: now you have a potential for a page with SQL in it, which site security services like McAfee will flag as "SQL injection failures". Sometimes you just don't want your SQL failures plastered all over for the world to see.

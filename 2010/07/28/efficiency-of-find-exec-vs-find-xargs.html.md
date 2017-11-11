@@ -21,7 +21,7 @@ Instead do this:
 find /path/to/junk/files -type f -mtime +31 -print0 | xargs -0 -r rm -f
 ```
 
-That will run xargs once for each very long list of files to be removed, so the overhead of fork &amp; exec is incurred very rarely, and the job can spend most of its effort actually unlinking files. (The xargs -r option says not to run the command if there is no input to xargs.)
+That will run xargs once for each very long list of files to be removed, so the overhead of fork & exec is incurred very rarely, and the job can spend most of its effort actually unlinking files. (The xargs -r option says not to run the command if there is no input to xargs.)
 
 How long can the argument list to xargs be? It depends on the system, but xargs --show-limits will tell us. Here's output from a RHEL 5 x86_64 system (using findutils 4.2.27):
 
@@ -51,7 +51,7 @@ Roughly 2 megabytes of arguments is a lot. But even the POSIX minimum of 4 kB is
 It doesn't usually make much of a difference, but we can tune even more. Make sure the maximum number of files is processed at one time by first changing to the base directory so that the relative pathnames are shorter:
 
 ```bash
-cd /path/to/junk/files &amp;&amp; find . -type f -mtime +31 -print0 | xargs -0 -r rm -f
+cd /path/to/junk/files && find . -type f -mtime +31 -print0 | xargs -0 -r rm -f
 ```
 
 That way each file argument is shorter, e.g. ./junkfile compared to /path/to/junk/files/junkfile.

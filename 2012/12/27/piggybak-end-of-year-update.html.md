@@ -18,7 +18,7 @@ Jump ahead a few months, and now Piggybak is a strong base for an ecommerce fram
 Since the last general update, we've tackled a number of additional changes:
 
 - SSL support: The Piggybak core now supports SSL for the checkout, which leverages the lightweight Rails gem [rack-ssl-enforcer](https://github.com/tobmatth/rack-ssl-enforcer). A Piggybak config variable specifying that checkout should be secure must be set to true in the main Rails application, which triggers that a specific set of pages should be secure. This configuration is not ideal to use if the main Rails application requires more complex management of secure pages.
-- Minor bug fixes &amp; cleanup: The updates below include minor refactoring and/or bug fixes to the Piggybak core:
+- Minor bug fixes & cleanup: The updates below include minor refactoring and/or bug fixes to the Piggybak core:
 
         - Moved order confirmation outside of controller, to minimize failure of order processing if the email confirmation fails.
         - RailsAdmin DRY cleanup
@@ -37,7 +37,7 @@ Since the last general update, we've tackled a number of additional changes:
 
 At this point, one of our big goals is to grow the Piggybak portfolio and see many of the extensions in action. We'd also like to improve the Piggybak core and extension documentation to help get folks up and running on Piggybak quickly. In addition to documentation and portfolio growth, additional features we may focus on are:
 
-- Product reviews &amp; ratings support
+- Product reviews & ratings support
 - Saved address/address book support
 - Wishlist, saved cart functionality
 

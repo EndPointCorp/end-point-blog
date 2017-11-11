@@ -95,7 +95,7 @@ The last example could be easily stated using squeel as:
 ```ruby
 @tags = params[:tags]
 Post.joins{comments.guest.tags}.
-     where{comments.guest.tags.code &lt;&lt; my{@tags}}
+     where{comments.guest.tags.code << my{@tags}}
 ```
 
 Isn’t that simpler and easier to read and comprehend?
@@ -131,7 +131,7 @@ No! Take a look here:
 
 ```ruby
 Person.joins{articles}.group{articles.title}.
-       having{{articles =&gt; {max(id) =&gt; id}}}
+       having{{articles => {max(id) => id}}}
 ```
 
 Producing:

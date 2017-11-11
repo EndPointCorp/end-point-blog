@@ -45,9 +45,9 @@ By default, it adds a comment after the changed value as well, to help in tracki
 ```diff
 diff -r1.1 postgresql.conf
 499c499
-&lt; random_page_cost = 4
+< random_page_cost = 4
 ---
-&gt; random_page_cost = 2 ## changed by modify_postgres_conf.pl on Wed Aug 10 13:31:34 2011
+> random_page_cost = 2 ## changed by modify_postgres_conf.pl on Wed Aug 10 13:31:34 2011
 ```
 
 The addition of the comment can be stopped by added a --no-comment argument. If the script runs successfully, it also returns two items of information: the size and name of the current Postgres log file. This is useful so you can know exactly where in the log this change took place. Note that this only works for items that are already explicitly set in your configuration file. However, [as discussed before](http://blog.endpoint.com/2010/09/postgres-configuration-best-practices.html), you should already have all the items that you may possibly change explicitly listed out at the bottom of the file already. Whitespace is preserved as well, for those (like me) who like to keep things lined up neatly inside the file (see examples in the link above).
@@ -62,19 +62,19 @@ $ ./modify_postgres_conf.pl --pgconf /etc/postgresql/9.0/main/postgresql.conf --
 No change made: value of "random_page_cost" is already 2
 
 $ ./modify_postgres_conf.pl --pgconf /etc/postgresql/9.0/main/postgresql.conf \
-&gt; --change random_page_cost=2 \
-&gt; --change log_statement=ddl \
-&gt; --change log_min_duration_statement=100
+> --change random_page_cost=2 \
+> --change log_statement=ddl \
+> --change log_min_duration_statement=100
 
 No change made: value of "random_page_cost" is already 2
 118459 /var/log/postgres/postgres-2011-08-10.log
 
 $ ./modify_postgres_conf.pl --pgconf /etc/postgresql/9.0/main/postgresql.conf \
-&gt; --change default_statitics_target=200 --no-comment
+> --change default_statitics_target=200 --no-comment
 There is no Postgres variable named "default_statitics_target"!
 
 $ ./modify_postgres_conf.pl --pgconf /etc/postgresql/9.0/main/postgresql.conf \
-&gt; --change default_statistics_target=200 --no-comment
+> --change default_statistics_target=200 --no-comment
 123396 /var/log/postgres/postgres-2011-08-10.log
 ```
 

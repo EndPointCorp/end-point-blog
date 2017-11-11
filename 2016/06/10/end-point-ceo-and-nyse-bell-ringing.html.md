@@ -33,4 +33,4 @@ End Point may be one of the smaller of the “small companies” chosen by Chase
 
 While I may not have rung the actual bell this year, our banker and Chase has every confidence – as do I – that one day we will.
 
-<iframe frameborder="0" height="360" id="lsembed_1465584958" scrolling="no" src="//livestream.com/accounts/1160789/events/5283827/videos/121916250/player?autoPlay=false&amp;height=360&amp;mute=false&amp;width=640" width="640"></iframe>
+<iframe frameborder="0" height="360" id="lsembed_1465584958" scrolling="no" src="//livestream.com/accounts/1160789/events/5283827/videos/121916250/player?autoPlay=false&height=360&mute=false&width=640" width="640"></iframe>

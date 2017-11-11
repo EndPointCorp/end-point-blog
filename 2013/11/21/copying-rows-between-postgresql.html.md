@@ -67,7 +67,7 @@ So now we can save it to a file:
 
 ```sql
 $ psql test -c \
-"\copy (SELECT i, t FROM original_table ORDER BY i) TO STDOUT" &gt; /tmp/f.tsv
+"\copy (SELECT i, t FROM original_table ORDER BY i) TO STDOUT" > /tmp/f.tsv
 ```
 
 Loading now is also pretty easy with the same “\copy” command.

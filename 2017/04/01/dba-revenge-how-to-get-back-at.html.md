@@ -35,7 +35,7 @@ CREATE TABLE "messages"";rollback;update products set price=0;commit;--"
  public | messages";rollback;update products set price=0;commit;-- | table | jwilliams
 (1 row)
 ```
-A copy &amp; paste later...
+A copy & paste later...
 
 ```
 [local]:5432|production=# SELECT "am i doing this right" FROM "messages";rollback;update products set price=0;commit;--";

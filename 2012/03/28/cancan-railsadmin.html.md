@@ -16,7 +16,7 @@ CanCan requires that you create an Ability class where all user permissions are 
 ```ruby
 class Ability
   include CanCan::Ability
-  if user &amp;&amp; user.is_admin?
+  if user && user.is_admin?
     can :access, :rails_admin
     can :dashboard
     can :manage, [User,
@@ -39,13 +39,13 @@ The Ability class might look like:
 ```ruby
 class Ability
   include CanCan::Ability
-  if user &amp;&amp; user.is_store_owner?
+  if user && user.is_store_owner?
     can :access, :rails_admin
     can :dashboard
-    can :manage, Product, :store_owner_id =&gt; user.id
-    can :read, Category, :visible =&gt; true
+    can :manage, Product, :store_owner_id => user.id
+    can :read, Category, :visible => true
   end
-  if user &amp;&amp; user.is_admin?
+  if user && user.is_admin?
     can :access, :rails_admin
     can :dashboard
     can :manage, [User,

@@ -37,4 +37,4 @@ Then tried the same HTTP POST that had been consistently failing, and poof! It w
 
 I think mostly likely something more than 1400 bytes would've been possible, perhaps just a few short of 1500. The number 1492 rings familiar. I'll be old-fashioned and *not* look it up on the web. But this 1400-byte MTU worked fine and solved the problem. To my delight.
 
-As an interesting aside, before making the change, I found one web application where uploads did work fine anyway: Google's Picasa. I'm not sure why, but maybe it sliced &amp; diced the upload stream into smaller chunks on its own? A mystery for another day.
+As an interesting aside, before making the change, I found one web application where uploads did work fine anyway: Google's Picasa. I'm not sure why, but maybe it sliced & diced the upload stream into smaller chunks on its own? A mystery for another day.

@@ -49,7 +49,7 @@ The file my_machine.json can be the name of any json file and contains all the i
       "http_port_max" : 9001,
       "shutdown_command": "echo {{user `ssh_pass`}} | sudo -S shutdown -P now",
       "boot_command": [
-        "&lt;esc&gt;&lt;esc&gt;&lt;enter&gt;&lt;wait&gt;",
+        "<esc><esc><enter><wait>",
         "/install/vmlinuz noapic ",
         "preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/precise_preseed.cfg ",
         "debian-installer=en_US auto locale=en_US kbd-chooser/method=us ",
@@ -57,7 +57,7 @@ The file my_machine.json can be the name of any json file and contains all the i
         "fb=false debconf/frontend=noninteractive ",
         "keyboard-configuration/modelcode=SKIP keyboard-configuration/layout=USA ",
         "keyboard-configuration/variant=USA console-setup/ask_detect=false ",
-        "initrd=/install/initrd.gz -- &lt;enter&gt;"
+        "initrd=/install/initrd.gz -- <enter>"
       ]
     }
   ]

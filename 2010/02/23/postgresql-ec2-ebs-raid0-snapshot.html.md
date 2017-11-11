@@ -88,7 +88,7 @@ mount /pgdata
 SELECT pg_start_backup('raid_backup');
 ```
 
-1. Manually inserted a 2nd known test row &amp; 2nd known test view that I don't want to appear in the snapshot after recovery
+1. Manually inserted a 2nd known test row & 2nd known test view that I don't want to appear in the snapshot after recovery
 
 1. Ran snapshot script which calls ec2-create-snapshot on each of the 4 EBS volumes -- during first run, run serially quite slowly taking about 1 minute total; during second run, run in parallel such that the snapshot point was within 1 second for all 4 volumes
 

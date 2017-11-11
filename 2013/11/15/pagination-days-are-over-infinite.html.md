@@ -24,8 +24,8 @@ First step is to include the necessary scripts:
 Add the container element. The navigation element is a very important part that triggers the loading of the subsequent page. After the second page the page number will automatically increment to fetch the subsequent pages:
 
 ```html
-<div id="container">&lt;% @images.each do |i| %&gt;
-    <div class="item"><img src="..."/></div>&lt;% end %&gt;
+<div id="container"><% @images.each do |i| %>
+    <div class="item"><img src="..."/></div><% end %>
 </div><nav id="page-nav" style="display: none;">
   <a href="/?p=2"></a>
 </nav>
@@ -63,7 +63,7 @@ Once the user scrolls down to the bottom of the first page, the script will fetc
 
 ```ruby
 def list
-  @images = Image.paginate(:page =&gt; params[:p] || 1, :per_page =&gt; 25)
+  @images = Image.paginate(:page => params[:p] || 1, :per_page => 25)
 end
 ```
 

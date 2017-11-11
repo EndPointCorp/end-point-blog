@@ -17,11 +17,11 @@ For backwards compatibility and fine-tuning control, there is a new attribute ca
 
 ```perl
   my $dsn = 'dbi:Pg:dbname=foobar';
-  my $dbh = DBI-&gt;connect($dsn, $dbuser, $dbpass,
-    { AutoCommit =&gt; 0,
-      RaiseError =&gt; 0,
-      PrintError =&gt; 0,
-      pg_utf8_strings =&gt; 0,
+  my $dbh = DBI->connect($dsn, $dbuser, $dbpass,
+    { AutoCommit => 0,
+      RaiseError => 0,
+      PrintError => 0,
+      pg_utf8_strings => 0,
     }
   );
 ```

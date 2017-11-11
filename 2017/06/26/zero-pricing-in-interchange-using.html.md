@@ -47,7 +47,7 @@ So building on our current CommonAdjust, let's leverage >> to allow our companio
 
 ```
 [calcn]
-    $Items-&gt;[1]{mv_price} = '&gt;&gt;0';
+    $Items->[1]{mv_price} = '>>0';
     return;
 [/calcn]
 ```
@@ -63,14 +63,14 @@ CommonAdjust $ ;[my-special-pricing] ;:sale_price ;:price
 Now instead of setting mv_price in the item, let's construct [my-special-pricing] to do some heavy lifting:
 
 ```
-UserTag my-special-pricing Routine &lt;&lt;EOR
+UserTag my-special-pricing Routine <<EOR
 sub {
     # A bunch of conditional, complicated code, but then ...
     elsif (buy_one_get_one_test($item)) {
         # This is where we know this normally priced item is supposed to be
         # free because of our promotion. Excellent!
 
-        return '&gt;&gt;0';
+        return '>>0';
     }
     # remaining code we don't care about for this discussion
 }

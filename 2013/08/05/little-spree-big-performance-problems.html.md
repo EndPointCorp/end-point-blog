@@ -45,7 +45,7 @@ The "Best Selling variants" report was being calculated real-time right in the w
 def best_selling_variants
   li = LineItem.includes(:order).
       where("orders.state = 'complete'").
-      sum(:quantity, :group =&gt; :variant_id, :limit =&gt; 5)
+      sum(:quantity, :group => :variant_id, :limit => 5)
   ...
 end
 ```
@@ -53,12 +53,12 @@ end
 Record counts in the database are large enough to crash the application on Heroku with the database timeout:
 
 ```ruby
-irb(main):001:0&gt; LineItem.count
-=&gt; 162279
-irb(main):002:0&gt; Order.count
-=&gt; 13027
-irb(main):003:0&gt; Variant.count
-=&gt; 14418
+irb(main):001:0> LineItem.count
+=> 162279
+irb(main):002:0> Order.count
+=> 13027
+irb(main):003:0> Variant.count
+=> 14418
 ```
 Other reports on the Dashboard experience the same problem. They would cause the timeout in turns when logging into Admin: 
 
@@ -76,7 +76,7 @@ Fortunately, in Spree 1.x the internal reporting system has been replaced with [
 If switching to Spree 1.x is not an option, another way is to move the calculation into a background job, using, for example, delayed_job gem and Heroku Scheduler Addon:
 
 ```ruby
-task :statistics =&gt; :environment do
+task :statistics => :environment do
   Delayed::Job.enqueue StatisticsJob.new
 end
 ```
@@ -96,9 +96,9 @@ or this:
 Spree, both 0.60 and 1.x, proved to have a huge problem if an order has a lot of line items and/or a large quantity of single line items. The potentially dangerous code can be found all over the place. Consider the following example:
 
 ```ruby
-class InventoryUnit &lt; ActiveRecord::Base
+class InventoryUnit < ActiveRecord::Base
   def self.destroy_units(order, variant, quantity)
-    variant_units = order.inventory_units.group_by(&amp;:variant_id)[variant.id].sort_by(&amp;:state)
+    variant_units = order.inventory_units.group_by(&:variant_id)[variant.id].sort_by(&:state)
     quantity.ceil.times do
       inventory_unit = variant_units.shift
       inventory_unit.destroy
@@ -115,11 +115,11 @@ A simple mindful refactoring was enough to solve the problem for me. There is no
 ```ruby
 def self.destroy_units(order, variant, quantity)
   variant_units = order.inventory_units.
-    group_by(&amp;:variant_id)[variant.id].
-    sort_by(&amp;:state)
+    group_by(&:variant_id)[variant.id].
+    sort_by(&:state)
   variant_units = variant_units.shift(quantity.ceil)
 InventoryUnit.
-    where(:order_id =&gt; order.id,:variant_id =&gt; variant.id).
+    where(:order_id => order.id,:variant_id => variant.id).
     order('state asc').limit(quantity.ceil).
     destroy_all
    end
@@ -130,7 +130,7 @@ InventoryUnit.
 All emails in Spree are sent in real-time.
 
 ```ruby
-class Order &lt; ActiveRecord::Base
+class Order < ActiveRecord::Base
   def finalize!
     ...
     OrderMailer.confirm_email(self).deliver
@@ -144,12 +144,12 @@ Why is it bad? Let's look at the following example from my application:
 ```ruby
 def confirm_email(order)
   attachments["invoice.pdf"] = {
-    'Content-type' =&gt; 'application/pdf', 
-    :content =&gt; OrderInvoice.new.to_pdf(order)}
+    'Content-type' => 'application/pdf', 
+    :content => OrderInvoice.new.to_pdf(order)}
 
-  mail(:subject  =&gt; 'Order #' + order.number, 
-       :from   =&gt;    Spree::Config[:order_from],  
-       :to =&gt; order.email)
+  mail(:subject  => 'Order #' + order.number, 
+       :from   =>    Spree::Config[:order_from],  
+       :to => order.email)
 end
 ```
 
@@ -182,8 +182,8 @@ As the result, here is what I see in server console while loading the order disp
 If I modify the line from the controller like this...
 
 ```ruby
-@order = Order.where(:number =&gt; params[:order_id])
-         .includes(:line_items =&gt; {:product =&gt; :taxons, :variant =&gt; [:product, :option_values]})
+@order = Order.where(:number => params[:order_id])
+         .includes(:line_items => {:product => :taxons, :variant => [:product, :option_values]})
          .includes(:adjustments).first
 ```
 
@@ -198,14 +198,14 @@ Eager-loading did the trick. Of course, not everything needs to be loaded eagerl
 There a lot of places in the Spree source code that are not optimized for performance. We don't need to look far for an example, because there is another killer method right near the "destroy_units" one we inspected earlier!
 
 ```ruby
-class InventoryUnit &lt; ActiveRecord::Base
+class InventoryUnit < ActiveRecord::Base
   def self.create_units(order, variant, sold, back_order)
     shipment = order.shipments.detect {|shipment| !shipment.shipped? }
     sold.ceil.times { 
-order.inventory_units.create(:variant =&gt; variant, :state =&gt; "sold", :shipment =&gt; shipment)
+order.inventory_units.create(:variant => variant, :state => "sold", :shipment => shipment)
 }
    back_order.ceil.times {     
-order.inventory_units.create(:variant =&gt; variant, :state =&gt; "backordered", :shipment =&gt; shipment)
+order.inventory_units.create(:variant => variant, :state => "backordered", :shipment => shipment)
 }
   end
 end
@@ -240,9 +240,9 @@ Another example: every line item has the after_create and after_save callbacks. 
 
 ```ruby
 def update_totals
-    self.payment_total = payments.completed.map(&amp;:amount).sum
-    self.item_total = line_items.map(&amp;:amount).sum
-    self.adjustment_total = adjustments.map(&amp;:amount).sum
+    self.payment_total = payments.completed.map(&:amount).sum
+    self.item_total = line_items.map(&:amount).sum
+    self.adjustment_total = adjustments.map(&:amount).sum
     self.total = item_total + adjustment_total
   end
 ```
@@ -250,7 +250,7 @@ def update_totals
 Now imagine the order from the second screenshot with a lot of line items. During the checkout "update_totals" will be called each time the line item is saved. Typically, this line would produce a timeout, because the  "line_items" association was, of course, not preloaded:
 
 ```ruby
-line_items.map(&amp;:amount).sum
+line_items.map(&:amount).sum
 ```
 
 I couldn't list every circumstance like that, because it would require a lot of context to explain the catch, but I can still say many times: "No long-running tasks in the web request!".

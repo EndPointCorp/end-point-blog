@@ -23,7 +23,7 @@ So I’m sounding like a fanboy. What was so much better?
 
 First, the design. A distributed system where all commits were objects with a SHA-1 hash to identify them and the parent commit(s). Locally editable history. Piecemeal committing thanks to the staging power of the Git index. Cheap and quick branching. Better merging. A commit log that was really useful. Implicit rename tracking. Easy tagging and commit naming. And nothing missing from other systems that I needed.
 
-Next, the implementation. Trivial setup, with no political and system administrative fuss for client or server. No messing with users and permissions and committer identities, just name &amp; email address like we’re all used to. An efficient wire protocol. Simple ssh transport for pushes and/or pulls of remote repositories, if needed. A single .git directory at the repository root, rather than RCS, CVS, or .svn directories scattered throughout the checkout. A simple .git/config configuration file. And speed, so much speed, even for very large repositories with lots of binary blobs.
+Next, the implementation. Trivial setup, with no political and system administrative fuss for client or server. No messing with users and permissions and committer identities, just name & email address like we’re all used to. An efficient wire protocol. Simple ssh transport for pushes and/or pulls of remote repositories, if needed. A single .git directory at the repository root, rather than RCS, CVS, or .svn directories scattered throughout the checkout. A simple .git/config configuration file. And speed, so much speed, even for very large repositories with lots of binary blobs.
 
 The speed is worth talking about more.
 

@@ -20,15 +20,15 @@ I gave a talk exploring new technologies for End Point's own [DevCamps](http://d
 
 [SpaceCamps Presentation Video](https://www.youtube.com/watch?v=IYKs8FF8--Y)
 
-#### AngularJS &amp; Dancer for Modern Web Development
+#### AngularJS & Dancer for Modern Web Development
 
 Josh detailed his experience migrating legacy applications utilizing Dancer, AngularJS, and modern Perl techniques. Josh highlighted the challenges he faced during the process, as well as lessons he learned along the way.
 
-[AngularJS &amp; Dancer for Modern Web Development Presentation Video](https://www.youtube.com/watch?v=m7q6QbSHrkA)
+[AngularJS & Dancer for Modern Web Development Presentation Video](https://www.youtube.com/watch?v=m7q6QbSHrkA)
 
 ### Lightning Talks
 
-Josh and I both gave short “lightning talks.” Josh’s was on [Writing Unit Tests for a Legacy App (Interchange 5)](https://youtu.be/-eg21qxxIAA?t=12m47s), and mine was on [Plack &amp; Interchange 5.](https://youtu.be/-eg21qxxIAA?t=19m11s)
+Josh and I both gave short “lightning talks.” Josh’s was on [Writing Unit Tests for a Legacy App (Interchange 5)](https://youtu.be/-eg21qxxIAA?t=12m47s), and mine was on [Plack & Interchange 5.](https://youtu.be/-eg21qxxIAA?t=19m11s)
 
 To review the rest of the presentations please checkout the [Perl Dancer Conference YouTube channel](https://www.youtube.com/channel/UCWtnsx6yRuHvO2e-xX2Yyng).
 

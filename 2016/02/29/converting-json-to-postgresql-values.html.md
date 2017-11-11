@@ -13,7 +13,7 @@ In the example JSON there is attribute country inside metadata.
 To access this field, we need to write:
 
 ```sql
-SELECT data-&gt;'metadata'-&gt;&gt;'country' FROM stats_data;
+SELECT data->'metadata'->>'country' FROM stats_data;
 ```
 
 The native SQL version would rather look like:
@@ -33,18 +33,18 @@ CREATE VIEW stats AS
 SELECT
   id                                                          as id,
   created_at                                                  as created_at,
-  to_timestamp((data-&gt;&gt;'start_ts')::double precision)         as start_ts,
-  to_timestamp((data-&gt;&gt;'end_ts')::double precision)           as end_ts,
+  to_timestamp((data->>'start_ts')::double precision)         as start_ts,
+  to_timestamp((data->>'end_ts')::double precision)           as end_ts,
   tstzrange(
-    to_timestamp((data-&gt;&gt;'start_ts')::double precision),
-    to_timestamp((data-&gt;&gt;'end_ts')::double precision)
+    to_timestamp((data->>'start_ts')::double precision),
+    to_timestamp((data->>'end_ts')::double precision)
   )                                                           as ts_range,
   ( SELECT array_agg(x)::INTEGER[]
-    FROM jsonb_array_elements_text(data-&gt;'resets') x)         as resets,
-  (data-&gt;'sessions')                                          as sessions,
-  (data-&gt;'metadata'-&gt;&gt;'country')                              as country,
-  (data-&gt;'metadata'-&gt;&gt;'installation')                         as installation,
-  (data-&gt;&gt;'status')                                           as status
+    FROM jsonb_array_elements_text(data->'resets') x)         as resets,
+  (data->'sessions')                                          as sessions,
+  (data->'metadata'->>'country')                              as country,
+  (data->'metadata'->>'installation')                         as installation,
+  (data->>'status')                                           as status
 FROM stats_data;
 ```
 
@@ -86,14 +86,14 @@ CREATE VIEW stats AS
 SELECT
   id                                                   as id,
   created_at                                           as created_at,
-  to_timestamp(data-&gt;'start_ts')                       as start_ts,
-  to_timestamp(data-&gt;'end_ts'  )                       as end_ts,
-  to_timestamp_range(data-&gt;'start_ts', data-&gt;'end_ts') as ts_range,
-  to_array(data-&gt;'resets')                             as resets,
-  (data-&gt;'sessions')                                   as sessions,
-  (data-&gt;'metadata'-&gt;&gt;'country')                       as country,
-  (data-&gt;'metadata'-&gt;&gt;'installation')                  as installation,
-  (data-&gt;&gt;'status')                                    as status
+  to_timestamp(data->'start_ts')                       as start_ts,
+  to_timestamp(data->'end_ts'  )                       as end_ts,
+  to_timestamp_range(data->'start_ts', data->'end_ts') as ts_range,
+  to_array(data->'resets')                             as resets,
+  (data->'sessions')                                   as sessions,
+  (data->'metadata'->>'country')                       as country,
+  (data->'metadata'->>'installation')                  as installation,
+  (data->>'status')                                    as status
 FROM stats_data;
 ```
 
@@ -157,10 +157,10 @@ SELECT
   id                                                                            as id,
   country                                                                       as country,
   installation                                                                  as installation,
-  s-&gt;&gt;'application'                                                             as appname,
-  to_timestamp_range(s-&gt;'start_ts', s-&gt;'end_ts')                                as ts_range,
-  COALESCE(bool(s-&gt;&gt;'occupancy_triggered'), false)                              as occupancy_triggered,
-  to_timestamp(s-&gt;'end_ts') - to_timestamp(s-&gt;'start_ts')                       as session_length
+  s->>'application'                                                             as appname,
+  to_timestamp_range(s->'start_ts', s->'end_ts')                                as ts_range,
+  COALESCE(bool(s->>'occupancy_triggered'), false)                              as occupancy_triggered,
+  to_timestamp(s->'end_ts') - to_timestamp(s->'start_ts')                       as session_length
 FROM stats, jsonb_array_elements(sessions) s
 ;
 
@@ -173,7 +173,7 @@ I've also created indexes on the materialized view, as my report queries will
 contain the where clause like:
 
 ```sql
-WHERE country='' and installation='' and ts_range &amp;&amp; tstzrange(fromdate, todate)
+WHERE country='' and installation='' and ts_range && tstzrange(fromdate, todate)
 ```
 
 An example data extracted from the JSON looks like this:

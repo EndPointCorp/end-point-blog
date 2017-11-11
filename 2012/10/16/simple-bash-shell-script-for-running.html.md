@@ -49,13 +49,13 @@ This will return the remaining record count to the shell script.
 And the shell script...
 
 ```bash
-ret=$(mysql -u [user] -p[password] --skip-column-names [database_name]  &lt; [the_batch_script].sql)
+ret=$(mysql -u [user] -p[password] --skip-column-names [database_name]  < [the_batch_script].sql)
 
 while [ $ret -gt 0 ]
 do
   echo "rows left: $ret"
   sleep 3
-  ret=$(mysql -u [user] -p[password] --skip-column-names [database_name]  &lt; [the_batch_script].sql)
+  ret=$(mysql -u [user] -p[password] --skip-column-names [database_name]  < [the_batch_script].sql)
 done
 ```
 

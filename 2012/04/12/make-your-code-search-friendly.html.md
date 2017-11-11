@@ -30,7 +30,7 @@ $ alsdkjgalkghkf
 (The last simulates pounding the keyboard with both fists.) I would suggest humbly that "strings you emit as a line should appear as a line in your code", if for no other reason than that it makes it so much easier for you or others to find them. Thus:
 
 ```perl
-my $string = &lt;&lt;'MSG';
+my $string = <<'MSG';
 Your transaction could not be processed due to a charge card error.
 MSG
 return $string;

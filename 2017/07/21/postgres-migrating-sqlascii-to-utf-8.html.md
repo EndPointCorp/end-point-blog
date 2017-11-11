@@ -57,10 +57,10 @@ way. Use of the "echo" command is a great way to add arbitrary bytes to a file a
 allows direct hex input:
 
 ```
-$ echo -e "[Windows-1252]   Euro: \x80   Double dagger: \x87" &gt; sample.data
-$ echo -e "[Latin-1]   Yen: \xa5   Half: \xbd" &gt;&gt; sample.data
-$ echo -e "[Japanese]   Ship: \xe8\x88\xb9" &gt;&gt; sample.data
-$ echo -e "[Invalid UTF-8]  Blob: \xf4\xa5\xa3\xa5" &gt;&gt; sample.data
+$ echo -e "[Windows-1252]   Euro: \x80   Double dagger: \x87" > sample.data
+$ echo -e "[Latin-1]   Yen: \xa5   Half: \xbd" >> sample.data
+$ echo -e "[Japanese]   Ship: \xe8\x88\xb9" >> sample.data
+$ echo -e "[Invalid UTF-8]  Blob: \xf4\xa5\xa3\xa5" >> sample.data
 ```
 
 This file looks ugly. Notice all the "wrong" characters when we simply view the file directly:
@@ -77,11 +77,11 @@ Running iconv is of little help:
 
 ```
 ## With no source encoding given, it errors on the Euro:
-$ iconv -t utf8 sample.data &gt;/dev/null
+$ iconv -t utf8 sample.data >/dev/null
 iconv: illegal input sequence at position 23
 
 ## We can tell it to ignore those errors, but it still barfs on the blob:
-$ iconv -t utf8//ignore sample.data &gt;/dev/null
+$ iconv -t utf8//ignore sample.data >/dev/null
 iconv: illegal input sequence at position 123
 
 ## Telling it the source is Window-1252 fixes some things, but still sinks the Ship:
@@ -152,12 +152,12 @@ pg_utf8_islegal(const unsigned char *source, int length)
       return false;
     case 4:
       a = source[3];
-      if (a &lt; 0x80 || a &gt; 0xBF)
+      if (a < 0x80 || a > 0xBF)
         return false;
       /* FALL THRU */
     case 3:
       a = source[2];
-      if (a &lt; 0x80 || a &gt; 0xBF)
+      if (a < 0x80 || a > 0xBF)
         return false;
       /* FALL THRU */
     case 2:
@@ -165,32 +165,32 @@ pg_utf8_islegal(const unsigned char *source, int length)
       switch (*source)
       {
         case 0xE0:
-          if (a &lt; 0xA0 || a &gt; 0xBF)
+          if (a < 0xA0 || a > 0xBF)
             return false;
           break;
         case 0xED:
-          if (a &lt; 0x80 || a &gt; 0x9F)
+          if (a < 0x80 || a > 0x9F)
             return false;
           break;
         case 0xF0:
-          if (a &lt; 0x90 || a &gt; 0xBF)
+          if (a < 0x90 || a > 0xBF)
             return false;
           break;
         case 0xF4:
-          if (a &lt; 0x80 || a &gt; 0x8F)
+          if (a < 0x80 || a > 0x8F)
             return false;
           break;
         default:
-          if (a &lt; 0x80 || a &gt; 0xBF)
+          if (a < 0x80 || a > 0xBF)
             return false;
           break;
       }
       /* FALL THRU */
     case 1:
       a = *source;
-      if (a &gt;= 0x80 &amp;&amp; a &lt; 0xC2)
+      if (a >= 0x80 && a < 0xC2)
         return false;
-      if (a &gt; 0xF4)
+      if (a > 0xF4)
         return false;
       break;
   }

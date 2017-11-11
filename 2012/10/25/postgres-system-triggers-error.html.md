@@ -66,19 +66,19 @@ CREATE ROLE
 You are now connected to database "postgres" as user "alice".
 
 <span class="c">-- Verify that we are not a superuser</span>
-<span class="p">postgres=&gt;</span> <span class="t">select usename, usesuper from pg_user where usename = (select current_user);</span>
+<span class="p">postgres=></span> <span class="t">select usename, usesuper from pg_user where usename = (select current_user);</span>
  usename | usesuper 
 ---------+----------
  alice   | f
 
-<span class="p">postgres=&gt;</span> <span class="t">create table foo(a int unique);</span>
+<span class="p">postgres=></span> <span class="t">create table foo(a int unique);</span>
 NOTICE:  CREATE TABLE / UNIQUE will create implicit index "foo_a_key" for table "foo"
 CREATE TABLE
 
-<span class="p">postgres=&gt;</span> <span class="t">create table bar(b int);</span>
+<span class="p">postgres=></span> <span class="t">create table bar(b int);</span>
 CREATE TABLE
 
-<span class="p">postgres=&gt;</span> <span class="t">alter table bar add constraint baz foreign key (b) references foo(a);</span>
+<span class="p">postgres=></span> <span class="t">alter table bar add constraint baz foreign key (b) references foo(a);</span>
 ALTER TABLE
 ```
 
@@ -87,7 +87,7 @@ Because the triggers enforcing the foreign key are internal, they will not show 
 when we do a \d:
 
 ```
-<span class="p">postgres=&gt;</span> <span class="t">\d foo</span>
+<span class="p">postgres=></span> <span class="t">\d foo</span>
       Table "public.foo"
  Column |  Type   | Modifiers 
 --------+---------+-----------
@@ -97,7 +97,7 @@ Indexes:
 Referenced by:
     TABLE "bar" CONSTRAINT "baz" FOREIGN KEY (b) REFERENCES foo(a)
 
-<span class="p">postgres=&gt;</span> <span class="t">\d bar</span>
+<span class="p">postgres=></span> <span class="t">\d bar</span>
       Table "public.bar"
  Column |  Type   | Modifiers 
 --------+---------+-----------
@@ -105,10 +105,10 @@ Referenced by:
 Foreign-key constraints:
     "baz" FOREIGN KEY (b) REFERENCES foo(a)
 
-<span class="p">postgres=&gt;</span> <span class="t">alter table foo disable trigger all;</span>
+<span class="p">postgres=></span> <span class="t">alter table foo disable trigger all;</span>
 <span class="e">ERROR:  permission denied: "RI_ConstraintTrigger_41047" is a system trigger</span>
 
-<span class="p">postgres=&gt;</span> <span class="t">alter table bar disable trigger all;</span>
+<span class="p">postgres=></span> <span class="t">alter table bar disable trigger all;</span>
 <span class="e">ERROR:  permission denied: "RI_ConstraintTrigger_41049" is a system trigger</span>
 ```
 
@@ -175,7 +175,7 @@ simply **disable user triggers manually** rather than use 'all':
 <span class="p">postgres=#</span> <span class="t">\c postgres alice</span>
 You are now connected to database "postgres" as user "alice".
 
-<span class="p">postgres=&gt;</span> <span class="t">\d bar</span>
+<span class="p">postgres=></span> <span class="t">\d bar</span>
       Table "public.bar"
  Column |  Type   | Modifiers 
 --------+---------+-----------
@@ -186,18 +186,18 @@ Triggers:
     trunk AFTER INSERT ON bar FOR EACH STATEMENT EXECUTE PROCEDURE funk()
     vupd BEFORE UPDATE ON bar FOR EACH ROW EXECUTE PROCEDURE verify_update();
 
-<span class="p">postgres=&gt;</span> <span class="t">alter table bar disable trigger trunk</span>;
+<span class="p">postgres=></span> <span class="t">alter table bar disable trigger trunk</span>;
 ALTER TABLE
 
-<span class="p">postgres=&gt;</span> <span class="t">alter table bar disable trigger vupd</span>;
+<span class="p">postgres=></span> <span class="t">alter table bar disable trigger vupd</span>;
 ALTER TABLE
 
 <span class="c">-- Do what you need to do, then:</span>
 
-<span class="p">postgres=&gt;</span> <span class="t">alter table bar enable trigger trunk</span>;
+<span class="p">postgres=></span> <span class="t">alter table bar enable trigger trunk</span>;
 ALTER TABLE
 
-<span class="p">postgres=&gt;</span> <span class="t">alter table bar enable trigger vupd</span>;
+<span class="p">postgres=></span> <span class="t">alter table bar enable trigger vupd</span>;
 ALTER TABLE
 ```
 
@@ -210,12 +210,12 @@ the first place. Of course, you have to add it back in as well:
 <span class="p">postgres=#</span> <span class="t">\c postgres alice</span>
 You are now connected to database "postgres" as user "alice".
 
-<span class="p">postgres=&gt;</span> <span class="t">alter table bar drop constraint baz</span>;
+<span class="p">postgres=></span> <span class="t">alter table bar drop constraint baz</span>;
 ALTER TABLE
 
 <span class="c">-- Do what you need to do then:</span>
 
-<span class="p">postgres=&gt;</span> <span class="t">alter table bar add constraint baz foreign key (b) references foo(a)</span>;
+<span class="p">postgres=></span> <span class="t">alter table bar add constraint baz foreign key (b) references foo(a)</span>;
 ALTER TABLE
 ```
 

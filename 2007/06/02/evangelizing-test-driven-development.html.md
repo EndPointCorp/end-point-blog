@@ -90,7 +90,7 @@ the other window. I have my test script use Test::More's require_ok() function t
 
 ```
 use lib '/path/to/my/custom/lib';
-use Test::More tests =&gt; 1;
+use Test::More tests => 1;
 
 require_ok('My::Newsletter::RecipientList');
 ```
@@ -115,16 +115,16 @@ object instance attributes. And given that it's a Moose-derived object, it'll us
 Back to vim, adding to the test:
 
 ```
-use Test::More tests =&gt; 4;
+use Test::More tests => 4;
 use DBI;
 
 my $module = 'My::Newsletter::RecipientList';
 my $newsletter = 'some_newsletter';
 
-my $dbh = DBI-&gt;connect(...);
-my $lister = $module-&gt;new(
-    dbh =&gt; $dbh,
-    newsletter_name =&gt; $newsletter_name,
+my $dbh = DBI->connect(...);
+my $lister = $module->new(
+    dbh => $dbh,
+    newsletter_name => $newsletter_name,
 );
 
 # Test object blessing
@@ -135,7 +135,7 @@ isa_ok(
 
 # Test the dbh attribute
 cmp_ok(
-    $lister-&gt;dbh,
+    $lister->dbh,
     '==',
     $dbh,
     'Database handle attribute',
@@ -143,7 +143,7 @@ cmp_ok(
 
 # Test the newsletter name
 cmp_ok(
-    $lister-&gt;newsletter_name,
+    $lister->newsletter_name,
     'eq',
     $newsletter,
     'Newsletter name attribute',

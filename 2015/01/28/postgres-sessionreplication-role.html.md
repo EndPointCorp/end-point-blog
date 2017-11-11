@@ -22,8 +22,8 @@ $SQL = q{
     WHERE  (
 };
 $SQL .= join "OR\n"
-    =&gt; map { "(oid = '$_-&gt;{safeschema}.$_-&gt;{safetable}'::regclass)" }
-      grep { $_-&gt;{reltype} eq 'table' }
+    => map { "(oid = '$_->{safeschema}.$_->{safetable}'::regclass)" }
+      grep { $_->{reltype} eq 'table' }
       @$goatlist;
 $SQL .= ')';
 ```

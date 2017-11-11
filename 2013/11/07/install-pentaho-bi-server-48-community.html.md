@@ -49,7 +49,7 @@ ALTER TABLE qrtz_fired_triggers
 --    ADD COLUMN PRIORITY INTEGER NOT NULL;
 --    ALTER COLUMN PRIORITY SET NULL;
 ```
-Modify database name, username &amp; password if necessary and create databases for configuration and scheduling by running below commands.
+Modify database name, username & password if necessary and create databases for configuration and scheduling by running below commands.
 
 ```bash
 $ psql -U postgres -a -f create_quartz_postgresql.sql
@@ -65,31 +65,31 @@ Now database name, username, password and driver should be configured in followi
 - biserver-ce/tomcat/webapps/pentaho/META-INF/context.xml
 
 ```xml
-&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;Context path="/pentaho" docbase="webapps/pentaho/"&gt;
-        &lt;Resource name="jdbc/Hibernate" auth="Container" type="javax.sql.DataSource"
+<?xml version="1.0" encoding="UTF-8"?>
+<Context path="/pentaho" docbase="webapps/pentaho/">
+        <Resource name="jdbc/Hibernate" auth="Container" type="javax.sql.DataSource"
                 factory="org.apache.commons.dbcp.BasicDataSourceFactory" maxActive="20" maxIdle="5"
                 maxWait="10000" username="hibuser" password="password"
                 driverClassName="org.postgresql.Driver" url="jdbc:postgresql://localhost:5432/hibernate"
-                validationQuery="select 1" /&gt;
+                validationQuery="select 1" />
                
-        &lt;Resource name="jdbc/Quartz" auth="Container" type="javax.sql.DataSource"
+        <Resource name="jdbc/Quartz" auth="Container" type="javax.sql.DataSource"
                 factory="org.apache.commons.dbcp.BasicDataSourceFactory" maxActive="20" maxIdle="5"
                 maxWait="10000" username="pentaho_user" password="password"
                 driverClassName="org.postgresql.Driver" url="jdbc:postgresql://localhost:5432/quartz"
-                validationQuery="select 1"/&gt;
-&lt;/Context&gt;
+                validationQuery="select 1"/>
+</Context>
 ```
 - biserver-ce/pentaho-solutions/system/applicationContext-spring-security-jdbc.xml
 
 ```xml
-        &lt;bean id="dataSource"
-                class="org.springframework.jdbc.datasource.DriverManagerDataSource"&gt;
-                &lt;property name="driverClassName" value="org.postgresql.Driver" /&gt;
-                &lt;property name="url" value="jdbc:postgresql://localhost:5432/hibernate" /&gt;
-                &lt;property name="username" value="hibuser" /&gt;
-                &lt;property name="password" value="password" /&gt;
-        &lt;/bean&gt;
+        <bean id="dataSource"
+                class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+                <property name="driverClassName" value="org.postgresql.Driver" />
+                <property name="url" value="jdbc:postgresql://localhost:5432/hibernate" />
+                <property name="username" value="hibuser" />
+                <property name="password" value="password" />
+        </bean>
 ```
 
 - biserver-ce/pentaho-solutions/system/applicationContext-spring-security-hibernate.properties
@@ -135,15 +135,15 @@ Specify the pentaho solutions path, server url and port in web.xml of tomcat web
 - biserver-ce/tomcat/webapps/pentaho/WEB-INF/web.xml
 
 ```xml
-        &lt;context-param&gt;
-                &lt;param-name&gt;solution-path&lt;/param-name&gt;
-                &lt;param-value&gt;/opt/avr-new/biserver-ce/pentaho-solutions&lt;/param-value&gt;
-        &lt;/context-param&gt;
+        <context-param>
+                <param-name>solution-path</param-name>
+                <param-value>/opt/avr-new/biserver-ce/pentaho-solutions</param-value>
+        </context-param>
 
-        &lt;context-param&gt;
-                &lt;param-name&gt;fully-qualified-server-url&lt;/param-name&gt;
-                &lt;param-value&gt;http://localhost:8080/pentaho/&lt;/param-value&gt;
-        &lt;/context-param&gt;
+        <context-param>
+                <param-name>fully-qualified-server-url</param-name>
+                <param-value>http://localhost:8080/pentaho/</param-value>
+        </context-param>
 ```
 
 Pentaho can be run tomcat custom ports by modifying the ports in server.xml and web.xml
@@ -151,18 +151,18 @@ Pentaho can be run tomcat custom ports by modifying the ports in server.xml and 
 - biserver-ce/tomcat/conf/server.xml
 
 ```xml
-    &lt;Connector URIEncoding="UTF-8" port="9090" protocol="HTTP/1.1"
+    <Connector URIEncoding="UTF-8" port="9090" protocol="HTTP/1.1"
                connectionTimeout="20000"
-               redirectPort="8443" /&gt;
+               redirectPort="8443" />
 ```
 
 - biserver-ce/tomcat/webapps/pentaho/WEB-INF/web.xml 
 
 ```xml
-         &lt;context-param&gt;
-                &lt;param-name&gt;fully-qualified-server-url&lt;/param-name&gt;
-                &lt;param-value&gt;http://localhost:8080/pentaho/&lt;/param-value&gt;
-        &lt;/context-param&gt;
+         <context-param>
+                <param-name>fully-qualified-server-url</param-name>
+                <param-value>http://localhost:8080/pentaho/</param-value>
+        </context-param>
 ```
 Let's start the Pentaho BI server and try out its great features. Commands to start and stop the BI server:
 

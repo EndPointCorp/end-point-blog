@@ -29,7 +29,7 @@ vendors/
 </pre></td> </tr>
 <tr class="notes">   <td align="center">Notes:</td>   <td colspan="2">     In Rails, layouts live in app/views/layouts/. In CakePHP, layouts live in views/layouts/ and helpers lie in views/helpers/.   </td> </tr>
 <tr>   <td valign="middle">Creating an Application</td>   <td valign="top"> <pre class="brush:plain gutter:false">rails new my_app # Rails 3 after gem installation
-rails my_app # Rails &lt;3
+rails my_app # Rails <3
 </pre>
 </td>
   <td valign="top">Download the compressed source code and create an application with the recommended directory structure.   </td>
@@ -41,7 +41,7 @@ rails my_app # Rails &lt;3
 </tr>
 <tr>
   <td align="center" style="padding-top: 30px;" valign="top">Validation</td>
-  <td valign="top"> <pre class="brush:ruby gutter:false">class Zone &lt; ActiveRecord::Base
+  <td valign="top"> <pre class="brush:ruby gutter:false">class Zone < ActiveRecord::Base
   validates_presence_of :name
   validates_uniqueness_of :name
 end
@@ -50,12 +50,12 @@ end
   <td valign="top"> <pre class="brush:php gutter:false">class User extends AppModel {
   var $name = 'User';
   var $validate = array(
-    'email' =&gt; array(
-      'email-create' =&gt; array(
-        'rule' =&gt; 'email',
-        'message' =&gt; 'Invalid e-mail.',
-        'required' =&gt; true,
-        'on' =&gt; 'create'
+    'email' => array(
+      'email-create' => array(
+        'rule' => 'email',
+        'message' => 'Invalid e-mail.',
+        'required' => true,
+        'on' => 'create'
       )
     )
   );
@@ -64,7 +64,7 @@ end
 </tr>
 <tr>
   <td align="center" style="padding-top: 30px;" valign="top">Relationships</td>
-  <td valign="top"> <pre class="brush:ruby gutter:false">class Order &lt; ActiveRecord::Base
+  <td valign="top"> <pre class="brush:ruby gutter:false">class Order < ActiveRecord::Base
   belongs_to :user
   has_many :line_items
 end
@@ -79,21 +79,21 @@ end
 </tr>
 <tr>
   <td align="center" style="padding-top: 30px;" valign="top">Special Relationships</td>
-  <td valign="top"> <pre class="brush:ruby gutter:false">class Address &lt; ActiveRecord::Base
+  <td valign="top"> <pre class="brush:ruby gutter:false">class Address < ActiveRecord::Base
   has_many :billing_checkouts,
-    :foreign_key =&gt; "bill_address_id",
-    :class_name =&gt; "Checkout"
+    :foreign_key => "bill_address_id",
+    :class_name => "Checkout"
 end
 </pre></td>
   <td valign="top"> <pre class="brush:php gutter:false">class Foo extends AppModel {
   var $name = 'Foo';
   var $hasMany = array(
-    'SpecialEntity' =&gt; array(
-      'className' =&gt; 'SpecialEntity',
-      'foreignKey' =&gt; 'entity_id',
-      'conditions' =&gt;
-  array('Special.entity_class' =&gt; 'Foo'),
-      'dependent' =&gt; true
+    'SpecialEntity' => array(
+      'className' => 'SpecialEntity',
+      'foreignKey' => 'entity_id',
+      'conditions' =>
+  array('Special.entity_class' => 'Foo'),
+      'dependent' => true
     ),
   );
 }
@@ -106,7 +106,7 @@ end
 </tr>
 <tr>
   <td align="center" valign="middle">Basic Syntax</td>
-  <td valign="top"> <pre class="brush:ruby gutter:false">class FoosController &lt; ActionController::Base
+  <td valign="top"> <pre class="brush:ruby gutter:false">class FoosController < ActionController::Base
   helper :taxons
   actions :show, :index
 
@@ -130,8 +130,8 @@ end
 </tr>
 <tr>
   <td align="center" style="padding-top: 30px" valign="top">Filters</td>
-  <td valign="top"> <pre class="brush:ruby gutter:false">class FoosController &lt; ActionController::Base
-  before_filter :load_data, :only =&gt; :show
+  <td valign="top"> <pre class="brush:ruby gutter:false">class FoosController < ActionController::Base
+  before_filter :load_data, :only => :show
 end
 </pre></td>
   <td valign="top"> <pre class="brush:php gutter:false">class FooController extends AppController {
@@ -146,7 +146,7 @@ end
 </tr>
 <tr>
   <td align="center" style="padding-top:30px;" valign="top">Setting View Variables</td>
-  <td valign="top"> <pre class="brush:ruby gutter:false">class FoosController &lt; ActionController::Base
+  <td valign="top"> <pre class="brush:ruby gutter:false">class FoosController < ActionController::Base
   def index
     @special_title = 'This is the Special Title!'
   end
@@ -157,7 +157,7 @@ end
   var $name = 'Foo';
 
   function index() {
-    $this-&gt;set('title',
+    $this->set('title',
       'This is the Special Title!');
   }
 }
@@ -170,29 +170,29 @@ end
 </tr>
 <tr>
   <td align="center" valign="middle">Variable Display</td>
-  <td valign="top"> <pre class="brush:plain gutter:false">&lt;%= @special_title %&gt;
+  <td valign="top"> <pre class="brush:plain gutter:false"><%= @special_title %>
 </pre></td>
-  <td valign="top"> <pre class="brush:plain gutter:false">&lt;?= $special_title ?&gt;
+  <td valign="top"> <pre class="brush:plain gutter:false"><?= $special_title ?>
 </pre></td>
 </tr>
 <tr>
   <td align="center" valign="middle">Looping</td>
-  <td valign="top"> <pre class="brush:plain gutter:false">&lt;% @foos.each do |foo| -%&gt;
-&lt;%= foo.name %&gt;
-&lt;% end -%&gt;
+  <td valign="top"> <pre class="brush:plain gutter:false"><% @foos.each do |foo| -%>
+<%= foo.name %>
+<% end -%>
 </pre></td>
-  <td valign="top"> <pre class="brush:plain gutter:false">&lt;?php foreach($items as $item): ?&gt;
-&lt;?= $item['name']; ?&gt;
-&lt;?php endforeach; ?&gt;
+  <td valign="top"> <pre class="brush:plain gutter:false"><?php foreach($items as $item): ?>
+<?= $item['name']; ?>
+<?php endforeach; ?>
 </pre></td>
 </tr>
 <tr>
   <td align="center" valign="middle">Partial Views or Elements</td>
-  <td valign="top"> <pre class="brush:plain gutter:false">&lt;%= render :partial =&gt; 'shared/view_name',
-  :locals =&gt; { :b =&gt; "abc" } %&gt;
+  <td valign="top"> <pre class="brush:plain gutter:false"><%= render :partial => 'shared/view_name',
+  :locals => { :b => "abc" } %>
 </pre></td>
-  <td valign="top"> <pre class="brush:php gutter:false">&lt;?php echo $this-&gt;element('account_menu',
-  array('page_type' =&gt; 'contact')); ?&gt;
+  <td valign="top"> <pre class="brush:php gutter:false"><?php echo $this->element('account_menu',
+  array('page_type' => 'contact')); ?>
 </pre></td>
 </tr>
 <tr class="notes">
@@ -201,18 +201,18 @@ end
 </tr>
 <tr>
   <td align="center" valign="middle">CSS and JS</td>
-  <td valign="top"> <pre class="brush:plain gutter:false">&lt;%= javascript_include_tag
+  <td valign="top"> <pre class="brush:plain gutter:false"><%= javascript_include_tag
   'my_javascript',
-  'my_javascript2' %&gt;
-&lt;%= stylesheet_link_tag
-  'my_style' %&gt;
+  'my_javascript2' %>
+<%= stylesheet_link_tag
+  'my_style' %>
 </pre></td>
-  <td valign="top"> <pre class="brush:php gutter:false">&lt;?php
-  $html-&gt;css(array('my_style.css'),
+  <td valign="top"> <pre class="brush:php gutter:false"><?php
+  $html->css(array('my_style.css'),
     null, array(), false);
-  $javascript-&gt;link(array('my_javascript.js'),
+  $javascript->link(array('my_javascript.js'),
     false);
-?&gt;
+?>
 </pre></td>
 </tr>
 <tr class="alt">
@@ -224,21 +224,21 @@ end
   <td align="center" valign="middle">Basic</td>
   <td valign="top"> <pre class="brush:ruby gutter:false"># Rails 3
 match '/cart',
-  :to =&gt; 'orders#edit',
-  :via =&gt; :get,
-  :as =&gt; :cart
-# Rails &lt;3
+  :to => 'orders#edit',
+  :via => :get,
+  :as => :cart
+# Rails <3
 map.login '/login',
-  :controller =&gt; 'user_sessions',
-  :action =&gt; 'new'
+  :controller => 'user_sessions',
+  :action => 'new'
 </pre></td>
 <td> <pre class="brush:php gutter:false">Router::connect('/refer',
-  array('controller' =&gt; 'invites',
-        'action' =&gt; 'refer'));
+  array('controller' => 'invites',
+        'action' => 'refer'));
 Router::connect('/sales/:sale_id',
-  array('controller' =&gt; 'sale',
-        'action' =&gt; 'show'),
-  array('sale_id' =&gt; '[0-9]+'));
+  array('controller' => 'sale',
+        'action' => 'show'),
+  array('sale_id' => '[0-9]+'));
 </pre></td>
 </tr>
 <tr>
@@ -253,11 +253,11 @@ namespace :admin do
   end
 end
 
-# Rails &lt;3
+# Rails <3
 map.namespace :admin do |admin|
-  admin.resources :foos, :collection =&gt; {
-    :revenue            =&gt; :get,
-    :profit             =&gt; :get,
+  admin.resources :foos, :collection => {
+    :revenue            => :get,
+    :profit             => :get,
   }
 end
 </pre></td>
@@ -276,12 +276,12 @@ end
 <tr>
   <td align="center" valign="middle">Logging Syntax</td>
   <td valign="top"> <pre class="brush:ruby gutter:false">Rails.logger.warn "steph!" # Rails 3
-logger.warn "steph!" # Rails &lt;3
+logger.warn "steph!" # Rails <3
 </pre>
 or
 <pre class="brush:ruby gutter:false">RAILS_DEFAULT_LOGGER.warn "steph!"
 </pre></td>
-  <td valign="top"><pre class="brush:php gutter:false">$this-&gt;log('steph!', LOG_DEBUG);</pre></td>
+  <td valign="top"><pre class="brush:php gutter:false">$this->log('steph!', LOG_DEBUG);</pre></td>
 </tr>
 </tbody></table>
 

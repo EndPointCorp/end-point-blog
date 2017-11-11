@@ -27,8 +27,8 @@ Within my actionmap Perl code, I wanted to redirect some URLs to the canonical a
 
 ```perl
 my $new_path = '/accessories/' .
-   Vend::Tags-&gt;filter({body =&gt; (join '%2f' =&gt; (grep { /\D/ } @path)),
-       op =&gt; 'urlencode', }) .
+   Vend::Tags->filter({body => (join '%2f' => (grep { /\D/ } @path)),
+       op => 'urlencode', }) .
    '.html';
 ```
 

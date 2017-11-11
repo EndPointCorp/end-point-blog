@@ -38,8 +38,8 @@ AllocateDir(const char *dirname)
      * from hogging every one of the available FDs, which'd lead to infinite
      * looping.
      */
-    if (numAllocatedDescs &gt;= MAX_ALLOCATED_DESCS ||
-        numAllocatedDescs &gt;= max_safe_fds - 1)
+    if (numAllocatedDescs >= MAX_ALLOCATED_DESCS ||
+        numAllocatedDescs >= max_safe_fds - 1)
         elog(ERROR, "too many private dirs demanded");
 ```
 
@@ -54,8 +54,8 @@ troublesome directory in question as a debugging clue:
 
 ```
 
-    if (numAllocatedDescs &gt;= MAX_ALLOCATED_DESCS ||
-        numAllocatedDescs &gt;= max_safe_fds - 1)
+    if (numAllocatedDescs >= MAX_ALLOCATED_DESCS ||
+        numAllocatedDescs >= max_safe_fds - 1)
         elog(ERROR, "exceeded MAX_ALLOCATED_DESCS while trying to open directory \"%s\"",
              dirname);
 
@@ -131,7 +131,7 @@ which contained a symlink named "zoneinfo" inside of it. Where did that
 symlink point to?
 
 ```
-lrwxrwxrwx  1 root root    19 Jun  3 05:45 zoneinfo -&gt; /usr/share/zoneinfo
+lrwxrwxrwx  1 root root    19 Jun  3 05:45 zoneinfo -> /usr/share/zoneinfo
 ```
 
 Whoops! That explains the problem. Postgres was trying to walk through all the subdirectories 

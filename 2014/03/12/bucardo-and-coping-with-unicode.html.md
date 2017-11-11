@@ -15,13 +15,13 @@ The first step is to build a test case. Bucardo's test suite is quite comprehens
 
 ```perl
 for my $dbh (($dbhA, $dbhB)) {
-    $dbh-&gt;do(qq/CREATE TABLE test_büçárđo ( pkey_\x{2695} INTEGER PRIMARY KEY, data TEXT );/);
-    $dbh-&gt;commit;
+    $dbh->do(qq/CREATE TABLE test_büçárđo ( pkey_\x{2695} INTEGER PRIMARY KEY, data TEXT );/);
+    $dbh->commit;
 }
 
-like $bct-&gt;ctl('bucardo add table test_büçárđo db=A relgroup=unicode'),
+like $bct->ctl('bucardo add table test_büçárđo db=A relgroup=unicode'),
     qr/Added the following tables/, "Added table in db A";
-like($bct-&gt;ctl("bucardo add sync test_unicode relgroup=unicode dbs=A:source,B:target"),
+like($bct->ctl("bucardo add sync test_unicode relgroup=unicode dbs=A:source,B:target"),
     qr/Added sync "test_unicode"/, "Create sync from A to B")
     or BAIL_OUT "Failed to add test_unicode sync";
 ```
@@ -29,20 +29,20 @@ like($bct-&gt;ctl("bucardo add sync test_unicode relgroup=unicode dbs=A:source,B
 Having created database objects and configured Bucardo, the next part of the test starts Bucardo, inserts some data into the master database "A", and tries to replicate it:
 
 ```perl
-$dbhA-&gt;do("INSERT INTO test_büçárđo (pkey_\x{2695}, data) VALUES (1, 'Something')");
-$dbhA-&gt;commit;
+$dbhA->do("INSERT INTO test_büçárđo (pkey_\x{2695}, data) VALUES (1, 'Something')");
+$dbhA->commit;
 
 ## Get Bucardo going
-$bct-&gt;restart_bucardo($dbhX);
+$bct->restart_bucardo($dbhX);
 
 ## Kick off the sync.
 my $timer_regex = qr/\[0\s*s\]\s+(?:[\b]{6}\[\d+\s*s\]\s+)*/;
-like $bct-&gt;ctl('kick sync test_unicode 0'),
+like $bct->ctl('kick sync test_unicode 0'),
     qr/^Kick\s+test_unicode:\s+${timer_regex}DONE!/,
     'Kick test_unicode' or die 'Sync failed, no point continuing';
 
-my $res = $dbhB-&gt;selectall_arrayref('SELECT * FROM test_büçárđo');
-ok($#$res == 0 &amp;&amp; $res-&gt;[0][0] == 1 &amp;&amp; $res-&gt;[0][1] eq 'Something', 'Replication worked');
+my $res = $dbhB->selectall_arrayref('SELECT * FROM test_büçárđo');
+ok($#$res == 0 && $res->[0][0] == 1 && $res->[0][1] eq 'Something', 'Replication worked');
 ```
 
 Given that DBD::Pg handles the encodings for strings from the database, I only need to make a few other changes. I added a few lines to the preamble of some files, to deal with UTF8 elements in the code itself, and to tell input and output pipes to expect UTF8 data.
@@ -56,8 +56,8 @@ In some cases, I also had to add a couple more modules, and explicitly decode in
 
 ```perl
     debug("Script: $ctl Connection options: $connopts Args: $args", 3);
--   $info = qx{$ctl $connopts $args 2&gt;&amp;1};
-+   $info = decode( locale =&gt; qx{$ctl $connopts $args 2&gt;&amp;1} );
+-   $info = qx{$ctl $connopts $args 2>&1};
++   $info = decode( locale => qx{$ctl $connopts $args 2>&1} );
     debug("Exit value: $?", 3);
 ```
 

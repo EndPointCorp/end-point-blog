@@ -26,8 +26,8 @@ require 'cassandra'
 def get_client 
   Cassandra.new('Keyspace1',
                 '127.0.0.1:9160',
-                :transport_wrapper =&gt; nil,
-                :transport         =&gt; Thrift::EventMachineTransport)
+                :transport_wrapper => nil,
+                :transport         => Thrift::EventMachineTransport)
 end
 
 def write(client, key, hash)
@@ -39,8 +39,8 @@ end
 EM.run do
   Fiber.new do
     client = get_client
-    write(client, 'foo', {'aard' =&gt; 'vark'})
-    write(client, 'bar', {'platy' =&gt; 'pus'})
+    write(client, 'foo', {'aard' => 'vark'})
+    write(client, 'bar', {'platy' => 'pus'})
     EM.stop
   end.resume
 end
@@ -65,11 +65,11 @@ Now let's replace the above code sample's EM.run block with this:
 EM.run do
   @done = 0 
   Fiber.new do
-    write(get_client, 'foo', {'aard' =&gt; 'vark'})
+    write(get_client, 'foo', {'aard' => 'vark'})
     @done += 1
   end.resume
   Fiber.new do
-    write(get_client, 'bar', {'platy' =&gt; 'pus'})
+    write(get_client, 'bar', {'platy' => 'pus'})
     @done += 1                 
   end.resume                   
   EM.add_periodic_timer(1) { EM.stop if @done == 2 } 

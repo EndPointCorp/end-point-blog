@@ -192,7 +192,7 @@ Change any setting by using: ./bucardo_ctl set foo=bar
 Now I'll use slony_migrator.pl to get a set of bucardo_ctl scripts to build my Bucardo cluster:
 
 ```nohighlight
-josh@eddie:~/devel/bucardo/scripts$ ./slony_migrator.pl -db pagila1 -H myfreebsd --bucardo &gt; pagila-slony2bucardo.sh
+josh@eddie:~/devel/bucardo/scripts$ ./slony_migrator.pl -db pagila1 -H myfreebsd --bucardo > pagila-slony2bucardo.sh
 josh@eddie:~/devel/bucardo/scripts$ head pagila-slony2bucardo.sh 
 ./bucardo_ctl add db pagila_1 dbname=pagila1  host=myfreebsd user=postgres
 ./bucardo_ctl add db pagila_4 dbname=pagila4  host=myfreebsd user=postgres
@@ -259,9 +259,9 @@ Based on those logs, it looks like everything's running fine, but just to make s
 
 ```nohighlight
 josh@eddie:~/devel/bucardo$ ./bucardo_ctl list syncs
-Sync: pagila_set1_node1_to_node2  (pushdelta)  pagila_node1_set1 =&gt;  pagila_2  (Active)
-Sync: pagila_set1_node1_to_node4  (pushdelta)  pagila_node1_set1 =&gt;  pagila_4  (Active)
-Sync: pagila_set1_node2_to_node3  (pushdelta)  pagila_node2_set1 =&gt;  pagila_3  (Active)
+Sync: pagila_set1_node1_to_node2  (pushdelta)  pagila_node1_set1 =>  pagila_2  (Active)
+Sync: pagila_set1_node1_to_node4  (pushdelta)  pagila_node1_set1 =>  pagila_4  (Active)
+Sync: pagila_set1_node2_to_node3  (pushdelta)  pagila_node2_set1 =>  pagila_3  (Active)
 
 josh@eddie:~/devel/bucardo$ ./bucardo_ctl status
 Days back: 3  User: bucardo  Database: bucardo  Host: /tmp  PID of Bucardo MCP: 22936

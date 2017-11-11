@@ -10,7 +10,7 @@ title: Check HTTP redirects with Nagios
 Often times there are critical page redirects on a site that may want to be monitored. Often times, it can be as simple as making sure your checkout page is redirecting from HTTP to HTTPS. Or perhaps you have valuable old URLs which Google has been indexing and you want to make sure these redirects remain in place for your PageRank. Whatever your reason for checking HTTP redirects with Nagios, you'll find there are a few scripts available, but none (that I found) which are able to follow more than one redirect. For example, let's suppose we have a redirect chain that looks like this:
 
 ```bash
-http://myshop.com/cart &gt;&gt; http://www.myshop.com/cart &gt;&gt; https://www.mycart.com/cart
+http://myshop.com/cart >> http://www.myshop.com/cart >> https://www.mycart.com/cart
 ```
 
 ### Following multiple redirects

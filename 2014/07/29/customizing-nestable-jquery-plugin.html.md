@@ -49,7 +49,7 @@ set_nestability: function() {
     // loop through each list item 
       // if the list item data('user_id') != $.cookie('user_id')
         // remove dd-handle class from all list item children .dd-handle elements
-        // replace all &lt;ol&gt; tags with &lt;ul&gt; tags inside that list item
+        // replace all <ol> tags with <ul> tags inside that list item
 ```
 
 The simple bit of pseudocode does two things: It removes the .dd-handle class for elements that can't be reordered, and it replaces <ol> tags with <ul> tags to enable CSS. The only thing to take note of here is that in theory, a "hacker" can change their cookie to enable nestability of certain items, but there is additional server-side logic that would prohibit an update.
@@ -71,7 +71,7 @@ Finally, I modified the on change event:
 ```javascript
 $('div#list').on('change', function(el) {
   // if item is dropped
-    // if dropped item is not inside &lt;ol&gt; tag, return (do nothing)
+    // if dropped item is not inside <ol> tag, return (do nothing)
     // else continue with dropped logic
   // else if position is changed
     // trigger position change logic  

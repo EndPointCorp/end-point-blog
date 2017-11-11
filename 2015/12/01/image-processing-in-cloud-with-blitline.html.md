@@ -40,20 +40,20 @@ $dest = $data['filename'] . '_darken_75_105_100_blur_0_20.' . $data['extension']
 
 $Blit = new Blitline_php();
 
-$Blit-&gt;load($url, $dest);
+$Blit->load($url, $dest);
 
-$Blit-&gt;do_script("convert input.png -blur 0x20 -modulate 75,105,100 output.png");
+$Blit->do_script("convert input.png -blur 0x20 -modulate 75,105,100 output.png");
 
-$Blit-&gt;set_postback_url( get_site_url() . '/wp-json/myapp/v1/blitline_callback');
+$Blit->set_postback_url( get_site_url() . '/wp-json/myapp/v1/blitline_callback');
 
-$results = $Blit-&gt;process();
+$results = $Blit->process();
 
-if ($results-&gt;success()) {
-foreach($results-&gt;get_images() as $name =&gt; $url) {
+if ($results->success()) {
+foreach($results->get_images() as $name => $url) {
 error_log("Processed: {$name} at {$url}\n");
 }
 } else {
-error_log($results-&gt;get_errors());
+error_log($results->get_errors());
 }
 }
 ```
@@ -69,8 +69,8 @@ I'm using [this plugin WP-API V2](http://v2.wp-api.org) that soon will become pa
 add_action('rest_api_init', function () {
 
 register_rest_route('portfolio/v1', '/blitline_callback', array(
-'methods' =&gt; 'POST',
-'callback' =&gt; 'process_blitline_callback',
+'methods' => 'POST',
+'callback' => 'process_blitline_callback',
 ));
 });
 ```
@@ -102,14 +102,14 @@ if( !class_exists( 'WP_Http' ) )
 include_once( ABSPATH . WPINC. '/class-http.php' );
 
 $s3Client = S3Client::factory(array(
-'credentials' =&gt; array(
-'key'    =&gt; 'YOUR S3 KEY',
-'secret' =&gt; 'YOUR S3 SECRET'
+'credentials' => array(
+'key'    => 'YOUR S3 KEY',
+'secret' => 'YOUR S3 SECRET'
 )
 ));
 $photo = new WP_Http();
 
-$body = $request-&gt;get_body_params();
+$body = $request->get_body_params();
 
 $var = (array) json_decode(stripslashes($body['results']), true);
 
@@ -118,7 +118,7 @@ error_log('Error ' . $var['images'][0]['error']);
 return;
 }
 
-$photo = $photo-&gt;request( $var['images'][0]['s3_url'] );
+$photo = $photo->request( $var['images'][0]['s3_url'] );
 
 $photo_name = $var['images'][0]['image_identifier'];
 
@@ -128,11 +128,11 @@ date("Y-m", strtotime( $photo['headers']['last-modified'] ) ) );
 
 $upload_dir = wp_upload_dir();
 
-$s3Client-&gt;putObject(array(
-'Bucket' =&gt; "yourbucket",
-'Key'    =&gt; 'wp-content/uploads' . $upload_dir['subdir'] . '/' . $photo_name,
-'SourceFile'   =&gt; $attachment['file'],
-'ACL'    =&gt; 'public-read'
+$s3Client->putObject(array(
+'Bucket' => "yourbucket",
+'Key'    => 'wp-content/uploads' . $upload_dir['subdir'] . '/' . $photo_name,
+'SourceFile'   => $attachment['file'],
+'ACL'    => 'public-read'
 ));
 }
 ```

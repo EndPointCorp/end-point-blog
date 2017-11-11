@@ -42,7 +42,7 @@ Documentation on Vim Encryption
   - Typically uses swap files that can compromise the security of the encrypted file. You can turn this off by using the 'n' flag.
 
 ```
-vim -xn &lt;filename&gt;
+vim -xn <filename>
 ```
 
 ## Integrating with GPG
@@ -63,18 +63,18 @@ augroup encrypted
 
   " Switch to binary mode to read the encrypted file
   autocmd BufReadPre,FileReadPre *.gpg set bin
-  autocmd BufReadPre,FileReadPre *.gpg let ch_save = &amp;ch|set ch=2
+  autocmd BufReadPre,FileReadPre *.gpg let ch_save = &ch|set ch=2
   " (If you use tcsh, you may need to alter this line.)
-  autocmd BufReadPost,FileReadPost *.gpg '[,']!gpg --decrypt 2&gt; /dev/null
+  autocmd BufReadPost,FileReadPost *.gpg '[,']!gpg --decrypt 2> /dev/null
 
   " Switch to normal mode for editing
   autocmd BufReadPost,FileReadPost *.gpg set nobin
-  autocmd BufReadPost,FileReadPost *.gpg let &amp;ch = ch_save|unlet ch_save
+  autocmd BufReadPost,FileReadPost *.gpg let &ch = ch_save|unlet ch_save
   autocmd BufReadPost,FileReadPost *.gpg execute ":doautocmd BufReadPost " . expand("%:r")
 
   " Convert all text to encrypted text before writing
   " (If you use tcsh, you may need to alter this line.)
-  autocmd BufWritePre,FileWritePre *.gpg '[,']!gpg --default-recipient-self -ae 2&gt;/dev/null
+  autocmd BufWritePre,FileWritePre *.gpg '[,']!gpg --default-recipient-self -ae 2>/dev/null
   " Undo the encryption so we are back in the normal text, directly
   " after the file has been written.
   autocmd BufWritePost,FileWritePost *.gpg u
@@ -87,7 +87,7 @@ This works by detecting the extension on the files you are opening with Vim.  Th
 Now you can create a new GPG encrypted file or edit an existing GPG encrypted doing this: 
 
 ```
-vim &lt;filename&gt;.gpg
+vim <filename>.gpg
 ```
 
 This should prompt you for GPG password either with a GUI window or command line depending on your environment's configuration.  If the file did not exist Vim creates one and when you save it will encrypt when you write and quit.
@@ -95,7 +95,7 @@ This should prompt you for GPG password either with a GUI window or command line
 Another thing I like to do is save a file that I have already decrypted, but want to save in plain text.  This can be done by simply opening the encrypted GPG file as seen above and change the extension when saving.  Simply save like so: 
 
 ```
-:w &lt;newfilename&gt;.txt
+:w <newfilename>.txt
 ```
 Any extension other than .gpg will save your file as plain text.   
 

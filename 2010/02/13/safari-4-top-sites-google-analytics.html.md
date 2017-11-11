@@ -18,7 +18,7 @@ The solution is to simply not output any analytics code when the X-Purpose heade
 ```nohighlight
 [tmp x_purpose][env HTTP_X_PURPOSE][/tmp]
 [if scratch x_purpose eq 'preview']
-&lt;!-- skip analytics for browser previews --&gt;
+<!-- skip analytics for browser previews -->
 [else]
 (normal Google Analytics, Omniture SiteCatalyst, or other analytics code)
 [/else]

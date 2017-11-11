@@ -13,7 +13,7 @@ I've had interesting tech news items piling up lately and it's time to mention s
 
 - [Ruby 2.1.0 was released.](https://www.ruby-lang.org/en/news/2013/12/25/ruby-2-1-0-is-released/)
 
-- [Ruby 1.9.3 end of life set for February 2015](https://www.ruby-lang.org/en/news/2014/01/10/ruby-1-9-3-will-end-on-2015/), and the formerly end-of-life Ruby 1.8.7 &amp; 1.9.2 have had their [maintenance extended](https://www.ruby-lang.org/en/news/2013/12/17/maintenance-of-1-8-7-and-1-9-2/) for security updates until June 2014 (thanks, [Heroku](https://www.heroku.com/)!).
+- [Ruby 1.9.3 end of life set for February 2015](https://www.ruby-lang.org/en/news/2014/01/10/ruby-1-9-3-will-end-on-2015/), and the formerly end-of-life Ruby 1.8.7 & 1.9.2 have had their [maintenance extended](https://www.ruby-lang.org/en/news/2013/12/17/maintenance-of-1-8-7-and-1-9-2/) for security updates until June 2014 (thanks, [Heroku](https://www.heroku.com/)!).
 
 - Red Hat and CentOS have joined forces, in an unexpected but exciting move. Several CentOS board members will be working for Red Hat, but *not* in the Red Hat Enterprise Linux part of the business. [Red Hat's press release](http://www.redhat.com/about/news/press-archive/2014/1/red-hat-and-centos-join-forces) and the [CentOS announcement](http://lists.centos.org/pipermail/centos-announce/2014-January/020100.html) give more details.
 

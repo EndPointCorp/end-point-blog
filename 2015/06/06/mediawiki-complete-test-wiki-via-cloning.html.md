@@ -17,8 +17,8 @@ Before creating a copy, there are two things that should be done to an existing 
 $ cd /var/www/mediawiki
 $ git init .
 <span class-"gsm_o"="">Initialized empty Git repository in /var/www/mediawiki/.git/</span>
-$ echo /cache/ &gt;&gt; .gitignore
-$ echo /images/ &gt;&gt; .gitignore
+$ echo /cache/ >> .gitignore
+$ echo /images/ >> .gitignore
 $ git add --force .
 $ git commit -a -m "Initial MediaWiki commit, version 1.24"
 [master (root-commit) bd7db2b] Initial MediaWiki commit, version 1.24
@@ -59,7 +59,7 @@ If your images directory is somewhere else, make sure you back that up as well.
 Backing up your database is dead simple if you are using Postgres:
 
 ```
-$ pg_dump wikidb | gzip --fast &gt; /backups/mediawiki.database.backup.wikidb.20150601.pg.gz
+$ pg_dump wikidb | gzip --fast > /backups/mediawiki.database.backup.wikidb.20150601.pg.gz
 ```
 
 The next step is to create a new copy of the database for your cloned wiki to access:
@@ -114,7 +114,7 @@ $wgEnableUploads  = false;
 The $wgReadOnly message will appear when people try to edit a page, but we want to make it very visible to all users so as soon as they see the wiki that "here be Danger" (and edits will be lost). To that end, there are four additional steps you can take. First, you can set a sitewide message. This will appear near the top of every page. You can add HTML to this, and it is set in your LocalSettings.php file as $wgSiteNotice. You can also change the $wgSiteName parameter, which will appear in the title of every page.
 
 ```
-$wgSiteNotice  = '&lt;strong&gt;TEST WIKI ONLY!&lt;/strong&gt;';
+$wgSiteNotice  = '<strong>TEST WIKI ONLY!</strong>';
 $wgSitename    = 'TEST WIKI';
 ```
 

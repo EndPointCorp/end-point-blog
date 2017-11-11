@@ -29,15 +29,15 @@ Before I go into the performance details, I want to describe the inherent challe
 
 ```nohighlight
 ItemA
-  ListItem =&gt; ItemA
-    ListItem =&gt; ItemA
-      ListItem =&gt; ItemB
-    ListItem =&gt; ItemA
-      ListItem =&gt; ItemB
-    ListItem =&gt; ItemB
-  ListItem =&gt; ItemB
-  ListItem =&gt; ItemC
-  ListItem =&gt; ItemD
+  ListItem => ItemA
+    ListItem => ItemA
+      ListItem => ItemB
+    ListItem => ItemA
+      ListItem => ItemB
+    ListItem => ItemB
+  ListItem => ItemB
+  ListItem => ItemC
+  ListItem => ItemD
 ```
 
 ### Repeating Queries
@@ -52,7 +52,7 @@ I also found an opportunity via [Sunspot](http://sunspot.github.io/), a Solr-bas
 ```ruby
 default_scope { includes(:some_association) } # example default scope in model
 SomeModel.includes(:some_association).limit(5) # example eager loading associations on query
-SomeModel.search(:include =&gt; :user) # example Sunspot search with eager loading
+SomeModel.search(:include => :user) # example Sunspot search with eager loading
 ```
 
 These updates proved extremely valuable in terms of minimizing database hits by reducing repeated queries.
@@ -63,15 +63,15 @@ One of the problem areas that Skylight highlighted was that many of our writes w
 
 ```ruby
 # Example of cache key based on item only
-&lt;% cache(item) do -%&gt;
+<% cache(item) do -%>
 # Stuff here
-&lt;% end -%&gt;
+<% end -%>
 
 # Example of cache key based on item and item.user
 # Fragment cache will expire when item.user or item is updated
-&lt;% cache([item.user, "listed-item", item]) do -%&gt;
+<% cache([item.user, "listed-item", item]) do -%>
 # Stuff here
-&lt;% end -%&gt;
+<% end -%>
 ```
 
 ### Remove unnecessary AJAX Requests
@@ -80,10 +80,10 @@ Although this wasn't a specific issue highlighted by Skylight, I did take the op
 
 ```ruby
 # Example of render_to_string to return HTML and JSON data from single AJAX request
-content = render_to_string("path/to/view.html.erb", :locals =&gt; { :item =&gt; item })
-render :json =&gt; { :some_key =&gt; item,
-                  :content =&gt; content,
-                  :other_data =&gt; some_other_data
+content = render_to_string("path/to/view.html.erb", :locals => { :item => item })
+render :json => { :some_key => item,
+                  :content => content,
+                  :other_data => some_other_data
                 }
 ```
 

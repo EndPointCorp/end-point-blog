@@ -10,8 +10,8 @@ As you may have read in my [earlier post](http://blog.endpoint.com/2014/01/unbal
 Here's another I discovered recently. I was debugging an odd AJAX bug in a form, one of those dynamically updating form widgets in a page:
 
 ```html
- &lt;select name="make"&gt;...&lt;/select&gt;
- &lt;select name="model"&gt;...&lt;/select&gt;
+ <select name="make">...</select>
+ <select name="model">...</select>
 ```
 
 where the first selector sends off an AJAX query to retrieve data to fill the second selector, and it in turn fires off a query to get data for the next, and so on down the line.
@@ -19,7 +19,7 @@ where the first selector sends off an AJAX query to retrieve data to fill the se
 Squirreled away in the form was:
 
 ```html
- &lt;input type="hidden" name="limitation" disabled="disabled" value=""&gt;
+ <input type="hidden" name="limitation" disabled="disabled" value="">
 ```
 
 Supposedly, this input was filled in to restrict the query on some pages, but not all. I think the original author's intent was to put data in here as it became available, and to toggle the field's disabled setting when it was pertinent to limit the query. (Mostly, it was pertinent when the second or third selector was firing off its AJAX query.)
@@ -27,10 +27,10 @@ Supposedly, this input was filled in to restrict the query on some pages, but no
 However, a recent change to the code behind this AJAX query created a bug, because the "limitation" parameter was showing up where it wasn't wanted. The AJAX call was assembling parameters "by hand" (as opposed to the .serialize() method, and that's where the problem lies!).
 
 ```html
-&lt;form&gt;
-&lt;input type="hidden" name="secret" disabled="disabled" value="Sue Richards"&gt;
-&lt;input type="submit"&gt;
-&lt;/form&gt;
+<form>
+<input type="hidden" name="secret" disabled="disabled" value="Sue Richards">
+<input type="submit">
+</form>
 ```
 
 If you submit this form, the data received by the server won't include the "secret" field. If you .serialize() it, likewise the data won't include "secret"'s value. *But* if you build up the parameters "by hand", e.g.,

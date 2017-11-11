@@ -41,57 +41,57 @@ We can see here that if the argument being provided is a string (and it is since
 
 <table>
     <tbody><tr>
-      <td>sprintf("%d",'01') =&gt; "1"</td>
+      <td>sprintf("%d",'01') => "1"</td>
       <td> | </td>
-      <td>sprintf("%d", 01) =&gt; "1"</td>
+      <td>sprintf("%d", 01) => "1"</td>
     </tr>
 
     <tr>
-      <td>sprintf("%d",'02') =&gt; "2"</td>
+      <td>sprintf("%d",'02') => "2"</td>
       <td> | </td>
-      <td>sprintf("%d", 02) =&gt; "2"</td>
+      <td>sprintf("%d", 02) => "2"</td>
     </tr>
 
     <tr>
-      <td>sprintf("%d",'03') =&gt; "3"</td>
+      <td>sprintf("%d",'03') => "3"</td>
       <td> | </td>
-      <td>sprintf("%d", 03) =&gt; "3"</td>
+      <td>sprintf("%d", 03) => "3"</td>
     </tr>
 
     <tr>
-      <td>sprintf("%d",'04') =&gt; "4"</td>
+      <td>sprintf("%d",'04') => "4"</td>
       <td> | </td>
-      <td>sprintf("%d", 04) =&gt; "4"</td>
+      <td>sprintf("%d", 04) => "4"</td>
     </tr>
 
     <tr>
-      <td>sprintf("%d",'05') =&gt; "5"</td>
+      <td>sprintf("%d",'05') => "5"</td>
       <td> | </td>
-      <td>sprintf("%d", 05) =&gt; "5"</td>
+      <td>sprintf("%d", 05) => "5"</td>
     </tr>
 
     <tr>
-      <td>sprintf("%d",'06') =&gt; "6"</td>
+      <td>sprintf("%d",'06') => "6"</td>
       <td> | </td>
-      <td>sprintf("%d", 06) =&gt; "6"</td>
+      <td>sprintf("%d", 06) => "6"</td>
     </tr>
 
     <tr>
-      <td>sprintf("%d",'07') =&gt; "7"</td>
+      <td>sprintf("%d",'07') => "7"</td>
       <td> | </td>
-      <td>sprintf("%d", 07) =&gt; "7"</td>
+      <td>sprintf("%d", 07) => "7"</td>
     </tr>
 
     <tr>
-      <td>sprintf("%d",'08') =&gt; error</td>
+      <td>sprintf("%d",'08') => error</td>
       <td> | </td>
-      <td>sprintf("%d", 08) =&gt; error</td>
+      <td>sprintf("%d", 08) => error</td>
     </tr>
 
     <tr>
-      <td>sprintf("%d",'09') =&gt; error</td>
+      <td>sprintf("%d",'09') => error</td>
       <td> | </td>
-      <td>sprintf("%d", 09) =&gt; error</td>
+      <td>sprintf("%d", 09) => error</td>
     </tr>
 
   </tbody></table>

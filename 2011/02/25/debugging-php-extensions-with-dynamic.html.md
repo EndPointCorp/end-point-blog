@@ -34,7 +34,7 @@ total 7336
 Knowing that I'd installed the pecl-imagick package using OpenBSD's pkg_add (which handles dependencies nicely), it seemed unlikely that it was missing any mainstream dependencies. Logically, this started me thinking that it might be a problem with OpenBSD's default chroot for Apache. Needless to say I was disappointed to see the same error when I ran php -m from the command line:
 
 ```nohighlight
-$ php -m 2&gt;&amp;1 | grep imagick
+$ php -m 2>&1 | grep imagick
 PHP Warning:  PHP Startup: Unable to load dynamic library
 '/var/www/lib/php/modules/imagick.so' - Cannot load specified object in
 Unknown on line 0
@@ -69,7 +69,7 @@ At this point I determine there *has* to be something wrong with imagick.so; the
 Finally, one of the OpenBSD developers suggested the LD_DEBUG environment variable. This tells the run-time link-editor (ld.so) to increase verbosity. The advantage this has over ldd is that it will catch any attempt to load shared objects **after** startup. In the case of PHP, it will look at any shared objects when php tries to load dynamic extensions with **dlopen()**.
 
 ```nohighlight
-$ sudo LD_DEBUG=1 php -m 2&gt;&amp;1 | more
+$ sudo LD_DEBUG=1 php -m 2>&1 | more
 ...
 dlopen: loading: /var/www/lib/php/modules/imagick.so
 head /var/www/lib/php/modules/imagick.so
@@ -81,7 +81,7 @@ loading: libjbig.so.2.0 required by /var/www/lib/php/modules/imagick.so
 obj /usr/local/lib/libjbig.so.2.0 has /var/www/lib/php/modules/imagick.so as head
 loading: libm.so.5.2 required by /var/www/lib/php/modules/imagick.so
 loading: libX11.so.13.0 required by /var/www/lib/php/modules/imagick.so
---&gt;&gt; dlopen: failed to open libX11.so.13.0 &lt;&lt;--
+-->> dlopen: failed to open libX11.so.13.0 <<--
 unload_shlib called on /var/www/lib/php/modules/imagick.so
 unload_shlib unloading on /var/www/lib/php/modules/imagick.so
 dlopen: /var/www/lib/php/modules/imagick.so: done (failed).

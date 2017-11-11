@@ -12,7 +12,7 @@ I've been working on getting DBD::Pg to play nicely with UTF-8, as the current s
 Currently, everything coming back from the database is, by default,  treated as byte soup, meaning no conversion is done, and no strings are marked as utf8 (Perl strings are actually objects in which one of the attributes you can set is 'utf8'). If you want strings marked as utf8, you must currently set the pg_enable_utf8 attribute on the database handle like so:
 
 ```perl
-$dbh-&gt;{pg_enable_utf8} = 1;
+$dbh->{pg_enable_utf8} = 1;
 ```
 
 This causes DBD::Pg to scan incoming strings for high bits and mark the string as utf8 if it finds them. There are a few drawbacks to this system:

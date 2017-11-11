@@ -78,9 +78,9 @@ SELECT t FROM x ORDER BY t LIMIT 10;
 2012-10-24 16:21:34.109 CEST 5087f8f8.3fe6 17 szymon@szymon LOG:  duration: 6.586 ms  plan:
  Query Text: SELECT * FROM x ORDER BY t LIMIT 10;
  Limit  (cost=361.10..361.12 rows=10 width=4)
-   -&gt;  Sort  (cost=361.10..386.10 rows=10000 width=4)
+   ->  Sort  (cost=361.10..386.10 rows=10000 width=4)
          Sort Key: t
-         -&gt;  Seq Scan on x  (cost=0.00..145.00 rows=10000 width=4)
+         ->  Seq Scan on x  (cost=0.00..145.00 rows=10000 width=4)
 2012-10-24 16:21:34.109 CEST 5087f8f8.3fe6 18 szymon@szymon LOG:  duration: 7.285 ms
 ```
 
@@ -97,10 +97,10 @@ Now PostgreSQL adds into logs the following lines:
 2012-10-24 16:23:22.522 CEST 5087f8f8.3fe6 22 szymon@szymon LOG:  duration: 8.248 ms  plan:
  Query Text: SELECT * FROM x ORDER BY t LIMIT 10;
  Limit  (cost=361.10..361.12 rows=10 width=4) (actual time=8.214..8.218 rows=10 loops=1)
-   -&gt;  Sort  (cost=361.10..386.10 rows=10000 width=4) (actual time=8.211..8.213 rows=10 loops=1)
+   ->  Sort  (cost=361.10..386.10 rows=10000 width=4) (actual time=8.211..8.213 rows=10 loops=1)
          Sort Key: t
          Sort Method: top-N heapsort  Memory: 25kB
-         -&gt;  Seq Scan on x  (cost=0.00..145.00 rows=10000 width=4) (actual time=0.032..2.663 rows=10000 loops=1)
+         ->  Seq Scan on x  (cost=0.00..145.00 rows=10000 width=4) (actual time=0.032..2.663 rows=10000 loops=1)
 2012-10-24 16:23:22.522 CEST 5087f8f8.3fe6 23 szymon@szymon LOG:  duration: 8.722 ms
 ```
 

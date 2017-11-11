@@ -45,7 +45,7 @@ The DROID 2 screen itself is higher resolution, bright, and responds well to tou
 
 Battery life on the DROID 2 is not great, especially when using GPS heavily. But that's a problem on most phones.
 
-I later got the optional extended-life battery. It isn't much bigger or heavier, and does add a lot more life to the phone. It wouldn't be necessary if I weren't doing heavy GPS &amp; web service interaction with my own Android app under development.
+I later got the optional extended-life battery. It isn't much bigger or heavier, and does add a lot more life to the phone. It wouldn't be necessary if I weren't doing heavy GPS & web service interaction with my own Android app under development.
 
 ### Audio
 

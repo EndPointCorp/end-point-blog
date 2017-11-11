@@ -76,13 +76,13 @@ The auto_capture setting defaults to false, not surprisingly, so it can be updat
 # *_extension.rb:
 def activate
   AppConfiguration.class_eval do
-    preference :auto_capture, :boolean, :default =&gt; true
+    preference :auto_capture, :boolean, :default => true
   end
 end
 
 # EXTENSION_DIR/config/initializers/*.rb:
 if Preference.table_exists?
-  Spree::Config.set(:auto_capture =&gt; true)
+  Spree::Config.set(:auto_capture => true)
 end
 ```
 

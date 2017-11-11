@@ -58,7 +58,7 @@ The culprits:
         - ...
 
 <b>Deprecated AJAX helper calls</b>
-AJAX javascript helpers have been switched to be unobtrusive and use :remote =&gt; true instead of having a seperate function to handle remote requests.
+AJAX javascript helpers have been switched to be unobtrusive and use :remote => true instead of having a seperate function to handle remote requests.
 More information: http://www.themodestrubyist.com/2010/02/24/rails-3-ujs-and-csrf-meta-tags/
 
 The culprits:
@@ -90,10 +90,10 @@ I went through and applied my updates, according to the checklist. Notable updat
 
 ```ruby
 ActionController::Routing::Routes.draw do |map|
-  map.root :controller =&gt; 'home', :action =&gt; 'index'
-  map.connect 'contact/submit', :controller =&gt; 'contact', :action =&gt; 'submit'
+  map.root :controller => 'home', :action => 'index'
+  map.connect 'contact/submit', :controller => 'contact', :action => 'submit'
   map.connect ':controller/:id'
-  map.connect '*path', :controller =&gt; 'redirect'
+  map.connect '*path', :controller => 'redirect'
 end
 ```
 
@@ -101,10 +101,10 @@ end
 
 ```ruby
 Endpoint::Application.routes.draw do
-  root :to =&gt; 'home#index'
-  match 'contact/submit' =&gt; 'contact#submit'
-  match ':controller(/:id)', :action =&gt; :index
-  match '*path' =&gt; 'redirect#index'
+  root :to => 'home#index'
+  match 'contact/submit' => 'contact#submit'
+  match ':controller(/:id)', :action => :index
+  match '*path' => 'redirect#index'
 end
 ```
 
@@ -118,8 +118,8 @@ gem 'json'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails', "  ~&gt; 3.1.0"
-  gem 'coffee-rails', "~&gt; 3.1.0"
+  gem 'sass-rails', "  ~> 3.1.0"
+  gem 'coffee-rails', "~> 3.1.0"
   gem 'uglifier'
 end
 

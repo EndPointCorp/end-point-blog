@@ -59,7 +59,7 @@ make install
 useradd -m riak
 su -c 'wget http://bitbucket.org/basho/riak/downloads/$riak_release.tar.gz' - riak
 su -c 'tar xzf $riak_release.tar.gz' - riak
-su -c 'cd $riak_release &amp;&amp; make all rel' - riak
+su -c 'cd $riak_release && make all rel' - riak
 su -c 'mv $riak_release/rel riak' - riak
 "
 ```

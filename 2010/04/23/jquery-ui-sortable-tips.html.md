@@ -43,7 +43,7 @@ $('input.new_sku').each(
     function( intIndex, obj ) {
         $('input.new_sku').each(
             function( secIndex, secObj ) {
-                if( (intIndex != secIndex) &amp;&amp; ($(obj).val() == $(secObj).val()) ) {
+                if( (intIndex != secIndex) && ($(obj).val() == $(secObj).val()) ) {
                     error = true;
                 }
             });

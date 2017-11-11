@@ -18,25 +18,25 @@ To solve these problems in PostgreSQL, try using the [inet](https://www.postgres
 In many cases, these types could end up simply being used as glorified integers: they display nicely as IP addresses should be, and support addition, subtraction, and bitwise operations, and basic numeric comparisons:
 
 ```sql
-phin=&gt; select inet '192.168.0.1' + 256;
+phin=> select inet '192.168.0.1' + 256;
   ?column?
 -------------
  192.168.1.1
 (1 row)
 
-phin=&gt; select inet '::2' - 1;
+phin=> select inet '::2' - 1;
  ?column?
 ----------
  ::1
 (1 row)
 
-phin=&gt; select inet '192.168.0.1' - inet '192.168.0.0';
+phin=> select inet '192.168.0.1' - inet '192.168.0.0';
  ?column?
 ----------
         1
 (1 row)
 
-phin=&gt; select inet 'Fff0:0:007a::' &gt; inet '192.168.0.0';
+phin=> select inet 'Fff0:0:007a::' > inet '192.168.0.0';
  ?column?
 ----------
  t
@@ -50,7 +50,7 @@ But if you take a look at the fantastic [official documentation](https://www.pos
 These include operators to check if one value contains or is contained by another (>> and <<), or the same with equality (>>= and <<=), or containment going either way (&&). Take this very real™ table of ecommerce orders, where order #3 from IP address 23.239.26.78 has committed or attempted some sort of ecommerce fraud:
 
 ```sql
-phin=&gt; select * from orders order by id;
+phin=> select * from orders order by id;
  id |        ip        | fraud
 ----+------------------+-------
   1 | 23.239.26.161/24 | f
@@ -65,7 +65,7 @@ phin=&gt; select * from orders order by id;
 By using the network(inet) function, we can identify other orders from the same network:
 
 ```sql
-phin=&gt; select * from orders where network(ip) = (
+phin=> select * from orders where network(ip) = (
     select network(ip) from orders where id=3
 );
  id |        ip        | fraud
@@ -79,7 +79,7 @@ phin=&gt; select * from orders where network(ip) = (
 Or, if we’ve identified 23.239.20.0/20 as a problematic network, we can use the <<= "is contained by or equals" operator:
 
 ```sql
-phin=&gt; select * from orders where ip &lt;&lt;= inet '23.239.20.0/20'
+phin=> select * from orders where ip <<= inet '23.239.20.0/20'
  id |        ip        | fraud
 ----+------------------+-------
   1 | 23.239.26.161/24 | f

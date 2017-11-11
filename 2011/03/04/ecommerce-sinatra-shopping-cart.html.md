@@ -44,7 +44,7 @@ The new data model with tables orderlines, products, orders, and users.
 
 First, let's discuss cart storage options, which is an important topic for an ecommerce system. Several cart storage methods are described below:
 
-- **Conventional SQL database models**: Conventional SQL (MySQL, PostgreSQL, etc.) tables can be set up to store shopping cart items, quantities, and additional information. This can be nice if designed so that cart information matches the existing data model (e.g. orders &amp; orderlines), so data can be clean and easy to work with using object-relational mappers or direct SQL. For example this makes it easy for administrative tools to report on abandoned carts. One disadvantage of this kind of storage is that it increases database I/O at the already limited chokepoint of a master database. Another disadvantage is that you need to eventually clean up data as users abandon their carts, or deal with tables that grow large much more quickly than the orders tables. For example, [Spree](http://spreecommerce.com/), an open source Ruby on Rails ecommerce platform that End Point works with frequently, stores carts in the database (order &amp; line_items table), and for one of our clients, approximately 66% of the order data is from abandoned carts.
+- **Conventional SQL database models**: Conventional SQL (MySQL, PostgreSQL, etc.) tables can be set up to store shopping cart items, quantities, and additional information. This can be nice if designed so that cart information matches the existing data model (e.g. orders & orderlines), so data can be clean and easy to work with using object-relational mappers or direct SQL. For example this makes it easy for administrative tools to report on abandoned carts. One disadvantage of this kind of storage is that it increases database I/O at the already limited chokepoint of a master database. Another disadvantage is that you need to eventually clean up data as users abandon their carts, or deal with tables that grow large much more quickly than the orders tables. For example, [Spree](http://spreecommerce.com/), an open source Ruby on Rails ecommerce platform that End Point works with frequently, stores carts in the database (order & line_items table), and for one of our clients, approximately 66% of the order data is from abandoned carts.
 
 - **Serialized object store**: Here cart items, quantities, and additional information is stored in a session object and serialized to disk in files, key/value stores like memcached, in [NoSQL](http://blog.endpoint.com/2010/06/nosql-railsconf-2010-ecommerce-example.html) databases (some of which can scale horizontally fairly nicely), or even as a BLOB in an SQL database. Sessions are assigned a random ID string and linked to users either by a cookie or in the URL (note: tracking session IDs in URLs has become less common due to its interference with caching and search engine indexing). This type of storage is very convenient for developers and tends to perform fairly well. However, if there is heavy server load, saving the session at the end of every request can introduce a bottleneck, especially when multiple application servers are using a single shared session data store. Also, the developer convenience can turn into a mess if the session becomes a dumping ground for ephemeral data that becomes permanent, or which causes pages to be un-RESTful as they're not based solely on the URL. [Interchange](http://www.icdevgroup.org/), an open source Perl ecommerce framework that End Point works with often, uses this method of cart storage by default.
 
@@ -60,15 +60,15 @@ For this demo, I chose to go with Cookie-based cart storage for several reasons.
 - hash format: e.g: { 2: 1, 18: 2 }. keys are product ids, quantities are the corresponding hash values. This format makes the cart items easy to manipulate (update, remove, add) but does not require database lookup (potentially saving database bandwidth).
 - object format: e.g.
 ```ruby
-&gt;&gt; @cart = Cart.new("2:1;18:2")
-&gt;&gt; @cart.items.inspect
+>> @cart = Cart.new("2:1;18:2")
+>> @cart.items.inspect
 [
-{ :product =&gt; #Product with id of 2,
-  :quantity =&gt; 1 },
-{ :product =&gt; #Product with id of 18,
-  :quantity =&gt; 2 }
+{ :product => #Product with id of 2,
+  :quantity => 1 },
+{ :product => #Product with id of 18,
+  :quantity => 2 }
 ]
-&gt;&gt; @cart.total = # sum of (item_cost*quantity)
+>> @cart.total = # sum of (item_cost*quantity)
 ```
 
 The cart object is created whenever the cart and it's items are displayed, such as on the actual cart page. Cart construction requires read requests from the database.
@@ -98,7 +98,7 @@ class method to convert cart from cookie format to hash
 def self.to_string(cart)
   cookie = ''
   cart.each do |k, v|
-    cookie += "#{k.to_s}:#{v.to_s};" if v.to_i &gt; 0
+    cookie += "#{k.to_s}:#{v.to_s};" if v.to_i > 0
   end
   cookie
 end
@@ -145,9 +145,9 @@ def initialize(cookie='')
   self.items = []
   cookie ||= ''
   cookie.split(';').each do |item|
-    self.items &lt;&lt; {
-      :product =&gt; Product.find(item.split(':')[0]),
-      :quantity =&gt; (item.split(':')[1]).to_i }
+    self.items << {
+      :product => Product.find(item.split(':')[0]),
+      :quantity => (item.split(':')[1]).to_i }
   end
   self.total = self.items.sum { |item|
     item[:quantity]*item[:product].price
@@ -170,10 +170,10 @@ I define some Sinatra methods to work with my cart methods. I also update the or
 app.get '/cart' do
   @cart = Cart.new(request.cookies["cart"])
   erb :cart,
-    :locals =&gt; {
-      :params =&gt; {
-        :order =&gt; {},
-        :credit_card =&gt; {}
+    :locals => {
+      :params => {
+        :order => {},
+        :credit_card => {}
       }
     }
 end
@@ -188,22 +188,22 @@ Build our cart when a get request is made to "/cart".
 <pre style="margin:0px;">
 app.post '/cart/add' do
   response.set_cookie("cart",
-    { :value =&gt; Cart.add(request.cookies["cart"], params),
-      :path =&gt; '/'
+    { :value => Cart.add(request.cookies["cart"], params),
+      :path => '/'
      })
   redirect "/cart"
 end
 app.post '/cart/update' do
   response.set_cookie("cart",
-    { :value =&gt; Cart.update(request.cookies["cart"], params),
-       :path =&gt; '/'
+    { :value => Cart.update(request.cookies["cart"], params),
+       :path => '/'
      })
   redirect "/cart"
 end
 app.get '/cart/remove/:product_id' do |product_id|
   response.set_cookie("cart",
-    { :value =&gt; Cart.remove(request.cookies["cart"], product_id),
-      :path =&gt; '/'
+    { :value => Cart.remove(request.cookies["cart"], product_id),
+      :path => '/'
     })
   redirect "/cart"
 end
@@ -220,10 +220,10 @@ The post and get requests to add, update, and remove use the cart class methods.
 if order.save
   cart = Cart.new(request.cookies["cart"])
   cart.items.each do |item|
-    Orderline.create({ :order_id =&gt; order.id,
-      :product_id =&gt; item[:product].id,
-      :price =&gt; item[:product].price,
-      :quantity =&gt; item[:quantity] })
+    Orderline.create({ :order_id => order.id,
+      :product_id => item[:product].id,
+      :price => item[:product].price,
+      :quantity => item[:quantity] })
     end
     order.update_attribute(cart.total)
     ...

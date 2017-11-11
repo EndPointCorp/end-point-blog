@@ -7,11 +7,11 @@ title: Install Pentaho BI Server 5 Enterprise Edition with PostgreSQL repository
 
 Pentaho provides different ways to install Pentaho BI server. Each method has its own flexibility in installation.
 
-1. Installer mode - Easy to install BA &amp; DI server &amp; tools in one flow with default PostgreSQL repo &amp; default Tomcat server. (New Postgres installed on port 5432.)
+1. Installer mode - Easy to install BA & DI server & tools in one flow with default PostgreSQL repo & default Tomcat server. (New Postgres installed on port 5432.)
 
-2. Archive mode - BA server installed with own BA repository &amp; default Tomcat server. Necessary tools need to be installed manually.
+2. Archive mode - BA server installed with own BA repository & default Tomcat server. Necessary tools need to be installed manually.
 
-3. Manual mode - BA server installed with own BA repository &amp; own application server (Tomcat or JBoss). Necessary tools need to installed manually.
+3. Manual mode - BA server installed with own BA repository & own application server (Tomcat or JBoss). Necessary tools need to installed manually.
 
 We have a Postgres instance running on our server and are good with Tomcat as application server so Archive mode of installation is suitable for us. Pentaho installation requires two things be installed before starting with Pentaho installation.
 
@@ -64,17 +64,17 @@ org.quartz.jobStore.driverDelegateClass = org.quartz.impl.jdbcjobstore.PostgreSQ
 - biserver-ee/pentaho-solutions/system/hibernate/hibernate-settings.xml
 
 ```xml
-    &lt;config-file&gt;system/hibernate/postgresql.hibernate.cfg.xml&lt;/config-file&gt;
+    <config-file>system/hibernate/postgresql.hibernate.cfg.xml</config-file>
 ```
 
 - biserver-ee/pentaho-solutions/system/hibernate/postgresql.hibernate.cfg.xml
 
 ```xml
-    &lt;property name="connection.driver_class"&gt;org.postgresql.Driver&lt;/property&gt;
-    &lt;property name="connection.url"&gt;jdbc:postgresql://localhost:5432/hibernate&lt;/property&gt;
-    &lt;property name="dialect"&gt;org.hibernate.dialect.PostgreSQLDialect&lt;/property&gt;
-    &lt;property name="connection.username"&gt;pentaho_user&lt;/property&gt;
-    &lt;property name="connection.password"&gt;password&lt;/property&gt;
+    <property name="connection.driver_class">org.postgresql.Driver</property>
+    <property name="connection.url">jdbc:postgresql://localhost:5432/hibernate</property>
+    <property name="dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+    <property name="connection.username">pentaho_user</property>
+    <property name="connection.password">password</property>
 ```
 
 There are more occurrences in this file. Carefully do the necessary changes in all the places.
@@ -86,11 +86,11 @@ There are more occurrences in this file. Carefully do the necessary changes in a
 - biserver-ee/tomcat/webapps/pentaho/META-INF/context.xml
 
 ```xml
-&lt;Resource name="jdbc/PDI_Operations_Mart" auth="Container" type="javax.sql.DataSource"
+<Resource name="jdbc/PDI_Operations_Mart" auth="Container" type="javax.sql.DataSource"
             factory="org.apache.commons.dbcp.BasicDataSourceFactory" maxActive="20" maxIdle="5"
             maxWait="10000" username="pentaho_user" password="password"
             driverClassName="org.postgresql.Driver" url="jdbc:postgresql://localhost:5432/hibernate"
-            validationQuery="select 1"/&gt;
+            validationQuery="select 1"/>
 ```
 
 ```xml
@@ -108,15 +108,15 @@ Specify the Pentaho solutions path, server URL and port in web.xml of Tomcat web
 biserver-ee/tomcat/webapps/pentaho/WEB-INF/web.xml
 
 ```xml
-        &lt;context-param&gt;
-                &lt;param-name&gt;solution-path&lt;/param-name&gt;
-                &lt;param-value&gt;$INSTALLATION_PATH/biserver-ee/pentaho-solutions&lt;/param-value&gt;
-        &lt;/context-param&gt;
+        <context-param>
+                <param-name>solution-path</param-name>
+                <param-value>$INSTALLATION_PATH/biserver-ee/pentaho-solutions</param-value>
+        </context-param>
 
-        &lt;context-param&gt;
-                &lt;param-name&gt;fully-qualified-server-url&lt;/param-name&gt;
-                &lt;param-value&gt;http://localhost:8080/pentaho/&lt;/param-value&gt;
-        &lt;/context-param&gt;
+        <context-param>
+                <param-name>fully-qualified-server-url</param-name>
+                <param-value>http://localhost:8080/pentaho/</param-value>
+        </context-param>
 ```
 
 Pentaho can be configured to run on different ports by changing ports on Tomcat server.xml and web.xml
@@ -124,17 +124,17 @@ Pentaho can be configured to run on different ports by changing ports on Tomcat 
 - biserver-ee/tomcat/biserver-ee/tomcat/server.xml
 
 ```xml
-    &lt;Connector URIEncoding"UTF-8" port"9090" protocol"HTTP/1.1"
+    <Connector URIEncoding"UTF-8" port"9090" protocol"HTTP/1.1"
                connectionTimeout"20000"
-               redirectPort"8443" /&gt;
+               redirectPort"8443" />
 ```
 
 ```xml
 - biserver-ee/tomcat/webapps/pentaho/WEB-INF/web.xml
-         &lt;context-param&gt;
-                &lt;param-name&gt;fully-qualified-server-url&lt;/param-name&gt;
-                &lt;param-value&gt;http://localhost:9090/pentaho/&lt;/param-value&gt;
-        &lt;/context-param&gt;
+         <context-param>
+                <param-name>fully-qualified-server-url</param-name>
+                <param-value>http://localhost:9090/pentaho/</param-value>
+        </context-param>
 ```
 
 Install license

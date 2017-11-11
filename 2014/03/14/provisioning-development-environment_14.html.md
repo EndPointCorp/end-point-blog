@@ -33,7 +33,7 @@ Packer will login to the server over ssh and run your provisioners. The big head
   "type": "shell",
   "execute_command": "echo '{{user `ssh_pass`}}' | {{ .Vars }} sudo -E -S sh '{{ .Path }}'",
   "inline": [
-    "echo '%sudo    ALL=(ALL)  NOPASSWD:ALL' &gt;&gt; /etc/sudoers"
+    "echo '%sudo    ALL=(ALL)  NOPASSWD:ALL' >> /etc/sudoers"
   ]
 }
 ```
@@ -66,7 +66,7 @@ Once the shell provisioner is working, Ansible can be installed on the new machi
     "type": "shell",
     "inline": [
       "mkdir .ssh",
-      "echo '{{user `public_key`}}' &gt;&gt; .ssh/authorized_keys"
+      "echo '{{user `public_key`}}' >> .ssh/authorized_keys"
     ]
   },
   {
@@ -76,7 +76,7 @@ Once the shell provisioner is working, Ansible can be installed on the new machi
       "add-apt-repository ppa:rquillo/ansible",
       "apt-get update",
       "apt-get install -y ansible",
-      "echo '%sudo    ALL=(ALL)  NOPASSWD:ALL' &gt;&gt; /etc/sudoers"
+      "echo '%sudo    ALL=(ALL)  NOPASSWD:ALL' >> /etc/sudoers"
     ]
   },
   {

@@ -24,7 +24,7 @@ you will basically be creating the second tagging for the "New York" tag with th
 The third tagging is generated if the same photo is tagged by the "owner" @user.
 
 ```ruby
-@user.tag(@photo, :with =&gt; "New York", :on =&gt; "album_3")
+@user.tag(@photo, :with => "New York", :on => "album_3")
 ```
 
 Issue #2
@@ -34,7 +34,7 @@ Tag count methods include the common "tags" context no matter which "tagging_key
 ```ruby
 tags = Photo.tag_counts_on("album_3") 
 tags.select {|t| t.name == "New York" }.first.count
-=&gt; 28470 
+=> 28470 
 ```
 The above will return tags with the "album_3" and "tags" contexts.
 
@@ -43,11 +43,11 @@ Issue #3
 "Tagged_with" method may return duplicates. It happens as a result of the query including the "tags" context by default. If multiple contexts were present you will have to manually exclude the duplicates from the list to get the correct counts.
 
 ```ruby
-f = Photo.tagged_with("New York", :on =&gt; "album_3").size
-=&gt; 28470 
+f = Photo.tagged_with("New York", :on => "album_3").size
+=> 28470 
 ```
 ```ruby
-f = Photo.tagged_with("New York", :on =&gt; "album_3").uniq.size
-=&gt; 27351 
+f = Photo.tagged_with("New York", :on => "album_3").uniq.size
+=> 27351 
 ```
 

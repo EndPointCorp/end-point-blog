@@ -88,7 +88,7 @@ class Factor
   def initialize_table
     variables_values = @variables.map do |var|
       var.values.map do |val|
-        { var.name.to_sym =&gt; val }
+        { var.name.to_sym => val }
       end.flatten
     end # [ [ { name: value } ] ]   
     @_table = variables_values[1..(variables_values.count)].inject(variables_values.first) do |all_array, var_arrays|
@@ -149,9 +149,9 @@ class Factor
   # the last one being the probability value
   def table
     rows = @_table.keys.map do |key|
-      key.values &lt;&lt; @_table[key]
+      key.values << @_table[key]
     end
-    table = Terminal::Table.new rows: rows, headings: ( @variables.map(&amp;:name) &lt;&lt; "value" )
+    table = Terminal::Table.new rows: rows, headings: ( @variables.map(&:name) << "value" )
     table.align_column(@variables.count, :right)
     table
   end
@@ -239,7 +239,7 @@ class Generator
   def self.pick(options)
     items = options.inject([]) do |memo, keyval|
       key, val = keyval
-      memo &lt;&lt; Array.new(val, key)
+      memo << Array.new(val, key)
       memo
     end.flatten
     items.sample
@@ -303,17 +303,17 @@ class Model
     num = 20
 
     num.times.to_a.map do |i|
-      if (age == :teens || age == :young_adults) &amp;&amp; sex == :female
+      if (age == :teens || age == :young_adults) && sex == :female
         Generator.pick veggies: 1, snacks: 3, meat: 1, drinks: 1, beauty: 9, magazines: 6
-      elsif age == :teens  &amp;&amp; sex == :male
+      elsif age == :teens  && sex == :male
         Generator.pick veggies: 1, snacks: 6, meat: 4, drinks: 1, beauty: 1, magazines: 4
-      elsif (age == :young_adults || age == :adults) &amp;&amp; sex == :male
+      elsif (age == :young_adults || age == :adults) && sex == :male
         Generator.pick veggies: 1, snacks: 4, meat: 6, drinks: 6, beauty: 1, magazines: 1
-      elsif (age == :young_adults || age == :adults) &amp;&amp; sex == :female
+      elsif (age == :young_adults || age == :adults) && sex == :female
         Generator.pick veggies: 4, snacks: 4, meat: 2, drinks: 1, beauty: 6, magazines: 3
-      elsif age == :elders &amp;&amp; sex == :male
+      elsif age == :elders && sex == :male
         Generator.pick veggies: 6, snacks: 2, meat: 2, drinks: 2, beauty: 1, magazines: 1
-      elsif age == :elders &amp;&amp; sex == :female
+      elsif age == :elders && sex == :female
         Generator.pick veggies: 8, snacks: 1, meat: 2, drinks: 1, beauty: 4, magazines: 1
       else
         Generator.pick veggies: 1, snacks: 1, meat: 1, drinks: 1, beauty: 1, magazines: 1
@@ -589,7 +589,7 @@ Which yields the following to the console (the full distribution is truncated du
 Let's define a Proc for inferring categories based on user traits as evidence:
 
 ```ruby
-infer = -&gt; (age, sex, rel, loc) do
+infer = -> (age, sex, rel, loc) do
 
   # Let's map through the possible categories and the probability
   # values the distibutions assign to them:
@@ -615,13 +615,13 @@ infer = -&gt; (age, sex, rel, loc) do
   # Here's we're getting the most probable categories based on the
   # Naive Bayes distribution approximation model and based on the full
   # distribution:
-  win      = all.max      { |a, b| a[:value] &lt;=&gt; b[:value] }
-  win_full = all_full.max { |a, b| a[:value] &lt;=&gt; b[:value] }
+  win      = all.max      { |a, b| a[:value] <=> b[:value] }
+  win_full = all_full.max { |a, b| a[:value] <=> b[:value] }
 
   puts "Best match for #{[ age, sex, rel, loc ]}:"
-  puts "   #{win[:category]} =&gt; #{win[:value]}"
+  puts "   #{win[:category]} => #{win[:value]}"
   puts "Full pointed at:"
-  puts "   #{win_full[:category]} =&gt; #{win_full[:value]}\n\n"
+  puts "   #{win_full[:category]} => #{win_full[:value]}\n\n"
 end
 ```
 
@@ -640,24 +640,24 @@ This gave the following results on the console:
 
 ```nohighlight
 Best match for [:teens, :male, :single, :us]:
-   snacks =&gt; 0.016252573282200262
+   snacks => 0.016252573282200262
 Full pointed at:
-   snacks =&gt; 0.01898999999999971
+   snacks => 0.01898999999999971
 
 Best match for [:young_adults, :male, :single, :asia]:
-   meat =&gt; 0.0037455794492659757
+   meat => 0.0037455794492659757
 Full pointed at:
-   meat =&gt; 0.0017000000000000016
+   meat => 0.0017000000000000016
 
 Best match for [:adults, :female, :in_relationship, :europe]:
-   beauty =&gt; 0.0012287311061725868
+   beauty => 0.0012287311061725868
 Full pointed at:
-   beauty =&gt; 0.0003000000000000026
+   beauty => 0.0003000000000000026
 
 Best match for [:elders, :female, :in_relationship, :canada]:
-   veggies =&gt; 0.002156365730474441
+   veggies => 0.002156365730474441
 Full pointed at:
-   veggies =&gt; 0.0013500000000000022
+   veggies => 0.0013500000000000022
 ```
 
 That's quite impressive! Even though we're using a simplified model to approximate the original distribution, the algorithm managed to infer the correct values in all cases. You can notice also that the results differ only by a couple of cases in 1000.

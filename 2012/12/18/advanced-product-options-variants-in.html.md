@@ -7,7 +7,7 @@ title: Advanced Product Options (Variants) in Piggybak
 
 About a month ago, Tim Case and I developed and released a [Piggybak](http://www.piggybak.org/) extension [piggybak_variants](https://github.com/piggybak/piggybak_variants), which provides advanced product optioning (or variant) support in Piggybak. Piggybak is an open source Ruby on Rails ecommerce platform developed and maintained by End Point. Here, I discuss the background and basics of the extension.
 
-### Motivation &amp; Background
+### Motivation & Background
 
 The motivation for this extension was the common ecommerce need for product options (e.g. size, color), where each variation shares high-level product information such as a title and description, but variants have different options, quantities available, and prices. Having been intimately familiar with Spree, another open source Ruby on Rails ecommerce framework, we decided to borrow similarities of Spree's product optioning data model after seeing its success in flexibility over many projects. The resulting model is similar to Spree's data model, but a bit different due to the varied nature in Piggybak's mountability design.
 

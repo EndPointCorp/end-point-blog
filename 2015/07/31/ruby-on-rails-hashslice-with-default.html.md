@@ -12,7 +12,7 @@ I figured a fairly easy way to do that would be to eliminate the need for all th
 My first draft came out looking something like:
 
 ```ruby
-class MyHash &lt; HashWithIndifferentAccess
+class MyHash < HashWithIndifferentAccess
   def initialize(constuctor = {}) do
     super
     self[:important_key_1] ||= "default 1"
@@ -26,8 +26,8 @@ This seemed to work fine. I didn't need to worry about ensuring "important keys"
 I soon discovered in my test suite that my code did not do exactly what I intended it to do. In the tests, I wanted to ensure several of my hash keys came out with the right values. I made use of MyHash#slice to ensure I ended up with the right subset of values for my given test. However, no matter what I did, I could not weed out the important keys:
 
 ```bash
-1.9.3 :003 &gt; MyHash.new({foo: 'bar', bar: 'lemon'}).slice(:bar)
-=&gt; {"important_key_1"=&gt;"default 1", "important_key_2"=&gt;"default 2", "bar"=&gt;"lemon"}
+1.9.3 :003 > MyHash.new({foo: 'bar', bar: 'lemon'}).slice(:bar)
+=> {"important_key_1"=>"default 1", "important_key_2"=>"default 2", "bar"=>"lemon"}
 ```
 
 I admit I was quite perplexed by this. I tried several re-writes of the initialize method looking for some version that didn't exhibit this strange slice behavior. Finally, I took to the Ruby on Rails and Ruby docs.
@@ -43,7 +43,7 @@ The method slice calls "new" (which includes the default values) to create anoth
 After a little thought, I came up with this:
 
 ```ruby
-class MyHash &lt; HashWithIndifferentAccess
+class MyHash < HashWithIndifferentAccess
   def self.build(constructor = {}) do
     h = new(constructor)
     h[:important_key_1] ||= "default 1"

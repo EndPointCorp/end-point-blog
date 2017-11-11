@@ -30,7 +30,7 @@ UPDATE pg_class SET
             WHERE pg_class.oid = pg_trigger.tgrelid
         ),
         relhasrules = (
-            SELECT COUNT(*) &gt; 0
+            SELECT COUNT(*) > 0
             FROM pg_rules
             WHERE schemaname = 'public'
                 AND tablename = 'foo'
@@ -269,7 +269,7 @@ BEGIN
             WHERE pg_class.oid = pg_trigger.tgrelid
         ),
         relhasrules = (
-            SELECT COUNT(*) &gt; 0
+            SELECT COUNT(*) > 0
             FROM pg_rules
             WHERE schemaname = schema_name
                 AND tablename = table_name
@@ -311,7 +311,7 @@ BEGIN
 
     GET DIAGNOSTICS int_num_del = ROW_COUNT;
 
-    IF (int_num_del &gt; 0) IS NOT TRUE THEN
+    IF (int_num_del > 0) IS NOT TRUE THEN
         RAISE EXCEPTION
             'No entry for %.% set by safe_disable_trigrules()',
             schema_name,

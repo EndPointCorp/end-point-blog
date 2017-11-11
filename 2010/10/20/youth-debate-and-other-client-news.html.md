@@ -9,7 +9,7 @@ I want to draw attention to several of our clients who have been in the news lat
 
 <a href="http://youthdebate.org/" onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5530254616609621874" src="/blog/2010/10/20/youth-debate-and-other-client-news/image-0.jpeg" style="display:block; margin:0px auto 10px; text-align:center;cursor:pointer; cursor:hand;width: 400px; height: 211px;"/></a>
 
-The [Youth Debate](http://youthdebate.org/) 2010 site is live and currently accepting question submissions from youth interested in hearing video responses from the DNC &amp; RNC chairmen before the November midterm elections. It's a simple site, developed and deployed quickly with an eye toward handling a very high amount traffic over a short period of time. We're excited to see what questions and answers come out of the project.
+The [Youth Debate](http://youthdebate.org/) 2010 site is live and currently accepting question submissions from youth interested in hearing video responses from the DNC & RNC chairmen before the November midterm elections. It's a simple site, developed and deployed quickly with an eye toward handling a very high amount traffic over a short period of time. We're excited to see what questions and answers come out of the project.
 
 <a href="http://www.collegedistrict.com/" onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5530259591698379890" src="/blog/2010/10/20/youth-debate-and-other-client-news/image-0.jpeg" style="float:right; margin:0 0 10px 10px;cursor:pointer; cursor:hand;width: 236px; height: 229px;"/></a>
 

@@ -33,12 +33,12 @@ Now that we have the feature in place, we can create the steps.
 
 ```ruby
 Given /^there is a product named "([^"]*)"$/ do |product_name|
-    @product = Product.create(:name =&gt; product_name)
+    @product = Product.create(:name => product_name)
   end
 
   Given /^it has some variants with various options$/ do
-    @variant_a = Variant.create(:sku =&gt; 'Variant A', product =&gt; @product)
-    VariantOption.create(:name =&gt; "Option A", :variant =&gt; @variant_a)
+    @variant_a = Variant.create(:sku => 'Variant A', product => @product)
+    VariantOption.create(:name => "Option A", :variant => @variant_a)
     #... same thing for B, C, D
   end
 
@@ -65,18 +65,18 @@ Keep in mind that at first, that these steps are going to be powered by FastMode
 After compeleting a RED TDD cycle, Mike's strategy really takes center stage. Instead of creating classes, he uses FastModel to define the models, including existing models, fields and relationships needed for his feature. He goes even farther and stubs out the interface which is needed to satisify the cucumber test. Let's look at a specific example.
 
 ```ruby
-class Product &lt; FastModel
+class Product < FastModel
     fields :name
     has_many :variants
   end
 
-  class Variant &lt; FastModel
+  class Variant < FastModel
     fields :name
     has_many :variant_options
     belongs_to :product
   end
 
-  class VariantOption &lt; FastModel
+  class VariantOption < FastModel
     fields :name
     belongs_to :variant
   end
@@ -96,7 +96,7 @@ It might seem strange to start stubbing out your class interface inside a cucumb
 Then /^the comparison chart header should have options "([^"]*)"$/ do |options|
     opts = options.split(",")
     header = stub(:header) { opts }
-    chart = stub(:chart, :header =&gt; header)
+    chart = stub(:chart, :header => header)
     VariantComparisonChart.stub(:build_for) { chart }
 
     chart = VariantComparisonChart.build_for(@current_product)

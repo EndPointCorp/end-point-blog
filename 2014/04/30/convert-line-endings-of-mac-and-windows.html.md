@@ -34,18 +34,18 @@ We can see the conversion of line endings to Unix from Mac and Windows using irb
 ***1. Mac***
 
 ```ruby
-irb(main):001:0&gt; mac ="Hello \r Mac"
-=&gt; "Hello \r Mac"
-irb(main):002:0&gt; mac.gsub(/\r\n?/,"\n")
-=&gt; "Hello \n Mac"
+irb(main):001:0> mac ="Hello \r Mac"
+=> "Hello \r Mac"
+irb(main):002:0> mac.gsub(/\r\n?/,"\n")
+=> "Hello \n Mac"
 ```
 ***2. Windows***
 
 ```ruby
-irb(main):001:0&gt; windows="Hello \r\n Windows"
-=&gt; "Hello \r\n Windows"
-irb(main):002:0&gt; windows.gsub(/\r\n?/,"\n")
-=&gt; "Hello \n Windows"
+irb(main):001:0> windows="Hello \r\n Windows"
+=> "Hello \r\n Windows"
+irb(main):002:0> windows.gsub(/\r\n?/,"\n")
+=> "Hello \n Windows"
 ```
 
 **RSpec Tests**
@@ -55,7 +55,7 @@ After the implementation of line endings conversion, it should covered with test
 ```ruby
   describe "POST feedback requests" do
     it "validates Mac line endings converted to Unix" do     
-      _params = { :content =&gt; "Hello \r Mac", :user =&gt; "myuser"}
+      _params = { :content => "Hello \r Mac", :user => "myuser"}
       post '/feedback.json', _params
       response.status.should == 200
       result = JSON.parse(response.body)
@@ -63,7 +63,7 @@ After the implementation of line endings conversion, it should covered with test
     end
 
     it "validates Windows line endings converted to Unix" do
-      _params = { :content =&gt; "Hello \r\n Windows", :user =&gt; "myuser"}
+      _params = { :content => "Hello \r\n Windows", :user => "myuser"}
       post '/feedback.json', _params
       response.status.should == 200
       result = JSON.parse(response.body)

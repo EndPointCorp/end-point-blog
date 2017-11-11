@@ -46,7 +46,7 @@ AS $body$
     tcount INTEGER;
   BEGIN
     SELECT INTO tcount
-      COUNT(*) FROM rental WHERE rental_date &gt; $1;
+      COUNT(*) FROM rental WHERE rental_date > $1;
   RETURN tcount;
   END;
 $body$;
@@ -73,23 +73,23 @@ Time: 224.718 ms
 *Note: all of the queries in this article were run multiple times first to reduce any caching effects.* Those times appear to be about the same, but I know from the distribution of the data that the first query will not hit the index, but the second one should. Thus, when we try and emulate what the function is doing on the command line, the first effort often looks like this:
 
 ```
-pagila# explain analyze select count(*) from rental where rental_date &gt; '2005-08-01';
+pagila# explain analyze select count(*) from rental where rental_date > '2005-08-01';
                      QUERY PLAN
 --------------------------------------------------------------------------------
  Aggregate (actual time=579.543..579.544)
    Seq Scan on rental (actual time=4.462..403.122 rows=187901)
-     Filter: (rental_date &gt; '2005-08-01 00:00:00')
+     Filter: (rental_date > '2005-08-01 00:00:00')
  Total runtime: 579.603 ms
 
-pagila# explain analyze select count(*) from rental where rental_date &gt; '2005-09-01';
+pagila# explain analyze select count(*) from rental where rental_date > '2005-09-01';
 
                      QUERY PLAN
 --------------------------------------------------------------------------------
  Aggregate  (actual time=35.133..35.133)
    Bitmap Heap Scan on rental (actual time=1.852..30.451)
-     Recheck Cond: (rental_date &gt; '2005-09-01 00:00:00')
-     -&gt; Bitmap Index Scan on idx_unq_rental (actual time=1.582..1.582 rows=5824)
-         Index Cond: (rental_date &gt; '2005-09-01 00:00:00')
+     Recheck Cond: (rental_date > '2005-09-01 00:00:00')
+     -> Bitmap Index Scan on idx_unq_rental (actual time=1.582..1.582 rows=5824)
+         Index Cond: (rental_date > '2005-09-01 00:00:00')
  Total runtime: 35.204 ms
 
 ```
@@ -99,23 +99,23 @@ Wow, that's a huge difference! The second query is hitting the index and using s
 The correct way to see queries as a function sees them is to use prepared statements. This caches the query plan into memory and simply passes a value to the already prepared plan, just like a function does. The process looks like this:
 
 ```
-pagila# PREPARE foobar(DATE) AS SELECT count(*) FROM rental WHERE rental_date &gt; $1;
+pagila# PREPARE foobar(DATE) AS SELECT count(*) FROM rental WHERE rental_date > $1;
 PREPARE
 
 pagila# EXPLAIN ANALYZE EXECUTE foobar('2005-08-01');
                 QUERY PLAN
 --------------------------------------------------------------
  Aggregate  (actual time=535.708..535.709 rows=1)
-   -&gt;  Seq Scan on rental (actual time=4.638..364.351 rows=187901)
-         Filter: (rental_date &gt; $1)
+   ->  Seq Scan on rental (actual time=4.638..364.351 rows=187901)
+         Filter: (rental_date > $1)
  Total runtime: 535.781 ms
 
 pagila# EXPLAIN ANALYZE EXECUTE foobar('2005-09-01');
                 QUERY PLAN
 --------------------------------------------------------------
  Aggregate  (actual time=280.374..280.375 rows=1)
-   -&gt;  Seq Scan on rental  (actual time=5.936..274.911 rows=5824)
-         Filter: (rental_date &gt; $1)
+   ->  Seq Scan on rental  (actual time=5.936..274.911 rows=5824)
+         Filter: (rental_date > $1)
  Total runtime: 280.448 ms
 ```
 
@@ -132,7 +132,7 @@ AS $body$
     myst TEXT;
     myrec RECORD;
   BEGIN
-    myst = 'SELECT count(*) FROM rental WHERE rental_date &gt; ' || quote_literal($1);
+    myst = 'SELECT count(*) FROM rental WHERE rental_date > ' || quote_literal($1);
     FOR myrec IN EXECUTE myst LOOP
       RETURN myrec.count;
     END LOOP;

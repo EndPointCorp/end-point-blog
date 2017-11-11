@@ -44,7 +44,7 @@ After I verified the encryption of both old user passwords encrypted with RESTfu
 
 ```ruby
 # app/models/user.rb
-class User &lt; ActiveRecord::Base
+class User < ActiveRecord::Base
   acts_as_authentic do |c|
     c.act_like_restful_authentication = true
   end

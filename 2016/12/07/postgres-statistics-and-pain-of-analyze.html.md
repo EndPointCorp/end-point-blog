@@ -50,9 +50,9 @@ naming scheme to keep them straight. It's simple enough to use pg_dump and sed t
 that the structure of the pg_statistic table has not changed from version 9.2 until 9.6:
 
 ```
-$ for z in 840 900 910 920 930 940 950; do echo -n $z: ; diff -sq &lt;(pg_dump \
-&gt;  --schema-only -p 5$z -t pg_statistic | sed -n '/CREATE TABLE/,/^$/p') &lt;(pg_dump \
-&gt;  --schema-only -p 5960 -t pg_statistic | sed -n '/CREATE TABLE/,/^$/p'); done
+$ for z in 840 900 910 920 930 940 950; do echo -n $z: ; diff -sq <(pg_dump \
+>  --schema-only -p 5$z -t pg_statistic | sed -n '/CREATE TABLE/,/^$/p') <(pg_dump \
+>  --schema-only -p 5960 -t pg_statistic | sed -n '/CREATE TABLE/,/^$/p'); done
 840:Files /dev/fd/63 and /dev/fd/62 differ
 900:Files /dev/fd/63 and /dev/fd/62 differ
 910:Files /dev/fd/63 and /dev/fd/62 differ
@@ -121,7 +121,7 @@ to demonstrate.
 
 ```
 $ initdb --data-checksums testdb
-$ echo port=5555 &gt;&gt; testdb/postgresql.conf 
+$ echo port=5555 >> testdb/postgresql.conf 
 $ pg_ctl start -D testdb
 $ createdb -p 1900 alpha
 $ pgbench alpha -p 1900 -i -s 2
@@ -174,8 +174,8 @@ database-wide analyzing is complete:
 ```
 ## Save the values away, then reset to default:
 CREATE TABLE custom_targets AS SELECT attrelid, attname, attnum, attstattarget
-  FROM pg_atttribute WHERE attstattarget &gt; 0;
-UPDATE pg_attribute SET attstattarget = -1 WHERE attstattarget &gt; 0;
+  FROM pg_atttribute WHERE attstattarget > 0;
+UPDATE pg_attribute SET attstattarget = -1 WHERE attstattarget > 0;
 
 ## Safely run your database-wide analyze now
 ## All columns will use default_statistics_target
@@ -188,7 +188,7 @@ UPDATE pg_attribute a SET attstattarget = c.attstattarget
 ## Bonus query: run all custom target columns in parallel:
 SELECT 'vacuumdb --analyze-only -e -j 100 ' || 
   string_agg(format('-t "%I(%I)" ', attrelid::regclass, attname), NULL)
-FROM pg_attribute WHERE attstattarget &gt; 0;
+FROM pg_attribute WHERE attstattarget > 0;
 ```
 
 As to the problems of not being able to pick the stage targets for --analyze-in-stages, and 

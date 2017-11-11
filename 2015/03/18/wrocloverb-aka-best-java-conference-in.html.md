@@ -23,11 +23,11 @@ Nicolas Dermine presented [Overtone's](http://overtone.github.io/) implemented m
 
 <blockquote class="twitter-tweet" lang="en">
 Awesome project! <a href="http://t.co/c2NUNpYjwS">http://t.co/c2NUNpYjwS</a> Coding music in <a href="https://twitter.com/hashtag/ruby?src=hash">#ruby</a> Thanks <a href="https://twitter.com/nicoder">@nicoder</a> for your talk <a href="https://twitter.com/hashtag/wrocloverb?src=hash">#wrocloverb</a> <a href="http://t.co/sY4MpqhZlf">pic.twitter.com/sY4MpqhZlf</a><br />
-&#8212; Cecile Veneziani (@cecilitse) <a href="https://twitter.com/cecilitse/status/576775533805092864">March 14, 2015</a></blockquote>
+— Cecile Veneziani (@cecilitse) <a href="https://twitter.com/cecilitse/status/576775533805092864">March 14, 2015</a></blockquote>
 
 There was also a fascinating talk about some aspects of social engineering in sourcing the requirements from your customers. It was presented by [Alberto Brandolini](https://twitter.com/ziobrando), and the technique is called **Event Storming.**
 
 <blockquote class="twitter-tweet" lang="en">
 .<a href="https://twitter.com/ziobrando">@ziobrando</a> in action. When walls are no longer enough... for <a href="https://twitter.com/hashtag/EventStorming?src=hash">#EventStorming</a>. Which is awesome by the way <a href="https://twitter.com/hashtag/wrocloverb?src=hash">#wrocloverb</a> <a href="http://t.co/Oq06nFaGub">pic.twitter.com/Oq06nFaGub</a><br />
-&#8212; a candid mind (@aCandidMind) <a href="https://twitter.com/aCandidMind/status/577486878330511360">March 16, 2015</a></blockquote>
+— a candid mind (@aCandidMind) <a href="https://twitter.com/aCandidMind/status/577486878330511360">March 16, 2015</a></blockquote>
 <script async="" charset="utf-8" src="//platform.twitter.com/widgets.js"></script>

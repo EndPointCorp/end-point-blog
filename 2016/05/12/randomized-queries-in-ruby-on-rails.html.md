@@ -17,10 +17,10 @@ Let’s pretend we’re working on an average project. The table we’ll be pull
 records_desired = 3
 count = [OurObject.count, 1].max
 offsets = records_desired.times.inject([]) do |offsets|
-  offsets &lt;&lt; rand(count)
+  offsets << rand(count)
 end
-while count &gt; offsets.uniq!.size &amp;&amp; offsets.size &lt; records_desired do
-  offsets &lt;&lt; rand(count)
+while count > offsets.uniq!.size && offsets.size < records_desired do
+  offsets << rand(count)
 end
 offsets.collect {|offset| OurObject.offset(offset).first}
 ```

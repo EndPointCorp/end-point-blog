@@ -94,11 +94,11 @@ CREATE TABLE stats_data (
   CONSTRAINT no_overlapping_jsons
   EXCLUDE USING gist (
     tstzrange(
-      to_timestamp((data-&gt;&gt;'start_ts')::double precision),
-      to_timestamp((data-&gt;&gt;'end_ts'  )::double precision)
-    ) WITH &amp;&amp;,
-    ((data-&gt;&gt;'metadata')::json-&gt;&gt;'country')      WITH =,
-    ((data-&gt;&gt;'metadata')::json-&gt;&gt;'installation') WITH =
+      to_timestamp((data->>'start_ts')::double precision),
+      to_timestamp((data->>'end_ts'  )::double precision)
+    ) WITH &&,
+    ((data->>'metadata')::json->>'country')      WITH =,
+    ((data->>'metadata')::json->>'installation') WITH =
   )
 );
 ```

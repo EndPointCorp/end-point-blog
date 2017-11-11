@@ -24,7 +24,7 @@ sub do_something {
 
     # some code
 
-    my $dbh = ::database_exists_ref($opt-&gt;{table})-&gt;dbh
+    my $dbh = ::database_exists_ref($opt->{table})->dbh
         or return undef;
 
     # ... more code
@@ -38,7 +38,7 @@ The ::database_exists_ref() method will not be available for a test script and n
 
 ```perl
 use lib '/home/user/interchange/custom/lib';
-use Test::More tests =&gt; 2;
+use Test::More tests => 2;
 use DBI;
 
 # Here are the methods to provide proper reference to our database handle
@@ -53,7 +53,7 @@ sub ::database_exists_ref {
 
 sub dbh {
     # define a dbh method
-    my $db = DBI-&gt;connect('dsn, 'user', 'pass');
+    my $db = DBI->connect('dsn, 'user', 'pass');
 
     return $db;
 }

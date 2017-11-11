@@ -18,7 +18,7 @@ For Perl, to compile from a source tarball with the defaults:
 Then build as normal:
 
 ```
-make &amp;&amp; make test &amp;&amp; sudo make install
+make && make test && sudo make install
 ```
 
 I hope this information will come in handy for someone. I believe I learned it from Red Hat's source RPM for Perl.

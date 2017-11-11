@@ -16,7 +16,7 @@ For a recent ecommerce project using RailsAdmin and Piggybak, I was required to 
 ### #1: Create Controller
 
 ```ruby
-class CustomAdminController &lt; RailsAdmin::MainController
+class CustomAdminController < RailsAdmin::MainController
   def import
     # TODO
   end
@@ -28,8 +28,8 @@ First, I created a custom admin controller for my application in the app/control
 ### #2: Add import route
 
 ```ruby
-match "/admin/:model_name/import" =&gt; "custom_admin#import" , :as =&gt; "import", :via =&gt; [:get, :post]
-mount RailsAdmin::Engine =&gt; '/admin', :as =&gt; 'rails_admin'
+match "/admin/:model_name/import" => "custom_admin#import" , :as => "import", :via => [:get, :post]
+mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
 ```
 
 In my routes file, I introduced a new named route for import to point to the new custom controller. This action will be a get or a post.
@@ -43,7 +43,7 @@ Next, I copied over the RailsAdmin app/views/rails_admin/_model_links.html.haml 
 - can_import = authorized? :import, abstract_model
 
 ...
-%li{:class =&gt; (params[:action] == 'import' &amp;&amp; 'active')}= link_to "Import", main_app.import_path(model_name) if can_import
+%li{:class => (params[:action] == 'import' && 'active')}= link_to "Import", main_app.import_path(model_name) if can_import
 ```
 
 With this logic, the Import tab shows only if the user has import access on the model. Note that the named route for the import must be prefixed with "main_app.", because it belongs to the main application and not RailsAdmin.
@@ -53,7 +53,7 @@ With this logic, the Import tab shows only if the user has import access on the 
 My application uses [CanCan with RailsAdmin](https://github.com/sferik/rails_admin/wiki/CanCan), so I leveraged CanCan to control which models are importable. The CanCan Ability class (app/models/ability.rb) was updated to contain the following, to allow exclude import on all models, and then allow import on several specific models.
 
 ```ruby
-if user &amp;&amp; user.is_admin?
+if user && user.is_admin?
   cannot :import, :all
   can :import, [Book, SomeModel1, SomeModel2, SomeModel3]
 end
@@ -68,18 +68,18 @@ I now see an Import tab in the admin:
 Next, I created a view for displaying the import form. Here's a generic example to display the set of fields that can be imported, and the form:
 
 ```nohighlight
-&lt;h1&gt;Import&lt;/h1&gt;
-&lt;h2&gt;Fields&lt;/h2&gt;
-&lt;ul&gt;
-    &lt;% @abstract_model::IMPORT_FIELDS.each do |attr| -%&gt;
-    &lt;li&gt;&lt;%= attr %&gt;&lt;/li&gt;
-    &lt;% end -%&gt;
-&lt;/ul&gt;
+<h1>Import</h1>
+<h2>Fields</h2>
+<ul>
+    <% @abstract_model::IMPORT_FIELDS.each do |attr| -%>
+    <li><%= attr %></li>
+    <% end -%>
+</ul>
 
-&lt;%= form_tag "/admin/#{@abstract_model.to_param}/import", :multipart =&gt; true do |f| -%&gt;
-    &lt;%= file_field_tag :file %&gt;
-    &lt;%= submit_tag "Upload", :disable_with =&gt; "Uploading..." %&gt;
-&lt;% end -%&gt;
+<%= form_tag "/admin/#{@abstract_model.to_param}/import", :multipart => true do |f| -%>
+    <%= file_field_tag :file %>
+    <%= submit_tag "Upload", :disable_with => "Uploading..." %>
+<% end -%>
 ```
 
 This will look something like this:
@@ -93,7 +93,7 @@ Finally, the code for the import looks something like this:
 ```ruby
 def import
   if request.post?
-    response = { :errors =&gt; [], :success =&gt; [] }
+    response = { :errors => [], :success => [] }
     file = CSV.new(params[:file].tempfile)
 
     # Build map of attributes based on first row
@@ -111,9 +111,9 @@ def import
 
       # Save
       if object.save
-        response[:success] &lt;&lt; "Created: #{object.title}"
+        response[:success] << "Created: #{object.title}"
       else
-        response[:error] &lt;&lt; "Failed to create: #{object.title}. Errors: #{object.errors.full_messages.join(', ')}."
+        response[:error] << "Failed to create: #{object.title}. Errors: #{object.errors.full_messages.join(', ')}."
       end
     end
   end

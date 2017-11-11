@@ -16,4 +16,4 @@ Here at End Point, we have a broad range and depth of knowledge in many areas of
 - Jon shared a [The Developer's RegEx Survival Guide: 15 Rules for Making Sense of Regular Expressions](http://blog.smartbear.com/development/the-developers-regex-survival-guide-15-rules-for-making-sense-of-regular-expressions/). This has a lot of great tips.
 - Finally, another developer recently asked for a zip code location software or service. Some options that came up were [Ultimate Locater](http://ultimatelocator.com/ultimatelocator), [Bullseye location software](http://www.bullseyelocations.com/), [Geosprawl](http://www.geosprawl.com/pricing/tabid/923/Default.aspx), [Google Maps](https://developers.google.com/maps/documentation/distancematrix/) and [zip-codes.com](http://zip-codes.com/).
 
-My *Internal* folder is now clean and I'm ready to hear about more great tips &amp; tools from my coworkers.
+My *Internal* folder is now clean and I'm ready to hear about more great tips & tools from my coworkers.

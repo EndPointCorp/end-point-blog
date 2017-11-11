@@ -58,7 +58,7 @@ UPDATE pg_database SET datallowconn = FALSE WHERE datname = 'mydb_template';
 Another way to restore the database to a known state is to use the [pg_dump utility](http://www.postgresql.org/docs/current/static/app-pgdump.html) to create a file, then use [psql](http://www.postgresql.org/docs/current/static/app-psql.html) to restore that database. In this case, the command to save a copy would be:
 
 ```sql
-pg_dump mydb --create &gt; mydb.template.pg
+pg_dump mydb --create > mydb.template.pg
 ```
 
 The **--create** option tells pg_dump to create the database itself as the first command in the file. If you look at the generated file, you'll see that it is using **template0** as the template database in this case. Why does Postgres have template0 *and* template1? The template1 database is meant as a user configurable template that you can make changes to that will be picked up by all future CREATE DATABASE commands (a common example is a [CREATE LANGUAGE](http://www.postgresql.org/docs/current/static/sql-createlanguage.html) command). The template0 database on the other hand is meant as a "hands off, don't ever change it" stable database that can always safely be used as a template, with no changes from when the cluster was first created. To that end, you are not even allowed to connect to the template0 database (thanks to the datallowconn column metioned earlier).
@@ -86,7 +86,7 @@ SELECT 'TRUNCATE TABLE '
 FROM pg_class
 JOIN pg_namespace n ON (n.oid = relnamespace)
 WHERE nspname !~ '^pg'
-AND nspname &lt;&gt; 'information_schema'
+AND nspname <> 'information_schema'
 AND relkind = 'r';
 ```
 
@@ -109,7 +109,7 @@ SELECT 'ALTER SEQUENCE '
 FROM pg_class
 JOIN pg_namespace n ON (n.oid = relnamespace)
 WHERE nspname !~ '^pg'
-AND nspname &lt;&gt; 'information_schema'
+AND nspname <> 'information_schema'
 AND relkind = 'S';
 ```
 
@@ -121,7 +121,7 @@ A final way to restore the database to a known state is a variation on the previ
 
 ```bash
 ## Create the template file:
-pg_dump mydb --schema-only --create &gt; mydb.template.schemaonly.pg
+pg_dump mydb --schema-only --create > mydb.template.schemaonly.pg
 
 ## Restore it:
 psql -X -c 'DROP DATABASE mydb'

@@ -14,7 +14,7 @@ Here's a common problem: you have a set of results you want to display (search r
 Firstly, you have to have the server-side processing in place to serve up paginated results in a way you can use. We'll assume that you can write or adapt your current results source to produce this for a given URL and parameters:
 
 ```
-/search?param1=123&amp;param2=ABC&amp;sort=colA,colB&amp;offset=0&amp;size=24
+/search?param1=123&param2=ABC&sort=colA,colB&offset=0&size=24
 ```
 
 That URL offers a state-less way to retrieve a slice of results: in this case, it corresponds to a query something like:

@@ -25,7 +25,7 @@ Once End Point's early dynamic websites went into production, Ben wanted to grow
 
 Before long, Akopia was acquired by Red Hat, and Ben met Jon Jensen there while getting his help with Interchange and Linux questions. Later when Red Hat was phasing out its Interchange consulting group, Ben offered Jon a job, and Jon introduced Ben and Rick to his co-worker Mark Johnson who was expert at all things database, Perl, and Interchange. Rick and Ben hired both Jon and Mark in 2002, and End Point continued to grow with new clients and soon more employees as well.
 
-The story continues with End Point moving into PostgreSQL support, Ruby on Rails development, AFS support, the creation of Spree Commerce, programming with Python &amp; Django, Java, PHP, Node.js, AngularJS, Puppet and Chef and Ansible, and a major move into the Liquid Galaxy world. By then things are documented a little better thanks to wikis and blogs, so Ben was able to keep to the highlights.
+The story continues with End Point moving into PostgreSQL support, Ruby on Rails development, AFS support, the creation of Spree Commerce, programming with Python & Django, Java, PHP, Node.js, AngularJS, Puppet and Chef and Ansible, and a major move into the Liquid Galaxy world. By then things are documented a little better thanks to wikis and blogs, so Ben was able to keep to the highlights.
 
 A lot happens in a business in 20 years!
 

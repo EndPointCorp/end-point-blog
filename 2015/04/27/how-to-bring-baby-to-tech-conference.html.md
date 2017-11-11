@@ -31,13 +31,13 @@ Here are some reasons I imagined behind the staring:
 - Wonder if day care is provided (No, it wasn't. But with a 4 month old who hasn't been in day care yet, I probably wouldn't have used it.)
 - Too hungover to politely not stare
 
-### Pros &amp; Cons
+### Pros & Cons
 
 And here is how I felt after the conference, regarding pros and cons on bringing the baby:
 
 <table cellpadding="0" cellspacing="0"><tbody><tr> <td style="padding-right:10px;" valign="top" width="50%"><b>Pros</b><br/>
 <ul><li>A baby is a good conversation starter, which is beneficial in a generally introverted crowd.</li>
-<li>I realized there are helpful &amp; nice people in the world who offered to help plenty of times.</li>
+<li>I realized there are helpful & nice people in the world who offered to help plenty of times.</li>
 <li>The baby was happiest staying with me.</li>
 </ul></td> <td style="padding-left:10px;" valign="top" width="50%"><b>Cons</b><br/>
 <ul><li>Because children were the focus of many conversations, I missed out on talking shop a bit.</li>
@@ -59,7 +59,7 @@ And finally, some tips:
 - Be agile and adapt. Most parents are already probably doing this with a 4 month old.
 - Manage your expectations:
 
-        - Expect the conference with a baby to be tiring &amp; challenging at times.
+        - Expect the conference with a baby to be tiring & challenging at times.
         - Expect stares.
         - Expect you won't make it to every session you want, so make a point of talking to others to find out their favorite sessions.
 

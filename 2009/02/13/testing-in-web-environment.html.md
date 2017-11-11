@@ -74,17 +74,16 @@ operations on a web site much like a browser, and to test the results
 in various ways. By way of example, here is a script that operates on
 the End Point website:
 
-> ~~~
+> ```
 > use strict;
 > use Test::WWW::Mechanize;
-> use Test::More tests =&gt; 4;
-> my $mech = Test::WWW::Mechanize-&gt;new();
-> $mech-&gt;get_ok('http://www.endpoint.com', 'Home page fetched');
-> $mech-&gt;title_like(qr/End Point/, 'Page mentions us');
-> $mech-&gt;follow_link_ok({ text_regex =&gt; qr/Team Bios/ }, 'Found team bios');
-> $mech-&gt;content_contains('Jeff Boes', 'Author was mentioned');
-> ~~~
->
+> use Test::More tests => 4;
+> my $mech = Test::WWW::Mechanize->new();
+> $mech->get_ok('http://www.endpoint.com', 'Home page fetched');
+> $mech->title_like(qr/End Point/, 'Page mentions us');
+> $mech->follow_link_ok({ text_regex => qr/Team Bios/ }, 'Found team bios');
+> $mech->content_contains('Jeff Boes', 'Author was mentioned');
+> ```
 
 This test declares that we will run four tests.
 It initializes the test framework with a call to the "new" method.

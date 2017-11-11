@@ -32,7 +32,7 @@ I asked [Rob Snell](http://www.robsnell.com/), author of *Starting a Yahoo Busin
 Another recurring topic I observed at PubCon was that often internal SEO processes are a much bigger obstacle than the actual SEO work. It's important to get the entire team on your side. Alex Bennert of Wall Street Journal discussed understanding your audience when presenting SEO. Here are some examples of appropriate topics for a given audience:
 
 - IT Folks: sitemaps, duplicate content (parameter issues, pagination, sorting, crawl allocation, dev servers), canonical link elements, 301 redirects, intuitive link structure
-- Biz Dev &amp; Marketing Folks: syndication of content, evaluation of vendor products &amp; integration, assessing SEO value and link equity of partner sites, microsites, leveraging multiple assets
+- Biz Dev & Marketing Folks: syndication of content, evaluation of vendor products & integration, assessing SEO value and link equity of partner sites, microsites, leveraging multiple assets
 - Content Developers: on page elements best practices, linking, anchor text best practices, keyword research, keyword trends, analytics
 - Management: progress, timelines, roadmaps
 

@@ -30,7 +30,7 @@ LOG: duration: 276945.482 ms statement: COPY public.sales
 2011-08-29 21:29:18 UTC tony@quadrant [17176]
 LOG: duration: 8229.237 ms execute dbdpg_p29855_1: SELECT 
 id, singer, track FROM album JOIN artist ON artist.id = 
-album.singer WHERE id &lt; 1000 AND track &lt;&gt; 1
+album.singer WHERE id < 1000 AND track <> 1
 ```
 
 However, the PGSI program was born of the need to look at ***all*** the queries in the database, not just the slowest-running ones; the cumulative effect of many short queries can have much more of an impact on the server than a smaller number of long-running queries. Thus, PGSI looks not only at how long a query takes to run, but how many times it has run in a certain period, as well as how often it runs. All of this information is put together to give a score to each normalized query, known as the "system impact". Like the costs on a Postgres explain plan, this is a unit-less number and of little importance in and of itself - the important thing is to compare it to the other queries to see the relative impact. We also have that report emailed out, it looks similar to this (this is a text version of the HTML produced):
@@ -56,7 +56,7 @@ Query System Impact : SELECT
 
  SELECT *
   FROM albums
-  WHERE track &lt;&gt; ? AND artist = ?
+  WHERE track <> ? AND artist = ?
   ORDER BY artist, track
 
 ```
@@ -88,7 +88,7 @@ Now for the tricky bit: extracting out just the section of logs that we want and
   | tail -1` \
   | sed -n '/statement" changed to "200"/,/statement" changed to "0"/ p' \
   | tac \
-  | bin/pgsi.pl --quiet &gt; tmp/pgsi.html &amp;&amp; bin/send_pgsi.pl
+  | bin/pgsi.pl --quiet > tmp/pgsi.html && bin/send_pgsi.pl
 ## Again, the above is all one line
 ```
 

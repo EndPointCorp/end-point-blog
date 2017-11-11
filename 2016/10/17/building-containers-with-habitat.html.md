@@ -21,7 +21,7 @@ For the most basic Habitat build, you must define a plan.sh file which will cont
 pkg_origin=daehlie
 pkg_name=mytutorialapp
 pkg_version=0.3.0
-pkg_maintainer="Kirk Harr &lt;kharr@endpoint.com&gt;"
+pkg_maintainer="Kirk Harr <kharr@endpoint.com>"
 pkg_license=()
 pkg_source=https://s3-us-west-2.amazonaws.com/${pkg_name}/${pkg_name}-${pkg_version}.tar.gz
 pkg_shasum=e4e988d9216775a4efa4f4304595d7ff31bdc0276d5b7198ad6166e13630aaa9

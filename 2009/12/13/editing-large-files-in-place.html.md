@@ -60,7 +60,7 @@ To simulate what happened, let's create a database dump and then bloat it until 
 ```bash
 $ cd /home/greg/ramtest
 
-$ pg_dumpall &gt; data.20091215.pg
+$ pg_dumpall > data.20091215.pg
 
 $ ls -l data.20091215.pg
 -rw-r--r-- 1 greg greg 3685 2009-12-15 10:42 data.20091215.pg

@@ -18,7 +18,7 @@ sub redirect {
    my ($url, $status) = @_;
    $status ||= 302;
    $Vend::StatusLine = qq|Status: $status moved\nLocation: $url\n|;
-   $::Pragma-&gt;{download} = 1;
+   $::Pragma->{download} = 1;
    my $body = '';
    ::response($body);
    $Vend::Sent = 1;
@@ -31,22 +31,22 @@ The code for the sub that checks to see if we need to redirect looks like this:
 ```perl
 sub redirect_old_links {
    my $db = Vend::Data::database_exists_ref('page_redirects');
-   my $dbh = $db-&gt;dbh();
-   my $current_url = $::Tag-&gt;env({ arg =&gt; "REQUEST_URI" });
-   my $normal_server = $::Variable-&gt;{NORMAL_SERVER};
-   if ( ! exists $::Scratch-&gt;{redirects} ) {
-       my $sth = $dbh-&gt;prepare(q{select * from page_redirects});
-       my $rc  = $sth-&gt;execute();
-       while ( my ($old,$new) = $sth-&gt;fetchrow_array() ) {
-           $::Scratch-&gt;{redirects}{"$old"} = $new;
+   my $dbh = $db->dbh();
+   my $current_url = $::Tag->env({ arg => "REQUEST_URI" });
+   my $normal_server = $::Variable->{NORMAL_SERVER};
+   if ( ! exists $::Scratch->{redirects} ) {
+       my $sth = $dbh->prepare(q{select * from page_redirects});
+       my $rc  = $sth->execute();
+       while ( my ($old,$new) = $sth->fetchrow_array() ) {
+           $::Scratch->{redirects}{"$old"} = $new;
        }
-       $sth-&gt;finish();
+       $sth->finish();
    }
-   if ( exists $::Scratch-&gt;{redirects}  ) {
-       if ( exists $::Scratch-&gt;{redirects}{"$current_url"} ) {
-           my $path = $normal_server.$::Scratch-&gt;{redirects}{"$current_url"};
-           my $Sub = Vend::Subs-&gt;new;
-           $Sub-&gt;redirect($path, '301');
+   if ( exists $::Scratch->{redirects}  ) {
+       if ( exists $::Scratch->{redirects}{"$current_url"} ) {
+           my $path = $normal_server.$::Scratch->{redirects}{"$current_url"};
+           my $Sub = Vend::Subs->new;
+           $Sub->redirect($path, '301');
            return;
        } else {
           return;

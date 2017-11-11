@@ -50,10 +50,10 @@ The import statement first "searches for the named module, then it binds the res
 Python 3.4.1 (default, Jul 15 2014, 13:05:56) 
 [GCC 4.8.2] on linux
 Type "help", "copyright", "credits" or "license" for more information.
-&gt;&gt;&gt; import re
-&gt;&gt;&gt; re
-&lt;module 're' from '/home/miguel/.pythonbrew/pythons/Python-3.4.1/lib/python3.4/re.py'&gt;
-&gt;&gt;&gt; re.sub('s', '', 'bananas')
+>>> import re
+>>> re
+<module 're' from '/home/miguel/.pythonbrew/pythons/Python-3.4.1/lib/python3.4/re.py'>
+>>> re.sub('s', '', 'bananas')
 'banana'
 ```
 
@@ -62,64 +62,64 @@ Here the import statement searches for a module named **re** then binds the resu
 A call to function __import__() performs the module search but not the binding; that is left to you. Example:
 
 ```bash
-&gt;&gt;&gt; muh_regex = __import__('re')
-&gt;&gt;&gt; muh_regex
-&lt;module 're' from '/home/miguel/.pythonbrew/pythons/Python-3.4.1/lib/python3.4/re.py'&gt;
-&gt;&gt;&gt; muh_regex.sub('s', '', 'bananas')
+>>> muh_regex = __import__('re')
+>>> muh_regex
+<module 're' from '/home/miguel/.pythonbrew/pythons/Python-3.4.1/lib/python3.4/re.py'>
+>>> muh_regex.sub('s', '', 'bananas')
 'banana'
 ```
 
 Your third option is to use importlib.import_module() which, like __import__(), only performs the search:
 
 ```bash
-&gt;&gt;&gt; import importlib
-&gt;&gt;&gt; muh_regex = importlib.import_module('re')
-&gt;&gt;&gt; muh_regex
-&lt;module 're' from '/home/miguel/.pythonbrew/pythons/Python-3.4.1/lib/python3.4/re.py'&gt;
-&gt;&gt;&gt; muh_regex.sub('s', '', 'bananas')
+>>> import importlib
+>>> muh_regex = importlib.import_module('re')
+>>> muh_regex
+<module 're' from '/home/miguel/.pythonbrew/pythons/Python-3.4.1/lib/python3.4/re.py'>
+>>> muh_regex.sub('s', '', 'bananas')
 'banana'
 ```
 
 Let's now talk about how Python searches for modules. The first place it looks is in sys.modules, which is a dictionary that caches previously imported modules:
 
 ```bash
-&gt;&gt;&gt; import sys
-&gt;&gt;&gt; 're' in sys.modules
+>>> import sys
+>>> 're' in sys.modules
 False
-&gt;&gt;&gt; import re
-&gt;&gt;&gt; 're' in sys.modules
+>>> import re
+>>> 're' in sys.modules
 True
-&gt;&gt;&gt; sys.modules['re']
-&lt;module 're' from '/home/miguel/.pythonbrew/pythons/Python-3.4.1/lib/python3.4/re.py'&gt;
+>>> sys.modules['re']
+<module 're' from '/home/miguel/.pythonbrew/pythons/Python-3.4.1/lib/python3.4/re.py'>
 ```
 
 If the module is not found in sys.modules Python searches sys.meta_path, which is a list that contains finder objects. Finders, along with loaders, are objects in Python's import protocol. The job of a finder is to return a module spec, using method [find_spec()](https://docs.python.org/3/library/importlib.html#importlib.abc.MetaPathFinder.find_spec), containing the module's import-related information which the loader then uses to load the actual module. Let's see what I have in my sys.meta_path:
 
 ```bash
-&gt;&gt;&gt; sys.meta_path
-[&lt;class '_frozen_importlib.BuiltinImporter'&gt;, &lt;class '_frozen_importlib.FrozenImporter'&gt;, &lt;class '_frozen_importlib.PathFinder'&gt;]
+>>> sys.meta_path
+[<class '_frozen_importlib.BuiltinImporter'>, <class '_frozen_importlib.FrozenImporter'>, <class '_frozen_importlib.PathFinder'>]
 ```
 
 Python will use each finder object in sys.meta_path until the module is found and will raise an ImportError if it is not found. Let's call find_spec() with parameter 're' on each of these finder objects:
 
 ```bash
-&gt;&gt;&gt; sys.meta_path[0].find_spec('re')
-&gt;&gt;&gt; sys.meta_path[1].find_spec('re')
-&gt;&gt;&gt; sys.meta_path[2].find_spec('re')
-ModuleSpec(name='re', loader=&lt;_frozen_importlib.SourceFileLoader object at 0x7ff7eb314438&gt;, origin='/home/miguel/.pythonbrew/pythons/Python-3.4.1/lib/python3.4/re.py')
+>>> sys.meta_path[0].find_spec('re')
+>>> sys.meta_path[1].find_spec('re')
+>>> sys.meta_path[2].find_spec('re')
+ModuleSpec(name='re', loader=<_frozen_importlib.SourceFileLoader object at 0x7ff7eb314438>, origin='/home/miguel/.pythonbrew/pythons/Python-3.4.1/lib/python3.4/re.py')
 ```
 
 The first finder knows how to find built-in modules and since **re** is not a built-in module, it returns None.
 
 ```bash
-&gt;&gt;&gt; 're' in sys.builtin_module_names
+>>> 're' in sys.builtin_module_names
 False
 ```
 
 The second finder knows how to find [frozen modules](), which **re** is not. The third knows how to find modules from a list of path entries called an import path. For **re** the import path is sys.path but for subpackages the import path can be the parent's __path__ attribute.
 
 ```bash
-&gt;&gt;&gt;sys.path
+>>>sys.path
 ['', '/home/miguel/.pythonbrew/pythons/Python-3.4.1/lib/python3.4/site-packages/distribute-0.6.49-py3.4.egg', '/home/miguel/.pythonbrew/pythons/Python-3.4.1/lib', '/home/miguel/.pythonbrew/pythons/Python-3.4.1/lib/python34.zip', '/home/miguel/.pythonbrew/pythons/Python-3.4.1/lib/python3.4', '/home/miguel/.pythonbrew/pythons/Python-3.4.1/lib/python3.4/plat-linux', '/home/miguel/.pythonbrew/pythons/Python-3.4.1/lib/python3.4/lib-dynload', '/home/miguel/.pythonbrew/pythons/Python-3.4.1/lib/python3.4/site-packages', '/home/miguel/.pythonbrew/pythons/Python-3.4.1/lib/python3.4/site-packages/setuptools-0.6c11-py3.4.egg-info']
 ```
 

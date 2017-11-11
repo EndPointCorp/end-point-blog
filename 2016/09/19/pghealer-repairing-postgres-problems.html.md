@@ -33,7 +33,7 @@ Data page checksums are enabled.
 creating directory dojo ... ok
 creating subdirectories ... ok
 ...
-$ echo port=9999 &gt;&gt; dojo/postgresql.conf
+$ echo port=9999 >> dojo/postgresql.conf
 $ pg_ctl start -D dojo -l log.dojo.txt
 server starting
 $ createdb -p 9999 $USER
@@ -60,7 +60,7 @@ $ make install
 gcc -Wall -Wmissing-prototypes ... -c -o pg_healer.o pg_healer.c
 gcc -Wall -Wmissing-prototypes ... -shared -o pg_healer.so pg_healer.o
 ...
-$ echo "shared_preload_libraries = 'pg_healer'" &gt;&gt; dojo/postgresql.conf
+$ echo "shared_preload_libraries = 'pg_healer'" >> dojo/postgresql.conf
 $ pg_ctl restart -D dojo -l log.dojo.txt
 waiting for server to shut down.... done
 server stopped

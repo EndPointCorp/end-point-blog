@@ -9,7 +9,7 @@ As I [mentioned previously](http://blog.endpoint.com/2009/05/google-io-2009-day-
 
 This is apparently easy to do by first copying all the contacts from the Nokia 6126 internal memory to the SIM card, then moving the SIM card to the Ion and importing the contacts. But that only works if all your contacts fit on the SIM card. If not, they're truncated, and you have to delete many contacts on the Nokia to fit more, which would be a nonreversable move.
 
-Several posts describe ways to do the export and import, such as [this one](http://blog.lickmyear.org/2009/01/story-of-nokia-and-android-contact.html) that didn't really apply to my phone, and [this one that involves VCF export &amp; import](http://www.javaworld.com/community/node/2184) which I didn't see a way to do.
+Several posts describe ways to do the export and import, such as [this one](http://blog.lickmyear.org/2009/01/story-of-nokia-and-android-contact.html) that didn't really apply to my phone, and [this one that involves VCF export & import](http://www.javaworld.com/community/node/2184) which I didn't see a way to do.
 
 Ultimately I found an article that described [Nokia's PC Suite](https://www.nokiausa.com/get-support-and-software/software/nokia-suites-for-your-pc) software that I'd never heard of before, which I downloaded on an old Windows machine and used to download the contacts from the phone via Bluetooth, then export to a CSV file and import into Gmail. So far, so good.
 

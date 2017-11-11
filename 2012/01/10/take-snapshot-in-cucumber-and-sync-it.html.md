@@ -54,13 +54,13 @@ I didn't know this until recently but you can [run dropbox on a linux server](ht
 For 32 bit: 
 
 ```nohighlight
-cd ~ &amp;&amp; wget -O - http://www.dropbox.com/download?plat=lnx.x86 | tar xzf -
+cd ~ && wget -O - http://www.dropbox.com/download?plat=lnx.x86 | tar xzf -
 ```
 
 or 64 bit: 
 
 ```nohighlight
-cd ~ &amp;&amp; wget -O - http://www.dropbox.com/download?plat=lnx.x86_64 | tar xzf -
+cd ~ && wget -O - http://www.dropbox.com/download?plat=lnx.x86_64 | tar xzf -
 ```
 
 You'll also need a small python script for working with the daemon.  You can download it from the web site or from [here](https://www.dropbox.com/download?dl=packages/dropbox.py).

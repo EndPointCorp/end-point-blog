@@ -19,7 +19,7 @@ git clone git://github.com/sstephenson/rbenv.git .rbenv
 Adjust your users path to find the newly installed commands
 
 ```nohighlight
-echo 'export PATH=$HOME/.rbenv/shims:$HOME/.rbenv/bin:$PATH' &gt;&gt; ~/.bash_profile
+echo 'export PATH=$HOME/.rbenv/shims:$HOME/.rbenv/bin:$PATH' >> ~/.bash_profile
 ```
 Install Ruby version 1.9.3-p0
 
@@ -49,16 +49,16 @@ The normal camps setup assumes you are going to be using Apache for the web serv
 ```nohighlight
 skip_apache:1
 httpd_start:/usr/sbin/nginx -c __CAMP_PATH__/nginx/nginx.conf
-httpd_stop:pid=`cat __CAMP_PATH__/var/run/nginx.pid 2&gt;/dev/null` &amp;&amp; kill $pid
-httpd_restart:pid=`cat __CAMP_PATH__/var/run/nginx.pid 2&gt;/dev/null` &amp;&amp; kill -HUP $pid || /usr/sbin/nginx -c __CAMP_PATH__/nginx/nginx.conf
+httpd_stop:pid=`cat __CAMP_PATH__/var/run/nginx.pid 2>/dev/null` && kill $pid
+httpd_restart:pid=`cat __CAMP_PATH__/var/run/nginx.pid 2>/dev/null` && kill -HUP $pid || /usr/sbin/nginx -c __CAMP_PATH__/nginx/nginx.conf
 app_start:__CAMP_PATH__/bin/start-app
-app_stop:pid=`cat __CAMP_PATH__/var/run/unicorn.pid 2&gt;/dev/null` &amp;&amp; kill $pid
-app_restart:pid=`cat __CAMP_PATH__/var/run/unicorn.pid 2&gt;/dev/null` &amp;&amp; kill $pid ; sleep 5 ;  __CAMP_PATH__/bin/start-app
+app_stop:pid=`cat __CAMP_PATH__/var/run/unicorn.pid 2>/dev/null` && kill $pid
+app_restart:pid=`cat __CAMP_PATH__/var/run/unicorn.pid 2>/dev/null` && kill $pid ; sleep 5 ;  __CAMP_PATH__/bin/start-app
 ```
 The contents of the start-app script is simply.
 
 ```nohighlight
-cd __CAMP_PATH__ &amp;&amp; bundle exec unicorn_rails -c __CAMP_PATH__/config/unicorn.conf.rb -D
+cd __CAMP_PATH__ && bundle exec unicorn_rails -c __CAMP_PATH__/config/unicorn.conf.rb -D
 ```
 
 You could create one script that handles all aspects of start, stop and restart if you wanted. This setup really wasn't much harder than a normal Ruby on Rails setup. The added time here required to set up rbenv per camp user is offset by the fact that users can manage and try multiple versions of ruby.

@@ -42,7 +42,7 @@ I looked for $pid/qemu-dm in the PID/Program Name column and could then see the 
 So I set up an ssh tunnel to the server for my VNC traffic:
 
 ```nohighlight
-ssh -f -N -L 5903:localhost:5903 root@$remote_host &amp;
+ssh -f -N -L 5903:localhost:5903 root@$remote_host &
 ```
 
 Then I opened the default Ubuntu/GNOME VNC viewer, labeled "Remote Desktop Viewer" under the Internet menu. This program is actually called Vinagre, and is basic but works. I connected to localhost:5903, since I'd forwarded my own local TCP port 5903 to the remote port 5903.

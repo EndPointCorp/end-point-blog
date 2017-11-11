@@ -17,7 +17,7 @@ Quoting directly from the main site:
 
 This program allows to see in real-time (top-like) or from the start of the server, stats for get, set, delete, increment, decrement, evictions, reclaimed, cas command, as well as server stats (network, items, server version) with googlecharts and server internal configuration
 
-You can go further to see each server slabs, occupation, memory wasted and items (key &amp; value).
+You can go further to see each server slabs, occupation, memory wasted and items (key & value).
 
 Another part can execute commands to any memcached server : get, set, delete, flush_all, as well as execute any commands (like stats) with telnet
 

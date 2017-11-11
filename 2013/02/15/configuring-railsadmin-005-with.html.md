@@ -64,9 +64,9 @@ RailsAdmin version 0.0.5 was still acting up, and none of WYSIWYG fields were re
 RailsAdmin rendered Ckeditor-enhanced textareas with the following markup:
 
 ```html
-&lt;textarea cols="48" data-options="{"jspath":"/assets/ckeditor/ckeditor.js","
+<textarea cols="48" data-options="{"jspath":"/assets/ckeditor/ckeditor.js","
 base_location":"/assets/ckeditor/","options":{"customConfig":"/assets/ckeditor/config.js"}}"
-data-richtext="ckeditor" id="testimonial_content" name="testimonial[content]" rows="3"&gt;
+data-richtext="ckeditor" id="testimonial_content" name="testimonial[content]" rows="3">
 ```
 
 Please, note the explicit hard-coded call to "/assets/ckeditor/config.js". During asset precompilation Ckeditor gem would compile the source from vendor/assets/ckeditor folder into the special resource package that looked like this:

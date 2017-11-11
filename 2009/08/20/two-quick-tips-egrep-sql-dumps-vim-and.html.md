@@ -2,7 +2,7 @@
 author: Selena Deckelmann
 gh_issue_number: 188
 tags: postgres, tips
-title: "Two quick tips: egrep &amp; SQL dumps, Vim and deleting things that don’t match"
+title: "Two quick tips: egrep & SQL dumps, Vim and deleting things that don’t match"
 ---
 
 Sometimes, I just don't want to restore a full SQL dump.  The restore might take too long, and maybe I just want a small subset of the records anyway.

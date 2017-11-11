@@ -40,8 +40,8 @@ Obviously the first-level parent domain will be covered by most SSL products, un
 So here's an example to generate a CSR which will cover *.your-new-domain.com and your-new-domain.com, all in one command:
 
 ```bash
-openssl req -new -sha256 -nodes -out \*.your-new-domain.com.csr -newkey rsa:2048 -keyout \*.your-new-domain.com.key -config &lt;(
-cat &lt;&lt;-EOF
+openssl req -new -sha256 -nodes -out \*.your-new-domain.com.csr -newkey rsa:2048 -keyout \*.your-new-domain.com.key -config <(
+cat <<-EOF
 [req]
 default_bits = 2048
 prompt = no
@@ -75,7 +75,7 @@ That's why I prefer creating a dedicated file (that you can also reuse in future
 Of course you can use your text editor of choice, I used HEREDOC mostly because it shows better through blog posts in my opinion.
 
 ```bash
-cat &gt; csr_details.txt &lt;&lt;-EOF
+cat > csr_details.txt <<-EOF
 [req]
 default_bits = 2048
 prompt = no
@@ -101,7 +101,7 @@ DNS.2 = www.your-new-domain.com
 EOF
 
 # Let's call openssl now by piping the newly created file in
-openssl req -new -sha256 -nodes -out \*.your-new-domain.com.csr -newkey rsa:2048 -keyout \*.your-new-domain.com.key -config &lt;( cat csr_details.txt )
+openssl req -new -sha256 -nodes -out \*.your-new-domain.com.csr -newkey rsa:2048 -keyout \*.your-new-domain.com.key -config <( cat csr_details.txt )
 ```
 
 Now with that I'm able to generate proper multi-domain CSRs effectively.

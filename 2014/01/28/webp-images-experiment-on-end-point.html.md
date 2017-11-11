@@ -9,7 +9,7 @@ WebP is an image format for RGB images on the web that supports both lossless (l
 
 Its main attraction is smaller file size at similar quality level. It also supports an alpha channel (transparency) and animation for both lossless and lossy images. Thus it is the first image format that offers the transparency of PNG in lossy images at much smaller file size, and animation only available in the archaic limited-color GIF format.
 
-## Comparing quality &amp; size
+## Comparing quality & size
 
 While considering WebP for an experiment on our own website, we were very impressed by its file size to quality ratio. In our tests it was even better than generally claimed. Here are a few side-by-side examples from our site. You'll only see the WebP version if your browser supports it:
 

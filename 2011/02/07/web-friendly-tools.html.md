@@ -35,8 +35,8 @@ A "kit" I created for use on a personal site.
 I signed up for a free Typekit account and created a "kit" with 2 fonts to be used on my personal site. After publishing my kit, I implement the kit by including some Javascript (shown below), and adding my typekit classes (tk-fertigo-script and tk-ff-enzo-web) to the regions where the kit fonts should apply.
 
 ```nohighlight
-&lt;script type="text/javascript" src="http://use.typekit.com/kitid.js"&gt;&lt;/script&gt;
-&lt;script type="text/javascript"&gt;try{Typekit.load();}catch(e){}&lt;/script&gt;
+<script type="text/javascript" src="http://use.typekit.com/kitid.js"></script>
+<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 ```
 
 I was impressed by typekit's font rendering speed. There are several other font hosting services out there that offer similar paid plans. Regardless of which service is chosen, a hosted font service is an affordable way to use "pretty" fonts, have fast rendering speeds, and have a site with SEO-friendly text.

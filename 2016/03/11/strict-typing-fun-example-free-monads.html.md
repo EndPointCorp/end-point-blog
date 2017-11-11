@@ -92,7 +92,7 @@ app = do
   install "postgresql-server"
   mkDir "/var/run/the-app" True
   cd "/var/run/the-app"
-  ifNotExists "the-app.log" $ touch "the-app.log" &gt;&gt; continue
+  ifNotExists "the-app.log" $ touch "the-app.log" >> continue
   done
 ```
 
@@ -106,7 +106,7 @@ Let’s define a set of data types linked with the function that we’ll use as 
 
 ```haskell
 class InterpretingContext a where
-  run :: Free Provision () -&gt; a
+  run :: Free Provision () -> a
 ```
 
 The above just says that if we want to use the function **run** to turn the AST wrapped in a monad to some concrete value (by executing it) — we need to implement this function for the type of the concrete value we’d like to get out of it.

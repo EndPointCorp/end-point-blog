@@ -15,9 +15,9 @@ title: A Performance Case Study
 
 <table cellpadding="0" celspacing="0" width="100%">
 <tbody><tr><td>
-<img src="http://chart.apis.google.com/chart?chxl=0:|Step+%234|Step+%233|Step+%232|Step+%231|Original&amp;chxr=0,0,15|1,0,15&amp;chxt=y,t&amp;chbh=a&amp;chs=300x225&amp;cht=bhg&amp;chco=A2C180&amp;chds=0,15&amp;chd=t:13.412,11.957,10.561,10.243,9.212&amp;chtt=First+Request+Load+Time+(seconds)"/>
+<img src="http://chart.apis.google.com/chart?chxl=0:|Step+%234|Step+%233|Step+%232|Step+%231|Original&chxr=0,0,15|1,0,15&chxt=y,t&chbh=a&chs=300x225&cht=bhg&chco=A2C180&chds=0,15&chd=t:13.412,11.957,10.561,10.243,9.212&chtt=First+Request+Load+Time+(seconds)"/>
 </td><td>
-<img src="http://chart.apis.google.com/chart?chxl=0:|Step+%234|Step+%233|Step+%232|Step+%231|Original&amp;chxr=0,0,15|1,0,15&amp;chxt=y,t&amp;chbh=a&amp;chs=300x225&amp;cht=bhg&amp;chco=A2C180&amp;chds=0,15&amp;chd=t:7.329,3.717,3.278,2.434,2.563&amp;chtt=Repeat+Request+Load+Time+(seconds)"/>
+<img src="http://chart.apis.google.com/chart?chxl=0:|Step+%234|Step+%233|Step+%232|Step+%231|Original&chxr=0,0,15|1,0,15&chxt=y,t&chbh=a&chs=300x225&cht=bhg&chco=A2C180&chds=0,15&chd=t:7.329,3.717,3.278,2.434,2.563&chtt=Repeat+Request+Load+Time+(seconds)"/>
 </td></tr></tbody></table>
 
 </td>

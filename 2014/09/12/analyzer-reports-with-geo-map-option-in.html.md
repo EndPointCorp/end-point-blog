@@ -19,12 +19,12 @@ The Mondrian schema has two main categories called Dimensions and Measures. The 
 #### Sample Level with Annotation:
 
 ```xml
-        &lt;Level name="Country Name" visible="true" column="country" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never"&gt;
-          &lt;Annotations&gt;
-            &lt;Annotation name="Data.Role"&gt;&lt;![CDATA[Geography]]&gt;&lt;/Annotation&gt;
-            &lt;Annotation name="Geo.Role"&gt;&lt;![CDATA[country]]&gt;&lt;/Annotation&gt;
-          &lt;/Annotations&gt;
-        &lt;/Level&gt;
+        <Level name="Country Name" visible="true" column="country" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+          <Annotations>
+            <Annotation name="Data.Role"><![CDATA[Geography]]></Annotation>
+            <Annotation name="Geo.Role"><![CDATA[country]]></Annotation>
+          </Annotations>
+        </Level>
 ```
 
  

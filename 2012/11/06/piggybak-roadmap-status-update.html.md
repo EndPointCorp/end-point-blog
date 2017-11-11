@@ -74,7 +74,7 @@ If we take a look the roadmap list a month ago, we can cross several items off f
 - Line Item Rearchitecture to support future work on Gift Certificates, Discounts
 - Gift Certificate, Discount Support
 - Advanced Taxonomy
-- Reviews &amp; Ratings
+- Reviews & Ratings
 
 A few new things have recently been added to the list:
 

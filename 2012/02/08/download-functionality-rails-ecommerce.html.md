@@ -12,12 +12,12 @@ I recently had to build out downloadable product support for a client project ru
 Piggybak is a pluggable ecommerce engine. To make any models inside your application "sellable", the class method acts_as_variant must be called for any class. This provides a nice flexibility in defining various sellable models throughout the application. Given that I will sell tracks in this example, my first step to supporting downloadable content is adding an is_downloadable boolean and attached file fields to the migration for a sellable item. The migration looks like this:
 
 ```ruby
-class CreateTracks &lt; ActiveRecord::Migration
+class CreateTracks < ActiveRecord::Migration
   def change
     create_table :tracks do |t|
       # a bunch of fields specific to tracks
 
-      t.boolean :is_downloadable, :nil =&gt; false, :default =&gt; false
+      t.boolean :is_downloadable, :nil => false, :default => false
 
       t.string :downloadable_file_name
       t.string :downloadable_content_type
@@ -33,12 +33,12 @@ end
 Next, I update my class definition to make tracks sellable and hook in paperclip functionality:
 
 ```ruby
-class Track &lt; ActiveRecord::Base
+class Track < ActiveRecord::Base
   acts_as_variant
 
   has_attached_file :downloadable,
-                    :path =&gt; ":rails_root/downloads/:id/:basename.:extension",
-                    :url =&gt; "downloads/:id/:basename.:extension"
+                    :path => ":rails_root/downloads/:id/:basename.:extension",
+                    :url => "downloads/:id/:basename.:extension"
 end
 ```
 
@@ -103,18 +103,18 @@ After a user has purchased downloadable products, they'll need a way to access t
 With a user instance method (current_user.downloads_by_order), the download index page iterates through orders with downloads to display orders and their downloads. The user method for generating orders and downloads shown here:
 
 ```ruby
-class User &lt; ActiveRecord::Base
+class User < ActiveRecord::Base
   ...
   def downloads_by_order
     self.piggybak_orders.inject([]) do |arr, order|
       downloads = []
       order.line_items.each do |line_item|
-        downloads &lt;&lt; line_item.variant.item if line_item.variant.item.is_downloadable?
+        downloads << line_item.variant.item if line_item.variant.item.is_downloadable?
       end
 
-      arr &lt;&lt; {
-          :order =&gt; order,
-          :downloads =&gt; downloads
+      arr << {
+          :order => order,
+          :downloads => downloads
       } if downloads.any?
       arr
     end
@@ -129,14 +129,14 @@ The above method would be a good candidate for Rails low-level caching or altern
 As I mentioned above, download files should not be stored in the public directory for public accessibility. From the download list page, the "Download Now" link maps to the following method in the downloads controller:
 
 ```ruby
-class DownloadsController &lt; ApplicationController
+class DownloadsController < ApplicationController
   def show
     item = ProductType.find(params[:id])
 
     if current_user.downloads.include?(item)
       send_file "#{Rails.root}/#{item.downloadable.url(:default, false)}"
     else
-      redirect_to(root_url, :notice =&gt; "You do not have access to this content.")
+      redirect_to(root_url, :notice => "You do not have access to this content.")
     end
   end
 end

@@ -27,7 +27,7 @@ First, I create Rails Admin action, which inherits from RailsAdmin::Config::Acti
 module RailsAdmin
   module Config
     module Actions
-      class SpecialExport &lt; RailsAdmin::Config::Actions::Base
+      class SpecialExport < RailsAdmin::Config::Actions::Base
         register_instance_option :collection do
           true
         end
@@ -40,7 +40,7 @@ module RailsAdmin
           Proc.new do
             if request.post?
               # generate CSV data
-              send_data csv_data, :filename =&gt; "export.csv", :type =&gt; "application/csv"
+              send_data csv_data, :filename => "export.csv", :type => "application/csv"
             end
             # renders view otherwise
           end
@@ -62,7 +62,7 @@ Next, I register and activate the action in the RailsAdmin configuration. Here's
 module RailsAdmin
   module Config
     module Actions
-      class SpecialExport &lt; RailsAdmin::Config::Actions::Base
+      class SpecialExport < RailsAdmin::Config::Actions::Base
         RailsAdmin::Config::Actions.register(self)
       end
     end
@@ -84,7 +84,7 @@ Next up, I modify [CanCan's abilities](https://github.com/ryanb/cancan#1-define-
 class Ability
   include CanCan::Ability
   def initialize(user)
-    if user &amp;&amp; user.is_admin?
+    if user && user.is_admin?
       #existing user authentication
       
       cannot :special_export, :all

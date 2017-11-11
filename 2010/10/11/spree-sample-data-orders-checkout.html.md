@@ -28,8 +28,8 @@ order_1:
   number: "R00000001"
   state: new
   item_total: 20.00
-  created_at: &lt;%= Time.now %&gt;
-  completed_at: &lt;%= Time.now %&gt;
+  created_at: <%= Time.now %>
+  completed_at: <%= Time.now %>
   total: 20.00
   adjustment_total: 0.00
 </pre>
@@ -92,7 +92,7 @@ test_variant:
 test_product:
   name: Test Product 1
   description: Lorem ipsum...
-  available_on: &lt;%= Time.zone.now.to_s(:db) %&gt;
+  available_on: <%= Time.zone.now.to_s(:db) %>
   count_on_hand: 10
   permalink: test-product
 </pre>

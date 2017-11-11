@@ -10,7 +10,7 @@ title: PostgreSQL odd checkpoint failure
 Nothing strikes fear into the heart of a DBA like error messages, particularly ones which indicate that there may be data corruption.  One such situation happened recently to us, when we ran into a recent unusual situation in an upgrade to PostgreSQL 8.1.21.  We had updated the software and manually been running a REINDEX DATABASE command, when we started to notice some errors being reported on the front-end.  We decided to dump the database in question to ensure we had a backup to return to, however we still ended up with more messages:
 
 ```bash
-  pg_dump -Fc database1 &gt; pgdump.database1.archive
+  pg_dump -Fc database1 > pgdump.database1.archive
 
   pg_dump: WARNING:  could not write block 1 of 1663/207394263/443523507
   DETAIL:  Multiple failures --- write error may be permanent.

@@ -2,7 +2,7 @@
 author: Jon Jensen
 gh_issue_number: 673
 tags: hosting, redhat, sysadmin
-title: cPanel Exim false positive failure &amp; restart fix
+title: cPanel Exim false positive failure & restart fix
 ---
 
 I'm not a big fan of add-on graphical control panels for Linux such as cPanel, Webmin, Ensim, etc. They deviate from the distributor's standard packages and locations for files, often simultaneously tightening security in various ways and weakening security practically by making several more remotely accessible administration logins.
@@ -13,7 +13,7 @@ However, within a few minutes we started getting emailed reports from the cPanel
 
 ```
 Date: Tue, 24 Jul 2012 14:21:05 -0400
-From: cPanel ChkServd Service Monitor &lt;cpanel@[SNIP]&gt;
+From: cPanel ChkServd Service Monitor <cpanel@[SNIP]>
 To: [SNIP]
 Subject: exim on [SNIP] status: failed
 
@@ -22,21 +22,21 @@ exim failed @ Tue Jul 24 14:21:04 2012. A restart was attempted automagically.
 Service Check Method:  [socket connect]
 
 Reason: TCP Transaction Log:
-&lt;&lt; 220-[SNIP] ESMTP Exim 4.77 #2 Tue, 24 Jul 2012 14:21:04 -0400
-&lt;&lt;
-&lt;&lt;
-&gt;&gt; EHLO localhost
-&lt;&lt; 250-[SNIP] Hello localhost.localdomain [127.0.0.1]
-&lt;&lt;
-&lt;&lt;
-&lt;&lt;
-&lt;&lt;
-&lt;&lt;
-&gt;&gt; AUTH PLAIN
+<< 220-[SNIP] ESMTP Exim 4.77 #2 Tue, 24 Jul 2012 14:21:04 -0400
+<<
+<<
+>> EHLO localhost
+<< 250-[SNIP] Hello localhost.localdomain [127.0.0.1]
+<<
+<<
+<<
+<<
+<<
+>> AUTH PLAIN
 [SNIP]=
-&lt;&lt; 535 Incorrect authentication data
+<< 535 Incorrect authentication data
 exim: ** [535 Incorrect authentication data != 2]
-: Died at /usr/local/cpanel/Cpanel/TailWatch/ChkServd.pm line 689, &lt;$socket_scc&gt; line 10.
+: Died at /usr/local/cpanel/Cpanel/TailWatch/ChkServd.pm line 689, <$socket_scc> line 10.
 
 Number of Restart Attempts: 1
 

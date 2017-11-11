@@ -46,8 +46,8 @@ class BlogsPruner
 
   private function __construct()
   {
-    $this-&gt;ensureDatabaseSetup();
-    $this-&gt;ensureBlogStatsGetUpdated();
+    $this->ensureDatabaseSetup();
+    $this->ensureBlogStatsGetUpdated();
     // ... other initialization here
   }
 
@@ -77,8 +77,8 @@ The next step was to implement the function ensuring there's a stats table in th
 function ensureDatabaseSetup()
   {
     global $wpdb;
-    $tableName = $this-&gt;blogStatsTableName();
-    $charsetCollate = $wpdb-&gt;get_charset_collate();
+    $tableName = $this->blogStatsTableName();
+    $charsetCollate = $wpdb->get_charset_collate();
 
     $sql = "CREATE TABLE $tableName (
             blog_id bigint(20),
@@ -88,7 +88,7 @@ function ensureDatabaseSetup()
 
     require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
     dbDelta( $sql );
-    $this-&gt;ensureBlogStatsUpdated();
+    $this->ensureBlogStatsUpdated();
   }
 ```
 This code uses a helper function to correctly construct the name for the table:
@@ -97,7 +97,7 @@ This code uses a helper function to correctly construct the name for the table:
 function blogStatsTableName()
 {
   global $wpdb;
-  return $wpdb-&gt;base_prefix . 'blog_stats';
+  return $wpdb->base_prefix . 'blog_stats';
 }
 ```
 This made sure the table was using the correct prefix, just like all the other tables in the database.
@@ -115,23 +115,23 @@ function onPostUpdated($postId)
 {
   global $blog_id;
   $post = get_post($postId);
-  if(wp_is_post_revision($postId) || $post-&gt;post_status == 'auto-draft')
+  if(wp_is_post_revision($postId) || $post->post_status == 'auto-draft')
   {
     return;
   }
-  $this-&gt;updateBlogStats($blog_id);
+  $this->updateBlogStats($blog_id);
 }
 
 function onPostDeleted()
 {
   global $blog_id;
-  $this-&gt;updateBlogStats($blog_id);
+  $this->updateBlogStats($blog_id);
 }
 
 function updateBlogStats($blogId)
 {
-  $count = $this-&gt;getBlogUserCreatedPostsCount($blogId);
-  $this-&gt;updateBlogPostsCount($blogId, $count);
+  $count = $this->getBlogUserCreatedPostsCount($blogId);
+  $this->updateBlogPostsCount($blogId, $count);
 }
 
 // Here we're specifically not including the post that is auto-created
@@ -147,17 +147,17 @@ function getBlogUserCreatedPostsCount($blogId)
           WHERE
             `wp_" . $blogId . "_posts`.`post_type` = 'post' AND
             `wp_" . $blogId . "_posts`.`post_status` = 'publish' AND
-            TIMESTAMPDIFF(SECOND, `wp_" . $blogId . "_posts`.`post_date`, `wp_blogs`.`last_updated`) &gt; 60";
-  $row = $wpdb-&gt;get_row($sql);
-  return intval($row-&gt;count_user_posts);
+            TIMESTAMPDIFF(SECOND, `wp_" . $blogId . "_posts`.`post_date`, `wp_blogs`.`last_updated`) > 60";
+  $row = $wpdb->get_row($sql);
+  return intval($row->count_user_posts);
 }
 
 function updateBlogPostsCount($blogId, $count)
 {
   global $wpdb;
-  $data = array('count_posts' =&gt; $count);
-  $where = array('blog_id' =&gt; $blogId);
-  $wpdb-&gt;update($this-&gt;blogStatsTableName(), $data, $where);
+  $data = array('count_posts' => $count);
+  $where = array('blog_id' => $blogId);
+  $wpdb->update($this->blogStatsTableName(), $data, $where);
 }
 ```
 The actual production plugin implemented many more features than this sample code demonstrates. It was listing the blogs that could be considered stale, automatically pruning them after specified in the admin screen time and allowing admins to configure it via the WordPress interface. The full set of features is beyond the scope of this post.

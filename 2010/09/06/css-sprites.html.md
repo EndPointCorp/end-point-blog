@@ -55,29 +55,29 @@ I updated the HTML to remove individual image requests. Below are some examples:
 <tbody><tr>
 <td style="background-color:#CCEEFF;" valign="top">
 <b>old:</b><br/>
-&lt;a href="http://alta.com/pages/contact.php"&gt;
-&lt;img src="./alta_files/banner_contact.gif" name="ContactUs" width="100" height="20" border="0"&gt;
-&lt;/a&gt;<br/>
+<a href="http://alta.com/pages/contact.php">
+<img src="./alta_files/banner_contact.gif" name="ContactUs" width="100" height="20" border="0">
+</a><br/>
 <b>new:</b><br/>
-&lt;a href="/" class="sprite" id="banner_contact"&gt;&lt;/a&gt;
+<a href="/" class="sprite" id="banner_contact"></a>
 <br/><br/>
 <b>old:</b><br/>
-&lt;a href="http://shop.alta.com/CS/Browse.aspx?Catalog=AltaRetail&amp;Category=Retail+Items" target="_self"&gt;
-&lt;img src="./alta_files/altaskishoplogo.jpg" alt="March Madness Logo" width="180" height="123" border="0"&gt;
-&lt;/a&gt;<br/>
+<a href="http://shop.alta.com/CS/Browse.aspx?Catalog=AltaRetail&Category=Retail+Items" target="_self">
+<img src="./alta_files/altaskishoplogo.jpg" alt="March Madness Logo" width="180" height="123" border="0">
+</a><br/>
 <b>new:</b><br/>
-&lt;a href="http://shop.alta.com/CS/Browse.aspx?Catalog=AltaRetail&amp;Category=Retail+Items" target="_self" id="skishoplogo" class="sprite"&gt;&lt;/a&gt;
+<a href="http://shop.alta.com/CS/Browse.aspx?Catalog=AltaRetail&Category=Retail+Items" target="_self" id="skishoplogo" class="sprite"></a>
 </td>
 <td style="background-color:#FFEECC;" valign="top">
 <b>old:</b><br/>
-&lt;div class="icon"&gt;&lt;img src="./snowbird_files/icon_less_rain.gif" border="0" alt="Sunny" title="Sunny"&gt;&lt;/div&gt;<br/>
+<div class="icon"><img src="./snowbird_files/icon_less_rain.gif" border="0" alt="Sunny" title="Sunny"></div><br/>
 <b>new:</b><br/>
-&lt;div class="icon sprite less_rain"&gt;&lt;/div&gt;
+<div class="icon sprite less_rain"></div>
 <br/><br/>
 <b>old:</b><br/>
-&lt;div&gt;&lt;input type="image" src="./snowbird_files/btn_check_rates.gif" border="0" alt="Check Rates"&gt;&lt;/div&gt;<br/>
+<div><input type="image" src="./snowbird_files/btn_check_rates.gif" border="0" alt="Check Rates"></div><br/>
 <b>new:</b><br/>
-&lt;div class="sprite" id="check_rates"&gt;&lt;/div&gt;
+<div class="sprite" id="check_rates"></div>
 </td>
 </tr>
 </tbody></table>

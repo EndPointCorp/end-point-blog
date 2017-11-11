@@ -11,7 +11,7 @@ title: 'Piggybak: Upgrade to Rails 4.1.0'
 - Modified use of assets which require "//= require piggybak/piggybak-application" to be added to the assets moving forward. There have been several observed issues with precompling and asset behavior, so I simplified this by requiring this require to be added to the main Rails application.js for now. The engine file is supposed to have a way around this, but it has not behaved as expected, specifically on unique deployment architectures (e.g. Heroku). Patches welcome to address this.
 - Tables migrated to namespaced tables, e.g. "orders" migrated to "piggybak_orders". This is how namespaced engine tables are supposed to look, and this upgrade fixes the table names with a migration and related code.
 - Handled strong parameters. This was one of the most significant jumps from Rails 3 to Rails 4. The main element of Piggybak that needed updating here was the orders controller, which receives the order parameters and must determine which parameters to handle. Any references to attr_accessible in the code were removed.
-- ActiveRecord "find" method replaced with where &amp; chaining, where applicable. The jump to Rails 4.0 deprecated find methods, but did not remove support, but the jump to Rails 4.1 removed support of these finder methods. These were removed.
+- ActiveRecord "find" method replaced with where & chaining, where applicable. The jump to Rails 4.0 deprecated find methods, but did not remove support, but the jump to Rails 4.1 removed support of these finder methods. These were removed.
 - Scope syntax update. Rails 4 handles scopes with new syntax, and all default scope and named scopes were updated to reflect this new syntax.
 - Validates syntax updated. Rails 4 has new validates syntax which accepts arguments, e.g. presence: true, uniqueness: true. Piggybak was upgraded to use the new syntax, although the old syntax is still supported.
 - Significant routes update. Rails 4 introduced a significant change in routing, and Piggybak was updated to reflect these changes.
@@ -24,4 +24,4 @@ There are a few things that I'd love to see adopted in Piggybak, with the help o
 
 - Consider move to [CoffeeScript](http://coffeescript.org/). I'm still on the fence about this, but I'm seeing more projects with node and CoffeeScript lately, so I wonder if it would be worth the overhead to move to CoffeeScript.
 - Add test coverage. Perhaps [Travis CI](https://travis-ci.org/) integration would make sense since it hooks into github nicely?
-- Build out more features. Things like reviews &amp; ratings, saved cart, wishlist support, and saved address support have been on the feature list for a while. It'd be nice to see movement here.
+- Build out more features. Things like reviews & ratings, saved cart, wishlist support, and saved address support have been on the feature list for a while. It'd be nice to see movement here.

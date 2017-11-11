@@ -23,7 +23,7 @@ end
 module RailsAdmin
   module Config
     module Actions
-      class ApproveReview &lt; RailsAdmin::Config::Actions::Base
+      class ApproveReview < RailsAdmin::Config::Actions::Base
       end
     end
   end
@@ -33,7 +33,7 @@ end
 By default, all actions are present for all models. We will only show the "Approve" action for the models that actually support it and are yet unapproved. It means that they have *approved* attribute defined and set to *false*:
 ```ruby
 register_instance_option :visible? do
-  authorized? &amp;&amp; !bindings[:object].approved
+  authorized? && !bindings[:object].approved
 end
 ```
 RailsAdmin has a lot of configuration options. We will use one of them to specify that the action acts on the object (member) scope:
@@ -73,7 +73,7 @@ First, it should be registered with RailsAdmin::Config::Actions like this:
 module RailsAdmin
   module Config
     module Actions
-      class ApproveReview &lt; RailsAdmin::Config::Actions::Base
+      class ApproveReview < RailsAdmin::Config::Actions::Base
         RailsAdmin::Config::Actions.register(self)
       end
     end
@@ -105,7 +105,7 @@ If your application is using [CanCan](https://github.com/ryanb/cancan) with Rail
 class Ability
   include CanCan::Ability
   def initialize(user)
-    if user &amp;&amp; user.is_admin?
+    if user && user.is_admin?
       ...
       cannot :approve_review, :all
       can :approve_review, [UserReview]

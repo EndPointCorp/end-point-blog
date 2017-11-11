@@ -66,39 +66,39 @@ There are always complexities that come up when implementing third-party service
 <tbody><tr style="background-color:#DDE4DF;">
 <td><a href="/blog/2011/03/15/ecommerce-product-personalization/image-9-big.jpeg" onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5584680200259449346" src="/blog/2011/03/15/ecommerce-product-personalization/image-9.jpeg" style="display:block; margin:0px auto 10px; text-align:center;cursor:pointer; cursor:hand;width: 200px; height: 200px;"/></a>
 </td>
-<td>https://a248.e.akamai.net/f/248/9086/10h/origin-d7.scene7.com/is/image/?layer=0&amp;
+<td>https://a248.e.akamai.net/f/248/9086/10h/origin-d7.scene7.com/is/image/?layer=0&
 anchor=-50,-50
-&amp;size=2000,2000&amp;layer=1&amp;src=is{PaperSource/A7_env_back_closed_sfwhite}&amp;
+&size=2000,2000&layer=1&src=is{PaperSource/A7_env_back_closed_sfwhite}&
 anchor=2900,-395
-&amp;rotate=-90&amp;op_usm=1,1,8,0&amp;resMode=sharp&amp;qlt=95,1&amp;pos=100,50&amp;size=1800,1800&amp;
-layer=3&amp;src=fxg
-{PaperSource/W136-122208301?&amp;imageres=150}&amp;anchor=0,0&amp;op_usm=1,1,1,0&amp;pos=500,315&amp;
+&rotate=-90&op_usm=1,1,8,0&resMode=sharp&qlt=95,1&pos=100,50&size=1800,1800&
+layer=3&src=fxg
+{PaperSource/W136-122208301?&imageres=150}&anchor=0,0&op_usm=1,1,1,0&pos=500,315&
 size=1732,1732
-&amp;effect=0&amp;resMode=sharp&amp;fmt=jpg</td>
+&effect=0&resMode=sharp&fmt=jpg</td>
 </tr>
 <tr>
 <td><a href="/blog/2011/03/15/ecommerce-product-personalization/image-10-big.jpeg" onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5584680200854096066" src="/blog/2011/03/15/ecommerce-product-personalization/image-10.jpeg" style="display:block; margin:0px auto 10px; text-align:center;cursor:pointer; cursor:hand;width: 200px; height: 200px;"/></a>
 </td>
-<td>https://a248.e.akamai.net/f/248/9086/10h/origin-d7.scene7.com/is/image/?layer=0&amp;
+<td>https://a248.e.akamai.net/f/248/9086/10h/origin-d7.scene7.com/is/image/?layer=0&
 anchor=-50,
-50&amp;size=2000,2000&amp;layer=1&amp;src=is{PaperSource/4bar_env_back_closed_fig}&amp;anchor=0,0&amp;
+50&size=2000,2000&layer=1&src=is{PaperSource/4bar_env_back_closed_fig}&anchor=0,0&
 pos=115,375
-&amp;size=1800,1800&amp;layer=2&amp;src=fxg{PaperSource/4barV_white_background_key}&amp;anchor=0,0&amp;
-rotate=-90&amp;
-pos=250,1757&amp;size=1733,1733&amp;layer=3&amp;
-src=fxg{PaperSource/ST57-2011579203301?&amp;$color_fig=true&amp;$color_black=false&amp;$
+&size=1800,1800&layer=2&src=fxg{PaperSource/4barV_white_background_key}&anchor=0,0&
+rotate=-90&
+pos=250,1757&size=1733,1733&layer=3&
+src=fxg{PaperSource/ST57-2011579203301?&$color_fig=true&$color_black=false&$
 color_chartreuse
-=false&amp;$color_espresso=false&amp;$color_moss=false&amp;$color_peacock=false
-&amp;$ink_0=780032
-&amp;$ink_2=780032&amp;$ink_1=780032&amp;imageres=150}&amp;anchor=0,0
-&amp;op_usm=2,1,1,
-0&amp;pos=255,513&amp;size=1721,1721&amp;resMode=sharp&amp;effect=0&amp;fmt=jpg</td>
+=false&$color_espresso=false&$color_moss=false&$color_peacock=false
+&$ink_0=780032
+&$ink_2=780032&$ink_1=780032&imageres=150}&anchor=0,0
+&op_usm=2,1,1,
+0&pos=255,513&size=1721,1721&resMode=sharp&effect=0&fmt=jpg</td>
 </tr>
 <tr style="background-color:#DDE4DF;">
 <td>
 <a href="/blog/2011/03/15/ecommerce-product-personalization/image-11-big.jpeg" onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5584680197021988386" src="/blog/2011/03/15/ecommerce-product-personalization/image-11.jpeg" style="display:block; margin:0px auto 10px; text-align:center;cursor:pointer; cursor:hand;width: 200px; height: 200px;"/></a>
 </td>
-<td>https://a248.e.akamai.net/f/248/9086/10h/origin-d7.scene7.com/is/image/?layer=0&amp;anchor=-50,- 50&amp;size=2000,2000&amp;layer=1&amp;src=is{PaperSource/4bar_env_back_closed_night}&amp;anchor=0,0&amp;pos =115,375&amp;&amp;size=1800,1800&amp;layer=2&amp;src=fxg{PaperSource/4bar_white_sm}  &amp;anchor=0,0&amp;rotate=-90&amp;pos=250,1757&amp;size=1733,1733&amp;layer=3&amp;src=fxg{PaperSource/W139-201203301?}  &amp;anchor=0,0&amp;op_usm=2,1,1,0&amp;pos=255,513&amp;size=1721,1721&amp;resMode=sharp&amp;effect=0&amp;fmt=jpg</td>
+<td>https://a248.e.akamai.net/f/248/9086/10h/origin-d7.scene7.com/is/image/?layer=0&anchor=-50,- 50&size=2000,2000&layer=1&src=is{PaperSource/4bar_env_back_closed_night}&anchor=0,0&pos =115,375&&size=1800,1800&layer=2&src=fxg{PaperSource/4bar_white_sm}  &anchor=0,0&rotate=-90&pos=250,1757&size=1733,1733&layer=3&src=fxg{PaperSource/W139-201203301?}  &anchor=0,0&op_usm=2,1,1,0&pos=255,513&size=1721,1721&resMode=sharp&effect=0&fmt=jpg</td>
 </tr>
 </tbody></table>
 

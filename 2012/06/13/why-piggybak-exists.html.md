@@ -23,7 +23,7 @@ Piggybak was created by first trying to identify the most stable and consistent 
 - Discount Sales
 - Rights and Roles
 
-What doesn't vary? **Cart &amp; Checkout.**
+What doesn't vary? **Cart & Checkout.**
 
 Shipping, tax, product catalog design, sales promotions, and rights and roles all vary across different e-commerce sites. The only strict commonality is the cart and the checkout.
 

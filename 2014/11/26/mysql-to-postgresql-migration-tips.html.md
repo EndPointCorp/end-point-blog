@@ -189,12 +189,12 @@ MySQL has a built-in function called split_part() which allows you to access a s
 in MySQL:
 
 ```sql
-split_part('a banana boat', ' ', -1) =&gt; 'boat'
+split_part('a banana boat', ' ', -1) => 'boat'
 ```
 in PostgreSQL:
 
 ```sql
-split_part('a banana boat', ' ', -1) =&gt; // ERROR:  field position must be greater than zero
+split_part('a banana boat', ' ', -1) => // ERROR:  field position must be greater than zero
 ```
 
 I fixed this issue by creating a custom plpgsql function to handle this case.  (In my specific case, all of the negative indexes were -1; i.e., the last element in the array, so I created a function to return only the substring occurring after the last instance of the delimiter.)
@@ -224,13 +224,13 @@ use warnings;
 
 use Data::Dumper;
 
-my $table = shift or die "Usage: $0 &lt;table&gt;\n";
+my $table = shift or die "Usage: $0 <table>\n";
 my @cols = @ARGV;
 
-my $dbh = DBI-&gt;connect(...);
+my $dbh = DBI->connect(...);
 
-my @raw_cols = @{ $dbh-&gt;column_info(undef, 'public', $table, '%')-&gt;fetchall_arrayref({}) };
-my %raw_cols = map { $_-&gt;{COLUMN_NAME} =&gt; $_ } @raw_cols;
+my @raw_cols = @{ $dbh->column_info(undef, 'public', $table, '%')->fetchall_arrayref({}) };
+my %raw_cols = map { $_->{COLUMN_NAME} => $_ } @raw_cols;
 
 die "Can't find table $table\n" unless @raw_cols;
 
@@ -241,10 +241,10 @@ die "Referenced non-existing columns: @missing_cols\n" if @missing_cols;
 my %is_pk;
 
 unless (@cols) {
-    @cols = map { $_-&gt;{COLUMN_NAME} } @raw_cols;
+    @cols = map { $_->{COLUMN_NAME} } @raw_cols;
 }
 
-my @pk_cols = $dbh-&gt;primary_key(undef, 'public', $table);
+my @pk_cols = $dbh->primary_key(undef, 'public', $table);
 
 @is_pk{@pk_cols} = (1)x@pk_cols;
 
@@ -253,11 +253,11 @@ my @data_cols = grep { ! $is_pk{$_} } @cols;
 die "Missing PK cols from column list!\n" unless @pk_cols == grep { $is_pk{$_} } @cols;
 die "No data columns!\n" unless @data_cols;
 
-print &lt;&lt;EOF
+print <<EOF
 CREATE OR REPLACE FUNCTION
     upsert_$table (@{[
-    join ', ' =&gt; map {
-        "_$_ $raw_cols{ $_ }-&gt;{pg_type}"
+    join ', ' => map {
+        "_$_ $raw_cols{ $_ }->{pg_type}"
     } @cols
 ]})
 RETURNS void
@@ -266,15 +266,15 @@ AS \$EOSQL\$
 BEGIN
     LOOP
         UPDATE $table SET @{[
-    join ', ' =&gt; map { "$_ = _$_" } @data_cols
+    join ', ' => map { "$_ = _$_" } @data_cols
 ]} WHERE @{[
-    join ' AND ' =&gt; map { "$_ = _$_" } @pk_cols
+    join ' AND ' => map { "$_ = _$_" } @pk_cols
 ]};
         IF FOUND THEN
             RETURN;
         END IF;
         BEGIN
-            INSERT INTO $table (@{[join ',' =&gt; @cols]}) VALUES (@{[join ',' =&gt; map { "_$_" } @cols]});
+            INSERT INTO $table (@{[join ',' => @cols]}) VALUES (@{[join ',' => map { "_$_" } @cols]});
             RETURN;
         EXCEPTION WHEN unique_violation THEN
             -- Do nothing, and loop to try the UPDATE again.

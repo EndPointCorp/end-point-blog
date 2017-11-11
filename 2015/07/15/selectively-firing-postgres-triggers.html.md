@@ -12,7 +12,7 @@ to be fired. Read below for the long explanation, but the [TL;DR version](https:
 
 ```
 CREATE TRIGGER mytrig AFTER INSERT ON foobar FOR EACH
-  ROW WHEN (current_setting('session_replication_role') &lt;&gt; 'local') EXECUTE PROCEDURE myfunc();
+  ROW WHEN (current_setting('session_replication_role') <> 'local') EXECUTE PROCEDURE myfunc();
 BEGIN;
 SET LOCAL session_replication_role = 'local';
 UPDATE foobar SET baz = 123;
@@ -44,7 +44,7 @@ The table we want to use for this post is named **"film"**, and comes with two t
 'film_fulltext_trigger', and 'last_updated':
 
 ```
-heroku=&gt; \d film
+heroku=> \d film
                             Table "public.film"
         Column        |            Type             |       Modifiers
 ----------------------+-----------------------------+---------------------------------
@@ -105,28 +105,28 @@ with disabling triggers this way is that it is too easy to accidentally leave it
 look at the lock, and double check that the trigger has been disabled as well:
 
 ```
-heroku=&gt; SELECT last_update FROM film WHERE film_id = 123;
+heroku=> SELECT last_update FROM film WHERE film_id = 123;
         last_update
 ----------------------------
  2015-06-21 16:38:00.891019
-heroku=&gt; BEGIN;
-heroku=&gt; ALTER TABLE film DISABLE TRIGGER last_updated;
-heroku=&gt; SELECT last_update FROM film WHERE film_id = 123;
-heroku=&gt; UPDATE film SET rental_duration = 10;
+heroku=> BEGIN;
+heroku=> ALTER TABLE film DISABLE TRIGGER last_updated;
+heroku=> SELECT last_update FROM film WHERE film_id = 123;
+heroku=> UPDATE film SET rental_duration = 10;
 -- We need the subselect because we share with a gazillion other Heroku databases!
-heroku=&gt; select relation::regclass,mode,granted from pg_locks where database =
-heroku-&gt;   (select oid from pg_database where datname = current_database());
+heroku=> select relation::regclass,mode,granted from pg_locks where database =
+heroku->   (select oid from pg_database where datname = current_database());
  relation |        mode         | granted
 ----------+---------------------+---------
  pg_locks | AccessShareLock     | t
  film     | RowExclusiveLock    | t
  film     | AccessExclusiveLock | t  ## This is a very heavy lock!
 ## Version 9.5 and up will have a ShareRowExclusive lock only!
-heroku=&gt; ALTER TABLE film ENABLE TRIGGER last_updated;
-heroku=&gt; COMMIT;
+heroku=> ALTER TABLE film ENABLE TRIGGER last_updated;
+heroku=> COMMIT;
 
 -- This is the same value, because the trigger did not fire when we updated
-heroku=&gt; select last_update FROM film WHERE film_id = 123;
+heroku=> select last_update FROM film WHERE film_id = 123;
         last_update
 ----------------------------
  2015-06-21 16:38:00.891019
@@ -214,7 +214,7 @@ BEGIN
 pagila=# drop trigger last_updated ON film;
 DROP TRIGGER
 pagila=# create trigger last_updated before update on film for each row
-pagila-#   when (current_setting('session_replication_role') &lt;&gt; 'local') execute procedure last_updated();
+pagila-#   when (current_setting('session_replication_role') <> 'local') execute procedure last_updated();
 CREATE TRIGGER
 pagila=# commit;
 COMMIT
@@ -265,35 +265,35 @@ COMMIT
 Those are the three main ways to selectively disable a trigger on a table: using ALTER TABLE to completely disable it (and invoking a heavy lock), having the function check session_replication_role (affects all triggers using it, requires superuser), and having the trigger use a WHEN clause (requires superuser). Sharp readers may note that being a superuser is not really required, as something other than session_replication_role could be used. Thus, a solution is to use a parameter that can be changed by anyone, that will not affect anything else, and can be set to a unique value. Here is one such solution, using the handy "application_name" parameter. We will return to the Heroku database for this one:
 
 ```
-heroku=&gt; drop trigger last_updated on film;
-heroku=&gt; create trigger last_updated before update on film for each row
-  when (current_setting('application_name') &lt;&gt; 'skiptrig') execute procedure last_updated();
+heroku=> drop trigger last_updated on film;
+heroku=> create trigger last_updated before update on film for each row
+  when (current_setting('application_name') <> 'skiptrig') execute procedure last_updated();
 
-heroku=&gt; select last_update from film where film_id = 111;
+heroku=> select last_update from film where film_id = 111;
  2015-06-21 16:38:00.365103
-heroku=&gt; update film set rental_duration = 10 WHERE film_id = 111;
+heroku=> update film set rental_duration = 10 WHERE film_id = 111;
 UPDATE 1
-heroku=&gt; select last_update from film where film_id = 111;
+heroku=> select last_update from film where film_id = 111;
  2015-06-21 16:38:03.101115
 
-heroku=&gt; begin;
+heroku=> begin;
 BEGIN
-heroku=&gt; set LOCAL application_name = 'skiptrig';
+heroku=> set LOCAL application_name = 'skiptrig';
 SET
-heroku=&gt; update film set rental_duration = 10 WHERE film_id = 111;
+heroku=> update film set rental_duration = 10 WHERE film_id = 111;
 UPDATE 1
-heroku=&gt; select last_update from film where film_id = 111;
+heroku=> select last_update from film where film_id = 111;
  2015-06-21 16:38:03.101115
 
 -- Show that we are not holding a heavy lock:
-heroku=&gt; select relation::regclass,mode,granted from pg_locks where database =
-heroku-&gt;   (select oid from pg_database where datname = current_database());
+heroku=> select relation::regclass,mode,granted from pg_locks where database =
+heroku->   (select oid from pg_database where datname = current_database());
  relation |       mode       | granted
 ----------+------------------+---------
  film     | AccessShareLock  | t
  film     | RowExclusiveLock | t
 
-heroku=&gt; commit;
+heroku=> commit;
 COMMIT
 ```
 

@@ -48,7 +48,7 @@ $ tail -f $HOME/.pythonbrew/log/build.log
 You can also add the following lines to ~/.bashrc to activate this python after starting new bash session.
 
 ```bash
-[[ -s "$HOME/.pythonbrew/etc/bashrc" ]] &amp;&amp; source $HOME/.pythonbrew/etc/bashrc
+[[ -s "$HOME/.pythonbrew/etc/bashrc" ]] && source $HOME/.pythonbrew/etc/bashrc
 pythonbrew switch 2.7.3
 ```
 

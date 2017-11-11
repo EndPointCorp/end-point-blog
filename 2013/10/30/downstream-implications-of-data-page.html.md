@@ -44,7 +44,7 @@ That relfilenode (plus the "postgres" database oid of 12066) corresponds to base
 ```nohighlight
 postgres@endpoint:~/9.3$ sed -iorig 's/9998000/9999000/' block
 
-postgres@endpoint:~/9.3$ diff -u &lt;(hexdump -C block) &lt;(hexdump -C blockorig)
+postgres@endpoint:~/9.3$ diff -u <(hexdump -C block) <(hexdump -C blockorig)
 --- /dev/fd/63    2013-10-18 16:35:22.963860942 -0400
 +++ /dev/fd/62    2013-10-18 16:35:22.963860942 -0400
 @@ -134,7 +134,7 @@

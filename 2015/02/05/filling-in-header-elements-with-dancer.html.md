@@ -22,15 +22,15 @@ The trick here is, there's no such files "additional.css" and "additional.js". I
 My Perl object has these fields (in addition to the other content):
 
 ```perl
-    $context-&gt;{additional_styles}    = [
-        { url =&gt; '/css/checkout.css' },
-        { url =&gt; '/css/colorbox.css' },
+    $context->{additional_styles}    = [
+        { url => '/css/checkout.css' },
+        { url => '/css/colorbox.css' },
     ];
-    $context-&gt;{additional_scripts}   = [
-        { url =&gt; '/javascripts/sprintf.js' },
-        { url =&gt; '/javascripts/toCurrency.js' },
-        { url =&gt; '/javascripts/jquery.colorbox-min.js' },
-        { url =&gt; '/javascripts/checkout.js' },
+    $context->{additional_scripts}   = [
+        { url => '/javascripts/sprintf.js' },
+        { url => '/javascripts/toCurrency.js' },
+        { url => '/javascripts/jquery.colorbox-min.js' },
+        { url => '/javascripts/checkout.js' },
     ];
 ```
 
@@ -55,13 +55,13 @@ The XML file is a connector that tells Template::Flute how to mix the Perl hash 
 ```
 
 the class name in the HTML and the name field in the XML connect, while the iterator field in the XML and the hash key in the Perl hashref do as well. The case of a ~~~
-&lt;list&gt;
+<list>
 ```
  means that the hash value must be an arrayref of hashrefs, i.e.,
 ```perl
  {
-  "additional_style" =&gt; [
-    { url =&gt; "...", },
+  "additional_style" => [
+    { url => "...", },
     ...,
    ],
  }

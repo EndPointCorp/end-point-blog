@@ -89,7 +89,7 @@ Open [VideoPool.as](https://github.com/ftert/red5-flash/blob/master/classes/org/
 private function getVideoContainer(p_id:Number):Subscriber
 {
   var d:Number = 1;
-  if (subscriberList.length &gt; 0) {
+  if (subscriberList.length > 0) {
     d = subscriberList[subscriberList.length - 1].getDepth() + 1;
   }
 
@@ -121,12 +121,12 @@ If the subscriber is added, at some point it may need to be removed! Add removeS
 
 ```javascript
 public function removeSubscriber(s:Subscriber): Void {
-  for(var i= 0; i &lt; subscriberList.length; i++) {
+  for(var i= 0; i < subscriberList.length; i++) {
     if (Subscriber(subscriberList[i]).videoStream == s.videoStream) {
       subscriberList.removeItemAt(i);
     }
   }
-  for (var i= 0; i &lt; subscriberList.length; i++) {
+  for (var i= 0; i < subscriberList.length; i++) {
     var positionX:Number = broadcaster._x + (subscriberList.length%4) * broadcaster._width;
     var positionY:Number = broadcaster._y + (broadcaster._height * Math.floor(subscriberList.length/4));
     var mc:Subscriber = Subscriber(subscriberList[i]);
@@ -209,7 +209,7 @@ When the new subscriber shows up, we add him or her and update ScrollPane.
 ```javascript
 private function processQue():Void
 {
-  if(streamQue.length &lt;= 0)
+  if(streamQue.length <= 0)
   {
     clearInterval(si);
     return;
@@ -226,11 +226,11 @@ private function processQue():Void
 Almost ready! Publish the swf file and copy to the website folder. If you want to re-compile ActionScript classes only, use [MTASC compiler](https://github.com/ftert/mtasc-mx/blob/master/bin/mtasc) and MX libraries from my [Github repo](https://github.com/ftert/mtasc-mx):
 
 ```bash
-&gt; cp videoConference.swf classes/videoConference.swf
-&gt; cd classes
-&gt; export PATH="$HOME/mtasc-mx/bin:$HOME/mtasc-mx/bin/std:$PATH"
-&gt; mtasc -version 8 -cp "." -swf videoConference.swf -mx org/red5/samples/livestream/videoConference/videoConference.as -v
-&gt; cp videoConference.swf $HOME/Sites/red5-hangout/videoConference.swf
+> cp videoConference.swf classes/videoConference.swf
+> cd classes
+> export PATH="$HOME/mtasc-mx/bin:$HOME/mtasc-mx/bin/std:$PATH"
+> mtasc -version 8 -cp "." -swf videoConference.swf -mx org/red5/samples/livestream/videoConference/videoConference.as -v
+> cp videoConference.swf $HOME/Sites/red5-hangout/videoConference.swf
 ```
 
 Include into the webpage:
@@ -317,8 +317,8 @@ private function connectionChange(evtObj:Object):Void
 Publish [simpleSubsciber.swf](https://github.com/ftert/red5-flash/blob/master/simpleSubscriber.swf) and place it into the website folder. To recompile the ActionScript part only:
 
 ```bash
-&gt; mtasc -version 8 -cp "." -swf simpleSubscriber.swf -mx org/red5/samples/livestream/subscriber/Main.as -v
-&gt; cp simpleSubscriber.swf $HOME/Sites/red5-hangout/simpleSubscriber.swf
+> mtasc -version 8 -cp "." -swf simpleSubscriber.swf -mx org/red5/samples/livestream/subscriber/Main.as -v
+> cp simpleSubscriber.swf $HOME/Sites/red5-hangout/simpleSubscriber.swf
 ```
 
 By the way the -version 8 flag for mtasc was added specifically to compile ExternalInterface, otherwise, these libraries would not be found.
@@ -378,8 +378,8 @@ private function onSetID(evtObj:Object):Void
 Publish or recompile:
 
 ```bash
-&gt; mtasc -version 8 -cp "." -swf chat.swf -mx org/red5/samples/livestream/videoConference/Chat.as -v
-&gt; cp chat.swf $HOME/Sites/red5-hangout/chat.swf
+> mtasc -version 8 -cp "." -swf chat.swf -mx org/red5/samples/livestream/videoConference/Chat.as -v
+> cp chat.swf $HOME/Sites/red5-hangout/chat.swf
 ```
 
 Add the chat to the web page:
@@ -391,8 +391,8 @@ function chat(streamName) {
                         {"streamName": streamName });
 }
 </script>
-&lt;div id="chat" style="display:none"&gt;
-&lt;/div&gt;
+<div id="chat" style="display:none">
+</div>
 ```
 
 And enjoy chatting with yourself for a while in different browser tabs:

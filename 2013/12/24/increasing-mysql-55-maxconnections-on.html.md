@@ -12,7 +12,7 @@ Busy database-backed websites often hit scalability limits in the database first
 When using MySQL 5.5 from Oracle's RPMs through cPanel (MySQL55-server-5.5.32-1.cp1136) on RHEL 5.10 x86_64, there is an interesting problem if you try to increase the max_connections setting beyond 214 in /etc/my.cnf. It will silently be ignored, and the limit remains 214:
 
 ```nohighlight
-mysql&gt; show variables like 'max_connections';
+mysql> show variables like 'max_connections';
 +-----------------+-------+
 | Variable_name   | Value |
 +-----------------+-------+
@@ -82,7 +82,7 @@ Max realtime priority     0                    0
 And the running MySQL server will reveal the desired max_connections setting stuck this time:
 
 ```nohighlight
-mysql&gt; show variables like 'max_connections';
+mysql> show variables like 'max_connections';
 +-----------------+-------+
 | Variable_name   | Value |
 +-----------------+-------+

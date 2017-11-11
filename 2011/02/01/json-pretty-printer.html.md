@@ -14,10 +14,10 @@ I threw together a little Perl program based on the JSON man page:
 
 use JSON;
 
-my $json = JSON-&gt;new;
+my $json = JSON->new;
 undef $/;
-while (&lt;&gt;) {
-    print $json-&gt;pretty-&gt;encode($json-&gt;decode($_));
+while (<>) {
+    print $json->pretty->encode($json->decode($_));
 }
 ```
 

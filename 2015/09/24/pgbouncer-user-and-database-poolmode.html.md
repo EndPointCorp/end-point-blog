@@ -88,13 +88,13 @@ root@scw-56578065:~# locate postgresql.conf pg_hba.conf
 
 root@scw-56578065:~# echo "logging_collector = on
 log_filename = 'postgres-%Y-%m-%d.log'
-log_rotation_size = 0" &gt;&gt; /etc/postgresql/9.4/main/postgresql.conf
+log_rotation_size = 0" >> /etc/postgresql/9.4/main/postgresql.conf
 
 ## But it already has a nice log_line_prefix (bully for you, Debian)
 
 ## Take a second to squirrel away the old version before overwriting:
 root@scw-56578065:~# cp /etc/postgresql/9.4/main/pg_hba.conf ~
-root@scw-56578065:~# echo "local all all trust" &gt; /etc/postgresql/9.4/main/pg_hba.conf
+root@scw-56578065:~# echo "local all all trust" > /etc/postgresql/9.4/main/pg_hba.conf
 root@scw-56578065:~# service postgresql restart
 root@scw-56578065:~# psql -U postgres -l
                              List of databases
@@ -174,7 +174,7 @@ keep jumping back and forth between accounts:
 postgres@scw-56578065:~/pgbouncer$ exit
 ## This is a disposable test box - do not try this at home!
 ## Debian's /etc/sudoers has #includedir /etc/sudoers.d, so we can do this:
-root@scw-56578065:~# echo "postgres ALL= NOPASSWD:ALL" &gt; /etc/sudoers.d/postgres
+root@scw-56578065:~# echo "postgres ALL= NOPASSWD:ALL" > /etc/sudoers.d/postgres
 root@scw-56578065:~# su - postgres
 postgres@scw-56578065:~ cd postgres
 postgres@scw-56578065:~/pgbouncer$ sudo apt-get build-dep pgbouncer
@@ -239,7 +239,7 @@ connected to PgBouncer, and seeing **'[local]'** indicates we are connected to P
 
 ```
 ## Visit the <a href="http://www.postgresql.org/docs/current/static/app-psql.html#APP-PSQL-PROMPTING">psql docs</a> for explanation of this prompt
-postgres@scw-56578065:~/pgbouncer$ echo "\set PROMPT1 '%n@%/:%&gt;%R%x%#%M '" &gt; ~/.psqlrc
+postgres@scw-56578065:~/pgbouncer$ echo "\set PROMPT1 '%n@%/:%>%R%x%#%M '" > ~/.psqlrc
 ```
 
 Let's confirm that each PgBouncer connection is in the expected mode. Database test1 should be using the
@@ -321,7 +321,7 @@ postgres@scw-56578065:~/pgbouncer$ psql -h /tmp test4 -U alice
 psql (9.4.3)
 Type "help" for help.
 
-alice@test4:5432=&gt;[local:/tmp] begin;
+alice@test4:5432=>[local:/tmp] begin;
 ERROR:  Long transactions not allowed
 ```
 
@@ -333,7 +333,7 @@ to the **pgbouncer.ini** file, in a section we must create called **[users]**:
 echo "[users]
 alice = pool_mode=transaction
 $(cat /var/lib/postgresql/pgbouncer/etc/pgbouncer.ini)" \
-&gt; /var/lib/postgresql/pgbouncer/etc/pgbouncer.ini
+> /var/lib/postgresql/pgbouncer/etc/pgbouncer.ini
 
 ## Attempt to reload pgbouncer:
 postgres@scw-56578065:~/pgbouncer$ kill -HUP `head -1 /run/pgbouncer/pgbouncer.pid`
@@ -346,9 +346,9 @@ postgres@scw-56578065:~/pgbouncer$ kill -HUP `head -1 /run/pgbouncer/pgbouncer.p
 postgres@scw-56578065:~/pgbouncer$ pgbouncer /var/lib/postgresql/pgbouncer/etc/pgbouncer.ini -d
 
 postgres@scw-56578065:~/pgbouncer$ psql -Ax -qt -h /tmp test4 -U alice
-alice@test4:5432=&gt;[local:/tmp] BEGIN; ROLLBACK;
-alice@test4:5432=&gt;[local:/tmp] PREPARE abc(int) AS SELECT $1::text;
-alice@test4:5432=&gt;[local:/tmp] EXECUTE abc(123);
+alice@test4:5432=>[local:/tmp] BEGIN; ROLLBACK;
+alice@test4:5432=>[local:/tmp] PREPARE abc(int) AS SELECT $1::text;
+alice@test4:5432=>[local:/tmp] EXECUTE abc(123);
 ERROR:  prepared statement "abc" does not exist
 ## test4 is thus running in transaction pool_mode due to the [users] setting
 ```

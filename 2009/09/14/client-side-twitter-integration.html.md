@@ -5,8 +5,6 @@ tags: ecommerce, javascript
 title: Client Side Twitter Integration
 ---
 
-
-
 I recently was assigned a project that required an interesting solution, [Crisis Consultation Services](http://www.crisis-consultation.com/). The site is essentially composed of five static pages and two dynamic components.
 
 The first integration point required PayPal payment processing. Crisis Consultation Services links to PayPal where payment processing is completed through PayPal. Upon payment completion, the user is bounced back to a static receipt page. This integration was quite simple as PayPal provides the exact form that must be included in the static HTML.
@@ -22,7 +20,7 @@ Initially, we investigated using Google App Engine with a Python app that retrie
 First, a script that retrieves the Twitter feed is appended to the document body. In this case, the endpoint Twitter account is pinged to get the most recent comment (count=1), and the resulting callback 'twitterAfter' is made after the JSON feed has been retrieved.
 
 ```javascript
-var url = 'http://twitter.com/statuses/user_timeline/endpoint.json?callback=twitterAfter&amp;count=1';
+var url = 'http://twitter.com/statuses/user_timeline/endpoint.json?callback=twitterAfter&count=1';
 var script = document.createElement('script');
 script.setAttribute('src', url);
 document.body.appendChild(script);
@@ -34,7 +32,7 @@ Next, the callback 'twitterAfter' function is called. The callback function incl
 var twitterAfter = function(obj) {
    var now = new Date();
    var available = new Date(obj[0].text.replace(/-/g, '/'));
-   if (now &gt;= available) {
+   if (now >= available) {
        alert('Consultant is available!');
        // do other whizbang stuff here
    }
@@ -49,7 +47,7 @@ var twitterAfter_advanced = function(obj) {
    var now = new Date();
    var available = new Date(obj[0].text.replace(/-/g, '/'));
    mins_available = parseInt((available.getTime() - now.getTime())/60000);
-   if (mins_available &lt; 1) {
+   if (mins_available < 1) {
        alert('Consultant is available!');
        // do other whizbang stuff here
     } else {
@@ -82,5 +80,3 @@ Sept 13th 9am - now: Available
 In both the basic and advanced callback methods above, content on the page is updated to inform users of service or consultant availability. In the application of the advanced callback method, the user is notified when the consultant will be available.
 
 The client side Twitter integration solution fit our budget and server constraints - the functionality lives entirely on the client side, so we weren't concerned about server installation, setup, or requirements. Additionally, Twitter is such a popular app that there are many convenient ways to tweet availability from a mobile environment.
-
-

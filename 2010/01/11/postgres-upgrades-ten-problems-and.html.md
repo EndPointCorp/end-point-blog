@@ -14,7 +14,7 @@ Upgrading between major versions of Postgres is a fairly straightforward affair,
 When we say upgrade, we mean going from an older major version to a newer major version. We've (recently) migrated client systems as old as 7.2 to as new as 8.4. The canonical way to perform such an upgrade is to simply do:
 
 ```bash
-pg_dumpall -h oldsystem &gt; dumpfile
+pg_dumpall -h oldsystem > dumpfile
 psql -h newsystem -f dumpfile
 ```
 

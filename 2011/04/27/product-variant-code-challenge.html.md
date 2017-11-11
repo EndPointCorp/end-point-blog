@@ -20,7 +20,7 @@ combos = []
 [1,2,3].each do |v1|
   [4,5,6].each do |v2|
     [7,8,9].each do |v3|
-      combos &lt;&lt; [v1, v2, v3]
+      combos << [v1, v2, v3]
     end
   end
 end

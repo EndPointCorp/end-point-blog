@@ -17,7 +17,7 @@ On Thursday:
 
 "Building a 'Database of Things' with Foreign Data Wrappers" by Rick Otten.  This was a live demonstration of building a custom foreign data wrapper to control such attributes as hue, brightness, and on/off state of Philips Hue bulbs.  Very interesting live demo, nice audience response to the control systems.  Used a python framework to stub out the interface with the foreign data wrapper and integrate fully.
 
-"Advanced use of pg_stat_statements: Filtering, Regression Testing &amp; More" by Lukas Fittl.  Covered how to use the pg_stat_statements extension to normalize queries and locate common performance statistics for the same query.  This talk also covered the pg_query tool/library, a Ruby tool to parse/analyze queries offline and generate a JSON object representing the query.  The talk also covered the example of using a test database and the pg_stat_statements views/data to perform query analysis to theorize about planning of specific queries without particular database indexes, etc.
+"Advanced use of pg_stat_statements: Filtering, Regression Testing & More" by Lukas Fittl.  Covered how to use the pg_stat_statements extension to normalize queries and locate common performance statistics for the same query.  This talk also covered the pg_query tool/library, a Ruby tool to parse/analyze queries offline and generate a JSON object representing the query.  The talk also covered the example of using a test database and the pg_stat_statements views/data to perform query analysis to theorize about planning of specific queries without particular database indexes, etc.
 
 On Friday:
 

@@ -25,9 +25,9 @@ class Person
 end
 
 Person.new.hello
-=&gt; "Hello"
+=> "Hello"
 Person.new.say_hello
-=&gt; "Hello"
+=> "Hello"
 ```
 
 ```ruby
@@ -40,9 +40,9 @@ class Person
 end
 
 Person.new.hello
-=&gt; "Hello"
+=> "Hello"
 Person.new.say_hello
-=&gt; "Hello"
+=> "Hello"
 ```
 
 Let's see what happens when we have a class inherit from Person in each of the cases above.
@@ -60,7 +60,7 @@ class Person
   apply_alias
 end
 
-class FunnyPerson &lt; Person
+class FunnyPerson < Person
   def hello
     "Hello, I'm funny!"
   end
@@ -68,9 +68,9 @@ class FunnyPerson &lt; Person
 end
 
 FunnyPerson.new.hello
-=&gt; "Hello, I'm funny!"
+=> "Hello, I'm funny!"
 FunnyPerson.new.say_hello
-=&gt; "Hello"
+=> "Hello"
 ```
 
 ```ruby
@@ -86,7 +86,7 @@ class Person
   apply_alias
 end
 
-class FunnyPerson &lt; Person
+class FunnyPerson < Person
   def hello
     "Hello, I'm funny!"
   end
@@ -94,9 +94,9 @@ class FunnyPerson &lt; Person
 end
 
 FunnyPerson. new.hello
-=&gt; "Hello, I'm funny!"
+=> "Hello, I'm funny!"
 FunnyPerson.new.say_hello
-=&gt; "Hello, I'm funny!"
+=> "Hello, I'm funny!"
 ```
 
 Because alias is a Ruby keyword it is executed when the source code gets parsed which in our case is in
@@ -115,7 +115,7 @@ class Person
   end
 end
 
-class PolitePerson &lt; Person
+class PolitePerson < Person
   def hello_with_majesty
     "#{hello_without_majesty}, your majesty!"
   end
@@ -125,11 +125,11 @@ class PolitePerson &lt; Person
 end
 
 PolitePerson.new.hello
-=&gt; "Hello, your majesty!"
+=> "Hello, your majesty!"
 PolitePerson.new.hello_with_majesty
-=&gt; "Hello, your majesty!"
+=> "Hello, your majesty!"
 PolitePerson.new.hello_without_majesty
-=&gt; "Hello"
+=> "Hello"
 ```
 
 What we did above in PolitePerson can be simplified by replacing the two alias_method calls with just one call to alias_method_chain:
@@ -141,7 +141,7 @@ class Person
   end
 end
 
-class PolitePerson &lt; Person
+class PolitePerson < Person
   def hello_with_majesty
     "#{hello_without_majesty}, your majesty!"
   end
@@ -149,7 +149,7 @@ class PolitePerson &lt; Person
   alias_method_chain :hello, :majesty
 end
 
-class OverlyPolitePerson &lt; Person
+class OverlyPolitePerson < Person
   def hello_with_honor
     "#{hello_without_humbling} I am honored by your presence!"
   end
@@ -158,9 +158,9 @@ class OverlyPolitePerson &lt; Person
 end
 
 PolitePerson.new.hello
-=&gt; "Hello, your majesty!"
+=> "Hello, your majesty!"
 OverlyPolitePerson.new.hello
-=&gt; "Hello, your majesty! I am honored by your presence!"
+=> "Hello, your majesty! I am honored by your presence!"
 ```
 
 Neat! How does this play into Redmine plugins, you ask? Before we get into that there is one more thing to go over: a module's **included** method.
@@ -184,7 +184,7 @@ class Person
   end
 end
 Polite has been included in class Person
-=&gt; Person
+=> Person
 ```
 
 Now, what if you can't modify the Person class directly with the **include** line? No biggie. Let's just send Person a message to include our module:
@@ -208,7 +208,7 @@ end
 
 Person.send(:include, Polite)
 Polite has been included in class Person
-=&gt; Person
+=> Person
 ```
 
 What if we now want to extend Person's hello method? Easy peasy:
@@ -237,11 +237,11 @@ module Polite
 end
 
 Person.new.hello
-=&gt; "Hello"
+=> "Hello"
 Person.send :include, Polite
-=&gt; Person
+=> Person
 Person.new.hello
-=&gt; "Hello, your majesty!"
+=> "Hello, your majesty!"
 ```
 
 How polite! Let's talk about what's going on in the Polite module. We defined our hello_with_politeness method inside an InstanceMethods module in order to not convolute the self.include method. In self.include we send an include call to the base class so that InstanceMethods is included.
@@ -268,7 +268,7 @@ module RateUsersHelperPatch
     # Adds a rates tab to the user administration page
     def user_settings_tabs_with_rate_tab
       tabs = user_settings_tabs_without_rate_tab
-      tabs &lt;&lt; { :name =&gt; 'rates', :partial =&gt; 'users/rates', :label =&gt; :rate_label_rate_history}
+      tabs << { :name => 'rates', :partial => 'users/rates', :label => :rate_label_rate_history}
       return tabs
     end
   end
@@ -289,11 +289,11 @@ So, the tabs variable is set using user_settings_tabs_without_rate_tab, which is
 ```ruby
 # https://github.com/redmine/redmine/blob/2.5.2/app/helpers/users_helper.rb#L45-L53
 def user_settings_tabs
-  tabs = [{:name =&gt; 'general', :partial =&gt; 'users/general', :label =&gt; :label_general},
-          {:name =&gt; 'memberships', :partial =&gt; 'users/memberships', :label =&gt; :label_project_plural}
+  tabs = [{:name => 'general', :partial => 'users/general', :label => :label_general},
+          {:name => 'memberships', :partial => 'users/memberships', :label => :label_project_plural}
           ]
   if Group.all.any?
-    tabs.insert 1, {:name =&gt; 'groups', :partial =&gt; 'users/groups', :label =&gt; :label_group_plural}
+    tabs.insert 1, {:name => 'groups', :partial => 'users/groups', :label => :label_group_plural}
   end
   tabs
 end
@@ -304,14 +304,14 @@ Then, a new hash is added to tabs. Because method user_settings_tabs is now alia
 ```ruby
 #https://github.com/redmine/redmine/blob/2.5.2/app/views/users/edit.html.erb#L9
 <div class="contextual">
-&lt;%= link_to l(:label_profile), user_path(@user), :class =&gt; 'icon icon-user' %&gt;
-&lt;%= change_status_link(@user) %&gt;
-&lt;%= delete_link user_path(@user) if User.current != @user %&gt;
+<%= link_to l(:label_profile), user_path(@user), :class => 'icon icon-user' %>
+<%= change_status_link(@user) %>
+<%= delete_link user_path(@user) if User.current != @user %>
 </div>
 
-&lt;%= title [l(:label_user_plural), users_path], @user.login %&gt;
+<%= title [l(:label_user_plural), users_path], @user.login %>
 
-&lt;%= render_tabs user_settings_tabs %&gt;
+<%= render_tabs user_settings_tabs %>
 ```
 
 Although alias_method_chain is a pretty cool and very useful method, it's not without its shortcomings. There's a great, recent blog article about that [here](http://www.justinweiss.com/blog/2014/09/08/rails-5-module-number-prepend-and-the-end-of-alias-method-chain/) in which Ruby 2's Module#prepend as a better alternative to alias_method_chain is discussed as well.

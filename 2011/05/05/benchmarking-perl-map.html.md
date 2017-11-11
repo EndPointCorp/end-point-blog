@@ -13,8 +13,8 @@ Last week, I was coding in Perl for an [Interchange](http://www.icdevgroup.org/i
 my @options;
 for my $obj (@$things) {
     push @options, {
-        value =&gt; $obj-&gt;{a},
-        label =&gt; $obj-&gt;{b}
+        value => $obj->{a},
+        label => $obj->{b}
     };        
 }
 return \@options;
@@ -25,8 +25,8 @@ I'm a big fan of Ruby's [inject method](http://www.ruby-doc.org/core/classes/Enu
 ```perl
 return [ map {
     {
-        value =&gt; $_-&gt;{a},
-        label =&gt; $_-&gt;{b}
+        value => $_->{a},
+        label => $_->{b}
     }
 } @$things ];
 ```
@@ -40,8 +40,8 @@ use Benchmark;
 
 my $count = 1000000;
 my $things = [
-    {'a' =&gt; 123, 'b' =&gt; 456, 'c' =&gt; 789 },
-    {'a' =&gt; 456, 'b' =&gt; 789, 'c' =&gt; 123 }
+    {'a' => 123, 'b' => 456, 'c' => 789 },
+    {'a' => 456, 'b' => 789, 'c' => 123 }
 ];
 
 #Test definitions as methods to mimic use in application
@@ -49,8 +49,8 @@ my $test1 = sub {
     my @options;
     for my $obj (@$things) {
         push @options, {
-            value =&gt; $obj-&gt;{a},
-            label =&gt; $obj-&gt;{b} 
+            value => $obj->{a},
+            label => $obj->{b} 
         };
     }
     return \@options;
@@ -58,22 +58,22 @@ my $test1 = sub {
 my $test2 = sub {
     return [ map {
         { 
-            value =&gt; $_-&gt;{a},
-            label =&gt; $_-&gt;{b}
+            value => $_->{a},
+            label => $_->{b}
         }
     } @$things ];
 };
 
-#Benchmark tests &amp; results.
-$t0 = Benchmark-&gt;new;
-$test1-&gt;() for(1..$count);
-$t1 = Benchmark-&gt;new;
+#Benchmark tests & results.
+$t0 = Benchmark->new;
+$test1->() for(1..$count);
+$t1 = Benchmark->new;
 $td = timediff($t1, $t0);
 print "the code for test 1 took:",timestr($td),"\n";
 
-$t0 = Benchmark-&gt;new;
-$test2-&gt;() for(1..$count);
-$t1 = Benchmark-&gt;new;
+$t0 = Benchmark->new;
+$test2->() for(1..$count);
+$t1 = Benchmark->new;
 $td = timediff($t1, $t0);
 
 print "the code for test 2 took:",timestr($td),"\n";

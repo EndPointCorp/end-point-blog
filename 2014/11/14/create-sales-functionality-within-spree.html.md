@@ -68,7 +68,7 @@ The [next part](http://guides.spreecommerce.com/developer/extensions_tutorial.ht
 We can find our Gemfile by going back to the terminal, and within the mystore directory, type ls to see a list of all the files and subdirectories within the Spree app. You will see the Gemfile there - open it using your favorite text editor. Add the following line to the last line of your Gemfile, and save it:
 
 ```ruby
-gem 'spree_fancy', :git =&gt; 'git://github.com/spree/spree_fancy.git', :branch =&gt; '2-1-stable'
+gem 'spree_fancy', :git => 'git://github.com/spree/spree_fancy.git', :branch => '2-1-stable'
 ```
 
 Notice the branch it mentions is 2-1-stable. Since you just installed Spree, you are most likely using the latest version, 2-3-stable. I changed my branch in the above gem to '2-3-stable' to reflect the Spree version I'm currently using. After completing this step, run bundle install to install the gem using Bundler.
@@ -110,9 +110,9 @@ bundle exec rails g migration add_sale_price_to_spree_variants sale_price:decima
 Once your migration is complete, navigate in your terminal to db/migrate/XXXXXXXXXXXX_add_sale_price_to_spree_variants.rb and add in the changes as shown in the Spree tutorial:
 
 ```ruby
-class AddSalePriceToSpreeVariants &lt; ActiveRecord::Migration
+class AddSalePriceToSpreeVariants < ActiveRecord::Migration
   def change
-    add_column :spree_variants, :sale_price, :decimal, :precision =&gt; 8, :scale =&gt; 2
+    add_column :spree_variants, :sale_price, :decimal, :precision => 8, :scale => 2
   end
 end
 ```
@@ -120,7 +120,7 @@ end
 Now let's switch back to our mystore application so that we can add our extension before continuing any development. Within mystore, add the following to your Gemfile:
 
 ```ruby
-gem 'spree_simple_sales', :path =&gt; '../spree_simple_sales'
+gem 'spree_simple_sales', :path => '../spree_simple_sales'
 ```
 
 You will have to adjust the path ('../spree_simple_sales') depending on where you created your sales extension.
@@ -161,7 +161,7 @@ Next step - add a route to this sales action in our config/routes.rb file. Make 
 
 ```ruby
 Spree::Core::Engine.routes.draw do
-  get "/sale" =&gt; "home#sale"
+  get "/sale" => "home#sale"
 end
 ```
 
@@ -178,17 +178,17 @@ The next steps are taken directly from the Spree documentation:
 “Now, follow the steps I take in selecting a product and updating its master variant to have a sale price. Note, you may not be editing the exact same product as I am, but this is not important. We just need one “on sale” product to display on the sales page.”
 
 ```ruby
-&gt; product = Spree::Product.first
-=&gt; #&lt;Spree::Product id: 107377505, name: "Spree Bag", description: "Lorem ipsum dolor sit amet, consectetuer adipiscing...", available_on: "2013-02-13 18:30:16", deleted_at: nil, permalink: "spree-bag", meta_description: nil, meta_keywords: nil, tax_category_id: 25484906, shipping_category_id: nil, count_on_hand: 10, created_at: "2013-02-13 18:30:16", updated_at: "2013-02-13 18:30:16", on_demand: false&gt;
+> product = Spree::Product.first
+=> #<Spree::Product id: 107377505, name: "Spree Bag", description: "Lorem ipsum dolor sit amet, consectetuer adipiscing...", available_on: "2013-02-13 18:30:16", deleted_at: nil, permalink: "spree-bag", meta_description: nil, meta_keywords: nil, tax_category_id: 25484906, shipping_category_id: nil, count_on_hand: 10, created_at: "2013-02-13 18:30:16", updated_at: "2013-02-13 18:30:16", on_demand: false>
 
-&gt; variant = product.master
-=&gt; #&lt;Spree::Variant id: 833839126, sku: "SPR-00012", weight: nil, height: nil, width: nil, depth: nil, deleted_at: nil, is_master: true, product_id: 107377505, count_on_hand: 10, cost_price: #&lt;BigDecimal:7f8dda5eebf0,'0.21E2',9(36)&gt;, position: nil, lock_version: 0, on_demand: false, cost_currency: nil, sale_price: nil&gt;
+> variant = product.master
+=> #<Spree::Variant id: 833839126, sku: "SPR-00012", weight: nil, height: nil, width: nil, depth: nil, deleted_at: nil, is_master: true, product_id: 107377505, count_on_hand: 10, cost_price: #<BigDecimal:7f8dda5eebf0,'0.21E2',9(36)>, position: nil, lock_version: 0, on_demand: false, cost_currency: nil, sale_price: nil>
 
-&gt; variant.sale_price = 8.00
-=&gt; 8.0
+> variant.sale_price = 8.00
+=> 8.0
 
-&gt; variant.save
-=&gt; true
+> variant.save
+=> true
 
 ```
 
@@ -204,7 +204,7 @@ Create the a file in your new directory called sale.html.erb and add the followi
 
 ```ruby
 <div data-hook="homepage_products">
-  &lt;%= render 'spree/shared/products', :products =&gt; @products %&gt;
+  <%= render 'spree/shared/products', :products => @products %>
 </div>
 ```
 
@@ -224,7 +224,7 @@ module Spree
     alias_method :orig_price_in, :price_in
     def price_in(currency)
       return orig_price_in(currency) unless sale_price.present?
-      Spree::Price.new(:variant_id =&gt; self.id, :amount =&gt; self.sale_price, :currency =&gt; currency)
+      Spree::Price.new(:variant_id => self.id, :amount => self.sale_price, :currency => currency)
     end
   end
 end
@@ -260,8 +260,8 @@ require 'spec_helper'
 describe Spree::Variant do
   describe "#price_in" do
     it "returns the sale price if it is present" do
-      variant = create(:variant, :sale_price =&gt; 8.00)
-      expected = Spree::Price.new(:variant_id =&gt; variant.id, :currency =&gt; "USD", :amount =&gt; variant.sale_price)
+      variant = create(:variant, :sale_price => 8.00)
+      expected = Spree::Price.new(:variant_id => variant.id, :currency => "USD", :amount => variant.sale_price)
 
       result = variant.price_in("USD")
 
@@ -271,8 +271,8 @@ describe Spree::Variant do
     end
 
     it "returns the normal price if it is not on sale" do
-      variant = create(:variant, :price =&gt; 15.00)
-      expected = Spree::Price.new(:variant_id =&gt; variant.id, :currency =&gt; "USD", :amount =&gt; variant.price)
+      variant = create(:variant, :price => 15.00)
+      expected = Spree::Price.new(:variant_id => variant.id, :currency => "USD", :amount => variant.price)
 
       result = variant.price_in("USD")
 
@@ -304,16 +304,16 @@ The result is the location of your spree_backend. Now cd into that location, and
 Now we want to actually add a field container after the price field container for sale price so we need to create another override by creating a new file in your application’s app/overrides directory called add_sale_price_to_product_edit.rb and add the following content:
 
 ```ruby
-Deface::Override.new(:virtual_path =&gt; 'spree/admin/products/_form',
-  :name =&gt; 'add_sale_price_to_product_edit',
-  :insert_after =&gt; "erb[loud]:contains('text_field :price')",
-  :text =&gt; "
-    &lt;%= f.field_container :sale_price do %&gt;
-      &lt;%= f.label :sale_price, raw(Spree.t(:sale_price) + content_tag(:span, ' *')) %&gt;
-      &lt;%= f.text_field :sale_price, :value =&gt;
-        number_to_currency(@product.sale_price, :unit =&gt; '') %&gt;
-      &lt;%= f.error_message_on :sale_price %&gt;
-    &lt;% end %&gt;
+Deface::Override.new(:virtual_path => 'spree/admin/products/_form',
+  :name => 'add_sale_price_to_product_edit',
+  :insert_after => "erb[loud]:contains('text_field :price')",
+  :text => "
+    <%= f.field_container :sale_price do %>
+      <%= f.label :sale_price, raw(Spree.t(:sale_price) + content_tag(:span, ' *')) %>
+      <%= f.text_field :sale_price, :value =>
+        number_to_currency(@product.sale_price, :unit => '') %>
+      <%= f.error_message_on :sale_price %>
+    <% end %>
   ")
 ```
 

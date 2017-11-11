@@ -28,17 +28,17 @@ Okay, now the know-it-alls have rejoined us. I had a Perl hashref being initiali
 
 ```nohighlight
 my $hr = {
-  KEY1 =&gt; $value1,
-  KEY2 =&gt; $value2,
-  KEY_TROUBLE =&gt; (defined($foo) ? mysub($foo) : 1),
-  KEY3 =&gt; $value3,
+  KEY1 => $value1,
+  KEY2 => $value2,
+  KEY_TROUBLE => (defined($foo) ? mysub($foo) : 1),
+  KEY3 => $value3,
 };
 ```
 
 So here is the issue: if mysub() returns a list, then the hashref will get extra data. Remember, Perl n00bs, "=>" is not a magical operator, it's just a "fat comma". So a construction like this:
 
 ```nohighlight
-1 =&gt; (2, 3, 4)
+1 => (2, 3, 4)
 ```
 
 is really the same as:
@@ -55,13 +55,13 @@ use Data::Dumper;
 my($value1,$value2,$value3,$foo) = qw(value1 value2 value3 foo);
 
 my $hr = {
-  KEY1 =&gt; $value1,
-  KEY2 =&gt; $value2,
-  KEY_TROUBLE =&gt; (defined($foo) ? mysub($foo) : 1),
-  KEY3 =&gt; $value3,
+  KEY1 => $value1,
+  KEY2 => $value2,
+  KEY_TROUBLE => (defined($foo) ? mysub($foo) : 1),
+  KEY3 => $value3,
 };
 
-print Data::Dumper-&gt;Dumper($hr);
+print Data::Dumper->Dumper($hr);
 
 sub mysub {
   return qw(junk extrajunk);
@@ -73,11 +73,11 @@ This outputs:
 ```nohighlight
 $VAR1 = 'Data::Dumper';
 $VAR2 = {
-          'extrajunk' =&gt; 'KEY3',
-          'KEY2' =&gt; 'value2',
-          'KEY1' =&gt; 'value1',
-          'value3' =&gt; undef,
-          'KEY_TROUBLE' =&gt; 'junk'
+          'extrajunk' => 'KEY3',
+          'KEY2' => 'value2',
+          'KEY1' => 'value1',
+          'value3' => undef,
+          'KEY_TROUBLE' => 'junk'
         };
 ```
 
@@ -85,7 +85,7 @@ Now, the actual subroutine involved in my little adventure was even more insidio
 
 ```nohighlight
 sub is_yes {
-   return( defined($_[0]) &amp;&amp; ($_[0] =~ /^[yYtT1]/));
+   return( defined($_[0]) && ($_[0] =~ /^[yYtT1]/));
 }
 ```
 

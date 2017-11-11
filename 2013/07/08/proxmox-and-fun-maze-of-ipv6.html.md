@@ -45,7 +45,7 @@ iface eth0 inet6 static
 address    YOUR:IPV6:IS:HERE
 netmask    64
 up ip -6 route add default via fe80::1 dev eth0
-up sysctl -p # &lt;------ ADDED THIS LINE TO FIX IPv6 CONNECTIVITY ISSUES
+up sysctl -p # <------ ADDED THIS LINE TO FIX IPv6 CONNECTIVITY ISSUES
 ```
 
 And there it goes. Reboot once again to verify and you should be all set.

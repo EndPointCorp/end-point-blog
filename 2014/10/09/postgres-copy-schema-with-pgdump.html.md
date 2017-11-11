@@ -74,7 +74,7 @@ Getting back to pg_dump, why is it schema-qualifying some ownerships, despite a 
         strcmp(type, "OPERATOR FAMILY") == 0)
     {
         /* Chop "DROP " off the front and make a modifiable copy */
-        char       *first = pg_strdup(te-&gt;dropStmt + 5);
+        char       *first = pg_strdup(te->dropStmt + 5);
 ```
 
 Well, that's an ugly elegant hack and explains why the schema name keeps popping up for functions, aggregates, and operators: because their names can be tricky, pg_dump hacks apart the already existing DROP statement built for the object, which unfortunately is schema-qualified. Thus, we get the redundant (and sed-busting) schema qualification!

@@ -16,9 +16,9 @@ Given these options, I built my own button using Rails 3.1, jQuery, and CoffeeSc
 Starting with **app/views/letters/index.html.erb**, I generated the buttons using Rails helpers and Twitter's Bootstrap classes:
 
 ```ruby
-&lt;%= link_to 'Write letter', new_letter_path, :class =&gt; "btn primary pull-right far-right" %&gt;
-&lt;%= link_to 'Delete all', '#', :class =&gt; "btn pull-right no_danger", :id =&gt; "delete_all" %&gt;
-&lt;%= link_to 'Are you sure?', delete_all_letters_path, :method =&gt; :destroy, :class =&gt;"btn pull-right danger confirm", :id =&gt; "delete_all", :style =&gt; "display:none;" %&gt;
+<%= link_to 'Write letter', new_letter_path, :class => "btn primary pull-right far-right" %>
+<%= link_to 'Delete all', '#', :class => "btn pull-right no_danger", :id => "delete_all" %>
+<%= link_to 'Are you sure?', delete_all_letters_path, :method => :destroy, :class =>"btn pull-right danger confirm", :id => "delete_all", :style => "display:none;" %>
 ```
 
 Notice that the 'Delete all' button doesn't actually specify a url and the 'Are you sure?' link's style is set to "display:none"
@@ -34,13 +34,13 @@ belongs to :user
 **app/models/user.rb**
 
 ```ruby
-has_many :letters, :dependent =&gt; :destroy
+has_many :letters, :dependent => :destroy
 ```
 
 I set up **config/routes.rb** to work with the explicit path I set in:
 
 ```ruby
-post 'delete_all_letters' =&gt; 'letters#delete_all'
+post 'delete_all_letters' => 'letters#delete_all'
 ```
 
 Finally, I finished this lot by adding the delete_all action to my **app/controllers/letters_controller.rb**:
@@ -59,17 +59,17 @@ end
 CoffeeScript is a beautiful language that compiles to JavaScript, which I prefer to JavaScript itself. You can read more about it [here](http://jashkenas.github.com/coffee-script/). Let's take a look at the **CoffeeScript** that makes this button work:
 
 ```js
-$('a#delete_all.no_danger').hover( -&gt;
+$('a#delete_all.no_danger').hover( ->
     $(this).addClass('danger')
-    $(this).click( -&gt;
+    $(this).click( ->
         $('a#delete_all.no_danger').hide()
         $('a#delete_all.confirm').show()
     )   
 )
-$('a#delete_all.no_danger').mouseleave( -&gt;
+$('a#delete_all.no_danger').mouseleave( ->
     $(this).removeClass('danger')
 )
-$('a#delete_all.danger').mouseleave( -&gt;
+$('a#delete_all.danger').mouseleave( ->
     $(this).hide()
     $('a#delete_all.no_danger').show()
 )
@@ -99,10 +99,10 @@ $('a#delete_all.danger').mouseleave(function() {
 Not shown in the video, but I modified index.html.erb to only show the 'Delete all' button when the user has a zero-inbox.
 
 ```ruby
-&lt;%= link_to 'Write letter', new_letter_path, :class =&gt; "btn primary pull-right far-right" %&gt;
-&lt;% if !@letters.empty? %&gt;
-    &lt;%= link_to 'Delete all', '#', :class =&gt; "btn pull-right no_danger", :id =&gt; "delete_all" %&gt;
-    &lt;%= link_to 'Are you sure?', delete_all_letters_path, :method =&gt; :destroy, :class =&gt;"btn pull-right danger confirm", :id =&gt; "delete_all", :style =&gt; "display:none;" %&gt;
-&lt;% end %&gt;
+<%= link_to 'Write letter', new_letter_path, :class => "btn primary pull-right far-right" %>
+<% if !@letters.empty? %>
+    <%= link_to 'Delete all', '#', :class => "btn pull-right no_danger", :id => "delete_all" %>
+    <%= link_to 'Are you sure?', delete_all_letters_path, :method => :destroy, :class =>"btn pull-right danger confirm", :id => "delete_all", :style => "display:none;" %>
+<% end %>
 ```
 

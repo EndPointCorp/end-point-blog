@@ -14,7 +14,7 @@ First, here are several examples of Facebook integration methods I used:
 <table cellpadding="10" cellspacing="0" width="100%">
 <tbody><tr style="background:#DDE4DF;">
 <th>
-Name &amp; Notes
+Name & Notes
 </th>
 <th>
 Screenshot Examples
@@ -77,22 +77,22 @@ xfbml
 <tr>
 <td valign="top">
 <pre class="brush:plain">
-&lt;iframe
+<iframe
 src="http://www.facebook.com/plugins/like.php
-?href=&lt;%= URI.encode(request.url) %&gt;
-&amp;layout=button_count"
+?href=<%= URI.encode(request.url) %>
+&layout=button_count"
 scrolling="no" frameborder="0"
 style="border:none;overflow:hidden;
 width:90px;height:21px;"
-allowTransparency="true"&gt;
-&lt;/iframe&gt;
+allowTransparency="true">
+</iframe>
 </pre>
 </td>
 <td valign="top">
 <pre class="brush:plain">
-&lt;p&gt;&lt;fb:like layout="button_count"&gt;&lt;/fb:like&gt;&lt;/p&gt;
-&lt;div id="fb-root"&gt;&lt;/div&gt;
-&lt;script&gt;
+<p><fb:like layout="button_count"></fb:like></p>
+<div id="fb-root"></div>
+<script>
 var fb_rendered = false;
 window.fbAsyncInit = function() {
     FB.init({appId: '*appid*',
@@ -108,7 +108,7 @@ window.fbAsyncInit = function() {
     e.async = true;
     document.getElementById('fb-root').appendChild(e);
 }());
-&lt;/script&gt;
+</script>
 </pre>
 </td>
 </tr>

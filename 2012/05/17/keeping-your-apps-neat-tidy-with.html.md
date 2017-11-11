@@ -2,7 +2,7 @@
 author: Greg Davidson
 gh_issue_number: 616
 tags: css, javascript, jquery, open-source, tools
-title: Keeping Your Apps Neat &amp; Tidy With RequireJS
+title: Keeping Your Apps Neat & Tidy With RequireJS
 ---
 
 
@@ -32,7 +32,7 @@ The dependencies included RequireJS bundled together with [jQuery](http://jquery
 RequireJS is included in the page with a script tag and the data-main attribute is used to specify additional files to load. In this case "scripts/main" tells RequireJS to load the main.js file that resides in the scripts directory. Require will load the specified files asynchronously. This is what index.html looks like:
 
 ```nohighlight
-&lt;!DOCTYPE html&gt;<br/>&lt;html&gt;<br/>&lt;head&gt;<br/>    &lt;title&gt;RequireJS Example&lt;/title&gt;<br/>&lt;/head&gt;<br/>&lt;body&gt;<br/>    &lt;h1&gt;RequireJS Example&lt;/h1&gt;<br/>    &lt;!-- This is a special version of jQuery with RequireJS built-in --&gt;<br/>    &lt;script data-main="scripts/main" src="scripts/require-jquery.js"&gt;&lt;/script&gt;<br/>&lt;/body&gt;<br/>&lt;/html&gt;<br/>
+<!DOCTYPE html><br/><html><br/><head><br/>    <title>RequireJS Example</title><br/></head><br/><body><br/>    <h1>RequireJS Example</h1><br/>    <!-- This is a special version of jQuery with RequireJS built-in --><br/>    <script data-main="scripts/main" src="scripts/require-jquery.js"></script><br/></body><br/></html><br/>
 ```
 
 I was a little skeptical of this approach working on older versions of Internet Explorer so I tested it quickly with IE6 and confirmed that it did indeed work just fine.
@@ -96,7 +96,7 @@ Next, we define a view with some data for our Mustache template and render it.
 I really like this approach because it allows me to keep my HTML, CSS and JavaScript separate and also lets me write my templates in HTML instead of long, messy JavaScript strings. This is what our template looks like:
 
 ```nohighlight
-&lt;ul class="hot-products"&gt;<br/>  {{#products}}<br/>  &lt;li class="product"&gt;<br/>    {{name}}: ${{price}} {{#soldByEach}}each{{/soldByEach}}{{#soldByPound}}per lb{{/soldByPound}}<br/>  &lt;/li&gt;<br/>  {{/products}}<br/>&lt;/ul&gt;<br/>
+<ul class="hot-products"><br/>  {{#products}}<br/>  <li class="product"><br/>    {{name}}: ${{price}} {{#soldByEach}}each{{/soldByEach}}{{#soldByPound}}per lb{{/soldByPound}}<br/>  </li><br/>  {{/products}}<br/></ul><br/>
 ```
 
 ## Including the Module

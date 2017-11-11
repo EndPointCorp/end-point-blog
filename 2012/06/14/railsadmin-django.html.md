@@ -2,7 +2,7 @@
 author: Jeff Boes
 gh_issue_number: 641
 tags: django, rails, conference, clients
-title: RailsAdmin &amp; Django
+title: RailsAdmin & Django
 ---
 
 Steph Skardal and Greg Davidson presented on RailsAdmin and Django (in the context of two of our clients, Musica Russica and Providence Plan).

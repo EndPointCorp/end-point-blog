@@ -39,7 +39,7 @@ Now consider the case in which we only know the first part of the word, so we pu
                              QUERY PLAN                                           
 ----------------------------------------------------------------------
  Index Only Scan using pg_class_relname_nsp_index on pg_class
-   Index Cond: ((relname &gt;= 'foo'::name) AND (relname &lt; 'fop'::name))
+   Index Cond: ((relname >= 'foo'::name) AND (relname < 'fop'::name))
    Filter: (relname ~~ 'foo%'::text)
 </span>
 ```
@@ -129,7 +129,7 @@ test# EXPLAIN EXECUTE zz('foo%');
                               QUERY PLAN                        
 ----------------------------------------------------------------------
  Index Only Scan using pg_class_relname_nsp_index on pg_class
-   Index Cond: ((relname &gt;= 'foo'::name) AND (relname &lt; 'fop'::name))
+   Index Cond: ((relname >= 'foo'::name) AND (relname < 'fop'::name))
    Filter: (relname ~~ 'foo%'::text)
 
 test# EXPLAIN EXECUTE zz('foobar');

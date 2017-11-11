@@ -26,7 +26,7 @@ SELECT  `users`.* FROM `users`  WHERE (email = 'Robert'); DROP TABLE STUDENTS;
 The example above shows how find_by_sql can allow parameters submitted by a user to be directly entered into a SQL statement and how an attacker might use the vulnerability to wreak havoc.  These types of find_by_sql statements used to be more commonly used in earlier versions of Rails (1.0 - 2.0) and it was through these statements that the Rails community realized that SQL injection was a problem that needed addressing.  Here's another example prominent in the early Rails days:
 
 ```sql
-User.find :first, :conditions =&gt; "(name = '#{params[:query]}')" ##(BAD BAD BAD)
+User.find :first, :conditions => "(name = '#{params[:query]}')" ##(BAD BAD BAD)
 produces this SQL statement:
 
 #generated SQL
@@ -40,7 +40,7 @@ Fortunately, Rails core decided to make it easier to just do the right thing and
 
 ```sql
 User.find_by_sql(["SELECT * FROM users WHERE (name = ?)", params])  ##(GOOD)
-User.find :first, :conditions =&gt; ["(name = '?')", params] ##(GOOD)
+User.find :first, :conditions => ["(name = '?')", params] ##(GOOD)
 #generated SQL
 SELECT * FROM users WHERE (name = 'Robert\'); DROP TABLE STUDENTS; ##') (RETURNS NIL)
 
@@ -52,7 +52,7 @@ The distinction in the filtered SQL statement is the escaped single quote right 
 User.find_by_name(params[:query]) ##(GOOD)
 #generated SQL
 SELECT * FROM `users` WHERE `users`.`name` = 'Robert\'); DROP TABLE STUDENTS; ##' (RETURNS NIL)
-User.find :first, :conditions =&gt; {:name =&gt; params} ##(GOOD)
+User.find :first, :conditions => {:name => params} ##(GOOD)
 SELECT `users`.* FROM `users` WHERE `users`.`name` = 'Robert\'); DROP TABLE STUDENTS; ##' (RETURNS NIL)
 
 ```

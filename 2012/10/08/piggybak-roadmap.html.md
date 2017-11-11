@@ -25,6 +25,6 @@ In looking towards the future of Piggybak, we've decided to build out some featu
 - Line Item Rearchitecture to support future work on Gift Certificates, Discounts [core]
 - Gift Certificate, Discount Support [core]
 - Advanced Taxonomy [as extension]
-- Reviews &amp; Ratings [as extension]
+- Reviews & Ratings [as extension]
 
 Follow the Piggybak GitHub user [here](https://github.com/piggybak), check out the website and demo [here](http://www.piggybak.org/) and keep an eye out for future blog posts on the progress of Piggybak.

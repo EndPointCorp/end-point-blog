@@ -18,7 +18,7 @@ The basic thought, then, is that we want to take the content of the unversioned 
 for ref in $(git tag);
 do
     echo -n $ref;
-    diff -w &lt;(git show $ref:/path/to/versioned/file 2&gt;/dev/null) modified_file | wc -l;
+    diff -w <(git show $ref:/path/to/versioned/file 2>/dev/null) modified_file | wc -l;
 done | sort -k2 -n
 ```
 

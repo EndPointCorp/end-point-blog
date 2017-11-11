@@ -29,21 +29,21 @@ class foobar {
 
   user {
     "postgres":
-      ensure     =&gt; present,
-      managehome =&gt; true;
+      ensure     => present,
+      managehome => true;
   }
 
   file {
     "/home/postgres/.psqlrc":
-      ensure      =&gt; present,
-      owner       =&gt; postgres,
-      group       =&gt; postgres,
-      mode        =&gt; 644,
-      source      =&gt; [
+      ensure      => present,
+      owner       => postgres,
+      group       => postgres,
+      mode        => 644,
+      source      => [
                       "puppet:///foobar/$pg_environment/psqlrc",
                       "puppet:///foobar/psqlrc",
                       ],
-      require     =&gt; User["postgres"];
+      require     => User["postgres"];
   }
 }
 ```
@@ -129,7 +129,7 @@ the string "gis" somewhere in their hostname by saying:
   if $::hostname =~ /gis/ {
     package {
       'postgis':
-        ensure =&gt; latest;
+        ensure => latest;
     }
   }
 ```
@@ -167,7 +167,7 @@ the actual system calls and the name of the variable:
 
 Facter.add("postgres_homedir") do
   setcode do
-    system('useradd -m postgres 2&gt;/dev/null')
+    system('useradd -m postgres 2>/dev/null')
     Facter::Util::Resolution.exec('/bin/grep "^postgres:" /etc/passwd | cut -d: -f6').chomp
   end
 end
@@ -194,12 +194,12 @@ class foobar {
   file {
 
     postgres_psqlrc:
-      path        =&gt; "${::postgres_homedir}/.psqlrc",
-      ensure      =&gt; present,
-      owner       =&gt; postgres,
-      group       =&gt; postgres,
-      mode        =&gt; 644,
-      source      =&gt; [
+      path        => "${::postgres_homedir}/.psqlrc",
+      ensure      => present,
+      owner       => postgres,
+      group       => postgres,
+      mode        => 644,
+      source      => [
                       "puppet:///postgres/$pg_environment/psqlrc",
                       "puppet:///postgres/psqlrc",
                       ];

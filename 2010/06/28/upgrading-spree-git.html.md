@@ -80,10 +80,10 @@ config/boot.rb
 config/environment.rb
 
 ```diff
--  config.gem 'authlogic', :version =&gt; '&gt;=2.1.2'
-+  config.gem 'authlogic', :version =&gt; '2.1.3'
--  config.gem 'will_paginate', :lib =&gt; 'will_paginate', :version =&gt; '2.3.11'
-+  config.gem 'will_paginate', :lib =&gt; 'will_paginate', :version =&gt; '2.3.14'
+-  config.gem 'authlogic', :version => '>=2.1.2'
++  config.gem 'authlogic', :version => '2.1.3'
+-  config.gem 'will_paginate', :lib => 'will_paginate', :version => '2.3.11'
++  config.gem 'will_paginate', :lib => 'will_paginate', :version => '2.3.14'
 -  config.i18n.default_locale = :'en-US'
 +  config.i18n.default_locale = :'en'
 ```
@@ -91,8 +91,8 @@ config/environment.rb
 config/environment/test.rb
 
 ```diff
--config.gem 'test-unit', :lib =&gt; 'test/unit', :version =&gt; '~&gt;2.0.5' if RUBY_VERSION.to_f &gt;= 1.9
-+config.gem 'test-unit', :lib =&gt; 'test/unit', :version =&gt; '~&gt;2.0.9' if RUBY_VERSION.to_f &gt;= 1.9
+-config.gem 'test-unit', :lib => 'test/unit', :version => '~>2.0.5' if RUBY_VERSION.to_f >= 1.9
++config.gem 'test-unit', :lib => 'test/unit', :version => '~>2.0.9' if RUBY_VERSION.to_f >= 1.9
 ```
 
 Most of the changes were not surprising, except that the locale changes here are significant because they may require extension locales to be updated. After I reviewed these changes, I installed newer gem dependencies and bootstrapped the data since all my application data was stored in sample data files and restarted the server to test the upgrade. Then, I added the config/ and public/ files in a single git commit. I removed the old temporary configuration files that were left around from the upgrade.

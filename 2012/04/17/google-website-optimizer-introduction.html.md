@@ -35,9 +35,9 @@ I jumped right into the Google Website Optimizer sign-up and wanted to set up a 
 
 Rather than implement a basic A/B tests in Google Website optimizer, I decided to implement a multivariate test with just the two options (A and B). The basic setup required this:
 
-- Copy provided JavaScript into my test page just above &lt;/head&gt;
-- Wrap &lt;script&gt;utmx_section("stephs_test")&lt;/script&gt;...&lt;/noscript&gt; around the section of text that will be modified by the test.
-- Copy provided JavaScript into my converting test page just above &lt;/head&gt;
+- Copy provided JavaScript into my test page just above </head>
+- Wrap <script>utmx_section("stephs_test")</script>...</noscript> around the section of text that will be modified by the test.
+- Copy provided JavaScript into my converting test page just above </head>
 
 Google Website Optimizer will verify the code and provide a user interface to enter the variations of the test text.
 

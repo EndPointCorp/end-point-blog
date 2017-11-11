@@ -94,7 +94,7 @@ Version 3.0.0  Released February 3, 2014 (git commit 9725314f27a8d65fc05bdeda3da
   - Use correct SQL_BIGINT constant for int8
     [Dagfinn Ilmari Mannsåker]
 
-  - Fix assertion when binding array columns on debug perls &gt;= 5.16
+  - Fix assertion when binding array columns on debug perls >= 5.16
     [Dagfinn Ilmari Mannsåker]
 
   - Adjust test to use 3 digit exponential values

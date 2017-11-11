@@ -28,7 +28,7 @@ mysql_fdw.c: In function ‘mysqlPlanForeignScan’:
 mysql_fdw.c:466:8: warning: ‘rows’ may be used uninitialized in this function [-Wmaybe-uninitialized]
 gcc -O2 -Wall -Wmissing-prototypes -Wpointer-arith -Wdeclaration-after-statement -Wendif-labels -Wformat-security -fno-strict-aliasing -fwrapv -fexcess-precision=standard -g -fpic -shared -o mysql_fdw.so mysql_fdw.o -L/home/josh/devel/pg91/lib -L/usr/lib  -Wl,--as-needed -Wl,-rpath,'/home/josh/devel/pg91/lib',--enable-new-dtags  -L/usr/lib/x86_64-linux-gnu -lmysqlclient -lpthread -lz -lm -lrt -ldl
 INFO: installing extension
-&lt; ... snip ... &gt;
+< ... snip ... >
 ```
 
 Here I'll refer to the documentation provided in [mysql_fdw's README](https://github.com/dpage/mysql_fdw/blob/master/README). The first step in using a foreign data wrapper, once the software is installed, is to create the foreign server, and the user mapping. The foreign server tells PostgreSQL how to connect to MySQL, and the user mapping covers what credentials to use. This is an interesting detail; it means the foreign data wrapper system can authenticate with external data sources in different ways depending on the PostgreSQL user involved. You'll note the pattern in creating these objects: each simply takes a series of options that can mean whatever the FDW needs them to mean. This allows the flexibility to support all sorts of different data sources with one interface.
@@ -48,10 +48,10 @@ done
 In a step not shown above, this script also consolidates the data from each table into one, native PostgreSQL table, to simplify later reporting. In our case, pulling the data once and reporting on the results is perfectly acceptable; in other words, data a few seconds old wasn't a concern. We also didn't need to write back to MySQL, which presumably could complicate things somewhat. We did, however, run into the same data validation problems PostgreSQL users habitually complain about when working with MySQL. Here's an example, in my own test database:
 
 ```nohighlight
-mysql&gt; create table bad_dates (mydate date);
+mysql> create table bad_dates (mydate date);
 Query OK, 0 rows affected (0.07 sec)
 
-mysql&gt; insert into bad_dates values ('2013-02-30'), ('0000-00-00');
+mysql> insert into bad_dates values ('2013-02-30'), ('0000-00-00');
 Query OK, 2 rows affected (0.02 sec)
 Records: 2  Duplicates: 0  Warnings: 0
 ```

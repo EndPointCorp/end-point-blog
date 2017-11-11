@@ -12,7 +12,7 @@ So, I looked around, and I found a solution: using a USB cable and ADB ([Android
 To show you exactly what I mean, here's a short video demonstrating this:
 
 <div class="separator" style="clear: both; text-align: center;">
-<object class="BLOGGER-youtube-video" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0" data-thumbnail-src="https://ytimg.googleusercontent.com/vi/ut7NWQZVXEk/0.jpg" height="532" width="640"><param name="movie" value="https://youtube.googleapis.com/v/ut7NWQZVXEk&amp;source=uds"/><param name="bgcolor" value="#FFFFFF"/><param name="allowFullScreen" value="true"/><embed allowfullscreen="true" height="532" src="https://youtube.googleapis.com/v/ut7NWQZVXEk&amp;source=uds" type="application/x-shockwave-flash" width="640"/></object></div>
+<object class="BLOGGER-youtube-video" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0" data-thumbnail-src="https://ytimg.googleusercontent.com/vi/ut7NWQZVXEk/0.jpg" height="532" width="640"><param name="movie" value="https://youtube.googleapis.com/v/ut7NWQZVXEk&source=uds"/><param name="bgcolor" value="#FFFFFF"/><param name="allowFullScreen" value="true"/><embed allowfullscreen="true" height="532" src="https://youtube.googleapis.com/v/ut7NWQZVXEk&source=uds" type="application/x-shockwave-flash" width="640"/></object></div>
 
 So, how does one work this magic? There are several ways, but I'll talk about the one that I used. For this method, you need to have Google Chrome version 31 or higher installed on both your Android device and your development machine.
 

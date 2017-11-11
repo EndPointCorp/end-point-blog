@@ -75,19 +75,19 @@ data Graph a = Graph (Map a [a]) deriving (Show)
 empty :: Graph a
 empty = Graph Map.empty
 
-insertNode :: (Ord a) =&gt; a -&gt; Graph a -&gt; Graph a
+insertNode :: (Ord a) => a -> Graph a -> Graph a
 insertNode node (Graph m) = Graph $ Map.insert node [] m
 
-removeNode :: (Ord a) =&gt; a -&gt; Graph a -&gt; Graph a
+removeNode :: (Ord a) => a -> Graph a -> Graph a
 removeNode node (Graph m) = Graph $ Map.delete node m
 
-insertEdge :: (Ord a) =&gt; a -&gt; a -&gt; Graph a -&gt; Graph a
+insertEdge :: (Ord a) => a -> a -> Graph a -> Graph a
 insertEdge parent child (Graph m) =
   Graph $ Map.insertWithKey update parent [child] m
   where
     update _ _ old = List.nub $ child:old
 
-nodes :: Graph a -&gt; [a]
+nodes :: Graph a -> [a]
 nodes (Graph m) = Map.keys m
 ```
 
@@ -98,11 +98,11 @@ You might be able to find a silly bug in the **removeNode** function. It doesn�
 Before doing that, let’s have a warm up, by adding two simple properties:
 
 ```haskell
-prop_insert_empty :: Int -&gt; Bool
+prop_insert_empty :: Int -> Bool
 prop_insert_empty i =
   nodes (insertNode i BlogGraph.empty) == [i]
 
-prop_insert_existing :: Int -&gt; Bool
+prop_insert_existing :: Int -> Bool
 prop_insert_existing i =
   nodes (insertNode i $ insertNode i BlogGraph.empty) == [i]
 ```
@@ -121,7 +121,7 @@ quickCheck prop_insert_existing
 Now we should add a property stating that for all removals of a node from the graph, all references of this node in edge definitions for other nodes are always also being removed:
 
 ```haskell
-prop_remove_removes_edges :: Graph Int -&gt; Bool
+prop_remove_removes_edges :: Graph Int -> Bool
 prop_remove_removes_edges (Graph m) =
   List.null (nodes graph) || List.notElem node elemsAfter
   where
@@ -130,24 +130,24 @@ prop_remove_removes_edges (Graph m) =
     elemsAfter = List.concat $ Map.elems mapAfter
     mapAfter =
       case removeNode node graph of
-        (Graph m) -&gt; m
+        (Graph m) -> m
 ```
 
 As I wrote before, these property testing functions are being run by the **QuickCheck** framework repeatedly with randomly generated values as arguments. Out of the box we’re able to generate random examples for many simple types — including e.g Int. That’s the reason we were able to just specify properties depending on random Int variables — without any additional code. But with the last example, we’re asking QuickCheck to generate a set of random **graphs**. We need to tell it how to construct a random graph first:
 
 ```haskell
-arbitrarySizedIntGraph :: Int -&gt; Gen (Graph Int)
+arbitrarySizedIntGraph :: Int -> Gen (Graph Int)
 arbitrarySizedIntGraph s = do
-  nodes &lt;- vectorOf s $ choose (0, 32000)
-  edges &lt;- edges nodes
+  nodes <- vectorOf s $ choose (0, 32000)
+  edges <- edges nodes
   let withNodes = List.foldr insertNode BlogGraph.empty nodes
   return $ List.foldr addEdge withNodes edges
   where
     addEdge (parent, child) = insertEdge parent child
     edges nodes = do
-      parents &lt;- sublistOf nodes
+      parents <- sublistOf nodes
       let children = nodes List.\\ parents
-      return [ (parent, child) | parent &lt;- parents, child &lt;- children ]
+      return [ (parent, child) | parent <- parents, child <- children ]
 
 instance Arbitrary (Graph Int) where
   arbitrary = sized arbitrarySizedIntGraph
@@ -167,7 +167,7 @@ QuickCheck shows that the property doesn’t hold for the whole domain — it fa
 We can now reexamine the code for the removeNode function and fix it as per the property’s specification:
 
 ```haskell
-removeNode :: (Ord a) =&gt; a -&gt; Graph a -&gt; Graph a
+removeNode :: (Ord a) => a -> Graph a -> Graph a
 removeNode node (Graph m) =
   Graph $ Map.map remNode $ Map.delete node m
   where

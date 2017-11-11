@@ -49,7 +49,7 @@ Start Time: 1482921042
 Timeout   : 300 (sec)
 Verify return code: 20 (unable to get local issuer certificate)
 
-$ echo -n | openssl s_client -CApath /etc/ssl/certs/ -connect app2domain.com:443 &lt;/dev/null | openssl x509 -noout -dates
+$ echo -n | openssl s_client -CApath /etc/ssl/certs/ -connect app2domain.com:443 </dev/null | openssl x509 -noout -dates
 
 verify error:num=20:unable to get local issuer certificate
 DONE
@@ -68,7 +68,7 @@ Start Time: 1482920942
 Timeout   : 300 (sec)
 Verify return code: 0 (ok)
 
-$ echo -n | openssl s_client -CApath /etc/ssl/certs/ -connect app2domain.com:443 -servername app2domain.com &lt;/dev/null | openssl x509 -noout -dates
+$ echo -n | openssl s_client -CApath /etc/ssl/certs/ -connect app2domain.com:443 -servername app2domain.com </dev/null | openssl x509 -noout -dates
 ...
 verify return:0
 DONE

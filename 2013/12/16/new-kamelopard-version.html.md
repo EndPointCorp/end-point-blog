@@ -28,7 +28,7 @@ it 'should accept only valid color modes' do
         @o.colorMode = :random
         begin
             @o.colorMode = :something_wrong
-        rescue RuntimeError =&gt; f
+        rescue RuntimeError => f
             q = f.to_s
         end
         q.should =~ /colorMode must be either/

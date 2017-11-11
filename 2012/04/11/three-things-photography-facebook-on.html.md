@@ -19,18 +19,18 @@ The site uses the WordPress plugin [Facebook Comments for WordPress](http://word
 
 ```diff
 219c219
--    echo "\t&lt;fb:comments xid='$xid' url='$postUrl' $siteisdark ",
-+    echo "\t&lt;fb:comments xid='$xid' href='$postUrl' url='$postUrl' $siteisdark ",
+-    echo "\t<fb:comments xid='$xid' url='$postUrl' $siteisdark ",
++    echo "\t<fb:comments xid='$xid' href='$postUrl' url='$postUrl' $siteisdark ",
 ```
 
 In the context of:
 
 ```php
-219                     echo "\t&lt;fb:comments xid='$xid' href='$postUrl' url='$postUrl' $siteisdark ",
+219                     echo "\t<fb:comments xid='$xid' href='$postUrl' url='$postUrl' $siteisdark ",
 220                         "numposts='{$fbc_options['numPosts']}' ",
 221                         "width='{$fbc_options['width']}' ",
 222                         "publish_feed='$publishToWall' ",
-223                         "migrated='1'&gt;&lt;/fb:comments&gt;";
+223                         "migrated='1'></fb:comments>";
 ```
 
 With this change, the Facebook error message disappeared and all appeared to be working as expected. I’m surprised that this hasn’t been fixed in the plugin itself, and the documentation wasn't extremely helpful. Sometimes the best option is to go right to the code. And of course, I'm recording this so I can revisit it if it breaks again with a WordPress plugin upgrade.

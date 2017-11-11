@@ -27,39 +27,39 @@ The prefix "**pg_**" is used because there is no corresponding built-in DBI meth
   my $dsn1 = 'dbi:Pg:dbname=sales;host=example1.com';
   my $dsn2 = 'dbi:Pg:dbname=sales;host=example2.com';
 
-  my $dbh1 = DBI-&gt;connect($dsn1, '', '', {AutoCommit=&gt;0, RaiseError=&gt;1});
-  my $dbh2 = DBI-&gt;connect($dsn2, '', '', {AutoCommit=&gt;0, RaiseError=&gt;1});
+  my $dbh1 = DBI->connect($dsn1, '', '', {AutoCommit=>0, RaiseError=>1});
+  my $dbh2 = DBI->connect($dsn2, '', '', {AutoCommit=>0, RaiseError=>1});
 
   my $SQL = 'SELECT gather_yearly_sales_data()';
   print "Kicking off a long, expensive query on database one\n";
   ## Normally, a do() will not return until the query is complete
   ## However, the async flag causes it to return immediately
-  $dbh1-&gt;do($SQL, {pg_async =&gt; PG_ASYNC});
+  $dbh1->do($SQL, {pg_async => PG_ASYNC});
 
   print "Kicking off a long, expensive query on database two\n";
-  $dbh2-&gt;do($SQL, {pg_async =&gt; PG_ASYNC});
+  $dbh2->do($SQL, {pg_async => PG_ASYNC});
 
   ## Both queries are running in the 'background'
   ## We have to wait for both, so it doesn't matter which one we wait for here
   ## However, if it's been over 2 minutes, we'll cancel both and quit
   my $time = 0;
-  while ( ! $dbh1-&gt;pg_ready() ) {
+  while ( ! $dbh1->pg_ready() ) {
     sleep 1;
-    if ($time++ &gt; 120) {
+    if ($time++ > 120) {
       print "Taking too long, let's cancel the queries\n";
-      $dbh1-&gt;pg_cancel();
-      $dbh2-&gt;pg_cancel();
-      $dbh1-&gt;rollback();
-      $dbh2-&gt;rollback();
+      $dbh1->pg_cancel();
+      $dbh2->pg_cancel();
+      $dbh1->rollback();
+      $dbh2->rollback();
       die "No sales data was retrieved\n";
     }
   }
 
   ## We know that database 1 has finished, so we read in the results
-  my $rows1 = $dbh1-&gt;pg_result();
+  my $rows1 = $dbh1->pg_result();
   ## We then grab results from database 2
   ## This will block until done, which is okay
-  my $rows2 = $dbh2-&gt;pg_result();
+  my $rows2 = $dbh2->pg_result();
 ```
 
 The new method, simply known as **cancel()**, will kill any synchronously running query. One of the main uses for this is to timeout a query by using the builtin Perl **alarm** function. However, since the builtin alarm function has some quirks, we will instead use the much safer [POSIX::SigAction](http://perldoc.perl.org/POSIX.html) method. Another example:
@@ -76,20 +76,20 @@ The new method, simply known as **cancel()**, will kill any synchronously runnin
 
   my $dsn = 'dbi:Pg:dbname=dq';
 
-  my $dbh = DBI-&gt;connect($dsn, '', '', {AutoCommit=&gt;0, RaiseError=&gt;1});
+  my $dbh = DBI->connect($dsn, '', '', {AutoCommit=>0, RaiseError=>1});
 
   ## Setup all the POSIX alarm plumbing
-  my $mask = POSIX::SigSet-&gt;new(SIGALRM);
-  my $action = POSIX::SigAction-&gt;new(
+  my $mask = POSIX::SigSet->new(SIGALRM);
+  my $action = POSIX::SigAction->new(
     sub { die "TIMEOUT\n" },
     $mask,
   );
-  my $oldaction = POSIX::SigAction-&gt;new();
+  my $oldaction = POSIX::SigAction->new();
   sigaction( SIGALRM, $action, $oldaction );
 
   ## Prepare the queries
-  my $upd = $dbh-&gt;prepare('UPDATE foobar SET x=? WHERE y=?');
-  my $inv = $dbh-&gt;prepare('SELECT refresh_inventory(?)');
+  my $upd = $dbh->prepare('UPDATE foobar SET x=? WHERE y=?');
+  my $inv = $dbh->prepare('SELECT refresh_inventory(?)');
 
   ## Yes, a double eval. Async is looking better all the time :)
   eval {
@@ -97,9 +97,9 @@ The new method, simply known as **cancel()**, will kill any synchronously runnin
           alarm 30;
           for my $y (12,24,48) {
               print "Adjusting widget #$y\n";
-              $upd-&gt;execute(555,$y);
+              $upd->execute(555,$y);
               print "Recalculating inventory\n";
-              $inv-&gt;execute($y);
+              $inv->execute($y);
           }
         };
         alarm 0; ## Turn off our alarm
@@ -110,9 +110,9 @@ The new method, simply known as **cancel()**, will kill any synchronously runnin
         print "Queries are taking too long! Cancelling\n";
         ## We don't know which one is still running, and don't care
         ## It's safe to cancel a non-active statement handle
-        $upd-&gt;cancel() or die qq{Failed to cancel the query!\n};
-        $inv-&gt;cancel() or die qq{Failed to cancel the query!\n};
-        $dbh-&gt;rollback();
+        $upd->cancel() or die qq{Failed to cancel the query!\n};
+        $inv->cancel() or die qq{Failed to cancel the query!\n};
+        $dbh->rollback();
         die "Who has time to wait 30 seconds anymore?";
       }
       ## Some other non-alarm error, so we simply:
@@ -120,7 +120,7 @@ The new method, simply known as **cancel()**, will kill any synchronously runnin
     }
 
     print "Updates are complete\n";
-    $dbh-&gt;commit();
+    $dbh->commit();
     exit;
 ```
 

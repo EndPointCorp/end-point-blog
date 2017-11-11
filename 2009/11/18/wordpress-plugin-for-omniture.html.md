@@ -12,7 +12,7 @@ I've had some experience with WordPress plugin development, and I thought this w
 First, I created the base wordpress file to append the code near the footer of the wordpress theme. This file must live in the ~/wp-content/plugins/ directory. I named the file omniture.php.
 
 ```php
-  &lt;?php /*
+  <?php /*
     Plugin Name: SiteCatalyst for WordPress
     Plugin URI: http:www.endpoint.com/
     Version: 1.0
@@ -21,7 +21,7 @@ First, I created the base wordpress file to append the code near the footer of t
     function omniture_tag() {
     }
     add_action('wp_footer', 'omniture_tag');
-  ?&gt;
+  ?>
 ```
 
 In the code above, the wp_footer is a specific WordPress hook that runs just before the </body> tag. Next, I added the base Omniture code inside the omniture_tag function:
@@ -30,12 +30,12 @@ In the code above, the wp_footer is a specific WordPress hook that runs just bef
 ...
 
 function omniture_tag() {
-?&gt;
-&lt;script type="text/javascript"&gt;
-&lt;!-- var s_account = 'omniture_account_id'; --&gt;
-&lt;/script&gt;
-&lt;script type="text/javascript" src="/path/to/s_code.js"&gt;&lt;/script&gt;
-&lt;script type="text/javascript"&gt;&lt;!--
+?>
+<script type="text/javascript">
+<!-- var s_account = 'omniture_account_id'; -->
+</script>
+<script type="text/javascript" src="/path/to/s_code.js"></script>
+<script type="text/javascript"><!--
 s.pageName='' //page name
 s.channel='' //channel
 s.pageType='' //page type
@@ -57,8 +57,8 @@ s.eVar4= '' //conversion variable 4
 s.eVar5= '' //conversion variable 5
 /************* DO NOT ALTER ANYTHING BELOW THIS LINE ! **************/
 var s_code=s.t();if(s_code)document.write(s_code)
---&gt;&lt;/script&gt;
-&lt;?php
+--></script>
+<?php
 }
 
 ...
@@ -71,8 +71,8 @@ After verifying that the code was correctly appended near the footer in the sour
 ```php
 ...
 
-&lt;script type="text/javascript"&gt;&lt;!--
-&lt;?php
+<script type="text/javascript"><!--
+<?php
 if(is_home()) {    //WordPress functionality to check if page is home page
         $pageName = $channel = $pageType = $prop1 = 'Blog Home';
 } elseif (is_page()) {    //WordPress functionality to check if page is static page
@@ -81,7 +81,7 @@ if(is_home()) {    //WordPress functionality to check if page is home page
 } elseif (is_single()) { //WordPress functionality to check if page is article
         $categories = get_the_category();
         $pageName = $prop2 = the_title('', '', false);
-        $channel = $categories[0]-&gt;name;
+        $channel = $categories[0]->name;
         $pageType = $prop1 = 'Article';
 } elseif (is_category()) {    //WordPress functionality to check if page is category page
         $pageName = $channel = single_cat_title('', false);
@@ -103,7 +103,7 @@ echo "s.pageType = '$pageType'  //page type\n";
 echo "s.prop1 = '$prop1' //traffic variable 1\n";
 echo "s.prop2 = '$prop2' //traffic variable 2\n";
 echo "s.prop3 = '$prop3' //traffic variable 3\n";
-?&gt;
+?>
 s.prop4 = '' //traffic variable 4
 
 ...

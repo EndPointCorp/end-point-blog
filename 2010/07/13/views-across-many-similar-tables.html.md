@@ -56,7 +56,7 @@ AND   table_name ~ '_statuses$'
 AND   t.table_type  = 'BASE TABLE'
 $SQL$
    LOOP
-       IF (LENGTH(stmt) &gt; 0)
+       IF (LENGTH(stmt) > 0)
        THEN
            stmt := stmt || ' UNION ';
        END IF;

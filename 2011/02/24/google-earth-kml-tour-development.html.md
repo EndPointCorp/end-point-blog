@@ -29,29 +29,29 @@ to stutter, so we also stopped the flight motion and displayed a balloon
 full of text for the audience.  A KML example of this wrapper is below.
 
 ```nohighlight
-&lt;Folder&gt;
-       &lt;name&gt;Region Link Two&lt;/name&gt;
-       &lt;TimeStamp&gt;&lt;when&gt;2010-09-19T16:00:00Z&lt;/when&gt;&lt;/TimeStamp&gt;
-       &lt;NetworkLink&gt;
-               &lt;name&gt;Region Link Two&lt;/name&gt;
-               &lt;Region&gt;
-                       &lt;LatLonAltBox&gt;
-                               &lt;north&gt;41.8&lt;/north&gt;
-                               &lt;south&gt;41.6&lt;/south&gt;
-                               &lt;east&gt;-86.1&lt;/east&gt;
-                               &lt;west&gt;-86.3&lt;/west&gt;
-                       &lt;/LatLonAltBox&gt;
-                       &lt;Lod&gt;
-                               &lt;minLodPixels&gt;256&lt;/minLodPixels&gt;
-                               &lt;maxLodPixels&gt;-1&lt;/maxLodPixels&gt;
-                       &lt;/Lod&gt;
-               &lt;/Region&gt;
-               &lt;Link&gt;
-                       &lt;href&gt;network_view.kml&lt;/href&gt;
-                       &lt;viewRefreshMode&gt;onRegion&lt;/viewRefreshMode&gt;
-               &lt;/Link&gt;
-       &lt;/NetworkLink&gt;
-&lt;/Folder&gt;
+<Folder>
+       <name>Region Link Two</name>
+       <TimeStamp><when>2010-09-19T16:00:00Z</when></TimeStamp>
+       <NetworkLink>
+               <name>Region Link Two</name>
+               <Region>
+                       <LatLonAltBox>
+                               <north>41.8</north>
+                               <south>41.6</south>
+                               <east>-86.1</east>
+                               <west>-86.3</west>
+                       </LatLonAltBox>
+                       <Lod>
+                               <minLodPixels>256</minLodPixels>
+                               <maxLodPixels>-1</maxLodPixels>
+                       </Lod>
+               </Region>
+               <Link>
+                       <href>network_view.kml</href>
+                       <viewRefreshMode>onRegion</viewRefreshMode>
+               </Link>
+       </NetworkLink>
+</Folder>
 ```
 
 These techniques, and the Liquid Galaxy platform, combine to coordinate a moving visual experience across the audience's entire field of view.  Animations highlight GIS data and narrate its story, creating an impressive presentation.

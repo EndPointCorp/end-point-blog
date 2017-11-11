@@ -169,12 +169,12 @@ CREATE TABLE
 greg=# INSERT INTO catbox2(creation_time) select now() - '1 year'::interval + (x* '1 hour'::interval) from generate_series(1,24*365) x;
 INSERT 0 8760
 
-greg=# select * from catbox2 where creation_time &gt; now()-'1 week'::interval order by 1 limit 1
+greg=# select * from catbox2 where creation_time > now()-'1 week'::interval order by 1 limit 1
   id  |         creation_time         
 ------+-------------------------------
  8617 | 2016-06-11 10:51:00.101971-08
 
-$ psql -Atc "select * from catbox2 where id &lt; 8617 order by 1" | sha1sum
+$ psql -Atc "select * from catbox2 where id < 8617 order by 1" | sha1sum
 456272656d65486e6f203139353120506173733f  -
 
 ## Add some rows to emulate the append-only nature of this table:
@@ -182,7 +182,7 @@ greg=# insert into catbox2(creation_time) select now() from generate_series(1,10
 INSERT 0 1000
 
 ## Checksums should still be identical:
-$ psql -Atc "select * from catbox2 where id &lt; 8617 order by 1" | sha1sum
+$ psql -Atc "select * from catbox2 where id < 8617 order by 1" | sha1sum
 456272656d65486e6f203139353120506173733f  -
 ```
 

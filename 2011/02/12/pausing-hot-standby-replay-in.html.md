@@ -62,10 +62,10 @@ string.
 Sample invocation:
 
 ```bash
-[user@host&lt;1&gt;] $ touch /tmp/pausefile; pause-while /tmp/pausefile echo hi
+[user@host<1>] $ touch /tmp/pausefile; pause-while /tmp/pausefile echo hi
 ... # pauses, notifying of status
 
-[user@host&lt;2&gt;] $ rm /tmp/pausefile
+[user@host<2>] $ rm /tmp/pausefile
 ... # shell 1 will now output "hi"
 ```
 
@@ -83,12 +83,12 @@ PAUSE_FILE=$1;
 shift;
 
 while [ -f $PAUSE_FILE ]; do
- echo "'$PAUSE_FILE' present; pausing. remove to continue" &gt;&amp;2
+ echo "'$PAUSE_FILE' present; pausing. remove to continue" >&2
  sleep 1;
  PAUSED=1
 done
 
-[ "$PAUSED" ] &amp;&amp; echo "'$PAUSE_FILE' removed; " &gt;&amp;2
+[ "$PAUSED" ] && echo "'$PAUSE_FILE' removed; " >&2
 
 # untrap so we don't block the invoked command's expected signal handling
 trap INT;
@@ -107,7 +107,7 @@ restore_command, thus adjusting recovery.conf to
 something like this:
 
 ```nohighlight
-restore_command = 'pause-while /tmp/standby.pause pg_standby ... &lt;args&gt;'
+restore_command = 'pause-while /tmp/standby.pause pg_standby ... <args>'
 ```
 
 With this configuration, when you want to pause WAL replay on the

@@ -34,15 +34,15 @@ A screenshot from the demo app.
 <tbody><tr>
 <td valign="top">
 <pre class="brush:jscript">
-for(var k=0;k&lt;10;k++) {
+for(var k=0;k<10;k++) {
   $('div.products').html('');
   console.time('test ' + k);
-  for(var j=0;j&lt;10;j++) {
+  for(var j=0;j<10;j++) {
     $.each(products, function(index, e) {
       var ihtml = $('div.products').html();
-      ihtml += '&lt;a href="#"&gt;'
-        + '&lt;img class="product" src="/images/'
-        + e.image + '" /&gt;&lt;/a&gt;';
+      ihtml += '<a href="#">'
+        + '<img class="product" src="/images/'
+        + e.image + '" /></a>';
       $('div.products').html(ihtml);
     });
   }
@@ -52,15 +52,15 @@ for(var k=0;k&lt;10;k++) {
 </td>
 <td valign="top">
 <pre class="brush:jscript">
-for(var k=0;k&lt;10;k++) {
+for(var k=0;k<10;k++) {
   $('div.products').html('');
   console.time('test ' + k);
-  for(var j=0;j&lt;10;j++) {
-    for(var i=0;i&lt;products.length; i++) {
+  for(var j=0;j<10;j++) {
+    for(var i=0;i<products.length; i++) {
       var ihtml = $('div.products').html();
-      ihtml += '&lt;a href="#"&gt;'
-        + '&lt;img class="product" src="/images/'
-        + products[i].image + '" /&gt;&lt;/a&gt;';
+      ihtml += '<a href="#">'
+        + '<img class="product" src="/images/'
+        + products[i].image + '" /></a>';
       $('div.products').html(ihtml);
     }
   }
@@ -88,10 +88,10 @@ Products displayed with a for loop instead of jQuery's each method.
 <table cellpadding="0" cellspacing="0" width="100%">
 <tbody><tr><td valign="top">
 <pre class="brush:jscript">
-for(var i=0;i&lt;products.length; i++) {
+for(var i=0;i<products.length; i++) {
   var link = $(document.createElement('a'))
     .attr(‘href’, ‘#’)
-    .html('&lt;img class="product" src="/images/' + products[i].image + '" /&gt;')
+    .html('<img class="product" src="/images/' + products[i].image + '" />')
     .data('name', products[i].name)
     .data('price', products[i].price);
   if(products[i].featured) {
@@ -104,7 +104,7 @@ for(var i=0;i&lt;products.length; i++) {
 };
 $('div.products a').click(function() {
    $('div.featured_product')
-    .html('&lt;h1&gt;' + $(this).data('name') + '&lt;/h1&gt;');
+    .html('<h1>' + $(this).data('name') + '</h1>');
   $(this).find('img').clone().appendTo('.featured_product');
 });
 </pre>
@@ -122,9 +122,9 @@ jQuery's data tag is used to populate the right side of the page as a product is
 <td valign="top">
 <pre class="brush:jscript">
 $('a.featured').click(function() {
-  for(var k=0;k&lt;10; k++) {
+  for(var k=0;k<10; k++) {
     console.time('test ' + k);
-    for(var j=0;j&lt;100;j++) {
+    for(var j=0;j<100;j++) {
       $('div.products a').css('background', '#FFF');
       $('div.products a.featured').css('background', '#999');
     }
@@ -138,9 +138,9 @@ $('a.featured').click(function() {
 var all_products = $('div.products a');
 var featured_products = $('div.products a.featured');
 $('a.featured').click(function() {
-  for(var k=0;k&lt;10; k++) {
+  for(var k=0;k<10; k++) {
     console.time('test ' + k);
-    for(var j=0;j&lt;100;j++) {
+    for(var j=0;j<100;j++) {
       all_products.css('background', '#FFF');
       featured_products.css('background', '#999');
     }
@@ -170,11 +170,11 @@ Multiple products added to test onclick for identifying "featured" products.
 <tbody><tr>
 <td valign="top">
 <pre class="brush:jscript">
-for(var k=0;k&lt;10;k++) {
+for(var k=0;k<10;k++) {
   $('div.products').html('');
   console.time('test ' + k);
-  for(var j=0;j&lt;10;j++) {
-    for(var i=0;i&lt;products.length; i++) {
+  for(var j=0;j<10;j++) {
+    for(var i=0;i<products.length; i++) {
       ...
       $('div.products').append(link);
     }
@@ -185,11 +185,11 @@ for(var k=0;k&lt;10;k++) {
 </td>
 <td valign="top">
 <pre class="brush:jscript">
-for(var k=0;k&lt;10;k++) {
+for(var k=0;k<10;k++) {
   $('div.products').html('');
   console.time('test ' + k);
-  for(var j=0;j&lt;10;j++) {
-    for(var i=0;i&lt;products.length; i++) {
+  for(var j=0;j<10;j++) {
+    for(var i=0;i<products.length; i++) {
       ...
       $('div.products', $('div.wrapper')).append(link);
     }
@@ -215,11 +215,11 @@ for(var k=0;k&lt;10;k++) {
 <tbody><tr>
 <td valign="top">
 <pre class="brush:jscript">
-for(var k=0;k&lt;10;k++) {
+for(var k=0;k<10;k++) {
   $('div.products').html('');
   console.time('test ' + k);
-  for(var j=0;j&lt;10;j++) {
-    for(var i=0;i&lt;products.length; i++) {
+  for(var j=0;j<10;j++) {
+    for(var i=0;i<products.length; i++) {
        ...
        $('div.products').append(link);
     }
@@ -230,11 +230,11 @@ for(var k=0;k&lt;10;k++) {
 </td>
 <td valign="top">
 <pre class="brush:jscript">
-for(var k=0;k&lt;10;k++) {
+for(var k=0;k<10;k++) {
   $('div.products').html('');
   console.time('test ' + k);
-  for(var j=0;j&lt;10;j++) {
-    for(var i=0;i&lt;products.length; i++) {
+  for(var j=0;j<10;j++) {
+    for(var i=0;i<products.length; i++) {
       ...
        $('div#products').append(link);
     }
@@ -260,11 +260,11 @@ for(var k=0;k&lt;10;k++) {
 <tbody><tr>
 <td valign="top">
 <pre class="brush:jscript">
-for(var k=0;k&lt;10;k++) {
+for(var k=0;k<10;k++) {
   $('div.products').html('');
   console.time('test ' + k);
-  for(var j=0;j&lt;10;j++) {
-    for(var i=0;i&lt;products.length; i++) {
+  for(var j=0;j<10;j++) {
+    for(var i=0;i<products.length; i++) {
       ...
       $('div#products').append(link);
     }
@@ -275,12 +275,12 @@ for(var k=0;k&lt;10;k++) {
 </td>
 <td valign="top">
 <pre class="brush:jscript">
-for(var k=0;k&lt;10;k++) {
+for(var k=0;k<10;k++) {
   $('div#products').html();
   console.time('test ' + k);
   var collection = $(document.createElement('div'));
-  for(var j=0;j&lt;10;j++) {
-    for(var i=0;i&lt;products.length; i++) {
+  for(var j=0;j<10;j++) {
+    for(var i=0;i<products.length; i++) {
       ...
       collection.append(link);
     }
@@ -310,7 +310,7 @@ var featured_product = $('div#featured_product');
 $('div#products a').click(function(e) {
   var product = $(e.target).parent();  // same as $(this)
   featured_product
-    .html('&lt;h1&gt;' + product.data('name') + '&lt;/h1&gt;')
+    .html('<h1>' + product.data('name') + '</h1>')
     .append(product.find('img').clone());
 });
 </pre>
@@ -324,9 +324,9 @@ $('div#products a').click(function(e) {
 <td valign="top">
 <pre class="brush:jscript">
 $('a#special').click(function() {
-  for(var k=0;k&lt;10;k++) {
+  for(var k=0;k<10;k++) {
     console.time('test ' + k);
-    for(var j=0;j&lt;100; j++) {
+    for(var j=0;j<100; j++) {
       $('div#products').find('a').css('background', '#FFF');
       $('div#products').find('.featured').css('background', '#999');
       $('div#products').find('.sale').css('background', '#999');
@@ -339,9 +339,9 @@ $('a#special').click(function() {
 <td valign="top">
 <pre class="brush:jscript">
 $('a#special').click(function() {
-  for(var k=0;k&lt;10;k++) {
+  for(var k=0;k<10;k++) {
     console.time('test ' + k);
-    for(var j=0;j&lt;100; j++) {
+    for(var j=0;j<100; j++) {
       $('div#products')
       .find('a')
         .css('background', '#FFF')
@@ -390,13 +390,13 @@ $(function() {
 
 $.extend($.expr[':'], {
   under20: function(a) {
-    if($(a).data('price') &amp;&amp; $(a).data('price') &lt; 20) {
+    if($(a).data('price') && $(a).data('price') < 20) {
       return true;
     }
     return false;
   },
   over1000: function(a) {
-    if($(a).data('price') &amp;&amp; $(a).data('price') &gt; 1000) {
+    if($(a).data('price') && $(a).data('price') > 1000) {
       return true;
     }
     return false;
@@ -410,7 +410,7 @@ $.extend($.expr[':'], {
 
 Products priced over $1000 are highlighted with a custom selector.
 
-**10.** I also found several examples of how to write your own chain methods. In this example, I create two chain methods to set the product background to white or grey and update my under20 &amp; over1000 methods to use this new chain method. The nice thing about creating your own chain methods is that these methods can be easily modified in the future with minimal code changes because it follows the DRY principle. I'm not sure if it's intended, but the use of my custom chain method did not work with the end() chain method described in Tip #8.
+**10.** I also found several examples of how to write your own chain methods. In this example, I create two chain methods to set the product background to white or grey and update my under20 & over1000 methods to use this new chain method. The nice thing about creating your own chain methods is that these methods can be easily modified in the future with minimal code changes because it follows the DRY principle. I'm not sure if it's intended, but the use of my custom chain method did not work with the end() chain method described in Tip #8.
 
 <table cellpadding="0" cellspacing="0" width="100%">
 <tbody><tr><td>
@@ -454,4 +454,4 @@ During development of the demo, I found a significant performance differences be
 
 Or in visual form:
 
-<img alt="" src="http://chart.apis.google.com/chart?chxl=0:|Tip+%231|Tip+%233|Tip+%234|Tip+%236|Tip+%238&amp;chxr=1,0,6250&amp;chxt=x,y&amp;chbh=a&amp;chs=745x300&amp;cht=bvg&amp;chco=A2C180,3D7930&amp;chds=0,6250,0,6250&amp;chd=t:6200,106,258,169,154|515,21,60,45,37&amp;chdl=Firefox+3.6|Chrome+8.0&amp;chtt=jQuery+Performance"/>
+<img alt="" src="http://chart.apis.google.com/chart?chxl=0:|Tip+%231|Tip+%233|Tip+%234|Tip+%236|Tip+%238&chxr=1,0,6250&chxt=x,y&chbh=a&chs=745x300&cht=bvg&chco=A2C180,3D7930&chds=0,6250,0,6250&chd=t:6200,106,258,169,154|515,21,60,45,37&chdl=Firefox+3.6|Chrome+8.0&chtt=jQuery+Performance"/>

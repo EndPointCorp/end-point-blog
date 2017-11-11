@@ -10,7 +10,7 @@ title: 'SSH: piping data in reverse'
 I found myself ssh'd several hops away and needing to copy output from a script back to localhost.  Essentially what I wanted was a way to get the data in question piped backwards from my SSH connection so I could capture it locally.  Since I utilize .ssh/config extensively, I could connect to the server in question from localhost with a single ssh command, however bringing the data back the other way would make it a multi-step process of saving a temporary file, copying it to a commonly accessible location which had the permissions/authentication setup or intermediately sshing to each node along the path -- in short it exceeded my laziness threshold.  So instead, I did the following:
 
 ```bash
-[me@localhost]$ ssh user@remote nc -l 11235 &gt; output.file  # long, complicated connection hidden behind .ssh/config + ProxyCommand
+[me@localhost]$ ssh user@remote nc -l 11235 > output.file  # long, complicated connection hidden behind .ssh/config + ProxyCommand
 
 [me@remotehost]$ perl -ne 'print if /startpat/ .. /endpat/' file/to/be/extracted | nc localhost 11235
 ```

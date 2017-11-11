@@ -35,12 +35,12 @@ Let's create a Rails partial to set up these variables for us, so we can easily 
 # assumes you've passed in the local variable 'article' into this partial
 # from http://docs.disqus.com/developers/universal/
 
-&lt;div id="disqus_thread"&gt;&lt;/div&gt;
-&lt;script type="text/javascript"&gt;
+<div id="disqus_thread"></div>
+<script type="text/javascript">
 
-    var disqus_shortname = '&lt;%= Article::DISQUS_SHORTNAME %&gt;';
-    var disqus_identifier = '&lt;%= article.id %&gt;';
-    var disqus_url = '&lt;%= url_for(article, :only_path =&gt; false) %&gt;';
+    var disqus_shortname = '<%= Article::DISQUS_SHORTNAME %>';
+    var disqus_identifier = '<%= article.id %>';
+    var disqus_url = '<%= url_for(article, :only_path => false) %>';
 
     /* * * DON'T EDIT BELOW THIS LINE * * */
     (function() {
@@ -48,7 +48,7 @@ Let's create a Rails partial to set up these variables for us, so we can easily 
         dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     })();
-&lt;/script&gt;
+</script>
 ```
 
 The above code will populate the div#disqus_thread with the correct content based on your disqus_identifier. By setting up a single partial that will always render your threads, it becomes very easy to adjust this code if needed.
@@ -63,15 +63,15 @@ Often an index page will want to display a count of how many comments are in a p
 
 ```ruby
 # HTML
-&lt;a href="http://example.com/article1.html#disqus_thread" 
-   data-disqus-identifier="&lt;%=@article.id%&gt;"&gt;
+<a href="http://example.com/article1.html#disqus_thread" 
+   data-disqus-identifier="<%=@article.id%>">
 This will be replaced by the comment count
-&lt;/a&gt;
+</a>
 
 # Rails helper
-&lt;%= link_to "This will be replaced by the comment count", 
-    article_path(@article, :anchor =&gt; "disqus_thread"), 
-    :"data-disqus-identifer" =&gt; @article.id %&gt;
+<%= link_to "This will be replaced by the comment count", 
+    article_path(@article, :anchor => "disqus_thread"), 
+    :"data-disqus-identifer" => @article.id %>
 ```
 
 At first this seemed strange, but it is the exact same pattern used to display the thread.  It would likely be best to remove the link text so nothing is shown until the comment count is loaded, but I felt for my example, having some meaning to the test would help understanding.  Additionally, you'll need to add the following JavaScript to your page.
@@ -79,11 +79,11 @@ At first this seemed strange, but it is the exact same pattern used to display t
 ```javascript
 # app/view/disqus/_comment_count_javascript.html.erb
 # from http://docs.disqus.com/developers/universal/
-# add once per page, just above &lt;/body&gt;
+# add once per page, just above </body>
 
-&lt;script type="text/javascript"&gt;
+<script type="text/javascript">
    
-    var disqus_shortname = '&lt;%= Article::DISQUS_SHORTNAME %&gt;';
+    var disqus_shortname = '<%= Article::DISQUS_SHORTNAME %>';
 
     /* * * DON'T EDIT BELOW THIS LINE * * */
     (function () {
@@ -92,7 +92,7 @@ At first this seemed strange, but it is the exact same pattern used to display t
         s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
         (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
     }());
-&lt;/script&gt;
+</script>
 ```
 
 Disqus recommends adding it just before the closing  </body> tag.  You only need to add this code ONCE per page, even if you're planning on showing multiple comment counts on a page.  You will need this code on any page with a comment count, so I do recommend putting it in a partial.  If you wanted, you could even include it in a layout.

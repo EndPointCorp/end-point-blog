@@ -19,15 +19,15 @@ use Data::Dumper;
 
 my $uri = 'param1/param2/params3';
 
-my $ua = LWP::UserAgent-&gt;new;
-my $hmac = Digest::HMAC_SHA1-&gt;new('secret_something');
+my $ua = LWP::UserAgent->new;
+my $hmac = Digest::HMAC_SHA1->new('secret_something');
 
 my $ts = time;
 
-$hmac-&gt;add($_) for (split (m{/}, $uri));
-$hmac-&gt;add($ts);
+$hmac->add($_) for (split (m{/}, $uri));
+$hmac->add($ts);
 
-my $calculated_hash = $hmac-&gt;hexdigest;
+my $calculated_hash = $hmac->hexdigest;
 ```
 
 My first try for calculating the same hash in the Java code looked something like this (without class/package overhead):

@@ -14,11 +14,11 @@ To allow these uploads, I brainstormed how to decouple the file upload from the 
 First, I created an UploadStatus model, to track the status of any file uploads. With RailsAdmin, there's an automagic CRUD interface connected to this model. Here's what the migration looked like:
 
 ```ruby
-class CreateUploadStatuses &lt; ActiveRecord::Migration
+class CreateUploadStatuses < ActiveRecord::Migration
   def change
     create_table :upload_statuses do |t|
-      t.string :filename, :nil =&gt; false
-      t.boolean :success, :nil =&gt; false, :default =&gt; false
+      t.string :filename, :nil => false
+      t.boolean :success, :nil => false, :default => false
       t.string :message
 
       t.timestamps
@@ -40,7 +40,7 @@ Here's the simplified rake task that I used for the process:
 
 ```ruby
 namespace :upload_files do
-  task :run =&gt; :environment do
+  task :run => :environment do
     files = Dir.glob("#{Rails.root}/to_upload/*.*")
     files.each do |full_filename|
       begin
@@ -52,7 +52,7 @@ namespace :upload_files do
         item = klass.find(id)
 
         if item.nil?
-          UploadStatus.create(:filename =&gt; "#{name}#{ext}", :message =&gt; "Could not find item from #{id}.")
+          UploadStatus.create(:filename => "#{name}#{ext}", :message => "Could not find item from #{id}.")
           next
         end
 
@@ -60,10 +60,10 @@ namespace :upload_files do
 
         if item.save
           FileUtils.rm(full_filename)
-          UploadStatus.create(:filename =&gt; "#{name}#{ext}", :success =&gt; true)
+          UploadStatus.create(:filename => "#{name}#{ext}", :success => true)
         end
-      rescue Exception =&gt; e
-        UploadStatus.create(:filename =&gt; "#{name}#{ext}", :message =&gt; "#{e.inspect}")
+      rescue Exception => e
+        UploadStatus.create(:filename => "#{name}#{ext}", :message => "#{e.inspect}")
       end
     end
   end

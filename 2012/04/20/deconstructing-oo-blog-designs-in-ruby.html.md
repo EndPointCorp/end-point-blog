@@ -68,7 +68,7 @@ In this case, it's being used to tap into the process of creating a new blog pos
 Avdi's approach may seem cumbersome at first, and it is compared to "the Rails way."  But in general, that's the whole point of Object on Rails; to challenge you to see beyond a generic solution to a problem (in this case defining relationships between classes) so you can build more flexible solutions.  Let's see some interesting things we might be able to do with this more flexible Blog class.  We can imagine this same Blog class being able to handle posts from all sorts of different sources.  Let's see if we can get creative.
 
 ```ruby
-class EmailPost &lt; ActionMailer::Base
+class EmailPost < ActionMailer::Base
   def receive(message)
     @blog = Blog.find_by_owner_email(message.from)
     @blog.post_source = EmailPost.public_method(:new)
@@ -82,7 +82,7 @@ With this little snippet, we're able to use the Blog class to process a differen
 
 ```ruby
 require 'feedzirra'
-# execute regularly with cronjob call like curl -d "blog_id=1&amp;url=http://somefeed.com" http://myblog.com/feed_poster"
+# execute regularly with cronjob call like curl -d "blog_id=1&url=http://somefeed.com" http://myblog.com/feed_poster"
 
 class FeedPostersController
   def create

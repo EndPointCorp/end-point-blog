@@ -21,7 +21,7 @@ Testing a web application can take one of two general approaches:
 The module [Dancer2::Test](http://search.cpan.org/~sukria/Dancer2-0.04/lib/Dancer2/Test.pm) provides a small set of routines for supporting this second approach. For instance, you can verify that your routes are set up correctly via "route_exists":
 
 ```perl
-route_exists [ GET =&gt; '/index.html' ], "We can get the home page";
+route_exists [ GET => '/index.html' ], "We can get the home page";
 ```
 
 This behaves like the various test-helper routines in [Test::More](). If the test succeeds (in this case, a route is defined that matches the path), great; if not, an error message is reported using the string parameter.
@@ -29,9 +29,9 @@ This behaves like the various test-helper routines in [Test::More](). If the tes
 You can also verify that the correct page has been delivered without errors:
 
 ```perl
-my $response = dancer_response GET =&gt; '/something';
-is $response-&gt;{status}, 200, '/something returns OK';
-like $response-&gt;{content}, qr{Something from the /something page};
+my $response = dancer_response GET => '/something';
+is $response->{status}, 200, '/something returns OK';
+like $response->{content}, qr{Something from the /something page};
 ```
 
 dancer_response is the preferred way to go about this, because it captures status, headers, and content in one operation, saving you time but also avoiding the potential for disturbing the state of your application by subsequent requests.

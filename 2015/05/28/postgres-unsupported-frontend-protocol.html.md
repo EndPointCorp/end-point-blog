@@ -41,12 +41,12 @@ use strict;
 use warnings;
 use IO::Socket;
 
-my $server = IO::Socket::UNIX-&gt;new('/tmp/.s.PGSQL.5432')
+my $server = IO::Socket::UNIX->new('/tmp/.s.PGSQL.5432')
   or die "Could not connect!: $@";
 
 my $packet = pack('nn', 1234,56789) . "user\0pg\0\0";
 $packet = pack('N', length($packet) + 4). $packet;
-$server-&gt;send($packet, 0);
+$server->send($packet, 0);
 ```
 
 After running the above program, a new error pops up in the Postgres logs as 
@@ -117,7 +117,7 @@ $ tail -1 /var/lib/pgsql/pg9.3/pg_log/postgres-2015-05-20.log
 As a final check, let's confirm that nmap is using SMB when it runs the version check:
 
 ```
-$ nmap localhost -p 5930 -sV --version-trace 2&gt;/dev/null | grep SMB
+$ nmap localhost -p 5930 -sV --version-trace 2>/dev/null | grep SMB
 Service scan sending probe SMBProgNeg to 127.0.0.1:5930 (tcp)
 Service scan match (Probe SMBProgNeg matched with SMBProgNeg line 10662): 127.0.0.1:5930 is postgresql.  Version: |PostgreSQL DB|||
 SF:ster\.c\0L1834\0RProcessStartupPacket\0\0")%r(SMBProgNeg,85,"E\0\0\0\x8

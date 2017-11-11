@@ -42,7 +42,7 @@ pg_xlogdump: FATAL:  error in WAL record at 0/99518D0: record with zero length a
 The last line just indicates that we've hit the end of the transaction log records, and it's written to stderr, so it can be ignored. Otherwise, that output contains everything we need, we just need to shift around the components so we can read it back into Postgres. Something like this did the trick for me, and let me import it directly:
 
 ```sql
-$ pg_xlogdump -p pg_xlog/ --start 0/01000000 --rmgr=Transaction | awk -v Q=\' '{sub(/;/, ""); print $8, Q$17, $18, $19Q}' &gt; xids
+$ pg_xlogdump -p pg_xlog/ --start 0/01000000 --rmgr=Transaction | awk -v Q=\' '{sub(/;/, ""); print $8, Q$17, $18, $19Q}' > xids
 
 postgres=# CREATE TABLE xids (xid xid, commit timestamptz);
 CREATE TABLE

@@ -20,7 +20,7 @@ The demo.spreecommerce.com site is run on a Xen VPS with 512 MB RAM, CentOS 5 i3
 - Enable HTTP keepalive: KeepAlive On and KeepAliveTimeout 3
 - Limit Apache children to keep RAM available for Rails: StartServers 5, MinSpareServers 2, MaxSpareServers 5
 - Limit Passenger pool size to 2 child processes (down from the default 6), to queue extra requests instead of using slow swap memory: PassengerMaxPoolSize 2
-- Enable browser &amp; intermediate proxy caching of static files: ExpiresActive On and ExpiresByType image/jpeg "access plus 2 hours" etc. (see below for full example)
+- Enable browser & intermediate proxy caching of static files: ExpiresActive On and ExpiresByType image/jpeg "access plus 2 hours" etc. (see below for full example)
 - Disable ETags which aren't necessary once Expires is enabled: FileETag None and Header unset ETag
 - Disable unused Apache modules: free up memory by commenting out LoadModule proxy, proxy_http, info, logio, usertrack, speling, userdir, negotiation, vhost_alias, dav_fs, autoindex, most authn_* and authz_* modules
 - Disable SSLv2 (for security and PCI compliance, not performance): SSLProtocol all -SSLv2 and SSLCipherSuite ALL:!ADH:!EXPORT56:RC4+RSA:+HIGH:+MEDIUM:-LOW:-SSLv2:-EXP

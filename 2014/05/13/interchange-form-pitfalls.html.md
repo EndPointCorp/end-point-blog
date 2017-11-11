@@ -21,20 +21,20 @@ I had one application that continued to present bugs that resisted solution, in 
 
 ```
 Page1.html:
-&lt;form ...&gt;
+<form ...>
 [set Continue]
 mv_nextpage=Page2.html
 [/set]
-&lt;input type="submit" name="mv_click" value="Continue"
-&lt;/form&gt;
+<input type="submit" name="mv_click" value="Continue"
+</form>
 
 Page2.html:
-&lt;form ...&gt;
+<form ...>
 [set Continue]
 mv_nextpage=Page3.html
 [/set]
-&lt;input type="submit" name="mv_click" value="Continue"
-&lt;/form&gt;
+<input type="submit" name="mv_click" value="Continue"
+</form>
 
 ```
 

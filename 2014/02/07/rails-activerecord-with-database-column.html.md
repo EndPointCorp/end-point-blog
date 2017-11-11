@@ -18,8 +18,8 @@ end
 
 Will result in:
 ```ruby
-$&gt; m = MyObject.new
-  =&gt; #&lt;MyObject id: nil, column_one: "foo", column_two: nil&gt;
+$> m = MyObject.new
+  => #<MyObject id: nil, column_one: "foo", column_two: nil>
 ```
 
 Note that column_two has no default and so is initialized to nil. But column_one is set to "foo" because no other value was supplied. This behavior can be quite handy for boolean attributes such as :published or :unread. Published can be a good example of a value that would start as false while unread is a good candidate to start out true.
@@ -27,12 +27,12 @@ Note that column_two has no default and so is initialized to nil. But column_one
 It's worth mentioning that defaults aren't absolutely enforced. It is still your prerogative to override should you so choose. For example:
 
 ```ruby
-$&gt; m = MyObject.new(column_one: nil)
-  =&gt; #&lt;MyObject id: nil, column_one: nil, column_two: nil&gt;
-$&gt; m.save
-  =&gt; true
-$&gt; m
-  =&gt; #&lt;MyObject id: 1, column_one: nil, column_two: nil&gt;
+$> m = MyObject.new(column_one: nil)
+  => #<MyObject id: nil, column_one: nil, column_two: nil>
+$> m.save
+  => true
+$> m
+  => #<MyObject id: 1, column_one: nil, column_two: nil>
 ```
 
 I mentioned my primary use for defaults is pairing them with booleans. Considering that overriding a default could defeat the purpose of having that default, pairing the default with a non-null constraint is one additional level of security you can provide yourself. For example, you can modify the original table definition as follows:
@@ -46,7 +46,7 @@ end
 
 Attempting to save an occurrence of the above object with column_one set to nil would raise a database-specific error. If you don't want to rescue an error, you can go one step further and add a validation to your Rails object.
 ```ruby
-class MyObject &lt; ActiveRecord::Base
+class MyObject < ActiveRecord::Base
   validates :column_one, inclusion: {in: [true, false]}
 end
 ```
@@ -56,7 +56,7 @@ It's probably worth noting the use of an inclusion validation instead of a prese
 Personally, I usually stick with:
 
 ```ruby
-t.boolean :column_one, default: &lt;pick one&gt;, null: false
+t.boolean :column_one, default: <pick one>, null: false
 ```
 
 I don't find much need for the model validation since if I explicitly add the following line of code:

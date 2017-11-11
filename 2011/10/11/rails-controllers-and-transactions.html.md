@@ -40,7 +40,7 @@ The second part is how to get the transaction wrapped around our controller meth
 
 ```ruby
  
-class MyObjectController &lt; ApplicationController
+class MyObjectController < ApplicationController
     around_filter :transactions_filter
 
     def transactions_filter
@@ -55,7 +55,7 @@ class MyObjectController &lt; ApplicationController
 It probably only makes sense to add the around_filter to actions which are of the modification type. A definition like this might be more reasonable.
 
 ```ruby
-    around_filter :transactions_filter, :only =&gt; [:create, :update, :destroy]
+    around_filter :transactions_filter, :only => [:create, :update, :destroy]
 ```
 
 Its also simple enough to add this to your ApplicationController definition if you want to have all of your controller classes inherit this functionality universally.

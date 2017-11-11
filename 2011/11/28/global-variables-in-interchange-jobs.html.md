@@ -22,9 +22,9 @@ The problem tracked down eventually to that session access. When the code was ru
 To demonstrate, I constructed a simple usertag to dump the reference addresses of the 5 mentioned global variables:
 
 ```perl
-UserTag  ic-globals  Routine &lt;&lt;EOR
+UserTag  ic-globals  Routine <<EOR
 sub {
-    return &lt;&lt;EOP;
+    return <<EOP;
 .     \$Session: $Session
 \$Vend::Session: $Vend::Session
     \$::Session: $::Session

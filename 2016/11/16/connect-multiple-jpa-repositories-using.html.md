@@ -19,38 +19,38 @@ package com.domain.data;
 import com.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UserRepository extends JpaRepository &lt;User, Integer&gt; {
+public interface UserRepository extends JpaRepository <User, Integer> {
 }
 ```
 persistent-context.xml - the dataSourceReadWrite bean class defines the database connection while the entityManagerFactoryReadWrite bean helps to access the database from the base package com.domain
 
 ```xml
 ...
-&lt;jpa:repositories base-package="com.domain" entity-manager-factory-ref="entityManagerFactoryReadWrite" transaction-manager-ref="transactionManager"&gt;
-&lt;/jpa:repositories&gt;
+<jpa:repositories base-package="com.domain" entity-manager-factory-ref="entityManagerFactoryReadWrite" transaction-manager-ref="transactionManager">
+</jpa:repositories>
 
-&lt;bean abstract="true" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close" id="abstractDataSource" p:driverclassname="${jdbc.driverClassName}" p:maxactive="20" p:maxidle="20" p:minidle="20" p:testonborrow="true" p:validationquery="SELECT 1" /&gt;
+<bean abstract="true" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close" id="abstractDataSource" p:driverclassname="${jdbc.driverClassName}" p:maxactive="20" p:maxidle="20" p:minidle="20" p:testonborrow="true" p:validationquery="SELECT 1" />
 
-&lt;bean id="dataSourceReadWrite" p:password="${jdbc.password}" p:url="${jdbc.url}" p:username="${jdbc.username}" parent="abstractDataSource" /&gt;
+<bean id="dataSourceReadWrite" p:password="${jdbc.password}" p:url="${jdbc.url}" p:username="${jdbc.username}" parent="abstractDataSource" />
 
-&lt;bean abstract="true" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean" id="abstractEntityManagerFactory" p:jpadialect-ref="hibernateJpaDialect" p:jpavendoradapter-ref="jpaAdapter"&gt;
-  &lt;property name="jpaProperties"&gt;
-    &lt;props&gt;
-      &lt;prop key="hibernate.use_sql_comments"&gt;true&lt;/prop&gt;
-      &lt;prop key="hibernate.temp.use_jdbc_metadata_defaults"&gt;false&lt;/prop&gt;
-    &lt;/props&gt;
-  &lt;/property&gt;
-&lt;/bean&gt;
+<bean abstract="true" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean" id="abstractEntityManagerFactory" p:jpadialect-ref="hibernateJpaDialect" p:jpavendoradapter-ref="jpaAdapter">
+  <property name="jpaProperties">
+    <props>
+      <prop key="hibernate.use_sql_comments">true</prop>
+      <prop key="hibernate.temp.use_jdbc_metadata_defaults">false</prop>
+    </props>
+  </property>
+</bean>
 
-&lt;bean id="entityManagerFactoryReadWrite" p:datasource-ref="dataSourceReadWrite" p:persistenceunitname="readWritePU" parent="abstractEntityManagerFactory"&gt;
-  &lt;property name="packagesToScan"&gt;
-    &lt;list&gt;
-      &lt;value&gt;com.domain&lt;/value&gt;
-    &lt;/list&gt;
-  &lt;/property&gt;
-&lt;/bean&gt;
+<bean id="entityManagerFactoryReadWrite" p:datasource-ref="dataSourceReadWrite" p:persistenceunitname="readWritePU" parent="abstractEntityManagerFactory">
+  <property name="packagesToScan">
+    <list>
+      <value>com.domain</value>
+    </list>
+  </property>
+</bean>
 
-&lt;bean class="org.springframework.orm.jpa.JpaTransactionManager" id="transactionManager" p:datasource-ref="dataSourceReadWrite" p:entitymanagerfactory-ref="entityManagerFactoryReadWrite" /&gt;
+<bean class="org.springframework.orm.jpa.JpaTransactionManager" id="transactionManager" p:datasource-ref="dataSourceReadWrite" p:entitymanagerfactory-ref="entityManagerFactoryReadWrite" />
 ...
 ```
 UserController.java - the userRepository object access defines how to use a static database configuration to fetch the User object record
@@ -96,7 +96,7 @@ package com.domain.data;
 import com.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UserRepository extends JpaRepository&lt;User, Integer&gt; {
+public interface UserRepository extends JpaRepository<User, Integer> {
 }
 ```
 UserReadonlyRepository.java - ReadOnly repository definition under the package com.domain.data.readonly
@@ -107,50 +107,50 @@ package com.domain.data.readonly;
 import com.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UserReadonlyRepository extends JpaRepository&lt;User, Integer&gt; {
+public interface UserReadonlyRepository extends JpaRepository<User, Integer> {
 }
 ```
 persistent-context.xml - this file defines two different datasources (dataSourceReadWrite and dataSourceReadOnly) while jpa repositories specify the repositories package path
 
 ```xml
 ...
-&lt;jpa:repositories base-package="com.domain" entity-manager-factory-ref="entityManagerFactoryReadWrite" transaction-manager-ref="transactionManager"&gt;
-  &lt;repository:exclude-filter expression="com.domain.data.readonly" type="regex"&gt;&lt;/repository:exclude-filter&gt;
-&lt;/jpa:repositories&gt;
+<jpa:repositories base-package="com.domain" entity-manager-factory-ref="entityManagerFactoryReadWrite" transaction-manager-ref="transactionManager">
+  <repository:exclude-filter expression="com.domain.data.readonly" type="regex"></repository:exclude-filter>
+</jpa:repositories>
 
-&lt;jpa:repositories base-package="com.domain.data.readonly" entity-manager-factory-ref="entityManagerFactoryReadOnly" transaction-manager-ref="transactionManagerReadOnly"&gt;
+<jpa:repositories base-package="com.domain.data.readonly" entity-manager-factory-ref="entityManagerFactoryReadOnly" transaction-manager-ref="transactionManagerReadOnly">
 
-&lt;bean abstract="true" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close" id="abstractDataSource" p:driverclassname="${jdbc.driverClassName}" p:maxactive="20" p:maxidle="20" p:minidle="20" p:testonborrow="true" p:validationquery="SELECT 1" /&gt;
-&lt;bean id="dataSourceReadWrite" p:password="${jdbc.password}" p:url="${jdbc.url}" p:username="${jdbc.username}" parent="abstractDataSource" /&gt;
-&lt;bean id="dataSourceReadOnly" p:password="${jdbc.readonly.password}" p:url="${jdbc.readonly.url}" p:username="${jdbc.readonly.username}" parent="abstractDataSource" /&gt;
-&lt;bean abstract="true" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean" id="abstractEntityManagerFactory" p:jpadialect-ref="hibernateJpaDialect" p:jpavendoradapter-ref="jpaAdapter"&gt;
-  &lt;property name="jpaProperties"&gt;
-    &lt;props&gt;
-      &lt;prop key="hibernate.use_sql_comments"&gt;true&lt;/prop&gt;
-      &lt;prop key="hibernate.temp.use_jdbc_metadata_defaults"&gt;false&lt;/prop&gt;
-    &lt;/props&gt;
-  &lt;/property&gt;
-&lt;/bean&gt;
+<bean abstract="true" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close" id="abstractDataSource" p:driverclassname="${jdbc.driverClassName}" p:maxactive="20" p:maxidle="20" p:minidle="20" p:testonborrow="true" p:validationquery="SELECT 1" />
+<bean id="dataSourceReadWrite" p:password="${jdbc.password}" p:url="${jdbc.url}" p:username="${jdbc.username}" parent="abstractDataSource" />
+<bean id="dataSourceReadOnly" p:password="${jdbc.readonly.password}" p:url="${jdbc.readonly.url}" p:username="${jdbc.readonly.username}" parent="abstractDataSource" />
+<bean abstract="true" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean" id="abstractEntityManagerFactory" p:jpadialect-ref="hibernateJpaDialect" p:jpavendoradapter-ref="jpaAdapter">
+  <property name="jpaProperties">
+    <props>
+      <prop key="hibernate.use_sql_comments">true</prop>
+      <prop key="hibernate.temp.use_jdbc_metadata_defaults">false</prop>
+    </props>
+  </property>
+</bean>
 
-&lt;bean id="entityManagerFactoryReadWrite" p:datasource-ref="dataSourceReadWrite" p:persistenceunitname="readWritePU" parent="abstractEntityManagerFactory"&gt;
-  &lt;property name="packagesToScan"&gt;
-    &lt;list&gt;
-      &lt;value&gt;com.domain&lt;/value&gt;
-    &lt;/list&gt;
-  &lt;/property&gt;
-&lt;/bean&gt;
+<bean id="entityManagerFactoryReadWrite" p:datasource-ref="dataSourceReadWrite" p:persistenceunitname="readWritePU" parent="abstractEntityManagerFactory">
+  <property name="packagesToScan">
+    <list>
+      <value>com.domain</value>
+    </list>
+  </property>
+</bean>
 
-&lt;bean id="entityManagerFactoryReadOnly" p:datasource-ref="dataSourceReadOnly" p:persistenceunitname="readOnlyPU" parent="abstractEntityManagerFactory"&gt;
-  &lt;property name="packagesToScan"&gt;
-    &lt;list&gt;
-      &lt;value&gt;com.domain&lt;/value&gt;
-    &lt;/list&gt;
-  &lt;/property&gt;
-&lt;/bean&gt;
+<bean id="entityManagerFactoryReadOnly" p:datasource-ref="dataSourceReadOnly" p:persistenceunitname="readOnlyPU" parent="abstractEntityManagerFactory">
+  <property name="packagesToScan">
+    <list>
+      <value>com.domain</value>
+    </list>
+  </property>
+</bean>
 
-&lt;bean class="org.springframework.orm.jpa.JpaTransactionManager" id="transactionManager" p:datasource-ref="dataSourceReadWrite" p:entitymanagerfactory-ref="entityManagerFactoryReadWrite" /&gt;
+<bean class="org.springframework.orm.jpa.JpaTransactionManager" id="transactionManager" p:datasource-ref="dataSourceReadWrite" p:entitymanagerfactory-ref="entityManagerFactoryReadWrite" />
 
-&lt;bean class="org.springframework.orm.jpa.JpaTransactionManager" id="transactionManagerReadOnly" p:datasource-ref="dataSourceReadOnly" p:entitymanagerfactory-ref="entityManagerFactoryReadOnly" /&gt;
+<bean class="org.springframework.orm.jpa.JpaTransactionManager" id="transactionManagerReadOnly" p:datasource-ref="dataSourceReadOnly" p:entitymanagerfactory-ref="entityManagerFactoryReadOnly" />
 ...
 ```
 UserController.java - in this definition it's interesting to note the the readonly flag, which will establish a connection with ReadWrite or ReadOnly database, based on that flag value
@@ -198,48 +198,48 @@ package com.domain.data;
 import com.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UserRepository extends JpaRepository&lt;User, Integer&gt; {
+public interface UserRepository extends JpaRepository<User, Integer> {
 }
 ```
 persistence-context.xml - dataSourceRootDB and dataSourceLiveDB beans defines two different databases. MultitenantRoutingDataSource holds the datasources available to chose dynamically from the code
 
 ```xml
 ...
-&lt;jpa:repositories base-package="com.domain" entity-manager-factory-ref="genericEntityManagerFactory" transaction-manager-ref="transactionManager"&gt;
-&lt;/jpa:repositories&gt;
+<jpa:repositories base-package="com.domain" entity-manager-factory-ref="genericEntityManagerFactory" transaction-manager-ref="transactionManager">
+</jpa:repositories>
 
-&lt;bean abstract="true" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close" id="abstractDataSource" p:driverclassname="${jdbc.driverClassName}" p:maxactive="20" p:maxidle="20" p:minidle="20" p:testonborrow="true" p:validationquery="SELECT 1" /&gt;
+<bean abstract="true" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close" id="abstractDataSource" p:driverclassname="${jdbc.driverClassName}" p:maxactive="20" p:maxidle="20" p:minidle="20" p:testonborrow="true" p:validationquery="SELECT 1" />
 
-&lt;bean id="dataSourceRootDB" p:password="${jdbc.password}" p:url="${jdbc.url}" p:username="${jdbc.username}" parent="abstractDataSource" /&gt;
+<bean id="dataSourceRootDB" p:password="${jdbc.password}" p:url="${jdbc.url}" p:username="${jdbc.username}" parent="abstractDataSource" />
 
-&lt;bean id="dataSourceLiveDB" p:password="${jdbc.livedb.password}" p:url="${jdbc.livedb.url}" p:username="${jdbc.livedb.username}" parent="abstractDataSource" /&gt;
+<bean id="dataSourceLiveDB" p:password="${jdbc.livedb.password}" p:url="${jdbc.livedb.url}" p:username="${jdbc.livedb.username}" parent="abstractDataSource" />
 
-&lt;bean class="com.domain.route.MultitenantRoutingDataSource" id="dataSource"&gt;
-  &lt;property name="targetDataSources"&gt;
-    &lt;map key-type="java.lang.String"&gt;
-      &lt;entry key="rootdb" value-ref="dataSourceRootDB"&gt;&lt;/entry&gt;
-      &lt;entry key="livedb" value-ref="dataSourceLiveDB"&gt;&lt;/entry&gt;
-    &lt;/map&gt;
-  &lt;/property&gt;
-  &lt;property name="defaultTargetDataSource" ref="dataSourceRootDB"&gt;
-  &lt;/property&gt;
-&lt;/bean&gt;
+<bean class="com.domain.route.MultitenantRoutingDataSource" id="dataSource">
+  <property name="targetDataSources">
+    <map key-type="java.lang.String">
+      <entry key="rootdb" value-ref="dataSourceRootDB"></entry>
+      <entry key="livedb" value-ref="dataSourceLiveDB"></entry>
+    </map>
+  </property>
+  <property name="defaultTargetDataSource" ref="dataSourceRootDB">
+  </property>
+</bean>
 
-&lt;bean class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean" id="genericEntityManagerFactory" p:datasource-ref="dataSource" p:jpadialect-ref="hibernateJpaDialect" p:jpavendoradapter-ref="jpaAdapter" p:persistenceunitname="readWriteDynamicPU"&gt;
-  &lt;property name="jpaProperties"&gt;
-    &lt;props&gt;
-      &lt;prop key="hibernate.use_sql_comments"&gt;true&lt;/prop&gt;
-      &lt;prop key="hibernate.temp.use_jdbc_metadata_defaults"&gt;false&lt;/prop&gt;
-    &lt;/props&gt;
-  &lt;/property&gt;
-  &lt;property name="packagesToScan"&gt;
-    &lt;list&gt;
-      &lt;value&gt;com.data.domain&lt;/value&gt;
-    &lt;/list&gt;
-  &lt;/property&gt;
-&lt;/bean&gt;
+<bean class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean" id="genericEntityManagerFactory" p:datasource-ref="dataSource" p:jpadialect-ref="hibernateJpaDialect" p:jpavendoradapter-ref="jpaAdapter" p:persistenceunitname="readWriteDynamicPU">
+  <property name="jpaProperties">
+    <props>
+      <prop key="hibernate.use_sql_comments">true</prop>
+      <prop key="hibernate.temp.use_jdbc_metadata_defaults">false</prop>
+    </props>
+  </property>
+  <property name="packagesToScan">
+    <list>
+      <value>com.data.domain</value>
+    </list>
+  </property>
+</bean>
 
-&lt;bean class="org.springframework.orm.jpa.JpaTransactionManager" id="transactionManager" p:datasource-ref="dataSource" p:entitymanagerfactory-ref="genericEntityManagerFactory" /&gt;
+<bean class="org.springframework.orm.jpa.JpaTransactionManager" id="transactionManager" p:datasource-ref="dataSource" p:entitymanagerfactory-ref="genericEntityManagerFactory" />
 ...
 ```
 UserController.java - this class choose the datasource dynamically based on the request and calls the selected service to complete the action
@@ -274,7 +274,7 @@ import com.domain.supplychain.app.ws.exceptions.InvalidDatabaseEndpointException
 import com.domain.exceptions.ServiceException;
 
 public class MultiTenantContext {
-    private static ThreadLocal&lt;Object&gt; currentTenant = new ThreadLocal&lt;&gt;();
+    private static ThreadLocal<Object> currentTenant = new ThreadLocal<>();
 
     public static Logger logger = LoggerFactory.getLogger(MultiTenantContext.class.getName());
     public static void setCurrentTenant(Object tenant) throws ServiceException {

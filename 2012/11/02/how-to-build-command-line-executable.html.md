@@ -29,7 +29,7 @@ require 'rubygems'
 
 begin
   require 'piggybak/cli'
-rescue LoadError =&gt; e
+rescue LoadError => e
 warn 'Could not load "piggybak/cli"'
   exit -1
 end
@@ -43,7 +43,7 @@ Piggybak::CLI.start
 Rubygems expects the executable to be in a directory called bin which is in the same directory as the gemspec, if you want to place the executable in a different location you'll need to specify that in your gemspec with a "bindir" entry. (Check the [Rubygem docs](http://docs.rubygems.org/) for a more detailed explanation.)
 
 ```ruby
-spec.executables &lt;&lt; 'piggybak'
+spec.executables << 'piggybak'
 ```
 
 Once that's done your gem is ready to go and can be included inside the Gemfile of a Rails app.  When the gem is installed, Rubygems will place a file in your Ruby bin directory that can be invoked via the command line.

@@ -16,7 +16,7 @@ CREATE INDEX i_test ON test (i);
 It will store all values of column i from table test. This index can be used with a query like:
 
 ```
-SELECT * FROM test WHERE i &lt; 100 ORDER BY i;
+SELECT * FROM test WHERE i < 100 ORDER BY i;
 ```
 
 ## Functional Indexes
@@ -58,11 +58,11 @@ I need to get two row sets from database. First I will get the rows with dates f
 I can get the rows with dates from the last 10 days like:
 
 ```
-postgres=# explain analyze select t from test where t::date &gt; (now() - '10 days'::interval)::date;
+postgres=# explain analyze select t from test where t::date > (now() - '10 days'::interval)::date;
                                                   QUERY PLAN
 ---------------------------------------------------------------------------------------------------------------
  Seq Scan on test  (cost=0.00..14152.02 rows=175200 width=8) (actual time=265.640..272.701 rows=13558 loops=1)
-   Filter: ((t)::date &gt; ((now() - '10 days'::interval))::date)
+   Filter: ((t)::date > ((now() - '10 days'::interval))::date)
    Rows Removed by Filter: 512043
  Total runtime: 273.152 ms
 (4 rows)
@@ -77,11 +77,11 @@ CREATE INDEX i_test_t ON test((t::date));
 With this index the plan is much better and the query is much faster:
 
 ```
-postgres=# explain analyze select t from test where t::date &gt; (now() - '10 days'::interval)::date;
+postgres=# explain analyze select t from test where t::date > (now() - '10 days'::interval)::date;
                                                        QUERY PLAN
 -------------------------------------------------------------------------------------------------------------------------
  Index Scan using i_test_t on test  (cost=0.43..459.23 rows=13817 width=8) (actual time=0.083..8.337 rows=13558 loops=1)
-   Index Cond: ((t)::date &gt; ((now() - '10 days'::interval))::date)
+   Index Cond: ((t)::date > ((now() - '10 days'::interval))::date)
  Total runtime: 9.990 ms
 (3 rows)
 ```
@@ -89,11 +89,11 @@ postgres=# explain analyze select t from test where t::date &gt; (now() - '10 da
 This index will also be used when you want to sort the results using the same values as stored in index:
 
 ```
-postgres=# explain analyze select t from test where t::date &gt; (now() - '10 days'::interval)::date order by t::date asc;
+postgres=# explain analyze select t from test where t::date > (now() - '10 days'::interval)::date order by t::date asc;
                                                         QUERY PLAN
 --------------------------------------------------------------------------------------------------------------------------
  Index Scan using i_test_t on test  (cost=0.43..493.78 rows=13817 width=8) (actual time=0.080..13.479 rows=13558 loops=1)
-   Index Cond: ((t)::date &gt; ((now() - '10 days'::interval))::date)
+   Index Cond: ((t)::date > ((now() - '10 days'::interval))::date)
  Total runtime: 15.833 ms
 (3 rows)
 ```
@@ -101,11 +101,11 @@ postgres=# explain analyze select t from test where t::date &gt; (now() - '10 da
 And even when you sort backwards:
 
 ```
-postgres=# explain analyze select t from test where t::date &gt; (now() - '10 days'::interval)::date order by t::date desc;
+postgres=# explain analyze select t from test where t::date > (now() - '10 days'::interval)::date order by t::date desc;
                                                             QUERY PLAN
 -----------------------------------------------------------------------------------------------------------------------------------
  Index Scan Backward using i_test_t on test  (cost=0.43..493.78 rows=13817 width=8) (actual time=0.053..13.847 rows=13558 loops=1)
-   Index Cond: ((t)::date &gt; ((now() - '10 days'::interval))::date)
+   Index Cond: ((t)::date > ((now() - '10 days'::interval))::date)
  Total runtime: 16.230 ms
 (3 rows)
 ```

@@ -53,7 +53,7 @@ Obviously we needed to compare the two files in order to determine
 what had changed between the two days.  I tried:
 
 ```nohighlight
- diff &lt;(zcat backup-Jan-01.sql.gz | head -2300) &lt;(zcat backup-Jan-02.sql.gz | head -2300)
+ diff <(zcat backup-Jan-01.sql.gz | head -2300) <(zcat backup-Jan-02.sql.gz | head -2300)
 ```
 
 Based on my earlier testing, this was the offset in the SQL dumps
@@ -67,7 +67,7 @@ been truncated or if some catastrophic deletion had occurred or...you
 get the idea.  I tried:
 
 ```nohighlight
- diff &lt;(zcat backup-Jan-01.sql.gz) &lt;(zcat backup-Jan-02.sql.gz)
+ diff <(zcat backup-Jan-01.sql.gz) <(zcat backup-Jan-02.sql.gz)
 ```
 
 However, this approach fell down when diff ran out of memory.  We

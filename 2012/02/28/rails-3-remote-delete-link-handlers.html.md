@@ -12,10 +12,10 @@ I recently encountered a bug in a Rails 3 application that used a remote link_to
 Here are the relevant parts of the models we're dealing with:
 
 ```ruby
-class StoredFile &lt; ActiveRecord::Base
-  has_many :comments, :dependent =&gt; :destroy
+class StoredFile < ActiveRecord::Base
+  has_many :comments, :dependent => :destroy
 end
-class Comment &lt; ActiveRecord::Base
+class Comment < ActiveRecord::Base
   belongs_to :user
   belongs_to :stored_file
 end
@@ -24,10 +24,10 @@ end
 Here's the partial that renders a single Comment (from the show.html.erb view for a StoredFile) along with a delete link if the current_user owns that single Comment:
 
 ```ruby
-&lt;%= comment.content %&gt; -&lt;%= comment.user.first_name %&gt;
-&lt;% if comment.user == current_user &gt;
-  &lt;%= link_to 'X', stored_file_comment_path(@stored_file, comment), :remote =&gt; true, :method =&gt; :delete, :class =&gt; 'delete-comment' &gt;
-&lt;% end -&gt;
+<%= comment.content %> -<%= comment.user.first_name %>
+<% if comment.user == current_user >
+  <%= link_to 'X', stored_file_comment_path(@stored_file, comment), :remote => true, :method => :delete, :class => 'delete-comment' >
+<% end ->
 ```
 
 Here’s a mockup of the view with 3 comments:
@@ -41,7 +41,7 @@ The development.log file on the server corraborated the story and showed a succe
 ```nohighlight
 Started DELETE "/stored_files/78/comments/25"
   Processing by CommentsController#destroy as JS
-  Parameters: {"stored_file_id"=&gt;"78", "id"=&gt;"25"}
+  Parameters: {"stored_file_id"=>"78", "id"=>"25"}
   SQL (0.6ms)  DELETE FROM "comments" WHERE "comments"."id" = 25
   Completed 200 OK in 156ms
 ```

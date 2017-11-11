@@ -36,9 +36,9 @@ my_database="foo"
  
 for table in $problematic_tables; do
     echo "Vacuuming $table"
-    ( timeout $timeout bash &lt;&lt;VACUUM
+    ( timeout $timeout bash <<VACUUM
         while :; do
-            vacuumdb -v -t $table $my_database 2&gt;&amp;1 | grep "stopping truncate" || break
+            vacuumdb -v -t $table $my_database 2>&1 | grep "stopping truncate" || break
         done
 VACUUM
 ) || echo "Timed out on table $table"

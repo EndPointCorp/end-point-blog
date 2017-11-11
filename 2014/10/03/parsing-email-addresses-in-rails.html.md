@@ -14,14 +14,14 @@ The Mail::Address class within the library can be used in Rails applications to 
 The [class documentation](http://rdoc.info/github/mikel/mail/Mail/Address) provides some of the highlights:
 
 ```ruby
-a = Address.new('Patrick Lewis (My email address) &lt;patrick@example.endpoint.com&gt;')
-a.format       #=&gt; 'Patrick Lewis &lt;patrick@example.endpoint.com&gt; (My email address)'
-a.address      #=&gt; 'patrick@example.endpoint.com
-a.display_name #=&gt; 'Patrick Lewis'
-a.local        #=&gt; 'patrick'
-a.domain       #=&gt; 'example.endpoint.com'
-a.comments     #=&gt; ['My email address']
-a.to_s         #=&gt; 'Patrick Lewis &lt;patrick@example.endpoint.com&gt; (My email address)'
+a = Address.new('Patrick Lewis (My email address) <patrick@example.endpoint.com>')
+a.format       #=> 'Patrick Lewis <patrick@example.endpoint.com> (My email address)'
+a.address      #=> 'patrick@example.endpoint.com
+a.display_name #=> 'Patrick Lewis'
+a.local        #=> 'patrick'
+a.domain       #=> 'example.endpoint.com'
+a.comments     #=> ['My email address']
+a.to_s         #=> 'Patrick Lewis <patrick@example.endpoint.com> (My email address)'
 ```
 
 Mail::Address makes it trivial to extract the username, domain name, or just about any other component part of an email address string. Also, its #format and #to_s methods allow you to easily return the full address as needed without having to recombine things yourself.
@@ -32,10 +32,10 @@ You can also build a Mail::Address object by assigning email and display name st
 a = Address.new
 a.address = "patrick@example.endpoint.com"
 a.display_name = "Patrick Lewis"
-a #=&gt; #&lt;Mail::Address:69846669408060 Address: |Patrick Lewis &lt;patrick@example.endpoint.com&gt;| &gt;
+a #=> #<Mail::Address:69846669408060 Address: |Patrick Lewis <patrick@example.endpoint.com>| >
 a.display_name = "Patrick J. Lewis"
-a #=&gt; #&lt;Mail::Address:69846669408060 Address: |"Patrick J. Lewis" &lt;patrick@example.endpoint.com&gt;| &gt;
-a.domain #=&gt; "example.endpoint.com"
+a #=> #<Mail::Address:69846669408060 Address: |"Patrick J. Lewis" <patrick@example.endpoint.com>| >
+a.domain #=> "example.endpoint.com"
 ```
 
 This provides an easy, reliable way to generate Mail::Address objects that catches input errors if the supplied address or display name are not parseable.

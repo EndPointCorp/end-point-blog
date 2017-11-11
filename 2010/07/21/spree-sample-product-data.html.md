@@ -32,7 +32,7 @@ test_product:
   id: 1
   name: Test Product
   description: Lorem ipsum...
-  available_on: &lt;%= Time.zone.now.to_s(:db) %&gt;
+  available_on: <%= Time.zone.now.to_s(:db) %>
   count_on_hand: 10
   permalink: test-product
 </pre>

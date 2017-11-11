@@ -22,7 +22,7 @@ ALTER TABLE SET UNLOGGED
 The easiest way which I found for changing the table into unlogged was to create a database dump and add UNLOGGED to all the table creation commands. To have it a little bit faster, I used this command:
 
 ```shell
-pg_dump pbench | sed 's/^CREATE TABLE/CREATE UNLOGGED TABLE/' &gt; pbench.dump.sql
+pg_dump pbench | sed 's/^CREATE TABLE/CREATE UNLOGGED TABLE/' > pbench.dump.sql
 ```
 
 This time I will just delete all the tables in the database and load this dump before running the tests instead of using pg_bench for generating the data:
@@ -30,7 +30,7 @@ This time I will just delete all the tables in the database and load this dump b
 ```bash
 psql -c "drop database pbench"
 psql -c "create database pbench"
-psql pbench &lt; pbench.dump.sql
+psql pbench < pbench.dump.sql
 ```
 
 Time for tests. The previous tests results are in the previous blog article. I'm using standard PostgreSQL settings (the secure ones) and the same scale value for pg_bench.

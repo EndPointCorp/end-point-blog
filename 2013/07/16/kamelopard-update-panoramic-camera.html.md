@@ -51,9 +51,9 @@ Tilt is simply the angle between the camera vector and the original Z axis, but 
 These calculations underlie a simple API, which simply takes a view, for the original camera, the number of the camera we're interested in getting, and the camera angle or total number of cameras. Like this, for instance:
 
 ```ruby
-view_hash = {:latitude =&gt; otp[:latitude], :longitude =&gt; lo,
-    :altitudeMode =&gt; otp[:altitudeMode], :altitude =&gt; otp[:altitude],
-    :roll =&gt; otp[:roll], :timestamp =&gt; Kamelopard::TimeStamp.new('1921-07-29'),
-    :heading =&gt; otp[:heading], :tilt =&gt; otp[:tilt]}
+view_hash = {:latitude => otp[:latitude], :longitude => lo,
+    :altitudeMode => otp[:altitudeMode], :altitude => otp[:altitude],
+    :roll => otp[:roll], :timestamp => Kamelopard::TimeStamp.new('1921-07-29'),
+    :heading => otp[:heading], :tilt => otp[:tilt]}
 v = Kamelopard::Multicam.get_camera_view(make_view_from(view_hash), camera, nil, CamCount)
 ```

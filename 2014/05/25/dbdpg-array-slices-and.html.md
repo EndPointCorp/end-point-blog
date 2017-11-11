@@ -16,18 +16,18 @@ Placeholders allow you store a dummy representation of a value inside your SQL s
 
 ```sql
 $SQL = 'SELECT tbalance FROM pgbench_tellers WHERE tid = ? AND bid = ?';
-$sth = $dbh-&gt;prepare($SQL);
-$sth-&gt;execute(12,33);
+$sth = $dbh->prepare($SQL);
+$sth->execute(12,33);
 
 $SQL = 'SELECT tbalance FROM pgbench_tellers WHERE tid = $1 AND bid = $2';
-$sth = $dbh-&gt;prepare($SQL);
-$sth-&gt;execute(12,33);
+$sth = $dbh->prepare($SQL);
+$sth->execute(12,33);
 
 $SQL = 'SELECT tbalance FROM pgbench_tellers WHERE tid = :teller AND bid = :bank';
-$sth = $dbh-&gt;prepare($SQL);
-$sth-&gt;bind_param(':teller', 10);
-$sth-&gt;bind_param(':bank', 33);
-$sth-&gt;execute()
+$sth = $dbh->prepare($SQL);
+$sth->bind_param(':teller', 10);
+$sth->bind_param(':bank', 33);
+$sth->execute()
 ```
 
 One of the problems with placeholders is that the symbols used are not exclusive for DBI only, but can be valid SQL characters as well, with their own special meaning. For example, question marks are used by [geometric operators](http://www.postgresql.org/docs/current/interactive/functions-geometry.html), dollar signs are used in Postgres for 
@@ -41,15 +41,15 @@ Question marks are the preferred style of placeholders for many users of DBI (as
 ```perl
 ## Fails:
 $SQL="SELECT ?- lseg'((-1,0),(1,0))' FROM pg_class WHERE relname = \$1";
-$sth = $dbh-&gt;prepare($SQL);
+$sth = $dbh->prepare($SQL);
 ## Error is: Cannot mix placeholder styles "?" and "$1"
 
 ## Works:
-$dbh-&gt;{pg_placeholder_dollaronly} = 1;
-$sth = $dbh-&gt;prepare($SQL);
-$sth-&gt;execute('foobar');
+$dbh->{pg_placeholder_dollaronly} = 1;
+$sth = $dbh->prepare($SQL);
+$sth->execute('foobar');
 ## For safety:
-$dbh-&gt;{pg_placeholder_dollaronly} = 0;
+$dbh->{pg_placeholder_dollaronly} = 0;
 ```
 
 Another good form of placeholder is the dollar sign. Postgres itself uses dollar signs for 
@@ -60,19 +60,19 @@ The final form of placeholder is 'named parameters' or simply 'colons'. In this 
 ```perl
 ## Works:
 $SQL = q{SELECT relacl[1:2] FROM pg_class WHERE relname = ?};
-$sth = $dbh-&gt;prepare($SQL);
-$sth-&gt;execute('foobar');
+$sth = $dbh->prepare($SQL);
+$sth->execute('foobar');
 
 ## Fails:
 $SQL = q{SELECT relacl[1 :2] FROM pg_class WHERE relname = ?};
-$sth = $dbh-&gt;prepare($SQL);
+$sth = $dbh->prepare($SQL);
 ## Error is: Cannot mix placeholder styles ":foo" and "?"
 
 ## Works:
-$dbh-&gt;{pg_placeholder_nocolons} = 1;
+$dbh->{pg_placeholder_nocolons} = 1;
 $SQL = q{SELECT relacl[1 :2] FROM pg_class WHERE relname = ?};
-$sth = $dbh-&gt;prepare($SQL);
-$sth-&gt;execute('foobar');
+$sth = $dbh->prepare($SQL);
+$sth->execute('foobar');
 ```
 
 Which placeholder style you use is up to you (or your framework / supporting module!), but there should be enough options now between **pg_placeholder_dollaronly** and **pg_placeholder_nocolons** to support your style peacefully.

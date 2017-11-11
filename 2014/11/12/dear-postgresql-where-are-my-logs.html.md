@@ -114,7 +114,7 @@ Then, check /proc/YOUR_PID_HERE/fd/2, which is a symlink to the log destination:
 
 ```nohighlight
 [josh@eddie ~]$ ll /proc/31113/fd/2
-lrwx------ 1 josh josh 64 Nov  5 12:52 /proc/31113/fd/2 -&gt; /var/log/postgresql/postgresql-9.2-local.log
+lrwx------ 1 josh josh 64 Nov  5 12:52 /proc/31113/fd/2 -> /var/log/postgresql/postgresql-9.2-local.log
 ```
 
 ### CSVLOG

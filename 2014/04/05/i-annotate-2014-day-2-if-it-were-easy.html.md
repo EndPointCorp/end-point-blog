@@ -5,7 +5,7 @@ tags: conference, javascript
 title: 'I Annotate 2014 Day 2: If it were easy, we would have already solved it'
 ---
 
-### H2O &amp; Annotator
+### H2O & Annotator
 
 Yesterday I gave my talk on Integrating Annotator with H2O, which covered the specific implementation details of integrating the open source JavaScript based tool Annotator into [H2O](https://cyber.law.harvard.edu/research/h2o), including a history of annotation and highlights of some of the challenges. I'll update the link here to my slides when they are available on the I Annotate conference website.
 

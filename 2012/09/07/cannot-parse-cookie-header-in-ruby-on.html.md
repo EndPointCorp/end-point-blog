@@ -38,7 +38,7 @@ def self.decode_www_form_component(str, enc=Encoding::UTF_8)
     if TBLDECWWWCOMP_.empty?
       tbl = {} 
       256.times do |i|
-        h, l = i&gt;&gt;4, i&amp;15 
+        h, l = i>>4, i&15 
         tbl['%%%X%X' % [h, l]] = i.chr
         tbl['%%%x%X' % [h, l]] = i.chr
         tbl['%%%X%x' % [h, l]] = i.chr
@@ -85,8 +85,8 @@ While this is a reasonable fix, I'm still puzzled for a number of reasons:
 - When I use the URI module directly in a console, no ArgumentError is raised:
 
 ```ruby
-&gt;&gt; URI.decode_www_form_component("url_with_google_campaign_variables")
-&gt;&gt; #happy dance
+>> URI.decode_www_form_component("url_with_google_campaign_variables")
+>> #happy dance
 ```
 
 My best advice at this point is to tell the client not to use '%' character in the Google Campaign ID, but I'm still putting all the pieces together in the virtual code map in my head. I think a fix is more likely needed on the Ruby and rack side to handle URL parameters with the '%' character, and to elegantly handle situations where the URI.decode_www_form_components method dies.

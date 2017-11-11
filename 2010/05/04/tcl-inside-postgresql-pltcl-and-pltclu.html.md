@@ -157,7 +157,7 @@ psql=# SELECT * FROM table_count; SELECT COUNT(*) FROM customer;
 public|customer|10000
 10000
 
-psql=# UPDATE customer SET email=email WHERE id &lt;= 10;
+psql=# UPDATE customer SET email=email WHERE id <= 10;
 UPDATE 10
 
 psql=# SELECT * FROM table_count; SELECT COUNT(*) FROM customer;
@@ -172,7 +172,7 @@ psql=# SELECT * FROM table_count; SELECT COUNT(*) FROM customer;
 public|customer|10004
 10004
 
-psql=# DELETE FROM customer WHERE id &lt;= 10;
+psql=# DELETE FROM customer WHERE id <= 10;
 DELETE 10
 
 psql=# SELECT * FROM table_count; SELECT COUNT(*) FROM customer;

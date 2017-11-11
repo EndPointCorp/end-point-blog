@@ -34,9 +34,9 @@ public function wp_blur_attachment_filter($image_data) {
        $src = $upload_dir['path'] . '/' . $image_data['sizes']['large']['file'];
        $destination = $upload_dir['path'] . '/' . $image_data['sizes']['blurred']['file'];
        $imagick = new \Imagick($src);
-       $imagick-&gt;blurImage(0, 20, Imagick::CHANNEL_ALL);
-       $imagick-&gt;modulateImage(75, 105, 100);
-       $imagick-&gt;writeImage($destination);
+       $imagick->blurImage(0, 20, Imagick::CHANNEL_ALL);
+       $imagick->modulateImage(75, 105, 100);
+       $imagick->writeImage($destination);
        return $image_data;
  }
 ```
@@ -44,13 +44,13 @@ public function wp_blur_attachment_filter($image_data) {
 I darken the image:
 
 ```php
-$imagick-&gt;modulateImage(75, 105, 100);
+$imagick->modulateImage(75, 105, 100);
 ```
 
 And I blur the image:
 
 ```php
-$imagick-&gt;blurImage(0, 20, Imagick::CHANNEL_ALL);
+$imagick->blurImage(0, 20, Imagick::CHANNEL_ALL);
 ```
 
 Now we are able to use the custom image size in the template. Place the helper function in functions.php:
@@ -74,11 +74,11 @@ public static function blurred($src) {
 And now use it in the template like this:
 
 ```html
-&lt;div class="blurImg"&gt;
-  &lt;div style="background-image: url('&lt;?php echo MyTheme::non_blurred(get_theme_mod( 'header' )); ?&gt;')"&gt;&lt;/div&gt;
-  &lt;div style="background-image: url('&lt;?php echo MyTheme::blurred(get_theme_mod('header')); ?&gt;'); opacity: 0;" class="blur"&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;header&gt;&lt;/header&gt;
+<div class="blurImg">
+  <div style="background-image: url('<?php echo MyTheme::non_blurred(get_theme_mod( 'header' )); ?>')"></div>
+  <div style="background-image: url('<?php echo MyTheme::blurred(get_theme_mod('header')); ?>'); opacity: 0;" class="blur"></div>
+</div>
+<header></header>
 ```
 
 Add CSS:
@@ -93,7 +93,7 @@ Add CSS:
   z-index: -1;
 }
 
-.blurImg &gt; div {
+.blurImg > div {
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -131,10 +131,10 @@ add_action( 'wp_blur_attachment_filter_hook', 'wp_blur_attachment_filter_callbac
 function wp_blur_attachment_filter_callback($path) {
   $path_parts = pathinfo($path);
   $imagick = new \Imagick($path);
-  $imagick-&gt;blurImage(0, 20, Imagick::CHANNEL_ALL);
-  $imagick-&gt;modulateImage(75, 105, 100);
+  $imagick->blurImage(0, 20, Imagick::CHANNEL_ALL);
+  $imagick->modulateImage(75, 105, 100);
   $destination = dirname($path) . "/" . $path_parts['filename'] . "_darken_blur." . $path_parts['extension'];
-  $imagick-&gt;writeImage($destination);
+  $imagick->writeImage($destination);
 }
 
 public function wp_blur_attachment_filter($post_ID) {

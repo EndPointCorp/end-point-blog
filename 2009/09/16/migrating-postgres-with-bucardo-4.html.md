@@ -5,8 +5,6 @@ tags: open-source, perl, postgres
 title: Migrating Postgres with Bucardo 4
 ---
 
-
-
 Bucardo just released a major version (4). The latest version, 4.0.3, can be found at [the Bucardo website](http://bucardo.org/wiki/Bucardo). The [complete list of changes](http://bucardo.org/wiki/Bucardo/Changes) is available on the new Bucardo wiki.
 
 One of the neat tricks you can do with Bucardo is an in-place upgrade of Postgres. While it still requires application downtime, you can minimize your downtime to a very, very small window by using Bucardo. We'll work through an example below, but for the impatient, the basic process is this:
@@ -24,7 +22,7 @@ Let's test out this process, using the handy pgbench utility to create a databas
 
 ```bash
   initdb -D testA
-  echo port=5555 &gt;&gt; testA/postgresql.conf
+  echo port=5555 >> testA/postgresql.conf
   pg_ctl -D testA -l a.log start
   createdb -p 5555 alpha
   pgbench -p 5555 -i alpha
@@ -48,7 +46,7 @@ For the purposes of this example, let's make believe that accounts table is actu
 
 ```bash
   initdb -D testB
-  echo port=5566 &gt;&gt; testB/postgresql.conf
+  echo port=5566 >> testB/postgresql.conf
   pg_ctl -D testB -l b.log start
 ```
 
@@ -80,7 +78,7 @@ Let's install bucardo on the new database:
 Set the port so we don't have to keep typing it in:
 
 ```bash
-  echo dbport=5566 &gt; .bucardorc
+  echo dbport=5566 > .bucardorc
 ```
 
 Now teach Bucardo about both databases:
@@ -152,5 +150,3 @@ That's it! You can now point your application to the new server. There are no Bu
 ```
 
 Then shutdown your old Postgres and start enjoying your new 8.4 server!
-
-

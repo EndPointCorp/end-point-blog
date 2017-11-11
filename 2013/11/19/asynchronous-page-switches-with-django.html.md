@@ -49,11 +49,11 @@ But again, this is the bit I'm least happy about.  It takes the selection out of
 In templates/main.xml (or whatever you want to call it above) create XML nodes for the blocks in your main.html file.  Or at least the blocks your pages will replace:
 
 ```xml
-&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;content&gt;
- &lt;title&gt;&lt;![CDATA[{% block title %}Django Site!{% endblock %}]]&gt;&lt;/title&gt;
- &lt;main_content&gt;&lt;![CDATA[{% block main_content %}{% endblock %}]]&gt;&lt;/main_content&gt;
-&lt;/content&gt;
+<?xml version="1.0" encoding="UTF-8"?>
+<content>
+ <title><![CDATA[{% block title %}Django Site!{% endblock %}]]></title>
+ <main_content><![CDATA[{% block main_content %}{% endblock %}]]></main_content>
+</content>
 ```
 
 Like your main.html, you can have defaults for the blocks here, such as a default title.
@@ -72,7 +72,7 @@ $('a.ajax').click(function (e) {
   $.get(this.href).done(function (response) {
     // The XML is automatically parsed and can be traversed in script
     var contentNodes = response.firstChild.childNodes;
-    for (var i = 0; i &lt; contentNodes.length; i++) {
+    for (var i = 0; i < contentNodes.length; i++) {
       // Ignore any textNodes or other non-elements
       if (contentNodes[i].nodeType != 1) continue;
 

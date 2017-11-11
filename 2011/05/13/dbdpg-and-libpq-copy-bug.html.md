@@ -12,29 +12,29 @@ Version 2.18.1 of [DBD::Pg](http://search.cpan.org/search?query=DBD%3A%3APg), th
 ```perl
 ## Prepare the source
 my $srccmd = "COPY (SELECT * FROM $S.$T WHERE $pkcols IN ($pkvals)) TO STDOUT";
-$fromdbh-&gt;do($srccmd);
+$fromdbh->do($srccmd);
 
 ## Prepare each target
 for my $t (@$todb) {
     my $tgtcmd = "COPY $S.$T FROM STDIN";
-    $t-&gt;{dbh}-&gt;do($tgtcmd);
+    $t->{dbh}->do($tgtcmd);
 }
 
 ## Pull a row from the source, and push it to each target
-while ($fromdbh-&gt;pg_getcopydata($buffer) &gt;= 0) {
+while ($fromdbh->pg_getcopydata($buffer) >= 0) {
     for my $t (@$todb) {
-        $t-&gt;{dbh}-&gt;pg_putcopydata($buffer);
+        $t->{dbh}->pg_putcopydata($buffer);
     }
 }
 
 ## Tell each target we are done with COPYing
 for my $t (@$todb) {
-    $t-&gt;{dbh}-&gt;pg_putcopyend();
+    $t->{dbh}->pg_putcopyend();
 }
 
 ## Later on, run an asynchronous command on the source database
-$sth{track}{$dbname}{$g} = $fromdbh-&gt;prepare($SQL, {pg_async =&gt; PG_ASYNC});
-$sth{track}{$dbname}{$g}-&gt;execute();
+$sth{track}{$dbname}{$g} = $fromdbh->prepare($SQL, {pg_async => PG_ASYNC});
+$sth{track}{$dbname}{$g}->execute();
 ```
 
 This gave the error "**another command is already in progress**". This error did not come from Postgres or DBD::Pg, but from **libpq**, the underlying C library which DBD::Pg uses to talk to the database. Strangely enough, taking out the async part and running the exact same command produced no errors.
@@ -47,14 +47,14 @@ If your application is encountering this bug and you cannot upgrade to 2.18.1 ye
 ...
 ## Tell each target we are done with COPYing
 for my $t (@$todb) {
-    $t-&gt;{dbh}-&gt;pg_putcopyend();
-    $t-&gt;{dbh}-&gt;do('SELECT 123');
+    $t->{dbh}->pg_putcopyend();
+    $t->{dbh}->do('SELECT 123');
 }
 
 ## Later on, run an asynchronous command on the source database
-$fromdbh-&gt;do('SELECT 123');
-$sth{track}{$dbname}{$g} = $fromdbh-&gt;prepare($SQL, {pg_async =&gt; PG_ASYNC});
-$sth{track}{$dbname}{$g}-&gt;execute();
+$fromdbh->do('SELECT 123');
+$sth{track}{$dbname}{$g} = $fromdbh->prepare($SQL, {pg_async => PG_ASYNC});
+$sth{track}{$dbname}{$g}->execute();
 ```
 
 Why does the non-asynchronous command work? Doesn't it check the conn->asyncStatus as well? The secret is that PQexecstart has this bit of code in it:

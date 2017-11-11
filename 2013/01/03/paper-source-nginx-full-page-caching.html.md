@@ -5,7 +5,7 @@ tags: interchange, nginx, performance
 title: 'Paper Source: The Road to nginx Full Page Caching in Interchange'
 ---
 
-### Background &amp; Motivation
+### Background & Motivation
 
 During the recent holiday season, it became apparent that some efforts were needed to improve performance for [Paper Source](http://www.paper-source.com/) to minimize down-time and server sluggishness. Paper Source runs on Interchange and sells paper and stationery products, craft products, personalized invitations, and some great gifts! They also have over 40 physical stores which in addition to selling products, offer on-site workshops.
 

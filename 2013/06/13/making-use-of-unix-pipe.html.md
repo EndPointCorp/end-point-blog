@@ -31,7 +31,7 @@ $ cat my_fifo
 Notice that when this runs, it blocks while it waits for something to come through the pipe. Now let's push some text through the pipe. In another terminal window, I'll just echo some text to the pipe.
 
 ```nohighlight
-$ echo "hello world" &gt; my_fifo
+$ echo "hello world" > my_fifo
 ```
 
 As soon as I press enter on this command, I see that the other terminal outputs "hello world" and then exits.
@@ -45,7 +45,7 @@ Now that we have a basic understanding of how the pipe works, we can set it up t
   fi
 
   while true; do
-    sh -c "clear &amp;&amp; $(cat commands)"
+    sh -c "clear && $(cat commands)"
   done
 ```
 
@@ -58,7 +58,7 @@ $ sh ./setup_listener.rb
 In another terminal:
 
 ```nohighlight
-$ echo 'ls -l' &gt; commands
+$ echo 'ls -l' > commands
 ```
 
 You'll notice that the command clears the screen in the other terminal and displays the output of the command ls -l. Nice!
@@ -69,7 +69,7 @@ Now let's put this to some practical use. I have a Rails application that has so
 # run_all_tests.rb
 
 #!/usr/bin/env ruby
-$:&lt;&lt;'test'
+$:<<'test'
 
 files = Dir.glob('test/**/*_test.rb')
 files.each{|file| require file.sub(/^test\/|.rb$/,'')}
@@ -90,13 +90,13 @@ $ minitest test/test_foo.rb
 With these two commands in mind, I can now put together everything I need for my pipe. First I'm going to vertically split my screen (You can use tmux, or whatever tool you'd like. I like iTerm's simple split screen for this.) In my terminal on the right, I'm going to startup my listener just like I did above. In the terminal on the right, I'm going to start up vim and bring up my test file. To execute my test, I'll just use vim's :! command to execute the test command in the shell using the % as a placeholder for the current file name in my active buffer.
 
 ```nohighlight
-:!echo "minitest %" &gt; commands
+:!echo "minitest %" > commands
 ```
 
 If I've done everything right, my test will run on the terminal on the right and then wait for my next command. W00T! Now I'm going to run all my tests:
 
 ```nohighlight
-:!echo "./run_all_tests.rb" &gt; commands
+:!echo "./run_all_tests.rb" > commands
 ```
 
 Immediately upon pressing enter, all my tests are running on the right pane! Hooray!
@@ -106,8 +106,8 @@ Immediately upon pressing enter, all my tests are running on the right pane! Hoo
 To make things a little easier in vim, I setup some key mappings for running the tests.
 
 ```nohighlight
-:nmap &lt;leader&gt;g :w\|:silent !echo "minitest %" &gt; commands&lt;cr&gt;
-:nmap &lt;leader&gt;G :w\|:silent !echo "./run_all_tests.rb" &gt; commands&lt;cr&gt;
+:nmap <leader>g :w\|:silent !echo "minitest %" > commands<cr>
+:nmap <leader>G :w\|:silent !echo "./run_all_tests.rb" > commands<cr>
 ```
 
 Now I don't necessarily want these shortcuts all the time so I'm going to add these shortcuts to a file called setup_test_shortcuts.vim. Then to activate them I just run :source setup_test_shortcuts.vim. Now I have a simple shortcut in vim for running my tests!
@@ -115,8 +115,8 @@ Now I don't necessarily want these shortcuts all the time so I'm going to add th
 If you are using [zeus](https://github.com/burke/zeus) then you will need to modify your shortcuts to look like this:
 
 ```nohighlight
-nmap &lt;leader&gt;g :w\|:silent !echo "zeus test %" &gt; commands&lt;cr&gt;
-nmap &lt;leader&gt;G :w\|:silent !echo "zeus test ./run_all_tests.rb" &gt; commands&lt;cr&gt;
+nmap <leader>g :w\|:silent !echo "zeus test %" > commands<cr>
+nmap <leader>G :w\|:silent !echo "zeus test ./run_all_tests.rb" > commands<cr>
 ```
 
 Using Unix to help me in my workflow always brings a big smile to my face as I see the gains in productivity. Simple Unix concepts continue to blow my mind at their practicality and underlying simplicity.

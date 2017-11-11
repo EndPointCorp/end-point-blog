@@ -38,7 +38,7 @@ I discussed all of my findings with a colleague, who was equally bewildered and 
 I created a test case, with a new table having a single field into which I would insert a too-long string that had an ASCII null at a point such that the string to that point was less than the field length. My testing *seemed* to indicate the problem had been fixed sometime between 5.0 and 5.5:
 
 ```
-mysql&gt; select version();
+mysql> select version();
 +-----------------+
 | version()       |
 +-----------------+
@@ -46,13 +46,13 @@ mysql&gt; select version();
 +-----------------+
 1 row in set (0.00 sec)
 
-mysql&gt; create table foo (foo_var varchar(5));
+mysql> create table foo (foo_var varchar(5));
 Query OK, 0 rows affected (0.60 sec)
 
-mysql&gt; insert into foo values ('123\0456');
+mysql> insert into foo values ('123\0456');
 Query OK, 1 row affected, 1 warning (0.93 sec)
 
-mysql&gt; select * from foo;
+mysql> select * from foo;
 +---------+
 | foo_var |
 +---------+
@@ -64,7 +64,7 @@ mysql&gt; select * from foo;
 Now to run the exact same test on my MySQL 5.0 instance, prove the deviation in behavior, and we'll be good to go:
 
 ```
-mysql&gt; select version();
+mysql> select version();
 +------------+
 | version()  |
 +------------+
@@ -72,13 +72,13 @@ mysql&gt; select version();
 +------------+
 1 row in set (0.00 sec)
 
-mysql&gt; create table foo (foo_var varchar(5));
+mysql> create table foo (foo_var varchar(5));
 Query OK, 0 rows affected (0.00 sec)
 
-mysql&gt; insert into foo values ('123\0456');
+mysql> insert into foo values ('123\0456');
 Query OK, 1 row affected, 1 warning (0.00 sec)
 
-mysql&gt; select * from foo;
+mysql> select * from foo;
 +---------+
 | foo_var |
 +---------+
@@ -92,7 +92,7 @@ So, my contrived test also worked on the original MySQL server that had dumped o
 By now, I'm pretty seriously flailing about in indignation. What was so special about the data from the dump, and its behavior in the original table, that I had failed to understand and reproduce? I begin devising tests that seemed too absurd to be believed, as though I had two apples that, if I repositioned them just right, would prove 1+1 is actually 3. Then, by a stroke of fortune, I hit on the missing clue. It was a bug, all right, but not anything like what I was thinking:
 
 ```
-mysql&gt; select version();
+mysql> select version();
 +------------+
 | version()  |
 +------------+
@@ -100,7 +100,7 @@ mysql&gt; select version();
 +------------+
 1 row in set (0.00 sec)
 
-mysql&gt; select * from foo;
+mysql> select * from foo;
 +---------+
 | foo_var |
 +---------+
@@ -108,7 +108,7 @@ mysql&gt; select * from foo;
 +---------+
 1 row in set (0.00 sec)
 
-mysql&gt; select * from foo \G
+mysql> select * from foo \G
 *************************** 1. row ***************************
 foo_var: 123
 1 row in set (0.00 sec)
@@ -117,7 +117,7 @@ foo_var: 123
 Eureka! The bug was an issue rendering the output using the \G query terminator, whether restricted just to ASCII null or perhaps to other backslash-escaped characters, I do not know. Finally, to confirm whether the issue was still an issue or fixed over the intervening versions, I ran my new test on 5.5:
 
 ```
-mysql&gt; select version();
+mysql> select version();
 +-----------------+
 | version()       |
 +-----------------+
@@ -125,7 +125,7 @@ mysql&gt; select version();
 +-----------------+
 1 row in set (0.00 sec)
 
-ql&gt; select * from foo;
+ql> select * from foo;
 +---------+
 | foo_var |
 +---------+
@@ -133,7 +133,7 @@ ql&gt; select * from foo;
 +---------+
 1 row in set (0.00 sec)
 
-mysql&gt; select * from foo \G
+mysql> select * from foo \G
 *************************** 1. row ***************************
 foo_var: 123 4
 1 row in set (0.00 sec)
@@ -142,7 +142,7 @@ foo_var: 123 4
 Now I had a clear explanation for the behavior of the data with ASCII nulls, but it threw me back to starting over on the original length problem. However, without the red herring of the "too long" data being truncated to explain the size problem, I looked more closely at the specific data causing the problem and realized that counting \ and 0 as literal characters, instead of the metadata represetnation of ASCII null, the width of the data ended up exceeding the field length. Testing this hypothesis was simple enough:
 
 ```
-mysql&gt; select length('07989409006\007989409') AS len;
+mysql> select length('07989409006\007989409') AS len;
 +-----+
 | len |
 +-----+

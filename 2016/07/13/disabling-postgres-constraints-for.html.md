@@ -43,7 +43,7 @@ creating tables...
 100000 of 100000 tuples (100%) done (elapsed 0.82 s, remaining 0.00 s)
 set primary keys...
 done.
-psql test_prod -c 'create function valid_account(int) returns bool language sql immutable as $$ SELECT $1 &gt; 0$$;'
+psql test_prod -c 'create function valid_account(int) returns bool language sql immutable as $$ SELECT $1 > 0$$;'
 CREATE FUNCTION
 psql test_prod -c 'alter table pgbench_accounts add constraint good_aid check ( valid_account(aid) )'
 ALTER TABLE
@@ -60,7 +60,7 @@ ERROR:  new row for relation "pgbench_accounts" violates check constraint "good_
 DETAIL:  Failing row contains (-1, 1, 0,                                         ...).
 
 ## Modify the function to disallow account ids under 100. No error is produced!
-psql test_prod -c 'create or replace function valid_account(int) returns bool language sql volatile as $$ SELECT $1 &gt; 99$$'
+psql test_prod -c 'create or replace function valid_account(int) returns bool language sql volatile as $$ SELECT $1 > 99$$'
 CREATE FUNCTION
 
 ## The error is tripped only when we violate it afresh:
@@ -172,7 +172,7 @@ A final sanity check is always a good idea, to make sure the two databases are i
 despite our [system catalog](https://www.postgresql.org/docs/current/static/catalogs.html) tweaking:
 
 ```
-diff -s &lt;(pg_dump test_prod) &lt;(pg_dump test_upgraded)
+diff -s <(pg_dump test_prod) <(pg_dump test_upgraded)
 Files /dev/fd/63 and /dev/fd/62 are identical
 ```
 

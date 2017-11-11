@@ -32,7 +32,7 @@ Now, let's try making a button with our custom graphics. Add a Button to your Ac
 res/layout/activity_main.xml
 
 ```
- &lt;RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+ <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
    xmlns:tools="http://schemas.android.com/tools"
    android:layout_width="match_parent"
    android:layout_height="match_parent"
@@ -40,15 +40,15 @@ res/layout/activity_main.xml
    android:paddingLeft="@dimen/activity_horizontal_margin"
    android:paddingRight="@dimen/activity_horizontal_margin"
    android:paddingTop="@dimen/activity_vertical_margin"
-   tools:context=".MainActivity" &gt;
-   &lt;Button
+   tools:context=".MainActivity" >
+   <Button
      android:id="@+id/button1"
      android:layout_width="wrap_content"
      android:layout_height="wrap_content"
      android:background="@drawable/button_selected"
      android:onClick="doStuff"
-     android:text="@string/hello_world" /&gt;
- &lt;/RelativeLayout&gt;
+     android:text="@string/hello_world" />
+ </RelativeLayout>
 ```
 
 Now, when we run it, it looks like this:
@@ -60,15 +60,15 @@ So we have our custom background working, but it's the same (red) whether or not
 res/drawable/button_selector.xml
 
 ```
- &lt;?xml version="1.0" encoding="utf-8"?&gt;
- &lt;selector xmlns:android="http://schemas.android.com/apk/res/android" &gt;
-   &lt;!-- When selected, use this image --&gt;
-   &lt;item android:drawable="@drawable/button_selected"
-     android:state_pressed="true" /&gt;
-   &lt;!-- When not selected, use this image --&gt;
-   &lt;item android:drawable="@drawable/button_unselected"
-     android:state_pressed="false" /&gt;
- &lt;/selector&gt;
+ <?xml version="1.0" encoding="utf-8"?>
+ <selector xmlns:android="http://schemas.android.com/apk/res/android" >
+   <!-- When selected, use this image -->
+   <item android:drawable="@drawable/button_selected"
+     android:state_pressed="true" />
+   <!-- When not selected, use this image -->
+   <item android:drawable="@drawable/button_unselected"
+     android:state_pressed="false" />
+ </selector>
 ```
 
 Now, instead of pointing our Button at an image directly, we can reference the XML instead:

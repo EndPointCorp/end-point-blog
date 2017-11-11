@@ -13,7 +13,7 @@ Then, the JS-frameworks epidemy started to disseminate. As web developers - we s
 
 ### Evolution of UI programming for browsers
 
-And so was the start of our global evolution, towards making the Web - our main means of interacting with *users*. Few with big enough imagination were already seeing HTML, CSS &amp; JS as the future standard of creating user interfaces for data-rich applications. Of course, there were toolkits like ExtJS which aimed at nothing but this - but who would have known back then, that we will be able to build apps for **smartphones** the way we are building ones for the web?
+And so was the start of our global evolution, towards making the Web - our main means of interacting with *users*. Few with big enough imagination were already seeing HTML, CSS & JS as the future standard of creating user interfaces for data-rich applications. Of course, there were toolkits like ExtJS which aimed at nothing but this - but who would have known back then, that we will be able to build apps for **smartphones** the way we are building ones for the web?
 
 I have my little observation in life — all *hot stuff* in the world of technology, has their *phases*.. That is:
 
@@ -22,7 +22,7 @@ I have my little observation in life — all *hot stuff* in the world of technol
 - people discover new pains brought on by these solutions
 - next pain and the beginning of the "next big thing"
 
-At the beginning it was painful to write all the *vanilla* JS code without shooting yourself in your own foot (well let’s just say it - JS is Pandora’s Box of pain). Then you realize you’ve got your sweet &amp; cool jQuery with which you can rapidly impress your boss/clients/friends.
+At the beginning it was painful to write all the *vanilla* JS code without shooting yourself in your own foot (well let’s just say it - JS is Pandora’s Box of pain). Then you realize you’ve got your sweet & cool jQuery with which you can rapidly impress your boss/clients/friends.
 
 Your next surprise is that jQuery isn’t enough - ever wondered why frameworks like Backbone.js were created?
 
@@ -82,19 +82,19 @@ So for example:
 module.exports = class PhotosView extends Backbone.View
    template: require "./templates/photos/index"
 
-   initialize: () -&gt;
+   initialize: () ->
        @view = new PhotosViewModel()
        @render()
 
-   render: () -&gt;
+   render: () ->
        $(@el).html(@template())
        ko.applyBindings(@view, @el)
 
-   setData: (photos) =&gt;
+   setData: (photos) =>
        @view.photos(photos)
 
 class PhotosViewModel
-   constructor: -&gt;
+   constructor: ->
        @photos = ko.observableArray []
 ```
 
@@ -114,31 +114,31 @@ Now - with this, you can manipulate the photos array however you like, and the U
 module.exports = class EditCompanyView extends Backbone.View
    template: require "./templates/companies/edit"
 
-   initialize: () -&gt;
+   initialize: () ->
        @view = new EditCompanyViewModel()
        @render()
 
-   render: () -&gt;
+   render: () ->
        $(@el).html(@template())
        ko.applyBindings(@view, @el)
 
-   setData: (company) =&gt;
+   setData: (company) =>
        @view.company(company)
 
 class EditCompanyViewModel
-   constructor: -&gt;
+   constructor: ->
        # let’s instantiate it with default company for bindings to work
        @company = ko.observable(new Company())
        @companyName = ko.computed
-           read: =&gt; @company.get('name')
-           write: (value) =&gt; @company.set('name': value)
+           read: => @company.get('name')
+           write: (value) => @company.set('name': value)
        @companyState = ko.computed
-           read: =&gt; @company.get('state')
-           write: (value) =&gt; @company.set('state': value)
+           read: => @company.get('state')
+           write: (value) => @company.set('state': value)
        @companyWebsite = ko.computed
-           read: =&gt; @company.get('url')
-           write: (value) =&gt; @company.set('url': value)
-       @saveCompany = () =&gt;
+           read: => @company.get('url')
+           write: (value) => @company.set('url': value)
+       @saveCompany = () =>
            @company.save()
 ```
 

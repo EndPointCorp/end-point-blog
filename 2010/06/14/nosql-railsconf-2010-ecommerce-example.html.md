@@ -21,7 +21,7 @@ In one NoSQL talk, [Flip Sasser](http://x451.com/) presented an example to demon
 In the transition to NoSQL, the transaction model stays as is. As a purchase is created, the Notification.create method is called.
 
 ```ruby
-class Purchase &lt; ActiveRecord::Base
+class Purchase < ActiveRecord::Base
   after_create :create_notification
 
   # model relationships
@@ -34,10 +34,10 @@ class Purchase &lt; ActiveRecord::Base
   protected
   def create_notification
     notifications.create({
-      :action =&gt; "purchased #{quantity == 1 ? 'a' : quantity} #{quantity == 1 ? product.name : product.name.pluralize}",
-      :description =&gt; "Spent a total of #{total}",
-      :item =&gt; self,
-      :user =&gt; user
+      :action => "purchased #{quantity == 1 ? 'a' : quantity} #{quantity == 1 ? product.name : product.name.pluralize}",
+      :description => "Spent a total of #{total}",
+      :item => self,
+      :user => user
     }
     )
   end
@@ -49,7 +49,7 @@ Flip moves the product class to Document store because it needs a lot of flexibi
 **Before**
 
 ```ruby
-class Product &lt; ActiveRecord::Base
+class Product < ActiveRecord::Base
   serialize :info, Hash
 end
 ```
@@ -74,7 +74,7 @@ The Notification class is moved to a Key-Value store. After a user completes a p
 **Before**
 
 ```ruby
-class Notification &lt; ActiveRecord::Base
+class Notification < ActiveRecord::Base
   # model relationships
   # model validations
 end
@@ -85,12 +85,12 @@ end
 ```ruby
 require 'ostruct'
 
-class Notification &lt; OpenStruct
-  class &lt;&lt; self
+class Notification < OpenStruct
+  class << self
     def create(attributes)
       message = "#{attributes[:user].name} #{attributes[:action]}"
       attributes[:user].follower_ids.each do |follower_id|
-        Red.lpush("user:#{follower_id}:notifications", {:message =&gt; message, :description =&gt; attributes[:description], :timestamp =&gt; Time.now}.to_json)
+        Red.lpush("user:#{follower_id}:notifications", {:message => message, :description => attributes[:description], :timestamp => Time.now}.to_json)
       end
     end
   end
@@ -102,7 +102,7 @@ The user model remains an ActiveRecord model and uses the devise gem for user au
 **Before**
 
 ```ruby
-class User &lt; ActiveRecord::Base
+class User < ActiveRecord::Base
   # user authentication here
   # model relationships
 
@@ -116,7 +116,7 @@ end
 **After**
 
 ```ruby
-class User &lt; ActiveRecord::Base
+class User < ActiveRecord::Base
   # user authentication here
   # model relationships
 
@@ -126,7 +126,7 @@ class User &lt; ActiveRecord::Base
   end
 
   def follower_ids
-    followers.map(&amp;:id)
+    followers.map(&:id)
   end
 
   def notifications

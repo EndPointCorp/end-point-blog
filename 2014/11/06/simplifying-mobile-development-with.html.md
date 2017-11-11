@@ -36,7 +36,7 @@ $ ionic start Cartoonic blank
 The framework gives you an option of whether you want to use Sass or just plain old Css. To turn Sass on for the project run:
 
 ```bash
-$ cd Cartoonic &amp;&amp; ionic setup sass
+$ cd Cartoonic && ionic setup sass
 ```
 
 All went well, but now let's see if it *works* well. For this, Ionic gives you an ability to test your app in the browser, as if it were a screen of your mobile device. To run the app in the browser now:
@@ -59,14 +59,14 @@ In order to do so you can take a look at the CSS documentation for different asp
 --- a/www/index.html
 +++ b/www/index.html
 @@ -21,8 +21,8 @@
-     &lt;ion-pane&gt;
--      &lt;ion-header-bar class="bar-stable"&gt;
--        &lt;h1 class="title"&gt;Ionic Blank Starter&lt;/h1&gt;
-+      &lt;ion-header-bar class="bar-positive"&gt;
-+        &lt;h1 class="title"&gt;Cartoonic&lt;/h1&gt;
-       &lt;/ion-header-bar&gt;
-       &lt;ion-content&gt;
-       &lt;/ion-content&gt;
+     <ion-pane>
+-      <ion-header-bar class="bar-stable">
+-        <h1 class="title">Ionic Blank Starter</h1>
++      <ion-header-bar class="bar-positive">
++        <h1 class="title">Cartoonic</h1>
+       </ion-header-bar>
+       <ion-content>
+       </ion-content>
 ```
 
 <div class="separator" style="clear: both; text-align: center;"><a href="/blog/2014/11/06/simplifying-mobile-development-with/image-1.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;" target="_blank"><img border="0" src="/blog/2014/11/06/simplifying-mobile-development-with/image-1.png"/></a></div>
@@ -91,17 +91,17 @@ So far so good, now let's play with the list of cartoons:
 
 --- a/www/index.html
 +++ b/www/index.html
-+        &lt;ion-list&gt;
-+          &lt;ion-item class="item-divider"&gt;Where Do Birds Go&lt;/ion-item&gt;
-+          &lt;ion-item class="cartoon"&gt;
-+            &lt;img src="http://imgs.xkcd.com/comics/where_do_birds_go.png" alt=""&gt;
-+          &lt;/ion-item&gt;
-+          &lt;ion-item class="item-divider"&gt;Lightsaber&lt;/ion-item&gt;
-+          &lt;ion-item class="cartoon"&gt;
-+            &lt;img src="http://imgs.xkcd.com/comics/lightsaber.png" alt=""&gt;
-+          &lt;/ion-item&gt;
-+        &lt;/ion-list&gt;
-       &lt;/ion-content&gt;
++        <ion-list>
++          <ion-item class="item-divider">Where Do Birds Go</ion-item>
++          <ion-item class="cartoon">
++            <img src="http://imgs.xkcd.com/comics/where_do_birds_go.png" alt="">
++          </ion-item>
++          <ion-item class="item-divider">Lightsaber</ion-item>
++          <ion-item class="cartoon">
++            <img src="http://imgs.xkcd.com/comics/lightsaber.png" alt="">
++          </ion-item>
++        </ion-list>
+       </ion-content>
 ```
 
 <div class="separator" style="clear: both; text-align: center;"><a href="/blog/2014/11/06/simplifying-mobile-development-with/image-2.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;" target="_blank"><img border="0" src="/blog/2014/11/06/simplifying-mobile-development-with/image-2.png"/></a></div>
@@ -117,29 +117,29 @@ Let's start with making the UI use dynamically bound data that we can operate on
 ```diff
 --- a/www/index.html
 +++ b/www/index.html
-     &lt;script src="js/app.js"&gt;&lt;/script&gt;
-+    &lt;script src="js/controllers.js"&gt;&lt;/script&gt;
-   &lt;/head&gt;
--  &lt;body ng-app="starter"&gt;
-+  &lt;body ng-app="starter" ng-controller="CartoonsCtrl"&gt;
+     <script src="js/app.js"></script>
++    <script src="js/controllers.js"></script>
+   </head>
+-  <body ng-app="starter">
++  <body ng-app="starter" ng-controller="CartoonsCtrl">
 
 (...)
 
-       &lt;ion-content&gt;
-         &lt;ion-list&gt;
--          &lt;ion-item class="item-divider"&gt;Where Do Birds Go&lt;/ion-item&gt;
--          &lt;ion-item class="cartoon"&gt;
--            &lt;img src="http://imgs.xkcd.com/comics/where_do_birds_go.png" alt=""&gt;
--          &lt;/ion-item&gt;
--          &lt;ion-item class="item-divider"&gt;Lightsaber&lt;/ion-item&gt;
--          &lt;ion-item class="cartoon"&gt;
--            &lt;img src="http://imgs.xkcd.com/comics/lightsaber.png" alt=""&gt;
-+          &lt;ion-item class="item-divider" ng-repeat-start="cartoon in cartoons"&gt;{{ cartoon.title }}&lt;/ion-item&gt;
-+          &lt;ion-item class="cartoon" ng-repeat-end&gt;
-+            &lt;img ng-src="{{ cartoon.href }}" alt=""&gt;
-           &lt;/ion-item&gt;
-         &lt;/ion-list&gt;
-       &lt;/ion-content&gt;
+       <ion-content>
+         <ion-list>
+-          <ion-item class="item-divider">Where Do Birds Go</ion-item>
+-          <ion-item class="cartoon">
+-            <img src="http://imgs.xkcd.com/comics/where_do_birds_go.png" alt="">
+-          </ion-item>
+-          <ion-item class="item-divider">Lightsaber</ion-item>
+-          <ion-item class="cartoon">
+-            <img src="http://imgs.xkcd.com/comics/lightsaber.png" alt="">
++          <ion-item class="item-divider" ng-repeat-start="cartoon in cartoons">{{ cartoon.title }}</ion-item>
++          <ion-item class="cartoon" ng-repeat-end>
++            <img ng-src="{{ cartoon.href }}" alt="">
+           </ion-item>
+         </ion-list>
+       </ion-content>
 
 --- a/www/js/app.js
 +++ b/www/js/app.js
@@ -173,14 +173,14 @@ Let's implement opening the picture upon the tap:
 ```diff
 --- a/www/index.html
 +++ b/www/index.html
-       &lt;ion-content&gt;
-         &lt;ion-list&gt;
-           &lt;ion-item class="item-divider" ng-repeat-start="cartoon in cartoons"&gt;{{ cartoon.title }}&lt;/ion-item&gt;
--          &lt;ion-item class="cartoon" ng-repeat-end&gt;
-+          &lt;ion-item class="cartoon" ng-repeat-end ng-click="openCartoon(cartoon)"&gt;
-             &lt;img ng-src="{{ cartoon.href }}" alt=""&gt;
-           &lt;/ion-item&gt;
-         &lt;/ion-list&gt;
+       <ion-content>
+         <ion-list>
+           <ion-item class="item-divider" ng-repeat-start="cartoon in cartoons">{{ cartoon.title }}</ion-item>
+-          <ion-item class="cartoon" ng-repeat-end>
++          <ion-item class="cartoon" ng-repeat-end ng-click="openCartoon(cartoon)">
+             <img ng-src="{{ cartoon.href }}" alt="">
+           </ion-item>
+         </ion-list>
 
 --- a/www/js/controllers.js
 +++ b/www/js/controllers.js
@@ -202,18 +202,18 @@ Now, let's implement loading images from the real feed:
 ```diff
 --- a/www/index.html
 +++ b/www/index.html
-     &lt;script src="cordova.js"&gt;&lt;/script&gt;
-+    &lt;script type="text/javascript" src="https://www.google.com/jsapi"&gt;&lt;/script&gt;
-+    &lt;script type="text/javascript"&gt;
+     <script src="cordova.js"></script>
++    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
++    <script type="text/javascript">
 +      google.load("feeds", "1");
-+    &lt;/script&gt;
++    </script>
 
-     &lt;!-- your app's js --&gt;
-     &lt;script src="js/app.js"&gt;&lt;/script&gt;
-     &lt;script src="js/controllers.js"&gt;&lt;/script&gt;
-+    &lt;script src="js/services.js"&gt;&lt;/script&gt;
-   &lt;/head&gt;
-   &lt;body ng-app="starter" ng-controller="CartoonsCtrl"&gt;
+     <!-- your app's js -->
+     <script src="js/app.js"></script>
+     <script src="js/controllers.js"></script>
++    <script src="js/services.js"></script>
+   </head>
+   <body ng-app="starter" ng-controller="CartoonsCtrl">
 
 --- a/www/js/app.js
 +++ b/www/js/app.js

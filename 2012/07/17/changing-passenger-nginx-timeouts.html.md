@@ -31,8 +31,8 @@ This is the kind of error message you'd see on the Nginx application server when
 If you're unable to address the slow Rails process problem and must extend the length of the time out, you'll need to modify the Passenger gem's Nginx configuration. Start by locating the Passenger gem's Nginx config with locate nginx/Configuration.c and edit the following lines:
 
 ```
-ngx_conf_merge_msec_value(conf-&gt;upstream.read_timeout,
-                              prev-&gt;upstream.read_timeout, 60000);
+ngx_conf_merge_msec_value(conf->upstream.read_timeout,
+                              prev->upstream.read_timeout, 60000);
 ```
 Replace the 60000 value with your desired timeout in milliseconds.  Then run sudo passenger-install-nginx-module to recompile nginx and restart.
 

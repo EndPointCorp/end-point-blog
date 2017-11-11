@@ -24,7 +24,7 @@ The concept behind WordPress plugins is much like Spree extension functionality 
 ```ruby
 /* inside plugin */
 function add_footer_text() {
-    echo '&lt;p&gt;Extra Footer Text!!&lt;/p&gt;';
+    echo '<p>Extra Footer Text!!</p>';
 }
 add_action('wp_footer', 'add_footer_text');
 ```
@@ -81,7 +81,7 @@ remove :sidebar
 - Next, I added a new view in the extension to include the new stylesheet.
 ```nohighlight
 # RAILS_ROOT/vendor/extensions/stephs_photos/app/views/shared/_styles.erb
-&lt;link type="text/css" rel="stylesheet" href="/stylesheets/stephs_photos.css"&gt;
+<link type="text/css" rel="stylesheet" href="/stylesheets/stephs_photos.css">
 ```
 
 - Next, I created a new stylesheet in the extension.
@@ -118,7 +118,7 @@ One more small change was required to update the logo via a Rails preference. I 
 # RAILS_ROOT/vendor/extensions/stephs_photos/stephs_photos_extension.rb
 def activate
  AppConfiguration.class_eval do
-   preference :logo, :string, :default =&gt; 'stephs_photos.png'
+   preference :logo, :string, :default => 'stephs_photos.png'
  end
 end
 ```
@@ -134,7 +134,7 @@ New look for Spree acomplished with several small changes.
 ```ruby
 def activate
   AppConfiguration.class_eval do
-    preference :stylesheets, :string, :default =&gt; 'styles'
+    preference :stylesheets, :string, :default => 'styles'
   end
 end
 ```
@@ -152,11 +152,11 @@ insert_before :homepage_products, 'shared/stephs_promo'
 - Next, I added the view using core Spree user functionality.
 ```nohighlight
 # RAILS_ROOT/vendor/extensions/stephs_photos/app/views/shared/_stephs_promo.erb
-&lt;% if current_user -%&gt;
-&lt;img src="http://www.blogger.com/images/promo10.png" alt="10 off" /&gt;
-&lt;% else -%&gt;
-&lt;img src="http://www.blogger.com/images/promo15.png" alt="15 off" /&gt;
-&lt;% end -%&gt;
+<% if current_user -%>
+<img src="http://www.blogger.com/images/promo10.png" alt="10 off" />
+<% else -%>
+<img src="http://www.blogger.com/images/promo15.png" alt="15 off" />
+<% end -%>
 ```
 
 - Finally, I uploaded my promo images to RAILS_ROOT/vendor/extensions/stephs_photos/public/images/
@@ -186,7 +186,7 @@ replace :product_description, 'shared/generic_product_description'
 - Next, I created the view with the generic product description.
 ```nohighlight
 # RAILS_ROOT/vendor/extensions/stephs_photos/app/views/shared/_generic_product_description.erb
-all prints are 4x6 matte prints.&lt;br /&gt;
+all prints are 4x6 matte prints.<br />
 all photos ship in a folder.
 ```
 
@@ -221,7 +221,7 @@ Since I couldn't add copyright information below the footer, I decided to add it
 
 ```ruby
 # RAILS_ROOT/vendor/extensions/stephs_photos/stephs_photos_hooks.rb
-insert_after :inside_product_cart_form, :text =&gt; '&lt;p&gt;&amp;copy; stephpowell. all rights reserved.&lt;/p&gt;'
+insert_after :inside_product_cart_form, :text => '<p>© stephpowell. all rights reserved.</p>'
 ```
 
 Server restart, and I'm happy, again:

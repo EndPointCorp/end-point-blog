@@ -14,7 +14,7 @@ title: pgcrypto pg_cipher_exists errors on upgrade from PostgreSQL 8.1
 While the functions listed above [were deprecated](http://www.mail-archive.com/pgsql-hackers@postgresql.org/msg81136.html), and marked as such for a while, their complete removal from 8.2 presents problems when upgrading via a simple pg_dump. Specifically, even though the client was not using those functions, they were still there as part of the dump. Here's what the error message looked like:
 
 ```bash
-$ pg_dump mydb --create | psql -X -p 5433 -f - &gt;pg.stdout 2&gt;pg.stderr
+$ pg_dump mydb --create | psql -X -p 5433 -f - >pg.stdout 2>pg.stderr
 ...
 psql:<stdin>:2654: ERROR:  could not find function "pg_cipher_exists"
   in file "/var/lib/postgresql/8.4/lib/pgcrypto.so"

@@ -28,7 +28,7 @@ First comes the method to fetch a single page.
 In the Radian6 wrapper class:
 
 ```ruby
-def page(index, &amp;block)
+def page(index, &block)
   data = block.call(index) 
   articles, count = data['article'], data['article_count'].to_i  
   [articles, count]
@@ -40,13 +40,13 @@ A data record in Radian6 is called an **article**. A call returns the  'article'
 Now we will retrieve all pages of data from Radian6:
 
 ```ruby
-def paginated_call(&amp;block)
+def paginated_call(&block)
   articles, index, count = [], 0, 0
   begin
     index += 1
-    batch, count = page(index, &amp;block)
+    batch, count = page(index, &block)
     articles += batch 
-  end while count &gt; 0
+  end while count > 0
   articles
 end
 ```

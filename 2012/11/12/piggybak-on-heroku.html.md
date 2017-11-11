@@ -44,7 +44,7 @@ git commit -m "Heroku support commit."
 heroku create
 git push heroku master
 heroku pg:psql
-&gt;&gt; \i sample.psql
+>> \i sample.psql
 heroku restart
 heroku open
 ```

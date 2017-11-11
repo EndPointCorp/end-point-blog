@@ -15,7 +15,7 @@ There are a few common ways to start processes at boot time in Red Hat Enterpris
 
 Custom standalone /etc/init.d init scripts become hard to differentiate from RPM-managed scripts (not having the separation of e.g. /usr/local vs. /usr), so in most of our hosting we've avoided those unless we're packaging software as RPMs.
 
-rc.local and @reboot cron jobs seemed fairly equivalent, with crond starting at #90 in the boot order, and local at #99. Both of those come after other system services such as Postgres &amp; MySQL have already started.
+rc.local and @reboot cron jobs seemed fairly equivalent, with crond starting at #90 in the boot order, and local at #99. Both of those come after other system services such as Postgres & MySQL have already started.
 
 To start up processes as various users we've typically used su - $user -c "$command" in the desired order in /etc/rc.local. This was mostly for convenience in easily seeing in one place what all would be started at boot time. However, when running under SELinux this runs processes in the init_t context which usually prevents them from working properly.
 

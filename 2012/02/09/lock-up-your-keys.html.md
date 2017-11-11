@@ -18,7 +18,7 @@ The idea of a restricted hash is to clamp down on Perl’s rather loose “recor
 An example:
 
 ```perl
-my %hash = (aaa =&gt; 1, bbb =&gt; 2);
+my %hash = (aaa => 1, bbb => 2);
 ```
 
 Attempts to reference $hash{ccc} will not return an error, but only an undefined value. We can now lock the hash so that its current roster of keys will be constant:
@@ -93,7 +93,7 @@ Everything shown here for hashes is also available for hashrefs: for instance, t
 Of course, adding all this locking and unlocking adds complexity to your code, so you should consider carefully whether it’s justified. In my case I had 60+ keys, in a nested structure, spanning 1500 lines of code – I just could not keep all the correct spellings in my head any more, so now when I write
 
 ```perl
-    if ($opt-&gt;{order_status})
+    if ($opt->{order_status})
 ```
 
 when I mean “transaction_status”, I’ll get a helpful run-time error instead of a silent skip of that block of code.

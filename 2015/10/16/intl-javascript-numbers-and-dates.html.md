@@ -73,7 +73,7 @@ var startingDay = new Date();
 
 var thisDay = new Date();
 var options = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'};
-for(var i=0; i &lt; 7; i++) {
+for(var i=0; i < 7; i++) {
     thisDay.setDate(startingDay.getDate() + i);
 
     console.log(new Intl.DateTimeFormat('nb-NO', options).format(thisDay));

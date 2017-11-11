@@ -51,7 +51,7 @@ The last step was to simulate the behavior of the designer and allow the code to
 
 ```cpp
 float topValue = 0;
-if([[[UIDevice currentDevice] systemVersion] floatValue] &gt;= 7.0f)
+if([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0f)
 {
     topValue = 64;
 }

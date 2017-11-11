@@ -10,7 +10,7 @@ title: Rails Request-Based Routing Constraints in Spree
 I recently adopted an unreleased ecommerce project running Spree 0.60.0 on Rails 3.0.9. The site used a Rails routing constraint and wildcard DNS to dynamically route subdomains to the “dispatch” action of the organizations_controller. If a request’s subdomain component matched that regular expression, it was routed to the dispatch method. Here's the original route:
 
 ```ruby
-match '/' =&gt; 'organizations#dispatch', :constraints =&gt; { :subdomain =&gt; /.+/ }
+match '/' => 'organizations#dispatch', :constraints => { :subdomain => /.+/ }
 ```
 
 The business requirement driving this feature was that a User could register an Organization by submitting a form on the site. Once that Organization was marked "approved" by an admin, that Organization would become accessible at their own subdomain - *no server configuration required*.
@@ -18,7 +18,7 @@ The business requirement driving this feature was that a User could register an 
 For marketing reasons, we decided to switch from subdomains to top-level subdirectories. This meant RESTful routes (e.g. domain.com/organizations/143) wouldn’t cut it. In order to handle this, I created a routing constraint class called OrgConstraint. This routing constraint class works in tandem with a tweaked version of that original route.
 
 ```ruby
-match '*org_url' =&gt; 'organizations#show', :constraints =&gt; OrgConstraint.new
+match '*org_url' => 'organizations#show', :constraints => OrgConstraint.new
 ```
 
 The :constraints param takes an *instance* of a class (not a class name) that responds to a matches? predicate method that returns true or false. If matches? returns true, the request will be routed to that controller#action. Else, that route is treated like any other non-matching route. Here’s the entire OrgConstraint class:

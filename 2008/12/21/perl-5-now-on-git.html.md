@@ -22,7 +22,7 @@ Skimming through the history turns up some fun things:
 
 ```
 commit d23b30860e3e4c1bd7e12ed5a35d1b90e7fa214c
-Author: Larry Wall &lt;lwall@scalpel.netlabs.com&gt;
+Author: Larry Wall <lwall@scalpel.netlabs.com>
 Date:   Wed Jan 11 11:01:09 1995 -0800
 
    duplicate DESTROY

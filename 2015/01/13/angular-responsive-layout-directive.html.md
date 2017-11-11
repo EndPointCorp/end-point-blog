@@ -28,7 +28,7 @@ angular.module('angularApp')
      scope.windowWidth = newValue.w;
 
      scope.mainContainerStyle = function () {
-       if (newValue.w &gt; 890) {
+       if (newValue.w > 890) {
          return {};
        } else {
          val = newValue.w/890;
@@ -44,7 +44,7 @@ angular.module('angularApp')
      };
 
      scope.topBarStyle = function () {
-       if (newValue.w &gt; 890) {
+       if (newValue.w > 890) {
          return {};
        } else {
          val = newValue.w/890;
@@ -107,7 +107,7 @@ scope.$watch(scope.getWindowDimensions,
 Few other things. My layout was sliced to the fixed width of 890px, that's why I took 890 as the pivotal point of my scale ratio formula. You should take the default width of the layout as the base of your calculation.
 
 ```javascript
-if (newValue.w &gt; 890) {
+if (newValue.w > 890) {
   return {};
 } else {
   val = newValue.w/890;

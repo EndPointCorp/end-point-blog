@@ -20,14 +20,14 @@ require 'kamelopard'
 name_folder 'test'
 name_document 'test'
 pt = point 100, 100
-pl = placemark 'test placemark', :geometry =&gt; pt
-get_folder &lt;&lt; pl
+pl = placemark 'test placemark', :geometry => pt
+get_folder << pl
 
 Kamelopard::VSRAction.new('action name',
-    :action =&gt; 'mplayer play_this_video.webm',
-    :constraints =&gt; {
-        :latitude =&gt; to_constraint(band(100, 0.1).collect{ |l| lat_check(l) }),
-        :longitude =&gt; to_constraint(band(100, 0.1).collect{ |l| long_check(l) }),
+    :action => 'mplayer play_this_video.webm',
+    :constraints => {
+        :latitude => to_constraint(band(100, 0.1).collect{ |l| lat_check(l) }),
+        :longitude => to_constraint(band(100, 0.1).collect{ |l| long_check(l) }),
     }
 )
 
@@ -60,8 +60,8 @@ require 'kamelopard'
 name_folder 'test'
 name_document 'test'
 pt = point 100, 100
-pl = placemark 'test placemark', :geometry =&gt; pt
-get_folder &lt;&lt; pl
+pl = placemark 'test placemark', :geometry => pt
+get_folder << pl
 
 get_folder.master_only = true
 write_kml_to 'slave.kml'

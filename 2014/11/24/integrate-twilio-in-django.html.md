@@ -116,9 +116,9 @@ def send_twilio_message(to_number, body):
 Open the **shell** and run following commands.
 
 ```python
-&gt;&gt;&gt; from communication.utils import send_twilio_message
-&gt;&gt;&gt; sms = send_twilio_message('+15005550006', 'Hello Endpointer,')
-&gt;&gt;&gt; print sms.sid
+>>> from communication.utils import send_twilio_message
+>>> sms = send_twilio_message('+15005550006', 'Hello Endpointer,')
+>>> print sms.sid
 SM97f8ac9321114af1b7fd4463ff8bd038
 ```
 

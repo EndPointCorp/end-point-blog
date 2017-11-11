@@ -23,7 +23,7 @@ Let's run the project locally first because a file cannot be written to Heroku's
 
 ```bash
 mkdir -p ~/Sites
-echo "&lt;html&gt;&lt;body&gt;&lt;h1&gt;My site works&lt;/h1&gt;&lt;/body&gt;&lt;/html&gt;" &gt; ~/Sites/index.html.en
+echo "<html><body><h1>My site works</h1></body></html>" > ~/Sites/index.html.en
 
 ```
 
@@ -62,7 +62,7 @@ sudo vi /etc/apache2/users/~YOURUSERNAME.conf
 Type the following in there:
 
 ```nohighlight
-&lt;Directory "/Users/~YOURUSERNAME/Sites/"&gt;
+<Directory "/Users/~YOURUSERNAME/Sites/">
     AddLanguage en .en
     LanguagePriority en fr de
     ForceLanguagePriority Fallback
@@ -71,7 +71,7 @@ Type the following in there:
     Order allow,deny
     Allow from localhost
     Require all granted
-&lt;/Directory&gt;
+</Directory>
 ```
 
 Restart Apache with:
@@ -102,8 +102,8 @@ The template we are using is tailored for the deployment to Heroku, which means 
 
 ```bash
 pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start
-&gt; createdb wordpress
-&gt; psql wordpress
+> createdb wordpress
+> psql wordpress
 CREATE USER wordpress WITH PASSWORD 'wordpress';
 GRANT ALL PRIVILEGES ON DATABASE wordpress to wordpress; 
 ```

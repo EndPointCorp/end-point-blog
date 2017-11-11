@@ -27,7 +27,7 @@ While there were *several* wonderful talks, [Gert van der Spoel](https://www.per
 
 Items coming soon to Dancer may include: Web Sockets (supported in [Plack](http://p3rl.org/Plack)), per-route [serialization](https://metacpan.org/pod/Dancer2::Manual#Serializers1) (currently enabling a serializer such as JSON affects the entire app — later on, [Russell](https://twitter.com/veryrusty) [released a module](http://p3rl.org/Dancer2::Plugin::SendAs) for this, which may make it back into the core), Dancer2::XS, and [critic/linter policies](https://github.com/PerlDancer/perl-lint-policy-dancer2).
 
-[Thomas Klausner](https://twitter.com/domm_favors_irc) shared about *[OAuth &amp; Microservices](https://www.perl.dance/talks/18-oauth2%2C-resty-apis%2C-microservices)*. Microservices are a good tool to manage complexity, but you might want to aim for "monolith first", [according to Martin Fowler](http://martinfowler.com/bliki/MonolithFirst.html), and only later break up your app into microservices. In the old days, we had "fat" back-ends, which did everything and delivered the results to a browser. Now, we have "fat" front-ends, which take info from a back-end and massage it for display. One advantage of the microservice way of thinking is that mobile devices (or even third parties) can access the same APIs as your front-end website.
+[Thomas Klausner](https://twitter.com/domm_favors_irc) shared about *[OAuth & Microservices](https://www.perl.dance/talks/18-oauth2%2C-resty-apis%2C-microservices)*. Microservices are a good tool to manage complexity, but you might want to aim for "monolith first", [according to Martin Fowler](http://martinfowler.com/bliki/MonolithFirst.html), and only later break up your app into microservices. In the old days, we had "fat" back-ends, which did everything and delivered the results to a browser. Now, we have "fat" front-ends, which take info from a back-end and massage it for display. One advantage of the microservice way of thinking is that mobile devices (or even third parties) can access the same APIs as your front-end website.
 
 [OAuth](http://oauth.net/) allows a user to login at your site, using their credentials from another site (such as Facebook or Google), so they don't need a password for your site itself. This typically happens via JavaScript and cookies. However, to make your back-end "stateless", you could use [JSON Web Tokens](http://jwt.io/) (JWT). Thomas showed some examples of all this in action, using the [OX Perl module](http://p3rl.org/OX).
 
@@ -38,7 +38,7 @@ One thing I found interesting that Thomas mentioned: *Plack middleware is the co
 <div class="separator" style="clear: both; text-align: center; float:right"><a href="/blog/2015/10/30/perl-dancer-conference-2015-report_30/image-1-big.jpeg" imageanchor="1" style="clear: right; float: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" src="/blog/2015/10/30/perl-dancer-conference-2015-report_30/image-1.jpeg"/></a><br/><br/>
 <small>Panorama from the south tower of St. Stephen's cathedral, by this author</small></div>
 
-Gert presented on *[Social Logins &amp; eCommerce](https://www.perl.dance/talks/9-social-logins-for-e-commerce-sites)*. This built on the earlier OAuth talk by Thomas. Here are some of the pros/cons to social login which Gert presented:
+Gert presented on *[Social Logins & eCommerce](https://www.perl.dance/talks/9-social-logins-for-e-commerce-sites)*. This built on the earlier OAuth talk by Thomas. Here are some of the pros/cons to social login which Gert presented:
 
 - **Pros - customer:**
 
@@ -52,7 +52,7 @@ Gert presented on *[Social Logins &amp; eCommerce](https://www.perl.dance/talks/
         - Expected customer retention
         - Expected increase in sales
         - Better target customers
-        - "Plug &amp; Play" (if you pay) — some services exist to make it simple to integrate social logins, where you just integrate with them, and then you are effectively integrated with whatever social login providers they support. These include [Janrain](http://janrain.com/) and [LoginRadius](http://www.loginradius.com/)
+        - "Plug & Play" (if you pay) — some services exist to make it simple to integrate social logins, where you just integrate with them, and then you are effectively integrated with whatever social login providers they support. These include [Janrain](http://janrain.com/) and [LoginRadius](http://www.loginradius.com/)
 
 
 - **Cons - customer:**
@@ -115,7 +115,7 @@ While at the conference, Alexis even wrote a Dancer2 plugin, [Dancer2::Plugin::P
 
 Also check out [Alexis' recap](http://blog.sukria.net/2015/10/22/perl-dancer-2015-report/).
 
-Finally, I was privileged to speak as well, on *[AngularJS &amp; Dancer for Modern Web Development](https://www.perl.dance/talks/11-angularjs-%26-dancer-for-modern-web-development)*. Since this post is already pretty long, I'll save the details for [another post](/2015/10/angularjs-dancer-for-modern-web.html).
+Finally, I was privileged to speak as well, on *[AngularJS & Dancer for Modern Web Development](https://www.perl.dance/talks/11-angularjs-%26-dancer-for-modern-web-development)*. Since this post is already pretty long, I'll save the details for [another post](/2015/10/angularjs-dancer-for-modern-web.html).
 
 ### Summary
 

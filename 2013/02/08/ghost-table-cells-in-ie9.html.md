@@ -50,7 +50,7 @@ Further digging revealed the the issue was related to whitespace between table c
 
 ```javascript
 $('#problem-table').html(function(i, el) {
-  return el.replace(/&gt;\s*&lt;/g, '&gt;&lt;');
+  return el.replace(/>\s*</g, '><');
 });
 ```
 

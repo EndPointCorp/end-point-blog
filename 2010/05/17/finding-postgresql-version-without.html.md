@@ -27,9 +27,9 @@ In this case, we can clearly see that line 1507 of postmaster.c was throwing the
 ```nohighlight
 /* Check we can handle the protocol the frontend is using. */
 
-if (PG_PROTOCOL_MAJOR(proto) &lt;&gt; PG_PROTOCOL_MAJOR(PG_PROTOCOL_LATEST) ||
-  (PG_PROTOCOL_MAJOR(proto) == PG_PROTOCOL_MAJOR(PG_PROTOCOL_LATEST) &amp;&amp;
-   PG_PROTOCOL_MINOR(proto) &gt; PG_PROTOCOL_MINOR(PG_PROTOCOL_LATEST)))
+if (PG_PROTOCOL_MAJOR(proto) <> PG_PROTOCOL_MAJOR(PG_PROTOCOL_LATEST) ||
+  (PG_PROTOCOL_MAJOR(proto) == PG_PROTOCOL_MAJOR(PG_PROTOCOL_LATEST) &&
+   PG_PROTOCOL_MINOR(proto) > PG_PROTOCOL_MINOR(PG_PROTOCOL_LATEST)))
   ereport(FATAL,
   (errcode(ERRCODE_FEATURE_NOT_SUPPORTED),
     errmsg("unsupported frontend protocol %u.%u: server supports %u.0 to %u.%u",
@@ -81,13 +81,13 @@ while (<data>) {
    my ($vmaj,$vmin,$vrev) = ($1,$2,$3);
    my $current = "$file|$vmaj|$vmin";
    if ($current eq $last) {
-       my ($lfile,$lmaj,$lmin) = split /\|/ =&gt; $last;
-       for (my $x = $lastmin+1 ; $x&lt;$vrev; $x++) {
+       my ($lfile,$lmaj,$lmin) = split /\|/ => $last;
+       for (my $x = $lastmin+1 ; $x<$vrev; $x++) {
            push @{$map{$file}{$lastline}}
-             =&gt; ["$lmaj.$lmin","$lmaj.$lmin.$x"];
+             => ["$lmaj.$lmin","$lmaj.$lmin.$x"];
        }
    }
-   push @{$map{$file}{$line}} =&gt; ["$vmaj.$vmin",$version];
+   push @{$map{$file}{$line}} => ["$vmaj.$vmin",$version];
    $last = $current;
    $lastmin = $vrev;
    $lastline = $line;
@@ -116,17 +116,17 @@ We're ready to connect, using the very standard IO::Socket module. If the host s
 my $server;
 if (!$host or !index $host, '/') {
    my $path = $host || '/tmp';
-   $server = IO::Socket::UNIX-&gt;new(
-       Type =&gt; IO::Socket::SOCK_STREAM,
-       Peer =&gt; "$path/.s.PGSQL.$port",
+   $server = IO::Socket::UNIX->new(
+       Type => IO::Socket::SOCK_STREAM,
+       Peer => "$path/.s.PGSQL.$port",
    ) or die "Could not connect!: $@";
 }
 else {
-   $server = IO::Socket::INET-&gt;new(
-       PeerAddr =&gt; $host,
-       PeerPort =&gt; $port,
-       Proto    =&gt; 'tcp',
-       Timeout  =&gt; 3,
+   $server = IO::Socket::INET->new(
+       PeerAddr => $host,
+       PeerPort => $port,
+       Proto    => 'tcp',
+       Timeout  => 3,
    ) or warn "Could not connect!: $@";
 }
 ```
@@ -137,7 +137,7 @@ Now we're ready to actually send something over our new socket. Postgres expects
 ## Build and sent the packet
 my $packet = pack('nn', 3,1) . "user\0pg\0\0";
 $packet = pack('N', length($packet) + 4). $packet;
-$server-&gt;send($packet, 0);
+$server->send($packet, 0);
 
 ## Get the message back and extract the filename and line number
 my $msg;
@@ -168,7 +168,7 @@ If there is only one result for this line and file number, we can state what it 
 my $result = $map{$file}{$line};
 
 if (1 == @$result) {
-   print "Most likely Postgres version $result-&gt;[0][1]\n";
+   print "Most likely Postgres version $result->[0][1]\n";
    exit;
 }
 ```
@@ -178,11 +178,11 @@ In most cases, though, we don't know the exact version down to the revision afte
 ```perl
 ## Walk through and figure out which versions it may be.
 ## For now, we know that the major version does not overlap
-print "Most likely Postgres version $result-&gt;[0][0]\n";
+print "Most likely Postgres version $result->[0][0]\n";
 print "Specifically, one of these:\n";
 
 for my $row (@$result) {
-   print "  Postgres version $row-&gt;[1]\n";
+   print "  Postgres version $row->[1]\n";
 }
 
 exit;

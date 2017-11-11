@@ -69,14 +69,14 @@ Yes you can. On the project’s website the authors are warning us that this fea
 doc.fromHTML $('.report_web').get(0), 10, 10,
   'width': 170,
   'elementHandlers': 
-    'LI': (el, renderer) =&gt;
-      if renderer.y &gt; 250
+    'LI': (el, renderer) =>
+      if renderer.y > 250
         doc.addPage()
         renderer.y = 10
       else
         renderer.y += 10
       false
-    'H1': (el, renderer) =&gt;
+    'H1': (el, renderer) =>
       doc.setFontSize(14)
       doc.setFontStyle('bold')
       doc.text($(el).text(), 10, renderer.y)
@@ -110,7 +110,7 @@ Nesting the PDF document inside the DOM seems way cooler. To do so:
 
 ```python
 data = doc.output 'dataurlstring', {}
-$('#report').html "&lt;iframe src='#{data}'&gt;&lt;/iframe&gt;"
+$('#report').html "<iframe src='#{data}'></iframe>"
 ```
 
 You will notice that the *#output* method takes a string which tells it how you’d like to generate the PDF. If you specify the **‘dataurlstring’** it will return a string containing the url data you use in your iframe. That is how the last example works.

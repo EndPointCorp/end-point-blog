@@ -16,7 +16,7 @@ Sometimes I come across websites that don't use RESTful URLs or have too unique 
 To add Goal Tracking by URL, pages must first be tagged as "virtual pages". To implement virtual page tracking in Google, it's as simple as including a new virtual page URL in the _trackPageview action:
 
 ```javascript
-&lt;script type="text/javascript"&gt;
+<script type="text/javascript">
 
   var _gaq = _gaq || [];
   _gaq.push(['_setAccount', 'UA-XXXXXXXX-1']);
@@ -29,7 +29,7 @@ To add Goal Tracking by URL, pages must first be tagged as "virtual pages". To i
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
   })();
 
-&lt;/script&gt;
+</script>
 ```
 
 In the cases I described above, here are the tags used for each:

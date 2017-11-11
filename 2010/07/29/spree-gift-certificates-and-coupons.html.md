@@ -25,11 +25,11 @@ end
 # inside order model during checkout finalization
 line_items.select { |li| li.variant.product.is_gift_cert? }.each do |line_item|
   line_item.quantity.times do
-    coupon = Coupon.create(:code =&gt; Coupon.generate_coupon_code,
-                           :description =&gt; "Gift Certificate",
-                           :usage_limit =&gt; 1,
-                           :combine =&gt; false,
-                           :calculator =&gt; Calculator::FlatRate.new)
+    coupon = Coupon.create(:code => Coupon.generate_coupon_code,
+                           :description => "Gift Certificate",
+                           :usage_limit => 1,
+                           :combine => false,
+                           :calculator => Calculator::FlatRate.new)
     coupon.calculator.update_attribute(:preferred_amount, line_item.variant.price)
   end
 end
@@ -41,7 +41,7 @@ end
 coupon_credits.select{ |cc| cc.adjustment_source.code.include?('giftcert-') }.each do |coupon_credit|
   coupon = coupon_credit.adjustment_source
   amount = coupon.calculator.preferred_amount - item_total
-  coupon.calculator.update_attribute(:preferred_amount, amount &lt; 0 ? 0 : amount)
+  coupon.calculator.update_attribute(:preferred_amount, amount < 0 ? 0 : amount)
 end
 ```
 
@@ -49,12 +49,12 @@ end
 ```ruby
 LineItem.class_eval do
   has_one :line_item_coupon
-  has_one :coupon, :through =&gt; :line_item_coupon
+  has_one :coupon, :through => :line_item_coupon
 end
 ```
 
 ```ruby
-class LineItemCoupon &lt; ActiveRecord::Base
+class LineItemCoupon < ActiveRecord::Base
   belongs_to :line_item
   belongs_to :coupon
 
@@ -69,7 +69,7 @@ end
 gift_certificate:
   name:          Gift Certificate
   description:   Gift Certificate
-  available_on:  &lt;%= Time.zone.now.to_s(:db) %&gt;
+  available_on:  <%= Time.zone.now.to_s(:db) %>
   permalink:     gift-certificate
   count_on_hand: 100000
 ```
@@ -114,7 +114,7 @@ After the above changes were implemented, additional changes were required for o
 ].each{ |c_model|
   begin
     c_model.register if c_model.table_exists?
-  rescue Exception =&gt; e
+  rescue Exception => e
     $stderr.puts "Error registering calculator #{c_model}"
   end
 }
@@ -122,7 +122,7 @@ After the above changes were implemented, additional changes were required for o
 
 ```ruby
 # shipping method and calculator creation in sample data
-s = ShippingMethod.new(:zone_id =&gt; 16, :name =&gt; 'Gift Certificate Shipping')
+s = ShippingMethod.new(:zone_id => 16, :name => 'Gift Certificate Shipping')
 s.save
 c = Calculator.new
 c.calculable = s
@@ -132,7 +132,7 @@ c.save
 
 ```ruby
 # calculator for free gift cert shipping
-class Calculator::GiftCertificateShipping &lt; Calculator
+class Calculator::GiftCertificateShipping < Calculator
   ...
   def available?(order)
     order.line_items.inject(0) { |sum, li| sum += li.quantity if !li.variant.product.is_gift_cert?; sum } == 0
@@ -150,7 +150,7 @@ After Bill implemented these changes, I contemplated the following code more:
 coupon_credits.select{ |coupon_credit| coupon_credit.adjustment_source.code =~ /^giftcert-/}.each do |coupon_credit|
   coupon = coupon_credit.adjustment_source
   amount = coupon.calculator.preferred_amount - item_total
-  coupon.calculator.update_attribute(:preferred_amount, amount &lt; 0 ? 0 : amount)
+  coupon.calculator.update_attribute(:preferred_amount, amount < 0 ? 0 : amount)
 end
 ```
 
@@ -167,7 +167,7 @@ def site_calculate_coupon_credit
   return 0 if order.line_items.empty?
   amount = adjustment_source.calculator.compute(order.line_items).abs
   order_total = adjustment_source.code.include?('giftcert-') ? order.item_total + order.charges.total : order.item_total
-  amount = order_total if amount &gt; order_total
+  amount = order_total if amount > order_total
   -1 * amount
 end
 ```

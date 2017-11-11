@@ -25,7 +25,7 @@ Ben G. finished the talk by explaining the architecture of the typical Liquid Ga
 
 <div class="separator" style="clear: both; text-align: center;"><a href="/blog/2016/01/04/liquid-galaxy-at-new-york-tech-meetup_4/image-2-big.jpeg" imageanchor="1" style="clear: right; float: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" src="/blog/2016/01/04/liquid-galaxy-at-new-york-tech-meetup_4/image-2.jpeg"/></a></div>
 
-### Q&amp;A Session
+### Q&A Session
 
 After our presentation, Ben G. and I were asked questions about the Liquid Galaxy. Some highlights:
 

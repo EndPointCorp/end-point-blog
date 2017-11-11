@@ -67,7 +67,7 @@ Unusual behavior like this is usually best allowed by [creating application-spec
 ```bash
   # yum install policycoreutils
   # mkdir ~/tmp  # if this doesn't exist already
-  # audit2allow --module wsgi &lt; ~/tmp/pile_of_auditd_output &gt; ~/tmp/wsgi.te
+  # audit2allow --module wsgi < ~/tmp/pile_of_auditd_output > ~/tmp/wsgi.te
 ```
 
 This will output source for a new policy module. You might review the .te file before compiling. Ours looks like this:

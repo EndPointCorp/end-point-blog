@@ -14,15 +14,15 @@ Over the last few months, I've been involved in a Ruby on Rails (version 2.3) pr
 Before I started on the project, there was already a significant amount of [fragment caching](http://guides.rubyonrails.org/caching_with_rails.html#fragment-caching) in use throughout the site. In it's most basic form, fragment caching wraps a cache method around existing view code:
 
 ```nohighlight
-&lt;%= cache "product-meta-#{product.id}" %&gt;
+<%= cache "product-meta-#{product.id}" %>
 #insert view code
-&lt;% end %&gt;
+<% end %>
 ```
 
 And [Rails Sweepers](http://guides.rubyonrails.org/caching_with_rails.html#sweepers) are used to clear the cached fragments, which looks something like the code shown below. In our application, the Sweeper attaches cache clearing methods to object callbacks, such as after_save, after_create, before_update.
 
 ```ruby
-class ProductSweeper &lt; ActionController::Caching::Sweeper
+class ProductSweeper < ActionController::Caching::Sweeper
   observe Product
 
   def after_save(record)
@@ -74,12 +74,12 @@ Typically, using ActiveRecord find methods and the item associations may yield m
 Next up, there were several opportunities through the site to use Rails low level caching. Here's one example of a simple use of Rails low level caching, which pulls a list of products that the user has owner or creator rights to:
 
 ```ruby
-class User &lt; ActiveRecord::Base 
+class User < ActiveRecord::Base 
   def products
     Rails.cache.fetch("user-products-#{self.id}") do
       self.roles
-        .find(:all, :conditions =&gt; {:authorizable_type =&gt; 'Product', :name =&gt; ['owner','creator']})
-        .collect(&amp;:authorizable)
+        .find(:all, :conditions => {:authorizable_type => 'Product', :name => ['owner','creator']})
+        .collect(&:authorizable)
         .uniq
         .compact
         .sort_by{|a| a.updated_at}

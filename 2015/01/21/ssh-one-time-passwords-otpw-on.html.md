@@ -22,7 +22,7 @@ Here are some details on how I set things up. On the Chromebook, nothing is need
 
 ```
 $ sudo aptitude install otpw-bin
-$ sudo cat &gt;&gt; /etc/pam.d/ssh
+$ sudo cat >> /etc/pam.d/ssh
   auth     required  pam_otpw.so
   session  optional  pam_otpw.so
 ```
@@ -30,7 +30,7 @@ $ sudo cat &gt;&gt; /etc/pam.d/ssh
 That is the bare minimum, but I also wanted to make sure that only 'local' machines could SSH in. While there are a number of ways to do this, such as iptables or /etc/hosts.allow, I decided the best approach was to configure sshd itself. The "Match" directive instructs that the lines after it only take effect on a positive match. Thus:
 
 ```
-$ sudo cat &gt;&gt; /etc/ssh/sshd_config
+$ sudo cat >> /etc/ssh/sshd_config
 AllowUsers nobodyatall
 Match Address 192.168.1.0/24,127.0.0.0
 AllowUsers greg

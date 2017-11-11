@@ -22,7 +22,7 @@ But it will likely have lots of other query parameters of lesser importance [to 
 Run the following command:
 
 ```bash
-sed 's/&lt;h3 class="r"&gt;/\n/g; s/class="l"/LINK\n/g' search.html | grep LINK | sed 's/&lt;a href="\|" LINK//g'
+sed 's/<h3 class="r">/\n/g; s/class="l"/LINK\n/g' search.html | grep LINK | sed 's/<a href="\|" LINK//g'
 ```
 
 There you have it. Interestingly enough, the order of pages can be an indicator of which pages rank well. Typically, pages with higher PageRank will be near the top, although I have seen some strange exceptions. End Point's indexed pages:
@@ -57,7 +57,7 @@ rm results.txt
 
 for ARG in $*
 do
-        sed 's/&lt;h3 class="r"&gt;/\n/g; s/class="l"/LINK\n/g' $ARG | grep LINK | sed 's/&lt;a href="\|" LINK//g' &gt;&gt; results.txt
+        sed 's/<h3 class="r">/\n/g; s/class="l"/LINK\n/g' $ARG | grep LINK | sed 's/<a href="\|" LINK//g' >> results.txt
 done
 ```
 

@@ -10,7 +10,7 @@ I was recently tasked with implementing site search using a commercially availab
 The first requirement I tackled was to design the web application in a way that produced search engine friendly canonical URLs. I used Rails routing to implement a basic search:
 
 ```ruby
-map.connect ':id', :controller =&gt; 'basic', :action =&gt; 'search'
+map.connect ':id', :controller => 'basic', :action => 'search'
 ```
 
 Any simple search path would be sent to the basic search query that performed the SOAP request followed by XML data parsing. For example,
@@ -20,9 +20,9 @@ http://www.gear.com/s/bike for "[bike](http://www.gear.com/s/bike)".
 After the initial search, a user can refine the search by brand, merchant, category or price, or choose to sort the items, select a different page, or modify the number of items per page. I chose to force the order of refinement, for example, brand and merchant order were constrained with the following Rails routes:
 
 ```ruby
-map.connect ':id/brand/:rbrand', :controller =&gt; 'basic', :action =&gt; 'search'
-map.connect ':id/merch/:rmerch', :controller =&gt; 'basic', :action =&gt; 'search'
-map.connect ':id/brand/:rbrand/merch/:rmerch', :controller =&gt; 'basic', :action =&gt; 'search'
+map.connect ':id/brand/:rbrand', :controller => 'basic', :action => 'search'
+map.connect ':id/merch/:rmerch', :controller => 'basic', :action => 'search'
+map.connect ':id/brand/:rbrand/merch/:rmerch', :controller => 'basic', :action => 'search'
 ```
 
 Rather than allow different order of refinement parameters in the URLs, such as

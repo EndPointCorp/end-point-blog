@@ -42,7 +42,7 @@ The "mountable" option makes you engine namespace-isolated.
 Next, update your app's Gemfile to include the extension under development
 
 ```ruby
-gem "piggybak_new_extension", :path =&gt; "/the/path/to/the/extension"
+gem "piggybak_new_extension", :path => "/the/path/to/the/extension"
 ```
 
 Run bundle install to install the extension in your application and restart your application.
@@ -70,14 +70,14 @@ An order is comprised of many line items, which are used to calculate the balanc
 ```ruby
 config.before_initialize do
   Piggybak.config do |config|
-    config.extra_secure_paths &lt;&lt; "/apply_bundle_discount"
+    config.extra_secure_paths << "/apply_bundle_discount"
     config.line_item_types[:bundle_discount] = {
-      :visible =&gt; true,
-      :allow_destroy =&gt; true,
-      :fields =&gt; ["bundle_discount"],
-      :class_name =&gt; "::PiggybakBundleDiscounts::BundleDiscount",
-      :display_in_cart =&gt; "Bundle Discount",
-      :sort =&gt; config.line_item_types[:payment][:sort]
+      :visible => true,
+      :allow_destroy => true,
+      :fields => ["bundle_discount"],
+      :class_name => "::PiggybakBundleDiscounts::BundleDiscount",
+      :display_in_cart => "Bundle Discount",
+      :sort => config.line_item_types[:payment][:sort]
     }
     config.line_item_types[:payment][:sort] += 1
   end

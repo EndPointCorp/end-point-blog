@@ -5,8 +5,6 @@ tags: conference, ecommerce, rails
 title: Sass at RailsConf 2011
 ---
 
-
-
 With the inclusion of the Scss gem in Rails 3.1, RailsConf is a nice time to get a refresher on Sass/Scss functionality. Sass defines itself as syntactically awesome stylesheets, or a CSS meta language built to provide more powerful functionality to manipulate website appearances with efficiency and elegance. Note that Sass has two syntaxes and the examples presented in this article use the newer Scss syntax. Around the time of RailsConf two years ago, Sass was a included in [Spree](http://spreecommerce.com/), an open-source Ruby on Rails ecommerce framework that End Point supports. At the time, I was skeptical about Sass inclusion in Spree because it wasn't being leveraged to it's full potential and had hopes of taking advantage of Sass, but a few months later it was removed from the core. Since then, I haven't worked with Sass on other projects but hope to do so moving forward after being reminded of it's features and of the fact that it will be included in Rails 3.1 as a default. I attended Chris Eppstein's [talk on Sass](http://en.oreilly.com/rails2011/public/schedule/detail/19066) and explain a few features related to real-life use cases of CSS manipulation.
 
 ### Variables
@@ -79,7 +77,7 @@ Mixins are reusable sections of CSS that can be included in other selectors to r
     a { 
         color: $blue;
         text-decoration: none;
-        &amp;:hover {
+        &:hover {
             color: $red;
         }
     }
@@ -121,7 +119,7 @@ _product_thumbnails.scss
     a { 
         color: $blue;
         text-decoration: none;
-        &amp;:hover { color: $red; }
+        &:hover { color: $red; }
     }
     img { padding-top: 10px; }
 }
@@ -154,5 +152,3 @@ $wrapper-sprite-dimensions: true;
 ### Conclusion
 
 Admittedly, the examples shown in this blog article come from a site that runs on Perl-based [Interchange](#), but I used these examples because I can distinctly remember each of these use cases. It might not be quite as easy to include Sass here with Interchange as it will be in Rails 3.1, where Scss/Sass is included as a new default.
-
-

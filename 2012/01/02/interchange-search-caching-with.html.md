@@ -21,7 +21,7 @@ You can leverage "permanent more" by adding the boolean **mv_more_permanent**, o
 ```nohighlight
 Link:
 
-    &lt;a href="[area search="
+    <a href="[area search="
         co=1
         sf=category
         se=Foo
@@ -29,7 +29,7 @@ Link:
         more=1
         ml=5
         <b>pm=1</b>
-    "]"&gt;All Foos&lt;/a&gt;
+    "]">All Foos</a>
 
 Loop:
 

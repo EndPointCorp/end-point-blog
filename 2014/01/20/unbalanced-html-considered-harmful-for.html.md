@@ -12,13 +12,13 @@ This isn't earth-shattering news, but it's one of those things that someone new 
 I had a bad experience recently adding jQuery to an existing page that had less than stellar HTML construction, and I didn't have time nor budget to clean up the HTML before starting work. Thus, I was working with something much more complex than, but equally broken as what follows:
 
 ```xml
-&lt;table&gt;&lt;tr&gt;&lt;td&gt;
-&lt;form&gt;
-&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;
-&lt;input type="text"&gt;
-&lt;/form&gt;
-&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+<table><tr><td>
+<form>
+</td></tr>
+<tr><td>
+<input type="text">
+</form>
+</td></tr></table>
 ```
 
 The jQuery I added did something like this:

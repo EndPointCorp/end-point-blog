@@ -113,7 +113,7 @@ factory('logToServerInterceptor', ['$q', function ($q) {
           var msAfterAjaxCall = new Date().getTime();
           var timeTakenInMs = msAfterAjaxCall - response.config.msBeforeAjaxCall;
 
-          if (timeTakenInMs &gt; response.config.warningAfter) {
+          if (timeTakenInMs > response.config.warningAfter) {
             JL('Angular.Ajax').warn({
               timeTakenInMs: timeTakenInMs,
               config: response.config,
@@ -126,7 +126,7 @@ factory('logToServerInterceptor', ['$q', function ($q) {
       },
       'responseError': function (rejection) {
         var errorMessage = "timeout";
-        if (rejection &amp;&amp; rejection.status &amp;&amp; rejection.data) {
+        if (rejection && rejection.status && rejection.data) {
           errorMessage = rejection.data.ExceptionMessage;
         }
         JL('Angular.Ajax').fatalException({
@@ -181,7 +181,7 @@ angular.module('logToServer', [])
           var msAfterAjaxCall = new Date().getTime();
           var timeTakenInMs = msAfterAjaxCall - response.config.msBeforeAjaxCall;
 
-          if (timeTakenInMs &gt; response.config.warningAfter) {
+          if (timeTakenInMs > response.config.warningAfter) {
             JL('Angular.Ajax').warn({
               timeTakenInMs: timeTakenInMs,
               config: response.config,
@@ -194,7 +194,7 @@ angular.module('logToServer', [])
       },
       'responseError': function (rejection) {
         var errorMessage = "timeout";
-        if (rejection &amp;&amp; rejection.status &amp;&amp; rejection.data) {
+        if (rejection && rejection.status && rejection.data) {
           errorMessage = rejection.data.ExceptionMessage;
         }
         JL('Angular.Ajax').fatalException({

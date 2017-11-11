@@ -76,8 +76,8 @@ end
 The default layout includes the main and site specific stylesheets:
 
 ```nohighlight
-  &lt;%= stylesheet_link_tag "style" %&gt;
-  &lt;%= stylesheet_link_tag "#{@asset_location}/site" %&gt;
+  <%= stylesheet_link_tag "style" %>
+  <%= stylesheet_link_tag "#{@asset_location}/site" %>
 ```
 
 The site specific stylesheet contains style rules and includes site specific image settings:

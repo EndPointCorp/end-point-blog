@@ -29,11 +29,11 @@ With rails routing, you can specify that the elements in the URL are passed alon
 
 ```ruby
 map.connect "music/:category/:year/:month",
-            :controller   =&gt; "events",
-            :action       =&gt; "show",
-            :requirements =&gt; {
-                :year  =&gt; /(19|20)\d\d/,
-                :month =&gt; /[01]\d/,
+            :controller   => "events",
+            :action       => "show",
+            :requirements => {
+                :year  => /(19|20)\d\d/,
+                :month => /[01]\d/,
             },
 ```
 

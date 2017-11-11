@@ -32,7 +32,7 @@ Great comment:
 <blockquote class="twitter-tweet" data-lang="en">
 <div dir="ltr" lang="en">
 Elixir is same as Erlang but not really <a href="https://twitter.com/hashtag/wrocloverb?src=hash">#wrocloverb</a></div>
-&#8212; Daria Woznicka (@DWoznicka) <a href="https://twitter.com/DWoznicka/status/843102967339384832">March 18, 2017</a></blockquote>
+— Daria Woznicka (@DWoznicka) <a href="https://twitter.com/DWoznicka/status/843102967339384832">March 18, 2017</a></blockquote>
 
 **Then a discussion followed during which panelists speculated about the price of the jump from Rails to Elixir:**
 
@@ -45,7 +45,7 @@ A reason why this discussion was somehow shallow and pointless was that those tw
 <blockquote class="twitter-tweet" data-lang="en">
 <div dir="ltr" lang="en">
 Ruby guys focus on business. Elixir guys on technical aspects <a href="https://twitter.com/hashtag/wrocloverb?src=hash">#wrocloverb</a></div>
-&#8212; Michał Łomnicki (@mlomnicki) <a href="https://twitter.com/mlomnicki/status/843106473358049280">March 18, 2017</a></blockquote>
+— Michał Łomnicki (@mlomnicki) <a href="https://twitter.com/mlomnicki/status/843106473358049280">March 18, 2017</a></blockquote>
 
 Elixir solves a lot of technical problems with scaling thanks to [Erlang's](https://www.erlang.org/) virtual machine. Such problems are definitely only a small part of what typical ruby problems solvers deal with on a daily basis. Hearing Elixir and Ruby on Rails developers talk past each other was probably the first sign of the fact that there's no hyping technology right now. Each problem can be addressed by many tech tools and frameworks.
 
@@ -55,6 +55,6 @@ Elixir solves a lot of technical problems with scaling thanks to [Erlang's](http
 <div dir="ltr" lang="en">
 <a href="https://twitter.com/hashtag/wrocloverb?src=hash">#wrocloverb</a> was great Clojure conference :)<br />
 Thanks for all organizers and speakers!</div>
-&#8212; Jakub Cieślar (@jcieslar_) <a href="https://twitter.com/jcieslar_/status/843596752926269443">March 19, 2017</a></blockquote>
+— Jakub Cieślar (@jcieslar_) <a href="https://twitter.com/jcieslar_/status/843596752926269443">March 19, 2017</a></blockquote>
 
 <script async="" charset="utf-8" src="//platform.twitter.com/widgets.js"></script>

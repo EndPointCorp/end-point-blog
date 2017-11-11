@@ -39,8 +39,8 @@ To get around these restrictions I did this in my migration:
 ```ruby
 Contact.class_eval do
   belongs_to :orig_state,
-             :class_name =&gt; "State",
-             :foreign_key =&gt; "state_id"
+             :class_name => "State",
+             :foreign_key => "state_id"
 end
 ```
 

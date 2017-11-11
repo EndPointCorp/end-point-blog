@@ -17,7 +17,7 @@ $home_path = parse_url(get_option('home'));
 If we take a look at the database wp_options table for option_name's home and siteurl immediately after the import, you might see something like the following, where http://www.myawesomesite.com/blog is the live blog.
 
 ```sql
-mysql&gt; SELECT option_name, option_value FROM wp_options WHERE option_name IN ('siteurl', 'home');
+mysql> SELECT option_name, option_value FROM wp_options WHERE option_name IN ('siteurl', 'home');
 +-------------+-----------------------------------+
 | option_name | option_value                      |
 +-------------+-----------------------------------+
@@ -35,7 +35,7 @@ UPDATE wp_options SET option_value = 'http://myawesomesite.temphost.net/blog' WH
 Yielding:
 
 ```sql
-mysql&gt; SELECT option_name, option_value FROM wp_options WHERE option_name IN ('siteurl', 'home');
+mysql> SELECT option_name, option_value FROM wp_options WHERE option_name IN ('siteurl', 'home');
 +-------------+----------------------------------------+
 | option_name | option_value                           |
 +-------------+----------------------------------------+

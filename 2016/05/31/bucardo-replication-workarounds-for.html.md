@@ -41,7 +41,7 @@ called A, B, C, D, and E. Databases A, B, and C will be sources; D and E are jus
 ```
 ## Create a new cluster for this test, and use port 5950 to minimize impact
 $ initdb --data-checksums btest
-$ echo port=5950 &gt;&gt; btest/postgresql.conf
+$ echo port=5950 >> btest/postgresql.conf
 $ pg_ctl start -D btest -l logfile
 
 ## Create the main database and install the pg_bench schema into it
@@ -65,7 +65,7 @@ $ bucardo add dbs A,B,C,D,E dbname=alpha,beta,gamma,delta,epsilon dbport=5950
 $ bucardo add sync fiveway tables=all dbs=A:source,B:source,C:source,D:target,E:target
 
 ## Tweak a few default locations to make our tests easier:
-$ echo -e "logdest=.\npiddir=." &gt; .bucardorc
+$ echo -e "logdest=.\npiddir=." > .bucardorc
 ```
 
 <div class="separator" style="clear: both; text-align: center;"><a href="/blog/2016/05/31/bucardo-replication-workarounds-for/image-1.png" id="gtsm.com/bucardo_fiveway.png" imageanchor="1" style="clear: right; float: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" src="/blog/2016/05/31/bucardo-replication-workarounds-for/image-1.png"/></a></div>
@@ -132,7 +132,7 @@ Creating ./fullstopbucardo ... Done
 
 ## In real-life, this query should get run in parallel across all databases,
 ## which would be on different servers:
-$ QUERY='UPDATE pgbench_accounts SET abalance = abalance + 25 WHERE aid &gt; 78657769;'
+$ QUERY='UPDATE pgbench_accounts SET abalance = abalance + 25 WHERE aid > 78657769;'
 
 $ for db in alpha beta gamma delta epsilon; do psql $db -Atc "SET session_replication_role='replica'; $QUERY"; done | tr "\n" " "
 UPDATE 83848570 UPDATE 83848570 UPDATE 83848570 UPDATE 83848570 UPDATE 83848570 
@@ -257,7 +257,7 @@ BEGIN
 beta=#LOCK TABLE pgbench_accounts;
 LOCK TABLE
 ## Copy all the delta rows we want to save:
-beta=# CREATE TEMP TABLE bucardo_store_deltas AS SELECT * FROM bucardo.delta_public_pgbench_accounts WHERE txntime &lt;&gt; '2016-05-07 23:20:46.325105-04';
+beta=# CREATE TEMP TABLE bucardo_store_deltas AS SELECT * FROM bucardo.delta_public_pgbench_accounts WHERE txntime <> '2016-05-07 23:20:46.325105-04';
 SELECT 1885
 beta=# TRUNCATE TABLE bucardo.delta_public_pgbench_accounts;
 TRUNCATE TABLE
@@ -275,7 +275,7 @@ sure your query will produce the exact same results on all the servers.
 
 ```
 ## As in the first solution above, this should ideally run in parallel
-$ QUERY='UPDATE pgbench_accounts SET abalance = abalance + 25 WHERE aid &gt; 78657769;'
+$ QUERY='UPDATE pgbench_accounts SET abalance = abalance + 25 WHERE aid > 78657769;'
 
 ## Unlike before, we do NOT run this against beta
 $ for db in alpha gamma delta epsilon; do psql $db -Atc "SET session_replication_role='replica'; $QUERY"; done | tr "\n" " "

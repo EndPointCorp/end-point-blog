@@ -18,7 +18,7 @@ Since Heroku includes a free offering to be used for development, it's a great o
 ```nohighlight
 rails -v 2.3.5
 highline -v '1.5.1'
-authlogic -v '&gt;=2.1.2'
+authlogic -v '>=2.1.2'
 authlogic-oid -v '1.0.4'
 activemerchant -v '1.5.1'
 activerecord-tableless -v '0.1.0'
@@ -29,7 +29,7 @@ whenever -v '0.3.7'
 searchlogic -v '2.3.5'
 will_paginate -v '2.3.11'
 faker -v '0.3.1'
-paperclip -v '&gt;=2.3.1.1'
+paperclip -v '>=2.3.1.1'
 state_machine -v '0.8.0'
 ```
 
@@ -49,7 +49,7 @@ I also removed the frozen Spree gem extension public files (javascripts, stylesh
 
 ```ruby
 AppConfiguration.class_eval do
-  preference :allow_ssl_in_production, :boolean, :default =&gt; false
+  preference :allow_ssl_in_production, :boolean, :default => false
 end
 ```
 

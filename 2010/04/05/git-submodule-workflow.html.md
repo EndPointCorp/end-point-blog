@@ -47,7 +47,7 @@ Given an existing git project in the "project" directory, and a git submodule ex
 First, a status check on the main project:
 
 ```nohighlight
-~/project&gt; git status
+~/project> git status
 # On branch master
 nothing to commit (working directory clean)
 ```
@@ -55,8 +55,8 @@ nothing to commit (working directory clean)
 Next, a status check on the git submodule:
 
 ```nohighlight
-~/project&gt; cd extension/
-~/project/extension&gt; git status
+~/project> cd extension/
+~/project/extension> git status
 # Not currently on any branch.
 nothing to commit (working directory clean)
 ```
@@ -64,20 +64,20 @@ nothing to commit (working directory clean)
 Next, an update of the extension:
 
 ```nohighlight
-~/project/extension&gt; git fetch
+~/project/extension> git fetch
 remote: Counting objects: 30, done.
 remote: Compressing objects: 100% (18/18), done.
 remote: Total 19 (delta 9), reused 0 (delta 0)
 Unpacking objects: 100% (19/19), done.
 From git://github.com/stephskardal/extension1
-   0f0b76b..9cbb6bd  master     -&gt; origin/master
+   0f0b76b..9cbb6bd  master     -> origin/master
 
-~/project/extension&gt; git checkout master
+~/project/extension> git checkout master
 Previous HEAD position was 0f0b76b... Added before_filter to base controller.
 Switched to branch "master"
 Your branch is behind 'origin/master' by 5 commits, and can be fast-forwarded.
 
-~/project/extension&gt; git merge origin/master
+~/project/extension> git merge origin/master
 Updating f95a2d5..9cbb6bd
 Fast forward
  extension.rb                                    |   10 +
@@ -85,7 +85,7 @@ Fast forward
  TODO                                               |   11 +-
 ...
 
-~/project/extension&gt; git status
+~/project/extension> git status
 # On branch master
 nothing to commit (working directory clean)
 ```
@@ -93,8 +93,8 @@ nothing to commit (working directory clean)
 Next, back to the main project:
 
 ```nohighlight
-~/project/extension&gt; cd ..
-~/project&gt; git status
+~/project/extension> cd ..
+~/project> git status
 # On branch master
 # Changed but not updated:
 #   (use "git add <file>..." to update what will be committed)
@@ -109,8 +109,8 @@ no changes added to commit (use "git add" and/or "git commit -a")
 Now, a commit to include the submodule repository change. Brian has made it a convention to manually include SUBMODULE UPDATE: extension_name in the commit message to inform other developers that a submodule update is required.
 
 ```nohighlight
-~/project&gt; git add extension
-~/project&gt; git commit
+~/project> git add extension
+~/project> git commit
 [master eba52d5] SUBMODULE UPDATE: extension
  1 files changed, 1 insertions(+), 1 deletions(-)
 ```

@@ -22,8 +22,8 @@ At first Jeff hacked the system to process the non-EPS files first, then sorted 
 That worked, but Jeff then came across the idea of processing an empty image file so we didn't have a dependency on an image that might later be deleted. He tinkered a bit and came up with something suprising but even better. This is his Perl code:
 
 ```perl
-my $first_im = Image::Magick-&gt;new;
-$first_im-&gt;read('');
+my $first_im = Image::Magick->new;
+$first_im->read('');
 # (then process all images in any order as originally intended)
 ```
 

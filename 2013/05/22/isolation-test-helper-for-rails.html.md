@@ -17,7 +17,7 @@ So, here's the full code from my isolation helper (this one works with RSpec).
 # spec/isolation_helper.rb
 DO_ISOLATION = ! defined?(Rails)
 
-def isolate_from_rails(&amp;block)
+def isolate_from_rails(&block)
   return unless DO_ISOLATION
   block.call
 end
@@ -37,7 +37,7 @@ isolate_from_rails do
   # Some RSpec config
   RSpec.configure do |config|
     config.treat_symbols_as_metadata_keys_with_true_values = true
-    config.filter_run :focus =&gt; true
+    config.filter_run :focus => true
     config.run_all_when_everything_filtered = true
   end
 end
@@ -57,7 +57,7 @@ end
 describe MyProductValidator do
 
   it "ensures that invalid records return false" do
-    Product.stub :find_by_name { OpenStruct.new(:product, :name =&gt; "invalid", :valid =&gt; false) }
+    Product.stub :find_by_name { OpenStruct.new(:product, :name => "invalid", :valid => false) }
     pv = MyProductValidator.validate Product.find_by_name("invalid")
     pv.valid.should be_false
   end

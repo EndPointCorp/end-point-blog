@@ -16,7 +16,7 @@ I attended several medium-sized sessions during the day:
 Michael McClennen, who programs for the Geology Department at the University of Wisconsin, outlined a flexible approach to providing an API to a complex data store. This supports a [front-end used for displaying](http://paleobiodb.org/navigator/) the location of fossils around the world, which is actually quite impressive. A typical URL for a data request looks like:
 
 > ~~~nohighlight
-> http://paleobiodb.org/data1.1/colls/summary.json?lngmin=-180&amp;lngmax=180&amp;latmin=-90&amp;latmax=90&amp;limit=all&amp;show=time&amp;level=3&amp;interval_id=14
+> http://paleobiodb.org/data1.1/colls/summary.json?lngmin=-180&lngmax=180&latmin=-90&latmax=90&limit=all&show=time&level=3&interval_id=14
 > ~~~
 
 (The URL above is wrapped for our blogger format; there should be no whitespace anywhere in it.)
@@ -45,14 +45,14 @@ This was a remarkable, rapid tour of an effort by Logan Bell and others at Shutt
 
 This was a great place to wind up my technical-talk journey, because it wasn't actually a technical talk at all.
 
-Aside: YAPC has adopted a special track of talks called "Awesome &amp;&amp; !Perl" (awesome and not Perl), in which presenters can talk about pretty much anything they want to. One session featured instruction on how to roast your own coffee. Others were somewhat closer to the spirit of the conference, but all were awesome from what I heard.
+Aside: YAPC has adopted a special track of talks called "Awesome && !Perl" (awesome and not Perl), in which presenters can talk about pretty much anything they want to. One session featured instruction on how to roast your own coffee. Others were somewhat closer to the spirit of the conference, but all were awesome from what I heard.
 
 I can't do this talk justice in the short space I have, but let me try as follows: when you are thinking about an application, especially in designing it in an object-oriented fashion, you will quite often use a metaphor or a system of them: this object "is" a customer, that object "is" a purchase, etc. Then your system verbs reflect this metaphor:
 
 ```perl
-$customer-&gt;bill_for_service(@params);
+$customer->bill_for_service(@params);
 ...
-$purchase-&gt;refund($amount);
+$purchase->refund($amount);
 ...
 ```
 

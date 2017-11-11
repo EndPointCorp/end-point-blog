@@ -37,11 +37,11 @@ p span.highlighted { display: inline-block; }
 The challenge was how to wrap the unwrapped text inside the paragraph without having any DOM elements to select? My first clumsy attempt was using regular expressions, which looked something like this:
 
 ```javascript
-var matches = $('p').html().match(/&lt;span class="highlighted.*?"&lt;.*?&lt;\/span&gt;/g);
-var non_matches = $('p').html().split(/&lt;span class="highlighted.*?"&gt;.*?&lt;\/span&gt;/);
+var matches = $('p').html().match(/<span class="highlighted.*?"<.*?<\/span>/g);
+var non_matches = $('p').html().split(/<span class="highlighted.*?">.*?<\/span>/);
 
 var b = '';
-for(var _i=0; _i&lt;non_matches.length; _i++) {
+for(var _i=0; _i<non_matches.length; _i++) {
   if(non_matches[i] != '') {
     b += '<span class="unhighlighted">' + non_matches[i] + '</span>';
   }
@@ -66,7 +66,7 @@ This was just the tool I was looking for: I wanted a simple way to iterate throu
 
 ```javascript
 var contents = $('p').contents();
-for(var _i = 0; _i &lt; contents.length; _i++) {
+for(var _i = 0; _i < contents.length; _i++) {
   if(contents[_i].nodeType == 3) { //conditional indicates match on TextNode
     var updated = '<span class="unhighlighted">' + $(contents[_i]).text() + '</span>';
     $(contents[_i]).replaceWith(updated); 

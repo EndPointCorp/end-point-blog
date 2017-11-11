@@ -35,7 +35,7 @@ End Point's content syndication has only been an issue with blog articles, since
 I've been planning to write this article and with impeccable timing, [Google announced support for the rel=canonical tag across different domains](http://googlewebmastercentral.blogspot.com/2009/12/handling-legitimate-cross-domain.html) this week. I've referenced the use of the rel=canonical tag in two articles ([PubCon 2009 Takeaways](http://blog.endpoint.com/2009/11/pubcon-vegas-7-takeaway-nuggets.html), [Search Engine Thoughts](http://blog.endpoint.com/2009/02/search-engine-optimization-thoughts.html)), but I haven't gone too much into depth about its use. Support of the rel=canonical tag was introduced early this year as a method to help decrease duplicate content across a single domain. A non-canonical URL that includes this tag suggests its canonical URL to search engines. Search engines then use this suggestion in their algorithms and results to reduce the effects of duplicate content.
 
 ```nohighlight
-&lt;link rel="canonical" href="http://www.example.com/product.php?item=swedish-fish" /&gt;
+<link rel="canonical" href="http://www.example.com/product.php?item=swedish-fish" />
 ```
 
 With the cross-domain rel=canonical support announcement, the rel=canonical tag presents another tool to battle duplicate content from content syndication across domains.

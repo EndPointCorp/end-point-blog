@@ -29,7 +29,7 @@ Consider this a public service announcement. This is a list of assorted suggesti
 
 - When responding about a job by email, write a cover letter directly in the email body, specific to our company and the job.
 
-- Why would you use anything other than your first &amp; last name in your email From: header when writing about a job? Cute nicknames look silly in this context and your first or last name only will not be easily searchable. The From text is often the first thing someone sees in an inbox, so make it presentable.
+- Why would you use anything other than your first & last name in your email From: header when writing about a job? Cute nicknames look silly in this context and your first or last name only will not be easily searchable. The From text is often the first thing someone sees in an inbox, so make it presentable.
 
 - Send your resume in standard PDF format. Other formats are far more likely to have rendering oddities on computers other than your own. A link to your online resume is ok, but if that’s all you provide, make sure your website stays up! Yes, I’ve really had candidates provide only a link to an online resume and the website was down or displaying errors when I went to look at it.
 

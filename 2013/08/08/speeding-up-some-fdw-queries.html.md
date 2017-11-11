@@ -65,9 +65,9 @@ The query for getting all data is simple, and the plan is terrible of course, bu
                               QUERY PLAN
 -----------------------------------------------------------------------
  Append  (cost=0.00..43275.00 rows=3000000 width=4)
-   -&gt;  Seq Scan on t_10_20  (cost=0.00..14425.00 rows=1000000 width=4)
-   -&gt;  Seq Scan on t_15_20  (cost=0.00..14425.00 rows=1000000 width=4)
-   -&gt;  Seq Scan on t_10_16  (cost=0.00..14425.00 rows=1000000 width=4)
+   ->  Seq Scan on t_10_20  (cost=0.00..14425.00 rows=1000000 width=4)
+   ->  Seq Scan on t_15_20  (cost=0.00..14425.00 rows=1000000 width=4)
+   ->  Seq Scan on t_10_16  (cost=0.00..14425.00 rows=1000000 width=4)
 (4 rows)
 ```
 
@@ -78,12 +78,12 @@ And what about querying only numbers between 10 and 14? This could be optimized 
                               QUERY PLAN
 ----------------------------------------------------------------------
  Append  (cost=0.00..58275.00 rows=1165534 width=4)
-   -&gt;  Seq Scan on t_10_20  (cost=0.00..19425.00 rows=453133 width=4)
-         Filter: ((i &gt;= 10) AND (i &lt;= 14))
-   -&gt;  Seq Scan on t_15_20  (cost=0.00..19425.00 rows=1 width=4)
-         Filter: ((i &gt;= 10) AND (i &lt;= 14))
-   -&gt;  Seq Scan on t_10_16  (cost=0.00..19425.00 rows=712400 width=4)
-         Filter: ((i &gt;= 10) AND (i &lt;= 14))
+   ->  Seq Scan on t_10_20  (cost=0.00..19425.00 rows=453133 width=4)
+         Filter: ((i >= 10) AND (i <= 14))
+   ->  Seq Scan on t_15_20  (cost=0.00..19425.00 rows=1 width=4)
+         Filter: ((i >= 10) AND (i <= 14))
+   ->  Seq Scan on t_10_16  (cost=0.00..19425.00 rows=712400 width=4)
+         Filter: ((i >= 10) AND (i <= 14))
 (7 rows)
 ```
 
@@ -104,10 +104,10 @@ And the plan for the previous query is:
                               QUERY PLAN
 ----------------------------------------------------------------------
  Append  (cost=0.00..38850.00 rows=1165533 width=4)
-   -&gt;  Seq Scan on t_10_20  (cost=0.00..19425.00 rows=453133 width=4)
-         Filter: ((i &gt;= 10) AND (i &lt;= 14))
-   -&gt;  Seq Scan on t_10_16  (cost=0.00..19425.00 rows=712400 width=4)
-         Filter: ((i &gt;= 10) AND (i &lt;= 14))
+   ->  Seq Scan on t_10_20  (cost=0.00..19425.00 rows=453133 width=4)
+         Filter: ((i >= 10) AND (i <= 14))
+   ->  Seq Scan on t_10_16  (cost=0.00..19425.00 rows=712400 width=4)
+         Filter: ((i >= 10) AND (i <= 14))
 (5 rows)
 ```
 
@@ -141,12 +141,12 @@ Unfortunately that didn’t help, and the plan is as ugly as it was in the begin
                               QUERY PLAN
 -----------------------------------------------------------------------
  Append  (cost=0.00..84930.34 rows=1165534 width=4)
-   -&gt;  Seq Scan on t_10_20  (cost=0.00..24425.00 rows=453133 width=4)
-         Filter: ((i &gt;= 10) AND (i &lt;= 20) AND (i &gt;= 10) AND (i &lt;= 14))
-   -&gt;  Seq Scan on t_15_20  (cost=0.00..24425.00 rows=1 width=4)
-         Filter: ((i &gt;= 15) AND (i &lt;= 20) AND (i &gt;= 10) AND (i &lt;= 14))
-   -&gt;  Seq Scan on t_10_16  (cost=0.00..24425.00 rows=712400 width=4)
-         Filter: ((i &gt;= 10) AND (i &lt;= 16) AND (i &gt;= 10) AND (i &lt;= 14))
+   ->  Seq Scan on t_10_20  (cost=0.00..24425.00 rows=453133 width=4)
+         Filter: ((i >= 10) AND (i <= 20) AND (i >= 10) AND (i <= 14))
+   ->  Seq Scan on t_15_20  (cost=0.00..24425.00 rows=1 width=4)
+         Filter: ((i >= 15) AND (i <= 20) AND (i >= 10) AND (i <= 14))
+   ->  Seq Scan on t_10_16  (cost=0.00..24425.00 rows=712400 width=4)
+         Filter: ((i >= 10) AND (i <= 16) AND (i >= 10) AND (i <= 14))
 (7 rows)
 ```
 
@@ -161,10 +161,10 @@ There is a setting named constraint_exclusion in postgresql.conf. Changing that 
                               QUERY PLAN
 -----------------------------------------------------------------------
  Append  (cost=0.00..60505.33 rows=1165533 width=4)
-   -&gt;  Seq Scan on t_10_20  (cost=0.00..24425.00 rows=453133 width=4)
-         Filter: ((i &gt;= 10) AND (i &lt;= 20) AND (i &gt;= 10) AND (i &lt;= 14))
-   -&gt;  Seq Scan on t_10_16  (cost=0.00..24425.00 rows=712400 width=4)
-         Filter: ((i &gt;= 10) AND (i &lt;= 16) AND (i &gt;= 10) AND (i &lt;= 14))
+   ->  Seq Scan on t_10_20  (cost=0.00..24425.00 rows=453133 width=4)
+         Filter: ((i >= 10) AND (i <= 20) AND (i >= 10) AND (i <= 14))
+   ->  Seq Scan on t_10_16  (cost=0.00..24425.00 rows=712400 width=4)
+         Filter: ((i >= 10) AND (i <= 16) AND (i >= 10) AND (i <= 14))
 (5 rows)
 ```
 

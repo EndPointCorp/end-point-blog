@@ -27,43 +27,43 @@ use Test::More;
 our $BASE = 'http://www.example.com/';
 
 my %common = (
-    agent =&gt; 'compare-pages',
-    autocheck =&gt; 1,
-    cookie_jar =&gt; { },
-    quiet =&gt; 1,
-    redirect_ok =&gt; 1,
-    timeout =&gt; 15,
+    agent => 'compare-pages',
+    autocheck => 1,
+    cookie_jar => { },
+    quiet => 1,
+    redirect_ok => 1,
+    timeout => 15,
 );
-my $old = WWW::Mechanize-&gt;new(
+my $old = WWW::Mechanize->new(
     %common,
 );
-my $new = WWW::Mechanize-&gt;new(
+my $new = WWW::Mechanize->new(
     %common,
 );
 
-for my $page (@ARGV ? @ARGV : &lt;&gt;) {
+for my $page (@ARGV ? @ARGV : <>) {
     print $page;
     chomp $page;
-    $new-&gt;get( $BASE . 'newstuff/' . $page . '?mv_pc=RESET');
-    my $new_form = $new-&gt;form_with_fields('last_product');
-    $new-&gt;submit();
-    $new-&gt;form_with_fields('mv_todo');
-    $new-&gt;submit();
-    $new-&gt;get( $BASE . 'show-the-dump' );
-    $new-&gt;content =~ m/#+\s+SESSION\s+#+\n(.+)\n#+\s+END SESSION\s+#+/s;
+    $new->get( $BASE . 'newstuff/' . $page . '?mv_pc=RESET');
+    my $new_form = $new->form_with_fields('last_product');
+    $new->submit();
+    $new->form_with_fields('mv_todo');
+    $new->submit();
+    $new->get( $BASE . 'show-the-dump' );
+    $new->content =~ m/#+\s+SESSION\s+#+\n(.+)\n#+\s+END SESSION\s+#+/s;
     my $new_session = eval $1;
-    delete $new_session-&gt;{carts}{main}[0]{$_} for qw(some fields);
+    delete $new_session->{carts}{main}[0]{$_} for qw(some fields);
 
-    $old-&gt;get( $BASE . $page . '?mv_pc=RESET' );
-    my $old_form = $old-&gt;form_with_fields('order_item', 'mv_order_deliverydate');
-    $old-&gt;select('mv_order_deliverydate', {n =&gt; 2});
-    $old-&gt;submit();
-    $old-&gt;get( $BASE . 'show-the-dump' );
-    $old-&gt;content =~ m/#+\s+SESSION\s+#+\n(.+)\n#+\s+END SESSION\s+#+/s;
+    $old->get( $BASE . $page . '?mv_pc=RESET' );
+    my $old_form = $old->form_with_fields('order_item', 'mv_order_deliverydate');
+    $old->select('mv_order_deliverydate', {n => 2});
+    $old->submit();
+    $old->get( $BASE . 'show-the-dump' );
+    $old->content =~ m/#+\s+SESSION\s+#+\n(.+)\n#+\s+END SESSION\s+#+/s;
     my $old_session = eval $1;
-    delete $old_session-&gt;{carts}{main}[0]{$_} for qw(other fields);
+    delete $old_session->{carts}{main}[0]{$_} for qw(other fields);
 
-    is_deeply($old_session-&gt;{carts}{main}, $new_session-&gt;{carts}{main}, "$page : carts match") or exit;
+    is_deeply($old_session->{carts}{main}, $new_session->{carts}{main}, "$page : carts match") or exit;
 }
 
 done_testing;
