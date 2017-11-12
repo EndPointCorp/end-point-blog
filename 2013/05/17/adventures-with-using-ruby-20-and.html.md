@@ -131,5 +131,5 @@ There are five notable incompatibilities we know of:
 - Iconv was removed, which had already been deprecated when M17N was introduced in ruby 1.9. Use String#encode, etc. instead.
 - There is ABI breakage [ruby-core:48984]. We think that normal users can/should just reinstall extension libraries. You should be aware: DO NOT COPY .so OR .bundle FILES FROM 1.9.
 - #lines, #chars, #codepoints, #bytes now returns an Array instead of an Enumerator [[#6670](https://bugs.ruby-lang.org/issues/6670)]. This change allows you to avoid the common idiom “lines.to_a”. Use #each_line, etc. to get an Enumerator.
-- Object#inspect does always return a string like #<ClassName:0x…> instead of delegating to #to_s. [[#2152](https://bugs.ruby-lang.org/issues/2152)]
+- Object#inspect does always return a string like `#<ClassName:0x…>` instead of delegating to #to_s. [[#2152](https://bugs.ruby-lang.org/issues/2152)]
 - There are some comparatively small incompatibilities. [ruby-core:49119]

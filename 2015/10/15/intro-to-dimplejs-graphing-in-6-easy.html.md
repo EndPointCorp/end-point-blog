@@ -9,7 +9,7 @@ Data Visualization is a big topic these days given the giant amount of data bein
 
 [D3](http://d3js.org/) is very versatile but can be a little more complicated than necessary for simple graphing. So, what if you just want to quickly spin up some graphs quickly? I was recently working on a project where we were trying to do just that. That is when I was introduced to [DimpleJS](http://dimplejs.org/).
 
-The advantage of using [DimpleJS](http://dimplejs.org/) rather than plain [D3](http://d3js.org/) is speed. It allows you to quickly create customizable graphs with your data, gives you easy access to [D3](http://d3js.org/) objects, is intuitive to code, and I've found the creator [John Kiernander](http:n-kiernander) to be very responsive on [Stack Overflow](http://stackoverflow.com/) when I ran in to issues.
+The advantage of using [DimpleJS](http://dimplejs.org/) rather than plain [D3](http://d3js.org/) is speed. It allows you to quickly create customizable graphs with your data, gives you easy access to [D3](http://d3js.org/) objects, is intuitive to code, and I've found the creator [John Kiernander](https://twitter.com/jkiernander) to be very responsive on [Stack Overflow](http://stackoverflow.com/) when I ran in to issues.
 
 I was really impressed with how flexible DimpleJS is. You can make a very large variety of graphs quickly and easily. You can update the labels on the graph and on the axes, you can create your own tooltips, add colors and animations, etc..
 
@@ -28,7 +28,6 @@ After including Dimple in your project, you simply create a div and give it an i
   <div id="chart" style="background:grey"></div>
 </body>
 ```
-
 
 ## Step 2
 
@@ -65,7 +64,7 @@ Next, you set up your axes. You can create multiple x and y axes with Dimple but
 
 ```javascript
 var xAxis = chart1.addCategoryAxis("x", "week");
-  var yAxis = chart1.addMeasureAxis("y", "miles");
+var yAxis = chart1.addMeasureAxis("y", "miles");
 ```
 
 ## Step 5
@@ -94,29 +93,29 @@ Here's the code in full, and a working JSBin here, http://jsbin.com/wivoxuvipe/e
 
 ```javascript
 var chart1 = new dimple.chart(svg1);
-  var xAxis = chart1.addCategoryAxis("x", "week");
-  var yAxis = chart1.addMeasureAxis("y", "miles");
+var xAxis = chart1.addCategoryAxis("x", "week");
+var yAxis = chart1.addMeasureAxis("y", "miles");
 
-  var data1 = [
-    [
-      {week: 'week 1', miles: 1},
-      {week: 'week 2', miles: 2},
-      {week: 'week 3', miles: 3},
-      {week: 'week 4', miles: 4}
-    ],
-    [
-      {week: 'week 1', miles: 2},
-      {week: 'week 2', miles: 4},
-      {week: 'week 3', miles: 6},
-      {week: 'week 4', miles: 8}
-    ]
-  ];
+var data1 = [
+  [
+    {week: 'week 1', miles: 1},
+    {week: 'week 2', miles: 2},
+    {week: 'week 3', miles: 3},
+    {week: 'week 4', miles: 4}
+  ],
+  [
+    {week: 'week 1', miles: 2},
+    {week: 'week 2', miles: 4},
+    {week: 'week 3', miles: 6},
+    {week: 'week 4', miles: 8}
+  ]
+];
 
-  s1 = chart1.addSeries("Bill", dimple.plot.line);
-  s1.data = data1[0];
-  s1.plot=dimple.plot.line;
-  s2 = chart1.addSeries("Sarah", dimple.plot.line);
-  s2.data = data1[1];
-  s2.plot=dimple.plot.line;
-  chart1.draw(1000);
+s1 = chart1.addSeries("Bill", dimple.plot.line);
+s1.data = data1[0];
+s1.plot=dimple.plot.line;
+s2 = chart1.addSeries("Sarah", dimple.plot.line);
+s2.data = data1[1];
+s2.plot=dimple.plot.line;
+chart1.draw(1000);
 ```
