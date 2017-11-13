@@ -1,7 +1,7 @@
 ---
 author: Josh Williams
 gh_issue_number: 885
-tags: ajax, django, javascript, python
+tags: django, javascript, python
 title: Asynchronous Page Switches with Django
 ---
 

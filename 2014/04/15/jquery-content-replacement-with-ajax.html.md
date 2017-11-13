@@ -1,7 +1,7 @@
 ---
 author: Jeff Boes
 gh_issue_number: 962
-tags: ajax, html
+tags: javascript, jquery, html
 title: jQuery Content Replacement with AJAX
 ---
 
@@ -80,5 +80,3 @@ $('form#order_item').on('change', 'select[name=sku]',
 Using an "on" handler for the whole form, with a filter of just the select element we care about, works better – because when we clone the form, we copy its handler(s), too.
 
 There's room for improvement in this solution, because we're still fetching the entire product display page, even the bits that we're going to ignore, so we should look at changing the .ajax() call to reference something else – maybe a custom version of the page that only generates the form and leaves out all the boilerplate. This solution also leaves the browser's address showing the original product, not the one we selected, so a page refresh will be confusing. There are fixes for both of these, but that's for another day.
-
-

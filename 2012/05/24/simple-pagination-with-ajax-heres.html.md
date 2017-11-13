@@ -1,15 +1,13 @@
 ---
 author: Jeff Boes
 gh_issue_number: 620
-tags: ajax, json
+tags: javascript, json
 title: Simple Pagination with AJAX
 ---
 
-
-
 Here's a common problem: you have a set of results you want to display (search results, or products in a category) and you want to paginate them in a way that doesn't submit and re-display your results page every time. AJAX is a clear winner in this; I'll outline a very simple, introductory approach for carrying this off.
 
-(I'm assuming that the reader has some modest familiarity with Javascript and jQuery, but no great expertise. My solutions below will tend toward the “Cargo Cult” programming model, so that you can cut and paste, tweak, and go, but with enough “how and why” sprinkled in so you will come away knowing enough to extend the solution as needed.)
+(I'm assuming that the reader has some modest familiarity with JavaScript and jQuery, but no great expertise. My solutions below will tend toward the “Cargo Cult” programming model, so that you can cut and paste, tweak, and go, but with enough “how and why” sprinkled in so you will come away knowing enough to extend the solution as needed.)
 
 Firstly, you have to have the server-side processing in place to serve up paginated results in a way you can use. We'll assume that you can write or adapt your current results source to produce this for a given URL and parameters:
 
@@ -39,7 +37,7 @@ Don't forget to include an appropriate document header:
 Content-type: application/json
 ```
 
-Now we need a Javascript function to retrieve a slice; I'll use jQuery here as it's my preferred solution (and because I'm not at all fluent in non-jQuery approaches!).
+Now we need a JavaScript function to retrieve a slice; I'll use jQuery here as it's my preferred solution (and because I'm not at all fluent in non-jQuery approaches!).
 
 ```javascript
 function(){
@@ -101,5 +99,3 @@ In place of an actual database query or search engine, I have a simple PHP progr
 Here's a screenshot of what you might expect, with Firebug showing the returned JSON object.
 
 <div class="separator" style="clear: both; text-align: center;"><a href="/blog/2012/05/24/simple-pagination-with-ajax-heres/image-0.png" imageanchor="1" style="clear:left; float:left;margin-right:1em; margin-bottom:1em"><img border="0" height="233" src="/blog/2012/05/24/simple-pagination-with-ajax-heres/image-0.png" width="320"/></a></div>
-
-

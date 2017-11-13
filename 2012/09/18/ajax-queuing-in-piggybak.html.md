@@ -1,11 +1,9 @@
 ---
 author: Steph Skardal
 gh_issue_number: 693
-tags: ajax, ecommerce, jquery, piggybak, rails
+tags: javascript, ecommerce, jquery, piggybak, rails
 title: AJAX Queuing in Piggybak
 ---
-
-
 
 AJAX is inherently asynchronous; for the most part, this works fine in web development, but sometimes it can cause problem if you have multiple related AJAX calls that are asynchronous to eachother, such as the use case described in this article.
 
@@ -58,5 +56,3 @@ Here's how this looks on a timeline:
 - 2 seconds: AJAX REQUEST 2 returns valid shipping options.
 
 This was an interesting technical problem to solve, but the needs were not surprising. The [jQuery-ajaxq plugin](http://code.google.com/p/jquery-ajaxq/) offers a simple, elegant solution for handling AJAX queing in jQuery.
-
-

@@ -1,11 +1,9 @@
 ---
 author: Jeff Boes
 gh_issue_number: 1137
-tags: ajax, dancer, javascript, perl
+tags: dancer, javascript, perl
 title: Documenting web services with Perl POD and AJAX
 ---
-
-
 
 Perl POD is a handy, convenient, but low-tech approach to embedded documentation. Consider a web service in [Dancer](http://www.perldancer.org):
 
@@ -21,7 +19,6 @@ Your application might have several, or even dozens of these, with various param
 I chose to document these in Perl [POD (Plain Old Documentation)](http://perldoc.perl.org/perlpod.html) format, e.g.,
 
 ```nohighlight
-
 =pod
 
 =head1 time
@@ -45,7 +42,6 @@ None.
 =back
 
 =cut
-
 ```
 
 This block gets inserted right in-line with the web service code, so it's immediately obvious to anyone maintaining it (and thus has the best chance of being maintained if and when the code changes!). Now I can generate an HTML page directly from my Perl code:
@@ -56,66 +52,30 @@ $ pod2html MyPackage.pm
 
 Your output looks something like this (excerpted for clarity):
 
-> 
-> 
-> 
 > ### [time]()
 > 
-> 
-> 
-> 
 > Retrieves the current time
-> 
-> 
-> 
 > **[Parameters]()**
-> 
-> 
-> 
 > 
 > None.
 > 
-> 
-> 
-> 
 > **[Example]()**
-> 
-> 
 
-Where the magic comes in is the Javascript code that allows an in-line example, live and accurate, within the documentation page. You'll actually get something more like this:
+Where the magic comes in is the JavaScript code that allows an in-line example, live and accurate, within the documentation page. You'll actually get something more like this:
 
-> 
-> 
-> 
 > ### [time]()
 > 
-> 
-> 
-> 
 > Retrieves the current time
-> 
-> 
-> 
 > **[Parameters]()**
-> 
-> 
-> 
 > 
 > None.
 > 
-> 
-> 
-> 
 > **[Example]()**
-> 
 > 
 > <input type="submit" value="Get data">
 > <input type="button" value="Hide result" name="hide">
 > 
 > (results appear here)
-> 
-> 
-> 
 
 Note that the code I have below is not factored by choice; I could move a lot of it out to a common routine, but for clarity I'm leaving it all in-line. I am breaking up the script into a few chunks for discussion, but you can and should construct it all into one file (in my example, "js/example-time.js").
 
@@ -135,7 +95,7 @@ $(document).ready(
 
 Note 1: This being a painfully simple example of a web service, there are no additional inputs. If you have some, you would add them to the HTML being assembled into the <form> tag, and then using jQuery, add them below to the url parameter, or into the data structure as required by your particular web service.
 
-This step just inserts a simple <form> into the document. I chose to embed the form into the Javascript code, rather than the POD, because it reduces the clutter and separates the example from the web service.
+This step just inserts a simple <form> into the document. I chose to embed the form into the JavaScript code, rather than the POD, because it reduces the clutter and separates the example from the web service.
 
 ```javascript
     var $form = $('form[action="/time"]');
@@ -186,5 +146,3 @@ Error handling goes here. If you have something more comprehensive, such as exam
 ```
 
 And just a bit of UI kindness: we have a "hide" button to make the example go away. Some of my actual examples ran to dozens of lines of JSON output, so I wanted a way to clean up after the example.
-
-

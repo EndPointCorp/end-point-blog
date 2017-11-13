@@ -1,7 +1,7 @@
 ---
 author: Jeff Boes
 gh_issue_number: 931
-tags: ajax, javascript, jquery
+tags: javascript, jquery
 title: 'More jQuery confusion: hidden, disabled fields'
 ---
 

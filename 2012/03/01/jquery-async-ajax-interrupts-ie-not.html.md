@@ -1,7 +1,7 @@
 ---
 author: Carl Bailey
 gh_issue_number: 563
-tags: ajax, jquery
+tags: javascript, jquery
 title: 'jQuery Async AJAX: Interrupts IE, not Firefox, Chrome, Safari'
 ---
 
