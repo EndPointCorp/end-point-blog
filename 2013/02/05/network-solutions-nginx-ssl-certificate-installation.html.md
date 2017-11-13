@@ -1,11 +1,9 @@
 ---
 author: Brian Buchalter
 gh_issue_number: 756
-tags: hosting, security
+tags: hosting, tls
 title: Install SSL Certificate from Network Solutions on nginx
 ---
-
-
 
 Despite nginx serving pages for [12.22% of the web's million busiest sites](http://news.netcraft.com/archives/2012/11/01/november-2012-web-server-survey.html), Network Solutions **does not** provide [instructions for installing SSL certificates](http://www.networksolutions.com/support/nsprotect-secure-ssl-topics/) for nginx. This artcle provides the exact steps for chaining the intermediary certificates for use with nginx.
 
@@ -33,5 +31,3 @@ chmod 600 your.site.com.key
 ```
 
 I hope this little note helps to ease nginx users looking to use a Network Solutions SSL certificate.
-
-

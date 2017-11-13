@@ -1,7 +1,7 @@
 ---
 author: Selvakumar Arumugam
 gh_issue_number: 947
-tags: mac, postgres, rails, ssl
+tags: mac, postgres, rails, tls
 title: Setup Rails Environment with PostgreSQL on Apple Mac OS X
 ---
 
@@ -186,5 +186,3 @@ $ ./bin/rails server
 It will use the SSL certificate and run the application over https protocol as we configured above. We can verify at [https://0.0.0.0:3000](https://0.0.0.0:3000/).
 
 We are ready with a Rails development environment on our Mac to do magic.
-
-

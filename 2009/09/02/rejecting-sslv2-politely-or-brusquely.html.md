@@ -1,7 +1,7 @@
 ---
 author: Jon Jensen
 gh_issue_number: 194
-tags: browsers, ecommerce, hosting, security
+tags: browsers, ecommerce, hosting, security, tls
 title: Rejecting SSLv2 politely or brusquely
 ---
 

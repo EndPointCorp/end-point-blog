@@ -1,7 +1,7 @@
 ---
 author: Josh Williams
 gh_issue_number: 1179
-tags: postgres, replication, ssl, sysadmin
+tags: postgres, replication, tls, sysadmin
 title: Odd pg_basebackup Connectivity Failures Over SSL
 ---
 

@@ -1,11 +1,9 @@
 ---
 author: Phin Jensen
 gh_issue_number: 1324
-tags: browsers, hosting, security, ssl, sysadmin
+tags: browsers, hosting, security, tls, sysadmin
 title: Web Security Services Roundup
 ---
-
-
 
 Security is often a very difficult thing to get right, especially when it’s not easy to find reliable or up-to-date information or the process of testing can be confusing and complicated. We have a lot of history and experience working on the security of websites and servers, and we’ve found many tools and websites to be very helpful. Here is a collection of those.
 
@@ -43,5 +41,3 @@ These websites provide information and diagnostic tools to ensure that you are u
 - [Digital Attack Map](http://www.digitalattackmap.com/) is an interactive map showing DDoS attacks across the world.
 - [The Internet-Wide Scan Data Repository](https://scans.io/) is a public archive of scans across the internet, intended for research and provided by the University of Michigan Censys Team.
 - [take-a-screenshot.org](https://www.take-a-screenshot.org/) is a simple website that shows how to take a screenshot on a variety of operating systems and desktop environments. It’s a fantastic tool to help less technically-minded people share their screens or issues they’re having.
-
-

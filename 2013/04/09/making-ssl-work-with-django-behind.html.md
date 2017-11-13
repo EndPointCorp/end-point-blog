@@ -1,11 +1,9 @@
 ---
 author: Greg Davidson
 gh_issue_number: 786
-tags: devops, django, hosting, python
+tags: sysadmin, django, python, tls
 title: Making SSL Work with Django Behind an Apache Reverse Proxy
 ---
-
-
 
 ## Bouncing Admin Logins
 
@@ -34,5 +32,3 @@ RequestHeader set X-Forwarded-Proto https env=HTTPS
 With SECURITY_PROXY_SSL_HEADER in place and the Apache configuration updated, logins to the admin site began to work correctly.
 
 This is standard practice for web applications that reside behind an HTTP reverse proxy, but if the application was initially set up using only plain HTTP, when HTTPS is later added, it can be easy to be confused and overlook this part of the setup.
-
-

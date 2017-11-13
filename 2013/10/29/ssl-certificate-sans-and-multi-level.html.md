@@ -1,11 +1,9 @@
 ---
 author: Cas Rusnov
 gh_issue_number: 869
-tags: security, ssl, sysadmin
+tags: security, tls, sysadmin
 title: SSL Certificate SANs and Multi-level Wildcards
 ---
-
-
 
 Some bits of advice for those that run their own Certificate Authorities or use self-signed certificates, related to multiple matches and wildcard domains.
 
@@ -74,5 +72,3 @@ X509v3 Subject Alternative Name:
 ```
 
 When you see this, you'll know everything worked. I hope this summary will help anyone who has this need, and here's to the day when browsers support multiple-level wildcard certificates and this advice is moot.
-
-

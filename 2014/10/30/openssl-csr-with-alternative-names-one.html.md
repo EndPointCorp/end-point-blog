@@ -1,11 +1,9 @@
 ---
 author: Emanuele “Lele” Calò
 gh_issue_number: 1048
-tags: security, sysadmin
+tags: security, sysadmin, tls
 title: OpenSSL CSR with Alternative Names one-line
 ---
-
-
 
 20170216 - Edit - I changed this post to use a different method than what I used in the original version cause X509v3 extensions were not created or seen correctly by many certificate providers.
 
@@ -109,5 +107,3 @@ Now with that I'm able to generate proper multi-domain CSRs effectively.
 Please note the use of the **-sha256** option to enable SHA256 signing instead of the old (and now definitely deprecated SHA1).
 
 Thanks to all our readers for all the hints, ideas and suggestiong they gave me to improve this post, which apparently is still very useful to a lot of System Administrators out there.
-
-
