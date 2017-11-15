@@ -1,3 +1,6 @@
+#!/usr/bin/env ruby
+# usage: preview-post POST_FILE
+# Creates a file preview.html for previewing in-progress blog posts
 require 'redcarpet'
 require 'yaml'
 
