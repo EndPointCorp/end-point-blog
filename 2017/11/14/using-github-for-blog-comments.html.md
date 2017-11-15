@@ -10,7 +10,7 @@ The most obvious thing that is missing from Middleman’s blog extension is the 
 
 Commenting requires a GitHub account, which is easy to sign up for and free, and the general target audience of our blog will often already have a GitHub account. At the bottom of each post will be a link to a GitHub issue at the top of the list of comments, if there are any. Click on the issue, write and post your comment, and it’ll appear on the blog post when you reload the page. It’s pretty simple.
 
-Now, for the gritty details. Don’s post shows the JavaScript he uses to find the correct GitHub issue and fetch its comments, but it required a bit of modification to work in our Middleman project. First, we needed a way to get the right Github issue number. Don’s example has that worked into the JavaScript with Hugo, fetching it from some paramter value, but I opted to create a hidden input on the page that would provide the right number:
+Now, for the gritty details. Don’s post shows the JavaScript he uses to find the correct GitHub issue and fetch its comments, but it required a bit of modification to work in our Middleman project. First, we needed a way to get the right GitHub issue number. Don’s example has that worked into the JavaScript with Hugo, fetching it from some parameter value, but I opted to create a hidden input on the page that would provide the right number:
 
 ```html
 <input type="hidden" name="gh_issue" value="<%= current_page.data.gh_issue_number =>">
@@ -30,7 +30,7 @@ var issue_id = $('[name="gh_issue"]').val();
 
 From there, we just had to modify the IDs referenced in Don’s JavaScript to match ours, and comments were working perfectly! Well, new comments were.
 
-Our blog is over 9 years old now, with over 1,300 posts and comments on many of those, and we needed to pull those existing comments over into GitHub as well. Actually copying the data wasn’t too difficult. I wrote a simple python script to use the Blogger API to fetch posts and their comments, sort them by date, create an appropriately-named GitHub issue, and add the comments to them. Aside from GitHub’s anti-abuse detection system getting in the way a few times, it was an easy process.
+Our blog is over 9 years old now, with over 1,300 posts and comments on many of those, and we needed to pull those existing comments over into GitHub as well. Actually copying the data wasn’t too difficult. I wrote a simple Python script to use the Blogger API to fetch posts and their comments, sort them by date, create an appropriately-named GitHub issue, and add the comments to them. Aside from GitHub’s anti-abuse detection system getting in the way a few times, it was an easy process.
 
 We wanted to preserve original author and timestamp information, so I had my script prepend the comment body with that information in a code block so it could be easily read by people reading comments on GitHub and parsed by JavaScript:
 
@@ -53,7 +53,7 @@ if (data.user.login == "phinjensen") {
 }
 ```
 
-If that regex isn’t matched, then the author and date data is left as-is and parsed as normal. Here’s the full JS we’re using:
+If that regex isn’t matched, then the author and date data is left as-is and parsed as normal. Here’s the full JavaScript we’re using:
 
 ```javascript
 function formatDate(date) {
