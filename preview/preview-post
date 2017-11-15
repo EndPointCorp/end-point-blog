@@ -4,8 +4,10 @@
 require 'redcarpet'
 require 'yaml'
 
-HEAD = File.read("head.html")
-FOOT = File.read("foot.html")
+dir = File.dirname(__FILE__)
+
+HEAD = File.read("#{dir}/head.html")
+FOOT = File.read("#{dir}/foot.html")
 
 markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, extensions = {
   no_intra_emphasis: true,
@@ -51,3 +53,5 @@ File.open('preview.html', 'w') do |file|
   file.write(markdown.render md)
   file.write(FOOT)
 end
+
+puts "Wrote preview to preview.html. Note that icons may be missing due to cross origin access rules on endpoint.com"
