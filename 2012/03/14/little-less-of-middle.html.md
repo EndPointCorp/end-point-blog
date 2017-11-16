@@ -38,7 +38,7 @@ SELECT array_to_json(array_agg(pages)) FROM pages WHERE page_title LIKE 'A Littl
 Notice the use of the row-type reference to the table itself after the SELECT, rather than just a single column.  This outputs:
 
 ```javascript
-[{"page_id":105,"today":"π day","page_title":"A Little Less of the Middle","contents":"I've been meaning to exercise a bit more.  You...","published_on":"2012-03-15 03:30:00+00"}]
+[{"page_id":105,"today":"\u03c0 day","page_title":"A Little Less of the Middle","contents":"I've been meaning to exercise a bit more.  You...","published_on":"2012-03-15 03:30:00+00"}]
 ```
 
 Compare that to the output from json_encode() above, where the database driver treated everything as a string, even the page_id integer.  The other difference is the Postgres code doesn't do any quoting on Unicode characters:
