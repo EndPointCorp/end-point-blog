@@ -34,8 +34,8 @@ date = Date.strptime(path.sub(path_regex, '\2'), "%Y/%m/%d")
 root = path.sub(path_regex, '\1')
 
 post = File.read(ARGV[0])
-yaml = post.sub(/---\n(.*)\n---(.*)/m, '\1')
-md   = post.sub(/---\n(.*)\n---(.*)/m, '\2')
+yaml = post.sub(/---\n(.*?)\n---(.*)/m, '\1')
+md   = post.sub(/---\n(.*?)\n---(.*)/m, '\2')
 md = md.gsub(/\/blog\//, "#{root}/")
 yaml = YAML.load(yaml)
 
