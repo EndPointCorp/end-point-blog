@@ -2,7 +2,7 @@
 author: Ben Witten
 gh_issue_number: 1173
 tags: liquid-galaxy
-title: "End Pointers\u2019 Favorite Liquid Galaxy Tours"
+title: "End Pointers’ Favorite Liquid Galaxy Tours"
 ---
 
 

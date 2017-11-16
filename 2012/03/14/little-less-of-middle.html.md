@@ -44,7 +44,7 @@ Notice the use of the row-type reference to the table itself after the SELECT, r
 Compare that to the output from json_encode() above, where the database driver treated everything as a string, even the page_id integer.  The other difference is the Postgres code doesn't do any quoting on Unicode characters:
 
 ```javascript
-[{"page_id":"105","today":"\u03c0 day","page_title":"A Little Less of the Middle","contents":"I've been meaning to exercise a bit more.  You...","published_on":"2012-03-15 03:30:00+00"}]
+[{"page_id":"105","today":"π day","page_title":"A Little Less of the Middle","contents":"I've been meaning to exercise a bit more.  You...","published_on":"2012-03-15 03:30:00+00"}]
 ```
 
 I'm a bit on the fence about whether it's a real replacement for doing it in middleware, especially in some web use cases where you typically want to do things like anti-XSS type processing on some fields before sending them off to a browser somewhere.  Besides, at the moment at least, there's no built-in way to break JSON back apart in the database.  But I'm sure there's some places getting direct JSON is helpful, and it's certainly an interesting start.

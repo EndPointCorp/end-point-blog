@@ -2,7 +2,7 @@
 author: Ben Witten
 gh_issue_number: 1286
 tags: liquid-galaxy
-title: "Liquid Galaxy Success at U.S. Embassy\u2019s Cultural Center"
+title: "Liquid Galaxy Success at U.S. Embassy’s Cultural Center"
 ---
 
 The U.S. Embassy to Jakarta features a high-tech cultural center called “[@america](http://www.atamerica.or.id/)”. @america’s mission is to provide a space for young Indonesians to learn more about the United States through discussions, cultural performances, debates, competitions and exhibitions.
