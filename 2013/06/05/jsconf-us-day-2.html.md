@@ -2,7 +2,7 @@
 author: Greg Davidson
 gh_issue_number: 815
 tags: browsers, conference, javascript
-title: "JSConf US \u2014 Day 2"
+title: "JSConf US — Day 2"
 ---
 
 ## Choose Your Own Adventure

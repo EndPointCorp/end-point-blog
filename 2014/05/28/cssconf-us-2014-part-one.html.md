@@ -2,7 +2,7 @@
 author: Greg Davidson
 gh_issue_number: 988
 tags: browsers, conference, css, design, html
-title: "CSSConf US 2014 \u2014 Part One"
+title: "CSSConf US 2014 — Part One"
 ---
 
 

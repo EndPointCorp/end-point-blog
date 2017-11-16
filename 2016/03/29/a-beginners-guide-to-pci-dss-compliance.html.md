@@ -2,7 +2,7 @@
 author: Elizabeth Garrett Christensen
 gh_issue_number: 1216
 tags: ecommerce, hosting, payments, security
-title: "A Beginner\u2019s Guide to PCI DSS Compliance and TLS Versions"
+title: "A Beginner’s Guide to PCI DSS Compliance and TLS Versions"
 ---
 
 

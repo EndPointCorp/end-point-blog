@@ -2,7 +2,7 @@
 author: Jon Jensen
 gh_issue_number: 1152
 tags: perl, programming
-title: "Perl\u2019s CPAN is 20 years old"
+title: "Perl’s CPAN is 20 years old"
 ---
 
 

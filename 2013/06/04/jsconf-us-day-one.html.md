@@ -2,7 +2,7 @@
 author: Greg Davidson
 gh_issue_number: 813
 tags: community, conference, css, html, javascript, open-source, tips, tools
-title: "JSConf US 2013 \u2014 Day One"
+title: "JSConf US 2013 — Day One"
 ---
 
 
