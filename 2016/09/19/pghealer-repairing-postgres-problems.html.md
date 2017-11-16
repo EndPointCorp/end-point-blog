@@ -127,6 +127,7 @@ $ xxd -a -g1 -u myrelfile
 ```
 
 <div class="separator" style="margin: 0 1em 1em 3em; clear: both; float:right; text-align: center;"><a href="/blog/2016/09/19/pghealer-repairing-postgres-problems/image-1.jpeg" imageanchor="1" style="clear: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" src="/blog/2016/09/19/pghealer-repairing-postgres-problems/image-1.jpeg"/></a><br/><small><a href="https://flic.kr/p/uoCuk">These shurikens</a> are not so deadly, but quite yummy!<br/>(photograph by <a href="https://www.flickr.com/photos/karviainen/">kahvikisu</a>)</small></div>
+<br>
 
 Now that we've messed up the file, watch closely at what happens when we try to 
 read from it. We are going to do this three times. The first time, the table will 
