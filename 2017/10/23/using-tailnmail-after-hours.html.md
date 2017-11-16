@@ -53,7 +53,6 @@ gpg:                 aka "Greg Sabino Mullane (End Point Corporation) <greg@endp
 gpg: WARNING: This key is not certified with a trusted signature!
 gpg:          There is no indication that the signature belongs to the owner.
 Primary key fingerprint: 2529 DF6A B8F7 9407 E944  45B4 BC9B 9067 1496 4AC8
-</greg@endpoint.com></greg@turnstep.com>
 ```
 
 The main way to configure tail_n_mail is through its configuration file, which is always the
