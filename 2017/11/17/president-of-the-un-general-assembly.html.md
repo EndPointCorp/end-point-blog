@@ -1,7 +1,7 @@
 ---
 title: "President of UN General Assembly Thanks End Point"
 author: Jonathan Blessing
-tags: liquid-galaxy
+tags: company, liquid-galaxy
 ---
 
 The President of UN General Assembly, Peter Thomson, thanked End Point for supporting the [Ocean Conference](https://oceanconference.un.org/), which was held at the United Nations Headquarters this past summer to bring attention and action to saving the world’s oceans.
