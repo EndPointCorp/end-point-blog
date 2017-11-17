@@ -5,9 +5,8 @@ tags: postgres, monitoring
 title: Using tail_n_mail after hours
 ---
 
-<a href="/blog/2017/10/23/using-tailnmail-after-hours/image-0-big.jpeg" imageanchor="1"><img border="0" data-original-height="313" data-original-width="500" src="/blog/2017/10/23/using-tailnmail-after-hours/image-0.jpeg"/></a>
-
-(Photo of [Turtle Island](https://flic.kr/p/bz2Vb4) by [Edwin Poon](https://www.flickr.com/photos/edwinpoon_gz/))
+<a href="/blog/2017/10/23/using-tailnmail-after-hours/image-0-big.jpeg" imageanchor="1"><img border="0" data-original-height="313" data-original-width="500" src="/blog/2017/10/23/using-tailnmail-after-hours/image-0.jpeg"/></a>   
+<small>(Photo of [Turtle Island](https://flic.kr/p/bz2Vb4) by [Edwin Poon](https://www.flickr.com/photos/edwinpoon_gz/))</small>
 
 Someone recently asked me something about
 [tail_n_mail](https://bucardo.org/Tail_n_mail/), a program that watches over your log files, scans for certain patterns,
@@ -17,7 +16,7 @@ to your database. The questioner wanted to know if it was possible
 for tail_n_mail to change its behavior based on the time of day - would it be able
 to do things differently outside of "business hours"? Although tail_n_mail cannot
 do so directly, a simple solution is to use alternate configuration files - which
-get swapped by cron - and the INHERIT keyword.
+get swapped by cron - and the `INHERIT` keyword.
 
 To demonstrate the solution, let's spin up a Postgres 10 instance, route the logs to syslog,
 setup tail_n_mail, and then create separate configuration files for different times of the week.
@@ -53,7 +52,6 @@ gpg:                 aka "Greg Sabino Mullane (End Point Corporation) <greg@endp
 gpg: WARNING: This key is not certified with a trusted signature!
 gpg:          There is no indication that the signature belongs to the owner.
 Primary key fingerprint: 2529 DF6A B8F7 9407 E944  45B4 BC9B 9067 1496 4AC8
-</greg@endpoint.com></greg@turnstep.com>
 ```
 
 The main way to configure tail_n_mail is through its configuration file, which is always the
