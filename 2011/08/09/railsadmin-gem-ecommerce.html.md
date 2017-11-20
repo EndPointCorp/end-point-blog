@@ -5,21 +5,18 @@ tags: ecommerce, ruby, rails, sinatra
 title: The rails_admin gem in Ecommerce
 ---
 
-
-
-Update: Since writing this article, this gem has had several updates. All rails_admin configuration now must be pulled out of ActiveRecord models and into the initializer. The look and feel has also been updated. Read about it more [here](https://github.com/sferik/rails_admin). Additionally, End Point has released a [Ruby on Rails Ecommerce Engine](http://blog.endpoint.com/2012/01/piggybak-mountable-ecommerce-ruby-on.html) with a sleek admin interface driven by rails_admin. Read more about it [here](http://www.piggybak.org/).
-
- 
+Update: Since writing this article, this gem has had several updates. All rails_admin configuration now must be pulled out of ActiveRecord models and into the initializer. The look and feel has also been updated. Read about it more [here](https://github.com/sferik/rails_admin). Additionally, End Point has released a [Ruby on Rails Ecommerce Engine](/blog/2012/01/06/piggybak-mountable-ecommerce-ruby-on) with a sleek admin interface driven by rails_admin. Read more about it [here](http://www.piggybak.org/).
 
 I recently installed the [rails_admin](https://github.com/sferik/rails_admin) gem into a new Rails project. This particular site is currently running on [Interchange](http://www.icdevgroup.org/i/dev), but it is not an ecommerce business, so Interchange is overkill for the site. The client has recently decided to make the switch to Rails (and [DevCamps](http://www.devcamps.org/)) with our help, and they have a moderate budget to do so. For the first increment, we considered installing [phpMyAdmin](http://www.phpmyadmin.net/home_page/index.php) for them to work directly with the data until a nice admin interface was built, but instead I spent a bit of time installing the rails_admin gem which has been on my mind for the last 6 months. The result: I'm **extremely** impressed with what rails_admin has to offer.
 
-To show some examples of rails_admin in action, I'll use the data model from a Sinatra ecommerce setup I [recently wrote about](http://blog.endpoint.com/2011/02/ecommerce-sinatra-shopping-cart.html), because it has a basic ecommerce data model that should be universally understood by my coworkers and clients.
+To show some examples of rails_admin in action, I'll use the data model from a Sinatra ecommerce setup I [recently wrote about](/blog/2011/03/04/ecommerce-sinatra-shopping-cart), because it has a basic ecommerce data model that should be universally understood by my coworkers and clients.
 
 To create a new site, I went through the standard Rails 3.0 installation steps:
 
 - **gem install rails -v=3.0.9** to install Rails
 - **rails new mystore** to create a new Rails application
 - In my gemfile, I added:
+
 ```ruby
 gem 'devise'
 gem 'rails_admin', :path => 'vendor/gems/rails_admin'
@@ -41,7 +38,7 @@ Note that I also tried to use Rails 3.1 and the master branch of rails_admin, bu
 
 After I got everything up and running, my first look at /admin looks nice. It shows the number of records per model, recent history, and a list of models for navigation on the right side:
 
-<img alt="" border="0" id="BLOGGER_PHOTO_ID_5638546496282705090" src="/blog/2011/08/09/railsadmin-gem-ecommerce/image-0.png" style="display:block; margin:0px auto 30px; text-align:center;cursor:pointer; cursor:hand;width: 745px;"/>
+<img alt="" border="0" src="/blog/2011/08/09/railsadmin-gem-ecommerce/image-0.png" style="display:block; margin:0px auto 30px; text-align:center;cursor:pointer; cursor:hand;width: 745px;"/>
 
 rails_admin has a nice DSL to modify the admin interface. I applied a few updates to my application, described below.
 
@@ -59,12 +56,12 @@ class User < ActiveRecord::Base
 end
 ```
 
-<img alt="" border="0" id="BLOGGER_PHOTO_ID_5638546738217496546" src="/blog/2011/08/09/railsadmin-gem-ecommerce/image-1.png" style="display:block; margin:0px auto 0px; text-align:center;cursor:pointer; cursor:hand;width:745px;"/>
+<img alt="" border="0" src="/blog/2011/08/09/railsadmin-gem-ecommerce/image-1.png" style="display:block; margin:0px auto 0px; text-align:center;cursor:pointer; cursor:hand;width:745px;"/>
 Users Tab removed from navigation
 
 ### List Views
 
-<img alt="" border="0" id="BLOGGER_PHOTO_ID_5638546491741049378" src="/blog/2011/08/09/railsadmin-gem-ecommerce/image-2.png" style="display:block; margin:0px auto; text-align:center;cursor:pointer; cursor:hand;width:745px;"/>
+<img alt="" border="0" src="/blog/2011/08/09/railsadmin-gem-ecommerce/image-2.png" style="display:block; margin:0px auto; text-align:center;cursor:pointer; cursor:hand;width:745px;"/>
 Product List View, rails_admin Out of the Box
 
 Next, I updated my products list view with the following changes, to limit the list view to the name and price field, sort by the name, and format the price:
@@ -117,7 +114,7 @@ end
 
 Here's a screenshot of the Products list view after these updates:
 
-<img alt="" border="0" id="BLOGGER_PHOTO_ID_5638546487487717986" src="/blog/2011/08/09/railsadmin-gem-ecommerce/image-3.png" style="display:block; margin:0px auto 30px; text-align:center;cursor:pointer; cursor:hand;width:745px;"/>
+<img alt="" border="0" src="/blog/2011/08/09/railsadmin-gem-ecommerce/image-3.png" style="display:block; margin:0px auto 30px; text-align:center;cursor:pointer; cursor:hand;width:745px;"/>
 
 ### WYSIWIG-ing It
 
@@ -136,7 +133,7 @@ class Page < ActiveRecord::Base
 end
 ```
 
-<img alt="" border="0" id="BLOGGER_PHOTO_ID_5638546495896498306" src="/blog/2011/08/09/railsadmin-gem-ecommerce/image-4.png" style="display:block; margin:0px auto; text-align:center;cursor:pointer; cursor:hand;width:745px;"/>
+<img alt="" border="0" src="/blog/2011/08/09/railsadmin-gem-ecommerce/image-4.png" style="display:block; margin:0px auto; text-align:center;cursor:pointer; cursor:hand;width:745px;"/>
 ckeditor used for content field.
 
 ### Paperclip Image Attachments
@@ -156,7 +153,7 @@ class Product < ActiveRecord::Base
 end
 ```
 
-<img alt="" border="0" id="BLOGGER_PHOTO_ID_5638546742541873570" src="/blog/2011/08/09/railsadmin-gem-ecommerce/image-5.png" style="display:block; margin:0px auto; text-align:center;cursor:pointer; cursor:hand;width:745px;"/>
+<img alt="" border="0" src="/blog/2011/08/09/railsadmin-gem-ecommerce/image-5.png" style="display:block; margin:0px auto; text-align:center;cursor:pointer; cursor:hand;width:745px;"/>
 The products edit view is now a multitype form to allow for image upload.
 
 And to update the show view, I made this change:
@@ -175,7 +172,7 @@ class Product < ActiveRecord::Base
 end
 ```
 
-<img alt="" border="0" id="BLOGGER_PHOTO_ID_5638546739741686978" src="/blog/2011/08/09/railsadmin-gem-ecommerce/image-6.png" style="display:block; margin:0px auto; text-align:center;cursor:pointer; cursor:hand;width:745px;"/>
+<img alt="" border="0" src="/blog/2011/08/09/railsadmin-gem-ecommerce/image-6.png" style="display:block; margin:0px auto; text-align:center;cursor:pointer; cursor:hand;width:745px;"/>
 Thumb image added to product show view.
 
 ### Overriding Views
@@ -190,10 +187,10 @@ Another common update in rails_admin might be the need to override views to chan
     %span.white Store
 ```
 
-<img alt="" border="0" id="BLOGGER_PHOTO_ID_5638546747871093266" src="/blog/2011/08/09/railsadmin-gem-ecommerce/image-7.png" style="display:block; margin:0px auto; text-align:center;cursor:pointer; cursor:hand;width:745px;"/>
+<img alt="" border="0" src="/blog/2011/08/09/railsadmin-gem-ecommerce/image-7.png" style="display:block; margin:0px auto; text-align:center; cursor:pointer; cursor:hand;width:745px;"/>
 After overriding the header view, "My Store" now appears in the header.
 
-<img alt="" border="0" id="BLOGGER_PHOTO_ID_5638546747878312770" src="/blog/2011/08/09/railsadmin-gem-ecommerce/image-8.png" style="display:block; margin:0px auto;text-align:center;cursor:pointer; cursor:hand;width:745px;"/>
+<img alt="" border="0" src="/blog/2011/08/09/railsadmin-gem-ecommerce/image-8.png" style="display:block; margin:0px auto; text-align:center; cursor:pointer; cursor:hand;width:745px;"/>
 And an override of app/views/layouts/rails_admin/main.html.haml removes "Rails Admin | 2011" from the bottom of the page.
 
 ### Conclusion
@@ -211,6 +208,4 @@ Note that a couple of popular alternatives to rails_admin are [ActiveAdmin](http
 
 ### What next?
 
-Since I've already built a Sinatra front-end ecommerce application, I might try to get my Rails admin running with a Sinatra frontend by following tips [in this article](http://m.onkey.org/rails-meets-sinatra). It'll be a little more complex here since I need to map user and admin and user routes to Rails and other routes to Sinatra, but the article covers the general idea for dispatching the routes. Why do it this way? Because you get the best of both worlds: a nice Rails backend for the CRUD interface and API management, and a speedy Sinatra driven frontend with simple paths to define product navigation, product pages, content pages, the cart and checkout process (which is not standard RESTful behavior). You can also leverage Ruby gem functionality in both Sinatra and Rails.
-
-
+Since I've already built a Sinatra front-end ecommerce application, I might try to get my Rails admin running with a Sinatra frontend by following tips [in this article](https://web.archive.org/web/20110830052603/http://m.onkey.org/rails-meets-sinatra). It'll be a little more complex here since I need to map user and admin and user routes to Rails and other routes to Sinatra, but the article covers the general idea for dispatching the routes. Why do it this way? Because you get the best of both worlds: a nice Rails backend for the CRUD interface and API management, and a speedy Sinatra driven frontend with simple paths to define product navigation, product pages, content pages, the cart and checkout process (which is not standard RESTful behavior). You can also leverage Ruby gem functionality in both Sinatra and Rails.
