@@ -5,8 +5,6 @@ tags: hosting, redhat, ruby, rails
 title: Ruby on Rails Typo blog upgrade
 ---
 
-
-
 I needed to migrate a Typo blog (built on Ruby on Rails) from one RHEL 5 x86_64 server to another. To date I've done Ruby on Rails deployments using Apache with FastCGI, mongrel, and Passenger, and I've been looking for an opportunity to try out an nginx + Unicorn deployment to see how it compares. This was that opportunity, and here are the changes that I made to the stack during the migration:
 
 - [Apache](http://httpd.apache.org/) 2.2.3 to [nginx](http://nginx.org/) 0.7.64
@@ -71,7 +69,7 @@ The listen port 8080 is the default, but I may need to change it. Unicorn defaul
 
 I added the following nginx configuration inside the http { ... } block (actually in a separate include file):
 
-```nohighlight
+```nginx
 upstream app_server {
     server 127.0.0.1:8080 fail_timeout=0;
 }
@@ -127,8 +125,6 @@ But when all is said and done, the blog is now running on the latest version of 
 
 As far as blogging platforms go, I can recommend Typo mainly for Rails enthusiasts who want to write their own plugins, tweak the source, etc. WordPress or Movable Type are so much more widely used that non-programmers are going to have a lot easier time deploying and supporting them. They've had a lot more security vulnerabilities requiring updates, though that may also be a function of popularity and payoff for those exploiting them.
 
-Rails deployment seems to take a lot of memory no matter how you do it. I don't think nginx + Unicorn uses much less RAM than Apache + Passenger, mostly the different between nginx and Apache themselves. But using Unicorn does allow for running the application processes on another server or several servers without needing nginx or Apache on those other servers. It does provide for clean separation between the web server and the application(s), including possibly different SELinux contexts rather than always httpd_sys_script_t as we see with Passenger. Passenger at least switches the child process UID to run with different permissions from the main web server, which is good. Both Passenger and Unicorn are much nicer than FastCGI, which I've always found to be a little buggy, and mongrel, which required specifying a range of ports and load-balancing across all of them in the proxy -- managing multiple port ranges is a pain with multiple apps on the same machine, especially when some need more than others.
+Rails deployment seems to take a lot of memory no matter how you do it. I don't think nginx + Unicorn uses much less RAM than Apache + Passenger, mostly the difference between nginx and Apache themselves. But using Unicorn does allow for running the application processes on another server or several servers without needing nginx or Apache on those other servers. It does provide for clean separation between the web server and the application(s), including possibly different SELinux contexts rather than always httpd_sys_script_t as we see with Passenger. Passenger at least switches the child process UID to run with different permissions from the main web server, which is good. Both Passenger and Unicorn are much nicer than FastCGI, which I've always found to be a little buggy, and mongrel, which required specifying a range of ports and load-balancing across all of them in the proxy -- managing multiple port ranges is a pain with multiple apps on the same machine, especially when some need more than others.
 
 I think if you have plenty of RAM, going with Apache + Passenger may still be the easiest Rails web deployment method overall, when mixed with other static content, server-side includes, PHP, and CGIs. But for high-traffic and custom setups, nginx + Unicorn is a nice option.
-
-
