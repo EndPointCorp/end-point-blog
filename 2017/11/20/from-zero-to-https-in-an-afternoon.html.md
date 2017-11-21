@@ -2,6 +2,7 @@
 author: "Matt Vollrath"
 title: "From Zero to HTTPS in an afternoon"
 tags: hosting, security, tls, nginx
+gh_issue_number: 1339
 ---
 
 I've been hosting my own [humble personal web site](https://mvollrath.net) since 2012. I had never bothered setting up HTTPS for my domain, but after hearing about the [Let's Encrypt](https://letsencrypt.org/) project, I was completely out of excuses.
