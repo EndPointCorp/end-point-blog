@@ -1,5 +1,5 @@
 ---
-author: "Peter Hankiewicz"
+author: "Piotr Hankiewicz"
 tags: java
 title: "Hot-deploy Java classes and assets in Wildfly 8/9/10"
 gh_issue_number: 1333

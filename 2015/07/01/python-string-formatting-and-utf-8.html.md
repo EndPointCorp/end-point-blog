@@ -1,5 +1,5 @@
 ---
-author: Muhammad Najmi Ahmad Zabidi
+author: Muhammad Najmi bin Ahmad Zabidi
 gh_issue_number: 1138
 tags: python
 title: Python string formatting and UTF-8 problems workaround

@@ -1,5 +1,5 @@
 ---
-author: Muhammad Najmi Ahmad Zabidi
+author: Muhammad Najmi bin Ahmad Zabidi
 gh_issue_number: 1296
 tags: storage
 title: Half day GlusterFS training in Selangor, Malaysia
