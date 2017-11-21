@@ -1,5 +1,5 @@
 ---
-author: Muhammad Najmi Ahmad Zabidi
+author: Muhammad Najmi bin Ahmad Zabidi
 gh_issue_number: 1274
 tags: community, open-source
 title: Malaysia Open Source Community Meetup Quarter 4 2015 (MOSCMY Q4 2015)

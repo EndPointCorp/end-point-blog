@@ -1,5 +1,5 @@
 ---
-author: Daniel Collis-Puro
+author: Dan Collis-Puro
 gh_issue_number: 55
 tags: database, postgres, payments, ecommerce
 title: Authorize.Net Transaction IDs to increase in size

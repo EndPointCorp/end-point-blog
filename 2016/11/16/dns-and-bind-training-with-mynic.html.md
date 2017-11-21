@@ -1,5 +1,5 @@
 ---
-author: Muhammad Najmi Ahmad Zabidi
+author: Muhammad Najmi bin Ahmad Zabidi
 gh_issue_number: 1267
 tags: sysadmin, training
 title: DNS and BIND Training with MyNIC

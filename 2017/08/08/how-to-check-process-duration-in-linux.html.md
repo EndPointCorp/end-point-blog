@@ -1,5 +1,5 @@
 ---
-author: Muhammad Najmi Ahmad Zabidi
+author: Muhammad Najmi bin Ahmad Zabidi
 gh_issue_number: 1320
 tags: shell, linux
 title: How to check process duration in Linux with the "ps" command
