@@ -2,7 +2,7 @@
 author: Jon Jensen
 title: "Logstash: Removing fields with empty values"
 tags: hosting, logging
-gh_issue_number: 1340
+gh_issue_number: 1341
 ---
 
 The [Elastic stack](https://www.elastic.co/products) is a nice toolkit for collecting, transporting, transforming, aggregating, searching, and reporting on log data from many sources. It was formerly known as the ELK stack, after its main components Elasticsearch, Logstash, and Kibana, but with the addition of Beats and other tools, the company now calls it simply the Elastic stack.
