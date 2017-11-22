@@ -1,5 +1,5 @@
 ---
-author: Joshua Tolley
+author: Josh Tolley
 gh_issue_number: 795
 tags: database, pentaho
 title: Dimensional Modeling

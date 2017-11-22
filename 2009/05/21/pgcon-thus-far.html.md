@@ -1,5 +1,5 @@
 ---
-author: Joshua Tolley
+author: Josh Tolley
 gh_issue_number: 151
 tags: conference, postgres
 title: PGCon thus far

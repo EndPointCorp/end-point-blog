@@ -1,5 +1,5 @@
 ---
-author: Joshua Tolley
+author: Josh Tolley
 gh_issue_number: 814
 tags: database, postgres, sql
 title: Window functions in action

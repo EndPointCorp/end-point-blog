@@ -1,5 +1,5 @@
 ---
-author: Joshua Tolley
+author: Josh Tolley
 gh_issue_number: 595
 tags: conference
 title: UTOSC, here I come

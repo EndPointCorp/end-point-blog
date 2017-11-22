@@ -1,5 +1,5 @@
 ---
-author: Joshua Tolley
+author: Josh Tolley
 gh_issue_number: 419
 tags: tips
 title: What's the difference?

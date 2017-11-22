@@ -1,5 +1,5 @@
 ---
-author: Joshua Tolley
+author: Josh Tolley
 gh_issue_number: 326
 tags: environment, hosting, monitoring, optimization
 title: Why is my load average so high?

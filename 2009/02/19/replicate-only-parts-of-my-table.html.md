@@ -1,5 +1,5 @@
 ---
-author: Joshua Tolley
+author: Josh Tolley
 gh_issue_number: 105
 tags: postgres
 title: Replicate only parts of my table

@@ -1,5 +1,5 @@
 ---
-author: Joshua Tolley
+author: Josh Tolley
 gh_issue_number: 375
 tags: nagios, postgres
 title: check_postgres meets pgbouncer

@@ -1,5 +1,5 @@
 ---
-author: Joshua Tolley
+author: Josh Tolley
 gh_issue_number: 216
 tags: open-source, postgres
 title: Automatically building Pentaho metadata

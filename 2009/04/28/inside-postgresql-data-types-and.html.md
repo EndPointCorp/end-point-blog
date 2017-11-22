@@ -1,5 +1,5 @@
 ---
-author: Joshua Tolley
+author: Josh Tolley
 gh_issue_number: 134
 tags: postgres
 title: Inside PostgreSQL - Data Types and Operator Classes

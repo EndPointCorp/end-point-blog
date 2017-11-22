@@ -1,5 +1,5 @@
 ---
-author: Joshua Tolley
+author: Josh Tolley
 gh_issue_number: 611
 tags: community, conference, database, liquid-galaxy
 title: UTOSC Recap

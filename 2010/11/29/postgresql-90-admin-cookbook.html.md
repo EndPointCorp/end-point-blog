@@ -1,5 +1,5 @@
 ---
-author: Joshua Tolley
+author: Josh Tolley
 gh_issue_number: 385
 tags: postgres
 title: PostgreSQL 9.0 Admin Cookbook

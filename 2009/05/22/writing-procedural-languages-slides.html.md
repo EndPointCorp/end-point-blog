@@ -1,5 +1,5 @@
 ---
-author: Joshua Tolley
+author: Josh Tolley
 gh_issue_number: 152
 tags: conference, postgres
 title: Writing Procedural Languages - slides

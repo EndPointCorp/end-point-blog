@@ -1,5 +1,5 @@
 ---
-author: Joshua Tolley
+author: Josh Tolley
 gh_issue_number: 128
 tags: postgres
 title: OFFSET 0, FTW

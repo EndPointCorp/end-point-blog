@@ -1,5 +1,5 @@
 ---
-author: Joshua Tolley
+author: Josh Tolley
 gh_issue_number: 215
 tags: postgres
 title: PL/LOLCODE and INLINE functions

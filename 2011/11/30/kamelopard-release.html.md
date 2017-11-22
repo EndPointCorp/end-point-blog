@@ -1,5 +1,5 @@
 ---
-author: Joshua Tolley
+author: Josh Tolley
 gh_issue_number: 517
 tags: liquid-galaxy, open-source, ruby, tools
 title: Kamelopard Release

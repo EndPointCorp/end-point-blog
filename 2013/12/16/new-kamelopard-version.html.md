@@ -1,5 +1,5 @@
 ---
-author: Joshua Tolley
+author: Josh Tolley
 gh_issue_number: 898
 tags: kamelopard, liquid-galaxy, ruby
 title: New Kamelopard version

@@ -1,5 +1,5 @@
 ---
-author: Joshua Tolley
+author: Josh Tolley
 gh_issue_number: 333
 tags: database, open-source, postgres, ruby, scalability
 title: Distributed Transactions and Two-Phase Commit

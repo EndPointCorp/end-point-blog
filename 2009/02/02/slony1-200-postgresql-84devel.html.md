@@ -1,5 +1,5 @@
 ---
-author: Joshua Tolley
+author: Josh Tolley
 gh_issue_number: 96
 tags: postgres
 title: Slony1-2.0.0 + PostgreSQL 8.4devel

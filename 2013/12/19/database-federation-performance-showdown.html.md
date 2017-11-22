@@ -1,5 +1,5 @@
 ---
-author: Joshua Tolley
+author: Josh Tolley
 gh_issue_number: 903
 tags: database, java, performance, postgres
 title: Database federation performance showdown

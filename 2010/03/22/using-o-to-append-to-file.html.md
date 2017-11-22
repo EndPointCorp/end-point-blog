@@ -1,5 +1,5 @@
 ---
-author: Joshua Tolley
+author: Josh Tolley
 gh_issue_number: 280
 tags: postgres
 title: Using psql \o to append to a file

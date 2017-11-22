@@ -1,5 +1,5 @@
 ---
-author: Joshua Tolley
+author: Josh Tolley
 gh_issue_number: 212
 tags: books, java, pentaho
 title: Pentaho Reporting 3.5 for Java Developers

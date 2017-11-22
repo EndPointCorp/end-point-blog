@@ -1,5 +1,5 @@
 ---
-author: Joshua Tolley
+author: Josh Tolley
 gh_issue_number: 122
 tags: postgres
 title: Inside PostgreSQL -- Multi-Batch Hash Join Improvements

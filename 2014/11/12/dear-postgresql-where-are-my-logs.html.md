@@ -1,5 +1,5 @@
 ---
-author: Joshua Tolley
+author: Josh Tolley
 gh_issue_number: 1053
 tags: postgres
 title: 'Dear PostgreSQL: Where are my logs?'
