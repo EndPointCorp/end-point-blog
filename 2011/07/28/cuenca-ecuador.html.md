@@ -1,5 +1,5 @@
 ---
-author: Ben Goldstein
+author: Benjamin Goldstein
 gh_issue_number: 480
 tags: company, travel, remote-work
 title: Cuenca, Ecuador

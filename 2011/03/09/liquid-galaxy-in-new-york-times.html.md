@@ -1,5 +1,5 @@
 ---
-author: Ben Goldstein
+author: Benjamin Goldstein
 gh_issue_number: 426
 tags: clients, company, liquid-galaxy
 title: Liquid Galaxy in The New York Times

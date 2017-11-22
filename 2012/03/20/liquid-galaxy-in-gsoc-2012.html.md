@@ -1,5 +1,5 @@
 ---
-author: Ben Goldstein
+author: Benjamin Goldstein
 gh_issue_number: 573
 tags: liquid-galaxy, open-source
 title: Liquid Galaxy in GSoC 2012!

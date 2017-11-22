@@ -1,5 +1,5 @@
 ---
-author: Ben Goldstein
+author: Benjamin Goldstein
 gh_issue_number: 913
 tags: jobs, liquid-galaxy
 title: "End Point’s New Tennessee Office — We’re Hiring!"

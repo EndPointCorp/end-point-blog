@@ -1,5 +1,5 @@
 ---
-author: Ben Goldstein
+author: Benjamin Goldstein
 gh_issue_number: 382
 tags: jobs, linux, liquid-galaxy, sysadmin
 title: Liquid Galaxy Sysadmin+ Wanted
