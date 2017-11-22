@@ -1,5 +1,5 @@
 ---
-author: Ben Goldstein
+author: Benjamin Goldstein
 gh_issue_number: 360
 tags: liquid-galaxy
 title: Two Cool Things about Liquid Galaxy

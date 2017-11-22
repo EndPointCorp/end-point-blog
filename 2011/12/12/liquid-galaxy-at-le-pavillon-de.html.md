@@ -1,5 +1,5 @@
 ---
-author: Ben Goldstein
+author: Benjamin Goldstein
 gh_issue_number: 524
 tags: clients, liquid-galaxy
 title: Liquid Galaxy at Le Pavillon de l'Arsenal in Paris

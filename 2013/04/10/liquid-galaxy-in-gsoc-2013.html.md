@@ -1,5 +1,5 @@
 ---
-author: Ben Goldstein
+author: Benjamin Goldstein
 gh_issue_number: 787
 tags: community, liquid-galaxy
 title: Liquid Galaxy in GSoC 2013!

@@ -1,5 +1,5 @@
 ---
-author: Ben Goldstein
+author: Benjamin Goldstein
 gh_issue_number: 358
 tags: company, liquid-galaxy
 title: Google Liquid Galaxy Support

@@ -1,5 +1,5 @@
 ---
-author: Ben Goldstein
+author: Benjamin Goldstein
 gh_issue_number: 744
 tags: liquid-galaxy
 title: Oceanographic Museum of Monaco Liquid Galaxy

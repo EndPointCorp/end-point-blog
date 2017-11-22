@@ -1,5 +1,5 @@
 ---
-author: Ben Goldstein
+author: Benjamin Goldstein
 gh_issue_number: 393
 tags: analytics, ecommerce, interchange, javascript
 title: New Year Bug Bites

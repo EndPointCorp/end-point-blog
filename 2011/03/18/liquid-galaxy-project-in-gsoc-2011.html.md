@@ -1,5 +1,5 @@
 ---
-author: Ben Goldstein
+author: Benjamin Goldstein
 gh_issue_number: 431
 tags: liquid-galaxy
 title: Liquid Galaxy Project in GSoC 2011!
