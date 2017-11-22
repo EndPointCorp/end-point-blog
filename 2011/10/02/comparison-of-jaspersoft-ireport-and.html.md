@@ -1,5 +1,5 @@
 ---
-author: Joshua Tolley
+author: Josh Tolley
 gh_issue_number: 503
 tags: analytics, database, open-source, reporting
 title: A comparison of JasperSoft iReport and Pentaho Reporting

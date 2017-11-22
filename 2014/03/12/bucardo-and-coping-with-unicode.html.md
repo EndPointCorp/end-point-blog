@@ -1,5 +1,5 @@
 ---
-author: Joshua Tolley
+author: Josh Tolley
 gh_issue_number: 944
 tags: bucardo, perl, postgres, replication, unicode
 title: Bucardo, and Coping with Unicode

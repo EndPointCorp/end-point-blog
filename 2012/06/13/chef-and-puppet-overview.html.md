@@ -1,5 +1,5 @@
 ---
-author: Joshua Tolley
+author: Josh Tolley
 gh_issue_number: 631
 tags: chef, devops, puppet
 title: Chef and Puppet Overview

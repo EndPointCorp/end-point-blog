@@ -1,5 +1,5 @@
 ---
-author: Joshua Tolley
+author: Josh Tolley
 gh_issue_number: 312
 tags: community, conference, database, open-source, postgres
 title: The PGCon "Hall Track"

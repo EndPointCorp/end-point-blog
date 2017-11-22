@@ -1,5 +1,5 @@
 ---
-author: Joshua Tolley
+author: Josh Tolley
 gh_issue_number: 489
 tags: google-earth, liquid-galaxy
 title: Giraffes and Liquid Galaxy

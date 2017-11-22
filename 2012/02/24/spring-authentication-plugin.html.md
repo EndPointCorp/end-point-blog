@@ -1,5 +1,5 @@
 ---
-author: Joshua Tolley
+author: Josh Tolley
 gh_issue_number: 558
 tags: java, pentaho
 title: Spring authentication plugin

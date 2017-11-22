@@ -1,5 +1,5 @@
 ---
-author: Joshua Tolley
+author: Josh Tolley
 gh_issue_number: 347
 tags: postgres
 title: Reducing bloat without locking

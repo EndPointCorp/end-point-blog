@@ -1,5 +1,5 @@
 ---
-author: Joshua Tolley
+author: Josh Tolley
 gh_issue_number: 788
 tags: google-earth, kamelopard, liquid-galaxy, open-source, ruby
 title: Creating Smooth Flight Paths in Google Earth with Kamelopard and Math

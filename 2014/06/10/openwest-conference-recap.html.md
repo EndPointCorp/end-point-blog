@@ -1,5 +1,5 @@
 ---
-author: Joshua Tolley
+author: Josh Tolley
 gh_issue_number: 993
 tags: community, conference
 title: OpenWest Conference Recap

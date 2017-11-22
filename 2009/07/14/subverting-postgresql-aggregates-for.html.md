@@ -1,5 +1,5 @@
 ---
-author: Joshua Tolley
+author: Josh Tolley
 gh_issue_number: 171
 tags: postgres
 title: Subverting PostgreSQL Aggregates for Pentaho

@@ -1,5 +1,5 @@
 ---
-author: Joshua Tolley
+author: Josh Tolley
 gh_issue_number: 984
 tags: gis, google-earth, kamelopard, liquid-galaxy, open-source
 title: Kamelopard version 0.0.15 released

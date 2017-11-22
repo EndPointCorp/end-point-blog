@@ -1,5 +1,5 @@
 ---
-author: Joshua Tolley
+author: Josh Tolley
 gh_issue_number: 338
 tags: open-source, postgres
 title: Creativity with fuzzy string search

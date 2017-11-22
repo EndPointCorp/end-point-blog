@@ -1,5 +1,5 @@
 ---
-author: Joshua Tolley
+author: Josh Tolley
 gh_issue_number: 1019
 tags: graphics, liquid-galaxy
 title: Point Clouds on the Liquid Galaxy

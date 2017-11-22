@@ -1,5 +1,5 @@
 ---
-author: Joshua Tolley
+author: Josh Tolley
 gh_issue_number: 799
 tags: database, mysql, open-source, postgres, sql, tools
 title: Foreign Data Wrappers

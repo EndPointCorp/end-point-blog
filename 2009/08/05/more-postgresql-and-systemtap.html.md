@@ -1,5 +1,5 @@
 ---
-author: Joshua Tolley
+author: Josh Tolley
 gh_issue_number: 181
 tags: postgres
 title: More PostgreSQL and SystemTap

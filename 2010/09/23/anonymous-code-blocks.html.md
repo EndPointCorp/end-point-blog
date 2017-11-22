@@ -1,5 +1,5 @@
 ---
-author: Joshua Tolley
+author: Josh Tolley
 gh_issue_number: 353
 tags: database, open-source, postgres
 title: Anonymous code blocks
