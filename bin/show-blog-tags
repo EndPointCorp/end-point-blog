@@ -1,0 +1,4 @@
+#!/bin/bash
+
+cd $( cd "$( dirname "${BASH_SOURCE[0]}" )" > /dev/null && pwd )/.. || exit 1
+git grep -h '^tags:' | perl -pe 's/^tags: *//; s/ *, */\n/g' | sort | uniq -c | sort -nr
