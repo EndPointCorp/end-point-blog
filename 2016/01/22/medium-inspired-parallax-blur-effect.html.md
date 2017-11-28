@@ -143,7 +143,7 @@ public function wp_blur_attachment_filter($post_ID) {
 }
 ```
 
-Or better yet, use cloud image processing — I wrote about that [here](http://blog.endpoint.com/2015/12/image-processing-in-cloud-with-blitline.html).
+Or better yet, use cloud image processing — I wrote about that [here](/blog/2015/12/01/image-processing-in-cloud-with-blitline).
 
 I hope you found this writeup useful!
 

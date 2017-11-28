@@ -5,7 +5,7 @@ tags: ecommerce, rails, spree
 title: A Ruby on Rails Tag Cloud Tutorial with Spree
 ---
 
-<a href="http://blog.endpoint.com/2011/02/in-our-own-words.html"><img border="0" src="/blog/2011/03/07/rails-tag-cloud-tutorial-spree/image-0.png" width="754px"/></a>
+<a href="/blog/2011/02/02/in-our-own-words"><img border="0" src="/blog/2011/03/07/rails-tag-cloud-tutorial-spree/image-0.png" width="754px"/></a>
 
 A tag cloud from a recent End Point blog post.
 

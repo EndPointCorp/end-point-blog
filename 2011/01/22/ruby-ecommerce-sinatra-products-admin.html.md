@@ -7,7 +7,7 @@ title: 'Ruby Ecommerce with Sinatra: Admin and Products'
 
 
 
-Last week, I [wrote about creating a very simple ecommerce application on Ruby with Sinatra](http://blog.endpoint.com/2011/01/sinatra-ecommerce-tutorial.html). This week, we continue on the yellow brick road of ecommerce development on Ruby with Sinatra.
+Last week, I [wrote about creating a very simple ecommerce application on Ruby with Sinatra](/blog/2011/01/17/sinatra-ecommerce-tutorial). This week, we continue on the yellow brick road of ecommerce development on Ruby with Sinatra.
 
 <a href="http://www.flickr.com/photos/airdiogo/4640440092/" title="yellow brick road by airdiogo, on Flickr"><img alt="yellow brick road" height="238" src="/blog/2011/01/22/ruby-ecommerce-sinatra-products-admin/image-0.jpeg" width="500"/></a>
 
@@ -286,7 +286,7 @@ functions.order = {
 <p style="text-align:center;"><a href="/blog/2011/01/22/ruby-ecommerce-sinatra-products-admin/image-5-big.png" onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5565131571665096178" src="/blog/2011/01/22/ruby-ecommerce-sinatra-products-admin/image-5.png" style="display:block; margin:0px auto 10px; text-align:center;cursor:pointer; cursor:hand;width: 400px; height: 283px;"/></a><br/>For this example, we limit order editing to email and phone number changes.</p>
 </td></tr></tbody></table>
 
-With a final touch of frontend JavaScript and CSS changes, the following screenshots show the two customer-facing pages from our example store. Like the application described in the [previous article](http://blog.endpoint.com/2011/01/sinatra-ecommerce-tutorial.html), this ecommerce application is still fairly lightweight, but it now allows us to sell several products and manage our resources via the admin panel. Stay tuned for the next increment!
+With a final touch of frontend JavaScript and CSS changes, the following screenshots show the two customer-facing pages from our example store. Like the application described in the [previous article](/blog/2011/01/17/sinatra-ecommerce-tutorial), this ecommerce application is still fairly lightweight, but it now allows us to sell several products and manage our resources via the admin panel. Stay tuned for the next increment!
 
 <table cellpadding="0" cellspacing="0" width="100%">
 <tbody><tr><td valign="top" width="50%">

@@ -11,7 +11,7 @@ Recently I was given the task of building out a new development server for one o
 
 Hetzner provides a scripted install process that you can kick off after booting the machine into rescue mode. I followed this process and selected CentOS 7 and proceeded through the whole process without a problem. After rebooting the server and logging in to verify everything, I noticed that the disk space was capped at 2 TB, even though the machine had two 3 TB drives in it (in hardware RAID 1). I looked at the partitions and found the partition table was "msdos". Ah ha!
 
-At this point [painful memories of running into this problem before](http://blog.endpoint.com/2013/11/installing-centos-5-on-3tb-drive.html) hit me. I reviewed our notes of what we had done last time, and felt like it was worth a shot even though this time I'm dealing with CentOS 7. I went through the steps up to patching anaconda and then found that anaconda for CentOS 7 is newer and the files are different. I couldn't find any files that care about the partition table type, so I didn't patch anything.
+At this point [painful memories of running into this problem before](/blog/2013/11/06/installing-centos-5-on-3tb-drive) hit me. I reviewed our notes of what we had done last time, and felt like it was worth a shot even though this time I'm dealing with CentOS 7. I went through the steps up to patching anaconda and then found that anaconda for CentOS 7 is newer and the files are different. I couldn't find any files that care about the partition table type, so I didn't patch anything.
 
 I then tried to run the CentOS 7 install as-is. This only got me so far because I then ran into trouble with NetworkManager timing out and not starting.
 

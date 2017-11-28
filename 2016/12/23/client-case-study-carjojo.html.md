@@ -73,7 +73,7 @@ To use the location information in the database, some GIS location smarts were t
 
 <div class="separator" style="clear: both; text-align: center;"><span id="docs-internal-guid-adf4efb0-192c-c5d7-47f8-c173ae3b292c" style='background-color: transparent; color: black; font-family: "arial"; font-size: 14.6667px; font-style: normal; font-variant: normal; font-weight: 400; margin-left: 1em; margin-right: 1em; text-decoration: none; vertical-align: baseline;'><img height="120" src="/blog/2016/12/23/client-case-study-carjojo/image-6.png" style="border: medium none; transform: rotate(0rad);" width="356"/></span></div>
 
-The approach worked well for most cases. However, sometimes Carjojo wanted something slightly different than what DimpleJS does out of the box. One example of DimpleJS customization work can be found [here on our blog](http://blog.endpoint.com/2015/10/intro-to-dimplejs-graphing-in-6-easy.html).
+The approach worked well for most cases. However, sometimes Carjojo wanted something slightly different than what DimpleJS does out of the box. One example of DimpleJS customization work can be found [here on our blog](/blog/2015/10/15/intro-to-dimplejs-graphing-in-6-easy).
 
 Another thing to note about the data visualizations was that sometimes when the data was plotted and graphed, it brought to light some discrepancies in the back-end calculations and analytics, requiring some back-and-forth between the Carjojo DBA and End Point.
 

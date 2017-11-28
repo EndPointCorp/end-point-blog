@@ -98,7 +98,7 @@ That's really not a good plan! It gets worse:
    Filter: (relname ~~ $1)</span>
 ```
 
-Before version 9.2, the prepared statement's plan was locked in place. This was the cause of many woes, and the reason why programs and functions were "slow" but [the same queries were fast on the command line](http://blog.endpoint.com/2008/12/why-is-my-function-slow.html). Enter Tom Lane's 
+Before version 9.2, the prepared statement's plan was locked in place. This was the cause of many woes, and the reason why programs and functions were "slow" but [the same queries were fast on the command line](/blog/2008/12/11/why-is-my-function-slow). Enter Tom Lane's 
 [commit](http://git.postgresql.org/gitweb/?p=postgresql.git;a=commitdiff;h=e6faf910d75027bdce7cd0f2033db4e912592bcc) from September 2011:
 
 ```

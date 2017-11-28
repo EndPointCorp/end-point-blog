@@ -5,9 +5,9 @@ tags: ecommerce, rails, spree
 title: Dissecting a Rails 3 Spree Extension Upgrade
 ---
 
-A while back, I wrote about the release of Spree 0.30.* [here](http://blog.endpoint.com/2010/10/spree-on-rails-3-part-one.html) and [here](http://blog.endpoint.com/2010/10/spree-on-rails-3-part-two.html). I didn't describe extension development in depth because I hadn't developed any Rails 3 extensions of substance for End Point's clients. Last month, I worked on an advanced reporting extension for a client running on Spree 0.10.2. I spent some time upgrading this extension to be compatible with Rails 3 because I expect the client to move in the direction of Rails 3 and because I wanted the extension to be available to the community since Spree's reporting is fairly lightweight.
+A while back, I wrote about the release of Spree 0.30.* [here](/blog/2010/10/25/spree-on-rails-3-part-one) and [here](/blog/2010/10/25/spree-on-rails-3-part-two). I didn't describe extension development in depth because I hadn't developed any Rails 3 extensions of substance for End Point's clients. Last month, I worked on an advanced reporting extension for a client running on Spree 0.10.2. I spent some time upgrading this extension to be compatible with Rails 3 because I expect the client to move in the direction of Rails 3 and because I wanted the extension to be available to the community since Spree's reporting is fairly lightweight.
 
-Just a quick rundown on what the extension does: It provides incremental reports such as revenue, units sold, profit (calculated by sales minus cost) in daily, weekly, monthly, quarterly, and yearly increments. It reports Geodata to show revenue, units sold, and profit by [US] states and countries. There are also two special reports that show top products and customers. The extension allows administrators to limit results by order date, "store" (for [Spree's multi-site architecture](http://blog.endpoint.com/2010/05/spree-multi-store-architecture.html)), product, and taxon. Finally, the extension provides the ability to export data in PDF or CSV format using the Ruport gem. One thing to note is that this extensions does not include new models – this is significant only because Rails 3 introduced significant changes to ActiveRecord, which are not described in this article.
+Just a quick rundown on what the extension does: It provides incremental reports such as revenue, units sold, profit (calculated by sales minus cost) in daily, weekly, monthly, quarterly, and yearly increments. It reports Geodata to show revenue, units sold, and profit by [US] states and countries. There are also two special reports that show top products and customers. The extension allows administrators to limit results by order date, "store" (for [Spree's multi-site architecture](/blog/2010/05/24/spree-multi-store-architecture)), product, and taxon. Finally, the extension provides the ability to export data in PDF or CSV format using the Ruport gem. One thing to note is that this extensions does not include new models – this is significant only because Rails 3 introduced significant changes to ActiveRecord, which are not described in this article.
 
 <table cellpadding="0" cellspacing="0" width="100%">
 <tbody><tr>
@@ -277,7 +277,7 @@ index 0000000..c878a04
 
 ### Relocation of hooks file
 
-A minor change with the extension upgrade is a relocation of the hooks file. Spree hooks allow you to interact with core Spree views, described more in depth [here](http://blog.endpoint.com/2010/01/rails-ecommerce-spree-hooks-tutorial.html) and [here](http://blog.endpoint.com/2010/01/rails-ecommerce-spree-hooks-comments.html).
+A minor change with the extension upgrade is a relocation of the hooks file. Spree hooks allow you to interact with core Spree views, described more in depth [here](/blog/2010/01/12/rails-ecommerce-spree-hooks-tutorial) and [here](/blog/2010/01/13/rails-ecommerce-spree-hooks-comments).
 
 ```diff
 diff --git a/advanced_reporting_hooks.rb b/advanced_reporting_hooks.rb

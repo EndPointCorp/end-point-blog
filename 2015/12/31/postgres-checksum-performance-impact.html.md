@@ -67,7 +67,7 @@ SELECT 1
 
 Finally, we will modify the data page on disk using sed, then ask Postgres to display 
 the data, which should cause the checksum to fail and send up an alarm. (Unlike my 
-coworker [Josh's checksum post](http://blog.endpoint.com/2013/10/downstream-implications-of-data-page.html), I will change the actual checksum and not the data, but the principle is the same).
+coworker [Josh's checksum post](/blog/2013/10/30/downstream-implications-of-data-page), I will change the actual checksum and not the data, but the principle is the same).
 
 ```
 ~/pg/9.4$ export P=5594

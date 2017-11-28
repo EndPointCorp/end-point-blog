@@ -81,7 +81,7 @@ Aha! **SMB** is not just a random placement of three letters, it is a big clue a
 causing this message. SMB stands for [Server Message Block](https://en.wikipedia.org/wiki/Server_Message_Block), and is used by a variety of things. We can guess that this is either some program randomly hitting 
 the Postgres port without realizing what it is, or some sort of purposeful port scanner. Why would something 
 want to connect to the port but not log in? For one, you can [determine the version of Postgres 
-without logging in](http://blog.endpoint.com/2010/05/finding-postgresql-version-without.html).
+without logging in](/blog/2010/05/17/finding-postgresql-version-without).
 
 To cut to the chase, the culprit is the [nmap](http://nmap.org/) program. In addition to simply 
 scanning ports, it has the ability to do a [deeper inspection](http://nmap.org/book/man-version-detection.html) to determine not only what is running on each port, but what version it is as well (with the "**-sV**" argument). Let's see nmap in action. We will use a non-standard Postgres port so as not to give it any additional hints about what is on that port:

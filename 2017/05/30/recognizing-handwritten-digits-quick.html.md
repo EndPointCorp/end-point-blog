@@ -7,8 +7,8 @@ title: Recognizing handwritten digits - a quick peek into the basics of machine 
 
 Previous in series:
 
-- [Learning from data basics - the Naive Bayes model](http://blog.endpoint.com/2016/03/learning-from-data-basics-naive-bayes.html)
-- [Learning from data basics II - simple Bayesian Networks](http://blog.endpoint.com/2016/04/learning-from-data-basics-ii-simple.html)
+- [Learning from data basics - the Naive Bayes model](/blog/2016/03/23/learning-from-data-basics-naive-bayes)
+- [Learning from data basics II - simple Bayesian Networks](/blog/2016/04/12/learning-from-data-basics-ii-simple)
 
 In the previous two posts on machine learning, I presented a very basic introduction of an approach called "probabilistic graphical models". In this post I'd like to take a tour of some different techniques while creating code that will recognize handwritten digits.
 

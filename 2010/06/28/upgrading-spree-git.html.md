@@ -9,7 +9,7 @@ Lately, I've upgraded a few Spree projects with the recent Spree releases. Spree
 
 <a href="http://spreecommerce.com/"><img alt="Spree" src="http://spreecommerce.com/images/new_logo.png"/></a>
 
-First, I made sure my application was running and committed all recent changes to have a clean branch. I follow the development principles outlined [here](http://blog.endpoint.com/2010/03/spree-software-development.html) that describe methodology for developing custom functionality on top of the Spree framework core. All of my custom functionality lives in the RAILS_ROOT/vendor/extensions/site/ directory, so that directory probably won't be touched during the upgrade.
+First, I made sure my application was running and committed all recent changes to have a clean branch. I follow the development principles outlined [here](/blog/2010/03/31/spree-software-development) that describe methodology for developing custom functionality on top of the Spree framework core. All of my custom functionality lives in the RAILS_ROOT/vendor/extensions/site/ directory, so that directory probably won't be touched during the upgrade.
 
 ```nohighlight
 steph@The-Laptop:/var/www/ep/myproject$ git status

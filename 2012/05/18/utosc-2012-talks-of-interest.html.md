@@ -5,7 +5,7 @@ tags: browsers, conference, javascript, python, redhat, security, sysadmin, virt
 title: UTOSC 2012 talks of interest
 ---
 
-It's been two weeks now since the [Utah Open Source Conference](http://conference.utos.org/) for 2012. My fellow End Pointers wrote previously about it: Josh Ausborne about the [mini Liquid Galaxy](http://blog.endpoint.com/2012/05/end-point-at-utah-open-source.html) we set up there for everyone to play with, and Josh Tolley with a [write-up of his talks](http://blog.endpoint.com/2012/05/utosc-recap.html) on database constraints and KML for geographic mapping markup.
+It's been two weeks now since the [Utah Open Source Conference](http://conference.utos.org/) for 2012. My fellow End Pointers wrote previously about it: Josh Ausborne about the [mini Liquid Galaxy](/blog/2012/05/05/end-point-at-utah-open-source) we set up there for everyone to play with, and Josh Tolley with a [write-up of his talks](/blog/2012/05/10/utosc-recap) on database constraints and KML for geographic mapping markup.
 
 There were a lot of interesting talks planned, and I could only attend some of them. I really enjoyed these:
 
@@ -15,7 +15,7 @@ There were a lot of interesting talks planned, and I could only attend some of t
 
 - Clint Savage about RPM packaging with [Mock](http://fedoraproject.org/wiki/Projects/Mock) & [Koji](http://fedoraproject.org/wiki/Koji)
 
-- Daniel Evans on testing web applications with [Capybara](https://github.com/jnicklas/capybara), embedded WebKit, and Selenium (which End Pointer Mike Farmer [wrote about here](http://blog.endpoint.com/2011/12/running-integration-tests-in-webkit.html) back in December)
+- Daniel Evans on testing web applications with [Capybara](https://github.com/jnicklas/capybara), embedded WebKit, and Selenium (which End Pointer Mike Farmer [wrote about here](/blog/2011/12/08/running-integration-tests-in-webkit) back in December)
 
 - Aaron Toponce on [breaking full-disk encryption](http://aarontoponce.org/presents/breaking-encryption/) (I missed this talk, but learned about it from Aaron in the hallway track and his slides afterwards)
 

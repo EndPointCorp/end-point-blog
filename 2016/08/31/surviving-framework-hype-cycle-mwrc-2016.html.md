@@ -5,7 +5,7 @@ tags: conference, frameworks
 title: Surviving the Framework Hype Cycle (MWRC 2016)
 ---
 
-Back in March, I attended MountainWest RubyConf with my co-workers Phunk and Phin. Shortly thereafter, Phin wrote about a couple of his favorite talks: [Writing a Test Framework from Scratch](http://blog.endpoint.com/2016/04/writing-test-framework-from-scratch.html) and [How to Build a Skyscraper](http://blog.endpoint.com/2016/04/how-to-build-skyscraper.html).
+Back in March, I attended MountainWest RubyConf with my co-workers Phunk and Phin. Shortly thereafter, Phin wrote about a couple of his favorite talks: [Writing a Test Framework from Scratch](/blog/2016/04/08/writing-test-framework-from-scratch) and [How to Build a Skyscraper](/blog/2016/04/19/how-to-build-skyscraper).
 
 I've found that another talk from the conference has stuck with me and I've referred to it several times in conversations. It is "Surviving the Framework Hype Cycle" by Brandon Hays. It is funny, engaging, insightful, and especially cathartic given the rapid pace of change in frameworks these days.
 

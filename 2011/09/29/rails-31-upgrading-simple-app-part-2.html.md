@@ -7,7 +7,7 @@ title: 'Rails 3.1: Upgrading a Simple App - Part 2'
 
 
 
-I recently [wrote about upgrading a simple Rails app](http://blog.endpoint.com/2011/09/rails-31-upgrading-simple-app-part-1.html), which involved applying routing, mailer, ActiveRecord, etc. updates to my Rails 2.1.2 application. An equally important part of the upgrade is working with the [asset pipeline](http://guides.rubyonrails.org/asset_pipeline.html), a framework that creates an architecture for managing JavaScript, CSS, and image assets in your Rails 3.1 application.
+I recently [wrote about upgrading a simple Rails app](/blog/2011/09/21/rails-31-upgrading-simple-app-part-1), which involved applying routing, mailer, ActiveRecord, etc. updates to my Rails 2.1.2 application. An equally important part of the upgrade is working with the [asset pipeline](http://guides.rubyonrails.org/asset_pipeline.html), a framework that creates an architecture for managing JavaScript, CSS, and image assets in your Rails 3.1 application.
 
 ### File Reorganization
 
@@ -136,7 +136,7 @@ These updates sorted out the JavaScript errors.
 
 ### Sass
 
-One of the great things about Rails 3.1 is that it makes using Sass or scss very easy. I've written about Sass a couple of times before ([here](http://blog.endpoint.com/2011/05/sass-at-railsconf-2011.html) and [here](http://blog.endpoint.com/2011/05/railsconf-2011-day-one.html)) and am happy to leverage its functionality. The stylesheets were updated to have a *.scss extension to force scss template rendering. I introduced variables, which allow you to easily represent and update colors used globally:
+One of the great things about Rails 3.1 is that it makes using Sass or scss very easy. I've written about Sass a couple of times before ([here](/blog/2011/05/18/sass-at-railsconf-2011) and [here](/blog/2011/05/16/railsconf-2011-day-one)) and am happy to leverage its functionality. The stylesheets were updated to have a *.scss extension to force scss template rendering. I introduced variables, which allow you to easily represent and update colors used globally:
 
 ```scss
 $blue: #195065;
@@ -162,7 +162,7 @@ Read more about other great Sass features like Mixins, Selector Inheritance, Fun
 
 Closing thoughts:
 
-- I spent equal time on asset pipeline updates and non-asset pipeline updates described in [the previous article](http://blog.endpoint.com/2011/09/rails-31-upgrading-simple-app-part-1.html). A coworker commented that he was surprised it took so long to work through the upgrade. The upgrade to Rails 3.1 is not trivial, but there are plenty of great resources out there. I found the [Rails Guides](http://guides.rubyonrails.org/index.html) to be particularly helpful.
+- I spent equal time on asset pipeline updates and non-asset pipeline updates described in [the previous article](/blog/2011/09/21/rails-31-upgrading-simple-app-part-1). A coworker commented that he was surprised it took so long to work through the upgrade. The upgrade to Rails 3.1 is not trivial, but there are plenty of great resources out there. I found the [Rails Guides](http://guides.rubyonrails.org/index.html) to be particularly helpful.
 - I did not leverage [CoffeeScript](http://jashkenas.github.com/coffee-script/), which is a meta language that compiles into JavaScript much like how scss compiles into css. I don't have experience working with CoffeeScript and I didn't feel like this was the project to start learning it.
 - I did not reorganize any image assets. However, I've done this in another Rails 3.1 application and have found it to be relatively painless.
 

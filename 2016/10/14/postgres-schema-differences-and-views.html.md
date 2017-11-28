@@ -15,7 +15,7 @@ This works great, but there are some gotchas, especially when dumping [database 
 
 First some background as to how this issue was discovered. We have a client that is in the process of upgrading from Postgres 9.2 to the Postgres 9.6 (the latest version as of this writing).
 
-Using the [pg_upgrade program](https://www.postgresql.org/docs/current/static/pgupgrade.html) was not an option, because not only are [data checksums](http://blog.endpoint.com/2015/12/postgres-checksum-performance-impact.html) going to be enabled, but the encoding is being moved to UTF-8. A number of factors, especially the UTF-8 change, meant that the typical upgrade process of **pg_dump old_database | psql new_database** was not possible.
+Using the [pg_upgrade program](https://www.postgresql.org/docs/current/static/pgupgrade.html) was not an option, because not only are [data checksums](/blog/2015/12/31/postgres-checksum-performance-impact) going to be enabled, but the encoding is being moved to UTF-8. A number of factors, especially the UTF-8 change, meant that the typical upgrade process of **pg_dump old_database | psql new_database** was not possible.
 
 Thus, we have a very custom program that carefully migrates pieces over, performing some transformations along the way.
 

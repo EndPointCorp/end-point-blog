@@ -7,7 +7,7 @@ title: 'jQuery Performance Tips: Slice, Filter, parentsUntil'
 
 
 
-I recently wrote about working with an [intensive jQuery UI interface to emulate highlighting text](http://blog.endpoint.com/2013/01/javascript-driven-interactive.html). During this work, I experimented with and worked with jQuery optimization quite a bit. In the previous blog article, I mentioned that in some cases, the number of DOM elements that I was traversing at times exceeded 44,000, which caused significant performance issues in all browsers. Here are a few things I was reminded of, or learned throughout the project. 
+I recently wrote about working with an [intensive jQuery UI interface to emulate highlighting text](/blog/2013/01/25/javascript-driven-interactive). During this work, I experimented with and worked with jQuery optimization quite a bit. In the previous blog article, I mentioned that in some cases, the number of DOM elements that I was traversing at times exceeded 44,000, which caused significant performance issues in all browsers. Here are a few things I was reminded of, or learned throughout the project. 
 
 - console.profile, console.time, and the Chrome timeline are all tools that I used during the project to some extent. I typically used console.time the most to identify which methods were taking the most time.
 - Caching elements is a valuable performance tool, as it's typically faster to run jQuery calls on a cached jQuery selector rather than reselecting the elements. Here's an example:

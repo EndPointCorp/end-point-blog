@@ -13,7 +13,7 @@ My RailsConf Sketchnote Summary
 
 In the heat of the moment, it's hard for me to do anything other than regurgitate RailsConf talks into blog articles (case in point: 
 
-[my review of Leah Silber's talk on building an open source focused company](http://blog.endpoint.com/2014/04/building-open-source-software-centric.html), and [my summary of the machine learning workshop at RailsConf](http://blog.endpoint.com/2014/04/railsconf-2014-on-machine-learning.html)). But after a bit of processing and brain-churning, I've pieced together the common themes that resonated for me throughout RailsConf, in Sketchnote form!
+[my review of Leah Silber's talk on building an open source focused company](/blog/2014/04/25/building-open-source-software-centric), and [my summary of the machine learning workshop at RailsConf](/blog/2014/04/24/railsconf-2014-on-machine-learning)). But after a bit of processing and brain-churning, I've pieced together the common themes that resonated for me throughout RailsConf, in Sketchnote form!
 
 There was of course a bit of bantering regarding code as "writing" versus code as "engineering" and the arguments supporting both ends of the spectrum. As my fifth RailsConf, I did walk away with some Rails topical knowledge, but the overwhelming theme of many talks I attended was the human element behind coding. People as a part of building communities, sharing commonalities, building relationships and mentorships, being influenced by their own biases and perceptions. Many of my memorable talks of the conference for me had great stories, great humor, and both.
 

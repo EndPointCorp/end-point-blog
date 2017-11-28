@@ -9,7 +9,7 @@ title: FOSDEM conference day 2
 
 It's Sunday evening, the [2015 FOSDEM conference](https://fosdem.org/2015/) is over, so it's time to give my impressions and opinions.
 
-As I already said in my [day 1 blog](http://blog.endpoint.com/2015/01/fosdem-conference-day-1.html) post, I really enjoyed the conference as I usually do in this kind of open source, enthusiast, knowledge sharing conference.
+As I already said in my [day 1 blog](/blog/2015/01/31/fosdem-conference-day-1) post, I really enjoyed the conference as I usually do in this kind of open source, enthusiast, knowledge sharing conference.
 
 Now that's also where the FOSDEM somehow slightly disappointed me: I lived it as yet another conference with a series of talks and some nice ideas here and there.
 

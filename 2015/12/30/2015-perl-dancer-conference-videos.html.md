@@ -9,8 +9,8 @@ The 2015 [Perl Dancer Conference](http://perl.dance) has recently released the p
 
 ### Conference Recap
 
-- [Training Days](http://blog.endpoint.com/2015/10/perl-dancer-conference-2015-report.html)
-- [Conference Days](http://blog.endpoint.com/2015/10/perl-dancer-conference-2015-report_30.html)
+- [Training Days](/blog/2015/10/28/perl-dancer-conference-2015-report)
+- [Conference Days](/blog/2015/10/30/perl-dancer-conference-2015-report_30)
 
 ### Conference Presentations
 

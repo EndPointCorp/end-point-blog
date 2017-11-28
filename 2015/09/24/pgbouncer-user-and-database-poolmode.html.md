@@ -245,7 +245,7 @@ postgres@scw-56578065:~/pgbouncer$ echo "\set PROMPT1 '%n@%/:%>%R%x%#%M '" > ~/.
 Let's confirm that each PgBouncer connection is in the expected mode. Database test1 should be using the
 default pool_mode, 'session'. Database test2 should be using a 'transaction' pool_mode, while 'statement' mode
 should be used by both test3 and test4. See my previous blog post on
-[ways to detect the various pool_modes of pgbouncer](http://blog.endpoint.com/2015/05/connected-to-pgbouncer-or-postgres.html). First, let's connect to normal Postgres and
+[ways to detect the various pool_modes of pgbouncer](/blog/2015/05/18/connected-to-pgbouncer-or-postgres). First, let's connect to normal Postgres and
 verify we are not connected to PgBouncer by trying to change to a non-existent database. **FATAL** means
 PgBouncer, and **ERROR** means Postgres:
 

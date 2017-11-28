@@ -5,7 +5,7 @@ tags: ecommerce, ruby, rails
 title: Importing Data with RailsAdmin
 ---
 
-**Update #1: Read an update to this functionality [here](http://blog.endpoint.com/2012/02/railsadmin-import-part-2.html).**
+**Update #1: Read an update to this functionality [here](/blog/2012/02/01/railsadmin-import-part-2).**
 
 **Update #2: This article was written in January of 2012, and the code related to the RailsAdmin actions no longer applies to the current release. Please make sure to read the [RailsAdmin](https://github.com/sferik/rails_admin) documentation regarding current action implementation.**
 

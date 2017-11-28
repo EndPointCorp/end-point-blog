@@ -13,7 +13,7 @@ One of the more frightening things you can run across as a DBA (whether using Po
 
 The first step is to look at why it is not starting up by examining the logs. Check your normal Postgres logs, but also check the filename passed to the **--log** argument for
 [pg_ctl](http://www.postgresql.org/docs/current/static/app-pg-ctl.html), as Postgres may not have even gotten far enough to start normal logging. Most of the time these errors are not serious, are fairly self-explanatory, and can be cured easily - such as
-[running out of disk space](http://blog.endpoint.com/2014/09/pgxlog-disk-space-problem-on-postgres.html). When in doubt, search the web or ask in the
+[running out of disk space](/blog/2014/09/25/pgxlog-disk-space-problem-on-postgres). When in doubt, search the web or ask in the
 [#postgresql IRC channel](http://www.postgresql.org/community/irc/) and you will most likely find a solution.
 
 Sometimes the error is more serious, or the solution is not so obvious. Consider this problem someone had in the #postgresql channel a while back:

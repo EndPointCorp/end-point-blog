@@ -5,9 +5,9 @@ tags: browsers, javascript, jquery
 title: jQuery UI Sortable Tips
 ---
 
-I was recently tasked with developing a sorting tool to allow [Paper Source](http://www.paper-source.com/) to manage the sort order in which their categories are displayed. They had been updating a sort column in a database column but wanted a more visual aspect to do so. Due to the well-received feature developed by Steph, it was decided that they wanted to adapt their upsell interface to manage the categories. See here for the post using [jQuery UI Drag Drop](http://blog.endpoint.com/2009/12/jquery-ui-drag-drop-tips-ecommerce.html).
+I was recently tasked with developing a sorting tool to allow [Paper Source](http://www.paper-source.com/) to manage the sort order in which their categories are displayed. They had been updating a sort column in a database column but wanted a more visual aspect to do so. Due to the well-received feature developed by Steph, it was decided that they wanted to adapt their upsell interface to manage the categories. See here for the post using [jQuery UI Drag Drop](/blog/2009/12/23/jquery-ui-drag-drop-tips-ecommerce).
 
-The only backend requirements were that the same sort column was used to drive the order. The front end required the ability to drag and drop positions within the same container. The [upsell feature](http://blog.endpoint.com/2009/12/jquery-ui-drag-drop-tips-ecommerce.html) provided a great starting point to begin the development. After a quick review I determined that the [jQuery UI](http://jqueryui.com/) [Sortable](http://jqueryui.com/demos/sortable/) function would be more favorable to use for the application.
+The only backend requirements were that the same sort column was used to drive the order. The front end required the ability to drag and drop positions within the same container. The [upsell feature](/blog/2009/12/23/jquery-ui-drag-drop-tips-ecommerce) provided a great starting point to begin the development. After a quick review I determined that the [jQuery UI](http://jqueryui.com/) [Sortable](http://jqueryui.com/demos/sortable/) function would be more favorable to use for the application.
 
 <a href="/blog/2010/04/23/jquery-ui-sortable-tips/image-0-big.jpeg" onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5463443403683695490" src="/blog/2010/04/23/jquery-ui-sortable-tips/image-0.jpeg" style="cursor: pointer; width: 320px; height: 262px;"/></a>
 
@@ -53,6 +53,6 @@ $('input.new_sku').each(
 
 <a href="/blog/2010/04/23/jquery-ui-sortable-tips/image-2-big.jpeg" onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5463443609961866050" src="/blog/2010/04/23/jquery-ui-sortable-tips/image-2.jpeg" style="cursor: pointer; width: 320px; height: 214px;"/></a>
 
-The rest of the feature uses some of the same logic previously documented [here](http://blog.endpoint.com/2009/12/jquery-ui-drag-drop-tips-ecommerce.html).
+The rest of the feature uses some of the same logic previously documented [here](/blog/2009/12/23/jquery-ui-drag-drop-tips-ecommerce).
 
 All in all I learned that the jQuery UI is very versatile and a pleasure to work with. I hope to be using more of its features in the near future.

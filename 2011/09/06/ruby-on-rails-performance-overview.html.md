@@ -35,7 +35,7 @@ Fragment caching is a good way to reuse small modular view components throughout
 
 ### Page Caching
 
-I did not initially add page caching to the application because the system has complex role management where users can have edit access at an object, class, or super level. However, later I investigated  advanced techniques to leverage full page caching, described in depth [here](http://blog.endpoint.com/2011/08/rails-optimization-digging-deeper.html). The benefit gained here was that the application server was not hit during full page requests, and a quick AJAX request was made after the page loaded to determine user access level.
+I did not initially add page caching to the application because the system has complex role management where users can have edit access at an object, class, or super level. However, later I investigated  advanced techniques to leverage full page caching, described in depth [here](/blog/2011/08/05/rails-optimization-digging-deeper). The benefit gained here was that the application server was not hit during full page requests, and a quick AJAX request was made after the page loaded to determine user access level.
 
 ### Raw SQL methods
 
@@ -89,7 +89,7 @@ end
 
 ```
 
-Rails low level caching makes sense for data that's pulled throughout various actions but additional computations are applied to this data. We are unable to cache this at the page request or action level, but we can cache the data retrieved with low level caching. I also used Rails low level caching on the search index pages, which is described more in depth [here](http://blog.endpoint.com/2011/07/rails-optimization-advanced-techniques.html).
+Rails low level caching makes sense for data that's pulled throughout various actions but additional computations are applied to this data. We are unable to cache this at the page request or action level, but we can cache the data retrieved with low level caching. I also used Rails low level caching on the search index pages, which is described more in depth [here](/blog/2011/07/22/rails-optimization-advanced-techniques).
 
 ### HTML Asset related Performance
 

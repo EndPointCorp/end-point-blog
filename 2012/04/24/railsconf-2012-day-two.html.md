@@ -5,7 +5,7 @@ tags: conference, performance, ruby, rails
 title: 'RailsConf 2012: Day Two'
 ---
 
-I'm here in Austin for Day 2 of RailsConf 2012. Here's a quick run-down of a few talks I attended today. Read about a couple of sessions I attended on Day 1 [here](http://blog.endpoint.com/2012/04/railsconf-2012-day-one.html).
+I'm here in Austin for Day 2 of RailsConf 2012. Here's a quick run-down of a few talks I attended today. Read about a couple of sessions I attended on Day 1 [here](/blog/2012/04/23/railsconf-2012-day-one).
 
 ### Let's Make the Web Faster
 
@@ -53,7 +53,7 @@ via migration shorthand.
 - You can override association methods to "hook" in custom behavior.
 - You can use limitless strings in PostgreSQL. This requires a bit of code shared in the presentation. I know, my fellow PostgreSQL expert coworkers are going to balk that this is on the list, but unfortunately Rails doesn't allow this without some code.
 - You can utilize PostgreSQL's full text search with a bit of code.
-- You can use a different database for each user. This one could be great for multi-domain ecommerce, which I [recently blogged about](http://blog.endpoint.com/2012/02/multi-store-architecture-ecommerce.html).
+- You can use a different database for each user. This one could be great for multi-domain ecommerce, which I [recently blogged about](/blog/2012/02/29/multi-store-architecture-ecommerce).
 - You can merge nested hashes via the [deep_merge](http://apidock.com/rails/Hash/deep_merge) method.
 - You can remove a specific key from a hash via the [except](http://apidock.com/rails/Hash/except) method.
 - You can add defaults to a hash without overriding via the [reverse_merge](http://apidock.com/rails/Hash/reverse_merge) method.
@@ -63,4 +63,4 @@ via migration shorthand.
 
 ### Ta Da
 
-Hopefully this article was more Rails-ey than yesterday's [RailsConf 2012: Day One](http://blog.endpoint.com/2012/04/railsconf-2012-day-one.html) post which focused on Backbone.js and CoffeeScript. I'm looking forward to a couple of tomorrow's sessions — and hopefully they will be blogworthy. Stay tuned!
+Hopefully this article was more Rails-ey than yesterday's [RailsConf 2012: Day One](/blog/2012/04/23/railsconf-2012-day-one) post which focused on Backbone.js and CoffeeScript. I'm looking forward to a couple of tomorrow's sessions — and hopefully they will be blogworthy. Stay tuned!

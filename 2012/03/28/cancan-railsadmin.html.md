@@ -60,10 +60,10 @@ With the above Ability definition, nothing changes for an admin user. A store ow
 
 ### Custom Abilities
 
-In addition to the CRUD methods (create, read, update, destroy), CanCan gives you the ability to define additional custom abilities. RailsAdmin has special abilities (:history, :show_in_app, :dashboard), but you can create custom actions with RailsAdmin where CanCan abilities can be managed. For example, Marina wrote about how you might create a custom task to approve reviews [here](http://blog.endpoint.com/2012/03/railsadmin-custom-action-case-study.html). And I described how to create a custom action to import data [here](http://blog.endpoint.com/2012/02/railsadmin-import-part-2.html), where CanCan is used to define which models can be imported and which users can do the import.
+In addition to the CRUD methods (create, read, update, destroy), CanCan gives you the ability to define additional custom abilities. RailsAdmin has special abilities (:history, :show_in_app, :dashboard), but you can create custom actions with RailsAdmin where CanCan abilities can be managed. For example, Marina wrote about how you might create a custom task to approve reviews [here](/blog/2012/03/15/railsadmin-custom-action-case-study). And I described how to create a custom action to import data [here](/blog/2012/02/01/railsadmin-import-part-2), where CanCan is used to define which models can be imported and which users can do the import.
 
 ### Conclusion
 
-CanCan is decoupled from authentication and the notion of roles, which yields quite a bit of flexibility in its use. Combine RailsAdmin, CanCan, Devise, and [our mountable ecommerce Rails Engine](http://blog.endpoint.com/2012/01/piggybak-mountable-ecommerce-ruby-on.html), and you've got a powerful set of tools for development of a custom Ruby on Rails ecommerce application with a powerful admin interface, flexible user authorization and authentication, and an extensible ecommerce solution.
+CanCan is decoupled from authentication and the notion of roles, which yields quite a bit of flexibility in its use. Combine RailsAdmin, CanCan, Devise, and [our mountable ecommerce Rails Engine](/blog/2012/01/06/piggybak-mountable-ecommerce-ruby-on), and you've got a powerful set of tools for development of a custom Ruby on Rails ecommerce application with a powerful admin interface, flexible user authorization and authentication, and an extensible ecommerce solution.
 
 

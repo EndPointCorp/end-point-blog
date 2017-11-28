@@ -11,7 +11,7 @@ Recently, I've been involved in optimization on a Rails 2.3 application. The app
 
 <img alt="" border="0" id="BLOGGER_PHOTO_ID_5628578619063114610" src="/blog/2011/07/22/rails-optimization-advanced-techniques/image-0.png" style="display:block; margin:0px auto 10px; text-align:center;cursor:pointer; cursor:hand;"/>
 
-A first stop in optimization was to investigate if memcached would speed up the site, described [in this article](http://blog.endpoint.com/2011/07/raw-caching-performance-in-rubyrails.html) Unfortunately, that did not improve the speed much.
+A first stop in optimization was to investigate if memcached would speed up the site, described [in this article](/blog/2011/07/12/raw-caching-performance-in-rubyrails) Unfortunately, that did not improve the speed much.
 
 Next, I re-examined the debug log to see what was taking so much time. The debug log looked like this (note that table names have been changed):
 

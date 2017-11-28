@@ -5,7 +5,7 @@ tags: ecommerce, rails, spree, cms, magento
 title: 'Spree vs. Magento: Feature List Revisited'
 ---
 
-A little over a month ago, I wrote an article on [Spree vs. Magento Features](http://blog.endpoint.com/2010/06/spree-vs-magento-feature-list.html). Recently, a client asked me to describe the features mentioned in that article. I thought this was another great opportunity to expand on my response to the client. So, here I am, revisiting ecommerce features in Spree and Magento. The [original article](http://blog.endpoint.com/2010/06/spree-vs-magento-feature-list.html) can be referenced to compare availability of these features in Spree and Magento.
+A little over a month ago, I wrote an article on [Spree vs. Magento Features](/blog/2010/06/07/spree-vs-magento-feature-list). Recently, a client asked me to describe the features mentioned in that article. I thought this was another great opportunity to expand on my response to the client. So, here I am, revisiting ecommerce features in Spree and Magento. The [original article](/blog/2010/06/07/spree-vs-magento-feature-list) can be referenced to compare availability of these features in Spree and Magento.
 
 ### Features on a Single Product or Group of Product
 

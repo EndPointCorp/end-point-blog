@@ -7,7 +7,7 @@ title: 'World IPv6 Launch: 6 June 2012'
 
 For any of our readers who don’t know: The classic Internet Protocol (IPv4) supported around 4 billion IP addresses, but it recently ran out of free addresses. That the addresses would eventually all be used was no surprise. For more than a decade, a replacement called IPv6 has been under development and allows practically unlimited addresses.
 
-Last year there was a one-day trial run called World IPv6 Day. Our own Josh Williams [wrote about it here](http://blog.endpoint.com/2011/06/june-8-2011-world-ipv6-day.html). It was the first major attempt for mainstream websites to enable dual-stack IPv4 and IPv6 networking, so that both the “old” and “new” Internet could access the same site. It was intended to bring to the surface any problems, and it went very well – most people never knew it was happening, which was the goal.
+Last year there was a one-day trial run called World IPv6 Day. Our own Josh Williams [wrote about it here](/blog/2011/06/07/june-8-2011-world-ipv6-day). It was the first major attempt for mainstream websites to enable dual-stack IPv4 and IPv6 networking, so that both the “old” and “new” Internet could access the same site. It was intended to bring to the surface any problems, and it went very well – most people never knew it was happening, which was the goal.
 
 <a href="http://www.worldipv6launch.org"><img align="right" alt="World IPv6 Launch is 6 June 2012 – The Future is Forever" height="128" src="/blog/2012/02/17/world-ipv6-launch-6-june-2012/image-0.png" title="World IPv6 Launch is 6 June 2012 – The Future is Forever" width="128"/></a>
 

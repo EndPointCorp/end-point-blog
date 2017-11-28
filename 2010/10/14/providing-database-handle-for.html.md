@@ -78,6 +78,6 @@ It is also worthwhile to note that you'll need to use the ::database_exists_ref 
 
 This approach allows us to use, reuse, and add new tests without worrying about mock data during the intial development. You can be sure that the existing test scripts will function properly against the latest data that is available. 
 
-I will cover some other topics regarding Interchange Test Driven Development in future posts. For more information regarding Unit Testing in general see [this post](http://blog.endpoint.com/2010/06/getting-started-with-unit-testing.html) by [Ethan](http://www.blogger.com/profile/07543304949984321650).
+I will cover some other topics regarding Interchange Test Driven Development in future posts. For more information regarding Unit Testing in general see [this post](/blog/2010/06/23/getting-started-with-unit-testing) by [Ethan](http://www.blogger.com/profile/07543304949984321650).
 
 

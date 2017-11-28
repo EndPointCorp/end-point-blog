@@ -39,7 +39,7 @@ Frank the Foster</p>
  </tr>
  <tr>
   <td valign="top">
-   <p style="margin:0px;"><a href="https://github.com/stephskardal/rails_admin_import">RailsAdminImport</a>. This is  an open source Ruby on Rails gem that I developed for an End Point client to import data, because RailsAdmin doesn't include import functionality out of the box. By installing this gem into the HeARTs Speak application, I introduced the ability to import data from CSV easily. Read more about it <a href="http://blog.endpoint.com/2012/02/railsadmin-import-part-2.html">here</a>.</p>
+   <p style="margin:0px;"><a href="https://github.com/stephskardal/rails_admin_import">RailsAdminImport</a>. This is  an open source Ruby on Rails gem that I developed for an End Point client to import data, because RailsAdmin doesn't include import functionality out of the box. By installing this gem into the HeARTs Speak application, I introduced the ability to import data from CSV easily. Read more about it <a href="/blog/2012/02/01/railsadmin-import-part-2">here</a>.</p>
   </td>
   <td style="background:#DDE4DF;" valign="top">
    <p style="margin:0px;"><a href="http://newrelic.com/">New Relic</a>. I installed New Relic's free offering's for both Rails application monitoring and server monitoring. New Relic is a very popular performance analytics and monitoring tool in the Rails space. They offer paid membership levels as well, but I am satisfied with the free basic monitoring at this point.</p>
@@ -47,7 +47,7 @@ Frank the Foster</p>
  </tr>
  <tr>
   <td style="background:#DDE4DF;" valign="top">
-   <p style="margin:0px;"><b>Full Page Caching</b>. Known Rails pitfalls include poor performance and a demanding server load. I added full page caching to all front-end facing pages to mitigate the effects of poor performance. I recently wrote about page caching in RailsAdmin <a href="http://blog.endpoint.com/2012/03/cache-expiration-railsadmin.html">here</a>.</p>
+   <p style="margin:0px;"><b>Full Page Caching</b>. Known Rails pitfalls include poor performance and a demanding server load. I added full page caching to all front-end facing pages to mitigate the effects of poor performance. I recently wrote about page caching in RailsAdmin <a href="/blog/2012/03/16/cache-expiration-railsadmin">here</a>.</p>
   </td>
   <td valign="top">
    <p style="margin:0px;"><a href="http://www.google.com/analytics/">Google Analytics</a>. This is an obvious and popular choice. Google Analytics offers so much in the way of traffic analysis, conversion analytics, and now even real-time tracking. If you aren't using it on your site, you should be!</p>
@@ -58,7 +58,7 @@ Frank the Foster</p>
    <p style="margin:0px;"><b>UI Elements</b>. The HeARTs Speak website includes several user interface elements such as the <a href="https://developers.google.com/maps/">Google Maps API</a>, <a href="http://developers.facebook.com/docs/guides/web/">Facebook integration</a>, and the popular jQuery plugin <a href="http://nivo.dev7studios.com/">Nivo Slider</a>.</p>
   </td>
   <td style="background:#DDE4DF;" valign="top">
-   <p style="margin:0px;"><b>Apache Performance Configuration</b>. My server was already configured to include <a href="http://developer.yahoo.com/performance/rules.html">best practice performance tweaks</a>, also described by Jon <a href="http://blog.endpoint.com/2009/10/performance-optimization-of.html">here</a> and <a href="http://blog.endpoint.com/2010/11/speeding-up-spree-demo-site.html">here</a>.</p>
+   <p style="margin:0px;"><b>Apache Performance Configuration</b>. My server was already configured to include <a href="http://developer.yahoo.com/performance/rules.html">best practice performance tweaks</a>, also described by Jon <a href="/blog/2009/10/23/performance-optimization-of">here</a> and <a href="/blog/2010/11/02/speeding-up-spree-demo-site">here</a>.</p>
   </td>
  </tr>
  <tr>
@@ -66,7 +66,7 @@ Frank the Foster</p>
    <p style="margin:0px;"><a href="http://www.webpagetest.org">WebPageTest</a>. This is a nice service for examining performance of a website. Several of us End Pointers have mentioned it in blog articles before. If you aren't using a performance analysis tool like <a href="http://www.webpagetest.org/">WebPageTest</a> or <a href="http://developer.yahoo.com/yslow/">YSlow</a>, I'd highly recommend it.</p>
   </td>
   <td valign="top">
-   <p style="margin:0px;"><a href="http://getfirebug.com/">Firebug</a> and <a href="http://www.screencast-o-matic.com/">Screencast-O-Matic</a>. Firebug is always a huge part of development for me. In this project, I used Screencast-O-Matic to provide an example of what it's like to work with Firebug to speed up the design iteration process, similar to process described <a href="http://blog.endpoint.com/2012/03/video-firebug-action.html">in this blog article</a>.</p>
+   <p style="margin:0px;"><a href="http://getfirebug.com/">Firebug</a> and <a href="http://www.screencast-o-matic.com/">Screencast-O-Matic</a>. Firebug is always a huge part of development for me. In this project, I used Screencast-O-Matic to provide an example of what it's like to work with Firebug to speed up the design iteration process, similar to process described <a href="/blog/2012/03/19/video-firebug-action">in this blog article</a>.</p>
   </td>
  </tr>
 </tbody></table>
