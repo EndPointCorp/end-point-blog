@@ -2,7 +2,7 @@
 author: Steph Skardal
 gh_issue_number: 206
 tags: browsers, company, javascript, rails, cms
-title: 'New End Point site launched: Rails, jQuery, Flot, Blogger'
+title: 'New End Point site launched: Rails, jQuery, Flot, blog feed'
 ---
 
 This week we launched a new website for End Point. Not only did the site get a facelift, but the backend content management system was entirely redesigned.
@@ -43,7 +43,7 @@ The triangle image CSS position is adjusted when a point on the plot is activate
 
 ### Dynamic Rails Partial Generation
 
-One component of the old site that was generated dynamically sans-CMS was Blogger article integration into the site. A cron job ran daily to import new Blogger article title, link, and content snippets into the Postgres database.  We opted for removing dependency on a database with the new site, so we investigated creative ways to include the dynamic Blogger content. We developed a rake task that is run via cron job to dynamically generate partial Rails views containing Blogger content. Below is an example and explanation of how the Blogger RSS feed is retrieved and a partial is generated:
+One component of the old site that was generated dynamically sans-CMS was blog article integration into the site. A cron job ran daily to import new blog article title, link, and content snippets into the Postgres database.  We opted for removing dependency on a database with the new site, so we investigated creative ways to include the dynamic blog content. We developed a rake task that is run via cron job to dynamically generate partial Rails views containing blog content. Below is an example and explanation of how the blog RSS feed is retrieved and a partial is generated:
 
 Open URI and REXML are used to retrieve and parse the XML feed.
 
@@ -56,11 +56,11 @@ require 'rexml/document'
 The feed is retrieved and a REXML object created from the feed in the rake task:
 
 ```ruby
-data = open('http://blog.endpoint.com/feeds/posts/default?alt=rss&max-results=10', 'User-Agent' => 'Ruby-Wget').read
+data = open('https://www.endpoint.com/blog/feed.xml', 'User-Agent' => 'Ruby-Wget').read
 doc = REXML::Document.new(data)
 ```
 
-The REXML object is iterated through. An array containing the Blogger links and titles is created.
+The REXML object is iterated through. An array containing the blog links and titles is created.
 
 ```ruby
 results = []
@@ -137,7 +137,7 @@ An array containing all the titles of all tweets is created.
     end
 ```
 
-The blogger RSS feed is retrieved and parsed. An array of hashes is created to track the un-tweeted blog articles.
+The blog RSS feed is retrieved and parsed. An array of hashes is created to track the un-tweeted blog articles.
 
 ```ruby
     data = open('http://blog.endpoint.com/feeds/posts/default?alt=rss&max-results=10000', 'User-Agent' => 'Ruby-Wget').read

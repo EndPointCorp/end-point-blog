@@ -44,7 +44,7 @@ A little over a month ago, I wrote an article on [Spree vs. Magento Features](ht
 
 <a href="/blog/2010/07/13/spree-vs-magento-feature-list-revisited/image-2-big.png" onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5493450626615883906" src="/blog/2010/07/13/spree-vs-magento-feature-list-revisited/image-2.png" style="display:block; margin:0px auto 10px; text-align:center;cursor:pointer; cursor:hand;width: 341px; height: 400px;"/></a>
 
-- **Contact us form**: functionality to allow customers to submit a request for contact. See [End Point's contact page](http://www.endpoint.com/contact) for an example.
+- **Contact us form**: functionality to allow customers to submit a request for contact. See [End Point's contact page](/contact) for an example.
 - **Polls**: functionality to allow site administrators to create and manage basic polls, functionality to allow customers to submit answers to basic polls.
 
 ### Checkout Support
