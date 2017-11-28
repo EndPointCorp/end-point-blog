@@ -19,7 +19,7 @@ How you get to the correct set of files (which means finding the proper git comm
 
 ### Finding a git commit by date
 
-This is the easiest one to solve. If all you need is to see how the repository looked around a certain point in time, you can use git checkout with git-rev-parse to get it. I covered this in detail in [an earlier post](http://blog.endpoint.com/2014/05/git-checkout-at-specific-date.html), but the best answer is below. For all of these examples, I am using the public Bucardo repository at git clone git://bucardo.org/bucardo.git
+This is the easiest one to solve. If all you need is to see how the repository looked around a certain point in time, you can use git checkout with git-rev-parse to get it. I covered this in detail in [an earlier post](/blog/2014/05/19/git-checkout-at-specific-date), but the best answer is below. For all of these examples, I am using the public Bucardo repository at git clone git://bucardo.org/bucardo.git
 
 ```
 $ DATE='Sep 3 2014'

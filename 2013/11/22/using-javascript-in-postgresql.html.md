@@ -7,7 +7,7 @@ title: Using JavaScript in PostgreSQL
 
 This time I will describe two things: installing a new extension using pgxn and using JavaScript for writing a PostgreSQL stored procedure.
 
-The last time I was describing a couple of nice features of the incoming PostgreSQL 9.3, I wrote about [merging JSONs in Postgres](http://blog.endpoint.com/2013/07/merging-jsons-in-postgresql.html) using a stored procedure written in Python. In one of the comments there was a suggestion that I should try using JavaScript for that, as JSON is much more native there.
+The last time I was describing a couple of nice features of the incoming PostgreSQL 9.3, I wrote about [merging JSONs in Postgres](/blog/2013/07/29/merging-jsons-in-postgresql) using a stored procedure written in Python. In one of the comments there was a suggestion that I should try using JavaScript for that, as JSON is much more native there.
 
 So let's try JavaScript with PostgreSQL.
 

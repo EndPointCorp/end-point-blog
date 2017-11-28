@@ -7,11 +7,11 @@ title: Using Disqus and Ruby on Rails
 
 
 
-Recently, I posted about how to [import comments from a Ruby on Rails app to Disqus](http://blog.endpoint.com/2011/12/importing-comments-into-disqus-using.html).  This is a follow up to that post where I outline the implementation of Disqus in a Ruby on Rails site.  Disqus provides what it calls [Universal Code](http://docs.disqus.com/developers/universal/) which can be added to any site.  This universal code is just JavaScript, which asynchronously loads the Disqus thread based on one of two unique identifiers Disqus uses.
+Recently, I posted about how to [import comments from a Ruby on Rails app to Disqus](/blog/2011/12/27/importing-comments-into-disqus-using).  This is a follow up to that post where I outline the implementation of Disqus in a Ruby on Rails site.  Disqus provides what it calls [Universal Code](http://docs.disqus.com/developers/universal/) which can be added to any site.  This universal code is just JavaScript, which asynchronously loads the Disqus thread based on one of two unique identifiers Disqus uses.
 
 ### Disqus in a development environment
 
-Before we get started, I'd recommend that you have two Disqus "sites"; one for development and one for production.  This will allow you to see real content and experiment with how things will really behave once you're in production.  Ideally, your development server would be publicly accessible to allow you to fully use the Disqus moderation interface, but it isn't required.  Simply register another Disqus site, and make sure that you have your shortname configured by environment.  Feel free to use whatever method you prefer for defining these kinds of application preferences.  If you're looking for an easy way, considering checking out my article on [Working with Constants in Ruby](http://blog.endpoint.com/2011/12/working-with-constants-in-ruby.html).  It might look something like this:
+Before we get started, I'd recommend that you have two Disqus "sites"; one for development and one for production.  This will allow you to see real content and experiment with how things will really behave once you're in production.  Ideally, your development server would be publicly accessible to allow you to fully use the Disqus moderation interface, but it isn't required.  Simply register another Disqus site, and make sure that you have your shortname configured by environment.  Feel free to use whatever method you prefer for defining these kinds of application preferences.  If you're looking for an easy way, considering checking out my article on [Working with Constants in Ruby](/blog/2011/12/05/working-with-constants-in-ruby).  It might look something like this:
 
 ```ruby
 # app/models/article.rb

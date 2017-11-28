@@ -15,7 +15,7 @@ Mikel's first **pro tip** for building a maintainable Rails app is to treat depl
 
 Mikel also mentioned several performance tips that make clients happy, listed below. I wasn't sure how these recommendations fit into the talk on how to keep Rails on the tracks by writing maintainable code, but nonetheless here they are:
 
-- combining JS, CSS, CSS sprites, utilizing [the Rails 3.1 asset pipeline](http://blog.endpoint.com/2011/05/rails-3-at-railsconf-2011.html)
+- combining JS, CSS, CSS sprites, utilizing [the Rails 3.1 asset pipeline](/blog/2011/05/17/rails-3-at-railsconf-2011)
 - caching optimization: fragment caching, action caching, page caching
 - avoid a bloated session, and avoid storing objects in the session
 - push things out to the browser if possible to minimize data and web-app load

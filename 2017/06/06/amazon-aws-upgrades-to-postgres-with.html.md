@@ -100,7 +100,7 @@ until the "Status" changes to Active.
 Once the instance is running, you will be shown a connection string that looks like this:
 gregtest.zqsvirfhzvg.us-east-1.rds.amazonaws.com:5432. That standard
 port is not a problem, but who wants to ever type that hostname out, or
-even have to look at it? The [pg_service.conf file](http://blog.endpoint.com/2016/10/postgres-connection-service-file.html) comes to the rescue with
+even have to look at it? The [pg_service.conf file](/blog/2016/10/26/postgres-connection-service-file) comes to the rescue with
 this new entry inside the ~/.pg_service.conf file:
 
 ```

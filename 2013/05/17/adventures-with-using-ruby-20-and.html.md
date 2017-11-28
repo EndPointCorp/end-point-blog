@@ -18,7 +18,7 @@ Not having root or sudo access on the machine I embarked on a sligthly hacky jou
 
 ### Ruby 2.0
 
-After reading Mike Farmer’s [blog post](http://blog.endpoint.com/2013/04/today-first-speaker-at-mwrc-is-one-and.html) about Ruby 2.0 and tons of other material about it on the Internet, I wanted to get a feeling of how faster & greater the new Ruby is. It’s always great also to stay up-to-date with latest technologies. It’s great for me as a developer, and more importantly - it’s great for our clients.
+After reading Mike Farmer’s [blog post](/blog/2013/04/04/today-first-speaker-at-mwrc-is-one-and) about Ruby 2.0 and tons of other material about it on the Internet, I wanted to get a feeling of how faster & greater the new Ruby is. It’s always great also to stay up-to-date with latest technologies. It’s great for me as a developer, and more importantly - it’s great for our clients.
 
 ### Importance of libreadline in development with Ruby
 

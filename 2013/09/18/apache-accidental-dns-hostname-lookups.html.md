@@ -73,7 +73,7 @@ Host 190.213.86.187.in-addr.arpa. not found: 3(NXDOMAIN)
 152.160.0.107.in-addr.arpa domain name pointer 107-0-160-152-ip-static.hfc.comcastbusiness.net.
 ```
 
-Did you notice that one IP address returned two different PTR records? That is allowed, though uncommon, as I mentioned in my blog post [Multiple reverse DNS pointers per IP address](http://blog.endpoint.com/2008/11/multiple-reverse-dns-pointers-per-ip.html) a few years back. Many reverse DNS control panels provided by commodity hosting providers won't allow you to assign multiple PTR records, but if you get your reverse DNS delegated to a real nameserver you control, you can do it.
+Did you notice that one IP address returned two different PTR records? That is allowed, though uncommon, as I mentioned in my blog post [Multiple reverse DNS pointers per IP address](/blog/2008/11/28/multiple-reverse-dns-pointers-per-ip) a few years back. Many reverse DNS control panels provided by commodity hosting providers won't allow you to assign multiple PTR records, but if you get your reverse DNS delegated to a real nameserver you control, you can do it.
 
 ### Finding the IP address owner: whois
 

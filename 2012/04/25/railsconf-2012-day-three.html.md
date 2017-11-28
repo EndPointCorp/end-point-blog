@@ -7,7 +7,7 @@ title: 'RailsConf 2012: Day Three'
 
 
 
-It's Day 3 of RailsConf 2012 here in Austin Texas. Check out my posts from [Day 1](http://blog.endpoint.com/2012/04/railsconf-2012-day-one.html) and [Day 2](http://blog.endpoint.com/2012/04/railsconf-2012-day-two.html).
+It's Day 3 of RailsConf 2012 here in Austin Texas. Check out my posts from [Day 1](/blog/2012/04/23/railsconf-2012-day-one) and [Day 2](/blog/2012/04/24/railsconf-2012-day-two).
 
 ### RailsConf 5k
 

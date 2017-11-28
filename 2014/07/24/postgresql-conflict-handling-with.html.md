@@ -18,7 +18,7 @@ replication, but "source" is a much more accurate description than
 "master"). Bucardo deals in primary keys as a way to identify rows. If the same row has changed on one or more sources since the last Bucardo run, a conflict has arisen and Bucardo must be told how to handle it. In other words, Bucardo must decide which row is the "winner" and thus gets replicated to all the other databases.
 
 For this demo, we will again use an Amazon AWS. See the [earlier post about Bucardo 5](
-http://blog.endpoint.com/2014/06/bucardo-5-multimaster-postgres-released.html)
+/blog/2014/06/23/bucardo-5-multimaster-postgres-released)
 for directions on installing Bucardo itself. Once it is installed (after the
 './bucardo install' step), we can create some test databases for our conflict
 testing. Recall that we have a handy database named "shake1". As this

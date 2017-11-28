@@ -11,7 +11,7 @@ Today, I gave the presentation to my coworkers entitled "Puppies & Ecommerce as 
 
 Below are a few more related articles to my work on Piggybak. Check them out!
 
-- [Recent Launch of Musica Russica on Piggybak](http://blog.endpoint.com/2012/09/musica-russica-launches-piggybak.html)
-- [Introduction of Piggybak](http://blog.endpoint.com/2012/01/piggybak-mountable-ecommerce-ruby-on.html)
-- [Leveraging ActiveRecord Callbacks in Ecommerce](http://blog.endpoint.com/2012/01/activerecord-callbacks-ecommerce-order.html)
-- [Shopping Cart Options (applied to a Sinatra application)](http://blog.endpoint.com/2011/02/ecommerce-sinatra-shopping-cart.html)
+- [Recent Launch of Musica Russica on Piggybak](/blog/2012/09/03/musica-russica-launches-piggybak)
+- [Introduction of Piggybak](/blog/2012/01/06/piggybak-mountable-ecommerce-ruby-on)
+- [Leveraging ActiveRecord Callbacks in Ecommerce](/blog/2012/01/13/activerecord-callbacks-ecommerce-order)
+- [Shopping Cart Options (applied to a Sinatra application)](/blog/2011/03/04/ecommerce-sinatra-shopping-cart)

@@ -5,7 +5,7 @@ tags: conference, development
 title: Get Out of Technical Debt Now!
 ---
 
-It's now been a year since I attended [YAPC::NA 2006](http://blog.endpoint.com/2006/07/yapcna-2006-conference-report.html) in Chicago with Brian Miller and the talk that we've spoken of most frequently, and cited most usefully in our work, was "Get Out of Technical Debt Now!" by Andy Lester.
+It's now been a year since I attended [YAPC::NA 2006](/blog/2006/07/11/yapcna-2006-conference-report) in Chicago with Brian Miller and the talk that we've spoken of most frequently, and cited most usefully in our work, was "Get Out of Technical Debt Now!" by Andy Lester.
 
 Most of the concepts and examples he gave were not new to us, nor to most of the attendees, I think. But his debt analogy made a coherent story out of ideas, maxims, and experiences that were previously too disjointed and differently labeled to pull together into a single comprehensible motivational package.
 

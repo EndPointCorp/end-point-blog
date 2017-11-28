@@ -7,7 +7,7 @@ title: DBD::Pg 3.0.0 and the utf8 flag
 
 
 
-One of the major changes in the recently released [3.0 version of DBD::Pg (the Perl driver for PostgreSQL)](http://blog.endpoint.com/2014/02/perl-postgresql-driver-dbdpg-300.html) was the handling of UTF-8 strings. Previously, you had to make sure to always set the mysterious "pg_enable_utf8" attribute. Now, everything should simply work as expected without any adjustments.
+One of the major changes in the recently released [3.0 version of DBD::Pg (the Perl driver for PostgreSQL)](/blog/2014/02/07/perl-postgresql-driver-dbdpg-300) was the handling of UTF-8 strings. Previously, you had to make sure to always set the mysterious "pg_enable_utf8" attribute. Now, everything should simply work as expected without any adjustments.
 
 When using an older DBD::Pg (version 2.x), any data coming back from the database was treated as a plain old string. Perl strings have an internal flag called "utf8" that tells Perl that the string should be treated as containing UTF-8. The only way to get this flag turned on was to set the **pg_enable_utf8** attribute to true before fetching your data from the database. When this flag was on, each returned string was scanned for high bit characters, and if found, the utf8 flag was set on the string. The Postgres server_encoding and client_encoding values were never consulted, so this one attribute was the only knob available. Here is a sample program we will use to examine the returned strings. The handy [Data::Peek module](http://search.cpan.org/~hmbrand/Data-Peek/Peek.pm) will help us see if the string has the utf8 flag enabled.
 

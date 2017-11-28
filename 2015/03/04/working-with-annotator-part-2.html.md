@@ -7,7 +7,7 @@ title: 'Working with Annotator: Part 2'
 
 
 
-A while back, [I wrote about](http://blog.endpoint.com/2014/07/interactive-highlighting-and.html) my work on Ruby on Rails based [H2O](http://cyber.law.harvard.edu/research/h2o) with [Annotator](http://annotatorjs.org/), an open source JavaScript library that provides annotation functionality. In that article, I discussed the history of my work with annotations, specifically touching on several iterations with native JavaScript functionality developed over several years to handle colored highlight overlapping on selected text.
+A while back, [I wrote about](/blog/2014/07/15/interactive-highlighting-and) my work on Ruby on Rails based [H2O](http://cyber.law.harvard.edu/research/h2o) with [Annotator](http://annotatorjs.org/), an open source JavaScript library that provides annotation functionality. In that article, I discussed the history of my work with annotations, specifically touching on several iterations with native JavaScript functionality developed over several years to handle colored highlight overlapping on selected text.
 
 Finally, last July we completed the transition to [Annotator](http://annotatorjs.org/) from custom JavaScript development, with the caveat that the application had quite a bit of customization hooked into Annotator's easily extensible library. But, just a few months after that, I revisited the customization, described in this post.
 

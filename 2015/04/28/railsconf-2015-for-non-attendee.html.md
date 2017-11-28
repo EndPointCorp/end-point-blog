@@ -5,7 +5,7 @@ tags: conference, rails
 title: RailsConf 2015 for the non-Attendee
 ---
 
-This blog post is really for myself. Because I had the unique experience of [bringing a baby to a conference](http://blog.endpoint.com/2015/04/how-to-bring-baby-to-tech-conference.html), I made an extra effort to talk to other attendees about what sessions shouldn't be missed. Here are the top takeaways from the conference that I recommend (in no particular order):
+This blog post is really for myself. Because I had the unique experience of [bringing a baby to a conference](/blog/2015/04/27/how-to-bring-baby-to-tech-conference), I made an extra effort to talk to other attendees about what sessions shouldn't be missed. Here are the top takeaways from the conference that I recommend (in no particular order):
 
 - [Watch DHH's Keynote](http://confreaks.tv/videos/railsconf2015-opening-keynote)
 - ... and [Aaron Patterson Keynote](http://confreaks.tv/videos/railsconf2015-keynote-day-2-opening)

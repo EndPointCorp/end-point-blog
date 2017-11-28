@@ -9,7 +9,7 @@ title: One-time password SSH solutions
 
 <div class="separator" style="clear: both; float:right; text-align: center; margin-bottom: 1.5em; margin-left: 3em; margin-right: 2em; "><a href="/blog/2015/02/02/onne-time-password-ssh-solutions/image-0-big.jpeg" imageanchor="1" style="clear: right; float: right; margin-left: 1em;"><img border="0" src="/blog/2015/02/02/onne-time-password-ssh-solutions/image-0.jpeg"/></a><br/><small>[how encryption was done in the 18th century]</small></div>
 
-In a [previous article](http://blog.endpoint.com/2014/01/ssh-one-time-passwords-otpw-on.html) I explained how I used a one‑time password system to enable SSH on my Chromebook. While this is still working great for me, there are a few problems that can pop 
+In a [previous article](/blog/2015/01/21/ssh-one-time-passwords-otpw-on) I explained how I used a one‑time password system to enable SSH on my Chromebook. While this is still working great for me, there are a few problems that can pop 
 up.
 
 ### Problem 1: Tripping the alarm

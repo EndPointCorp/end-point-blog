@@ -5,7 +5,7 @@ tags: ecommerce, piggybak, rails
 title: 'Piggybak: End of Year Update'
 ---
 
-Over the last few months, my coworkers and I have shared several updates on [Piggybak](http://www.piggybak.org/) progress ([October 2012 Piggybak Roadmap ](http://blog.endpoint.com/2012/10/piggybak-roadmap.html), [November 2012 Piggybak Roadmap Status Update](http://blog.endpoint.com/2012/11/piggybak-roadmap-status-update.html)).  Piggybak is an open source, mountable as a Rails Engine, Ruby on Rails ecommerce platform developed and maintained by End Point. Here's a brief background on Piggybak followed by an end of year update with some recent Piggybak news.
+Over the last few months, my coworkers and I have shared several updates on [Piggybak](http://www.piggybak.org/) progress ([October 2012 Piggybak Roadmap ](/blog/2012/10/08/piggybak-roadmap), [November 2012 Piggybak Roadmap Status Update](/blog/2012/11/06/piggybak-roadmap-status-update)).  Piggybak is an open source, mountable as a Rails Engine, Ruby on Rails ecommerce platform developed and maintained by End Point. Here's a brief background on Piggybak followed by an end of year update with some recent Piggybak news.
 
 ### A Brief Background
 
@@ -27,11 +27,11 @@ Since the last general update, we've tackled a number of additional changes:
         - Tax + coupons bug fixes.
         - RailsAdmin upgrade to updated recent versions.
 
-- Heroku tutorial: Piggybak support in Piggybak was described [in this blog article](http://blog.endpoint.com/2012/11/piggybak-on-heroku.html).
+- Heroku tutorial: Piggybak support in Piggybak was described [in this blog article](/blog/2012/11/12/piggybak-on-heroku).
 - Advanced taxonomy or product organization: An extension for advanced product organization (e.g. categories, subcategories) was released, but we still plan to add more documentation regarding its functionality and use.
-- Bundle discount support: Another extension for bundle discount support was released. Bundle discount offers the ability to give customer discounts when a bundle or set of products has been added to the cart. Barrett shared his experiences in creating this extension [in this article](http://blog.endpoint.com/2012/12/piggybak-extensions-basic-how-to-guide.html).
-- **Fancy** jQuery tour: I wrote about [a new Piggybak demo tour](http://blog.endpoint.com/2012/12/interactive-piggybak-demo-tour.html) that I created for checking out the features of Piggybak.
-- Advanced product optioning: Another extension for advanced product option support (e.g. size, color) was released a couple of months ago, but [this recent article](http://blog.endpoint.com/2012/12/advanced-product-options-variants-in.html) provides more documentation on its functionality and use.
+- Bundle discount support: Another extension for bundle discount support was released. Bundle discount offers the ability to give customer discounts when a bundle or set of products has been added to the cart. Barrett shared his experiences in creating this extension [in this article](/blog/2012/12/13/piggybak-extensions-basic-how-to-guide).
+- **Fancy** jQuery tour: I wrote about [a new Piggybak demo tour](/blog/2012/12/06/interactive-piggybak-demo-tour) that I created for checking out the features of Piggybak.
+- Advanced product optioning: Another extension for advanced product option support (e.g. size, color) was released a couple of months ago, but [this recent article](/blog/2012/12/18/advanced-product-options-variants-in) provides more documentation on its functionality and use.
 
 ### What's Next?
 
@@ -46,7 +46,7 @@ A few large features that are on our wishlist that may need client sponsorship f
 - Multiple shipping addresses per order: This allows for users to select multiple shipping addresses per order. I implemented this functionality for [Paper Source](http://www.paper-source.com/) just over a year ago. This would likely be developed in the form of an extension that requires several non-trivial Piggybak core overrides.
 - Subscription support: The [Piggybak Google Group](https://groups.google.com/forum/?fromgroups#!forum/piggybak) has expressed interest in subscription support, which also is not trivial.
 - Point-based credit support
-- Multi-store architecture: End Point is very familiar with multi-store architecture, which allows multiple stores to be support via one code base. I shared some of the options [in this blog article](http://blog.endpoint.com/2012/02/multi-store-architecture-ecommerce.html).
+- Multi-store architecture: End Point is very familiar with multi-store architecture, which allows multiple stores to be support via one code base. I shared some of the options [in this blog article](/blog/2012/02/29/multi-store-architecture-ecommerce).
 - One deal at a time support: This is another popular feature that End Point has been involved with for [Backcountry.com](http://www.backcountry.com/) sites [Steep and Cheap](http://www.steepandcheap.com/), [WhiskeyMilitia.com](http://www.whiskeymilitia.com/), and [Chainlove.com](http://www.chainlove.com/).
 
 ### Get Involved

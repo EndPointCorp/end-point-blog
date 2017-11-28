@@ -7,7 +7,7 @@ title: Take a snapshot in Cucumber and sync it with Dropbox!
 
 
 
-In a previous [post](http://blog.endpoint.com/2011/12/running-integration-tests-in-webkit.html) I talked about running cucumber using [capybara-webkit](https://github.com/thoughtbot/capybara-webkit). In a recent project using this setup I noticed that I couldn't use capybara in connection with [launchy](https://github.com/copiousfreetime/launchy) to open up a page in the browser for debugging tests. The "save and open page" step is one that I used a lot when I was developing locally. But now that I'm developing on a server, I don't have any way save the page or open it for review.
+In a previous [post](/blog/2011/12/08/running-integration-tests-in-webkit) I talked about running cucumber using [capybara-webkit](https://github.com/thoughtbot/capybara-webkit). In a recent project using this setup I noticed that I couldn't use capybara in connection with [launchy](https://github.com/copiousfreetime/launchy) to open up a page in the browser for debugging tests. The "save and open page" step is one that I used a lot when I was developing locally. But now that I'm developing on a server, I don't have any way save the page or open it for review.
 
 The solution I found to this comes in two parts. First, create a "take a snapshot" cucumber step that drops a snapshot of the HTML and a PNG of the page in a temp directory. Second, add that temp directory to [dropbox](http://www.dropbox.com) so that it gets synced to my desktop automatically when it is created.
 

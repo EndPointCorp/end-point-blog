@@ -11,7 +11,7 @@ Previous in series:
 
 - [Learning from data basics I: Naive Bayes](/2016/03/learning-from-data-basics-naive-bayes.html)
 
-In my [last article](http://blog.endpoint.com/2016/03/learning-from-data-basics-naive-bayes.html) I presented an approach that simplifies computations of very complex probability models. It makes these complex models viable by shrinking the amount of needed memory and improving the speed of computing probabilities. The approach we were exploring is called the **Naive Bayes model**.
+In my [last article](/blog/2016/03/23/learning-from-data-basics-naive-bayes) I presented an approach that simplifies computations of very complex probability models. It makes these complex models viable by shrinking the amount of needed memory and improving the speed of computing probabilities. The approach we were exploring is called the **Naive Bayes model**.
 
 The context was the e-commerce feature in which a user is presented with the promotion box. The box shows the product category the user is most likely to buy.
 
@@ -61,7 +61,7 @@ Notice that the Naive Bayes model fits perfectly into this equation. If you were
 
 ### Coding the updated probabilistic model
 
-Before going further, I strongly advise you to make sure you read the [previous article - about the Naive Bayes model](http://blog.endpoint.com/2016/03/learning-from-data-basics-naive-bayes.html) - to fully understand the classes used in the code in this section.
+Before going further, I strongly advise you to make sure you read the [previous article - about the Naive Bayes model](/blog/2016/03/23/learning-from-data-basics-naive-bayes) - to fully understand the classes used in the code in this section.
 
 Let's take our chain rule equation and simplify it:
 

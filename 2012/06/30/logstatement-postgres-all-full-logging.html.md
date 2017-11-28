@@ -80,7 +80,7 @@ using incomplete logs.
 ### **Advantage: *Forensics/Auditing***
 
 Full logging via log_statement='all' is extremely important if you need to know exactly what commands a particular user or process has run. This is not just relevant to 
-[SQL injection attacks](http://blog.endpoint.com/2012/06/detecting-postgres-sql-injection.html), but for rogue users, lost laptops, and any situation 
+[SQL injection attacks](/blog/2012/06/10/detecting-postgres-sql-injection), but for rogue users, lost laptops, and any situation 
 in which someone has done something unknown to your database. Not every one of 
 these situations will be noticeable, such as the infamous **DROP TABLE students;**: 
 often it involves updating a few critical rows, modifying some functions, or 

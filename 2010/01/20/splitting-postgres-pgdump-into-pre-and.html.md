@@ -15,7 +15,7 @@ The problem is that using the --schema-only flag outputs the first and third sec
 
 Why would you need to do this instead of just using a full dump? Some reasons I've found include:
 
-- When you need to load the data more than once, such as debugging a data load error.- When you want to stop after the data load step (which you can't do with a full dump)- When you need to make adjustments to the schema before the data is loaded (seen quite a bit on [major version upgrades](http://blog.endpoint.com/2010/01/postgres-upgrades-ten-problems-and.html))
+- When you need to load the data more than once, such as debugging a data load error.- When you want to stop after the data load step (which you can't do with a full dump)- When you need to make adjustments to the schema before the data is loaded (seen quite a bit on [major version upgrades](/blog/2010/01/11/postgres-upgrades-ten-problems-and))
 
 Usage is simply ./split_postgres_dump.pl yourdumpfile.pg, which will then create two new files, yourdumpfile.pg.pre and yourdumpfile.pg.post. It doesn't produce perfectly formatted files, but it gets the job done!
 

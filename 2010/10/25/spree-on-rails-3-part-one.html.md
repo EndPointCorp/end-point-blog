@@ -94,6 +94,6 @@ After setup, I ran rails server, the new command for starting a server in Rails 
 
 Hooray - it's up!
 
-There wasn't much to getting a Rails 3 application up and running locally. I removed all my old gems, installed Rails 3, grabbed the repository, allowed bundler to install dependencies and worked through one snag. Then, I ran my Spree specific rake task to setup the project and started the server. Tomorrow, I [share my experiences on extension development in Rails 3 based Spree](http://blog.endpoint.com/2010/10/spree-on-rails-3-part-two.html).
+There wasn't much to getting a Rails 3 application up and running locally. I removed all my old gems, installed Rails 3, grabbed the repository, allowed bundler to install dependencies and worked through one snag. Then, I ran my Spree specific rake task to setup the project and started the server. Tomorrow, I [share my experiences on extension development in Rails 3 based Spree](/blog/2010/10/25/spree-on-rails-3-part-two).
 
 

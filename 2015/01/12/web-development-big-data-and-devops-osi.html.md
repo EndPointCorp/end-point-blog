@@ -5,7 +5,7 @@ tags: angular, conference, containers, mongodb, nodejs, php, cms
 title: Web Development, Big Data and DevOps - OSI Days 2014, India
 ---
 
-This is the second part of an article about the conference [Open Source India](http://osidays.com/), 2014 was held at Bengaluru, India. The first part is available [here](http://blog.endpoint.com/2014/11/mongodb-and-openstack-osi-days-2014.html). The second day of the conference started with the same excitement level. I plan to attend talks covering Web, Big Data, Logs monitoring and Docker.
+This is the second part of an article about the conference [Open Source India](http://osidays.com/), 2014 was held at Bengaluru, India. The first part is available [here](/blog/2014/11/19/mongodb-and-openstack-osi-days-2014). The second day of the conference started with the same excitement level. I plan to attend talks covering Web, Big Data, Logs monitoring and Docker.
 
 ## Web Personalisation
 
