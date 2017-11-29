@@ -60,6 +60,8 @@ install bash auto completion and you miss out on a ALOT of systemctl. Just havin
 
 Lets start at the top and work down;
 
+1.
+
 ```systemctl``` 
 
 ```service```
@@ -67,7 +69,7 @@ Lets start at the top and work down;
 Used in conjunction with ABRT can show you some great debug info and runtime metadata, categorised groupings.
 tab out when you type in systemctl and you will see many optional arguments. Choose one and then tab again to see its options/args.
 
-
+2.
 ```systemctl status```
 
 ```service --status-all```
@@ -78,35 +80,41 @@ PID path and potentially the arguments which were run for the process or service
 
 ```systemctl status serviceName -l```
 
+Good flags: is-active, -a,  
 
+3.
 ```service serviceName status```
 
 Check the service/process status. The ```-l``` switch will output more for that service. A similar command might be ```
 journalctl -xe```
 
+4.
 ```systemctl enable NameofService```
 
 ```chkconfig on ServiceName```
 
 You might find on some distro's that chkconfig is still present. It doesn't do what you think it does!
 
+5.
 ```systemctl start/stop/restart httpd```
 
 ```service httpd start/stop/restart```
 
 As it suggests, start,stop,restart services/processes.
 
+6.
 ```systemctl reload httpd```
 
 ```service httpd reload```
 
 Perform a graceful reload of a configuration you may have just changed. 
 
-
+7.
 ```systemctl daemon reload```
 
 Graceful reloads of configuration files on a running service/process. See below for an explanation of “daemon reload”.
 
+8.
 ```systemctl list-unit-files```
 
 Good flags: --type=service
@@ -118,6 +126,7 @@ Prints from  /usr/lib/systemd/system/ and /etc/systemd/system/
 Slightly different to list-units, rarely used but has any interesting output. You may want to use this in any 
 monitoring scripts you write.
 
+9.
 ```systemctl list-units```
 Good flags -a (--all)
 
@@ -131,14 +140,20 @@ Anyone see the problem between the two cmd passes? I prefer to use ‘list-units
 It shows more information and is shorter to type. List all active services using systemctl. 
 Or you could install the sysvinit-utils, which by default are not installed.
 
+10.
 ```systemctl list-sockets```
 
+
+11.
 ```systemctl list-timers```
 
 
+12.
 ```systemctl list-jobs```
 Requires further explanation in another blog post.
 
+
+13.
 ```systemctl --failed```
 Show me failed services. Systemctl status will highlight at the top if units have failed, especially after a reboot.
 
@@ -154,29 +169,32 @@ Show me failed services. Systemctl status will highlight at the top if units hav
 Gets the run level which i sdefault for the system. NOt often used if rarely but good know when you start having boot issues or need
 to swap out to a different run level to fix things.
 
+14.
 ```systemctl shutdown or reboot```
 
 ```shutdown -r now```
 
 Reboot/shutdown the system. Personally I use ‘shutdown -r now’ still.
 
-
+15.
 ```systemctl cat serviceName```
 
 ```cd to dir, cat init file```
 
 Shows me the system service(unit) file contents and options.
 
+16.
 ```systemctl list-dependencies serviceName```
 
 What’s really depending on my process. The --all flag will show everything --before, --after, --reverse
 Pretty handy little dependency checker for processes.
 
+17.
 ```systemctl show serviceName```
 -p - shows a single property of a service. Shows more than using ‘systemctl cat servicename’.
 Dont forget TAB is your friend. running the ``-p`` flag and using TAB will help you.
 
-
+18.
 ```systemctl mask serviceName```
 
 ```Update-rc.d serviceName disable```
@@ -184,6 +202,7 @@ Dont forget TAB is your friend. running the ``-p`` flag and using TAB will help 
 Never want someone starting a service EVER!! 'Mask' is your friend and a little sneaky. See if your system admins 
 pick this one up. Good April fools day. ‘’unmask’’ to return it to its user
 
+19.
 ```systemctl edit serviceName```
 Good flags --full
 
@@ -193,12 +212,14 @@ Yes that’s right, edit the service file without having to cd into the director
 Careful with this. The plain edit creates an override file in /etc/systemd/system to complement the original unit file. 
 If you need to edit the original unit file use the ```--full``` flag.
 
-```Systemctl --output=```
+20.
+```systemctl --output=```
 Good Flags =verbose
 
 Particular good if you have a bad service which is playing up. Outputs a short standard message or a very terse verbose message
 using different flags.
 
+21.
 ```systemctl isolate```
 
 This deserves its own small blog post. Isolate can be used to rescue systems automagically following kernel reboot 
