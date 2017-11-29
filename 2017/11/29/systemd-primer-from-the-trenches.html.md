@@ -4,7 +4,7 @@ title: "systemd: A primer from the trench's"
 tags: hosting, systemd, systemctl 
 ---
 
-#systemctl - lets get back to basics
+# systemctl - lets get back to basics
 
 ''help me systemd you are my only hope''. If we start back at the beginning, sometimes going back to day dot
 often brings clarity to what seems like hopeless or frustrating situation for users from SysV world. Caveat, 
@@ -44,7 +44,13 @@ A good example is using the ```-l``` flag when checking a failing service such a
 Usually will output enough information to diagnose the problem without going to the logs and or journalctl. 
 
 
-##### systemctl versus old school explanation. The terminal command followed by flags and explanation. 
+##### systemctl versus old school explanation. The terminal command followed by flags and explanation.
+
+example:
+
+```systemd command/s```
+
+```sysv command/s``` 
 
 
 *Pro Tip 1*
