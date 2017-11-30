@@ -72,45 +72,48 @@ script/generate extension StephsPhotos
 Next, I wanted to try out the insert_after method to append a stylesheet to the default theme inside the <head> html element. I also wanted to remove the sidebar because my test site only has 8 products (lame!) and I don't need sidebar navigation. This was accomplished with the following changes:
 
 - First, I added the insert_after hook to add a view that contains my extra stylesheet. I also added the remove hook to remove the sidebar element:
-```ruby
-# RAILS_ROOT/vendor/extensions/stephs_photos/stephs_photos_hooks.rb
-insert_after :inside_head, 'shared/styles'
-remove :sidebar
-```
+
+    ```ruby
+    # RAILS_ROOT/vendor/extensions/stephs_photos/stephs_photos_hooks.rb
+    insert_after :inside_head, 'shared/styles'
+    remove :sidebar
+    ```
 
 - Next, I added a new view in the extension to include the new stylesheet.
-```nohighlight
-# RAILS_ROOT/vendor/extensions/stephs_photos/app/views/shared/_styles.erb
-<link type="text/css" rel="stylesheet" href="/stylesheets/stephs_photos.css">
-```
+
+    ```nohighlight
+    # RAILS_ROOT/vendor/extensions/stephs_photos/app/views/shared/_styles.erb
+    <link type="text/css" rel="stylesheet" href="/stylesheets/stephs_photos.css">
+    ```
 
 - Next, I created a new stylesheet in the extension.
-```css
-/* RAILS_ROOT/vendor/extensions/stephs_photos/public/stylesheets/stephs_photos.css */
-body { background: #000; }
-body.two-col div#wrapper { background: none; }
-a, #header a { color: #FFF; text-decoration: none; }
 
-ul#nav-bar { width: 280px; line-height: 30px; margin-top: 87px; font-size: 1.0em; }
-ul#nav-bar li form { display: none; }
+    ```css
+    /* RAILS_ROOT/vendor/extensions/stephs_photos/public/stylesheets/stephs_photos.css */
+    body { background: #000; }
+    body.two-col div#wrapper { background: none; }
+    a, #header a { color: #FFF; text-decoration: none; }
 
-.container { width: 750px; }
-#wrapper { padding-top: 0px; }
+    ul#nav-bar { width: 280px; line-height: 30px; margin-top: 87px; font-size: 1.0em; }
+    ul#nav-bar li form { display: none; }
 
-.product-listing li { background: #FFF; height: 140px; }
-.product-listing li a.info { background: #FFF; }
+    .container { width: 750px; }
+    #wrapper { padding-top: 0px; }
 
-body#product-details div#wrapper { background: #000; }
-body#product-details div#content, body#product-details div#content h1 { color: #FFF; margin-left: 10px; }
-#taxon-crumbs { display: none; }
-#product-description { width: 190px; border: none; }
-.price.selling { color: #FFF; }
-#product-image #main-image { min-height: 170px; }
+    .product-listing li { background: #FFF; height: 140px; }
+    .product-listing li a.info { background: #FFF; }
 
-/* Styling in this extension only applies to product and main page */
+    body#product-details div#wrapper { background: #000; }
+    body#product-details div#content, body#product-details div#content h1 { color: #FFF; margin-left: 10px; }
+    #taxon-crumbs { display: none; }
+    #product-description { width: 190px; border: none; }
+    .price.selling { color: #FFF; }
+    #product-image #main-image { min-height: 170px; }
 
-div#footer { display: none; }
-```
+    /* Styling in this extension only applies to product and main page */
+
+    div#footer { display: none; }
+    ```
 
 One more small change was required to update the logo via a Rails preference. I set the logo preference variable to a new logo image and uploaded the logo to RAILS_ROOT/vendor/extensions/stephs_photos/public/images/.
 
@@ -144,30 +147,32 @@ end
 The next requirement I imagined was adding promo functionality to the product listing page. I wanted to use core Spree logic to determine which promo image to use. The first promo image would be a 10% off discount to users that were logged in. The second promo image would be a 15% off discount offered to users who weren't logged in and created an account. I completed the following changes for this work:
 
 - First, I added the insert_before method to add the promo view before the homepage_products component, the component that lists the products on the homepage.
-```ruby
-# RAILS_ROOT/vendor/extensions/stephs_photos/stephs_photos_hooks.rb
-insert_before :homepage_products, 'shared/stephs_promo'
-```
+
+    ```ruby
+    # RAILS_ROOT/vendor/extensions/stephs_photos/stephs_photos_hooks.rb
+    insert_before :homepage_products, 'shared/stephs_promo'
+    ```
 
 - Next, I added the view using core Spree user functionality.
-```nohighlight
-# RAILS_ROOT/vendor/extensions/stephs_photos/app/views/shared/_stephs_promo.erb
-<% if current_user -%>
-<img src="http://www.blogger.com/images/promo10.png" alt="10 off" />
-<% else -%>
-<img src="http://www.blogger.com/images/promo15.png" alt="15 off" />
-<% end -%>
-```
+
+    ```nohighlight
+    # RAILS_ROOT/vendor/extensions/stephs_photos/app/views/shared/_stephs_promo.erb
+    <% if current_user -%>
+    <img src="http://www.blogger.com/images/promo10.png" alt="10 off" />
+    <% else -%>
+    <img src="http://www.blogger.com/images/promo15.png" alt="15 off" />
+    <% end -%>
+    ```
 
 - Finally, I uploaded my promo images to RAILS_ROOT/vendor/extensions/stephs_photos/public/images/
 
 After another server restart and homepage refresh, I tested the logged in and logged out promo logic.
 
-<a href="http://2.bp.blogspot.com/_wWmWqyCEKEs/S0fnzmk6OsI/AAAAAAAADAw/ASys_VeRS8w/s1600-h/image4.png" onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5424559149905754818" src="/blog/2010/01/12/rails-ecommerce-spree-hooks-tutorial/image-0.png" style="margin: 0px auto 10px; display: block; text-align: center; cursor: pointer; width: 400px; height: 175px;"/></a>
+<a href="http://2.bp.blogspot.com/_wWmWqyCEKEs/S0fnzmk6OsI/AAAAAAAADAw/ASys_VeRS8w/s1600-h/image4.png" onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5424559149905754818" src="/blog/2010/01/12/rails-ecommerce-spree-hooks-tutorial/image-0.png" style="display: block; cursor: pointer; width: 400px; height: 175px;"/></a>
 
 vs.
 
-<a href="http://4.bp.blogspot.com/_wWmWqyCEKEs/S0fnz-pL2hI/AAAAAAAADA4/QuJR5NvI_1A/s1600-h/image5.png" onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5424559156366137874" src="/blog/2010/01/12/rails-ecommerce-spree-hooks-tutorial/image-0.png" style="margin: 0px auto 10px; display: block; text-align: center; cursor: pointer; width: 400px; height: 175px;"/></a>
+<a href="http://4.bp.blogspot.com/_wWmWqyCEKEs/S0fnz-pL2hI/AAAAAAAADA4/QuJR5NvI_1A/s1600-h/image5.png" onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5424559156366137874" src="/blog/2010/01/12/rails-ecommerce-spree-hooks-tutorial/image-0.png" style="display: block; cursor: pointer; width: 400px; height: 175px;"/></a>
 
 Spree core functionality used to display two different promo images inside a partial view.
 
@@ -178,17 +183,19 @@ Spree core functionality used to display two different promo images inside a par
 In my third example, I imagined that I wouldn't have time to manage product descriptions when I was rich and famous. I decided to use the replace hook to replace the product description on all product pages. I completed the following steps for this change:
 
 - First, I added the replace method to replace the :product_description component with a rails partial view.
-```ruby
-# RAILS_ROOT/vendor/extensions/stephs_photos/stephs_photos_hooks.rb
-replace :product_description, 'shared/generic_product_description'
-```
+
+    ```ruby
+    # RAILS_ROOT/vendor/extensions/stephs_photos/stephs_photos_hooks.rb
+    replace :product_description, 'shared/generic_product_description'
+    ```
 
 - Next, I created the view with the generic product description.
-```nohighlight
-# RAILS_ROOT/vendor/extensions/stephs_photos/app/views/shared/_generic_product_description.erb
-all prints are 4x6 matte prints.<br />
-all photos ship in a folder.
-```
+
+    ```nohighlight
+    # RAILS_ROOT/vendor/extensions/stephs_photos/app/views/shared/_generic_product_description.erb
+    all prints are 4x6 matte prints.<br />
+    all photos ship in a folder.
+    ```
 
 After yet another server restart and product refresh, I tested the generic product description using the replace hook.
 
