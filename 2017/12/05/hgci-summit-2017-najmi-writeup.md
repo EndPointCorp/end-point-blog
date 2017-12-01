@@ -1,0 +1,21 @@
+---
+author: "Muhammad Najmi Ahmad Zabidi"
+title: "HGCI Summit Conference 2017, Malaysia - A conference on cloud, security and big data"
+tags: conference, Malaysia
+---
+
+I was asked by a friend to give a talk in conference from a friend whom organized an annual conference called as HGCI Summit 2017. This conference is meant to bridge the academic world and the industry in term of knowledge and experience sharing. It took place in the Center of Advanced Professional Education (CAPE) a center under the Universiti Teknologi Petronas (UTP) which has a main campus in Tronoh, Perak, Malaysia. 
+
+(/2017/12/05/utp.jpg)
+
+This conference focuses on the application of big data, cloud and its application. UTP decided to close up the gap between the academic world and the industry - hence they invited industry practitioners to share their knowledge within the event. 
+
+I will highlight several tracks which I attended. In the first day, several faculty members sat together within a forum in which they discussed the main issue the academic faced when they need access to the high performance computing. One of the audience shared her experience completing her research group's work which took so long to be rendered while she could do it in a day when she submitted the work in a university in the US. One of the forum's members then replied she could always work collaboratively with the other univesities, in which he (the forum's member) offered his university's facilities to be used for her research. Such issue, apart from the inter-varsity network bandwidth also being dicussed in the forum. 
+
+The other interesting talk which I attended was a talk delivered by Dr Izzatdin from UTP. He shared his work on the cloud based crude oil refiniery monitoring. The monitoring system web page is hosted on Azure in which it will display the oil refinery data which were gathered batch by batch from the sensors. The metal corrosion is among the thing that being monitored by the systems.
+
+I also attended a talk delivered by a friend of mine, Mr Aizat from Informology (his own company). He shared the use of OpenStack for the privision of high parallel computing instances. I saw that Aizat also used the ready-to-be-used Ansible scripts in order to get the computing instances ready. By using Horizon (OpenStack's user interface) it seems we could speed up the process of the instance provisioning. Aizat also shared a link if anyone interested to try out the "vanilla" version of OpenStack http://trystack.org/. Another tool which he shared is [ElastiCluster](https://github.com/gc3-uzh-ch/elasticluster), a set of Python scripts which allow to create, manage and setup cloud infrastructures by using Ansible.  Aizat also showed the use of [Jujucharms](https://jujucharms.com),  a portal which handles Juju - an open source application modelling tool developed by Canonical (the maker of Ubuntu Linux). 
+
+(/2017/12/05/aizat.jpg)
+
+My talk was shortly after Aizat's slot, in which I covered the use of algorithms to detect the similiary subsequence of patterns between malware and non malware (benign software) and between the malware family variances. I obtained the malware samples from a Windows malware researcher when he did his PhD study and another dataset was obtained from a research unit in Asia (please contact me if you want these samples). These datasets contain either Application Programming Interface (API) calls only, or API calls with their arguments. These API calls were obtained by running the malware within a safe, virtualized environment and the calls were dumped into text files. Since procedural language commonly runs from top bottom, the API calls which were generated inherit the same idea, making them having the same structures if they are sharing the common root. I used ***n-gram*** and ***Longest Common Subsequence (LCS)*** to perform the experiment. These two algorithms are categorized under the dynamic programming algorithms group, in which they created a subsequence from the sequence of problem for a pattern matching. I also mentioned the use of Python (for example with scikit-learn) and [Weka](https://www.cs.waikato.ac.nz/ml/weka) if we want to work on the problem by using the machine learning method. 
