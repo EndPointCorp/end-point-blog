@@ -19,15 +19,11 @@ I expected this to be simple, but that expectation sometimes proves to be false.
 
 ### Trying the prune filter
 
-The most obvious way would be to use the Logstash `prune` filter, which is designed for just such a use case. However, the `prune` filter doesn’t handle nested keys. This is [only noted in the Logstash prune filter source code](https://github.com/logstash-plugins/logstash-filter-prune/blob/b01ed5e4bcada138654195a3f410801f5670720a/lib/logstash/filters/prune.rb#L38-L40) in a comment!
+The most obvious way would be to use the Logstash `prune` filter, which is designed for just such a use case. However, the `prune` filter doesn’t handle nested keys, as explained in the documentation:
 
-```ruby
-# NOTE: This filter currently only support operations on top-level fields,
-# i.e. whitelisting and blacklisting of subfields based on name or value
-# does not work.
-```
+> NOTE: This filter currently only support operations on top-level fields, i.e. whitelisting and blacklisting of subfields based on name or value does not work.
 
-Too bad.
+That is too bad.
 
 ### Pruning with custom Ruby code
 
