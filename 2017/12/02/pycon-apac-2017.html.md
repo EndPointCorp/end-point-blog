@@ -2,6 +2,7 @@
 author: Muhammad Najmi bin Ahmad Zabidi
 title: "Conference Recap: PyCon Asia Pacific (APAC) 2017 in Kuala Lumpur, Malaysia"
 tags: conference, python
+gh_issue_number: 1345
 ---
 I got a chance to attend the annual PyCon APAC 2017 (Python Conference, Asia Pacific) which was hosted in my homeland, Malaysia. In previous years, Python conferences in Malaysia were held at the national level and this year the Malaysia’s PyCon committee worked hard on organizing a broader Asia-level regional conference.
 
