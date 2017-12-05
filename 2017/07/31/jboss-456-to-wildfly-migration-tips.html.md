@@ -21,7 +21,7 @@ You can set it up using multiple configuration files in the standalone/configura
 
 I can recommend to use the standalone-full.xml file for most of setup, it contains a default full stack as opposed to **standalone.xml**.
 
-You can also set up an application specific configuration using various configuration XML files ([https://docs.jboss.org/author/display/WFLY10/Deployment+Descriptors+used+In+WildFly](https://docs.jboss.org/author/display/WFLY10/Deployment+Descriptors+used+In+WildFly)). Remember to keep the appliction specific configuration in the Classpath.
+You can also set up an application specific configuration using various configuration XML files ([https://docs.jboss.org/author/display/WFLY10/Deployment+Descriptors+used+In+WildFly](https://docs.jboss.org/author/display/WFLY10/Deployment+Descriptors+used+In+WildFly)). Remember to keep the application specific configuration in the Classpath.
 
 ## Quartz as a message queue
 
