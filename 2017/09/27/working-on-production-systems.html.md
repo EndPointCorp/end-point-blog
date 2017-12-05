@@ -28,12 +28,10 @@ server) should involve a good amount or preparation. By the time the big night a
 - Know the impact on the business, and the downtime window anticipated by the rest of the company.
 - Have a coworker familiar with everything on standby, ready to call in if needed.
 - Document the process. For a large project, a spreadsheet or similar document can be quite helpful.
-
-        - Who are the people involved, how to contact them, and what general role do they play?
-        - Which task is being done at what time, who is the primary and backup for it, and what other tasks does it block?
-        - How is success for each stage measured?
-        - What is the rollback plan for each step? When is the point of no return reached?
-
+    - Who are the people involved, how to contact them, and what general role do they play?
+    - Which task is being done at what time, who is the primary and backup for it, and what other tasks does it block?
+    - How is success for each stage measured?
+    - What is the rollback plan for each step? When is the point of no return reached?
 - Setup a shared meeting space (IRC, Skype, Slack, Zulip, HipChat, etc.)
 - Confirm connections (e.g. VPN up and running? Passwords not set to expire soon? Can everyone get to Slack? SSH working well?)
 
@@ -46,18 +44,14 @@ what you are doing. Finally, they enable you to easily view and control multiple
 
 - Name your screen something obvious to the task such as "bucardo-production-rollout". Always give it a name to prevent people from joining it by accident. I often use just my email, i.e. screen -S greg@endpoint.com or tmux new -s greg_endpoint_com.
 - Keep organized. Try to keep each window to one general task, and give each one a descriptive name:
-
-        - screen: Ctrl-a A     tmux: Ctrl-b ,
-        - I find that uppercase names stand out nicely from  your terminal traffic.
-        - Splitting windows by task also helps scrollback searching.
-
+    - screen: Ctrl-a A     tmux: Ctrl-b ,
+    - I find that uppercase names stand out nicely from  your terminal traffic.
+    - Splitting windows by task also helps scrollback searching.
 - Boost your scrollback buffer so you can see what happened a while ago. The default value is usually much too low.
-
-        - Inside /etc/screenrc or ~/.screenrc: defscrollback 50000
-        - Inside /etc/tmux.conf or ~/.tmux.conf: set-option -g history-limit 50000
-
+    - Inside /etc/screenrc or ~/.screenrc: defscrollback 50000
+    - Inside /etc/tmux.conf or ~/.tmux.conf: set-option -g history-limit 50000
 - Develop a good configuration file. Nothing too fancy is needed, but being able to see all the window names at once on the bottom of the screen makes things much easier.
- - Consider [logging all your screen output](/blog/2013/07/24/gnu-screen-logtstamp-string).
+- Consider [logging all your screen output](/blog/2013/07/24/gnu-screen-logtstamp-string).
 
 ### Discovery and Setup
 
@@ -73,7 +67,7 @@ For Postgres, you also want to get some quick database information as well. Ther
 at a bare minimum check out the version, and per-user settings, the databases and their sizes, and what all the 
 non-default configuration settings are:
 
-```
+```text
 select version();
 \drds
 \l+
@@ -126,7 +120,7 @@ database - and server - you are using just by looking at the psql prompt. Databa
 same (especially with primaries and their replicas), so you need to add a little bit more. Here's a decent recipe, but you can 
 consult [the documentation](https://www.postgresql.org/docs/current/static/app-psql.html#APP-PSQL-PROMPTING) to design your own.
 
-```
+```text
 $ echo "\set PROMPT1 '%/@%m%R%#%x '" >> ~/.psqlrc
 $ psql service=PROD
 product_elements@topeka=> 
@@ -164,7 +158,7 @@ run on the production server. If they do, you end up with a "function not found 
 realizing you just truncated a production table. Of course, you should add some safeguards so that the function 
 itself is never created on the production server. Here is one sample recipe:
 
-```
+```text
 \set ON_ERROR_STOP on
 
 DROP FUNCTION IF EXISTS safetruncate(text);
@@ -212,7 +206,7 @@ psql commands. For example, I recently found myself having to examine tables on 
 and needed to quickly examine a table's size, indexes, and if anyone was currently modifying it. Thus 
 a shall script:
 
-```
+```text
 psql service=PROD -c "\\d $1"
 psql service=PROD -Atc "select pg_relation_size('$1')"
 psql service=PROD -Atc "select query from pg_stat_activity where query ~ '$1'"
