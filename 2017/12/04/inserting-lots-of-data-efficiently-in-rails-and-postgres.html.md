@@ -2,6 +2,7 @@
 author: Kamil Ciemniewski
 title: "Inserting lots of data efficiently in Rails + Postgres"
 tags: rails, postgres
+gh_issue_number: 1347
 ---
 
 This is going to be a very short post about a simple solution to the problem of inserting data fast when you really have a **lot** of it.
