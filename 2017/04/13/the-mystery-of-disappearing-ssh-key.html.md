@@ -32,7 +32,7 @@ simply add an entry in my ~/.ssh/config file to automatically create a tunnel be
 the servers -
 at which point I can reach the client's server by typing "ssh acmedmz":
 
-```
+```text
 ##
 ## Client: ACME ANVILS
 ##
@@ -50,7 +50,7 @@ to the client's server uses a non-standard port, and the username
 changes from "greg" to "endpoint", but all of that is hidden away from
 me as now the login is simply:
 
-```
+```text
 [greg@localhost]$ ssh acmedmz
 [endpoint@dmz]$
 ```
@@ -58,7 +58,7 @@ me as now the login is simply:
 It's unusual that I'll actually need to do any work on the dmz server, of course,
 so the tunnel gets extended another hop to the db1.acme-anvils.com server:
 
-```
+```text
 ##
 ## Client: ACME ANVILS
 ##
@@ -97,7 +97,7 @@ the server in question for a long time, but I needed to make some adjustments
 to a [tail_n_mail](https://bucardo.org/wiki/Tail_n_mail) configuration file. The first login attempt failed
 completely:
 
-```
+```text
 [greg@localhost]$ ssh acmedmz
 endpoint@dmz.acme-anvils.com's password:
 ```
@@ -116,7 +116,7 @@ When in doubt, crank up the debugging. For the ssh program, using the
 -v option turns on some minimal debugging. Running the
 original command from my computer with this option enabled quickly revealed the problem:
 
-```
+```text
 [greg@localhost]$ ssh -v acmedmz
 OpenSSH_7.4p1, OpenSSL 1.0.2k-fips  26 Jan 2017
 debug1: Reading configuration data /home/greg/.ssh/config
@@ -138,7 +138,7 @@ debug1: Next authentication method: password
 endpoint@dmz.acme-anvils.com's password:
 ```
 
-As highlighted above, the problem is that my DSA key (the "ssh-dss key") was rejected by
+The problem is that my DSA key (the "ssh-dss key") was rejected by
 my ssh program. As we will see below, DSA keys are rejected by default in recent versions
 of the OpenSSH program. But why was I still able to login when not hopping through
 the middle server? The solution lays in the fact that when I use the ProxyCommand,
@@ -147,7 +147,7 @@ key. However, when I ssh to the portal.endpoint.com server, and then on to the n
 the second server has no problem using my (forwarded) DSA key! Using the -v option on the connection
 from portal.endpoint.com to dmz.acme-anvils.com reveals another clue:
 
-```
+```text
 [greg@portal]$ ssh -v endpoint@dmz.acme-anvils.com:2222
 ...
 debug1: Connecting to dmz [1234:5678:90ab:cd::e] port 2222.
@@ -192,7 +192,7 @@ keys again. To do this, add this line to your local SSH config file
 ($HOME/.ssh/config), or to the global SSH config file
 (/etc/ssh/config):
 
-```
+```text
 PubkeyAcceptedKeyTypes +ssh-dss
 ```
 

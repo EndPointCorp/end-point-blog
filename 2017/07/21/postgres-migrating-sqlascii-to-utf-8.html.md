@@ -75,7 +75,7 @@ $ cat sample.data
 
 Running iconv is of little help:
 
-```
+```text
 ## With no source encoding given, it errors on the Euro:
 $ iconv -t utf8 sample.data >/dev/null
 iconv: illegal input sequence at position 23
@@ -94,27 +94,25 @@ $ iconv -f windows-1252 -t utf8//ignore sample.data
 
 After testing a few other tools, we discovered the nifty [Encoding::FixLatin](https://metacpan.org/pod/Encoding::FixLatin), a Perl module which provides a command-line program called "fix_latin". Rather than being authoritative like iconv, it tries its best to fix things up with educated guesses. Its documentation gives a good summary:
 
-```
-  The script acts as a filter, taking source data which may contain a mix of
-  ASCII, UTF8, ISO8859-1 and CP1252 characters, and producing output will be
-  all ASCII/UTF8.
+>  The script acts as a filter, taking source data which may contain a mix of
+>  ASCII, UTF8, ISO8859-1 and CP1252 characters, and producing output will be
+>  all ASCII/UTF8.
+>
+>  Multi-byte UTF8 characters will be passed through unchanged (although
+>  over-long UTF8 byte sequences will be converted to the shortest normal
+>  form). Single byte characters will be converted as follows:
+>
+>  0x00 - 0x7F   ASCII - passed through unchanged
+>  0x80 - 0x9F   Converted to UTF8 using CP1252 mappings
+>  0xA0 - 0xFF   Converted to UTF8 using Latin-1 mappings
 
-  Multi-byte UTF8 characters will be passed through unchanged (although
-  over-long UTF8 byte sequences will be converted to the shortest normal
-  form). Single byte characters will be converted as follows:
-
-    0x00 - 0x7F   ASCII - passed through unchanged
-    0x80 - 0x9F   Converted to UTF8 using CP1252 mappings
-    0xA0 - 0xFF   Converted to UTF8 using Latin-1 mappings
-```
 
 While this works great for fixing the Windows-1252 and Latin-1 problems (and
 thus accounted for at least 95% of our table's bad encodings), it still allows
 "invalid" UTF-8 to pass on through. Which means that Postgres will still refuse
 to accept it. Let's check our test file:
 
-```
-
+```text
 $ fix_latin sample.data
 [Windows-1252]   Euro: €   Double dagger: ‡
 [Latin-1]   Yen: ¥   Half: ½
@@ -208,7 +206,7 @@ question marks were quick and easy - and the surrounding data was unlikely to be
 
 Voila! All of the data was now going into Postgres without a problem. Observe:
 
-```
+```text
 $ echo "SELECT E'"  "$(fix_latin  sample.data)"  "';" | psql
 ERROR:  invalid byte sequence for encoding "UTF8": 0xf4 0xa5 0xa3 0xa5
 

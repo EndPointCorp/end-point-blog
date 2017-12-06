@@ -80,7 +80,7 @@ each command with /usr/bin/time -verbose, which produces a nice breakdown of res
 To gather the data, the "Elapsed (wall clock) time" was used, along with size of
 the compressed file. Here is some sample output of the time command:
 
-```
+```text
   Command being timed: "bzip2 -4 ./0000000100008B91000000A5"
   User time (seconds): 1.65
   System time (seconds): 0.01
@@ -111,6 +111,12 @@ running the [pgbench program](https://www.postgresql.org/docs/current/static/pgb
 and once with it disabled. Then each of the resulting WAL files was compressed using each of the programs above.
 
 -----------
+
+<style><!--
+table.gsmt { font-family: Monospace; padding: 0 0 3em 0; margin-left: auto; margin-right: auto; }
+table.gsmt table td { padding: 0 0.5em 0 0.2em ; color: #222200; white-space: nowrap; font-size: smaller;}
+table.gsmt table th { padding: 0em 0.5em 0em 0.5em; color: black; font-size: smaller; }
+--></style>
 
 <table border="0" class="gsmt" style="padding: 0 0 3em 0"><caption><b>Table 1.</b><br/>
 Results of compressing 16 MB WAL files - average for 100 files</caption>

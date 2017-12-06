@@ -22,7 +22,7 @@ To demonstrate the solution, let's spin up a Postgres 10 instance, route the log
 setup tail_n_mail, and then create separate configuration files for different times of the week.
 First, some setup:
 
-```
+```text
 $ initdb --version
 initdb (PostgreSQL) 10.0
 $ initdb --data-checksums data
@@ -37,7 +37,7 @@ $ pg_ctl start -D data -l logfile
 
 Grab the latest version of tail_n_mail and verify it:
 
-```
+```text
 $ wget --no-verbose https://bucardo.org/downloads/tail_n_mail{,.asc}
 2017-03-03 10:00:33 URL:https://bucardo.org/downloads/tail_n_mail [98767/98767] -> "tail_n_mail" [1]
 2017-03-03 10:00:33 URL:https://bucardo.org/downloads/tail_n_mail.asc [163/163] -> "tail_n_mail.asc" [1]
@@ -83,7 +83,7 @@ To test it out, we will generate some errors, and then run tail_n_mail from the 
 If all goes well, it sends out an email and then rewrites the configuration file to indicate
 how far along it got. The --dry-run option can be used to view the email without actually sending it.
 
-```
+```text
 $ for i in 2 4 6 8; do psql -tc "select $i/0"; done
 ERROR:  division by zero
 ERROR:  division by zero
@@ -91,7 +91,7 @@ ERROR:  division by zero
 ERROR:  division by zero
 ```
 
-```
+```text
 $ perl tail_n_mail tnm.conf --dry-run
 Subject: localhost.localdomain Postgres errors 4
 Auto-Submitted: auto-generated
@@ -118,7 +118,7 @@ STATEMENT: select 2/0
 
 Running it in normal mode rewrites the configuration file:
 
-```
+```text
 $ perl tail_n_mail tnm.conf
 $ cat tnm.conf
 ## Config file for the tail_n_mail program
@@ -156,7 +156,7 @@ them getting rewritten on each invocation, as we can store the ephemeral data in
 file, and the constant data in a separate, version controlled file. Let's apply that idea to
 our example:
 
-```
+```text
 $ cat > tnm.global.conf << EOT
 PGLOG: syslog
 EMAIL: greg@example.com
@@ -181,7 +181,7 @@ EOT
 
 After another run, we observe that the inherited file does not change:
 
-```
+```text
 $ perl tail_n_mail tnm.conf
 $ git status
 On branch master
@@ -206,7 +206,7 @@ A common usage is to get an immediate email about almost all database problems, 
 well as a daily report about all problems. To do this, we create two configuration
 files and set them up in cron:
 
-```
+```text
 $ cp tnm.conf tnm.fatals.conf
 $ mv tnm.conf tnm.errors.conf
 $ perl -pi -e 's/Postgres errors/Postgres fatals/' tnm.fatals.conf
@@ -223,7 +223,7 @@ Simple enough - we just create two "inherited" configuration files, then have cr
 For example, let's say that after 5pm on weekdays, and all weekend, we do not want to receive emails
 about "division by zero" errors. First, create files named tnm.global.hometime.conf and tnm.global.workday.conf:
 
-```
+```text
 $ cp tnm.global.conf tnm.global.workday.conf
 $ cp tnm.global.conf tnm.global.hometime.conf
 $ ln -sf tnm.global.workday.conf tnm.global.conf
@@ -232,7 +232,7 @@ $ echo "EXCLUDE: ERROR:  division by zero" >> tnm.global.hometime.conf
 
 Finally, have cron swap the files around at the start and end of business hours:
 
-```
+```text
 $ crontab -e
 ## May need to use 1-5 instead of Mon-Fri on some systems
 0 9 * * Mon-Fri ln -sf tnm.global.workday.conf tnm.global.conf
