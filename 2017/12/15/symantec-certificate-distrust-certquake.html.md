@@ -23,14 +23,13 @@ What's this all about? Glad you asked.
 
 These certificates are used to secure the communication we have with
 websites. When a site uses a certificate correctly, you will see the
-leading part of the URL begin with "http://" (known as the protocol),
+leading part of the URL begin with `https://` (known as the protocol),
 and the "green-lock" icon in your browser.
 
 Certificates can also be issued with more stringent requirements on the
 company obtaining them, where they must verify their company by
 providing articles of incorporation, etc. These are known as "EV" certs,
-and browsers will show the company name in the URL bar next to the green-
-lock icon.
+and browsers will show the company name in the URL bar next to the green-lock icon.
 
 ### Essential Trust
 
@@ -56,11 +55,9 @@ The first distrust will occur in **March 2018**, when Chrome 66 is released to b
 
 Symantec also resold their security offerings to multiple partners.
 Thus, several certificate vendors with completely different names turned
-out to use Symantec root certificates behind the scenes, and are also affected.
-
-This includes *all* certificates with Symantec as the root issuer, which
-means that their **reseller brands such as Equifax, GeoTrust, Thawte,
-and VeriSign, among others, are also affected**.
+out to use Symantec root certificates behind the scenes, and are also affected. 
+This includes *all* certificates with Symantec as the root issuer, such as **Equifax, GeoTrust, Thawte,
+and VeriSign**, among others.
 
 You can read more on [Google's plan](https://security.googleblog.com/2017/09/chromes-plan-to-distrust-symantec.html), and also see [Qualys' overview on the situation](https://blog.qualys.com/ssllabs/2017/09/26/google-and-mozilla-deprecating-existing-symantec-certificates).
 
