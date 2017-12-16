@@ -1,7 +1,7 @@
 ---
 author: Steph Skardal
 gh_issue_number: 914
-tags: mpas, javascript, jquery
+tags: maps, javascript, jquery
 title: Using Google Maps and jQuery for Location Search
 ---
 
