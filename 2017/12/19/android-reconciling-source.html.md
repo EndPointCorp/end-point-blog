@@ -28,7 +28,6 @@ oddball problems reported by our client. One reported issue I had to fix was fou
 The "Quantity" field worked just fine for any non-zero value, but if it was zero, then the app was displaying 0 instead. This turned out to be very simple to fix. Below is the snippet of code involved:
 
 ```java
-[code]
 <TextView
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
