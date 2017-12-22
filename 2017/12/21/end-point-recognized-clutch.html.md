@@ -5,7 +5,7 @@ tags: company, ruby, rails, ecommerce
 gh_issue_number: 1358
 ---
 
-<img src="/blog/2017/12/21/end-point-recognized-clutch/clutch.png" width="370" height="400" style="float: right; margin: 1em" />
+<img src="/blog/2017/12/21/end-point-recognized-clutch/clutch.png" width="185" height="200" style="float: right; margin: 1em" />
 
 As the year comes to a close and we reflect on the goals we’ve accomplished and the work that made it all possible, we are proud to announce our inclusion on the Clutch Global Leaders List, encapsulating the 475+ most highly reviewed companies from around the world. We placed as a leader on both Top Ruby on Rails Developers and Top Ecommerce Developers, being the best New York-based firm on the former and in the top three from New York on the latter.
 
