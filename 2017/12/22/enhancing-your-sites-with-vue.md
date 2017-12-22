@@ -5,6 +5,7 @@ tags: javascript, html, frameworks, front-end, vuejs, open-source
 
 ---
 
+<img src="/blog/2017/12/22/enhancing-your-sites-with-vue/vuejs-logo.png" width="250" alt="Vue.js Logo" style="margin: 1em auto; display: block" />
 ### Framework Fatigue
 
 When developers consider and evaluate front-end frameworks they often think in terms of writing *or rewriting* their entire project in Framework X. “Should we use Vue, React, Preact?” or “I heard about [Sapper](https://twitter.com/Rich_Harris/status/942493962857787392) the other day, has anyone tried that?”. The running joke response (back-end devs especially **love** this one) is to the effect of: “If we wait a couple weeks there will be ten more choices!”.
