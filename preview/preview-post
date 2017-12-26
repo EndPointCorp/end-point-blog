@@ -37,7 +37,7 @@ root = path.sub(path_regex, '\1')
 post = File.read(ARGV[0])
 yaml = post.sub(/---\n(.*?)\n---(.*)/m, '\1')
 md   = post.sub(/---\n(.*?)\n---(.*)/m, '\2')
-md = md.gsub(/(src|href)=(["'])\/blog\//, "\1=\2#{root}/")
+md = md.gsub(/(src|href)=(["'])\/blog\//, '\1=\2')
 yaml = YAML.load(yaml)
 
 header = <<-eof
