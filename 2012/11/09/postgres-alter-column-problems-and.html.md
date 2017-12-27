@@ -15,10 +15,10 @@ A common situation for database-backed applications is the need to change the at
 
 The most common example of such a change is expanding a 
 VARCHAR declaration to allow more characters. For example, 
-your "checksum" column was based on 
+your “checksum” column was based on 
 [MD5](http://en.wikipedia.org/wiki/MD5) (at 32 characters), and 
 now needs to be based on 
-[Keccak](http://en.wikipedia.org/wiki/Keccak) (Keccak is pronounced "catch-ack")  (at 64 characters)
+[Keccak](http://en.wikipedia.org/wiki/Keccak) (Keccak is pronounced “catch-ack”)  (at 64 characters)
 In other words, you need a column in your table to change from VARCHAR(32) to VARCHAR(64). 
 The canonical approach is to do this:
 
@@ -63,7 +63,7 @@ before you jump down there, consider a different option: abandoning VARCHAR alto
 In the Postgres world, there are few differences between the VARCHAR and TEXT data types. The latter can 
 be thought of as an unbounded VARCHAR, or if you like, a VARCHAR(999999999999). You may also add a 
 [check constraint](http://www.postgresql.org/docs/current/static/ddl-constraints.html) to a table to emulate the limit of a VARCHAR. For example, to convert 
-a VARCHAR(32) column named "checksum" to a TEXT column:
+a VARCHAR(32) column named “checksum” to a TEXT column:
 
 ```
 ALTER TABLE foobar ALTER COLUMN checksum TYPE text;

@@ -52,17 +52,13 @@ And here is how I felt after the conference, regarding pros and cons on bringing
 And finally, some tips:
 
 - Plan ahead:
-
-        - Review the sessions in advance and pick out ones you want to attend because you may not have time to do that on the fly.
-        - Walk (or travel) the route from your hotel to the conference so you know how long it will take and if there will be challenges.
-
+    - Review the sessions in advance and pick out ones you want to attend because you may not have time to do that on the fly.
+    - Walk (or travel) the route from your hotel to the conference so you know how long it will take and if there will be challenges.
 - Be agile and adapt. Most parents are already probably doing this with a 4 month old.
 - Manage your expectations:
-
-        - Expect the conference with a baby to be tiring & challenging at times.
-        - Expect stares.
-        - Expect you won't make it to every session you want, so make a point of talking to others to find out their favorite sessions.
-
+    - Expect the conference with a baby to be tiring & challenging at times.
+    - Expect stares.
+    - Expect you won't make it to every session you want, so make a point of talking to others to find out their favorite sessions.
 - If not provided, ask conference organizers for access to a nursing or stashing room.
 - Bring baby gear options: carrier, stroller, bouncy seat, etc.
 - Research food delivery options ahead of time.

@@ -5,7 +5,7 @@ tags: postgres
 title: Copying Rows Between PostgreSQL Databases
 ---
 
-A recurring question is: ‘how can I copy a couple of rows from one database to another’? People try to set up some replication, or dump entire database, however the solution is pretty simple.
+A recurring question is: “how can I copy a couple of rows from one database to another”? People try to set up some replication, or dump entire database, however the solution is pretty simple.
 
 ## Example
 

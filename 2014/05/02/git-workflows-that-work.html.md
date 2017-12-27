@@ -82,7 +82,7 @@ On the other end of the spectrum from a master only workflow, is Gitflow.  Here 
 
 When I worked for Backcountry.com we used a similar workflow, however we used different names for the branches.  All development happened on master, feature branches were branched off and then merged back into master.  Then we branched master to create a new release branch.  And then we merged the release branch into a branch called “production”.  And since master is just a branch and doesn’t have to be special, you could use a branch named whatever you want for your production code.
 
-## Guidelines
+### Guidelines
 
 There are many other examples we could go over and discuss, but these should be enough to get you thinking about different possibilities.  There are a few guidelines that you should consider for your workflow:
 
