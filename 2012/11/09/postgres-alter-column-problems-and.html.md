@@ -29,7 +29,7 @@ ALTER TABLE foobar ALTER COLUMN checksum TYPE VARCHAR(64);
 This approach works fine, but it has two huge and interrelated problems: 
 locking and time. This approach locks the table for as long as the 
 command takes to run. And by lock, we are talking a heavy 
-['access exclusive' lock](http://www.postgresql.org/docs/current/static/explicit-locking.html#LOCKING-TABLES) which shuts everything else out of the table. If your table is small, 
+[“access exclusive” lock](http://www.postgresql.org/docs/current/static/explicit-locking.html#LOCKING-TABLES) which shuts everything else out of the table. If your table is small, 
 this is not an issue. If your table has a lot of data, however, this brings 
 us to the second issue: table rewrite. The above command will cause Postgres 
 to rewrite every single row of the table, which can be a very expensive operation 
@@ -95,7 +95,7 @@ So why would you go through the trouble of switching from your VARCHAR(32) to a
 TEXT column with a CHECK constraint? There are at least three good reasons.
 
 First, if you are running Postgres 9.2 or better, this means you can change the constraint 
-requirements on the fly, without a table scan - even for the 'non-optimal' situations 
+requirements on the fly, without a table scan - even for the “non-optimal” situations 
 such as going from 64 characters down to 32. Just drop the old constraint, and add a new 
 one with the NOT VALID clause thrown on it.
 
@@ -183,7 +183,7 @@ no difference in the way the actual table data is written. The length limit of a
 is simply an implicit check constraint, after all, and as such, it is quite easy to 
 change.
 
-Let's create a table and look at some of the important fields in the system 
+Let’s create a table and look at some of the important fields in the system 
 table **pg_attribute**. In these examples we will use Postgres 8.4, but 
 other versions should look very similar - this part of the system catalog 
 rarely changes.
@@ -204,7 +204,7 @@ atttypmod | 36
 ```
 
 The important column is **atttypmod**. It indicates the legal length of this varchar column 
-(whose full legal name is 'character varying', but everyone calls it varchar). In the case of 
+(whose full legal name is “character varying”, but everyone calls it varchar). In the case of 
 Postgres, there is also 4 characters of overhead. So VARCHAR(32) shows up as 36 in the 
 atttypmod column. Thus, if we want to change it to a VARCHAR(64), we add 4 to 64 and get a number of 68.
 Before we do this change, however, we need to make sure that nothing else will be affected. There are 
@@ -223,7 +223,7 @@ postgres-#   WHERE refobjid = 'foobar'::regclass;
 We can see in the above that the only dependency is an entry in the pg_type table - which is a normal 
 thing for all tables and will not cause any issues. Any other entries, however, should give you pause 
 before doing a manual update of pg_attribute. You can use the information returned by the first column 
-of the above query to see exactly what is referencing the table. For example, let's make that column 
+of the above query to see exactly what is referencing the table. For example, let’s make that column 
 unique, as well as adding a view that uses the table, and then see the effects on the pg_depend table:
 
 ```
@@ -243,7 +243,7 @@ postgres-#   WHERE refobjid = 'foobar'::regclass;
  pg_rewrite:16424 | n
 ```
 
-The 'i', 'a', and 'n' stand for internal, auto, and normal. They are not too important in this context, but more 
+The “i”, “a”, and “n” stand for internal, auto, and normal. They are not too important in this context, but more 
 details can be found in [the docs on the pg_depend table](http://www.postgresql.org/docs/8.4/static/catalog-pg-depend.html). The first column shows us the system table and oid of the dependency, so 
 we can look them up and see what they are:
 
