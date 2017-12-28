@@ -11,7 +11,7 @@ title: Copy Data Between MySQL Databases with Sequel Pro
 
 <img alt="Sequel pro" border="0" height="350" src="/blog/2014/01/10/copy-data-between-mysql-databases-with/image-0.png" style="display:block" title="sequel-pro.png" width="450"/>
 
-I often use [Sequel Pro](http://www.sequelpro.com/) when I'm getting up to speed on the data model for a project or when I just want to debug in a more visual way than with the mysql command-line client. It's a free OS X application that lets you inspect and manage MySQL databases. I also find it very useful for making small changes to the data while I develop and test web apps.
+I often use [Sequel Pro](http://www.sequelpro.com/) when I’m getting up to speed on the data model for a project or when I just want to debug in a more visual way than with the mysql command-line client. It’s a free OS X application that lets you inspect and manage MySQL databases. I also find it very useful for making small changes to the data while I develop and test web apps.
 
 ### Quickly Copy Data Between Databases
 
@@ -19,10 +19,10 @@ I recently needed a way to copy a few dozen records from one [camp](http://www.d
 
 <img alt="Copy as sql insert" border="0" height="407" src="/blog/2014/01/10/copy-data-between-mysql-databases-with/image-1.png" title="copy-as-sql-insert.png" width="562"/>
 
-I simply selected the records I wanted to copy and used the "Copy as SQL INSERT" feature. The SQL insert statement I needed was now copied to the system clipboard and easily copied over to the other camp and imported via the mysql command-line client.
+I simply selected the records I wanted to copy and used the “Copy as SQL INSERT” feature. The SQL insert statement I needed was now copied to the system clipboard and easily copied over to the other camp and imported via the mysql command-line client.
 
 ### Bundles
 
-The Sequel Pro website describes [Bundles](http://www.sequelpro.com/bundles) which extend the functionality in various ways — including copying data as JSON. Very handy stuff. Many thanks to the [developers](http://northofthree.com/) of this fine software. If you're on OS X, be sure to give it a try.
+The Sequel Pro website describes [Bundles](http://www.sequelpro.com/bundles) which extend the functionality in various ways — including copying data as JSON. Very handy stuff. Many thanks to the [developers](http://northofthree.com/) of this fine software. If you’re on OS X, be sure to give it a try.
 
 

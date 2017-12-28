@@ -2,17 +2,17 @@
 author: Greg Sabino Mullane
 gh_issue_number: 983
 tags: git
-title: git checkout at a specific date
+title: 'git checkout at a specific date'
 ---
-
-
 
 <div class="separator" style="clear: both; float:right; text-align: center;"><a href="/blog/2014/05/19/git-checkout-at-specific-date/image-0.jpeg" imageanchor="1" style="clear: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" src="/blog/2014/05/19/git-checkout-at-specific-date/image-0.jpeg"/></a>
 <br/><small><a href="https://flic.kr/p/eqKF87">Porcupine</a> via <a href="https://www.flickr.com/photos/pinti1/">Flickr user Holly Occhipinti</a></small></div>
 
 There are times when you need to view a git repository as it was at a certain point in time. For example, someone sends your project an error report and says they were using the git head version from around January 17, 2014. The short (and wrong!) way to do it is to pass the date to the checkout command like so:
 
+```
 $ git checkout 'HEAD@{Jan 17 2014}' ## do not do this
+```
 
 While I used to rely on this, I no longer do so, as I consider it somewhat of a footgun. To understand why, you first have to know that the ability to checkout using the format above only works for a short window of time, as defined by the git parameter **gc.reflogExpire**. This defaults to a measly 90 days. You can view yours with **git config gc.reflogExpire**. The problem is that when you go over the 90 day limit, git outputs a warning, but them spews a mountain of output as it performs the checkout anyway! It uses the latest entry it has in the reflog (e.g. 90 days ago). This commit has no relation at all with the date you requested, so unless you catch the warning, you have checked out a repository that is useless to your efforts.
 
@@ -22,7 +22,7 @@ For example, the Bucardo project can be cloned via:
 $ git clone git://bucardo.org/bucardo.git/
 ```
 
-Now let's say we want to examine the project as it looked on January 17, 2014. As I am writing this, the date is May 19, 2014, so that date occurred about four months ago: well over 90 days. Watch what happens:
+Now let’s say we want to examine the project as it looked on January 17, 2014. As I am writing this, the date is May 19, 2014, so that date occurred about four months ago: well over 90 days. Watch what happens:
 
 ```
 $ git checkout 'HEAD@{Jan 17 2014}' ## do not do this
@@ -49,7 +49,7 @@ Since this behavior cannot, to my knowledge, be turned off, I avoid this method 
 $ git checkout `git rev-list -1 --before="Jan 17 2014" master`
 ```
 
-This command works fine, although it is a little clunky and hard to remember. It's requesting a list of all commits on the master branch, which happened before the given date, ordered by date, and stop once a single row has been output. Since I deal with SQL all day, I think of this as:
+This command works fine, although it is a little clunky and hard to remember. It’s requesting a list of all commits on the master branch, which happened before the given date, ordered by date, and stop once a single row has been output. Since I deal with SQL all day, I think of this as:
 
 ```
 SELECT repository WHERE commit_id = 
@@ -75,5 +75,4 @@ Date:   Fri Jan 17 10:49:09 2014 -0500
 ```
 
 As a final nail in the coffin for doing a checkout via the reflog date, the reflog actually is local to you and will pull the date of the repo as it existed for you at that point in time. This may or may not line up with the commits, depending on how often you are syncing with other people via git pull or other methods! So play it safe and request a specific commit by sha-1 hash, or use the rev-list trick.
-
 

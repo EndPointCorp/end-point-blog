@@ -21,7 +21,7 @@ On PostgreSQL version 9.2 and newer, the error may look like this:
 ERROR:  permission denied: "RI_ConstraintTrigger_c_32780" is a system trigger</span>
 ```
 
-I labelled this as mystifying because, while Postgres' error system is generally 
+I labelled this as mystifying because, while Postgres’ error system is generally 
 well designed and gives clear messages, this one stinks. A better one would 
 be something similar to:
 
@@ -43,8 +43,8 @@ Because Postgres
 enforces foreign keys through the use of triggers, and because data 
 integrity is very important to Postgres, one must be 
 a superuser to perform such an action and bypass the foreign keys. (A superuser 
-is a Postgres role that has "do anything" privileges). 
-We'll look at an example of this in action, and then discuss solutions 
+is a Postgres role that has “do anything” privileges). 
+We’ll look at an example of this in action, and then discuss solutions 
 and workarounds.
 
 Note that if you are not a superuser *and* you are not the owner of the 
@@ -82,7 +82,7 @@ CREATE TABLE
 ALTER TABLE
 ```
 
-Let's take a look at both tables, and then try to disable triggers on each one. 
+Let’s take a look at both tables, and then try to disable triggers on each one. 
 Because the triggers enforcing the foreign key are internal, they will not show up 
 when we do a \d:
 
@@ -129,7 +129,7 @@ ALTER TABLE
 <span class="p">postgres=#</span> <span class="t">alter table bar disable trigger all;</span>
 ALTER TABLE
 
-<span class="c">-- Don't forget to re-enable the triggers!</span>
+<span class="c">-- Don’t forget to re-enable the triggers!</span>
 
 <span class="p">postgres=#</span> <span class="t">alter table foo enable trigger all;</span>
 ALTER TABLE
@@ -162,14 +162,14 @@ SET
 SET
 ```
 
-Note: while you can do "SET LOCAL" to limit the changes to the current 
+Note: while you can do “SET LOCAL” to limit the changes to the current 
 transaction, I always feel safer to explicitly set it before and after 
 the changes, rather than relying on the implicit change back via 
 commit and rollback.
 
 It may be that you are simply trying to disable one or more of the 
-"normal" triggers that appear on the table. In which case, you can 
-simply **disable user triggers manually** rather than use 'all':
+"normal” triggers that appear on the table. In which case, you can 
+simply **disable user triggers manually** rather than use “all”:
 
 ```
 <span class="p">postgres=#</span> <span class="t">\c postgres alice</span>
@@ -226,7 +226,7 @@ are ultimately trying to do (e.g. update/delete/insert to the table)
 can be performed some other way.
 
 All of these solutions have their advantages and disadvantages. 
-And that's what charts are good for!:
+And that’s what charts are good for!:
 
 <table class="greg">
 <tbody><tr class="h1">
@@ -271,7 +271,7 @@ And that's what charts are good for!:
 </tbody></table>
 
 For the rest of this article, we will tie up two loose ends. First, 
-how can we see the triggers if \d will not show them? Second, what's 
+how can we see the triggers if \d will not show them? Second, what’s 
 up with the crappy trigger name?
 
 As seen above, the output of \d in the psql program shows us the triggers 
@@ -334,7 +334,7 @@ ORDER BY 1;
 
 So in our example table above, we should find the trigger we created, as well as the 
 two triggers created by the foreign key. All of them are enabled. Disabled 
-triggers will show as a 'D' in the tgenabled column. (O stands for origin, 
+triggers will show as a ‘D’ in the tgenabled column. (O stands for origin, 
 and has to do with session_replication_role).
 
 ```
@@ -366,10 +366,10 @@ non-intuitive named - looked like this:
 <span class="e">ERROR:  permission denied: "RI_ConstraintTrigger_16509" is a system trigger</span>
 ```
 
-We can break it apart to see what it is doing. The "RI" is short for 
+We can break it apart to see what it is doing. The “RI” is short for 
 "Referential Integrity", and anyone who manages to figure that out can 
-probably make a good guess as to what it does. The "Constraint" means 
-it is a constraint on the table - okay, simple enough. The "Trigger" 
+probably make a good guess as to what it does. The “Constraint” means 
+it is a constraint on the table - okay, simple enough. The “Trigger” 
 is a little redundant, as it is extraordinarily unlikely you will ever come across 
 this trigger without some context (such as the error message above) that 
 tells you it is a trigger. The final number is simply the oid 

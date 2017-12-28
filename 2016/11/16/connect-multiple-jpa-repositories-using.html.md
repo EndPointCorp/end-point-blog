@@ -5,7 +5,7 @@ tags: database, java
 title: Connect Multiple JPA repositories using Static and Dynamic Methods
 ---
 
-The JPA Repository is a useful Spring Framework library that provides object-relational mapping for Java web applications to be able to connect to a wide variety of databases. Most applications need to establish a connection with one database to store and retrieve the data though sometimes there could be more than one database to read and write. There could also be some cases where the application needs to choose which database should be used dynamically, based on each request's parameters. Let's see how to configure and establish connections for these three cases.
+The JPA Repository is a useful Spring Framework library that provides object-relational mapping for Java web applications to be able to connect to a wide variety of databases. Most applications need to establish a connection with one database to store and retrieve the data though sometimes there could be more than one database to read and write. There could also be some cases where the application needs to choose which database should be used dynamically, based on each request’s parameters. Let’s see how to configure and establish connections for these three cases.
 
 ### 1. Single Static Connection
 
@@ -86,7 +86,7 @@ public class UserController {
 
 In some cases, we may need to connect more than one database in our application. Usually there will be a primary database and a secondary one which syncs data from the primary, most likely as a readonly replica load balancing approach. In this case the application needs to be configure to establish connection with two different datasources.
 
-To achieve this result it's possible to define ReadWrite and ReadOnly datasources in the spring configuration and then declare the specific Repository classes for each specific datasource.
+To achieve this result it’s possible to define ReadWrite and ReadOnly datasources in the spring configuration and then declare the specific Repository classes for each specific datasource.
 
 UserRepository.java - ReadWrite repository definition under the package com.domain.data
 
@@ -153,7 +153,7 @@ persistent-context.xml - this file defines two different datasources (dataSource
 <bean class="org.springframework.orm.jpa.JpaTransactionManager" id="transactionManagerReadOnly" p:datasource-ref="dataSourceReadOnly" p:entitymanagerfactory-ref="entityManagerFactoryReadOnly" />
 ...
 ```
-UserController.java - in this definition it's interesting to note the the readonly flag, which will establish a connection with ReadWrite or ReadOnly database, based on that flag value
+UserController.java - in this definition it’s interesting to note the the readonly flag, which will establish a connection with ReadWrite or ReadOnly database, based on that flag value
 
 ```java
 @Api(name = "User", description = "User API Service")
@@ -188,7 +188,7 @@ public class UserController {
 
 ### 3. Multiple Dynamic Connections
 
-Recently there was an application that needed to choose the database during API request processing. Unfortunately defining multiple datasources and choosing the database based on the hard coded checks in the code is really cumbersome. Instead it's possible to use JPA Repository which provides a feature to override the database lookup dynamically using AbstractRoutingDataSource when a request is sent to the application.
+Recently there was an application that needed to choose the database during API request processing. Unfortunately defining multiple datasources and choosing the database based on the hard coded checks in the code is really cumbersome. Instead it’s possible to use JPA Repository which provides a feature to override the database lookup dynamically using AbstractRoutingDataSource when a request is sent to the application.
 
 UserRepository.java - defines mapping to the user table
 
@@ -293,7 +293,7 @@ public class MultiTenantContext {
 
 }
 ```
-MultitenantRoutingDataSource.java - here there's the definition which determines how the datasource establish the connection. Specifically it will get the datasource which was set previously based on the request parameters
+MultitenantRoutingDataSource.java - here there’s the definition which determines how the datasource establish the connection. Specifically it will get the datasource which was set previously based on the request parameters
 
 ```java
 package com.domain.route;

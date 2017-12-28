@@ -11,7 +11,7 @@ Today we will show you how to create a video player with time markers using Java
 
 <div class="separator" style="clear: both; text-align: center;"><a href="/blog/2016/03/17/creating-video-player-with-time-markers/image-0.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="/blog/2016/03/17/creating-video-player-with-time-markers/image-0.png"/></a></div>
 
-To simplify (or to make it harder for some of you :)) this tutorial we won't use any package management tools. The demo is available on Github here: [https://github.com/peter-hank/video-with-markers](https://github.com/peter-hank/video-with-markers)
+To simplify (or to make it harder for some of you :)) this tutorial we won’t use any package management tools. The demo is available on Github here: [https://github.com/peter-hank/video-with-markers](https://github.com/peter-hank/video-with-markers)
 
 ### Requirements
 
@@ -24,17 +24,17 @@ We will need some libraries (all of these are free to use in commercial projects
 
 ### Step 1 - creating a project skeleton
 
-Let's create a new folder for our project and call it video-with-markers. Inside let's create a new file called "index.html", three folders: "css", "js" and "var".
+Let’s create a new folder for our project and call it video-with-markers. Inside let’s create a new file called “index.html”, three folders: “css”, “js” and “var”.
 
 We also need to copy libraries files and put it into a proper directory:
 
-- copy [https://raw.githubusercontent.com/spchuang/videojs-markers/master/dist/videojs-markers.min.js](https://raw.githubusercontent.com/spchuang/videojs-markers/master/dist/videojs-markers.min.js) -> "js" directory,
-- copy [http://vjs.zencdn.net/5.0/video.min.js](http://vjs.zencdn.net/5.0/video.min.js) -> "js" directory,
-- copy [https://raw.githubusercontent.com/spchuang/videojs-markers/master/dist/videojs.markers.min.css](https://raw.githubusercontent.com/spchuang/videojs-markers/master/dist/videojs.markers.min.css) -> "css" directory,
-- copy [http://vjs.zencdn.net/5.0/video-js.min.css](http://vjs.zencdn.net/5.0/video-js.min.css) -> "css" directory.
-- copy [http://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4](http://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4) -> "var" directory.
+- copy [https://raw.githubusercontent.com/spchuang/videojs-markers/master/dist/videojs-markers.min.js](https://raw.githubusercontent.com/spchuang/videojs-markers/master/dist/videojs-markers.min.js) -> “js” directory,
+- copy [http://vjs.zencdn.net/5.0/video.min.js](http://vjs.zencdn.net/5.0/video.min.js) -> “js” directory,
+- copy [https://raw.githubusercontent.com/spchuang/videojs-markers/master/dist/videojs.markers.min.css](https://raw.githubusercontent.com/spchuang/videojs-markers/master/dist/videojs.markers.min.css) -> “css” directory,
+- copy [http://vjs.zencdn.net/5.0/video-js.min.css](http://vjs.zencdn.net/5.0/video-js.min.css) -> “css” directory.
+- copy [http://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4](http://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4) -> “var” directory.
 
-Let's open the index.html file and fill it with some basic structure, that will include libraries files too.
+Let’s open the index.html file and fill it with some basic structure, that will include libraries files too.
 
 ```html
 <!doctype html>
@@ -68,7 +68,7 @@ First, we need to create a video tag:
  </video>
 ```
 
-We need to set an element "id" attribute and both classes "video-js vjs-default-skin" to let player CSS apply. Other attributes are not required and are here just for demo purpose. "Data-setup" attribute is an attribute that configures multiple player options. More details can be found in the documentation here: [http://docs.videojs.com/docs/guides/options.html](http://docs.videojs.com/docs/guides/options.html).
+We need to set an element “id” attribute and both classes “video-js vjs-default-skin” to let player CSS apply. Other attributes are not required and are here just for demo purpose. “Data-setup” attribute is an attribute that configures multiple player options. More details can be found in the documentation here: [http://docs.videojs.com/docs/guides/options.html](http://docs.videojs.com/docs/guides/options.html).
 
 At this point after launching index.html in a browser we should see a video player like this:
 
@@ -97,7 +97,7 @@ Now, markers should be visible like on my this image and markers text will be vi
 
 <div class="separator" style="clear: both; text-align: center;"><a href="/blog/2016/03/17/creating-video-player-with-time-markers/image-2.jpeg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="/blog/2016/03/17/creating-video-player-with-time-markers/image-2.jpeg"/></a></div>
 
-It needs some additional CSS styling to achieve a result like on the first image but it's not much work.
+It needs some additional CSS styling to achieve a result like on the first image but it’s not much work.
 
 ### The end
 

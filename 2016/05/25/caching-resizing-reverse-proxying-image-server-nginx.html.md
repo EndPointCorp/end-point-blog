@@ -27,11 +27,11 @@ Our setup ended up being almost the same as the one in that blog post, with some
 
 ### Requirements installation
 
-First, as the post points out, the Image Filter module is **not** installed by default on many Linux distributions. As we're using Nginx's official repositories, it was just a matter of installing the *nginx_module_image_filter* package and restarting the service.
+First, as the post points out, the Image Filter module is **not** installed by default on many Linux distributions. As we’re using Nginx’s official repositories, it was just a matter of installing the *nginx_module_image_filter* package and restarting the service.
 
 ### Cache Storage configuration
 
-Continuing following the post's great instructions, we set up the cache in our main http section, tuning each parameter to fit ur specific needs. We wanted a 10MB storage space for keys and 100MB for actual images, that will be removed after not being accessed for 40 days. The main configuration entry was then:
+Continuing following the post’s great instructions, we set up the cache in our main http section, tuning each parameter to fit ur specific needs. We wanted a 10MB storage space for keys and 100MB for actual images, that will be removed after not being accessed for 40 days. The main configuration entry was then:
 
 ```bash
 proxy_cache_path /tmp/nginx_cache levels=1:2 keys_zone=nginx_cache:10M max_size=100M inactive=40d;
@@ -41,7 +41,7 @@ This went straight in the http section of nginx.conf.
 
 ### Caching Proxy configuration
 
-Next, we configured our front facing virtual host. In our case, we needed the reverse proxy to live within an already existing site, and that's why we chose the /image/ path prefix.
+Next, we configured our front facing virtual host. In our case, we needed the reverse proxy to live within an already existing site, and that’s why we chose the /image/ path prefix.
 
 ```bash
 server {
@@ -69,7 +69,7 @@ Every URL starting with /image/ would be server from the cache if present, other
 
 We then configured the resizing server, using a regexp to extract the width, height and URL of the image we desire.
 
-The server will proxy the request to https://upload.wikimedia.org/ looking for the image, resize it and then serve it back to the Caching Proxy. We preferred to keep it simple and tidy, as we didn't actually need any aws-related configuration as the blog post did.
+The server will proxy the request to https://upload.wikimedia.org/ looking for the image, resize it and then serve it back to the Caching Proxy. We preferred to keep it simple and tidy, as we didn’t actually need any aws-related configuration as the blog post did.
 
 ```bash
 server {
@@ -102,7 +102,7 @@ http://www.example.com/image/150x150/wikipedia/commons/0/01/Tiger.25.jpg
 
 ### Optionally securing access to your image server
 
-As this was not a public server, we didn't use any security mechanism to validate the request.
+As this was not a public server, we didn’t use any security mechanism to validate the request.
 
 The original blog post, though, reports a very simple and clever way to prevent abuse from unauthorized access, using the [Secure Link module](http://nginx.org/en/docs/http/ngx_http_secure_link_module.html).
 

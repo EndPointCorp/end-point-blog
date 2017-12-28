@@ -5,7 +5,7 @@ tags: json, nosql, postgres
 title: PostgreSQL as NoSQL with Data Validation
 ---
 
-PostgreSQL is a relational database with many great features. There are also many so called NoSQL databases, some of them, like CouchDB, are document databases. However the document in CouchDB is automatically enhanced with a "_id" field, if it is not present. When you want to get this one document, you can use this "_id" field - it behaves exactly like the primary key from relational databases. PostgreSQL stores data in tables' rows while CouchDB stores data as JSON documents. On one hand CouchDB seems like a great solution, as you can have all the different data from different PostgreSQL tables in just one JSON document. This flexibility comes with a cost of no constraints on the data structure, which can be really appealing at the first moment and really frustrating when you have a huge database and some of the documents contain bad values or there are missing some fields.
+PostgreSQL is a relational database with many great features. There are also many so called NoSQL databases, some of them, like CouchDB, are document databases. However the document in CouchDB is automatically enhanced with a “_id” field, if it is not present. When you want to get this one document, you can use this “_id” field - it behaves exactly like the primary key from relational databases. PostgreSQL stores data in tables’ rows while CouchDB stores data as JSON documents. On one hand CouchDB seems like a great solution, as you can have all the different data from different PostgreSQL tables in just one JSON document. This flexibility comes with a cost of no constraints on the data structure, which can be really appealing at the first moment and really frustrating when you have a huge database and some of the documents contain bad values or there are missing some fields.
 
 PostgreSQL 9.3 comes with great features which can turn it into a NoSQL database, with full transaction support, storing JSON documents with constraints on the fields data.
 
@@ -58,7 +58,7 @@ CREATE TABLE products (
 ); >
 ```
 
-Now all the operations, like adding or modifying a row, which violate any of those constraints, just fail. Let's check:
+Now all the operations, like adding or modifying a row, which violate any of those constraints, just fail. Let’s check:
 
 ```sql
 postgres=# INSERT INTO products (name, description, price, currency, in_stock) VALUES ('shoes', 'blue shoes', 12.34, 'dollars', 5);
@@ -99,7 +99,7 @@ This works like most of the NoSQL datatabases, no checks, no errors with bad fie
 
 CouchDB validates JSON before saving the document into database. In PostgreSQL 9.2 there is the nice type for that, it is named JSON. The JSON type can store only a proper JSON, there is validation performed before converting into this type.
 
-Let's change the definition of the table to:
+Let’s change the definition of the table to:
 
 ```sql
 CREATE TABLE products (
@@ -154,17 +154,17 @@ CONTEXT:  JSON data, line 5: ...,
 }
 ```
 
-The problem with formatting can be hard to notice (I've added comma after the last field, JSON doesn't like it).
+The problem with formatting can be hard to notice (I’ve added comma after the last field, JSON doesn’t like it).
 
 ### Validating Fields
 
-OK, so we have a solution which looks almost like the first native PostgreSQL solution: we have data which validates. It doesn't mean the data is sensible.
+OK, so we have a solution which looks almost like the first native PostgreSQL solution: we have data which validates. It doesn’t mean the data is sensible.
 
-Let's add checks for validating the data.
+Let’s add checks for validating the data.
 
 In PostgreSQL 9.3, which has not been released yet, there are some new great features for manipulating JSON values. There are defined operators for the JSON type, which give you easy access to the fields and values.
 
-I will use only one operator '->>', but you can find more information in [PostgreSQL documentation](http://www.postgresql.org/docs/9.3/static/functions-json.html).
+I will use only one operator “->>”, but you can find more information in [PostgreSQL documentation](http://www.postgresql.org/docs/9.3/static/functions-json.html).
 
 I also need to validate the types of the fields, including id field. This is something Postgres just checks because of the types definitions. I am going to use some other syntax for the checks, as I want to name it. It will be easier to look at problem with specific field instead of searching through the whole huge JSON.
 
@@ -182,9 +182,9 @@ CREATE TABLE products (
 }
 ```
 
-The "->>" operator allows me to get the value of a specific field from JSON, check if it exists and validate it.
+The “->>” operator allows me to get the value of a specific field from JSON, check if it exists and validate it.
 
-Let's add a JSON without a description:
+Let’s add a JSON without a description:
 
 ```sql
 postgres=# INSERT INTO products(data) VALUES('{
@@ -221,11 +221,11 @@ ERROR:  current transaction is aborted, commands ignored until end of transactio
 
 ### Id Generation
 
-In NoSQL databases the id field is usually some UUID. This is an identifier generated with algorithms with a very small chance of generating the same value, even when you generate them on different machines. So I'm not going to touch it here.
+In NoSQL databases the id field is usually some UUID. This is an identifier generated with algorithms with a very small chance of generating the same value, even when you generate them on different machines. So I’m not going to touch it here.
 
 ## Searching
 
-You can search the JSON data normally like you were searching columns in a table. Let's search for the most expensive product we have in stock:
+You can search the JSON data normally like you were searching columns in a table. Let’s search for the most expensive product we have in stock:
 
 ```sql
 SELECT * FROM products WHERE in_stock > 0 ORDER BY price DESC LIMIT 1;
@@ -252,7 +252,7 @@ This query can be very inefficient. It needs to read all the rows, parse JSON fi
 (7 rows)
 ```
 
-The "Seq Scan" line means that PostgreSQL needs to read the whole table. The time of 412 ms is not that bad, but can we make it better?
+The “Seq Scan” line means that PostgreSQL needs to read the whole table. The time of 412 ms is not that bad, but can we make it better?
 
 Fortunately PostgreSQL has a great feature: indexes on expressions, also named as functional indexes. It can store in the index sorted values of some expressions, and if the same expressions occur in a query, then the index can be used.
 
@@ -281,14 +281,14 @@ So it is 664k percent faster.
 
 ## The JSON Advantage
 
-The JSON solution has got one nice feature which the native PostgreSQL hasn't. The application can add its own fields on the fly without altering any table. JSON field is just a text, however with some validation. The new field won't be checked by the indexes and constraints I've shown you above.
+The JSON solution has got one nice feature which the native PostgreSQL hasn’t. The application can add its own fields on the fly without altering any table. JSON field is just a text, however with some validation. The new field won’t be checked by the indexes and constraints I’ve shown you above.
 
-What's more, you can add a constraint for this field later. This way you can have the best from both worlds: easy data model changing and consistent JSON structure across the database.
+What’s more, you can add a constraint for this field later. This way you can have the best from both worlds: easy data model changing and consistent JSON structure across the database.
 
 On the other hand you could of course add a trigger checking the JSON, before saving it to database, to check the list of available fields. This way you could prevent adding new fields by the application.
 
 ## Summary
 
-So, I've shown you how you can use PostgreSQL as a simple NoSQL database storing JSON blobs of text. The great advantage over the simple NoSQL databases storing blobs is that you can constrain the blobs, so they are always correct and you shouldn't have any problems with parsing and getting them from the database.
+So, I’ve shown you how you can use PostgreSQL as a simple NoSQL database storing JSON blobs of text. The great advantage over the simple NoSQL databases storing blobs is that you can constrain the blobs, so they are always correct and you shouldn’t have any problems with parsing and getting them from the database.
 
 You can also query the database very easily, with huge speed. The ad-hoc queries are really simple, much simpler than the map-reduce queries which are needed in many NoSQL databases.

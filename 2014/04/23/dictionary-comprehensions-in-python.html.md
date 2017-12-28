@@ -2,7 +2,7 @@
 author: Szymon Lipiński
 gh_issue_number: 968
 tags: python
-title: Dictionary Comprehensions in Python
+title: 'Dictionary Comprehensions in Python'
 ---
 
 Python has many features which usually stay unknown to many programmers.
@@ -11,7 +11,7 @@ Python has many features which usually stay unknown to many programmers.
 
 List comprehensions are much simpler way of creating lists. This is one feature which is rather widely used and I saw this in many examples and source of many libraries.
 
-Imagine you have a function which returns a list of data. A good example of this is xrange(start, end) function which returns all numbers within the range [start, end), so it excludes the end. This is a generator, so it doesn't return all numbers at once, but you need to call this function many times, and each time it returns the next number.
+Imagine you have a function which returns a list of data. A good example of this is xrange(start, end) function which returns all numbers within the range [start, end), so it excludes the end. This is a generator, so it doesn’t return all numbers at once, but you need to call this function many times, and each time it returns the next number.
 
 Getting all numbers from range [1, 10] using this function can be done like this:
 
@@ -62,7 +62,7 @@ Consider a collection like this:
 numbers = [i for i in xrange(1,11)] + [i for i in xrange(1,6)]
 ```
 
-The most complicated way of removing duplicates I've ever seen was:
+The most complicated way of removing duplicates I’ve ever seen was:
 
 ```python
 unique_numbers = []
@@ -117,4 +117,4 @@ This can be used to make a list without all duplicates using a custom field:
 { d['id']:d for d in data }.values()
 ```
 
-The above code creates a dictionary with key, which is the field I want to use for uniqueness, and the whole dictionary as value. The dictionary then contains only one entry for each key. The values() function is used to get only values, as I don't need the key:value mappings any more.
+The above code creates a dictionary with key, which is the field I want to use for uniqueness, and the whole dictionary as value. The dictionary then contains only one entry for each key. The values() function is used to get only values, as I don’t need the key:value mappings any more.
