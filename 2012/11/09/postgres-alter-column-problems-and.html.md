@@ -9,16 +9,16 @@ title: Postgres alter column problems and solutions
 
 <div class="separator" style="clear: both; text-align: center; float:right">
 <a href="/blog/2012/11/09/postgres-alter-column-problems-and/image-0-big.jpeg" imageanchor="1" style="clear:right; margin-left:1em; margin-bottom:1em"><img border="0" height="240" src="/blog/2012/11/09/postgres-alter-column-problems-and/image-0.jpeg" width="320"/></a>
-<br/><a href="http://www.flickr.com/photos/ell-r-brown/7611437386/">Image</a> from Flickr user <a href="http://www.flickr.com/photos/ell-r-brown/">ell brown</a></div>
+<br/><a href="https://www.flickr.com/photos/ell-r-brown/7611437386/">Image</a> from Flickr user <a href="https://www.flickr.com/photos/ell-r-brown/">ell brown</a></div>
 
 A common situation for database-backed applications is the need to change the attributes of a column. One can change the data type, or more commonly, only the size limitation, e.g. VARCHAR(32) gets changed to VARCHAR(42). There are a few ways to accomplish this in PostgreSQL, from a straightforward ALTER COLUMN, to replacing VARCHAR with TEXT (plus a table constraint), to some advanced system catalog hacking.
 
 The most common example of such a change is expanding a 
 VARCHAR declaration to allow more characters. For example, 
 your “checksum” column was based on 
-[MD5](http://en.wikipedia.org/wiki/MD5) (at 32 characters), and 
+[MD5](https://en.wikipedia.org/wiki/MD5) (at 32 characters), and 
 now needs to be based on 
-[Keccak](http://en.wikipedia.org/wiki/Keccak) (Keccak is pronounced “catch-ack”)  (at 64 characters)
+[Keccak](https://en.wikipedia.org/wiki/Keccak) (Keccak is pronounced “catch-ack”)  (at 64 characters)
 In other words, you need a column in your table to change from VARCHAR(32) to VARCHAR(64). 
 The canonical approach is to do this:
 
@@ -29,7 +29,7 @@ ALTER TABLE foobar ALTER COLUMN checksum TYPE VARCHAR(64);
 This approach works fine, but it has two huge and interrelated problems: 
 locking and time. This approach locks the table for as long as the 
 command takes to run. And by lock, we are talking a heavy 
-[“access exclusive” lock](http://www.postgresql.org/docs/current/static/explicit-locking.html#LOCKING-TABLES) which shuts everything else out of the table. If your table is small, 
+[“access exclusive” lock](https://www.postgresql.org/docs/current/static/explicit-locking.html#LOCKING-TABLES) which shuts everything else out of the table. If your table is small, 
 this is not an issue. If your table has a lot of data, however, this brings 
 us to the second issue: table rewrite. The above command will cause Postgres 
 to rewrite every single row of the table, which can be a very expensive operation 
@@ -62,7 +62,7 @@ before you jump down there, consider a different option: abandoning VARCHAR alto
 
 In the Postgres world, there are few differences between the VARCHAR and TEXT data types. The latter can 
 be thought of as an unbounded VARCHAR, or if you like, a VARCHAR(999999999999). You may also add a 
-[check constraint](http://www.postgresql.org/docs/current/static/ddl-constraints.html) to a table to emulate the limit of a VARCHAR. For example, to convert 
+[check constraint](https://www.postgresql.org/docs/current/static/ddl-constraints.html) to a table to emulate the limit of a VARCHAR. For example, to convert 
 a VARCHAR(32) column named “checksum” to a TEXT column:
 
 ```
@@ -95,7 +95,7 @@ So why would you go through the trouble of switching from your VARCHAR(32) to a
 TEXT column with a CHECK constraint? There are at least three good reasons.
 
 First, if you are running Postgres 9.2 or better, this means you can change the constraint 
-requirements on the fly, without a table scan - even for the “non-optimal” situations 
+requirements on the fly, without a table scan — even for the “non-optimal” situations 
 such as going from 64 characters down to 32. Just drop the old constraint, and add a new 
 one with the NOT VALID clause thrown on it.
 
@@ -169,7 +169,7 @@ COMMIT;
 ```
 
 <div class="separator" style="clear: both; text-align: center; float:right">
-<a href="/blog/2012/11/09/postgres-alter-column-problems-and/image-1-big.jpeg" imageanchor="1" style="clear:right; margin-left:1em; margin-bottom:1em"><img border="0" height="240" src="/blog/2012/11/09/postgres-alter-column-problems-and/image-1.jpeg" width="320"/></a><br/><a href="http://www.flickr.com/photos/loozrboy/4471483367/">Image</a> from Flickr user <a href="http://www.flickr.com/photos/loozrboy/">loozrboy</a></div>
+<a href="/blog/2012/11/09/postgres-alter-column-problems-and/image-1-big.jpeg" imageanchor="1" style="clear:right; margin-left:1em; margin-bottom:1em"><img border="0" height="240" src="/blog/2012/11/09/postgres-alter-column-problems-and/image-1.jpeg" width="320"/></a><br/><a href="https://www.flickr.com/photos/loozrboy/4471483367/">Image</a> from Flickr user <a href="https://www.flickr.com/photos/loozrboy/">loozrboy</a></div>
 
 Back to the other problem, however: how can we avoid a table rewrite when going from 
 VARCHAR(64) to VARCHAR(32), or when stuck on an older version of Postgres that always insists 
@@ -185,7 +185,7 @@ change.
 
 Let’s create a table and look at some of the important fields in the system 
 table **pg_attribute**. In these examples we will use Postgres 8.4, but 
-other versions should look very similar - this part of the system catalog 
+other versions should look very similar — this part of the system catalog 
 rarely changes.
 
 ```
@@ -220,7 +220,7 @@ postgres-#   WHERE refobjid = 'foobar'::regclass;
  pg_type:16419 | i
 ```
 
-We can see in the above that the only dependency is an entry in the pg_type table - which is a normal 
+We can see in the above that the only dependency is an entry in the pg_type table — which is a normal 
 thing for all tables and will not cause any issues. Any other entries, however, should give you pause 
 before doing a manual update of pg_attribute. You can use the information returned by the first column 
 of the above query to see exactly what is referencing the table. For example, let’s make that column 
@@ -244,7 +244,7 @@ postgres-#   WHERE refobjid = 'foobar'::regclass;
 ```
 
 The “i”, “a”, and “n” stand for internal, auto, and normal. They are not too important in this context, but more 
-details can be found in [the docs on the pg_depend table](http://www.postgresql.org/docs/8.4/static/catalog-pg-depend.html). The first column shows us the system table and oid of the dependency, so 
+details can be found in [the docs on the pg_depend table](https://www.postgresql.org/docs/8.4/static/catalog-pg-depend.html). The first column shows us the system table and oid of the dependency, so 
 we can look them up and see what they are:
 
 ```
@@ -281,7 +281,7 @@ affected by changing the length, so it (along with the pg_type entry) can be ign
 should be recreated so that it records the actual column size.
 
 We are now ready to make the actual change. This would be an excellent time to make a backup of 
-your database. This procedure should be done very carefully - if you are unsure about any of 
+your database. This procedure should be done very carefully — if you are unsure about any of 
 the entries in pg_depend, do not proceed.
 
 First, we are going to start a transaction, lock the table, and drop the view. Then we are going 

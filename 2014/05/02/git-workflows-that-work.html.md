@@ -13,7 +13,7 @@ There was a [significant blog post some years ago](http://nvie.com/posts/a-succe
 
 I start with this little bit of history to talk about the void that was filled by Gitflow.  There was clearly something that drew people to it that wasn’t there before.  It questioned the way they were working with Git and offered something different that worked “successfully” for someone else.  I supposed many developers didn’t have much confidence or strong feelings about their use of Git before they heard of Gitflow.  And so they followed someone who clearly did have confidence and strong feelings about a particular workflow.  Some of you may be questioning your current Git workflow now and can relate to what I’m describing.  However, I’m not going to prescribe a particular workflow for you as “the” way to do it.
 
-Instead, let’s talk about the purpose of a workflow.  Let’s reword that so we’re clear- the purpose of a software development workflow using Git.  What is the purpose?  Let’s back up and ask what is the purpose of software?  [The purpose of software is to help people.](http://www.codesimplicity.com/post/the-purpose-of-software/)  Period.  Yes it can help servers, and networks, and robots, and telephones, etc.  But help them do what?  Help people.  They are tools to help us (people) do things better, faster, simpler, etc.  I submit to you that the purpose of a software development workflow using Git should be the same.  It should help people release software.  Specifically, it should help match the software development process with business expectations for the people responsible for the software.  That list of people responsible for the software should include more than just the developers.  It also includes operations engineers, project managers, and certainly business owners.
+Instead, let’s talk about the purpose of a workflow.  Let’s reword that so we’re clear- the purpose of a software development workflow using Git.  What is the purpose?  Let’s back up and ask what is the purpose of software?  [The purpose of software is to help people.](https://www.codesimplicity.com/post/the-purpose-of-software/)  Period.  Yes it can help servers, and networks, and robots, and telephones, etc.  But help them do what?  Help people.  They are tools to help us (people) do things better, faster, simpler, etc.  I submit to you that the purpose of a software development workflow using Git should be the same.  It should help people release software.  Specifically, it should help match the software development process with business expectations for the people responsible for the software.  That list of people responsible for the software should include more than just the developers.  It also includes operations engineers, project managers, and certainly business owners.
 
 Does your Git workflow help your business owners?  Does it help your project managers or the Operations team?  These are questions you should be thinking about.  And by doing so, you should realize that there is no “one size fits all” workflow that will do all that for every case.  There are many different workflows based on different needs and uses.  Some are for large complex projects and some are extremely simple.  What you need to ask is- what will best help my team/project/organization to develop, release, and maintain software effectively?  Let’s look at a few workflow examples and see.
 
@@ -99,13 +99,13 @@ These should help you adjust your software development workflow using Git to ful
 
 There is a lot more you can read about on this topic, and here are several good places to start:
 
-- [http://www.codesimplicity.com/post/the-purpose-of-software/](http://www.codesimplicity.com/post/the-purpose-of-software/)
+- [https://www.codesimplicity.com/post/the-purpose-of-software/](https://www.codesimplicity.com/post/the-purpose-of-software/)
 - [http://scottchacon.com/2011/08/31/github-flow.html](http://scottchacon.com/2011/08/31/github-flow.html)
 - [http://nvie.com/posts/a-successful-git-branching-model/](http://nvie.com/posts/a-successful-git-branching-model/)
 - [http://www.kdgregory.com/index.php?page=scm.git](http://www.kdgregory.com/index.php?page=scm.git)
 - [https://sandofsky.com/blog/git-workflow.html](https://sandofsky.com/blog/git-workflow.html)
-- [http://stackoverflow.com/questions/2428722/git-branch-strategy-for-small-dev-team](http://stackoverflow.com/questions/2428722/git-branch-strategy-for-small-dev-team)
-- [http://git-scm.com/book/en/Git-Branching-Branching-Workflows](http://git-scm.com/book/en/Git-Branching-Branching-Workflows)
+- [https://stackoverflow.com/questions/2428722/git-branch-strategy-for-small-dev-team](https://stackoverflow.com/questions/2428722/git-branch-strategy-for-small-dev-team)
+- [https://git-scm.com/book/en/Git-Branching-Branching-Workflows](https://git-scm.com/book/en/Git-Branching-Branching-Workflows)
 - [https://www.atlassian.com/git/workflows](https://www.atlassian.com/git/workflows)
 
 

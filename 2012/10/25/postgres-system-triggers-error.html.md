@@ -318,7 +318,7 @@ Disabled triggers:
 Warning: Versions older than 8.3 will not tell you in the \d output 
 that the trigger is disabled! Yet another reason to upgrade as soon 
 as possible because 
-[8.2 and earlier are end of life](http://www.postgresql.org/support/versioning/).
+[8.2 and earlier are end of life](https://www.postgresql.org/support/versioning/).
 
 If you want to see all the triggers on a table, even the internal ones, 
 you will need to look at the pg_trigger table directly. Here is the query 

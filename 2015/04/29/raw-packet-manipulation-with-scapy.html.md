@@ -29,7 +29,7 @@ Welcome to Scapy (2.2.0)
 10
 ```
 
-In this case I created a single request which was point from one host on my network to the default gateway on the same network. Scapy will allow the capability to create any TCP/IP request in raw form. There are a huge number of possible options for Scapy that can be applied, as well as huge number of possible packet types defined. The [documentation](http://www.secdev.org/projects/scapy/doc/) with these options and packet types is available on the main site for Scapy.
+In this case I created a single request which was point from one host on my network to the default gateway on the same network. Scapy will allow the capability to create any TCP/IP request in raw form. There are a huge number of possible options for Scapy that can be applied, as well as huge number of possible packet types defined. The [documentation](https://scapy.readthedocs.io/en/latest/) with these options and packet types is available on the main site for Scapy.
 
 ### Creating custom scripts with Scapy
 

@@ -9,7 +9,7 @@ Cron is a wonderful tool, and a standard part of all sysadmins toolkit. Not only
 
 ### Version control
 
-This rule is number one for a reason. *Always* version control everything you do. It provides an instant backup, accountability, easy rollbacks, and a history. Keeping your crontabs in version control is slightly more work than normal files, but all you have to do is pick a standard place for the file, then export it with crontab -l > crontab.postgres.txt. I prefer [RCS](http://agave.garden.org/%7Eaaronh/rcs/tutorial.html) for quick little version control jobs like this: no setup required, and everything is in one place. Just run: ci -l crontab.postgres.txt and you are done. The name of the file should be something like the example shown, indicating what it is (a crontab file), which one it is (belongs to the user “postgres”), and what format it is in (text).
+This rule is number one for a reason. *Always* version control everything you do. It provides an instant backup, accountability, easy rollbacks, and a history. Keeping your crontabs in version control is slightly more work than normal files, but all you have to do is pick a standard place for the file, then export it with crontab -l > crontab.postgres.txt. I prefer [RCS](https://www.gnu.org/software/rcs/) for quick little version control jobs like this: no setup required, and everything is in one place. Just run: ci -l crontab.postgres.txt and you are done. The name of the file should be something like the example shown, indicating what it is (a crontab file), which one it is (belongs to the user “postgres”), and what format it is in (text).
 
 You can even run another cronjob that compares the current crontab for each user with the version-controlled version and mail an alert and/or check it in automatically on a difference.
 
@@ -26,7 +26,7 @@ I generally like to combine the above entries, such that I’ll put the entries 
 
 ### Always test
 
-It’s very important to test out your final product. Cron entries have a nasty habit of working from the command line, but failing when called by cron, usually due to missing environment variables or path problems. Don’t wait for the clock to roll around when adding or changing an entry - test it right away by making it fire 1-2 minutes into the future. Of course, this is only after you have tested it by creating a simple shell script and/or running it from the command line.
+It’s very important to test out your final product. Cron entries have a nasty habit of working from the command line, but failing when called by cron, usually due to missing environment variables or path problems. Don’t wait for the clock to roll around when adding or changing an entry — test it right away by making it fire 1–2 minutes into the future. Of course, this is only after you have tested it by creating a simple shell script and/or running it from the command line.
 
 In addition to testing normal behavior, make sure you test all possible failure and success scenarios as well. If you have an entry that deletes all files older than a day in a certain directory, use the touch command to age some files and verify they get deleted. If your command only performs an action when a rare, hard-to-test criteria is met (such as a disk being 99% full), tweak the parameters so it will pass (such as setting the previous example to 5%).
 
@@ -46,7 +46,7 @@ Don’t be afraid to call external scripts. Anything even slightly complex shoul
 Use aliases (actually environment variables, but it’s easier to call them aliases) at the top of your cron script to store any commands, files, directories, or other things that are used throughout your crontab. Anything that is complex or custom to your site/user/server is a good candidate to make an alias of. This has many advantages:
 
 - The crontab file as a whole is easier to read.
-- Entries are easier to read, and allow you to focus on the "meat" of the entry, not the repeated constants.
+- Entries are easier to read, and allow you to focus on the “meat” of the entry, not the repeated constants.
 - Similar aliases grouped together allow for easier spotting of errors.
 - Changes only need to be made in one place.
 - It is easier to find and make changes.
@@ -65,7 +65,7 @@ PSQL_SLAVE='/usr/local/bin/psql -X -A -q -t -d master'
 
 ### Forward emails
 
-In addition to using non-root accounts whenever possible, it is also very important to make sure that someone is actively receiving emails for each account that has cronjobs. Email is the first line of defense for things going wrong with cron, but all too often I’ll su into an account and find that it has 6000 messages, all of them from cron indicating that the same problem has been occurring over and over for weeks. Don’t let this happen to you - learn about the problem the moment it stops happening by making sure the account is either actively checked, or set up a quick forward to one that is. If you don’t want to get all the mail for the account, setup a quick filter - the output of cron is very standard and easy to filter.
+In addition to using non-root accounts whenever possible, it is also very important to make sure that someone is actively receiving emails for each account that has cronjobs. Email is the first line of defense for things going wrong with cron, but all too often I’ll su into an account and find that it has 6000 messages, all of them from cron indicating that the same problem has been occurring over and over for weeks. Don’t let this happen to you — learn about the problem the moment it stops happening by making sure the account is either actively checked, or set up a quick forward to one that is. If you don’t want to get all the mail for the account, setup a quick filter — the output of cron is very standard and easy to filter.
 
 ### Document everything
 
@@ -97,7 +97,7 @@ Consider these two examples:
 30 * * * * $PSQL -c 'VACUUM abc' && $PSQL -c 'VACUUM def' && $PSQL -c 'ANALYZE abc'
 ```
 
-The first example has many problems. First, it creates three separate cron processes. Second, the ANALYZE on table abc may end up running while the VACUUM is still going on - not a desired behavior. Third, the second VACUUM may start before the previous VACUUM or ANALYZE has finished. Fourth, if the database is down, there are three emailed error reports going out, and three errors in the Postgres logs.
+The first example has many problems. First, it creates three separate cron processes. Second, the ANALYZE on table abc may end up running while the VACUUM is still going on — not a desired behavior. Third, the second VACUUM may start before the previous VACUUM or ANALYZE has finished. Fourth, if the database is down, there are three emailed error reports going out, and three errors in the Postgres logs.
 
 The second example fixes all of these problems. The second VACUUM and the ANALYZE will not run until the previous actions are completed. Only a single cron process is spawned. If the first VACUUM encounters a problem (such as the database being down), the other two commands are not even attempted.
 
@@ -105,7 +105,7 @@ The only drawback is to make sure that you don’t stick very important items at
 
 ### Avoid redirects to /dev/null
 
-Resist strongly the urge to add 2>/dev/null to the end of your entries. The problem with such a redirect that it is a very crude tool that removes *all* error output, both the expected (what you are probably trying to filter out) and the unexpected (the stuff you probably do not want filtered out). Turning off the error output negates one of the strongest features of cron - emailing of output.
+Resist strongly the urge to add 2>/dev/null to the end of your entries. The problem with such a redirect that it is a very crude tool that removes *all* error output, both the expected (what you are probably trying to filter out) and the unexpected (the stuff you probably do not want filtered out). Turning off the error output negates one of the strongest features of cron — emailing of output.
 
 Rather than using 2>/dev/null or >/dev/null, make the actions quiet by default. Many commands take a -q, --quiet, or --silent option. Use Unix tools to filter out known noise. If all else fails, append the output to a logfile, so you can come back and look at things later when you realize your entry is not working the way you thought it was.
 
@@ -113,7 +113,7 @@ If all else fails, call an external script. It’s well worth the extra few minu
 
 ### Don’t rely on email
 
-Unfortunately, cron emails all output to you by default - both stdout and stderr. This means that the output tends to be overloaded - both informational messages and errors are sent. It’s too easy for the error messages to get lost if you tend to to receive many informational cron messages. Even well-intentioned messages tend to cause problems over time, as you grow numb (for example) to the daily message showing you the output of a script that runs at 2 AM. After a while, you stop reading the body of the message, and then you mentally filter them away when you see them - too much mail to read to look that one over. Unfortunately, that’s when your script fails and cron sends an error message that is not seen.
+Unfortunately, cron emails all output to you by default — both stdout and stderr. This means that the output tends to be overloaded — both informational messages and errors are sent. It’s too easy for the error messages to get lost if you tend to to receive many informational cron messages. Even well-intentioned messages tend to cause problems over time, as you grow numb (for example) to the daily message showing you the output of a script that runs at 2 AM. After a while, you stop reading the body of the message, and then you mentally filter them away when you see them — too much mail to read to look that one over. Unfortunately, that’s when your script fails and cron sends an error message that is not seen.
 
 The best solution is to reserve cron emails for when things go wrong. Thus, an email from cron is a rare event and will very likely be noticed and taken care of. If you still need the output from stdout, you can append it to a logfile somewhere. A better way, but more complex, is to call an external script that can send you an email itself, thus allowing control of the subject line.
 
@@ -123,7 +123,7 @@ Don’t put passwords into your crontab. Not only is it a security risk (crontab
 
 ### Use full paths
 
-Both for safety and sanity, use the full paths to all commands. This is quite easy to do when using aliases, and allows you to also add standard flags as well (e.g. /usr/bin/psql -q -t -A -X). Of course, you can probably get away with not giving the full path to very standard commands such as “cp” - few sysadmins are *that* paranoid. :)
+Both for safety and sanity, use the full paths to all commands. This is quite easy to do when using aliases, and allows you to also add standard flags as well (e.g. /usr/bin/psql -q -t -A -X). Of course, you can probably get away with not giving the full path to very standard commands such as “cp” — few sysadmins are *that* paranoid. :)
 
 ### Conditionally run
 

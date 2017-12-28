@@ -7,15 +7,15 @@ title: Case Sensitive MySQL Searches
 
 
 
-MySQL’s support for case sensitive search is explained somewhat opaquely in the aptly titled [Case Sensitivity in String Searches](http://dev.mysql.com/doc/refman/5.6/en/case-sensitivity.html) documentation. In short, it explains that by default, MySQL won’t treat strings as case sensitive when executing a statement such as:
+MySQL’s support for case sensitive search is explained somewhat opaquely in the aptly titled [Case Sensitivity in String Searches](https://dev.mysql.com/doc/refman/5.6/en/case-sensitivity.html) documentation. In short, it explains that by default, MySQL won’t treat strings as case sensitive when executing a statement such as:
 
 ```sql
 SELECT first_name FROM contacts WHERE first_name REGEXP '^[a-z]';
 ```
 
-This simple search to look for contacts whose first name starts with a lower case letter, will return *all* contacts because in the default character set used by MySQL ([latin1](http://en.wikipedia.org/wiki/ISO/IEC_8859-1)), upper and lower case letters share the same “sort value”.
+This simple search to look for contacts whose first name starts with a lower case letter, will return *all* contacts because in the default character set used by MySQL ([latin1](https://en.wikipedia.org/wiki/ISO/IEC_8859-1)), upper and lower case letters share the same “sort value”.
 
-UPDATE: After many helpful comments from readers, it would seem the term I should have used was collation, not sort value. The documentation for both [MySQL](http://dev.mysql.com/doc/refman/5.6/en/charset-general.html) and [PostgreSQL](http://www.postgresql.org/docs/9.2/static/collation.html) have lengthy discussions on the topic.
+UPDATE: After many helpful comments from readers, it would seem the term I should have used was collation, not sort value. The documentation for both [MySQL](https://dev.mysql.com/doc/refman/5.6/en/charset-general.html) and [PostgreSQL](https://www.postgresql.org/docs/9.2/static/collation.html) have lengthy discussions on the topic.
 
 ### Enough with the backstory, how do I perform case sensitive searches!
 
@@ -25,7 +25,7 @@ The docs say to convert the string representation to a binary one. This allows �
 SELECT first_name FROM contacts WHERE BINARY(first_name) REGEXP '^[a-z]';
 ```
 
-There are other strategies available, such as changing the character set being used for comparisons with the [COLLATE](http://dev.mysql.com/doc/refman/5.0/en/charset-collate.html) function. This would likely work better for cases where you had many columns to compare.
+There are other strategies available, such as changing the character set being used for comparisons with the [COLLATE](https://dev.mysql.com/doc/refman/5.0/en/charset-collate.html) function. This would likely work better for cases where you had many columns to compare.
 
 ```sql
 SELECT first_name FROM contacts WHERE first_name REGEXP '^[a-z]' COLLATE latin1_bin;

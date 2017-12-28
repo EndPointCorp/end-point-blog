@@ -9,7 +9,7 @@ title: A caching, resizing, reverse proxying image server with Nginx
 
 While working on a complex project, we had to set up a caching reverse proxying image server with the ability of automatically resize any cached image on the fly.
 
-Looking around on the Internet, we discovered [an amazing blog post](http://charlesleifer.com/blog/nginx-a-caching-thumbnailing-reverse-proxying-image-server-/) describing how Nginx could do that with a neat [Image Filter module](http://nginx.org/en/docs/http/ngx_http_image_filter_module.html) capable of resizing, cropping and rotating images, creating an Nginx-only solution.
+Looking around on the Internet, we discovered [an amazing blog post](http://charlesleifer.com/blog/nginx-a-caching-thumbnailing-reverse-proxying-image-server-/) describing how Nginx could do that with a neat [Image Filter module](https://nginx.org/en/docs/http/ngx_http_image_filter_module.html) capable of resizing, cropping and rotating images, creating an Nginx-only solution.
 
 ### What we wanted
 
@@ -88,7 +88,7 @@ server {
   }
 ```
 
-Note that we may also use [image_filter](http://nginx.org/en/docs/http/ngx_http_image_filter_module.html#image_filter) resize and crop options, should we need different results than just resizing.
+Note that we may also use [image_filter](https://nginx.org/en/docs/http/ngx_http_image_filter_module.html#image_filter) resize and crop options, should we need different results than just resizing.
 
 ### Testing the final result
 
@@ -104,9 +104,9 @@ http://www.example.com/image/150x150/wikipedia/commons/0/01/Tiger.25.jpg
 
 As this was not a public server, we didn’t use any security mechanism to validate the request.
 
-The original blog post, though, reports a very simple and clever way to prevent abuse from unauthorized access, using the [Secure Link module](http://nginx.org/en/docs/http/ngx_http_secure_link_module.html).
+The original blog post, though, reports a very simple and clever way to prevent abuse from unauthorized access, using the [Secure Link module](https://nginx.org/en/docs/http/ngx_http_secure_link_module.html).
 
-To access your server you will now need to add an auth parameter to the request, with a secure token that can be [easily calculated as an MD5 hash](http://nginx.org/en/docs/http/ngx_http_secure_link_module.html#secure_link_md5).
+To access your server you will now need to add an auth parameter to the request, with a secure token that can be [easily calculated as an MD5 hash](https://nginx.org/en/docs/http/ngx_http_secure_link_module.html#secure_link_md5).
 
 This is the simple Bash command we used to test it:
 

@@ -7,7 +7,7 @@ title: Getting realtime output using Python Subprocess
 
 ### The Problem
 
-When I launch a long running unix process within a python script, it waits until the process is finished, and only then do I get the complete output of my program. This is annoying if I'm running a process that takes a while to finish. And I want to capture the output and display it in the nice manner with clear formatting.
+When I launch a long running unix process within a python script, it waits until the process is finished, and only then do I get the complete output of my program. This is annoying if I’m running a process that takes a while to finish. And I want to capture the output and display it in the nice manner with clear formatting.
 
 ### Using the subprocess and shlex library
 
@@ -17,8 +17,8 @@ Python has a “batteries included” philosophy. I have used 2 standard librari
 import subprocess
 import shlex
 ```
-- subprocess - Works with additional processes.
-- shlex - Lexical analysis of shell-style syntaxes.
+- subprocess — Works with additional processes.
+- shlex — Lexical analysis of shell-style syntaxes.
 
 ### subprocess.popen
 
@@ -61,7 +61,7 @@ I had one more problem in parsing the shell commands to pass it to popen when I 
 ```bash
 rsync -avzXH --delete --exclude=*.swp --exclude=**/drivers.ini /media/lgisos/lg.iso root@42-a:/isodevice
 ```
-To split the string using shell-like syntax I have used shlex library's split method.
+To split the string using shell-like syntax I have used shlex library’s split method.
 
 ### Here is the final code looks like
 

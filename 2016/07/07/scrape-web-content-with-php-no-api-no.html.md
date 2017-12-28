@@ -17,7 +17,7 @@ Today I will show you how to get web data using PHP and that it can be as easy a
 
 There are multiple scraping scripts ready to use. I can recommend one of them: PHP Simple HTML DOM Parser. It’s extremely easy to start with and initial cost is almost nothing, it’s open sourced also.
 
-First, download a library from an official site: [http://sourceforge.net/project/showfiles.php?group_id=218559](http://sourceforge.net/project/showfiles.php?group_id=218559). You can use a composer version too, it’s here: [https://github.com/sunra/php-simple-html-dom-parser](https://github.com/sunra/php-simple-html-dom-parser).
+First, download a library from an official site: [https://sourceforge.net/project/showfiles.php?group_id=218559](https://sourceforge.net/project/showfiles.php?group_id=218559). You can use a composer version too, it’s here: [https://github.com/sunra/php-simple-html-dom-parser](https://github.com/sunra/php-simple-html-dom-parser).
 
 Let’s say that you have downloaded this file already. It’s just a one PHP file called simple_html_dom.php. Create a new PHP file called scraper.php and include mentioned library like this:
 

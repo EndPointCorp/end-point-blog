@@ -5,7 +5,7 @@ tags: android, mobile
 title: Dynamically adding custom radio buttons in Android
 ---
 
-I’ve been writing a timesheet tracking app for End Point. In working on various features of this app, I’ve had more than a few problems to work through, since this project is one of my first on Android and I’ve never used many of the Android features that I’m now using. One particularly fun bit was setting up a scrollable list of radio buttons with numbers from 0 - 23 (no, we don’t often have people working 23 hours on a project in a day, but just in case!) when the user is creating an entry, as a prettier and more backward-compatible alternative to using a number picker to indicate how many hours were spent on this particular job.
+I’ve been writing a timesheet tracking app for End Point. In working on various features of this app, I’ve had more than a few problems to work through, since this project is one of my first on Android and I’ve never used many of the Android features that I’m now using. One particularly fun bit was setting up a scrollable list of radio buttons with numbers from 0 – 23 (no, we don’t often have people working 23 hours on a project in a day, but just in case!) when the user is creating an entry, as a prettier and more backward-compatible alternative to using a number picker to indicate how many hours were spent on this particular job.
 
 In Android, view layouts are usually defined in XML like this:
 
@@ -24,7 +24,7 @@ layout/activity_hour_picker.xml
 </RelativeLayout>
 ```
 
-Simple. But, as you can imagine, not so fun when you’re adding a list of 24 buttons - so, I decided to add them dynamically in the code. First, though, a ScrollView and RadioGroup (ScrollView only allows one child) need to be defined in the XML, no point in doing that programmatically. Let’s add those:
+Simple. But, as you can imagine, not so fun when you’re adding a list of 24 buttons — so, I decided to add them dynamically in the code. First, though, a ScrollView and RadioGroup (ScrollView only allows one child) need to be defined in the XML, no point in doing that programmatically. Let’s add those:
 
 layout/activity_hour_picker.xml
 
@@ -75,7 +75,7 @@ And this is what we get:
 
 <a href="/blog/2013/05/09/dynamically-adding-custom-radio-buttons/image-0-big.png" imageanchor="1"><img border="0" src="/blog/2013/05/09/dynamically-adding-custom-radio-buttons/image-0.png"/></a>
 
-It scrolls horizontally like we want, but there’s a problem - we don’t want the default radio button selector showing up, since we’ve already got custom button graphics showing. And we can’t forget that we’re still missing the code to make everything within the RadioGroup work properly - In other words, the buttons won’t do anything when a user clicks them. So, let’s add a listener to each button as it’s created:
+It scrolls horizontally like we want, but there’s a problem — we don’t want the default radio button selector showing up, since we’ve already got custom button graphics showing. And we can’t forget that we’re still missing the code to make everything within the RadioGroup work properly — In other words, the buttons won’t do anything when a user clicks them. So, let’s add a listener to each button as it’s created:
 
 src/com/example/HourPickerActivity.java
 
@@ -118,4 +118,4 @@ Now, let’s see how this all has pulled together.
 
 <a href="/blog/2013/05/09/dynamically-adding-custom-radio-buttons/image-1-big.png" imageanchor="1"><img border="0" src="/blog/2013/05/09/dynamically-adding-custom-radio-buttons/image-1.png"/></a>
 
-There - that looks much better! And it works great.
+There — that looks much better! And it works great.

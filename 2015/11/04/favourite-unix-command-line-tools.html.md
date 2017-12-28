@@ -71,7 +71,7 @@ Syntax: $directory $file_change_mask $command_or_action
  /tmp IN_ALL_EVENTS logger "/tmp action for #file"
 ```
 
-The above example shows triggering an rsync event whenever there is a change in `/var/www/html/contents` directory. In cases of immediate backup implementations this will be really helpful. Find more about incron [here](http://www.cyberciti.biz/faq/linux-inotify-examples-to-replicate-directories/).
+The above example shows triggering an rsync event whenever there is a change in `/var/www/html/contents` directory. In cases of immediate backup implementations this will be really helpful. Find more about incron [here](https://www.cyberciti.biz/faq/linux-inotify-examples-to-replicate-directories/).
 
 ### 5. Double dash
 

@@ -26,7 +26,7 @@ Unfortunately, XFS is not capable of being shrunk at the moment (and for the for
 
 In my specific case this translated to connect to the virtualization hosting server, create a new LVM logical volume to host the virtual disk device for the VM and then add the new virtual device to the VM configuration. Unfortunately in order to have the VM see the new virtual device I had to shut it down.
 
-While connected to the virtualization host server I also downloaded and attached to the VM the latest ISO of [SysRescueCD](http://www.sysresccd.org/SystemRescueCd_Homepage) which is a data rescue specialized Linux distribution. I’m specifically using this distro since it’s one of the few which offers the XFS dump/restore tools on the live ISO.
+While connected to the virtualization host server I also downloaded and attached to the VM the latest ISO of [SysRescueCD](http://www.system-rescue-cd.org/) which is a data rescue specialized Linux distribution. I’m specifically using this distro since it’s one of the few which offers the XFS dump/restore tools on the live ISO.
 
 Now the VM was ready to be booted with the SysRescueCD Live OS and then I could start working my way through all the needed fixes. If you’re doing something similar, of course please make sure you have **offsite backups** and have double-checked that they’re readable before doing anything else.
 

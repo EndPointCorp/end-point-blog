@@ -154,7 +154,7 @@ Many times when you insert a records into a MySQL table, later references to thi
 
 MySQL has the GROUP_CONCAT function, which serves as a string “join” of sorts.  We emulate this behavior in PostgreSQL by using the string_agg aggregate function with the delimiter of choice.
 
-#### CONCAT_WS() - expected to be but not an issue; PG has this function
+#### CONCAT_WS() — expected to be but not an issue; PG has this function
 
 PostgreSQL has included a CONCAT_WS() function since PostgreSQL 9.1, so this was not an issue with the specific migration, but could still be an issue if you are migrating to an older version of PostgreSQL.
 

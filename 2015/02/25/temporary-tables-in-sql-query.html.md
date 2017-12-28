@@ -65,7 +65,7 @@ Here, we are creating an empty “inventory” table template as a temporary tab
 
 I’ve used temporary tables (in a MySQL/Interchange/Perl environment) to speed up a query by a factor of two or more. It’s usually in those cases where you have a complex JOIN that appears in two or more parts of the query (again, usually a UNION). I’ve even had big-win situations where the same temporary table was used in two different queries during the same session.
 
-A similar approach is the [Common Table Expression](http://www.postgresql.org/docs/9.4/static/queries-with.html) (CTE) found in PostgreSQL starting with version 8.4. This allows you to identify the rows you would be pouring into your temporary table as a named result-set, then reference it in your query. Our “toy” example would become:
+A similar approach is the [Common Table Expression](https://www.postgresql.org/docs/9.4/static/queries-with.html) (CTE) found in PostgreSQL starting with version 8.4. This allows you to identify the rows you would be pouring into your temporary table as a named result-set, then reference it in your query. Our “toy” example would become:
 
 ```sql
 WITH cross_inventory AS

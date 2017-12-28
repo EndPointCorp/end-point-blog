@@ -2,7 +2,7 @@
 author: Piotr Hankiewicz
 gh_issue_number: 1214
 tags: html, javascript, video
-title: Creating a video player with time markers - step by step
+title: Creating a video player with time markers — step by step
 ---
 
 ### Introduction
@@ -17,12 +17,12 @@ To simplify (or to make it harder for some of you :)) this tutorial we won’t u
 
 We will need some libraries (all of these are free to use in commercial projects):
 
-- Video.js - [https://github.com/videojs/video.js](https://github.com/videojs/video.js),
-- Videojs-markers plugin - [https://github.com/spchuang/videojs-markers](https://github.com/spchuang/videojs-markers).
-- jQuery - [http://code.jquery.com/jquery-2.0.3.min.js](http://code.jquery.com/jquery-2.0.3.min.js)
-- Sample video file - [http://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4](http://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4)
+- Video.js — [https://github.com/videojs/video.js](https://github.com/videojs/video.js),
+- Videojs-markers plugin — [https://github.com/spchuang/videojs-markers](https://github.com/spchuang/videojs-markers).
+- jQuery — [http://code.jquery.com/jquery-2.0.3.min.js](http://code.jquery.com/jquery-2.0.3.min.js)
+- Sample video file — [http://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4](http://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4)
 
-### Step 1 - creating a project skeleton
+### Step 1 — creating a project skeleton
 
 Let’s create a new folder for our project and call it video-with-markers. Inside let’s create a new file called “index.html”, three folders: “css”, “js” and “var”.
 
@@ -56,7 +56,7 @@ Let’s open the index.html file and fill it with some basic structure, that wil
 </html>
 ```
 
-### Step 2 - activating player and creating markers
+### Step 2 — activating player and creating markers
 
 **TIP: all the further code should be put inside the body tag.**
 
@@ -103,9 +103,9 @@ It needs some additional CSS styling to achieve a result like on the first image
 
 Almost the end. There are many more Video.js plugins ready to use, for example:
 
-- videojs-HDtoggle - button which toggles between HD and non-HD source,
-- videojs-playlist - plays videos continuously or by selecting them,
-- videojs-watermark - displays a watermark on top of the video.
+- videojs-HDtoggle — button which toggles between HD and non-HD source,
+- videojs-playlist — plays videos continuously or by selecting them,
+- videojs-watermark — displays a watermark on top of the video.
 
 With not much effort most of video player functionalities can be finalized. There is always some tweaking, but at least you can have a base for creating your project. And remember, if you will find bugs, report it! And if you have implemented something cool, share it!
 

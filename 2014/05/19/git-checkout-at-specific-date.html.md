@@ -41,7 +41,7 @@ do so (now or later) by using -b with the checkout command again. Example:
 HEAD is now at d7f89dd... Bucardo now accepts pg_service for databases
 ```
 
-So, we get the warning that HEAD only goes back to Feb 22, but then git goes ahead and checks us out anyway! If you were not paying attention - perhaps because you only glanced over that perfectly ordinary looking last line - you might not realize that the checkout you received is not what you requested.
+So, we get the warning that HEAD only goes back to Feb 22, but then git goes ahead and checks us out anyway! If you were not paying attention — perhaps because you only glanced over that perfectly ordinary looking last line — you might not realize that the checkout you received is not what you requested.
 
 Since this behavior cannot, to my knowledge, be turned off, I avoid this method and use other ways to checkout the repo as it existed on a certain date. The simplest is to find the closest commit by viewing the output of **git log**. In smaller projects, you can simply do this in a text editor and search for the date you want, then find a good commit sha-1 hash to checkout (i.e. **git log > log.txt; emacs log.txt**). Another somewhat canonical way is to use git-rev-list:
 

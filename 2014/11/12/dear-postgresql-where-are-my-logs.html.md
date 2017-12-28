@@ -45,7 +45,7 @@ Syslog is often useful, in that it allows administrators to collect logs from ma
 
 ### EVENTLOG
 
-For PostgreSQL systems running on Windows, you can send log entries to the Windows event log. You’ll want to tell Windows to expect the log values, and what “event source” they’ll come from. You can find instructions for this operation in the [PostgreSQL documentation discussing server setup](http://www.postgresql.org/docs/9.3/static/event-log-registration.html).
+For PostgreSQL systems running on Windows, you can send log entries to the Windows event log. You’ll want to tell Windows to expect the log values, and what “event source” they’ll come from. You can find instructions for this operation in the [PostgreSQL documentation discussing server setup](https://www.postgresql.org/docs/9.3/static/event-log-registration.html).
 
 ### STDERR
 
@@ -99,7 +99,7 @@ foo=# show log_filename ;
  postgresql-%Y-%m-%d_%H%M%S.log
 (1 row)
 ```
-Documentation for each of these options, along with settings governing log rotation, is available [here](http://www.postgresql.org/docs/9.3/static/runtime-config-logging.html).
+Documentation for each of these options, along with settings governing log rotation, is available [here](https://www.postgresql.org/docs/9.3/static/runtime-config-logging.html).
 
 If logging_collector is turned off, you can still find the logs using the /proc filesystem, on operating systems equipped with one. First you’ll need to find the process ID of a PostgreSQL process, which is simple enough:
 
@@ -119,7 +119,7 @@ lrwx------ 1 josh josh 64 Nov  5 12:52 /proc/31113/fd/2 -> /var/log/postgresql/p
 
 ### CSVLOG
 
-The “csvlog” mode creates logs in CSV format, designed to be easily machine-readable. In fact, [this section of the PostgreSQL documentation](http://www.postgresql.org/docs/9.3/static/runtime-config-logging.html#RUNTIME-CONFIG-LOGGING-CSVLOG) even provides a handy table definition if you want to slurp the logs into your database. CSV logs are produced in a fixed format the administrator cannot change, but it includes fields for everything available in the other log formats. For these to work, you need to have logging_collector turned on; without logging_collector, the logs simply won’t show up anywhere. But when configured correctly, PostgreSQL will create CSV format logs in the log_directory, with file names mostly following the log_filename pattern. Here’s my example database, with log_destination set to “stderr, csvlog” and logging_collector turned on, just after I start the database and issue one query:
+The “csvlog” mode creates logs in CSV format, designed to be easily machine-readable. In fact, [this section of the PostgreSQL documentation](https://www.postgresql.org/docs/9.3/static/runtime-config-logging.html#RUNTIME-CONFIG-LOGGING-CSVLOG) even provides a handy table definition if you want to slurp the logs into your database. CSV logs are produced in a fixed format the administrator cannot change, but it includes fields for everything available in the other log formats. For these to work, you need to have logging_collector turned on; without logging_collector, the logs simply won’t show up anywhere. But when configured correctly, PostgreSQL will create CSV format logs in the log_directory, with file names mostly following the log_filename pattern. Here’s my example database, with log_destination set to “stderr, csvlog” and logging_collector turned on, just after I start the database and issue one query:
 
 ```nohighlight
 [josh@eddie ~/devel/pg_log]$ ll

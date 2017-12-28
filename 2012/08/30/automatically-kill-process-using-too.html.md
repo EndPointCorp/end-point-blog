@@ -5,7 +5,7 @@ tags: hosting, linux, perl
 title: Automatically kill process using too much memory on Linux
 ---
 
-Sometimes on Linux (and other Unix variants) a process will consume way too much memory. This is more likely if you have a fair amount swap space configured -- but within the range of normal, for example, as much swap as you have RAM.
+Sometimes on Linux (and other Unix variants) a process will consume way too much memory. This is more likely if you have a fair amount swap space configured — but within the range of normal, for example, as much swap as you have RAM.
 
 There are various methods to try to limit trouble from such situations. You can use the shell’s ulimit setting to put a hard cap on the amount of RAM allowed to the process. You can adjust settings in /etc/security/limits.conf on both Red Hat- and Debian-based distros. You can wait for the OOM (out of memory) killer to notice the process and kill it.
 

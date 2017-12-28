@@ -31,7 +31,7 @@ SPF:
 - in case the check fails a rejection message is given to the sender server
 
 <div class="separator" style="clear: both; text-align: center;"><a href="/blog/2014/04/15/spf-dkim-and-dmarc-brief-explanation/image-0-big.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="/blog/2014/04/15/spf-dkim-and-dmarc-brief-explanation/image-0.png"/></a><br/><br/>
-<span style="font-weight: lighter; size: 0.25em;">Source <a href="http://en.wikipedia.org/wiki/E-mail_authentication">[*]</a></span></div>
+<span style="font-weight: lighter; size: 0.25em;">Source <a href="https://en.wikipedia.org/wiki/E-mail_authentication">[*]</a></span></div>
 
 DKIM:
 
@@ -42,7 +42,7 @@ DKIM:
 - the DKIM header check result can be then used when deciding if a message is fraudulent or trustworthy
 
 <div class="separator" style="clear: both; text-align: center;"><a href="http://2.bp.blogspot.com/-eQ123eQEqB4/U0yIgEIXf_I/AAAAAAAAAS8/Kbwz5xMrP4Q/s1600/DomainKeys_Identified_Mail_(DKIM).png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="/blog/2014/04/15/spf-dkim-and-dmarc-brief-explanation/image-1.png"/></a><br/><br/>
-<span style="font-weight: lighter; size: 0.25em;">Source <a href="http://en.wikipedia.org/wiki/E-mail_authentication">[*]</a></span></div>
+<span style="font-weight: lighter; size: 0.25em;">Source <a href="https://en.wikipedia.org/wiki/E-mail_authentication">[*]</a></span></div>
 
 DMARC:
 
@@ -53,7 +53,7 @@ DMARC:
 - if the check fails, based on the action published by the DMARC policy, different actions are taken
 
 <div class="separator" style="clear: both; text-align: center;"><a href="/blog/2014/04/15/spf-dkim-and-dmarc-brief-explanation/image-2-big.jpeg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="/blog/2014/04/15/spf-dkim-and-dmarc-brief-explanation/image-2.jpeg"/></a><br/><br/>
-<span style="font-weight: lighter; size: 0.25em;">Source <a href="http://dmarc.org/overview.html">[*]</a></span></div>
+<span style="font-weight: lighter; size: 0.25em;">Source <a href="https://dmarc.org/overview.html">[*]</a></span></div>
 
 ## The bad news: limits and best practices
 
@@ -75,6 +75,6 @@ The short answer is: Yes. The longer answer is that everybody should and eventua
 Hopefully things will change soon and that starts by every one of us adopting these tools as soon as possible.
 
 [1] The lack of such a monitoring tool is considered one of the reasons why other tools (such as ADSP) in past have failed during the adoption phase.
-[2] [Comparison of mail servers on Wikipedia](http://en.wikipedia.org/wiki/Comparison_of_mail_servers)
+[2] [Comparison of mail servers on Wikipedia](https://en.wikipedia.org/wiki/Comparison_of_mail_servers)
 
 

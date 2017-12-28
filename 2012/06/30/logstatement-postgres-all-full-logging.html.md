@@ -8,10 +8,10 @@ title: Postgres log_statement='all' should be your default
 
 
 <div class="separator" style="clear: both; float:right; text-align: center;">
-<a href="/blog/2012/06/30/logstatement-postgres-all-full-logging/image-0-big.jpeg" imageanchor="1" style="clear:right; margin-left:1em; margin-bottom:1em"><img border="0" height="281" src="/blog/2012/06/30/logstatement-postgres-all-full-logging/image-0.jpeg" width="400"/></a><br/>Modified version of <a href="http://www.flickr.com/photos/ellesmerefnc/3869313993/">image</a> by Flickr user <a href="http://www.flickr.com/photos/ellesmerefnc/">Ellesmere FNC</a></div>
+<a href="/blog/2012/06/30/logstatement-postgres-all-full-logging/image-0-big.jpeg" imageanchor="1" style="clear:right; margin-left:1em; margin-bottom:1em"><img border="0" height="281" src="/blog/2012/06/30/logstatement-postgres-all-full-logging/image-0.jpeg" width="400"/></a><br/>Modified version of <a href="https://www.flickr.com/photos/ellesmerefnc/3869313993/">image</a> by Flickr user <a href="https://www.flickr.com/photos/ellesmerefnc/">Ellesmere FNC</a></div>
 
 Setting the PostgreSQL **log_statement** parameter to **'all'** is always your best choice; this article will explain why. PostgreSQL does not have many knobs to control logging. The main one is 
-[log_statement](http://www.postgresql.org/docs/current/static/runtime-config-logging.html#GUC-LOG-STATEMENT), which can be set to **'none'** (do not ever set it to this!), **'ddl'** or **'mod'** (decent but flawed values), or **'all'**, which is what you should be using. In addition, you probably 
+[log_statement](https://www.postgresql.org/docs/current/static/runtime-config-logging.html#GUC-LOG-STATEMENT), which can be set to **'none'** (do not ever set it to this!), **'ddl'** or **'mod'** (decent but flawed values), or **'all'**, which is what you should be using. In addition, you probably 
 want to set **log_connections = on**, **log_disconnections = on**, and **log_duration = on**. 
 Of course, if you do set all of those, don’t forget to set **log_min_duration_statement = -1**
 to turn it off completely, as it is no longer needed.
@@ -39,16 +39,16 @@ anything else on the server. Additionally, you can configure this disk different
 as it will be heavy write/append with little to no random read access. The best 
 filesystems for handling this sort of thing seem to be ext2 and ext4.
 A better solution is to trade the I/O hit for a network hit, and use syslog (or 
-better, [rsyslog](http://en.wikipedia.org/wiki/Rsyslog)) to ship the logs to a different server. Doing this is usually as simple as setting **log_destination = 'syslog'** in your postgresql.conf and adjusting your [r]syslog.conf. This has many advantages: if shipping to a local server, you can often go over a non-public network interface, and thus not impact the database server at all. This other server can also be queried at will, without affecting the performance of the database server. This means heavy analytics, e.g. running [pgsi](http://bucardo.org/wiki/Pgsi) or 
-[pgfouine](http://pgfouine.projects.postgresql.org/), can 
+better, [rsyslog](https://en.wikipedia.org/wiki/Rsyslog)) to ship the logs to a different server. Doing this is usually as simple as setting **log_destination = 'syslog'** in your postgresql.conf and adjusting your [r]syslog.conf. This has many advantages: if shipping to a local server, you can often go over a non-public network interface, and thus not impact the database server at all. This other server can also be queried at will, without affecting the performance of the database server. This means heavy analytics, e.g. running [pgsi](https://bucardo.org/wiki/Pgsi) or 
+[pgfouine](http://pgfoundry.org/projects/pgfouine/), can 
 run without fear of impacting production. It can also be easier to provision this other server with larger disks than to mess around with the production database server.
 
 ### **Objection: *Noise***
 
-A final objection is that the log files get so large and noisy, they are hard to read. Certainly, if you are used to reading sparse logs, this will be a change that will take some getting used to. One should not be reading logs manually anyway: there are tools to do that. If all your logs were showing before was log_min_duration_statement, you can get the same effect (in a prettier format!) by using the “duration” mode of [the tail_n_mail program](http://bucardo.org/wiki/Tail_n_mail), which also lets you pick your own minimum duration and then sorts them from longest to shortest.
+A final objection is that the log files get so large and noisy, they are hard to read. Certainly, if you are used to reading sparse logs, this will be a change that will take some getting used to. One should not be reading logs manually anyway: there are tools to do that. If all your logs were showing before was log_min_duration_statement, you can get the same effect (in a prettier format!) by using the “duration” mode of [the tail_n_mail program](https://bucardo.org/wiki/Tail_n_mail), which also lets you pick your own minimum duration and then sorts them from longest to shortest.
 
 <div class="separator" style="clear: both; text-align: center;">
-<a href="/blog/2012/06/30/logstatement-postgres-all-full-logging/image-1-big.jpeg" imageanchor="1" style="margin-left:1em; margin-right:1em"><img border="0" height="299" src="/blog/2012/06/30/logstatement-postgres-all-full-logging/image-1.jpeg" width="400"/></a><br/><a href="http://www.flickr.com/photos/7682623@N02/2535217848/">Image</a> by Flickr user <a href="http://www.flickr.com/photos/7682623@N02/">auntjojo</a></div>
+<a href="/blog/2012/06/30/logstatement-postgres-all-full-logging/image-1-big.jpeg" imageanchor="1" style="margin-left:1em; margin-right:1em"><img border="0" height="299" src="/blog/2012/06/30/logstatement-postgres-all-full-logging/image-1.jpeg" width="400"/></a><br/><a href="https://www.flickr.com/photos/7682623@N02/2535217848/">Image</a> by Flickr user <a href="https://www.flickr.com/photos/7682623@N02/">auntjojo</a></div>
 
 ### **Advantage: *Troubleshooting***
 
@@ -57,7 +57,7 @@ can be crucial. Additionally, being able to look back and see what *was*
 going on can be invaluable. I cannot count the number of times that full logging 
 has made debugging a production issue easier. Without this logging, the only 
 option sometimes is to switch log_statement to all and then wait for the error 
-to pop up again! Don’t let that happen to you - log heavy preemptively. This is 
+to pop up again! Don’t let that happen to you — log heavy preemptively. This is 
 not just useful for tracking direct database problems; often the database 
 trail can enable a DBA to work with application developers to see exactly what their 
 application is doing and where things started to go wrong. On that note, it is a good 
@@ -69,7 +69,7 @@ moment’s notice when major problems arise.
 
 If the only logging you are doing is those queries that happen to be longer 
 than you log_min_duration_statement, you have a very skewed and incomplete view 
-of your database activity. Certainly one can view the slowest queries and try to speed them up, but tools like [pgsi](http://bucardo.org/wiki/Pgsi) are designed to parse full logs: the impact of thousands of "fast" queries can often be more stressful on your server than a few long-running queries, but without full logging you will never know. You also won’t know if those long-running queries sometimes (or often!) run faster than log_min_duration_statement.
+of your database activity. Certainly one can view the slowest queries and try to speed them up, but tools like [pgsi](https://bucardo.org/wiki/Pgsi) are designed to parse full logs: the impact of thousands of "fast" queries can often be more stressful on your server than a few long-running queries, but without full logging you will never know. You also won’t know if those long-running queries sometimes (or often!) run faster than log_min_duration_statement.
 
 We do have some clients that cannot do log_statement = 'all', but we still want 
 to use pgsi, so what we do is turn on full logging for a period of time via cron 

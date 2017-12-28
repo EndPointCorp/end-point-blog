@@ -5,13 +5,13 @@ tags: conference, rails
 title: How to Bring a Baby to a Tech Conference
 ---
 
-Last week, I brought my 4 month old to [RailsConf](http://railsconf.com/). In a game-day decision, rather than drag a two year old and husband along on the ~5 hour drive and send the dogs to boarding, we decided it would ultimately be easier on everyone (except maybe me) if I attended the conference with the baby, especially since a good amount of the conference would be live-streamed.
+Last week, I brought my 4 month old to [RailsConf](https://railsconf.com/). In a game-day decision, rather than drag a two year old and husband along on the ~5 hour drive and send the dogs to boarding, we decided it would ultimately be easier on everyone (except maybe me) if I attended the conference with the baby, especially since a good amount of the conference would be live-streamed.
 
 <img border="0" src="/blog/2015/04/27/how-to-bring-baby-to-tech-conference/image-0.jpeg" style="margin-bottom:5px;" width="810"/>
 
 Daily morning photos at the conference.
 
-While I was there, I was asked often how it was bringing a baby to a conference, so I decided to write a blog post. As with all parenting advice, the circumstances are a strong factor in how the experience turned out. RailsConf is a casual three-day multi-track tech conference with many breaks and social events – it’s as much about socialization as it is about technical know-how. This is not my first baby and not my first time at RailsConf, so I had some idea of what I might be getting into. Minus a few minor squeaks, baby Skardal was sleeping or sitting happily throughout the conference.
+While I was there, I was asked often how it was bringing a baby to a conference, so I decided to write a blog post. As with all parenting advice, the circumstances are a strong factor in how the experience turned out. RailsConf is a casual three-day multi-track tech conference with many breaks and social events — it’s as much about socialization as it is about technical know-how. This is not my first baby and not my first time at RailsConf, so I had some idea of what I might be getting into. Minus a few minor squeaks, baby Skardal was sleeping or sitting happily throughout the conference.
 
 Here’s what I [qualitatively] perceived to be the reaction of others attending the conference to baby Skardal:
 
@@ -21,7 +21,7 @@ In list form:
 
 - **Didn’t Notice:** Probably about 50% didn’t notice I had a baby, especially when she was sleeping soundly in the carrier.
 - **Stares:** Around 50% may have stared. See below for more.
-- **Joke:** A really small percentage of people made some variation of the joke "Starting her early, eh?"
+- **Joke:** A really small percentage of people made some variation of the joke “Starting her early, eh?”
 - **Conversation:** An equally small percentage of people started a conversation with me, which often led to more technical talk.
 
 Here are some reasons I imagined behind the staring:

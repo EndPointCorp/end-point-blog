@@ -21,13 +21,13 @@ Luckily the solution is pretty simple and straight-forward and the only requirem
 
 If you managed to understand how an SSL certificate works this shouldn’t be a huge problem, anyway just as a recap here’s the list of the meaning for the common Subject entries you’ll need:
 
-- C  => Country
-- ST => State
-- L  => City
-- O  => Organization
-- OU => Organization Unit
-- CN => Common Name (eg: the main domain the certificate should cover)
-- emailAddress => main administrative point of contact for the certificate
+- `C` — Country
+- `ST` — State
+- `L` — City
+- `O` — Organization
+- `OU` — Organization Unit
+- `CN` — Common Name (eg: the main domain the certificate should cover)
+- `emailAddress` — main administrative point of contact for the certificate
 
 So by using the common syntax for OpenSSL subject written via command line you need to specify all of the above (the OU is optional) and add another section called **subjectAltName=**.
 
