@@ -9,7 +9,7 @@ I recently was involved in a project to migrate a client’s existing applicatio
 
 Note that these issues should not be considered exhaustive, but were taken from my notes of issues encountered and/or things that we had to take into consideration in this migration process.
 
-## Convert the schema
+### Convert the schema
 
 The first step is to convert the equivalent schema in your PostgreSQL system, generated from the original MySQL.
 
@@ -100,7 +100,7 @@ Basically the idea is that we look for all table with a defined integer primary 
 
 Another interesting thing about this script is that we utilize psql’s ability to store results in a variable, using the \gset command, then we subsequently execute this SQL by interpolating that corresponding variable in the same script.
 
-## Convert the data
+### Convert the data
 
 The next step was to prepare the data load from a MySQL data-only dump.  Using a similar dump recipe as for the initial import, we used: `mysqldump --compatible=postgresql --no-create-info --extended-insert > data.sql` to save the data in a dump file so we could iteratively tweak our approach to cleaning up the MySQL data.
 
@@ -108,7 +108,7 @@ Using our dump file, we attempted a fresh load into the new PostgreSQL database.
 
 What we ended up doing was to create a filter script to handle all of the “fixup” issues needed here.  This involved decoding the data and reencoding to ensure we were using proper UTF8, performing some context-sensitive datatype conversions, etc.
 
-## Additional schema modifications
+### Additional schema modifications
 
 As we were already using a filter script to process the data dump, we decided to take the opportunity to fixup some warts in the current table definitions.  This included some fields which were varchar, but should have actually been numeric or integer; as this was a non-trivial schema (100 tables) we were able to use PostgreSQL’s system views to identify a list of columns which should should be numeric and were currently not.
 
@@ -116,7 +116,7 @@ Since this was an ecommerce application, we identified columns that were likely 
 
 Once we identified the fields in question, I wrote a script to generate the appropriate ALTER TABLE statements to first drop the default, change the column type, then set the new default.  This was done via a mapping between table/column name and desired output type.
 
-## Convert the application
+### Convert the application
 
 The final (and needless to say most involved step) was to convert the actual application itself to work with PostgreSQL.  Despite the fact that these databases both speak SQL, we had to come up for solutions for the following issues:
 
@@ -209,7 +209,7 @@ MySQL MyISAM tables have a very fast COUNT(*) calculation, owing to queries taki
 
 MySQL is much more (*ahem*) flexible when it comes to GROUP BY/aggregate queries, allowing some columns to be excluded in a GROUP BY or an aggregate function.  Making the equivalent query in PostgreSQL involves transforming the query from SELECT ... GROUP BY (cols) to a SELECT DISTINCT ON (cols) ... and providing an explicit sort order for the rows.
 
-## More notes
+### More notes
 
 Don’t be afraid to script things; in fact, I would go so far as to suggest that **everything** you do should be scripted.  This process was complicated and there were lots of moving parts to ensure moved in tandem.  There were changes being made on the site itself concurrently, so we were doing testing against a dump of the original database at a specific point-in-time.  Having everything scripted ensured that this process was repeatable and testable, and that we could get to a specific point in the process without having to remember anything I’d done off-the-cuff.
 

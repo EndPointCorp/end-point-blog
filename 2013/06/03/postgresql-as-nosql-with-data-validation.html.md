@@ -9,11 +9,11 @@ PostgreSQL is a relational database with many great features. There are also man
 
 PostgreSQL 9.3 comes with great features which can turn it into a NoSQL database, with full transaction support, storing JSON documents with constraints on the fields data.
 
-## Simple Example
+### Simple Example
 
 I will show how to do it using a very simple example of a table with products. Each product has a name, description, some id number, price, currency and number of products we have in stock.
 
-## PostgreSQL Version
+### PostgreSQL Version
 
 The simple table in PostgreSQL can look like:
 
@@ -68,7 +68,7 @@ ERROR:  new row for relation "products" violates check constraint "products_in_s
 DETAIL:  Failing row contains (2, shoes, blue shoes, 12.34, dollars, -1).
 ```
 
-## NoSQL Version
+### NoSQL Version
 
 In CouchDB the inserted row in the above table, would be just a JSON looking like this:
 
@@ -83,7 +83,7 @@ In CouchDB the inserted row in the above table, would be just a JSON looking lik
 }
 ```
 
-### The Trivial Solution
+#### The Trivial Solution
 
 In PostgreSQL we can store this JSON as a row in the products table:
 
@@ -95,7 +95,7 @@ CREATE TABLE products (
 
 This works like most of the NoSQL datatabases, no checks, no errors with bad fields. As a result, you can modify the data the way you want, the problem begins when your application expects that the price is a number, and you get a string there, or there is no price at all.
 
-### Validate JSON
+#### Validate JSON
 
 CouchDB validates JSON before saving the document into database. In PostgreSQL 9.2 there is the nice type for that, it is named JSON. The JSON type can store only a proper JSON, there is validation performed before converting into this type.
 
@@ -156,7 +156,7 @@ CONTEXT:  JSON data, line 5: ...,
 
 The problem with formatting can be hard to notice (I’ve added comma after the last field, JSON doesn’t like it).
 
-### Validating Fields
+#### Validating Fields
 
 OK, so we have a solution which looks almost like the first native PostgreSQL solution: we have data which validates. It doesn’t mean the data is sensible.
 
@@ -219,11 +219,11 @@ DETAIL:  Key ((data ->> 'id'::text))=(1) already exists.
 ERROR:  current transaction is aborted, commands ignored until end of transaction block
 ```
 
-### Id Generation
+#### Id Generation
 
 In NoSQL databases the id field is usually some UUID. This is an identifier generated with algorithms with a very small chance of generating the same value, even when you generate them on different machines. So I’m not going to touch it here.
 
-## Searching
+### Searching
 
 You can search the JSON data normally like you were searching columns in a table. Let’s search for the most expensive product we have in stock:
 
@@ -279,7 +279,7 @@ The plan now looks a little bit different, after creating indexes and running an
 
 So it is 664k percent faster.
 
-## The JSON Advantage
+### The JSON Advantage
 
 The JSON solution has got one nice feature which the native PostgreSQL hasn’t. The application can add its own fields on the fly without altering any table. JSON field is just a text, however with some validation. The new field won’t be checked by the indexes and constraints I’ve shown you above.
 
@@ -287,7 +287,7 @@ What’s more, you can add a constraint for this field later. This way you can h
 
 On the other hand you could of course add a trigger checking the JSON, before saving it to database, to check the list of available fields. This way you could prevent adding new fields by the application.
 
-## Summary
+### Summary
 
 So, I’ve shown you how you can use PostgreSQL as a simple NoSQL database storing JSON blobs of text. The great advantage over the simple NoSQL databases storing blobs is that you can constrain the blobs, so they are always correct and you shouldn’t have any problems with parsing and getting them from the database.
 

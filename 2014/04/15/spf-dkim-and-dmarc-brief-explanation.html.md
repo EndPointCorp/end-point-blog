@@ -11,7 +11,7 @@ Spam mail messages have been a plague since the Internet became popular and they
 
 Luckily it seems that lately something is changing with the adoption of three (relatively) new tools which are starting to be widely used: SPF, DKIM and DMARC. Let’s have a quick look at each of these tools and what they achieve.
 
-## What are SPF, DKIM and DMARC
+### What are SPF, DKIM and DMARC
 
 SPF (Sender Policy Framework) is a DNS text entry which shows a list of servers that should be considered allowed to send mail for a specific domain. Incidentally the fact that SPF is a DNS entry can also considered a way to enforce the fact that the list is authoritative for the domain, since the owners/administrators are the only people allowed to add/change that main domain zone.
 
@@ -19,7 +19,7 @@ DKIM (DomainKeys Identified Mail) should be instead considered a method to verif
 
 DMARC (Domain-based Message Authentication, Reporting and Conformance) empowers SPF and DKIM by stating a clear policy which should be used about both the aforementioned tools and allows to set an address which can be used to send reports about the mail messages statistics gathered by receivers against the specific domain [1].
 
-## How do they work?
+### How do they work?
 
 All these tools relies heavily on DNS and luckily their functioning process, after all the setup phase is finished, is simple enough to be (roughly) explained below:
 
@@ -55,7 +55,7 @@ DMARC:
 <div class="separator" style="clear: both; text-align: center;"><a href="/blog/2014/04/15/spf-dkim-and-dmarc-brief-explanation/image-2-big.jpeg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="/blog/2014/04/15/spf-dkim-and-dmarc-brief-explanation/image-2.jpeg"/></a><br/><br/>
 <span style="font-weight: lighter; size: 0.25em;">Source <a href="https://dmarc.org/overview.html">[*]</a></span></div>
 
-## The bad news: limits and best practices
+### The bad news: limits and best practices
 
 Unfortunately even by having a perfectly functional mail system with all the above tools enforced you won’t be 100% safe from the bad guys out there. Not all servers are using all three tools shown above. It’s enough to take a look at the table shown in Wikipedia [2] to see how that’s possible.
 
@@ -68,7 +68,7 @@ Furthermore there are some limits that you should always consider when dealing w
 
 Please work through the proper process carefully, otherwise your precious messages won’t be delivered to your users as potentially seen as fraudulent by a wrong SPF, DKIM or DMARC setup.
 
-## What’s the message behind all this? Should I use these tools or not?
+### What’s the message behind all this? Should I use these tools or not?
 
 The short answer is: Yes. The longer answer is that everybody should and eventually will in future, but we’re just not there yet. So even if all these tools already have a lot of power, they’re not still shining as bright as they should because of poor adoption.
 

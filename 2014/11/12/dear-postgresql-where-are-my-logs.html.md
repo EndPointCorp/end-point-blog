@@ -11,7 +11,7 @@ title: 'Dear PostgreSQL: Where are my logs?'
 
 When debugging a problem, it’s always frustrating to get sidetracked hunting down the relevant logs. PostgreSQL users can select any of several different ways to handle database logs, or even choose a combination. But especially for new users, or those getting used to an unfamiliar system, just finding the logs can be difficult. To ease that pain, here’s a key to help dig up the correct logs.
 
-## Where are log entries sent?
+### Where are log entries sent?
 
 First, connect to PostgreSQL with psql, pgadmin, or some other client that lets you run SQL queries, and run this:
 

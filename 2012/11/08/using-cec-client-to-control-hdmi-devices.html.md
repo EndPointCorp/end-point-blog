@@ -11,7 +11,7 @@ Maintaining the horde of computers it takes to run [Liquid Galaxies](https://liq
 
 Enter [HDMI-CEC](https://en.wikipedia.org/wiki/HDMI#CEC). CEC is a protocol that allows HDMI-connected devices to control each other in various ways. It has a set of standard features that make it easy for home users with a stack of DVD players or TiVos or other devices to change the active source, put everything on standby, control the volume, and some other handy tricks.
 
-We typically use Samsung TVs which support CEC under the trade name “Anynet+”. To interface between computers and TVs, we use [Pulse Eight’s USB-CEC adapters](https://www.pulse-eight.com/store/products/104-usb-hdmi-cec-adapter.aspx) which, in conjunction with [libCEC](https://libcec.pulse-eight.com/), give us a command line interface for arbitrary commands to the TV.
+We typically use Samsung TVs which support CEC under the trade name “Anynet+”. To interface between computers and TVs, we use [Pulse Eight’s USB-CEC adapters](https://www.pulse-eight.com/store/products/104-usb-hdmi-cec-adapter.aspx) which, in conjunction with [libCEC](http://libcec.pulse-eight.com/), give us a command line interface for arbitrary commands to the TV.
 
 libCEC is available on apt for Ubuntu users:
 
