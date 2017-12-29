@@ -27,7 +27,7 @@ ps -p "pid" -o etimes
 
 In this case the “pid” should be replaced with your intended process ID.
 
-The following will help to nicely reporting the output. We can put -o etime or -o etimes with other argument, that is “command", in order to show the executed command along with its very own absolute path:
+The following will help to nicely reporting the output. We can put -o etime or -o etimes with other argument, that is “command”, in order to show the executed command along with its very own absolute path:
 
 ```bash
 ps -p "28590" -o etime,command

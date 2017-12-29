@@ -9,8 +9,8 @@ title: Working on production systems
 
 <div class="separator" style="clear: both; float: right; text-align: center;"><a href="/blog/2017/09/27/working-on-production-systems/image-0.jpeg" imageanchor="1" style="clear: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" data-original-height="392" data-original-width="324" src="/blog/2017/09/27/working-on-production-systems/image-0.jpeg"/></a><br/><small>(Not as easy as it looks) <br/><a href="https://flic.kr/p/Y4yDHm">Photo</a> by Flickr user <a href="https://www.flickr.com/photos/edenpictures/">'edenpictures'</a></small></div>
 
-As consultants, the engineers at End  Point are often called upon to do work on production systems - 
-in other words, one or more servers that are vital to our client's business. These range from doing years 
+As consultants, the engineers at End  Point are often called upon to do work on production systems — 
+in other words, one or more servers that are vital to our client’s business. These range from doing years 
 of planning to perform a major upgrade for a long-standing client, down to jumping into a brand-new client for an 
 emergency fix. Either way, the work can be challenging, rewarding, and a little bit nerve-wracking. 
 
@@ -37,12 +37,12 @@ server) should involve a good amount or preparation. By the time the big night a
 
 ### Screen Up
 
-The night usually begins with connecting to a client server via SSH. The first order of business should be to invoke 'screen' or 'tmux', 
+The night usually begins with connecting to a client server via SSH. The first order of business should be to invoke ‘screen’ or ‘tmux’, 
 which are persistent session managers (aka terminal multiplexers). These keep your connections; if your network drops, 
 so you can easily pick up where you left off. They also allow other people to view  and/or join in on 
 what you are doing. Finally, they enable you to easily view and control multiple windows. Some screen-specific tips:
 
-- Name your screen something obvious to the task such as "bucardo-production-rollout". Always give it a name to prevent people from joining it by accident. I often use just my email, i.e. screen -S greg@endpoint.com or tmux new -s greg_endpoint_com.
+- Name your screen something obvious to the task such as “bucardo-production-rollout”. Always give it a name to prevent people from joining it by accident. I often use just my email, i.e. screen -S greg@endpoint.com or tmux new -s greg_endpoint_com.
 - Keep organized. Try to keep each window to one general task, and give each one a descriptive name:
     - screen: Ctrl-a A     tmux: Ctrl-b ,
     - I find that uppercase names stand out nicely from  your terminal traffic.
@@ -55,7 +55,7 @@ what you are doing. Finally, they enable you to easily view and control multiple
 
 ### Discovery and Setup
 
-If you don't already know, spend a little bit of time getting to know the server. A deep analysis is not needed, but you should have a rough 
+If you don’t already know, spend a little bit of time getting to know the server. A deep analysis is not needed, but you should have a rough 
 idea how powerful it is (CPU, memory), how  big it is (disk space), what OS it is (distro/version), and what else is running on it. Although 
 one should be able to easily work on any unmodified *nix server, I almost always make a few changes:
 
@@ -89,7 +89,7 @@ to various database servers in quick succession.
 Although psql is an amazing tool, there are important considerations to keep in mind.
 
 The .psql_history file, along with readline support, is a wonderful thing. However, 
- it is also a great footgun, owing to the ease of using the "up arrow" and "Ctrl-r" rerun SQL statements. This can lead to running a command on server B that was previously run on server A (and which should never, 
+ it is also a great footgun, owing to the ease of using the “up arrow” and “Ctrl-r” rerun SQL statements. This can lead to running a command on server B that was previously run on server A (and which should never, 
 ever be run on server B!). Here are some ways around this issue:
 
 One could simply remove the use of readline when on a production database. In this way, you will be forced to type everything 
@@ -117,7 +117,7 @@ while you go off and do something else. There are multiple reasons for this:
 
 Another helpful thing for psql is a good custom prompt. There should always be some way of telling which 
 database - and server - you are using just by looking at the psql prompt. Database names are often the 
-same (especially with primaries and their replicas), so you need to add a little bit more. Here's a decent recipe, but you can 
+same (especially with primaries and their replicas), so you need to add a little bit more. Here’s a decent recipe, but you can 
 consult [the documentation](https://www.postgresql.org/docs/current/static/app-psql.html#APP-PSQL-PROMPTING) to design your own.
 
 ```text
@@ -132,29 +132,29 @@ Using a [connection service file](/blog/2016/10/26/postgres-connection-service-f
 a simple name with multiple connection parameters, allowing abstraction of those details in a manner much safer and cleaner than using shell aliases. 
 Here are some suggestions on using connection files:
 
-- If possible, use the local user's file (~/.pg_service.conf), but the global file is fine too. Whichever you choose, do not put the password inside them - use the .pgpass file for that.
+- If possible, use the local user’s file (~/.pg_service.conf), but the global file is fine too. Whichever you choose, do not put the password inside them - use the .pgpass file for that.
 - Use short but descriptive service names. Keep them very distinct from each other, to reduce the chance of typing in the wrong name.
 - Use uppercase names for important connections (e.g. PROD for the connection to an important production database). This provides another little 
 reminder to your brain that this is not a normal psql connection. (Remember, PROD = Please Respect Our Data)
-- Resist the temptation to alias them further. Force yourself to type everything out each time, e.g. "psql service=PROD" each time. This keeps your head focused on where you are going.
+- Resist the temptation to alias them further. Force yourself to type everything out each time, e.g. “psql service=PROD” each time. This keeps your head focused on where you are going.
 
 ### Dangerous SQL
 
 Some actions are so dangerous, it is a good idea to remove any chance of direct invocation on the wrong server. 
-The best example of this is the SQL 'truncate' command. If I find myself working on multiple servers in which I need 
+The best example of this is the SQL ‘truncate’ command. If I find myself working on multiple servers in which I need 
 to truncate a table, I do NOT attempt to invoke the truncate command directly. Despite all precautions, 
 there are many ways to accidentally run the same truncate command on the wrong serve, whether via 
 a .psql_history lookup, or simply an errant cut-n-paste error. One solution is to put the truncate into a text file, 
 and then invoke that text file, but that simply 
 adds the chance that this file may be invoked on the wrong database. Another solution is to use a text file, but 
-change it when done (e.g. search and replace "truncate" to "notruncate"). This is slightly better, but still 
+change it when done (e.g. search and replace “truncate” to “notruncate”). This is slightly better, but still 
 error prone as it relies on someone remembering to change the file after each use, and causes the file to 
 no longer represent what was actually run.
 
 For a better solution, create a function that only exists on one of the databases. For example, if you have 
 a test database and a production database, you can run truncate via a function that only exists on the 
 test database. Thus, you may safely run your function calls on the test server, and not worry if the functions accidentally get 
-run on the production server. If they do, you end up with a "function not found error" rather than 
+run on the production server. If they do, you end up with a “function not found error” rather than 
 realizing you just truncated a production table. Of course, you should add some safeguards so that the function 
 itself is never created on the production server. Here is one sample recipe:
 
@@ -198,12 +198,12 @@ Make liberal use of the tee(1) command to store command output into discrete fil
 scrollback).
 
 Rather than entering commands directly into a psql prompt, consider putting them into a text file 
-and then feeding that file to psql. It's a little extra work, but the file can be checked into git, 
+and then feeding that file to psql. It’s a little extra work, but the file can be checked into git, 
 giving an excellent audit trail. Plus, you may have to run those commands again someday.
 
 If you find yourself doing the same thing over and over, write a shell script. This even applies to 
 psql commands. For example, I recently found myself having to examine tables on two servers, 
-and needed to quickly examine a table's size, indexes, and if anyone was currently modifying it. Thus 
+and needed to quickly examine a table’s size, indexes, and if anyone was currently modifying it. Thus 
 a shall script:
 
 ```text
