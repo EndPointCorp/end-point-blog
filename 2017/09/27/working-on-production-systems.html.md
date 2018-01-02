@@ -143,7 +143,7 @@ reminder to your brain that this is not a normal psql connection. (Remember, PRO
 Some actions are so dangerous, it is a good idea to remove any chance of direct invocation on the wrong server. 
 The best example of this is the SQL 'truncate' command. If I find myself working on multiple servers in which I need 
 to truncate a table, I do NOT attempt to invoke the truncate command directly. Despite all precautions, 
-there are many ways to accidentally run the same truncate command on the wrong serve, whether via 
+there are many ways to accidentally run the same truncate command on the wrong server, whether via 
 a .psql_history lookup, or simply an errant cut-n-paste error. One solution is to put the truncate into a text file, 
 and then invoke that text file, but that simply 
 adds the chance that this file may be invoked on the wrong database. Another solution is to use a text file, but 
