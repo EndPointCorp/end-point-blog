@@ -15,13 +15,13 @@ For the last few weeks, our developers have been working on syncing our [Liquid 
 
 Sketchfab content can be deployed onto the system in minutes! Users from many industries use Sketchfab, including architecture, hospitals, museums, gaming, design, and education. There is a natural overlap between the Liquid Galaxy and Sketchfab, as members of all of these industries utilize the Liquid Galaxy for its visually stunning and immersive atmosphere. 
 
-We recently had [Alban Denoyel](https://twitter.com/albn), cofounder of Sketchfab, into our office to demo Sketchfab on the Liquid Galaxy. We're happy to report that Alban loved it! He told us about new features that are going to be coming out on Sketchfab soon. These features will automatically roll out to Sketchfab content on the Liquid Galaxy system, and will serve to make the Liquid Galaxy's pull with 3D modeling even greater.
+We recently had [Alban Denoyel](https://twitter.com/albn), cofounder of Sketchfab, into our office to demo Sketchfab on the Liquid Galaxy. We’re happy to report that Alban loved it! He told us about new features that are going to be coming out on Sketchfab soon. These features will automatically roll out to Sketchfab content on the Liquid Galaxy system, and will serve to make the Liquid Galaxy’s pull with 3D modeling even greater.
 
 <div class="separator" style="clear: both; text-align: center;"><a href="/blog/2016/05/12/sketchfab-on-liquid-galaxy/image-2-big.jpeg" imageanchor="1" style="clear: right; float: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" src="/blog/2016/05/12/sketchfab-on-liquid-galaxy/image-2.jpeg"/></a></div>
 
-We’re thrilled with how well Sketchfab works on our Liquid Galaxy as is, but we’re in the process of making it even more impressive. Some Sketchfab models take a bit of time to load (on their website and on our system), so our developers are working on having models load in the background so they can be activated instantaneously on the system. We will also be extending our Sketchfab implementation to make use of some of the features already present on Sketchfab's excellent API, including displaying model annotations and animating the models. 
+We’re thrilled with how well Sketchfab works on our Liquid Galaxy as is, but we’re in the process of making it even more impressive. Some Sketchfab models take a bit of time to load (on their website and on our system), so our developers are working on having models load in the background so they can be activated instantaneously on the system. We will also be extending our Sketchfab implementation to make use of some of the features already present on Sketchfab’s excellent API, including displaying model annotations and animating the models. 
 
-You can view a video of Sketchfab content on the Liquid Galaxy below. If you'd like to learn more, you can call us at 212-929-6923, or [contact us here](https://liquidgalaxy.endpoint.com/#contact).
+You can view a video of Sketchfab content on the Liquid Galaxy below. If you’d like to learn more, you can call us at 212-929-6923, or [contact us here](https://liquidgalaxy.endpoint.com/#contact).
 
 <iframe allowfullscreen="" frameborder="0" height="315" src="https://www.youtube.com/embed/n43cpZ_16zU" width="560"></iframe>
 

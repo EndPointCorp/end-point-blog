@@ -31,6 +31,6 @@ The first day I was on the job in Wall Street, the chairman of the company said 
 
 End Point may be one of the smaller of the “small companies” chosen by Chase this day. But, we were selected because we are a company that personifies good management, great engineering, unrelenting commitment to our customers, and a company that has great potential. Why? Because we believe in having a great kitchen! Our engineering staff is exemplary, our clients are fully appreciative of our partnerships with them, and we are doing all we can to be a model business.
 
-While I may not have rung the actual bell this year, our banker and Chase has every confidence – as do I – that one day we will.
+While I may not have rung the actual bell this year, our banker and Chase has every confidence—as do I—that one day we will.
 
 <iframe frameborder="0" height="360" id="lsembed_1465584958" scrolling="no" src="//livestream.com/accounts/1160789/events/5283827/videos/121916250/player?autoPlay=false&height=360&mute=false&width=640" width="640"></iframe>

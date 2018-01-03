@@ -36,10 +36,10 @@ to a format that Postgres will accept as valid UTF-8, or the entire table import
 similar to this:
 
 ```
-ERROR:  invalid byte sequence for encoding "UTF8": 0xf4 0xa5 0xa3 0xa5
+ERROR:  invalid byte sequence for encoding “UTF8”: 0xf4 0xa5 0xa3 0xa5
 ```
 
-Looking closer at the data in the table showed that it might - just might! - be a 
+Looking closer at the data in the table showed that it might—just might!—be a 
 historical table. In other words, it no longer receives updates, just selects. 
 We really wanted this to be true, for it meant we could dump the whole table, convert it, 
 and simply load the converted table into the new database (which took only a 
@@ -57,9 +57,9 @@ A better solution is to simply look at the underlying file that makes up the
 table. To do this, you need be a Postgres 
 [superuser](https://www.postgresql.org/docs/current/static/role-attributes.html) 
 or have access to the underlying operating system.
-Basically, we will trust the operating system's 
+Basically, we will trust the operating system’s 
 information on when the table was last changed to determine if the table 
-itself has changed. Although not foolproof, it is an excellent solution. Let's 
+itself has changed. Although not foolproof, it is an excellent solution. Let’s 
 illustrate it here. First: create a test table and add some rows:
 
 ```
@@ -87,7 +87,7 @@ isdir        | f
 ```
 
 Next we will revisit the table after some time (e.g. 24 hours) 
-and see if the "modification" timestamp is the same. If it is, then the 
+and see if the “modification” timestamp is the same. If it is, then the 
 table has not been modified either. Unfortunately, the possibility of 
 a false positive is possible due to [VACUUM](https://www.postgresql.org/docs/current/static/sql-vacuum.html), 
 which may change things on disk but does NOT change the data itself. (A regular VACUUM *may* modify the file, and a 
@@ -146,7 +146,7 @@ table that loads extremely fast into the new database.
 That solved only one of the problems, however; another table was also slowing 
 down the migration. Although it did not have the SQL_ASCII conversion 
 issue, it was a large table, and took a large percentage of the remaining 
-migration time. A quick look at this table showed it had a "creation_time"  
+migration time. A quick look at this table showed it had a “creation_time”  
 column as well as a 
 [SERIAL primary key](www.neilconway.org/docs/sequences/), and was obviously being updated quite often. 
 Close examination showed that it was possible this was an append-only 
@@ -157,9 +157,9 @@ most recent rows during the migration, saving a good bit of time.
 
 The previous tricks would not work for this situation, because the underlying file would 
 change constantly as seen by pg_stat_file(), and a pg_dump checksum would 
-change on every insert. We needed to analyze a slice of the table - in this particular case, 
+change on every insert. We needed to analyze a slice of the table—in this particular case, 
 we wanted to see about checksumming all rows except those created in 
-the last week. As a primary key lookup is very fast, we used the "creation_time" 
+the last week. As a primary key lookup is very fast, we used the “creation_time” 
 column to determine an approximate primary key to start with. Then it was simply 
 a matter of feeding all those rows into the sha1sum program:
 
@@ -189,15 +189,15 @@ $ psql -Atc "select * from catbox2 where id < 8617 order by 1" | sha1sum
 Despite the large size of this table (around 10 GB), this command did not take 
 that long to run. A week later, we ran the same 
 commands, and got the same checksum! Thus, we were able to prove that the 
-table was mostly append-only - or at least enough for our use case. We 
-copied over the "old" rows, then copied over the rest of the rows during 
+table was mostly append-only—or at least enough for our use case. We 
+copied over the “old” rows, then copied over the rest of the rows during 
 the critical production migration window.
 
 In the future, this client will able to take advantage of pg_upgrade, 
 but getting to UTF-8 and data checksums was absolutely worth the high one-time cost. 
 There were several other tricks used to speed up the final migration, but 
 being able to remove the UTF-8 conversion of the first table, and being able 
-to pre-copy 99% of the second table accounted for the lion's share of the 
+to pre-copy 99% of the second table accounted for the lion’s share of the 
 final speed improvements.
 
 

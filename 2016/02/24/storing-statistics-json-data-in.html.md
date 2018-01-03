@@ -39,7 +39,7 @@ Inside we have a structure like:
 }
 ```
 
-And the files are named like "{start_ts}.json".
+And the files are named like “{start_ts}.json”.
 The number of files is different on each system.
 For January we had from 11k to 17k files.
 
@@ -72,7 +72,7 @@ The basic idea behind the database schema is:
 - there should be only one json entry for a site for given time
 - the script loading the data should load the same file many times without any error
 
-I've started with the main table for storing jsons:
+I’ve started with the main table for storing jsons:
 
 ```sql
 CREATE TABLE stats_data (

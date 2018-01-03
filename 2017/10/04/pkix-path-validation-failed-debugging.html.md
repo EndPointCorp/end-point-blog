@@ -2,7 +2,7 @@
 author: Selvakumar Arumugam
 gh_issue_number: 1330
 tags: java, tls
-title: PKIX path validation failed - Debugging
+title: PKIX path validation failed — Debugging
 ---
 
 I recently ran into a case working on an application with a PKIX path validation error on a site that had a valid certificate. I was able to solve the issue using OpenSSL to debug.
@@ -31,7 +31,7 @@ Exception: javax.net.ssl.SSLHandshakeException:
 sun.security.validator.ValidatorException: PKIX path validation failed:
 java.security.cert.CertPathValidatorException: timestamp check failed
 ```
-PKIX (Public-Key Infrastructure - X.509) is standard for key based encryption mechanism. The PKIX path related errors come up due to the failure establishing the connection with SSL applications.
+PKIX (Public-Key Infrastructure — X.509) is standard for key based encryption mechanism. The PKIX path related errors come up due to the failure establishing the connection with SSL applications.
 
 ### Debug
 
@@ -40,7 +40,7 @@ It is good to identify the root cause of the problem since there are few possibl
 - Check the Certificate status and expiration date in your browser
 The browser reports that the certificate is valid and will expire at a future date for AppY's domain name. So now on to the detailed debugging using OpenSSL.
 - OpenSSL validation
-The openssl tool is a handy utility to validate the SSL certificate for any domain. It reports error with return code 20 (unable to get local issuer certificate) when checking the status of certificate - which is in contrast with browser's report on the same certificate.
+The openssl tool is a handy utility to validate the SSL certificate for any domain. It reports error with return code 20 (unable to get local issuer certificate) when checking the status of certificate — which is in contrast with browser's report on the same certificate.
 
 ```shell
 $ echo -n | openssl s_client -CApath /etc/ssl/certs/ -connect app2domain.com:443

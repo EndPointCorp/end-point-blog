@@ -1,7 +1,7 @@
 ---
 author: Kamil Ciemniewski
 gh_issue_number: 1212
-tags: functional-programming, haskell, javascript, testing, testing
+tags: functional-programming, haskell, javascript, testing
 title: QuickCheck - property based testing in Haskell and JavaScript
 ---
 

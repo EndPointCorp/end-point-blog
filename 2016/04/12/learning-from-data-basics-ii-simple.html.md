@@ -31,17 +31,17 @@ When exploring  the Naive Bayes model, we said that there is a probabilistic ass
 
 #### Expressing variable dependencies as a graph
 
-Let's imagine the visual representation of the relations between the random variables in the Naive Bayes model. Let's make it into a directed acyclic graph. Let's mark the dependence of one variable on another as a graph edge from the parent node pointing to it's dependent node.
+Let’s imagine the visual representation of the relations between the random variables in the Naive Bayes model. Let’s make it into a directed acyclic graph. Let’s mark the dependence of one variable on another as a graph edge from the parent node pointing to it’s dependent node.
 
 Because of the assumption the Naive Bayes model enforces, its structure as a graph looks like the following:
 
 <div class="separator" style="clear: both; text-align: center;"><a href="/blog/2016/04/12/learning-from-data-basics-ii-simple/image-0.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="/blog/2016/04/12/learning-from-data-basics-ii-simple/image-0.png"/></a></div>
 
-You can notice there are no lines between all the "evidence" nodes. The assumption says that knowing the category, we have all needed knowledge about every single evidence node. This makes category the parent of all the other nodes. Intuitively, we can say that knowing the **class** (in this example, the category) we know everything about all **features**. It's easy to notice that this assumption doesn't hold in this example.
+You can notice there are no lines between all the “evidence” nodes. The assumption says that knowing the category, we have all needed knowledge about every single evidence node. This makes category the parent of all the other nodes. Intuitively, we can say that knowing the **class** (in this example, the category) we know everything about all **features**. It’s easy to notice that this assumption doesn’t hold in this example.
 
-In our fake data generator, we made it so that e.g. relationship status depends on age. We've also made the category depend on sex and age directly. This way we can't say that knowing category we know everything about e. g. age. The random variables age and sex are not independent even if we know the value of category. It is clear that the above graph does not model the dependency relationships between these random variables.
+In our fake data generator, we made it so that e.g. relationship status depends on age. We’ve also made the category depend on sex and age directly. This way we can’t say that knowing category we know everything about e. g. age. The random variables age and sex are not independent even if we know the value of category. It is clear that the above graph does not model the dependency relationships between these random variables.
 
-Let's draw a graph that represents our fake data model better:
+Let’s draw a graph that represents our fake data model better:
 
 <div class="separator" style="clear: both; text-align: center;"><a href="/blog/2016/04/12/learning-from-data-basics-ii-simple/image-1.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="/blog/2016/04/12/learning-from-data-basics-ii-simple/image-1.png"/></a></div>
 
@@ -55,15 +55,15 @@ The fact that our distribution is part of the Bayesian Network, allows us to use
 p(cat, sex, age, rel, loc) = p(sex) * p(age) * p(loc) * p(rel | age) * p(cat | sex, age)
 ```
 
-You can notice that the equation is just a product of a number of factors. There's one factor for each random variable. The factors for variables that in the graph don't have any parents are expressed as p(var) while those that do are expressed as p(var | par) or p(var | par1, par2...). 
+You can notice that the equation is just a product of a number of factors. There’s one factor for each random variable. The factors for variables that in the graph don’t have any parents are expressed as p(var) while those that do are expressed as p(var | par) or p(var | par1, par2...). 
 
-Notice that the Naive Bayes model fits perfectly into this equation. If you were to take the first graph presented in this article — for the Naive Bayes, and use the above equation, you'd get exactly the formula we used in the last article.
+Notice that the Naive Bayes model fits perfectly into this equation. If you were to take the first graph presented in this article — for the Naive Bayes, and use the above equation, you’d get exactly the formula we used in the last article.
 
 ### Coding the updated probabilistic model
 
 Before going further, I strongly advise you to make sure you read the [previous article - about the Naive Bayes model](/blog/2016/03/23/learning-from-data-basics-naive-bayes) - to fully understand the classes used in the code in this section.
 
-Let's take our chain rule equation and simplify it:
+Let’s take our chain rule equation and simplify it:
 
 ```nohighlight
 p(cat, sex, age, rel, loc) = p(sex) * p(age) * p(loc) * p(rel | age) * p(cat | sex, age)
@@ -87,7 +87,7 @@ We can easily factor out the p(age) with:
 p(cat, sex, age, rel, loc) = p(sex) * p(loc) * p(rel, age) * (p(cat, sex, age) / p(sex, age))
 ```
 
-Let's define needed random variables and factors:
+Let’s define needed random variables and factors:
 
 ```ruby
 category = RandomVariable.new :category, [ :veggies, :snacks, :meat, :drinks, :beauty, :magazines ]
@@ -154,7 +154,7 @@ end
 
 ### The results
 
-Now let's run the inference procedure with the same set of examples as in the previous post to compare the results:
+Now let’s run the inference procedure with the same set of examples as in the previous post to compare the results:
 
 ```ruby
 infer.call :teens, :male, :single, :us

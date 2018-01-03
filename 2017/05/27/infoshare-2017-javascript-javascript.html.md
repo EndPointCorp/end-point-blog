@@ -19,7 +19,7 @@ infoShare in numbers:
 
 Let’s go through each speech I was attending.
 
-## Day 1
+### Day 1
 
 ### Why Fast Matters by Harry Roberts from csswizardry.com
 
@@ -28,7 +28,7 @@ Harry tried to convince us that performance is important.
 <a href="/blog/2017/05/27/infoshare-2017-javascript-javascript/image-1.png" imageanchor="1"><img border="0" data-original-height="206" data-original-width="620" src="/blog/2017/05/27/infoshare-2017-javascript-javascript/image-1.png"/></a>
 
 Great speech, showing that it’s an interesting problem not only from a financial point of view.
-You must see it, link to his presentation: https://speakerdeck.com/csswizardry/why-fast-matters
+You must see it, link to his presentation [here](https://speakerdeck.com/csswizardry/why-fast-matters)
 
 ### Dirty Little Tricks From The Dark Corners of Front-End by Vitaly Friedman from smashingmagazine.com
 
@@ -60,7 +60,7 @@ Tomasz Nurkiewicz from Allegro showed us his high programming skills and provide
 
 Definitely something to read about.
 
-## Day 2
+### Day 2
 
 ### What does a production ready Kubernetes application look like? by Carter Morgan from Google
 
@@ -82,7 +82,7 @@ Gianluca showed us his modern and flexible monitoring stack. Great tips and most
 
 He was right that it’s easy to configure, open-source and really useful. Great speech!
 
-## Summary
+### Summary
 
 Amazing two days. All the presentations will be available on Youtube soon: [https://www.youtube.com/user/infoSharePL/videos](https://www.youtube.com/user/infoSharePL/videos).
 

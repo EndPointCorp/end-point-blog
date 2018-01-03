@@ -9,8 +9,8 @@ title: Bucardo replication workarounds for extremely large Postgres updates
 
 <div class="separator" style="clear: both; float: right; text-align: center;"><a href="/blog/2016/05/31/bucardo-replication-workarounds-for/image-0.jpeg" imageanchor="1" style="clear: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" src="/blog/2016/05/31/bucardo-replication-workarounds-for/image-0.jpeg"/></a><br/><small>(<a href="https://flic.kr/p/iiRxFT">photograph</a> by <a href="https://www.flickr.com/photos/pagedooley/">Kevin Dooley</a>)</small></div>
 
-[Bucardo](http://bcuardo.org/wiki/Bucardo) is very good at replicating data among 
-[Postgres](http://bucardo.org) databases 
+[Bucardo](https://bucardo.org/) is very good at replicating data among 
+[Postgres](https://www.postgresql.org/) databases 
 (as well as replicating to other things, such as 
 [MariaDB](http://mariadb.org), Oracle, and 
 [Redis](http://redis.io)!). 
@@ -22,7 +22,7 @@ changes.
 
 When a change is made to a table that is being replicated by Bucardo, a 
 trigger fires and stores the primary key of the row that was changed into 
-a "delta" table. Then the Bucardo daemon comes along, gathers a list of all rows that 
+a “delta” table. Then the Bucardo daemon comes along, gathers a list of all rows that 
 were changed since the last time it checked, and pushes those rows to 
 the other databases in the sync (a named replication set). Although all of this is 
 done in a fast and efficient manner, there is a bit of overhead that 
@@ -34,7 +34,7 @@ yourself to every database you are replicating to. By disabling the
 Bucardo triggers first, you can prevent Bucardo from even knowing, or caring, 
 that the changes have been made.
 
-To demonstrate this, let's have Bucardo replicate among five 
+To demonstrate this, let’s have Bucardo replicate among five 
 [pgbench](https://www.postgresql.org/docs/current/static/pgbench.html) databases, 
 called A, B, C, D, and E. Databases A, B, and C will be sources; D and E are just targets. Our replication looks like this: ( A <=> B <=> C ) => (D, E). First, we create all the databases and populate them:
 
@@ -56,7 +56,7 @@ $ psql alpha -c 'alter table pgbench_history add column hid serial primary key'
 $ for dbname in beta gamma delta epsilon; do createdb $dbname -T alpha; done
 ```
 
-Now that those are done, let's install Bucardo, teach it about these 
+Now that those are done, let’s install Bucardo, teach it about these 
 databases, and create a sync to replicate among them as described above.
 
 ```
@@ -71,7 +71,7 @@ $ echo -e "logdest=.\npiddir=." > .bucardorc
 <div class="separator" style="clear: both; text-align: center;"><a href="/blog/2016/05/31/bucardo-replication-workarounds-for/image-1.png" id="gtsm.com/bucardo_fiveway.png" imageanchor="1" style="clear: right; float: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" src="/blog/2016/05/31/bucardo-replication-workarounds-for/image-1.png"/></a></div>
 
 At this point, we have five databases all ready to go, and Bucardo is setup to 
-replicate among them. Let's do a quick test to make sure everything is working as 
+replicate among them. Let’s do a quick test to make sure everything is working as 
 it should.
 
 ```
@@ -107,10 +107,10 @@ $ for db in alpha beta gamma delta epsilon; do psql $db -Atc "select '$db',sum(a
 alpha|7065 beta|7065 gamma|7065 delta|7065 epsilon|7065
 ```
 
-Let's imagine that the bank discovered a huge financial error, and needed to increase the balance of 
-every account created in the last two years by 20 dollars. Let's further imagine that this involved 
+Let’s imagine that the bank discovered a huge financial error, and needed to increase the balance of 
+every account created in the last two years by 20 dollars. Let’s further imagine that this involved 
 650 million customers. That UPDATE will take a very long time, but will suffer even more because 
-each update will also fire a Bucardo trigger, which in turn will write to another "delta" table. Then, Bucardo 
+each update will also fire a Bucardo trigger, which in turn will write to another “delta” table. Then, Bucardo 
 will have to read in 650 million rows from the delta table, and (on every other database in the sync) 
 apply those changes by deleting 650 million rows then COPYing over the correct values. This is 
 one situation where you want to sidestep your replication and handle things yourself. There are 
@@ -167,7 +167,7 @@ Creating ./fullstopbucardo ... Done
 $ pkill -15 Bucardo
 ```
 
-Now to clean out the delta table. In this example, the junior DBA updated the "beta"
+Now to clean out the delta table. In this example, the junior DBA updated the “beta”
 database, so we look there. We may go ahead and truncate it because we are going to 
 copy the entire table after that point.
 
@@ -182,13 +182,13 @@ $ psql beta -Atc 'truncate table bucardo.delta_public_pgbench_accounts'
 ```
 
 The delta table will continue to accumulate changes as applications update the 
-table, but that is okay - we got rid of the 650 million rows. Now we know 
+table, but that is okay—we got rid of the 650 million rows. Now we know 
 that beta has the canonical information, and we need to get it to all the 
 others. As before, we use session_replication_role. However, we also need 
 to ensure that nobody else will try to add rows before our COPY gets 
 in there, so if you have active source databases, pause your applications. 
 Or simply shut them out for a while via pg_hba.conf! Once that is done, 
-we can copy the data until all databases are identical to "beta":
+we can copy the data until all databases are identical to “beta”:
 
 ```
 $ ( echo "SET session_replication_role='replica'; TRUNCATE TABLE pgbench_accounts; " ; pg_dump beta --section=data -t pgbench_accounts ) | psql alpha -1 --set ON_ERROR_STOP=on
@@ -199,7 +199,7 @@ HINT:  Truncate table "pgbench_history" at the same time, or use TRUNCATE ... CA
 ```
 
 Aha! Note that we used the --foreign-keys option when creating the pgbench tables above. 
-We will need to remove the foreign key, or simply copy both tables together. Let's 
+We will need to remove the foreign key, or simply copy both tables together. Let’s 
 do the latter:
 
 ```
@@ -289,7 +289,7 @@ Starting Bucardo
 
 That concludes the solutions for when you have to make a LOT of changes to your database. How do you know 
 how much is enough to worry about the solutions presented here? Generally, you can simply let 
-Bucardo run - you will know when everything crawls to a halt that perhaps trying to insert 
+Bucardo run—you will know when everything crawls to a halt that perhaps trying to insert 
 465 million rows at once was a bad idea. :)
 
 

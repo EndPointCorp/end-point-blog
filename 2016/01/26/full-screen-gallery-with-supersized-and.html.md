@@ -5,11 +5,11 @@ tags: css, design, html, javascript, jquery, extensions, video, wordpress
 title: Full Screen Gallery with Supersized and video slides
 ---
 
-I was recently looking to build a full screen image and video gallery for our client [Mission Blue](http://mission-blue.org/). Something similar to the Google Maps interface you can see in the screenshot below:
+I was recently looking to build a full screen image and video gallery for our client [Mission Blue](https://mission-blue.org/). Something similar to the Google Maps interface you can see in the screenshot below:
 
 <div class="separator" style="clear: both; text-align: center;">    <a href="/blog/2016/01/26/full-screen-gallery-with-supersized-and/image-0-big.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;">       <img border="0" src="/blog/2016/01/26/full-screen-gallery-with-supersized-and/image-0.png" width="600"/>     </a>   </div>
 
-After scouring the Internet to find a suitable jQuery plugin I finally decided on [Supersized, Full screen background slideshow plugin for jQuery](http://www.buildinternet.com/project/supersized/).
+After scouring the Internet to find a suitable jQuery plugin I finally decided on [Supersized, Full screen background slideshow plugin for jQuery](https://www.buildinternet.com/2009/05/supersized-20-full-screen-imagebackground-slideshow-jquery-plugin-w-transitions-and-controls/).
 
 After downloading the library, include it on the page:
 
@@ -24,7 +24,7 @@ After downloading the library, include it on the page:
 
 ### Basic functionality
 
-Let's create a variable that will hold all the images in the slideshow:
+Let’s create a variable that will hold all the images in the slideshow:
 
 ```javascript
 var images = [];
@@ -45,7 +45,7 @@ images.push({
 });
 ```
 
-Let's initialize Supersized:
+Let’s initialize Supersized:
 
 ```javascript
 jQuery.supersized({
@@ -78,7 +78,7 @@ jQuery.supersized({
 
 ### Customizing the screen image size
 
-I didn't want to have the full screen image as it was a little overwhelming for the user. I wanted the black bars just like in the Google interface. Supersized allows for easy customization. This CSS did the trick:
+I didn’t want to have the full screen image as it was a little overwhelming for the user. I wanted the black bars just like in the Google interface. Supersized allows for easy customization. This CSS did the trick:
 
 ```css
 #supersized, #supersized li {

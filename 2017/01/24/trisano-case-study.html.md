@@ -5,15 +5,15 @@ tags: case-study, clients, company, hosting, rails
 title: TriSano Case Study
 ---
 
-## Overview
+### Overview
 
-End Point has been working with state and local health agencies since 2008. We host disease outbreak surveillance and management systems and have expertise providing clients with the sophisticated case management tools they need to deliver in-house analysis, visualization, and reporting - combined with the flexibility to comply with changing state and federal requirements. End Point provides the hosting infrastructure, database, reporting systems, and customizations that agencies need in order to service to their populations.
+End Point has been working with state and local health agencies since 2008. We host disease outbreak surveillance and management systems and have expertise providing clients with the sophisticated case management tools they need to deliver in-house analysis, visualization, and reporting — combined with the flexibility to comply with changing state and federal requirements. End Point provides the hosting infrastructure, database, reporting systems, and customizations that agencies need in order to service to their populations.
 
 Our work with health agencies is a great example of End Point’s ability to use our experience in open source technology, Ruby on Rails, manage and back up large secure datasets, and integrate reporting systems to build and support a full-stack application. We will discuss one such client in this case study.
 
 <div class="separator" style="clear: both; float: right; text-align: center;"><a href="/blog/2017/01/24/trisano-case-study/image-0.jpeg" imageanchor="1"><img border="0" height="376" src="/blog/2017/01/24/trisano-case-study/image-0.jpeg"/></a></div>
 
-## Why End Point?
+### Why End Point?
 
 End Point is a good fit for this project because of our expertise in several areas including reporting and our hosting capabilities. End Point has had a long history of consultant experts in PostgreSQL and Ruby on Rails, which are the core software behind this application.
 
@@ -21,7 +21,7 @@ Also, End Point specializes in customizing open-source software, which can save 
 
 Due to the secure nature of the medical data in these database, we and our clients must adhere to all HIPAA and CDC policies regarding hosting of data handling, server hosting, and staff authorization and access auditing.
 
-## Team
+### Team
 
 <div class="separator" style="clear: both; float: left; text-align: center; padding:10px;"><a href="/blog/2017/01/24/trisano-case-study/image-1-big.jpeg" imageanchor="1"><img border="0" height="100" src="/blog/2017/01/24/trisano-case-study/image-1.jpeg" width="100"/></a></div>
 
@@ -43,7 +43,7 @@ Josh is one of End Point’s most knowledgeable database and reporting experts. 
 
 <div class="separator" style="clear: both; float: right; text-align: center;"><a href="/blog/2017/01/24/trisano-case-study/image-4-big.jpeg" imageanchor="1"><img border="0" src="/blog/2017/01/24/trisano-case-study/image-4.jpeg" width="500"/></a></div>
 
-## Application
+### Application
 
 The disease tracking system consists of several applications including a web application, reporting application, two messaging areas, and SOAP services that relay data between internal and external systems.
 
@@ -55,6 +55,6 @@ The disease tracking system consists of several applications including a web app
 
 SOAP services run between the TriSano web app, the Pentaho reporting application, and the client’s data systems translate messages into the correct formats and relay the information to each application.
 
-## Into the Future
+### Into the Future
 
 Based on the success over 9+ years working on this project, the client continues to work with their End Point team to manage their few non open-source software licenses, create long term security strategies, and plan and implement all of their needs related to the continuous improvement and changes in epidemiology tracking. We partner with the client so they can focus their efforts on reading results and planning for the future health of their citizens. This ongoing partnership is something End Point is very proud to be a part of and we hope to continue our work in this field well into the future.

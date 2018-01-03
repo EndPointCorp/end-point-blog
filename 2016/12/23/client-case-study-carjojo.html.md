@@ -7,7 +7,7 @@ title: 'Client Case Study: Carjojo'
 
 [Carjojo](https://www.carjojo.com/)’s site makes use of some of the best tools on the market today for accessing and displaying data. Carjojo is a car buying application that takes data about car pricing, dealer incentives, and rebate programs and aggregates that into a location-specific vehicle pricing search tool. The Carjojo work presented a great opportunity for End Point to utilize our technical skills to build a state-of-the-art application everyone is very proud of. End Point worked on the Carjojo development project from October of 2014 through early 2016, and the final Carjojo application launched in the summer of 2016. This case study shows that End Point can be a technology partner for a startup, enabling the client to maintain their own business once our part of the project is over.
 
-## Why End Point?
+### Why End Point?
 
 <div class="separator" style="clear: both; float: right; text-align: center;"><img height="375" id="docs-internal-guid-bf89d7d8-193d-dd5c-ed85-19fbe48e18e4" src="/blog/2016/12/23/client-case-study-carjojo/image-0.png" style="border: medium none; transform: rotate(0rad);" width="338"/></div>
 
@@ -29,7 +29,7 @@ End Point works on projects where either the project management is done in-house
 
 <div class="separator" style="clear: both; float: left; text-align: center;"><img height="350" id="docs-internal-guid-adf4efb0-193f-f2b6-279f-301698d2fdc2" src="/blog/2016/12/23/client-case-study-carjojo/image-1.png" style="-webkit-transform: rotate(0.00rad); border: none; transform: rotate(0.00rad);" width="150"/></div>
 
-## Project Overview
+### Project Overview
 
 The main goal of the Carjojo project was to aggregate several data sources on car price and use data analytics to provide useful shopper information, and display that for their clients.
 
@@ -41,7 +41,7 @@ A major component of this project was using a custom API to pull information fro
 
 Creating a custom API also allows Carjojo to work with future partners and leverage their data and analytics in new ways as their business grows.
 
-## Team
+### Team
 
 <div class="separator" style="clear: both; float: left; text-align: center;"><img height="151" id="docs-internal-guid-c5221843-1937-962a-43e0-fc2b316dbed6" src="/blog/2016/12/23/client-case-study-carjojo/image-2.png" style="border: medium none; transform: rotate(0rad);" width="151"/></div>
 
@@ -57,7 +57,7 @@ Creating a custom API also allows Carjojo to work with future partners and lever
 
 <div class="separator" style="clear: both; float: right; text-align: center;"><img height="279" id="docs-internal-guid-adf4efb0-1941-c6b8-7c03-547234b8105c" src="/blog/2016/12/23/client-case-study-carjojo/image-5.png" style="border: medium none; transform: rotate(0rad);" width="309"/> </div>
 
-## Project Specifics
+### Project Specifics
 
 #### API Tools
 
@@ -69,7 +69,7 @@ To use the location information in the database, some GIS location smarts were t
 
 [D3](https://d3js.org/) is standard in data-visualization and is great for doing both simple and complicated graphics. Many of Carjojo’s graphs were bar graphs, pie charts and didn’t really require writing out D3 by hand. We also wanted to make many of them reusable and dynamic (often based on search terms or inputs) with use of Angular directives and services. This could have been done with pure D3, but Dimple makes creating simple D3 graphs easy and fast.
 
-[DimpleJS](https://d3js.org/) was used a lot in this project. Since Carjojo is data-driven, they wanted to display their information in an aesthetically pleasing manner and DimpleJS allowed us to quickly spin up information against some of the project’s tightest deadlines.
+[DimpleJS](http://dimplejs.org/) was used a lot in this project. Since Carjojo is data-driven, they wanted to display their information in an aesthetically pleasing manner and DimpleJS allowed us to quickly spin up information against some of the project’s tightest deadlines.
 
 <div class="separator" style="clear: both; text-align: center;"><span id="docs-internal-guid-adf4efb0-192c-c5d7-47f8-c173ae3b292c" style='background-color: transparent; color: black; font-family: "arial"; font-size: 14.6667px; font-style: normal; font-variant: normal; font-weight: 400; margin-left: 1em; margin-right: 1em; text-decoration: none; vertical-align: baseline;'><img height="120" src="/blog/2016/12/23/client-case-study-carjojo/image-6.png" style="border: medium none; transform: rotate(0rad);" width="356"/></span></div>
 

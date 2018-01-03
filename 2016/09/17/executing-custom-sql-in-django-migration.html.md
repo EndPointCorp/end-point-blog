@@ -9,7 +9,7 @@ Since version 1.7, Django has natively supported database migrations similar to 
 
 Usually, Django’s automatic schema detection works quite nicely, but occasionally you will have to write some custom migration that Django can’t properly generate, such as a functional index in PostgreSQL.
 
-## Creating an empty migration
+### Creating an empty migration
 
 To create a custom migration, it’s easiest to start by generating an empty migration. In this example, it’ll be for an application called blog:
 
@@ -39,7 +39,7 @@ class Migration(migrations.Migration):
     ]
 ```
 
-## Adding Custom SQL to a Migration
+### Adding Custom SQL to a Migration
 
 The best way to run custom SQL in a migration is through the [migration.RunSQL](https://docs.djangoproject.com/en/1.10/ref/migration-operations/#runsql) operation. RunSQL allows you to write code for migrating forwards and backwards—that is, applying migrations and unapplying them. In this example, the first string in RunSQL is the forward SQL, the second is the reverse SQL.
 
@@ -67,7 +67,7 @@ class Migration(migrations.Migration):
 
 Unless you’re using Postgres for your database, you’ll need to install the [sqlparse](https://pypi.python.org/pypi/sqlparse) library, which allows Django to break the SQL strings into individual statements.
 
-## Running the Migrations
+### Running the Migrations
 
 Running your migrations is easy:
 
