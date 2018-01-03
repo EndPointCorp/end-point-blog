@@ -5,8 +5,6 @@ tags: apache, heroku, php, wordpress
 title: Install WordPress on Heroku in OS X Yosemite
 ---
 
-
-
 I wanted to install WordPress locally for my blog (about programming!), but using MAMP, XAMP or even Vagrant for this seemed overkill. I wanted a light setup. PHP and Apache are already integrated into Mac OS X, so why not use them? I wanted to deploy the app to Heroku, so that was another thing, since Heroku only provides PostgreSQL, not MySQL, out of the box. I'd like to share my research on how I did it.
 
 ## WordPress with Heroku support
@@ -14,7 +12,7 @@ I wanted to install WordPress locally for my blog (about programming!), but usin
 I found [this handy WordPress template with built-in Heroku support](https://github.com/mhoofman/wordpress-heroku). It has everything one needs to run WordPress on Heroku: PostgreSQL for WordPress (because MySQL on Heroku is a paid service), Amazon S3 and Cloudfront for your uploads since Heroku has an ephemeral file system, WP Sendgrid to send emails and WordPress HTTPS. Check out a copy with this command:
 
 ```bash
-git clone git://github.com/mhoofman/wordpress-heroku.git
+git clone https://github.com/mhoofman/wordpress-heroku.git
 ```
 
 Let's run the project locally first because a file cannot be written to Heroku's file system, and updating and installing plugins or themes should be done locally anyways and then pushed to Heroku. I'm using [PhpStorm](https://www.jetbrains.com/phpstorm/) for my PHP development.
@@ -88,7 +86,7 @@ Go to http://localhost/~YOURUSER/wordpress-heroku/ and enjoy the results of your
 Your PHP installation appears to be missing the PostgreSQL extension which is required by WordPress with PG4WP.
 ```
 
-Here is a handy script to fix this problem [Install PHP PGSQL extensions on Mac OS X Yosemite (change PHP_VER with your PHP version)](https://gist.github.com/ftert/ec5d77ffd9d8e8acce2c).
+Here is a handy script to fix this problem [Install PHP PGSQL extensions on Mac OS X Yosemite (change PHP_VER with your PHP version)](https://gist.github.com/marinalohova/ec5d77ffd9d8e8acce2c).
 
 ## Creating the database
 
@@ -180,5 +178,3 @@ git push heroku master
 Go to http://YOURAPP.herokuapp.com/wp-admin/install.php and run the famous 5-minute setup again, activate all the plugins and the chosen custom theme aaand... You are done!
 
 Hope you will find this write-up useful and it will help you create your blog on the web!
-
-
