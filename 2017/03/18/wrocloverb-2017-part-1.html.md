@@ -1,7 +1,7 @@
 ---
 author: Wojtek Ziniewicz
 gh_issue_number: 1292
-tags: distributed-computing, machine-learning, message-queues, ros, ruby, spree, ecommerce, conference
+tags: machine-learning, ros, ruby, spree, ecommerce, conference
 title: Wrocloverb 2017 part 1
 ---
 
