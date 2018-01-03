@@ -16,7 +16,7 @@ Here's a subjective list of most interesting talks from the first day
 **Why [Kafka](https://kafka.apache.org/) is (*probably*) better message/task broker for your app:**
 
 - broadcasting is a real power feature of kafka (http lacks that)
-- author claims that its easier to support it  rather than ZeroMQ/RabbitMQ
+- author claims that it's easier to support it rather than ZeroMQ/RabbitMQ
 - it's namespaced with topics (similar to [Robot Operating System](http://www.ros.org/))
 - great replacement for [ruby-kafka](https://github.com/zendesk/ruby-kafka) and [Poseidon](https://github.com/bpot/poseidon)
 
@@ -31,7 +31,7 @@ This talk was devoted to Machine Learning success (and failure) story of the aut
 Author underlined that Machine Learning is a **process** and proposed following **workflow**:
 
 1. define a problem
-2. gather you data
+2. gather your data
 3. understand your data
 4. prepare and condition the data
 5. select & run your algorithms
@@ -57,14 +57,14 @@ Mariusz described few ML problems that he has dealt with in the past. One of the
 One of the lightning talks was devoted to Spree. Here's some interesting latest data from the Spree world:
 
 - number of contributors of spree - 700
-- it's very modular modular
-- it's api driven
-- it's one of the biggest repos on github
+- it's very modular
+- it's API driven
+- it's one of the biggest repos on GitHub
 - very large number of extensions
 - it drives thousands of stores worldwide
 - [Spark Solutions](https://sparksolutions.co/) is a maintainer
-- Popular companies that use spree: Go Daddy, Goop, Casper, Bonobos, Littlebits, Greetabl
-- it support rails 5, rails 4.2 and rails 3.x
+- Popular companies that use Spree: GoDaddy, Goop, Casper, Bonobos, Littlebits, Greetabl
+- it support Rails 5, Rails 4.2 and Rails 3.x
 
 Author also released newest 3.2.0 stable version during the talk:
 

@@ -32,7 +32,4 @@ At that point, the only way to get the concurrent index creation to complete was
 
 Another business decision was made—the concurrent indexes were nice, but we needed the indexes, even if some had to be created as regular indexes. Many of the indexes were able to be completed (concurrently) very quickly—and they were on not-very-busy tables—so we plowed through the index creation script, and simply canceled any concurrent index creations that were being blocked for too long. This only left a handful of uncreated indexes, so we simply dropped the “invalid” indexes (these appear when a concurrent index creation is interrupted), and reran with regular CREATE INDEX statements.
 
-The lesson here is that nothing comes without a cost. The overly polite concurrent index creation is great at letting everyone else access the table, but it also means that large complex transactions can chug along without being
-
-blocked, and have to have all of their work rolled back. In this case, things worked out as we did 99% of the indexes as CONCURRENT, and the remaining ones as regular. All in all, the use of concurrent indexes was a big win, and they are still an amazing feature of Postgres.
-
+The lesson here is that nothing comes without a cost. The overly polite concurrent index creation is great at letting everyone else access the table, but it also means that large complex transactions can chug along without being blocked, and have to have all of their work rolled back. In this case, things worked out as we did 99% of the indexes as CONCURRENT, and the remaining ones as regular. All in all, the use of concurrent indexes was a big win, and they are still an amazing feature of Postgres.
