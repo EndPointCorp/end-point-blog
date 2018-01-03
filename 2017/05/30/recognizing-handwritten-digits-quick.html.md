@@ -1,7 +1,7 @@
 ---
 author: Kamil Ciemniewski
 gh_issue_number: 1310
-tags: computer-vision, data-science, julia, machine-learning, python
+tags: julia, machine-learning, python
 title: Recognizing handwritten digits - a quick peek into the basics of machine learning
 ---
 
