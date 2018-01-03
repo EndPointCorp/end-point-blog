@@ -7,13 +7,13 @@ title: Create categories in Virtuemart 3 with Joomla 2.5 and 3.5 programmaticall
 
 ### Introduction
 
-*Code that I'm going to show you is ready to download here: [https://github.com/peter-hank/com_morevirtuemart](https://github.com/peter-hank/com_morevirtuemart)*
+*Code that I’m going to show you is ready to download here: [https://github.com/peter-hank/com_morevirtuemart](https://github.com/peter-hank/com_morevirtuemart)*
 
-[Virtuemart](https://virtuemart.net/) is an open-source e-commerce application written in PHP. It's pretty popular with a 4% share of the whole e-commerce market ([https://blog.aheadworks.com/2015/05/ecommerce-platforms-popularity-may-2015-two-platforms-take-half/](https://blog.aheadworks.com/2015/05/ecommerce-platforms-popularity-may-2015-two-platforms-take-half/)). Today I will show you how to extend it and use its functionality from an external [Joomla](https://www.joomla.org) (free and open-source content management system) component.
+[Virtuemart](https://virtuemart.net/) is an open-source e-commerce application written in PHP. It’s pretty popular with a 4% share of the whole e-commerce market ([https://blog.aheadworks.com/2015/05/ecommerce-platforms-popularity-may-2015-two-platforms-take-half/](https://blog.aheadworks.com/2015/05/ecommerce-platforms-popularity-may-2015-two-platforms-take-half/)). Today I will show you how to extend it and use its functionality from an external [Joomla](https://www.joomla.org) (free and open-source content management system) component.
 
 ### Creating a component
 
-We are going to create a new component to show the code in a nice and clear form. I'm using a component generator from here: [https://www.component-creator.com](https://www.component-creator.com). We don't need any tables, models and views for the purpose of this blog post. Plain and simple component is what we need. After creating the component download it and install in a Joomla administration interface.
+We are going to create a new component to show the code in a nice and clear form. I’m using a component generator from here: [https://www.component-creator.com](https://www.component-creator.com). We don’t need any tables, models and views for the purpose of this blog post. Plain and simple component is what we need. After creating the component download it and install in a Joomla administration interface.
 
 ### Component overview
 
@@ -48,7 +48,7 @@ components/com_morevirtuemart
     └── index.html
 ```
 
-We don't need to use more than a generic controller in a main directory. Its content is not very exciting for now:
+We don’t need to use more than a generic controller in a main directory. Its content is not very exciting for now:
 
 ```php
 <?php
@@ -101,7 +101,7 @@ class MorevirtuemartController extends JControllerLegacy
 }
 ```
 
-To test that our component is fully working right now try to open Joomla with this url: **index.php?option=com_morevirtuemart&task=createCategory**. Of course you need to prepend it with your domain name to make it work. The result should be just an empty page with our text: "I'm alive!"
+To test that our component is fully working right now try to open Joomla with this url: **index.php?option=com_morevirtuemart&task=createCategory**. Of course you need to prepend it with your domain name to make it work. The result should be just an empty page with our text: “I’m alive!”
 
 Now you know how to call a controller task within a browser.
 
@@ -157,7 +157,7 @@ class VirtueMartModelCategoryLocal extends VirtueMartModelCategory {
 }
 ```
 
-I hope it's pretty clear what we are doing here: extending a Virtuemart category model. What I'm going to do now is to copy a store function from a VirtueMartModelCategory class and put it in our local class of a category model and remove an authentication check from it (you need to secure it by yourself but using a different method). The result of this action is:
+I hope it’s pretty clear what we are doing here: extending a Virtuemart category model. What I’m going to do now is to copy a store function from a VirtueMartModelCategory class and put it in our local class of a category model and remove an authentication check from it (you need to secure it by yourself but using a different method). The result of this action is:
 
 ```php
 <?php
@@ -265,7 +265,7 @@ class MorevirtuemartController extends JControllerLegacy
 }
 ```
 
-Wow! The new category should be there. There are many more available attributes to be set, we've used a needed minimum: category name, its parent and status.
+Wow! The new category should be there. There are many more available attributes to be set, we’ve used a needed minimum: category name, its parent and status.
 
 ### The end
 

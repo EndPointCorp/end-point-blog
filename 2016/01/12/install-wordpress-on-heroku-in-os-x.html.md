@@ -7,9 +7,9 @@ title: Install WordPress on Heroku in OS X Yosemite
 
 
 
-I wanted to install WordPress locally for my blog (about programming!), but using MAMP, XAMP or even Vagrant for this seemed overkill. I wanted a light setup. PHP and Apache are already integrated into Mac OS X, so why not use them? I wanted to deploy the app to Heroku, so that was another thing, since Heroku only provides PostgreSQL, not MySQL, out of the box. I'd like to share my research on how I did it.
+I wanted to install WordPress locally for my blog (about programming!), but using MAMP, XAMP or even Vagrant for this seemed overkill. I wanted a light setup. PHP and Apache are already integrated into Mac OS X, so why not use them? I wanted to deploy the app to Heroku, so that was another thing, since Heroku only provides PostgreSQL, not MySQL, out of the box. I’d like to share my research on how I did it.
 
-## WordPress with Heroku support
+### WordPress with Heroku support
 
 I found [this handy WordPress template with built-in Heroku support](https://github.com/mhoofman/wordpress-heroku). It has everything one needs to run WordPress on Heroku: PostgreSQL for WordPress (because MySQL on Heroku is a paid service), Amazon S3 and Cloudfront for your uploads since Heroku has an ephemeral file system, WP Sendgrid to send emails and WordPress HTTPS. Check out a copy with this command:
 
@@ -17,14 +17,13 @@ I found [this handy WordPress template with built-in Heroku support](https://git
 git clone git://github.com/mhoofman/wordpress-heroku.git
 ```
 
-Let's run the project locally first because a file cannot be written to Heroku's file system, and updating and installing plugins or themes should be done locally anyways and then pushed to Heroku. I'm using [PhpStorm](https://www.jetbrains.com/phpstorm/) for my PHP development.
+Let’s run the project locally first because a file cannot be written to Heroku’s file system, and updating and installing plugins or themes should be done locally anyways and then pushed to Heroku. I’m using [PhpStorm](https://www.jetbrains.com/phpstorm/) for my PHP development.
 
-## Configuring Apache
+### Configuring Apache
 
 ```bash
 mkdir -p ~/Sites
-echo "<html><body><h1>My site works</h1></body></html>" > ~/Sites/index.html.en
-
+echo "<html><body><h1>my site works</h1></body></html>" > ~/sites/index.html.en
 ```
 
 Enable PHP support:
@@ -82,15 +81,15 @@ sudo apachectl restart
 
 Go to http://localhost/~YOURUSER/wordpress-heroku/ and enjoy the results of your work! OK, not so fast! There are more steps to make it happen ;)
 
-## Enabling PostgreSQL for PHP
+### Enabling PostgreSQL for PHP
 
 ```nohighlight
 Your PHP installation appears to be missing the PostgreSQL extension which is required by WordPress with PG4WP.
 ```
 
-Here is a handy script to fix this problem [Install PHP PGSQL extensions on Mac OS X Yosemite (change PHP_VER with your PHP version)](https://gist.github.com/ftert/ec5d77ffd9d8e8acce2c).
+Here is a handy script to fix this problem [Install PHP PGSQL extensions on Mac OS X Yosemite (change PHP_VER with your PHP version)](https://gist.github.com/marinalohova/ec5d77ffd9d8e8acce2c).
 
-## Creating the database
+### Creating the database
 
 Hit http://localhost/~YOURUSER/blog-heroku/wp-admin/install.php
 
@@ -116,7 +115,7 @@ $db = parse_url($_ENV["DATABASE_URL"] ? $_ENV["DATABASE_URL"] : "postgres://word
 
 Now 5 hours later, you are completely ready for the famous 5-min install ;D. Go to http://localhost/~YOURUSER/blog-heroku/wp-admin/install.php
 
-## Uploading the custom theme/plugin
+### Uploading the custom theme/plugin
 
 What to do next? Of course, upload a custom theme or plugin.
 
@@ -148,9 +147,9 @@ This way, no file nor directory is world-writable.
 
 Remember to commit your plugins/themes because due to the nature of Heroku all of the files will be overwritten there if uncommitted or not in the database, effectively wiping out all of your changes at each server restart if you do them on the server.
 
-I installed this pretty theme for myself called Literatum -- just bragging.
+I installed this pretty theme for myself called Literatum — just bragging.
 
-## Deployment to Heroku
+### Deployment to Heroku
 
 One of the most exciting last steps. This will make your blog visible to the world! Commit the changes:
 

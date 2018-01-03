@@ -208,10 +208,12 @@ Isn’t it easy?
 
 I have some advice if you want to make this kind of script be processing the same page all the time:
 
-- set the user agent header to simulate a real web browser request,
-- make calls with a random delay to avoid blacklisting from a web server,
-- use PHP 7,
-- try to optimize the script as much as possible.
+- set the user agent header to simulate a real web browser request
+- make calls with a random delay to avoid blacklisting from a web server
+- use PHP 7
+- try to optimize the script as much as possible
+
+<br/>
 
 You can use this script for production code but, to be honest, it’s not the most optimal approach. If you are not satisfied, code it by yourself :-).
 

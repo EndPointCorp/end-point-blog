@@ -9,7 +9,7 @@ title: Bonked By Basic_auth Because Bcrypt
 
 <div class="separator" style="clear: both; float: right; padding: 0 1em 1em 2em; text-align: center;"><a href="/blog/2016/02/09/bonked-by-basicauth-because-bcrypt/image-0.jpeg" imageanchor="1" style="clear: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" src="/blog/2016/02/09/bonked-by-basicauth-because-bcrypt/image-0.jpeg"/></a><br/><small><a href="https://flic.kr/p/xUswo">Alligator photo</a> by <a href="https://www.flickr.com/people/johnjack/">Random McRandomhead</a></small></div>
 
-**tl;dr - don't use a high bcrypt cost with HTTP basic auth!**
+**tl;dr — don’t use a high bcrypt cost with HTTP basic auth!**
 
 Recently we had a client approach us with reports of a slow wiki experience. This was 
 for a [MediaWiki](https://www.mediawiki.org/wiki/MediaWiki) we recently installed for them; 
@@ -21,17 +21,17 @@ I was tasked to dive in and solve this issue.
 The first step in any troubleshooting is to verify and duplicate the problem. While the 
 wiki did feel a bit sluggish, it was not as bad as the reports we were getting of taking 
 over 15 seconds to view a page. A side-by-side comparison with a similar wiki seemed a 
-good place to start. I called up the main wiki page on both the client wiki and End Point's 
+good place to start. I called up the main wiki page on both the client wiki and End Point’s 
 internal wiki. Both were running the latest version of MediaWiki, had the same type of 
 servers (located a similar distance from me), were using the same version of Apache, and 
 had roughly the same 
 [server load](https://en.wikipedia.org/wiki/Load_%28computing%29). While both 
-wiki's pages had roughly the same amount of content, the client one loaded noticeably slower. 
+wiki’s pages had roughly the same amount of content, the client one loaded noticeably slower. 
 It took less than a second for the End Point wiki, and around ten seconds for the client one!
 
 The first possible culprit was MediaWiki itself. Perhaps something was misconfigured there, or 
 some extension was slowing everything down? MediaWiki has 
-[good debugging tools](https://www.mediawiki.org/wiki/Manual:How_to_debug). Inside the both wiki's **LocalSettings.php** file I 
+[good debugging tools](https://www.mediawiki.org/wiki/Manual:How_to_debug). Inside the both wiki’s **LocalSettings.php** file I 
 turned on debugging temporarily with:
 
 ```
@@ -42,7 +42,7 @@ $wgDebugTimestamps      = true;
 ```
 
 I reloaded the page, then commented out the $wgDebugLogFile line to stop it from 
-growing large (the debug output can be quite verbose!). Here's some snippets from 
+growing large (the debug output can be quite verbose!). Here’s some snippets from 
 the generated log file:
 
 ```
@@ -88,7 +88,7 @@ main wiki page. The access logs looked fairly normal:
 85.236.207.120 - greg [19/Jan/2016:12:23:22 -0500] "GET /mediawiki/resources/assets/poweredby_mediawiki_88x31.png HTTP/1.1" 200 3525 "https://wiki.endpoint.com/wiki/Main_Page" "Mozilla/5.0 Firefox/43.0"
 ```
 
-Still nothing out of the ordinary. What to do next? When all else fails, go to the system calls. It's about as close to bare metal as you can easily get on a Linux system. In this case, I decided to run 
+Still nothing out of the ordinary. What to do next? When all else fails, go to the system calls. It’s about as close to bare metal as you can easily get on a Linux system. In this case, I decided to run 
 [strace](https://en.wikipedia.org/wiki/Strace) on the Apache 
 [daemon](https://en.wikipedia.org/wiki/Daemon_%28computing%29) to see exactly where the time was being spent. As expected, there were a large handful of httpd processes already 
 spawned and waiting for a connection. While there was no way to know which one would field my requests, some shell-fu allowed me 
@@ -133,7 +133,7 @@ $ head greg.httpd.trace.4948
 13:00:29.496863 rt_sigaction(SIGPROF, {0x7fc962da7ab0, [PROF], SA_RESTORER|SA_RESTART, 0x7fc970605670}, {0x7fc962da7ab0, [PROF], SA_RESTORER|SA_RESTART, 0x7fc970605670
 ```
 
-Aha! If you look close at those timestamps, you will notice that the time gap from the call to close() and the subsequent setitimer() is quite large at .69 seconds. That's a long time for Apache to be waiting around for something. The second clue is the file it just opened: "htpasswd.users". Seeing the top of the file, with the {SHA} in quotes, made me realize the problem - htpasswd files now support bcrypt as an authentication method, and bcrypt is designed to be secure - and slow. Sure enough, the htpasswd file had bcrypt entries with a high cost for the people that were having the most issues with the speed. This is what the file looked like (names and values changed):
+Aha! If you look close at those timestamps, you will notice that the time gap from the call to close() and the subsequent setitimer() is quite large at .69 seconds. That’s a long time for Apache to be waiting around for something. The second clue is the file it just opened: “htpasswd.users”. Seeing the top of the file, with the {SHA} in quotes, made me realize the problem — htpasswd files now support bcrypt as an authentication method, and bcrypt is designed to be secure — and slow. Sure enough, the htpasswd file had bcrypt entries with a high cost for the people that were having the most issues with the speed. This is what the file looked like (names and values changed):
 
 ```
 alice:{SHA}jA0EAgMCMEpo4Wa3n/9gybBBsDPa
@@ -147,7 +147,7 @@ eve:$apr1$I/hv09PcpU0VfXhyG7ZGaMz7Vhxi1Tm
 
 I recognized the bcrypt format right away ($2y$13$). The people who were complaining the most (e.g. mallory in the example above) about the speed of the wiki had the highest costs, while those with low costs (e.g. jon), and those using something other than bcrypt (everyone else above), were not complaining at all!
 
-The 'cost' is the number after the second dollar sign: as you can see, some of them had a cost of **15**, which is much more expensive than a cost of **13**, which is what my user ("greg") was using. This was a smoking gun, but one more step was needed for proof. I adjusted the cost of my password to something low using the [htpasswd program](https://httpd.apache.org/docs/current/programs/htpasswd.html):
+The 'cost' is the number after the second dollar sign: as you can see, some of them had a cost of **15**, which is much more expensive than a cost of **13**, which is what my user (“greg”) was using. This was a smoking gun, but one more step was needed for proof. I adjusted the cost of my password to something low using the [htpasswd program](https://httpd.apache.org/docs/current/programs/htpasswd.html):
 
 ```
 $ htpasswd -B -C 6 /wiki/htpasswd.users greg
@@ -156,30 +156,30 @@ Re-type new password:
 Updating password for user greg
 ```
 
-Voila! The page loaded in a flash. I then changed the cost to 15 and suddenly the wiki was even slower than before - taking 
+Voila! The page loaded in a flash. I then changed the cost to 15 and suddenly the wiki was even slower than before — taking 
 upwards of 15 seconds to load the main page of the wiki. Mystery solved. All those high cost bcrypt requests are also not good 
 for the server: not only does it use a lot of CPU, but ends up keeping the Apache daemon tied up waiting for the bcrypt to 
 finish, rather than simply finishing up quickly and going back to the main pool.
 
 You may be asking a few questions at this point, however. Why would htpasswd offer a footgun like this? Why such a radical 
-difference in effect for slightly different costs? Is bcrypt a good practice for a htpasswd file? Let's attempt to answer 
+difference in effect for slightly different costs? Is bcrypt a good practice for a htpasswd file? Let’s attempt to answer 
 those. Before we do, we have to learn a little bit about bcrypt and passwords in general. Some of this is purposefully 
 oversimplified, so be gently in the comments. :)
 
 Passwords themselves are never stored on a server (aka the machine doing the authentication). Instead, the server stores 
-a hash of the password. This is created by what is known as a "one-way" function, that creates a unique fingerprint of your 
+a hash of the password. This is created by what is known as a “one-way” function, that creates a unique fingerprint of your 
 password. If this fingerprint (aka hash) is discovered, there is no direct way to see the password that created it. When 
 you login to a site, it creates a hash of the password you give it, then compares that hash to the one it has stored. Thus, 
 it can verify that you have given it the correct password without actually having to store the password.
 
 For a long time, very simple algorithms were used to create these hashes. However, as computers became more powerful, 
-and as the field of cryptography advanced, it became easier to "crack" these hashes and determine the password that 
+and as the field of cryptography advanced, it became easier to “crack” these hashes and determine the password that 
 was used to create them. This was an important problem, and one of the solutions that people came up with was the 
 [bcrypt algorithm](https://en.wikipedia.org/wiki/Bcrypt), which makes the computation of the hash very expensive, in terms of computer speed. Furthermore, that 
-speed is adjustable, and determined by the "cost" given at creation time. You may have noticed the **-C** option I 
+speed is adjustable, and determined by the “cost” given at creation time. You may have noticed the **-C** option I 
 used in the htpasswd example above. That number indicates the number of rounds the algorithm must go through. However, the cost 
 given leads to 2^code rounds, which means that the cost is exponential. In other words, a cost of 13 means that bcrypt runs 
-2 to the 13th power rounds, or 8,192 rounds. A cost of 14 is 2 to the 14th power, or 16,384 rounds - twice as slow as 
+2 to the 13th power rounds, or 8,192 rounds. A cost of 14 is 2 to the 14th power, or 16,384 rounds — twice as slow as 
 a cost of 13! A cost of 15 is 32,768 rounds, etc. Thus, one can see why even a cost of 15 would be much slower than a cost of 13.
 
 A web page usually returns more than just the requested HTML. There are commonly images, CSS, and JavaScript that must also be 
@@ -188,7 +188,7 @@ by bcrypt. This is why even though each basic authentication via bcrypt of 15 on
 page can take much longer.
 
 What encryption options are available for htpasswd program? The bcrypt option was introduced without much fanfare in 
-[version 2.4.4 of Apache](https://httpd.apache.org/docs/2.4/new_features_2_4.html#programs), which was released on February 25, 2013. So, it's been around a while. The output of --help shows 
+[version 2.4.4 of Apache](https://httpd.apache.org/docs/2.4/new_features_2_4.html#programs), which was released on February 25, 2013. So, it’s been around a while. The output of --help shows 
 us that bcrypt is the only secure one, but allows for other legacy ones to be used. Also note that the range of costs for 
 bcrypt range from 4 to 31:
 
@@ -235,17 +235,17 @@ seconds delay are quite acceptable, as it is a rare event.
 So why do we even care about passwords so much, especially for something like basic auth and 
 a htpasswd file? After all, if someone can view the contents of the htpasswd file, they can 
 also more than likely view whatever material on the web server it was designed to protect. 
-These days, however, it's important to view strong hashes such as bcrypt as not just 
+These days, however, it’s important to view strong hashes such as bcrypt as not just 
 protecting data, but protecting the password as well. Why? Password reuse. 
-It's very common for people to use the same (or very similar) password on all the sites 
+It’s very common for people to use the same (or very similar) password on all the sites 
 they visit. The danger is thus not that an attacker can view the file contents protected 
-by the htpasswd file, but that an attacker can use that password on the user's email accounts, or 
+by the htpasswd file, but that an attacker can use that password on the user’s email accounts, or 
 on other sites the user may have visited and used the same password.
 
 What bcrypt cost should you use? The general answer is to use the highest possible cost 
 you can get away with. Take something with such a high cost that is causes discomfort 
 to the users, then dial it back a tiny bit. Measure it out and see what your server 
-can handle. For general bcrypt use, start with 13, but don't be afraid to keep going up until it takes a 
+can handle. For general bcrypt use, start with 13, but don’t be afraid to keep going up until it takes a 
 wall clock second or two to run. For basic auth, use something very fast: perhaps 9 or less. Anything 
 that takes over a second to create via htpasswd will slow a site down noticeably!
 

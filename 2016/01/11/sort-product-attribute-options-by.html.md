@@ -17,7 +17,7 @@ I looked for a patch to fix this issue, however there was no official patch, and
 
 ### Part 1
 
-We need to overwrite some Magento core code unfortunately. The good thing is that there is a cool way of doing this in Magento so we don't need to overwrite the files directly, we need to create a local copy.
+We need to overwrite some Magento core code unfortunately. The good thing is that there is a cool way of doing this in Magento so we don’t need to overwrite the files directly, we need to create a local copy.
 
 Copy app/code/Core/Mage/Catalog/Model/Resource/Product/Type/Configurable/Attribute/Collection.php file to app/code/local/Mage/Catalog/Model/Resource/Product/Type/Configurable/Attribute/Collection.php. You need to create the whole directory structure. If you use Unix system it is simple as: (running from Magento root)
 

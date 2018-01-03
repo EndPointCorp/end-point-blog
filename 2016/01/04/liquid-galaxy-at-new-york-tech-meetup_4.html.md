@@ -29,12 +29,12 @@ Ben G. finished the talk by explaining the architecture of the typical Liquid Ga
 
 After our presentation, Ben G. and I were asked questions about the Liquid Galaxy. Some highlights:
 
-- "How does the Liquid Galaxy fit in the context of AR and VR?" Ben G. explained that one thing that distinguishes the Liquid Galaxy is the communal experience. Often with VR, the user is having an individual  experience. We foresee combining with the LG with a VR headset, so that you will be able to display what you’re seeing on the headset right onto the LG.
-- "How is End Point engaging content creators for the platform?" There is a big, vibrant community that we want to integrate with. For a simple but useful example, cell phones can generate panoramas, which can be dropped into the CMS.
+- “How does the Liquid Galaxy fit in the context of AR and VR?” Ben G. explained that one thing that distinguishes the Liquid Galaxy is the communal experience. Often with VR, the user is having an individual  experience. We foresee combining with the LG with a VR headset, so that you will be able to display what you’re seeing on the headset right onto the LG.
+- “How is End Point engaging content creators for the platform?” There is a big, vibrant community that we want to integrate with. For a simple but useful example, cell phones can generate panoramas, which can be dropped into the CMS.
 
 <div class="separator" style="clear: both; text-align: center;"><a href="/blog/2016/01/04/liquid-galaxy-at-new-york-tech-meetup_4/image-3-big.jpeg" imageanchor="1" style="clear: right; float: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" src="/blog/2016/01/04/liquid-galaxy-at-new-york-tech-meetup_4/image-3.jpeg"/></a></div>
 
-- "Can you use the Liquid Galaxy to map an emergency before and after the event?" Ben G: Absolutely. We think the LG is an excellent display platform to show events as they are occurring. One of the things that’s great is the Liquid Galaxy takes in your peripheral vision, so if you have a spherical or panoramic collection tool then you can really see it on the system.
-- "How close to live data can you get?" The Liquid Galaxy is primarily being run with Google Earth at the moment. You can incorporate panoramic images, depending on what your data source is. If you’d like to incorporate a panoramic webcam, your info can display instantaneously on the LG.
+- “Can you use the Liquid Galaxy to map an emergency before and after the event?” Ben G: Absolutely. We think the LG is an excellent display platform to show events as they are occurring. One of the things that’s great is the Liquid Galaxy takes in your peripheral vision, so if you have a spherical or panoramic collection tool then you can really see it on the system.
+- “How close to live data can you get?” The Liquid Galaxy is primarily being run with Google Earth at the moment. You can incorporate panoramic images, depending on what your data source is. If you’d like to incorporate a panoramic webcam, your info can display instantaneously on the LG.
 
 During the after-party, attendees had the opportunity to free fly on the Liquid Galaxy, to view presentations, and to navigate around on Street View. Six members of End Point’s team were present, so attendees also had the opportunity to ask questions and to learn more about the system.

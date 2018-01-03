@@ -11,7 +11,7 @@ I was excited to learn this week about a Grammy Award recently awarded in connec
 
 <a href="/blog/2016/02/19/grammy-awards-at-musica-russica/image-0.jpeg" imageanchor="1" style="clear: left; float: left; margin-bottom: 1em; margin-right: 1em;"><img border="0" src="/blog/2016/02/19/grammy-awards-at-musica-russica/image-0.jpeg"/></a>
 
-Last week’s Grammy-Award-winning (Best Choral Performance) recording by the Kansas City/Phoenix Chorales, conducted by Charles Bruffy, is featured at Musica Russica. Take a moment and listen to samples of the [Rachmaninoff's All-Night Vigil](http://www.musicarussica.com/compact_discs/a136).
+Last week’s Grammy-Award-winning (Best Choral Performance) recording by the Kansas City/Phoenix Chorales, conducted by Charles Bruffy, is featured at Musica Russica. Take a moment and listen to samples of [Rachmaninoff's All-Night Vigil](https://web.archive.org/web/20160312111456/http://www.musicarussica.com/compact_discs/a136).
 
 This is the third Grammy award for best choral recordings won with music published by Musica Russica, adding to their awards from 2007 and 2015.
 

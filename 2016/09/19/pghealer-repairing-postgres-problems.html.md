@@ -9,15 +9,15 @@ title: 'pg_healer: repairing Postgres problems automatically'
 
 <div class="separator" style="clear: both; float: right; text-align: center;"><a href="/blog/2016/09/19/pghealer-repairing-postgres-problems/image-0.jpeg" imageanchor="1" style="clear: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" src="/blog/2016/09/19/pghealer-repairing-postgres-problems/image-0.jpeg"/></a><br/><small>(<a href="https://flic.kr/p/6r7La7">Photograph</a> by <a href="https://www.flickr.com/photos/computerhotline/">Thomas Bresson</a>)</small></div>
 
-Sometimes, [the elephant](http://www.postgres.org) gets hurt - inducing database errors! 
+Sometimes, [the elephant](http://www.postgres.org) gets hurt—inducing database errors! 
 Data corruption is a fact of life in working with computers, and Postgres is not immune. 
-With the addition of the "data checksums" feature, detecting such corruption is now 
-much easier. But detection is not enough - what happens after the corruption is detected? What if 
-Postgres could fix the problem all by itself - what if we could give the elephant a  mutant healing power?!?
+With the addition of the “data checksums” feature, detecting such corruption is now 
+much easier. But detection is not enough—what happens after the corruption is detected? What if 
+Postgres could fix the problem all by itself—what if we could give the elephant a  mutant healing power?!?
 
-Now we can. I wrote an extension named pg_healer that does just that - detects 
-corruption issues, and automatically repairs them. Let's see how it works with a demonstration. 
-For this, we will be purposefully corrupting the "pgbench_branches" table, part of 
+Now we can. I wrote an extension named pg_healer that does just that—detects 
+corruption issues, and automatically repairs them. Let’s see how it works with a demonstration. 
+For this, we will be purposefully corrupting the “pgbench_branches” table, part of 
 the venerable [pgbench utility](https://wiki.postgresql.org/wiki/Pgbench).
 
 For the initial setup, we will create a new Postgres cluster and install the pgbench schema. 
@@ -94,7 +94,7 @@ $ psql -p 9999 -Atc "select format('%s/%s',
 $ ln -s /home/greg/pg_healer/dojo/base/16384/198461 myrelfile
 ```
 
-Let's throw a deadly shuriken right into the middle of it!
+Let’s throw a deadly shuriken right into the middle of it!
 
 ```
 ## Here is what the file looks like in its original uncorrupted form
@@ -129,7 +129,7 @@ $ xxd -a -g1 -u myrelfile
 <div class="separator" style="margin: 0 1em 1em 3em; clear: both; float:right; text-align: center;"><a href="/blog/2016/09/19/pghealer-repairing-postgres-problems/image-1.jpeg" imageanchor="1" style="clear: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" src="/blog/2016/09/19/pghealer-repairing-postgres-problems/image-1.jpeg"/></a><br/><small><a href="https://flic.kr/p/uoCuk">These shurikens</a> are not so deadly, but quite yummy!<br/>(photograph by <a href="https://www.flickr.com/photos/karviainen/">kahvikisu</a>)</small></div>
 <br>
 
-Now that we've messed up the file, watch closely at what happens when we try to 
+Now that we’ve messed up the file, watch closely at what happens when we try to 
 read from it. We are going to do this three times. The first time, the table will 
 still be in the shared buffer cache, and thus will show no error. The second time, 
 the table will be read from the disk and throw an error. At this point, pg_healer 
@@ -160,9 +160,9 @@ $ psql -p 9999 -c "select * from pgbench_accounts"
 (1 row)
 ```
 
-The corruption we created before changed the "free space" of the Postgres "page" structure. 
+The corruption we created before changed the “free space” of the Postgres “page” structure. 
 There are multiple ways pg_healer can fix things: this demonstrates one of the 
-"intrinsic" fixes, which require no external knowledge to fix. Corruption can occur anywhere 
+“intrinsic” fixes, which require no external knowledge to fix. Corruption can occur anywhere 
 on the page, of course, including inside your data (as opposed to the meta-data or free space). 
 One of the methods of fixing this is for pg_healer to use another copy of the table to try 
 and repair the original table.
@@ -171,7 +171,7 @@ While eventually pg_healer will be able to reach out to replicas for a copy of t
 (non-corrupted) table data it needs, a simpler method is to simply create a good copy inside the 
 data directory. There is a helper function that does just that, by copying the important 
 files to a new directory. Details on how this is kept refreshed will be covered later; 
-for now, let's see it in action and observe how it can help Postgres heal itself from 
+for now, let’s see it in action and observe how it can help Postgres heal itself from 
 more serious corruption problems:
 
 ```
@@ -181,7 +181,7 @@ $ psql -p 9999 -qc 'checkpoint'
 $ psql -p 9999 -c 'select pg_healer_cauldron()'
 ```
 
-Rather than free space, let's corrupt something a little more important: the line pointers, 
+Rather than free space, let’s corrupt something a little more important: the line pointers, 
 which indicate where, inside the page, that each tuple (aka table row) is located. Extremely critical information, 
 that is about to get blown away with another deadly shuriken!
 
@@ -225,7 +225,7 @@ Once again, pg_healer has repaired the file. This time, however, it reached out
 to a version of the file outside the data directory, copied the old page data 
 to the new page data, and then used the checksum to confirm that the changes 
 were correct. This method only works, however, if the original file and the 
-copy have the same checksum - which means that no changes have been made since 
+copy have the same checksum—which means that no changes have been made since 
 the copy was made via pg_healer_cauldron(). As this is not always possible, there 
 is a third method pg_healer can use, which is to examine things row by row and 
 to try and repair the damage.
@@ -276,10 +276,10 @@ reacting to corruption errors as they appear is nice, in the future I would like
 be more proactive, and run as a background process that scans the database for any problems 
 and fixes them. Ideally, it should be able to handle a wider class of table corruption 
 problems, as well as problems in indexes, free space maps, system catalogs, etc.
-Please jump in and lend a hand - the project is on github as [pg_healer](https://github.com/turnstep/pg_healer). 
+Please jump in and lend a hand—the project is on github as [pg_healer](https://github.com/turnstep/pg_healer). 
 
 Data corruption is a fact of life DBAs must confront, be it from failing hard drives, cosmic rays, 
 or other reason. While the detection of such errors was greatly improved in Postgres 9.3 with the 
---data-checksums argument to initdb (which ought to default on!), it's time to not just detect, but heal!
+--data-checksums argument to initdb (which ought to default on!), it’s time to not just detect, but heal!
 
 
