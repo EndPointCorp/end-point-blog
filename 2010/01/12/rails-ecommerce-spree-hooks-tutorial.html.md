@@ -5,11 +5,11 @@ tags: ecommerce, rails, spree
 title: 'Rails Ecommerce with Spree: Customizing with Hooks Tutorial'
 ---
 
-In the last couple months, there's been a bit of buzz around theme and hook implementation in [Spree](http://spreecommerce.com/). The Spree team hasn't officially announced the newest version 0.9.5, but the edge code is available at [http://github.com/railsdog/spree](http://github.com/railsdog/spree) and developers have been encouraged to work with the edge code to check out the new features. Additionally, there is decent documentation [here](http://spreecommerce.com/documentation/theming.html) about theme and hook implementation. In this article, I'll go through several examples of how I would approach site customization using hooks in the upcoming Spree 0.9.5 release.
+In the last couple months, there's been a bit of buzz around theme and hook implementation in [Spree](https://spreecommerce.org/). The Spree team hasn't officially announced the newest version 0.9.5, but the [edge code is available](https://github.com/spree/spree) and developers have been encouraged to work with the edge code to check out the new features. Additionally, there is decent [documentation about theme and hook implementation](https://guides.spreecommerce.org/developer/view.html). In this article, I'll go through several examples of how I would approach site customization using hooks in the upcoming Spree 0.9.5 release.
 
 **Background**
 
-I've been a [big](http://groups.google.com/group/spree-user/browse_thread/thread/57b2bb9a48f9a8bd/b950cfffb989b1b3?lnk=gst&q=wordpress#b950cfffb989b1b3) [proponent](http://groups.google.com/group/spree-user/browse_thread/thread/4e03da372f7652/1be11e3c06847c2d?lnk=gst&q=wordpress#1be11e3c06847c2d) of how WordPress implements themes, plugins, and hooks in the [spree-user Google group](http://groups.google.com/group/spree-user). The idea behind WordPress themes is that a theme includes a set of PHP files that contain the display logic, HTML, and CSS for the customer-facing pages:
+I've been a [big](https://groups.google.com/forum/#!topic/spree-user/V7K7mkj5qL0) [proponent](https://groups.google.com/forum/#!topic/spree-user/AE4D2jcvdlI) of how WordPress implements themes, plugins, and hooks in the [spree-user Google group](https://groups.google.com/forum/#!forum/spree-user). The idea behind WordPress themes is that a theme includes a set of PHP files that contain the display logic, HTML, and CSS for the customer-facing pages:
 
 - index
 - a post page
@@ -19,7 +19,7 @@ I've been a [big](http://groups.google.com/group/spree-user/browse_thread/thread
 
 In many cases, themes include sections (referred to as partial views in Rails), or  components that are included in multiple template pages. An example of this partial view is the sidebar that is likely to be included in all of the page types mentioned above. The WordPress theme community is abundant; there are many free or at-cost themes available.
 
-The concept behind WordPress plugins is much like Spree extension functionality - a plugin includes modular functionality to add to your site that is decoupled from the core functionality. Judging from the popularity of the WordPress plugin community, WordPress has done a great job designing the [Plugin API](http://codex.wordpress.org/Plugin_API). In most cases, the Plugin API is used to extend or override core functionality and add to the views without having to update the theme files themselves. An example of using the WordPress plugin API to add an action to the wp_footer hook is accomplished with the following code:
+The concept behind WordPress plugins is much like Spree extension functionality - a plugin includes modular functionality to add to your site that is decoupled from the core functionality. Judging from the popularity of the WordPress plugin community, WordPress has done a great job designing the [Plugin API](https://codex.wordpress.org/Plugin_API). In most cases, the Plugin API is used to extend or override core functionality and add to the views without having to update the theme files themselves. An example of using the WordPress plugin API to add an action to the wp_footer hook is accomplished with the following code:
 
 ```ruby
 /* inside plugin */
@@ -29,11 +29,11 @@ function add_footer_text() {
 add_action('wp_footer', 'add_footer_text');
 ```
 
-WordPress themes and plugins with hooks are the building blocks of WordPress: with them, you piece together the appearance and functionality for your site. I reference WordPress as a basis of comparison for Spree, because like WordPress users, Spree users aim to piece together the appearance and functionality for their site. One thing to note is that the hook implementation in Spree is based on hook implementation in [Redmine](http://www.redmine.org/).
+WordPress themes and plugins with hooks are the building blocks of WordPress: with them, you piece together the appearance and functionality for your site. I reference WordPress as a basis of comparison for Spree, because like WordPress users, Spree users aim to piece together the appearance and functionality for their site. One thing to note is that the hook implementation in Spree is based on hook implementation in [Redmine](https://www.redmine.org/).
 
 **Spree Code**
 
-I grabbed the latest code at [http://github.com/railsdog/spree](http://github.com/railsdog/spree). After examining the code and reviewing the SpreeGuides documentation, the first thing I learned is that there are four ways to work with hooks:
+I grabbed [the latest code](https://github.com/spree/spree). After examining the code and reviewing the Spree documentation, the first thing I learned is that there are four ways to work with hooks:
 
 - insert before a hook component
 - insert after hook component
@@ -49,7 +49,7 @@ The next thing I researched was the hook components or elements. Below are the s
 - view product: product_description, product_properties, product_taxons, product_price, product_cart_form, inside_product_cart_form
 - etc.
 
-After I spent time figuring out the hook methods and components, I was ready to **do stuff**. First, I got Spree up and running (refer to the [SpreeGuides](http://spreecommerce.com/documentation/) for more information):
+After I spent time figuring out the hook methods and components, I was ready to **do stuff**. First, I got Spree up and running (refer to the [Spree Documentation](https://guides.spreecommerce.org/) for more information):
 
 <a href="http://2.bp.blogspot.com/_wWmWqyCEKEs/S0fnymK64uI/AAAAAAAADAY/3A18BO3Vk0E/s1600-h/image1.png" onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5424559132616876770" src="/blog/2010/01/12/rails-ecommerce-spree-hooks-tutorial/image-0.png" style="margin: 0px auto 10px; display: block; text-align: center; cursor: pointer; width: 400px; height: 172px;"/></a>
 
@@ -73,47 +73,47 @@ Next, I wanted to try out the insert_after method to append a stylesheet to the 
 
 - First, I added the insert_after hook to add a view that contains my extra stylesheet. I also added the remove hook to remove the sidebar element:
 
-    ```ruby
-    # RAILS_ROOT/vendor/extensions/stephs_photos/stephs_photos_hooks.rb
-    insert_after :inside_head, 'shared/styles'
-    remove :sidebar
-    ```
+```ruby
+# RAILS_ROOT/vendor/extensions/stephs_photos/stephs_photos_hooks.rb
+insert_after :inside_head, 'shared/styles'
+remove :sidebar
+```
 
 - Next, I added a new view in the extension to include the new stylesheet.
 
-    ```nohighlight
-    # RAILS_ROOT/vendor/extensions/stephs_photos/app/views/shared/_styles.erb
-    <link type="text/css" rel="stylesheet" href="/stylesheets/stephs_photos.css">
-    ```
+```nohighlight
+# RAILS_ROOT/vendor/extensions/stephs_photos/app/views/shared/_styles.erb
+<link type="text/css" rel="stylesheet" href="/stylesheets/stephs_photos.css">
+```
 
 - Next, I created a new stylesheet in the extension.
 
-    ```css
-    /* RAILS_ROOT/vendor/extensions/stephs_photos/public/stylesheets/stephs_photos.css */
-    body { background: #000; }
-    body.two-col div#wrapper { background: none; }
-    a, #header a { color: #FFF; text-decoration: none; }
+```css
+/* RAILS_ROOT/vendor/extensions/stephs_photos/public/stylesheets/stephs_photos.css */
+body { background: #000; }
+body.two-col div#wrapper { background: none; }
+a, #header a { color: #FFF; text-decoration: none; }
 
-    ul#nav-bar { width: 280px; line-height: 30px; margin-top: 87px; font-size: 1.0em; }
-    ul#nav-bar li form { display: none; }
+ul#nav-bar { width: 280px; line-height: 30px; margin-top: 87px; font-size: 1.0em; }
+ul#nav-bar li form { display: none; }
 
-    .container { width: 750px; }
-    #wrapper { padding-top: 0px; }
+.container { width: 750px; }
+#wrapper { padding-top: 0px; }
 
-    .product-listing li { background: #FFF; height: 140px; }
-    .product-listing li a.info { background: #FFF; }
+.product-listing li { background: #FFF; height: 140px; }
+.product-listing li a.info { background: #FFF; }
 
-    body#product-details div#wrapper { background: #000; }
-    body#product-details div#content, body#product-details div#content h1 { color: #FFF; margin-left: 10px; }
-    #taxon-crumbs { display: none; }
-    #product-description { width: 190px; border: none; }
-    .price.selling { color: #FFF; }
-    #product-image #main-image { min-height: 170px; }
+body#product-details div#wrapper { background: #000; }
+body#product-details div#content, body#product-details div#content h1 { color: #FFF; margin-left: 10px; }
+#taxon-crumbs { display: none; }
+#product-description { width: 190px; border: none; }
+.price.selling { color: #FFF; }
+#product-image #main-image { min-height: 170px; }
 
-    /* Styling in this extension only applies to product and main page */
+/* Styling in this extension only applies to product and main page */
 
-    div#footer { display: none; }
-    ```
+div#footer { display: none; }
+```
 
 One more small change was required to update the logo via a Rails preference. I set the logo preference variable to a new logo image and uploaded the logo to RAILS_ROOT/vendor/extensions/stephs_photos/public/images/.
 
@@ -148,21 +148,21 @@ The next requirement I imagined was adding promo functionality to the product li
 
 - First, I added the insert_before method to add the promo view before the homepage_products component, the component that lists the products on the homepage.
 
-    ```ruby
-    # RAILS_ROOT/vendor/extensions/stephs_photos/stephs_photos_hooks.rb
-    insert_before :homepage_products, 'shared/stephs_promo'
-    ```
+```ruby
+# RAILS_ROOT/vendor/extensions/stephs_photos/stephs_photos_hooks.rb
+insert_before :homepage_products, 'shared/stephs_promo'
+```
 
 - Next, I added the view using core Spree user functionality.
 
-    ```nohighlight
-    # RAILS_ROOT/vendor/extensions/stephs_photos/app/views/shared/_stephs_promo.erb
-    <% if current_user -%>
-    <img src="http://www.blogger.com/images/promo10.png" alt="10 off" />
-    <% else -%>
-    <img src="http://www.blogger.com/images/promo15.png" alt="15 off" />
-    <% end -%>
-    ```
+```nohighlight
+# RAILS_ROOT/vendor/extensions/stephs_photos/app/views/shared/_stephs_promo.erb
+<% if current_user -%>
+<img src="http://www.blogger.com/images/promo10.png" alt="10 off" />
+<% else -%>
+<img src="http://www.blogger.com/images/promo15.png" alt="15 off" />
+<% end -%>
+```
 
 - Finally, I uploaded my promo images to RAILS_ROOT/vendor/extensions/stephs_photos/public/images/
 
@@ -184,18 +184,18 @@ In my third example, I imagined that I wouldn't have time to manage product desc
 
 - First, I added the replace method to replace the :product_description component with a rails partial view.
 
-    ```ruby
-    # RAILS_ROOT/vendor/extensions/stephs_photos/stephs_photos_hooks.rb
-    replace :product_description, 'shared/generic_product_description'
-    ```
+```ruby
+# RAILS_ROOT/vendor/extensions/stephs_photos/stephs_photos_hooks.rb
+replace :product_description, 'shared/generic_product_description'
+```
 
 - Next, I created the view with the generic product description.
 
-    ```nohighlight
-    # RAILS_ROOT/vendor/extensions/stephs_photos/app/views/shared/_generic_product_description.erb
-    all prints are 4x6 matte prints.<br />
-    all photos ship in a folder.
-    ```
+```nohighlight
+# RAILS_ROOT/vendor/extensions/stephs_photos/app/views/shared/_generic_product_description.erb
+all prints are 4x6 matte prints.<br />
+all photos ship in a folder.
+```
 
 After yet another server restart and product refresh, I tested the generic product description using the replace hook.
 
@@ -237,6 +237,6 @@ Server restart, and I'm happy, again:
 
 Text, rather than a partial view, was appended via a hook.
 
-Hopefully my examples were exciting enough for you. There's quite a lot you can do with the hook methods, and over time more documentation and examples will become available through the Spree site, but I wanted to present a few very simple examples of my approach to customization in Spree. I've uploaded the extension to [http://github.com/stephskardal/stephs_photos](http://github.com/stephskardal/stephs_photos) for this article.
+Hopefully my examples were exciting enough for you. There's quite a lot you can do with the hook methods, and over time more documentation and examples will become available through the Spree site, but I wanted to present a few very simple examples of my approach to customization in Spree.
 
-Tomorrow, I'm set to publish closing thoughts and comments on the hook implementation since this article is now too long for a blog post. Stay tuned.
+Tomorrow, I'm set to publish closing thoughts and comments on the hook implementation. Stay tuned.
