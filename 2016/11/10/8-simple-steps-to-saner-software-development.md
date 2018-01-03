@@ -6,6 +6,8 @@ tags: development, environment
 
 ### 8 Simple Steps to Saner Software Development
 
+<div class="separator" style="clear: both; text-align: center;"><a href="/blog/2016/11/10/8-simple-steps-to-samer-software-development/bauhausstage.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="/blog/2016/11/10/8-simple-steps-to-samer-software-development//bauhausstage.jpg"/></a></div>
+
 While these might seem obvious for seasoned developers, many projects, especially legacy software, still fail to follow most of the steps below.
 
 In future posts, I’ll expand on these steps and give more details. For now, here’s an overview of some basic guidelines for making the process of software development smoother (& saner) for both the client and the dev team.
