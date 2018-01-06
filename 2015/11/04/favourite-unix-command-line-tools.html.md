@@ -23,7 +23,7 @@ $ man -k "find files"
 
 ### 2. Fix typos in our commands
 
-It's normal to make typographical errors when we type so fast. Consider a situation where we need to run a command with a long list of arguments and when executing it returns “command not found” and you noticed that you have made a typo on the executed command.
+It’s normal to make typographical errors when we type so fast. Consider a situation where we need to run a command with a long list of arguments and when executing it returns “command not found” and you noticed that you have made a typo on the executed command.
 
 Now, we really do not want to retype the long list of arguments, instead use the following to simply just correct the typo command and execute `^typo_cmd^correct_cmd`:
 
@@ -41,13 +41,13 @@ The above will navigate to /tmp directory.
 
 Bang quite useful, when we want to play with the bash history commands. Bang helps by letting you execute commands in history easily when you need them:
 
-- `!!` - Execute the last executed command in the bash history
-- `!*` - Execute the command with all the arguments passed to the previous command
-- `!ˆ` - Get the first argument of the last executed command in the bash history
-- `!$` - Get the last argument of the last executed command in the bash history
-- `!` - Execute a command which is in the specified number in bash history
-- `!?keyword?` - Execute a command from bash history for the first pattern match of the specified keyword
-- `!-N` - Execute the command that was Nth position from the last in bash history  
+- `!!` — Execute the last executed command in the bash history
+- `!*` — Execute the command with all the arguments passed to the previous command
+- `!ˆ` — Get the first argument of the last executed command in the bash history
+- `!$` — Get the last argument of the last executed command in the bash history
+- `!` — Execute a command which is in the specified number in bash history
+- `!?keyword?` — Execute a command from bash history for the first pattern match of the specified keyword
+- `!-N` — Execute the command that was Nth position from the last in bash history  
 
 <br/>
 
@@ -56,7 +56,7 @@ $ ~/bin/lg-backup
  $ sudo !!
 ```
 
-In the last part of the above example we didn't realize that the lg-backup command had to be run with `sudo`. Now, Instead of typing the whole command again with sudo, we can just use `sudo !!` which will re-run the last executed command in bash history as sudo, which saves us lot of time.
+In the last part of the above example we didn’t realize that the lg-backup command had to be run with `sudo`. Now, Instead of typing the whole command again with sudo, we can just use `sudo !!` which will re-run the last executed command in bash history as sudo, which saves us lot of time.
 
 ### 4. Working with Incron
 

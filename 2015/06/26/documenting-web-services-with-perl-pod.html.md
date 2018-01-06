@@ -44,7 +44,7 @@ None.
 =cut
 ```
 
-This block gets inserted right in-line with the web service code, so it's immediately obvious to anyone maintaining it (and thus has the best chance of being maintained if and when the code changes!). Now I can generate an HTML page directly from my Perl code:
+This block gets inserted right in-line with the web service code, so it’s immediately obvious to anyone maintaining it (and thus has the best chance of being maintained if and when the code changes!). Now I can generate an HTML page directly from my Perl code:
 
 ```shell
 $ pod2html MyPackage.pm
@@ -61,7 +61,7 @@ Your output looks something like this (excerpted for clarity):
 > 
 > **[Example]()**
 
-Where the magic comes in is the JavaScript code that allows an in-line example, live and accurate, within the documentation page. You'll actually get something more like this:
+Where the magic comes in is the JavaScript code that allows an in-line example, live and accurate, within the documentation page. You’ll actually get something more like this:
 
 > ### [time]()
 > 
@@ -77,7 +77,7 @@ Where the magic comes in is the JavaScript code that allows an in-line example, 
 > 
 > (results appear here)
 
-Note that the code I have below is not factored by choice; I could move a lot of it out to a common routine, but for clarity I'm leaving it all in-line. I am breaking up the script into a few chunks for discussion, but you can and should construct it all into one file (in my example, "js/example-time.js").
+Note that the code I have below is not factored by choice; I could move a lot of it out to a common routine, but for clarity I’m leaving it all in-line. I am breaking up the script into a few chunks for discussion, but you can and should construct it all into one file (in my example, “js/example-time.js”).
 
 ```javascript
 /* example-time.js */
@@ -113,9 +113,9 @@ This step just inserts a simple <form> into the document. I chose to embed the f
              },
 ```
 
-Here we have a submit handler that performs a very simple AJAX submit using the form's information, and upon success, inserts the results into a result <div> as a pre-formatted block. I added a "json" class which just tweaks the font and other typographic presentation a bit; you can provide your own if you wish.
+Here we have a submit handler that performs a very simple AJAX submit using the form’s information, and upon success, inserts the results into a result <div> as a pre-formatted block. I added a “json” class which just tweaks the font and other typographic presentation a bit; you can provide your own if you wish.
 
-I'm aware that there are various jQuery [plug-ins](http://malsup.com/jquery/form/) that will handle AJAX-ifying a form, but I couldn't get the exact behavior I wanted on my first tries, so I bailed out and just constructed this approach.
+I’m aware that there are various jQuery [plug-ins](http://malsup.com/jquery/form/) that will handle AJAX-ifying a form, but I couldn’t get the exact behavior I wanted on my first tries, so I bailed out and just constructed this approach.
 
 ```javascript
           'error':
@@ -128,7 +128,7 @@ I'm aware that there are various jQuery [plug-ins](http://malsup.com/jquery/form
 
 (That stray-looking comment above is just a work-around for the syntax highlighter.)
 
-Error handling goes here. If you have something more comprehensive, such as examining the result for error codes or messages, this is where you'd put it.
+Error handling goes here. If you have something more comprehensive, such as examining the result for error codes or messages, this is where you’d put it.
 
 ```javascript
           'complete':
@@ -145,4 +145,4 @@ Error handling goes here. If you have something more comprehensive, such as exam
 );
 ```
 
-And just a bit of UI kindness: we have a "hide" button to make the example go away. Some of my actual examples ran to dozens of lines of JSON output, so I wanted a way to clean up after the example.
+And just a bit of UI kindness: we have a “hide” button to make the example go away. Some of my actual examples ran to dozens of lines of JSON output, so I wanted a way to clean up after the example.

@@ -15,16 +15,16 @@ the resulting logical SQL into the new database. This could be a very slow,
 very painful process, requiring a lot of downtime. While there were other solutions 
 (such as [Bucardo](https://bucardo.org/wiki/Bucardo)) that allowed little (or even zero) downtime, setting them 
 up was a large complex task. Enter 
-[the pg_upgrade program](http://www.postgresql.org/docs/current/static/pgupgrade.html), which attempts to upgrade a 
+[the pg_upgrade program](https://www.postgresql.org/docs/current/static/pgupgrade.html), which attempts to upgrade a 
 cluster with minimal downtime. Just how fast is it? I grew tired of answering 
-this question from clients with vague answers such as "it depends" and "really, 
-really fast" and decided to generate some data for ballpark answers.
+this question from clients with vague answers such as “it depends” and “really, 
+really fast” and decided to generate some data for ballpark answers.
 
-Spoiler: it's either about 3.5 times as fast as pg_dump, or insanely 
-fast at a flat 15 seconds or so. Before going further, let's discuss the methodology used.
+Spoiler: it’s either about 3.5 times as fast as pg_dump, or insanely 
+fast at a flat 15 seconds or so. Before going further, let’s discuss the methodology used.
 
 I used the venerable pgbench program to generate some sample tables and data, 
-and then upgraded the resulting database, going from Postgres version 9.3 to 9.4. The pgbench program comes with Postgres, and simply requires an **--initialize** argument to create the test tables. There is also a **--scale** argument you can provide to increase the amount of initial data - each increment increases the number of rows in the largest table, pgbench_accounts, by one hundred thousand rows. Here are the scale runs I did, along with the number of rows and overall database size for each level:
+and then upgraded the resulting database, going from Postgres version 9.3 to 9.4. The pgbench program comes with Postgres, and simply requires an **--initialize** argument to create the test tables. There is also a **--scale** argument you can provide to increase the amount of initial data—each increment increases the number of rows in the largest table, pgbench_accounts, by one hundred thousand rows. Here are the scale runs I did, along with the number of rows and overall database size for each level:
 
 <table class="gsm">
 <caption>Effect of --scale</caption>
@@ -50,10 +50,10 @@ $ pg_dump postgres | psql postgres -q -p 5433 -f -
 
 I did make one important optimization, which was to set 
 [
-fsync](http://www.postgresql.org/docs/current/static/runtime-config-wal.html#GUC-FSYNC) off on the target database (version 9.4). Although this setting should never be turned off in production  - or anytime you cannot replace all your data, upgrades 
+fsync](https://www.postgresql.org/docs/current/static/runtime-config-wal.html#GUC-FSYNC) off on the target database (version 9.4). Although this setting should never be turned off in production—or anytime you cannot replace all your data, upgrades 
 like this are an excellent time to disable fsync. Just make sure you flip it back on 
 again right away! There are some other minor optimizations one could make (especially 
-boosting [maintenance_work_mem](http://www.postgresql.org/docs/current/static/runtime-config-resource.html#GUC-MAINTENANCE-WORK-MEM)), but for the purposes of this test, I decided that the fsync was enough.
+boosting [maintenance_work_mem](https://www.postgresql.org/docs/current/static/runtime-config-resource.html#GUC-MAINTENANCE-WORK-MEM)), but for the purposes of this test, I decided that the fsync was enough.
 
 For testing the speed of pg_upgrade, I used the following command:
 
@@ -91,7 +91,7 @@ with pg_upgrade as the clear winner:
 
 <div class="separator" style="clear: both; text-align: center;"><a href="/blog/2015/07/01/how-fast-is-pgupgrade-anyway/image-1-big.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="/blog/2015/07/01/how-fast-is-pgupgrade-anyway/image-1.png"/></a></div>
 
-I mentioned earlier that there were some other optimizations that could be done to make the pg_dump slightly faster. As it turns out, pg_upgrade can also be made faster. Absolutely, beautifully, insanely faster. All we have to do is add the **--link** argument. What this does is rather than copying the data files, it simply links them via the filesystem. Thus, each large data file that makes up the majority of a database's size takes a fraction of a second to link to the new version. Here are the new numbers, generated simply by adding a **--link** to the pg_upgrade command from above:
+I mentioned earlier that there were some other optimizations that could be done to make the pg_dump slightly faster. As it turns out, pg_upgrade can also be made faster. Absolutely, beautifully, insanely faster. All we have to do is add the **--link** argument. What this does is rather than copying the data files, it simply links them via the filesystem. Thus, each large data file that makes up the majority of a database’s size takes a fraction of a second to link to the new version. Here are the new numbers, generated simply by adding a **--link** to the pg_upgrade command from above:
 
 <table class="gsm">
 <caption>pg_upgrade --link is crazy fast</caption>
@@ -109,11 +109,11 @@ I mentioned earlier that there were some other optimizations that could be done 
 <tr><td>600</td><td>8.5 GB</td><td>12.9</td></tr>
 </tbody></table>
 
-No, those are not typos - an average of thirteen seconds despite the size of the database! The only downside to this method is that you cannot access the old system once the new system starts up, but that's a very small price to pay, as you can easily backup the old system first. There is no point in graphing these numbers out - just look at the graph above and imagine a nearly flat line traveling across the bottom of the graph :)
+No, those are not typos—an average of thirteen seconds despite the size of the database! The only downside to this method is that you cannot access the old system once the new system starts up, but that’s a very small price to pay, as you can easily backup the old system first. There is no point in graphing these numbers out—just look at the graph above and imagine a nearly flat line traveling across the bottom of the graph :)
 
-Are there any other options that can affect the time? While pgbench has a handy **--foreign-keys** argument I often use to generate a more "realistic" test database, both pg_dump and pg_upgrade are unaffected by any numbers of foreign keys. One limitation of pg_upgrade is that it cannot change the **--checksum** attribute of a database. In other words, if you want to go from a non-checksummed version of Postgres to a checksummed version, you need to use pg_dump or some other method. On the plus side, my testing found negligible difference between upgrading a checksummed versus a non-checksummed version.
+Are there any other options that can affect the time? While pgbench has a handy **--foreign-keys** argument I often use to generate a more “realistic” test database, both pg_dump and pg_upgrade are unaffected by any numbers of foreign keys. One limitation of pg_upgrade is that it cannot change the **--checksum** attribute of a database. In other words, if you want to go from a non-checksummed version of Postgres to a checksummed version, you need to use pg_dump or some other method. On the plus side, my testing found negligible difference between upgrading a checksummed versus a non-checksummed version.
 
-Another limitation of the pg_upgrade method is that all internal stats are blown away by the upgrade, so the database starts out in a completely unanalyzed state. This is not as much an issue as it used to be, as pg_upgrade will generate a script to regenerate these stats, using the handy **--analyze-in-stages** argument to vacuum. There are a few other minor limitations to pg_upgrade: read [the documentation](http://www.postgresql.org/docs/current/static/pgupgrade.html#AEN165408) for a complete list. In the end, pg_upgrade is extraordinarily fast and should be your preferred method for upgrading. Here is a final chart showing the strengths and weaknesses of the major upgrade methods.
+Another limitation of the pg_upgrade method is that all internal stats are blown away by the upgrade, so the database starts out in a completely unanalyzed state. This is not as much an issue as it used to be, as pg_upgrade will generate a script to regenerate these stats, using the handy **--analyze-in-stages** argument to vacuum. There are a few other minor limitations to pg_upgrade: read [the documentation](https://www.postgresql.org/docs/current/static/pgupgrade.html#AEN165408) for a complete list. In the end, pg_upgrade is extraordinarily fast and should be your preferred method for upgrading. Here is a final chart showing the strengths and weaknesses of the major upgrade methods.
 
 <table class="gsm">
 <caption>Postgres upgrade methods compared</caption>

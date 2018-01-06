@@ -103,9 +103,9 @@ print("{!s:*^{fill}}{!s:#^{fill}}".format("Age","Name",fill=30))
 
 Feel free to refer the Python’s documentation on Unicode here:
 
-> https://docs.python.org/2/howto/unicode.html
+[https://docs.python.org/2/howto/unicode.html](https://docs.python.org/2/howto/unicode.html)
 
 And for the “format” method it can be referred here:
 
-> https://www.safaribooksonline.com/library/view/python-cookbook-3rd/9781449357337/ch02s13.html
+[https://www.safaribooksonline.com/library/view/python-cookbook-3rd/9781449357337/ch02s13.html](https://www.safaribooksonline.com/library/view/python-cookbook-3rd/9781449357337/ch02s13.html)
 
