@@ -13,9 +13,9 @@ We found a nice project called [img.bi](https://github.com/imgbi/img.bi) that is
 
 The system is divided into two components: the **HTML/JS** frontend and a **Python FastCGI API**.
 
-Unfortunately the documentation is a still in its very early stage and it's lacking a meaningful structure and a lot of needed information.
+Unfortunately the documentation is a still in its very early stage and it’s lacking a meaningful structure and a lot of needed information.
 
-Here's an overview of the steps we followed to setup img.bi on our own server behind **nginx**.
+Here’s an overview of the steps we followed to setup img.bi on our own server behind **nginx**.
 
 First of all we chose that we wanted to have as much as possible running and confined to a regular user, which is always a good idea with such young and potentially vulnerable tools. We chose to use the *imgbi* user.
 
@@ -52,9 +52,9 @@ As a short note to the usage of the **bad practice** of blindly using:
 curl -o- https://some_obscure_link_or_not | bash
 ```
 
-We want to add that we do **not** endorse this practice as it's dangerous and exposes your system to many security risks. On the other hand, though, it's true that cloning the source via Git and compile/installing it blindly is not much safer, so it's always up to how much you trust the peer review on the project you're about to use. And at least with an https URL you should be talking to the destination you want, whereas an http URL is much more dangerous.
+We want to add that we do **not** endorse this practice as it’s dangerous and exposes your system to many security risks. On the other hand, though, it’s true that cloning the source via Git and compile/installing it blindly is not much safer, so it’s always up to how much you trust the peer review on the project you’re about to use. And at least with an https URL you should be talking to the destination you want, whereas an http URL is much more dangerous.
 
-Furthermore going through the entire Python and NodeJS installation as a regular user, was far beyond the scope of this post and the steps proposed here *assumes* that you're doing everything as the regular user, except where specifically stated differently.
+Furthermore going through the entire Python and NodeJS installation as a regular user, was far beyond the scope of this post and the steps proposed here *assumes* that you’re doing everything as the regular user, except where specifically stated differently.
 
 Anyway after that we updated **pip** and then installed all the needed Python modules:
 
@@ -63,7 +63,7 @@ pip install --upgrade pip
 pip install redis m2crypto web.py bcrypt pysha3 zbase62 pyutil flup
 ```
 
-Then it's time to clone the actual img.bi code from the **GitHub** repo, install a few missing dependencies and then use the bower and npm .json files to add the desired packages:
+Then it’s time to clone the actual img.bi code from the **GitHub** repo, install a few missing dependencies and then use the bower and npm .json files to add the desired packages:
 
 ```nohighlight
 git clone https://github.com/imgbi/img.bi.git
@@ -74,7 +74,7 @@ npm install
 bower install
 ```
 
-We also faced an issue which made **Grunt** fail to start correctly. Grunt was complaining about an "undefined property" called "prototype". If you happen to have the same problem just type
+We also faced an issue which made **Grunt** fail to start correctly. Grunt was complaining about an “undefined property” called “prototype”. If you happen to have the same problem just type
 
 ```nohighlight
 cd node_modules/grunt-connect-proxy/node_modules/http-proxy
@@ -82,7 +82,7 @@ npm install eventemitter3@0.1.6
 cd -
 ```
 
-That'll basically install the eventemitter3 NodeJS package module locally to the *grunt-connect-proxy* module so to overcome the compatibility issues which in turn causes the error mentioned above.
+That’ll basically install the eventemitter3 NodeJS package module locally to the *grunt-connect-proxy* module so to overcome the compatibility issues which in turn causes the error mentioned above.
 
 You should use your favourite editor to change the file *config.json*, which basically contains all your local needed configuration. In particular our host is not exposed on the I2P or Tor network, so we "visually" disabled those options.
 
@@ -104,7 +104,7 @@ You should use your favourite editor to change the file *config.json*, which bas
 +  "tor": "http://NOTAVAILABLE.onion",
 ```
 
-Save and close the file. At this point you should be able to run "grunt" to build the project but if it fails on the multiresize task, just run
+Save and close the file. At this point you should be able to run “grunt” to build the project but if it fails on the multiresize task, just run
 
 ```nohighlight
 grunt --force
@@ -112,7 +112,7 @@ grunt --force
 
 to ignore the warnings.
 
-That's about everything you need for the *frontend* part, so it's now time to take care of the API.
+That’s about everything you need for the *frontend* part, so it’s now time to take care of the API.
 
 ```nohighlight
 cd
@@ -128,25 +128,25 @@ You now need to edit the two Python files which are the core of the API.
 +upload_dir = '/home/imgbi/img.bi-files'
 ```
 
-Verify that you're not having any Python import related error, due to missing modules or else, by running the Python code.py file directly.
+Verify that you’re not having any Python import related error, due to missing modules or else, by running the Python code.py file directly.
 
 ```nohighlight
 ./code.py
 ```
 
-If that's working okay, just create a symlink in the build directory in order to have the API created files available to the frontend
+If that’s working okay, just create a symlink in the build directory in order to have the API created files available to the frontend
 
 ```nohighlight
 ln -s /home/imgbi/img.bi-files /home/imgbi/img.bi/build/download
 ```
 
-And then it's time to spawn the actual Python daemon:
+And then it’s time to spawn the actual Python daemon:
 
 ```nohighlight
 spawn-fcgi -f /home/imgbi/img.bi-api/code.py -a 127.0.0.1 -p 1234
 ```
 
-The expired.py file is used by a cronjob which periodically checks if there's any image/content that should be removed because its time has expired. First of all let's call the script directly and if there's no error, let's create the crontab:
+The expired.py file is used by a cronjob which periodically checks if there’s any image/content that should be removed because its time has expired. First of all let’s call the script directly and if there’s no error, let’s create the crontab:
 
 ```nohighlight
 python /home/imgbi/img.bi-api/expired.py
@@ -157,7 +157,7 @@ crontab -e
 30 4 * * * python /home/imgbi/img.bi-api/expired.py
 ```
 
-It's now time to install nginx and Redis (if you still haven't done so), and then configure them. For Redis you can just follow the usual simple, basic installation and that'll be just okay. Same is true for nginx but we'll add our configuration/vhost file content here as an example /etc/nginx/sites-enabled/imgbi.example.conf for everyone who may need it:
+It’s now time to install nginx and Redis (if you still haven’t done so), and then configure them. For Redis you can just follow the usual simple, basic installation and that’ll be just okay. Same is true for nginx but we’ll add our configuration/vhost file content here as an example /etc/nginx/sites-enabled/imgbi.example.conf for everyone who may need it:
 
 ```nohighlight
 upstream imgbi-fastcgi {

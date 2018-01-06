@@ -15,7 +15,7 @@ From a technical point of view, End Point debuted several new features with this
 
 - New scene control and editing functionalities in the Roscoe Content Management System
 - A new touchscreen interface that shows presentations and scenes within a presentation in a compact, clean layout
-- A new Street View interface that allows the "pinch and zoom" map navigation that we all expect from our smart phones and tablets
+- A new Street View interface that allows the “pinch and zoom” map navigation that we all expect from our smart phones and tablets
 - Debut of the new ROS-based operating system, including new ROS-nodes that can control Google Earth, Street View, panoramic content viewers, browser windows, and other interfaces
 - Deployment of some very nice NEC professional-grade displays
 

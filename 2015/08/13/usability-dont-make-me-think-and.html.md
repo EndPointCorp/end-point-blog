@@ -2,7 +2,7 @@
 author: Steph Skardal
 gh_issue_number: 1151
 tags: books, javascript, tips
-title: 'Usability: Don''t Make Me Think and a Bookmarklet'
+title: "Usability: Don’t Make Me Think and a Bookmarklet"
 ---
 
 

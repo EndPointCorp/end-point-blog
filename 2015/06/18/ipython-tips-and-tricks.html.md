@@ -123,7 +123,7 @@ In [33]: %timeit range(100)
 
 Basic UNIX shell integration (you can run simple shell commands such as cp, ls, rm, cp, etc. directly from the ipython command line)
 
-To execute any other shell commands we just need to add '!' beginning of the command line. We can assign the result of the system command to a Python variable to further use. 
+To execute any other shell commands we just need to add “!” beginning of the command line. We can assign the result of the system command to a Python variable to further use. 
 
 ```python
 In [38]: list_of_files = !ls
@@ -166,8 +166,8 @@ Out[43]: u'https://gist.github.com/a660948b8323280a0d27'
 
 For more info on this topic: 
 
-http://ipython.org/ipython-doc/dev/interactive/tutorial.html
+[http://ipython.org/ipython-doc/dev/interactive/tutorial.html](http://ipython.org/ipython-doc/dev/interactive/tutorial.html)
 
-http://ipython.org/ipython-doc/dev/interactive/magics.html
+[http://ipython.org/ipython-doc/dev/interactive/magics.html](http://ipython.org/ipython-doc/dev/interactive/magics.html)
 
 

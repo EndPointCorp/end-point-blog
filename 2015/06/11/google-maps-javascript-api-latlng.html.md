@@ -15,13 +15,13 @@ A few weeks ago I had to troubleshoot some Google Maps related code that had sud
 var myLoc = new google.maps.LatLng(results[0].geometry.location.k, results[0].geometry.location.D);
 ```
 
-It looked like the original author had inspected the geocoded response, found the 'k' and 'D' properties which held latitude and longitude values and used them in their maps code. This had all been working fine until Google released a [new version](https://groups.google.com/forum/#!topic/google-maps-js-api-v3-notify/tYp4JKtkDg0) of their JavaScript API. Sites that did not [specify a particular version](https://developers.google.com/maps/documentation/javascript/basics#Versioning) of the API were upgraded to the new version automatically. If you have Google Maps code which stopped working recently this might be the reason why.  
+It looked like the original author had inspected the geocoded response, found the ‘k’ and ‘D’ properties which held latitude and longitude values and used them in their maps code. This had all been working fine until Google released a [new version](https://groups.google.com/forum/#!topic/google-maps-js-api-v3-notify/tYp4JKtkDg0) of their JavaScript API. Sites that did not [specify a particular version](https://developers.google.com/maps/documentation/javascript/basics#Versioning) of the API were upgraded to the new version automatically. If you have Google Maps code which stopped working recently this might be the reason why.  
 
 ## The Solution: Use the built-in methods in the LatLng class
 
 <img alt="Screen Shot 2015 06 10 at 3 47 32 PM" border="0" height="308" src="/blog/2015/06/11/google-maps-javascript-api-latlng/image-0.png" title="Screen Shot 2015-06-10 at 3.47.32 PM.png" width="419"/> 
 
-  I recalled there being some helper methods for LatLng objects and confirmed this with a visit to the [docs for the LatLng class](https://developers.google.com/maps/documentation/javascript/3.exp/reference#LatLng) which had recently been updated and given the [Material design](http://www.google.com/design/spec/material-design/introduction.html) treatment — thanks Google! The lat() and lng() methods were what I needed and updating the code with them fixed the issue. The fixed code was similar to this: 
+I recalled there being some helper methods for LatLng objects and confirmed this with a visit to the [docs for the LatLng class](https://developers.google.com/maps/documentation/javascript/3.exp/reference#LatLng) which had recently been updated and given the [Material design](https://material.io/guidelines/material-design/introduction.html) treatment — thanks Google! The lat() and lng() methods were what I needed and updating the code with them fixed the issue. The fixed code was similar to this: 
 
 ```
 var myLoc = new google.maps.LatLng(results[0].geometry.location.lat(), results[0].geometry.location.lng());
