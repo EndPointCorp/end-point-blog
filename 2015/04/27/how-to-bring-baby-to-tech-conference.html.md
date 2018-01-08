@@ -5,7 +5,7 @@ tags: conference, rails
 title: How to Bring a Baby to a Tech Conference
 ---
 
-Last week, I brought my 4 month old to [RailsConf](https://railsconf.com/). In a game-day decision, rather than drag a two year old and husband along on the ~5 hour drive and send the dogs to boarding, we decided it would ultimately be easier on everyone (except maybe me) if I attended the conference with the baby, especially since a good amount of the conference would be live-streamed.
+Last week, I brought my 4 month old to [RailsConf](https://railsconf.com/2015/). In a game-day decision, rather than drag a two year old and husband along on the ~5 hour drive and send the dogs to boarding, we decided it would ultimately be easier on everyone (except maybe me) if I attended the conference with the baby, especially since a good amount of the conference would be live-streamed.
 
 <img border="0" src="/blog/2015/04/27/how-to-bring-baby-to-tech-conference/image-0.jpeg" style="margin-bottom:5px;" width="810"/>
 
