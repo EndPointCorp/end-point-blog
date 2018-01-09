@@ -12,21 +12,21 @@ What are we to do in order to make sure that our infrastructure is **tested** **
 <div class="separator" style="clear: both; text-align: center;">
 <br/></div>
 
-Scary? - It's not.
+Scary? It’s not.
 
 <div class="separator" style="clear: both; text-align: center;">
 <a href="/blog/2015/02/18/testing-your-chef-repo-pull-requests/image-0.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em; text-align: left;"><img border="0" height="550" src="/blog/2015/02/18/testing-your-chef-repo-pull-requests/image-0.png" width="640"/></a></div>
 
 #### Workflow broken down by pieces
 
-- **lg_chef.git repo** - where we keep cookbooks, environments and node definitions
-- **GitHub pull request** - artifact of infrastructure source code tested by Jenkins
-- **Vagrant** - virtual environment in which chef is run in order to test the artifact. There's always 1 master node and few Vagrant boxes that boot an ISO from master via tftp protocol
-- **chef-zero** - Chef flavor used to converge and test the infrastructure on the basis of GitHub pull request
-- **chef-server/chef-client**- Chef flavor used to converge and test production and pre-production environment
-- **Jenkins** - Continuous Integration environment that runs the converge process and part of the tests
-- **Tests -**two frameworks used - [BATS](https://github.com/sstephenson/bats) (for the integration tests on the top) and [minitest](https://github.com/seattlerb/minitest) (for after-converge tests)
-- **lg-live-build -**our fork of [Debian live build](http://live.debian.net/devel/live-build/) used to build the ISO that is booted by Vagrant slaves
+- **lg_chef.git repo** — where we keep cookbooks, environments and node definitions
+- **GitHub pull request** — artifact of infrastructure source code tested by Jenkins
+- **Vagrant** — virtual environment in which chef is run in order to test the artifact. There’s always 1 master node and few Vagrant boxes that boot an ISO from master via tftp protocol
+- **chef-zero** — Chef flavor used to converge and test the infrastructure on the basis of GitHub pull request
+- **chef-server/chef-client** — Chef flavor used to converge and test production and pre-production environment
+- **Jenkins** — Continuous Integration environment that runs the converge process and part of the tests
+- **Tests** — two frameworks used — [BATS](https://github.com/sstephenson/bats) (for the integration tests on the top) and [minitest](https://github.com/seattlerb/minitest) (for after-converge tests)
+- **lg-live-build** — our fork of [Debian live build](https://www.debian.org/devel/debian-live/) used to build the ISO that is booted by Vagrant slaves
 
 #### Workflow broken down by the order of actions
 
@@ -34,13 +34,13 @@ Scary? - It's not.
 1. **GitHub pull request** gets picked up by **Jenkins**
 1. **Jenkins** creates 1 **master** **Vagrant** node and several slave nodes to act as **slaves**
 1. **chef-zero** converges master **Vagrant** box and runs **minitest**
-1. **BATS** tests run on the freshly converged **Vagrant master**box. Few steps are performed here: ISO is built, it's distributed to the slaves, slaves boot the ISO and final integration tests are run to see whether slaves have all the goodness.
+1. **BATS** tests run on the freshly converged **Vagrant master**box. Few steps are performed here: ISO is built, it’s distributed to the slaves, slaves boot the ISO and final integration tests are run to see whether slaves have all the goodness.
 1. If points 1 to 5 are **green,**developer merges the changes, uploads the updated cookbooks, node definitions, roles and environments and runs the final tests.
 
-**What didn't work for us and why**
+**What didn’t work for us and why**
 
-- [kitchen-vagrant ](https://github.com/test-kitchen/kitchen-vagrant) - because it didn't play well with Jenkins (or JVM itself) and didn't know how to use advanced Vagrant features for specifying multiple networking options, interfaces and drivers. However it supports using your own [Vagrantfile.erb](https://github.com/test-kitchen/kitchen-vagrant/blob/master/templates/Vagrantfile.erb)
-- We've had some doubts about keeping all the cookbooks, environments and node definitions in one repo because chef-server/chef-client tests can only test your stuff if it's uploaded to the Chef server, but **chef-zero** came in handy
+- [kitchen-vagrant ](https://github.com/test-kitchen/kitchen-vagrant) — because it didn’t play well with Jenkins (or JVM itself) and didn’t know how to use advanced Vagrant features for specifying multiple networking options, interfaces and drivers. However it supports using your own [Vagrantfile.erb](https://github.com/test-kitchen/kitchen-vagrant/blob/master/templates/Vagrantfile.erb)
+- We’ve had some doubts about keeping all the cookbooks, environments and node definitions in one repo because chef-server/chef-client tests can only test your stuff if it’s uploaded to the Chef server, but **chef-zero** came in handy
 
 #### The code
 
@@ -234,7 +234,7 @@ It renders a Vagrant File out of following data:
 }
 ```
 
-As a result we get an on-the-fly Vagrantfile that's used during the testing:
+As a result we get an on-the-fly Vagrantfile that’s used during the testing:
 
 ```javascript
 Vagrant.configure("2") do |config|
@@ -447,6 +447,6 @@ So finally we get the following pipeline:
 1. Boot display nodes with the newly created ISO
 1. Run final integration tests on the stack
 
-Elapsed time - between 40 and 50 minutes.
+Elapsed time—between 40 and 50 minutes.
 
 
