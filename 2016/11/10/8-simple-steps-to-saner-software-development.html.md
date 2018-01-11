@@ -4,9 +4,9 @@ title: "8 Simple Steps to Saner Software Development"
 tags: development, environment 
 ---
 
-<div class="separator" style="clear: both; text-align: center;"><a href="/blog/2016/11/10/8-simple-steps-to-saner-software-development/bauhausstage.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="/blog/2016/11/10/8-simple-steps-to-saner-software-development/bauhausstage.jpg"/></a></div>
+### 8 Simple Steps to Saner Software Development
 
-<div class="separator" style="clear: both; text-align: center;"><a href="/blog/2016/11/10/8-simple-steps-to-saner-software-development/bauhausstage.jpg" imageanchor="1" style="clear: right; float: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" src="/blog/2016/11/10/8-simple-steps-to-saner-software-development/bauhausstage.jpg"/></a></div>
+<div class="separator" style="clear: both; text-align: center;"><a href="/blog/2016/11/10/8-simple-steps-to-saner-software-development/layercake.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="/blog/2016/11/10/8-simple-steps-to-saner-software-development/layercake.jpg"/></a></div>
 
 While these might seem obvious for seasoned developers, many projects, especially legacy software, still fail to follow most of the steps below.
 

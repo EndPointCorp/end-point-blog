@@ -2,7 +2,9 @@
 author: "Liz Flyntz"
 title: "The Happy Path: An Interview with Design Strategist & Gallerist Kelani Nichole"
 tags: development, art, architecture
+
 ---
+
 Kelani Nichole is a digital strategist who is also a contemporary art gallerist. Or maybe vice versa. 
  
 She works with the [Theresa Neil Strategy + Design](http://www.theresaneil.com/) agency, doing user-centered design research for (mostly) big products at big companies.  Her gallery, Transfer, presents internet and computer-based artworks in its Brooklyn, NY location and as pop-up installations around the country and the world. 
