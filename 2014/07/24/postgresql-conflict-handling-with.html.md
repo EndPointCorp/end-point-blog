@@ -10,19 +10,19 @@ title: PostgreSQL conflict handling with Bucardo and multiple data sources
 user <a href="https://www.flickr.com/photos/grongar/">Rebecca Siegel</a>
 (cropped)</small></div>
 
-Bucardo's much publicized ability to handle multiple data sources often raises questions about conflict resolution. People wonder, for example, what happens when a row in one source database gets updated one way, and the same row in another source database gets updated a different way? This article will explain some of the solutions Bucardo uses to solve conflicts. The recently released [Bucardo 5.1.1](http://bucardo.org/wiki/Bucardo) has some new features for conflict handling, so make sure you use at least that version.
+Bucardo’s much publicized ability to handle multiple data sources often raises questions about conflict resolution. People wonder, for example, what happens when a row in one source database gets updated one way, and the same row in another source database gets updated a different way? This article will explain some of the solutions Bucardo uses to solve conflicts. The recently released [Bucardo 5.1.1](https://bucardo.org/wiki/Bucardo) has some new features for conflict handling, so make sure you use at least that version.
 
-[Bucardo](http://bucardo.org/wiki/Bucardo) does multi-source replication, meaning that 
+[Bucardo](https://bucardo.org/wiki/Bucardo) does multi-source replication, meaning that 
 users can write to more than one source at the same time. (This is also called multi-master
-replication, but "source" is a much more accurate description than
-"master"). Bucardo deals in primary keys as a way to identify rows. If the same row has changed on one or more sources since the last Bucardo run, a conflict has arisen and Bucardo must be told how to handle it. In other words, Bucardo must decide which row is the "winner" and thus gets replicated to all the other databases.
+replication, but “source” is a much more accurate description than
+“master”). Bucardo deals in primary keys as a way to identify rows. If the same row has changed on one or more sources since the last Bucardo run, a conflict has arisen and Bucardo must be told how to handle it. In other words, Bucardo must decide which row is the “winner” and thus gets replicated to all the other databases.
 
 For this demo, we will again use an Amazon AWS. See the [earlier post about Bucardo 5](
 /blog/2014/06/23/bucardo-5-multimaster-postgres-released)
 for directions on installing Bucardo itself. Once it is installed (after the
 './bucardo install' step), we can create some test databases for our conflict
-testing. Recall that we have a handy database named "shake1". As this
-name can get a bit long for some of the examples below, let's make a few databases copies with shorter names. We will also teach Bucardo about the databases, and create a sync named "ctest" to replicate between them all:
+testing. Recall that we have a handy database named “shake1”. As this
+name can get a bit long for some of the examples below, let’s make a few databases copies with shorter names. We will also teach Bucardo about the databases, and create a sync named “ctest” to replicate between them all:
 
 ```nohighlight
 createdb aa -T shake1
@@ -38,12 +38,12 @@ Bucardo has three general ways to handle conflicts: built in strategies, a
 list of databases, or using custom conflict handlers. 
 The primary strategy, and also the default one for all syncs, is known as **bucardo_latest**. When
 this strategy is invoked, Bucardo scans all copies of the conflicted table across all
-source databases, and then orders the databases according to when they were last changed. This generates a list of databases, for example **"B C A"**. For each conflicting row, the database most recently updated - of all the ones involved in the conflict for that row - is the winner. The other built in strategy is called "bucardo_latest_all_tables", which scans all the tables in the sync across all source databases to find a winner.
+source databases, and then orders the databases according to when they were last changed. This generates a list of databases, for example **“B C A”**. For each conflicting row, the database most recently updated—of all the ones involved in the conflict for that row—is the winner. The other built in strategy is called “bucardo_latest_all_tables”, which scans all the tables in the sync across all source databases to find a winner.
 
 There may be other built in strategies added as experience/demand
 dictates, but it is hard to develop generic solutions to the complex
 problem of conflicts, so non built-in strategies are preferred. Before getting into 
-those other solutions, let's see the default strategy (bucardo_latest) in
+those other solutions, let’s see the default strategy (bucardo_latest) in
 action:
 
 ```
@@ -67,10 +67,10 @@ cc   |   31
 </span>
 ```
 
-Under the hood, Bucardo actually applies the list of winning databases to each conflicting row, such that example above of "B C A" means that database B wins in a conflict in which a rows was updated by B and C, or B and A, or B and C and A. However, if B did not change the row, and the conflict is only between C and A, then C will win.
+Under the hood, Bucardo actually applies the list of winning databases to each conflicting row, such that example above of “B C A” means that database B wins in a conflict in which a rows was updated by B and C, or B and A, or B and C and A. However, if B did not change the row, and the conflict is only between C and A, then C will win.
 
 As an alternative to the built-ins, you can set conflict_strategy
-to a list of the databases in the sync, ordered from highest priority to lowest, for example "C B A". The list does not have to include all the databases, but it is a good idea to do so. Let's see it in action. We will change the conflict_strategy for our test sync and then reload the sync to have it take effect:
+to a list of the databases in the sync, ordered from highest priority to lowest, for example “C B A”. The list does not have to include all the databases, but it is a good idea to do so. Let’s see it in action. We will change the conflict_strategy for our test sync and then reload the sync to have it take effect:
 
 ```
 <span class="gsm">
@@ -97,10 +97,10 @@ cc   |   22
 
 The final strategy for handling conflicts is to write your own code. Many will argue this is the best approach. It is certaiy the only one that will allow you to embed your business logic into the conflict handling.
 
-Bucardo allows loading of snippets of Perl code known as "customcodes".
+Bucardo allows loading of snippets of Perl code known as “customcodes”.
 These codes take effect at specified times, such as after triggers are
 disabled, or when a sync has failed because of an exception. The specific time we
-want is called "conflict", and it is an argument to the "whenrun"
+want is called “conflict”, and it is an argument to the “whenrun”
 attribute of the customcode. A customcode needs a name, the whenrun
 argument, and a file to read in for its content. They can also be
 associated with one or more syncs or tables.
@@ -113,7 +113,7 @@ winner for each conflicted row, or it can simply declare a winning database
 for all rows, or even for all tables. It can even modify the data in any of the tables itself. What it cannot do (thanks to the magic of DBIx::Safe) is commit, rollback, or do
 other dangerous actions since we are in the middle of an important transaction.
 
-It's probably best to show by example at this point. Here is a file called ctest1.pl that asks Bucardo to skip to the next applicable customcode if the conflict is in the table "chapter". Otherwise, it will tell it to have database "C" win all conflicts for this table, and fallback to the database "B" otherwise.
+It’s probably best to show by example at this point. Here is a file called ctest1.pl that asks Bucardo to skip to the next applicable customcode if the conflict is in the table “chapter”. Otherwise, it will tell it to have database “C” win all conflicts for this table, and fallback to the database “B” otherwise.
 
 ```perl
 ## ctest1.pl - a sample conflict handler for Bucardo
@@ -132,7 +132,7 @@ else {
 return;
 ```
 
-Let's add in this customcode, and associate it with our sync. Then we will reload the sync and cause a conflict.
+Let’s add in this customcode, and associate it with our sync. Then we will reload the sync and cause a conflict.
 
 ```
 <span class="gsm">bucardo add customcode ctest \
@@ -157,17 +157,17 @@ cc   |   33
 </span>
 ```
 
-We used the 'skip' hash value to tell Bucardo to not do anything if the table is named "chapter'. In real life, we would have another customcode that will handle the skipped table, else any conflict in it will cause the sync to stop. Any number of customcodes can be attached to syncs or tables.
+We used the “skip” hash value to tell Bucardo to not do anything if the table is named “chapter”. In real life, we would have another customcode that will handle the skipped table, else any conflict in it will cause the sync to stop. Any number of customcodes can be attached to syncs or tables.
 
-The database preference will last for the remainder of this sync's run,
+The database preference will last for the remainder of this sync’s run,
 so any other conflicts in other tables will not even bother to invoke the
-code. You can use the hash key "tablewinneralways" to make this decision
+code. You can use the hash key “tablewinneralways” to make this decision
 sticky, in that it will apply for all future runs by this sync (its KID
-technically) - which effectively means the decision stays until Bucardo
+technically)—which effectively means the decision stays until Bucardo
 restarts.
 
 One of the important structures sent to the code is a hash
-named "conflicts", which contains all the changed primary keys, and, for
+named “conflicts”, which contains all the changed primary keys, and, for
 each one, a list of which databases were involved in the sync. A
 Data::Dumper peek at it would look like this:
 
@@ -182,7 +182,7 @@ Data::Dumper peek at it would look like this:
 </span>
 ```
 
-The job of the conflict handling code (unless using one of the "winner" hash keys) is to change each of those conflicted rows from a hash of involved databases into a string describing the preferred order of databases. The Data::Dumper output would thus look like this:
+The job of the conflict handling code (unless using one of the “winner” hash keys) is to change each of those conflicted rows from a hash of involved databases into a string describing the preferred order of databases. The Data::Dumper output would thus look like this:
 
 ```
 <span class="gsm">$VAR1 = {
@@ -209,7 +209,7 @@ $info->{lastcode} = 1;
 return;
 ```
 
-Let's see that code in action. Assuming the above "bucardo add customcode" command was run, we will need to load an updated version, and then reload the sync. We create some conflicts, and check on the results:
+Let’s see that code in action. Assuming the above “bucardo add customcode” command was run, we will need to load an updated version, and then reload the sync. We create some conflicts, and check on the results:
 
 ```
 <span class="gsm">
@@ -234,7 +234,7 @@ cc   |   14
 </span>
 ```
 
-That was an obviously oversimplified example, as we picked 'A' for no discernible reason! These conflict handlers can be quite complex, and are only limited by your imagination - and your business logic. As a final example, let's have the code examine some other things in the database, and as well as jump out of the database itself(!) to determine the resolution to the conflict:
+That was an obviously oversimplified example, as we picked “A” for no discernible reason! These conflict handlers can be quite complex, and are only limited by your imagination—and your business logic. As a final example, let’s have the code examine some other things in the database, and as well as jump out of the database itself(!) to determine the resolution to the conflict:
 
 ```perl
 ## ctest3.pl - a somewhat silly conflict handler for Bucardo.
@@ -290,7 +290,7 @@ $info->{lastcode} = 1;
 return;
 ```
 
-We'll forego the demo: suffice to say that B always won in my tests, as Walla Walla never got over 97, and all my test databases had the same number of connections. Note some of the other items in the $info hash: "shared" allows arbitrary data to be stored across invocations of the code. The "lastcode" key tells Bucardo not to fire any more customcodes. While this example is very impractical, it does demonstrate the power available to you when solving conflicts.
+We’ll forego the demo: suffice to say that B always won in my tests, as Walla Walla never got over 97, and all my test databases had the same number of connections. Note some of the other items in the $info hash: “shared” allows arbitrary data to be stored across invocations of the code. The “lastcode” key tells Bucardo not to fire any more customcodes. While this example is very impractical, it does demonstrate the power available to you when solving conflicts.
 
 Hopefully this article answers many of the questions about conflict handling
 with Bucardo. Suggestions for new default handlers and examples of

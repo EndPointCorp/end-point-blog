@@ -5,7 +5,7 @@ tags: security, sysadmin, tls
 title: OpenSSL CSR with Alternative Names one-line
 ---
 
-2017-02-16 - Edit - I changed this post to use a different method than what I used in the original version cause X509v3 extensions were not created or seen correctly by many certificate providers.
+2017-02-16—Edit—I changed this post to use a different method than what I used in the original version cause X509v3 extensions were not created or seen correctly by many certificate providers.
 
 I find it hard to remember a period in my whole life in which I issued, reissued, renewed and revoked so many certificates.
 

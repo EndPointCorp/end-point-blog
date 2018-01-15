@@ -7,9 +7,9 @@ title: Bucardo replication trigger enabling
 
 <div class="separator" style="clear: both; margin-bottom: 1em; float: right; text-align: center;"><a href="/blog/2014/12/22/bucardo-replication-trigger-enabling/image-0-big.jpeg" imageanchor="1" style="clear: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" src="/blog/2014/12/22/bucardo-replication-trigger-enabling/image-0.jpeg"/></a><br/><small><a href="https://flic.kr/p/7MuYEP">Armadillo</a> by <a href="https://www.flickr.com/photos/chrisvandyck/">Chris van Dyck</a></small></div>
 
-[Bucardo](http://bucardo.org/) is one of the trigger-based replication systems for Postgres (others include Slony and Londiste). All of these not only use triggers to gather information on what has changed, but they also disable triggers when copying things to remote databases. They do this to ensure that only the data itself gets copied, in as fast as manner as possible. This also has the effect of disabling foreign keys, which Postgres implements by use of triggers on the underlying tables. There are times, however, when you need a trigger on a target to fire (such as data masking). Here are four approaches to working around the disabling of triggers. The first two solutions will work with any replication system, but the third and fourth are specific to Bucardo.
+[Bucardo](https://bucardo.org/) is one of the trigger-based replication systems for Postgres (others include Slony and Londiste). All of these not only use triggers to gather information on what has changed, but they also disable triggers when copying things to remote databases. They do this to ensure that only the data itself gets copied, in as fast as manner as possible. This also has the effect of disabling foreign keys, which Postgres implements by use of triggers on the underlying tables. There are times, however, when you need a trigger on a target to fire (such as data masking). Here are four approaches to working around the disabling of triggers. The first two solutions will work with any replication system, but the third and fourth are specific to Bucardo.
 
-First, let's understand how the triggers get disabled. A long time ago (Postgres 8.2 and older), triggers had to be disabled by direct changes to the system catalogs. Luckily, those days are over, and now this is done by issuing this command before copying any data:
+First, let’s understand how the triggers get disabled. A long time ago (Postgres 8.2 and older), triggers had to be disabled by direct changes to the system catalogs. Luckily, those days are over, and now this is done by issuing this command before copying any data:
 
 ```
 SET session_replication_role = 'replica';
@@ -17,7 +17,7 @@ SET session_replication_role = 'replica';
 
 This prevents all normal triggers and rules from being activated. There are times, however, when you want certain triggers (or their effects) to execute during replication.
 
-Let's use a simple hypothetical to illustrate all of these solutions. We will start with the Postgres built-in [pgbench utility](https://wiki.postgresql.org/wiki/Pgbench), The initialize option (**-i**) can be used to create and populate some tables:
+Let’s use a simple hypothetical to illustrate all of these solutions. We will start with the Postgres built-in [pgbench utility](https://wiki.postgresql.org/wiki/Pgbench), The initialize option (**-i**) can be used to create and populate some tables:
 
 ```
 $ createdb btest1
@@ -40,7 +40,7 @@ $ psql btest1 -c 'ALTER TABLE pgbench_history ADD hid SERIAL PRIMARY KEY'
 ALTER TABLE
 ```
 
-Now to make things a little more interesting. Let's add a new column to the **pgbench_accounts** table named "phone", which will hold the account owner's phone number. As this is confidential information, we do not want it to be available - except on the source database! For this example, database btest1 will be the source, and database btest2 will be the target.
+Now to make things a little more interesting. Let’s add a new column to the **pgbench_accounts** table named “phone”, which will hold the account owner’s phone number. As this is confidential information, we do not want it to be available—except on the source database! For this example, database btest1 will be the source, and database btest2 will be the target.
 
 ```
 $ psql btest1 -c 'ALTER TABLE pgbench_accounts ADD phone TEXT'
@@ -48,7 +48,7 @@ ALTER TABLE
 $ createdb btest2 --template=btest1
 ```
 
-To prevent the phone number from being revealed to anyone querying btest2, a trigger and supporting function is used to change the phone number to always display the word 'private'. Here is what they look like.
+To prevent the phone number from being revealed to anyone querying btest2, a trigger and supporting function is used to change the phone number to always display the word ‘private’. Here is what they look like.
 
 ```
 btest2=# CREATE OR REPLACE FUNCTION elide_phone()
@@ -95,7 +95,6 @@ $ bucardo start
 
 A demonstration of the new trigger is now in order. On the database btest2, we will update a few rows and attempt to set the phone number. However, our new trigger will overwrite our changes:
 
- Jenny
 ```
 $ psql btest2 -c "update pgbench_accounts set abalance=123, phone='867-5309' where aid <= 3"
 UPDATE 3
@@ -108,7 +107,7 @@ $ psql btest2 -c 'select aid,abalance,phone from pgbench_accounts order by aid l
    3 |      123 | private
 ```
 
-So, all is as we expected: any changes made to this table have the phone number changed. Let's see what happens when the changes are done via Bucardo replication. Note that we are updating btest1 but querying btest2:
+So, all is as we expected: any changes made to this table have the phone number changed. Let’s see what happens when the changes are done via Bucardo replication. Note that we are updating btest1 but querying btest2:
 
 ```
 $ psql btest1 -c "update pgbench_accounts set abalance=99, phone='867-5309' WHERE aid <= 3"
@@ -122,9 +121,9 @@ $ psql btest2 -c 'select aid,abalance,phone from pgbench_accounts order by aid l
    3 |       99 | 867-5309
 ```
 
-As you can see, our privacy safeguard is gone, as Bucardo disables the trigger on btest2 before making the changes. So what can we do? There are four solutions: set the trigger as ALWAYS, set the trigger as REPLICA, use Bucardo's customcode feature, or use Bucardo's customcols feature.
+As you can see, our privacy safeguard is gone, as Bucardo disables the trigger on btest2 before making the changes. So what can we do? There are four solutions: set the trigger as ALWAYS, set the trigger as REPLICA, use Bucardo’s customcode feature, or use Bucardo’s customcols feature.
 
-## Solution one: ALWAYS trigger
+### Solution one: ALWAYS trigger
 
 The easiest way is to simply mark the trigger as ALWAYS, which means that it will always fire, regardless of what session_replication_role is set to. This is the best solution for most problems of this sort. Changing the trigger requires an ALTER TABLE command. Once done, psql will show you the new state of the trigger as well:
 
@@ -163,7 +162,6 @@ Triggers firing always:
 
 That is some ugly syntax for changing the triggers, eh? (To restore a trigger to its default state, you would simply leave out the ALWAYS clause, so it becomes ***ALTER TABLE pgbench_accounts ENABLE TRIGGER elide_phone***). Time to verify that the ALWAYS trigger fires even when Bucardo is updating the table:
 
- Who ya gonna call?
 ```
 $ psql btest1 -c "update pgbench_accounts set abalance=11, phone='555-2368' WHERE aid <= 3"
 UPDATE 3
@@ -176,9 +174,9 @@ $ psql btest2 -c 'select aid,abalance,phone from pgbench_accounts order by aid l
    3 |       11 | private
 ```
 
-## Solution two: REPLICA trigger
+### Solution two: REPLICA trigger
 
-Trigger-based replication solutions, you may recall from above, issue this command: ***SET session_replication_role = 'replica'***. What this means is that all rules and triggers that are *not* of type replica are skipped (with the exception of always triggers of course). Thus, another solution is to set the triggers you want to fire to be of type "replica". Once you do this, however, the triggers will NOT fire in ordinary use - so be careful. Let's see it in action:
+Trigger-based replication solutions, you may recall from above, issue this command: ***SET session_replication_role = 'replica'***. What this means is that all rules and triggers that are *not* of type replica are skipped (with the exception of always triggers of course). Thus, another solution is to set the triggers you want to fire to be of type “replica”. Once you do this, however, the triggers will NOT fire in ordinary use—so be careful. Let’s see it in action:
 
 ```
 btest2=# ALTER TABLE pgbench_accounts ENABLE REPLICA TRIGGER elide_phone;
@@ -201,7 +199,6 @@ Triggers firing on replica only:
 
 As before, we can test it out and verify the trigger is firing:
 
- Freeze, Vegan Police!
 ```
 $ psql btest1 -c "update pgbench_accounts set abalance=22, phone='664-7665' WHERE aid <= 3"
 UPDATE 3
@@ -214,15 +211,15 @@ $ psql btest2 -c 'select aid,abalance,phone from pgbench_accounts order by aid l
    3 |       22 | private
 ```
 
-## Solution three: Bucardo customcode
+### Solution three: Bucardo customcode
 
-Bucardo supports a number of hooks into the replication process. These are called "customcodes" and consist of Perl code that is invoked by Bucardo. To solve the problem at hand, we will create some code for the "code_before_trigger_enable" hook - in other words, right after the actual data copying is performed. To create the customcode, we write the actual code to a text file, then do this:
+Bucardo supports a number of hooks into the replication process. These are called “customcodes” and consist of Perl code that is invoked by Bucardo. To solve the problem at hand, we will create some code for the “code_before_trigger_enable” hook—in other words, right after the actual data copying is performed. To create the customcode, we write the actual code to a text file, then do this:
 
 ```
 $ bucardo add code nophone whenrun=before_trigger_enable sync=pgb src_code=./nophone.pl
 ```
 
-This creates a new customcode named "nophone" that contains the code inside the local file "nophone.pl". It runs after the replication, but before the triggers are re-enabled. It is associated with the sync named "pgb". The content of the file looks like this:
+This creates a new customcode named “nophone” that contains the code inside the local file “nophone.pl”. It runs after the replication, but before the triggers are re-enabled. It is associated with the sync named “pgb”. The content of the file looks like this:
 
 ```
 my $info = shift;
@@ -261,9 +258,8 @@ if (exists $rows->{$schema} and exists $rows->{$schema}{$table}) {
 }
 ```
 
-Note that this solution requires Bucardo version 5.3.0 or better. Let's verify it:
+Note that this solution requires Bucardo version 5.3.0 or better. Let’s verify it:
 
- 800-588-2300, Em-pire!
 ```
 $ psql btest1 -c "update pgbench_accounts set abalance=33, phone='588-2300' WHERE aid <= 3"
 UPDATE 3
@@ -276,9 +272,9 @@ $ psql btest2 -c 'select aid,abalance,phone from pgbench_accounts order by aid l
    3 |       33 | private
 ```
 
-## Solution four: Bucardo customcols
+### Solution four: Bucardo customcols
 
-The final way to keep the information in that column masked is to use Bucardo's 'customcols' feature. This allows rewriting of the command that grabs rows from the source databases.  Bucardo uses COPY to grab rows from a source, DELETE to remove the rows if they exist on the target, and another COPY to add the rows to the target tables. Postgres supports adding a SELECT clause to a COPY command, as we will see below. To hide the values of the phone column using the customcols feature, we simply do:
+The final way to keep the information in that column masked is to use Bucardo’s ‘customcols’ feature. This allows rewriting of the command that grabs rows from the source databases.  Bucardo uses COPY to grab rows from a source, DELETE to remove the rows if they exist on the target, and another COPY to add the rows to the target tables. Postgres supports adding a SELECT clause to a COPY command, as we will see below. To hide the values of the phone column using the customcols feature, we simply do:
 
 ```
 $ bucardo add customcols public.pgbench_accounts "select aid,bid,abalance,filler,'private' as phone" db=B sync=pgb
@@ -297,9 +293,8 @@ Bucardo will instead do this thanks to our customcols:
 COPY (SELECT aid,bid,abalance,filler,'private' as phone FROM public.pgbench_accounts WHERE aid IN (1,2,3)) TO STDOUT
 ```
 
-Let's verify it:
+Let’s verify it:
 
- Glenn Miller hit
 ```
 $ psql btest1 -c "update pgbench_accounts set abalance=44, phone='736-5000' WHERE aid <= 3"
 UPDATE 3
@@ -312,4 +307,4 @@ $ psql btest2 -c 'select aid,abalance,phone from pgbench_accounts order by aid l
    3 |       44 | private
 ```
 
-Those are the four approaches to firing (or emulating) triggers when using replication. Which one you choose depends on what exactly your trigger does, but overall, the best solution is probably the 'trigger ALWAYS', followed by 'Bucardo customcols'. If you have another solution, or some problem that is not covered by the above, please let me know in the comments.
+Those are the four approaches to firing (or emulating) triggers when using replication. Which one you choose depends on what exactly your trigger does, but overall, the best solution is probably the ‘trigger ALWAYS’, followed by ‘Bucardo customcols’. If you have another solution, or some problem that is not covered by the above, please let me know in the comments.

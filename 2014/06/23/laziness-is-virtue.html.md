@@ -23,24 +23,38 @@ blah blah blah
 </td>
 ```
 
-The <ul> element was supposed to float to the right of the cell, and its individual <li> elements also floated, so that the list would fill up from right to left as more items were added:
+The \<ul\> element was supposed to float to the right of the cell, and its individual \<li\> elements also floated, so that the list would fill up from right to left as more items were added:
 
 One item:
 
-- 1
+<div style="width: 50%; height: 40px">
+<ul style="list-style-type: none">
+<li style="border: 1px solid white; height: 20px; text-align: center; width: 40px; float: right">1</li>
+</ul>
+</div>
 
 Two items:
 
-- 1
-- 2
+<div style="width: 50%; height: 40px">
+<ul style="list-style-type: none">
+<li style="border: 1px solid white; height: 20px; text-align: center; width: 40px; float: right">1</li>
+<li style="border: 1px solid white; height: 20px; text-align: center; width: 40px; float: right">2</li>
+</ul>
+</div>
 
 Three items:
 
-- 1
-- 2
-- 3
+<div style="width: 50%; height: 40px">
+<ul style="list-style-type: none">
+<li style="border: 1px solid white; height: 20px; text-align: center; width: 40px; float: right">1</li>
+<li style="border: 1px solid white; height: 20px; text-align: center; width: 40px; float: right">2</li>
+<li style="border: 1px solid white; height: 20px; text-align: center; width: 40px; float: right">3</li>
+</ul>
+</div>
 
-etc., while the "sticky" div was supposed to stay on the left. The challenge was when the div got too tall, or the number of list items caused it to wrap around to a new row; the vertical alignment to keep everything nice and centered is probably achievable in CSS, but I decided to be lazy:
+<br/>
+
+etc., while the “sticky” div was supposed to stay on the left. The challenge was when the div got too tall, or the number of list items caused it to wrap around to a new row; the vertical alignment to keep everything nice and centered is probably achievable in CSS, but I decided to be lazy:
 
 ```html
 <td style="vertical-align: middle">
@@ -56,8 +70,8 @@ blah blah blah
 </td>
 ```
 
-Duh. Seriously. Table cells do a bang-up job of vertical alignment under the worst of conditions. And I'm already in the middle of a table, so the work here was just a matter of adding the appropriate "colspans" elsewhere to account for my column's bifurcation.
+Duh. Seriously. Table cells do a bang-up job of vertical alignment under the worst of conditions. And I’m already in the middle of a table, so the work here was just a matter of adding the appropriate “colspans” elsewhere to account for my column’s bifurcation.
 
-P.S.: I love the word "bifurcate" and work it in to conversation when I can.
+P.S.: I love the word “bifurcate” and work it in to conversation when I can.
 
 

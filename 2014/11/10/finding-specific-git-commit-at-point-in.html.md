@@ -91,7 +91,7 @@ We then use xargs to feed list of commit ids one by one to a shell. The shell gr
 
 Next, we pipe this list to grep so we only match the MD5 we are looking for. We use -m1 to stop processing once the first match is found (this is important, as the extraction and checksumming of files is fairly expensive, so we want to short-circuit it as soon as possible). Once we have a match, we use the **cut** utility to extract just the commit ID, and pipe that back into **git log**. Voila! Now we know the very last time the file existed with that MD5, and can checkout the given commit. (The “terminated by signal 13” is normal and expected)
 
-You may wonder if a sha1sum would be better, as git uses those internally. Sadly, the process remains the same, as the algorithm git uses to generate its internal SHA1 checksums is sha1("blob " . length(file) . "\0" . contents(file)), and you can’t expect a random user to compute that and send it to you! :)
+You may wonder if a sha1sum would be better, as git uses those internally. Sadly, the process remains the same, as the algorithm git uses to generate its internal SHA1 checksums is `sha1("blob " . length(file) . "\0" . contents(file))`, and you can’t expect a random user to compute that and send it to you! :)
 
 #### Finding a git commit when given a file size
 
