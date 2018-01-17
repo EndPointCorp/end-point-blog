@@ -5,8 +5,6 @@ tags: database, environment, mysql, tools
 title: Copy Data Between MySQL Databases with Sequel Pro
 ---
 
-
-
 ### Sequel Pro
 
 <img alt="Sequel pro" border="0" height="350" src="/blog/2014/01/10/copy-data-between-mysql-databases-with/image-0.png" style="display:block" title="sequel-pro.png" width="450"/>
@@ -23,6 +21,5 @@ I simply selected the records I wanted to copy and used the “Copy as SQL INSER
 
 ### Bundles
 
-The Sequel Pro website describes [Bundles](https://www.sequelpro.com/bundles) which extend the functionality in various ways — including copying data as JSON. Very handy stuff. Many thanks to the [developers](https://web.archive.org/web/20140208071143/http://northofthree.com/) of this fine software. If you’re on OS X, be sure to give it a try.
-
+The Sequel Pro website describes [Bundles](https://www.sequelpro.com/bundles) which extend the functionality in various ways—including copying data as JSON. Very handy stuff. Many thanks to the [developers](https://web.archive.org/web/20140208071143/http://northofthree.com/) of this fine software. If you’re on OS X, be sure to give it a try.
 
