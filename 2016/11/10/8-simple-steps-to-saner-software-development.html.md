@@ -2,6 +2,7 @@
 author: "Dylan Wooters"
 title: "8 Simple Steps to Saner Software Development"
 tags: development, environment, devops
+gh_issue_number: 1365
 ---
 
 <div class="separator" style="clear: both; text-align: center;"><img border="0" src="/blog/2016/11/10/8-simple-steps-to-saner-software-development/layercake.jpg"/></div>

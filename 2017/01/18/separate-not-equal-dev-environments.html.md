@@ -2,6 +2,7 @@
 author: Dylan Wooters
 title: "Separate and Not Equal: Development Environments to Support People, Process, and Automation"
 tags: development, environment, devops
+gh_issue_number: 1367
 ---
 <div class="separator" style="clear: both; text-align: center;"><img border="0" src="/blog/2017/01/18/separate-not-equal-dev-environments/bauhausstage.jpg"/></div>
 

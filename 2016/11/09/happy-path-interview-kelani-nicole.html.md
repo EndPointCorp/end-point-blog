@@ -2,6 +2,7 @@
 author: "Liz Flyntz"
 title: "The Happy Path: An Interview with Design Strategist & Gallerist Kelani Nichole"
 tags: development, art, architecture
+gh_issue_number: 1366
 ---
 
 <div class="separator" style="clear: both; text-align: center;"><img border="0" src="/blog/2016/11/09/happy-path-interview-kelani-nicole/happypath.jpg"/></div>

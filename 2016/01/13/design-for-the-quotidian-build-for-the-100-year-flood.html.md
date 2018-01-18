@@ -2,6 +2,7 @@
 author: "Jonathan Blessing"
 title: "Design for the Quotidian. Build for the 100-Year Flood."
 tags: design, development
+gh_issue_number: 1363
 ---
 
 <div class="separator" style="clear: both; text-align: center;"><img border="0" src="/blog/2016/01/13/design-for-the-quotidian-build-for-the-100-year-flood/100YearFlood.jpg"/></div>

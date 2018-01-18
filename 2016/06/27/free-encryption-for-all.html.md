@@ -2,6 +2,7 @@
 author: "Lee Azzarello"
 title: "Free Encryption for All, In Our Time"
 tags: security
+gh_issue_number: 1364
 ---
 
 <div class="separator" style="clear: both; text-align: center;"><img border="0" src="/blog/2016/06/27/free-encryption-for-all/LAblog.jpg"/></div>
