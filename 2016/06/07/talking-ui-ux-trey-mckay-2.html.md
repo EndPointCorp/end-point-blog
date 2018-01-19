@@ -1,10 +1,10 @@
 ---
-author: Liz Flyntz
+author: "Liz Flyntz"
 title: "Talking UI/UX with Trey McKay - Part 2"
 tags: art, ecommerce, testing, community
 
 ---
-##The Second Installment of a Two-Part with Shapeways Designer Trey McKay
+##The Exciting Conclusion of a Two-Part with Shapeways Designer Trey McKay
 
 <div class="separator" style="clear: both; text-align: center;"><a href="/end-point-blog-git/2016/06/07/talking-ui-ux-trey-mckay-2/shapeways3dscan.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="/end-point-blog-git/2016/06/07/talking-ui-ux-trey-mckay-2/shapeways3dscan.jpg"/></a></div>
 
