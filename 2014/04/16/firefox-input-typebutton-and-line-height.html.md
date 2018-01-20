@@ -9,10 +9,10 @@ I recently discovered a discrepancy in the way Firefox treats inputs with a line
 
 This behavior seemed odd enough to me that I did some Googling to determine if this was recently introduced, a long standing issue, or something I was just doing wrong. I found some interesting discussions on the issue. Several of the search results used the word “bug” in the title though it appears to be more of a deliberate (though possibly outdated) “feature” instead. Along with the discussions, I also came across a couple of suggestions for a solution.
 
-First of all, I was able to locate a simple enough explanation of what’s causing the behavior. As [Rob Glazebrook](http://www.cssnewbie.com/input-button-line-height-bug/#.UzBquPldXgI) explains:
+First of all, I was able to locate a simple enough explanation of what’s causing the behavior. As [Rob Glazebrook](https://www.cssnewbie.com/input-button-line-height-bug/#.UzBquPldXgI) explains:
 
 >
-> Basically, Firefox is setting the line-height to “normal” on buttons and is enforcing this decision with an !important declaration.” and, “browser-defined !important rules cannot be over-ruled by author-defined !important rules. This rule cannot be overruled by a CSS file, an inline style — anything.
+> Basically, Firefox is setting the line-height to “normal” on buttons and is enforcing this decision with an !important declaration.” and, “browser-defined !important rules cannot be over-ruled by author-defined !important rules. This rule cannot be overruled by a CSS file, an inline style—anything.
 >
 
 Good news is I can stop experimenting hoping for different results.

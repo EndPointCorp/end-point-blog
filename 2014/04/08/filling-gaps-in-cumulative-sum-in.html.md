@@ -5,7 +5,7 @@ tags: postgres
 title: Filling Gaps in Cumulative Sum in Postgres
 ---
 
-I found an interesting problem. There was a table with some data, among which there was a date and an integer value. The problem was to get cumulative sum for all the dates, however including dates for which we don't have entries. In case of such dates we should use the last calculated sum.
+I found an interesting problem. There was a table with some data, among which there was a date and an integer value. The problem was to get cumulative sum for all the dates, however including dates for which we don’t have entries. In case of such dates we should use the last calculated sum.
 
 ### Example Data
 
@@ -95,7 +95,7 @@ My first idea was to use the generate_series() function, which can generate a se
  2014-02-05
 ```
 
-The generate_series() function arguments are (begin, end, interval). The function returns all timestamps from beginning to end with given interval. The return value is timestamp, so I had to cast it to date with '::date', which is a nice PostgreSQL shortcut for the standard syntax, CAST(generate_series(...) AS DATE).
+The generate_series() function arguments are (begin, end, interval). The function returns all timestamps from beginning to end with given interval. The return value is timestamp, so I had to cast it to date with ‘::date’, which is a nice PostgreSQL shortcut for the standard syntax, CAST(generate_series(...) AS DATE).
 
 I also want to use the first query to use the cumulative sum I calculated before. It can be simply achieved using the great WITH command which creates something like a temporary table, which can be queried:
 

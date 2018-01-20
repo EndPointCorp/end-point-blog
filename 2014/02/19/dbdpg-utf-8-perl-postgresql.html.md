@@ -7,9 +7,9 @@ title: DBD::Pg 3.0.0 and the utf8 flag
 
 
 
-One of the major changes in the recently released [3.0 version of DBD::Pg (the Perl driver for PostgreSQL)](/blog/2014/02/07/perl-postgresql-driver-dbdpg-300) was the handling of UTF-8 strings. Previously, you had to make sure to always set the mysterious "pg_enable_utf8" attribute. Now, everything should simply work as expected without any adjustments.
+One of the major changes in the recently released [3.0 version of DBD::Pg (the Perl driver for PostgreSQL)](/blog/2014/02/07/perl-postgresql-driver-dbdpg-300) was the handling of UTF-8 strings. Previously, you had to make sure to always set the mysterious “pg_enable_utf8” attribute. Now, everything should simply work as expected without any adjustments.
 
-When using an older DBD::Pg (version 2.x), any data coming back from the database was treated as a plain old string. Perl strings have an internal flag called "utf8" that tells Perl that the string should be treated as containing UTF-8. The only way to get this flag turned on was to set the **pg_enable_utf8** attribute to true before fetching your data from the database. When this flag was on, each returned string was scanned for high bit characters, and if found, the utf8 flag was set on the string. The Postgres server_encoding and client_encoding values were never consulted, so this one attribute was the only knob available. Here is a sample program we will use to examine the returned strings. The handy [Data::Peek module](http://search.cpan.org/~hmbrand/Data-Peek/Peek.pm) will help us see if the string has the utf8 flag enabled.
+When using an older DBD::Pg (version 2.x), any data coming back from the database was treated as a plain old string. Perl strings have an internal flag called “utf8” that tells Perl that the string should be treated as containing UTF-8. The only way to get this flag turned on was to set the **pg_enable_utf8** attribute to true before fetching your data from the database. When this flag was on, each returned string was scanned for high bit characters, and if found, the utf8 flag was set on the string. The Postgres server_encoding and client_encoding values were never consulted, so this one attribute was the only knob available. Here is a sample program we will use to examine the returned strings. The handy [Data::Peek module](http://search.cpan.org/~hmbrand/Data-Peek/Peek.pm) will help us see if the string has the utf8 flag enabled.
 
 ```
 #!perl
@@ -48,7 +48,7 @@ for my $x (sort keys %dm) {
 }
 ```
 
-Let's checkout an older version of DBD::Pg and run the script:
+Let’s checkout an older version of DBD::Pg and run the script:
 
 ```
 $ cd dbdpg.git; git checkout 2.18.1; perl Makefile.PL; make
@@ -97,7 +97,7 @@ PVMG("\342\230\203"\0) [UTF8 "\x{2603}"]
 
 ```
 
-Now our snowman has the correct length, and Data::Peek shows us that it has a UTF8 section. However, it's not a great solution, because it ignores client_encoding, has to scan every single string, and because it means having to always remember  to set an obscure attribute in your code every time you connect. Version 3.0.0 and up will check your [client_encoding](http://www.postgresql.org/docs/9.3/static/multibyte.html), and as long as it is UTF-8 (and it really ought to be!), it will automatically return strings with the utf8 flag set. Here is our snowman test on 3.0.0 with no explicit setting of pg_enable_utf8:
+Now our snowman has the correct length, and Data::Peek shows us that it has a UTF8 section. However, it’s not a great solution, because it ignores client_encoding, has to scan every single string, and because it means having to always remember  to set an obscure attribute in your code every time you connect. Version 3.0.0 and up will check your [client_encoding](http://www.postgresql.org/docs/9.3/static/multibyte.html), and as long as it is UTF-8 (and it really ought to be!), it will automatically return strings with the utf8 flag set. Here is our snowman test on 3.0.0 with no explicit setting of pg_enable_utf8:
 
 ```
 $ git checkout 3.0.0; perl Makefile.PL; make
@@ -120,11 +120,11 @@ Prior to DBD::Pg 3.0.0, the pg_enable_utf8 attribute was a simple boolean, so th
 
 #### Why does DBD::Pg flag everything as utf8, including simple ASCII strings with no high bit characters?
 
-The lovely thing about the UTF-8 scheme is that ASCII data fits nicely inside it with no changes. However, a bare ASCII string is still valid UTF-8, it simply doesn't have any high-bit characters. So rather than read each string as it comes back from the database and determine if it *must* be flagged as utf8, DBD::Pg simply flags every string as utf8 because it *can*. In other words, every string may or may not contain actual non-ASCII characters, but either way we simply flag it because it *may* contain them, and that is good enough. This saves us a bit of time and effort, as we no longer have to scan every single byte coming back from the database. This decision to mark everything as utf8 instead of only non-ASCII strings was the most contentious decision when this new version was being developed.
+The lovely thing about the UTF-8 scheme is that ASCII data fits nicely inside it with no changes. However, a bare ASCII string is still valid UTF-8, it simply doesn’t have any high-bit characters. So rather than read each string as it comes back from the database and determine if it *must* be flagged as utf8, DBD::Pg simply flags every string as utf8 because it *can*. In other words, every string may or may not contain actual non-ASCII characters, but either way we simply flag it because it *may* contain them, and that is good enough. This saves us a bit of time and effort, as we no longer have to scan every single byte coming back from the database. This decision to mark everything as utf8 instead of only non-ASCII strings was the most contentious decision when this new version was being developed.
 
 #### Why is only UTF-8 the only client_encoding that is treated special?
 
-There are two important reasons why we only look at UTF-8. First, the utf8 flag is the only flag Perl strings have, so there is no way of marking a string as any other type of encoding. Second, UTF-8 is unique inside Postgres as it is the universal client_encoding, which has a mapping from nearly every supported server_encoding. In other words, no matter what your server_encoding is set to, setting your client_encoding to UTF-8 is always a safe bet. It's pretty obvious at this point that UTF-8 has won the encoding wars, and is the de-facto encoding standard for Unicode.
+There are two important reasons why we only look at UTF-8. First, the utf8 flag is the only flag Perl strings have, so there is no way of marking a string as any other type of encoding. Second, UTF-8 is unique inside Postgres as it is the universal client_encoding, which has a mapping from nearly every supported server_encoding. In other words, no matter what your server_encoding is set to, setting your client_encoding to UTF-8 is always a safe bet. It’s pretty obvious at this point that UTF-8 has won the encoding wars, and is the de-facto encoding standard for Unicode.
 
 #### When is the client_encoding checked? What if I change it?
 
@@ -159,6 +159,6 @@ PVMG("\342\230\203"\0) [UTF8 "\x{2603}"]
 
 #### Why is Unicode so hard?
 
-Partly because human languages are a vast and complex system, and partly because we painted ourselves into a corner a bit in the early days of computing. Some of the statements presented above have been over-simplified. Unicode is much more than just using UTF-8 properly. The utf8 flag in Perl strings does not mean quite the same thing as a UTF-8 encoding. Interestingly, Perl even makes a distinction between "UTF8" and "UTF-8". It's quite a mess, but at the end of the day. Unicode support is far better [in Perl](http://perldoc.perl.org/perlunicode.html) than [any other language](http://dheeb.files.wordpress.com/2011/07/gbu.pdf).
+Partly because human languages are a vast and complex system, and partly because we painted ourselves into a corner a bit in the early days of computing. Some of the statements presented above have been over-simplified. Unicode is much more than just using UTF-8 properly. The utf8 flag in Perl strings does not mean quite the same thing as a UTF-8 encoding. Interestingly, Perl even makes a distinction between “UTF8” and “UTF-8”. It’s quite a mess, but at the end of the day, Unicode support is far better [in Perl](http://perldoc.perl.org/perlunicode.html) than [any other language](https://web.archive.org/web/20140306122242/https://dheeb.files.wordpress.com/2011/07/gbu.pdf).
 
 

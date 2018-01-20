@@ -29,7 +29,7 @@ $ git checkout 'HEAD@{Jan 17 2014}' ## do not do this
 warning: Log for 'HEAD' only goes back to Sat, 22 Feb 2014 11:47:33 -0500.
 Note: checking out 'HEAD@{Jan 17 2014}'.
 
-You are in 'detached HEAD' state. You can look around, make experimental
+You are in ‘detached HEAD’ state. You can look around, make experimental
 changes and commit them, and you can discard any commits you make in this
 state without impacting any branches by performing another checkout.
 
