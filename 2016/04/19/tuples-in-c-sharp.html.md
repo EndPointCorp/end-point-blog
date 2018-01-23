@@ -5,7 +5,7 @@ tags:  development
 
 ---
 
-<div class="separator" style="clear: both; text-align: center;"><a href="/end-point-blog-git/2016/04/19/tuples-in-c/TwinsTuples.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="/end-point-blog-git/2016/04/19/tuples-in-c/TwinsTuples.jpg"/></a></div>
+<div class="separator" style="clear: both; text-align: center;"><a href="/end-point-blog-git/2016/04/19/tuples-in-c-sharp/TwinsTuples.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="/end-point-blog-git/2016/04/19/tuples-in-c-sharp/TwinsTuples.jpg"/></a></div>
 
 Dynamic and functional languages have greatly influenced C# as the language has matured. The introduction of the 'var' and 'dynamic' keywords allowed C# developers to write code that resembled a dynamic language like Python, and the fluent method chaining of one of C# greatest features, LINQ, came from functional programming concepts.
 
