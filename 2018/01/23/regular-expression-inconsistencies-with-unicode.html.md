@@ -94,6 +94,53 @@ irb(main):002:0> /^[[:word:]]+$/ =~ "userاسم"
 
 JavaScript doesn’t support POSIX-style bracket expressions, and its backslash character classes are simple, straightforward lists of ASCII characters. The [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions#Using_special_characters) has simple explanations for each one.
 
+JavaScript regular expressions do accept a `/u` flag, but it does not affect shorthand character classes. Consider these examples in Node.js:
+
+```javascript
+> /^\w+$/.test("username");
+true
+> /^\w+$/.test("userﺎﺴﻣ");
+false
+> /^\w+$/u.test("username");
+true
+> /^\w+$/u.test("userﺎﺴﻣ");
+false
+```
+
+We can see that the `/u` flag has no effect on what `\w` matches. Now let’s look at Unicode character lengths in JavaScript:
+
+```javascript
+> '❤'.length
+1
+> '👩'.length
+2
+> '🀄️'.length
+3
+```
+
+Because of the way Unicode is implemented in JavaScript, strings with Unicode characters outside the BMP (Basic Multilingual Plane) will appear to be longer than they are.
+
+This can be accounted for in regular expressions with the `/u` flag, which only corrects character parsing, and does not affect shorthand character classes:
+
+```javascript
+> let mystr = "hi👩there";
+undefined
+> mystr.length
+9
+> /hi.there/.test(mystr);
+false
+> /hi..there/.test(mystr);
+true
+> /hi.there/u.test(mystr);  # note the /u from here on
+true
+> /hi..there/u.test(mystr);
+false
+> /hi..there/u.test("hi👩👩there");
+true
+```
+
+The excellent article ["💩".length === 2](http://blog.jonnew.com/posts/poo-dot-length-equals-two) by Jonathan New goes into detail about the why this is, and explores various solutions. It also addresses some legacy inconsistencies, like how the old HEAVY BLACK HEART character and other older Unicode symbols might be represented differently.
+
 #### PHP
 
 PHP’s documentation explains that `\w` matches letters, digits, and the underscore as defined by your locale. It’s not totally clear about how Unicode is treated, but it uses the PCRE (Perl Compatible Regular Expressions) library which supports a `/u` flag that can be used to enable Unicode matching in character classes:
@@ -162,8 +209,8 @@ Again, implementations vary a lot, so double check on your system before doing a
 
 As great as Unicode and regular expressions are, their implementations vary widely across various languages and tools, and that introduces far more unexpected behavior than I can write about in this post. Whenever you're going to use something with Unicode and regular expressions, make sure to check language specifications to make sure everything will work as expected.
 
-Of course, this topic has already been discussed and written about at great length, so here is a list of articles, tools, and blog posts that I’ve found interesting or useful:
+Of course, this topic has already been discussed and written about at great length. Here are some links worth checking out:
 
 - [The Absolute Minimum Every Software Developer Absolutely, Positively Must Know About Unicode and Character Sets (No Excuses!)](https://www.joelonsoftware.com/2003/10/08/the-absolute-minimum-every-software-developer-absolutely-positively-must-know-about-unicode-and-character-sets-no-excuses/) - This is an oft-referenced article by Joel Spolsky. It was written in 2003 but the wealth of valuable information within is still very relevant and it helps greatly in going from Unicode noob to having a comfortable, useful knowledge of many common issues.
-- ["💩".length === 2](http://blog.jonnew.com/posts/poo-dot-length-equals-two) - This blog post goes into some detail about the how and why JavaScript handles emoji as two characters and explores possible solutions. It also addresses some legacy inconsitencies, like how old HEAVY BLACK HEART character and other older Unicode symbols might be represented differently.
+- [ECMAScript regular expressions are getting better!](https://mathiasbynens.be/notes/es-regexp-proposals) - This article by a V8 developer at Google shows some nice JavaScript regular expression improvements planned for ES2018, including Unicode property escapes.
 - [ftfy for Python](https://github.com/LuminosoInsight/python-ftfy) - ftfy is a Python library that takes corrupt Unicode text and attempts to fix it as best it can. I haven’t yet had a chance to use it, but the examples are compelling and it’s definitely worth knowing about.
