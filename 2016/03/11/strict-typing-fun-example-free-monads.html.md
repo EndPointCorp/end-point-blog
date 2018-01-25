@@ -2,7 +2,7 @@
 author: Kamil Ciemniewski
 gh_issue_number: 1210
 tags: functional-programming, haskell, programming
-title: Strict typing fun example - Free Monads in Haskell
+title: Strict typing fun example — Free Monads in Haskell
 ---
 
 From time to time I’ve got a chance to discuss different programming paradigms with colleagues. Very often I like steering the discussion into the programming languages realm as it’s something that interests me a lot.
@@ -26,12 +26,12 @@ My goal is not to explain in detail all the subtleties of the code I’m going t
 
 The pattern I’m going to present is called the “Free Monad + Interpreter”. The idea behind it is that we can build [DSLs](https://en.wikipedia.org/wiki/Domain-specific_language) (domain specific languages) by making our functions not execute the code immediately, but to build the [AST](https://en.wikipedia.org/wiki/Abstract_syntax_tree) (abstract syntax tree) out of it and interpret it in different ways depending on the context.
 
-A fun example I came up with is a DSL for system [provisioning](https://en.wikipedia.org/wiki/Provisioning#Server_provisioning) scripts that — among many use cases one could come up with —allows to:
+A fun example I came up with is a DSL for system [provisioning](https://en.wikipedia.org/wiki/Provisioning#Server_provisioning) scripts that — among many use cases one could come up with — allows to:
 
 - present the AST in bash or zsh code or whatever other language like Python, Ruby or Perl
 - present the AST as a graph to visualize the execution
 - execute it directly, natively in Haskell
-- have an easy to comprehend set of provisioning instructions while lower level aspects like file handles etc. - being handled in common Haskell code used for the execution of ASTs
+- have an easy-to-comprehend set of provisioning instructions while lower level aspects like file handles etc. — being handled in common Haskell code used for the execution of ASTs
 
 There are potentially many more use cases but I just wanted to show you a couple — enough to hopefully make you a bit curious. In this post we’ll focus on interpreting the AST as a bash script.
 
@@ -233,8 +233,8 @@ Also, the similarity to the [Interpreter Pattern](https://en.wikipedia.org/wiki/
 
 If I managed to make you a bit curious about the aspects I presented here, here are some of the resources you might want to take a look at:
 
-- [Learn You a Haskell - online book](http://learnyouahaskell.com/chapters)
-- [Real World Haskell - online book](http://book.realworldhaskell.org/read/)
+- [Learn You a Haskell — online book](http://learnyouahaskell.com/chapters)
+- [Real World Haskell — online book](http://book.realworldhaskell.org/read/)
 - [A pleasant visual tutorial about functors and monads](http://adit.io/posts/2013-04-17-functors,_applicatives,_and_monads_in_pictures.html)
 - [Haskell Wiki article on monads](https://wiki.haskell.org/Monad)
 - [A fantastic intro to the Free Monad pattern](http://programmers.stackexchange.com/questions/242795/what-is-the-free-monad-interpreter-pattern)

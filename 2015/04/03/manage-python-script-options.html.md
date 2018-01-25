@@ -13,14 +13,12 @@ The main ideas for the options management are:
 
 - The script reads all config values from a config file, which is a simple ini file.
 - The script values can be overwritten by the command line values.
-- There are special command line arguments, which don't exist in the config file like:
-
-        - --help          - shows help in command line
-        - --create-config - creates a new config file with default values
-        - --config        - the path to the config file which should be used
-
+- There are special command line arguments, which don’t exist in the config file like:
+    - --help          — shows help in command line
+    - --create-config — creates a new config file with default values
+    - --config        — the path to the config file which should be used
 - If there is no value for a setting in the config file, and in the command line arguments, then a default value should be taken.
-- The option names in the configuration file, and the command line, must be the same. If there is repo-branch in the ini file, then there must be --repo-branch in the command line. However the variable where it will be stored in Python will be named repo_branch, as we cannot use - in the variable name.
+- The option names in the configuration file, and the command line, must be the same. If there is repo-branch in the ini file, then there must be --repo-branch in the command line. However the variable where it will be stored in Python will be named repo_branch, as we cannot use “-” in the variable name.
 
 ### The Basic Implementation
 
@@ -129,13 +127,13 @@ The main idea of this code was:
 - All the command line arguments parsing is done in the Options class.
 - The UpgradeService class reads the ini file.
 - The values from the Options class and the ini file are merged into the UpgradeService fields. So a config option like repo-branch will be stored in the upgrade_service.repo_branch field.
-- The upgrade_service.run() method does all the script's magic, however this is not important here.
+- The upgrade_service.run() method does all the script’s magic, however this is not important here.
 
 This way I can run the script with:
 
-- ./example.py - which will read the config file from /tmp/example.cfg, and the repo_branch should contain another.
-- ./example.py --config=/tmp/a.cfg - which will read the config from the /tmp/a.cfg.
-- ./example.py --help - which will show the help (this is automatically supported by the argparse module).
+- ./example.py — which will read the config file from /tmp/example.cfg, and the repo_branch should contain another.
+- ./example.py --config=/tmp/a.cfg — which will read the config from the /tmp/a.cfg.
+- ./example.py --help — which will show the help (this is automatically supported by the argparse module).
 - ./example.py --repo-branch=1764 -- and the repo_branch variable should contain 1764.
 
 ### The Problems
@@ -170,7 +168,7 @@ The code for the two implementations (the one described above, and the one descr
 
 I tried to implement a better solution, it should fix the bug, inform user about bad config values, be easier to change later, and give the same result: the values should be used as UpgradeService fields.
 
-The class Options is not that bad. We need to store the argparse configuration somewhere. I'd like just to have the option names, and default values declared in one place, without repeating it in different places.
+The class Options is not that bad. We need to store the argparse configuration somewhere. I’d like just to have the option names, and default values declared in one place, without repeating it in different places.
 
 I left the Options class, however I moved all the default values to another dictionary. There is no default value for any option in the argparse configuration. So now, if there is no command line option e.g. for --repo-branch then the repo_branch field in the object returned by the method Options.get_options() will be None.
 
@@ -216,7 +214,7 @@ So I have a dictionary with the default values. If I would have a dictionary wit
 
 ### Get Command Line Options Dictionary
 
-First let's make a dictionary with the command line values. This can be made with a simple:
+First let’s make a dictionary with the command line values. This can be made with a simple:
 
 ```python
 def parse_args():
@@ -228,7 +226,7 @@ However there are two things to remember:
 - There is the command --create-config which should be supported, and this is the best place to do it.
 - The arguments returned by the __dict__, will have underscores in the names, instead of dashes.
 
-So let's add creation of the new config file:
+So let’s add creation of the new config file:
 
 ```python
 def parse_args():
@@ -283,7 +281,7 @@ def read_config(fname, section_name=CONFIG_SECTION_NAME):
     return result
 ```
 
-And yes, I'm using dictionary comprehension there.
+And yes, I’m using dictionary comprehension there.
 
 ### Merging Time
 
@@ -302,7 +300,7 @@ And I need to merge them. Merging cannot be done automatically, as I need to:
 
 For merging I created this generic function, it can merge the first with the second dictionary, and can use the default values for the initial dictionary.
 
-At the end it uses the namedtuple to get a nice object with fields' names taken from the keys, and filled with the merged dictionary values.
+At the end it uses the namedtuple to get a nice object with fields’ names taken from the keys, and filled with the merged dictionary values.
 
 ```python
 def merge_options(first, second, default={}):
@@ -342,7 +340,7 @@ def merge_options(first, second, default={}):
 
 ### Dictionary Difference
 
-The last utility function I need is something to compare dictionaries. I think it is a great idea to inform the user that he has a strange option name in the config file. Let's assume, that:
+The last utility function I need is something to compare dictionaries. I think it is a great idea to inform the user that he has a strange option name in the config file. Let’s assume, that:
 
 - The main list of the options is the argparse option list.
 - The config file can contain less options, but cannot contain options which are not in the argparse list.
@@ -351,8 +349,8 @@ The last utility function I need is something to compare dictionaries. I think i
 The main idea behind the function is to convert the keys for the dictionaries to sets, and then make a difference of the sets.
 This must be done for the settings names in both directions:
 
-- config.keys - commandline.keys - if the result is not an empty set, then it is an error
-- commandline.keys - config.keys - if the result is not an empty set, then we should just show some information about this
+- config.keys — commandline.keys — if the result is not an empty set, then it is an error
+- commandline.keys — config.keys — if the result is not an empty set, then we should just show some information about this
 
 The below function gets two arguments first and second. It returns a tuple like (first-second, second-first). There is also the third argument, it is a list of the keys which we should ignore, like the create_config one.
 
@@ -389,7 +387,7 @@ This function:
 - Reads the dictionary with config file options from the read_config function.
 - Calculates the differences between the dictionaries using the dict_difference function.
 - Prints information about the options which can be set in the config file, but are not set currently. Those options are in the Options class, but are not in the config file.
-- Prints information about the options which are in the config file, but shouldn't be there, because they are not declared in the argparse options list, in the Options class.
+- Prints information about the options which are in the config file, but shouldn’t be there, because they are not declared in the argparse options list, in the Options class.
 - If there are any options which cannot be in the config file, the script exits with error code.
 - Then it merges all three dictionaries using the function merge_options, and returns the named tuple.
 

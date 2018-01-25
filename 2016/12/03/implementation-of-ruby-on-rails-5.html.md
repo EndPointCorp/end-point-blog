@@ -1,7 +1,7 @@
 ---
 author: Selvakumar Arumugam
 gh_issue_number: 1272
-tags: rails, javascript, websocket
+tags: rails, javascript
 title: Implementation of Ruby on Rails 5 Action Cable with Chat Application
 ---
 
@@ -11,7 +11,7 @@ WebSocket provides full-duplex communication between server and client using TCP
 
 WebSocket were adopted on RoR applications with help of third party libraries. But Rails 5 came up with a module called ActionCable which is seamlessly sits with existing framework and integrates the WebSocket to the application. ActionCable provides server and client side framework to implement WebSocket with the application.
 
-## ActionCable Overview:
+### ActionCable Overview:
 
 ##### Server Side:
 
@@ -26,10 +26,9 @@ The Client side javascript framework have all functionalities to interact with s
 **Prerequisite:**
 
 * Ruby 2.2.2 or newer is required for Rails 5. Install the gem package and Rails 5 on your environment.
-
 * ActionCable needs puma as development server to support multithreaded feature.
 
-Let's create the rails 5 chat application...! The application structure will have following default action cable related files.
+Let’s create the rails 5 chat application...! The application structure will have following default action cable related files.
 
 ```shell
 $ rails new action-cable-chat-example
@@ -50,7 +49,6 @@ $ rails new action-cable-chat-example
 Below models and controllers need to be created to have basic chat application.
 
 * User, Room and Message models
-
 * users, rooms, messages, sessions and welcome controllers
 
 The commands to create these items are listed below and skipping the code to focus on ActionCable but the code is available at [github to refer or clone](https://github.com/selvait90/rails5-actioncable-chat-application).
@@ -70,33 +68,33 @@ $ rails g controller sessions new create destroy
 $ rails g controller welcome about
 ```
 
-Make necessary changes to controllers, models and views to create chat application with chat rooms([Refer Github Repository](https://github.com/selvait90/rails5-actioncable-chat-application)). Start the application with help of puma server to verify the basic functionalities.
+Make necessary changes to controllers, models and views to create chat application with chat rooms ([Refer Github Repository](https://github.com/selvait90/rails5-actioncable-chat-application)). Start the application with help of puma server to verify the basic functionalities.
 
 ```shell
 $ rails s -b 0.0.0.0 -p 8000
 ```
 
-The application should meet following actions. The User will sign up or login with username to get the access new or existing rooms to chat. The user can write messages on the chat room but the messages won't appear to other users at the moment without refreshing the page. Let's see how ActionCable handles it.
+The application should meet following actions. The User will sign up or login with username to get the access new or existing rooms to chat. The user can write messages on the chat room but the messages won’t appear to other users at the moment without refreshing the page. Let’s see how ActionCable handles it.
 
-## Action Cable Implementation:
+### Action Cable Implementation:
 
 **Configurations:**
 
 There are few configurations to enable the ActionCable on the application.
 
-*config/routes.rb* - The server should be mounted on specific path to serve websocket cable requests.
+*config/routes.rb* — The server should be mounted on specific path to serve websocket cable requests.
 
 ```ruby
 mount ActionCable.server => '/cable'
 ```
 
-*app/views/layouts/application.html.erb* - The action_cable_meta_tag passes the WebSocket URL(which is configured on environment variable config.action_cable.url) to consumer.
+*app/views/layouts/application.html.erb* — The action_cable_meta_tag passes the WebSocket URL(which is configured on environment variable config.action_cable.url) to consumer.
 
 ```ruby
 <%= action_cable_meta_tag %>
 ```
 
-*app/assets/javascripts/cable.js* - The consumer should be created to establish the WebSocket connection to specified URL in action-cable-url.
+*app/assets/javascripts/cable.js* — The consumer should be created to establish the WebSocket connection to specified URL in action-cable-url.
 
 ```javascript
 (function() {
@@ -157,7 +155,7 @@ $ rails generate channel Messages
  app/assets/javascripts/channels/messages.js
 ```
 
-*messages_controller.rb* - Whenever the user writes a message in the room, it will be broadcasted to 'messages' channel after the save action.
+*messages_controller.rb* — Whenever the user writes a message in the room, it will be broadcasted to “messages” channel after the save action.
 
 ```html
 class MessagesController < ApplicationController
@@ -180,7 +178,7 @@ class MessagesController < ApplicationController
 end
 ```
 
-*messages_channel.rb* - Messages channel streams those broadcasted messages to subscribed clients through established WebSocket connection.
+*messages_channel.rb* — Messages channel streams those broadcasted messages to subscribed clients through established WebSocket connection.
 
 ```ruby
 class MessagesChannel < ApplicationCable::Channel
@@ -206,6 +204,6 @@ App.messages = App.cable.subscriptions.create('MessagesChannel', {
 
 These ActionCable channel related changes could make the Chat application to receive the messages on realtime.
 
-## Conclusion:
+### Conclusion:
 
 Rails Action Cable adds additional credits to framework by supplying the promising needed realtime feature. In addition, It could be easily implemented on existing Rails application with the nature of interacting with existing system and similar structural implementation. Also, The strategy of the channels workflow can be applied to any kind of live data feeding. The production stack uses redis by default (config/cable.yml) to send and receive the messages through channels.

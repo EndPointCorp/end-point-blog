@@ -13,7 +13,7 @@ title: Raw Packet Manipulation with Scapy
 
 ### Using Scapy
 
-When getting started with Scapy, it's useful to start to understand how all the aspects of the connection get encapsulated into the Python syntax. Here is an example of creating a simple IP request:
+When getting started with Scapy, it’s useful to start to understand how all the aspects of the connection get encapsulated into the Python syntax. Here is an example of creating a simple IP request:
 
 ```python
 Welcome to Scapy (2.2.0)
@@ -29,7 +29,7 @@ Welcome to Scapy (2.2.0)
 10
 ```
 
-In this case I created a single request which was point from one host on my network to the default gateway on the same network. Scapy will allow the capability to create any TCP/IP request in raw form. There are a huge number of possible options for Scapy that can be applied, as well as huge number of possible packet types defined. The [documentation](http://www.secdev.org/projects/scapy/doc/) with these options and packet types is available on the main site for Scapy.
+In this case I created a single request which was point from one host on my network to the default gateway on the same network. Scapy will allow the capability to create any TCP/IP request in raw form. There are a huge number of possible options for Scapy that can be applied, as well as huge number of possible packet types defined. The [documentation](https://scapy.readthedocs.io/en/latest/) with these options and packet types is available on the main site for Scapy.
 
 ### Creating custom scripts with Scapy
 
@@ -93,6 +93,6 @@ Received 5 packets, got 1 answers, remaining 0 packets
 
 ### Conclusions
 
-Scapy is a powerful tool, if a bit daunting in syntax initially. Creating raw TCP/IP packets systematically will probably challenge most people's understanding of the TCP/IP stack (it certainly did mine!) but exposing this level of configuration has serious advantages. Full control of the requests and responses as well as ability to add custom Python logic allows Scapy to become a packet foundry which you can use for things like unit testing of web applications, verification of state of an unknown network, etc. I will definitely be using Scapy in the future when performing raw HTTP testing of web applications.
+Scapy is a powerful tool, if a bit daunting in syntax initially. Creating raw TCP/IP packets systematically will probably challenge most people’s understanding of the TCP/IP stack (it certainly did mine!) but exposing this level of configuration has serious advantages. Full control of the requests and responses as well as ability to add custom Python logic allows Scapy to become a packet foundry which you can use for things like unit testing of web applications, verification of state of an unknown network, etc. I will definitely be using Scapy in the future when performing raw HTTP testing of web applications.
 
 

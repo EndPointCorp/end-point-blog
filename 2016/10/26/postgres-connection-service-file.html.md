@@ -7,9 +7,9 @@ title: Postgres connection service file
 
 
 
-<div class="separator" style="clear: both; float:right; text-align: center;"><a href="/blog/2016/10/26/postgres-connection-service-file/image-0.jpeg" imageanchor="1" style="clear: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" src="/blog/2016/10/26/postgres-connection-service-file/image-0.jpeg"/></a><br/><small>(<a href="https://flic.kr/p/fMYx1K">Photo</a> by<a href="https://www.flickr.com/photos/francisco-javier-garcia-orts/">Francisco Javier Garcia Orts</a>)</small></div>
+<div class="separator" style="clear: both; float:right; text-align: center;"><a href="/blog/2016/10/26/postgres-connection-service-file/image-0.jpeg" imageanchor="1" style="clear: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" src="/blog/2016/10/26/postgres-connection-service-file/image-0.jpeg"/></a><br/><small>(<a href="https://flic.kr/p/fMYx1K">Photo</a> by <a href="https://www.flickr.com/photos/francisco-javier-garcia-orts/">Francisco Javier Garcia Orts</a>)</small></div>
 
-[Postgres](http://postgres.org) has a wonderfully helpful (but often overlooked) feature called the 
+[Postgres](https://www.postgresql.org/) has a wonderfully helpful (but often overlooked) feature called the 
 connection service file (its [documentation](https://www.postgresql.org/docs/current/static/libpq-pgservice.html) is quite sparse).
 In a nutshell, it defines connection aliases you can use from any client. These connections 
 are given simple names, which then map behind the scenes to specific connection parameters, 
@@ -17,7 +17,7 @@ such as host name, Postgres port, username, database name, and many others. This
 extraordinarily useful feature to have.
 
 The connection service file is named pg_service.conf and is setup in a known 
-location. The entries inside are in the common "INI file" format: a named section, followed by its 
+location. The entries inside are in the common “INI file” format: a named section, followed by its 
 related entries below it, one per line. To access a named section, just use the 
 service=*name* string in your application.
 
@@ -59,7 +59,7 @@ be used in a connection service file.
 
 The connection service file is not just limited to basic connections. You can 
 have sections that only differ by user, for example, or in their SSL requirements, 
-making it easy to switch things around by a simple change in the service name. It's also 
+making it easy to switch things around by a simple change in the service name. It’s also 
 handy for pgbouncer connections, which typically run on non-standard ports. Be creative 
 in your service names, and keep them distinct from each other to avoid fat fingering the wrong 
 one. Comments are allowed and highly encouraged. Here is a slightly edited service file that was recently 
@@ -95,8 +95,8 @@ dbname=tiger
 connect_timeout=10
 ```
 
-You may notice above that "connect_timeout" is repeated in each section. Currently, there is no way to 
-set a parameter that applies to all sections, but it's a very minor problem. I also usually set 
+You may notice above that “connect_timeout” is repeated in each section. Currently, there is no way to 
+set a parameter that applies to all sections, but it’s a very minor problem. I also usually set 
 the environment variable PGCONNECT_TIMEOUT to 10 in by .bashrc, but putting 
 it in the pg_service.conf file ensures it is always set regardless of what user I am.
 
@@ -115,7 +115,7 @@ like relying on those. One less thing to worry about by simply using the global 
 
 The location of the global pg_service.conf file can be found by using the [pg_config program](https://www.postgresql.org/docs/current/static/app-pgconfig.html) 
 and looking for the SYSCONFDIR entry. Annoyingly, pg_config is not installed 
-by default on many systems, as it is considered part of the "development" packages 
+by default on many systems, as it is considered part of the “development” packages 
 (which may be named postgresql-devel, libpq-devel, or libpq-dev). While using pg_config 
 is the best solution, there are times it cannot be installed (e.g. working on an important production 
 box, or simply do not have root). While you can probably discover the right location 
@@ -126,7 +126,7 @@ Unix tools.
 When you invoke psql with a request for a service file entry, it has to look for the 
 service files. We can use this information to quickly find the expected location of the 
 global pg_service.conf file. If you have [the strace program](https://en.wikipedia.org/wiki/Strace) installed, just run psql through strace, 
-grep for "pg_service", and you should see two **stat()** calls pop up: one for the 
+grep for “pg_service”, and you should see two **stat()** calls pop up: one for the 
 per-user service file, and one for the global service file we are looking for:
 
 ```

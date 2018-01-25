@@ -44,7 +44,7 @@ def page_cache_path(path, extension = nil)
 end
 ```
 
-See, it's not that much! The rest of the gem was not modified much, and the interaction from the Rails app to this gem was maintained (via a controller class method :caches_page). The one thing to note above is the raw option passed in the call to write the cache, which forces the content to be served as a raw string.
+See, it’s not that much! The rest of the gem was not modified much, and the interaction from the Rails app to this gem was maintained (via a controller class method :caches_page). The one thing to note above is the raw option passed in the call to write the cache, which forces the content to be served as a raw string.
 
 ### Step 2: Set up nginx to look for memcached files
 
@@ -71,11 +71,11 @@ location / {
   }
 ```
 
-The desired logic here is to look up the memcached pages for all requests. If there is no memcached page, nginx should fallback to serving the standard Rails page with a modified URL ("/nocache/" prepended). Without this URL modification, nginx would get stuck in an infinite loop of looking up all URLs in memcache repeatedly.
+The desired logic here is to look up the memcached pages for all requests. If there is no memcached page, nginx should fallback to serving the standard Rails page with a modified URL (“/nocache/” prepended). Without this URL modification, nginx would get stuck in an infinite loop of looking up all URLs in memcache repeatedly.
 
 ### Step 3: Setup a Rack::Rewrite rule to lookup /nocache/ pages.
 
-Due to the infinite loop problem, Rails was receiving all requests with /nocache/ prepended to it. A simple solution to handle this was to add a Rack::Rewrite rule to internally rewrite the URL to ignore the /nocache/ fragment, shown below. The nice thing about this change is that if caching is disabled (e.g. on the development server), this rewrite rule won't affect any requests.
+Due to the infinite loop problem, Rails was receiving all requests with /nocache/ prepended to it. A simple solution to handle this was to add a Rack::Rewrite rule to internally rewrite the URL to ignore the /nocache/ fragment, shown below. The nice thing about this change is that if caching is disabled (e.g. on the development server), this rewrite rule won’t affect any requests.
 
 ```nohighlight
 config.middleware.insert_before(Rack::Runtime, Rack::Rewrite) do
@@ -91,12 +91,12 @@ Finally, I had to add cache invalidation throughout the application where the me
 - Inside a Rails model, via ActiveRecord callbacks.
 - Inside a module that decorates an ActiveRecord model via callbacks.
 
-Choose your poison wisely here. A controller makes sense, but in the case where [RailsAdmin](https://github.com/sferik/rails_admin) is utilized for all admin CRUD methods, it's not much different (IMHO) to extend the controllers as it is to extend the models. I'm a fan of ActiveRecord callbacks, so I went with option 2.
+Choose your poison wisely here. A controller makes sense, but in the case where [RailsAdmin](https://github.com/sferik/rails_admin) is utilized for all admin CRUD methods, it’s not much different (IMHO) to extend the controllers as it is to extend the models. I’m a fan of ActiveRecord callbacks, so I went with option 2.
 
 ### Final Thoughts
 
 Logs were invaluable here. Most importantly, the memcached log was invaluable here to confirm the infinite loop bug. Also, the Rails dev log was naturally helpful once I solved the nginx issue to handle the Rack::Rewrite rule.
 
-One important note here is that this type of caching does not take advantage of [expiration via model timestamp cache keys](https://signalvnoise.com/posts/3113-how-key-based-cache-expiration-works) introduced in Rails 4. But, it wouldn't be able to, because nginx needs a quick lookup on the URL in memcache to serve the file, and we ideally don't want to hit the database to try to figure out what that key should be.
+One important note here is that this type of caching does not take advantage of [expiration via model timestamp cache keys](https://signalvnoise.com/posts/3113-how-key-based-cache-expiration-works) introduced in Rails 4. But, it wouldn’t be able to, because nginx needs a quick lookup on the URL in memcache to serve the file, and we ideally don’t want to hit the database to try to figure out what that key should be.
 
 

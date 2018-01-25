@@ -5,11 +5,11 @@ tags: payments, spree, ecommerce
 title: 'The merchant login ID or password is invalid or the account is inactive, and to how to fix it in Spree'
 ---
 
-Authorize.net has disabled the RC4 cipher suite on their test server. Their production server update will follow soon. So, in order to ensure your, or your client's, site(s) do not experience any interruption in payment processing it is wise to place a test order in the Authorize.net test environment. [See details.](http://app.payment.authorize.net/e/es.aspx?s=986383348&e=1086337)
+Authorize.net has disabled the RC4 cipher suite on their test server. Their production server update will follow soon. So, in order to ensure your, or your client’s, site(s) do not experience any interruption in payment processing it is wise to place a test order in the Authorize.net test environment.
 
-The projects I was testing were all [Spree](https://spreecommerce.com/) Gem (2.1.x). The Spree Gem uses the [ActiveMerchant ](https://github.com/activemerchant/active_merchant)Gem (in Spree 2.1.x it's ActiveMerchant version 1.34.x). Spree allows you to sign into the admin and select which server your Authorize.net payment method will hit- production or test. There is another option for selecting a "Test *Mode*" transaction. The difference between a test **server** transaction and a test **mode** transaction is explained quite succinctly on the [Authorize.net documentation](http://developer.authorize.net/hello_world/testing_guide/). To summarize it, test **server** transactions are never sent to financial institutions for processing but are stored in Authorize.net (so you can see their details). Transactions in test **mode** however are not stored and return a transaction ID of zero.
+The projects I was testing were all [Spree](https://spreecommerce.com/) Gem (2.1.x). The Spree Gem uses the [ActiveMerchant ](https://github.com/activemerchant/active_merchant)Gem (in Spree 2.1.x it’s ActiveMerchant version 1.34.x). Spree allows you to sign into the admin and select which server your Authorize.net payment method will hit- production or test. There is another option for selecting a “Test *Mode*” transaction. The difference between a test **server** transaction and a test **mode** transaction is explained quite succinctly on the [Authorize.net documentation](http://developer.authorize.net/hello_world/testing_guide/). To summarize it, test **server** transactions are never sent to financial institutions for processing but are stored in Authorize.net (so you can see their details). Transactions in test **mode** however are not stored and return a transaction ID of zero.
 
-I wanted to use my Authorize.net test account to ensure my clients were ready for the RC4 Cypher Suite disablement. I ran across a few strange things. First, for three sites, no matter what I did, I kept getting errors saying my Authorize.net account was either inactive or I was providing the wrong credentials. I signed in to Authorize.net and verified my account was active. I triple checked the credentials, they were right. So, I re-read the Spree docs thinking that perhaps I needed to use a special word or format to actually use the test server ("test" versus "Test" or something like that).
+I wanted to use my Authorize.net test account to ensure my clients were ready for the RC4 Cypher Suite disablement. I ran across a few strange things. First, for three sites, no matter what I did, I kept getting errors saying my Authorize.net account was either inactive or I was providing the wrong credentials. I signed in to Authorize.net and verified my account was active. I triple checked the credentials, they were right. So, I re-read the Spree docs thinking that perhaps I needed to use a special word or format to actually use the test server (“test” versus “Test” or something like that).
 
 Below is a screenshot of the test payment method I had created and was trying to use.
 
@@ -110,7 +110,7 @@ def provider
 end
 ```
 
-At this point I was satisfied that Spree was sending a server param. I also knew Spree was setting Active Merchant's Base.gateway_mode as intended. I then reviewed [active_merchant/lib/active_merchant/billing/gateway.rb
+At this point I was satisfied that Spree was sending a server param. I also knew Spree was setting Active Merchant’s Base.gateway_mode as intended. I then reviewed [active_merchant/lib/active_merchant/billing/gateway.rb
 ](https://github.com/activemerchant/active_merchant/blob/master/lib/active_merchant/billing/gateway.rb) once more
 
 ```ruby
@@ -128,7 +128,7 @@ def self.test?
 end
 ```
 
-So, that's it! We know from the exceptions I raised that Spree is sending a test key and a test_mode key. They seem to be the same value but with different keys (I'm guessing that's a mistake), and they both just seem to indicate if the test **mode** checkbox was checked or not in the Spree admin. However, Base.test? is the **server** selection and comes from whatever anyone enters in the server input box in the Spree admin. So, we just need to update the ternary operator to check if @options[:test] (test *mode*) **or** Base.test? (test *server*) is true.
+So, that’s it! We know from the exceptions I raised that Spree is sending a test key and a test_mode key. They seem to be the same value but with different keys (I’m guessing that’s a mistake), and they both just seem to indicate if the test **mode** checkbox was checked or not in the Spree admin. However, Base.test? is the **server** selection and comes from whatever anyone enters in the server input box in the Spree admin. So, we just need to update the ternary operator to check if @options\[:test\] (test *mode*) **or** Base.test? (test *server*) is true.
 
 Since this is Spree, I created a decorator to override the test? method.
 

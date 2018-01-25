@@ -7,11 +7,11 @@ title: Adding Bash Completion To a Python Script
 
 Bash has quite a nice feature, you can write a command in a console, and then press <TAB> twice. This should should you possible options you can write for this command.
 
-I will show how to integrate this mechanism into a custom python script with two types of arguments. What's more, I want this to be totally generic. I don't want to change it when I will change the options, or change config files.
+I will show how to integrate this mechanism into a custom python script with two types of arguments. What’s more, I want this to be totally generic. I don’t want to change it when I will change the options, or change config files.
 
 This script accepts two types of arguments. One type contains mainly flags beginning with '--', the other type is a host name taken from a bunch of chef scripts.
 
-Let's name this script show.py - it will show some information about the host. This way I can use it with:
+Let’s name this script show.py—it will show some information about the host. This way I can use it with:
 
 ```bash
 show.py szymon
@@ -91,7 +91,7 @@ _show_complete()
 complete -F _show_complete show.py
 ```
 
-The last thing was to source this file, so I've added the below line in my ~/.bashrc.
+The last thing was to source this file, so I’ve added the below line in my ~/.bashrc.
 
 ```bash
 source $CHEF_DIR/repo_scripts/show.bash-completion

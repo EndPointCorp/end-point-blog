@@ -14,7 +14,7 @@ David and I are really fortunate to work at End Point and work remotely from our
 <tr><td class="tr-caption" style="text-align: center;">Our home office in Lawrence</td></tr>
 </tbody></table>
 
-## What I love
+### What I love
 
 #### Being together all the time
 
@@ -37,7 +37,7 @@ I always like to have a work buddy. Having a spouse next to you to proofread you
 <tr><td class="tr-caption" style="text-align: center;">Near the End Point NYC Office</td></tr>
 </tbody></table>
 
-## Things that take work
+### Things that take work
 
 #### Not over-talking
 
@@ -54,7 +54,7 @@ When you know so much about a person’s workload and personal life, you can som
 
 By far the biggest challenge for me are the social limitations that working from home with a spouse inevitably creates. I used to work for a company of 400, so co-working from home with only one other person is quite a change. I’m still looking to fill up my social needs in other ways. The upside here is that I’ve become really close with my neighbors.
 
-## Thinking about becoming a co-working couple?
+### Thinking about becoming a co-working couple?
 
 I’m pretty new at this, so just a couple notes. Give me a few years … maybe I’ll have more!
 

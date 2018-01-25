@@ -38,4 +38,4 @@ psql (PostgreSQL) 9.1.4
 contains support for command-line editing
 ```
 
-You can find more information in the program manual using man pg_wrapper or at [pg_wrapper manual](http://manpages.ubuntu.com/manpages/precise/man1/pg_wrapper.1.html")
+You can find more information in the program manual using man pg_wrapper or at [pg_wrapper manual](http://manpages.ubuntu.com/manpages/precise/man1/pg_wrapper.1.html)

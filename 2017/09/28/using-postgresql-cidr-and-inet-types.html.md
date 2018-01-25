@@ -76,7 +76,7 @@ phin=> select * from orders where network(ip) = (
 (3 rows)
 ```
 
-Or, if we’ve identified 23.239.20.0/20 as a problematic network, we can use the <<= "is contained by or equals" operator:
+Or, if we’ve identified 23.239.20.0/20 as a problematic network, we can use the <<= “is contained by or equals” operator:
 
 ```sql
 phin=> select * from orders where ip <<= inet '23.239.20.0/20'

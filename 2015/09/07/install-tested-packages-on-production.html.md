@@ -9,11 +9,11 @@ title: Install Tested Packages on Production Server
 
 One of our customers has us to do scheduled monthly OS updates following a specific rollout process. First week of the month, we will update the test server and wait for a week to confirm that everything looks as expected in the application; then next week we apply the very same updates to the production servers.
 
-Since not long ago we used to use aptitude to perform system updates. While doing the update on the test server, we also executed aptitude on production servers to "freeze" the same packages and version to be updated on following week. That helped to ensure that only tested packages would have been updated on the production servers afterward.
+Since not long ago we used to use aptitude to perform system updates. While doing the update on the test server, we also executed aptitude on production servers to “freeze” the same packages and version to be updated on following week. That helped to ensure that only tested packages would have been updated on the production servers afterward.
 
-Since using aptitude in that way wasn't particularly efficient, we decided to use directly apt-get to stick with our standard server update process. We still wanted to keep our test-production synced updated process cause software updates released between the test and the production server update are untested in the customer specific environment. Thus we needed to find a method to filter out the unneeded packages for the production server update.
+Since using aptitude in that way wasn’t particularly efficient, we decided to use directly apt-get to stick with our standard server update process. We still wanted to keep our test-production synced updated process cause software updates released between the test and the production server update are untested in the customer specific environment. Thus we needed to find a method to filter out the unneeded packages for the production server update.
 
-In order to do so we have developed a shell script that automates the process and maintain the package version in test and production in sync during OS updates. I'll explain the processes involved used on both the test and the production servers.
+In order to do so we have developed a shell script that automates the process and maintain the package version in test and production in sync during OS updates. I’ll explain the processes involved used on both the test and the production servers.
 
 ### Test Server Update Process:
 

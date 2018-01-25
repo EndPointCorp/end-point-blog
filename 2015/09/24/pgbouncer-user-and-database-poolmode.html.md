@@ -45,7 +45,7 @@ no problems with it being ARM.
 
 To start a new server (once I entered my billing information, and pasted
 my public SSH key in), I simply clicked the create server button, chose
-"Debian Jessie (8.1)", and then create server again. 60 seconds later,
+“Debian Jessie (8.1)”, and then create server again. 60 seconds later,
 I had an IP address to login as root. The first order of business, as always,
 is to make sure things are up to date and install some important tools:
 
@@ -108,9 +108,9 @@ root@scw-56578065:~# psql -U postgres -l
 (3 rows)
 ```
 
-SQL_ASCII? Yuck, how did that get in there?! That's an absolutely terrible
+SQL_ASCII? Yuck, how did that get in there?! That’s an absolutely terrible
 encoding to be using in 2015, so we need to change that right away. Even
-though it won't affect this demonstration, there is the principle of the matter.
+though it won’t affect this demonstration, there is the principle of the matter.
 We will create a new database with a sane encoding, then create some test databases
 based on that.
 
@@ -145,7 +145,7 @@ postgres@scw-56578065:~$ psql -U alice test1 -tc 'show effective_cache_size'
  847283
 ```
 
-Now that Postgres is up and running, let's install PgBouncer. Since we are
+Now that Postgres is up and running, let’s install PgBouncer. Since we are
 showing off some 1.6 features, it is unlikely to be available via packaging,
 but we will check anyway.
 
@@ -163,11 +163,11 @@ postgres@scw-56578065:~/pgbouncer$ git checkout pgbouncer_1_6_1
 postgres@scw-56578065:~/pgbouncer$ ./autogen.sh
 ```
 
-The autogen.sh script fails rather quickly with an error about libtool - which is to be expected,
+The autogen.sh script fails rather quickly with an error about libtool—which is to be expected,
 as PgBouncer comes with a small list of required packages in order to build it. Because monkeying
-around with all those prerequisites can get tiresome, apt-get provides an option called "build-dep"
+around with all those prerequisites can get tiresome, apt-get provides an option called “build-dep”
 that (in theory!) allows you to download everything needed to build a specific package. Before doing
-that, let's drop back to root and give the postgres user full sudo permission, so we don't have to
+that, let’s drop back to root and give the postgres user full sudo permission, so we don’t have to
 keep jumping back and forth between accounts:
 
 ```
@@ -186,8 +186,8 @@ The following NEW packages will be installed:
 postgres@scw-56578065:~/pgbouncer$ ./autogen.sh
 ```
 
-Whoops, another build failure. Well, build-dep isn't perfect, turns out we still need
-a few packages. Let's get this built, create some needed directories, tweak permissions,
+Whoops, another build failure. Well, build-dep isn’t perfect, turns out we still need
+a few packages. Let’s get this built, create some needed directories, tweak permissions,
 find the location of the installed PgBouncer ini file, and make a few changes to it:
 
 ```
@@ -221,7 +221,7 @@ free to use **'/tmp'**!
 The bottom line is that we can use port 5432 for both Postgres and PgBouncer, and control which one
 is used by setting the host parameter when connecting (which, when starting with a slash, is
 actually the location of the socket file). However, note that only one of them can be used when
-connecting via TCP/IP. Enough of all that, let's make sure PgBouncer at least
+connecting via TCP/IP. Enough of all that, let’s make sure PgBouncer at least
 starts up!
 
 ```
@@ -232,7 +232,7 @@ postgres@scw-56578065:~/pgbouncer$
 ```
 
 As expected, the pgbouncer program gave us a single line of information before going into background daemon mode, per
-the **-d** argument. Since both Postgres and PgBouncer are running on port 5432, let's make our psql prompt
+the **-d** argument. Since both Postgres and PgBouncer are running on port 5432, let’s make our psql prompt
 a little more informative, by having it list the hostname via **%M**. If the hostname matches the unix_socket_directory
 value that psql was compiled with, then it will simply show **'[local]'**. Thus, seeing **'/tmp'** indicates we are
 connected to PgBouncer, and seeing **'[local]'** indicates we are connected to Postgres (via /var/run/postgresql).
@@ -242,10 +242,10 @@ connected to PgBouncer, and seeing **'[local]'** indicates we are connected to P
 postgres@scw-56578065:~/pgbouncer$ echo "\set PROMPT1 '%n@%/:%>%R%x%#%M '" > ~/.psqlrc
 ```
 
-Let's confirm that each PgBouncer connection is in the expected mode. Database test1 should be using the
-default pool_mode, 'session'. Database test2 should be using a 'transaction' pool_mode, while 'statement' mode
+Let’s confirm that each PgBouncer connection is in the expected mode. Database test1 should be using the
+default pool_mode, “session”. Database test2 should be using a “transaction” pool_mode, while “statement” mode
 should be used by both test3 and test4. See my previous blog post on
-[ways to detect the various pool_modes of pgbouncer](/blog/2015/05/18/connected-to-pgbouncer-or-postgres). First, let's connect to normal Postgres and
+[ways to detect the various pool_modes of pgbouncer](/blog/2015/05/18/connected-to-pgbouncer-or-postgres). First, let’s connect to normal Postgres and
 verify we are not connected to PgBouncer by trying to change to a non-existent database. **FATAL** means
 PgBouncer, and **ERROR** means Postgres:
 
@@ -265,8 +265,8 @@ postgres@test1:5432=#[local:/tmp] \c sewdiegosew
 ERROR:  No such database: sewdiegosew
 ```
 
-Now let's confirm that we have database-specific pool modes working. If you recall from above, test2 is set to transaction mode,
-and test3 is set to statement mode. We determine the mode by running three tests. First, we do a "BEGIN; ROLLBACK;" - if this fails,
+Now let’s confirm that we have database-specific pool modes working. If you recall from above, test2 is set to transaction mode,
+and test3 is set to statement mode. We determine the mode by running three tests. First, we do a “BEGIN; ROLLBACK;”—if this fails,
 it means we are in statement mode. Next, we try to PREPARE and EXECUTE a statement. If this fails, it means
 we are in a transaction mode. Finally, we try to switch to a non-existent database. If it returns an ERROR, it
 means we are in session mode. If it returns a FATAL, it means we are not connected to PgBouncer at all.
@@ -325,7 +325,7 @@ alice@test4:5432=>[local:/tmp] begin;
 ERROR:  Long transactions not allowed
 ```
 
-Let's see if we can change the pool_mode for Alice to transaction, even if we
+Let’s see if we can change the pool_mode for Alice to transaction, even if we
 are connected to test4 (which is set to statement mode). All it takes is a quick entry
 to the **pgbouncer.ini** file, in a section we must create called **[users]**:
 
@@ -353,6 +353,6 @@ ERROR:  prepared statement "abc" does not exist
 ## test4 is thus running in transaction pool_mode due to the [users] setting
 ```
 
-There you have it - database-specific and user-specific PgBouncer pool_modes. Note that you cannot
+There you have it—database-specific and user-specific PgBouncer pool_modes. Note that you cannot
 yet do user *and* database specific pool_modes, such as if you want Alice to use transaction
 mode for database test4 and statement mode for test5.

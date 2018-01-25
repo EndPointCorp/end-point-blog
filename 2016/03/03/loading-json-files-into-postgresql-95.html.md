@@ -7,7 +7,7 @@ title: Loading JSON Files Into PostgreSQL 9.5
 
 In the [previous](/2016/02/storing-statistics-json-data-in.html) [posts](/2016/02/converting-json-to-postgresql-values.html) I have described a simple database table for storing JSON values, and a way to unpack nested JSON attributes into simple database views. This time I will show how to write a very simple query (thanks to PostgreSQL 9.5) to load the JSON files
 
-Here's a simple Python script to load the database.
+Here’s a simple Python script to load the database.
 
 This script is made for PostgreSQL 9.4 (in fact it should work for 9.5 too, but is not using a nice new 9.5 feature described below).
 
@@ -116,17 +116,17 @@ if empty_files:
         logger.info(" >>> {}".format(f))
 ```
 
-I have created two example files in the 'data' directory, the output of this script is:
+I have created two example files in the “data” directory, the output of this script is:
 
 ```python
 Found 2 files to process
  [Elapsed Time: 0:00:00] [ETA:  0:00:00] |#####################################|
 ```
 
-Yey, so it works. What's more, I can run the script again on the same files,
+Yey, so it works. What’s more, I can run the script again on the same files,
 and it will try loading the same data without any errors. Do you rememember that
-there was an EXCLUDE constraint which doesn't allow us to load any JSON for the same
-country, and installation, and overlapping time range? That's why the query is so
+there was an EXCLUDE constraint which doesn’t allow us to load any JSON for the same
+country, and installation, and overlapping time range? That’s why the query is so
 long. I also need to check that such a JSON is not in the database, so I can
 load it.
 
@@ -139,7 +139,7 @@ And then PostgreSQL 9.5 was released, with one great feature:
 ON CONFLICT DO SOMETHING. The conflict is a UNIQUE index violation.
 The EXCLUDE clause in the stats_data table created such a unique index.
 
-There can also be ON CONFLICT DO NOTHING, and that's what I have used.
+There can also be ON CONFLICT DO NOTHING, and that’s what I have used.
 I changed only one query in the script, and instead of this:
 
 ```python

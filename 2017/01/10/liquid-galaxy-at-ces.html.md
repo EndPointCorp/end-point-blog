@@ -5,7 +5,7 @@ tags: event, liquid-galaxy
 title: Liquid Galaxy at CES
 ---
 
-This past week, End Point attended and exhibited at [CES](http://www.ces.tech/), a global consumer electronics and consumer technology tradeshow that takes place every January in Las Vegas, Nevada. End Point’s [Liquid Galaxy](https://liquidgalaxy.endpoint.com/) was set up in the [Gigabyte](http://www.gigabyte.us/?f=g) exhibit at Caesar’s Palace.
+This past week, End Point attended and exhibited at [CES](https://www.ces.tech/), a global consumer electronics and consumer technology tradeshow that takes place every January in Las Vegas, Nevada. End Point’s [Liquid Galaxy](https://liquidgalaxy.endpoint.com/) was set up in the [Gigabyte](http://www.gigabyte.us/?f=g) exhibit at Caesar’s Palace.
 
 <div class="separator" style="clear: both; text-align: center;"><a href="/blog/2017/01/10/liquid-galaxy-at-ces/image-0-big.jpeg" imageanchor="1" style="clear: right; float: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" height="338" src="/blog/2017/01/10/liquid-galaxy-at-ces/image-0.jpeg" width="400"/></a></div>
 

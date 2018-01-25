@@ -9,13 +9,13 @@ title: Postal code pain and fun
 
 <img align="right" src="/blog/2017/05/10/postal-code-pain-and-fun/image-0.jpeg" style="margin: 1em" width="200"/>We do a lot of ecommerce development at End Point. You know the usual flow as a customer: Select products, add to the shopping cart, then check out. Checkout asks questions about the buyer, payment, and delivery, at least. Some online sales are for “soft goods”, downloadable items that don’t require a delivery address. Much of online sales are still for physical goods to be delivered to an address. For that, a postal code or zip code is usually required.
 
-## No postal code?
+### No postal code?
 
 I say *usually* because there are some countries that do not use postal codes at all. An ecommerce site that expects to ship products to buyers in one of those countries needs to allow for an empty postal code at checkout time. Otherwise, customers may leave thinking they aren’t welcome there. The more creative among them will make up something to put in there, such as “00000” or “99999” or “NONE”.
 
 Someone has helpfully assembled and maintains a machine-readable (in Ruby, easily convertible to JSON or other formats) [list of the countries that don’t require a postal code](https://gist.github.com/kennwilson/3902548). You may be surprised to see on the list such countries as Hong Kong, Ireland, Panama, Saudi Arabia, and South Africa. Some countries on the list actually do have postal codes but do not require them or commonly use them.
 
-## Do you really need the customer’s address?
+### Do you really need the customer’s address?
 
 <img align="right" src="/blog/2017/05/10/postal-code-pain-and-fun/image-1.jpeg" style="margin: 1em" width="200"/>When selling both downloadable and shipped products, it would be nice to not bother asking the customer for an address at all. Unfortunately even when there is no shipping address because there’s nothing to ship, the billing address is still needed if payment is made by credit card through a normal credit card payment gateway — as opposed to PayPal, Amazon Pay, Venmo, Bitcoin, or other alternative payment methods.
 
@@ -25,7 +25,7 @@ Before sending the address to AVS, validating the *format* of postal codes is si
 
 So most countries’ postal codes can be validated in software with simple regular expressions, to catch typos such as transpositions and missing or extra characters.
 
-## UK postcodes
+### UK postcodes
 
 <img align="right" src="/blog/2017/05/10/postal-code-pain-and-fun/image-2.jpeg" style="margin: 1em" width="200"/>The most complicated postal codes I have worked with is the United Kingdom’s, because they can be from 5 to 7 characters, with an unpredictable mix of letters and numbers, normally formatted with a space in the middle. The benefit they bring is that they encode a lot of detail about the address, and it’s possible to catch transposed character errors that would be missed in a purely numeric postal code. The Wikipedia article [Postcodes in the United Kingdom](https://en.wikipedia.org/wiki/Postcodes_in_the_United_Kingdom) has the gory details.
 
@@ -51,7 +51,7 @@ The bulkiness of that list, and its short shelf life — the likelihood that it 
 
 The ecommerce site I mentioned also does in-browser validation via JavaScript before ever submitting the order to the server. Loading a huge list of valid outcodes would waste a lot of bandwidth and slow down checkout loading, especially on mobile devices. So a more lax regex check there is a good choice.
 
-## When Christmas comes
+### When Christmas comes
 
 There’s no Christmas gift of a single UK postal code validation solution for all needs, but there are some fun trivia notes in the Wikipedia page covering [Non-geographic postal codes](https://en.wikipedia.org/wiki/Postal_code#Non-geographic_codes):
 

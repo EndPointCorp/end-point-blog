@@ -7,7 +7,7 @@ title: Liquid Galaxy Uses at UNC Chapel Hill
 
 
 
-An article was posted on [The Tech Broadcast](http://www.thetechbroadcast.com/2016/12/23/constructing-student-learning-using-makerspaces-and-liquid-galaxy/) last week that featured the UNC Chapel Hill Center for Faculty Excellence's Faculty Showcase. The faculty showcase included a fantastic presentation featuring the many ways students and faculty use their [Liquid Galaxy](https://liquidgalaxy.endpoint.com/), and discussed other opportunities for using the system in the future. 
+An article was posted on [The Tech Broadcast](http://www.thetechbroadcast.com/2016/12/23/constructing-student-learning-using-makerspaces-and-liquid-galaxy/) last week that featured the UNC Chapel Hill Center for Faculty Excellence’s Faculty Showcase. The faculty showcase included a fantastic presentation featuring the many ways students and faculty use their [Liquid Galaxy](https://liquidgalaxy.endpoint.com/), and discussed other opportunities for using the system in the future. 
 
 <a href="/blog/2016/12/29/liquid-galaxy-uses-at-unc-chapel-hill/image-0-big.jpeg" imageanchor="1"><img border="0" height="436" src="/blog/2016/12/29/liquid-galaxy-uses-at-unc-chapel-hill/image-0.jpeg" width="640"/></a>
 
@@ -15,7 +15,7 @@ An article was posted on [The Tech Broadcast](http://www.thetechbroadcast.com/20
 
 Exciting examples cited of great classroom successes making use of the Liquid Galaxy include:
 
-1. A course offered at UNC, Geography 121 People and Places, requires its students to sift through data sets and spend time in the GIS lab/research hub making maps using the data they've collected. The goal of this assignment is to demonstrate understanding of diversity within particular geographic entities. The students use the Liquid Galaxy to present their findings. Examples of studies done for this project include studies of fertility, infant mortality, income inequality, poverty, population density, and primary education.
+1. A course offered at UNC, Geography 121 People and Places, requires its students to sift through data sets and spend time in the GIS lab/research hub making maps using the data they’ve collected. The goal of this assignment is to demonstrate understanding of diversity within particular geographic entities. The students use the Liquid Galaxy to present their findings. Examples of studies done for this project include studies of fertility, infant mortality, income inequality, poverty, population density, and primary education.
 
 1. A group of students working in lab found that the household income of a particular municipality was many times greater than all surrounding municipalities. By looking around on the Liquid Galaxy, they discovered an enormous plantation in a very rural area. They were then able to understand how that plantation skewed the data from the entire municipality.
 
@@ -37,7 +37,7 @@ During the faculty showcase, faculty members listed off some of the great benefi
 
 1. Liquid Galaxy helps students with geographic literacy. They are able to think about concepts covered in class, and fly to and observe the locations discussed.
 
-1. Students often bring parents and family to see the Liquid Galaxy, which is widely accessible to students on campus. Students are always excited to share what they're doing with the system, with family and with faculty.  
+1. Students often bring parents and family to see the Liquid Galaxy, which is widely accessible to students on campus. Students are always excited to share what they’re doing with the system, with family and with faculty.  
 
 1. Faculty members have commented that students that don’t ask questions in class have been very involved in the Liquid Galaxy lessons, which could be in part because some students are more visual learners. These visual learners find great benefit in seeing the information displayed in front of them in an interactive setting.    
 

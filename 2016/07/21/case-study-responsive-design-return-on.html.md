@@ -9,23 +9,25 @@ Responsive design has been a hot topic in the e-commerce world for several years
 
 The lead of our Interchange team, Greg Hanson, led a responsive design project and I’d like to summarize that work on our blog. For confidentiality, I am leaving out the client’s name in this case.
 
-## Why Go Responsive?
+### Why Go Responsive?
 
 There are two main reasons every e-commerce website, even a small one, needs to become responsive:
 
 - Your customers
 - Google
 
+<br/>
+
 The march toward mobile sales at this point is undeniable and unstoppable. As more and more people become comfortable using their phones and tablets to purchase things, the bigger this market share will become. Also, Google has begun de-prioritizing websites that do not cater to mobile users. If you are waiting to go responsive because of budget, you might surprised to learn how dramatically the mobile revenue increased for the customer in this case.
 
-## Goals
+### Goals
 
 This client is a small e-commerce business with a heavy ‘on’ season and ‘off’ season where the business owners could focus on this project. They wanted:
 
 - To accommodate the increasing mobile user base; they knew it was there from looking at their Google Analytics.
 - To increase revenue from mobile users. They could see that they had a 10% mobile user base, but they were converting only a small percentage.
 
-## End Point’s strategy
+### End Point’s strategy
 
 Our strategy with this small client, to minimize impact to the business and cost was to:
 
@@ -41,7 +43,7 @@ In this case, we had a three phase approach:
 - Phase II, site checkout sequence changed to responsive
 - Phase III, entire site responsive
 
-## The Project
+### The Project
 
 Converting the site to Bootstrap was the biggest chunk of the time and money spent on this project. Since we knew this would be the foundation for the changes to come, we took our time getting it right, keeping the client involved every step of the way. We didn’t want to get in the way of their busy season either, so we completed that project and waited a half a year to begin the next piece.
 
@@ -49,13 +51,13 @@ The second step was updating checkout sequence to be responsive since this was a
 
 Last, once we had a responsive checkout sequence, we changed the rest of the internal pages to be responsive and rolled out the entire site as responsive and mobile friendly.
 
-## Results
+### Results
 
 The first time we looked at the analytics following the responsive conversion, we were SHOCKED! Using a small sample period, from just a year prior, we saw a **280%** increase in mobile purchases.
 
 <div class="separator" style="clear: both; text-align: center;"><a href="/blog/2016/07/21/case-study-responsive-design-return-on/image-0-big.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="440" src="/blog/2016/07/21/case-study-responsive-design-return-on/image-0.png" width="640"/></a></div>
 
-*The timeframe for these comparison numbers was August 2014 before the responsive transition and August of 2015, after the transition. *
+*The timeframe for these comparison numbers was August 2014 before the responsive transition and August of 2015, after the transition.*
 
 To sanity check those numbers, we just re-ran some of the analytics recently and in May of 2016, revenue from mobile users is still up over 90% and **the clients total revenue year-over-year is up 12%**.
 
@@ -69,6 +71,6 @@ We also ran some numbers on the growth of mobile revenue as a percentage of over
 
 In this case, I didn’t go into all the ways to slice and dice the numbers in Google Analytics. However I'm happy to speak with you if you want to know more about mobile users, this client’s data, or how responsive design might help grow your e-commerce business.
 
-## The Lesson
+### The Lesson
 
 The lesson here is that any store will benefit from going responsive. Having an experienced partner like End Point that can work with your budget and timeline can make this is a doable project for any size store and budget.

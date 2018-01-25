@@ -5,7 +5,7 @@ tags: postgres
 title: Converting JSON to PostgreSQL values, simply
 ---
 
-In the [previous post](/2016/02/storing-statistics-json-data-in.html) I showed a simple PostgreSQL table for storing JSON data. Let's talk about making the JSON data easier to use.
+In the [previous post](/2016/02/storing-statistics-json-data-in.html) I showed a simple PostgreSQL table for storing JSON data. Let’s talk about making the JSON data easier to use.
 
 One of the requirements was to store the JSON from the files unchanged.
 However using the JSON operators for deep attributes is a little bit unpleasant.
@@ -22,11 +22,11 @@ The native SQL version would rather look like:
 SELECT country FROM stats;
 ```
 
-So let's do something to be able to write the queries like this.
+So let’s do something to be able to write the queries like this.
 We need to repack the data to have the nice SQL types, and hide all the nested
 JSON operators.
 
-I've made a simple view for this:
+I’ve made a simple view for this:
 
 ```sql
 CREATE VIEW stats AS
@@ -142,7 +142,7 @@ status       | on
 ```
 
 The last part left is to extract information about the sessions.
-To make the reports simpler, I've extracted the sessions list into another view.
+To make the reports simpler, I’ve extracted the sessions list into another view.
 However, because the operation of extracting the data is more expensive,
 I made it as a MATERIALIZED VIEW. This means that this view not only stores
 the query, but also keeps all the view data. This also means that this view
@@ -169,7 +169,7 @@ CREATE INDEX i_sessions_retailer ON sessions (installation);
 CREATE INDEX i_sessions_ts_range ON sessions USING GIST (ts_range);
 ```
 
-I've also created indexes on the materialized view, as my report queries will
+I’ve also created indexes on the materialized view, as my report queries will
 contain the where clause like:
 
 ```sql
