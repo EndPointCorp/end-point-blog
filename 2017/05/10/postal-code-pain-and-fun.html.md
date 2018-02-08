@@ -55,86 +55,30 @@ The ecommerce site I mentioned also does in-browser validation via JavaScript be
 
 There’s no Christmas gift of a single UK postal code validation solution for all needs, but there are some fun trivia notes in the Wikipedia page covering [Non-geographic postal codes](https://en.wikipedia.org/wiki/Postal_code#Non-geographic_codes):
 
-> 
-> 
-> 
-> 
 > A fictional address is used by UK Royal Mail for letters to Santa Claus:
 > 
-> 
-> 
-> 
-> 
-> Santa’s Grotto
-> 
+> Santa’s Grotto  
 > Reindeerland XM4 5HQ
-> 
-> 
-> 
-> 
-> 
 > 
 > Previously, the postcode SAN TA1 was used.
 > 
-> 
-> 
-> 
-> 
 > In Finland the special postal code 99999 is for Korvatunturi, the place where Santa Claus (Joulupukki in Finnish) is said to live, although mail is delivered to the Santa Claus Village in Rovaniemi.
 > 
-> 
-> 
-> 
-> 
 > In Canada the amount of mail sent to Santa Claus increased every Christmas, up to the point that Canada Post decided to start an official Santa Claus letter-response program in 1983. Approximately one million letters come in to Santa Claus each Christmas, including from outside of Canada, and they are answered in the same languages in which they are written. Canada Post introduced a special address for mail to Santa Claus, complete with its own postal code:
-> 
-> 
-> 
-> 
-> 
-> SANTA CLAUS
-> 
+>
+> SANTA CLAUS  
 > NORTH POLE  H0H 0H0
-> 
-> 
-> 
-> 
-> 
 > 
 > In Belgium bpost sends a small present to children who have written a letter to Sinterklaas. They can use the non-geographic postal code 0612, which refers to the date Sinterklaas is celebrated (6 December), although a fictional town, street and house number are also used. In Dutch, the address is:
 > 
-> 
-> 
-> 
-> 
-> Sinterklaas
-> 
-> Spanjestraat 1
-> 
+> Sinterklaas  
+> Spanjestraat 1  
 > 0612 Hemel
-> 
-> 
-> 
-> 
-> 
-> 
+>
 > This translates as “1 Spain Street, 0612 Heaven”. In French, the street is called “Paradise Street”:
 > 
-> 
-> 
-> 
-> 
-> Saint-Nicolas
-> 
-> Rue du Paradis 1
-> 
+> Saint-Nicolas  
+> Rue du Paradis 1  
 > 0612 Ciel
-> 
-> 
-> 
-> 
-> 
 
 That UK postcode for Santa doesn’t validate in some of the regexes, but the simpler Finnish, Canadian, and Belgian ones do, so if you want to order something online for Santa, you may want to choose one of those countries for delivery. :)
-
-
