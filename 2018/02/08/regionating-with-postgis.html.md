@@ -31,7 +31,7 @@ point, and annotates it with its type, manufacturer, capacity, and many other
 characteristics. In this sample image, notice how the data are distributed,
 with compact clusters of many points, scattered sparsely across the landscape.
 
-<img src="/blog/2018/02/08/regionating-with-postgis/windfarms-dataset.png" alt="Wind turbine dataset" /><br />
+<img src="/blog/2018/02/08/regionating-with-postgis/windfarms-dataset.jpg" alt="Wind turbine dataset" /><br />
 
 I wanted data sets with different types of geometric objects, so the [second
 data set](https://earthquake.usgs.gov/hazards/qfaults/) I chose describes
@@ -45,7 +45,7 @@ with other attributes, though we won’t use those annotations here. The faults
 are distributed in less obvious clusters than the wind turbines, though some
 clustering is still easily visible.
 
-<img src="/blog/2018/02/08/regionating-with-postgis/faults-dataset.png" alt="Faults dataset" /><br />
+<img src="/blog/2018/02/08/regionating-with-postgis/faults-dataset.jpg" alt="Faults dataset" /><br />
 
 The [last data
 set](https://www.sciencebase.gov/catalog/item/59667039e4b0d1f9f05cf2ff) uses a
@@ -56,7 +56,7 @@ be comprehensive, it serves nicely to experiment with regionating polygon data.
 Note that across the area covered by the dataset, the polygons are quite
 thickly distributed.
 
-<img src="/blog/2018/02/08/regionating-with-postgis/wildfire-dataset.png" alt="Wildfire dataset" /><br />
+<img src="/blog/2018/02/08/regionating-with-postgis/wildfire-dataset.jpg" alt="Wildfire dataset" /><br />
 
 ## Regionating with Google Earth Pro
 
