@@ -2,13 +2,18 @@
 author: Josh Tolley
 title: Regionation with PostGIS
 tags: postgres, gis, liquid-galaxy
+gh_issue_number: 1378
 ---
+
+<img src="/blog/2018/02/08/regionating-with-postgis/reefs-far-banner.jpg" alt="Coral reefs map" /><br />
 
 Recently a co-worker handed me a KML file and said, in essence, “This file
 takes too long for the Liquid Galaxy to load and render. What can you do to
 make it faster?” It’s a common problem for large data sets, no matter the
 display platform. For the Liquid Galaxy the common first response is
-“Regionate!”. Though your dictionary may claim otherwise, for purposes of this
+“Regionate!”
+
+Though your dictionary may claim otherwise, for purposes of this
 post the word means to group a set of geographic data into regions of localized
 objects. This is sometimes also called “spatial clustering” or “geographic
 clustering”. After grouping objects into geographically similar clusters, we
@@ -18,9 +23,9 @@ Google Earth to render the full detail of a region only when the current view
 shows enough of that region to justify spending the processing time. Although
 the “Pro” version of Google Earth offers an automated regionation feature, it
 has some limitations. I’d like to compare it to some alternatives available in
-PostGIS.
+PostgreSQL and PostGIS.
 
-## Data sets
+### Data sets
 
 For this experiment I’ve chosen a few different freely available datasets, with
 the aim to use different geographic data types, distributed in different
@@ -58,7 +63,7 @@ thickly distributed.
 
 <img src="/blog/2018/02/08/regionating-with-postgis/wildfire-dataset.jpg" alt="Wildfire dataset" /><br />
 
-## Regionating with Google Earth Pro
+### Regionating with Google Earth Pro
 
 Having decided which data sets to use, my first step was to download each one,
 and import them into three different tables in a PostGIS database. The precise
@@ -80,7 +85,7 @@ The second surprise was the sheer time it took to regionate these data. The
 wildfire and turbine data only took a couple of minutes, but my computer spent
 more than half an hour to regionate the faults data. My system isn’t especially
 high powered, but this still caught me off guard, and as we’ll see, the other
-regionation methods I tried took far less time that Google Earth Pro for this
+regionation methods I tried took far less time than Google Earth Pro for this
 data set.
 
 Finally, Google Earth Pro’s regionation system offers no customization at all;
@@ -97,7 +102,7 @@ rather, I’d write code to do it), but this isn’t much different from the oth
 methods we’ll explore, which create tens, hundreds, or even thousands of
 database entries and which likewise need to be processed in software.
 
-## Basic regionating with PostGIS
+### Basic regionating with PostGIS
 
 PostGIS offers several functions to help us cluster geographic data. The
 two I used for this test were
@@ -164,7 +169,7 @@ SELECT
 FROM clusters;
 ```
 
-## PostGIS regionation functions
+### PostGIS regionation functions
 
 The two functions I mentioned deserve some further exploration. First
 [ST_ClusterKMeans](http://postgis.net/docs/manual-dev/ST_ClusterKMeans.html),
@@ -208,7 +213,7 @@ results first, followed by K-means.
 
 <img src="/blog/2018/02/08/regionating-with-postgis/turbines-kmeans-20.jpg" alt="Wind turbine data, K-means clustering" /><br />
 
-## Applications
+### Applications
 
 Obviously, beauty is in the eye of the beholder, and applications could be
 found for which both clustering systems were beneficial. I’ll finish with one
