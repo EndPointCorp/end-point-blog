@@ -5,7 +5,7 @@ tags: ecommerce, piggybak, ruby, rails
 title: 'Piggybak: The Roadmap'
 ---
 
-Over the last couple of weeks, a few of us at End Point have had some discussion about the future direction of [Piggybak](http://www.piggybak.org/). Piggybak is an open source mountable ecommerce framework written in Ruby on Rails supported and developed by End Point. It introduces core ecommerce functionality into a Rails application, but is intended to allow the mounted Rails application to maintain control over some architecture elements.
+Over the last couple of weeks, a few of us at End Point have had some discussion about the future direction of [Piggybak](https://github.com/piggybak/piggybak). Piggybak is an open source mountable ecommerce framework written in Ruby on Rails supported and developed by End Point. It introduces core ecommerce functionality into a Rails application, but is intended to allow the mounted Rails application to maintain control over some architecture elements.
 
 ### Pros of Piggybak
 
@@ -27,4 +27,4 @@ In looking towards the future of Piggybak, we've decided to build out some featu
 - Advanced Taxonomy [as extension]
 - Reviews & Ratings [as extension]
 
-Follow the Piggybak GitHub user [here](https://github.com/piggybak), check out the website and demo [here](http://www.piggybak.org/) and keep an eye out for future blog posts on the progress of Piggybak.
+Follow the Piggybak GitHub user [here](https://github.com/piggybak), check out the website and demo [here](https://github.com/piggybak/piggybak) and keep an eye out for future blog posts on the progress of Piggybak.

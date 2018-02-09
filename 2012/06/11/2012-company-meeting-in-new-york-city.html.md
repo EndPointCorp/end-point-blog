@@ -13,7 +13,7 @@ We’re looking forward to hearing from each other on a wide range of topics ref
 - Liquid Galaxy deployments, logistics, hardware improvements, and custom tours
 - Development process topics around workflow, version control, and testing
 - Operations (and “DevOps”) topics including configuration management with Chef and Puppet, and monitoring with Nagios
-- The [Piggybak](http://www.piggybak.org/) Rails ecommerce gem
+- The [Piggybak](https://github.com/piggybak/piggybak) Rails ecommerce gem
 - User experience in projects using RailsAdmin, Django, and jQuery
 - Database and web application security
 - Transitioning ecommerce architecture to modern browsers and mobile apps using web services

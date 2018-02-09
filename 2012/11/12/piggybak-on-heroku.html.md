@@ -5,9 +5,9 @@ tags: ecommerce, hosting, piggybak, rails
 title: Piggybak on Heroku
 ---
 
-Several weeks ago, we were contacted through our website with a request for Heroku support on [Piggybak](http://www.piggybak.org). Piggybak is an open source Ruby on Rails ecommerce platform developed and maintained by End Point. Piggybak is similar to many other Rails gems in that it can be installed from Rubygems in any Rails application, and Heroku understands this requirement from the application’s Gemfile. This is a brief tutorial for getting a Rails application up and running with Piggybak. For the purpose of this tutorial, I’ll be using the existing [Piggybak demo](http://www.piggybak.org/demo_details.html) for deployment, instead of creating a Rails application from scratch.
+Several weeks ago, we were contacted through our website with a request for Heroku support on [Piggybak](https://github.com/piggybak/piggybak). Piggybak is an open source Ruby on Rails ecommerce platform developed and maintained by End Point. Piggybak is similar to many other Rails gems in that it can be installed from Rubygems in any Rails application, and Heroku understands this requirement from the application’s Gemfile. This is a brief tutorial for getting a Rails application up and running with Piggybak. For the purpose of this tutorial, I’ll be using the existing [Piggybak demo](https://github.com/piggybak/demo) for deployment, instead of creating a Rails application from scratch.
 
-**a)** First, clone the existing [Piggybak demo](http://www.piggybak.org/demo_details.html). This will be your base application. On your development machine (local or other), you must run bundle install to get all the application’s dependencies.
+**a)** First, clone the existing [Piggybak demo](https://github.com/piggybak/demo). This will be your base application. On your development machine (local or other), you must run bundle install to get all the application’s dependencies.
 
 **b)** Next, add config.assets.initialize_on_precompile = false to config/application.rb to allow your assets to be compiled without requiring creating a local database.
 

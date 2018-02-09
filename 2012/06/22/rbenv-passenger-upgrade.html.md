@@ -5,7 +5,7 @@ tags: hosting, piggybak, rails
 title: '.rbenv and Passenger: Working through an Upgrade'
 ---
 
-Yesterday, I worked on upgrading the [Piggybak demo](http://www.piggybak.org/demo/) application, which runs on [Piggybak](http://www.piggybak.org/), an open source Ruby on Rails ecommerce plugin developed and maintained by End Point. The demo was running on Ruby 1.8.7 and Rails 3.1.3, but I wanted to update it to Ruby 1.9.* and Rails 3.2.6 to take advantage of improved performance in Ruby and the recent Rails security updates. I also wanted to update the Piggybak version, since there have been [several recent bug fixes and commits](https://github.com/stephskardal/piggybak/commits/master).
+Yesterday, I worked on upgrading the [Piggybak demo](https://github.com/piggybak/demo) application, which runs on [Piggybak](https://github.com/piggybak/piggybak), an open source Ruby on Rails ecommerce plugin developed and maintained by End Point. The demo was running on Ruby 1.8.7 and Rails 3.1.3, but I wanted to update it to Ruby 1.9.* and Rails 3.2.6 to take advantage of improved performance in Ruby and the recent Rails security updates. I also wanted to update the Piggybak version, since there have been [several recent bug fixes and commits](https://github.com/stephskardal/piggybak/commits/master).
 
 One of the constraints with the upgrade was that I wanted to upgrade via [.rbenv](https://github.com/sstephenson/rbenv/), because End Point has been happily using .rbenv recently. Below are the steps [Richard](/team/richard_templet) and I went through for the upgrade, as well as a minor Passenger issue.
 

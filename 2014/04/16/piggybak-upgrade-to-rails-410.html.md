@@ -5,7 +5,7 @@ tags: piggybak, rails, ecommerce
 title: 'Piggybak: Upgrade to Rails 4.1.0'
 ---
 
-[Piggybak](http://www.piggybak.org/) and gems available in the demo (piggybak_variants, piggybak_giftcerts, piggybak_coupons, piggybak_bundle_discounts, piggybak_taxonomy) have been updated to Rails 4.1.0, Ruby 2.1.1 via Piggybak version gem 0.7.1. Interested in the technical details of the upgrade? Here are some fine points:
+[Piggybak](https://github.com/piggybak/piggybak) and gems available in the demo (piggybak_variants, piggybak_giftcerts, piggybak_coupons, piggybak_bundle_discounts, piggybak_taxonomy) have been updated to Rails 4.1.0, Ruby 2.1.1 via Piggybak version gem 0.7.1. Interested in the technical details of the upgrade? Here are some fine points:
 
 - Dependencies were refactored so that the parent Rails app controls the Rails dependency only. There was a bit of redundancy in the various plugin gemspec dependencies. This has been cleaned up so the parent Rails app shall be the canonical reference to the Rails version used in the application.
 - Modified use of assets which require "//= require piggybak/piggybak-application" to be added to the assets moving forward. There have been several observed issues with precompling and asset behavior, so I simplified this by requiring this require to be added to the main Rails application.js for now. The engine file is supposed to have a way around this, but it has not behaved as expected, specifically on unique deployment architectures (e.g. Heroku). Patches welcome to address this.
