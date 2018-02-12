@@ -6,7 +6,7 @@ gh_issue_number: 1379
 ---
 
 Hi there! I’m Steph, the original creator and not-very-good maintainer of
-Piggybak, a modular ecommerce platform written in Ruby on Rails. With the help
+[Piggybak](https://github.com/piggybak/piggybak), a modular ecommerce platform written in Ruby on Rails. With the help
 of End Point, I created
 Piggybak after building a custom Ruby on Rails ecommerce application for
 one of our clients here at End Point.
