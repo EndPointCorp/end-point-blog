@@ -1,6 +1,6 @@
 ---
 author: Dave Jenkins
-title: Liquid Galaxy at the Pyeongchang 2018 Olympics
+title: Liquid Galaxy at the Pyeongchang 2018 Winter Olympics
 tags: liquid-galaxy, event, clients
 gh_issue_number: 1381
 ---
