@@ -2,8 +2,10 @@
 author: Steph Skardal
 title: Sunsetting Piggybak, A Ruby on Rails Ecommerce Gem
 tags: ecommerce, ruby, rails, open-source
-gh_issue_number: 1379
+gh_issue_number:
 ---
+
+<img src="/blog/2018/02/12/sunsetting-piggybak/piggybak.png" alt="Piggybak: Open Source Ruby on Rails Ecommerce" /><br />
 
 Hi there! I’m Steph, the original creator and not-very-good maintainer of
 [Piggybak](https://github.com/piggybak/piggybak), a modular ecommerce platform written in Ruby on Rails. With the help
