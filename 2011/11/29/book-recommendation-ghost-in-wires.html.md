@@ -5,20 +5,12 @@ tags: books, security
 title: 'Book Recommendation: Ghost in the Wires'
 ---
 
+<a href="http://www.amazon.com/Ghost-Wires-Adventures-Worlds-Wanted/dp/0316037702"><img border="0" width="200" height="300" src="/blog/2011/11/29/book-recommendation-ghost-in-wires/image-0.png" style="float: right; margin: 1em;" /></a>
 
+I recently listened to <a href="http://www.amazon.com/Ghost-Wires-Adventures-Worlds-Wanted/dp/0316037702">Ghost in the Wires</a> by Kevin Mitnick as an audiobook during my long Thanksgiving vacation drives. This non-fiction book is a first-person account about Kevin Mitnick's phone and computer break-in (or what he claims to be ethical hacking) adventures in the late eighties and early nineties, and it touches on the following legal proceedings from 1995 on. A couple of interesting things stood out to me:
 
-<table cellpadding="0" cellspacing="0" width="100%">
-<tbody><tr>
-<td style="padding-top:10px;" valign="top"><a href="http://www.amazon.com/Ghost-Wires-Adventures-Worlds-Wanted/dp/0316037702"><img border="0" height="280" src="/blog/2011/11/29/book-recommendation-ghost-in-wires/image-0.png"/></a></td>
-<td style="padding-left:10px;">
-<p>I recently listened to <a href="http://www.amazon.com/Ghost-Wires-Adventures-Worlds-Wanted/dp/0316037702">Ghost in the Wires</a> by Kevin Mitnick as an audiobook during my long Thanksgiving vacation drives. This non-fiction book is a first-person account about Kevin Mitnick's phone and computer break-in (or what he claims to be ethical hacking) adventures in the late eighties and early nineties, and it touches on the following legal proceedings from 1995 on. A couple of interesting things stood out to me:</p>
-<ul>
-<li>Kevin's tactics revolve around <a href="http://en.wikipedia.org/wiki/Social_engineering_(security)">social engineering</a>, or techniques that capitalize on flaws in "human hardware" to gain information. The book was an eye opener in terms of how easily Kevin gained access to systems, as there are countless examples of Kevin's ability to gain credibility, pretext, introduce diversions, etc.</li>
-<li>Another highlight of the book for me was learning details of how bug reports were exploited to gain sensitive information. Kevin gained access to bug reports on proprietary software to exploit the software and gain access to the systems running the software. I don't think of my own clients' bug reports as an extremely valuable source of information for exploiting vulnerabilities to gain user information, but there have been a few instances in the past where bugs could have been used maliciously.</li>
-</ul>
-</td>
-</tr>
-</tbody></table>
+ - Kevin's tactics revolve around [social engineering](http://en.wikipedia.org/wiki/Social_engineering_(security)), or techniques that capitalize on flaws in "human hardware" to gain information. The book was an eye opener in terms of how easily Kevin gained access to systems, as there are countless examples of Kevin's ability to gain credibility, pretext, introduce diversions, etc.
+ - Another highlight of the book for me was learning details of how bug reports were exploited to gain sensitive information. Kevin gained access to bug reports on proprietary software to exploit the software and gain access to the systems running the software. I don't think of my own clients' bug reports as an extremely valuable source of information for exploiting vulnerabilities to gain user information, but there have been a few instances in the past where bugs could have been used maliciously.
 
 ### Follow-up Comments
 
