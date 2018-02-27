@@ -4,7 +4,7 @@ title: "Vue and Ecommerce: An Introduction"
 tags: ecommerce, vue, javascript, open-source
 ---
 
-<img src="/blog/2018/02/19/vue-shop.png" alt="Vue Shop created by Matheus Azzi" /><br />
+<img src="/blog/2018/02/19/vue-in-ecommerce/vue-shop.png" alt="Vue Shop created by Matheus Azzi" /><br />
 
 I speak the domain specific language of ecommerce, Ruby on Rails, JavaScript, and jQuery. Lately, I've been getting up to speed on [Vue.js](https://vuejs.org/). I've been working on writing a small ecommerce site using Vue.js, because for me, creating an application addressing familiar paradigm in a new technology is a great way to learn. [Vue.js](https://vuejs.org/), initially released about 3 years ago, is a lightweight JS framework that can be adopted incrementally. In the case of my small example site, Vue.js serves the frontend shop content and connects to a decoupled backend that can be run on any platform of choice. On my path to get up to speed on Vu on Vue on Vuee, I found great resources that I wanted to write about before I get into the details of my ecommerce app. Here they are:
 
