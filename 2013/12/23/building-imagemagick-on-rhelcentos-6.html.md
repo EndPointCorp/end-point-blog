@@ -19,6 +19,6 @@ However, that fails to build without applying a patch to make it compatible with
 Image::Magick T_PTROBJ
 ```
 
-Then build, test, and install as usual. That's it.
+Then build, test, and install as usual. That’s it.
 
 
