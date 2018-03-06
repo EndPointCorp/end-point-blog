@@ -2,11 +2,12 @@
 author: Steph Skardal
 title: "Vue in Ecommerce: Routing and Persistence"
 tags: ecommerce, vue, javascript, open-source
+gh_issue_number: 1387
 ---
 
 <img src="/blog/2018/03/01/vue-router-in-ecommerce/vue-shop.png" alt="Vue Shop created by Matheus Azzi" /><br />
 
-I recently wrote about [Vue in Ecommerce](http://www.endpoint.com/blog) and pointed to a handful of references to get started. Today, I’ll talk about using [vue-router](https://router.vuejs.org/en/) in a small Ecommerce application, combined with [vuex-persist](https://www.npmjs.com/package/vuex-persist) for state storage.
+I recently wrote about [Vue in Ecommerce](/blog/2018/02/19/vue-in-ecommerce) and pointed to a handful of references to get started. Today, I’ll talk about using [vue-router](https://router.vuejs.org/en/) in a small ecommerce application, combined with [vuex-persist](https://www.npmjs.com/package/vuex-persist) for state storage.
  
 I forked this [Vue Shop on GitHub](https://github.com/matheusazzi/shop-vue) from Matheus Azzi. It was a great starting point for to see how basic component organization and state management might look in a Vue ecommerce application, but it is a single page ecommerce app with no separate page for a product detail, checkout, or static pages, so here I go into some details on routing and persistence in a Vue ecommerce application.
 
@@ -26,7 +27,7 @@ vue init webpack myapp
 ? Install vue-router? (Y/n) 
 ```
 
-If you select Yes here, the main differences you’ll see is that an application with vue-router installed will call `<router-view/>` to render the view for the current router, instead of a `<HelloWorld/>` component, and that a vue-router app will include src/router/index.js with basic routing configuration to your `<HelloWorld/>` component.
+If you select Yes here, the main differences you’ll see are that an application with vue-router installed will call `<router-view/>` to render the view for the current router, instead of a `<HelloWorld/>` component, and that a vue-router app will include src/router/index.js with basic routing configuration to your `<HelloWorld/>` component.
 
 #### Without Routing
 ```
@@ -116,7 +117,7 @@ export default new Router({
 
 ##### History Mode
 
-One thing you also might notice is the ‘history’ mode setting above, overriding the default hash mode. You can read about that [here](https://router.vuejs.org/en/essentials/history-mode.html), but it leverages history.pushState to URL navigation. The history mode override must be combined with server configuration to ensure that non-static asset URL requests (i.e. all of our routes) hit the Vue index.html app in our Vue application, and then renders the component associated with the requested route. I’m using Apache for my Vue application, so I followed the instructions on that documentation for vue-router history mode configuration.
+One thing you also might notice is the ‘history’ mode setting above, overriding the default hash mode. You can read about that [here](https://router.vuejs.org/en/essentials/history-mode.html), but it leverages `history.pushState` to URL navigation. The history mode override must be combined with server configuration to ensure that non-static asset URL requests (i.e. all of our routes) hit the Vue index.html app in our Vue application, and then renders the component associated with the requested route. I’m using Apache for my Vue application, so I followed the instructions on that documentation for vue-router history mode configuration.
 
 ##### Using \<router-link/\>
 
@@ -125,10 +126,9 @@ One thing you also will want to use throughout your templates is `<router-link/>
 
 ### Vuex PersistedState 
 
-If you are still reading, you’ve now seen the basic configuration for vue-router in an ecommerce application running on Vue. The Ecommerce application I forked uses [vuex](https://vuex.vuejs.org/en/intro.html), a state management pattern and library to store the state of our application. What you’ll notice with a shopping cart application, though, is that you need to persist the state of your cart for sessions. Without further setup, every page refresh on your application will result in losing the state of the cart.
+If you are still reading, you’ve now seen the basic configuration for vue-router in an ecommerce application running on Vue. The ecommerce application I forked uses [vuex](https://vuex.vuejs.org/en/intro.html), a state management pattern and library to store the state of our application. What you’ll notice with a shopping cart application, though, is that you need to persist the state of your cart for sessions. Without further setup, every page refresh on your application will result in losing the state of the cart.
 
 To address this behavior, there are a few options to persist your state in Vue. I chose [vuex-persist](https://www.npmjs.com/package/vuex-persist), which stores the state (for all modules or specific modules) in localStorage. After installing vuex-persist, I modified the following to include the shoppingCart module in my stored state:
-
 
 ```
 // src/store/index.js
@@ -151,7 +151,7 @@ export default new Vuex.Store({
 })
 ```
 
-It’s as simple as that to persist the state of your shopping cart using all the vuex-persist defaults, and there are some alternative Promise based stores supported if you are interested.
+It’s as simple as that to persist the state of your shopping cart using all the vuex-persist defaults, and there are some alternative Promise-based stores supported if you are interested.
 
 ### What’s Next?
 
