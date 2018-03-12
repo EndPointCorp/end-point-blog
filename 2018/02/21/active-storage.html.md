@@ -117,3 +117,7 @@ Create storage.yml file in rails's config folder.
 2) For now it supports only to amazon, google, azure.
 
 You can also see the [Active Storage](http://edgeguides.rubyonrails.org/active_storage_overview.html) doc for more details.
+
+### Conclusion
+
+For now, Active Storage’s features are very limited as compare with CarrierWave and Paperclip. Active Storage will become replacment for the CarrierWave or Paperclip in future. Active storage having advantage that it doesn't require any explicit job call when uploading image asynchronously. Active Storage supports  mini_magick and imagemagick for image versioning. To perform image resizing or versioning still recommend CarrierWave because CarrierWave provide rich set of library.
