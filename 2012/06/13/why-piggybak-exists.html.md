@@ -29,4 +29,4 @@ Shipping, tax, product catalog design, sales promotions, and rights and roles al
 
 Piggybak is just the cart and checkout.
 
-You mount Piggybak as a gem into any Rails app, and can assign any object as a purchasable product using a the tag "acts_as_variant" and you're good to go. To learn more, and to see it in action 'checkout' [Piggybak.org](http://www.piggybak.org/).
+You mount Piggybak as a gem into any Rails app, and can assign any object as a purchasable product using a the tag "acts_as_variant" and you're good to go. To learn more, and to see it in action 'checkout' [Piggybak.org](https://github.com/piggybak/piggybak).

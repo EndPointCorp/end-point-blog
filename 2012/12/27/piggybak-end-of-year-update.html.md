@@ -5,7 +5,7 @@ tags: ecommerce, piggybak, rails
 title: 'Piggybak: End of Year Update'
 ---
 
-Over the last few months, my coworkers and I have shared several updates on [Piggybak](http://www.piggybak.org/) progress ([October 2012 Piggybak Roadmap ](/blog/2012/10/08/piggybak-roadmap), [November 2012 Piggybak Roadmap Status Update](/blog/2012/11/06/piggybak-roadmap-status-update)).  Piggybak is an open source, mountable as a Rails Engine, Ruby on Rails ecommerce platform developed and maintained by End Point. Here's a brief background on Piggybak followed by an end of year update with some recent Piggybak news.
+Over the last few months, my coworkers and I have shared several updates on [Piggybak](https://github.com/piggybak/piggybak) progress ([October 2012 Piggybak Roadmap ](/blog/2012/10/08/piggybak-roadmap), [November 2012 Piggybak Roadmap Status Update](/blog/2012/11/06/piggybak-roadmap-status-update)).  Piggybak is an open source, mountable as a Rails Engine, Ruby on Rails ecommerce platform developed and maintained by End Point. Here's a brief background on Piggybak followed by an end of year update with some recent Piggybak news.
 
 ### A Brief Background
 

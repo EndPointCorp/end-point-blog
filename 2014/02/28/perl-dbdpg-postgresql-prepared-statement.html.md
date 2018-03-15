@@ -62,6 +62,6 @@ DETAIL:  parameters: $1 = 'foobar3'
 
 As you can see, the do() method always uses PQexecParams (this is what creates the "<unnamed>" statement seen in the logs). For the prepare/execute section, the older versions issued an implicit prepare right away, while 3.0.0 uses an unnamed statement for the first iteration, and only when called more than once switches to a named prepared statement. The use of PQexecParams is faster than doing a PQprepare plus a PQexecParams, but if you are going to execute the same query a number of times, it is more efficient to simply send the arguments via PQexecPrepared and absorb the one-time cost of creating the statement via PQprepare.
 
-What does this mean for users of DBD::Pg? Probably nothing, as the new default is already a decent compromise, but it's good to know about the pg_switch_prepared knob, that is there if you need it.
+What does this mean for users of DBD::Pg? Probably nothing, as the new default is already a decent compromise, but it’s good to know about the pg_switch_prepared knob, that is there if you need it.
 
 

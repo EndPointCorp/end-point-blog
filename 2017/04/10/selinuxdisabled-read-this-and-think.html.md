@@ -5,9 +5,9 @@ tags: redhat, linux, security, selinux, wordpress
 title: SELINUX=disabled? Read this and think twice!
 ---
 
-Not long ago, one of our customers had their website compromised because of a badly maintained, not-updated ***WordPress***. At **End Point** we love WordPress, but it really needs to be configured and hardened the right way, otherwise it's easy to end up in a real nightmare.
+Not long ago, one of our customers had their website compromised because of a badly maintained, not-updated ***WordPress***. At **End Point** we love WordPress, but it really needs to be configured and hardened the right way, otherwise it’s easy to end up in a real nightmare.
 
-This situation is worsened even more if there's no additional security enforcement system to protect the environment on which the compromised site lives. One of the basic ways to protect your Linux server, especially RHEL/Centos based ones, is using **SELinux**.
+This situation is worsened even more if there’s no additional security enforcement system to protect the environment on which the compromised site lives. One of the basic ways to protect your Linux server, especially RHEL/Centos based ones, is using **SELinux**.
 
 Sadly, most of the interaction people has with SELinux happens while disabling it, first on the running system:
 
@@ -19,9 +19,9 @@ setenforce 0
 
 and then permanently by manually editing the file **/etc/sysconfig/selinux** to change the variable **SELINUX=enforcing** to **SELINUX=disabled**.
 
-Is that actually a good idea though? While SELinux can be a bit of a headache to tune appropriately and can easily be misconfigured, here's something that could really convince you to think twice before disabling SELinux once and forever.
+Is that actually a good idea though? While SELinux can be a bit of a headache to tune appropriately and can easily be misconfigured, here’s something that could really convince you to think twice before disabling SELinux once and forever.
 
-Back to our customer's compromised site. While going through the customer's system for some post-crisis cleaning, I found this hilarious piece of bash_history:
+Back to our customer’s compromised site. While going through the customer’s system for some post-crisis cleaning, I found this hilarious piece of bash_history:
 
 ```
 ls

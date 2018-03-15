@@ -2,7 +2,7 @@
 author: Piotr Hankiewicz
 gh_issue_number: 1163
 tags: html, javascript
-title: Int'l - JavaScript numbers and dates formatting, smart strings comparison
+title: Int’l — JavaScript numbers and dates formatting, smart strings comparison
 ---
 
 <img border="0" src="/blog/2015/10/16/intl-javascript-numbers-and-dates/image-0.png" style="width: 100%;"/>
@@ -11,7 +11,7 @@ title: Int'l - JavaScript numbers and dates formatting, smart strings comparison
 
 *** WARNING *** At the time of writing this text all of the things mentioned below are not yet supported by Safari and most of the mobile browsers.
 
-It's almost three years now since Ecma International published the 1st version of "ECMAScript Internationalization API Specification". It's widely supported by most of the browsers now. A new object called Intl has been introduced. Let's see what it can do.
+It’s almost three years now since Ecma International published the 1st version of “ECMAScript Internationalization API Specification”. It’s widely supported by most of the browsers now. A new object called Intl has been introduced. Let’s see what it can do.
 
 To make it easier imagine that we have a banking system with a possibility of having accounts in multiple currencies. Our user is Mr. White, a rich guy.
 
@@ -19,7 +19,7 @@ To make it easier imagine that we have a banking system with a possibility of ha
 
 #### Number formatting
 
-Mr. White has four accounts with four different currencies: British pound, Japanese yen, Swiss franc, Moroccan dirham. If we want to have a list of current balances, with a correct currency symbols, it's pretty simple:
+Mr. White has four accounts with four different currencies: British pound, Japanese yen, Swiss franc, Moroccan dirham. If we want to have a list of current balances, with a correct currency symbols, it’s pretty simple:
 
 ```javascript
 // locales and balances object
@@ -61,7 +61,7 @@ The output looks like:
 "د.م.‏ ٤٬٣٤٥"
 ```
 
-In a real application you'd typically use the same locale for a view/language/page, the different examples above are just to show the power of Intl!
+In a real application you’d typically use the same locale for a view/language/page, the different examples above are just to show the power of Intl!
 
 #### Date and time easier
 
@@ -92,11 +92,11 @@ The output is:
 "tirsdag 29. september 2015"
 ```
 
-Trust me, it's correct (;p).
+Trust me, it’s correct (;p).
 
 #### String comparison
 
-Mr. White has a list of his clients from Sweden. He uses his UI in German as it's a default language, but Mr. White is Swedish.
+Mr. White has a list of his clients from Sweden. He uses his UI in German as it’s a default language, but Mr. White is Swedish.
 
 ```javascript
 var clients = ["Damien", "Ärna", "Darren", "Adam"];
@@ -126,4 +126,4 @@ Now, we are sorting using Collator object with Swedish locales. The output is di
 
 ### Conclusion
 
-Be careful with using the Intl object -- its implementation is still not perfect and not supported by all the browsers. There is a nice library called: [Intl.js](https://github.com/andyearnshaw/Intl.js/) by Andy Earnshaw. It's nothing more than a compatibility implementation of the ECMAScript Internationalization API. You can use it to use all the Intl object features now, without being worried about different browsers' implementations.
+Be careful with using the Intl object—its implementation is still not perfect and not supported by all the browsers. There is a nice library called: [Intl.js](https://github.com/andyearnshaw/Intl.js/) by Andy Earnshaw. It’s nothing more than a compatibility implementation of the ECMAScript Internationalization API. You can use it to use all the Intl object features now, without being worried about different browsers’ implementations.

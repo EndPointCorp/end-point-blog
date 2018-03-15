@@ -9,20 +9,20 @@ title: MediaWiki extension.json change in 1.25
 
 I recently released a new version of the
 [MediaWiki](https://www.mediawiki.org/wiki/MediaWiki)
-["Request Tracker" extension](https://www.mediawiki.org/wiki/Extension:RequestTracker), which provides
+[“Request Tracker” extension](https://www.mediawiki.org/wiki/Extension:RequestTracker), which provides
 a nice interface to your
 [RequestTracker](https://bestpractical.com/rt/) instance, allowing you to view the tickets right
 inside of your wiki. There are two major changes I want to point out. First, the name has
-changed from **"RT"** to **"RequestTracker"**. Second, it is using the brand-new way of writing
+changed from **“RT”** to **“RequestTracker”**. Second, it is using the brand-new way of writing
 MediaWiki extensions, featuring the extension.json file.
 
 The name change rationale is easy to understand: I wanted it to be more intuitive and easier to find. A search for
-"RT" on mediawiki.org ends up finding references to the WikiMedia RequestTracker system,
+“RT” on mediawiki.org ends up finding references to the WikiMedia RequestTracker system,
 while a
-[search for "RequestTracker"](https://www.mediawiki.org/w/index.php?search=RequestTracker)
+[search for “RequestTracker”](https://www.mediawiki.org/w/index.php?search=RequestTracker)
 finds the new extension right away. Also, the name was
-too short and failed to indicate to people what it was. The "rt" tag used by the extension stays
-the same. However, to produce a table showing all open tickets for user 'alois', you still write:
+too short and failed to indicate to people what it was. The “rt” tag used by the extension stays
+the same. However, to produce a table showing all open tickets for user “alois”, you still write:
 
 ```
 <rt u='alois'></rt>
@@ -42,9 +42,9 @@ and was not without controversy. However, as of MediaWiki 1.25 it is the new sta
 the project is better for it. The old way will continue to be supported, but extension
 authors should be using extension.json for new extensions, and converting existing
 ones over. As an aside, this is another indication that [JSON](http://json.org/) has won the data format war.
-Sorry, [XML](http://www.json.org/xml.html), you were too big and bloated. Nice try [YAML](http://yaml.org/), but you were a little *too* free-form. JSON isn't perfect,
+Sorry, [XML](http://www.json.org/xml.html), you were too big and bloated. Nice try [YAML](http://yaml.org/), but you were a little *too* free-form. JSON isn’t perfect,
 but it is the best solution of its kind. For further evidence, see Postgres,
-which now has [outstanding support for JSON and JSONB](http://www.postgresql.org/docs/current/static/datatype-json.html). I added support for YAML output to EXPLAIN
+which now has [outstanding support for JSON and JSONB](https://www.postgresql.org/docs/current/static/datatype-json.html). I added support for YAML output to EXPLAIN
 in Postgres some years back, but nobody (including me!) was excited enough about YAML to do
 more than that with it. :)
 
@@ -72,7 +72,7 @@ the LocalSettings.php file.
 
 So what should go into the extension.json file? The
 [extension development documentation](https://www.mediawiki.org/wiki/Manual:Developing_extensions) has some suggested
-fields, and you can also view the [canonical extension.json schema](https://phabricator.wikimedia.org/diffusion/MW/browse/master/docs/extension.schema.v2.json). Let's take a quick look at the RequestTracker/extension.json file. Don't worry, it's not
+fields, and you can also view the [canonical extension.json schema](https://phabricator.wikimedia.org/diffusion/MW/browse/master/docs/extension.schema.v2.json). Let’s take a quick look at the RequestTracker/extension.json file. Don’t worry, it’s not
 too long.
 
 ```perl
@@ -123,12 +123,12 @@ too long.
 ```
 
 The first field in the file is manifest_version, and simply indicates the extension.json schema version. Right now it is marked as required, and I figure it does no harm to throw it in there. The name field should be self-explanatory, and should match your CamelCase extension name, which will also be the subdirectory where your extension will live under the extensions/ directory.
-The type field simply tells what kind of extension this is, and is mostly used to determine which section of the Special:Version page an extension will appear under. The author is also self-explanatory, but note that this is a JSON array, allowing for multiple items if needed. The version and url are highly recommended. For the license, I chose the dirt-simple [PostgreSQL license](http://opensource.org/licenses/postgresql), whose only fault is its name. The descriptionmsg is what will appear as the description of the extension on the Special:Version page. As it is a user-facing text, it is subject to
-internationalization, and thus **rt-desc** is converted to your current language by looking up the language file inside of the extension's i18n directory.
+The type field simply tells what kind of extension this is, and is mostly used to determine which section of the Special:Version page an extension will appear under. The author is also self-explanatory, but note that this is a JSON array, allowing for multiple items if needed. The version and url are highly recommended. For the license, I chose the dirt-simple [PostgreSQL license](https://opensource.org/licenses/postgresql), whose only fault is its name. The descriptionmsg is what will appear as the description of the extension on the Special:Version page. As it is a user-facing text, it is subject to
+internationalization, and thus **rt-desc** is converted to your current language by looking up the language file inside of the extension’s i18n directory.
 
-The requires field only supports a "MediaWiki" subkey at the moment. In this case, I have it
-set to require at least version 1.25 of MediaWiki - as anything lower will not even be able to read
-this file! The AutoloadClasses key is the new way of loading code needed by the extension. As before, this should be stored in a php file with the name of the extension, an underscore, and the word "body" (e.g. RequestTracker_body.php). This file contains all of the functions that perform the actual work of the extension.
+The requires field only supports a “MediaWiki” subkey at the moment. In this case, I have it
+set to require at least version 1.25 of MediaWiki—as anything lower will not even be able to read
+this file! The AutoloadClasses key is the new way of loading code needed by the extension. As before, this should be stored in a php file with the name of the extension, an underscore, and the word “body” (e.g. RequestTracker_body.php). This file contains all of the functions that perform the actual work of the extension.
 
 The Hooks field is one of the big advantages of the new extension.json format. Rather than
 worrying about modifying global variables, you can simply let MediaWiki know what functions
@@ -152,8 +152,8 @@ The MessagesDirs field tells MediaWiki where to find your localization files. Th
 should always be in the standard place, the i18n directory.
 Inside that directory are localization files, one for each language, as well as a special
 file named qqq.json, which gives information about each message
-string as a guide to translators. The language files are of the format "xxx.json", where
-"xxx" is the language code. For example, RequestTracker/i18n/en.json
+string as a guide to translators. The language files are of the format “xxx.json”, where
+“xxx” is the language code. For example, RequestTracker/i18n/en.json
 contains English versions of all the messages used by the extension. The i18n files look like this:
 
 
@@ -201,7 +201,7 @@ to be used inside of the tag. To view a specific ticket, one was always able to 
 <rt>6567</rt>
 ```
 
-This would produce the text "RT #6567", with information on the ticket available on mouseover,
+This would produce the text “RT #6567”, with information on the ticket available on mouseover,
 and hyperlinked to the ticket inside of RT. However, I often found myself using this extension
 to view all the open tickets in a certain queue like this:
 

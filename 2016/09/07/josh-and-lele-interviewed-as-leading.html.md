@@ -7,7 +7,7 @@ title: Josh and Lele Interviewed as Experts in Leading Cloud Technologies
 
 <a href="/blog/2016/09/07/josh-and-lele-interviewed-as-leading/image-0-big.png" imageanchor="1"><img border="0" height="266" src="/blog/2016/09/07/josh-and-lele-interviewed-as-leading/image-0.png" width="640"/></a>
 
-End Point's Josh Williams and Lele Calò were recently interviewed for a piece that is now published on [Clutch](https://clutch.co/), a site offering B2B research and reviews. Josh and Lele were interviewed as experts in leading cloud technologies. The interview can be found [here](https://clutch.co/cloud/expert-interview/end-point).
+End Point’s Josh Williams and Lele Calò were recently interviewed for a piece that is now published on [Clutch](https://clutch.co/), a site offering B2B research and reviews. Josh and Lele were interviewed as experts in leading cloud technologies. The interview can be found [here](https://clutch.co/cloud/expert-interview/end-point).
 
 Josh and Lele began the interview by giving some background on End Point and its various offerings. These offerings include software development, hosting, consulting, and the [Liquid Galaxy](https://liquidgalaxy.endpoint.com/) division.
 
@@ -17,4 +17,4 @@ Clutch asked Josh and Lele about costs in utilizing cloud technologies. Lele exp
 
 Next, Josh and Lele were asked about how they go about choosing the right platform for projects. They made sure to stress that needs vary for every client, and that the right platform for one client may not be the right platform for another. The two agreed that AWS has at times been an appealing option due to its many features. For projects where fewer features are necessary and cost is tight, Rackspace has been a good option. Josh and Lele also touched on the support that the various cloud technologies offer, and their strengths and weaknesses. Finally, Josh and Lele were asked to rate different platforms in terms of functionality, ease of use, response time, whether they would recommend the service, and what their satisfaction level has been.
 
-If you're interested in learning more about our cloud services, please [contact us here](/contact) for more information.
+If you’re interested in learning more about our cloud services, please [contact us here](/contact) for more information.

@@ -15,6 +15,6 @@ CPAN began as a way to collect, mirror, and distribute open-source Perl packages
 
 It is rare to find some needed functionality that is not available on CPAN. These days a more common problem is finding too much choice there, and needing to choose between several modules based on which are better maintained and supported on current versions of Perl, or kept current against external dependencies.
 
-Perl does not get as much press these days as it once did, but it continues to thrive and improve. On that topic, our former co-worker Steph Skardal sent me an article called [We’re still catching up to Perl](http://devblog.avdi.org/2015/08/07/were-still-catching-up-to-perl/) by Avdi Grimm of Ruby fame. It is not an in-depth language comparison, just a brief observation to his fellow Rubyists that there is plenty to be learned from Perl. (Of course Perl has plenty to learn from Ruby and other languages too.)
+Perl does not get as much press these days as it once did, but it continues to thrive and improve. On that topic, our former co-worker Steph Skardal sent me an article called [We’re still catching up to Perl](http://www.virtuouscode.com/2015/08/07/were-still-catching-up-to-perl/) by Avdi Grimm of Ruby fame. It is not an in-depth language comparison, just a brief observation to his fellow Rubyists that there is plenty to be learned from Perl. (Of course Perl has plenty to learn from Ruby and other languages too.)
 
 

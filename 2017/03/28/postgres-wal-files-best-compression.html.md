@@ -27,10 +27,10 @@ waiting for changes to get written to disk before letting the client proceed can
 very expensive solution. Postgres gets around this with the use of the Write Ahead Log, which
 generates WAL files indicating what changes were made. Creating these files is much faster than
 performing the actual updates on the underlying files. Thus, Postgres is able to tell the client
-that the work is "done" when the WAL file has been generated. Should the system crash before
+that the work is “done” when the WAL file has been generated. Should the system crash before
 the actual changes are made, the WAL files are used to replay the changes. As these
 WAL files represent a continuous unbroken chain of all changes to the database, they can also
-be used for Point in Time Recovery - in other words, the WAL files can be used to rewind the database
+be used for Point in Time Recovery — in other words, the WAL files can be used to rewind the database
 to any single point in time, capturing the state of the database at a specific moment.
 
 Postgres WAL files are exactly 16 MB in size (although this size may be changed at compilation time,
@@ -52,7 +52,7 @@ archive_command = 'gzip < %p > /var/lib/pgsql/archive/%f'
 ```
 
 It is widely known that gzip is no longer the best compression option for most tasks,
-so I endeavored to determine which program was the best at WAL file compression - in terms
+so I endeavored to determine which program was the best at WAL file compression — in terms
 of final file size versus the overhead to create the file. I also wanted to examine how these
 fared versus the new wal_compression feature.
 
@@ -62,22 +62,22 @@ To compare the various compression methods, I examined all of the compression pr
 are commonly available on a Linux system, are known to be stable, and which perform at least
 as good as the common utility gzip. The contenders were:
 
-- **gzip** - the canonical, default compression utility for many years
-- **pigz** - parallel version of gzip
-- **bzip2** - second only to gzip in popularity, it offers better compression
-- **lbzip2** - parallel version of bzip
-- **xz** - an excellent all-around compression alternative to gzip and bzip
-- **pxz** - parallel version of xz
-- **7za** - excellent compression, but suffers from complex arguments
-- **lrzip** - compression program targeted at "large files"
+- **gzip** — the canonical, default compression utility for many years
+- **pigz** — parallel version of gzip
+- **bzip2** — second only to gzip in popularity, it offers better compression
+- **lbzip2** — parallel version of bzip
+- **xz** — an excellent all-around compression alternative to gzip and bzip
+- **pxz** — parallel version of xz
+- **7za** — excellent compression, but suffers from complex arguments
+- **lrzip** — compression program targeted at “large files”
 
 For the tests, 100 random WAL files were copied from a busy production Postgres system. Each of
-those 100 files were compressed nine times by each of the programs above: from the "least compressed"
-option (e.g. -1) to the "best compressed" option (e.g. -9).
+those 100 files were compressed nine times by each of the programs above: from the “least compressed”
+option (e.g. -1) to the “best compressed” option (e.g. -9).
 The tests were performed on a 16-core system, with plenty of free RAM and nothing else running on the server.
 Results were gathered by wrapping
 each command with /usr/bin/time -verbose, which produces a nice breakdown of results.
-To gather the data, the "Elapsed (wall clock) time" was used, along with size of
+To gather the data, the “Elapsed (wall clock) time” was used, along with size of
 the compressed file. Here is some sample output of the time command:
 
 ```text
@@ -107,7 +107,7 @@ the compressed file. Here is some sample output of the time command:
 ```
 
 The wal_compression feature was tested by creating a new Postgres 9.6 cluster, then
-running the [pgbench program](https://www.postgresql.org/docs/current/static/pgbench.html) twice to generate WAL files - once with wal_compression enabled,
+running the [pgbench program](https://www.postgresql.org/docs/current/static/pgbench.html) twice to generate WAL files — once with wal_compression enabled,
 and once with it disabled. Then each of the resulting WAL files was compressed using each of the programs above.
 
 -----------
@@ -119,7 +119,7 @@ table.gsmt table th { padding: 0em 0.5em 0em 0.5em; color: black; font-size: sma
 --></style>
 
 <table border="0" class="gsmt" style="padding: 0 0 3em 0"><caption><b>Table 1.</b><br/>
-Results of compressing 16 MB WAL files - average for 100 files</caption>
+Results of compressing 16 MB WAL files — average for 100 files</caption>
 <tbody><tr>
 <td><table border="1">
 <tbody><tr><th>Command</th><th>Wall clock time (s)</th><th>File size (MB)</th></tr>
@@ -161,7 +161,7 @@ Results of compressing 16 MB WAL files - average for 100 files</caption>
 </tbody></table>
 
 <table border="0" class="gsmt"><caption><b>Table 2.</b><br/>
-Results of compressing 16 MB WAL file - average for 100 files</caption>
+Results of compressing 16 MB WAL file — average for 100 files</caption>
 <tbody><tr>
 <td><table border="1">
 <tbody><tr><th>Command</th><th>Wall clock time (s)</th><th>File size (MB)</th>
@@ -202,7 +202,7 @@ Results of compressing 16 MB WAL file - average for 100 files</caption>
 </tbody></table>
 
 <table border="0" class="gsmt"><caption><b>Table 3.</b><br/>
-Results of compressing 16 MB WAL file - average for 100 files</caption>
+Results of compressing 16 MB WAL file — average for 100 files</caption>
 <tbody><tr>
 <td><table border="1">
 <tbody><tr><th>Command</th><th>Wall clock time (s)</th><th>File size (MB)</th></tr>
@@ -267,8 +267,8 @@ file size, even when using a -9 argument. For that matter, the best compression 
 ever achieve is 4.23 MB, which the other programs can beat without breakng a sweat.
 
 Table 2 demonstrates two ways of invoking the lrzip program: the -l option (lzo compression -
-described in the lrzip documentation as "ultra fast") and the -z option (zpaq compression -
-"extreme compression, extreme slow"). All of those superlatives are supported by the data. The -l
+described in the lrzip documentation as “ultra fast”) and the -z option (zpaq compression -
+“extreme compression, extreme slow”). All of those superlatives are supported by the data. The -l
 option runs extremely fast: even at -L5 the total clock time is still only .39 seconds. Unfortunately,
 the file size hovers around an undesirable 5.5 MB, no matter what compression level is used. The -z
 option produces the smallest file of all the programs here (2.48 MB) at a whopping cost of over 30
@@ -278,7 +278,7 @@ lrzip is clearly out of the competition.
 <div class="separator" style="clear: both; text-align: center; padding-bottom:1em;"><a href="/blog/2017/03/28/postgres-wal-files-best-compression/image-1.jpeg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" id="jA0EBAMCQV4Upc7MVzZgycARvnUd7ZPBWXA9iXj+1nagDqP0bIKB3vspSuKJKLudmKh2tPgjwLFfxFkN34sgCWCeyYnxTt/zDAR3GpmBoiPQbMmxJO2QBdjcFr6e3R5/tMNH5MsIQklNNOM/EBtZid0PshHrOEooRj4xhSO74FtVZiXNR/hx0tr1QdPHs8XS5qWaKCG4PG69JN/k74CevdILYAAdhENPNZV48aOJwZq5D2A3+65ZYcNWfBXpHrnecboKT607iQUBC7zUnzqPCl31RVmQ0EmRX7zElgin3B3jwho==9+3U" src="/blog/2017/03/28/postgres-wal-files-best-compression/image-1.jpeg"/></a><br/>Compression in action <small>(<a href="https://flic.kr/p/9sgf6f">photo</a> by <a href="https://www.flickr.com/people/familymwr/?rb=1">Eric Armstrong</a>)</small></div>
 
 The most interesting program is without a doubt 7za. Unlike the others, it is organized around
-creating archives, and thus doesn't do in-place compression as the others do. Nevertheless,
+creating archives, and thus doesn’t do in-place compression as the others do. Nevertheless,
 the results are quite good. At the lowest level, it takes a mere 0.13 seconds to produce a
 3.18 MB file. As it takes xz 1.19 seconds to produce a nearly equivalent 3.10 MB file, 7za
 is the clear winner ... if we had only a single core available. :)
@@ -293,7 +293,7 @@ consideration.
 
 The bzip2 program has been nipping at the heels of gzip for many years, so naturally it
 has its own parallel version, known as lbzip2. As Table 3 shows, it is also amazingly fast.
-Not as fast as pigz, but with a speed of under 0.2 seconds - even at the highest compression level!
+Not as fast as pigz, but with a speed of under 0.2 seconds — even at the highest compression level!
 There is very little variation among the compression levels used, so it is fair to simply state
 that lbzip2 takes 0.15 seconds to shrink the WAL file to 3.5 MB. A decent entry.
 
@@ -305,7 +305,7 @@ file.
 
 So the clear winners are 7za and pxz. I gave the edge to pxz, as (1) the file size was
 slightly smaller at comparable time costs, and (2) the odd syntax for 7za for both compressing
-and decompressing was annoying compared with the simplicity of "xz -2" and "xz -d".
+and decompressing was annoying compared with the simplicity of “xz -2” and “xz -d”.
 
 Now, what about the built-in compression offered by the wal_compression option?
 As Table 4 shows, the compression for the WAL files I tested went from 208 MB to
@@ -316,7 +316,7 @@ your workload, so you might see reports of greater and lesser compressions.
 
 Of interest is that the WAL files generated by turning on wal_compression are
 capable of being further compressed by the archive_command option, and doing
-a pretty good job of it as well - going from 81 MB of WAL files to 9.4 MB of
+a pretty good job of it as well — going from 81 MB of WAL files to 9.4 MB of
 WAL files. However, using just xz in the archive_command without wal_compression
 on still yielded a smaller overall size, and means less CPU because the data is only
 compressed once.
@@ -325,7 +325,7 @@ It should be pointed out that wal_compression has other advantages, and that
 comparing it to archive_command is not a fair comparison, but this article was
 primarily about the best compression option for storing WAL files long-term.
 
-Thus, the overall winner is "pxz -2", followed closely by 7za and its bulky
+Thus, the overall winner is “pxz -2”, followed closely by 7za and its bulky
 arguments, with honorable mention given to wal_compression. Your particular
 requirements might guide you to another conclusion, but hopefully nobody shall
 simply default to using gzip anymore.

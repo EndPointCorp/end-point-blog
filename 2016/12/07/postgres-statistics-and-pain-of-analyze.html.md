@@ -27,8 +27,8 @@ on the pg_upgrade program in its examples, the lessons may be applied to any upg
 The short version of the lessons is: run vacuumdb in parallel, control the stages yourself, 
 and make sure you handle any custom per-column statistics.
 
-Before digging into the solution in more detail, let's see why all of this is needed. 
-Doesn't pg_upgrade allow for super-fast Postgres major version upgrades, including the 
+Before digging into the solution in more detail, let’s see why all of this is needed. 
+Doesn’t pg_upgrade allow for super-fast Postgres major version upgrades, including the 
 system catalogs? It does, with the notable exception of the pg_statistics table. The 
 nominal reason for not copying the data is that the table format may change from version to 
 version. The real reason is that nobody has bothered to write the conversion logic yet, 
@@ -46,7 +46,7 @@ CONTEXT:  COPY pg_statistic, line 1, column stavalues1: "{"{i,v}","{v}","{i,o,o}
 ```
 
 I keep many different versions of Postgres running on my laptop, and use a simple port 
-naming scheme to keep them straight. It's simple enough to use pg_dump and sed to confirm 
+naming scheme to keep them straight. It’s simple enough to use pg_dump and sed to confirm 
 that the structure of the pg_statistic table has not changed from version 9.2 until 9.6:
 
 ```
@@ -66,7 +66,7 @@ Of course, the same table structure does not promise that the backend of differe
 versions uses them in the same way (spoiler: they do), but that should be 
 something pg_upgrade can handle by itself. Even if the table structure did change, pg_upgrade 
 could be taught to migrate the information from one format to another (its 
-raison d'être). If the new statistics format take a long time to generate, 
+raison d’être). If the new statistics format take a long time to generate, 
 perhaps pg_upgrade could leisurely generate a one-time table on the old 
 database holding the new format, then copy that over as part of the upgrade.
 
@@ -114,9 +114,9 @@ going to iterate through each database one-by-one, but it will also process
 tables one-by-one within each database! As the script states, it is also extremely 
 inefficient if you have any per-column statistics targets. Another issue 
 with the --analyze-in-stages option is that the stages are hard-coded 
-(at "1", "10", and "default"). Additionally, there is no way to easily know when 
+(at “1”, “10”, and “default”). Additionally, there is no way to easily know when 
 a stage has finished other than watching the command output. Happily, all of these 
-problems can be fairly easily overcome; let's create a sample database 
+problems can be fairly easily overcome; let’s create a sample database 
 to demonstrate.
 
 ```
@@ -135,14 +135,14 @@ wins and nice scaling. Here are the results of running vacuumdb alpha --analyze-
 
 The slope of your graph will be determined by how many expensive-to-analyze tables you have. As a rule of thumb, 
 however, you may as well set --jobs to a high number. Anything over your max_connections setting is pointless, 
-but don't be afraid to jack it up to at least a hundred. Experiment on your test box, of course, to find the 
+but don’t be afraid to jack it up to at least a hundred. Experiment on your test box, of course, to find the 
 sweet spot for your system. Note that the --jobs argument will not work on old versions of Postgres. For those cases, 
 I usually whip up a Perl script using Parallel::ForkManager to get the job done. Thanks to Dilip Kumar for adding 
 the --jobs option to vacuumdb!
 
-The next problem to conquer is the use of custom statistics. Postgres' ANALYZE uses the default_statistics_target 
+The next problem to conquer is the use of custom statistics. Postgres’ ANALYZE uses the default_statistics_target 
 setting to determine how many rows to sample (the default value in modern versions of Postgres is 100). However, 
-as the name suggests, this is only the default - you may also set a specific target at the column level. 
+as the name suggests, this is only the default—you may also set a specific target at the column level. 
 Unfortunately, there is no way to disable this quickly, which means that vacuumdb will always use 
 the custom value. This is not what you want, especially if you are using the --analyze-in-stages option, 
 as it will happily (and needlessly!) recalculate columns with specific targets three times. As custom 
@@ -193,7 +193,7 @@ FROM pg_attribute WHERE attstattarget > 0;
 
 As to the problems of not being able to pick the stage targets for --analyze-in-stages, and 
 not being able to know when a stage has finished, the solution is to simply do it yourself. 
-For example, to run all databases in parallel with a target of "2", you would need to change 
+For example, to run all databases in parallel with a target of “2”, you would need to change 
 the default_statistics_target at the database level (via ALTER DATABASE), or at the cluster 
 level (via [ALTER SYSTEM](https://www.postgresql.org/docs/current/static/sql-altersystem.html)). Then invoke vacuumdb, and reset the value:
 
@@ -203,7 +203,7 @@ $ vacuumdb --all --analyze-only --jobs 100
 $ psql -qc 'alter system reset default_statistics_target' -qc 'select pg_reload_conf()'
 ```
 
-In summary, don't trust the given vacuumdb suggestions for a post-upgrade analyze. 
+In summary, don’t trust the given vacuumdb suggestions for a post-upgrade analyze. 
 Instead, remove any per-column statistics, run it in parallel, and do whatever 
 stages make sense for you.
 

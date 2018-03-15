@@ -7,7 +7,7 @@ title: 'Git: pre-receive hook error on CentOS 7'
 
 We recently had to move a git repository from an old CentOS 5 to a new CentOS 7 server.
 
-On the old CentOS 5 we had a recent, custom compiled version of git while on the new server we are using the system default old 1.8 version, shipped by the official CentOS repositories. And, as usual when you tell yourself "What could possibly go wrong?", something did: every push began to return the dreaded "fatal: The remote end hung up unexpectedly" error.
+On the old CentOS 5 we had a recent, custom compiled version of git while on the new server we are using the system default old 1.8 version, shipped by the official CentOS repositories. And, as usual when you tell yourself “What could possibly go wrong?”, something did: every push began to return the dreaded “fatal: The remote end hung up unexpectedly” error.
 
 After some time spent trying to debug the problem, we managed to isolate the problem to the pre-receive hook, specifically active on that repository. The script was very simple:
 

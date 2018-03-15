@@ -7,7 +7,7 @@ title: Liquid Galaxy at 2017 BOMA International Annual Conference & Expo
 
 <a href="/blog/2017/07/03/liquid-galaxy-at-2017-boma/image-0-big.png" imageanchor="1"><img border="0" data-original-height="792" data-original-width="1364" height="372" src="/blog/2017/07/03/liquid-galaxy-at-2017-boma/image-0.png" width="640"/></a>
 
-We just returned from Nashville after bringing [Liquid Galaxy](https://liquidgalaxy.endpoint.com/) to the 2017 BOMA International Annual Conference & Expo. Commercial real estate has always been a seamless fit for Liquid Galaxy due to the system's ability to showcase real estate and property data in an interactive and panoramic setting.  Within real estate, Liquid Galaxy was first used by CBRE and has since been adopted by Hilton, JLL, and Prologis to name a few.
+We just returned from Nashville after bringing [Liquid Galaxy](https://liquidgalaxy.endpoint.com/) to the 2017 BOMA International Annual Conference & Expo. Commercial real estate has always been a seamless fit for Liquid Galaxy due to the system’s ability to showcase real estate and property data in an interactive and panoramic setting.  Within real estate, Liquid Galaxy was first used by CBRE and has since been adopted by Hilton, JLL, and Prologis to name a few.
 
 In preparation for BOMA (Building Owners and Managers Association), we prepared sample commercial real estate content on our content management system to be displayed on the Liquid Galaxy. This included the creation of content about Hudson Yards, the new development being built in lower Manhattan.
 

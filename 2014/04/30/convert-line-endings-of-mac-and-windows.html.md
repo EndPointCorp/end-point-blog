@@ -5,7 +5,7 @@ tags: ruby, rails, testing
 title: Convert Line Endings of Mac and Windows to Unix in Rails and Test with RSpec
 ---
 
-Line endings or newline is a special character(s) to define the end of a line. The line endings special character(s) vary across the operating systems. Let's take an example, we are developing a Rails feedback application which will be used by a wide range of users. The users might submit the feedback from different operating systems which has different kind of line end character(s). The content should have formatted for standard line endings before storing into backend.
+Line endings or newline is a special character(s) to define the end of a line. The line endings special character(s) vary across the operating systems. Let’s take an example, we are developing a Rails feedback application which will be used by a wide range of users. The users might submit the feedback from different operating systems which has different kind of line end character(s). The content should have formatted for standard line endings before storing into backend.
 
 Mostly two special characters used to define the line endings in most of the operating systems.
 
@@ -24,14 +24,14 @@ The usage of these two special characters for Unix, Mac and Windows are
 
 Note:- \r is the newline character up to Mac OS version 9, after that Mac uses Unix line endings.
 
-It is a developer's job to convert all kinds of line endings to Unix line ending format to maintain the standard. We can achieve this by a regex pattern replace. The regex pattern should convert \r(Mac) or \r\n(Windows) to \n(Unix).
+It is a developer’s job to convert all kinds of line endings to Unix line ending format to maintain the standard. We can achieve this by a regex pattern replace. The regex pattern should convert \r(Mac) or \r\n(Windows) to \n(Unix).
 
 ```ruby
 standard_content = non_standard_content.gsub(/\r\n?/,"\n")
 ```
 We can see the conversion of line endings to Unix from Mac and Windows using irb (Interactive Ruby) shell.
 
-***1. Mac***
+### 1. Mac
 
 ```ruby
 irb(main):001:0> mac ="Hello \r Mac"
@@ -39,7 +39,7 @@ irb(main):001:0> mac ="Hello \r Mac"
 irb(main):002:0> mac.gsub(/\r\n?/,"\n")
 => "Hello \n Mac"
 ```
-***2. Windows***
+### 2. Windows
 
 ```ruby
 irb(main):001:0> windows="Hello \r\n Windows"
@@ -48,7 +48,7 @@ irb(main):002:0> windows.gsub(/\r\n?/,"\n")
 => "Hello \n Windows"
 ```
 
-**RSpec Tests**
+#### RSpec Tests
 
 After the implementation of line endings conversion, it should covered with test cases for the best practices of development. Here is the bunch of Rspec code to test both Mac and Windows line endings conversion.
 

@@ -7,7 +7,7 @@ title: AJAX Queuing in Piggybak
 
 AJAX is inherently asynchronous; for the most part, this works fine in web development, but sometimes it can cause problem if you have multiple related AJAX calls that are asynchronous to eachother, such as the use case described in this article.
 
-In [Piggybak](http://www.piggybak.org/), a Ruby on Rails open source shopping cart module developed and maintained by End Point, the one page checkout uses AJAX to generate shipping options. Whenever state and zip options change, the shipping address information is sent via AJAX and valid shipping methods are returned and rendered in a select dropdown.
+In [Piggybak](https://github.com/piggybak/piggybak), a Ruby on Rails open source shopping cart module developed and maintained by End Point, the one page checkout uses AJAX to generate shipping options. Whenever state and zip options change, the shipping address information is sent via AJAX and valid shipping methods are returned and rendered in a select dropdown.
 
 <img border="0" src="/blog/2012/09/18/ajax-queuing-in-piggybak/image-0.png" width="750"/>
 

@@ -23,7 +23,7 @@ Thus, we have a very custom program that carefully migrates pieces over, perform
 
 As a final sanity check, we wanted to make sure the final schema for the upgraded 9.6 database was as identical as possible to the current production 9.2 database schema. When comparing the pg_dump outputs, we quickly encountered a problem with the way that views were represented. Version 9.2 uses a very bare-bones, single-line output, while 9.6 uses a multi-line pretty printed version. Needless to say, this meant that *none* of the views matched when trying to diff the pg_dump outputs.
 
-The problem stems from the system function pg_get_viewdef(), which is used by pg_dump to give a human-readable and Postgres-parseable version of the view. To demonstrate the problem and the solution, let's create a simple view on a 9.2 and a 9.6 database, then compare the differences via pg_dump:
+The problem stems from the system function pg_get_viewdef(), which is used by pg_dump to give a human-readable and Postgres-parseable version of the view. To demonstrate the problem and the solution, let’s create a simple view on a 9.2 and a 9.6 database, then compare the differences via pg_dump:
 
 ```
 $ psql -p 5920 vtest -c \
@@ -80,7 +80,7 @@ $ psql vtest -p 5920 -Atc "select pg_get_viewdef('gregtest',true)"
   WHERE pg_class.reltuples = 0::double precision;
 ```
 
-In Postgres 9.6 however, you are always stuck with the pretty indentation - regardless of which of the five function variations you choose, and what arguments you give them! Here's the same function calls as above in version 9.6:
+In Postgres 9.6 however, you are always stuck with the pretty indentation—regardless of which of the five function variations you choose, and what arguments you give them! Here’s the same function calls as above in version 9.6:
 
 ```
 $ psql vtest -p 5960 -Atc "select pg_get_viewdef('gregtest')"
@@ -107,9 +107,9 @@ When I first ran into this problem, the three solutions that popped into my mind
 1. Modify the Postgres source code such that ***pg_get_viewdef*** changes its behavior
 1. Have pg_dump call ***pg_get_viewdef*** in a way that creates identical output
 
-My original instinct was that a quick Perl script would be the overall easiest route. And while I eventually did get one working, it was a real pain to "un-pretty" the output, especially the whitespace and use of parens. A brute-force approach of simply removing all parens, brackets, and extra whitespace from the rule and view definitions almost did the trick, but the resulting output was quite ugly & hard to read, and there were still some lingering whitespace problems.
+My original instinct was that a quick Perl script would be the overall easiest route. And while I eventually did get one working, it was a real pain to “un-pretty” the output, especially the whitespace and use of parens. A brute-force approach of simply removing all parens, brackets, and extra whitespace from the rule and view definitions almost did the trick, but the resulting output was quite ugly & hard to read, and there were still some lingering whitespace problems.
 
-Approach two, hacking the Postgres source code, is actually fairly easy. At some point, the Postgres source code was changed such that all indenting is forced "on". A single character change to the file src/backend/utils/adt/ruleutils.c did the trick:
+Approach two, hacking the Postgres source code, is actually fairly easy. At some point, the Postgres source code was changed such that all indenting is forced “on”. A single character change to the file src/backend/utils/adt/ruleutils.c did the trick:
 
 ```
 - #define PRETTYFLAG_INDENT    2
@@ -163,4 +163,4 @@ Files /dev/fd/63 and /dev/fd/62 are identical
 
 ### CONCLUSION
 
-Trying to compare schemas across versions can be difficult, so it's best not to try. Dumping and recreating schemas is a cheap operation, so simply dump them both into the same backend, then do the comparison.
+Trying to compare schemas across versions can be difficult, so it’s best not to try. Dumping and recreating schemas is a cheap operation, so simply dump them both into the same backend, then do the comparison.

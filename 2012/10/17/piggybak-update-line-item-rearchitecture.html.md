@@ -5,7 +5,7 @@ tags: ecommerce, piggybak, ruby, rails
 title: 'Piggybak Update: Line Item Rearchitecture'
 ---
 
-Over the last couple of weeks, I’ve been involved in doing significant rearchitecture of [Piggybak](http://www.piggybak.org/)’s line items data model. Piggybak is an open-source mountable Ruby on Rails ecommerce solution created and maintained by End Point. A few months ago after observing a few complications with Piggybak’s order model and it’s interaction with various nested elements (product line items, shipments, payments, adjustments) and calculations, and after reviewing and discussing these complications with a couple of my expert coworkers, we decided to go in the direction of a uniform line item data model based on our success with this model for other ecommerce clients over the years (whoa, that was a long sentence!). Here, I’ll discuss some of the motiivations and an overview of the technical aspects of this rearchitecture.
+Over the last couple of weeks, I’ve been involved in doing significant rearchitecture of [Piggybak](https://github.com/piggybak/piggybak)’s line items data model. Piggybak is an open-source mountable Ruby on Rails ecommerce solution created and maintained by End Point. A few months ago after observing a few complications with Piggybak’s order model and it’s interaction with various nested elements (product line items, shipments, payments, adjustments) and calculations, and after reviewing and discussing these complications with a couple of my expert coworkers, we decided to go in the direction of a uniform line item data model based on our success with this model for other ecommerce clients over the years (whoa, that was a long sentence!). Here, I’ll discuss some of the motiivations and an overview of the technical aspects of this rearchitecture.
 
 ### Motivation
 
@@ -76,4 +76,4 @@ Less common, but still possible with this new architecture might include:
 
 The future for the Piggybak team includes further development of extensions to support some of the common line item type features.
 
-Naturally, there may be a few follow-up incremental improvements since this was a significant change. All of this work is included in the Piggybak gem release version 0.6.2. Read more about Piggybak and check out the demo [here](http://www.piggybak.org/).
+Naturally, there may be a few follow-up incremental improvements since this was a significant change. All of this work is included in the Piggybak gem release version 0.6.2. Read more about Piggybak and check out the demo [here](https://github.com/piggybak/piggybak).

@@ -12,7 +12,7 @@ title: 'DBD::Pg: one ping to rule them all'
 
 How can you tell if your database connection is still valid? One way, when using Perl, is to use the ping() method.
 Besides backslash-escaped placeholders, a revamped ping() method is the major change in the recently released version 3.5.0 of [DBD::Pg](http://search.cpan.org/dist/DBD-Pg/), the Perl/[DBI](http://search.cpan.org/dist/DBI/DBI.pm#ping) interface to 
-[Postgres](https://postgres.org/). Before 3.5.0, there was a chance of false positives when using this method. In particular, if you were inside of a transaction, DBD::Pg did not actually attempt to contact the Postgres backend. This was definitely an oversight, and DBD::Pg now does the right thing.
+[Postgres](https://www.postgresql.org/). Before 3.5.0, there was a chance of false positives when using this method. In particular, if you were inside of a transaction, DBD::Pg did not actually attempt to contact the Postgres backend. This was definitely an oversight, and DBD::Pg now does the right thing.
 
 Detecting a dead backend is a little trickier than it sounds. While libpq stores some state information for us, the only way to be sure is to issue a command to the backend. Additionally, we check the value of PQstatus in case libpq has detected a problem. Realistically, it would be far better if the Postgres protocol supported some sort of ping itself, just a simple answer/response without doing anything, but there is nothing like that yet. Fortunately, the command that is issued, **/* DBD::Pg ping test, v3.5.0 */**, is very lightweight.
 
