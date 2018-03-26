@@ -2,10 +2,11 @@
 author: Seth Jensen
 title: King Arthur Flour Recipes
 tags: clients, tips
+gh_issue_number: 1395
 ---
 
 <img src="/blog/2018/03/26/king-arthur-flour-recipes/pancakes.jpg" alt="pancakes" />
-<small>The delicious yield of a <a href="https://www.kingarthurflour.com/recipes/simply-perfect-pancakes-recipe">King Arthur Flour recipe</a></small>
+<small>The delicious yield of King Arthur Flour recipe <a href="https://www.kingarthurflour.com/recipes/simply-perfect-pancakes-recipe">Simply Perfect Pancakes</a></small>
 
 We have been pleased to have King Arthur Flour as a client for a few years. A year or so ago I started using some of their recipes, and their website has since become my go-to source for good baking recipes. I have used their flours a few times, but I am going to focus on their recipes in this post.
 
