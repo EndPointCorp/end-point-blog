@@ -1,0 +1,28 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" width="820px" height="520px" viewBox="-0.210084 0 820.42 520" preserveAspectRatio="xMidYMid meet">
+  <rect id="svgEditorBackground" x="0" y="0" width="820" height="520" style="fill: none; stroke: none;"/>
+  <defs id="svgEditorDefs">
+    <polygon id="svgEditorShapeDefs" style="fill:khaki;stroke:black;vector-effect:non-scaling-stroke;stroke-width:1px;"/>
+  </defs>
+  <rect x="175" y="24" style="fill:#57c1f2;stroke:black;stroke-width:1px;" id="e1_rectangle" width="267" height="78" transform="matrix(1 0 0 1 -2 13)" ry="0" rx="0"/>
+  <text style="fill:black;font-family:Arial;font-size:20px;" x="238.277" y="83.1093" id="e3_texte">App Instance</text>
+  <path d="M-6.595970253845273,-0.41427898485836245v5.000000000000003q0,1,3.999999999999999,1t4,-1v-5.000000000000001q0,1.0000000000000024,-4,1.0000000000000024t-3.999999999999999,-1.0000000000000024q0,-1,3.999999999999999,-1t4,0.9999999999999991t-4,1.0000000000000029t-3.999999999999999,-1.0000000000000029Z" style="fill:#57c1f2; stroke:black; vector-effect:non-scaling-stroke;stroke-width:1px;" id="e1_shape" transform="matrix(12.6246 0 0 14.0205 206.807 337.679)"/>
+  <path d="M-5.436785649295584,-0.4548840572206862v5.0000000000000036q0,1.0000000000000053,4,1.0000000000000053t4.000000000000004,-1.0000000000000053v-5.000000000000004q0,1.0000000000000033,-4.000000000000004,1.0000000000000033t-4,-1.0000000000000033q0,-1.0000000000000022,4,-1.0000000000000022t4.000000000000004,1.0000000000000022t-4.000000000000004,1.0000000000000033t-4,-1.0000000000000033Z" style="fill:#57c1f2; stroke:black; vector-effect:non-scaling-stroke;stroke-width:1px;" id="e2_shape" transform="matrix(12.3259 0 0 14.3097 326.432 342.385)"/>
+  <path d="M-4,-2.5v5q0,1,4,1t4,-1v-5q0,1,-4,1t-4,-1q0,-1,4,-1t4,1t-4,1t-4,-1Z" style="fill:#57c1f2; stroke:black; vector-effect:non-scaling-stroke;stroke-width:1px;" id="e4_shape" transform="matrix(12.8098 0 0 14.2111 452.059 369.995)"/>
+  <text style="fill:black;font-family:Arial;font-size:20px;" x="149.454" y="367.059" id="e5_texte">
+    <tspan x="143.992" y="" dx="">Tenant</tspan>
+    <tspan x="162.563" dy="1.25em" y="">A</tspan>
+  </text>
+  <text style="fill:black;font-family:Arial;font-size:20px;" x="273.992" y="379.076" id="e16_texte">
+    <tspan x="272.9" y="" dx="">Tenant</tspan>
+    <tspan x="288.194" dy="1.25em" y="">B</tspan>
+  </text>
+  <text style="fill:black;font-family:Arial;font-size:20px;" x="422.563" y="372.521" id="e19_texte">
+    <tspan x="422.563"> Tenant</tspan>
+    <tspan x="444.412" dy="1.25em" y="">C</tspan>
+  </text>
+  <path d="M2,0h2l-4,4l-4,-4h2v-4h4Z" style="fill:khaki; stroke:black; vector-effect:non-scaling-stroke;stroke-width:1px;" id="e20_shape" transform="matrix(4.82758 1.17793 -3.89766 16.9362 182.579 221.602)"/>
+  <path d="M2,0h2l-4,4l-4,-4h2v-4h4Z" style="fill:khaki; stroke:black; vector-effect:non-scaling-stroke;stroke-width:1px;" id="e21_shape" transform="matrix(4.41869 0 0 17.9037 305.126 219.58)"/>
+  <path d="M2,0h2l-4,4l-4,-4h2v-4h4Z" style="fill:khaki; stroke:black; vector-effect:non-scaling-stroke;stroke-width:1px;" id="e22_shape" transform="matrix(4.28827 -1.9671 4.12185 17.8648 408.022 221.427)"/>
+</svg>
