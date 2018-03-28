@@ -10,9 +10,9 @@ title: Bucardo replication from Postgres to sqlite and mariadb using pgbench
 <div class="separator" style="margin: 0 0 20px 20px; clear: both; float: right; text-align: center;"><a href="/blog/2015/08/12/bucardo-postgres-replication-pgbench/image-0-big.png" imageanchor="1" style="clear: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" src="/blog/2015/08/12/bucardo-postgres-replication-pgbench/image-0.png"/></a><br/><small><a href="https://flic.kr/p/rwPy8">"Apples and oranges" image</a><br/> by
 <a href="https://www.flickr.com/people/mukluk/">Dan McKay</a></small></div>
 
-While [Bucardo](https://bucardo.org/) is known for doing "multi-master" Postgres replication,  it can do a lot more than simple "master to master" replication (better known as "source to source" replication). As people have been asking for simple Bucardo [Bucardo 5](/blog/2014/06/23/bucardo-5-multimaster-postgres-released) recipes based on [pgbench](http://www.postgresql.org/docs/devel/static/pgbench.html), I decided to present a few here. Since Bucardo allows any number of sources and targets, I will demonstrate a source-source-source-target replication. Targets do not have to be Postgres, so let's also show that we can do source - [MariaDB](https://mariadb.org/) - [SQLite](https://sqlite.org/) replication. Because my own boxes are so customized,  I find it easier and more honest when writing demos to start with a fresh system, which also allows you to follow along at home. For this example, I decided to fire up [Amazon Web Services](https://aws.amazon.com/ec2) (AWS) again.
+While [Bucardo](https://bucardo.org/) is known for doing “multi-master” Postgres replication,  it can do a lot more than simple “master to master” replication (better known as “source to source” replication). As people have been asking for simple Bucardo [Bucardo 5](/blog/2014/06/23/bucardo-5-multimaster-postgres-released) recipes based on [pgbench](http://www.postgresql.org/docs/devel/static/pgbench.html), I decided to present a few here. Since Bucardo allows any number of sources and targets, I will demonstrate a source-source-source-target replication. Targets do not have to be Postgres, so let’s also show that we can do source—[MariaDB](https://mariadb.org/)—[SQLite](https://sqlite.org/) replication. Because my own boxes are so customized,  I find it easier and more honest when writing demos to start with a fresh system, which also allows you to follow along at home. For this example, I decided to fire up [Amazon Web Services](https://aws.amazon.com/ec2) (AWS) again.
 
-After logging in at [https://aws.amazon.com](http://aws.amazon.com/), I visited the AWS Management Console, selected "EC2", clicked on "Launch Instance", and picked the Amazon Linux AMI (in this case, "Amazon Linux AMI 2015.03 (HVM), SSD Volume Type - ami-1ecae776"). Demos like this require very little resources,  so choosing the smallest AMI (t2.micro) is more than sufficient. After waiting a couple of minutes for it to start up, I was able to SSH in and begin. The first order of business is always updating the box and installing some standard tools. After that I make sure we can install the most recent version of Postgres. I'll skip the initial steps and jump to the Major Problem I encountered:
+After logging in at [https://aws.amazon.com](http://aws.amazon.com/), I visited the AWS Management Console, selected “EC2”, clicked on “Launch Instance”, and picked the Amazon Linux AMI (in this case, “Amazon Linux AMI 2015.03 (HVM), SSD Volume Type—ami-1ecae776”). Demos like this require very little resources,  so choosing the smallest AMI (t2.micro) is more than sufficient. After waiting a couple of minutes for it to start up, I was able to SSH in and begin. The first order of business is always updating the box and installing some standard tools. After that I make sure we can install the most recent version of Postgres. I’ll skip the initial steps and jump to the Major Problem I encountered:
 
 ```
 $ sudo yum install postgresql94-plperl
@@ -22,7 +22,7 @@ Error: Package: postgresql94-plperl-9.4.4-1PGDG.rhel6.x86_64 (pgdg94)
  You could try running: rpm -Va --nofiles --nodigest
 ```
 
-Well, that's not good (and the "You could try" are useless in this case). Although all the other Postgres packages installed without a problem (postgresql94, postgresql94-server, and postgresql94-libs), there is a major incompatibility preventing Pl/Perl from working. Basically, the rpm was compiled against Perl version 5.10, but Amazon Linux is using 5.16! There are many solutions to this problem, from using perlbrew, to downgrading the system Perl, to compiling Postgres manually. However, this is the Age of the Cloud, so a simpler solution is to ditch this AMI and pick a different one. I decided to try a RHEL (Red Hat Enterprise Linux) AMI. Again, I used a t2.micro instance and launched RHEL-7.1 (AMI ID RHEL-7.1_HVM_GA-20150225-x86_64-1-Hourly2-GP2). As always when starting up an instance, the first order of business when logging in is to update the box. Then I installed some important tools, and set about getting the latest and greatest version of Postgres up and running:
+Well, that’s not good (and the “You could try” are useless in this case). Although all the other Postgres packages installed without a problem (postgresql94, postgresql94-server, and postgresql94-libs), there is a major incompatibility preventing Pl/Perl from working. Basically, the rpm was compiled against Perl version 5.10, but Amazon Linux is using 5.16! There are many solutions to this problem, from using perlbrew, to downgrading the system Perl, to compiling Postgres manually. However, this is the Age of the Cloud, so a simpler solution is to ditch this AMI and pick a different one. I decided to try a RHEL (Red Hat Enterprise Linux) AMI. Again, I used a t2.micro instance and launched RHEL-7.1 (AMI ID RHEL-7.1_HVM_GA-20150225-x86_64-1-Hourly2-GP2). As always when starting up an instance, the first order of business when logging in is to update the box. Then I installed some important tools, and set about getting the latest and greatest version of Postgres up and running:
 
 ```
 $ sudo yum update
@@ -38,7 +38,7 @@ Available Packages
 postgresql-server.x86_64        9.2.13-1.el7_1        rhui-REGION-rhel-server-release
 ```
 
-Luckily, there is excellent support for Postgres packaging on most distros. The first step is to find a rpm to use to get the "pgdg" yum repository in place. Visit [http://yum.postgresql.org/](http://yum.postgresql.org/) and choose the latest version (as of this writing, 9.4). Then find your distro, and copy the link to the rpm. Going back to the AWS box,  add it in like this:
+Luckily, there is excellent support for Postgres packaging on most distros. The first step is to find a rpm to use to get the “pgdg” yum repository in place. Visit [http://yum.postgresql.org/](https://yum.postgresql.org/) and choose the latest version (as of this writing, 9.4). Then find your distro, and copy the link to the rpm. Going back to the AWS box,  add it in like this:
 
 ```
 $ sudo yum localinstall http://yum.postgresql.org/9.4/redhat/rhel-7-x86_64/pgdg-redhat94-9.4-1.noarch.rpm
@@ -66,8 +66,8 @@ Now it is time to install Postgres 9.4. Bucardo currently needs to use Pl/Perl, 
 $ sudo yum install postgresql-plperl postgresql-contrib
 ```
 
-This time it went fine - and Perl is at 5.16.3. The next step is to start Postgres up. Red Hat has gotten on the 
-[systemd](https://en.wikipedia.org/wiki/Systemd#History_and_controversy) bandwagon, for better or for worse, so gone is the familiar 
+This time it went fine—and Perl is at 5.16.3. The next step is to start Postgres up. Red Hat has gotten on the 
+[systemd](https://en.wikipedia.org/wiki/Systemd#Criticism) bandwagon, for better or for worse, so gone is the familiar 
 **/etc/init.d/postgresql** script. Instead, we need to use **systemctl**. We will find the exact service name, enable it, then try to start it up:
 
 ```
@@ -80,7 +80,7 @@ $ sudo systemctl start postgresql-9.4
 Job for postgresql-9.4.service failed. See 'systemctl status postgresql-9.4.service' and 'journalctl -xn' for details.
 ```
 
-As in the pre-systemd days, we need to run initdb before we can start Postgres. However, the simplicity of the init.d script is gone (e.g. "service postgresql initdb"). Poking in the systemd logs reveals the solution:
+As in the pre-systemd days, we need to run initdb before we can start Postgres. However, the simplicity of the init.d script is gone (e.g. “service postgresql initdb”). Poking in the systemd logs reveals the solution:
 
 ```
 $ sudo systemctl -l status postgresql-9.4.service
@@ -98,8 +98,8 @@ Aug 03 10:15:25 ip-12.15.22.5.ec2.internal systemd[1]: Failed to start PostgreSQ
 Aug 03 10:15:25 ip-12.15.22.5.ec2.internal systemd[1]: Unit postgresql-9.4.service entered failed state.</small>
 ```
 
-That's ugly output, but what can you do? Let's run initdb, start things up, and create a test database. As I really like to use 
-[Postgres with checksums](http://michael.otacoo.com/postgresql-2/postgres-9-3-feature-highlight-data-checksums/), 
+That’s ugly output, but what can you do? Let’s run initdb, start things up, and create a test database. As I really like to use 
+[Postgres with checksums](http://paquier.xyz/postgresql-2/postgres-9-3-feature-highlight-data-checksums/), 
 we can set the environment variables to pass that flag to initdb. After that completes, we can startup Postgres.
 
 ```
@@ -109,7 +109,7 @@ Initializing database ... OK
 $ sudo systemctl start postgresql-9.4
 ```
 
-Now that Postgres is up and running, it is time to create some test databases and populate them via the pgbench utility. First, a few things to make life easier. Because pgbench installs into **/usr/pgsql-9.4/bin**, which is certainly not in anyone's PATH, we will put it in a better location. We also want to loosen the Postgres login restrictions,  and reload Postgres so it takes effect:
+Now that Postgres is up and running, it is time to create some test databases and populate them via the pgbench utility. First, a few things to make life easier. Because pgbench installs into **/usr/pgsql-9.4/bin**, which is certainly not in anyone’s PATH, we will put it in a better location. We also want to loosen the Postgres login restrictions,  and reload Postgres so it takes effect:
 
 ```
 $ sudo ln -s /usr/pgsql-9.4/bin/pgbench /usr/local/bin/
@@ -198,7 +198,7 @@ $ sudo chown $USER /var/run/bucardo /var/log/bucardo
 $ bucardo install ## hit "P" twice
 ```
 
-Now that Bucardo is ready to go, let's teach it about our databases and tables, then 
+Now that Bucardo is ready to go, let’s teach it about our databases and tables, then 
 setup a three-source, one-target database sync (aka multimaster or master-master-master-slave)
 
 ```
@@ -226,7 +226,7 @@ Checking for existing processes
 Starting Bucardo
 ```
 
-Time to test that it works. The initial database, "test1", should have many rows in the pgbench_accounts table, while the other databases should have none. Once we update some of the rows in the test1 database, it should replicate to all the others. Changes in test2 and test3 should go everywhere as well,  because they are source databases. Changes made to the database test4 should stay in test4, as it is only a target.
+Time to test that it works. The initial database, “test1”, should have many rows in the pgbench_accounts table, while the other databases should have none. Once we update some of the rows in the test1 database, it should replicate to all the others. Changes in test2 and test3 should go everywhere as well,  because they are source databases. Changes made to the database test4 should stay in test4, as it is only a target.
 
 ```
 $ psql test1 -xtc 'select count(*) from pgbench_accounts'
@@ -289,7 +289,7 @@ $ psql test4 -tc 'select aid, abalance from pgbench_accounts where aid <= 4 orde
    4 |     9999
 ```
 
-Let's create one more sync - this time, we want to replicate our Postgres data to a MariaDB and a SQLite database. 
+Let’s create one more sync—this time, we want to replicate our Postgres data to a MariaDB and a SQLite database. 
 (Bucardo can also do systems like Oracle, but getting it up and running is NOT an easy task for a quick 
 demo like this!). The first step is to get both systems up and running,  and provide them with a copy of the pgbench schema:
 
@@ -358,7 +358,7 @@ sqlite> ## add the tables here
 sqlite> .q
 ```
 
-Teach Bucardo about these new databases, then add them to a new sync. As we do not want changes to get immediately replicated, we set this sync to "autokick off". This will ensure that the sync will only run when it is manually started via the "bucardo kick" command. Since database C is also part of another Bucardo sync and may get rows written to it that way,  we need to set it as a "makedelta" database, which ensures that the replicated rows from the other sync are replicated onwards in our new sync.
+Teach Bucardo about these new databases, then add them to a new sync. As we do not want changes to get immediately replicated, we set this sync to “autokick off”. This will ensure that the sync will only run when it is manually started via the “bucardo kick” command. Since database C is also part of another Bucardo sync and may get rows written to it that way,  we need to set it as a “makedelta” database, which ensures that the replicated rows from the other sync are replicated onwards in our new sync.
 
 ```
 ## Teach Bucardo about the MariaDB database

@@ -5,11 +5,11 @@ tags: performance, postgres, python
 title: Speeding Up Saving Millions of ORM Objects in PostgreSQL
 ---
 
-## The Problem
+### The Problem
 
 Sometimes you need to generate sample data, like random data for tests. Sometimes you need to generate it with
 huge amount of code you have in your ORM mappings, just because an architect decided that all the logic needs to be
-stored in the ORM, and the database should be just a dummy data container. The real reason is not important - the problem
+stored in the ORM, and the database should be just a dummy data container. The real reason is not important—the problem
 is: let’s generate lots of, millions of rows, for a sample table from ORM mappings.
 
 Sometimes the data is read from a file, but due to business logic kept in ORM, you need to load the data from file to ORM and then save the millions of ORM objects to database.
@@ -18,7 +18,7 @@ This can be done in many different ways, but here I will concentrate on making t
 
 I will use PostgreSQL and SQLAlchemy (with psycopg2) for ORM, so all the code will be implemented in Python. I will create a couple of functions, each implementing another solution for saving the data to the database, and I will test them using 10k and 100k of generated ORM objects.
 
-## Sample Table
+### Sample Table
 
 The table I used is quite simple, just a simplified blog post:
 
@@ -31,9 +31,9 @@ CREATE TABLE posts (
 );
 ```
 
-## SQLAlchemy Mapping
+### SQLAlchemy Mapping
 
-I'm using SQLAlchemy for ORM, so I need a mapping, I will use this simple one:
+I’m using SQLAlchemy for ORM, so I need a mapping, I will use this simple one:
 
 ```python
 class BlogPost(Base):
@@ -47,7 +47,7 @@ class BlogPost(Base):
 
 The payload field is just to make the object bigger, to simulate real life where objects can be much more complicated, and thus slower to save to the database.
 
-## Generating Random Object
+### Generating Random Object
 
 The main idea for this test is to have a randomly generated object, however what I really check is the database speed,
 and the whole randomness is used at the client side, so having a randomly generated object doesn’t really matter at
@@ -65,14 +65,14 @@ def generate_random_post():
     return BlogPost(title=TITLE, body=BODY, payload=PAYLOAD)
 ```
 
-## Solution Ideas
+### Solution Ideas
 
 Generally there are two main ideas for such a bulk inserting of multiple ORM objects:
 
 - Insert them one-by-one with autocommit
 - Insert them one-by-one in one transaction
 
-## Save One By One
+### Save One By One
 
 This is the simplest way. Usually we don’t save just one object, but instead we save
 many different objects in one transaction, and making a couple of related changes in multiple transactions is a great
@@ -93,7 +93,7 @@ def save_objects_one_by_one(count=MAX_COUNT):
         session.commit()
 ```
 
-## Save All in One Transaction
+### Save All in One Transaction
 
 This solution is as simple as: create objects, save them to the database, commit the transaction at the end, so do
 everything in one huge transaction.
@@ -109,17 +109,17 @@ def save_objects_one_transaction(count=MAX_COUNT):
     session.commit()
 ```
 
-## Time difference
+### Time difference
 
 I ran the tests multiple times, truncating the table each time. The average results of saving 10k objects were quite predictable:
 
-- Multiple transactions - 268 seconds
-- One transaction - 25 seconds
+- Multiple transactions — 268 seconds
+- One transaction — 25 seconds
 
 The difference is not surprising, the whole table size is 4.8MB, but after each transaction the database needs to write the
 changes on disk, which slows the procedure a lot.
 
-## Copy
+### Copy
 
 So far, I’ve described the most common methods of generating and storing many ORM objects. I was wondering about
 another, which may seem surprising a little bit at the beginning.
@@ -129,7 +129,7 @@ row per one file row, fields delimited with a defined delimiter etc. It can be a
 
 My crazy idea was: how about using the COPY for loading all the generated ORM objects? To do that, I need to
 serialize them to a text representation, to create a text file with all of them. So I created a simple function, which
-does that. This function is made outside the BlogPost class, so I don't need to change the data model.
+does that. This function is made outside the BlogPost class, so I don’t need to change the data model.
 
 ```python
 def serialize_post_to_out_stream(post, out):
@@ -140,18 +140,18 @@ def serialize_post_to_out_stream(post, out):
 
 The function above gets two parameters:
 
-- post - the object to be serialized
-- out - the output stream where the row with the post object will be saved, in Python it is a file-like object, so an
+- post — the object to be serialized
+- out — the output stream where the row with the post object will be saved, in Python it is a file-like object, so an
 object with all the functions a file object has
 
 Here I use a standard csv module, which supports reading and writing csv files. I really don’t want to write my own
-function for escaping all the possible forms of data I could have - this usually leads to many tricky bugs.
+function for escaping all the possible forms of data I could have—this usually leads to many tricky bugs.
 
 The only thing left is to use the COPY command. I don’t want to create a file with data and load that later; the
 generated data can be really huge, and creating temporary files can just slow things down. I want to keep the whole
 procedure in Python, and use pipes for data loading.
 
-I will use the psql program for accessing the PostgreSQL database. Psql has a different command called \COPY, which can read the csv file from psql's standard input. This can be done using e.g.: cat file.csv | psql database.
+I will use the psql program for accessing the PostgreSQL database. Psql has a different command called \COPY, which can read the csv file from psql’s standard input. This can be done using e.g.: cat file.csv | psql database.
 
 To use it in Python, I’m going to use the subprocess module, and create a psql process with stdin=subprocess.PIPE
 which will give me write access to the pipe psql reads from. The function I’ve implemented is:
@@ -171,10 +171,10 @@ def save_objects_using_copy(count=MAX_COUNT):
     p.stdin.close()
 ```
 
-## Results
+### Results
 
 I’ve also tested that on the same database table, truncating the table before running it. After that I’ve also checked
-this function, and the previous one (with one transaction) on a bigger sample - 100k of BlogPost objects.
+this function, and the previous one (with one transaction) on a bigger sample—100k of BlogPost objects.
 
 The results are:
 
@@ -218,7 +218,7 @@ As you can see, the COPY version is the fastest, even 5 times faster than the fu
 transaction. This version is also memory friendly, as no matter how many objects you want to generate, it always needs
 to store one ORM object in memory, and you can destroy it after saving.
 
-## The Drawbacks
+### The Drawbacks
 
 Of course using psql poses a couple of problems:
 
@@ -226,6 +226,6 @@ Of course using psql poses a couple of problems:
 - calling psql creates another connection to the database; sometimes that could be a problem
 - you need to set up a password in ~/.psql file; you cannot provide it in the command line
 
-You could also get the pcycopg2 cursor directly from the SQLAlchemy connection, and then use the copy_from() function, but this method needs to have all the data already prepared in memory, as it reads from a file-like object, e.g. StringIO. This is not a good solution for inserting millions of objects, as they can be quite huge - streaming is much better in this case.
+You could also get the pcycopg2 cursor directly from the SQLAlchemy connection, and then use the copy_from() function, but this method needs to have all the data already prepared in memory, as it reads from a file-like object, e.g. StringIO. This is not a good solution for inserting millions of objects, as they can be quite huge—streaming is much better in this case.
 
-Another solution to this is to write a generator, which is a file like object, and the copy_from() method can read from it directly. This function calls the file's read() method trying to read 8192 bytes per call. This can be a good idea when you don't have access to the psql, however due to the overhead for generating the 8192 bytes strings, it should be slowever than the psql version.
+Another solution to this is to write a generator, which is a file like object, and the copy_from() method can read from it directly. This function calls the file’s read() method trying to read 8192 bytes per call. This can be a good idea when you don’t have access to the psql, however due to the overhead for generating the 8192 bytes strings, it should be slowever than the psql version.

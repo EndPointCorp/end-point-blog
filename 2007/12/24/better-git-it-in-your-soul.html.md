@@ -21,8 +21,7 @@ Distributed development is at the heart of Git. In 2005, licensing concerns surr
 
 #### How Distributed Development is Achieved
 
-*This section gets a bit technical; if your interest in this subject is more at the level of workflow, management, etc., you can safely skip down to the "Distributed Development in Practice" section.
-*
+*This section gets a bit technical; if your interest in this subject is more at the level of workflow, management, etc., you can safely skip down to the "Distributed Development in Practice" section.*
 
 Git "tracks content, not files". All files and directories managed in Git are reduced to basic Git "objects", the identity of each being determined by a SHA1 hash of its content. A file "X" added to Git, therefore, is not stored as "file X" within the Git repository; the file itself is stored as a "file" object identified by a SHA1 hash of the file "X"'s contents along with some Git headers about the data (identifying the Git object as a "file" object, including the file permissions, etc.). The name "X" is not found anywhere within this blob that represents "X". However, the Git object representing the directory in which file "X" lives will contain a reference to the "X" blob (via the SHA1 hash ID) and the name "X" for that reference. This is rather like Unix filesystems: a file on disk is just a file on disk, with no outer-world identity other than the local names given to references to that file on disk from directories that choose to reference it. The names are "local" because they are only meaningful within their respective directory.
 

@@ -6,15 +6,15 @@ title: Analyzer Reports with Geo Map Option in Pentaho 5 BI Server
 ---
 
 
-The "Geo Map" option in Analyzer Reports provides a feature to visualize data with geographic locations. We will learn how to design a Mondrian schema and configure Pentaho to make use of the "Geo Map" feature in the Analyzer Reports. This article will show us how to set this feature up step by step.
+The “Geo Map” option in Analyzer Reports provides a feature to visualize data with geographic locations. We will learn how to design a Mondrian schema and configure Pentaho to make use of the “Geo Map” feature in the Analyzer Reports. This article will show us how to set this feature up step by step.
 
 ### **Enable Geo Map feature on Geographic fields in Mondrian Schema**
 
 The Mondrian schema has two main categories called Dimensions and Measures. The Dimensions are defined as levels in the Mondrian schema. The Geographic fields should have two additional annotations to use Geo Map. The two annotations are:
 
-1. Data.Role - defines the type of level generally; for this type of node, this must be set to  'Geography'.
+1. Data.Role — defines the type of level generally; for this type of node, this must be set to ‘Geography’.
 
-2. Geo.Role - defines the geographical classification in a hierarchy. These can be either predefined roles ('country', 'state', 'city', 'postalcode') or custom roles.
+2. Geo.Role — defines the geographical classification in a hierarchy. These can be either predefined roles (‘country’, ‘state’, ‘city’, ‘postalcode’) or custom roles.
 
 #### Sample Level with Annotation:
 
@@ -31,9 +31,9 @@ The Mondrian schema has two main categories called Dimensions and Measures. The 
 
 ### **Geographic fields and datasets in database**
 
- I have created a sample table with the fields containing geographic locations for dimensions and aggregated value for measures. The sample population table contains Pentaho-defined geographic locations 'country', 'state', 'city' and aggregated population count for those geographic fields.
+ I have created a sample table with the fields containing geographic locations for dimensions and aggregated value for measures. The sample population table contains Pentaho-defined geographic locations ‘country’, ‘state’, ‘city’ and aggregated population count for those geographic fields.
 
-#### **'Population' table design and datasets:**
+#### **‘Population’ table design and datasets:**
 
 Here we create a sample population table with geographic fields and the population count in a PostgreSQL database.
 
@@ -47,7 +47,7 @@ CREATE TABLE population (
 );
 ```
 
-Next we load population data into the table for 4 cities of 2 states in USA. (Population data for more geographic locations in USA are available at [USA Population](http://www.google.com/publicdata/explore?ds=kf7tgg1uo9ude_).)
+Next we load population data into the table for 4 cities of 2 states in USA. (Population data for more geographic locations in USA are available at [USA Population](https://www.google.com/publicdata/explore?ds=kf7tgg1uo9ude_).)
 
 ```sql
 # SELECT * FROM population;
@@ -63,7 +63,7 @@ Next we load population data into the table for 4 cities of 2 states in USA. (Po
 
 ### **Design a Mondrian Schema with Geographic Support**
 
-Pentaho provides a tool called "Schema Work Bench" to design a Mondrian schema for a specific table's data. We can create a new Mondrian schema for the table by selecting File -> New -> Schema. The picture below depicts the hierarchy level of the Mondrian schema elements.
+Pentaho provides a tool called “Schema Work Bench” to design a Mondrian schema for a specific table’s data. We can create a new Mondrian schema for the table by selecting File -> New -> Schema. The picture below depicts the hierarchy level of the Mondrian schema elements.
 
 <div class="separator" style="clear: both; text-align: center;">
 <a href="/blog/2014/09/12/analyzer-reports-with-geo-map-option-in/image-0.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="536" src="/blog/2014/09/12/analyzer-reports-with-geo-map-option-in/image-0.png" width="640"/></a></div>
@@ -92,12 +92,12 @@ The Mondrian schema xml can be imported directly into Pentaho server to create a
 
 ### **Create a Analyzer Report with Geo Map**
 
-Add the necessary geographic fields under "Rows" and population count under "Measure" to create a basic analyzer report.
+Add the necessary geographic fields under “Rows” and population count under “Measure” to create a basic analyzer report.
 
 <div class="separator" style="clear: both; text-align: center;">
 <a href="/blog/2014/09/12/analyzer-reports-with-geo-map-option-in/image-4.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="278" src="/blog/2014/09/12/analyzer-reports-with-geo-map-option-in/image-4.png" width="640"/></a></div>
 
-Change the report type to "Geo Map" through the right top corner options to view the visualized data. Congratulations, you're done!
+Change the report type to “Geo Map” through the right top corner options to view the visualized data. Congratulations, you’re done!
 
 <div class="separator" style="clear: both; text-align: center;">
 <a href="/blog/2014/09/12/analyzer-reports-with-geo-map-option-in/image-5.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="220" src="/blog/2014/09/12/analyzer-reports-with-geo-map-option-in/image-5.png" width="640"/></a></div>

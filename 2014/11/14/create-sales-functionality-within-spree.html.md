@@ -7,13 +7,13 @@ title: Create a sales functionality within Spree 2.3 using Spree fancy
 
 
 
-## Introduction
+### Introduction
 
-I recently started working with Spree and wanted to learn how to implement some basic features. I focused on one of the most common needs of any e-commerce business - adding a sale functionality to products. To get a basic understanding of what was involved, I headed straight to the [Spree Developer Guides](http://guides.spreecommerce.com/developer/getting_started_tutorial.html). As I was going through the directions, I realized it was intended for the older Spree version 2.1. This led to me running into a few issues as I went through it using Spree's latest version 2.3.4. I wanted to share with you what I learned, and some tips to avoid the same mistakes I made.
+I recently started working with Spree and wanted to learn how to implement some basic features. I focused on one of the most common needs of any e-commerce business—adding a sale functionality to products. To get a basic understanding of what was involved, I headed straight to the [Spree Developer Guides](https://guides.spreecommerce.org/developer/getting_started_tutorial.html). As I was going through the directions, I realized it was intended for the older Spree version 2.1. This led to me running into a few issues as I went through it using Spree’s latest version 2.3.4. I wanted to share with you what I learned, and some tips to avoid the same mistakes I made.
 
-## Set-up
+### Set-up
 
-I'll assume you have the prerequisites it lists including Rails, Bundler, ImageMagick and the Spree gem. These are the versions I'm running on my Mac OS X:
+I’ll assume you have the prerequisites it lists including Rails, Bundler, ImageMagick and the Spree gem. These are the versions I’m running on my Mac OS X:
 
 - **Ruby**: 2.1.2p95
     - **Rails**: 4.1.4
@@ -21,11 +21,11 @@ I'll assume you have the prerequisites it lists including Rails, Bundler, ImageM
     - **ImageMagick**: 6.8.9-1
     - **Spree**: 2.3.4
 
-**What is Bundler?** Bundler provides a consistent environment for Ruby projects by tracking and installing the exact gems and versions that are needed. You can read more about the benefits of using Bundler on their [website](http://bundler.io/). If you're new to Ruby on Rails and/or Spree, you'll quickly realize how useful Bundler is when updating your gems.
+**What is Bundler?** Bundler provides a consistent environment for Ruby projects by tracking and installing the exact gems and versions that are needed. You can read more about the benefits of using Bundler on their [website](http://bundler.io/). If you’re new to Ruby on Rails and/or Spree, you’ll quickly realize how useful Bundler is when updating your gems.
 
-After you've successfully installed the necessary tools for your project, it's time to create our first Rails app, which will then be used as a foundation for our simple Spree project called mystore
+After you’ve successfully installed the necessary tools for your project, it’s time to create our first Rails app, which will then be used as a foundation for our simple Spree project called mystore
 
-## Let's create our app
+### Let’s create our app
 
 Run the following commands:
 
@@ -35,9 +35,9 @@ $ cd mystore
 $ gem install spree_cmd
 ```
 
-*Note: you may get a warning that you need to run bundle install before trying to start your application since spree_gateway.git isn't checked out yet. Go ahead and follow those directions, I'll wait.
+*Note: you may get a warning that you need to run bundle install before trying to start your application since spree_gateway.git isn’t checked out yet. Go ahead and follow those directions, I’ll wait.
 
-## Spree-ify our app
+### Spree-ify our app
 
 We can add the e-commerce platform to our Rails app by running the following command:
 
@@ -45,9 +45,9 @@ We can add the e-commerce platform to our Rails app by running the following com
 spree install --auto-accept
 ```
 
-If all goes well, you should get a message that says, "Spree has been installed successfully. You're all ready to go! Enjoy!". Now the fun part - let's go ahead and start our server to see what our demo app actually looks like. Run rails s to start the server and open up a new browser page pointing to the URL localhost:3000.
+If all goes well, you should get a message that says, “Spree has been installed successfully. You’re all ready to go! Enjoy!”. Now the fun part—let’s go ahead and start our server to see what our demo app actually looks like. Run rails s to start the server and open up a new browser page pointing to the URL localhost:3000.
 
-*Note - when you navigate to localhost:3000, watch your terminal - you'll see a lot of processes running in the background as the page loads simultaneously in your browser window. It can be pretty overwhelming, but as long as you get a "Completed 200 OK" message in your terminal, you should be good to go! See it below:
+*Note—when you navigate to localhost:3000, watch your terminal—you’ll see a lot of processes running in the background as the page loads simultaneously in your browser window. It can be pretty overwhelming, but as long as you get a “Completed 200 OK” message in your terminal, you should be good to go! See it below:
 
 <div class="separator" style="clear: both; text-align: center;"><a href="/blog/2014/11/14/create-sales-functionality-within-spree/image-0-big.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="/blog/2014/11/14/create-sales-functionality-within-spree/image-0.png"/></a></div>
 
@@ -57,21 +57,21 @@ Once you login to the admin screen, this is what you should see:
 
 <div class="separator" style="clear: both; text-align: center;"><a href="/blog/2014/11/14/create-sales-functionality-within-spree/image-1-big.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="/blog/2014/11/14/create-sales-functionality-within-spree/image-1.png"/></a></div>
 
-Once you begin to use Spree, you'll soon find that the most heavily used areas of the admin panel include Orders, Products, Configuration and Promotions. We'll be going into some of these soon.
+Once you begin to use Spree, you’ll soon find that the most heavily used areas of the admin panel include Orders, Products, Configuration and Promotions. We’ll be going into some of these soon.
 
-## Extensions in 3.5 steps
+### Extensions in 3.5 steps
 
-The [next part](http://guides.spreecommerce.com/developer/extensions_tutorial.html) of the Spree documentation suggests adding the spree_fancy extension to our store to update the look and feel of the website, so let's go ahead and follow the next few steps:
+The [next part](https://guides.spreecommerce.org/developer/extensions_tutorial.html) of the Spree documentation suggests adding the spree_fancy extension to our store to update the look and feel of the website, so let’s go ahead and follow the next few steps:
 
 ### **Step 1: Update the Gemfile**
 
-We can find our Gemfile by going back to the terminal, and within the mystore directory, type ls to see a list of all the files and subdirectories within the Spree app. You will see the Gemfile there - open it using your favorite text editor. Add the following line to the last line of your Gemfile, and save it:
+We can find our Gemfile by going back to the terminal, and within the mystore directory, type ls to see a list of all the files and subdirectories within the Spree app. You will see the Gemfile there—open it using your favorite text editor. Add the following line to the last line of your Gemfile, and save it:
 
 ```ruby
 gem 'spree_fancy', :git => 'git://github.com/spree/spree_fancy.git', :branch => '2-1-stable'
 ```
 
-Notice the branch it mentions is 2-1-stable. Since you just installed Spree, you are most likely using the latest version, 2-3-stable. I changed my branch in the above gem to '2-3-stable' to reflect the Spree version I'm currently using. After completing this step, run bundle install to install the gem using Bundler.
+Notice the branch it mentions is 2-1-stable. Since you just installed Spree, you are most likely using the latest version, 2-3-stable. I changed my branch in the above gem to '2-3-stable' to reflect the Spree version I’m currently using. After completing this step, run bundle install to install the gem using Bundler.
 
 Now we need to copy over the migrations and assets from the spree_fancy extension by running this command in your terminal within your mystore application:
 
@@ -79,9 +79,9 @@ Now we need to copy over the migrations and assets from the spree_fancy extensio
 $ bundle exec rails g spree_fancy:install
 ```
 
-### Step 1.5: We've hit an error!
+### Step 1.5: We’ve hit an error!
 
-At this point, you've probably hit a LoadError, and we can no longer see our beautiful Spree demo app, instead getting an error page which says "Sprockets::Rails::Helper::AssetFilteredError in Spree::Home#index" at the top. How do we fix this?
+At this point, you’ve probably hit a LoadError, and we can no longer see our beautiful Spree demo app, instead getting an error page which says “Sprockets::Rails::Helper::AssetFilteredError in Spree::Home#index” at the top. How do we fix this?
 
 Within your mystore application directory, navigate to config/intializers/assets.rb file and edit the last line of code by uncommenting it and typing:
 
@@ -93,7 +93,7 @@ Now restart your server and you will see your new theme!
 
 ### Step 2: Create a sales extension
 
-Now let's see how to create an extension instead of using an existing one. According to the Spree tutorial, we first need to *generate* an extension - remember to run this command from a directory *outside* of your Spree application:
+Now let’s see how to create an extension instead of using an existing one. According to the Spree tutorial, we first need to *generate* an extension—remember to run this command from a directory *outside* of your Spree application:
 
 ```ruby
 $ spree extension simple_sales
@@ -117,7 +117,7 @@ class AddSalePriceToSpreeVariants < ActiveRecord::Migration
 end
 ```
 
-Now let's switch back to our mystore application so that we can add our extension before continuing any development. Within mystore, add the following to your Gemfile:
+Now let’s switch back to our mystore application so that we can add our extension before continuing any development. Within mystore, add the following to your Gemfile:
 
 ```ruby
 gem 'spree_simple_sales', :path => '../spree_simple_sales'
@@ -125,7 +125,7 @@ gem 'spree_simple_sales', :path => '../spree_simple_sales'
 
 You will have to adjust the path ('../spree_simple_sales') depending on where you created your sales extension.
 
-Now it's time to bundle install again, so go ahead and run that. Now we need to copy our migration by running this command in our terminal:
+Now it’s time to bundle install again, so go ahead and run that. Now we need to copy our migration by running this command in our terminal:
 
 $ rails g spree_simple_sales:install
 
@@ -157,7 +157,7 @@ end
 
 As Spree explains it, this script will select just the products that have a variant with a sale_price set. 
 
-Next step - add a route to this sales action in our config/routes.rb file. Make sure your routes.rb file looks like this:
+Next step—add a route to this sales action in our config/routes.rb file. Make sure your routes.rb file looks like this:
 
 ```ruby
 Spree::Core::Engine.routes.draw do
@@ -165,11 +165,11 @@ Spree::Core::Engine.routes.draw do
 end
 ```
 
-###  Let's set a sale price for the variant 
+###  Let’s set a sale price for the variant 
 
 Normally, to change a variant attribute, we could do it through the admin interface, but we haven’t created this functionality yet. This means we need to open up our rails console:
 
-*Note - you should be in the mystore directory
+*Note—you should be in the mystore directory
 
 Run $ rails console
 
@@ -208,7 +208,7 @@ Create the a file in your new directory called sale.html.erb and add the followi
 </div>
 ```
 
-Now start your rails server again and navigate to localhost:3000/sale to see the product you listed on sale earlier! Exciting stuff, isn't it? The next step is to actually reflect the sale price instead of the original price by fixing our sales price extension using Spree Decorator.
+Now start your rails server again and navigate to localhost:3000/sale to see the product you listed on sale earlier! Exciting stuff, isn’t it? The next step is to actually reflect the sale price instead of the original price by fixing our sales price extension using Spree Decorator.
 
 ### Decorate your variant
 
@@ -238,7 +238,7 @@ Run the following command from the root directory of your EXTENSION:
 
 $ bundle exec rake test_app
 
-It will begin the process by saying “Generating dummy Rails application…” - great! you’re on the right path.
+It will begin the process by saying “Generating dummy Rails application…”—great! you’re on the right path.
 
 Once you finish creating your dummy Rails app, run the rspec command and you should see the following output:
 
@@ -293,13 +293,13 @@ Next we need to add a field to our product admin page, so we don’t have to alw
 A better way to override views is to use Deface, which is a Rails library to directly edit the underlying view file. All view customizations will be in ONE location: app/overrides which will make sure your app is always using the latest implementation of the view provided by Spree.
 
 1. Go to mystore/app/views/spree and create an admin/products directory and create the file _form.html.erb.
-1. Copy the full file NOT from Spree’s GitHub but from your Spree backend. You can think of your Spree backend as the area to edit your admin (among other things) - the spree_backend gem contains the most updated  _form.html.erb - if you use the one listed in the documentation, you will get some Method Errors on your product page.
+1. Copy the full file NOT from Spree’s GitHub but from your Spree backend. You can think of your Spree backend as the area to edit your admin (among other things)—the spree_backend gem contains the most updated  _form.html.erb—if you use the one listed in the documentation, you will get some Method Errors on your product page.
 
 In order to find the _form.html.erb file in your spree_backend gem, navigate to your app, and within that, run the command:
 
 bundle show spree_backend
 
-The result is the location of your spree_backend. Now cd into that location, and navigate to app/views/spree/admin/products - this is where you will find the correct _form.html.erb. Copy the contents of this file into the newly created _form.html.erb file within your application’s directory structure you just created: mystore/app/views/spree/admin/products.
+The result is the location of your spree_backend. Now cd into that location, and navigate to app/views/spree/admin/products—this is where you will find the correct _form.html.erb. Copy the contents of this file into the newly created _form.html.erb file within your application’s directory structure you just created: mystore/app/views/spree/admin/products.
 
 Now we want to actually add a field container after the price field container for sale price so we need to create another override by creating a new file in your application’s app/overrides directory called add_sale_price_to_product_edit.rb and add the following content:
 
@@ -331,6 +331,6 @@ Now you can check to see if it worked by heading to http://localhost:3000/admin/
 
 ### CONCLUSION
 
-Congratulations, you've created the sales functionality! If you're using Spree 2.3 to create a sales functionality for your application, I would love to know what your experience was like. Good luck!
+Congratulations, you’ve created the sales functionality! If you’re using Spree 2.3 to create a sales functionality for your application, I would love to know what your experience was like. Good luck!
 
 

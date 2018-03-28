@@ -5,7 +5,7 @@ tags: ecommerce, piggybak, rails
 title: Advanced Product Options (Variants) in Piggybak
 ---
 
-About a month ago, Tim Case and I developed and released a [Piggybak](http://www.piggybak.org/) extension [piggybak_variants](https://github.com/piggybak/piggybak_variants), which provides advanced product optioning (or variant) support in Piggybak. Piggybak is an open source Ruby on Rails ecommerce platform developed and maintained by End Point. Here, I discuss the background and basics of the extension.
+About a month ago, Tim Case and I developed and released a [Piggybak](https://github.com/piggybak/piggybak) extension [piggybak_variants](https://github.com/piggybak/piggybak_variants), which provides advanced product optioning (or variant) support in Piggybak. Piggybak is an open source Ruby on Rails ecommerce platform developed and maintained by End Point. Here, I discuss the background and basics of the extension.
 
 ### Motivation & Background
 
@@ -47,7 +47,7 @@ These steps are similar to Piggybak's core behavior for adding non-variant sella
 
 ### Screenshots
 
-The [Piggybak demo](http://www.piggybak.org/demo) uses this extension for selling several product options of photography frames. The images and captions below represent the variants extension for this use case.
+The [Piggybak demo](https://github.com/piggybak/demo) uses this extension for selling several product options of photography frames. The images and captions below represent the variants extension for this use case.
 
 <img border="0" src="/blog/2012/12/18/advanced-product-options-variants-in/image-4.png" style="border:5px solid #E6E6E6;margin-bottom:0px;" width="700"/>
 
@@ -71,4 +71,4 @@ When each option value is triggered, appropriate pricing information is displaye
 
 The goal of this extension was to provide variant functionality that is not necessarily required to be used with Piggybak. Piggybak can still be leveraged without this extension to provide simple single product option add to cart functionality. The Piggybak cart only examines what elements are in the cart based on the sellable_id and the quantity, which is the driving force of the core Piggybak architecture as well as this extension.
 
-Stay tuned for additional updates to the [Piggybak Ruby on Rails Ecommerce](http://www.piggybak.org/) platform.
+Stay tuned for additional updates to the [Piggybak Ruby on Rails Ecommerce](https://github.com/piggybak/piggybak) platform.

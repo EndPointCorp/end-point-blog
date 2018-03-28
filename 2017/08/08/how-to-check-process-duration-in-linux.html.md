@@ -2,12 +2,12 @@
 author: Muhammad Najmi bin Ahmad Zabidi
 gh_issue_number: 1320
 tags: shell, linux
-title: How to check process duration in Linux with the "ps" command
+title: How to check process duration in Linux with the “ps” command
 ---
 
-In certain cases we might want to get a certain process' elapsed time for our own reason. Turns out "ps" command could easily assist us in that. According to "ps" manual, etime could put the duration of time in **[[DD-]hh:]mm:ss. format**, while etimes in seconds.
+In certain cases we might want to get a certain process’ elapsed time for our own reason. Turns out “ps” command could easily assist us in that. According to “ps” manual, etime could put the duration of time in **[[DD-]hh:]mm:ss. format**, while etimes in seconds.
 
-From "ps" manpage:
+From “ps” manpage:
 
 ```bash
 etime       ELAPSED   elapsed time since the process was started, in the form [[DD-]hh:]mm:ss.
@@ -25,9 +25,9 @@ or in seconds:
 ps -p "pid" -o etimes
 ```
 
-In this case the "pid" should be replaced with your intended process ID.
+In this case the “pid” should be replaced with your intended process ID.
 
-The following will help to nicely reporting the output. We can put -o etime or -o etimes with other argument, that is "command", in order to show the executed command along with its very own absolute path:
+The following will help to nicely reporting the output. We can put -o etime or -o etimes with other argument, that is “command”, in order to show the executed command along with its very own absolute path:
 
 ```bash
 ps -p "28590" -o etime,command
@@ -37,7 +37,7 @@ ELAPSED COMMAND
 21:45 /usr/bin/perl ./fastcgi-wrapper.pl 7999
 ```
 
-We can also get the start date of the process' execution:
+We can also get the start date of the process’ execution:
 
 ```bash
 najmi@ubuntu-ampang:~$ ps -p 21745 -o etime,command,start
@@ -136,4 +136,4 @@ najmi@ubuntu-ampang:~$ for i in `pidof chrome`;do ps -p $i -o pid,comm,cmd,start
  2255 chrome          /opt/google/chrome/chrome - 08:05:43    02:57:39
 ```
 
-There is other tool, called as **stat** which records the timestamp of a file but for slightly different purpose. Stay tune for the next blogpost!
+There is other tool, called as **stat** which records the timestamp of a file but for slightly different purpose. Stay tuned for the next blogpost!

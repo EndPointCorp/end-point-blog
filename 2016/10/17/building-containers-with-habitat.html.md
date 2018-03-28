@@ -1,13 +1,13 @@
 ---
 author: Kirk Harr
 gh_issue_number: 1262
-tags: chef, containers, kubernetes, devops
+tags: chef, containers, devops
 title: 'Building Containers with Habitat'
 ---
 
 ### Many Containers, Many Build Systems
 
-When working with modern container systems like Docker, Kubernetes, and Mesosphere, each provide methods for building your applications into their containers. However each build process is specific to that container system, and using similar applications across tiers of container environments would require maintaining each container's build environment. When approaching this problem for multiple container environments, Chef Software created a tool to unify these build systems and create container-agnostic builds which could be exported into any of the containers. This tool is called [Habitat](https://www.habitat.sh/) which also provide some pre-built images to get applications started quickly.
+When working with modern container systems like Docker, Kubernetes, and Mesosphere, each provide methods for building your applications into their containers. However each build process is specific to that container system, and using similar applications across tiers of container environments would require maintaining each container’s build environment. When approaching this problem for multiple container environments, Chef Software created a tool to unify these build systems and create container-agnostic builds which could be exported into any of the containers. This tool is called [Habitat](https://www.habitat.sh/) which also provide some pre-built images to get applications started quickly.
 
 I recently attended a Habitat Hack event locally in Portland (Oregon) which helped me get more familiar with the system and its capabilities. We worked together in teams to take a deeper dive into various aspects of how Habitat works, you can read about our adventures over on the [Chef blog](https://blog.chef.io/2016/09/09/habitat-hack-pdx-wrap/).
 
@@ -66,7 +66,7 @@ We also need two hooks which will be executed at package install time and at run
 }
 ```
 
-To complete the replacement, we would provide a "Tom's Obvious, Minimal Language" (.toml) file with has a key-value pair for each of these configuration variables we want to set. This .toml file will be interpreted during each build to populate these values, creating an opportunity to customize our builds by injecting specific values into the variables defined in the application configuration. Here is an example of the syntax from this example:
+To complete the replacement, we would provide a “Tom’s Obvious, Minimal Language” (.toml) file with has a key-value pair for each of these configuration variables we want to set. This .toml file will be interpreted during each build to populate these values, creating an opportunity to customize our builds by injecting specific values into the variables defined in the application configuration. Here is an example of the syntax from this example:
 
 ```nohighlight
 # Message of the Day

@@ -7,11 +7,11 @@ title: Bucardo, and Coping with Unicode
 
 
 
-Given the [recent DBD::Pg 3.0.0 release](/blog/2014/02/19/dbdpg-utf-8-perl-postgresql), with its improved Unicode support, it seemed like a good time to work on a [Bucardo bug](https://github.com/bucardo/bucardo/issues/47) we've wanted fixed for a while. Although [Bucardo](http://www.bucardo.org) will replicate Unicode data without a problem, it runs into difficulties when table or column in the database include non-ASCII characters. Teaching Bucardo to handle Unicode data has been an interesting exercise.
+Given the [recent DBD::Pg 3.0.0 release](/blog/2014/02/19/dbdpg-utf-8-perl-postgresql), with its improved Unicode support, it seemed like a good time to work on a [Bucardo bug](https://github.com/bucardo/bucardo/issues/47) we’ve wanted fixed for a while. Although [Bucardo](https://bucardo.org) will replicate Unicode data without a problem, it runs into difficulties when table or column in the database include non-ASCII characters. Teaching Bucardo to handle Unicode data has been an interesting exercise.
 
-Without information about its encoding, string data at its heart is meaningless. Programs that exchange string information without paying attention to the encoding end up with problems exactly like that described in the bug, with nonsense characters all over. Further, it's impossible even to compare two different strings reliably. So not only would Bucardo's logs and program output contain junk data, Bucardo would simply fail to find database objects that clearly existed, because it would end up querying for the wrong object name, or the keys of the hashes it uses internally would be meaningless. Even communication between different Bucardo processes needs to be decoded correctly. The recent DBD::Pg 3.0.0 release takes care of decoding strings sent from PostgreSQL, but other inputs, such as command-line arguments, must be treated individually. All output handles, such as STDOUT, STDERR, and the log file output, must be told to expect data in a particular encoding to ensure their output is handled correctly.
+Without information about its encoding, string data at its heart is meaningless. Programs that exchange string information without paying attention to the encoding end up with problems exactly like that described in the bug, with nonsense characters all over. Further, it’s impossible even to compare two different strings reliably. So not only would Bucardo’s logs and program output contain junk data, Bucardo would simply fail to find database objects that clearly existed, because it would end up querying for the wrong object name, or the keys of the hashes it uses internally would be meaningless. Even communication between different Bucardo processes needs to be decoded correctly. The recent DBD::Pg 3.0.0 release takes care of decoding strings sent from PostgreSQL, but other inputs, such as command-line arguments, must be treated individually. All output handles, such as STDOUT, STDERR, and the log file output, must be told to expect data in a particular encoding to ensure their output is handled correctly.
 
-The first step is to build a test case. Bucardo's test suite is quite comprehensive, and easy to use. For starters, I'll make a simple test that just creates a table, and tries to tell Bucardo about it. The test suite will already create databases and install Bucardo for me; I can talk to those databases with handles $dbhA and $dbhB. Note that in this case, although the table and primary key names contain non-ASCII characters, the relgroup and sync names do not. That will require further programming. The character in the primary key name, incidentally, is a [staff of Aesculapius](https://en.wikipedia.org/wiki/Rod_of_Asclepius), which I don't recommend people include in the name of a typical primary key.
+The first step is to build a test case. Bucardo’s test suite is quite comprehensive, and easy to use. For starters, I’ll make a simple test that just creates a table, and tries to tell Bucardo about it. The test suite will already create databases and install Bucardo for me; I can talk to those databases with handles $dbhA and $dbhB. Note that in this case, although the table and primary key names contain non-ASCII characters, the relgroup and sync names do not. That will require further programming. The character in the primary key name, incidentally, is a [staff of Aesculapius](https://en.wikipedia.org/wiki/Rod_of_Asclepius), which I don’t recommend people include in the name of a typical primary key.
 
 ```perl
 for my $dbh (($dbhA, $dbhB)) {
@@ -26,7 +26,7 @@ like($bct->ctl("bucardo add sync test_unicode relgroup=unicode dbs=A:source,B:ta
     or BAIL_OUT "Failed to add test_unicode sync";
 ```
 
-Having created database objects and configured Bucardo, the next part of the test starts Bucardo, inserts some data into the master database "A", and tries to replicate it:
+Having created database objects and configured Bucardo, the next part of the test starts Bucardo, inserts some data into the master database “A”, and tries to replicate it:
 
 ```perl
 $dbhA->do("INSERT INTO test_büçárđo (pkey_\x{2695}, data) VALUES (1, 'Something')");
@@ -52,7 +52,7 @@ use utf8;
 use open qw( :std :utf8 );
 ```
 
-In some cases, I also had to add a couple more modules, and explicitly decode incoming values. For instance, the test suite repeatedly runs shell commands to configure and manage test instances of Bucardo. . There, too, the output needs to be decoded correctly:
+In some cases, I also had to add a couple more modules, and explicitly decode incoming values. For instance, the test suite repeatedly runs shell commands to configure and manage test instances of Bucardo. There, too, the output needs to be decoded correctly:
 
 ```perl
     debug("Script: $ctl Connection options: $connopts Args: $args", 3);

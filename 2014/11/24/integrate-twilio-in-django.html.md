@@ -1,21 +1,21 @@
 ---
 author: Kulbir Singh
 gh_issue_number: 1060
-tags: django, python
+tags: django, python, twilio
 title: Integrate Twilio in Django
 ---
 
 
 
-## Twilio
+### Twilio
 
 [Twilio](https://www.twilio.com/) is a powerful HTTP API that allows you to build powerful voice and SMS apps. The goal of this blog post is to help make building the SMS applications as simple as possible in django.
 
-There is a already Twilio Python help library available. The open source [twilio-python](https://github.com/twilio/twilio-python) library lets us to write python code to make HTTP requests to the Twilio API.
+There is a already Twilio Python help library available. The open source [twilio-python](https://github.com/twilio/twilio-python) library lets us to write Python code to make HTTP requests to the Twilio API.
 
-## Installation
+### Installation
 
-The easiest way to install twilio-python library is using [pip](http://pip.readthedocs.org/en/latest/quickstart.html). [Pip](http://pip.readthedocs.org/en/latest/quickstart.html) is a package manager for python.
+The easiest way to install twilio-python library is using [pip](http://pip.readthedocs.org/en/latest/quickstart.html). Pip is a package manager for Python.
 
 Simply run following command in terminal.
 
@@ -23,7 +23,7 @@ Simply run following command in terminal.
 $ pip install twilio
 ```
 
-## Twilio API Credentails
+### Twilio API Credentails
 
 To Integrate twilio API in django application, we need **TWILIO_ACCOUNT_SID** and **TWILIO_AUTH_TOKEN** variables. These variables can be found by logging into your Twilio account dashboard. These variables are used to communicate with the Twilio API.
 
@@ -34,9 +34,9 @@ TWILIO_ACCOUNT_SID = 'ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
 TWILIO_AUTH_TOKEN = 'YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY'
 ```
 
-## Create a New App
+### Create a New App
 
-We are going to interact with people using SMS, so I prefer to create an app named **communication**. I am assuming, you've already installed Django.
+We are going to interact with people using SMS, so I prefer to create an app named **communication**. I am assuming you’ve already installed Django.
 
 Run following command in terminal.
 
@@ -62,7 +62,7 @@ INSTALLED_APPS = (
 )
 ```
 
-## Create the Model
+### Create the Model
 
 Now we’ll open up **communication/models.py** to start creating models for our app.
 
@@ -87,7 +87,7 @@ $ python manage.py syncdb
 
 It will create the necessary database tables for our app.
 
-## Create utils.py file
+### Create utils.py file
 
 Create a new file named utils.py and save in **communication/utils.py**.
 
@@ -111,7 +111,7 @@ def send_twilio_message(to_number, body):
 
 ```
 
-## Testing send_twilio_message
+### Testing send_twilio_message
 
 Open the **shell** and run following commands.
 
@@ -124,7 +124,7 @@ SM97f8ac9321114af1b7fd4463ff8bd038
 
 Having the sid means that everything in the backend is working fine. And we can proceed to work on the front end.
 
-## Create Form
+### Create Form
 
 Lets create a form to gather the data.  Now open/create up **communication/forms.py** to start creating forms for our app. And paste the following code into it:
 
@@ -137,7 +137,7 @@ class SendSMSForm(forms.ModelForm):
 
 ```
 
-## The View CreateView
+### The View CreateView
 
 ```python
 class SendSmsCreateView(CreateView):
@@ -168,7 +168,7 @@ class SendSmsCreateView(CreateView):
 
 ```
 
-## Defining URLS
+### Defining URLS
 
 The URL configuration tells Django how to match a request’s path to your Python code. Django looks for the URL configuration, defined as urlpatterns, in the **urls.py** file in your project:
 
@@ -186,7 +186,7 @@ urlpatterns = patterns('',
 )
 ```
 
-## Creating the Template
+### Creating the Template
 
 Now that we’ve defined a URL for our list view, we can try it out. Django includes a server suitable for development purposes that you can use to easily test your project:
 
@@ -211,7 +211,7 @@ Now reload the **http://127.0.0.1:8000/communication/send/sms/** in your browser
 
 Fill out the form, and hit the submit button to send your SMS.
 
-## CONCLUSION
+### CONCLUSION
 
 Congratulations, your SMS is successfully sent. Good luck!
 

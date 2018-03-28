@@ -2,7 +2,7 @@
 author: Ian Neilsen
 gh_issue_number: 1329
 tags: devops, disaster-recovery, virtualization, replication
-title: Disaster Recovery - Miami to Dallas in one hit
+title: Disaster Recovery — Miami to Dallas in one hit
 ---
 
 Hurricane Irma came a knocking but didn’t blow Miami away.

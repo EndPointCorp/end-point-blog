@@ -34,9 +34,9 @@ If all went well, you should see the startup messages for the Django application
 
 Products within Cartridge are defined within the python models for the application, there are three primary models to be concerned with in a Product definition, the Product, ProductVariation and ProductImage models specifically.
 
-- Product - Defines the primary attributes for a product like name, price, SKU, and can be populated with optional fields for sale prices, etc.
-- ProductVariation - Defines a variant of a product SKU, these would be most commonly used for things like product sizes and colors.
-- ProductImage - Defines the image for the picture of each product.
+- Product — Defines the primary attributes for a product like name, price, SKU, and can be populated with optional fields for sale prices, etc.
+- ProductVariation — Defines a variant of a product SKU, these would be most commonly used for things like product sizes and colors.
+- ProductImage — Defines the image for the picture of each product.
 
 Each of these three models exist within Django as their own data sets, but then they have foreign key references from each Product to all of its Variants and Images. While you can alter these model definitions using the django shell and other methods within python, you can also update and manage the products within the admin interface for the django site.
 

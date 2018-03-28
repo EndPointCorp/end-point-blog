@@ -2,14 +2,14 @@
 author: Miguel Alatorre
 gh_issue_number: 1032
 tags: extensions, ruby, rails
-title: Aliasin' and Redmine plugins
+title: Aliasin’ and Redmine plugins
 ---
 
-Recently I was tasked with creating a plugin to customize End Point's Redmine instance.
+Recently I was tasked with creating a plugin to customize End Point’s Redmine instance.
 In working through this I was exposed for the first time to alias_method_chain.
 What follows is my journey down the rabbit hole as I wrap my head around new (to me) Ruby/Rails magic.
 
-The Rails core method alias_method_chain encapsulates a common pattern of using alias_method twice: first to rename an original method to a method "without" a feature, and second to rename a new method "with" a feature to the original method. Whaaaa? Let's start by taking a look at Ruby core methods alias and alias_method before further discussing alias_method_chain.
+The Rails core method alias_method_chain encapsulates a common pattern of using alias_method twice: first to rename an original method to a method “without" a feature, and second to rename a new method “with" a feature to the original method. Whaaaa? Let’s start by taking a look at Ruby core methods alias and alias_method before further discussing alias_method_chain.
 
 ### alias and alias_method
 
@@ -45,7 +45,7 @@ Person.new.say_hello
 => "Hello"
 ```
 
-Let's see what happens when we have a class inherit from Person in each of the cases above.
+Let’s see what happens when we have a class inherit from Person in each of the cases above.
 
 ```ruby
 class Person
@@ -163,7 +163,7 @@ OverlyPolitePerson.new.hello
 => "Hello, your majesty! I am honored by your presence!"
 ```
 
-Neat! How does this play into Redmine plugins, you ask? Before we get into that there is one more thing to go over: a module's **included** method.
+Neat! How does this play into Redmine plugins, you ask? Before we get into that there is one more thing to go over: a module’s **included** method.
 
 ### The **included** callback
 
@@ -187,7 +187,7 @@ Polite has been included in class Person
 => Person
 ```
 
-Now, what if you can't modify the Person class directly with the **include** line? No biggie. Let's just send Person a message to include our module:
+Now, what if you can’t modify the Person class directly with the **include** line? No biggie. Let’s just send Person a message to include our module:
 
 ```ruby
 class Person
@@ -211,7 +211,7 @@ Polite has been included in class Person
 => Person
 ```
 
-What if we now want to extend Person's hello method? Easy peasy:
+What if we now want to extend Person’s hello method? Easy peasy:
 
 ```ruby
 class Person
@@ -244,13 +244,13 @@ Person.new.hello
 => "Hello, your majesty!"
 ```
 
-How polite! Let's talk about what's going on in the Polite module. We defined our hello_with_politeness method inside an InstanceMethods module in order to not convolute the self.include method. In self.include we send an include call to the base class so that InstanceMethods is included.
+How polite! Let’s talk about what’s going on in the Polite module. We defined our hello_with_politeness method inside an InstanceMethods module in order to not convolute the self.include method. In self.include we send an include call to the base class so that InstanceMethods is included.
 This will allow our base class instances access to any method defined in InstanceMethods. Next, class_eval is used on the base class so that the alias_method_chain method is called within the context of the class.
 
 ### How this applies to Redmine
 
-If you take a look at the Redmine plugin documentation, specifically [Extending the Redmine Core](http://www.redmine.org/projects/redmine/wiki/Plugin_Internals#Extending-the-Redmine-Core), you'll see the above pattern as the recommended method to overwrite/extend Redmine core functionality.
-I'll include the RateUsersHelperPatch example from the documentation here so that you can see it compared with the above code blocks:
+If you take a look at the Redmine plugin documentation, specifically [Extending the Redmine Core](http://www.redmine.org/projects/redmine/wiki/Plugin_Internals#Extending-the-Redmine-Core), you’ll see the above pattern as the recommended method to overwrite/extend Redmine core functionality.
+I’ll include the RateUsersHelperPatch example from the documentation here so that you can see it compared with the above code blocks:
 
 ```ruby
 module RateUsersHelperPatch
@@ -275,7 +275,7 @@ module RateUsersHelperPatch
 end
 ```
 
-Sending an include to RateUsersHelper can be done in the plugin's init.rb file:
+Sending an include to RateUsersHelper can be done in the plugin’s init.rb file:
 
 ```ruby
 Rails.configuration.to_prepare do
@@ -314,4 +314,4 @@ Then, a new hash is added to tabs. Because method user_settings_tabs is now alia
 <%= render_tabs user_settings_tabs %>
 ```
 
-Although alias_method_chain is a pretty cool and very useful method, it's not without its shortcomings. There's a great, recent blog article about that [here](http://www.justinweiss.com/blog/2014/09/08/rails-5-module-number-prepend-and-the-end-of-alias-method-chain/) in which Ruby 2's Module#prepend as a better alternative to alias_method_chain is discussed as well.
+Although alias_method_chain is a pretty cool and very useful method, it’s not without its shortcomings. There’s a great, recent blog article about that [here](https://www.justinweiss.com/blog/2014/09/08/rails-5-module-number-prepend-and-the-end-of-alias-method-chain/) in which Ruby 2’s Module#prepend as a better alternative to alias_method_chain is discussed as well.

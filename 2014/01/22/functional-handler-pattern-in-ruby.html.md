@@ -2,16 +2,16 @@
 author: Mike Farmer
 gh_issue_number: 916
 tags: functional-programming, ruby, rails
-title: Functional Handler - A Pattern in Ruby
+title: Functional Handler — A Pattern in Ruby
 ---
 
 
 
-First, a disclaimer. Naming things in the world of programming is always a challenge. Naming this blog post was also difficult. There are all sorts of implications that come up when you claim something is "functional" or that something is a "pattern". I don't claim to be an expert on either of these topics, but what I want to describe is a pattern that I've seen develop in my code lately and it involves functions, or anonymous functions to be more precise. So please forgive me if I don't hold to all the constraints of both of these loaded terms.
+First, a disclaimer. Naming things in the world of programming is always a challenge. Naming this blog post was also difficult. There are all sorts of implications that come up when you claim something is “functional” or that something is a “pattern”. I don’t claim to be an expert on either of these topics, but what I want to describe is a pattern that I’ve seen develop in my code lately and it involves functions, or anonymous functions to be more precise. So please forgive me if I don’t hold to all the constraints of both of these loaded terms.
 
 ### A pattern
 
-The pattern that I've seen lately is that I need to accomplish of myriad of steps, all in sequence, and I need to only proceed to the next step if my current step succeeds. This is common in the world of Rails controllers. For example:
+The pattern that I’ve seen lately is that I need to accomplish of myriad of steps, all in sequence, and I need to only proceed to the next step if my current step succeeds. This is common in the world of Rails controllers. For example:
 
 ```ruby
 def update
@@ -30,7 +30,7 @@ def update
 end
 ```
 
-What I'm really trying to accomplish here is that I want to perform the following steps:
+What I’m really trying to accomplish here is that I want to perform the following steps:
 
 - Find my order
 - Update the attributes of my order
@@ -39,11 +39,11 @@ What I'm really trying to accomplish here is that I want to perform the followin
 - Send the invoice, but only if the order is complete
 - Redirect back to the index page.
 
-There are a number of ways to accomplish this set of steps. There's the option above but now my controller is doing way more than it should and testing this is going to get ugly. In the past, I may have created a callback in my order model. Something like after_save :calculate_tax_and_shipping and after_save :send_invoice if: :complete?. The trouble with this approach is that now *anytime* my order is updated these steps also occur. There may be many instances where I want to update my order and what I'm updating has nothing to do with calculating totals. This is particularly problematic when these calculations take a lot of processing and have a lot of dependencies on other models.
+There are a number of ways to accomplish this set of steps. There’s the option above but now my controller is doing way more than it should and testing this is going to get ugly. In the past, I may have created a callback in my order model. Something like after_save :calculate_tax_and_shipping and after_save :send_invoice if: :complete?. The trouble with this approach is that now *anytime* my order is updated these steps also occur. There may be many instances where I want to update my order and what I’m updating has nothing to do with calculating totals. This is particularly problematic when these calculations take a lot of processing and have a lot of dependencies on other models.
 
-Another approach may be to move some of my steps into the controller before and after filters (now before_action and after_action in Rails 4). This approach is even worse because I've spread my order specific steps to a layer of my application that should only be responsible for routing user interaction to the business logic of my application. This makes maintaining this application more difficult and debugging a nightmare.
+Another approach may be to move some of my steps into the controller before and after filters (now before_action and after_action in Rails 4). This approach is even worse because I’ve spread my order specific steps to a layer of my application that should only be responsible for routing user interaction to the business logic of my application. This makes maintaining this application more difficult and debugging a nightmare.
 
-The approach I prefer is to hand off the processing of the order to a class that has the responsibility of processing the user’s interaction with the model, in this case, the order. Let's take a look at how my controller action may look with this approach.
+The approach I prefer is to hand off the processing of the order to a class that has the responsibility of processing the user’s interaction with the model, in this case, the order. Let’s take a look at how my controller action may look with this approach.
 
 ```ruby
 def update

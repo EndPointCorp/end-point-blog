@@ -11,12 +11,12 @@ title: Version 5 of Bucardo database replication system
 <br/><small><a href="https://flic.kr/p/6GYFk5">Goat & Kid</a> by Flickr user <a href="https://www.flickr.com/photos/bala_/">Bala Sivakumar</a></small></div>
 
 Bucardo 5, the next generation of the async multimaster replication system, has been released. This major release removes the previous two source database limitation, allowing you to have as many sources (aka masters) and as many targets (aka slaves) as you wish. Bucardo can also replicate to other targets, including MySQL, MariaDB, Oracle, SQLite, MongoDB, and Redis. Bucardo has been completely rewritten and is more powerful and efficient 
-than the previous version, known as Bucardo 4. You can always find the latest version by visiting [the Bucardo wiki](http://bucardo.org/wiki/bucardo).
+than the previous version, known as Bucardo 4. You can always find the latest version [here](https://bucardo.org/).
 
 This article will show a quick demonstration of Bucardo. Future posts will explore its capabilities further: 
 for now, we will show how easy it is to get basic multimaster replication up and running.
 
-For this demo, I used a quick and disposable server from [Amazon Web Services](http://aws.amazon.com/) (AWS, specifically a basic t1.micro server running Amazon Linux). If you want to follow along, it's free and simple to create your own instance. Once it is created and you have SSH'ed in as the ec2-user account, we can start to install PostgreSQL and Bucardo.
+For this demo, I used a quick and disposable server from [Amazon Web Services](https://aws.amazon.com/) (AWS, specifically a basic t1.micro server running Amazon Linux). If you want to follow along, it’s free and simple to create your own instance. Once it is created and you have SSH’ed in as the ec2-user account, we can start to install PostgreSQL and Bucardo.
 
 ```
 # Always a good idea:
@@ -37,7 +37,7 @@ $ pg_ctl -D btest -l logfile start
 $ createdb shake1
 ```
 
-Next, we need something to replicate! For a sample dataset, I like to use the open source Shakespeare project. It's a small, free, simple schema that is easy to load. There's a nice little [project on github](https://github.com/catherinedevlin/opensourceshakespeare) the contains a ready-made Postgres schema, so we will load that in to our new database:
+Next, we need something to replicate! For a sample dataset, I like to use the open source Shakespeare project. It’s a small, free, simple schema that is easy to load. There’s a nice little [project on github](https://github.com/catherinedevlin/opensourceshakespeare) the contains a ready-made Postgres schema, so we will load that in to our new database:
 
 ```
 $ sudo yum install git
@@ -56,7 +56,7 @@ $ createdb shake3 -T shake1
 Bucardo has some dependencies that need installing. You may have a different 
 list depending on your distro: this is what Amazon Linux needed when I wrote this.
 (If you are lucky, your distro may have Bucardo already available, in which case many of the steps below can be 
-replaced e.g. with "yum install bucardo" - just make sure it is using version 5 or better! (e.g. with yum info bucardo))
+replaced e.g. with “yum install bucardo”—just make sure it is using version 5 or better! (e.g. with yum info bucardo))
 
 ```
 $ sudo yum install  perl-ExtUtils-MakeMaker  perl-DBD-Pg \
@@ -66,9 +66,9 @@ $ sudo yum install cpan
 $ echo y | cpan DBIx::Safe
 ```
 
-The Perl module DBIx::Safe was not available on this system's yum, hence we 
-needed to install it via [CPAN](http://www.cpan.org/). Once all of that is 
-done, we are ready to install Bucardo. We'll grab the official tarball, verify it, 
+The Perl module DBIx::Safe was not available on this system’s yum, hence we 
+needed to install it via [CPAN](https://www.cpan.org/). Once all of that is 
+done, we are ready to install Bucardo. We’ll grab the official tarball, verify it, 
 untar it, and run make install:
 
 ```
@@ -84,8 +84,8 @@ $ make
 $ sudo make install
 ```
 
-Let's make some small adjustments via the bucardorc file (which sets some global information). Then we can run the 
-"bucardo install", which creates the main bucardo database, containing the information the Bucardo daemon will need:
+Let’s make some small adjustments via the bucardorc file (which sets some global information). Then we can run the 
+“bucardo install”, which creates the main bucardo database, containing the information the Bucardo daemon will need:
 
 ```
 $ mkdir pid
@@ -94,7 +94,7 @@ $ bucardo install --batch --quiet
 Creating superuser 'bucardo'
 ```
 
-Now that Bucardo is installed and ready to go, let's setup the replication. In this case, we 
+Now that Bucardo is installed and ready to go, let’s setup the replication. In this case, we 
 are going to have three of our databases replicate to each other. We can do all this in 
 only two commands:
 
@@ -118,15 +118,15 @@ them names for Bucardo to refer to as (s1,s2,s3). You can also specify the
 port and host, but in this case the default values of 5432 and no host (Unix sockets) were sufficient.
 
 The second command creates a named replication system, called a **sync**, and assigns 
-it the name "bard". It needs to know where and how to replicate, so we tell it to 
+it the name “bard”. It needs to know where and how to replicate, so we tell it to 
 use the three databases s1,s2, and s3. Each of these is to act as a source, so we 
 append that information as well. Finally, we need to know what to replicate. In this 
 case, we simply want all tables (or to be more precise, all tables with a primary 
 key or a unique index). Notice that Bucardo always puts databases and tables into 
-named groups - in this case, it was done automatically, and the dbgroup and relgroup 
+named groups—in this case, it was done automatically, and the dbgroup and relgroup 
 are simply named after the sync.
 
-Let's verify that replication is working, by checking that a changed row replicates 
+Let’s verify that replication is working, by checking that a changed row replicates 
 to all systems involved in the sync:
 
 ```
@@ -151,7 +151,7 @@ $ tail -2 log.bucardo
 ```
 
 There are two deletes and inserts because the changed row was first deleted, and then inserted 
-(via COPY, technically) to the other two databases. Next, let's see how Bucardo handles a conflict. 
+(via COPY, technically) to the other two databases. Next, let’s see how Bucardo handles a conflict. 
 We will have the same row get changed on all the servers, which should lead to a conflict:
 
 ```
@@ -184,7 +184,7 @@ $ for i in {1,2,3}; do psql shake$i -tc \
 
 Sometimes when I was developing this demo, Bucardo was so fast that conflicts did not happen. In 
 other words, because the updates were sequential, there is a window in which Bucardo can replicate 
-a change before the next update occurs. The 'pause a sync' feature can be very handy for this, 
+a change before the next update occurs. The “pause a sync” feature can be very handy for this, 
 as well as other times in which you need a sync to temporarily stop running:
 
 ```

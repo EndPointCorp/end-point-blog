@@ -1,7 +1,7 @@
 ---
 author: Phin Jensen
 gh_issue_number: 1220
-tags: conference, architecture
+tags: conference
 title: How to Build a Skyscraper
 ---
 

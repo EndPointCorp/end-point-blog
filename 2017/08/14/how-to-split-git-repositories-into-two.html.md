@@ -9,13 +9,13 @@ Ever wondered how to split your Git repo into two repos?
 
 <div class="separator" style="clear: both; text-align: center;"><a href="/blog/2017/08/14/how-to-split-git-repositories-into-two/image-0-big.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="412" data-original-width="447" height="294" src="/blog/2017/08/14/how-to-split-git-repositories-into-two/image-0.png" width="320"/></a><br/> </div>
 
-First you need to find out what files and directories you want to move to separate repos. In the above example we're moving dir3, dir4 and dir7 to repo A, and dir1, dir2, dir5 and dir8 to repo B.
+First you need to find out what files and directories you want to move to separate repos. In the above example we’re moving dir3, dir4 and dir7 to repo A, and dir1, dir2, dir5 and dir8 to repo B.
 
-## Steps
+### Steps
 
-What you need to do is to go through**each and every commit** in **git history** for **every branch** and **filter out commits** that modify directories that you dont care about in your new repo. The only flaw of this method is that it will leave those empty, filtered out commits in the history.
+What you need to do is to go through **each and every commit** in git history for every branch and filter out commits that modify directories that you dont care about in your new repo. The only flaw of this method is that it will leave those empty, filtered out commits in the history.
 
-### Track all branches
+#### Track all branches
 
 First we need to start tracking all branches locally:
 
@@ -32,7 +32,7 @@ cp -a source_repo repo_a
 cp -a source_repo repo_b
 ```
 
-### Filter the history
+#### Filter the history
 
 Following command will delete all dirs that exclusively belong to repo B, thus we create repo A. Filtering is not limited to directories. You can provide relative paths to files, dirs etc.
 
@@ -52,9 +52,9 @@ Look at the list of branches once again (in both repos):
 git branch -l
 ```
 
-### Set new origins and push
+#### Set new origins and push
 
-In every repo, we need to remove the old origin and set up new origin. After it's done, we're ready to push.
+In every repo, we need to remove the old origin and set up new origin. After it’s done, we’re ready to push.
 
 Remove old origin:
 
@@ -74,4 +74,4 @@ Push all tracked branches:
 git push origin --all
 ```
 
-That's it!
+That’s it!

@@ -15,7 +15,7 @@ While looking for the best configuration layout to achieve this, we found that P
 
 Upon receiving a message Postfix will probe the preferred MTA for the address. If that address is valid the message is accepted and processed, otherwise it is rejected.
 
-Message Probes does not actually go through the whole delivery process; Postfix will just connect to the MTA, send a HELO + MAIL FROM + RCPT TO sequence and check its response. Probe checks results are cached on disk, minimizing network and resource impact. During this check the client is put "on hold"; if the probe takes too much a temporary reject is given; a legitimate mail server will have no problem retrying the delivery later, when the cached result will likely be available.
+Message Probes does not actually go through the whole delivery process; Postfix will just connect to the MTA, send a HELO + MAIL FROM + RCPT TO sequence and check its response. Probe checks results are cached on disk, minimizing network and resource impact. During this check the client is put “on hold”; if the probe takes too much a temporary reject is given; a legitimate mail server will have no problem retrying the delivery later, when the cached result will likely be available.
 
 Everything is highly configurable: response codes, timeouts, cache storage type and location, and so on.
 
@@ -23,7 +23,7 @@ Everything is highly configurable: response codes, timeouts, cache storage type 
 
 In our case, we wanted to only accept messages with a valid recipient address. Recipient Address Verification took care of this in a very smooth and elegant way.
 
-Adding Recipient Address Verification it's easy. Just add these lines to /etc/postfix/main.cf:
+Adding Recipient Address Verification it’s easy. Just add these lines to /etc/postfix/main.cf:
 
 ```nohighlight
 # Your relaying configuration will already be in place. For example:
@@ -41,7 +41,7 @@ unverified_recipient_reject_reason = Address lookup failure
 
 Settings order is important as they are verified one after another; when a decision is triggered (PERMIT or REJECT) the parsing process ends.
 
-Let's see them in details:
+Let’s see them in details:
 
 - **permit_mynetworks**: *permit* message from local or trusted addresses listed in $mynetworks;
 - **reject_unauth_destination**: *reject* message unless recipient domain is a local one (typically in $mydestination, $virtual_alias_domains or $virtual_mailbox_domains) or is accepted for forwarding (in $relay_domains);

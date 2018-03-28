@@ -1,0 +1,17 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" width="820px" height="520px" viewBox="0 0 820 520" preserveAspectRatio="xMidYMid meet">
+  <rect id="svgEditorBackground" x="0" y="0" width="820" height="520" style="fill: none; stroke: none;"/>
+  <defs id="svgEditorDefs">
+    <polygon id="svgEditorShapeDefs" style="fill:khaki;stroke:black;vector-effect:non-scaling-stroke;stroke-width:1px;"/>
+  </defs>
+  <rect x="175" y="24" style="fill:#57c1f2;stroke:black;stroke-width:1px;" id="e1_rectangle" width="267" height="78" transform="matrix(1 0 0 1 -2 13)" ry="0" rx="0"/>
+  <text style="fill:black;font-family:Arial;font-size:20px;" x="238.277" y="83.1093" id="e3_texte">App Instance</text>
+  <path d="M-4,-2.5v5q0,1,4,1t4,-1v-5q0,1,-4,1t-4,-1q0,-1,4,-1t4,1t-4,1t-4,-1Z" style="fill:khaki; stroke:black; vector-effect:non-scaling-stroke;stroke-width:1px;" id="e14_shape" transform="matrix(0.125 0 0 0.125 210.5 313.438)"/>
+  <path d="M-5.8715596330275295,-2.389908256880747v5.000000000000002q0,1.0000000000000044,3.9999999999999982,1.0000000000000044t4.0000000000000036,-1.0000000000000018v-4.999999999999998q0,0.9999999999999996,-4.0000000000000036,0.9999999999999996t-3.9999999999999982,-0.9999999999999996q0,-1.000000000000004,3.9999999999999982,-1.000000000000004t4.0000000000000036,1.000000000000004t-4.0000000000000036,0.9999999999999978t-3.9999999999999982,-0.9999999999999978Z" style="fill:#57c1f2; stroke:black; vector-effect:non-scaling-stroke;stroke-width:1px;" id="e15_shape" transform="matrix(27.25 0 0 27.25 360 383.375)"/>
+  <text style="fill:black;font-family:Arial;font-size:20px;" x="250" y="394" id="e17_texte">
+    <tspan x="229" dy="1.25em" y="" dx="">Sharing Database</tspan>
+    <tspan x="233" dy="1.25em" y="">Tenants A, B, C</tspan>
+  </text>
+  <path d="M8.542935428837389,-0.45576000689452606h2l-4,4l-3.999999999999999,-4.000000000000001h2.000000000000001v-3.9999999999999987h3.9999999999999982Z" style="fill:khaki; stroke:black; vector-effect:non-scaling-stroke;stroke-width:1px;" id="e20_shape" transform="matrix(5.18116 0 0 17.5531 271.1 220)"/>
+</svg>

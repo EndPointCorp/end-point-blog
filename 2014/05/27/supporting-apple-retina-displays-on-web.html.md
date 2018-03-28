@@ -5,23 +5,22 @@ tags: graphics, browsers
 title: Supporting Apple Retina displays on the Web
 ---
 
-Apple's [Retina displays](http://en.wikipedia.org/wiki/Retina_Display) (on Mac desktop & laptop computers, and on iPhones and iPads) have around twice the pixel density of traditional displays. Most recent Android phones and tablets have higher-resolution screens as well.
+Apple’s [Retina displays](https://en.wikipedia.org/wiki/Retina_Display) (on Mac desktop & laptop computers, and on iPhones and iPads) have around twice the pixel density of traditional displays. Most recent Android phones and tablets have higher-resolution screens as well.
 
-I was recently given the task of adding support for these higher-resolution displays to our [End Point company website](/). Our imagery had been created prior to Retina displays being commonly used, but even now many web developers still overlook supporting high-resolution screens because it hasn't been part of the website workflow before, because they aren't simple to cope with, and since most people don't notice any lack of sharpness without comparing low & high-resolution images side by side.
+I was recently given the task of adding support for these higher-resolution displays to our [End Point company website](/). Our imagery had been created prior to Retina displays being commonly used, but even now many web developers still overlook supporting high-resolution screens because it hasn’t been part of the website workflow before, because they aren’t simple to cope with, and since most people don’t notice any lack of sharpness without comparing low & high-resolution images side by side.
 
 Most images which are not designed for Retina displays look blurry on them, like this:
 
-<a href="/blog/2014/05/27/supporting-apple-retina-displays-on-web/image-0-big.png" imageanchor="1"><img border="0" height="266" src="/blog/2014/05/27/supporting-apple-retina-displays-on-web/image-0.png" width="266"/></a>
-
-<a href="/blog/2014/05/27/supporting-apple-retina-displays-on-web/image-1-big.png" imageanchor="1"><img border="0" height="266" src="/blog/2014/05/27/supporting-apple-retina-displays-on-web/image-1.png" width="266"/></a>
+<a href="/blog/2014/05/27/supporting-apple-retina-displays-on-web/image-0-big.png" imageanchor="1" style="display:inline"><img border="0" height="266" src="/blog/2014/05/27/supporting-apple-retina-displays-on-web/image-0.png" width="266"/></a>
+<a href="/blog/2014/05/27/supporting-apple-retina-displays-on-web/image-1-big.png" imageanchor="1" style="display:inline"><img border="0" height="266" src="/blog/2014/05/27/supporting-apple-retina-displays-on-web/image-1.png" width="266"/></a>
 
 The higher-resolution image is on the left, and the lower-resolution image is on the right.
 
-Now, to solve this problem, you need to serve a larger, higher quality image to Retina displays. There are several different ways to do this. I'll cover a few ways to do it, and explain how I implemented it for our site.
+Now, to solve this problem, you need to serve a larger, higher quality image to Retina displays. There are several different ways to do this. I’ll cover a few ways to do it, and explain how I implemented it for our site.
 
 ### Retina.js
 
-As I was researching ways to implement support for Retina displays, I found that a popular suggestion is the JavaScript library [Retina.js](http://imulus.github.io/retinajs/). Retina.js automatically detects Retina screens, and then for each image on the page, it checks the web server for a Retina image version under the same name with @2x before the suffix. For example, when fetching the image background.jpg on a Retina-capable system, it would afterward look for background@2x.jpg and serve that if it's available.
+As I was researching ways to implement support for Retina displays, I found that a popular suggestion is the JavaScript library [Retina.js](http://imulus.github.io/retinajs/). Retina.js automatically detects Retina screens, and then for each image on the page, it checks the web server for a Retina image version under the same name with @2x before the suffix. For example, when fetching the image background.jpg on a Retina-capable system, it would afterward look for background@2x.jpg and serve that if it’s available.
 
 Retina.js makes it relatively painless to deal with serving Retina images to the correct people, but it has a couple of large problems. First, it fetches and replaces the Retina image *after* the default image, serving both the normal and Retina images to Retina users, greatly increasing download size and time.
 
@@ -29,7 +28,7 @@ Second, Retina.js does not use the correct image if the browser window is moved 
 
 ### Using CSS for background images
 
-Doesn't the "modern web" have a way to handle this natively in HTML & CSS? For sites using CSS background images, CSS media queries will do the trick:
+Doesn’t the “modern web” have a way to handle this natively in HTML & CSS? For sites using CSS background images, CSS media queries will do the trick:
 
 ```css
 @media only screen and (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
@@ -42,23 +41,23 @@ Doesn't the "modern web" have a way to handle this natively in HTML & CSS? For s
 
 But this method only works with CSS background images, so for our site and a lot of other sites, it will only be useful for a small number of images.
 
-Take a look at this [CSS-Tricks](http://css-tricks.com/snippets/css/retina-display-media-query/) page for some excellent examples of Retina (and other higher-res display) support.
+Take a look at this [CSS-Tricks](https://css-tricks.com/snippets/css/retina-display-media-query/) page for some excellent examples of Retina (and other higher-res display) support.
 
 ### Server-side checks for Retina images
 
-A very efficient way to handle all types of images is to have the browser JavaScript set a cookie that tells the web server whether to serve Retina or standard images. That will keep data transfer to a minimum, with a minimum of trickery required in the browser. You'll still need to create an extra Retina-resolution image for every standard image on the server. And you'll need to have a dynamic web process run for every image served. The [Retina Images](http://retina-images.complexcompulsions.com/) open source PHP program shows how to do this.
+A very efficient way to handle all types of images is to have the browser JavaScript set a cookie that tells the web server whether to serve Retina or standard images. That will keep data transfer to a minimum, with a minimum of trickery required in the browser. You’ll still need to create an extra Retina-resolution image for every standard image on the server. And you’ll need to have a dynamic web process run for every image served. The [Retina Images](http://retina-images.complexcompulsions.com/) open source PHP program shows how to do this.
 
-### Why we didn't use these methods
+### Why we didn’t use these methods
 
-There is one reason common to all of these methods which made us decide against them: All of them require you to maintain multiple versions of each image. This ends up taking a lot of time and effort. It also means your content distribution network (CDN) or other HTTP caches will have twice as many image files to load and cache, increasing cache misses and data transfer. It also uses more disk space, which isn't a big problem for the small number of images on our website, but on an ecommerce website with many thousands of images, it adds up quickly.
+There is one reason common to all of these methods which made us decide against them: All of them require you to maintain multiple versions of each image. This ends up taking a lot of time and effort. It also means your content distribution network (CDN) or other HTTP caches will have twice as many image files to load and cache, increasing cache misses and data transfer. It also uses more disk space, which isn’t a big problem for the small number of images on our website, but on an ecommerce website with many thousands of images, it adds up quickly.
 
 We would feel compelled to have the separate images if it were necessary if the Retina images were much larger and slow down the browsing experience for non-Retina users for no purpose. But instead we decided on the following solution that we saw others describe.
 
 ### Serving Retina images to everybody (how we did it)
 
-We read that you can serve Retina images to everyone, but we immediately thought that wouldn't work out well. We were sure that the Retina images would be several times larger than the normal images, wasting a ton of bandwidth for anyone not using a Retina screen. We were very pleasantly surprised to find out that this wasn't the case at all.
+We read that you can serve Retina images to everyone, but we immediately thought that wouldn’t work out well. We were sure that the Retina images would be several times larger than the normal images, wasting a ton of bandwidth for anyone not using a Retina screen. We were very pleasantly surprised to find out that this wasn’t the case at all.
 
-After testing on a few images, I found I could get Retina images within 2-3 KB of the normal images while keeping the visual fidelity, by dropping the JPEG compression rate. How? Because the images were being displayed at a smaller size than they were, the compression artifacts weren't nearly as noticeable.
+After testing on a few images, I found I could get Retina images within 2-3 KB of the normal images while keeping the visual fidelity, by dropping the JPEG compression rate. How? Because the images were being displayed at a smaller size than they were, the compression artifacts weren’t nearly as noticeable.
 
 These are the total file sizes for each image on our [team page](/team):
 
@@ -119,13 +118,13 @@ Retina: 549.4K
 Normal: 608.8K
 ```
 
-This is where I found the biggest, and best, surprise. The cumulative size of the Retina image files was *less* than that of the original images. So now we have support for Retina displays, making our website look nice on modern screens, while actually using less data transfer. We don't need JavaScript, cookies, or any extra server-side trickery to do this. And best of all, we don't have to maintain a separate set of Retina images.
+This is where I found the biggest, and best, surprise. The cumulative size of the Retina image files was *less* than that of the original images. So now we have support for Retina displays, making our website look nice on modern screens, while actually using less data transfer. We don’t need JavaScript, cookies, or any extra server-side trickery to do this. And best of all, we don’t have to maintain a separate set of Retina images.
 
-Once you've seen the difference in quality on a Retina screen or a new Android phone, you'll wonder how you ever were able to tolerate the lower-resolution images. And at least for our selection of JPEG images, there's not even a file size penalty to pay!
+Once you’ve seen the difference in quality on a Retina screen or a new Android phone, you’ll wonder how you ever were able to tolerate the lower-resolution images. And at least for our selection of JPEG images, there’s not even a file size penalty to pay!
 
 ### Reference reading
 
-- [A guide for creating a better retina web](http://ivomynttinen.com/blog/a-guide-for-creating-a-better-retina-web/) by Ivo Mynttinen
-- [5 Things I Learned Designing For High-Resolution Retina Displays](http://www.leemunroe.com/designing-for-high-resolution-retina-displays/) by Lee Munroe
+- [A guide for creating a better retina web](https://ivomynttinen.com/blog/a-guide-for-creating-a-better-retina-web/) by Ivo Mynttinen
+- [5 Things I Learned Designing For High-Resolution Retina Displays](https://www.leemunroe.com/designing-for-high-resolution-retina-displays/) by Lee Munroe
 - [About Proper Image Delivery on the Web](https://developer.apple.com/library/safari/documentation/NetworkingInternet/Conceptual/SafariImageDeliveryBestPractices/Introduction/Introduction.html) on the Safari Developer Library
 - [Serving Images Efficiently to Displays of Varying Pixel Density](https://developer.apple.com/library/safari/documentation/NetworkingInternet/Conceptual/SafariImageDeliveryBestPractices/ServingImagestoRetinaDisplays/ServingImagestoRetinaDisplays.html) on the Safari Developer Library

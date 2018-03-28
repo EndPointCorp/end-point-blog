@@ -7,7 +7,7 @@ title: Creating a recent activity feed for Thredded
 
 ### Introduction
 
-[Thredded](https://github.com/thredded/thredded) is open source forum/message board software for [Rails](http://rubyonrails.org/) 4.2+. The project is still alive and maintained by its author actively. For a new Rails project for a client in End Point we used Thredded as a part of an application stack. It works pretty well, but sometimes it lacks some important features. Fortunately, it's coded very nice and easy to extend its core functionality. This time we wanted to create a recent activity feed for a current user. I wanted to share this with you because I think that it's a popular widget in many social community sites.
+[Thredded](https://github.com/thredded/thredded) is open source forum/message board software for [Rails](http://rubyonrails.org/) 4.2+. The project is still alive and maintained by its author actively. For a new Rails project for a client in End Point we used Thredded as a part of an application stack. It works pretty well, but sometimes it lacks some important features. Fortunately, it’s coded very nice and easy to extend its core functionality. This time we wanted to create a recent activity feed for a current user. I wanted to share this with you because I think that it’s a popular widget in many social community sites.
 
 ### Plan
 
@@ -18,7 +18,7 @@ We decided to put two main data sources for the feed:
 
 ### Getting data
 
-Let's say that we created a *WidgetController* controller. How to get data that we are interested in? It's not so difficult. First, this is how we are getting the latest 5 private messages for a user:
+Let’s say that we created a *WidgetController* controller. How to get data that we are interested in? It’s not so difficult. First, this is how we are getting the latest 5 private messages for a user:
 
 ```ruby
 private_messages = Thredded::PrivateTopic
@@ -115,7 +115,7 @@ The data is ready now, the only thing that we need to do now is to create a view
             = time_ago_in_words(message[:created_at])
 ```
 
-We are looping through a list of messages. We need to distinguish between a private message and a regular post, just to make it nicer and user friendly. You may need to play a little bit with an author's property, it may be different for your project. If you have any problems, please comment! Good luck!
+We are looping through a list of messages. We need to distinguish between a private message and a regular post, just to make it nicer and user friendly. You may need to play a little bit with an author’s property, it may be different for your project. If you have any problems, please comment! Good luck!
 
 ### The end
 

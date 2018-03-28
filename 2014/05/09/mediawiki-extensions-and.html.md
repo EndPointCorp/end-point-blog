@@ -11,8 +11,8 @@ title: MediaWiki extensions and wfLoadExtensionMessages
 </div>
 
 Upgrading MediaWiki can be a challenging task, especially if you use a lot of extensions. 
-While the core upgrade process usually goes smoothly, it's rare you can upgrade a major 
-version or two without having to muddle with your collection of extensions. Extensions are bits of code that extend what MediaWiki can do. Only a few are packaged with and maintained alongside MediaWiki itself - the great majority are written by third-party developers. When the MediaWiki API changes, it is up to those developers to update their extension so it works with the new version of MediaWiki. This does not always happen. Take for example one of the more common errors seen on a MediaWiki upgrade since 1.21 was released:
+While the core upgrade process usually goes smoothly, it’s rare you can upgrade a major 
+version or two without having to muddle with your collection of extensions. Extensions are bits of code that extend what MediaWiki can do. Only a few are packaged with and maintained alongside MediaWiki itself—the great majority are written by third-party developers. When the MediaWiki API changes, it is up to those developers to update their extension so it works with the new version of MediaWiki. This does not always happen. Take for example one of the more common errors seen on a MediaWiki upgrade since 1.21 was released:
 
 [Tue May 06 11:21:52 2014] [error] [client 12.34.56.78] PHP Fatal error:  
 Call to undefined function wfLoadExtensionMessages() in /home/beckett/mediawiki/extensions/PdfExport/PdfExport.php on line 83, referer: http://test.ziggy.com/wiki/Main_Page
@@ -23,15 +23,15 @@ error seen above. Luckily, this function has been a no-op since 1.16, so it is s
 to comment it out and/or make a dummy function in your LocalSettings.php file (see below).
 
 Sadly, the release notes for 1.21 make no mention of 
-[this fairly major change](http://www.gossamer-threads.com/lists/wiki/wikitech/214619). Let's 
-walk through as if we didn't know anything about it and see how we could solve the 
-given error with the help of git. For this example, we'll use the 
-[Pdf Export extension](http://www.mediawiki.org/wiki/Extension:Pdf_Export), 
+[this fairly major change](https://lists.gt.net/wiki/wikitech/214619). Let’s 
+walk through as if we didn’t know anything about it and see how we could solve the 
+given error with the help of git. For this example, we’ll use the 
+[Pdf Export extension](https://www.mediawiki.org/wiki/Extension:Pdf_Export), 
 which allows you to export your wiki pages into PDF form. A pretty handy extension, and 
 one which completely fails to work in MediaWiki version 1.21 or better.
 
-First, let's verify that wfLoadExtensionMessages does not exist at all in version 1.21 of MediaWiki. For 
-these examples, I've checked out the MediaWiki code via git, and am relying on 
+First, let’s verify that wfLoadExtensionMessages does not exist at all in version 1.21 of MediaWiki. For 
+these examples, I’ve checked out the MediaWiki code via git, and am relying on 
 the fact that lightweight git tags were made for all the versions we are interested in.
 
 $ git clone https://github.com/SemanticMediaWiki/SemanticMediaWiki.git mediawiki
@@ -44,7 +44,7 @@ $ git grep wfLoadExtensionMessages 1.21.0
 
 A nice feature of git-grep is the ability to simply use a tag after the search string. In this 
 case, we see that the only mention of wfLoadExtensionMessages in the entire codebase is an 
-old mention of it in the history file. Let's see what version that bug is from:
+old mention of it in the history file. Let’s see what version that bug is from:
 
 $ git grep -n wfLoadExtensionMessages 1.21.0
 
@@ -54,7 +54,7 @@ $ git show 1.21.0:HISTORY | head -5280 | tac | grep '===' -m1
 
 === Bug fixes in 1.12 ===
 
-That message is from way back in version 1.12, and doesn't concern us. Let's take a look at 
+That message is from way back in version 1.12, and doesn’t concern us. Let’s take a look at 
 what tags exist in the 1.20 branch so we can scan the latest one:
 
 ```
@@ -97,7 +97,7 @@ function wfLoadExtensionMessages() {
 
 Thus wfLoadExtensionMessages was basically a no-op in MediaWiki version 1.20, with the caveat that it will write 
 a deprecation warning to your error log (or, in modern versions, the debug log unless $wgDevelopmentWarnings is set). 
-Next we want to find the last time this function did something useful - which should be version 1.15 according to 
+Next we want to find the last time this function did something useful—which should be version 1.15 according to 
 the comment above. Thus:
 
 ```
@@ -111,7 +111,7 @@ function wfLoadExtensionMessages( $extensionName, $langcode = false ) {
 </span>
 ```
 
-So, it's a pretty safe bet that unless you are upgrading from 1.15.0 or earlier, it should 
+So, it’s a pretty safe bet that unless you are upgrading from 1.15.0 or earlier, it should 
 be completely safe to remove it. When was 1.16.0 released? There are no dates in the HISTORY 
 file (shame), but the date it was tagged should be a good guess:
 

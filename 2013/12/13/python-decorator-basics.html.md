@@ -73,7 +73,7 @@ def div(x, y):
 div = debug(div)
 ```
 
-Looking at the definition of the debug function we see that debug(mul) returns wrapper, which becomes the new mul. When we now call mul(5, 2) we are really calling wrapper(5, 2). But how do subsequent calls to wrapper have access to the initial f parameter passed to debug and to the msg variable defined in debug? Closures. Taken from aaronasterling's response to [this](http://stackoverflow.com/questions/4020419/closures-in-python) stackoverflow question, "A closure occurs when a function has access to a local variable from an enclosing scope that has finished its execution." You can read more about closures [here](http://www.shutupandship.com/2012/01/python-closures-explained.html), [here](http://ynniv.com/blog/2007/08/closures-in-python.html), and [here](https://thenewcircle.com/bookshelf/python_fundamentals_tutorial/functional_programming.html). So, at the moment that mul is decorated, debug(mul) is executed returning wrapper, which has access to the original mul function and to the msg variable, which is then set as the new mul.
+Looking at the definition of the debug function we see that debug(mul) returns wrapper, which becomes the new mul. When we now call mul(5, 2) we are really calling wrapper(5, 2). But how do subsequent calls to wrapper have access to the initial f parameter passed to debug and to the msg variable defined in debug? Closures. Taken from aaronasterling’s response to [this](https://stackoverflow.com/questions/4020419/closures-in-python) stackoverflow question, “A closure occurs when a function has access to a local variable from an enclosing scope that has finished its execution.” You can read more about closures [here](https://www.learnpython.org/en/Closures), [here](http://ynniv.com/blog/2007/08/closures-in-python.html), and [here](https://www.protechtraining.com/content/python_fundamentals_tutorial-functional_programming). So, at the moment that mul is decorated, debug(mul) is executed returning wrapper, which has access to the original mul function and to the msg variable, which is then set as the new mul.
 
 By decorating, we remove code duplication and if the need to ever change the debug logic arises, we only need to do so in one place. Now, decorators with (non-optional) arguments get a bit trickier, but only because the syntax is a bit hard to grasp at first sight. Say that we want to pass the debug message as a parameter to the decorator like so:
 
@@ -105,6 +105,6 @@ mul = debug("Let's multiply")(mul)
 
 The debug function returns actual_decorator, to which we pass the mul function as the parameter, which then returns wrapper. So again, mul becomes wrapper which has access to msg and f because of closure.
 
-What about decorators with optional arguments? That I'll leave for a future blog post :)
+What about decorators with optional arguments? That I’ll leave for a future blog post :)
 
 

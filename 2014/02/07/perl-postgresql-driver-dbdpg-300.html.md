@@ -5,13 +5,11 @@ tags: dbdpg, perl, postgres
 title: Perl PostgreSQL driver DBD::Pg 3.0.0 released
 ---
 
-
-
 <div class="separator" style="clear: both; float: right; text-align: center;"><a href="/blog/2014/02/07/perl-postgresql-driver-dbdpg-300/image-0.jpeg" imageanchor="1" style="clear: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" src="/blog/2014/02/07/perl-postgresql-driver-dbdpg-300/image-0.jpeg"/></a><br/><a href="http://www.flickr.com/photos/58505349@N04/11306745055/in/photolist-ie92og-9VGzdh-9VGce5-aeJFwW-AEuKX-5yQqdL-dvL4rC-9bNETo-4wWo81-wMme2-8pkCsJ-7sGZqc-a3P3b9-qndNG-aAUEih-4bwydr-P1JC9-s8waL-kqSSN-a8WSUb-6o5G4p-95a4Dz-3MJRz1-9VGrjs-x5YkV-aKGJzz-82S6jT-hygzDj-7ddteN-bpDuEv-bCVYHG-7x53rc-7x53uz-HMera-9dgTkM-7K2kcz-9egdRk-dxVsaB-bbxy3e-3i16xM-9VGxqE-9VGvdY-9VDmEc-9VGt6Q-5dpTGX-5NA2Jd-x5QcE-x5SLY-62uXRr-dVR2tu-8SPS7k">Nuptse summit</a> by Flickr user <a href="http://www.flickr.com/photos/f514nc0/">François Bianco</a></div>
 
 I am happy to announce that version 3.0.0 of DBD::Pg, the [Perl](http://www.perl.org/) interface to [Postgres](http://www.postgresql.org/), was released on February 3, 2014. This represents a major release, mostly due to the way it now handles [UTF-8](http://perldoc.perl.org/perlunitut.html). I will try to blog soon with more details about that and some other major changes in this version.
 
-The new version is [available from CPAN](http://search.cpan.org/~turnstep/DBD-Pg-3.0.0/). Please make sure that this is the latest version, as new versions may have come out since this post was written.
+The new version is [available from CPAN](http://search.cpan.org/dist/DBD-Pg/Pg.pm). Please make sure that this is the latest version, as new versions may have come out since this post was written.
 
 Checksums for 3.0.0:
 
