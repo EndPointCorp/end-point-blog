@@ -15,7 +15,7 @@ if [ 01:23:45 -gt 00:05:00 ]; then
 fi
 ```
 
-However, bash *can* compare timestamps of files using -ot and -nt for "older than" and "newer than", respectively. If the launch of our process includes creation of a PID file, then we are in luck! At the beginning of our loop, we can create a file with a specific age and use that for quick and simple comparison.
+However, bash *can* compare timestamps of files using -ot and -nt for “older than” and “newer than”, respectively. If the launch of our process includes creation of a PID file, then we are in luck! At the beginning of our loop, we can create a file with a specific age and use that for quick and simple comparison.
 
 For example, if we only want to take action when the process we care about was launched longer than 24 hours ago, try:
 
@@ -31,7 +31,7 @@ if [ $PIDFILE -ot $STAMPFILE ]; then
 fi
 ```
 
-And of course if you want to be sure you're working with the PID file of a process which is actually responding, you can try to send it signal 0 to check:
+And of course if you want to be sure you’re working with the PID file of a process which is actually responding, you can try to send it signal 0 to check:
 
 ```bash
 if kill -0 `cat $PIDFILE`; then

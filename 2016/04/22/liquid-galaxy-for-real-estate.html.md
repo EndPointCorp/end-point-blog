@@ -7,7 +7,7 @@ title: Liquid Galaxy for Real Estate
 
 
 
-The [Liquid Galaxy](https://liquidgalaxy.endpoint.com/), an immersive and panoramic presentation tool, is the perfect fit for any time you want to grab the attention of your audience and leave a lasting impression. The system has applications in a variety of industries (which include museums and aquariums, hospitality and travel, research libraries at universities, events, and real estate, to name a few) but no industry's demand rivals the popularity seen in real estate. 
+The [Liquid Galaxy](https://liquidgalaxy.endpoint.com/), an immersive and panoramic presentation tool, is the perfect fit for any time you want to grab the attention of your audience and leave a lasting impression. The system has applications in a variety of industries (which include museums and aquariums, hospitality and travel, research libraries at universities, events, and real estate, to name a few) but no industry’s demand rivals the popularity seen in real estate. 
 
 <div class="separator" style="clear: both; text-align: center;"><a href="/blog/2016/04/22/liquid-galaxy-for-real-estate/image-0-big.jpeg" imageanchor="1" style="clear: right; float: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" src="/blog/2016/04/22/liquid-galaxy-for-real-estate/image-0.jpeg"/></a></div>
 
@@ -21,6 +21,6 @@ The Liquid Galaxy allows your clients an in-depth contextual tour of multiple li
 
 <div class="separator" style="clear: both; text-align: center;"><a href="/blog/2016/04/22/liquid-galaxy-for-real-estate/image-2-big.jpeg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="/blog/2016/04/22/liquid-galaxy-for-real-estate/image-2.jpeg"/></a></div>
 
-If you'd like to learn more about the Liquid Galaxy, you can call us at 212-929-6923, or [contact us here.](https://liquidgalaxy.endpoint.com/#contact)
+If you’d like to learn more about the Liquid Galaxy, you can call us at 212-929-6923, or [contact us here.](https://liquidgalaxy.endpoint.com/#contact)
 
 

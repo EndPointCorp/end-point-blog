@@ -7,7 +7,7 @@ title: Surviving the Framework Hype Cycle (MWRC 2016)
 
 Back in March, I attended MountainWest RubyConf with my co-workers Phunk and Phin. Shortly thereafter, Phin wrote about a couple of his favorite talks: [Writing a Test Framework from Scratch](/blog/2016/04/08/writing-test-framework-from-scratch) and [How to Build a Skyscraper](/blog/2016/04/19/how-to-build-skyscraper).
 
-I've found that another talk from the conference has stuck with me and I've referred to it several times in conversations. It is "Surviving the Framework Hype Cycle" by Brandon Hays. It is funny, engaging, insightful, and especially cathartic given the rapid pace of change in frameworks these days.
+I’ve found that another talk from the conference has stuck with me and I’ve referred to it several times in conversations. It is “Surviving the Framework Hype Cycle” by Brandon Hays. It is funny, engaging, insightful, and especially cathartic given the rapid pace of change in frameworks these days.
 
 It can be tough to set aside the time to focus on a conference talk video, but I think this one is well worth it for programmers!
 
@@ -27,6 +27,6 @@ And he shows how different groups of people with different needs can benefit at 
 - Settlers
 - Town Planners
 
-The ebb and flow of technology fads can be a lot easier to navigate when we realize there isn't an absolute right and wrong to technology choices, and we must consider the project and its maturity level, the people involved, and the current state of the technologies under consideration.
+The ebb and flow of technology fads can be a lot easier to navigate when we realize there isn’t an absolute right and wrong to technology choices, and we must consider the project and its maturity level, the people involved, and the current state of the technologies under consideration.
 
-See also the [Surviving the Framework Hype Cycle video page](http://confreaks.tv/videos/mwrc2016-surviving-the-framework-hype-cycle) and Brandon's [@tehviking Twitter account](https://twitter.com/tehviking).
+See also the [Surviving the Framework Hype Cycle video page](http://confreaks.tv/videos/mwrc2016-surviving-the-framework-hype-cycle) and Brandon’s [@tehviking Twitter account](https://twitter.com/tehviking).

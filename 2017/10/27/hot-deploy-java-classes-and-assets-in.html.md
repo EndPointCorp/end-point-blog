@@ -7,7 +7,7 @@ gh_issue_number: 1333
 
 <img border="0" src="/blog/2017/10/27/hot-deploy-java-classes-and-assets-in/image-0.jpg" style="width: 100%; max-width: 100%;" />
 
-## Introduction
+### Introduction
 
 Java development can be really frustrating when you need to re-build your project and restart a server every time you change something. I know about JRebel, but while it’s a good tool, it’s also pretty expensive. You can use the open-source version, but then you need to send project statistics to the JRebel server, which is not a viable option for your more serious projects.
 
@@ -15,7 +15,7 @@ Fortunately, there is an open-source project called HotSwapAgent and it does the
 
 I will explain how to combine it with Widlfly in order to hot-deploy Java classes as well as how to hot-deploy other resources (Javascript, CSS, images).
 
-## Wildfly configuration
+### Wildfly configuration
 
 Let’s assume that we use the `standalone-full.xml` configuration file.
 
@@ -49,7 +49,7 @@ Note:
 
 `RELATIVE_TO_PATH` is, as the name suggests the dir that the `PATH_TO_DEPLOYMENT_DIR` is relative to.
 
-## HotSwapAgent installation and configuration
+### HotSwapAgent installation and configuration
 
 We need to download and install the latest release of DCEVM Java patch from here: [https://github.com/dcevm/dcevm/releases](https://github.com/dcevm/dcevm/releases). Why it’s needed? It will allow us unlimited redefinition of loaded classes at runtime. This is not possible with the original Java HotSpot VM. Make sure you update to the same Java version that you’re going to use to run the Wildfly server.
 
@@ -82,20 +82,20 @@ Basically create a new file, name it hotswap-agent.properties, set all needed co
 
 If you use Netbeans, Eclipse or Intellij you should check the HotSwapAgent page for some helpful plugins here: [http://hotswapagent.org/mydoc_setup_intellij_idea.html](http://hotswapagent.org/mydoc_setup_intellij_idea.html), [http://hotswapagent.org/mydoc_setup_eclipse.html](http://hotswapagent.org/mydoc_setup_eclipse.html), and [http://hotswapagent.org/mydoc_setup_netbeans.html](http://hotswapagent.org/mydoc_setup_netbeans.html).
 
-## Application configuration
+### Application configuration
 
 Now that we have everything in place, I will explain how to put it all together.
 I doesn’t really matter which build-tool you use (Ant, Gradle or Maven). The process should look like this (you can do it in many ways, in our case, it’s pretty specific as our build process is really complicated):
 
 1. Build your application and deploy it to the `PATH_TO_DEPLOYMENT_DIR` in the exploded version,
-2. Create a script that will look for changes in the application directory (this one is interesting: [https://gist.github.com/peter-hank/3ecf7fc285ba4b9c50cf8cace1badaf4]()),
+2. Create a script that will look for changes in the application directory (this one is interesting: [https://gist.github.com/peter-hank/3ecf7fc285ba4b9c50cf8cace1badaf4](https://gist.github.com/peter-hank/3ecf7fc285ba4b9c50cf8cace1badaf4)),
 3. On change, trigger a job that will:
     1. Copy all resources like JSP, JavaScript, CSS and copy to the `PATH_TO_DEPLOYMENT_DIR`,
     2. Compile classes and copy them to the `PATH_TO_DEPLOYMENT_DIR`.
 
 That’s it, after you replace files in the `PATH_TO_DEPLOYMENT_DIR` HotSwapAgent and Wildfly will do the rest really fast. We have a ton of assets and classes and the whole process takes only a few seconds!
 
-## Summary
+### Summary
 
 I feel this process is really worth doing. It doesn’t take a lot of time to configure everything and saves a lot of manual work. Just multiply the number of manual deployments and the number of developers in your team and you understand how much time you lose everyday without hot-deployment.
 

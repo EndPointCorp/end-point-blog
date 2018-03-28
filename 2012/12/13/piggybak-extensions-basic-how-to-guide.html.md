@@ -5,7 +5,7 @@ tags: piggybak, rails
 title: 'Piggybak Extensions: A Basic How-To Guide'
 ---
 
-This article outlines the steps to build an extension for [Piggybak](http://www.piggybak.org/). Piggybak is an open-source Ruby on Rails ecommerce platform created and maintained by End Point. It is developed as a Rails Engine and is intended to be mounted on an existing Rails application. If you are interested in developing an extension for Piggybak, this article will help you identify the steps you need to take to have your extension leveraging the Piggybak gem, and integrating smoothly into your app.
+This article outlines the steps to build an extension for [Piggybak](https://github.com/piggybak/piggybak). Piggybak is an open-source Ruby on Rails ecommerce platform created and maintained by End Point. It is developed as a Rails Engine and is intended to be mounted on an existing Rails application. If you are interested in developing an extension for Piggybak, this article will help you identify the steps you need to take to have your extension leveraging the Piggybak gem, and integrating smoothly into your app.
 
 ### Introduction
 

@@ -5,7 +5,7 @@ tags: ecommerce, rails, spree, open-source
 title: A Brief Retrospective of Spree
 ---
 
-[SpreeConf NYC 2014](http://spreeconf.com/) starts on the 26th and its hard to believe that Spree is almost 7 years old! Here's a retrospective showing some notable Spree moments and major releases.
+[SpreeConf NYC 2014](https://web.archive.org/web/20140227013404/http://spreeconf.com:80/) starts on the 26th and its hard to believe that Spree is almost 7 years old! Here’s a retrospective showing some notable Spree moments and major releases.
 
 **July 15, 2007** RailsCart, the precursor to Spree, is created by Sean Schofield and gets its first commit as a Google Code project.
 
@@ -61,7 +61,7 @@ title: A Brief Retrospective of Spree
 
 **November 1, 2010** New extension registry.
 
-**November 9, 2010** Spree 0.30.0 released: Rails 3 support, reorganization into multiple gems: spree_core, spree_auth, spree_api, spree_dash, spree_sample, Rails engines introduced, site extension removed, extensions become gems, improved payments with addition of state machine, simplification of adjustments, new promotion functionality, no more "vendor mode".
+**November 9, 2010** Spree 0.30.0 released: Rails 3 support, reorganization into multiple gems: spree_core, spree_auth, spree_api, spree_dash, spree_sample, Rails engines introduced, site extension removed, extensions become gems, improved payments with addition of state machine, simplification of adjustments, new promotion functionality, no more “vendor mode”.
 
 **December 10, 2010** Spree 0.40.0 released: switched from Authlogic to Devise for authentication.
 
@@ -81,15 +81,15 @@ title: A Brief Retrospective of Spree
 
 **April 30, 2012** Spree 1.1.0 released: support for Rails 3.2, Ransack replaces meta search, Spree product groups is a standalone extension, theme support deprecated in favor of deface, major rewrite of credit card model, API rewrite, stronger mass assignment protection, clearer separation between Spree components, easier Spree spec testing.
 
-**August 31, 2012** Spree 1.2.0 released: Auth component completely removed from Spree and placed in separate Spree auth devise extension.  Customizing state machine no longer requires completely overriding it.
+**August 31, 2012** Spree 1.2.0 released: Auth component completely removed from Spree and placed in separate Spree auth devise extension. Customizing state machine no longer requires completely overriding it.
 
 **December 19, 2012** Spree 1.3.0 released: Admin section redesigned, currency support.
 
-**December 20, 2012** New Spree "Fancy" theme introduced.
+**December 20, 2012** New Spree “Fancy” theme introduced.
 
 **April 15, 2013** New documentation site launched.
 
-**May 19, 2013** Spree 2.0.0 released: Removed support for Ruby 1.8.7, Backend and Frontend split from core, Split shipments introduced,  I18n names spaced translations, New API endpoints, instance level permission in API, Custom API templates, adjustment state changes, Order Populator in its own class, coupon applicator in its own class, product duplicator moved to its own class, new helpers to modify checkout flow steps, API supports "checking out" order, Auto-rotation of images, Unique payment identifier added to payments, removal of state call back in checkout controller, tracking URL for shipments, SSLRequirement deprecated in favor of ForceSSL, MailMethod model no longer exists,
+**May 19, 2013** Spree 2.0.0 released: Removed support for Ruby 1.8.7, Backend and Frontend split from core, Split shipments introduced, I18n names spaced translations, New API endpoints, instance level permission in API, Custom API templates, adjustment state changes, Order Populator in its own class, coupon applicator in its own class, product duplicator moved to its own class, new helpers to modify checkout flow steps, API supports “checking out” order, Auto-rotation of images, Unique payment identifier added to payments, removal of state call back in checkout controller, tracking URL for shipments, SSLRequirement deprecated in favor of ForceSSL, MailMethod model no longer exists,
 
 **May 21, 2013** Second SpreeConf held in Washington DC.
 

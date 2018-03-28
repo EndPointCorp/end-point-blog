@@ -9,13 +9,13 @@ title: Postal code pain and fun
 
 <img align="right" src="/blog/2017/05/10/postal-code-pain-and-fun/image-0.jpeg" style="margin: 1em" width="200"/>We do a lot of ecommerce development at End Point. You know the usual flow as a customer: Select products, add to the shopping cart, then check out. Checkout asks questions about the buyer, payment, and delivery, at least. Some online sales are for “soft goods”, downloadable items that don’t require a delivery address. Much of online sales are still for physical goods to be delivered to an address. For that, a postal code or zip code is usually required.
 
-## No postal code?
+### No postal code?
 
 I say *usually* because there are some countries that do not use postal codes at all. An ecommerce site that expects to ship products to buyers in one of those countries needs to allow for an empty postal code at checkout time. Otherwise, customers may leave thinking they aren’t welcome there. The more creative among them will make up something to put in there, such as “00000” or “99999” or “NONE”.
 
 Someone has helpfully assembled and maintains a machine-readable (in Ruby, easily convertible to JSON or other formats) [list of the countries that don’t require a postal code](https://gist.github.com/kennwilson/3902548). You may be surprised to see on the list such countries as Hong Kong, Ireland, Panama, Saudi Arabia, and South Africa. Some countries on the list actually do have postal codes but do not require them or commonly use them.
 
-## Do you really need the customer’s address?
+### Do you really need the customer’s address?
 
 <img align="right" src="/blog/2017/05/10/postal-code-pain-and-fun/image-1.jpeg" style="margin: 1em" width="200"/>When selling both downloadable and shipped products, it would be nice to not bother asking the customer for an address at all. Unfortunately even when there is no shipping address because there’s nothing to ship, the billing address is still needed if payment is made by credit card through a normal credit card payment gateway — as opposed to PayPal, Amazon Pay, Venmo, Bitcoin, or other alternative payment methods.
 
@@ -25,7 +25,7 @@ Before sending the address to AVS, validating the *format* of postal codes is si
 
 So most countries’ postal codes can be validated in software with simple regular expressions, to catch typos such as transpositions and missing or extra characters.
 
-## UK postcodes
+### UK postcodes
 
 <img align="right" src="/blog/2017/05/10/postal-code-pain-and-fun/image-2.jpeg" style="margin: 1em" width="200"/>The most complicated postal codes I have worked with is the United Kingdom’s, because they can be from 5 to 7 characters, with an unpredictable mix of letters and numbers, normally formatted with a space in the middle. The benefit they bring is that they encode a lot of detail about the address, and it’s possible to catch transposed character errors that would be missed in a purely numeric postal code. The Wikipedia article [Postcodes in the United Kingdom](https://en.wikipedia.org/wiki/Postcodes_in_the_United_Kingdom) has the gory details.
 
@@ -51,90 +51,34 @@ The bulkiness of that list, and its short shelf life — the likelihood that it 
 
 The ecommerce site I mentioned also does in-browser validation via JavaScript before ever submitting the order to the server. Loading a huge list of valid outcodes would waste a lot of bandwidth and slow down checkout loading, especially on mobile devices. So a more lax regex check there is a good choice.
 
-## When Christmas comes
+### When Christmas comes
 
 There’s no Christmas gift of a single UK postal code validation solution for all needs, but there are some fun trivia notes in the Wikipedia page covering [Non-geographic postal codes](https://en.wikipedia.org/wiki/Postal_code#Non-geographic_codes):
 
-> 
-> 
-> 
-> 
 > A fictional address is used by UK Royal Mail for letters to Santa Claus:
 > 
-> 
-> 
-> 
-> 
-> Santa’s Grotto
-> 
+> Santa’s Grotto  
 > Reindeerland XM4 5HQ
-> 
-> 
-> 
-> 
-> 
 > 
 > Previously, the postcode SAN TA1 was used.
 > 
-> 
-> 
-> 
-> 
 > In Finland the special postal code 99999 is for Korvatunturi, the place where Santa Claus (Joulupukki in Finnish) is said to live, although mail is delivered to the Santa Claus Village in Rovaniemi.
 > 
-> 
-> 
-> 
-> 
 > In Canada the amount of mail sent to Santa Claus increased every Christmas, up to the point that Canada Post decided to start an official Santa Claus letter-response program in 1983. Approximately one million letters come in to Santa Claus each Christmas, including from outside of Canada, and they are answered in the same languages in which they are written. Canada Post introduced a special address for mail to Santa Claus, complete with its own postal code:
-> 
-> 
-> 
-> 
-> 
-> SANTA CLAUS
-> 
+>
+> SANTA CLAUS  
 > NORTH POLE  H0H 0H0
-> 
-> 
-> 
-> 
-> 
 > 
 > In Belgium bpost sends a small present to children who have written a letter to Sinterklaas. They can use the non-geographic postal code 0612, which refers to the date Sinterklaas is celebrated (6 December), although a fictional town, street and house number are also used. In Dutch, the address is:
 > 
-> 
-> 
-> 
-> 
-> Sinterklaas
-> 
-> Spanjestraat 1
-> 
+> Sinterklaas  
+> Spanjestraat 1  
 > 0612 Hemel
-> 
-> 
-> 
-> 
-> 
-> 
+>
 > This translates as “1 Spain Street, 0612 Heaven”. In French, the street is called “Paradise Street”:
 > 
-> 
-> 
-> 
-> 
-> Saint-Nicolas
-> 
-> Rue du Paradis 1
-> 
+> Saint-Nicolas  
+> Rue du Paradis 1  
 > 0612 Ciel
-> 
-> 
-> 
-> 
-> 
 
 That UK postcode for Santa doesn’t validate in some of the regexes, but the simpler Finnish, Canadian, and Belgian ones do, so if you want to order something online for Santa, you may want to choose one of those countries for delivery. :)
-
-

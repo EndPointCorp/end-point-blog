@@ -7,7 +7,7 @@ title: Web Security Services Roundup
 
 Security is often a very difficult thing to get right, especially when it’s not easy to find reliable or up-to-date information or the process of testing can be confusing and complicated. We have a lot of history and experience working on the security of websites and servers, and we’ve found many tools and websites to be very helpful. Here is a collection of those.
 
-## Server-side security
+### Server-side security
 
 There are a number of tools available that can scan your website to check for common vulnerabilities and the quality of SSL/TLS configuration, as well as give great tips on how to improve security for your website.
 
@@ -26,7 +26,7 @@ These websites provide valuable information on SSL/TLS which can be used to crea
 - [Mozilla SSL Configuration Generator](https://mozilla.github.io/server-side-tls/ssl-config-generator/) is a simple tool that generates boilerplate server configuration files for common servers, including Apache and Nginx, and specific server and OpenSSL versions. It also allows you to target “modern”, “intermediate”, or “old” clients and servers, which will give the best configuration possible for each level.
 - [Is TLS Fast Yet?](https://istlsfastyet.com/) is a great, simple, and to-the-point informational website which explains why TLS is so important and how to improve its performance so it has the smallest impact possible on your website’s speed.
 
-## Client-side security
+### Client-side security
 
 These websites provide information and diagnostic tools to ensure that you are using a secure browser.
 
@@ -34,7 +34,7 @@ These websites provide information and diagnostic tools to ensure that you are u
 - [IPv6 Test](http://ipv6-test.com/) checks your network and browser for IPv6 support, showing you your ISP, reverse DNS pointers, both your IPv4 and IPv6 addresses, and giving an idea of when your computer or network may have problems with dual-stack IPv4 + IPv6 remote hosts or DNS.
 - [How’s My SSL?](https://www.howsmyssl.com/) and [Qualys Labs SSL Client Test](https://www.ssllabs.com/ssltest/viewMyClient.html) both check your browser for support of SSL/TLS versions, protocols, ciphers, and features, as well as susceptibility to common vulnerabilities.
 
-## General Tools
+### General Tools
 
 - [NeverSSL](http://neverssl.com/) is a simple website that promises to never use SSL. Many public wifi networks require you to go through a payment or login page, which can be blocked when trying to access a well-secured website such as Google, Facebook, Twitter, or Amazon, which can cause trouble connecting to that website. NeverSSL provides an easy and simple way to access that login website.
 - [crt.sh](https://crt.sh/) is a search engine for public TLS certificate information. It provides a history of certificates for a given domain name, with information including issuer and issue date, as well as an advanced search.

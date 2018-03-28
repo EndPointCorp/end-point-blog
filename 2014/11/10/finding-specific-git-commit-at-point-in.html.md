@@ -14,7 +14,7 @@ When using git, being able to track down a particular version of a file is an im
 How you get to the correct set of files (which means finding the proper git commit) depends on what information you can tease out of the user. There are three classes of clues I have come across, each of which is solved a different way. You may be given clues about:
 
 1. **Date**: The date they downloaded the files (e.g. last time they ran a **git pull**)
-1. **File**: A specific file's size, checksum, or even contents.
+1. **File**: A specific file’s size, checksum, or even contents.
 1. **Error**: An error message that helps guide to the right version (especially by giving a line number)
 
 ### Finding a git commit by date
@@ -45,9 +45,9 @@ $ DATE='Sep 3 2014'
 $ git rev-list -1 --before="$DATE" master | xargs -Iz git checkout z
 ```
 
-What about the case in which there were multiple important commits on the given day? If the user doesn't know the exact time, you will have to make some educated guesses. You might add the **-p** flag to git log to examine what changes were made and how likely they are to interact with the bug in question. If it is still not clear, you may just want to have the user mail you a copy or a checksum of one of the key files, and use the method below.
+What about the case in which there were multiple important commits on the given day? If the user doesn’t know the exact time, you will have to make some educated guesses. You might add the **-p** flag to git log to examine what changes were made and how likely they are to interact with the bug in question. If it is still not clear, you may just want to have the user mail you a copy or a checksum of one of the key files, and use the method below.
 
-Once you have found the commit you want, it's a good idea to tag it right away. This applies to any of the three classes of clues in this article. I usually add a lightweight git tag immediately after doing the checkout. Then you can easily come back to this commit simply by using the name of the tag. Give it something memorable and easy, such as the bug number being reported. For example:
+Once you have found the commit you want, it’s a good idea to tag it right away. This applies to any of the three classes of clues in this article. I usually add a lightweight git tag immediately after doing the checkout. Then you can easily come back to this commit simply by using the name of the tag. Give it something memorable and easy, such as the bug number being reported. For example:
 
 ```
 $ git checkout `git rev-list -1 --before="$DATE" master`
@@ -62,12 +62,12 @@ $ git checkout bug_23142
 
 ### Finding a git commit by checksum, size, or exact file
 
-Sometimes you can find the commit you need by looking for a specific version of an important file. One of the "main" files in the repository that changes often is your best bet for this. You can ask the user for the size, or just a checksum of the file, and then see which repository commits have a matching entry.
+Sometimes you can find the commit you need by looking for a specific version of an important file. One of the “main” files in the repository that changes often is your best bet for this. You can ask the user for the size, or just a checksum of the file, and then see which repository commits have a matching entry.
 
 #### Finding a git commit when given a checksum
 
-As an example, a user in the Bucardo project has encountered a problem when running HEAD, but all they know is that they checked it out of sometime in the last four months. They also run "md5sum Bucardo.pm" and report that the MD5 of the file Bucardo.pm is 
-767571a828199b6720f6be7ac543036e. Here's the easiest way to find what version of the repository they are using:
+As an example, a user in the Bucardo project has encountered a problem when running HEAD, but all they know is that they checked it out of sometime in the last four months. They also run “md5sum Bucardo.pm” and report that the MD5 of the file Bucardo.pm is 
+767571a828199b6720f6be7ac543036e. Here’s the easiest way to find what version of the repository they are using:
 
 ```
 $ SUM=767571a828199b6720f6be7ac543036e
@@ -85,13 +85,13 @@ Date:   Fri Feb 24 08:34:50 2012 -0500
     Fix typo regarding piddir</greg@endpoint.com>
 ```
 
-I'm using variables in these examples both to make copy and paste easier, and because it's always a good idea to save away constant but hard-to-remember bits of information. The first part of the pipeline grabs a list of all commit IDs: **git log --format=%H**.
+I’m using variables in these examples both to make copy and paste easier, and because it’s always a good idea to save away constant but hard-to-remember bits of information. The first part of the pipeline grabs a list of all commit IDs: **git log --format=%H**.
 
 We then use xargs to feed list of commit ids one by one to a shell. The shell grabs a copy of the Bucardo.pm file as it existed at the time of that commit, and generates an MD5 checksum of it. We echo the commit on the line as well as we will need it later on. So we now generate the commit hash and the md5 of the Bucardo.pm file.
 
-Next, we pipe this list to grep so we only match the MD5 we are looking for. We use -m1 to stop processing once the first match is found (this is important, as the extraction and checksumming of files is fairly expensive, so we want to short-circuit it as soon as possible). Once we have a match, we use the **cut** utility to extract just the commit ID, and pipe that back into **git log**. Voila! Now we know the very last time the file existed with that MD5, and can checkout the given commit. (The "terminated by signal 13" is normal and expected)
+Next, we pipe this list to grep so we only match the MD5 we are looking for. We use -m1 to stop processing once the first match is found (this is important, as the extraction and checksumming of files is fairly expensive, so we want to short-circuit it as soon as possible). Once we have a match, we use the **cut** utility to extract just the commit ID, and pipe that back into **git log**. Voila! Now we know the very last time the file existed with that MD5, and can checkout the given commit. (The “terminated by signal 13” is normal and expected)
 
-You may wonder if a sha1sum would be better, as git uses those internally. Sadly, the process remains the same, as the algorithm git uses to generate its internal SHA1 checksums is sha1("blob " . length(file) . "\0" . contents(file)), and you can't expect a random user to compute that and send it to you! :)
+You may wonder if a sha1sum would be better, as git uses those internally. Sadly, the process remains the same, as the algorithm git uses to generate its internal SHA1 checksums is `sha1("blob " . length(file) . "\0" . contents(file))`, and you can’t expect a random user to compute that and send it to you! :)
 
 #### Finding a git commit when given a file size
 
@@ -110,7 +110,7 @@ $ git rev-list --all \
 d91807d59a6326e48077311e96e4d5730f24304c
 ```
 
-The git ls-tree command generates a list of all blobs (files) for a given commit. The -l option tells it to also print the file size, and the -r option asks it to recurse. So we use git rev-list to generate a list of all the commits (by default, these are output from newest to oldest). Then we pass each commit to the ls-tree command, and use grep to see if that number appears anywhere in the output. If it does, grep returns truth, making the if statement fire the echo, which shows is the commit. The break ensures we stop after the first match. We now have the (probable) commit that the user checked the file out of. As we are not matching by filename, it's probably a good idea to double-check by running git ls-tree -l -r on the given commit.
+The git ls-tree command generates a list of all blobs (files) for a given commit. The -l option tells it to also print the file size, and the -r option asks it to recurse. So we use git rev-list to generate a list of all the commits (by default, these are output from newest to oldest). Then we pass each commit to the ls-tree command, and use grep to see if that number appears anywhere in the output. If it does, grep returns truth, making the if statement fire the echo, which shows is the commit. The break ensures we stop after the first match. We now have the (probable) commit that the user checked the file out of. As we are not matching by filename, it’s probably a good idea to double-check by running git ls-tree -l -r on the given commit.
 
 #### Finding a git commit when given a copy of the file itself
 
@@ -142,7 +142,7 @@ DBI connect('dbname=bucardo;host=localhost;port=5432',
   /usr/local/bin/bucardo line 8627.
 ```
 
-A quick glance at line 8627 of the file "bucardo" in HEAD showed only a closing brace, so it must be an earlier version of the file. What was needed was to walk backwards in time and check that line for every commit until we find one that could have triggered the error. Here is one way to do that:
+A quick glance at line 8627 of the file “bucardo” in HEAD showed only a closing brace, so it must be an earlier version of the file. What was needed was to walk backwards in time and check that line for every commit until we find one that could have triggered the error. Here is one way to do that:
 
 ```
 $ git log --format=%h \
@@ -153,7 +153,7 @@ $ git log --format=%h \
 379c9006     $dbh = DBI->connect($BDSN, 'bucardo'...
 ```
 
-Therefore, we can do a "git checkout 379c9006" and see if we can solve the user's problem.
+Therefore, we can do a “git checkout 379c9006” and see if we can solve the user’s problem.
 
 These are some of the techniques I use to hunt down specific commits in a git repository. Are there other clues you have run up against? Better recipes for hunting down commits? Let me know in the comments below.
 

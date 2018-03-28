@@ -49,9 +49,9 @@ To pipe together commands using the sh library, you would encapsulate each comma
 199
 ```
 
-This command would have been equivalent to the bash pipe of "ls -l /etc | wc -l" indicating that the long listing of /etc on my workstation contained 199 lines of output. Each piped command is encapsulated inside the parenthesis of the command the precedes it.
+This command would have been equivalent to the bash pipe of “ls -l /etc | wc -l” indicating that the long listing of /etc on my workstation contained 199 lines of output. Each piped command is encapsulated inside the parenthesis of the command the precedes it.
 
-For our log listener we will use the tail command along with a python iterator to watch for a potential error condition, which I will represent with the string "ERROR":
+For our log listener we will use the tail command along with a python iterator to watch for a potential error condition, which I will represent with the string “ERROR”:
 
 ```python
 >>> for line in sh.tail("-f", "/tmp/test_log", _iter=True):

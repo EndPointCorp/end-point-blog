@@ -1,8 +1,8 @@
 ---
 author: Kamil Ciemniewski
 gh_issue_number: 1215
-tags: classifiers, machine-learning, optimization, probability-theory, ruby
-title: Learning from data basics - the Naive Bayes model
+tags: machine-learning, optimization, probability-theory, ruby
+title: Learning from data basics — the Naive Bayes model
 ---
 
 
@@ -21,13 +21,13 @@ One of the obvious directions we may want to turn towards is to use probability 
 
 ### Quick theory refresher for programmers
 
-As we'll be exploring the probability approaches using Ruby code, I'd like to very quickly walk you through some of the basic concepts we will be using from now on.
+As we’ll be exploring the probability approaches using Ruby code, I’d like to very quickly walk you through some of the basic concepts we will be using from now on.
 
 #### Random variables
 
-The simplest probability scenario many of us are already accustomed with is the coin toss results distribution. Here we're throwing the coin, noting whether we get heads or tails. In this experiment, we call "got heads" and "got tails" probability events. We can also shift the terminology a bit by calling them: two values of the "toss result" **random variable**.
+The simplest probability scenario many of us are already accustomed with is the coin toss results distribution. Here we’re throwing the coin, noting whether we get heads or tails. In this experiment, we call “got heads” and “got tails” probability events. We can also shift the terminology a bit by calling them: two values of the “toss result” **random variable**.
 
-So in this case we'd have a random variable — let's call it **T** (for "toss") that can take values of: "heads" or "tails". We then define the probability distribution P(T) as a function from the random variable value to a real number between 0 and 1 inclusively on both sides. In real world the probability values after e. g 10000 tosses might look like the following:
+So in this case we’d have a random variable — let’s call it **T** (for “toss”) that can take values of: “heads” or “tails”. We then define the probability distribution P(T) as a function from the random variable value to a real number between 0 and 1 inclusively on both sides. In real world the probability values after e. g 10000 tosses might look like the following:
 
 ```nohighlight
 +-------+---------------------+
@@ -42,16 +42,16 @@ These values are nearing 0.5 more and more with the greater number of tosses.
 
 #### Factors and probability distributions
 
-We've shown a simple probability distribution. To ease the comprehension of the Ruby code we'll be working with, let me introduce the notion of the **factor**. We called the "table" from the last example a probability distribution. The table represented a function from a random variable's value to a real number between [0, 1]. The **factor** is a generalization of that notion. It's a function from the same domain, but returning any real number. We'll explore the usability of this notion in some of our next articles.
+We’ve shown a simple probability distribution. To ease the comprehension of the Ruby code we’ll be working with, let me introduce the notion of the **factor**. We called the “table” from the last example a probability distribution. The table represented a function from a random variable’s value to a real number between [0, 1]. The **factor** is a generalization of that notion. It’s a function from the same domain, but returning any real number. We’ll explore the usability of this notion in some of our next articles.
 
 The probability distribution is a factor that adds two constraints:
 
 - its values are always in the range [0, 1] inclusively
-- the sum of all it's values is exactly 1
+- the sum of all it’s values is exactly 1
 
 ### Simple Ruby modeling of random variables and factors
 
-We need to have some ways of computing probability distributions. Let's define some simple tools we'll be using in this blog series:
+We need to have some ways of computing probability distributions. Let’s define some simple tools we’ll be using in this blog series:
 
 ```ruby
 # Let's define a simple version of the random variable
@@ -174,7 +174,7 @@ class Factor
 end
 ```
 
-Notice that we're using here the **terminal-table** gem as a helper for printing out the factors in an easy to grasp fashion. You'll need the following requires:
+Notice that we’re using here the **terminal-table** gem as a helper for printing out the factors in an easy to grasp fashion. You’ll need the following requires:
 
 ```ruby
 require 'rubygems'
@@ -198,7 +198,7 @@ relation = RandomVariable.new :relation, [ :single, :in_relationship ]
 location = RandomVariable.new :location, [ :us, :canada, :europe, :asia ]
 ```
 
-Let's define the data model that resembles logically the one we could have in our real e-commerce application:
+Let’s define the data model that resembles logically the one we could have in our real e-commerce application:
 
 ```ruby
 class LineItem
@@ -232,7 +232,7 @@ end
 
 We want to utilize a user’s baskets in order to infer the most probable value for a category, given a set of user’s features. In our example, we can imagine that we’re offering authentication via Facebook. We can grab info about a user’s sex, location, age and whether she/he is in relationship or not. We want to find a category that’s being chosen the most by users with a given set of features.
 
-As we don't have any real data to play with, we'll need a generator to create fake data of certain characteristics. Let's first define a helper class with a method, that will allow us to choose a value out of a given list of options along with their weights:
+As we don’t have any real data to play with, we’ll need a generator to create fake data of certain characteristics. Let’s first define a helper class with a method, that will allow us to choose a value out of a given list of options along with their weights:
 
 ```ruby
 class Generator
@@ -375,7 +375,7 @@ The Naive Bayes model limits the number of parameters we have to manage but it c
 
 ### Implementing the Naive Bayes model
 
-As we now have all the tools we need, let's get back to the probability theory to figure out how best to model the Naive Bayes in terms of the Ruby blocks we now have.
+As we now have all the tools we need, let’s get back to the probability theory to figure out how best to model the Naive Bayes in terms of the Ruby blocks we now have.
 
 The approach says that under the assumptions we discussed we can approximate the original distribution to be the product of factors:
 
@@ -401,7 +401,7 @@ And then simplify it even further as:
 p(cat, age, sex, rel, loc) = p(age, cat) * ( p(sex, cat) / p(cat) ) * ( p(rel, cat) / p(cat) ) * ( p(loc, cat) / p(cat) )
 ```
 
-Let's define all the factors we will need:
+Let’s define all the factors we will need:
 
 ```ruby
 cat_dist     = Factor.new [ category ]
@@ -417,7 +417,7 @@ Also, we want a full distribution to compare the results:
 full_dist = Factor.new [ category, age, sex, relation, location ]
 ```
 
-Let's generate 1000 random users and looping through them and their baskets - adjust probability distributions for combinations of product categories and user traits:
+Let’s generate 1000 random users and looping through them and their baskets - adjust probability distributions for combinations of product categories and user traits:
 
 ```ruby
 Model.generate(1000).each do |user|
@@ -586,7 +586,7 @@ Which yields the following to the console (the full distribution is truncated du
 1.0000000000000004
 ```
 
-Let's define a Proc for inferring categories based on user traits as evidence:
+Let’s define a Proc for inferring categories based on user traits as evidence:
 
 ```ruby
 infer = -> (age, sex, rel, loc) do
@@ -627,7 +627,7 @@ end
 
 ### The results
 
-We're ready now to use the model and see how well the Naive Bayes model performs in this particular scenario:
+We’re ready now to use the model and see how well the Naive Bayes model performs in this particular scenario:
 
 ```ruby
 infer.call :teens, :male, :single, :us
@@ -660,11 +660,11 @@ Full pointed at:
    veggies => 0.0013500000000000022
 ```
 
-That's quite impressive! Even though we're using a simplified model to approximate the original distribution, the algorithm managed to infer the correct values in all cases. You can notice also that the results differ only by a couple of cases in 1000.
+That’s quite impressive! Even though we’re using a simplified model to approximate the original distribution, the algorithm managed to infer the correct values in all cases. You can notice also that the results differ only by a couple of cases in 1000.
 
 The approximation like that would certainly be very useful in a more complex e-commerce scenario, in the case where the number of evidence variables would be big enough to be unmanageable using the full distribution. There are use cases though, where a couple of errors in 1000 cases would be too many — the traditional example is medical diagnosis. There are also cases where the number of errors would be much greater just because the Naive Bayes assumption of conditional independence of variables is not always a fair an assumption. Is there a way to improve?
 
-The Naive Bayes assumption says that the distribution factorizes the way we did it **only if the features are conditionally independent given the category**. The notion of **conditional independence** (apart from the formal mathematical definition) suggests that if some variables a and b are conditionally independent given c, then if we know the value of c then no additional information about b can alter our knowledge about a. In our example, knowing the category, let say :beauty doesn’t mean that e. g sex is independent from age. In real world examples, it's often very hard to find a use case for Naive Bayes that would follow the assumption in all the cases.
+The Naive Bayes assumption says that the distribution factorizes the way we did it **only if the features are conditionally independent given the category**. The notion of **conditional independence** (apart from the formal mathematical definition) suggests that if some variables a and b are conditionally independent given c, then if we know the value of c then no additional information about b can alter our knowledge about a. In our example, knowing the category, let say :beauty doesn’t mean that e. g sex is independent from age. In real world examples, it’s often very hard to find a use case for Naive Bayes that would follow the assumption in all the cases.
 
 There are alternative approaches that allow us to apply the assumptions that more rigidly follow the chosen data set. We will explore these in the next articles, building on top of what we saw here.
 

@@ -5,7 +5,7 @@ tags: company
 title: Updated End Point Blog Stats and Our Services
 ---
 
-Today, I sat down to read through a few recent End Point blog articles and was impressed at the depth of topics in recent posts ([PostgreSQL](/blog/2015/02/10/postgres-custom-casts-and-pgdump), [Interchange](/blog/2015/02/09/interchange-loop-optimization), [SysAdmin](/blog/2015/02/06/cron-wrapper-keep-your-cron-jobs), [Text Editors (Vim)](/blog/2015/02/06/vim-plugin-spotlight-ctrlp), [Dancer](/blog/2015/02/05/filling-in-header-elements-with-dancer), [AngularJS](/blog/2015/02/05/polemics-on-opinions-about-angularjs)) from my coworkers. The list continues if I look further back covering technologies in both front and back end web development. And, this list doesn't even cover the topics I typically write about such as Ruby on Rails & JavaScript.
+Today, I sat down to read through a few recent End Point blog articles and was impressed at the depth of topics in recent posts ([PostgreSQL](/blog/2015/02/10/postgres-custom-casts-and-pgdump), [Interchange](/blog/2015/02/09/interchange-loop-optimization), [SysAdmin](/blog/2015/02/06/cron-wrapper-keep-your-cron-jobs), [Text Editors (Vim)](/blog/2015/02/06/vim-plugin-spotlight-ctrlp), [Dancer](/blog/2015/02/05/filling-in-header-elements-with-dancer), [AngularJS](/blog/2015/02/05/polemics-on-opinions-about-angularjs)) from my coworkers. The list continues if I look further back covering technologies in both front and back end web development. And, this list doesn’t even cover the topics I typically write about such as Ruby on Rails & JavaScript.
 
 While 5 years ago, we may have said we predominately worked with ecommerce clients, our portfolio has evolved to include [Liquid Galaxy](https://liquidgalaxy.endpoint.com/) clients and many non-ecommerce sites as well. With the inspiration from reading through these recent posts, I decided to share some updated stats.
 
@@ -15,7 +15,7 @@ Do you remember [my post on Wordle](/blog/2011/02/02/in-our-own-words) from earl
 
 End Point blog Word cloud from 2013 to present
 
-I removed common words from the word cloud not removed from the original post, including "one", "like", etc. Compared to the original post, it looks like database related topics (e.g. [PostgreSQL](/technology/postgresql)) still have strong representation on the blog in terms of word count, and many other common developer words. [Liquid Galaxy](https://liquidgalaxy.endpoint.com/) now shows up in the word cloud (not surprising), but many of the other technology specific terms are still present (Spree, [Rails](/technology/ruby-on-rails), [Bucardo](/technology/replication)).
+I removed common words from the word cloud not removed from the original post, including “one”, “like”, etc. Compared to the original post, it looks like database related topics (e.g. [PostgreSQL](/technology/postgresql)) still have strong representation on the blog in terms of word count, and many other common developer words. [Liquid Galaxy](https://liquidgalaxy.endpoint.com/) now shows up in the word cloud (not surprising), but many of the other technology specific terms are still present (Spree, [Rails](/technology/ruby-on-rails), [Bucardo](/technology/replication)).
 
 I also took a look at the top 10 blog posts by page views, as compared to [this post](/blog/2010/01/04/2009-end-point-blogging):
 
@@ -32,7 +32,7 @@ I also took a look at the top 10 blog posts by page views, as compared to [this 
 
 The page views are not normalized over time, which means older blog posts would not only have more page views, but also have more time to build up traffic from search. Again, this list demonstrates qualitatively the broad range of topics for which our blog is popular, including both very technology specific posts as well as general development topics. I also suspect our traffic continues to attract long-tail keywords, described more [in this post](/blog/2010/02/22/code-seo-google-analytics-api).
 
-Finally, back in October, I visited End Point's Tennessee office and got into a discussion with [Jon](/team/jon_jensen) about how we define our services and/or how our business breaks down into topics. Here's a rough chart of what we came up with at the time:
+Finally, back in October, I visited End Point’s Tennessee office and got into a discussion with [Jon](/team/jon_jensen) about how we define our services and/or how our business breaks down into topics. Here’s a rough chart of what we came up with at the time:
 
 <img border="0" src="/blog/2015/02/10/updated-end-point-blog-stats-and-our/image-1.png"/>
 
@@ -44,7 +44,7 @@ Trying to explain the broad range and depth of our services can be challenging. 
 - Our [Ecommerce](/ecommerce) services typically includes work in the topics of Backend & Client Side Development, as well as Databases.
 - Our development in mobile applications spans Backend & Client Side Development.
 
-All in all, I'm impressed that we've continued to maintain expertise in long-standing topics such as PostgreSQL and Interchange, but also haven't shied away from learning new technologies such as GIS as related to Liquid Galaxy and JavaScript frameworks.
+All in all, I’m impressed that we’ve continued to maintain expertise in long-standing topics such as PostgreSQL and Interchange, but also haven’t shied away from learning new technologies such as GIS as related to Liquid Galaxy and JavaScript frameworks.
 
 ### PS
 

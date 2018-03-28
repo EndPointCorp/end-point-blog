@@ -9,14 +9,11 @@ title: Liquid Galaxy Technology Showcase at Situation Interactive
 
 Situation Interactive hosted its first Annual Tech Showcase on June 10th to continue its ongoing event series that promotes innovation through community collaboration.
 
-End Point Liquid Galaxy was chosen to be one of three technology companies to show off its interactive display platform to Situation's internal staff and a select group of clients. We were selected as a company that represents an exciting innovative technology. Our presentation focused on the various features of the Liquid Galaxy, including:
+End Point Liquid Galaxy was chosen to be one of three technology companies to show off its interactive display platform to Situation’s internal staff and a select group of clients. We were selected as a company that represents an exciting innovative technology. Our presentation focused on the various features of the Liquid Galaxy, including:
 
 - Google Earth navigation with digital content overlays
-
 - Panoramic photography and videos using krPano
-
 - 3D modeling within Google Earth
-
 - Customized tours 
 
 As you can see in the photos below, participants were able to view any part of Google Earth, pano photos, and even the interior of leading museums and coral reefs (as Google Street View expands beyond just the sidewalks).

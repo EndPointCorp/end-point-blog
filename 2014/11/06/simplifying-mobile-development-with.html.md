@@ -7,27 +7,27 @@ title: Simplifying mobile development with Ionic Framework
 
 My high school math teacher used to say that mathematicians are the laziest people on Earth. Why? Because they always look for clever ways to simplify their work.
 
-If you stop and think about it, all that technology is, is just simplification. It's taking the infinitely complex world and turning it into something sterile and simple. It's all about producing simple models with a limited number of elements and processes.
+If you stop and think about it, all that technology is, is just simplification. It’s taking the infinitely complex world and turning it into something sterile and simple. It’s all about producing simple models with a limited number of elements and processes.
 
 Today I’d like to walk you through creation of a mobile app that could be used on iOS, Android or Windows Phone. We’ll use a very cool set of technologies that allow us to switch from using multiple languages and frameworks (Objective-C for iOS, Java for Android and C# for Windows Phone) to just using HTML, CSS and JavaScript.
 
 Let’s start turning complex into simple!
 
-## PhoneGap and Ionic Framework
+### PhoneGap and Ionic Framework
 
-### Creating the project
+#### Creating the project
 
-In order to be able to start playing along, you need to get yourself a set of toys. Assuming that you've got NodeJS and Npm installed already, all you have to do is:
+In order to be able to start playing along, you need to get yourself a set of toys. Assuming that you’ve got NodeJS and Npm installed already, all you have to do is:
 
 ```bash
 $ npm install -g cordova ionic
 ```
 
-Now you should be able to create the project's scaffold. We'll be creating a simple app that will list all the latest cartoons from [the xkcd blog](http://xkcd.com). Let's call it Cartoonic.
+Now you should be able to create the project’s scaffold. We’ll be creating a simple app that will list all the latest cartoons from [the xkcd blog](https://xkcd.com). Let’s call it Cartoonic.
 
-Ionic comes with a handy tool called 'ionic'. It allows you to create a new project as well as perform some automated project-structure-management tasks. The project creation task accepts a 'skeleton' name that drives an initial layout of the app. Possible options are: 'blank', 'tabs' and 'sidemenu'.
+Ionic comes with a handy tool called ‘ionic’. It allows you to create a new project as well as perform some automated project-structure-management tasks. The project creation task accepts a ‘skeleton’ name that drives an initial layout of the app. Possible options are: ‘blank’, ‘tabs’ and ‘sidemenu’.
 
-We'll be creating an app from scratch so:
+We’ll be creating an app from scratch so:
 
 ```bash
 $ ionic start Cartoonic blank
@@ -39,7 +39,7 @@ The framework gives you an option of whether you want to use Sass or just plain 
 $ cd Cartoonic && ionic setup sass
 ```
 
-All went well, but now let's see if it *works* well. For this, Ionic gives you an ability to test your app in the browser, as if it were a screen of your mobile device. To run the app in the browser now:
+All went well, but now let’s see if it *works* well. For this, Ionic gives you an ability to test your app in the browser, as if it were a screen of your mobile device. To run the app in the browser now:
 
 ```bash
 $ ionic serve
@@ -47,13 +47,13 @@ $ ionic serve
 
 <div class="separator" style="clear: both; text-align: center;"><a href="/blog/2014/11/06/simplifying-mobile-development-with/image-0.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;" target="_blank"><img border="0" src="/blog/2014/11/06/simplifying-mobile-development-with/image-0.png"/></a></div>
 
-### Working with the app layout
+#### Working with the app layout
 
-We need to let all users know what a cool name we've chosen for our app. The default one provided by the scaffold wouldn't work well. Also we'd like the color of the header to be blue instead of the default white.
+We need to let all users know what a cool name we’ve chosen for our app. The default one provided by the scaffold wouldn’t work well. Also we’d like the color of the header to be blue instead of the default white.
 
 In order to do so you can take a look at the CSS documentation for different aspects of the UI:
 
-[http://ionicframework.com/docs/components/#header](http://ionicframework.com/docs/components/#header)
+[https://ionicframework.com/docs/components/#header](https://ionicframework.com/docs/components/#header)
 
 ```diff
 --- a/www/index.html
@@ -71,7 +71,7 @@ In order to do so you can take a look at the CSS documentation for different asp
 
 <div class="separator" style="clear: both; text-align: center;"><a href="/blog/2014/11/06/simplifying-mobile-development-with/image-1.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;" target="_blank"><img border="0" src="/blog/2014/11/06/simplifying-mobile-development-with/image-1.png"/></a></div>
 
-So far so good, now let's play with the list of cartoons:
+So far so good, now let’s play with the list of cartoons:
 
 ```diff
 --- a/scss/ionic.app.scss
@@ -106,13 +106,13 @@ So far so good, now let's play with the list of cartoons:
 
 <div class="separator" style="clear: both; text-align: center;"><a href="/blog/2014/11/06/simplifying-mobile-development-with/image-2.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;" target="_blank"><img border="0" src="/blog/2014/11/06/simplifying-mobile-development-with/image-2.png"/></a></div>
 
-Alright, we've got the list that's looking quite nice. The data behind is static, but for now we just wanted to make sure the look&feel is good.
+Alright, we’ve got the list that’s looking quite nice. The data behind is static, but for now we just wanted to make sure the look&feel is good.
 
-### Using AngularJS to manage the app
+#### Using AngularJS to manage the app
 
-Ionic is built around the fantastic AngularJS framework. That's our means of developing the logic behind. We need to make the list of cartoons use real data from the Xckd blog RSS feed. We also need to enable tapping on images to see the picture in the browser (so it can be zoomed in).
+Ionic is built around the fantastic AngularJS framework. That’s our means of developing the logic behind. We need to make the list of cartoons use real data from the Xckd blog RSS feed. We also need to enable tapping on images to see the picture in the browser (so it can be zoomed in).
 
-Let's start with making the UI use dynamically bound data that we can operate on with JavaScript. In order to do so, we need to add a controller for our view. We also need to specify the data binding between the markup we've created previously and the variable in the controller that we intend to use as our data store.
+Let’s start with making the UI use dynamically bound data that we can operate on with JavaScript. In order to do so, we need to add a controller for our view. We also need to specify the data binding between the markup we’ve created previously and the variable in the controller that we intend to use as our data store.
 
 ```diff
 --- a/www/index.html
@@ -166,9 +166,9 @@ Let's start with making the UI use dynamically bound data that we can operate on
 +});
 ```
 
-You can notice that "ng-controller" directive has been added to the body element. It points at the newly created controller, which we're loading with a script tag and making available to the rest of the app by including its module (starter.controllers) in the 'starter' module's dependencies list.
+You can notice that “ng-controller” directive has been added to the body element. It points at the newly created controller, which we’re loading with a script tag and making available to the rest of the app by including its module (starter.controllers) in the ‘starter’ module’s dependencies list.
 
-Let's implement opening the picture upon the tap:
+Let’s implement opening the picture upon the tap:
 
 ```diff
 --- a/www/index.html
@@ -195,9 +195,9 @@ Let's implement opening the picture upon the tap:
  });
 ```
 
-That was simple wasn't it? We've just added the ng-click directive making the click/tap event bound to the openCartoon function from the scope. This function in turn is using window.open passing '_blank' as target. Et voilà!
+That was simple wasn’t it? We’ve just added the ng-click directive making the click/tap event bound to the openCartoon function from the scope. This function in turn is using window.open passing ‘_blank’ as target. Et voilà!
 
-Now, let's implement loading images from the real feed:
+Now, let’s implement loading images from the real feed:
 
 ```diff
 --- a/www/index.html
@@ -283,17 +283,17 @@ Now, let's implement loading images from the real feed:
 +});
 ```
 
-Okay, a couple of comments here. You may wonder why have we loaded Google APIs? That's because if we were to try to load the xml that comes from the blog's feed, we would inevitably fail because of the "[Same Origin Policy](http://en.wikipedia.org/wiki/Same-origin_policy)". Basically, the Ajax request would not complete successfully and there's nothing we can do locally about it.
+Okay, a couple of comments here. You may wonder why have we loaded Google APIs? That’s because if we were to try to load the xml that comes from the blog’s feed, we would inevitably fail because of the “[Same Origin Policy](https://en.wikipedia.org/wiki/Same-origin_policy)”. Basically, the Ajax request would not complete successfully and there’s nothing we can do locally about it.
 
-Luckily, Google has created a service we can use as a middleman between our in-browser JavaScript code and blog's web server. Long story made short: when you load the feed with Google's Feed API - the data's there and it's also already parsed.
+Luckily, Google has created a service we can use as a middleman between our in-browser JavaScript code and blog’s web server. Long story made short: when you load the feed with Google’s Feed API - the data’s there and it’s also already parsed.
 
-We're also adding a custom service here. The service fetches the entries upon its initialization. And because the controller's depending on this service - we're guaranteed to get the data as soon as the controller is initialized. The controller is also using the $watch function to make sure it has the most recent copy of the entries list.
+We’re also adding a custom service here. The service fetches the entries upon its initialization. And because the controller’s depending on this service - we’re guaranteed to get the data as soon as the controller is initialized. The controller is also using the $watch function to make sure it has the most recent copy of the entries list.
 
 <div class="separator" style="clear: both; text-align: center;"><a href="/blog/2014/11/06/simplifying-mobile-development-with/image-3.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;" target="_blank"><img border="0" src="/blog/2014/11/06/simplifying-mobile-development-with/image-3.png"/></a></div>
 
 References:
 
-- [Ionic docs](http://ionicframework.com/docs/)
+- [Ionic docs](https://ionicframework.com/docs/)
 - [Google Feed API docs](https://developers.google.com/feed/v1/)
-- [Same Origin Policy on Wikipedia](http://en.wikipedia.org/wiki/Same-origin_policy)
-- [The xkcd blog](http://xkcd.com)
+- [Same Origin Policy on Wikipedia](https://en.wikipedia.org/wiki/Same-origin_policy)
+- [The xkcd blog](https://xkcd.com)

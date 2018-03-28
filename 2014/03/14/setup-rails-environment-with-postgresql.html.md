@@ -5,13 +5,13 @@ tags: mac, postgres, rails, tls
 title: Setup Rails Environment with PostgreSQL on Apple Mac OS X
 ---
 
-Setting up Rails on Mac OS X to have a Rails application is a tedious process. It's a kind of road block for newbies. Here I have listed the steps to have Rails application running with a PostgreSQL database on the Mac OS X.
+Setting up Rails on Mac OS X to have a Rails application is a tedious process. It’s a kind of road block for newbies. Here I have listed the steps to have Rails application running with a PostgreSQL database on the Mac OS X.
 
-**1. Rails**
+### 1. Rails
 
 Before installing Rails, We need couple of things installed on Mac OS X. 
 
-- Ruby
+##### Ruby
 
 Luckily Mac OS X comes with preinstalled Ruby. 
 
@@ -19,15 +19,15 @@ Luckily Mac OS X comes with preinstalled Ruby.
 $ ruby -v
 ruby 2.0.0p247 (2013-06-27 revision 41674) [universal.x86_64-darwin13]
 ```
-- Xcode and Command Line Tools
+##### Xcode and Command Line Tools
 
 Install [Xcode](https://itunes.apple.com/app/xcode/id497799835?l=en&mt=12) from Mac Store. Xcode contains some system libraries which are required for Rails. 
 
-To install Command Line Tools, Open Xcode -> Xcode(menu bar) -> Preferences -> Downloads -> Install 'Command Line Tools'
+To install Command Line Tools, Open Xcode -> Xcode(menu bar) -> Preferences -> Downloads -> Install ‘Command Line Tools’
 
-- Homebrew
+##### Homebrew
 
-Homebrew helps to install gems with 'gem' and its dependencies with help of brew. Homebrew makes our life easier by handling dependencies for us during installation.
+Homebrew helps to install gems with ‘gem’ and its dependencies with help of brew. Homebrew makes our life easier by handling dependencies for us during installation.
 
 ```bash
 $ ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
@@ -39,9 +39,9 @@ $ brew tap homebrew/dupes
 $ brew install apple-gcc42
 $ sudo ln -s /usr/local/bin/gcc-4.2 /usr/bin/gcc-4.2
 ```
-- RVM
+##### RVM
 
-RVM (Ruby Version Manager) is a must have tool to easily manage multiple Ruby environments. Let's install RVM:
+RVM (Ruby Version Manager) is a must have tool to easily manage multiple Ruby environments. Let’s install RVM:
 
 ```bash
 $ curl -L https://get.rvm.io | bash -s stable --ruby
@@ -50,7 +50,7 @@ rvm 1.25.19 (stable) by Wayne E. Seguin <wayneeseguin@gmail.com>, Michal Papis <
 $ echo '[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"' >> ~/.bashrc
 $ source ~/.bashrc
 ```
-Gemsets are very helpful to manage multiple applications with different sets of gems packed. So let's create a gemset to work on:
+Gemsets are very helpful to manage multiple applications with different sets of gems packed. So let’s create a gemset to work on:
 
 ```bash
 $ rvm use ruby-2.1.1@endpoint --create
@@ -62,7 +62,7 @@ gemsets for ruby-2.1.1 (found in /Users/selva/.rvm/gems/ruby-2.1.1)
 ```
 (See also the similar [rbenv](http://rbenv.org/), which some people prefer.)
 
-- Rails
+##### Rails
 
 We are all set to install Rails now: 
 
@@ -72,7 +72,7 @@ $ rails -v
 Rails 4.0.3
 ```
 
-**2. Install PostgreSQL**
+### 2. Install PostgreSQL
 
 Download and Install PostgreSQL database from [Postgres.app](http://postgresapp.com/) which provides PostgresSQL in a single package to easily get started with Max OS X. After the installation, open Postgres located under Applications to start PostgreSQL database running. Find out the PostgreSQL bin path and append to ~/.bashrc for accessing commands through the shell.
 
@@ -89,9 +89,9 @@ Enter it again:
 CREATE ROLE sampleuser PASSWORD 'md5afd8d364af0c8efa11183c3454f56c52' NOSUPERUSER CREATEDB NOCREATEROLE INHERIT LOGIN;
 ```
 
-**3. Create Application**
+### 3. Create Application
 
-Rails environment is ready with PostgreSQL database. Let's create a sample web application
+Rails environment is ready with PostgreSQL database. Let’s create a sample web application
 
 ```bash
 $ rails new SampleApp
@@ -113,9 +113,9 @@ $ cd SampleApp
 $ ./bin/rails server
 ```
 
-**4. Version Control System**
+### 4. Version Control System
 
-It is always good to develop an application with version control system. Here I am using 'Git'.
+It is always good to develop an application with version control system. Here I am using ‘Git’.
 
 ```bash
 $ cd SampleApp
@@ -123,7 +123,7 @@ $ git init
 $ git add . && git commit -m "Initial Commit"
 ```
 
-**5. Server on https (optional)**
+### 5. Server on https (optional)
 
 Sometimes the application needs to be run on the https protocol for security reasons to if third-party services require the application to be served over https. So we should setup https (SSL Security). First, create an self-signed SSL certificate. To create a self-signed certificate we should have RSA key and Certificate request in place beforehand.
 
@@ -147,7 +147,7 @@ $ openssl req -new -key server.key -out server.csr
 # creating self-signed certificate
 $ openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt 
 ```
-WEBrick server can be configured to use SSL key and certificate by adding below lines of code into bin/rails after '#!/usr/bin/env ruby'. Provide the locations of RSA key and certificate in the Ruby code. 
+WEBrick server can be configured to use SSL key and certificate by adding below lines of code into bin/rails after ‘#!/usr/bin/env ruby’. Provide the locations of RSA key and certificate in the Ruby code. 
 
 ```ruby
 require 'rubygems'

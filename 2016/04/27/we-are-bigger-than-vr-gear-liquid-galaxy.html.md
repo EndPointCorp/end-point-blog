@@ -15,17 +15,17 @@ When everyone is so addicted to their little magic boxes, they tend to lose thei
 
 When a user stands in front of Liquid Galaxy and is surrounded by a multitude of huge screens arranged in a semicircle, he puts not only his eyes but his whole body into an unprecedented 3D space. These screens are big enough to cover the audience’s entire peripheral vision and bring great visual stimulation from all directions. When using the Liquid Galaxy system, the users become fully immersed in the system and the imagery they view.
 
-<div class="separator" style="clear: both; text-align: center;"><a href="/blog/2016/04/27/we-are-bigger-than-vr-gear-liquid-galaxy/image-0-big.jpeg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="/blog/2016/04/27/we-are-bigger-than-vr-gear-liquid-galaxy/image-0.jpeg"/></a></div>
+<div class="separator" style="clear: both; text-align: center;"><a href="/blog/2016/04/27/we-are-bigger-than-vr-gear-liquid-galaxy/image-1-big.jpeg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="/blog/2016/04/27/we-are-bigger-than-vr-gear-liquid-galaxy/image-1.jpeg"/></a></div>
 
-<div class="separator" style="clear: both; text-align: center; float: right;"><a href="/blog/2016/04/27/we-are-bigger-than-vr-gear-liquid-galaxy/image-1-big.jpeg" imageanchor="1" style="clear: right; float: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" src="/blog/2016/04/27/we-are-bigger-than-vr-gear-liquid-galaxy/image-1.jpeg"/></a><br/>
+<div class="separator" style="clear: both; text-align: center; float: right;"><a href="/blog/2016/04/27/we-are-bigger-than-vr-gear-liquid-galaxy/image-2-big.jpeg" imageanchor="1" style="clear: right; float: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" src="/blog/2016/04/27/we-are-bigger-than-vr-gear-liquid-galaxy/image-2.jpeg"/></a><br/>
 <small>Movie Night at End Point</small></div>
 
 This digital chamber can be considered a sort of VR movie theater, where an audience can enjoy the same content, and probably the same bucket of popcorn! While this setup makes the Liquid Galaxy a natural fit for any sort of exhibit, many End Point employees have also watched full length feature movies on the system during our monthly Movie Night at our Headquarters office in Manhattan. This sort of shared experience is not something that is possible on typical VR, because unlike VR the Liquid Galaxy is serving a larger audience and presenting stories in a more interactive way.
 
 For most meetings, exhibitions, and other special occasions, the Liquid Galaxy helps to provide an amazing and impactful experience  to the audience. Any scenario can be built for users to explore, and geospatial data sets can be  presented immersively.
 
-<div class="separator" style="clear: both; text-align: center;"><a href="/blog/2016/04/27/we-are-bigger-than-vr-gear-liquid-galaxy/image-2-big.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="/blog/2016/04/27/we-are-bigger-than-vr-gear-liquid-galaxy/image-2.png"/></a></div>
+<div class="separator" style="clear: both; text-align: center;"><a href="/blog/2016/04/27/we-are-bigger-than-vr-gear-liquid-galaxy/image-3-big.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="/blog/2016/04/27/we-are-bigger-than-vr-gear-liquid-galaxy/image-3.png"/></a></div>
 
-With the ability to serve a group of people simultaneously, Liquid Galaxy increases the impact of content presentation and brings a revolutionary visual experience to its audiences. If you'd like to learn more, you can call us at 212-929-6923, or [contact us here.](https://liquidgalaxy.endpoint.com/#contact)
+With the ability to serve a group of people simultaneously, Liquid Galaxy increases the impact of content presentation and brings a revolutionary visual experience to its audiences. If you’d like to learn more, you can call us at 212-929-6923, or [contact us here.](https://liquidgalaxy.endpoint.com/#contact)
 
 

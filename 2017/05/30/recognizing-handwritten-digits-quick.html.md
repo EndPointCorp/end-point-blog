@@ -1,7 +1,7 @@
 ---
 author: Kamil Ciemniewski
 gh_issue_number: 1310
-tags: computer-vision, data-science, julia, machine-learning, python, r
+tags: julia, machine-learning, python
 title: Recognizing handwritten digits - a quick peek into the basics of machine learning
 ---
 
@@ -10,33 +10,33 @@ Previous in series:
 - [Learning from data basics - the Naive Bayes model](/blog/2016/03/23/learning-from-data-basics-naive-bayes)
 - [Learning from data basics II - simple Bayesian Networks](/blog/2016/04/12/learning-from-data-basics-ii-simple)
 
-In the previous two posts on machine learning, I presented a very basic introduction of an approach called "probabilistic graphical models". In this post I'd like to take a tour of some different techniques while creating code that will recognize handwritten digits.
+In the previous two posts on machine learning, I presented a very basic introduction of an approach called “probabilistic graphical models”. In this post I’d like to take a tour of some different techniques while creating code that will recognize handwritten digits.
 
 The handwritten digits recognition is an interesting topic that has been explored for many years. It is now considered one of the best ways to start the journey into the world of machine learning.
 
-## Taking the Kaggle challenge
+### Taking the Kaggle challenge
 
-We'll take the "digits recognition" challenge as presented in Kaggle. It is an online platform with challenges for data scientists. Most of the challenges have their prizes expressed in real money to win. Some of them are there to help us out in our journey on learning data science techniques — so is the "digits recognition" contest.
+We’ll take the “digits recognition” challenge as presented in Kaggle. It is an online platform with challenges for data scientists. Most of the challenges have their prizes expressed in real money to win. Some of them are there to help us out in our journey on learning data science techniques — so is the “digits recognition” contest.
 
-## The challenge
+### The challenge
 
 As explained on Kaggle:
 
 >
-> MNIST ("Modified National Institute of Standards and Technology") is the de facto “hello world” dataset of computer vision.
+> MNIST (“Modified National Institute of Standards and Technology”) is the de facto “hello world” dataset of computer vision.
 
-The "digits recognition" challenge is one of the best ways to get acquainted with machine learning and computer vision. The so-called "MNIST" dataset consists of 70k images of handwritten digits - each one grayscaled and of a 28x28 size. The Kaggle challenge is about taking a subset of 42k of them along with labels (what actual number does the image show) and "training" the computer on that set. The next step is to take the rest 28k of images without the labels and "predict" which actual number they present.
+The “digits recognition” challenge is one of the best ways to get acquainted with machine learning and computer vision. The so-called “MNIST” dataset consists of 70k images of handwritten digits - each one grayscaled and of a 28x28 size. The Kaggle challenge is about taking a subset of 42k of them along with labels (what actual number does the image show) and “training” the computer on that set. The next step is to take the rest 28k of images without the labels and “predict” which actual number they present.
 
-Here's a short overview of how the digits in a set really look like (along with the numbers they represent):
+Here’s a short overview of how the digits in a set really look like (along with the numbers they represent):
 
 <div class="separator" style="clear: both; text-align: center;">
 <a href="/blog/2017/05/30/recognizing-handwritten-digits-quick/image-0-big.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="1201" data-original-width="1600" height="480" src="/blog/2017/05/30/recognizing-handwritten-digits-quick/image-0.png" width="640"/></a></div>
 
 I have to admit that for some of them I have a really hard time recognizing the actual numbers on my own :)
 
-## The general approach to supervised learning
+### The general approach to supervised learning
 
-Learning from labelled data is what is called "supervised learning". It's supervised because we're taking the computer by hand through the whole training data set and "teaching" it how the data that is linked with different labels "looks" like.
+Learning from labelled data is what is called “supervised learning”. It’s supervised because we’re taking the computer by hand through the whole training data set and “teaching” it how the data that is linked with different labels “looks” like.
 
 In all such scenarios we can express the data and labels as:
 
@@ -48,39 +48,39 @@ The Y is called a **dependent variable** while each Xn are **independent variabl
 
 Classification is when the dependent variable Y is so called *categorical* — taking values from a concrete set without a meaningful order. Regression is when the Y is not categorical — most often continuous.
 
-In the digits recognition challenge we're faced with the classification task. The dependent variable takes values from the set:
+In the digits recognition challenge we’re faced with the classification task. The dependent variable takes values from the set:
 
 ```nohighlight
 Y = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 }
 ```
 
-I'm sure the question you might be asking yourself now is: what are the independent variables Xn? It turns out to be the crux of the whole problem to solve :)
+I’m sure the question you might be asking yourself now is: what are the independent variables Xn? It turns out to be the crux of the whole problem to solve :)
 
-## The plan of attack
+### The plan of attack
 
-A good introduction to computer vision techniques is a book by J. R Parker - "Algorithms for Image Processing and Computer Vision". I encourage the reader to buy that book. I took some ideas from it while having fun with my own solution to the challenge.
+A good introduction to computer vision techniques is a book by J. R Parker - “Algorithms for Image Processing and Computer Vision”. I encourage the reader to buy that book. I took some ideas from it while having fun with my own solution to the challenge.
 
-The book outlines the ideas revolving around computing image profiles — for each side. For each row of pixels, a number representing the distance of the first pixel from the edge is computed. This way we're getting our first independent variables. To capture even more information about digit shapes, we'll also capture the differences between consecutive row values as well as their global maxima and minima. We'll also compute the width of the shape for each row.
+The book outlines the ideas revolving around computing image profiles — for each side. For each row of pixels, a number representing the distance of the first pixel from the edge is computed. This way we’re getting our first independent variables. To capture even more information about digit shapes, we’ll also capture the differences between consecutive row values as well as their global maxima and minima. We’ll also compute the width of the shape for each row.
 
 Because the handwritten digits vary greatly in their thickness, we will first preprocess the images to detect so-called skeletons of the digit. The skeleton is an image representation where the thickness of the shape has been reduced to just one.
 
 Having the image thinned will also allow us to capture some more info about the shapes. We will write an algorithm that walks the skeleton and records the direction change frequencies.
 
-Once we'll have our set of independent variables Xn, we'll use a classification algorithm to first learn in a supervised way (using the provided labels) and then to predict the values of the test data set. Lastly we'll submit our predictions to Kaggle and see how well did we do.
+Once we’ll have our set of independent variables Xn, we’ll use a classification algorithm to first learn in a supervised way (using the provided labels) and then to predict the values of the test data set. Lastly we’ll submit our predictions to Kaggle and see how well did we do.
 
-## Having fun with languages
+### Having fun with languages
 
-In the data science world, the lingua franca still remains to be the R programming language. In the last years Python has also came close in popularity and nowadays we can say it's the duo of R and Python that rule the data science world (not counting high performance code written e. g. in C++ in production systems).
+In the data science world, the lingua franca still remains to be the R programming language. In the last years Python has also came close in popularity and nowadays we can say it’s the duo of R and Python that rule the data science world (not counting high performance code written e. g. in C++ in production systems).
 
-Lately a new language designed with data scientists in mind has emerged - Julia. It's a language with characteristics of both dynamically typed scripting languages as well as strictly typed compiled ones. It compiles its code into efficient native binary via LLVM — but it's using it in a JIT fashion - inferring the types when needed on the go.
+Lately a new language designed with data scientists in mind has emerged - Julia. It’s a language with characteristics of both dynamically typed scripting languages as well as strictly typed compiled ones. It compiles its code into efficient native binary via LLVM — but it’s using it in a JIT fashion - inferring the types when needed on the go.
 
-While having fun with the Kaggle challenge I'll use Julia and Python for the so called **feature extraction** phase (the one in which we're computing information about our Xn variables). I'll then turn towards R for doing the classification itself. Note that I might use any of those languages at each step getting very similar results. The purpose of this series of articles is to be a bird eye fun overview so I decided that this way will be much more interesting.
+While having fun with the Kaggle challenge I’ll use Julia and Python for the so called **feature extraction** phase (the one in which we’re computing information about our Xn variables). I’ll then turn towards R for doing the classification itself. Note that I might use any of those languages at each step getting very similar results. The purpose of this series of articles is to be a bird eye fun overview so I decided that this way will be much more interesting.
 
-## Feature Extraction
+### Feature Extraction
 
-The end result of this phase is the data frame saved as a CSV file so that we'll be able to load it in R and do the classification.
+The end result of this phase is the data frame saved as a CSV file so that we’ll be able to load it in R and do the classification.
 
-First let's define the general function in Julia that takes the name of the input CSV file and returns a data frame with features of given images extracted into columns:
+First let’s define the general function in Julia that takes the name of the input CSV file and returns a data frame with features of given images extracted into columns:
 
 ```ruby
 using DataFrames
@@ -157,11 +157,11 @@ A few nice things to notice here about Julia itself are:
 - Types can be inferred from the context
 - It is often desirable to provide the concrete types to improve performance (but that an advanced Julia related topic)
 - Arrays are indexed from 1
-- There's the nice |> operator found e. g. In Elixir (which I absolutely love)
+- There’s the nice |> operator found e. g. In Elixir (which I absolutely love)
 
 The above code converts the images to be arrays of Float64 and converts the values to be within 0 and 1 (instead of 0..255 originally).
 
-A thing to notice is that in Julia we can vectorize operations easily and we're using this fact to tersely convert our number:
+A thing to notice is that in Julia we can vectorize operations easily and we’re using this fact to tersely convert our number:
 
 ```ruby
 images = frame[:, :pixels] ./ 255
@@ -213,7 +213,7 @@ immutable ProfileStats
 end
 ```
 
-The pixels_to_features function first gets the skeleton of the digit shape as an image and then uses other functions passing that skeleton to them. The function returning the skeleton utilizes the fact that in Julia it's trivially easy to use Python libraries. Here's its definition:
+The pixels_to_features function first gets the skeleton of the digit shape as an image and then uses other functions passing that skeleton to them. The function returning the skeleton utilizes the fact that in Julia it’s trivially easy to use Python libraries. Here’s its definition:
 
 ```ruby
 using PyCall
@@ -228,9 +228,9 @@ function compute_skeleton(number_image :: Array{Float64}) :: Array{Float64}
 end
 ```
 
-It uses the scikit-image library's function skeletonize3d by using the @pyimport macro and using the function as if it was just a regular Julia code.
+It uses the scikit-image library’s function skeletonize3d by using the @pyimport macro and using the function as if it was just a regular Julia code.
 
-Next the code crops the digit itself from the 28x28 image and resizes it back to 28x28 so that the edges of the shape always "touch" the edges of the image. For this we need the function that returns the bounds of the shape so that it's easy to do the cropping:
+Next the code crops the digit itself from the 28x28 image and resizes it back to 28x28 so that the edges of the shape always “touch” the edges of the image. For this we need the function that returns the bounds of the shape so that it’s easy to do the cropping:
 
 ```ruby
 function compute_bounds(number_image :: Array{Float64}) :: Bounds
@@ -524,17 +524,17 @@ end
 
 The data frame constructed with the get_data function can be easily dumped into the CSV file with the writeable function from the DataFrames package.
 
-You can notice that gathering / extracting features is a **lot** of work. All this was needed to be done because in this article we're focusing on the somewhat "classical" way of doing machine learning. You might have heard about algorithms existing that mimic how the human brain learns. We're **not** focusing on them here. This we will explore in some future article.
+You can notice that gathering / extracting features is a **lot** of work. All this was needed to be done because in this article we’re focusing on the somewhat “classical" way of doing machine learning. You might have heard about algorithms existing that mimic how the human brain learns. We’re **not** focusing on them here. This we will explore in some future article.
 
 We use the mentioned writetable on data frames computed for both training and test datasets to store two files: processed_train.csv and processed_test.csv.
 
-## Choosing the model
+### Choosing the model
 
-For the task of classifying I decided to use the XGBoost library which is somewhat a hot new technology in the world of machine learning. It's an improvement over the so-called Random Forest algorithm. The reader can read more about XGBoost on its website: [http://xgboost.readthedocs.io/](http://xgboost.readthedocs.io/).
+For the task of classifying I decided to use the XGBoost library which is somewhat a hot new technology in the world of machine learning. It’s an improvement over the so-called Random Forest algorithm. The reader can read more about XGBoost on its website: [https://xgboost.readthedocs.io/](https://xgboost.readthedocs.io/).
 
-Both random forest and xgboost revolve around the idea called *ensemble learning*. In this approach we're not getting just one learning model — the algorithm actually creates many variations of models and uses them to collectively come up with better results. This is as much as can be written as a short description as this article is already quite lengthy.
+Both random forest and xgboost revolve around the idea called *ensemble learning*. In this approach we’re not getting just one learning model — the algorithm actually creates many variations of models and uses them to collectively come up with better results. This is as much as can be written as a short description as this article is already quite lengthy.
 
-## Training the model
+### Training the model
 
 The training and classification code in R is very simple. We first need to load the libraries that will allow us to load data as well as to build the classification model:
 
@@ -563,7 +563,7 @@ features = as.matrix(features)
 
 When working with models, one of the ways of evaluating their performance is to split the data into so-called train and test sets. We train the model on one set and then we predict the values from the test set. We then calculate the accuracy of predicted values as the ratio between the number of correct predictions and the number of all observations.
 
-Because Kaggle provides the test set without labels, for the sake of evaluating the model's performance without the need to submit the results, we'll split our Kaggle-training set into local train and test ones. We'll use the amazing caret library which provides a wealth of tools for doing machine learning:
+Because Kaggle provides the test set without labels, for the sake of evaluating the model’s performance without the need to submit the results, we’ll split our Kaggle-training set into local train and test ones. We’ll use the amazing caret library which provides a wealth of tools for doing machine learning:
 
 ```r
 library(caret)
@@ -601,17 +601,17 @@ model <- xgboost(train,
                  num_class = 10)
 ```
 
-It's critically important to pass the objective as "multi:softmax" and num_class as 10.
+It’s critically important to pass the objective as “multi:softmax" and num_class as 10.
 
-## Simple performance evaluation with confusion matrix
+### Simple performance evaluation with confusion matrix
 
-After waiting a while (couple of minutes) for the last batch of code to finish computing, we now have the classification model ready to be used. Let's use it to predict the labels from our test set:
+After waiting a while (couple of minutes) for the last batch of code to finish computing, we now have the classification model ready to be used. Let’s use it to predict the labels from our test set:
 
 ```r
 predicted = predict(model, test)
 ```
 
-This returns the vector of predicted values. We'd now like to check how well our model predicts the values. One of the easiest ways is to use the so-called **confusion matrix**.
+This returns the vector of predicted values. We’d now like to check how well our model predicts the values. One of the easiest ways is to use the so-called **confusion matrix**.
 
 As per Wikipedia, confusion matrix is simply:
 
@@ -655,21 +655,21 @@ Overall Statistics
 (...)
 ```
 
-Each column in the matrix represents actual labels while rows represent what our algorithms predicted this value to be. There's also the accuracy rate printed for us and in this case it equals 0.9411. This means that our code was able to predict correct values of handwritten digits for 94.11% of observations.
+Each column in the matrix represents actual labels while rows represent what our algorithms predicted this value to be. There’s also the accuracy rate printed for us and in this case it equals 0.9411. This means that our code was able to predict correct values of handwritten digits for 94.11% of observations.
 
-## Submitting the results
+### Submitting the results
 
-We got 0.9411 of an accuracy rate for our local test set and it turned out to be very close to the one we got against the test set coming from Kaggle. After predicting the competition values and submitting them, the accuracy rate computed by Kaggle was 0.94357. That's quite okay given the fact that we're not using here any of the new and fancy techniques.
+We got 0.9411 of an accuracy rate for our local test set and it turned out to be very close to the one we got against the test set coming from Kaggle. After predicting the competition values and submitting them, the accuracy rate computed by Kaggle was 0.94357. That’s quite okay given the fact that we’re not using here any of the new and fancy techniques.
 
-Also, we haven't done any *parameter tuning* which could surely improve the overall accuracy. We could also revisit the code from the features extraction phase. One improvement I can think of would be to first crop and resize back - and only then compute the skeleton which might preserve more information about the shape. We could also use the confusion matrix and taking the number that was being confused the most, look at the real images that we failed to recognize. This could lead us to conclusions about improvements to our feature extraction code. There's always a way to extract more information.
+Also, we haven’t done any *parameter tuning* which could surely improve the overall accuracy. We could also revisit the code from the features extraction phase. One improvement I can think of would be to first crop and resize back - and only then compute the skeleton which might preserve more information about the shape. We could also use the confusion matrix and taking the number that was being confused the most, look at the real images that we failed to recognize. This could lead us to conclusions about improvements to our feature extraction code. There’s always a way to extract more information.
 
-Nowadays, Kagglers from around the world were successfully using advanced techniques like *Convolutional Neural Networks* getting accuracy scores close to 0.999. Those live in somewhat different branch of the machine learning world though. Using this type of neural networks we don't need to do the feature extraction on our own. The algorithm includes the step that automatically gathers features that it later on feeds into the network itself. We will take a look at them in some of the future articles.
+Nowadays, Kagglers from around the world were successfully using advanced techniques like *Convolutional Neural Networks* getting accuracy scores close to 0.999. Those live in somewhat different branch of the machine learning world though. Using this type of neural networks we don’t need to do the feature extraction on our own. The algorithm includes the step that automatically gathers features that it later on feeds into the network itself. We will take a look at them in some of the future articles.
 
-## See also
+### See also
 
 - [Julia Language](https://julialang.org/)
 - [R Language](https://www.r-project.org/)
 - [Scikit-Image library](http://scikit-image.org/)
-- [XGBoost library](http://xgboost.readthedocs.io/)
+- [XGBoost library](https://xgboost.readthedocs.io/)
 - [Caret library](https://topepo.github.io/caret/index.html)
 - [Kaggle](https://www.kaggle.com/)

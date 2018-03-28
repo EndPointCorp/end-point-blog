@@ -5,7 +5,7 @@ tags: rails, ruby, testing
 title: Migrating to Devise in a Legacy Rails App
 ---
 
-I've recently started working in a Rails 4 application that has accrued a lot of technical debt since it began life on Rails 1. To avoid spending the next few months tip-toeing around the code base, scared to bump something or step on a boobie-trapped brick, I pitched the client for a slice of budget to pay down some of that debt and write some tests. I got the thumbs up.
+I’ve recently started working in a Rails 4 application that has accrued a lot of technical debt since it began life on Rails 1. To avoid spending the next few months tip-toeing around the code base, scared to bump something or step on a boobie-trapped brick, I pitched the client for a slice of budget to pay down some of that debt and write some tests. I got the thumbs up.
 
 <img border="0" src="/blog/2016/02/22/devise-migration-legacy-rails-app/image-0.jpeg"/>
 
@@ -99,7 +99,7 @@ end
 
 Once this has been running in production for a while and all the users have signed in and auto-migrated their passwords, clean-up will be easy: I’ll delete this mixin module, the two lines in the User class that reference it, and drop the legacy encrypted password column from the users table. All traces of this migration code will be gone, and this will look and run just like a vanilla Devise setup.
 
-A side note about the arguably gratuitous one-liner methods in that mix-in module: Those help maintain a consistent level of abstraction in the main method and support the use case where a developer needs to quickly answer the question, "What’s special about how this app handles passwords?" (There are also some subtleties that these one-liners help hide, such as the legacy and Devise attribute names differing by only two characters.)
+A side note about the arguably gratuitous one-liner methods in that mix-in module: Those help maintain a consistent level of abstraction in the main method and support the use case where a developer needs to quickly answer the question, “What’s special about how this app handles passwords?” (There are also some subtleties that these one-liners help hide, such as the legacy and Devise attribute names differing by only two characters.)
 
 By adding integration tests to the sign in use cases, switching to Devise behind the scenes and coming up with a way to securely migrate passwords without interrupting users’ work, I was able to reduce technical debt, familiarize myself with some of the surrounding code, and make it easier and safer for us to work in this app. I also got to delete a ton of crufty code, which might be my favorite part.
 

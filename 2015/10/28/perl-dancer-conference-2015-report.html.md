@@ -2,7 +2,7 @@
 author: Josh Lavin
 gh_issue_number: 1167
 tags: conference, dancer, interchange, perl
-title: Perl Dancer Conference 2015 Report - Training Days
+title: Perl Dancer Conference 2015 Report — Training Days
 ---
 
 
@@ -11,22 +11,21 @@ I just returned from the [Perl Dancer Conference](https://www.perl.dance/), held
 
 <div class="separator" style="clear: both; float:right; text-align: center;"><a href="/blog/2015/10/28/perl-dancer-conference-2015-report/image-0-big.jpeg" imageanchor="1" style="clear: right; float: right; margin-bottom: 1em; margin-left: 1em;" title="Vienna"><img alt="[image of Vienna]" border="0" src="/blog/2015/10/28/perl-dancer-conference-2015-report/image-0.jpeg"/></a><br/><br/><small>Kohlmarkt street, Wien, by this author</small></div>
 
-If you aren't familiar with [Perl Dancer](http://www.perldancer.org/), it is a modern framework for Perl for building web applications. Dancer1 originated as a port of Ruby's Sinatra project, but has officially been replaced with a rewrite called Dancer2, based on [Moo](https://metacpan.org/pod/Moo), with Dancer1 being frozen and only receiving security fixes. The Interchange 5 e-commerce package is gradually being replaced by Dancer plugins.
+If you aren’t familiar with [Perl Dancer](http://www.perldancer.org/), it is a modern framework for Perl for building web applications. Dancer1 originated as a port of Ruby’s Sinatra project, but has officially been replaced with a rewrite called Dancer2, based on [Moo](https://metacpan.org/pod/Moo), with Dancer1 being frozen and only receiving security fixes. The Interchange 5 e-commerce package is gradually being replaced by Dancer plugins.
 
 **Day 1** began with a training on Dancer2 by [Sawyer X](https://twitter.com/PerlSawyer) and [Mickey Nasriachi](https://twitter.com/0xMickey), two Dancer core devs. During the training, the attendees worked on adding functionality to a [sample Dancer app](https://github.com/xsawyerx/dancer-training-vienna). Some of my takeaways from the training:
 
 - Think of your app as a Dancer Web App *plus* an App. These should ideally be two separate things, where the Dancer web app provides the URL routes for interaction with your App.
 - The lib directory contains all of your application. The recommendation for large productions is to separate your app into separate namespaces and classes. Some folks use a routes directory just for routing code, with lib reserved for the App itself.
-- It is recommended to add an empty .dancer file to your app's directory, which indicates that this is a Dancer app (other Perl frameworks do similarly).
+- It is recommended to add an empty .dancer file to your app’s directory, which indicates that this is a Dancer app (other Perl frameworks do similarly).
 - When running your Dancer app in development, you can use plackup -R lib bin/app.psgi which will restart the app automatically whenever something changes in lib.
 - Dancer handles all the standard HTTP verbs, except note that we must use del, not *delete*, as *delete* conflicts with the Perl keyword.
 - There are new keywords for retrieving parameters in your routes. Whereas before we only had param or params, it is now recommended to use:
-
-        - route_parameters,
-        - query_parameters, or
-        - body_parameters
-        - all of which can be used with ->get('foo') which is always a single scalar, or ->get_all('foo') which is always a list.
-        - These allow you to specify which area you want to retrieve parameters from, instead of being unsure which param you are getting, if identical names are used in multiple areas.
+    - route_parameters,
+    - query_parameters, or
+    - body_parameters
+    - all of which can be used with ->get('foo') which is always a single scalar, or ->get_all('foo') which is always a list.
+    - These allow you to specify which area you want to retrieve parameters from, instead of being unsure which param you are getting, if identical names are used in multiple areas.
    
 
 **Day 2** was [DBIx::Class](https://metacpan.org/pod/DBIx::Class) training, led by [Stefan Hornburg](https://twitter.com/PerlRacke) and Peter Mottram, with assistance from [Peter Rabbitson](https://twitter.com/ribasushi), the DBIx::Class maintainer.
@@ -47,6 +46,6 @@ I took copious notes, but it seems that the true learning takes place only as on
 
 The training days were truly like drinking from a firehose, with so much good information. I am looking forward to putting this into practice!
 
-Stay tuned for my [next blog post](/2015/10/perl-dancer-conference-2015-report_30.html) on the Conference Days.
+Stay tuned for my [next blog post](/blog/2015/10/30/perl-dancer-conference-2015-report_30) on the Conference Days.
 
 

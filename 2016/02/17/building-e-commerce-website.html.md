@@ -11,7 +11,7 @@ After working with clients on multiple different projects — including e-commer
 
 With this article I’d like to save you some of the hassle and money and present you with a small introduction of what to expect.
 
-## Preparations
+### Preparations
 
 Apart from thinking about the budget, kinds of products, warehouses etc. you’ll most probably want to know how to put it all out there for the public to see. You’ve seen other web stores and intuition may tell you that you just need a “website” with some backend functionality to manage products and see the orders. You may have heard about some “free” stacks you could use or some online hassle-free platforms where you could just pay monthly and have your web store in almost no time.
 
@@ -36,7 +36,7 @@ What these popularity charts do not reveal, is that many users of such framework
 
 A problem with “ready to use” e-commerce solutions is that they take a one-size-fits-all approach. Many of them have “plugin” systems allowing users to choose from a list of third party extensions. They are never tailored to your specific needs though. The large list of features only impairs the ability to implement the ones that you really need. It’s still possible but it’s much more costly and much more bug prone.
 
-The “online platform”, or what's called the SaaS approach takes out the development time induced hassle from the picture giving you the set of features most owners would want. The downside is that you have even less room for customizations and you certainly won’t have the flexibility of adding anything you’d like as in the “ready to use” or even “ground up work” approaches. This is especially true if you'd like to maximize your profit by tailoring your web store to your specific type of a customer. Web stores aren't that rare anymore and you'll need to differentiate yourself somehow in order to gain a competitive edge (apart from the one your products give you on their own). The story of Amazon and their "one click checkouts" tells it all. The other disadvantage is that pricing can be based on e. g. the number of visitors or orders. This means that the greater success you are, the more you have to pay.
+The “online platform”, or what's called the SaaS approach takes out the development time induced hassle from the picture giving you the set of features most owners would want. The downside is that you have even less room for customizations and you certainly won’t have the flexibility of adding anything you’d like as in the “ready to use” or even “ground up work” approaches. This is especially true if you'd like to maximize your profit by tailoring your web store to your specific type of a customer. Web stores aren't that rare anymore and you'll need to differentiate yourself somehow in order to gain a competitive edge (apart from the one your products give you on their own). The story of Amazon and their “one click checkouts” tells it all. The other disadvantage is that pricing can be based on e. g. the number of visitors or orders. This means that the greater success you are, the more you have to pay.
 
 No business is the same, it may be that the “ready to use” platform is exactly what you need — at least at this point in time. The SaaS solutions cover the needs of some users as well. It’s always a matter a weighing pros and cons — many things are beautiful in this world but nothing is perfect. I’d like to present my humble set of advice to at least steer your thinking to line it up with what my experience tells me is reasonable. With this I'll focus solely on the approach of hiring a developer or a team to maximize your ability to mold your web store and react to the needs of the market.
 
@@ -58,7 +58,7 @@ At End Point we usually give estimates in the form of a range. Rather than commi
 
 ### 3. Let go of perfectionism
 
-It’s so easy nowadays, to read a lot about the "proper" ways of building anything. We’re bombarded with information: people are writing about SEO and having mobile-friendly UI. Others will discuss quality of the design, the importance of typography, email campaigns, payment gateways, data security etc. Don’t get me wrong — It’s all very important and mostly good advice. The problem though is that it’s such a complex endeavor that it’s easy to get paralyzed thinking you have to get it perfectly or else it will not work.
+It’s so easy nowadays, to read a lot about the “proper” ways of building anything. We’re bombarded with information: people are writing about SEO and having mobile-friendly UI. Others will discuss quality of the design, the importance of typography, email campaigns, payment gateways, data security etc. Don’t get me wrong — It’s all very important and mostly good advice. The problem though is that it’s such a complex endeavor that it’s easy to get paralyzed thinking you have to get it perfectly or else it will not work.
 
 In reality, it’s completely safe to put it all aside and first decide what’s the **most important** to reach your initial goals. A great way to focus on that is to talk with experienced developers — they will help you understand the critically important aspects the application will need to handle properly, like data security and contrast that with some of the other e-commerce wants and needs.
 
@@ -66,7 +66,7 @@ In reality, it’s completely safe to put it all aside and first decide what’s
 
 Very often, online business owners come up with a large list of features they want, only to discover in the end that a small part of it in fact was making them their money. It’s equally true that it’s very easy to get excited at each stage of development and ask developers “to add this-or-that while they’re on it”. What may seem as “simple” additions, at different stages of the project may become things taking much longer than expected. In the end owners need to pay much, much more — for something that may not even contribute to the business success at all.
 
-We as developers have a number of interesting battle tested principles. One of them is what’s known as YAGNI - "you ain’t gonna need it" ([https://en.wikipedia.org/wiki/You_aren%27t_gonna_need_it](https://en.wikipedia.org/wiki/You_aren%27t_gonna_need_it)). It means that you're better off focusing only on the essentials that will do the job rather than focusing on the large number of "nice-to-haves".
+We as developers have a number of interesting battle tested principles. One of them is what’s known as YAGNI - “you ain’t gonna need it” ([https://en.wikipedia.org/wiki/You_aren%27t_gonna_need_it](https://en.wikipedia.org/wiki/You_aren%27t_gonna_need_it)). It means that you're better off focusing only on the essentials that will do the job rather than focusing on the large number of “nice-to-haves”.
 
 You have to think of the crucial, most important set of features that will make your web shop make money for you. Once you have that set, go through the list and try to prune it a bit more. Have you heard about the [Pareto principle](https://en.wikipedia.org/wiki/Pareto_principle)? It says that only about 20% of the things you’ll do, will bring you the 80% of the income. From the development point of view — the simpler the better. For you as an investor, it also means much, much smaller invoice to pay.
 
@@ -79,6 +79,6 @@ outages. With little real world experience, a weak development team can make the
 
 It **pays** to pay for a really great development team.
 
-## There’s much more
+### There’s much more
 
 There’s much, much more to the subject that an article like this can fit. I invite to you [contact us](/contact) if you’re considering starting out an e-commerce business and would like to learn more. We’re also available to help you in case you already have an established business.

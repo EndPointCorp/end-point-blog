@@ -85,4 +85,4 @@ A few new things have recently been added to the list:
 
 Our goal for the immediate future is to focus on development of the most common ecommerce features.
 
-All of the features described in this article are active on the Piggybak demo. [Check it out now!](http://www.piggybak.org/demo_details.html)
+All of the features described in this article are part of the [Piggybak demo](https://github.com/piggybak/demo).

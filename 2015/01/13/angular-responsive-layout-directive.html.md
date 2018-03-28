@@ -9,7 +9,7 @@ title: Angular Responsive Layout Directive
 
 To all of you window.onResize aficionados, I dedicate this blog post because today we will be doing a lot of dynamic resizing in JavaScript. All of it will be done completely and effortlessly with my one-page long Angular directive.
 
-Why do I need to attach an expensive onResize handler to my already overloaded page, you ask. The answer is very simple. Our app layout is pixel-perfect. Each element has the predefined width and margins. Yet, the app needs to look good on all kind of devices, from regular PC to tablet to iPhone. That's why I created the following Angular directive in /scripts/directives/tsResize.js:
+Why do I need to attach an expensive onResize handler to my already overloaded page, you ask. The answer is very simple. Our app layout is pixel-perfect. Each element has the predefined width and margins. Yet, the app needs to look good on all kind of devices, from regular PC to tablet to iPhone. That’s why I created the following Angular directive in /scripts/directives/tsResize.js:
 
 ```javascript
 angular.module('angularApp')
@@ -80,7 +80,7 @@ return {
 };
 ```
 
-It's important to set transform-origin, or the elements will be weirdly positioned on the page.
+It’s important to set transform-origin, or the elements will be weirdly positioned on the page.
 
 ```javascript
 return {
@@ -104,7 +104,7 @@ scope.$watch(scope.getWindowDimensions,
 });
 ```
 
-Few other things. My layout was sliced to the fixed width of 890px, that's why I took 890 as the pivotal point of my scale ratio formula. You should take the default width of the layout as the base of your calculation.
+Few other things. My layout was sliced to the fixed width of 890px, that’s why I took 890 as the pivotal point of my scale ratio formula. You should take the default width of the layout as the base of your calculation.
 
 ```javascript
 if (newValue.w > 890) {
@@ -118,7 +118,7 @@ if (newValue.w > 890) {
 
 ```
 
-With the directive in place it's time to plug it in:
+With the directive in place it’s time to plug it in:
 
 ```html
 <script src="scripts/directives/tsResize.js"></script>
@@ -126,7 +126,7 @@ With the directive in place it's time to plug it in:
   <div ng-style="mainContainerStyle()" ng-view="" ts-resize=""></div>
 ```
 
-Be sure to use style "display:block" or "display:inline-block" and "position:relative" for all the inside components of the scaled elements with the default display. Otherwise they do not obey the scaling enforcement and grow way too long prompting a scrollbar.
+Be sure to use style “display:block” or “display:inline-block” and “position:relative” for all the inside components of the scaled elements with the default display. Otherwise they do not obey the scaling enforcement and grow way too long prompting a scrollbar.
 
 ```html
 <div id="main-container"><div id="inner-block" style="position:relative; display:inline-block"></div></div>

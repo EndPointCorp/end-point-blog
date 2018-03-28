@@ -9,7 +9,7 @@ The new PostgreSQL 9.5 release has a bunch of great features. I describe below t
 
 ### Upsert
 
-UPSERT is simply a combination of INSERT and UPDATE. This works like this: if a row exists, then update it, if it doesn't exist, create it.
+UPSERT is simply a combination of INSERT and UPDATE. This works like this: if a row exists, then update it, if it doesn’t exist, create it.
 
 Before Postgres 9.5 when I wanted to insert or update a row, I had to write this:
 
@@ -70,7 +70,7 @@ SELECT '{"a": 1, "b": 2, "c": 3}'::jsonb || '{"x": 1, "y": 2, "c": 42}'::jsonb;
  {"b": 2, "c": 3}
 ```
 
-And merge JSONB values (the last value's keys overwrite the first's one):
+And merge JSONB values (the last value’s keys overwrite the first’s one):
 
 ```sql
 SELECT '{"a": 1, "b": 2, "c": 3}'::jsonb || '{"x": 1, "y": 2, "c": 42}'::jsonb;
