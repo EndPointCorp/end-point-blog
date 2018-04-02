@@ -7,11 +7,11 @@ title: Pagination days are over? Infinite scrolling technique
 
 
 
-Love it or hate it, but the infinite scrolling technique became a big part of UX. Google Images use it, Flickr uses it, Beyonce's official website uses it. Twitter, Tumblr and the Facebook feed have it as well. The technique allows users to seamlessly scroll through content. When the user reaches the end of the page new content will automatically load at the bottom.
+Love it or hate it, but the infinite scrolling technique became a big part of UX. Google Images use it, Flickr uses it, Beyonce’s official website uses it. Twitter, Tumblr and the Facebook feed have it as well. The technique allows users to seamlessly scroll through content. When the user reaches the end of the page new content will automatically load at the bottom.
 
-In my opinion, it allows for a much more natural and immersive experience while viewing images or articles, much better than pagination or once popular image slideshow galleries. In the real life you don't click on pagination links to get through your day, right?
+In my opinion, it allows for a much more natural and immersive experience while viewing images or articles, much better than pagination or once popular image slideshow galleries. In the real life you don’t click on pagination links to get through your day, right?
 
-To create the infinite scrolling page with images we will use the [jQuery Infinite Scroll](https://github.com/paulirish/infinite-scroll) plugin and [Masonry](http://masonry.desandro.com/) to lay out the images. Here is the [demo](http://desandro.github.io/masonry/demos/infinite-scroll.html) of what we are going to accomplish. The code is below.
+To create the infinite scrolling page with images we will use the [jQuery Infinite Scroll](https://github.com/paulirish/infinite-scroll) plugin and [Masonry](https://masonry.desandro.com/) to lay out the images. Here is the [demo](https://infinite-scroll.com/demo/masonry/) of what we are going to accomplish. The code is below.
 
 First step is to include the necessary scripts:
 

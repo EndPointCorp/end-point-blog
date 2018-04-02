@@ -164,7 +164,7 @@ Pentaho can be run tomcat custom ports by modifying the ports in server.xml and 
                 <param-value>http://localhost:8080/pentaho/</param-value>
         </context-param>
 ```
-Let's start the Pentaho BI server and try out its great features. Commands to start and stop the BI server:
+Let’s start the Pentaho BI server and try out its great features. Commands to start and stop the BI server:
 
 ```bash
 biserver-ce$ ./start-pentaho.sh

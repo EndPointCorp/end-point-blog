@@ -7,7 +7,7 @@ title: jQuery contents() method
 
 
 
-I had an interesting JavaScript challenge recently and came across a jQuery method that I hadn't heard of before, so I wanted to share my experience. Given the following markup, I needed a way to hide all the text not inside span.highlighted elements:
+I had an interesting JavaScript challenge recently and came across a jQuery method that I hadn’t heard of before, so I wanted to share my experience. Given the following markup, I needed a way to hide all the text not inside span.highlighted elements:
 
 ```html
 <p>Here is some text. 
@@ -17,7 +17,7 @@ Here is even more text! Here is some more un-wrapped text.
 </p>
 ```
 
-With standard CSS rules like visibility, display, and opacity, there's not an easy way to hide only the unhighlighted text without additional HTML modifications. So, I set out to wrap the unhighlighted text in additional HTML elements dynamically, to produce the following markup from our example:
+With standard CSS rules like visibility, display, and opacity, there’s not an easy way to hide only the unhighlighted text without additional HTML modifications. So, I set out to wrap the unhighlighted text in additional HTML elements dynamically, to produce the following markup from our example:
 
 ```html
 <p><span class="unhighlighted">Here is some text. </span>
@@ -52,11 +52,11 @@ for(var _i=0; _i<non_matches.length; _i++) {
 $('p').html(b);
 ```
 
-In the code above, I create two arrays – one that includes the unhighlighted text and one that includes the highlighted spans and their content with a non-greedy regular expression. I incremented through these arrays and built HTML with alternating newly wrapped unhighlighted content and existing highlighted spans. At the end of the loop, the paragraph HTML is updated with the new HTML. Now, there are quite a few edge cases with this method which needed to be addressed **and** the bigger issue I came across was that the highlighted spans were being rewritten, so any important data tied to the overwritten highlighted spans was lost with the HTML update. I felt that this implementation was overcomplicated and went in search of something more simple.
+In the code above, I create two arrays—one that includes the unhighlighted text and one that includes the highlighted spans and their content with a non-greedy regular expression. I incremented through these arrays and built HTML with alternating newly wrapped unhighlighted content and existing highlighted spans. At the end of the loop, the paragraph HTML is updated with the new HTML. Now, there are quite a few edge cases with this method which needed to be addressed **and** the bigger issue I came across was that the highlighted spans were being rewritten, so any important data tied to the overwritten highlighted spans was lost with the HTML update. I felt that this implementation was overcomplicated and went in search of something more simple.
 
 ### jQuery contents()
 
-Enter the [jQuery.contents()](http://api.jquery.com/contents/) method. This method returns the children nodes of an element (or elements) in an array form, including(!) text and comment nodes. The console output of the contents() method for our example paragraph might look like:
+Enter the [jQuery.contents()](https://api.jquery.com/contents/) method. This method returns the children nodes of an element (or elements) in an array form, including(!) text and comment nodes. The console output of the contents() method for our example paragraph might look like:
 
 <img src="/blog/2013/11/04/jquery-contents-method/image-0.png" style="border:1px solid #000;"/>
 
@@ -74,6 +74,6 @@ for(var _i = 0; _i < contents.length; _i++) {
 }
 ```
 
-I then have the ability to toggle the visibility of both the highlighted and unhighlighted spans for the desired functionality. I've been working with jQuery for a long time and was happy to browse through the documentation to find this little gem!
+I then have the ability to toggle the visibility of both the highlighted and unhighlighted spans for the desired functionality. I’ve been working with jQuery for a long time and was happy to browse through the documentation to find this little gem!
 
 
