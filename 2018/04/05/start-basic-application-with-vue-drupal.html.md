@@ -12,14 +12,14 @@ gh_issue_number:
 
 The purpose of creating this post is to show how fast can you build web applications with Vue.js on the front-end and Drupal on the back-end side.
 
-Let’s call it Awesome Nerds.
+Let’s call our project "Awesome Nerds".
 
-### What do we need
+### What do we need?
 
 * Debian/Ubuntu system
 * Internet
 * 30 minutes
-* Vagrant && Virtualbox
+* Vagrant & VirtualBox
 * Git
 * Vim
 * Yarn
@@ -28,12 +28,12 @@ Let’s call it Awesome Nerds.
 
 Here's what we're going to do:
 
-* Install Vagrant && Virtualbox && Git
-* Setup a new Drupal 8 project that will be out back-end project
+* Install Vagrant, VirtualBox, and Git
+* Setup a new Drupal 8 project that will be our back-end project
 * Setup a new Vue.js project that will be our front-end application
 * Let’s code
 
-### Install Vagrant && Virtualbox && Git
+### Install Vagrant, VirtualBox, and Git
 
 Open your console and run:
 
@@ -57,7 +57,7 @@ Open your console and run:
 
 `$ sudo apt-get update`
 
-`$ sudo apt-get install virtualbox-5.2 git vim nfs-kernel-server` - installing Virtualbox
+`$ sudo apt-get install virtualbox-5.2 git vim nfs-kernel-server` - installing VirtualBox
 
 `$ vagrant plugin install vagrant-vbguest`
 
@@ -68,6 +68,7 @@ Open your console and run:
 `$ sudo apt-get update && sudo apt-get install yarn` - installing Yarn
 
 Now we can continue to the back-end project installation.
+
 ### Install and setup back-end project
 
 Create a new folder for the project:
@@ -99,8 +100,9 @@ Quit Vim and run:
 
 It will take a while to setup everything, you can get a coffee or browse some memes or go to the next chapter and start creating our front-end project.
 
-When it’s ready we will have a running Drupal 8 setup with MySQL, PHP 7 and Apache (you can configure all this stack in `default.config.yml` if you prefer nginx for example).
-Drupal project files are in the drupal directory and it’s the only folder that you would want to add to a project Git repository.
+When it’s ready we will have a running Drupal 8 setup with MySQL, PHP 7 and Apache (you can configure this stack in `default.config.yml` if you prefer nginx for example).
+
+Drupal project files are in the `drupal` directory and that’s the only folder that you would want to add to a project Git repository.
 
 ### Setup new Vue.js project
 
@@ -116,7 +118,7 @@ Run:
 
 `$ vue init webpack awesome_nerds`
 
-Name the project with “awesome_nerds” (yes!) and just hit enter to install with defaults.
+Name the project “awesome_nerds” (yes!) and just hit enter to install with defaults.
 
 When you run:
 
