@@ -7,7 +7,7 @@ title: VIM - Tabs and Splits
 
 
 
-[Vim](http://www.vim.org/) is my go-to code editor these days. After many years of using different editors, I've settled on vim as my editor of choice. There are some things I've done to make using vim more enjoyable and usable and this blog post is dedicated to some of those things that I use everyday.
+[Vim](http://www.vim.org/) is my go-to code editor these days. After many years of using different editors, I’ve settled on vim as my editor of choice. There are some things I’ve done to make using vim more enjoyable and usable and this blog post is dedicated to some of those things that I use everyday.
 
 ### Tabs
 
@@ -21,7 +21,7 @@ nmap <silent> [G :tabrewind<CR>
 nmap <silent> ]G :tablast<CR>
 ```
 
-First, I'm using nmap here which says to only map these keys in normal mode. Next, I use <silent> which keeps my editor clean of any distractions while performing the task. I find that the double tap short-cuts (see more below) tt work really well for normal mode and I love their simplicity. Double-tap t and you have a new tab. Using the bracket navigation is something that I've stolen from [Tim Pope's](https://github.com/tpope) [vim-unimpaired](https://github.com/tpope/vim-unimpaired) plugin. Using g and G work for me, but you can use whatever you like.
+First, I’m using nmap here which says to only map these keys in normal mode. Next, I use <silent> which keeps my editor clean of any distractions while performing the task. I find that the double tap short-cuts (see more below) tt work really well for normal mode and I love their simplicity. Double-tap t and you have a new tab. Using the bracket navigation is something that I’ve stolen from [Tim Pope’s](https://github.com/tpope) [vim-unimpaired](https://github.com/tpope/vim-unimpaired) plugin. Using g and G work for me, but you can use whatever you like.
 
 ### Splits
 
@@ -32,7 +32,7 @@ nmap <silent> vv :vsp<CR>
 nmap <silent> ss :sp<CR>
 ```
 
-Once you have a split, navigating between them can be a little bit of a pain as well. Here's my optimization:
+Once you have a split, navigating between them can be a little bit of a pain as well. Here’s my optimization:
 
 ```nohighlight
 map <C-h> <C-w>h
@@ -41,7 +41,7 @@ map <C-k> <C-w>k
 map <C-l> <C-w>l
 ```
 
-After using vim's splitting capability for a while, I noticed I didn't always like where the split occurred. Sometimes above, sometimes to the left. To ensure that you have consistency, try these settings:
+After using vim’s splitting capability for a while, I noticed I didn’t always like where the split occurred. Sometimes above, sometimes to the left. To ensure that you have consistency, try these settings:
 
 ```
 set splitright " When splitting vertically, split to the right

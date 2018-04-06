@@ -31,7 +31,7 @@ _gaq.push(['_addItem',
 _gaq.push(['_trackTrans']);
 ```
 
-But what happens when a single page with various JavaScript-driven UI updates drives a user to a conversion event via AJAX? All of the conversion events have to be triggered via JavaScript after the conversion event. After some experimentation and verification with Google's Developer Tools (Network) or Firebug's Net Tool, I've implemented the following tracking services and code in JavaScript upon a conversion event for our Ruby on Rails client [Mobixa](http://www.mobixa.com/):
+But what happens when a single page with various JavaScript-driven UI updates drives a user to a conversion event via AJAX? All of the conversion events have to be triggered via JavaScript after the conversion event. After some experimentation and verification with Google’s Developer Tools (Network) or Firebug’s Net Tool, I’ve implemented the following tracking services and code in JavaScript upon a conversion event for our Ruby on Rails client [Mobixa](https://web.archive.org/web/20130112044344/http://www.mobixa.com:80/):
 
 ### MSN Conversion
 
@@ -121,5 +121,5 @@ Here are a few important takeaways in working with conversion tracking via JavaS
 
 - Most of the above conversion tracking calls have a specific ID that is provided by the marketing service.
 - Images and iframes are appended to a div with an id of hidden_tracking on the page to trigger the conversion request. Tracking did not appear to work if the images or iframes were appended to the body element. Also in the case of Google Ad Services conversion, the image itself did not have to be appended to the page; a request alone was enough.
-- It's important and extremely helpful to use Google Developer Tools or Firebug to verify these requests go through during development.
+- It’s important and extremely helpful to use Google Developer Tools or Firebug to verify these requests go through during development.
 - Google Analytics tracking does not look much different from non-AJAX conversion tracking, but much of the other tracking code differs from what you might see in on-page tracking events.

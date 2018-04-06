@@ -5,9 +5,9 @@ tags: postgres, python
 title: Merging JSONs in PostgreSQL
 ---
 
-PostgreSQL's JSON support is great, however there is one thing missing, and it will be missing in the next PostgreSQL release. It is not too easy to manipulate the values stored in such a JSON field. Fortunately there is an easy way to do anything you want, you can use some external programming language.
+PostgreSQL’s JSON support is great, however there is one thing missing, and it will be missing in the next PostgreSQL release. It is not too easy to manipulate the values stored in such a JSON field. Fortunately there is an easy way to do anything you want, you can use some external programming language.
 
-## Merging JSONs
+### Merging JSONs
 
 Sometimes you need to update one JSON with values from another. Or you just need to change one field in a JSON value. There is no easy way to do it in PostgreSQL, but with the help of external language, it seems trivial.
 
@@ -36,7 +36,7 @@ UPDATE data SET j = something(j, b) WHERE id = 10;
 
 The question is: how to merge those JSONs.
 
-## Merging
+### Merging
 
 For merging I’ve written a simple plpython function:
 
@@ -51,7 +51,7 @@ RETURNS JSON AS $$
 $$ LANGUAGE PLPYTHONU;
 ```
 
-This function merges the "left" argument with the "right" overwriting values if they exist.
+This function merges the “left” argument with the “right” overwriting values if they exist.
 
 This way if we use this function for the above JSONs, then (using the pretty print json function from previous post):
 

@@ -7,11 +7,11 @@ title: Debugging obscure Postgres problems with strace
 
 
 
-<div class="separator" style="clear: both; float: right; text-align: center;"><a href="/blog/2013/06/20/debugging-obscure-postgres-problems/image-0-big.jpeg" imageanchor="1" style="clear: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" src="/blog/2013/06/20/debugging-obscure-postgres-problems/image-0.jpeg"/></a><br/><small><a href="http://www.flickr.com/photos/gadl/284995199/in/photolist-rbF9k/">
-Image</a> by Flickr user <a href="http://www.flickr.com/photos/gadl/">Alexandre Duret-Lutz</a></small></div>
+<div class="separator" style="clear: both; float: right; text-align: center;"><a href="/blog/2013/06/20/debugging-obscure-postgres-problems/image-0-big.jpeg" imageanchor="1" style="clear: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" src="/blog/2013/06/20/debugging-obscure-postgres-problems/image-0.jpeg"/></a><br/><small><a href="https://www.flickr.com/photos/gadl/284995199/in/photolist-rbF9k/">
+Image</a> by Flickr user <a href="https://www.flickr.com/photos/gadl/">Alexandre Duret-Lutz</a></small></div>
 
 One of the nice things about being a Postgres consultant is the sheer 
-variety of interesting problems you get to solve. Here's one that 
+variety of interesting problems you get to solve. Here’s one that 
 recently popped up, and a walkthrough of how I solved it. One of 
 our clients had this strange error pop up when they were trying 
 to start Postgres:
@@ -35,7 +35,7 @@ AllocateDir(const char *dirname)
     /*
      * The test against MAX_ALLOCATED_DESCS prevents us from overflowing
      * allocatedDescs[]; the test against max_safe_fds prevents AllocateDir
-     * from hogging every one of the available FDs, which'd lead to infinite
+     * from hogging every one of the available FDs, which’d lead to infinite
      * looping.
      */
     if (numAllocatedDescs >= MAX_ALLOCATED_DESCS ||
@@ -45,7 +45,7 @@ AllocateDir(const char *dirname)
 
 So it appeared as if we ran into some sort of safety valve that was meant to
 bail out before too many directories were opened. A strange error to suddenly have
-appear (this client's Postgres worked just fine a few days ago - luckily,
+appear (this client’s Postgres worked just fine a few days ago—luckily,
 this was not on a production system!).
 
 The client was using Postgres 8.3. In version 9.1, the source code was changed to give
@@ -65,9 +65,9 @@ However, I had no such clue. What to do? This was definitely a job for
 the **strace** program. Its job is to show a trace of all system calls 
 that a process is making. In this way, you can see at a very low level 
 what a particular program is doing. In this case, the program was PostgreSQL, or 
-to be precise, the "postmaster" program.
+to be precise, the “postmaster” program.
 
-While it's possible to have strace attach to an already running process, 
+While it’s possible to have strace attach to an already running process, 
 that was not possible in this case as Postgres errored out immediately 
 after being invoked. The invocation looked like this:
 
@@ -75,18 +75,18 @@ after being invoked. The invocation looked like this:
 pg_ctl start -D /var/lib/pgsql/data -l /tmp/postgres.startup.log
 ```
 
-To run strace, we can simply add "strace" to the start of the command 
+To run strace, we can simply add “strace” to the start of the command 
 above. However, this will dump the system calls to the screen 
 for the pg_ctl command. We need a few flags to make things easier.
 
-The first flag is "-f", which tells strace to follow forked processes. 
-Without this, we would simply strace pg_ctl itself - and we need to strace 
+The first flag is “-f”, which tells strace to follow forked processes. 
+Without this, we would simply strace pg_ctl itself—and we need to strace 
 the postmaster process instead. As we want to be able to look at the output 
-in an editor, we also add the "-o" flag to send all strace output to an output 
-file. We also take the opportunity to upgrade "-f" to "-ff", which tells strace to 
+in an editor, we also add the “-o” flag to send all strace output to an output 
+file. We also take the opportunity to upgrade “-f” to “-ff”, which tells strace to 
 send each forked process to a separate file. Very handy, that. Finally, we 
-add a "-t" flag, which prepends each line with a timestamp. Not strictly needed in this 
-case, but it's a nice flag to always use. The final command looked like this:
+add a “-t” flag, which prepends each line with a timestamp. Not strictly needed in this 
+case, but it’s a nice flag to always use. The final command looked like this:
 
 ```
 strace -o gregtest -ff -t pg_ctl start -D /var/lib/pgsql/data -l /tmp/postgres.startup.log
@@ -112,7 +112,7 @@ data/postmaster.pid confirmed that the main postmaster PID is indeed 26670.
 
 Why did pg_ctl not return, and not give the expected error? 
 The reason is that the strace process adds enough overhead that it takes 
-a lot longer to reach the "too many private dirs demanded" error. 
+a lot longer to reach the “too many private dirs demanded” error. 
 As I suspected this error was related to entering an infinite 
 loop of file openings, that delay makes sense.
 
@@ -124,10 +124,10 @@ solution right away. Repeating over and over were calls like this:
   O_RDONLY|O_NONBLOCK|O_DIRECTORY) = 22
 ```
 
-The actual call was 16 directories deep, I'm just showing three 
+The actual call was 16 directories deep, I’m just showing three 
 for brevity! So the problem was definitely with the /usr/share/zoneinfo file. 
 A look at the file system showed that /usr/share/zoneinfo was a directory, 
-which contained a symlink named "zoneinfo" inside of it. Where did that 
+which contained a symlink named “zoneinfo” inside of it. Where did that 
 symlink point to?
 
 ```

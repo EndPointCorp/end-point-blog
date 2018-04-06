@@ -5,39 +5,37 @@ tags: ecommerce, ruby, rails, spree
 title: Buy One Get One Promotion with Spree
 ---
 
-
-
-Implementing a "Buy One, Get One Free" promotion in
+Implementing a “Buy One, Get One Free” promotion in
 Spree requires implementation of a custom promotion action and
 appropriate use of existing promotion rules. This article implements
-the promotion by automatically adding and removing immutable "get one" line items whose
+the promotion by automatically adding and removing immutable “get one” line items whose
 price is zero and whose quantity always mirrors its paid
-"buy one" counterpart. Although written and tested with Spree's 1-3-stable branch, the core logic of this tutorial will work with any version of Spree.
+“buy one” counterpart. Although written and tested with Spree’s 1-3-stable branch, the core logic of this tutorial will work with any version of Spree.
 
-## Promotion Eligibility
+### Promotion Eligibility
 
 Begin by creating a new promotion using a meaningful name. Set the
-"event name" field to be "Order contents changed"
-so the promotion's actions are updated as the order is updated. Save
+“event name” field to be “Order contents changed”
+so the promotion’s actions are updated as the order is updated. Save
 this new promotion, so we can then configure Rules and Actions. In
-the Rules section, select the "Product(s)" rule and click
-Add. Now choose the products you'd like to be eligible for your
-promotion. If you'd like to include broader sets such as entire
+the Rules section, select the “Product(s)” rule and click
+Add. Now choose the products you’d like to be eligible for your
+promotion. If you’d like to include broader sets such as entire
 taxonomies (and have implemented the custom promotion rules to do
 so), feel free to use them. When we implement the promotion
-action, you'll be able to make things work.
+action, you’ll be able to make things work.
 
 You should now have a product rule that selects some subset of
 products eligible for your promotion.
 
-## Adding a Custom Promotion Action
+### Adding a Custom Promotion Action
 
-We'll now add a custom promotion action that will do the work of
+We’ll now add a custom promotion action that will do the work of
 creating the free line items for each eligible paid line item. Again, this implementation is specifically for the 1-3-stable branch, but the public interface for promotion actions has (amazingly) remained stable, and is supported from 0-7-0-stable all the way through 2-0-stable.
 
 First,
 we begin by doing [the
-basic wiring for creating a new promotion action](http://guides.spreecommerce.com/developer/promotions.html#registering-a-new-action). As the guide
+basic wiring for creating a new promotion action](https://web.archive.org/web/20140330103232/http://guides.spreecommerce.com/developer/promotions.html). As the guide
 instructs, create a new promotion class in a file.
 
 ```ruby
@@ -58,7 +56,7 @@ Rails.application.config.spree.promotions.actions << BuyOneGetOne
 ```
 
 Then update your locales to provide translations for the promotion
-action's name and description.
+action’s name and description.
 
 ```ruby
 # config/locales/en.yml
@@ -71,7 +69,7 @@ en:
         description: Adds free line items of matching quantity of eligible paid line items.
 ```
 
-And although the guide doesn't instruct you to, it seems required
+And although the guide doesn’t instruct you to, it seems required
 that you add an empty partial to be rendered in the Spree admin when
 you select the rule.
 
@@ -82,17 +80,17 @@ you select the rule.
 # but you could expand here if you'd like.
 ```
 
-### Pre-flight check
+#### Pre-flight check
 
-Before moving any farther, it's best to make sure the new
+Before moving any farther, it’s best to make sure the new
 promotion action has been wired up correctly. Restart your
 development server so the initializer registers your new promotion
-action and refresh your browser. You should now see a "Buy One
-Get One" promotion action.
+action and refresh your browser. You should now see a “Buy One
+Get One” promotion action.
 
-## Buy One Get One Logic
+### Buy One Get One Logic
 
-Now that we've got the promotion action wired, we're ready to
+Now that we’ve got the promotion action wired, we’re ready to
 implement the logic needed to create the new line items. Begin by
 collecting the order from the options.
 
@@ -108,8 +106,8 @@ end
 Next we need to determine which line items in the order are eligible
 for a corresponding free line item. Because line items are for
 variants of products, we must collect the variant ids from the
-product rule we setup. If you've used something other the default
-Spree "Product(s)" rule, just make sure you end up with
+product rule we setup. If you’ve used something other the default
+Spree “Product(s)” rule, just make sure you end up with
 equivalent output.
 
 ```ruby
@@ -137,8 +135,8 @@ class BuyOneGetOne < Spree::PromotionAction
 end
 ```
 
-Now that we've got the eligible variant ids from the promotion's
-rule, we'll identify the line items which have those variants.
+Now that we’ve got the eligible variant ids from the promotion’s
+rule, we’ll identify the line items which have those variants.
 
 ```ruby
 # app/models/spree/promotion/buy_one_get_one.rb
@@ -157,42 +155,19 @@ class BuyOneGetOne < Spree::PromotionAction
 end
 ```
 
-We're now ready to process eligible line items. There are several
-cases we'll need to implement to have a working promotion:
+We’re now ready to process eligible line items. There are several
+cases we’ll need to implement to have a working promotion:
 
 - When we find an eligible, paid
  line item: 
- 
-
- 
-
-        - If an existing corresponding free
-  line item exists, update quantity to match the paid line item. 
-  
-
-          - Else, create corresponding free
-  line item with appropriate quantity. 
-  
-
- 
-
- - When we find a Buy One Get One
- promotion line item: 
- 
-
- 
-
-        - If the corresponding paid line
-  item still exists, do nothing. 
-  
-
-          - Else, destroy the free line item. 
-  
-
- 
+  - if an existing corresponding free line item exists, update quantity to match the paid line item. 
+  - Else, create corresponding free line item with appropriate quantity. 
+  - When we find a Buy One Get One promotion line item: 
+  - If the corresponding paid line item still exists, do nothing. 
+  - Else, destroy the free line item. 
 
 These cases handle the creation, updating, and removal of
-promotional line items. Let's translate these cases into a skeleton
+promotional line items. Let’s translate these cases into a skeleton
 of code which can then be implemented incrementally.
 
 ```ruby
@@ -240,7 +215,7 @@ end
 
 This well named and commented code reads nicely and clearly covers
 the create, update, and destroy cases we need to be concerned with.
-Now let's implement the helper methods.
+Now let’s implement the helper methods.
 
 ```ruby
   ....
@@ -269,20 +244,20 @@ Now let's implement the helper methods.
 end
 ```
 
-We've now completed most of the implementation for the promotion
+We’ve now completed most of the implementation for the promotion
 action. Every time the order is updated, all line items are scanned
 for eligibility and the appropriate create/update/destroy actions are
-taken. This however, isn't the end of our implementation. Unlike
+taken. This however, isn’t the end of our implementation. Unlike
 other items in our cart, we need to prevent users from changing the
-quantity of "get one" line items or removing them from the
+quantity of “get one” line items or removing them from the
 cart. We also need some way of indicating that these zero price line
 items are complements of the Buy One Get One promotion.
 
-## Locked Line Items with Additional Text
+### Locked Line Items with Additional Text
 
 While the concept of locked or immutable line items might rightly
-deserve its own, separate Spree plugin, we'll roll a quick one here
-to complete the implementation of our promotion. We'll need to add a
+deserve its own, separate Spree plugin, we’ll roll a quick one here
+to complete the implementation of our promotion. We’ll need to add a
 few attributes to the spree_line_items database table, and tweak our
 implementation of create_matching_get_one_line_item.
 
@@ -311,28 +286,28 @@ end
   end
 ```
 
-Now that we know which line items aren't meant to be edited by users,
+Now that we know which line items aren’t meant to be edited by users,
 we can update our UI to not render the options to remove immutable
 line items or update their quantity. We can also display the
-additional text in the line line item when it's available.
+additional text in the line line item when it’s available.
 
 Missing from this implementation is a way to secure the immutable
 line items from manipulation of the immutable line items POSTed
 parameters. While this might be required in other cases using
-immutable line items, because our promotion action sets the "get
-one" line items quantity with every order update, we don't need
+immutable line items, because our promotion action sets the “get
+one” line items quantity with every order update, we don’t need
 to worry about this issue in this case.
 
-## Test Driving
+### Test Driving
 
 At this point, you can begin manual testing of your
 implementation, but of course automated testing is best. Ideally, we
 would have TDDed this against a failing integration test, but the
 testing infrastructural setup required to do this is beyond the scope
-of the article. What's worth sharing though, is the syntax of the
-assertions I've developed to inspect line items, so that you can
-implement something similar for your specific needs. Here's a snippet
-from an integration test to give you a sense of the DSL we've built
+of the article. What’s worth sharing though, is the syntax of the
+assertions I’ve developed to inspect line items, so that you can
+implement something similar for your specific needs. Here’s a snippet
+from an integration test to give you a sense of the DSL we’ve built
 up.
 
 ```ruby
@@ -354,8 +329,8 @@ context "add eligible item to cart" do
 end
 ```
 
-Of course you'd want to test all the cases we've implemented, but
-what's worth focusing on is the ability to assert specific attributes
+Of course you’d want to test all the cases we’ve implemented, but
+what’s worth focusing on is the ability to assert specific attributes
 across many different line items. This is an extremely reusable tool
 to have in your testing suite. Good luck implementing!
 

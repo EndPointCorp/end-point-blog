@@ -9,19 +9,19 @@ title: Interchange Case Study with Google Maps API
 
 Basic Google map with location markers.
 
-Recently, I've been working with the [Google Maps API](https://developers.google.com/maps/) for one of our large [Interchange](/technology/perl-interchange) clients with over 40 physical stores throughout the US. On their website, they had previously been managing static HTML pages for these 40 physical stores to share store information, location, and hours. They wanted to move in the direction of something more dynamic with interactive maps. After doing a bit of research on search options out there, I decided to go with the Google Maps API. This article discusses basic implementation of map rendering, search functionality, as well as interesting edge case behavior.
+Recently, I’ve been working with the [Google Maps API](https://developers.google.com/maps/) for one of our large [Interchange](/technology/perl-interchange) clients with over 40 physical stores throughout the US. On their website, they had previously been managing static HTML pages for these 40 physical stores to share store information, location, and hours. They wanted to move in the direction of something more dynamic with interactive maps. After doing a bit of research on search options out there, I decided to go with the Google Maps API. This article discusses basic implementation of map rendering, search functionality, as well as interesting edge case behavior.
 
-### **Basic Map Implementation**
+### Basic Map Implementation
 
-In it's most simple form, the markup required for adding a basic map with markers is the shown below. Read more at [Google Maps Documentation](https://developers.google.com/maps/).
+In it’s most simple form, the markup required for adding a basic map with markers is the shown below. Read more at [Google Maps Documentation](https://developers.google.com/maps/).
 
-**HTML**
+##### HTML
 
 ```html
 <div id="map"></div>
 ```
 
-**CSS**
+##### CSS
 
 ```html
 #map {
@@ -30,7 +30,7 @@ In it's most simple form, the markup required for adding a basic map with marker
 }
 ```
 
-**JavaScript**
+##### JavaScript
 
 ```javascript
 //mapOptions defined here
@@ -53,7 +53,7 @@ $.each(all_locations, function(i, loc) {
 })
 ```
 
-### **Building Search Functionality**
+### Building Search Functionality
 
 <img border="0" src="/blog/2013/03/29/paper-source-case-study-with-google/image-1.png" width="700"/>
 
@@ -103,9 +103,9 @@ google.maps.event.addListener(map, 'zoom_changed', function() {
 });
 ```
 
-### **Handling Zero Results**
+### Handling Zero Results
 
-What happens if your Geocoder object can't find the address? A simple conditional can be used:
+What happens if your Geocoder object can’t find the address? A simple conditional can be used:
 
 ```javascript
 geocoder.geocode({ 'address' : search }, function(results, status) {
@@ -117,7 +117,7 @@ geocoder.geocode({ 'address' : search }, function(results, status) {
 }
 ```
 
-### **Calculate and Sort by Distance**
+### Calculate and Sort by Distance
 
 The next layer of logic I needed to add was the ability to determine the distance between the search address and sort the results by distance. To calculate distance, I did some research and settled on the following code:
 
@@ -159,13 +159,13 @@ var sort_by_distance = function(obj) {
 var sorted_locations = sort_by_distance(all_locations);
 ```
 
-### **Adjust Map Boundaries to Include Specific Markers**
+### Adjust Map Boundaries to Include Specific Markers
 
 Another interesting use case I needed to handle was forcing the map to zoom out to include stores within 100 miles if there was nothing in the initial map boundaries, e.g.:
 
 <img border="0" src="/blog/2013/03/29/paper-source-case-study-with-google/image-2.png" width="700"/>
 
-The search for "27103" doesn't return any nearby stores, so the map is extended to include stores within 100 miles.
+The search for "27103" doesn’t return any nearby stores, so the map is extended to include stores within 100 miles.
 
 To accomplish this functionality, I added a bit of code to extend the map boundaries:
 
@@ -215,9 +215,9 @@ geocoder.geocode({ 'address' : search }, function(results, status) {
 }
 ```
 
-### **Disable Scroll and Zoom on Mobile-Sized Devices**
+### Disable Scroll and Zoom on Mobile-Sized Devices
 
-One final behavior needed was to disable map zooming and scrolling on mobile devices, to improve the usability on mobile/touch interfaces. Here's how this was accomplished:
+One final behavior needed was to disable map zooming and scrolling on mobile devices, to improve the usability on mobile/touch interfaces. Here’s how this was accomplished:
 
 ```javascript
 var options_listener = google.maps.event.addListener(map, "idle", function() {
@@ -234,11 +234,11 @@ var options_listener = google.maps.event.addListener(map, "idle", function() {
 });
 ```
 
-### **Conclusion**
+### Conclusion
 
 With all this code, the final location search functionality includes:
 
 - Basic United States map rendering to display all physical store locations.
 - Search by location which shows stores within 100 miles, and allows users to zoom in and out to adjust their search. Search lists results sorted by distance.
-- "Saved" or "Quick" searches by states, which displays all physical stores by state.
+- “Saved” or “Quick” searches by states, which displays all physical stores by state.
 - Adjustment of mobile display map options.

@@ -13,13 +13,13 @@ Say you want to add a column to a large table, e.g.,
 ALTER TABLE transactions ADD COLUMN email_sent BOOLEAN DEFAULT FALSE;
 ```
 
-You really do want new rows to start out with the column "false" (if no value is supplied when the row is created). However, you also want all *existing* rows to be "true", so innocently:
+You really do want new rows to start out with the column “false” (if no value is supplied when the row is created). However, you also want all *existing* rows to be “true”, so innocently:
 
 ```sql
 UPDATE transactions SET email_sent = TRUE;
 ```
 
-This is a great time for a coffee break, or a trip to the post office, or maybe (if you're a telecommuter like me), a stroll out to weed the garden. Unfortunately for all those side activities, you really didn't have to take the long way.
+This is a great time for a coffee break, or a trip to the post office, or maybe (if you’re a telecommuter like me), a stroll out to weed the garden. Unfortunately for all those side activities, you really didn’t have to take the long way.
 
 ```sql
 BEGIN;

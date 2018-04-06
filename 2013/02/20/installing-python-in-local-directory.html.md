@@ -5,7 +5,7 @@ tags: python
 title: Installing Python in local directory
 ---
 
-On one of our client's Ubuntu 10.04 machines, I needed to upgrade Python
+On one of our client’s Ubuntu 10.04 machines, I needed to upgrade Python
 from 2.6 to 2.7. Unfortunately, after installing Python 2.7 from apt
 the virtualenv, version 1.4.5, did not work
 correctly. This bug was fixed in a newer virtualenv version, however
@@ -95,7 +95,7 @@ $ python --version
 Python 2.6.5
 ```
 
-So let's try to tell virtualenvwrapper which Python file should be used:
+So let’s try to tell virtualenvwrapper which Python file should be used:
 
 ```bash
 $ deactivate
@@ -125,8 +125,8 @@ ERROR: virtualenv is not compatible with this system or executable
 </module></module></module>
 ```
 
-The problem is that the virtualenv version, used by virtualenvwrapper, doesn't work with Python 2.7. As I wrote at the begining, there is no newer version available via apt.
-The solution is pretty simple. Let's just install the newer virtualenvwrapper and virtualenv version using pip.
+The problem is that the virtualenv version, used by virtualenvwrapper, doesn’t work with Python 2.7. As I wrote at the begining, there is no newer version available via apt.
+The solution is pretty simple. Let’s just install the newer virtualenvwrapper and virtualenv version using pip.
 
 ```bash
 $ pip install virtualenv
@@ -145,20 +145,20 @@ $ which easy_install
 /home/szymon/.pythonbrew/pythons/Python-2.7.3/bin/easy_install
 ```
 
-So let's use it for installing virtualenv and virtualenvwrapper:
+So let’s use it for installing virtualenv and virtualenvwrapper:
 
 ```bash
 $ easy_install virtualenv virtualenvwrapper
 ```
 
 
-I've checked the whole installation procedure once again, it turned out that there was some network error while downloading pip, but unfortunately I didn't notice the error. If everything is OK, then pip should be installed, and you should be able to install virtualenv using pip as well with:
+I’ve checked the whole installation procedure once again, it turned out that there was some network error while downloading pip, but unfortunately I didn’t notice the error. If everything is OK, then pip should be installed, and you should be able to install virtualenv using pip as well with:
 
 ```bash
 $ pip install virtualenv virtualenvwrapper
 ```
 
-Cool, let's check which version is installed:
+Cool, let’s check which version is installed:
 
 ```bash
 $ which virtualenv
@@ -180,13 +180,13 @@ I just have to change it to the below line and login once again:
 source /home/szymon/.pythonbrew/pythons/Python-2.7.3/bin/virtualenvwrapper.sh
 ```
 
-Let's now create the virtual environment using the brand new Python version:
+Let’s now create the virtual environment using the brand new Python version:
 
 ```bash
 $ mkvirtualenv --no-site-packages -p $HOME/.pythonbrew/pythons/Python-2.7.3/bin/python envname
 ```
 
-I want to use this environment each time I log into this server, so I've added this line to my ~/.bashrc:
+I want to use this environment each time I log into this server, so I’ve added this line to my ~/.bashrc:
 
 ```bash
 workon envname

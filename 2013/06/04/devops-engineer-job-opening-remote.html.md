@@ -21,7 +21,7 @@ What you will be doing:
 
 - Remotely set up and maintain Linux servers (mostly RHEL/CentOS, Debian, and Ubuntu), with custom software written mostly in Ruby, Python, Perl, and PHP
 - Audit and improve security, backups,reliability, monitoring (with Nagios etc.)
-- Support developer use of major language ecosystems: Perl's CPAN, Python PyPI (pip/easy_install), Ruby gems, PHP PEAR/PECL, etc.
+- Support developer use of major language ecosystems: Perl’s CPAN, Python PyPI (pip/easy_install), Ruby gems, PHP PEAR/PECL, etc.
 - Automate provisioning with Ansible, Chef, Puppet, etc.
 - Use open source tools and contribute back as opportunity arises
 - Use your desktop platform of choice: Linux, Mac OS X, Windows

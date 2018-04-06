@@ -9,7 +9,7 @@ Git is a tool that all of us End Pointers use frequently. I was recently reviewi
 
 **git commit -m "****"**
 
-This is a no-brainer – as it commits a set of changes to the repository. I always use the -m to set the git commit message instead of using an editor to do so. **Edit:** [Jon](/team/jon_jensen) recommends that new users not use *-m*, and that more advanced users use this sparingly, for good reasons described in the comments!
+This is a no-brainer as it commits a set of changes to the repository. I always use the -m to set the git commit message instead of using an editor to do so. **Edit:** [Jon](/team/jon_jensen) recommends that new users not use *-m*, and that more advanced users use this sparingly, for good reasons described in the comments!
 
 **git checkout -b branchname**
 
@@ -17,7 +17,7 @@ This is the first step to setting up a local branch. I use this one often as I s
 
 **git push origin branchname**
 
-After I've done a bit of work on my branch, I push it to the origin to a) back it up in another location (if applicable) and b) provide the ability for others to reference the branch.
+After I’ve done a bit of work on my branch, I push it to the origin to a) back it up in another location (if applicable) and b) provide the ability for others to reference the branch.
 
 **git rebase origin/master**
 
@@ -25,11 +25,11 @@ This one is very important to me, and our blog has featured a couple of articles
 
 **git push -f origin branchname**
 
-I use this one sparingly, and **only** if I'm the only one that's working on branchname. This comes up when you've rebased one of your local branches resulting in an altered history of branchname. When you attempt to push it to origin, you may see a message that origin/branchname has X commits different from your local branch. This command will forcefully push your branch to origin and overwrite its history.
+I use this one sparingly, and **only** if I’m the only one that’s working on branchname. This comes up when you’ve rebased one of your local branches resulting in an altered history of branchname. When you attempt to push it to origin, you may see a message that origin/branchname has X commits different from your local branch. This command will forcefully push your branch to origin and overwrite its history.
 
 **git merge --squash branchname**
 
-After you've done a bit of work on branchname and you are ready to merge it into the master branch, you can use the *--squash* argument to squash/smush/combine all of your commits into one clump of changes. This command **does not** perform the commit itself, therefore it must be followed by a) review of the changes and b) git commit.
+After you’ve done a bit of work on branchname and you are ready to merge it into the master branch, you can use the *--squash* argument to squash/smush/combine all of your commits into one clump of changes. This command **does not** perform the commit itself, therefore it must be followed by a) review of the changes and b) git commit.
 
 **git branch -D branchname**
 
@@ -41,14 +41,14 @@ Want to delete branchname from the origin? Run this command. You can leave branc
 
 **git checkout -t origin/someone_elses_branch**
 
-Use this command to set up a local branch to track another developers branch. As the acting technical project manager for one of my clients, I use this command to track [Kamil's](/team/kamil_ciemniewski) branch, in combination with the next command (cherry-pick), to get his work cleanly merged into master.
+Use this command to set up a local branch to track another developers branch. As the acting technical project manager for one of my clients, I use this command to track [Kamil’s](/team/kamil_ciemniewski) branch, in combination with the next command (cherry-pick), to get his work cleanly merged into master.
 
 **git cherry-pick hashhashhash**
 
-Git cherry-pick applies changes from a single commit (identified by hash) to your current working branch. As noted above, I typically use this after I've set up a local tracking branch from another developer to cherry-pick his or her commits onto the master branch in preparation for a deploy.
+Git cherry-pick applies changes from a single commit (identified by hash) to your current working branch. As noted above, I typically use this after I’ve set up a local tracking branch from another developer to cherry-pick his or her commits onto the master branch in preparation for a deploy.
 
 **git stash, git stash apply**
 
-I only learned about *git stash* in the last year, however, it's become a go-to tool of mine. If I have some working changes that I don't want to commit, but a client asks me to commit another quick change, I will often stash the current changes (save them but not commit them), run a rebase to get my branch up to date, then push out the commit, then run *git stash apply* to restore my uncommitted changes.
+I only learned about *git stash* in the last year, however, it’s become a go-to tool of mine. If I have some working changes that I don’t want to commit, but a client asks me to commit another quick change, I will often stash the current changes (save them but not commit them), run a rebase to get my branch up to date, then push out the commit, then run *git stash apply* to restore my uncommitted changes.
 
-Admittedly, several of my coworkers are Git experts and have many more Git tools in their toolboxes – I should ask one of them to follow-up on this article with additional advanced git commands I should be using! Also take note that for us End Pointers, [DevCamps](http://www.devcamps.org/) may influence our Git toolbox because it allows us to have multiple instances (and copies of the production database) running at a time, which may require less management of Git branches.
+Admittedly, several of my coworkers are Git experts and have many more Git tools in their toolboxes — I should ask one of them to follow-up on this article with additional advanced git commands I should be using! Also take note that for us End Pointers, [DevCamps](http://www.devcamps.org/) may influence our Git toolbox because it allows us to have multiple instances (and copies of the production database) running at a time, which may require less management of Git branches.

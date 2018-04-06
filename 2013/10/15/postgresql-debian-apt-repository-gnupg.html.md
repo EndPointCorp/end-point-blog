@@ -5,7 +5,7 @@ tags: debian, postgres, sysadmin
 title: PostgreSQL Debian apt repository GnuPG key update
 ---
 
-The excellent PGDG (PostgreSQL Global Development Group) apt repositories provide current point releases of supported PostgreSQL versions for Debian and Ubuntu LTS Linux. If you'd like to use a newer version of PostgreSQL than ships with your Linux distribution, or need to use an older Postgres release, you should take a look at [http://wiki.postgresql.org/wiki/Apt](http://wiki.postgresql.org/wiki/Apt).
+The excellent PGDG (PostgreSQL Global Development Group) apt repositories provide current point releases of supported PostgreSQL versions for Debian and Ubuntu LTS Linux. If you’d like to use a newer version of PostgreSQL than ships with your Linux distribution, or need to use an older Postgres release, you should take a look at [http://wiki.postgresql.org/wiki/Apt](http://wiki.postgresql.org/wiki/Apt).
 
 A minor housekeeping matter arose just a few days ago: The GnuPG key used to sign the PostgreSQL packages expired on October 13. During a run of apt-get update && apt-get upgrade that leads to errors such as those seen here:
 
@@ -49,7 +49,7 @@ Updating the key to quell the error may not be quite as simple as expected, thou
 wget --quiet -O - http://apt.postgresql.org/pub/repos/apt/ACCC4CF8.asc | sudo apt-key add -
 ```
 
-Indeed that imports the new key. However, you may still see errors from apt. Why? It's possible to have apt trusted keys installed in more than one place:
+Indeed that imports the new key. However, you may still see errors from apt. Why? It’s possible to have apt trusted keys installed in more than one place:
 
 ```
 # apt-key list
@@ -64,9 +64,9 @@ pub   4096R/ACCC4CF8 2011-10-13 [expired: 2013-10-13]
 uid                  PostgreSQL Debian Repository
 ```
 
-A script is referenced from the apt setup page but it doesn't do the exact same thing as the instructions show. Instead, it installs the GPG key in /etc/apt/sources.list.d/pgdg.list, and unless we update or remove that file, apt will continue to see the expired key and complain about it.
+A script is referenced from the apt setup page but it doesn’t do the exact same thing as the instructions show. Instead, it installs the GPG key in /etc/apt/sources.list.d/pgdg.list, and unless we update or remove that file, apt will continue to see the expired key and complain about it.
 
-In our example above, we have already imported the new key into the main /etc/apt/trusted.gpg keystore, so let's just remove the original key that was in its own file in /etc/apt/trusted.gpg.d/ like this:
+In our example above, we have already imported the new key into the main /etc/apt/trusted.gpg keystore, so let’s just remove the original key that was in its own file in /etc/apt/trusted.gpg.d/ like this:
 
 ```
 rm -f /etc/apt/trusted.gpg.d/apt.postgresql.org.gpg

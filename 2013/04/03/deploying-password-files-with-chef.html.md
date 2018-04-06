@@ -44,8 +44,8 @@ end
 
 Further reading:
 
-- [Chef: Encrypted Data Bags](http://docs.opscode.com/essentials_data_bags_encrypt.html)
-- [Chef: Ruby Blocks](http://docs.opscode.com/resource_ruby_block.html)
-- [Ruby: File Methods](http://www.ruby-doc.org/core-2.0/File.html)
+- [Chef: Encrypted Data Bags](https://docs.opscode.com/essentials_data_bags_encrypt.html)
+- [Chef: Ruby Blocks](https://docs.opscode.com/resource_ruby_block.html)
+- [Ruby: File Methods](https://www.ruby-doc.org/core-2.0/File.html)
 
 

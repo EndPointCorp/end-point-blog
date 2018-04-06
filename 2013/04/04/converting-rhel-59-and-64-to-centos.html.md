@@ -11,13 +11,13 @@ Because Red Hat is the source or origin of packages that ultimately end up in Ce
 
 Thanks to this close similarity and the tradeoff between rapidity of updates vs. cost and entitlement tracking, we find reasons to use both RHEL and CentOS, depending on the situation.
 
-Sometimes we want to convert RHEL to CentOS or vice versa, on a running machine, without the expense and destabilizing effect of having to reinstall the operating system. In the past I've written on this blog about [converting from CentOS 6 to RHEL 6](/blog/2011/12/22/converting-centos-6-to-rhel-6), and earlier about [converting from RHEL 5 to CentOS 5](/blog/2009/10/22/upgrading-from-rhel-52-to-centos-54).
+Sometimes we want to convert RHEL to CentOS or vice versa, on a running machine, without the expense and destabilizing effect of having to reinstall the operating system. In the past I’ve written on this blog about [converting from CentOS 6 to RHEL 6](/blog/2011/12/22/converting-centos-6-to-rhel-6), and earlier about [converting from RHEL 5 to CentOS 5](/blog/2009/10/22/upgrading-from-rhel-52-to-centos-54).
 
 I recently needed to migrate several servers from RHEL to CentOS, and found an update of the procedure was in order because some URLs and package versions had changed. Here are current instructions on how to migrate from RHEL 5.9 to CentOS 5.9, and RHEL 6.4 to CentOS 6.4.
 
 These commands should of course be run as root, and observed carefully by a human eye to look for any errors or warnings and adapt accordingly.
 
-## RHEL 5.9 to CentOS 5.9 conversion, 64-bit (x86_64)
+### RHEL 5.9 to CentOS 5.9 conversion, 64-bit (x86_64)
 
 ```bash
 cd
@@ -39,7 +39,7 @@ yum upgrade
 shutdown -r now
 ```
 
-## RHEL 5.9 to CentOS 5.9 conversion, 32-bit (i386)
+### RHEL 5.9 to CentOS 5.9 conversion, 32-bit (i386)
 
 ```bash
 cd
@@ -61,7 +61,7 @@ yum upgrade
 shutdown -r now
 ```
 
-## RHEL 6.4 to CentOS 6.4 conversion, 64-bit (x86_64)
+### RHEL 6.4 to CentOS 6.4 conversion, 64-bit (x86_64)
 
 ```bash
 cd
@@ -81,7 +81,7 @@ yum upgrade
 shutdown -r now
 ```
 
-We don't use 32-bit (i386) RHEL or CentOS 6, so you're on your own with that, but it should be very straightforward to adapt the x86_64 instructions.
+We don’t use 32-bit (i386) RHEL or CentOS 6, so you’re on your own with that, but it should be very straightforward to adapt the x86_64 instructions.
 
 If during the yum localinstall you get an error like this that references a URL containing %24releasever:
 
@@ -90,9 +90,9 @@ If during the yum localinstall you get an error like this that references a URL 
 Error: Cannot retrieve repository metadata (repomd.xml) for repository
 ```
 
-Then you need to temporarily disable that add-on yum repository until after the conversion is complete by editing /etc/yum.repos.d/*name*.repo to change enabled=1 to enabled=0. The problem here is caused by the repo configuration using the releasever yum variable which is undefined mid-conversion because we forcibly removed the redhat-release* package that defines it. We can't expect the OS to know what kind it is in the middle of its identity crisis and change!
+Then you need to temporarily disable that add-on yum repository until after the conversion is complete by editing /etc/yum.repos.d/*name*.repo to change enabled=1 to enabled=0. The problem here is caused by the repo configuration using the releasever yum variable which is undefined mid-conversion because we forcibly removed the redhat-release* package that defines it. We can’t expect the OS to know what kind it is in the middle of its identity crisis and change!
 
-If all goes well, nothing will look any different at all, except you'll now see:
+If all goes well, nothing will look any different at all, except you’ll now see:
 
 ```nohighlight
 # cat /etc/redhat-release

@@ -5,13 +5,13 @@ tags: android, graphics
 title: Creating custom button graphics in Android
 ---
 
-In the Android timesheet app I'm working on, I have a scrollable layout of RadioButtons for the user to pick how much time they've spent on a project (see [my earlier blog post about it](/blog/2013/05/09/dynamically-adding-custom-radio-buttons)), and for that I use custom button graphics to make it look nice. So, I'm going to show you how to do that with 9-patch PNGs and selector XML.
+In the Android timesheet app I’m working on, I have a scrollable layout of RadioButtons for the user to pick how much time they’ve spent on a project (see [my earlier blog post about it](/blog/2013/05/09/dynamically-adding-custom-radio-buttons)), and for that I use custom button graphics to make it look nice. So, I’m going to show you how to do that with 9-patch PNGs and selector XML.
 
-First, what's a 9-patch PNG? A 9-patch is a special PNG image where you specify regions that can be stretched to make room for text. Android will automatically resize a 9-patch to best fit whatever contents you give it. The tool you need to create a 9-patch image is included in the Android SDK Tools, so download that if you haven't already.
+First, what’s a 9-patch PNG? A 9-patch is a special PNG image where you specify regions that can be stretched to make room for text. Android will automatically resize a 9-patch to best fit whatever contents you give it. The tool you need to create a 9-patch image is included in the Android SDK Tools, so download that if you haven’t already.
 
-More information about 9-patch images can be found [here](http://developer.android.com/guide/topics/graphics/2d-graphics.html#nine-patch).
+More information about 9-patch images can be found [here](https://developer.android.com/guide/topics/graphics/drawables#nine-patch).
 
-Okay! I've got custom button graphics (72x72 for HDPI screens), drawn in the Gimp and saved in my project's res/drawable-hdpi/ folder as button_selected.png and button_unselected.png:
+Okay! I’ve got custom button graphics (72x72 for HDPI screens), drawn in the Gimp and saved in my project’s res/drawable-hdpi/ folder as button_selected.png and button_unselected.png:
 
 <table>
 <tbody><tr>
@@ -25,9 +25,9 @@ Okay! I've got custom button graphics (72x72 for HDPI screens), drawn in the Gim
 
 To convert it to a 9-patch, browse to the tools/ directory of the Android SDK and run draw9patch. This will open a window with a graphical editor on the left, and a button preview on the right. The editor window is for specifying which parts of the image will be stretched. The top and left edges show this, and the right and bottom edges show which parts of the image can contain the text you put in the button.
 
-When you've finished with draw9patch, save the images in the same place, but with .9.png as the file extension (in this case, res/drawable-hdpi/button_selected.png will be res/drawable-hdpi/button_selected.9.png). Make sure to delete the old images, because Android R (the generated resource class) doesn't use file extensions, so it can't tell the difference between our two image types.
+When you’ve finished with draw9patch, save the images in the same place, but with .9.png as the file extension (in this case, res/drawable-hdpi/button_selected.png will be res/drawable-hdpi/button_selected.9.png). Make sure to delete the old images, because Android R (the generated resource class) doesn’t use file extensions, so it can’t tell the difference between our two image types.
 
-Now, let's try making a button with our custom graphics. Add a Button to your Activity XML, like so:
+Now, let’s try making a button with our custom graphics. Add a Button to your Activity XML, like so:
 
 res/layout/activity_main.xml
 
@@ -55,7 +55,7 @@ Now, when we run it, it looks like this:
 
 <a href="/blog/2013/06/07/creating-custom-button-graphics-in/image-2-big.png" imageanchor="1"><img border="0" src="/blog/2013/06/07/creating-custom-button-graphics-in/image-2.png"/></a>
 
-So we have our custom background working, but it's the same (red) whether or not you're pushing it. To use different images for different states, we can use selector XML. With ours, we just have two images, so it's simple:
+So we have our custom background working, but it’s the same (red) whether or not you’re pushing it. To use different images for different states, we can use selector XML. With ours, we just have two images, so it’s simple:
 
 res/drawable/button_selector.xml
 
@@ -94,4 +94,4 @@ And when we run it, it looks great (assuming you like bright red)!
 </tr>
 </tbody></table>
 
-This project is on [GitHub,](https://github.com/obnoxiousorc/com.example.custombuttonsdemo) if you'd like to download it and try some stuff.
+This project is on [GitHub,](https://github.com/obnoxiousorc/com.example.custombuttonsdemo) if you’d like to download it and try some stuff.

@@ -9,10 +9,10 @@ title: SSH ProxyCommand with netcat and socat
 
 <a href="/blog/2013/04/24/socat-and-netcat-proxycommand-ssh/image-0-big.jpeg" imageanchor="1"><img border="0" src="/blog/2013/04/24/socat-and-netcat-proxycommand-ssh/image-0.jpeg"/></a>
 
-[Picture](http://www.flickr.com/photos/tambako/5880777651/) by Flickr user [Tambako the Jaguar]()
+[Picture](https://www.flickr.com/photos/tambako/5880777651/) by Flickr user [Tambako the Jaguar](https://www.flickr.com/photos/tambako/)
 
 Most of my day to day is work is conducted via a terminal, using 
-[Secure Shell](http://en.wikipedia.org/wiki/Secure_Shell) 
+[Secure Shell](https://en.wikipedia.org/wiki/Secure_Shell) 
 (SSH) to connect to various servers. I make extensive use of the local SSH
 configuration file, **~/.ssh/config** file, both to reduce typing by aliasing connections,
 and to allow me to seamlessly connect to servers, even when a direct connection
@@ -25,8 +25,8 @@ servers to get to the one that you need. For example, some of our clients only a
 SSH connections from specific IPs. Rather than worry about which engineers need to connect, and
 what IPs they may have at the moment, engineers can access servers through certain 
 trusted shell servers. Then our engineers can SSH to one of those servers, and from
-there on to the client's servers. As one does not want to actually SSH twice every time a
-connection is needed, the ProxyCommand option allows a quick tunnel to be created. Here's
+there on to the client’s servers. As one does not want to actually SSH twice every time a
+connection is needed, the ProxyCommand option allows a quick tunnel to be created. Here’s
 an example entry for a .ssh/config file:
 
 ```
@@ -41,16 +41,16 @@ an example entry for a .ssh/config file:
 ```
 
 So now when we run the command **ssh acme**, ssh actually first logs into proxy.example.com
- as the user "greg", runs the nc (netcat) command (after plugging in the host and port parameters for us),
-and then logs in to gmullane@pgdev.acme.com from proxy.example.com. We don't see any of this
-happening: one simply types "ssh acme" and gets a prompt on the pgdev.acme.com server.
+ as the user “greg”, runs the nc (netcat) command (after plugging in the host and port parameters for us),
+and then logs in to gmullane@pgdev.acme.com from proxy.example.com. We don’t see any of this
+happening: one simply types “ssh acme” and gets a prompt on the pgdev.acme.com server.
 
-Often times more than one "jump" is needed, but it is easy to chain servers together,
+Often times more than one “jump” is needed, but it is easy to chain servers together,
 such that you can log into a third server by running two ProxyCommands. Recently,
-this situation arose but with a further wrinkle. There was a server, we'll call
+this situation arose but with a further wrinkle. There was a server, we’ll call
 it **calamity.acme.com**, which was not directly reachable via SSH from the outside world, as
 it was a tightly locked down production box. However, it was reachable by other boxes
-within the company's intranet, including pgdev.acme.com. Thus to login as gmullane
+within the company’s intranet, including pgdev.acme.com. Thus to login as gmullane
 on the calamity server, the .ssh/config file would normally look like this:
 
 ```
@@ -70,7 +70,7 @@ on the calamity server, the .ssh/config file would normally look like this:
 <span class="gsma">ProxyCommand</span> ssh -q acme nc -w 180 %h %p
 ```
 
-Thus, we'd expect to run **ssh acme_calamity** and get a prompt on the calamity box.
+Thus, we’d expect to run **ssh acme_calamity** and get a prompt on the calamity box.
 However, this was not the case. Although I was able to ssh from proxy to acme,
 and then from acme to calamity, things were failing because acme did not have the nc (netcat)
 program installed. Further investigation showed that it was not even available
@@ -89,8 +89,8 @@ became:
 <span class="gsma">ProxyCommand</span> ssh -q acme socat STDIN TCP:%h:%p
 ```
 
-After that, everything worked as expected. It's perfectly fine to mix socat and
-netcat as we've done here; at the end of the day, they are simple dumb pipes
+After that, everything worked as expected. It’s perfectly fine to mix socat and
+netcat as we’ve done here; at the end of the day, they are simple dumb pipes
 (although socat allows them to be not so simple or dumb if desired!). The arguments
 to socat are simply the two sides of the pipe. One is stdin (sometimes written as
 stdio or a single dash), and the other is a TCP connection to a specific host
@@ -99,7 +99,7 @@ simply forces IPv4 only, where TCP encompasses IPv6 as well.
 
 The options to netcat are very similar, but shorter as it already defaults to
 using stdin for the one side, and because it defaults to a TCP connection,
-so we can leave that out as well. The "-w 180" simply establishes a three minute
+so we can leave that out as well. The “-w 180” simply establishes a three minute
 timeout so the connection will close itself on a problem rather than hanging out
 until manually killed.
 

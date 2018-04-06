@@ -19,7 +19,7 @@ The issue of cache duration is not addressed here as any such formulation will b
 
 ### Caching and the Application Stack
 
-Let's examine an ideal target architecture for a simple implementation of an Interchange store, or stores. Note that we could also introduce load balancing layers to substantially boost capacity through horizontal scaling at multiple points in this stack, and if we did so we'd need to add those to our list to identify the impact of selecting a target cache point.
+Let’s examine an ideal target architecture for a simple implementation of an Interchange store, or stores. Note that we could also introduce load balancing layers to substantially boost capacity through horizontal scaling at multiple points in this stack, and if we did so we’d need to add those to our list to identify the impact of selecting a target cache point.
 
 - Browser
 - Reverse proxy (e.g., Varnish, Pound, nginx)
@@ -32,7 +32,7 @@ Let's examine an ideal target architecture for a simple implementation of an Int
 
 The higher up the stack we can cache, the more scalable our solution becomes. Interchange comes with [timed-build] which can be used to great effect to cache database results in particular, but also potentially other applications that could produce bottlenecks in performance. Moreover, because Interchange assembles the document, this is the last point in the stack that we can (directly, if at all) partially cache a resource. However, having all requests reach Interchange is, itself, a scalability issue that would have to be resolved with either horizontal scaling or pushing our cache farther up the stack.
 
-It's also possible to produce a static build of assets in the web server's doc space, keeping requests from reaching Interchange at all. And while responses from a web server will have considerably less overhead and better response times than Interchange, both building and maintaining a static repository of Interchange assets is going to take some effort and, ultimately, will require horizontal scaling to relieve overload.
+It’s also possible to produce a static build of assets in the web server’s doc space, keeping requests from reaching Interchange at all. And while responses from a web server will have considerably less overhead and better response times than Interchange, both building and maintaining a static repository of Interchange assets is going to take some effort and, ultimately, will require horizontal scaling to relieve overload.
 
 Our target point for the cache described herein is at the reverse proxy. We want to control our cache using standard cache headers and an nginx configuration that uses the full URL for its cache keys. The reverse proxy is chosen because:
 
@@ -51,11 +51,11 @@ New boolean catalog configuration parameter that, when true, instructs Interchan
 
 #### $::Instance->{Volatile}
 
-Value indicates to critical core code what the request's cache potential is. Three values:
+Value indicates to critical core code what the request’s cache potential is. Three values:
 
-- **undef** - unknown, could be cached, but hasn't been explicitly identified
+- **undef** - unknown, could be cached, but hasn’t been explicitly identified
 - **true** - cannot be cached. Indicates the requested resource is user-dependent and may produce different results for the same URL for different users.
-- **false** (other than undef) - explicitly treat as a "can be cached" resource. This setting can be used to reverse override other cache overrides.
+- **false** (other than undef) - explicitly treat as a “can be cached” resource. This setting can be used to reverse override other cache overrides.
 
 The ternary nature of Volatile allows a developer to explicitly control the caching behavior of any given resource if circumstances require an adjustment to the default behavior.
 
@@ -89,7 +89,7 @@ Take advantage of writing custom actionmaps, which allow the developer extreme f
 
 #### Permanent More for Category Lists
 
-By default, search objects which Interchange uses for more lists, are restricted to access from the generating user's session. This is a safeguard as often search results include personal data for access only to the requestor. However, for features such as category lists, this creates a difficult burden for the developer who wishes to cache the popular resources and whose results are identical across all users.
+By default, search objects which Interchange uses for more lists, are restricted to access from the generating user’s session. This is a safeguard as often search results include personal data for access only to the requestor. However, for features such as category lists, this creates a difficult burden for the developer who wishes to cache the popular resources and whose results are identical across all users.
 
 We can overcome this difficulty by making the search definitions for category lists, or other canned searches, include the [permanent more](/blog/2012/01/02/interchange-search-caching-with) indicator. Permanent more causes all identical searches to share a common search object accessible by the same URLs, and freeing the usual coupling with the session of the search originator.
 
@@ -104,11 +104,11 @@ There are certain session variables that are often found in page code and can ca
 
 #### Cacheable Redirects
 
-Any code that issues a redirect must do so consistently with respect to its URL. Any redirect will cache the http code and, if issued conditionally, will force all users accessing the cached resource to also redirect. This practice is seen often in Interchange catalogs, particularly when monitoring pages that are restricted to logged-in users. In summary, it's OK to cache redirects, but just make sure that a given URL is either always, or never, redirected.
+Any code that issues a redirect must do so consistently with respect to its URL. Any redirect will cache the http code and, if issued conditionally, will force all users accessing the cached resource to also redirect. This practice is seen often in Interchange catalogs, particularly when monitoring pages that are restricted to logged-in users. In summary, it’s OK to cache redirects, but just make sure that a given URL is either always, or never, redirected.
 
-#### Profile and "Click" Code
+#### Profile and “Click” Code
 
-It is common practice to define profile and click code in scratch variables. This is particularly true for click code defined with the [button] tag, which while convenient causes the click action to be defined under the hood in scratch space. In order for these event-driven features to work, the resource must compile that code and seed it in the session in anticipation of the user's next actions. If those resources are cached, those important features are never added to the session as the result of a page load and, so, none of the actions will work.
+It is common practice to define profile and click code in scratch variables. This is particularly true for click code defined with the [button] tag, which while convenient causes the click action to be defined under the hood in scratch space. In order for these event-driven features to work, the resource must compile that code and seed it in the session in anticipation of the user’s next actions. If those resources are cached, those important features are never added to the session as the result of a page load and, so, none of the actions will work.
 
 All use of [button] or [set] to produce click or profile code should be moved into the profile files (typically found in etc/profile.*). There they are added to the Interchange global configuration at compile time and are thus available to all users without regard to the state of their sessions. This is good practice generally since it is often easy (particularly with [button]) to have multiple actions map to the same scratch key. When that happens, a user going through the browser back button can get invalid results on actions taken because the click or profile definitions have changed with respect to the anticipated such actions on the current page.
 
@@ -124,16 +124,16 @@ Invocation looks something like [tag pragma cache_control]max-age=NNN[/tag], whe
 
 ### Impact on Session Management
 
-Any resource considered cacheable should *a priori* have neither impact nor dependence on a session. This must be true if we consider that, once cached, a user will interact with the page--and expect correct behavior--without ever touching Interchange. This introduces some new conditions associated with the session:
+Any resource considered cacheable should *a priori* have neither impact nor dependence on a session. This must be true if we consider that, once cached, a user will interact with the page—and expect correct behavior—without ever touching Interchange. This introduces some new conditions associated with the session:
 
 - The initial user request against a cacheable resource will *not* generate a session. Why is this so? Apart from the already-noted discrepancy of accessing the resource for a cached vs. live hit, generating a session would necessitate producing the session cookie. Returning that cookie would invalidate the resource as cacheable. Further, one of the significant advantages of a reverse-proxy caching strategy is to provide protection in a DoS attack, and the user agents in such an attack are very unlikely to maintain a session. Thus, if we were failing to produce a cache on initial hits to allow setting a session, **all** those DoS hits would reach Interchange, and on top of that be churning out session entries on the server.
-- Session writing is suppressed on any response with a cacheable resource. Interchange must treat the response without any permanence because all accesses of the resource from the cache will *never* reach Interchange. If the request that produced the cache also wrote that user's session, it would produce a deviation in behavior between the cached v. live requests.
+- Session writing is suppressed on any response with a cacheable resource. Interchange must treat the response without any permanence because all accesses of the resource from the cache will *never* reach Interchange. If the request that produced the cache also wrote that user’s session, it would produce a deviation in behavior between the cached v. live requests.
 
 ### Overrides on a Cacheable Response
 
 Any action resulting in a POST is considered to imply the necessity of the user initiating the request reaching the session (or the database, or some other permanent storage controlled by the Interchange app). Thus POSTs by default force the Volatile setting to true. However, note this can be overridden by the developer if necessary (e.g., if a DoS hits the home page with a POST rather than the expected GET).
 
-Similarly, any requests passing through either the "process" or "order" actionmap are assumed to require access to the session. "process" will most often be issued as a POST as well, although using "order" with a GET is common.
+Similarly, any requests passing through either the “process” or “order” actionmap are assumed to require access to the session. “process” will most often be issued as a POST as well, although using “order” with a GET is common.
 
 ### User State on Cacheable Resources
 
@@ -141,7 +141,7 @@ A big mistake a developer may make when considering full-page caching is to assu
 
 A catalog can gain considerable benefit simply from evaluating those resources which do not require session entanglement at all and starting with them. Without considering users that are logged in or have items in their cart, under most circumstances the home and category list pages should be free from entanglement. With a bit of URL management, the resources can skip the cache when a user is logged in or has items in the cart.
 
-#### "Read Only" User State
+#### “Read Only” User State
 
 If caching is desirable on resources that cannot be decoupled from session influence, we can expose the necessary parts of the session to the client in the form of cookies and can refactor our document to contain client-side code to manage the session use. Typical examples of this would be personalization for logged in users, or the display of a small cart on all pages. The session data stored in the cookie is controlled exclusively by Interchange and is read-only on the client. Each time the session is accessed and updated, the cookie is re-written to the client.
 
@@ -168,9 +168,9 @@ and in the ready() event elsewhere with our session cookie data stored in values
 
 The OutputCookieHook was developed as a convenient mechanism for constructing the proposed valuesData cookie above, allowing for a subroutine to build the cookie just prior to the core code that constructs the document headers but after any standard actions that would alter the session and would need to be captured in the cookie data.
 
-#### "Read Write" User State
+#### “Read Write” User State
 
-If state needs are more complex on a particularly popular resource, it may be necessary to allow our state cookie to also be updated from the client. With the tools described here, the developer can either amend the existing cookie, or construct a new one, that captures data input by the client through subsequent requests to cached resources. Once the user issues the next non-cached request, an Autoload subroutine could be constructed to identify that changes have occurred and then sync those changes back to the user's session. While implementing read-write user state may be challenging, it is possible and has been done at End Point for clients where that need exists.
+If state needs are more complex on a particularly popular resource, it may be necessary to allow our state cookie to also be updated from the client. With the tools described here, the developer can either amend the existing cookie, or construct a new one, that captures data input by the client through subsequent requests to cached resources. Once the user issues the next non-cached request, an Autoload subroutine could be constructed to identify that changes have occurred and then sync those changes back to the user’s session. While implementing read-write user state may be challenging, it is possible and has been done at End Point for clients where that need exists.
 
 ---
 

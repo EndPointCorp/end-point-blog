@@ -5,13 +5,13 @@ tags: sysadmin, django, python, tls
 title: Making SSL Work with Django Behind an Apache Reverse Proxy
 ---
 
-## Bouncing Admin Logins
+### Bouncing Admin Logins
 
-We have a [Django](https://www.djangoproject.com/) application that runs on [Gunicorn](http://gunicorn.org/) behind an [Apache](http://httpd.apache.org/) reverse proxy server. I was asked to look into a strange issue with it: After a successful login to the admin interface, the browser was re-directed to the http (non-SSL) version of the interface.
+We have a [Django](https://www.djangoproject.com/) application that runs on [Gunicorn](http://gunicorn.org/) behind an [Apache](https://httpd.apache.org/) reverse proxy server. I was asked to look into a strange issue with it: After a successful login to the admin interface, the browser was re-directed to the http (non-SSL) version of the interface.
 
 After some googling and investigation I determined the issue was likely due to our specific server arrangement. Although the login requests were made over https, the requests proxied by Apache to Gunicorn used http (securely on the same host). Checking the Apache SSL error logs quickly affirmed this suspicion. I described the issue in the #django channel on [freenode IRC](http://freenode.net/) and received some assistance from Django core developer [Carl Meyer](https://github.com/carljm). As of Django 1.4 there was a new setting Carl had [developed](https://code.djangoproject.com/ticket/14597#comment:16) to handle this particular scenario.
 
-## Enter SECURE_PROXY_SSL_HEADER
+### Enter SECURE_PROXY_SSL_HEADER
 
 The documentation for the [SECURE_PROXY_SSL_HEADER](https://docs.djangoproject.com/en/dev/ref/settings/#secure-proxy-ssl-header) variable describes how to configure it for your project. I added the following to the settings.py config file:
 

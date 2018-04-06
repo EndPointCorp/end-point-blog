@@ -11,7 +11,7 @@ During the recent holiday season, it became apparent that some efforts were need
 
 <a href="http://www.paper-source.com/"><img border="0" height="46" src="/blog/2013/01/03/paper-source-nginx-full-page-caching/image-0.gif" width="362"/></a>
 
-Over the holiday season, the website experienced a couple of instances where server load spiked causing extreme sluggishness for customers. Various parts of the site leverage Interchange's [timed-build](http://www.icdevgroup.org/doc/frames/ictags_112.html) tag, which creates static caches of parts of a page (equivalent to Rails' and Django's fragment caching). However, in all cases, Interchange is still being hit for the page request and often the pages perform repeated logic and database hits that opens an opportunity for optimization.
+Over the holiday season, the website experienced a couple of instances where server load spiked causing extreme sluggishness for customers. Various parts of the site leverage Interchange’s [timed-build](http://www.icdevgroup.org/doc/frames/ictags_112.html) tag, which creates static caches of parts of a page (equivalent to Rails’ and Django’s fragment caching). However, in all cases, Interchange is still being hit for the page request and often the pages perform repeated logic and database hits that opens an opportunity for optimization.
 
 ### The Plan
 
@@ -19,7 +19,7 @@ The long-term plan for Paper Source is to move towards full page [nginx](http://
 
 ### Step 1: Identify Commonly Visited Pages
 
-First, it's important to recognize which pages are visited the most frequently and to tackle optimization on those pages first, essentially profiling the site to determine where we will gain the most from performance optimization. In the case of Paper Source, popular pages include:
+First, it’s important to recognize which pages are visited the most frequently and to tackle optimization on those pages first, essentially profiling the site to determine where we will gain the most from performance optimization. In the case of Paper Source, popular pages include:
 
 - Thumbnail page, or the template where multiple products are shown in list format
 - Product detail page, or the template that serves the basic product page
@@ -30,13 +30,13 @@ First, it's important to recognize which pages are visited the most frequently a
 
 The next step in the process is to remove dynamic elements on the page, by having cookies or AJAX render these dynamic elements. Below are a couple of examples of these dynamic elements on two primary page templates.
 
-<img border="0" src="/blog/2013/01/03/paper-source-nginx-full-page-caching/image-0.png" width="740"/>
-
-The thumbnail page contains two dynamic elements: the mini-cart template, which shows how many items are in the user's cart, and the log in information, which shows "my account" and "log out" links if the user is logged in, and shows a "log in" link if the user is not logged in.
-
 <img border="0" src="/blog/2013/01/03/paper-source-nginx-full-page-caching/image-1.png" width="740"/>
 
-In addition to the mini-cart and logged in elements, the product page contains additional dynamic elements which signify if a user has added an item to their cart, and presentation of the user's previously viewed items.
+The thumbnail page contains two dynamic elements: the mini-cart template, which shows how many items are in the user’s cart, and the log in information, which shows “my account” and “log out” links if the user is logged in, and shows a “log in” link if the user is not logged in.
+
+<img border="0" src="/blog/2013/01/03/paper-source-nginx-full-page-caching/image-2.png" width="740"/>
+
+In addition to the mini-cart and logged in elements, the product page contains additional dynamic elements which signify if a user has added an item to their cart, and presentation of the user’s previously viewed items.
 
 In the examples above, the following changes were applied to replace these dynamic elements:
 
@@ -47,7 +47,7 @@ In the examples above, the following changes were applied to replace these dynam
 
 ### Step 3: Implement fully timed-build caching pages
 
-During this incremental process to reach the end goal of full nginx caching, the next step is to implement fully timed-build pages, or use Interchange's caching mechanism to fully cache these pages and reduce repetitive database hits and backend logic. In this step, the entire page is wrapped in a timed-build tag, which results in writing and serving a static cached file for that page. While this step is not a necessity, it does allow for us to deploy and test our changes in preparation for nginx caching. In adddition to giving us an opportunity to work out kinks, this step also gives us an added bump in performance because several of these page templates have no caching at all.
+During this incremental process to reach the end goal of full nginx caching, the next step is to implement fully timed-build pages, or use Interchange’s caching mechanism to fully cache these pages and reduce repetitive database hits and backend logic. In this step, the entire page is wrapped in a timed-build tag, which results in writing and serving a static cached file for that page. While this step is not a necessity, it does allow for us to deploy and test our changes in preparation for nginx caching. In adddition to giving us an opportunity to work out kinks, this step also gives us an added bump in performance because several of these page templates have no caching at all.
 
 ### Step 4: Reproduce redirect logic outside of Interchange
 
@@ -59,8 +59,8 @@ Another non-trivial step in this process will be to implement nginx architecture
 
 ### Step 6: Turn nginx caching on!
 
-Finally, we can turn on nginx caching for specific pages of interest. Nginx will then serve these fully cached pages and will avoid Interchange entirely. Cookies and AJAX will still be used to render the dynamic elements on the fully cached pages. While we'd ideally like to cache every page on the site except for the cart, checkout and my account pages, it makes more sense to find the bottlenecks and tackle them incrementally.
+Finally, we can turn on nginx caching for specific pages of interest. Nginx will then serve these fully cached pages and will avoid Interchange entirely. Cookies and AJAX will still be used to render the dynamic elements on the fully cached pages. While we’d ideally like to cache every page on the site except for the cart, checkout and my account pages, it makes more sense to find the bottlenecks and tackle them incrementally.
 
 ### Where are we now?
 
-At the moment, I've made progress on steps 1-3 for several subsets of pages, including the thumbnail and product detail pages. I plan to continue these steps for additional bottleneck pages. I have worked out out a couple of minor kinks throughout the recent progress, but things have been progressing well. [Richard](/team/richard_templet) plans to make progress on the nginx related tasks in preparation for reaching the end goal.
+At the moment, I’ve made progress on steps 1-3 for several subsets of pages, including the thumbnail and product detail pages. I plan to continue these steps for additional bottleneck pages. I have worked out out a couple of minor kinks throughout the recent progress, but things have been progressing well. [Richard](/team/richard_templet) plans to make progress on the nginx related tasks in preparation for reaching the end goal.

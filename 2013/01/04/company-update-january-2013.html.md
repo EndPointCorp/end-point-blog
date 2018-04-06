@@ -13,7 +13,7 @@ With the busy holiday season just behind us, we haven’t had as much time to wr
 
 - [David](/team/david_christensen) has been working on an HA (highly available) **PostgreSQL** database system with automatic failover, dynamic node creation/population, and configuration synchronization.
 
-- [Greg Sabino Mullane](/team/greg_sabino_mullane) has been speeding up slow queries, debugging pg_bouncer problems, expanding the abilities of **Bucardo**, and many other PostgreSQL-related activities.
+- Greg Sabino Mullane/team/greg_sabino_mullane has been speeding up slow queries, debugging pg_bouncer problems, expanding the abilities of **Bucardo**, and many other PostgreSQL-related activities.
 
 - Jeff has been working on some major updates to the **HydroPool** site, including adding a set of “parts” products from an external supplier, with an interface that displays the schematic diagram of selected pool products and offers a way to order parts based on the exploded diagram. This has involved extensive amounts of AJAX/JSON, both in the customer UI and in the background, allowing a hierarchical drill-down into the categories, manufacturers and models.
 

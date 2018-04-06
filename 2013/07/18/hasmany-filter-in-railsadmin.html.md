@@ -29,7 +29,7 @@ RailsAdmin.config do |config|
 end
 ```
 
-The reason is that only the belongs_to association is enabled for the search, as stated in the "Field searching" section of the [ documentation](https://github.com/sferik/rails_admin/wiki/List):
+The reason is that only the belongs_to association is enabled for the search, as stated in the “Field searching” section of the [ documentation](https://github.com/sferik/rails_admin/wiki/List):
 
 ```
 (3) Belongs_to associations : will be searched on their foreign_key (:team_id) 
@@ -38,12 +38,12 @@ or on their label if label is not virtual (:name, :title, etc.)
 Benoit Bénézech, creator of RailsAdmin, [confirmed this as well](https://groups.google.com/forum/#!topic/rails_admin/POCY-c_knDk):
 
 ```
-has_many are not added to the include for perf reason. That means that AR won't find the :programs table
+has_many are not added to the include for perf reason. That means that AR won’t find the :programs table
 ```
 
 We only had a few has_many fields configured across the project, so I decided to look into the source code and see if the limitation can be bypassed.
 
-[MainController](https://github.com/sferik/rails_admin/blob/master/app/controllers/rails_admin/main_controller.rb) class in RailsAdmin invokes the "get_collection" method to fetch the records for the list action. It defines the "associations" variable which is used to generate SQL query for the filters. I reopened the class in config/initializers/rails_admin_main_controller.rb:
+[MainController](https://github.com/sferik/rails_admin/blob/master/app/controllers/rails_admin/main_controller.rb) class in RailsAdmin invokes the “get_collection” method to fetch the records for the list action. It defines the “associations” variable which is used to generate SQL query for the filters. I reopened the class in config/initializers/rails_admin_main_controller.rb:
 
 ```ruby
 module RailsAdmin

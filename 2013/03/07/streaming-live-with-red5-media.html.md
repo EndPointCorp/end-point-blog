@@ -5,15 +5,15 @@ tags: java, video
 title: "Streaming Live with Red5 Media Server: Two-Way"
 ---
 
-I already wrote about [the basics of publishing and broadcasting](/blog/2012/04/27/streaming-live-with-red5-media-server) with Red5 Media Server. Let's fast forward to the advanced topics and create a video conference now!
+I already wrote about [the basics of publishing and broadcasting](/blog/2012/04/27/streaming-live-with-red5-media-server) with Red5 Media Server. Let’s fast forward to the advanced topics and create a video conference now!
 
-## Getting Ready
+### Getting Ready
 
 First, a word about the technology stack: a little bit of Java6/Java EE will be used for the server-side work (Red5 is written in Java), ActionScript2/Adobe Flash CS6 will be the primary tool for the client side development, and OS X Mountain Lion is my operating system.
 
-Red5 Server comes with the set of sample applications that provide the source code for about everything you may want to achieve. The primary challenge is to unleash the power of it, since the samples fall extremely short of documentation! The **"fitcDemo"** application will serve as a base for all our customization.
+Red5 Server comes with the set of sample applications that provide the source code for about everything you may want to achieve. The primary challenge is to unleash the power of it, since the samples fall extremely short of documentation! The **“fitcDemo”** application will serve as a base for all our customization.
 
-Originally I made all the development in Red5 RC 1.0 version where fitcDemo was present. Unfortunately, when I downloaded the latest Red5 1.0.1 release yesterday it was simply not there! The source code was still in the repo, just outdated and not working. Well, I did all the work for Red5 team, so you can just download [fitcDemo.war](https://github.com/marinalohova/red5-example/blob/master/fitcDemo/dist/fitcDemo.war) from my repo and drop it into the **"webapps"** directory of Red5 1.0.1 installation - and you are good!
+Originally I made all the development in Red5 RC 1.0 version where fitcDemo was present. Unfortunately, when I downloaded the latest Red5 1.0.1 release yesterday it was simply not there! The source code was still in the repo, just outdated and not working. Well, I did all the work for Red5 team, so you can just download [fitcDemo.war](https://github.com/marinalohova/red5-example/blob/master/fitcDemo/dist/fitcDemo.war) from my repo and drop it into the **“webapps”** directory of Red5 1.0.1 installation—and you are good!
 
 You will then find the video conference demo at [http://localhost:5080/demos/videoConference.html](http://localhost:5080/demos/videoConference.html)
 
@@ -27,9 +27,9 @@ Here is how we want it to look!
 
 The goal is to make our Red5 conference look as neat as Google Hangout.
 
-## Sleek Subscribers
+### Sleek Subscribers
 
-Default video conference has five subscribers statically positioned on the stage. It's way more fun to have the subscribers added and removed on the fly as they connect to the server. So let's do that! I have the complete tutorial code based on Red5 1.0.1 The final version is in my [GitHub repo](https://github.com/marinalohova/red5-flash), so I will be explaining parts of it further. Open [videoConference.fla](https://github.com/marinalohova/red5-flash/blob/master/videoConference.fla) in Flash. I used CS6 for all the FLA/ActionScript editing in the tutorial.
+Default video conference has five subscribers statically positioned on the stage. It’s way more fun to have the subscribers added and removed on the fly as they connect to the server. So let’s do that! I have the complete tutorial code based on Red5 1.0.1 The final version is in my [GitHub repo](https://github.com/marinalohova/red5-flash), so I will be explaining parts of it further. Open [videoConference.fla](https://github.com/marinalohova/red5-flash/blob/master/videoConference.fla) in Flash. I used CS6 for all the FLA/ActionScript editing in the tutorial.
 
 <div class="separator" style="clear: both; text-align: center;"><a href="/blog/2013/03/07/streaming-live-with-red5-media/image-2.jpeg" imageanchor="1" style="clear: left; float: left; margin-bottom: 1em; margin-right: 1em;"><img border="0" src="/blog/2013/03/07/streaming-live-with-red5-media/image-2.jpeg"/></a>  <br/>
 </div>
@@ -44,9 +44,9 @@ Edit the VideoPool clip, to remove everything in it as well and drag a Broadcast
 <div class="separator" style="clear: both; text-align: center;"><a href="/blog/2013/03/07/streaming-live-with-red5-media/image-4.jpeg" imageanchor="1" style="clear: left; float: left; margin-bottom: 1em; margin-right: 1em;"><img border="0" src="/blog/2013/03/07/streaming-live-with-red5-media/image-4.jpeg"/></a><br/>
 </div>
 
-Broadcaster and Subscriber clips should be modified too and have only the video component visible. You may look into the complete source code for details. Don't forget to change the Publish Settings to **Flash Player 8; ActionScript2** and publish.
+Broadcaster and Subscriber clips should be modified too and have only the video component visible. You may look into the complete source code for details. Don’t forget to change the Publish Settings to **Flash Player 8; ActionScript2** and publish.
 
-Modify [Connector.as](https://github.com/marinalohova/red5-flash/blob/master/classes/org/red5/samples/livestream/videoconference/Connector.as) to point to the Red5 server. It is important to specify the IP address of the host machine rather than just "localhost", so other computers can join the hangout over network.
+Modify [Connector.as](https://github.com/marinalohova/red5-flash/blob/master/classes/org/red5/samples/livestream/videoconference/Connector.as) to point to the Red5 server. It is important to specify the IP address of the host machine rather than just “localhost”, so other computers can join the hangout over network.
 
 ```javascript
 public static var red5URI:String = "rtmp://192.168.0.5/fitcDemo";
@@ -83,7 +83,7 @@ private function configUI():Void
 }
 ```
 
-Open [VideoPool.as](https://github.com/marinalohova/red5-flash/blob/master/classes/org/red5/samples/livestream/videoconference/VideoPool.as) and modify getVideoContainer() so that every subscriber will be dynamically created and positioned on stage. The row will have 4 streams with the broadcaster stream (your computer's camera) being the first in the first row, and more rows will be created in the scroll pane to accommodate more streams.
+Open [VideoPool.as](https://github.com/marinalohova/red5-flash/blob/master/classes/org/red5/samples/livestream/videoconference/VideoPool.as) and modify getVideoContainer() so that every subscriber will be dynamically created and positioned on stage. The row will have 4 streams with the broadcaster stream (your computer’s camera) being the first in the first row, and more rows will be created in the scroll pane to accommodate more streams.
 
 ```javascript
 private function getVideoContainer(p_id:Number):Subscriber
@@ -202,7 +202,7 @@ private function configUI():Void
 }
 ```
 
-We could wrap the last four lines in some kind of configUI() function on VideoPool, but haven't I told you? Refactoring will be your homework assignment!
+We could wrap the last four lines in some kind of configUI() function on VideoPool, but haven’t I told you? Refactoring will be your homework assignment!
 
 When the new subscriber shows up, we add him or her and update ScrollPane.
 
@@ -242,13 +242,13 @@ Include into the webpage:
 <div id="participants"></div>
 ```
 
-## Stylish Spotlight
+### Stylish Spotlight
 
-The "Spotlight" component is the larger video of the "talking" person that shows up when one of the smaller previews is clicked. simpleSubscriber.fla is the ideal base for this component:
+The “Spotlight” component is the larger video of the “talking” person that shows up when one of the smaller previews is clicked. simpleSubscriber.fla is the ideal base for this component:
 
 <div class="separator" style="clear: both; text-align: center;"><a href="/blog/2013/03/07/streaming-live-with-red5-media/image-5.jpeg" imageanchor="1" style="clear: left; float: left; margin-bottom: 1em; margin-right: 1em;"><img border="0" src="/blog/2013/03/07/streaming-live-with-red5-media/image-5.jpeg"/></a></div>
 
-Subscriber and Broadcaster will respond to the "click" event and call JavaScript function with the video stream name as a parameter. The video stream name is just a string like "videoStream_12" denoting the 12th stream accepted by "fitcDemo" application.
+Subscriber and Broadcaster will respond to the “click” event and call JavaScript function with the video stream name as a parameter. The video stream name is just a string like “videoStream_12” denoting the 12th stream accepted by “fitcDemo” application.
 
 In [Broadcaster.as](https://github.com/marinalohova/red5-flash/blob/master/classes/org/red5/samples/livestream/videoconference/Broadcaster.as#L96):
 
@@ -323,9 +323,9 @@ Publish [simpleSubsciber.swf](https://github.com/marinalohova/red5-flash/blob/ma
 
 By the way the -version 8 flag for mtasc was added specifically to compile ExternalInterface, otherwise, these libraries would not be found.
 
-## Chat in the absence of Sound
+### Chat in the absence of Sound
 
-One thing I really appreciate about the Google Hangout architecture is that it does not just make the whole page a bulky <embed> or <object> and lock everything into the external component. I love how they use the familiar and friendly JavaScript and HTML to add some interactive features. That's why I decided to break the single VideoConference component into pieces as well and tie them together on a web page.
+One thing I really appreciate about the Google Hangout architecture is that it does not just make the whole page a bulky <embed> or <object> and lock everything into the external component. I love how they use the familiar and friendly JavaScript and HTML to add some interactive features. That’s why I decided to break the single VideoConference component into pieces as well and tie them together on a web page.
 
 The original conference had its audio support commented out with the note about performance issues. Bummer! This will surely need to be addressed, but for now I decided to use the existing chat and make it separate. Create a blank document [chat.fla](https://github.com/marinalohova/red5-flash/blob/master/chat.fla) and drag Chat clip from the VideoConference Library to the stage.
 
@@ -399,17 +399,17 @@ And enjoy chatting with yourself for a while in different browser tabs:
 
 <div class="separator" style="clear: both; text-align: center;"><a href="/blog/2013/03/07/streaming-live-with-red5-media/image-7.jpeg" imageanchor="1" style="clear: left; float: left; margin-bottom: 1em; margin-right: 1em;"><img border="0" src="/blog/2013/03/07/streaming-live-with-red5-media/image-7.jpeg"/></a></div>
 
-## Final result
+### Final result
 
 After a bit of styling and herding my test participants, here is what I got:
 
 <div class="separator" style="clear: both; text-align: center;"><a href="/blog/2013/03/07/streaming-live-with-red5-media/image-8.jpeg" imageanchor="1" style="clear: left; float: left; margin-bottom: 1em; margin-right: 1em;"><img border="0" src="/blog/2013/03/07/streaming-live-with-red5-media/image-8.jpeg"/></a></div>
 
-## Questions, questions
+### Questions, questions
 
 There are problems to be addressed yet.
 
-First, there is no audio. It's commented out in the original code with the note about performance issues. Silence may be golden, but the grimace-enhanced chat experience is totally not acceptable for production!
+First, there is no audio. It’s commented out in the original code with the note about performance issues. Silence may be golden, but the grimace-enhanced chat experience is totally not acceptable for production!
 
 Second, the whole performance talk brings up the other important questions: How many subscribers can this setup handle? Is it possible to achieve the better video quality? Why is the video stream choppy at times?
 

@@ -7,13 +7,13 @@ title: Speeding Up Some FDW Queries
 
 There was a very interesting question about PostgreSQL optimization. It was about speeding up a query on foreign tables.
 
-## Foreign Data Wrappers
+### Foreign Data Wrappers
 
 FDW is quite a nice idea, it allows to use different sources of data and access them like a normal database table.
 
-You can find some more [information about writing custom FDW handlers](http://www.postgresql.org/docs/9.2/static/fdwhandler.html) or [use some already created](http://wiki.postgresql.org/wiki/Foreign_data_wrappers). This way you can connect to another database, or even use CSV files as Postgres tables without loading them into database.
+You can find some more [information about writing custom FDW handlers](https://www.postgresql.org/docs/9.2/static/fdwhandler.html) or [use some already created](https://wiki.postgresql.org/wiki/Foreign_data_wrappers). This way you can connect to another database, or even use CSV files as Postgres tables without loading them into database.
 
-## Introduction
+### Introduction
 
 Let’s take a couple of tables and a view created on the top of them:
 
@@ -56,7 +56,7 @@ ANALYZE t_15_20;
 ANALYZE t_10_16;
 ```
 
-## Getting Data
+### Getting Data
 
 The query for getting all data is simple, and the plan is terrible of course, but it is a normal plan for a query like SELECT * FROM x.
 
@@ -152,9 +152,9 @@ Unfortunately that didn’t help, and the plan is as ugly as it was in the begin
 
 As you can see, there is the worse plan used. Planner doesn’t want to use the view definition to optimize the query plan.
 
-## Changing Postgres Settings
+### Changing Postgres Settings
 
-There is a setting named constraint_exclusion in postgresql.conf. Changing that from "partition" to "on" helps a lot:
+There is a setting named constraint_exclusion in postgresql.conf. Changing that from “partition” to “on” helps a lot:
 
 ```
 # EXPLAIN SELECT * FROM all_tables_2 WHERE i BETWEEN 10 AND 14;
@@ -168,7 +168,7 @@ There is a setting named constraint_exclusion in postgresql.conf. Changing that 
 (5 rows)
 ```
 
-## Fixing the Ugly Part
+### Fixing the Ugly Part
 
 This works great, however nothing is for free. The description of the different values for this setting says:
 
@@ -180,7 +180,7 @@ This works great, however nothing is for free. The description of the different 
 >
 >
 >
-> [PostgreSQL doc](http://www.postgresql.org/docs/9.1/static/runtime-config-query.html#GUC-CONSTRAINT-EXCLUSION)
+> [PostgreSQL doc](https://www.postgresql.org/docs/9.1/static/runtime-config-query.html#GUC-CONSTRAINT-EXCLUSION)
 >
 >
 >

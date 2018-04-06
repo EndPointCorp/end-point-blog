@@ -5,13 +5,13 @@ tags: jquery, javascript, performance
 title: JavaScript-driven Interactive Highlighting
 ---
 
-One project I've been involved in for almost two years here at End Point is the [H2O project](http://cyber.law.harvard.edu/research/h2o). The Ruby on Rails web application behind H2O serves as a platform for creating, editing, organizing, consuming and sharing course materials that is used by professors and their students.
+One project I’ve been involved in for almost two years here at End Point is the [H2O project](https://cyber.law.harvard.edu/research/h2o). The Ruby on Rails web application behind H2O serves as a platform for creating, editing, organizing, consuming and sharing course materials that is used by professors and their students.
 
 One of the most interesting UI elements of this project is the requirement to allow highlighting and annotating text interactively. For example, when one reads a physical textbook for a college course, they may highlight and mark it up in various ways with different colors and add annotated text. They may also highlight a section that is particularly important for an upcoming exam, or they may highlight another section with a different color and notes that may be needed for a paper.
 
 <img border="0" src="/blog/2013/01/25/javascript-driven-interactive/image-0.jpeg" width="300"/>
 
-An example of highlighted text, by [sergis on Flickr](http://www.flickr.com/photos/srgblog/7366596592/)
+An example of highlighted text, by [sergis on Flickr](https://www.flickr.com/photos/srgblog/7366596592/)
 
 The H2O project has required support for digitizing interactive highlighting and annotating. Since individual text is not selectable as a DOM element, each word is wrapped into an individual DOM element that is selectable, hoverable, and has DOM properties that we can assign it. For example, we have the following text:
 
@@ -19,6 +19,7 @@ The cow jumped over the moon.
 
 Which is manipulated to create individual DOM elements by word:
 
+```
 <span>The </span>
 
 <span>cow </span>
@@ -30,9 +31,11 @@ Which is manipulated to create individual DOM elements by word:
 <span>the </span>
 
 <span>moon.</span>
+```
 
 And an id is assigned to each element:
 
+```
 <span id="e1">The </span>
 
 <span id="e2">cow </span>
@@ -44,17 +47,19 @@ And an id is assigned to each element:
 <span id="e5">the </span>
 
 <span id="e6">moon.</span>
+```
 
-This markup is the foundation of digitizing highlighting behavior: it allows the starting and ending boundaries of a highlighted section to be selected. It also allows additional highlighting boundary elements to be created before and after highlighted text, as well as provide the ability to interactively toggle highlighting. Without this, we can't easily parse or identify starting and ending points other than trying to determine it by other methods such as substring-ing text or using positioning details to identify the current word.
+This markup is the foundation of digitizing highlighting behavior: it allows the starting and ending boundaries of a highlighted section to be selected. It also allows additional highlighting boundary elements to be created before and after highlighted text, as well as provide the ability to interactively toggle highlighting. Without this, we can’t easily parse or identify starting and ending points other than trying to determine it by other methods such as substring-ing text or using positioning details to identify the current word.
 
 ### How do we Highlight?
 
-With our example, I'll describe the history of highlighting functionality that I've been involved in on the project. For this post, let's say our desired emulated highlighted behavior is the following, where "cow jumped over" is highlighted in pink, and "over the" is highlighted in blue:
+With our example, I’ll describe the history of highlighting functionality that I’ve been involved in on the project. For this post, let’s say our desired emulated highlighted behavior is the following, where “cow jumped over” is highlighted in pink, and “over the” is highlighted in blue:
 
 The cow jumped over the moon.
 
 And our HTML markup may look like this to indicate the highlighted layers:
 
+```
 <span id="e1">The </span>
 
 <span id="e2" class="pink">cow </span>
@@ -66,20 +71,24 @@ And our HTML markup may look like this to indicate the highlighted layers:
 <span id="e5" class="blue">the </span>
 
 <span id="e6">moon.</span>
+```
 
 ### Highlighting Iteration 1
 
-One of the challenges with emulating highlighting is that a DOM element can only have one background color. We can't easily layer pink and blue highlights over a specific word to give a layered highlighted effect. So in our example, the pink and blue highlighted words will show up fine, but no color combinations will show up because a node cannot have multiple background colors. During my first iteration on this functionality, I implemented behavior to track the history of our highlights per textual node. The following steps are an example of a use case that demonstrates the highlight overlap:
+One of the challenges with emulating highlighting is that a DOM element can only have one background color. We can’t easily layer pink and blue highlights over a specific word to give a layered highlighted effect. So in our example, the pink and blue highlighted words will show up fine, but no color combinations will show up because a node cannot have multiple background colors. During my first iteration on this functionality, I implemented behavior to track the history of our highlights per textual node. The following steps are an example of a use case that demonstrates the highlight overlap:
 
 - Starting from unhighlighted text, first a user highlights pink:
 
-The cow jumped over the moon.
-- Next, a user highlightes blue:
+The <span style="background-color: pink">cow jumped over</span> the moon.
 
-The cow jumped over the moon.
+- Next, a user highlights blue:
+
+The <span style="background-color: pink">cow jumped</span> <span style="background-color: lightblue">over the</span> moon.
+
 - Next, a user unhighlights blue:
 
-The cow jumped over the moon.
+The <span style="background-color: pink">cow jumped over</span> the moon.
+
 - Finally, a user unhighlights pink:
 
 The cow jumped over the moon.
@@ -88,13 +97,16 @@ Or another simple use case:
 
 - Starting from unhighlighted text, first a user highlights pink:
 
-The cow jumped over the moon.
-- Next, a user highlightes blue:
+The <span style="background-color: pink">cow jumped over</span> the moon.
 
-The cow jumped over the moon.
+- Next, a user highlights blue:
+
+The <span style="background-color: pink">cow jumped</span> <span style="background-color: lightblue">over the</span> moon.
+
 - Next, a user unhighlights pink:
 
-The cow jumped over the moon.
+The cow jumped <span style="background-color: lightblue">over the</span> moon.
+
 - Finally, a user unhighlights pink:
 
 The cow jumped over the moon.
@@ -109,67 +121,73 @@ In the next iteration, I attempted to implement a method that added opaque, abso
 
 In the second iteration, additional colored & opaque nodes were created under the text to provide a layered highlighting effect.
 
-<table cellpadding="0" cellspacing="0" width="100%"><tbody><tr> <td valign="top" width="50%"><br/>
-<p>Unhighlighted markup looked like this:</p><p style="font-size:13px;font-weight:bold;"><span id="e1"><br/>
-    <span class="highlights"></span><br/>
-    The <br/>
-</span><br/>
-<span id="e2" class="pink"><br/>
-  <span class="highlights"></span><br/>
-    cow <br/>
-</span><br/>
-<span id="e3" class="pink"><br/>
-    <span class="highlights"></span><br/>
-    jumped<br/>
-</span><br/>
-<span id="e4" class="pink blue"><br/>
-    <span class="highlights"></span><br/>
-    over<br/>
-</span><br/>
-<span id="e5" class="blue"><br/>
-    <span class="highlights"></span><br/>
-    the<br/>
-</span><br/>
-<span id="e6"><br/>
-    <span class="highlights"></span><br/>
-    moon.<br/>
-</span><br/>
-</p></td> <td valign="top" width="50%"><br/>
-<p>And highlighted markup looked like this:</p><p style="font-size:13px;font-weight:bold;"><span id="e1"><br/>
-    <span class="highlights"></span><br/>
-    The <br/>
-</span><br/>
-<span id="e2" class="pink"><br/>
-    <span class="highlights"><br/>
-        <span class="highlight_pink"></span><br/>
-    </span><br/>
-    cow <br/>
-</span><br/>
-<span id="e3" class="pink"><br/>
-    <span class="highlights"><br/>
-        <span class="highlight_pink"></span><br/>
-    </span><br/>
-    jumped <br/>
-</span><br/>
-<span id="e4" class="pink blue"><br/>
-    <span class="highlights"><br/>
-        <span class="highlight_pink"></span><br/>
-        <span class="highlight_blue"></span><br/>
-    </span><br/>
-    over <br/>
-</span><br/>
-<span id="e5" class="blue"><br/>
-    <span class="highlights"><br/>
-        <span class="highlight_blue"></span><br/>
-    </span><br/>
-    the <br/>
-</span><br/>
-<span id="e6"><br/>
-    <span class="highlights"></span><br/>
-    moon.<br/>
-</span><br/>
-</p></td> </tr>
-</tbody></table>
+<p>Unhighlighted markup looked like this:</p>
+
+```
+<span id="e1">
+    <span class="highlights"></span>
+    The 
+</span>
+<span id="e2" class="pink">
+  <span class="highlights"></span>
+    cow 
+</span>
+<span id="e3" class="pink">
+    <span class="highlights"></span>
+    jumped
+</span>
+<span id="e4" class="pink blue">
+    <span class="highlights"></span>
+    over
+</span>
+<span id="e5" class="blue">
+    <span class="highlights"></span>
+    the
+</span>
+<span id="e6">
+    <span class="highlights"></span>
+    moon.
+</span>
+```
+
+<td valign="top" width="50%"><br/>
+<p>And highlighted markup looked like this:</p>
+
+```
+<span id="e1">
+    <span class="highlights"></span>
+    The 
+</span>
+<span id="e2" class="pink">
+    <span class="highlights">
+        <span class="highlight_pink"></span>
+    </span>
+    cow 
+</span>
+<span id="e3" class="pink">
+    <span class="highlights">
+        <span class="highlight_pink"></span>
+    </span>
+    jumped 
+</span>
+<span id="e4" class="pink blue">
+    <span class="highlights">
+        <span class="highlight_pink"></span>
+        <span class="highlight_blue"></span>
+    </span>
+    over 
+</span>
+<span id="e5" class="blue">
+    <span class="highlights">
+        <span class="highlight_blue"></span>
+    </span>
+    the 
+</span>
+<span id="e6">
+    <span class="highlights"></span>
+    moon.
+</span>
+```
 
 In the above markup, the following should be noted:
 
@@ -208,11 +226,10 @@ $.each($('span.' + highlighted_class), function(i, el) {
 Step by step, the above code does the following:
 
 - For each span node with a specific highlight:
-
-        - Retrieve the array of highlights applied to that node, or create a new array with the new highlight color.
-        - For each highlight, layer an opaque version of that highlight on top of the summation of colors.
-        - Set the background to the final combination of layered highlights.
-        - Store the new array of highlights applied to that node.
+ - Retrieve the array of highlights applied to that node, or create a new array with the new highlight color.
+ - For each highlight, layer an opaque version of that highlight on top of the summation of colors.
+ - Set the background to the final combination of layered highlights.
+ - Store the new array of highlights applied to that node.
 
 The markup is back to the original markup with no additional children elements per text node. Each highlighting interaction triggers a recalculation of the background color per text node based on the data stored to that node.
 
@@ -229,7 +246,7 @@ Additional UI functional requirements include:
 - Functionality to show paragraph numbers, and hide all paragraph numbers when they have no visible children (Hint: advanced jQuery selectors are used here).
 - Ability to toggle display of unhighlighted text. The […] in the above image trigger the unhighlighted text in that section to display, while the left and right arrows trigger the unhighlighted text in that section to be hidden.
 - Ability to toggle display of highlighted text, similar to the toggle of unhighlighted text.
-- Ability to toggle between a "read" and "edit" mode for owners of the text, which allows for these users to interactively add additional highlights and dynamically modify the markup. In the edit mode, additional markup is added to identify these highlighted layers.
+- Ability to toggle between a “read” and “edit” mode for owners of the text, which allows for these users to interactively add additional highlights and dynamically modify the markup. In the edit mode, additional markup is added to identify these highlighted layers.
 - Ability to toggle display of the annotation. In the above image, clicking on the green asterisk toggles this display. No asterisk is shown if there is no annotation.
 - Ability for highlights to encompass HTML nodes that are not individual span elements. For example, highlighted sections may encompass multiple paragraphs and headers of <span> nodes, which is why simply adding a wrapping element to highlights will not work.
 

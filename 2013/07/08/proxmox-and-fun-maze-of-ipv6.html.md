@@ -36,7 +36,7 @@ Mon Jul  8 18:38:59 2013: done.
 [..]
 ```
 
-The following steps would be to either crawl through the "inextricable" maze of the ProxMox (PVE) boot initrd image and probably came up with the solution or find a quick way to deal with this in a clean way without touching the boot process.
+The following steps would be to either crawl through the “inextricable” maze of the ProxMox (PVE) boot initrd image and probably came up with the solution or find a quick way to deal with this in a clean way without touching the boot process.
 
 Since it was all due to ***sysctl*** being called too early in the boot process and then not finding proper IPv6 module already loaded calling it again *later* would suffice. So I simply added the following line to ***/etc/network/interfaces***
 

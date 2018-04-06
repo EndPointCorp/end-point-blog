@@ -21,13 +21,13 @@ Every once in a while as web developers we face the challenge of providing PDF d
 The usual approach is to:
 
 - generate the document with a library / DSL in the language of the backend
-- or - generate *normal html* view and use a utility like [wkhtmltopdf](https://code.google.com/p/wkhtmltopdf/)
+- or—generate *normal html* view and use a utility like [wkhtmltopdf](https://wkhtmltopdf.org/)
 
-That works nice, but what if you’re developing an [SPA](http://en.wikipedia.org/wiki/Single-page_application) app which only consumes JSON data from its backend? Imagine a scenario when the backend isn’t capable of producing responses other than JSON data. What could you do there?
+That works nice, but what if you’re developing an [SPA](https://en.wikipedia.org/wiki/Single-page_application) app which only consumes JSON data from its backend? Imagine a scenario when the backend isn’t capable of producing responses other than JSON data. What could you do there?
 
 ### The solution
 
-Thanks to some very bright folks behind the [jsPDF](http://jspdf.com/) library we have both above mentioned options right inside the browser.
+Thanks to some very bright folks behind the [jsPDF](https://parall.ax/products/jspdf) library we have both above mentioned options right inside the browser.
 
 I strongly encourage you to visit their website. There is a nice live coding editor set up which reflects in real time the PDF your code is producing.
 
@@ -59,7 +59,7 @@ For all of you who don’t know the shortcut yet, here it is:
 git clone https://github.com/MrRio/jsPDF.git
 ```
 
-And in the *doc* directory you will find nicely generated docs out of the project sources - very neat!
+And in the *doc* directory you will find nicely generated docs out of the project sourcesvery neat!
 
 ### Can I generate it just from HTML?
 

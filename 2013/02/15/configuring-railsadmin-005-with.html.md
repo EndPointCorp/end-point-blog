@@ -9,7 +9,7 @@ title: Configuring RailsAdmin 0.0.5 with CKeditor 3.7.2
 
 If you like adventures, read on! Because recently I went trough a really tough one with RailsAdmin 0.0.5 and Ckeditor 3.7.2 in production mode. I only needed to enable the WYSIWYG editor for one of the fields in admin, yet it turned out to be a bit more than just that.
 
-After I installed ckeditor gem, created the custom config file as described in [Ckeditor gem readme](https://github.com/galetahub/ckeditor/blob/master/README.rdoc) and added ckeditor support to the field as suggested by [RailsAdmin configuration tutorial](https://github.com/sferik/rails_admin/wiki/Text), both  frontend and backend in production mode were broken in pieces with JavaScript errors. So what did I do wrong?
+After I installed ckeditor gem, created the custom config file as described in [Ckeditor gem readme](https://github.com/galetahub/ckeditor/blob/master/README.md) and added ckeditor support to the field as suggested by [RailsAdmin configuration tutorial](https://github.com/sferik/rails_admin/wiki/Text), both frontend and backend in production mode were broken in pieces with JavaScript errors. So what did I do wrong?
 
 ### The problem with frontend
 
@@ -36,7 +36,7 @@ as I was getting
 ReferenceError: CKEDITOR is not defined
 ```
 
-Duh! I found a lot of complaints about [ckeditor gem production mode loading issues](https://github.com/galetahub/ckeditor/issues/87) due to the incorrect work with asset pipeline, as well as a [solution that required update to 3.7.3](https://github.com/galetahub/ckeditor/pull/191), but at this point I did not need any ckeditor on the frontend, so I decided to put a sanity check into custom config file that would be useful to have anyway. None of the README's provided sample custom config file or considerations regarding loading order, so I had to improv on this one:
+Duh! I found a lot of complaints about [ckeditor gem production mode loading issues](https://github.com/galetahub/ckeditor/issues/87) due to the incorrect work with asset pipeline, as well as a [solution that required update to 3.7.3](https://github.com/galetahub/ckeditor/pull/191), but at this point I did not need any ckeditor on the frontend, so I decided to put a sanity check into custom config file that would be useful to have anyway. None of the README’s provided sample custom config file or considerations regarding loading order, so I had to improv on this one:
 
 ```javascript
 if (typeof(CKEDITOR) != 'undefined') {
@@ -69,7 +69,7 @@ base_location":"/assets/ckeditor/","options":{"customConfig":"/assets/ckeditor/c
 data-richtext="ckeditor" id="testimonial_content" name="testimonial[content]" rows="3">
 ```
 
-Please, note the explicit hard-coded call to "/assets/ckeditor/config.js". During asset precompilation Ckeditor gem would compile the source from vendor/assets/ckeditor folder into the special resource package that looked like this:
+Please, note the explicit hard-coded call to “/assets/ckeditor/config.js”. During asset precompilation Ckeditor gem would compile the source from vendor/assets/ckeditor folder into the special resource package that looked like this:
 
 ```bash
 $ ls public/assets/ckeditor/

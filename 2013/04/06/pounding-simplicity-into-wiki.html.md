@@ -5,14 +5,14 @@ tags: conference, ruby
 title: Pounding Simplicity into Wiki
 ---
 
-Day two of MountainWest Ruby Conference starts out with a bang! Notable developer and thought leader [Ward Cunningham](http://en.wikipedia.org/wiki/Ward_Cunningham) describes the how he is going about developing his latests ideas behind the wiki. While doing so, Cunningham teaches concepts of innovation and how creativity to help inspire ruby developers.
+Day two of MountainWest Ruby Conference starts out with a bang! Notable developer and thought leader [Ward Cunningham](https://en.wikipedia.org/wiki/Ward_Cunningham) describes the how he is going about developing his latests ideas behind the wiki. While doing so, Cunningham teaches concepts of innovation and how creativity to help inspire ruby developers.
 
 ### Promise
 
 The promise is a basic statement of the desired outcome. Not in a way a mock-up shows the finished product, but the way in which it will affect humanity. Wikipedia gives words, depth, and meaning that ordinary people can depend on every day. The promise of this new kind of wiki is to
 give numbers depth and meaning that ordinary people can depend on every day.
 
-This means data visualization intermixed with context. For example, a weather map can show you numbers on a map to tell you temperatures. A meteorologist doesn't just see a number, he sees the actual weather, the hot and cold, the wind or the rain, etc. Data visualizations like a [wind map](http://hint.fm/wind/) excel at helping users to visually see the wind in region.
+This means data visualization intermixed with context. For example, a weather map can show you numbers on a map to tell you temperatures. A meteorologist doesn’t just see a number, he sees the actual weather, the hot and cold, the wind or the rain, etc. Data visualizations like a [wind map](http://hint.fm/wind/) excel at helping users to visually see the wind in region.
 
 To accomplish this promise, Cunningham implemented a new kind of wiki. The main difference in this new wiki is that the data is federated among several different locations on the web and then assembled in the browser. You can think of it as a traditional mashup. The wiki content is both self generated and programatically generated from data on the web or attached to the web via some device.
 
@@ -22,12 +22,12 @@ To accomplish this promise, Cunningham implemented a new kind of wiki. The main 
 - 1 Binding: Attaches the data to different versions of the page revisions.
 - 2 Attribution: Source is dynamically generated so that it can be tracked back.
 - 3 Link Context: Links to other pages on other servers give hints to tell you where the data originates.
-- 4 Neighborhood: Click on a page that doesn't exist (red link) server looks for similar page on other wikis in the federated network.
+- 4 Neighborhood: Click on a page that doesn’t exist (red link) server looks for similar page on other wikis in the federated network.
 - 5 Search: Global search looks in all the wikis in the federated network.
 
 ### Principle
 
-The principle behind this project is one of discovery. As the development continues, the possibilities for it increase and new thoughts and ideas are discovered. This was talked about in a [talk by Bret Victor called Inventing on Principle](http://vimeo.com/36579366). If you were to compare this to agile, it might look like this:
+The principle behind this project is one of discovery. As the development continues, the possibilities for it increase and new thoughts and ideas are discovered. This was talked about in a [talk by Bret Victor called Inventing on Principle](https://vimeo.com/36579366). If you were to compare this to agile, it might look like this:
 
 <table>
 <colgroup>

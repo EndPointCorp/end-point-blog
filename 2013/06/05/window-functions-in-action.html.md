@@ -11,13 +11,13 @@ title: Window functions in action
 
 *Image by Wikimedia user [Ardfern](https://commons.wikimedia.org/wiki/User:Ardfern)*
 
-Yesterday I ran on to a nice practical application of a number of slightly unusual SQL features, in particular, window functions. PostgreSQL has had window functions for quite a while now (since version 8.4, in fact, the oldest version still officially supported), but even though they're part of the SQL standard, window functions aren't necessarily a feature people use every day. As a bonus, I also threw in some common table expressions (also known as CTEs, also a SQL standard feature), to help break up what could have been a more confusing, complex query.
+Yesterday I ran on to a nice practical application of a number of slightly unusual SQL features, in particular, window functions. PostgreSQL has had window functions for quite a while now (since version 8.4, in fact, the oldest version still officially supported), but even though they’re part of the SQL standard, window functions aren’t necessarily a feature people use every day. As a bonus, I also threw in some common table expressions (also known as CTEs, also a SQL standard feature), to help break up what could have been a more confusing, complex query.
 
 A client of ours noticed a problem in some new code they were working on. It was possible for users to submit duplicate orders to the system in quick succession, by double-clicking or something similar. This was fixed in the code easily enough, but we needed to clean up the duplicate orders in the database. Which meant we had to find them. We defined a group of duplicates as all orders involving the same line items, with one of a set of possible status codes, created in an interval of less than five minutes by the same user.
 
-This discussion of the time interval between two different records should immediately signal "window functions" (or possibly a self-join, but window functions are much easier in this case). A window function takes a set of rows and lets you chop them up into subsets, processing the subsets in various ways. In this case, we want to take all the rows in the orders table with a particular status value, group them by the customer who placed the order as well as by the items in the order, and then evaluate each of those groups.
+This discussion of the time interval between two different records should immediately signal “window functions” (or possibly a self-join, but window functions are much easier in this case). A window function takes a set of rows and lets you chop them up into subsets, processing the subsets in various ways. In this case, we want to take all the rows in the orders table with a particular status value, group them by the customer who placed the order as well as by the items in the order, and then evaluate each of those groups.
 
-As might be expected, the items associated with an order are in a different table from the orders themselves. There are probably several different ways I could have compared the items; I chose to accumulate all the items in an order into an array, and compare the resulting arrays (I imagine this would be awfully slow if orders had many different items attached to them, but it wasn't a problem in this instance). An item consists of its ID value, and an integer quantity; I created a composite type, so I could compare these values as an array.
+As might be expected, the items associated with an order are in a different table from the orders themselves. There are probably several different ways I could have compared the items; I chose to accumulate all the items in an order into an array, and compare the resulting arrays (I imagine this would be awfully slow if orders had many different items attached to them, but it wasn’t a problem in this instance). An item consists of its ID value, and an integer quantity; I created a composite type, so I could compare these values as an array.
 
 ```sql
 CREATE TYPE order_item AS (
@@ -26,7 +26,7 @@ CREATE TYPE order_item AS (
 );
 ```
 
-Now I need a query that will gather all the items on an order into an array. I'll use the [array_agg()](http://www.postgresql.org/docs/9.1/static/functions-aggregate.html) aggregate to do that. While I'm at it, I'll also filter out order status codes I don't want. One important note here is that later, I'll be comparing the results of array_agg() with each other, and array element ordering will matter. So I need to sort the rows as they're being aggregated. Fortunately we've been able to do that easily since version 9.0, with ordered aggregates (NB! many of the features in use in this post are part of the SQL standard; ordered aggregates are a PostgreSQL-specific extension).
+Now I need a query that will gather all the items on an order into an array. I’ll use the [array_agg()](https://www.postgresql.org/docs/9.1/static/functions-aggregate.html) aggregate to do that. While I’m at it, I’ll also filter out order status codes I don’t want. One important note here is that later, I’ll be comparing the results of array_agg() with each other, and array element ordering will matter. So I need to sort the rows as they’re being aggregated. Fortunately we’ve been able to do that easily since version 9.0, with ordered aggregates (NB! many of the features in use in this post are part of the SQL standard; ordered aggregates are a PostgreSQL-specific extension).
 
 ```sql
 SELECT
@@ -53,7 +53,7 @@ The result, taken from a sample data set I created for demonstration purposes, i
 (5 rows)
 ```
 
-Now I need to compare various rows in this list, and that's where window functions come in. A call to a window function looks like any other function call, except that it is followed by a "window definition", which describes the window of rows the function will operate on: how rows are grouped into windows, and optionally, how rows within a window are sorted. Here a query I used to get started.
+Now I need to compare various rows in this list, and that’s where window functions come in. A call to a window function looks like any other function call, except that it is followed by a “window definition”, which describes the window of rows the function will operate on: how rows are grouped into windows, and optionally, how rows within a window are sorted. Here a query I used to get started.
 
 ```sql
 SELECT
@@ -62,9 +62,9 @@ SELECT
 FROM orders
 ```
 
-The *OVER* and subsequent parenthetical expression is the window clause. This one tells PostgreSQL to group all the orders by the user ID that created them, and sort them in ascending order of their creation time. In future iterations I'll need to partition by the items in the order as well, but we're keeping it simple for this query. The first_value() function is the actual window function, and returns the expression it is passed, evaluated in terms of the first row in the window. In this case the sort order is important; without it, there is no guarantee which of the window's rows is considered "first". There are lots of other window functions available, documented [here](http://www.postgresql.org/docs/9.2/static/functions-window.html).
+The *OVER* and subsequent parenthetical expression is the window clause. This one tells PostgreSQL to group all the orders by the user ID that created them, and sort them in ascending order of their creation time. In future iterations I’ll need to partition by the items in the order as well, but we’re keeping it simple for this query. The first_value() function is the actual window function, and returns the expression it is passed, evaluated in terms of the first row in the window. In this case the sort order is important; without it, there is no guarantee which of the window’s rows is considered “first”. There are lots of other window functions available, documented [here](https://www.postgresql.org/docs/9.2/static/functions-window.html).
 
-It's time to start combining these queries together. For this, I like to use common table expressions, which essentially let me define a named view for purposes of just this query. My first such expression will gather the items associated with an order into an array. The second part of the query will use window functions to compare the results of the first part with each other.
+It’s time to start combining these queries together. For this, I like to use common table expressions, which essentially let me define a named view for purposes of just this query. My first such expression will gather the items associated with an order into an array. The second part of the query will use window functions to compare the results of the first part with each other.
 
 ```sql
 WITH order_items_array AS (
@@ -99,7 +99,7 @@ This gives these results:
 (5 rows)
 ```
 
-This shows the order ID, user ID, and creation timestamp, as well as the ID and creation timestamp of the first order in the window each row belongs to. Note that in order to avoid having to retype the same long window definition twice, I used an alternate syntax whereby I created a named window definition, and referred to that name. Anyway, you can see that the first two rows have the same first_id value; this means they're duplicates, and we want to get rid of one of them. You'll have to trust me that that's the only duplicated order in my sample database; suffice it to say that these results are, in fact, correct. I'll decide (because it turns out to be easier this way) to keep the earliest of the duplicate orders, so from the results above, I can see that I want to remove order ID 2. It would be nice, though, to have a list of just the order IDs I need to remove without any other information. Even better, a list of SQL commands to run to remove them. Like this:
+This shows the order ID, user ID, and creation timestamp, as well as the ID and creation timestamp of the first order in the window each row belongs to. Note that in order to avoid having to retype the same long window definition twice, I used an alternate syntax whereby I created a named window definition, and referred to that name. Anyway, you can see that the first two rows have the same first_id value; this means they’re duplicates, and we want to get rid of one of them. You’ll have to trust me that that’s the only duplicated order in my sample database; suffice it to say that these results are, in fact, correct. I’ll decide (because it turns out to be easier this way) to keep the earliest of the duplicate orders, so from the results above, I can see that I want to remove order ID 2. It would be nice, though, to have a list of just the order IDs I need to remove without any other information. Even better, a list of SQL commands to run to remove them. Like this:
 
 ```sql
 WITH order_items_array AS (
@@ -133,6 +133,6 @@ WITH order_items_array AS (
 (1 row)
 ```
 
-So by combining common table expressions, ordered aggregates, composite types, arrays, and window functions, we've successfully cleaned up this database. Until we find another application bug...
+So by combining common table expressions, ordered aggregates, composite types, arrays, and window functions, we’ve successfully cleaned up this database. Until we find another application bug...
 
 

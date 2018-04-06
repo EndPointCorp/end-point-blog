@@ -19,7 +19,7 @@ It will store all values of column i from table test. This index can be used wit
 SELECT * FROM test WHERE i < 100 ORDER BY i;
 ```
 
-## Functional Indexes
+### Functional Indexes
 
 There is also something I like most. Index can store all values you want, they don’t need to be values from the table. You can use values calculated from the table columns. They will be sorted, so searching with those indexes will be pretty fast.
 
@@ -35,7 +35,7 @@ The main rule is: this index can be used if you have the same function call in y
 SELECT * FROM test WHERE lower(i) = 'aaa';
 ```
 
-## Example
+### Example
 
 Let’s check something more complicated. My test table looks like:
 
@@ -53,7 +53,7 @@ This way there are 500k rows.
 
 I need to get two row sets from database. First I will get the rows with dates from the last 10 days. Later I will get all rows with dates from current year.
 
-### The Last 10 Days
+#### The Last 10 Days
 
 I can get the rows with dates from the last 10 days like:
 
@@ -110,7 +110,7 @@ postgres=# explain analyze select t from test where t::date > (now() - '10 days'
 (3 rows)
 ```
 
-### All Rows for This Year
+#### All Rows for This Year
 
 You can get current year from a timestamp or date value with the extract function.
 
@@ -167,7 +167,7 @@ postgres=# explain analyze select t from test where extract(year from t) = extra
 (3 rows)
 ```
 
-## Summary
+### Summary
 
 As you can see functional indexes can be used for storing calculated values which you can use for searching. In other database engines this can be achieved with additional columns storing those values (updated with triggers or application) or materialized views.
 

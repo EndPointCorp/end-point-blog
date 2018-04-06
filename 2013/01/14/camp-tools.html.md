@@ -5,7 +5,7 @@ tags: shell, camps
 title: Camp tools
 ---
 
-[Devcamps](http://www.devcamps.org/) are such a big part of my everyday work that I can't imagine life without them. Over the years, I developed some short-cuts in navigating camps that I also can't live without: I share them below.
+[Devcamps](http://www.devcamps.org/) are such a big part of my everyday work that I can’t imagine life without them. Over the years, I developed some short-cuts in navigating camps that I also can’t live without: I share them below.
 
 ```
 function camp_top() {
@@ -45,11 +45,11 @@ function what_camp() {
 }
 ```
 
-("cat_root" and "pages_root" are very [Interchange](http://www.icdevgroup.org/i/dev)-specific; you may find other short-cuts more useful in your particular camp.)
+(“cat_root” and “pages_root” are very [Interchange](http://www.icdevgroup.org/i/dev)-specific; you may find other short-cuts more useful in your particular camp.)
 
-There's nothing terribly ground-breaking here, but if bash is not your native shell-tongue, then you might find these useful.
+There’s nothing terribly ground-breaking here, but if bash is not your native shell-tongue, then you might find these useful.
 
-What I do is to stash these somewhere like "$HOME/.bash_camps", then alter my .bashrc:
+What I do is to stash these somewhere like “$HOME/.bash_camps”, then alter my .bashrc:
 
 ```
 # Source campy definitions
@@ -58,4 +58,4 @@ if [ -f ~/.bash_camps ]; then
 fi
 ```
 
-That's all it takes. Have you a camp-y shell script, function, or alias? Please share in the comments!
+That’s all it takes. Have you a camp-y shell script, function, or alias? Please share in the comments!

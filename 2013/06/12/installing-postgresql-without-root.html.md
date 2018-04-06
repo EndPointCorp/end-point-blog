@@ -9,26 +9,26 @@ PostgreSQL can be installed using installers prepared for your operation system.
 
 The only way to install Postgres without root privileges, in home directory, is to compile it from sources. That’s not very difficult.
 
-## Download Sources
+### Download Sources
 
 First of all you need to download sources. I use Github for getting the latest sources. There is [Postgres Github mirror](https://github.com/postgres/postgres). I clone that, but you could just download [zip file](https://github.com/postgres/postgres/archive/master.zip).
 
 Unpack it somewhere, and you have the Postgres sources you need.
 
-## Install Needed Software
+### Install Needed Software
 
-For compiling Postgres you will need some libraries and programs. The complete list can be found in [Postgres documentation](http://www.postgresql.org/docs/9.2/static/install-requirements.html).
+For compiling Postgres you will need some libraries and programs. The complete list can be found in [Postgres documentation](https://www.postgresql.org/docs/9.2/static/install-requirements.html).
 
 I’m using Ubuntu, the packages I use for compiling Postgres are:
 
-- gcc – C compiler
-- libreadline6, libreadline6-dev – readline support
-- zlib1g, zlib1g-dev – compression library used internally by Postgres
-- libpython2.7, libpython2.7-dev – for compiling with plPython support
+- gcc—C compiler
+- libreadline6, libreadline6-dev—readline support
+- zlib1g, zlib1g-dev—compression library used internally by Postgres
+- libpython2.7, libpython2.7-dev—for compiling with plPython support
 
 If you are using different system, or different system/Postgres version, then your packages/libraries can be named differently.
 
-## Configure
+### Configure
 
 Now you should enter the directory where your sources are and run below command for source configuration:
 
@@ -44,7 +44,7 @@ PYTHON parameter points to current python binary installation.
 
 The configure command should finish without any errors. If you have any errors, most probably you don’t have some needed libraries installed.
 
-## Compile
+### Compile
 
 If configure succeeded, you can compile the sources. It is simple:
 
@@ -56,7 +56,7 @@ The -j parameter allows for this maximum number of jobs at the same time.
 
 My computer has 4 cores, I want to use all of them, this way compilation time will be much shorter. On my laptop compilation with 4 cores takes 1 minute 26 seconds. Using one core is almost 4 times longer.
 
-## Install
+### Install
 
 If compilation ended without error, you can install the database. Installation copies all files into the directory from the --prefix parameter. For installation just run:
 
@@ -73,7 +73,7 @@ This should create four directories in ~/postgres/
 * share
 ```
 
-## Create database
+### Create database
 
 I’m going to keep the database in the same directory as the installed files. The data will be at ~/postgres/data directory. For this I need to use initdb program, but not this one installed at system level, but this one from ~/postgres/bin/ directory:
 
@@ -128,7 +128,7 @@ or
 
 Take a look at the last couple of line. This shows you exact commands needed for running Postgres at this location with this database.
 
-## Run
+### Run
 
 Let’s run, I will use the first command, the log lines will be printed on console:
 
@@ -139,7 +139,7 @@ LOG:  database system is ready to accept connections
 LOG:  autovacuum launcher started
 ```
 
-## Connect
+### Connect
 
 Connect to the database. One important notice, you should use the psql program which you’ve already installed:
 
@@ -176,17 +176,17 @@ postgres=# show data_directory ;
 (1 row)
 ```
 
-## Configuration
+### Configuration
 
 All configuration files are stored in the data directory: ~/postgres/data. If you want to run multiple Postgres versions on the same machine, they must have different data directories and different ports. The port number can be changed in ~/postgres/data/postgresql.conf.
 
-## Deleting Installation
+### Deleting Installation
 
-If you want to delete the installation – nothing easier. Just stop the Postgres if it is running, and delete the whole ~/postgres/ directory.
+If you want to delete the installation—nothing easier. Just stop the Postgres if it is running, and delete the whole ~/postgres/ directory.
 
-If you want to delete the whole data – just stop Postgres if it is running, and delete ~/postgres/data directory. Then you can run initdb once again to have a brand new database.
+If you want to delete the whole data—just stop Postgres if it is running, and delete ~/postgres/data directory. Then you can run initdb once again to have a brand new database.
 
-## Summary
+### Summary
 
 I know that there are many ways of installing, and compiling Postgres in local directory. I know that there can be made some more advanced tweaks and automations. I also have my makefile with some default values.
 

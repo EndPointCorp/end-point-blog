@@ -18,7 +18,7 @@ Not having root or sudo access on the machine I embarked on a sligthly hacky jou
 
 ### Ruby 2.0
 
-After reading Mike Farmer’s [blog post](/blog/2013/04/04/today-first-speaker-at-mwrc-is-one-and) about Ruby 2.0 and tons of other material about it on the Internet, I wanted to get a feeling of how faster & greater the new Ruby is. It’s always great also to stay up-to-date with latest technologies. It’s great for me as a developer, and more importantly - it’s great for our clients.
+After reading Mike Farmer’s [blog post](/blog/2013/04/04/today-first-speaker-at-mwrc-is-one-and) about Ruby 2.0 and tons of other material about it on the Internet, I wanted to get a feeling of how faster & greater the new Ruby is. It’s always great also to stay up-to-date with latest technologies. It’s great for me as a developer, and more importantly—it’s great for our clients.
 
 ### Importance of libreadline in development with Ruby
 
@@ -43,7 +43,7 @@ And you should be able now to have available latest Ruby build to install:
 rbenv install 2.0.0-p195
 ```
 
-If you want to install Ruby compiled with support for libreadline, you have to have it installed in your system  **before** compiling the build with *rbenv install*.
+If you want to install Ruby compiled with support for libreadline, you have to have it installed in your system **before** compiling the build with *rbenv install*.
 
 If you have access to root or sudo on your system, the easiest way is to e. g:
 
@@ -61,7 +61,7 @@ yum install readline-devel
 
 ### Installing libreadline from sources
 
-In my case - I had to download sources and compile them myself. Luckily the system had all needed essential packages installed for building it.
+In my case—I had to download sources and compile them myself. Luckily the system had all needed essential packages installed for building it.
 
 ```bash
 wget "ftp://ftp.cwru.edu/pub/bash/readline-6.2.tar.gz"
@@ -121,7 +121,7 @@ bundle
 
 Last thing I wanted to do, was to try if I could upgrade Rails even further and have a working Rails4 setup. This was impossible unfortunately since RailsAdmin isn’t yet compatible with it [as stated here](https://github.com/sferik/rails_admin/issues/1443).
 
-I conclude that latest Ruby is quite usable right now. If you don't mind the quirks with the readline - you're pretty safe to upgrade. This assumes though that your app doesn't use any incompatible elements.
+I conclude that latest Ruby is quite usable right now. If you don’t mind the quirks with the readline—you’re pretty safe to upgrade. This assumes though that your app doesn’t use any incompatible elements.
 
 The main Ruby site describes them like so:
 
