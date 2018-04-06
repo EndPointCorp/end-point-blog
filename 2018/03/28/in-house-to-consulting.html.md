@@ -5,7 +5,8 @@ tags: tips, software
 gh_issue_number: 1398
 ---
 
-<img src="/blog/2018/03/27/in-house-to-consulting/burst-image.jpg" alt="In House vs. Consulting" />
+<img src="/blog/2018/03/28/in-house-to-consulting/burst-image.jpg" alt="In House vs. Consulting" /><br />
+<small>[Photo by Matthew Henry of Burst](https://burst.shopify.com/photos/business-team-meeting-in-boardroom)</small>
 
 Hi! I’m Steph. I’ve been working 10+ years now as a software engineer, and I’ve spent ~4 years of that as an in-house developer at 2 different companies and 7+ years as a consultant here at End Point and as an independent contractor. Whenever I’ve started a new position, I get asked “What’s it like on the other side?” or something along the lines of “Is the grass greener?” I thought my answer to this was good blog fodder, so here we are.
 
@@ -24,7 +25,7 @@ If you google “in-house vs. consultant”, much of the results are written fro
 
 * Working as a consultant often offers the ability to be exposed to many technologies, many technology stacks, and more variety.
 * From my experience, adaptability is highly valued in the consulting space because you are exposed to different technology stacks and development processes. It is valuable to move seamlessly between teams and technologies.
-* Depending on how your company is set up, there can be a wide range of types of client interaction. Some clients want to learn how to make website changes and your role is to support them in that desire. Other clients may be hands-off all dev work, expecting you to have the expertise to drive technology choices. Clients may have very limited budgets and wants a consultant to provide the most value to them. Client management is very important here.
+* Depending on how your company is set up, there can be a wide range of types of client interaction. Some clients want to learn how to make website changes and your role is to support them in that desire. Other clients may be hands-off all dev work, expecting you to have the expertise to drive technology choices. Clients may have very limited budgets and want a consultant to provide the most value to them. Client management is very important here.
 * In consulting, from my experience, it is not unusual to participate in sales efforts to provide estimates or technical solutions for proposals.
 * While I find many successful software engineering consultants have a breadth of knowledge, companies can often grow talent in specific areas or with specific hires to gain a depth of knowledge in specific technologies. The benefit to other employees is the accessibility to expertise that may translate to better efficiency for clients (for example when I ping other expert co-workers when a question is not in my skillset).
 * By nature, consulting is diverse, so job stability may be decent if clients are overall successful and you are successful in working with them.
