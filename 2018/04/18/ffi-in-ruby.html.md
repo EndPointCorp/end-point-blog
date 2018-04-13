@@ -87,7 +87,7 @@ end
 
 The full documentation on the types mappings can be found here: [https://github.com/ffi/ffi/wiki/Types](https://github.com/ffi/ffi/wiki/Types)
 
-We're now ready to wrap our newly attached external function around a convenient `Ruby` code. We'll create a `to_visual_indices` method on the `Bidi` module that will take a string and a symbol representing the directionality. The directionality will expect `:rtl` for the RTL direction. Here's the listing of how it looks like:
+We're now ready to wrap our newly attached external function inside a convenient `Ruby` code. We'll create a `to_visual_indices` method on the `Bidi` module that will take a string and a symbol representing the directionality. The directionality will expect `:rtl` for the RTL direction. Here's the listing of how it looks like:
 
 ```ruby
 module Bidi
