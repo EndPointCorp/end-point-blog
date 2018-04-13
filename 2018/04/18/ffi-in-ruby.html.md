@@ -1,4 +1,8 @@
-# Using FFI in Ruby
+---
+author: Kamil Ciemniewski
+title: "Using FFI in Ruby"
+tags: ruby, ffi, c
+---
 
 `Ruby` for many years has been proving to be an amazing language. It's one of the most popular for creating web applications but also DevOps / systems administration tools. 
 
