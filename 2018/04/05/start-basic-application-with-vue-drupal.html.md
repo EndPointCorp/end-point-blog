@@ -2,17 +2,16 @@
 author: Piotr Hankiewicz
 title: "Start basic application with Vue.js 2 and Drupal 8"
 tags: vue, drupal, javascript, php, open-source
-gh_issue_number:
+gh_issue_number: 1405
 ---
 
 <img src="/blog/2018/04/05/start-basic-application-with-vue-drupal/vue-and-drupal.jpg" width="1200" alt="Vue.js 2 and Drupal 8" />
-
 
 ### Introduction
 
 The purpose of creating this post is to show how fast can you build web applications with Vue.js on the front-end and Drupal on the back-end side.
 
-Let’s call our project "Awesome Nerds".
+Let’s call our project “Awesome Nerds”.
 
 ### What do we need?
 
@@ -26,7 +25,7 @@ Let’s call our project "Awesome Nerds".
 
 ### Step by step
 
-Here's what we're going to do:
+Here’s what we’re going to do:
 
 * Install Vagrant, VirtualBox, and Git
 * Setup a new Drupal 8 project that will be our back-end project
@@ -43,7 +42,7 @@ Open your console and run:
 
 `$ sudo apt-get update`
 
-`$ sudo apt-get install ansible` - installing ansible
+`$ sudo apt-get install ansible` - installing Ansible
 
 `$ wget ‘https://releases.hashicorp.com/vagrant/2.0.2/vagrant_2.0.2_x86_64.deb’ && dpkg -i vagrant_2.0.2_x86_64.deb` - installing Vagrant
 
@@ -98,9 +97,9 @@ Quit Vim and run:
 
 `$ vagrant up`
 
-It will take a while to setup everything, you can get a coffee or browse some memes or go to the next chapter and start creating our front-end project.
+It will take a while to set up everything, you can get a coffee or browse some memes or go to the next chapter and start creating our front-end project.
 
-When it’s ready we will have a running Drupal 8 setup with MySQL, PHP 7 and Apache (you can configure this stack in `default.config.yml` if you prefer nginx for example).
+When it’s ready we will have a running Drupal 8 setup with MySQL, PHP 7, and Apache (you can configure this stack in `default.config.yml` if you prefer nginx for example).
 
 Drupal project files are in the `drupal` directory and that’s the only folder that you would want to add to a project Git repository.
 
