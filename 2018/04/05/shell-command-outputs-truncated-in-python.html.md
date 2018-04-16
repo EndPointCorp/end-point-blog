@@ -1,13 +1,20 @@
 ---
 author: "Selvakumar Arumugam"
 title: "Shell Command Outputs Truncated in Python"
-tags: python, shell, execv, execve, environment
+tags: python, shell, environment
+gh_issue_number: 1403
 ---
 
-Recently I was working on a python script to do some parsing and processing on the shell commands output in Ubuntu OS. The output showed up in python console was truncated. The below sections will walk through the debugging process to identify the root cause and implement a solution with detailed explanation.
+<img src="/blog/2018/04/05/shell-command-outputs-truncated-in-python/programmers-reviewing-code-on-computer_925x.jpg" alt="Two guys working at computers" /><br />
+<small>[Photo by Sarah Pflug of Burst](https://burst.shopify.com/photos/programmers-reviewing-code-on-computer)</small>
 
-###Problem###
-The following code block shows the output of a shell command which lists the installed packages name and version in Ubuntu.
+Recently I was working on a Python script to do some parsing and processing on the output of shell commands in Ubuntu. The output that showed up was truncated.
+
+The below sections will walk through the debugging process to identify the root cause and implement a solution with detailed explanation, using Python 2.
+
+### Problem
+
+The following code block shows the output of a shell command which lists the installed packages, name and version, in Ubuntu.
 
 ```bash
 # dpkg -l | grep ^ii | awk '{print $2 "    " $3}'
@@ -23,10 +30,11 @@ apache2-utils    2.4.7-1ubuntu4.18
 apparmor    2.10.95-0ubuntu2.6~14.04.1
 ```
 
-The same shell command executed in python console but output shows truncated values for few packages(accountsservice, adduser, apache2, etc...) version.
+The same shell command executes in the Python console but the output shows truncated values for a few packages’ versions, for example, accountsservice, adduser, apache2, etc.
 
 ```python
->>> installed_packages = subprocess.check_output(['dpkg -l | grep ^ii | awk \'{print $2 "    " $3}\'']     shell=True)
+>>> import subprocess
+>>> installed_packages = subprocess.check_output(['dpkg -l | grep ^ii | awk \'{print $2 "    " $3}\''], shell=True)
 >>> print installed_packages
 accountsservice    0.6.35-0ubuntu7.
 acl    2.2.52-1
@@ -40,8 +48,9 @@ apache2-utils    2.4.7-1ubuntu4.1
 apparmor    2.10.95-0ubuntu2
 ```
 
-###Root Cause###
-To identify the root cause of the problem, started with source command `dpkg -l` command without any filters and processing. I have noticed two different results for shell this command with and without less command. The less command showed the complete result with scrolling as below.
+### Root Cause
+
+To identify the root cause of the problem, I started with source command `dpkg -l` command without any filters and processing. I have noticed two different results for this command, with and without less command. The less command showed the complete result with scrolling as below.
 
 ```bash
 # dpkg -l | less
@@ -64,14 +73,13 @@ rc  apache2.2-common                      2.2.22-1ubuntu1.11                    
 ii  apparmor                              2.10.95-0ubuntu2.6~14.04.1                 amd64        user-space parser utility for AppArmor
 ```
 
-But `dpkg -l` prints on the screen with truncated data due to the columns width constraint. The truncated values exactly matches with result of python console output. The output column width is decided by environment variable COLUMNS and commands restricting the column width in output based on COLUMNS value.
+But `dpkg -l` prints on the screen with truncated data due to the columns width constraint. The truncated values exactly match the Python console output. The output column width is decided by environment variable COLUMNS and commands restrict the column width in output based on COLUMNS value.
 
 ```bash
-# echo $COLUMNS 
+# echo $COLUMNS
 127
 
 # dpkg -l
-
 Desired=Unknown/Install/Remove/Purge/Hold
 | Status=Not/Inst/Conf-files/Unpacked/halF-conf/Half-inst/trig-aWait/Trig-pend
 |/ Err?=(none)/Reinst-required (Status,Err: uppercase=bad)
@@ -91,8 +99,9 @@ rc  apache2.2-common       2.2.22-1ubuntu1. amd64            Apache HTTP Server 
 ii  apparmor               2.10.95-0ubuntu2 amd64            user-space parser utility for AppArmor
 ```
 
-###Solution###
-The subprocess module of python provides complete output of the shell command when env={} passed to check_output function as argument. Below shell command in python console shows the output without any truncation when env is passed as argument. In this way, we can achieve complete output of shell commands in python.
+### Solution
+
+The subprocess module of Python provides complete untruncated output of the shell command when the argument `env={}` is passed to check_output function:
 
 ```
 >>> installed_packages = subprocess.check_output(['dpkg -l | grep ^ii | awk \'{print $2 "    " $3}\''], shell=True, env={})
@@ -109,52 +118,50 @@ apache2-utils    2.4.7-1ubuntu4.18
 apparmor    2.10.95-0ubuntu2.6~14.04.1
 ```
 
-###Explanation###
-Curious to konw what env argument does behind the scenes. The check_output function uses C library functions execv or execve for processing. It choosing either of these functions based env argument. 
+### Explanation
+
+Curious to know what is happening behind the scenes? The check_output function uses C library functions `execv` or `execve` for processing. It chooses the function based on the `env` argument.
 
 Reference:
 
- - [subprocess doc](https://docs.python.org/2/library/subprocess.html)
+ - [subprocess documentation](https://docs.python.org/2/library/subprocess.html)
 
- - [subprocess.py](https://github.com/python/cpython/blob/master/Lib/subprocess.py)
+ - [subprocess.py source](https://github.com/python/cpython/blob/master/Lib/subprocess.py)
 
- - [posixsubprocess.c](https://github.com/google/python-subprocess32/blob/master/_posixsubprocess.c)
+ - [posixsubprocess.c source](https://github.com/google/python-subprocess32/blob/master/_posixsubprocess.c)
+
+When no env argument is passed to `subprocess.check_output`, the `os.execv` function is called.
+
+When an env argument is passed to `subprocess.check_output`, the `os.execve` function is called.
+
+```c
+for (i = 0; exec_array[i] != NULL; ++i) {
+    const char *executable = exec_array[i];
+    if (envp) {
+        execve(executable, argv, envp);
+    } else {
+        execv(executable, argv);
+    }
+```
+
+What makes the `execv` and `execve` functions produce different output?
+
+The `execv` function passes through the shell COLUMNS variable which leads to truncating output columns to 127 width, like our reference system.
 
 ```
-when env argument is not passed to subprocess.check_output, os.execv function is called
-when env={} argument is passed to subprocess.check_output, os.execve function is called
-
-        for (i = 0; exec_array[i] != NULL; ++i) {
-            const char *executable = exec_array[i];
-            if (envp) {
-                execve(executable, argv, envp);
-            } else {
-                execv(executable, argv);
-            }
-            if (errno != ENOENT && errno != ENOTDIR && saved_errno == 0) {
-                saved_errno = errno;
-            }
-```
-What makes execv and execve functions to produce different output? 
-
-`execv` function using the shell COLUMNS variable which leads to truncating output columns to 127 width as per reference system.
-
-```
-# echo $COLUMNS 
+# echo $COLUMNS
 127
 
 >>> print subprocess.check_output(['dpkg -l | grep libqtcore4'], shell=True)
 ii  libqtcore4:amd64          4:4.8.5+git192-g0 amd64             Qt 4 core module
 
->>> print subprocess.check_output(['dpkg -l | grep libqtcore4'], shell=True, env={'COLUMNS':'127'})                            
+>>> print subprocess.check_output(['dpkg -l | grep libqtcore4'], shell=True, env={'COLUMNS':'127'})
 ii  libqtcore4:amd64          4:4.8.5+git192-g0 amd64             Qt 4 core module
+```
+
+The `execve` function uses additional argument environment variables and it is based on the `environ` function. It uses environment variables available in env command which doesn't have COLUMNS initialised. So output values returned without any column width restriction.
 
 ```
-`execve` function using additional argument environment variables and it is based on `environ` function. It uses environment variables available in env command which doesn't have COLUMNS initialised. So output values returned without any column width restriction.
-
-```
-# env | grep COLUMNS
-
 >>> print subprocess.check_output(['dpkg -l | grep libqtcore4'], shell=True, env={})
 ii  libqtcore4:amd64                      4:4.8.5+git192-g085f851+dfsg-2ubuntu4.1    amd64        Qt 4 core module
 
@@ -163,8 +170,8 @@ ii  libqtcore4:amd64                      4:4.8.5+git192-g085f851+dfsg-2ubuntu4.
 
 ```
 
-For more details refer man pages of `execv, execve, environ`.
+For more details refer to the man pages of `execv`, `execve`, `environ`.
 
-###Conclusion###
-It is always good to pass env={} argument to subprocess.check_output function whenever processing the shell commands output in python. It helps avoid unstable results in down the line due to truncated values.
+### Conclusion
 
+It is always good to pass `env={}` argument to `subprocess.check_output` function whenever processing shell command output in Python. It helps avoid unstable results down the line due to truncated values.
