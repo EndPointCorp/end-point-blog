@@ -1,6 +1,6 @@
 ---
 author: Joe Marrero
-tags: linux, open-source, tools
+tags: linux, open-source, tools, c
 title: A Collaborative Timezone Utility
 gh_issue_number: 1334
 ---

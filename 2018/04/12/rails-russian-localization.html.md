@@ -1,7 +1,7 @@
 ---
 author: Steph Skardal
 title: "Ruby on Rails: Russian Translation and Pluralization"
-tags: ruby-on-rails, rails, ruby, localization
+tags: rails, ruby, localization
 gh_issue_number: 1404
 ---
 

@@ -1,7 +1,7 @@
 ---
 author: Liz Flyntz
 title: "Hue’s on First: How we used responsive bulbs to join software and hardware for a busy medical practice"
-tags: case-study, design, ux, iot, architecture
+tags: case-study, design, user-interface, iot, architecture
 gh_issue_number: 1376
 ---
 

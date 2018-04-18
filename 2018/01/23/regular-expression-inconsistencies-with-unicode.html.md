@@ -1,7 +1,7 @@
 ---
 author: Phin Jensen
 title: Regular Expression Inconsistencies With Unicode
-tags: python, ruby, javascript, go, perl, dotnet, php, unicode
+tags: python, ruby, javascript, golang, perl, dotnet, php, unicode
 gh_issue_number: 1368
 ---
 

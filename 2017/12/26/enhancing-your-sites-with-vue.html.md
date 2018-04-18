@@ -1,7 +1,7 @@
 ---
 author: "Greg Davidson"
 title: "Enhancing Your Sites with Vue.js"
-tags: javascript, html, frameworks, vuejs
+tags: javascript, html, frameworks, vue
 gh_issue_number: 1360
 ---
 
