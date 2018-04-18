@@ -4,7 +4,7 @@ title: "RailsConf 2018: Day One"
 tags: ruby-on-rails, rails, ruby, localization
 ---
 
-<img src="/blog/2018/04/17/railsconf-2018-day-one.png" alt="RailsConf" />
+<img src="/blog/2018/04/17/railsconf.png" alt="RailsConf" />
 <small>[RailsConf](https://railsconf.com/)</small>
 
 It's day one of [RailsConf 2018](https://railsconf.com/), and I'm in Pittsburgh with baby Ingrid (daycare FTW!). This is my 8th time at RailsConf and third time with a kid (SELECT DISTINCT kid FROM skardals). In my first few years of attendance, [starting in 2009](https://www.endpoint.com/blog/2009/05/06/cinco-de-rails), I absorbed much more on the technical side, but the talks that have struck a chord in recent years of attendance have been more on the side of the human element of software and software engineering.
