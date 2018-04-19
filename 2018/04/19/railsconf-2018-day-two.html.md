@@ -20,7 +20,7 @@ In consulting, I find this applicable in a couple of scenarios:
 
 ### Drop the Nots
 
-Laura says, “We often reach for denial or communicate in forms of negatives instead of answering directly.” Nots enable misunderstanding. Instead of denial or avoidance, answer directly and taking accountability can ultimately build a better long term relationship between those who are communicating.
+Laura says, “We often reach for denial or communicate in forms of negatives instead of answering directly.” Nots enable misunderstanding. Instead of denial or avoidance, answering directly and taking accountability can ultimately build a better long term relationship between those who are communicating.
 
 Here are some examples of how we might use nots:
 
@@ -48,7 +48,7 @@ Common phrasing pitfalls are:
 
 The final bit of advice that Laura gave was to praise in public and critique in private. Praise is recognition that is motivating on the receiving end. Everyday praise is valuable.
 
-Critiques are best given and received in private, not guided by emotions. Remember that the the person receiving critiques may not yet realize what they said or did was not ideal, so be kind and patient to that person. Again, I see this as very applicable in both the context of code reviews and parenting. The author of a new feature may not be aware of best practices in the specific code framework, just like a child may not realize that coloring on furniture is not the best practice use of crayons.
+Critiques are best given and received in private, not guided by emotions. Remember that the person receiving critiques may not yet realize what they said or did was not ideal, so be kind and patient to that person. Again, I see this as very applicable in both the context of code reviews and parenting. The author of a new feature may not be aware of best practices in the specific code framework, just like a child may not realize that coloring on furniture is not the best practice use of crayons.
 
 Thanks, Laura, for your talk!
 
