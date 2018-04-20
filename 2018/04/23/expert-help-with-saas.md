@@ -4,7 +4,7 @@ title: Expert Help with Your SaaS System
 tags: saas, big comemrce, shopify, wordpress, design, project management
 ---
 
-<img src="/blog/2018/04/23/expert-help-with-saas/123go.jpg" width="400" height="300" alt="123Go" />
+<img src="/blog/2018/04/23/123go.jpg" width="400" height="300" alt="123Go" />
 
 Are you thinking about starting a new website and using BigCommerce, Shopify, or WooCommerce? The software-as-a-service offerings on the market today can help you get a great-looking, low-cost website up and running quickly, but you may need more help than you first expect. In order to get the most out of your site, ecommerce consultants like End Point can guide you through setup, customize your site to fit your brand, manage all of your technical requirements, and help drive traffic to your site. This post is an overview of services we offer to clients looking for a SaaS solution. 
 
