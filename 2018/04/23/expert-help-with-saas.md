@@ -1,7 +1,7 @@
 ---
 author: Elizabeth Garrett Christensen and Jon Allen
 title: Expert Help with Your SaaS System
-tags: saas, big comemrce, shopify, wordpress, design, project management
+tags: saas, big commerce, shopify, wordpress, design, project management
 ---
 
 <img src="/blog/2018/04/23/123go.jpg" width="400" height="300" alt="123Go" />
