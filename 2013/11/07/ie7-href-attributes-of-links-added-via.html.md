@@ -13,7 +13,7 @@ I ran into this issue the other day while testing a new feature for a client sit
     <a href="#panel3">More Info</a>
 ```
 
-Each of the links pointed to their corresponding counterparts which had also been added to the page. The JavaScript code in question responded to clicks on the "More Info" links and used their href attribute as a jQuery selector:
+Each of the links pointed to their corresponding counterparts which had also been added to the page. The JavaScript code in question responded to clicks on the “More Info” links and used their href attribute as a jQuery selector:
 
 ```js
 $('.my-links').on('click', function(e) {
@@ -24,9 +24,9 @@ $('.my-links').on('click', function(e) {
   
 ```
 
-### Links "Enhanced" By IE7
+### Links “Enhanced” By IE7
 
-As I debugged in IE7, I determined that it was adding the fully qualified domain name to the links. Instead of "#panel2" the href attributes were set to "http://example.com/#panel2" which broke things — especially my jQuery selectors. Fixing the issue was straightforward at this point:
+As I debugged in IE7, I determined that it was adding the fully qualified domain name to the links. Instead of “#panel2” the href attributes were set to “http://example.com/#panel2” which broke things — especially my jQuery selectors. Fixing the issue was straightforward at this point:
 
 ```js
 // fix hrefs in IE7 and 6

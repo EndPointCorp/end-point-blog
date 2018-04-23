@@ -9,9 +9,9 @@ This time I will describe two things: installing a new extension using pgxn and 
 
 The last time I was describing a couple of nice features of the incoming PostgreSQL 9.3, I wrote about [merging JSONs in Postgres](/blog/2013/07/29/merging-jsons-in-postgresql) using a stored procedure written in Python. In one of the comments there was a suggestion that I should try using JavaScript for that, as JSON is much more native there.
 
-So let's try JavaScript with PostgreSQL.
+So let’s try JavaScript with PostgreSQL.
 
-## Installing PL/V8
+### Installing PL/V8
 
 PL/V8 is a PostgreSQL procedural language powered by V8 JavaScript Engine. This way we can have JavaScript backed, something funny which could be used to create something like NoSQL database, with JavaScript procedures and storing JSON.
 
@@ -19,9 +19,9 @@ To have this procedural language, you need to install it as a separate extension
 
 I keep my PostgreSQL in ~/postgres directory. The ~/postgres/bin directory is added to environmnent $PATH variable. It is important, as the further steps will use pg_config program, which prints lots of information about the PostgreSQL installation.
 
-The code for PL/V8 can be found in [the project's PGXN page](http://pgxn.org/dist/plv8/). You can of course download source, and install it. However there is much simpler way to do it. PGXN provides a tool for managing extensions stored there.
+The code for PL/V8 can be found in [the project’s PGXN page](https://pgxn.org/dist/plv8/). You can of course download source, and install it. However there is much simpler way to do it. PGXN provides a tool for managing extensions stored there.
 
-To get the client for pgxn, it's enough to write:
+To get the client for pgxn, it’s enough to write:
 
 ```bash
 $ pip install pgxnclient
@@ -42,7 +42,7 @@ $ pgxn install plv8
 
 This should download, compile and copy all the files into a proper directory described by the pg_config program.
 
-## Use PL/V8
+### Use PL/V8
 
 For each database where you want to use this extension, you need to create it:
 
@@ -51,7 +51,7 @@ plv8=# CREATE EXTENSION plv8;
 CREATE EXTENSION
 ```
 
-## Write Procedure in JavaScript
+### Write Procedure in JavaScript
 
 This is an example I used in the previous post:
 
