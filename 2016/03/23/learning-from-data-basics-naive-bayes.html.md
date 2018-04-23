@@ -2,10 +2,8 @@
 author: Kamil Ciemniewski
 gh_issue_number: 1215
 tags: machine-learning, optimization, probability-theory, ruby
-title: Learning from data basics — the Naive Bayes model
+title: "Learning from data basics: the Naive Bayes model"
 ---
-
-
 
 Have you ever wondered what is the machinery behind some of the algorithms for doing seemingly very intelligent tasks? How is it possible that the computer program can recognize faces in photos, turn an image into a text or even classify some emails as legitimate or as spam?
 
@@ -667,5 +665,3 @@ The approximation like that would certainly be very useful in a more complex e-c
 The Naive Bayes assumption says that the distribution factorizes the way we did it **only if the features are conditionally independent given the category**. The notion of **conditional independence** (apart from the formal mathematical definition) suggests that if some variables a and b are conditionally independent given c, then if we know the value of c then no additional information about b can alter our knowledge about a. In our example, knowing the category, let say :beauty doesn’t mean that e. g sex is independent from age. In real world examples, it’s often very hard to find a use case for Naive Bayes that would follow the assumption in all the cases.
 
 There are alternative approaches that allow us to apply the assumptions that more rigidly follow the chosen data set. We will explore these in the next articles, building on top of what we saw here.
-
-

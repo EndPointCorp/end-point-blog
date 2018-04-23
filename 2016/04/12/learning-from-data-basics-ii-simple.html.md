@@ -2,14 +2,8 @@
 author: Kamil Ciemniewski
 gh_issue_number: 1219
 tags: classifiers, machine-learning, optimization, probability-theory, ruby
-title: Learning from data basics II - simple Bayesian Networks
+title: "Learning from data basics II: simple Bayesian Networks"
 ---
-
-
-
-Previous in series:
-
-- [Learning from data basics I: Naive Bayes](/2016/03/learning-from-data-basics-naive-bayes.html)
 
 In my [last article](/blog/2016/03/23/learning-from-data-basics-naive-bayes) I presented an approach that simplifies computations of very complex probability models. It makes these complex models viable by shrinking the amount of needed memory and improving the speed of computing probabilities. The approach we were exploring is called the **Naive Bayes model**.
 
@@ -21,13 +15,7 @@ Though the results we got were quite good, I promised to present an approach tha
 
 When exploring  the Naive Bayes model, we said that there is a probabilistic assumption the model makes in order to simplify the computations. In the last article I wrote:
 
-> 
->   
-> 
 > The Naive Bayes assumption says that the distribution factorizes the way we did it **only if the features are conditionally independent given the category**.
-> 
-> 
-> 
 
 #### Expressing variable dependencies as a graph
 
@@ -188,5 +176,3 @@ Full pointed at:
 ```
 
 Just as with using the Naive Bayes, we got correct values for all cases. When you look closer though, you can notice that the resulting probability values were much closer to the original, full distribution ones. The approach we took here makes the values differ only a couple times in 10000. That result could make a difference in the e-commerce shop from the example if it were visited by millions of customers each month.
-
-

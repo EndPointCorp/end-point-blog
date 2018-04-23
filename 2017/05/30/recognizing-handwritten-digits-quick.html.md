@@ -2,13 +2,13 @@
 author: Kamil Ciemniewski
 gh_issue_number: 1310
 tags: julia, machine-learning, python
-title: Recognizing handwritten digits - a quick peek into the basics of machine learning
+title: "Recognizing handwritten digits: a quick peek into the basics of machine learning"
 ---
 
 Previous in series:
 
-- [Learning from data basics - the Naive Bayes model](/blog/2016/03/23/learning-from-data-basics-naive-bayes)
-- [Learning from data basics II - simple Bayesian Networks](/blog/2016/04/12/learning-from-data-basics-ii-simple)
+- [Learning from data basics: the Naive Bayes model](/blog/2016/03/23/learning-from-data-basics-naive-bayes)
+- [Learning from data basics II: simple Bayesian Networks](/blog/2016/04/12/learning-from-data-basics-ii-simple)
 
 In the previous two posts on machine learning, I presented a very basic introduction of an approach called “probabilistic graphical models”. In this post I’d like to take a tour of some different techniques while creating code that will recognize handwritten digits.
 
@@ -22,7 +22,6 @@ We’ll take the “digits recognition” challenge as presented in Kaggle. It i
 
 As explained on Kaggle:
 
->
 > MNIST (“Modified National Institute of Standards and Technology”) is the de facto “hello world” dataset of computer vision.
 
 The “digits recognition” challenge is one of the best ways to get acquainted with machine learning and computer vision. The so-called “MNIST” dataset consists of 70k images of handwritten digits - each one grayscaled and of a 28x28 size. The Kaggle challenge is about taking a subset of 42k of them along with labels (what actual number does the image show) and “training” the computer on that set. The next step is to take the rest 28k of images without the labels and “predict” which actual number they present.
