@@ -21,7 +21,7 @@ Most SaaS offerings include ready-to-use, beautiful design templates, but you’
 
 ### User Experience and Navigation
 
-Working with an ecommerce consultant that has experience with user behavior, site navigation, and business workflows can help you develop the best way to organize your pages and products. End Point’s content architecture services can ensure that your users are finding what they’re looking for and getting where they’re going quickly and seamlessly.
+Working with an ecommerce consultant that has experience with user behavior, site navigation, and business workflows can help you develop the best way to organize your pages and products. With improved navigation, we can ensure that your users are finding what they’re looking for and getting where they’re going quickly and seamlessly.
 
 ### Customizing Your Store
 
