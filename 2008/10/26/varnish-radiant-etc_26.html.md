@@ -5,7 +5,7 @@ tags: hosting, postgres, rails, performance, cms
 title: Varnish, Radiant, etc.
 ---
 
-As my colleague [Jon mentioned](http://blog.endpoint.com/2008/10/walden-university-presidential-youth.html), the Presidential Youth Debates launched its [full debate content this week](http://www.youthdebate2008.org/).  And, as Jon also mentioned, the mix of tools involved was fairly interesting:
+As my colleague [Jon mentioned](/blog/2008/10/22/walden-university-presidential-youth), the Presidential Youth Debates launched its [full debate content this week](http://www.youthdebate2008.org/).  And, as Jon also mentioned, the mix of tools involved was fairly interesting:
 
 - [Radiant](http://radiantcms.org/), a simple Rails-based CMS
 - [Varnish](http://varnish.projects.linpro.no/), a high-performance reverse proxy server

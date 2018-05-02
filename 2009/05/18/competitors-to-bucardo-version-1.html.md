@@ -7,7 +7,7 @@ title: Competitors to Bucardo version 1
 
 
 
-Last time I described [the design and major functions of Bucardo version 1](http://blog.endpoint.com/2009/05/design-of-bucardo-version-1.html) in detail. A natural question to ask about Bucardo 1 is, why didn't I use something else already out there? And that's a very good question.
+Last time I described [the design and major functions of Bucardo version 1](/blog/2009/05/15/design-of-bucardo-version-1) in detail. A natural question to ask about Bucardo 1 is, why didn't I use something else already out there? And that's a very good question.
 
 I had no desire to create a new replication system and work out the inevitable kinks that would come with that. However, nothing then available met our needs, and today still nothing I'm familiar with quite would. So writing something new was necessary. Writing an asynchronous multimaster replications system for Postgres was not trivial, but turned out to be easier than I had expected thanks to Postgres itself -- with the caveats noted in the last post.
 

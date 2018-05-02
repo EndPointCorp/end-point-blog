@@ -9,20 +9,20 @@ title: Using tail_n_mail after hours
 <small>(Photo of [Turtle Island](https://flic.kr/p/bz2Vb4) by [Edwin Poon](https://www.flickr.com/photos/edwinpoon_gz/))</small>
 
 Someone recently asked me something about
-[tail_n_mail](https://bucardo.org/Tail_n_mail/), a program that watches over your log files, scans for certain patterns,
+[tail_n_mail](https://bucardo.org/tail_n_mail/), a program that watches over your log files, scans for certain patterns,
 and sends out an email if matches are found. It is frequently used to watch over
 Postgres logs so you can receive an automatic email alert when Bad Things start happening
 to your database. The questioner wanted to know if it was possible
-for tail_n_mail to change its behavior based on the time of day - would it be able
-to do things differently outside of "business hours"? Although tail_n_mail cannot
-do so directly, a simple solution is to use alternate configuration files - which
-get swapped by cron - and the `INHERIT` keyword.
+for tail_n_mail to change its behavior based on the time of day — would it be able
+to do things differently outside of “business hours”? Although tail_n_mail cannot
+do so directly, a simple solution is to use alternate configuration files — which
+get swapped by cron — and the `INHERIT` keyword.
 
-To demonstrate the solution, let's spin up a Postgres 10 instance, route the logs to syslog,
+To demonstrate the solution, let’s spin up a Postgres 10 instance, route the logs to syslog,
 setup tail_n_mail, and then create separate configuration files for different times of the week.
 First, some setup:
 
-```
+```text
 $ initdb --version
 initdb (PostgreSQL) 10.0
 $ initdb --data-checksums data
@@ -37,7 +37,7 @@ $ pg_ctl start -D data -l logfile
 
 Grab the latest version of tail_n_mail and verify it:
 
-```
+```text
 $ wget --no-verbose https://bucardo.org/downloads/tail_n_mail{,.asc}
 2017-03-03 10:00:33 URL:https://bucardo.org/downloads/tail_n_mail [98767/98767] -> "tail_n_mail" [1]
 2017-03-03 10:00:33 URL:https://bucardo.org/downloads/tail_n_mail.asc [163/163] -> "tail_n_mail.asc" [1]
@@ -58,7 +58,7 @@ The main way to configure tail_n_mail is through its configuration file, which i
 first argument given to the program. This file describes where the log files are, what to look
 for, and a few other important items. In addition, it automatically updates itself each time
 tail_n_mail is run to keep track of where the last run left of, so the next run can start at
-the exact same file, and the correct place within that file. In this example, let's
+the exact same file, and the correct place within that file. In this example, let’s
 assume the DBA wants to get email for every error that pops up in the database (in practice,
 this means any severity levels that are
 ERROR, FATAL, or PANIC). The configuration file
@@ -83,7 +83,7 @@ To test it out, we will generate some errors, and then run tail_n_mail from the 
 If all goes well, it sends out an email and then rewrites the configuration file to indicate
 how far along it got. The --dry-run option can be used to view the email without actually sending it.
 
-```
+```text
 $ for i in 2 4 6 8; do psql -tc "select $i/0"; done
 ERROR:  division by zero
 ERROR:  division by zero
@@ -91,7 +91,7 @@ ERROR:  division by zero
 ERROR:  division by zero
 ```
 
-```
+```text
 $ perl tail_n_mail tnm.conf --dry-run
 Subject: localhost.localdomain Postgres errors 4
 Auto-Submitted: auto-generated
@@ -118,7 +118,7 @@ STATEMENT: select 2/0
 
 Running it in normal mode rewrites the configuration file:
 
-```
+```text
 $ perl tail_n_mail tnm.conf
 $ cat tnm.conf
 ## Config file for the tail_n_mail program
@@ -141,8 +141,8 @@ OFFSET1: 333
 ```
 
 Note how the file was rewritten to include state information about the files we are tracking, but
-leaves the exclusion rules and their comments in place. Tail_n_mail also attempts to "flatten"
-similar queries, which is why the four division-by-zero errors all appear as "SELECT ?/0". A
+leaves the exclusion rules and their comments in place. Tail_n_mail also attempts to “flatten”
+similar queries, which is why the four division-by-zero errors all appear as “SELECT ?/0”. A
 sample of one of the literal errors appears below the normalized version.
 
 You are not limited to a single configuration file, however, as the main config file can read in
@@ -153,10 +153,10 @@ at the top of this post: how to change what is being looked for based on the tim
 
 Using INHERITS also allows us to store files in version control, without worrying about
 them getting rewritten on each invocation, as we can store the ephemeral data in one
-file, and the constant data in a separate, version controlled file. Let's apply that idea to
+file, and the constant data in a separate, version controlled file. Let’s apply that idea to
 our example:
 
-```
+```text
 $ cat > tnm.global.conf << EOT
 PGLOG: syslog
 EMAIL: greg@example.com
@@ -181,7 +181,7 @@ EOT
 
 After another run, we observe that the inherited file does not change:
 
-```
+```text
 $ perl tail_n_mail tnm.conf
 $ git status
 On branch master
@@ -206,7 +206,7 @@ A common usage is to get an immediate email about almost all database problems, 
 well as a daily report about all problems. To do this, we create two configuration
 files and set them up in cron:
 
-```
+```text
 $ cp tnm.conf tnm.fatals.conf
 $ mv tnm.conf tnm.errors.conf
 $ perl -pi -e 's/Postgres errors/Postgres fatals/' tnm.fatals.conf
@@ -219,11 +219,11 @@ $ crontab -e
 ```
 
 What if we want to change the rules depending on the time of day, per the question that started this article?
-Simple enough - we just create two "inherited" configuration files, then have cron swap things around as needed.
-For example, let's say that after 5pm on weekdays, and all weekend, we do not want to receive emails
-about "division by zero" errors. First, create files named tnm.global.hometime.conf and tnm.global.workday.conf:
+Simple enough — we just create two “inherited” configuration files, then have cron swap things around as needed.
+For example, let’s say that after 5pm on weekdays, and all weekend, we do not want to receive emails
+about “division by zero” errors. First, create files named tnm.global.hometime.conf and tnm.global.workday.conf:
 
-```
+```text
 $ cp tnm.global.conf tnm.global.workday.conf
 $ cp tnm.global.conf tnm.global.hometime.conf
 $ ln -sf tnm.global.workday.conf tnm.global.conf
@@ -232,13 +232,13 @@ $ echo "EXCLUDE: ERROR:  division by zero" >> tnm.global.hometime.conf
 
 Finally, have cron swap the files around at the start and end of business hours:
 
-```
+```text
 $ crontab -e
 ## May need to use 1-5 instead of Mon-Fri on some systems
 0 9 * * Mon-Fri ln -sf tnm.global.workday.conf tnm.global.conf
 0 17 * * Mon-Fri ln -sf tnm.global.hometime.conf tnm.global.conf
 ```
 
-Voila! We've changed the way tail_n_mail runs depending on the time of day. There are
-many other tricks you can do with tail_n_mail - check out [the documentation](https://bucardo.org/Tail_n_mail/) or post to [the mailing list](https://mail.endcrypt.com/mailman/listinfo/tnm)
+Voila! We’ve changed the way tail_n_mail runs depending on the time of day. There are
+many other tricks you can do with tail_n_mail — check out [the documentation](https://bucardo.org/tail_n_mail/) or post to [the mailing list](https://mail.endcrypt.com/mailman/listinfo/tnm)
 for more help and/or inspiration.

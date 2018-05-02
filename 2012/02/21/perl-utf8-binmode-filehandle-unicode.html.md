@@ -5,8 +5,6 @@ tags: perl, unicode
 title: Perl, UTF-8, and binmode on filehandles
 ---
 
-
-
 <a href="/blog/2012/02/21/perl-utf8-binmode-filehandle-unicode/image-0-big.jpeg"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5711604532308041090" src="/blog/2012/02/21/perl-utf8-binmode-filehandle-unicode/image-0.jpeg" style="cursor: pointer; height: 222px; width: 320px;"/></a>
 
 Original [image](http://www.flickr.com/photos/avlxyz/2462987456/) by [avlxyz](http://www.flickr.com/photos/avlxyz/)
@@ -85,9 +83,7 @@ warn = This is a micro symbol: µ
 warn = The radioactive snowmen come in peace: ☢ ☃☃☃ ☮
 ```
 
-There are a number of things to note here. First, that the stderr filehandle has the same problem as the stdout filehandle. So, while warn() and die() send things to stderr, there is some magic happening behind the scenes such 
-
-that sending a string to them is *not* the same as sending it to stderr ourselves via a print statement. Which is a good thing overall, as it would be more weird for stdout and stderr to have different encoding layers! The solution to this is simple enough: just force stdout to have the proper encoding by use of the [binmode](http://perldoc.perl.org/functions/binmode.html) function:
+There are a number of things to note here. First, that the stderr filehandle has the same problem as the stdout filehandle. So, while warn() and die() send things to stderr, there is some magic happening behind the scenes such that sending a string to them is *not* the same as sending it to stderr ourselves via a print statement. Which is a good thing overall, as it would be more weird for stdout and stderr to have different encoding layers! The solution to this is simple enough: just force stdout to have the proper encoding by use of the [binmode](http://perldoc.perl.org/functions/binmode.html) function:
 
 ```perl
 binmode STDOUT, ':utf8';
@@ -105,10 +101,6 @@ warn = This is a micro symbol: µ
 warn = The radioactive snowmen come in peace: ☢ ☃☃☃ ☮
 ```
 
-The next thing to notice is that the snowmen alert message is displayed properly everywhere. Why is this? The answer lies in that the micro symbol (and the accented French characters) fall into a range that *could* still be 
-
-ASCII, as far as Perl is concerned. What happens is that, in the lack of any explicit guidance, Perl makes a best guess as to whether a string to be outputted contains UTF-8 characters or not. In the case of the French and "micro" strings, it guessed wrong, and the characters were output as ASCII. In the case of the Japanese and "snowmen" strings, it still guessed wrong, even though the strings contained higher bytes that left no doubt that we had left ASCII-land and were exploring the land of Unicode. In other words, even though they were still not coming out as pure UTF-8, there is no direct ASCII equivalent so they appear as the characters one would expect. Note, however, that Perl still emits a wide character warning, for it recognizes that something is probably wrong. The warnings go away when we use binmode to force the encoding layer to :utf8
+The next thing to notice is that the snowmen alert message is displayed properly everywhere. Why is this? The answer lies in that the micro symbol (and the accented French characters) fall into a range that *could* still be ASCII, as far as Perl is concerned. What happens is that, in the lack of any explicit guidance, Perl makes a best guess as to whether a string to be outputted contains UTF-8 characters or not. In the case of the French and "micro" strings, it guessed wrong, and the characters were output as ASCII. In the case of the Japanese and "snowmen" strings, it still guessed wrong, even though the strings contained higher bytes that left no doubt that we had left ASCII-land and were exploring the land of Unicode. In other words, even though they were still not coming out as pure UTF-8, there is no direct ASCII equivalent so they appear as the characters one would expect. Note, however, that Perl still emits a wide character warning, for it recognizes that something is probably wrong. The warnings go away when we use `binmode` to force the encoding layer to `:utf8`.
 
 The correct solution when dealing with UTF-8 is to be explicit and not let Perl make any guesses. Solutions to this vary, but the combination here of adding **use utf8;** and **binmode STDOUT, ':utf8';**. While I was able to duplicate the problem right away, the combination of Perl making inconsistent guesses and the odd behavior of warn() and die() turned this from a quick fix into a slightly longer investigation. Yes, Unicode and Perl has given me quite a few gray hairs over the years, but I always feel better when I [look at how *other* languages handle Unicode](http://training.perl.com/tcpc/OSCON2011/gbu.html). :)
-
-

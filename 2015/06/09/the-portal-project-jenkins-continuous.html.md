@@ -2,14 +2,14 @@
 author: Zdeněk Maxa
 gh_issue_number: 1133
 tags: chef, browsers, jenkins, liquid-galaxy, python, testing
-title: The Portal project - Jenkins Continuous Integration summary
+title: The Portal project — Jenkins Continuous Integration summary
 ---
 
 This post describes some of our experiences at End Point in designing and working on comprehensive QA/CI facilities for a new system which is closely related to the [Liquid Galaxy](https://liquidgalaxy.endpoint.com/).
 
-Due to the design of the system, the full deployment cycle can be [rather lengthy](http://blog.endpoint.com/2015/02/testing-your-chef-repo-pull-requests.html) and presents us with extra reasons for investing heavily in unit test development. Because of the very active ongoing development on the system we benefit greatly from running the tests in an automated fashion on the [Jenkins CI](https://jenkins-ci.org/) (Continuous Integration) server.
+Due to the design of the system, the full deployment cycle can be [rather lengthy](/blog/2015/02/18/testing-your-chef-repo-pull-requests) and presents us with extra reasons for investing heavily in unit test development. Because of the very active ongoing development on the system we benefit greatly from running the tests in an automated fashion on the [Jenkins CI](https://jenkins-ci.org/) (Continuous Integration) server.
 
-### Our Project's CI Anatomy
+### Our Project’s CI Anatomy
 
 Our Jenkins CI service defines 10+ job types (a.k.a. Jenkins projects) that cover our system. These job types differ as far as source code branches are concerned, as well as by combinations of the types of target environments the project builds are executed on.
 
@@ -28,16 +28,16 @@ Factoring out all degrees of freedom into two pairs of externally managed (by [C
 <div class="separator" style="clear: both; text-align: center;">
 <a href="/blog/2015/06/09/the-portal-project-jenkins-continuous/image-1-big.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="/blog/2015/06/09/the-portal-project-jenkins-continuous/image-1.png"/></a></div>
 
-It’s well possible to have all variables and content of the bash scripts laid out directly in the corresponding text fields in the Jenkins configuration. We used to have that. It’s actually a terrible practice and the above desire for purity comes from a tedious and clumsy experience that changing a variable (e.g. an URL or such) in 10+ job types involves an unbearable amount of mouse clicking through the Jenkins service webpage. Performing some level of debugging of the CI environment (like when setting up [ROS stack](http://wiki.ros.org/) which the project [depends on](http://blog.endpoint.com/2015/03/simple-cross-browser-communication-ros.html)) one is in for repetitive strain injury.
+It’s well possible to have all variables and content of the bash scripts laid out directly in the corresponding text fields in the Jenkins configuration. We used to have that. It’s actually a terrible practice and the above desire for purity comes from a tedious and clumsy experience that changing a variable (e.g. an URL or such) in 10+ job types involves an unbearable amount of mouse clicking through the Jenkins service webpage. Performing some level of debugging of the CI environment (like when setting up [ROS stack](http://wiki.ros.org/) which the project [depends on](/blog/2015/03/24/simple-cross-browser-communication-ros)) one is in for repetitive strain injury.
 
 In essence, keeping knowledge about job types on the Jenkins server itself at a minimum and having it managed externally serves us well and is efficient. Another step forward would be managing everything (the entire job type definition) by Chef. We have yet to experiment with the already existing Chef community cookbooks for Jenkins.
 
-The tests themselves are implemented in [Python](https://www.python.org/) using [pytest](http://pytest.org/) unit testing envelope. The test cases depend on [Selenium](http://www.seleniumhq.org/) - the web automation framework. Python drives the browser through Selenium according to testing scenarios, sometimes rather complex. The Selenium framework provides handles by which the browser is controlled - this includes user data input, clicking buttons, etc.
+The tests themselves are implemented in [Python](https://www.python.org/) using [pytest](https://docs.pytest.org/en/latest/) unit testing envelope. The test cases depend on [Selenium](http://www.seleniumhq.org/)—the web automation framework. Python drives the browser through Selenium according to testing scenarios, sometimes rather complex. The Selenium framework provides handles by which the browser is controlled—this includes user data input, clicking buttons, etc.
 
 We use Selenium in two modes:
 
 **local mode:**
-selenium drives a browser running on the Jenkins CI machine itself, locally. The browser runs in the [Xvfb](http://www.x.org/releases/X11R7.6/doc/man/man1/Xvfb.1.xhtml) environment. In this case everything runs on the Jenkins master machine.
+selenium drives a browser running on the Jenkins CI machine itself, locally. The browser runs in the [Xvfb](https://www.x.org/releases/X11R7.6/doc/man/man1/Xvfb.1.xhtml) environment. In this case everything runs on the Jenkins master machine.
 
 **remote mode:**
 the remote driver connects to a browser running on a remote machine (node A, B) and drives the browser there, as described in the diagram below. The test cases are run on the Jenkins slave machine located on a private network. The only difference between browser A and B is that they load their different respective Chrome extensions.
@@ -92,4 +92,4 @@ Once we fixed the cronjob with a more complex but functional solution, without t
 
 ### Summary, conclusion
 
-Jenkins CI proved in general very useful for our Portal project. Keeping its configuration minimal and handling it externally worked most efficient. The custom jenkins-watcher application provides useful, aggregated, dashboard-like view. It is very easily configurable and not in any way dependent on the base project - take it for free, configure a bit and push as your own Google App Engine project. The visualisation can sometimes be a useful debugging tool.
+Jenkins CI proved in general very useful for our Portal project. Keeping its configuration minimal and handling it externally worked most efficient. The custom jenkins-watcher application provides useful, aggregated, dashboard-like view. It is very easily configurable and not in any way dependent on the base project—take it for free, configure a bit and push as your own Google App Engine project. The visualisation can sometimes be a useful debugging tool.

@@ -11,16 +11,12 @@ I was recently deploying a new Ruby on Rails application that used NGINX and Uni
 
 After a couple of deploys using this init script, I found that there was a significant inturruption caused to the site. This was due to the approximately 20 seconds it took for the Unicorn workers to launch. This was unaccepatble and I started a search for how to perform a zero downtime deploy for Unicorn.
 
-My search lead me to the [Unicorn Signal Handling](http://unicorn.bogomips.org/SIGNALS.html) documentation. Unicorn makes use of [POSIX Signals](http://en.wikipedia.org/wiki/Unix_signal) for inter-process communication. You can send a signal to a process using the unfortunately named [kill system command](http://en.wikipedia.org/wiki/Kill_(command)). Reading through the different signals and what message they send to the Unicorn master and workers, I found a better approach to restarting my Unicorn processes that would result in no delay or inturruption to the website.
+My search lead me to the [Unicorn Signal Handling](https://unicorn.bogomips.org/SIGNALS.html) documentation. Unicorn makes use of [POSIX Signals](https://en.wikipedia.org/wiki/Signal_(IPC)) for inter-process communication. You can send a signal to a process using the unfortunately named [kill system command](https://en.wikipedia.org/wiki/Kill_(command)). Reading through the different signals and what message they send to the Unicorn master and workers, I found a better approach to restarting my Unicorn processes that would result in no delay or inturruption to the website.
 
-On the Signal Handling page (linked above) is a section called **Procedure to replace a running unicorn executable**. The key to my problem lied in this explanation:
+On the Signal Handling page (linked above) is a section called **Procedure to replace a running unicorn executable**. The key to my problem lay in this explanation:
 
-> 
-> 
 > 
 > You may replace a running instance of Unicorn with a new one without losing any incoming connections. Doing so will reload all of your application code, Unicorn config, Ruby executable, and all libraries.
-> 
-> 
 > 
 
 This was exactly what I needed. I did a quick search online to see if anyone had put together an init script that used this method for restarting Unicorn and found one on a [gist on github](https://gist.github.com/jaygooby/504875). With a few modifications, I assembled my new init script:
@@ -97,8 +93,8 @@ start_stop $ARGS
 
 The script is pretty self explanitory and it supports the major term signals outlined in the Unicorn documentation. With this new init script in hand, I now have a better way to restart Unicorn without negatively impacting the user experience.
 
-There are a couple of caveats to this approach that you should be aware of before just slapping it into your system. First, in order to perform the restart, your application needs to essentially run twice until the old master is killed off. This means your hardware should be able to support running two instances of your application in both CPU and RAM at least temporarily. Second, you'll notice that the actual command being run looks something like bundle exec unicorn_rails -C /path/to/config/file -E development -D when interpolated by the script. This means that when you perform a rolling restart, those same parameters are used for the new application. So if anything changes in your config file or if you want to switch environments, you will need to completely stop the Unicorn processes and start them again for those changes to take effect.
+There are a couple of caveats to this approach that you should be aware of before just slapping it into your system. First, in order to perform the restart, your application needs to essentially run twice until the old master is killed off. This means your hardware should be able to support running two instances of your application in both CPU and RAM at least temporarily. Second, you’ll notice that the actual command being run looks something like bundle exec unicorn_rails -C /path/to/config/file -E development -D when interpolated by the script. This means that when you perform a rolling restart, those same parameters are used for the new application. So if anything changes in your config file or if you want to switch environments, you will need to completely stop the Unicorn processes and start them again for those changes to take effect.
 
-Another thing you should be aware of is that your old application will be running for the 30 seconds it takes for the new application to load so if you perform any database migrations that could break the old version of your application, you may be better served by stopping the Unicorn process, running the migration, and then starting a new process. I'm sure there are ways to mitigate this but I just wanted to mention it here to help you be aware of the issue with this script in particular.
+Another thing you should be aware of is that your old application will be running for the 30 seconds it takes for the new application to load so if you perform any database migrations that could break the old version of your application, you may be better served by stopping the Unicorn process, running the migration, and then starting a new process. I’m sure there are ways to mitigate this but I just wanted to mention it here to help you be aware of the issue with this script in particular.
 
 

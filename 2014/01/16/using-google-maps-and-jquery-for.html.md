@@ -1,18 +1,18 @@
 ---
 author: Steph Skardal
 gh_issue_number: 914
-tags: mpas, javascript, jquery
+tags: maps, javascript, jquery
 title: Using Google Maps and jQuery for Location Search
 ---
 
 <div class="separator" style="clear: both; text-align: center;margin-bottom:10px;"><img border="0" src="/blog/2014/01/16/using-google-maps-and-jquery-for/image-0.png"/><br/>
 Example of Google maps showing <a href="http://www.paper-source.com/">Paper Source</a> locations.</div>
 
-A few months ago, I built out functionality to display physical store locations within a search radius for [Paper Source](http://www.paper-source.com/) on an interactive map. There are a few map tools out there to help accomplish this goal, but I chose Google Maps because of my familiarity and past success using it. Here I'll go through some of the steps to implement this functionality.
+A few months ago, I built out functionality to display physical store locations within a search radius for [Paper Source](http://www.paper-source.com/) on an interactive map. There are a few map tools out there to help accomplish this goal, but I chose Google Maps because of my familiarity and past success using it. Here I’ll go through some of the steps to implement this functionality.
 
 ### Google Maps API Key
 
-Before you start this work, you'll want to get a Google Maps API key. Learn more [here](https://developers.google.com/maps/documentation/javascript/tutorial#api_key).
+Before you start this work, you’ll want to get a Google Maps API key. Learn more [here](https://developers.google.com/maps/documentation/javascript/tutorial#api_key).
 
 ### Geocoder Object
 
@@ -108,7 +108,7 @@ The above code determines which locations are visible, sorts those locations by 
 
 ### Adding Listeners
 
-After you've got your map and location markers added, a few map listeners will add more functionality, described below:
+After you’ve got your map and location markers added, a few map listeners will add more functionality, described below:
 
 ```javascript
 var listener = google.maps.event.addListener(map, "idle", function() {
@@ -122,7 +122,7 @@ var listener = google.maps.event.addListener(map, "idle", function() {
 });
 ```
 
-After the map has loaded (via the map "idle" event), render_locations is called to render the HTML for visible locations. This method is also triggered any time the map center or zoom level is changed, so the HTML to the left of the map is updated whenever a user modifies the map bounds.
+After the map has loaded (via the map “idle” event), render_locations is called to render the HTML for visible locations. This method is also triggered any time the map center or zoom level is changed, so the HTML to the left of the map is updated whenever a user modifies the map bounds.
 
 ### Advanced Elements
 

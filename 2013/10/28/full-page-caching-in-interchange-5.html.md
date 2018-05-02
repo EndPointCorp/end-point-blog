@@ -91,7 +91,7 @@ Take advantage of writing custom actionmaps, which allow the developer extreme f
 
 By default, search objects which Interchange uses for more lists, are restricted to access from the generating user's session. This is a safeguard as often search results include personal data for access only to the requestor. However, for features such as category lists, this creates a difficult burden for the developer who wishes to cache the popular resources and whose results are identical across all users.
 
-We can overcome this difficulty by making the search definitions for category lists, or other canned searches, include the [permanent more](http://blog.endpoint.com/2012/01/interchange-search-caching-with.html) indicator. Permanent more causes all identical searches to share a common search object accessible by the same URLs, and freeing the usual coupling with the session of the search originator.
+We can overcome this difficulty by making the search definitions for category lists, or other canned searches, include the [permanent more](/blog/2012/01/02/interchange-search-caching-with) indicator. Permanent more causes all identical searches to share a common search object accessible by the same URLs, and freeing the usual coupling with the session of the search originator.
 
 #### Address Common Session Variables
 

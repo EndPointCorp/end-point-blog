@@ -7,13 +7,13 @@ title: Simple AngularJS Page
 
 The best thing in [AngularJS](https://angularjs.org/) is the great automation of actualizing the data in the html code.
 
-To show how easy Angular is to use, I will create a very simple page using [AngularJS](https://angularjs.org/) and [Github](http://github.org/).
+To show how easy Angular is to use, I will create a very simple page using AngularJS and [Github](http://github.org/).
 
 Every Github user can get lots of notifications. All of them can be seen at [Github notification page](https://github.com/notifications). There is also the Github API, which can be used for getting the notification information, using simple http requests, which return jsons.
 
-I wanted to create a simple page with a list of notifications. With information if the notification was read (I used "!!!" for unread ones). And with automatical refreshing every 10 minutes.
+I wanted to create a simple page with a list of notifications. With information if the notification was read (I used “!!!” for unread ones). And with automatical refreshing every 10 minutes.
 
-To access the Github API, first I generated an application token on the [Github token page](https://github.com/settings/applications). Then I downloaded a file from the [AngularJS](https://angularjs.org/) page, and a [Github API javascript wrapper](https://github.com/michael/github/).
+To access the Github API, first I generated an application token on the [Github token page](https://github.com/settings/applications). Then I downloaded a file from the AngularJS page, and a [Github API javascript wrapper](https://github.com/michael/github/).
 
 Then I wrote a simple html file:
 
@@ -72,10 +72,10 @@ The code is also not very complicated:
   }]);
 ```
 
-First of all I've created an Angular application object. That object has one controller, in which I created a Github object, which gives me a nice way to access the Github API.
+First of all I’ve created an Angular application object. That object has one controller, in which I created a Github object, which gives me a nice way to access the Github API.
 
 The function getNotificationsList calls the Github API, gets a response, and just stores it in the $scope.notifications object.
 
-Then the angular's magic comes into play. When the $scope fields are updated, angular automatically updates all the declarations in the html page. This time it is not so automatic, as I had to call the $scope.$apply() function to trigger it. It will loop through the $scope.notifications and update the html.
+Then the angular’s magic comes into play. When the $scope fields are updated, angular automatically updates all the declarations in the html page. This time it is not so automatic, as I had to call the $scope.$apply() function to trigger it. It will loop through the $scope.notifications and update the html.
 
 For more information about the Angular, and the commands I used, you can check the [AngularJS Documentation](https://docs.angularjs.org/api).

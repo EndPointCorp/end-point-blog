@@ -39,7 +39,7 @@ The **disadvantages** to this method are:
 <tbody><tr>
 <td valign="top">
 <h3>Option #2: Single Code Base, Single Database</h3>
-<p>In this method, there is one copy of the source code that interacts with one database. The single database would be modified to contain a store specific id per product, order, and peripheral tables. The code base would also have to be modified to be able to limit the visible products described <a href="http://blog.endpoint.com/2010/05/spree-multi-store-architecture.html">here</a>. In this method, the individual store may be identified by the domain or subdomain. With this method, there may also be code customization that allows for custom templates per store.</p>
+<p>In this method, there is one copy of the source code that interacts with one database. The single database would be modified to contain a store specific id per product, order, and peripheral tables. The code base would also have to be modified to be able to limit the visible products described <a href="/blog/2010/05/24/spree-multi-store-architecture">here</a>. In this method, the individual store may be identified by the domain or subdomain. With this method, there may also be code customization that allows for custom templates per store.</p>
 
 <p>The <b>advantages</b> to this method are:</p>
 <ul>
@@ -60,7 +60,7 @@ The **disadvantages** to this method are:
 <img src="/blog/2012/02/29/multi-store-architecture-ecommerce/image-1.png" style="padding-bottom:10px;"/>
 <p>
 A second option in multi-store architecture may use a data model with store specific entries in various tables, described 
-<a href="http://blog.endpoint.com/2010/05/spree-multi-store-architecture.html">here</a>.</p>
+<a href="/blog/2010/05/24/spree-multi-store-architecture">here</a>.</p>
 </td>
 </tr>
 </tbody></table>
@@ -80,7 +80,7 @@ The **disadvantage** to this method is:
 
 - Customization and development is required for database configuration and management of multi-store database schemas.
 
-A tangential variation on the methods above are two different codebases and functionality attached to one back-end web service and backing database, such as the architecture we implemented for Locate Express. And a similar tangential variation I've investigated before is one that might use a [Sinatra driven front-end](http://blog.endpoint.com/2011/02/ecommerce-sinatra-shopping-cart.html) and a Rails backed admin, such as [RailsAdmin](https://github.com/sferik/rails_admin) used in [Piggybak](http://blog.endpoint.com/2012/01/piggybak-mountable-ecommerce-ruby-on.html).
+A tangential variation on the methods above are two different codebases and functionality attached to one back-end web service and backing database, such as the architecture we implemented for Locate Express. And a similar tangential variation I've investigated before is one that might use a [Sinatra driven front-end](/blog/2011/03/04/ecommerce-sinatra-shopping-cart) and a Rails backed admin, such as [RailsAdmin](https://github.com/sferik/rails_admin) used in [Piggybak](/blog/2012/01/06/piggybak-mountable-ecommerce-ruby-on).
 
 <a href="http://www.collegedistrict.com/"><img src="/blog/2012/02/29/multi-store-architecture-ecommerce/image-2.png" width="700"/></a>
 

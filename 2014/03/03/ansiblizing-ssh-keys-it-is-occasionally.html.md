@@ -7,9 +7,9 @@ title: Ansiblizing SSH Keys
 
 
 
-It is occasionally the case that several users share a particular account on a few boxes, such as in a scenario where a test server and a production server share a deployment account, and several developers work on them. In these situations the preference is to authenticate the users with their ssh keys through authorized_keys on the account they are sharing, which leads to the problem of keeping the keys synchronized when they are updated and changed. We add the additional parameter that perhaps any given box will have a few users of the account that aren't shared by the others, but otherwise allow a core of developers to access them. Now extend this scenario across hundreds of machines, and the maintenance becomes difficult or impossible when updating any of the core accounts. Obviously this is a job for a remote management framework like Ansible.
+It is occasionally the case that several users share a particular account on a few boxes, such as in a scenario where a test server and a production server share a deployment account, and several developers work on them. In these situations the preference is to authenticate the users with their ssh keys through authorized_keys on the account they are sharing, which leads to the problem of keeping the keys synchronized when they are updated and changed. We add the additional parameter that perhaps any given box will have a few users of the account that aren’t shared by the others, but otherwise allow a core of developers to access them. Now extend this scenario across hundreds of machines, and the maintenance becomes difficult or impossible when updating any of the core accounts. Obviously this is a job for a remote management framework like Ansible.
 
-## Our Example Scenario
+### Our Example Scenario
 
 We have developers Alice, Bob and Carla which need access to every box. We have additional developers Dwayne and Edward that only need access to one box each. We have a collection of servers: dev1, dev2, staging and prod. All of the servers have an account called web_deployment.
 
@@ -41,9 +41,9 @@ The authorized_keys for web_deployment on each box contains:
         - bob
         - carla
 
-## Enter Ansible
+### Enter Ansible
 
-Ansible is setup for every box already. The basic strategy for managing the keys is to copy a default authorized_keys file from the ansible host containing Alice, Bob and Carla (since they are present on all of the destination machines) and assemble the keys with a collection of keys local to the host (Dwayne's key on dev2, and Edward's key on staging). To perform the assembly action we also want to provide a script  so that the keys can be manually manipulated (local keys changed) without touching the ansible box. The script is thus:
+Ansible is setup for every box already. The basic strategy for managing the keys is to copy a default authorized_keys file from the ansible host containing Alice, Bob and Carla (since they are present on all of the destination machines) and assemble the keys with a collection of keys local to the host (Dwayne’s key on dev2, and Edward’s key on staging). To perform the assembly action we also want to provide a script so that the keys can be manually manipulated (local keys changed) without touching the ansible box. The script is thus:
 
 ```bash
 #!/usr/bin/env bash
@@ -188,7 +188,7 @@ And finally the handler which invokes the assembly script:
 
 A note about this setup: The authorized_keys.universal has the extension .j2, and is invoked as a Jinja2 template. This allows server-specific conditionals amongst other things. It is useful for example when per-key shell features are used (for example restricting one particular key to invoking rsync for backups), and if the OS selection is mixed thus requiring the paths to differ between hosts.
 
-## Conclusion
+### Conclusion
 
 We hope that this example is helpful. There are some clear directions for improvement and ways to make this suit other scenarios, such as having the universal keys list also merged with an additional keys list select by host or other information such as OS or abstract values associated with the host. One could also envision a system in which some arbitrary collection of key files are merged at the destination server selected through the aforementioned means or others.
 

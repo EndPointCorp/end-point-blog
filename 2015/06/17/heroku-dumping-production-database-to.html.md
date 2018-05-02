@@ -19,20 +19,20 @@ pg:pull not found
 
 To fix this:
 
-1. Uninstall the 'heroku' gem with
+1. Uninstall the “heroku” gem with
 
 ```
 gem uninstall heroku (Select 'All Versions')
 ```
 
-2. Find your Ruby 'bin' path by running 
+2. Find your Ruby “bin” path by running 
 
 ```
 gem env
 ```
-(it's under 'EXECUTABLE DIRECTORY:')
+(it’s under “EXECUTABLE DIRECTORY:”)
 
-3. Cd to the 'bin' folder.
+3. Cd to the “bin” folder.
 
 4. Remove the Heroku executable with 
 
@@ -61,7 +61,7 @@ Now you can proceed with the transfer:
 heroku config --app production-app
 ```
 
-Note the DATABASE_URL, for example let's imagine that the production database url is HEROKU_POSTGRESQL_KANYE_URL, and the staging database url is HEROKU_POSTGRESQL_NORTH
+Note the DATABASE_URL, for example let’s imagine that the production database url is HEROKU_POSTGRESQL_KANYE_URL, and the staging database url is HEROKU_POSTGRESQL_NORTH
 
 2. Run
 

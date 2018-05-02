@@ -7,7 +7,7 @@ title: Python decorator basics, part II
 
 
 
-This is a continuation of my previous post: [Python decorator basics](http://blog.endpoint.com/2013/12/python-decorator-basics.html). Here I'll talk about a decorator with optional arguments. Let's say we want to pass an optional argument to the same debug decorator:
+This is a continuation of my previous post: [Python decorator basics](/blog/2013/12/13/python-decorator-basics). Here I’ll talk about a decorator with optional arguments. Let’s say we want to pass an optional argument to the same debug decorator:
 
 ```python
 def debug(msg=None):
@@ -32,7 +32,7 @@ Let's multiply!
 10
 ```
 
-Excellent. Now let's decorate without a msg and call mul:
+Excellent. Now let’s decorate without a msg and call mul:
 
 ```python
 @debug
@@ -46,13 +46,13 @@ TypeError: actual_decorator() takes exactly 1 argument (2 given)
 </module></stdin>
 ```
 
-Oh oh. Let's see what happens at time of decoration:
+Oh oh. Let’s see what happens at time of decoration:
 
 ```python
 mul = debug(mul)
 ```
 
-Hmmm, mul gets passed to debug as it's argument and then the arguments (5, 2) are passed to actual_decorator, since debug returns actual_decorator. To resolve this we need to always call the decorator as a function:
+Hmmm, mul gets passed to debug as it’s argument and then the arguments (5, 2) are passed to actual_decorator, since debug returns actual_decorator. To resolve this we need to always call the decorator as a function:
 
 ```python
 @debug()

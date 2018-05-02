@@ -7,7 +7,7 @@ title: MySQL and Postgres command equivalents (mysql vs psql)
 
 
 
-Users toggling between MySQL and Postgres are often confused by the equivalent commands to accomplish basic tasks. Here's a chart listing some of the differences between the command line client for MySQL (simply called **mysql**), and the command line client for Postgres (called **psql**).
+Users toggling between MySQL and Postgres are often confused by the equivalent commands to accomplish basic tasks. Here’s a chart listing some of the differences between the command line client for MySQL (simply called **mysql**), and the command line client for Postgres (called **psql**).
 
 <table cellpadding="0" cellspacing="0" id="toggle" style="border: medium none ;"><tbody>
 <tr class="alt"><th style="white-space: nowrap;" width="30%">MySQL (using mysql)</th><th style="white-space: nowrap;" width="30%">Postgres (using psql)</th><th>Notes</th></tr>
@@ -108,7 +108,7 @@ Include a file as if it were typed in</td><td><b>\i <em>filename</em></b>
 Toggles timing on and off</td><td>
 </td></tr><tr><td>No equivalent</td><td><b>\t</b>
 
-Toggles 'tuple only' mode</td><td>This shows the data from select queries, with no headers or footers</td></tr><tr class="alt"><td><b>show tables;</b>
+Toggles “tuple only” mode</td><td>This shows the data from select queries, with no headers or footers</td></tr><tr class="alt"><td><b>show tables;</b>
 
 List all tables</td><td><b>\dt</b>
 
@@ -160,8 +160,8 @@ List all server engines</td><td>No equivalent</td><td>Postgres does not use sepa
 Create an object: database, table, etc.</td><td><b>CREATE <em>object ...</em></b>
 Mostly the same</td><td>Most CREATE commands are similar or identical. Lookup specific help on commands (for example: <span style="font-weight: bold; white-space: nowrap;">\h CREATE TABLE</span>)</td></tr></tbody></table>
 
-If there are any commands not listed you would like to see, or if there are errors in the above, please let me know. There are differences in how you invoke **mysql** and **psql**, and in the flags that they use, but that's a topic for another day.
+If there are any commands not listed you would like to see, or if there are errors in the above, please let me know. There are differences in how you invoke **mysql** and **psql**, and in the flags that they use, but that’s a topic for another day.
 
-**Updates:** Added **PSQL_PAGER** and **\o |tee *filename***, thanks to the Davids in the comments section. Added **\t** back in, per Joe's comment.
+**Updates:** Added **PSQL_PAGER** and **\o |tee *filename***, thanks to the Davids in the comments section. Added **\t** back in, per Joe’s comment.
 
 

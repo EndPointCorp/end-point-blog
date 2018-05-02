@@ -15,11 +15,11 @@ If you follow good code organization practices and develop modular and abstracte
 
 ## git rebase
 
-Git rebase is lovely. Ethan describes some examples of using git rebase [here](http://blog.endpoint.com/2009/05/git-rebase-just-workingness-baked-right.html). When working with several other developers and even when I'm the sole developer, I've included rebasing in my pull and push workflow.
+Git rebase is lovely. Ethan describes some examples of using git rebase [here](/blog/2009/05/28/git-rebase-just-workingness-baked-right). When working with several other developers and even when I'm the sole developer, I've included rebasing in my pull and push workflow.
 
 ## .gitmodules
 
-Git submodules are lovely, also. An overview on git submodules with contributions from Brian Miller and [David Christensen](/team/david_christensen) can be read [here](http://blog.endpoint.com/2010/04/git-submodule-workflow.html). Below is an example of a .gitmodules from a recent project that includes several extensions written by folks in the Spree community:
+Git submodules are lovely, also. An overview on git submodules with contributions from Brian Miller and [David Christensen](/team/david_christensen) can be read [here](/blog/2010/04/05/git-submodule-workflow). Below is an example of a .gitmodules from a recent project that includes several extensions written by folks in the Spree community:
 
 ```nohighlight
 [submodule "vendor/extensions/faq"]
@@ -174,7 +174,7 @@ And from the view, the two methods can be called within the following block:
 
 ### Extend an Existing View
 
-I previously discussed the introduction of hooks in depth [here](http://blog.endpoint.com/2010/01/rails-ecommerce-spree-hooks-tutorial.html) and [here](http://blog.endpoint.com/2010/01/rails-ecommerce-spree-hooks-comments.html). To extend an existing view that has a hook wrapped around the content you intend to modify, you may add something similar to the following to *_hooks.rb, where * is the extension name:
+I previously discussed the introduction of hooks in depth [here](/blog/2010/01/12/rails-ecommerce-spree-hooks-tutorial) and [here](/blog/2010/01/13/rails-ecommerce-spree-hooks-comments). To extend an existing view that has a hook wrapped around the content you intend to modify, you may add something similar to the following to *_hooks.rb, where * is the extension name:
 
 ```ruby
 insert_after :homepage_products, 'shared/promo'
@@ -197,8 +197,8 @@ Before the introduction of hooks, the standard method of overriding or extending
 -    <%= render 'shared/language_bar' if Spree::Config[:allow_locale_switching] %>
 -  </div>
 - </div>
-<%= render 'shared/google_analytics' %>
-+<p><a href="http://www.endpoint.com/">End Point</a></p>
+  <%= render 'shared/google_analytics' %>
++ <p><a href="http://www.endpoint.com/">End Point</a></p>
 ```
 
 ## Sample data

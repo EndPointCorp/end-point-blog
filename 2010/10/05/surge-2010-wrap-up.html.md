@@ -5,7 +5,7 @@ tags: conference, scalability
 title: Surge 2010 wrap-up
 ---
 
-Following up on my earlier post about [day 1 of the conference](http://blog.endpoint.com/2010/10/surge-2010-day-1.html), here is an unsorted collection of what I felt were noteworthy observations made in talks at [Surge 2010](http://omniti.com/surge/2010):
+Following up on my earlier post about [day 1 of the conference](/blog/2010/10/01/surge-2010-day-1), here is an unsorted collection of what I felt were noteworthy observations made in talks at [Surge 2010](http://omniti.com/surge/2010):
 
 Web engineering as a separate discipline from computer science or software development started around 1999. It is interdisciplinary, involving [human factors engineering](http://en.wikipedia.org/wiki/Human_factors_engineering), [systems engineering](http://en.wikipedia.org/wiki/Systems_engineering), [operations research](http://en.wikipedia.org/wiki/Operations_research), [fault-tolerant design](http://en.wikipedia.org/wiki/Fault-tolerant_design), and [control systems engineering](http://en.wikipedia.org/wiki/Control_Systems_Engineering). (John Allspaw)
 

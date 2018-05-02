@@ -15,7 +15,7 @@ So in our case the content of our **CentOS** authorized_keys would be something 
 command="/bin/nice -15 /usr/bin/rsync --server --daemon .",no-port-forwarding,no-X11-forwarding,no-agent-forwarding,no-pty ssh-rsa AAAB3[...]Q== endpoint-backup
 ```
 
-Sadly that's only true for CentOS systems so that if you want to **automate the distribution of authorized_keys** (as we'll show in another post) to different Linux distributions (like **Ubuntu**) you may need to tweak it to comply to the new standard "/usr/bin" location, which will be eventually adopted by all new Linux versions overtime.. RHEL 7.x onward included.
+Sadly that’s only true for CentOS systems so that if you want to **automate the distribution of authorized_keys** (as we’ll show in another post) to different Linux distributions (like **Ubuntu**) you may need to tweak it to comply to the new standard “/usr/bin” location, which will be eventually adopted by all new Linux versions overtime.. RHEL 7.x onward included.
 
 To do the OS version detection we decided to use an **Ansible**/**Jinja2** template by placing the following line in the Ansible task:
 
@@ -34,8 +34,8 @@ And inside the actual file place a slightly modified version of the line above:
 command="{% if ansible_os_family != "RedHat" %}/usr{% endif %}/bin/nice -15 /usr/bin/rsync --server --daemon .",no-port-forwarding,no-X11-forwarding,no-agent-forwarding,no-pty ssh-rsa AAAB3[...]Q== endpoint-backup"
 ```
 
-So that if the target OS is not part of the "RedHat" family it will add the "/usr" in front of the "/bin/nice" absolute path.
+So that if the target OS is not part of the “RedHat” family it will add the “/usr” in front of the “/bin/nice” absolute path.
 
-Easy peasy, ain't it?
+Easy peasy, ain’t it?
 
 Now go out there and exploit this feature to all your needs.

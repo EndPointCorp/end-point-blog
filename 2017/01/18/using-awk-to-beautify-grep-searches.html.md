@@ -5,7 +5,7 @@ tags: shell
 title: Using Awk to beautify grep searches
 ---
 
-Recently we've seen a sprout of re-implementations of many popular Unix tools. With the expansion of communities built around new languages or platforms, it seems that apart from the novelties in technologies — the ideas on how to use them stay the same. There are more and more solutions to the same kinds of problems:
+Recently we’ve seen a sprout of re-implementations of many popular Unix tools. With the expansion of communities built around new languages or platforms, it seems that apart from the novelties in technologies — the ideas on how to use them stay the same. There are more and more solutions to the same kinds of problems:
 
 - text editors
 - CSS pre-processors
@@ -13,27 +13,27 @@ Recently we've seen a sprout of re-implementations of many popular Unix tools. W
 - screen scraping tools
 - ... many more ...
 
-In this blog post I'd like to tackle the problem from yet another perspective. Instead of resolving to "new and cool" libraries and languages (grep implemented in X language) — I'd like to use what's out there already in terms of tooling to build a nice search-in-files tool for myself.
+In this blog post I’d like to tackle the problem from yet another perspective. Instead of resolving to “new and cool” libraries and languages (grep implemented in X language) — I’d like to use what’s out there already in terms of tooling to build a nice search-in-files tool for myself.
 
-## Search in files tools
+### Search in files tools
 
-It seems that for many people it's very important to have a "search in files" tool that they really like. Some of the nice work we've seen so far include:
+It seems that for many people it’s very important to have a “search in files” tool that they really like. Some of the nice work we’ve seen so far include:
 
 - [ack](https://github.com/petdance/ack2)
 - [ripgrep](https://github.com/BurntSushi/ripgrep)
 - [the_silver_searcher](https://github.com/ggreer/the_silver_searcher)
 
-These are certainly very nice. As the goal of this post is to build something out of the tooling found in any minimal Unix-like installation — they won't work though. They either need to be compiled or require Perl to be installed which isn't everywhere (e. g. FreeBSD on default — though obviously available via the ports).
+These are certainly very nice. As the goal of this post is to build something out of the tooling found in any minimal Unix-like installation — they won’t work though. They either need to be compiled or require Perl to be installed which isn’t everywhere (e. g. FreeBSD on default — though obviously available via the ports).
 
-## What I really need from the tool
+### What I really need from the tool
 
-I do understand that for some developers, waiting 100 ms longer for the search results might be too long. I'm not like that though. Personally, all I care about when searching is how the results are being presented. I also like to have the consistency of using the same approach between many machines I work on. We're often working on remote machines at End Point. The need to install e.g Rust compiler just to get the ripgrep tool is too time consuming and hence doesn't contribute to getting things done faster. Same goes for e. g the_silver_searcher which needs to be compiled too. What options do I have then?
+I do understand that for some developers, waiting 100 ms longer for the search results might be too long. I’m not like that though. Personally, all I care about when searching is how the results are being presented. I also like to have the consistency of using the same approach between many machines I work on. We’re often working on remote machines at End Point. The need to install e.g Rust compiler just to get the ripgrep tool is too time consuming and hence doesn’t contribute to getting things done faster. Same goes for e. g the_silver_searcher which needs to be compiled too. What options do I have then?
 
-## Using good old Unix tools
+### Using good old Unix tools
 
-The "find in files" functionality is covered fully by the Unix grep tool. It allows searching for a given substring but also "Regex" matches. The output can not only contain only the lines with matches, but also the lines before and after to give some context. The tool can provide line numbers and also search recursively within directories.
+The “find in files” functionality is covered fully by the Unix grep tool. It allows searching for a given substring but also “Regex” matches. The output can not only contain only the lines with matches, but also the lines before and after to give some context. The tool can provide line numbers and also search recursively within directories.
 
-While I'm not into speeding it up, I'd certainly love to play with its output because I do care about my brain's ability to parse text and hence: be more productive.
+While I’m not into speeding it up, I’d certainly love to play with its output because I do care about my brain’s ability to parse text and hence: be more productive.
 
 The usual output of grep:
 
@@ -115,27 +115,27 @@ src/worker.rs:
 (...)
 ```
 
-Fortunately, even the tiniest of Unix like system installation already has all we need to make it happen without the need to install anything else. Let's take a look at how we can modify the output of grep with awk to achieve what we need.
+Fortunately, even the tiniest of Unix like system installation already has all we need to make it happen without the need to install anything else. Let’s take a look at how we can modify the output of grep with awk to achieve what we need.
 
-## Piping into awk
+### Piping into awk
 
-Awk has been in Unix systems for many years — it's older than me! It is a programming language interpreter designed specifically to work with text. In Unix, we can use pipes to direct output of one program to be the standard input of another in the following way:
+Awk has been in Unix systems for many years — it’s older than me! It is a programming language interpreter designed specifically to work with text. In Unix, we can use pipes to direct output of one program to be the standard input of another in the following way:
 
 ```bash
 $ oneapp | secondapp
 ```
 
-The idea with our searching tool is to use what we already have and pipe it between the programs to format the output as we'd like:
+The idea with our searching tool is to use what we already have and pipe it between the programs to format the output as we’d like:
 
 ```bash
 $ egrep -nR Option src | awk -f script.awk
 ```
 
-Notice that we used egrep when in this simple case we didn't need to. It was sufficient to use fgrep or just grep.
+Notice that we used egrep when in this simple case we didn’t need to. It was sufficient to use fgrep or just grep.
 
-## Very quick introduction to coding with Awk
+### Very quick introduction to coding with Awk
 
-Awk is one of the forefathers of languages like Perl and Ruby. In fact some of the ideas I'll show you here exist in them as well.
+Awk is one of the forefathers of languages like Perl and Ruby. In fact some of the ideas I’ll show you here exist in them as well.
 
 The structure of awk programs can be summarized as follows:
 
@@ -161,7 +161,7 @@ END {
 
 The interpreter provides default versions for all three parts: a "no-op" for BEGIN and END and "print each line unmodified" for the "body" of the script.
 
-Each line is being exploded into columns based on the "separator" which by default is any number of consecutive white characters. One can change it via the -F switch or by assigning the FS variable inside the BEGIN area. We'll do just that in our example.
+Each line is being exploded into columns based on the "separator" which by default is any number of consecutive white characters. One can change it via the -F switch or by assigning the FS variable inside the BEGIN area. We’ll do just that in our example.
 
 The "columns" that lines are being exploded into can be accessed via the special variables:
 
@@ -172,7 +172,7 @@ $2 # second column
 # etc
 ```
 
-The FS variable can contain a pattern too. So for example if we'd have a file with the following contents:
+The FS variable can contain a pattern too. So for example if we’d have a file with the following contents:
 
 ```
 One | Two | Three | Four
@@ -202,7 +202,7 @@ Two
 Zwei
 ```
 
-## Simple Awk coding to format the search results
+### Simple Awk coding to format the search results
 
 Armed with this simple knowledge, we can tackle the problem we stated in the earlier part of this post:
 
@@ -284,7 +284,7 @@ BEGIN {
 }
 ```
 
-Notice that the "middle" part of the script (the one with the patterns and actions) gets ran in an implicit loop - once for each input line.
+Notice that the “middle” part of the script (the one with the patterns and actions) gets ran in an implicit loop - once for each input line.
 
 To use the above awk script you could wrap it up with the following shell script:
 
@@ -294,12 +294,12 @@ To use the above awk script you could wrap it up with the following shell script
 egrep -nR $@ | awk -f script.awk
 ```
 
-Here we're very trivially (and somewhat naively) passing all the arguments passed to the script to egrep with the use of $@.
+Here we’re very trivially (and somewhat naively) passing all the arguments passed to the script to egrep with the use of $@.
 
-This of course is a simple solution. Some care needs to be applied when trying to make it work with A, B and C switches, it's not difficult either though. All it takes is to e.g pipe it through sed (another great Unix tool - the "stream editor") to replace the initial '-' characters in the [filename]-[line-number] parts to match our assumptions of having ":" as the separator in the awk script.
+This of course is a simple solution. Some care needs to be applied when trying to make it work with A, B and C switches, it’s not difficult either though. All it takes is to e.g pipe it through sed (another great Unix tool - the “stream editor”) to replace the initial '-' characters in the [filename]-[line-number] parts to match our assumptions of having “:“ as the separator in the awk script.
 
-## In praise of "what-already-works"
+### In praise of “what-already-works”
 
-The simple script like shown above could easily be placed in your GitHub, BitBucket or GitLab account and fetched with curl on whichever machine you're working on. With one call to curl and maybe another one to put the scripts somewhere in the local PATH you'd gain a productivity enhancing tool that doesn't require anything else to work than what you already have.
+The simple script like shown above could easily be placed in your GitHub, BitBucket or GitLab account and fetched with curl on whichever machine you’re working on. With one call to curl and maybe another one to put the scripts somewhere in the local PATH you’d gain a productivity enhancing tool that doesn’t require anything else to work than what you already have.
 
-I'll keep learning "what we already have" to not fall too much into "what's hot and new" unnecessarily.
+I’ll keep learning “what we already have” to not fall too much into “what’s hot and new” unnecessarily.

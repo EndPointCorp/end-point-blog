@@ -5,7 +5,7 @@ tags: rails
 title: 'KISS: Slurping up File Attachments'
 ---
 
-I've been heavily involved in an ecommerce project running on Rails 3, using [Piggybak](http://www.piggybak.org/), [RailsAdmin](https://github.com/sferik/rails_admin), [Paperclip]() for file attachment management, [nginx](http://nginx.org/) and [unicorn](http://unicorn.bogomips.org/). One thing that we've struggled with is handling large file uploads both in the [RailsAdmin import](http://blog.endpoint.com/2012/02/railsadmin-import-part-2.html) process as well as from the standard RailsAdmin edit page. Nginx is configured to limit request size and duration, which is a problem for some of the large files that are uploaded, which are large purchasable, downloadable files.
+I've been heavily involved in an ecommerce project running on Rails 3, using [Piggybak](https://github.com/piggybak/piggybak), [RailsAdmin](https://github.com/sferik/rails_admin), [Paperclip]() for file attachment management, [nginx](http://nginx.org/) and [unicorn](http://unicorn.bogomips.org/). One thing that we've struggled with is handling large file uploads both in the [RailsAdmin import](/blog/2012/02/01/railsadmin-import-part-2) process as well as from the standard RailsAdmin edit page. Nginx is configured to limit request size and duration, which is a problem for some of the large files that are uploaded, which are large purchasable, downloadable files.
 
 To allow these uploads, I brainstormed how to decouple the file upload from the import and update process. Phunk recently worked on integration of [Resque](https://github.com/defunkt/resque), a popular Rails queueing tool which worked nicely. However, I ultimately decided that I wanted to go down a simpler route. The implementation is described below.
 

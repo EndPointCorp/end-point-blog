@@ -9,9 +9,9 @@ In the spirit of April 1st, resurrecting this old classic post:
 
 -----------
 
-Maybe you work at one of those large corporations that has a dedicated DBA staff, separate from the development team.  Or maybe you're lucky and just get to read about it on [thedailywtf.com](http://thedailywtf.com).  But you've probably seen battles between database folk and the developers that "just want a table with "ID " VARCHAR(255), name VARCHAR(255), price VARCHAR(255), post_date VARCHAR(255).  Is that so much to ask?!"
+Maybe you work at one of those large corporations that has a dedicated DBA staff, separate from the development team.  Or maybe you’re lucky and just get to read about it on [thedailywtf.com](https://thedailywtf.com).  But you’ve probably seen battles between database folk and the developers that “just want a table with `"ID " VARCHAR(255), name VARCHAR(255), price VARCHAR(255), post_date VARCHAR(255)`. Is that so much to ask?!”
 
-Well if you ever feel the need to get back at them, here's a few things you can try.  Quoted identifiers let you name your objects anything you want, even if they don't look like a normal object name...
+Well if you ever feel the need to get back at them, here’s a few things you can try.  Quoted identifiers let you name your objects anything you want, even if they don’t look like a normal object name...
 
 ```sql
 CREATE TABLE "; rollback; drop database postgres;--" ("'';
@@ -22,7 +22,7 @@ COMMENT ON TABLE "; rollback; drop database postgres;--"
 IS 'DON''T FORGET TO QUOTE THESE';
 ```
 
-Good advice, that comment.  Of course, assuming they learn, they'll be quoting everything you give them.  So, drop a quote right in the middle of it:
+Good advice, that comment.  Of course, assuming they learn, they’ll be quoting everything you give them.  So, drop a quote right in the middle of it:
 
 ```sql
 CREATE TABLE "messages"";rollback;update products set price=0;commit;--"
@@ -49,7 +49,7 @@ WARNING:  there is no transaction in progress
 COMMIT
 ```
 
-Then again, if this is your database, that'll eventually cause you a lot of headache.  Restores aren't fun.  But UTF-8 can be...
+Then again, if this is your database, that’ll eventually cause you a lot of headache.  Restores aren’t fun.  But UTF-8 can be...
 
 ```sql
 CREATE TABLE suoıʇɔɐsuɐɹʇ (ɯnu‾ɹǝpɹo SERIAL PRIMARY KEY,

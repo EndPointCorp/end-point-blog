@@ -5,15 +5,15 @@ tags: javascript, liquid-galaxy, ros
 title: Simple cross-browser communication with ROS
 ---
 
-[ROS](http://www.ros.org/) and [RobotWebTools](http://robotwebtools.org/) have been extremely useful in building our latest crop of distributed interactive experiences. We're continuing to develop browser-fronted ROS experiences very quickly based on their huge catalog of existing device drivers. Whether a customer wants their interaction to use a touchscreen, joystick, lights, sound, or just about anything you can plug into the wall, we now say with confidence: "Yeah, we can do that."
+[ROS](http://www.ros.org/) and [RobotWebTools](http://robotwebtools.org/) have been extremely useful in building our latest crop of distributed interactive experiences. We’re continuing to develop browser-fronted ROS experiences very quickly based on their huge catalog of existing device drivers. Whether a customer wants their interaction to use a touchscreen, joystick, lights, sound, or just about anything you can plug into the wall, we now say with confidence: “Yeah, we can do that.”
 
-A typical ROS system is made out of a group ("graph") of nodes that communicate with (usually TCP) messaging. Topics for messaging can be either publish/subscribe namespaces or request/response services. ROS bindings exist for several languages, but C++ and Python are the only supported direct programming interfaces. ROS nodes can be custom logic processors, aggregators, arbitrators, command-line tools for debugging, native Arduino sketches, or just about any other imaginable consumer of the data streams from other nodes.
+A typical ROS system is made out of a group (“graph”) of nodes that communicate with (usually TCP) messaging. Topics for messaging can be either publish/subscribe namespaces or request/response services. ROS bindings exist for several languages, but C++ and Python are the only supported direct programming interfaces. ROS nodes can be custom logic processors, aggregators, arbitrators, command-line tools for debugging, native Arduino sketches, or just about any other imaginable consumer of the data streams from other nodes.
 
 The [rosbridge server](https://github.com/RobotWebTools/rosbridge_suite/tree/master), implemented with [rospy](http://wiki.ros.org/rospy) in Python, is a ROS node that provides a web socket interface to the ROS graph with a simple JSON protocol, making it easy to communicate with ROS from any language that can connect to a web socket and parse JSON. Data is published to a messaging topic (or topics) from any node in the graph and the rosbridge server is just another subscriber to those topics. This is the critical piece that brings all the magic of the ROS graph into a browser.
 
-A handy feature of the [rosbridge JSON protocol](https://github.com/RobotWebTools/rosbridge_suite/blob/master/ROSBRIDGE_PROTOCOL.md) is the ability to create topics on the fly. For interactive exhibits that require multiple screens displaying synchronous content, topics that are only published and subscribed between web socket clients are a quick and dirty way to share data without writing a "third leg" ROS node to handle input arbitration and/or logic. In this case, rosbridge will act as both a publisher and a subscriber of the topic.
+A handy feature of the [rosbridge JSON protocol](https://github.com/RobotWebTools/rosbridge_suite/blob/master/ROSBRIDGE_PROTOCOL.md) is the ability to create topics on the fly. For interactive exhibits that require multiple screens displaying synchronous content, topics that are only published and subscribed between web socket clients are a quick and dirty way to share data without writing a “third leg” ROS node to handle input arbitration and/or logic. In this case, rosbridge will act as both a publisher and a subscriber of the topic.
 
-To develop a ROS-enabled browser app, all you need is an Ubuntu box with ROS, the rosbridge server and a web socket-capable browser installed. Much has been written about [installing ROS (indigo)](http://wiki.ros.org/indigo/Installation/Ubuntu), and once you've installed ros-indigo-ros-base, set up your shell environment, and started the ROS core/master, a rosbridge server is two commands away:
+To develop a ROS-enabled browser app, all you need is an Ubuntu box with ROS, the rosbridge server and a web socket-capable browser installed. Much has been written about [installing ROS (indigo)](http://wiki.ros.org/indigo/Installation/Ubuntu), and once you’ve installed ros-indigo-ros-base, set up your shell environment, and started the ROS core/master, a rosbridge server is two commands away:
 
 ```
 $ sudo apt-get install ros-indigo-rosbridge-suite
@@ -49,7 +49,7 @@ var exampleTopic = new ROSLIB.Topic({
 
 The messageType of [std_msgs/String](http://docs.ros.org/api/std_msgs/html/msg/String.html) means that we are using a message definition from the std_msgs package (which ships with ROS) containing a single string field. Each topic can have only one messageType that must be used by all publishers and subscribers of that topic.
 
-A "proper" ROS communication scheme will use predefined message types to serialize messages for maximum efficiency over the wire. When using the std_msgs package, this means each message will contain a value (or an array of values) of a single, very specific type. See the [std_msgs documentation](http://wiki.ros.org/std_msgs) for a complete list. Other message types may be available, depending on which ROS packages are installed on the system.
+A “proper” ROS communication scheme will use predefined message types to serialize messages for maximum efficiency over the wire. When using the std_msgs package, this means each message will contain a value (or an array of values) of a single, very specific type. See the [std_msgs documentation](http://wiki.ros.org/std_msgs) for a complete list. Other message types may be available, depending on which ROS packages are installed on the system.
 
 For cross-browser application development, a bit more flexibility is usually desired. You can roll your own data-to-string encoding and pack everything into a single string topic or use multiple topics of appropriate messageType if you like, but unless you have severe performance needs, a JSON stringify and parse will pack arbitrary JavaScript objects as messages just fine. It will only take a little bit of boilerplate to accomplish this.
 
@@ -109,7 +109,7 @@ setInterval(function() {
 }, 1000);
 ```
 
-From here, you can add another layer of data shuffling by writing message handlers for your communication channel. Re-using the EventEmitter2 class upon which roslibjs depends is not a bad way to go. If it feels like you're implementing ROS messaging on top of ROS messaging.. well, that's what you're doing! This approach will generally break down when communicating with other non-browser nodes, so use it sparingly and only for application layer messaging that needs to be flexible.
+From here, you can add another layer of data shuffling by writing message handlers for your communication channel. Re-using the EventEmitter2 class upon which roslibjs depends is not a bad way to go. If it feels like you’re implementing ROS messaging on top of ROS messaging.. well, that’s what you’re doing! This approach will generally break down when communicating with other non-browser nodes, so use it sparingly and only for application layer messaging that needs to be flexible.
 
 ```javascript
 /**
@@ -148,7 +148,7 @@ RosTypedMessaging.prototype.sendMessage = function(type, data) {
 };
 ```
 
-Here's an example using RosTypedMessaging.
+Here’s an example using RosTypedMessaging.
 
 ```javascript
 //* Example implementation of RosTypedMessaging.

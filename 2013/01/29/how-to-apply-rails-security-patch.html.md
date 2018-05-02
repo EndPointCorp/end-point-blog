@@ -5,13 +5,11 @@ tags: rails, security
 title: How to Apply a Rails Security Patch
 ---
 
-
-
-With [the announcement of CVE-2013-0333](https://groups.google.com/forum/?hl=en&fromgroups=#!topic/rubyonrails-security/1h2DR63ViGo), it's time again to secure your Rails installation. ([Didn't we just do this?](http://blog.endpoint.com/2013/01/rails-CVE-2013-0156-metasploit.html)) If you are unable to upgrade to the latest, secure release of Rails, this post will help you apply a Rail security patch, using CVE-2013-0333 as an example.
+With [the announcement of CVE-2013-0333](https://groups.google.com/forum/?hl=en&fromgroups=#!topic/rubyonrails-security/1h2DR63ViGo), it’s time again to secure your Rails installation. ([Didn’t we just do this?](/blog/2013/01/10/rails-cve-2013-0156-metasploit)) If you are unable to upgrade to the latest, secure release of Rails, this post will help you apply a Rail security patch, using CVE-2013-0333 as an example.
 
 ### Fork Rails, Patch
 
-The CVE-2013-0333 patches so kindly released by [Michael Koziarski](https://twitter.com/nzkoz) are intended for use with folks who have forked the Rails repository. If you are unable to keep up with the latest releases, a forked repo can help you manage divergences and make it easy to apply security patches. Unfortunately, you cannot use wget to download the attached patches directly from Google Groups, so you'll have to do this in the browser and put the patch into the root of your forked Rails repo. To apply the patch:
+The CVE-2013-0333 patches so kindly released by [Michael Koziarski](https://twitter.com/nzkoz) are intended for use with folks who have forked the Rails repository. If you are unable to keep up with the latest releases, a forked repo can help you manage divergences and make it easy to apply security patches. Unfortunately, you cannot use wget to download the attached patches directly from Google Groups, so you’ll have to do this in the browser and put the patch into the root of your forked Rails repo. To apply the patch:
 
 ```bash
 cd $RAILS_FORK_PATH
@@ -35,11 +33,11 @@ Before begining, take a look at the diffstat at the top of the patch:
  activesupport/test/json/decoding_test.rb           |    4 +-
 ```
 
-As you can see the base path of the diff is "activesupport". (The triple dots are simply there to truncate the paths so the diffstats line up nicely.) However, when the activesupport gem is installed on your system, the version number is appended in the path. This means we need to use the -p2 argument for [patch](http://linux.die.net/man/1/patch) to "strip the smallest prefix containing *num* leading slashes from each file name found in the patch file." We'll see how to do this in just a second, but first, let's find the source files we need to patch.
+As you can see the base path of the diff is “activesupport”. (The triple dots are simply there to truncate the paths so the diffstats line up nicely.) However, when the activesupport gem is installed on your system, the version number is appended in the path. This means we need to use the -p2 argument for [patch](http://linux.die.net/man/1/patch) to “strip the smallest prefix containing *num* leading slashes from each file name found in the patch file.” We’ll see how to do this in just a second, but first, let’s find the source files we need to patch.
 
 ### Locating Rails Gems
 
-To find the installed location of your Rails gems, make sure you are using the desired RVM installation@gemset (check with rvm current), and then run "gem env" and look for the "GEM PATHS" section. If you're using the user-based installation of RVM it might look something like this:
+To find the installed location of your Rails gems, make sure you are using the desired RVM installation@gemset (check with rvm current), and then run “gem env” and look for the “GEM PATHS” section. If you’re using the user-based installation of RVM it might look something like this:
 
 ```bash
 /home/$USER/.rvm/gems/ree-1.8.7-2012.02
@@ -60,7 +58,7 @@ patch -p2 < cve-2013-0333.patch
 patching file lib/active_support/json/backends/okjson.rb
 patching file lib/active_support/json/backends/yaml.rb
 patching file lib/active_support/json/decoding.rb
-can't find file to patch at input line 768
+can’t find file to patch at input line 768
 Perhaps you used the wrong -p or --strip option?
 The text leading up to this was:
 --------------------------
@@ -75,11 +73,11 @@ Skipping patch.
 1 out of 1 hunk ignored
 ```
 
-This error is just saying it cannot find the file test/json/decoding_test.rb. It's OK to skip this patch, because the file doesn't exist to patch.
+This error is just saying it cannot find the file test/json/decoding_test.rb. It’s OK to skip this patch, because the file doesn’t exist to patch.
 
 ### Verify the Patch is Installed
 
-When doing any kind of security patching it is essential that you have confidence your actions were applied successfully. The strategies on doing this will verify based on the type of changes made. For CVE-2013-0333, it's a fairly simple check.
+When doing any kind of security patching it is essential that you have confidence your actions were applied successfully. The strategies on doing this will verify based on the type of changes made. For CVE-2013-0333, it’s a fairly simple check.
 
 ```bash
 # Before applying patch

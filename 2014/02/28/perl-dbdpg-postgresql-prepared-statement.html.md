@@ -7,7 +7,7 @@ title: DBD::Pg prepared statement change
 
 
 
-One of the changes in the recently released [DBD::Pg version 3](http://blog.endpoint.com/2014/02/perl-postgresql-driver-dbdpg-300.html) (in addition to the [big utf8 change](http://blog.endpoint.com/2014/02/dbdpg-utf-8-perl-postgresql.html)), is the addition of a new attribute, **pg_switch_prepared**. This accompanies a behavior change in the use of prepare/execute. DBD::Pg will now postpone creating a server-side PREPARE statement until the second time a query is run via the execute() method.
+One of the changes in the recently released [DBD::Pg version 3](/blog/2014/02/07/perl-postgresql-driver-dbdpg-300) (in addition to the [big utf8 change](/blog/2014/02/19/dbdpg-utf-8-perl-postgresql)), is the addition of a new attribute, **pg_switch_prepared**. This accompanies a behavior change in the use of prepare/execute. DBD::Pg will now postpone creating a server-side PREPARE statement until the second time a query is run via the execute() method.
 
 Technically, DBD::Pg will use **PQexecParams** (part of the underlying libpq system that DBD::Pg uses) the first time a statement is executed, and switch to using **PQexecPrepared** the second time the statement is executed (by calling **PQprepare** first). When it actually switches is controlled by the pg_switch_prepared attribute, which defaults to 2 (the behavior above). You can set it to 0 or 1 to always use PQexecPrepared (as the older versions did), or you can set it to -1 to always use PQexecParams and avoid creating prepared statements entirely.
 
@@ -62,6 +62,6 @@ DETAIL:  parameters: $1 = 'foobar3'
 
 As you can see, the do() method always uses PQexecParams (this is what creates the "<unnamed>" statement seen in the logs). For the prepare/execute section, the older versions issued an implicit prepare right away, while 3.0.0 uses an unnamed statement for the first iteration, and only when called more than once switches to a named prepared statement. The use of PQexecParams is faster than doing a PQprepare plus a PQexecParams, but if you are going to execute the same query a number of times, it is more efficient to simply send the arguments via PQexecPrepared and absorb the one-time cost of creating the statement via PQprepare.
 
-What does this mean for users of DBD::Pg? Probably nothing, as the new default is already a decent compromise, but it's good to know about the pg_switch_prepared knob, that is there if you need it.
+What does this mean for users of DBD::Pg? Probably nothing, as the new default is already a decent compromise, but it’s good to know about the pg_switch_prepared knob, that is there if you need it.
 
 

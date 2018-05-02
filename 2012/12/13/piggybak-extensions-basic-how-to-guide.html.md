@@ -5,7 +5,7 @@ tags: piggybak, rails
 title: 'Piggybak Extensions: A Basic How-To Guide'
 ---
 
-This article outlines the steps to build an extension for [Piggybak](http://www.piggybak.org/). Piggybak is an open-source Ruby on Rails ecommerce platform created and maintained by End Point. It is developed as a Rails Engine and is intended to be mounted on an existing Rails application. If you are interested in developing an extension for Piggybak, this article will help you identify the steps you need to take to have your extension leveraging the Piggybak gem, and integrating smoothly into your app.
+This article outlines the steps to build an extension for [Piggybak](https://github.com/piggybak/piggybak). Piggybak is an open-source Ruby on Rails ecommerce platform created and maintained by End Point. It is developed as a Rails Engine and is intended to be mounted on an existing Rails application. If you are interested in developing an extension for Piggybak, this article will help you identify the steps you need to take to have your extension leveraging the Piggybak gem, and integrating smoothly into your app.
 
 ### Introduction
 
@@ -65,7 +65,7 @@ config.to_prepare do
 end
 ```
 
-An order is comprised of many line items, which are used to calculate the balance due. More information on the line item architecture is described [here](http://blog.endpoint.com/2012/10/piggybak-update-line-item-rearchitecture.html). If your extension needs to register new line item types to the order, you may use something similar to the following code to set up the information regarding this new line item type.
+An order is comprised of many line items, which are used to calculate the balance due. More information on the line item architecture is described [here](/blog/2012/10/17/piggybak-update-line-item-rearchitecture). If your extension needs to register new line item types to the order, you may use something similar to the following code to set up the information regarding this new line item type.
 
 ```ruby
 config.before_initialize do

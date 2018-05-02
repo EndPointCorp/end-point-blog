@@ -8,31 +8,31 @@ title: The mystery of the disappearing SSH key
 <div class="separator" style="clear: both; float: right; text-align: center; padding: 0 0 2em 1em"><a href="/blog/2017/04/13/the-mystery-of-disappearing-ssh-key/image-0.jpeg" imageanchor="1" style="clear: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" src="/blog/2017/04/13/the-mystery-of-disappearing-ssh-key/image-0.jpeg"/></a><br/><small><a href="https://flic.kr/p/SnZgVF">Photo</a> by <a href="https://www.flickr.com/photos/50663863@N02/">Jay Huang</a></small></div>
 
 SSH ([Secure Shell](https://en.wikipedia.org/wiki/Secure_Shell)) is one of the programs I use every single day at [work](/), primarily to connect
-to our client's servers. Usually it is a rock-solid program that simply
+to our client’s servers. Usually it is a rock-solid program that simply
 works as expected, but recently I discovered it behaving quite strangely -
 a server I had visited many times before was now refusing my attempts
 to login. The underlying problem turned out to be a misguided decision by the developers
-of [OpenSSH](http://www.openssh.com/) to deprecate [DSA](https://en.wikipedia.org/wiki/Digital_Signature_Algorithm) keys. How I discovered this problem is described below
+of [OpenSSH](https://www.openssh.com/) to deprecate [DSA](https://en.wikipedia.org/wiki/Digital_Signature_Algorithm) keys. How I discovered this problem is described below
 (as well as two solutions).
 
 The use of the ssh program is not simply limited to logging in and connecting
 to remote servers. It also supports many powerful features, one of the most
 important being the ability to chain multiple connections with the
-ProxyCommand option. By using this, you can "login" to servers
+ProxyCommand option. By using this, you can “login” to servers
 that you cannot reach directly, by linking together two or more servers behind the scenes.
 
-As as example, let's consider a client named "Acme Anvils" that strictly
+As as example, let’s consider a client named “Acme Anvils” that strictly
 controls access to its production servers. They make all SSH traffic
 come in through a single server, named dmz.acme-anvils.com, and only on port 2222.
 They also only allow certain public IPs to connect to this server, via whitelisting.
 On our side, End Point has a server, named portal.endpoint.com, that I can use as a jumping off point,
 which has a fixed IP that we can give to our clients to whitelist.
-Rather than logging in to "portal", getting a prompt, and then logging in to "dmz", I can
+Rather than logging in to “portal”, getting a prompt, and then logging in to “dmz”, I can
 simply add an entry in my ~/.ssh/config file to automatically create a tunnel between
 the servers -
-at which point I can reach the client's server by typing "ssh acmedmz":
+at which point I can reach the client’s server by typing “ssh acmedmz”:
 
-```
+```text
 ##
 ## Client: ACME ANVILS
 ##
@@ -45,20 +45,20 @@ Port 2222
 ProxyCommand ssh -q greg@portal.endpoint.com nc -w 180s %h %p
 ```
 
-Notice that the "Host" name may be set to anything you want. The connection
-to the client's server uses a non-standard port, and the username
-changes from "greg" to "endpoint", but all of that is hidden away from
+Notice that the “Host” name may be set to anything you want. The connection
+to the client’s server uses a non-standard port, and the username
+changes from “greg” to “endpoint”, but all of that is hidden away from
 me as now the login is simply:
 
-```
+```text
 [greg@localhost]$ ssh acmedmz
 [endpoint@dmz]$
 ```
 
-It's unusual that I'll actually need to do any work on the dmz server, of course,
+It’s unusual that I’ll actually need to do any work on the dmz server, of course,
 so the tunnel gets extended another hop to the db1.acme-anvils.com server:
 
-```
+```text
 ##
 ## Client: ACME ANVILS
 ##
@@ -78,8 +78,8 @@ ProxyCommand ssh -q acmedmz nc -w 180s %h %p
 
 ```
 
-Notice how the second ProxyCommand references the "Host" of the section
-above it. Neat stuff. When I type "ssh acemdb1", I'm actually connecting to
+Notice how the second ProxyCommand references the “Host” of the section
+above it. Neat stuff. When I type “ssh acemdb1”, I’m actually connecting to
 the portal.endpoint.com server, then immediately running the netcat (nc) command
 in the background, then going through netcat to dmz.acme-anvils.com and
 running a second netcat command on *that* server, and finally going through
@@ -89,15 +89,15 @@ After you update your .ssh/config file, you soon forget about
 all the tunneling and feel as though you are connecting directly to all your servers. That is, until
 something breaks, as it did recently for me.
 
-The actual client this happened with was not "Acme Anvils", of course, and it
+The actual client this happened with was not “Acme Anvils”, of course, and it
 was a connection that went through four servers and three ProxyCommands,
-but for demonstration purposes let's pretend it happened on a simple
+but for demonstration purposes let’s pretend it happened on a simple
 connection to the dmz.acme-anvils.com server. I had not connected to
 the server in question for a long time, but I needed to make some adjustments
 to a [tail_n_mail](https://bucardo.org/wiki/Tail_n_mail) configuration file. The first login attempt failed
 completely:
 
-```
+```text
 [greg@localhost]$ ssh acmedmz
 endpoint@dmz.acme-anvils.com's password:
 ```
@@ -107,8 +107,8 @@ to the client server failed. This is not an unusual problem: it usually signifie
 or that I forgot to feed it the correct key via the ssh-add program. However, I quickly discovered
 that ssh-agent was working and contained all my usual keys. Moreover, I was able to
 connect to other sites with no problem! On a hunch, I tried breaking down the connections
-into manual steps. First, I tried logging in to the "portal" server. It logged me in
-with no problem. Then I tried to login from there to dmz.acme-anvils.com - which also logged
+into manual steps. First, I tried logging in to the “portal” server. It logged me in
+with no problem. Then I tried to login from there to dmz.acme-anvils.com — which also logged
 me in with no problem! But trying to get there via ProxyCommand still failed.
 What was going on?
 
@@ -116,7 +116,7 @@ When in doubt, crank up the debugging. For the ssh program, using the
 -v option turns on some minimal debugging. Running the
 original command from my computer with this option enabled quickly revealed the problem:
 
-```
+```text
 [greg@localhost]$ ssh -v acmedmz
 OpenSSH_7.4p1, OpenSSL 1.0.2k-fips  26 Jan 2017
 debug1: Reading configuration data /home/greg/.ssh/config
@@ -138,7 +138,7 @@ debug1: Next authentication method: password
 endpoint@dmz.acme-anvils.com's password:
 ```
 
-As highlighted above, the problem is that my DSA key (the "ssh-dss key") was rejected by
+The problem is that my DSA key (the “ssh-dss key”) was rejected by
 my ssh program. As we will see below, DSA keys are rejected by default in recent versions
 of the OpenSSH program. But why was I still able to login when not hopping through
 the middle server? The solution lays in the fact that when I use the ProxyCommand,
@@ -147,7 +147,7 @@ key. However, when I ssh to the portal.endpoint.com server, and then on to the n
 the second server has no problem using my (forwarded) DSA key! Using the -v option on the connection
 from portal.endpoint.com to dmz.acme-anvils.com reveals another clue:
 
-```
+```text
 [greg@portal]$ ssh -v endpoint@dmz.acme-anvils.com:2222
 ...
 debug1: Connecting to dmz [1234:5678:90ab:cd::e] port 2222.
@@ -192,13 +192,13 @@ keys again. To do this, add this line to your local SSH config file
 ($HOME/.ssh/config), or to the global SSH config file
 (/etc/ssh/config):
 
-```
+```text
 PubkeyAcceptedKeyTypes +ssh-dss
 ```
 
 As mentioned earlier, this whole mess was caused by the OpenSSH program deciding
 to deprecate DSA keys. Their rationale for targeting all DSA keys seems a little weak at best: certainly
-I don't feel that my 2048-bit DSA key is in any way a weak link. But
+I don’t feel that my 2048-bit DSA key is in any way a weak link. But
 the writing is on the wall now for DSA, so you may as well replace your DSA
 keys with RSA ones (and an [ed25519 key](https://en.wikipedia.org/wiki/EdDSA) as well, in anticipation of when ssh-agent
 is able to support them!). More information about the decision to force out

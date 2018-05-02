@@ -5,9 +5,9 @@ tags: postgres
 title: How to make a PostgreSQL query slow
 ---
 
-Some applications can be very vulnerable to long running queries. When you test an application, sometimes it is good to have a query running for, let's say, 10 minutes. What's more it should be a normal query, so the application can get the normal results, however this query should run for some longer time than usual.
+Some applications can be very vulnerable to long running queries. When you test an application, sometimes it is good to have a query running for, let’s say, 10 minutes. What’s more it should be a normal query, so the application can get the normal results, however this query should run for some longer time than usual.
 
-PostgreSQL has quite a nice function pg_sleep which takes exactly one parameter, it is the number of seconds this function will wait before returning. You can use it as a normal PostgreSQL function, however it's not very sensible:
+PostgreSQL has quite a nice function pg_sleep which takes exactly one parameter, it is the number of seconds this function will wait before returning. You can use it as a normal PostgreSQL function, however it’s not very sensible:
 
 ```sql
 # SELECT pg_sleep(10);
@@ -20,7 +20,7 @@ PostgreSQL has quite a nice function pg_sleep which takes exactly one parameter,
 Time: 10072.794 ms
 ```
 
-The most interesting usage is adding this function into a query. Let's take this query:
+The most interesting usage is adding this function into a query. Let’s take this query:
 
 ```sql
 # SELECT schemaname, tablename
@@ -30,7 +30,7 @@ The most interesting usage is adding this function into a query. Let's take this
 Time: 0.985 ms
 ```
 
-As you can see, this query is quite fast and returns data in less than 1 ms. Let's now make this query much slower, however returning exactly the same data, but after 15 seconds:
+As you can see, this query is quite fast and returns data in less than 1 ms. Let’s now make this query much slower, however returning exactly the same data, but after 15 seconds:
 
 ```sql
 # SELECT schemaname, tablename

@@ -120,10 +120,10 @@ Full custom action can be viewed [here](https://gist.github.com/2039001)
 
 [RailsAdmin has a nice script](https://github.com/sferik/rails_admin/wiki/Custom-action) that can be used for generating custom actions as external gems (engines). In the case of this blog article, the approve_review was integrated directly into the Rails application. RailsAdmin action configuration options can be found [here](https://github.com/sferik/rails_admin/blob/master/lib/rails_admin/config/actions/base.rb).
 
-End Point has been using RailsAdmin for an ecommerce project that uses [Piggybak](http://www.piggybak.org/). Here are a few related articles:
+End Point has been using RailsAdmin for an ecommerce project that uses [Piggybak](https://github.com/piggybak/piggybak). Here are a few related articles:
 
-- [RailsAdmin and Import functionality](http://blog.endpoint.com/2012/02/railsadmin-import-part-2.html)
-- [Piggybak: A Mountable Ruby on Rails Ecommerce Engine](http://blog.endpoint.com/2012/01/piggybak-mountable-ecommerce-ruby-on.html)
-- [RailsAdmin in ecommerce](http://blog.endpoint.com/2011/08/railsadmin-gem-ecommerce.html)
+- [RailsAdmin and Import functionality](/blog/2012/02/01/railsadmin-import-part-2)
+- [Piggybak: A Mountable Ruby on Rails Ecommerce Engine](/blog/2012/01/06/piggybak-mountable-ecommerce-ruby-on)
+- [RailsAdmin in ecommerce](/blog/2011/08/09/railsadmin-gem-ecommerce)
 
 

@@ -5,13 +5,13 @@ tags: linux, sysadmin
 title: md+lvm expansion from RAID 1 to RAID 5
 ---
 
-VHS is on the way out, or so they tell me.  A little while back I unearthed the family's collection of old tape recordings, and have been digitizing everything in an effort to preserve all the old youth sports games and embarassing birthday parties.  There's no way I'm going to let my brother forget those.  It's a lot of video, and that takes up quite a bit of space.  Between that, HD videos recorded more recently, Postgres test databases and source datasets, server backups, and so on, the 3TB of space on my local file server was quickly running out.
+VHS is on the way out, or so they tell me. A little while back I unearthed the family’s collection of old tape recordings, and have been digitizing everything in an effort to preserve all the old youth sports games and embarassing birthday parties. There’s no way I’m going to let my brother forget those. It’s a lot of video, and that takes up quite a bit of space. Between that, HD videos recorded more recently, Postgres test databases and source datasets, server backups, and so on, the 3TB of space on my local file server was quickly running out.
 
-I know, right?  My first hard drive was 40MB, in two 20MB partitions.  And we were glad for that space!
+I know, right? My first hard drive was 40MB, in two 20MB partitions. And we were glad for that space!
 
-Back in the present, now it was time to add another hard drive.  This (otherwise) tiny rooted plug server contained two 3TB USB hard drives in a RAID-1 configuration through the Linux md module.  On top of that is lvm.  lvm itself could have been used for the RAID-1, but has the disadvantage of not being able to optimize multiple reads, whereas md can allow both disks in the mirror serve different reads at the same time.
+Back in the present, now it was time to add another hard drive. This (otherwise) tiny rooted plug server contained two 3TB USB hard drives in a RAID-1 configuration through the Linux md module. On top of that is lvm. lvm itself could have been used for the RAID-1, but has the disadvantage of not being able to optimize multiple reads, whereas md can allow both disks in the mirror serve different reads at the same time.
 
-I bought a third disk of the same model, so it could be added in to a RAID-5 configuration.  These being big USB drives, operations that read and write the disks as a whole (such as RAID rebuild operations) take a while.  A long while.  I could have unmounted, disassembled the array, rebuilt it as RAID-5, and brought it back after, but keeping it offline for that amount of time wasn't too appealing.  Lets attempt an online conversion.
+I bought a third disk of the same model, so it could be added in to a RAID-5 configuration. These being big USB drives, operations that read and write the disks as a whole (such as RAID rebuild operations) take a while. A long while. I could have unmounted, disassembled the array, rebuilt it as RAID-5, and brought it back after, but keeping it offline for that amount of time wasn’t too appealing. Lets attempt an online conversion.
 
 First up, confirming the disks are all the same exact size:
 
@@ -23,7 +23,7 @@ root@plug01:/backup# blockdev --getsize64 /dev/sdc2
 root@plug01:/backup# blockdev --getsize64 /dev/sdb2
 2999557554176
 ```
-mdadm says the array is in good shape, but it won't be for long.  We'll need to break the RAID-1 in order to recreate the RAID-5.  Yes, it's as scary as it sounds.  Backups were double checked.  Backups were triple checked.  To break the array set one of the devices as failed, then remove it:
+mdadm says the array is in good shape, but it won’t be for long. We’ll need to break the RAID-1 in order to recreate the RAID-5. Yes, it’s as scary as it sounds. Backups were double checked. Backups were triple checked. To break the array set one of the devices as failed, then remove it:
 
 ```
 Number Major Minor RaidDevice State
@@ -34,9 +34,9 @@ mdadm: set /dev/sdc2 faulty in /dev/md0
 root@plug01:/backup# mdadm /dev/md0 -r /dev/sdc2 # Remove from array
 mdadm: hot removed /dev/sdc2 from /dev/md0
 ```
-Now we have an ex-RAID-1 (sdb2) with two spare disks (sdc2 and sdd2.)  Those two spare partitions can then be put into a RAID-5 configuration.
+Now we have an ex-RAID-1 (sdb2) with two spare disks (sdc2 and sdd2.) Those two spare partitions can then be put into a RAID-5 configuration.
 
-Wait, what?  RAID-5 with two disks?  Sure, I could have created a 3-device RAID-5 with one marked as "missing" but I wanted to restore the redundancy as soon as possible, and so gave it a shot.  Lo and behold...
+Wait, what? RAID-5 with two disks? Sure, I could have created a 3-device RAID-5 with one marked as “missing” but I wanted to restore the redundancy as soon as possible, and so gave it a shot. Lo and behold...
 
 ```
 root@plug01:/backup# mdadm --create /dev/md1 --level=5 --raid-devices=2 /dev/sdc2 /dev/sdd2
@@ -76,7 +76,7 @@ Number Major Minor RaidDevice State
 0 8 34 0 active sync /dev/sdc2
 2 8 50 1 spare rebuilding /dev/sdd2
 ```
-Seems to have worked!  The array build will do its thing in the background, but we can start using it immediately.  Since we want the redundancy back sooner than later, lets start moving the data off the now single disk it resides on.  Since we're using lvm, this is just a matter of having it move the volume group from the old pv to the new one.  That process does take a long time.  Set up the physical volume structure, add it to the volume group, and start the move process:
+Seems to have worked! The array build will do its thing in the background, but we can start using it immediately. Since we want the redundancy back sooner than later, lets start moving the data off the now single disk it resides on. Since we’re using lvm, this is just a matter of having it move the volume group from the old pv to the new one. That process does take a long time. Set up the physical volume structure, add it to the volume group, and start the move process:
 
 ```
 root@plug01:/backup# pvcreate /dev/md1
@@ -110,9 +110,9 @@ mdadm: added /dev/sdb2
 root@plug01:/backup# mdadm --grow --raid-devices=3 --backup-file=/root/tmp/md1.bak /dev/md1
 mdadm: /dev/md1 is performing resync/recovery and cannot be reshaped
 ```
-Oh, our pvmove activity superseded the array build procedure, so we have to wait until that finishes before we can grow the RAID-5.  While we're waiting, I'll note that the operation backs up some of the metadata to an external file at the very start of the procedure, just in case something happens early on in the process.  It doesn't need it for long.
+Oh, our pvmove activity superseded the array build procedure, so we have to wait until that finishes before we can grow the RAID-5. While we’re waiting, I’ll note that the operation backs up some of the metadata to an external file at the very start of the procedure, just in case something happens early on in the process. It doesn’t need it for long.
 
-There, that's probably enough waiting...
+There, that’s probably enough waiting...
 
 ```
 root@plug01:/backup# mdadm --grow --raid-devices=3 --backup-file=/root/tmp/md1.bak /dev/md1
@@ -125,7 +125,7 @@ md1 : active raid5 sdb2[3] sdd2[2] sdc2[0]
 
 unused devices:
 ```
-More waiting.  After that completes we're then able to resize the pv to take up that space, and then resize the lv.  Note that the lv doesn't take up the entirety of the pv and has a little bit of space reserved for snapshots.
+More waiting. After that completes we’re then able to resize the pv to take up that space, and then resize the lv. Note that the lv doesn’t take up the entirety of the pv and has a little bit of space reserved for snapshots.
 
 ```
 root@plug01:/backup# pvresize /dev/md1

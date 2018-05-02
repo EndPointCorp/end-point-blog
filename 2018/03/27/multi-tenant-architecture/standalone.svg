@@ -1,0 +1,18 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" width="820px" height="520px" viewBox="-0.210084 0 820.42 520" preserveAspectRatio="xMidYMid meet">
+  <rect id="svgEditorBackground" x="0" y="0" width="820" height="520" style="fill: none; stroke: none;"/>
+  <defs id="svgEditorDefs">
+    <polygon id="svgEditorShapeDefs" style="fill:khaki;stroke:black;vector-effect:non-scaling-stroke;stroke-width:1px;"/>
+  </defs>
+  <rect x="175" y="24" style="fill:#57c1f2;stroke:black;stroke-width:1px;" id="e1_rectangle" width="158.856" height="69.2605" transform="matrix(1.0665 0 0 1 -12.911 13)" ry="0" rx="0"/><text style="fill:black;font-family:Arial;font-size:20px;" x="190.21" y="76.5547" id="e3_texte">App Instance A</text>
+  <path d="M-4,-2.5v5q0,1,4,1t4,-1v-5q0,1,-4,1t-4,-1q0,-1,4,-1t4,1t-4,1t-4,-1Z" style="fill:khaki; stroke:black; vector-effect:non-scaling-stroke;stroke-width:1px;" id="e14_shape" transform="matrix(0.125 0 0 0.125 210.5 313.438)"/>
+  <path d="M-0.6252346416877963,-1.1155330517316193v5.0000000000000036q0,1,4,1t4.000000000000002,-1v-5q0,1.0000000000000064,-4.000000000000002,1.0000000000000064t-3.9999999999999996,-1.0000000000000064q0,-1,3.9999999999999996,-1t4.000000000000002,0.9999999999999987t-4.000000000000002,1.0000000000000062t-3.9999999999999996,-1.0000000000000062Z" style="fill:#57c1f2; stroke:black; vector-effect:non-scaling-stroke;stroke-width:1px;" id="e1_shape" transform="matrix(12.6246 0 0 14.0205 206.807 337.679)"/>
+  <path d="M7.5917343192359485,-1.60002019613494v5.000000000000005q0,1.000000000000008,4.000000000000002,1.000000000000008t4.0000000000000036,-1.0000000000000058v-5.000000000000005q0,1.0000000000000044,-4.0000000000000036,1.0000000000000044t-4.000000000000003,-1.0000000000000044q0,-1.0000000000000044,4.000000000000003,-1.0000000000000044t4.0000000000000036,1.0000000000000044t-4.0000000000000036,1.0000000000000044t-4.000000000000003,-1.0000000000000044Z" style="fill:#57c1f2; stroke:black; vector-effect:non-scaling-stroke;stroke-width:1px;" id="e2_shape" transform="matrix(12.3259 0 0 14.3097 326.432 342.385)"/>
+  <text style="fill:black;font-family:Arial;font-size:20px;" x="431.303" y="369.244" id="e16_texte">Tenant B</text>
+  <rect x="351.555" y="39.3277" style="fill:#57c1f2;stroke:black;stroke-width:1px;" id="e2_rectangle" width="163.866" height="66.6387" transform="matrix(1 0 0 1.04938 26.2185 -5.77238)" ry="0" rx="0"/>
+  <text style="fill:black;font-family:Arial;font-size:20px;" x="393.067" y="76.4706" id="e4_texte">App Instance B</text>
+  <text style="fill:black;font-family:Arial;font-size:20px;" x="206.26" y="369.244" id="e5_texte">Tenant A</text>
+  <path d="M2,0h2l-4,4l-4,-4h2v-4h4Z" style="fill:khaki; stroke:black; vector-effect:non-scaling-stroke;stroke-width:1px;" id="e7_shape" transform="matrix(5.96032 0 0 14.9103 249.412 207.017)"/>
+  <path d="M2,0h2l-4,4l-4,-4h2v-4h4Z" style="fill:khaki; stroke:black; vector-effect:non-scaling-stroke;stroke-width:1px;" id="e8_shape" transform="matrix(6.06618 0 0 14.2279 467.899 210.294)"/>
+</svg>

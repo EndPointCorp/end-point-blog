@@ -8,13 +8,13 @@ title: 'MediaWiki extension EmailDiff: notification emails improved'
 <div class="separator" style="clear: both; float:right; padding: 0 0 .5em 1.5em; text-align: center;"><a href="/blog/2016/03/11/mediawiki-extension-emaildiff/image-0.jpeg" imageanchor="1" style="clear: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" src="/blog/2016/03/11/mediawiki-extension-emaildiff/image-0.jpeg"/></a><br/><small><a href="https://flic.kr/p/bdWyHP">Photo</a> by <a href="https://www.flickr.com/photos/karenandbrademerson/">Karen and Brad Emerson</a></small></div>
 
 One of the nice things about MediaWiki is the ability to use 
-[extensions](https://www.mediawiki.org/wiki/Manual:Extensions) to extend the core functionality in many ways. I've just released a 
+[extensions](https://www.mediawiki.org/wiki/Manual:Extensions) to extend the core functionality in many ways. I’ve just released a 
 new version of an extension I wrote called EmailDiff that helps provide a much needed 
 function. When one is using a MediaWiki site, and a page is on your 
-watchlist - or your username is inside  
-[the 'UsersNotifiedOnAllChanges' array](https://www.mediawiki.org/wiki/Manual:$wgUsersNotifiedOnAllChanges) - you will receive an email whenever a page 
-is changed. However, this email simply gives you the editor's summary and states 
-"the page has been changed, here's some links if you want to see exactly what". 
+watchlist — or your username is inside  
+[the 'UsersNotifiedOnAllChanges' array](https://www.mediawiki.org/wiki/Manual:$wgUsersNotifiedOnAllChanges) — you will receive an email whenever a page 
+is changed. However, this email simply gives you the editor’s summary and states 
+“the page has been changed, here’s some links if you want to see exactly what”. 
 With the EmailDiff extension enabled, a full diff of what exactly has changed is sent 
 in the email itself. This is extremely valuable because you can quickly see exactly what has 
 changed, without leaving your email client to open a browser (and potentially have to login), 
@@ -109,7 +109,7 @@ The extension has changed a lot over the years, moving forward along
 with MediaWiki, whose support of extensions gets better all the time. 
 The current version of the EmailDiff extension, 1.7, requires a 
 MediaWiki version of 1.25 or better, as it uses the 
-[new extension.json format](http://blog.endpoint.com/2015/10/mediawiki-extensionjson-change-in-125.html).
+[new extension.json format](/blog/2015/10/17/mediawiki-extensionjson-change-in-125).
 
 Installation is pretty straightforward with four steps. First, visit the 
 [official extension page](https://www.mediawiki.org/wiki/Extension:EmailDiff) at mediawiki.org, download the tarball, and untar 
@@ -126,7 +126,6 @@ line. Currently, the only two configuration items are:
 
 - **$wgEmailDiffSubjectSuffix** This is a string that gets added to the 
 end of any notification emails that contain a diff. Defaults to ***(diff)***.
-
 - **$wgEmailDiffCommand** This is the command used to execute the diff. 
 It should not need to be changed for most systems. Defaults to 
 ***"/usr/bin/diff -u OLDFILE NEWFILE | /usr/bin/tail --lines=+3 > DIFFFILE"***
@@ -176,7 +175,7 @@ There are some limitations to this extension that should be mentioned. As each
 page edit will potentially cause three files to be created on the operating system 
 as well as invoking an external diff command, large and extremely busy wikis may see a 
 performance impact. However, file creations are cheap and the diff command is 
-fast, so unless you are Wikipedia, it's probably worth at least testing out to 
+fast, so unless you are Wikipedia, it’s probably worth at least testing out to 
 see if the impact is meaningful.
 
 I also like these emails as a kind of audit trail for the wiki. On that note, 

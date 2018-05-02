@@ -5,7 +5,7 @@ tags: ecommerce, piggybak, ruby, rails
 title: Download Functionality for Rails Ecommerce
 ---
 
-I recently had to build out downloadable product support for a client project running on [Piggybak (a Ruby on Rails Ecommerce engine)](http://www.piggybak.org/) with extensive use of [RailsAdmin](https://github.com/sferik/rails_admin). Piggybak's core functionality does not support downloadable products, but it was not difficult to extend. Here are some steps I went through to add this functionality. While the code examples apply specifically to a Ruby on Rails application using [paperclip](https://github.com/thoughtbot/paperclip) for managing attachments, the general steps here would apply across languages and frameworks.
+I recently had to build out downloadable product support for a client project running on [Piggybak (a Ruby on Rails Ecommerce engine)](https://github.com/piggybak/piggybak) with extensive use of [RailsAdmin](https://github.com/sferik/rails_admin). Piggybak's core functionality does not support downloadable products, but it was not difficult to extend. Here are some steps I went through to add this functionality. While the code examples apply specifically to a Ruby on Rails application using [paperclip](https://github.com/thoughtbot/paperclip) for managing attachments, the general steps here would apply across languages and frameworks.
 
 ### Data Migration
 
@@ -150,7 +150,7 @@ This straightforward code accomplished the  major updates required for download 
 
 If you are interested in this project, check out these related articles:
 
-- [Introducing Piggybak: A Mountable Ruby on Rails Ecommerce Engine](http://blog.endpoint.com/2012/01/piggybak-mountable-ecommerce-ruby-on.html)
-- [ActiveRecord Callbacks for Order Processing in Ecommerce Applications](http://blog.endpoint.com/2012/01/activerecord-callbacks-ecommerce-order.html)
-- [Importing into RailsAdmin: Part 1](http://blog.endpoint.com/2012/01/import-railsadmin.html)
-- [Importing into RailsAdmin: Part 2](http://blog.endpoint.com/2012/02/railsadmin-import-part-2.html)
+- [Introducing Piggybak: A Mountable Ruby on Rails Ecommerce Engine](/blog/2012/01/06/piggybak-mountable-ecommerce-ruby-on)
+- [ActiveRecord Callbacks for Order Processing in Ecommerce Applications](/blog/2012/01/13/activerecord-callbacks-ecommerce-order)
+- [Importing into RailsAdmin: Part 1](/blog/2012/01/19/import-railsadmin)
+- [Importing into RailsAdmin: Part 2](/blog/2012/02/01/railsadmin-import-part-2)

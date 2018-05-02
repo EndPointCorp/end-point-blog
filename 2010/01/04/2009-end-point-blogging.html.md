@@ -13,44 +13,44 @@ Here's a breakdown of article categories (the categorization was a bit difficult
 
 In 2009, the top 10 articles with the highest number of unique visitors were:
 
-- [http://blog.endpoint.com/2008/07/git-push-know-your-refspecs.html](http://blog.endpoint.com/2008/07/git-push-know-your-refspecs.html)
-- [http://blog.endpoint.com/2008/11/10000-databases-on-postgresql-cluster.html](http://blog.endpoint.com/2008/11/10000-databases-on-postgresql-cluster.html)
-- [http://blog.endpoint.com/2009/02/slony1-200-postgresql-84devel.html](http://blog.endpoint.com/2009/02/slony1-200-postgresql-84devel.html)
-- [http://blog.endpoint.com/2009/01/slow-xen-virtualization-of-rhel-3-i386.html](http://blog.endpoint.com/2009/01/slow-xen-virtualization-of-rhel-3-i386.html)
-- [http://blog.endpoint.com/2009/08/file-test-comparison-table-for-shell.html](http://blog.endpoint.com/2009/08/file-test-comparison-table-for-shell.html)
-- [http://blog.endpoint.com/2009/12/mysql-and-postgres-command-equivalents.html](http://blog.endpoint.com/2009/12/mysql-and-postgres-command-equivalents.html)
-- [http://blog.endpoint.com/2008/08/switching-from-sendmail-to-postfix-on.html](http://blog.endpoint.com/2008/08/switching-from-sendmail-to-postfix-on.html)
-- [http://blog.endpoint.com/2008/11/multiple-reverse-dns-pointers-per-ip.html](http://blog.endpoint.com/2008/11/multiple-reverse-dns-pointers-per-ip.html)
-- [http://blog.endpoint.com/2008/08/acts-as-xapian-it-just-works.html](http://blog.endpoint.com/2008/08/acts-as-xapian-it-just-works.html)
-- [http://blog.endpoint.com/2008/12/truecrypte-whole-disk-encryption-for.html](http://blog.endpoint.com/2008/12/truecrypte-whole-disk-encryption-for.html)
+- [/blog/2008/07/30/git-push-know-your-refspecs](/blog/2008/07/30/git-push-know-your-refspecs)
+- [/blog/2008/11/10/10000-databases-on-postgresql-cluster](/blog/2008/11/10/10000-databases-on-postgresql-cluster)
+- [/blog/2009/02/02/slony1-200-postgresql-84devel](/blog/2009/02/02/slony1-200-postgresql-84devel)
+- [/blog/2009/01/23/slow-xen-virtualization-of-rhel-3-i386](/blog/2009/01/23/slow-xen-virtualization-of-rhel-3-i386)
+- [/blog/2009/08/31/file-test-comparison-table-for-shell](/blog/2009/08/31/file-test-comparison-table-for-shell)
+- [/blog/2009/12/24/mysql-and-postgres-command-equivalents](/blog/2009/12/24/mysql-and-postgres-command-equivalents)
+- [/blog/2008/08/01/switching-from-sendmail-to-postfix-on](/blog/2008/08/01/switching-from-sendmail-to-postfix-on)
+- [/blog/2008/11/28/multiple-reverse-dns-pointers-per-ip](/blog/2008/11/28/multiple-reverse-dns-pointers-per-ip)
+- [/blog/2008/08/26/acts-as-xapian-it-just-works](/blog/2008/08/26/acts-as-xapian-it-just-works)
+- [/blog/2008/12/13/truecrypte-whole-disk-encryption-for](/blog/2008/12/13/truecrypte-whole-disk-encryption-for)
 
 The top 10 "Top Pages", according to a tool provided by [SEOmoz](http://seomoz.org/), which is calculated using SEOmoz popularity metrics based on external links and quality of external linking pages to the url, are:
 
-- [http://blog.endpoint.com/2009/09/migrating-postgres-with-bucardo-4.html](http://blog.endpoint.com/2009/09/migrating-postgres-with-bucardo-4.html)
-- [http://blog.endpoint.com/2009/08/text-sequences.html](http://blog.endpoint.com/2009/08/text-sequences.html)
-- [http://blog.endpoint.com/2008/07/git-push-know-your-refspecs.html](http://blog.endpoint.com/2008/07/git-push-know-your-refspecs.html)
-- [http://blog.endpoint.com/2009/07/bucardo-and-truncate-triggers.html](http://blog.endpoint.com/2009/07/bucardo-and-truncate-triggers.html)
-- [http://blog.endpoint.com/2009/09/seo-external-links-and-pagerank.html](http://blog.endpoint.com/2009/09/seo-external-links-and-pagerank.html)
-- [http://blog.endpoint.com/2009/09/permission-denied-for-postgresqlconf.html](http://blog.endpoint.com/2009/09/permission-denied-for-postgresqlconf.html)
-- [http://blog.endpoint.com/2009/07/mdx.html](http://blog.endpoint.com/2009/07/mdx.html)
-- [http://blog.endpoint.com/2009/08/two-quick-tips-egrep-sql-dumps-vim-and.html](http://blog.endpoint.com/2009/08/two-quick-tips-egrep-sql-dumps-vim-and.html)
-- [http://blog.endpoint.com/2009/07/slony-slstatus-and-diagnosing.html](http://blog.endpoint.com/2009/07/slony-slstatus-and-diagnosing.html)
-- [http://blog.endpoint.com/2009/08/perlpostgres-changes-in-dbdpg-2151.html](http://blog.endpoint.com/2009/08/perlpostgres-changes-in-dbdpg-2151.html)
+- [/blog/2009/09/16/migrating-postgres-with-bucardo-4](/blog/2009/09/16/migrating-postgres-with-bucardo-4)
+- [/blog/2009/08/20/text-sequences](/blog/2009/08/20/text-sequences)
+- [/blog/2008/07/30/git-push-know-your-refspecs](/blog/2008/07/30/git-push-know-your-refspecs)
+- [/blog/2009/07/14/bucardo-and-truncate-triggers](/blog/2009/07/14/bucardo-and-truncate-triggers)
+- [/blog/2009/09/17/seo-external-links-and-pagerank](/blog/2009/09/17/seo-external-links-and-pagerank)
+- [/blog/2009/09/21/permission-denied-for-postgresqlconf](/blog/2009/09/21/permission-denied-for-postgresqlconf)
+- [/blog/2009/07/14/mdx](/blog/2009/07/14/mdx)
+- [/blog/2009/08/20/two-quick-tips-egrep-sql-dumps-vim-and](/blog/2009/08/20/two-quick-tips-egrep-sql-dumps-vim-and)
+- [/blog/2009/07/31/slony-slstatus-and-diagnosing](/blog/2009/07/31/slony-slstatus-and-diagnosing)
+- [/blog/2009/08/12/perlpostgres-changes-in-dbdpg-2151](/blog/2009/08/12/perlpostgres-changes-in-dbdpg-2151)
 
 It would probably be more interesting to normalize the data above by the total number of days published to get an idea of which articles were the most impacting. This is likely an example of normalization that search engines employ in popularity algorithms.
 
 The **lamest** articles, ordered by the number of unique visitors ascending, were:
 
-- [http://blog.endpoint.com/2005/06/death-taxes-and-spam.html](http://blog.endpoint.com/2005/06/death-taxes-and-spam.html)
-- [http://blog.endpoint.com/2008/02/dbdpg-200-released.html](http://blog.endpoint.com/2008/02/dbdpg-200-released.html)
-- [http://blog.endpoint.com/2005/08/end-point-celebrates-10-years-of.html](http://blog.endpoint.com/2005/08/end-point-celebrates-10-years-of.html)
-- [http://blog.endpoint.com/2008/08/camps-presentation-at-utosc-2008.html](http://blog.endpoint.com/2008/08/camps-presentation-at-utosc-2008.html)
-- [http://blog.endpoint.com/2008/06/railsconf-2008-report.html](http://blog.endpoint.com/2008/06/railsconf-2008-report.html)
-- [http://blog.endpoint.com/2008/06/pgcon-2008-report.html](http://blog.endpoint.com/2008/06/pgcon-2008-report.html)
-- [http://blog.endpoint.com/2006/06/review-practices-of-agile-developer.html](http://blog.endpoint.com/2006/06/review-practices-of-agile-developer.html)
+- [/blog/2005/06/12/death-taxes-and-spam](/blog/2005/06/12/death-taxes-and-spam)
+- [/blog/2008/02/25/dbdpg-200-released](/blog/2008/02/25/dbdpg-200-released)
+- [/blog/2005/08/10/end-point-celebrates-10-years-of](/blog/2005/08/10/end-point-celebrates-10-years-of)
+- [/blog/2008/08/31/camps-presentation-at-utosc-2008](/blog/2008/08/31/camps-presentation-at-utosc-2008)
+- [/blog/2008/06/14/railsconf-2008-report](/blog/2008/06/14/railsconf-2008-report)
+- [/blog/2008/06/13/pgcon-2008-report](/blog/2008/06/13/pgcon-2008-report)
+- [/blog/2006/06/20/review-practices-of-agile-developer](/blog/2006/06/20/review-practices-of-agile-developer)
 - [http://blog.endpoint.com/2006/04/dbdpg-148-released.html](http://blog.endpoint.com/2006/04/dbdpg-148-released.html)
-- [http://blog.endpoint.com/2006/01/interchange-54-released.html](http://blog.endpoint.com/2006/01/interchange-54-released.html)
-- [http://blog.endpoint.com/2005/08/rowe-promotes-good-data-vpns.html](http://blog.endpoint.com/2005/08/rowe-promotes-good-data-vpns.html)
+- [/blog/2006/01/07/interchange-54-released](/blog/2006/01/07/interchange-54-released)
+- [/blog/2005/08/10/rowe-promotes-good-data-vpns](/blog/2005/08/10/rowe-promotes-good-data-vpns)
 
 **Phew** - none of my articles were on that list :)
 

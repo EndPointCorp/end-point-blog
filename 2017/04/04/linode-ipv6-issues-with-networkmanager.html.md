@@ -5,7 +5,7 @@ tags: redhat, ipv6, hosting, networking
 title: Linode IPv6 issues with NetworkManager on CentOS 7
 ---
 
-In End Point, we use different hosting providers based on the specific task needs. One provider we use extensively with good results is [Linode](http://www.linode.com).
+In End Point, we use different hosting providers based on the specific task needs. One provider we use extensively with good results is [Linode](https://www.linode.com).
 
 During a routine CentOS 7 system update, we noticed a very strange behavior where our IPv6 assigned server address was wrong after restarting the server.
 
@@ -21,7 +21,7 @@ This was a major update, and it turned out that the problem was a change in the 
 
 Since 1.2, NetworkManager added the Stable Privacy Addressing feature. This allows for some form of tracking prevention, with the IPv6 address to be stable on a network but changing when entering another network, and still remain unique.
 
-This new interesting feature has apparently become the default after the update, with the ipv6.addr-gen-mode property set to "stable-privacy". Setting it to “eui64” maintains the old default behavior.
+This new interesting feature has apparently become the default after the update, with the ipv6.addr-gen-mode property set to “stable-privacy”. Setting it to “eui64” maintains the old default behavior.
 
 ### Privacy Extension
 

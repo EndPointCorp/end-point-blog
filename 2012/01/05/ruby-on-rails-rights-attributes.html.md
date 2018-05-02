@@ -111,14 +111,14 @@ The method above is reused to define which fields are editable to the current us
 The data model and rights management described in this article isn't novel, but applying it in this fashion is elegant and produces modular and reusable methods. The code shown here has been simplified for this blog post. In reality, there are a few additional complexities:
 
 - The application utilizes [acl9](https://github.com/be9/acl9) for access control, which is an additional layer of security that will prevent non-registered users from creating items, and will prohibit specific users from updating existing items.
-- The user's all_rights method utilizes Rails low-level caching, with appropriate cache invalidation when the user's rights, groups, or roles change. I've given a simple example of Rails low-level caching [in this blog article](http://blog.endpoint.com/2011/09/ruby-on-rails-performance-overview.html).
+- The user's all_rights method utilizes Rails low-level caching, with appropriate cache invalidation when the user's rights, groups, or roles change. I've given a simple example of Rails low-level caching [in this blog article](/blog/2011/09/06/ruby-on-rails-performance-overview).
 - The logic in attr_accessible_for is more complex and can be based on the object's values or parameters. For example, an item may have a boolean that indicates anyone can tag it. The attr_accessible_for method will incorporate additional logic to determine if the :tags field is editable.
 - The view handles different field types (checkbox, textarea, etc) and allows for overriding the field label.
 
 Here are several articles related to the same large Ruby on Rails project, for your reading pleasure:
 
-- [Working with Solr Results in Rails](http://blog.endpoint.com/2011/12/sunspot-solr-rails-working-with-results.html)
-- [Performing Bulk Edits in Rails: Part 1](http://blog.endpoint.com/2011/11/performing-bulk-edits-in-rails-part-1.html)
-- [Performing Bulk Edits in Rails: Part 2](http://blog.endpoint.com/2011/11/performing-bulk-edits-in-rails-part-2.html)
-- [Advanced Rights and Role Management in Rails](http://blog.endpoint.com/2011/11/advanced-rights-roles-management-rails.html)
-- [Double Has and Belongs to Many Relationship in Rails](http://blog.endpoint.com/2011/11/double-habtm-relationship-between.html)
+- [Working with Solr Results in Rails](/blog/2011/12/12/sunspot-solr-rails-working-with-results)
+- [Performing Bulk Edits in Rails: Part 1](/blog/2011/11/14/performing-bulk-edits-in-rails-part-1)
+- [Performing Bulk Edits in Rails: Part 2](/blog/2011/12/03/performing-bulk-edits-in-rails-part-2)
+- [Advanced Rights and Role Management in Rails](/blog/2011/11/11/advanced-rights-roles-management-rails)
+- [Double Has and Belongs to Many Relationship in Rails](/blog/2011/11/04/double-habtm-relationship-between)

@@ -20,7 +20,7 @@ COMMIT;
 ```
 
 I decided to spin up a free [Heroku](https://www.heroku.com/)
-["Hobby Dev" database](https://devcenter.heroku.com/articles/heroku-postgres-plans#hobby-tier) to illustrate the solutions. Generating a test table was done by using the Pagila project, as it has tables which contain triggers. Heroku gives you a randomly generated user and database name. To install [the Pagila schema](http://www.postgresql.org/ftp/projects/pgFoundry/dbsamples/pagila/pagila/), I did:
+[“Hobby Dev” database](https://devcenter.heroku.com/articles/heroku-postgres-plans#hobby-tier) to illustrate the solutions. Generating a test table was done by using the Pagila project, as it has tables which contain triggers. Heroku gives you a randomly generated user and database name. To install [the Pagila schema](http://www.postgresql.org/ftp/projects/pgFoundry/dbsamples/pagila/pagila/), I did:
 
 ```
 $ export H="postgres://vacnvzatmsnpre:2iCDp-46ldaFxgdIx8HWFeXHM@ec2-34-567-89.compute-1.amazonaws.com:5432/d5q5io7c3alx9t"
@@ -30,7 +30,7 @@ $ psql $H -q -f pagila-data.sql
 ```
 
 Errors appeared on the import, but they can be safely ignored.
-One error was because the Heroku database does not have a user named "postgres", and the other error was due to the fact that the Heroku user is not a superuser. The data, however, was all intact. The sample data is actually quite funny, as the movie titles were semi auto-generated at some point. For example, seven random movie descriptions:
+One error was because the Heroku database does not have a user named “postgres”, and the other error was due to the fact that the Heroku user is not a superuser. The data, however, was all intact. The sample data is actually quite funny, as the movie titles were semi auto-generated at some point. For example, seven random movie descriptions:
 
 - A Brilliant Panorama of a Madman And a Composer who must Succumb a Car in Ancient India
 - A Touching Documentary of a Madman And a Mad Scientist who must Outrace a Feminist in An Abandoned Mine Shaft
@@ -40,8 +40,8 @@ One error was because the Heroku database does not have a user named "postgres",
 - A Beautiful Reflection of a Womanizer And a Sumo Wrestler who must Chase a Database Administrator in The Gulf of Mexico
 - A Awe-Inspiring Reflection of a Waitress And a Squirrel who must Kill a Mad Cow in A Jet Boat
 
-The table we want to use for this post is named **"film"**, and comes with two triggers on it,
-'film_fulltext_trigger', and 'last_updated':
+The table we want to use for this post is named **“film”**, and comes with two triggers on it,
+‘film_fulltext_trigger’, and ‘last_updated’:
 
 ```
 heroku=> \d film
@@ -71,7 +71,7 @@ Triggers:
 The last_updated trigger calls the last_updated() function, which simply sets the last_update column to
 [CURRENT_TIMESTAMP](http://www.postgresql.org/docs/current/static/functions-datetime.html#FUNCTIONS-DATETIME-CURRENT), which is often seen as its shorter-to-type form, now(). This is a handy metric to track,
 but there are times when you want to make changes and *not* update this field. A typical
-example is some sort of bulk change that does not warrant changing all the rows' last_update
+example is some sort of bulk change that does not warrant changing all the rows’ last_update
 field. How to accomplish this? We need to ensure that the trigger does not fire when
 we do our UPDATE. The way many people are familiar with is to simply disable all triggers on the table. So you would do something like this:
 
@@ -99,9 +99,9 @@ ALTER TABLE film ENABLE TRIGGER last_updated;
 COMMIT;
 ```
 
-This works on Heroku, but there are two major problems with the ALTER TABLE solution. First, the ALTER TABLE will take a very heavy lock on the entire table, meaning that nobody else will be able to access the table - even to read it! - until your transaction is complete (although Postgres 9.5 will reduce this lock!). The other problem
+This works on Heroku, but there are two major problems with the ALTER TABLE solution. First, the ALTER TABLE will take a very heavy lock on the entire table, meaning that nobody else will be able to access the table—even to read it!—until your transaction is complete (although Postgres 9.5 will reduce this lock!). The other problem
 with disabling triggers this way is that it is too easy to accidentally leave it in a disabled state (although the check_postgres program has a
-[specific check for this!](https://bucardo.org/check_postgres/check_postgres.pl.html#disabled_triggers)). Let's take a
+[specific check for this!](https://bucardo.org/check_postgres/check_postgres.pl.html#disabled_triggers)). Let’s take a
 look at the lock, and double check that the trigger has been disabled as well:
 
 ```
@@ -133,21 +133,21 @@ heroku=> select last_update FROM film WHERE film_id = 123;
 ```
 
 What we really want is to use the
-[powerful session_replication_role parameter](http://blog.endpoint.com/2015/01/postgres-sessionreplication-role.html) to safely disable the triggers. The problem is that the canonical way to disable triggers, by setting session_replication_role to 'replica', will disable ALL triggers and rules, for ALL tables. This is not wanted. In our example, we want to stop the **last_updated** trigger from firing, but also want all the other user triggers to fire, as well as the hidden system triggers that are enforcing foreign key referential integrity.
+[powerful session_replication_role parameter](/blog/2015/01/28/postgres-sessionreplication-role) to safely disable the triggers. The problem is that the canonical way to disable triggers, by setting session_replication_role to ‘replica’, will disable ALL triggers and rules, for ALL tables. This is not wanted. In our example, we want to stop the **last_updated** trigger from firing, but also want all the other user triggers to fire, as well as the hidden system triggers that are enforcing foreign key referential integrity.
 
-You can set session_replication_role to one of three values: **origin** (the default), **local**, and **replica**. Setting it to "replica" is commonly used in replication systems such as Bucardo and Slony to prevent all rules and triggers from firing. It can also be used for careful bulk loading. Only triggers explicitly set as "replica triggers" will fire when the session_replication_role is set to 'replica'. The **local** setting is a little harder to understand, as it does not have a direct mapping to a trigger state, as 'origin' and 'replica' do. Instead, it can be thought of as an alias to 'origin' - same functionality, but with a different name. What use is that? Well, you can check the value of session_replication_role and do things differently depending on whether it is 'origin' or 'local'. Thus, it is possible to teach a trigger that it should not fire when session_replication_role is set to 'local' (or to fire *only* when it is set to 'local').
+You can set session_replication_role to one of three values: **origin** (the default), **local**, and **replica**. Setting it to “replica” is commonly used in replication systems such as Bucardo and Slony to prevent all rules and triggers from firing. It can also be used for careful bulk loading. Only triggers explicitly set as “replica triggers” will fire when the session_replication_role is set to ‘replica’. The **local** setting is a little harder to understand, as it does not have a direct mapping to a trigger state, as ‘origin’ and ‘replica’ do. Instead, it can be thought of as an alias to ‘origin’—same functionality, but with a different name. What use is that? Well, you can check the value of session_replication_role and do things differently depending on whether it is ‘origin’ or ‘local’. Thus, it is possible to teach a trigger that it should not fire when session_replication_role is set to ‘local’ (or to fire *only* when it is set to ‘local’).
 
 Thus, our previous problem of preventing the last_updated trigger from firing can be solved by careful use of
-the session_replication_role. We want the trigger to NOT fire when session_replication_role is set to 'local'. This can be accomplished in two ways: modification of the trigger, or modification of the underlying function. Each has its
-strengths and weaknesses. Note that session_replication_role can only be set by a superuser, which means I'll
+the session_replication_role. We want the trigger to NOT fire when session_replication_role is set to ‘local’. This can be accomplished in two ways: modification of the trigger, or modification of the underlying function. Each has its
+strengths and weaknesses. Note that session_replication_role can only be set by a superuser, which means I’ll
 be switching from Heroku (which only allows connecting as a non-superuser) to a local Pagila database.
 
 For the modify-the-function route, add a quick block at the top to short-circuit the trigger
-if the session_replication_role (srr) is set to 'local'. An advantage to this method is that all triggers that
+if the session_replication_role (srr) is set to ‘local’. An advantage to this method is that all triggers that
 invoke this function will be affected. In the pagila database, there are 14 tables that have a trigger that
 calls the last_updated function. Another advantage is that the exception to the function firing is
 clearly visible in the functions definition itself, and thus easy to spot when you examine the
-function. Here is how you would modify the last_updated function to only fire when in 'local' srr mode:
+function. Here is how you would modify the last_updated function to only fire when in ‘local’ srr mode:
 
 ```
 CREATE OR REPLACE FUNCTION public.last_updated()
@@ -165,8 +165,8 @@ END
 $bc$;
 ```
 
-To invoke it, we change session_replication_role (temporarily!) to 'local', then make our
-changes. Observe how the value of last_update does not change when we are in 'local' mode:
+To invoke it, we change session_replication_role (temporarily!) to ‘local’, then make our
+changes. Observe how the value of last_update does not change when we are in ‘local’ mode:
 
 ```
 pagila=# show session_replication_role \t\g
@@ -206,7 +206,7 @@ trigger definition itself, rather than changing the function. This has the advan
 to touch the function at all, and also allows you to see that the trigger has been modified when
 doing a **\d** of the table. Using ALTER TRIGGER only allows a rename, so we will need to
 drop and recreate the trigger. By adding a WHEN clause to the trigger, we can ensure that
-it does NOT fire when session_replication_role is set to 'local'. The SQL looks like this:
+it does NOT fire when session_replication_role is set to ‘local’. The SQL looks like this:
 
 ```
 pagila=# begin;
@@ -220,7 +220,7 @@ pagila=# commit;
 COMMIT
 ```
 
-Voila! As before, we can test it out by setting session_replication_role to 'local' and confirming that the function does not modify the last_update column. Before doing that, let's also change the function back to its original form, to keep things honest:
+Voila! As before, we can test it out by setting session_replication_role to ‘local’ and confirming that the function does not modify the last_update column. Before doing that, let’s also change the function back to its original form, to keep things honest:
 
 ```
 -- Restore the original version, with no session_replication_role logic:
@@ -262,7 +262,7 @@ pagila=# commit;
 COMMIT
 ```
 
-Those are the three main ways to selectively disable a trigger on a table: using ALTER TABLE to completely disable it (and invoking a heavy lock), having the function check session_replication_role (affects all triggers using it, requires superuser), and having the trigger use a WHEN clause (requires superuser). Sharp readers may note that being a superuser is not really required, as something other than session_replication_role could be used. Thus, a solution is to use a parameter that can be changed by anyone, that will not affect anything else, and can be set to a unique value. Here is one such solution, using the handy "application_name" parameter. We will return to the Heroku database for this one:
+Those are the three main ways to selectively disable a trigger on a table: using ALTER TABLE to completely disable it (and invoking a heavy lock), having the function check session_replication_role (affects all triggers using it, requires superuser), and having the trigger use a WHEN clause (requires superuser). Sharp readers may note that being a superuser is not really required, as something other than session_replication_role could be used. Thus, a solution is to use a parameter that can be changed by anyone, that will not affect anything else, and can be set to a unique value. Here is one such solution, using the handy “application_name” parameter. We will return to the Heroku database for this one:
 
 ```
 heroku=> drop trigger last_updated on film;

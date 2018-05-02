@@ -25,13 +25,13 @@ hit doing all that validation. Preventing the constraint from firing may provide
 a significant speed boost, especially for very large tables with non-trivial 
 constraints.
 
-Let's explore one way to work around the problem of pg_dump failing to work 
+Let’s explore one way to work around the problem of pg_dump failing to work 
 because some of the data is not valid according to the logic of the constraints.
 While it would be quicker to make some of these changes on the production 
 system itself, corporate inertia, red tape, and the usual DBA paranoia 
 means a better way is to modify a copy of the database instead.
 
-For this example, we will first create a sample "production" database and give it a simple constraint. 
+For this example, we will first create a sample “production” database and give it a simple constraint. 
 This constraint is based on a function, to both emulate a specific real-world example we came across 
 for a client recently, and to allow us to easily create a database in which the data is invalid 
 with regards to the constraint:
@@ -50,11 +50,11 @@ ALTER TABLE
 ```
 
 Note that the constraint was added without any problem, as all of the values in the aid column 
-satisfy the function, as each one is greater than zero. Let's tweak the function, such that it no 
+satisfy the function, as each one is greater than zero. Let’s tweak the function, such that it no 
 longer represents a valid, up to date constraint on the table in question:
 
 ```
-## Verify that the constraint is working - we should get an error:
+## Verify that the constraint is working—we should get an error:
 psql test_prod -c 'update pgbench_accounts set aid = -1 where aid = 1'
 ERROR:  new row for relation "pgbench_accounts" violates check constraint "good_aid"
 DETAIL:  Failing row contains (-1, 1, 0,                                         ...).
@@ -73,7 +73,7 @@ DETAIL:  Failing row contains (88, 1, 0,                                        
 
 The volatility was changed from IMMUTABLE to VOLATILE simply to demonstrate that a function called 
 by a constraint is not bound to any particular volatility, although it *should* always be IMMUTABLE. In 
-this example, it is a moot point, as our function can be immutable and still be "invalid" for some rows 
+this example, it is a moot point, as our function can be immutable and still be “invalid” for some rows 
 in the table. Owing to our function changing its logic, we now have a situation in which a regular pg_dump cannot be done:
 
 ```
@@ -88,11 +88,11 @@ CONTEXT:  COPY pgbench_accounts, line 1: "1             1   0          "
 Time for a workaround. When a constraint is created, it may be declared as NOT VALID, which simply means 
 that it makes no promises about the *existing* data in the table, but will start constraining any data 
 changed from that point forward. Of particular importance is the fact that pg_dump can dump things into 
-three sections, "pre-data", "data", and "post-data". When a normal constraint is dumped, it will go into 
+three sections, “pre-data”, “data”, and “post-data”. When a normal constraint is dumped, it will go into 
 the pre-data section, and cause the problems seen above when the data is loaded. However, a constraint that 
 has been declared NOT VALID will appear in the post-data section, which will allow the data to load, as it 
-will not be declared until after the "data" section has been loaded in. Thus, our workaround will be to 
-move constraints from the pre-data to the post-data section. First, let's confirm the state of things by 
+will not be declared until after the “data” section has been loaded in. Thus, our workaround will be to 
+move constraints from the pre-data to the post-data section. First, let’s confirm the state of things by 
 making some dumps from the production database:
 
 ```

@@ -5,9 +5,9 @@ tags: database, piggybak, rails
 title: 'RailsAdmin Import: Part 2'
 ---
 
-I recently wrote about [importing data in RailsAdmin](http://blog.endpoint.com/2012/01/import-railsadmin.html). [RailsAdmin](https://github.com/sferik/rails_admin) is a Rails engine that provides a nice admin interface for managing your data, which comes packed with configuration options.
+I recently wrote about [importing data in RailsAdmin](/blog/2012/01/19/import-railsadmin). [RailsAdmin](https://github.com/sferik/rails_admin) is a Rails engine that provides a nice admin interface for managing your data, which comes packed with configuration options.
 
-In a recent Ruby on Rails ecommerce project, I've been using RailsAdmin, [Piggybak (a Rails ecommerce gem supported by End Point)](http://www.piggybak.org/), and have been building out custom front-end features such as advanced search and downloadable product support. When this client came to End Point with the project, we offered several options for handling data migration from a legacy system to the new Rails application:
+In a recent Ruby on Rails ecommerce project, I've been using RailsAdmin, [Piggybak (a Rails ecommerce gem supported by End Point)](https://github.com/piggybak/piggybak), and have been building out custom front-end features such as advanced search and downloadable product support. When this client came to End Point with the project, we offered several options for handling data migration from a legacy system to the new Rails application:
 
 1. Create a standard migration file, which migrates data from the existing legacy database to the new data architecture. The advantage with this method is that it requires virtually no manual interaction for the migration process. The disadvantage with this is that it's basically a one-off solution and would never be useful again.
 1. Have the client manually enter data. This was a reasonable solution for several of the models that required 10 or less entries, but not feasible for the tables containing thousands of entries.
