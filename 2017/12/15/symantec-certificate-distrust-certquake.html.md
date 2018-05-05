@@ -2,6 +2,7 @@
 author: "Josh Lavin"
 title: "Symantec Certificate Distrust (CertQuake)"
 tags: tls, security, browsers, chrome
+gh_issue_number: 1351
 ---
 
 If you are accustomed to running your browser with the “developer tools” panel open (which probably indicates you are a web developer), you may have seen it show the following message:
