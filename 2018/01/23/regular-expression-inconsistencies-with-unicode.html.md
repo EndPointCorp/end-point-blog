@@ -6,7 +6,7 @@ gh_issue_number: 1368
 ---
 
 <img src="/blog/2018/01/23/regular-expression-inconsistencies-with-unicode/mud-run.jpg" alt="A mud run"><br/>
-<small>A casual stroll through the world of Unicode and regular expressions—[Photo](https://www.flickr.com/photos/presidioofmonterey/7025086135) by Presidio of Monterey</small>
+<small>A casual stroll through the world of Unicode and regular expressions—​[Photo](https://www.flickr.com/photos/presidioofmonterey/7025086135) by Presidio of Monterey</small>
 
 Character classes in regular expressions are an extremely useful and widespread feature, but there are some relatively recent changes that you might not know of.
 

@@ -7,7 +7,7 @@ gh_issue_number: 1411
 
 <img src="/blog/2018/04/19/railsconf-2018-day-two/railsconf-2018.jpg" width="770" height="272" alt="RailsConf banner" />
 
-The punchline is that I’m writing about Communication: 101 here at [RailsConf 2018](https://railsconf.com/), but there is no joke. In “[Harry the Hedgehog Learns you a Communication](https://speakerdeck.com/lauramosher/harry-the-hedgehog-learns-you-a-communication)”, [Laura Mosher](https://lauramosher.com/) presented examples of common pitfalls we encounter in our daily lives as software engineers and 5 tips to mitigate those pitfalls. All of these tips are both helpful in the world of consulting when interacting with a variety of clients and coworkers, but also very personally valuable from the perspective of a parent — I want to exemplify strong communication skills to my children as they absorb everything around them, the little sponges that they are. Here are the tips that Laura went over:
+The punchline is that I’m writing about Communication: 101 here at [RailsConf 2018](https://railsconf.com/), but there is no joke. In “[Harry the Hedgehog Learns you a Communication](https://speakerdeck.com/lauramosher/harry-the-hedgehog-learns-you-a-communication)”, [Laura Mosher](https://lauramosher.com/) presented examples of common pitfalls we encounter in our daily lives as software engineers and 5 tips to mitigate those pitfalls. All of these tips are both helpful in the world of consulting when interacting with a variety of clients and coworkers, but also very personally valuable from the perspective of a parent—​I want to exemplify strong communication skills to my children as they absorb everything around them, the little sponges that they are. Here are the tips that Laura went over:
 
 ### Think, Then Speak
 
@@ -42,7 +42,7 @@ Common phrasing pitfalls are:
 
 * Self-deprecating. Examples: “I’m fine”, when you’re not. Be honest about your feelings.
 * Stereotyped. Examples include: “Ladies and gents”, “Heroes to men”. “Man up”, “You act like a girl”. Such phrases are commonly said, and they perpetuate stereotypes that are exclusionary.
-* Ambiguous. Ambiguous phrases, often used in humor, are phrases that can be interpreted in two or more ways. Be careful using these in communication when asking for support or involvement — it’s better to be direct when asking for the specific support you may need.
+* Ambiguous. Ambiguous phrases, often used in humor, are phrases that can be interpreted in two or more ways. Be careful using these in communication when asking for support or involvement—​it’s better to be direct when asking for the specific support you may need.
 
 ### Praise in Public, Critique in Private
 

@@ -14,7 +14,7 @@ While YouTube is certainly facing its fair share of controversies and criticism<
 
 ### So many videos!
 
-YouTube is currently experiencing a glut of uploads and content—with over 400 hours of video uploaded each minute<sup><a href="#footnotes">2</a></sup>—and it can be difficult to have a video pick up traction within this never-ending barrage of uploads. While most of the videos you may see on YouTube have view counts ranging from hundreds of thousands to millions, the average view count for videos in the tech sector is just around 6,500—and even this is much higher than the median view counts.
+YouTube is currently experiencing a glut of uploads and content—​with over 400 hours of video uploaded each minute<sup><a href="#footnotes">2</a></sup>—​and it can be difficult to have a video pick up traction within this never-ending barrage of uploads. While most of the videos you may see on YouTube have view counts ranging from hundreds of thousands to millions, the average view count for videos in the tech sector is just around 6,500—​and even this is much higher than the median view counts.
 
 Many videos uploaded to the service do not utilize techniques to maximize the odds of their video being suggested to viewers, so more and more videos don’t break into the double digits of views.
 

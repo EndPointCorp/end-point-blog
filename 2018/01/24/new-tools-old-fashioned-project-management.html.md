@@ -1,6 +1,6 @@
 ---
 author: Elizabeth Garrett Christensen
-title: New Tools — Old-Fashioned Project Management 
+title: New Tools —​ Old-Fashioned Project Management 
 tags: management
 gh_issue_number: 1371
 ---
@@ -10,7 +10,7 @@ gh_issue_number: 1371
 
 In the last year at End Point, I’ve managed projects in Trello, JIRA, Redmine, Basecamp, RT (Request Tracker) and a few others. The market of project management tools is wide and varied…​and they are all great. Well, maybe that’s a topic for another post.
 
-However, I’ve been thinking lately—as I kick off yet another project—that no matter what tool you use for managing your project there are some fundamentals you should never forget. For those of you deep in the mud of project management tools I have some reminders for you:
+However, I’ve been thinking lately—​as I kick off yet another project—​that no matter what tool you use for managing your project there are some fundamentals you should never forget. For those of you deep in the mud of project management tools I have some reminders for you:
 
 ### Communicate with your client
 

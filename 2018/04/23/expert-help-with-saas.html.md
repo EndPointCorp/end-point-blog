@@ -13,7 +13,7 @@ In order to get the most out of your site, ecommerce consultants like us at End 
 
 ### Select the Right Vendor
 
-Working with an expert consultant can help you make the right choices from the start. Sometimes knowing the level of customization that your project requires can be a real challenge. End Point has experience with everything from out-of-the-box SaaS platforms to large-scale, custom software developments — we take time to understand your requirements and guide you to the perfect solution for your business.
+Working with an expert consultant can help you make the right choices from the start. Sometimes knowing the level of customization that your project requires can be a real challenge. End Point has experience with everything from out-of-the-box SaaS platforms to large-scale, custom software developments—​we take time to understand your requirements and guide you to the perfect solution for your business.
 
 ### Custom Design
 
@@ -37,7 +37,7 @@ End Point has DevOps experts who can make sure everything with your domain name 
 
 ### Search Engine Optimization (SEO)
 
-A solid search engine optimization strategy is critical to the success of your website, and therefore critical to the success of your business. A high Google ranking means more page views — and more conversions. At End Point, we design and build with SEO in mind from the start to help you get the most value from your online presence.
+A solid search engine optimization strategy is critical to the success of your website, and therefore critical to the success of your business. A high Google ranking means more page views—​and more conversions. At End Point, we design and build with SEO in mind from the start to help you get the most value from your online presence.
 
 ### Payments and Merchants
 
