@@ -35,4 +35,4 @@ For this project I was already using [gulp](https://gulpjs.com/) to handle the f
 
 With a small Vue template and less than 100 lines of code I was able to create a dynamic and very responsive (read: fast!) pagination feature without any DOM manipulation code (e.g. updates, insertions, deletions, etc.).
 
-With Vue (React and friends as well) you simply manage the state of your application (wishlist items in this case) and let the framework handle the rendering step. Give it a try — I think you’ll like it!
+With Vue (React and friends as well) you simply manage the state of your application (wishlist items in this case) and let the framework handle the rendering step. Give it a try—​I think you’ll like it!

@@ -10,7 +10,7 @@ title: Postgres migrating SQL_ASCII to UTF-8 with fix_latin
 Upgrading [Postgres](https://www.postgresql.org/) is not quite as painful as it used to be, thanks
 primarily to the [pg_upgrade program](https://www.postgresql.org/docs/current/static/pgupgrade.html), but there are times when it simply cannot be used.
 We recently had an existing End Point client come to us requesting help upgrading from their current
-Postgres database (version 9.2) to the latest version (9.6 — but soon to be 10). They also wanted
+Postgres database (version 9.2) to the latest version (9.6—​but soon to be 10). They also wanted
 to finally move away from their SQL_ASCII encoding to [UTF-8](https://en.wikipedia.org/wiki/UTF-8). As this meant
 that pg_upgrade could not be used, we also took the opportunity to enable
 checksums as well (this change cannot be done via pg_upgrade). Finally, they
@@ -35,7 +35,7 @@ byte soup.
 
 For this migration, we first did a [pg_dump](https://www.postgresql.org/docs/current/static/app-pgdump.html) from the old database to
 a newly created UTF-8 test database, just to see which tables had encoding problems.
-Quite a few did — but not all of them! — so we wrote a script to import tables
+Quite a few did—​but not all of them!—​so we wrote a script to import tables
 in parallel, with some filtering for the problem ones. As mentioned above,
 iconv was not particularly helpful: looking at the tables closely showed
 evidence of many different encodings in each one: Windows-1252, ISO-8859-1,  Japanese,
@@ -202,7 +202,7 @@ increase the migration time. So I made a quick patch to the fix_latin program it
 that C logic in Perl. A new option “--strict-utf8” was added. Its job is to simply enforce the
 rules found in the Postgres source code. If a character is invalid, it is replaced with
 a question mark (there are other choices for a replacement character, but we decided simple
-question marks were quick and easy — and the surrounding data was unlikely to be read or even used anyway).
+question marks were quick and easy—​and the surrounding data was unlikely to be read or even used anyway).
 
 Voila! All of the data was now going into Postgres without a problem. Observe:
 

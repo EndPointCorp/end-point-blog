@@ -30,7 +30,7 @@ performing the actual updates on the underlying files. Thus, Postgres is able to
 that the work is “done” when the WAL file has been generated. Should the system crash before
 the actual changes are made, the WAL files are used to replay the changes. As these
 WAL files represent a continuous unbroken chain of all changes to the database, they can also
-be used for Point in Time Recovery — in other words, the WAL files can be used to rewind the database
+be used for Point in Time Recovery—​in other words, the WAL files can be used to rewind the database
 to any single point in time, capturing the state of the database at a specific moment.
 
 Postgres WAL files are exactly 16 MB in size (although this size may be changed at compilation time,
@@ -52,7 +52,7 @@ archive_command = 'gzip < %p > /var/lib/pgsql/archive/%f'
 ```
 
 It is widely known that gzip is no longer the best compression option for most tasks,
-so I endeavored to determine which program was the best at WAL file compression — in terms
+so I endeavored to determine which program was the best at WAL file compression—​in terms
 of final file size versus the overhead to create the file. I also wanted to examine how these
 fared versus the new wal_compression feature.
 
@@ -62,14 +62,14 @@ To compare the various compression methods, I examined all of the compression pr
 are commonly available on a Linux system, are known to be stable, and which perform at least
 as good as the common utility gzip. The contenders were:
 
-- **gzip** — the canonical, default compression utility for many years
-- **pigz** — parallel version of gzip
-- **bzip2** — second only to gzip in popularity, it offers better compression
-- **lbzip2** — parallel version of bzip
-- **xz** — an excellent all-around compression alternative to gzip and bzip
-- **pxz** — parallel version of xz
-- **7za** — excellent compression, but suffers from complex arguments
-- **lrzip** — compression program targeted at “large files”
+- **gzip** —​ the canonical, default compression utility for many years
+- **pigz** —​ parallel version of gzip
+- **bzip2** —​ second only to gzip in popularity, it offers better compression
+- **lbzip2** —​ parallel version of bzip
+- **xz** —​ an excellent all-around compression alternative to gzip and bzip
+- **pxz** —​ parallel version of xz
+- **7za** —​ excellent compression, but suffers from complex arguments
+- **lrzip** —​ compression program targeted at “large files”
 
 For the tests, 100 random WAL files were copied from a busy production Postgres system. Each of
 those 100 files were compressed nine times by each of the programs above: from the “least compressed”
@@ -107,7 +107,7 @@ the compressed file. Here is some sample output of the time command:
 ```
 
 The wal_compression feature was tested by creating a new Postgres 9.6 cluster, then
-running the [pgbench program](https://www.postgresql.org/docs/current/static/pgbench.html) twice to generate WAL files — once with wal_compression enabled,
+running the [pgbench program](https://www.postgresql.org/docs/current/static/pgbench.html) twice to generate WAL files—​once with wal_compression enabled,
 and once with it disabled. Then each of the resulting WAL files was compressed using each of the programs above.
 
 -----------
@@ -119,7 +119,7 @@ table.gsmt table th { padding: 0em 0.5em 0em 0.5em; color: black; font-size: sma
 --></style>
 
 <table border="0" class="gsmt" style="padding: 0 0 3em 0"><caption><b>Table 1.</b><br/>
-Results of compressing 16 MB WAL files — average for 100 files</caption>
+Results of compressing 16 MB WAL files—​average for 100 files</caption>
 <tbody><tr>
 <td><table border="1">
 <tbody><tr><th>Command</th><th>Wall clock time (s)</th><th>File size (MB)</th></tr>
@@ -161,7 +161,7 @@ Results of compressing 16 MB WAL files — average for 100 files</caption>
 </tbody></table>
 
 <table border="0" class="gsmt"><caption><b>Table 2.</b><br/>
-Results of compressing 16 MB WAL file — average for 100 files</caption>
+Results of compressing 16 MB WAL file—​average for 100 files</caption>
 <tbody><tr>
 <td><table border="1">
 <tbody><tr><th>Command</th><th>Wall clock time (s)</th><th>File size (MB)</th>
@@ -202,7 +202,7 @@ Results of compressing 16 MB WAL file — average for 100 files</caption>
 </tbody></table>
 
 <table border="0" class="gsmt"><caption><b>Table 3.</b><br/>
-Results of compressing 16 MB WAL file — average for 100 files</caption>
+Results of compressing 16 MB WAL file—​average for 100 files</caption>
 <tbody><tr>
 <td><table border="1">
 <tbody><tr><th>Command</th><th>Wall clock time (s)</th><th>File size (MB)</th></tr>
@@ -293,7 +293,7 @@ consideration.
 
 The bzip2 program has been nipping at the heels of gzip for many years, so naturally it
 has its own parallel version, known as lbzip2. As Table 3 shows, it is also amazingly fast.
-Not as fast as pigz, but with a speed of under 0.2 seconds — even at the highest compression level!
+Not as fast as pigz, but with a speed of under 0.2 seconds—​even at the highest compression level!
 There is very little variation among the compression levels used, so it is fair to simply state
 that lbzip2 takes 0.15 seconds to shrink the WAL file to 3.5 MB. A decent entry.
 
@@ -316,7 +316,7 @@ your workload, so you might see reports of greater and lesser compressions.
 
 Of interest is that the WAL files generated by turning on wal_compression are
 capable of being further compressed by the archive_command option, and doing
-a pretty good job of it as well — going from 81 MB of WAL files to 9.4 MB of
+a pretty good job of it as well—​going from 81 MB of WAL files to 9.4 MB of
 WAL files. However, using just xz in the archive_command without wal_compression
 on still yielded a smaller overall size, and means less CPU because the data is only
 compressed once.

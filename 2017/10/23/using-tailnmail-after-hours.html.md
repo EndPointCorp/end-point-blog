@@ -13,10 +13,10 @@ Someone recently asked me something about
 and sends out an email if matches are found. It is frequently used to watch over
 Postgres logs so you can receive an automatic email alert when Bad Things start happening
 to your database. The questioner wanted to know if it was possible
-for tail_n_mail to change its behavior based on the time of day — would it be able
+for tail_n_mail to change its behavior based on the time of day—​would it be able
 to do things differently outside of “business hours”? Although tail_n_mail cannot
-do so directly, a simple solution is to use alternate configuration files — which
-get swapped by cron — and the `INHERIT` keyword.
+do so directly, a simple solution is to use alternate configuration files—​which
+get swapped by cron—​and the `INHERIT` keyword.
 
 To demonstrate the solution, let’s spin up a Postgres 10 instance, route the logs to syslog,
 setup tail_n_mail, and then create separate configuration files for different times of the week.
@@ -219,7 +219,7 @@ $ crontab -e
 ```
 
 What if we want to change the rules depending on the time of day, per the question that started this article?
-Simple enough — we just create two “inherited” configuration files, then have cron swap things around as needed.
+Simple enough—​we just create two “inherited” configuration files, then have cron swap things around as needed.
 For example, let’s say that after 5pm on weekdays, and all weekend, we do not want to receive emails
 about “division by zero” errors. First, create files named tnm.global.hometime.conf and tnm.global.workday.conf:
 
@@ -240,5 +240,5 @@ $ crontab -e
 ```
 
 Voila! We’ve changed the way tail_n_mail runs depending on the time of day. There are
-many other tricks you can do with tail_n_mail — check out [the documentation](https://bucardo.org/tail_n_mail/) or post to [the mailing list](https://mail.endcrypt.com/mailman/listinfo/tnm)
+many other tricks you can do with tail_n_mail—​check out [the documentation](https://bucardo.org/tail_n_mail/) or post to [the mailing list](https://mail.endcrypt.com/mailman/listinfo/tnm)
 for more help and/or inspiration.

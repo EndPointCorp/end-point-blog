@@ -9,7 +9,7 @@ We had an interesting problem to track down. (Though I suppose I wouldn’t be w
 
 One day, the backup churn hit a tipping point and we took notice. Some process, we found, seemed to be touching an increasing number of image files: The contents were almost always the same, but the modification timestamps were updated. But digging through the myriad of code to figure out what was doing that was proving to be somewhat troublesome.
 
-Enter auditd, already present on the RHEL host. This allows us to attach a watch on the directory in question, and track down exactly what was performing the events. — Note, other flavors of Linux, such as Ubuntu, may not have it out of the box. But you can usually install it via the the auditd package.
+Enter auditd, already present on the RHEL host. This allows us to attach a watch on the directory in question, and track down exactly what was performing the events.—​Note, other flavors of Linux, such as Ubuntu, may not have it out of the box. But you can usually install it via the the auditd package.
 
 ```shell
 (output from a test system for demonstration purposes)

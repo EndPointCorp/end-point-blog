@@ -7,7 +7,7 @@ title: TriSano Case Study
 
 ### Overview
 
-End Point has been working with state and local health agencies since 2008. We host disease outbreak surveillance and management systems and have expertise providing clients with the sophisticated case management tools they need to deliver in-house analysis, visualization, and reporting — combined with the flexibility to comply with changing state and federal requirements. End Point provides the hosting infrastructure, database, reporting systems, and customizations that agencies need in order to service to their populations.
+End Point has been working with state and local health agencies since 2008. We host disease outbreak surveillance and management systems and have expertise providing clients with the sophisticated case management tools they need to deliver in-house analysis, visualization, and reporting—​combined with the flexibility to comply with changing state and federal requirements. End Point provides the hosting infrastructure, database, reporting systems, and customizations that agencies need in order to service to their populations.
 
 Our work with health agencies is a great example of End Point’s ability to use our experience in open source technology, Ruby on Rails, manage and back up large secure datasets, and integrate reporting systems to build and support a full-stack application. We will discuss one such client in this case study.
 

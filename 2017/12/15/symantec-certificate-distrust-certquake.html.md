@@ -74,6 +74,6 @@ If you are interested in our Bash scripts, we have placed a [copy on GitHub](htt
 
 ### Summary
 
-Our process allowed us to quickly discover all affected certificates, and re-issue them for our clients. Most of the time, this was done behind the scenes, where our clients didn’t even need to get involved — we were on the job, protecting them and their businesses.
+Our process allowed us to quickly discover all affected certificates, and re-issue them for our clients. Most of the time, this was done behind the scenes, where our clients didn’t even need to get involved—​we were on the job, protecting them and their businesses.
 
 In this Internet Age, we all have to do our part to ensure trust in the system. It’s unfortunate when one thing can affect so many websites, but it’s how the system works.

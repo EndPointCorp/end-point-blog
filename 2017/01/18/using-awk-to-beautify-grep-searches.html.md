@@ -5,7 +5,7 @@ tags: shell
 title: Using Awk to beautify grep searches
 ---
 
-Recently we’ve seen a sprout of re-implementations of many popular Unix tools. With the expansion of communities built around new languages or platforms, it seems that apart from the novelties in technologies — the ideas on how to use them stay the same. There are more and more solutions to the same kinds of problems:
+Recently we’ve seen a sprout of re-implementations of many popular Unix tools. With the expansion of communities built around new languages or platforms, it seems that apart from the novelties in technologies—​the ideas on how to use them stay the same. There are more and more solutions to the same kinds of problems:
 
 - text editors
 - CSS pre-processors
@@ -13,7 +13,7 @@ Recently we’ve seen a sprout of re-implementations of many popular Unix tools.
 - screen scraping tools
 - ... many more ...
 
-In this blog post I’d like to tackle the problem from yet another perspective. Instead of resolving to “new and cool” libraries and languages (grep implemented in X language) — I’d like to use what’s out there already in terms of tooling to build a nice search-in-files tool for myself.
+In this blog post I’d like to tackle the problem from yet another perspective. Instead of resolving to “new and cool” libraries and languages (grep implemented in X language)—​I’d like to use what’s out there already in terms of tooling to build a nice search-in-files tool for myself.
 
 ### Search in files tools
 
@@ -23,7 +23,7 @@ It seems that for many people it’s very important to have a “search in files
 - [ripgrep](https://github.com/BurntSushi/ripgrep)
 - [the_silver_searcher](https://github.com/ggreer/the_silver_searcher)
 
-These are certainly very nice. As the goal of this post is to build something out of the tooling found in any minimal Unix-like installation — they won’t work though. They either need to be compiled or require Perl to be installed which isn’t everywhere (e. g. FreeBSD on default — though obviously available via the ports).
+These are certainly very nice. As the goal of this post is to build something out of the tooling found in any minimal Unix-like installation—​they won’t work though. They either need to be compiled or require Perl to be installed which isn’t everywhere (e. g. FreeBSD on default—​though obviously available via the ports).
 
 ### What I really need from the tool
 
@@ -119,7 +119,7 @@ Fortunately, even the tiniest of Unix like system installation already has all w
 
 ### Piping into awk
 
-Awk has been in Unix systems for many years — it’s older than me! It is a programming language interpreter designed specifically to work with text. In Unix, we can use pipes to direct output of one program to be the standard input of another in the following way:
+Awk has been in Unix systems for many years—​it’s older than me! It is a programming language interpreter designed specifically to work with text. In Unix, we can use pipes to direct output of one program to be the standard input of another in the following way:
 
 ```bash
 $ oneapp | secondapp

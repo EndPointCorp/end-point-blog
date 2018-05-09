@@ -20,14 +20,14 @@ for your RDS upgrade:
 
 Many businesses are very sensitive to any database downtime, and upgrading your database
 to a new version always incurs that cost. Although RDS uses the ultra-fast [pg_upgrade --links](https://www.postgresql.org/docs/current/static/pgupgrade.html) method, the whole upgrade process can take quite
-a while — or at least too long for the business to accept. Bucardo can reduce the application
+a while—​or at least too long for the business to accept. Bucardo can reduce the application
 downtime from around seven minutes to ten seconds or less.
 
 #### Upgrade more than one version at once
 
 As of this writing (June 2017), RDS only allows upgrading of one major Postgres version at a time. Since
 pg_upgrade can easily handle upgrading older versions, this limitation will probably be fixed
-someday. Still, it means even more application downtime — to the tune of seven minutes for
+someday. Still, it means even more application downtime—​to the tune of seven minutes for
 each major version. If you are going from 9.3 to 9.6 (via 9.4 and 9.5), that’s at least 21 minutes
 of application downtime, with many unnecessary steps along the way. The total time
 for Bucardo to jump from 9.3 to 9.6 (or any major version to another one) is still under ten seconds.
@@ -63,12 +63,12 @@ but it was simply removal of all table bloat!).
 
 #### Statistics remain in place
 
-The pg_upgrade program currently has a glaring flaw — no copying of the information in
+The pg_upgrade program currently has a glaring flaw—​no copying of the information in
 the pg_statistic table. Which means that although an Amazon RDS upgrade completes in about
 seven minutes, the performance will range somewhere from slightly slow to completely unusable,
 until all those statistics are regenerated on the new version via
 the [ANALYZE command](https://www.postgresql.org/docs/current/static/sql-analyze.html). How long this can take depends on a number of factors,
-but in general, the larger your database, the longer it will take — a database-wide
+but in general, the larger your database, the longer it will take—​a database-wide
 analyze can take hours on very large databases. As mentioned above, upgrading via
 Bucardo relies on COPYing the data to a fresh copy of the table. Although the statistics
 also need to be created when using Bucardo, the time cost for this does NOT apply to
@@ -78,7 +78,7 @@ generating statistics zero.
 ### Upgrading RDS the Amazon way
 
 Having said all that, the native upgrade system for RDS is very simple and fast. If the
-drawbacks above do not apply to you — or can be suffered with minimal business pain -
+drawbacks above do not apply to you—​or can be suffered with minimal business pain -
 then this way should always be the upgrade approach to use. Here is a quick walk through
 of how an Amazon RDS upgrade is done.
 
@@ -143,7 +143,7 @@ set primary keys...
 done.
 ```
 
-At 68MB in size, this is still not a big database — so let’s create a large table, then
+At 68MB in size, this is still not a big database—​so let’s create a large table, then
 create a bunch of databases, to make pg_upgrade work a little harder:
 
 ```

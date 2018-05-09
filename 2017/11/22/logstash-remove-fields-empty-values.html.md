@@ -109,7 +109,7 @@ truncate {
 }
 ```
 
-For example, sometimes the client sends an absurdly long HTTP `Referer` request header, or the URI requested is very long — we see plenty longer than 5000 characters. We are happy to truncate those to save space.
+For example, sometimes the client sends an absurdly long HTTP `Referer` request header, or the URI requested is very long—​we see plenty longer than 5000 characters. We are happy to truncate those to save space.
 
 We also do not need to waste space in our paid log service with the repetitive tag `beats_input_codec_plain_applied` or the same Filebeat version in every single log event.
 

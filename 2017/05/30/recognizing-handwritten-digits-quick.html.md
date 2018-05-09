@@ -16,7 +16,7 @@ The handwritten digits recognition is an interesting topic that has been explore
 
 ### Taking the Kaggle challenge
 
-We’ll take the “digits recognition” challenge as presented in Kaggle. It is an online platform with challenges for data scientists. Most of the challenges have their prizes expressed in real money to win. Some of them are there to help us out in our journey on learning data science techniques — so is the “digits recognition” contest.
+We’ll take the “digits recognition” challenge as presented in Kaggle. It is an online platform with challenges for data scientists. Most of the challenges have their prizes expressed in real money to win. Some of them are there to help us out in our journey on learning data science techniques—​so is the “digits recognition” contest.
 
 ### The challenge
 
@@ -45,7 +45,7 @@ Y ~ X1, X2, X3, X4, ..., Xn
 
 The Y is called a **dependent variable** while each Xn are **independent variables**. This formula holds both for classification problems as well as regressions.
 
-Classification is when the dependent variable Y is so called *categorical* — taking values from a concrete set without a meaningful order. Regression is when the Y is not categorical — most often continuous.
+Classification is when the dependent variable Y is so called *categorical*—​taking values from a concrete set without a meaningful order. Regression is when the Y is not categorical—​most often continuous.
 
 In the digits recognition challenge we’re faced with the classification task. The dependent variable takes values from the set:
 
@@ -59,7 +59,7 @@ I’m sure the question you might be asking yourself now is: what are the indepe
 
 A good introduction to computer vision techniques is a book by J. R Parker - “Algorithms for Image Processing and Computer Vision”. I encourage the reader to buy that book. I took some ideas from it while having fun with my own solution to the challenge.
 
-The book outlines the ideas revolving around computing image profiles — for each side. For each row of pixels, a number representing the distance of the first pixel from the edge is computed. This way we’re getting our first independent variables. To capture even more information about digit shapes, we’ll also capture the differences between consecutive row values as well as their global maxima and minima. We’ll also compute the width of the shape for each row.
+The book outlines the ideas revolving around computing image profiles—​for each side. For each row of pixels, a number representing the distance of the first pixel from the edge is computed. This way we’re getting our first independent variables. To capture even more information about digit shapes, we’ll also capture the differences between consecutive row values as well as their global maxima and minima. We’ll also compute the width of the shape for each row.
 
 Because the handwritten digits vary greatly in their thickness, we will first preprocess the images to detect so-called skeletons of the digit. The skeleton is an image representation where the thickness of the shape has been reduced to just one.
 
@@ -71,7 +71,7 @@ Once we’ll have our set of independent variables Xn, we’ll use a classificat
 
 In the data science world, the lingua franca still remains to be the R programming language. In the last years Python has also came close in popularity and nowadays we can say it’s the duo of R and Python that rule the data science world (not counting high performance code written e. g. in C++ in production systems).
 
-Lately a new language designed with data scientists in mind has emerged - Julia. It’s a language with characteristics of both dynamically typed scripting languages as well as strictly typed compiled ones. It compiles its code into efficient native binary via LLVM — but it’s using it in a JIT fashion - inferring the types when needed on the go.
+Lately a new language designed with data scientists in mind has emerged - Julia. It’s a language with characteristics of both dynamically typed scripting languages as well as strictly typed compiled ones. It compiles its code into efficient native binary via LLVM—​but it’s using it in a JIT fashion - inferring the types when needed on the go.
 
 While having fun with the Kaggle challenge I’ll use Julia and Python for the so called **feature extraction** phase (the one in which we’re computing information about our Xn variables). I’ll then turn towards R for doing the classification itself. Note that I might use any of those languages at each step getting very similar results. The purpose of this series of articles is to be a bird eye fun overview so I decided that this way will be much more interesting.
 
@@ -531,7 +531,7 @@ We use the mentioned writetable on data frames computed for both training and te
 
 For the task of classifying I decided to use the XGBoost library which is somewhat a hot new technology in the world of machine learning. It’s an improvement over the so-called Random Forest algorithm. The reader can read more about XGBoost on its website: [https://xgboost.readthedocs.io/](https://xgboost.readthedocs.io/).
 
-Both random forest and xgboost revolve around the idea called *ensemble learning*. In this approach we’re not getting just one learning model — the algorithm actually creates many variations of models and uses them to collectively come up with better results. This is as much as can be written as a short description as this article is already quite lengthy.
+Both random forest and xgboost revolve around the idea called *ensemble learning*. In this approach we’re not getting just one learning model—​the algorithm actually creates many variations of models and uses them to collectively come up with better results. This is as much as can be written as a short description as this article is already quite lengthy.
 
 ### Training the model
 

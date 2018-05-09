@@ -2,14 +2,14 @@
 author: Ian Neilsen
 gh_issue_number: 1329
 tags: devops, disaster-recovery, virtualization, replication
-title: Disaster Recovery — Miami to Dallas in one hit
+title: Disaster Recovery —​ Miami to Dallas in one hit
 ---
 
 Hurricane Irma came a knocking but didn’t blow Miami away.
 
 Hurricanes are never fun, and neither is knowing that your business servers may be in the direct path of a major outage due to a natural disaster.
 
-Recently we helped a client prepare a disaster recovery environment, 4 days out pending Hurricane Irma approaching Miami — where it happens their entire server ecosystem sat. In recent months we had been discussing a long-term disaster recovery plan for this client’s infrastructure, but the final details hadn’t been worked out yet, and no work begun on it, when the news of the impending storm started to arrive.
+Recently we helped a client prepare a disaster recovery environment, 4 days out pending Hurricane Irma approaching Miami—​where it happens their entire server ecosystem sat. In recent months we had been discussing a long-term disaster recovery plan for this client’s infrastructure, but the final details hadn’t been worked out yet, and no work begun on it, when the news of the impending storm started to arrive.
 
 Although the Miami datacenter they are using is highly regarded and well-rated, the client had the foresight to think about an emergency project to replicate their entire server ecosystem out of Miami to somewhere a little safer.
 

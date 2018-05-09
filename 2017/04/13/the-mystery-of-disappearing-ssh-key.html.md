@@ -108,7 +108,7 @@ or that I forgot to feed it the correct key via the ssh-add program. However, I 
 that ssh-agent was working and contained all my usual keys. Moreover, I was able to
 connect to other sites with no problem! On a hunch, I tried breaking down the connections
 into manual steps. First, I tried logging in to the “portal” server. It logged me in
-with no problem. Then I tried to login from there to dmz.acme-anvils.com — which also logged
+with no problem. Then I tried to login from there to dmz.acme-anvils.com—​which also logged
 me in with no problem! But trying to get there via ProxyCommand still failed.
 What was going on?
 

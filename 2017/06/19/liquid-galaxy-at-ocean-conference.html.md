@@ -11,7 +11,7 @@ End Point had the privilege of participating in [The Ocean Conference](https://o
 
 <a href="/blog/2017/06/19/liquid-galaxy-at-ocean-conference/image-1-big.jpeg"><img style="clear: left; float: left; margin-bottom: 1em; margin-right: 1em;" width="400" height="300" src="/blog/2017/06/19/liquid-galaxy-at-ocean-conference/image-1.jpeg"></a>
 
-A Liquid Galaxy was set up in a prominent area on the main floor of the United Nations. End Point created custom content for the Ocean Conference, using the Liquid Galaxy’s Content Management System. Visiting diplomats and government officials were able to experience this content — Liquid Galaxy’s interactive panoramic setup allows visitors to feel immersed in the different locations, with video and information spanning their periphery.
+A Liquid Galaxy was set up in a prominent area on the main floor of the United Nations. End Point created custom content for the Ocean Conference, using the Liquid Galaxy’s Content Management System. Visiting diplomats and government officials were able to experience this content—​Liquid Galaxy’s interactive panoramic setup allows visitors to feel immersed in the different locations, with video and information spanning their periphery.
 
 Liquid Galaxy content created for The Ocean Conference included:
 
