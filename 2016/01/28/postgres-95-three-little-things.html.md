@@ -16,7 +16,7 @@ Before jumping into my list, I’d like to thank everyone who contributes to Pos
 
 ### Feature: REINDEX VERBOSE
 
-The first feature is one I’ve been wishing for a long time — a verbose form of the REINDEX command. Thanks to Sawada Masahiko for adding this. Similar to VACUUM, REINDEX gets kicked off and then gives no progress or information until it finishes. While VACUUM has long had the VERBOSE option to get around this, REINDEX gives you no clue to which index it was working on, or how much work each index took to rebuild. Here is a normal reindex, along with another 9.5 feature, the ability to reindex an entire schema:
+The first feature is one I’ve been wishing for a long time—​a verbose form of the REINDEX command. Thanks to Sawada Masahiko for adding this. Similar to VACUUM, REINDEX gets kicked off and then gives no progress or information until it finishes. While VACUUM has long had the VERBOSE option to get around this, REINDEX gives you no clue to which index it was working on, or how much work each index took to rebuild. Here is a normal reindex, along with another 9.5 feature, the ability to reindex an entire schema:
 
 ```
 greg=# reindex schema public;
@@ -78,7 +78,7 @@ Shutdown modes are:
 ```
  
 
-In the past, the default was “smart”. Which often means your friendly neighborhood DBA would type **“pg_ctl restart -D data”**, then watch the progress dots slowly marching across the screen, until they remembered that the default mode of “smart” is kind of dumb — as long as there is one connected client, the restart will not happen. Thus, the DBA had to cancel the command, and rerun it as **“pg_ctl restart -D data -m fast”**. Then they would vow to remember to add the -m switch in next time. And promptly forget to the next time they did a shutdown or restart. :) Now pg_ctl has a much better default. Thanks, Bruce Momjian! 
+In the past, the default was “smart”. Which often means your friendly neighborhood DBA would type **“pg_ctl restart -D data”**, then watch the progress dots slowly marching across the screen, until they remembered that the default mode of “smart” is kind of dumb—​as long as there is one connected client, the restart will not happen. Thus, the DBA had to cancel the command, and rerun it as **“pg_ctl restart -D data -m fast”**. Then they would vow to remember to add the -m switch in next time. And promptly forget to the next time they did a shutdown or restart. :) Now pg_ctl has a much better default. Thanks, Bruce Momjian! 
 
 ### Feature: new “cluster_name” option
 

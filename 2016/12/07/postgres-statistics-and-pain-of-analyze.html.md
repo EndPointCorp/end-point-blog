@@ -142,7 +142,7 @@ the --jobs option to vacuumdb!
 
 The next problem to conquer is the use of custom statistics. Postgres’ ANALYZE uses the default_statistics_target 
 setting to determine how many rows to sample (the default value in modern versions of Postgres is 100). However, 
-as the name suggests, this is only the default—you may also set a specific target at the column level. 
+as the name suggests, this is only the default—​you may also set a specific target at the column level. 
 Unfortunately, there is no way to disable this quickly, which means that vacuumdb will always use 
 the custom value. This is not what you want, especially if you are using the --analyze-in-stages option, 
 as it will happily (and needlessly!) recalculate columns with specific targets three times. As custom 

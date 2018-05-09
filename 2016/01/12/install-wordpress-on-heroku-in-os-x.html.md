@@ -145,7 +145,7 @@ This way, no file nor directory is world-writable.
 
 Remember to commit your plugins/themes because due to the nature of Heroku all of the files will be overwritten there if uncommitted or not in the database, effectively wiping out all of your changes at each server restart if you do them on the server.
 
-I installed this pretty theme for myself called Literatum — just bragging.
+I installed this pretty theme for myself called Literatum—​just bragging.
 
 ### Deployment to Heroku
 

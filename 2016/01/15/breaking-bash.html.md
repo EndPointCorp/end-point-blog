@@ -20,7 +20,7 @@ Eh? grep is misparsing the arguments! How does *that* happen?
 So I began to study my bash environment. Eventually I came up with this fascinating little typo:
 
 ```bash
-export GREP_OPTIONS='—color=auto'
+export GREP_OPTIONS='-color=auto'
 ```
 
 That's supposed to be:

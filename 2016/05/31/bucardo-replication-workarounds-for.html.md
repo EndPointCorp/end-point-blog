@@ -182,7 +182,7 @@ $ psql beta -Atc 'truncate table bucardo.delta_public_pgbench_accounts'
 ```
 
 The delta table will continue to accumulate changes as applications update the 
-table, but that is okay—we got rid of the 650 million rows. Now we know 
+table, but that is okay—​we got rid of the 650 million rows. Now we know 
 that beta has the canonical information, and we need to get it to all the 
 others. As before, we use session_replication_role. However, we also need 
 to ensure that nobody else will try to add rows before our COPY gets 
@@ -289,7 +289,7 @@ Starting Bucardo
 
 That concludes the solutions for when you have to make a LOT of changes to your database. How do you know 
 how much is enough to worry about the solutions presented here? Generally, you can simply let 
-Bucardo run—you will know when everything crawls to a halt that perhaps trying to insert 
+Bucardo run—​you will know when everything crawls to a halt that perhaps trying to insert 
 465 million rows at once was a bad idea. :)
 
 

@@ -54,7 +54,7 @@ satisfy the function, as each one is greater than zero. Let’s tweak the functi
 longer represents a valid, up to date constraint on the table in question:
 
 ```
-## Verify that the constraint is working—we should get an error:
+## Verify that the constraint is working—​we should get an error:
 psql test_prod -c 'update pgbench_accounts set aid = -1 where aid = 1'
 ERROR:  new row for relation "pgbench_accounts" violates check constraint "good_aid"
 DETAIL:  Failing row contains (-1, 1, 0,                                         ...).

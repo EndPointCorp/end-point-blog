@@ -41,7 +41,7 @@ class Migration(migrations.Migration):
 
 ### Adding Custom SQL to a Migration
 
-The best way to run custom SQL in a migration is through the [migration.RunSQL](https://docs.djangoproject.com/en/1.10/ref/migration-operations/#runsql) operation. RunSQL allows you to write code for migrating forwards and backwards—that is, applying migrations and unapplying them. In this example, the first string in RunSQL is the forward SQL, the second is the reverse SQL.
+The best way to run custom SQL in a migration is through the [migration.RunSQL](https://docs.djangoproject.com/en/1.10/ref/migration-operations/#runsql) operation. RunSQL allows you to write code for migrating forwards and backwards—​that is, applying migrations and unapplying them. In this example, the first string in RunSQL is the forward SQL, the second is the reverse SQL.
 
 ```python
 # -*- coding: utf-8 -*-

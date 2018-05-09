@@ -30,11 +30,11 @@ window.onerror = function (errorMsg, url, lineNumber, column, errorObj) {
 
 What do we have here? We bind a function to the window.onerror event. Every time an error occurs this function will be called. Some arguments are passed together:
 
-- errorMsg — this is an error message, usually describing why an error occurred (for example: "Uncaught ReferenceError: heyyou is not defined"),
-- url — current url location,
-- lineNumber — script line number where an error happened,
-- column — the same as above but about column,
-- errorObj — the most important part here, an error object with a stack trace included.
+- errorMsg —​ this is an error message, usually describing why an error occurred (for example: "Uncaught ReferenceError: heyyou is not defined"),
+- url —​ current url location,
+- lineNumber —​ script line number where an error happened,
+- column —​ the same as above but about column,
+- errorObj —​ the most important part here, an error object with a stack trace included.
 
 What to do with this data? You will probably want to send it to a server and save it, to be able to go through this log from time to time like we do in our example:
 

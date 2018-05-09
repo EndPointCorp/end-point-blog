@@ -13,7 +13,7 @@ Today, I’d like to present one of the simplest models for performing classific
 
 Imagine that you’re working on an e-commerce store for your client. One of the requirements is to present the currently logged in user with a “promotion box” somewhere on the page. The goal is to maximize our chances of having the user put the product from the box into the basket. There’s one promotional box and a couple of different categories of products to choose the actual product from.
 
-### Thinking about the solution — using probability theory
+### Thinking about the solution—​using probability theory
 
 One of the obvious directions we may want to turn towards is to use probability theory. If we could collect the data about the user’s previous choices and his or her characteristics, we can use probability to select the product category best suited for the current user. We would then choose a product from this category that currently has an active promotion.
 
@@ -25,7 +25,7 @@ As we’ll be exploring the probability approaches using Ruby code, I’d like t
 
 The simplest probability scenario many of us are already accustomed with is the coin toss results distribution. Here we’re throwing the coin, noting whether we get heads or tails. In this experiment, we call “got heads” and “got tails” probability events. We can also shift the terminology a bit by calling them: two values of the “toss result” **random variable**.
 
-So in this case we’d have a random variable — let’s call it **T** (for “toss”) that can take values of: “heads” or “tails”. We then define the probability distribution P(T) as a function from the random variable value to a real number between 0 and 1 inclusively on both sides. In real world the probability values after e. g 10000 tosses might look like the following:
+So in this case we’d have a random variable—​let’s call it **T** (for “toss”) that can take values of: “heads” or “tails”. We then define the probability distribution P(T) as a function from the random variable value to a real number between 0 and 1 inclusively on both sides. In real world the probability values after e. g 10000 tosses might look like the following:
 
 ```nohighlight
 +-------+---------------------+
@@ -335,9 +335,9 @@ end
 
 ### Where is the complexity?
 
-The approach described above doesn’t seem that exciting or complex. Usually reading about probability theory applied in the field of machine learning requires going through quite a dense set of mathematical notions. The field is also being actively worked on by researchers. This implies a huge complexity — certainly not the simple definition of probability that we got used to in high school.
+The approach described above doesn’t seem that exciting or complex. Usually reading about probability theory applied in the field of machine learning requires going through quite a dense set of mathematical notions. The field is also being actively worked on by researchers. This implies a huge complexity—​certainly not the simple definition of probability that we got used to in high school.
 
-The problem becomes a bit more complex if you consider efficiency of computing the probabilities. In our example, the joined probability distribution — to fully describe the scenario — needs to specify probability values for 383 cases:
+The problem becomes a bit more complex if you consider efficiency of computing the probabilities. In our example, the joined probability distribution—​to fully describe the scenario—​needs to specify probability values for 383 cases:
 
 ```ruby
 p(:veggies, :teens, :male, :single, :us) # one of 384 combinations
@@ -660,7 +660,7 @@ Full pointed at:
 
 That’s quite impressive! Even though we’re using a simplified model to approximate the original distribution, the algorithm managed to infer the correct values in all cases. You can notice also that the results differ only by a couple of cases in 1000.
 
-The approximation like that would certainly be very useful in a more complex e-commerce scenario, in the case where the number of evidence variables would be big enough to be unmanageable using the full distribution. There are use cases though, where a couple of errors in 1000 cases would be too many — the traditional example is medical diagnosis. There are also cases where the number of errors would be much greater just because the Naive Bayes assumption of conditional independence of variables is not always a fair an assumption. Is there a way to improve?
+The approximation like that would certainly be very useful in a more complex e-commerce scenario, in the case where the number of evidence variables would be big enough to be unmanageable using the full distribution. There are use cases though, where a couple of errors in 1000 cases would be too many—​the traditional example is medical diagnosis. There are also cases where the number of errors would be much greater just because the Naive Bayes assumption of conditional independence of variables is not always a fair an assumption. Is there a way to improve?
 
 The Naive Bayes assumption says that the distribution factorizes the way we did it **only if the features are conditionally independent given the category**. The notion of **conditional independence** (apart from the formal mathematical definition) suggests that if some variables a and b are conditionally independent given c, then if we know the value of c then no additional information about b can alter our knowledge about a. In our example, knowing the category, let say :beauty doesn’t mean that e. g sex is independent from age. In real world examples, it’s often very hard to find a use case for Naive Bayes that would follow the assumption in all the cases.
 

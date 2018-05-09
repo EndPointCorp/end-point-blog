@@ -9,7 +9,7 @@ It’s a good idea for ecommerce stores to regularly contact their customers. Th
 
     <img alt="" border="0" height="200" src="/blog/2016/08/22/reach-customers-and-drive-sales-with/image-0.png" title="Freddie, the MailChimp mascot" width="191"/>
 
-MailChimp offers the regular suite of email newsletter services: lists, campaigns, and reports—but in addition, they allow an ecommerce store to [integrate sales data back into MailChimp](http://mailchimp.com/connect-your-store/). When you have **detailed shopping statistics** for each subscriber, it opens new possibilities for customized marketing campaigns.
+MailChimp offers the regular suite of email newsletter services: lists, campaigns, and reports—​but in addition, they allow an ecommerce store to [integrate sales data back into MailChimp](http://mailchimp.com/connect-your-store/). When you have **detailed shopping statistics** for each subscriber, it opens new possibilities for customized marketing campaigns.
 
 ### Endless possibilities
 

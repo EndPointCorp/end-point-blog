@@ -25,11 +25,11 @@ Feature: Refund item
     Then Jeff should be refunded $100
 ```
 
-In this article, I’d like to present an approach that was conceived in the realm of Haskell — the purely functional, statically typed language. Though it started just as a Haskell library, today it could be broadly named an “approach”. We now have implementations for almost every major language. This approach is what is known as **QuickCheck**.
+In this article, I’d like to present an approach that was conceived in the realm of Haskell—​the purely functional, statically typed language. Though it started just as a Haskell library, today it could be broadly named an “approach”. We now have implementations for almost every major language. This approach is what is known as **QuickCheck**.
 
 ### Code testing limitations
 
-Having a good test coverage is a sign of a potentially stable code. However, even well-tested software needs to be improved occasionally as new bugs are discovered. This happens even in the projects with the largest test suites. Moreover, the tests are code too — they also are prone to being invalid. But do we have a really valid solution when all our tests are valid and the code passes all assertions? Realistically, we can only provide a few examples per use case at most. The best we can do is to choose the most probable use cases and the ones we have a hunch that might go wrong.
+Having a good test coverage is a sign of a potentially stable code. However, even well-tested software needs to be improved occasionally as new bugs are discovered. This happens even in the projects with the largest test suites. Moreover, the tests are code too—​they also are prone to being invalid. But do we have a really valid solution when all our tests are valid and the code passes all assertions? Realistically, we can only provide a few examples per use case at most. The best we can do is to choose the most probable use cases and the ones we have a hunch that might go wrong.
 
 This implies that for the tests suite to be guarding us against bugs, we need to have an insight as to where the potential bugs may be before even testing. Isn’t a definition of a bug telling the other story though? If we knew where to find them, we would fix them in the first place. In reality the systems grow so complex that we only can have *a feeling* of what might go wrong.
 
@@ -57,7 +57,7 @@ arr1 == reverse(reverse(arr1))
 
 The idea here is to make sure this property holds against a large number of randomly selected arguments from the domain. In this example the checker would randomly generate e. g 100 arrays and test if the assertion evaluates to true for every one of them.
 
-### Working example — the Haskell way
+### Working example —​ the Haskell way
 
 Let’s take a look at how the approach is being used in its original environment. Later on we'll see how the pattern can be used when coding in JavaScript. For this, let’s imagine that we’re developing a graph data structure, to be used in some e-commerce project we’re working on. Here’s the basic very incomplete draft:
 
@@ -133,7 +133,7 @@ prop_remove_removes_edges (Graph m) =
         (Graph m) -> m
 ```
 
-As I wrote before, these property testing functions are being run by the **QuickCheck** framework repeatedly with randomly generated values as arguments. Out of the box we’re able to generate random examples for many simple types — including e.g Int. That’s the reason we were able to just specify properties depending on random Int variables — without any additional code. But with the last example, we’re asking QuickCheck to generate a set of random **graphs**. We need to tell it how to construct a random graph first:
+As I wrote before, these property testing functions are being run by the **QuickCheck** framework repeatedly with randomly generated values as arguments. Out of the box we’re able to generate random examples for many simple types—​including e.g Int. That’s the reason we were able to just specify properties depending on random Int variables—​without any additional code. But with the last example, we’re asking QuickCheck to generate a set of random **graphs**. We need to tell it how to construct a random graph first:
 
 ```haskell
 arbitrarySizedIntGraph :: Int -> Gen (Graph Int)
@@ -162,7 +162,7 @@ Failed! Falsifiable (after 3 tests):
 Graph (fromList [(10089,[]),(25695,[10089])])
 ```
 
-QuickCheck shows that the property doesn’t hold for the whole domain — it failed after 3 examples. It also prints the example for which our property did not hold.
+QuickCheck shows that the property doesn’t hold for the whole domain—​it failed after 3 examples. It also prints the example for which our property did not hold.
 
 We can now reexamine the code for the removeNode function and fix it as per the property’s specification:
 
@@ -176,9 +176,9 @@ removeNode node (Graph m) =
 
 Now running the test again we can see that it works.
 
-### Another working example — the JavaScript land
+### Another working example —​ the JavaScript land
 
-As I stated before, this pattern became implemented for many different mainstream languages — this includes JavaScript. I’d like to show you the version of the above process for this language now. This might end up being helpful if you’d like to use it in your project but don't know much Haskell yet.
+As I stated before, this pattern became implemented for many different mainstream languages—​this includes JavaScript. I’d like to show you the version of the above process for this language now. This might end up being helpful if you’d like to use it in your project but don't know much Haskell yet.
 
 As a start, let’s make sure we have the following packages:
 
@@ -228,7 +228,7 @@ Graph.empty = function() {
 }
 ```
 
-To reproduce the first property — for all integers, inserting one as a node to an empty graph results in a graph with one node:
+To reproduce the first property—​for all integers, inserting one as a node to an empty graph results in a graph with one node:
 
 ```javascript
 var propInsertEmpty =

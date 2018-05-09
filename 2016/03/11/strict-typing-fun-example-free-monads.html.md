@@ -2,7 +2,7 @@
 author: Kamil Ciemniewski
 gh_issue_number: 1210
 tags: functional-programming, haskell, programming
-title: Strict typing fun example — Free Monads in Haskell
+title: Strict typing fun example —​ Free Monads in Haskell
 ---
 
 From time to time I’ve got a chance to discuss different programming paradigms with colleagues. Very often I like steering the discussion into the programming languages realm as it’s something that interests me a lot.
@@ -26,14 +26,14 @@ My goal is not to explain in detail all the subtleties of the code I’m going t
 
 The pattern I’m going to present is called the “Free Monad + Interpreter”. The idea behind it is that we can build [DSLs](https://en.wikipedia.org/wiki/Domain-specific_language) (domain specific languages) by making our functions not execute the code immediately, but to build the [AST](https://en.wikipedia.org/wiki/Abstract_syntax_tree) (abstract syntax tree) out of it and interpret it in different ways depending on the context.
 
-A fun example I came up with is a DSL for system [provisioning](https://en.wikipedia.org/wiki/Provisioning#Server_provisioning) scripts that — among many use cases one could come up with — allows to:
+A fun example I came up with is a DSL for system [provisioning](https://en.wikipedia.org/wiki/Provisioning#Server_provisioning) scripts that—​among many use cases one could come up with—​allows to:
 
 - present the AST in bash or zsh code or whatever other language like Python, Ruby or Perl
 - present the AST as a graph to visualize the execution
 - execute it directly, natively in Haskell
-- have an easy-to-comprehend set of provisioning instructions while lower level aspects like file handles etc. — being handled in common Haskell code used for the execution of ASTs
+- have an easy-to-comprehend set of provisioning instructions while lower level aspects like file handles etc.—​being handled in common Haskell code used for the execution of ASTs
 
-There are potentially many more use cases but I just wanted to show you a couple — enough to hopefully make you a bit curious. In this post we’ll focus on interpreting the AST as a bash script.
+There are potentially many more use cases but I just wanted to show you a couple—​enough to hopefully make you a bit curious. In this post we’ll focus on interpreting the AST as a bash script.
 
 ### The coding part
 
@@ -61,7 +61,7 @@ The continuation parameter is meant to store the next “provisioning command”
 Begin (Install "postgresql-server" (Echo "installed!" (Done)))
 ```
 
-Out of these blocks, our ASTs will be created. We need some way of composing these blocks into AST trees. I’m not going to explain here why the following code works — it’s just a teaser post. Let’s just say that the following functions allow us to just build the tree instead of calling any system-affecting code. In other words, it allows these calls to look as if they’re doing something when in fact they are just constructing the data structure in memory:
+Out of these blocks, our ASTs will be created. We need some way of composing these blocks into AST trees. I’m not going to explain here why the following code works—​it’s just a teaser post. Let’s just say that the following functions allow us to just build the tree instead of calling any system-affecting code. In other words, it allows these calls to look as if they’re doing something when in fact they are just constructing the data structure in memory:
 
 ```haskell
 begin = liftF $ Begin id
@@ -96,7 +96,7 @@ app = do
   done
 ```
 
-Running this function does nothing except for returning AST wrapped inside the “free monad” — which you can think of as a special, useful kind of container. The above function looks like any other Haskell function. It’s also “type safe” — which weeds out one class of errors that we’re only able to notice **after** we ran the code — in languages like JavaScript or Python.
+Running this function does nothing except for returning AST wrapped inside the “free monad”—​which you can think of as a special, useful kind of container. The above function looks like any other Haskell function. It’s also “type safe”—​which weeds out one class of errors that we’re only able to notice **after** we ran the code—​in languages like JavaScript or Python.
 
 Later on we’ll see that to get different results out of the “provisioning workflow” we defined above, no change in this function will be needed.
 
@@ -109,7 +109,7 @@ class InterpretingContext a where
   run :: Free Provision () -> a
 ```
 
-The above just says that if we want to use the function **run** to turn the AST wrapped in a monad to some concrete value (by executing it) — we need to implement this function for the type of the concrete value we’d like to get out of it.
+The above just says that if we want to use the function **run** to turn the AST wrapped in a monad to some concrete value (by executing it)—​we need to implement this function for the type of the concrete value we’d like to get out of it.
 
 For example, let’s say that for the portability sakes we want to turn the AST into the bash script. The natural (though naive) way to do this would be to implement this “class” along with its **run** function for the type of **String**:
 
@@ -150,7 +150,7 @@ instance InterpretingContext String where
   run (Free Done) = "exit 0"
 ```
 
-Each node kind is being **interpreted** as a data type we chose to be one of the **instances of this class** — in our example a **String**.
+Each node kind is being **interpreted** as a data type we chose to be one of the **instances of this class**—​in our example a **String**.
 
 What this allows us to do, is to use the **run** function, specifying that we want a **String** as a return value and automatically the instance we’ve just created will be used:
 
@@ -219,7 +219,7 @@ And also:
 import Control.Monad.Free
 ```
 
-Bear in mind though that the code I presented here is by no means optimal — especially memory wise. I chose to present it this way for the clarity of what the code is doing for those of you not familiar with the language.
+Bear in mind though that the code I presented here is by no means optimal—​especially memory wise. I chose to present it this way for the clarity of what the code is doing for those of you not familiar with the language.
 
 ### What are other use cases for this pattern?
 
@@ -227,14 +227,14 @@ The pattern presented here has a huge number of uses. It could be used for provi
 
 I doubt that the ability this gives thanks to the **very helpful** Haskell type system could be reproduced in languages like Ruby or Python easily. It is possible of course, but the amount of boilerplate code and complexity would require lots of testing code too. Here on the other hand the code holds many guarantees just because we’re coding in a language with an advanced strict type system.
 
-Also, the similarity to the [Interpreter Pattern](https://en.wikipedia.org/wiki/Interpreter_pattern) known from the object oriented languages is only superficial. In that case there’s no way to use regular normal functions (or methods) to build AST — as if it was a regular imperative code. It’s always about some weird mangling of data structures by hand.
+Also, the similarity to the [Interpreter Pattern](https://en.wikipedia.org/wiki/Interpreter_pattern) known from the object oriented languages is only superficial. In that case there’s no way to use regular normal functions (or methods) to build AST—​as if it was a regular imperative code. It’s always about some weird mangling of data structures by hand.
 
 ### Curious?
 
 If I managed to make you a bit curious about the aspects I presented here, here are some of the resources you might want to take a look at:
 
-- [Learn You a Haskell — online book](http://learnyouahaskell.com/chapters)
-- [Real World Haskell — online book](http://book.realworldhaskell.org/read/)
+- [Learn You a Haskell —​ online book](http://learnyouahaskell.com/chapters)
+- [Real World Haskell —​ online book](http://book.realworldhaskell.org/read/)
 - [A pleasant visual tutorial about functors and monads](http://adit.io/posts/2013-04-17-functors,_applicatives,_and_monads_in_pictures.html)
 - [Haskell Wiki article on monads](https://wiki.haskell.org/Monad)
 - [A fantastic intro to the Free Monad pattern](http://programmers.stackexchange.com/questions/242795/what-is-the-free-monad-interpreter-pattern)

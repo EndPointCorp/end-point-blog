@@ -20,7 +20,7 @@ Fortunately, history was on the side of the algorithm authors and now we have co
 
 Unfortunately, everything didn’t go as planned. SSL certificate vendors built small empires on asymmetric knowledge about a complicated process. In the USA, the National Security Agency influenced vendors to inject secret backdoors into their security products. Web browsers were installed with poorly implemented SSL certificate management. Academics wrote papers about experiments to break various kinds of security, then published them.
 
-So where does the casual web developer stand in this world? There’s too much chaos for any rational thought — besides, <em>all I want is a secure webpage that just works!</em>
+So where does the casual web developer stand in this world? There’s too much chaos for any rational thought—​besides, <em>all I want is a secure webpage that just works!</em>
 
 This story typically ends with the casual web developer paying some US dollars (usually around $30 to $80) to a company to sell them a single SSL certificate which is only good for a couple of years and only works for a single URL. The process to perform this transaction is esoteric, confusing, and requires a pretty decent understanding of the underlying infrastructure to comprehend, let alone transact.
 

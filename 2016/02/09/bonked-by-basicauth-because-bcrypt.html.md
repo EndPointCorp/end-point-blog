@@ -9,7 +9,7 @@ title: Bonked By Basic_auth Because Bcrypt
 
 <div class="separator" style="clear: both; float: right; padding: 0 1em 1em 2em; text-align: center;"><a href="/blog/2016/02/09/bonked-by-basicauth-because-bcrypt/image-0.jpeg" imageanchor="1" style="clear: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" src="/blog/2016/02/09/bonked-by-basicauth-because-bcrypt/image-0.jpeg"/></a><br/><small><a href="https://flic.kr/p/xUswo">Alligator photo</a> by <a href="https://www.flickr.com/people/johnjack/">Random McRandomhead</a></small></div>
 
-**tl;dr — don’t use a high bcrypt cost with HTTP basic auth!**
+**tl;dr —​ don’t use a high bcrypt cost with HTTP basic auth!**
 
 Recently we had a client approach us with reports of a slow wiki experience. This was 
 for a [MediaWiki](https://www.mediawiki.org/wiki/MediaWiki) we recently installed for them; 
@@ -133,7 +133,7 @@ $ head greg.httpd.trace.4948
 13:00:29.496863 rt_sigaction(SIGPROF, {0x7fc962da7ab0, [PROF], SA_RESTORER|SA_RESTART, 0x7fc970605670}, {0x7fc962da7ab0, [PROF], SA_RESTORER|SA_RESTART, 0x7fc970605670
 ```
 
-Aha! If you look close at those timestamps, you will notice that the time gap from the call to close() and the subsequent setitimer() is quite large at .69 seconds. That’s a long time for Apache to be waiting around for something. The second clue is the file it just opened: “htpasswd.users”. Seeing the top of the file, with the {SHA} in quotes, made me realize the problem — htpasswd files now support bcrypt as an authentication method, and bcrypt is designed to be secure — and slow. Sure enough, the htpasswd file had bcrypt entries with a high cost for the people that were having the most issues with the speed. This is what the file looked like (names and values changed):
+Aha! If you look close at those timestamps, you will notice that the time gap from the call to close() and the subsequent setitimer() is quite large at .69 seconds. That’s a long time for Apache to be waiting around for something. The second clue is the file it just opened: “htpasswd.users”. Seeing the top of the file, with the {SHA} in quotes, made me realize the problem—​htpasswd files now support bcrypt as an authentication method, and bcrypt is designed to be secure—​and slow. Sure enough, the htpasswd file had bcrypt entries with a high cost for the people that were having the most issues with the speed. This is what the file looked like (names and values changed):
 
 ```
 alice:{SHA}jA0EAgMCMEpo4Wa3n/9gybBBsDPa
@@ -156,7 +156,7 @@ Re-type new password:
 Updating password for user greg
 ```
 
-Voila! The page loaded in a flash. I then changed the cost to 15 and suddenly the wiki was even slower than before — taking 
+Voila! The page loaded in a flash. I then changed the cost to 15 and suddenly the wiki was even slower than before—​taking 
 upwards of 15 seconds to load the main page of the wiki. Mystery solved. All those high cost bcrypt requests are also not good 
 for the server: not only does it use a lot of CPU, but ends up keeping the Apache daemon tied up waiting for the bcrypt to 
 finish, rather than simply finishing up quickly and going back to the main pool.
@@ -179,7 +179,7 @@ was used to create them. This was an important problem, and one of the solutions
 speed is adjustable, and determined by the “cost” given at creation time. You may have noticed the **-C** option I 
 used in the htpasswd example above. That number indicates the number of rounds the algorithm must go through. However, the cost 
 given leads to 2^code rounds, which means that the cost is exponential. In other words, a cost of 13 means that bcrypt runs 
-2 to the 13th power rounds, or 8,192 rounds. A cost of 14 is 2 to the 14th power, or 16,384 rounds — twice as slow as 
+2 to the 13th power rounds, or 8,192 rounds. A cost of 14 is 2 to the 14th power, or 16,384 rounds—​twice as slow as 
 a cost of 13! A cost of 15 is 32,768 rounds, etc. Thus, one can see why even a cost of 15 would be much slower than a cost of 13.
 
 A web page usually returns more than just the requested HTML. There are commonly images, CSS, and JavaScript that must also be 

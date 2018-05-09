@@ -158,7 +158,7 @@ $ git commit -a -m "New version of Auth_remoteuser extension, with custom fix fo
 
 One of the trickiest part of major upgrades is the fact that all the files are simply replaced. 
 Normally not a problem, but what if you are in the habit of modifying the core files because sometimes 
-extensions cannot do what you want? My solution is to tag the changes prominently — using a PHP comment 
+extensions cannot do what you want? My solution is to tag the changes prominently—​using a PHP comment 
 that contains the string “END POINT”. This makes it easy to generate a list of files that may 
 need the local changes applied again. After using “git log” to find the commit ID of the 1.26.2 
 changes (message was “Upgrade to version 1.26.2”), we can grep for the unique string and 
@@ -205,7 +205,7 @@ allow a tally of working and non-working extensions. I like to give each extensi
 a text description of what should be seen, and then the actual extension in action.
 
 That’s the end of the major upgrade for MediaWiki! Hopefully in the future the upgrade process will 
-be better designed (I have ideas on that — but that’s the topic of another article). One final check you can do is to 
+be better designed (I have ideas on that—​but that’s the topic of another article). One final check you can do is to 
 open a screen and tail -f the httpd error log for your site. After the upgrade, this is a helpful 
 way to spot any issues as they come up.
 

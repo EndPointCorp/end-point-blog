@@ -11,7 +11,7 @@ I will show how to integrate this mechanism into a custom python script with two
 
 This script accepts two types of arguments. One type contains mainly flags beginning with '--', the other type is a host name taken from a bunch of chef scripts.
 
-Let’s name this script show.py—it will show some information about the host. This way I can use it with:
+Let’s name this script show.py—​it will show some information about the host. This way I can use it with:
 
 ```bash
 show.py szymon

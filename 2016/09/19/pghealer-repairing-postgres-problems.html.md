@@ -9,13 +9,13 @@ title: 'pg_healer: repairing Postgres problems automatically'
 
 <div class="separator" style="clear: both; float: right; text-align: center;"><a href="/blog/2016/09/19/pghealer-repairing-postgres-problems/image-0.jpeg" imageanchor="1" style="clear: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" src="/blog/2016/09/19/pghealer-repairing-postgres-problems/image-0.jpeg"/></a><br/><small>(<a href="https://flic.kr/p/6r7La7">Photograph</a> by <a href="https://www.flickr.com/photos/computerhotline/">Thomas Bresson</a>)</small></div>
 
-Sometimes, [the elephant](http://www.postgres.org) gets hurt—inducing database errors! 
+Sometimes, [the elephant](http://www.postgres.org) gets hurt—​inducing database errors! 
 Data corruption is a fact of life in working with computers, and Postgres is not immune. 
 With the addition of the “data checksums” feature, detecting such corruption is now 
-much easier. But detection is not enough—what happens after the corruption is detected? What if 
-Postgres could fix the problem all by itself—what if we could give the elephant a  mutant healing power?!?
+much easier. But detection is not enough—​what happens after the corruption is detected? What if 
+Postgres could fix the problem all by itself—​what if we could give the elephant a  mutant healing power?!?
 
-Now we can. I wrote an extension named pg_healer that does just that—detects 
+Now we can. I wrote an extension named pg_healer that does just that—​detects 
 corruption issues, and automatically repairs them. Let’s see how it works with a demonstration. 
 For this, we will be purposefully corrupting the “pgbench_branches” table, part of 
 the venerable [pgbench utility](https://wiki.postgresql.org/wiki/Pgbench).
@@ -225,7 +225,7 @@ Once again, pg_healer has repaired the file. This time, however, it reached out
 to a version of the file outside the data directory, copied the old page data 
 to the new page data, and then used the checksum to confirm that the changes 
 were correct. This method only works, however, if the original file and the 
-copy have the same checksum—which means that no changes have been made since 
+copy have the same checksum—​which means that no changes have been made since 
 the copy was made via pg_healer_cauldron(). As this is not always possible, there 
 is a third method pg_healer can use, which is to examine things row by row and 
 to try and repair the damage.
@@ -276,7 +276,7 @@ reacting to corruption errors as they appear is nice, in the future I would like
 be more proactive, and run as a background process that scans the database for any problems 
 and fixes them. Ideally, it should be able to handle a wider class of table corruption 
 problems, as well as problems in indexes, free space maps, system catalogs, etc.
-Please jump in and lend a hand—the project is on github as [pg_healer](https://github.com/turnstep/pg_healer). 
+Please jump in and lend a hand—​the project is on github as [pg_healer](https://github.com/turnstep/pg_healer). 
 
 Data corruption is a fact of life DBAs must confront, be it from failing hard drives, cosmic rays, 
 or other reason. While the detection of such errors was greatly improved in Postgres 9.3 with the 

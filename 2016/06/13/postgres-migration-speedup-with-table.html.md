@@ -39,7 +39,7 @@ similar to this:
 ERROR:  invalid byte sequence for encoding “UTF8”: 0xf4 0xa5 0xa3 0xa5
 ```
 
-Looking closer at the data in the table showed that it might—just might!—be a 
+Looking closer at the data in the table showed that it might—​just might!—​be a 
 historical table. In other words, it no longer receives updates, just selects. 
 We really wanted this to be true, for it meant we could dump the whole table, convert it, 
 and simply load the converted table into the new database (which took only a 
@@ -157,7 +157,7 @@ most recent rows during the migration, saving a good bit of time.
 
 The previous tricks would not work for this situation, because the underlying file would 
 change constantly as seen by pg_stat_file(), and a pg_dump checksum would 
-change on every insert. We needed to analyze a slice of the table—in this particular case, 
+change on every insert. We needed to analyze a slice of the table—​in this particular case, 
 we wanted to see about checksumming all rows except those created in 
 the last week. As a primary key lookup is very fast, we used the “creation_time” 
 column to determine an approximate primary key to start with. Then it was simply 
@@ -189,7 +189,7 @@ $ psql -Atc "select * from catbox2 where id < 8617 order by 1" | sha1sum
 Despite the large size of this table (around 10 GB), this command did not take 
 that long to run. A week later, we ran the same 
 commands, and got the same checksum! Thus, we were able to prove that the 
-table was mostly append-only—or at least enough for our use case. We 
+table was mostly append-only—​or at least enough for our use case. We 
 copied over the “old” rows, then copied over the rest of the rows during 
 the critical production migration window.
 

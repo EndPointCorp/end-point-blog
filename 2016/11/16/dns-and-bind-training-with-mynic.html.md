@@ -33,7 +33,7 @@ The contents of our lab training are as follows:
 - Setting up RNDC 
 - Setting up logging 
 - Recursive and Cache DNS 
-- Authoritative NS—Master and Slave 
+- Authoritative NS—​Master and Slave 
 - Delegation 
 - IPv6 
 - DNS Security Extensions (DNSSEC) 

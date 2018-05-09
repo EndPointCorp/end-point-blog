@@ -22,7 +22,7 @@ Like any newlywed, I cannot get enough of this guy. He’s easy to talk to, fun 
 
 #### Getting some real insight on personality issues or conflicts
 
-Working with someone that knows you really well and who can see your perspective can be really valuable—especially if you are navigating conflict or a political/personal issue, or just generally need some advice. I have always found deep friendships at work to help me work through these issues and having a spouse around has been great for this.
+Working with someone that knows you really well and who can see your perspective can be really valuable—​especially if you are navigating conflict or a political/personal issue, or just generally need some advice. I have always found deep friendships at work to help me work through these issues and having a spouse around has been great for this.
 
 #### Getting up-to-speed on company culture
 

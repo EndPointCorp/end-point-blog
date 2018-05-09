@@ -45,7 +45,7 @@ p(cat, sex, age, rel, loc) = p(sex) * p(age) * p(loc) * p(rel | age) * p(cat | s
 
 You can notice that the equation is just a product of a number of factors. There’s one factor for each random variable. The factors for variables that in the graph don’t have any parents are expressed as p(var) while those that do are expressed as p(var | par) or p(var | par1, par2...). 
 
-Notice that the Naive Bayes model fits perfectly into this equation. If you were to take the first graph presented in this article — for the Naive Bayes, and use the above equation, you’d get exactly the formula we used in the last article.
+Notice that the Naive Bayes model fits perfectly into this equation. If you were to take the first graph presented in this article—​for the Naive Bayes, and use the above equation, you’d get exactly the formula we used in the last article.
 
 ### Coding the updated probabilistic model
 

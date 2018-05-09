@@ -27,7 +27,7 @@ Instead, this is what we’re getting when setting up WordPress in a multi-site 
 
 <div class="separator" style="clear: both; text-align: center;"><a href="/blog/2016/11/02/making-cross-blogs-queries-in-multi/image-1.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="/blog/2016/11/02/making-cross-blogs-queries-in-multi/image-1.png"/></a></div>
 
-WordPress just creates a new set of tables we seen before appending the index of the blog to the tables prefix! Instead of having a nice, clean and easy to use wp_posts with the blog_id column, we get a number of tables—one for each blog: wp_1_posts, wp_2_posts etc. Why does it matter that much? Just try to get the counts of posts in each blog in one query—it’s impossible with such a tables setup. Getting such info involves querying **each table separately**. This means that with each new blog within the system, the cost of running such sequence of queries adds up dramatically. This is also known as a N+1 problem—bad WordPress! bad!
+WordPress just creates a new set of tables we seen before appending the index of the blog to the tables prefix! Instead of having a nice, clean and easy to use wp_posts with the blog_id column, we get a number of tables—​one for each blog: wp_1_posts, wp_2_posts etc. Why does it matter that much? Just try to get the counts of posts in each blog in one query—​it’s impossible with such a tables setup. Getting such info involves querying **each table separately**. This means that with each new blog within the system, the cost of running such sequence of queries adds up dramatically. This is also known as a N+1 problem—​bad WordPress! bad!
 
 ### The approach around it
 
@@ -166,4 +166,4 @@ The overall result made getting the statistics about very large set of blogs ver
 
 ### Final thoughts
 
-WordPress is loved by many users. If you’re not just a user but also working with the code, there’s a number of traps you may fall into though. If I were to employ techniques that get advised as “WordPress usual/default/preferred”—I’d end up with a very unhappy client who’s be owning a very broken WordPress system. Fortunately, the set of WordPress tables isn’t casted in stone and you can freely extend it—as long as you’re cautious and know what you’re doing. Provided that these two prerequisites are met—WordPress is just a database backed platform—like any other.
+WordPress is loved by many users. If you’re not just a user but also working with the code, there’s a number of traps you may fall into though. If I were to employ techniques that get advised as “WordPress usual/default/preferred”—​I’d end up with a very unhappy client who’s be owning a very broken WordPress system. Fortunately, the set of WordPress tables isn’t casted in stone and you can freely extend it—​as long as you’re cautious and know what you’re doing. Provided that these two prerequisites are met—​WordPress is just a database backed platform—​like any other.

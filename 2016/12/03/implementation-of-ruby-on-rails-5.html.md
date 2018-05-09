@@ -82,19 +82,19 @@ The application should meet following actions. The User will sign up or login wi
 
 There are few configurations to enable the ActionCable on the application.
 
-*config/routes.rb* — The server should be mounted on specific path to serve websocket cable requests.
+*config/routes.rb* —​ The server should be mounted on specific path to serve websocket cable requests.
 
 ```ruby
 mount ActionCable.server => '/cable'
 ```
 
-*app/views/layouts/application.html.erb* — The action_cable_meta_tag passes the WebSocket URL(which is configured on environment variable config.action_cable.url) to consumer.
+*app/views/layouts/application.html.erb* —​ The action_cable_meta_tag passes the WebSocket URL(which is configured on environment variable config.action_cable.url) to consumer.
 
 ```ruby
 <%= action_cable_meta_tag %>
 ```
 
-*app/assets/javascripts/cable.js* — The consumer should be created to establish the WebSocket connection to specified URL in action-cable-url.
+*app/assets/javascripts/cable.js* —​ The consumer should be created to establish the WebSocket connection to specified URL in action-cable-url.
 
 ```javascript
 (function() {
@@ -155,7 +155,7 @@ $ rails generate channel Messages
  app/assets/javascripts/channels/messages.js
 ```
 
-*messages_controller.rb* — Whenever the user writes a message in the room, it will be broadcasted to “messages” channel after the save action.
+*messages_controller.rb* —​ Whenever the user writes a message in the room, it will be broadcasted to “messages” channel after the save action.
 
 ```html
 class MessagesController < ApplicationController
@@ -178,7 +178,7 @@ class MessagesController < ApplicationController
 end
 ```
 
-*messages_channel.rb* — Messages channel streams those broadcasted messages to subscribed clients through established WebSocket connection.
+*messages_channel.rb* —​ Messages channel streams those broadcasted messages to subscribed clients through established WebSocket connection.
 
 ```ruby
 class MessagesChannel < ApplicationCable::Channel

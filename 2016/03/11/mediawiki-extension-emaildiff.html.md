@@ -11,8 +11,8 @@ One of the nice things about MediaWiki is the ability to use
 [extensions](https://www.mediawiki.org/wiki/Manual:Extensions) to extend the core functionality in many ways. I’ve just released a 
 new version of an extension I wrote called EmailDiff that helps provide a much needed 
 function. When one is using a MediaWiki site, and a page is on your 
-watchlist — or your username is inside  
-[the 'UsersNotifiedOnAllChanges' array](https://www.mediawiki.org/wiki/Manual:$wgUsersNotifiedOnAllChanges) — you will receive an email whenever a page 
+watchlist—​or your username is inside  
+[the 'UsersNotifiedOnAllChanges' array](https://www.mediawiki.org/wiki/Manual:$wgUsersNotifiedOnAllChanges)—​you will receive an email whenever a page 
 is changed. However, this email simply gives you the editor’s summary and states 
 “the page has been changed, here’s some links if you want to see exactly what”. 
 With the EmailDiff extension enabled, a full diff of what exactly has changed is sent 

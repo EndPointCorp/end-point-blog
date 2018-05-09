@@ -20,7 +20,7 @@ Our group of six remote engineers met weekly for one hour to discuss one chapter
 
 ### Honing Our Craft
 
-As consultants we have to balance technical perfection with other considerations — most often budget and timelines/deadlines. This reality does not lend itself well to developing and learning to apply new technical concepts. It’s also challenging to apply these new concepts in large, established projects where our role is to maintain and extend existing code. The conventions and architecture are well established and it’s hard to push against projects with inertia like this. Setting some time aside each week not tied to client projects gave us the opportunity to focus on our skills and develop them together. Although several in the group had read the POODR book before, they reported that working through each chapter and discussing it in a group setting greatly increased their understanding of the material.
+As consultants we have to balance technical perfection with other considerations—​most often budget and timelines/deadlines. This reality does not lend itself well to developing and learning to apply new technical concepts. It’s also challenging to apply these new concepts in large, established projects where our role is to maintain and extend existing code. The conventions and architecture are well established and it’s hard to push against projects with inertia like this. Setting some time aside each week not tied to client projects gave us the opportunity to focus on our skills and develop them together. Although several in the group had read the POODR book before, they reported that working through each chapter and discussing it in a group setting greatly increased their understanding of the material.
 
 ### Face Time
 

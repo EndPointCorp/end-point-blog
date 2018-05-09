@@ -5,7 +5,7 @@ tags: clients, video
 title: Showing Your Client Measurable Progress with Video Updates
 ---
 
-I’ve recently started working on a big new fancy project—the kind everyone dreams of—a nice budget, a great client, and lots of fun stuff to dig into. I happened to stumble on a fun and easy way to get a client a weekly update on progress, **Videos**!
+I’ve recently started working on a big new fancy project—​the kind everyone dreams of—​a nice budget, a great client, and lots of fun stuff to dig into. I happened to stumble on a fun and easy way to get a client a weekly update on progress, **Videos**!
 
 <div class="separator" style="clear: both; text-align: center;"><a href="/blog/2016/07/28/showing-your-client-measurable-progress/image-0-big.png" imageanchor="1" style="clear: left; float: left; margin-bottom: 1em; margin-right: 1em;"><img border="0" height="320" src="/blog/2016/07/28/showing-your-client-measurable-progress/image-0.png" width="214"/></a></div>
 

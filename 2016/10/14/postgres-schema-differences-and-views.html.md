@@ -80,7 +80,7 @@ $ psql vtest -p 5920 -Atc "select pg_get_viewdef('gregtest',true)"
   WHERE pg_class.reltuples = 0::double precision;
 ```
 
-In Postgres 9.6 however, you are always stuck with the pretty indentation—regardless of which of the five function variations you choose, and what arguments you give them! Here’s the same function calls as above in version 9.6:
+In Postgres 9.6 however, you are always stuck with the pretty indentation—​regardless of which of the five function variations you choose, and what arguments you give them! Here’s the same function calls as above in version 9.6:
 
 ```
 $ psql vtest -p 5960 -Atc "select pg_get_viewdef('gregtest')"
