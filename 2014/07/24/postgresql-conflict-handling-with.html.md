@@ -38,7 +38,7 @@ Bucardo has three general ways to handle conflicts: built in strategies, a
 list of databases, or using custom conflict handlers. 
 The primary strategy, and also the default one for all syncs, is known as **bucardo_latest**. When
 this strategy is invoked, Bucardo scans all copies of the conflicted table across all
-source databases, and then orders the databases according to when they were last changed. This generates a list of databases, for example **“B C A”**. For each conflicting row, the database most recently updated—of all the ones involved in the conflict for that row—is the winner. The other built in strategy is called “bucardo_latest_all_tables”, which scans all the tables in the sync across all source databases to find a winner.
+source databases, and then orders the databases according to when they were last changed. This generates a list of databases, for example **“B C A”**. For each conflicting row, the database most recently updated—​of all the ones involved in the conflict for that row—​is the winner. The other built in strategy is called “bucardo_latest_all_tables”, which scans all the tables in the sync across all source databases to find a winner.
 
 There may be other built in strategies added as experience/demand
 dictates, but it is hard to develop generic solutions to the complex
@@ -163,7 +163,7 @@ The database preference will last for the remainder of this sync’s run,
 so any other conflicts in other tables will not even bother to invoke the
 code. You can use the hash key “tablewinneralways” to make this decision
 sticky, in that it will apply for all future runs by this sync (its KID
-technically)—which effectively means the decision stays until Bucardo
+technically)—​which effectively means the decision stays until Bucardo
 restarts.
 
 One of the important structures sent to the code is a hash
@@ -234,7 +234,7 @@ cc   |   14
 </span>
 ```
 
-That was an obviously oversimplified example, as we picked “A” for no discernible reason! These conflict handlers can be quite complex, and are only limited by your imagination—and your business logic. As a final example, let’s have the code examine some other things in the database, and as well as jump out of the database itself(!) to determine the resolution to the conflict:
+That was an obviously oversimplified example, as we picked “A” for no discernible reason! These conflict handlers can be quite complex, and are only limited by your imagination—​and your business logic. As a final example, let’s have the code examine some other things in the database, and as well as jump out of the database itself(!) to determine the resolution to the conflict:
 
 ```perl
 ## ctest3.pl - a somewhat silly conflict handler for Bucardo.

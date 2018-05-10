@@ -12,7 +12,7 @@ This behavior seemed odd enough to me that I did some Googling to determine if t
 First of all, I was able to locate a simple enough explanation of what’s causing the behavior. As [Rob Glazebrook](https://www.cssnewbie.com/input-button-line-height-bug/#.UzBquPldXgI) explains:
 
 >
-> Basically, Firefox is setting the line-height to “normal” on buttons and is enforcing this decision with an !important declaration.” and, “browser-defined !important rules cannot be over-ruled by author-defined !important rules. This rule cannot be overruled by a CSS file, an inline style—anything.
+> Basically, Firefox is setting the line-height to “normal” on buttons and is enforcing this decision with an !important declaration.” and, “browser-defined !important rules cannot be over-ruled by author-defined !important rules. This rule cannot be overruled by a CSS file, an inline style—​anything.
 >
 
 Good news is I can stop experimenting hoping for different results.

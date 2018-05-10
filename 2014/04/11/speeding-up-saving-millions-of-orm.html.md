@@ -9,7 +9,7 @@ title: Speeding Up Saving Millions of ORM Objects in PostgreSQL
 
 Sometimes you need to generate sample data, like random data for tests. Sometimes you need to generate it with
 huge amount of code you have in your ORM mappings, just because an architect decided that all the logic needs to be
-stored in the ORM, and the database should be just a dummy data container. The real reason is not important—the problem
+stored in the ORM, and the database should be just a dummy data container. The real reason is not important—​the problem
 is: let’s generate lots of, millions of rows, for a sample table from ORM mappings.
 
 Sometimes the data is read from a file, but due to business logic kept in ORM, you need to load the data from file to ORM and then save the millions of ORM objects to database.
@@ -113,8 +113,8 @@ def save_objects_one_transaction(count=MAX_COUNT):
 
 I ran the tests multiple times, truncating the table each time. The average results of saving 10k objects were quite predictable:
 
-- Multiple transactions — 268 seconds
-- One transaction — 25 seconds
+- Multiple transactions —​ 268 seconds
+- One transaction —​ 25 seconds
 
 The difference is not surprising, the whole table size is 4.8MB, but after each transaction the database needs to write the
 changes on disk, which slows the procedure a lot.
@@ -140,12 +140,12 @@ def serialize_post_to_out_stream(post, out):
 
 The function above gets two parameters:
 
-- post — the object to be serialized
-- out — the output stream where the row with the post object will be saved, in Python it is a file-like object, so an
+- post —​ the object to be serialized
+- out —​ the output stream where the row with the post object will be saved, in Python it is a file-like object, so an
 object with all the functions a file object has
 
 Here I use a standard csv module, which supports reading and writing csv files. I really don’t want to write my own
-function for escaping all the possible forms of data I could have—this usually leads to many tricky bugs.
+function for escaping all the possible forms of data I could have—​this usually leads to many tricky bugs.
 
 The only thing left is to use the COPY command. I don’t want to create a file with data and load that later; the
 generated data can be really huge, and creating temporary files can just slow things down. I want to keep the whole
@@ -174,7 +174,7 @@ def save_objects_using_copy(count=MAX_COUNT):
 ### Results
 
 I’ve also tested that on the same database table, truncating the table before running it. After that I’ve also checked
-this function, and the previous one (with one transaction) on a bigger sample—100k of BlogPost objects.
+this function, and the previous one (with one transaction) on a bigger sample—​100k of BlogPost objects.
 
 The results are:
 
@@ -204,7 +204,7 @@ The results are:
 </tr>
 <tr>
  <td style="text-align:right;">100k</td>
- <td style="text-align:right;">—</td>
+ <td style="text-align:right;">—​</td>
  <td style="text-align:right;">262 s</td>
  <td style="text-align:right;">51 s</td>
 </tr>
@@ -226,6 +226,6 @@ Of course using psql poses a couple of problems:
 - calling psql creates another connection to the database; sometimes that could be a problem
 - you need to set up a password in ~/.psql file; you cannot provide it in the command line
 
-You could also get the pcycopg2 cursor directly from the SQLAlchemy connection, and then use the copy_from() function, but this method needs to have all the data already prepared in memory, as it reads from a file-like object, e.g. StringIO. This is not a good solution for inserting millions of objects, as they can be quite huge—streaming is much better in this case.
+You could also get the pcycopg2 cursor directly from the SQLAlchemy connection, and then use the copy_from() function, but this method needs to have all the data already prepared in memory, as it reads from a file-like object, e.g. StringIO. This is not a good solution for inserting millions of objects, as they can be quite huge—​streaming is much better in this case.
 
 Another solution to this is to write a generator, which is a file like object, and the copy_from() method can read from it directly. This function calls the file’s read() method trying to read 8192 bytes per call. This can be a good idea when you don’t have access to the psql, however due to the overhead for generating the 8192 bytes strings, it should be slowever than the psql version.

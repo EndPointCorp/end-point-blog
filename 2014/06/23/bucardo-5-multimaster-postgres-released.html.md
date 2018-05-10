@@ -56,7 +56,7 @@ $ createdb shake3 -T shake1
 Bucardo has some dependencies that need installing. You may have a different 
 list depending on your distro: this is what Amazon Linux needed when I wrote this.
 (If you are lucky, your distro may have Bucardo already available, in which case many of the steps below can be 
-replaced e.g. with “yum install bucardo”—just make sure it is using version 5 or better! (e.g. with yum info bucardo))
+replaced e.g. with “yum install bucardo”—​just make sure it is using version 5 or better! (e.g. with yum info bucardo))
 
 ```
 $ sudo yum install  perl-ExtUtils-MakeMaker  perl-DBD-Pg \
@@ -123,7 +123,7 @@ use the three databases s1,s2, and s3. Each of these is to act as a source, so w
 append that information as well. Finally, we need to know what to replicate. In this 
 case, we simply want all tables (or to be more precise, all tables with a primary 
 key or a unique index). Notice that Bucardo always puts databases and tables into 
-named groups—in this case, it was done automatically, and the dbgroup and relgroup 
+named groups—​in this case, it was done automatically, and the dbgroup and relgroup 
 are simply named after the sync.
 
 Let’s verify that replication is working, by checking that a changed row replicates 

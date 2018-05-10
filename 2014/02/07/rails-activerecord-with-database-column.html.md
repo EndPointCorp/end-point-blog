@@ -5,7 +5,7 @@ tags: database, rails
 title: Rails ActiveRecord with Database Column Defaults
 ---
 
-I had an interaction with a coworker recently that made me take stock of what occasions and situations I use database column defaults. I realized that far and away my primary use is for booleans. I commonly set a default on my boolean columns when I’m defining a new migration. I do this primarily to minimize the potential for three states—true, false, and null—when I usually want a boolean to be limited to either true or false.
+I had an interaction with a coworker recently that made me take stock of what occasions and situations I use database column defaults. I realized that far and away my primary use is for booleans. I commonly set a default on my boolean columns when I’m defining a new migration. I do this primarily to minimize the potential for three states—​true, false, and null—​when I usually want a boolean to be limited to either true or false.
 
 Alongside the distillation down to the classically defined values, another perk of defaults in general is that Rails uses the table’s definition within the database to pre-fill attributes that are not included in the initialization params for an object. For example, a table with columns defined as follows:
 

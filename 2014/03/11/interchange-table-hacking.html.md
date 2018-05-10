@@ -42,7 +42,7 @@ in addition to the original key:
 Database  my_table  KEY  code
 ```
 
-Here’s the problem this presents: when you add a COMPOSITE_KEY to a table, the table editor refuses to show per-row checkboxes that allow you to delete rows. I thought I might have to write a custom admin page to carry this off, but then I had an inspiration—the REAL_NAME attribute of the Database directive:
+Here’s the problem this presents: when you add a COMPOSITE_KEY to a table, the table editor refuses to show per-row checkboxes that allow you to delete rows. I thought I might have to write a custom admin page to carry this off, but then I had an inspiration—​the REAL_NAME attribute of the Database directive:
 
 ```nohighlight
 Database  my_table_edit my_table_edit.txt __SQLDSN__

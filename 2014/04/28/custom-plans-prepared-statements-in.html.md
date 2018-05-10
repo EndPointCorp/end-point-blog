@@ -113,7 +113,7 @@ Before version 9.2, the prepared statement’s plan was locked in place. This wa
 </blockquote>
 ```
 
-Yes, you read that correctly—new plans can be generated to match the parameters! (In case you were wondering, things have been improved since this commit, as hoped for in the last sentence.) Let’s see what happens when we run the exact same prepared statements above, but on Postgres version 9.3:
+Yes, you read that correctly—​new plans can be generated to match the parameters! (In case you were wondering, things have been improved since this commit, as hoped for in the last sentence.) Let’s see what happens when we run the exact same prepared statements above, but on Postgres version 9.3:
 
 ```
 <span class="gsm"># SELECT substring(version() from '(.+?) on');

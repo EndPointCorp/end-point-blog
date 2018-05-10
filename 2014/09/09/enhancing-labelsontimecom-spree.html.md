@@ -5,7 +5,7 @@ tags: ecommerce, ruby, rails, spree
 title: Enhancing the labelsontime.com Spree application
 ---
 
-[Labels on Time](http://www.labelsontime.com) is an online retailer that delivers top-quality thermal roll and direct thermal labels—and all on time, of course. They came to us last year to upgrade their Spree site, resolve bugs, and develop cutting-edge features, utilizing our expertise with the ecommerce platform. Spree Commerce is an open-source ecommerce solution built on Ruby on Rails, and manages all aspects of the fulfillment process, from checkout to shipping to discounts, and much more.
+[Labels on Time](http://www.labelsontime.com) is an online retailer that delivers top-quality thermal roll and direct thermal labels—​and all on time, of course. They came to us last year to upgrade their Spree site, resolve bugs, and develop cutting-edge features, utilizing our expertise with the ecommerce platform. Spree Commerce is an open-source ecommerce solution built on Ruby on Rails, and manages all aspects of the fulfillment process, from checkout to shipping to discounts, and much more.
 
 ### UPGRADING THE SPREE PLATFORM
 

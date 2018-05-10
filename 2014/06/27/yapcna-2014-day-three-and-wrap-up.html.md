@@ -7,7 +7,7 @@ title: YAPC::NA 2014, Day Three (and wrap-up)
 
 My final day at YAPC::NA (Yet Another Perl Conference, North American flavor) summarized below. (For [Day Two](/blog/2014/06/25/yapcna-2014-day-two) and [Day One](/blog/2014/06/23/yapcna-2014-day-one), see the links.)
 
-The conference organizers know their audience: day one started at 8 AM, day two at 9 AM, and the final day at 10 AM. (I took advantage of this lenient schedule to go for a swim in the hotel pool and grab a nice off-site breakfast. — Oh, dear, does my boss read this blog? :-)
+The conference organizers know their audience: day one started at 8 AM, day two at 9 AM, and the final day at 10 AM. (I took advantage of this lenient schedule to go for a swim in the hotel pool and grab a nice off-site breakfast.—​Oh, dear, does my boss read this blog? :-)
 
 I attended several medium-sized sessions during the day:
 
@@ -37,7 +37,7 @@ as well as setting up appropriate permissions, etc.
 
 Dancer was somewhat incidental to this talk. It’s another web framework (a way of connecting structured URLs into a web service so that a given URL runs a given chunk of code, and delivers output in a particular format, HTML, JSON, XML, or what-have you). Setting it up on a bare system can be a chore, especially if you aren’t a rugged, fearless [system administrator](http://geekswing.com/wp-content/uploads/2013/07/system-administrator-poster.jpg) type, so Avery gave us mortals a way to brute-force this installation without a lot of experience beforehand.
 
-- Templates as a service—with swig.js
+- Templates as a service—​with swig.js
 
 This was a remarkable, rapid tour of an effort by Logan Bell and others at Shutterstock, in which the [swig.js](https://github.com/paularmstrong/swig) template system is set up to be provided as a web service. In other words, a Dancer application runs JavaScript inside of Perl to fill out HTML templates, which get delivered back to an invoking Perl application (and then, one assumes, served up as the output of that application). I found all this just a bit mind-blowing, and I’m looking forward to giving it a try.
 

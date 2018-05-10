@@ -40,7 +40,7 @@ $ psql btest1 -c 'ALTER TABLE pgbench_history ADD hid SERIAL PRIMARY KEY'
 ALTER TABLE
 ```
 
-Now to make things a little more interesting. Let’s add a new column to the **pgbench_accounts** table named “phone”, which will hold the account owner’s phone number. As this is confidential information, we do not want it to be available—except on the source database! For this example, database btest1 will be the source, and database btest2 will be the target.
+Now to make things a little more interesting. Let’s add a new column to the **pgbench_accounts** table named “phone”, which will hold the account owner’s phone number. As this is confidential information, we do not want it to be available—​except on the source database! For this example, database btest1 will be the source, and database btest2 will be the target.
 
 ```
 $ psql btest1 -c 'ALTER TABLE pgbench_accounts ADD phone TEXT'
@@ -176,7 +176,7 @@ $ psql btest2 -c 'select aid,abalance,phone from pgbench_accounts order by aid l
 
 ### Solution two: REPLICA trigger
 
-Trigger-based replication solutions, you may recall from above, issue this command: ***SET session_replication_role = 'replica'***. What this means is that all rules and triggers that are *not* of type replica are skipped (with the exception of always triggers of course). Thus, another solution is to set the triggers you want to fire to be of type “replica”. Once you do this, however, the triggers will NOT fire in ordinary use—so be careful. Let’s see it in action:
+Trigger-based replication solutions, you may recall from above, issue this command: ***SET session_replication_role = 'replica'***. What this means is that all rules and triggers that are *not* of type replica are skipped (with the exception of always triggers of course). Thus, another solution is to set the triggers you want to fire to be of type “replica”. Once you do this, however, the triggers will NOT fire in ordinary use—​so be careful. Let’s see it in action:
 
 ```
 btest2=# ALTER TABLE pgbench_accounts ENABLE REPLICA TRIGGER elide_phone;
@@ -213,7 +213,7 @@ $ psql btest2 -c 'select aid,abalance,phone from pgbench_accounts order by aid l
 
 ### Solution three: Bucardo customcode
 
-Bucardo supports a number of hooks into the replication process. These are called “customcodes” and consist of Perl code that is invoked by Bucardo. To solve the problem at hand, we will create some code for the “code_before_trigger_enable” hook—in other words, right after the actual data copying is performed. To create the customcode, we write the actual code to a text file, then do this:
+Bucardo supports a number of hooks into the replication process. These are called “customcodes” and consist of Perl code that is invoked by Bucardo. To solve the problem at hand, we will create some code for the “code_before_trigger_enable” hook—​in other words, right after the actual data copying is performed. To create the customcode, we write the actual code to a text file, then do this:
 
 ```
 $ bucardo add code nophone whenrun=before_trigger_enable sync=pgb src_code=./nophone.pl

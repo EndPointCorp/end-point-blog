@@ -24,7 +24,7 @@ postinstall scriptlet (using /bin/sh):
 
 That line “postinstall scriptlet (using /bin/sh):” marks the beginning of the list of commands that are run at install time. Ah ha! It runs update-alternatives! If you’re not familiar with alternatives, the short description is that it keeps track of different versions of things installed on your system and automatically manages symlinks to the version you want to run.
 
-Now, not all the commands we’re interested in are installed by the package “postgresql93”—you can search through the output and see that **pg_config** gets installed but is not set up in alternatives. The commands **initdb** and **pg_ctl** are part of the package “postgresql93-server”. If we run the same command to view its files and scripts we’ll see something interesting—it doesn’t set up any of its commands using alternatives! Grrr. :-(
+Now, not all the commands we’re interested in are installed by the package “postgresql93”—​you can search through the output and see that **pg_config** gets installed but is not set up in alternatives. The commands **initdb** and **pg_ctl** are part of the package “postgresql93-server”. If we run the same command to view its files and scripts we’ll see something interesting—​it doesn’t set up any of its commands using alternatives! Grrr. :-(
 
 In the postgresql93-server package the preinstall and postinstall scripts only set up the postgres user on the system, set up /var/log/pgsql, add postgres to the init scripts, and set up the postgres user’s .bash_profile. That’s it. But, now that we know what commands are run for getting psql, clusterdb, and createdb into the path, we can manually run the same commands for the postgres commands that we need. Like this:
 

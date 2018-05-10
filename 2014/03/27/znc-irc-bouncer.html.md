@@ -9,7 +9,7 @@ title: 'ZNC: An IRC Bouncer'
 
 ### Kickin’ it Old Skool
 
-At End Point, we use IRC extensively for group chat and messaging. Prior to starting here I had been an occasional IRC user—asking questions about various open source projects on [Freenode](http://freenode.net/) and helping others as well. When I began to use IRC daily, I ran into a few things that bugged me and thought I would write about what I have done to mitigate those. While it might not be as fancy as [Campfire](https://campfirenow.com/), [HipChat](https://www.hipchat.com/) or [Slack](https://slack.com/) I’m happy with my setup now.
+At End Point, we use IRC extensively for group chat and messaging. Prior to starting here I had been an occasional IRC user—​asking questions about various open source projects on [Freenode](http://freenode.net/) and helping others as well. When I began to use IRC daily, I ran into a few things that bugged me and thought I would write about what I have done to mitigate those. While it might not be as fancy as [Campfire](https://campfirenow.com/), [HipChat](https://www.hipchat.com/) or [Slack](https://slack.com/) I’m happy with my setup now.
 
 ### What did I miss?
 
@@ -29,7 +29,7 @@ A bouncer connects to an IRC server on your behalf and maintains a persistent co
 
 ### IRC to go
 
-Another benefit of this setup has been the ability to connect to IRC on my phone (with the same nick as my laptop). I have used Mobile Colloquy and Palaver on iOS and both work quite well. There are also ZNC modules on GitHub that enable ZNC to send push notifications for mentions and private messages. Mobile Colloquy does a good job of this—I have not yet tried this with Palaver yet.
+Another benefit of this setup has been the ability to connect to IRC on my phone (with the same nick as my laptop). I have used Mobile Colloquy and Palaver on iOS and both work quite well. There are also ZNC modules on GitHub that enable ZNC to send push notifications for mentions and private messages. Mobile Colloquy does a good job of this—​I have not yet tried this with Palaver yet.
 
 ### Modules
 

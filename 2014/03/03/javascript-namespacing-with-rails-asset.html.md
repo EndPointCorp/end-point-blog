@@ -105,6 +105,6 @@ var users_show = users_edit;
 
 ### Conclusion
 
-It’s pretty simple, but it’s a nice little pattern that has helped me be consistent in my organization and namespacing and makes for less code repetition in executing the initialized methods per individual page types. Perhaps there are a few more techniques in the Rails space intended to accomplish a similar goal—I’d like to hear about them in the comments!
+It’s pretty simple, but it’s a nice little pattern that has helped me be consistent in my organization and namespacing and makes for less code repetition in executing the initialized methods per individual page types. Perhaps there are a few more techniques in the Rails space intended to accomplish a similar goal—​I’d like to hear about them in the comments!
 
 

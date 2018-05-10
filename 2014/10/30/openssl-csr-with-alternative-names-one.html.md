@@ -5,7 +5,7 @@ tags: security, sysadmin, tls
 title: OpenSSL CSR with Alternative Names one-line
 ---
 
-2017-02-16—Edit—I changed this post to use a different method than what I used in the original version cause X509v3 extensions were not created or seen correctly by many certificate providers.
+2017-02-16—​Edit—​I changed this post to use a different method than what I used in the original version cause X509v3 extensions were not created or seen correctly by many certificate providers.
 
 I find it hard to remember a period in my whole life in which I issued, reissued, renewed and revoked so many certificates.
 
@@ -21,13 +21,13 @@ Luckily the solution is pretty simple and straight-forward and the only requirem
 
 If you managed to understand how an SSL certificate works this shouldn’t be a huge problem, anyway just as a recap here’s the list of the meaning for the common Subject entries you’ll need:
 
-- `C` — Country
-- `ST` — State
-- `L` — City
-- `O` — Organization
-- `OU` — Organization Unit
-- `CN` — Common Name (eg: the main domain the certificate should cover)
-- `emailAddress` — main administrative point of contact for the certificate
+- `C` —​ Country
+- `ST` —​ State
+- `L` —​ City
+- `O` —​ Organization
+- `OU` —​ Organization Unit
+- `CN` —​ Common Name (eg: the main domain the certificate should cover)
+- `emailAddress` —​ main administrative point of contact for the certificate
 
 So by using the common syntax for OpenSSL subject written via command line you need to specify all of the above (the OU is optional) and add another section called **subjectAltName=**.
 

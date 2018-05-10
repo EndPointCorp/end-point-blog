@@ -2,7 +2,7 @@
 author: Mike Farmer
 gh_issue_number: 916
 tags: functional-programming, ruby, rails
-title: Functional Handler — A Pattern in Ruby
+title: Functional Handler —​ A Pattern in Ruby
 ---
 
 

@@ -2,7 +2,7 @@
 author: Selvakumar Arumugam
 gh_issue_number: 1058
 tags: big-data, cloud, conference, mongodb, open-source
-title: MongoDB and OpenStack — OSI Days 2014, India
+title: MongoDB and OpenStack —​ OSI Days 2014, India
 ---
 
 The 11th edition of Open Source India, 2014 was held at Bengaluru, India. The two day conference was filled with three parallel tech talks and workshops which was spread across various Open Source technologies.
@@ -63,16 +63,16 @@ OpenStack is a Open Source cloud computing platform to provision the Infrastruct
 
 OpenStack have multiple components to provide various features in Infrastructure as a Service. Here is the list of OpenStack components and the purpose of each one.
 
-- Nova (Compute) — manages the pool of computer resources
-- Cinder (Block Storage) — provides the storage volume to machines
-- Neutron (Network) — manages the networks and IP addresses
-- Swift (Object Storage) — provides distributed high availability(replication) on storage system.
-- Glance (Image) — provides a repository to store disk and server images
-- KeyStone (Identity) — enables the common authentication system across all components
-- Horizon (Dashboard) — provides GUI for users to interact with OpenStack components
-- Ceilometer (Telemetry) — provides the services usage and billing reports
-- Ironic (Bare Metal) — provisions bare metal instead of virtual machines
-- Sahara (Map Reduce) — provisions hadoop cluster for big data processing
+- Nova (Compute) —​ manages the pool of computer resources
+- Cinder (Block Storage) —​ provides the storage volume to machines
+- Neutron (Network) —​ manages the networks and IP addresses
+- Swift (Object Storage) —​ provides distributed high availability(replication) on storage system.
+- Glance (Image) —​ provides a repository to store disk and server images
+- KeyStone (Identity) —​ enables the common authentication system across all components
+- Horizon (Dashboard) —​ provides GUI for users to interact with OpenStack components
+- Ceilometer (Telemetry) —​ provides the services usage and billing reports
+- Ironic (Bare Metal) —​ provisions bare metal instead of virtual machines
+- Sahara (Map Reduce) —​ provisions hadoop cluster for big data processing
 
 OpenStack services are usually mapped to AWS services to better understand the purpose of the components. The following table depicts the mapping of similar services in OpenStack and AWS:
 
@@ -174,6 +174,6 @@ Along with the overview of OpenStack architecture, there were couple of in-depth
 
 - Neependra Khare from RedHat gave a presentation on using [Docker in OpenStack Nova](https://github.com/nkhare/presetations/blob/master/osidays/osi_openstack_nova_docker.md). 
 - Pushpesh Sharma presented a [comparison between storage component OpenStack Swift and Ceph](http://pushpeshsharma.blogspot.in/2014/11/openstack-swift-vs-ceph-rgw-read.html)
-- Sridhar Rao presented about OpenStack and its role in Network Function Virtualisation(NFV) — [Slides](https://dl.dropboxusercontent.com/u/1527696/OpenStack-NfV.pptx)
+- Sridhar Rao presented about OpenStack and its role in Network Function Virtualisation(NFV) —​ [Slides](https://dl.dropboxusercontent.com/u/1527696/OpenStack-NfV.pptx)
 
 That was a wonderful Day One of OSI 2014 which helped me to get better understanding of MongoDB and OpenStack.

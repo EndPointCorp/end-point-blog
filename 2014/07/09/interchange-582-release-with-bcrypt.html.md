@@ -18,11 +18,11 @@ Require module Crypt::Random
 
 To use bcrypt, configure your UserDB directive with the following options:
 
-- bcrypt —set to 1
-- cost — desired cost between 1 and 31 (optional; current default is 13)
-- bcrypt_pepper — random string used to apply a unique padding pattern (also optional, but strongly recommended)
+- bcrypt—​set to 1
+- cost—​desired cost between 1 and 31 (optional; current default is 13)
+- bcrypt_pepper—​random string used to apply a unique padding pattern (also optional, but strongly recommended)
 
-To encourage adoption of bcrypt, there are two mechanisms available that allow a user table already using another encryption type to convert to using bcrypt. The first option is to add the “promote” directive—set to 1—to your UserDB configuration. This will cause passwords stored by any other encryption type to update to bcrypt upon the next successful access of that user account. This causes no disruption to site operations or your users, but it does mean you have to allow full adoption of bcrypt to advance organically as your users return to your site over time.
+To encourage adoption of bcrypt, there are two mechanisms available that allow a user table already using another encryption type to convert to using bcrypt. The first option is to add the “promote” directive—​set to 1—​to your UserDB configuration. This will cause passwords stored by any other encryption type to update to bcrypt upon the next successful access of that user account. This causes no disruption to site operations or your users, but it does mean you have to allow full adoption of bcrypt to advance organically as your users return to your site over time.
 
 The second option builds on “promote” by allowing the developer to construct a background process to slurp in the existing passwords stored by another encryption type and generate a bcrypt storage value of the *encrypted* password, by utilizing the construct_bcrypt() subroutine in Vend::UserDB. construct_bcrypt() takes a single hashref argument with a required key “password” and optional keys “type” and “profile”. In this use case, password holds the encrypted password extracted from the existing user table and type contains one of “sha1”, “md5”, “md5_salted”, or “crypt”, corresponding to the encryption algorithm used to produce the password originally. The profile key maps to the profile name assigned to control this user table in the UserDB directive. Normally, this will be either “default”, which controls the userdb table, or “ui”, which controls the access table. Note that the profile used *must* already be configured to use bcrypt, or construct_bcrypt() will die. If profile is omitted, defaults to “default”. It is anticipated the developer would construct an Interchange job to query all the users and encrypted passwords still stored by the previous algorithm, pass each into construct_bcrypt(), and update the source record’s password field with the return value from construct_bcrypt().
 

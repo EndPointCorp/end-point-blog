@@ -11,7 +11,7 @@ title: Solving pg_xlog out of disk space problem on Postgres
 <em>pg_xlog with a dummy file</em><br/>
 <small>(<a href="https://flic.kr/p/5Naet5">image</a> by <a href="https://www.flickr.com/photos/andrewmalone/">Andrew Malone</a>)</small></div>
 
-Running out of disk space in the pg_xlog directory is a fairly common Postgres problem. This important directory holds the [WAL](https://www.postgresql.org/docs/current/static/wal-intro.html) (Write Ahead Log) files. (WAL files contain a record of all changes made to the database — see the link for more details). Because of the near write‑only nature of this directory, it is often put on a separate disk. Fixing the out of space error is fairly easy: I will discuss a few remedies below.
+Running out of disk space in the pg_xlog directory is a fairly common Postgres problem. This important directory holds the [WAL](https://www.postgresql.org/docs/current/static/wal-intro.html) (Write Ahead Log) files. (WAL files contain a record of all changes made to the database—​see the link for more details). Because of the near write‑only nature of this directory, it is often put on a separate disk. Fixing the out of space error is fairly easy: I will discuss a few remedies below.
 
 When the pg_xlog directory fills up and new files cannot be written to it, Postgres will stop running, try to automatically restart, fail to do so, and give up. The pg_xlog directory is so important that Postgres cannot function until there is enough space cleared out to start writing files again. When this problem occurs, the Postgres logs will give you a pretty clear indication of the problem. They will look similar to this:
 
@@ -80,7 +80,7 @@ LOG:  aborting startup due to startup process failure
 
 At this point, you must provide Postgres a little bit of room in the partition/disk that the pg_xlog directory is in. There are four approaches to doing so: removing non-WAL files to clear space, moving the pg_xlog directory, resizing the partition it is on, and removing some of the WAL files yourself.
 
-The easiest solution is to clear up space by removing any non-WAL files that are on the same partition. If you do not have pg_xlog on its own partition, just remove a few files (or move them to another partition) and then start Postgres. You don’t need much space — a few hundred megabytes should be more than enough.
+The easiest solution is to clear up space by removing any non-WAL files that are on the same partition. If you do not have pg_xlog on its own partition, just remove a few files (or move them to another partition) and then start Postgres. You don’t need much space—​a few hundred megabytes should be more than enough.
 
 This problem occurs often enough that I have a best practice: create a dummy file on your pg_xlog partition whose sole purpose is to get deleted after this problem occurs, and thus free up enough space to allow Postgres to start! Disk space is cheap these days, so just create a 300MB file and put it in place like so (on Linux):
 
@@ -89,7 +89,7 @@ dd if=/bin/zero of=/pgdata/pg_xlog/DO_NOT_MOVE_THIS_FILE bs=1MB count=300
 ```
   
 
-This is a nice trick, because you don’t have to worry about finding a file to remove, or determine which WALs to delete — simply move or delete the file and you are done. Once things are back to normal, don’t forget to put it back in place.
+This is a nice trick, because you don’t have to worry about finding a file to remove, or determine which WALs to delete—​simply move or delete the file and you are done. Once things are back to normal, don’t forget to put it back in place.
 
 The best way to get more room is to simply move your pg_xlog directory to another partition that has more space. Simply create a directory for it on the other partition, copy over all the files, then make pg_xlog a symlink to this new directory. (thanks to Bruce in the comments below)
 

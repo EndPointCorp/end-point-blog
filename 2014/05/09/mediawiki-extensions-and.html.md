@@ -12,7 +12,7 @@ title: MediaWiki extensions and wfLoadExtensionMessages
 
 Upgrading MediaWiki can be a challenging task, especially if you use a lot of extensions. 
 While the core upgrade process usually goes smoothly, it’s rare you can upgrade a major 
-version or two without having to muddle with your collection of extensions. Extensions are bits of code that extend what MediaWiki can do. Only a few are packaged with and maintained alongside MediaWiki itself—the great majority are written by third-party developers. When the MediaWiki API changes, it is up to those developers to update their extension so it works with the new version of MediaWiki. This does not always happen. Take for example one of the more common errors seen on a MediaWiki upgrade since 1.21 was released:
+version or two without having to muddle with your collection of extensions. Extensions are bits of code that extend what MediaWiki can do. Only a few are packaged with and maintained alongside MediaWiki itself—​the great majority are written by third-party developers. When the MediaWiki API changes, it is up to those developers to update their extension so it works with the new version of MediaWiki. This does not always happen. Take for example one of the more common errors seen on a MediaWiki upgrade since 1.21 was released:
 
 [Tue May 06 11:21:52 2014] [error] [client 12.34.56.78] PHP Fatal error:  
 Call to undefined function wfLoadExtensionMessages() in /home/beckett/mediawiki/extensions/PdfExport/PdfExport.php on line 83, referer: http://test.ziggy.com/wiki/Main_Page
@@ -97,7 +97,7 @@ function wfLoadExtensionMessages() {
 
 Thus wfLoadExtensionMessages was basically a no-op in MediaWiki version 1.20, with the caveat that it will write 
 a deprecation warning to your error log (or, in modern versions, the debug log unless $wgDevelopmentWarnings is set). 
-Next we want to find the last time this function did something useful—which should be version 1.15 according to 
+Next we want to find the last time this function did something useful—​which should be version 1.15 according to 
 the comment above. Thus:
 
 ```

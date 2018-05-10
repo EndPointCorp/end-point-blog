@@ -9,7 +9,7 @@ title: YAPC::NA 2014, Day One
 
 YAPC (Yet Another Perl Conference) is an annual gathering of Perl developers (and non-developers) to talk about Perl: how to do it, how to get other people to do it, and how we will all be doing it next year (or decade, if all goes well). There are flavors of YAPC set in North America, Europe, etc.
 
-I attended my first-ever starting in Orlando, FL today (which apparently makes me a VIP—Very Important Perl-user, as the community stands on its head the idea that the old fogies are the important people—it’s the new blood at the conference that gets them all excited).
+I attended my first-ever starting in Orlando, FL today (which apparently makes me a VIP—​Very Important Perl-user, as the community stands on its head the idea that the old fogies are the important people—​it’s the new blood at the conference that gets them all excited).
 
 In no particular order, here’s what I remember of my whirlwind tour of YAPC::NA, Day One.
 
@@ -19,7 +19,7 @@ Dan Wright, treasurer for the Perl Foundation, gave an overview of that virtuous
 
 Mark Keating gave an energetic (almost frenetic) talk on the Life and Death of Perl: at various times in the last 10 years, Perl has been declared “dead”, mostly due to the use of various (flawed and/or skewed) statistics, such as the negative growth in Perl jobs. However, Perl is still being written, written about, and talked about in great volumes: the reports of its demise can be traced to the downturn in programming jobs in general.
 
-Larry Wall (yes, that Larry Wall—author of the One True Programming Language) spoke at length about Perl RFCs: not to discuss the hundreds of features requested for the language, but to highlight some general principles that emerged as these features were proposed, considered, modified, accepted or rejected. For instance, “YAGNI”: Ya Ain’t Gonna Need It. Sometimes a feature seems so intrinsically cool that you just want to embrace it, but as a language maintainer you realize that its innate usefulness just “ain’t gonna” crop up that often, so convoluting the syntax or semantics isn’t worth the risk.
+Larry Wall (yes, that Larry Wall—​author of the One True Programming Language) spoke at length about Perl RFCs: not to discuss the hundreds of features requested for the language, but to highlight some general principles that emerged as these features were proposed, considered, modified, accepted or rejected. For instance, “YAGNI”: Ya Ain’t Gonna Need It. Sometimes a feature seems so intrinsically cool that you just want to embrace it, but as a language maintainer you realize that its innate usefulness just “ain’t gonna” crop up that often, so convoluting the syntax or semantics isn’t worth the risk.
 
 Much of Larry’s talk dealt with the advent of Perl 6, which is coming soon and will shake up the language at least as much as Perl 5 did when Perl 4 was still what people used. Larry’s “sacred” goal: to keep Perl as Perl-like as possible. Quote:
 
@@ -27,7 +27,7 @@ Much of Larry’s talk dealt with the advent of Perl 6, which is coming soon and
 > “We’ve got a golden opportunity to turn Perl into whatever we like. Let’s not take it.”
 > 
 
-This was the first time I’d heard Larry speak. He touched briefly on his bout with cancer, and that he was now one year cancer-free—which prompted a great, congratulatory outburst from the room.
+This was the first time I’d heard Larry speak. He touched briefly on his bout with cancer, and that he was now one year cancer-free—​which prompted a great, congratulatory outburst from the room.
 
 From here, we jumped into the first round of lightning talks. I can’t do them justice, as they were here and gone almost before I could write down the title. One discussed a “universal” stemming library. [Stemming](https://en.wikipedia.org/wiki/Word_stem) is the process of linguistic analysis to find a root word (usually for search indexing: “hacker”, “hacked”, and “hacking” would all be indexed under “hack”. The library is an attempt to put almost two dozen languages under one umbrella so that code processing a natural language doesn’t care which language it is.
 

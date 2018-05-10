@@ -2,7 +2,7 @@
 author: Carl Bailey
 gh_issue_number: 939
 tags: ecommerce, payments
-title: Amazon Payments — Caveat Developer
+title: Amazon Payments —​ Caveat Developer
 ---
 
 

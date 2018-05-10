@@ -12,9 +12,9 @@ The “Geo Map” option in Analyzer Reports provides a feature to visualize dat
 
 The Mondrian schema has two main categories called Dimensions and Measures. The Dimensions are defined as levels in the Mondrian schema. The Geographic fields should have two additional annotations to use Geo Map. The two annotations are:
 
-1. Data.Role — defines the type of level generally; for this type of node, this must be set to ‘Geography’.
+1. Data.Role —​ defines the type of level generally; for this type of node, this must be set to ‘Geography’.
 
-2. Geo.Role — defines the geographical classification in a hierarchy. These can be either predefined roles (‘country’, ‘state’, ‘city’, ‘postalcode’) or custom roles.
+2. Geo.Role —​ defines the geographical classification in a hierarchy. These can be either predefined roles (‘country’, ‘state’, ‘city’, ‘postalcode’) or custom roles.
 
 #### Sample Level with Annotation:
 

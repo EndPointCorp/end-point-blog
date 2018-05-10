@@ -9,4 +9,4 @@ Microsoft recently announced a new service which I’m finding very useful. [Rem
 
 <a href="https://remote.modern.ie/" title="More information about RemoteIE from Microsoft"><img alt="RemoteIE" border="0" height="484" src="/blog/2014/12/02/easier-ie-site-testing-with-remoteie/image-0.png" title="remoteIE.png" width="615"/></a>
 
-To use RemoteIE you’ll need a valid Microsoft account—it’s easy to sign up if you don’t already one. Once you have an account and have downloaded & installed the Azure RemoteApp client of your choice it’s just a matter of starting it up and logging in. Happy Testing!
+To use RemoteIE you’ll need a valid Microsoft account—​it’s easy to sign up if you don’t already one. Once you have an account and have downloaded & installed the Azure RemoteApp client of your choice it’s just a matter of starting it up and logging in. Happy Testing!

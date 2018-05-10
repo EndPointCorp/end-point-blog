@@ -13,7 +13,7 @@ During the course of this first part, which had contained a number of difficulti
 ERROR:  value too long for type character varying(20)
 ```
 
-Surely, the error message is absolutely clear, but how could this possibly be? The obvious answer—that the varchar definitions were different lengths between MySQL and PostgreSQL—was sadly quite wrong (which you knew, or I wouldn’t have written this).
+Surely, the error message is absolutely clear, but how could this possibly be? The obvious answer—​that the varchar definitions were different lengths between MySQL and PostgreSQL—​was sadly quite wrong (which you knew, or I wouldn’t have written this).
 
 After isolating out the row in question, the first clear distinction of the data in question was the presence of the ASCII null character in it:
 

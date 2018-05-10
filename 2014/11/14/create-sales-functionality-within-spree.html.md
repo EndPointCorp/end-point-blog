@@ -9,7 +9,7 @@ title: Create a sales functionality within Spree 2.3 using Spree fancy
 
 ### Introduction
 
-I recently started working with Spree and wanted to learn how to implement some basic features. I focused on one of the most common needs of any e-commerce business—adding a sale functionality to products. To get a basic understanding of what was involved, I headed straight to the [Spree Developer Guides](https://guides.spreecommerce.org/developer/getting_started_tutorial.html). As I was going through the directions, I realized it was intended for the older Spree version 2.1. This led to me running into a few issues as I went through it using Spree’s latest version 2.3.4. I wanted to share with you what I learned, and some tips to avoid the same mistakes I made.
+I recently started working with Spree and wanted to learn how to implement some basic features. I focused on one of the most common needs of any e-commerce business—​adding a sale functionality to products. To get a basic understanding of what was involved, I headed straight to the [Spree Developer Guides](https://guides.spreecommerce.org/developer/getting_started_tutorial.html). As I was going through the directions, I realized it was intended for the older Spree version 2.1. This led to me running into a few issues as I went through it using Spree’s latest version 2.3.4. I wanted to share with you what I learned, and some tips to avoid the same mistakes I made.
 
 ### Set-up
 
@@ -45,9 +45,9 @@ We can add the e-commerce platform to our Rails app by running the following com
 spree install --auto-accept
 ```
 
-If all goes well, you should get a message that says, “Spree has been installed successfully. You’re all ready to go! Enjoy!”. Now the fun part—let’s go ahead and start our server to see what our demo app actually looks like. Run rails s to start the server and open up a new browser page pointing to the URL localhost:3000.
+If all goes well, you should get a message that says, “Spree has been installed successfully. You’re all ready to go! Enjoy!”. Now the fun part—​let’s go ahead and start our server to see what our demo app actually looks like. Run rails s to start the server and open up a new browser page pointing to the URL localhost:3000.
 
-*Note—when you navigate to localhost:3000, watch your terminal—you’ll see a lot of processes running in the background as the page loads simultaneously in your browser window. It can be pretty overwhelming, but as long as you get a “Completed 200 OK” message in your terminal, you should be good to go! See it below:
+*Note—​when you navigate to localhost:3000, watch your terminal—​you’ll see a lot of processes running in the background as the page loads simultaneously in your browser window. It can be pretty overwhelming, but as long as you get a “Completed 200 OK” message in your terminal, you should be good to go! See it below:
 
 <div class="separator" style="clear: both; text-align: center;"><a href="/blog/2014/11/14/create-sales-functionality-within-spree/image-0-big.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="/blog/2014/11/14/create-sales-functionality-within-spree/image-0.png"/></a></div>
 
@@ -65,7 +65,7 @@ The [next part](https://guides.spreecommerce.org/developer/extensions_tutorial.h
 
 ### **Step 1: Update the Gemfile**
 
-We can find our Gemfile by going back to the terminal, and within the mystore directory, type ls to see a list of all the files and subdirectories within the Spree app. You will see the Gemfile there—open it using your favorite text editor. Add the following line to the last line of your Gemfile, and save it:
+We can find our Gemfile by going back to the terminal, and within the mystore directory, type ls to see a list of all the files and subdirectories within the Spree app. You will see the Gemfile there—​open it using your favorite text editor. Add the following line to the last line of your Gemfile, and save it:
 
 ```ruby
 gem 'spree_fancy', :git => 'git://github.com/spree/spree_fancy.git', :branch => '2-1-stable'
@@ -93,7 +93,7 @@ Now restart your server and you will see your new theme!
 
 ### Step 2: Create a sales extension
 
-Now let’s see how to create an extension instead of using an existing one. According to the Spree tutorial, we first need to *generate* an extension—remember to run this command from a directory *outside* of your Spree application:
+Now let’s see how to create an extension instead of using an existing one. According to the Spree tutorial, we first need to *generate* an extension—​remember to run this command from a directory *outside* of your Spree application:
 
 ```ruby
 $ spree extension simple_sales
@@ -157,7 +157,7 @@ end
 
 As Spree explains it, this script will select just the products that have a variant with a sale_price set. 
 
-Next step—add a route to this sales action in our config/routes.rb file. Make sure your routes.rb file looks like this:
+Next step—​add a route to this sales action in our config/routes.rb file. Make sure your routes.rb file looks like this:
 
 ```ruby
 Spree::Core::Engine.routes.draw do
@@ -169,7 +169,7 @@ end
 
 Normally, to change a variant attribute, we could do it through the admin interface, but we haven’t created this functionality yet. This means we need to open up our rails console:
 
-*Note—you should be in the mystore directory
+*Note—​you should be in the mystore directory
 
 Run $ rails console
 
@@ -238,7 +238,7 @@ Run the following command from the root directory of your EXTENSION:
 
 $ bundle exec rake test_app
 
-It will begin the process by saying “Generating dummy Rails application…”—great! you’re on the right path.
+It will begin the process by saying “Generating dummy Rails application…”—​great! you’re on the right path.
 
 Once you finish creating your dummy Rails app, run the rspec command and you should see the following output:
 
@@ -293,13 +293,13 @@ Next we need to add a field to our product admin page, so we don’t have to alw
 A better way to override views is to use Deface, which is a Rails library to directly edit the underlying view file. All view customizations will be in ONE location: app/overrides which will make sure your app is always using the latest implementation of the view provided by Spree.
 
 1. Go to mystore/app/views/spree and create an admin/products directory and create the file _form.html.erb.
-1. Copy the full file NOT from Spree’s GitHub but from your Spree backend. You can think of your Spree backend as the area to edit your admin (among other things)—the spree_backend gem contains the most updated  _form.html.erb—if you use the one listed in the documentation, you will get some Method Errors on your product page.
+1. Copy the full file NOT from Spree’s GitHub but from your Spree backend. You can think of your Spree backend as the area to edit your admin (among other things)—​the spree_backend gem contains the most updated  _form.html.erb—​if you use the one listed in the documentation, you will get some Method Errors on your product page.
 
 In order to find the _form.html.erb file in your spree_backend gem, navigate to your app, and within that, run the command:
 
 bundle show spree_backend
 
-The result is the location of your spree_backend. Now cd into that location, and navigate to app/views/spree/admin/products—this is where you will find the correct _form.html.erb. Copy the contents of this file into the newly created _form.html.erb file within your application’s directory structure you just created: mystore/app/views/spree/admin/products.
+The result is the location of your spree_backend. Now cd into that location, and navigate to app/views/spree/admin/products—​this is where you will find the correct _form.html.erb. Copy the contents of this file into the newly created _form.html.erb file within your application’s directory structure you just created: mystore/app/views/spree/admin/products.
 
 Now we want to actually add a field container after the price field container for sale price so we need to create another override by creating a new file in your application’s app/overrides directory called add_sale_price_to_product_edit.rb and add the following content:
 

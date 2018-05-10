@@ -25,7 +25,7 @@ pkill screensaver
 pgrep -l screensaver
 ```
 
-The first command was to see if I had any programs running with “screensaver” in their name (I did: xscreensaver). As it was the only program that matched, it was safe to run the second command, which stopped xscreensaver. Finally, I re-ran the pgrep to make sure it was stopped and gone. Then I did the same thing with the string “lockmore” (which found no matches, as I expected). Once xscreensaver was turned off, I told the upgrade to continue, and had no more problems until after Ubuntu 14.04 was installed and running. The first post-install problem appeared after I suspended the computer and brought it back to life—no wireless network!
+The first command was to see if I had any programs running with “screensaver” in their name (I did: xscreensaver). As it was the only program that matched, it was safe to run the second command, which stopped xscreensaver. Finally, I re-ran the pgrep to make sure it was stopped and gone. Then I did the same thing with the string “lockmore” (which found no matches, as I expected). Once xscreensaver was turned off, I told the upgrade to continue, and had no more problems until after Ubuntu 14.04 was installed and running. The first post-install problem appeared after I suspended the computer and brought it back to life—​no wireless network!
 
 ### Issue 2: no wireless after suspend
 
