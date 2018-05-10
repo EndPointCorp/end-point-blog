@@ -51,11 +51,11 @@ end
 ```
 I created a test helper which allows you to add to add three lines of code to verify your authentication:
 
-1. verify_authentication_declared — Does two different things:
+1. verify_authentication_declared —​ Does two different things:
     a. Checks that all actions in your controller are explicitly listed in the tested controller’s before_filters.  In my example I have two before_filters that call :authenticate and :do_not_authenticate.
     b. Checks that no actions are listed for both :authenticate, and do not :authenticate.
-2. verify_require_authenticate — Allows the developer to specify what actions are intended to be authenticated
-3. verify_do_not_authenticate — Allows the developer to specify what actions don’t require authentication, notice that this is different than just not setting the before_filter for :authenticate, what this does is clearly communicate the intent that the action should not be authenticated.
+2. verify_require_authenticate —​ Allows the developer to specify what actions are intended to be authenticated
+3. verify_do_not_authenticate —​ Allows the developer to specify what actions don’t require authentication, notice that this is different than just not setting the before_filter for :authenticate, what this does is clearly communicate the intent that the action should not be authenticated.
 
 ### How to implement:
 

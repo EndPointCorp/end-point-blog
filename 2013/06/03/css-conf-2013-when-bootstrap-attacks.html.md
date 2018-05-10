@@ -2,7 +2,7 @@
 author: Greg Davidson
 gh_issue_number: 811
 tags: conference, css, design, graphics, html, javascript, open-source, testing, tips, tools
-title: "CSS Conf 2013 — When Bootstrap Attacks!"
+title: "CSS Conf 2013 —​ When Bootstrap Attacks!"
 ---
 
 <img alt="Cssconf 2013" border="0" height="234" src="/blog/2013/06/03/css-conf-2013-when-bootstrap-attacks/image-0.png" style="display:block; margin-left:auto; margin-right:auto;" title="cssconf-2013.png" width="373"/>

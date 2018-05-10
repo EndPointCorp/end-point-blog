@@ -5,7 +5,7 @@ tags: browsers, javascript, jquery, tips
 title: "IE7 “Enhances” href Attributes of Links Added via innerHTML"
 ---
 
-I ran into this issue the other day while testing a new feature for a client site. The code worked well in Chrome, Firefox, Safari and IE (8-11) but it blew up in IE7. The page was fairly straightforward — I was using jQuery and the excellent [doT.js templating library](http://olado.github.io/doT/index.html) to build up some HTML and add it to the page after the DOM had loaded. This content included several links like so: 
+I ran into this issue the other day while testing a new feature for a client site. The code worked well in Chrome, Firefox, Safari and IE (8-11) but it blew up in IE7. The page was fairly straightforward—​I was using jQuery and the excellent [doT.js templating library](http://olado.github.io/doT/index.html) to build up some HTML and add it to the page after the DOM had loaded. This content included several links like so: 
 
 ```html
     <a href="#panel1">More Info</a>
@@ -26,7 +26,7 @@ $('.my-links').on('click', function(e) {
 
 ### Links “Enhanced” By IE7
 
-As I debugged in IE7, I determined that it was adding the fully qualified domain name to the links. Instead of “#panel2” the href attributes were set to “http://example.com/#panel2” which broke things — especially my jQuery selectors. Fixing the issue was straightforward at this point:
+As I debugged in IE7, I determined that it was adding the fully qualified domain name to the links. Instead of “#panel2” the href attributes were set to “http://example.com/#panel2” which broke things—​especially my jQuery selectors. Fixing the issue was straightforward at this point:
 
 ```js
 // fix hrefs in IE7 and 6

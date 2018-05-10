@@ -52,7 +52,7 @@ for(var _i=0; _i<non_matches.length; _i++) {
 $('p').html(b);
 ```
 
-In the code above, I create two arrays—one that includes the unhighlighted text and one that includes the highlighted spans and their content with a non-greedy regular expression. I incremented through these arrays and built HTML with alternating newly wrapped unhighlighted content and existing highlighted spans. At the end of the loop, the paragraph HTML is updated with the new HTML. Now, there are quite a few edge cases with this method which needed to be addressed **and** the bigger issue I came across was that the highlighted spans were being rewritten, so any important data tied to the overwritten highlighted spans was lost with the HTML update. I felt that this implementation was overcomplicated and went in search of something more simple.
+In the code above, I create two arrays—​one that includes the unhighlighted text and one that includes the highlighted spans and their content with a non-greedy regular expression. I incremented through these arrays and built HTML with alternating newly wrapped unhighlighted content and existing highlighted spans. At the end of the loop, the paragraph HTML is updated with the new HTML. Now, there are quite a few edge cases with this method which needed to be addressed **and** the bigger issue I came across was that the highlighted spans were being rewritten, so any important data tied to the overwritten highlighted spans was lost with the HTML update. I felt that this implementation was overcomplicated and went in search of something more simple.
 
 ### jQuery contents()
 

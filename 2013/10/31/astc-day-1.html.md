@@ -7,7 +7,7 @@ title: ASTC Day 1
 
 
 
-I recently attended ASTC—Association of Science Technology Centers in Albuquerque, New Mexico (also known as Breaking Bad territory). I was amazed by the interactive and unique exhibits I encountered, as well as the cool museums and science centers that attended.
+I recently attended ASTC—​Association of Science Technology Centers in Albuquerque, New Mexico (also known as Breaking Bad territory). I was amazed by the interactive and unique exhibits I encountered, as well as the cool museums and science centers that attended.
 
 <div class="separator" style="clear: both; text-align: center;"><a href="/blog/2013/10/31/astc-day-1/image-0-big.jpeg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="/blog/2013/10/31/astc-day-1/image-0.jpeg"/></a></div>
 

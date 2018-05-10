@@ -84,7 +84,7 @@ Once this alarm goes off, you should strive to update your clusters as soon as p
 If you are using a packaging system, then it may be as simple as relying on it to 
 do the right thing, e.g. “yum update postgresql”. If you are installing from source, 
 you will need the new tarball and can simply “make install” onto the existing 
-Postgres, and then restart it. Always check the release notes for the new revision—once in a blue 
+Postgres, and then restart it. Always check the release notes for the new revision—​once in a blue 
 moon the update requires some other action, such as a reindex of certain types of indexes.
 
 The check_postgres program can verify versions of some 

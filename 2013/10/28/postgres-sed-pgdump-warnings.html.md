@@ -120,7 +120,7 @@ $ pg_dump --schema-only | head -20 | grep -n '^SET'
 9:SET client_min_messages = warning;
 ```
 
-What to do? The schema file was very large, so editing it was not an option—and
+What to do? The schema file was very large, so editing it was not an option—​and
 certainly not for this automated task. The answer was to modify the large
 schema text file before loading it. While perl is my goto tool for most things,
 this looked the perfect job for the sed program. So, in my script, I simply added this right
@@ -190,7 +190,7 @@ viewing the file that a change had been made (Postgres does not care what
 the case is).
 
 Normally, this might be considered a fairly sloppy regex, as it doesn’t
-match very strictly—any lines up to and including the client_min_messages
+match very strictly—​any lines up to and including the client_min_messages
 will have the word warning replaced. However, because we can be confident
 that the pg_dump output is going to remain very standard, we can let it slide.
 A more proper solution might be:

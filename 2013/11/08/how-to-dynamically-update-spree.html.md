@@ -41,7 +41,7 @@ However, without any additional coding when a customer increases their order qua
 
 <div class="separator" style="clear: both; text-align: center;"><a href="/blog/2013/11/08/how-to-dynamically-update-spree/image-1-big.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="/blog/2013/11/08/how-to-dynamically-update-spree/image-1.png"/></a></div>
 
-So, how would one accomplish this? JavaScript is the first thing that comes to most people’s mind. I spent some time looking around the Spree docs thinking that certainly there must be something quick to drop in, but there was not. I did a little Googling and found the same thing to be true—not much info out there on how best to proceed with this task. I was very surprised to find no notes on anyone doing what I would think is a very common issue. So, here we are and I hope that anyone who reads this finds it helpful.
+So, how would one accomplish this? JavaScript is the first thing that comes to most people’s mind. I spent some time looking around the Spree docs thinking that certainly there must be something quick to drop in, but there was not. I did a little Googling and found the same thing to be true—​not much info out there on how best to proceed with this task. I was very surprised to find no notes on anyone doing what I would think is a very common issue. So, here we are and I hope that anyone who reads this finds it helpful.
 
 ### **Step 1a: Create an array of the prices**
 

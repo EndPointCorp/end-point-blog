@@ -21,7 +21,7 @@ Every once in a while as web developers we face the challenge of providing PDF d
 The usual approach is to:
 
 - generate the document with a library / DSL in the language of the backend
-- or—generate *normal html* view and use a utility like [wkhtmltopdf](https://wkhtmltopdf.org/)
+- or—​generate *normal html* view and use a utility like [wkhtmltopdf](https://wkhtmltopdf.org/)
 
 That works nice, but what if you’re developing an [SPA](https://en.wikipedia.org/wiki/Single-page_application) app which only consumes JSON data from its backend? Imagine a scenario when the backend isn’t capable of producing responses other than JSON data. What could you do there?
 

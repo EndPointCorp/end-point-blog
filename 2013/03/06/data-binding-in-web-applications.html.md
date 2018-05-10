@@ -9,26 +9,26 @@ Ever since JavaScript was introduced the world of web programming has constantly
 
 Navigating through some of the oldest web-dev articles, we still can feel the pain of manipulating the DOM, the-vanilla-way and creating ever so clever hacks to make the code work on all of the web browsers.
 
-Then, the JS-frameworks epidemy started to disseminate. As web developers—we started to have some powerful tools. The productivity of average nerdy Joe raised immediately as he started using Prototype.js, Mootools or jQuery.
+Then, the JS-frameworks epidemy started to disseminate. As web developers—​we started to have some powerful tools. The productivity of average nerdy Joe raised immediately as he started using Prototype.js, Mootools or jQuery.
 
 ### Evolution of UI programming for browsers
 
-And so was the start of our global evolution, towards making the Web—our main means of interacting with *users*. Few with big enough imagination were already seeing HTML, CSS & JS as the future standard of creating user interfaces for data-rich applications. Of course, there were toolkits like ExtJS which aimed at nothing but this—but who would have known back then, that we will be able to build apps for **smartphones** the way we are building ones for the web?
+And so was the start of our global evolution, towards making the Web—​our main means of interacting with *users*. Few with big enough imagination were already seeing HTML, CSS & JS as the future standard of creating user interfaces for data-rich applications. Of course, there were toolkits like ExtJS which aimed at nothing but this—​but who would have known back then, that we will be able to build apps for **smartphones** the way we are building ones for the web?
 
-I have my little observation in life — all *hot stuff* in the world of technology, has their *phases*.. That is:
+I have my little observation in life —​ all *hot stuff* in the world of technology, has their *phases*.. That is:
 
 - they don’t exist, but the problems they solve do and they are **painful**
 - they show up, and there is massive excitement
 - people discover new pains brought on by these solutions
 - next pain and the beginning of the “next big thing”
 
-At the beginning it was painful to write all the *vanilla* JS code without shooting yourself in your own foot (well let’s just say it—JS is Pandora’s Box of pain). Then you realize you’ve got your sweet & cool jQuery with which you can rapidly impress your boss/clients/friends.
+At the beginning it was painful to write all the *vanilla* JS code without shooting yourself in your own foot (well let’s just say it—​JS is Pandora’s Box of pain). Then you realize you’ve got your sweet & cool jQuery with which you can rapidly impress your boss/clients/friends.
 
-Your next surprise is that jQuery isn’t enough—ever wondered why frameworks like Backbone.js were created?
+Your next surprise is that jQuery isn’t enough—​ever wondered why frameworks like Backbone.js were created?
 
 ### Data binding
 
-Here is the challenge for you: write GMail web interface clone using **just** jQuery. Here is the spoiler: you’d get lost in managing your app’s *state*—and syncing UI to reflect it. In fact—even small *todo* app in vanilla jQuery could end up being quite complicated. That’s just not the way other folks are dealing with UI programming. A long time ago they were—but they got smarter. We can learn from their mistakes.
+Here is the challenge for you: write GMail web interface clone using **just** jQuery. Here is the spoiler: you’d get lost in managing your app’s *state*—​and syncing UI to reflect it. In fact—​even small *todo* app in vanilla jQuery could end up being quite complicated. That’s just not the way other folks are dealing with UI programming. A long time ago they were—​but they got smarter. We can learn from their mistakes.
 
 When I was beginning my journey into the world of professional programming, I was given a job of creating small business app with C# and Windows Forms. Despite the fact that in the world of desktop apps you have to be mindful of much more things than in the web/browsers world (like updating your UI only on the main thread), the whole experience was pretty much the same as with vanilla jQuery:
 
@@ -46,7 +46,7 @@ That’s the core concept here: **managing objects is much easier than managing 
 
 ### Data binding on web
 
-As the need came with more and more amazing web apps—we now have quite a nice choice when it comes to employing data binding:
+As the need came with more and more amazing web apps—​we now have quite a nice choice when it comes to employing data binding:
 
 [Angular.js](https://angularjs.org/)
 
@@ -72,7 +72,7 @@ Here is a simple way of using Knockout.js with Backbone.js:
 
 - for every Backbone.js view, define complementary view model
 - put ‘ko.applyBindings’ at the end of your ‘render’ method
-- do not use any logic in your view templates—rely solely on data binding
+- do not use any logic in your view templates—​rely solely on data binding
 
 So for example:
 
@@ -106,7 +106,7 @@ class PhotosViewModel
 </ul>
 ```
 
-Now—with this, you can manipulate the photos array however you like, and the UI will get auto-updated on its own. But this idea shines the most when it comes to implementing forms with it. Take a look at the following example:
+Now—​with this, you can manipulate the photos array however you like, and the UI will get auto-updated on its own. But this idea shines the most when it comes to implementing forms with it. Take a look at the following example:
 
 **# app/views/company.coffee**
 

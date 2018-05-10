@@ -2,7 +2,7 @@
 author: Josh Tolley
 gh_issue_number: 834
 tags: google-earth, graphics, kamelopard, liquid-galaxy, open-source, ruby, tools
-title: Kamelopard update—Panoramic camera simulation, and splines have returned
+title: Kamelopard update—​Panoramic camera simulation, and splines have returned
 ---
 
 A few days ago I pushed Kamelopard version 0.0.12 to [RubyGems](https://rubygems.org/gems/kamelopard). This version includes a couple big items. The first of these is a new implementation of the spline code that was removed a while ago. As I mentioned in [a previous blog post](/blog/2013/04/15/creating-smooth-flight-paths-in-google), this original implementation was built in anticipation of an API that never materialized. The new version is built on the same API discussed in the previous post I mentioned, modified to support multidimensional functions. More information about these splines is available on the [wiki for Liquid Galaxy](https://github.com/liquidgalaxy/liquid-galaxy/wiki).
@@ -46,7 +46,7 @@ The last line of this snippet calculates the camera and up vectors, and passes t
 
 First we want to calculate the heading, which we can find by calculating the angle between two planes. The first plane is defined by the camera vector and the Z axis, and the second is the plane of the Y and Z axes. To find the angle between two planes, we find the angle between their normal vectors. The normal vector of the YZ plane is simply the X axis; the normal vector for hte first plane is the cross product of the camera vector and the Z axis. The dot product lets us find the angle between these two vectors, which is our heading.
 
-Tilt is simply the angle between the camera vector and the original Z axis, but roll is a bit harder. To find it, we transform the original Y axis—the original “up” vector—using the heading and tilt calculated previously. We then find the angle between it and the current “up” vector, again using the dot product.
+Tilt is simply the angle between the camera vector and the original Z axis, but roll is a bit harder. To find it, we transform the original Y axis—​the original “up” vector—​using the heading and tilt calculated previously. We then find the angle between it and the current “up” vector, again using the dot product.
 
 These calculations underlie a simple API, which simply takes a view, for the original camera, the number of the camera we’re interested in getting, and the camera angle or total number of cameras. Like this, for instance:
 

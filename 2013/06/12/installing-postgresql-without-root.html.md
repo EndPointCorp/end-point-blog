@@ -21,10 +21,10 @@ For compiling Postgres you will need some libraries and programs. The complete l
 
 I’m using Ubuntu, the packages I use for compiling Postgres are:
 
-- gcc—C compiler
-- libreadline6, libreadline6-dev—readline support
-- zlib1g, zlib1g-dev—compression library used internally by Postgres
-- libpython2.7, libpython2.7-dev—for compiling with plPython support
+- gcc—​C compiler
+- libreadline6, libreadline6-dev—​readline support
+- zlib1g, zlib1g-dev—​compression library used internally by Postgres
+- libpython2.7, libpython2.7-dev—​for compiling with plPython support
 
 If you are using different system, or different system/Postgres version, then your packages/libraries can be named differently.
 
@@ -182,9 +182,9 @@ All configuration files are stored in the data directory: ~/postgres/data. If yo
 
 ### Deleting Installation
 
-If you want to delete the installation—nothing easier. Just stop the Postgres if it is running, and delete the whole ~/postgres/ directory.
+If you want to delete the installation—​nothing easier. Just stop the Postgres if it is running, and delete the whole ~/postgres/ directory.
 
-If you want to delete the whole data—just stop Postgres if it is running, and delete ~/postgres/data directory. Then you can run initdb once again to have a brand new database.
+If you want to delete the whole data—​just stop Postgres if it is running, and delete ~/postgres/data directory. Then you can run initdb once again to have a brand new database.
 
 ### Summary
 

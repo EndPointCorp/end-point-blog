@@ -11,7 +11,7 @@ The same rules apply when you develop software in Python.
 
 For Python there is a document which describes some of the most desirable style features for Python code [Style Guide for Python Code](https://www.python.org/dev/peps/pep-0008/). However there are some problems with that, as even the standard Python library has some libraries which are not consistent. This shouldn’t be an excuse for your team to be inconsistent as well. Ensuring that the code is nice and readable is worth working for a moment on that.
 
-In Python there are two tools which I use for writing code in Python—[Python style guide checker](https://pypi.org/project/pep8/) and [Python code static checker](https://pypi.org/project/pylint/).
+In Python there are two tools which I use for writing code in Python—​[Python style guide checker](https://pypi.org/project/pep8/) and [Python code static checker](https://pypi.org/project/pylint/).
 
 ### pep8
 
@@ -228,7 +228,7 @@ pylint --rcfile=.pylint test.py
 
 ### Remarks
 
-Pylint is great—sometimes even too great.
+Pylint is great—​sometimes even too great.
 
 I usually ignore many of the errors, as too often the changes needed to satisfy pylint are not worth time spending on them. One of common problems found by pylint is that the variable name is too short. It has a rule that all the names should have between 2 and 30 characters. There is nothing bad with one letter variable, especially when it is something like Point(x, y) or it is a small local variable, something like for i in xrange(1,1000).
 

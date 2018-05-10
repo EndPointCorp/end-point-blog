@@ -31,7 +31,7 @@ Back to our tale. I wrote that mistaken bit of code (and worse, it’s not the f
 
 (If you got this far and still haven’t figured out the punch line: the regular expression matches “94” at the beginning of a string, which is good, but it matches “95” anywhere in the string, which is bad. So $zip containing “89501” would match, which is ... not good.)
 
-It doesn’t matter if you tested this in an external script, or went through the motions of operating the larger system (an e-commerce checkout) with the appropriate values of $zip, or wrote a full [test-driven development](http://search.cpan.org/~rjbs/Test-Simple-1.001002/lib/Test/More.pm) exercise—the problem isn’t the testing methodology, it’s the imagination of the person desiging the test. I “knew” (nope) what the regular expression was written to do, so I tested to make sure it did that.
+It doesn’t matter if you tested this in an external script, or went through the motions of operating the larger system (an e-commerce checkout) with the appropriate values of $zip, or wrote a full [test-driven development](http://search.cpan.org/~rjbs/Test-Simple-1.001002/lib/Test/More.pm) exercise—​the problem isn’t the testing methodology, it’s the imagination of the person desiging the test. I “knew” (nope) what the regular expression was written to do, so I tested to make sure it did that.
 
 The only ways to catch this particular bug would be (a) exhaustively testing all values from 00000–99999, or (b) *imagining* ways that the regular expression might be broken. And that’s the challenge here, pertaining to my title. How do you rig your imagination to construct test cases that are “outside the box”?
 

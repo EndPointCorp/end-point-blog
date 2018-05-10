@@ -7,7 +7,7 @@ title: 'First Dance: a Gentle Introduction to Dancer.pm for Web Services'
 
 I’ve been dabbling in Dancer ([Version One](http://search.cpan.org/~yanick/Dancer-1.3118/lib/Dancer.pm), not so much [Version Two](https://web.archive.org/web/20131119231012/http://search.cpan.org/~sukria/Dancer2-0.10/lib/Dancer2.pm)). Our first opportunity to create a production-worthy Dancer application just rolled out with encouraging results, so I thought I would outline some things we tried, and things we learned.  Don’t worry if you don’t know a thing about Dancer; I’ll educate you a little as we go along.
 
-First, some background. This application was a re-host and rewrite of an existing application written in Javascript and plain old CGI Perl scripts, returning either HTML or fairly simple JSON objects. Even the database it connected to was ancient DBM files. Those files were created by extracting data from the main website’s database, so that part was easy to replace — we just had to use the extraction queries (mostly) to connect directly.
+First, some background. This application was a re-host and rewrite of an existing application written in Javascript and plain old CGI Perl scripts, returning either HTML or fairly simple JSON objects. Even the database it connected to was ancient DBM files. Those files were created by extracting data from the main website’s database, so that part was easy to replace—​we just had to use the extraction queries (mostly) to connect directly.
 
 We chose Dancer as the platform for this effort because of its purely Perl footprint, and its relatively easy deployment.
 

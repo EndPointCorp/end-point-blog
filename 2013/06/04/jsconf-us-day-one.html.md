@@ -2,7 +2,7 @@
 author: Greg Davidson
 gh_issue_number: 813
 tags: community, conference, css, html, javascript, open-source, tips, tools
-title: "JSConf US 2013 — Day One"
+title: "JSConf US 2013 —​ Day One"
 ---
 
 
@@ -51,7 +51,7 @@ Angelina suggested several ways to improve your skills. Ask “why?” obsessive
 
 #### Learning New Words
 
-[Andrew Dupont](http://andrewdupont.net/) continued in the literary, language-oriented vein, giving a talk which drew a parallel between olde english purists who did not want to adopt any “new” words and the differing views surrounding the EcmaScript 6 specification process. Dupont’s talk was very thought-provoking especially in light of the resistance to some proposals in the works (e.g. [ES6 modules](https://web.archive.org/web/20130820143217/http://wiki.ecmascript.org/doku.php?id=harmony:modules)). Check out [his slides](https://www.slideshare.net/savetheclocktower/learning-new-words-22244915) — the video will also be published in future. 
+[Andrew Dupont](http://andrewdupont.net/) continued in the literary, language-oriented vein, giving a talk which drew a parallel between olde english purists who did not want to adopt any “new” words and the differing views surrounding the EcmaScript 6 specification process. Dupont’s talk was very thought-provoking especially in light of the resistance to some proposals in the works (e.g. [ES6 modules](https://web.archive.org/web/20130820143217/http://wiki.ecmascript.org/doku.php?id=harmony:modules)). Check out [his slides](https://www.slideshare.net/savetheclocktower/learning-new-words-22244915)—​the video will also be published in future. 
 
 #### Flight.js
 

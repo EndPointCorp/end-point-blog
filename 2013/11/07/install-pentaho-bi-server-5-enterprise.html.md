@@ -7,11 +7,11 @@ title: Install Pentaho BI Server 5 Enterprise Edition with PostgreSQL repository
 
 Pentaho provides different ways to install Pentaho BI server. Each method has its own flexibility in installation.
 
-1. Installer mode—Easy to install BA & DI server & tools in one flow with default PostgreSQL repo & default Tomcat server. (New Postgres installed on port 5432.)
+1. Installer mode—​Easy to install BA & DI server & tools in one flow with default PostgreSQL repo & default Tomcat server. (New Postgres installed on port 5432.)
 
-2. Archive mode—BA server installed with own BA repository & default Tomcat server. Necessary tools need to be installed manually.
+2. Archive mode—​BA server installed with own BA repository & default Tomcat server. Necessary tools need to be installed manually.
 
-3. Manual mode—BA server installed with own BA repository & own application server (Tomcat or JBoss). Necessary tools need to installed manually.
+3. Manual mode—​BA server installed with own BA repository & own application server (Tomcat or JBoss). Necessary tools need to installed manually.
 
 We have a Postgres instance running on our server and are good with Tomcat as application server so Archive mode of installation is suitable for us. Pentaho installation requires two things be installed before starting with Pentaho installation.
 
@@ -149,11 +149,11 @@ Install plugins
 
 Archive mode of installation installs only BI Server. Necessary plugins can to be installed manually. Here install the plugins for reporting, analyzer and dashboard. Plugins are available at the same place where download BI server. Download these three files and place at any path on server
 
-Reporting—pir-plugin-ee-5.x-dist.zip
+Reporting—​pir-plugin-ee-5.x-dist.zip
 
-Analyzer—pdd-plugin-ee-5.0.0.1-dist.zip
+Analyzer—​pdd-plugin-ee-5.0.0.1-dist.zip
 
-Dashboard—paz-plugin-ee-5.0.0.1-dist.zip
+Dashboard—​paz-plugin-ee-5.0.0.1-dist.zip
 
 All the plugins installed through same procedure
 
@@ -171,7 +171,7 @@ Lets start the BI server
 biserver-ee$ ./start-pentaho.sh
 ```
 
-Install the licenses for the plugins by login as admin user (default—Admin:password) or install through the command line
+Install the licenses for the plugins by login as admin user (default—​Admin:password) or install through the command line
 
 Administration -> License -> install licenses for plugin by click +
 

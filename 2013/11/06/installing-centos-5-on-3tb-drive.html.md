@@ -50,7 +50,7 @@ mount -t tmpfs none /mnt/anacondalib
 cp -R /mnt/runtime/usr/lib/anaconda/* /mnt/anacondalib/
 ```
 
-Now edit the python file at /mnt/anacondalib/partitions.py, and on line 1082 (vi and nano are present in the rescue image for editing), change the word “*errors*” to the word “*warnings*”— this little change allows anaconda to install despite the fact that we’ve setup the partitions using GPT for the /boot partition, which is what will normally cause the install to fail.
+Now edit the python file at /mnt/anacondalib/partitions.py, and on line 1082 (vi and nano are present in the rescue image for editing), change the word “*errors*” to the word “*warnings*”—​this little change allows anaconda to install despite the fact that we’ve setup the partitions using GPT for the /boot partition, which is what will normally cause the install to fail.
 
 Now we mount the changed library directory over the read-only version from the installation media:
 

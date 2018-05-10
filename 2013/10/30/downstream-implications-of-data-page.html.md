@@ -108,7 +108,7 @@ postgres@endpoint:~/9.3$ dd bs=8192 count=1 skip=10 if=replica/base/12066/16390 
 8192 bytes (8.2 kB) copied, 0.000295787 s, 27.7 MB/s
 ```
 
-With one assumption—that the replica is caught up to the point where the primary first saw the page as corrupted—the replica should be guaranteed to have an up-to-date copy of the page, even if other things on the master are changing and the replica’s lagging behind.
+With one assumption—​that the replica is caught up to the point where the primary first saw the page as corrupted—​the replica should be guaranteed to have an up-to-date copy of the page, even if other things on the master are changing and the replica’s lagging behind.
 
 Above, we did a direct copy from the replica’s version of that page back to the master...
 

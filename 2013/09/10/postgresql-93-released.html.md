@@ -9,7 +9,7 @@ Yesterday PostgreSQL 9.3 was released. It contains many great new features, belo
 
 One of the most important features of the new release is the long list of bug fixes and improvements making the 9.3 version faster. I think it is the main reason for upgrading. There are also many new features which your current application will not possibly use, but faster database is always better.
 
-The new mechanism of background workers gives us quite new possibilities to run a custom process in the background. I’ve got a couple of ideas for implementing such background tasks like a custom message queue, or postgres log analyzer, or a tool for accessing PostgreSQL using HTTP (and JSON — just to have API like the NoSQL databases have).
+The new mechanism of background workers gives us quite new possibilities to run a custom process in the background. I’ve got a couple of ideas for implementing such background tasks like a custom message queue, or postgres log analyzer, or a tool for accessing PostgreSQL using HTTP (and JSON—​just to have API like the NoSQL databases have).
 
 Another nice feature, which I haven’t checked yet, is data checksums. Something really useful for checking data consistency at data files level. It should make all the data updates slower, but I haven’t checked how much slower, there will be another blog post about that.
 

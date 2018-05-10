@@ -13,7 +13,7 @@ First, a word about the technology stack: a little bit of Java6/Java EE will be 
 
 Red5 Server comes with the set of sample applications that provide the source code for about everything you may want to achieve. The primary challenge is to unleash the power of it, since the samples fall extremely short of documentation! The **“fitcDemo”** application will serve as a base for all our customization.
 
-Originally I made all the development in Red5 RC 1.0 version where fitcDemo was present. Unfortunately, when I downloaded the latest Red5 1.0.1 release yesterday it was simply not there! The source code was still in the repo, just outdated and not working. Well, I did all the work for Red5 team, so you can just download [fitcDemo.war](https://github.com/marinalohova/red5-example/blob/master/fitcDemo/dist/fitcDemo.war) from my repo and drop it into the **“webapps”** directory of Red5 1.0.1 installation—and you are good!
+Originally I made all the development in Red5 RC 1.0 version where fitcDemo was present. Unfortunately, when I downloaded the latest Red5 1.0.1 release yesterday it was simply not there! The source code was still in the repo, just outdated and not working. Well, I did all the work for Red5 team, so you can just download [fitcDemo.war](https://github.com/marinalohova/red5-example/blob/master/fitcDemo/dist/fitcDemo.war) from my repo and drop it into the **“webapps”** directory of Red5 1.0.1 installation—​and you are good!
 
 You will then find the video conference demo at [http://localhost:5080/demos/videoConference.html](http://localhost:5080/demos/videoConference.html)
 

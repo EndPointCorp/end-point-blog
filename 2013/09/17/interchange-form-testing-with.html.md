@@ -11,7 +11,7 @@ Because the original developers chose to construct 200+ slightly-different pages
 
 Fortunately, I had easy ways to identify which pages needed testing, construct URLs to the new and old pages, and even a way to “script” how to operate on the page-under-test. And I had WWW::Mechanize, which has saved my aft end more than once.
 
-WWW::Mechanize is a pretty mature (originally 2008) “browser-like” system for fetching and acting on web pages. You can accept and store cookies, find and follow links, handle redirection, forms, you name it — but not Javascript. Sorry, but there are other tools in the box that can help you if you are working with more interactive pages.
+WWW::Mechanize is a pretty mature (originally 2008) “browser-like” system for fetching and acting on web pages. You can accept and store cookies, find and follow links, handle redirection, forms, you name it—​but not Javascript. Sorry, but there are other tools in the box that can help you if you are working with more interactive pages.
 
 In my case, lack of JS wasn’t an issue. I just needed a way to fetch a page, tweak a form element or two, and submit the page’s POST for server processing. Then if I could capture the server-side state of my session, I’d be golden.
 
@@ -73,7 +73,7 @@ In my case, lack of JS wasn’t an issue. I just needed a way to fetch a page, t
 - 7: This will be the URL base for our requests.
 - 9-22: we set up two separate user agents so that they don’t share cookies, history, or any state information that would confuse our comparisons.
 - 27, 37: retrieving the pages under test. Note that in my case, “newstuff/” distinguished the new version from the original.
-- 28, 38: specifying which form on the retrieved page is to be considered the “current” one. Note that I’m not using the returned value here (although it came in handy during debugging). “form_with_fields” lets you pick a form based on one or more fields named within it. In the event that there’s more than one, you get the first (and Mechanize complains with a warning — but we’ve turned that off via the “quiet” option, above).
+- 28, 38: specifying which form on the retrieved page is to be considered the “current” one. Note that I’m not using the returned value here (although it came in handy during debugging). “form_with_fields” lets you pick a form based on one or more fields named within it. In the event that there’s more than one, you get the first (and Mechanize complains with a warning—​but we’ve turned that off via the “quiet” option, above).
 - 32, 41: In the interests of security, I’ve not shown the actual page we use to dump the session internals. However, for Interchange users it’s just a page with a “[dump]” tag. You might write something that produces plain text, or CSV, or JSON. In my case, the session dump contains Data::Dumper-style output that I can feed into Perl’s “eval” function.
 - 35, 44: The two data structures resulting from the “old” and “new” pages aren’t exactly alike, so I remove the bits I don’t care about.
 - 46: And Test::More to the rescue, saving me from having to re-invent the code that will compare a possibly-complex data structure down to the scalar members. I have it exit after a failure, since in my case one error usually meant a whole family of corrections that needed to be applied to several related pages.

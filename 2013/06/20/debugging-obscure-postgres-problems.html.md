@@ -45,7 +45,7 @@ AllocateDir(const char *dirname)
 
 So it appeared as if we ran into some sort of safety valve that was meant to
 bail out before too many directories were opened. A strange error to suddenly have
-appear (this client’s Postgres worked just fine a few days ago—luckily,
+appear (this client’s Postgres worked just fine a few days ago—​luckily,
 this was not on a production system!).
 
 The client was using Postgres 8.3. In version 9.1, the source code was changed to give
@@ -80,7 +80,7 @@ above. However, this will dump the system calls to the screen
 for the pg_ctl command. We need a few flags to make things easier.
 
 The first flag is “-f”, which tells strace to follow forked processes. 
-Without this, we would simply strace pg_ctl itself—and we need to strace 
+Without this, we would simply strace pg_ctl itself—​and we need to strace 
 the postmaster process instead. As we want to be able to look at the output 
 in an editor, we also add the “-o” flag to send all strace output to an output 
 file. We also take the opportunity to upgrade “-f” to “-ff”, which tells strace to 

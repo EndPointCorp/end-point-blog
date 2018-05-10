@@ -29,9 +29,9 @@ In Rails, having a versionless Gemfile makes clean updates **impossible**.
 
 ### Fearing the update makes your app susceptible to bugs
 
-Newer versions of gems are there, not only for delivering new features. The history of changes between different versions mostly show changes related to bug fixes. If you see a gem which mostly delivers new features without fixing bugs—stay **away** from it!
+Newer versions of gems are there, not only for delivering new features. The history of changes between different versions mostly show changes related to bug fixes. If you see a gem which mostly delivers new features without fixing bugs—​stay **away** from it!
 
-If you do not update the gem set out of fear—you could be missing out on available security updates and bug fixes.
+If you do not update the gem set out of fear—​you could be missing out on available security updates and bug fixes.
 
 ### Fragile gems influence the whole stack
 

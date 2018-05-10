@@ -24,7 +24,7 @@ layout/activity_hour_picker.xml
 </RelativeLayout>
 ```
 
-Simple. But, as you can imagine, not so fun when you’re adding a list of 24 buttons—so, I decided to add them dynamically in the code. First, though, a ScrollView and RadioGroup (ScrollView only allows one child) need to be defined in the XML, no point in doing that programmatically. Let’s add those:
+Simple. But, as you can imagine, not so fun when you’re adding a list of 24 buttons—​so, I decided to add them dynamically in the code. First, though, a ScrollView and RadioGroup (ScrollView only allows one child) need to be defined in the XML, no point in doing that programmatically. Let’s add those:
 
 layout/activity_hour_picker.xml
 
@@ -75,7 +75,7 @@ And this is what we get:
 
 <a href="/blog/2013/05/09/dynamically-adding-custom-radio-buttons/image-0-big.png" imageanchor="1"><img border="0" src="/blog/2013/05/09/dynamically-adding-custom-radio-buttons/image-0.png"/></a>
 
-It scrolls horizontally like we want, but there’s a problem—we don’t want the default radio button selector showing up, since we’ve already got custom button graphics showing. And we can’t forget that we’re still missing the code to make everything within the RadioGroup work properly—In other words, the buttons won’t do anything when a user clicks them. So, let’s add a listener to each button as it’s created:
+It scrolls horizontally like we want, but there’s a problem—​we don’t want the default radio button selector showing up, since we’ve already got custom button graphics showing. And we can’t forget that we’re still missing the code to make everything within the RadioGroup work properly—​In other words, the buttons won’t do anything when a user clicks them. So, let’s add a listener to each button as it’s created:
 
 src/com/example/HourPickerActivity.java
 
@@ -118,4 +118,4 @@ Now, let’s see how this all has pulled together.
 
 <a href="/blog/2013/05/09/dynamically-adding-custom-radio-buttons/image-1-big.png" imageanchor="1"><img border="0" src="/blog/2013/05/09/dynamically-adding-custom-radio-buttons/image-1.png"/></a>
 
-There—that looks much better! And it works great.
+There—​that looks much better! And it works great.
