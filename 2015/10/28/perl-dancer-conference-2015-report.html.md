@@ -2,7 +2,7 @@
 author: Josh Lavin
 gh_issue_number: 1167
 tags: conference, dancer, interchange, perl
-title: Perl Dancer Conference 2015 Report — Training Days
+title: Perl Dancer Conference 2015 Report —​ Training Days
 ---
 
 

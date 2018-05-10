@@ -144,7 +144,7 @@ disappeared.
 In addition to this being an unrealistic worst-case scenario, I promise that you 
 would be hard pressed to find a server to run Postgres on with a slower CPU than the 
 laptop I ran these tests on. :) The actual calculation is pretty simple and uses 
-a fast Fowler/Noll/Vo hash—see the [src/include/storage/checksum_impl.h](https://github.com/postgres/postgres/blob/master/src/include/storage/checksum_impl.h) file. The calculation used is:
+a fast Fowler/Noll/Vo hash—​see the [src/include/storage/checksum_impl.h](https://github.com/postgres/postgres/blob/master/src/include/storage/checksum_impl.h) file. The calculation used is:
 
 ```
 hash = (hash ^ value) * FNV_PRIME ^ ((hash ^ value) >> 17)
@@ -170,5 +170,5 @@ impact figures, you will need to do A/B testing with your database and applicati
 
 To sum this page up (ha!), enable those checksums! It’s worth the one-time cost of not being 
 able to use pg_upgrade, and the ongoing cost of a little more CPU. Don’t wait 
-for your corruption to get so bad the system catalogs start getting confused—
+for your corruption to get so bad the system catalogs start getting confused—​
 find out the moment a bit gets flipped.

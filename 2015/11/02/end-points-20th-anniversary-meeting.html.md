@@ -69,13 +69,13 @@ user@host:~/Downloads $
 
 Use ! (“bang”) commands to access commands and arguments in the history:
 
-- !! — entire previous command
-- !* — all arguments of previous command
-- !^ — first argument of previous command
-- !$ — last argument of previous command
-- !N — command at position N in history
-- !?keyword? — most recent command with pattern match of keyword
-- !-N — command at Nth position from last in history
+- !! —​ entire previous command
+- !* —​ all arguments of previous command
+- !^ —​ first argument of previous command
+- !$ —​ last argument of previous command
+- !N —​ command at position N in history
+- !?keyword? —​ most recent command with pattern match of keyword
+- !-N —​ command at Nth position from last in history
 
 Using Ctrl-R will do a reverse search of your command history, letting you see and edit old commands. If you press Ctrl-O on a historic command, it will execute it and put the following command from the history into the prompt. Additional presses of Ctrl-O will continue down the history.
 

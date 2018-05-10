@@ -10,9 +10,9 @@ title: Bucardo replication from Postgres to sqlite and mariadb using pgbench
 <div class="separator" style="margin: 0 0 20px 20px; clear: both; float: right; text-align: center;"><a href="/blog/2015/08/12/bucardo-postgres-replication-pgbench/image-0-big.png" imageanchor="1" style="clear: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" src="/blog/2015/08/12/bucardo-postgres-replication-pgbench/image-0.png"/></a><br/><small><a href="https://flic.kr/p/rwPy8">"Apples and oranges" image</a><br/> by
 <a href="https://www.flickr.com/people/mukluk/">Dan McKay</a></small></div>
 
-While [Bucardo](https://bucardo.org/) is known for doing “multi-master” Postgres replication,  it can do a lot more than simple “master to master” replication (better known as “source to source” replication). As people have been asking for simple Bucardo [Bucardo 5](/blog/2014/06/23/bucardo-5-multimaster-postgres-released) recipes based on [pgbench](http://www.postgresql.org/docs/devel/static/pgbench.html), I decided to present a few here. Since Bucardo allows any number of sources and targets, I will demonstrate a source-source-source-target replication. Targets do not have to be Postgres, so let’s also show that we can do source—[MariaDB](https://mariadb.org/)—[SQLite](https://sqlite.org/) replication. Because my own boxes are so customized,  I find it easier and more honest when writing demos to start with a fresh system, which also allows you to follow along at home. For this example, I decided to fire up [Amazon Web Services](https://aws.amazon.com/ec2) (AWS) again.
+While [Bucardo](https://bucardo.org/) is known for doing “multi-master” Postgres replication,  it can do a lot more than simple “master to master” replication (better known as “source to source” replication). As people have been asking for simple Bucardo [Bucardo 5](/blog/2014/06/23/bucardo-5-multimaster-postgres-released) recipes based on [pgbench](http://www.postgresql.org/docs/devel/static/pgbench.html), I decided to present a few here. Since Bucardo allows any number of sources and targets, I will demonstrate a source-source-source-target replication. Targets do not have to be Postgres, so let’s also show that we can do source—​[MariaDB](https://mariadb.org/)—​[SQLite](https://sqlite.org/) replication. Because my own boxes are so customized,  I find it easier and more honest when writing demos to start with a fresh system, which also allows you to follow along at home. For this example, I decided to fire up [Amazon Web Services](https://aws.amazon.com/ec2) (AWS) again.
 
-After logging in at [https://aws.amazon.com](http://aws.amazon.com/), I visited the AWS Management Console, selected “EC2”, clicked on “Launch Instance”, and picked the Amazon Linux AMI (in this case, “Amazon Linux AMI 2015.03 (HVM), SSD Volume Type—ami-1ecae776”). Demos like this require very little resources,  so choosing the smallest AMI (t2.micro) is more than sufficient. After waiting a couple of minutes for it to start up, I was able to SSH in and begin. The first order of business is always updating the box and installing some standard tools. After that I make sure we can install the most recent version of Postgres. I’ll skip the initial steps and jump to the Major Problem I encountered:
+After logging in at [https://aws.amazon.com](http://aws.amazon.com/), I visited the AWS Management Console, selected “EC2”, clicked on “Launch Instance”, and picked the Amazon Linux AMI (in this case, “Amazon Linux AMI 2015.03 (HVM), SSD Volume Type—​ami-1ecae776”). Demos like this require very little resources,  so choosing the smallest AMI (t2.micro) is more than sufficient. After waiting a couple of minutes for it to start up, I was able to SSH in and begin. The first order of business is always updating the box and installing some standard tools. After that I make sure we can install the most recent version of Postgres. I’ll skip the initial steps and jump to the Major Problem I encountered:
 
 ```
 $ sudo yum install postgresql94-plperl
@@ -66,7 +66,7 @@ Now it is time to install Postgres 9.4. Bucardo currently needs to use Pl/Perl, 
 $ sudo yum install postgresql-plperl postgresql-contrib
 ```
 
-This time it went fine—and Perl is at 5.16.3. The next step is to start Postgres up. Red Hat has gotten on the 
+This time it went fine—​and Perl is at 5.16.3. The next step is to start Postgres up. Red Hat has gotten on the 
 [systemd](https://en.wikipedia.org/wiki/Systemd#Criticism) bandwagon, for better or for worse, so gone is the familiar 
 **/etc/init.d/postgresql** script. Instead, we need to use **systemctl**. We will find the exact service name, enable it, then try to start it up:
 
@@ -289,7 +289,7 @@ $ psql test4 -tc 'select aid, abalance from pgbench_accounts where aid <= 4 orde
    4 |     9999
 ```
 
-Let’s create one more sync—this time, we want to replicate our Postgres data to a MariaDB and a SQLite database. 
+Let’s create one more sync—​this time, we want to replicate our Postgres data to a MariaDB and a SQLite database. 
 (Bucardo can also do systems like Oracle, but getting it up and running is NOT an easy task for a quick 
 demo like this!). The first step is to get both systems up and running,  and provide them with a copy of the pgbench schema:
 

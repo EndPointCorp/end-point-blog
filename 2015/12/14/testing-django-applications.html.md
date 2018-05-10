@@ -58,7 +58,7 @@ Django adds (among any other aspects) handling of database, the documentation is
 
 this is a pytest style implementation of the same tests and pytest-django plug-in adds, among other features, Django database handling support.
 
-The advantage of unittest is that it comes with the Python installation—it’s a standard library. That means that one does not have to install anything for writing tests, unlike pytest which is a third-party library and needs to be installed separately. While the absence of additional installation is certainly a plus, it’s dubious whether being a part of Python distribution is a benefit. I seem to recall Guido Van Rossum during Europython 2010 having said the the best thing for pytest is not being part of the Python standard set of libraries for its lively development and evolution would be slowed down by the inclusion.
+The advantage of unittest is that it comes with the Python installation—​it’s a standard library. That means that one does not have to install anything for writing tests, unlike pytest which is a third-party library and needs to be installed separately. While the absence of additional installation is certainly a plus, it’s dubious whether being a part of Python distribution is a benefit. I seem to recall Guido Van Rossum during Europython 2010 having said the the best thing for pytest is not being part of the Python standard set of libraries for its lively development and evolution would be slowed down by the inclusion.
 
 There are very good talks and articles summarizing advantages of pytest. For me personally, the reporting of error
 context is supreme. No boiler-plate (no inheritance), using plain Python asserts instead of
@@ -106,7 +106,7 @@ the **settings.py**. As a matter of fact, it’s possible to run the test suite 
 the test suite interacts only with “test_” + DATABASE_NAME
 - migration execution before any database interaction is carried out (similarly to unittest example)
 - database interaction marked by a Python decorator **@pytest.mark.django_db** on the method or class level (or stand-alone function level). It’s in fact the **first** occurrence of this marker which triggers the database set up (its creation and migrations handling). Again analogously to unittest (django.test.TestCase), the test case is wrapped in a database transaction which puts the database back into the state prior to the test case. The database “test_” + DATABASE_NAME itself is dropped once the test suite run is over. The database is not dropped if **--db-reuse** option is used. The production DATABASE_NAME remains untouched during the test suite run (more about this below)
-- **pytest_djangodb_only.py — setup_method** — run this module separately and the data created in setup_method end up **NOT** in the “test_” + DATABASE_NAME database but in the standard one (as configured in the **settings.py** which would be the production database likely)! Also this data won’t be rolled back. When run separately, this test module will pass (but still the production database would be tainted). It may or may not fail on the second and subsequent run depending whether it creates any unique data. When run within the test suite, the database call from the setup_method will fail despite the presence of the class django_db marker. This has been very important to realize.
+- **pytest_djangodb_only.py —​ setup_method** —​ run this module separately and the data created in setup_method end up **NOT** in the “test_” + DATABASE_NAME database but in the standard one (as configured in the **settings.py** which would be the production database likely)! Also this data won’t be rolled back. When run separately, this test module will pass (but still the production database would be tainted). It may or may not fail on the second and subsequent run depending whether it creates any unique data. When run within the test suite, the database call from the setup_method will fail despite the presence of the class django_db marker. This has been very important to realize.
 Recommendation: do not include database interaction in the pytest special methods
 (such assetup_method or teardown_method, etc), **only include database interaction in the test case methods**
 - The error message `Failed: Database access not allowed, use the "django_db" mark to enable` was seen on a database error on a method which actually had the marker. This output is not to be 100% trusted
@@ -149,11 +149,11 @@ Despite its ease of use, the factory_boy is a powerful library capable of modeli
 
 ### Additional useful links
 
-- [Django 1.7 testing](https://docs.djangoproject.com/en/1.7/topics/testing/overview/) — version used in the demo application
-- [Django 2.0 testing](https://docs.djangoproject.com/en/2.0/topics/testing/overview/) — latest stable version
-- [Effective Django](http://www.effectivedjango.com/) — testing covered already in the second chapter of the book
+- [Django 1.7 testing](https://docs.djangoproject.com/en/1.7/topics/testing/overview/) —​ version used in the demo application
+- [Django 2.0 testing](https://docs.djangoproject.com/en/2.0/topics/testing/overview/) —​ latest stable version
+- [Effective Django](http://www.effectivedjango.com/) —​ testing covered already in the second chapter of the book
 - [Effective Django factory_boy](http://www.effectivedjango.com/orm.html#factoryboy-example)
-- [Django testing](http://carljm.github.io/django-testing-slides) — excellent PyCon talk, slides covering pytest, fixtures vs factories, etc
+- [Django testing](http://carljm.github.io/django-testing-slides) —​ excellent PyCon talk, slides covering pytest, fixtures vs factories, etc
 
 ### Conclusion
 

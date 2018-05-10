@@ -11,7 +11,7 @@ Last week, I brought my 4 month old to [RailsConf](https://railsconf.com/2015/).
 
 Daily morning photos at the conference.
 
-While I was there, I was asked often how it was bringing a baby to a conference, so I decided to write a blog post. As with all parenting advice, the circumstances are a strong factor in how the experience turned out. RailsConf is a casual three-day multi-track tech conference with many breaks and social events — it’s as much about socialization as it is about technical know-how. This is not my first baby and not my first time at RailsConf, so I had some idea of what I might be getting into. Minus a few minor squeaks, baby Skardal was sleeping or sitting happily throughout the conference.
+While I was there, I was asked often how it was bringing a baby to a conference, so I decided to write a blog post. As with all parenting advice, the circumstances are a strong factor in how the experience turned out. RailsConf is a casual three-day multi-track tech conference with many breaks and social events—​it’s as much about socialization as it is about technical know-how. This is not my first baby and not my first time at RailsConf, so I had some idea of what I might be getting into. Minus a few minor squeaks, baby Skardal was sleeping or sitting happily throughout the conference.
 
 Here’s what I [qualitatively] perceived to be the reaction of others attending the conference to baby Skardal:
 

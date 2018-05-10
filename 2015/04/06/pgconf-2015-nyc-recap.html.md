@@ -13,7 +13,7 @@ On Thursday:
 
 “Managing PostgreSQL with Puppet” by Chris Everest. This talk covered experiences by CoverMyMeds.com staff in deploying PostgreSQL instances and integrating with custom Puppet recipes.
 
-“A TARDIS for your ORM — application level timetravel in PostgreSQL” by Magnus Hagander. Demonstrated how to construct a mirror schema of an existing database and manage (via triggers) a view of how data existed at some specific point in time. This system utilized range types with exclusion constraints, views, and session variables to generate a similar-structured schema to be consumed by an existing ORM application.
+“A TARDIS for your ORM—​application level timetravel in PostgreSQL” by Magnus Hagander. Demonstrated how to construct a mirror schema of an existing database and manage (via triggers) a view of how data existed at some specific point in time. This system utilized range types with exclusion constraints, views, and session variables to generate a similar-structured schema to be consumed by an existing ORM application.
 
 “Building a ‘Database of Things’ with Foreign Data Wrappers” by Rick Otten. This was a live demonstration of building a custom foreign data wrapper to control such attributes as hue, brightness, and on/off state of Philips Hue bulbs. Very interesting live demo, nice audience response to the control systems. Used a python framework to stub out the interface with the foreign data wrapper and integrate fully.
 

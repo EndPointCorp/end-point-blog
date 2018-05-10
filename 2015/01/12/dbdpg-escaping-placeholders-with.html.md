@@ -11,7 +11,7 @@ title: DBD::Pg escaping placeholders with backslashes
 The popularity of using JSON and [JSONB](https://www.depesz.com/2014/03/25/waiting-for-9-4-introduce-jsonb-a-structured-format-for-storing-json/) within Postgres has forced a solution to the problem of question mark overload. JSON (as well as hstore) uses the question mark as an operator in its queries, and Perl DBI (esp. DBD::Pg) uses the question mark to indicate a placeholder. [Version 3.5.0 of DBD::Pg](http://search.cpan.org/dist/DBD-Pg/
 ) has solved this by allowing the use of a backslash character before the question mark, to indicate it is NOT a placeholder. We will see some code samples after establishing a little background.
 
-First, what are placeholders? They are special characters within a SQL statement that allow you to defer adding actual values until a later time. This has a number of advantages. First, it completely removes the need to worry about quoting your values. Second, it allows efficient re-use of queries. Third, it reduces network traffic as you do not need to send the entire query each time it is re-run. Fourth, it can allow for seamless translation of data types from Postgres to your client language and back again (for example, DBD::Pg translates easily between Perl arrays and Postgres arrays). There are three styles of placeholders supported by DBD::Pg—question marks, dollar-signs, and colon-names.
+First, what are placeholders? They are special characters within a SQL statement that allow you to defer adding actual values until a later time. This has a number of advantages. First, it completely removes the need to worry about quoting your values. Second, it allows efficient re-use of queries. Third, it reduces network traffic as you do not need to send the entire query each time it is re-run. Fourth, it can allow for seamless translation of data types from Postgres to your client language and back again (for example, DBD::Pg translates easily between Perl arrays and Postgres arrays). There are three styles of placeholders supported by DBD::Pg—​question marks, dollar-signs, and colon-names.
 
 Next, what are Postgres operators? They are special symbols withing a SQL statement that perform some action using as inputs the strings to the left and right side of them. It sounds more complicated than it is. Take this query:
 
@@ -19,7 +19,7 @@ Next, what are Postgres operators? They are special symbols withing a SQL statem
 SELECT count(*) FROM pg_class WHERE relpages > 24;
 ```
 
-In this case, the operator is “>”—the greater than sign. It compares the things on its left (in this case, the value of the relpages column) with the things on its right (in this case, the number 24). The operator will return true or false—in this case, it will return true only if the value on its left is larger than the value on its right. Postgres is extremely extensible, which means it is easy to add all types of new things to it. Adding your own operator is fairly easy. Here’s an example that duplicates the greater-than operator, but with a ? symbol:
+In this case, the operator is “>”—​the greater than sign. It compares the things on its left (in this case, the value of the relpages column) with the things on its right (in this case, the number 24). The operator will return true or false—​in this case, it will return true only if the value on its left is larger than the value on its right. Postgres is extremely extensible, which means it is easy to add all types of new things to it. Adding your own operator is fairly easy. Here’s an example that duplicates the greater-than operator, but with a ? symbol:
 
 ```
 CREATE OPERATOR ? (procedure=int4gt, leftarg=integer, rightarg=integer);
@@ -64,7 +64,7 @@ $sth->execute('foobar');
 ## No error!
 ```
 
-Then came JSON and JSONB. Just like hstore, they have three operators with question marks in them: ?, ?& and ?|—all of which will prevent the use of question-mark placeholders. However, some frameworks and supporting modules (e.g. SQL::Abstract and DBIx::Class) only support the question mark style of placeholder! Hence, another solution was needed. After some [discussion](http://codeverge.com/perl.dbi.users/escaping-placeholders-take-2/2026098) on the dbi-users list, it was agreed that a backslash before a placeholder character would allow that character to be “escaped” and sent as-is to the database (minus the backslash). Thus, as of version 3.5.0 of DBD::Pg, the above query can be written as:
+Then came JSON and JSONB. Just like hstore, they have three operators with question marks in them: ?, ?& and ?|—​all of which will prevent the use of question-mark placeholders. However, some frameworks and supporting modules (e.g. SQL::Abstract and DBIx::Class) only support the question mark style of placeholder! Hence, another solution was needed. After some [discussion](http://codeverge.com/perl.dbi.users/escaping-placeholders-take-2/2026098) on the dbi-users list, it was agreed that a backslash before a placeholder character would allow that character to be “escaped” and sent as-is to the database (minus the backslash). Thus, as of version 3.5.0 of DBD::Pg, the above query can be written as:
 
 ```
 use DBD::Pg 3.5.0;

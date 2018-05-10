@@ -20,7 +20,7 @@ Something else that should be mentioned here:
 1. When your structure is different than all the other structures made by your co-workers, consider changing it.
 1. When someone will force you to change your styling code, ask her/him/them why, even if she/he/they are your manager or boss.
 1. When there is no good coding style guide for your language, create one.
-1. Try to have the same habits of coding in your team and company—it’s a time saver.
+1. Try to have the same habits of coding in your team and company—​it’s a time saver.
 1. Even if you’ve adapted to some structures be open for change.
 1. Respect experience. If senior developers tell you that your code is weird, there is probably something wrong with it.
 

@@ -126,7 +126,7 @@ $wgUseSiteCss                     = true;
 $wgAllowSiteCSSOnRestrictedPages  = true;
 ```
 
-Once the above is done, navigate to MediaWiki:Common.css and add the text below. Note that you may need to wait until “making the wiki active” step below—and comment out the $wgReadOnly variable.
+Once the above is done, navigate to MediaWiki:Common.css and add the text below. Note that you may need to wait until “making the wiki active” step below—​and comment out the $wgReadOnly variable.
 
 ```
 * { background-color: #ddeeff !important }
@@ -160,6 +160,6 @@ Alias /testwiki /var/www/test_mediawiki/index.php
 ```
 
 Reload the web server, and Bob’s your uncle. You now have a fully functional, safely sandboxed, magnificently marked-up 
-copy of your production wiki. The above may seem like a lot of work, but this was an overly-detailed post—the actual work only takes around 10 minutes (or much less if you script it!)
+copy of your production wiki. The above may seem like a lot of work, but this was an overly-detailed post—​the actual work only takes around 10 minutes (or much less if you script it!)
 
 

@@ -5,8 +5,6 @@ tags: clojure, conference, erlang, functional-programming, javascript, ruby
 title: wroclove.rb a.k.a. “The best Java conference in Ruby world”
 ---
 
-
-
 **Time and Date:** 13-15th March 2015
 
 **Place:** Wrocław University

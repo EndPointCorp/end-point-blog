@@ -5,8 +5,6 @@ tags: database, postgres
 title: Postgres ON_ERROR_ROLLBACK explained
 ---
 
-
-
 <div class="separator" style="clear: both; float: right; text-align: center;"><a href="/blog/2015/02/24/postgres-onerrorrollback-explained/image-0-big.jpeg" imageanchor="1" style="clear: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" src="/blog/2015/02/24/postgres-onerrorrollback-explained/image-0.jpeg"/></a><br/><small>
 (<a href="https://flic.kr/p/jt1ajt">picture</a> by <a href="https://www.flickr.com/photos/pokerbrit/">Steve Wilson</a>)</small></div>
 
@@ -61,7 +59,7 @@ greg=# select count(*) from somi;
      3
 ```
 
-What about if you create a savepoint yourself? Or even a savepoint with the same name as the one that psql uses internally? Not a problem—Postgres allows multiple savepoints with the same name, and will rollback or release the latest one created, which allows ON_ERROR_ROLLBACK to work seamlessly with user-provided savepoints.
+What about if you create a savepoint yourself? Or even a savepoint with the same name as the one that psql uses internally? Not a problem—​Postgres allows multiple savepoints with the same name, and will rollback or release the latest one created, which allows ON_ERROR_ROLLBACK to work seamlessly with user-provided savepoints.
 
 Note that the example above sets ON_ERROR_ROLLBACK (yes it is case sensitive!) to ‘interactive’, not just ‘on’. This is a good idea, as you generally want it to catch human errors, and not just plow through a SQL script.
 

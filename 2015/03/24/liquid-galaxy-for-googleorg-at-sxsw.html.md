@@ -11,9 +11,9 @@ End Point enjoyed an opportunity to work with Google.org, who bought a Liquid Ga
 
 Some of the projects included are as follows:
 
-- **Charity:Water** — The charity: water presentation included scenes featuring multi screen video of Scott Harrison (Founder/CEO) and Robert Lee (Director of Special Programs), and an animated virtual tour of charity: water well sites in Ethiopia.
-- **World Wildlife Fund** — The World Wildlife Fund presentation featured a virtual tour of the Bouba N’Djida National Park, Cameroon putting the viewer into the perspective of a drone patrolling the park for poachers. Additional scenes in the presentation revealed pathways of transport for illegal ivory from the park through intermediate stops in Nigeria and Hong Kong before reaching China.
-- **Samasource** — The Samasource presentation showed slums where workers start and the technology centers they are able to migrate to while serving a global network of technology clients.
+- **Charity:Water**—​The charity: water presentation included scenes featuring multi screen video of Scott Harrison (Founder/CEO) and Robert Lee (Director of Special Programs), and an animated virtual tour of charity: water well sites in Ethiopia.
+- **World Wildlife Fund**—​The World Wildlife Fund presentation featured a virtual tour of the Bouba N’Djida National Park, Cameroon putting the viewer into the perspective of a drone patrolling the park for poachers. Additional scenes in the presentation revealed pathways of transport for illegal ivory from the park through intermediate stops in Nigeria and Hong Kong before reaching China.
+- **Samasource**—​The Samasource presentation showed slums where workers start and the technology centers they are able to migrate to while serving a global network of technology clients.
 
 <div class="separator" style="clear: both; text-align: center;"><a href="/blog/2015/03/24/liquid-galaxy-for-googleorg-at-sxsw/image-1-big.jpeg" imageanchor="1" style="clear: right; float: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" src="/blog/2015/03/24/liquid-galaxy-for-googleorg-at-sxsw/image-1.jpeg"/></a></div>
 

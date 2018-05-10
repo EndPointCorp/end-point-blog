@@ -85,4 +85,4 @@ Other reference materials:
 - [Making the Web Faster with HTTP 2.0: HTTP continues to evolve](http://queue.acm.org/detail.cfm?id=2555617) by Ilya Grigorik of Google
 - [TLS in HTTP/2](https://daniel.haxx.se/blog/2015/03/06/tls-in-http2/): Daniel Stenberg on TLS in HTTP/2 being mandatory in effect if not in the specification, and discusses opportunistic encryption
 - [HTTP/2 and the Internet of Things](http://robbysimpson.com/2015/01/26/http2-and-the-internet-of-things/) by Robby Simpson of GE Digital Energy
-- [HTTP/2.0 — The IETF is Phoning It In: Bad protocol, bad politics](http://queue.acm.org/detail.cfm?id=2716278) by Poul-Henning Kamp, author of Varnish
+- [HTTP/2.0—​The IETF is Phoning It In: Bad protocol, bad politics](http://queue.acm.org/detail.cfm?id=2716278) by Poul-Henning Kamp, author of Varnish

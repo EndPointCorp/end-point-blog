@@ -5,8 +5,6 @@ tags: conference, liquid-galaxy
 title: Social Innovation Summit 2014
 ---
 
-
-
 <img height="98px;" src="/blog/2015/01/28/social-innovation-summit-2014/image-0.png" style="-webkit-transform: rotate(0rad); border: none; transform: rotate(0rad);" width="328px;"/>
 
 In November, Josh Ausborne and I set up a Liquid Galaxy at the Sofitel Hotel in Redwood City for the 2014 [Social Innovation Summit](https://www.socinnovation.com/ehome/79546). Prior to the event the End Point content team worked together with Chris Busselle and Sasha Buscho from [Google.org](https://www.google.org/) to create presentations featuring 10 grantee organizations.
@@ -17,7 +15,7 @@ With the Liquid Galaxy we were able to feature “Street View” panoramas of pe
 
 image credit: [Jensen Sutta](http://www.jensensutta.com/)
 
-I was thrilled to see the Google.org team in front of the system sharing the larger narrative associated with each project. This highlights one of the many opportunities of the Liquid Galaxy—the opportunity to share, explore and collaborate in real time, in front of an immersive array of screens.
+I was thrilled to see the Google.org team in front of the system sharing the larger narrative associated with each project. This highlights one of the many opportunities of the Liquid Galaxy—​the opportunity to share, explore and collaborate in real time, in front of an immersive array of screens.
 
 <img height="471px;" src="/blog/2015/01/28/social-innovation-summit-2014/image-2.png" style="-webkit-transform: rotate(0.00rad); border: none; transform: rotate(0.00rad);" width="624px;"/>
 

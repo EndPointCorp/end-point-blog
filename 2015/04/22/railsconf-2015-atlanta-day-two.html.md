@@ -2,7 +2,7 @@
 author: Steph Skardal
 gh_issue_number: 1120
 tags: conference, rails
-title: 'RailsConf 2015 — Atlanta: Day Two'
+title: 'RailsConf 2015—​Atlanta: Day Two'
 ---
 
 It’s day 2 of [RailsConf 2015](https://railsconf.com/2015/) in Atlanta! I made it through day 1!
@@ -39,6 +39,6 @@ I also attended a few talks on testing. My favorite little gem from one of these
 
 Eduardo Gutierrez gave a talk on Capybara where he went through explicit examples of balancing maintainability, readability, and performance in Capybara. I’ll update this post to include links to all these talks when they become available. Here are the videos & slides for these talks:
 
-- [Ambitious Capybara by Eduardo Gutierrez](http://confreaks.tv/videos/railsconf2015-ambitious-capybara) — [slides](https://speakerdeck.com/ecbypi/ambitious-capybara)
-- [RSpec: It’s Not Actually Magic by Noel Rappin](http://confreaks.tv/videos/railsconf2015-rspec-it-s-not-actually-magic) — [slides](https://speakerdeck.com/noelrap/rspec-it-isnt-actually-magic)
-- [Ruby on Rails on Minitest by Ryan Davis](http://confreaks.tv/videos/railsconf2015-ruby-on-rails-on-minitest) — [slides (pdf)](http://www.zenspider.com/presentations/2015-railsconf.html)
+- [Ambitious Capybara by Eduardo Gutierrez](http://confreaks.tv/videos/railsconf2015-ambitious-capybara)—​[slides](https://speakerdeck.com/ecbypi/ambitious-capybara)
+- [RSpec: It’s Not Actually Magic by Noel Rappin](http://confreaks.tv/videos/railsconf2015-rspec-it-s-not-actually-magic)—​[slides](https://speakerdeck.com/noelrap/rspec-it-isnt-actually-magic)
+- [Ruby on Rails on Minitest by Ryan Davis](http://confreaks.tv/videos/railsconf2015-ruby-on-rails-on-minitest)—​[slides (pdf)](http://www.zenspider.com/presentations/2015-railsconf.html)

@@ -136,7 +136,7 @@ Here’s a quick example of how the JavaScript might look:
 
 This is very simplified, but via its modules/factories/controllers, the AngularJS code handles how the JSON feeds are displayed in the page. It pulls in the JSON and can massage it for use by the ng- attributes, etc.
 
-I don’t have to use AngularJS to do this — I could use a Template::Toolkit template delivered by Dancer, or any number of other templating systems. However, I like this method, because it doesn’t require a Perl developer to use. Rather, any competent JavaScript developer can take this and run with it.
+I don’t have to use AngularJS to do this—​I could use a Template::Toolkit template delivered by Dancer, or any number of other templating systems. However, I like this method, because it doesn’t require a Perl developer to use. Rather, any competent JavaScript developer can take this and run with it.
 
 ### Migration
 

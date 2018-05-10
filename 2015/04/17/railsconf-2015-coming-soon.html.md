@@ -21,7 +21,7 @@ This will be a new experience since my husband will be juggling two kids while I
 - [Building RailsPerf: A Toolkit to Detect Performance Regressions in Ruby on Rails Core](https://railsconf.com/2015/program#prop_1087)
 - [High Performance APIs in Ruby Using ActiveRecord and Goliath](https://railsconf.com/2015/program#prop_1251)
 - [What Comes After MVC](https://railsconf.com/2015/program#prop_1132)
-- [Your Front End Framework is Overkill — Server Side JavaScript with Rails](https://railsconf.com/2015/program#prop_999)
+- [Your Front End Framework is Overkill—​Server Side JavaScript with Rails](https://railsconf.com/2015/program#prop_999)
 - [Bringing UX To Your Code](https://railsconf.com/2015/program#prop_1037)
 - [Coding: Art or Craft?](https://railsconf.com/2015/program#prop_987)
 - [What I’ve Learned in 7 Years of Podcasting About Ruby](https://railsconf.com/2015/program#prop_1067)

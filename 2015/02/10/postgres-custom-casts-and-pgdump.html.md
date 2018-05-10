@@ -5,8 +5,6 @@ tags: database, postgres
 title: Postgres custom casts and pg_dump
 ---
 
-
-
 We recently upgraded a client from Postgres 
 [version 8.3](https://www.postgresql.org/docs/current/static/release-8-3.html) to [version 9.4](https://www.postgresql.org/docs/current/static/release-9-4.html). Yes, that is quite the jump! In the process, I was reminded about the old implicit cast issue. A major change of Postgres 8.3 was the removal of some of the built-in [casts](https://www.postgresql.org/docs/current/static/sql-createcast.html), meaning that many applications that worked fine on Postgres 8.2 and earlier started throwing errors. The correct response to fixing such things is to adjust the underlying application and its SQL. Sometimes this meant a big code difference. This is not always possible because of the size and/or complexity of the code, or simply the sheer inability to change it for various other reasons. Thus, another solution was to add some of the casts back in. However, this has its own drawback, as seen below.
 
@@ -30,7 +28,7 @@ HINT: No operator matches the given name and argument type(s). You might need to
 add explicit casts.
 ```
 
-This was quickly fixed by applying the FUNCTION and CAST from above, but why did we have to apply it twice (the original, and after the migration)? The reason is that pg_dump does *NOT* dump custom casts. Yes, this is a bit surprising as pg_dump is supposed to write out a complete logical dump of the database, but casts are a specific exception. Not all casts are ignored by pg_dump—only if both sides of the cast are built-in data types, and everything is in the pg_catalog namespace. It would be nice if this were fixed someday, such that *any* user-created objects are dumped, regardless of their namespace.
+This was quickly fixed by applying the FUNCTION and CAST from above, but why did we have to apply it twice (the original, and after the migration)? The reason is that pg_dump does *NOT* dump custom casts. Yes, this is a bit surprising as pg_dump is supposed to write out a complete logical dump of the database, but casts are a specific exception. Not all casts are ignored by pg_dump—​only if both sides of the cast are built-in data types, and everything is in the pg_catalog namespace. It would be nice if this were fixed someday, such that *any* user-created objects are dumped, regardless of their namespace.
 
 There is a way around this, however, and that is to create the function and cast in another namespace. When this is done, pg_dump *WILL* dump the casts. The drawback is that you must ensure the function and schema are available to everyone. By default, functions are available to everyone, so unless you go crazy with REVOKE commands, you should be fine. The nice thing about pg_catalog is that the schema is not likely to get dropped :). Being able to dump the added casts has another advantage: creating copies of the database via pg_dump for QA or testing will always work.
 

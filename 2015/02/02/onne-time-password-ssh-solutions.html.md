@@ -5,8 +5,6 @@ tags: chrome, security, ssh
 title: One-time password SSH solutions
 ---
 
-
-
 <div class="separator" style="clear: both; float:right; text-align: center; margin-bottom: 1.5em; margin-left: 3em; margin-right: 2em; "><a href="/blog/2015/02/02/onne-time-password-ssh-solutions/image-0-big.jpeg" imageanchor="1" style="clear: right; float: right; margin-left: 1em;"><img border="0" src="/blog/2015/02/02/onne-time-password-ssh-solutions/image-0.jpeg"/></a><br/><small>[how encryption was done in the 18th century]</small></div>
 
 In a [previous article](/blog/2015/01/21/ssh-one-time-passwords-otpw-on) I explained how I used a one‑time password system to enable SSH on my Chromebook. While this is still working great for me, there are a few problems that can pop 
@@ -24,7 +22,7 @@ This alarm can be tripped from SSH timing out, or from getting pulled away from 
 
 ### Problem 2: Lost or compromised passwords
 
-The physical sheet of paper containing your one‑time passwords is definitely a single point of failure—but an easy one to remedy. Maybe you lost the paper, maybe your arch‑nemesis stole it, or maybe it got destroyed in a freak hunting accident. No worries at all, just generate a new one! Run the otpw‑bin command again:
+The physical sheet of paper containing your one‑time passwords is definitely a single point of failure—​but an easy one to remedy. Maybe you lost the paper, maybe your arch‑nemesis stole it, or maybe it got destroyed in a freak hunting accident. No worries at all, just generate a new one! Run the otpw‑bin command again:
 
 ```
 $ otpw-gen -e 30 | lpr
@@ -55,7 +53,7 @@ OTPW1
 089npYNavK9MIVA
 ```
 
-The first line states the format of the file, while the second line indicates the number of passwords generated, the digits per password number, the digits in the hash, and the digits in the actual passwords. All the other lines are passwords—either an unused one consisting of the number and the hash, or a line of hyphens. The goal is to replace the current password with hyphens. Here’s a quick recipe to do so:
+The first line states the format of the file, while the second line indicates the number of passwords generated, the digits per password number, the digits in the hash, and the digits in the actual passwords. All the other lines are passwords—​either an unused one consisting of the number and the hash, or a line of hyphens. The goal is to replace the current password with hyphens. Here’s a quick recipe to do so:
 
 ```
 perl -ni -e 'print unless /^\d\d\d\S/ and ! $x++' ~/.otpw

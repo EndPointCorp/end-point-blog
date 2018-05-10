@@ -31,7 +31,7 @@ the same. However, to produce a table showing all open tickets for user “alois
 The other major change was to modernize it. As of version 1.25 of MediaWiki,
 extensions are encouraged to use a new system to register themselves with MediaWiki. Previously,
 an extension would have a PHP file named after the extension that was responsible for doing
-the registration and setup—usually by mucking with global variables! There was no
+the registration and setup—​usually by mucking with global variables! There was no
 way for MediaWiki to figure out what the extension was going to do without parsing the entire file, and
 thereby activating the extension. The new method relies on a standard JSON file called
 extension.json. Thus, in the RequestTracker extension, the file RequestTracker.php has
@@ -127,7 +127,7 @@ The type field simply tells what kind of extension this is, and is mostly used t
 internationalization, and thus **rt-desc** is converted to your current language by looking up the language file inside of the extension’s i18n directory.
 
 The requires field only supports a “MediaWiki” subkey at the moment. In this case, I have it
-set to require at least version 1.25 of MediaWiki—as anything lower will not even be able to read
+set to require at least version 1.25 of MediaWiki—​as anything lower will not even be able to read
 this file! The AutoloadClasses key is the new way of loading code needed by the extension. As before, this should be stored in a php file with the name of the extension, an underscore, and the word “body” (e.g. RequestTracker_body.php). This file contains all of the functions that perform the actual work of the extension.
 
 The Hooks field is one of the big advantages of the new extension.json format. Rather than

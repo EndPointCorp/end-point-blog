@@ -22,7 +22,7 @@ to export and import your wiki, named dumpBackup.php and
 importDump.php. So it 
 was simply a matter of getting the wiki up and running enough to run dumpBackup.php.
 
-My first thought was to simply bring the wiki up as it was—all the files were in 
+My first thought was to simply bring the wiki up as it was—​all the files were in 
 place, after all, and specifically designed to read the old version of the schema. 
 (Because the database scheme changes over time, newer MediaWikis cannot run against 
 older database dumps.) So I unpacked the MediaWiki directory, and prepared to 
@@ -75,7 +75,7 @@ the word “Namespace” as a class name. As PHP has always had very
 non-existent/poor support for packages, namespaces, and scoping, it is 
 vital that all your PHP variables, class names, etc. are as unique as possible. 
 To that end, the name of the class was changed at some point  
-to “MWNamespace”—but the damage has been done. The second group to share the 
+to “MWNamespace”—​but the damage has been done. The second group to share the 
 blame is the PHP developers, both for not having namespace support for 
 so long, and for making it into a reserved word full knowing that one of 
 the poster children for “mature” PHP apps, MediaWiki, was using “namespace”. 
@@ -98,7 +98,7 @@ Not a good solution, but ideal when you just need to get the wiki up
 and running. Thus, it’s the solution I tried for the original problem.
 
 However, once I solved the Namespace problem by renaming to MWNamespace, 
-some other problems popped up. I will not run through them here—although they were 
+some other problems popped up. I will not run through them here—​although they were 
 small and quickly solved, it began to feel like a neverending whack-a-mole 
 game, and I decided to cut the Gordian knot with a completely different 
 approach.

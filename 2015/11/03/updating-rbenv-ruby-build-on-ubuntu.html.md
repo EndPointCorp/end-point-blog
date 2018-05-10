@@ -27,6 +27,6 @@ cd ~/.rbenv/plugins/ruby-build/
 git pull
 ```
 
-And tada—that was all that was needed. rbenv version -l now includes ruby 2.1.1, and I can install it with rbenv install 2.1.1.
+And tada—​that was all that was needed. rbenv version -l now includes ruby 2.1.1, and I can install it with rbenv install 2.1.1.
 
 

@@ -35,6 +35,6 @@ The tour of all of the End Point employees still stands out in my mind, just bec
 
 <div class="separator" style="clear: both; text-align: center;"><a href="/blog/2015/11/04/end-pointers-favorite-liquid-galaxy/image-2-big.jpeg" imageanchor="1" style="clear: right; float: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" src="/blog/2015/11/04/end-pointers-favorite-liquid-galaxy/image-2.jpeg"/></a></div>
 
-The complex presentations that mix video, GIS data, and unique flight paths are really something to see. We created a sort of ‘treasure hunt’ at SXSW last year for the XPrize, where viewers entered a code on the touchscreen based on other exhibits that they had viewed. If they got the code right, the Liquid Galaxy shot them into space, but if they entered the wrong code—just a splash into the ocean!
+The complex presentations that mix video, GIS data, and unique flight paths are really something to see. We created a sort of ‘treasure hunt’ at SXSW last year for the XPrize, where viewers entered a code on the touchscreen based on other exhibits that they had viewed. If they got the code right, the Liquid Galaxy shot them into space, but if they entered the wrong code—​just a splash into the ocean!
 
 

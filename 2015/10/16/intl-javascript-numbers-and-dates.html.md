@@ -2,7 +2,7 @@
 author: Piotr Hankiewicz
 gh_issue_number: 1163
 tags: html, javascript
-title: Int’l — JavaScript numbers and dates formatting, smart strings comparison
+title: Int’l —​ JavaScript numbers and dates formatting, smart strings comparison
 ---
 
 <img border="0" src="/blog/2015/10/16/intl-javascript-numbers-and-dates/image-0.png" style="width: 100%;"/>
@@ -126,4 +126,4 @@ Now, we are sorting using Collator object with Swedish locales. The output is di
 
 ### Conclusion
 
-Be careful with using the Intl object—its implementation is still not perfect and not supported by all the browsers. There is a nice library called: [Intl.js](https://github.com/andyearnshaw/Intl.js/) by Andy Earnshaw. It’s nothing more than a compatibility implementation of the ECMAScript Internationalization API. You can use it to use all the Intl object features now, without being worried about different browsers’ implementations.
+Be careful with using the Intl object—​its implementation is still not perfect and not supported by all the browsers. There is a nice library called: [Intl.js](https://github.com/andyearnshaw/Intl.js/) by Andy Earnshaw. It’s nothing more than a compatibility implementation of the ECMAScript Internationalization API. You can use it to use all the Intl object features now, without being worried about different browsers’ implementations.

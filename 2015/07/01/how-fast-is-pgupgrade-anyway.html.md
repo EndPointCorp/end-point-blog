@@ -24,7 +24,7 @@ Spoiler: it’s either about 3.5 times as fast as pg_dump, or insanely
 fast at a flat 15 seconds or so. Before going further, let’s discuss the methodology used.
 
 I used the venerable pgbench program to generate some sample tables and data, 
-and then upgraded the resulting database, going from Postgres version 9.3 to 9.4. The pgbench program comes with Postgres, and simply requires an **--initialize** argument to create the test tables. There is also a **--scale** argument you can provide to increase the amount of initial data—each increment increases the number of rows in the largest table, pgbench_accounts, by one hundred thousand rows. Here are the scale runs I did, along with the number of rows and overall database size for each level:
+and then upgraded the resulting database, going from Postgres version 9.3 to 9.4. The pgbench program comes with Postgres, and simply requires an **--initialize** argument to create the test tables. There is also a **--scale** argument you can provide to increase the amount of initial data—​each increment increases the number of rows in the largest table, pgbench_accounts, by one hundred thousand rows. Here are the scale runs I did, along with the number of rows and overall database size for each level:
 
 <table class="gsm">
 <caption>Effect of --scale</caption>
@@ -50,7 +50,7 @@ $ pg_dump postgres | psql postgres -q -p 5433 -f -
 
 I did make one important optimization, which was to set 
 [
-fsync](https://www.postgresql.org/docs/current/static/runtime-config-wal.html#GUC-FSYNC) off on the target database (version 9.4). Although this setting should never be turned off in production—or anytime you cannot replace all your data, upgrades 
+fsync](https://www.postgresql.org/docs/current/static/runtime-config-wal.html#GUC-FSYNC) off on the target database (version 9.4). Although this setting should never be turned off in production—​or anytime you cannot replace all your data, upgrades 
 like this are an excellent time to disable fsync. Just make sure you flip it back on 
 again right away! There are some other minor optimizations one could make (especially 
 boosting [maintenance_work_mem](https://www.postgresql.org/docs/current/static/runtime-config-resource.html#GUC-MAINTENANCE-WORK-MEM)), but for the purposes of this test, I decided that the fsync was enough.
@@ -109,7 +109,7 @@ I mentioned earlier that there were some other optimizations that could be done 
 <tr><td>600</td><td>8.5 GB</td><td>12.9</td></tr>
 </tbody></table>
 
-No, those are not typos—an average of thirteen seconds despite the size of the database! The only downside to this method is that you cannot access the old system once the new system starts up, but that’s a very small price to pay, as you can easily backup the old system first. There is no point in graphing these numbers out—just look at the graph above and imagine a nearly flat line traveling across the bottom of the graph :)
+No, those are not typos—​an average of thirteen seconds despite the size of the database! The only downside to this method is that you cannot access the old system once the new system starts up, but that’s a very small price to pay, as you can easily backup the old system first. There is no point in graphing these numbers out—​just look at the graph above and imagine a nearly flat line traveling across the bottom of the graph :)
 
 Are there any other options that can affect the time? While pgbench has a handy **--foreign-keys** argument I often use to generate a more “realistic” test database, both pg_dump and pg_upgrade are unaffected by any numbers of foreign keys. One limitation of pg_upgrade is that it cannot change the **--checksum** attribute of a database. In other words, if you want to go from a non-checksummed version of Postgres to a checksummed version, you need to use pg_dump or some other method. On the plus side, my testing found negligible difference between upgrading a checksummed versus a non-checksummed version.
 

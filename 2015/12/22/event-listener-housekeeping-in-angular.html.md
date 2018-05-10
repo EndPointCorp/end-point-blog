@@ -17,6 +17,6 @@ $scope.$on('$destroy', function() {
 });
 ```
 
-Single page apps do not have the benefit of getting a clean state with each page load. Because of this it’s important to keep track of any listeners that are added — especially those that are outside of angular (e.g. window and document) and make sure to clean those up when the related controllers and directives are destroyed. 
+Single page apps do not have the benefit of getting a clean state with each page load. Because of this it’s important to keep track of any listeners that are added—​especially those that are outside of angular (e.g. window and document) and make sure to clean those up when the related controllers and directives are destroyed. 
 
 

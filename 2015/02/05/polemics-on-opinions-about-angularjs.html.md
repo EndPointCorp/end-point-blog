@@ -5,13 +5,11 @@ tags: angular, javascript
 title: Polemics on opinions about AngularJS
 ---
 
-
-
 Some time ago, our CTO, Jon Jensen, sent me a link to a *very* [interesting blog article about AngularJS](http://www.fse.guru/2-years-with-angular).
 
-I have used the [AngularJS framework](https://angularjs.org/) in one of our internal projects and have been (vocally) very pleased with it ever since. It solves many problems of other frameworks and it makes you quite productive as a developer, if you know what you’re doing. It’s equally true that even the best marketed technology is no silver bullet in real life. Once you’ve been through a couple of luckless technology-crushes, you tend to stay calm—understanding that in the end there’s always some tradeoff.
+I have used the [AngularJS framework](https://angularjs.org/) in one of our internal projects and have been (vocally) very pleased with it ever since. It solves many problems of other frameworks and it makes you quite productive as a developer, if you know what you’re doing. It’s equally true that even the best marketed technology is no silver bullet in real life. Once you’ve been through a couple of luckless technology-crushes, you tend to stay calm—​understanding that in the end there’s always some tradeoff.
 
-We’re trying to do our best at finding a balance between chasing after the newest and coolest, and honoring what’s already stable and above all safe. Because the author of the blog article decided to point at some elephants in the room—it immediately caught our attention.
+We’re trying to do our best at finding a balance between chasing after the newest and coolest, and honoring what’s already stable and above all safe. Because the author of the blog article decided to point at some elephants in the room—​it immediately caught our attention.
 
 I must admit that the article resonates with me somewhat. I believe, though, that it also doesn’t in some places.
 
@@ -56,7 +54,7 @@ This is true but is also constrained IMHO. Counter examples are to be found all 
 > - Project with 5 star performance requirements.
 >
 
-I agree with the last one. Other ones sprout from the fact that Angular is so liberal in how the app may be structured. In some cases it’s good, while in some bad—there’s always some tradeoff. I’d compare Angular to Sinatra and Ember to Rails. Both are intended to be used in different use cases. One isn’t superior to another without a context.
+I agree with the last one. Other ones sprout from the fact that Angular is so liberal in how the app may be structured. In some cases it’s good, while in some bad—​there’s always some tradeoff. I’d compare Angular to Sinatra and Ember to Rails. Both are intended to be used in different use cases. One isn’t superior to another without a context.
 
 >
 > It there any Working Strategy, if you are FORCED to work with angular?
@@ -68,13 +66,13 @@ I agree with the last one. Other ones sprout from the fact that Angular is so li
 > - Port the functionality from the prototype to your MVP.
 >
 
-Agreed with #1. Maintainability isn’t trivial with Angular—it’s true. One reason is that with dependency injection there’s a possibility that with growing number of modules, some tries will depend on each other in a circular way:
+Agreed with #1. Maintainability isn’t trivial with Angular—​it’s true. One reason is that with dependency injection there’s a possibility that with growing number of modules, some tries will depend on each other in a circular way:
 
 A -> B -> C -> A
 
-But it’s not inherent to Angular but to dependency injection itself and there are known strategies for dealing with that. Other reason is that it’s so liberal and yes—you have to always be alert, making sure the code grows in the good direction.
+But it’s not inherent to Angular but to dependency injection itself and there are known strategies for dealing with that. Other reason is that it’s so liberal and yes—​you have to always be alert, making sure the code grows in the good direction.
 
-It’s also true that many teams who have previously been using other MV{C,P} frameworks—are converting to Angular. Why? I gave the answer in the first paragraph—there’s no silver bullet. If you want a truly [orthogonal](https://en.wikipedia.org/wiki/Orthogonality_(programming)) software you don’t grow it with just great tools—but with great people. And sometimes even having a star-level team isn’t enough because of the degree to which business requirements change.
+It’s also true that many teams who have previously been using other MV{C,P} frameworks—​are converting to Angular. Why? I gave the answer in the first paragraph—​there’s no silver bullet. If you want a truly [orthogonal](https://en.wikipedia.org/wiki/Orthogonality_(programming)) software you don’t grow it with just great tools—​but with great people. And sometimes even having a star-level team isn’t enough because of the degree to which business requirements change.
 
 Then:
 
@@ -85,7 +83,7 @@ Then:
 > - Create a thorough guideline based on the popular things (this, this and that) covering all the use cases and patterns you can imagine.
 > - Try to keep things as loosely coupled as possible with your OOD knowledge.
 > - Choose either MVC or MVVM, but do not start by mixing approaches.
-> - Include “refactoring” iterations in your dev process (good interval—each 3 months).
+> - Include “refactoring” iterations in your dev process (good interval—​each 3 months).
 > - Analyze your usage patterns and use cases periodically.
 > - Create a metaframework based on angular, tailored SPECIFICALLY for your project needs and your team experience!
 >
@@ -120,9 +118,9 @@ Then:
 > You can use modules only to specify the dependency graph and get rid of specifying the correct file order for injecting scripts (which is not a problem anyway if you are using component-based structure and, for example, browserify).
 >
 
-That’s only a half-truth. You can use e.g. RequireJS and have “real modules” with Angular—there’s even a good blog article describing how to do it: [https://www.sitepoint.com/using-requirejs-angularjs-applications/](https://www.sitepoint.com/using-requirejs-angularjs-applications/).
+That’s only a half-truth. You can use e.g. RequireJS and have “real modules” with Angular—​there’s even a good blog article describing how to do it: [https://www.sitepoint.com/using-requirejs-angularjs-applications/](https://www.sitepoint.com/using-requirejs-angularjs-applications/).
 
-If you were to use just Angular-flavored modules one issue you might run into though could be name clashes. But then unless you want to use a dozen of 3rd party modules you find on GitHub—name clashes aren’t a real problem out there in the wild. And also if you do want to use those modules, you cannot expect to have a “maintainable” codebase over time anyway can you?
+If you were to use just Angular-flavored modules one issue you might run into though could be name clashes. But then unless you want to use a dozen of 3rd party modules you find on GitHub—​name clashes aren’t a real problem out there in the wild. And also if you do want to use those modules, you cannot expect to have a “maintainable” codebase over time anyway can you?
 
 >
 > $scope is “transparent” and inherited by default.
@@ -170,7 +168,7 @@ Then:
 > The worst thing is that you are learning framework for sake of learning framework.
 >
 
-I’d say quite the contrary is true. When we switched to Angular with the our internal app, no-one on the team had any experience with it. The team was ranging in experience—from “not much outside of jQuery” to some much more experienced with many JavaScript frameworks. Yet the team started producing much more almost right away. I also heard them saying that Angular is *much* easier than our previous setup—which was Backbone + KnockoutJS.
+I’d say quite the contrary is true. When we switched to Angular with the our internal app, no-one on the team had any experience with it. The team was ranging in experience—​from “not much outside of jQuery” to some much more experienced with many JavaScript frameworks. Yet the team started producing much more almost right away. I also heard them saying that Angular is *much* easier than our previous setup—​which was Backbone + KnockoutJS.
 
 Then:
 

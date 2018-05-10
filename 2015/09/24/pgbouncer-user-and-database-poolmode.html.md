@@ -163,7 +163,7 @@ postgres@scw-56578065:~/pgbouncer$ git checkout pgbouncer_1_6_1
 postgres@scw-56578065:~/pgbouncer$ ./autogen.sh
 ```
 
-The autogen.sh script fails rather quickly with an error about libtool—which is to be expected,
+The autogen.sh script fails rather quickly with an error about libtool—​which is to be expected,
 as PgBouncer comes with a small list of required packages in order to build it. Because monkeying
 around with all those prerequisites can get tiresome, apt-get provides an option called “build-dep”
 that (in theory!) allows you to download everything needed to build a specific package. Before doing
@@ -266,7 +266,7 @@ ERROR:  No such database: sewdiegosew
 ```
 
 Now let’s confirm that we have database-specific pool modes working. If you recall from above, test2 is set to transaction mode,
-and test3 is set to statement mode. We determine the mode by running three tests. First, we do a “BEGIN; ROLLBACK;”—if this fails,
+and test3 is set to statement mode. We determine the mode by running three tests. First, we do a “BEGIN; ROLLBACK;”—​if this fails,
 it means we are in statement mode. Next, we try to PREPARE and EXECUTE a statement. If this fails, it means
 we are in a transaction mode. Finally, we try to switch to a non-existent database. If it returns an ERROR, it
 means we are in session mode. If it returns a FATAL, it means we are not connected to PgBouncer at all.
@@ -353,6 +353,6 @@ ERROR:  prepared statement "abc" does not exist
 ## test4 is thus running in transaction pool_mode due to the [users] setting
 ```
 
-There you have it—database-specific and user-specific PgBouncer pool_modes. Note that you cannot
+There you have it—​database-specific and user-specific PgBouncer pool_modes. Note that you cannot
 yet do user *and* database specific pool_modes, such as if you want Alice to use transaction
 mode for database test4 and statement mode for test5.

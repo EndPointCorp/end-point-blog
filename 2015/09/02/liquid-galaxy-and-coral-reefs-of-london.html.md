@@ -9,7 +9,7 @@ Exploring coral reefs and studying the diverse species that live in them usually
 
 London, you say?
 
-Yes, the one in England. No, not the coral attaching itself to oil and gas platforms in the North Sea, nor the deep water coral there—admittedly far away from London, but perhaps in the general vacinity on the globe. We’re talking about the heart of London, specifically Cromwell Road. Divers will need to navigate their ways there, but scuba gear and a boat won’t be required once they arrive. No worries! Divers can float right up to the Liquid Galaxy in the exhibit hall at The Natural History Museum. The museum opened *CORAL REEFS: SECRET CITIES OF THE SEA* on March 27th. and the exhibit runs through mid-September this year.
+Yes, the one in England. No, not the coral attaching itself to oil and gas platforms in the North Sea, nor the deep water coral there—​admittedly far away from London, but perhaps in the general vacinity on the globe. We’re talking about the heart of London, specifically Cromwell Road. Divers will need to navigate their ways there, but scuba gear and a boat won’t be required once they arrive. No worries! Divers can float right up to the Liquid Galaxy in the exhibit hall at The Natural History Museum. The museum opened *CORAL REEFS: SECRET CITIES OF THE SEA* on March 27th. and the exhibit runs through mid-September this year.
 
 <img alt="NHML LG1.jpg" height="462px;" src="/blog/2015/09/02/liquid-galaxy-and-coral-reefs-of-london/image-0.jpeg" style="-webkit-transform: rotate(0.00rad); border: none; transform: rotate(0.00rad);" width="615px;"/>
 

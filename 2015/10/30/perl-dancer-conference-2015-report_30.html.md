@@ -24,7 +24,7 @@ While there were *several* wonderful talks, [Gert van der Spoel](https://www.per
         - Runs on the server after the request has finished.
         - Streaming is also asynchronous, feeding the user chunks of data at a time.
 
-Items coming soon to Dancer may include: Web Sockets (supported in [Plack](http://p3rl.org/Plack)), per-route [serialization](https://metacpan.org/pod/Dancer2::Manual#Serializers1) (currently enabling a serializer such as JSON affects the entire app — later on, [Russell](https://twitter.com/veryrusty) [released a module](http://p3rl.org/Dancer2::Plugin::SendAs) for this, which may make it back into the core), Dancer2::XS, and [critic/linter policies](https://github.com/PerlDancer/perl-lint-policy-dancer2).
+Items coming soon to Dancer may include: Web Sockets (supported in [Plack](http://p3rl.org/Plack)), per-route [serialization](https://metacpan.org/pod/Dancer2::Manual#Serializers1) (currently enabling a serializer such as JSON affects the entire app—​later on, [Russell](https://twitter.com/veryrusty) [released a module](http://p3rl.org/Dancer2::Plugin::SendAs) for this, which may make it back into the core), Dancer2::XS, and [critic/linter policies](https://github.com/PerlDancer/perl-lint-policy-dancer2).
 
 [Thomas Klausner](https://twitter.com/domm_favors_irc) shared about *[OAuth & Microservices](https://www.perl.dance/talks/18-oauth2%2C-resty-apis%2C-microservices)*. Microservices are a good tool to manage complexity, but you might want to aim for “monolith first”, [according to Martin Fowler](http://martinfowler.com/bliki/MonolithFirst.html), and only later break up your app into microservices. In the old days, we had “fat” back-ends, which did everything and delivered the results to a browser. Now, we have “fat” front-ends, which take info from a back-end and massage it for display. One advantage of the microservice way of thinking is that mobile devices (or even third parties) can access the same APIs as your front-end website.
 
@@ -39,28 +39,28 @@ One thing I found interesting that Thomas mentioned: *Plack middleware is the co
 
 Gert presented on *[Social Logins & eCommerce](https://www.perl.dance/talks/9-social-logins-for-e-commerce-sites)*. This built on the earlier OAuth talk by Thomas. Here are some of the pros/cons to social login which Gert presented:
 
-- **Pros — customer:**
+- **Pros—​customer:**
     - Alleviates “password fatigue”
     - Convenience
     - Brand familiarity (with the social login provider)
-- **Pros — eCommerce website:**
+- **Pros—​eCommerce website:**
     - Expected customer retention
     - Expected increase in sales
     - Better target customers
-    - “Plug & Play” (if you pay) — some services exist to make it simple to integrate social logins, where you just integrate with them, and then you are effectively integrated with whatever social login providers they support. These include [Janrain](http://janrain.com/) and [LoginRadius](http://www.loginradius.com/)
-- **Cons — customer:**
+    - “Plug & Play” (if you pay)—​some services exist to make it simple to integrate social logins, where you just integrate with them, and then you are effectively integrated with whatever social login providers they support. These include [Janrain](http://janrain.com/) and [LoginRadius](http://www.loginradius.com/)
+- **Cons—​customer:**
     - Privacy concerns (sharing their social identity with your site)
     - Security concerns (if their social account is hacked, so are all their accounts where they have used their social login)
     - Confusion (especially on how to leave a site)
     - Usefulness (no address details are provided by the social provider in the standard scope, so the customer still has to enter extra details on your site)
     - Social account hostages (if you’ve used your social account to login elsewhere, you are reluctant to shut down your social account)
-- **Cons — eCommerce website:**
+- **Cons—​eCommerce website:**
     - Legal implications
     - Implementation hurdles
     - Usefulness
     - Provider problem is your problem (e.g., if the social login provider goes down, all your customers who use it to login are unable to login to your site)
     - Brand association (maybe you don’t want your site associated with certain social sites)
-- **Cons — social provider:**
+- **Cons—​social provider:**
     - ???
 Šimun Kodžoman spoke on *[Dancer + Meteor = mobile app](https://www.perl.dance/talks/22-dancer-%2B-meteor-%3D-mobile-app)*. [Meteor](https://www.meteor.com/) is a JavaScript framework for both server-side and client-side. It seems one of the most interesting aspects is you can use Meteor with the Android or iOS SDK to auto-generate a true mobile app, which has many more advantages than a simple HTML “app” created with [PhoneGap](http://phonegap.com/). Šimun is using Dancer as a back-end for Meteor, because the server-side Meteor aspect is still new and unstable, and is also dependent on [MongoDB](https://www.mongodb.org/), which cannot be used for everything.
 
@@ -87,13 +87,13 @@ There are several [Dancer 2 issues tagged “beginner suitable”](https://githu
 
 It was great to have the author of Dancer, [Alexis Sukrieh](https://twitter.com/sukria), in attendance. He shared his original vision for Dancer, which filled a gap in the Perl ecosystem back in 2009. The goal for Dancer was to create a DSL ([Domain-specific language](https://en.wikipedia.org/wiki/Domain-specific_language)) to provide a very simple way to develop web applications. The DSL provides “[keywords](https://metacpan.org/pod/Dancer2::Manual#DSL-KEYWORDS)” for use in the Dancer app, which are specific to Dancer (basically extra functionality for Perl). One of the core aspects of keeping it simple was to avoid the use of $self (a standby of object-oriented Perl, one of the things that you just “have to do”, typically).
 
-Alexis mentioned that **Dancer 1 is frozen — Dancer 2 full-speed ahead!** He also shared some of his learnings along the way:
+Alexis mentioned that **Dancer 1 is frozen—​Dancer 2 full-speed ahead!** He also shared some of his learnings along the way:
 
 - Fill a gap (define clearly the problem, present your solution)
 - Stick to your vision
 - Code is not enough (opensource needs attention; marketing matters)
 - Meet in person (collaboration is hard; online collaboration is very hard)
-- Kill the ego — you are not your code
+- Kill the ego—​you are not your code
 
 While at the conference, Alexis even wrote a Dancer2 plugin, [Dancer2::Plugin::ProbabilityRoute](https://metacpan.org/pod/Dancer2::Plugin::ProbabilityRoute), which allows you to do [A/B Testing](https://en.wikipedia.org/wiki/A/B_testing) in your Dancer app. (Another similar plugin is [Dancer2::Plugin::Sixpack](https://metacpan.org/pod/Dancer2::Plugin::Sixpack).)
 
@@ -103,4 +103,4 @@ Finally, I was privileged to speak as well, on *[AngularJS & Dancer for Modern W
 
 ### Summary
 
-In summary, the Perl Dancer conference was a great time of learning and building community. If I had to wrap it all up in one insight, it would be: **Web App + App** — that is, your **application should be a compilation of: Plack middleware, Web App (Dancer), and App (Perl classes and methods)**.
+In summary, the Perl Dancer conference was a great time of learning and building community. If I had to wrap it all up in one insight, it would be: **Web App + App**—​that is, your **application should be a compilation of: Plack middleware, Web App (Dancer), and App (Perl classes and methods)**.

@@ -9,7 +9,7 @@ title: Top 7 Funniest Perl Modules
 
 And now for something completely different ...
 
-Programmers in general, and Perl programmers in particular, seem to have excellent, if warped, senses of humor. As a result, the CPAN library is replete with modules that have oddball names, or strange and wonderful purposes, or in some delightful cases—both!
+Programmers in general, and Perl programmers in particular, seem to have excellent, if warped, senses of humor. As a result, the CPAN library is replete with modules that have oddball names, or strange and wonderful purposes, or in some delightful cases—​both!
 
 Let’s take a look.
 

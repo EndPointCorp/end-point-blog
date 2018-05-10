@@ -2,7 +2,7 @@
 author: Selvakumar Arumugam
 gh_issue_number: 1069
 tags: angular, conference, containers, mongodb, nodejs, php, cms
-title: Web Development, Big Data and DevOps — OSI Days 2014, India
+title: Web Development, Big Data and DevOps—​OSI Days 2014, India
 ---
 
 This is the second part of an article about the conference [Open Source India](https://opensourceindia.in/osidays/), 2014 was held at Bengaluru, India. The first part is available [here](/blog/2014/11/19/mongodb-and-openstack-osi-days-2014). The second day of the conference started with the same excitement level. I plan to attend talks covering Web, Big Data, Logs monitoring and Docker.
@@ -19,15 +19,15 @@ Sateesh Kavuri of Yodlee spoke about the [MEAN](http://mean.io/) stack which is 
 
 He also provided an overview of each component involved in MEAN Stack.
 
-[MongoDB](https://www.mongodb.org/) — NoSQL database with dynamic schema, in-built aggregation, mapreduce, JSON style document, auto-sharding, extensive query mechanism and high availability.
+[MongoDB](https://www.mongodb.org/)—​NoSQL database with dynamic schema, in-built aggregation, mapreduce, JSON style document, auto-sharding, extensive query mechanism and high availability.
 
-[ExpressJS](http://expressjs.com/) — A node.js framework to provide features to web and mobile applications.
+[ExpressJS](http://expressjs.com/)—​A node.js framework to provide features to web and mobile applications.
 
-[AngularJS](https://angularjs.org/) — seamless bi-directional model with extensive features like services and directives.
+[AngularJS](https://angularjs.org/)—​seamless bi-directional model with extensive features like services and directives.
 
-[Node.js](https://nodejs.org/) — A server side javascript framework with event based programming and single threaded (non blocking I/O with help of request queue).
+[Node.js](https://nodejs.org/)—​A server side javascript framework with event based programming and single threaded (non blocking I/O with help of request queue).
 
-[Sails.js](https://sailsjs.org/) — MEAN Stack provisioner to develop applications quickly.
+[Sails.js](https://sailsjs.org/)—​MEAN Stack provisioner to develop applications quickly.
 
 Finally he demonstrated a MEAN Stack demo application provisioned with help of Sails.js.
 
@@ -51,11 +51,11 @@ ELK Stack = Elasticsearch, LogStash, Kibana. The architecture and the data flow 
 
 <div class="separator" style="clear: both; text-align: center;"><a href="/blog/2015/01/12/web-development-big-data-and-devops-osi/image-2.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="438" src="/blog/2015/01/12/web-development-big-data-and-devops-osi/image-2.png" width="640"/></a></div>
 
-[Elasticsearch](https://www.elastic.co/) — Open source full text search and analytics engine
+[Elasticsearch](https://www.elastic.co/)—​Open source full text search and analytics engine
 
-[Log Stash](https://www.elastic.co/products/logstash) — Open source tool for managing events and logs which has following steps to process the logs
+[Log Stash](https://www.elastic.co/products/logstash)—​Open source tool for managing events and logs which has following steps to process the logs
 
-[Kibana](https://www.elastic.co/products/kibana) — seamlessly works with Elasticsearch and provides elegant user interface with various types of graphs
+[Kibana](https://www.elastic.co/products/kibana)—​seamlessly works with Elasticsearch and provides elegant user interface with various types of graphs
 
 <div class="separator" style="clear: both; text-align: center;"><a href="/blog/2015/01/12/web-development-big-data-and-devops-osi/image-3.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="138" src="/blog/2015/01/12/web-development-big-data-and-devops-osi/image-3.png" width="640"/></a></div>
 
@@ -70,7 +70,7 @@ Apache Spark has certain features in processing the data to deliver the promisin
 - Multistep Directed Acyclic Graph
 - Cached Intermediate Data
 - Resilient Distributed Data
-- Spark Streaming — Adjust batch time to get the near real time data process
+- Spark Streaming—​Adjust batch time to get the near real time data process
 - Implementation of Lambda architecture
 - Graphx and Mlib libraries play an important role
 

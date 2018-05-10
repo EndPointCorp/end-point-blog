@@ -17,8 +17,8 @@ Python has a “batteries included” philosophy. I have used 2 standard librari
 import subprocess
 import shlex
 ```
-- subprocess — Works with additional processes.
-- shlex — Lexical analysis of shell-style syntaxes.
+- subprocess—​Works with additional processes.
+- shlex—​Lexical analysis of shell-style syntaxes.
 
 ### subprocess.popen
 

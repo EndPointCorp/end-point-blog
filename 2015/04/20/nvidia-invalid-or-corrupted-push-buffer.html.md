@@ -5,7 +5,7 @@ tags: linux, liquid-galaxy
 title: 'Nvidia: Invalid or Corrupted Push Buffer Stream'
 ---
 
-As a high-performance video rendering appliance, the Liquid Galaxy requires really good video cards — better than your typical on-board integrated video cards. Despite ongoing attempts by competitors to displace them, Nvidia remains the best choice for high-end video, if you use the proprietary Nvidia driver for Linux.
+As a high-performance video rendering appliance, the Liquid Galaxy requires really good video cards—​better than your typical on-board integrated video cards. Despite ongoing attempts by competitors to displace them, Nvidia remains the best choice for high-end video, if you use the proprietary Nvidia driver for Linux.
 
 In addition to providing regular security and system updates, End Point typically provides advanced remote monitoring of our customers’ systems for issues such as unanticipated application behavior, driver issues, and hardware errors. One particularly persistent issue presents as an error with an Nvidia kernel module.  Unfortunately, relying on proprietary Nvidia drivers so as to maintain an acceptable performance level limits the available diagnostic information and options for resolution.
 

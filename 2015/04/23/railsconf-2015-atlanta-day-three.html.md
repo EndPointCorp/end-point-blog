@@ -2,10 +2,8 @@
 author: Steph Skardal
 gh_issue_number: 1121
 tags: conference, rails
-title: 'RailsConf 2015 — Atlanta: Day Three'
+title: 'RailsConf 2015—​Atlanta: Day Three'
 ---
-
-
 
 Today, [RailsConf](https://railsconf.com/2015/) concluded here in Atlanta. The day started with the reveal of this year’s [Ruby Heroes](http://rubyheroes.com/), followed by a Rails Core panel. Watch the video [here](http://confreaks.tv/videos/railsconf2015-ruby-heroes-awards).
 
