@@ -1,6 +1,7 @@
+author: Piotr Hankiewicz
 gh_issue_number: 1163
 tags: html, javascript
-title: Int’l — JavaScript numbers and dates formatting, smart strings comparison
+title: "Int’l — JavaScript numbers and dates formatting, smart strings comparison"
 ---
 
 <img border="0" src="/blog/2015/10/16/intl-javascript-numbers-and-dates/image-0.png" style="width: 100%;"/>
