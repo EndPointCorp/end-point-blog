@@ -11,7 +11,7 @@ Comparing the schemas of two or more different [Postgres](https://www.postgresql
 
 This works great, but there are some gotchas, especially when dumping [database views](https://www.postgresql.org/docs/current/static/sql-createview.html).
 
-### BACKGROUND
+### Background
 
 First some background as to how this issue was discovered. We have a client that is in the process of upgrading from Postgres 9.2 to the Postgres 9.6 (the latest version as of this writing).
 
@@ -19,7 +19,7 @@ Using the [pg_upgrade program](https://www.postgresql.org/docs/current/static/pg
 
 Thus, we have a very custom program that carefully migrates pieces over, performing some transformations along the way.
 
-### PROBLEM
+### Problem
 
 As a final sanity check, we wanted to make sure the final schema for the upgraded 9.6 database was as identical as possible to the current production 9.2 database schema. When comparing the pg_dump outputs, we quickly encountered a problem with the way that views were represented. Version 9.2 uses a very bare-bones, single-line output, while 9.6 uses a multi-line pretty printed version. Needless to say, this meant that *none* of the views matched when trying to diff the pg_dump outputs.
 
@@ -99,7 +99,7 @@ $ psql vtest -p 5960 -Atc "select pg_get_viewdef('gregtest',true)"
   WHERE pg_class.reltuples = 0::double precision;
 ```
 
-### SOLUTIONS
+### Solutions
 
 When I first ran into this problem, the three solutions that popped into my mind were:
 
@@ -161,6 +161,6 @@ $ diff -s -u <(pg_dump vtest92 -x -p 5960 --schema-only) <(pg_dump vtest -x -p 5
 Files /dev/fd/63 and /dev/fd/62 are identical
 ```
 
-### CONCLUSION
+### Conclusion
 
 Trying to compare schemas across versions can be difficult, so it’s best not to try. Dumping and recreating schemas is a cheap operation, so simply dump them both into the same backend, then do the comparison.

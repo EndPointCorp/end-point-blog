@@ -5,8 +5,6 @@ tags: database, postgres
 title: 'Postgres 9.5: three little things'
 ---
 
- 
-
 <div class="separator" style="clear: both; float:right; padding: .5em .5em 2em 1em; text-align: center;"><a href="/blog/2016/01/28/postgres-95-three-little-things/image-0-big.jpeg" imageanchor="1" style="clear: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" src="/blog/2016/01/28/postgres-95-three-little-things/image-0.jpeg"/></a><br/>
 <small><a href="https://flic.kr/p/nobB5c">Photo</a> by <a href="https://www.flickr.com/photos/tambako/">Tambako the Jaguar</a></small></div>
 
@@ -23,7 +21,6 @@ greg=# reindex schema public;
 ## What seems like five long minutes later...
 REINDEX
 ```
-  
 
 The new syntax uses parenthesis to support VERBOSE and any other future options. If you are familiar with EXPLAIN’s newer options, you may see a similarity. More on the syntax in a bit. Here is the much improved version in action:
 
@@ -43,7 +40,6 @@ DETAIL:  CPU 12.26s/0.05u sec elapsed 19.33 sec.
 INFO:  table "public.foobaz" was reindexed
 REINDEX
 ```
- 
 
 Why not **REINDEX VERBOSE TABLE foobar**? Or even **REINDEX TABLE foobar WITH VERBOSE**? There was a good discussion of this on pgsql-hackers when this feature was being developed, but the short answer is that parenthesis are the correct way to do things moving forward. Robert Haas summed it up well:
 
@@ -76,7 +72,6 @@ Shutdown modes are:
   fast        quit directly, with proper shutdown
   immediate   quit without complete shutdown; will lead to recovery on restart
 ```
- 
 
 In the past, the default was “smart”. Which often means your friendly neighborhood DBA would type **“pg_ctl restart -D data”**, then watch the progress dots slowly marching across the screen, until they remembered that the default mode of “smart” is kind of dumb—​as long as there is one connected client, the restart will not happen. Thus, the DBA had to cancel the command, and rerun it as **“pg_ctl restart -D data -m fast”**. Then they would vow to remember to add the -m switch in next time. And promptly forget to the next time they did a shutdown or restart. :) Now pg_ctl has a much better default. Thanks, Bruce Momjian! 
 
@@ -100,7 +95,6 @@ greg      6784  6773  0 Mar01 ?        00:00:02 postgres: wal writer process
 greg      6785  6773  0 Mar01 ?        00:00:02 postgres: autovacuum launcher process   
 greg      6786  6773  0 Mar01 ?        00:00:07 postgres: stats collector process
 ```
-  
 
 One can adjust the cluster_name inside each postgresql.conf (for example, to “alpha” and “bravo”), and get this:
 
@@ -120,9 +114,6 @@ greg      8593  8583  0 Mar01 ?        00:00:02 postgres: bravo: wal writer proc
 greg      8594  8583  0 Mar01 ?        00:00:02 postgres: bravo: autovacuum launcher process   
 greg      8595  8583  0 Mar01 ?        00:00:07 postgres: bravo: stats collector process
 ```
-  
 
 There are a lot of other things added in Postgres 9.5. I recommend you visit 
 [this page](https://bucardo.org/postgres_all_versions.html#version_9.5) for a complete list, and poke around on your own. A final shout out to all the people that are continually improving the tab-completion of psql. You rock.
-
-

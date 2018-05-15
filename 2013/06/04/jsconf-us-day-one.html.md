@@ -2,14 +2,10 @@
 author: Greg Davidson
 gh_issue_number: 813
 tags: community, conference, css, html, javascript, open-source, tips, tools
-title: "JSConf US 2013 —​ Day One"
+title: "JSConf US 2013 — Day One"
 ---
 
-
-
 <a href="https://www.flickr.com/photos/geigercounter/8951325076/" title="Room With A View by Geiger Counter, on Flickr"><img alt="Room With A View" height="217" src="/blog/2013/06/04/jsconf-us-day-one/image-0.jpeg" width="640"/></a>
-
- 
 
 I attended JSConf in Amelia Island, FL last week. As you can see, the venue was pretty spectacular and the somewhat remote location lent itself very well to the vision set by the conference organizers. Many developers myself included, often find the line between work and play blurring because there is much work to be done, many new open source projects to check out, constant advancements in browser technology, programming languages, you name it. Keeping up with it all is fun but can be challenging at times. While the talks were amazing, the focus and ethos of JSConf as I experienced it was more about people and building on the incredible community we have. I highly recommend attending meetups or conferences in your field if possible.
 
@@ -60,5 +56,3 @@ Angelina suggested several ways to improve your skills. Ask “why?” obsessive
 [Dan Webb](https://twitter.com/danwrong) spoke about [Flight](https://web.archive.org/web/20130520095336/http://twitter.github.io/flight/), a client-side framework developed by the team at Twitter and released this past January. They have been using it to run lots of twitter.com and most of tweetdeck as well. Webb got a laugh out of the room when he recalled the first comment on Hacker News after [Flight was announced](https://web.archive.org/web/20130518044937/http://engineering.twitter.com/2013/01/introducing-flight-web-application.html): “Why not use [Angular](https://angularjs.org/)?”. The motivation behind Flight’s design was to make a “system that’s easy to think about”. This aim was achieved by decoupling components (entirely self-contained).
 
 A Flight component is just a JavaScript object with a reference to a DOM node. The component can be manipulated, trigger events and listen to events (from other components). Applications are constructed by attaching Flight components to pieces of the DOM. Keeping the components independent in this way makes testing very easy. Complexity can be layered on but does not require any additional mental overhead. Dan suggested that Flight’s design and architecture would work very well with Web Components and [Polymer](https://polymer-project.appspot.com/) in future.
-
-

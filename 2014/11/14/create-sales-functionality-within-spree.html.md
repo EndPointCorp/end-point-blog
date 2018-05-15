@@ -5,8 +5,6 @@ tags: ecommerce, rails, spree
 title: Create a sales functionality within Spree 2.3 using Spree fancy
 ---
 
-
-
 ### Introduction
 
 I recently started working with Spree and wanted to learn how to implement some basic features. I focused on one of the most common needs of any e-commerce business—​adding a sale functionality to products. To get a basic understanding of what was involved, I headed straight to the [Spree Developer Guides](https://guides.spreecommerce.org/developer/getting_started_tutorial.html). As I was going through the directions, I realized it was intended for the older Spree version 2.1. This led to me running into a few issues as I went through it using Spree’s latest version 2.3.4. I wanted to share with you what I learned, and some tips to avoid the same mistakes I made.
@@ -286,8 +284,6 @@ end
 
 ### Deface overrides
 
- 
-
 Next we need to add a field to our product admin page, so we don’t have to always go through the rails console to update a product’s sale_price. If we directly override the view that Spree provides, whenever Spree updates the view in a new release, the updated view will be lost, so we’d have to add our customizations back in to stay up to date.
 
 A better way to override views is to use Deface, which is a Rails library to directly edit the underlying view file. All view customizations will be in ONE location: app/overrides which will make sure your app is always using the latest implementation of the view provided by Spree.
@@ -329,8 +325,6 @@ end
 
 Now you can check to see if it worked by heading to http://localhost:3000/admin/products and you should edit one of the products. Once you’re on the product edit page, you should see a new field container called SALE PRICE. Add a sale price in the empty field and click on update. Once completed, navigate to http://localhost:3000/sale to find an updated list of products on sale.
 
-### CONCLUSION
+### Conclusion
 
 Congratulations, you’ve created the sales functionality! If you’re using Spree 2.3 to create a sales functionality for your application, I would love to know what your experience was like. Good luck!
-
-

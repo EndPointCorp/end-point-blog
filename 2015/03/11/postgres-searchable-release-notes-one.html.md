@@ -27,5 +27,3 @@ Here’s a screenshot showing the bottom of the table of contents, and some of t
 The name replacements took the most time, as some required a good bit of detective work. Most were unambiguous: “Tom” became “Tom Lane”, “Bruce” became “Bruce Momjian”, and so on. For the final document, 3781 name replacements were performed! Some of the trickier ones were “Greg”—​both myself (“Greg Sabino Mullane”) and “Greg Stark” had single-name entries. Similar problems popped up with “Ryan”, and with “Peter” *not* being the familiar Peter Eisentraut (but Peter T. Mount) threw me off for a second. The only one I was never able to figure out was “Clark”, who is attributed (via Bruce) with “Fix tutorial code” in version 6.5. Pointers or corrections welcome.
 
 Hopefully this page will be of use to others. It’s a very large page, but not remarkably wasteful of space,  like many HTML pages these days. Perhaps some of the changes will make their way to the official docs over time.
-
-

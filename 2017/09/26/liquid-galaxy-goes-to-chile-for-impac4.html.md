@@ -5,8 +5,6 @@ tags: conference, liquid-galaxy
 title: Liquid Galaxy Goes to Chile for IMPAC4
 ---
 
-
-
 <div class="separator" style="clear: both; text-align: center;"><a href="/blog/2017/09/26/liquid-galaxy-goes-to-chile-for-impac4/image-0.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="139" data-original-width="530" height="84" src="/blog/2017/09/26/liquid-galaxy-goes-to-chile-for-impac4/image-0.png" width="320"/></a></div>
 
 Marine Protected Areas: Bringing the people and ocean together
@@ -36,7 +34,7 @@ Aside from showcasing this curated content, the Liquid Galaxy served as a compre
 
 <table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container" style="margin-left: auto; margin-right: auto; text-align: center;"><tbody>
 <tr><td><a href="/blog/2017/09/26/liquid-galaxy-goes-to-chile-for-impac4/image-2-big.jpeg" imageanchor="1" style="margin-left: auto; margin-right: auto;"><img border="0" data-original-height="900" data-original-width="1600" height="500" src="/blog/2017/09/26/liquid-galaxy-goes-to-chile-for-impac4/image-2.jpeg" width="860"/></a></td></tr>
-<tr><td class="tr-caption" style="font-size: 12.8px;">Liquid Galaxy at IMPAC4 —​ La Serena, Chile 2017</td></tr>
+<tr><td class="tr-caption" style="font-size: 12.8px;">Liquid Galaxy at IMPAC4 — La Serena, Chile 2017</td></tr>
 </tbody></table>
 
 The Liquid Galaxy platform is featured in museums and aquariums around the world, and we are thrilled that it is being used as a tool to study and conserve oceans and nature. We recently had the opportunity to participate in [The Ocean Conference at the United Nations](/blog/2017/06/19/liquid-galaxy-at-ocean-conference), and are excited the system continues to be utilized to study and prevent future detrimental changes to our planet. We hope to have more opportunities to create content geared toward nature conservation, as well as opportunities to share the Liquid Galaxy with environmentalists so that the system will continue be used as a tool for visualizing research data in new and interesting ways.

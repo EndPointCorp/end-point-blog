@@ -5,8 +5,6 @@ tags: database, postgres
 title: Postgres checksum performance impact
 ---
 
-
-
 <div class="separator" style="clear: both; float: right; text-align: center;"><a href="/blog/2015/12/31/postgres-checksum-performance-impact/image-0-big.jpeg" imageanchor="1" style="clear: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" src="/blog/2015/12/31/postgres-checksum-performance-impact/image-0.jpeg"/></a><br/><small>Another <a href="https://flic.kr/p/BGxbqv">Tequila Sunrise</a> by <a href="https://www.flickr.com/photos/cq-biker/">T.Kiya</a></small></div>
 
 Way back in 2013, [Postgres](https://www.postgresql.org/) introduced a feature known as data checksums. 
@@ -166,9 +164,4 @@ amounts of inserts and updates, and higher if your database doesn’t fit at all
 into shared buffers. All in all, a worthy trade-off. If you want some precise performance 
 impact figures, you will need to do A/B testing with your database and application.
 
- 
-
-To sum this page up (ha!), enable those checksums! It’s worth the one-time cost of not being 
-able to use pg_upgrade, and the ongoing cost of a little more CPU. Don’t wait 
-for your corruption to get so bad the system catalogs start getting confused—​
-find out the moment a bit gets flipped.
+To sum this page up (ha!), enable those checksums! It’s worth the one-time cost of not being able to use pg_upgrade, and the ongoing cost of a little more CPU. Don’t wait for your corruption to get so bad the system catalogs start getting confused—​find out the moment a bit gets flipped.

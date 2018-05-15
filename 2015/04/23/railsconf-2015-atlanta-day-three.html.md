@@ -21,5 +21,3 @@ One interesting talk I attended was [See You on The Trail](http://confreaks.tv/v
 There was a Trailblazer demo during the talk, but as I mentioned above, the takeaway for me here is that rather than focus on the specific technical implementation at this point, this buzzworthy topic of microservices is more about good code organization and conventions for increasingly complex applications, that encourages readability and maintenance on the development side.
 
 I went to a handful of other decent talks today and will include a summary of my RailsConf experience sharing links to popular talks on this blog.
-
-

@@ -448,5 +448,3 @@ So finally we get the following pipeline:
 1. Run final integration tests on the stack
 
 Elapsed time—​between 40 and 50 minutes.
-
-

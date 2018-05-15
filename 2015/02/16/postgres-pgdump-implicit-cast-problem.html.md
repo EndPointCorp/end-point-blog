@@ -39,5 +39,3 @@ psql casting_test2 -xtc 'select 123::text = 123::int'
 ```
 
 Yay, it works! Thanks, Tom, for commit [9feefedf9e92066fa6609d1e1e17b4892d81716f](https://git.postgresql.org/gitweb/?p=postgresql.git;a=commitdiff;h=9feefedf9e92066fa6609d1e1e17b4892d81716f)). The fix even got back-patches, which means it will appear in Postgres version 9.5, but also versions 9.4.2, 9.3.7, 9.2.11, 9.1.16, and 9.0.20. However, does this mean that pg_dump is logically complete, or are there similar dangers lurking like eels below the water in the source code for pg_dump? You will be happy to learn that I could find no other exceptions inside of src/bin/pg_dump/pg_dump.c. While there are still many place in the code where an object can be excluded, it’s all done for valid and expected reasons, such as not dumping a table if the schema it is in is not being dumped as well.
-
-

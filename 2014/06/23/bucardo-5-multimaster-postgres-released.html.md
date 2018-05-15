@@ -5,8 +5,6 @@ tags: bucardo, database, postgres, replication
 title: Version 5 of Bucardo database replication system
 ---
 
-
-
 <div class="separator" style="clear: both; float:right; text-align: center;"><a href="/blog/2014/06/23/bucardo-5-multimaster-postgres-released/image-0.jpeg" imageanchor="1" style="clear: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" src="/blog/2014/06/23/bucardo-5-multimaster-postgres-released/image-0.jpeg" width="350"/></a>
 <br/><small><a href="https://flic.kr/p/6GYFk5">Goat & Kid</a> by Flickr user <a href="https://www.flickr.com/photos/bala_/">Bala Sivakumar</a></small></div>
 
@@ -216,5 +214,3 @@ over the years who have contributed code, raised bugs, tested Bucardo out,
 and asked (and/or answered!) important questions. Please see the [Changes](https://github.com/bucardo/bucardo/blob/master/Changes) file 
 for a partial list. Thanks to all of you, and special thanks to Jon Jensen, who started 
 this whole project, many moons ago.
-
-

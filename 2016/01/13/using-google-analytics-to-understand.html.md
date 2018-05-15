@@ -13,13 +13,13 @@ With Google Analytics, you have the ability to see traffic from all channels. Th
 
 <div class="separator" style="clear: both; text-align: center;"><a href="/blog/2016/01/13/using-google-analytics-to-understand/image-1-big.png" imageanchor="1" style="clear: right; float: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" src="/blog/2016/01/13/using-google-analytics-to-understand/image-1.png"/></a></div>
 
-- Organic —​ traffic from search engines which is not paid for
-- Paid Search —​ visitors that clicked on one of your paid advertisements (also known as Pay-Per-Click or PPC)
-- Direct —​ visitors that typed your website address directly into the browser (includes bookmarks)
-- Social —​ traffic from sites that are considered to be social networking sites
-- Referral —​ visitors that arrived from 3rd party referrals
-- Email —​ visitors that are directed from an email
-- Display —​ visitors directed from video and display advertising
+- Organic — traffic from search engines which is not paid for
+- Paid Search — visitors that clicked on one of your paid advertisements (also known as Pay-Per-Click or PPC)
+- Direct — visitors that typed your website address directly into the browser (includes bookmarks)
+- Social — traffic from sites that are considered to be social networking sites
+- Referral — visitors that arrived from 3rd party referrals
+- Email — visitors that are directed from an email
+- Display — visitors directed from video and display advertising
 
 It will be helpful to walk through an example. Say you launch an email marketing campaign, and want to understand how your audience responded to your content. First, you can check how many people clicked the ad to come to your website. From there, you can see how they navigated the page. Who came to the webpage? Did they take the actions you were hoping they would take? How long did they spend viewing the page? Where did they click? Did this click lead to a conversion/sale?
 

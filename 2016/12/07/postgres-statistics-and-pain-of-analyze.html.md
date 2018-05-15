@@ -5,8 +5,6 @@ tags: postgres
 title: Postgres statistics and the pain of analyze
 ---
 
-
-
 <div class="separator" style="clear: both; text-align: center; float:right"><a href="/blog/2016/12/07/postgres-statistics-and-pain-of-analyze/image-0.jpeg" imageanchor="1" style="clear: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" src="/blog/2016/12/07/postgres-statistics-and-pain-of-analyze/image-0.jpeg"/></a>
 <br/><small>(<a href="https://flic.kr/p/k1jVuw">Photo</a> by <a href="https://www.flickr.com/photos/marfis75/">marfis75 on flickr</a>)</small></div>
 
@@ -206,5 +204,3 @@ $ psql -qc 'alter system reset default_statistics_target' -qc 'select pg_reload_
 In summary, don’t trust the given vacuumdb suggestions for a post-upgrade analyze. 
 Instead, remove any per-column statistics, run it in parallel, and do whatever 
 stages make sense for you.
-
-

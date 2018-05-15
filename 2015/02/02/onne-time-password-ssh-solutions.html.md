@@ -62,5 +62,3 @@ perl -ni -e 'print unless /^\d\d\d\S/ and ! $x++' ~/.otpw
 We do an in‑place edit (**-i**) of the .otpw file, looping through a line at a time (**-n**), and run a command against each line (**-e ...**). The first time we find a line that starts with three numbers and then contains non‑whitespace, we skip it. Everything else is printed and thus goes back into the file.
 
 Those are some ways to handle three of the common problems that can occur when using one‑time passwords. Have other problems, or better solutions to the above? Let me know in the comments.
-
-

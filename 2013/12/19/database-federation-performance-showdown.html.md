@@ -5,8 +5,6 @@ tags: database, java, performance, postgres
 title: Database federation performance showdown
 ---
 
-
-
 <div class="separator" style="clear: left; float: left; margin-bottom: 1em; margin-right: 1em;"><a href="https://www.flickr.com/photos/garryknight/" imageanchor="1"><img border="0" src="/blog/2013/12/19/database-federation-performance-showdown/image-0.jpeg"/></a><p align="center"><small>Flickr user <a href="https://www.flickr.com/photos/garryknight/">garryknight</a></small></p></div>
 
 The [PostgreSQL Foreign Data Wrapper](https://www.postgresql.org/docs/9.3/static/postgres-fdw.html) has gotten a fair bit of attention since its release in PostgreSQL version 9.3. Although it does much the same thing the [dblink](https://www.postgresql.org/docs/9.3/static/dblink.html) contrib module has long done, it is simpler to implement for most tasks and reuses the same foreign data wrapper infrastructure employed by several other contrib modules. It allows users to “federate” distinct PostgreSQL databases; that is, it allows them to work in combination as though they were one database. This topic of database federation has interested me for some time—​I [wrote about it](/blog/2010/07/29/distributed-transactions-and-two-phase) a couple years ago—​and when postgres_fdw came out I wanted to see how it compared to the solution I used back then.
@@ -45,5 +43,3 @@ The results show that for small transactions, postgres_fdw performs much better.
 <div class="separator" style="clear: both; text-align: center;"><a href="/blog/2013/12/19/database-federation-performance-showdown/image-2-big.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="/blog/2013/12/19/database-federation-performance-showdown/image-2.png"/></a></div>
 
 All in all, it doesn’t surprise me that postgres_fdw would be faster than Bitronix for small and medium-sized transactions. Being more tightly coupled to PostgreSQL, it has a faster path to get done what it wants to do, and in particular, isn’t restricted to using two-phase commit, which is generally considered slow. I was surprised, however, to see that Bitronix managed to catch up for very large transactions.
-
-

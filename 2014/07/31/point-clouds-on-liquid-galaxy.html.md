@@ -5,8 +5,6 @@ tags: graphics, liquid-galaxy
 title: Point Clouds on the Liquid Galaxy
 ---
 
-
-
 <div class="separator" style="clear: both; text-align: center;"><a href="/blog/2014/07/31/point-clouds-on-liquid-galaxy/image-0.jpeg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="262" src="/blog/2014/07/31/point-clouds-on-liquid-galaxy/image-0.jpeg" width="400"/></a><p><small>Image by <a href="http://commons.wikimedia.org/wiki/User:Stoermerjp">Stoermerjp</a>, unmodified <a href="http://creativecommons.org/licenses/by-sa/3.0/">(CC BY-SA 3.0)</a></small></p></div>
 
 The Liquid Galaxy began as a system to display geographic data through Google Earth, but it has expanded quickly as a display platform for other types of information. We’ve used Liquid Galaxies for panoramic images and video, three dimensional models of all sorts, as well as time-lapse renderings of weather, infrastructure, and economic data. Now we’ve added support for a new type of data, the [point cloud](https://en.wikipedia.org/wiki/Point_cloud).
@@ -22,5 +20,3 @@ This marks the debut of a simple three.js extension we’ve been working on, whi
 With that introduction, please enjoy this demonstration.
 
 <iframe allowfullscreen="" frameborder="0" height="315" src="//www.youtube.com/embed/GiWjUI97viQ" width="560"></iframe>
-
-

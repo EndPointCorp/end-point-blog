@@ -2,7 +2,7 @@
 author: Kamil Ciemniewski
 gh_issue_number: 1210
 tags: functional-programming, haskell, programming
-title: Strict typing fun example —​ Free Monads in Haskell
+title: Strict typing fun example — Free Monads in Haskell
 ---
 
 From time to time I’ve got a chance to discuss different programming paradigms with colleagues. Very often I like steering the discussion into the programming languages realm as it’s something that interests me a lot.
@@ -233,8 +233,8 @@ Also, the similarity to the [Interpreter Pattern](https://en.wikipedia.org/wiki/
 
 If I managed to make you a bit curious about the aspects I presented here, here are some of the resources you might want to take a look at:
 
-- [Learn You a Haskell —​ online book](http://learnyouahaskell.com/chapters)
-- [Real World Haskell —​ online book](http://book.realworldhaskell.org/read/)
+- [Learn You a Haskell — online book](http://learnyouahaskell.com/chapters)
+- [Real World Haskell — online book](http://book.realworldhaskell.org/read/)
 - [A pleasant visual tutorial about functors and monads](http://adit.io/posts/2013-04-17-functors,_applicatives,_and_monads_in_pictures.html)
 - [Haskell Wiki article on monads](https://wiki.haskell.org/Monad)
 - [A fantastic intro to the Free Monad pattern](http://programmers.stackexchange.com/questions/242795/what-is-the-free-monad-interpreter-pattern)

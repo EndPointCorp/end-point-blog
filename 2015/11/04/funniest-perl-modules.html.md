@@ -5,8 +5,6 @@ tags: perl
 title: Top 7 Funniest Perl Modules
 ---
 
-
-
 And now for something completely different ...
 
 Programmers in general, and Perl programmers in particular, seem to have excellent, if warped, senses of humor. As a result, the CPAN library is replete with modules that have oddball names, or strange and wonderful purposes, or in some delightful cases—​both!
@@ -73,5 +71,3 @@ use your qw($wits %head @tools);
 Here the name is the funny bit; the module itself is all business.
 
 Well, that seems like enough to get you started. If you find others, post them here in the comments!
-
-

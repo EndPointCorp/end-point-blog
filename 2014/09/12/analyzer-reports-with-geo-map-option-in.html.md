@@ -5,16 +5,15 @@ tags: gis, pentaho, postgres, reporting
 title: Analyzer Reports with Geo Map Option in Pentaho 5 BI Server
 ---
 
-
 The “Geo Map” option in Analyzer Reports provides a feature to visualize data with geographic locations. We will learn how to design a Mondrian schema and configure Pentaho to make use of the “Geo Map” feature in the Analyzer Reports. This article will show us how to set this feature up step by step.
 
 ### **Enable Geo Map feature on Geographic fields in Mondrian Schema**
 
 The Mondrian schema has two main categories called Dimensions and Measures. The Dimensions are defined as levels in the Mondrian schema. The Geographic fields should have two additional annotations to use Geo Map. The two annotations are:
 
-1. Data.Role —​ defines the type of level generally; for this type of node, this must be set to ‘Geography’.
+1. Data.Role — defines the type of level generally; for this type of node, this must be set to ‘Geography’.
 
-2. Geo.Role —​ defines the geographical classification in a hierarchy. These can be either predefined roles (‘country’, ‘state’, ‘city’, ‘postalcode’) or custom roles.
+2. Geo.Role — defines the geographical classification in a hierarchy. These can be either predefined roles (‘country’, ‘state’, ‘city’, ‘postalcode’) or custom roles.
 
 #### Sample Level with Annotation:
 
@@ -101,5 +100,3 @@ Change the report type to “Geo Map” through the right top corner options to 
 
 <div class="separator" style="clear: both; text-align: center;">
 <a href="/blog/2014/09/12/analyzer-reports-with-geo-map-option-in/image-5.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="220" src="/blog/2014/09/12/analyzer-reports-with-geo-map-option-in/image-5.png" width="640"/></a></div>
-
-

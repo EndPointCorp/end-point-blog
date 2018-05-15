@@ -5,14 +5,9 @@ tags: mediawiki
 title: MediaWiki major upgrade process
 ---
 
-
-
 <div class="separator" style="clear: both; float:right; text-align: center;"><a href="/blog/2016/01/13/mediawiki-major-upgrade-process/image-0-big.jpeg" id="jA0ECgMCAgq+j/dF5fVg0p8B+8AMgSoFokDOSe5KCFaxWZJhpt3VCeVufE4QxYsVo4JdJsN/neWFX+7wvaOGwJ4PWGvCJkIhTWbhp40tAbTL4uxmK3Qn7vru5vFtQvwJab4uSmKNp+lG4rTqWrHU2gi0wLlpFCKQ7WabVQ5cAdwwUInGP/13zrBj9J0Cg9FAZVjb5M9qFDNl6kip6Gg8dl5IXp+PKyhRd09Nng4yBKM==zRAb" imageanchor="1" style="clear: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" src="/blog/2016/01/13/mediawiki-major-upgrade-process/image-0.jpeg"/></a><br/><small><a href="https://flic.kr/p/26krAr">Flower photo</a> by <a href="https://www.flickr.com/photos/mayrace/">May Race</a></small></div>
 
-Keeping your MediaWiki site up to date with the latest version is, like many sysadmin tasks, 
-a never-ending chore. In a previous article I covered how to [
-upgrade minor revisions of MediaWiki with patches.](/blog/2014/10/02/mediawiki-minor-upgrade-with-patches) In this one, I’ll cover 
-my solution to doing a “major” upgrade to MediaWiki. While the [official upgrade instructions](https://www.mediawiki.org/wiki/Manual:Upgrading) are good, they don’t cover everything.
+Keeping your MediaWiki site up to date with the latest version is, like many sysadmin tasks, a never-ending chore. In a previous article I covered how to [upgrade minor revisions of MediaWiki with patches.](/blog/2014/10/02/mediawiki-minor-upgrade-with-patches) In this one, I’ll cover my solution to doing a “major” upgrade to MediaWiki. While the [official upgrade instructions](https://www.mediawiki.org/wiki/Manual:Upgrading) are good, they don’t cover everything.
 
 MediaWiki, like Postgres, uses a three-section version number in which the first two 
 numbers combined give the major version, and the number on the end the revision of 
@@ -31,8 +26,8 @@ going from version 1.25.3 to 1.26.2
 ### Preparation
 
 Before making any changes, make sure everything is up to date in 
-[git](https://rogerdudler.github.io/git-guide/). You do have your MediaWiki 
-site controlled by git, right? If not, go do so right now. Then check you are on the main branch 
+[Git](https://rogerdudler.github.io/git-guide/). You do have your MediaWiki 
+site controlled by Git, right? If not, go do so right now. Then check you are on the main branch 
 and have no outstanding changes. It should look like this:
 
 ```
@@ -208,5 +203,3 @@ That’s the end of the major upgrade for MediaWiki! Hopefully in the future the
 be better designed (I have ideas on that—​but that’s the topic of another article). One final check you can do is to 
 open a screen and tail -f the httpd error log for your site. After the upgrade, this is a helpful 
 way to spot any issues as they come up.
-
-

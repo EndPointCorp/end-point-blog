@@ -107,6 +107,3 @@ elsif (txn_status == IN_TRANSACTION) {
 ```
 
 While there is there some overhead in constantly creating and tearing down so many savepoints, it is quite small, especially if you are using it in an interactive session. This ability to automatically roll things back is especially powerful when you remember that Postgres can roll everything back, including DDL (e.g. CREATE TABLE). Certain other expensive database systems [do not play well when mixing DDL and transactions](https://wiki.postgresql.org/wiki/Transactional_DDL_in_PostgreSQL:_A_Competitive_Analysis).
-
- 
-

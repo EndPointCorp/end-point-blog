@@ -11,7 +11,7 @@ The only way to install Postgres without root privileges, in home directory, is 
 
 ### Download Sources
 
-First of all you need to download sources. I use Github for getting the latest sources. There is [Postgres Github mirror](https://github.com/postgres/postgres). I clone that, but you could just download [zip file](https://github.com/postgres/postgres/archive/master.zip).
+First of all you need to download sources. I use GitHub for getting the latest sources. There is a [Postgres GitHub mirror](https://github.com/postgres/postgres). I clone that, but you could just download [zip file](https://github.com/postgres/postgres/archive/master.zip).
 
 Unpack it somewhere, and you have the Postgres sources you need.
 
@@ -21,10 +21,10 @@ For compiling Postgres you will need some libraries and programs. The complete l
 
 I’m using Ubuntu, the packages I use for compiling Postgres are:
 
-- gcc—​C compiler
-- libreadline6, libreadline6-dev—​readline support
-- zlib1g, zlib1g-dev—​compression library used internally by Postgres
-- libpython2.7, libpython2.7-dev—​for compiling with plPython support
+- gcc — C compiler
+- libreadline6, libreadline6-dev — readline support
+- zlib1g, zlib1g-dev — compression library used internally by Postgres
+- libpython2.7, libpython2.7-dev — for compiling with PL/Python support
 
 If you are using different system, or different system/Postgres version, then your packages/libraries can be named differently.
 

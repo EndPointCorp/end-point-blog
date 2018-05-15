@@ -2,7 +2,7 @@
 author: Greg Hanson
 gh_issue_number: 1155
 tags: css, design, html, interchange, javascript
-title: Old Dog & New Tricks —​ Giving Interchange a New Look with Bootstrap
+title: Old Dog & New Tricks — Giving Interchange a New Look with Bootstrap
 ---
 
 ### Introduction

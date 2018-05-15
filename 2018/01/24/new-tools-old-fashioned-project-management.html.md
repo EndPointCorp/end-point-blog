@@ -1,6 +1,6 @@
 ---
 author: Elizabeth Garrett Christensen
-title: New Tools —​ Old-Fashioned Project Management 
+title: New Tools — Old-Fashioned Project Management
 tags: management
 gh_issue_number: 1371
 ---

@@ -5,8 +5,6 @@ tags: postgres
 title: Postgres migration speedup with table change analysis
 ---
 
-
-
 <div class="separator" style="clear: both; float: right; text-align: center;"><a href="/blog/2016/06/13/postgres-migration-speedup-with-table/image-0.jpeg" imageanchor="1" style="clear: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" src="/blog/2016/06/13/postgres-migration-speedup-with-table/image-0.jpeg"/></a><br/><small>(A Unicode rabbit face 🐰 will never be as cute <br/>as this real bunny. <a href="https://flic.kr/p/6stdw2">Photo</a> by <a href="https://www.flickr.com/photos/wsimmons/">Wade Simmons</a>)</small></div>
 
 One of our clients recently reached out to us for help in upgrading their 
@@ -199,5 +197,3 @@ There were several other tricks used to speed up the final migration, but
 being able to remove the UTF-8 conversion of the first table, and being able 
 to pre-copy 99% of the second table accounted for the lion’s share of the 
 final speed improvements.
-
-

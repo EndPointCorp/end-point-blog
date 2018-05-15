@@ -5,8 +5,6 @@ tags: mediawiki
 title: MediaWiki complete test wiki via cloning
 ---
 
-
-
 <div class="separator" style="clear: both; float:right; padding-left: 2em; padding-bottom: 1em; text-align: center;"><a href="/blog/2015/06/06/mediawiki-complete-test-wiki-via-cloning/image-0-big.jpeg" imageanchor="1" style="clear: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" id="jA0EAgMCshiJ2sWFNg5gyVkDpsZvh+IoZdIClG04/TSA8gqRN8ct" src="/blog/2015/06/06/mediawiki-complete-test-wiki-via-cloning/image-0.jpeg"/></a><br/><small><a href="https://flic.kr/p/eavCXg">Liska</a> by <a href="https://www.flickr.com/photos/tambako/">Tambako The Jaguar</a></small></div>
 
 Being able to create a quick copy of your [MediaWiki](https://www.mediawiki.org/wiki/MediaWiki) site is an important skill that has many benefits. Any time you are testing an upgrade, whether major or [minor](/blog/2014/10/02/mediawiki-minor-upgrade-with-patches), it is great to be able to perform the upgrade on a test site first. Tracking down bugs becomes a lot easier when you can add all the debugging statements you need and not worry about affecting any of the users of your wiki. Creating and modifying extensions also goes a lot smoother when you can work with an identical copy of your production wiki. I will outline the steps I use to create such a copy, also known as a "test wiki".
@@ -161,5 +159,3 @@ Alias /testwiki /var/www/test_mediawiki/index.php
 
 Reload the web server, and Bob’s your uncle. You now have a fully functional, safely sandboxed, magnificently marked-up 
 copy of your production wiki. The above may seem like a lot of work, but this was an overly-detailed post—​the actual work only takes around 10 minutes (or much less if you script it!)
-
-

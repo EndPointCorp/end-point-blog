@@ -5,8 +5,6 @@ tags: sysadmin
 title: DNS and BIND Training with MyNIC
 ---
 
-
-
 This is yet another yesteryear’s story!
 
 I had a chance to attend a DNS/Bind training which was organized by Malaysia’s domain registry [(MyNIC)](https://www.mynic.my/en/). The training took two days and was organized in Bangi, Selangor, Malaysia. Dated November 23 to 24, 2015, the two days’ training was packed with technical training for the Domain Name System (DNS) using BIND software. Our trainer was Mr Amir Haris, who is running his own DNS specialist company named [Localhost Sendirian Berhad](http://www.localhost.my/) (Sendirian Berhad is equivalent to “Private Limited”).
@@ -97,5 +95,3 @@ In conclusion we were pretty much exposed to the introductory part of DNS. Hones
 At End Point we are experienced hosting our own and clients’ DNS service using BIND (including in more exotic split-horizon setups) and nsd, and using common SaaS DNS providers such as UltraDNS, SoftLayer, Amazon Web Services Route 53, Hurricane Electric, etc.
 
 DNS has largely become an unseen commodity service to Internet users in general, but that makes it all the more important to have skill handling DNS changes safely, and due to the occasional need for unusual configurations and coping with DDoS attacks such as the recent major attack on Dyn.
-
-

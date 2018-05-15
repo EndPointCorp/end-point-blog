@@ -2,7 +2,7 @@
 author: Selvakumar Arumugam
 gh_issue_number: 1330
 tags: java, tls
-title: PKIX path validation failed —​ Debugging
+title: PKIX path validation failed — Debugging
 ---
 
 I recently ran into a case working on an application with a PKIX path validation error on a site that had a valid certificate. I was able to solve the issue using OpenSSL to debug.
@@ -31,7 +31,7 @@ Exception: javax.net.ssl.SSLHandshakeException:
 sun.security.validator.ValidatorException: PKIX path validation failed:
 java.security.cert.CertPathValidatorException: timestamp check failed
 ```
-PKIX (Public-Key Infrastructure —​ X.509) is standard for key based encryption mechanism. The PKIX path related errors come up due to the failure establishing the connection with SSL applications.
+PKIX (Public-Key Infrastructure — X.509) is standard for key based encryption mechanism. The PKIX path related errors come up due to the failure establishing the connection with SSL applications.
 
 ### Debug
 

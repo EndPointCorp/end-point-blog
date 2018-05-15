@@ -5,8 +5,6 @@ tags: ruby, rails
 title: 'Updating rbenv, ruby-build on Ubuntu: ruby version not found'
 ---
 
-
-
 *Hi! Steph here, former long-time End Point employee now blogging from afar as a software developer for [Pinhole Press](https://pinholepress.com/). While I’m no longer an employee of End Point, I’m happy to blog and share here.*
 
 A while back, I was in the middle of upgrading [Piggybak](https://github.com/piggybak/piggybak), an open source Ruby on Rails platform developed and supported by End Point, and I came across a quick error that I thought I’d share.
@@ -27,6 +25,4 @@ cd ~/.rbenv/plugins/ruby-build/
 git pull
 ```
 
-And tada—​that was all that was needed. rbenv version -l now includes ruby 2.1.1, and I can install it with rbenv install 2.1.1.
-
-
+And tada—​that was all that was needed. `rbenv version -l` now includes ruby 2.1.1, and I can install it with `rbenv install 2.1.1`.

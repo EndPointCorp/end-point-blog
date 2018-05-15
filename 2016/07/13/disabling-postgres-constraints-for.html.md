@@ -5,8 +5,6 @@ tags: postgres
 title: Disabling Postgres constraints for pg_dump
 ---
 
-
-
 <div class="separator" style="clear: both; float: right; text-align: center;"><a href="/blog/2016/07/13/disabling-postgres-constraints-for/image-0-big.jpeg" imageanchor="1" style="clear: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" height="214" id="jA0EBAMChzm+tKZB3H1gyTmVfCRHS4otffhMjrBmP9+8cv7edF+qqTG1SnC7KYRpMDHK8xT+Wlq8Qnv0JM23KZ5BBFn6NeMLcjo==wAGQ" src="/blog/2016/07/13/disabling-postgres-constraints-for/image-0.jpeg" width="320"/></a><br/><small><a href="https://flic.kr/p/ieEvjB">Photo</a> by <a href="https://www.flickr.com/photos/joceykinghorn/">Jocelyn Kinghorn</a></small></div>
 
 Constraints in [Postgres](https://www.postgresql.org/) are very powerful and versatile: 
@@ -186,5 +184,3 @@ command!).
 While there is no direct way to disable constraints when loading data, using this pre-data to 
 post-data trick can not only boost data load times, but get you out of a potential jam when 
 your data is invalid!
-
-

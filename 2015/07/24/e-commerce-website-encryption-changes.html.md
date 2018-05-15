@@ -94,7 +94,7 @@ PCI DSS will require client applications to stop using TLS 1.0 also, which may m
 ### Reference
 
 - “SSL and early TLS are no longer considered to be strong cryptography and cannot be used as a security control after June 30, 2016. Prior to this date, existing implementations that use SSL and/or early TLS must have a formal Risk Mitigation and Migration Plan in place. Effective immediately, new implementations must not use SSL or early TLS.” ―Sections 2.2.3, 2.3, 4.1 of [PCI DSS 3.1](https://www.pcisecuritystandards.org/documents/PCI_DSS_v3-1.pdf)
-- [How’s My SSL?](https://www.howsmyssl.com/) —​ tells you how secure your TLS client is
-- [Qualys SSL Labs client test](https://www.ssllabs.com/ssltest/viewMyClient.html) —​ a different client test
-- [Qualys SSL Labs server test](https://www.ssllabs.com/ssltest/index.html) —​ very useful, and shows client compatibility with a server’s configuration
-- [linuxlifecycle.com —​ Support Life Cycles for Enterprise Linux Distributions](http://linuxlifecycle.com/)
+- [How’s My SSL?](https://www.howsmyssl.com/) — tells you how secure your TLS client is
+- [Qualys SSL Labs client test](https://www.ssllabs.com/ssltest/viewMyClient.html) — a different client test
+- [Qualys SSL Labs server test](https://www.ssllabs.com/ssltest/index.html) — very useful, and shows client compatibility with a server’s configuration
+- [linuxlifecycle.com — Support Life Cycles for Enterprise Linux Distributions](http://linuxlifecycle.com/)

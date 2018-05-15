@@ -5,8 +5,6 @@ tags: postgres, sysadmin
 title: Downstream Implications of Data Page Checksums
 ---
 
-
-
 Now that Postgres 9.3 is all the rage, page checksums are starting to see use in production. It’s not enabled by default during initdb, so you may want to double check the options used when you upgraded.
 
 What? You have already upgraded to 9.3, right? No? Oh well, when you do get around to updating, keep an eye out for initdb’s --data-checksums option, or just -k. To give the feature a try on my development desktop, after the initdb I created a table and loaded in some text data. Small text strings are being cast from integers so we can more easily see it in the on-disk structure. You’ll see why in a moment. The table was loaded with a good amount of data, at least more than my shared_buffers setting:
@@ -131,5 +129,3 @@ UPDATE 1
 ```
 
 Voila! Corruption fixed without even having to take the database down.
-
-

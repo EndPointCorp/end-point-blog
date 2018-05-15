@@ -113,8 +113,8 @@ def save_objects_one_transaction(count=MAX_COUNT):
 
 I ran the tests multiple times, truncating the table each time. The average results of saving 10k objects were quite predictable:
 
-- Multiple transactions —​ 268 seconds
-- One transaction —​ 25 seconds
+- Multiple transactions — 268 seconds
+- One transaction — 25 seconds
 
 The difference is not surprising, the whole table size is 4.8MB, but after each transaction the database needs to write the
 changes on disk, which slows the procedure a lot.
@@ -140,8 +140,8 @@ def serialize_post_to_out_stream(post, out):
 
 The function above gets two parameters:
 
-- post —​ the object to be serialized
-- out —​ the output stream where the row with the post object will be saved, in Python it is a file-like object, so an
+- post — the object to be serialized
+- out — the output stream where the row with the post object will be saved, in Python it is a file-like object, so an
 object with all the functions a file object has
 
 Here I use a standard csv module, which supports reading and writing csv files. I really don’t want to write my own

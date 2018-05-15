@@ -5,8 +5,6 @@ tags: ssh, sysadmin
 title: Scripting ssh master connections
 ---
 
-
-
 <a href="http://www.flickr.com/photos/pennstatelive/4947288981/" title="Elephant Parade 005 by pennstatenews, on Flickr"><img alt="Elephant Parade 005" height="138" src="/blog/2014/03/17/scripting-ssh-master-connections/image-0.jpeg" width="240"/></a>
 
 At End Point, security is a top priority. We just phased out the last of the 1024-bit keys for all of our employees—​those of us in ops roles that have keys lots of places had done so a long while back. Similarly, since we’ll tend to have several sessions open for a long while, a number of us will use ssh-agent’s -c (confirm) option. That forces a prompt for confirmation of each request the agent gets. It can get a little annoying (especially since it takes the focus over to one monitor, even if I’m working on the other) but it combats SSH socket hijacking when we have the agent forwarded to remote servers.
@@ -50,4 +48,3 @@ $MSSH bucardo.org 'su - postgres -c "pg_dump -c wikidb"' | su - postgres -c "psq
 
 $MSSH -O exit bucardo.org
 ```
-

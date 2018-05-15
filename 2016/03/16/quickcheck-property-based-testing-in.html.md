@@ -57,7 +57,7 @@ arr1 == reverse(reverse(arr1))
 
 The idea here is to make sure this property holds against a large number of randomly selected arguments from the domain. In this example the checker would randomly generate e. g 100 arrays and test if the assertion evaluates to true for every one of them.
 
-### Working example —​ the Haskell way
+### Working example — the Haskell way
 
 Let’s take a look at how the approach is being used in its original environment. Later on we'll see how the pattern can be used when coding in JavaScript. For this, let’s imagine that we’re developing a graph data structure, to be used in some e-commerce project we’re working on. Here’s the basic very incomplete draft:
 
@@ -176,7 +176,7 @@ removeNode node (Graph m) =
 
 Now running the test again we can see that it works.
 
-### Another working example —​ the JavaScript land
+### Another working example — the JavaScript land
 
 As I stated before, this pattern became implemented for many different mainstream languages—​this includes JavaScript. I’d like to show you the version of the above process for this language now. This might end up being helpful if you’d like to use it in your project but don't know much Haskell yet.
 

@@ -2,7 +2,7 @@
 author: Greg Davidson
 gh_issue_number: 811
 tags: conference, css, design, graphics, html, javascript, open-source, testing, tips, tools
-title: "CSS Conf 2013 —​ When Bootstrap Attacks!"
+title: "CSS Conf 2013 — When Bootstrap Attacks!"
 ---
 
 <img alt="Cssconf 2013" border="0" height="234" src="/blog/2013/06/03/css-conf-2013-when-bootstrap-attacks/image-0.png" style="display:block; margin-left:auto; margin-right:auto;" title="cssconf-2013.png" width="373"/>
@@ -41,5 +41,3 @@ Pamela wrapped up the talk by explaining how testing front end code would ease t
 [Needle](https://github.com/python-needle/needle) is a tool which allows you to do this *automatically*. Once you develop a test case, you can run Needle to view a visual diff of your CSS changes. I think this is an excellent idea. Pamela also noted that the combination of [Firefox screenshots](https://support.mozilla.org/en-US/questions/940991) and [Kaleidoscope](https://www.kaleidoscopeapp.com/) could be used manually in much the same way.
 
 Many thanks to [Pamela](https://twitter.com/pamelafox) for sharing this! The slides for this talk can be viewed [here](http://slides.com/pamelafox/when-bootstrap-attacks#/) and the talk was recorded so the video will also be available sometime soon.
-
-

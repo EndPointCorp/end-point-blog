@@ -5,8 +5,6 @@ tags: conference, ruby, rails
 title: Railsbridge NYC
 ---
 
-
-
 Last week I attended a Ruby on Rails workshop hosted by [Railsbridge NYC](https://web.archive.org/web/20130506103440/http://workshops.railsbridge.org/). The organization promotes diversity in tech by introducing web development concepts to a community of technology professionals and enthusiasts. It’s geared towards women, but open to all.
 
 ### Installfest
@@ -22,5 +20,3 @@ I remained in the beginner group, which was significantly larger. The day was di
 ### Summary
 
 It was great to meet other newbie Ruby developers who were going through some of the same beginner pains that I was. The workshop was a positive experience, and gave me the push I periodically need to keep myself immersed in technology. If you are interested in learning more about Ruby and Rails, or just meeting fellow technologists active in the supportive Ruby community, consider attending a Railsbridge workshop near you.
-
-

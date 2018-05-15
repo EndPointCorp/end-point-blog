@@ -5,8 +5,6 @@ tags: testing
 title: Testing Your Imagination
 ---
 
-
-
 The usual blog post follows a particular format:
 
 “I learned something new, as part of a task that I succeeded at. Here’s what I did, here’s why it worked so well, thank you for reading.”
@@ -52,5 +50,3 @@ then that same brain will continue to construct test cases that are “close but
 I don’t have an answer here, and I suspect no one does. Certainly it helps if you have a fellow engineer get involved and review your code (and your testing!), but not every project has a budget for that. Certainly it helps if your client gets involved, and can test with their (hopefully!) better understanding of business rules and conditions. (And when I say “test”, I mean both “actually operate the system” and “actively contribute to test cases” such as “have you tried 89501? Have you tried A1A 1A1?”)
 
 I just know that we have to find a better way to construct test cases than relying on the imagination from the same brain that made the bug in the first place, before we start putting software in charge of important things like [this](http://en.wikipedia.org/wiki/Unmanned_combat_air_vehicle) or [this](http://www.fox.com/almost-human/) Thank you for raeding. Er, reading.
-
-

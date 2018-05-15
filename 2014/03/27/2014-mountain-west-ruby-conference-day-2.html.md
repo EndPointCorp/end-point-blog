@@ -7,7 +7,7 @@ title: 2014 Mountain West Ruby Conference Day 2
 
 This past Friday concluded my second Mountain West Ruby Conference right here in my backyard of Salt Lake City, Utah. Just like the 2013 MWRC, this year’s conference was great. It was also nice to meet up with fellow remote co-worker Mike Farmer for both days. Here are a few of my personal favorites from day 2 of the conference, which I almost missed when I had the audacity to show up without a Macbook Air/Pro. (Kidding!)
 
-### Randy Coulman —​ Affordances in Programming Languages
+### Randy Coulman — Affordances in Programming Languages
 
 Affordances (“A quality of an object or environment that allows someone to perform an action”) are all around us. Randy opened with some examples of poor affordances such as a crosswalk button with two enticing-looking widgets that requires arrows drawn on the box to point to the one that actually is a button. Then, a counter-example showing the “walking” or “standing” footprints painted on an escalator and how they instantly and intuitively communicate how to best use the escalator.
 
@@ -23,7 +23,7 @@ Ultimately, Randy’s list of takeaways summed it all up nicely:
 
 Thanks for the talk, Randy! Here is his [“Affordances in Programming Languages” Slideshare](https://www.slideshare.net/randycoulman/affordances-in-programming-languages)
 
-### John Athayde —​ The Timeless Way of Building
+### John Athayde — The Timeless Way of Building
 
 Patterns. Patterns in nature, human behavior, architecture. Patterns are only truly valuable when used appropriately, which, it is said, requires a certain amount of fluency in the language of patterns. Treating them as “a library of code templates” is a problem, says John. I would agree. Correctly applying design patterns in software development is more than finding a [GoF design pattern](https://en.wikipedia.org/wiki/Design_Patterns) and squeezing your problem through it like so much delicious looking [Play dough](http://www.kraftrecipes.com/recipes/kool-aid-play-dough-148569.aspx).
 
@@ -33,6 +33,6 @@ John’s overall takeaway was that memorizing and applying patterns is neither t
 
 John’s recommended reading: The Timeless Way of Building, A Pattern Language, The Oregon Experiment, Rails Antipatterns, Design Patterns in Ruby
 
-### Ryan Davis —​ Nerd Party v3.1
+### Ryan Davis — Nerd Party v3.1
 
 Ryan’s talk covering the various “versions” of the Seattle.rb Ruby user group throughout the years gets an honorable mention because it convinced me to get involved with one of the Ruby user groups here in Salt Lake City.

@@ -2,10 +2,8 @@
 author: Carl Bailey
 gh_issue_number: 939
 tags: ecommerce, payments
-title: Amazon Payments —​ Caveat Developer
+title: Amazon Payments — Caveat Developer
 ---
-
-
 
 A client of ours needed me to install Amazon Payments for them. Now there are several shopping carts for which Amazon Payments can be installed as an option, and I assume they work just fine. This client was not so lucky, and I had to roll my own.
 
@@ -60,5 +58,3 @@ I followed these guidelines for the remainder of Amazon’s steps, and at last r
 The thing is, that unlike PayPal and traditional credit card gateways, Amazon does not necessarily return an immediate yes or no answer as to whether the transaction is approved. The order is placed in a “Pending” state, and you need to poll them from time to time to get the final approval status of such orders. They attribute this to extra fraud protection that they perform. At the worst case, they say that it could take them up to a full day to return a formal decision, though most transactions (95%+) will be resolved within an hour. This unexpected development caused me to have to handle Amazon orders differently from other orders placed at the site. In my case, Amazon orders got their own order acknowledgement page and email, and we changed the way that the company determines which orders are approved and ready to be filled.
 
 In short Amazon Payments it not any sort of “drop-in” alternative to PayPal. Rather it’s a fairly complex system that may require you to change the way orders are processed.
-
-

@@ -2,7 +2,7 @@
 author: Benjamin Goldstein
 gh_issue_number: 913
 tags: jobs, liquid-galaxy
-title: "End Point’s New Tennessee Office —​ We’re Hiring!"
+title: "End Point’s New Tennessee Office — We’re Hiring!"
 ---
 
 End Point has opened a new office for our Liquid Galaxy business in Bluff City, TN. Bluff City is in the Tri-Cities region on the eastern border of Tennessee. Our new office is 3500+ square feet and has ample office and warehouse space for our growing Liquid Galaxy business.

@@ -5,8 +5,6 @@ tags: bucardo, postgres
 title: Bucardo replication workarounds for extremely large Postgres updates
 ---
 
-
-
 <div class="separator" style="clear: both; float: right; text-align: center;"><a href="/blog/2016/05/31/bucardo-replication-workarounds-for/image-0.jpeg" imageanchor="1" style="clear: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" src="/blog/2016/05/31/bucardo-replication-workarounds-for/image-0.jpeg"/></a><br/><small>(<a href="https://flic.kr/p/iiRxFT">photograph</a> by <a href="https://www.flickr.com/photos/pagedooley/">Kevin Dooley</a>)</small></div>
 
 [Bucardo](https://bucardo.org/) is very good at replicating data among 
@@ -291,5 +289,3 @@ That concludes the solutions for when you have to make a LOT of changes to your 
 how much is enough to worry about the solutions presented here? Generally, you can simply let 
 Bucardo run—​you will know when everything crawls to a halt that perhaps trying to insert 
 465 million rows at once was a bad idea. :)
-
-

@@ -2,7 +2,7 @@
 author: Piotr Hankiewicz
 gh_issue_number: 1308
 tags: cms, drupal, php, programming
-title: Drupal —​ rapid development
+title: Drupal — rapid development
 ---
 
 <div class="separator" style="clear: both; text-align: center;"><a href="/blog/2017/05/26/drupal-rapid-development/image-0.gif" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="279" data-original-width="640" src="/blog/2017/05/26/drupal-rapid-development/image-0.gif"/></a></div>

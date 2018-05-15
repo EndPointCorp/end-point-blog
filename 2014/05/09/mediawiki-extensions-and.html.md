@@ -5,8 +5,6 @@ tags: git, mediawiki, troubleshooting
 title: MediaWiki extensions and wfLoadExtensionMessages
 ---
 
-
-
 <div class="separator" style="clear: both; float: right; text-align: center;"><a href="/blog/2014/05/09/mediawiki-extensions-and/image-0.jpeg" imageanchor="1" style="clear: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" src="/blog/2014/05/09/mediawiki-extensions-and/image-0.jpeg"/></a><br/><small><a href="https://flic.kr/p/dykcFR">Image</a> by Flickr user <a href="https://www.flickr.com/photos/yukonlife/">Susan Drury</a></small>
 </div>
 
@@ -169,5 +167,3 @@ happens.
 
 While there may be other compatibility issues when upgrading MediaWiki, for some extensions 
 (such as PdfExport), this is the only change needed to make it work again on newer versions of MediaWiki!
-
-

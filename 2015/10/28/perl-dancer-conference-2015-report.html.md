@@ -2,10 +2,8 @@
 author: Josh Lavin
 gh_issue_number: 1167
 tags: conference, dancer, interchange, perl
-title: Perl Dancer Conference 2015 Report —​ Training Days
+title: Perl Dancer Conference 2015 Report — Training Days
 ---
-
-
 
 I just returned from the [Perl Dancer Conference](https://www.perl.dance/), held in Vienna, Austria. It was a jam-packed schedule of two days of training and two conference days, with five of the nine Dancer core developers in attendance.
 
@@ -47,5 +45,3 @@ I took copious notes, but it seems that the true learning takes place only as on
 The training days were truly like drinking from a firehose, with so much good information. I am looking forward to putting this into practice!
 
 Stay tuned for my [next blog post](/blog/2015/10/30/perl-dancer-conference-2015-report_30) on the Conference Days.
-
-

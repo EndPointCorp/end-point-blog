@@ -62,14 +62,14 @@ To compare the various compression methods, I examined all of the compression pr
 are commonly available on a Linux system, are known to be stable, and which perform at least
 as good as the common utility gzip. The contenders were:
 
-- **gzip** —​ the canonical, default compression utility for many years
-- **pigz** —​ parallel version of gzip
-- **bzip2** —​ second only to gzip in popularity, it offers better compression
-- **lbzip2** —​ parallel version of bzip
-- **xz** —​ an excellent all-around compression alternative to gzip and bzip
-- **pxz** —​ parallel version of xz
-- **7za** —​ excellent compression, but suffers from complex arguments
-- **lrzip** —​ compression program targeted at “large files”
+- **gzip** — the canonical, default compression utility for many years
+- **pigz** — parallel version of gzip
+- **bzip2** — second only to gzip in popularity, it offers better compression
+- **lbzip2** — parallel version of bzip
+- **xz** — an excellent all-around compression alternative to gzip and bzip
+- **pxz** — parallel version of xz
+- **7za** — excellent compression, but suffers from complex arguments
+- **lrzip** — compression program targeted at “large files”
 
 For the tests, 100 random WAL files were copied from a busy production Postgres system. Each of
 those 100 files were compressed nine times by each of the programs above: from the “least compressed”

@@ -5,8 +5,6 @@ tags: interchange
 title: Interchange form pitfalls
 ---
 
-
-
 I’ll warn you going in: this is obscure Interchange internal form-wrangling voodoo, and even if you are familiar with that, it’s not going to be an easy trip to get from here to the end of the story. Fair warning!
 
 Interchange form-handling has many, many features. Some of them are pretty obscure. One such is the concept of a “click map”: a snippet of named code, stored on the server. Specifically, it is stored within the user’s session, which is a chunk of storage associated with a browser cookie, and can contain all sorts of stuff—​but which is primarily used for things like the shopping cart, the user’s identity, and so on.
@@ -50,5 +48,3 @@ In Interchange terms, this tells Interchange where to go when form processing is
 Now, if we click the button on Page1.html, but then refresh the page on the resulting Page2, form processing is run again—​but this time, our call-by-name to “Continue” executes the code that Page2 set up for its Continue button—​not the Page1 setup. In other words: clicking the button on Page1.html sends us to page 2, but refreshing Page2.html * sends us to Page3.html*.
 
 I can’t tell you what a relief this was to finally reproduce this bug. The simple fix was to just change the names involved, to “Continue1” and “Continue2”. There’s certainly a lot of power in Interchange form processing, but hoo boy—​with great power comes great potential to shoot yourself in the foot.
-
-

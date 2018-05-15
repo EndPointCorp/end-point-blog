@@ -2,7 +2,7 @@
 author: Zdeněk Maxa
 gh_issue_number: 1133
 tags: chef, browsers, jenkins, liquid-galaxy, python, testing
-title: The Portal project —​ Jenkins Continuous Integration summary
+title: The Portal project — Jenkins Continuous Integration summary
 ---
 
 This post describes some of our experiences at End Point in designing and working on comprehensive QA/CI facilities for a new system which is closely related to the [Liquid Galaxy](https://liquidgalaxy.endpoint.com/).

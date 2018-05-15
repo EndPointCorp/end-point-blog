@@ -5,8 +5,6 @@ tags: interchange
 title: Interchange table hacking
 ---
 
-
-
 [Interchange](http://www.interchange.rtfm.info/docs/index.html) has a powerful but terribly obscure table administration tool called the Table Editor. You can create, update, and delete rows, and even upload whole spreadsheets of data, but the Table Editor isn’t the most flexible thing in the world, so sometimes it just flat-out refuses to do what you want.
 
 So you trick it.
@@ -55,5 +53,3 @@ Database  my_table_edit  AUTO_SEQUENCE
 This chunk of config-code tells Interchange that a second table can be accessed in the database, which is in fact the same table as the first (not a view, not a copy, but the actual table), but it doesn’t have the COMPOSITE_KEY. When Interchange is restarted with this new definition in place, the Table Editor will show this second table with the familiar per-row checkboxes, even as it refuses to show them for the original table.
 
 Phew. I dodged a bullet with that, as I didn’t want to have to write a special page just to mimic the Table Editor.
-
-

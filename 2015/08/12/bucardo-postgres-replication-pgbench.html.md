@@ -5,8 +5,6 @@ tags: database, postgres, replication
 title: Bucardo replication from Postgres to sqlite and mariadb using pgbench
 ---
 
-
-
 <div class="separator" style="margin: 0 0 20px 20px; clear: both; float: right; text-align: center;"><a href="/blog/2015/08/12/bucardo-postgres-replication-pgbench/image-0-big.png" imageanchor="1" style="clear: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" src="/blog/2015/08/12/bucardo-postgres-replication-pgbench/image-0.png"/></a><br/><small><a href="https://flic.kr/p/rwPy8">"Apples and oranges" image</a><br/> by
 <a href="https://www.flickr.com/people/mukluk/">Dan McKay</a></small></div>
 
@@ -441,5 +439,3 @@ $ mysql pgb -e 'select aid,abalance from pgbench_accounts where aid <=4 order by
 ```
 
 Excellent. Everything is working as expected. Note that the changes from the test4 database were not replicated onwards, as test4 is not a source database. Feel free to ask any questions in the comments below, or better still, on the [Bucardo mailing list](https://mail.endcrypt.com/mailman/listinfo/bucardo-general).
-
-

@@ -5,8 +5,6 @@ tags: imagemagick, php, user-interface, wordpress
 title: Medium-inspired Parallax Blur Effect For WordPress
 ---
 
-
-
 Are you are running a WordPress blog, but secretly dying to have that [](http://pencilscoop.com/2015/02/recreating-mediums-parallax-blur-effect)[Medium](https://medium.com/) parallax blur effect? I recently implemented this, and would like to share it with you. By the way, while I was working on the article, the effect was removed from Medium, which only makes having one on the website more precious.
 
 Let’s assume that we have our custom theme class MyTheme. In functions.php:
@@ -146,5 +144,3 @@ public function wp_blur_attachment_filter($post_ID) {
 Or better yet, use cloud image processing—​I wrote about that [here](/blog/2015/12/01/image-processing-in-cloud-with-blitline).
 
 I hope you found this writeup useful!
-
-

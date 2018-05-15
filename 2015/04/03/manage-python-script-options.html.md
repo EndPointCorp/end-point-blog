@@ -14,9 +14,9 @@ The main ideas for the options management are:
 - The script reads all config values from a config file, which is a simple ini file.
 - The script values can be overwritten by the command line values.
 - There are special command line arguments, which don’t exist in the config file like:
-    - --help—​shows help in command line
-    - --create-config—​creates a new config file with default values
-    - --config—​the path to the config file which should be used
+    - --help — shows help in command line
+    - --create-config — creates a new config file with default values
+    - --config — the path to the config file which should be used
 - If there is no value for a setting in the config file, and in the command line arguments, then a default value should be taken.
 - The option names in the configuration file, and the command line, must be the same. If there is repo-branch in the ini file, then there must be --repo-branch in the command line. However the variable where it will be stored in Python will be named repo_branch, as we cannot use “-” in the variable name.
 
@@ -131,10 +131,10 @@ The main idea of this code was:
 
 This way I can run the script with:
 
-- ./example.py—​which will read the config file from /tmp/example.cfg, and the repo_branch should contain another.
-- ./example.py --config=/tmp/a.cfg—​which will read the config from the /tmp/a.cfg.
-- ./example.py --help—​which will show the help (this is automatically supported by the argparse module).
-- ./example.py --repo-branch=1764 -- and the repo_branch variable should contain 1764.
+- ./example.py — which will read the config file from /tmp/example.cfg, and the repo_branch should contain another.
+- ./example.py --config=/tmp/a.cfg — which will read the config from the /tmp/a.cfg.
+- ./example.py --help — which will show the help (this is automatically supported by the argparse module).
+- ./example.py --repo-branch=1764 — and the repo_branch variable should contain 1764.
 
 ### The Problems
 
@@ -349,8 +349,8 @@ The last utility function I need is something to compare dictionaries. I think i
 The main idea behind the function is to convert the keys for the dictionaries to sets, and then make a difference of the sets.
 This must be done for the settings names in both directions:
 
-- config.keys—​commandline.keys—​if the result is not an empty set, then it is an error
-- commandline.keys—​config.keys—​if the result is not an empty set, then we should just show some information about this
+- config.keys — commandline.keys — if the result is not an empty set, then it is an error
+- commandline.keys — config.keys — if the result is not an empty set, then we should just show some information about this
 
 The below function gets two arguments first and second. It returns a tuple like (first-second, second-first). There is also the third argument, it is a list of the keys which we should ignore, like the create_config one.
 

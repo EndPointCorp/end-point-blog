@@ -5,8 +5,6 @@ tags: tips, tools
 title: 'ZNC: An IRC Bouncer'
 ---
 
-
-
 ### Kickin’ it Old Skool
 
 At End Point, we use IRC extensively for group chat and messaging. Prior to starting here I had been an occasional IRC user—​asking questions about various open source projects on [Freenode](http://freenode.net/) and helping others as well. When I began to use IRC daily, I ran into a few things that bugged me and thought I would write about what I have done to mitigate those. While it might not be as fancy as [Campfire](https://campfirenow.com/), [HipChat](https://www.hipchat.com/) or [Slack](https://slack.com/) I’m happy with my setup now.
@@ -44,5 +42,3 @@ ZNC comes with a number of built in modules and allows users to develop their ow
 ### Running ZNC
 
 ZNC is easy to compile and install and there are also packages available for some Linux distros. After testing it out locally for a while I installed it on a small VPS and that has been working well. [Digital Ocean](https://digitalocean.com/) has published an article on [how to install ZNC on a Ubuntu VPS](https://www.digitalocean.com/community/articles/how-to-install-znc-an-irc-bouncer-on-an-ubuntu-vps) if you are interested in learning more about it. Also, the [ZNC wiki](http://wiki.znc.in/ZNC) has lots of helpful information on how to install and configure ZNC.
-
-

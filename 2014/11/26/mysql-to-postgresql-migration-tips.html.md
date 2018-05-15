@@ -154,7 +154,7 @@ Many times when you insert a records into a MySQL table, later references to thi
 
 MySQL has the GROUP_CONCAT function, which serves as a string “join” of sorts. We emulate this behavior in PostgreSQL by using the string_agg aggregate function with the delimiter of choice.
 
-#### CONCAT_WS() —​ expected to be but not an issue; PG has this function
+#### CONCAT_WS() — expected to be but not an issue; Postgres has this function
 
 PostgreSQL has included a CONCAT_WS() function since PostgreSQL 9.1, so this was not an issue with the specific migration, but could still be an issue if you are migrating to an older version of PostgreSQL.
 
@@ -197,7 +197,7 @@ in PostgreSQL:
 split_part('a banana boat', ' ', -1) => // ERROR: field position must be greater than zero
 ```
 
-I fixed this issue by creating a custom plpgsql function to handle this case. (In my specific case, all of the negative indexes were -1; i.e., the last element in the array, so I created a function to return only the substring occurring after the last instance of the delimiter.)
+I fixed this issue by creating a custom PL/pgSQL function to handle this case. (In my specific case, all of the negative indexes were -1; i.e., the last element in the array, so I created a function to return only the substring occurring after the last instance of the delimiter.)
 
 ### Performance considerations
 

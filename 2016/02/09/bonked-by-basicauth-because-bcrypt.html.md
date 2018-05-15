@@ -5,11 +5,9 @@ tags: apache, bcrypt, mediawiki, performance, security, sysadmin
 title: Bonked By Basic_auth Because Bcrypt
 ---
 
-
-
 <div class="separator" style="clear: both; float: right; padding: 0 1em 1em 2em; text-align: center;"><a href="/blog/2016/02/09/bonked-by-basicauth-because-bcrypt/image-0.jpeg" imageanchor="1" style="clear: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" src="/blog/2016/02/09/bonked-by-basicauth-because-bcrypt/image-0.jpeg"/></a><br/><small><a href="https://flic.kr/p/xUswo">Alligator photo</a> by <a href="https://www.flickr.com/people/johnjack/">Random McRandomhead</a></small></div>
 
-**tl;dr —​ don’t use a high bcrypt cost with HTTP basic auth!**
+**tl;dr — don’t use a high bcrypt cost with HTTP basic auth!**
 
 Recently we had a client approach us with reports of a slow wiki experience. This was 
 for a [MediaWiki](https://www.mediawiki.org/wiki/MediaWiki) we recently installed for them; 
@@ -248,5 +246,3 @@ to the users, then dial it back a tiny bit. Measure it out and see what your ser
 can handle. For general bcrypt use, start with 13, but don’t be afraid to keep going up until it takes a 
 wall clock second or two to run. For basic auth, use something very fast: perhaps 9 or less. Anything 
 that takes over a second to create via htpasswd will slow a site down noticeably!
-
-

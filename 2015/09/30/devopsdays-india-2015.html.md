@@ -2,7 +2,7 @@
 author: Selvakumar Arumugam
 gh_issue_number: 1161
 tags: automation, conference, devops, containers
-title: DevOpsDays India —​ 2015
+title: DevOpsDays India — 2015
 ---
 
 DevOpsIndia 2015 was held at The Royal Orchid in Bengaluru on Sep 12-13, 2015. After saying hello to a few familiar faces who I often see at the conferences, I collected some goodies and entered into the hall. Everything was set up for the talks. Niranjan Paranjape, one of the organizers, was giving the introduction and overview of the conference.
@@ -23,8 +23,6 @@ Vishal Uderani, a DevOps guy from WebEngage, presented “Automating AWS infrast
 - No agents will be running on the client side, which avoids having to monitor the agents at client nodes
 - Great deployment tool
 
-<br/>
-
 Vipul Sharma from CodeIgnition stated the importance of Resilience Testing. The application should be tested periodically to be tough and strong enough to handle any kind of load. He said Simian Army can be used to create the problems in environments and then resolving them to make them flawless. Simian Army can used to improve application using security monkey, chaos monkey, janitor monkey, etc… Also “Friday Failure” is a good method to identify the problem and improve the application.
 
 Avi Cavale from Shippable gave an awesome talk on “Modern DevOps with Docker”. He talk started with “What is the first question that arises during an outage ? ... What changed ?”After fixing these issues, the next question will be “Who made the change?” Both questions are bad for the business. Change is the root cause of all outage but business requires changes. In his own words, DevOps is a culture of embracing change. Along with that he explained the zero downtime ways to deploy the changes using a container.
@@ -37,7 +35,7 @@ Rahul Mahale from SecureDB gave a demo on [Terraform](https://terraform.io/), a 
 
 Shobhit and Sankalp from CodeIgnition shared their experience on solving network based issues. Instead of whitelisting the user’s location every time manually to provide the access to systems, they created a VPN to enable access only to users, not locations. They have resolved two more additional kind of issues by adding Router to bind two networks using FIP.  Another issue is that they need to whitelist to access third party services from containers, but it was hard to whitelist all the containers. Therefore, they created and whitelisted VMs and containers accessed the third party services through VMs.
 
-Ankur Trivedi from Xebia Labs spoke about the “[Open Containers Initiative](https://www.opencontainers.org/)” project. He explained the evolution of the containers (Docker—​2013 & Rocket—​2014). The various distributions of containers are compared based on the Packing, Identity, Distribution and Runtime capabilities. Open Containers is supported by the community and various companies who are doing extensive work on containers in order to standardize them.
+Ankur Trivedi from Xebia Labs spoke about the “[Open Containers Initiative](https://www.opencontainers.org/)” project. He explained the evolution of the containers (Docker—​2013 & rkt—​2014). The various distributions of containers are compared based on the Packing, Identity, Distribution and Runtime capabilities. Open Containers is supported by the community and various companies who are doing extensive work on containers in order to standardize them.
 
 Vamsee Kanala, a DevOps consultant, presented a talk on “Docker Networking—​A Primer”. He spoke about Bridge networking, Host Networking, Mapped container networking and None (Self Managed) with dockers. The communications between the containers can happen through:
 
@@ -45,15 +43,11 @@ Vamsee Kanala, a DevOps consultant, presented a talk on “Docker Networking—�
 - Link
 - Docker composing (programmatically)
 
-<br/>
-
 In addition, he explained the tools which feature the clustering of containers, and listed the tools that have their own way of clustering and advantages:
 
 - Kubernetes
 - Mesos
 - Docker Swarm
-
-<br/>
 
 Aditya Patawari from BrowserStack gave a demo on “Using Kubernetes to Build Fault Tolerant Container Clusters”. Kubernetes has a feature called “Replication Controllers,” which helps to maintain number of pods running at any time. “Kubernetes Services” defines a policy to enable access among the pods which provisions the pods as micro services.
 

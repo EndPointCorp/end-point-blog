@@ -5,8 +5,6 @@ tags: postgres
 title: How fast is pg_upgrade anyway?
 ---
 
-
-
 <div class="separator" style="clear: both; float: right; text-align: center;"><a href="/blog/2015/07/01/how-fast-is-pgupgrade-anyway/image-0-big.jpeg" imageanchor="1" style="clear: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" src="/blog/2015/07/01/how-fast-is-pgupgrade-anyway/image-0.jpeg"/></a><br/><small><a href="https://flic.kr/p/db6hGQ">Shark photo</a> by <a href="https://www.flickr.com/people/tomsaint/">Rennett Stowe</a>
 </small></div>
 
@@ -124,5 +122,3 @@ Another limitation of the pg_upgrade method is that all internal stats are blown
 </tbody></table>
 
 (As an addendum of sorts, pg_upgrade is fantastic, but the Holy Grail is still out of sight: true in-place upgrades. This would mean dropping in a new major version (similar to the way revisions can be dropped in now), and this new version would be able to read both old and new data file formats, and doing an update-on-write as needed. Someday!)
-
-

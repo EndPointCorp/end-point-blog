@@ -5,12 +5,9 @@ tags: postgres
 title: Working on production systems
 ---
 
-
-
 <div class="separator" style="clear: both; float: right; text-align: center;"><a href="/blog/2017/09/27/working-on-production-systems/image-0.jpeg" imageanchor="1" style="clear: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" data-original-height="392" data-original-width="324" src="/blog/2017/09/27/working-on-production-systems/image-0.jpeg"/></a><br/><small>(Not as easy as it looks) <br/><a href="https://flic.kr/p/Y4yDHm">Photo</a> by Flickr user <a href="https://www.flickr.com/photos/edenpictures/">'edenpictures'</a></small></div>
 
-As consultants, the engineers at End  Point are often called upon to do work on production systems—​
-in other words, one or more servers that are vital to our client’s business. These range from doing years 
+As consultants, the engineers at End  Point are often called upon to do work on production systems—​in other words, one or more servers that are vital to our client’s business. These range from doing years 
 of planning to perform a major upgrade for a long-standing client, down to jumping into a brand-new client for an 
 emergency fix. Either way, the work can be challenging, rewarding, and a little bit nerve-wracking. 
 
@@ -217,5 +214,3 @@ psql service=PROD -Atc "select query from pg_stat_activity where query ~ '$1'"
 When you are done with all your production tasks, write up some final thoughts on how it went, and what the next steps are. 
 Read through all your notes while it is all fresh in your mind and clean them up as needed. Revel in your 
 success, and get some sleep!
-
-

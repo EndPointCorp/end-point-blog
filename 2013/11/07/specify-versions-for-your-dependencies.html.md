@@ -5,8 +5,6 @@ tags: ruby, rails
 title: Specify versions for your dependencies in your Gemfiles
 ---
 
-
-
 How often have you been too lazy to put a version spec for gems you depended on in your projects? Do you fear updating the gems your app uses in production?
 
 Here is an elusive-obvious tip for you: **Always** specify version numbers for your dependencies in your app’s Gemfile.
@@ -100,5 +98,3 @@ Interested in reading more? Here are some links for you:
 [https://robots.thoughtbot.com/a-healthy-bundle](https://robots.thoughtbot.com/a-healthy-bundle)
 
 [https://github.com/thoughtbot/guides/tree/master/best-practices#bundler](https://github.com/thoughtbot/guides/tree/master/best-practices#bundler)
-
-

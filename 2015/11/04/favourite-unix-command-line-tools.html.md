@@ -41,13 +41,13 @@ The above will navigate to /tmp directory.
 
 Bang quite useful, when we want to play with the bash history commands. Bang helps by letting you execute commands in history easily when you need them:
 
-- `!!` —​ Execute the last executed command in the bash history
-- `!*` —​ Execute the command with all the arguments passed to the previous command
-- `!ˆ` —​ Get the first argument of the last executed command in the bash history
-- `!$` —​ Get the last argument of the last executed command in the bash history
-- `!` —​ Execute a command which is in the specified number in bash history
-- `!?keyword?` —​ Execute a command from bash history for the first pattern match of the specified keyword
-- `!-N` —​ Execute the command that was Nth position from the last in bash history  
+- `!!` — Execute the last executed command in the bash history
+- `!*` — Execute the command with all the arguments passed to the previous command
+- `!ˆ` — Get the first argument of the last executed command in the bash history
+- `!$` — Get the last argument of the last executed command in the bash history
+- `!` — Execute a command which is in the specified number in bash history
+- `!?keyword?` — Execute a command from bash history for the first pattern match of the specified keyword
+- `!-N` — Execute the command that was Nth position from the last in bash history  
 
 <br/>
 

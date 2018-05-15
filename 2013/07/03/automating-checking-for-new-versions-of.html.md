@@ -2,10 +2,8 @@
 author: Greg Sabino Mullane
 gh_issue_number: 828
 tags: monitoring, nagios, postgres, sysadmin
-title: ' Automating checking for new versions of PostgreSQL'
+title: 'Automating checking for new versions of PostgreSQL'
 ---
-
-
 
 <div class="separator" style="clear: both; text-align: center; float:right"><a href="/blog/2013/07/03/automating-checking-for-new-versions-of/image-0.jpeg" imageanchor="1" style="clear: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" src="/blog/2013/07/03/automating-checking-for-new-versions-of/image-0.jpeg"/></a><br/><small>Hubble image via Flickr user <a href="https://www.flickr.com/photos/77954350@N07/">castielstar</a></div>
 
@@ -88,10 +86,6 @@ Postgres, and then restart it. Always check the release notes for the new revisi
 moon the update requires some other action, such as a reindex of certain types of indexes.
 
 The check_postgres program can verify versions of some 
-[other programs](https://bucardo.org/check_postgres/check_postgres.pl.html#new_version_bc) as well, 
-including 
+[other programs](https://bucardo.org/check_postgres/check_postgres.pl.html#new_version_bc) as well, including 
 [Bucardo](https://bucardo.org/Bucardo/), 
-[tail_n_mail](https://bucardo.org/tail_n_mail/)
-, and check_postgres itself.
-
-
+[tail_n_mail](https://bucardo.org/tail_n_mail/), and check_postgres itself.

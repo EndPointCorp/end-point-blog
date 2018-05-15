@@ -2,7 +2,7 @@
 author: Greg Davidson
 gh_issue_number: 815
 tags: browsers, conference, javascript
-title: "JSConf US —​ Day 2"
+title: "JSConf US — Day 2"
 ---
 
 ### Choose Your Own Adventure
@@ -36,7 +36,7 @@ client
 
 I worked in a team with [Ryan Seddon](https://www.thecssninja.com/) and [John Buckley](https://web.archive.org/web/20130605185222/http://jbuckley.ca/) on a challenge set out at the beginning of the day by Felix. We used [Open CV](https://opencv.org/) (Computer Vision library) initially and later the on-board compass data to have the nodecopter take off, locate a marked line on the floor, fly to the end of the line and then land in the prescribed location. We were close several times but did not successfully complete the challenge in the end. This was dissappointing *but* we still had a blast working on it throughout the day.
 
-<blockquote class="twitter-tweet"><p>Hacking on nodecopters! So rad <a href="https://twitter.com/search/%23jsconf">#jsconf</a> <a href="http://t.co/d71G94MpaJ" title="http://twitter.com/ryanseddon/status/340145777525542913/photo/1">twitter.com/ryanseddon/sta…</a></p>—​ Ryan Seddon (@ryanseddon) <a href="https://twitter.com/ryanseddon/status/340145777525542913">May 30, 2013</a></blockquote><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet"><p>Hacking on nodecopters! So rad <a href="https://twitter.com/search/%23jsconf">#jsconf</a> <a href="http://t.co/d71G94MpaJ" title="http://twitter.com/ryanseddon/status/340145777525542913/photo/1">twitter.com/ryanseddon/sta…</a></p>— Ryan Seddon (@ryanseddon) <a href="https://twitter.com/ryanseddon/status/340145777525542913">May 30, 2013</a></blockquote><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 ### Demos
 

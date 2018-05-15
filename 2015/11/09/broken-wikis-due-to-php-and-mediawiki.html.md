@@ -5,8 +5,6 @@ tags: mediawiki, php
 title: Broken wikis due to PHP and MediaWiki “namespace” conflicts
 ---
 
-
-
 <div class="separator" style="clear: both; float:right; text-align: center;"><a href="/blog/2015/11/09/broken-wikis-due-to-php-and-mediawiki/image-0-big.jpeg" imageanchor="1" style="clear: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" src="/blog/2015/11/09/broken-wikis-due-to-php-and-mediawiki/image-0.jpeg"/></a><br/><small><a href="https://flic.kr/p/79LtQP">Photo</a> by <a href="https://www.flickr.com/people/mothernaturephotos/">Elliot Gilfix</a></small></div>
 
 I was recently tasked with resurrecting an ancient wiki. In this case, a wiki last 
@@ -186,5 +184,3 @@ $ php maintenance/rebuildrecentchanges.php
 ```
 
 Voila! All of the data from this ancient wiki is now in place on a modern wiki!
-
-

@@ -5,8 +5,6 @@ tags: conference, perl
 title: YAPC::NA 2014, Day One
 ---
 
-
-
 YAPC (Yet Another Perl Conference) is an annual gathering of Perl developers (and non-developers) to talk about Perl: how to do it, how to get other people to do it, and how we will all be doing it next year (or decade, if all goes well). There are flavors of YAPC set in North America, Europe, etc.
 
 I attended my first-ever starting in Orlando, FL today (which apparently makes me a VIP—​Very Important Perl-user, as the community stands on its head the idea that the old fogies are the important people—​it’s the new blood at the conference that gets them all excited).
@@ -40,5 +38,3 @@ I was quite interested in a presentation about Perl on [NetBeans](https://netbea
 The last of the talks I will report on here concerned a Perl module called [DBIx::Introspector](http://search.cpan.org/~frew/DBIx-Introspector-0.001000/lib/DBIx/Introspector.pm). This provides a means for investigating a database connection (or definition) to determine what type of database it is (e.g., Postgres vs. MySQL). This may sound trivial (why would you not know what your database is?), but in fact since database implementation details can be different in crucial ways (for instance, SQL syntax), any sort of generic database-agnostic module (ORM, utility, etc.) may need to have DB-specific code abstracted out. In an example close-to-home, our very own [DevCamp](http://www.devcamps.org/) tool has need of this sort of abstraction.
 
 Day 2 promises to be just as action-packed. I’m live-tweeting this via @murwiz, and the hashtag [#yapcna](https://twitter.com/search?q=%23yapcna&src=tyah) is our unifying battle-cry.
-
-

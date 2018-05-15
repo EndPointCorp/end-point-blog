@@ -49,7 +49,7 @@ One of my favorite features was how Moovweb could handle page navigation menus, 
 
 As you can see, it replicates the same menu tree, with the same ability to expand into any of the available categories, or use the text search, all within an interface that is easy to use within a mobile browser.
 
-### The Future of the Web —​ Devices, Devices, Devices
+### The Future of the Web — Devices, Devices, Devices
 
 One thing is clear from the rise of mobile devices and tablets on the web over the past few years, is that these devices are here to stay, and if anything will continue to grow and dominate the marketplace. For developers seeking to harness, or even to just stay ahead of this trend, will need to address the problems of mobile browsers and the limitations of the devices themselves. 
 

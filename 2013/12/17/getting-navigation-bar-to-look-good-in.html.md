@@ -2,10 +2,8 @@
 author: Kamil Ciemniewski
 gh_issue_number: 900
 tags: ios
-title: Getting navigation bar to look good in iOS7
+title: Getting navigation bar to look good in iOS 7
 ---
-
-
 
 Apple has recently released iOS 7—​a major upgrade to its operating system for mobile devices. Whether users like it or not—​developers have to treat it seriously. There is nothing worse in the world of technology than being viewed as *passé*.
 
@@ -66,5 +64,3 @@ tableViewController.view.frame = frame;
 [https://www.fastcompany.com/3016423/developing-for-ios-7-the-good-the-bad-the-flat-and-the-ugly](https://www.fastcompany.com/3016423/developing-for-ios-7-the-good-the-bad-the-flat-and-the-ugly)
 
 [https://developer.apple.com/ios/human-interface-guidelines/bars/navigation-bars/](https://developer.apple.com/ios/human-interface-guidelines/bars/navigation-bars/)
-
-

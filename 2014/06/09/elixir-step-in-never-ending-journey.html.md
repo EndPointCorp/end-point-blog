@@ -2,7 +2,7 @@
 author: Kamil Ciemniewski
 gh_issue_number: 992
 tags: elixir, erlang, functional-programming, haskell, ruby
-title: "Elixir —​ a step in a never ending journey"
+title: "Elixir — a step in a never ending journey"
 ---
 
 Every now and then a new programming language is born. In fact, since the not-so-distant introduction of early programming languages, we’ve got about 693 of them! (at least that’s what [Wikipedia](https://en.wikipedia.org/wiki/List_of_programming_languages) says).

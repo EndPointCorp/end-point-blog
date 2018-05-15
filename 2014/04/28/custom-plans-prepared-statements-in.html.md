@@ -5,8 +5,6 @@ tags: database, dbdpg, postgres
 title: Custom plans prepared statements in PostgreSQL 9.2
 ---
 
-
-
 <div class="separator" style="clear: both; float: right; padding-bottom: 1em; text-align: center;"><a href="/blog/2014/04/28/custom-plans-prepared-statements-in/image-0-big.jpeg" imageanchor="1" style="clear: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" src="/blog/2014/04/28/custom-plans-prepared-statements-in/image-0.jpeg"/></a><br/><small><a href="https://flic.kr/p/4XWBSV">Image</a> by Flickr user <a href="https://www.flickr.com/photos/brettneilson/">Brett Neilson</a></small>
 </div>
 
@@ -140,5 +138,3 @@ test# EXPLAIN EXECUTE zz('foobar');
 ```
 
 Tada! We have three different plans for the same prepared statement, If you look close, you will see that even the first plan is now a “custom” one, as it has the exact parameter string rather than just $1 as before. The moral of the story: don’t settle for anything less than version 9.2 of Postgres!
-
-

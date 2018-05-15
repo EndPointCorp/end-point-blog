@@ -57,7 +57,7 @@ In this post, we share some of the interesting tricks that were shown, and also 
 - View manpage for the word under the cursor: K
 - [Cheat sheets](http://www.viemu.com/a_vi_vim_graphical_cheat_sheet_tutorial.html)
 - [Vim Tips with Ben](https://www.briefs.fm/vim-tips-with-ben) podcast
-- [Vimcasts](http://vimcasts.org/) —​ free screencasts
+- [Vimcasts](http://vimcasts.org/) — free screencasts
 - [Tweets from Mastering Vim](https://twitter.com/MasteringVim/)
 
 *With contributions from [Sam Batschelet](/team/sam_batschelet)*

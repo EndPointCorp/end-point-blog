@@ -5,8 +5,6 @@ tags: html, javascript
 title: Google Maps JavaScript API LatLng Property Name Changes
 ---
 
-
-
 ## Debugging Broken Maps
 
 A few weeks ago I had to troubleshoot some Google Maps related code that had suddenly stopped working. Some debugging revealed the issue: the code adding markers to the page was attempting to access properties that did not exist. This seemed odd because the latitude and longitude values were the result of a geocoding request which was completing successfully. The other thing which stood out to me were the property names themselves:
@@ -40,5 +38,3 @@ I was curious about this so I mapped out the differences between the three lates
 </tbody> </table>
 
 It seems to me that the property name changes are a result of running the Google Maps API code through the [Closure Compiler](https://developers.google.com/closure/compiler/). Make sure to use the built-in lat() and lng() methods as these property names are very likely to change again in future!
-
-

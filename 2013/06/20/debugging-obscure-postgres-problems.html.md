@@ -5,8 +5,6 @@ tags: postgres, sysadmin
 title: Debugging obscure Postgres problems with strace
 ---
 
-
-
 <div class="separator" style="clear: both; float: right; text-align: center;"><a href="/blog/2013/06/20/debugging-obscure-postgres-problems/image-0-big.jpeg" imageanchor="1" style="clear: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" src="/blog/2013/06/20/debugging-obscure-postgres-problems/image-0.jpeg"/></a><br/><small><a href="https://www.flickr.com/photos/gadl/284995199/in/photolist-rbF9k/">
 Image</a> by Flickr user <a href="https://www.flickr.com/photos/gadl/">Alexandre Duret-Lutz</a></small></div>
 
@@ -141,5 +139,3 @@ as the zoneinfo symlink kept looping back to the current directory.
 So the solution was to simply remove that faulty symlink. Once that was done, 
 Postgres started without a hitch. Once again, the invaluable strace 
 saves the day.
-
-

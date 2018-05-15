@@ -5,8 +5,6 @@ tags: ecommerce, perl, ruby, shipping
 title: Postal code pain and fun
 ---
 
-
-
 <img align="right" src="/blog/2017/05/10/postal-code-pain-and-fun/image-0.jpeg" style="margin: 1em" width="200"/>We do a lot of ecommerce development at End Point. You know the usual flow as a customer: Select products, add to the shopping cart, then check out. Checkout asks questions about the buyer, payment, and delivery, at least. Some online sales are for “soft goods”, downloadable items that don’t require a delivery address. Much of online sales are still for physical goods to be delivered to an address. For that, a postal code or zip code is usually required.
 
 ### No postal code?

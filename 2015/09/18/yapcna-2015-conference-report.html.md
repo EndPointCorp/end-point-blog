@@ -5,8 +5,6 @@ tags: conference, perl
 title: YAPC::NA 2015 Conference Report
 ---
 
-
-
 In June, I attended the [Yet Another Perl Conference (North America)](http://www.yapcna.org/yn2015/), held in Salt Lake City, Utah. I was able to take in a training day on [Moose](https://metacpan.org/pod/Moose), as well as the full 3-day conference.
 
 The [Moose Master Class](http://www.yapcna.org/yn2015/masters.html#Moose) ([slides and exercises here](https://github.com/moose/intro-to-moose)) was taught by Dave Rolsky (a Moose core developer), and was a full day of hands-on training and exercises in the Moose object-oriented system for Perl 5. I’ve been experimenting a bit this year with the related project [Moo](https://metacpan.org/pod/Moo) (essentially the best two-thirds of Moose, with quicker startup), and most of the concepts carry over, with just slight differences.
@@ -40,5 +38,3 @@ I attended some talks on the long-awaited Perl 6, which is apparently to be rele
 One talk not related to Perl was [Scrum for One](http://www.yapcna.org/yn2015/talk/6031) ([video](https://youtu.be/Zh7dXvQY-hg)), which discussed how to use the principles of [Scrum](https://en.wikipedia.org/wiki/Scrum_%28software_development%29) in one’s daily life. Helpful hints included thinking of your tasks in the [User Story](https://en.wikipedia.org/wiki/User_story) format: “as a $Person, I would like $Thing, so that $Accomplishment”; leave murky stories on the backlog, as you must know what “done” looks like; the current tasks should include things doable in the next week—​this prevents you from worrying about *all* tasks in your list. Personally, I’ve started using [Trello](https://trello.com/) boards to implement this, such as: Done, Doing, ToDo, Later.
 
 Finally, while a great technical conference, YAPC’s biggest strength is bringing together the Perl community. I found this evident myself, as I had the opportunity to meet another attendee from my city. We were introduced at the conference, not knowing each other previously. When you have two Perl developers in the same city, it is time to resurrect your local [Perl Mongers](https://www.pm.org/) group, which is [what we did](http://bend.pm.org/)!
-
-

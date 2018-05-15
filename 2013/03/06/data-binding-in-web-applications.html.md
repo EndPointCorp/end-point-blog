@@ -15,7 +15,7 @@ Then, the JS-frameworks epidemy started to disseminate. As web developers—​w
 
 And so was the start of our global evolution, towards making the Web—​our main means of interacting with *users*. Few with big enough imagination were already seeing HTML, CSS & JS as the future standard of creating user interfaces for data-rich applications. Of course, there were toolkits like ExtJS which aimed at nothing but this—​but who would have known back then, that we will be able to build apps for **smartphones** the way we are building ones for the web?
 
-I have my little observation in life —​ all *hot stuff* in the world of technology, has their *phases*.. That is:
+I have my little observation in life — all *hot stuff* in the world of technology, has their *phases*. That is:
 
 - they don’t exist, but the problems they solve do and they are **painful**
 - they show up, and there is massive excitement

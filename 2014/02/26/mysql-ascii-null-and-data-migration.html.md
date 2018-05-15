@@ -176,4 +176,3 @@ The other potentially confusing point, then, is *why* didn’t MySQL interpret t
 > MySQL recognizes the escape sequences shown in Table 9.1, "Special Character Escape Sequences". For all other escape sequences, backslash is ignored.[2](http://dev.mysql.com/doc/refman/5.6/en/string-literals.html#character-escape-sequences)
 
 If you look at Table 9.1, you’ll see the list of escape sequences is rather short and does not include general handling for octal or hex numeric representations.
-

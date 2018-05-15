@@ -5,8 +5,6 @@ tags: javascript, jquery
 title: jQuery contents() method
 ---
 
-
-
 I had an interesting JavaScript challenge recently and came across a jQuery method that I hadn’t heard of before, so I wanted to share my experience. Given the following markup, I needed a way to hide all the text not inside span.highlighted elements:
 
 ```html
@@ -75,5 +73,3 @@ for(var _i = 0; _i < contents.length; _i++) {
 ```
 
 I then have the ability to toggle the visibility of both the highlighted and unhighlighted spans for the desired functionality. I’ve been working with jQuery for a long time and was happy to browse through the documentation to find this little gem!
-
-

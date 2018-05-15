@@ -11,7 +11,7 @@ The JPA Repository is a useful Spring Framework library that provides object-rel
 
 In order to use JPA the following configurations are required to get the database connection handle and define the interface to map a database table by extending JpaRepository class.
 
-UserRepository.java —​ this part of the code configures how to map the user table
+UserRepository.java — this part of the code configures how to map the user table
 
 ```java
 package com.domain.data;
@@ -22,7 +22,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface UserRepository extends JpaRepository <User, Integer> {
 }
 ```
-persistent-context.xml —​ the dataSourceReadWrite bean class defines the database connection while the entityManagerFactoryReadWrite bean helps to access the database from the base package com.domain
+persistent-context.xml — the dataSourceReadWrite bean class defines the database connection while the entityManagerFactoryReadWrite bean helps to access the database from the base package com.domain
 
 ```xml
 ...
@@ -53,7 +53,7 @@ persistent-context.xml —​ the dataSourceReadWrite bean class defines the dat
 <bean class="org.springframework.orm.jpa.JpaTransactionManager" id="transactionManager" p:datasource-ref="dataSourceReadWrite" p:entitymanagerfactory-ref="entityManagerFactoryReadWrite" />
 ...
 ```
-UserController.java —​ the userRepository object access defines how to use a static database configuration to fetch the User object record
+UserController.java — the userRepository object access defines how to use a static database configuration to fetch the User object record
 
 ```java
 @Api(name = "User", description = "User API Service")
@@ -88,7 +88,7 @@ In some cases, we may need to connect more than one database in our application.
 
 To achieve this result it’s possible to define ReadWrite and ReadOnly datasources in the spring configuration and then declare the specific Repository classes for each specific datasource.
 
-UserRepository.java —​ ReadWrite repository definition under the package com.domain.data
+UserRepository.java — ReadWrite repository definition under the package com.domain.data
 
 ```java
 package com.domain.data;
@@ -99,7 +99,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface UserRepository extends JpaRepository<User, Integer> {
 }
 ```
-UserReadonlyRepository.java —​ ReadOnly repository definition under the package com.domain.data.readonly
+UserReadonlyRepository.java — ReadOnly repository definition under the package com.domain.data.readonly
 
 ```java
 package com.domain.data.readonly;
@@ -110,7 +110,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface UserReadonlyRepository extends JpaRepository<User, Integer> {
 }
 ```
-persistent-context.xml —​ this file defines two different datasources (dataSourceReadWrite and dataSourceReadOnly) while jpa repositories specify the repositories package path
+persistent-context.xml — this file defines two different datasources (dataSourceReadWrite and dataSourceReadOnly) while jpa repositories specify the repositories package path
 
 ```xml
 ...
@@ -153,7 +153,7 @@ persistent-context.xml —​ this file defines two different datasources (dataS
 <bean class="org.springframework.orm.jpa.JpaTransactionManager" id="transactionManagerReadOnly" p:datasource-ref="dataSourceReadOnly" p:entitymanagerfactory-ref="entityManagerFactoryReadOnly" />
 ...
 ```
-UserController.java —​ in this definition it’s interesting to note the the readonly flag, which will establish a connection with ReadWrite or ReadOnly database, based on that flag value
+UserController.java — in this definition it’s interesting to note the the readonly flag, which will establish a connection with ReadWrite or ReadOnly database, based on that flag value
 
 ```java
 @Api(name = "User", description = "User API Service")
@@ -190,7 +190,7 @@ public class UserController {
 
 Recently there was an application that needed to choose the database during API request processing. Unfortunately defining multiple datasources and choosing the database based on the hard coded checks in the code is really cumbersome. Instead it’s possible to use JPA Repository which provides a feature to override the database lookup dynamically using AbstractRoutingDataSource when a request is sent to the application.
 
-UserRepository.java —​ defines mapping to the user table
+UserRepository.java — defines mapping to the user table
 
 ```java
 package com.domain.data;
@@ -201,7 +201,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface UserRepository extends JpaRepository<User, Integer> {
 }
 ```
-persistence-context.xml —​ dataSourceRootDB and dataSourceLiveDB beans defines two different databases. MultitenantRoutingDataSource holds the datasources available to chose dynamically from the code
+persistence-context.xml — dataSourceRootDB and dataSourceLiveDB beans defines two different databases. MultitenantRoutingDataSource holds the datasources available to chose dynamically from the code
 
 ```xml
 ...
@@ -242,7 +242,7 @@ persistence-context.xml —​ dataSourceRootDB and dataSourceLiveDB beans defin
 <bean class="org.springframework.orm.jpa.JpaTransactionManager" id="transactionManager" p:datasource-ref="dataSource" p:entitymanagerfactory-ref="genericEntityManagerFactory" />
 ...
 ```
-UserController.java —​ this class choose the datasource dynamically based on the request and calls the selected service to complete the action
+UserController.java — this class choose the datasource dynamically based on the request and calls the selected service to complete the action
 
 ```java
 ...
@@ -264,7 +264,7 @@ UserController.java —​ this class choose the datasource dynamically based on
 }
 ...
 ```
-MultiTenantContext.java —​ this code sets the datasource connection based on the request from Controller
+MultiTenantContext.java — this code sets the datasource connection based on the request from Controller
 
 ```java
 package com.domain.common;
@@ -293,7 +293,7 @@ public class MultiTenantContext {
 
 }
 ```
-MultitenantRoutingDataSource.java —​ here there’s the definition which determines how the datasource establish the connection. Specifically it will get the datasource which was set previously based on the request parameters
+MultitenantRoutingDataSource.java — here there’s the definition which determines how the datasource establish the connection. Specifically it will get the datasource which was set previously based on the request parameters
 
 ```java
 package com.domain.route;
@@ -311,7 +311,7 @@ public class MultitenantRoutingDataSource extends AbstractRoutingDataSource {
 
 }
 ```
-DefaultUserService.java —​ Fetch the user data from the dynamically chosen database.
+DefaultUserService.java — Fetch the user data from the dynamically chosen database.
 
 ```java
 @Service
@@ -337,5 +337,3 @@ public class DefaultUserService implements UserService {
 ### Conclusion
 
 The application establishes a connection with database through any one of these methods, based on the requirement. The single or multiple static connections are commonly used in most of the applications. But when there is a requirement to choose the database dynamically to establish a connection, AbstractRoutingDataSource class in spring framework features a wonderful way to implement the functionality as explained above.
-
-

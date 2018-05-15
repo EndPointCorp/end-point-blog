@@ -5,8 +5,6 @@ tags: case-study, clients, ecommerce, interchange
 title: 'Client Case Study: Vervante—​Publishing, Production and Fulfillment Services'
 ---
 
-  
-
 ### A real-life scenario
 
 The following is a real-life example of services we have provided for one of our clients.  
@@ -83,5 +81,3 @@ The above described processes are just a few of the processes that we developed 
 ### Last, but not least
 
 Oh, and one other interesting fact: When Vervante first came to us several years ago, they had fewer than 20 customers. Today, they provide order fulfillment and print on demand services for nearly 4000 customers. So when we say to plan ahead for growth, we have experience in that area. 
-
-

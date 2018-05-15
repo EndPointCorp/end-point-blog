@@ -100,5 +100,3 @@ Password 140:
 ```
 
 So you type in the passphrase you entered above when running the otpw-gen command, then pull out your sheet of paper and look up the matching password next to number 140. Voila! I am now connected securely to my more powerful computer, and can SSH from there to anywhere I am used to going to from my laptop. I can even run mutt as if I were at the laptop! A nice workaround for the limitations of the Chromebook.
-
-

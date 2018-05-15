@@ -2,10 +2,8 @@
 author: Mike Farmer
 gh_issue_number: 916
 tags: functional-programming, ruby, rails
-title: Functional Handler —​ A Pattern in Ruby
+title: Functional Handler — A Pattern in Ruby
 ---
-
-
 
 First, a disclaimer. Naming things in the world of programming is always a challenge. Naming this blog post was also difficult. There are all sorts of implications that come up when you claim something is “functional” or that something is a “pattern”. I don’t claim to be an expert on either of these topics, but what I want to describe is a pattern that I’ve seen develop in my code lately and it involves functions, or anonymous functions to be more precise. So please forgive me if I don’t hold to all the constraints of both of these loaded terms.
 
@@ -210,5 +208,3 @@ def execute_pipeline!(payload)
 
 end
 ```
-
-

@@ -5,8 +5,6 @@ tags: postgres
 title: Solving pg_xlog out of disk space problem on Postgres
 ---
 
-
-
 <div class="separator" style="clear: both; padding-bottom: 30px; float:right; text-align: center;"><a href="/blog/2014/09/25/pgxlog-disk-space-problem-on-postgres/image-0-big.png" imageanchor="1" style="clear: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" src="/blog/2014/09/25/pgxlog-disk-space-problem-on-postgres/image-0.png"/></a><br/>
 <em>pg_xlog with a dummy file</em><br/>
 <small>(<a href="https://flic.kr/p/5Naet5">image</a> by <a href="https://www.flickr.com/photos/andrewmalone/">Andrew Malone</a>)</small></div>
@@ -138,5 +136,3 @@ In summary, things you should do now to prevent, detect, and/or mitigate the pro
 1. Monitor the disk space and/or number of WAL files (via check_postgres) so that you are notified that the WALs are growing out of control. Otherwise your first notification may be when the database PANICs and shuts down!
 
 In summary, don’t panic if you run out of space. Do the steps above, and rest assured that no data corruption or data loss has occurred. It’s not fun, but there are far worse Postgres problems to run into! :)
-
-

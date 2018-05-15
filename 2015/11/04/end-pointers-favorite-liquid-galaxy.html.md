@@ -5,8 +5,6 @@ tags: liquid-galaxy
 title: "End Pointers’ Favorite Liquid Galaxy Tours"
 ---
 
-
-
 The Liquid Galaxy is an open source project founded by Google and further developed by End Point along with contributions from others. It allows for “viewsyncing” multiple instances of Google Earth and Google Maps (including Street View) and other applications that are configured with geometric offsets that allow multiple screens to be set up surrounding users of the system. It has evolved to become an ideal data visualization tool for operations, marketing, and research. It immerses users in an environment with rich satellite imagery, elevation data, oceanic data, and panoramic images.
 
 End Point has had the opportunity to make incredible custom presentation for dozens of clients. I had a chance to connect with members of the End Point Liquid Galaxy team, and learn about which presentations they enjoyed making the most.
@@ -36,5 +34,3 @@ The tour of all of the End Point employees still stands out in my mind, just bec
 <div class="separator" style="clear: both; text-align: center;"><a href="/blog/2015/11/04/end-pointers-favorite-liquid-galaxy/image-2-big.jpeg" imageanchor="1" style="clear: right; float: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" src="/blog/2015/11/04/end-pointers-favorite-liquid-galaxy/image-2.jpeg"/></a></div>
 
 The complex presentations that mix video, GIS data, and unique flight paths are really something to see. We created a sort of ‘treasure hunt’ at SXSW last year for the XPrize, where viewers entered a code on the touchscreen based on other exhibits that they had viewed. If they got the code right, the Liquid Galaxy shot them into space, but if they entered the wrong code—​just a splash into the ocean!
-
-
