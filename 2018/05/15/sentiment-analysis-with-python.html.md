@@ -46,8 +46,13 @@ analysis=TextBlob(tweet.text)
 print(analysis.sentiment)
 print("\n")
 ```
+If we want to increase the number of tweet to be displayed and analyzed, just change this line to:
 
-### Analyzing Tweepy's Sentiment Score Results
+```
+public_tweets=api.search("avengers", count=100, result_type = 'recent', lang='en')
+```
+
+### Analyzing Sentiment Score Results
 The sentiment score that we got is summarized as follows:
 
 * 0 - Neutral
@@ -55,6 +60,30 @@ The sentiment score that we got is summarized as follows:
 * Positive - Positive sentiment
 
 By default, the code above uses the English-based library. As a Malaysian, I could not analyze the Malay language based tweet yet. Efforts by the local community are being done to create the Malay-based language corpus for NLTK.  
+
+
+### Looking on The Component : TextBlob
+The Natural Language Processing (NLP) library - TextBlob did the sentiment processing task.
+I did some readings on the [TextBlob's documentation](https://textblob.readthedocs.io/en/dev/). So for example if I declared
+
+```
+text = '''
+I love to read!
+'''
+```
+
+I will get a sentiment polarity value which equals to 0.5 (positive).
+
+While if I put 
+
+```
+text= '''
+I hate to read!
+'''
+```
+
+I will get a sentiment polarity value which equals to -1.0 (negative).
+
 
 ### Summary
 In overall I am quite satisfied with I learned during the session. It is good to have one day spent on a technical workshop like this in which we could be super focus on the content without any external distraction. Kudos to Mr Lee for his effort to teach us on Data Analysis with Python. Till we meet again, hopefully!
