@@ -8,7 +8,7 @@ title: Company Meeting Wrap-Up
 <img border="0" src="/blog/2012/06/18/company-meeting-wrap-up/image-0.jpeg" width="750"/>
 End Pointers at our annual company meeting!
 
-Many of us End Pointers are back to work after last week's annual company meeting of 2012 held in New York City. We attended a 3-day conference full of technical tips, client updates, and general company news. Everyone participated in live blogging during the conference, producing valuable documentation to allow us to revisit what was discussed. Here's a list of all the articles in case you missed any, or felt overwhelmed by the articles in the RSS feed:
+Many of us End Pointers are back to work after last week’s annual company meeting of 2012 held in New York City. We attended a 3-day conference full of technical tips, client updates, and general company news. Everyone participated in live blogging during the conference, producing valuable documentation to allow us to revisit what was discussed. Here’s a list of all the articles in case you missed any, or felt overwhelmed by the articles in the RSS feed:
 
 <table cellpadding="0" cellspacing="0" width="100%">
 <tbody><tr>
@@ -36,7 +36,7 @@ Many of us End Pointers are back to work after last week's annual company meetin
 </td><td valign="top">
 
 <h3 style="margin-bottom:5px;">General Tips & Company News</h3>
-<a href="/blog/2012/06/13/end-points-ruby-slippers">End Point's Ruby Slippers</a><br/>
+<a href="/blog/2012/06/13/end-points-ruby-slippers">End Point’s Ruby Slippers</a><br/>
 <a href="/blog/2012/06/15/when-we-are-not-writing-in-bash-perl">Writing Tips</a><br/>
 <a href="/blog/2012/06/15/popular-mobile-apps-from-brian-and-adam">Popular Mobile Apps</a><br/>
 <a href="/blog/2012/06/13/why-piggybak-exists">Piggybak</a><br/>

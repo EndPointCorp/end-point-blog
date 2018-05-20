@@ -5,27 +5,25 @@ tags: ecommerce, interchange, rails, spree
 title: Multi-store Architecture for Ecommerce
 ---
 
-
-
 Something that never seems to go out of style in ecommerce development is the request for multi-site or multi-store architecture running on a given platform. Usually there is interest in this type of setup to encourage build-out and branding of unique stores that have shared functionality.
 
 <a href="http://www.backcountry.com/"><img src="/blog/2012/02/29/multi-store-architecture-ecommerce/image-0.gif" style="padding-right: 10px" width="250"/></a>
 
 <a href="http://www.steepandcheap.com/"><img border="0" src="http://www.steepandcheap.com/images/steepcheap/header/logo.png" width="200"/></a>
 
-<img src="/blog/2012/02/29/multi-store-architecture-ecommerce/image-0.gif" style="padding-left: 10px" width="200"/>
+<img src="/blog/2012/02/29/multi-store-architecture-ecommerce/image-1.gif" style="padding-left: 10px" width="200"/>
 
-A few of Backcountry.com's stores driven by a multi-store architecture, developed with End Point support.
+A few of Backcountry.com’s stores driven by a multi-store architecture, developed with End Point support.
 
-End Point has developed several multi-store architectures on open source ecommerce platforms, including [Backcountry.com](http://www.backcountry.com/) (Interchange/Perl), [College District](http://www.collegedistrict.com/) (Interchange/Perl), and Fantegrate (Spree/Rails). Here's an outline of several approaches and the advantages and disadvantages for each method.
+End Point has developed several multi-store architectures on open source ecommerce platforms, including [Backcountry.com](http://www.backcountry.com/) (Interchange/Perl), [College District](http://www.collegedistrict.com/) (Interchange/Perl), and Fantegrate (Spree/Rails). Here’s an outline of several approaches and the advantages and disadvantages for each method.
 
 ### Option #1: Copy of Code Base and Database for Every Site
 
-This option requires multiple copies of the ecommerce platform code base, and multiple database instances connected to each code base. The stores could even be installed on different servers. This solution isn't a true multi-store architecture, but it's certainly the first stop for a quick and dirty approach to deploy multiple stores.
+This option requires multiple copies of the ecommerce platform code base, and multiple database instances connected to each code base. The stores could even be installed on different servers. This solution isn’t a true multi-store architecture, but it’s certainly the first stop for a quick and dirty approach to deploy multiple stores.
 
 The **advantages** to this method are:
 
-- Special template logic doesn't have to be written per site — the templates would simply follow the ecommerce platform's template pattern.
+- Special template logic doesn’t have to be written per site — the templates would simply follow the ecommerce platform’s template pattern.
 - Relative to Option #3 described below, no custom database development is required.
 - Custom business logic may be more easily applied to a set of the stores, without affecting the other stores.
 
@@ -35,35 +33,25 @@ The **disadvantages** to this method are:
 - Custom changes must be applied to all multi-store instances.
 - Users and administrator accounts are not shared across multiple stores.
 
-<table cellpadding="0" cellspacing="0" width="100%">
-<tbody><tr>
-<td valign="top">
-<h3>Option #2: Single Code Base, Single Database</h3>
-<p>In this method, there is one copy of the source code that interacts with one database. The single database would be modified to contain a store specific id per product, order, and peripheral tables. The code base would also have to be modified to be able to limit the visible products described <a href="/blog/2010/05/24/spree-multi-store-architecture">here</a>. In this method, the individual store may be identified by the domain or subdomain. With this method, there may also be code customization that allows for custom templates per store.</p>
+### Option #2: Single Code Base, Single Database
 
-<p>The <b>advantages</b> to this method are:</p>
-<ul>
-<li>Relative to Option #1, maintenance for one code base is relatively simple.</li>
-<li>User and administrator accounts are shared across multiple stores.</li>
-<li>Super administrators may view and manage data from one backend administrative interface.</li>
-</ul>
+<img src="/blog/2012/02/29/multi-store-architecture-ecommerce/image-2.png" style="padding: 10px 0 0 10px; float: right;"/>
 
-<p>The <b>disadvantages</b> to this method are:</p>
-<ul>
-<li>Rights and role management can be complicated.</li>
-<li>Development is required for code and database customization.</li>
-<li>Development is required for coding to handle flexible templating across stores.</li>
-</ul>
+In this method, there is one copy of the source code that interacts with one database. The single database would be modified to contain a store specific id per product, order, and peripheral tables. The code base would also have to be modified to be able to limit the visible products described [here](/blog/2010/05/24/spree-multi-store-architecture). In this method, the individual store may be identified by the domain or subdomain. With this method, there may also be code customization that allows for custom templates per store.
 
-</td>
-<td style="padding:10px 0px 0px 10px;" valign="top">
-<img src="/blog/2012/02/29/multi-store-architecture-ecommerce/image-1.png" style="padding-bottom:10px;"/>
-<p>
-A second option in multi-store architecture may use a data model with store specific entries in various tables, described 
-<a href="/blog/2010/05/24/spree-multi-store-architecture">here</a>.</p>
-</td>
-</tr>
-</tbody></table>
+The **advantages** to this method are:
+
+- Relative to Option #1, maintenance for one code base is relatively simple.
+- User and administrator accounts are shared across multiple stores.
+- Super administrators may view and manage data from one backend administrative interface.
+
+The **disadvantages** to this method are:
+
+- Rights and role management can be complicated.
+- Development is required for code and database customization.
+- Development is required for coding to handle flexible templating across stores.
+
+A second option in multi-store architecture may use a data model with store specific entries in various tables, described [here](/blog/2010/05/24/spree-multi-store-architecture).
 
 ### Option #3: Single Code Base, Single Database with Schemas or Views Per Store
 
@@ -80,9 +68,9 @@ The **disadvantage** to this method is:
 
 - Customization and development is required for database configuration and management of multi-store database schemas.
 
-A tangential variation on the methods above are two different codebases and functionality attached to one back-end web service and backing database, such as the architecture we implemented for Locate Express. And a similar tangential variation I've investigated before is one that might use a [Sinatra driven front-end](/blog/2011/03/04/ecommerce-sinatra-shopping-cart) and a Rails backed admin, such as [RailsAdmin](https://github.com/sferik/rails_admin) used in [Piggybak](/blog/2012/01/06/piggybak-mountable-ecommerce-ruby-on).
+A tangential variation on the methods above are two different codebases and functionality attached to one back-end web service and backing database, such as the architecture we implemented for Locate Express. And a similar tangential variation I’ve investigated before is one that might use a [Sinatra driven front-end](/blog/2011/03/04/ecommerce-sinatra-shopping-cart) and a Rails backed admin, such as [RailsAdmin](https://github.com/sferik/rails_admin) used in [Piggybak](/blog/2012/01/06/piggybak-mountable-ecommerce-ruby-on).
 
-<a href="http://www.collegedistrict.com/"><img src="/blog/2012/02/29/multi-store-architecture-ecommerce/image-2.png" width="700"/></a>
+<a href="http://www.collegedistrict.com/"><img src="/blog/2012/02/29/multi-store-architecture-ecommerce/image-3.png" width="700"/></a>
 
 College District has a collection of stores driven by a multi-store architecture, developed with End Point support.
 

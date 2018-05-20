@@ -5,13 +5,13 @@ tags: hosting, tools
 title: Automating removal of SSH key patterns
 ---
 
-Every now and again, it becomes necessary to remove a user's SSH key from a system.  At End Point, we'll often allow multiple developers into multiple user accounts, so cleaning up these keys can be cumbersome.  I decided to write a shell script to brush up on those skills, make sure I completed my task comprehensively, and automate future work.
+Every now and again, it becomes necessary to remove a user’s SSH key from a system. At End Point, we’ll often allow multiple developers into multiple user accounts, so cleaning up these keys can be cumbersome. I decided to write a shell script to brush up on those skills, make sure I completed my task comprehensively, and automate future work.
 
-## Initial Design and Dependencies
+### Initial Design and Dependencies
 
-My plan for this script is to accept a single  argument which would be used to search the system's authorized_keys files.  If the pattern was found, it would offer you the opportunity to delete the line of the file on which the pattern was found.
+My plan for this script is to accept a single argument which would be used to search the system’s authorized_keys files. If the pattern was found, it would offer you the opportunity to delete the line of the file on which the pattern was found.
 
-I've always found mlocate to be very helpful; it makes finding files extremely fast and its usage is trivial. For this script, we'll use the output from locate to find all authorized_keys files in the system.  Of course, we'll want to make sure that the mlocate.db has recently been updated.  So let's show the user when the database was last updated and offer them a chance to update it.
+I’ve always found mlocate to be very helpful; it makes finding files extremely fast and its usage is trivial. For this script, we’ll use the output from locate to find all authorized_keys files in the system. Of course, we’ll want to make sure that the mlocate.db has recently been updated. So let’s show the user when the database was last updated and offer them a chance to update it.
 
 ```bash
 mlocate_path="/var/lib/mlocate/mlocate.db"
@@ -33,7 +33,7 @@ else
 fi
 ```
 
-First we define the path where we can find the mlocate database.  Then we check to see if we can read that file.  If we can't read the file, we let the user know and exit.  If we can read the file, print the date and time it was last modified and offer the user a chance to update the database.  While this is functional, it's pretty brittle.  Let's make things a bit more flexible by letting locate tell us where its database is.
+First we define the path where we can find the mlocate database. Then we check to see if we can read that file. If we can’t read the file, we let the user know and exit. If we can read the file, print the date and time it was last modified and offer the user a chance to update the database. While this is functional, it’s pretty brittle. Let’s make things a bit more flexible by letting locate tell us where its database is.
 
 ```bash
 if
@@ -49,9 +49,9 @@ else
 fi
 ```
 
-Instead of hard-coding the path to the database, we collect the locate database details using the -S parameter.  By using some [string manipulation functions](http://tldp.org/LDP/abs/html/string-manipulation.html) we can tease out the file path from the output.
+Instead of hard-coding the path to the database, we collect the locate database details using the -S parameter. By using some [string manipulation functions](http://tldp.org/LDP/abs/html/string-manipulation.html) we can tease out the file path from the output.
 
-Because we are going to offer to update the location database (as well as eventually manipulate authorized_keys files), it makes sense to check that we are root before proceeding.  Additionally, let's check to see that we get a pattern from our user, and provide some usage guidance.
+Because we are going to offer to update the location database (as well as eventually manipulate authorized_keys files), it makes sense to check that we are root before proceeding. Additionally, let’s check to see that we get a pattern from our user, and provide some usage guidance.
 
 ```bash
 if [ ! `whoami` = "root" ]
@@ -67,9 +67,9 @@ then
 fi
 ```
 
-## Checking and modifying authorized_keys for a pattern
+### Checking and modifying authorized_keys for a pattern
 
-With some prerequisites in place, we're finally ready to scan the system's authorized_keys files. Let's just start with the syntax for that loop.
+With some prerequisites in place, we’re finally ready to scan the system’s authorized_keys files. Let’s just start with the syntax for that loop.
 
 ```bash
 for key_file in `locate authorized_keys`; do
@@ -77,7 +77,7 @@ for key_file in `locate authorized_keys`; do
 done
 ```
 
-We do not specify a dollar sign ($) in front of key_file when defining the loop, but once inside our loop we use the regular syntax.  We use [command substitution](http://pubs.opengroup.org/onlinepubs/009695399/utilities/xcu_chap02.html#tag_02_06_03) by placing a command around back quotes (`) around the output of the command we want to use.  We're now scanning each file, but how do we find matching entries?
+We do not specify a dollar sign ($) in front of key_file when defining the loop, but once inside our loop we use the regular syntax. We use [command substitution](http://pubs.opengroup.org/onlinepubs/009695399/utilities/xcu_chap02.html#tag_02_06_03) by placing a command around back quotes (`) around the output of the command we want to use. We’re now scanning each file, but how do we find matching entries?
 
 ```bash
 IFS=$'\n'
@@ -88,9 +88,9 @@ for matching_entry in `grep "$1" $key_file`; do
 done
 ```
 
-For each $key_file, we now grep our user's pattern ($1) and store it in $matching_entry.  We have to change the [Input Field Seperator (IFS)](http://pubs.opengroup.org/onlinepubs/009695399/utilities/xcu_chap02.html#tag_02_05_03) to a new line, instead of the default space, in order to capture each grepped line in its entriety.  (Thanks to Brian Miller for that one!)
+For each $key_file, we now grep our user’s pattern ($1) and store it in $matching_entry. We have to change the [Input Field Seperator (IFS)](http://pubs.opengroup.org/onlinepubs/009695399/utilities/xcu_chap02.html#tag_02_05_03) to a new line, instead of the default space, in order to capture each grepped line in its entriety. (Thanks to Brian Miller for that one!)
 
-With a matching entry found in a key file, it's time to finally offer the user a chance to remove the entry.
+With a matching entry found in a key file, it’s time to finally offer the user a chance to remove the entry.
 
 ```bash
 echo "Found an entry in $key_file:"
@@ -112,11 +112,11 @@ else
 fi
 ```
 
-We prompt the user if they want to delete the shown entry, verify we can write to the $key_file, and then delete the $matching entry.  By using the -i option to the sed command, we are able to make modifications in place.
+We prompt the user if they want to delete the shown entry, verify we can write to the $key_file, and then delete the $matching entry. By using the -i option to the sed command, we are able to make modifications in place.
 
-## The Final Product
+### The Final Product
 
-I'm sure there is a lot of room for improvement on this script and I'd welcome pull requests on the [GitHub repo](https://github.com/bbuchalter/clean_authorized_keys/blob/master/clean_authorized_keys) I setup for this little block of code.  As always, be **very** careful when running automated scripts as root.  Please test this script out on a non-production system before use.
+I’m sure there is a lot of room for improvement on this script and I’d welcome pull requests on the [GitHub repo](https://github.com/bbuchalter/clean_authorized_keys/blob/master/clean_authorized_keys) I setup for this little block of code. As always, be **very** careful when running automated scripts as root. Please test this script out on a non-production system before use.
 
 ```bash
 #!/bin/bash

@@ -9,7 +9,7 @@ title: Hidden inefficiencies in Interchange searching
 
 A very common, somewhat primitive approach to Interchange searching uses an approach like this:
 
-The search profile contains something along the lines of --
+The search profile contains something along the lines of
 
 ```nohighlight
   mv_search_type=db
@@ -25,7 +25,7 @@ The search profile contains something along the lines of --
 [/search-region]
 ```
 
-In other words, we search the products table for rows whose column "category" matches an expression (with a single query), and we list all the matches (description only). However, this can be inefficient depending on your database implementation: the item-field tag *issues a query* every time it's encountered, which you can see if you "tail" your database log. If your item-list contains many different columns from the search result, you'll end up issuing *many* such queries:
+In other words, we search the products table for rows whose column “category” matches an expression (with a single query), and we list all the matches (description only). However, this can be inefficient depending on your database implementation: the item-field tag *issues a query* every time it’s encountered, which you can see if you “tail” your database log. If your item-list contains many different columns from the search result, you’ll end up issuing *many* such queries:
 
 ```nohighlight
 [item-list]
@@ -44,9 +44,9 @@ SELECT size FROM products WHERE sku='ABC123'
 ...
 ```
 
-(Now, some databases are smart enough to cache query results, but some aren't, so avoiding this extra work is probably worth your trouble even on a "smart" database, in case your Interchange application gets moved to a "dumb" database sometime in the future.)
+(Now, some databases are smart enough to cache query results, but some aren’t, so avoiding this extra work is probably worth your trouble even on a “smart” database, in case your Interchange application gets moved to a “dumb” database sometime in the future.)
 
-Fortunately, it's easy to correct:
+Fortunately, it’s easy to correct:
 
 ```nohighlight
 mv_return_fields=*
@@ -60,6 +60,6 @@ and then
 ...
 ```
 
-in place of "item-field".
+in place of “item-field”.
 
 

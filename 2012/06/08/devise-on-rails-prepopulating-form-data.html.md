@@ -7,13 +7,13 @@ title: 'Devise on Rails: Prepopulating Form Data'
 
 
 
-I recently had a unique (but reasonable) request from a client: after an anonymous/guest user had completed checkout, they requested that a "Create Account" link be shown on the receipt page which would prepopulate the user form data with the user's checkout billing address. Their application is running on Ruby on Rails 3.2 and uses [devise](https://github.com/plataformatec/devise). Devise is a user authentication gem that's popular in the Rails community.
+I recently had a unique (but reasonable) request from a client: after an anonymous/guest user had completed checkout, they requested that a “Create Account” link be shown on the receipt page which would prepopulate the user form data with the user’s checkout billing address. Their application is running on Ruby on Rails 3.2 and uses [devise](https://github.com/plataformatec/devise). Devise is a user authentication gem that’s popular in the Rails community.
 
 <img border="0" height="216" src="/blog/2012/06/08/devise-on-rails-prepopulating-form-data/image-0.png" width="400"/>
 A customer request was to include a link on the receipt page that would
  autopopulate the user create account form with checkout data.
 
-Because devise is a Rails engine (self-contained Rails functionality), the source code is not included in the main application code repository. While using [bundler](http://gembundler.com/), the version information for devise is stored in the application's Gemfile.lock, and the engine source code is stored depending on bundler configuration. Because the source code does not live in the main application, modifying the behavior of the engine is not quite as simple as editing the source code. My goal here was to find an elegant solution to **hook** into the devise registration controller to set the user parameters.
+Because devise is a Rails engine (self-contained Rails functionality), the source code is not included in the main application code repository. While using [bundler](http://gembundler.com/), the version information for devise is stored in the application’s Gemfile.lock, and the engine source code is stored depending on bundler configuration. Because the source code does not live in the main application, modifying the behavior of the engine is not quite as simple as editing the source code. My goal here was to find an elegant solution to **hook** into the devise registration controller to set the user parameters.
 
 ### ActiveSupport::Concern
 

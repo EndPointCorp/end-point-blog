@@ -5,13 +5,11 @@ tags: ecommerce, open-source, piggybak, rails
 title: ActiveRecord Callbacks for Order Processing in Ecommerce Applications
 ---
 
-
-
-As I recently blogged about, I introduced a new [Ruby on Rails Ecommerce Engine](http://piggybak.org). The gem relies on [RailsAdmin](https://github.com/sferik/rails_admin), a Ruby on Rails engine that provides a nice interface for managing data. Because the RailsAdmin gem drives order creation on the backend in the context of a standard but configurable CRUD interface, and because I didn't want to hack at the RailsAdmin controllers, much of the order processing logic leverages ActiveRecord callbacks for processing. In this blog article, I'll cover the process that happens when an order is saved.
+As I recently blogged about, I introduced a new [Ruby on Rails Ecommerce Engine](http://piggybak.org). The gem relies on [RailsAdmin](https://github.com/sferik/rails_admin), a Ruby on Rails engine that provides a nice interface for managing data. Because the RailsAdmin gem drives order creation on the backend in the context of a standard but configurable CRUD interface, and because I didn’t want to hack at the RailsAdmin controllers, much of the order processing logic leverages ActiveRecord callbacks for processing. In this blog article, I’ll cover the process that happens when an order is saved.
 
 ### Order Data Model
 
-The first thing to note is the data model and the use of nested attributes. Here's how the order model relates to its associated models:
+The first thing to note is the data model and the use of nested attributes. Here’s how the order model relates to its associated models:
 
 ```ruby
 class Order < ActiveRecord::Base
@@ -69,7 +67,7 @@ validates_each :payment_method_id do |record, attr, value|
 end
 ```
 
-This bit of code uses ActiveMerchant's functionality to avoid reproducing business logic for credit card validation. The errors are added on the payment attributes (e.g. card_number, verification_code, expiration date) and presented to the user.
+This bit of code uses ActiveMerchant’s functionality to avoid reproducing business logic for credit card validation. The errors are added on the payment attributes (e.g. card_number, verification_code, expiration date) and presented to the user.
 
 ### Step #4: after_validation
 
@@ -98,12 +96,10 @@ After the payment processes, another before_save method is called to update the 
 
 ### Step #7: Save
 
-Finally, if everything's gone through, the order is saved.
+Finally, if everything’s gone through, the order is saved.
 
 ### Summary
 
 As I mentioned above, the RailsAdmin controllers were not extended or overridden to handle backroom order processing. All of the order processing is represented in the Order model in these active record callbacks. This also allows for the frontend order processing controller to be fairly lightweight, which is a standard practice for writing clean MVC code.
 
-Check out the full list of ActiveRecord callbacks [here](http://guides.rubyonrails.org/active_record_validations_callbacks.html#available-callbacks). And check out the Order model for Piggybak [here](https://github.com/stephskardal/piggybak/blob/master/app/models/piggybak/order.rb).
-
-
+Check out the full list of ActiveRecord callbacks [here](https://web.archive.org/web/20120125101409/http://edgeguides.rubyonrails.org/active_record_validations_callbacks.html). And check out the Order model for Piggybak [here](https://github.com/piggybak/piggybak/blob/master/app/models/piggybak/order.rb).

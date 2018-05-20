@@ -30,6 +30,6 @@ To work around the problem, you can either:
 
 Red Hat is aware of the bug and you can track progress toward a resolution in [Bugzilla bug #835090](https://bugzilla.redhat.com/show_bug.cgi?id=835090).
 
-If you're using IPv6, watch out for this! If not, you're fine.
+If you’re using IPv6, watch out for this! If not, you’re fine.
 
 

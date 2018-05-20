@@ -5,7 +5,7 @@ tags: browsers, mobile
 title: 'Three Things: ImageMagick, RequestBin, Responsivness'
 ---
 
-It's been a while since I wrote a **Three Things** blog article, where I share tidbits that I've learned that don't quite make it into a full blog post, but are still worth sharing!
+It’s been a while since I wrote a **Three Things** blog article, where I share tidbits that I’ve learned that don’t quite make it into a full blog post, but are still worth sharing!
 
 ### Image Stacking via Command Line
 
@@ -20,7 +20,7 @@ The -append argument will stack the images vertically, and +append will stack th
 
 ### RequestBin
 
-Recently, I needed to quickly examine the contents sent during a payment transaction. [Richard](/team/richard_templet) pointed me to [RequestBin](http://requestb.in/) a neat and quick tool for examining the contents of an external request. I was testing the Elavon payment gateway integrated in an application using [Piggybak](http://piggybak.org/). In my code, I made the following change:
+Recently, I needed to quickly examine the contents sent during a payment transaction. [Richard](/team/richard_templet) pointed me to [RequestBin](https://github.com/Runscope/requestbin) a neat and quick tool for examining the contents of an external request. I was testing the Elavon payment gateway integrated in an application using [Piggybak](https://github.com/piggybak/piggybak). In my code, I made the following change:
 
 ```ruby
 class ElavonGateway < ViaklixGateway
@@ -32,7 +32,7 @@ class ElavonGateway < ViaklixGateway
 I ran through a single checkout, then visited the RequestBin inspect URL to examine the variables passed to the payment gateway, to see the following data (the text overwrites itself in Chrome):
 
 <img border="0" height="400" src="/blog/2012/06/28/three-things-imagemagick-requestbin/image-0.png" width="372"/>
-[RequestBin](http://requestb.in/) example output.
+[RequestBin](https://github.com/Runscope/requestbin) example output.
 
 ### A Responsiveness Tool
 

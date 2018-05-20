@@ -5,21 +5,21 @@ tags: performance, postgres, testing
 title: Speeding Up Integration Tests with PostgreSQL
 ---
 
-Many people tend to say they don't want to write tests. One of the reasons is usually that the tests are too slow. The tests can be slow because they are written in a bad way. They can also be slow because of slow components. One such component is usually a database.
+Many people tend to say they don’t want to write tests. One of the reasons is usually that the tests are too slow. The tests can be slow because they are written in a bad way. They can also be slow because of slow components. One such component is usually a database.
 
-The great thing about PostgreSQL is that all types of queries are transactional. It simply means that you can start a transaction, then run the test, which can add, delete and update all the data and database structure it wants. At the end of the integration test, there should be called rollback which just reverts all the changes. It means the next test will always have the same database structure and data before running, and you don't need to manually clear anything.
+The great thing about PostgreSQL is that all types of queries are transactional. It simply means that you can start a transaction, then run the test, which can add, delete and update all the data and database structure it wants. At the end of the integration test, there should be called rollback which just reverts all the changes. It means the next test will always have the same database structure and data before running, and you don’t need to manually clear anything.
 
-For running the integration tests we need a test database. One of the most important things when running test is speed. Tests should be fast, programmers don't like to wait ages just to know that there is something wrong.
+For running the integration tests we need a test database. One of the most important things when running test is speed. Tests should be fast, programmers don’t like to wait ages just to know that there is something wrong.
 
-We can also have a read only databases for the tests. Then you don't need to worry about the transactions, however you always need to ensure the tests won't change anything. Even if you assume your tests won't make any changes, it is always better to use a new transaction for each test and rollback at the end.
+We can also have a read only databases for the tests. Then you don’t need to worry about the transactions, however you always need to ensure the tests won’t change anything. Even if you assume your tests won’t make any changes, it is always better to use a new transaction for each test and rollback at the end.
 
-The main idea for fast integration tests using PostgreSQL is that those tests don't change anything in the database. If they don't change, we don't need to worry about some possible data loss when the database suddenly restarts. Then we can just restart the tests. Tests should prepare the data before running, assuming the database is in unknown state.
+The main idea for fast integration tests using PostgreSQL is that those tests don’t change anything in the database. If they don’t change, we don’t need to worry about some possible data loss when the database suddenly restarts. Then we can just restart the tests. Tests should prepare the data before running, assuming the database is in unknown state.
 
-This database should be as fast as possible, even if it means losing data when some unusual things happen. Normally PostgreSQL works really great when someone turns off the server plug suddenly or kills the database process. It just doesn't lose the data.
+This database should be as fast as possible, even if it means losing data when some unusual things happen. Normally PostgreSQL works really great when someone turns off the server plug suddenly or kills the database process. It just doesn’t lose the data.
 
-However we really don't need this stuff when running the tests. The database can be loaded before running tests. If the database is suddenly shut down, we should restart the tests.
+However we really don’t need this stuff when running the tests. The database can be loaded before running tests. If the database is suddenly shut down, we should restart the tests.
 
-The simplest thing is to change a couple of settings which enable great secure writes, however it slows down the database. We don't need to have secure writes, they are only important when something crashes. Then we should restart all the components used for integration tests and load database before testing.
+The simplest thing is to change a couple of settings which enable great secure writes, however it slows down the database. We don’t need to have secure writes, they are only important when something crashes. Then we should restart all the components used for integration tests and load database before testing.
 
 For testing I will use pgbench program which makes a test similar to TPC-B. The tests prepare the data in four tables and then performs a simple transaction:
 
@@ -70,7 +70,7 @@ The initial results show about 80 transactions per second (tps).
   tps = 78.624383 (excluding connections establishing)
 ```
 
-You may probably noticed the "number of clients" and "number of threads" values. It is the scenario where you have sequential tests, so all of them are run one by one. However integration tests written in a good way can be run in parallel, so let's run the pgbench once again, but with three threads and three clients.
+You may probably noticed the “number of clients” and “number of threads” values. It is the scenario where you have sequential tests, so all of them are run one by one. However integration tests written in a good way can be run in parallel, so let’s run the pgbench once again, but with three threads and three clients.
 
 ```bash
   ./pgbench -h localhost -c 3 -j 3 -T 300 pbench
@@ -87,9 +87,9 @@ The results show that it is a little bit faster now:
   tps = 99.273464 (excluding connections establishing)
 ```
 
-Let's now change the PostgreSQL settings to some more dangerous, so it can lose some data when shut down suddenly, but in fact I don't care as all the data is loaded just before running the test.
+Let’s now change the PostgreSQL settings to some more dangerous, so it can lose some data when shut down suddenly, but in fact I don’t care as all the data is loaded just before running the test.
 
-I've written at the end of the postgresql.conf file the following lines:
+I’ve written at the end of the postgresql.conf file the following lines:
 
 ```bash
   fsync = off                # turns forced synchronization on or off
@@ -146,4 +146,4 @@ As you can see, you can do three simple things to speed up your integration test
 
 This way I managed to speed up the tests from 78 tps to 1215 tps. It means that the integration tests which normally run in 60 minutes, should now run in 4 minutes.
 
-I've also played with many other settings which could have some impact on the PostgreSQL speed. They really have, however the impact is so small that I don't think it is worth mentioning here. Changing those three settings can make the PostgreSQL fast enough.
+I’ve also played with many other settings which could have some impact on the PostgreSQL speed. They really have, however the impact is so small that I don’t think it is worth mentioning here. Changing those three settings can make the PostgreSQL fast enough.

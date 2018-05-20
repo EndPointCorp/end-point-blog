@@ -5,11 +5,11 @@ tags: company, jobs, rails
 title: Ruby on Rails software developer needed
 ---
 
-We're looking for another talented Ruby on Rails developer to consult with our clients and develop their Ruby on Rails web applications. If you like to focus on solving business problems and can take responsibility for getting a job done well without intensive oversight, please read on!
+We’re looking for another talented Ruby on Rails developer to consult with our clients and develop their Ruby on Rails web applications. If you like to focus on solving business problems and can take responsibility for getting a job done well without intensive oversight, please read on!
 
 End Point is a 17-year-old web consulting company based in New York city, with 28 full-time employees working mostly remotely from home offices. Our team is made up of strong ecommerce, database, and system administration talent, working together using ssh, Screen and tmux, IRC, Google+ Hangouts, Skype, and good old phones.
 
-We serve over 200 clients ranging from small family businesses to large corporations, using a variety of open source technologies including Ruby, Python, Perl, Git, PostgreSQL, MySQL, RHEL/CentOS, Debian, and Ubuntu.
+We serve over 200 clients ranging from small family businesses to large corporations, using a variety of open source technologies including Ruby, Python, Perl, Git, PostgreSQL, MySQL, RHEL/​CentOS, Debian, and Ubuntu.
 
 What is in it for you?
 

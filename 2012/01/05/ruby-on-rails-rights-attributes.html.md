@@ -5,13 +5,13 @@ tags: rails
 title: 'Ruby on Rails: Attributes Management through Rights'
 ---
 
-I've written a couple times about a large Rails project that a few End Pointers have been working on. The system has a fairly robust system for managing rights and accessibility. The basic data model for rights, users, groups, and roles is this:
+I’ve written a couple times about a large Rails project that a few End Pointers have been working on. The system has a fairly robust system for managing rights and accessibility. The basic data model for rights, users, groups, and roles is this:
 
 <img border="0" height="337" src="/blog/2012/01/05/ruby-on-rails-rights-attributes/image-0.png" width="737"/>
 
 In this data model, right_assignments belong to a single right, and belong to a subject, through a polymorphic relationship. The subject can be a Role, Group, or User. A User can have a role or belong to a group. This allows for the ability to assign a right to a user directly or through a group or role.
 
-In our code, there is a simple method for grabbing a user's set of rights:
+In our code, there is a simple method for grabbing a user’s set of rights:
 
 ```ruby
   class User < ActiveRecord::Base
@@ -79,9 +79,9 @@ The interesting part of this application is how the rights are used. In Rails, y
   end
 ```
 
-The above block updates an existing item. The default accessible attributes are title and description, which means that anyone can set those values. Tags and origin can only be set if the user has the right that correspond to that attribute. Tags and origin will not be saved for a user without those rights, even if they are passed in the parameters. The obvious disadvantage with this method is that there's no exception handling when a user tries to submit parameters that they cannot set.
+The above block updates an existing item. The default accessible attributes are title and description, which means that anyone can set those values. Tags and origin can only be set if the user has the right that correspond to that attribute. Tags and origin will not be saved for a user without those rights, even if they are passed in the parameters. The obvious disadvantage with this method is that there’s no exception handling when a user tries to submit parameters that they cannot set.
 
-The method above is reused to define which fields are editable to the current user, with the code shown below. So in theory, a user submitting parameters that they can't edit would only be doing it through a [malicious] post not based on the view below.
+The method above is reused to define which fields are editable to the current user, with the code shown below. So in theory, a user submitting parameters that they can’t edit would only be doing it through a [malicious] post not based on the view below.
 
 
 
@@ -108,11 +108,11 @@ The method above is reused to define which fields are editable to the current us
   <% end -%>
 ```
 
-The data model and rights management described in this article isn't novel, but applying it in this fashion is elegant and produces modular and reusable methods. The code shown here has been simplified for this blog post. In reality, there are a few additional complexities:
+The data model and rights management described in this article isn’t novel, but applying it in this fashion is elegant and produces modular and reusable methods. The code shown here has been simplified for this blog post. In reality, there are a few additional complexities:
 
 - The application utilizes [acl9](https://github.com/be9/acl9) for access control, which is an additional layer of security that will prevent non-registered users from creating items, and will prohibit specific users from updating existing items.
-- The user's all_rights method utilizes Rails low-level caching, with appropriate cache invalidation when the user's rights, groups, or roles change. I've given a simple example of Rails low-level caching [in this blog article](/blog/2011/09/06/ruby-on-rails-performance-overview).
-- The logic in attr_accessible_for is more complex and can be based on the object's values or parameters. For example, an item may have a boolean that indicates anyone can tag it. The attr_accessible_for method will incorporate additional logic to determine if the :tags field is editable.
+- The user’s all_rights method utilizes Rails low-level caching, with appropriate cache invalidation when the user’s rights, groups, or roles change. I’ve given a simple example of Rails low-level caching [in this blog article](/blog/2011/09/06/ruby-on-rails-performance-overview).
+- The logic in attr_accessible_for is more complex and can be based on the object’s values or parameters. For example, an item may have a boolean that indicates anyone can tag it. The attr_accessible_for method will incorporate additional logic to determine if the :tags field is editable.
 - The view handles different field types (checkbox, textarea, etc) and allows for overriding the field label.
 
 Here are several articles related to the same large Ruby on Rails project, for your reading pleasure:

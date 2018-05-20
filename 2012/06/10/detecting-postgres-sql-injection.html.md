@@ -10,17 +10,17 @@ title: Detecting Postgres SQL Injection
 <a href="/blog/2012/06/10/detecting-postgres-sql-injection/image-0-big.png" imageanchor="1" style="clear:right; float:right; margin-left:1em; margin-bottom:1em"><img border="0" height="206" src="/blog/2012/06/10/detecting-postgres-sql-injection/image-0.png" width="200"/></a>
 
 SQL injection attacks are often treated with scorn among seasoned 
-DBAs and developers - "oh it could never happen to **us**!". Until it does, 
+DBAs and developers—​“oh it could never happen to **us**!”. Until it does, 
 and then it becomes a serious matter. It can, and most likely will eventually 
-happen to you or one of your clients. It's prudent to not just avoid them in 
+happen to you or one of your clients. It’s prudent to not just avoid them in 
 the first place, but to be proactively looking for attacks, to know what to do 
 when they occur, and know what steps to take after you have cleaned up the mess.
 
 What is a SQL injection attack? Broadly speaking, it is a malicious 
 user entering data to subvert the nature of your original query. This is 
-almost always through a web interface, and involves an "unescaped" parameter 
+almost always through a web interface, and involves an “unescaped” parameter 
 that can be used to change the data returned or perform other database 
-actions. The user "injects" their own SQL into your original SQL statement, 
+actions. The user “injects” their own SQL into your original SQL statement, 
 changing the query from its original intent.
 
 For example, you have a page in which the a logged-in customer can look up 
@@ -43,7 +43,7 @@ by creating a non-standard order_number such as:
 12345 --
 ```
 
-This would return information on anyone's order, without checking the order_owner 
+This would return information on anyone’s order, without checking the order_owner 
 column, as the SQL sent to the database would become:
 
 ```
@@ -78,13 +78,13 @@ $sql = 'SELECT * FROM order WHERE order_id = ? AND order_owner = ?';
 $results = run_query($sql, $order_id, $username);
 ```
 
-## Reaction
+### Reaction
 
-So you've just detected a SQL injection attack. Don't panic! Okay, perhaps 
+So you’ve just detected a SQL injection attack. Don’t panic! Okay, perhaps 
 panic a little bit. The first order of business is to, as quickly as possible, 
 disable access and prevent the attacker from doing anything else. Their next 
 injected SQL statement could be a DROP TABLE. Do as much as is needed to stop it 
-right away - don't worry about fixing the hole yet. Stop Apache, disable all CGI, 
+right away—​don’t worry about fixing the hole yet. Stop Apache, disable all CGI, 
 shut down your database, whatever it takes. Yes, this will cause a loss of business 
 for a busy site but so will that potential DROP TABLE command! Once things are disabled, 
 start patching up the holes. If it is a well isolated, obvious fix, bring things back up. 
@@ -95,11 +95,11 @@ are now some important steps to take:
 - Check your logs carefully to see if this was an isolated event, or if the hole had 
 been used before. If you are relying on SQL errors for detection, a careful attacker 
 may have already successfully injected some SQL. See below for forensic tactics.
-- Learn why this happened in the first place. Didn't update a driver? Someone just 
+- Learn why this happened in the first place. Didn’t update a driver? Someone just 
 wrote some bad code? Something else? Fix it at both the immediate technical and 
 long-term procedural level.
 
-## Detection
+### Detection
 
 Detection is the most important part of this article. If someone were to start a 
 SQL injection attack against your site right now, would you even know? How quickly?
@@ -107,7 +107,7 @@ SQL injection attack against your site right now, would you even know? How quick
 Fortunately, SQL injection attacks almost always generate some SQL errors as the 
 attacker tries to work around your SQL. This is the number one way to detect 
 an attack while it is happening. We recommend the invaluable 
-[tail_n_mail](http://bucardo.org/wiki/Tail_n_mail) for this task.
+[tail_n_mail](https://bucardo.org/tail_n_mail/) for this task.
 For our clients, we have tail_n_mail running via cron every minute, 
 scanning for new and interesting errors and mailing them out to us. Thus, 
 detection is usually within minutes.
@@ -125,7 +125,7 @@ injected ones. In most cases, attacker access to your database is fairly limited
 knowing the names of your tables, columns, functions, and views, so one thing 
 to look for is references to system tables such as pg_class and pg_attribute, 
 system views such as pg_tables and pg_stat_activity, the pg_sleep() function, 
-and the information_schema schema. (pg_sleep() is often used in "blind SQL" 
+and the information_schema schema. (pg_sleep() is often used in “blind SQL” 
 attacks, to let the attacker know if something worked or not by the inclusion 
 of a delay, when there may be no other direct feedback from their injection).
 While looking for these items is not as easy to setup as looking 
@@ -135,7 +135,7 @@ be accessing those items.
 Another thing to watch out for strange offsets. Because the information an attacker 
 can get back is often limited to a row at a time due to the limitations of 
 the original query, SQL injections often pull back the same information from, 
-say, information_schema.tables, with a "LIMIT 1 OFFSET 1" tacked on, Then 
+say, information_schema.tables, with a “LIMIT 1 OFFSET 1” tacked on, Then 
 they call the page again and inject their SQL, but with an offset of 2, then an 
 offset of 3, etc. Nothing says SQL injection like seeing an OFFSET 871 in your logs.
 
@@ -145,7 +145,7 @@ your postgresql.conf file. Setting this parameter to **'all'** is *highly*
 recommended, and SQL injection detection (and forensics!) are merely two of the 
 many reasons for doing so.
 
-If you don't have log_statement set to 'all', your only hope of direct detection is 
+If you don’t have log_statement set to ‘all’, your only hope of direct detection is 
 if one of the queries happens to get logged for some other reason, such 
 as going over your log_min_duration_statement setting. Good luck with that. 
 /sarcasm.
@@ -157,35 +157,35 @@ business intelligence people may come across some unexplained buying
 patterns, etc. Intuition from experienced people is a powerful tool: follow 
 up on those hunches and nagging feelings!
 
-## Prevention
+### Prevention
 
 Preventing SQL injection is mostly a matter of following some 
 standard software development practices. Basically, you want your 
 code up to date, well vetted, and easy to read and revert. Here are some 
 guidelines:
 
-### Use version control
+#### Use version control
 
 More specifically, use 
-[git](http://git-scm.com/). For everything related to your site. Application code, 
+[git](https://git-scm.com/). For everything related to your site. Application code, 
 HTML pages, system configurations. There are many advantages to git, but it is particularly 
 useful when you are (quickly!) trying to figure out how some bad code (e.g. with SQL injection 
 holes) got into your app, and what safe version you can replace it with. The powers of 
 git log -p, git bisect, git blame, and git checkout will make you wonder how you ever 
 lived without them.
 
-### More than one set of eyes
+#### More than one set of eyes
 
  
 
-Never commit code that hasn't been looked at by at least one other person not involved 
+Never commit code that hasn’t been looked at by at least one other person not involved 
 in its writing. This can be as informal as leaning over and asking someone else to look 
 at the patch, to setting up a complex enforcement system via something like 
-[gerrit](http://code.google.com/p/gerrit/). The most important thing is to 
+[gerrit](https://www.gerritcodereview.com/). The most important thing is to 
 have it reviewed by someone qualified, and to note the review in your commit message.
 
 Email is a great way to do this, especially if you have a list of people qualified to 
-give a review of the code in question. So, database changes could go to a "dbgroup" 
+give a review of the code in question. So, database changes could go to a “dbgroup” 
 list, and one or more people on the list will review and reply.
 
 Another nice thing is a post-commit hook that mails committed code as a diff to a wide 
@@ -194,27 +194,27 @@ but the more eyes the better. On that note, make sure the age-old appeal of heav
 commenting code is followed, especially code that is trying to fetch information 
 from a database.
 
-### Teach people about SQL injection
+#### Teach people about SQL injection
 
 Using placeholders is the only truly safe way to write code. Make sure everyone 
 knows this, and show some examples of SQL injection problems to new hires so they 
 know what to look out for and what the consequences will be.
 
-### Never assume any database input is safe.
+#### Never assume any database input is safe.
 
 Never, ever assume database input is safe, or will remain safe. Always 
 use prepared statements aka placeholders. You say you scrubbed that 
 variable with a regular expression above the SQL call? Someone **will** 
 tweak that regex someday.
 
-### Be proactive in looking for problems
+#### Be proactive in looking for problems
 
 See the section about about using tail_n_mail. There are also companies / tools 
 that will attempt to find SQL injection problems in your application. While not 
 foolproof, these can be useful, particularly if you have a very large website 
 with a very large codebase.
 
-### Keep your software up to date
+#### Keep your software up to date
 
 Sure, your software is free of all problems, but what about the framework 
 you are using? The language? The database? And the database drivers? 
@@ -223,16 +223,16 @@ have already patched it. Run the most recent version, and make sure you
 are on all the relevant announcement lists so you hear about new problems 
 and new releases of everything important in your tool chain.
 
-### Compartmentalize
+#### Compartmentalize
 
 In these days of complex frameworks and multiple levels of abstraction, 
 direct SQL access is often hard or impossible to do. Which can be a very 
 good thing, as this is often a good protection against SQL injection. 
 Keep in mind however that there are always other ways to reach your database, 
-such as the boss's daughter or son whipping up a quick PHP script so he can 
+such as the boss’s daughter or son whipping up a quick PHP script so he can 
 run some reports from home against the production database.
 
-### Use the least privileges possible
+#### Use the least privileges possible
 
 Make sure you are taking full advantage of roles and users in your database. 
 This means an application should have the bare minimum rights it needs to 
@@ -240,7 +240,7 @@ do its job. No creating of functions, no creating tables, and explicit
 GRANTs to the tables/views/functions it truly needs. Limit severely what 
 runs as a superuser. If something really needs to run as a superuser, 
 consider wrapping the data/logic in a SECURITY DEFINER function. Having 
-separate "readonly" and "readwrite" versions of each application's user is 
+separate “readonly” and “readwrite” versions of each application’s user is 
 a great idea as well, and may even help you to scale by being able to send 
 your readonly user to a different database (via hot standby or a Bucardo/Slony slave), 
 or even send them to different pg_bouncer ports with different pooling methods.
@@ -249,15 +249,15 @@ Access can be further limited by the use of views, which can limit which
 columns and rows are visible to a user, or you could even limit all 
 application user access to going through stored procedures.
 
-### URLs are public
+#### URLs are public
 
 Never assume an application, URL, or API will remain internal. It will end 
 up accessible to an attacker someday, somehow. Treat everything with 
 the same careful, paranoid, care and always use placeholders.
 
-## Forensics
+### Forensics
 
-So you've just closed a SQL injection hole, and carefully audited your code to 
+So you’ve just closed a SQL injection hole, and carefully audited your code to 
 ensure no other holes exist. Now what? Forensics! Which means, a careful 
 examination after the crime. In this case, we want to see what damage the 
 intruder managed to cause.
@@ -281,7 +281,7 @@ altered to narrow the list of changed data. You will also have to assume that
 the attacker captured all the possible data the database user was allowed 
 to see.
 
-Enough about the worst case scenario above - what about those of us 
+Enough about the worst case scenario above—​what about those of us 
 with **log_statment='all'**? Well, now we go through the logs to see 
 what exact SQL was injected, and what commands have been succesfully run. At this point, 
 you should know what the SQL involved in the attack looks like, and more to the point, 
@@ -289,7 +289,7 @@ where in your code it came from. Now its a matter of filtering out the good stuf
 from the bad. Luckily, this is a pretty easy task.
 
 What you will need to do is write a quick script to parse your logs, find the type of query 
-that had the hole, and determine the "bad" ones. Then you can look closer 
+that had the hole, and determine the “bad” ones. Then you can look closer 
 and have it report exactly what commands the attacker ran.
 
 Most SQL injection results in a string of additional SQL in place of where 
@@ -297,14 +297,14 @@ a single value should be, with an adding of quotes. So, for example, if someone
 forgot to escape an OFFSET at the end of the query, your program could simply 
 look for any variations of the query that ended in something other than 
 OFFSET \d$. If the unescaped value was in the middle of the query, I find that 
-a simple but reliable test is to look for whitespace or a '*' character. This assumes 
-that whitespace or '*' would not normally appear for that value, but as long as it's 
-not common, it should still work. (The '*' is needed because one can use SQL comments 
+a simple but reliable test is to look for whitespace or a ‘*’ character. This assumes 
+that whitespace or ‘*’ would not normally appear for that value, but as long as it’s 
+not common, it should still work. (The ‘*’ is needed because one can use SQL comments 
 as a means of whitespace, for example **SELECT/**/*/*foo*/FROM/**/pg_tables**). 
-Your script should ignore any queries in which the value has no whitespace or '*' character, 
+Your script should ignore any queries in which the value has no whitespace or ‘*’ character, 
 and focus on the ones that do. Then normalize the queries (for example collapse ones that 
 differ only by the OFFSET value), and generate a report. Of course, the exact method to 
-differentiate between "good" and "bad" queries will vary. Find your best Perl hacker and 
+differentiate between “good” and “bad” queries will vary. Find your best Perl hacker and 
 set them on it.
 
 I should point out that a script is almost always necessary, for three reasons. 

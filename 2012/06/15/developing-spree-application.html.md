@@ -9,9 +9,9 @@ title: Developing a Spree Application
 
 Mike Farmer presented one of the projects he worked on. He gave us a very detailed overview of integration of a Spree application into Facebook for a large client.
 
-He also described the changes that were made in the Spree project to customize it to the client's needs.
+He also described the changes that were made in the Spree project to customize it to the client’s needs.
 
-The most interesting thing in this Spree shop usage is that the company's clients make extensive use of the admin panel and they can sell their own products for other clients.
+The most interesting thing in this Spree shop usage is that the company’s clients make extensive use of the admin panel and they can sell their own products for other clients.
 
 Mike showed us a great overview of writing better Rails applications using better object oriented code along with TDD and extensive SASS usage. He also described the great tools he uses including Screen and Vagrant.
 

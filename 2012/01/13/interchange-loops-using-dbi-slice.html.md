@@ -5,9 +5,7 @@ tags: database, interchange, perl
 title: Interchange loops using DBI Slice
 ---
 
-
-
-One day I was reading through the documentation on [search.cpan.org](http://search.cpan.org) for the [DBI](http://search.cpan.org/~timb/DBI-1.616/DBI.pm) module and ran across an attribute that you can use with selectall_arrayref() that creates the proper data structure to be used with Interchange's object.mv_results loop attribute. The attribute is called Slice which causes selectall_arrayref() to return an array of hashrefs instead of an array of arrays. To use this you have to be working in global Perl modules as Safe.pm will not let you use the selectall_arrayref() method.
+One day I was reading through the documentation on [search.cpan.org](http://search.cpan.org) for the [DBI](https://metacpan.org/pod/DBI) module and ran across an attribute that you can use with selectall_arrayref() that creates the proper data structure to be used with Interchange’s object.mv_results loop attribute. The attribute is called Slice which causes selectall_arrayref() to return an array of hashrefs instead of an array of arrays. To use this you have to be working in global Perl modules as Safe.pm will not let you use the selectall_arrayref() method.
 
 An example of what you could use this for is an easy way to generate a list of items in the same category. Inside the module, you would do like this:
 

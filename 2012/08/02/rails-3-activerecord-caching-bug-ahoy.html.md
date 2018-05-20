@@ -7,7 +7,7 @@ title: Rails 3 ActiveRecord caching bug ahoy!
 
 
 
-Sometimes bugs in other people's code makes me think I might be crazy. I’m not talking Walter Sobchak gun-in-the-air-and-a-Pomeranian-in-a-cat-carrier crazy, but “I must be doing something incredibly wrong here” crazy. I recently ran into a Rails 3 ActiveRecord caching bug that made me feel this kind of crazy. Check out this pretty simple caching setup and the bug I encountered and tell me; Am I wrong?
+Sometimes bugs in other people’s code makes me think I might be crazy. I’m not talking Walter Sobchak gun-in-the-air-and-a-Pomeranian-in-a-cat-carrier crazy, but “I must be doing something incredibly wrong here” crazy. I recently ran into a Rails 3 ActiveRecord caching bug that made me feel this kind of crazy. Check out this pretty simple caching setup and the bug I encountered and tell me; Am I wrong?
 
 I have two models with a simple parent/child relationship defined with has_many and belongs_to ActiveRecord associations, respectively. Here are the pertinent bits of each:
 
@@ -30,7 +30,7 @@ end
 
 Notice how in MimeTypeCategory.all, we are eager loading each MimeTypeCategory’s children MimeTypes because our app tends to use those MimeTypes any time we need a MimeTypeCategory. Then, we cache that entire data structure because it’s a good candidate for caching and we like our app to be fast.
 
-Now, to reproduce this Rails caching bug, I clear my app’s cache using 'Rails.cache.clear' in the rails console, then load any page in my app that calls MimeTypeCategory.all. The page loads successfully and shows no errors. Doesn’t sound like a bug so far, right? If I load that same page a second time, I will get the standard Rails error page with:
+Now, to reproduce this Rails caching bug, I clear my app’s cache using ‘Rails.cache.clear’ in the rails console, then load any page in my app that calls MimeTypeCategory.all. The page loads successfully and shows no errors. Doesn’t sound like a bug so far, right? If I load that same page a second time, I will get the standard Rails error page with:
 
 ```nohighlight
 undefined class/module MimeType
@@ -46,6 +46,6 @@ I’m not about to give up on automatic class reloading in my development enviro
 
 Hopefully this explanation helps people avoid some of the pain I experienced while trying to determine if it was a Rails bug/feature or if I had finally gone insane. I should point out that some of the reading I’ve done suggests “require_dependency” is the more appropriate solution for this problem. I’ve verified that require_association works in all my cases, but to avoid “programming by coincidence,” I am going to snoop around the Rails core to understand the difference between the two.
 
-Lastly, please remember: You can’t board a Pomeranian - they get upset and their hair falls out.
+Lastly, please remember: You can’t board a Pomeranian—​they get upset and their hair falls out.
 
 

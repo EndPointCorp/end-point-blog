@@ -5,13 +5,13 @@ tags: rails
 title: 'KISS: Slurping up File Attachments'
 ---
 
-I've been heavily involved in an ecommerce project running on Rails 3, using [Piggybak](https://github.com/piggybak/piggybak), [RailsAdmin](https://github.com/sferik/rails_admin), [Paperclip]() for file attachment management, [nginx](http://nginx.org/) and [unicorn](http://unicorn.bogomips.org/). One thing that we've struggled with is handling large file uploads both in the [RailsAdmin import](/blog/2012/02/01/railsadmin-import-part-2) process as well as from the standard RailsAdmin edit page. Nginx is configured to limit request size and duration, which is a problem for some of the large files that are uploaded, which are large purchasable, downloadable files.
+I’ve been heavily involved in an ecommerce project running on Rails 3, using [Piggybak](https://github.com/piggybak/piggybak), [RailsAdmin](https://github.com/sferik/rails_admin), [Paperclip](https://github.com/thoughtbot/paperclip) for file attachment management, [nginx](https://nginx.org/) and [unicorn](https://bogomips.org/unicorn/). One thing that we’ve struggled with is handling large file uploads both in the [RailsAdmin import](/blog/2012/02/01/railsadmin-import-part-2) process as well as from the standard RailsAdmin edit page. Nginx is configured to limit request size and duration, which is a problem for some of the large files that are uploaded, which are large purchasable, downloadable files.
 
-To allow these uploads, I brainstormed how to decouple the file upload from the import and update process. Phunk recently worked on integration of [Resque](https://github.com/defunkt/resque), a popular Rails queueing tool which worked nicely. However, I ultimately decided that I wanted to go down a simpler route. The implementation is described below.
+To allow these uploads, I brainstormed how to decouple the file upload from the import and update process. Phunk recently worked on integration of [Resque](https://github.com/resque/resque), a popular Rails queueing tool which worked nicely. However, I ultimately decided that I wanted to go down a simpler route. The implementation is described below.
 
 ### Upload Status
 
-First, I created an UploadStatus model, to track the status of any file uploads. With RailsAdmin, there's an automagic CRUD interface connected to this model. Here's what the migration looked like:
+First, I created an UploadStatus model, to track the status of any file uploads. With RailsAdmin, there’s an automagic CRUD interface connected to this model. Here’s what the migration looked like:
 
 ```ruby
 class CreateUploadStatuses < ActiveRecord::Migration
@@ -36,7 +36,7 @@ RailsAdmin also leverages [CanCan](https://github.com/ryanb/cancan/), so I updat
 
 ### KISS Script
 
-Here's the simplified rake task that I used for the process:
+Here’s the simplified rake task that I used for the process:
 
 ```ruby
 namespace :upload_files do
@@ -70,10 +70,10 @@ namespace :upload_files do
 end
 ```
 
-And here's how the process breaks down:
+And here’s how the process breaks down:
 
 1. The script iterates through files in the #{Rails.root}/to_upload directory (lines 3-4).
-1. Based on the filename, in the format "class_name:field:id.extension", the item to be updated is retrieved (line 11).
+1. Based on the filename, in the format “class_name:field:id.extension”, the item to be updated is retrieved (line 11).
 1. If the item does not exist, an upload_status record is created with a message that notes the item could not be found (lines 13-16).
 1. If the file exists and the update occurs, the original file is deleted, and a successful upload status is recorded (lines 18-23).
 1. If the process fails anywhere, the exception is logged in a new upload status record (lines 24-26).

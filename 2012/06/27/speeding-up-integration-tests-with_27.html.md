@@ -11,7 +11,7 @@ In one of the comments Greg proposed using the unlogged table. This feature appe
 
 For the unlogged table, the data is not written to the write-ahead log. All inserts, updates and deletes are much faster, however the table will be truncated at the server crash or unclean shutdown. Such table is not replicated to standby servers, which is obvious as there are replicated write-ahead logs. What is more important, the indexes created on unlogged tables are unlogged as well.
 
-All the things I describe here are for integrations tests. When database crashes, then all the tests should be restarted and should prepare the database before running, so I really don't care what happens with the data when something crashes.
+All the things I describe here are for integrations tests. When database crashes, then all the tests should be restarted and should prepare the database before running, so I really don’t care what happens with the data when something crashes.
 
 The bad thing about unlogged tables is that you cannot change normal table to unlogged. There is nothing like:
 
@@ -33,7 +33,7 @@ psql -c "create database pbench"
 psql pbench < pbench.dump.sql
 ```
 
-Time for tests. The previous tests results are in the previous blog article. I'm using standard PostgreSQL settings (the secure ones) and the same scale value for pg_bench.
+Time for tests. The previous tests results are in the previous blog article. I’m using standard PostgreSQL settings (the secure ones) and the same scale value for pg_bench.
 
 The tests were made using exactly the same command as last time:
 
@@ -80,6 +80,6 @@ Below are results combined with the results from previous article.
 </table>
 ```
 
-As you can see, the efficiency with unlogged tables is almost as good as with the unsafe settings. The great thing is that it doesn't influence other databases in the cluster, so you can use safe/default settings for other databases, and only use unlogged tables for the integration tests, which should be much faster now.
+As you can see, the efficiency with unlogged tables is almost as good as with the unsafe settings. The great thing is that it doesn’t influence other databases in the cluster, so you can use safe/default settings for other databases, and only use unlogged tables for the integration tests, which should be much faster now.
 
 This solution works only with the PostgreSQL 9.1 and newer. If you have older PostgreSQL you have to use the previous method with unsafe settings, or better: just upgrade the database.

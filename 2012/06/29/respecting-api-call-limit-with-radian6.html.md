@@ -7,7 +7,7 @@ title: Respecting API Call Limit with Radian6
 
 
 
-A common practice in the online API world is to enforce the call limit. Twitter allows 150 API calls per hour. Shopify has 500 API calls per 5 minutes limit. You may learn how to work with Shopify call limit from [this great article](http://wiki.shopify.com/Learning_to_Respect_the_API_calls_limit).
+A common practice in the online API world is to enforce the call limit. Twitter allows 150 API calls per hour. Shopify has 500 API calls per 5 minutes limit. You may learn how to work with Shopify call limit from [this great article](https://web.archive.org/web/20120826132711/http://wiki.shopify.com/Learning_to_Respect_the_API_calls_limit).
 
 One of our projects was built around interaction with [Radian6](http://www.radian6.com/) platform. Radian6 is a new and growing data mining service with the default limit of 100 calls per hour. I will describe our take on the call limit implementation.
 
@@ -40,7 +40,7 @@ RadianCallCount.delete_all
 RadianCallCount.create(:count => 0)
 ```
 
-Let's roll the counter!
+Let’s roll the counter!
 
 ```bash
 rake db:migrate
@@ -49,7 +49,7 @@ rake db:seed
 
 ### Scheduling the counter reset
 
-It is necessary to reset the counter back to zero in the beginning of each hour otherwise the subsequent calls will not be executed. The excellent 'whenever' gem will take care of this.
+It is necessary to reset the counter back to zero in the beginning of each hour otherwise the subsequent calls will not be executed. The excellent ‘whenever’ gem will take care of this.
 
 ```bash
 gem install whenever
@@ -102,7 +102,7 @@ def self.included(base)
 end
 ```
 
-The code introduces a simple check before 'authenticate' and 'tweets_stats' methods. If call count exceeds the allowed limit the method is not executed and the method returns **false**. Otherwise, the counter increments after the successful method execution. We wrap the code in transaction because the actual count in the database may increase while we are making the API_LIMIT comparison.
+The code introduces a simple check before ‘authenticate’ and ‘tweets_stats’ methods. If call count exceeds the allowed limit the method is not executed and the method returns **false**. Otherwise, the counter increments after the successful method execution. We wrap the code in transaction because the actual count in the database may increase while we are making the API_LIMIT comparison.
 
 ### Making the limit-aware call
 
