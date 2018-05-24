@@ -9,7 +9,7 @@ title: "Int’l — JavaScript numbers and dates formatting, smart strings compa
 
 ### Introduction
 
-*** WARNING *** At the time of writing this text all of the things mentioned below are not yet supported by Safari and most of the mobile browsers.
+**WARNING** — At the time of writing this text all of the things mentioned below are not yet supported by Safari and most of the mobile browsers.
 
 It’s almost three years now since Ecma International published the 1st version of “ECMAScript Internationalization API Specification”. It’s widely supported by most of the browsers now. A new object called Intl has been introduced. Let’s see what it can do.
 
