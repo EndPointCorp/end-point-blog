@@ -5,7 +5,7 @@ tags: python, natural-language-processing, twitter
 gh_issue_number: 1424
 ---
 
-<img src="/blog/2018/05/18/sentiment-analysis-with-python/book-chair-chat-711009-crop.jpg" width="770" height="381" alt="people sitting around a table with smartphone and magazine"> <!-- Photograph by Helena Lopes, CC0, https://www.pexels.com/photo/group-of-people-reading-book-sitting-on-chair-711009/ -->
+<img src="/blog/2018/05/18/sentiment-analysis-with-python/book-chair-chat-711009-crop.jpg" width="770" height="381" alt="people sitting around a table with smartphone and magazine"><br><a href="https://www.pexels.com/photo/group-of-people-reading-book-sitting-on-chair-711009/">Photograph by Helena Lopes, CC0</a>
 
 I recently had the chance to spend my weekend enhancing my knowledge by joining a local community meetup in Malaysia which is sponsored by Malaysian Global Innovation & Creativity Centre (MaGIC). The trainer was Mr Lee Boon Kong.
 
