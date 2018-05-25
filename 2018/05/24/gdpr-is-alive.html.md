@@ -7,7 +7,7 @@ gh_issue_number: 1425
 
 <img src="/blog/2018/05/24/gdpr-is-alive/5740833496_9c8776282e_o-crop.jpg" width="770" height="354" alt="two men talking in a crowd at night"><br><a href="https://www.flickr.com/photos/julioalbarran/5740833496/">Photo by Julio Albarrán, CC BY-SA 2.0, cropped</a>
 
-The European Union's General Data Protection Regulation (GDPR) that became law a little over two years ago, is now implemented as of 25 May 2018.
+The European Union’s General Data Protection Regulation (GDPR) that became law a little over two years ago, is now implemented as of 25 May 2018.
 
 ### Another GDPR article?
 
@@ -118,6 +118,8 @@ And of course, look to the source, the European Union itself. They provide varie
 
 * [2018 reform of EU data protection rules](https://ec.europa.eu/commission/priorities/justice-and-fundamental-rights/data-protection/2018-reform-eu-data-protection-rules_en)
 * [Data protection: Rules for the protection of personal data inside and outside the EU](https://ec.europa.eu/info/law/law-topic/data-protection_en)
+
+### Do it
 
 Everyone is responsible for their own compliance with the regulation, but we are happy to help our clients adapt their systems and implement technical accommodations they determine are needed.
 
