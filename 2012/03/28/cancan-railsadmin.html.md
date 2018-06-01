@@ -7,7 +7,7 @@ title: CanCan and RailsAdmin in Ecommerce
 
 
 
-I've written about [Rails Admin](https://github.com/sferik/rails_admin) a lot lately. One thing I haven't written about is how it can leverage [CanCan](https://github.com/ryanb/cancan) for user authorization. Once a user is authenticated via [Devise](https://github.com/plataformatec/devise), CanCan adds an additional layer for you to control how users can access and interact with data from the admin.
+I’ve written about [Rails Admin](https://github.com/sferik/rails_admin) a lot lately. One thing I haven’t written about is how it can leverage [CanCan](https://github.com/ryanb/cancan) for user authorization. Once a user is authenticated via [Devise](https://github.com/plataformatec/devise), CanCan adds an additional layer for you to control how users can access and interact with data from the admin.
 
 ### A Simple Example
 
@@ -30,7 +30,7 @@ Note that in the above code, a user that is admin (where is_admin? returns a tru
 
 ### Multi-Merchant Solution
 
-Let's go a little deeper. Multi-merchant solutions are a frequent request in ecommerce. Let's say we have the following over-simplified data model, where users own and manage products and products are displayed by category:
+Let’s go a little deeper. Multi-merchant solutions are a frequent request in ecommerce. Let’s say we have the following over-simplified data model, where users own and manage products and products are displayed by category:
 
 <img border="0" src="/blog/2012/03/28/cancan-railsadmin/image-0.png" width="750"/>
 
@@ -56,7 +56,7 @@ class Ability
 end
 ```
 
-With the above Ability definition, nothing changes for an admin user. A store owner can create products and manage (read, update, destroy) those same products. A store owner can also read categories where the category visible attribute is true. As you can see, conditions can be passed in for ability definitions. Directly from the CanCan documentation: "Anything that you can pass to a hash of conditions in Active Record will work here. The only exception is working with model ids. You can't pass in the model objects directly, you must pass in the ids."
+With the above Ability definition, nothing changes for an admin user. A store owner can create products and manage (read, update, destroy) those same products. A store owner can also read categories where the category visible attribute is true. As you can see, conditions can be passed in for ability definitions. Directly from the CanCan documentation: “Anything that you can pass to a hash of conditions in Active Record will work here. The only exception is working with model ids. You can’t pass in the model objects directly, you must pass in the ids.”
 
 ### Custom Abilities
 
@@ -64,6 +64,6 @@ In addition to the CRUD methods (create, read, update, destroy), CanCan gives yo
 
 ### Conclusion
 
-CanCan is decoupled from authentication and the notion of roles, which yields quite a bit of flexibility in its use. Combine RailsAdmin, CanCan, Devise, and [our mountable ecommerce Rails Engine](/blog/2012/01/06/piggybak-mountable-ecommerce-ruby-on), and you've got a powerful set of tools for development of a custom Ruby on Rails ecommerce application with a powerful admin interface, flexible user authorization and authentication, and an extensible ecommerce solution.
+CanCan is decoupled from authentication and the notion of roles, which yields quite a bit of flexibility in its use. Combine RailsAdmin, CanCan, Devise, and [our mountable ecommerce Rails Engine](/blog/2012/01/06/piggybak-mountable-ecommerce-ruby-on), and you’ve got a powerful set of tools for development of a custom Ruby on Rails ecommerce application with a powerful admin interface, flexible user authorization and authentication, and an extensible ecommerce solution.
 
 

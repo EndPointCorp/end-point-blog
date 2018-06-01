@@ -5,11 +5,11 @@ tags: analytics, seo, testing
 title: An Introduction to Google Website Optimizer
 ---
 
-On End Point’s website, [Jon](/team/jon_jensen) and I recently discussed testing out use of Google Website Optimizer to run a few A/B tests on content and various website updates. I've worked with a couple of clients who use Google Website Optimizer, but I've never installed it from start to finish. Here are a few basic notes that I made during the process.
+On End Point’s website, [Jon](/team/jon_jensen) and I recently discussed testing out use of Google Website Optimizer to run a few A/B tests on content and various website updates. I’ve worked with a couple of clients who use Google Website Optimizer, but I’ve never installed it from start to finish. Here are a few basic notes that I made during the process.
 
 ### What’s the Point?
 
-Before I get into the technical details of the implementation, I’ll give a quick summary of why  you would want to A/B test something. A basic A/B test will test user experiences of content A versus content B. The goal is to decide which of the two (content A or content B) leads to higher conversion (or higher user interactivity that indirectly leads to conversion). After testing, one would continue to use the higher converting content. An example of this in ecommerce may be product titles or descriptions.
+Before I get into the technical details of the implementation, I’ll give a quick summary of why you would want to A/B test something. A basic A/B test will test user experiences of content A versus content B. The goal is to decide which of the two (content A or content B) leads to higher conversion (or higher user interactivity that indirectly leads to conversion). After testing, one would continue to use the higher converting content. An example of this in ecommerce may be product titles or descriptions.
 
 ### A/B tests in Google Website Optimizer
 
@@ -23,10 +23,10 @@ I jumped right into the Google Website Optimizer sign-up and wanted to set up a 
 </tr>
 <tr>
 <td>
-<p>Test A: Keep existing text</p>
+<p><small>Test A: Keep existing text</small></p>
 </td>
 <td>
-<p>Test B: Remove some paragraph text in first section</p>
+<p><small>Test B: Remove some paragraph text in first section</small></p>
 </td>
 </tr>
 </tbody></table>
@@ -43,8 +43,8 @@ Google Website Optimizer will verify the code and provide a user interface to en
 
 I used multivariate testing to test the homepage changes described above. After a couple of weeks of testing, my test results were inconclusive:
 
-<img border="0" height="191" src="/blog/2012/04/17/google-website-optimizer-introduction/image-2.png" width="400"/>
-Example multivariate test result in Google Website Optimizer
+<img border="0" height="191" src="/blog/2012/04/17/google-website-optimizer-introduction/image-2.png" width="400"/><br/>
+<small>Example multivariate test result in Google Website Optimizer</small>
 
 ### A Limitation with Multivariate Testing
 

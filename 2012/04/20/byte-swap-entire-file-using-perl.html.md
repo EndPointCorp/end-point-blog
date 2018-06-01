@@ -21,6 +21,6 @@ $ perl -0777ne 'print pack(q{v*},unpack(q{n*},$_))' inputfile > outputfile
 
 (Of course there are more efficient ways to handle this, but for a quick and dirty job this may just be what you need.)
 
-We use the -0777 option to ensure perl reads the input file in its entirety and doesn't affect newlines, etc.
+We use the -0777 option to ensure perl reads the input file in its entirety and doesn’t affect newlines, etc.
 
 

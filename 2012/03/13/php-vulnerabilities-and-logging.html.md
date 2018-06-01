@@ -5,7 +5,7 @@ tags: hosting, security
 title: PHP Vulnerabilities and Logging
 ---
 
-I've recently been working on a Ruby on Rails site on my personal [Linode](http://www.linode.com/) machine. The Rails application was running in development with virtually no caching or optimization, so page load was very slow. While I was not actively developing on the site, I received a Linode alert that the disk I/O rate exceeded the notification threshold for the last 2 hours.
+I’ve recently been working on a Ruby on Rails site on my personal [Linode](https://www.linode.com/) machine. The Rails application was running in development with virtually no caching or optimization, so page load was very slow. While I was not actively developing on the site, I received a Linode alert that the disk I/O rate exceeded the notification threshold for the last 2 hours.
 
 <img border="0" src="/blog/2012/03/13/php-vulnerabilities-and-logging/image-0.png" width="740"/>
 
@@ -53,6 +53,6 @@ Started GET "/phpMyAdmin-2.5.7-pl1/index.php" for 200.195.156.242 at 2012-02-15 
 Started GET "/phpMyAdmin-2.5.5-pl1/index.php" for 174.111.11.143 at 2012-02-15 14:09:10 -0500
 ```
 
-As it turns out, the domain somehow got picked up by crawlers that were looking for PHP vulnerabilities. It's interesting to see the various versions of phpMyAdmin the crawler is attempting to exploit. Judging from the crawled pages, there may also be a few other applications (e.g. [TYPO3](http://typo3.com/)) that the crawler was trying to exploit. I'm not up to date on the various security exploits in PHP applications, but I was surprised to not see anything directly related to [WordPress](http://wordpress.org/) in the log, since I often hear of WordPress security issues.
+As it turns out, the domain somehow got picked up by crawlers that were looking for PHP vulnerabilities. It’s interesting to see the various versions of phpMyAdmin the crawler is attempting to exploit. Judging from the crawled pages, there may also be a few other applications (e.g. [TYPO3](https://typo3.com/)) that the crawler was trying to exploit. I’m not up to date on the various security exploits in PHP applications, but I was surprised to not see anything directly related to [WordPress](https://wordpress.org/) in the log, since I often hear of WordPress security issues.
 
 Luckily, this particular application and all other applications on this server have virtually no private data, since most applications running on the server are CMS-type applications where all content is displayed on the front-end.

@@ -7,7 +7,7 @@ title: DevCamps setup with Ruby 1.9.3, rbenv, Nginx and Unicorn
 
 I was working with Steph Skardal on the setup of a new [DevCamps](http://www.devcamps.org/) installation that was going to need to use [Ruby 1.9.3](http://www.ruby-lang.org/en/), [Rails 3](http://rubyonrails.org/), [Unicorn](http://unicorn.bogomips.org/) and [Nginx](http://wiki.nginx.org/Main). This setup was going to be much different than a standard setup due to the different application stack that was required.
 
-The first trick for this was going to get Ruby 1.9.3 on the server. We were using Debian Squeeze but that still only comes with Ruby 1.9.1. We wanted Ruby 1.9.3 for the increased overall speed and significant speed increase with Rails 3. We decided on using [rbenv](https://github.com/sstephenson/rbenv) for this task. It's a very easy to setup utility that allows you to maintain multiple version of Ruby in your system user account without the headache of adjusting anything but the PATH environment variable. It takes advantage of another easy to setup utility called [ruby build](https://github.com/sstephenson/ruby-build) to handle the actual installation of the Ruby source code.
+The first trick for this was going to get Ruby 1.9.3 on the server. We were using Debian Squeeze but that still only comes with Ruby 1.9.1. We wanted Ruby 1.9.3 for the increased overall speed and significant speed increase with Rails 3. We decided on using [rbenv](https://github.com/sstephenson/rbenv) for this task. It’s a very easy to setup utility that allows you to maintain multiple version of Ruby in your system user account without the headache of adjusting anything but the PATH environment variable. It takes advantage of another easy to setup utility called [ruby build](https://github.com/sstephenson/ruby-build) to handle the actual installation of the Ruby source code.
 
 A quick and easy version for setting up a user with this is as follows:
 
@@ -61,4 +61,4 @@ The contents of the start-app script is simply.
 cd __CAMP_PATH__ && bundle exec unicorn_rails -c __CAMP_PATH__/config/unicorn.conf.rb -D
 ```
 
-You could create one script that handles all aspects of start, stop and restart if you wanted. This setup really wasn't much harder than a normal Ruby on Rails setup. The added time here required to set up rbenv per camp user is offset by the fact that users can manage and try multiple versions of ruby.
+You could create one script that handles all aspects of start, stop and restart if you wanted. This setup really wasn’t much harder than a normal Ruby on Rails setup. The added time here required to set up rbenv per camp user is offset by the fact that users can manage and try multiple versions of ruby.

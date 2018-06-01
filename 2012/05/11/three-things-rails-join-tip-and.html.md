@@ -7,11 +7,11 @@ title: 'Three Things: Rails, JOIN tip, and Responsiveness'
 
 
 
-Here's another entry in my *Three Things* series, where I share a few small tips I've picked up lately.
+Here’s another entry in my *Three Things* series, where I share a few small tips I’ve picked up lately.
 
 ### 1. Rails and Dramas
 
-Sometimes I think that since Rails allows you write code efficiently, [a few] members of the Rails community have time to overdramatize incidents that otherwise would go relatively unnoticed :) Someone with a good sense of humor created [this website](http://rubydramas.com/) to track these dramas. While it's probably a waste of time to get caught up on the personal aspects of the drama, some of the dramas have interesting technical aspects which are fiercely defended.
+Sometimes I think that since Rails allows you write code efficiently, [a few] members of the Rails community have time to overdramatize incidents that otherwise would go relatively unnoticed :) Someone with a good sense of humor created [this website](https://web.archive.org/web/20120531143155/http://rubydramas.com/) to track these dramas. While it’s probably a waste of time to get caught up on the personal aspects of the drama, some of the dramas have interesting technical aspects which are fiercely defended.
 
 ### 2. JOIN with concat
 
@@ -25,6 +25,6 @@ In modern MVC frameworks with ORMs, databases are typically not designed to incl
 
 ### 3. Responsiveness
 
-Responsive web design is all the rage lately from the increase in mobile web browsing and tablets. [Here](http://mattkersley.com/responsive/) is a fun tool that that the ecommerce director at [Paper Source](http://www.paper-source.com/) pointed out to me recently. The website allows you to render a single URL at various widths for a quick review of the UI.
+Responsive web design is all the rage lately from the increase in mobile web browsing and tablets. [Here](http://mattkersley.com/responsive/) is a fun tool that that the ecommerce director at [Paper Source](https://www.papersource.com/) pointed out to me recently. The website allows you to render a single URL at various widths for a quick review of the UI.
 
 

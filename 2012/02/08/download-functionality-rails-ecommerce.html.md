@@ -5,11 +5,11 @@ tags: ecommerce, piggybak, ruby, rails
 title: Download Functionality for Rails Ecommerce
 ---
 
-I recently had to build out downloadable product support for a client project running on [Piggybak (a Ruby on Rails Ecommerce engine)](https://github.com/piggybak/piggybak) with extensive use of [RailsAdmin](https://github.com/sferik/rails_admin). Piggybak's core functionality does not support downloadable products, but it was not difficult to extend. Here are some steps I went through to add this functionality. While the code examples apply specifically to a Ruby on Rails application using [paperclip](https://github.com/thoughtbot/paperclip) for managing attachments, the general steps here would apply across languages and frameworks.
+I recently had to build out downloadable product support for a client project running on [Piggybak (a Ruby on Rails Ecommerce engine)](https://github.com/piggybak/piggybak) with extensive use of [RailsAdmin](https://github.com/sferik/rails_admin). Piggybak’s core functionality does not support downloadable products, but it was not difficult to extend. Here are some steps I went through to add this functionality. While the code examples apply specifically to a Ruby on Rails application using [paperclip](https://github.com/thoughtbot/paperclip) for managing attachments, the general steps here would apply across languages and frameworks.
 
 ### Data Migration
 
-Piggybak is a pluggable ecommerce engine. To make any models inside your application "sellable", the class method acts_as_variant must be called for any class. This provides a nice flexibility in defining various sellable models throughout the application. Given that I will sell tracks in this example, my first step to supporting downloadable content is adding an is_downloadable boolean and attached file fields to the migration for a sellable item. The migration looks like this:
+Piggybak is a pluggable ecommerce engine. To make any models inside your application “sellable”, the class method acts_as_variant must be called for any class. This provides a nice flexibility in defining various sellable models throughout the application. Given that I will sell tracks in this example, my first step to supporting downloadable content is adding an is_downloadable boolean and attached file fields to the migration for a sellable item. The migration looks like this:
 
 ```ruby
 class CreateTracks < ActiveRecord::Migration
@@ -42,11 +42,11 @@ class Track < ActiveRecord::Base
 end
 ```
 
-The important thing to note here is that the attached downloadable files **must not** be stored in the public root. Why? Because we don't want users to access the files via a URL through the public root. Downloadable files will be served via the send_file call, discussed below.
+The important thing to note here is that the attached downloadable files **must not** be stored in the public root. Why? Because we don’t want users to access the files via a URL through the public root. Downloadable files will be served via the send_file call, discussed below.
 
 ### Shipping
 
-Piggybak's order model has_many shipments. In the case of an order that contains only downloadables, shipments can be empty. To accomplish this, I extend the Piggybak::Cart model using [ActiveSupport::Concern](http://www.fakingfantastic.com/2010/09/20/concerning-yourself-with-active-support-concern/) to check whether or not an order is downloadable, with the following instance method:
+Piggybak’s order model has_many shipments. In the case of an order that contains only downloadables, shipments can be empty. To accomplish this, I extend the Piggybak::Cart model using [ActiveSupport::Concern](http://www.fakingfantastic.com/2010/09/20/concerning-yourself-with-active-support-concern/) to check whether or not an order is downloadable, with the following instance method:
 
 ```ruby
 module CartDecorator
@@ -95,7 +95,7 @@ On the checkout page, a user is forced to log in if cart.has_downloadable?. Afte
 
 ### Download List Page
 
-After a user has purchased downloadable products, they'll need a way to access these files. Next, I create a downloads page which lists orders and their downloads:
+After a user has purchased downloadable products, they’ll need a way to access these files. Next, I create a downloads page which lists orders and their downloads:
 
 <div class="separator" style="clear: both; text-align: center;">
 <a href="/blog/2012/02/08/download-functionality-rails-ecommerce/image-2-big.png" imageanchor="1" style="margin-left:1em; margin-right:1em"><img border="0" height="380" src="/blog/2012/02/08/download-functionality-rails-ecommerce/image-2.png" width="400"/></a></div>
@@ -126,7 +126,7 @@ The above method would be a good candidate for Rails low-level caching or altern
 
 ### Sending Files
 
-As I mentioned above, download files should not be stored in the public directory for public accessibility. From the download list page, the "Download Now" link maps to the following method in the downloads controller:
+As I mentioned above, download files should not be stored in the public directory for public accessibility. From the download list page, the “Download Now” link maps to the following method in the downloads controller:
 
 ```ruby
 class DownloadsController < ApplicationController
@@ -142,7 +142,7 @@ class DownloadsController < ApplicationController
 end
 ```
 
-Note that there is additional verification here to check if the current user's downloads includes the download requested. The .url(:default, false) bit hides paperclip's cache buster (e.g. "?123456789") from the url in order to send the file.
+Note that there is additional verification here to check if the current user’s downloads includes the download requested. The .url(:default, false) bit hides paperclip’s cache buster (e.g. “?123456789”) from the url in order to send the file.
 
 ### Conclusion
 

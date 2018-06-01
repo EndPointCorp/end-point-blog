@@ -19,15 +19,15 @@ The most popular combination for video/audio streaming is Adobe Flash Player as 
 
 <a href="/blog/2012/04/27/streaming-live-with-red5-media-server/image-0.png" imageanchor="1" style="clear: right; float: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" height="79" src="/blog/2012/04/27/streaming-live-with-red5-media-server/image-0.png" width="200"/></a>
 
-Luckily for us there is an open-source [Red5 Media Server](http://red5.org/) – the most popular if not the only one stable of all open-source media streaming servers. We will be leveraging Red5 to dive into RTMP world and the cutting edge streaming technologies.
+Luckily for us there is an open-source [Red5 Media Server](http://red5.org/)—​the most popular if not the only one stable of all open-source media streaming servers. We will be leveraging Red5 to dive into RTMP world and the cutting edge streaming technologies.
 
 ### Exploring Red5 Media Server
 
-Download and install Red5 Media Server for your environment from [here](http://red5.org/downloads/red5/1_0/). Now it is time to implement a sweeping live stream between our two laptops.
+Download and install Red5 Media Server for your environment from [here](https://web.archive.org/web/20120809211757/http://red5.org/downloads/red5/1_0/). Now it is time to implement a sweeping live stream between our two laptops.
 
-Red5 comes with the set of [demo applications](http://localhost:5080/demos/) that are very handy to base the development on. Demo applications can be installed via the [Installer](http://localhost:5080/installer/). For the purpose of this article we need to install the "oflaDemo" application.
+Red5 comes with the set of [demo applications](http://localhost:5080/demos/) that are very handy to base the development on. Demo applications can be installed via the [Installer](http://localhost:5080/installer/). For the purpose of this article we need to install the “oflaDemo” application.
 
-After installation is complete, we can launch the demo for Simple Broadcaster application. In Simple Broadcaster we click "Connect" button, grant Flash Player permission to use camera and microphone, and  – voila! – we should now be broadcasting live via Simple Broadcaster application to oflaDemo application.
+After installation is complete, we can launch the demo for Simple Broadcaster application. In Simple Broadcaster we click “Connect” button, grant Flash Player permission to use camera and microphone, and—​voila!—​we should now be broadcasting live via Simple Broadcaster application to oflaDemo application.
 
 If we use another browser  to open Simple Subscriber application, or even another laptop with the IP  of the broadcasting computer, we will be able to stream the video live. It is quite noticeable that quality drops in Simple Subscriber.
 
@@ -39,9 +39,9 @@ In this example we also learned that rtmp://localhost/oflaDemo is the server com
 
 Next comes the most interesting part, embedding SimpleBroadcaster and SimpleSubscriber into the web page.
 
-We can't really use their default versions "as is". We want to remove input box, "Connect" button and Red5 connection indicator. We also want the streaming to start automatically.
+We can’t really use their default versions “as is”. We want to remove input box, “Connect” button and Red5 connection indicator. We also want the streaming to start automatically.
 
-It's more convenient to implement "Start" button in HTML and trigger the loading of SWF on "click", because then we can easily change it, while changing SWF requires a lot of effort. You will be able to understand how exactly much effort it takes in a minute.
+It’s more convenient to implement “Start” button in HTML and trigger the loading of SWF on “click”, because then we can easily change it, while changing SWF requires a lot of effort. You will be able to understand how exactly much effort it takes in a minute.
 
 My plan is to use Flash CS5 to modify SimpleBroadcaster.fla and SimpleSubscriber.fla. Flash Builder 4.6 to modify ActionScript classes for SimpleBroadcaster and SimpleSubscriber. Finally I will use Flash compiler to generate SimpleBroadcaster.swf and SimpleSubscriber.swf from .as and .fla files.
 
@@ -55,7 +55,7 @@ Red5 sources are conveniently available on [GitHub](https://github.com/Red5), in
 
 Step 1.
 
-Let's open simpleBroadcaster.fla located in the very root of the download in Flash CS5.
+Let’s open simpleBroadcaster.fla located in the very root of the download in Flash CS5.
 
 <a href="/blog/2012/04/27/streaming-live-with-red5-media-server/image-2-big.jpeg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="333" src="/blog/2012/04/27/streaming-live-with-red5-media-server/image-2.jpeg" width="400"/></a>
 
@@ -63,17 +63,17 @@ and take a pick at the Library panel.
 
 <a href="/blog/2012/04/27/streaming-live-with-red5-media-server/image-3-big.jpeg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="400" src="/blog/2012/04/27/streaming-live-with-red5-media-server/image-3.jpeg" width="332"/></a>
 
-Let's double-click on the Embedded Video 1, open Window -> Properties panel and modify the size of the video to occupy the full documents area. Alternatively, we may change the document size to fit the video: right-click on the grey area, pick Document settings from the context menu and adjust dimensions. Either way, now we should drag the video rectangle to fit the document. We will save the document and repeat the same sequence of actions for simpleSubscriber.fla, because they are really no different.
+Let’s double-click on the Embedded Video 1, open Window -> Properties panel and modify the size of the video to occupy the full documents area. Alternatively, we may change the document size to fit the video: right-click on the grey area, pick Document settings from the context menu and adjust dimensions. Either way, now we should drag the video rectangle to fit the document. We will save the document and repeat the same sequence of actions for simpleSubscriber.fla, because they are really no different.
 
 Step 2.
 
-Let's now open the "red5" directory that we checked out in FlashBuilder.
+Let’s now open the “red5” directory that we checked out in FlashBuilder.
 
 <a href="/blog/2012/04/27/streaming-live-with-red5-media-server/image-4-big.jpeg" imageanchor="1" style="clear: left; float: left; margin-bottom: 1em; margin-right: 1em;"><img border="0" height="424" src="/blog/2012/04/27/streaming-live-with-red5-media-server/image-4.jpeg" width="640"/></a>
 
-We immediately find the main class for simpleBroadcaster.fla org.red5.samples.livestream.broadcaster.Main in "classes" directory.
+We immediately find the main class for simpleBroadcaster.fla org.red5.samples.livestream.broadcaster.Main in “classes” directory.
 
-The key function here is "configUI".
+The key function here is “configUI”.
 
 ```java
 private function configUI():Void
@@ -95,7 +95,7 @@ private function configUI():Void
 }
 ```
 
-Let's look into Connector class org.red5.utils.Connector.
+Let’s look into Connector class org.red5.utils.Connector.
 
 ```java
  // UI Elements:
@@ -177,9 +177,9 @@ Done! After making these changes we are good with SimpleSubscriber as well, beca
 
 Step 3.
 
-Unfortunately Red5 is written in ActionScript 2. We can't really use any of the newer mxml compilers installed on our systems, because they compile ActionScript 3. Flex SDK is also only compatible with ActionScript 3. I spent quite a lot of time searching for a simple and working AS2 compiler on the Internet, and luckily, found one called [MTASC](https://en.wikipedia.org/wiki/MTASC).
+Unfortunately Red5 is written in ActionScript 2. We can’t really use any of the newer mxml compilers installed on our systems, because they compile ActionScript 3. Flex SDK is also only compatible with ActionScript 3. I spent quite a lot of time searching for a simple and working AS2 compiler on the Internet, and luckily, found one called [MTASC](https://en.wikipedia.org/wiki/MTASC).
 
-The compiler needs to be supplied with the correct MX Component libraries to compile Red5 classes. Flash CS6 has those libraries, but in case you don't have CS6 handy I put them on [GitHub](https://github.com/marinalohova/mtasc-mx) for you.
+The compiler needs to be supplied with the correct MX Component libraries to compile Red5 classes. Flash CS6 has those libraries, but in case you don’t have CS6 handy I put them on [GitHub](https://github.com/marinalohova/mtasc-mx) for you.
 
 ```nohighlight
 > export PATH="/path/to/mtasc-mx/bin:/path/to/mtasc-mx/std:$PATH"
@@ -187,9 +187,9 @@ The compiler needs to be supplied with the correct MX Component libraries to com
 > mtasc -cp . -swf ../simpleBroadcaster.swf -mx org/red5/samples/livestream/broadcaster/Main.as -v
 > mtasc -cp . -swf ../simpleSubscriber.swf  -mx org/red5/samples/livestream/broadcaster/Main.as -v
 ```
-The compiled swf's can be found in the root of the current directory.
+The compiled swf’s can be found in the root of the current directory.
 
-At this point it is possible to create a broadcast and stream it just by launching the swf's, first broadcaster, then subscriber. However, we would like to be able to broadcast via network.
+At this point it is possible to create a broadcast and stream it just by launching the swf’s, first broadcaster, then subscriber. However, we would like to be able to broadcast via network.
 
 ### Are you ready to broadcast?
 

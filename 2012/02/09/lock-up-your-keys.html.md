@@ -5,9 +5,7 @@ tags: json, perl
 title: Lock up your keys
 ---
 
-
-
-## Locking hash keys with Hash::Util
+### Locking hash keys with Hash::Util
 
 It’s a given that you shouldn’t write Perl without “use strict”; it prevents all kinds of silent bugs involving misspelled and uninitialized variables. A similar aid for misspelled and uninitialized hash keys exists in the module “[Hash::Util](http://search.cpan.org/perldoc?Hash::Util)”.
 
@@ -90,7 +88,7 @@ Everything shown here for hashes is also available for hashrefs: for instance, t
     lock_ref_keys_plus($hr, (legal_ref_keys($hr), qw(other keys)));
 ```
 
-Of course, adding all this locking and unlocking adds complexity to your code, so you should consider carefully whether it’s justified. In my case I had 60+ keys, in a nested structure, spanning 1500 lines of code – I just could not keep all the correct spellings in my head any more, so now when I write
+Of course, adding all this locking and unlocking adds complexity to your code, so you should consider carefully whether it’s justified. In my case I had 60+ keys, in a nested structure, spanning 1500 lines of code — I just could not keep all the correct spellings in my head any more, so now when I write
 
 ```perl
     if ($opt->{order_status})

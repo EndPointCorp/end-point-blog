@@ -7,7 +7,7 @@ title: Make your code search-friendly
 
 
 
-Here's something about coding style that you may not have considered: is your code "search-friendly"? That is, does the format of your code help or hinder someone who might be searching it for context while debugging, extending, or just learning how it works?
+Here’s something about coding style that you may not have considered: is your code “search-friendly”? That is, does the format of your code help or hinder someone who might be searching it for context while debugging, extending, or just learning how it works?
 
 Seriously Contrived Example (from Perl):
 
@@ -18,7 +18,7 @@ my $string = q{Your transaction could not be} .
 return $string;
 ```
 
-Now someone's going to experience this error and wonder where it occurs. So armed with grep, or ack, or git-grep, they set off into the wilderness:
+Now someone’s going to experience this error and wonder where it occurs. So armed with grep, or ack, or git-grep, they set off into the wilderness:
 
 ```nohighlight
 $ git grep 'could not be processed'
@@ -27,7 +27,7 @@ $ git grep -e 'transaction.*charge.*error'
 $ alsdkjgalkghkf
 ```
 
-(The last simulates pounding the keyboard with both fists.) I would suggest humbly that "strings you emit as a line should appear as a line in your code", if for no other reason than that it makes it so much easier for you or others to find them. Thus:
+(The last simulates pounding the keyboard with both fists.) I would suggest humbly that “strings you emit as a line should appear as a line in your code”, if for no other reason than that it makes it so much easier for you or others to find them. Thus:
 
 ```perl
 my $string = <<'MSG';

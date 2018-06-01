@@ -5,9 +5,9 @@ tags: ruby, rails
 title: Using CarrierWave without an ORM in Spree
 ---
 
-I was recently adding some settings to Spree (an open source Ruby on Rails ecommerce framework) using Spree's built-in preferences system and found myself needing to upload an image as part of the settings. Our application was already using [CarrierWave](https://github.com/jnicklas/carrierwave) to handle some other uploads and wanted to use it to handle the uploading for my current image as well. Since the only setting I was setting was the image and there would only ever be one image, I didn't want to tie the setting to ActiveRecord. So I did some reading and found that you can tie a CarrierWave to a class without an ORM. The documentation on this is very sparse so I resorted to reading through the code to figure out how to get it working. After hours of playing with it I finally got it working. With the [current movement in the Rails community](/blog/2012/04/20/deconstructing-oo-blog-designs-in-ruby) to move more toward an Object Oriented approach to building applications, I've decided to document this here so that others will be able to quickly tie CarrierWave uploaders to their non-persisted classes.
+I was recently adding some settings to Spree (an open source Ruby on Rails ecommerce framework) using Spree’s built-in preferences system and found myself needing to upload an image as part of the settings. Our application was already using [CarrierWave](https://github.com/carrierwaveuploader/carrierwave) to handle some other uploads and wanted to use it to handle the uploading for my current image as well. Since the only setting I was setting was the image and there would only ever be one image, I didn’t want to tie the setting to ActiveRecord. So I did some reading and found that you can tie a CarrierWave to a class without an ORM. The documentation on this is very sparse so I resorted to reading through the code to figure out how to get it working. After hours of playing with it I finally got it working. With the [current movement in the Rails community](/blog/2012/04/20/deconstructing-oo-blog-designs-in-ruby) to move more toward an Object Oriented approach to building applications, I’ve decided to document this here so that others will be able to quickly tie CarrierWave uploaders to their non-persisted classes.
 
-The uploader I'll be working on is to add a banner to the checkout process in Spree (0.60.x). The idea is to store the image url in Spree::Config (the general preferences mechanism within Spree). For those who unfamiliar, Spree::Config acts very similar to a Hash object that is persisted to the preferences table in the database.
+The uploader I’ll be working on is to add a banner to the checkout process in Spree (0.60.x). The idea is to store the image url in Spree::Config (the general preferences mechanism within Spree). For those who unfamiliar, Spree::Config acts very similar to a Hash object that is persisted to the preferences table in the database.
 
 ## The RSpec
 
@@ -64,7 +64,7 @@ describe CheckoutViewSetting do
 end
 ```
 
-The first thing I do here is mock the Spree config so that I can watch when the configuration gets written to make sure that works ok. I'm going to trust CarrierWave to do its thing as far as storing and removing the image. But what I'm really interested in for my tests is that the correct identifiers get read and set in the Spree::Config object. I'm also using the exact uploaded file object that will be passed to a Rails controller during the form submission so I don't have to worry about whether the image is the proper format.
+The first thing I do here is mock the Spree config so that I can watch when the configuration gets written to make sure that works ok. I’m going to trust CarrierWave to do its thing as far as storing and removing the image. But what I’m really interested in for my tests is that the correct identifiers get read and set in the Spree::Config object. I’m also using the exact uploaded file object that will be passed to a Rails controller during the form submission so I don’t have to worry about whether the image is the proper format.
 
 In the next test, I want to make sure that I can use the standard conventions for setting the image straight from the class. The next two test cases I want to test the ability to pass a set of params as they would come from a form submission to save and remove an image. This matches the behavior you get when attaching CarrierWave to an ActiveRecord object.
 
@@ -120,15 +120,15 @@ class CheckoutViewSetting
 end
 ```
 
-The code above will allow our first test to pass. There's a bunch of stuff going on here, so I'll walk through the important parts:
+The code above will allow our first test to pass. There’s a bunch of stuff going on here, so I’ll walk through the important parts:
 
-- require 'carrierwave/mount' just loads the CarrierWave mount library.
+- require ‘carrierwave/mount’ just loads the CarrierWave mount library.
 - extend CarrierWave::Mount will add the mount_uploader method to our class so that we can designate which uploader we are going to use. Each file that is uploaded requires an uploader, so if our class were going to upload a banner and footer image, we would need an uploader for both of those.
 - IMAGE_ID_CONFIG_KEY = :checkout_view_setting_image_id is a unique key in the Spree::Config preferences system that is going to contain the image identifier.
 
-The two most important methods here are the write_uploader and read_uploader. These methods will be called by CarrierWave to get and set your identifier. Here, I'm just setting those in the config. The configured? method is just for convenience to see if the value is set. The other two methods are used when removing the image.
+The two most important methods here are the write_uploader and read_uploader. These methods will be called by CarrierWave to get and set your identifier. Here, I’m just setting those in the config. The configured? method is just for convenience to see if the value is set. The other two methods are used when removing the image.
 
-When mount_uploader is called, a bunch of methods are automatically defined in your class and they will all have the name of your uploader in the method name. It also takes a configuration block where you can configure your uploader. Another option is to create your uploader class like you would in a typical CarrierWave setup, but I chose to use an anonymous uploader here for brevity. Oh, and all those methods that were defined? Here's a list of methods that were defined in my class:
+When mount_uploader is called, a bunch of methods are automatically defined in your class and they will all have the name of your uploader in the method name. It also takes a configuration block where you can configure your uploader. Another option is to create your uploader class like you would in a typical CarrierWave setup, but I chose to use an anonymous uploader here for brevity. Oh, and all those methods that were defined? Here’s a list of methods that were defined in my class:
 
 - image
 - image=
@@ -151,9 +151,9 @@ When mount_uploader is called, a bunch of methods are automatically defined in y
 - find_previous_model_for_image
 - remove_previously_stored_image
 
-Pretty nice! You can see how this is done by [checking out the source code on GitHub](https://github.com/jnicklas/carrierwave/blob/master/lib/carrierwave/mount.rb). Now that these methods are in place, my class will act just like an ActiveRecord object with CarrierWave!
+Pretty nice! You can see how this is done by [checking out the source code on GitHub](https://github.com/carrierwaveuploader/carrierwave/blob/master/lib/carrierwave/mount.rb). Now that these methods are in place, my class will act just like an ActiveRecord object with CarrierWave!
 
-Well, almost. CarrierWave lets you do some pretty cool stuff with ActiveRecord's update_attributes method. For example, setting a value of :remove_image => 1 in the params with a checkbox will call the remove_image= method on your class. Since my class doesn't have an update_attributes method, I'm going to implement something similar with a method called update_config that will accept params from a form and act in a similar fashion to ActiveRecord. Here's the code I came up with (borrowed heavily from ActiveRecord).
+Well, almost. CarrierWave lets you do some pretty cool stuff with ActiveRecord’s update_attributes method. For example, setting a value of :remove_image => 1 in the params with a checkbox will call the remove_image= method on your class. Since my class doesn’t have an update_attributes method, I’m going to implement something similar with a method called update_config that will accept params from a form and act in a similar fashion to ActiveRecord. Here’s the code I came up with (borrowed heavily from ActiveRecord).
 
 ```ruby
 # stores the setting similar update_attributes in ActiveRecord
@@ -175,7 +175,7 @@ def update_config(params)
 end
 ```
 
-First, I do some parameter checking so that only params that I want to processed are actually sent. Since I'm using metaprogramming here, I don't want to introduce a case where someone could run various methods by passing bad params (much like mass-assignment vulnerabilities). Then I loop through the params and run the commands needed to save the image.
+First, I do some parameter checking so that only params that I want to processed are actually sent. Since I’m using metaprogramming here, I don’t want to introduce a case where someone could run various methods by passing bad params (much like mass-assignment vulnerabilities). Then I loop through the params and run the commands needed to save the image.
 
 ## The Implementation
 
@@ -222,4 +222,4 @@ And then in my form I have the following (haml):
     = submit_tag
 ```
 
-CarrierWave is an awesome library and a very suitable replacement for the more popular [Paperclip](https://github.com/thoughtbot/paperclip) library. I couldn't find anywhere online for showing a complete solution for implementing CarrierWave in an non-ActiveRecord class so I hope this helps anyone else that wants to go this route.
+CarrierWave is an awesome library and a very suitable replacement for the more popular [Paperclip](https://github.com/thoughtbot/paperclip) library. I couldn’t find anywhere online for showing a complete solution for implementing CarrierWave in an non-ActiveRecord class so I hope this helps anyone else that wants to go this route.

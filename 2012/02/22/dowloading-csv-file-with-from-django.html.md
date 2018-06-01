@@ -32,9 +32,9 @@ I’ve also added a couple of rows in the database table for this model. The adm
 
 Now I want to be able to select some rows and download a CSV file right from the Django admin panel. The file should contain only the information about selected rows.
 
-This can be done really easy with the admin actions mechanism. Over the table with rows there is the actions menu. There is one default action, it is "Delete selected stats". To use the action you need to select the rows, select the action from the combo box and press the OK button.
+This can be done really easy with the admin actions mechanism. Over the table with rows there is the actions menu. There is one default action, it is “Delete selected stats”. To use the action you need to select the rows, select the action from the combo box and press the OK button.
 
-I will add another action there, which will be named "*Download CSV file for selected stats*".
+I will add another action there, which will be named *“Download CSV file for selected stats”*.
 
 ### Add the action.
 
@@ -103,7 +103,10 @@ def download_csv(self, request, queryset):
     return response
 ```
 
-So the main changes are: - closed the file and reopen it for reading - added headers for proper content type and file name.
+So the main changes are: 
+
+- closed the file and reopen it for reading
+- added headers for proper content type and file name.
 
 The result is that when someone clicks on the OK button, the browser automatically starts downloading the stat-info.csv file.
 
@@ -130,6 +133,10 @@ def download_csv(self, request, queryset):
     return response
 ```
 
-As you can see the changes are: - added import StringIO - changed opening file to creating new StringIO object - there is no reopening the file, only seek to set the marker at the beginning of the file
+As you can see the changes are: 
+
+- added import StringIO
+- changed opening file to creating new StringIO object
+- there is no reopening the file, only seek to set the marker at the beginning of the file
 
 Everything is finished now. There is a new action in the admin panel which generates a new CSV file with information about chosen rows and it doesn’t do any browser redirection.

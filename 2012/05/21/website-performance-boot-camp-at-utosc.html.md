@@ -29,12 +29,12 @@ I was asked to give on both day one and day two a talk called “Website Perform
 
 Here is the video recording of the first time I presented the talk. (The technician noted its audio was “a little hot”.)
 
-<iframe allowfullscreen="" frameborder="0" height="315" src="http://www.youtube.com/embed/ItkF8V7DzyQ?rel=0" width="560"></iframe>
+<iframe allowfullscreen="" frameborder="0" height="315" src="https://www.youtube.com/embed/ItkF8V7DzyQ?rel=0" width="560"></iframe>
 
 Use this [Website Performance Boot Camp](https://www.youtube.com/watch?v=ItkF8V7DzyQ) direct YouTube video link if the embedded video doesn’t work for you.
 
-The slides for this [Website Performance Boot Camp](http://jon.endpoint.com/utosc-2012/website-performance-boot-camp.html) presentation are available.
+The slides for this [Website Performance Boot Camp](https://jon.endpoint.com/utosc-2012/website-performance-boot-camp.html) presentation are available.
 
-Thanks again to the conference organizers and the other speakers and sponsors, and the nice venue [Utah Valley University](http://www.uvu.edu/), for making it a great conference!
+Thanks again to the conference organizers and the other speakers and sponsors, and the nice venue [Utah Valley University](https://www.uvu.edu/), for making it a great conference!
 
 

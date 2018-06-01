@@ -9,7 +9,7 @@ A couple of days ago I had to change my notebook. I installed Ubuntu 12.04 on th
 
 The only problem was with VPN. While working for one of our clients, I need to connect to their VPN. On the old machine I did that through the Network Manager. Nothing easier, I went to the Network Manager, chose the Export option and saved all the settings to a file. I copied the file to the new computer and loaded it into the Network Manager.
 
-The file loaded correctly. I could switch the VPN on. It said everything works. But in fact it didn't. The message was "VPN is connected", I could switch it on and off, but I couldn't access any of the client's resources available from my previous notebook.
+The file loaded correctly. I could switch the VPN on. It said everything works. But in fact it didn’t. The message was “VPN is connected”, I could switch it on and off, but I couldn’t access any of the client’s resources available from my previous notebook.
 
 The first thing I checked was the content of /etc/resolv.conf on both computers. The file without connecting to VPN looked like this on both computers:
 
@@ -33,7 +33,7 @@ nameserver 127.0.0.1
 
 I changed the data a little bit of course, so the domain names and IP addresses (except for 127.0.0.1) are not real.
 
-On my old computer the resolv.conf file had a lot more entries, however I thought the above file should work as well. The problem was still the same: I couldn't connect to the client's resources.
+On my old computer the resolv.conf file had a lot more entries, however I thought the above file should work as well. The problem was still the same: I couldn’t connect to the client’s resources.
 
 The client is using the CISCO VPN, so I had to install network-manager-vpnc. This is just a plugin for network-manager which uses the vpnc program internally. I thought that maybe the plugin was doing something wrong.
 
@@ -126,4 +126,4 @@ $ vpn stop
 Terminating vpnc daemon (pid: 13771)
 ```
 
-I'm using this script for a couple of days and I don't have any problems with the CISCO VPN. It seems like the vpnc program in Ubuntu 12.04 is OK, however there is something wrong with the Network Manager plugin for vpnc.
+I’m using this script for a couple of days and I don’t have any problems with the CISCO VPN. It seems like the vpnc program in Ubuntu 12.04 is OK, however there is something wrong with the Network Manager plugin for vpnc.

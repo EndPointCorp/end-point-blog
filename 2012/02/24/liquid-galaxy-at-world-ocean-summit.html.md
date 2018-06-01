@@ -9,15 +9,15 @@ Jenifer Austin Foulkes, Product Manager for Google Ocean contacted End Point for
 
 [Josh Tolley](/team/josh_tolley) of End Point specially developed a Google Earth tour for the Liquid Galaxy featuring Hope Spots:
 
-> *"Hope Spots are special places that are critical to the health of the ocean, Earth’s blue heart."*
+> *“Hope Spots are special places that are critical to the health of the ocean, Earth’s blue heart.”*
 >
->     - from the [Sylvia Earle Alliance website](http://www.sylviaearlealliance.org)
+>     —from the [Sylvia Earle Alliance website](http://www.sylviaearlealliance.org)
 
 The Underwater Earth Seaview Project was unveiled for the first time in Singapore. Liquid Galaxy showcased some of the amazing panoramas created by the project. The panoramas are beautiful in the immersive format that a Liquid Galaxy provides.
 
-> *"We’re on a mission to reveal our oceans. Why? Because the biggest threat to life in our oceans is the fact that it is out of sight and out of mind.”*
+> *“We’re on a mission to reveal our oceans. Why? Because the biggest threat to life in our oceans is the fact that it is out of sight and out of mind.”*
 >
->     - from the [Underwater Earth website](http://www.underwaterearth.org/)
+>     —from the [Underwater Earth website](https://web.archive.org/web/20130115045417/http://underwaterearth.org/)
 
 Gap Kim from Google Singapore worked hard to get approvals to bring a portable Liquid Galaxy to the World Ocean Summit and also to have it subsequently installed at the Google Singapore office.
 
@@ -25,6 +25,6 @@ The green light for proceeding came just 13 days before the beginning of the Sum
 
 Cut to February 23, Singapore. Adam was there but the monitors (another story) and the Liquid Galaxy would not be there together until late. Adam adapted and worked overnight before a full day of presentation at the Summit. Jenifer provided this video on the closing day of the Summit:
 
-<iframe allowfullscreen="" frameborder="0" height="315" src="http://www.youtube.com/embed/uwg6rIeXXM8" width="560"></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/uwg6rIeXXM8" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
-My favorite part of this video is at the very end when we hear Jenifer say "Yaaay!" You always like to hear the client say that. After reaching across the globe to help her save the oceans it feels particularly good.
+My favorite part of this video is at the very end when we hear Jenifer say “Yaaay!” You always like to hear the client say that. After reaching across the globe to help her save the oceans it feels particularly good.

@@ -7,11 +7,11 @@ title: 'RailsAdmin Import: Part 2'
 
 I recently wrote about [importing data in RailsAdmin](/blog/2012/01/19/import-railsadmin). [RailsAdmin](https://github.com/sferik/rails_admin) is a Rails engine that provides a nice admin interface for managing your data, which comes packed with configuration options.
 
-In a recent Ruby on Rails ecommerce project, I've been using RailsAdmin, [Piggybak (a Rails ecommerce gem supported by End Point)](https://github.com/piggybak/piggybak), and have been building out custom front-end features such as advanced search and downloadable product support. When this client came to End Point with the project, we offered several options for handling data migration from a legacy system to the new Rails application:
+In a recent Ruby on Rails ecommerce project, I’ve been using RailsAdmin, [Piggybak (a Rails ecommerce gem supported by End Point)](https://github.com/piggybak/piggybak), and have been building out custom front-end features such as advanced search and downloadable product support. When this client came to End Point with the project, we offered several options for handling data migration from a legacy system to the new Rails application:
 
-1. Create a standard migration file, which migrates data from the existing legacy database to the new data architecture. The advantage with this method is that it requires virtually no manual interaction for the migration process. The disadvantage with this is that it's basically a one-off solution and would never be useful again.
-1. Have the client manually enter data. This was a reasonable solution for several of the models that required 10 or less entries, but not feasible for the tables containing thousands of entries.
-1. Develop import functionality to plug into RailsAdmin which imports from CSV files. The advantage to this method is that it could be reused in the future. The disadvantage with ths method is that data exported from the legacy system would have to be cleaned up and formatted for import.
+1. Create a standard migration file, which migrates data from the existing legacy database to the new data architecture. The advantage with this method is that it requires virtually no manual interaction for the migration process. The disadvantage with this is that it’s basically a one-off solution and would never be useful again.
+2. Have the client manually enter data. This was a reasonable solution for several of the models that required 10 or less entries, but not feasible for the tables containing thousands of entries.
+3. Develop import functionality to plug into RailsAdmin which imports from CSV files. The advantage to this method is that it could be reused in the future. The disadvantage with ths method is that data exported from the legacy system would have to be cleaned up and formatted for import.
 
 The client preferred option #3. Using [a quick script for generating custom actions for RailsAdmin](https://github.com/sferik/rails_admin/wiki/Custom-action), I developed a new gem called rails_admin_import to handle import that could be plugged into RailsAdmin. Below are some technical details on the generic import solution.
 
@@ -41,7 +41,7 @@ One of the tricky parts here is how to handle import of fields representing asso
 
 <img border="0" height="167" src="/blog/2012/02/01/railsadmin-import-part-2/image-1.png" width="400"/>
 
-I've solved this by including a dropdown to select the attribute used for mapping in the form. Each of the dropdowns contains a list of model attributes that are used for association mapping. A user can then select the associated mappings when they upload a file. In a real-life situation, I may import the state data via abbreviation, country via display name (e.g. "United States", "Canada") and role via the role name (e.g. "admin"). My data import file might look like this:
+I’ve solved this by including a dropdown to select the attribute used for mapping in the form. Each of the dropdowns contains a list of model attributes that are used for association mapping. A user can then select the associated mappings when they upload a file. In a real-life situation, I may import the state data via abbreviation, country via display name (e.g. “United States”, “Canada”) and role via the role name (e.g. “admin”). My data import file might look like this:
 
 <table cellpadding="0" cellspacing="0" style="border:1px solid #999;" width="100%">
 <tbody><tr>
@@ -92,7 +92,7 @@ Many to many relationships are handled by allowing multiple columns in the CSV t
 
 ### Import of File Fields
 
-In this scenario, I've chosen to use open-uri to request existing files from a URL. The CSV must contain the URL for that file to be imported. The import process downloads the file and attaches it to the imported object.
+In this scenario, I’ve chosen to use open-uri to request existing files from a URL. The CSV must contain the URL for that file to be imported. The import process downloads the file and attaches it to the imported object.
 
 ```ruby
 self.class.file_fields.each do |key|
@@ -113,7 +113,7 @@ If the file request fails, an error is added to the object and presented to the 
 
 ### Configuration: Display
 
-Following RailsAdmin's example for setting configurations, I've added the ability to allow the import display to be set for each model.
+Following RailsAdmin’s example for setting configurations, I’ve added the ability to allow the import display to be set for each model.
 
 ```ruby
 config.model User do
@@ -127,7 +127,7 @@ The above configuration will yield success and error messages with the user.name
 
 ### Configuration: Excluded Fields
 
-In addition to allowing a configurable display option, I've added the configuration for excluding fields.
+In addition to allowing a configurable display option, I’ve added the configuration for excluding fields.
 
 ```ruby
 config.model User do
@@ -185,6 +185,6 @@ can :import, User
 
 ### Conclusion
 
-My goal in developing this tool was to produce reusable functionality that could easily be applied to multiple models with different import needs, and to use this tool across Rails applications. I've already used this gem in another Rails 3.1 project to quickly import data that would otherwise be difficult to deal with manually. The combination of association mapping and configurability produces a flexibility that encourages reusability.
+My goal in developing this tool was to produce reusable functionality that could easily be applied to multiple models with different import needs, and to use this tool across Rails applications. I’ve already used this gem in another Rails 3.1 project to quickly import data that would otherwise be difficult to deal with manually. The combination of association mapping and configurability produces a flexibility that encourages reusability.
 
 Feel free to review or check out the code [here](https://github.com/stephskardal/rails_admin_import).

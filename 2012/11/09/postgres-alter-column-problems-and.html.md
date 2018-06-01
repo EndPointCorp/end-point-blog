@@ -95,7 +95,7 @@ So why would you go through the trouble of switching from your VARCHAR(32) to a
 TEXT column with a CHECK constraint? There are at least three good reasons.
 
 First, if you are running Postgres 9.2 or better, this means you can change the constraint 
-requirements on the fly, without a table scan — even for the “non-optimal” situations 
+requirements on the fly, without a table scan—​even for the “non-optimal” situations 
 such as going from 64 characters down to 32. Just drop the old constraint, and add a new 
 one with the NOT VALID clause thrown on it.
 
@@ -185,7 +185,7 @@ change.
 
 Let’s create a table and look at some of the important fields in the system 
 table **pg_attribute**. In these examples we will use Postgres 8.4, but 
-other versions should look very similar — this part of the system catalog 
+other versions should look very similar—​this part of the system catalog 
 rarely changes.
 
 ```
@@ -220,7 +220,7 @@ postgres-#   WHERE refobjid = 'foobar'::regclass;
  pg_type:16419 | i
 ```
 
-We can see in the above that the only dependency is an entry in the pg_type table — which is a normal 
+We can see in the above that the only dependency is an entry in the pg_type table—​which is a normal 
 thing for all tables and will not cause any issues. Any other entries, however, should give you pause 
 before doing a manual update of pg_attribute. You can use the information returned by the first column 
 of the above query to see exactly what is referencing the table. For example, let’s make that column 
@@ -281,7 +281,7 @@ affected by changing the length, so it (along with the pg_type entry) can be ign
 should be recreated so that it records the actual column size.
 
 We are now ready to make the actual change. This would be an excellent time to make a backup of 
-your database. This procedure should be done very carefully — if you are unsure about any of 
+your database. This procedure should be done very carefully—​if you are unsure about any of 
 the entries in pg_depend, do not proceed.
 
 First, we are going to start a transaction, lock the table, and drop the view. Then we are going 

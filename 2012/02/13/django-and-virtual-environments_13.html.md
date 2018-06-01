@@ -59,7 +59,7 @@ Now Django should be installed. There is a couple of ways to install it. The one
 Django==1.2.7
 ```
 
-To install the packages listed in the file, I will use the command "pip install -r requirements.txt":
+To install the packages listed in the file, I will use the command “pip install -r requirements.txt”:
 
 ```nohighlight
 (django_demo_12)$ pip install -r requirements.txt
@@ -117,7 +117,7 @@ The commands are:
 
 So now there are two different Python environments, totally separated from each other. When I install something in one of them, it is not installed in the other, so I can have different packages for different Django versions.
 
-The best way to install a package here is to update the requirements.txt file, and run the "pip install -r requirements.txt" once again. Later it will be easier to give the whole code to another programmer, who then could run the command on his computer and it will automatically install all needed packages (each in exactly needed version).
+The best way to install a package here is to update the requirements.txt file, and run the “pip install -r requirements.txt” once again. Later it will be easier to give the whole code to another programmer, who then could run the command on his computer and it will automatically install all needed packages (each in exactly needed version).
 
 There is one simple command left. Sometimes you just want to remove the virtual environment from the path and use standard python libraries installed in the system. It can be done using this command:
 

@@ -5,10 +5,10 @@ tags: git
 title: Reverting Git Commits
 ---
 
-Git is great, but it's not always easy to use. For example, reverting a commit is a very nice feature. There are git commands for reverting a commit which has not been pushed to the main repository. However after pushing it, things are not so easy.
+Git is great, but it’s not always easy to use. For example, reverting a commit is a very nice feature. There are git commands for reverting a commit which has not been pushed to the main repository. However after pushing it, things are not so easy.
 
 While I was working for one of our clients, I made about 20 commits and then I pushed them to the main repository. After that I realised that I was working on a wrong branch.
-The new branch I should have used wasn't created yet. I had to revert all my commits, create the new branch, and load all my changes into it.
+The new branch I should have used wasn’t created yet. I had to revert all my commits, create the new branch, and load all my changes into it.
 
 Creating the branch named NEW_BRANCH is as easy as:
 
@@ -48,8 +48,8 @@ Date:   Mon Apr 30 12:13:49 2012 +0200
 
 ```
 
-Now let's move the last 3 commits to another branch. I will create one diff for reverting the changes and one for replaying them on the new branch.
-Let's call these the 'down' and 'up' diff files: 'down' for reverting, and 'up' for recreating the changes.
+Now let’s move the last 3 commits to another branch. I will create one diff for reverting the changes and one for replaying them on the new branch.
+Let’s call these the ‘down’ and ‘up’ diff files: ‘down’ for reverting, and ‘up’ for recreating the changes.
 
 The up diff can be created with:
 
@@ -79,7 +79,7 @@ index 3171744..7898192 100644
 -c
 ```
 
-I saved the diffs into files called 'up.diff' and 'down.diff'.
+I saved the diffs into files called ‘up.diff’ and ‘down.diff’.
 
 On the old branch I want to revert the changes, after doing this I will just commit the changes and the branch will look like it was before all the commits. However all the commits stay in the branch. This something like a revert commit.
 
@@ -91,7 +91,7 @@ patching file test
 $ git commit -a -m "reverted the changes, moved to another branch"
 ```
 
-Now let's move the changes into the new branch.
+Now let’s move the changes into the new branch.
 I need to create the new branch from the repo after the first commit:
 
 ```nohighlight

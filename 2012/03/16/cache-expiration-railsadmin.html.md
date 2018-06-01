@@ -7,9 +7,9 @@ title: A Cache Expiration Strategy in RailsAdmin
 
 
 
-I've been blogging about [RailsAdmin](https://github.com/sferik/rails_admin) a lot lately. You might think that I think it's the best thing since sliced bread. It's a great configurable administrative interface compatible with Ruby on Rails 3. It provides a configurable architecture for CRUD (create, update, delete, view) management of resources with many additional user-friendly features like search, pagination, and a flexible navigation. It integrates nicely with [CanCan](https://github.com/ryanb/cancan), an authorization library. RailsAdmin also allows you to introduce custom actions such as [import](/blog/2012/02/01/railsadmin-import-part-2), and [approving items](/blog/2012/03/15/railsadmin-custom-action-case-study).
+I’ve been blogging about [RailsAdmin](https://github.com/sferik/rails_admin) a lot lately. You might think that I think it’s the best thing since sliced bread. It’s a great configurable administrative interface compatible with Ruby on Rails 3. It provides a configurable architecture for CRUD (create, update, delete, view) management of resources with many additional user-friendly features like search, pagination, and a flexible navigation. It integrates nicely with [CanCan](https://github.com/ryanb/cancan), an authorization library. RailsAdmin also allows you to introduce custom actions such as [import](/blog/2012/02/01/railsadmin-import-part-2), and [approving items](/blog/2012/03/15/railsadmin-custom-action-case-study).
 
-Whenever you are working with a gem that introduces admin functionality (RailsAdmin, [ActiveAdmin](http://activeadmin.info/), etc.), the controllers that provide resource management do not live in your code base. In Rails, typically you will see cache expirations in the controller that provides the CRUD functionality. For example, in the code below, a PagesController will specify [caching and sweeping](http://api.rubyonrails.org/classes/ActionController/Caching/Sweeping.html) of the page which expires when a page is updated or destroyed:
+Whenever you are working with a gem that introduces admin functionality (RailsAdmin, [ActiveAdmin](https://activeadmin.info/), etc.), the controllers that provide resource management do not live in your code base. In Rails, typically you will see cache expirations in the controller that provides the CRUD functionality. For example, in the code below, a PagesController will specify [caching and sweeping](https://apidock.com/rails/ActionController/Caching/Sweeping) of the page which expires when a page is updated or destroyed:
 
 ```ruby
 class PagesController < AdminController
@@ -20,7 +20,7 @@ class PagesController < AdminController
 end
 ```
 
-While working with RailsAdmin, I've come up with a different solution for expiring caches without extending the RailsAdmin functionality. Here are a couple of examples:
+While working with RailsAdmin, I’ve come up with a different solution for expiring caches without extending the RailsAdmin functionality. Here are a couple of examples:
 
 ### Page Caching
 
@@ -60,7 +60,7 @@ end
 
 ### Fragment Caching
 
-When a page can't be fully cached, I might cache a view shared across the application. In the example below, the shared view is included in the layout – it's generated dynamically but the data does not change often, which makes it suitable for fragment caching.
+When a page can’t be fully cached, I might cache a view shared across the application. In the example below, the shared view is included in the layout—​it’s generated dynamically but the data does not change often, which makes it suitable for fragment caching.
 
 ```ruby
 <% cache "navigation" do -%>
@@ -86,7 +86,7 @@ end
 
 ### Conclusion
 
-One thing that's noteworthy is that expire_page requires a class method on ActionController::Base while expire_fragment requires an instance method (see [here](https://github.com/rails/rails/blob/master/actionpack/lib/action_controller/caching/pages.rb) versus [here](https://github.com/rails/rails/blob/master/actionpack/lib/action_controller/caching/fragments.rb)). Action cache expiration with ActiveRecord callbacks should work similarly with action caching, as a class method ([reference](https://github.com/rails/rails/blob/master/actionpack/lib/action_controller/caching/actions.rb)).
+One thing that’s noteworthy is that expire_page requires a class method on ActionController::Base while expire_fragment requires an instance method (see [here](https://github.com/rails/rails/blob/5284e650be321273a2bb68bf4baa8adeb6bc586b/actionpack/lib/action_controller/caching/pages.rb) versus [here](https://github.com/rails/rails/blob/5284e650be321273a2bb68bf4baa8adeb6bc586b/actionpack/lib/action_controller/caching/fragments.rb)). Action cache expiration with ActiveRecord callbacks should work similarly with action caching, as a class method ([reference](https://github.com/rails/rails/blob/5284e650be321273a2bb68bf4baa8adeb6bc586b/actionpack/lib/action_controller/caching/actions.rb)).
 
 An alternative approach here would be to extend the [generic RailsAdmin admin controller](https://github.com/sferik/rails_admin/blob/master/app/controllers/rails_admin/main_controller.rb) to introduce a generic sweeper. However, the sweeper would have to determine what model was modified and what to expire it. This can be implemented and abstracted elegantly, but in my application I preferred to use simple ActiveRecord callbacks because the caching was limited to a small number of models.
 

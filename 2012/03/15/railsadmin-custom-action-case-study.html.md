@@ -7,11 +7,11 @@ title: 'RailsAdmin: A Custom Action Case Study'
 
 
 
-[RailsAdmin](https://github.com/sferik/rails_admin) is an awesome tool that can be efficiently used right out of box. It provides a handy admin interface, automatically scanning through all the models in the project and enhancing them with List, Create, Edit and  Delete actions. However, sometimes we need to create a custom action for a more specific feature.
+[RailsAdmin](https://github.com/sferik/rails_admin) is an awesome tool that can be efficiently used right out of box. It provides a handy admin interface, automatically scanning through all the models in the project and enhancing them with List, Create, Edit and Delete actions. However, sometimes we need to create a custom action for a more specific feature.
 
 ### Creating The Custom Action
 
-Here we will create an "Approve Review" action, that the admin will use to moderate user reviews. First, we need to create an action class rails_admin_approve_review.rb in Rails::Config::Actions namespace and place it in the "#{Rails.root}/lib" folder. Here is the template for it:
+Here we will create an “Approve Review” action, that the admin will use to moderate user reviews. First, we need to create an action class rails_admin_approve_review.rb in Rails::Config::Actions namespace and place it in the “#{Rails.root}/lib” folder. Here is the template for it:
 
 ```ruby
 require 'rails_admin/config/actions'
@@ -30,7 +30,7 @@ module RailsAdmin
 end
 ```
 
-By default, all actions are present for all models. We will only show the "Approve" action for the models that actually support it and are yet unapproved. It means that they have *approved* attribute defined and set to *false*:
+By default, all actions are present for all models. We will only show the “Approve” action for the models that actually support it and are yet unapproved. It means that they have *approved* attribute defined and set to *false*:
 ```ruby
 register_instance_option :visible? do
   authorized? && !bindings[:object].approved
@@ -48,7 +48,7 @@ register_instance_option :link_icon do
   'icon-check'
 end
 ```
-Now, this is what I call "customized"!
+Now, this is what I call “customized”!
 
 The last step is, perhaps, the most important, because it actually processes the action. In this case, the action sets the *approved* attribute to *true* for the object. The code needs to be placed into the controller context. To do so we wrap it in the following block:
 
@@ -114,7 +114,7 @@ class Ability
 end
 ```
 
-Full custom action can be viewed [here](https://gist.github.com/2039001)
+Full custom action can be viewed [here](https://gist.github.com/marinalohova/2039001)
 
 ### Additional Notes
 

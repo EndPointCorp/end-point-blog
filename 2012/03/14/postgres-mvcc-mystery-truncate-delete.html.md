@@ -12,8 +12,8 @@ title: The Mystery of The Zombie Postgres Row
 
 Being a PostgreSQL DBA is always full of new challenges and mysteries. Tracking them 
 down is one of the best parts of the job. Presented below is an error message we received one day 
-via [tail_n_mail](http://bucardo.org/wiki/Tail_n_mail) from one of our client's production servers.
-See if you can figure out what was going on as I walk through it. This is from a "read only" database that acts as a [Bucardo]() target (aka slave), and as such, the only write activity should be from Bucardo.
+via [tail_n_mail](https://bucardo.org/tail_n_mail/) from one of our client’s production servers.
+See if you can figure out what was going on as I walk through it. This is from a “read only” database that acts as a [Bucardo]() target (aka slave), and as such, the only write activity should be from Bucardo.
 
 ```error
  05:46:11 [85]: ERROR: duplicate key value violates unique constraint "foobar_id"
@@ -29,11 +29,11 @@ this should never happen, as Bucardo always deletes the rows it is about to add 
  05:46:11 [85]: CONTEXT: COPY foobar, line 1: "12345#011...
 ```
 
-How weird. Although we killed the row, it seems to have resurrected, and shambled like a zombie into our b-tree index, preventing a new row from being added. At this point, I double checked that the correct schema was being used (it was), that  there were no rules or triggers, no quoting problems, no index corruption, and that "id" was indeed the first column in the table. I also confirmed that there were plenty of occurrences of 
-the exact same DELETE/COPY pattern - with the same id! - that had run without any error at all, both before and after this error. If you are familiar with Postgres' default MVCC mode, you might make a guess what is going on. Inside the postgresql.conf 
-file there is a setting named 'default_transaction_isolation', which is almost always 
+How weird. Although we killed the row, it seems to have resurrected, and shambled like a zombie into our b-tree index, preventing a new row from being added. At this point, I double checked that the correct schema was being used (it was), that there were no rules or triggers, no quoting problems, no index corruption, and that “id” was indeed the first column in the table. I also confirmed that there were plenty of occurrences of 
+the exact same DELETE/COPY pattern—​with the same id!—​that had run without any error at all, both before and after this error. If you are familiar with Postgres’ default MVCC mode, you might make a guess what is going on. Inside the postgresql.conf 
+file there is a setting named ‘default_transaction_isolation’, which is almost always 
 set to **read committed**. Further discussion of what this mode does can be found 
-in [the online documentation](http://www.postgresql.org/docs/current/static/transaction-iso.html), but the short version is that while in this mode, 
+in [the online documentation](https://www.postgresql.org/docs/current/static/transaction-iso.html), but the short version is that while in this mode, 
 another transaction could have added row 12345 and committed after we did the DELETE, 
 but before we ran the COPY. A great theory that fits the facts, except that Bucardo always 
 sets the isolation level manually to avoid just such problems. Scanning back for the previous command for that PID revealed:
@@ -47,20 +47,20 @@ sets the isolation level manually to avoid just such problems. Scanning back for
 
 So that rules out any effects of read committed isolation mode. We have Postgres set to the strictest 
 interpretation of MVCC it knows, SERIALIZABLE. (As this was on Postgres 8.3, it was not a 
-["true" serializable mode](/blog/2011/09/28/postgresql-allows-for-different),
+[“true” serializable mode](/blog/2011/09/28/postgresql-allows-for-different),
  but that does not matter here.) What else could be going on? If you look at the timestamps, you will note 
 that there is actually quite a large gap between the DELETE and the COPY error, despite it simply deleting and 
 adding a single row (I have changed the table and data names, but it was actually a single row). So something 
 else must be happening to that table.
 
-Anyone guess what the problem is yet? After all, "when you have eliminated the impossible, 
-whatever remains, however improbable, must be the truth". In this case, the truth must be that 
-Postgres' MVCC was not working, and the database was not as [ACID](http://en.wikipedia.org/wiki/ACID) as advertised. Postgres does use 
-[MVCC](http://en.wikipedia.org/wiki/Multiversion_concurrency_control), but has two (that I know of) exceptions: the system tables, and the TRUNCATE command. I knew in 
+Anyone guess what the problem is yet? After all, “when you have eliminated the impossible, 
+whatever remains, however improbable, must be the truth”. In this case, the truth must be that 
+Postgres’ MVCC was not working, and the database was not as [ACID](https://en.wikipedia.org/wiki/ACID) as advertised. Postgres does use 
+[MVCC](https://en.wikipedia.org/wiki/Multiversion_concurrency_control), but has two (that I know of) exceptions: the system tables, and the TRUNCATE command. I knew in 
 this case nothing was directly manipulating the system tables, so that only left truncate. Sure enough, 
 grepping through the logs found that something had truncated the table right around the same time, and then added a 
-bunch of rows back in. As truncate is *not* MVCC-safe, this explains our mystery completely. It's a 
-bit of a race condition, to be sure, but it can and does happen. Here's some more logs showing 
+bunch of rows back in. As truncate is *not* MVCC-safe, this explains our mystery completely. It’s a 
+bit of a race condition, to be sure, but it can and does happen. Here’s some more logs showing 
 the complete sequence of events for two separate processes, which I have labeled A and B:
 
 ```error
@@ -92,8 +92,8 @@ the row truly be removed on disk (usually via the autovacuum daemon). Truncate, 
 all the rows and add visibility information: 
 as the name implies, it truncates the table by removing all rows, period.
 
-So when we did the truncate, process A was able to add row 12345 back in: it had no idea that the row was "in use" by transaction B. Similarly, B had no idea that something had added the row back in. No idea, that is, until it tried to add the row and the unique index prevented it! There appears to be 
-[some work](http://postgresql.1045698.n5.nabble.com/RFC-Making-TRUNCATE-more-quot-MVCC-safe-quot-td5470710.html) on making truncate more MVCC friendly in future versions.
+So when we did the truncate, process A was able to add row 12345 back in: it had no idea that the row was “in use” by transaction B. Similarly, B had no idea that something had added the row back in. No idea, that is, until it tried to add the row and the unique index prevented it! There appears to be 
+[some work](http://www.postgresql-archive.org/RFC-Making-TRUNCATE-more-quot-MVCC-safe-quot-td5470710.html) on making truncate more MVCC friendly in future versions.
 
 Here is a sample script demonstrating the problem:
 
@@ -155,8 +155,8 @@ features a brand new true serializable mode, we see yet another error message:
  HINT:  The transaction might succeed if retried
 ```
 
-This doesn't really give us a whole lot more information, and the "detail" line is fairly arcane, but 
-it does give a pretty nice "hint", because in this particular case, the transaction *would* succeed if 
+This doesn’t really give us a whole lot more information, and the “detail” line is fairly arcane, but 
+it does give a pretty nice “hint”, because in this particular case, the transaction *would* succeed if 
 it were tried again. More specifically, B would DELETE the new row added by process A, and then safely 
 add the row back in without running into any unique violations.
 

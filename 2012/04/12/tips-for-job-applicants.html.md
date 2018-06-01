@@ -49,4 +49,4 @@ Consider this a public service announcement. This is a list of assorted suggesti
 
 This wasn’t meant to be an exhaustive list, but will help the attentive job-seeker. Much of it applies to all of us in normal business communication with our co-workers and others as well.
 
-On a distantly related note, I recently came across this list of tips called [How to Get the Best Customer Service (Anywhere)](http://blog.softlayer.com/2012/how-to-get-the-best-customer-service-anywhere/). It appeared on SoftLayer’s blog and has a similar overall theme of approaching others respectfully, and communicating effectively.
+On a distantly related note, I recently came across this list of tips called [How to Get the Best Customer Service (Anywhere)](https://web.archive.org/web/20120509130857/http://blog.softlayer.com/2012/how-to-get-the-best-customer-service-anywhere/). It appeared on SoftLayer’s blog and has a similar overall theme of approaching others respectfully, and communicating effectively.
