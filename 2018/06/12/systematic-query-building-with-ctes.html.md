@@ -6,7 +6,7 @@ tags: postgres, gis, sql
 
 <img src="/blog/2018/06/11/systematic-query-building-with-ctes/intro.jpg" />
 
-The first time I got paid for doing PostgreSQL work on the side, I spent most of the proceeds on the mortgage (boring, I know), but I did get myself one little treat: a boxed set DVDs from a favorite old television show. They became part of my evening ritual, watching an episode while cleaning the kitchen before bed. The show features three military draftees, one of whom, Frank, is universally disliked. In one episode, we learn that Frank has been unexpectedly transferred away, leaving his two roommates the unenviable responsibility of collecting Frank's belongings and sending them to his new assignment. After some grumbling, they settle into the job, and one of them picks a pair of shorts off the clothesline, saying, "One pair of shorts, perfect condition: mine," and he throws the shorts onto his own bed. Picking up another pair, he says, "One pair of shorts. Holes, buttons missing: Frank's."
+The first time I got paid for doing PostgreSQL work on the side, I spent most of the proceeds on the mortgage (boring, I know), but I did get myself one little treat: a boxed set of DVDs from a favorite old television show. They became part of my evening ritual, watching an episode while cleaning the kitchen before bed. The show features three military draftees, one of whom, Frank, is universally disliked. In one episode, we learn that Frank has been unexpectedly transferred away, leaving his two roommates the unenviable responsibility of collecting Frank's belongings and sending them to his new assignment. After some grumbling, they settle into the job, and one of them picks a pair of shorts off the clothesline, saying, "One pair of shorts, perfect condition: mine," and he throws the shorts onto his own bed. Picking up another pair, he says, "One pair of shorts. Holes, buttons missing: Frank's."
 
 The other starts on the socks: "One pair of socks, perfect condition: mine. One pair socks, holes: Frank's. You know, this is going to be a lot easier than I thought."
 
@@ -390,6 +390,5 @@ in a table somewhere, for quicker processing as we build the rest of the query
 and experiment with visulization options. Second, PostGIS provides an arguably
 more elegant way of finding grid squares in the first place, a method which
 also affords other options for interesting visualizations. Stay tuned for a
-future blog post discussing these issues.
-
-XXX Return to the "having a system" theme
+future blog post discussing these issues. Meanwhile, CTEs proved a valuable way
+to systematize and modularize a very complicated query.
