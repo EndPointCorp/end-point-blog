@@ -73,7 +73,7 @@ gridix AS (
 ),
 ```
 
-Occasionally I like to check my progress, something like this:
+Occasionally I like to check my progress, running whatever bits of the query I've already written to review its behavior. CTEs make this convenient, because I can adjust the final clause of the query to select data from whichever of the CTEs I'm currently interested in. Here's the query thus far:
 
 ```shell
 inegi=# WITH params AS (
