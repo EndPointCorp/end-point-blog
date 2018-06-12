@@ -29,7 +29,7 @@ WITH alias AS (
     SELECT something FROM wherever
 ),
 another_alias AS (
-    SELECT another_thing FROM wherever LEFT JOIN something_else
+    SELECT another_thing FROM alias LEFT JOIN something_else
 )
 SELECT an, assortment, of, fields
 FROM another_alias;
@@ -37,16 +37,12 @@ FROM another_alias;
 
 As shown by this example query, the `WITH` keyword precedes a list of named, parenthesized queries, each of which functions throughout the life of the query as a though it were a full-fledged table. These pseudo-tables are called Common Table Expressions, and they allow me to make one table for each distinct function in what will prove to be a fairly complicated query.
 
-Let's go through the elements of this query piece by piece. First, I want to store the results of the query, so I can create different visualizations without recalculating everything.
+Let's go through the elements of our new query piece by piece. First, I want to store the results of the query, so I can create different visualizations without recalculating everything. So I'll make this query create a new table filled with its results. In this case, I called the table `grid_mza_vals`.
+
+Now, for my first CTE. This query involves a few user-selected parameters, and I want an easy way to adjust these settings as I experiment to get the best results. I'll want to fiddle with the number of grid squares in the overall result, as well as the coefficients used later on to calculate the height of each polygon.  So my first CTE is called simply `params`, and returns a single row, composed of these parameters.
 
 ```sql
-DROP TABLE IF EXISTS grid_mza_vals;
 CREATE TABLE grid_mza_vals AS
-```
-
-Now, for my first CTE, I want an easy way to adjust settings on this query. I'll want to experiment with the number of grid squares in the overall result, as well as coefficients used to calculate the height of each polygon. So my first CTE is called simply `params`, and returns a single row.
-
-```sql
 WITH params AS (
     SELECT
         25 AS numsq,
