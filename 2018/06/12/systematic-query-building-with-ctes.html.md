@@ -39,7 +39,7 @@ As shown by this example query, the `WITH` keyword precedes a list of named, par
 
 Let's go through the elements of our new query piece by piece. First, I want to store the results of the query, so I can create different visualizations without recalculating everything. So I'll make this query create a new table filled with its results. In this case, I called the table `grid_mza_vals`.
 
-Now, for my first CTE. This query involves a few user-selected parameters, and I want an easy way to adjust these settings as I experiment to get the best results. I'll want to fiddle with the number of grid squares in the overall result, as well as the coefficients used later on to calculate the height of each polygon.  So my first CTE is called simply `params`, and returns a single row, composed of these parameters.
+Now, for my first CTE. This query involves a few user-selected parameters, and I want an easy way to adjust these settings as I experiment to get the best results. I'll want to fiddle with the number of grid squares in the overall result, as well as the coefficients used later on to calculate the height of each polygon. So my first CTE is called simply `params`, and returns a single row, composed of these parameters.
 
 ```sql
 CREATE TABLE grid_mza_vals AS
@@ -113,7 +113,7 @@ SELECT * FROM gridix;
 ...
 ```
 
-So far, so good. The `gridix` CTE returns coordinates for each cell in the grid, from zero to the `numsq` value from my `params` CTE, and from those numbers, if I know the geographic boundaries of the data set, I can calculate the latitude and longitude of the four corners of the square using only the number of squares on an edge, and the integer coordinates of this square. First, I need to find the geographic boundaries of the data. My dataset lives in a table called `manzanas`, Spanish for "city block" (and also "apple"). Each row contains one geographic attribute containing a polygon defining the boundaries of the block, and several other attributes such as the education score I mentioned. In PostGIS there are several different ways to find the bounding box I want; here's the one I used.
+So far, so good. The `gridix` CTE returns coordinates for each cell in the grid, from zero to the `numsq` value from my `params` CTE. From those coordinates, if I know the geographic boundaries of the data set and the number of squares in each edge, I can calculate the latitude and longitude of the four corners of each grid square. First, I need to find the geographic boundaries of the data. My dataset lives in a table called `manzanas`, Spanish for "city block" (and also "apple"). Each row contains one geographic attribute containing a polygon defining the boundaries of the block, and several other attributes such as the education score I mentioned. In PostGIS there are several different ways to find the bounding box I want; here's the one I used.
 
 ```sql
 limits AS (
@@ -261,7 +261,7 @@ sum_graproes | 3888.53630440106
 
 Now we're left with turning these results into a visualization. I'd like to assign each polygon a height, and a color. To make the visualization easier to understand, I'll divide the results into a handful of classes, and assign a height and color to each class.
 
-Using an online color palette generator, I came up with a sequence of six colors, which progress from white to a green similar to the green bar on the Mexican flag. Another CTE will return these colors as an array, and yet another will assign the grid squares to groups based on their calculated score.  Finally, a third will select the proper color from the array using that group value. At this point, readers are probably thinking "enough already; quit dividing everything into ever smaller CTEs", to which I can only say, "Yeah, you may be right."
+Using an online color palette generator, I came up with a sequence of six colors, which progress from white to a green similar to the green bar on the Mexican flag. Another CTE will return these colors as an array, and yet another will assign the grid squares to groups based on their calculated score. Finally, a third will select the proper color from the array using that group value. At this point, readers are probably thinking "enough already; quit dividing everything into ever smaller CTEs", to which I can only say, "Yeah, you may be right."
 
 ```sql
 colors AS (
@@ -279,7 +279,7 @@ color AS (
 )
 ```
 
-The [ntile() window function](https://www.postgresql.org/docs/current/static/functions-window.html) is useful for this kind of thing. It divides the given partition into buckets, and returns the number of the bucket for each row. Here, the partition consists of the whole data set; we sort it by educational score to ensure low-scoring grid squares get low-numbered buckets.  Note also that I can change the colors, adding or removing groups, simply by adjusting the `colors` CTE. This could theoretically prove handy, if I decided I didn't like the number of levels or the color scheme, but it's a feature I never used for this visualization.
+The [ntile() window function](https://www.postgresql.org/docs/current/static/functions-window.html) is useful for this kind of thing. It divides the given partition into buckets, and returns the number of the bucket for each row. Here, the partition consists of the whole data set; we sort it by educational score to ensure low-scoring grid squares get low-numbered buckets. Note also that I can change the colors, adding or removing groups, simply by adjusting the `colors` CTE. This could theoretically prove handy, if I decided I didn't like the number of levels or the color scheme, but it's a feature I never used for this visualization.
 
 We're on the home stretch, at last, and I should clarify how I plan to turn the
 database objects into KML, usable on a Liquid Galaxy. I used
@@ -301,6 +301,7 @@ the surface of the earth a ways. So I can probably finish this with one final
 query:
 
 ```sql
+-- Insert all previous CTEs here
 SELECT
     ST_Translate(
         ST_Force3DZ(geom), 0, 0,
@@ -308,17 +309,17 @@ SELECT
     ) AS edu_geom,
     'BRUSH(fc:#' || edu_color || 'ff);PEN(c:#' || edu_color || 'ff)' AS edu_style,
     'absolute' AS "altitudeMode"
-FROM color, params
+FROM color, params;
 ```
 
 You may remember `alt_bias` and `alt_percfactor`, the oddly named and
-previously unexplained values in my first `params` CTE. These I used to control
-how far apart in space one group of polygons is from another, and to bias them
-far enough above the ground to avoid the problem of them being obscured by
-terrain features. You may also remember that this query began with the `CREATE
-TABLE grid_mza_vals AS...` command, meaning that we'll store the results of all
-this processing into a table, so `ogr2ogr` can get to it. We call `ogr2ogr`
-like this:
+thus far unexplained values in my first `params` CTE. These I used to control
+how far apart in altitude one group of polygons is from another, and to bias
+them all far enough above the ground to avoid the problem of them being
+obscured by terrain features. You may also remember that this query began with
+the `CREATE TABLE grid_mza_vals AS...` command, meaning that we'll store the
+results of all this processing in a table, so `ogr2ogr` can get to it. We
+call `ogr2ogr` like this:
 
 ```shell
 ogr2ogr \
@@ -329,14 +330,15 @@ ogr2ogr \
 
 OGR's [LIBKML driver](http://www.gdal.org/drv_libkml.html) knows an attribute
 called "OGR_STYLE" is a style string, and one called "altitudeMode" is,
-predictably, the feature's altitude mode. So this will create a bunch of
-polygons, floating in the air above Mexico City, at different levels and with
-different colors, corresponding to our original education data. Something like
-this:
+predictably, the feature's altitude mode. So this will create a KML file,
+containing one placemark for each row in our `grid_mza_tables` table. Each
+placemark consists of a colored square, floating in the air above Mexico City.
+The squares come in six different levels and six different colors,
+corresponding to our original education data. Something like this:
 
 <img src="/blog/2018/06/11/systematic-query-building-with-ctes/floating-polys.jpg" />
 
-The KML looks like this:
+Here's one of the placemarks from the KML.
 
 ```xml
       <Placemark id="sql_statement.1">
@@ -372,10 +374,11 @@ The KML looks like this:
       </Placemark>
 ```
 
-This may be sufficient, but it gets confusing when viewed from a low angle, so
-I prefer having the polygons "extruded" from the ground, as KML calls it. I
-used a simple Perl script to add the `extrude` element to each polygon in the
-KML, resulting in this:
+This may be sufficient, but it gets confusing when viewed from a low angle,
+because it's hard to tell which square belongs to which part of the map. I
+prefer having the polygons "extruded" from the ground, as KML terms it. I used
+a simple Perl script to add the `extrude` element to each polygon in the KML,
+resulting in this:
 
 <img src="/blog/2018/06/11/systematic-query-building-with-ctes/extruded-polys.jpg" />
 
