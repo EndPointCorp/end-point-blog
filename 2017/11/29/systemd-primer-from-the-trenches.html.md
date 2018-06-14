@@ -6,12 +6,12 @@ tags: hosting, systemd, systemctl
 
 # systemctl - lets get back to basics
 
-''help me systemd you are my only hope''. If we start back at the beginning, sometimes going back to day dot
+''help me systemd you are my only hope''. If we start back at the beginning, sometimes going back to day zero
 often brings clarity to what seems like hopeless or frustrating situation for users from SysV world. Caveat, 
 I previously worked at Red Hat for many years before joining the excellent team at End Point and have been using systemd for as long. 
-I quite honestly have forgotten most of the SysV or init days. Although at End Point we work daily on Debian, Ubuntu, Centos and BSD variants.
+I quite honestly have forgotten most of the SysV or init days. Although at End Point we work daily on Debian, Ubuntu, CentOS and BSD variants.
 
-So here is a short and sweet primer to get your fingers wet, before we dive into some of the heavier subjects with systemd.
+Here is a short and sweet primer to get your fingers wet, before we dive into some of the heavier subjects with systemd.
 
 Did you know that systemd has many utilities it can run:
 
@@ -19,13 +19,13 @@ Did you know that systemd has many utilities it can run:
 * timedatectl
 * journalctl
 * loginctl
-* notify
-* Analyze - analyze system
-* Cgls - show cgroup tree
-* cgtop
-* N spawn
+* systemd-notify
+* systemd-analyze - analyze system
+* systemd-cgls - show cgroup tree
+* systemd-cgtop
+* systemd-nspawn
 
-systemd for want of keeping thinigs simple in unix terms also runs several daemons
+systemd for want of keeping things simple in unix terms also runs several daemons.
  - systemd, journald, networkd, loginduser, timedated, udevd, system-boot, tmpfiles and session 
  
 That’s a long way from the old init days. But in all essence it’s not that far from SysV. The one thing that stands out to me
@@ -57,7 +57,7 @@ example:
 **Pro Tip 1**
 
 Before you begin playing with the commands, you should install ```bash-completion.noarch```. Some distro's don't auto complete with systemd until you
-install bash auto completion. Without tab auto-completion you miss out on a ALOT of systemctl.
+install bash auto completion. Without tab auto-completion you miss out on a A LOT of systemctl.
 
 As an example when you `TAB` for completion you will see many of the systemctl options;
 
@@ -79,7 +79,7 @@ Lets start at the top and work down;
 
 ```service```
 
-Used in conjunction with ABRT can show you some great debug info and runtime metadata, categorised in their respective groupings of loaded, 
+Used in conjunction with ABRT it can show you some great debug info and runtime metadata, categorized by their respective groupings of loaded, 
 active, running and a description of the unit.
 
 2.
@@ -121,17 +121,17 @@ Flags: on or off
 You might find on some distro's that chkconfig is still present. It doesn't do what you think it does with systemd systems.
 
 Tip:
-* No tip on this, just remember, `enable` vs `chckconfig` and you will be swell.
+* No tip on this, just remember, `enable` vs `chkconfig` and you will be swell.
 
 5.
 ```systemctl start/stop/restart httpd```
 
-Good flags: reload-or-restart
+Good unit commands: reload-or-restart
 
 ```service httpd start/stop/restart```
 
-As it suggests, start,stop,restart services/processes. The `reload-or-restart` pattern tells the services to reload if it is able and if
-not then restart. SOme services doent allow a reload, often you will find this when you go to systemctl reload service. Nagios was one
+As it suggests, start,stop,restart services/processes/units. The `reload-or-restart` pattern tells the services to reload if it is able and if
+not then restart. Some services don't allow a reload, often you will find this when you go to systemctl reload service. Nagios was one
 example where a reload-or-restart would work, because it didn't allow reloads.
 
 Tip:
@@ -175,7 +175,7 @@ Good flags -a (--all), -t serviecName, --all
 ```ls /etc/rc.d/init.d/```
 ```ls /etc/rc.d/rc.local```
 ```sysv-rc-conf```
-```Initctl list```
+```initctl list```
 
 Anyone see the problem between the two cmd passes? I prefer to use ‘list-units’ over ‘list-unit-files’. 
 It shows more information and is shorter to type. List all active services using systemctl. 
@@ -196,10 +196,10 @@ type I am wanting to look at.
 
 ```crontab -e```
 
-systemd offers a way to schedule tasks aka crontab. Im going to go out on a limb here and say they both do the same thing, except
+systemd offers a way to schedule tasks aka crontab. I'm going to go out on a limb here, and say they both do the same thing, except
 systemd timers may be more readable by human eyes, are logged to the journal, easier to debug and enable or disable.
 
-Although my caveat; I still use cron jobs in my daily work, because Im familiar with them and emailing is still an issue from a timer.
+Although my caveat; I still use cron jobs in my daily work, because I'm familiar with them and emailing is still an issue from a timer.
 
 Tip:
 * set a systemd timer to a calendar, day, month, year to trigger.
@@ -223,8 +223,8 @@ Show me failed services. systemctl status will highlight at the top if units hav
 
 to list targets run ```systemctl list-units -t target```
 
-```Runlevel```
-```Chkconfig --list```
+```runlevel```
+```chkconfig --list```
 ```telinit runlevel```
 
 Gets the run level default for the system. Not often used, if rarely, but good know when you start having boot issues or need
@@ -238,8 +238,9 @@ Tip:
 ```systemctl shutdown or reboot```
 
 ```shutdown -r now```
+```shutdown -h now```
 
-Reboot/shutdown the system. Personally I use ‘shutdown -r now’ still.
+Reboot/shutdown and poweroff the system. Personally I use ‘shutdown’.
 
 16.
 ```systemctl cat serviceName```
@@ -250,8 +251,8 @@ Shows me the system service(unit) file contents and options. We will go more int
 building and maintaining our own UNIT files.
 
 Tip:
-* systemctl cat shows all unti file information and snippets involved with unit file.
-* If you use VIM as I do, you can enable vim-systemd to help wotj syntax highlighting.
+* systemctl cat shows all unit file information and snippets involved with unit file.
+* If you use VIM as I do, you can enable vim-systemd to help with syntax highlighting.
 
 17.
 ```systemctl list-dependencies serviceName```
@@ -266,43 +267,50 @@ Tip:
 
 Flags: -p - shows a single property of a service. 
 
-Shows more than using ‘systemctl cat servicename’. Dont forget TAB is your friend. 
+Shows more than using ‘systemctl cat servicename’. Don't forget TAB is your friend. 
 Running the ``-p`` flag and using TAB will help you.
 
 19.
 ```systemctl mask serviceName```
 
-```Update-rc.d serviceName disable```
+```update-rc.d serviceName disable```
 
-Never want someone starting a service EVER!! 'Mask' is your friend and a little sneaky. See if your system admins 
+Never want someone starting a service EVER!! 'Mask' is your friend and a little sneaky. See if your system admin's 
 pick this one up. Good April fools day. ‘’unmask’’ to return it to its user
 
 20.
 ```systemctl edit serviceName```
 
-Good flags --full
+Good options: --full
 
-```vim /etc/inittab```
+Example: ```systemctl edit --full serviceName```
+
+```vim /etc/init.d/scriptName```
 
 Yes that’s right! Edit the service file without having to cd into the directory. Now that saved me a bit of time.
 
 Tip:
 * Careful with this. The plain edit creates an override file in /etc/systemd/system to complement the original unit file. 
 * If you need to edit the original unit file use the ```--full``` flag.
-* I made mistake in my unit file or I messed up a system unti file; use `systemctl revert unit`
+* The `--full` flag allows you to edit the unit file without creating a snippet.
+* I made a mistake in my unit file or I messed up a system unit file; use `systemctl revert unit`
 
 21.
 ```systemctl --output=```
 
-Good Flags verbose, --full
+Good options: verbose
 
-```/etc/init.d/httpd start >httpd-output 2>&1```
+```
+Set your apache log level to warn or debug in your configuration file
+/etc/init.d/httpd restart 
+View logs
+```
 
 Particular good if you have a bad service which is playing up. Outputs a short standard message or a very verbose message
 using different flags.
 
 Tip:
-* `Journalctl -u serviceName` can help you here, but I often find it easier to reply the command and include `--output=verbose`
+* `journalctl -u serviceName` can help you here, but I often find it easier to include `--output=verbose`
 
 22.
 ```systemctl isolate```
@@ -316,7 +324,7 @@ We will cover this next week.
 23.
 ```systemd-delta```
 
-Check your unit files to see if someone has been changing things on you. Especially useful if you are writting your own Unit files.
+Check your unit files to see if someone has been changing things on you. Especially useful if you are writing your own Unit files.
 
 Tip:
 * Used in conjunction with `systemctl cat` or `edit`, `delta` can help you see what was what.
@@ -325,7 +333,7 @@ Tip:
 
 1. Sometimes you need to use the suffix such as ‘config_file@openvpn.service’.  Keep this back of mind.
 2. systemd will always think services are services unless you use the suffix like .target or .socket, make sure you tell the system so.
-3. If you want multiple services running use a prefix, such as; ssh1@sshd.service ssh2@sshd.service with different configs. Handy for multiple openvpn servers.
+3. If you want multiple services running use a prefix, such as; ssh1@sshd.service ssh2@sshd.service with different config's. Handy for multiple openvpn servers.
 4. Mount points will always be determined as mount points.
 6. If you have made a lot of configuration changes and want to gracefully load these without restarting everything try  
 `systemctl daemon reload`
@@ -333,11 +341,13 @@ Tip:
 command to run since it keeps sockets open while it does its thing.
 8. Reboots on newer systems only really need to be done when new kernels are presented. Systemd is gracious and good at 
 processing new packages and enabling these changes during a yum update.
-9. Autocomplete on Centos is not present until you install `bash-completion`. systemctl takes on a life of it’s own, 
+9. Auto complete on CentOS is not present until you install `bash-completion`. systemctl takes on a life of it’s own, 
 when you install this utility. Tabbing out will list all systemctl options. Very handy!!
 10. Systemd does not use the /etc/inittab file even if you have them present.
 11. Converting your init’s to systemd is easier than you think. Create a systemd unit file and add in 10 basic lines to 
-call the bin or init script. You have basically created a systemd managed init script. Don’t forget to go back and one day convert it completely. For the basic lines you need, see next week's blog post on unti files.
+call the bin or init script. You have basically created a systemd managed init script. Don’t forget to go back 
+and one day convert it completely. For the basic lines you need, see the next blog post on unit files where I will explain the
+advantages of converting a SysV script into a systemd unit file.
 12. Targets vs runlevels - A target in systemd is a runlevel in sysV, Names replace numbers; runlevel3 = multi-user.target, runlevel1 = rescue.target
 
 
@@ -448,7 +458,7 @@ network.target @2.618s
                                         └─-.slice
 ```
 
-Lets go one step further and output the entire system heirachy. 
+Lets go one step further and output the entire system hierarchy. 
 
 ``systemd-analyze dot``
 
@@ -457,7 +467,7 @@ Now with this one you should output to nice res picture
 ```systemd-analyze dot | dot -Tpng -o system-stuff.png```
 
  
-## Too many typings - I type enough everyday and a have bzillion servers
+## Too much typing! - I type enough everyday and a have bzillion servers!!!
 
 *Pro Tip 2*
 
@@ -502,13 +512,14 @@ Vs
 I think the biggest part that people struggle with is workable, usable examples. 
 
 ## Next week
-I know this is only touching the surface of systemctl or systemd as whole, however from a day-to-day context this should help
-play in the systemd world. We will come back to systemctl more next week when we start working with units and targets.
-  
-Each week I will try and delve deeper into unit files, unit targets, systemctl isolate and slices, followed by a small primer 
-on journalctl, timedatectl, loginctl. providing working examples where I can.
 
-Stay tuned next week for hero to zero on unit files.
+I know this is only touching the surface of systemctl or systemd as whole, however from a day-to-day context this should help
+play in the systemd world. We will come back to systemctl in later posts when we start working with "units" and "targets".
+  
+Each post I will try and delve deeper into systemd where we will look at; unit files, unit targets, systemctl isolate and slices, followed by a small primer 
+on journalctl, timedatectl, loginctl. providing working examples as best as I can.
+
+Stay tuned for future posts for 'hero to zero on unit file's'.
 
 
 
