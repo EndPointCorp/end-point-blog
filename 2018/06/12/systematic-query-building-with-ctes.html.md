@@ -35,7 +35,7 @@ SELECT an, assortment, of, fields
 FROM another_alias;
 ```
 
-As shown by this example query, the `WITH` keyword precedes a list of named, parenthesized queries, each of which functions throughout the life of the query as a though it were a full-fledged table. These pseudo-tables are called Common Table Expressions, and they allow me to make one table for each distinct function in what will prove to be a fairly complicated query.
+As shown by this example query, the `WITH` keyword precedes a list of named, parenthesized queries, each of which functions throughout the life of the query as though it were a full-fledged table. These pseudo-tables are called Common Table Expressions, and they allow me to make one table for each distinct function in what will prove to be a fairly complicated query.
 
 Let's go through the elements of our new query piece by piece. First, I want to store the results of the query, so I can create different visualizations without recalculating everything. So I'll make this query create a new table filled with its results. In this case, I called the table `grid_mza_vals`.
 
