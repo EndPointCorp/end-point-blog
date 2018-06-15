@@ -23,7 +23,7 @@ proxy to fix this and we've had good success on getting payments flowing again.
 # What is a Proxy?
 
 A proxy is a mid-point, essentially a digital middleman, moving your data from one place to another
-in a secure way. In both of these instances, we ended up using `nginx` (the stack's webserver) as
+in a secure way. In two recent client instances, we ended up using `nginx` (the stack's webserver) as
 the reverse proxy, basically running a separate server for just shuttling requests to/from the
 payment gateway.  Since we want to be able to run the gateway in both live and test modes, we use
 two separate server definitions in our `nginx` include, one for each.
@@ -133,7 +133,7 @@ A few notes about this:
 
 # Rails sample application config
 
-A configuration file for the Authorize.net CIM gateway:
+A configuration file for the Authorize.net CIM gateway, for clients using ActiveMerchant as the base for payment gateway integration:
 
 ```rb
 require File.expand_path('../boot', __FILE__)
@@ -143,8 +143,6 @@ module MyApp
   class Application < Rails::Application
     ActiveMerchant::Billing::AuthorizeNetCimGateway.test_url = 'http://localhost:1337/xml/v1/request.api'
     ActiveMerchant::Billing::AuthorizeNetCimGateway.live_url = 'http://localhost:1338/xml/v1/request.api'
-    ActiveMerchant::Billing::AuthorizeNetGateway.test_url = 'http://localhost:1337/xml/v1/request.api'
-    ActiveMerchant::Billing::AuthorizeNetGateway.live_url = 'http://localhost:1338/xml/v1/request.api'
   end
 end
 ```
