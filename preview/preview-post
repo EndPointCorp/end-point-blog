@@ -4,6 +4,7 @@
 # Creates a file preview.html for previewing in-progress blog posts
 require 'redcarpet'
 require 'yaml'
+require 'date'
 
 dir = File.dirname(__FILE__)
 
