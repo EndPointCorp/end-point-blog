@@ -49,7 +49,7 @@ CREATE TYPE
 
 Next, as a superuser, we create the table containing sensitive information, and populate it:
 
-```sql
+```text
 postgres=> CREATE TABLE weapon (
   id              SERIAL          PRIMARY KEY,
   name            TEXT            NOT NULL,
@@ -74,7 +74,7 @@ INSERT 0 7
 
 We don't want anyone but ourselves to be able to access this table, so for safety, we make some explicit revocations. We'll examine the permissions before and after we do this:
 
-```sql
+```text
 postgres=> \dp weapon
                           Access privileges
  Schema |  Name  | Type  | Access privileges | Column access privileges 
@@ -93,18 +93,20 @@ postgres=> \dp weapon
 
 As you can see, what the REVOKE really does is remove the implicit "no permission" and grant explicit permissions to only the postgres user to view or modify the table. Let's confirm that Alice cannot do anything with that table:
 
-```sql
+```text
 postgres=> \c postgres alice
 You are now connected to database "postgres" as user "alice".
-postgres=> postgres=> SELECT * FROM weapon;
+
+postgres=> SELECT * FROM weapon;
 ERROR:  permission denied for relation weapon
-postgres=> postgres=> UPDATE weapon SET id = id;
+
+postgres=> UPDATE weapon SET id = id;
 ERROR:  permission denied for relation weapon
 ```
 
 Alice does need to have access to parts of this table, so we will create a "wrapper function" that will query the table for us and return some results. By declaring this function as SECURITY DEFINER, it will run as if the person who created the function invoked it  - in this case, the postgres user. For this example, we'll be letting Alice see the "cost and description" of exactly one item at a time. Further, we are not going to let her (or anyone else using this function) view certain items. Only those items classified as "confidential" or lower can be viewed (i.e. "confidential", "restricted", or "unclassified"). Here's the first version of our function:
 
-```sql
+```text
 postgres=> CREATE LANGUAGE plperlu;
 CREATE LANGUAGE
 
@@ -182,7 +184,7 @@ CONTEXT:  PL/Perl function "weapon_details"
 
 Now that we have solved the restricted access problem, let's move on the auditing. We will create a simple table to hold information about who accessed what and when:
 
-```sql
+```text
 postgres=> CREATE TABLE data_audit (
   tablename TEXT         NOT NULL,
   arguments TEXT             NULL,
@@ -197,7 +199,7 @@ CREATE TABLE
 
 The 'tablename' column simply records which table they are getting data from. The 'arguments' is a free-form field describing what they were looking for. The 'results' column shows how many matching rows were found. The 'status' column will be used primarily to log unusual requests, such as the case where Alice looks for a forbidden item. The 'username' column records the name of the user doing the searching. Because we are using functions with SECURITY DEFINER set, this needs to be session_user, not current_user, as the latter will switch to 'postgres' within the function, and we want to log the real caller (e.g. 'alice'). The final two columns tell us then the current transaction started, and the exact time when an entry was made inside of this table. As a first attempt, we'll have our function do some simple inserts to this new data_audit table:
 
-```sql
+```text
 postgres=> CREATE OR REPLACE FUNCTION weapon_details(TEXT)
 RETURNS TABLE (name TEXT, cost TEXT, description TEXT)
 LANGUAGE plperlu
@@ -308,7 +310,7 @@ AS $bc$
 ```perl
 use strict;
 use warnings;
->use DBI;
+use DBI;
 
 ## The item they are looking for
 my $name = shift;
