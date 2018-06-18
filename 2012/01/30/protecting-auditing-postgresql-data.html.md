@@ -5,11 +5,9 @@ tags: audit, database, perl, postgres, security
 title: Protecting and auditing your secure PostgreSQL data
 ---
 
+<a href="/blog/2012/01/30/protecting-auditing-postgresql-data/image-0-big.png"><img alt="" border="0" src="/blog/2012/01/30/protecting-auditing-postgresql-data/image-0.png" style="float:right; margin:0 0 10px 10px"/></a>
 
-
-<a href="/blog/2012/01/30/protecting-auditing-postgresql-data/image-0-big.png"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5703579175260784338" src="/blog/2012/01/30/protecting-auditing-postgresql-data/image-0.png" style="float:right; margin:0 0 10px 10px;cursor:pointer; cursor:hand;width: 310px; height: 320px;"/></a>
-
-PostgreSQL functions can be written in [many languages](http://www.postgresql.org/docs/current/static/xplang.html). These languages fall into two categories, 'trusted' and 'untrusted'. Trusted languages cannot do things "outside of the database", such as writing to local files, opening sockets, sending email, connecting to other systems, etc. Two such languages are [PL/pgSQL](http://www.postgresql.org/docs/current/static/plpgsql-overview.html) and and [PL/Perl](http://www.postgresql.org/docs/current/static/plperl.html). For "untrusted" languages, such as PL/PerlU, all bets are off, and they have no limitations placed on what they can do. Untrusted languages can be very powerful, and sometimes dangerous.
+PostgreSQL functions can be written in [many languages](https://www.postgresql.org/docs/current/static/xplang.html). These languages fall into two categories, 'trusted' and 'untrusted'. Trusted languages cannot do things "outside of the database", such as writing to local files, opening sockets, sending email, connecting to other systems, etc. Two such languages are [PL/pgSQL](https://www.postgresql.org/docs/current/static/plpgsql-overview.html) and and [PL/Perl](https://www.postgresql.org/docs/current/static/plperl.html). For "untrusted" languages, such as PL/PerlU, all bets are off, and they have no limitations placed on what they can do. Untrusted languages can be very powerful, and sometimes dangerous.
 
 One of the reasons untrusted languages can be considered dangerous is that they can cause side effects outside of the normal transactional flow that cannot be rolled back. If your function writes to local disk, and the transaction then rolls back, the changes on disk are still there. Working around this is extremely difficult, as there is no way to detect when a transaction has rolled back at the level where you could, for example, undo your local disk changes.
 
@@ -25,7 +23,7 @@ ROLLBACK;                          -- inserts to the audit table are now gone!
 
 Certainly there are other ways to track who is using this query, the most obvious being by enabling full Postgres logging (by setting log_statement = 'all' in your postgresql.conf file.) However, extracting that information from logs is no fun, so let's find a way to make that INSERT stick, even if the surrounding function was rolled back.
 
-Stepping back for one second, we can see there are actually two problems here: restricting access to the data, and logging that access somewhere. The ultimate access restriction is to simply force everyone to go through your custom interface. However, in this example, we will assume that someone has [psql](http://www.postgresql.org/docs/current/static/app-psql.html) access and needs to be able to run ad hoc SQL queries, as well as be able to BEGIN, ROLLBACK, COMMIT, etc.
+Stepping back for one second, we can see there are actually two problems here: restricting access to the data, and logging that access somewhere. The ultimate access restriction is to simply force everyone to go through your custom interface. However, in this example, we will assume that someone has [psql](https://www.postgresql.org/docs/current/static/app-psql.html) access and needs to be able to run ad hoc SQL queries, as well as be able to BEGIN, ROLLBACK, COMMIT, etc.
 
 Let's assume we have a table with some Very Important Data inside of it. Further, let's establish that regular users can only see some of that data, and that we need to know who asked for what data, and when. For this example, we will create a normal user named Alice:
 
@@ -34,7 +32,7 @@ postgres=> CREATE USER alice;
 CREATE ROLE
 ```
 
-We need a way to tell which rows are suitable for people like Alice to view. We will set up a quick classification scheme using the nifty [ENUM feature](http://www.postgresql.org/docs/current/static/datatype-enum.html) of PostgreSQL:
+We need a way to tell which rows are suitable for people like Alice to view. We will set up a quick classification scheme using the nifty [ENUM feature](https://www.postgresql.org/docs/current/static/datatype-enum.html) of PostgreSQL:
 
 ```sql
 postgres=> CREATE TYPE classification AS ENUM (
@@ -160,7 +158,7 @@ $bc$;
 CREATE FUNCTION
 ```
 
-The above should be fairly self-explanatory. We are using PL/Perl's [built-in database access functions](http://www.postgresql.org/docs/current/static/plperl-builtins.html), such as spi_prepare, to do the actual querying. Let's confirm that this works as it should for Alice:
+The above should be fairly self-explanatory. We are using PL/Perl's [built-in database access functions](https://www.postgresql.org/docs/current/static/plperl-builtins.html), such as spi_prepare, to do the actual querying. Let's confirm that this works as it should for Alice:
 
 ```sql
 postgres=> \c postgres alice
@@ -296,7 +294,7 @@ txntime   | 2012-01-30 17:37:39.497491-05
 realtime  | 2012-01-30 17:37:39.545891-05
 ```
 
-How do we get around this? We need a way to commit something that will survive the surrounding transaction's rollback. The closest thing Postgres has to such a thing at the moment is to connect back to the database with a new and entirely separate connection. Two such popular ways to do so are with [the dblink program](http://www.postgresql.org/docs/current/static/dblink.html) and [the PL/PerlU language](http://www.postgresql.org/docs/current/static/plperl.html). Obviously, we are going to focus on the latter, but all of this could be done with dblink as well. Here are the additional steps to connect back to the database, do the insert, and then leave again:
+How do we get around this? We need a way to commit something that will survive the surrounding transaction's rollback. The closest thing Postgres has to such a thing at the moment is to connect back to the database with a new and entirely separate connection. Two such popular ways to do so are with [the dblink program](https://www.postgresql.org/docs/current/static/dblink.html) and [the PL/PerlU language](https://www.postgresql.org/docs/current/static/plperl.html). Obviously, we are going to focus on the latter, but all of this could be done with dblink as well. Here are the additional steps to connect back to the database, do the insert, and then leave again:
 
 ```sql
 postgres=> CREATE OR REPLACE FUNCTION weapon_details(TEXT)
@@ -398,7 +396,7 @@ txntime   | 2012-01-30 17:56:01.573335-05
 realtime  | 2012-01-30 17:56:01.574989-05
 ```
 
-So that's the basic premise of how to solve the auditing problem. For an actual production script, you would probably want to cache the database connection by sticking things inside of the special [%_SHARED hash available to PL/Perl and Pl/PerlU](http://www.postgresql.org/docs/current/static/plperl-global.html). Note that each user gets their own version of that hash, so Alice will not be able to create a function and have access to the same %_SHARED hash that the postgres user has access to. It's probably a good idea to simply not let users like Alice use the language at all. Indeed, that's the default when we do the CREATE LANGUAGE call as above:
+So that's the basic premise of how to solve the auditing problem. For an actual production script, you would probably want to cache the database connection by sticking things inside of the special [%_SHARED hash available to PL/Perl and PL/PerlU](https://www.postgresql.org/docs/current/static/plperl-global.html). Note that each user gets their own version of that hash, so Alice will not be able to create a function and have access to the same %_SHARED hash that the postgres user has access to. It's probably a good idea to simply not let users like Alice use the language at all. Indeed, that's the default when we do the CREATE LANGUAGE call as above:
 
 ```sql
 postgres=>  \c postgres alice
@@ -416,5 +414,3 @@ ERROR:  permission denied for language plperlu
 Further refinements to the actual script might include refactoring the logging bits to a separate function, writing some of the auditing data to a file on the local disk, recording the actual results returned to the user, and sending the data to another Postgres server entirely. For that matter, as we are using DBI, you could send it to other place entirely - such as a MySQL, Oracle, or DB2 database!
 
 Another place for improvement would be associating each user with a security_level classification, such that any user could run the function and only see things at or below their level, rather than hard-coding the level as "confidential" as we have done here. Another nice refinement might be to always return undef (no matches) for items marked "top secret", to prevent the very existence of a top secret weapon from being deduced. :)
-
-
