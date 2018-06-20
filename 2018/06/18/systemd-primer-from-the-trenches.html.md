@@ -1,19 +1,21 @@
 ---
 author: Ian Neilsen
-title: "systemd: A primer from the trench's"
-tags: hosting, systemd, systemctl 
+title: "systemd: a primer from the trenches"
+tags: hosting, systemd
+gh_issue_number: 1432
 ---
 
-# systemctl - lets get back to basics
+<img src="/blog/2018/06/18/systemd-primer-from-the-trenches/6095265888_a27b664798_o-crop.jpg" width="1540" alt="gears" /><br><a href="https://www.flickr.com/photos/guysie/6095265888/">Gears image by Guy Sie, CC BY-SA 2.0, cropped & scaled</a>
 
-''help me systemd you are my only hope''. If we start back at the beginning, sometimes going back to day zero
-often brings clarity to what seems like hopeless or frustrating situation for users from SysV world. Caveat, 
-I previously worked at Red Hat for many years before joining the excellent team at End Point and have been using systemd for as long. 
-I quite honestly have forgotten most of the SysV or init days. Although at End Point we work daily on Debian, Ubuntu, CentOS and BSD variants.
+### systemctl: Let’s get back to basics
+
+''Help me systemd, you are my only hope.''
+
+Sometimes going back to day zero brings clarity to what seems like hopeless or frustrating situation for users from the Unix SysV init world. Caveat: I previously worked at Red Hat for many years before joining the excellent team at End Point and I have been using systemd for as long. I quite honestly have forgotten most of the SysV init days. Although at End Point we work daily on Debian, Ubuntu, CentOS, and BSD variants.
 
 Here is a short and sweet primer to get your fingers wet, before we dive into some of the heavier subjects with systemd.
 
-Did you know that systemd has many utilities it can run:
+Did you know that systemd has many utilities you can run?
 
 * systemctl
 * timedatectl
@@ -25,361 +27,296 @@ Did you know that systemd has many utilities it can run:
 * systemd-cgtop
 * systemd-nspawn
 
-systemd for want of keeping things simple in unix terms also runs several daemons.
- - systemd, journald, networkd, loginduser, timedated, udevd, system-boot, tmpfiles and session 
- 
-That’s a long way from the old init days. But in all essence it’s not that far from SysV. The one thing that stands out to me
- is we have more information with less typing then previously. That can only be a good thing right??
- 
-Well lets see! There are many many web pages out there that list systemd or systemctl switches/flags. 
-However in everyday use I want to speed up the work I do, I want information at my fingertips and quite honestly in the
-day and age of being human friendly, having flags and switches which mean something sure does make it easier.
+And systemd consists of several daemons:
 
-### Daily List of systemctl
-Lets start with a good daily list of systemctl commands versus their SysV counterpart. Go ahead and run each command 
-to get a feel for what it displays.
+* systemd
+* journald
+* networkd
+* logind
+* timedated
+* udevd
+* system-boot
+* tmpfiles
+* session
 
-Remember each command usually has switches/flags you can use.
- 
-A good example is using the ```-l``` flag when checking a failing service such as; ```systemctl status httpd -l```. 
-The -l flag will usually output enough information to diagnose a service start or reload problem without having to go into the logs. 
+That’s a long way from the old SysV init days. But in all essence it’s not that different. The one thing that stands out to me is we have more information with less typing then previously. That can only be a good thing, right?
 
+Well, let’s see! There are many many web pages out there that list systemd or systemctl switches/​flags. However in everyday use I want to speed up the work I do, I want information at my fingertips, and I find flags and switches which mean something sure do make it easier.
 
-##### systemctl versus old school explanation. The next few lines will list out the command followed by flags and explanation.
+### Pro Tip 1: Tab completion
 
-example:
+Before you begin playing with the commands, you should install `bash-completion`. Some distros don’t auto-complete with systemd until you install that, and without tab auto-completion you miss out on **a lot** of systemctl.
 
-```systemd command/s```
+As an example when you tab for completion you will see many of the systemctl options:
 
-```sysv command/s``` 
-
-
-**Pro Tip 1**
-
-Before you begin playing with the commands, you should install ```bash-completion.noarch```. Some distro's don't auto complete with systemd until you
-install bash auto completion. Without tab auto-completion you miss out on a A LOT of systemctl.
-
-As an example when you `TAB` for completion you will see many of the systemctl options;
-
-```bash
-local-ian ~]# systemctl 
-add-requires           condstop               edit                   halt                   is-failed              list-dependencies      mask                   reload-or-restart      set-environment        status                 unset-environment
-add-wants              daemon-reexec          emergency              help                   isolate                list-jobs              poweroff               reload-or-try-restart  set-property           stop                   
-cancel                 daemon-reload          enable                 hibernate              is-system-running      list-sockets           preset                 rescue                 show                   suspend                
-cat                    default                exit                   hybrid-sleep           kexec                  list-timers            reboot                 reset-failed           show-environment       switch-root            
-condreload             delete                 force-reload           is-active              kill                   list-unit-files        reenable               restart                snapshot               try-restart            
-condrestart            disable                get-default            is-enabled             link                   list-units             reload                 set-default            start                  unmask 
+```
+# systemctl
+add-requires           enable                 is-system-running      preset                 show
+add-wants              exit                   kexec                  preset-all             show-environment
+cancel                 force-reload           kill                   reboot                 start
+cat                    get-default            link                   reenable               status
+condreload             halt                   list-dependencies      reload                 stop
+condrestart            help                   list-jobs              reload-or-restart      suspend
+condstop               hibernate              list-machines          rescue                 switch-root
+daemon-reexec          hybrid-sleep           list-sockets           reset-failed           try-reload-or-restart
+daemon-reload          import-environment     list-timers            restart                try-restart
+default                is-active              list-unit-files        revert                 unmask
+disable                is-enabled             list-units             set-default            unset-environment
+edit                   is-failed              mask                   set-environment
+emergency              isolate                poweroff               set-property
 ```
 
-Lets start at the top and work down;
+### systemctl vs. old school commands
 
-1.
+Here we will list out new systemctl commands and the corresponding old SysV command, followed by systemctl flags and explanation.
 
-```systemctl``` 
+Go ahead and run each command to get a feel for what it displays. Remember each command usually has switches/​flags you can use.
 
-```service```
+Let’s start at the top and work down:
 
-Used in conjunction with ABRT it can show you some great debug info and runtime metadata, categorized by their respective groupings of loaded, 
-active, running and a description of the unit.
+#### systemctl
 
-2.
-```systemctl status```
+Formerly: `service`
 
-```service --status-all```
-or
-```initctl list```. If jobs are started in upstart on Ubuntu systems you will need to run this as well as `service --status-all`
+Used in conjunction with ABRT it can show you some great debug info and runtime metadata, categorized by their respective groupings of loaded, active, running and a description of the unit.
 
-Check all system services status. Normally during a server update I will run this and output it to a file. 
-When the server reboots I can run it again and diff this file to ensure all things started. The output is great. It shows me the 
-PID path and potentially the arguments which were run for the process or service. Saves me `ps`'ing the process.
+#### systemctl status
 
-Note, each distro deals differently with `service --status-all` output. 
+Formerly: `service --status-all` or `initctl list`.
 
-3.
-```systemctl status serviceName -l```
+Check all system services’ status. Normally during a server update I will run this and output it to a file. When the server reboots I can run it again and diff this file to ensure all things started.
 
-Good flags: is-active or -a 
+The output is great. It shows me the PID path and potentially the arguments which were run for the process or service. Saves me `ps`ing the process.
 
-```service serviceName status```
+Note that each distro deals differently with `service --status-all` output.
 
-As it suggests, show me the status and information related to the service Unit file. Other good info includes is the service enabled or
-is chkconfig on, uptime, PID and CGroup info, plus any other information associated with the service. 
+#### systemctl status serviceName -l
 
-Tip: 
-* use the -l flag
-* To view more than one service group services in {} braces, i.e.  {httpd,mysql,postfix}
+Formerly: `service serviceName status`
 
-4.
-```systemctl enable NameofService```
+Good flags: `is-active`, `-a`, `-l`
 
-Flags: disable
+As it suggests, show me the status and information related to the service unit file. Other good info included is whether the service is enabled or chkconfig is on, uptime, PID and cgroup info, and any other information associated with the service.
 
-```chkconfig on ServiceName```
+Tips:
 
-Flags: on or off
+* The `-l` flag will usually output enough information to diagnose a service start or reload problem without having to go into the logs.
+* You can view more than one service by separating them with spaces, e.g.: `systemctl status httpd mysql postfix`.
 
-You might find on some distro's that chkconfig is still present. It doesn't do what you think it does with systemd systems.
+#### systemctl enable|disable NameofService
 
-Tip:
-* No tip on this, just remember, `enable` vs `chkconfig` and you will be swell.
+Formerly: `chkconfig ServiceName on|off`
 
-5.
-```systemctl start/stop/restart httpd```
+You might find on some distros that `chkconfig` is still present. It doesn’t do what you think it does with systemd systems.
+
+#### systemctl start|stop|restart httpd
+
+Formerly: `service httpd start|stop|restart`
 
 Good unit commands: reload-or-restart
 
-```service httpd start/stop/restart```
+As it suggests, start, stop, or restart services/​processes/​units.
 
-As it suggests, start,stop,restart services/processes/units. The `reload-or-restart` pattern tells the services to reload if it is able and if
-not then restart. Some services don't allow a reload, often you will find this when you go to systemctl reload service. Nagios was one
-example where a reload-or-restart would work, because it didn't allow reloads.
+The `reload-or-restart` command tells the services to reload if it is able and if not then restart, similar to the old `service serviceName force-reload`. Some services don’t allow a reload. Nagios is one example where a `reload-or-restart` works because it doesn’t allow reloads.
 
-Tip:
-* reload or restart is similar to `force-reload`. 
+#### systemctl reload httpd
 
-6.
-```systemctl reload httpd```
+Formerly: `service httpd reload`
 
-```service httpd reload```
+Perform a graceful reload of a configuration you may have just changed. Example: I’ve just made some changes to httpd conf and need to gracefully reload them without restarting the web service.
 
-Perform a graceful reload of a configuration you may have just changed. Example, I've just made some changes to httpd conf and need to gracefully
-reload them without restarting the web service. 
+#### systemctl daemon reload
 
-7.
-```systemctl daemon reload```
+Formerly: `chkconfig serviceName --add`
 
-```chkconfig serviceName --add```
+Graceful reloads configuration files on a running service/​process. See below for an explanation of “daemon reload”. Basically, if you have added in a new service and made many config changes, use `daemon-reload`.
 
-Graceful reloads configuration files on a running service/process. See below for an explanation of “daemon reload”.
-Basically, if you have added in a new service and made many config changes, use daemon-reload.
+#### systemctl list-unit-files
 
-8.
-```systemctl list-unit-files```
+Good flags: `--type=service`
 
-Good flags: --type=service
+Formerly: `ls /etc/rc.d/init.d/ /etc/rc.d/rc.local`
 
-```ls /etc/rc.d/init.d/```
-```ls /etc/rc.d/rc.local```
+Prints unit files from `/usr/lib/systemd/system/` and `/etc/systemd/system/`. Slightly different to `list-units`; rarely used but has any interesting output. You may want to use this in monitoring scripts you write.
 
-Prints from  /usr/lib/systemd/system/ and /etc/systemd/system/
-Slightly different to list-units, rarely used but has any interesting output. You may want to use this in any 
-monitoring scripts you write.
+#### systemctl list-units
 
+Good flags: `-a (--all)`, `-t serviceName`
 
-9.
-```systemctl list-units```
+Formerly:
 
-Good flags -a (--all), -t serviecName, --all
+```bash
+chkconfig --list
+ntsysv
+ls /etc/rc.d/init.d/ /etc/rc.d/rc.local
+sysv-rc-conf
+initctl list
+```
 
-```chkconfig --list``` or ```ntsysv```
-```ls /etc/rc.d/init.d/```
-```ls /etc/rc.d/rc.local```
-```sysv-rc-conf```
-```initctl list```
+I prefer to use `list-units` over `list-unit-files`. It shows more information and is shorter to type. Or you could install the `sysvinit-utils` package, which by default is not installed on systemd distros.
 
-Anyone see the problem between the two cmd passes? I prefer to use ‘list-units’ over ‘list-unit-files’. 
-It shows more information and is shorter to type. List all active services using systemctl. 
-Or you could install the sysvinit-utils, which by default are not installed on SysV distro's.
+#### systemctl list-sockets
 
-10.
-```systemctl list-sockets```
+Formerly:
 
-```lsof```
-```ss -s```
-```cat /proc/net/*```
+```bash
+lsof
+ss -s
+cat /proc/net/*
+```
 
-Sockets of all types can be viewed from one command. Although time to time I will ise lsof or ss depending on the socket
-type I am wanting to look at.
+Sockets of all types can be viewed from one command. Although time to time I will still use `lsof` or `ss` depending on the socket type I want to look at.
 
-11.
-```systemctl list-timers```
+#### systemctl list-timers
 
-```crontab -e```
+Formerly: `crontab -e`
 
-systemd offers a way to schedule tasks aka crontab. I'm going to go out on a limb here, and say they both do the same thing, except
-systemd timers may be more readable by human eyes, are logged to the journal, easier to debug and enable or disable.
+systemd offers a way to schedule tasks like crontab. I’m going to go out on a limb here and say they both do the same thing, except systemd timers may be more readable by human eyes, are logged to the journal, easier to debug and enable or disable.
 
-Although my caveat; I still use cron jobs in my daily work, because I'm familiar with them and emailing is still an issue from a timer.
+My caveat is that I still use cron jobs in my daily work, because I’m familiar with them and emailing is still an issue from a timer.
 
 Tip:
-* set a systemd timer to a calendar, day, month, year to trigger.
 
+* set a systemd timer to a calendar day, month, year to trigger.
 
-12.
-```systemctl list-jobs```
+#### systemctl list-jobs
 
 Requires further explanation in another blog post.
 
+#### systemctl --failed
 
-13.
-```systemctl --failed```
+Show me failed services. `systemctl status` will highlight at the top if units have failed, especially useful after a reboot.
 
-Show me failed services. systemctl status will highlight at the top if units have failed, especially after a reboot.
+#### systemctl get-default
 
-14.
-```systemctl get-default```
-
-```systemctl set-default multi-user.target``` - equivalent to runlevels 2,3 and 4
-
-to list targets run ```systemctl list-units -t target```
-
-```runlevel```
-```chkconfig --list```
-```telinit runlevel```
-
-Gets the run level default for the system. Not often used, if rarely, but good know when you start having boot issues or need
-to swap out to a different run level to fix things.
-
-Tip:
-* There are many tables comparing the SysV runlevels to systemd. Get your google on and search.
-* `systemctl set-default graphical.target` will set a graphical user shell. For all those that like a good desktop.
-
-15.
-```systemctl shutdown or reboot```
-
-```shutdown -r now```
-```shutdown -h now```
-
-Reboot/shutdown and poweroff the system. Personally I use ‘shutdown’.
-
-16.
-```systemctl cat serviceName```
-
-```cd to dir, cat init file```
-
-Shows me the system service(unit) file contents and options. We will go more into these commands as we work through next week
-building and maintaining our own UNIT files.
-
-Tip:
-* systemctl cat shows all unit file information and snippets involved with unit file.
-* If you use VIM as I do, you can enable vim-systemd to help with syntax highlighting.
-
-17.
-```systemctl list-dependencies serviceName```
-
-What’s really depending on my process. The --all flag will show everything --before, --after, --reverse.
-
-Tip:
-* Pretty handy little dependency checker for processes.
-
-18.
-```systemctl show serviceName```
-
-Flags: -p - shows a single property of a service. 
-
-Shows more than using ‘systemctl cat servicename’. Don't forget TAB is your friend. 
-Running the ``-p`` flag and using TAB will help you.
-
-19.
-```systemctl mask serviceName```
-
-```update-rc.d serviceName disable```
-
-Never want someone starting a service EVER!! 'Mask' is your friend and a little sneaky. See if your system admin's 
-pick this one up. Good April fools day. ‘’unmask’’ to return it to its user
-
-20.
-```systemctl edit serviceName```
-
-Good options: --full
-
-Example: ```systemctl edit --full serviceName```
-
-```vim /etc/init.d/scriptName```
-
-Yes that’s right! Edit the service file without having to cd into the directory. Now that saved me a bit of time.
-
-Tip:
-* Careful with this. The plain edit creates an override file in /etc/systemd/system to complement the original unit file. 
-* If you need to edit the original unit file use the ```--full``` flag.
-* The `--full` flag allows you to edit the unit file without creating a snippet.
-* I made a mistake in my unit file or I messed up a system unit file; use `systemctl revert unit`
-
-21.
-```systemctl --output=```
-
-Good options: verbose
-
-```
-Set your apache log level to warn or debug in your configuration file
-/etc/init.d/httpd restart 
-View logs
-```
-
-Particular good if you have a bad service which is playing up. Outputs a short standard message or a very verbose message
-using different flags.
-
-Tip:
-* `journalctl -u serviceName` can help you here, but I often find it easier to include `--output=verbose`
-
-22.
-```systemctl isolate```
-
-This deserves its own small blog post. Isolate can be used to rescue systems automagically following kernel reboot 
-failures, but requires some special work.
-
-Tip:
-We will cover this next week.
-
-23.
-```systemd-delta```
-
-Check your unit files to see if someone has been changing things on you. Especially useful if you are writing your own Unit files.
-
-Tip:
-* Used in conjunction with `systemctl cat` or `edit`, `delta` can help you see what was what.
-
-## Gotchas
-
-1. Sometimes you need to use the suffix such as ‘config_file@openvpn.service’.  Keep this back of mind.
-2. systemd will always think services are services unless you use the suffix like .target or .socket, make sure you tell the system so.
-3. If you want multiple services running use a prefix, such as; ssh1@sshd.service ssh2@sshd.service with different config's. Handy for multiple openvpn servers.
-4. Mount points will always be determined as mount points.
-6. If you have made a lot of configuration changes and want to gracefully load these without restarting everything try  
-`systemctl daemon reload`
-7. This is not the same as the above “reload” action. Daemon reload is for systemd and not the unit files it controls. This is a safe 
-command to run since it keeps sockets open while it does its thing.
-8. Reboots on newer systems only really need to be done when new kernels are presented. Systemd is gracious and good at 
-processing new packages and enabling these changes during a yum update.
-9. Auto complete on CentOS is not present until you install `bash-completion`. systemctl takes on a life of it’s own, 
-when you install this utility. Tabbing out will list all systemctl options. Very handy!!
-10. Systemd does not use the /etc/inittab file even if you have them present.
-11. Converting your init’s to systemd is easier than you think. Create a systemd unit file and add in 10 basic lines to 
-call the bin or init script. You have basically created a systemd managed init script. Don’t forget to go back 
-and one day convert it completely. For the basic lines you need, see the next blog post on unit files where I will explain the
-advantages of converting a SysV script into a systemd unit file.
-12. Targets vs runlevels - A target in systemd is a runlevel in sysV, Names replace numbers; runlevel3 = multi-user.target, runlevel1 = rescue.target
-
-
-## Who's got the goods on speed - ```systemd-analyze```
-
-Is systemd faster than sysv-init? Parallel processing says it is? You be the judge! 
-
-One great test is to build a new machine which doesn't have systemd installed. Reboot the machine and check your boot time. 
-On an older SysV system you may have use “tuned”, “systemtap”, “numastat” etc to gather performance information.
-
-Then install systemd. Better still, upgrade from a old version of linux to a new version of linux from ‘init’ to ‘systemd’ 
-then run ‘systemd-analyze’
-
-‘systemd-analyze’ will show you boot times. Notice that systemd starts less services at boot because systemd only starts 
-what is necessary to get the server booting.
-
-Not a bad way to collect a baseline on a newly built server. Add it to your ansible facts for the server so you have a 
-historical view and collection of boot times. In fact add it to your monitoring system and be proactive in your monitoring 
-of client server boot times, while performing your maintenance cycles.
-
-OK ok... but how do I see what is taking its sweet time during boot or what is borking your beautiful server following an 
-update/upgrade... Wonder no more!!
-
-```bash 
-$ systemd-analyze blame
-$ systemd-analyze time
-```
-
-For example on my system, I can see that my top 10 culprits to a potentially slow boot are;
+Formerly:
 
 ```bash
-@local-ian ~]$ systemd-analyze blame
+runlevel
+chkconfig --list
+```
+
+To list targets run `systemctl list-units -t target`.
+
+Gets the run level default for the system. Not often used, but good to know when you start having boot issues or need to change to a different run level to fix things.
+
+Tips:
+
+* There are many tables comparing the SysV runlevels to systemd. Get your Google on and search.
+* `systemctl set-default graphical.target` will set a graphical user shell. For all those that like a good desktop.
+
+#### systemctl set-default multi-user.target
+
+Formerly: `telinit runlevel`
+
+The systemd `multi-user.target` is equivalent to runlevels 2, 3, and 4.
+
+#### systemctl shutdown or reboot
+
+Formerly: `shutdown -r|-h now`
+
+Reboot/shutdown and poweroff the system. Personally I still use `shutdown`.
+
+#### systemctl cat serviceName
+
+Formerly: `cat /etc/init.d/$init_file`
+
+Shows me the system service (unit) file contents and options. We will go more into these commands later as we work through building and maintaining our own unit files.
+
+Tips:
+
+* `systemctl cat` shows all unit file information and snippets involved with the unit file.
+* If you use Vim and Arch Linux, you can enable `vim-systemd` to help with syntax highlighting.
+
+#### systemctl list-dependencies serviceName
+
+What’s really depending on a given service. The `--all` flag will show everything from `--before`, `--after`, `--reverse`.
+
+#### systemctl show serviceName
+
+Flags: `-p` shows a single property of a service.
+
+Shows more than using `systemctl cat servicename`. Don’t forget tab completion is your friend. Running the `-p` flag and using tab will help you.
+
+#### systemctl mask serviceName
+
+Formerly: `update-rc.d serviceName disable`
+
+Never want someone starting a service **ever**? `mask` is your friend and a little sneaky. See if your system admins pick this one up. Good April Fool’s day trick on them. Use `unmask` to return it to its normal state.
+
+#### systemctl edit serviceName
+
+Formerly: edit `/etc/init.d/scriptName`
+
+Good options: `--full`
+
+Yes, that’s right! Edit the service file without having to go find it on disk. That has saved me a bit of time.
+
+Tips:
+
+* Careful with this. The plain edit creates an override file in /etc/systemd/system to complement the original unit file.
+* If you need to edit the original unit file use the `--full` flag, which allows you to edit the unit file without creating a snippet.
+* If you make a mistake in your unit file: `systemctl revert serviceName`
+
+#### systemctl -o
+
+Formerly: Edit Apache config to set log level to warn or debug, `/etc/init.d/httpd reload`, view logs
+
+Good options: `--output=verbose`
+
+Particularly good if you have a service acting up. Outputs a short standard message or a very verbose message using different flags.
+
+Tip:
+
+* `journalctl -u serviceName` can help you here, but I often find it easier to include `--output=verbose`
+
+#### systemctl isolate
+
+This deserves its own small blog post. Isolate can be used to rescue systems automagically following kernel reboot failures, but requires some special work.
+
+#### systemd-delta
+
+Check your unit files to see if someone has been changing things on you. Especially useful if you are writing your own unit files.
+
+Tip:
+
+* Used in conjunction with `systemctl cat` or `edit`, `delta` can help you see what was what.
+
+### Gotchas
+
+1. Sometimes you need to use the suffix such as ‘config_file@openvpn.service’. systemd will always think services are services unless you use the suffix like .target or .socket, so make sure you tell the system so.
+1. If you want multiple services running use a prefix, such as; ssh1@sshd.service ssh2@sshd.service with different configs. Handy for multiple openvpn servers.
+1. Mount points will always be determined as mount points.
+1. If you have made a lot of configuration changes and want to gracefully load these without restarting everything try `systemctl daemon reload`. This is not the same as the above `reload` action. Daemon reload is for systemd and not the unit files it controls. This is a safe command to run since it keeps sockets open while it does its thing.
+1. Reboots on newer systems only really need to be done when new kernels are presented. Systemd is gracious and good at processing new packages and enabling these changes during a yum update.
+1. Autocomplete on CentOS is not present until you install `bash-completion`. systemctl takes on a life of its own when you install this utility. Tabbing out will list all systemctl options. Very handy!
+1. Systemd does not use the /etc/inittab file even if you have it present.
+1. Converting your init scripts to systemd is easier than you think. Create a systemd unit file and add in 10 basic lines to call the bin or init script. You have basically created a systemd managed init script. Don’t forget to go back and one day convert it completely.
+1. Targets vs. runlevels: A target in systemd is a runlevel in sysV, names replace numbers; runlevel 3 = multi-user.target, runlevel 1 = rescue.target
+
+### Who’s got the goods on speed?
+
+Is systemd faster than SysV init? Parallel processing says it is? You be the judge!
+
+One great test is to build a new machine which doesn’t have systemd installed. Reboot the machine and check your boot time. On an older SysV system you may have use “tuned”, “systemtap”, “numastat” etc. to gather performance information.
+
+Then install systemd. Better still, upgrade from a old version of Linux to a new version of linux from ‘init’ to ‘systemd’ and then run ‘systemd-analyze’.
+
+`systemd-analyze` will show you boot times. Notice that systemd starts fewer services at boot because it only starts what is necessary to get the server booting.
+
+Not a bad way to collect a baseline on a newly-built server. Add it to your Ansible facts for the server so you have a historical view and collection of boot times. In fact add it to your monitoring system and be proactive in your monitoring of server boot times while performing your maintenance cycles.
+
+How do you see what is taking its sweet time during boot or what is borking your beautiful server following an update/​upgrade? Wonder no more!
+
+```
+# systemd-analyze blame
+# systemd-analyze time
+```
+
+For example on my system, I can see that my top 10 culprits for a potentially slow boot are:
+
+```
+# systemd-analyze blame
           7.346s dracut-initqueue.service
           6.787s systemd-cryptsetup@luks.service
           5.378s NetworkManager-wait-online.service
@@ -391,16 +328,13 @@ For example on my system, I can see that my top 10 culprits to a potentially slo
           1.072s fwupd.service
            609ms docker-storage-setup.service
 ```
-I might disable the docker service by `systemctl disable docker` and start it when I need it.
 
-What else can `systemd-analyze` show me, that's all a bit boring!!!
+I might disable the Docker service by `systemctl disable docker` and start it when I need it.
 
-```# systemd-analyze critical-chain```
+What else can `systemd-analyze` show me?
 
-Don't forget your TAB. There are options hiding that you will miss unless you know them.
-
-```bash
-@local-ian ~]$ systemd-analyze critical-chain 
+```
+# systemd-analyze critical-chain
 The time after the unit is active or started is printed after the "@" character.
 The time the unit takes to start is printed after the "+" character.
 
@@ -425,12 +359,10 @@ graphical.target @5.209s
                                   └─-.slice
 ```
 
-Lets look at how long our network targets take to start:
+Let’s look at how long our network targets take to start:
 
-```# systemd-analyze critical-chain network.target```
-
-```bash
-icinga-ian ~]# systemd-analyze critical-chain network.target
+```
+# systemd-analyze critical-chain network.target
 The time after the unit is active or started is printed after the "@" character.
 The time the unit takes to start is printed after the "+" character.
 
@@ -458,68 +390,56 @@ network.target @2.618s
                                         └─-.slice
 ```
 
-Lets go one step further and output the entire system hierarchy. 
-
-``systemd-analyze dot``
-
-Now with this one you should output to nice res picture
-
-```systemd-analyze dot | dot -Tpng -o system-stuff.png```
-
- 
-## Too much typing! - I type enough everyday and a have bzillion servers!!!
-
-*Pro Tip 2*
-
-I have a server which needs a service restarted or checked constantly. Running systemctl remotely will show me or 
-allow me to do this.
-
-```systemctl status sshd -H root@server.address.com```
-
-or
-
-```systemctl -H root@server.address status httpd```
-
-I might make an alias for it. Obviously this is a pretty useless example, if you’re having to manually do this for a 
-service/process you should fix the problem on the server. However for edge cases it can be quite handy. Use your imagination,
-we could use this for monitoring which takes a local ssh user found on all machines and pass this for some returned
-output to a monitoring server.
-
-## What relies on my service
-*Pro Tip 3*
-
-Figure out what targets/runlevel a target runs at. We will touch on 'WANTS' in next weeks 'UNIT' files journey.
-
-```systemctl show httpd -p “wants” multi-user.target```
-
-Vs
-
-```insert sysv option```
-
-*Pro Tip 4*
-
-Check processes, service association and top. You can still grep/awk the output if you wish.
-Instead of using ps or top use the following;
-
-```$ systemd-cgls``` 
-```$ systemd-cgtop```
-
-Vs 
-
-```ps xawf -eo pid,user,cgroup,args```
+Let’s go one step further and output the entire system hierarchy. With this one you get a nice image:
 
 
-I think the biggest part that people struggle with is workable, usable examples. 
+```bash
+# systemd-analyze dot | dot -Tpng -o system-stuff.png
+```
 
-## Next week
+### Pro Tip 2: Remote commands
 
-I know this is only touching the surface of systemctl or systemd as whole, however from a day-to-day context this should help
-play in the systemd world. We will come back to systemctl in later posts when we start working with "units" and "targets".
-  
-Each post I will try and delve deeper into systemd where we will look at; unit files, unit targets, systemctl isolate and slices, followed by a small primer 
-on journalctl, timedatectl, loginctl. providing working examples as best as I can.
+I have a server which needs a service restarted or checked constantly. Running systemctl remotely will show me or allow me to do this:
 
-Stay tuned for future posts for 'hero to zero on unit file's'.
+```bash
+# systemctl status sshd -H root@server.domain.tld
+```
 
+Or:
 
+```bash
+# systemctl -H root@server.domain.tld status httpd
+```
 
+I might make an alias for it. Obviously this is a pretty useless example, if you’re having to manually do this for a service/​process you should fix the problem on the server. However for edge cases it can be quite handy. Use your imagination: We could use this for monitoring which takes a local ssh user found on all machines and pass this for some returned output to a monitoring server.
+
+### Pro Tip 3: What relies on my service
+
+Figure out what targets/​runlevel a target runs at:
+
+```bash
+# systemctl show httpd -p wants multi-user.target
+```
+
+#### Pro Tip 4: Monitoring
+
+Check processes, service association, and busiest processes. You can still grep/​awk the output if you wish.
+
+Instead of using `top` or something like this:
+
+```bash
+ps xawf -eo pid,user,cgroup,args
+```
+
+use the following:
+
+```bash
+# systemd-cgls
+# systemd-cgtop
+```
+
+### Summing up
+
+I know this is only touching the surface of systemctl or systemd as whole but from a day-to-day context this should help you play in the systemd world. I think the biggest part that people struggle with is workable, usable examples.
+
+Stay tuned for future posts on unit files, unit targets, systemctl isolate and slices, journalctl, timedatectl, and loginctl.
