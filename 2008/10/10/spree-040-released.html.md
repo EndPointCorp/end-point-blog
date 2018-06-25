@@ -5,7 +5,7 @@ tags: ecommerce, spree
 title: Spree 0.4.0 Released
 ---
 
-Spree 0.4.0 was officially released today. Spree is a complete open source ecommerce platform written for Ruby on Rails. While Spree technically works "out of the box" as a fully functional store, it is really intended to serve as a strong foundation for a custom commerce solution. Like Rails, Spree is considered to be ["opinionated software"](http://wiki.github.com/schof/spree/philosophy), and it does not seek to solve 100% of the commerce needs of all possible clients. Developers are able to provide the missing functionality by using the powerful [extension system](http://wiki.github.com/schof/spree/extensions).
+Spree 0.4.0 was officially released today. Spree is a complete open source ecommerce platform written for Ruby on Rails. While Spree technically works “out of the box” as a fully functional store, it is really intended to serve as a strong foundation for a custom commerce solution. Like Rails, Spree is considered to be [“opinionated software”](https://guides.spreecommerce.org/developer/about.html#opinionated-commerce), and it does not seek to solve 100% of the commerce needs of all possible clients. Developers are able to provide the missing functionality by using the powerful [extension system](https://guides.spreecommerce.org/developer/extensions_tutorial.html).
 
 The current release of Spree contains many signficant improvements from the previous 0.2.0 release. Some of the highlights include:
 

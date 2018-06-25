@@ -5,7 +5,7 @@ tags: development
 title: The how and why of Code Reviews
 ---
 
-Everyone believes that code reviews are highly beneficial to software and web site quality. Yet many of those who agree in principle don’t follow through with them in practice, at least not consistently or thoroughly. To find ways to improve real-world practice, I attended [Code Reviews for Fun and Profit](http://en.oreilly.com/oscon2008/public/schedule/detail/2538), given by Alex Martelli, Über Tech Lead at Google, during OSCON 2008.
+Everyone believes that code reviews are highly beneficial to software and web site quality. Yet many of those who agree in principle don’t follow through with them in practice, at least not consistently or thoroughly. To find ways to improve real-world practice, I attended [Code Reviews for Fun and Profit](https://conferences.oreilly.com/oscon/oscon2008/public/schedule/detail/2538), given by Alex Martelli, Über Tech Lead at Google, during OSCON 2008.
 
 One barrier to good reviews is when developers are reluctant to point out flaws in the code of more experienced programmers, perhaps due to culture or personal dynamics. In Open Source projects, and at End Point, the reverse is often true: corrections earn Nerd Cred. But if it is an issue, one good workaround is to ask questions. Instead of “If you use a value of zero, it crashes,” say “What happens if you use a value of zero?”
 
@@ -17,14 +17,14 @@ Check for well-written tests, that high level integration tests cover corner cas
 
 To make code reviews easier and more likely to happen, ensure that they are small. Just 200–400 lines, comments included, depending on the language. Linus rejects large patches out of hand for this reason. Code reviewers should not spend more than 60–90 minutes at a time doing code review, once in the morning and once in the afternoon, because effectiveness drops off quickly. It is not like coding, which is the act of creation; you can spend many hours in that mode without ill effect.
 
-Pair programming doesn't reduce the need for code review. There is a propensity for good pairs to groupthink, so that they will not see problems that an outsider could. Furthermore, code review must still be done for others to have familiarity with the code.
+Pair programming doesn’t reduce the need for code review. There is a propensity for good pairs to groupthink, so that they will not see problems that an outsider could. Furthermore, code review must still be done for others to have familiarity with the code.
 
 If you have a mountain of legacy code that needs review, it may be best to start by just changing one small piece at a time, and reviewing that as you go.
 
 The most important tool to assist with code review is e-mail. While one person should always have the responsibility of completing the review, the use of e-mail will allow all team members to become familiar with every part of the codebase, and it encourages them to perform additional review because it takes little time. There are a variety of other software tools:
 
-- [Rietveld](http://code.google.com/p/rietveld/)
-- [Review Board](http://www.review-board.org/)
+- [Rietveld](https://github.com/rietveld-codereview/rietveld)
+- [Review Board](https://www.reviewboard.org/)
 - [Codestriker](http://codestriker.sourceforge.net/)
 - [JCR](http://jcodereview.sourceforge.net/) (Java Code Reviewer, not just for Java)
 
