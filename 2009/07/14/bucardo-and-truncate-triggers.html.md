@@ -5,17 +5,17 @@ tags: database, open-source, perl, postgres
 title: Bucardo and truncate triggers
 ---
 
-Version 8.4 of Postgres was recently released. One of the [features](http://www.postgresql.org/docs/8.4/static/release-8-4.html) that hasn't gotten a lot of press, but which I'm excited about, is truncate triggers. This fixes a critical hole in trigger-based PostgreSQL replication systems, and support for these new triggers is now working in the [Bucardo replication program.](http://bucardo.org)
+Version 8.4 of Postgres was recently released. One of the [features](https://www.postgresql.org/docs/8.4/static/release-8-4.html) that hasn’t gotten a lot of press, but which I’m excited about, is truncate triggers. This fixes a critical hole in trigger-based PostgreSQL replication systems, and support for these new triggers is now working in the [Bucardo replication program.](https://bucardo.org)
 
-Truncate triggers were added to Postgres by [Simon Riggs](http://wiki.postgresql.org/wiki/Simon_Riggs%27_Development_Projects) (thanks Simon!), and unlike other types of triggers (UPDATE, DELETE, and INSERT), they are statement-level only, as truncate is not a row-level action.
+Truncate triggers were added to Postgres by [Simon Riggs](https://wiki.postgresql.org/wiki/Simon_Riggs%27_Development_Projects) (thanks Simon!), and unlike other types of triggers (UPDATE, DELETE, and INSERT), they are statement-level only, as truncate is not a row-level action.
 
-Here's a quick demo showing off the new triggers. This is using the development version of Bucardo - a major new version is expected to be released in the next week or two that will include truncate trigger support and many other things. If you want to try this out for yourself, just run:
+Here’s a quick demo showing off the new triggers. This is using the development version of Bucardo—​a major new version is expected to be released in the next week or two that will include truncate trigger support and many other things. If you want to try this out for yourself, just run:
 
 ```bash
 $ git clone git-clone http://bucardo.org/bucardo.git/
 ```
 
-Bucardo does three types of replication; for this example, we'll be using the 'pushdelta' method, which is your basic "master to slaves" relationship. In addition to the master database (which we'll name A) and the slave database (which we'll name B), we'll create a third database for Bucardo itself.
+Bucardo does three types of replication; for this example, we’ll be using the ‘pushdelta’ method, which is your basic “master to slaves” relationship. In addition to the master database (which we’ll name A) and the slave database (which we’ll name B), we’ll create a third database for Bucardo itself.
 
 ```bash
 $ initdb -D bcdata
@@ -23,9 +23,9 @@ $ initdb -D testA
 $ initdb -D testB 
 ```
 
-(Technically, we are creating three new database clusters, and since we are doing this as the postgres user, the default database for all three will be 'postgres')
+(Technically, we are creating three new database clusters, and since we are doing this as the postgres user, the default database for all three will be ‘postgres’)
 
-Let's give them all unique port numbers:
+Let’s give them all unique port numbers:
 
 ```bash
 $ echo port=5400 >> bcdata/postgresql.conf
@@ -41,14 +41,14 @@ $ pg_ctl start -D testA -l A.log
 $ pg_ctl start -D testB -l B.log
 ```
 
-We'll create a simple test table on both sides:
+We’ll create a simple test table on both sides:
 
 ```bash
 $ psql -d postgres -p 5401 -c 'CREATE TABLE trtest(id int primary key)'
 $ psql -d postgres -p 5402 -c 'CREATE TABLE trtest(id int primary key)'
 ```
 
-Before we go any further, let's install Bucardo itself. Bucardo is a Perl daemon that uses a central database to store its configuration information. The first step is to create the Bucardo schema. This, like almost everything else with Bucardo, is done with the 'bucardo_ctl' script. The install process is interactive:
+Before we go any further, let’s install Bucardo itself. Bucardo is a Perl daemon that uses a central database to store its configuration information. The first step is to create the Bucardo schema. This, like almost everything else with Bucardo, is done with the ‘bucardo_ctl’ script. The install process is interactive:
 
 ```bash
 $ bucardo_ctl install --dbport=5400
@@ -83,13 +83,13 @@ Change any setting by using: bucardo_ctl set foo=bar
 </none>
 ```
 
-Because we don't want to tell the bucardo_ctl program our custom port each time we call it, we'll store that info into the ~/.bucardorc file:
+Because we don’t want to tell the bucardo_ctl program our custom port each time we call it, we’ll store that info into the ~/.bucardorc file:
 
 ```bash
 $ echo dbport=5400 > ~/.bucardorc
 ```
 
-Let's double check that everything went okay by checking the list of databases that Bucardo knows about:
+Let’s double check that everything went okay by checking the list of databases that Bucardo knows about:
 
 ```bash
 $ bucardo_ctl list db
@@ -106,7 +106,7 @@ $ bucardo_ctl add database postgres name=slave1 port=5402
 Database added: slave1
 ```
 
-Before we go any further, let's look at our databases:
+Before we go any further, let’s look at our databases:
 
 ```bash
 $ bucardo_ctl list dbs
@@ -117,7 +117,7 @@ Database: slave1   Status: active
 Conn: psql -h  -p 5402 -U bucardo -d postgres
 ```
 
-Note that by default we connect as the 'bucardo' user. This is a highly recommended practice, for safety and auditing. Since that user obviously does not exist on the newly created databases, we need to add them in:
+Note that by default we connect as the ‘bucardo’ user. This is a highly recommended practice, for safety and auditing. Since that user obviously does not exist on the newly created databases, we need to add them in:
 
 ```bash
 $ psql -p 5401 -c 'create user bucardo superuser'
@@ -134,7 +134,7 @@ Table added: public.trtest
 
 A herd is simply a named connection of tables. Typically, you put tables that are linked together by foreign keys or other logic into a herd so that they all get replicated at the same time.
 
-The final setup step is to create a replication event, which in Bucardo is known as a 'sync':
+The final setup step is to create a replication event, which in Bucardo is known as a ‘sync’:
 
 ```bash
 $ bucardo_ctl add sync willow source=herd1 targetdb=slave1 type=pushdelta
@@ -153,7 +153,7 @@ Checking for existing processes
 Starting Bucardo
 ```
 
-Let's add a row to the master table and make sure it goes to the slave:
+Let’s add a row to the master table and make sure it goes to the slave:
 
 ```sql
 $ psql -p 5401 -c 'insert into trtest(id) VALUES (1)'
@@ -165,7 +165,7 @@ $ psql -p 5402 -c 'select * from trtest'
 (1 row)
 ```
 
-Looks fine, so let's try out the truncate. On versions of Postgres less than 8.4, there was no way for Bucardo (or Slony) to know that a truncate had been run, so the rows were removed from the master but not from the slave. We'll do a truncate and add a new row in a single operation:
+Looks fine, so let’s try out the truncate. On versions of Postgres less than 8.4, there was no way for Bucardo (or Slony) to know that a truncate had been run, so the rows were removed from the master but not from the slave. We’ll do a truncate and add a new row in a single operation:
 
 ```sql
 $ psql -p 5401 -c 'begin; truncate table trtest; insert into trtest values (2); commit'
@@ -177,7 +177,7 @@ $ psql -p 5402 -c 'select * from trtest'
 (1 row)
 ```
 
-It works! Let's clean up our test environment for good measure:
+It works! Let’s clean up our test environment for good measure:
 
 ```bash
 $ bucardo_ctl stop
@@ -186,7 +186,7 @@ $ pg_ctl stop -D testA
 $ pg_ctl stop -D testB
 ```
 
-As mentioned, there are three types of syncs in Bucardo. The other type that can make use of truncate triggers is the 'swap' sync, aka "master to master". I've not yet decided on the behavior for such syncs, but one possibility is simply:
+As mentioned, there are three types of syncs in Bucardo. The other type that can make use of truncate triggers is the ‘swap’ sync, aka “master to master”. I’ve not yet decided on the behavior for such syncs, but one possibility is simply:
 
 - Database A gets truncated at time X
 - Bucardo truncates database B, then discards all delta rows older than X for both A and B, and all delta rows for B
@@ -197,7 +197,7 @@ Second proposal:
 
 - Database A gets truncated at time X
 - We populate the delta table with every primary key in the table before truncation (assuming we can get at it)
-- That's it! Bucardo does its normal thing as if we just deleted a whole bunch of rows on A, and in theory deletes them from B as well.
+- That’s it! Bucardo does its normal thing as if we just deleted a whole bunch of rows on A, and in theory deletes them from B as well.
 
 Comments on this strategy welcome!
 

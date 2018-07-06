@@ -5,15 +5,15 @@ tags: hosting, redhat, security
 title: Cisco PIX mangled packets and iptables state tracking
 ---
 
-Kiel and I had a fun time tracking down a client's networking problem the other day. Their scp transfers from their application servers behind a Cisco PIX firewall failed after a few seconds, consistently, with a connection reset.
+Kiel and I had a fun time tracking down a client’s networking problem the other day. Their scp transfers from their application servers behind a Cisco PIX firewall failed after a few seconds, consistently, with a connection reset.
 
 The problem was easily reproducible with packet sizes of 993 bytes or more, not just with TCP but also ICMP (bloated ping packets, generated with ping -s 993 $host). That raised the question of how this problem could go undetected for their heavy web traffic. We determined that their HTTP load balancer avoided the problem as it rewrote the packets for HTTP traffic on each side.
 
-Kiel narrowed the connect resets down to iptables' state-tracking considering packets INVALID, not ESTABLISHED or RELATED as they should be.
+Kiel narrowed the connect resets down to iptables’ state-tracking considering packets INVALID, not ESTABLISHED or RELATED as they should be.
 
-Then he found via tcpdump that the problem was easily visible in scp connections when TCP window scaling adjustments were made by either side of the connection. We tried disabling window scaling but that didn't help.
+Then he found via tcpdump that the problem was easily visible in scp connections when TCP window scaling adjustments were made by either side of the connection. We tried disabling window scaling but that didn’t help.
 
-We tried having iptables allow packets in state INVALID when they were also ESTABLISHED or RELATED, and that reduced the frequency of terminated connections, but still didn't eliminate them entirely. (And it was a kludge we weren't eager to keep in place anyway.)
+We tried having iptables allow packets in state INVALID when they were also ESTABLISHED or RELATED, and that reduced the frequency of terminated connections, but still didn’t eliminate them entirely. (And it was a kludge we weren’t eager to keep in place anyway.)
 
 We wanted to avoid some unpleasant possibilities: (1) turn off stateful firewalling or (2) perform risky updates or configuration changes on the Cisco PIX, which may or may not fix the problem, in the middle of the busy holiday ecommerce season.
 

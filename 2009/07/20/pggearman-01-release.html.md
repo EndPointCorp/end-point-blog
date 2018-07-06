@@ -7,7 +7,7 @@ title: pgGearman 0.1 release!
 
 
 
-Yesterday, [Brian Aker](http://brian.krow.net) and [Eric Day](http://oddments.org) presented [pgGearman: A distributed worker queue for PostgreSQL](http://wiki.postgresql.org/wiki/PgDaySanJose2009#pgGearman:_A_distributed_worker_queue_for_PostgreSQL) during the OSCON/SFPUG PgDay. 
+Yesterday, [Brian Aker](https://krow.livejournal.com/) and [Eric Day](https://web.archive.org/web/20090710182114/http://oddments.org/) presented [pgGearman: A distributed worker queue for PostgreSQL](https://wiki.postgresql.org/wiki/PgDaySanJose2009#pgGearman:_A_distributed_worker_queue_for_PostgreSQL) during the OSCON/SFPUG PgDay. 
 
 [Gearman](http://gearman.org) is a distributed worker queuing system that allows you to farm work out to a collection of servers, and basically run arbitrary operations. The example they presented was automating and distributing the load of image processing for Livejournal. For example, everyone loves to share pictures of their kittens, but once an image is uploaded, it may need to be scaled or cropped in different ways to display in different contexts. Gearman is a tool you can use to farm these types of jobs out.
 

@@ -5,9 +5,9 @@ tags: analytics, seo
 title: WordPress Plugin for Omniture SiteCatalyst
 ---
 
-A couple of months ago, I integrated Omniture SiteCatalyst into an Interchange site for one of End Point's clients, [CityPass](http://www.citypass.com/). Shortly after, the client added a blog to their site, which is a standalone WordPress instance that runs separately from the Interchange ecommerce application. I was asked to add SiteCatalyst tracking to the blog.
+A couple of months ago, I integrated Omniture SiteCatalyst into an Interchange site for one of End Point’s clients, [CityPass](https://www.citypass.com/). Shortly after, the client added a blog to their site, which is a standalone WordPress instance that runs separately from the Interchange ecommerce application. I was asked to add SiteCatalyst tracking to the blog.
 
-I've had some experience with WordPress plugin development, and I thought this was a great opportunity to develop a plugin to abstract the SiteCatalyst code from the WordPress theme. I was surprised that there were limited Omniture WordPress plugins available, so I'd like to share my experiences through a brief tutorial for building a WordPress plugin to integrate Omniture SiteCatalyst.
+I’ve had some experience with WordPress plugin development, and I thought this was a great opportunity to develop a plugin to abstract the SiteCatalyst code from the WordPress theme. I was surprised that there were limited Omniture WordPress plugins available, so I’d like to share my experiences through a brief tutorial for building a WordPress plugin to integrate Omniture SiteCatalyst.
 
 First, I created the base wordpress file to append the code near the footer of the wordpress theme. This file must live in the ~/wp-content/plugins/ directory. I named the file omniture.php.
 
@@ -177,6 +177,6 @@ s.prop2 = 'Hello world!' //traffic variable 2
 s.prop3 = '' //traffic variable 3
 ```
 
-A followup step to this plugin would be to use the wp_options table in WordPress to manage the Omniture account id, which would allow admin to set the Omniture account id through the WordPress admin without editing the plugin code. I've uploaded the plugin to a GitHub repository [here](http://github.com/stephskardal/wordpress-sitecatalyst/).
+A followup step to this plugin would be to use the wp_options table in WordPress to manage the Omniture account id, which would allow admin to set the Omniture account id through the WordPress admin without editing the plugin code. I’ve uploaded the plugin to a GitHub repository [here](https://github.com/stephskardal/wordpress-sitecatalyst/).
 
-*Update: This plugin is included in the WordPress plugin registry and can be found at [http://wordpress.org/extend/plugins/omniture-sitecatalyst-tracking/](http://wordpress.org/extend/plugins/omniture-sitecatalyst-tracking/).*
+*Update: This plugin is included in the WordPress plugin registry and can be found at [https://wordpress.org/extend/plugins/omniture-sitecatalyst-tracking/](https://wordpress.org/extend/plugins/omniture-sitecatalyst-tracking/).*

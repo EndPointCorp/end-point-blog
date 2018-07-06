@@ -5,7 +5,7 @@ tags: database, postgres, security
 title: Permission denied for postgresql.conf
 ---
 
-I recently saw a problem in which Postgres would not startup when called via the standard 'service' script, /etc/init.d/postgresql. This was on a normal Linux box,   Postgres was installed via yum, and the startup script had not been altered at all. However, running this as root:
+I recently saw a problem in which Postgres would not startup when called via the standard 'service’ script, /etc/init.d/postgresql. This was on a normal Linux box,   Postgres was installed via yum, and the startup script had not been altered at all. However, running this as root:
 
 ```bash
  service postgresql start
@@ -21,7 +21,7 @@ Looking into the script showed that output from the startup attempt should be go
 ```
 
 
-However, the postgres user *can* see this file, as evidenced by an su to the account and viewing the file. What's going on? Well, anytime you see something odd when using Linux, especially if permissions are involved, you should suspect [SELinux](http://fedoraproject.org/wiki/SELinux/FAQ). The first thing to check is if SELinux is running, and in what mode:
+However, the postgres user *can* see this file, as evidenced by an su to the account and viewing the file. What’s going on? Well, anytime you see something odd when using Linux, especially if permissions are involved, you should suspect [SELinux](http://fedoraproject.org/wiki/SELinux/FAQ). The first thing to check is if SELinux is running, and in what mode:
 
 ```nohighlight
 # sestatus
@@ -35,7 +35,7 @@ Policy from config file:        targeted
 ```
 
 
-Yes, it is running and most importantly, in 'enforcing' mode. SELinux logs to /var/log/audit/ by default on most distros, although some older ones may log directly to /var/log/messages. In this case, I quickly found the problem in the logs:
+Yes, it is running and most importantly, in 'enforcing’ mode. SELinux logs to /var/log/audit/ by default on most distros, although some older ones may log directly to /var/log/messages. In this case, I quickly found the problem in the logs:
 
 ```nohighlight
 # grep postgres /var/log/audit/audit.log | grep denied | tail -1
@@ -61,7 +61,7 @@ Here we see that although the postgres user owns the symlink, owns the data dire
 
 Now that we know SELinux is the problem, what can we do about it? There are four possible solutions at this point to get Postgres working again:
 
-First, we can simply edit the PGDATA assignment within the /etc/init.d/postgresql file to point to the actual data dir, and bypass the symlink. In this case, we'd change the line as follows:
+First, we can simply edit the PGDATA assignment within the /etc/init.d/postgresql file to point to the actual data dir, and bypass the symlink. In this case, we’d change the line as follows:
 
 ```nohighlight
 #PGDATA=/var/lib/pgsql/data
@@ -72,4 +72,4 @@ The second solution is to simply turn SELinux off. Unless you are specifically u
 
 The third solution is to change the SELinux mode. Switching from "enforcing" to "permissive" will keep SELinux on, but rather than denying access, it will log the attempt and still allow it to proceed. This mode is a good way to debug things while you attempt to put in new enforcement rules or change existing ones.
 
-The fourth solution is the most correct one, but also the most difficult. That of course is to carve out an SELinux exception for the new symlink. If you move things around again, you'll need to tweak the rules again, or course.
+The fourth solution is the most correct one, but also the most difficult. That of course is to carve out an SELinux exception for the new symlink. If you move things around again, you’ll need to tweak the rules again, or course.

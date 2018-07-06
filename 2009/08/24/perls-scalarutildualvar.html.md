@@ -2,14 +2,14 @@
 author: Jon Jensen
 gh_issue_number: 190
 tags: perl
-title: Perl's Scalar::Util::dualvar
+title: Perl’s Scalar::Util::dualvar
 ---
 
 
 
-I just came across this fun Perl function that I can't think of a (good) use for, but have to share.
+I just came across this fun Perl function that I can’t think of a (good) use for, but have to share.
 
-In the [Scalar::Util](http://search.cpan.org/perldoc?Scalar::Util) module is the function dualvar:
+In the [Scalar::Util](https://metacpan.org/pod/Scalar::Util) module is the function dualvar:
 
 dualvar NUM, STRING
 

@@ -33,7 +33,7 @@ Send current query to the server</td><td><b>\g</b>
 </td></tr>
 <tr><td><b>\h</b>
 
-Gives help - general or specific</td><td><b>\h</b>
+Gives help — general or specific</td><td><b>\h</b>
 
 (same)</td><td>
 </td></tr>

@@ -22,10 +22,10 @@ Sure enough, ls showed the inode pointed to by /etc/resolv.conf having 2 links. 
 1526575 -rw-r--r-- 2 root root 69 Nov 30  2008 /etc/sysconfig/networking/profiles/default/resolv.conf
 ```
 
-I've worked with a lot of RHEL/CentOS 5 servers and hadn't ever dealt with these network profiles. Kiel guessed it was probably a system configuration tool that we never use, and he was right: Running system-config-network (part of the system-config-network-tui RPM package) creates the hardlinks for the default profile.
+I’ve worked with a lot of RHEL/CentOS 5 servers and hadn’t ever dealt with these network profiles. Kiel guessed it was probably a system configuration tool that we never use, and he was right: Running system-config-network (part of the system-config-network-tui RPM package) creates the hardlinks for the default profile.
 
 /etc/hosts gets the same treatment as /etc/resolv.conf.
 
-I suppose SELinux's restorecond doesn't want to apply any context changes because its rules are based on filesystem paths, and the paths of the multiple links are different and could result in conflicting context settings.
+I suppose SELinux’s restorecond doesn’t want to apply any context changes because its rules are based on filesystem paths, and the paths of the multiple links are different and could result in conflicting context settings.
 
-Since we don't use network profiles, we can just delete the extra links in /etc/sysconfig/networking/profiles/default/.
+Since we don’t use network profiles, we can just delete the extra links in /etc/sysconfig/networking/profiles/default/.

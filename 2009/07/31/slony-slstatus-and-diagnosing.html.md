@@ -22,7 +22,7 @@ _lag_time
 (1 row)
 ```
 
-This view pulls data out of sl_event and sl_confirm, two tables that keep track of the forward progress of replication. Every time there is an event - SYNCs, DDL changes, slony administrative events - a row is added to sl_event. Slony is very chatty and so all of the slaves send events to each other, as well as the master. (That statement is a simplification, and it is possible to make some configuration changes that reduce the traffic, but in general, this is what people who set up slony will see.)
+This view pulls data out of sl_event and sl_confirm, two tables that keep track of the forward progress of replication. Every time there is an event—​SYNCs, DDL changes, slony administrative events—​a row is added to sl_event. Slony is very chatty and so all of the slaves send events to each other, as well as the master. (That statement is a simplification, and it is possible to make some configuration changes that reduce the traffic, but in general, this is what people who set up slony will see.)
 
 Broken down, the columns are: 
 
@@ -61,6 +61,6 @@ There’s a couple things I wished that slony would have told me:
 - Notification on the slave that it no longer had its connection back to the master. We’ll set up our own monitors to detect that this connection no longer exists, but it would be much nicer for slony to warn about this. Additionally, it would be nice to be able to re-connect to a single slave without restarting slon entirely.
 - More explanation about sl_confirm and likely causes of failed confirmations. I hope I’ve shed a little light with this blog post.
 
-The [documentation for setting up slony](http://www.slony.info/documentation/addthings.html) is very good, but the troubleshooting information is lacking around events and confirmations, and how each type of event and confirmation actually happens.  I’m happy to be proven wrong -- so please leave pointers in the comments!
+The [documentation for setting up slony](http://www.slony.info/documentation/addthings.html) is very good, but the troubleshooting information is lacking around events and confirmations, and how each type of event and confirmation actually happens. I’m happy to be proven wrong—​so please leave pointers in the comments!
 
 

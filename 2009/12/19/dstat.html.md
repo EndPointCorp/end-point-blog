@@ -7,7 +7,7 @@ title: 'dstat: better system resource monitoring'
 
 
 
-I recently came across a useful tool I hadn't heard of before: [dstat](http://dag.wieers.com/home-made/dstat/), by Dag Wieers (of DAG RPM-building fame). He describes it as "a versatile replacement for vmstat, iostat, netstat, nfsstat and ifstat."
+I recently came across a useful tool I hadn’t heard of before: [dstat](http://dag.wiee.rs/home-made/dstat/), by Dag Wieers (of DAG RPM-building fame). He describes it as “a versatile replacement for vmstat, iostat, netstat, nfsstat and ifstat.”
 
 The most immediate benefit I found is the collation of system resource monitoring output at each point in time, removing the need to look at output from multiple monitors. The coloring helps readability too:
 
@@ -47,14 +47,14 @@ usr sys idl wai hiq siq| read  writ| recv  send|  in   out | i
 
   5   4  68  22   0   0| 576k 1096k|  12k 4628B|   0     0 |1522  1731 ^C       
 
-(Textual screenshot by script of [util-linux](http://userweb.kernel.org/~kzak/util-linux-ng/) and Perl module [HTML::FromANSI](http://search.cpan.org/perldoc?HTML::FromANSI).)
+(Textual screenshot by script of [util-linux](https://github.com/karelzak/util-linux) and Perl module [HTML::FromANSI](http://search.cpan.org/perldoc?HTML::FromANSI).)
 
-Its default one-line-per-timeslice output makes it good for collecting data samples over time, as opposed to full-screen top-like utilities such as [atop](http://www.atcomputing.nl/Tools/atop/), which give much more detailed information at each snapshot, but don't show history.
+Its default one-line-per-timeslice output makes it good for collecting data samples over time, as opposed to full-screen top-like utilities such as [atop](https://www.atoptool.nl/), which give much more detailed information at each snapshot, but don’t show history.
 
 Since dstat is a standard package available in RHEL/CentOS and Debian/Ubuntu, it is a reasonably easy add-on to get on various systems.
 
-dstat also allows plugins, and just in the most recent release last month were added new plugins "for showing NTP time, power usage, fan speed, remaining battery time, memcache hits and misses, process count, top process total and average latency, top process total and average CPU timeslice, and per disk utilization rates."
+dstat also allows plugins, and just in the most recent release last month were added new plugins “for showing NTP time, power usage, fan speed, remaining battery time, memcache hits and misses, process count, top process total and average latency, top process total and average CPU timeslice, and per disk utilization rates.”
 
-It sounds like it'll grow even more useful over time and is worth keeping an eye on.
+It sounds like it’ll grow even more useful over time and is worth keeping an eye on.
 
 

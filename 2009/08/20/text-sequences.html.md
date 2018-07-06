@@ -5,9 +5,9 @@ tags: database, perl, postgres
 title: Text sequences
 ---
 
-Somebody recently asked on the [Postgres mailing list](http://archives.postgresql.org/pgsql-general/) about "Generating random unique alphanumeric IDs". While there were some interesting solutions given, from a simple [Pl/pgsql function](http://www.postgresql.org/docs/current/static/plpgsql.html) to using mathematical transformations, I'd like to lay out a simple and powerful solution using [Pl/PerlU](http://www.postgresql.org/docs/current/static/plperl.html)
+Somebody recently asked on the [Postgres mailing list](https://www.postgresql.org/list/pgsql-general/) about "Generating random unique alphanumeric IDs". While there were some interesting solutions given, from a simple [Pl/pgsql function](https://www.postgresql.org/docs/current/static/plpgsql.html) to using mathematical transformations, I’d like to lay out a simple and powerful solution using [Pl/PerlU](https://www.postgresql.org/docs/current/static/plperl.html)
 
-First, to paraphrase the original request, the poster needed a table to have a text column be its primary key, and to have a five-character alphanumeric string used as that key. Let's knock out a quick function using Pl/PerlU that solves the generation part of the question:
+First, to paraphrase the original request, the poster needed a table to have a text column be its primary key, and to have a five-character alphanumeric string used as that key. Let’s knock out a quick function using Pl/PerlU that solves the generation part of the question:
 
 ```sql
 DROP FUNCTION IF EXISTS nextvalalpha(TEXT);
@@ -40,7 +40,7 @@ greg=# SELECT nextvalalpha('foo');
 (1 row)
 ```
 
-So let's set up our test table. Since Postgres can use many things column DEFAULTS, including user-defined functions, this is pretty straightforward:
+So let’s set up our test table. Since Postgres can use many things column DEFAULTS, including user-defined functions, this is pretty straightforward:
 
 ```sql
 DROP TABLE IF EXISTS seq_test;
@@ -74,7 +74,7 @@ greg=# EXECUTE abc('Buzzards Bay', 'Massachusetts');
 INSERT 0 1
 ```
 
-So far so good. But while those returned values are random, they are not in any way unique, which a primary key needs to be. First, let's create a helper table to keep track of which values we've already seen. We'll also track the 'name' of the sequence as well, to allow for more than one unique set of sequences at a time:
+So far so good. But while those returned values are random, they are not in any way unique, which a primary key needs to be. First, let’s create a helper table to keep track of which values we’ve already seen. We’ll also track the ‘name’ of the sequence as well, to allow for more than one unique set of sequences at a time:
 
 ```sql
 DROP TABLE IF EXISTS alpha_sequence;
@@ -124,9 +124,9 @@ AS $_$
 $_$;
 ```
 
-Alright, that seems to work well, and prevents duplicate values. Or does it? Recall that one of the properties of [sequences in Postgres](http://www.postgresql.org/docs/current/interactive/functions-sequence.html) is that they live outside of the normal MVCC rules. In other words, once you get a number via a call to nextval(), nobody else can get that number again (even you!) - regardless of whether you commit or rollback. Thus, sequences are guaranteed unique across all transactions and sessions, even if used for more than one table, called manually, etc. Can we do the same with our text sequence? Yes!
+Alright, that seems to work well, and prevents duplicate values. Or does it? Recall that one of the properties of [sequences in Postgres](https://www.postgresql.org/docs/current/static/functions-sequence.html) is that they live outside of the normal MVCC rules. In other words, once you get a number via a call to nextval(), nobody else can get that number again (even you!)—​regardless of whether you commit or rollback. Thus, sequences are guaranteed unique across all transactions and sessions, even if used for more than one table, called manually, etc. Can we do the same with our text sequence? Yes!
 
-For this trick, we'll need to ensure that we only return a new value if we are 100% sure it is unique. We also need to record the value returned, even if the transaction that calls it rolls back. In other words, we need to make a small 'subtransaction' that commits, regardless of the rest of the transaction. Here's the solution:
+For this trick, we’ll need to ensure that we only return a new value if we are 100% sure it is unique. We also need to record the value returned, even if the transaction that calls it rolls back. In other words, we need to make a small ‘subtransaction’ that commits, regardless of the rest of the transaction. Here’s the solution:
 
 ```sql
 CREATE OR REPLACE FUNCTION nextvalalpha(TEXT)
@@ -176,9 +176,9 @@ AS $_$
 $_$;
 ```
 
-What's the big difference between this one and the previous version? Rather than examine the alpha_sequence table in our /current/ session, we figure out who and where we are, and make a completely separate connection to the same database using DBI. Then we find an unused value, INSERT that value into the alpha_sequence table, and commit that outside of our current transaction.Only then can we return the value to the caller.
+What’s the big difference between this one and the previous version? Rather than examine the alpha_sequence table in our /current/ session, we figure out who and where we are, and make a completely separate connection to the same database using DBI. Then we find an unused value, INSERT that value into the alpha_sequence table, and commit that outside of our current transaction.Only then can we return the value to the caller.
 
-Postgres sequences also have a currval() function, which returns the last value returned via a nextval() in the current session. The lastval() function is similar, but it returns the last call to nextval(), regardless of the name used. We can make a version of these easy enough, because Pl/Perl functions have a built-in shared hash named '%_SHARED'. Thus, we'll add two new lines to the end of the function above:
+Postgres sequences also have a currval() function, which returns the last value returned via a nextval() in the current session. The lastval() function is similar, but it returns the last call to nextval(), regardless of the name used. We can make a version of these easy enough, because Pl/Perl functions have a built-in shared hash named ‘%_SHARED’. Thus, we’ll add two new lines to the end of the function above:
 
 ```perl
 ...
@@ -188,7 +188,7 @@ Postgres sequences also have a currval() function, which returns the last value 
 ...
 ```
 
-Then we create a simple function to display that value, as well as throw an error if called too early - just like nextval() does:
+Then we create a simple function to display that value, as well as throw an error if called too early—​just like nextval() does:
 
 ```sql
 DROP FUNCTION IF EXISTS currvalalpha(TEXT)
@@ -225,7 +225,7 @@ AS $_$
 $_$;
 ```
 
-For the next tests, we'll create a normal (integer) sequence, and see how it acts compared to our newly created text sequence:
+For the next tests, we’ll create a normal (integer) sequence, and see how it acts compared to our newly created text sequence:
 
 ```sql
 DROP SEQUENCE IF EXISTS newint;
@@ -277,7 +277,7 @@ greg=# SELECT lastvalalpha();
  rRwJ6
 ```
 
-There is one more quick optimization we could make. Since the %_SHARED hash is available across our session, there is no need to do anything in the function more than once if we can cache it away. In this case, we'll cache away the server information we look up, the database handle, and the prepares. Our final function looks like this:
+There is one more quick optimization we could make. Since the %_SHARED hash is available across our session, there is no need to do anything in the function more than once if we can cache it away. In this case, we’ll cache away the server information we look up, the database handle, and the prepares. Our final function looks like this:
 
 ```sql
 CREATE OR REPLACE FUNCTION nextvalalpha(TEXT)
@@ -329,4 +329,4 @@ AS $_$
 $_$;
 ```
 
-Having the ability to reach outside the database in Pl/PerlU - even if simply to go back in again! - can be a powerful tool, and allows us to do things that might otherwise seem impossible.
+Having the ability to reach outside the database in Pl/PerlU—​even if simply to go back in again!—​can be a powerful tool, and allows us to do things that might otherwise seem impossible.

@@ -5,21 +5,21 @@ tags: shell, perl, python, ruby
 title: File test comparison table for shell, Perl, Ruby, and Python
 ---
 
-A few days ago, my co-worker Richard asked how in Python you would do the -x Bourne shell and Perl file test that checks whether a file is executable. This is (for me, at least) a really commonly used function but one I hadn't needed to do yet in Python, so I looked it up.
+A few days ago, my co-worker Richard asked how in Python you would do the -x Bourne shell and Perl file test that checks whether a file is executable. This is (for me, at least) a really commonly used function but one I hadn’t needed to do yet in Python, so I looked it up.
 
-That wasn't so hard to find, but then I wondered about the other shell and Perl file tests that I use all the time. Finding equivalents for those was harder than I expected. A web search didn't turn much up aside from language holy wars and limited answers, but I didn't find any exhaustive list.
+That wasn’t so hard to find, but then I wondered about the other shell and Perl file tests that I use all the time. Finding equivalents for those was harder than I expected. A web search didn’t turn much up aside from language holy wars and limited answers, but I didn’t find any exhaustive list.
 
-So I made my own. Below is a table comparing file test operators in the original Bourne shell-compatibles bash, ksh, and zsh; Perl's expanded set; Ruby's which was derived first from Perl; and equivalent Python code.
+So I made my own. Below is a table comparing file test operators in the original Bourne shell-compatibles bash, ksh, and zsh; Perl’s expanded set; Ruby’s which was derived first from Perl; and equivalent Python code.
 
-There are still some blanks where I didn't find a good equivalent. Of course I'm sure it's possible with enough custom logic to achieve the same end, but I have tried to stick with relatively simple formulations using built-in functions for now. I'll be happy to fill in the blanks if any readers make suggestions.
+There are still some blanks where I didn’t find a good equivalent. Of course I’m sure it’s possible with enough custom logic to achieve the same end, but I have tried to stick with relatively simple formulations using built-in functions for now. I’ll be happy to fill in the blanks if any readers make suggestions.
 
 Performance notes on avoiding multiple stats of the same file:
 
-- Starting with Perl 5.9.1, file tests can be "stacked" and will use a single stat for all tests, e.g. -f -x file. In older versions of Perl you can do -f file && -x _ instead.
+- Starting with Perl 5.9.1, file tests can be “stacked” and will use a single stat for all tests, e.g. -f -x file. In older versions of Perl you can do -f file && -x _ instead.
 
-- Ruby's File::Stat class can be used to cache a stat for multiple tests.
+- Ruby’s File::Stat class can be used to cache a stat for multiple tests.
 
-- Python's os.stat(file).st_mode can be stored and used for multiple tests.
+- Python’s os.stat(file).st_mode can be stored and used for multiple tests.
 
 Unless otherwise specified, these tests follow symbolic links and operate on the target of the link, rather than the link itself.
 
@@ -432,9 +432,9 @@ All tests return boolean true or false unless otherwise noted.
 
 Complete details are in the manuals for each language:
 
-- bash: [`man bash`](http://linux.die.net/man/1/bash) and search for "CONDITIONAL EXPRESSIONS"
-- ksh: [`man pdksh`](http://linux.die.net/man/1/pdksh) and search for "test expression"
-- zsh: [`man zshmisc`](http://linux.die.net/man/1/zshmisc) and search for "CONDITIONAL EXPRESSIONS"
-- Perl: [`perldoc -f -f`](http://perldoc.perl.org/functions/-X.html), [filetest pragma](http://perldoc.perl.org/filetest.html)
-- Ruby: [File class](http://www.ruby-doc.org/core/classes/File.html) ([summary version](http://www.tutorialspoint.com/ruby/ruby_file_methods.htm)) and [test() built-in](http://www.ruby-doc.org/core-1.8.7/classes/Kernel.html#M001085), [IO class](http://www.ruby-doc.org/core/classes/IO.html) docs
-- Python: [os.stat](http://docs.python.org/library/os.html#os.stat), [stat() results](http://docs.python.org/library/stat.html), [os.path](http://docs.python.org/library/os.path.html#module-os.path)
+- bash: [`man bash`](https://linux.die.net/man/1/bash) and search for “CONDITIONAL EXPRESSIONS”
+- ksh: [`man pdksh`](https://linux.die.net/man/1/pdksh) and search for “test expression”
+- zsh: [`man zshmisc`](https://linux.die.net/man/1/zshmisc) and search for “CONDITIONAL EXPRESSIONS”
+- Perl: [`perldoc -f -f`](https://perldoc.perl.org/functions/-X.html), [filetest pragma](https://perldoc.perl.org/filetest.html)
+- Ruby: [File class](https://ruby-doc.org/core-2.5.1/File.html) ([summary version](https://www.tutorialspoint.com/ruby/ruby_file_methods.htm)) and [test() built-in](https://ruby-doc.org/core-1.8.7/Kernel.html#M001085), [IO class](https://ruby-doc.org/core-2.5.1/IO.html) docs
+- Python: [os.stat](https://docs.python.org/3/library/os.html#os.stat), [stat() results](https://docs.python.org/3/library/stat.html), [os.path](https://docs.python.org/3/library/os.path.html#module-os.path)

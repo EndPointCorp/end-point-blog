@@ -15,9 +15,9 @@ The second integration point required a unique solution. The service offered by 
 - Could the employees use ftp or ssh to upload a single file containing details on their availability?
 - Are there other dynamic tools that we could use to track the availability of the consultant such as SMS or Twitter?
 
-Initially, we investigated using Google App Engine with a Python app that retrieved the availability information from an existing tool. To keep the budget down and try to stick with a purely static site on the server, we decided to investigate using Twitter for integration. I reviewed the [Twitter API](http://apiwiki.twitter.com/) and found some code snippets for integrating Twitter via JavaScript. Below are snippets and explanations of the resulting code.
+Initially, we investigated using Google App Engine with a Python app that retrieved the availability information from an existing tool. To keep the budget down and try to stick with a purely static site on the server, we decided to investigate using Twitter for integration. I reviewed the [Twitter API](https://developer.twitter.com/) and found some code snippets for integrating Twitter via JavaScript. Below are snippets and explanations of the resulting code.
 
-First, a script that retrieves the Twitter feed is appended to the document body. In this case, the endpoint Twitter account is pinged to get the most recent comment (count=1), and the resulting callback 'twitterAfter' is made after the JSON feed has been retrieved.
+First, a script that retrieves the Twitter feed is appended to the document body. In this case, the endpoint Twitter account is pinged to get the most recent comment (count=1), and the resulting callback ‘twitterAfter’ is made after the JSON feed has been retrieved.
 
 ```javascript
 var url = 'http://twitter.com/statuses/user_timeline/endpoint.json?callback=twitterAfter&count=1';
@@ -26,7 +26,7 @@ script.setAttribute('src', url);
 document.body.appendChild(script);
 ```
 
-Next, the callback 'twitterAfter' function is called. The callback function includes logic to determine if the consultant is available based on the most recent twitter message. If the datetime is in the future, the consultant is not available and will be available at that future datetime. If the datetime is in the past, the consultant is available and has been available since that datetime.
+Next, the callback ‘twitterAfter’ function is called. The callback function includes logic to determine if the consultant is available based on the most recent twitter message. If the datetime is in the future, the consultant is not available and will be available at that future datetime. If the datetime is in the past, the consultant is available and has been available since that datetime.
 
 ```javascript
 var twitterAfter = function(obj) {
@@ -79,4 +79,4 @@ Sept 13th 9am - now: Available
 
 In both the basic and advanced callback methods above, content on the page is updated to inform users of service or consultant availability. In the application of the advanced callback method, the user is notified when the consultant will be available.
 
-The client side Twitter integration solution fit our budget and server constraints - the functionality lives entirely on the client side, so we weren't concerned about server installation, setup, or requirements. Additionally, Twitter is such a popular app that there are many convenient ways to tweet availability from a mobile environment.
+The client side Twitter integration solution fit our budget and server constraints—​the functionality lives entirely on the client side, so we weren’t concerned about server installation, setup, or requirements. Additionally, Twitter is such a popular app that there are many convenient ways to tweet availability from a mobile environment.

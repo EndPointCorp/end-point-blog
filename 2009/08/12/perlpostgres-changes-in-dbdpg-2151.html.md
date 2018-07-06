@@ -5,9 +5,9 @@ tags: database, open-source, perl, postgres
 title: 'Perl+Postgres: changes in DBD::Pg 2.15.1'
 ---
 
-[DBD::Pg](http://search.cpan.org/dist/DBD-Pg/), the Perl interface to [Postgres](http://postgres.org/), recently released version 2.15.1. The last two weeks has seen a quick flurry of releases: 2.14.0, 2.14.1, 2.15.0, and 2.15.1. Per the usual versioning convention, the numbers on the far right (in this case the "dot one" releases) were simply bug fixes, while 2.14.0 and 2.15.0 introduced API and/or major internal changes. Some of these changes are explained below.
+[DBD::Pg](https://metacpan.org/release/DBD-Pg), the Perl interface to [Postgres](https://www.postgresql.org/), recently released version 2.15.1. The last two weeks has seen a quick flurry of releases: 2.14.0, 2.14.1, 2.15.0, and 2.15.1. Per the usual versioning convention, the numbers on the far right (in this case the “dot one” releases) were simply bug fixes, while 2.14.0 and 2.15.0 introduced API and/or major internal changes. Some of these changes are explained below.
 
-From the [Changes](http://cpansearch.perl.org/src/TURNSTEP/DBD-Pg-2.15.1/Changes) file for 2.15.0:
+From the [Changes](https://fastapi.metacpan.org/source/TURNSTEP/DBD-Pg-2.15.1/Changes) file for 2.15.0:
 
 ```nohighlight
 CHANGE:
@@ -47,7 +47,7 @@ Found: 1 : Garrett
 Found: 2 : Viktoria
 ```
 
-In 2.15.0, we loosened the requirement that the number of placeholders in each array match up with the expected number. Per the DBI spec, any "missing" items are considered undef, which maps to a SQL NULL. Thus:
+In 2.15.0, we loosened the requirement that the number of placeholders in each array match up with the expected number. Per the DBI spec, any “missing” items are considered undef, which maps to a SQL NULL. Thus:
 
 ```perl
 $dbh->do('DROP TABLE IF EXISTS people');
@@ -101,7 +101,7 @@ CHANGE:
  - Fix quoting of booleans to respect more Perlish variants (CPAN bug #41565) [GSM]
 ```
 
-In previous versions, the mapping of Perl vars to booleans was very simple, and did only simple 0/1 mapping. However, Perl's values of "truth" is richer than that. We can now do things like this:
+In previous versions, the mapping of Perl vars to booleans was very simple, and did only simple 0/1 mapping. However, Perl’s values of “truth” is richer than that. We can now do things like this:
 
 ```perl
 for my $name ('0', '1', '0E0', '0 but true', 'F', 'T', 'TRUE', 'false') {
@@ -127,7 +127,7 @@ CHANGE:
     (CPAN bug #47619) [GSM]
 ```
 
-This one is a little more subtle. When a value is returned from the database, it gets mapped back to a string. So even if the value in the database came from an INTEGER column, by the time it made it's way back to your Perl script it was a string that happened to hold an integer value. DBD::Pg now attempts to cast some types to their Perl equivalent. This is normally hard to see without peering inside Perl internals, but using Data::Dumper can show you the difference:
+This one is a little more subtle. When a value is returned from the database, it gets mapped back to a string. So even if the value in the database came from an INTEGER column, by the time it made it’s way back to your Perl script it was a string that happened to hold an integer value. DBD::Pg now attempts to cast some types to their Perl equivalent. This is normally hard to see without peering inside Perl internals, but using Data::Dumper can show you the difference:
 
 ```perl
 ## Ask Postgres to return a string and an integer
@@ -148,8 +148,8 @@ $VAR1 = [
         ];
 ```
 
-A small difference, but not unimportant - this change came about through a [bug request](http://rt.cpan.org/Public/Dist/Display.html?Name=DBD-Pg), as it was causing problems when DBD::Pg was interacting with [JSON::XS](http://stackoverflow.com/questions/1087308/why-cant-i-properly-encode-a-boolean-from-postgresql-via-jsonxs-via-perl). Special thanks to [Tim Bunce](http://blog.timbunce.org/), (author of DBI, maintainer of the amazing [NYTProf](http://search.cpan.org/dist/Devel-NYTProf/), and all around Perl guru) who found an important bug regarding this solution in 2.14.0, which led to the quick release of 2.14.1. Lesson learned: don't try converting ints to floats via sv_setnv.
+A small difference, but not unimportant—​this change came about through a [bug request](https://rt.cpan.org/Public/Dist/Display.html?Name=DBD-Pg), as it was causing problems when DBD::Pg was interacting with [JSON::XS](https://stackoverflow.com/questions/1087308/why-cant-i-properly-encode-a-boolean-from-postgresql-via-jsonxs-via-perl). Special thanks to [Tim Bunce](https://blog.timbunce.org/), (author of DBI, maintainer of the amazing [NYTProf](https://metacpan.org/release/Devel-NYTProf), and all around Perl guru) who found an important bug regarding this solution in 2.14.0, which led to the quick release of 2.14.1. Lesson learned: don’t try converting ints to floats via sv_setnv.
 
 -----------
 
-Most of the other changes to 2.14 and 2.15 are bug fixes of one sort or another. To keep up on the changes or to talk about the project more, please join the [mailing list](http://www.nntp.perl.org/group/perl.dbd.pg/)
+Most of the other changes to 2.14 and 2.15 are bug fixes of one sort or another. To keep up on the changes or to talk about the project more, please join the [mailing list](https://www.nntp.perl.org/group/perl.dbd.pg/).
