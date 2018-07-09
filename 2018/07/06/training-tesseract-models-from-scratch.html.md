@@ -231,7 +231,7 @@ lstmtraining \
 
 You're giving it the compiled `*.traineddata` file and the train / eval file lists and it trains the new model for you. It will adjust the neural network parameters to make the error between its predictions and what is known as ground-truth smaller and smaller.
 
-There's one part that we haven't yet talked about yet: the `--net_spec` argument and its accompanying value given as string.
+There's one part that we haven't talked about yet: the `--net_spec` argument and its accompanying value given as string.
 
 The neural network "spec" is there because neural networks come in many different shapes and forms. The subject is beyond the scope of this article. If you don't know anything yet but are curious, I encourage you to look for some good books. The process of learning about them is extremely rewarding — if you're into Math's and Computer Science.
 
