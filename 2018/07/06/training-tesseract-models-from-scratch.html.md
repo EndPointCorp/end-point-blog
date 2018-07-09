@@ -233,7 +233,7 @@ You're giving it the compiled `*.traineddata` file and the train / eval file lis
 
 There's one part that we haven't talked about yet: the `--net_spec` argument and its accompanying value given as string.
 
-The neural network "spec" is there because neural networks come in many different shapes and forms. The subject is beyond the scope of this article. If you don't know anything yet but are curious, I encourage you to look for some good books. The process of learning about them is extremely rewarding — if you're into Math's and Computer Science.
+The neural network "spec" is there because neural networks come in many different shapes and forms. The subject is beyond the scope of this article. If you don't know anything yet but are curious, I encourage you to look for some good books. The process of learning about them is extremely rewarding — if you're into Math and Computer Science.
 
 The value for that argument I presented above should be more than enough for most of your needs. That's unless you'd like to e. g. recognize vertical text, for which I'd recommend adjusting the spec greatly.
 
