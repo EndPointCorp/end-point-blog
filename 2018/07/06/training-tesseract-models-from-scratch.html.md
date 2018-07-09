@@ -1,3 +1,9 @@
+---
+author: Kamil Ciemniewski
+title: "Training Tesseract 4 models from real images"
+tags: tesseract, bash, ruby, machine-learning, neural-networks
+---
+
 Over the years, `Tesseract` has been one of the most popular OpenSource OCR solution. It's been providing ready to use models for recognizing text in many languages. Currently, there are 124 models that are available to be downloaded and used.
 
 Not too long ago, the project's been moved in the direction of using more modern machine learning approaches and is now using [Artificial Neural Networks](https://en.wikipedia.org/wiki/Artificial_neural_network).
