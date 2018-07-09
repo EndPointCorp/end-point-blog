@@ -1,8 +1,8 @@
-Within the world of OpenSource software, the choice between different OCR platforms is not very big. There are a couple of projects being used with some success. The most notable ones are:
+Over the years, `Tesseract` has been one of the most popular OpenSource OCR solution. It's been providing ready to use models for recognizing text in many languages. Currently, there are 124 models that are ready to be downloaded and used.
 
-* Tesseract ([GitHub - tesseract-ocr/tesseract: Tesseract Open Source OCR Engine (main repository)](https://github.com/tesseract-ocr/tesseract))
-* Ocropy ([GitHub - tmbdev/ocropy: Python-based tools for document analysis and OCR](https://github.com/tmbdev/ocropy))
-* Kraken (Ocropy's fork - [GitHub - mittagessen/kraken: Ocropus fork with sane defaults](https://github.com/mittagessen/kraken))
+Not too long ago, the project's been moved in the more modern direction and is now using [Artificial Neural Networks](https://en.wikipedia.org/wiki/Artificial_neural_network) as their main recognition-brain.
+
+For some people, this move meant a lot of confusion when they wanted to train their own models. This blog post tries to explain the process of turning scans of images with textual ground-truth data into models that are ready to be used.
 
 ## Tesseract pre-trained models
 
