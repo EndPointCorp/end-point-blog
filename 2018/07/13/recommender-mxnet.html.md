@@ -1,4 +1,4 @@
-# Blog → Recommender Systems via simple Matrix Factorization
+# Recommender Systems via simple Matrix Factorization
 
 Recommender systems have a broad range of applications. We all like how Spotify or Last.fm can recommend a song. Discovering new libraries on GitHub through recommendations is also quite pleasing. In this article, we're going to get an overview of what it takes to build a system like that. We'll then move onto the practical side of things and will build our of recommender in `Python` and `MXNet`.
 
