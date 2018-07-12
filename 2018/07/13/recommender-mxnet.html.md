@@ -1,5 +1,82 @@
 # Blog → Recommender Systems via simple Matrix Factorization
 
+Recommender systems have a broad range of applications. We all like how Spotify or Last.fm can recommend a song. Discovering new libraries on GitHub through recommendations is also quite pleasing. In this article, we're going to get an overview of what it takes to build a system like that. We'll then move onto the practical side of things and will build our of recommender in `Python` and `MXNet`.
+
+## Kinds of recommenders
+
+The general setup of the content recommendation is that we have **users** and **items**. The task is to recommend items to a particular user.
+
+There are two approaches to recommending content:
+
+1. Content based filtering
+2. Collaborative filtering
+
+The first one bases its outputs on the the intricate features of the item and how they relate to the user itself. The latter one uses the information about the way other, similar users rank the items.
+
+This article is going to focus on **collaborative filtering** only.
+
+## A bit of theory: matrix factorization
+
+In the simplest terms, we can represent interactions between users and items with a matrix:
+
+|  | item1 | item2 | item3 |
+|:--|:--|:--|:--|
+| user1 | -1 | - | 0.6 |
+| user2 | - | 0.95 | -0.1 |
+| user3 | 0.5 | - | 0.8 |
+
+In the above case users can rate items on the scale of `<-1, 1>`. Notice that in reality it's close to impossible to have them rate everything. The missing ratings are represented with the dash: `-`.
+
+Just by looking at the matrix above, we know that no amount of math is going to change the fact that user1 completely dislikes item1. The same goes for the fact that user2 likes item2 a lot. The ratings we already have make up for an fairly easy set of items to propose. That's not the goal of a recommender though — we'd like to predict which of the "dashes" in the table would in reality have high enough values. It'd also be great to know which ones are most likely to have very low ones. In essence: we want to predict the full representation of the above matrix, basing only on its "sparse" representation as shown above.
+
+To solve the above dilemma, we'll need to use just a little bit of linear algebra. Let's recall when can we multiply two matrices:
+
+Given matrix `A: m × k` and `B: k × n`, their product is another matrix `C: m × n`.
+
+```latex
+C = AB
+```
+
+Imagine now that the "sparse" (not having all the values for all the row-column pairs) matrix represented by the table above is our `C`. This means that there exist matrices `A` and `B` that *factorize* `C`.
+
+Notice also how this factorization can be helping in saving the space / memory for storing the full info about the matrix `C`.
+
+Let's say that:
+
+```
+m = 1000000
+n = 10000
+```
+
+Then the full representation takes:
+
+```
+m * n => 10,000,000,000
+```
+
+Now let's image that:
+
+```
+k = 16
+```
+
+Then to store both matrices: `A` and `B` we only need:
+
+```
+m * k + n * k => 16,160,000
+```
+
+Making it into a fraction of the original required space:
+
+```
+(m * k + n * k) / (m * n) => 0.001616
+```
+
+That's a **huge** saving. It goes with the small increase in the cost of there information retrieval. With matrices `A` and `B`, to infer the rating from `C` you need a **dot product** of the corresponding row and column of those matrices.
+
+## Factorizing the user / item matrix in practice
+
+
 
 ```python
 from mxnet.gluon import Block, nn, Trainer
@@ -16,7 +93,6 @@ import re
 ```
 
 
-
 ```python
 class DataIter(mx.io.DataIter):
     def __init__(self, data, batch_size = 16):
@@ -31,20 +107,15 @@ class DataIter(mx.io.DataIter):
             self.all_user_ids.add(user_id)
             self.all_item_ids.add(item_id)
         
-        self.provide_data = [('user', (batch_size, )), ('item', (batch_size, ))]
-        self.provide_label = [('rating', (self.batch_size, ))]
-        
-    @property
-    def count_all(self):
-        return len(self.data)
-        
     @property
     def user_count(self):
         return len(self.all_user_ids)
     
     @property
     def item_count(self):
-        return len(self.all_item_ids)
+        # we just know the value even though 10 of them were
+        # not voted
+        return 150
         
     def next(self):
         index = self.index * self.batch_size
@@ -59,7 +130,7 @@ class DataIter(mx.io.DataIter):
 
             user_ids = self.data[index:endindex, 0]
             item_ids = self.data[index:endindex, 1]
-            ratings = self.data[index:endindex, 2]
+            ratings   = self.data[index:endindex, 2]
 
             data_all = [mx.nd.array(user_ids), mx.nd.array(item_ids)]
             label_all = [mx.nd.array([r]) for r in ratings]
@@ -74,15 +145,12 @@ class DataIter(mx.io.DataIter):
 ```
 
 
-
 ```python
 def get_data(batch_size):
     def get_all_raw_data():
         user_ids = []
         item_ids = []
         ratings = []
-
-        print('Loading examples...')
 
         with open("data/jester_ratings.dat", "r") as file:
             for line in file:
@@ -100,50 +168,38 @@ def get_data(batch_size):
     return DataIter(all_raw,  batch_size = batch_size)
 ```
 
-
 ```python
 train = get_data(64)
 ```
 
-
 ```python
 class Model(Block):
-    def __init__(self, hidden, k, dataiter, **kwargs):
+    def __init__(self, k, dataiter, **kwargs):
         super(Model, self).__init__(**kwargs)
 
         with self.name_scope():
             self.user_embedding = nn.Embedding(input_dim = dataiter.user_count, output_dim=k)
-            self.item_embedding = nn.Embedding(input_dim = 150, output_dim=k)
-            
-            self.user_embed_act = nn.Activation('tanh')
-            self.item_embed_act = nn.Activation('tanh')
-            
-            self.user_fc = nn.Dense(hidden, activation = 'tanh')
-            self.item_fc = nn.Dense(hidden, activation = 'tanh')
-            
-            self.flatten = nn.Flatten()
+            self.item_embedding = nn.Embedding(input_dim = dataiter.item_count, output_dim=k)
 
     def forward(self, x):
-        user = self.user_embedding(x[0])
-        user = self.user_embed_act(user)
-        user = self.user_fc(user)
-        
+        user = self.user_embedding(x[0])   
         item = self.item_embedding(x[1])
-        item = self.item_embed_act(item)
-        item = self.item_fc(item)
         
         pred = user * item
-        pred = F.sum_axis(pred, axis = 1)
         
-        return self.flatten(pred)
+        return F.sum_axis(pred, axis = 1)
 ```
-
 
 
 ```python
 context = mx.gpu() if mx.test_utils.list_gpus() else mx.cpu()
-model = Model(8, 8, train)
+model = Model(16, train)
 model.collect_params().initialize(mx.init.Xavier(), ctx=context)
+```
+
+
+```python
+model.load_params("model.mxnet", ctx=context)
 ```
 
 
@@ -179,36 +235,36 @@ def fit(model, train, num_epoch, learning_rate):
 
 
 ```python
-fit(model, train, num_epoch=2, learning_rate=.05)
+fit(model, train, num_epoch=10, learning_rate=.05)
 ```
 
+
+
 ```
-INFO:root:Epoch 1 / 2 | Batch 1000 | Mean Loss: 0.15913794934749603
-INFO:root:Epoch 1 / 2 | Batch 2000 | Mean Loss: 0.17600205540657043
-INFO:root:Epoch 1 / 2 | Batch 3000 | Mean Loss: 0.16867533326148987
-INFO:root:Epoch 1 / 2 | Batch 4000 | Mean Loss: 0.14042142033576965
-INFO:root:Epoch 1 / 2 | Batch 5000 | Mean Loss: 0.14513427019119263
+INFO:root:Epoch 1 / 10 | Batch 1000 | Mean Loss: 1.8353286577621475e-05
+INFO:root:Epoch 1 / 10 | Batch 2000 | Mean Loss: 0.00026763149071484804
+INFO:root:Epoch 1 / 10 | Batch 3000 | Mean Loss: 0.00011451070167822763
+INFO:root:Epoch 1 / 10 | Batch 4000 | Mean Loss: 0.006481964141130447
+INFO:root:Epoch 1 / 10 | Batch 5000 | Mean Loss: 0.0004052179865539074
 
-(....)
+(...)
 
-INFO:root:Epoch 2 / 2 | Batch 21000 | Mean Loss: 0.10960876941680908
-INFO:root:Epoch 2 / 2 | Batch 22000 | Mean Loss: 0.08507367223501205
-INFO:root:Epoch 2 / 2 | Batch 23000 | Mean Loss: 0.08566252887248993
-INFO:root:Epoch 2 / 2 | Batch 24000 | Mean Loss: 0.0738331750035286
-INFO:root:Epoch 2 / 2 | Batch 25000 | Mean Loss: 0.08409106731414795
-INFO:root:Epoch 2 / 2 | Batch 26000 | Mean Loss: 0.07854850590229034
-INFO:root:Epoch 2 / 2 | Batch 27000 | Mean Loss: 0.0929383859038353
+INFO:root:Epoch 10 / 10 | Batch 22000 | Mean Loss: 3.0491356661777047e-10
+INFO:root:Epoch 10 / 10 | Batch 23000 | Mean Loss: 2.106314254957109e-12
+INFO:root:Epoch 10 / 10 | Batch 24000 | Mean Loss: 1.0526101474825356e-12
+INFO:root:Epoch 10 / 10 | Batch 25000 | Mean Loss: 8.65350542958443e-15
+INFO:root:Epoch 10 / 10 | Batch 26000 | Mean Loss: 3.3907354701767645e-09
+INFO:root:Epoch 10 / 10 | Batch 27000 | Mean Loss: 6.161449388891738e-12
 INFO:root:Saving model parameters
 ```
 
-```python
-model.load_params("model.mxnet", ctx=context)
-```
+
 
 ```python
 user_embed = model.collect_params().get('embedding0_weight').data()
 joke_embed = model.collect_params().get('embedding1_weight').data()
 ```
+
 
 
 ```python
@@ -258,16 +314,17 @@ jokes = get_jokes()
 ```python
 > jokes[0]
 
- 'A man visits the doctor. The doctor says, "I have bad news for you. You have cancer and Alzheimer\'s disease".\n\nThe man replies, "Well, thank God I don\'t have cancer!"'
+'A man visits the doctor. The doctor says, "I have bad news for you. You have cancer and Alzheimer\'s disease".\n\nThe man replies, "Well, thank God I don\'t have cancer!"'
 ```
 
 
 ```python
 > joke_embed[0]
 
- [-0.1940057   0.03230569 -0.04879944  0.04697262  0.10779835 -0.15459293
-  -0.01924264  0.18142588]
- <NDArray 8 @cpu(0)>
+[-0.02011569 -0.1868052   0.16420332  0.06995389 -0.02797213  0.10479802
+  0.07839763 -0.07516536 -0.05363695  0.03807874 -0.1073292  -0.13022287
+  0.09191594  0.00539801 -0.07646554  0.09778512]
+ <NDArray 16 @cpu(0)>
 ```
 
 
@@ -277,6 +334,7 @@ def cos_similarity(vec1, vec2):
 ```
 
 
+
 ```python
 def abs_id_to_rel(abs_id):
     try:
@@ -284,6 +342,7 @@ def abs_id_to_rel(abs_id):
     except Exception as e:
         return None
 ```
+
 
 ```python
 def get_scores(rel_id):
@@ -300,18 +359,21 @@ def get_scores(rel_id):
 
 
 ```python
-def print_joke_stats(ix):
-    def sort_by_second(t):
-      if t[1] is None:
-          return -2
-      else:
-          return t[1]
+def sort_by_second(t):
+    if t[1] is None:
+        return -2
+    else:
+        return t[1]
+```
 
+
+```python
+def print_joke_stats(ix):
     similar = get_scores(ix)
     similar.sort(key=sort_by_second)
     similar.reverse()
     
-    print(f'Jokes making same people laugh compared to:\n=== \n{jokes[ix]}===:\n\n')
+    print(f'Jokes making same people laugh compared to:\n=== \n{jokes[ix]}\n===:\n\n')
 
     for ix in range(1, 4):
         print(f'---\n{jokes[similar[ix][0]]}\n---\n\n')
@@ -319,73 +381,98 @@ def print_joke_stats(ix):
 
 
 ```python
-print_joke_stats(2)
+print_joke_stats(9)
 ```
 
 ```
     Jokes making same people laugh compared to:
     === 
-    Q. What's 200 feet long and has 4 teeth?
+    Two cannibals are eating a clown. One turns to the other and says:
     
-    A. The front row at a Willie Nelson concert.===:
+    "Does this taste funny to you?"
+    ===:
     
     
     ---
-    What a woman says: 
-    "This place is a mess! C'mon,
-    you and I need to clean up,
-    your stuff is lying on the floor and
-    you'll have no clothes to wear
-    if we don't do laundry right now!"
-    
-    What a man hears: 
-    "blah, blah, blah, blah, C'mon
-    blah, blah, blah, blah, you and I
-    blah, blah, blah, blah, on the floor
-    blah, blah, blah, blah, no clothes
-    blah, blah, blah, blah, right now!"
+    The father was very anxious to marry off his only daughter so he wanted to impress her date. "Do you like to screw?" he asks. "Huh?" replied the surprised first date. "My daughter, she loves to screw and she's good at it: you and her should go screw," the father carefully explained. Now very interested, the boy replied, "Yes, sir." Minutes later the girl came down the stairs, kissed her father goodbye and the couple left. After only a few minutes she reappeared, furious, dress torn, hair a mess and screamed, "Dammit, Daddy, it's the TWIST, get it straight!"
     ---
     
     
     ---
-    A lady bought a new Lexus. It cost a bundle. Two days later, she brought it back, complaining that the radio was not working.
+    A couple has been married for 75 years. For the husband's 95th birthday, his wife decides to surprise him by hiring a prostitute. That day, the doorbell rings. The husband uses his walker to get to the door and opens it.
     
-    "Madam," said the sales manager, "the audio system in this car is completely automatic. All you need to do is tell it what you want to listen to, and you will hear exactly that!"
+    A 21-year-old in a latex outfit smiles and says, "Hi, I here to give you super sex!"
     
-    She drove out, somewhat amazed and a little confused. She looked at the radio and said, "Nelson." The radio responded, "Ricky or Willie?" She was astounded. If she wanted Beethoven, that's what she got. If she wanted Nat King Cole, she got it.
-    
-    She was stopped at a traffic light enjoying "On the Road Again" when the light turned green and she pulled out. Suddenly an enormous sports utility vehicle coming from the street she was crossing sped toward her, obviously not paying attention to the light. She swerved and narrowly missed a collision.
-    
-    "Idiot!" she yelled and, from the radio, "Ladies and gentlemen, the President of the United States."
+    The old man says, "I'll take the soup."
     ---
     
     
     ---
-    What do you get when you run over a parakeet with a lawnmower?
+    A man piloting a hot air balloon discovers he has wandered off course and is hopelessly lost. He descends to a lower altitude and locates a man down on the ground. He lowers the balloon further and shouts, "Excuse me, can you tell me where I am?"
     
-    Shredded tweet.
+    The man below says, "Yes, you're in a hot air balloon, about 30 feet above this field."
+    
+    "You must work in Information Technology," says the balloonist.
+    
+    "Yes I do," replies the man. "And how did you know that?"
+    
+    "Well," says the balloonist, "what you told me is technically correct, but of no use to anyone."
+    
+    The man below says, "You must work in management."
+    
+    "I do," replies the balloonist, "how did you know?"
+    
+    "Well," says the man, "you don't know where you are, or where you're going, but you expect my immediate help. You're in the same position you were before we met, but now it's my fault!"
     ---
 ```
-
+    
 
 
 ```python
-def predict_laughter(user_id, joke_id):
+def predict_rating(user_id, joke_id):
     user = mx.nd.array([user_id])
     joke = mx.nd.array([joke_id])
-    return model([user, joke]).asnumpy()[0][0] * 10
+    return model([user, joke]).asnumpy()[0] * 10
 ```
 
 
 ```python
-> predict_laughter(5, 77)
-
-2.370649129152298
-
 > jokes[77]
 
 "Q: What's the difference between the government and the Mafia?\n\nA: One of them is organized."
 ```
 
 
+
+```python
+> predict_rating(5, 77)
+
+0.9022721648216248
+```
+
+
+
+```python
+> F.dot(user_embed, joke_embed.T)[5, 77]
+
+[0.0902272]
+<NDArray 1 @cpu(0)>
+```
+
+
+```python
+> F.sum(user_embed[5] * joke_embed[77])
+
+[0.09022722]
+<NDArray 1 @cpu(0)>
+```
+
+
+
+```python
+> F.dot(user_embed[5], joke_embed[77])
+
+[0.09022722]
+<NDArray 1 @cpu(0)>
+```
 
