@@ -1,16 +1,19 @@
 ---
-title: Vue, FontAwesome, and Facebook/Twitter Icons 
+title: Vue, Font Awesome, and Facebook/​Twitter Icons 
 author: David Christensen
-tags: font-awesome, vue, javascript
+tags: vue, javascript
+gh_issue_number: 1443
 ---
 
-# Overview
+<img src="/blog/2018/07/12/vue-fontawesome-facebook-twitter/fontawesome-screenshot.png" alt="some Font Awesome fonts" />
 
-[FontAwesome](https://fontawesome.com) and [Vue](https://www.vuejs.org/) are both great technologies.  Here I detail overcoming some issues when trying to get the Facebook/Twitter icons working when using the `vue-fontawesome` bindings in the hopes of saving others future debugging time.
+### Overview
 
-# Detail
+[Font Awesome](https://fontawesome.com) and [Vue](https://www.vuejs.org/) are both great technologies. Here I detail overcoming some issues when trying to get the Facebook and Twitter icons working when using the `vue-fontawesome` bindings in the hopes of saving others future debugging time.
 
-Recently, I was working with the `vue-fontawesome` tools, which have recently been updated to version 5 of FontAwesome.  A quick installation recipe:
+### Detail
+
+Recently, I was working with the `vue-fontawesome` tools, which have recently been updated to version 5 of Font Awesome. A quick installation recipe:
 
 ```shell
 $ yarn add @fortawesome/fontawesome
@@ -20,10 +23,10 @@ $ yarn add @fortawesome/free-brands-svg-icons
 $ yarn add @fortawesome/vue-fontawesome
 ```
 
-A best practice when using FontAwesome is to import only the icons you need for your specific project instead of the thousand+, as this just contributes to project bloat.  So in our `main.js` file, we import them like so:
+A best practice when using Font Awesome is to import only the icons you need for your specific project instead of the thousand+, as this just contributes to project bloat. So in our `main.js` file, we import them like so:
 
 ```js
-// FontAwesome-related initialization
+// Font Awesome-related initialization
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faEnvelope, faUser } from '@fortawesome/free-solid-svg-icons'
 import { faFacebook, faTwitter } from '@fortawesome/free-brands-svg-icons'
@@ -74,9 +77,9 @@ Only blank spots and errors in the browser console like so:
 {}
 ```
 
-After turning up dry for a run to the Google well and scanning the docs, I determined that this must come down to a difference in the prefix; since the icons that worked were being imported from the `free-solid-svg-icons` library, it would seem that that was the source of the `fas` prefix.  Since the non-working icons were coming from the `free-brands-svg-icons` library it stood to reason that somehow passing in a prefix parameter of `fab` would work.
+After turning up dry from a run to the Google well and scanning the docs, I determined that this must come down to a difference in the prefix; since the icons that worked were being imported from the `free-solid-svg-icons` library, it would seem that that was the source of the `fas` prefix. Since the non-working icons were coming from the `free-brands-svg-icons` library it stood to reason that somehow passing in a prefix parameter of `fab` would work.
 
-I tested modifying things like follows, just to exercise potentially obvious answers.  Sadly, this did not result in workage.
+I tested modifying things like follows, just to exercise potentially obvious answers. Sadly, this did not result in workage.
 
 ```vue
 <template>
@@ -89,7 +92,7 @@ I tested modifying things like follows, just to exercise potentially obvious ans
 </template>
 ```
 
-I finally took to the original source for the `FontAwesomeIcon` component (every engineer's favorite thing, aside from brown paper packages tied up with string), and noted the following:
+I finally took to the original source for the `FontAwesomeIcon` component (every engineer’s favorite thing, aside from brown paper packages tied up with string), and noted the following:
 
 ```js
 function normalizeIconArgs (icon) {
@@ -126,4 +129,6 @@ So I ended up trying:
 </template>
 ```
 
-(I am omitting the part where I stupidly left out the leading `:` to pass in an explicit object instead of a string equivalent.)  Everything worked!  And there was much rejoicing!  Hope this helps someone else who had the same issue as me.
+(I am omitting the part where I stupidly left out the leading `:` to pass in an explicit object instead of a string equivalent.)
+
+Everything worked! And there was much rejoicing! Hope this helps someone else who had the same issue as me.
