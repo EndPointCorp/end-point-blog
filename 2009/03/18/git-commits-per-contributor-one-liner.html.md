@@ -5,7 +5,7 @@ tags: git, spree
 title: Git commits per contributor one-liner
 ---
 
-Just for fun, in the [Spree Git repository](http://www.spreehq.org/):
+Just for fun, in the [Spree Git repository](https://github.com/spree/spree):
 
 ```nohighlight
 git log | grep ^Author: | sed 's/ <.*//; s/^Author: //' | sort | uniq -c | sort -nr

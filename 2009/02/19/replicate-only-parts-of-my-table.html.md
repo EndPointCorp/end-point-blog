@@ -5,9 +5,9 @@ tags: postgres
 title: Replicate only parts of my table
 ---
 
-A day or two ago in [#slony](irc://irc.freenode.net/slony), someone asked if Slony would replicate only selected columns of a table. A natural response might be to create a view containing only the columns you're interested in, and have Slony replicate that. But Slony is trigger-based -- the only reason it knows there's something to replicate is because a trigger has told it so -- and you can't have a trigger on a view. So that won't work. [Greg](/team/greg_sabino_mullane) chimed in to say that Bucardo could do it, and mentioned a Bucardo feature I'd not yet noticed.
+A day or two ago in [#slony](irc://irc.freenode.net/slony), someone asked if Slony would replicate only selected columns of a table. A natural response might be to create a view containing only the columns you’re interested in, and have Slony replicate that. But Slony is trigger-based—​the only reason it knows there’s something to replicate is because a trigger has told it so—​and you can’t have a trigger on a view. So that won’t work. [Greg](/team/greg_sabino_mullane) chimed in to say that Bucardo could do it, and mentioned a Bucardo feature I’d not yet noticed.
 
-[Bucardo](http://bucardo.org/) is trigger-based, like Slony, so defining a view won't work. But it allows you to specify a special query string for each table you're replicating. This query is called a "customselect", and can serve to limit the columns you replicate, transform the rows as they're being replicated, etc., and probably a bunch of other stuff I haven't thought of yet. A simple example:
+[Bucardo](https://bucardo.org/) is trigger-based, like Slony, so defining a view won’t work. But it allows you to specify a special query string for each table you’re replicating. This query is called a “customselect”, and can serve to limit the columns you replicate, transform the rows as they’re being replicated, etc., and probably a bunch of other stuff I haven’t thought of yet. A simple example:
 
 1. Create a table in one database as follows:
 
@@ -20,16 +20,20 @@ CREATE TABLE synctest (
 );
 ```
 
-Also create this table in the replication destination database; Bucardo won't replicate schema changes or database structure.
+Also create this table in the replication destination database; Bucardo won’t replicate schema changes or database structure.
 
-1. Tell Bucardo about the table. I won't give the SQL here because it's already available in the [Bucardo documentation](http://bucardo.org/wiki/Bucardo/Documentation). Suffice it to say you need to tell the goat table about a customselect query. For my testing, I used 'SELECT id, field1 FROM synctest'. Note that the fields returned by this query must
+1. Tell Bucardo about the table. I won’t give the SQL here because it’s already available in the [Bucardo documentation](https://bucardo.org/Bucardo/Documentation/Overview/). Suffice it to say you need to tell the goat table about a customselect query. For my testing, I used ‘SELECT id, field1 FROM synctest’. Note that the fields returned by this query must
 
-        - Include all the primary key fields from the table. Bucardo will complain if it can't find the primary key in the results of the customselect query.
-        - Return field names matching those of the table. This means, for example, that if you somehow transform the contents of a field, you need to make sure the query explicitly names the results something Bucardo can recognize, e.g. 'SELECT id, do_some_transformation(field1) AS field1 FROM synctest'
+    <ul>
+      <li>Include all the primary key fields from the table. Bucardo will complain if it can’t find the primary key in the results of the customselect query.</li>
 
-1. Tell the sync to use the custom select statements by setting the 'usecustomselect' field in the sync table to TRUE for the sync in question
+      <li>Return field names matching those of the table. This means, for example, that if you somehow transform the contents of a field, you need to make sure the query explicitly names the results something Bucardo can recognize, e.g. ‘SELECT id, do_some_transformation(field1) AS field1 FROM synctest’</li>
+    </ul>
 
-1. Fire up Bucardo and see the results. Here's my source table:
+2. Tell the sync to use the custom select statements by setting the ‘usecustomselect’ field in the sync table to TRUE for the sync in question
+
+3. Fire up Bucardo and see the results. Here’s my source table:
+
 ```
 58921 josh@bucardo_test# select * from uniq_test ;
  id |  field1  | field2 | field3
@@ -45,7 +49,8 @@ Also create this table in the replication destination database; Bucardo won't re
 (8 rows)
 ```
 
-...and here's my destination table...
+...and here’s my destination table...
+
 ```
 58922 josh@bucardo_test# select * from uniq_test;
  id |  field1  | field2 | field3
@@ -61,4 +66,4 @@ Also create this table in the replication destination database; Bucardo won't re
 (8 rows)
 ```
 
-Note that at least for now, customselect works only with fullcopy sync types. Also, the destination table must match the source table in structure, even if you're not going to copy all the fields. That is, even though I'm only replicating the 'id' and 'field1' fields in the example above, the destination table needs to contain all the fields in the source table. This is one of Bucardo's TODO items...
+Note that at least for now, customselect works only with fullcopy sync types. Also, the destination table must match the source table in structure, even if you’re not going to copy all the fields. That is, even though I’m only replicating the ‘id’ and ‘field1’ fields in the example above, the destination table needs to contain all the fields in the source table. This is one of Bucardo’s TODO items...

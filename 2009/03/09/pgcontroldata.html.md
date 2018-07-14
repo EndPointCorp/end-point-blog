@@ -7,7 +7,7 @@ title: pg_controldata
 
 
 
-PostgreSQL ships with several utility applications to administer the server life cycle and clean up in the event of problems. I spent some time lately looking at what is probably one of the least well known of these, [pg_controldata](http://www.postgresql.org/docs/current/static/app-pgcontroldata.html). This useful utility dumps out a number of useful tidbits about a database cluster, given the data directory it should look at. Here's an example from a little-used 8.3.6 instance:
+PostgreSQL ships with several utility applications to administer the server life cycle and clean up in the event of problems. I spent some time lately looking at what is probably one of the least well known of these, [pg_controldata](https://www.postgresql.org/docs/current/static/app-pgcontroldata.html). This useful utility dumps out a number of useful tidbits about a database cluster, given the data directory it should look at. Here’s an example from a little-used 8.3.6 instance:
 
 ```nohighlight
 josh@eddie:~$ pg_controldata
@@ -40,6 +40,6 @@ LC_COLLATE:                           en_US.UTF-8
 LC_CTYPE:                             en_US.UTF-8
 ```
 
-I can't claim to speak with authority on all these data, but leave it as an exercise to the reader to determine the meaning of those that appear most captivating. One of pg_controldata's more interesting features is that it doesn't have to actually connect to anything; it reads everything from the disk. That means you can use it on databases in the middle of WAL recovery, even though you can't actually query the recovering database. The [check_postgres.pl](http://bucardo.org/check_postgres/) script uses this unique capability to make inferences about the health of a WAL replica, specifically by making sure checkpoints happen fairly regularly. pg_controldata requires only one argument, the data directory of the PostgreSQL instance you're interested in, and that only if you haven't already set the PGDATA environment variable.
+I can’t claim to speak with authority on all these data, but leave it as an exercise to the reader to determine the meaning of those that appear most captivating. One of pg_controldata’s more interesting features is that it doesn’t have to actually connect to anything; it reads everything from the disk. That means you can use it on databases in the middle of WAL recovery, even though you can’t actually query the recovering database. The [check_postgres.pl](https://bucardo.org/check_postgres/) script uses this unique capability to make inferences about the health of a WAL replica, specifically by making sure checkpoints happen fairly regularly. pg_controldata requires only one argument, the data directory of the PostgreSQL instance you’re interested in, and that only if you haven’t already set the PGDATA environment variable.
 
 

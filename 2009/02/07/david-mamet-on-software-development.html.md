@@ -5,7 +5,7 @@ tags: books, development
 title: David Mamet on software development
 ---
 
-I recently read the book True and False: Heresy and Common Sense for the Actor (1997) by David Mamet. (A gift from Uncle Steve. Thanks!) Mamet’s film [The Spanish Prisoner](http://www.imdb.com/title/tt0120176/) is one of my favorites, and I liked [Oleanna](http://www.imdb.com/title/tt0110722/), [Things Change](http://www.imdb.com/title/tt0096259/), and [Glengarry Glen Ross](http://www.imdb.com/title/tt0104348/) a lot too. Wait, looking over his [writing credits at IMDb](http://www.imdb.com/name/nm0000519/), I see I’d forgotten [The Winslow Boy](http://www.imdb.com/title/tt0155388/), [State and Main](http://www.imdb.com/title/tt0120202/), and [Wag the Dog](http://www.imdb.com/title/tt0120885/), which were good too.
+I recently read the book True and False: Heresy and Common Sense for the Actor (1997) by David Mamet. (A gift from Uncle Steve. Thanks!) Mamet’s film [The Spanish Prisoner](https://www.imdb.com/title/tt0120176/) is one of my favorites, and I liked [Oleanna](https://www.imdb.com/title/tt0110722/), [Things Change](https://www.imdb.com/title/tt0096259/), and [Glengarry Glen Ross](https://www.imdb.com/title/tt0104348/) a lot too. Wait, looking over his [writing credits at IMDb](https://www.imdb.com/name/nm0000519/), I see I’d forgotten [The Winslow Boy](https://www.imdb.com/title/tt0155388/), [State and Main](https://www.imdb.com/title/tt0120202/), and [Wag the Dog](https://www.imdb.com/title/tt0120885/), which were good too.
 
 Enough of the fanboyism. This little book of his is packed with what sounds like good advice for actors. Not having been an actor in anything more than a school play or two, I can only imagine, but I was surprised to find myself nodding in agreement during many passages because they applied so well to my field, software development.
 
@@ -15,7 +15,7 @@ I’ve selected a few quotations that seemed especially apt:
 
 This reminded me of Richard Stallman’s take on the same subject:
 
-> Yoda’s philosophy (“There is no ‘try’”) sounds neat, but it doesn’t work for me. I have done most of my work while anxious about whether I could do the job, and unsure that it would be enough to achieve the goal if I did. But I tried anyway, because there was no one but me between the enemy and my city. Surprising myself, I have sometimes succeeded. (from the essay, [The GNU Project](http://www.gnu.org/gnu/thegnuproject.html))
+> Yoda’s philosophy (“There is no ‘try’”) sounds neat, but it doesn’t work for me. I have done most of my work while anxious about whether I could do the job, and unsure that it would be enough to achieve the goal if I did. But I tried anyway, because there was no one but me between the enemy and my city. Surprising myself, I have sometimes succeeded. (from the essay, [The GNU Project](https://www.gnu.org/gnu/thegnuproject.html))
 
 Though they appear to be contradictory, I think both approaches can apply depending on circumstances and I’ve employed each at various times. Whoa, there ... nuance.
 

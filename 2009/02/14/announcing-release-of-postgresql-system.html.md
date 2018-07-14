@@ -7,10 +7,10 @@ title: Announcing Release of PostgreSQL System Impact (PGSI) Log Analyzer
 
 
 
-The PostgreSQL System Impact (PGSI) log analyzer is now available at [http://bucardo.org/wiki/Pgsi](http://bucardo.org/wiki/Pgsi).
+The PostgreSQL System Impact (PGSI) log analyzer is now available at [https://bucardo.org/Pgsi/](https://bucardo.org/Pgsi/).
 
 System Impact (SI) is a measure of the overall load a given query imposes on a
-server. It is expressed as a percentage of a query's average duration over the
+server. It is expressed as a percentage of a query’s average duration over the
 its average interval between successive calls.
 
 Queries are collected into canonical form with respect to literals and bind
@@ -31,7 +31,7 @@ successive calls in an active state. These are often smaller queries that have
 failed to be optimized and punish a system severely under heavy load.
 
 PGSI requires full PostgreSQL logging through syslog with a prescribed format.
-Specifically, log_statement must be 'all' and log_duration must be 'on'. Given
+Specifically, log_statement must be ‘all’ and log_duration must be ‘on’. Given
 a continuous log interval of any duration, PGSI will calculate reports in
 wiki-ready format with the following data over that interval:
 
@@ -45,9 +45,9 @@ wiki-ready format with the following data over that interval:
 - Display of the canonical query
 - List of log entries for best- and worst-duration instances of the canonical query (only if report was generated using the --offenders option).
 
-<a href="http://3.bp.blogspot.com/_VJwpFgQYUQ4/SZci40TaGkI/AAAAAAAAAAU/0UapXcaoFZk/s1600-h/pgsi.jpg" onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5302745445760113218" src="/blog/2009/02/14/announcing-release-of-postgresql-system/image-0.jpeg" style="display:block; margin:0px auto 10px; text-align:center;cursor:pointer; cursor:hand;width: 400px; height: 211px;"/></a>
+<a href="https://3.bp.blogspot.com/_VJwpFgQYUQ4/SZci40TaGkI/AAAAAAAAAAU/0UapXcaoFZk/s1600-h/pgsi.jpg" onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5302745445760113218" src="/blog/2009/02/14/announcing-release-of-postgresql-system/image-0.jpeg" style="display:block; margin:0px auto 10px; text-align:center;cursor:pointer; cursor:hand;width: 400px; height: 211px;"/></a>
 
-PGSI can be downloaded in [tar.gz](http://bucardo.org/downloads/pgsi-1.1.1.tar.gz) format or can
+PGSI can be downloaded in [tar.gz](https://bucardo.org/downloads/pgsi-1.1.1.tar.gz) format or can
 be accessed from Git, its version-control system. To obtain it from git, run:
 
 ```

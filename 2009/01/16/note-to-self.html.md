@@ -6,9 +6,7 @@ title: 'Note to self:'
 ---
 
 
-
 In free software, patches are considerably more useful than complaints.
 
-It's easy to forget.
-
+It’s easy to forget.
 

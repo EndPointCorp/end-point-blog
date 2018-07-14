@@ -5,36 +5,36 @@ tags: openafs
 title: What is OpenAFS?
 ---
 
-A common question about OpenAFS adoption is "What is OpenAFS?" Usually,
+A common question about OpenAFS adoption is “What is OpenAFS?” Usually,
 the person asking the question is somewhat familiar with filesystems, but
-doesn't follow the technical details of various filesystems.  This article
+doesn’t follow the technical details of various filesystems. This article
 is designed to help that reader understand why OpenAFS could be a useful
 solution (and understand where it is not a useful solution).
 
 First, the basics. OpenAFS is an open source implementation of AFS:
-from the OpenAFS [website](http://www.openafs.org/), OpenAFS
-is a heterogeneous system that "offers client-server architecture for
+from the OpenAFS [website](https://www.openafs.org/), OpenAFS
+is a heterogeneous system that “offers client-server architecture for
 federated file sharing and replicated read-only content distribution,
 providing location independence, scalability, security, and transparent
-migration capabilities".
+migration capabilities”.
 
-Let's break that down:
+Let’s break that down:
 
 First, OpenAFS is extremely cross-platform. OpenAFS clients exist for
 small devices (e.g., the Nokia tablet) up to mainframes. Do you want
 Windows with that? [Not a
-problem](http://www.openafs.org/windows.html). On the other hand, OpenAFS servers are primarily available
+problem](https://www.openafs.org/windows.html). On the other hand, OpenAFS servers are primarily available
 on Unix-based platforms. Implementations of OpenAFS servers for Windows
-do exist, but they are not recommended or supported (If you'd like to
+do exist, but they are not recommended or supported (If you’d like to
 change that, you are welcome to submit patches or to hire developers to
-make that change.  That's a major advantage of an open source project.).
+make that change. That’s a major advantage of an open source project.).
 
 The second part of OpenAFS is rather straightforward: it is a
 client-server distributed file system. Much like SMB/CIFS in the Windows
 world, and NFS in the Unix world, OpenAFS lets file accesses take place
 over a network. One feature that sets OpenAFS apart from CIFS and NFS,
 though, is its strong file consistency semantics based on its use of
-client-side caching and callbacks.  Client-side caching lets clients
+client-side caching and callbacks. Client-side caching lets clients
 access data from their local cache without going across the network for
 every access.
 
@@ -81,7 +81,7 @@ kind of feature is not usually found in networked filesystems but only
 in either higher-end proprietary Network Attached Storage (NAS) systems,
 or in Storage Area Networks (SANs).
 
-Because of OpenAFS's use of client-side caching, read-only data, and
+Because of OpenAFS’s use of client-side caching, read-only data, and
 separation of location information from the filesystem itself, OpenAFS
 can scale up quite well. The initial design of AFS was to be at least
 10 times more scalable than the implementations of NFS at that time,
@@ -101,7 +101,7 @@ the Kerberos services for an OpenAFS installation, as can an MIT KDC or
 a Heimdal one.
 
 Additionally, traffic between the clients and servers can be encrypted
-by OpenAFS itself (i.e., not just with SSH or VPN encryption).  This can
+by OpenAFS itself (i.e., not just with SSH or VPN encryption). This can
 provide an extra layer of security.
 
 Overall, OpenAFS provides some of the features of traditional network
