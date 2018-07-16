@@ -265,7 +265,7 @@ def fit(model, train, num_epoch):
 Running the trainer for 10 epochs is as simple as:
 
 ```python
-fit(model, train, num_epoch=10, learning_rate=.05)
+fit(model, train, num_epoch=10)
 ```
 
 The training process is periodically outputting statistics similar to ones below:
