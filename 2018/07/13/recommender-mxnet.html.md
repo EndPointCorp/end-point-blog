@@ -1,17 +1,19 @@
 # Recommender System via a simple Matrix Factorization
 
-Recommender systems have a broad range of applications. We all like how Spotify or Last.fm can recommend a song. Discovering new libraries on GitHub through recommendations is also quite pleasing. In this article, we're going to get an overview of what it takes to build a system like that. We'll then move onto the practical side of things and will build our of recommender in `Python` and `MXNet`.
+We all like how apps like Spotify or Last.fm can recommend us a song that feels so much like our taste. Being able to recommend an item to a user is very important for keeping and expanding the user base.
+
+In this article I'll present an overview of building a recommendation system. The approach here is quite basic. It's grounded though in a valid and battle tested theory. I'll show you how to put this theory into practice by coding it in `Python` with the help of `MXNet`.
 
 ## Kinds of recommenders
 
-The general setup of the content recommendation is that we have **users** and **items**. The task is to recommend items to a particular user.
+The general setup of the content recommendation challenge is that we have **users** and **items**. The task is to recommend items to a particular user.
 
-There are two approaches to recommending content:
+There are two distinct approaches to recommending content:
 
-1. Content based filtering
-2. Collaborative filtering
+1. [Content based filtering](https://en.wikipedia.org/wiki/Recommender_system#Content-based_filtering)
+2. [Collaborative filtering](https://en.wikipedia.org/wiki/Recommender_system#Collaborative_filtering)
 
-The first one bases its outputs on the the intricate features of the item and how they relate to the user itself. The latter one uses the information about the way other, similar users rank the items.
+The first one bases its outputs on the the intricate features of the item and how they relate to the user itself. The latter one uses the information about the way other, similar users rank the items. More elaborated systems base their work on both. Such recommender systems are called [hybrid](https://en.wikipedia.org/wiki/Recommender_system#Hybrid_recommender_systems).
 
 This article is going to focus on **collaborative filtering** only.
 
@@ -25,23 +27,23 @@ In the simplest terms, we can represent interactions between users and items wit
 | user2 | - | 0.95 | -0.1 |
 | user3 | 0.5 | - | 0.8 |
 
-In the above case users can rate items on the scale of `<-1, 1>`. Notice that in reality it's close to impossible to have them rate everything. The missing ratings are represented with the dash: `-`.
+In the above case users can rate items on the scale of `<-1, 1>`. Notice that in reality it's most likely that users will not rate everything. The missing ratings are represented with the dash: `-`.
 
-Just by looking at the matrix above, we know that no amount of math is going to change the fact that user1 completely dislikes item1. The same goes for the fact that user2 likes item2 a lot. The ratings we already have make up for an fairly easy set of items to propose. That's not the goal of a recommender though — we'd like to predict which of the "dashes" in the table would in reality have high enough values. It'd also be great to know which ones are most likely to have very low ones. In essence: we want to predict the full representation of the above matrix, basing only on its "sparse" representation as shown above.
+Just by looking at the above table, we know that no amount of math is going to change the fact that user1 completely dislikes item1. The same goes for user2 liking item2 a lot. The ratings we already have make up for a fairly easy set of items to propose. The goal of a recommender is not to propose the items users know already though. We want to predict which of the "dashes" from the table are most likely to be liked the most. Putting it in other words: we want to predict the full representation of the above matrix, basing only on its "sparse" representation as shown above.
 
-To solve the above dilemma, we'll need to use just a little bit of linear algebra. Let's recall when can we multiply two matrices:
+How can we solve this problem? Let's recall the rules of multiplying two matrices:
 
-Given matrix `A: m × k` and `B: k × n`, their product is another matrix `C: m × n`.
+Given two matrices: `A: m × k` and `B: k × n`, their product is another matrix `C: m × n`. We know that we can multiply matrices only if the second dimension of the first matrix equals the first one of the second matrix. In such a case, matrix `C` becomes a product of two factors: matrix `A` and matrix `B`:
 
 ```latex
 C = AB
 ```
 
-Imagine now that the "sparse" (not having all the values for all the row-column pairs) matrix represented by the table above is our `C`. This means that there exist matrices `A` and `B` that *factorize* `C`.
+Imagine now that the sparse matrix represented by the ratings table is our `C`. This means that there exist two matrices: `A` and `B` that *factorize* `C`.
 
-Notice also how this factorization can be helping in saving the space / memory for storing the full info about the matrix `C`.
+Notice also how this factorization is saving the space needed to persist the ratings:
 
-Let's say that:
+Let's make `m` and `n` numbers into:
 
 ```
 m = 1000000
@@ -54,7 +56,7 @@ Then the full representation takes:
 m * n => 10,000,000,000
 ```
 
-Now let's image that:
+We can now choose the value for `k`, to be later used when constructing the factorizing matrices:
 
 ```
 k = 16
@@ -66,31 +68,25 @@ Then to store both matrices: `A` and `B` we only need:
 m * k + n * k => 16,160,000
 ```
 
-Making it into a fraction of the original required space:
+Making it into a fraction of the previous number:
 
 ```
 (m * k + n * k) / (m * n) => 0.001616
 ```
 
-That's a **huge** saving. It goes with the small increase in the cost of the information retrieval. Inference of the rating from `C` based on `A` and `B` requires a **dot product** of the corresponding row and column of those matrices.
+That's a **huge** saving of the original space! The cost we need to pay is the small increase in the computational resources needed for the information retrieval. Inference of the rating from `C` based on `A` and `B` requires a **dot product** of the corresponding row and column of those matrices.
 
 ## Reasoning about the matrix factors
 
-What intuition can we build for the above mentioned matrices `A` and `B`? Looking at their dimensions, we can see that each row of `A` is a `k`-sized vector that represents a user. Conversely, each column of `B` is a `k`-sized vector that represents an item. They are being called "latent features" or "latent representations" of users and items.
+What intuition can we build for the above mentioned matrices `A` and `B`? Looking at their dimensions, we can see that each row of `A` is a `k`-sized vector that represents a user. Conversely, each column of `B` is a `k`-sized vector that represents an item. The values in those vectors are being called **latent features**. Sometimes those vectors are being called **latent representations** of users and items.
 
-What could be the intuition? The factorizing algorithm takes all interactions with other users for any given item into account. The result is the latent feature vector of k elements. You can imagine the algorithm finding patterns in the ratings that later on match certain characteristics of the item. If this was about movies, the features could be that it's a comedy or sci-fi, that it's futuristic or embedded deeply in some ancient times etc. We're essentially taking the original vector of a movie, that contains ratings or empty value for each user — and based on that we're distilling features of the movie that describe it best.
+What could be the intuition? To split the original matrix, for each item we need to look at all interactions with users. You can imagine the algorithm finding patterns in the ratings that later on match certain characteristics of the item. If this was about movies, the features could be that it's a comedy or sci-fi or that it's futuristic or embedded deeply in some ancient times. We're essentially taking the original vector of a movie, that contains ratings — and based on that we're distilling features of the movie that describe it best. Note that this is only a half-truth. We think about it this way just to have a way to explain why the approach works. In many cases we could have a hard time finding the actual real world aspects that those latent features follow. 
  
-## Factorizing the user / item matrix in practice
+## Factorizing the user × item matrix in practice
 
-An extremely simple approach I'd like to show here, is to use a neural net. It's going to have matrices `A` and `B` as learnable parameters. The output for each row ow `A` and column of `B` is going to be a simple dot product. We're going to use a L2 loss which in essence sum of the squared differences between the output and the known rating.
+A simple approach to find matrices `A` and `B` is to initialize them randomly first. Then by computing the dot product of each row and column having a known value in `C`, we can compute how much it differs from the known value. Because dot product is easily differentiable, we can use [gradient descend](https://en.wikipedia.org/wiki/Gradient_descent) to iteratively improve our matrices `A` and `B` until `AB` is close enough to `C` for our purposes.
 
-The goal is to learn the values of `A` and `B` so that their product `AB` is very close to `C`.
-
-## Getting the dataset
-
-In this article, I'm going to use a freely available database of joke ratings, called "Jester". It contains data about ratings from 59132 users and 150 jokes.
-
-It's available to download from [Berkeley](http://eigentaste.berkeley.edu/dataset/)
+In this article, I'm going to use a freely available database of joke ratings, called "[Jester](http://eigentaste.berkeley.edu/dataset/)". It contains data about ratings from 59132 users and 150 jokes.
 
 ## Coding the model with MXNet
 
@@ -105,15 +101,12 @@ import mxnet as mx
 import numpy as np
 import random
 import logging
-import sys
 import re
 ```
 
-We'll need an iterator over the training batches read from the data files. In this simple scenario, it'll be just fine to read the whole data into memory and yield the batches from there.
+First step in building the training process is to create an iterator over the training batches read from the data files. To make things trivially simple, I'll read the whole data into memory. The batches will be constructed each time from the data cached in memory.
 
-It wouldn't be much more complicated to read the data on the fly from disk. This would be required in case e. g. the data not fitting into the memory.
-
-Recent developments of `MXNet` bring a lot of the architectural goodness we've observed and loved in `PyTorch`. The `DataIter` class comes in the similar spirit. To create a custom data iterator, you'll need to inherit from `mxnet.io.DataIter` and implement two methods at least: `next` and `reset`. Here's our simple in-memory implementation:
+To create a custom data iterator, we'll need to inherit from `mxnet.io.DataIter` and implement at least two methods: `next` and `reset`. Here's our simple code:
 
 ```python
 class DataIter(mx.io.DataIter):
@@ -121,13 +114,11 @@ class DataIter(mx.io.DataIter):
         super(DataIter, self).__init__()
         self.batch_size = batch_size
         self.all_user_ids = set()
-        self.all_item_ids = set()
         self.data = data
         self.index = 0
         
         for user_id, item_id, _ in data:
             self.all_user_ids.add(user_id)
-            self.all_item_ids.add(item_id)
         
     @property
     def user_count(self):
@@ -166,51 +157,44 @@ class DataIter(mx.io.DataIter):
         random.shuffle(self.data)
 ```
 
-The above `DataIter` class expects to be given a `numpy` array with all the training examples. The first column represents a user, second an item and third the rating.
+The above `DataIter` class expects to be given a `numpy` array with all the training examples. The first dimension represents a user, second an item and third the rating.
 
-We'll need to write some code that will read data from disk and feed it into the `DataIter`'s constructor:
+Here's the code for reading data from disk and feeding it into the `DataIter`'s constructor:
 
 ```python
 def get_data(batch_size):
-    def get_all_raw_data():
-        user_ids = []
-        item_ids = []
-        ratings = []
+    user_ids = []
+    item_ids = []
+    ratings = []
 
-        print('Loading examples...')
+    with open("data/jester_ratings.dat", "r") as file:
+        for line in file:
+            user_id, _, item_id, _, rating = line.strip().split("\t")
 
-        with open("data/jester_ratings.dat", "r") as file:
-            for line in file:
-                user_id, _, item_id, _, rating = line.strip().split("\t")
+            user_ids.append(int(user_id))
+            item_ids.append(int(item_id))
+            ratings.append(float(rating) / 10.0)
 
-                user_ids.append(int(user_id))
-                item_ids.append(int(item_id))
-                ratings.append(float(rating) / 10.0)
-
-        return np.asarray(list(zip(user_ids, item_ids, ratings)), dtype='float32')
-    
-    all_raw = get_all_raw_data()
+    all_raw = np.asarray(list(zip(user_ids, item_ids, ratings)), dtype='float32')
     
     return DataIter(all_raw,  batch_size = batch_size)
 ```
 
-Notice that I'm dividing each rating by `10` to scale the ratings from `<-10,10>` to `<-1,1>`. I did this because I found the process hitting overflows when using e. g. the `Adam` optimizer.
+Notice that I'm dividing each rating by `10` to scale the ratings from `<-10,10>` to `<-1,1>`. I'm doing it because I found the process hitting numerical overflows when using the `Adam` optimizer.
 
-Here's how we can use the function to obtain the training data iterator:
+The function accepts the `batch_size` as an argument. Below I'm creating a dataset iterator yielding 64 examples at a time:
 
 ```python
 train = get_data(64)
 ```
 
-To continue with the `PyTorch` style of coding, we're going to use the `mxnet.gluon` module with its classes to define the neural network.
+Recent versions of `MXNet` bring in a similar coding model to one found in `PyTorch`. We can use the clean approach of defining the model by extending the base class and defining the `forward` method. This is possible by using the `mxnet.gluon` module that defines the `Block` class.
 
-The approach is very clean. You first inherit from the `mxnet.gluon.Block` and then you define the `forward` method that is going to be used during the forward network pass.
+As a full-featured deep learning framework, `MXNet` has its own implementation of calculating gradients automatically. The `forward` method in our `Block` inherited class is all we need to proceed with the gradient descend.
 
-MXNet has its own implementation of automatic gradient calculations. You only need to care about the forward pass — the gradients will be computed automatically.
+In our model, the `A` and `B` matrices will be encoded within the `gluon` layers of type `Embedding`. The `Embedding` class lets you specify the number of rows in the matrix as well as the dimension into which we're "squashing" them. Using the class is very handy as it doesn't require you to "[one hot encode](https://en.wikipedia.org/wiki/One-hot)" our user and item ids.
 
-In our case, the `A` and `B` will be encoded within the `gluon` layers of type `Embedding`. It let's you specify the number of all the users and items as well as the dimension into which we're "squashing" them. It's also extremely handy as we won't need to "one hot encode" our user and item ids as the `Embedding` layer will do that for us.
-
-Here's the implementation of our very simple network. Notice that all it really is, is a regression. The model also is linear so we're not going to use any activation functions:
+Following is the implementation of our simple model as `MXNet` block. Notice that all it really is, is a regression. The model is linear so we're not using any [activation function](https://en.wikipedia.org/wiki/Activation_function):
 
 ```python
 class Model(Block):
@@ -225,12 +209,13 @@ class Model(Block):
         user = self.user_embedding(x[0] - 1)
         item = self.item_embedding(x[1] - 1)
         
+        # the following is a dot product in essence
+        # summing up of the element-wise multiplication
         pred = user * item
-        
         return F.sum_axis(pred, axis = 1)
 ```
 
-Next, we'll need to create the `MXNet` computation context as well as an instance of the model itself. Before doing any kind of learning, the parameters of the model will need to be initialized:
+Next, I'm creating the `MXNet` computation context as well as an instance of the model itself. Before doing any kind of learning, the parameters of the model will need to be initialized:
 
 ```python
 context = mx.gpu() if mx.test_utils.list_gpus() else mx.cpu()
@@ -238,16 +223,18 @@ model = Model(16, train)
 model.collect_params().initialize(mx.init.Xavier(), ctx=context)
 ```
 
-We are going to save the state of the model periodically to a file. You'd then be able to load them with:
+The last line from above is initializing the `A` and `B` matrices randomly.
+
+We are going to save the state of the model periodically to a file. We'll be able to load them back with:
 
 ```python
 model.load_params("model.mxnet", ctx=context)
 ```
 
-The last bit of code that we need is the train ing procedure itself. We're going to code it as a function that take the model, the data iterator and the number of epochs and the learning rate:
+The last bit of code that we need is the training procedure itself. We're going to code it as a function that takes the model, the data iterator and the number of epochs:
 
 ```python
-def fit(model, train, num_epoch):    
+def fit(model, train, num_epoch):
     trainer = Trainer(model.collect_params(), 'adam')
 
     for epoch_id in range(num_epoch):
@@ -275,13 +262,13 @@ def fit(model, train, num_epoch):
         model.save_params("model.mxnet")
 ```
 
-Let's run the trainer for 10 epochs:
+Running the trainer for 10 epochs is as simple as:
 
 ```python
 fit(model, train, num_epoch=10, learning_rate=.05)
 ```
 
-You should see the output similar to the one below:
+The training process is periodically outputting statistics similar to ones below:
 
 ```
 INFO:root:Epoch 1 / 10 | Batch 1000 | Mean Loss: 0.11189080774784088
@@ -307,7 +294,7 @@ user_embed = model.collect_params().get('embedding0_weight').data()
 joke_embed = model.collect_params().get('embedding1_weight').data()
 ```
 
-Let's see how the first user is represented in this latent matrix:
+Each user's latent representation is a vector of `k` values:
 
 ```python
 > user_embed[0]
@@ -318,7 +305,7 @@ Let's see how the first user is represented in this latent matrix:
 <NDArray 16 @cpu(0)>
 ```
 
-And here is how the joke no 7 looks like:
+The same case is with the latent representations of jokes:
 
 ```python
 > joke_embed[7]
@@ -345,7 +332,7 @@ Comparing it with the value from the file:
 1               8               -9.281
 ```
 
-That's close enough. Let's now get the set of all joke ids that the first user ranked:
+That's close enough. Let's now get the set of all joke ids rated by the first user:
 
 ```python
 test = get_data(1)
@@ -357,7 +344,7 @@ for batch in test:
 joke_ids
 ```
 
-Which outputs:
+The above code outputs:
 
 ```python
 {5.0, 7.0, 8.0, 13.0, 15.0, 16.0, 17.0, 18.0, 19.0, 20.0, 21.0, 22.0, 23.0, 24.0, 25.0, 26.0, 27.0, 29.0, 31.0, 32.0, 34.0, 35.0, 36.0, 42.0, 49.0, 50.0, 51.0, 52.0, 53.0, 54.0, 61.0, 62.0, 65.0, 66.0, 68.0, 69.0, 72.0, 76.0, 80.0, 81.0, 83.0, 87.0, 89.0, 91.0, 92.0, 93.0, 102.0, 103.0, 104.0, 105.0, 106.0, 107.0, 108.0, 109.0, 118.0, 119.0, 120.0, 121.0, 123.0, 127.0, 128.0, 134.0}
@@ -458,11 +445,11 @@ Because we're mostly interested in the items that have not been yet rated by the
  (87, 23.8028883934021)]
 ```
 
-The above output presents joke ids along with the predicted user #1 rating. We can see that some values fall outside of the `<-10, 10>` range which is fine. We can simply treat the smaller than `-10` ones as `-10` and greater than `10` as `10`.
+The above output presents joke ids along with the prediction of what rating user1 would give them. We can see that some values fall outside of the `<-10, 10>` range which is fine. We can simply treat the smaller than `-10` ones as `-10` and greater than `10` as `10`.
 
 Immediately we can see that with this recommender model we could recommend the jokes: `146, 149, 27, 143, 113, 66, 139, 142, 128, 141, 54, 55, 37, 87`.
 
-To have a little bit more fun, let's create some code for reading the actual text of the jokes. The following class will handy when stripping HTML tags from the jokes file:
+To have a little bit more fun, let's create code for reading the actual text of the jokes. I took the following class from [StackOverflow](https://stackoverflow.com/questions/11061058/using-htmlparser-in-python-3-2). We'll use it for stripping HTML tags from the jokes file:
 
 ```python
 from html.parser import HTMLParser
@@ -503,7 +490,7 @@ def get_jokes():
     return jokes
 ```
 
-Let's now read the jokes from the disk and see one of the jokes our system would recommend to the first user:
+Let's now read them from disk and see an example joke our system would recommend to the first user:
 
 ```python
 > jokes = get_jokes()
@@ -512,13 +499,11 @@ Let's now read the jokes from the disk and see one of the jokes our system would
 'A Czechoslovakian man felt his eyesight was growing steadily worse, and felt it was time to go see an optometrist.\n\nThe doctor started with some simple testing, and showed him a standard eye chart with letters of diminishing size: CRKBNWXSKZY...\n\n"Can you read this?" the doctor asked.\n\n"Read it?" the Czech answered. "Doc, I know him!"'
 ```
 
-## Using the item feature vectors to find similar ones
+## Using the item feature vectors to find similarities
 
-One cool thing we can do with the latent representation of jokes, is that we can now measure how similar they are in terms of appealing to certain users.
+One cool thing we can do with the latent vectors, is to measure how similar they are in terms of appealing to certain users. To do that we can use a so-called **cosine similarity**. The subject is very clearly described by Christian S. Perone [in his blog post](http://blog.christianperone.com/2013/09/machine-learning-cosine-similarity-for-vector-space-models-part-iii/).
 
-To do that we can use a so-called **cosine similarity**. The subject is very clearly described by Christian S. Perone [in his blog post](http://blog.christianperone.com/2013/09/machine-learning-cosine-similarity-for-vector-space-models-part-iii/).
-
-If you don't feel like reading it, let me just state that a cosine similarity makes use of the angle between the two vectors and returns its cosine. Notice that it only cares about the angle between the vectors, and **not** their magnitudes. The domain of the cosine function is `<-1, 1>` and so is for the *cosine similarity* as well.
+If you don't feel like reading it, let me just briefly explain that it makes use of the angle between the two vectors and returns its cosine. Notice that it only cares about the angle between the vectors, and **not** their magnitudes. The domain of the cosine function is `<-1, 1>` and so is for the *cosine similarity* as well. It translates to our sense of similarity quite naturally: `-1` meaning "the total opposite" and `1` meaning "exactly the same".
 
 We can trivially implement the function as a product of the dot products of the vectors normalized to units: 
 
@@ -527,7 +512,7 @@ def cos_similarity(vec1, vec2):
     return mx.nd.dot(vec1, vec2) / (F.norm(vec1) * F.norm(vec2))
 ```
 
-We can use the new measurement to rank the jokes in terms of it. Here's a function that takes a joke_id and returns list of ids along with the similarity ranks:
+We can use the new measurement to rank the jokes in terms of how close they are. Here's a function that takes a joke id and returns list of ids along with the similarity ratings:
 
 ```python
 def get_scores(joke_id):
@@ -538,17 +523,17 @@ def get_scores(joke_id):
     return scores
 ```
 
-The following function takes a joke_id and takes 4, most similar jokes. It then prints then one by one in a little summary:
+The following function takes a joke_id and takes 4, most similar jokes. It then prints them one by one in a summary:
 
 ```python
 def print_joke_stats(ix):
-		def sort_by_second(t):
+		def by_second(t):
 		    if t[1] is None:
 		        return -2
 		    else:
 		        return t[1]
     similar = get_scores(ix)
-    similar.sort(key=sort_by_second)
+    similar.sort(key=by_second)
     similar.reverse()
     
     print(f'Jokes making same people laugh compared to:\n\n=== \n{jokes[ix]}\n===:\n\n')
@@ -600,15 +585,13 @@ As they are eating and chatting, he eventually asks the farmer why the pig is th
 
 ## Final words
 
-The approach presented here is relatively simple. Provided that you have enough data for each item — it's surprisingly accurate.
+The approach presented here is relatively simple, yet people have found it surprisingly accurate. It depends though on having enough data for each item. Otherwise the accuracy degrades. An extreme case of not having enough data is called a [cold start](https://en.wikipedia.org/wiki/Cold_start_(computing)).
 
-In cases where you wouldn't have that much data though, the approach described in this article would inevitably degrade in its accuracy.
-
-Accuracy isn't also the only goal. [Wikipedia page about the recommender systems](https://en.wikipedia.org/wiki/Recommender_system) lists e. g. "Serendipity" as an important factor in a successful system:
+Also, accuracy is not the only goal. [Wikipedia](https://en.wikipedia.org/wiki/Recommender_system) lists features like "Serendipity" as an important factor of a successful system among others:
 
 > Serendipity is a measure of "how surprising the recommendations are". For instance, a recommender system that recommends milk to a customer in a grocery store might be perfectly accurate, but it is not a good recommendation because it is an obvious item for the customer to buy. However, high scores of serendipity may have a negative impact on accuracy.
 
-Researchers have been working on different approaches to tackling the above mentioned issues. E. g. Netflix is known to be using a so-called "Hybrid" approach — one that uses both content and collaborative based recommender. As per [Wikipedia](https://en.wikipedia.org/wiki/Recommender_system):
+Researchers have been working on different approaches to tackling the above mentioned issues. Netflix is known to be using a so-called "Hybrid" approach — one that uses both content and collaborative based recommender. As per [Wikipedia](https://en.wikipedia.org/wiki/Recommender_system):
 
 > Netflix is a good example of the use of hybrid recommender systems.[48] The website makes recommendations by comparing the watching and searching habits of similar users (i.e., collaborative filtering) as well as by offering movies that share characteristics with films that a user has rated highly (content-based filtering).
 
