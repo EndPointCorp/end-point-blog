@@ -1,4 +1,8 @@
-# Recommender System via a simple Matrix Factorization
+---
+author: Kamil Ciemniewski
+title: "Recommender System via a simple Matrix Factorization"
+tags: python, mxnet, machine-learning
+---
 
 We all like how apps like Spotify or Last.fm can recommend us a song that feels so much like our taste. Being able to recommend an item to a user is very important for keeping and expanding the user base.
 
