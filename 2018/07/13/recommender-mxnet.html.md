@@ -507,7 +507,7 @@ Let's now read them from disk and see an example joke our system would recommend
 
 One cool thing we can do with the latent vectors, is to measure how similar they are in terms of appealing to certain users. To do that we can use a so-called **cosine similarity**. The subject is very clearly described by Christian S. Perone [in his blog post](http://blog.christianperone.com/2013/09/machine-learning-cosine-similarity-for-vector-space-models-part-iii/).
 
-If you don't feel like reading it, let me just briefly explain that it makes use of the angle between the two vectors and returns its cosine. Notice that it only cares about the angle between the vectors, and **not** their magnitudes. The domain of the cosine function is `<-1, 1>` and so is for the *cosine similarity* as well. It translates to our sense of similarity quite naturally: `-1` meaning "the total opposite" and `1` meaning "exactly the same".
+If you don't feel like reading it, let me just briefly explain that it makes use of the angle between the two vectors and returns its cosine. Notice that it only cares about the angle between the vectors, and **not** their magnitudes. The codomain of the cosine function is `<-1, 1>` and so is for the *cosine similarity* as well. It translates to our sense of similarity quite naturally: `-1` meaning "the total opposite" and `1` meaning "exactly the same".
 
 We can trivially implement the function as a product of the dot products of the vectors normalized to units: 
 
