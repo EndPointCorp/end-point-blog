@@ -9,9 +9,9 @@ Written and spoken communication involve language, and language builds on a lot 
 
 ### 2-dimensional measurements
 
-Width always comes first, followed by height. This is a longstanding printing and paper measurement custom. 8.5" x 11" = 8.5 inches wide by 11 inches high. Always. Of course it never hurts to say specifically if you’re the one writing: 8.5" wide x 11" high, or 360px wide x 140px high.
+Width always comes first, followed by height. This is a longstanding printing and paper measurement custom. 8.5” x 11” = 8.5 inches wide by 11 inches high. Always. Of course it never hurts to say specifically if you’re the one writing: 8.5” wide x 11” high, or 360px wide x 140px high.
 
-If a third dimension comes into play, it goes last: 10" (horiz.) x 10" (vertical) x 4" (deep).
+If a third dimension comes into play, it goes last: 10” (horiz.) x 10” (vertical) x 4” (deep).
 
 ### Dates
 
@@ -25,7 +25,7 @@ When dealing with anyone who isn’t at the some location you are, specify a tim
 
 You can save others some mental strain by translating times into the time zone of the majority of other participants, especially if there’s an overwhelming majority in one particular time zone. It’s polite.
 
-In time zones, the word “standard” isn’t just filler meaning “normal time zones” -- it specifically means “not daylight saving time”! So don’t say “Eastern Standard Time” unless you really mean “Eastern Time outside of daylight saving”, referring to somewhere that doesn’t observe daylight saving time. It’s simplest and most often correct in conversation to just say “Eastern Time”. When people say “*Something* Standard Time” but daylight saving time is in effect, beware, because they probably actually just mean “*Something* Time, either daylight or not, whichever is in effect then”. It’s good to ask them and confirm what they meant.
+In time zones, the word “standard” isn’t just filler meaning “normal time zones”—​it specifically means “not daylight saving time”! So don’t say “Eastern Standard Time” unless you really mean “Eastern Time outside of daylight saving”, referring to somewhere that doesn’t observe daylight saving time. It’s simplest and most often correct in conversation to just say “Eastern Time”. When people say “*Something* Standard Time” but daylight saving time is in effect, beware, because they probably actually just mean “*Something* Time, either daylight or not, whichever is in effect then”. It’s good to ask them and confirm what they meant.
 
 Just to keep things interesting, the “S” doesn’t always mean “standard”. [British Summer Time](https://en.wikipedia.org/wiki/British_Summer_Time) is the British daylight saving time zone and is abbreviated BST.
 

@@ -7,15 +7,31 @@ title: 'Tickle me Postgres: Tcl inside PostgreSQL with pl/tcl and pl/tclu'
 
 
 
-Although I really love Pl/Perl and find it the most useful language to write PostgreSQL functions in, Postgres has had (for a long time) another set of procedural languages: **Pl/Tcl** and **Pl/TclU**. The Tcl language is pronounced "tickle", so those two languages are pronounced as "pee-el-tickle" and "pee-el-tickle-you". The pl/tcl languages have been around since before any others, even pl/perl; for a long time in the early days of Postgres using pl/tclu was the only way to do things "outside of the database", such as making system calls, writing files, sending email, etc.
+Although I really love Pl/Perl and find it the most useful language to write PostgreSQL functions in, Postgres has had (for a long time) another set of procedural languages: **Pl/Tcl** and **Pl/TclU**. The Tcl language is pronounced “tickle”, so those two languages are pronounced as “pee-el-tickle” and “pee-el-tickle-you”. The pl/tcl languages have been around since before any others, even pl/perl; for a long time in the early days of Postgres using pl/tclu was the only way to do things “outside of the database”, such as making system calls, writing files, sending email, etc.
 
-Sometimes people are surprised when they hear I still use Tcl. Although it's not as widely mentioned as other procedural languages, it's a very clean, easy to read, powerful language that shouldn't be overlooked. Of course, with Postgres, you have a wide variety of languages to write your functions in, including:
+Sometimes people are surprised when they hear I still use Tcl. Although it’s not as widely mentioned as other procedural languages, it’s a very clean, easy to read, powerful language that shouldn’t be overlooked. Of course, with Postgres, you have a wide variety of languages to write your functions in, including:
 
-- [Perl](http://www.postgresql.org/docs/current/static/plperl.html) (my favorite)- [Tcl](http://www.postgresql.org/docs/current/interactive/pltcl-overview.html) (second favorite)- [Python](http://www.postgresql.org/docs/current/interactive/plpython.html) (distant third)- [Ruby](http://moulon.inra.fr/ruby/plruby.html)- [Scheme](http://plscheme.projects.postgresql.org/)- [LOLCODE](http://pgfoundry.org/projects/pllolcode)- [PHP](https://www.commandprompt.com/community/plphp/)- [sh](http://plsh.projects.postgresql.org/)- [Java](http://pgfoundry.org/projects/pljava/)
+- [Perl](https://www.postgresql.org/docs/current/static/plperl.html) (my favorite)
 
-The nice thing about [Tcl](http://wiki.tcl.tk/299) is that not only is it an easy language to write in, it's fully supported by Postgres. Only three languages are maintained inside the Postgres tree itself: Perl, Tcl, and Python. Only two of those have a trusted and untrusted version: Perl and Tcl. All procedural languages in Postgres are untrusted by default, which means they can do things like make system calls. To be a trusted language, there must be some capacity to limit what can be done by the language. With Perl, this is accomplished through the "Safe" Perl module. For Tcl, this is accomplished by having two versions of the Tcl interpreter: a normal one for pltclu and a separate one that uses the ["Safe-Tcl mechanism"](http://www.tcl.tk/software/plugin/safetcl.html) for pltcl.
+- [Tcl](https://www.postgresql.org/docs/current/interactive/pltcl-overview.html) (second favorite)
 
-Let's take a quick look at what a pltcl function looks like. We'll use pl/tcl to implement the common problem of "SELECT COUNT(*) is very slow" by tracking the row count using [triggers](http://www.postgresql.org/docs/current/interactive/trigger-definition.html) as we go along. For this, we'll start with a sample table that we want to be able to find out exactly how many rows are inside of any time, without suffering the delay of COUNT(*). Here's the table definition, and a quick command to populate it with some dummy data:
+- [Python](https://www.postgresql.org/docs/current/interactive/plpython.html) (distant third)
+
+- [Ruby](https://github.com/knu/postgresql-plruby)
+
+- [Scheme](https://github.com/vy/plscheme)
+
+- [LOLCODE](http://pgfoundry.org/projects/pllolcode)
+
+- [PHP](http://plphp.sourceforge.net/)
+
+- [sh](https://github.com/petere/plsh)
+
+- [Java](http://pgfoundry.org/projects/pljava/)
+
+The nice thing about [Tcl](https://wiki.tcl.tk/299) is that not only is it an easy language to write in, it’s fully supported by Postgres. Only three languages are maintained inside the Postgres tree itself: Perl, Tcl, and Python. Only two of those have a trusted and untrusted version: Perl and Tcl. All procedural languages in Postgres are untrusted by default, which means they can do things like make system calls. To be a trusted language, there must be some capacity to limit what can be done by the language. With Perl, this is accomplished through the “Safe” Perl module. For Tcl, this is accomplished by having two versions of the Tcl interpreter: a normal one for pltclu and a separate one that uses the [“Safe-Tcl mechanism”](https://www.tcl.tk/software/plugin/safetcl.html) for pltcl.
+
+Let’s take a quick look at what a pltcl function looks like. We’ll use pl/tcl to implement the common problem of “SELECT COUNT(*) is very slow” by tracking the row count using [triggers](https://www.postgresql.org/docs/current/interactive/trigger-definition.html) as we go along. For this, we’ll start with a sample table that we want to be able to find out exactly how many rows are inside of any time, without suffering the delay of COUNT(*). Here’s the table definition, and a quick command to populate it with some dummy data:
 
 ```sql
 CREATE SEQUENCE customer_id_seq;
@@ -32,9 +48,9 @@ INSERT INTO customer (email, address)
   FROM generate_series(1,10000);
 ```
 
-A quick review: we create a [sequence](http://www.postgresql.org/docs/current/interactive/functions-sequence.html) for use by the table to populate its primary key, the 'id' column. Each customer also has an optional email and address, plus we automatically track when we create the row by using the "DEFAULT now()" trick on the 'cdate' column. Finally, we use the super handy [generate_series](http://www.postgresql.org/docs/current/interactive/functions-srf.html) function to populate the new table with ten thousand rows of data.
+A quick review: we create a [sequence](https://www.postgresql.org/docs/current/interactive/functions-sequence.html) for use by the table to populate its primary key, the ‘id’ column. Each customer also has an optional email and address, plus we automatically track when we create the row by using the “DEFAULT now()” trick on the ‘cdate’ column. Finally, we use the super handy [generate_series](https://www.postgresql.org/docs/current/static/functions-srf.html) function to populate the new table with ten thousand rows of data.
 
-Next, we'll create a helper table that will keep track of the rows for us. We'll make it generic so that it can track any number of tables:
+Next, we’ll create a helper table that will keep track of the rows for us. We’ll make it generic so that it can track any number of tables:
 
 ```sql
 CREATE TABLE table_count (
@@ -47,7 +63,7 @@ INSERT INTO table_count(schemaname,tablename,rows)
   SELECT 'public', 'customer', count(*) FROM customer;
 ```
 
-We also populated it with the current number of rows in customer. Of course, this will be out of date as soon as someone updates the table, so let's add our triggers. We don't want to update the table_count table on every single row change, but only at the end of each statement. To do that, we'll make a row-level trigger that stores up the changes inside a global variable, and then a statement-level trigger that uses the global variable to update the table_count table.
+We also populated it with the current number of rows in customer. Of course, this will be out of date as soon as someone updates the table, so let’s add our triggers. We don’t want to update the table_count table on every single row change, but only at the end of each statement. To do that, we’ll make a row-level trigger that stores up the changes inside a global variable, and then a statement-level trigger that uses the global variable to update the table_count table.
 
 ```sql
 CREATE FUNCTION update_table_count_row()
@@ -143,9 +159,9 @@ CREATE TRIGGER update_table_count_statement
 
 ```
 
-(Caveat: because there is a single Tcl interpreter for all pl/tcl functions, these functions are not 100% safe, as there is a theoretical chance that changes made by processes running at the exact same time may step on each other's global variables. In practice, this is unlikely.)
+(Caveat: because there is a single Tcl interpreter for all pl/tcl functions, these functions are not 100% safe, as there is a theoretical chance that changes made by processes running at the exact same time may step on each other’s global variables. In practice, this is unlikely.)
 
-If everything is working correctly, we should see the entries in the table_count table match up with the output of SELECT COUNT(*). Let's take a look via a psql session:
+If everything is working correctly, we should see the entries in the table_count table match up with the output of SELECT COUNT(*). Let’s take a look via a psql session:
 
 ```sql
 psql=# \t
@@ -215,7 +231,7 @@ CREATE TRIGGER update_table_count_truncate
 
 ```
 
-Pretty straightforward, let's make sure it works:
+Pretty straightforward, let’s make sure it works:
 
 ```sql
 psql=# TRUNCATE TABLE customer;
@@ -226,13 +242,13 @@ public|customer|0
 0
 ```
 
-Success! This was a fairly contrived example, but Tcl (and especially pl/tclU) offers a lot more functionality. If you want to examine pl/tcl and pl/tclu for yourself, you'll need to make sure it's compiled into the Postgres you are using. If using a packaging system, it's as simple as doing this (or something like it, depending on what packaging system you use):
+Success! This was a fairly contrived example, but Tcl (and especially pl/tclU) offers a lot more functionality. If you want to examine pl/tcl and pl/tclu for yourself, you’ll need to make sure it’s compiled into the Postgres you are using. If using a packaging system, it’s as simple as doing this (or something like it, depending on what packaging system you use):
 
 ```bash
 yum install postgresql-pltcl
 ```
 
-If compiling from source, just pass the *--with-tcl* option to **configure**. You'll probably also need to install the Tcl development package, e.g. with yum install tcl-devel
+If compiling from source, just pass the *--with-tcl* option to **configure**. You’ll probably also need to install the Tcl development package, e.g. with yum install tcl-devel
 
 Once installed, installing it into a specific database is as simple as:
 
@@ -243,6 +259,6 @@ $ CREATE LANGUAGE pltclu;
 CREATE LANGUAGE
 ```
 
-For more about Tcl, check out the [The Tcl Wiki](http://wiki.tcl.tk/_/welcome), the [Tcl tutorial](http://www.tcl.tk/man/tcl8.5/tutorial/tcltutorial.html), or this [Tcl reference](http://www.tcl.tk/man/tcl8.5/). For more about pl/tcl and pl/tclu. visit the [Postgres pltcl documentation](http://www.postgresql.org/docs/current/interactive/pltcl-overview.html)
+For more about Tcl, check out the [The Tcl Wiki](https://wiki.tcl.tk/), the [Tcl tutorial](https://www.tcl.tk/man/tcl8.5/tutorial/tcltutorial.html), or this [Tcl reference](https://www.tcl.tk/man/tcl8.5/). For more about pl/tcl and pl/tclu. visit the [Postgres pltcl documentation](https://www.postgresql.org/docs/current/static/pltcl-overview.html)
 
 

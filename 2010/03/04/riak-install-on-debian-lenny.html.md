@@ -7,9 +7,9 @@ title: Riak Install on Debian Lenny
 
 
 
-I'm doing some comparative analysis of various distributed non-relational databases and consequently wrestled with the installation of [Riak](http://riak.basho.com/) on a server running Debian Lenny.
+I’m doing some comparative analysis of various distributed non-relational databases and consequently wrestled with the installation of [Riak](http://basho.com/products/) on a server running Debian Lenny.
 
-I relied upon the standard "erlang" debian package, which installs cleanly on a basically bare system without a hitch (as one would expect).  However, the latest Riak's "make" tasks fail to run; this is because the rebar script on which the make tasks rely chokes on various bad characters:
+I relied upon the standard “erlang” debian package, which installs cleanly on a basically bare system without a hitch (as one would expect). However, the latest Riak’s “make” tasks fail to run; this is because the rebar script on which the make tasks rely chokes on various bad characters:
 
 ```nohighlight
 riak@nosql-01:~/riak$ make all rel
@@ -31,9 +31,9 @@ make: *** [compile] Error 127
 
 Delicious.
 
-Ultimately, I came across this article describing issues [getting Riak to install on Ubuntu 9.04](http://onerlang.blogspot.com/2009/10/fighting-with-riak.html), and ultimately determined that the Erlang version mentioned seemed to apply here.  Following the article's instructions for building Erlang from source worked out fine, and so far I've been able to start, ping, and stop the local Riak server without incident.
+Ultimately, I came across this article describing issues [getting Riak to install on Ubuntu 9.04](http://onerlang.blogspot.com/2009/10/fighting-with-riak.html), and ultimately determined that the Erlang version mentioned seemed to apply here. Following the article’s instructions for building Erlang from source worked out fine, and so far I’ve been able to start, ping, and stop the local Riak server without incident.
 
-Since a true investigation requires running these kinds of tools in a cluster, and that means automation of the installation/configuration is desirable, I've been scripting out the configuration steps (putting things into a configuration management tool like [Puppet](http://reductivelabs.com/trac/puppet/) will come later when we're farther along and closer to picking the right solution for the problem in question).  So, here's the script I've been running to build these things from my local machine (relying upon SSH); these are rough, a work in progress, and are not intended as examples of excellence, elegance, or beauty -- they simply get the job done (so far) for me and may help somebody else.
+Since a true investigation requires running these kinds of tools in a cluster, and that means automation of the installation/configuration is desirable, I’ve been scripting out the configuration steps (putting things into a configuration management tool like [Puppet](https://puppet.com/) will come later when we’re farther along and closer to picking the right solution for the problem in question). So, here’s the script I’ve been running to build these things from my local machine (relying upon SSH); these are rough, a work in progress, and are not intended as examples of excellence, elegance, or beauty—​they simply get the job done (so far) for me and may help somebody else.
 
 ```bash
 #!/bin/sh
@@ -64,6 +64,6 @@ su -c 'mv $riak_release/rel riak' - riak
 "
 ```
 
-(I have other scripts for preparing the box post-OS-install, but I don't think they impact this particular part of the process.)
+(I have other scripts for preparing the box post-OS-install, but I don’t think they impact this particular part of the process.)
 
 

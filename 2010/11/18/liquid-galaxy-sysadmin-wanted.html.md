@@ -11,7 +11,7 @@ Responsibilities:
 
 - Set up and upgrade Liquid Galaxy Systems at client locations. (Some travel is required, including internationally.)
 - Do on site and remote troubleshooting and support.
-- Participate in ongoing work to improve the system with automation, monitoring, and customizing configurations to clients' needs.
+- Participate in ongoing work to improve the system with automation, monitoring, and customizing configurations to clients’ needs.
 - Provide first-class customer service.
 
 Requirements:
@@ -34,6 +34,6 @@ If you have experience with any of the following it is likely to be useful:
 - Video capture, processing, and production technologies
 - Puppet.
 
-While we have a strong preference that this position be a hire for our New York City office where most of our Liquid Galaxy team is located, we don't entirely rule out the possibility of hiring someone who works out of his or her home office if the fit is right.
+While we have a strong preference that this position be a hire for our New York City office where most of our Liquid Galaxy team is located, we don’t entirely rule out the possibility of hiring someone who works out of his or her home office if the fit is right.
 
 Please email [jobs@endpoint.com](mailto:jobs@endpoint.com) to apply.

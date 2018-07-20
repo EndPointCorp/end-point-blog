@@ -118,20 +118,20 @@ message.deliver
 
 ### RailTies
 
-A few talks about Rails 3 mentioned the use of [RailTies](http://rubyforge.org/projects/railties/), which serves as the interface between the Rails framework and the rest of its components. It accepts configuration from application.rb, sets up initializers in extensions, tells Rails about generators and rake tasks in extensions, gems, plugins.
+A few talks about Rails 3 mentioned the use of [RailTies](http://edgeapi.rubyonrails.org/classes/Rails/Railtie.html), which serves as the interface between the Rails framework and the rest of its components. It accepts configuration from application.rb, sets up initializers in extensions, tells Rails about generators and rake tasks in extensions, gems, plugins.
 
 ### Rails 3.1
 
-[DHH](http://www.loudthinking.com/) briefly spoke about some Rails 3.1 things he's excited about, including reorganization of the public directory assets and implementing sprite functionality, which I am a big fan of.
+[DHH](http://david.heinemeierhansson.com/) briefly spoke about some Rails 3.1 things he’s excited about, including reorganization of the public directory assets and implementing sprite functionality, which I am a big fan of.
 
 ### Rails 3 Resources
 
 A few recommended Rails 3 learning resources were mentioned throughout the conference, including:
 
-- [Rails 3 Screencasts](http://rubyonrails.org/screencasts/rails3) by Gregg Pollack
-- [The Rails 3 Upgrade Handbook](http://www.railsupgradehandbook.com/) by Jeremy McAnally
-- [The Rails Dispatch Blog](http://www.railsdispatch.com/)
-- [The Great Decoupling](http://yehudakatz.com/2009/07/19/rails-3-the-great-decoupling/) by Yehuda Katz
-- [Rails API Documentation](http://railsapi.com/)
+- [Rails 3 Screencasts](https://web.archive.org/web/20100612184031/http://rubyonrails.org/screencasts/rails3) by Gregg Pollack
+- [The Rails 3 Upgrade Handbook](https://web.archive.org/web/20100722101913/http://www.railsupgradehandbook.com/) by Jeremy McAnally
+- [The Rails Dispatch Blog](https://www.railsdispatch.com/)
+- [The Great Decoupling](https://yehudakatz.com/2009/07/19/rails-3-the-great-decoupling/) by Yehuda Katz
+- [Rails API Documentation](https://web.archive.org/web/20100723135724/http://railsapi.com/)
 
 There are tons of resources out there on these topics and more that I found as I was putting this article together. Go look and write code!

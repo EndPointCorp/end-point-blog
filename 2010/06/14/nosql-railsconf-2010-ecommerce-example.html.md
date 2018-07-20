@@ -5,16 +5,16 @@ tags: database, ecommerce, nosql, ruby, rails, spree
 title: 'NoSQL at RailsConf 2010: An Ecommerce Example'
 ---
 
-Even more so than Rails 3, [NoSQL](http://en.wikipedia.org/wiki/NoSQL) was a popular technical topic at RailsConf this year. I haven't had much exposure to NoSQL except for reading a few articles written by Ethan ([Quick Thoughts on NoSQL Live Boston Conference](/blog/2010/03/11/quick-thoughts-on-nosql-live-boston), [NoSQL Live: The Dynamo Derivatives (Cassandra, Voldemort, Riak)](/blog/2010/03/12/nosql-live-dynamo-derivatives-cassandra), and [Cassandra, Thrift, and Fibers in EventMachine](/blog/2010/05/08/cassandra-thrift-and-fibers-in)), so I attended a few sessions to learn more.
+Even more so than Rails 3, [NoSQL](https://en.wikipedia.org/wiki/NoSQL) was a popular technical topic at RailsConf this year. I haven’t had much exposure to NoSQL except for reading a few articles written by Ethan ([Quick Thoughts on NoSQL Live Boston Conference](/blog/2010/03/11/quick-thoughts-on-nosql-live-boston), [NoSQL Live: The Dynamo Derivatives (Cassandra, Voldemort, Riak)](/blog/2010/03/12/nosql-live-dynamo-derivatives-cassandra), and [Cassandra, Thrift, and Fibers in EventMachine](/blog/2010/05/08/cassandra-thrift-and-fibers-in)), so I attended a few sessions to learn more.
 
-First, it was reinforced several times that if you can read JSON, you should have no problem comprehending NoSQL. So, it shouldn't be too hard to jump into code examples! Next, I found it helpful when one of the speakers presented high-level categorization of NoSQL, whether or not the categories meant much to me at the time:
+First, it was reinforced several times that if you can read JSON, you should have no problem comprehending NoSQL. So, it shouldn’t be too hard to jump into code examples! Next, I found it helpful when one of the speakers presented high-level categorization of NoSQL, whether or not the categories meant much to me at the time:
 
 - **Key-Value Stores:** Advantages include that this is the simplest possible data model. Disadvantages include that range queries are not straightforward and modeling can get complicated. Examples include Redis, Riak, Voldemort, Tokyo Cabinet, MemcacheDB.
 - **Document stores:** Advantages include that the value associated with a key is a document that exposes a structure that allows some database operations to be performed on it. Examples include CouchDB, MongoDB, Riak, FleetDB.
 - **Column-based stores:** Examples include Cassandra, HBase.
 - **Graph stores:** Advantages include that this allows for deep relationships. Examples include Neo4j, HypergraphDB, InfoGrid.
 
-In one NoSQL talk, [Flip Sasser](http://x451.com/) presented an example to demonstrate how an ecommerce application might be migrated to use NoSQL, which was the most efficient (and very familiar) way for me to gain an understanding of NoSQL use in a Rails application. Flip introduced the models and relationships shown here:
+In one NoSQL talk, [Flip Sasser](https://web.archive.org/web/20100610062845/http://x451.com/) presented an example to demonstrate how an ecommerce application might be migrated to use NoSQL, which was the most efficient (and very familiar) way for me to gain an understanding of NoSQL use in a Rails application. Flip introduced the models and relationships shown here:
 
 <img alt="" border="0" id="BLOGGER_PHOTO_ID_5482744501534322754" src="/blog/2010/06/14/nosql-railsconf-2010-ecommerce-example/image-0.png" style="display:block; margin:0px auto 10px; text-align:center;cursor:pointer; cursor:hand;width: 600px;"/>
 
@@ -97,7 +97,7 @@ class Notification < OpenStruct
 end
 ```
 
-The user model remains an ActiveRecord model and uses the devise gem for user authentication, but is modified to retrieve the notifications, now an OpenStruct. The result is that whenever a user's friend makes a purchase, the user is notified of the purchase. In this simple example, a purchase contains one product only.
+The user model remains an ActiveRecord model and uses the devise gem for user authentication, but is modified to retrieve the notifications, now an OpenStruct. The result is that whenever a user’s friend makes a purchase, the user is notified of the purchase. In this simple example, a purchase contains one product only.
 
 **Before**
 
@@ -135,4 +135,4 @@ class User < ActiveRecord::Base
 end
 ```
 
-The disadvantages to the NoSQL and RDBMS hybrid is that data portability is limited and ActiveRecord plugins can no longer be used. But the general idea is that performance justifies the move to NoSQL for some data. In several sessions I attended, the speakers reiterated that you will likely never be in a situation where you'll only use NoSQL, but that it's another tool available to suit performance-related business needs. I later spoke with a few [Spree](http://spreecommerce.com/) developers and we concluded that the NoSQL approach may work well in **some** applications for product and variant data for improved performance with flexibility, but we didn't come to an agreement on where else this approach may be applied.
+The disadvantages to the NoSQL and RDBMS hybrid is that data portability is limited and ActiveRecord plugins can no longer be used. But the general idea is that performance justifies the move to NoSQL for some data. In several sessions I attended, the speakers reiterated that you will likely never be in a situation where you’ll only use NoSQL, but that it’s another tool available to suit performance-related business needs. I later spoke with a few [Spree](https://spreecommerce.org/) developers and we concluded that the NoSQL approach may work well in **some** applications for product and variant data for improved performance with flexibility, but we didn’t come to an agreement on where else this approach may be applied.

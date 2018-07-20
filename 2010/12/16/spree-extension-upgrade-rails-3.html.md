@@ -5,9 +5,9 @@ tags: ecommerce, rails, spree
 title: Dissecting a Rails 3 Spree Extension Upgrade
 ---
 
-A while back, I wrote about the release of Spree 0.30.* [here](/blog/2010/10/25/spree-on-rails-3-part-one) and [here](/blog/2010/10/25/spree-on-rails-3-part-two). I didn't describe extension development in depth because I hadn't developed any Rails 3 extensions of substance for End Point's clients. Last month, I worked on an advanced reporting extension for a client running on Spree 0.10.2. I spent some time upgrading this extension to be compatible with Rails 3 because I expect the client to move in the direction of Rails 3 and because I wanted the extension to be available to the community since Spree's reporting is fairly lightweight.
+A while back, I wrote about the release of Spree 0.30.* [here](/blog/2010/10/25/spree-on-rails-3-part-one) and [here](/blog/2010/10/25/spree-on-rails-3-part-two). I didn’t describe extension development in depth because I hadn’t developed any Rails 3 extensions of substance for End Point’s clients. Last month, I worked on an advanced reporting extension for a client running on Spree 0.10.2. I spent some time upgrading this extension to be compatible with Rails 3 because I expect the client to move in the direction of Rails 3 and because I wanted the extension to be available to the community since Spree’s reporting is fairly lightweight.
 
-Just a quick rundown on what the extension does: It provides incremental reports such as revenue, units sold, profit (calculated by sales minus cost) in daily, weekly, monthly, quarterly, and yearly increments. It reports Geodata to show revenue, units sold, and profit by [US] states and countries. There are also two special reports that show top products and customers. The extension allows administrators to limit results by order date, "store" (for [Spree's multi-site architecture](/blog/2010/05/24/spree-multi-store-architecture)), product, and taxon. Finally, the extension provides the ability to export data in PDF or CSV format using the Ruport gem. One thing to note is that this extensions does not include new models – this is significant only because Rails 3 introduced significant changes to ActiveRecord, which are not described in this article.
+Just a quick rundown on what the extension does: It provides incremental reports such as revenue, units sold, profit (calculated by sales minus cost) in daily, weekly, monthly, quarterly, and yearly increments. It reports Geodata to show revenue, units sold, and profit by [US] states and countries. There are also two special reports that show top products and customers. The extension allows administrators to limit results by order date, “store” (for [Spree’s multi-site architecture](/blog/2010/05/24/spree-multi-store-architecture)), product, and taxon. Finally, the extension provides the ability to export data in PDF or CSV format using the Ruport gem. One thing to note is that this extensions does not include new models—​this is significant only because Rails 3 introduced significant changes to ActiveRecord, which are not described in this article.
 
 <table cellpadding="0" cellspacing="0" width="100%">
 <tbody><tr>
@@ -30,13 +30,13 @@ Just a quick rundown on what the extension does: It provides incremental reports
 Screenshots of the Spree Advanced Reporting extension.
 </td></tr></tbody></table>
 
-To deconstruct the upgrade, I examined a git diff of the master and rails3 branch. I've divided the topics into Rails 3 and Spree specific categories.
+To deconstruct the upgrade, I examined a git diff of the master and rails3 branch. I’ve divided the topics into Rails 3 and Spree specific categories.
 
-## Rails 3 Specific
+### Rails 3 Specific
 
-### SafeBuffers
+#### SafeBuffers
 
-In my report extension, I utilize Ruport's to_html method, which returns a ruport table object to an HTML table. With the upgrade to Rails 3, ruports to_html was spitting out escaped HTML with the addition of default XSS protection. The change is described [here](http://yehudakatz.com/2010/02/01/safebuffers-and-rails-3-0/). and required the addition of a new helper method (raw) to yield unescaped HTML:
+In my report extension, I utilize Ruport’s to_html method, which returns a ruport table object to an HTML table. With the upgrade to Rails 3, ruports to_html was spitting out escaped HTML with the addition of default XSS protection. The change is described [here](https://yehudakatz.com/2010/02/01/safebuffers-and-rails-3-0/). and required the addition of a new helper method (raw) to yield unescaped HTML:
 
 ```diff
 diff --git a/app/views/admin/reports/top_base.html.erb b/app/views/admin/reports/top_base.html.erb
@@ -48,7 +48,7 @@ index 6cc6b70..92f2118 100644
 +<%= raw @report.ruportdata.to_html %>
 ```
 
-### Common Deprecation Messages
+#### Common Deprecation Messages
 
 While troubleshooting the upgrade, I came across the following warning:
 
@@ -73,7 +73,7 @@ index ba69a2e..6d9c3f9 100644
 
 ```
 
-### Integrating Gems
+#### Integrating Gems
 
 An exciting change in Rails 3 is the advancement of Rails::Engines to allow easier inclusion of mini-applications inside the main application. In an ecommerce platform, it makes sense to break up the system components into Rails Engines. Extensions become gems in Spree and gems can be released through rubygems.org. A gemspec is required in order for my extension to be treated as a gem by my main application, shown below. Componentizing elements of a larger platform into gems may become popular with the advancement of Rails::Engines / Railties.
 
@@ -106,7 +106,7 @@ index 0000000..71f00a8
 +end
 ```
 
-### Routing Updates
+#### Routing Updates
 
 With the release of Rails 3, there was a major rewrite of the router and integration of rack-mount. The [Rails 3 release notes on Action Dispatch](http://edgeguides.rubyonrails.org/3_0_release_notes.html#action-dispatch) provide a good starting point of resources. In the case of my extension, I rewrote the contents of config/routes.rb:
 
@@ -158,11 +158,11 @@ end
 </pre>
 </td></tr></tbody></table>
 
-## Spree Specific
+### Spree Specific
 
-### Transition extension to Engine
+#### Transition extension to Engine
 
-The biggest transition to Rails 3 based Spree requires extensions to transition to Rails Engines. In Spree 0.11.*, the extension class inherits from Spree::Extension and the path of activation for extensions in Spree 0.11.* starts in initializer.rb where the ExtensionLoader is called to load and activate all extensions. In Spree 0.30.*, extensions inherit from Rails:Engine which is a subclass of Rails::Railtie. Making an extension a Rails::Engine allows it to hook into all parts of the Rails initialization process and interact with the application object. A Rails engine allows you run a mini application inside the main application, which is at the core of what a Spree extension is – a self-contained Rails application that is included in the main ecommerce application to introduce new features or override core behavior.
+The biggest transition to Rails 3 based Spree requires extensions to transition to Rails Engines. In Spree 0.11.*, the extension class inherits from Spree::Extension and the path of activation for extensions in Spree 0.11.* starts in initializer.rb where the ExtensionLoader is called to load and activate all extensions. In Spree 0.30.*, extensions inherit from Rails:Engine which is a subclass of Rails::Railtie. Making an extension a Rails::Engine allows it to hook into all parts of the Rails initialization process and interact with the application object. A Rails engine allows you run a mini application inside the main application, which is at the core of what a Spree extension is—​a self-contained Rails application that is included in the main ecommerce application to introduce new features or override core behavior.
 
 See the diffs between versions here:
 
@@ -237,7 +237,7 @@ index 0000000..4e6fee6
 </pre>
 </td></tr></tbody></table>
 
-### Required Rake Tasks
+#### Required Rake Tasks
 
 Rails Engines in Rails 3.1 will allow migrations and public assets to be accessed from engine subdirectories, but a work-around is required to access migrations and assets in the main application directory in the meantime. There are a few options for accessing Engine migrations and assets; Spree recommends a couple rake tasks to copy assets to the application root, shown here:
 
@@ -275,7 +275,7 @@ index 0000000..c878a04
 +end
 ```
 
-### Relocation of hooks file
+#### Relocation of hooks file
 
 A minor change with the extension upgrade is a relocation of the hooks file. Spree hooks allow you to interact with core Spree views, described more in depth [here](/blog/2010/01/12/rails-ecommerce-spree-hooks-tutorial) and [here](/blog/2010/01/13/rails-ecommerce-spree-hooks-comments).
 
@@ -301,9 +301,9 @@ index 0000000..cca155e
 +end
 ```
 
-### Adoption of "Decorator" naming convention
+#### Adoption of “Decorator” naming convention
 
-A common behavior in Spree extensions is to override or extend core controllers and models. With the upgrade, Spree adopts the "decorator" naming convention:
+A common behavior in Spree extensions is to override or extend core controllers and models. With the upgrade, Spree adopts the “decorator” naming convention:
 
 ```ruby
 Dir.glob(File.join(File.dirname(__FILE__), "../app/**/*_decorator*.rb")) do |c|
@@ -313,9 +313,9 @@ end
 
 I prefer to extend the controllers and models with module includes, but the decorator convention also works nicely.
 
-### Gem Dependency Updates
+#### Gem Dependency Updates
 
-With the transition to Rails 3, I found that there were changes related to dependency upgrades. Spree 0.11.* uses searchlogic 2.3.5, and Spree 0.30.1 uses searchlogic 3.0.0.*. Searchlogic is the gem that performs the search for orders in my report to pull orders between a certain time frame or tied to a specific store. I didn't go digging around in the searchlogic upgrade changes, but I referenced Spree's core implementation of searchlogic to determine the required updates:
+With the transition to Rails 3, I found that there were changes related to dependency upgrades. Spree 0.11.* uses searchlogic 2.3.5, and Spree 0.30.1 uses searchlogic 3.0.0.*. Searchlogic is the gem that performs the search for orders in my report to pull orders between a certain time frame or tied to a specific store. I didn’t go digging around in the searchlogic upgrade changes, but I referenced Spree’s core implementation of searchlogic to determine the required updates:
 
 
 
@@ -357,9 +357,9 @@ diff --git a/lib/advanced_report.rb b/lib/advanced_report.rb
      if params[:advanced_reporting]
 ```
 
-### Rakefile diffs
+#### Rakefile diffs
 
-Finally, there are substantial changes to the Rakefile, which are related to rake tasks and testing framework. These didn't impact my development directly. Perhaps when I get into more significant testing on another extension, I'll dig deeper into the code changes here.
+Finally, there are substantial changes to the Rakefile, which are related to rake tasks and testing framework. These didn’t impact my development directly. Perhaps when I get into more significant testing on another extension, I’ll dig deeper into the code changes here.
 
 ```diff
 diff --git a/Rakefile b/Rakefile
@@ -367,4 +367,4 @@ index f279cc8..f9e6a0e 100644
 # lots of stuff
 ```
 
-For those interested in learning more about the upgrade process, I recommend the reviewing the [Rails 3 Release Notes](http://edgeguides.rubyonrails.org/3_0_release_notes.html) in addition to reading up on Rails Engines as they are an important part of Spree's core and extension architecture. The advanced reporting extension described in this article is available [here](https://github.com/stephskardal/spree-advanced-reporting).
+For those interested in learning more about the upgrade process, I recommend the reviewing the [Rails 3 Release Notes](http://edgeguides.rubyonrails.org/3_0_release_notes.html) in addition to reading up on Rails Engines as they are an important part of Spree’s core and extension architecture. The advanced reporting extension described in this article is available [here](https://github.com/stephskardal/spree-advanced-reporting).

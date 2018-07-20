@@ -34,7 +34,7 @@ for (var i = 0; i < links.length; i++) {
 </script>
 ```
 
-You could use various ways to identify the links to be player-ized, but I chose to just associate the links with a class, "mp3":
+You could use various ways to identify the links to be player-ized, but I chose to just associate the links with a class, “mp3”:
 
 ```nohighlight
 <a class="mp3" href="/path/to/file.mp3">Audio File 1</a>

@@ -2,15 +2,15 @@
 author: Ron Phipps
 gh_issue_number: 291
 tags: ecommerce, interchange, open-source
-title: Using charge tag in Interchange's profiles, and trickiness with logic and tag
+title: Using charge tag in Interchange’s profiles, and trickiness with logic and tag
   interpolation order
 ---
 
 
 
-One of the standard ways to charging in older versions of the Interchange demo was to do the charging from a profile using the &charge command. New versions of the demo store do the charging from log_transaction once the order profiles have finished, so it is not an issue there. I've come across quite a few catalogs where the &charge command is replaced with the [charge] tag wrapped in if-then-else blocks in an order profile. It had been so long since I had used &charge so I needed to lookup how options are passed to it, which may be why people tend to use the tag version instead of the &charge command. The problem here is that Interchange tags interpolate before any of the profile specifications execute, so if you have a [charge] tag in an order profile, it executes before any of the other checks, such as validation of fields.
+One of the standard ways to charging in older versions of the Interchange demo was to do the charging from a profile using the &charge command. New versions of the demo store do the charging from log_transaction once the order profiles have finished, so it is not an issue there. I’ve come across quite a few catalogs where the &charge command is replaced with the [charge] tag wrapped in if-then-else blocks in an order profile. It had been so long since I had used &charge so I needed to lookup how options are passed to it, which may be why people tend to use the tag version instead of the &charge command. The problem here is that Interchange tags interpolate before any of the profile specifications execute, so if you have a [charge] tag in an order profile, it executes before any of the other checks, such as validation of fields.
 
-Here's a stripped down example of where a profile will have tags executed before the other profile checks:
+Here’s a stripped down example of where a profile will have tags executed before the other profile checks:
 
 ```nohighlight
 lname=required Last name required

@@ -5,15 +5,15 @@ tags: hosting, rails, spree
 title: Spree on Heroku for Development
 ---
 
-Yesterday, I worked through some issues to setup and run Spree on Heroku. One of End Point's clients is using Spree for a multi-store solution. We are using the the [recently released Spree 0.10.0.beta gem](http://spreecommerce.com/blog/2010/03/06/spree-0100beta-now-available/), which includes some significant Spree template and hook changes discussed [here](/blog/2010/01/12/rails-ecommerce-spree-hooks-tutorial) and [here](/blog/2010/01/13/rails-ecommerce-spree-hooks-comments) in addition to other substantial updates and fixes. Our client will be using Heroku for their production server, but our first goal was to work through deployment issues to use Heroku for development.
+Yesterday, I worked through some issues to setup and run Spree on Heroku. One of End Point’s clients is using Spree for a multi-store solution. We are using the the [recently released Spree 0.10.0.beta gem](https://web.archive.org/web/20101128022443/http://spreecommerce.com/blog/2010/03/06/spree-0100beta-now-available/), which includes some significant Spree template and hook changes discussed [here](/blog/2010/01/12/rails-ecommerce-spree-hooks-tutorial) and [here](/blog/2010/01/13/rails-ecommerce-spree-hooks-comments) in addition to other substantial updates and fixes. Our client will be using Heroku for their production server, but our first goal was to work through deployment issues to use Heroku for development.
 
-<a href="http://heroku.com/" onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5446672221379055490" src="/blog/2010/03/08/spree-heroku-development-environment/image-0.png" style="display:block; margin:0px auto 10px; text-align:center;cursor:pointer; cursor:hand;width: 194px; height: 66px;"/></a>
+<a href="https://www.heroku.com/" onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5446672221379055490" src="/blog/2010/03/08/spree-heroku-development-environment/image-0.png" style="display:block; margin:0px auto 10px; text-align:center;cursor:pointer; cursor:hand;width: 194px; height: 66px;"/></a>
 
-Since Heroku includes a free offering to be used for development, it's a great option for a quick and dirty setup to run Spree non-locally. I experienced several problems and summarized them below.
+Since Heroku includes a free offering to be used for development, it’s a great option for a quick and dirty setup to run Spree non-locally. I experienced several problems and summarized them below.
 
 ## Application Changes
 
-**1.** After a failed attempt to setup the basic Heroku installation described [here](http://heroku.com/how/workflow) because of a RubyGems 1.3.6 requirement, I discovered the need for [Heroku's bamboo deployment stack](http://docs.heroku.com/bamboo), which requires you to declare the gems required for your application. I also found the [Spree Heroku extension](http://docs.heroku.com/bamboo) and reviewed the code, but I wanted to take a more simple approach initially since the extension offers several features that I didn't need. After some testing, I created a .gems file in the main application directory including the contents below to specify the gems required on the Badious Bamboo Heroku stack.
+**1.** After a failed attempt to setup the basic Heroku installation described [here](https://devcenter.heroku.com/articles/how-heroku-works) because of a RubyGems 1.3.6 requirement, I discovered the need for [Heroku’s bamboo deployment stack](https://web.archive.org/web/20100308035824/http://docs.heroku.com/bamboo), which requires you to declare the gems required for your application. I also found a Spree Heroku extension and reviewed the code, but I wanted to take a more simple approach initially since the extension offers several features that I didn’t need. After some testing, I created a .gems file in the main application directory including the contents below to specify the gems required on the Badious Bamboo Heroku stack.
 
 ```nohighlight
 rails -v 2.3.5
@@ -33,9 +33,9 @@ paperclip -v '>=2.3.1.1'
 state_machine -v '0.8.0'
 ```
 
-**2.** The next block I hit was that git submodules are not supported by Heroku, mentioned [here](http://docs.heroku.com/constraints#git-submodules). I replaced the git submodules in our application with the Spree extension source code.
+**2.** The next block I hit was that git submodules are not supported by Heroku, mentioned [here](https://web.archive.org/web/20100310162053/http://docs.heroku.com/constraints#git-submodules). I replaced the git submodules in our application with the Spree extension source code.
 
-**3.** I also worked through addressing [Heroku's read-only filesystem](http://docs.heroku.com/constraints#read-only-filesystem) limitation. The setting perform_caching is set to true for a production environment by default in an application running from the Spree gem. In order to run the application for development purposes, perform_caching was set to false in RAILS_APP/config/environments/production.rb:
+**3.** I also worked through addressing [Heroku’s read-only filesystem](https://web.archive.org/web/20100310162053/http://docs.heroku.com/constraints#read-only-filesystem) limitation. The setting perform_caching is set to true for a production environment by default in an application running from the Spree gem. In order to run the application for development purposes, perform_caching was set to false in RAILS_APP/config/environments/production.rb:
 
 ```ruby
 config.action_controller.perform_caching             = false
@@ -53,7 +53,7 @@ AppConfiguration.class_eval do
 end
 ```
 
-Obviously, this isn't the preference setting that will be used for the production application, but it works for a quick and dirty Heroku development app. Heroku's SSL options are described [here](http://docs.heroku.com/ssl).
+Obviously, this isn’t the preference setting that will be used for the production application, but it works for a quick and dirty Heroku development app. Heroku’s SSL options are described [here](http://docs.heroku.com/ssl).
 
 ## Deployment Tips
 
@@ -77,4 +77,4 @@ heroku rake db:bootstrap AUTO_ACCEPT=1
 
 As a side note, I ran the command heroku logs several times to review the latest application logs throughout troubleshooting.
 
-Despite the issues noted above, the troubleshooting yielded an application that can be used for development. I also learned more about Heroku configurations that will need to be addressed when moving the project to production, such as SSL setup and multi domain configuration. We'll also need to determine the best option for serving static content, such as using Amazon's S3, which is supported by the Spree Heroku extension mentioned above.
+Despite the issues noted above, the troubleshooting yielded an application that can be used for development. I also learned more about Heroku configurations that will need to be addressed when moving the project to production, such as SSL setup and multi domain configuration. We’ll also need to determine the best option for serving static content, such as using Amazon’s S3, which is supported by the Spree Heroku extension mentioned above.

@@ -7,7 +7,7 @@ title: Localize $@ in DESTROY
 
 
 
-I have been conditioned now for many years in Perl to trust the relationship of $@ to its preceding eval. The relationship goes something like this: if you have string or block eval, immediately after its execution, $@ will either be false or it will contain the die message of that eval (or the generic "Died at ..." message if none is provided). Implicit here is that evals contained within an eval have their effects on $@ concealed, unless the containing eval "passes on" the inner eval's die.
+I have been conditioned now for many years in Perl to trust the relationship of $@ to its preceding eval. The relationship goes something like this: if you have string or block eval, immediately after its execution, $@ will either be false or it will contain the die message of that eval (or the generic “Died at ...” message if none is provided). Implicit here is that evals contained within an eval have their effects on $@ concealed, unless the containing eval “passes on” the inner eval’s die.
 
 To quickly demonstrate:
 
@@ -69,9 +69,9 @@ $@ after outer eval: Uh oh. Bad outer eval, too at demo.pl line 11.
 [mark@sokt ~]$ 
 ```
 
-Why am I covering this, well known to any serious Perl programmer? Because I was caught off guard troubleshooting for a client last week when the result of an inner eval "leaked" through, affecting $@ of the containing eval. Because I was so conditioned to the stated relationship between eval and $@, it took me quite some time before I even opened up to the possibility.
+Why am I covering this, well known to any serious Perl programmer? Because I was caught off guard troubleshooting for a client last week when the result of an inner eval “leaked” through, affecting $@ of the containing eval. Because I was so conditioned to the stated relationship between eval and $@, it took me quite some time before I even opened up to the possibility.
 
-It turned out the hitch had to do with garbage collection. The key was that the inner eval in question was initially called from a routine within an object's DESTROY method. As I discovered, at least in Perl 5.10, if a containing eval dies, causing an object to go out of scope, and that object's DESTROY itself executes an eval, $@ reflects the exit condition of the eval from within DESTROY, and not that of the containing eval. Even more strange, this is only true *if* the containing eval dies. If instead the containing eval completes, then that same dying eval within DESTROY *does not affect* the condition of $@ after the containing eval. It will still be false, as (IMO) it should be.
+It turned out the hitch had to do with garbage collection. The key was that the inner eval in question was initially called from a routine within an object’s DESTROY method. As I discovered, at least in Perl 5.10, if a containing eval dies, causing an object to go out of scope, and that object’s DESTROY itself executes an eval, $@ reflects the exit condition of the eval from within DESTROY, and not that of the containing eval. Even more strange, this is only true *if* the containing eval dies. If instead the containing eval completes, then that same dying eval within DESTROY *does not affect* the condition of $@ after the containing eval. It will still be false, as (IMO) it should be.
 
 So, some code demonstrating each situation. We have 3 conditions:
 
@@ -161,7 +161,7 @@ Happy days! Our eval code ran to completion. Woot!
 [mark@sokt ~]$ 
 ```
 
-Notice how particularly insidious the above is. We not only don't know what the error was from the eval block that immediately precedes the evaluation of $@, but we actually think it succeeds!
+Notice how particularly insidious the above is. We not only don’t know what the error was from the eval block that immediately precedes the evaluation of $@, but we actually think it succeeds!
 
 Finally, the 3rd condition:
 
@@ -204,9 +204,9 @@ Happy days! Our eval code ran to completion. Woot!
 [mark@sokt ~]$ 
 ```
 
-So, fortunately, case 3 contains the leak when the outer eval completes successfully. We don't introduce the worst possible situation: a successful eval that is subsequently treated as a failure. However, cases 1, and especially 2, are bad enough.
+So, fortunately, case 3 contains the leak when the outer eval completes successfully. We don’t introduce the worst possible situation: a successful eval that is subsequently treated as a failure. However, cases 1, and especially 2, are bad enough.
 
-Now that I know all this, the solution is thankfully simple. When constructing objects, if they include a supplied DESTROY, always localize $@. It doesn't matter whether I execute any evals or not; if the code calls any other routines that do, anywhere in the stack, the problem is introduced. A local $@ provides full protection.
+Now that I know all this, the solution is thankfully simple. When constructing objects, if they include a supplied DESTROY, always localize $@. It doesn’t matter whether I execute any evals or not; if the code calls any other routines that do, anywhere in the stack, the problem is introduced. A local $@ provides full protection.
 
 A rerun of test1 but with localization provides a much more expected result:
 
@@ -250,7 +250,7 @@ $@ comes from code in main eval at test1.pl line 17.
 [mark@sokt ~]$ 
 ```
 
-and test2, which now doesn't lie to us about the success of the eval of interest:
+and test2, which now doesn’t lie to us about the success of the eval of interest:
 
 ```perl
 use strict;

@@ -7,7 +7,7 @@ title: 'Spree on Rails 3: Part One'
 
 
 
-A couple of weeks ago, I jumped into development on Spree on Rails 3. [Spree](http://spreecommerce.com/) is an open source Ruby on Rails ecommerce platform. End Point has been involved in Spree since its inception in 2008, and we continue to develop on Spree with a growing number of clients. Spree began to transition to Rails 3 several months ago. The most recent stable version of Spree (0.11.2) runs on Rails 2.*, but the edge code runs on Rails 3. My personal involvement of Rails 3 based Spree began recently; I waited to look at edge Spree until Rails 3 had a bit of momentum and until Rails 3 based Spree had more documentation and stability. My motivation for looking at it now was to determine whether End Point can recommend Rails 3 based Spree to clients and to share insight to my coworkers and other members of the Spree community.
+A couple of weeks ago, I jumped into development on Spree on Rails 3. [Spree](https://spreecommerce.org/) is an open source Ruby on Rails ecommerce platform. End Point has been involved in Spree since its inception in 2008, and we continue to develop on Spree with a growing number of clients. Spree began to transition to Rails 3 several months ago. The most recent stable version of Spree (0.11.2) runs on Rails 2.*, but the edge code runs on Rails 3. My personal involvement of Rails 3 based Spree began recently; I waited to look at edge Spree until Rails 3 had a bit of momentum and until Rails 3 based Spree had more documentation and stability. My motivation for looking at it now was to determine whether End Point can recommend Rails 3 based Spree to clients and to share insight to my coworkers and other members of the Spree community.
 
 First, I looked at the messy list of gems that have built up on my local machine throughout development of various Rails and Spree projects. I found this simple little script to remove all my old gems:
 
@@ -47,15 +47,15 @@ treetop (1.4.8)
 tzinfo (0.3.23)
 ```
 
-Next, I cloned the Spree edge with the following command from [here](http://github.com/railsdog/spree):
+Next, I cloned the Spree edge with the following command from [here](https://github.com/railsdog/spree):
 
 ```nohighlight
 git clone http://github.com/railsdog/spree.git
 ```
 
-In most cases, developers will run Spree from the gem and not the source code ([see the documentation for more details](http://edgeguides.spreecommerce.com/)). In my case, I wanted to review the source code and identify changes. You might notice that the new spree core directory doesn't look much like the old one, which can be explained by the following: the Spree core code has been broken down into 6 separate core gems (api, auth, core, dash, promo, sample) that run as Rails Engines.
+In most cases, developers will run Spree from the gem and not the source code ([see the documentation for more details](https://guides.spreecommerce.org/)). In my case, I wanted to review the source code and identify changes. You might notice that the new spree core directory doesn’t look much like the old one, which can be explained by the following: the Spree core code has been broken down into 6 separate core gems (api, auth, core, dash, promo, sample) that run as Rails Engines.
 
-After checking out the source code, the first new task to run with edge Spree was bundle install. The bundler gem is intalled by default in Rails 3. It works out of the box in Rails 3, and can work in Rails 2.3 with  additional file and configuration changes. Bundler is a dependency management tool. Gemfile and Gemfile.lock in the Spree core specify which gems are required for the application. Several gems were installed with Spree's bundler configuration, including:
+After checking out the source code, the first new task to run with edge Spree was bundle install. The bundler gem is intalled by default in Rails 3. It works out of the box in Rails 3, and can work in Rails 2.3 with  additional file and configuration changes. Bundler is a dependency management tool. Gemfile and Gemfile.lock in the Spree core specify which gems are required for the application. Several gems were installed with Spree’s bundler configuration, including:
 
 ```nohighlight
 Installing webrat (0.7.2.beta.1) 
@@ -92,8 +92,8 @@ After setup, I ran rails server, the new command for starting a server in Rails 
 
 <a href="/blog/2010/10/25/spree-on-rails-3-part-one/image-0-big.png" onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5532048412737352690" src="/blog/2010/10/25/spree-on-rails-3-part-one/image-0.png" style="display:block; margin:0px auto 10px; text-align:center;cursor:pointer; cursor:hand;width: 400px; height: 204px;"/></a>
 
-Hooray - it's up!
+Hooray—​it’s up!
 
-There wasn't much to getting a Rails 3 application up and running locally. I removed all my old gems, installed Rails 3, grabbed the repository, allowed bundler to install dependencies and worked through one snag. Then, I ran my Spree specific rake task to setup the project and started the server. Tomorrow, I [share my experiences on extension development in Rails 3 based Spree](/blog/2010/10/25/spree-on-rails-3-part-two).
+There wasn’t much to getting a Rails 3 application up and running locally. I removed all my old gems, installed Rails 3, grabbed the repository, allowed bundler to install dependencies and worked through one snag. Then, I ran my Spree specific rake task to setup the project and started the server. Tomorrow, I [share my experiences on extension development in Rails 3 based Spree](/blog/2010/10/25/spree-on-rails-3-part-two).
 
 

@@ -5,7 +5,7 @@ tags: database, postgres
 title: Views across many similar tables
 ---
 
-An application I'm working on has a host of (a dozen or so) status tables, each containing various rows that reflect the state of associated rows in other tables. For instance:
+An application I’m working on has a host of (a dozen or so) status tables, each containing various rows that reflect the state of associated rows in other tables. For instance:
 
 ```sql
 Table "public.inventory"
@@ -27,9 +27,9 @@ repaired  | Repaired
 ```
 etc.
 
-Several of the codes are common to several tables. For instance, "void" is a status that occurs in seven tables. The application cares about this; there are code-level triggers that will respond to a change of status to "void" in one table, and pass that information along to another table higher up the chain.
+Several of the codes are common to several tables. For instance, “void” is a status that occurs in seven tables. The application cares about this; there are code-level triggers that will respond to a change of status to “void” in one table, and pass that information along to another table higher up the chain.
 
-Since I wasn't present at the birth of the system (nor do I have unlimited memory to keep 180+ codes in my head), I needed a way to answer the question, "In which table(s) does status 'foo' occur?" This was made rather easier by attention to detail early on: each of the status tables was named "*_statuses"; each primary key was named "code"; and each human-readable description field was named "display_label". I wrote a Pl/PgSQL function to create a view spanning all the tables. (I could have just created the SQL by hand, but I wanted a way to reproduce this effort later, if tables are added, dropped, or modified.)
+Since I wasn’t present at the birth of the system (nor do I have unlimited memory to keep 180+ codes in my head), I needed a way to answer the question, “In which table(s) does status ‘foo’ occur?” This was made rather easier by attention to detail early on: each of the status tables was named “*_statuses”; each primary key was named “code”; and each human-readable description field was named “display_label”. I wrote a Pl/PgSQL function to create a view spanning all the tables. (I could have just created the SQL by hand, but I wanted a way to reproduce this effort later, if tables are added, dropped, or modified.)
 
 ```sql
 CREATE FUNCTION create_all_statuses()
@@ -70,7 +70,7 @@ END;
 $$;
 ```
 
-Now it's easy to answer the question:
+Now it’s easy to answer the question:
 
 ```sql
 select * from all_statuses where code = 'void';
@@ -83,4 +83,4 @@ void | Void          | pick_list_statuses
 ```
 etc.
 
-If your database uses boilerplate columns such as "last_modified" or "date_created" to record timestamps on rows, you could use similar logic to create a view that would tell you which tables were the most recently modified.
+If your database uses boilerplate columns such as “last_modified” or “date_created” to record timestamps on rows, you could use similar logic to create a view that would tell you which tables were the most recently modified.

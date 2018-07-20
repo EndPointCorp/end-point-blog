@@ -7,15 +7,15 @@ title: Automatic migration from Slony to Bucardo
 
 
 
-About [a month ago](https://mail.endcrypt.com/pipermail/bucardo-general/2009-December/000489.html), Bucardo added an interesting set of features in the form of a [new script called slony_migrator.pl](http://github.com/bucardo/bucardo/blob/master/scripts/slony_migrator.pl). In this post I'll describe slony_migrator.pl and its three major functions.
+About [a month ago](https://mail.endcrypt.com/pipermail/bucardo-general/2009-December/000489.html), Bucardo added an interesting set of features in the form of a [new script called slony_migrator.pl](https://github.com/bucardo/bucardo/blob/master/scripts/slony_migrator.pl). In this post I’ll describe slony_migrator.pl and its three major functions.
 
-## The Setup
+### The Setup
 
-For these examples, I'm using the [pagila sample database](http://pgfoundry.org/projects/dbsamples/) along with a set of scripts I wrote and made available [here](http://josh.endpoint.com/slony-pagila.tgz). These scripts build two different Slony clusters. The first is a simple one, which replicates this database from a database called "pagila1" on one host to a database "pagila2" on another host. The second is more complex. Its one master node replicates the pagila database to two slave nodes, one of which replicates it again to a fourth slave using Slony's FORWARD function as described [here](/blog/2010/01/28/postgres-slony-cascading-subscription). I implemented this setup on two FreeBSD virtual machines, known as myfreebsd and myfreebsd2. The reset-simple.sh and reset-complex.sh scripts in the script package I've linked to will build all the necessary databases from one pagila database and do all the Slony configuration.
+For these examples, I’m using the [pagila sample database](http://pgfoundry.org/projects/dbsamples/) along with a set of scripts I wrote and made available [here](http://josh.endpoint.com/slony-pagila.tgz). These scripts build two different Slony clusters. The first is a simple one, which replicates this database from a database called "pagila1" on one host to a database "pagila2" on another host. The second is more complex. Its one master node replicates the pagila database to two slave nodes, one of which replicates it again to a fourth slave using Slony’s FORWARD function as described [here](/blog/2010/01/28/postgres-slony-cascading-subscription). I implemented this setup on two FreeBSD virtual machines, known as myfreebsd and myfreebsd2. The reset-simple.sh and reset-complex.sh scripts in the script package I’ve linked to will build all the necessary databases from one pagila database and do all the Slony configuration.
 
-## Slony Synopsis
+### Slony Synopsis
 
-The slony_migrator.pl script has three possible actions, the first of which is to connect to a running Slony cluster and print a synopsis of the Slony setup it discovers. You can do this safely against a running, production Slony cluster; it gathers all its necessary information from a few simple Slony queries. Here's the synopsis the script writes for the simple configuration I described above:
+The slony_migrator.pl script has three possible actions, the first of which is to connect to a running Slony cluster and print a synopsis of the Slony setup it discovers. You can do this safely against a running, production Slony cluster; it gathers all its necessary information from a few simple Slony queries. Here’s the synopsis the script writes for the simple configuration I described above:
 
 ```nohighlight
 josh@eddie:~/devel/bucardo/scripts$ ./slony_migrator.pl -db pagila1 -H myfreebsd
@@ -31,7 +31,7 @@ SET 1: All pagila tables
      (dbname=pagila2 host=myfreebsd2 user=postgres)
 ```
 
-The script has reported the Slony, PostgreSQL, and psql versions, the Slony schema name, and shows that there's only one set, replicated from the master node to one slave node, including connection information for each node. Here is the output of the same action, run against the complex slony setup. Notice that node 3 has node 2 as its provider, not node 1:
+The script has reported the Slony, PostgreSQL, and psql versions, the Slony schema name, and shows that there’s only one set, replicated from the master node to one slave node, including connection information for each node. Here is the output of the same action, run against the complex slony setup. Notice that node 3 has node 2 as its provider, not node 1:
 
 ```nohighlight
 josh@eddie:~/devel/bucardo/scripts$ ./slony_migrator.pl -db pagila1 -H myfreebsd
@@ -53,9 +53,9 @@ SET 1: All pagila tables
 
 This is a simple way to get an idea of how a Slony cluster is organized. Again, we can get all this without downtime or any impact on the Slony cluster.
 
-## Creating Slonik Scripts Automatically
+### Creating Slonik Scripts Automatically
 
-Slony gets its configuration entirely through scripts passed to an application called Slonik, which writes configuration entries into a Slony schema within a replicated database. At least as far as I know, however, Slony doesn't provide a way to regenerate those scripts based on the contents of that schema. The slony_migrator.pl script will do that for you with the --slonik option. For example, here is the Slonik script it generates for the simple configuration:
+Slony gets its configuration entirely through scripts passed to an application called Slonik, which writes configuration entries into a Slony schema within a replicated database. At least as far as I know, however, Slony doesn’t provide a way to regenerate those scripts based on the contents of that schema. The slony_migrator.pl script will do that for you with the --slonik option. For example, here is the Slonik script it generates for the simple configuration:
 
 ```nohighlight
 josh@eddie:~/devel/bucardo/scripts$ ./slony_migrator.pl -db pagila1 -H myfreebsd --slonik
@@ -81,7 +81,7 @@ SET ADD SEQUENCE (ID = 5, ORIGIN = 1, SET ID = 1, FULLY QUALIFIED NAME = 'public
 SUBSCRIBE SET (ID = 1, PROVIDER = 1, RECEIVER = 2, FORWARD = YES);
 ```
 
-The pagila database contains many tables and sequences, and I've removed the repetitive commands to tell Slony about all of them, for the sake of brevity, but in its original form, the code above would rebuild the simple Slony cluster exactly, and can be very useful for getting an idea of how an otherwise unknown cluster is configured. I won't promise the Slonik code is ideal, but it does recreate a working cluster. The more complex Slonik output is very similar, differing only in how the sets are subscribed. Here I'll show only the major differences, which are the commands required to create the more complex Slony subscription scheme. In the downloadable script package I mentioned above, this subscription code is somewhat more complex, specifically because Slony won't let you subscribe node 3 to updates from node 2 until node 2 is fully subscribed itself. The slony_migrator.pl script isn't smart enough on its own to add necessary WAIT FOR EVENT Slonik commands, but it does get most of the code right, and, importantly, creates the subscriptions in the proper order.
+The pagila database contains many tables and sequences, and I’ve removed the repetitive commands to tell Slony about all of them, for the sake of brevity, but in its original form, the code above would rebuild the simple Slony cluster exactly, and can be very useful for getting an idea of how an otherwise unknown cluster is configured. I won’t promise the Slonik code is ideal, but it does recreate a working cluster. The more complex Slonik output is very similar, differing only in how the sets are subscribed. Here I’ll show only the major differences, which are the commands required to create the more complex Slony subscription scheme. In the downloadable script package I mentioned above, this subscription code is somewhat more complex, specifically because Slony won’t let you subscribe node 3 to updates from node 2 until node 2 is fully subscribed itself. The slony_migrator.pl script isn’t smart enough on its own to add necessary WAIT FOR EVENT Slonik commands, but it does get most of the code right, and, importantly, creates the subscriptions in the proper order.
 
 ```nohighlight
 SET ADD SEQUENCE (ID = 10, ORIGIN = 1, SET ID = 1, FULLY QUALIFIED NAME = 'public.payment_payment_id_seq', COMMENT = 'public.payment_payment_id_seq');
@@ -91,9 +91,9 @@ SUBSCRIBE SET (ID = 1, PROVIDER = 1, RECEIVER = 2, FORWARD = YES);
 SUBSCRIBE SET (ID = 1, PROVIDER = 2, RECEIVER = 3, FORWARD = YES);
 ```
 
-## Migrating Slony Clusters to Bucardo
+### Migrating Slony Clusters to Bucardo
 
-The final slony_migrator.pl option will create a set of bucardo_ctl commands to create a Bucardo cluster to match an existing Slony setup. Although Bucardo can be configured by directly modifying its configuration database, a great deal of work of late has gone into making configuration easier through the bucardo_ctl program. Here's the output from slony_migrator.pl on the simple Slony cluster. Note the --bucardo command-line option, which invokes this function:
+The final slony_migrator.pl option will create a set of bucardo_ctl commands to create a Bucardo cluster to match an existing Slony setup. Although Bucardo can be configured by directly modifying its configuration database, a great deal of work of late has gone into making configuration easier through the bucardo_ctl program. Here’s the output from slony_migrator.pl on the simple Slony cluster. Note the --bucardo command-line option, which invokes this function:
 
 ```nohighlight
 josh@eddie:~/devel/bucardo/scripts$ ./slony_migrator.pl -db pagila1 -H myfreebsd --bucardo
@@ -112,7 +112,7 @@ josh@eddie:~/devel/bucardo/scripts$ ./slony_migrator.pl -db pagila1 -H myfreebsd
 ./bucardo_ctl add sync pagila_set1_node1_to_node2 source=pagila_node1_set1 targetdb=pagila_2 type=pushdelta
 ```
 
-The Bucardo model of a replication system differs from Slony, but the two match fairly closely, especially for a simple scenario like this one. But slony_migrator.pl will work for the more complex Slony example I've been using, shown here:
+The Bucardo model of a replication system differs from Slony, but the two match fairly closely, especially for a simple scenario like this one. But slony_migrator.pl will work for the more complex Slony example I’ve been using, shown here:
 
 ```nohighlight
 josh@eddie:~/devel/bucardo/scripts$ ./slony_migrator.pl -db pagila1 -H myfreebsd --bucardo
@@ -138,11 +138,11 @@ josh@eddie:~/devel/bucardo/scripts$ ./slony_migrator.pl -db pagila1 -H myfreebsd
 ./bucardo_ctl add sync pagila_set1_node2_to_node3 source=pagila_node2_set1 targetdb=pagila_3 type=pushdelta
 ```
 
-I mentioned the Bucardo data model differs from that of Slony. Slony contains a set of tables and sequences in a "set", and that Slony set remains a distinct object on all databases where those objects are found. Bucardo, on the other hand, has a concept of a "sync", which is a replication job from one database to one or more slaves (here I'm talking only about master->slave syncs, and ignoring for purposes of this post Bucardo's ability to do multi-master replication). This makes the setup slightly different for the more complex Slony scenario, in that whereas Slony has one set and different subscriptions, in Bucardo I need to define the tables and sequences involved in each of three syncs: one from node 1 to node 2, one from node 1 to node 4, and one from node 2 to node 3. I also need to turn on Bucardo's "makedelta" option for the node 1 -> node 2 sync, which is the Bucardo equivalent of the Slony FORWARD subscription option.
+I mentioned the Bucardo data model differs from that of Slony. Slony contains a set of tables and sequences in a “set”, and that Slony set remains a distinct object on all databases where those objects are found. Bucardo, on the other hand, has a concept of a “sync”, which is a replication job from one database to one or more slaves (here I’m talking only about master->slave syncs, and ignoring for purposes of this post Bucardo’s ability to do multi-master replication). This makes the setup slightly different for the more complex Slony scenario, in that whereas Slony has one set and different subscriptions, in Bucardo I need to define the tables and sequences involved in each of three syncs: one from node 1 to node 2, one from node 1 to node 4, and one from node 2 to node 3. I also need to turn on Bucardo’s “makedelta” option for the node 1 -> node 2 sync, which is the Bucardo equivalent of the Slony FORWARD subscription option.
 
-## Migrating from Slony to Bucardo
+### Migrating from Slony to Bucardo
 
-This post is getting long, but for the sake of demonstration let's show a migration from Slony to Bucardo, using the more complex Slony example. First, I'll create a blank database, and install Bucardo in it:
+This post is getting long, but for the sake of demonstration let’s show a migration from Slony to Bucardo, using the more complex Slony example. First, I’ll create a blank database, and install Bucardo in it:
 
 ```nohighlight
 josh@eddie:~/devel/bucardo$ createdb bucardo
@@ -163,7 +163,7 @@ Current connection settings:
 Enter a number to change it, P to proceed, or Q to quit: 
 ```
 
-I'll make the necessary configuration changes, and run the installation by following the simple menu.
+I’ll make the necessary configuration changes, and run the installation by following the simple menu.
 
 ```nohighlight
 Current connection settings:
@@ -189,7 +189,7 @@ You should probably check over the configuration variables next, by running:
 Change any setting by using: ./bucardo_ctl set foo=bar
 ```
 
-Now I'll use slony_migrator.pl to get a set of bucardo_ctl scripts to build my Bucardo cluster:
+Now I’ll use slony_migrator.pl to get a set of bucardo_ctl scripts to build my Bucardo cluster:
 
 ```nohighlight
 josh@eddie:~/devel/bucardo/scripts$ ./slony_migrator.pl -db pagila1 -H myfreebsd --bucardo > pagila-slony2bucardo.sh
@@ -206,7 +206,7 @@ josh@eddie:~/devel/bucardo/scripts$ head pagila-slony2bucardo.sh
 ./bucardo_ctl add table public.film_category db=pagila_1 ping=true standard_conflict=source herd=pagila_node1_set1
 ```
 
-I'll run the script...
+I’ll run the script...
 
 ```nohighlight
 josh@eddie:~/devel/bucardo$ sh scripts/pagila-slony2bucardo.sh
@@ -235,7 +235,7 @@ Added sequence "public.country_country_id_seq"
 Added sync "pagila_set1_node2_to_node3"
 ```
 
-Now all that's left is to shut down Slony (I just use the "pkill slon" command on each database server), start Bucardo, and, eventually, remove the Slony schemas. Note that Bucardo runs only on one machine (which in this case isn't either of the database servers I'm using for this demonstration -- Bucardo can run effectively anywhere you want).
+Now all that’s left is to shut down Slony (I just use the "pkill slon" command on each database server), start Bucardo, and, eventually, remove the Slony schemas. Note that Bucardo runs only on one machine (which in this case isn’t either of the database servers I’m using for this demonstration—​Bucardo can run effectively anywhere you want).
 
 ```nohighlight
 josh@eddie:~/devel/bucardo$ ./bucardo_ctl start
@@ -255,7 +255,7 @@ josh@eddie:~/devel/bucardo$ tail -f log.bucardo
 [Mon Feb  1 21:45:27 2010]  CTL Sent notice "bucardo_syncdone_pagila_set1_node1_to_node4"
 ```
 
-Based on those logs, it looks like everything's running fine, but just to make sure, I'll use bucardo_ctl's "list syncs" and "status" commands:
+Based on those logs, it looks like everything’s running fine, but just to make sure, I’ll use bucardo_ctl’s "list syncs" and "status" commands:
 
 ```nohighlight
 josh@eddie:~/devel/bucardo$ ./bucardo_ctl list syncs
@@ -272,9 +272,9 @@ pagila_set1_node1_to_node4| P   |idle |22953|52s      |0s   |0/0/0|unknown |
 pagila_set1_node2_to_node3| P   |idle |22954|52s      |0s   |0/0/0|unknown |    
 ```
 
-Everything looks good. Before I test that data are really replicated correctly, I'll issue the a "DROP SCHEMA _pagila CASCADE" command in each database, which I can do while Bucardo's running. If this were a production system, the best strategy, to avoid things getting replicated twice) would be to stop all applications, stop Slony, start Bucardo, and start the applications, though because Slony and Bucardo both replicate rows using primary keys, doing otherwise wouldn't cause duplicated data.
+Everything looks good. Before I test that data are really replicated correctly, I’ll issue the a "DROP SCHEMA _pagila CASCADE" command in each database, which I can do while Bucardo’s running. If this were a production system, the best strategy, to avoid things getting replicated twice) would be to stop all applications, stop Slony, start Bucardo, and start the applications, though because Slony and Bucardo both replicate rows using primary keys, doing otherwise wouldn’t cause duplicated data.
 
-Finally, I'll tail the Bucardo logs while inserting rows in the pagila1 database, to see what happens. These rows tell me it's working:
+Finally, I’ll tail the Bucardo logs while inserting rows in the pagila1 database, to see what happens. These rows tell me it’s working:
 
 ```nohighlight
 [Mon Feb  1 21:55:42 2010]  KID Setting sequence public.payment_payment_id_seq to value of 32098, is_called is 1
@@ -300,6 +300,6 @@ In this case I need to "kick" the node 2 -> node 3 sync to get it to replicate, 
 [Mon Feb  1 22:00:34 2010]  CTL Sent notice "bucardo_syncdone_pagila_set1_node2_to_node3"
 ```
 
-Please consider giving slony_migrator.pl a try. I'd be glad to hear how it works out.
+Please consider giving slony_migrator.pl a try. I’d be glad to hear how it works out.
 
 

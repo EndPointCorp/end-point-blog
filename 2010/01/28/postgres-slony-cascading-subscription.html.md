@@ -11,7 +11,7 @@ Sometime you run into a situation where you need to replicate one
 dataset to many machines in multiple datacenters, with different costs
 associated with sending to each (either real costs as in bandwidth, or
 virtual costs as in the amount of time it takes to transmit to each
-machine).  Defining a Slony cluster to handle this is easy, as you can
+machine). Defining a Slony cluster to handle this is easy, as you can
 specify the topology and paths taken to replicate any changes.
 
 Basic topology:
@@ -19,26 +19,26 @@ Basic topology:
 - Data center B, with machines B1, B2, B3, and B4.
 - Data center C, with machines C1, C2, C3, and C4.
 
-<a href="http://4.bp.blogspot.com/_eLhk5Eevkf8/S2H5apImCRI/AAAAAAAAABk/24-aTF5wp50/s1600-h/slony_non_cascaded_pathways.png" onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5431896861699344658" src="/blog/2010/01/28/postgres-slony-cascading-subscription/image-0.png" style="display:block; margin:0px auto 10px; text-align:center;cursor:pointer; cursor:hand;width: 400px; height: 106px;"/><br/>Figure 1: Non-cascaded slony replication nodes/pathways.
+<a href="https://4.bp.blogspot.com/_eLhk5Eevkf8/S2H5apImCRI/AAAAAAAAABk/24-aTF5wp50/s1600-h/slony_non_cascaded_pathways.png" onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5431896861699344658" src="/blog/2010/01/28/postgres-slony-cascading-subscription/image-0.png" style="display:block; margin:0px auto 10px; text-align:center;cursor:pointer; cursor:hand;width: 400px; height: 106px;"/><br/>Figure 1: Non-cascaded slony replication nodes/pathways.
 </a>
 
 Node A1 is the master, which propagates its changes to all other
-machines.  In the simple setup, A1 would push all of its changes to
+machines. In the simple setup, A1 would push all of its changes to
 each node, however if data centers B and C have high costs associated
 with transfer to the nodes, you end up transferring 4x the data needed
-for each data center.  (We are assuming that traffic on the local
+for each data center. (We are assuming that traffic on the local
 subnet at each data center is cheap and fast.)
 
 The basic idea then, is to push the changes only once to each
-datacenter, and let the "master" machine in the data center push the
-changes out to the others in the data center.  This reduces traffic
+datacenter, and let the “master” machine in the data center push the
+changes out to the others in the data center. This reduces traffic
 from the master to each datacenter, plus removes any other associated
 costs associated with pushing to every node.
 
-<a href="http://2.bp.blogspot.com/_eLhk5Eevkf8/S2H56IeyG1I/AAAAAAAAABs/_LxqX_P0n5I/s1600-h/slony_cascaded_pathways.png" onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5431897402689854290" src="/blog/2010/01/28/postgres-slony-cascading-subscription/image-0.png" style="display:block; margin:0px auto 10px; text-align:center;cursor:pointer; cursor:hand;width: 400px; height: 166px;"/><br/>
+<a href="https://2.bp.blogspot.com/_eLhk5Eevkf8/S2H56IeyG1I/AAAAAAAAABs/_LxqX_P0n5I/s1600-h/slony_cascaded_pathways.png" onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5431897402689854290" src="/blog/2010/01/28/postgres-slony-cascading-subscription/image-1.png" style="display:block; margin:0px auto 10px; text-align:center;cursor:pointer; cursor:hand;width: 400px; height: 166px;"/><br/>
 Figure 2: Cascaded slony replication nodes/pathways</a>
 
-Let's look at an example configuration:
+Let’s look at an example configuration:
 
 ```bash
 cluster_init.sh:
@@ -104,16 +104,16 @@ cluster_init.sh:
     EOF
 ```
 
-As you can see in the initialization script, we're defining the basic
-topology for the cluster.  We're defining each individual node, and
+As you can see in the initialization script, we’re defining the basic
+topology for the cluster. We’re defining each individual node, and
 the paths that slony will use to communicate events and other status.
 Since slony needs to communicate status both ways, we need to define
-the paths for each node's edge both ways.  In particular, we've
+the paths for each node’s edge both ways. In particular, we’ve
 defined pathways from A1 to each of the other A nodes, A1 to B1 and
 C1, and B1 and C1 to each of their respective nodes.
 
-Now it's a matter of defining the replication sets and describing the
-subscriptions for each.  We will use something like the following for
+Now it’s a matter of defining the replication sets and describing the
+subscriptions for each. We will use something like the following for
 our script:
 
 ```bash
@@ -135,7 +135,7 @@ cluster_define_set1.sh:
     EOF
 ```
 
-Here we've defined the tables that we want replicated from A1 to the
+Here we’ve defined the tables that we want replicated from A1 to the
 entire cluster; there is nothing specific to this particular scenario
 that we need to consider.
 
@@ -173,15 +173,15 @@ cluster_subscribe_set1.sh:
 ```
 
 The key points here are that you specify the provider nodes and the
-receiver nodes to specify how the particular replication occurs.  For
+receiver nodes to specify how the particular replication occurs. For
 the subscription to any cascade point (i.e., B1 and C1), you need to
-have the 'forward = yes' parameter to ensure that the events properly
-cascade to the sub-nodes.  In any of the other nodes' subscription,
-you should set 'forward = no'.
+have the ‘forward = yes’ parameter to ensure that the events properly
+cascade to the sub-nodes. In any of the other nodes’ subscription,
+you should set ‘forward = no’.
 
 In actual deployment of this setup, you would want to wait for the
 subscription from A1 -> B1 and A1 -> C1 to complete successfully
-before subscribing the sub-nodes.  Additionally, this solution assumes
+before subscribing the sub-nodes. Additionally, this solution assumes
 high availability between nodes and does not address failure of
 particular machines; in particular, A1, B1, and C1 are key to
 maintaining the full replication.

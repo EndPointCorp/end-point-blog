@@ -7,7 +7,7 @@ title: Authlogic and RESTful Authentication Encryption
 
 I recently did a bit of digging around for the migration of user data from RESTful authentication to Authlogic in Rails. My task was to implement changes required to move the application and data from RESTful Authentication to Authlogic user authentication.
 
-I was given a subset of the database dump for new and old users in addition to sample user login data for testing. I didn't necessarily want to use the application to test login functionality, so I examined the repositories [here](http://github.com/technoweenie/restful-authentication) and [here](http://github.com/binarylogic/authlogic) and came up with the two blocks of code shown below to replicate and verify encryption methods and data for both plugins.
+I was given a subset of the database dump for new and old users in addition to sample user login data for testing. I didn’t necessarily want to use the application to test login functionality, so I examined the repositories [here](https://github.com/technoweenie/restful-authentication) and [here](https://github.com/binarylogic/authlogic) and came up with the two blocks of code shown below to replicate and verify encryption methods and data for both plugins.
 
 ## RESTful Authentication
 
@@ -40,7 +40,7 @@ digest = "#{actual_password}#{user.salt}"
 
 Note that the stretches value for Authlogic defaults to 20, but it can be adjusted. Also note that Authlogic uses the SHA-512 hash function by default.
 
-After I verified the encryption of both old user passwords encrypted with RESTful Authentication and new user passwords encrypted Authlogic, I added the verified REST_AUTH_SITE_KEY and REST_AUTH_DIGEST_STRETCHES values to RAILS_ROOT/config/initializers/site_keys.rb and confirmed that the changes implemented in the tutorial described [here](http://www.binarylogic.com/2008/11/23/tutorial-easily-migrate-from-restful_authentication-to-authlogic/) were implemented. The Spree User model already contains the model changes below discussed in the tutorial. As users log in to the application, user authentication is performed against the RESTful authentication crypted password. After a successful login, the password is re-encrypted by Authlogic.
+After I verified the encryption of both old user passwords encrypted with RESTful Authentication and new user passwords encrypted Authlogic, I added the verified REST_AUTH_SITE_KEY and REST_AUTH_DIGEST_STRETCHES values to RAILS_ROOT/config/initializers/site_keys.rb and confirmed that the changes implemented in the tutorial described [here](https://web.archive.org/web/20100722161801/http://www.binarylogic.com/2008/11/23/tutorial-easily-migrate-from-restful_authentication-to-authlogic/) were implemented. The Spree User model already contains the model changes below discussed in the tutorial. As users log in to the application, user authentication is performed against the RESTful authentication crypted password. After a successful login, the password is re-encrypted by Authlogic.
 
 ```ruby
 # app/models/user.rb
@@ -51,4 +51,4 @@ class User < ActiveRecord::Base
 end
 ```
 
-Prior to this task, I hadn't poked around the user authentication code in Rails or Spree. Hopefully, this experience will prepare me for the next time I encounter user migrations with encrypted passwords.
+Prior to this task, I hadn’t poked around the user authentication code in Rails or Spree. Hopefully, this experience will prepare me for the next time I encounter user migrations with encrypted passwords.

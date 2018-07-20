@@ -7,9 +7,9 @@ title: Listen/Notify improvements in PostgreSQL 9.0
 
 
 
-Improved listen/notify is one of the new features of Postgres 9.0 I've been waiting for a long time. There are basically two major changes: everything is in shared memory instead of using system tables, and full support for "payload" messages is enabled.
+Improved listen/notify is one of the new features of Postgres 9.0 I’ve been waiting for a long time. There are basically two major changes: everything is in shared memory instead of using system tables, and full support for "payload" messages is enabled.
 
-Before I demonstrate the changes, here's a review of what exactly the listen/notify system in Postgres is. Basically, it is an inter-process signalling system, which uses the pg_listener system table to coordinate simple named events between processes. One or more clients connects to the database and issues a command such as:
+Before I demonstrate the changes, here’s a review of what exactly the listen/notify system in Postgres is. Basically, it is an inter-process signalling system, which uses the pg_listener system table to coordinate simple named events between processes. One or more clients connects to the database and issues a command such as:
 
 ```sql
 LISTEN foobar;
@@ -21,9 +21,9 @@ The name **foobar** can be replaced by any valid name; usually the name is somet
 NOTIFY foobar;
 ```
 
-Each client that is listening for the 'foobar' message will receive a notification that the sender has issued the NOTIFY. It also receives the PID of the sending process. Multiple notifications are collapsed into a single notice, and the notification is not sent until a transaction is committed.
+Each client that is listening for the ‘foobar’ message will receive a notification that the sender has issued the NOTIFY. It also receives the PID of the sending process. Multiple notifications are collapsed into a single notice, and the notification is not sent until a transaction is committed.
 
-Here's some sample code using DBD::Pg that demonstrates how the system works:
+Here’s some sample code using DBD::Pg that demonstrates how the system works:
 
 ```perl
 #!/usr/bin/env perl
@@ -93,7 +93,7 @@ As expected, we got a notification only after the other process committed.
 
 Note that because this is asychronous and involves the system tables, we added a sleep call to ensure that the notice had time to propagate so that the other processes will see it. Without the sleep, we usually see four "No messages" appear, as the script goes too fast for the pg_listener table to catch up.
 
-Now for the aforementioned payloads. Payloads allow an arbitrary string to be attached to the notification, such that you can have a standard name like before, but you can also attach some specific text that the other processes can see. I added support for payloads to DBD::Pg back in June 2008, so let's modify the script a little bit to demonstrate the new payload mechanism:
+Now for the aforementioned payloads. Payloads allow an arbitrary string to be attached to the notification, such that you can have a standard name like before, but you can also attach some specific text that the other processes can see. I added support for payloads to DBD::Pg back in June 2008, so let’s modify the script a little bit to demonstrate the new payload mechanism:
 
 ```perl
 ...
@@ -111,7 +111,7 @@ $dbh2->commit();
 ...
 ```
 
-Here's what the output looks like under version 9.0 of Postgres:
+Here’s what the output looks like under version 9.0 of Postgres:
 
 ```nohighlight
 Postgres version is 90000
@@ -130,7 +130,7 @@ We also got rid of the sleep. Because we are now using shared memory instead of 
 
 Another large advantage to removing the pg_listener table is that systems that make heavy use of it (such as the replication systems Bucardo and Slony) no longer have to worry about bloat in these tables.
 
-The use of payloads also means that many application can be greatly simplified: in the past, one had to be creative in the name of your notifications in order to pass meta-information to your listener. For example, [Bucardo](http://bucardo.org/wiki/bucardo) uses a large collection of notifications, meaning that the Bucardo processes had to do the equivalent of things like this:
+The use of payloads also means that many application can be greatly simplified: in the past, one had to be creative in the name of your notifications in order to pass meta-information to your listener. For example, [Bucardo](https://bucardo.org/Bucardo/) uses a large collection of notifications, meaning that the Bucardo processes had to do the equivalent of things like this:
 
 ```perl
 $dbh->do(q{LISTEN bucardo_reload_config});
@@ -168,6 +168,6 @@ while (my $notice = $dbh->func('pg_notifies')) {
 }
 ```
 
-I hope to add this support to Bucardo shortly; it's simply a matter of refactoring all the listen and notify calls into a function that does the right thing depending on the server version it is attached to.
+I hope to add this support to Bucardo shortly; it’s simply a matter of refactoring all the listen and notify calls into a function that does the right thing depending on the server version it is attached to.
 
 

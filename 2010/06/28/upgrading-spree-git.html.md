@@ -5,11 +5,11 @@ tags: ecommerce, rails, spree, git
 title: Upgrading Spree with the help of Git
 ---
 
-Lately, I've upgraded a few Spree projects with the recent Spree releases. Spree is a Ruby on Rails ecommerce platform that End Point previously sponsored and continues to support. In all cases, my Spree project was running from the Spree gem (version 0.10.2) and I was upgrading to Spree 0.11.0. I wanted to go through a brief explanation on how I went about upgrading my projects.
+Lately, I’ve upgraded a few Spree projects with the recent Spree releases. Spree is a Ruby on Rails ecommerce platform that End Point previously sponsored and continues to support. In all cases, my Spree project was running from the Spree gem (version 0.10.2) and I was upgrading to Spree 0.11.0. I wanted to go through a brief explanation on how I went about upgrading my projects.
 
-<a href="http://spreecommerce.com/"><img alt="Spree" src="http://spreecommerce.com/images/new_logo.png"/></a>
+<a href="https://spreecommerce.org/"><img alt="Spree" src="https://spreecommerce.org/wp-content/themes/spree-theme/assets/img/spree-logo@2x.png"/></a>
 
-First, I made sure my application was running and committed all recent changes to have a clean branch. I follow the development principles outlined [here](/blog/2010/03/31/spree-software-development) that describe methodology for developing custom functionality on top of the Spree framework core. All of my custom functionality lives in the RAILS_ROOT/vendor/extensions/site/ directory, so that directory probably won't be touched during the upgrade.
+First, I made sure my application was running and committed all recent changes to have a clean branch. I follow the development principles outlined [here](/blog/2010/03/31/spree-software-development) that describe methodology for developing custom functionality on top of the Spree framework core. All of my custom functionality lives in the RAILS_ROOT/vendor/extensions/site/ directory, so that directory probably won’t be touched during the upgrade.
 
 ```nohighlight
 steph@The-Laptop:/var/www/ep/myproject$ git status
@@ -17,7 +17,7 @@ steph@The-Laptop:/var/www/ep/myproject$ git status
 nothing to commit (working directory clean)
 ```
 
-Then, I tried the rake spree:upgrade task with the following results. I haven't upgraded Spree recently, and I vaguely remembered there being an upgrade task.
+Then, I tried the rake spree:upgrade task with the following results. I haven’t upgraded Spree recently, and I vaguely remembered there being an upgrade task.
 
 ```nohighlight
 steph@The-Laptop:/var/www/ep/myproject$ rake spree:upgrade
@@ -33,7 +33,7 @@ Updating to Spree 0.11.0 ...
 Finished.
 ```
 
-That was easy! I run 'git status' and saw that there were several modified config/ files, and a few new config/ files:
+That was easy! I run ‘git status’ and saw that there were several modified config/ files, and a few new config/ files:
 
 ```nohighlight
 # On branch master

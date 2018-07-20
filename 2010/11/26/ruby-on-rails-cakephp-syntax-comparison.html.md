@@ -5,10 +5,10 @@ tags: php, ecommerce, ruby, rails
 title: 'Ruby on Rails versus CakePHP: A Syntax Comparison Guide'
 ---
 
-My time is typically split between [Interchange](http://www.icdevgroup.com/i/dev) and [Spree](http://www.spreecommerce.com/) development, but in a recent project for [JackThreads](http://www.jackthreads.com/), I jumped back into CakePHP code. CakePHP is one of the more popular PHP MVC frameworks and is inspired by Rails. I decided to put together a quick syntax comparison guide between CakePHP and Rails since I occasionally have to look up how to do some Rails-y thing in CakePHP.
+My time is typically split between [Interchange](http://www.icdevgroup.com/i/dev) and [Spree](https://spreecommerce.org/) development, but in a recent project for [JackThreads](https://www.jackthreads.com/), I jumped back into CakePHP code. CakePHP is one of the more popular PHP MVC frameworks and is inspired by Rails. I decided to put together a quick syntax comparison guide between CakePHP and Rails since I occasionally have to look up how to do some Rails-y thing in CakePHP.
 
 <table cellpadding="5" cellspacing="0" class="phprails" width="100%"><tbody><tr class="alt">   <th align="center" valign="middle"><h3>Basic</h3></th>   <td align="center" style="width: 43%;" valign="middle">Ruby on Rails</td>   <td align="center" style="width: 43%;" valign="middle">CakePHP</td> </tr>
-<tr>   <td align="center" valign="top">MVC Code Inclusion</td>   <td valign="top"> Rails is typically installed as a gem and source code lives in the user's gem library. In theory, a modified version of the Rails source code can be "frozen" to your application, but I would guess this is pretty rare.   </td>   <td valign="top"> CakePHP is typically installed in the application directory in a "cake/" directory. The "app/" directory contains application specific code. From my experience, this organization has allowed me to easily debug CakePHP objects, but didn't do much more for me.   </td> </tr>
+<tr>   <td align="center" valign="top">MVC Code Inclusion</td>   <td valign="top"> Rails is typically installed as a gem and source code lives in the user’s gem library. In theory, a modified version of the Rails source code can be “frozen” to your application, but I would guess this is pretty rare.   </td>   <td valign="top"> CakePHP is typically installed in the application directory in a “cake/” directory. The “app/” directory contains application specific code. From my experience, this organization has allowed me to easily debug CakePHP objects, but didn’t do much more for me.   </td> </tr>
 <tr>   <td align="center" valign="middle">Application Directory Structure</td>   <td valign="top"> <pre class="brush:plain gutter: false">app/
   controllers/ models/ views/ helpers/
 lib/
@@ -126,7 +126,7 @@ end
 </pre></td>
 </tr><tr class="notes">
   <td align="center">Notes:</td>
-  <td colspan="2"> CakePHP and Rails use similar helper and layout declarations. In CakePHP, the $uses array initiates required models to be used in the controller, while in Rails all application models are available without an explicit include. In CakePHP, the $components array initiates required classes to be used in the controller, while in Rails you will use "include ClassName" to include a module.   </td>
+  <td colspan="2"> CakePHP and Rails use similar helper and layout declarations. In CakePHP, the $uses array initiates required models to be used in the controller, while in Rails all application models are available without an explicit include. In CakePHP, the $components array initiates required classes to be used in the controller, while in Rails you will use “include ClassName” to include a module.   </td>
 </tr>
 <tr>
   <td align="center" style="padding-top: 30px" valign="top">Filters</td>
@@ -285,7 +285,7 @@ or
 </tr>
 </tbody></table>
 
-If you are looking for guidance on choosing one of these technologies, below are common arguments. In End Point's case, we choose whatever technology makes the most sense for the client. We implemented a nifty solution for JackThreads to avoid a complete rewrite, described [here](/blog/2009/12/03/iterative-migration-of-legacy) in detail. We also work with existing open source ecommerce platforms such as [Interchange](http://www.icdevgroup.com/i/dev) and [Spree](http://www.spreecommerce.com/) and try to choose the best fit for each client.
+If you are looking for guidance on choosing one of these technologies, below are common arguments. In End Point’s case, we choose whatever technology makes the most sense for the client. We implemented a nifty solution for JackThreads to avoid a complete rewrite, described [here](/blog/2009/12/03/iterative-migration-of-legacy) in detail. We also work with existing open source ecommerce platforms such as [Interchange](http://www.icdevgroup.com/i/dev) and [Spree](https://www.spreecommerce.org/) and try to choose the best fit for each client.
 
 <table cellpadding="5" cellspacing="0" class="phprails" width="100%"><tbody><tr class="alt">   <th valign="middle" width="10%"><h3>Pick Me!</h3></th>   <td align="center" valign="middle" width="45%">Ruby on Rails</td>   <td align="center" valign="middle" width="45%">CakePHP</td> </tr>
 <tr>   <td></td>   <td valign="top">     <ul><li>Ruby is prettier than PHP.</li>

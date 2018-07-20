@@ -33,7 +33,7 @@ The super project repo stores a .gitmodules file. A sample:
 
 **When you have submodules in a project, do you have to separately clone them from the master project, or does the initial checkout take care of that recursively for you?**
 
-Generally, you will issue the commands below when you clone a super project repository. These commands will "install" the submodule under the main repository.
+Generally, you will issue the commands below when you clone a super project repository. These commands will “install” the submodule under the main repository.
 
 ```nohighlight
 git submodule init
@@ -42,7 +42,7 @@ git submodule update
 
 **How do you update a git submodule repository?**
 
-Given an existing git project in the "project" directory, and a git submodule extension1 in the the extension directory:
+Given an existing git project in the “project” directory, and a git submodule extension1 in the the extension directory:
 
 First, a status check on the main project:
 
@@ -115,12 +115,12 @@ Now, a commit to include the submodule repository change. Brian has made it a co
  1 files changed, 1 insertions(+), 1 deletions(-)
 ```
 
-**What does git store internally to track the submodule? The HEAD position?  That would seem to be the minimal information needed to tie the specific submodule-tracked version with the version used in the superproject.**
+**What does git store internally to track the submodule? The HEAD position? That would seem to be the minimal information needed to tie the specific submodule-tracked version with the version used in the superproject.**
 
-It stores a specific commit SHA1 so even if HEAD moves the super project's "reference" doesn't, which is why updating to the upstream version must be followed by a commit so that the super project is "pinned" to the same commit across repos. You'll see in the example above that the submodule project was in a detached head state (not on a branch) so HEAD doesn't really make sense.
+It stores a specific commit SHA1 so even if HEAD moves the super project’s “reference” doesn’t, which is why updating to the upstream version must be followed by a commit so that the super project is “pinned” to the same commit across repos. You’ll see in the example above that the submodule project was in a detached head state (not on a branch) so HEAD doesn’t really make sense.
 
 It is critical that the super project repo store an exact position for the submodule otherwise you would not be able to associate your own code with a particular version of a submodule and ensure that a given submodule is at the same position across repos. For instance, if you updated to an upgraded version of a submodule and committed it not realizing that it broke your own code, you can check out a previous spot in the repository where the code worked with the submodule.
 
 Hopefully, this discussion on git submodules begins to show how powerful git and submodules can be for making it easy for non-core developers to start sharing their code on an open source project.
 
-Thanks to Brian Miller and [David Christensen](/team/david_christensen) for contributing the content for this post! I reference this article in my article on [Software Development with Spree](/blog/2010/03/31/spree-software-development) - I've found it very useful to use git submodules to install several Spree extensions on recent projects. The Spree extension community has a few valuable extensions including that introduce features such as product reviews, faq, blog organization, static pages, and multi-domain setup.
+Thanks to Brian Miller and [David Christensen](/team/david_christensen) for contributing the content for this post! I reference this article in my article on [Software Development with Spree](/blog/2010/03/31/spree-software-development)—​I’ve found it very useful to use git submodules to install several Spree extensions on recent projects. The Spree extension community has a few valuable extensions including that introduce features such as product reviews, faq, blog organization, static pages, and multi-domain setup.

@@ -5,9 +5,9 @@ tags: ecommerce, rails, spree
 title: 'Spree on Rails 3: Part Two'
 ---
 
-Yesterday, I [discussed my experiences on getting Rails 3 based Spree](/blog/2010/10/25/spree-on-rails-3-part-one) up and running. I've explained in several blog articles ([here](/blog/2010/03/31/spree-software-development) and [here](/blog/2010/01/12/rails-ecommerce-spree-hooks-tutorial)) that customizing Spree through extensions will produce the most maintainable code – it is not recommended to work directly with source code and make changes to core classes or views. Working through extension development was one of my primary goals after getting Spree up and running.
+Yesterday, I [discussed my experiences on getting Rails 3 based Spree](/blog/2010/10/25/spree-on-rails-3-part-one) up and running. I’ve explained in several blog articles ([here](/blog/2010/03/31/spree-software-development) and [here](/blog/2010/01/12/rails-ecommerce-spree-hooks-tutorial)) that customizing Spree through extensions will produce the most maintainable code – it is not recommended to work directly with source code and make changes to core classes or views. Working through extension development was one of my primary goals after getting Spree up and running.
 
-To create an extension named "foo", I ran rails g spree:extension foo. Similar to pre-Rails 3.0 Spree, a foo directory is created (albeit inside the sandbox/) directory as a Rails Engine. The generator appends the foo directory details to the sandbox/ Gemfile. Without the Gemfile update, the rails project won't include the new foo extension directory (and encompassed functionality). I reviewed the extension directory structure and files and found that foo/lib/foo.rb was similar to the the *_extension.rb file.
+To create an extension named “foo”, I ran rails g spree:extension foo. Similar to pre-Rails 3.0 Spree, a foo directory is created (albeit inside the sandbox/) directory as a Rails Engine. The generator appends the foo directory details to the sandbox/ Gemfile. Without the Gemfile update, the rails project won’t include the new foo extension directory (and encompassed functionality). I reviewed the extension directory structure and files and found that foo/lib/foo.rb was similar to the the *_extension.rb file.
 
 <table cellpadding="20" cellspacing="0" width="100%">
 <tbody><tr><td valign="top">
@@ -71,7 +71,7 @@ module Foo
 end
 ```
 
-From here, [The Spree Documentation on Extensions](http://edgeguides.spreecommerce.com/extension_tutorial.html) provides insight on further extension development. As I began to update an older extension, I ensured that my_extension/lib/my_extension.rb had all the necessary includes in the activate method and I copied over controller and library files to their new locations.
+From here, [The Spree Documentation on Extensions](https://guides.spreecommerce.org/developer/extensions_tutorial.html) provides insight on further extension development. As I began to update an older extension, I ensured that my_extension/lib/my_extension.rb had all the necessary includes in the activate method and I copied over controller and library files to their new locations.
 
 One issue that I came across was that migrations are not run with rake db:migrate and the public assets are not copied to the main project public directory on server restart. The documentation recommends building the migration within the application root (sandbox/), but this is not ideal to maintain modularity of extensions – each extension must include all of its migration files. To work-around this, it was recommended to copy over the install rake tasks from one of the core gems that copies migrations and public assets:
 
@@ -145,19 +145,19 @@ script/generate extension_model Foo thing name:string start:date
 
 Some of my takeaway comments after going through these exercises:
 
-If there's anything I might want to learn about to work with edge Spree, it's Rails Engines. When you run Spree from source and use extensions, the architecture includes several layers of stacked Rails Engines:
+If there’s anything I might want to learn about to work with edge Spree, it’s Rails Engines. When you run Spree from source and use extensions, the architecture includes several layers of stacked Rails Engines:
 
 <a href="/blog/2010/10/25/spree-on-rails-3-part-two/image-0-big.jpeg" onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5532069288049287234" src="/blog/2010/10/25/spree-on-rails-3-part-two/image-0.jpeg" style="display:block; margin:0px auto 10px; text-align:center;cursor:pointer; cursor:hand;width: 400px; height: 200px;"/></a>
 
 Layers of Rails Engines in Spree with extensions.
 
-After some quick googling, I found two helpful articles on Engines in Rails 3 [here](http://www.themodestrubyist.com/2010/03/01/rails-3-plugins---part-1---the-big-picture/) and [here](http://www.themodestrubyist.com/2010/03/05/rails-3-plugins---part-2---writing-an-engine/). The Spree API has been inconsistent until now - hopefully the introduction of Rails Engine will force the API to become more consistent which may improve the extension community.
+After some quick googling, I found two helpful articles on Engines in Rails 3 [here](https://web.archive.org/web/20100414171720/http://www.themodestrubyist.com/2010/03/01/rails-3-plugins---part-1---the-big-picture/) and [here](https://web.archive.org/web/20101112142245/http://www.themodestrubyist.com/2010/03/05/rails-3-plugins---part-2---writing-an-engine/). The Spree API has been inconsistent until now—​hopefully the introduction of Rails Engine will force the API to become more consistent which may improve the extension community.
 
-I didn't notice much deviation of controllers, models, or views from previous versions of Spree, except for massive reorganization. Theme support (including [Spree hooks](/blog/2010/01/12/rails-ecommerce-spree-hooks-tutorial)) is still present in the core. Authorization in Spree still uses authlogic, but I heard rumors of moving to devise eventually. The spree_dash (admin dashboard) gem still is fairly lightweight and doesn't contain much functionality. Two fairly large code changes I noticed were:
+I didn’t notice much deviation of controllers, models, or views from previous versions of Spree, except for massive reorganization. Theme support (including [Spree hooks](/blog/2010/01/12/rails-ecommerce-spree-hooks-tutorial)) is still present in the core. Authorization in Spree still uses authlogic, but I heard rumors of moving to devise eventually. The spree_dash (admin dashboard) gem still is fairly lightweight and doesn’t contain much functionality. Two fairly large code changes I noticed were:
 
 - The checkout state machine has been merged into order and the checkout model will be eliminated in the future.
 - The spree_promo gem has a decent amount of new functionality.
 
-Browsing through the [spree-user](http://groups.google.com/group/spree-user) Google Group might reveal that there are still several kinks that need to be worked out on edge Spree. After these issues are worked out and the documentation on edge Spree is more complete, I will be more confident in making a recommendation to develop on Rails 3 based Spree.
+Browsing through the [spree-user](https://groups.google.com/forum/#!forum/spree-user) Google Group might reveal that there are still several kinks that need to be worked out on edge Spree. After these issues are worked out and the documentation on edge Spree is more complete, I will be more confident in making a recommendation to develop on Rails 3 based Spree.
 
 

@@ -5,7 +5,7 @@ tags: company, jobs, ruby, rails, spree
 title: Seeking a Ruby, Rails, Spree developer
 ---
 
-Today I realized that we never posted our job announcement on our own blog even though we'd posted it to several job boards. So here it is:
+Today I realized that we never posted our job announcement on our own blog even though we’d posted it to several job boards. So here it is:
 
 We are looking for a developer who can consult with our clients and develop Ruby web applications. Most of our needs center around Rails, Spree, and SQL, but Sinatra, DataMapper, and NoSQL are lately coming into play too.
 

@@ -5,13 +5,13 @@ tags: ecommerce, rails, spree
 title: 'Spree: Working with Sample Product Data'
 ---
 
-It's taken me a bit of time to gain a better understanding of working with Spree sample data or [fixtures](http://api.rubyonrails.org/classes/Fixtures.html), but now that I am comfortable with it I thought I'd share some details. The first thing you might wonder is why should you even care about sample data? Well, in our project, we had a few motivations for creating sample data:
+It’s taken me a bit of time to gain a better understanding of working with Spree sample data or [fixtures](http://api.rubyonrails.org/v2.3.8/classes/Fixtures.html), but now that I am comfortable with it I thought I’d share some details. The first thing you might wonder is why should you even care about sample data? Well, in our project, we had a few motivations for creating sample data:
 
 1. **Multiple developers, consistent sample data provides consistency during development.** End Point offers [SpreeCamps](http://www.spreecamps.com/), a hosting solution that combines the open source Spree technology with devcamps to allow multiple development and staging instances of a Spree application. In a recent project, we had a two developers working on different aspects of the custom application in SpreeCamps; creating meaningful sample data allowed each developer to work from the same data starting point.
 1. **Unit testing**. Another important element of our project includes adding unit tests to test our custom functionality. Consistent test sample data gave us the ability to test individual methods and functionality with confidence.
 1. **Application testing**. In addition to unit testing, adding sample data gives the ability to efficiently test the application repeatedly with fresh sample data.
 
-Throughout development, our standard practice is to repeatedly run rake db:bootstrap SKIP_CORE=1 AUTO_ACCEPT=1. Running bootstrap with these arguments will not create Spree's core sample data set, but it will set the core's default data that includes some base zones, zone members, countries, states, and roles, data that is essential for the application to work.
+Throughout development, our standard practice is to repeatedly run rake db:bootstrap SKIP_CORE=1 AUTO_ACCEPT=1. Running bootstrap with these arguments will not create Spree’s core sample data set, but it will set the core’s default data that includes some base zones, zone members, countries, states, and roles, data that is essential for the application to work.
 
 ### Product Data Model
 
@@ -177,7 +177,7 @@ Example taxonomies created with Spree sample data
 
 ### Product Images
 
-My last step in creating Spree sample data is to add product images. I've typically added the image via the Spree backend first, and then copied the images my site extension directory.
+My last step in creating Spree sample data is to add product images. I’ve typically added the image via the Spree backend first, and then copied the images my site extension directory.
 
 ```nohighlight
 # upload Spree images
@@ -205,7 +205,7 @@ i1:
   position: 1
 ```
 
-And finally, I use a modified version of the Spree's core products.rb file to copy over product images during bootstrap:
+And finally, I use a modified version of the Spree’s core products.rb file to copy over product images during bootstrap:
 
 ```ruby
 <b>products.rb</b>
@@ -241,4 +241,4 @@ With my sample data defined in my Spree site extension, I run rake db:bootstrap 
 
 Sample product image created with the sample data above.
 
-In addition to setting up sample product data, I've worked through creating sample orders, shipping configuration, and tax configuration. I hope to discuss these adventures in the future.
+In addition to setting up sample product data, I’ve worked through creating sample orders, shipping configuration, and tax configuration. I hope to discuss these adventures in the future.

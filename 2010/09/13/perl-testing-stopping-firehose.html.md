@@ -9,13 +9,19 @@ title: Perl Testing - stopping the firehose
 
 <a href="/blog/2010/09/13/perl-testing-stopping-firehose/image-0-big.jpeg" onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5516463759234506722" src="/blog/2010/09/13/perl-testing-stopping-firehose/image-0.jpeg" style="float:right; margin:0 0 10px 10px;cursor:pointer; cursor:hand;width: 266px; height: 400px;"/></a>
 
-I maintain a large number of Perl modules and scripts, and one thing they all have in common is a test suite, which is basically a collection of scripts inside a "t" subdirectory used to thoroughly test the behavior of the program. When using Perl, this means you are using the awesome [Test::More module](http://search.cpan.org/~mschwern/Test-Simple-0.96/lib/Test/More.pm), which uses the Test Anything Protocol (TAP). While I love Test::More, I often find myself needing to stop the testing entirely after a certain number of failures (usually one). This is the solution I came up with.
+I maintain a large number of Perl modules and scripts, and one thing they all have in common is a test suite, which is basically a collection of scripts inside a “t” subdirectory used to thoroughly test the behavior of the program. When using Perl, this means you are using the awesome [Test::More module](https://metacpan.org/pod/release/MSCHWERN/Test-Simple-0.96/lib/Test/More.pm), which uses the Test Anything Protocol (TAP). While I love Test::More, I often find myself needing to stop the testing entirely after a certain number of failures (usually one). This is the solution I came up with.
 
-Normally tests are run as a group, by invoking all files named t/*.t; each file has numerous tests inside of it, and these individual tests issue a pass or a fail. At the end of each file, a summary is output stating how many tests passed and how many failed. So why is stopping after a failed test even needed? The reasons below mostly relate to the tests I write for the [Bucardo program](http://bucardo.org/wiki/Bucardo), which has a fairly large and complex test suite. Some of the reasons I like having fine-grained control of when to stop are:
+Normally tests are run as a group, by invoking all files named t/*.t; each file has numerous tests inside of it, and these individual tests issue a pass or a fail. At the end of each file, a summary is output stating how many tests passed and how many failed. So why is stopping after a failed test even needed? The reasons below mostly relate to the tests I write for the [Bucardo program](https://bucardo.org/Bucardo/), which has a fairly large and complex test suite. Some of the reasons I like having fine-grained control of when to stop are:
 
-- Scrolling back through screens and screens of failing tests to find the point where the test began to fail is not just annoying, but a very unproductive use of my time.- Tests are very often dependent. If test #23 fails, it means there is a very good chance that most if not all of the subsequent tests are going to fail as well, and it makes no sense for me to look at fixing anything but test #23 first.- Tests can take a very long time to run, and I can't wait around for the errors to start appearing and hit ctrl-c. I need to kick them off, go do something else, and then come back and have the tests stop running immediately after the first failed test. Bucardo tests, for example, create and startup four different Postgres clusters, populates the databases inside each cluster with test data, installs a fresh copy of Bucardo, and *then* begins the real testing. No way I'm going to wait around for that to happen.- Debugging is greatly aided by having the tests stop where I want them to. Often tests after the failing one will modify data and otherwise destroy the "state" such that I cannot manually duplicate the error right then and there, and thus fix it easily.
+- Scrolling back through screens and screens of failing tests to find the point where the test began to fail is not just annoying, but a very unproductive use of my time.
 
-For now, my solution is to override some of the methods from Test::More. I have a standard script that does this, and I 'use' this script after I 'use Test::More' inside my test scripts. For example, a test script might look like this:
+- Tests are very often dependent. If test #23 fails, it means there is a very good chance that most if not all of the subsequent tests are going to fail as well, and it makes no sense for me to look at fixing anything but test #23 first.
+
+- Tests can take a very long time to run, and I can’t wait around for the errors to start appearing and hit ctrl-c. I need to kick them off, go do something else, and then come back and have the tests stop running immediately after the first failed test. Bucardo tests, for example, create and startup four different Postgres clusters, populates the databases inside each cluster with test data, installs a fresh copy of Bucardo, and *then* begins the real testing. No way I’m going to wait around for that to happen.
+
+- Debugging is greatly aided by having the tests stop where I want them to. Often tests after the failing one will modify data and otherwise destroy the “state” such that I cannot manually duplicate the error right then and there, and thus fix it easily.
+
+For now, my solution is to override some of the methods from Test::More. I have a standard script that does this, and I ‘use’ this script after I ‘use Test::More’ inside my test scripts. For example, a test script might look like this:
 
 ```perl
 #!/usr/bin/env perl
@@ -88,9 +94,9 @@ sub is {
 } ## end of is
 ```
 
-The **is_deeply** compares two arbitrary Perl structures (such as the arrayref here, but it can do hashes as well), and points out if they differ, and where. The "deeply" is because it will walk through the entire structure to find any differences. Good stuff.
+The **is_deeply** compares two arbitrary Perl structures (such as the arrayref here, but it can do hashes as well), and points out if they differ, and where. The “deeply” is because it will walk through the entire structure to find any differences. Good stuff.
 
-Some things to note about the new is_deeply function: first, we simply pass in our parameters to the "real" is_deeply subroutine - the one found inside the Test::More package. If this passes (by returning true), we simply pass that truth back to the caller, and it's completely as if is_deeply had not been overwritten at all. However, if the test fails, Test::More::is_deeply will output a failure notice, but we check to see if the total number of failures for this test script ($total_errors) is greater than or equal to the threshold ($bail_on_error) that we set via then environment variable TESTBAIL. (Having it as an environment variable that defaults to zero allows the traditional behavior to be easily changed without editing any files).
+Some things to note about the new is_deeply function: first, we simply pass in our parameters to the “real” is_deeply subroutine—​the one found inside the Test::More package. If this passes (by returning true), we simply pass that truth back to the caller, and it’s completely as if is_deeply had not been overwritten at all. However, if the test fails, Test::More::is_deeply will output a failure notice, but we check to see if the total number of failures for this test script ($total_errors) is greater than or equal to the threshold ($bail_on_error) that we set via then environment variable TESTBAIL. (Having it as an environment variable that defaults to zero allows the traditional behavior to be easily changed without editing any files).
 
 If the number of failed tests is over our threshhold, we call the **BAIL_OUT** method from Test::More, which not only stops the current test script from running any more scripts, but stops any subsequent test files from running as well.
 
@@ -130,6 +136,6 @@ not ok 1 - Function some_function() returns correct value when called with 'foo'
 Bail out!  Stopping on a failed 'is_deeply' test from line 17 of test1.t.
 ```
 
-Yes, the [Test::Most](http://search.cpan.org/~ovid/Test-Most-0.23/lib/Test/Most.pm) module does some similar things, but I don't use it because it's yet another module dependency, it doesn't allow me to control the number of acceptable failures before bailing, and it doesn't show pretty output for is_deeply.
+Yes, the [Test::Most](https://metacpan.org/pod/release/OVID/Test-Most-0.23/lib/Test/Most.pm) module does some similar things, but I don’t use it because it’s yet another module dependency, it doesn’t allow me to control the number of acceptable failures before bailing, and it doesn’t show pretty output for is_deeply.
 
 

@@ -25,16 +25,16 @@ details.  You may need configuration options.
 
 Searching the web for info on this error yields two basic solutions:
 
-1. [Install the mysql-devel package](http://serverfault.com/questions/54532/installing-mysql-ruby-gem-on-64-bit-centos/60296#60296) (this provides the mysql.h file in /usr/include/mysql/).
+1. [Install the mysql-devel package](https://serverfault.com/questions/54532/installing-mysql-ruby-gem-on-64-bit-centos/60296#60296) (this provides the mysql.h file in /usr/include/mysql/).
 1. Run gem install mysql -- --with-mysql-config=/usr/bin/mysql_config or some [other additional options](http://www.wzzrd.com/2008/02/building-mysql-gem-centos5-hell-usually.html).
 
-These are correct but not sufficient. Because this gem compiles a library to interface with MySQL's C API, the gcc and make packages are also required to create the build environment:
+These are correct but not sufficient. Because this gem compiles a library to interface with MySQL’s C API, the gcc and make packages are also required to create the build environment:
 
 ```bash
 # yum install mysql-devel gcc make
 # gem install mysql -- --with-mysql-config=/usr/bin/mysql_config
 ```
 
-Alternatively, if you're using your distro's ruby (not a custom build like [Ruby Enterprise Edition](/blog/2009/06/16/ruby-enterprise-edition-rpm-packages)), you can install [EPEL](http://fedoraproject.org/wiki/EPEL)'s ruby-mysql package along with their rubygem-rails and other packages.
+Alternatively, if you’re using your distro’s ruby (not a custom build like [Ruby Enterprise Edition](/blog/2009/06/16/ruby-enterprise-edition-rpm-packages)), you can install [EPEL](https://fedoraproject.org/wiki/EPEL)’s ruby-mysql package along with their rubygem-rails and other packages.
 
 

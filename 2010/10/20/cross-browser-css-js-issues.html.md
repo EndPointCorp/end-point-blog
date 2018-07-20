@@ -9,7 +9,7 @@ Coding cross browser friendly JavaScript and CSS got you down? In a recent proje
 
 ### Variable Declaration in JS
 
-In several cases, I noticed that excluding variable declaration ("var") resulted in broken JavaScript-based functionality in IE only. I typically include variable declaration when I'm writing JavaScript. In our project, we were working with legacy code and conflicting variable names may have be introduced, resulting in broken functionality. Examples of before and after:
+In several cases, I noticed that excluding variable declaration (“var”) resulted in broken JavaScript-based functionality in IE only. I typically include variable declaration when I’m writing JavaScript. In our project, we were working with legacy code and conflicting variable names may have be introduced, resulting in broken functionality. Examples of before and after:
 
 <table cellpadding="10" cellspacing="0" width="100%">
 <tbody><tr>
@@ -68,7 +68,7 @@ var zip = $(type+'_zip').value;
 </tr>
 </tbody></table>
 
-I researched this to gain more insight, but I didn't find much except a reiteration that when you create variables without the "var" declaration, they become global variables which may have resulted in conflicts. However, all the "learning JavaScript" documentation I browsed through includes variable declaration and there's no reason to leave it out for these lexically scoped variables.
+I researched this to gain more insight, but I didn’t find much except a reiteration that when you create variables without the “var” declaration, they become global variables which may have resulted in conflicts. However, all the “learning JavaScript” documentation I browsed through includes variable declaration and there’s no reason to leave it out for these lexically scoped variables.
 
 ### Trailing Commas in JSON objects
 
@@ -154,7 +154,7 @@ Additional solutions to avoid the trailing comma include using join (Perl, Ruby)
 
 ### Floating Elements in IE
 
-Often times, you'll get a design like the one shown below. There will be a static width and repeating components to span the entire width. You may programmatically determine how many repeating elements will be displayed, but using CSS floating elements yields the cleanest code.
+Often times, you’ll get a design like the one shown below. There will be a static width and repeating components to span the entire width. You may programmatically determine how many repeating elements will be displayed, but using CSS floating elements yields the cleanest code.
 
 <a href="/blog/2010/10/20/cross-browser-css-js-issues/image-0-big.png" onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5530221714317774530" src="/blog/2010/10/20/cross-browser-css-js-issues/image-0.png" style="display:block; margin:0px auto 10px; text-align:center;cursor:pointer; cursor:hand;width: 400px; height: 122px;"/></a>
 
@@ -166,7 +166,7 @@ You start working in Chrome or Firefox and apply the following CSS rules:
 
 CSS rules for repeating floating elements.
 
-When you think you're finished, you load the page in IE and see the following. Bummer!
+When you think you’re finished, you load the page in IE and see the following. Bummer!
 
 <a href="/blog/2010/10/20/cross-browser-css-js-issues/image-2-big.png" onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5530221714104026050" src="/blog/2010/10/20/cross-browser-css-js-issues/image-2.png" style="display:block; margin:0px auto 10px; text-align:center;cursor:pointer; cursor:hand;width: 400px; height: 157px;"/></a>
 
@@ -174,7 +174,7 @@ Floating elements wrap incorrectly in IE.
 
 This is a pretty common scenario. In IE, if the combined widths of consecutive floating elements is greater than or equal to 100% of the available width, the latter floating element will jump down based on the IE float model. Instead of using floating elements, you might consider using tables or CSS position rules, but my preference is to use tables only for elements that need vertical align settings and to stay away from absolute positioning completely. And I try to stay away from absolute positioning in general.
 
-The simplest and minimalist change I've found to work can be described in a few steps. Let's say your floating elements are <div>'s inside a <div> with an id of "products":
+The simplest and minimalist change I’ve found to work can be described in a few steps. Let’s say your floating elements are <div>’s inside a <div> with an id of “products”:
 
 ```nohighlight
 <div id="products">
@@ -187,7 +187,7 @@ The simplest and minimalist change I've found to work can be described in a few 
 </div>
 ```
 
-And let's assume we have the following CSS:
+And let’s assume we have the following CSS:
 
 ```css
 <style>
@@ -199,9 +199,9 @@ div.last { margin-right: 0px; }
 
 Complete these steps:
 
-- First, add another div to wrap around the #products div, with an id of "outer_products"
+- First, add another div to wrap around the #products div, with an id of “outer_products”
 - Next, update the 'div#products' width to be greater than 960 pixels by several pixels.
-- Next, add a style rule for 'div#outer_products' to have a width of "960px" and overflow equal to "hidden".
+- Next, add a style rule for 'div#outer_products' to have a width of “960px” and overflow equal to “hidden”.
 
 Yielding:
 
@@ -229,10 +229,10 @@ div.last { margin-right: 0px; }
 </style>
 ```
 
-The solution is essentially creating a "display window" (outer_products), where overflow is hidden, but the contents are allowed to span a greater width in the inside <div> (products).
+The solution is essentially creating a “display window” (outer_products), where overflow is hidden, but the contents are allowed to span a greater width in the inside <div> (products).
 
 <a href="/blog/2010/10/20/cross-browser-css-js-issues/image-3-big.png" onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5530221720067114994" src="/blog/2010/10/20/cross-browser-css-js-issues/image-3.png" style="display:block; margin:0px auto 10px; text-align:center;cursor:pointer; cursor:hand;width: 400px; height: 113px;"/></a>
 
-The white border outlines the outer_products "display window".
+The white border outlines the outer_products “display window”.
 
-Some other issues that I see less frequently include [the double-margin IE6 bug](http://www.positioniseverything.net/explorer/floatIndent.html), [chaining CSS in IE](http://www.ryanbrill.com/archives/multiple-classes-in-ie/), and [using '#' vs. 'javascript:void(0);'](http://stackoverflow.com/questions/134845/href-for-javascript-links-or-javascriptvoid0).
+Some other issues that I see less frequently include [the double-margin IE6 bug](http://www.positioniseverything.net/explorer/floatIndent.html), [chaining CSS in IE](http://www.ryanbrill.com/archives/multiple-classes-in-ie/), and [using '#' vs. 'javascript:void(0);'](https://stackoverflow.com/questions/134845/which-href-value-should-i-use-for-javascript-links-or-javascriptvoid0).

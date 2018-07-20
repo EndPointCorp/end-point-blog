@@ -2,14 +2,14 @@
 author: Greg Sabino Mullane
 gh_issue_number: 306
 tags: database, postgres, security
-title: Finding the PostgreSQL version - without logging in!
+title: Finding the PostgreSQL version — without logging in!
 ---
 
 <a href="/blog/2010/05/17/finding-postgresql-version-without/image-0-big.jpeg" onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5472376552703238962" src="/blog/2010/05/17/finding-postgresql-version-without/image-0.jpeg" style="margin: 0pt 0pt 10px 10px; float: right; cursor: pointer; width: 180px; height: 239px;"/></a>
 
-Metasploit used the error messages given by a PostgreSQL server to find out the version without actually having to log in and issue a "SELECT version()" command. The original article is at [http://blog.metasploit.com/2010/02/postgres-fingerprinting.html](http://blog.metasploit.com/2010/02/postgres-fingerprinting.html) and is worth a read. I'll wait.
+Metasploit used the error messages given by a PostgreSQL server to find out the version without actually having to log in and issue a “SELECT version()” command. The original article is at [http://blog.metasploit.com/2010/02/postgres-fingerprinting.html](https://web.archive.org/web/20100619074143/http://blog.metasploit.com/2010/02/postgres-fingerprinting.html) and is worth a read. I’ll wait.
 
-The basic idea is that because version 3 of the Postgres protocol gives you the file and the line number in which the error is generated, you can use the information to figure out what version of Postgres is running, as the line numbers change from version to version. In effect, each version of Postgres reveals enough in its error message to fingerprint it. This was a neat little trick, and I wanted to explore it more myself. The first step was to write a quick Perl script to connect and get the error string out. The original Metasploit script focuses on failed login attempts, but after some experimenting I found an easier way was to send an invalid protocol number (Postgres expects "2.0" or "3.0"). Sending a startup packet with an invalid protocol of "3.1" gave me back the following string:
+The basic idea is that because version 3 of the Postgres protocol gives you the file and the line number in which the error is generated, you can use the information to figure out what version of Postgres is running, as the line numbers change from version to version. In effect, each version of Postgres reveals enough in its error message to fingerprint it. This was a neat little trick, and I wanted to explore it more myself. The first step was to write a quick Perl script to connect and get the error string out. The original Metasploit script focuses on failed login attempts, but after some experimenting I found an easier way was to send an invalid protocol number (Postgres expects “2.0” or “3.0”). Sending a startup packet with an invalid protocol of “3.1” gave me back the following string:
 
 ```perl
 E|SFATALC0A000Munsupported frontend protocol 3.1:
@@ -47,7 +47,7 @@ cvs update -rREL8_3_0 -p postmaster.c | grep -Fn 'LATEST))))'
 
 This showed me that the string occurred on line 1497 of postmaster.c. I created a Postgres instance and verified that the line number was the same. At that point, it was a simple matter of making a bash script to grab all releases since 7.3 and build up a comprehensive list of when that line changed from version to version.
 
-Once that was done, I rolled the whole thing up into a new Perl script called "detect_postgres_version.pl". Here's the script, broken into pieces for explanation. A link to the entire script is at the bottom of the post.
+Once that was done, I rolled the whole thing up into a new Perl script called “detect_postgres_version.pl”. Here’s the script, broken into pieces for explanation. A link to the entire script is at the bottom of the post.
 
 First, we do some standard Perl script things and read in the __DATA__ section at the bottom of the script, which lists at which version the message has changed:
 
@@ -95,7 +95,7 @@ while (<data>) {
 </data>
 ```
 
-Next, we allow a few options to the script: port and host. We'll default to a Unix socket if the host is not set, and default to port 5432 if none is given:
+Next, we allow a few options to the script: port and host. We’ll default to a Unix socket if the host is not set, and default to port 5432 if none is given:
 
 ```perl
 ## Read in user options and set defaults
@@ -109,7 +109,7 @@ my $port = $opt{port} || 5432;
 my $host = $opt{host} || '';
 ```
 
-We're ready to connect, using the very standard IO::Socket module. If the host starts with a slash, we assume this is the unix_socket_directory and replace the default '/tmp' location:
+We’re ready to connect, using the very standard IO::Socket module. If the host starts with a slash, we assume this is the unix_socket_directory and replace the default ‘/tmp’ location:
 
 ```perl
 ## Start the connection, either unix or tcp
@@ -131,7 +131,7 @@ else {
 }
 ```
 
-Now we're ready to actually send something over our new socket. Postgres expects the startup packet to be in a certain format. We'll follow that format, but send it an invalid protocol number, 3.1. The rest of the information does not really matter, but we'll also tell it we're connecting as user "pg". Finally, we read back in the message, extract the file and line number, and spit them back out to the user:
+Now we’re ready to actually send something over our new socket. Postgres expects the startup packet to be in a certain format. We’ll follow that format, but send it an invalid protocol number, 3.1. The rest of the information does not really matter, but we’ll also tell it we’re connecting as user “pg”. Finally, we read back in the message, extract the file and line number, and spit them back out to the user:
 
 ```perl
 ## Build and sent the packet
@@ -173,7 +173,7 @@ if (1 == @$result) {
 }
 ```
 
-In most cases, though, we don't know the exact version down to the revision after the second dot, so we'll state what the major version is, and all the possible revisions:
+In most cases, though, we don’t know the exact version down to the revision after the second dot, so we’ll state what the major version is, and all the possible revisions:
 
 ```perl
 ## Walk through and figure out which versions it may be.
@@ -188,7 +188,7 @@ for my $row (@$result) {
 exit;
 ```
 
-The only thing left is the DATA section, which I'll show here to be complete:
+The only thing left is the DATA section, which I’ll show here to be complete:
 
 ```nohighlight
 __DATA__
@@ -238,8 +238,8 @@ postmaster.c 1664 9.0.0
 
 (Because version 9.0 is not released yet, its line number may still change.)
 
-I found this particular protocol error to be a good one because there is no overlap of line numbers across major versions. Of the approximately 125 different versions released since 7.3.0, only 6 are unique enough to identify to the exact revision. That's okay for this iteration of the script. If you wanted to know the exact revision, you could try other errors, such as an invalid login, as the metasploit code does.
+I found this particular protocol error to be a good one because there is no overlap of line numbers across major versions. Of the approximately 125 different versions released since 7.3.0, only 6 are unique enough to identify to the exact revision. That’s okay for this iteration of the script. If you wanted to know the exact revision, you could try other errors, such as an invalid login, as the metasploit code does.
 
 The complete code can be read here: [detect_postgres_version.pl](http://gtsm.com/detect_postgres_version.pl)
 
-I'll be giving [a talk](http://www.pgcon.org/2010/schedule/events/238.en.html) later on this week at [PgCon 2010](http://www.pgcon.org/2010/), so say hi if you see me there. I'll probably be giving a [lightning talk](http://www.pgcon.org/2010/schedule/events/267.en.html) as well.
+I’ll be giving [a talk](http://www.pgcon.org/2010/schedule/events/238.en.html) later on this week at [PgCon 2010](http://www.pgcon.org/2010/), so say hi if you see me there. I’ll probably be giving a [lightning talk](http://www.pgcon.org/2010/schedule/events/267.en.html) as well.
