@@ -157,7 +157,7 @@ How to handle this is a little more tricky—​implementation details like this
 
 There is no one right answer there: for those who want to only use tests, then the tests need to be complete and cover the implementation details. Of course, this means that if a future scaling problem requires a change in data structures, then the test will also need to be ported to the new architecture. If specifications or design documents are used, that can speed the implementer’s work, but leaves open some questions of correctness (e.g., did the implementer use the right architecture in the right way).
 
-We solved these problems (and more) in true Agile fashion: through good communication among the customer,the test designer, and the developer, but this experience reinforced to us
+We solved these problems (and more) in true Agile fashion: through good communication among the customer, the test designer, and the developer, but this experience reinforced to us
 that tests alone are insufficient, and good communication needs to be maintained in the development process.
 
 Real specs can help, too.
