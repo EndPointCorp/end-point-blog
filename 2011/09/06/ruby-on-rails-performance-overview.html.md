@@ -7,11 +7,11 @@ title: Ruby on Rails Performance Overview
 
 
 
-Over the last few months, I've been involved in a Ruby on Rails (version 2.3) project that had a strong need to implement performance improvements using various methods. Here, I'll summarize some the methods and tools used for performance optimization on this application.
+Over the last few months, I’ve been involved in a Ruby on Rails (version 2.3) project that had a strong need to implement performance improvements using various methods. Here, I’ll summarize some the methods and tools used for performance optimization on this application.
 
 ### Fragment Caching
 
-Before I started on the project, there was already a significant amount of [fragment caching](http://guides.rubyonrails.org/caching_with_rails.html#fragment-caching) in use throughout the site. In it's most basic form, fragment caching wraps a cache method around existing view code:
+Before I started on the project, there was already a significant amount of [fragment caching](http://guides.rubyonrails.org/caching_with_rails.html#fragment-caching) in use throughout the site. In it’s most basic form, fragment caching wraps a cache method around existing view code:
 
 ```nohighlight
 <%= cache "product-meta-#{product.id}" %>
@@ -39,7 +39,7 @@ I did not initially add page caching to the application because the system has c
 
 ### Raw SQL methods
 
-Another performance technique I employed on this application was using raw SQL rather than use standard ActiveRecord methods to lookup association data. The application uses [ActsAsTaggable](http://rubyforge.org/projects/taggable/), a gem that enables you to tag objects. The simplified data model looks like this, which includes a polymorphic relationship in the taggings table to the items tagged (products, categories):
+Another performance technique I employed on this application was using raw SQL rather than use standard ActiveRecord methods to lookup association data. The application uses [ActsAsTaggable](https://web.archive.org/web/20111020154349/rubyforge.org/projects/taggable/), a gem that enables you to tag objects. The simplified data model looks like this, which includes a polymorphic relationship in the taggings table to the items tagged (products, categories):
 
 <a href="/blog/2011/09/06/ruby-on-rails-performance-overview/image-0-big.png" onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5649308360992095682" src="/blog/2011/09/06/ruby-on-rails-performance-overview/image-0.png" style="display:block; margin:0px auto 10px; text-align:center;cursor:pointer; cursor:hand;width: 400px; height: 219px;"/></a>
 
@@ -53,7 +53,7 @@ def self.tag_list
 end
 ```
 
-However, this request is quite sluggish because it has to iterate through each object and it's tags. I wrote raw SQL to generate the Tag objects, which runs at least 10 times faster than using standard ActiveRecord association lookup:
+However, this request is quite sluggish because it has to iterate through each object and it’s tags. I wrote raw SQL to generate the Tag objects, which runs at least 10 times faster than using standard ActiveRecord association lookup:
 
 ```ruby
 def self.tag_list
@@ -71,7 +71,7 @@ Typically, using ActiveRecord find methods and the item associations may yield m
 
 ### Rails Low Level Caching
 
-Next up, there were several opportunities through the site to use Rails low level caching. Here's one example of a simple use of Rails low level caching, which pulls a list of products that the user has owner or creator rights to:
+Next up, there were several opportunities through the site to use Rails low level caching. Here’s one example of a simple use of Rails low level caching, which pulls a list of products that the user has owner or creator rights to:
 
 ```ruby
 class User < ActiveRecord::Base 
@@ -89,7 +89,7 @@ end
 
 ```
 
-Rails low level caching makes sense for data that's pulled throughout various actions but additional computations are applied to this data. We are unable to cache this at the page request or action level, but we can cache the data retrieved with low level caching. I also used Rails low level caching on the search index pages, which is described more in depth [here](/blog/2011/07/22/rails-optimization-advanced-techniques).
+Rails low level caching makes sense for data that’s pulled throughout various actions but additional computations are applied to this data. We are unable to cache this at the page request or action level, but we can cache the data retrieved with low level caching. I also used Rails low level caching on the search index pages, which is described more in depth [here](/blog/2011/07/22/rails-optimization-advanced-techniques).
 
 ### HTML Asset related Performance
 
@@ -103,13 +103,13 @@ In addition to server-side optimization, I investigated several avenues of HTML 
 
 Throughout performance tweaking, I used the following tools:
 
-- Rails' [standard logger](http://guides.rubyonrails.org/debugging_rails_applications.html#the-logger)
-- PostgreSQL's [ANALYZE](http://www.postgresql.org/docs/8.1/static/sql-analyze.html)
-- Ruby's [Benchmark Module](http://ruby-doc.org/stdlib/libdoc/benchmark/rdoc/index.html)
-- [WebPageTest.org](http://www.webpagetest.org/)
+- Rails’ [standard logger](http://guides.rubyonrails.org/debugging_rails_applications.html#the-logger)
+- PostgreSQL’s [ANALYZE](https://www.postgresql.org/docs/8.1/static/sql-analyze.html)
+- Ruby’s [Benchmark Module](https://ruby-doc.org/stdlib-2.5.1/libdoc/benchmark/rdoc/index.html)
+- [WebPageTest.org](https://www.webpagetest.org/)
 
 ### Conclusion
 
-There are a few Rails caching techniques that I did not use in the application, such as [action caching](http://guides.rubyonrails.org/caching_with_rails.html#action-caching) and [SQL Caching](http://guides.rubyonrails.org/caching_with_rails.html#sql-caching). The [Rails caching overview](http://guides.rubyonrails.org/caching_with_rails.html) provides a great summary of caching techniques, but does not cover Rails low level caching. Another great resources for performance optimization is [Yahoo's Best Practices for Speeding Up Your Web Site](http://developer.yahoo.com/performance/rules.html), but it focuses on asset related optimization opportunities. I typically recommend pursuing optimization on both the server-side and asset related fronts.
+There are a few Rails caching techniques that I did not use in the application, such as [action caching](http://guides.rubyonrails.org/caching_with_rails.html#action-caching) and [SQL Caching](http://guides.rubyonrails.org/caching_with_rails.html#sql-caching). The [Rails caching overview](http://guides.rubyonrails.org/caching_with_rails.html) provides a great summary of caching techniques, but does not cover Rails low level caching. Another great resources for performance optimization is [Yahoo’s Best Practices for Speeding Up Your Web Site](https://developer.yahoo.com/performance/rules.html), but it focuses on asset related optimization opportunities. I typically recommend pursuing optimization on both the server-side and asset related fronts.
 
 

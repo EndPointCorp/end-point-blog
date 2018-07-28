@@ -32,9 +32,9 @@ mysql> desc foo;
 mysql>
 ```
 
-I had always assumed those size attributes were limiters, MySQL's way of providing some sort of constraint on the integers allowed in the field. While doing some recent work for a MySQL client, I attempted to enforce the range of a tinyint according to that assumption. In reality, I only wanted a sign field, and would have liked to have applied a "CHECK field IN (-1,1)", but without check constraints I figured at least keeping obviously incorrect data out would be better than nothing.
+I had always assumed those size attributes were limiters, MySQL’s way of providing some sort of constraint on the integers allowed in the field. While doing some recent work for a MySQL client, I attempted to enforce the range of a tinyint according to that assumption. In reality, I only wanted a sign field, and would have liked to have applied a “CHECK field IN (-1,1)”, but without check constraints I figured at least keeping obviously incorrect data out would be better than nothing.
 
-I wanted to see what MySQL's behavior would be on data entry that failed the limiters. I was hoping for an error, but expecting truncation. What I discovered was neither.
+I wanted to see what MySQL’s behavior would be on data entry that failed the limiters. I was hoping for an error, but expecting truncation. What I discovered was neither.
 
 ```sql
 mysql> INSERT INTO foo (field_ti) VALUES (-1);
@@ -90,7 +90,7 @@ mysql> SELECT field_ti FROM foo;
 mysql>
 ```
 
-Two possible conclusions followed immediately: either the limiter feature was horribly broken, or those apparent sizes didn't represent a limiter feature. A full review of MySQL's [Numeric Types](http://dev.mysql.com/doc/refman/5.0/en/numeric-types.html) documentation provided the answer:
+Two possible conclusions followed immediately: either the limiter feature was horribly broken, or those apparent sizes didn’t represent a limiter feature. A full review of MySQL’s [Numeric Types](https://dev.mysql.com/doc/refman/8.0/en/numeric-types.html) documentation provided the answer:
 
 > 
 > MySQL supports an extension for optionally specifying the display width of integer data types in parentheses following the base keyword for the type. For example, INT(4) specifies an INT with a display width of four digits. This optional display width may be used by applications to display integer values having a width less than the width specified for the column by left-padding them with spaces. (That is, this width is present in the metadata returned with result sets. Whether it is used or not is up to the application.)

@@ -5,7 +5,7 @@ tags: javascript
 title: Preventing Global Variables in JavaScript
 ---
 
-JavaScript's biggest problem is its dependence on global variables
+JavaScript’s biggest problem is its dependence on global variables
 ―Douglas Crockford, *JavaScript: The Good Parts*
 
 Recently I built out support for affiliate management into LocateExpress.com’s Sinatra app using JavaScript and YUI.
@@ -18,7 +18,7 @@ I used a working page from the admin, Service Providers, as a starting point to 
 
 There were no errors in the console, and the forms on the Service Providers page remained broken even after restoring an old copy of service_providers.js. As it turns out, a global variable, edit_map, was defined within service_providers.js, and again in the copied affiliates.js. Credit for spotting the problem goes to Brian Miller.
 
-The fix was as simple as moving edit_map's declaration into the file's YUI sandbox, so that version of edit_map wouldn't be visible to any other pages in the admin.
+The fix was as simple as moving edit_map’s declaration into the file’s YUI sandbox, so that version of edit_map wouldn’t be visible to any other pages in the admin.
 
 ### **Preventing global variables**
 
@@ -53,6 +53,6 @@ function(Y) {
 });
 ```
 
-<a href="http://www.amazon.com/JavaScript-Good-Parts-Douglas-Crockford/dp/0596517742"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5686371099560345650" src="/blog/2011/12/15/preventing-global-variables-in/image-1.gif" style="float:left; margin:0 10px 10px 0;cursor:pointer; cursor:hand;width: 180px; height: 236px;"/></a>
+<a href="https://www.amazon.com/JavaScript-Good-Parts-Douglas-Crockford/dp/0596517742"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5686371099560345650" src="/blog/2011/12/15/preventing-global-variables-in/image-1.gif" style="float:left; margin:0 10px 10px 0;cursor:pointer; cursor:hand;width: 180px; height: 236px;"/></a>
 
 I highly recommend [JavaScript: The Good Parts](https://www.amazon.com/JavaScript-Good-Parts-Douglas-Crockford/dp/0596517742) to learn about the best JavaScript has to offer and workarounds for its ugly side. The author also wrote a very popular code-checker, JSLint, which could help debug this nasty problem by highlighting implicit global variables.

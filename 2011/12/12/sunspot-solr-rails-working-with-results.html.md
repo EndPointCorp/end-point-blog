@@ -7,7 +7,7 @@ title: 'Sunspot, Solr, Rails: Working with Results'
 
 
 
-Having worked with [Sunspot](http://sunspot.github.com/) and [Solr](http://lucene.apache.org/solr/) in several large Rails projects now, I've gained some knowledge about working with result sets optimally. Here's a brief explanation on working with results or hits from a search object.
+Having worked with [Sunspot](http://sunspot.github.io/) and [Solr](https://lucene.apache.org/solr/) in several large Rails projects now, I’ve gained some knowledge about working with result sets optimally. Here’s a brief explanation on working with results or hits from a search object.
 
 ### MVC Setup
 
@@ -68,7 +68,7 @@ The above code works. It works nicely until you display many results on one page
 Thing Load (0.9ms)  SELECT "things".* FROM "things" WHERE "things"."id" IN (6, 12, 7, 13, 8, ...)
 ```
 
-An optimized way to work with search results sets is working directly with hits. @search.hits is an array of Sunspot::Search::Hits, which represent the raw information returned by Solr for a single returned item. Hit objects provide access to stored field values, identified by the :stored option in the model's searchable definition. The model definition looks the same. The controller may now look like this:
+An optimized way to work with search results sets is working directly with hits. @search.hits is an array of Sunspot::Search::Hits, which represent the raw information returned by Solr for a single returned item. Hit objects provide access to stored field values, identified by the :stored option in the model’s searchable definition. The model definition looks the same. The controller may now look like this:
 
 ```ruby
 class ThingsController < ApplicationController
@@ -101,7 +101,7 @@ And working with the data in the view may look like this:
 <% end -%>
 ```
 
-In some cases, you may want to introduce an additional piece of logic prior pagination, which is the case with the most recent Rails application I've been working on:
+In some cases, you may want to introduce an additional piece of logic prior pagination, which is the case with the most recent Rails application I’ve been working on:
 
 ```ruby
     ...
@@ -120,6 +120,6 @@ In some cases, you may want to introduce an additional piece of logic prior pagi
     @hits = filtered_results.paginate :page => params[:page], :per_page => 25
 ```
 
-Sunspot and Solr are rich with functionality and features that can add value to a Rails application, but it's important to identify areas of the application where database calls can be minimized and lazy loading can be optimized for better performance. The standard log file and database log file are good places to start looking.
+Sunspot and Solr are rich with functionality and features that can add value to a Rails application, but it’s important to identify areas of the application where database calls can be minimized and lazy loading can be optimized for better performance. The standard log file and database log file are good places to start looking.
 
 

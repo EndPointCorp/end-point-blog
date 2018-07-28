@@ -9,13 +9,13 @@ title: Changing postgresql.conf from a script
 
 <a href="/blog/2011/08/10/changing-postgresqlconf-from-script/image-0-big.jpeg" onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}"><img 207px;"="" 320px;="" alt="" border="0" cursor:hand;width:="" cursor:pointer;="" height:="" id="BLOGGER_PHOTO_ID_5639288985207208354" src="/blog/2011/08/10/changing-postgresqlconf-from-script/image-0.jpeg"/></a>
 
-Image by ["TheBusyBrain" on Flickr](http://www.flickr.com/photos/thebusybrain/)
+Image by [“TheBusyBrain” on Flickr](https://www.flickr.com/photos/thebusybrain/)
 
 The modify_postgres_conf script for Postgres allows you to change your postgresql.conf file from the command line, via a cron job, or any time when you want to automate the process.
 
-Postgres runs as a background daemon. The configuration parameters it runs with are stored in a file named postgresql.conf. To change the behavior of Postgres, one must usually edit this file, and then tell Postgres that you have made the changes. Sometimes all that is needed is to 'HUP' or reload Postgres. Most changes fall into this category. Other changes require a full restart of Postgres, which entails disconnecting all current clients.
+Postgres runs as a background daemon. The configuration parameters it runs with are stored in a file named postgresql.conf. To change the behavior of Postgres, one must usually edit this file, and then tell Postgres that you have made the changes. Sometimes all that is needed is to ‘HUP’ or reload Postgres. Most changes fall into this category. Other changes require a full restart of Postgres, which entails disconnecting all current clients.
 
-Thus, to make a change, one must edit the file, find the item to change (the file consists of "name = value" lines), change it, then send a signal to the main Postgres process so it picks up the change. Finally, you should then connect to Postgres to make sure it is still running and has accepted the latest change.
+Thus, to make a change, one must edit the file, find the item to change (the file consists of “name = value” lines), change it, then send a signal to the main Postgres process so it picks up the change. Finally, you should then connect to Postgres to make sure it is still running and has accepted the latest change.
 
 Doing this automatically (such as via a cron script) is very difficult. One method, if you are doing something simple like toggling between two known configuration files, is to simply store copies of both files and replace them, like this example cronjob:
 
@@ -26,7 +26,7 @@ Doing this automatically (such as via a cron script) is very difficult. One meth
 
 The major problem with that approach, as I quickly learned when I tried it, is that despite nobody making changes to the postgresql.conf file in *years*, a few days after I put the above change in place, someone decided to edit postgresql.conf. At 10:30AM the next day, their changes were blown away. A better way is to simply write a program to make the change for you. Thus, the modify_postgres_conf.pl script.
 
-The basic usage is to tell the script where the conf file is, and list what changes you want to make. Here's an example that will change the random_page_cost to **2** on a Debian system:
+The basic usage is to tell the script where the conf file is, and list what changes you want to make. Here’s an example that will change the random_page_cost to **2** on a Debian system:
 
 ```bash
 ./modify_postgres_conf.pl --pgconf /etc/postgresql/9.0/main/postgresql.conf --change random_page_cost=2
@@ -36,9 +36,16 @@ Here is exactly what the script does for the above statement:
 
 - For each item to be changed, we:
 
-        - Ask the database what the current value is (and die if that parameter does not exist)        - If the current and new value are the same, do nothing        - Otherwise, open (and flock) the configuration file and change the parameter
+        <ul>
+          <li>Ask the database what the current value is (and die if that parameter does not exist)</li>
+          <li>If the current and new value are the same, do nothing</li>
+          <li>Otherwise, open (and flock) the configuration file and change the parameter</li>
+        </ul>
 
-- If no changes were made, exit- Otherwise, close the configuration file- Figure out the Postgres PID and send it a HUP signal- Reconnect to the database and confirm each change has taken effect
+- If no changes were made, exit
+- Otherwise, close the configuration file
+- Figure out the Postgres PID and send it a HUP signal
+- Reconnect to the database and confirm each change has taken effect
 
 By default, it adds a comment after the changed value as well, to help in tracking down who made the change. A diff of the postgresql.conf file after running the example above produces:
 

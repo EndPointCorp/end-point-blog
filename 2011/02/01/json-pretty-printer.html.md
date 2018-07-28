@@ -63,7 +63,7 @@ into this much more readable specimen:
 }
 ```
 
-But today I thought back to that and figured surely something like that must already be at hand if I'd just looked for it. Sure enough, there are many easy options that work conveniently from the shell, similarly to that script:
+But today I thought back to that and figured surely something like that must already be at hand if I’d just looked for it. Sure enough, there are many easy options that work conveniently from the shell, similarly to that script:
 
 - json_xs (Perl JSON::XS)
 - python -mjson.tool (Python 2.6+)

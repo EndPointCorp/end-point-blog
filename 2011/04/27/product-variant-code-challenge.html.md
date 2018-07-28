@@ -7,7 +7,7 @@ title: A Product Variant Code Challenge
 
 
 
-A while ago, I came across a [cute little Ruby challenge](http://norbauer.com/notebooks/code/notes/code-challenge-combinations) that looked interesting:
+A while ago, I came across a [cute little Ruby challenge](https://www.norbauer.com/rails-consulting/notes/code-challenge-combinations) that looked interesting:
 
 *
 
@@ -31,7 +31,7 @@ Entries can be written using one or more functions, and may optionally be writte
 
 *
 
-And now some context to why I thought this was applicable to ecommerce: Let's imagine you have a product. Then, let's imagine that the product has variations, or variants. We'll say we have an arbitrary size array of "option types", each with an arbitrary number of items in the array. Here, we have option types of size, color, and printed logo, which yields multiple variations, variants or combinations of a single product:
+And now some context to why I thought this was applicable to ecommerce: Let’s imagine you have a product. Then, let’s imagine that the product has variations, or variants. We’ll say we have an arbitrary size array of “option types”, each with an arbitrary number of items in the array. Here, we have option types of size, color, and printed logo, which yields multiple variations, variants or combinations of a single product:
 
 <table cellpadding="10" cellspacing="0" width="100%">
 <tbody><tr>
@@ -75,7 +75,7 @@ Small</td>
 </tr>
 </tbody></table>
 
-And let's give a real-life example data model, this one from a [previous article on Spree's product data model](/blog/2010/07/21/spree-sample-product-data):
+And let’s give a real-life example data model, this one from a [previous article on Spree’s product data model](/blog/2010/07/21/spree-sample-product-data):
 
 <img alt="" border="0" id="BLOGGER_PHOTO_ID_5598028813657050850" src="/blog/2011/04/27/product-variant-code-challenge/image-7.png" style="display:block; margin:0px auto 10px; text-align:center;cursor:pointer; cursor:hand;width: 537px; height: 279px;"/>
 
@@ -108,6 +108,6 @@ Given this context, we can say that the outer array dimension represents product
 ["small", "red", "blogger"]]
 ```
 
-Unfortunately, the original contest only received 2 submissions, so I wanted to open the door here to allow people to submit more submissions in Ruby and any other language. Please include a link to the gist or code solution and in a few weeks, I'll update the post with several submissions and links to the submissions, including my own solution. It's a nice little puzzle to take on in your desired language.
+Unfortunately, the original contest only received 2 submissions, so I wanted to open the door here to allow people to submit more submissions in Ruby and any other language. Please include a link to the gist or code solution and in a few weeks, I’ll update the post with several submissions and links to the submissions, including my own solution. It’s a nice little puzzle to take on in your desired language.
 
 

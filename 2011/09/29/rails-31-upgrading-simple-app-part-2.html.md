@@ -2,7 +2,7 @@
 author: Steph Skardal
 gh_issue_number: 502
 tags: rails
-title: 'Rails 3.1: Upgrading a Simple App - Part 2'
+title: 'Rails 3.1: Upgrading a Simple App — Part 2'
 ---
 
 
@@ -78,7 +78,7 @@ To enforce loading order of JavaScript files, application.js contains the follow
 //= require_tree .
 ```
 
-I did not decide to reorganize images at this point in time, since many of our blog articles references on-site images and I didn't want to address blog article updates with this upgrade.
+I did not decide to reorganize images at this point in time, since many of our blog articles references on-site images and I didn’t want to address blog article updates with this upgrade.
 
 ### Learning the Asset Tasks
 
@@ -136,7 +136,7 @@ These updates sorted out the JavaScript errors.
 
 ### Sass
 
-One of the great things about Rails 3.1 is that it makes using Sass or scss very easy. I've written about Sass a couple of times before ([here](/blog/2011/05/18/sass-at-railsconf-2011) and [here](/blog/2011/05/16/railsconf-2011-day-one)) and am happy to leverage its functionality. The stylesheets were updated to have a *.scss extension to force scss template rendering. I introduced variables, which allow you to easily represent and update colors used globally:
+One of the great things about Rails 3.1 is that it makes using Sass or scss very easy. I’ve written about Sass a couple of times before ([here](/blog/2011/05/18/sass-at-railsconf-2011) and [here](/blog/2011/05/16/railsconf-2011-day-one)) and am happy to leverage its functionality. The stylesheets were updated to have a *.scss extension to force scss template rendering. I introduced variables, which allow you to easily represent and update colors used globally:
 
 ```scss
 $blue: #195065;
@@ -156,14 +156,14 @@ And I introduced nesting, which is a great tool for minimizing retyping style de
 }
 ```
 
-Read more about other great Sass features like Mixins, Selector Inheritance, Functions, and Operations [here](http://sass-lang.com/).
+Read more about other great Sass features like Mixins, Selector Inheritance, Functions, and Operations [here](https://sass-lang.com/).
 
 ### Conclusion
 
 Closing thoughts:
 
 - I spent equal time on asset pipeline updates and non-asset pipeline updates described in [the previous article](/blog/2011/09/21/rails-31-upgrading-simple-app-part-1). A coworker commented that he was surprised it took so long to work through the upgrade. The upgrade to Rails 3.1 is not trivial, but there are plenty of great resources out there. I found the [Rails Guides](http://guides.rubyonrails.org/index.html) to be particularly helpful.
-- I did not leverage [CoffeeScript](http://jashkenas.github.com/coffee-script/), which is a meta language that compiles into JavaScript much like how scss compiles into css. I don't have experience working with CoffeeScript and I didn't feel like this was the project to start learning it.
-- I did not reorganize any image assets. However, I've done this in another Rails 3.1 application and have found it to be relatively painless.
+- I did not leverage [CoffeeScript](https://coffeescript.org/), which is a meta language that compiles into JavaScript much like how scss compiles into css. I don’t have experience working with CoffeeScript and I didn’t feel like this was the project to start learning it.
+- I did not reorganize any image assets. However, I’ve done this in another Rails 3.1 application and have found it to be relatively painless.
 
 

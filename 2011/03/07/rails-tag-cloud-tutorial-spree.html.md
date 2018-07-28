@@ -13,15 +13,15 @@ Tag clouds have become a fairly popular way to present data on the web. One of o
 
 ### Step 1: Determine Organization
 
-If you are running this as an extension on Spree pre-Rails 3.0 versions, you'll create an extension to house the custom code. If you are running this as part of a Rails 3.0 application or Spree Rails 3.0 versions, you'll want to consider creating a custom gem to house the custom code. In my case, I'm writing a Spree extension for an application running on Spree 0.11, so I create an extension with the command script/generate extension SearchTag.
+If you are running this as an extension on Spree pre-Rails 3.0 versions, you’ll create an extension to house the custom code. If you are running this as part of a Rails 3.0 application or Spree Rails 3.0 versions, you’ll want to consider creating a custom gem to house the custom code. In my case, I’m writing a Spree extension for an application running on Spree 0.11, so I create an extension with the command script/generate extension SearchTag.
 
 ### Step 2: Data Model & Migration
 
-First, the desired data model for the tag cloud data should be defined. Here's what mine will look like in this tutorial:
+First, the desired data model for the tag cloud data should be defined. Here’s what mine will look like in this tutorial:
 
 <a href="/blog/2011/03/07/rails-tag-cloud-tutorial-spree/image-0-big.png" onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5581403495920932162" src="/blog/2011/03/07/rails-tag-cloud-tutorial-spree/image-0.png" style="display:block; margin:0px auto 10px; text-align:center;cursor:pointer; cursor:hand;width: 167px; height: 113px;"/></a>
 
-Next, a model and migration must be created to introduce the class, table and it's fields. In Spree, I run script/generate extension_model SearchTag SearchRecord and update the migration file to contain the following:
+Next, a model and migration must be created to introduce the class, table and it’s fields. In Spree, I run script/generate extension_model SearchTag SearchRecord and update the migration file to contain the following:
 
 ```ruby
 class CreateSearchRecords < ActiveRecord::Migration
@@ -55,7 +55,7 @@ end
 
 ### Step 3: Populating the Data
 
-After the migration has been applied, I'll need to update the code to populate the data. I'm going to add an after filter on every user search. In the case of using Spree, I update search_tag_extension.rb to contain the following:
+After the migration has been applied, I’ll need to update the code to populate the data. I’m going to add an after filter on every user search. In the case of using Spree, I update search_tag_extension.rb to contain the following:
 
 ```ruby
 def activate
@@ -84,7 +84,7 @@ module Spree::SearchTagCloud::ProductsController
 end
 ```
 
-The module appends an after filter to the products#index action. The after filter method cleans the search term and creates a record or increments the existing record's count. If this is added directly into an existing Rails application, this bit of functionality may be added directly into one or more existing controller methods to record the search term.
+The module appends an after filter to the products#index action. The after filter method cleans the search term and creates a record or increments the existing record’s count. If this is added directly into an existing Rails application, this bit of functionality may be added directly into one or more existing controller methods to record the search term.
 
 ### Step 4: Reporting the Data
 
@@ -96,7 +96,7 @@ map.namespace :admin do |admin|
 end
 ```
 
-And I update my controller to calculate the search tag cloud data, shown below. The index method method retrieves all of the search records, sorts, and grabs the the top x results, where x is some configuration defined by the administrator. The method determines the linear solution for scaling the search_record.count to font sizes ranging from 8 pixels to 25 pixels. This order of terms is randomized ([.shuffle](http://www.ruby-doc.org/core/classes/Array.html#M000284)) and linear equation applied. This linear shift can be applied to different types of data. For example, if a tag cloud is to show products with a certain tag, the totals per tag must be calculated and scaled linearly.
+And I update my controller to calculate the search tag cloud data, shown below. The index method method retrieves all of the search records, sorts, and grabs the the top x results, where x is some configuration defined by the administrator. The method determines the linear solution for scaling the search_record.count to font sizes ranging from 8 pixels to 25 pixels. This order of terms is randomized ([.shuffle](https://ruby-doc.org/core-2.5.1/Array.html#M000284)) and linear equation applied. This linear shift can be applied to different types of data. For example, if a tag cloud is to show products with a certain tag, the totals per tag must be calculated and scaled linearly.
 
 ```ruby
 class Admin::SearchTagCloudsController < Admin::BaseController
@@ -134,7 +134,7 @@ The data is presented to the user in the following view:
 
 ### Step 5: Adding Flexibility
 
-In this project, I added configuration variables for the total number of terms displayed, and maximum and minimum font size using Spree's preference architecture. In a generic Rails application, this may be a nice bit of functionality to include with the preferred configuration architecture.
+In this project, I added configuration variables for the total number of terms displayed, and maximum and minimum font size using Spree’s preference architecture. In a generic Rails application, this may be a nice bit of functionality to include with the preferred configuration architecture.
 
 <a href="/blog/2011/03/07/rails-tag-cloud-tutorial-spree/image-1-big.png" onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5581403499162521858" src="/blog/2011/03/07/rails-tag-cloud-tutorial-spree/image-1.png" style="display:block; margin:0px auto 10px; text-align:center;cursor:pointer; cursor:hand;width: 327px; height: 132px;"/></a>
 

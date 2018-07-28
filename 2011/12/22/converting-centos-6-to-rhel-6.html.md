@@ -7,9 +7,9 @@ title: Converting CentOS 6 to RHEL 6
 
 
 
-A few years ago I needed to convert a [Red Hat Enterprise Linux](http://www.redhat.com/rhel/) (RHEL) 5 development system to [CentOS](http://www.centos.org/) 5, as our customer did not actively use the system any more and no longer wanted to renew the Red Hat Network entitlement for it. Making the conversion was surprisingly straightforward.
+A few years ago I needed to convert a [Red Hat Enterprise Linux](https://www.redhat.com/en/technologies/linux-platforms/enterprise-linux) (RHEL) 5 development system to [CentOS](https://www.centos.org/) 5, as our customer did not actively use the system any more and no longer wanted to renew the Red Hat Network entitlement for it. Making the conversion was surprisingly straightforward.
 
-This week I needed to make a conversion in the opposite direction: from CentOS 6 to RHEL 6. I didn't find any instructions on doing so, but found a [RHEL 6 to CentOS 6 conversion guide](http://ivo.livejournal.com/75008.html) with roughly these steps:
+This week I needed to make a conversion in the opposite direction: from CentOS 6 to RHEL 6. I didn’t find any instructions on doing so, but found a [RHEL 6 to CentOS 6 conversion guide](https://ivo.livejournal.com/75008.html) with roughly these steps:
 
 ```bash
 yum clean all
@@ -29,20 +29,22 @@ yum upgrade
 
 I then put together a plan to do more or less the opposite of that. The high-level overview of the steps is:
 
-1. Completely upgrade the current CentOS and reboot to run the latest kernel, if necessary, to make sure you're starting with a solid system.
+1. Completely upgrade the current CentOS and reboot to run the latest kernel, if necessary, to make sure you’re starting with a solid system.
 1. Install a handful of packages that will be needed by various RHN tools.
 1. Log into the Red Hat Network web interface and search for and download onto the server the most recent version of these packages for RHEL 6 x86_64:
 
-        - redhat-release-server-6Server
-        - rhn-check
-        - rhn-client-tools
-        - rhnlib
-        - rhnsd
-        - rhn-setup
-        - yum
-        - yum-metadata-parser
-        - yum-rhn-plugin
-        - yum-utils
+        <ul>
+          <li>redhat-release-server-6Server</li>
+          <li>rhn-check</li>
+          <li>rhn-client-tools</li>
+          <li>rhnlib</li>
+          <li>rhnsd</li>
+          <li>rhn-setup</li>
+          <li>yum</li>
+          <li>yum-metadata-parser</li>
+          <li>yum-rhn-plugin</li>
+          <li>yum-utils</li>
+        </ul>
 
 1. Install the Red Hat GnuPG signing key.
 1. Forcibly remove the package that identifies this system as CentOS.
@@ -79,8 +81,8 @@ rhn_register
 yum upgrade
 ```
 
-I'm expecting to use this process a few more times in the near future. It is very useful when working with a hosting provider that does not directly support RHEL, but provides CentOS, so we can get the new servers set up without needing to request a custom operating system installation that may add a day or two to the setup time.
+I’m expecting to use this process a few more times in the near future. It is very useful when working with a hosting provider that does not directly support RHEL, but provides CentOS, so we can get the new servers set up without needing to request a custom operating system installation that may add a day or two to the setup time.
 
-Given the popularity of both RHEL and CentOS, it would be neat for Red Hat to provide a tool that would easily switch, at least "upgrading" from CentOS to RHEL to bring more customers into their fold, if not the other direction!
+Given the popularity of both RHEL and CentOS, it would be neat for Red Hat to provide a tool that would easily switch, at least “upgrading” from CentOS to RHEL to bring more customers into their fold, if not the other direction!
 
 

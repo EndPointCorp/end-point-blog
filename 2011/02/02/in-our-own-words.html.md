@@ -7,7 +7,7 @@ title: In Our Own Words
 
 What do our words say about us?
 
-<img border="0" src="/blog/2011/02/02/in-our-own-words/image-0.png" width="800px"/>
+![](/blog/2011/02/02/in-our-own-words/image-0.png)
 
 Recently, I came across [Wordle](http://www.wordle.net/), a Java-based Google App Engine application that generates word clouds from websites and raw text. I wrote a cute little rake task to grab text from our blog to plug into Wordle. The rake task grabs the blog contents, uses REXML for parsing, and then lowercases the results. The task also applies a bit of aliasing since we use postgres, postgreSQL and pg interchangeably in our blog.
 

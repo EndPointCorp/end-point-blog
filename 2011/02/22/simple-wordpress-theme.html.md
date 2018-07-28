@@ -7,12 +7,12 @@ title: A Simple WordPress Theme In Action
 
 
 
-I’m a big fan of [WordPress](http://wordpress.org/). And I’m a big fan of building WordPress themes from the ground up. Why am I a big fan of building them from the ground up? Because...
+I’m a big fan of [WordPress](https://wordpress.org/). And I’m a big fan of building WordPress themes from the ground up. Why am I a big fan of building them from the ground up? Because...
 
-- It's very easy to setup and build if you plan to move to utilize WordPress's blog architecture for your site, but just have a set of static pages initially.
+- It’s very easy to setup and build if you plan to move to utilize WordPress’s blog architecture for your site, but just have a set of static pages initially.
 - It allows you to incrementally add elements to your theme from starting from the ground up, rather than cutting out elements from a complex theme.
 - It allows you to leave out features that you don’t need (search, comments, archives, listing of aticles), but still take advantage of the WordPress plugin community and core functionality.
-- The learning curve of WordPress APIs and terminology can be complicated. It's nice to start simple and build up.
+- The learning curve of WordPress APIs and terminology can be complicated. It’s nice to start simple and build up.
 
 Here are some screenshots from my simple WordPress theme in action, a site that contains several static pages.
 
@@ -31,19 +31,19 @@ The template is comprised of several files:
 </tr>
 <tr>
 <td valign="top">header.php</td>
-<td style="padding: 0px 0px 10px 10px;">Includes doctype, header html, and global stylesheets included here. <a href="http://codex.wordpress.org/Plugin_API/Action_Reference/wp_head">wp_head()</a> is called in the header, which will call any executables tied to the header hook using WordPress’s hook API. <a href="http://codex.wordpress.org/Function_Reference/wp_list_pages">wp_list_pages()</a> is also called, which is WordPress’s core method for listing pages.</td>
+<td style="padding: 0px 0px 10px 10px;">Includes doctype, header html, and global stylesheets included here. <a href="https://codex.wordpress.org/Plugin_API/Action_Reference/wp_head">wp_head()</a> is called in the header, which will call any executables tied to the header hook using WordPress’s hook API. <a href="https://developer.wordpress.org/reference/functions/wp_list_pages/">wp_list_pages()</a> is also called, which is WordPress’s core method for listing pages.</td>
 </tr>
 <tr>
 <td valign="top">footer.php</td>
-<td style="padding: 0px 0px 10px 10px;">Includes footer navigation elements, global JavaScript, and Google Analytics. <a href="http://codex.wordpress.org/Plugin_API/Action_Reference/wp_footer">wp_footer()</a>, is also called here, which will call any executables tied to the footer hook using WordPress's hook API.</td>
+<td style="padding: 0px 0px 10px 10px;">Includes footer navigation elements, global JavaScript, and Google Analytics. <a href="https://codex.wordpress.org/Plugin_API/Action_Reference/wp_footer">wp_footer()</a>, is also called here, which will call any executables tied to the footer hook using WordPress’s hook API.</td>
 </tr>
 <tr>
 <td valign="top">index.php</td>
-<td style="padding: 0px 0px 10px 10px;">Calls get_header() and get_footer(), WordPress's core methods for displaying the header and footer. This also contains static content for the homepage for now (text and images).</td>
+<td style="padding: 0px 0px 10px 10px;">Calls get_header() and get_footer(), WordPress’s core methods for displaying the header and footer. This also contains static content for the homepage for now (text and images).</td>
 </tr>
 <tr>
 <td>page.php</td>
-<td style="padding: 0px 0px 10px 10px;">Calls get_header() and get_footer(). Uses <a href="”http://codex.wordpress.org/The_Loop”">The Loop</a>, or WordPress's core functionality for display individual posts or pages to display the page content to render the single page static content.</td>
+<td style="padding: 0px 0px 10px 10px;">Calls get_header() and get_footer(). Uses <a href="https://codex.wordpress.org/The_Loop">The Loop</a>, or WordPress’s core functionality for display individual posts or pages to display the page content to render the single page static content.</td>
 </tr>
 <tr>
 <td valign="top">404.php</td>
@@ -74,6 +74,6 @@ Below are a couple snapshots of the shared elements between pages.
 
 You can see the site in the wild [here](http://stephskardal.com/).
 
-*Update: Since this article was published, the website shown here has been updated to include a "blog" page, which is one more page that uses the [exec-php plugin](http://wordpress.org/extend/plugins/exec-php/) to list blog articles.*
+*Update: Since this article was published, the website shown here has been updated to include a “blog” page, which is one more page that uses the [exec-php plugin](https://wordpress.org/plugins/exec-php/) to list blog articles.*
 
 

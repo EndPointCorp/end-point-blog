@@ -11,25 +11,25 @@ title: Bucardo multi-master for PostgreSQL
 
 The original Bucardo
 
-The next version of [Bucardo](http://bucardo.org/wiki/Bucardo), a replication system for [Postgres](http://postgres.org/), is almost complete. The scope of the changes required a major version bump, so this Bucardo will start at version 5.0.0. Much of the innards was rewritten, with the following goals:
+The next version of [Bucardo](https://bucardo.org/Bucardo/), a replication system for [Postgres](https://www.postgresql.org/), is almost complete. The scope of the changes required a major version bump, so this Bucardo will start at version 5.0.0. Much of the innards was rewritten, with the following goals:
 
  
 
 ### Multi-master support
 
-Where "multi" means "as many as you want"! There are no more pushdelta (master to slaves) or swap (master to master) syncs: there is simply one sync where you tell it which databases to use, and what role they play. See examples below.
+Where “multi” means “as many as you want”! There are no more pushdelta (master to slaves) or swap (master to master) syncs: there is simply one sync where you tell it which databases to use, and what role they play. See examples below.
 
 ### Ease of use
 
-The **bucardo** program (previously known as 'bucardo_ctl') has been greatly improved, making all the administrative tasks such as adding tables, creating syncs, etc. much easier.
+The **bucardo** program (previously known as ‘bucardo_ctl’) has been greatly improved, making all the administrative tasks such as adding tables, creating syncs, etc. much easier.
 
 ### Performance
 
-Much of the underlying architecture was improved, and sometimes rewritten, to make things go much faster. Most striking is the difference between the old multi-master "swap syncs" and the new method, which has been described as "orders of magnitudes" faster by early testers. We use async database calls whenever possible, and no longer have the bottleneck of a single large bucardo_delta table.
+Much of the underlying architecture was improved, and sometimes rewritten, to make things go much faster. Most striking is the difference between the old multi-master “swap syncs” and the new method, which has been described as “orders of magnitudes” faster by early testers. We use async database calls whenever possible, and no longer have the bottleneck of a single large bucardo_delta table.
 
 ### Improved logging
 
-Not only are more details provided, there is now the ability to control how verbose the logs are. Just set the log_level parameter to terse, normal, verbose, or debug. Those who had busy systems, which was the equivalent of a 'debug' firehose, will really appreciate this.
+Not only are more details provided, there is now the ability to control how verbose the logs are. Just set the log_level parameter to terse, normal, verbose, or debug. Those who had busy systems, which was the equivalent of a ‘debug’ firehose, will really appreciate this.
 
 ### Different targets
 
@@ -37,7 +37,7 @@ Who says your slave (target) databases need to be Postgres? In addition to the a
 
 -----------
 
-This new version is not quite at beta yet, but you can try out a demo of multi-master on Postgres quie easily. Let's see if we can do it in ten steps.
+This new version is not quite at beta yet, but you can try out a demo of multi-master on Postgres quie easily. Let’s see if we can do it in ten steps.
 
 #### I. Download all prerequisites
 
@@ -110,7 +110,7 @@ A herd is simply a logical grouping of tables. We did not add the other pgbench 
 bucardo add dbgroup tgroup t1:source t2:source t3:source t4:source t5:target
 ```
 
-We've grouped all five databases together, and made four of them masters (aka source), and one of them a slave (aka target). You can any combination of master and slaves you want, as long as there is at least one master.
+We’ve grouped all five databases together, and made four of them masters (aka source), and one of them a slave (aka target). You can any combination of master and slaves you want, as long as there is at least one master.
 
 #### VII. Create the Bucardo sync
 
@@ -137,7 +137,7 @@ pgbench -t 10000 btest3
 pgbench -t 10000 btest4
 ```
 
-Here, we've told pgbench to run ten thousand transactions against each of the first four databases. Triggers on these tables have captured the changes.
+Here, we’ve told pgbench to run ten thousand transactions against each of the first four databases. Triggers on these tables have captured the changes.
 
 #### X. Kick off the sync and watch the fun.
 
@@ -151,7 +151,7 @@ You can now tail the log.bucardo file to see the fun, or simply run:
 bucardo status
 ```
 
-...to see what it is doing, and the final counts when we are done. Don't forget to stop Bucardo when you are done testing:
+...to see what it is doing, and the final counts when we are done. Don’t forget to stop Bucardo when you are done testing:
 
 ```bash
 bucardo stop
@@ -166,7 +166,7 @@ Name     State    Last good    Time    Last I/D/C           Last bad    Time
 foobar | Good   | 17:58:37   | 3m2s  | 131836/131836/4785 | none      |
 ```
 
-Here we see that this syncs has never failed ("Last bad"), the time of day of the last good run, how long ago it was from right now (3 minutes and 2 seconds), as well as details of the last successful run. Last I/D/C stands for number of inserts, deletes, and collisions across all databases for this syncs. This is just an overview of all syncs at a high level, but we can also give status an argument of a sync name to see more details like so:
+Here we see that this syncs has never failed (“Last bad”), the time of day of the last good run, how long ago it was from right now (3 minutes and 2 seconds), as well as details of the last successful run. Last I/D/C stands for number of inserts, deletes, and collisions across all databases for this syncs. This is just an overview of all syncs at a high level, but we can also give status an argument of a sync name to see more details like so:
 
 ```bash
 bucardo status foobar
@@ -188,6 +188,6 @@ Post-copy analyze               : Yes
 Last error:                     :
 ```
 
-This gives us a little more information about the sync itself, as well as another important metric, how long the sync itself took to run, in this case, 42 seconds. That particular metric might make its way back to the overall "status" view above. Try things out and [help us find bugs](http://bucardo.org/bugzilla/) and improve Bucardo!
+This gives us a little more information about the sync itself, as well as another important metric, how long the sync itself took to run, in this case, 42 seconds. That particular metric might make its way back to the overall “status” view above. Try things out and [help us find bugs](https://github.com/bucardo/bucardo/issues) and improve Bucardo!
 
 

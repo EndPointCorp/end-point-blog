@@ -5,9 +5,9 @@ tags: javascript, performance, rails
 title: 'Rails Optimization: Digging Deeper'
 ---
 
-I recently wrote about [raw caching performance in Rails](/blog/2011/07/12/raw-caching-performance-in-rubyrails) and [advanced Rails performance techniques](/blog/2011/07/22/rails-optimization-advanced-techniques). In the latter article, I explained how to use a Rails low-level cache to store lists of **things** during the index or list request. This technique works well for list pages, but it doesn't necessarily apply to requests to an individual **thing**, or what is commonly referred to as the "show" action in Rails applications.
+I recently wrote about [raw caching performance in Rails](/blog/2011/07/12/raw-caching-performance-in-rubyrails) and [advanced Rails performance techniques](/blog/2011/07/22/rails-optimization-advanced-techniques). In the latter article, I explained how to use a Rails low-level cache to store lists of **things** during the index or list request. This technique works well for list pages, but it doesn’t necessarily apply to requests to an individual **thing**, or what is commonly referred to as the “show” action in Rails applications.
 
-In my application, the "show" action loaded at ~200 ms/request with low concurrency, with the use of Rails [fragment caching](http://api.rubyonrails.org/classes/ActionController/Caching/Fragments.html). And with high concurrency, the requests shot up to around 2000 ms/request. This wasn't cutting it! So, I pursued implementing full-page caching with a follow-up AJAX request, outlined by this diagram:
+In my application, the “show” action loaded at ~200 ms/request with low concurrency, with the use of Rails [fragment caching](https://apidock.com/rails/v2.0.0/ActionController/Caching/Fragments). And with high concurrency, the requests shot up to around 2000 ms/request. This wasn’t cutting it! So, I pursued implementing full-page caching with a follow-up AJAX request, outlined by this diagram:
 
 <img alt="" border="0" id="BLOGGER_PHOTO_ID_5637405702799042498" src="/blog/2011/08/05/rails-optimization-digging-deeper/image-0.png" style="display:block; margin:0px auto 10px; text-align:center;cursor:pointer; cursor:hand;" width="700"/>
 
@@ -75,7 +75,7 @@ $.ajax({
 });
 ```
 
-And don't forget the sweeper to clear the fully cached page after edits (or other ActiveRecord callbacks):
+And don’t forget the sweeper to clear the fully cached page after edits (or other ActiveRecord callbacks):
 
 ```ruby
 class ThingSweeper < ActionController::Caching::Sweeper
@@ -92,11 +92,11 @@ end
 
 There are some additional notes to mention:
 
-- If a user were to hack the AJAX or JavaScript, server-side validation is still being performed when an "edit" action is submitted. In other words, if a hacker somehow enabled an edit button to show up and post an edit, a server-side response would prohibit the update because the hacker does not have appropriate accessibility.
+- If a user were to hack the AJAX or JavaScript, server-side validation is still being performed when an “edit” action is submitted. In other words, if a hacker somehow enabled an edit button to show up and post an edit, a server-side response would prohibit the update because the hacker does not have appropriate accessibility.
 - HTML changes were made to accommodate this caching behavior, which was a bit tricky. HTML has to handle all potential use cases (no user, user & no edit access, user & edit access). jQuery itself can also be used to introduce new elements per use case.
 - The access level AJAX request is also hitting more low-level Rails caches: For example, the array of **things** that a user has edit permissions is cached and the cache is cleared with standard Rails sweepers. With this additional caching component, the access level AJAX request is hitting the database minimally.
 - Performance optimization scenarios such as this make an argument against inline editing of resources. If there were a backend admin interface to allow editing of **things**, full-page caching would be more straight-forward to implement.
 
 ### Conclusion
 
-With this functionality, fully cached pages are served with an average of less than 5 ms/request, and the AJAX accessibility request appears to be around 20 ms/request (although this is harder to test with simple command line tools). This is an improvement over the 200 ms/request initially implemented. Additionally, requests at a high concurrency don't bog down the system as much.
+With this functionality, fully cached pages are served with an average of less than 5 ms/request, and the AJAX accessibility request appears to be around 20 ms/request (although this is harder to test with simple command line tools). This is an improvement over the 200 ms/request initially implemented. Additionally, requests at a high concurrency don’t bog down the system as much.

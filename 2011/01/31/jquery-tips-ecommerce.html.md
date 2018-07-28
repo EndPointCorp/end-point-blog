@@ -5,68 +5,61 @@ tags: ecommerce, javascript, jquery, performance
 title: jQuery Tips and an Ecommerce Demo
 ---
 
-I've recently been jumping back and forth between YUI and jQuery on several different client projects. I prefer working with jQuery, but whenever I work with another framework, I realize what's out there and how I should continue to improve my skills in my preferred framework. I read up on jQuery tips and put together a summary of common tips I need to follow more explained here in an ecommerce demo.
+I’ve recently been jumping back and forth between YUI and jQuery on several different client projects. I prefer working with jQuery, but whenever I work with another framework, I realize what’s out there and how I should continue to improve my skills in my preferred framework. I read up on jQuery tips and put together a summary of common tips I need to follow more explained here in an ecommerce demo.
 
 ### The Setup
 
-<table cellpadding="0" cellspacing="0" width="100%">
-<tbody><tr>
-<td valign="top">
-<p>Before we get started, some notes on the ecommerce demo and performance testing:</p>
-<ul>
-<li>The fake product images come from <a href="http://dryicons.com">DryIcons</a></li>
-<li>A <a href="https://github.com/stephskardal/jquerytips/blob/master/public/products.js">JSON array contains product information</a> (price, image, and title).</li>
-<li>The code runs on a quick and dirty sinatra app.</li>
-<li>console.time(‘task’) and console.timeEnd(‘task’) are used to debug task runtime for performance measurement</li>
-<li>The performance numbers provided in the article were measured in Chrome (Ubuntu) where the average of 10 tests is reported. In all the tests, an additional for loop was added as part of the test to see measurable performance differences. See the notes at the bottom of the article on performance differences between Chrome and Firefox.</li>
-</ul>
-</td>
-<td align="center" valign="top">
-<a href="/blog/2011/01/31/jquery-tips-ecommerce/image-0-big.png" onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5567773008183125922" src="/blog/2011/01/31/jquery-tips-ecommerce/image-0.png" style="display:block; margin:0px auto 10px; text-align:center;cursor:pointer; cursor:hand;width: 400px; height: 317px;"/></a>
-A screenshot from the demo app.
-</td>
-</tr>
-</tbody></table>
+Before we get started, some notes on the ecommerce demo and performance testing:
 
-**1.** The first tip I came across was a recommendation to use a for loop instead of jQuery's each method. I start off with some un-optimized code to test that loops through our products JSON object and renders the images to the page. In this case, the use of the for loop instead of each doesn't give us a significant performance difference.
+- The fake product images come from [DryIcons](https://dryicons.com)
+- A [JSON array contains product information](https://github.com/stephskardal/jquerytips/blob/master/public/products.js) (price, image, and title).
+- The code runs on a quick and dirty sinatra app.
+- console.time(‘task’) and console.timeEnd(‘task’) are used to debug task runtime for performance measurement
+- The performance numbers provided in the article were measured in Chrome (Ubuntu) where the average of 10 tests is reported. In all the tests, an additional for loop was added as part of the test to see measurable performance differences. See the notes at the bottom of the article on performance differences between Chrome and Firefox.
+
+<span style="float: right"><a href="/blog/2011/01/31/jquery-tips-ecommerce/image-0-big.png" onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5567773008183125922" src="/blog/2011/01/31/jquery-tips-ecommerce/image-0.png" style="display:block; margin:0px auto 10px; text-align:center;cursor:pointer; cursor:hand;width: 400px; height: 317px;"/></a>
+<small style="float: right">A screenshot from the demo app.</small></span>
+
+
+**1.** The first tip I came across was a recommendation to use a for loop instead of jQuery’s each method. I start off with some un-optimized code to test that loops through our products JSON object and renders the images to the page. In this case, the use of the for loop instead of each doesn’t give us a significant performance difference.
 
 <table cellpadding="0" cellspacing="0" width="100%">
 <tbody><tr>
 <td valign="top">
-<pre class="brush:jscript">
-for(var k=0;k<10;k++) {
+<pre class="brush:jscript"><code>
+for(var k=0;k&#60;10;k++) {
   $('div.products').html('');
   console.time('test ' + k);
-  for(var j=0;j<10;j++) {
+  for(var j=0;j&#60;10;j++) {
     $.each(products, function(index, e) {
       var ihtml = $('div.products').html();
-      ihtml += '<a href="#">'
-        + '<img class="product" src="/images/'
-        + e.image + '" /></a>';
+      ihtml += '&#60;a href="#">'
+        + '&#60;img class="product" src="/images/'
+        + e.image + '" />&#60;/a>';
       $('div.products').html(ihtml);
     });
   }
   console.timeEnd('test ' + k);
 }
-</pre>
+</code></pre>
 </td>
 <td valign="top">
-<pre class="brush:jscript">
-for(var k=0;k<10;k++) {
+<pre class="brush:jscript"><code>
+for(var k=0;k&#60;10;k++) {
   $('div.products').html('');
   console.time('test ' + k);
-  for(var j=0;j<10;j++) {
-    for(var i=0;i<products.length; i++) {
+  for(var j=0;j&#60;10;j++) {
+    for(var i=0;i&#60;products.length; i++) {
       var ihtml = $('div.products').html();
-      ihtml += '<a href="#">'
-        + '<img class="product" src="/images/'
-        + products[i].image + '" /></a>';
+      ihtml += '&#60;a href="#">'
+        + '&#60;img class="product" src="/images/'
+        + products[i].image + '" />&#60;/a>';
       $('div.products').html(ihtml);
     }
   }
   console.timeEnd('test ' + k);
 }
-</pre>
+</code></pre>
 </td>
 </tr>
 <tr>
@@ -81,17 +74,17 @@ for(var k=0;k<10;k++) {
 
 <a href="/blog/2011/01/31/jquery-tips-ecommerce/image-1-big.png" onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5567850235750329490" src="/blog/2011/01/31/jquery-tips-ecommerce/image-1.png" style="display:block; margin:0px auto 10px; text-align:center;cursor:pointer; cursor:hand;width: 400px; height: 282px;"/></a>
 
-Products displayed with a for loop instead of jQuery's each method.
+Products displayed with a for loop instead of jQuery’s each method.
 
-**2.** The next "I Can't Believe I'm Not Using this jQuery Technique" I found was a recommendation to use data tag. Although I've read about the data tag, I haven't worked with it enough to use it consistently. With this code, we assign product data (name, price) to each product link as it’s added to the DOM. Upon clicking a product, instead of traversing through the products array, we render the "featured_product" contents based on it's data. The data tag is recommended over assigning values to arbitrary HTML tag attributes such as assigning our product <a> and <img> the name and price values to title or alt attributes.
+**2.** The next “I Can’t Believe I’m Not Using this jQuery Technique” I found was a recommendation to use data tag. Although I’ve read about the data tag, I haven’t worked with it enough to use it consistently. With this code, we assign product data (name, price) to each product link as it’s added to the DOM. Upon clicking a product, instead of traversing through the products array, we render the “featured_product” contents based on it’s data. The data tag is recommended over assigning values to arbitrary HTML tag attributes such as assigning our product \<a\> and \<img\> the name and price values to title or alt attributes.
 
 <table cellpadding="0" cellspacing="0" width="100%">
 <tbody><tr><td valign="top">
-<pre class="brush:jscript">
-for(var i=0;i<products.length; i++) {
+<pre class="brush:jscript"><code>
+for(var i=0;i&#60;products.length; i++) {
   var link = $(document.createElement('a'))
-    .attr(‘href’, ‘#’)
-    .html('<img class="product" src="/images/' + products[i].image + '" />')
+    .attr('href', '#')
+    .html('&#60;img class="product" src="/images/' + products[i].image + '" /\>')
     .data('name', products[i].name)
     .data('price', products[i].price);
   if(products[i].featured) {
@@ -104,50 +97,50 @@ for(var i=0;i<products.length; i++) {
 };
 $('div.products a').click(function() {
    $('div.featured_product')
-    .html('<h1>' + $(this).data('name') + '</h1>');
+    .html('&#60;h1>' + $(this).data('name') + '&#60;/h1>');
   $(this).find('img').clone().appendTo('.featured_product');
 });
-</pre>
+</code></pre>
 </td></tr>
 </tbody></table>
 
 <a href="/blog/2011/01/31/jquery-tips-ecommerce/image-2-big.png" onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5567850235768483282" src="/blog/2011/01/31/jquery-tips-ecommerce/image-2.png" style="display:block; margin:0px auto 10px; text-align:center;cursor:pointer; cursor:hand;width: 400px; height: 302px;"/></a>
 
-jQuery's data tag is used to populate the right side of the page as a product is clicked.
+jQuery’s data tag is used to populate the right side of the page as a product is clicked.
 
-**3.** The next tip I came across frequently was a recommendation to cache your selectors, shown in the example below. A selector $('div.products a.featured') is created and used when users like to view "Featured" Items. This gave me a 33% performance gain.
+**3.** The next tip I came across frequently was a recommendation to cache your selectors, shown in the example below. A selector $('div.products a.featured') is created and used when users like to view “Featured” Items. This gave me a 33% performance gain.
 
 <table cellpadding="0" cellspacing="0" width="100%">
 <tbody><tr>
 <td valign="top">
-<pre class="brush:jscript">
+<pre class="brush:jscript"><code>
 $('a.featured').click(function() {
-  for(var k=0;k<10; k++) {
+  for(var k=0;k&#60;10; k++) {
     console.time('test ' + k);
-    for(var j=0;j<100;j++) {
+    for(var j=0;j&#60;100;j++) {
       $('div.products a').css('background', '#FFF');
       $('div.products a.featured').css('background', '#999');
     }
     console.timeEnd('test ' + k);
   }
 });
-</pre>
+</code></pre>
 </td>
 <td valign="top">
-<pre class="brush:jscript">
+<pre class="brush:jscript"><code>
 var all_products = $('div.products a');
 var featured_products = $('div.products a.featured');
 $('a.featured').click(function() {
-  for(var k=0;k<10; k++) {
+  for(var k=0;k&#60;10; k++) {
     console.time('test ' + k);
-    for(var j=0;j<100;j++) {
+    for(var j=0;j&#60;100;j++) {
       all_products.css('background', '#FFF');
       featured_products.css('background', '#999');
     }
     console.timeEnd('test ' + k);
   }
 });
-</pre>
+</code></pre>
 </td>
 </tr>
 <tr>
@@ -162,41 +155,41 @@ $('a.featured').click(function() {
 
 <a href="/blog/2011/01/31/jquery-tips-ecommerce/image-3-big.png" onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5567850240733601346" src="/blog/2011/01/31/jquery-tips-ecommerce/image-3.png" style="display:block; margin:0px auto 10px; text-align:center;cursor:pointer; cursor:hand;width: 145px; height: 400px;"/></a>
 
-Multiple products added to test onclick for identifying "featured" products.
+Multiple products added to test onclick for identifying “featured” products.
 
-**4.** Another tip I came across was the recommendation on using context in jQuery selectors, described [here](”http://api.jquery.com/jQuery/#jQuery1”) in the jQuery documentation. In one example, I try updating the $('div.products') selector to set the context as $(‘div.wrapper’), but saw performance worsen here. In another example, I added "this" as a context for populating the featured product, but again saw performance worsen slightly here. In this case, performance gain will depend on your original selector, but it's worth testing.
+**4.** Another tip I came across was the recommendation on using context in jQuery selectors, described [here](https://api.jquery.com/jQuery/#jQuery1) in the jQuery documentation. In one example, I try updating the $('div.products') selector to set the context as $(‘div.wrapper’), but saw performance worsen here. In another example, I added “this” as a context for populating the featured product, but again saw performance worsen slightly here. In this case, performance gain will depend on your original selector, but it’s worth testing.
 
 <table cellpadding="0" cellspacing="0" width="100%">
 <tbody><tr>
 <td valign="top">
-<pre class="brush:jscript">
-for(var k=0;k<10;k++) {
+<pre class="brush:jscript"><code>
+for(var k=0;k&#60;10;k++) {
   $('div.products').html('');
   console.time('test ' + k);
-  for(var j=0;j<10;j++) {
-    for(var i=0;i<products.length; i++) {
+  for(var j=0;j&#60;10;j++) {
+    for(var i=0;i&#60;products.length; i++) {
       ...
       $('div.products').append(link);
     }
   }
   console.timeEnd('test ' + k);
 }
-</pre>
+</code></pre>
 </td>
 <td valign="top">
-<pre class="brush:jscript">
-for(var k=0;k<10;k++) {
+<pre class="brush:jscript"><code>
+for(var k=0;k&#60;10;k++) {
   $('div.products').html('');
   console.time('test ' + k);
-  for(var j=0;j<10;j++) {
-    for(var i=0;i<products.length; i++) {
+  for(var j=0;j&#60;10;j++) {
+    for(var i=0;i&#60;products.length; i++) {
       ...
       $('div.products', $('div.wrapper')).append(link);
     }
   }
   console.timeEnd('test ' + k);
 }
-</pre>
+</code></pre>
 </td>
 </tr>
 <tr>
@@ -209,39 +202,39 @@ for(var k=0;k<10;k++) {
 </tr>
 </tbody></table>
 
-**5.** Another common tip I came across that "I can't believe I don't follow" is to use an id selector instead of a class. I’ve admittedly read this several times, but again it's a practice that I sometimes forget about. In my ecommerce setup, I add a loop to add the products 10x to our DOM, and with a change of selector from 'div.products' to 'div#products', I saw a small performance improvement.
+**5.** Another common tip I came across that “I can’t believe I don’t follow” is to use an id selector instead of a class. I’ve admittedly read this several times, but again it’s a practice that I sometimes forget about. In my ecommerce setup, I add a loop to add the products 10x to our DOM, and with a change of selector from ‘div.products’ to ‘div#products’, I saw a small performance improvement.
 
 <table cellpadding="0" cellspacing="0" width="100%">
 <tbody><tr>
 <td valign="top">
-<pre class="brush:jscript">
-for(var k=0;k<10;k++) {
+<pre class="brush:jscript"><code>
+for(var k=0;k&#60;10;k++) {
   $('div.products').html('');
   console.time('test ' + k);
-  for(var j=0;j<10;j++) {
-    for(var i=0;i<products.length; i++) {
+  for(var j=0;j&#60;10;j++) {
+    for(var i=0;i&#60;products.length; i++) {
        ...
        $('div.products').append(link);
     }
   }
   console.timeEnd('test ' + k);
 }
-</pre>
+</code></pre>
 </td>
 <td valign="top">
-<pre class="brush:jscript">
-for(var k=0;k<10;k++) {
+<pre class="brush:jscript"><code>
+for(var k=0;k&#60;10;k++) {
   $('div.products').html('');
   console.time('test ' + k);
-  for(var j=0;j<10;j++) {
-    for(var i=0;i<products.length; i++) {
+  for(var j=0;j&#60;10;j++) {
+    for(var i=0;i&#60;products.length; i++) {
       ...
        $('div#products').append(link);
     }
   }
   console.timeEnd('test ' + k);
 }
-</pre>
+</code></pre>
 </td>
 </tr>
 <tr>
@@ -254,33 +247,33 @@ for(var k=0;k<10;k++) {
 </tr>
 </tbody></table>
 
-**6.** I found a recommendation to minimize the DOM minimally. This is a tip that I typically follow, but another one that's easily forgotten. In our ecommerce setup, I create a single point of appending to the div#products selector after generating my product links and data. This gave a ~25% performance gain.
+**6.** I found a recommendation to minimize the DOM minimally. This is a tip that I typically follow, but another one that’s easily forgotten. In our ecommerce setup, I create a single point of appending to the div#products selector after generating my product links and data. This gave a ~25% performance gain.
 
 <table cellpadding="0" cellspacing="0" width="100%">
 <tbody><tr>
 <td valign="top">
-<pre class="brush:jscript">
-for(var k=0;k<10;k++) {
+<pre class="brush:jscript"><code>
+for(var k=0;k&#60;10;k++) {
   $('div.products').html('');
   console.time('test ' + k);
-  for(var j=0;j<10;j++) {
-    for(var i=0;i<products.length; i++) {
+  for(var j=0;j&#60;10;j++) {
+    for(var i=0;i&#60;products.length; i++) {
       ...
       $('div#products').append(link);
     }
   }
   console.timeEnd('test ' + k);
 }
-</pre>
+</code></pre>
 </td>
 <td valign="top">
-<pre class="brush:jscript">
-for(var k=0;k<10;k++) {
+<pre class="brush:jscript"><code>
+for(var k=0;k&#60;10;k++) {
   $('div#products').html();
   console.time('test ' + k);
   var collection = $(document.createElement('div'));
-  for(var j=0;j<10;j++) {
-    for(var i=0;i<products.length; i++) {
+  for(var j=0;j&#60;10;j++) {
+    for(var i=0;i&#60;products.length; i++) {
       ...
       collection.append(link);
     }
@@ -288,7 +281,7 @@ for(var k=0;k<10;k++) {
   $('div#products').append(collection);
   console.timeEnd('test ' + k);
 }
-</pre>
+</code></pre>
 </td>
 </tr>
 <tr>
@@ -301,32 +294,32 @@ for(var k=0;k<10;k++) {
 </tr>
 </tbody></table>
 
-**7.** Another tip I came across was to use event delegation in jQuery. The idea is that your event has more context to work with than general selectors. You can access the event and manipulate it’s parent. I found that $(e.target).parent() is the same as manipulating $(this) performance-wise. It’s likely that using one or the other is much faster than using a general DOM selector such as $(div.product' + id).
+**7.** Another tip I came across was to use event delegation in jQuery. The idea is that your event has more context to work with than general selectors. You can access the event and manipulate it’s parent. I found that $(e.target).parent() is the same as manipulating $(this) performance-wise. It’s likely that using one or the other is much faster than using a general DOM selector such as $('div.product' + id).
 
 <table cellpadding="0" cellspacing="0" width="100%">
 <tbody><tr><td valign="top">
-<pre class="brush:jscript">
+<pre class="brush:jscript"><code>
 var featured_product = $('div#featured_product');
 $('div#products a').click(function(e) {
   var product = $(e.target).parent();  // same as $(this)
   featured_product
-    .html('<h1>' + product.data('name') + '</h1>')
+    .html('&#60;h1>' + product.data('name') + '&#60;/h1>')
     .append(product.find('img').clone());
 });
-</pre>
+</code></pre>
 </td></tr>
 </tbody></table>
 
-**8.** One tip that I've never seen before is to use ".end()" in chaining. Instead of reselecting the $('div.products') region, I use "find()" to apply a css style, then traverse up the chain to find another set of products to apply a css style, and repeat. This change gave a small performance bump, but you might tend to use the cached selectors described in Tip #3 instead of the following.
+**8.** One tip that I’ve never seen before is to use “.end()” in chaining. Instead of reselecting the $('div.products') region, I use “find()” to apply a css style, then traverse up the chain to find another set of products to apply a css style, and repeat. This change gave a small performance bump, but you might tend to use the cached selectors described in Tip #3 instead of the following.
 
 <table cellpadding="0" cellspacing="0" width="100%">
 <tbody><tr>
 <td valign="top">
-<pre class="brush:jscript">
+<pre class="brush:jscript"><code>
 $('a#special').click(function() {
-  for(var k=0;k<10;k++) {
+  for(var k=0;k&#60;10;k++) {
     console.time('test ' + k);
-    for(var j=0;j<100; j++) {
+    for(var j=0;j&#60;100; j++) {
       $('div#products').find('a').css('background', '#FFF');
       $('div#products').find('.featured').css('background', '#999');
       $('div#products').find('.sale').css('background', '#999');
@@ -334,14 +327,14 @@ $('a#special').click(function() {
     console.timeEnd('test ' + k);
   }
 });
-</pre>
+</code></pre>
 </td>
 <td valign="top">
-<pre class="brush:jscript">
+<pre class="brush:jscript"><code>
 $('a#special').click(function() {
-  for(var k=0;k<10;k++) {
+  for(var k=0;k&#60;10;k++) {
     console.time('test ' + k);
-    for(var j=0;j<100; j++) {
+    for(var j=0;j&#60;100; j++) {
       $('div#products')
       .find('a')
         .css('background', '#FFF')
@@ -355,7 +348,7 @@ $('a#special').click(function() {
     console.timeEnd('test ' + k);
   }
 });
-</pre>
+</code></pre>
 </td>
 </tr>
 <tr>
@@ -376,7 +369,7 @@ Featured and Sale products are highlighted here.
 
 <table cellpadding="0" cellspacing="0" width="100%">
 <tbody><tr><td>
-<pre class="brush:jscript">
+<pre class="brush:jscript"><code>
 $(function() {
    $('a#under20').click(function() {
     all_products.css('background', '#FFF');
@@ -390,7 +383,7 @@ $(function() {
 
 $.extend($.expr[':'], {
   under20: function(a) {
-    if($(a).data('price') && $(a).data('price') < 20) {
+    if($(a).data('price') && $(a).data('price') &#60; 20) {
       return true;
     }
     return false;
@@ -402,7 +395,7 @@ $.extend($.expr[':'], {
     return false;
   }
 });
-</pre>
+</code></pre>
 </td></tr>
 </tbody></table>
 
@@ -410,11 +403,11 @@ $.extend($.expr[':'], {
 
 Products priced over $1000 are highlighted with a custom selector.
 
-**10.** I also found several examples of how to write your own chain methods. In this example, I create two chain methods to set the product background to white or grey and update my under20 & over1000 methods to use this new chain method. The nice thing about creating your own chain methods is that these methods can be easily modified in the future with minimal code changes because it follows the DRY principle. I'm not sure if it's intended, but the use of my custom chain method did not work with the end() chain method described in Tip #8.
+**10.** I also found several examples of how to write your own chain methods. In this example, I create two chain methods to set the product background to white or grey and update my under20 & over1000 methods to use this new chain method. The nice thing about creating your own chain methods is that these methods can be easily modified in the future with minimal code changes because it follows the DRY principle. I’m not sure if it’s intended, but the use of my custom chain method did not work with the end() chain method described in Tip #8.
 
 <table cellpadding="0" cellspacing="0" width="100%">
 <tbody><tr><td>
-<pre class="brush:jscript">
+<pre class="brush:jscript"><code>
 $.fn.unhighlight_product = function() {
   return $(this).css('background', '#FFF');
 }
@@ -432,7 +425,7 @@ $(function() {
     $('div#products a:over1000').highlight_product();
   });
 });
-</pre>
+</code></pre>
 </td></tr>
 </tbody></table>
 
@@ -440,7 +433,7 @@ $(function() {
 
 Products priced under $20 are highlighted with a custom selector and custom chain method.
 
-Again, the product images for this demo app are from [DryIcons.com](http://dryicons.com) and the final application code can be found [here](https://github.com/stephskardal/jquerytips). The application was also deployed on [Heroku](http://heroku.com/) to verify that the code works in IE [8], Chrome, and Firefox.
+Again, the product images for this demo app are from [DryIcons.com](https://dryicons.com) and the final application code can be found [here](https://github.com/stephskardal/jquerytips). The application was also deployed on [Heroku](https://www.heroku.com/) to verify that the code works in IE [8], Chrome, and Firefox.
 
 ### In Case You are Interested
 
@@ -454,4 +447,4 @@ During development of the demo, I found a significant performance differences be
 
 Or in visual form:
 
-<img alt="" src="http://chart.apis.google.com/chart?chxl=0:|Tip+%231|Tip+%233|Tip+%234|Tip+%236|Tip+%238&chxr=1,0,6250&chxt=x,y&chbh=a&chs=745x300&cht=bvg&chco=A2C180,3D7930&chds=0,6250,0,6250&chd=t:6200,106,258,169,154|515,21,60,45,37&chdl=Firefox+3.6|Chrome+8.0&chtt=jQuery+Performance"/>
+<img alt="" src="https://chart.apis.google.com/chart?chxl=0:|Tip+%231|Tip+%233|Tip+%234|Tip+%236|Tip+%238&chxr=1,0,6250&chxt=x,y&chbh=a&chs=745x300&cht=bvg&chco=A2C180,3D7930&chds=0,6250,0,6250&chd=t:6200,106,258,169,154|515,21,60,45,37&chdl=Firefox+3.6|Chrome+8.0&chtt=jQuery+Performance"/>

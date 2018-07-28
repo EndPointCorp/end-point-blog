@@ -7,9 +7,9 @@ title: Liquid Galaxy Project in GSoC 2011!
 
 
 
-We're very happy to announce The Liquid Galaxy Project has been [accepted](http://socghop.appspot.com/gsoc/program/accepted_orgs/google/gsoc2011) as a Mentoring Organization for the Google Summer of Code (GSoC) Program!
+We’re very happy to announce The Liquid Galaxy Project has been [accepted](https://www.google-melange.com/archive/gsoc/2011) as a Mentoring Organization for the Google Summer of Code (GSoC) Program!
 
-Talented students interested in Liquid Galaxy, panoramic systems, and the opportunity to be paid a stipend of $5000 by Google to develop and enhance open source code should go to the project's Ideas Page and make a proposal to the project for review:
+Talented students interested in Liquid Galaxy, panoramic systems, and the opportunity to be paid a stipend of $5000 by Google to develop and enhance open source code should go to the project’s Ideas Page and make a proposal to the project for review:
 
 [http://code.google.com/p/liquid-galaxy/wiki/GSoC2011](http://code.google.com/p/liquid-galaxy/wiki/GSoC2011)
 

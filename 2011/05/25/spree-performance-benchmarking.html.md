@@ -5,7 +5,7 @@ tags: interchange, performance, rails, scalability, spree, magento
 title: Spree Performance Benchmarking
 ---
 
-I see a lot of questions regarding Spree performance in the [spree-user group](http://groups.google.com/group/spree-user), but they are rarely answered with metrics. I put together a quick script using the generic benchmark tool [ab](http://httpd.apache.org/docs/2.0/programs/ab.html) to review some data. Obviously, the answer to how well a site performs and scales is highly dependent on the host and the consumption of the web application, so the data here needs to be taken with a grain of salt. Another thing to note is that only two of the following use cases are running on Rails 3.0 — many of our current Spree clients are on Spree 0.11.2 or older. I also included one non-Spree Rails ecommerce application, in addition to a few non-Rails applications for comparison. All of the tests were run from my home network, so in theory there shouldn't be bias on performance tests for sites running on End Point servers.
+I see a lot of questions regarding Spree performance in the [spree-user group](https://groups.google.com/forum/#!forum/spree-user), but they are rarely answered with metrics. I put together a quick script using the generic benchmark tool [ab](https://httpd.apache.org/docs/2.0/programs/ab.html) to review some data. Obviously, the answer to how well a site performs and scales is highly dependent on the host and the consumption of the web application, so the data here needs to be taken with a grain of salt. Another thing to note is that only two of the following use cases are running on Rails 3.0 — many of our current Spree clients are on Spree 0.11.2 or older. I also included one non-Spree Rails ecommerce application, in addition to a few non-Rails applications for comparison. All of the tests were run from my home network, so in theory there shouldn’t be bias on performance tests for sites running on End Point servers.
 
 <table cellpadding="5" cellspacing="0" width="100%"><tbody><tr>   <td></td>   <td align="center" colspan="4">ab -n 100</td>   <td></td>  </tr>
 <tr>   <td></td>   <td align="center">-c 2 homepage</td>   <td align="center">-c 20 homepage</td>   <td align="center">-c 2<br/>
@@ -77,13 +77,13 @@ DB: Unknown<br/>
 <tr style="background-color:#424242;">   <td>469.831</td><td>445.931</td><td>745.472</td><td>551.11</td>   <td>Time per request (ms)</td>  </tr>
 </tbody></table>
 
-Here's the same data in graphical form:
+Here’s the same data in graphical form:
 
-## Requests per Second
+### Requests per Second
 
 <a href="/blog/2011/05/25/spree-performance-benchmarking/image-0-big.png" onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5610751500251002546" src="/blog/2011/05/25/spree-performance-benchmarking/image-0.png" style="display:block; margin:0px auto 10px; text-align:center;cursor:pointer; cursor:hand;width: 740px;"/></a>
 
-## Time Per Request (ms)
+### Time Per Request (ms)
 
 <a href="/blog/2011/05/25/spree-performance-benchmarking/image-1-big.png" onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5610751511624706978" src="/blog/2011/05/25/spree-performance-benchmarking/image-1.png" style="display:block; margin:0px auto 10px; text-align:center;cursor:pointer; cursor:hand;width: 740px;"/></a>
 

@@ -9,7 +9,7 @@ title: DBD::Pg UTF-8 for PostgreSQL server_encoding
 
 <a href="/blog/2011/06/20/dbdpg-utf-8-for-postgresql/image-0-big.png" onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5620313937936840898" src="/blog/2011/06/20/dbdpg-utf-8-for-postgresql/image-0.png" style="float:right; margin:0 0 10px 10px;cursor:pointer; cursor:hand;width: 167px; height: 276px;"/></a>
 
-We are preparing to make a major version bump in DBD::Pg, the Perl interface for [PostgreSQL](http://postgres.org), from the 2.x series to 3.x. This is due to a reworking of how we handle UTF-8. The change is not going to be backwards compatible, but will probably not affect many people. If you are using the pg_enable_utf8 flag, however, you definitely need to read on for the details.
+We are preparing to make a major version bump in DBD::Pg, the Perl interface for [PostgreSQL](https://www.postgresql.org/), from the 2.x series to 3.x. This is due to a reworking of how we handle UTF-8. The change is not going to be backwards compatible, but will probably not affect many people. If you are using the pg_enable_utf8 flag, however, you definitely need to read on for the details.
 
 The short version is that DBD::Pg is going return all strings from the Postgres server with the Perl utf8 flag on. The sole exception will be databases in which the server_encoding is SQL_ASCII, in which case the flag will never be turned on.
 
@@ -35,7 +35,7 @@ There are a few exceptions as to what things DBD::Pg will mark as utf8. Integers
 The old attribute, **pg_enable_utf8**, will be deprecated, and have no effect. We thought about re-using that but it seemed clearer and cleaner to simply create a new variable (pg_utf8_strings), as the behavior has significantly changed.
 
 A beta version of DBD::Pg (2.99.9_1) with these changes has been uploaded to CPAN for anyone to experiment with. Right now, none of this is set in stone, but we did want to get a working version out there to start the discussion and see how it interacts with applications that were making use of the
-pg_enable_utf8 flag. You can web search for "dbdpg" and look for the "Latest Dev. Release", or jump straight to [the page for DBD::Pg 2.99.9_1](http://search.cpan.org/~turnstep/DBD-Pg-2.99.9_1/). The trailing underscore is a CPAN convention that indicates this is a development version only, and thus will not replace the latest production version (2.18.1 as of this writing).
+pg_enable_utf8 flag. You can web search for “dbdpg” and look for the “Latest Dev. Release”, or jump straight to [the page for DBD::Pg 2.99.9_1](https://metacpan.org/release/TURNSTEP/DBD-Pg-2.99.9_1). The trailing underscore is a CPAN convention that indicates this is a development version only, and thus will not replace the latest production version (2.18.1 as of this writing).
 
 As a reminder, DBD::Pg has [switched to using git](/blog/2011/06/14/dbdpg-moves-to-git), so you can follow along with the development
 with:

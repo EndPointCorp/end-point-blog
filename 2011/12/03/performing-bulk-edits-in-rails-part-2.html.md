@@ -7,15 +7,15 @@ title: 'Performing Bulk Edits in Rails: Part 2'
 
 
 
-This is the second article in the series on how to perform a bulk edit in Rails. Let's recap our user's story from [Part 1](/blog/2011/11/14/performing-bulk-edits-in-rails-part-1). 
+This is the second article in the series on how to perform a bulk edit in Rails. Let’s recap our user’s story from [Part 1](/blog/2011/11/14/performing-bulk-edits-in-rails-part-1). 
 
-- User makes a selection of records and clicks "Bulk Edit" button
+- User makes a selection of records and clicks “Bulk Edit” button
 - User works with the same form they would use for a regular edit, plus
 
     - check boxes are added by each attribute to allow the user to indicate this variable should be affected by the bulk edit
     - only attributes which are the same among selected records should be populated in the form
 
-Part 1 addressed the first part of our user story.  Now that we have our user's selection, we need to create an interface to allow them to select attributes affected by the bulk edit.  Let's start with the form we'll use to POST our input.
+Part 1 addressed the first part of our user story. Now that we have our user’s selection, we need to create an interface to allow them to select attributes affected by the bulk edit. Let’s start with the form we’ll use to POST our input.
 
 ```ruby
 # app/controllers/bulk_edits_controller.rb
@@ -36,7 +36,7 @@ end
 <% end %>
 ```
 
-Let's first look at how we formed our form_for tag.  Although this is a form for a Foo object, we don't want to POST to foos_controller#create so we add :url => "/bulk_edits" which will POST to the bulk_edits_controller#create.  Additionally, we need to send along the foo_ids we eventually want to bulk update.  Finally, we don't want to re-create the form we already have for Foo.  By modifying one master form, we'll make long term maintenance easier.  Now that we've got our form posting to the right place, let's see what modifications will need to make to our standard form to allow the user to highlight attributes they want to modify.
+Let’s first look at how we formed our form_for tag. Although this is a form for a Foo object, we don’t want to POST to foos_controller#create so we add :url => "/bulk_edits" which will POST to the bulk_edits_controller#create. Additionally, we need to send along the foo_ids we eventually want to bulk update. Finally, we don’t want to re-create the form we already have for Foo. By modifying one master form, we’ll make long term maintenance easier. Now that we’ve got our form posting to the right place, let’s see what modifications will need to make to our standard form to allow the user to highlight attributes they want to modify.
 
 ```ruby
 # app/views/foos/_form.html.erb
@@ -49,7 +49,7 @@ Let's first look at how we formed our form_for tag.  Although this is a form for
 <div class="separator" style="text-align: center;"><img border="0" height="52" src="/blog/2011/12/03/performing-bulk-edits-in-rails-part-2/image-0.png" width="320"/><br/>
 Bulk edit check boxes appear in front of field names to let users know which fields will be modified.</div>
 
-We've added another [check_box_tag](http://api.rubyonrails.org/classes/ActionView/Helpers/FormTagHelper.html#method-i-check_box_tag) to the form to record which attributes the user will select for bulk updating. However, we only want to display this when we're doing a bulk edit.  Let's tweak this a bit further.
+We’ve added another [check_box_tag](http://api.rubyonrails.org/classes/ActionView/Helpers/FormTagHelper.html#method-i-check_box_tag) to the form to record which attributes the user will select for bulk updating. However, we only want to display this when we’re doing a bulk edit. Let’s tweak this a bit further.
 
 ```ruby
 # app/views/foos/_form.html.erb
@@ -69,7 +69,7 @@ def bulk_edit?
 end
 ```
 
-With these modifications to the form in place, the user can now specify which fields are eligible for bulk editing.  Now we need the logic to determine how to populate the bar attribute based on the user's selection.  This way, the user will see that an attribute is the same across all selected items.  Let's revise our bulk edit controller.
+With these modifications to the form in place, the user can now specify which fields are eligible for bulk editing. Now we need the logic to determine how to populate the bar attribute based on the user’s selection. This way, the user will see that an attribute is the same across all selected items. Let’s revise our bulk edit controller.
 
 ```ruby
 # app/controllers/bulk_edit_controller.rb
@@ -109,9 +109,9 @@ end
 ```
 
 <div class="separator" style="clear: both; text-align: center;"><img border="0" height="57" src="/blog/2011/12/03/performing-bulk-edits-in-rails-part-2/image-1.png" width="320"/><br/>
-Only fields which are the same across all selected records will be populated.  Other fields will be left blank by default.</div>
+Only fields which are the same across all selected records will be populated. Other fields will be left blank by default.</div>
 
-With Foo#matching_attributes_for generating a hash of matching attributes, the form will only populate fields which match across all of the user's selected items.  With our form in place, the last step is to actually perform the bulk edit.
+With Foo#matching_attributes_for generating a hash of matching attributes, the form will only populate fields which match across all of the user’s selected items. With our form in place, the last step is to actually perform the bulk edit.
 
 ```ruby
 # app/controllers/bulk_edits_controller.rb
@@ -137,8 +137,8 @@ def create
 end
 ```
 
-We've now completed the entire user story.  Users are able to use check boxes to identify which attributes should be bulk updated.  They also get to see which attributes match across their selection. Things are, of course, always more involved with a real production application.  Keep in mind this example does not make good use of mass assignment protection using [attr_accessible](http://api.rubyonrails.org/classes/ActiveModel/MassAssignmentSecurity/ClassMethods.html#method-i-attr_accessible) and forcing an empty whitelist of attributes by using [config.active_record.whitelist_attributes](http://guides.rubyonrails.org/configuring.html#configuring-active-record) = true.  This is a best practice that should be implemented anytime you need sever-side validation of your forms.
+We’ve now completed the entire user story. Users are able to use check boxes to identify which attributes should be bulk updated. They also get to see which attributes match across their selection. Things are, of course, always more involved with a real production application. Keep in mind this example does not make good use of mass assignment protection using [attr_accessible](https://apidock.com/rails/ActiveRecord/Base/attr_accessible/class) and forcing an empty whitelist of attributes by using [config.active_record.whitelist_attributes](http://guides.rubyonrails.org/configuring.html#configuring-active-record) = true. This is a best practice that should be implemented anytime you need sever-side validation of your forms.
 
-Additionally, there may be cases where you want to perform bulk edits of more complex attributes, such as nested attributes.  Consider appending your additional attributes to the Foo.new.attribute_names array and then tweaking the eligible attributes logic.  Also consider implementing a maximum number of records which are able to be bulk edited at a time; wouldn't want your server to time out.  Good luck!
+Additionally, there may be cases where you want to perform bulk edits of more complex attributes, such as nested attributes. Consider appending your additional attributes to the Foo.new.attribute_names array and then tweaking the eligible attributes logic. Also consider implementing a maximum number of records which are able to be bulk edited at a time; wouldn’t want your server to time out. Good luck!
 
 

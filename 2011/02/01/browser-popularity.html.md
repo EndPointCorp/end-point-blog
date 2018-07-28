@@ -7,9 +7,9 @@ title: Browser popularity
 
 
 
-It's [no secret](http://www.pcmag.com/article2/0,2817,2379105,00.asp) that Internet Explorer has been steadily losing market share, while Chrome and Safari have been gaining.
+It’s [no secret](https://www.pcmag.com/article2/0,2817,2379105,00.asp) that Internet Explorer has been steadily losing market share, while Chrome and Safari have been gaining.
 
-But in the last couple of years I've been surprised to see how strong IE has remained among visitors to our website -- it's usually been #2 after Firefox.
+But in the last couple of years I’ve been surprised to see how strong IE has remained among visitors to our website—​it’s usually been #2 after Firefox.
 
 Recently this has changed and IE has dropped to 4th place among our visitors, and Chrome now has more than double the users that Safari does, as reported by Google Analytics:
 
@@ -47,6 +47,6 @@ Recently this has changed and IE has dropped to 4th place among our visitors, an
 
 </tbody></table>
 
-That's heartening. :)
+That’s heartening. :)
 
 

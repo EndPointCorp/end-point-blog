@@ -13,9 +13,9 @@ This can happen a number of different ways. One way is to break old migrations. 
 
 While these can be (and usually are) considered coordination rather than technical issues, sometimes you just need to handle them and move on.
 
-One case I'd like to cover here is removing or changing associations.  At the time the migration is expected to run, the file for the model class will have been updated already, so it is hard use that in the migration itself, even though it would be useful.
+One case I’d like to cover here is removing or changing associations. At the time the migration is expected to run, the file for the model class will have been updated already, so it is hard use that in the migration itself, even though it would be useful.
 
-In this case I found myself with an even slightly trickier example.  I have a model that contains some address info.  Part of that is an association to an external table that lists the states. So part of the
+In this case I found myself with an even slightly trickier example. I have a model that contains some address info. Part of that is an association to an external table that lists the states. So part of the
 class definition was like so:
 
 ```ruby
@@ -26,8 +26,8 @@ end
 ```
 
 What I needed to do in the migration was to remove the association and
-introduce another field called "state" which would just be a varchar
-field representing the state part of the address.  The two problems the
+introduce another field called “state” which would just be a varchar
+field representing the state part of the address. The two problems the
 migration would encounter were:
 
 1. The state association would not exist at the time it ran
@@ -44,11 +44,11 @@ Contact.class_eval do
 end
 ```
 
-This creates a different association named "orig_state" using the states table for the Contact class. I can now use my original migration code more-or-less as is, and still create a new state column.
+This creates a different association named “orig_state” using the states table for the Contact class. I can now use my original migration code more-or-less as is, and still create a new state column.
 column.
 
 Another problem I had was that the table had about 300 rows of data that
-failed one of the validations called "validate_names".  I didn't feel
+failed one of the validations called “validate_names”. I didn’t feel
 like sorting it out, so I just added the following code to the above
 class_eval block:
 

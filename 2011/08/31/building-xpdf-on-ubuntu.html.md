@@ -7,9 +7,9 @@ title: Building Xpdf on Ubuntu
 
 
 
-It may happen that you need to use [Xpdf](http://foolabs.com/xpdf/), even though it no longer ships with [Ubuntu](http://www.ubuntu.com/) and is considered ... outdated? buggy? insecure? In any case, it still renders some PDFs that [Poppler](http://poppler.freedesktop.org/)-based viewers such as [Evince](http://projects.gnome.org/evince/) don't, or allows some troublesome PDFs to print as fonts and line art instead of a rasterized mess.
+It may happen that you need to use [Xpdf](https://www.xpdfreader.com/), even though it no longer ships with [Ubuntu](https://www.ubuntu.com/) and is considered ... outdated? buggy? insecure? In any case, it still renders some PDFs that [Poppler](https://poppler.freedesktop.org/)-based viewers such as [Evince](https://wiki.gnome.org/Apps/Evince) don’t, or allows some troublesome PDFs to print as fonts and line art instead of a rasterized mess.
 
-Here's how I built and installed xpdf 3.02 on Ubuntu 11.04 (Natty Narwhal) x86_64:
+Here’s how I built and installed xpdf 3.02 on Ubuntu 11.04 (Natty Narwhal) x86_64:
 
 ```bash
 sudo apt-get install libfreetype6-dev libmotif-dev
@@ -25,6 +25,6 @@ make
 sudo make install
 ```
 
-That's it. Not as nice as the old native Debian/Ubuntu packages, but gets the job done.
+That’s it. Not as nice as the old native Debian/Ubuntu packages, but gets the job done.
 
 

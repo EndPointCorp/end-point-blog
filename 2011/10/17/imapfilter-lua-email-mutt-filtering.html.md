@@ -9,9 +9,9 @@ title: Using the new version of imapfilter with mutt
 
 <a href="/blog/2011/10/17/imapfilter-lua-email-mutt-filtering/image-0-big.jpeg" onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5664298724633134418" src="/blog/2011/10/17/imapfilter-lua-email-mutt-filtering/image-0.jpeg"/></a>
 
-Image by Flickr user [p886](http://www.flickr.com/photos/p886/)
+Image by Flickr user [p886](https://www.flickr.com/photos/p886/)
 
-My beloved [mutt](http://www.mutt.org/)/imapfilter combo recently stopped working after an operating system switch. (tl;dr: that combo rocks; use *ipairs* instead of *pairs*) When my laptop wireless stopped working, and after spending some time fighting with it, I decided to simply install a new OS. As all of my important data is on a separate partition, this was not that big a deal. I ended up using [Scientific Linux](http://www.scientificlinux.org/), as I'd heard good things about it, and it was one of the few distros that actually would install on my laptop (failures for one reason or another: Fedora, FreeBSD, Ubuntu, and OpenBSD). After the install, I simply copied my ~/.mutt directory and ~/.muttrc file into place, and similarly copied my ~/.imapfilter directory, which contained the all important config.lua file. The [imapfilter program](https://github.com/lefcha/imapfilter) itself was not available via the normal [yum](http://fedoraproject.org/wiki/Yum) repositories, so I simply grabbed the latest and greatest and did a manual install:
+My beloved [mutt](http://www.mutt.org/)/imapfilter combo recently stopped working after an operating system switch. (tl;dr: that combo rocks; use *ipairs* instead of *pairs*) When my laptop wireless stopped working, and after spending some time fighting with it, I decided to simply install a new OS. As all of my important data is on a separate partition, this was not that big a deal. I ended up using [Scientific Linux](https://www.scientificlinux.org/), as I’d heard good things about it, and it was one of the few distros that actually would install on my laptop (failures for one reason or another: Fedora, FreeBSD, Ubuntu, and OpenBSD). After the install, I simply copied my ~/.mutt directory and ~/.muttrc file into place, and similarly copied my ~/.imapfilter directory, which contained the all important config.lua file. The [imapfilter program](https://github.com/lefcha/imapfilter) itself was not available via the normal [yum](https://fedoraproject.org/wiki/Yum) repositories, so I simply grabbed the latest and greatest and did a manual install:
 
 ```bash
 $ git clone https://github.com/lefcha/imapfilter.git
@@ -21,9 +21,9 @@ $ make
 $ sudo make install
 ```
 
-I've used a lot of email clients over the years (and may have been using email longer than most people reading this). I started out (because that's all there was) with non-graphical clients such as mail, pine, elm, and mutt. Over the years I also tried out many graphical clients, such as Evolution, Kmail, Eudora, Thunderbird, and Claws Mail. However, nothing ever worked quite right, so I eventually ended up back with mutt, and have been happy with it ever since. The one drawback (or strength) of mutt is its single-mindedness. It does email very well, but lets other tools handle the ancillary tasks. One of those tasks is filtering, and that's where imapfilter comes in. I like to view all email that comes in, so mutt generally runs with my INBOX open. I scan through the items, marking them urgent if I need to keep them around, and deleting them if they are obvious trash. As needed, I'll kick off a imapfilter run, which then puts all my read, non-urgent, non-deleted email into the appropriate [IMAP folders](http://en.wikipedia.org/wiki/Internet_Message_Access_Protocol) for me (mutt is even smart enough to realize that the folder was externally changed by imapfilter).
+I’ve used a lot of email clients over the years (and may have been using email longer than most people reading this). I started out (because that’s all there was) with non-graphical clients such as mail, pine, elm, and mutt. Over the years I also tried out many graphical clients, such as Evolution, Kmail, Eudora, Thunderbird, and Claws Mail. However, nothing ever worked quite right, so I eventually ended up back with mutt, and have been happy with it ever since. The one drawback (or strength) of mutt is its single-mindedness. It does email very well, but lets other tools handle the ancillary tasks. One of those tasks is filtering, and that’s where imapfilter comes in. I like to view all email that comes in, so mutt generally runs with my INBOX open. I scan through the items, marking them urgent if I need to keep them around, and deleting them if they are obvious trash. As needed, I’ll kick off a imapfilter run, which then puts all my read, non-urgent, non-deleted email into the appropriate [IMAP folders](https://en.wikipedia.org/wiki/Internet_Message_Access_Protocol) for me (mutt is even smart enough to realize that the folder was externally changed by imapfilter).
 
-So I tried running imapfilter per usual on my new system and noticed an odd thing: each item in my filter was getting a minimum of 66 'hits', even when there was not even 66 total emails in my inbox! I output the number of matches to each filter I use, so instead of seeing what I was usually did:
+So I tried running imapfilter per usual on my new system and noticed an odd thing: each item in my filter was getting a minimum of 66 ‘hits’, even when there was not even 66 total emails in my inbox! I output the number of matches to each filter I use, so instead of seeing what I was usually did:
 
 ```nohighlight
 Mediawiki emails moved:    1
@@ -53,7 +53,7 @@ Obviously, something was wonky. Glancing at the release notes showed that versio
 
 > * Since version 2.2, a different format is used for the returned structures of the searching methods, due to the introduction of multiple mailbox searching and meta-searching, and thus any configuration files that rely on them should be updated*
 
-Okay, but where was the 66 coming from? I created a ~/.imapfilter/test.lua file to show me exactly what was happening inside the loop over the results table. (imapfilter is written in a nice language called [Lua](http://www.lua.org/), which calls its main data structures ["tables"](http://www.lua.org/pil/2.5.html). Probably to the chagrin of those using Lua/database crossover tools like [Pl/Lua](http://pllua.projects.postgresql.org/) :) The test.lua file looked like this:
+Okay, but where was the 66 coming from? I created a ~/.imapfilter/test.lua file to show me exactly what was happening inside the loop over the results table. (imapfilter is written in a nice language called [Lua](https://www.lua.org/), which calls its main data structures [“tables”](https://www.lua.org/pil/2.5.html). Probably to the chagrin of those using Lua/database crossover tools like [Pl/Lua](https://github.com/pllua) :) The test.lua file looked like this:
 
 ```nohighlight
 myaccount = IMAP {
@@ -84,7 +84,7 @@ end
 print("Total count for ipairs: " .. count);
 ```
 
-I downloaded and compiled version 2.0 of imapfilter and ran the above code, knowing that there were exactly two emails in my inbox that had a subject containing the string 'bats':
+I downloaded and compiled version 2.0 of imapfilter and ran the above code, knowing that there were exactly two emails in my inbox that had a subject containing the string ‘bats’:
 
 ```bash
 [~/code/imapfilter-2.0] ./imapfilter -c ~/.imapfilter/test.lua
@@ -115,9 +115,9 @@ Total count for ipairs: 2
 
 This tells us a quite a few things, and solves the mystery of the 66, which represents some meta-data stored in the results table. So rather than treating results as a simple key/value hash with one entry per match, the results table is now a dual-purpose table where the hash part of it contains some meta-data, while the actual matches are stored in the array (indexed) part of the table. Note how the counting of the matches now starts at 1 and increments, rather than using the position in the inbox, as it did before. Which means we must use ipairs to iterate through the table and get our matching entries, in this case with keys 1 and 2.
 
-(If the "table" structure in Lua looks odd to you, that's because it is. I don't think I would have designed things that way myself - while it's clever to have a single structure that behaves as both an array with indices and a btree hash, it can lead to confusion and some ugly corner cases).
+(If the “table” structure in Lua looks odd to you, that’s because it is. I don’t think I would have designed things that way myself—​while it’s clever to have a single structure that behaves as both an array with indices and a btree hash, it can lead to confusion and some ugly corner cases).
 
-The next step was to get my filters working again - this was simply a matter of a global search and replace (M-x query-replace-regexp) from "pairs" to "ipairs".This is a good a point as any to explain what my file looks like (stored as ~/.imapfilter/config.lua). The first part simply sets some common options - for details on what they do, check out the [manpage for imapfilter_config](http://manpages.ubuntu.com/manpages/gutsy/man5/imapfilter_config.5.html).
+The next step was to get my filters working again—​this was simply a matter of a global search and replace (M-x query-replace-regexp) from “pairs” to “ipairs”.This is a good a point as any to explain what my file looks like (stored as ~/.imapfilter/config.lua). The first part simply sets some common options—​for details on what they do, check out the [manpage for imapfilter_config](http://manpages.ubuntu.com/manpages/bionic/en/man5/imapfilter_config.5.html).
 
 ```nohighlight
 options.cache        = true
@@ -128,7 +128,7 @@ options.close        = true
 options.expunge      = false
 ```
 
-Next, a new table is created with the IMAP function. After that, we exclude all messages that are already marked as deleted, that have not yet been read, and have not been flagged. In other words, everything in my inbox I've already seen, but not flagged as urgent or deleted. The '*' in this case is a logical 'AND', and the output is the search result table we saw in the above code.
+Next, a new table is created with the IMAP function. After that, we exclude all messages that are already marked as deleted, that have not yet been read, and have not been flagged. In other words, everything in my inbox I’ve already seen, but not flagged as urgent or deleted. The ‘*’ in this case is a logical ‘AND’, and the output is the search result table we saw in the above code.
 
 ```nohighlight
 myaccount = IMAP {
@@ -157,7 +157,7 @@ end
 print('Mediawiki emails moved:        ' .. count)
 ```
 
-Searches can be applied to an existing search result to create a new table. In the code above, a new table named 'result' is created that is based off of our 'baseresult' table, with the condition that only entries matching a specific "To" or "Cc" field are added.The '+' acts as as a logical 'OR'.
+Searches can be applied to an existing search result to create a new table. In the code above, a new table named ‘result’ is created that is based off of our ‘baseresult’ table, with the condition that only entries matching a specific “To” or “Cc” field are added.The ‘+’ acts as as a logical ‘OR’.
 
 Deletion is handled in a similar way:
 
@@ -174,8 +174,8 @@ print('Wiki alerts deleted:           ' .. count)
 </wikiadmin@example.com>
 ```
 
-The rest of my config.lua file is more filtering sections, similar to the above. Adding a new filter is as easy as creating a new section similar to the above by editing the ~/.imapfilter/config.lua file. While that's not as automated as it could be, filter adjustment happens so rarely I have never been bothered by that step.
+The rest of my config.lua file is more filtering sections, similar to the above. Adding a new filter is as easy as creating a new section similar to the above by editing the ~/.imapfilter/config.lua file. While that’s not as automated as it could be, filter adjustment happens so rarely I have never been bothered by that step.
 
-If you are not using imapfilter, you should check it out, even if you are not using mutt; imapfilter is completely independent of your email reading program, and can be run from anywhere, as it doesn't save or read anything locally. I find that imapfilter is very fast, so even when I used mail programs with built-in filters, I still employed imapfilter from time to time for bulk deletes and moves. Plus, it's a great way to dip your toe into Lua if you are not familiar with it (although without using some of its more interesting features, such as coroutines).
+If you are not using imapfilter, you should check it out, even if you are not using mutt; imapfilter is completely independent of your email reading program, and can be run from anywhere, as it doesn’t save or read anything locally. I find that imapfilter is very fast, so even when I used mail programs with built-in filters, I still employed imapfilter from time to time for bulk deletes and moves. Plus, it’s a great way to dip your toe into Lua if you are not familiar with it (although without using some of its more interesting features, such as coroutines).
 
 

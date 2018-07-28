@@ -7,7 +7,7 @@ title: 'Benchmarking in Perl: Map versus For Loop'
 
 
 
-Last week, I was coding in Perl for an [Interchange](http://www.icdevgroup.org/i/dev) project. I've been in and out of Perl and Ruby a lot lately. While I was working on the project, I came across the following bit of code and wanted to finally sit down and figure out how to use the [map](http://perldoc.perl.org/functions/map.html) function in Perl on this bit of code.
+Last week, I was coding in Perl for an [Interchange](http://www.icdevgroup.org/i/dev) project. I’ve been in and out of Perl and Ruby a lot lately. While I was working on the project, I came across the following bit of code and wanted to finally sit down and figure out how to use the [map](https://perldoc.perl.org/functions/map.html) function in Perl on this bit of code.
 
 ```perl
 my @options;
@@ -20,7 +20,7 @@ for my $obj (@$things) {
 return \@options;
 ```
 
-I'm a big fan of Ruby's [inject method](http://www.ruby-doc.org/core/classes/Enumerable.html#M001494) and in general a fan of the [Enumerable Module](http://www.ruby-doc.org/core/classes/Enumerable.html), but I have a brain block when it comes to using the map method in both Perl and Ruby. I spent a little time investigating and working on a small local Perl script to test the implementation of the map method. I came up with the following:
+I’m a big fan of Ruby’s [inject method](https://ruby-doc.org/core-2.5.1/Enumerable.html#M001494) and in general a fan of the [Enumerable Module](https://ruby-doc.org/core-2.5.1/Enumerable.html), but I have a brain block when it comes to using the map method in both Perl and Ruby. I spent a little time investigating and working on a small local Perl script to test the implementation of the map method. I came up with the following:
 
 ```perl
 return [ map {
@@ -31,7 +31,7 @@ return [ map {
 } @$things ];
 ```
 
-After that, I wanted to make sure the code change was justified. The Interchange application that is the source of this code is built for performance, so I wanted to ensure this change didn't hinder performance. It's been a while since I've done benchmarking in Perl, so I also had to refresh my memory regarding using the [Benchmark module](http://perldoc.perl.org/Benchmark.html). I came up with:
+After that, I wanted to make sure the code change was justified. The Interchange application that is the source of this code is built for performance, so I wanted to ensure this change didn’t hinder performance. It’s been a while since I’ve done benchmarking in Perl, so I also had to refresh my memory regarding using the [Benchmark module](https://perldoc.perl.org/Benchmark.html). I came up with:
 
 ```perl
 #!/usr/bin/perl
@@ -144,6 +144,6 @@ The results were:
 </tr>
 </tbody></table>
 
-In this case, replacing the [imperative programming](http://en.wikipedia.org/wiki/Imperative_programming) style here with [Functional programming](http://en.wikipedia.org/wiki/Functional_programming) (via map) yielded a small performance improvement, but the script executed each method 1,000,000 times, so the performance gain yielded by just one method call is very small. I doubt it's worth it go on a code cleanup rampage to update and test this, but it's good to keep in mind moving forward as small bits of the code are touched. I also wonder if the performance will vary when the size of $things changes — something I didn't test here. It was nice to practice using Perl's map method and Benchmark module. Yippee.
+In this case, replacing the [imperative programming](https://en.wikipedia.org/wiki/Imperative_programming) style here with [Functional programming](https://en.wikipedia.org/wiki/Functional_programming) (via map) yielded a small performance improvement, but the script executed each method 1,000,000 times, so the performance gain yielded by just one method call is very small. I doubt it’s worth it go on a code cleanup rampage to update and test this, but it’s good to keep in mind moving forward as small bits of the code are touched. I also wonder if the performance will vary when the size of $things changes — something I didn’t test here. It was nice to practice using Perl’s map method and Benchmark module. Yippee.
 
 

@@ -7,14 +7,14 @@ title: CRUD, RESTful, and JSON for Address Management in Interchange
 
 
 
-Recently, I worked on a large project for [Paper Source](http://www.paper-source.com/) that introduced the functionality to allow users to split orders into multiple addresses, which is especially valuable during the holiday season for gift purchase. Paper Source runs on [Interchange](http://www.icdevgroup.org/i/dev), one of the ecommerce frameworks End Point is intimately familiar with.
+Recently, I worked on a large project for [Paper Source](https://www.papersource.com/) that introduced the functionality to allow users to split orders into multiple addresses, which is especially valuable during the holiday season for gift purchase. Paper Source runs on [Interchange](http://www.icdevgroup.org/i/dev), one of the ecommerce frameworks End Point is intimately familiar with.
 
 <div class="separator" style="clear: both; text-align: left;">
 <a href="/blog/2011/10/04/crud-restful-and-json-for-address/image-0.png" imageanchor="1" style="margin-left:1em; margin-right:1em"><img border="0" src="/blog/2011/10/04/crud-restful-and-json-for-address/image-0.png" width="740"/></a></div>
 
-This project requires [CRUD](http://en.wikipedia.org/wiki/Create,_read,_update_and_delete) functionality for address editing during the checkout process; users must be able to add, edit, list, and remove addresses to be assigned to the various items in the cart. Another challenge here is that both logged in and logged out users are required to have this functionality, where addresses modified by logged in users would persist between sessions, and addresses of logged out users are available during their session and destroyed after they end the session (or in Paper Source's case, when they close the browser window).
+This project requires [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) functionality for address editing during the checkout process; users must be able to add, edit, list, and remove addresses to be assigned to the various items in the cart. Another challenge here is that both logged in and logged out users are required to have this functionality, where addresses modified by logged in users would persist between sessions, and addresses of logged out users are available during their session and destroyed after they end the session (or in Paper Source’s case, when they close the browser window).
 
-With these requirements, I set off to develop an architecture that followed [RESTful practices](http://en.wikipedia.org/wiki/Representational_state_transfer), described below:
+With these requirements, I set off to develop an architecture that followed [RESTful practices](https://en.wikipedia.org/wiki/Representational_state_transfer), described below:
 
 ### Listing Addresses
 
@@ -43,7 +43,7 @@ sub list {
 }
 ```
 
-In the HTML template, Interchange's loop tag is used to loop through the addresses. Note: There may be a better way to avoid trailing commas in Interchange's loop tag – please share it if you know the secret!
+In the HTML template, Interchange’s loop tag is used to loop through the addresses. Note: There may be a better way to avoid trailing commas in Interchange’s loop tag – please share it if you know the secret!
 
 ```nohighlight
 <script type="text/javascript">
@@ -123,7 +123,7 @@ $.ajax({
 
 ### Edit Address
 
-The edit address functionality is similar to the code for creating an address, the only difference being that the database and Session variable was updated, and the URL called for editing is "/address_management/edit/:id". [Mustache](http://mustache.github.com/) is used to render the form prepopulated with the current address values.
+The edit address functionality is similar to the code for creating an address, the only difference being that the database and Session variable was updated, and the URL called for editing is "/address_management/edit/:id". [Mustache](https://mustache.github.io/) is used to render the form prepopulated with the current address values.
 
 <div class="separator" style="clear: both; text-align: center;">
 <a href="/blog/2011/10/04/crud-restful-and-json-for-address/image-1.png" imageanchor="1" style="margin-left:1em; margin-right:1em"><img border="0" src="/blog/2011/10/04/crud-restful-and-json-for-address/image-1.png" width="750"/></a></div>

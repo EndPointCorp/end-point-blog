@@ -9,17 +9,17 @@ title: Bucardo PostgreSQL replication to other tables with customname
 
 <a href="/blog/2011/09/05/bucardo-postgresql-replication-to-other/image-0-big.jpeg" onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5648699560032368754" src="/blog/2011/09/05/bucardo-postgresql-replication-to-other/image-0.jpeg" style="cursor:pointer; cursor:hand;width: 320px; height: 214px;"/></a>
 
-Image by Flickr user [Soggydan](http://www.flickr.com/photos/soggydan/)
+Image by Flickr user [Soggydan](https://www.flickr.com/photos/soggydan/)
 
-(Don't miss the Bucardo5 talk at [Postgres Open](http://postgresopen.org/2011/home/) in Chicago)
+(Don’t miss the Bucardo5 talk at [Postgres Open](https://web.archive.org/web/20110927094014/http://postgresopen.org/2011/home/) in Chicago)
 
 Work on the next major version of Bucardo is wrapping up (version 5 is now in beta), and two new features have been added to this major version. The first, called **customname**, allows you to replicate to a table with a different name. This has been a feature people have been asking for a long time, and even allows you to replicate between differently named Postgres schemas. The second option, called **customcols**, allows you replicate to different columns on the target: not only a subset, but different column names (and types), as well as other neat tricks.
 
 The "customname" options allows changing of the table name for one or more targets. Bucardo replicates tables from the source databases to the target databases, and all tables must have the same name and schema everywhere. With the customname feature, you can change the target table names, either globally, per database, or per sync.
 
-We'll go through a full example here, using a stock 64-bit RedHat 6.1 EC2 box (ami-5e837b37). I find EC2 a great testing platform - not only can you try different operating systems and architectures, but (as my own personal box is very customized) it is great to start afresh from a stock configuration.
+We’ll go through a full example here, using a stock 64-bit RedHat 6.1 EC2 box (ami-5e837b37). I find EC2 a great testing platform—​not only can you try different operating systems and architectures, but (as my own personal box is very customized) it is great to start afresh from a stock configuration.
 
-First, let's turn off SELinux, install the [EPEL rpm](http://fedoraproject.org/wiki/EPEL), update the box, and install a few needed packages.
+First, let’s turn off SELinux, install the [EPEL rpm](https://fedoraproject.org/wiki/EPEL), update the box, and install a few needed packages.
 
 ```bash
 echo 0 > /selinux/enforce
@@ -40,7 +40,7 @@ emacs /var/lib/pgsql/data/pg_hba.conf
 service postgresql start
 ```
 
-For the pg_hba.conf configuration file, because we want to be able to connect to the database as the bucardo user without actually logging into that account, we will allow access using the 'md5' (password) method instead of 'ident'. But we don't want to bother creating a password for the postgres user, we will still allow those connections via ident. The relevant lines in the pg_hba.conf will end up like this:
+For the pg_hba.conf configuration file, because we want to be able to connect to the database as the bucardo user without actually logging into that account, we will allow access using the ‘md5’ (password) method instead of ‘ident’. But we don’t want to bother creating a password for the postgres user, we will still allow those connections via ident. The relevant lines in the pg_hba.conf will end up like this:
 
 ```bash
 # TYPE   DATABASE   USER       METHOD
@@ -112,7 +112,7 @@ If all goes well, you should see something very similar to this in the last line
 (954) [Sat Sep  3 16:18:56 2011] MCP Got NOTICE syncdone_wildstar from 957 (Bucardo DB) (line 749)
 ```
 
-From the above, we see that a KID finished running the sync we created, without finding any changed rows to replicate. Then there is some chatter between the different Bucardo processes. Now to test out the customname feature. We'll rename one of the tables, tell Bucardo about the change, reload the sync, and verify that all is still being replicated.
+From the above, we see that a KID finished running the sync we created, without finding any changed rows to replicate. Then there is some chatter between the different Bucardo processes. Now to test out the customname feature. We’ll rename one of the tables, tell Bucardo about the change, reload the sync, and verify that all is still being replicated.
 
 ```bash
 psql french3 -c 'ALTER TABLE regions RENAME TO tesla'
@@ -133,7 +133,7 @@ psql french3 -t -c 'select count(*) from tesla'
 
 In the above, the update on the regions table inthe french1 database calls a trigger that notifies Bucardo that some rows have changed; Bucardo then has a KID copy the rows from the source databases french1 to the other source database french2, as well as the targets french3 and french4. The final internal DELETE and COPY that it performs is done on database french3 to the tesla table rather than the regions table.
 
-The customname feature cannot be used to change the tables in a source database, as they must all be the same (for obvious reasons). We can, however, specify that a different *schema* be used for a target, as well as a different table. This only applies to Postgres targets, as other database types (e.g. MySQL) do not use schemas. Let's see that in action:
+The customname feature cannot be used to change the tables in a source database, as they must all be the same (for obvious reasons). We can, however, specify that a different *schema* be used for a target, as well as a different table. This only applies to Postgres targets, as other database types (e.g. MySQL) do not use schemas. Let’s see that in action:
 
 ```bash
 psql french4 -c 'create schema banana'
@@ -152,6 +152,6 @@ psql french4 -t -c 'select count(*) from banana.regions'
 26
 ```
 
-As before, the update on a source causes the changes to propagate to the other source database, as well as both targets. Note that the ALTER TABLE also mutated the associated sequence for the table, so there will be warnings in Bucardo's logs about the DEFAULT values for the primary keys in the regions' tables being different. Since this post is getting long, I will save the discussion of customcols for another day.
+As before, the update on a source causes the changes to propagate to the other source database, as well as both targets. Note that the ALTER TABLE also mutated the associated sequence for the table, so there will be warnings in Bucardo’s logs about the DEFAULT values for the primary keys in the regions’ tables being different. Since this post is getting long, I will save the discussion of customcols for another day.
 
 

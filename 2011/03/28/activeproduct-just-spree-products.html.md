@@ -147,7 +147,7 @@ There are two interesting things about this to note:
 - The engine lib directory is **not** auto-loaded in
 the same way that app/models, app/controllers, etc are. There
 apparently is no convention for loading a lib directory. I picked
-'lib/auto', but there are not any constraints on what can be added.
+‘lib/auto’, but there are not any constraints on what can be added.
 
 - The engine has its own config variable that is loaded and honored
 as part of the Rails app config.

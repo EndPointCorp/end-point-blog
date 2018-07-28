@@ -7,7 +7,7 @@ title: 'Ecommerce on Sinatra: In a Jiffy'
 
 
 
-Several of us at End Point have been involved in a non-ecommerce project for one of our clients running on Ruby, Sinatra, Unicorn, using DataMapper, PostgreSQL, PostGIS, with heavy use of JavaScript (specifically YUI). [Sinatra](http://www.sinatrarb.com/) is a lightweight Ruby web framework – it's not in direct competition with Rails but it might be a better "tool" for lightweight applications. It's been a fun project to work with Sinatra, DataMapper, and YUI as I've been working traditionally focused on their respective related technologies (Rails, ActiveRecord, jQuery).
+Several of us at End Point have been involved in a non-ecommerce project for one of our clients running on Ruby, Sinatra, Unicorn, using DataMapper, PostgreSQL, PostGIS, with heavy use of JavaScript (specifically YUI). [Sinatra](http://sinatrarb.com/) is a lightweight Ruby web framework – it’s not in direct competition with Rails but it might be a better “tool” for lightweight applications. It’s been a fun project to work with Sinatra, DataMapper, and YUI as I’ve been working traditionally focused on their respective related technologies (Rails, ActiveRecord, jQuery).
 
 Out of curiosity, I wanted to see what it might take to implement a bare-bones ecommerce store using Sinatra. Here is a mini-tutorial to develop an ecommerce store using Sinatra.
 
@@ -32,7 +32,7 @@ sinatrashop/
 
 ### Data Model
 
-Now, let's look at the data model. Since this is a bare-bones store, I have one order model which contains all the order information including contact information and addresses. We're not storing the credit card in the database. Also, since this is a bare-bones app, we're going to go with one product with a set price and force the limitation that users only buy one at a time. I've also chosen to use ActiveRecord here since I'm still not sold on DataMapper, but another ORM can be used as well. Here is our model:
+Now, let’s look at the data model. Since this is a bare-bones store, I have one order model which contains all the order information including contact information and addresses. We’re not storing the credit card in the database. Also, since this is a bare-bones app, we’re going to go with one product with a set price and force the limitation that users only buy one at a time. I’ve also chosen to use ActiveRecord here since I’m still not sold on DataMapper, but another ORM can be used as well. Here is our model:
 
 ```ruby
 # sinatrashop/models/order.rb
@@ -114,7 +114,7 @@ end
 
 ### Views
 
-Now, let's think about the views we'll present to users. There are many template rendering options in Sinatra, but we'll go with erb and create an index.erb file. By default, Sinatra looks for views in the ROOT/views directory. This will be our only view and layout and below is a breakdown of what it will include:
+Now, let’s think about the views we’ll present to users. There are many template rendering options in Sinatra, but we’ll go with erb and create an index.erb file. By default, Sinatra looks for views in the ROOT/views directory. This will be our only view and layout and below is a breakdown of what it will include:
 
 ```nohighlight
 # header information
@@ -129,7 +129,7 @@ Obviously, there will be a lot more code here, but the view needs to show the ba
 
 ### Application Code
 
-Next, let's take a look at the application code. This will be in sinatrashop/store.rb:
+Next, let’s take a look at the application code. This will be in sinatrashop/store.rb:
 
 ```ruby
 require 'sinatra'
@@ -147,7 +147,7 @@ post '/' do
 end
 ```
 
-The application code handles two requests, a get and post to '/'. The get is a standard home page request. The post to '/' is the order submission. The post '/' action needs to save the order, establish a connection to the payment gateway, and authorize and capture the payment. If any of these actions fail, the order must not be saved to the database and errors must be presented to the user. Consider the following code, which uses ActiveRecord::Base.transaction method and will rollback the saved order if any part of the authorization fails. We also use [ActiveMerchant](http://www.activemerchant.org/) here, which is an extraction from [Shopify](http://www.shopify.com/) for payment gateway integration that can be used as a gem.
+The application code handles two requests, a get and post to ‘/’. The get is a standard home page request. The post to ‘/’ is the order submission. The post ‘/’ action needs to save the order, establish a connection to the payment gateway, and authorize and capture the payment. If any of these actions fail, the order must not be saved to the database and errors must be presented to the user. Consider the following code, which uses ActiveRecord::Base.transaction method and will rollback the saved order if any part of the authorization fails. We also use [ActiveMerchant](http://activemerchant.org/) here, which is an extraction from [Shopify](https://www.shopify.com/) for payment gateway integration that can be used as a gem.
 
 ```ruby
 # sinatrashop/store.rb
@@ -186,7 +186,7 @@ end
 
 ### Configuration
 
-You might notice above that there is a "settings" hash used in the payment gateway connection request. I create a configuration file which sets up some configuration variables in Sinatra's configure do block:
+You might notice above that there is a “settings” hash used in the payment gateway connection request. I create a configuration file which sets up some configuration variables in Sinatra’s configure do block:
 
 ```ruby
 # sinatrashop/configuration.rb

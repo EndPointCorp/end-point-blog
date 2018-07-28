@@ -37,7 +37,7 @@ Last week, I wanted to add several additional sizes to be created upon upload to
 
 ### Step 1: Extend attachment_definitions
 
-First, I had to override the image attachment styles, with the code shown below. My application is running on Spree 0.11.2 (Rails 2.3.*), so this was added inside the extension activate method, but in Rails 3.0 versions of Spree, this would be added inside the engine's activate method.
+First, I had to override the image attachment styles, with the code shown below. My application is running on Spree 0.11.2 (Rails 2.3.*), so this was added inside the extension activate method, but in Rails 3.0 versions of Spree, this would be added inside the engine’s activate method.
 
 ```ruby
 Image.attachment_definitions[:attachment][:styles].merge!(
@@ -111,6 +111,6 @@ Finally, I added newsize1_image and newsize2_image methods throughout the views,
 
 ### Conclusion
 
-It would be ideal to remove Step 2 described here by investigating why the image methods are not defined by the Spree core BaseHelper module. It's possible that this is working as expected on more recent versions of Spree. Other than that violation of the DRY principle, it is a fairly simple process to extend the Paperclip image settings to include additional sizes.
+It would be ideal to remove Step 2 described here by investigating why the image methods are not defined by the Spree core BaseHelper module. It’s possible that this is working as expected on more recent versions of Spree. Other than that violation of the DRY principle, it is a fairly simple process to extend the Paperclip image settings to include additional sizes.
 
 

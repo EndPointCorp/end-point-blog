@@ -7,15 +7,15 @@ title: Managing Perl environments with perlbrew
 
 
 
-As a Perl hobbyist, I've gotten used to the methodical evolution of Perl 5 over the years. Perl has always been a reliable language, not without its faults, but with a high level of flexibility in syntactical expression and even deployment options. Even neophytes quickly learn how to install their own Perl distribution and CPAN libraries in $HOME. But the process can become unwieldy, particularly if you want to test across a variety of Perl versions.
+As a Perl hobbyist, I’ve gotten used to the methodical evolution of Perl 5 over the years. Perl has always been a reliable language, not without its faults, but with a high level of flexibility in syntactical expression and even deployment options. Even neophytes quickly learn how to install their own Perl distribution and CPAN libraries in $HOME. But the process can become unwieldy, particularly if you want to test across a variety of Perl versions.
 
-To contrast, Ruby core development frequently experiences ABI breakages, even between minor releases. In spite of the wide adoption of Ruby as a Web development language (thanks to Ruby on Rails), Ruby developers are able to plod along unconcerned, where these incompatibilities would almost certainly lead to major bickering within the Perl or PHP communities. How do they do it? The [Ruby Version Manager](http://rvm.beginrescueend.com/).
+To contrast, Ruby core development frequently experiences ABI breakages, even between minor releases. In spite of the wide adoption of Ruby as a Web development language (thanks to Ruby on Rails), Ruby developers are able to plod along unconcerned, where these incompatibilities would almost certainly lead to major bickering within the Perl or PHP communities. How do they do it? The [Ruby Version Manager](https://rvm.io/).
 
 Ruby Version Manager (RVM) allows users to install Ruby and RubyGems within their own self-contained environment. This allows each user to install all (or only) the software that their particular application requires. Particularly for Ruby developers, this provides them with the flexibility to quickly test upgrades for regressions, ABI changes and enhancements without impacting system-wide stability. Thankfully a lot of the ideas in RVM have made their way over to the Perl landscape, in the form of [perlbrew](https://github.com/gugod/App-perlbrew).
 
-Perlbrew offers many of the same features found in RVM for Ruby. It's easy to install. It isolates different Perl versions and CPAN installations in your $HOME and helps you switch between them. It automates your environment setup and teardown. And most importantly, using perlbrew means not having to clutter your default system Perl with application-specific CPAN dependencies.
+Perlbrew offers many of the same features found in RVM for Ruby. It’s easy to install. It isolates different Perl versions and CPAN installations in your $HOME and helps you switch between them. It automates your environment setup and teardown. And most importantly, using perlbrew means not having to clutter your default system Perl with application-specific CPAN dependencies.
 
-Getting started with perlbrew couldn't be easier. A quick one-liner is all it takes to install perlbrew in your home directory.
+Getting started with perlbrew couldn’t be easier. A quick one-liner is all it takes to install perlbrew in your home directory.
 
 ```nohighlight
 $ curl -L http://xrl.us/perlbrewinstall | bash
@@ -29,9 +29,9 @@ $ chmod +x perlbrew
 $ PERLBREW_ROOT=/mnt/perlbrew ./perlbrew install
 ```
 
-Follow the instructions on screen and you'll be ready to use perlbrew in no time. The perlbrew binary will be installed in ~/perl5/perlbrew/bin, so make sure to adjust your login $PATH accordingly.
+Follow the instructions on screen and you’ll be ready to use perlbrew in no time. The perlbrew binary will be installed in ~/perl5/perlbrew/bin, so make sure to adjust your login $PATH accordingly.
 
-Once you're done installing perlbrew there are a couple commands you'll want to run before installing your own Perl versions or CPAN modules. The perlbrew init command is mandatory; this initializes your perlbrew directory. It can also be used later if you need to modify your PERLBREW_ROOT setting. The perlbrew mirror is optional (but recommended) to help you select a preferred CPAN mirror.
+Once you’re done installing perlbrew there are a couple commands you’ll want to run before installing your own Perl versions or CPAN modules. The perlbrew init command is mandatory; this initializes your perlbrew directory. It can also be used later if you need to modify your PERLBREW_ROOT setting. The perlbrew mirror is optional (but recommended) to help you select a preferred CPAN mirror.
 
 ```nohighlight
 $ perlbrew init
@@ -74,7 +74,7 @@ Perl may be copied only under the terms of either the Artistic License or the
 GNU General Public License, which may be found in the Perl 5 source kit.
 
 Complete documentation for Perl, including FAQ lists, should be found on
-this system using "man perl" or "perldoc perl".  If you have access to the
+this system using “man perl” or “perldoc perl”. If you have access to the
 Internet, point your browser at http://www.perl.org/, the Perl Home Page.
 ```
 
@@ -107,6 +107,6 @@ drwxr-xr-x  5 testy  users  512 Feb 11 00:38 perl-5.12.3
 drwxr-xr-x  5 testy  users  512 Feb 11 10:32 perl-5.13.6
 ```
 
-If you're a Perl developer, the [perlbrew](https://github.com/gugod/App-perlbrew) project may help alleviate a lot of the pain associated with team development or multi-tenant programming environments. Suddenly it becomes much easier to manage your own software requirements, resulting in faster development and testing cycles for you, and fewer headaches for your System Administrators.
+If you’re a Perl developer, the [perlbrew](https://github.com/gugod/App-perlbrew) project may help alleviate a lot of the pain associated with team development or multi-tenant programming environments. Suddenly it becomes much easier to manage your own software requirements, resulting in faster development and testing cycles for you, and fewer headaches for your System Administrators.
 
 

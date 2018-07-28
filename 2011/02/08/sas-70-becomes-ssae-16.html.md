@@ -17,9 +17,9 @@ Practically speaking, what does passing a SAS 70 audit tell us about an organiza
 
 On June 15, 2011, the SAS 70 **audit** will be effectively replaced by the new SSAE 16 **attestation** standard (Statement on Standards for Attestation Engagements no. 16, *Reporting on Controls at a Service Organization*). Thus the focus appears to shift from an external auditor investigating an organization, to the organization making claims about itself under the guidance of an auditor.
 
-SSAE 16 was created by the AICPA to make the United States service organization reporting standard compatible with the new international service organization reporting standard, ISAE 3402, which is freely available [in PDF format](http://web.ifac.org/download/b014-2010-iaasb-handbook-isae-3402.pdf). The SSAE 16 document is available only for a fee.
+SSAE 16 was created by the AICPA to make the United States service organization reporting standard compatible with the new international service organization reporting standard, ISAE 3402, which is freely available [in PDF format](https://www.ifac.org/system/files/downloads/b014-2010-iaasb-handbook-isae-3402.pdf). The SSAE 16 document is available only for a fee.
 
-The AICPA’s [FAQ on the SAS 70 to SSAE 16 transition](http://www.aicpa.org/InterestAreas/AccountingAndAuditing/Resources/SOC/DownloadableDocuments/QAs_Serv_Orgs_Apr_26_2010.pdf) makes an interesting point:
+The AICPA’s [FAQ on the SAS 70 to SSAE 16 transition](https://www.aicpa.org/InterestAreas/FRC/AssuranceAdvisoryServices/DownloadableDocuments/FAQs_Service_Orgs.pdf) makes an interesting point:
 
 > 
 > 
@@ -38,8 +38,8 @@ This is interesting because many in the industry informally state that they are 
 
 Many major hosting providers have completed a SAS 70 Type II audit, including Rackspace (and Rackspace Cloud), Amazon Web Services, SoftLayer (and The Planet, which SoftLayer recently acquired), Verio, Terremark, and ServePath, to mention a few that we have worked with. Presumably these will make an SSAE 16 attestation later this year.
 
-Note that many VPS and cloud hosting providers do not report having been SAS 70 audited. If this is a requirement for your hosting, it's important to look for it early before settling on a provider.
+Note that many VPS and cloud hosting providers do not report having been SAS 70 audited. If this is a requirement for your hosting, it’s important to look for it early before settling on a provider.
 
-More details about the SAS 70 to SSAE 16 transition are available on the [AICPA Service Organization Controls Reporting website](http://www.aicpa.org/soc).
+More details about the SAS 70 to SSAE 16 transition are available on the [AICPA Service Organization Controls Reporting website](https://www.aicpa.org/interestareas/frc/assuranceadvisoryservices/sorhome.html).
 
 

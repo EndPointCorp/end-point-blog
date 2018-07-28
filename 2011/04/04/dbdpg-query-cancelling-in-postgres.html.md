@@ -7,11 +7,11 @@ title: DBD::Pg query cancelling in Postgres
 
 
 
-A new version of DBD::Pg, the Perl driver for PostgreSQL, has [just been released](http://archives.postgresql.org/pgsql-announce/2011-03/msg00021.php). In addition to fixing some memory leaks and other minor bugs, this release (version 2.18.0) introduces support for the DBI method known as **cancel()**. A giant thanks to Eric Simon, who wrote this new feature. The new method is similar to the existing **pg_cancel()** method, except it works on synchronous rather than asynchronous queries. I'll show an example of both below.
+A new version of DBD::Pg, the Perl driver for PostgreSQL, has [just been released](https://www.postgresql.org/message-id/20110330153007.GD7412@core.home). In addition to fixing some memory leaks and other minor bugs, this release (version 2.18.0) introduces support for the DBI method known as **cancel()**. A giant thanks to Eric Simon, who wrote this new feature. The new method is similar to the existing **pg_cancel()** method, except it works on synchronous rather than asynchronous queries. I’ll show an example of both below.
 
-DBD::Pg has been able to handle asynchronous queries for a while now. Basically, that means you don't have to wait around for the database to finish a query. Your application can do other things while the query runs, then check back later to see if it has completed and grab the results. The way to cancel an already kicked-off asynchronous query is with the **pg_cancel()** method (the other asynchronous methods are **pg_ready** and **pg_result**, which have no synchronous equivalents).
+DBD::Pg has been able to handle asynchronous queries for a while now. Basically, that means you don’t have to wait around for the database to finish a query. Your application can do other things while the query runs, then check back later to see if it has completed and grab the results. The way to cancel an already kicked-off asynchronous query is with the **pg_cancel()** method (the other asynchronous methods are **pg_ready** and **pg_result**, which have no synchronous equivalents).
 
-The prefix "**pg_**" is used because there is no corresponding built-in DBI method to override, and the convention is to prefix everything custom to a driver with the driver's prefix, in our case 'pg'. Here's an example showing one possible use of asynchronous queries using DBD::Pg in some Perl code:
+The prefix "**pg_**" is used because there is no corresponding built-in DBI method to override, and the convention is to prefix everything custom to a driver with the driver’s prefix, in our case ‘pg’. Here’s an example showing one possible use of asynchronous queries using DBD::Pg in some Perl code:
 
 ```perl
   ## We are connecting to two servers and running expensive 
@@ -62,7 +62,7 @@ The prefix "**pg_**" is used because there is no corresponding built-in DBI meth
   my $rows2 = $dbh2->pg_result();
 ```
 
-The new method, simply known as **cancel()**, will kill any synchronously running query. One of the main uses for this is to timeout a query by using the builtin Perl **alarm** function. However, since the builtin alarm function has some quirks, we will instead use the much safer [POSIX::SigAction](http://perldoc.perl.org/POSIX.html) method. Another example:
+The new method, simply known as **cancel()**, will kill any synchronously running query. One of the main uses for this is to timeout a query by using the builtin Perl **alarm** function. However, since the builtin alarm function has some quirks, we will instead use the much safer [POSIX::SigAction](https://perldoc.perl.org/POSIX.html) method. Another example:
 
 ```perl
   ## We are running a series of queries against a database, but if

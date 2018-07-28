@@ -2,12 +2,12 @@
 author: Josh Tolley
 gh_issue_number: 419
 tags: tips
-title: What's the difference?
+title: What’s the difference?
 ---
 
 
 
-Not long ago a software vendor we work with delivered a patch for a bug we'd been having. I was curious to know the difference between the patch, a .tgz file, and the files it was replacing. I came up with this:
+Not long ago a software vendor we work with delivered a patch for a bug we’d been having. I was curious to know the difference between the patch, a .tgz file, and the files it was replacing. I came up with this:
 
 ```bash
 ( \
@@ -20,7 +20,7 @@ Not long ago a software vendor we work with delivered a patch for a bug we'd bee
 ) | uniq -u  -c -w 32
 ```
 
-Assuming the original .tgz file was unpacked into a directory called "old", and the new one into "new", this tells me which files exist in one directory and not other, and which files exist in both in different forms. Here's an example using a few random files in two directories:
+Assuming the original .tgz file was unpacked into a directory called “old”, and the new one into “new”, this tells me which files exist in one directory and not other, and which files exist in both in different forms. Here’s an example using a few random files in two directories:
 
 ```nohighlight
 josh@eddie:~/tmp/transient$ ls -l old new
@@ -54,6 +54,6 @@ josh@eddie:~/tmp/transient$ ( \
       1 md5sum: new/5: No such file or directory
 ```
 
-Note that this can run into problems when two files in one directory are identical, but that wasn't a likely issue in this case, so I didn't work to avoid that problem.
+Note that this can run into problems when two files in one directory are identical, but that wasn’t a likely issue in this case, so I didn’t work to avoid that problem.
 
 

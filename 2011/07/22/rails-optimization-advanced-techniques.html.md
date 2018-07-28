@@ -7,7 +7,7 @@ title: 'Rails Optimization: Advanced Techniques with Solr'
 
 
 
-Recently, I've been involved in optimization on a Rails 2.3 application. The application had pre-existing fragment caches throughout the views with the use of Rails sweepers. Fragment caches are used throughout the site (rather than action or page caches) because the application has a fairly complex role management system that manages edit access at the instance, class, and site level. In addition to server-side optimization with more fragment caching and query clean-up, I did significant asset-related optimization including extensive use of CSS sprites, combining JavaScript and CSS requests where ever applicable, and optimizing images with tools like pngcrush and jpegtran. Unfortunately, even with the server-side and client-side optimization, my response times were still sluggish, and the server response was the most time consuming part of the request for a certain type of page that's expected to be hit frequently:
+Recently, I’ve been involved in optimization on a Rails 2.3 application. The application had pre-existing fragment caches throughout the views with the use of Rails sweepers. Fragment caches are used throughout the site (rather than action or page caches) because the application has a fairly complex role management system that manages edit access at the instance, class, and site level. In addition to server-side optimization with more fragment caching and query clean-up, I did significant asset-related optimization including extensive use of CSS sprites, combining JavaScript and CSS requests where ever applicable, and optimizing images with tools like pngcrush and jpegtran. Unfortunately, even with the server-side and client-side optimization, my response times were still sluggish, and the server response was the most time consuming part of the request for a certain type of page that’s expected to be hit frequently:
 
 <img alt="" border="0" id="BLOGGER_PHOTO_ID_5628578619063114610" src="/blog/2011/07/22/rails-optimization-advanced-techniques/image-0.png" style="display:block; margin:0px auto 10px; text-align:center;cursor:pointer; cursor:hand;"/>
 
@@ -52,17 +52,17 @@ To rule out any database slowness due to missing indexes, I examined the query s
 
  
 
-The query here is on the scale of 1000 times faster than the loading of the objects from the ThingsController. It's well known that object instantiation in Ruby is slow. There's not much I can do to speed up the pure performance of object instantation except possibly 1) upgrade to Ruby 1.9 or 2) try something like JRuby or Rubinius, which are both out of the scope of this project.
+The query here is on the scale of 1000 times faster than the loading of the objects from the ThingsController. It’s well known that object instantiation in Ruby is slow. There’s not much I can do to speed up the pure performance of object instantation except possibly 1) upgrade to Ruby 1.9 or 2) try something like JRuby or Rubinius, which are both out of the scope of this project.
 
 My next best option is to investigate using Rails low-level caching here to cache my objects pulled from the database, but there are a few challenges with this:
 
 - The object instantiation is happening as part of a Solr (via sunspot) query, not a standard ActiveRecord lookup.
-- The Solr object that's retrieved is used for pagination with the will_paginate gem.
+- The Solr object that’s retrieved is used for pagination with the will_paginate gem.
 - Rails low-level caches can only store serializable objects. The Solr search object and WillPaginate:Collection object (a wrapper around an array of elements that can be paginated) are not serializable, so I must determine a suitable structure to store in the cache.
 
 ### Controller
 
-After troubleshooting, here's what I came up with:
+After troubleshooting, here’s what I came up with:
 
 ```ruby
 @things = Rails.cache.fetch("things-search-#{params[:page]}-#{params[:tag]}-#{params[:sort]}") do  
@@ -84,7 +84,7 @@ end
 @things = WillPaginate::Collection.create(params[:page], 25, @things[:count]) { |pager| pager.replace(@things[:results]) }
 ```
 
-Here's how it breaks down:
+Here’s how it breaks down:
 
 - My cache key is based on the page #, tag information, and sort type, shown in the argument passed into the low-level cache build:
 
@@ -110,7 +110,7 @@ end
   things.execute!
 ```
 
-- **things** is my Sunspot/Solr object. I build an array of the Solr result set items and  record the total number of things found. A hash that contains an array of "things" and a total count is my serializable cacheable object.
+- **things** is my Sunspot/Solr object. I build an array of the Solr result set items and  record the total number of things found. A hash that contains an array of “things” and a total count is my serializable cacheable object.
 
 ```ruby
   t = things.hits.inject([]) { |arr, h| arr.push(h.result); arr }
@@ -118,7 +118,7 @@ end
     :count => things.total }
 ```
 
-- The tricky part here is building a WillPaginate::Collection object after pulling the cached data, since a WillPaginate object is also not serializable. This needs to know what the current page is, things per page, and total number of things found to correctly build the pagination links, but it doesn't require that you have all the other "things" available:
+- The tricky part here is building a WillPaginate::Collection object after pulling the cached data, since a WillPaginate object is also not serializable. This needs to know what the current page is, things per page, and total number of things found to correctly build the pagination links, but it doesn’t require that you have all the other “things” available:
 
 ```ruby
 @things = WillPaginate::Collection.create(params[:page], 25, @things[:count]) { |pager| pager.replace(@things[:results]) }
@@ -141,7 +141,7 @@ And I pass the result set in a partial as a collection to display my listed item
 
 ### Sweepers
 
-Another thing to get right here is clearing the low-level cache with Rails sweepers. I have a fairly standard Sweeper setup similar to the one [described here](http://api.rubyonrails.org/classes/ActionController/Caching/Sweeping.html). I utilize two ActiveRecord callbacks (after_save, before_destroy) in my sweeper to clear the cache, shown below.
+Another thing to get right here is clearing the low-level cache with Rails sweepers. I have a fairly standard Sweeper setup similar to the one [described here](https://apidock.com/rails/ActionController/Caching/Sweeping). I utilize two ActiveRecord callbacks (after_save, before_destroy) in my sweeper to clear the cache, shown below.
 
 ```ruby
 class ThingSweeper < ActionController::Caching::Sweeper
@@ -161,7 +161,7 @@ class ThingSweeper < ActionController::Caching::Sweeper
 end
 ```
 
-With the changes described here (caching a serializable hash with the Solr results and total count, generating a WillPaginate:Collection object, and defining the Sweepers to clear the cache), I saw great improvements in performance. The standard "index" page request does not hit the database at all for users not logged in nor does it experience the sluggish object instantiation. My waterfall now looks like this:
+With the changes described here (caching a serializable hash with the Solr results and total count, generating a WillPaginate:Collection object, and defining the Sweepers to clear the cache), I saw great improvements in performance. The standard “index” page request does not hit the database at all for users not logged in nor does it experience the sluggish object instantiation. My waterfall now looks like this:
 
 <img alt="" border="0" id="BLOGGER_PHOTO_ID_5628578620851292354" src="/blog/2011/07/22/rails-optimization-advanced-techniques/image-1.png" style="display:block; margin:0px auto 10px; text-align:center;cursor:pointer; cursor:hand;"/>
 

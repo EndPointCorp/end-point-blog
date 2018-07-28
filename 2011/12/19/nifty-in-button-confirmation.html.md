@@ -7,13 +7,11 @@ title: Nifty In-Button Confirmation
 
 
 
-I've been working on a personal email client after work, called [Warm Sunrise](http://warmsunrise.com), that forces myself to keep a manageable inbox. One of the goals of the project was to get to a zero-inbox everyday, so I needed a 'Delete All' button that was easy-to-use without running the risk of *accidentally* deleting emails. I took a look at JavaScript's confirm, which is jarring, and jQuery's dblClick, which doesn't provide any feedback to the user after the first click, leaving the user to wonder why their emails weren't deleted.
+I’ve been working on a personal email client after work, called [Warm Sunrise](https://web.archive.org/web/20120318064212/http://warmsunrise.com/), that forces myself to keep a manageable inbox. One of the goals of the project was to get to a zero-inbox everyday, so I needed a ‘Delete All’ button that was easy-to-use without running the risk of *accidentally* deleting emails. I took a look at JavaScript’s confirm, which is jarring, and jQuery’s dblClick, which doesn’t provide any feedback to the user after the first click, leaving the user to wonder why their emails weren’t deleted.
 
-Given these options, I built my own button using Rails 3.1, jQuery, and CoffeeScript, that better fit the goals I set out with. It requires a double click, but gives the user a confirmation in the button itself, without any sort of timeout. You can see a video of it in action here:
+Given these options, I built my own button using Rails 3.1, jQuery, and CoffeeScript, that better fit the goals I set out with. It requires a double click, but gives the user a confirmation in the button itself, without any sort of timeout.
 
-<iframe frameborder="0" height="360" src="http://www.youtube-nocookie.com/embed/diKdYAW0r88" width="640"></iframe>
-
-Starting with **app/views/letters/index.html.erb**, I generated the buttons using Rails helpers and Twitter's Bootstrap classes:
+Starting with **app/views/letters/index.html.erb**, I generated the buttons using Rails helpers and Twitter’s Bootstrap classes:
 
 ```ruby
 <%= link_to 'Write letter', new_letter_path, :class => "btn primary pull-right far-right" %>
@@ -21,9 +19,9 @@ Starting with **app/views/letters/index.html.erb**, I generated the buttons usin
 <%= link_to 'Are you sure?', delete_all_letters_path, :method => :destroy, :class =>"btn pull-right danger confirm", :id => "delete_all", :style => "display:none;" %>
 ```
 
-Notice that the 'Delete all' button doesn't actually specify a url and the 'Are you sure?' link's style is set to "display:none"
+Notice that the ‘Delete all’ button doesn’t actually specify a url and the ‘Are you sure?’ link’s style is set to "display:none"
 
-Here's the relationship I set up in my models:
+Here’s the relationship I set up in my models:
 
 **app/models/letter.rb**
 
@@ -56,7 +54,7 @@ def delete_all
 end 
 ```
 
-CoffeeScript is a beautiful language that compiles to JavaScript, which I prefer to JavaScript itself. You can read more about it [here](http://jashkenas.github.com/coffee-script/). Let's take a look at the **CoffeeScript** that makes this button work:
+CoffeeScript is a beautiful language that compiles to JavaScript, which I prefer to JavaScript itself. You can read more about it [here](https://coffeescript.org/). Let’s take a look at the **CoffeeScript** that makes this button work:
 
 ```js
 $('a#delete_all.no_danger').hover( ->
@@ -75,9 +73,9 @@ $('a#delete_all.danger').mouseleave( ->
 )
 ```
 
-Since the button's text changes to a confirmation on the first click, makes it better for my purposes than Javascript's dblClick method. Check the video to see what it looks like in action.
+Since the button’s text changes to a confirmation on the first click, makes it better for my purposes than Javascript’s dblClick method. Check the video to see what it looks like in action.
 
-Let's take a look at what this compiles to in plain **JavaScript**, too, since this is the only thing the browser sees:
+Let’s take a look at what this compiles to in plain **JavaScript**, too, since this is the only thing the browser sees:
 
 ```js
 $('a#delete_all.no_danger').hover(function() {
@@ -96,7 +94,7 @@ $('a#delete_all.danger').mouseleave(function() {
 });
 ```
 
-Not shown in the video, but I modified index.html.erb to only show the 'Delete all' button when the user has a zero-inbox.
+Not shown in the video, but I modified index.html.erb to only show the ‘Delete all’ button when the user has a zero-inbox.
 
 ```ruby
 <%= link_to 'Write letter', new_letter_path, :class => "btn primary pull-right far-right" %>

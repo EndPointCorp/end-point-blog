@@ -7,13 +7,13 @@ title: Home router problems with .0 IP address
 
 
 
-In our work the occasional mysterious problem surfaces which makes me appreciate how tractable and sane the majority of the challenges are. Here I'll tell the story of one of the mysterious problems.
+In our work the occasional mysterious problem surfaces which makes me appreciate how tractable and sane the majority of the challenges are. Here I’ll tell the story of one of the mysterious problems.
 
-In Internet routing of IPv4 addresses, there's nothing inherently special about an IP address that ends in .0, .255, or anything else. It all depends on the subnet. In the days before CIDR (Classless Inter-Domain Routing) brought us arbitrary subnet masks, there were classes of routing, most commonly A, B, and C. And the .0 and .255 addresses were special.
+In Internet routing of IPv4 addresses, there’s nothing inherently special about an IP address that ends in .0, .255, or anything else. It all depends on the subnet. In the days before CIDR (Classless Inter-Domain Routing) brought us arbitrary subnet masks, there were classes of routing, most commonly A, B, and C. And the .0 and .255 addresses were special.
 
 That was a long time ago, but it can still cause occasional trouble today. One of our hosting providers assigned us an IP address ending in .0, which we used for hosting a website. It worked fine, and was in service for many months before we heard any reports of trouble.
 
-Then we heard a report from one of our clients that they could not access that website from their home, but they could from their office. We couldn't ever figure out why.
+Then we heard a report from one of our clients that they could not access that website from their home, but they could from their office. We couldn’t ever figure out why.
 
 Next one of our own employees found that he could not access the website from his home, but he could from other locations.
 
@@ -27,6 +27,6 @@ The commonality was in the router they were using:
 
 We moved the website to a different IP address on the same server, and they had no problem accessing it.
 
-The routers are obviously broken, but there's little sense arguing about that. For now we avoid using any .0 IP address because there are going to be some few people who can't reach it.
+The routers are obviously broken, but there’s little sense arguing about that. For now we avoid using any .0 IP address because there are going to be some few people who can’t reach it.
 
 

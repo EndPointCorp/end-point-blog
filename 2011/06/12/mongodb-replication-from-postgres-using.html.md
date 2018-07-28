@@ -9,9 +9,9 @@ title: MongoDB replication from Postgres using Bucardo
 
 <a href="/blog/2011/06/12/mongodb-replication-from-postgres-using/image-0-big.png" onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5616998406288420578" src="/blog/2011/06/12/mongodb-replication-from-postgres-using/image-0.png" style="float:right; margin:0 0 10px 10px;cursor:pointer; cursor:hand;width: 200px; height: 128px;"/></a>
 
-One of the features of the upcoming version of [Bucardo](http://bucardo.org/wiki/Bucardo) (a replication system for the PostgreSQL RDBMS) is the ability to replicate data to things other than [PostgreSQL](http://postgres.org) databases. One of those new targets is [MongoDB](http://www.mongodb.org/), a non-relational 'document-based' database. (to be clear, we can only use MongoDB as a target, not as a source)
+One of the features of the upcoming version of [Bucardo](https://bucardo.org/Bucardo/) (a replication system for the PostgreSQL RDBMS) is the ability to replicate data to things other than [PostgreSQL](https://www.postgresql.org/) databases. One of those new targets is [MongoDB](https://www.mongodb.com/), a non-relational ‘document-based’ database. (to be clear, we can only use MongoDB as a target, not as a source)
 
-To see this in action, let's setup a quick example, modified from the [earlier blog post on running Bucardo 5](/blog/2011/06/06/bucardo-multi-master-for-postgresql). We will create a Bucardo instance that replicates from two Postgres master databases to a Postgres database target and a MongoDB instance target. We will start by setting up the prerequisites:
+To see this in action, let’s setup a quick example, modified from the [earlier blog post on running Bucardo 5](/blog/2011/06/06/bucardo-multi-master-for-postgresql). We will create a Bucardo instance that replicates from two Postgres master databases to a Postgres database target and a MongoDB instance target. We will start by setting up the prerequisites:
 
 ```bash
 sudo aptitude install postgresql-server \
@@ -22,13 +22,13 @@ postgresql-contrib
 
 Getting Postgres up and running is left as an exercise to the reader. If you have problems, the friendly folks at #postgresql on irc.freenode.net will be able to help you out.
 
-Now for the MongoDB parts. First, we need the server itself. Your distro may have it already available, in which case it's as simple as:
+Now for the MongoDB parts. First, we need the server itself. Your distro may have it already available, in which case it’s as simple as:
 
 ```bash
 aptitude install mongodb
 ```
 
-For more installation information, follow the links from the [MongoDB Quickstart page](http://www.mongodb.org/display/DOCS/Quickstart). For my test box, I ended up installing from source by following the directions at the [Building for Linux page](http://www.mongodb.org/display/DOCS/Building+for+Linux).
+For more installation information, follow the links from the [MongoDB Quickstart page](https://docs.mongodb.com/manual/installation/). For my test box, I ended up installing from source by following the directions at the [Building for Linux page](https://web.archive.org/web/20110608014829/http://www.mongodb.org/display/DOCS/Building+for+Linux).
 
 Once MongoDB is installed, we will need to start it up. First, create a place for MongoDB to store its data, and then launch the mongodb process:
 
@@ -39,7 +39,7 @@ all output going to: /tmp/mongo.log
 forked process: 428
 ```
 
-You can perform a quick test that it is working by invoking the command-line shell for MongoDB (named "mongo" of course) Use **quit()** to exit:
+You can perform a quick test that it is working by invoking the command-line shell for MongoDB (named “mongo” of course) Use **quit()** to exit:
 
 ```bash
 $  mongo
@@ -50,7 +50,7 @@ connecting to: test
 $ 
 ```
 
-The other piece we need is a Perl driver so that Bucardo (which is written in Perl) can talk to the MongoDB server. Luckily, there is an excellent one available on CPAN named 'MongoDB'. We started the MongoDB server before doing this step because the driver we will install needs a running MongoDB instance to pass all of its tests. The module has very good documentation available on [its CPAN page](http://search.cpan.org/dist/MongoDB/). Installation may be as easy as:
+The other piece we need is a Perl driver so that Bucardo (which is written in Perl) can talk to the MongoDB server. Luckily, there is an excellent one available on CPAN named ‘MongoDB’. We started the MongoDB server before doing this step because the driver we will install needs a running MongoDB instance to pass all of its tests. The module has very good documentation available on [its CPAN page](https://metacpan.org/release/MongoDB). Installation may be as easy as:
 
 ```bash
 $  sudo cpan MongoDB
@@ -134,7 +134,7 @@ Table: public.pgbench_branches  DB: t1  PK: bid (int4)
 Table: public.pgbench_tellers   DB: t1  PK: tid (int4)
 ```
 
-The next step is to add in our MongoDB instance. The syntax is the same as the "add db" above, but we also tell it the type of database, as it is not the default of "postgres". We will also assign an arbitrary database name, "btest1", the same as the others. Everything else (such as the port and host) is default, so all we need to say is:
+The next step is to add in our MongoDB instance. The syntax is the same as the “add db” above, but we also tell it the type of database, as it is not the default of “postgres”. We will also assign an arbitrary database name, “btest1”, the same as the others. Everything else (such as the port and host) is default, so all we need to say is:
 
 ```bash
 $  bucardo add db m1 dbname=btest1 type=mongo
@@ -157,7 +157,7 @@ Added database "t3" to group "tgroup" as target
 Added database "m1" to group "tgroup" as target
 ```
 
-Note that "target" is the default action, so we could shorten that to:
+Note that “target” is the default action, so we could shorten that to:
 
 ```bash
 $  bucardo add dbgroup tgroup t1:source  t2  t3  m1
@@ -165,7 +165,7 @@ $  bucardo add dbgroup tgroup t1:source  t2  t3  m1
 
 However, I think it is best to be explicit, even if it does (incorrectly) hint that m1 could be anything *other* than a target. :)
 
-We are almost ready to go. The final step is to create a sync (a basic replication event in Bucardo), then we can start up Bucardo, put some test data into the master databases, and 'kick' the sync:
+We are almost ready to go. The final step is to create a sync (a basic replication event in Bucardo), then we can start up Bucardo, put some test data into the master databases, and ‘kick’ the sync:
 
 ```bash
 $  bucardo add sync mongotest  herd=therd  dbs=tgroup  ping=false
@@ -188,7 +188,7 @@ tps = 408.059368 (excluding connections establishing)
 $  bucardo kick mongotest
 ```
 
-We'll give it a few seconds to replicate those changes (it took 18 seconds on my test box), and then check the output of bucardo status:
+We’ll give it a few seconds to replicate those changes (it took 18 seconds on my test box), and then check the output of bucardo status:
 
 ```bash
 $  bucardo status
@@ -198,7 +198,7 @@ PID of Bucardo MCP: 3317
  mongotest | Good   | 21:57:47   | 11s   | 6/36234/898 | none      |
 ```
 
-Looks good, but what about the data in MongoDB? Let's get some counts from the Postgres masters and slave, and then look at the data inside MongoDB with the mongo command-line client:
+Looks good, but what about the data in MongoDB? Let’s get some counts from the Postgres masters and slave, and then look at the data inside MongoDB with the mongo command-line client:
 
 ```bash
 $  psql btest1 -c 'SELECT count(*) FROM pgbench_accounts'
@@ -244,7 +244,7 @@ system.indexes
 }
 ```
 
-Why the difference in counts? We only started replicating after we populated the Postgres tables on the master databases with 100,000 rows, so the eighteen thousand is the number of rows that was changed during the subsequent pgbench run. (Note that pgbench uses randomness, so your numbers will be different than the above). In the future Bucardo will support the ["onetimecopy"](http://bucardo.org/wiki/Onetimecopy) feature for MongoDB, but until then we can fully populate the pgbench_accounts collection simply by "touching' all the records on one of the masters:
+Why the difference in counts? We only started replicating after we populated the Postgres tables on the master databases with 100,000 rows, so the eighteen thousand is the number of rows that was changed during the subsequent pgbench run. (Note that pgbench uses randomness, so your numbers will be different than the above). In the future Bucardo will support the [“onetimecopy”](https://bucardo.org/Onetimecopy/) feature for MongoDB, but until then we can fully populate the pgbench_accounts collection simply by ‘touching’ all the records on one of the masters:
 
 ```bash
 $ psql btest1 -c 'UPDATE pgbench_accounts SET aid=aid'
@@ -262,8 +262,8 @@ connecting to: btest1
 
 A nice feature of MongoDB is its autovivification ability (aka dynamic schemas), which means unlike Postgres you do not have to create your tables first, but can simply ask MongoDB to do an insert, and it will create the table (or, in mongospeak, the collection) automatically for you.
 
-Because MongoDB has no concept of transactions, and because Bucardo does not update, but does deletes plus inserts (for reasons I'll not get into today), there is one more trick Bucardo does when replicating to a MongoDB instance. A collection named 'bucardo_status' is created and updated at the start and the end of a sync (a replication event). Thus, your application can pause if it sees this table has a 'started' value, and wait until it sees 'complete' or 'failed'. Not foolproof by any means, but better than nothing :) You should, of course, carefully consider the way your app and Bucardo will coordinate things.
+Because MongoDB has no concept of transactions, and because Bucardo does not update, but does deletes plus inserts (for reasons I’ll not get into today), there is one more trick Bucardo does when replicating to a MongoDB instance. A collection named ‘bucardo_status’ is created and updated at the start and the end of a sync (a replication event). Thus, your application can pause if it sees this table has a ‘started’ value, and wait until it sees ‘complete’ or ‘failed’. Not foolproof by any means, but better than nothing :) You should, of course, carefully consider the way your app and Bucardo will coordinate things.
 
-Feedback from Postgres or MongoDB folk is much appreciated: there are probably some rough edges, but as you can see from above, the basics are there are working. Feel free to email the [bucardo-general mailing list](https://mail.endcrypt.com/mailman/listinfo/bucardo-general) or make a feature request / bug report on the [Bucardo Bugzilla page](http://bucardo.org/bugzilla/).
+Feedback from Postgres or MongoDB folk is much appreciated: there are probably some rough edges, but as you can see from above, the basics are there are working. Feel free to email the [bucardo-general mailing list](https://mail.endcrypt.com/mailman/listinfo/bucardo-general) or make a feature request / bug report on the [Bucardo GitHub page](https://github.com/bucardo/bucardo/issues).
 
 
