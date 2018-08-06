@@ -8,7 +8,7 @@ We all like how apps like Spotify or Last.fm can recommend us a song that feels 
 
 In this article I'll present an overview of building a recommendation system. The approach here is quite basic. It's grounded though in a valid and battle tested theory. I'll show you how to put this theory into practice by coding it in `Python` with the help of `MXNet`.
 
-## Kinds of recommenders
+### Kinds of recommenders
 
 The general setup of the content recommendation challenge is that we have **users** and **items**. The task is to recommend items to a particular user.
 
@@ -21,7 +21,7 @@ The first one bases its outputs on the the intricate features of the item and ho
 
 This article is going to focus on **collaborative filtering** only.
 
-## A bit of theory: matrix factorization
+### A bit of theory: matrix factorization
 
 In the simplest terms, we can represent interactions between users and items with a matrix:
 
@@ -33,7 +33,7 @@ In the simplest terms, we can represent interactions between users and items wit
 
 In the above case users can rate items on the scale of `<-1, 1>`. Notice that in reality it's most likely that users will not rate everything. The missing ratings are represented with the dash: `-`.
 
-Just by looking at the above table, we know that no amount of math is going to change the fact that user1 completely dislikes item1. The same goes for user2 liking item2 a lot. The ratings we already have make up for a fairly easy set of items to propose. The goal of a recommender is not to propose the items users know already though. We want to predict which of the "dashes" from the table are most likely to be liked the most. Putting it in other words: we want to predict the full representation of the above matrix, basing only on its "sparse" representation as shown above.
+Just by looking at the above table, we know that no amount of math is going to change the fact that user1 completely dislikes item1. The same goes for user2 liking item2 a lot. The ratings we already have make up for a fairly easy set of items to propose. The goal of a recommender is not to propose the items users know already though. We want to predict which of the “dashes” from the table are most likely to be liked the most. Putting it in other words: we want to predict the full representation of the above matrix, basing only on its “sparse” representation as shown above.
 
 How can we solve this problem? Let's recall the rules of multiplying two matrices:
 
@@ -80,19 +80,19 @@ Making it into a fraction of the previous number:
 
 That's a **huge** saving of the original space! The cost we need to pay is the small increase in the computational resources needed for the information retrieval. Inference of the rating from `C` based on `A` and `B` requires a **dot product** of the corresponding row and column of those matrices.
 
-## Reasoning about the matrix factors
+### Reasoning about the matrix factors
 
 What intuition can we build for the above mentioned matrices `A` and `B`? Looking at their dimensions, we can see that each row of `A` is a `k`-sized vector that represents a user. Conversely, each column of `B` is a `k`-sized vector that represents an item. The values in those vectors are being called **latent features**. Sometimes those vectors are being called **latent representations** of users and items.
 
 What could be the intuition? To split the original matrix, for each item we need to look at all interactions with users. You can imagine the algorithm finding patterns in the ratings that later on match certain characteristics of the item. If this was about movies, the features could be that it's a comedy or sci-fi or that it's futuristic or embedded deeply in some ancient times. We're essentially taking the original vector of a movie, that contains ratings — and based on that we're distilling features of the movie that describe it best. Note that this is only a half-truth. We think about it this way just to have a way to explain why the approach works. In many cases we could have a hard time finding the actual real world aspects that those latent features follow. 
  
-## Factorizing the user × item matrix in practice
+### Factorizing the user × item matrix in practice
 
 A simple approach to find matrices `A` and `B` is to initialize them randomly first. Then by computing the dot product of each row and column having a known value in `C`, we can compute how much it differs from the known value. Because dot product is easily differentiable, we can use [gradient descend](https://en.wikipedia.org/wiki/Gradient_descent) to iteratively improve our matrices `A` and `B` until `AB` is close enough to `C` for our purposes.
 
-In this article, I'm going to use a freely available database of joke ratings, called "[Jester](http://eigentaste.berkeley.edu/dataset/)". It contains data about ratings from 59132 users and 150 jokes.
+In this article, I'm going to use a freely available database of joke ratings, called “[Jester](http://eigentaste.berkeley.edu/dataset/)”. It contains data about ratings from 59132 users and 150 jokes.
 
-## Coding the model with MXNet
+### Coding the model with MXNet
 
 Let's first import some of the classes and functions we'll use later. 
 
@@ -196,7 +196,7 @@ Recent versions of `MXNet` bring in a similar coding model to one found in `PyTo
 
 As a full-featured deep learning framework, `MXNet` has its own implementation of calculating gradients automatically. The `forward` method in our `Block` inherited class is all we need to proceed with the gradient descend.
 
-In our model, the `A` and `B` matrices will be encoded within the `gluon` layers of type `Embedding`. The `Embedding` class lets you specify the number of rows in the matrix as well as the dimension into which we're "squashing" them. Using the class is very handy as it doesn't require you to "[one hot encode](https://en.wikipedia.org/wiki/One-hot)" our user and item ids.
+In our model, the `A` and `B` matrices will be encoded within the `gluon` layers of type `Embedding`. The `Embedding` class lets you specify the number of rows in the matrix as well as the dimension into which we're “squashing” them. Using the class is very handy as it doesn't require you to “[one hot encode](https://en.wikipedia.org/wiki/One-hot)” our user and item ids.
 
 Following is the implementation of our simple model as `MXNet` block. Notice that all it really is, is a regression. The model is linear so we're not using any [activation function](https://en.wikipedia.org/wiki/Activation_function):
 
@@ -289,7 +289,7 @@ INFO:root:Epoch 10 / 10 | Batch 27000 | Mean Loss: 0.005522257648408413
 INFO:root:Saving model parameters
 ```
 
-## Using the trained latent feature matrices
+### Using the trained latent feature matrices
 
 To extract he latent matrices from the trained model we need to use the `collect_params` as shown below:
 
@@ -503,11 +503,11 @@ Let's now read them from disk and see an example joke our system would recommend
 'A Czechoslovakian man felt his eyesight was growing steadily worse, and felt it was time to go see an optometrist.\n\nThe doctor started with some simple testing, and showed him a standard eye chart with letters of diminishing size: CRKBNWXSKZY...\n\n"Can you read this?" the doctor asked.\n\n"Read it?" the Czech answered. "Doc, I know him!"'
 ```
 
-## Using the item feature vectors to find similarities
+### Using the item feature vectors to find similarities
 
 One cool thing we can do with the latent vectors, is to measure how similar they are in terms of appealing to certain users. To do that we can use a so-called **cosine similarity**. The subject is very clearly described by Christian S. Perone [in his blog post](http://blog.christianperone.com/2013/09/machine-learning-cosine-similarity-for-vector-space-models-part-iii/).
 
-If you don't feel like reading it, let me just briefly explain that it makes use of the angle between the two vectors and returns its cosine. Notice that it only cares about the angle between the vectors, and **not** their magnitudes. The codomain of the cosine function is `<-1, 1>` and so is for the *cosine similarity* as well. It translates to our sense of similarity quite naturally: `-1` meaning "the total opposite" and `1` meaning "exactly the same".
+If you don't feel like reading it, let me just briefly explain that it makes use of the angle between the two vectors and returns its cosine. Notice that it only cares about the angle between the vectors, and **not** their magnitudes. The codomain of the cosine function is `<-1, 1>` and so is for the *cosine similarity* as well. It translates to our sense of similarity quite naturally: `-1` meaning “the total opposite” and `1` meaning “exactly the same”.
 
 We can trivially implement the function as a product of the dot products of the vectors normalized to units: 
 
@@ -587,15 +587,15 @@ As they are eating and chatting, he eventually asks the farmer why the pig is th
 ---
 ```
 
-## Final words
+### Final words
 
 The approach presented here is relatively simple, yet people have found it surprisingly accurate. It depends though on having enough data for each item. Otherwise the accuracy degrades. An extreme case of not having enough data is called a [cold start](https://en.wikipedia.org/wiki/Cold_start_(computing)).
 
-Also, accuracy is not the only goal. [Wikipedia](https://en.wikipedia.org/wiki/Recommender_system) lists features like "Serendipity" as an important factor of a successful system among others:
+Also, accuracy is not the only goal. [Wikipedia](https://en.wikipedia.org/wiki/Recommender_system) lists features like “Serendipity” as an important factor of a successful system among others:
 
-> Serendipity is a measure of "how surprising the recommendations are". For instance, a recommender system that recommends milk to a customer in a grocery store might be perfectly accurate, but it is not a good recommendation because it is an obvious item for the customer to buy. However, high scores of serendipity may have a negative impact on accuracy.
+> Serendipity is a measure of “how surprising the recommendations are”. For instance, a recommender system that recommends milk to a customer in a grocery store might be perfectly accurate, but it is not a good recommendation because it is an obvious item for the customer to buy. However, high scores of serendipity may have a negative impact on accuracy.
 
-Researchers have been working on different approaches to tackling the above mentioned issues. Netflix is known to be using a so-called "Hybrid" approach — one that uses both content and collaborative based recommender. As per [Wikipedia](https://en.wikipedia.org/wiki/Recommender_system):
+Researchers have been working on different approaches to tackling the above mentioned issues. Netflix is known to be using a so-called “Hybrid” approach — one that uses both content and collaborative based recommender. As per [Wikipedia](https://en.wikipedia.org/wiki/Recommender_system):
 
 > Netflix is a good example of the use of hybrid recommender systems.[48] The website makes recommendations by comparing the watching and searching habits of similar users (i.e., collaborative filtering) as well as by offering movies that share characteristics with films that a user has rated highly (content-based filtering).
 
