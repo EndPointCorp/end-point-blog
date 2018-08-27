@@ -1,4 +1,28 @@
-# Self driving toy car using the Asynchronous Advantage Actor-Critic algorithm
+---
+author: Kamil Ciemniewski
+title: "Self driving toy car using the Asynchronous Advantage Actor-Critic algorithm"
+tags: python, machine-learning, artificial-intelligence, reinforcement-learning
+---
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js"></script>
+    
+<style>
+.katex .op-symbol.large-op {
+	line-height: 1.2 !important;
+}
+
+.mtight {
+	font-size: 0.95em;
+}
+</style>
+
+<center>
+  <video width="100%" controls poster="file:///Users/kamil/Projects/end-point-blog/2018/09/01/poster.png">
+    <source src="file:///Users/kamil/Desktop/car-racing/892-openaigym.video.90.68.video000000.mp4" type="video/mp4">
+  </video>
+</center>
 
 The field of [Reinforcement Learning](https://en.wikipedia.org/wiki/Reinforcement_learning) has seen a lot of great improvement in the past years. Researchers at Universities and companies like [Deep Mind](https://deepmind.com/) have been developing new and better ways to train intelligent, artificial agents to solve more and more difficult tasks. The algorithms being developed are requiring less and less time to train. They also are making the training more and more stable.
 
@@ -53,7 +77,7 @@ $$J(\theta)=E_\tau[R_\tau\cdot\sum_{t=0}^{T-1}\,log\,\pi(a_t|s_t;\theta)]$$
 
 Hence:
 
-$$L_\theta=-\frac{1}{n}\sum_{t=0}^{n-1}R_t\cdotlog\pi(a_t|s_t;\theta)$$
+$$L_\theta=-\frac{1}{n}\sum_{t=0}^{n-1}R_t\,\cdot\,log\pi(a_t|s_t;\theta)$$
 
 #### Formalizing the accumulation of rewards
 
@@ -123,11 +147,11 @@ Let's look at the gradient formula again:
 
 $$\nabla_{\theta} J(\theta) = E_{\tau}[\,\nabla_\theta\,\sum_{t=0}^{T-1}\,log\,\pi(a_t|s_t;\theta)\cdot(R_t-V(s_t))\,]$$
 
-We can see that the term $\nabla_\thetalog\,\pi(a_t|s_t;\theta)$ scales the resulting overall gradient.
+We can see that the term $\nabla_{\theta}log\,\pi(a_t|s_t;\theta)$ scales the resulting overall gradient.
 
 Let's look at the $log(x)$ and $\frac{d}{dx}log(x)$ functions graphs:
 
-/log-deriv.png
+![graph of log(x) and d/dxlog(x)](file:///Users/kamil/Projects/end-point-blog/2018/09/01/log-deriv.png)
 
 The "overconfidence" case happens when our $\pi(a|s;\theta)$ approaches more and more $1$. Notice that the closer it is to this value, the **smaller the gradient**. With smaller gradient, the learning itself becomes slower.
 
@@ -167,7 +191,7 @@ entropy (super over confident) => 0.0291
 
 We can use the above to "punish" the model whenever it's too confident of its choices. As we're going to use gradient descend, we'll be minimizing terms that appear in our loss function. Minimizing the entropy as shown above would encourage more confidence though. We'll need to make it into a negative in the loss to work the way we intend:
 
- $$L_\theta=-\frac{1}{n}\sum_{t=0}^{n-1}log\pi(a_t|s_t;\theta)\cdot(R_t-V(s_t))\,+\betaH(\pi(a_t|s_t;\theta))$$
+ $$L_\theta=-\frac{1}{n}\sum_{t=0}^{n-1}log\pi(a_t|s_t;\theta)\cdot(R_t-V(s_t))\,-\beta\,H(\pi(a_t|s_t;\theta))$$
  
  Where $\beta$ is a hyper parameter scaling the effects of the penalty that the entropy has on the gradients.
 
@@ -298,38 +322,71 @@ class Runner:
         self.reset = False
         self.states = []
 
+				# each runner has its own environment:
         self.env = gym.make('CarRacing-v0')
 
     def get_value(self):
+	      """
+	      Returns just the current state's value.
+	      This is used when approximating the R with
+	      the Bellman equation. If the last step was
+	      not terminal, then we're substituting the "r"
+	      with V(s) - hence, we need a way to just
+	      get that V(s) without moving forward yet.
+	      """
         _input = self.preprocess(self.states)
-        _, _, _, value = self.decide(_input, 9999)
+        _, _, _, value = self.decide(_input)
         return value
 
     def run_episode(self, yield_every = 10, do_render = False):
+        """
+        The episode runner written in the generator style.
+        This is meant to be used in a "for (...) in run_episode(...):" manner.
+        Each value generated is a tuple of:
+        step_ix: the current "step" number
+        rewards: the list of rewards as received from the environment (without discounting yet)
+        values: the list of V(s) values, as predicted by the "critic"
+        policies: the list of policies as received from the "actor"
+        actions: the list of actions as sampled based on policies
+        terminal: whether we're in a "terminal" state
+        """
         self.reset = False
         step_ix = 0
 
         rewards, values, policies, actions = [[], [], [], []]
 
         self.env.reset()
+        
+        # we're going to feed the last 4 frames to the neural network that acts as the "actor - critic" duo. We'll use the "deque" to efficiently drop too old frames always keeping its length at 4:
         states = deque([ ])
 
+        # we're pre-populating the states deque by taking first 4 steps as "full throttle forward":
         while len(states) < 4:
-            _, r, _, _ = self.env.step([0.0, 0.0, 1.0])
+            _, r, _, _ = self.env.step([0.0, 1.0, 0.0])
             state = self.env.render(mode='rgb_array')
             states.append(state)
             logger.info('Init reward ' + str(r) )
 
+        # we need to repeat the following as long as the game is not over yet:
         while True:
+            # the frames need to be preprocessed (I'm explaining the reasons later in the article)
             _input = self.preprocess(states)
+            
+            # asking the neural network for the policy and value predictions:
             action, action_ix, policy, value = self.decide(_input, step_ix)
+            
+            # taking the step and receiving the reward along with info if the game is over:
             _, reward, terminal, _ = self.env.step(action)
+            
+            # explicitly rendering the scene (again, this will be explained later)
             state = self.env.render(mode='rgb_array')
 
+            # update the last 4 states deque:
             states.append(state)
             while len(states) > 4:
                 states.popleft()
 
+            # if we've been asked to render into the window (e. g. to capture the video):
             if do_render:
                 self.env.render()
 
@@ -341,6 +398,7 @@ class Runner:
             policies.append(policy)
             actions.append(action_ix)
 
+            # periodically save the state's screenshot along with the numerical values in an easy to read way:
             if self.ix == 2 and step_ix % 200 == 0:
                 fname = './screens/car-racing/screen-' + str(step_ix) + '-' + str(int(time.time())) + '.jpg'
                 im = Image.fromarray(state)
@@ -348,10 +406,12 @@ class Runner:
                 state.tofile(fname + '.txt', sep=" ")
                 _input.numpy().tofile(fname + '.input.txt', sep=" ")
 
+            # if it's game over or we hit the "yield every" value, yield the values from this generator:
             if terminal or step_ix % yield_every == 0:
                 yield step_ix, rewards, values, policies, actions, terminal
                 rewards, values, policies, actions = [[], [], [], []]
 
+            # following is a very tacky way to allow external using code to mark that it wants us to reset the environment, finishing the episode prematurely. (this would be hugely refactored in the production code but for the sake of playing with the algorithm itself, it's good enough):
             if self.reset:
                 self.reset = False
                 self.agent.reset()
@@ -371,9 +431,15 @@ class Runner:
         return torch.stack([ torch.tensor(self.preprocess_one(image_data), dtype=torch.float32) for image_data in states ])
 
     def preprocess_one(self, image):
+        """
+        Scales the rendered image and makes it grayscale
+        """
         return rescale(rgb2gray(image), (0.24, 0.16), anti_aliasing=False, mode='edge', multichannel=False)
 
     def choose_action(self, policy, step_ix):
+        """
+        Chooses an action to take based on the policy and whether we're in the training mode or not. During training it samples based on the probability values in the policy. During evaluation it takes the most probable action in the greedy way.
+        """
         policies = [[-0.8, 0.0, 0.0], [0.8, 0.0, 0], [0.0, 0.1, 0.0], [0.0, 0.0, 0.6]]
 
         if self.train:
@@ -385,7 +451,7 @@ class Runner:
 
         return np.array(policies[action_ix], dtype=np.float32), action_ix
 
-    def decide(self, state, step_ix):
+    def decide(self, state, step_ix = 999):
         policy, value = self.agent(state)
 
         action, action_ix = self.choose_action(policy, step_ix)
@@ -393,21 +459,324 @@ class Runner:
         return action, action_ix, policy, value
 
     def load_state_dict(self, state):
+        """
+        As we'll have multiple "worker" runners, they will need to be able to sync their agents weights with the main agent.
+        This function loads the weights into this runner's agent.
+        """
         self.agent.load_state_dict(state)
 ```
 
-(The importance of tuning of the n-step window size)
+I've encapsulated the training process in a class of it's own:
 
-(Problems with the buggy gym state returning - overcoming with the explicit render)
+```python
+class Trainer:
+    def __init__(self, gamma, agent, window = 15, workers = 8, **kwargs):
+        super().__init__(**kwargs)
 
-(Tips for recognizing when the algorithm converges - rich logging)
+        self.agent = agent
+        self.window = window
+        self.gamma = gamma
+        self.optimizer = optim.Adam(self.agent.parameters(), lr=1e-4)
+        self.workers = workers
 
-(Coding the agent)
+				# even though we're loading the weights into worker agents explicitly, I found that still without sharing the weights as following, the algorithm was not converging: 
+        self.agent.share_memory()
 
-(The episode runner)
+    def fit(self, episodes = 1000):
+		    """
+		    The higher level method for training the agents.
+		    It called into the lower level "train" which orchestrates the process itself.
+		    """
+        last_update = 0
+        updates = dict()
 
-(The trainer)
+        for ix in range(1, self.workers + 1):
+            updates[ ix ] = { 'episode': 0, 'step': 0, 'rewards': deque(), 'losses': deque(), 'points': 0, 'mean_reward': 0, 'mean_loss': 0 }
 
-(Results)
+        for update in self.train(episodes):
+            now = time.time()
+            
+            # you could do something useful here with the updates dict.
+            # I've opted out as I'm using logging anyways and got more value in just watching the log file, grepping for the desired values
 
-(Ending words - links to GitHub)
+            # save the current model's weights every minute:
+            if now - last_update > 60:
+                torch.save(self.agent.state_dict(), './checkpoints/car-racing/' + str(int(now)) + '-.pytorch')
+                last_update = now
+
+    def train(self, episodes = 1000):
+        """
+        Lower level training orchestration method. Written in the generator style. Intended to be used with "for update in train(...):"
+        """
+        
+        # create the requested number of background agents and runners:
+        worker_agents = self.agent.clone(num = self.workers)
+        runners = [ Runner(agent=agent, ix = ix + 1, train = True) for ix, agent in enumerate(worker_agents) ]
+
+        # we're going to communicate the workers updates via the thread safe queue:
+        queue = mp.SimpleQueue()
+
+        # if we've not been given a number of episodes: assume the process is going to be interrupted with the keyboard interrupt once the user (us) decides so:
+        if episodes is None:
+            print('Starting out an infinite training process')
+
+        # create the actual background processes, making their entry be the train_one method:
+        processes = [ mp.Process(target=self.train_one, args=(runners[ix - 1], queue, episodes, ix)) for ix in range(1, self.workers + 1) ]
+
+        # run those processes:
+        for process in processes:
+            process.start()
+
+        try:
+            # what follows is a rather naive implementation of listening to workers updates. it works though for our purposes:
+            while any([ process.is_alive() for process in processes ]):
+                results = queue.get()
+                yield results
+        except Exception as e:
+            logger.error(str(e))
+
+    def train_one(self, runner, queue, episodes = 1000, ix = 1):
+        """
+        Orchestrate the training for a single worker runner and agent. This is intended to be ran in its own background process.
+        """
+        
+        # possibly naive way of trying to de-correclate the weight updates further (I have no hard evidence to prove if it works, other than my subjective observation):
+        time.sleep(ix)
+        
+        try:
+            # we are going to request the episode be reset whenever our agent scores lower than its max points. the same will happen if the agent scores total of -10 points:
+            max_points = 0
+            max_eval_points = 0
+            min_points = 0
+            max_episode = 0
+
+            for episode_ix in itertools.count(start=0, step=1):
+
+                if episodes is not None and episode_ix >= episodes:
+                    return
+
+                max_episode_points = 0
+                points = 0
+                
+                # load up the newest weights every new episode:
+                runner.load_state_dict(self.agent.state_dict())
+
+                # every 5 episodes lets evaluate the weights we've learned so far by recording the run of the car using the greedy strategy:
+                if ix == 1 and episode_ix % 5 == 0:
+                    eval_points = self.record_greedy(episode_ix)
+
+                    if eval_points > max_eval_points:
+                        torch.save(runner.agent.state_dict(), './checkpoints/car-racing/' + str(eval_points) + '-eval-points.pytorch')
+                        max_eval_points = eval_points
+
+                # each n-step window, compute the gradients and apply
+                # also: decide if we shouldn't restart the episode if we don't want ot explore too much of the not-useful state space: 
+                for step, rewards, values, policies, action_ixs, terminal in runner.run_episode(yield_every=self.window):
+                    points += sum(rewards)
+
+                    if ix == 1 and points > max_points:
+                        torch.save(runner.agent.state_dict(), './checkpoints/car-racing/' + str(points) + '-points.pytorch')
+                        max_points = points
+
+                    if ix == 1 and episode_ix > max_episode:
+                        torch.save(runner.agent.state_dict(), './checkpoints/car-racing/' + str(episode_ix) + '-episode.pytorch')
+                        max_episode = episode_ix
+
+                    if points < -10 or (max_episode_points > min_points and points < min_points):
+                        terminal = True
+                        max_episode_points = 0
+                        point = 0
+                        runner.ask_reset()
+
+                    if terminal:
+                        logger.info('TERMINAL for ' + str(ix) + ' at step ' + str(step) + ' with total points ' + str(points) + ' max: ' + str(max_episode_points) )
+
+                    # if we're learning, then compute and apply the gradients and load the newest weights:
+                    if runner.train:
+                        loss = self.apply_gradients(policies, action_ixs, rewards, values, terminal, runner)
+                        runner.load_state_dict(self.agent.state_dict())
+
+                    max_episode_points = max(max_episode_points, points)
+                    min_points = max(min_points, points)
+
+                    # communicate the gathered values to the main process:
+                    queue.put((ix, episode_ix, step, rewards, loss, points, terminal))
+
+        except Exception as e:
+            string = traceback.format_exc()
+            logger.error(str(e) + ' → ' + string)
+            queue.put((ix, -1, -1, [-1], -1, str(e) + '<br />' + string, True))
+
+    def record_greedy(self, episode_ix):
+        """
+        Records the video of the "greedy" run based on the current weights.
+        """
+        directory = './videos/car-racing/episode-' + str(episode_ix) + '-' + str(int(time.time()))
+        player = Player(agent=self.agent, directory=directory, train=False)
+        points = player.play()
+        logger.info('Evaluation at episode ' + str(episode_ix) + ': ' + str(points) + ' points (' + directory + ')')
+        return points
+
+    def apply_gradients(self, policies, actions, rewards, values, terminal, runner):
+        worker_agent = runner.agent
+        actions_one_hot = torch.tensor([[ int(i == action) for i in range(4) ] for action in actions], dtype=torch.float32)
+
+        policies = torch.stack(policies)
+        values = torch.cat(values)
+        values_nograd = torch.zeros_like(values.detach(), requires_grad=False)
+        values_nograd.copy_(values)
+
+        discounted_rewards = self.discount_rewards(runner, rewards, values_nograd[-1], terminal)
+        advantages = discounted_rewards - values_nograd
+
+        logger.info('Runner ' + str(runner.ix) + 'Rewards: ' + str(rewards))
+        logger.info('Runner ' + str(runner.ix) + 'Discounted Rewards: ' + str(discounted_rewards.numpy()))
+
+        log_policies = torch.log(0.00000001 + policies)
+
+        one_log_policies = torch.sum(log_policies * actions_one_hot, dim=1)
+
+        entropy = torch.sum(policies * -log_policies)
+
+        policy_loss = -torch.mean(one_log_policies * advantages)
+
+        value_loss = F.mse_loss(values, discounted_rewards)
+
+        value_loss_nograd = torch.zeros_like(value_loss)
+        value_loss_nograd.copy_(value_loss)
+
+        policy_loss_nograd = torch.zeros_like(policy_loss)
+        policy_loss_nograd.copy_(policy_loss)
+
+        logger.info('Value Loss: ' + str(float(value_loss_nograd)) + ' Policy Loss: ' + str(float(policy_loss_nograd)))
+
+        loss = policy_loss + 0.5 * value_loss - 0.01 * entropy
+        self.agent.zero_grad()
+        loss.backward()
+        torch.nn.utils.clip_grad_norm_(worker_agent.parameters(), 40)
+
+        # the following step is crucial. to this points all the info about the gradients reside in the worker agent's memory. We need to "move" those gradients into the main agent's memory:
+        self.share_gradients(worker_agent)
+        
+        # update the weights with the computed gradients:
+        self.optimizer.step()
+
+        worker_agent.zero_grad()
+        return float(loss.detach())
+
+    def share_gradients(self, worker_agent):
+        for param, shared_param in zip(worker_agent.parameters(), self.agent.parameters()):
+            if shared_param.grad is not None:
+                return
+            shared_param._grad = param.grad
+
+    def clip_reward(self, reward):
+        """
+        Clips the rewards into the <-3, 3> range preventing too big of the gradients variance.
+        """
+        return max(min(reward, 3), -3)
+
+    def discount_rewards(self, runner, rewards, last_value, terminal):
+		    discounted_rewards = [0 for _ in rewards]
+        loop_rewards = [ self.clip_reward(reward) for reward in rewards ]
+
+        if terminal:
+            loop_rewards.append(0)
+        else:
+            loop_rewards.append(runner.get_value())
+
+        for main_ix in range(len(discounted_rewards) - 1, -1, -1):
+            for inside_ix in range(len(loop_rewards) - 1, -1, -1):
+                if inside_ix >= main_ix:
+                    reward = loop_rewards[inside_ix]
+                    discounted_rewards[main_ix] += self.gamma**(inside_ix - main_ix) * reward
+
+        #logger.info('Discounting ' + str(loop_rewards) + ' --> ' + str(discounted_rewards) + ' len(rewards) = ' + str(len(rewards)))
+
+        return torch.tensor(discounted_rewards)
+```
+
+For the `record_greedy` method to work we need the following class:
+
+```python
+class Player(Runner):
+    def __init__(self, directory, **kwargs):
+        super().__init__(ix=999, **kwargs)
+
+        self.env = Monitor(self.env, directory)
+
+    def play(self):
+        points = 0
+        for step, rewards, values, policies, actions, terminal in self.run_episode(yield_every = 1, do_render = True):
+            points += sum(rewards)
+        self.env.close()
+        return points
+```
+
+All the above code can be used as follows (in the Python's script):
+
+```python
+if __name__ == "__main__":
+    agent = Agent()
+
+    trainer = Trainer(gamma = 0.99, agent = agent)
+    trainer.fit(episodes=None)
+```
+
+### The importance of tuning of the n-step window size
+
+Reading the code, you can notice that we've chosen $15$ to be the size of the n-step window. We've also chosen $\gamma=0.99$. Getting those values right is a matter of trial and error. The same ones that work on one game or a challenge will not necessarily work well for the other.
+
+Here's a quick explanation of how to think about them: we're going to be penalized most of the time. It's important for us to give the algorithm a chance to actually find trajectories that score positively though. In the "CarRacing" challenge, I've found that it can take 10 steps of moving "full throttle" in the correct direction before we're being rewarded by entering the new "tile". I've just simply added $5$ of the safety net to that number. No mathematical proof follows this thinking here, I can tell you though that it made a **huge** difference in the training time for me. The version of the code I'm presenting above starts to score above 700 points after approximately 10 hours on my Ryzen 7 based computing box.
+
+### Problems with the state being returned from the environment - overcoming with the explicit render
+
+You might have also noticed that I'm not using the state values returned by the `step` method of the gym environment. This might seem contradictory to how gym is typically being used. After **days** of not seeing my model converge though, I have found that the `step` method was returning **one and the same** numpy array **on each call**. You can imagine that it was the absolutely **last** thing I've checked when trying to find that bug.
+
+I've found the `render(mode='rgb_array')` work as intended each time. I just needed to write my own preprocessing code, to scale it down and make it grayscale.
+
+### How to know when the algorithm converges
+
+I've seen some people thinking that their A3C implementation does not converge. The resulting policy did not seem to be working that well, but the training process was taking a bit longer than "some other implementation". I fell for this kind of thinking myself as well. My humble bit of advice is stick to what makes sense mathematically. Someone else model might be converging faster simply because of the hardware this person uses or some very slight difference in how that training occurs. This might not have anything to do with the A3C part per se.
+
+How do we "stick to what makes sense mathematically"? Simply by logging the value loss and observing it as the training happens. Intuitively, for the model that has converged, we should see (in the CarRacing example), that the model has already learned the value function (the average of the discounted rewards for the state) and you should not see the loss being too big most of the time. Still for some states, the best action will make the $R_t$ much bigger than $V(s_t)$ which means that we still should see the loss spiking from time to time.
+
+Again, the above bit of advice doesn't come with any mathematical proofs. It's what I found working and making sense **for me**. 
+
+### The Results
+
+Instead of presenting hard-core statistics about the models performance (which wouldn't make much sense because I stopped it as soon as the "evaluation" videos started looking cool enough) — I'll just post three videos of the car driving on its own through the three randomly generated tracks.
+
+Have fun watching and even more fun coding it yourself too!
+
+<center>
+  <video width="100%" controls poster="file:///Users/kamil/Projects/end-point-blog/2018/09/01/poster.png">
+    <source src="file:///Users/kamil/Desktop/car-racing/873-openaigym.video.92.68.video000000.mp4" type="video/mp4">
+  </video>
+</center> 
+
+<center>
+  <video width="100%" controls poster="file:///Users/kamil/Projects/end-point-blog/2018/09/01/poster.png">
+    <source src="file:///Users/kamil/Desktop/car-racing/892-openaigym.video.90.68.video000000.mp4" type="video/mp4">
+  </video>
+</center> 
+
+<center>
+  <video width="100%" controls poster="file:///Users/kamil/Projects/end-point-blog/2018/09/01/poster.png">
+    <source src="file:///Users/kamil/Desktop/car-racing/904-openaigym.video.77.68.video000000.mp4" type="video/mp4">
+  </video>
+</center> 
+
+<script>
+    renderMathInElement(
+        document.body,
+        {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "\\[", right: "\\]", display: true},
+                {left: "$", right: "$", display: false},
+                {left: "\\(", right: "\\)", display: false}
+            ]
+        }
+    );
+</script>
