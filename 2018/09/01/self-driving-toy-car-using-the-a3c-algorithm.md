@@ -191,7 +191,7 @@ We can use the above to "punish" the model whenever it's too confident of its ch
  
 Let's include the value loss $L_v$ in the loss function formula making it full and ready to be implemented:
 
-$$L_\theta=-\frac{1}{n}\sum_{t=0}^{n-1}log\pi(a_t|s_t;\theta)\cdot(R_t-V(s_t))\,-\alpha\,L_v\,\,-\beta\,H(\pi(a_t|s_t;\theta))$$
+$$L_\theta=-\frac{1}{n}\sum_{t=0}^{n-1}log\pi(a_t|s_t;\theta)\cdot(R_t-V(s_t))\,+\alpha\,L_v\,\,-\beta\,H(\pi(a_t|s_t;\theta))$$
 
 ### The last A in A3C
 
