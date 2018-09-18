@@ -286,7 +286,8 @@ replace the transparency with a gray checkerboard pattern.
 
 ## Counting schools
 
-Now it remains to count the schools in each pixel, and assign corresponding color values. 
+Now all that remains is to count the schools in each pixel, and assign
+corresponding color values. 
 
 ```sql
     WITH polygons AS (
