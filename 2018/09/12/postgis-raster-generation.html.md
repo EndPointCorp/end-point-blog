@@ -25,8 +25,8 @@ sometimes enjoyable mental exercise, but it also means the query has to start
 from zero, every time it runs, so iterative development bogs down quickly as
 the query must recalculate at every new iteration all the expensive stuff
 it already got worked out in previous runs. Further, the query in that post
-built a grid of squares from scratch, and I promised an alternative method
-which I'd like to demonstrate here.
+calculated its grid coordinates all on its own; there's an easier method I
+promised to introduce, which I'd like to demonstrate here.
 
 ## Rasters
 
@@ -68,10 +68,10 @@ a Perl script, building sufficient intelligence therein to recreate any bits of
 the database I might have simply dropped, as I developed the script, and to
 skip reprocessing any steps for which it finds current results lying around.
 
-PostGIS supports a data type called `raster`, and, anticipating that I might
-want multiple rasters in my database, using a variety of settings and script
-modifications, I created a table to store these rasters and some extra data
-about them.
+PostGIS supports a data type called `raster`, and anticipating that I might
+want multiple rasters in my database each using a variety of settings and
+script modifications, I created a table to store these rasters and some extra
+data about them.
 
 ```perl
 $dbh->do("CREATE TABLE IF NOT EXISTS rasters (id SERIAL PRIMARY KEY, pixels INTEGER, r RASTER, comment TEXT)");
