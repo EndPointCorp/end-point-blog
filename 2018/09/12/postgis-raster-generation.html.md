@@ -85,7 +85,7 @@ my purposes.
 To calculate a raster, I need to find a value for each of its pixels, or to
 confirm that the pixel should have no value, and for that I wanted another
 table. This table contains both geographic and Euclidean coordinates for each
-pixel in each raster, the `id` of the assocated entry in the `rasters` table, a
+pixel in each raster, the `id` of the associated entry in the `rasters` table, a
 field for the number of schools I've counted in this square, fields for the RGB
 color assigned to the pixel, and a boolean flag telling me whether or not I've
 finished calculating everything for this pixel or not.
@@ -188,7 +188,7 @@ We need to find the polygon corresponding to each pixel in the raster, and
 PostGIS gives us two ways to do it. The first is
 [ST_PixelAsPolygons()](http://postgis.net/docs/RT_ST_PixelAsPolygons.html),
 which returns a set of values, including the geographic rectangle the pixel
-represents, calld `geom`, and its `x` and `y` coordinates. The other function,
+represents, called `geom`, and its `x` and `y` coordinates. The other function,
 [ST_PixelAsCentroids()](http://postgis.net/docs/RT_ST_PixelAsCentroids.html),
 also accepts a single raster as its sole argument and returns a set of similar
 results, except that instead of a geographic rectangle, it returns only the
@@ -346,7 +346,7 @@ It's easy to see in that image that some pixels are colored to represent
 schools, but where did all the vertical bands come from? Much of Mexico is very
 sparsely populated, so vast swaths of our pixels have no schools at all. This
 means that the pixels with a school count of zero fill most of the available
-buckets.  Pixels with schools in them are so much in the minoity, for any
+buckets.  Pixels with schools in them are so much in the minority, for any
 raster of sufficient resolution, as to place all non-zero pixels in a single
 bucket. So I modified my approach slightly: I made my histogram only from those
 pixels with non-zero school counts. That query is below.
