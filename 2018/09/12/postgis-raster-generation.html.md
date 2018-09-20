@@ -329,13 +329,13 @@ necessary, and later, resume more or less where I left off.
 ## Color assignment
 
 After counting schools, I need to assign colors to the pixels. Initially I
-imagined this would be fairly easy, but in fact it took some detective work,
-and added query complexity, to get it right. I planned to get a gradient of
-colors, divide the school counts into histogram-like buckets according to school
-density, and assign a color to each bucket. Building your own decent color
-gradient is surprisingly difficult, and I got mine from an online service.
-As with the last blog post, I figured a relatively small number of colors would
-be easiest. These I encoded as a PostgreSQL array, and I used PostgreSQL's
+imagined this would be fairly easy, but in fact it took some detective work
+to get it right. My plan was to get a gradient of colors, divide the school
+counts into histogram-like buckets according to school density, and assign a
+color to each bucket. Building your own decent color gradient is surprisingly
+difficult, and I got mine from an online service.  As with the last blog post,
+I figured a relatively small number of colors would be easiest. These I encoded
+as a PostgreSQL array, and I used PostgreSQL's
 [ntile](https://www.postgresql.org/docs/current/static/functions-window.html)
 window function to return the right bucket for each polygon. The results
 surprised me, shown here in a raster with 500 pixels on each side:
