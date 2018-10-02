@@ -4,6 +4,8 @@ title: "Building Rasters in PostGIS"
 tags: postgres, gis, sql, database
 ---
 
+![](/blog/2018/09/12/postgis-raster-generation/raster-better-opacity.jpg)
+
 In a [past blog
 post](https://www.endpoint.com/blog/2018/06/12/systematic-query-building-with-ctes)
 I described a method I’d used to digest raw statistics from the Mexican
@@ -73,8 +75,8 @@ want multiple rasters in my database each using a variety of settings and
 script modifications, I created a table to store these rasters and some extra
 data about them.
 
-```perl
-$dbh->do("CREATE TABLE IF NOT EXISTS rasters (id SERIAL PRIMARY KEY, pixels INTEGER, r RASTER, comment TEXT)");
+```sql
+CREATE TABLE IF NOT EXISTS rasters (id SERIAL PRIMARY KEY, pixels INTEGER, r RASTER, comment TEXT);
 ```
 
 The `pixels` field holds the number of pixels along one edge of the raster,
@@ -90,20 +92,18 @@ field for the number of schools I’ve counted in this square, fields for the RG
 color assigned to the pixel, and a boolean flag telling me whether or not I’ve
 finished calculating everything for this pixel or not.
 
-```perl
-$dbh->do(q{
-    CREATE TABLE IF NOT EXISTS polys (
-        x INTEGER,
-        y INTEGER,
-        geom GEOMETRY,
-        count INTEGER,
-        r_val INTEGER,
-        b_val INTEGER,
-        g_val INTEGER,
-        processed BOOLEAN DEFAULT 'f',
-        raster_id INTEGER NOT NULL
-    )
-});
+```sql
+CREATE TABLE IF NOT EXISTS polys (
+    x INTEGER,
+    y INTEGER,
+    geom GEOMETRY,
+    count INTEGER,
+    r_val INTEGER,
+    b_val INTEGER,
+    g_val INTEGER,
+    processed BOOLEAN DEFAULT 'f',
+    raster_id INTEGER NOT NULL
+);
 ```
 
 The script’s first step is to create an empty raster, which it does with
@@ -115,29 +115,29 @@ parlance for an 8-bit unsigned integer. The various color bands default to
 NULL values, and the alpha band to zeroes. The code looks something like this:
 
 ```sql
-    INSERT INTO rasters (pixels, r, comment)
-    SELECT
-        ST_AddBand(
-        ST_AddBand(
-        ST_AddBand(
-        ST_AddBand(
-            ST_MakeEmptyRaster(
-                numpixels,      -- The number of pixels along one edge of the raster
-                numpixels,
-                st_xmin,        -- latitude and longitude coordinates of the corner of the raster
-                st_ymax,
-                (st_xmax - st_xmin)/numpixels::float,   -- width and height of the raster
-                -(st_ymax - st_ymin)/numpixels::float,
-                0,
-                0,
-                4326            -- We'll use the WGS 84 coordinate system
-            ),
-            1, '8BUI'::TEXT, NULL::DOUBLE PRECISION, NULL::DOUBLE PRECISION),
-            2, '8BUI'::TEXT, NULL::DOUBLE PRECISION, NULL::DOUBLE PRECISION),
-            3, '8BUI'::TEXT, NULL::DOUBLE PRECISION, NULL::DOUBLE PRECISION),
-            4, '8BUI'::TEXT, 0, 0
-        ) AS r
-    FROM limits, params;
+INSERT INTO rasters (pixels, r, comment)
+SELECT
+    ST_AddBand(
+    ST_AddBand(
+    ST_AddBand(
+    ST_AddBand(
+        ST_MakeEmptyRaster(
+            numpixels,      -- The number of pixels along one edge of the raster
+            numpixels,
+            st_xmin,        -- latitude and longitude coordinates of the corner of the raster
+            st_ymax,
+            (st_xmax - st_xmin)/numpixels::float,   -- width and height of the raster
+            -(st_ymax - st_ymin)/numpixels::float,
+            0,
+            0,
+            4326            -- We'll use the WGS 84 coordinate system
+        ),
+        1, '8BUI'::TEXT, NULL::DOUBLE PRECISION, NULL::DOUBLE PRECISION),
+        2, '8BUI'::TEXT, NULL::DOUBLE PRECISION, NULL::DOUBLE PRECISION),
+        3, '8BUI'::TEXT, NULL::DOUBLE PRECISION, NULL::DOUBLE PRECISION),
+        4, '8BUI'::TEXT, 0, 0
+    ) AS r
+FROM limits, params;
 ```
 
 The query refers to the `limits` and `params` tables (actually, they’re table
@@ -200,10 +200,10 @@ referred to.
 This query fills the `polys` table with polygons for a particular raster:
 
 ```sql
-    INSERT INTO polys (x, y, geom, raster_id)
-    SELECT (ST_PixelAsPolygons(r)).*, $id FROM rasters   -- Having code for both functions here made it easy to switch back and forth
-    -- SELECT (ST_PixelAsCentroids(r)).*, $id FROM rasters
-    WHERE id = $id
+INSERT INTO polys (x, y, geom, raster_id)
+SELECT (ST_PixelAsPolygons(r)).*, $id FROM rasters   -- Having code for both functions here made it easy to switch back and forth
+-- SELECT (ST_PixelAsCentroids(r)).*, $id FROM rasters
+WHERE id = $id
 ```
 
 One step that proved critical for decent performance was to filter the set of
@@ -216,20 +216,20 @@ and more in savings later when calculating schools within each pixel. This
 modified version of the query above does that filtering.
 
 ```sql
-    WITH polygons AS (
-        SELECT (ST_PixelAsPolygons(r)).* FROM rasters   -- Having code for both functions here made it easy to switch back and forth
-        -- SELECT (ST_PixelAsCentroids(r)).* FROM rasters
-        WHERE id = $id
-    ),
-    filtered_polygons AS (
-        SELECT x, y, p.geom
-        FROM polygons p
-            JOIN mexico m
-                ON ST_Intersects(m.geom, p.geom)
-        GROUP BY 1, 2, 3
-    )
-    INSERT INTO polys (x, y, geom, raster_id)
-    SELECT x, y, geom, $id FROM filtered_polygons
+WITH polygons AS (
+    SELECT (ST_PixelAsPolygons(r)).* FROM rasters   -- Having code for both functions here made it easy to switch back and forth
+    -- SELECT (ST_PixelAsCentroids(r)).* FROM rasters
+    WHERE id = $id
+),
+filtered_polygons AS (
+    SELECT x, y, p.geom
+    FROM polygons p
+        JOIN mexico m
+            ON ST_Intersects(m.geom, p.geom)
+    GROUP BY 1, 2, 3
+)
+INSERT INTO polys (x, y, geom, raster_id)
+SELECT x, y, geom, $id FROM filtered_polygons
 ```
 
 This query refers to a table called `mexico`, which contains geographic
@@ -255,19 +255,19 @@ the center point for each pixel’s corresponding polygon—​gc as `ST_SetValu
 is considerably faster that way than when given `POLYGON` values themselves.
 
 ```sql
-    -- Update the original raster
-    UPDATE rasters
-        SET r = ST_SetValues(ST_SetValues(ST_SetValues(ST_SetValues(r, 1, r_geomvalset), 2, g_geomvalset), 3, b_geomvalset), 4, a_geomvalset)
-    FROM (
-        SELECT
-            ARRAY_AGG((geom, 255)::GEOMVAL) AS r_geomvalset,
-            ARRAY_AGG((geom, 255)::GEOMVAL) AS g_geomvalset,
-            ARRAY_AGG((geom, 255)::GEOMVAL) AS b_geomvalset,
-            ARRAY_AGG((ST_Centroid(geom), 255)::GEOMVAL) AS a_geomvalset
-        FROM polys
-        WHERE raster_id = $id
-    ) foo
-    WHERE id = $id
+-- Update the original raster
+UPDATE rasters
+    SET r = ST_SetValues(ST_SetValues(ST_SetValues(ST_SetValues(r, 1, r_geomvalset), 2, g_geomvalset), 3, b_geomvalset), 4, a_geomvalset)
+FROM (
+    SELECT
+        ARRAY_AGG((geom, 255)::GEOMVAL) AS r_geomvalset,
+        ARRAY_AGG((geom, 255)::GEOMVAL) AS g_geomvalset,
+        ARRAY_AGG((geom, 255)::GEOMVAL) AS b_geomvalset,
+        ARRAY_AGG((ST_Centroid(geom), 255)::GEOMVAL) AS a_geomvalset
+    FROM polys
+    WHERE raster_id = $id
+) foo
+WHERE id = $id
 ```
 
 For a raster with many pixels, this takes a bit of time to accomplish. For my
@@ -290,25 +290,25 @@ Now all that remains is to count the schools in each pixel, and assign
 corresponding color values. 
 
 ```sql
-    WITH polygons AS (
-        SELECT x, y, geom FROM polys
-        WHERE
-            processed = 'f'
-            AND raster_id = $id
-        LIMIT 100
-    ),
-    schoolcounts AS (
-        SELECT x AS sx, y AS sy, COUNT(*) AS schoolcount
-        FROM polygons p
-            JOIN sip ON (ST_Within(sip.geom, p.geom) AND sip.geografico = 'Escuela')
-        GROUP BY x, y, p.geom
-    )
-    UPDATE polys SET count = COALESCE(s.schoolcount, 0), processed = 't'
-    FROM schoolcounts s
-        RIGHT JOIN polygons p
-            ON (sx = p.x AND sy = p.y)
+WITH polygons AS (
+    SELECT x, y, geom FROM polys
     WHERE
-        polys.x = p.x AND polys.y = p.y AND raster_id = $id
+        processed = 'f'
+        AND raster_id = $id
+    LIMIT 100
+),
+schoolcounts AS (
+    SELECT x AS sx, y AS sy, COUNT(*) AS schoolcount
+    FROM polygons p
+        JOIN sip ON (ST_Within(sip.geom, p.geom) AND sip.geografico = 'Escuela')
+    GROUP BY x, y, p.geom
+)
+UPDATE polys SET count = COALESCE(s.schoolcount, 0), processed = 't'
+FROM schoolcounts s
+    RIGHT JOIN polygons p
+        ON (sx = p.x AND sy = p.y)
+WHERE
+    polys.x = p.x AND polys.y = p.y AND raster_id = $id
 ```
 
 This query finally refers to the actual INEGI data set I started with, a table
@@ -393,18 +393,18 @@ The final bit of required scripting to generate a usable image is to use
 an array of `geomval` objects and using them to update the original raster.
 
 ```sql
-    UPDATE rasters
-        SET r = ST_SetValues(ST_SetValues(ST_SetValues(ST_SetValues(r, 1, r_geomvalset), 2, g_geomvalset), 3, b_geomvalset), 4, a_geomvalset)
-    FROM (
-        SELECT
-            ARRAY_AGG((ST_Centroid(geom), r_val)::GEOMVAL) FILTER (WHERE r_val IS NOT NULL) AS r_geomvalset,
-            ARRAY_AGG((ST_Centroid(geom), g_val)::GEOMVAL) FILTER (WHERE g_val IS NOT NULL) AS g_geomvalset,
-            ARRAY_AGG((ST_Centroid(geom), b_val)::GEOMVAL) FILTER (WHERE b_val IS NOT NULL) AS b_geomvalset,
-            ARRAY_AGG((ST_Centroid(geom), 255)::GEOMVAL) AS a_geomvalset
-        FROM polys
-        WHERE raster_id = $id
-    ) foo
-    WHERE id = $id
+UPDATE rasters
+    SET r = ST_SetValues(ST_SetValues(ST_SetValues(ST_SetValues(r, 1, r_geomvalset), 2, g_geomvalset), 3, b_geomvalset), 4, a_geomvalset)
+FROM (
+    SELECT
+        ARRAY_AGG((ST_Centroid(geom), r_val)::GEOMVAL) FILTER (WHERE r_val IS NOT NULL) AS r_geomvalset,
+        ARRAY_AGG((ST_Centroid(geom), g_val)::GEOMVAL) FILTER (WHERE g_val IS NOT NULL) AS g_geomvalset,
+        ARRAY_AGG((ST_Centroid(geom), b_val)::GEOMVAL) FILTER (WHERE b_val IS NOT NULL) AS b_geomvalset,
+        ARRAY_AGG((ST_Centroid(geom), 255)::GEOMVAL) AS a_geomvalset
+    FROM polys
+    WHERE raster_id = $id
+) foo
+WHERE id = $id
 ```
 
 This gives me something like the image below, with 500 pixels on each edge of
@@ -425,12 +425,12 @@ point, in this case, with an arbitrarily chosen radius, and counts the number
 of schools found within that circle.
 
 ```sql
-    schoolcounts AS (
-        SELECT x AS sx, y AS sy, COUNT(*) AS schoolcount
-        FROM polygons p
-            JOIN sip ON (ST_Within(sip.geom, ST_Buffer(p.geom, 0.4)) AND sip.geografico = 'Escuela')
-        GROUP BY x, y, p.geom
-    )
+schoolcounts AS (
+    SELECT x AS sx, y AS sy, COUNT(*) AS schoolcount
+    FROM polygons p
+        JOIN sip ON (ST_Within(sip.geom, ST_Buffer(p.geom, 0.4)) AND sip.geografico = 'Escuela')
+    GROUP BY x, y, p.geom
+)
 ```
 
 The resulting image, again with 500x500 pixel resolution, shows evidence of its
