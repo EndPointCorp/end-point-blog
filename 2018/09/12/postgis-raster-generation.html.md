@@ -2,12 +2,13 @@
 author: "Josh Tolley"
 title: "Building Rasters in PostGIS"
 tags: postgres, gis, sql, database
+gh_issue_number: 1455
 ---
 
-![](/blog/2018/09/12/postgis-raster-generation/raster-better-opacity.jpg)
+![](/blog/2018/09/12/postgis-raster-generation/raster-banner.jpg)
 
 In a [past blog
-post](https://www.endpoint.com/blog/2018/06/12/systematic-query-building-with-ctes)
+post](/blog/2018/06/12/systematic-query-building-with-ctes)
 I described a method I’d used to digest raw statistics from the Mexican
 government statistics body, INEGI, quantifying the relative educational level
 of residents in Mexico City. In the post, I divided these data into squares
@@ -76,7 +77,7 @@ script modifications, I created a table to store these rasters and some extra
 data about them.
 
 ```sql
-CREATE TABLE IF NOT EXISTS rasters (id SERIAL PRIMARY KEY, pixels INTEGER, r RASTER, comment TEXT);
+CREATE TABLE rasters (id SERIAL PRIMARY KEY, pixels INTEGER, r RASTER, comment TEXT);
 ```
 
 The `pixels` field holds the number of pixels along one edge of the raster,
@@ -93,7 +94,7 @@ color assigned to the pixel, and a boolean flag telling me whether or not I’ve
 finished calculating everything for this pixel or not.
 
 ```sql
-CREATE TABLE IF NOT EXISTS polys (
+CREATE TABLE polys (
     x INTEGER,
     y INTEGER,
     geom GEOMETRY,
@@ -122,15 +123,15 @@ SELECT
     ST_AddBand(
     ST_AddBand(
         ST_MakeEmptyRaster(
-            numpixels,      -- The number of pixels along one edge of the raster
+            numpixels,  -- The number of pixels along one edge of the raster
             numpixels,
-            st_xmin,        -- latitude and longitude coordinates of the corner of the raster
+            st_xmin,    -- latitude and longitude coordinates of the corner of the raster
             st_ymax,
             (st_xmax - st_xmin)/numpixels::float,   -- width and height of the raster
             -(st_ymax - st_ymin)/numpixels::float,
             0,
             0,
-            4326            -- We'll use the WGS 84 coordinate system
+            4326        -- We'll use the WGS 84 coordinate system
         ),
         1, '8BUI'::TEXT, NULL::DOUBLE PRECISION, NULL::DOUBLE PRECISION),
         2, '8BUI'::TEXT, NULL::DOUBLE PRECISION, NULL::DOUBLE PRECISION),
@@ -155,8 +156,7 @@ handy, because doing this in pure SQL is actually something of a pain..
 ```perl
 print "Creating image\n";
 my $res = $dbh->selectall_arrayref(qq{
-    SELECT
-        ST_AsPng(r, ARRAY[1,2,3,4]::INT[])
+    SELECT ST_AsPng(r, ARRAY[1,2,3,4]::INT[])
     FROM rasters WHERE id = $id
 });
 
@@ -201,7 +201,8 @@ This query fills the `polys` table with polygons for a particular raster:
 
 ```sql
 INSERT INTO polys (x, y, geom, raster_id)
-SELECT (ST_PixelAsPolygons(r)).*, $id FROM rasters   -- Having code for both functions here made it easy to switch back and forth
+SELECT (ST_PixelAsPolygons(r)).*, $id FROM rasters
+-- Having code for both functions here made it easy to switch back and forth
 -- SELECT (ST_PixelAsCentroids(r)).*, $id FROM rasters
 WHERE id = $id
 ```
@@ -217,7 +218,8 @@ modified version of the query above does that filtering.
 
 ```sql
 WITH polygons AS (
-    SELECT (ST_PixelAsPolygons(r)).* FROM rasters   -- Having code for both functions here made it easy to switch back and forth
+    SELECT (ST_PixelAsPolygons(r)).* FROM rasters
+    -- Having code for both functions here made it easy to switch back and forth
     -- SELECT (ST_PixelAsCentroids(r)).* FROM rasters
     WHERE id = $id
 ),
@@ -418,8 +420,7 @@ polygon, I thought I might try calculating the number of schools within a
 specific distance of the pixel’s center; perhaps that technique would lead to a
 more visually appealing result. This is simple enough, using the
 `ST_PixelAsCentroids()` function to get the centroids of the pixels’ polygons,
-and then modifying the `schoolcounts` CTE as shown here. The key modification
--- in fact, the only modification from the earlier version shown above—​is in
+and then modifying the `schoolcounts` CTE as shown here. The key modification—​in fact, the only modification from the earlier version shown above—​is in
 the `JOIN` clause, which uses `ST_Buffer` to create a circle surrounding a
 point, in this case, with an arbitrarily chosen radius, and counts the number
 of schools found within that circle.
