@@ -2,12 +2,12 @@
 author: Charles Chang
 title: 'Microsoft Deployment Toolkit (MDT) Initial Configuration Steps'
 tags: windows, iso, servers
-gh_issue_number: 1457
+gh_issue_number: 1458
 ---
 
-###PART 2 - MDT Initial Configuration Steps###
+### PART 2 - MDT Initial Configuration Steps ###
 
-####Prerequisites####
+#### Prerequisites ####
 Softwares needed to build the MDT server and customize ISO for ***Windows 2012R2 Server***.
 
 To begin, go ahead and download the software needed from below links and install on a ***Windows 2012R2 Server***. Below steps would work on Windows 2008, and 2012. If installing on Windows Server 2016, you would need to find the MDT and ADK version for Windows 2016.
@@ -19,10 +19,10 @@ To begin, go ahead and download the software needed from below links and install
 [Windows Assessment and Deployment Kit (Windows ADK) for Windows 8.1 Update]
 (https://www.microsoft.com/en-us/download/details.aspx?id=39982)  
 
-####Introduction####
+#### Introduction ####
 The goal of this proof of concept was to create a customize Window Server ISO and embed customize powershell and bat scripts. Automation of the OS installation is done by compiling an ISO via MDT. Happy reading!
 
-####Deployment Shares####
+#### Deployment Shares ####
 1\. Create a “New Deployment Share” by right clicking “Deployment Shares” on the left navigation.<br><br>
 <img src="\blog\2018\09\12\Microsoft-Deployment-Toolkit-Initial-Configuration\image69.png" alt="New Deployment Share Folder for MDT" />
 
@@ -59,7 +59,7 @@ The goal of this proof of concept was to create a customize Window Server ISO an
 12\. On the Windows PE Tab, sub tab called "Drivers and Patches". You could select the profile here. To create a profile, scroll down to "Selection Profile" towards the bottom of the page. The profile consist of imported drivers, scripts, apps, etc. Also toggle “Include only drivers from the selection profile".<br><br>
 <img src="\blog\2018\09\12\Microsoft-Deployment-Toolkit-Initial-Configuration\image13.png" alt="WIndows PE and Drivers and Patches" />
 
-####Importing Operating System####
+#### Importing Operating System ####
 1\. Below section shows how to import an operating system for the custom ISO build. Go ahead and right click on Operating Systems within the left navigation. Then click on “Import Operating System”.<br><br>
 <img src="\blog\2018\09\12\Microsoft-Deployment-Toolkit-Initial-Configuration\image44.png" alt="Deployment Import Operating System" />
 
@@ -109,7 +109,7 @@ The goal of this proof of concept was to create a customize Window Server ISO an
 5\. The last step of import driver is the confirmation page. Once you import, check the errors and see if the errors are relevant.<br><br>
 <img src="\blog\2018\09\12\Microsoft-Deployment-Toolkit-Initial-Configuration\image45.png" alt="Import Driver Wizard Confirmation" />
 
-####Selection Profiles####
+#### Selection Profiles ####
 1\. The selection profiles allows you to include certain aspect of the ISO build. Could choose to include or exclude applications, drivers, tasks, etc. <br><br>
 <img src="\blog\2018\09\12\Microsoft-Deployment-Toolkit-Initial-Configuration\image57.png" alt="Selection Profile" /><br>
 
@@ -177,7 +177,7 @@ This will complete Part 2 of creating a customize ISO. In Part 3, I will discuss
 Continue to - <br>
 **Link:** <A href=/blog/2018/09/13/Microsoft-Deployment-Toolkit-Bootable-USB-Key.html.md>Part 3 - Microsoft Deployment Toolkit (MDT) - Create Customize Bootable USB Key using ISO Produced by MDT</a>
 
-####Related Articles####
+#### Related Articles ####
 **Link:** <A href=/blog/2018/09/11/Microsoft-Deployment-Toolkit-Customsettingini.html.md>Part 1 - MDT and Customsetting.ini Parameters</a>
 
 
