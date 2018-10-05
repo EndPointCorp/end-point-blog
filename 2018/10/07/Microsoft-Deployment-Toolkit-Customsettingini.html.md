@@ -11,18 +11,16 @@ gh_issue_number: 1457
 The customsetting.ini is a important part of the Microsoft Deployment Toolkit which sets rules on how your deployment will run. Would you need to disable certain interactive parts of the deployment? or would you want the person who's installing the operating system to interact with the installation. These are all possible by setting the customsetting.ini paramters. Please read below to get a better sense of how to use various customsetting.ini parameters. Happy reading!
 
 #### Customsetting.ini Parameters ####
-<table width=100% border=1>
-  <tr>
-    <th width=33%><b>Skip this wizard page</b></th>
-    <th width=30%><b>Using this property</b></th>
-    <th width=37%><b>Configure these properties</b></th>
-  </tr>
+
+  |  Skip this wizard page  |  Using this property  |  Configure these properties  |
+  |-------------------------|-----------------------|------------------------------|
+  |  Welcome                |  SkipBDDWelcome       |                              |
+  |-------------------------|-----------------------|------------------------------|
+  |  Welcome                |  SkipBDDWelcome       |                              |
+  |-------------------------|-----------------------|------------------------------| 
+    
+    
   
-    <tr valign=top>
-    <th>Welcome</th>
-    <th>SkipBDDWelcome</th>
-    <th></th>
-  </tr>
   
   <tr valign=top>
     <th>Specify credentials for connecting to network shares</th>
