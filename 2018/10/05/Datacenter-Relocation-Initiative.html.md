@@ -46,25 +46,25 @@ Key elements to have a successful migration project is to understand how, when a
 
 ---
 
-####Moving forward with Tier IV####
+#### Moving forward with Tier IV ####
 
 Main reason an enterprise company would seek a Tier 4 data center is because it offer the highest level of guarantee that a data center can provide, with 99.99% availability with zero single points of failure.. This data center is fully redundant in terms of electrical circuits, cooling and network. This architecture can withstand even the most serious of technical incidents without server availability ever being affected. In a situation like the recent Hurricane Sandy that hit New York a few years ago, the data center is contracted with a company to deliver diesel fuel to the complex to sustain their generators during a power outage. Typically in a situation like hurricane Sandy, the data center will mobilize their disaster recovery procedure to support and sustain their services to their customer.  
 
 ---
 
-####Getting Started####
+#### Getting Started ####
 <img src="/blog/2018/10/05/Datacenter-Relocation-Initiative/image04.jpg" style="float: left; margin: 10px 25px 15px 15px" alt="Data Center Hardware Removal and Clean Up" width=250 height=333 />
 It seems like a daunting task, but most important part of a data center migration project is how to migrate and make the critical systems available. For this particular client, we had the luxury of having a second data center with adequate resources to accommodate majority of the critical systems coming over from the data center being relocated. If client did not have a 2nd data center to work with, then a new proposal and strategy would be proposed. In this case, the client had a secondary data center to work with, ample resources to work with, except for adding additional storage to the SAN environment and planning for some minor maintenance to free up storage. 
 
 ---
 
-####Alternatives####
+#### Alternatives ####
 
 Originally, the practice was to change the external DNS records to point to the correct data center but management team was worried the external DNS record would not replicate worldwide quick enough since they operate globally and have customers and other global systems interconnected. 
 
 ---
 
-####Solutions####
+#### Solutions ####
 <img src="/blog/2018/10/05/Datacenter-Relocation-Initiative/image03.jpg" style="float: right; margin: 10px 25px 15px 15px" alt="New Data Center Cabinets" width=250 height=333 />
 We threw around some ideas and ended up using a load balancer to basically resolve two issues with one technology. A load balancer is a network device that routes incoming traffic destined for a single destination (web site, application, or service) and 'shares' the incoming connections across multiple destination devices or services. In this case, the primary data center being migrate originally house the critical systems like web servers, sql, etc. The secondary data center house a replica (offline copy) of the web servers, SQL, etc using a replication technology. (Actifio, Rubrik, SAN mirroring, VMware SRM, Zerto, etc) These are all potential tools/systems to use in a migration project.  
 
@@ -74,7 +74,7 @@ By providing this solution, the critical systems will start providing service fr
 
 ---
 
-####Project Planning####
+#### Project Planning ####
 <img src="/blog/2018/10/05/Datacenter-Relocation-Initiative/image02.jpg" style="float: left; margin: 10px 25px 15px 15px" alt="Pure Flex Hyper-Converged Hardware Stack" width=250 height=333 />
 A data center migration and relocation project could be overwhelming but typically resolving known issues ahead of the migration and proper planning in stages will better the outcome once the relocation occurs. The planning stages could take weeks if not months but necessary to have a successful relocation. 
 
@@ -98,7 +98,7 @@ Covering all aspect of the data center relocation is daunting since there will b
 
 --- 
 
-####Summary####
+#### Summary ####
 <img src="/blog/2018/10/05/Datacenter-Relocation-Initiative/image01.jpg" style="float: right; margin: 10px 25px 15px 15px" alt="Pure Flex Cabinet" width=250 height=333 />
 This article was to understand the complexity of a data center migration project and the number of moving parts needed to successfully migrate a data center. The goal was to reduce large servers power usage by 40% by consolidating into an hyper-converged system. Other goals were to reduce floor space by 50% and reducing the monthly recurring data center charges by 50% which is about $20,000 saved per month and $240,000 annually. The client ended up leveraging their data center saving by purchasing new hyper-converged compute hardware with a new SSD IBM Storwize SAN environment. 
 
