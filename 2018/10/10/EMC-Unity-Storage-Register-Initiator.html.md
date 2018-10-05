@@ -83,6 +83,8 @@ The goal of this blog is to build a new UCS environment with 2 chassis and 4 com
 #### Summary ####
 
 Initially the expectation is that the initiator would connect automatically without intervention but some technology need a workaround to get it to work properly. The above example was based on real life experience working with Boot to SAN using EMC Unity storage along with Cisco UCS compute hardware. The beauty of the UCS environment along with shared storage adds up to superior hyper-converged environment with full redundancy and the ability to grow vertically as to horizontally which in terms save quite a bit of money. The hyper-converged encourage growth while minimizing spending on adding additional storage unit or expanding the network environment. Thus the cost of building a UCS environment with the ability to vertically grow and provide flexibility to easily manage a hyper-converged environment without causing outages during maintenance or common task during business hours is a luxury for all companies to have. 
+<br>
+
 
 
 
