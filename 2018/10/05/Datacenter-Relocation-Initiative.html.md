@@ -6,7 +6,7 @@ title: 'Data Center Relocation Initiatives'
 
 tags: windows, servers, virtualization, data center
 
-gh_issue_number: 1460
+gh_issue_number: 1456
 
 ---
 
