@@ -38,7 +38,7 @@ The goal of this blog is to build a new UCS environment with 2 chassis and 4 com
 
 4\. Once you reach this section, the compute node should automatically pick up the LUNs you created within the EMC Unisphere GUI.
 
-<img src="/blog/2018/09/19/EMC-Unity-Storage-Register-Initiator/image3.png" alt="select storage to install ESXi" />
+<img src="/blog/2018/09/19/EMC-Unity-Storage-Register-Initiator/image3.png" alt="Select Storage to install ESXi" />
 
 5\. Go ahead and select the LUN associated with the compute node. Should be able to locate the correct NAA from within the EMC Unisphere GUI and compare to what is displayed on the ESXi install to make sure you have the correct volume. 
 
@@ -74,7 +74,7 @@ The goal of this blog is to build a new UCS environment with 2 chassis and 4 com
 
 1\. Once you rescan the storage within vSphere, head back to the EMC Unisphere GUI and check if the host automatically register back to the "Host Access" section on EMC Unisphere GUI. The screenshot below will depict some host under "Access" on EMC Unisphere GUI setup as "Auto".
 
-<img src="/blog/2018/09/19/EMC-Unity-Storage-Register-Initiator/image5.png" alt="Properly registered Host" />
+<img src="/blog/2018/09/19/EMC-Unity-Storage-Register-Initiator/image5.png" alt="Properly Registered Host" />
 
 2\. Also confirm under Access on EMC Unisphere GUI, if the correct initiators are attached and also LUN ID is set to 0 for boot to san. If all goes well, then the ESXi host should be able to boot from SAN.
 
