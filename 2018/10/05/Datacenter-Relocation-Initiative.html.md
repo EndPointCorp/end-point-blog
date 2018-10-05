@@ -76,7 +76,7 @@ By providing this solution, the critical systems will start providing service fr
 
 #### Project Planning ####
 <img src="/blog/2018/10/05/Datacenter-Relocation-Initiative/image02.jpg" style="float: left; margin: 10px 25px 15px 15px" alt="Pure Flex Hyper-Converged Hardware Stack" width=250 height=333 />
-A data center migration and relocation project could be overwhelming but typically resolving known issues ahead of the migration and proper planning in stages will better the outcome once the relocation occurs. The planning stages could take weeks if not months but necessary to have a successful relocation. 
+A data center migration and relocation project could be overwhelming but typically resolving known issues ahead of the migration and proper planning in stages will better the outcome once the relocation occurs. The planning stages could take weeks if not months but necessary to have a successful relocation. <br><br>
 
 Key is to break apart each part of the data center relocation, analyze, and then strategy what would be the best approach to complete each task. Typically, planning would start 6 months +/- ahead of the scheduled relocation date. Some customers might need additional time to plan due to a large group of stakeholders involved. 
 
