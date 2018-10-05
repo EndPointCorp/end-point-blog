@@ -96,4 +96,4 @@ This will end Part 3 "Microsoft Deployment Toolkit (MDT) - Create Customize Boot
 
 #### Related Articles ####
 <A href=/blog/2018/10/07/Microsoft-Deployment-Toolkit-Customsettingini.html.md>Part 1 - MDT and Customsetting.ini Parameters</a><br>
-<A href=/blog/2018/10/08/Microsoft-Deployment-Toolkit-Initial-Configuration.html.md>Part 2 - MDT Initial Configuration Steps</a><br>
+<A href=/blog/2018/10/08/Microsoft-Deployment-Toolkit-Initial-Configuration.html.md>Part 2 - MDT Initial Configuration Steps</a><br><br>
