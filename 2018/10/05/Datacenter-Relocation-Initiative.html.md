@@ -82,9 +82,9 @@ Key is to break apart each part of the data center relocation, analyze, and then
 
 **For example what needs to be completed ahead of the data center migration?**<br>
 
-1\. Process the paperwork from new hardware, approve all applications, hire movers, schedule and coördinate with internal management team and key stakeholders like IT staffs, system admins, contractors, circuit providers, etc.<br>
-2\. Collect, and analyze resource usage associated with the critical and non-critical systems and prepare and compare resource availability between the two data center.<br>
-3\. Determine and schedule critical systems migration to secondary data center. Discuss approach with key stakeholder in regards to task associate with the critical servers.<br>
+1\. Process the paperwork from new hardware, approve all applications, hire movers, schedule and coördinate with internal management team and key stakeholders like IT staffs, system admins, contractors, circuit providers, etc.<br><br>
+2\. Collect, and analyze resource usage associated with the critical and non-critical systems and prepare and compare resource availability between the two data center.<br><br>
+3\. Determine and schedule critical systems migration to secondary data center. Discuss approach with key stakeholder in regards to task associate with the critical servers.<br><br>
 
 **Samples of Pre-Relocation Task**
 
