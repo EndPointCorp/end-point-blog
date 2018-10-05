@@ -12,152 +12,31 @@ The customsetting.ini is a important part of the Microsoft Deployment Toolkit wh
 
 #### Customsetting.ini Parameters ####
 
-  |  Skip this wizard page  									          |  Using this property  								  |  		                         Configure these properties  |
-  |-----------------------------------------------------------------------|-------------------------------------------------------|--------------------------------------------------------------|
-  |  Welcome                											  |  SkipBDDWelcome       								  |								                                 |
-  |   Specify credentials for connecting to network shares                |  Skipped by providing properties in next column       |    ·  UserID<BR>·  UserDomain<BR>·  UserPassword             |
-  |  Welcome                |  SkipBDDWelcome       |                              |
-  |  Welcome                |  SkipBDDWelcome       |                              |
-  |  Welcome                |  SkipBDDWelcome       |                              |
-  |  Welcome                |  SkipBDDWelcome       |                              |
-  |  Welcome                |  SkipBDDWelcome       |                              |
-  |  Welcome                |  SkipBDDWelcome       |                              |
-  |  Welcome                |  SkipBDDWelcome       |                              |
-  |  Welcome                |  SkipBDDWelcome       |                              |
-  |  Welcome                |  SkipBDDWelcome       |                              |
-  |  Welcome                |  SkipBDDWelcome       |                              |
-  |  Welcome                |  SkipBDDWelcome       |                              |
-  |  Welcome                |  SkipBDDWelcome       |                              |
-  |  Welcome                |  SkipBDDWelcome       |                              |
-  |  Welcome                |  SkipBDDWelcome       |                              |
-  |  Welcome                |  SkipBDDWelcome       |                              |
-  |  Welcome                |  SkipBDDWelcome       |                              |
-  |  Welcome                |  SkipBDDWelcome       |                              |
-  |  Welcome                |  SkipBDDWelcome       |                              |
-  |  Welcome                |  SkipBDDWelcome       |                              |
-  
-    
-    
-  
-  
- 
-  
-   
-    Task Sequence
-    SkipTaskSequence
-    ·  TaskSequenceID
+  |  Skip this wizard page  								   |  Using this property  								  |  	Configure these properties                                                                                   |
+  |------------------------------------------------------------|------------------------------------------------------|------------------------------------------------------------------------------------------------------------------|
+  |  Welcome                								   |  SkipBDDWelcome       								  |								                                                                                     |
+  |  Specify credentials for connecting to network shares      |  Skipped by providing properties in next column      |  ·  UserID<BR>·  UserDomain<BR>·  UserPassword             												         |
+  |  Task Sequence                							   |  SkipTaskSequence       							  |  ·  TaskSequenceID               			     														         |
+  |  Computer Details                						   |  SkipComputerName, SkipDomainMembership       		  |  ·  OSDComputerName<br>·  JoinWorkgroup<br>–or–<br>·  JoinDomain<br>·  DomainAdmin                               |
+  |  User Data                								   |  SkipUserData       								  |  ·  UDDir <br>·  UDShare<br>·  UserDataLocation                     									         |
+  |  Move Data and Settings                				       |  SkipUserData       								  |  ·  UDDir<br>·  UDShare<br>·  UserDataLocation                  										         |
+  |  User Data (Restore)                					   |  SkipUserData       								  |  ·  UDDir<br>·  UDShare<br>·  UserDataLocation                      									         |
+  |  Computer Backup                						   |  SkipComputerBackup                                  |  ·  BackupDir<br>·  BackupShare<br>·  ComputerBackupLocation                    						         |
+  |  Product Key                							   |  SkipProductKey       								  |  ·  ProductKey<br>–or–<br>·  OverrideProductKey                   										         |
+  |  Language Packs                							   |  SkipPackageDisplay       							  |  ·  LanguagePacks                        														                 |
+  |  Locale and Time                						   |  SkipLocaleSelection, SkipTimeZone       			  |  ·  KeyboardLocale<br>·  UserLocale<br>·  UILanguage<br>·  TimeZone<br>·  TimeZoneName                           |
+  |  Roles and Features                						   |  SkipRoles       									  |  ·  OSRoles<br>·  OSRoleServices<br>·  OSFeatures                       								         |
+  |  Applications                						       |  SkipApplications       							  |  ·  Applications                        																         |
+  |  Administrator Password                					   |  SkipAdminPassword       							  |  ·  AdminPassword                   																	         |
+  |  Local Administrators                					   |  SkipAdminAccounts       							  |  ·  Administrators                     																	         |
+  |  Capture Image                							   |  SkipCapture       							      |  ·  ComputerBackupLocation                      														         |
+  |  Bitlocker                								   |  SkipBitLocker       					              |  ·  BDEDriveLetter<br>·  BDEDriveSize<br>·  BDEInstall<br>·  BDEInstallSuppress<br>·  							 |
+  |															   |	                                                  |  ·  BDERecoveryKey<br>·  TPMOwnerPassword<br>·  OSDBitLockerStartupKeyDrive<br>·  OSDBitLockerWaitForEncryption  |   	
+  |  Ready to begin                							   |  SkipSummary       								  |                              																					 |
+  |  Operating system deployment completed successfully        |  SkipFinalSummary       							  |                              																					 |
+  |  Operating system deployment did not complete successfully |  SkipFinalSummary       							  |                              																				     |
 
   
-     
-    Computer Details
-    SkipComputerName, SkipDomainMembership
-    ·  OSDComputerName<br>·  JoinWorkgroup<br>–or–<br>·  JoinDomain<br>·  DomainAdmin
-
-  
-     
-    User Data
-    SkipUserData
-    ·  UDDir <br>·  UDShare<br>·  UserDataLocation
-
-  
-     
-    Move Data and Settings
-    SkipUserData
-    ·  UDDir<br>·  UDShare<br>·  UserDataLocation
-
-  
-     
-    User Data (Restore)
-    SkipUserData
-    ·  UDDir<br>·  UDShare<br>·  UserDataLocation
-
-  
-     
-    Computer Backup
-    SkipComputerBackup
-    ·  BackupDir<br>·  BackupShare<br>·  ComputerBackupLocation
-
-  
-     
-    Product Key
-    SkipProductKey
-    ·  ProductKey<br>–or–<br>·  OverrideProductKey
-
-  
-     
-    Language Packs
-    SkipPackageDisplay
-    ·  LanguagePacks
-
-  
-     
-    Locale and Time
-    SkipLocaleSelection, SkipTimeZone
-    ·  KeyboardLocale<br>·  UserLocale<br>·  UILanguage<br>·  TimeZone<br>·  TimeZoneName
-
-  
-     
-    Roles and Features
-    SkipRoles
-    ·  OSRoles<br>·  OSRoleServices<br>·  OSFeatures
-
-  
-     
-    Applications
-    SkipApplications
-    ·  Applications
-
-  
-     
-    Administrator Password
-    SkipAdminPassword
-    ·  AdminPassword
-
-  
-     
-    Local Administrators
-    SkipAdminAccounts
-    ·  Administrators
-
-  
-     
-    Capture Image
-    SkipCapture
-    ·  ComputerBackupLocation
-
-  
-     
-    Capture Image
-    SkipCapture
-    ·  ComputerBackupLocation
-
-  
-     
-    Bitlocker
-    SkipBitLocker
-    ·  BDEDriveLetter<br>·  BDEDriveSize<br>·  BDEInstall<br>·  BDEInstallSuppress<br>·  BDERecoveryKey<br>·  TPMOwnerPassword<br>·  OSDBitLockerStartupKeyDrive<br>·  OSDBitLockerWaitForEncryption
-
-  
-     
-    Ready to begin
-    SkipSummary
-    
-
-  
-   
-    Operating system deployment completed successfully
-    SkipFinalSummary
-    
-
-  
-   
-    Operating system deployment did not complete successfully
-    SkipFinalSummary
-    
-
-</table>
-
-
 #### Sample Customsetting.ini ####
 
 Below is an sample of a few commonly used parameters in customsetting.ini.<br>
