@@ -15,7 +15,6 @@ The customsetting.ini is a important part of the Microsoft Deployment Toolkit wh
   |  Skip this wizard page  |  Using this property  |  Configure these properties  |
   |-------------------------|-----------------------|------------------------------|
   |  Welcome                |  SkipBDDWelcome       |                              |
-  |-------------------------|-----------------------|------------------------------|
   |  Welcome                |  SkipBDDWelcome       |                              |
   |-------------------------|-----------------------|------------------------------| 
     
