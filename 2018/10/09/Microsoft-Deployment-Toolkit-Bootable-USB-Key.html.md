@@ -95,5 +95,5 @@ Note: This is where we store the scripts used in the task sequence. Any customiz
 This will end Part 3 "Microsoft Deployment Toolkit (MDT) - Create Customize Bootable USB Key using ISO Produced by MDT". <br><br>
 
 #### Related Articles ####
-**Link:** <A href=/blog/2018/09/11/Microsoft-Deployment-Toolkit-Customsettingini.html.md>Part 1 - MDT and Customsetting.ini Parameters</a>
-**Link:** <A href=/blog/2018/09/12/Microsoft-Deployment-Toolkit-Initial-Configuration.html.md>Part 2 - MDT Initial Configuration Steps</a><br>
+<A href=/blog/2018/09/11/Microsoft-Deployment-Toolkit-Customsettingini.html.md>Part 1 - MDT and Customsetting.ini Parameters</a><br>
+<A href=/blog/2018/09/12/Microsoft-Deployment-Toolkit-Initial-Configuration.html.md>Part 2 - MDT Initial Configuration Steps</a><br>
