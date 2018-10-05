@@ -12,134 +12,149 @@ The customsetting.ini is a important part of the Microsoft Deployment Toolkit wh
 
 #### Customsetting.ini Parameters ####
 
-  |  Skip this wizard page  |  Using this property  |  Configure these properties  |
-  |-------------------------|-----------------------|------------------------------|
+  |  Skip this wizard page  									          |  Using this property  								  |  		                         Configure these properties  |
+  |-----------------------------------------------------------------------|-------------------------------------------------------|--------------------------------------------------------------|
+  |  Welcome                											  |  SkipBDDWelcome       								  |								                                 |
+  |   Specify credentials for connecting to network shares                |  Skipped by providing properties in next column       |    ·  UserID<BR>·  UserDomain<BR>·  UserPassword             |
   |  Welcome                |  SkipBDDWelcome       |                              |
   |  Welcome                |  SkipBDDWelcome       |                              |
-  |-------------------------|-----------------------|------------------------------| 
+  |  Welcome                |  SkipBDDWelcome       |                              |
+  |  Welcome                |  SkipBDDWelcome       |                              |
+  |  Welcome                |  SkipBDDWelcome       |                              |
+  |  Welcome                |  SkipBDDWelcome       |                              |
+  |  Welcome                |  SkipBDDWelcome       |                              |
+  |  Welcome                |  SkipBDDWelcome       |                              |
+  |  Welcome                |  SkipBDDWelcome       |                              |
+  |  Welcome                |  SkipBDDWelcome       |                              |
+  |  Welcome                |  SkipBDDWelcome       |                              |
+  |  Welcome                |  SkipBDDWelcome       |                              |
+  |  Welcome                |  SkipBDDWelcome       |                              |
+  |  Welcome                |  SkipBDDWelcome       |                              |
+  |  Welcome                |  SkipBDDWelcome       |                              |
+  |  Welcome                |  SkipBDDWelcome       |                              |
+  |  Welcome                |  SkipBDDWelcome       |                              |
+  |  Welcome                |  SkipBDDWelcome       |                              |
+  |  Welcome                |  SkipBDDWelcome       |                              |
+  
     
     
   
   
-  <tr valign=top>
-    <th>Specify credentials for connecting to network shares</th>
-    <th>Skipped by providing properties in next column</th>
-    <th>·  UserID<BR>·  UserDomain<BR>·  UserPassword</th>
-  </tr>
+ 
   
-    <tr valign=top>
-    <th>Task Sequence</th>
-    <th>SkipTaskSequence</th>
-    <th>·  TaskSequenceID</th>
-  </tr>
+   
+    Task Sequence
+    SkipTaskSequence
+    ·  TaskSequenceID
+
   
-      <tr valign=top>
-    <th>Computer Details</th>
-    <th>SkipComputerName, SkipDomainMembership</th>
-    <th>·  OSDComputerName<br>·  JoinWorkgroup<br>–or–<br>·  JoinDomain<br>·  DomainAdmin</th>
-  </tr>
+     
+    Computer Details
+    SkipComputerName, SkipDomainMembership
+    ·  OSDComputerName<br>·  JoinWorkgroup<br>–or–<br>·  JoinDomain<br>·  DomainAdmin
+
   
-      <tr valign=top>
-    <th>User Data</th>
-    <th>SkipUserData</th>
-    <th>·  UDDir <br>·  UDShare<br>·  UserDataLocation</th>
-  </tr>
+     
+    User Data
+    SkipUserData
+    ·  UDDir <br>·  UDShare<br>·  UserDataLocation
+
   
-      <tr valign=top>
-    <th>Move Data and Settings</th>
-    <th>SkipUserData</th>
-    <th>·  UDDir<br>·  UDShare<br>·  UserDataLocation</th>
-  </tr>
+     
+    Move Data and Settings
+    SkipUserData
+    ·  UDDir<br>·  UDShare<br>·  UserDataLocation
+
   
-      <tr valign=top>
-    <th>User Data (Restore)</th>
-    <th>SkipUserData</th>
-    <th>·  UDDir<br>·  UDShare<br>·  UserDataLocation</th>
-  </tr>
+     
+    User Data (Restore)
+    SkipUserData
+    ·  UDDir<br>·  UDShare<br>·  UserDataLocation
+
   
-      <tr valign=top>
-    <th>Computer Backup</th>
-    <th>SkipComputerBackup</th>
-    <th>·  BackupDir<br>·  BackupShare<br>·  ComputerBackupLocation</th>
-  </tr>
+     
+    Computer Backup
+    SkipComputerBackup
+    ·  BackupDir<br>·  BackupShare<br>·  ComputerBackupLocation
+
   
-      <tr valign=top>
-    <th>Product Key</th>
-    <th>SkipProductKey</th>
-    <th>·  ProductKey<br>–or–<br>·  OverrideProductKey</th>
-  </tr>
+     
+    Product Key
+    SkipProductKey
+    ·  ProductKey<br>–or–<br>·  OverrideProductKey
+
   
-      <tr valign=top>
-    <th>Language Packs</th>
-    <th>SkipPackageDisplay</th>
-    <th>·  LanguagePacks</th>
-  </tr>
+     
+    Language Packs
+    SkipPackageDisplay
+    ·  LanguagePacks
+
   
-      <tr valign=top>
-    <th>Locale and Time</th>
-    <th>SkipLocaleSelection, SkipTimeZone</th>
-    <th>·  KeyboardLocale<br>·  UserLocale<br>·  UILanguage<br>·  TimeZone<br>·  TimeZoneName</th>
-  </tr>
+     
+    Locale and Time
+    SkipLocaleSelection, SkipTimeZone
+    ·  KeyboardLocale<br>·  UserLocale<br>·  UILanguage<br>·  TimeZone<br>·  TimeZoneName
+
   
-      <tr valign=top>
-    <th>Roles and Features</th>
-    <th>SkipRoles</th>
-    <th>·  OSRoles<br>·  OSRoleServices<br>·  OSFeatures</th>
-  </tr>
+     
+    Roles and Features
+    SkipRoles
+    ·  OSRoles<br>·  OSRoleServices<br>·  OSFeatures
+
   
-      <tr valign=top>
-    <th>Applications</th>
-    <th>SkipApplications</th>
-    <th>·  Applications</th>
-  </tr>
+     
+    Applications
+    SkipApplications
+    ·  Applications
+
   
-      <tr valign=top>
-    <th>Administrator Password</th>
-    <th>SkipAdminPassword</th>
-    <th>·  AdminPassword</th>
-  </tr>
+     
+    Administrator Password
+    SkipAdminPassword
+    ·  AdminPassword
+
   
-      <tr valign=top>
-    <th>Local Administrators</th>
-    <th>SkipAdminAccounts</th>
-    <th>·  Administrators</th>
-  </tr>
+     
+    Local Administrators
+    SkipAdminAccounts
+    ·  Administrators
+
   
-      <tr valign=top>
-    <th>Capture Image</th>
-    <th>SkipCapture</th>
-    <th>·  ComputerBackupLocation</th>
-  </tr>
+     
+    Capture Image
+    SkipCapture
+    ·  ComputerBackupLocation
+
   
-      <tr valign=top>
-    <th>Capture Image</th>
-    <th>SkipCapture</th>
-    <th>·  ComputerBackupLocation</th>
-  </tr>
+     
+    Capture Image
+    SkipCapture
+    ·  ComputerBackupLocation
+
   
-      <tr valign=top>
-    <th>Bitlocker</th>
-    <th>SkipBitLocker</th>
-    <th>·  BDEDriveLetter<br>·  BDEDriveSize<br>·  BDEInstall<br>·  BDEInstallSuppress<br>·  BDERecoveryKey<br>·  TPMOwnerPassword<br>·  OSDBitLockerStartupKeyDrive<br>·  OSDBitLockerWaitForEncryption</th>
-  </tr>
+     
+    Bitlocker
+    SkipBitLocker
+    ·  BDEDriveLetter<br>·  BDEDriveSize<br>·  BDEInstall<br>·  BDEInstallSuppress<br>·  BDERecoveryKey<br>·  TPMOwnerPassword<br>·  OSDBitLockerStartupKeyDrive<br>·  OSDBitLockerWaitForEncryption
+
   
-      <tr valign=top>
-    <th>Ready to begin</th>
-    <th>SkipSummary</th>
-    <th></th>
-  </tr>
+     
+    Ready to begin
+    SkipSummary
+    
+
   
-    <tr valign=top>
-    <th>Operating system deployment completed successfully</th>
-    <th>SkipFinalSummary</th>
-    <th></th>
-  </tr>
+   
+    Operating system deployment completed successfully
+    SkipFinalSummary
+    
+
   
-    <tr valign=top>
-    <th>Operating system deployment did not complete successfully</th>
-    <th>SkipFinalSummary</th>
-    <th></th>
-  </tr>
+   
+    Operating system deployment did not complete successfully
+    SkipFinalSummary
+    
+
 </table>
 
 
