@@ -174,8 +174,7 @@ The goal of this proof of concept was to create a customize Window Server ISO an
 
 This will complete Part 2 of creating a customize ISO. In Part 3, I will discuss how to create a bootable USB key with the customize ISO.
 
-Continue to - <br>
-**Link:** <A href=/blog/2018/09/13/Microsoft-Deployment-Toolkit-Bootable-USB-Key.html.md>Part 3 - Microsoft Deployment Toolkit (MDT) - Create Customize Bootable USB Key using ISO Produced by MDT</a>
+Continue to - <A href=/blog/2018/09/13/Microsoft-Deployment-Toolkit-Bootable-USB-Key.html.md>Part 3 - Microsoft Deployment Toolkit (MDT) - Create Customize Bootable USB Key using ISO Produced by MDT</a>
 
 #### Related Articles ####
 **Link:** <A href=/blog/2018/09/11/Microsoft-Deployment-Toolkit-Customsettingini.html.md>Part 1 - MDT and Customsetting.ini Parameters</a>
