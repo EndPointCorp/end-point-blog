@@ -18,16 +18,16 @@ A customer was running into some logistical nightmare about a hardware refresh a
 
 <img src="/blog/2018/10/05/Datacenter-Relocation-Initiative/image05.jpg" style="float: right; margin: 10px 25px 15px 15px" alt="Decommissioning Cabinets and Wires" width=250 height=333 />
 
-##### Tier IV Data Center Requirements (Best)#####
+##### Tier IV Data Center Requirements (Best) #####
 Zero single points of failure. Tier IV providers has redundancies for every process and data protection stream. No single outage or error can shut down the system. 99.995 % uptime per annum. This is the level with the highest guaranteed uptime and must be maintained well for a data center to keep up Tier IV ranking. 2N+1 infrastructure (two times the amount required for operation plus a backup). 2N+1 is another way of saying “fully redundant.”
 
-##### Tier III Data Center Requirements (Average)#####
+##### Tier III Data Center Requirements (Average) #####
 N+1 (the amount required for operation plus a backup) fault tolerance. A Tier III provider can undergo routine maintenance without a hiccup in operations. No more than 1.6 hours of downtime per annum. This downtime is allowed for purposes of maintenance and overwhelming emergency issues.
 
-##### Tier II Data Center Requirements (Minimal)#####
+##### Tier II Data Center Requirements (Minimal) #####
 No more than 22 hours of downtime per annum. There is a considerable jump between levels II and III regarding downtime. Redundancy is one of the primary reasons for this. 99.741 % uptime per annum. This is a minimum amount of uptime that this provider can produce in a year. Partial cooling and multiple power redundancies.
 
-##### Tier I Data Center Requirements - no redundancy (Basic, Cheapest)#####
+##### Tier I Data Center Requirements - no redundancy (Basic, Cheapest) #####
 No more than 28.8 hours of downtime per annum. These facilities are allowed the highest amount of downtime of any level.
 
 ---
