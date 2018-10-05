@@ -18,13 +18,13 @@ The goal of this blog is to build a new UCS environment with 2 chassis and 4 com
 
 1\. First step is to manually create an access for each esxi host on EMC Unisphere GUI. On the screenshot, the "Host Access" will register as manual.
 
-<img src="/blog/2018/09/19/EMC-Unity-Storage-Register-Initiator/image1.png" alt="Create Access for each host" />
+<img src="/blog/2018/10/10/EMC-Unity-Storage-Register-Initiator/image1.png" alt="Create Access for each host" />
 
 2\. Next step is to carve out storage for each compute node which the ESXi will install onto. For the test I created a 10GB volume for each ESXi Host on EMC Unisphere GUI.
 
 3\. The next step is to manually add the initiators to each host created. The screenshot below will display the initiators registering from each UCS compute node to EMC storage. This is a automated process as long as the Initiators are setup properly within the UCS manager.
 
-<img src="/blog/2018/09/19/EMC-Unity-Storage-Register-Initiator/image2.png" alt="Initiator registering automatically to EMC Unisphere GUI" />
+<img src="/blog/2018/10/10/EMC-Unity-Storage-Register-Initiator/image2.png" alt="Initiator registering automatically to EMC Unisphere GUI" />
 
 4\. Next step is to open the "Host Access" configuration for each host. Confirm if the correct initiators are attached to each host. Once you assign the correct initiators for each "Host Access", continue on to next step.
 
@@ -38,7 +38,7 @@ The goal of this blog is to build a new UCS environment with 2 chassis and 4 com
 
 4\. Once you reach this section, the compute node should automatically pick up the LUNs you created within the EMC Unisphere GUI.
 
-<img src="/blog/2018/09/19/EMC-Unity-Storage-Register-Initiator/image3.png" alt="Select Storage to install ESXi" />
+<img src="/blog/2018/10/10/EMC-Unity-Storage-Register-Initiator/image3.png" alt="Select Storage to install ESXi" />
 
 5\. Go ahead and select the LUN associated with the compute node. Should be able to locate the correct NAA from within the EMC Unisphere GUI and compare to what is displayed on the ESXi install to make sure you have the correct volume. 
 
@@ -62,7 +62,7 @@ The goal of this blog is to build a new UCS environment with 2 chassis and 4 com
 
 2\. Once you are back to the "Host Access" section on Unisphere, go ahead and delete the manually create "Host Access" we created in step 1. As you could see below "Host Access" Type is "Manual" which needs to be set to "Auto".
 
-<img src="/blog/2018/09/19/EMC-Unity-Storage-Register-Initiator/image4.png" alt="Delete Host Access on EMC" />
+<img src="/blog/2018/10/10/EMC-Unity-Storage-Register-Initiator/image4.png" alt="Delete Host Access on EMC" />
 
 3\. Probably would need remove the LUNs and Initiators from the "Host Access" before deleting the "Host Access" entry. 
 
@@ -74,7 +74,7 @@ The goal of this blog is to build a new UCS environment with 2 chassis and 4 com
 
 1\. Once you rescan the storage within vSphere, head back to the EMC Unisphere GUI and check if the host automatically register back to the "Host Access" section on EMC Unisphere GUI. The screenshot below will depict some host under "Access" on EMC Unisphere GUI setup as "Auto".
 
-<img src="/blog/2018/09/19/EMC-Unity-Storage-Register-Initiator/image5.png" alt="Properly Registered Host" />
+<img src="/blog/2018/10/10/EMC-Unity-Storage-Register-Initiator/image5.png" alt="Properly Registered Host" />
 
 2\. Also confirm under Access on EMC Unisphere GUI, if the correct initiators are attached and also LUN ID is set to 0 for boot to san. If all goes well, then the ESXi host should be able to boot from SAN.
 
