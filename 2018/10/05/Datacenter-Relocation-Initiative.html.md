@@ -16,6 +16,7 @@ gh_issue_number: 1456
 
 A customer was running into some logistical nightmare about a hardware refresh and data center relocation project but needed some expert advice as to which was the best approach and ways to complete the task. Currently, the customer has two active data centers, and looking to relocate one of the active data center to a modernize Tier 4 data center to better the performance and offer redundancy for critical systems. The reason the customer decided to move forward with the data center relocation initiatives was to move to a more modern data center, consolidate or decommission equipments to reduce carbon footprint, eliminate recurring expenses, and establish green IT Initiative. The reason the client decided on a Tier 4 datacenter was due to the prospect of redundancy across the board within the data center.  Below will better explain each Tier in detail.
 
+<img src="/blog/2018/10/05/Datacenter-Relocation-Initiative/image05.jpg" style="float: right; margin: 10px 25px 15px 15px" alt="Decommissioning Cabinets and Wires" width=250 height=333 />
 
 ##### Tier IV Data Center Requirements (Best)#####
 Zero single points of failure. Tier IV providers has redundancies for every process and data protection stream. No single outage or error can shut down the system. 99.995 % uptime per annum. This is the level with the highest guaranteed uptime and must be maintained well for a data center to keep up Tier IV ranking. 2N+1 infrastructure (two times the amount required for operation plus a backup). 2N+1 is another way of saying “fully redundant.”
@@ -52,7 +53,7 @@ Main reason an enterprise company would seek a Tier 4 data center is because it 
 ---
 
 ####Getting Started####
-
+<img src="/blog/2018/10/05/Datacenter-Relocation-Initiative/image04.jpg" style="float: left; margin: 10px 25px 15px 15px" alt="Data Center Hardware Removal and Clean Up" width=250 height=333 />
 It seems like a daunting task, but most important part of a data center migration project is how to migrate and make the critical systems available. For this particular client, we had the luxury of having a second data center with adequate resources to accommodate majority of the critical systems coming over from the data center being relocated. If client did not have a 2nd data center to work with, then a new proposal and strategy would be proposed. In this case, the client had a secondary data center to work with, ample resources to work with, except for adding additional storage to the SAN environment and planning for some minor maintenance to free up storage. 
 
 ---
@@ -64,7 +65,7 @@ Originally, the practice was to change the external DNS records to point to the 
 ---
 
 ####Solutions####
-
+<img src="/blog/2018/10/05/Datacenter-Relocation-Initiative/image03.jpg" style="float: right; margin: 10px 25px 15px 15px" alt="New Data Center Cabinets" width=250 height=333 />
 We threw around some ideas and ended up using a load balancer to basically resolve two issues with one technology. A load balancer is a network device that routes incoming traffic destined for a single destination (web site, application, or service) and 'shares' the incoming connections across multiple destination devices or services. In this case, the primary data center being migrate originally house the critical systems like web servers, sql, etc. The secondary data center house a replica (offline copy) of the web servers, SQL, etc using a replication technology. (Actifio, Rubrik, SAN mirroring, VMware SRM, Zerto, etc) These are all potential tools/systems to use in a migration project.  
 
 In this case, the customer had multiple systems with external DNS records and Public IP. The public DNS name for each critical system will not change. The public IP associated with the public DNS name of the critical system will change and point to the load balancer which then points to the correct data center servicing the critical systems. This setup would allow the load balancer to store the two public IP of the critical system pointing to either the primary or secondary data center. When we were ready to power up the replica web server, we could adjust the load balancer to point to the secondary data center where the replica web servers is located and provide access to the critical system. 
@@ -74,7 +75,7 @@ By providing this solution, the critical systems will start providing service fr
 ---
 
 ####Project Planning####
-
+<img src="/blog/2018/10/05/Datacenter-Relocation-Initiative/image02.jpg" style="float: left; margin: 10px 25px 15px 15px" alt="Pure Flex Hyper-Converged Hardware Stack" width=250 height=333 />
 A data center migration and relocation project could be overwhelming but typically resolving known issues ahead of the migration and proper planning in stages will better the outcome once the relocation occurs. The planning stages could take weeks if not months but necessary to have a successful relocation. 
 
 Key is to break apart each part of the data center relocation, analyze, and then strategy what would be the best approach to complete each task. Typically, planning would start 6 months +/- ahead of the scheduled relocation date. Some customers might need additional time to plan due to a large group of stakeholders involved. 
@@ -98,7 +99,7 @@ Covering all aspect of the data center relocation is daunting since there will b
 --- 
 
 ####Summary####
-
+<img src="/blog/2018/10/05/Datacenter-Relocation-Initiative/image01.jpg" style="float: right; margin: 10px 25px 15px 15px" alt="Pure Flex Cabinet" width=250 height=333 />
 This article was to understand the complexity of a data center migration project and the number of moving parts needed to successfully migrate a data center. The goal was to reduce large servers power usage by 40% by consolidating into an hyper-converged system. Other goals were to reduce floor space by 50% and reducing the monthly recurring data center charges by 50% which is about $20,000 saved per month and $240,000 annually. The client ended up leveraging their data center saving by purchasing new hyper-converged compute hardware with a new SSD IBM Storwize SAN environment. 
 
 Some of the major highlight achieved by this client were a new hardware stack (compute, storage, network, backup environment) in a Tier 4  data center, saved 50% percent on data center operation cost which was leveraged to pay for the new hardware, and during the process corrected two issues associated with system migration between the two data center. Once the two key issues that hampered the disaster recovery and business continuity effort were resolved, changing systems roles in multiple data center was much easier to provide service during critical moment when time comes. 
