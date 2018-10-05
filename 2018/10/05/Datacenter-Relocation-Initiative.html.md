@@ -36,11 +36,11 @@ No more than 28.8 hours of downtime per annum. These facilities are allowed the 
 
 **Some of the key issues the customer mentioned were:**<br>
 
-1\. How do we move the virtual environment to the new data center.<br>
-2\. How do we protect our assets during the relocation.<br>
-3\. How do we completely shut down the current data center and migrate seamlessly into the new data center.<br>
-4\. How to update external DNS records without creating downtime to the web application available to the customers. <br>
-5\. How do we seamlessly allow our customers access to the secondary data center which will temporary house the critical systems during the migration. <br>
+1\. How do we move the virtual environment to the new data center.<br> <br>
+2\. How do we protect our assets during the relocation.<br> <br>
+3\. How do we completely shut down the current data center and migrate seamlessly into the new data center.<br> <br>
+4\. How to update external DNS records without creating downtime to the web application available to the customers. <br> <br>
+5\. How do we seamlessly allow our customers access to the secondary data center which will temporary house the critical systems during the migration. <br> <br>
 
 Key elements to have a successful migration project is to understand how, when and where to migrate critical and non-critical systems, and then give access to the systems once it completes the migration. Basically, before the day of the relocation, the goal is to relocate, or shutdown the systems residing in the data center being relocated.
 
@@ -88,10 +88,10 @@ Key is to break apart each part of the data center relocation, analyze, and then
 
 **Samples of Pre-Relocation Task**
 
-1\. Stand up new environment with new hardware in new data center and prepare and establish network connectivity to secondary data center. <br>
-2\. Make sure replica of critical systems are up to date. <br>
-3\. Prepare hardware and virtualization technology in newly built data center. <br>
-4\. Test, retest, burn in the new hardware. (2-4 weeks of testing)<br>
+1\. Stand up new environment with new hardware in new data center and prepare and establish network connectivity to secondary data center. <br> <br>
+2\. Make sure replica of critical systems are up to date. <br> <br>
+3\. Prepare hardware and virtualization technology in newly built data center. <br> <br>
+4\. Test, retest, burn in the new hardware. (2-4 weeks of testing)<br> <br>
 5\. Create a non-essential server within the virtualization environment and test.<br>
 
 Covering all aspect of the data center relocation is daunting since there will be a bit of moving parts and variables to deal with. There will probably be a few things to discuss but with proper planning and setting reasonable goals for each phase of the project will definitely ease the transition. Brainstorming between teams and dissecting an inventory of all system and understanding the criticality of each system would allow each team to decide best approach to make their service available. Thus allow a seamless and successful relocation. 
@@ -100,7 +100,7 @@ Covering all aspect of the data center relocation is daunting since there will b
 
 #### Summary ####
 <img src="/blog/2018/10/05/Datacenter-Relocation-Initiative/image01.jpg" style="float: right; margin: 10px 25px 15px 15px" alt="Pure Flex Cabinet" width=250 height=333 />
-This article was to understand the complexity of a data center migration project and the number of moving parts needed to successfully migrate a data center. The goal was to reduce large servers power usage by 40% by consolidating into an hyper-converged system. Other goals were to reduce floor space by 50% and reducing the monthly recurring data center charges by 50% which is about $20,000 saved per month and $240,000 annually. The client ended up leveraging their data center saving by purchasing new hyper-converged compute hardware with a new SSD IBM Storwize SAN environment. 
+This article was to understand the complexity of a data center migration project and the number of moving parts needed to successfully migrate a data center. The goal was to reduce large servers power usage by 40% by consolidating into an hyper-converged system. Other goals were to reduce floor space by 50% and reducing the monthly recurring data center charges by 50% which is about $20,000 saved per month and $240,000 annually. The client ended up leveraging their data center saving by purchasing new hyper-converged compute hardware with a new SSD IBM Storwize SAN environment. <br><br>
 
 Some of the major highlight achieved by this client were a new hardware stack (compute, storage, network, backup environment) in a Tier 4  data center, saved 50% percent on data center operation cost which was leveraged to pay for the new hardware, and during the process corrected two issues associated with system migration between the two data center. Once the two key issues that hampered the disaster recovery and business continuity effort were resolved, changing systems roles in multiple data center was much easier to provide service during critical moment when time comes. 
 
