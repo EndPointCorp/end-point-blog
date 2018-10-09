@@ -16,15 +16,7 @@ End Point Corporation is pleased to announce a new Windows Infrastruture Divisio
   |  New Tehnology Services								   |  Using this property  								  |  	Configuretheseproperties              |
   |--------------------------------------------------- ----|------------------------------------------------------|-------------------------------------------|
   |  Service: RMM									       |  		    									      |  	    							      |
-  |	 Our Remote Monitoring and Management (RMM) solution provides unified control and visibility into your organization’s IT infrastructure. Our agents actively monitor and manage workstations, servers, networks, and endpoints. |
-  -------------------------------------------------------------------------------------------------------------------------------------------------------------  
-  |  Service: RMM									       |  		    									      |  	    							      |
-  |	 Microsoft Windows Technologies is widely used around the world. Our Windows Infrastruture Division could be a great benefit to your company by building, managing and supporting your Windows Server and Desktop environment. To sustain a healthy environment, our solutions and technique is capable of providing a secure, stable, and healthy Windows environment to give your business a proper setup to sustain your business. Protecting your technology investment and allowing your employees operating is the number one goal for End Point Corporation.  |
-  -------------------------------------------------------------------------------------------------------------------------------------------------------------  
-
-
-
-
+  
 
 
 
