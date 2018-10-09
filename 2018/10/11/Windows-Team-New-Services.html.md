@@ -15,17 +15,17 @@ End Point Corporation is pleased to announce a new Windows Infrastruture Divisio
 
   |  New Technology Services			     			      																					              |
   |:-----------------------------------------------------------------------------------------------------------------------------------------------------------|
-  |  ** Service: RMM **								        	    							      														  |
+  |  **Service: RMM**								        	    							      														  |
   |	 Our Remote Monitoring and Management (RMM) solution provides unified control and visibility into your organization’s IT infrastructure. Our agents actively monitor and manage workstations, servers, networks, and endpoints.	  |
-  |  ** Service: Backup & Disaster Recovery Solutions **								        	    													  |
+  |  **Service: Backup & Disaster Recovery Solutions**								        	    													  |
   |	 End Point offers an enterprise class Backup & Disaster Recovery solution at a low cost. The flexibility of End Point backup solutions allows our customer to recover their server and desktop environment within hours and not days. Some main features include bare metal recovery (desktop, laptop, virtual or physical server), optional Disaster Recovery site to use for emergency, data encryption, file level recovery and many more. It also help ensure the integrity of business-critical data, while achieving regulatory transparency and decreasing security risks.	  |
-  |  ** Service: Network Vulnerability and Infrastructure Assessment **							      														  |
+  |  **Service: Network Vulnerability and Infrastructure Assessment**							      														  |
   |	 End Point Network Vulnerability Assessment provides valuable infrastructure information for our customer which includes security risk, domain assessment, backup and disaster recovery analysis report, and others great reporting capabilities like PCI or HIPAA compliance services.	  |
-  |  ** Service: VOIP System Integration **								        	    							      									  |
+  |  **Service: VOIP System Integration**								        	    							      									  |
   |	End Point offers a low cost enterprise VOIP system where the phone could be used anywhere in the world and the only thing you would need is internet access. The VOIP system is great for remote users, and internal office workers to be able to transfer calls to each other even though they are in two, three or four seperate locations. Call us to see how you could save money using a VOIP phone system. 	  |
-  |  ** Service: Cloud hosting / Cloud Migrations (Azure/AWS) **								        	    							    			  |
+  |  **Service: Cloud hosting / Cloud Migrations (Azure/AWS)**								        	    							    			  |
   |	 Our cloud hosting team is experienced with all types of Windows cloud systems including AWS, Azure, and many others. We can help you move your server from your office or provider to the cloud to decrease your system costs. Including all version of SQL database, applications, web servers and many more!	  |
-  |  ** Service: Infrastructure Support - Office/Data Center **								        	    							      				  |
+  |  **Service: Infrastructure Support - Office/Data Center**								        	    							      				  |
   |	 Our Infrastructure team will be able to provide a solution for all your company’s technology initiatives within the office or data center. We specialize in servers, virtualization, shared storage, networking, windows, linux support, or common technology needs like scanner, printer, desktop management and security measures to protect your technology investments. Our model is to provide a stable, redundant, scalable and performance driven solution while providing a ROI on all your technology investments. 	 	  |
   
   
