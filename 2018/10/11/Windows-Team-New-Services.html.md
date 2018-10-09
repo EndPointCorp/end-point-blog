@@ -16,7 +16,8 @@ End Point Corporation is pleased to announce a new Windows Infrastruture Divisio
   |  New Technology Services			     			      																					              |
   |--------------------------------------------------------|------------------------------------------------------|-------------------------------------------|
   |  Service: RMM									       |  		    									      |  	    							      |
-  |	 Our Remote Monitoring and Management (RMM) solution provides unified control and visibility into your organization’s IT infrastructure. Our agents actively monitor and manage workstations, servers, networks, and endpoints. |
+  |	 Our Remote Monitoring and Management (RMM) solution provides unified control and visibility into your organization’s IT infrastructure. Our agents 	  |
+  |   actively monitor and manage workstations, servers, networks, and endpoints.                                                                             |
   -------------------------------------------------------------------------------------------------------------------------------------------------------------  
 
 
