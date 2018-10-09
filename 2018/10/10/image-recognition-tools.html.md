@@ -29,9 +29,9 @@ $ file makan-small.jpg
 makan-small.jpg: JPEG image data, JFIF standard 1.01, resolution (DPI), density 72x72, segment length 16, Exif Standard: [TIFF image data, big-endian, direntries=15, height=3120, bps=0, width=4160], baseline, precision 8, 640x480, frames 3
 ```
 
-![](/blog/2018/10/10/image-recognition-tools/makan-small.jpg)
+![](../image-recognition-tools/makan-small.jpg)
 
-![](/blog/2018/10/10/image-recognition-tools/aufa-detect.jpg)
+![](../image-recognition-tools/aufa-detect.jpg)
 
 #### Machine Vision
 Computer doesn't see the image directly as the humans are as we need to convert the images into the numerical values. For example in of the facial regcognition tools, the training file contains the following matrices:
@@ -78,7 +78,7 @@ If the codes provided in the video  isn't working directly, you could use my sma
 
 <center>
   <video width="100%" controls poster="poster.png">
-    <source src="/blog/2018/10/10/image-recognition-tools/aufa-im-process.mp4" type="video/mp4">
+    <source src="../image-recognition-tools/aufa-im-process.mp4" type="video/mp4">
   </video>
 <caption>My kid Aufa is joining me on the facial recognition session</caption>
 </center>
@@ -88,7 +88,7 @@ If the codes provided in the video  isn't working directly, you could use my sma
 
 <center>
   <video width="100%" controls poster="poster.png">
-    <source src="/blog/2018/10/10/image-recognition-tools/tom-cruise.mp4" type="video/mp4">
+    <source src="../image-recognition-tools/tom-cruise.mp4" type="video/mp4">
   </video>
 <caption>Obviously I am not Tom Cruise</caption>
 </center>
@@ -98,51 +98,51 @@ If the codes provided in the video  isn't working directly, you could use my sma
 I also searched more related works which could possibly provides an alternative to the face recognition. However turns out I found a quite interesing piece of work for objection detection by using Neural Network. The work is running on a framework called as [Darknet](https://pjreddie.com/darknet/). It allows us to do post-processing objection detection for still pictures and videos. It also able to do real time object recognition but requires GPUs to allow us to make it happened efficiently. I tried with the CPU only mode but I could not get a real time result (my computer almost freezed). 
 
 #### Still images' samples
-![](/blog/2018/10/10/image-recognition-tools/bot.jpg)
+![](../image-recognition-tools/bot.jpg)
 
 
-![](/blog/2018/10/10/image-recognition-tools/burung-zoo.jpg)
+![](../image-recognition-tools/burung-zoo.jpg)
 
 
 #### Video samples
 <center>
   <video width="100%" controls poster="poster.png">
-    <source src="/blog/2018/10/10/image-recognition-tools/keteslow.mp4" type="video/mp4">
+    <source src="../image-recognition-tools/keteslow.mp4" type="video/mp4">
   </video>
 <caption>This video was on Lebuhraya Utara Selatan (Freeway) in Malaysia</caption>
 </center>
 
 <center>
   <video width="100%" controls poster="poster.png">
-    <source src="/blog/2018/10/10/image-recognition-tools/keteslow2.mp4" type="video/mp4">
+    <source src="../image-recognition-tools/keteslow2.mp4" type="video/mp4">
   </video>
 <caption>This is another video which was on Lebuhraya Utara Selatan (Freeway) in Malaysia</caption>
 </center>
 
 <center>
   <video width="100%" controls poster="poster.png">
-    <source src="/blog/2018/10/10/image-recognition-tools/kids-bubble.mp4" type="video/mp4">
+    <source src="../image-recognition-tools/kids-bubble.mp4" type="video/mp4">
   </video>
 <caption>Two kids in the playground playing water bubbles</caption>
 </center>
 
 <center>
   <video width="100%" controls poster="poster.png">
-    <source src="/blog/2018/10/10/image-recognition-tools/perhentian-swim-analyzed-slow.mp4" type="video/mp4">
+    <source src="../image-recognition-tools/perhentian-swim-analyzed-slow.mp4" type="video/mp4">
   </video>
 <caption>This video was taken a on a boat, with several people floating in the sea wearing their life jackets</caption>
 </center>
 
 <center>
   <video width="100%" controls poster="poster.png">
-    <source src="/blog/2018/10/10/image-recognition-tools/jalan-pantai.mp4" type="video/mp4">
+    <source src="../image-recognition-tools/jalan-pantai.mp4" type="video/mp4">
   </video>
 <caption>This is my kid and I, walking on the beach in Western Australia</caption>
 </center>
 
 <center>
   <video width="100%" controls poster="poster.png">
-    <source src="/blog/2018/10/10/image-recognition-tools/aufa-naik-kuda-slow.mp4" type="video/mp4">
+    <source src="../image-recognition-tools/aufa-naik-kuda-slow.mp4" type="video/mp4">
   </video>
 <caption>This is a video a kid, riding small horse</caption>
 </center>
@@ -154,7 +154,7 @@ You can see the following video on how it works.
 
 <center>
   <video width="100%" controls poster="poster.png">
-    <source src="/blog/2018/10/10/image-recognition-tools/ahmet-traffic.mp4" type="video/mp4">
+    <source src="../image-recognition-tools/ahmet-traffic.mp4" type="video/mp4">
   </video>
 <caption>This is a video a kid, riding small horse</caption>
 </center>
