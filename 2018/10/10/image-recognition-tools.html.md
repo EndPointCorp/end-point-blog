@@ -33,7 +33,7 @@ makan-small.jpg: JPEG image data, JFIF standard 1.01, resolution (DPI), density 
 
 ![](/blog/2018/10/10/image-recognition-tools/aufa-detect.jpg)
 
-####Machine Vision
+#### Machine Vision
 Computer doesn't see the image directly as the humans are as we need to convert the images into the numerical values. For example in of the facial regcognition tools, the training file contains the following matrices:
 
 ```
@@ -97,14 +97,14 @@ If the codes provided in the video  isn't working directly, you could use my sma
 ### Object Recognition
 I also searched more related works which could possibly provides an alternative to the face recognition. However turns out I found a quite interesing piece of work for objection detection by using Neural Network. The work is running on a framework called as [Darknet](https://pjreddie.com/darknet/). It allows us to do post-processing objection detection for still pictures and videos. It also able to do real time object recognition but requires GPUs to allow us to make it happened efficiently. I tried with the CPU only mode but I could not get a real time result (my computer almost freezed). 
 
-####Still images' samples
+#### Still images' samples
 ![](/blog/2018/10/10/image-recognition-tools/bot.jpg)
 
 
 ![](/blog/2018/10/10/image-recognition-tools/burung-zoo.jpg)
 
 
-####Video samples
+#### Video samples
 <center>
   <video width="100%" controls poster="poster.png">
     <source src="/blog/2018/10/10/image-recognition-tools/keteslow.mp4" type="video/mp4">
@@ -147,14 +147,14 @@ I also searched more related works which could possibly provides an alternative 
 <caption>This is a video a kid, riding small horse</caption>
 </center>
 
-#####Vehicle Counting and Speed Measurement
+##### Vehicle Counting and Speed Measurement
 I found a tool developed by [Ahmet Ozlu](https://github.com/ahmetozlu/vehicle_counting_tensorflow) which uses Tensorflow. In this case the use case are vechicle counting, vehicle type and color recoginition and speed detection.
 
 You can see the following video on how it works.
 
 <center>
   <video width="100%" controls poster="poster.png">
-    <source src="/home/najmi/end-point-blog/2018/10/10/image-recognition-tools/ahmet-traffic.mp4" type="video/mp4">
+    <source src="/blog/2018/10/10/image-recognition-tools/ahmet-traffic.mp4" type="video/mp4">
   </video>
 <caption>This is a video a kid, riding small horse</caption>
 </center>
