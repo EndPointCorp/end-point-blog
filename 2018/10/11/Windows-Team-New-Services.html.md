@@ -32,7 +32,7 @@ End Point Corporation is pleased to announce a new Windows Infrastruture Divisio
   |																																							  |
   |  ** Service: Infrastructure Support - Office/Data Center **								        	    							      				  |
   |	 Our Infrastructure team will be able to provide a solution for all your company’s technology initiatives within the office or data center. We specialize in servers, virtualization, shared storage, networking, windows, linux support, or common technology needs like scanner, printer, desktop management and security measures to protect your technology investments. Our model is to provide a stable, redundant, scalable and performance driven solution while providing a ROI on all your technology investments. 	 	  |
-  |-----------------------------------------------------------------------------------------------------------------------------------------------------------|
+  | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
   
  
 
