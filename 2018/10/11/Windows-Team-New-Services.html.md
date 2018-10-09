@@ -17,8 +17,7 @@ End Point Corporation is pleased to announce a new Windows Infrastruture Divisio
   |-----------------------------------------------------------------------------------------------------------------------------------------------------------|
   |  ** Service: RMM **								        	    							      														  |
   |	 Our Remote Monitoring and Management (RMM) solution provides unified control and visibility into your organization’s IT infrastructure. Our agents actively monitor and manage workstations, servers, networks, and endpoints.	  |
-  |                                                                                																			  |
-   -----------------------------------------------------------------------------------------------------------------------------------------------------------
+  |-----------------------------------------------------------------------------------------------------------------------------------------------------------|
   |  ** Service: Backup & Disaster Recovery Solutions **								        	    													  |
   |	 End Point offers an enterprise class Backup & Disaster Recovery solution at a low cost. The flexibility of End Point backup solutions allows our customer to recover their server and desktop environment within hours and not days. Some main features include bare metal recovery (desktop, laptop, virtual or physical server), optional Disaster Recovery site to use for emergency, data encryption, file level recovery and many more. It also help ensure the integrity of business-critical data, while achieving regulatory transparency and decreasing security risks.	  |
   |																			                                                                                  |
