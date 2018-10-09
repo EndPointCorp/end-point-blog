@@ -17,7 +17,7 @@ The reason I explored these tools is simple, I plan to deploy a cheap, poor's ma
 ### Face Detection
 I searched around for the existing works which regards to the face detection and I found [this work](https://github.com/shantnu/FaceDetect/blob/master/face_detect.py). It uses [Haarcascade](https://github.com/opencv/opencv/tree/master/data/haarcascades). So I was then able to detect faces, but then upon sharing the "findings" with a friend he then said this is just a "face detection", but how does the computer would be able to recognize who's who? Then I stumbled upon the phrase "face recognition" (in which I believe should be the next sequence).
 
-You might noticed that if you use the image file that you import directly from your smartphone then the output will be displayed in a large file to the screen. You can use ImageMagick program in Linux to resize the file to say, 640x480 format.
+You might noticed that if you use the image file that you import directly from your smartphone then the output will be displayed in a large file to the screen. You can use the ImageMagick program in Linux to resize the file to say, 640x480 format.
 
 ```bash
 $ file makan.jpg
@@ -33,10 +33,47 @@ makan-small.jpg: JPEG image data, JFIF standard 1.01, resolution (DPI), density 
 
 ![](/home/najmi/end-point-blog/2018/10/10/image-recognition-tools/aufa-detect.jpg)
 
+####Machine Vision
+Computer doesn't see the image directly as the humans are as we need to convert the images into the numerical values. For example in of the facial regcognition tools, the training file contains the following matrices:
+
+```
+opencv_lbphfaces:
+   threshold: 1.7976931348623157e+308
+   radius: 1
+   neighbors: 8
+   grid_x: 8
+   grid_y: 8
+   histograms:
+      - !!opencv-matrix
+         rows: 1
+         cols: 16384
+         dt: f
+         data: [ 2.46913582e-02, 1.85185187e-02, 0., 3.08641978e-03,
+             1.23456791e-02, 6.17283955e-03, 3.08641978e-03,
+             2.46913582e-02, 0., 0., 0., 0., 0., 3.08641978e-03, 0.,
+             9.25925933e-03, 1.85185187e-02, 9.25925933e-03, 0., 0.,
+             3.08641978e-03, 0., 0., 0., 3.08641978e-03, 0., 0., 0.,
+             2.46913582e-02, 3.08641978e-03, 0., 6.79012388e-02, 0., 0.,
+		...................
+             1.30385486e-02, 1.47392293e-02, 4.53514745e-03,
+             1.13378686e-03, 7.93650839e-03, 5.66893432e-04,
+             5.66893432e-04, 1.13378686e-03, 6.80272095e-03,
+             2.26757373e-03, 0., 0., 5.66893443e-03, 2.83446722e-03,
+             5.10204071e-03, 9.07029491e-03, 7.14285746e-02 ]
+   labels: !!opencv-matrix
+      rows: 26
+      cols: 1
+      dt: i
+      data: [ 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 4, 4, 4, 4, 5, 5, 5, 5, 5,
+          6, 6, 8, 8, 8, 8 ]
+   labelsInfo:
+      []
+```
+
 
 ### Face Recognition 
 I continued my search for the existing works on face recognition and found several works which could be tested right away (with some modifications from the original source codes). There is one [tutorial](https://www.youtube.com/watch?v=PmZ29Vta7Vc) in YouTube which explained clearly how we could get the face recognition worksfrom the web camera (real time). 
-If the codes provided in the video  isn't working directly, you could use my small patches, in which I corrected out a typo and extend the filename extensions towards the source file.
+If the codes provided in the video  isn't working directly, you could use my small patches, in which I corrected out a typo and extend the filename extensions towards the source file from [here](https://github.com/codingforentrepreneurs/OpenCV-Python-Series/compare/master...raden:utk-github)
 
 
 <center>
@@ -58,7 +95,7 @@ If the codes provided in the video  isn't working directly, you could use my sma
 
 
 ### Object Recognition
-i also searched more related works which could possibly provides an alternative to the face recognition. However turns out I found quite an interesing piece of work for objection detection by using Neural Network. The work is running on a framework called as [Darknet](https://pjreddie.com/darknet/). It allows us to do post-processing objection detection for still pictures and videos. It also able to do real time object recognition but requires GPUs to allow us to make it happened efficiently. I tried with the CPU only mode but I could not get a real time result (my computer almost freezed). 
+I also searched more related works which could possibly provides an alternative to the face recognition. However turns out I found a quite interesing piece of work for objection detection by using Neural Network. The work is running on a framework called as [Darknet](https://pjreddie.com/darknet/). It allows us to do post-processing objection detection for still pictures and videos. It also able to do real time object recognition but requires GPUs to allow us to make it happened efficiently. I tried with the CPU only mode but I could not get a real time result (my computer almost freezed). 
 
 ####Still images' samples
 ![](/home/najmi/end-point-blog/2018/10/10/image-recognition-tools/bot.jpg)
@@ -110,6 +147,17 @@ i also searched more related works which could possibly provides an alternative 
 <caption>This is a video a kid, riding small horse</caption>
 </center>
 
+#####Vehicle Counting and Speed Measurement
+I found a tool developed by [Ahmet Ozlu](https://github.com/ahmetozlu/vehicle_counting_tensorflow) which uses Tensorflow. In this case the use case are vechicle counting, vehicle type and color recoginition and speed detection.
+
+You can see the following video on how it works.
+
+<center>
+  <video width="100%" controls poster="poster.png">
+    <source src="/home/najmi/end-point-blog/2018/10/10/image-recognition-tools/ahmet-traffic.mp4" type="video/mp4">
+  </video>
+<caption>This is a video a kid, riding small horse</caption>
+</center>
 
 ### Libraries
 
@@ -140,10 +188,10 @@ To convert the video in a slow frame per second (FPS):
 (for the Darkflow tool, the default output is in AVI format, but ffmpeg allow us to convert it to MP4, you can also maintain the format to AVI if you want)
 
 
- 
-
 #### ImageAI
-[ImageAI](https://github.com/OlafenwaMoses/ImageAI) is a Python based computer vision library which utilizes the use of Tensorflow, Keras, Matplotlib and several other dependencies which are commonly being used for machine learning.
+[ImageAI](https://github.com/OlafenwaMoses/ImageAI) is a Python based computer vision library which utilizes the use of Tensorflow, Keras, Matplotlib and several other dependencies which are commonly being used for machine learning. In term of the usage, it is similar as darkflow.
 
+### Conclusion
+The advancement of the field of Artificial Intelligence (AI) contributes a lot of useful automation to the human lives. Ranged from helping detecting tumor, search and rescue mission, reducing keystrokes with keyword predictions up to the use of anti spam. AI also accelerates the field of image processing and pattern recognition. A lot of the hard works of smart people and scholars produced many smart solutions to make people live a better life with the use of AI. As what I have shown from the existing tools, some of these tools could achieve better detection give a good amout of samples to be trained and the correct size of picture to be detected. 
 
-
+In term of the usability, the provided tools above will work as is (and may need some tweaking/editing if you want to customize it, for example some of the codes works with their own demo, so you may need to pass an argument for e.g `sys.argv[]` inside the Python code if you want to process your own video). 
