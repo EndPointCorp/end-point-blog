@@ -1,7 +1,7 @@
 ---
 author: Charles Chang
 title: 'Registering Initiators and "Host Access" Configuration on EMC Unisphere with UCS Compute Node'
-tags: ucs, emc, servers, storage
+tags: windows, virtualization, storage, integration, disaster-recovery, infrastructure, datacenter
 gh_issue_number: 1460
 ---
 
