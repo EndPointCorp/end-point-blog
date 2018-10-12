@@ -1,7 +1,7 @@
 
 ### End Point New Services to Manage, Upkeep and Grow your Technology Infrastructure ###
 
-
+<img src="/blog/2018/10/11/Windows-Team-New-Services/newservice.jpg" alt="End Point new services" />
 
 #### Introduction ####
 
