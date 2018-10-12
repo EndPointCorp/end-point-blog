@@ -18,7 +18,6 @@ End Point Corporation is pleased to announce a new Windows Infrastructure Divisi
 End Point Corporation is offering special discounts when customers purchase block of hours to support your office or data center technology environment. The block of hours could be rolled over to the following months if not used. If you purchase a larger block of hours, a discount will be provided. Annual support contract is also available upon request. Please contact one our representative to discuss the options you are interested in. 
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------
-**INFORMATION FOR INTERNAL USAGE ONLY**
 
 | PACKAGES  | COST  | BLOCK OF HRS    | SPECIAL OFFER |
 |:---:|:---|:---:|:---:|
