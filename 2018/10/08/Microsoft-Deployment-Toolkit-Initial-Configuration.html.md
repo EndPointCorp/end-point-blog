@@ -1,7 +1,7 @@
 ---
-author: Charles Chang
+author: Windows Infrastructure Team
 title: 'Microsoft Deployment Toolkit (MDT) Initial Configuration Steps'
-tags: windows, iso, servers
+tags: windows, integration, infrastructure
 gh_issue_number: 1458
 ---
 
