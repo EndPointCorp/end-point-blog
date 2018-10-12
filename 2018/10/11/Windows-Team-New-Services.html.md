@@ -1,3 +1,9 @@
+---
+author: Windows Infrastructure Team
+title: 'End Point New Services to Manage, Upkeep and Grow your Technology Infrastructure'
+tags: windows, virtualization, storage, networking, integration, environment, disaster-recovery, company, cloud, infrastructure, datacenter
+gh_issue_number: 1461
+---
 
 ### End Point New Services to Manage, Upkeep and Grow your Technology Infrastructure ###
 
