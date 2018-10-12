@@ -1,7 +1,7 @@
 ---
-author: Charles Chang
+author: Windows Infrastructure Team
 title: 'Microsoft Deployment Toolkit (MDT) - Create Customize Bootable USB Key using ISO Produced by MDT'
-tags: windows, iso, servers
+tags: windows, integration, infrastructure
 gh_issue_number: 1459
 ---
 
