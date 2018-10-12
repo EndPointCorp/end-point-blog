@@ -71,7 +71,7 @@ In Part 2, I will go over how to configure Microsoft Deployment Toolkit and buil
 
 **Continue to Next Article** <br> <A href=/blog/2018/10/08/Microsoft-Deployment-Toolkit-Initial-Configuration.html.md>Part 2 - MDT Initial Configuration Steps</a>
 
-#### Related Articles ####
+**Related Article**<br>
 <A href=/blog/2018/10/09/Microsoft-Deployment-Toolkit-Bootable-USB-Key.html.md>Part 3 - Microsoft Deployment Toolkit (MDT) - Create Customize Bootable USB Key using ISO Produced by MDT</a>
 
-<a href="http://renshollanders.nl/2013/02/mdt-2012-settings-for-fully-automated-lti-deployment-part-ii-customsettings-ini/">MDT 2012 Settings for fully automated LTI deployment, Part II: Customsettings.ini</a><br><br><br>
+
