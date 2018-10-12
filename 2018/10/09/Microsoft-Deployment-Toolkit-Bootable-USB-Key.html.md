@@ -92,8 +92,8 @@ Note: This is where we store the scripts used in the task sequence. Any customiz
 
 #### How to Use the Bootable ISO USB key ####
 1\. To install the Operating System using the bootable USB key, go ahead and power up the physical server and go into BIOS. Determine if disabling Secure USB or enabling USB boot is needed. This is done through the BIOS. Once boot from USB is enabled, then next thing to do is boot to option. Usually F12 or F8. Various manufacturer have a shortcut key. Please check with your manufacturer. Once you are able to boot from USB, basically the installation will run automatically without user intervention. During the process, there will be several reboot of the server which is normal behavior. After the customize ISO runs and completes, the server should be ready to use.<br><br>
-This will end Part 3 "Microsoft Deployment Toolkit (MDT) - Create Customize Bootable USB Key using ISO Produced by MDT". <br><br>
+This will end Part 3 "Microsoft Deployment Toolkit (MDT) - Create Customize Bootable USB Key using ISO Produced by MDT". <br>
 
-#### Related Articles ####
+**Related Article**<br>
 <A href=/blog/2018/10/07/Microsoft-Deployment-Toolkit-Customsettingini.html.md>Part 1 - MDT and Customsetting.ini Parameters</a><br>
 <A href=/blog/2018/10/08/Microsoft-Deployment-Toolkit-Initial-Configuration.html.md>Part 2 - MDT Initial Configuration Steps</a><br><br>
