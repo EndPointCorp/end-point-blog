@@ -4,7 +4,7 @@ title: "What’s the deal with ASP.NET Core Razor Pages?"
 tags: web-development, .net-core, .net-framework, asp.net, asp.net-core, mvc, mvvm, razor-pages, web-forms
 ---
 
-![Banner Image](./whats-the-deal-with-asp-net-core-razor-pages/banner.png)
+![Banner Image](whats-the-deal-with-asp-net-core-razor-pages/banner.png)
 
 During the last couple of years I’ve been doing lots of web development with technologies like [JavaScript](https://en.wikipedia.org/wiki/JavaScript) and [PHP](http://php.net/) and [Zend Framework](https://framework.zend.com/), with a strong focus on the front end. Before that, however, the vast majority of the work I did as a web developer was with the [.NET Framework](https://www.microsoft.com/net).
 
