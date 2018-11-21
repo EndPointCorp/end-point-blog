@@ -7,21 +7,21 @@ tags: php, zend-framework, composer, namespaces, code-reuse, package-manager, mo
 ![Banner](how-to-use-zend-framework-components-in-a-console-app/banner.png)
 
 
-When Rasmus Lerdorf created [PHP](http://php.net/) in the 90s, I bet he never thought that his language would become the engine that powers most of the web, even today, 23 years later.
+When Rasmus Lerdorf created [PHP](http://php.net/) in the 90s, I bet he never thought that his language would become the engine that powers most of the web... Even today, 23 years later.
 
-PHP is indeed super popular. Part of that popularity stems for the fact that it can run pretty much anywhere. You'd be hard pressed to find a hosting solution that doesn't support PHP out of the box. Even the cheapest ones. It is also fully functional in pretty much any version of the most used operating systems, so development and deployment has a very low barrier of entry.
+PHP is indeed super popular. Part of that popularity stems for the fact that it can run pretty much anywhere. You'd be hard pressed to find a hosting solution that doesn't support PHP out of the box. Even the cheapest ones. It is also fully functional in pretty much any version of the most used operating systems so; development and deployment have a very low barrier of entry.
 
-Both because and as a result of this ubiquity and popularity, PHP also boasts an expansive, active community and a rich ecosystem of [documentation](http://php.net/docs.php), tools, libraries and frameworks. [Zend Framework](https://framework.zend.com/) being a great example of one of the latter.
+Both because and as a result of this ubiquity and popularity, PHP also boasts an expansive, active community and a rich ecosystem of [documentation](http://php.net/docs.php), tools, libraries and frameworks. [Zend Framework](https://framework.zend.com/) being a great example of the latter.
 
-I started using Zend Framework a good while ago now when it became clear that writing vanilla PHP wasn't going to cut it anymore for moderately sized projects. I needed help and Zend Framework extended a very welcomed helping hand. Zend Framework is basically a big collection of libraries and frameworks that cover most of the needs that we would have as web developers building PHP applications.
+I started using Zend Framework a good while ago now, when it became clear to me that writing vanilla PHP wasn't going to cut it anymore for moderately sized projects. I needed help and Zend Framework extended a very welcomed helping hand. Zend Framework is basically a big collection of libraries and frameworks that cover most of the needs that we would have as web developers building PHP applications.
 
 While most parts of Zend Framework are standalone components that we can plug into an existing code base, picking and choosing what's needed; there's also the likes of [Zend MVC](https://docs.zendframework.com/tutorials/getting-started/overview/). Zend MVC is, in its own right, a framework for developing web applications using the MVC design pattern (shocker, I know). A Zend MVC application is itself comprised of several other components from Zend Framework's library like Zend Form (which helps with developing HTML forms), Zend Db (which helps with database access), Zend Validator (which helps with input validation), and many more.
 
-Obviously, these are very useful within the context of web applications but they can also be valuable on their own. One could put together a PHP console app and make one's life much easier by leveraging the features provided by these libraries. Coming back to the point of PHP's ubiquity, it is very easy to put together such a script that runs in a server where a PHP web app is already deployed. No installation of an additional language interpreter needed; which means no need for special server permissions. No fuss, just good old PHP, which is already running on the server, being used to perform some backend task, some database maintenance, some file downloading, etc.
+Obviously, these are very useful within the context of web applications but they can also be valuable on their own. One could put together a PHP console app and make one's life much easier by leveraging the features provided by these libraries. Coming back to the point of PHP's ubiquity, it is very easy to write such a script that runs in a server where a PHP web app is already deployed. No installation of an additional language interpreter needed; which means no need for special server permissions. No fuss, just good old PHP, which is already running on the server, being used to perform some backend task, some database maintenance, some file downloading, etc.
 
 So, the question becomes, how do we leverage the power of Zend Framework components outside the context of a Zend MVC application? Composer is the key.
 
-Composer is a widely used package manager and module loader for PHP and it is what powers Zend MVC applications' module resolution engine.
+Composer is a widely used package manager and module loader for PHP, and it is what powers Zend MVC applications' module resolution engine.
 
 In vanilla PHP, the `include` and `require` statements are the main forms of code reuse. When we want to bring functions or classes defined in other files to our script, these are what we use. PHP also supports namespaces. In their most abstract definition, namespaces are things used for organizing other things. In a programing language, they are little more and a name, a series of characters, that group together classes, functions, variables, etc. I.e. program constructs.
 
@@ -61,7 +61,7 @@ echo $result;
 
 In this file, we're getting a reference to the `ArithmeticCalculator` via its namespace. That is, we're calling it with its fully qualified name.
 
-The funny thing though, is that namespaces do not serve to resolve dependencies. That is, just because we use `use Application\MathTools\ArithmeticCalculator;`, it does not mean that PHP knows where the file that actually contains the class is located. In other words, the `use` statement doesn't know how to go out of the current file and look for the corresponding `namespace` statements in other files to figure out what to include. Given that, the savvy reader would be able to deduce that the previous code doesn't actually work. In fact, if we run this as it is, it will most surely throw an exception with PHP complaining about just what we discussed.
+The funny thing though, is that namespaces do not serve to resolve dependencies. That is, just because we write `use Application\MathTools\ArithmeticCalculator;`, it does not mean that PHP knows where the file that actually contains the class is located. In other words, the `use` statement doesn't know how to go out of the current file and look for the corresponding `namespace` statements in other files to figure out what to include. Given that, the savvy reader would be able to deduce that the previous code doesn't actually work. In fact, if we run this as it is, it will most surely throw an exception with PHP complaining about just what we discussed.
 
 ![Class not found error](how-to-use-zend-framework-components-in-a-console-app/error.png)
 
@@ -76,15 +76,15 @@ include 'calc.php';
 // ... rest of the code ...
 ```
 
-Now it does work. Well, hurray I guess. It's still kind of a bummer because we now have to use BOTH `include`/`require` AND `use` if we want to use namespaces. Imagine how quickly will that become a mess in a project with a good number of files. Thankfully, Composer can help us with that.
+Now it does work. Well, hurray, I guess. It's still kind of a bummer because we now have to use BOTH `include`/`require` AND `use` if we want to use namespaces. Imagine how quickly will that become a mess in a project with a good number of files. Thankfully, Composer can help us with that.
 
 Alright, after that long tangent about requiring and including scripts and using namespaces, finally Composer comes back into the picture. Composer includes what's called an autoloader. An autoloader is precisely what we need here because we can use it to make it so our scripts don't need to use `require`/`include` statements anymore. The autoloader takes notice of the `use` statements and then includes the actual files where the source code lives as it sees fit. Alright, let's see how we can create a Composer managed PHP project and use the files that we already have.
 
-First of all, make sure to install Composer from [the official website](https://getcomposer.org/).
+First of all, make sure to install Composer from [their official website](https://getcomposer.org/).
 
 Let's create a new directory to work in. I'm going to call mine "`my-console-app`". Go into it and run `composer init` in your console.
 
-This will result in Composer's config generator showing up. It is an interactive prompt that helps you through the setup of your project's `composer.json` file. That file's purpose is to store references to all of your dependencies as well as some general project information like name, description, author, license and the like. For now, just hit enter a few of times until asked whether you'd like to interactively define your dependencies for both dev and prod. Say `no` to those and then finally say `yes` when asked to confirm generation. When all is said and done, the whole thing should look like this:
+This will result in Composer's config generator showing up. It is an interactive prompt that helps you through the setup of your project's `composer.json` file. That file's purpose is to store references to all of your dependencies as well as some general project information like name, description, author, license and the like. For now, just hit enter a few times until asked whether you'd like to interactively define your dependencies for both dev and prod. Say `no` to those and then finally say `yes` when asked to confirm generation. When all is said and done, the whole thing should look like this:
 
 ```
 $ composer init
@@ -122,7 +122,7 @@ Would you like to define your dev dependencies (require-dev) interactively [yes]
 Do you confirm generation [yes]? y
 ```
 
-You should have a brand new `composer.json` file created as well with that final json content that `composer init` showed in the console.
+You should have a brand-new `composer.json` file created with that final json content that `composer init` showed us in the console.
 
 Alright, now let's, in that same directory, create two PHP files with the contents that we saw above. Here they are again for your convenience:
 
@@ -184,7 +184,7 @@ Next, we need to generate the actual runtime component that will do the autoload
 composer dump-autoload -o
 ```
 
-This creates a series of files that contain the actual autoloading logic to fulfill what we described in our `composer.json` file. They live inside a new `vendor` directory created at the root of our project. An `ls` reveals the current state of our directory:
+This creates a series of files that contain the actual autoloading logic to fulfill what we described in our `composer.json` file. They live inside a new `vendor` directory created at the root of our project. A quick `ls` reveals the current state of our directory:
 
 ```
 $ ls
@@ -287,6 +287,6 @@ echo "\n";
 
 Demonstrating the breath of functionality that we can take advantage of by using the Zend Validator component is obviously well beyond the scope of this article. However, in the example above, we can see what including such a component in our scripts could look like. We put together a simple credit card and email validator that works on incoming arrays of data. All we had to do was run `composer require zendframework/zend-validator` to install our package and put this line at the beginning of our script `include 'vendor/autoload.php';`. We didn't even have to generate the autoloader like we did with our custom `AruthmeticCalculator` class. This is because Composer knows how to deal with dependencies installed with `composer require` without us needing to tell it so.
 
-And that concludes today's post about how to use Zend Framework components in a console App in PHP. As a bonus, we also learned about code reuse with `require` and `include`, what namespaces are, how to use them, what they can and cannot do, what is Composer, how to set up a project using it and how to use it for autoloading modules. That's a pretty good bang for your buck.
+And that concludes today's post about how to use Zend Framework components in a console app in PHP. As a bonus, we also learned about code reuse with `require` and `include`, what namespaces are, how to use them, what they can and cannot do, what is Composer, how to set up a project using it and how to use it for autoloading modules. That's a pretty good bang for your buck.
 
 You can find all the source code that we wrote for this post in [this GitHub repo](https://github.com/megakevin/end-point-blog-zf-console-app).
