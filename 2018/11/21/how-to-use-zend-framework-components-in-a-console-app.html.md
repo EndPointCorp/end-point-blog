@@ -1,3 +1,12 @@
+---
+author: "Kevin Campusano"
+title: "How to use Zend Framework components in a console app"
+tags: php, zend-framework, composer, namespaces, code-reuse, package-manager, module-loader
+---
+
+![Banner](how-to-use-zend-framework-components-in-a-console-app/banner.png)
+
+
 When Rasmus Lerdorf created [PHP](http://php.net/) in the 90s, I bet he never thought that his language would become the engine that powers most of the web, even today, 23 years later.
 
 PHP is indeed super popular. Part of that popularity stems for the fact that it can run pretty much anywhere. You'd be hard pressed to find a hosting solution that doesn't support PHP out of the box. Even the cheapest ones. It is also fully functional in pretty much any version of the most used operating systems, so development and deployment has a very low barrier of entry.
@@ -279,3 +288,5 @@ echo "\n";
 Demonstrating the breath of functionality that we can take advantage of by using the Zend Validator component is obviously well beyond the scope of this article. However, in the example above, we can see what including such a component in our scripts could look like. We put together a simple credit card and email validator that works on incoming arrays of data. All we had to do was run `composer require zendframework/zend-validator` to install our package and put this line at the beginning of our script `include 'vendor/autoload.php';`. We didn't even have to generate the autoloader like we did with our custom `AruthmeticCalculator` class. This is because Composer knows how to deal with dependencies installed with `composer require` without us needing to tell it so.
 
 And that concludes today's post about how to use Zend Framework components in a console App in PHP. As a bonus, we also learned about code reuse with `require` and `include`, what namespaces are, how to use them, what they can and cannot do, what is Composer, how to set up a project using it and how to use it for autoloading modules. That's a pretty good bang for your buck.
+
+You can find all the source code that we wrote for this post in [this GitHub repo](https://github.com/megakevin/end-point-blog-zf-console-app).
