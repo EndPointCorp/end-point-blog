@@ -8,11 +8,15 @@ There's one truth that I quickly discovered as I went into my first real foray i
 
 In my experience, there are two main roadblocks when trying to do this. First: [RubyInstaller](https://rubyinstaller.org/downloads/), the most mainstream method for getting ruby on Windows, is not available for every version of the interpreter. Second: I've ran into issues while compiling native extensions for certain gems. One of these gems is, surprisingly, sqlite3, a gem that's needed to even complete the official Getting Started tutorial over on https://guides.rubyonrails.org/.
 
-In this post, I'm going to be talking about how to avoid these pitfalls by setting up your development environment using WSL on Windows 10 Pro. You can jump to the [summary](#summary) at the bottom of the article to get a quick idea of what we're going to do over the next few minutes.
+> In this post, I'm going to be talking about how to avoid these pitfalls by setting up your development environment using the Windows Subsystem for Linux on Windows 10 Pro. You can jump to the [summary](#summary) at the bottom of the article to get a quick idea of what we're going to do over the next few minutes.
 
 Anyway, I've since learned that the vast majority of the Ruby and Rails community uses either OSX or some flavor of Linux as their Operating System of choice...
 
-Great, but what is a Windows guy like me to do under these circumstances? Well, there are a few options. Assuming they would like/need to keep using Windows as their main OS, they could virtualize some version of Linux (using something like Hyper-V or VitrualBox) or go dual boot with a native Linux installation on their current hardware. In a pinch, these solutions work beautifully, but they have their drawbacks. Virtual machines, in my experience, and unless you have a really beefy machine, take quite a performance hit, for graphical interfaces at least. So, having your entire development environment in one can get annoying after a while. The dual boot scenario gets rid of any performance degradation but then you have to go through the hassle of restarting anytime you want to work in different OS. This was not an option for me as I actively maintain Windows-based .NET projects as well.
+Great, but what is a Windows guy like me to do under these circumstances? Well, there are a few options. Assuming they would like/need to keep using Windows as their main OS, they could virtualize some version of Linux (using something like Hyper-V or VitrualBox) or go dual boot with a native Linux installation on their current hardware. Provided you can set something like these up, these solutions can work beautifully, but they have their drawbacks.
+
+Virtual machines, depending on how you set them up and for graphical interfaces at least, can take a bit of a performance hit when compared to running the OS natively. So, having your entire development environment in one can get annoying after a while. The dual boot scenario gets rid of any performance degradation but then you have to go through the hassle of restarting anytime you want to work in a different OS. This was not an option for me as I actively maintain Windows-based .NET projects as well.
+
+> There's also se option of using something like [Cygwin](https://www.cygwin.com/) to create an environment very close to what you'd see in a Linux distribution. I personally haven't had much experience with that one so I can't speak on how capable it is as far as Ruby and Rails development goes.
 
 Luckily for me, it turns out that Microsoft's own Windows Subsystem for Linux is up to the task of providing a drama-free solution for working in a Linux environment within Windows. That's why I thought I'd give it a shot in setting up my Ruby/Rails development environment. I can happily say that this exercise ended up being a resounding success.
 
@@ -178,9 +182,9 @@ gem install rails
 
 ### Context: The problem with Windows
 
-Installing Rails can take a while so, while the RubyGems package manager works its magic, I'd like to take the opportunity to point out one of the major pain points that we're avoiding by not doing all this on plain Windows. When installing some gems like Rails, the package manager will not only have to download the packages, but also build some native extensions that are required for them to work.
-
-This is where I ran into problems with Windows. Namely, these build steps would fail because, for some reason, the Windows environment does not have (at least not by default or in a way that's easy to get) the required build and compilation tools for these to succeed.
+> Installing Rails can take a while so, while the RubyGems package manager works its magic, I'd like to take the opportunity to point out one of the major pain points that we're avoiding by not doing all this on plain Windows. When installing some gems like Rails, the package manager will not only have to download the packages, but also build some native extensions that are required for them to work.
+>
+> This is where I ran into problems with Windows. Namely, these build steps would fail because, for some reason, the Windows environment does not have (at least not by default or in a way that's easy to get) the required build and compilation tools for these to succeed.
 
 ...
 
@@ -192,7 +196,7 @@ rails new my-rails-app --skip-spring --skip-listen
 
 ### Note: File system notifications in WSL
 
-We need to pass in the `--skip-spring` and `--skip-listen` options because, according to [Rails' official documentation](https://guides.rubyonrails.org/getting_started.html), there are currently some limitations on file system notifications in the Windows Subsystem for Linux.
+> We need to pass in the `--skip-spring` and `--skip-listen` options because, according to [Rails' official documentation](https://guides.rubyonrails.org/getting_started.html), there are currently some limitations on file system notifications in the Windows Subsystem for Linux.
 
 Ok then, let's `cd` into our brand-new app's directory and try running it with the included development web server.
 
@@ -220,7 +224,9 @@ Ubuntu will ask you for your `sudo` password by prompting you with `[sudo] passw
 rails server webrick
 ```
 
-NOTE: We're explicitly telling Rails to use the WEBrick development server here because, currently, there's an issue with Puma (another development web server shipped with Rails) that prevents it from working in a WSL environment.
+### Note: Using WEBrick instead of Puma
+
+> We're explicitly telling Rails to use the WEBrick development server here because, currently, there's an issue with Puma (another development web server shipped with Rails) that prevents it from working in a WSL environment.
 
 You should now see something like this in the prompt:
 
@@ -427,15 +433,15 @@ Again, feel free to look around the `launch.json` file that the Ruby extension h
 
 ### Gotcha: Ruby versions 2.5.0 and 2.5.1 have some issues
 
-At this point there's one big gotcha. Ruby versions 2.5.0 and 2.5.1 have some issues that prevent doing this kind of debugging in Rails apps. You can read more about that [here](https://superuser.com/questions/1359747/is-it-possible-to-get-visual-studio-code-ide-debugging-of-apps-on-rails-5-2-to-w). Thankfully, there's a quick workaround: Replace the `require 'bootsnap/setup'` line in the `config\boot.rb` file with something like this:
-
-```ruby
-unless ( (('2.5.0'..'2.5.1').include? RUBY_VERSION) && defined?(Debugger) )
-    require 'bootsnap/setup' # Speed up boot time by caching expensive operations.
-end
-```
-
-Basically, we're preventing the inclusion of the `bootsnap/setup` gem for versions of Ruby between `2.5.0` and `2.5.1`.
+> At this point there's one big gotcha. Ruby versions 2.5.0 and 2.5.1 have some issues that prevent doing this kind of debugging in Rails apps. You can read more about that [here](https://superuser.com/questions/1359747/is-it-possible-to-get-visual-studio-code-ide-debugging-of-apps-on-rails-5-2-to-w). Thankfully, there's a quick workaround: Replace the `require 'bootsnap/setup'` line in the `config\boot.rb` file with something like this:
+> 
+> ```ruby
+> unless ( (('2.5.0'..'2.5.1').include? RUBY_VERSION) && defined?>(Debugger) )
+>     require 'bootsnap/setup' # Speed up boot time by caching expensive operations.
+> end
+> ```
+>
+> Basically, we're preventing the inclusion of the `bootsnap/setup` gem for versions of Ruby between `2.5.0` and `2.5.1`.
 
 ### 4.4.4. Setting code breakpoints
 
