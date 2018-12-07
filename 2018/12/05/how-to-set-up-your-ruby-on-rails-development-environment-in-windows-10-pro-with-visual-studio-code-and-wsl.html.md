@@ -4,6 +4,8 @@ title: "How to set up your Ruby on Rails development environment in Windows 10 P
 tags: web-development, ruby, ruby-on-rails, rvm, windows, windows-subsystem-for-linux, wsl, visual-studio-code, vscode
 ---
 
+![Banner](how-to-set-up-your-ruby-on-rails-development-environment-in-windows-10-pro-with-visual-studio-code-and-wsl/banner.png)
+
 There's one truth that I quickly discovered as I went into my first real foray into Ruby and Rails development: Working with Rails in Windows sucks.
 
 In my experience, there are two main roadblocks when trying to do this. First: [RubyInstaller](https://rubyinstaller.org/downloads/), the most mainstream method for getting ruby on Windows, is not available for every version of the interpreter. Second: I've ran into issues while compiling native extensions for certain gems. One of these gems is, surprisingly, sqlite3, a gem that's needed to even complete the official Getting Started tutorial over on https://guides.rubyonrails.org/.
