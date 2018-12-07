@@ -6,9 +6,13 @@ tags: web-development, ruby, ruby-on-rails, rvm, windows, windows-subsystem-for-
 
 There's one truth that I quickly discovered as I went into my first real foray into Ruby and Rails development: Working with Rails in Windows sucks.
 
-I've since learned that the vast majority of the Ruby and Rails community uses either OSX or some flavor of Linux as their Operating System of choice.
+In my experience, there are two main roadblocks when trying to do this. First: [RubyInstaller](https://rubyinstaller.org/downloads/), the most mainstream method for getting ruby on Windows, is not available for every version of the interpreter. Second: I've ran into issues while compiling native extensions for certain gems. One of these gems is, surprisingly, sqlite3, a gem that's needed to even complete the official Getting Started tutorial over on https://guides.rubyonrails.org/.
 
-Great, but what is a Windows guy like me to do under these circumstances? Well, there are a few options. Assuming they would like/need to keep using Windows as their main OS, they could virtualize some version of Linux (using something like Hyper-V or VitrualBox) or go dual boot with a native Linux installation on their current hardware. In a pinch, these solutions work beautifully, but they are not with some drawbacks. Virtual machines, in my experience, and unless you have a really beefy machine, take quite a performance hit, for graphical interfaces at least. So, having your entire development environment in one can get annoying after a while. The dual boot scenario gets rid of any performance degradation but then you have to go through the hassle of restarting anytime you want to work in different OS. This was not an option for me as I actively maintain Windows-based .NET projects as well.
+In this post, I'm going to be talking about how to avoid these pitfalls by setting up your development environment using WSL on Windows 10 Pro. You can jump to the [summary](#summary) at the bottom of the article to get a quick idea of what we're going to do over the next few minutes.
+
+Anyway, I've since learned that the vast majority of the Ruby and Rails community uses either OSX or some flavor of Linux as their Operating System of choice...
+
+Great, but what is a Windows guy like me to do under these circumstances? Well, there are a few options. Assuming they would like/need to keep using Windows as their main OS, they could virtualize some version of Linux (using something like Hyper-V or VitrualBox) or go dual boot with a native Linux installation on their current hardware. In a pinch, these solutions work beautifully, but they have their drawbacks. Virtual machines, in my experience, and unless you have a really beefy machine, take quite a performance hit, for graphical interfaces at least. So, having your entire development environment in one can get annoying after a while. The dual boot scenario gets rid of any performance degradation but then you have to go through the hassle of restarting anytime you want to work in different OS. This was not an option for me as I actively maintain Windows-based .NET projects as well.
 
 Luckily for me, it turns out that Microsoft's own Windows Subsystem for Linux is up to the task of providing a drama-free solution for working in a Linux environment within Windows. That's why I thought I'd give it a shot in setting up my Ruby/Rails development environment. I can happily say that this exercise ended up being a resounding success.
 
@@ -22,7 +26,7 @@ First of all, if you don't already have it, we need to install a Linux distribut
 
 ![Microsoft Store](how-to-set-up-your-ruby-on-rails-development-environment-in-windows-10-pro-with-visual-studio-code-and-wsl/microsoft-store.png)
 
-There are multiple options here but I decided to go with Ubuntu 18.04 LTS. Ok, click it and follow the screens until you are downloading and installing it. Everything there is pretty straightforward. After the store says that the Linux distribution has been installed, it's actually not fully installed yet. When you launch it for the first time, it'll do some final installing that was still pending, ask you for a new UNIX username and password, and then you'll be ready to use your newly installed Linux distribution.
+There are multiple options here but I decided to go with Ubuntu 18.04 LTS. Ok, click it and follow the screens until you are downloading and installing it. Everything there is pretty straightforward. After the store says that the Linux distribution has been installed, **it's actually not fully installed yet**. When you launch it for the first time, it'll do some final installing that was still pending, ask you for a new UNIX username and password, and then you'll be ready to use your newly installed Linux distribution.
 
 Your console should look something like this now:
 
@@ -99,7 +103,7 @@ rvm 1.29.4 (latest) by Michal Papis, Piotr Kuczynski, Wayne E. Seguin [https://r
 
 ## 2.2 Install a Ruby via RVM
 
-Alright, nice. Now that we have RVM installed, we are ready to install any version of Ruby that we want. Let's see what's available by running this:
+All right, nice. Now that we have RVM installed, we are ready to install any version of Ruby that we want. Let's see what's available by running this:
 
 ```
 rvm list known
@@ -126,7 +130,7 @@ ruby-head
 ...
 ```
 
-RVM's `list known` command shows us all the available Rubies that can be installed via RVM. There are a bunch of different Ruby implementations available like MRI, JRuby, IronRuby, etc. The MRI ones, listed first, stand for "Matz's Ruby Interpreter" and represent the de facto standard for ruby implementations. Nowadays, it would be more accurate to call them "YARV", but that's a story for another day. For our purposes, let's think of the MRI Rubies as the default Rubies. Anyway, let's install one of the most recent ones with:
+RVM's `list known` command shows us all the available Rubies that can be installed via RVM. There are a bunch of different Ruby implementations available like MRI, JRuby, IronRuby, etc. The MRI ones, listed first, stand for "Matz's Ruby Interpreter" and represent the de facto standard for Ruby implementations. Nowadays, it would be more accurate to call them "YARV", but that's a story for another day. For our purposes, let's think of the MRI Rubies as the default Rubies. Anyway, let's install one of the most recent ones with:
 
 ```
 rvm install 2.5.1
@@ -172,7 +176,11 @@ We also need Rails, so...
 gem install rails
 ```
 
-Installing Rails can take a while so, while the RubyGems package manager works its magic, I'd like take the opportunity to point out one of the major pain points that we're avoiding by not doing all this on plain Windows. When installing some gems like Rails, the package manager will have to, not only download the packages, but also build some native extensions that are required for them to work. This is where I ran into problems with Windows. Namely, these build steps would fail because, for some reason, the Windows environment does not have (at least not by default or in a way that's easy to get) the required build and compilation tools for these to succeed.
+### Context: The problem with Windows
+
+Installing Rails can take a while so, while the RubyGems package manager works its magic, I'd like to take the opportunity to point out one of the major pain points that we're avoiding by not doing all this on plain Windows. When installing some gems like Rails, the package manager will not only have to download the packages, but also build some native extensions that are required for them to work.
+
+This is where I ran into problems with Windows. Namely, these build steps would fail because, for some reason, the Windows environment does not have (at least not by default or in a way that's easy to get) the required build and compilation tools for these to succeed.
 
 ...
 
@@ -181,6 +189,8 @@ Ok, now that Rails has finished installing, we can create a new app. I've chosen
 ```
 rails new my-rails-app --skip-spring --skip-listen
 ```
+
+### Note: File system notifications in WSL
 
 We need to pass in the `--skip-spring` and `--skip-listen` options because, according to [Rails' official documentation](https://guides.rubyonrails.org/getting_started.html), there are currently some limitations on file system notifications in the Windows Subsystem for Linux.
 
@@ -229,9 +239,9 @@ Well, this looks much better than our last try. Ok, now that the app is running,
 
 How cool is that? We're running a Rails app in our WSL Linux distribution and accessing it via a browser running in Windows.
 
-## 3.2. Tangent: Where are my files?
+## 3.2. Where are my files?
 
-So far, we've fired up a WSL console, created our app and served it from there. We created folders and files as part of Rails' initialization command (`rails new my-rails-app ...`). Those files are definitely somewhere in our disk, but where exactly? Well that would be in our distribution's folder within Windows. It's hidden pretty deep within the file system but it is there. To find it, navigate to your local `AppData` folder in `C:\Users\[YOUR_USER]\AppData\Local`. Once there, go to the `Packages` folder and, in there, look for a folder whose name corresponds to your installed Linux distribution. Mine shows up as a folder named `CanonicalGroupLimited.Ubuntu18.04onWindows_79rhkp1fndgsc` because I installed Ubuntu 18.04. It may vary slightly for different systems and distributions but, given how it's named, it should be easily identifiable nonetheless. Alright, enter that folder and continue navigating to `LocalState` and then `rootfs`. And now, we're finally there. This is the root of our distribution's file system. If you navigate further through `home`, then a folder named after your user, you'll find our `railsdemo/my-rails-app` directory. Inside it, that's where the code of our app lives.
+So far, we've fired up a WSL console, created our app and served it from there. We created folders and files as part of Rails' initialization command (`rails new my-rails-app ...`). Those files are definitely somewhere in our disk, but where exactly? Well that would be in our distribution's folder within Windows. It's hidden pretty deep within the file system but it is there. To find it, navigate to your local `AppData` folder in `C:\Users\[YOUR_USER]\AppData\Local`. Once there, go to the `Packages` folder and, in there, look for a folder whose name corresponds to your installed Linux distribution. Mine shows up as a folder named `CanonicalGroupLimited.Ubuntu18.04onWindows_79rhkp1fndgsc` because I installed Ubuntu 18.04. It may vary slightly for different systems and distributions but, given how it's named, it should be easily identifiable nonetheless. All right, enter that folder and continue navigating to `LocalState` and then `rootfs`. And now, we're finally there. This is the root of our distribution's file system. If you navigate further through `home`, then a folder named after your user, you'll find our `railsdemo/my-rails-app` directory. Inside it, that's where the code of our app lives.
 
 So, after all that spelunking, we've learned a few things:
 
@@ -253,7 +263,7 @@ However you choose to do it, we end up with our app's source code ready for edit
 
 ![Our Rails code in VS Code](how-to-set-up-your-ruby-on-rails-development-environment-in-windows-10-pro-with-visual-studio-code-and-wsl/vscode.png)
 
-Alright, that looks good. But let's start setting up VS Code for Rails development.
+All right, that looks good. But let's start setting up VS Code for Rails development.
 
 VS Code has an integrated console. You can set it up so that it can use any console that's currently installed in the system. Since we're using WSL, let's set that one up as the default. Press `Ctrl + Shift + P` to bring up the Command Palette and type in "default shell" to search for the `Terminal: Select Default Shell` option:
 
@@ -315,7 +325,7 @@ gem install solargraph
 
 ### 4.3.1. Adding some new code to debug
 
-Alright, once we have the Ruby extension installed and ready, setting up our project to support interactive debugging via VS Code is actually pretty straightforward, albeit with some gotchas.
+All right, once we have the Ruby extension installed and ready, setting up our project to support interactive debugging via VS Code is actually pretty straightforward, albeit with some gotchas.
 
 Before that though, let's actually add some code that we can debug. With Rails, this is pretty easy to do using generators. Here, run this command in your terminal:
 
@@ -480,25 +490,27 @@ If you take a look at VS Code now, you'll see that code execution has stopped in
 
 VS Code's debug mode GUI is pretty complete with a console for evaluating any expression in context, watches, listings of variables in scope, call stacks... Pretty much anything you would want or need in your debugging session.
 
+# Summary
+
 So, in summary, here's what we just did:
 
-1. Installed a WSL distribution.
-2. Installed RVM.
-3. Installed a Ruby via RVM.
-4. Created a new Rails app in the WSL distribution's file system.
-5. Ran the Rails app in WSL and accessed it via the browser from Windows.
-6. Learned where the WSL file system lives within Windows.
-7. Opened the Rails app's source code in VS Code.
-8. Set VS Code's Terminal's default shell as WSL's bash.
-9. Installed and set up key VS Code extensions for Ruby/Rails development like "Ruby", "Rails" and "Solargraph".
-10. Created a demo controller with a simple hello world action.
-11. Added a suite of Ruby/Rails launch configurations to VS Code via the launch.json file.
-12. Set up an "attach" launch configuration for our Rails app.
-13. Learned how to deal with Ruby versions 2.5.0 and 2.5.1 for debugging.
-14. Set breakpoints in VS Code.
-15. Launched the Rails app's dev server from WSL in remote debug mode.
-16. Attached our debugger from VS Code running on Windows to the Rails app running in WSL.
-17. Had our minds blown because we accomplished all of this and now developing Ruby/Rails on Windows will be much easier and fun.
+1. [Installed a WSL distribution.](#1.-install-wsl)
+2. [Installed RVM.](#2.1-install-rvm)
+3. [Installed a Ruby via RVM.](#2.2-install-a-ruby-via-rvm)
+4. [Created a new Rails app in the WSL distribution's file system.](#3.1.-set-up-rails-skeleton-app)
+5. [Ran the Rails app in WSL and accessed it via the browser from Windows.](#3.1.-set-up-rails-skeleton-app)
+6. [Learned where the WSL file system lives within Windows.](#3.2.-where-are-my-files?)
+7. [Opened the Rails app's source code in VS Code.](#4.1.-using-vs-code-to-develop-our-rails-app)
+8. [Set VS Code's Terminal's default shell as WSL's bash.](#4.1.-using-vs-code-to-develop-our-rails-app)
+9. [Installed and set up key VS Code extensions for Ruby/Rails development like "Ruby", "Rails" and "Solargraph".](#4.2.-improving-the-developer-experience)
+10. [Created a demo controller with a simple hello world action.](#4.3.1.-adding-some-new-code-to-debug)
+11. [Added a suite of Ruby/Rails launch configurations to VS Code via the launch.json file.](#4.3.2.-creating-a-launch-configuration-for-vs-code)
+12. [Set up an "attach" launch configuration for our Rails app.](#4.3.2.-creating-a-launch-configuration-for-vs-code)
+13. [Learned how to deal with Ruby versions 2.5.0 and 2.5.1 for debugging.](#gotcha:-ruby-versions-2.5.0-and-2.5.1-have-some-issues)
+14. [Set breakpoints in VS Code.](#4.4.4.-setting-code-breakpoints)
+15. [Launched the Rails app's dev server from WSL in remote debug mode.](#4.4.5.-debugging-with-vs-code)
+16. [Attached our debugger from VS Code running on Windows to the Rails app running in WSL.](#4.4.5.-debugging-with-vs-code)
+17. [Had our minds blown because we accomplished all of this and now developing Ruby/Rails on Windows will be much easier and fun.](#4.4.5.-debugging-with-vs-code)
 
 Yeah, we've accomplished quite a lot! We should feel pretty proud.
 
