@@ -1,11 +1,11 @@
 ---
-author: 
+author: Benjamin Goldstein
 gh_issue_number: 
 tags: careers, jobs, engineer, liquid-galaxy
 title: Liquid Galaxy Support Engineer
 ---
 
-Liquid Galaxy Support Engineer
+<img src="/blog/2018/10/02/immersive_gis_job_opening/image-0.jpg" alt="Liquid Galaxy Installation" />
 
 We are looking for a full-time engineer to help us further support the software, infrastructure, and hardware integration for our [Liquid Galaxy](https://liquidgalaxy.endpoint.com/) and related systems. Liquid Galaxy is an impressive panoramic system for Google Earth, Street View, CesiumJS, panoramic photos and videos, 3D visualizations, and other applications.
 
