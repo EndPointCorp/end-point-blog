@@ -1,3 +1,10 @@
+---
+author: 
+gh_issue_number: 
+tags: careers, jobs, engineer, liquid-galaxy
+title: Liquid Galaxy Support Engineer
+---
+
 Liquid Galaxy Support Engineer
 
 We are looking for a full-time engineer to help us further support the software, infrastructure, and hardware integration for our [Liquid Galaxy](https://liquidgalaxy.endpoint.com/) and related systems. Liquid Galaxy is an impressive panoramic system for Google Earth, Street View, CesiumJS, panoramic photos and videos, 3D visualizations, and other applications.
@@ -34,7 +41,7 @@ Since Liquid Galaxy is a global operation, we are looking for an engineer who wi
 
 -   Enthusiasm for learning new technologies
 
-### Bonus points for experience the following:
+### Bonus points for experience with the following:
 
 -   Experience with automation tools such as Chef, Ansible, Salt, or Puppet
 
@@ -52,7 +59,7 @@ Since Liquid Galaxy is a global operation, we are looking for an engineer who wi
 
 ### About us
 
-End Point is technology consulting company founded in 1995 and based in New York City, with 35 full-time employees with many working remotely from home offices. We serve over 200 clients ranging from small family businesses to large corporations, using a wide variety of  technologies. Our team works together using tmux, chat applications, video conferencing, and even regular telephones.
+End Point is a technology consulting company founded in 1995 and based in New York City, with 35 full-time employees with many working remotely from home offices. We serve over 200 clients ranging from small family businesses to large corporations, using a wide variety of technologies. Our team works together using tmux, chat applications, video conferencing, and even regular telephones.
 
 ### How to apply
 
