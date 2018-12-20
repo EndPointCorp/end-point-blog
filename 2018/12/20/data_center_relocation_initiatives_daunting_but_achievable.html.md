@@ -17,7 +17,7 @@ A customer asked for our help dealing with logistical nightmares they encountere
 
 #### Moving forward with Tier IV
 
-Enterprises typically transition to Tier 4 data centers because they offer the highest uptime guarantees, and have zero single points of failure. These facilities are fully redundant in terms of electrical circuits, cooling and networking. This architecture is best able to withstand even the most serious technical incidents without server availability being affected. Tier IV facilities have contracts with disaster management companies who will provide them, for example, with fuel in the event that a natural disaster damages the power grid.
+Enterprises typically transition to Tier 4 data centers because they offer the highest uptime guarantees, and have zero single points of failure. These facilities are fully redundant in terms of electrical circuits, cooling, and networking. This architecture is best able to withstand even the most serious technical incidents without server availability being affected. Tier IV facilities have contracts with disaster management companies who will provide them, for example, with fuel in the event that a natural disaster damages the power grid.
 
 
 
@@ -49,7 +49,7 @@ To manage data center relocations is challenging because there are many moving p
 
 Here are some of our procedures for pre-migration preparation:
 
-1\. Process the paperwork for new hardware, approve all applications, hire movers, schedule and coordinate with internal management and key stakeholders like IT staff, system admins, contractors, circuit providers, etc.<img align="right" src="https://lh4.googleusercontent.com/YpEoWm5H1hM-PPol0Rck-ou_Tb6cmlk4QQdxGCgfkt91Os6GpluVKDpNQNE08LwdENaQvS1RIfw8e0AB5xT-HLKExCzyh8etNMBdfxQCjYOYKzpyFgG0xRb2uQtG2LJZndhahsHt" style="margin: 1em" width="200"/>
+1\. Process the paperwork for new hardware. Identify, review, and approve all applications. Hire movers. Schedule and coordinate with internal management and key stakeholders like IT staff, system admins, contractors, circuit providers, etc.<img align="right" src="https://lh4.googleusercontent.com/YpEoWm5H1hM-PPol0Rck-ou_Tb6cmlk4QQdxGCgfkt91Os6GpluVKDpNQNE08LwdENaQvS1RIfw8e0AB5xT-HLKExCzyh8etNMBdfxQCjYOYKzpyFgG0xRb2uQtG2LJZndhahsHt" style="margin: 1em" width="200"/>
 
 2\. Collect and analyze resource usage associated with the critical and non-critical systems and compare resource needs to resource availability at the new facility.
 
@@ -76,7 +76,7 @@ To minimize or eliminate downtime requires very careful preparation. With this p
 
 #### Solutions
 
-After discussing various approaches, we ended up using a load balancer. A load balancer is a network device that routes incoming traffic destined for a single destination (web site, application, or service) and 'shares' the incoming connections across multiple destination devices or services. In this case, the data center we were to migrate housed the client's critical systems like web servers, sql, etc. The secondary data center housed a replica (offline copy) of the critical systems using a replication technology (e.g. Actifio, Rubrik, SAN mirroring, VMWare SRM, or Zerto --- we used Actifio in this scenario).
+After discussing various approaches, we ended up using a load balancer. A load balancer is a network device that routes incoming traffic destined for a single destination (web site, application, or service) and 'shares' the incoming connections across multiple destination devices or services. In this case, the data center we were to migrate housed the client's critical systems like web servers, sql, etc. The secondary data center housed a replica (offline copy) of the critical systems using a replication technology (e.g. Actifio, Rubrik, SAN mirroring, VMWare SRM, or Zerto — we used Actifio in this scenario).
 <img align="right" src="https://lh5.googleusercontent.com/LRumZsXWkWNlCb1Qy2hrP_rIUHsENrLdRcvqCaAcjnLjbnzRV5_xhzxZE7Ae0iU5zth9leQinwmxcHINoso5kRRITuUkw5dukoHXXoB_VNSOWdC9qFTrnAVm6r2KSWT4aUNhddPz" style="margin: 1em" width="200"/>
 
 The customer had multiple systems with external DNS records and public IP addresses. We did not change the public DNS names for the critical systems. We did change the public IP addresses associated with the public DNS names, to point to the load balancer, which then pointed to the appropriate data center throughout the process. This setup enabled a gradual, flexible, and fully controlled transition to the new data center.
@@ -98,7 +98,7 @@ Tier IV data centers have redundancies for every process and data protection str
 
 ##### Tier III (Average)
 
-N+1 (the amount required for operation plus a backup) fault tolerance --- which means a Tier III facility can undergo routine maintenance without a hiccup in operations. 99.982% minimum uptime per annum, used for maintenance and overwhelming emergencies.
+N+1 (the amount required for operation plus a backup) fault tolerance — which means a Tier III facility can undergo routine maintenance without a hiccup in operations. 99.982% minimum uptime per annum, used for maintenance and overwhelming emergencies.
 
 ##### Tier II (Minimal)
 
