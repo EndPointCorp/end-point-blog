@@ -43,7 +43,7 @@ Some of the customer's key concerns were:
 
 * * * * *
 
-#### Project Planning
+#### Project Planning 
 
 To manage data center relocations is challenging because there are many moving parts and variables. Typically, planning starts 6 months ahead of the scheduled relocation date. We seek to understand the role of each system by consulting in-depth with all the teams involved. We analyze each part of the client's tech infrastructure, break it down, and strategize about the best approach for handling the migration of each component. Additional time to plan can help especially when a large group of stakeholders is involved. Successful planning requires hard and sometimes extensive work, but makes an otherwise overwhelming data center migration smooth and worry free.
 
