@@ -42,7 +42,7 @@ To manage data center relocations is challenging because there are many moving p
 
 Here are some of our procedures for pre-migration preparation:
 
-1\. Process the paperwork for new hardware, approve all applications, hire movers, schedule and coordinate with internal management and key stakeholders like IT staff, system admins, contractors, circuit providers, etc.![](https://lh4.googleusercontent.com/YpEoWm5H1hM-PPol0Rck-ou_Tb6cmlk4QQdxGCgfkt91Os6GpluVKDpNQNE08LwdENaQvS1RIfw8e0AB5xT-HLKExCzyh8etNMBdfxQCjYOYKzpyFgG0xRb2uQtG2LJZndhahsHt)
+1\. Process the paperwork for new hardware, approve all applications, hire movers, schedule and coordinate with internal management and key stakeholders like IT staff, system admins, contractors, circuit providers, etc.<img align="right" src="https://lh4.googleusercontent.com/YpEoWm5H1hM-PPol0Rck-ou_Tb6cmlk4QQdxGCgfkt91Os6GpluVKDpNQNE08LwdENaQvS1RIfw8e0AB5xT-HLKExCzyh8etNMBdfxQCjYOYKzpyFgG0xRb2uQtG2LJZndhahsHt" style="margin: 1em" width="200"/>
 
 2\. Collect and analyze resource usage associated with the critical and non-critical systems and compare resource needs to resource availability at the new facility.
 
@@ -60,7 +60,8 @@ Here are some of our procedures for pre-migration preparation:
 
 * * * * *
 
-#### A Challenge: Eliminating Downtime![](https://lh5.googleusercontent.com/8tGYGGV_3X8iy_pi6Z_AdrJh014UaaMtyMm_-nIqNJ4kO4MoK3-RpVlA1_4Ds7eqHblzIXiHjrjieiEEtgsxg9yJOJfq-SkpO0FA2H-88rXSnB5TmWGFLgIvtbEFr3XT7QFvKGl3)
+#### A Challenge: Eliminating Downtime 
+<img align="right" src="/https://lh5.googleusercontent.com/8tGYGGV_3X8iy_pi6Z_AdrJh014UaaMtyMm_-nIqNJ4kO4MoK3-RpVlA1_4Ds7eqHblzIXiHjrjieiEEtgsxg9yJOJfq-SkpO0FA2H-88rXSnB5TmWGFLgIvtbEFr3XT7QFvKGl3" style="margin: 1em" width="200"/>
 
 To minimize or eliminate downtime requires very careful preparation. With this particular client, we had the luxury of their already having a secondary data center, which could accommodate a majority of the critical systems during the migration. We originally planned to leverage this by simply changing the external DNS records to point to this data center during the migration, but during planning determined that the external DNS record would not replicate worldwide quickly enough to meet the downtime needs of their global operation.
 
@@ -68,13 +69,15 @@ To minimize or eliminate downtime requires very careful preparation. With this p
 
 #### Solutions
 
-After discussing various approaches, we ended up using a load balancer. A load balancer is a network device that routes incoming traffic destined for a single destination (web site, application, or service) and 'shares' the incoming connections across multiple destination devices or services. In this case, the data center we were to migrate housed the client's critical systems like web servers, sql, etc. The secondary data center housed a replica (offline copy) of the critical systems using a replication technology (e.g. Actifio, Rubrik, SAN mirroring, VMWare SRM, or Zerto --- we used Actifio in this scenario).![](https://lh5.googleusercontent.com/LRumZsXWkWNlCb1Qy2hrP_rIUHsENrLdRcvqCaAcjnLjbnzRV5_xhzxZE7Ae0iU5zth9leQinwmxcHINoso5kRRITuUkw5dukoHXXoB_VNSOWdC9qFTrnAVm6r2KSWT4aUNhddPz)
+After discussing various approaches, we ended up using a load balancer. A load balancer is a network device that routes incoming traffic destined for a single destination (web site, application, or service) and 'shares' the incoming connections across multiple destination devices or services. In this case, the data center we were to migrate housed the client's critical systems like web servers, sql, etc. The secondary data center housed a replica (offline copy) of the critical systems using a replication technology (e.g. Actifio, Rubrik, SAN mirroring, VMWare SRM, or Zerto --- we used Actifio in this scenario).
+<img align="right" src="/https://lh5.googleusercontent.com/LRumZsXWkWNlCb1Qy2hrP_rIUHsENrLdRcvqCaAcjnLjbnzRV5_xhzxZE7Ae0iU5zth9leQinwmxcHINoso5kRRITuUkw5dukoHXXoB_VNSOWdC9qFTrnAVm6r2KSWT4aUNhddPz" style="margin: 1em" width="200"/>
 
 The customer had multiple systems with external DNS records and public IP addresses. We did not change the public DNS names for the critical systems. We did change the public IP addresses associated with the public DNS names, to point to the load balancer, which then pointed to the appropriate data center throughout the process. This setup enabled a gradual, flexible, and fully controlled transition to the new data center.
 
 * * * * *
 
-#### Summary![](https://lh3.googleusercontent.com/3xBfelArNw6-22IMkE6HQRyuP_9c2eHgbfTvXg2JnDFU9p8njADgWJ1-sp6bCjpm5HIifilJpN45FpE0YEhjttUcebz2uPte8qtc637znMFQ_UhmjoqEhYhPyP0KxR3zAdYuowIA)
+#### Summary
+<img align="right" src="https://lh3.googleusercontent.com/3xBfelArNw6-22IMkE6HQRyuP_9c2eHgbfTvXg2JnDFU9p8njADgWJ1-sp6bCjpm5HIifilJpN45FpE0YEhjttUcebz2uPte8qtc637znMFQ_UhmjoqEhYhPyP0KxR3zAdYuowIA" style="margin: 1em" width="200"/>
 
 Our client wanted to reduce their servers' power usage 40% by consolidating into a hyper-converged system. Other goals were to reduce floor space by 50%, and monthly recurring data center charges by 50%. We transitioned them to a new hardware stack (compute, storage, network, backup environment) in a Tier 4 data center, and saved them 50% percent on data center operation costs. Additionally, during the process we corrected issues associated with disaster recovery and business continuity, leaving the client's operations more resilient, cheaper, and more secure.
 
