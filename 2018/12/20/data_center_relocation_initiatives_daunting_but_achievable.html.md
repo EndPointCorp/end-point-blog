@@ -1,15 +1,12 @@
-Data Center Relocation Initiatives
-----------------------------------
-
+---
+author: Charles Chang
+gh_issue_number: 
+tags: windows, virtualization, storage, networking, integration, environment, disaster-recovery, company, infrastructure, data-center
+title: Data Center Relocation Initiatives: Daunting But Achievable
+---
 By Charles Chang - Friday, Dec. 10, 2018
 
-Tags: windows, virtualization, storage, networking, integration, environment, disaster-recovery, company, infrastructure, data-center
 
-### Data Center Relocation Initiatives: Daunting But Achievable
-
-###
-
-* * * * *
 
 #### Introduction
 
