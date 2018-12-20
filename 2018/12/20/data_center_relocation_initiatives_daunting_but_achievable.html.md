@@ -4,13 +4,13 @@ gh_issue_number:
 tags: windows, virtualization, storage, networking, integration, environment, disaster-recovery, company, infrastructure, data-center
 title: Data Center Relocation Initiatives: Daunting But Achievable
 ---
-By Charles Chang - Friday, Dec. 10, 2018
-
 
 
 #### Introduction
 
-A customer asked for our help dealing with logistical nightmares they encountered during a hardware update and data center relocation project. The customer had two active data centers, and wanted to relocate one of them to a modern Tier 4 facility to improve its performance and provide redundancy for critical systems. They also wanted to consolidate or decommission equipment to reduce recurring expenses and reduce their carbon footprint. The client decided to move to a Tier 4 data center because they provide across-the-board redundancy within the data center. ![](https://lh4.googleusercontent.com/KECQiaIv9vq6_8tCbnr0c-pp2Z_6ER66KYWzZ_UXyYLNA9nzqktf8r_kTmomYP2FLD4CiVJL6qkADhBJaUtof0V-riFdZpvqFjB2_8-vsyVtFsku5_74p-8_UA-ton5Wx9dqMWtL)
+A customer asked for our help dealing with logistical nightmares they encountered during a hardware update and data center relocation project. The customer had two active data centers, and wanted to relocate one of them to a modern Tier 4 facility to improve its performance and provide redundancy for critical systems. They also wanted to consolidate or decommission equipment to reduce recurring expenses and reduce their carbon footprint. The client decided to move to a Tier 4 data center because they provide across-the-board redundancy within the data center.
+
+<img align="right" src="https://lh4.googleusercontent.com/KECQiaIv9vq6_8tCbnr0c-pp2Z_6ER66KYWzZ_UXyYLNA9nzqktf8r_kTmomYP2FLD4CiVJL6qkADhBJaUtof0V-riFdZpvqFjB2_8-vsyVtFsku5_74p-8_UA-ton5Wx9dqMWtL" style="margin: 1em" width="200"/>
 
 #### Moving forward with Tier IV
 
