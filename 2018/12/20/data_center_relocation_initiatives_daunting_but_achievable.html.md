@@ -61,7 +61,7 @@ Here are some of our procedures for pre-migration preparation:
 * * * * *
 
 #### A Challenge: Eliminating Downtime 
-<img align="right" src="/https://lh5.googleusercontent.com/8tGYGGV_3X8iy_pi6Z_AdrJh014UaaMtyMm_-nIqNJ4kO4MoK3-RpVlA1_4Ds7eqHblzIXiHjrjieiEEtgsxg9yJOJfq-SkpO0FA2H-88rXSnB5TmWGFLgIvtbEFr3XT7QFvKGl3" style="margin: 1em" width="200"/>
+<img align="right" src="https://lh5.googleusercontent.com/8tGYGGV_3X8iy_pi6Z_AdrJh014UaaMtyMm_-nIqNJ4kO4MoK3-RpVlA1_4Ds7eqHblzIXiHjrjieiEEtgsxg9yJOJfq-SkpO0FA2H-88rXSnB5TmWGFLgIvtbEFr3XT7QFvKGl3" style="margin: 1em" width="200"/>
 
 To minimize or eliminate downtime requires very careful preparation. With this particular client, we had the luxury of their already having a secondary data center, which could accommodate a majority of the critical systems during the migration. We originally planned to leverage this by simply changing the external DNS records to point to this data center during the migration, but during planning determined that the external DNS record would not replicate worldwide quickly enough to meet the downtime needs of their global operation.
 
@@ -70,7 +70,7 @@ To minimize or eliminate downtime requires very careful preparation. With this p
 #### Solutions
 
 After discussing various approaches, we ended up using a load balancer. A load balancer is a network device that routes incoming traffic destined for a single destination (web site, application, or service) and 'shares' the incoming connections across multiple destination devices or services. In this case, the data center we were to migrate housed the client's critical systems like web servers, sql, etc. The secondary data center housed a replica (offline copy) of the critical systems using a replication technology (e.g. Actifio, Rubrik, SAN mirroring, VMWare SRM, or Zerto --- we used Actifio in this scenario).
-<img align="right" src="/https://lh5.googleusercontent.com/LRumZsXWkWNlCb1Qy2hrP_rIUHsENrLdRcvqCaAcjnLjbnzRV5_xhzxZE7Ae0iU5zth9leQinwmxcHINoso5kRRITuUkw5dukoHXXoB_VNSOWdC9qFTrnAVm6r2KSWT4aUNhddPz" style="margin: 1em" width="200"/>
+<img align="right" src="https://lh5.googleusercontent.com/LRumZsXWkWNlCb1Qy2hrP_rIUHsENrLdRcvqCaAcjnLjbnzRV5_xhzxZE7Ae0iU5zth9leQinwmxcHINoso5kRRITuUkw5dukoHXXoB_VNSOWdC9qFTrnAVm6r2KSWT4aUNhddPz" style="margin: 1em" width="200"/>
 
 The customer had multiple systems with external DNS records and public IP addresses. We did not change the public DNS names for the critical systems. We did change the public IP addresses associated with the public DNS names, to point to the load balancer, which then pointed to the appropriate data center throughout the process. This setup enabled a gradual, flexible, and fully controlled transition to the new data center.
 
