@@ -1,6 +1,6 @@
 ---
 author: Charles Chang
-gh_issue_number: 
+gh_issue_number: 1475
 tags: windows, virtualization, storage, networking, integration, environment, disaster-recovery, company, infrastructure, data-center
 title: Data Center Relocation Initiatives: Daunting But Achievable
 ---
