@@ -19,11 +19,15 @@ A customer asked for our help dealing with logistical nightmares they encountere
 
 Enterprises typically transition to Tier 4 data centers because they offer the highest uptime guarantees, and have zero single points of failure. These facilities are fully redundant in terms of electrical circuits, cooling and networking. This architecture is best able to withstand even the most serious technical incidents without server availability being affected. Tier IV facilities have contracts with disaster management companies who will provide them, for example, with fuel in the event that a natural disaster damages the power grid.
 
+
+
 * * * * *
 
 (More information about the four data center levels is at the end of the this post.)
 
 * * * * *
+
+
 
 ##### Key Issues
 
