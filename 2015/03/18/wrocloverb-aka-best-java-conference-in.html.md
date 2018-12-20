@@ -2,10 +2,10 @@
 author: Wojtek Ziniewicz
 gh_issue_number: 1102
 tags: clojure, conference, erlang, functional-programming, javascript, ruby
-title: wroclove.rb a.k.a. “The best Java conference in Ruby world”
+title: wroc_love.rb a.k.a. “The best Java conference in Ruby world”
 ---
 
-**Time and Date:** 13-15th March 2015
+**Time and Date:** 13–15th March 2015
 
 **Place:** Wrocław University
 
@@ -28,4 +28,3 @@ There was also a fascinating talk about some aspects of social engineering in so
 <blockquote class="twitter-tweet" lang="en">
 .<a href="https://twitter.com/ziobrando">@ziobrando</a> in action. When walls are no longer enough... for <a href="https://twitter.com/hashtag/EventStorming?src=hash">#EventStorming</a>. Which is awesome by the way <a href="https://twitter.com/hashtag/wrocloverb?src=hash">#wrocloverb</a> <a href="http://t.co/Oq06nFaGub">pic.twitter.com/Oq06nFaGub</a><br />
 — a candid mind (@aCandidMind) <a href="https://twitter.com/aCandidMind/status/577486878330511360">March 16, 2015</a></blockquote>
-<script async="" charset="utf-8" src="//platform.twitter.com/widgets.js"></script>
