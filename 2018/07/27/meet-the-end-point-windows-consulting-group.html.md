@@ -9,7 +9,7 @@ As the share of internet traffic passing through mobile devices hovers around 50
 
 At End Point, we take pride in being a multi-platform organization and using open source technologies in real-world business environments. Our internal chat service, wiki, and many other libraries and tools we employ across our client base are all open source. However, for various reasons many companies choose Microsoft’s solutions including long-time standards Windows Server, Active Directory, and Exchange.
 
-With the [acquisition of Series Digital in 2017](/blog/2017/06/01/series-digital-joins-end-point) and the addition of **Dan Briones** to our staff, End Point has begun supporting Windows infrastructure in a new way. In 2018 we’ve recently added two new engineers to the mix, **Chris Hopkins** and **Charles Chang**, to form a full-service Windows consulting team, all local to our New York City office on Park Avenue.
+In April 2017, **Dan Briones** came to End Point to head up the company’s new Windows infrastructure services. In 2018 we added two new engineers to the mix, **Chris Hopkins** and **Charles Chang**, to form a full-service Windows consulting team, all local to our New York City office on Park Avenue.
 
 ### Dan Briones
 
