@@ -5,8 +5,6 @@ tags: liquid-galaxy, video, philanthropy, education, non-profit, culture
 title: "VISGRAF and the Moreira Salles Institute to Collaborate Using Liquid Galaxy"
 ---
 
-Title:  VISGRAF and the Moreira Salles Institute to Collaborate Using Liquid Galaxy
-
 In 2017, End Point donated a Liquid Galaxy to [the Institute of Pure and Applied Mathematics](https://impa.br/) (IMPA) in Rio De Janeiro. The Institute is home to VISGRAF, a laboratory specializing in computer graphics research, including AR, VR, visualization, and computer vision.
 
 IMPA recently formed a [partnership](https://www.visgraf.impa.br/ims/#works&gid=1&pid=1) with a leading Brazilian cultural institution, [the Moreira Sales Institute](https://ims.com.br/) (IMS). The IMS stewards a vast collection of culturally important Brazilian photography, music, literature, and art. IMS moved to collaborate with IMPA because of its core mission of promoting broad access to these historically valuable artifacts.
