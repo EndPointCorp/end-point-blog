@@ -1,6 +1,6 @@
 ---
 author: Liquid Galaxy Team
-gh_issue_number: 
+gh_issue_number: 1483
 tags: liquid-galaxy, video, philanthropy, education, non-profit, culture
 title: "VISGRAF and the Moreira Salles Institute to Collaborate Using Liquid Galaxy"
 ---
