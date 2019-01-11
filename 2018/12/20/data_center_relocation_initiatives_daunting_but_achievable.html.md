@@ -78,7 +78,7 @@ Our client wanted to reduce their servers’ power usage 40% by consolidating in
 
 #### Tier IV (Best)
 
-Tier IV data centers have redundancies for every process and data protection stream. No single outage or error can shut down the system. To keep Tier IV ranking, data centers must have 99.995% minimum uptime per year. They come equipped with 2N+1 infrastructure (two times the amount required for operation plus a backup), which is considered “fully redundant.”
+Tier IV data centers have redundancies for every process and data protection stream. No single outage or error can shut down the system. To keep Tier IV ranking, data centers must have 99.995% minimum uptime per year. They come equipped with 2N+1 infrastructure (two times the amount required for operation plus a backup), which is considered “fully redundant.”
 
 #### Tier III (Average)
 
@@ -86,7 +86,7 @@ N+1 (the amount required for operation plus a backup) fault tolerance, which mea
 
 #### Tier II (Minimal)
 
-99.749% minimum uptime. Tier II facilities have considerably more downtime than Tier III facilities, primarily because Tier II facilities have less redundancy. They do however have partial cooling redundancy and multiple power redundancies.
+99.749% minimum uptime. Tier II facilities have considerably more downtime than Tier III facilities, primarily because Tier II facilities have less redundancy. They do however have partial cooling redundancy and multiple power redundancies.
 
 #### Tier I (Basic, Cheapest)
 
