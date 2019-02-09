@@ -2,6 +2,7 @@
 title: "Adding Awesomplete to Vue Components"
 author: Patrick Lewis
 tags: vue, javascript
+gh_issue_number: 1492
 ---
 
 <img src="/blog/2019/01/31/adding-awesomplete-to-vue-components/banner.jpg" alt="IBM Model M SSK keyboard" />
