@@ -43,7 +43,7 @@ Windows 10 LTSC/LTSB editions also follow the Fixed Lifecycle policy. To learn m
 
 <table>
 <thead><tr><th>OS Version</th><th>Date of Availability</th><th>Mainstream Support End Date</th><th>Extended Support End Date</th></tr></thead><tbody>
- <tr><td>Windows 10 Enterprise LTSC 2019 / Windows 10 IoT Enterprise LTSC 2019"</td><td>November 13, 2018</td><td>January 9, 2024</td><td>January 9, 2029</td></tr>
+ <tr><td>Windows 10 Enterprise LTSC 2019 / Windows 10 IoT Enterprise LTSC 2019</td><td>November 13, 2018</td><td>January 9, 2024</td><td>January 9, 2029</td></tr>
  <tr><td>Windows 10 Enterprise 2016 LTSB / Windows 10 IoT Enterprise 2016 LTSB</td><td>August 2, 2016</td><td>October 12, 2021</td><td>October 13, 2026</td></tr>
  <tr><td>Windows 10 Enterprise 2015 LTSB / Windows 10 IoT Enterprise 2015 LTSB</td><td>July 29, 2015</td><td>October 13, 2020</td><td>October 14, 2025</td></tr>
 </tbody></table>
