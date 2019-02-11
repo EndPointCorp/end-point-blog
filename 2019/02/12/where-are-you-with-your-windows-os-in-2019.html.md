@@ -21,25 +21,9 @@ See the charts below to learn when service will end for various versions of Wind
 
 * * * * *
 
-<style type="text/css">
-	table.tableizer-table {
-		font-size: 12px;
-		border: 1px solid #CCC; 
-		font-family: Arial, Helvetica, sans-serif;
-	} 
-	.tableizer-table td {
-		padding: 4px;
-		margin: 3px;
-		border: 1px solid #CCC;
-	}
-	.tableizer-table th {
-		background-color: #104E8B; 
-		color: #FFF;
-		font-weight: bold;
-	}
-</style>
-<table class="tableizer-table">
-<thead><tr class="tableizer-firstrow"><th>OS Version</th><th>Date of Availability</th><th>End of Service for Home, Pro, and Pro for Workstation Editions</th><th>End of Service for Enterprise and Education Editions</th></tr></thead><tbody>
+
+<table>
+<thead><tr><th>OS Version</th><th>Date of Availability</th><th>End of Service for Home, Pro, and Pro for Workstation Editions</th><th>End of Service for Enterprise and Education Editions</th></tr></thead><tbody>
  <tr><td>Windows 10, version 1809</td><td>November 13, 2018</td><td>May 12, 2020</td><td>May 11, 2021</td></tr>
  <tr><td>Windows 10, version 1803</td><td>April 30, 2018</td><td>November 12, 2019</td><td>November 10, 2020</td></tr>
  <tr><td>Windows 10, version 1709</td><td>October 17, 2017</td><td>April 9, 2019</td><td>April 14, 2020</td></tr>
