@@ -1,0 +1,297 @@
+---
+author: Dan Briones
+gh_issue_number: 1489
+tags: windows, windows-rmm, security, operating-systems, microsoft
+title: "Where Are You With Your Windows OS in 2019?"
+---
+
+It should be of little surprise that on January 14, 2020, after a decade of Windows 7, Microsoft will stop providing security updates and support for this older operating system. Windows 7 was released in 2009, and due to its stability enjoyed many years as the go-to operating system for home and business alike. Even now, it is estimated by [NetMarketShare](https://netmarketshare.com/operating-system-market-share.aspx) that over 40% of businesses still rely on it. Despite Microsoft having ended mainstream support for Windows 7 in 2015, it still offered extended support because of the operating system's popularity, and the generally slow adoption of newer releases. However that support shall shall soon end, as will support for Windows Server 2008R2 (release 2), which also remains in wide use. Organizations of all kinds will need to upgrade to newer operating systems to remain secure.
+
+The corporate adoption of Windows 8 and 8.1 may have been slow in part due to Microsoft's radical changes to the user interface, such as replacing navigation menus with information-filled "live" tiles. Windows 10, however, was designed as a compromise, providing a Windows-7-like start menu, while preserving the live tile interface for accessing applications and services from the desktop. There are many compelling reasons for moving to Windows 10 from Windows 7. The most notable is that it will no longer receive any security updates, creating serious security and compliance issues.
+
+In 2018, Microsoft adopted a Semi-Annual Channel (SAC) governed by the[  Modern Lifecycle Policy](https://support.microsoft.com/en-us/help/30881). This means that feature updates are released to the public twice a year, around March and September. Updates are cumulative. Updating to these releases is required to remain eligible for support from Microsoft. Security updates are released monthly and quarterly as rollups, and critical updates are released as needed. This is part of Microsoft's plan to minimize vulnerabilities and security exposure in an ever changing digital world.
+
+At End Point we consider keeping our clients' systems updated both fundamental and essential. Companies need stable systems in order to operate, and uptime is of critical importance. This is one reason we offer our RMM (Remote Management and Monitoring) services. We connect with our clients' systems to receive custom-defined policies for patching, then monitor and test updates before we deploy them on the cycle that best suits our customer's workflow.
+
+End Point is committed to helping our clients transition safely and efficiently to Windows 10. It can be a lengthy process when accounting for the time it takes to properly test all business applications and processes before transitioning to a new OS, and the time it takes to make any necessary hardware changes and complete the update.
+
+See the charts below to learn when service will end for various versions of Windows, and contact End Point for a consultation on the best ways to manage your IT to keep your organization secure.
+
+### Windows 10
+
+* * * * *
+
+|
+
+OS Version
+
+ |
+
+Date of Availability
+
+ |
+
+End of Service for Home, Pro, and Pro for Workstation Editions
+
+ |
+
+End of Service for Enterprise and Education Editions
+
+ |
+|
+
+Windows 10, version 1809
+
+ |
+
+November 13, 2018
+
+ |
+
+May 12, 2020
+
+ |
+
+May 11, 2021
+
+ |
+|
+
+Windows 10, version 1803
+
+ |
+
+April 30, 2018
+
+ |
+
+November 12, 2019
+
+ |
+
+November 10, 2020
+
+ |
+|
+
+Windows 10, version 1709
+
+ |
+
+October 17, 2017
+
+ |
+
+April 9, 2019
+
+ |
+
+April 14, 2020
+
+ |
+|
+
+Windows 10, version 1703
+
+ |
+
+April 5, 2017
+
+ |
+
+October 9, 2018
+
+ |
+
+October 8, 2019
+
+ |
+|
+
+Windows 10, version 1607
+
+ |
+
+August 2, 2016
+
+ |
+
+April 10, 2018
+
+ |
+
+April 9, 2019
+
+ |
+|
+
+Windows 10, version 1511
+
+ |
+
+November 10, 2015
+
+ |
+
+October 10, 2017
+
+ |
+
+October 10, 2017
+
+ |
+|
+
+Windows 10, released July 2015 (version 1507)
+
+ |
+
+July 29, 2015
+
+ |
+
+May 9, 2017
+
+ |
+
+May 9, 2017
+
+ |\
+Note: Not all features in an update will work on all devices. A device may not be able to receive updates if the device hardware is incompatible, lacks current drivers, or is otherwise outside the original equipment manufacturers (OEM) support period.
+
+### Enterprise LTSC/LTSB Editions
+
+* * * * *
+
+Windows 10 LTSC/LTSB editions also follow the Fixed Lifecycle policy. To learn more, see [Microsoft Business, Developer and Desktop Operating Systems Policy](https://support.microsoft.com/en-us/help/14085).
+
+|
+
+OS Version
+
+ |
+
+Date of Availability
+
+ |
+
+Mainstream Support End Date
+
+ |
+
+Extended Support End Date
+
+ |
+|
+
+Windows 10 Enterprise LTSC 2019
+
+Windows 10 IoT Enterprise LTSC 2019
+
+ |
+
+November 13, 2018
+
+ |
+
+January 9, 2024
+
+ |
+
+January 9, 2029
+
+ |
+|
+
+Windows 10 Enterprise 2016 LTSB
+
+Windows 10 IoT Enterprise 2016 LTSB
+
+ |
+
+August 2, 2016
+
+ |
+
+October 12, 2021
+
+ |
+
+October 13, 2026
+
+ |
+|
+
+Windows 10 Enterprise 2015 LTSB
+
+Windows 10 IoT Enterprise 2015 LTSB
+
+ |
+
+July 29, 2015
+
+ |
+
+October 13, 2020
+
+ |
+
+October 14, 2025
+
+ |
+
+##### Note: Not all features in an update will work on all devices. A device may not be able to receive updates if the device hardware is incompatible, lacks current drivers, or is otherwise outside the original equipment manufacturers (OEM) support period.
+
+For more information on the Windows 10 lifecycle, see [Windows 10 Client and Windows Server Semi-Annual Channel Lifecycle Policy update (February 1, 2018)](https://support.microsoft.com/en-us/help/4076506) or the [Windows 10 release information](https://technet.microsoft.com/windows/release-info.aspx) page. To learn more about the Windows 10 mobile lifecycle, see [Windows 10 Mobile](https://support.microsoft.com/lifecycle/search?alpha=Windows%2010%20Mobile).
+
+### Windows 8.1 and 7
+
+* * * * *
+
+Prior releases of the Windows operating system are likewise governed by the Fixed Lifecycle Policy. This policy comprises two phases: mainstream support and extended support. See [Microsoft Business, Developer and Desktop Operating Systems Policy](https://support.microsoft.com/en-us/help/14085) for more details.
+
+|
+
+OS Version
+
+ |
+
+End of Mainstream Support
+
+ |
+
+End of Extended Support
+
+ |
+|
+
+Windows 8.1
+
+ |
+
+January 9, 2018
+
+ |
+
+January 10, 2023
+
+ |
+|
+
+Windows 7, service pack 1*
+
+ |
+
+January 13, 2015
+
+ |
+
+January 14, 2020
+
+ |
+
+##### * Support for Windows 7 RTM without service packs ended on April 9, 2013. Be sure to install [Windows 7 Service Pack 1](https://support.microsoft.com/en-us/help/15090) to continue to receive support and updates.
+
+Prior versions of Windows, including Windows 7 and Windows 8.1, have limited support when running on new processors and chipsets from manufacturers like Intel, AMD, NVidia, and Qualcomm. For more information, see the [Microsoft Lifecycle Policy](http://go.microsoft.com/fwlink/p/?LinkId=722733). A device may not be able to run prior versions of Windows if the device hardware is incompatible, lacks current drivers, or is otherwise outside the original equipment manufacturers (OEM) support period.
+
+Windows life cycle charts and information were taken from Microsoft Support[  Site](https://support.microsoft.com/en-us/help/13853/windows-lifecycle-fact-sheet).
