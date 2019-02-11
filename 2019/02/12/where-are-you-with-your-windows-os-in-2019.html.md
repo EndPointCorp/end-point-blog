@@ -42,26 +42,13 @@ Note: Not all features in an update will work on all devices. A device may not b
 Windows 10 LTSC/LTSB editions also follow the Fixed Lifecycle policy. To learn more, see [Microsoft Business, Developer and Desktop Operating Systems Policy](https://support.microsoft.com/en-us/help/14085).
 
 <table>
-<thead><tr><th></th></tr></thead><tbody>
- <tr><td>OS Version</td></tr>
- <tr><td>Date of Availability</td></tr>
- <tr><td>Mainstream Support End Date</td></tr>
- <tr><td>Extended Support End Date</td></tr>
- <tr><td>Windows 10 Enterprise LTSC 2019</td></tr>
- <tr><td>Windows 10 IoT Enterprise LTSC 2019</td></tr>
- <tr><td>November 13, 2018</td></tr>
- <tr><td>January 9, 2024</td></tr>
- <tr><td>January 9, 2029</td></tr>
- <tr><td>Windows 10 Enterprise 2016 LTSB</td></tr>
- <tr><td>Windows 10 IoT Enterprise 2016 LTSB</td></tr>
- <tr><td>August 2, 2016</td></tr>
- <tr><td>October 12, 2021</td></tr>
- <tr><td>October 13, 2026</td></tr>
- <tr><td>Windows 10 Enterprise 2015 LTSB</td></tr>
- <tr><td>Windows 10 IoT Enterprise 2015 LTSB</td></tr>
- <tr><td>July 29, 2015</td></tr>
- <tr><td>October 13, 2020</td></tr>
- <tr><td>October 14, 2025</td></tr>
+<thead><tr><th>OS Version</th><th>Date of Availability</th><th>Mainstream Support End Date</th><th>Extended Support End Date</th></tr></thead><tbody>
+ <tr><td>"Windows 10 Enterprise LTSC 2019</td></tr>
+ <tr><td>Windows 10 IoT Enterprise LTSC 2019"</td><td>November 13, 2018</td><td>January 9, 2024</td><td>January 9, 2029</td></tr>
+ <tr><td>"Windows 10 Enterprise 2016 LTSB</td></tr>
+ <tr><td>Windows 10 IoT Enterprise 2016 LTSB"</td><td>August 2, 2016</td><td>October 12, 2021</td><td>October 13, 2026</td></tr>
+ <tr><td>"Windows 10 Enterprise 2015 LTSB</td></tr>
+ <tr><td>Windows 10 IoT Enterprise 2015 LTSB"</td><td>July 29, 2015</td><td>October 13, 2020</td><td>October 14, 2025</td></tr>
 </tbody></table>
 
 ##### Note: Not all features in an update will work on all devices. A device may not be able to receive updates if the device hardware is incompatible, lacks current drivers, or is otherwise outside the original equipment manufacturers (OEM) support period.
@@ -75,16 +62,9 @@ For more information on the Windows 10 lifecycle, see [Windows 10 Client and Win
 Prior releases of the Windows operating system are likewise governed by the Fixed Lifecycle Policy. This policy comprises two phases: mainstream support and extended support. See [Microsoft Business, Developer and Desktop Operating Systems Policy](https://support.microsoft.com/en-us/help/14085) for more details.
 
 <table>
-<thead><tr><th></th></tr></thead><tbody>
- <tr><td>OS Version</td></tr>
- <tr><td>End of Mainstream Support</td></tr>
- <tr><td>End of Extended Support</td></tr>
- <tr><td>Windows 8.1</td></tr>
- <tr><td>January 9, 2018</td></tr>
- <tr><td>January 10, 2023</td></tr>
- <tr><td>Windows 7, service pack 1*</td></tr>
- <tr><td>January 13, 2015</td></tr>
- <tr><td>January 14, 2020 </td></tr>
+<thead><tr><th>OS Version</th><th>End of Mainstream Support</th><th>End of Extended Support</th></tr></thead><tbody>
+ <tr><td>Windows 8.1</td><td>January 9, 2018</td><td>January 10, 2023</td></tr>
+ <tr><td>Windows 7, service pack 1*</td><td>January 13, 2015</td><td>January 14, 2020</td></tr>
 </tbody></table>
 
 ##### * Support for Windows 7 RTM without service packs ended on April 9, 2013. Be sure to install [Windows 7 Service Pack 1](https://support.microsoft.com/en-us/help/15090) to continue to receive support and updates.
