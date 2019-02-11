@@ -21,142 +21,34 @@ See the charts below to learn when service will end for various versions of Wind
 
 * * * * *
 
-|
+<style type="text/css">
+	table.tableizer-table {
+		font-size: 12px;
+		border: 1px solid #CCC; 
+		font-family: Arial, Helvetica, sans-serif;
+	} 
+	.tableizer-table td {
+		padding: 4px;
+		margin: 3px;
+		border: 1px solid #CCC;
+	}
+	.tableizer-table th {
+		background-color: #104E8B; 
+		color: #FFF;
+		font-weight: bold;
+	}
+</style>
+<table class="tableizer-table">
+<thead><tr class="tableizer-firstrow"><th>OS Version</th><th>Date of Availability</th><th>End of Service for Home, Pro, and Pro for Workstation Editions</th><th>End of Service for Enterprise and Education Editions</th></tr></thead><tbody>
+ <tr><td>Windows 10, version 1809</td><td>November 13, 2018</td><td>May 12, 2020</td><td>May 11, 2021</td></tr>
+ <tr><td>Windows 10, version 1803</td><td>April 30, 2018</td><td>November 12, 2019</td><td>November 10, 2020</td></tr>
+ <tr><td>Windows 10, version 1709</td><td>October 17, 2017</td><td>April 9, 2019</td><td>April 14, 2020</td></tr>
+ <tr><td>Windows 10, version 1703</td><td>April 5, 2017</td><td>October 9, 2018</td><td>October 8, 2019</td></tr>
+ <tr><td>Windows 10, version 1607</td><td>August 2, 2016</td><td>April 10, 2018</td><td>April 9, 2019</td></tr>
+ <tr><td>Windows 10, version 1511</td><td>November 10, 2015</td><td>October 10, 2017</td><td>October 10, 2017</td></tr>
+ <tr><td>Windows 10, released July 2015 (version 1507)</td><td>July 29, 2015</td><td>May 9, 2017</td><td>May 9, 2017</td></tr>
+</tbody></table>
 
-OS Version
-
- |
-
-Date of Availability
-
- |
-
-End of Service for Home, Pro, and Pro for Workstation Editions
-
- |
-
-End of Service for Enterprise and Education Editions
-
- |
-|
-
-Windows 10, version 1809
-
- |
-
-November 13, 2018
-
- |
-
-May 12, 2020
-
- |
-
-May 11, 2021
-
- |
-|
-
-Windows 10, version 1803
-
- |
-
-April 30, 2018
-
- |
-
-November 12, 2019
-
- |
-
-November 10, 2020
-
- |
-|
-
-Windows 10, version 1709
-
- |
-
-October 17, 2017
-
- |
-
-April 9, 2019
-
- |
-
-April 14, 2020
-
- |
-|
-
-Windows 10, version 1703
-
- |
-
-April 5, 2017
-
- |
-
-October 9, 2018
-
- |
-
-October 8, 2019
-
- |
-|
-
-Windows 10, version 1607
-
- |
-
-August 2, 2016
-
- |
-
-April 10, 2018
-
- |
-
-April 9, 2019
-
- |
-|
-
-Windows 10, version 1511
-
- |
-
-November 10, 2015
-
- |
-
-October 10, 2017
-
- |
-
-October 10, 2017
-
- |
-|
-
-Windows 10, released July 2015 (version 1507)
-
- |
-
-July 29, 2015
-
- |
-
-May 9, 2017
-
- |
-
-May 9, 2017
-
- |\
 Note: Not all features in an update will work on all devices. A device may not be able to receive updates if the device hardware is incompatible, lacks current drivers, or is otherwise outside the original equipment manufacturers (OEM) support period.
 
 ### Enterprise LTSC/LTSB Editions
