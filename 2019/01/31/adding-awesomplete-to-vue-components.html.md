@@ -7,13 +7,13 @@ gh_issue_number: 1492
 
 <img src="/blog/2019/01/31/adding-awesomplete-to-vue-components/banner.jpg" alt="IBM Model M SSK keyboard" />
 
-[Awesomplete](https://leaverou.github.io/awesomplete/) is an <em>“Ultra lightweight, customizable, simple autocomplete widget with zero dependencies, built with modern standards for modern browsers”</em>.
+[Awesomplete](https://leaverou.github.io/awesomplete/) is an “Ultra lightweight, customizable, simple autocomplete widget with zero dependencies, built with modern standards for modern browsers.”
 
-Awesomplete caught my attention when I was looking for a lightweight autocomplete implementation to add to an existing, heavily styled form in a Vue.js single-file component. There are no fewer than 10 options on the [Awesome Vue.js](https://github.com/vuejs/awesome-vue#autocomplete) list of autocomplete libraries, but many of them brought their own dependencies or custom styling and I was looking for something simpler to add autocomplete features to my form.
+Awesomplete caught my attention when I was looking for a lightweight autocomplete implementation to add to an existing, heavily styled form in a Vue.js single-​file component. There are no fewer than 10 options on the [Awesome Vue.js](https://github.com/vuejs/awesome-vue#autocomplete) list of autocomplete libraries, but many of them brought their own dependencies or custom styling and I was looking for something simpler to add autocomplete features to my form.
 
-I have created a [live JSFiddle demo](https://jsfiddle.net/endpointpatrick/9czpvo58/9/) showing an implementation of Awesomplete in a Vue.js app, but the remainder of this post contains more details about adding Awesomplete to a single-file component in a larger Vue application.
+I have created a [live JSFiddle demo](https://jsfiddle.net/endpointpatrick/9czpvo58/9/) showing an implementation of Awesomplete in a Vue.js app, but the remainder of this post contains more details about adding Awesomplete to a single-​file component in a larger Vue application.
 
-Here is a screenshot and sample code for a simplified version of the Vue single-file component that I was working with:
+Here is a screenshot and sample code for a simplified version of the Vue single-​file component that I was working with:
 
 <img src="/blog/2019/01/31/adding-awesomplete-to-vue-components/form.png" alt="Simple form" />
 
@@ -52,7 +52,7 @@ export default {
 </script>
 ```
 
-In my actual application I was populating the data object with API data via [vue-apollo](https://github.com/Akryum/vue-apollo), but I’ve hard-coded the array of strings here for simplicity.
+In my actual application I was populating the data object with API data via [vue-apollo](https://github.com/Akryum/vue-apollo), but I’ve hard-​coded the array of strings here for simplicity.
 
 Adding autocomplete to my form with Awesomplete was as easy as adding the package to my project with `yarn awesomplete` and then updating the Vue component to load the library and attach it to my form:
 
