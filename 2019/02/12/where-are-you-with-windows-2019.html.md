@@ -5,6 +5,8 @@ tags: windows, security
 gh_issue_number: 1489
 ---
 
+<img src="/blog/2019/02/12/where-are-you-with-windows-2019/image-0.jpg" alt="Windows home row" /><br><a href="https://www.flickr.com/photos/bradleypjohnson/6139142250/">Photo by bradleypjohnson</a> · <a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0</a>
+
 It should be of little surprise that on January 14, 2020, after a decade of Windows&nbsp;7, Microsoft will stop providing security updates and support for this older operating system. Windows&nbsp;7 was released in 2009, and due to its stability enjoyed many years as the go-to operating system for home and business alike.
 
 Even now, it is estimated by [NetMarketShare](https://netmarketshare.com/operating-system-market-share.aspx) that over 40% of businesses still rely on it. Despite Microsoft having ended mainstream support for Windows&nbsp;7 in 2015, it still offered extended support because of the operating system’s popularity, and the generally slow adoption of newer releases. However, that support shall soon end, as will support for Windows Server 2008 R2 (release 2), which also remains in wide use. Organizations of all kinds will need to upgrade to newer operating systems to remain secure.

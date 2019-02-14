@@ -1,13 +1,15 @@
 ---
 author: "Selvakumar Arumugam"
 title: "How to Migrate from Microsoft SQL Server to PostgreSQL"
-tags: pentaho, postgres, database
+tags: pentaho, postgres, database, sql, sql-server
 gh_issue_number: 1493
 ---
 
-One of our clients had a Java-based application stack on Linux servers with a pretty old version of SQL Server. We decided to migrate from SQL Server to PostgreSQL to make the entire application stack more stable with regular updates and better service from our Postgres experts.
+One of our clients had a Java-​based application stack on Linux that connected to a pretty old version of SQL Server on Windows. We wanted to migrate the entire system to a more consistent unified stack that developers are efficient with, and that is current so it receives regular updates.
 
-I was experimenting with a few approaches to the migration and decided to go with the process of schema migration and then the data migration approach which is referred to on the Postgres wiki page. Let’s walk through the process of migration step by step.
+We decided to migrate the database from SQL Server to PostgreSQL on Linux because porting the database, while not entirely quick or simple, was still much simpler than porting the app in .NET/C# would have been. Rewriting the application would have taken far longer, been much riskier to the business, and cost a lot more.
+
+I experimented with a few approaches to the migration and decided to go with the process of schema migration and then the data migration approach which is referred to on the Postgres wiki page. Let’s walk through the process of migration step by step.
 
 ### Schema Migration
 
@@ -16,15 +18,15 @@ A schema of the SQL Server database tables and views needs to be exported to per
 #### Export SQL Server Database Schema
 In SQL Management Studio, right click on the database and select Tasks -> Generate Scripts.
 
-<img src="/blog/2019/01/23/how-to-migrate-from-sql-server-to-postgresql/generate-scripts.png" alt='Generate Scripts' />
+<img src="/blog/2019/01/23/migrate-from-sql-server-to-postgresql/generate-scripts.png" alt='Generate Scripts' />
 
 Choose “Select specific database objects” and check only your application schema Tables (untick dbo schema objects and others if any).
 
-<img src="/blog/2019/01/23/how-to-migrate-from-sql-server-to-postgresql/choose-tables.png" alt="Choose tables" />
+<img src="/blog/2019/01/23/migrate-from-sql-server-to-postgresql/choose-tables.png" alt="Choose tables" />
 
 Ensure that “Types of data to script” in advanced options is set to “Schema only”.
 
-<img src="/blog/2019/01/23/how-to-migrate-from-sql-server-to-postgresql/schema-only.png" alt="Schema Only" />
+<img src="/blog/2019/01/23/migrate-from-sql-server-to-postgresql/schema-only.png" alt="Schema Only" />
 
 Review and save the database tables schema file (tables.sql). Use WinSCP and public key auth to transfer tables.sql to the linux server.
 
@@ -104,13 +106,13 @@ File -> New -> Job
 
 Click View in left sidebar -> Right Click ‘Database Connections’ -> Choose New -> Provide SQL Server connection details
 
-<img src="/blog/2019/01/23/how-to-migrate-from-sql-server-to-postgresql/sqlserver-database-connection.png" alt="SQL Server Database" />
+<img src="/blog/2019/01/23/migrate-from-sql-server-to-postgresql/sqlserver-database-connection.png" alt="SQL Server Database" />
 
 3\. Create Destination Database Connection
 
 Click View in left sidebar -> Right Click ‘Database Connections’ -> Choose New -> Provide Postgres connection details
 
-<img src="/blog/2019/01/23/how-to-migrate-from-sql-server-to-postgresql/postgres-database-connection.png" alt="PostgreSQL Database" />
+<img src="/blog/2019/01/23/migrate-from-sql-server-to-postgresql/postgres-database-connection.png" alt="PostgreSQL Database" />
 
 4\. From Wizard menu, choose Copy Tables Wizard
 
@@ -118,19 +120,19 @@ Tools -> Wizard -> Copy Tables
 
 5\. Choose Source and Destination databases
 
-<img src="/blog/2019/01/23/how-to-migrate-from-sql-server-to-postgresql/source-destination.png" alt="Source and Destination" />
+<img src="/blog/2019/01/23/migrate-from-sql-server-to-postgresql/source-destination.png" alt="Source and Destination" />
 
 6\. Select the list of tables to migrate
 
-<img src="/blog/2019/01/23/how-to-migrate-from-sql-server-to-postgresql/source-destination.png" alt="Source and Destination" />
+<img src="/blog/2019/01/23/migrate-from-sql-server-to-postgresql/source-destination.png" alt="Source and Destination" />
 
 7\. Move forward to choose the path for job and transformation files
 
-<img src="/blog/2019/01/23/how-to-migrate-from-sql-server-to-postgresql/create-job.png" alt="Create Job" />
+<img src="/blog/2019/01/23/migrate-from-sql-server-to-postgresql/create-job.png" alt="Create Job" />
 
 8\. The transformations were created to copy data from source to destination database. 
 
-<img src="/blog/2019/01/23/how-to-migrate-from-sql-server-to-postgresql/job-view.png" alt="Job Steps" />
+<img src="/blog/2019/01/23/migrate-from-sql-server-to-postgresql/job-view.png" alt="Job Steps" />
 
 9\. Copy the Pentaho Data Integration tarball and job with transformations to Postgres server to avoid network latency on data migration.
 
@@ -237,4 +239,4 @@ After migration, we performed extensive testing on the application and optimised
 
 The entire migration was automated with a script to test multiple times and reduce manual intervention to perform error free process. The automated script is available to customize based on your scenario.
 
-<a href="/blog/2019/01/23/how-to-migrate-from-sql-server-to-postgresql/sqlserver-postgres-migration-automation.sh">sqlserver-postgres-migration-automation.sh</a>
+<a href="/blog/2019/01/23/migrate-from-sql-server-to-postgresql/sqlserver-postgres-migration-automation.sh">sqlserver-postgres-migration-automation.sh</a>
