@@ -71,4 +71,4 @@ Prior releases of the Windows operating system are likewise governed by the Fixe
 
 Prior versions of Windows, including Windows&nbsp;7 and Windows&nbsp;8.1, have limited support when running on new processors and chipsets from manufacturers like Intel, AMD, Nvidia, and Qualcomm. For more information, see the [Microsoft Lifecycle Policy](http://go.microsoft.com/fwlink/p/?LinkId=722733). A device may not be able to run prior versions of Windows if the device hardware is incompatible, lacks current drivers, or is otherwise outside the original equipment manufacturer’s (OEM) support period.
 
-Windows life cycle charts and information were taken from Microsoft’s windows support [site](https://support.microsoft.com/en-us/help/13853/windows-lifecycle-fact-sheet).
+(Windows life cycle charts and information were taken from Microsoft’s windows support [site](https://support.microsoft.com/en-us/help/13853/windows-lifecycle-fact-sheet).)

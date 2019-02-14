@@ -18,7 +18,7 @@ Right, so, show of hands: How many of you work on some bit of web code by doing 
 
 Are you fidgeting nervously thinking about that? Sorry. ☹ But also, check out this little thing: [DevCamps](http://www.devcamps.org/). It’s been an End Point staple for quite a while now, so if you’ve read our blog before you might have heard about it.
 
-Long story short, in addition to any local development you do, this system will spin up your own little environments (“camps”) on a remote development server. Each camp includes a checkout of the code, a separate httpd/​nginx and app processes, and a dedicated database with a clone of the data. What’s that all mean?
+Long story short: In addition to any local development you do, this system will spin up your own little environments (“camps”) on a remote development server. Each camp includes a checkout of the code, separate httpd/​nginx and app processes, and a dedicated database with a clone of the data. What’s that all mean?
 
 - Well, figuring that dev server is configured the same, you’ll be working right in a stack identical to production.
 - Each camp gets its own port, so you can link your beautiful results to someone and they’ll see exactly what the site will look like when deployed.
@@ -45,4 +45,6 @@ Cloud camps take you the rest of the way there. You can feel like you’re worki
 
 I do love making things open source, but in this case I’m not sure there’s really anything to publish; it’s just the same Terraform configuration with just a little bit of tuning to make workspaces work better. But you’ve heard enough from me today, so I’ll write more about all those details later.
 
-There, I hope I’ve planted some ideas in your mind about how you can change that development methodology for the better. On the whole we work better collaboratively, and camp-​like systems for development can really assist that. It can feel weird and cumbersome at first, but the clients we have that have adopted it are generally happy campers. It’s still early on, but our cloud-​based camp experiment is showing lots of promise, too. Keep it in mind when you’re starting a development project.
+There, I hope I’ve planted some ideas in your mind about how you can change that development methodology for the better. On the whole we work better collaboratively, and camp-​like systems for development can really assist that. It can feel weird and cumbersome at first, but the clients we have that have adopted it are generally happy campers.
+
+It’s still early on, but our cloud-​based camp experiment is showing lots of promise, too. Keep it in mind when you’re starting a development project.
