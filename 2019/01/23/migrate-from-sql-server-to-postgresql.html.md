@@ -5,6 +5,8 @@ tags: pentaho, postgres, database, sql, sql-server
 gh_issue_number: 1493
 ---
 
+<img src="/blog/2019/01/23/migrate-from-sql-server-to-postgresql/sql-server-to-postgres.jpg" alt='SQL server to Postgres' />
+
 One of our clients had a Java-​based application stack on Linux that connected to a pretty old version of SQL Server on Windows. We wanted to migrate the entire system to a more consistent unified stack that developers are efficient with, and that is current so it receives regular updates.
 
 We decided to migrate the database from SQL Server to PostgreSQL on Linux because porting the database, while not entirely quick or simple, was still much simpler than porting the app in .NET/C# would have been. Rewriting the application would have taken far longer, been much riskier to the business, and cost a lot more.
@@ -16,7 +18,7 @@ I experimented with a few approaches to the migration and decided to go with the
 A schema of the SQL Server database tables and views needs to be exported to perform schema conversion. The following steps will show you how to export the schema.
 
 #### Export SQL Server Database Schema
-In SQL Management Studio, right click on the database and select Tasks -> Generate Scripts.
+In SQL Management Studio, right click on the database and select Tasks ➜ Generate Scripts.
 
 <img src="/blog/2019/01/23/migrate-from-sql-server-to-postgresql/generate-scripts.png" alt='Generate Scripts' />
 
@@ -43,7 +45,7 @@ $ perl sqlserver2pgsql.pl -f tables.sql -b tables-before.sql -a tables-after.sql
 The converted schema will be available in tables-before.sql and constraint kind of queries will be in tables-after.sql to execute after data migration. Just review tables-unsure.sql and do what’s needed if there are any tables not converted by the tool. If you want to change any schema names in Postgres, you can rename them now in the .sql file.
 	
 ```bash
-$ sed -i ‘s/sql_server_schema/public/g’ *.sql 
+$ sed -i ‘s/sql_server_schema/public/g’ *.sql
 ```
 
 #### Setup Postgres Database:
@@ -57,9 +59,9 @@ CREATE USER <user_name> WITH
   NOCREATEDB
   NOCREATEROLE
   NOREPLICATION;
-  
+
 CREATE DATABASE <database_name>
-    WITH 
+    WITH
     OWNER = <user_name>
     ENCODING = 'UTF8'
     LC_COLLATE = 'en_US.UTF-8'
@@ -100,23 +102,23 @@ Create connections to both SQL Server and Postgres databases in PDI.
 
 1\. Create a New Job.
 
-File -> New -> Job
+File ➜ New ➜ Job
 
 2\. Create Source Database Connection.
 
-Click View in left sidebar -> Right Click ‘Database Connections’ -> Choose New -> Provide SQL Server connection details
+Click View in left sidebar ➜ Right Click ‘Database Connections’ ➜ Choose New ➜ Provide SQL Server connection details
 
 <img src="/blog/2019/01/23/migrate-from-sql-server-to-postgresql/sqlserver-database-connection.png" alt="SQL Server Database" />
 
 3\. Create Destination Database Connection
 
-Click View in left sidebar -> Right Click ‘Database Connections’ -> Choose New -> Provide Postgres connection details
+Click View in left sidebar ➜ Right Click ‘Database Connections’ ➜ Choose New ➜ Provide Postgres connection details
 
 <img src="/blog/2019/01/23/migrate-from-sql-server-to-postgresql/postgres-database-connection.png" alt="PostgreSQL Database" />
 
 4\. From Wizard menu, choose Copy Tables Wizard
 
-Tools -> Wizard -> Copy Tables
+Tools ➜ Wizard ➜ Copy Tables
 
 5\. Choose Source and Destination databases
 
@@ -130,7 +132,7 @@ Tools -> Wizard -> Copy Tables
 
 <img src="/blog/2019/01/23/migrate-from-sql-server-to-postgresql/create-job.png" alt="Create Job" />
 
-8\. The transformations were created to copy data from source to destination database. 
+8\. The transformations were created to copy data from source to destination database.
 
 <img src="/blog/2019/01/23/migrate-from-sql-server-to-postgresql/job-view.png" alt="Job Steps" />
 
@@ -146,7 +148,7 @@ $ scp pdi-migration-job.tar.gz user@server:
 Establish ssh tunneling to connect to SQL Server through application server.
 
 ```bash
-$ cat config 
+$ cat config
 host tunnel-server
     Hostname <application_server>
     Port 22
@@ -161,7 +163,7 @@ $ telnet localhost 1433
 Execute PDI job using Pentaho kitchen utility on the database server. Add a kettle configuration to avoid Pentaho considering empty values as null values which affects not-null constraints.
 
 ```bash
-$ cat .kettle/kettle.properties 
+$ cat .kettle/kettle.properties
 KETTLE_EMPTY_STRING_DIFFERS_FROM_NULL=Y
 ```
 
@@ -170,7 +172,7 @@ Ensure IP address for database servers connection and execute the job using kitc
 ```bash
 $ ./kitchen.sh -file="/path/to/pdi-migration-job.kjb" -level=Basic | tee pdi-migration-job.log
 
-The data migration process took around 30 minutes to copy 10GB of data from SQL Server to Postgres database over network. 
+The data migration process took around 30 minutes to copy 10GB of data from SQL Server to Postgres database over network.
 Output
 2018/08/23 11:16:52 - SQLServerToPostgres20180823 - Job execution finished
 2018/08/23 11:16:52 - Kitchen - Finished!
@@ -197,7 +199,7 @@ database_name=# \i /path/to/tables-after.sql
 ```
 
 #### Migrate Views
-Follow the same steps to convert the views.sql schema. Right click on the database and click on Tasks -> Generate Script -> Export only views
+Follow the same steps to convert the views.sql schema. Right click on the database and click on Tasks ➜ Generate Script ➜ Export only views
 
 ```bash
 $ perl sqlserver2pgsql.pl -f views.sql -b views-before.sql -a views-after.sql -u views-unsure.sql
@@ -210,28 +212,28 @@ database_name=# \i /path/to/tables-unsure.sql
 The functions migration requires skill and syntax awareness in both SQL Server and Postgres database. The functions need to validated and tested properly after rewriting for Postgres. Place all rewritten functions into postgres-function.sql and load into the database as part of the migration process.
 
 ### Most Common Errors
-* ERROR:  syntax error at or near "["  
-Square brackets — Remove square brackets around column and table names.  
+* ERROR:  syntax error at or near "["
+Square brackets — Remove square brackets around column and table names.
 SELECT [user_id] => SELECT user_id
 
-* ERROR:  operator does not exist: character varying = integer.  
-Type casting on comparison  
+* ERROR:  operator does not exist: character varying = integer.
+Type casting on comparison
 AND column_name in (1, -1) => AND column_name in ('1', '-1')
 
-* ERROR:  syntax error at or near ","  
-Datatype conversion  
+* ERROR:  syntax error at or near ","
+Datatype conversion
 convert(varchar(10),column_name) => column_name::text
 
-* ERROR: column "user_id" of relation "user" does not exist  
-No double quotes on integer data type columns  
+* ERROR: column "user_id" of relation "user" does not exist
+No double quotes on integer data type columns
 INSERT INTO user ("user_id") VALUES (1) => INSERT INTO user (user_id) VALUES (1)
 
-* ERROR: column "mm" does not exist  
-DATEADD -> INTERVAL  
+* ERROR: column "mm" does not exist
+DATEADD ➜ INTERVAL
 DATEADD(mm,-6,GETDATE()) => CURRENT_DATE + INTERVAL '-6 month'
 
-* ERROR: column "varchar" does not exist  
-Convert Date to USA format  
+* ERROR: column "varchar" does not exist
+Convert Date to USA format
 convert(varchar, tc_agreed_dt, 101) => to_char(CURRENT_TIMESTAMP::TIMESTAMP, 'MM/DD/YYY')
 
 ### Result
