@@ -5,7 +5,7 @@ tags: vue, javascript
 gh_issue_number: 1492
 ---
 
-<img src="/blog/2019/01/31/adding-awesomplete-to-vue-components/banner.jpg" alt="IBM Model M SSK keyboard" />
+<img src="/blog/2019/01/31/adding-awesomplete-to-vue-components/banner.jpg" alt="IBM Model M SSK keyboard" /> [IBM Model M SSK](https://www.flickr.com/photos/njbair/19313574711/) by [njbair](https://www.flickr.com/photos/njbair/), used under [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/) / Cropped from original
 
 [Awesomplete](https://leaverou.github.io/awesomplete/) is an “Ultra lightweight, customizable, simple autocomplete widget with zero dependencies, built with modern standards for modern browsers.”
 
