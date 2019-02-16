@@ -1,6 +1,6 @@
 ---
 author: "Kamil Ciemniewski"
-title: "Speech Recognition from scratch using Dilated Convolutions and CTC in Tensorflow"
+title: "Speech Recognition from scratch using Dilated Convolutions and CTC in TensorFlow"
 tags: machine-learning, python
 gh_issue_number: 1481
 ---

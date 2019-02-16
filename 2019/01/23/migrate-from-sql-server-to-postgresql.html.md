@@ -9,7 +9,7 @@ gh_issue_number: 1493
 
 One of our clients had a Java-​based application stack on Linux that connected to a pretty old version of SQL Server on Windows. We wanted to migrate the entire system to a more consistent unified stack that developers are efficient with, and that is current so it receives regular updates.
 
-We decided to migrate the database from SQL Server to PostgreSQL on Linux because porting the database, while not entirely quick or simple, was still much simpler than porting the app in .NET/C# would have been. Rewriting the application would have taken far longer, been much riskier to the business, and cost a lot more.
+We decided to migrate the database from SQL Server to PostgreSQL on Linux because porting the database, while not entirely quick or simple, was still much simpler than porting the app to .NET/C# would have been. Rewriting the application would have taken far longer, been much riskier to the business, and cost a lot more.
 
 I experimented with a few approaches to the migration and decided to go with the process of schema migration and then the data migration approach which is referred to on the Postgres wiki. Let’s walk through the process of migration step by step.
 
@@ -110,25 +110,25 @@ Click View in left sidebar → Right Click ‘Database Connections’ → Choose
 
 <img src="/blog/2019/01/23/migrate-from-sql-server-to-postgresql/sqlserver-database-connection.png" alt="SQL Server Database" />
 
-3\. Create Destination Database Connection
+3\. Create Destination Database Connection.
 
 Click View in left sidebar → Right Click ‘Database Connections’ → Choose New → Provide Postgres connection details
 
 <img src="/blog/2019/01/23/migrate-from-sql-server-to-postgresql/postgres-database-connection.png" alt="PostgreSQL Database" />
 
-4\. From Wizard menu, choose Copy Tables Wizard
+4\. From Wizard menu, choose Copy Tables Wizard.
 
 Tools → Wizard → Copy Tables
 
-5\. Choose Source and Destination databases
+5\. Choose Source and Destination databases.
 
 <img src="/blog/2019/01/23/migrate-from-sql-server-to-postgresql/source-destination.png" alt="Source and Destination" />
 
-6\. Select the list of tables to migrate
+6\. Select the list of tables to migrate.
 
 <img src="/blog/2019/01/23/migrate-from-sql-server-to-postgresql/source-destination.png" alt="Source and Destination" />
 
-7\. Move forward to choose the path for job and transformation files
+7\. Move forward to choose the path for job and transformation files.
 
 <img src="/blog/2019/01/23/migrate-from-sql-server-to-postgresql/create-job.png" alt="Create Job" />
 
@@ -144,6 +144,7 @@ $ rsync -azP data-integration.zip pdi-migration-job.tar.gz user@server:
 ```
 
 10\. Check Postgres server to SQL Server database access (based on architecture design at your end).
+
 Establish SSH tunneling to connect to SQL Server through the application server.
 
 ```bash
@@ -159,6 +160,7 @@ $ telnet localhost 1433
 ```
 
 #### PDI Job Execution
+
 Execute PDI job using Pentaho kitchen utility on the database server. Add a kettle configuration to avoid Pentaho considering empty values as NULL values which affects NOT NULL constraints.
 
 ```bash
@@ -170,9 +172,13 @@ Confirm IP address for database servers’ connections and execute the job using
 
 ```bash
 $ ./kitchen.sh -file="/path/to/pdi-migration-job.kjb" -level=Basic | tee pdi-migration-job.log
+```
 
 The data migration process took around 30 minutes to copy 10GB of data from SQL Server to Postgres database over network.
-Output
+
+Output:
+
+```
 2018/08/23 11:16:52 - SQLServerToPostgres20180823 - Job execution finished
 2018/08/23 11:16:52 - Kitchen - Finished!
 2018/08/23 11:16:52 - Kitchen - Start=2018/08/23 10:51:00.701, Stop=2018/08/23 11:16:52.951
