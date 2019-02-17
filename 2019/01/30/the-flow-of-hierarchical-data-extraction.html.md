@@ -59,10 +59,10 @@ In this article we intend to have solid ideas of how hierarchical data can be ex
 Assuming that extracting the data is both legally and ethically a good thing to do, we have hierarchies to work with, possibly many. Nodes can have the parent-child relation, but they can have the ancestor-descendant relation as well. A is the ancestor and D is its descendant, if A is the parent of D, or we have a sequence of nodes S, where Si is the parent of Si+i for each neighboring pair of the sequence and A is the parent of S1, Sn is the parent of D. Consider this HTML code chunk:
 
 ```
-<div class=”dimensions”>
-    <div class=”large-width”>
-        <div class=”area”>Area<span class=”dimension-data”>500</span> <span class=”unit”>sqm</span></div>
-        <div class=”height”>Height<span class=”dimension-data”>60</span> <span class=”unit”>m</span></div>
+<div class="dimensions">
+    <div class="large-width">
+        <div class="area">Area<span class="dimension-data">500</span> <span class="unit">sqm</span></div>
+        <div class="height">Height<span class="dimension-data">60</span> <span class="unit">m</span></div>
     </div>
 </div>
 ```
@@ -75,21 +75,21 @@ In hierarchical structures we have some nodes, a (usually small) subset of which
 
 ```
 let dimensions = [];
-let dimensionContainers = document.querySelectorAll(“.dimensions”);
+let dimensionContainers = document.querySelectorAll(".dimensions");
 for (let dimensionContainer of dimensionContainers) {
     const dimension = {};
-    let areaContainer = dimensionContainer.querySelector(“.area”);
+    let areaContainer = dimensionContainer.querySelector(".area");
     if (areaContainer) {
-        let value = areaContainer.querySelector(“.dimension-data”);
-        let unit = areaContainer.querySelector(“.unit”);
+        let value = areaContainer.querySelector(".dimension-data");
+        let unit = areaContainer.querySelector(".unit");
         if (value && unit) {
             dimension.area = {value: value.innerText, unit: unit.innerText};
         }
     }
-    let heighContainer = dimensionContainer.querySelector(“.height”);
+    let heighContainer = dimensionContainer.querySelector(".height");
     if (heightContainer) {
-        let value = heightContainer.querySelector(“.dimension-data”);
-        let unit = heightContainer.querySelector(“.unit”);
+        let value = heightContainer.querySelector(".dimension-data");
+        let unit = heightContainer.querySelector(".unit");
         if (value && unit) {
             dimension.unit = {value: value.innerText, unit: unit.innerText};
         }
@@ -159,7 +159,7 @@ Let’s consider the example of books displayed on a website. A book may have ma
 
 The semantic rules we define have a parent-child and ancestor-descendant relation. The semantic tree is the blueprint of the conceptual essence, a plan to extract data and also, its attributes instruct the extractor about what concept should be found where, how should the extractor operate to have a better performance and so on. However, the entities to extract can vary greatly and there might be cases when  seemingly the same concept is distributed among various places. The word “seemingly” here means that even though at the end these concepts will be merged, at the phase of the actual data-mining we view these to be similar, but different concepts. The fact that a conceptual node might have several parents in the semantic rules only means that one of the parents of the list is to be expected, which means that all of the listed parents are possible. Consider a semantic rule which says that the parent of currency can be the description or the price:
 
-parent: description,price
+```parent: description,price```
 
 This means that the parent can be any of the elements of the list, that is, in the case of some elements the parent will be description, but in the case of some other elements, the parent will be price, so we do not violate by design our aim to have a semantic tree. We have to watch out for cycles though. Without additional tools there is no protection against cycles, that we might accidentally add while we define the semantic rules, or our semantic rule generator does its magic. However, it makes sense to check whether there is a cycle in the semantic tree. If this is done automatically, then all the better. However, since the description of semantic trees can define multiple disjunct parents to cope with the possibility to cope with the actual tree of concepts for all elements, at least those whose pattern is known, the semantic tree in reality is a semantic tree pattern and when we use it or we search for the cycles, we will need to traverse the possible parents where more of them are listed.
 
@@ -172,15 +172,15 @@ We can see that we have a single main concept, “REAL-ESTATE”. This is not a 
 Why is “CURRENCY” special? It has two potential parents: “DESCRIPTION” or “PRICE”. In some cases it can be found inside “DESCRIPTION”, in other cases it can be found inside price. For example, if there are several values for “PRICE”, then “CURRENCY” is inside “DESCRIPTION”, but otherwise “CURRENCY” is inside “PRICE”. But why could a real-estate have several different prices? Well, this is outside the scope of data-mining, but to have an understanding, it is good to consider a viable example. Let’s consider the example of an estate-agent who has a 20% bonus if he/she successfully sells a given real-estate within a month. In this case, the agent might want to draw buyers and put a 5% discount on the real-estate for a month and if he/she is successful in selling the real-estate, then he/she will still have a nice bonus. Considering this economic mechanism the data-source might be showing the prices in a special way if there is such a discount, like:
 
 ```
-<div class=”description”>
-    <table class=”prices”>
+<div class="description">
+    <table class="prices">
         <tr>
             <td>
-                <p class=”price”><span>100000</span></p>
-                <p class=”price red”><span>90000</span> 10% discount!</p>
+                <p class="price"><span>100000</span></p>
+                <p class="price red"><span>90000</span> 10% discount!</p>
             </td>
             <td>
-                <div class=”currency”>$</div>
+                <div class="currency">$</div>
             </td>
         </tr>
     </table>
@@ -191,10 +191,10 @@ Why is “CURRENCY” special? It has two potential parents: “DESCRIPTION” o
 while, if there is a single price, a different structure is generated:
 
 ```
-<div class=”description”>
-    <p class=”price”>
+<div class="description">
+    <p class="price">
         <span>100000</span>
-        <div class=”currency>$</div>
+        <div class="currency">$</div>
     </p>
 </div>
 ```
@@ -227,7 +227,7 @@ Let’s assume that we have a very nice schema and we store the data we have eff
 - <a href="https://opentextbc.ca/dbdesign01/chapter/chapter-11-functional-dependencies/">functional dependencies</a>
 - conditional functional dependencies (a functional dependency upon the table or cluster records provided a condition is met)
 
-AR (Association Rule): c => {v1, …, vn}
+```AR (Association Rule): c => {v1, …, vn}```
 
 If a condition (c) is fulfilled, then we have a set of constant values for their respective (database table) columns. We have an association rule in the case when a certain condition is met, some values (database columns in the record) will have a constant value.
 
@@ -235,55 +235,57 @@ Example:
 
 Let's consider the table
 
-person(id, is_alive, has_right_to_vote, has_valid_passport)
+```person(id, is_alive, has_right_to_vote, has_valid_passport)```
 
 Now, we can observe that
 
-(is_alive = 0) => ((has_right_to_vote = 0) ^ (has_valid_passport = 0))
+```(is_alive = 0) => ((has_right_to_vote = 0) ^ (has_valid_passport = 0))```
 
 so, this is an association rule, which has the condition of is_alive = 0 (so the person is deceased) and we know for a fact that dead people will not vote and their passport is invalid.
 
 When we extract data from a source, there might be some association rules (field values are associated to a condition) we do not know about, yet, if we find those out, then it will help us a lot. For instance, imagine the case when for whatever reason an insert/update is attempted with the result of
 
+```
 is_alive = 0
 
 has_right_to_vote = 1
+```
 
 In this case we can throw an exception, so, this way we can find bugs in the code or mistakes in the semantic tree. This kind of inconsistency prevention is useful even if we are not speaking of data-mining, but, in the context of this article it is extremely useful, as it might detect problems in the semantic tree automatically.
 
-FD (Functional Dependency): S → D
+```FD (Functional Dependency): S → D```
 
 The column-set S (Source):
 
-S = {S1, …, Sm}
+```S = {S1, …, Sm}```
 
 determines the column-set D (Destination):
 
-D = {D1, …, Dn}
+```D = {D1, …, Dn}```
 
 The formula more explicitly looks like this:
 
-{S1, …, Sm} → (D1, …, Dn)
+```{S1, …, Sm} → (D1, …, Dn)```
 
 This relation means that if we have two different records/entities with the same source values:
 
-Source1 = Source2 = {s1, …, sm}, then their destination will match as well:
+```Source1 = Source2 = {s1, …, sm}```, then their destination will match as well:
 
-Destination1 = Destination2 = {d1, …, dn}
+```Destination1 = Destination2 = {d1, …, dn}```
 
 Inversely this is not necessarily true. If two records/entities have the same destination values, then the functional dependency does not require them to have the very same sources.
 
 CFD (Conditional Functional Dependency):
 
-c => S → D
+```c => S → D```
 
 A CFD is a more generalized term of FD, it adds a condition to the formula, so that the functional dependency’s applicability is only guaranteed if the condition is met. We can describe functional dependencies as particular conditional functional dependencies, where the condition is inherently true:
 
-(true => S → D) <=> S → D
+```(true => S → D) <=> S → D```
 
 Also, an AR can be described as
 
-c => {} → D
+```c => {} → D```
 
 #### 5.1. The More Useful (MU) relation
 
@@ -293,46 +295,51 @@ P1 MU P2 if and only if P1 is more general than P2.
 
 Since both ARs and FDs are particular cases of CFDs, we will work with the formula of CFDs:
 
+```
 P1 = (c1 => S1 → D1)
 
 P2 = (c2 => S2 → D2)
 
 P1 MU P2 <=> ((c2 => c1) ^ (S1 ⊆ S2) ^ (D1 ⊇ D2))
+```
 
 Note that MU is reflexive, transitive, antisymmetrical and has a neutral element.
 
-Reflexive: (c1 => c1) ^ (S1 ⊆ S1) ^ (D1 ⊇ D1) is trivially true.
+Reflexive: ```(c1 => c1) ^ (S1 ⊆ S1) ^ (D1 ⊇ D1)``` is trivially true.
 
 Transitive:
 
 Let’s suppose that
 
+```
 ((c2 => c1) ^ (S1 ⊆ S2) ^ (D1 ⊇ D2))
 
 ((c3 => c2) ^ (S2 ⊆ S3) ^ (D2 ⊇ D3))
+```
 
 is true. Is
 
-((c3 => c1) ^ (S1 ⊆ S3) ^ (D1 ⊇ D3))
+```((c3 => c1) ^ (S1 ⊆ S3) ^ (D1 ⊇ D3))```
 
 also true?
 
-Since c3 => c2 => c1, due to the transitivity of the implication relation we know that c3 => c1
+Since ```c3 => c2 => c1```, due to the transitivity of the implication relation we know that ```c3 => c1```.
 
-Since S1 ⊆ S2 ⊆ S3, due to the transitivity of the subset relation we know that S1 ⊆ S3
+Since ```S1 ⊆ S2 ⊆ S3```, due to the transitivity of the subset relation we know that ```S1 ⊆ S3```.
 
-Since D1 ⊇ D2 ⊇ D3, due to the transitivity of the superset relation we know that D1 ⊇ D3.
+Since ```D1 ⊇ D2 ⊇ D3```, due to the transitivity of the superset relation we know that ```D1 ⊇ D3```.
 
 The three transitivities together prove that MU is transitive.
 
 Neutral element (the least useful):
 
-false => {} → All columns
+```false => {} → All columns```
 
-false => c is always true, {} is the subset of everything else, including itself and all columns is the subset of all combinations of columns, or, in other words, it’s a superset of all its subsets.
+```false => c``` is always true, ```{}``` is the subset of everything else, including itself and all columns is the subset of all combinations of columns, or, in other words, it’s a superset of all its subsets.
 
 Antisymmetrical:
 
+```
 If P1 MU P2 and P2 MU P1, then P1 <=> P2.
 
 P1 MU P2:
@@ -353,9 +360,12 @@ P1 MU P2 ^ P2 MU P1 <=>
 
 (c1 <=> c2) ^ (S1 = S2) ^ (D1 = D2) <=>
 
-P1 <=> P2, so the relation is antisymmetrical:
+P1 <=> P2
+```
 
-((P1 MU P2) ^ (P2 Mu P1)) <=> (P1 <=> P2)
+so the relation is antisymmetrical:
+
+```((P1 MU P2) ^ (P2 Mu P1)) <=> (P1 <=> P2)```
 
 This means that MU is a poset (partially ordered set) and all the algebra applicable for partially ordered sets in general can be used to analyze MU as well.
 
@@ -365,21 +375,25 @@ The importance of the MU relation is that we can start searching for such patter
 
 Possible patterns can be represented using a <a href="http://mathworld.wolfram.com/LatticeTheory.html">Lattice</a>, where the root would be the most useful node and the leaf would be the least useful node. We have a join and a meet operation, which are closures.
 
+```
 P1 join P2 = (c1 v c2) => (S1 ⋂ S2) → (D1 ⋃ D2)
 
 P1 meet P2 = (c1 ^ c2) => (S1 ⋃ S2) → (D1 ⋂ D2)
+```
 
 Of course
 
-(P1 join P2) MU (P1 meet P2)
+```(P1 join P2) MU (P1 meet P2)```
 
 Proof
 
+```
 (c1 ^ c2) => (c1 v c2) is trivially true and
 
 (S1 ⋂ S2) ⊆ (S1 ⋃ S2) is trivially true and
 
 (D1 ⋃ D2) ⊇ (D1 ⋂ D2) is trivially true.
+```
 
 We can split the lattice into many different simple lattices, each having its own condition. Since an AR never has source columns, it cannot be less useful than a non AR CFD. Also, since an FD has a condition which is implied by any possible other condition, FDs are never less useful than CDFs with real conditions.
 
@@ -403,11 +417,11 @@ Proof (reductio ad absurdum):
 
 Let’s assume that there is a finite n number of primes and there is no other, except them:
 
-p1, …, pn
+```p1, …, pn```
 
 Now, let’s consider the number:
 
-N = (p1 * … * pn) + 1
+```N = (p1 * … * pn) + 1```
 
 We know that N is indivisible with any of p1, …, pn, so there are two cases: N is either a prime or a composite number. If N is a prime, then we found a new prime. Otherwise, if N is composite, then it is divisible by at least a prime which is not among p1, …, pn. So, in either case we find a new prime, therefore there are infinitely many prime numbers. How many primes are pair? Exactly one. It is the number of 2. Now, if we have a huge set of primes, among which we do not find 2, not knowing that 2 is a prime, we might be inclined to think that primes can only be odd numbers, which is of course wrong. If we pick a prime randomly from the infinitely many primes, the chance that it will be exactly two is extremely small, rather minuscule. However, if a human has to pick a prime number, a human will know only a few primes and 2 is the “first”, so, among the primes 2 is among those primes, which have the highest chance of being chosen by a human.
 
@@ -417,7 +431,7 @@ The point of all this contemplation is that if something is very frequent or hig
 
 Now, if we accept a rule to be factually accurate, then we might want to make sure that it is respected. Assuming that
 
-c => S → D
+```c => S → D```
 
 is accurate, we also assume that if the condition is met and there is already a record having the source values of s1, …, sm, then, inserting/updating another record with the same source values, but with different destination values leads to an error. Let’s suppose that we throw an exception when an accepted pattern is to be violated. If many such exceptions are thrown, then we have a problem. What could the problem be:
 
