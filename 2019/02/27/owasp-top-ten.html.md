@@ -58,7 +58,7 @@ uppercase/lowercase/digit enforcing).
 For web developers an interesting class is the ubiquitous Cross-Site
 Scripting (XSS) vulnerability, which is found in two thirds of all
 applications. Statistically speaking, it’s probable that the
-application you are currently working on it’s affected.
+application you are currently working on, it’s affected.
 
 XSS comes in many flavours, usually generated server-side, when a
 variable coming from user input is interpolated without proper
