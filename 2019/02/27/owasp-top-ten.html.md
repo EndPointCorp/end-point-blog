@@ -4,6 +4,9 @@ title: "OWASP Top Ten 2017"
 tags: security
 ---
 
+![wasps](/blog/2019/02/27/owasp-top-ten/wasps.jpg)
+
+
 I don’t consider myself a security expert. Still, to my surprise, I
 was asked to give a talk about security in front of all the End Point
 developers. Obviously I realized too late what I was getting myself
