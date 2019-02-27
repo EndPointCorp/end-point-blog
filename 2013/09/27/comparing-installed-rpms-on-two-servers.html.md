@@ -65,6 +65,6 @@ With the output redirected to file mylist, you can edit it to result in a list o
 < mylist yum -y install
 ```
 
-It’s a good idea to test if first without the -y option, which will cause yum to abort the installation and gives you a chance to see if any unexpected dependencies will be dragged in.
+It’s a good idea to test it first without the -y option, which will cause yum to abort the installation and gives you a chance to see if any unexpected dependencies will be dragged in.
 
 Also, don’t blindly install every package you don’t know the purpose of. Watch out for RPMs that may not belong everywhere due to hardware differences such as Ethernet firmware, RAID controller, IPMI, etc.
