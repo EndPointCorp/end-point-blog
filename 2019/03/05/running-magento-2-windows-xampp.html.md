@@ -6,7 +6,7 @@ tags: magento, e-commere, mysql, xampp, windows, php
 
 <img src="/blog/2019/03/05/running-magento-2-windows-xampp/e-commerce-safe.jpg" alt="E-commerce" /><br><a href="https://burst.shopify.com/photos/computer-security-lock-and-payment?q=e-commerce">Photo by Nicole De Khors</a> · <a href="https://burst.shopify.com/licenses/shopify-some-rights-reserved">Burst Some Rights Reserved</a>
 
-Magento is an open source e-commerce platform, written in PHP and relying on MySQL/MariaDB for persistence. According to <a href="https://trends.builtwith.com/shop" target="_blank">BuiltWith</a>, Magento is the third most used platform in e-commerce websites. It began its life in 2008 with its first release version, and a major update (Magento 2) was later relased in 2015.
+Magento is an open source e-commerce platform, written in PHP and relying on MySQL/MariaDB for persistence. According to <a href="https://trends.builtwith.com/shop" target="_blank">BuiltWith</a>, Magento is the third most used platform in e-commerce websites. It began its life in 2008 with its first release version, and a major update (Magento 2) was later released in 2015.
 
 And now, more than three years after, <b>Magento 1 is slowly dying</b>: There won't be any more quality fixes, no more security updates from June 2020, and lack of extensions support for fixes or new payment methods. So the obvious choice will be Magento 2 from now on.
 
@@ -47,20 +47,20 @@ We have all the files in place and the environment ready to start configuring th
 
 * Create a “magento” (or whatever name you prefer) database in MySQL from phpMyAdmin, installed already on XAMPP: <a href="http://localhost/phpmyadmin" target="_blank">localhost/phpmyadmin</a>
 
-* Run the Magento 2 setup from <a href="http://localhost/magento" target="_blank">localhost/magento</a> (replace the “magento” part of the URL with whatever name you have choosen to host Magento). If the setup program requires to do any additional configuration change, do it as instructed. Do a screenshot or save the final page contents for later use.
+* Run the Magento 2 setup from <a href="http://localhost/magento" target="_blank">localhost/magento</a> (replace the “magento” part of the URL with whatever name you have chosen to host Magento). If the setup program requires to do any additional configuration change, do it as instructed. Do a screenshot or save the final page contents for later use.
 
 <img src="/blog/2019/03/05/running-magento-2-windows-xampp/magento-2-installation-success.jpg" /><br><small>Example of the page that will be displayed when the Magento 2 installation finishes.</small>
 
 
 ##Fixing known issues
 
-When we finish the installation process, we will have a Magento 2 instance running on our host. But we're not ready yet! There's a couple known bugs with Magento 2 and XAMPP at the moment I'm writing this article:
+When we finish the installation process, we will have a Magento 2 instance running on our host. But we're not ready yet! There are a couple known bugs with Magento 2 and XAMPP at the moment I'm writing this article:
 
 * The Magento admin page may not work (it shows a blank page): Fix this issue by updating the “isPathInDirectories” function inside the ```Validator.php``` file as instructed in this article: <a href="https://magento.stackexchange.com/questions/252188/magento-2-2-7-admin-panel-blank-page" target="_blank">magento.stackexchange.com/questions/252188/magento-2-2-7-admin-panel-blank-page</a>
 
 * We might not be able to upload images (like a custom logo or product pictures): Fix this issue by updating the ```design_config_form.xml``` file as shown in the reference: <a href="https://community.magento.com/t5/Magento-2-x-Technical-Issues/A-technical-problem-with-the-server-created-an-error-Try-again/m-p/115085#M7549" target="_blank">community.magento.com/t5/Magento-2-x-Technical-Issues/A-technical-problem-with-the-server-created-an-error-Try-again/m-p/115085#M7549</a>
 
-After we finish making this changes, we will need to <b>restart the Apache service</b> from the XAMPP control panel. And that's it! We should be ready to open the Magento front page, and login into the backend.
+After we finish making these changes, we will need to <b>restart the Apache service</b> from the XAMPP control panel. And that's it! We should be ready to open the Magento front page, and login into the backend.
 
 <img src="/blog/2019/03/05/running-magento-2-windows-xampp/magento-2-front-end.jpg" /><br><small>An empty home page with the default theme enabled in Magento 2.</small>
 
