@@ -1,0 +1,127 @@
+---
+author: "Juan Pablo Ventoso"
+title: "Switching from Google Maps to Leaflet"
+tags: google maps, leaflet, open source
+---
+
+<img src="/blog/2019/03/07/switching-google-maps-leaflet/leaflet-weather-map-us.jpg" alt="Leaflet Weather map example" /><br>Photo: <a href="https://www.extendedforecast.net/radsat">RadSat HD</a>
+
+It's no news for anyone who has Google Maps running on their websites that Google started charging for using their API. We saw it coming when, back in 2016, they started requiring a key to add a map using their Javascript API. And on June 11, 2018, they did a major upgrade to their API and billing system.
+
+<b>The consequence?</b> Any website with more than 25,000 page loads per day will have to pay. And if you are using a dynamic map (a map with custom styling and/or content) you only have roughly 28,000 free monthly page loads. We must create a billing account -even if we have a small website with a couple daily visitors-, hand credit card information to Google, and monitor our stats to make sure we won't be charged. And if we don't do that, our map will be dark and will have a "For development only" message in the background.
+
+So what are our options? We can either pay or completely remove Google Maps from our websites. I would say the second one makes more sense: Even enterprise weather websites like <a href="https://weather.com/weather/radar/interactive/l/USNY0996:1:US" target="_blank">The Weather Channel</a> or <a href="https://www.wunderground.com/wundermap" target="_blank">Weather Underground</a> have now replaced their Google Maps API calls with an alternative like Leaflet or MapBox (in some cases, they even gained some functionality in the process).
+
+I have a <a href="https://www.extendedforecast.net" target="_blank">weather website</a> too, and when I heard big changes were coming, I started to move away from Google as well. My choice at that moment was Leaflet, and I can't be more happy about it. It has everything you may need to build a robust tile-based map, add layers, markers, animations, custom tiles... And the most important thing: It's BSD-licensed open source and <b>free</b>.
+
+
+###Creating a basic map
+
+<img src="/blog/2019/03/07/switching-google-maps-leaflet/google-vs-leaflet-look-and-feel.jpg" /><br><small>Google Map conversion to Leaflet can be almost seamless if the same tiles are used.</small>
+
+Google Maps API and Leaflet share a similar way of doing most things, but they have some key differences we need to take into account. As a general rule, Google used the "google.maps" prefix to name most classes and interfaces, while Leaflet uses the "L" prefix instead.
+
+First thing we need to do is to remove the Google Maps API reference from our website(s). So we need to replace the reference:
+
+```
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=[your_api_key]"></script>
+```
+
+With the references to the Leaflet map Javascript and stylesheet URIs.
+
+```
+<script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.2/dist/leaflet.css" />
+```
+
+Now let's take a look at the code needed to create a Google Map vs. a Leaflet map.
+
+* Google:
+
+```javascript
+var map = new google.maps.Map(document.getElementById("map"), {
+	center: new google.maps.LatLng(40.7401, -73.9891),
+	zoom: 12,
+	mapTypeId: google.maps.MapTypeId.ROADMAP
+});
+```
+
+* Leaflet:
+
+```javascript
+var map = new L.Map("map", {
+	center: new L.LatLng(40.7401, -73.9891),
+	zoom: 12,
+	layers: new L.TileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png")
+});
+```
+
+Quite similar, isn't it? The main difference is that, in Leaflet, we need to provide a tile layer for the base map because there isn't one by default. There's a lot of freely available tile layers out there for us to use. Here are some of them:
+
+* Bright: "https://a.tiles.mapbox.com/v3/mapbox.world-bright/{z}/{x}/{y}.png"
+* Topographic: "https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png"
+* Black and white: "https://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}{r}.png"
+
+You can browse other free tile layer providers for Leaflet on <a href="https://leaflet-extras.github.io/leaflet-providers/preview/" target="_blank">this link</a>. And of course, if you want to pay there's a lot of affordable tiles out there too.
+
+
+###Adding a marker
+
+Adding a marker is quite straightforward as well. It even looks easier on Leaflet than Google.
+
+* Google:
+
+```javascript
+var marker = new google.maps.Marker({
+	position: new google.maps.LatLng(40.7401, -73.9891),
+	map: map,
+	title: "End Point Corporation"
+});
+```
+
+* Leaflet:
+
+```javascript
+var marker = new L.Marker(new L.LatLng(40.7401, -73.9891));
+marker.bindPopup("End Point Corporation");
+map.addLayer(marker);
+```
+
+And that's it: we have a working Leaflet map with a marker that displays a text when we click on it.
+
+<img src="/blog/2019/03/07/switching-google-maps-leaflet/leaflet-example-working.jpg" /><br><small>Screenshot of the Leaflet example (download link below).</small>
+
+
+###Layers and controls
+
+From this point, we can start doing more complex things if we need to:
+
+* Display images on the map: <a href="https://leafletjs.com/reference-1.4.0.html#imageoverlay" target="_blank">ImageOverlay</a>.
+* Display a custom tile layer: <a href="https://leafletjs.com/reference-1.4.0.html#tilelayer" target="_blank">TileLayer</a>.
+* Draw polygons, rectangles, circles: <a href="https://leafletjs.com/reference-1.4.0.html#polygon" target="_blank">Polygon</a> - <a href="https://leafletjs.com/reference-1.4.0.html#rectagle" target="_blank">Rectangle</a> - <a href="https://leafletjs.com/reference-1.4.0.html#circle" target="_blank">Circle</a>.
+* Display GeoJSON data on the map: <a href="https://leafletjs.com/reference-1.4.0.html#geojson" target="_blank">GeoJSON</a>.
+
+You can browse the <a href="https://leafletjs.com/reference-1.4.0.html" target="_blank">Leaflet API reference</a> for further details.
+
+
+###Plugins and resources
+
+There is some extended functionality in Google Maps that is not available in Leaflet by default unless we use a Plugin. For example, if we want to add the "fullscreen" button to the top right corner, just as Google has it, or if we want to let the user draw polygons on top of the map, we'll need to download and add the reference to the required plugins. Here is a list of the ones I've already used:
+
+* "Fullscreen" button plugin: <a href="https://github.com/Leaflet/Leaflet.fullscreen" target="_blank">Leaflet.fullscreen</a>.
+* Vector drawing and editing plugin: <a href="https://github.com/Leaflet/Leaflet.draw" target="_blank">Leaflet.draw</a>.
+* Heatmap plugin: <a href="https://github.com/Leaflet/Leaflet.heat" target="_blank">Leaflet.heat</a>.
+
+You can find more plugins at the <a href="https://github.com/Leaflet/" target="_blank">Leaflet GitHub account</a>. And of course, you can (and should!) contribute to improve them.
+
+
+###Putting it all together
+
+In resume, I've been using Leaflet for almost a year now in an interactive weather map originally made with Google Maps API. Of course, I've had some minor hiccups along the way, but having full control of the source code and resources allows you to add functionality, fix things or even rewrite whatever you need.
+
+The Leaflet source code is well organized, modularized and easy to understand. I've created custom grid layers using different tile sources -with different coordinate systems-, animations with frame transitions, custom controls, clickable polygons, popups with dynamic content from AJAX calls and more. And all works out smoothly. So I recommend to <b>go ahead and start using Leaflet right away</b>.
+
+<img src="/blog/2019/03/07/switching-google-maps-leaflet/leaflet-map-radsat-hd.jpg" /><br><small>Example of a fully-functional Leaflet map with custom controls, overlays, animations and polygons.</small>
+
+
+Do you want to view/download the code from this post? <a href="leaflet-example.html">Click here</a> to open the live version. And this is the repository with my weather map source code: <a href="https://github.com/juanpabloventoso/RadSat-HD" target="_blank">RadSat HD</a>. <b>Feel free to leave any comments or suggestions!</b>

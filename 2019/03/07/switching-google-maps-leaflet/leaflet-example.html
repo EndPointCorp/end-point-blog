@@ -1,0 +1,23 @@
+<head>
+<title>Leaflet map example - End Point Corporation</title>
+<script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.2/dist/leaflet.css" />
+</head>
+<body>
+<style>
+body { margin: 0 } 
+#map { height: 100% }
+</style>
+<div id="map"></div>
+<script type="text/javascript">
+var endPointLocation = new L.LatLng(40.7401, -73.9891);
+var map = new L.Map("map", {
+	center: endPointLocation,
+	zoom: 12,
+	layers: new L.TileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png")
+});
+var marker = new L.Marker(endPointLocation);
+marker.bindPopup("End Point Corporation");
+map.addLayer(marker);
+</script>
+</body>
