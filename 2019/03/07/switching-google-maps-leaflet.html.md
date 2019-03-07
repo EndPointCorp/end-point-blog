@@ -4,7 +4,7 @@ title: "Switching from Google Maps to Leaflet"
 tags: google maps, leaflet, open source
 ---
 
-<img src="/blog/2019/03/07/switching-google-maps-leaflet/leaflet-weather-map-us.jpg" alt="Leaflet Weather map example" /><br>Photo: <a href="https://www.extendedforecast.net/radsat">RadSat HD</a>
+<img src="https://raw.githubusercontent.com/juanpabloventoso/end-point-blog/master/2019/03/07/switching-google-maps-leaflet/leaflet-weather-map-us.jpg" alt="Leaflet Weather map example" /><br>Photo: <a href="https://www.extendedforecast.net/radsat">RadSat HD</a>
 
 It's no news for anyone who has Google Maps running on their websites that Google started charging for using their API. We saw it coming when, back in 2016, they started requiring a key to add a map using their Javascript API. And on June 11, 2018, they did a major upgrade to their API and billing system.
 
@@ -17,7 +17,7 @@ I have a <a href="https://www.extendedforecast.net" target="_blank">weather webs
 
 ###Creating a basic map
 
-<img src="/blog/2019/03/07/switching-google-maps-leaflet/google-vs-leaflet-look-and-feel.jpg" /><br><small>Google Map conversion to Leaflet can be almost seamless if the same tiles are used.</small>
+<img src="https://raw.githubusercontent.com/juanpabloventoso/end-point-blog/master/2019/03/07/switching-google-maps-leaflet/google-vs-leaflet-look-and-feel.jpg" /><br><small>Google Map conversion to Leaflet can be almost seamless if the same tiles are used.</small>
 
 Google Maps API and Leaflet share a similar way of doing most things, but they have some key differences we need to take into account. As a general rule, Google used the "google.maps" prefix to name most classes and interfaces, while Leaflet uses the "L" prefix instead.
 
@@ -89,7 +89,7 @@ map.addLayer(marker);
 
 And that's it: we have a working Leaflet map with a marker that displays a text when we click on it.
 
-<img src="/blog/2019/03/07/switching-google-maps-leaflet/leaflet-example-working.jpg" /><br><small>Screenshot of the Leaflet example (download link below).</small>
+<img src="https://raw.githubusercontent.com/juanpabloventoso/end-point-blog/master/2019/03/07/switching-google-maps-leaflet/leaflet-example-working.jpg" /><br><small>Screenshot of the Leaflet example (download link below).</small>
 
 
 ###Layers and controls
@@ -121,7 +121,7 @@ In resume, I've been using Leaflet for almost a year now in an interactive weath
 
 The Leaflet source code is well organized, modularized and easy to understand. I've created custom grid layers using different tile sources -with different coordinate systems-, animations with frame transitions, custom controls, clickable polygons, popups with dynamic content from AJAX calls and more. And all works out smoothly. So I recommend to <b>go ahead and start using Leaflet right away</b>.
 
-<img src="/blog/2019/03/07/switching-google-maps-leaflet/leaflet-map-radsat-hd.jpg" /><br><small>Example of a fully-functional Leaflet map with custom controls, overlays, animations and polygons.</small>
+<img src="https://raw.githubusercontent.com/juanpabloventoso/end-point-blog/master/2019/03/07/switching-google-maps-leaflet/leaflet-map-radsat-hd.jpg" /><br><small>Example of a fully-functional Leaflet map with custom controls, overlays, animations and polygons.</small>
 
 
 Do you want to view/download the code from this post? <a href="leaflet-example.html">Click here</a> to open the live version. And this is the repository with my weather map source code: <a href="https://github.com/juanpabloventoso/RadSat-HD" target="_blank">RadSat HD</a>. <b>Feel free to leave any comments or suggestions!</b>
