@@ -10,9 +10,9 @@ It's no news for anyone who has Google Maps running on their websites that Googl
 
 <b>The consequence?</b> Any website with more than 25,000 page loads per day will have to pay. And if you are using a dynamic map (a map with custom styling and/or content) you only have roughly 28,000 free monthly page loads. We must create a billing account -even if we have a small website with a couple daily visitors-, hand credit card information to Google, and monitor our stats to make sure we won't be charged. And if we don't do that, our map will be dark and will have a "For development only" message in the background.
 
-So what are our options? We can either pay or completely remove Google Maps from our websites. I would say the second one makes more sense: Even enterprise weather websites like <a href="https://weather.com/weather/radar/interactive/l/USNY0996:1:US" target="_blank">The Weather Channel</a> or <a href="https://www.wunderground.com/wundermap" target="_blank">Weather Underground</a> have now replaced their Google Maps API calls with an alternative like Leaflet or MapBox (in some cases, they even gained some functionality in the process).
+So what are your options? You can either pay or completely remove Google Maps from your websites. Even enterprise weather websites like <a href="https://weather.com/weather/radar/interactive/l/USNY0996:1:US" target="_blank">The Weather Channel</a> or <a href="https://www.wunderground.com/wundermap" target="_blank">Weather Underground</a> have now replaced their Google Maps API calls with an alternative like Leaflet or MapBox (in some cases, they even gained some functionality in the process).
 
-I have a <a href="https://www.extendedforecast.net" target="_blank">weather website</a> too, and when I heard big changes were coming, I started to move away from Google as well. My choice at that moment was Leaflet, and I can't be more happy about it. It has everything you may need to build a robust tile-based map, add layers, markers, animations, custom tiles... And the most important thing: It's BSD-licensed open source and <b>free</b>.
+I have a <a href="https://www.extendedforecast.net" target="_blank">personal weather website</a> too, and when I heard big changes were coming, I started to move away from Google as well. My choice at that moment was Leaflet: It has everything you may need to build a robust tile-based map, add layers, markers, animations, custom tiles... And the most important thing: It's BSD-licensed open source and <b>free</b>.
 
 
 ###Creating a basic map
@@ -56,7 +56,7 @@ var map = new L.Map("map", {
 });
 ```
 
-Quite similar, isn't it? The main difference is that, in Leaflet, we need to provide a tile layer for the base map because there isn't one by default. There's a lot of freely available tile layers out there for us to use. Here are some of them:
+Quite similar, isn't it? The main difference is that, in Leaflet, we need to provide a tile layer for the base map because there isn't one by default. There are a lot of excellent tile layers available to use at no cost. Here are some of them:
 
 * <b>Bright</b>: ```https://a.tiles.mapbox.com/v3/mapbox.world-bright/{z}/{x}/{y}.png```
 * <b>Topographic</b>: ```https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png```
