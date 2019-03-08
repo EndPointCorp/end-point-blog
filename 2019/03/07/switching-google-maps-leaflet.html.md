@@ -96,23 +96,31 @@ And that's it: we have a working Leaflet map with a marker that displays a text 
 
 From this point, we can start doing more complex things if we need to:
 
-* Display images on the map: <a href="https://leafletjs.com/reference-1.4.0.html#imageoverlay" target="_blank">ImageOverlay</a>.
-* Display a custom tile layer: <a href="https://leafletjs.com/reference-1.4.0.html#tilelayer" target="_blank">TileLayer</a>.
-* Draw polygons, rectangles, circles: <a href="https://leafletjs.com/reference-1.4.0.html#polygon" target="_blank">Polygon</a> - <a href="https://leafletjs.com/reference-1.4.0.html#rectagle" target="_blank">Rectangle</a> - <a href="https://leafletjs.com/reference-1.4.0.html#circle" target="_blank">Circle</a>.
-* Display GeoJSON data on the map: <a href="https://leafletjs.com/reference-1.4.0.html#geojson" target="_blank">GeoJSON</a>.
+* <b>Display images on the map</b>: <a href="https://leafletjs.com/reference-1.4.0.html#imageoverlay" target="_blank">ImageOverlay</a>.
+* <b>Display a custom tile layer</b>: <a href="https://leafletjs.com/reference-1.4.0.html#tilelayer" target="_blank">TileLayer</a>.
+* <b>Draw polygons, rectangles, circles</b>: <a href="https://leafletjs.com/reference-1.4.0.html#polygon" target="_blank">Polygon</a> - <a href="https://leafletjs.com/reference-1.4.0.html#rectagle" target="_blank">Rectangle</a> - <a href="https://leafletjs.com/reference-1.4.0.html#circle" target="_blank">Circle</a>.
+* <b>Display GeoJSON data on the map</b>: <a href="https://leafletjs.com/reference-1.4.0.html#geojson" target="_blank">GeoJSON</a>.
 
 You can browse the <a href="https://leafletjs.com/reference-1.4.0.html" target="_blank">Leaflet API reference</a> for further details.
 
 
-###Plugins and resources
+###Plugins and tools
 
 There is some extended functionality in Google Maps that is not available in Leaflet by default unless we use a Plugin. For example, if we want to add the "fullscreen" button to the top right corner, just as Google has it, or if we want to let the user draw polygons on top of the map, we'll need to download and add the reference to the required plugins. Here is a list of the ones I've already used:
 
-* "Fullscreen" button plugin: <a href="https://github.com/Leaflet/Leaflet.fullscreen" target="_blank">Leaflet.fullscreen</a>.
-* Vector drawing and editing plugin: <a href="https://github.com/Leaflet/Leaflet.draw" target="_blank">Leaflet.draw</a>.
-* Heatmap plugin: <a href="https://github.com/Leaflet/Leaflet.heat" target="_blank">Leaflet.heat</a>.
+* <b>"Fullscreen" button plugin</b>: <a href="https://github.com/Leaflet/Leaflet.fullscreen" target="_blank">Leaflet.fullscreen</a>.
+* <b>Vector drawing and editing plugin</b>: <a href="https://github.com/Leaflet/Leaflet.draw" target="_blank">Leaflet.draw</a>.
+* <b>Heatmap plugin</b>: <a href="https://github.com/Leaflet/Leaflet.heat" target="_blank">Leaflet.heat</a>.
 
 You can find more plugins at the <a href="https://github.com/Leaflet/" target="_blank">Leaflet GitHub account</a>. And of course, you can (and should!) contribute to improve them.
+
+
+There is also some alternatives to additional services offered by Google like geocoding or routing. They might have some limitations involved, so it would be wise to take a look and their usage policies first.
+
+* <b>Geocoding API</b>: <a href="https://wiki.openstreetmap.org/wiki/Nominatim" target="_blank">Nominatim</a>.
+* <b>Routing</b>: <a href="http://project-osrm.org/" target="_blank">Project ORSM</a> (free version has a limited use).
+
+More services can be found at <a href="https://switch2osm.org/other-uses/" target="_blank">switch2osm.org/other-uses</a>.
 
 
 ###Putting it all together
