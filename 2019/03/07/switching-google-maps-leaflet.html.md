@@ -132,4 +132,4 @@ The Leaflet source code is well organized, modularized and easy to understand. I
 <img src="https://raw.githubusercontent.com/juanpabloventoso/end-point-blog/master/2019/03/07/switching-google-maps-leaflet/leaflet-map-radsat-hd.jpg" /><br><small>Example of a fully-functional Leaflet map with custom controls, overlays, animations and polygons.</small>
 
 
-Do you want to view/download the code from this post? <a href="leaflet-example.html">Click here</a> to open the live version. And this is the repository with my weather map source code: <a href="https://github.com/juanpabloventoso/RadSat-HD" target="_blank">RadSat HD</a>. <b>Feel free to leave any comments or suggestions!</b>
+Do you want to view/download the code from this post? <a href="https://raw.githubusercontent.com/juanpabloventoso/end-point-blog/master/2019/03/07/switching-google-maps-leaflet/leaflet-example.html">Click here</a> to open the live version. And this is the repository with my weather map source code: <a href="https://github.com/juanpabloventoso/RadSat-HD" target="_blank">RadSat HD</a>. <b>Feel free to leave any comments or suggestions!</b>
