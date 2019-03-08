@@ -58,9 +58,9 @@ var map = new L.Map("map", {
 
 Quite similar, isn't it? The main difference is that, in Leaflet, we need to provide a tile layer for the base map because there isn't one by default. There's a lot of freely available tile layers out there for us to use. Here are some of them:
 
-* Bright: "https://a.tiles.mapbox.com/v3/mapbox.world-bright/{z}/{x}/{y}.png"
-* Topographic: "https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png"
-* Black and white: "https://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}{r}.png"
+* <b>Bright</b>: ```https://a.tiles.mapbox.com/v3/mapbox.world-bright/{z}/{x}/{y}.png```
+* <b>Topographic</b>: ```https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png```
+* <b>Black and white</b>: ```https://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}{r}.png```
 
 You can browse other free tile layer providers for Leaflet on <a href="https://leaflet-extras.github.io/leaflet-providers/preview/" target="_blank">this link</a>. And of course, if you want to pay there's a lot of affordable tiles out there too.
 
