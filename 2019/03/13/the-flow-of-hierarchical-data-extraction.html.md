@@ -5,7 +5,7 @@ tags: data-mining, machine-learning, data-processing
 gh_issue_number: 1503
 ---
 
-![Diagram of the Habitable Zone for Earth, by NASA](/blog/2019/02/16/the-flow-of-hierarchical-data-extraction/habitable-zone.jpg)
+![Diagram of the Habitable Zone for Earth, by NASA](/blog/2019/03/13/the-flow-of-hierarchical-data-extraction/habitable-zone.jpg)
 
 [//]: # (Image sources: https://www.eurekalert.org/multimedia/pub/194678.php and https://3c1703fe8d.site.internapcdn.net/newman/gfx/news/hires/2019/chancesforli.jpg)
 
@@ -19,7 +19,7 @@ It is more effective to teach them this at the same time than to teach them sepa
 
 This is why people write software to cope with this issue. The terms data-extractor, data-miner, data-crawler, data-spider mean software which extracts data from a source and stores it at the target. If data is mined from the web, then the more-specific web-extractor, web-miner, web-crawler, web-spider terms can be used.
 
-![](/blog/2019/02/16/the-flow-of-hierarchical-data-extraction/SemanticDataExtractorFigure1.png "Extraction, to put it simply")
+![](/blog/2019/03/13/the-flow-of-hierarchical-data-extraction/SemanticDataExtractorFigure1.png "Extraction, to put it simply")
 
 In this article I will use the term “data-miner”.
 
@@ -195,7 +195,7 @@ We have to watch out for cycles though. Without additional tools there is no pro
 
 However, since the description of semantic trees can define multiple disjunct parents to cope with the possibility to cope with the actual tree of concepts for all elements, at least those whose pattern is known, the semantic tree in reality is a semantic tree pattern and when we use it or we search for the cycles, we will need to traverse the possible parents where more of them are listed.
 
-![](/blog/2019/02/16/the-flow-of-hierarchical-data-extraction/SemanticDataExtractorFigure2.png "Semantic tree example")
+![](/blog/2019/03/13/the-flow-of-hierarchical-data-extraction/SemanticDataExtractorFigure2.png "Semantic tree example")
 
 Consider the example we have brought for a semantic tree. 
 
@@ -488,6 +488,6 @@ Knowledge is power. Instead of failing gracefully, outside our limits of what we
 
 ### 6. The flow
 
-![](/blog/2019/02/16/the-flow-of-hierarchical-data-extraction/SemanticDataExtractorFigure3.png "The flow")
+![](/blog/2019/03/13/the-flow-of-hierarchical-data-extraction/SemanticDataExtractorFigure3.png "The flow")
 
 This diagram is an idealized representation of the flow. In reality we might have several different cron jobs, we might be working with threads, in asynchronous manner and the parser is invoked much more frequently, not just at the end of the whole extraction, because we do not have infinite resources. All these nuances would complicate the diagram immensely.
