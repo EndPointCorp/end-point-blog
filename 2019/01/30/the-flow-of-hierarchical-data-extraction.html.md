@@ -227,7 +227,11 @@ Let’s assume that we have a very nice schema and we store the data we have eff
 - <a href="https://opentextbc.ca/dbdesign01/chapter/chapter-11-functional-dependencies/">functional dependencies</a>
 - conditional functional dependencies (a functional dependency upon the table or cluster records provided a condition is met)
 
+<<<<<<< HEAD
 ```AR (Association Rule): c => {v1, …, vn}```
+=======
+AR (Association Rule): c => {v1, …, vn}
+>>>>>>> Created a blog post about data-mining
 
 If a condition (c) is fulfilled, then we have a set of constant values for their respective (database table) columns. We have an association rule in the case when a certain condition is met, some values (database columns in the record) will have a constant value.
 
