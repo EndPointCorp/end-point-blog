@@ -5,9 +5,9 @@ tags: data-mining, machine-learning, data-processing
 gh_issue_number: 1503
 ---
 
-![Diagram of the Habitable Zone for Earth, by NASA](/blog/2019/03/13/the-flow-of-hierarchical-data-extraction/habitable-zone.jpg)
+![forest view through glass ball on wood stump](/blog/2019/03/13/the-flow-of-hierarchical-data-extraction/art-ball-ball-shaped-235615-smaller.jpg)
 
-[//]: # (Image sources: https://www.eurekalert.org/multimedia/pub/194678.php and https://3c1703fe8d.site.internapcdn.net/newman/gfx/news/hires/2019/chancesforli.jpg)
+[//]: # (CC0 image source: https://www.pexels.com/photo/ball-ball-shaped-blur-color-235615/)
 
 ### 1. Problem statement
 
@@ -237,7 +237,7 @@ We notice again that the possibility of multiple parents does not mean that ther
 
 If we take a look at “DIMENSIONS”, we will see several concepts with the same name (“VALUE” and “UNIT”), but they have a different meaning in their specific context (“AREA” and “HEIGHT”, respectively).
 
-Another interesting region is “CONTACT”, which has “PERSON” and “COMPANY” elements as conceptual children and both “PERSON” and “CONTRACT” is plural. The underlying logic is that several companies or persons can be contacted when one wants to buy/​view a real-estate. We have sub-concepts of “FACEBOOK”, “EMAIL”, “PHONE”, “NAME”, “OTHER” and “WEBSITE” for both “PERSON” and “COMPANY”, but similarly to the example we have seen with “CURRENCY”, here the concepts have different meanings. A corporate website is a different thing from a personal website.
+Another interesting region is “CONTACT”, which has “PERSON” and “COMPANY” elements as conceptual children and both “PERSON” and “CONTACT” is plural. The underlying logic is that several companies or persons can be contacted when one wants to buy/​view a real-estate. We have sub-concepts of “FACEBOOK”, “EMAIL”, “PHONE”, “NAME”, “OTHER” and “WEBSITE” for both “PERSON” and “COMPANY”, but similarly to the example we have seen with “CURRENCY”, here the concepts have different meanings. A corporate website is a different thing from a personal website.
 
 However, if we draw/​generate such a semantic tree, then it is better than a long documentation. It actually describes for coders the exact way the engine will operate and in the case when the engine is suggesting a new semantic tree for a reason, then, provided that the engine generates the tree’s picture, one will immediately understand what the essence of the engine’s suggestion is. Also, with such a nice diagram managers will understand the mechanism of the system at a glance.
 
