@@ -50,7 +50,7 @@ This illustrates the "magic" problem with Base64 encoding binary data in JSON.  
 The CBOR representation of the same input data, as a hex string:
 
 ```
-a2646e616d656e5374726177626572727920506965696a7065675f646174614a00010203040506070809
+a2646e616d656e537472617762657272792050696564646174614a00010203040506070809
 ```
 
 Whoa, there.  What do all these numbers and letters mean?  I miss my JSON!  The [node-cbor](https://www.npmjs.com/package/cbor) package has a handy [`cbor2comment` tool](https://github.com/hildjj/node-cbor/blob/master/bin/cbor2comment) to annotate this hex string for us.
@@ -65,7 +65,7 @@ Whoa, there.  What do all these numbers and letters mean?  I miss my JSON!  The 
       64617461 -- {Key:1}, "data"
     4a              -- Bytes, length: 10
       00010203040506070809 -- {Val:1}, 00010203040506070809
-Length: 35 bytes
+Length: 37 bytes
 ```
 
 Now let’s [benchmark JSON against CBOR using real JPEG data](https://github.com/mvollrath/cbor-bench).  For this test I used a [modified version of cbor-js](https://github.com/mvollrath/cbor-js/tree/fast_byte_array_encoding), a library compatible with both Node and browsers, and encoded a 910,226 byte JPEG of strawberry rhubarb pie.
