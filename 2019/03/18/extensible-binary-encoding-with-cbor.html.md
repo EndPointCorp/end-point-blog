@@ -4,16 +4,19 @@ title: "Extensible Binary Encoding with CBOR"
 tags: cbor, performance, optimization, browsers, scalability, nodejs, benchmarks
 ---
 
-CBOR is a relatively new IETF draft standard extensible binary data format.  Compared to similar formats like MessagePack and BSON, CBOR was developed from the ground up with clear goals:
+CBOR is a relatively new IETF extensible binary data format.  Compared to similar formats like MessagePack and BSON, CBOR was developed from the ground up with clear goals:
 
-> 1. unambiguous encoding of most common data formats from Internet standards
-> 2. code compactness for encoder and decoder
-> 3. no schema description needed
-> 4. reasonably compact serialization
-> 5. applicability to constrained and unconstrained applications
-> 6. good JSON conversion
-> 7. extensibility
-> -- [RFC7049](https://tools.ietf.org/html/rfc7049) Appendix E, Copyright (c) 2013 IETF Trust, Bormann & Hoffman
+```
+1. unambiguous encoding of most common data formats from Internet standards
+2. code compactness for encoder and decoder
+3. no schema description needed
+4. reasonably compact serialization
+5. applicability to constrained and unconstrained applications
+6. good JSON conversion
+7. extensibility
+```
+
+-- [RFC7049](https://tools.ietf.org/html/rfc7049) Appendix E, Copyright (c) 2013 IETF Trust, Bormann & Hoffman
 
 In the context of data storage and messaging, most developers can relate to CBOR as a binary drop-in replacement for JSON.  While CBOR doesn’t share the human readability of JSON, it can efficiently and unambiguously encode types of data that JSON struggles with.  CBOR can also be extended with tags to optimize serialization beyond its standard primitives.
 
