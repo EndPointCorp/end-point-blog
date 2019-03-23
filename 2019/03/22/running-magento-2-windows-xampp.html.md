@@ -5,7 +5,7 @@ tags: magento, ecommerce, mysql, windows, php
 gh_issue_number: 1506
 ---
 
-<img src="/blog/2019/03/05/running-magento-2-windows-xampp/e-commerce-safe.jpg" alt="Ecommerce" /><br><a href="https://burst.shopify.com/photos/computer-security-lock-and-payment?q=e-commerce">Photo by Nicole De Khors</a> · <a href="https://burst.shopify.com/licenses/shopify-some-rights-reserved">Burst, Some Rights Reserved</a>
+<img src="/blog/2019/03/22/running-magento-2-windows-xampp/e-commerce-safe.jpg" alt="Ecommerce" /><br><a href="https://burst.shopify.com/photos/computer-security-lock-and-payment?q=e-commerce">Photo by Nicole De Khors</a> · <a href="https://burst.shopify.com/licenses/shopify-some-rights-reserved">Burst, Some Rights Reserved</a>
 
 Magento is an open source Ecommerce platform, written in PHP and relying on MySQL/MariaDB for persistence. According to <a href="https://trends.builtwith.com/shop">BuiltWith</a>, Magento is the third most used platform in Ecommerce websites. It began its life in 2008 with its first general release, and a major update (Magento 2) was released in 2015.
 
@@ -33,7 +33,7 @@ Now we’re ready to install the environment needed to run Magento. I recommend 
 * Create a new “magento” subfolder (or whatever name you prefer) inside the htdocs folder in the XAMPP installation (usually ```C:\xampp```) and uncompress the Magento 2 archive there.
 * Start the XAMPP Control Panel from the Windows start menu. In the “Apache” section, click the “Config” button and, on the menu that appears, select “PHP (php.ini)”. Remove the semicolon before the ```extension=intl```, ```extension=soap```, and ```extension=xsl``` texts (this will enable the intl, soap and xsl extensions).
 
-<img src="/blog/2019/03/05/running-magento-2-windows-xampp/xampp-control-panel.jpg" /><br><small>Screenshot of the XAMPP Control Panel with the PHP config menu displayed.</small>
+<img src="/blog/2019/03/22/running-magento-2-windows-xampp/xampp-control-panel.jpg" /><br><small>Screenshot of the XAMPP Control Panel with the PHP config menu displayed.</small>
 
 
 ###MySQL and Magento setup
@@ -46,7 +46,7 @@ We have all the files in place and the environment ready to start configuring th
 
 * Run the Magento 2 setup from <a href="http://localhost/magento">localhost/magento</a> (replace the “magento” part of the URL with whatever name you have chosen to host Magento). If the setup program requires to do any additional configuration change, do it as instructed. Do a screenshot or save the final page contents for later use.
 
-<img src="/blog/2019/03/05/running-magento-2-windows-xampp/magento-2-installation-success.jpg" /><br><small>Example of the page that will be displayed when the Magento 2 installation finishes.</small>
+<img src="/blog/2019/03/22/running-magento-2-windows-xampp/magento-2-installation-success.jpg" /><br><small>Example of the page that will be displayed when the Magento 2 installation finishes.</small>
 
 
 ###Fixing known issues
@@ -59,9 +59,9 @@ When we finish the installation process, we will have a Magento 2 instance runni
 
 After we finish making these changes, we will need to <b>restart the Apache service</b> from the XAMPP control panel. And that’s it! We should be ready to open the Magento front page, and login into the backend.
 
-<img src="/blog/2019/03/05/running-magento-2-windows-xampp/magento-2-front-end.jpg" /><br><small>An empty home page with the default theme enabled in Magento 2.</small>
+<img src="/blog/2019/03/22/running-magento-2-windows-xampp/magento-2-front-end.jpg" /><br><small>An empty home page with the default theme enabled in Magento 2.</small>
 
-<img src="/blog/2019/03/05/running-magento-2-windows-xampp/magento-2-back-end.jpg" /><br><small>This is how the Magento 2 back-end dashboard looks like once we login.</small>
+<img src="/blog/2019/03/22/running-magento-2-windows-xampp/magento-2-back-end.jpg" /><br><small>This is how the Magento 2 back-end dashboard looks like once we login.</small>
 
 ###Setting up the store: A roadmap
 
