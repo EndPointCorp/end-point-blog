@@ -14,11 +14,11 @@ In my experience, there are two main roadblocks when trying to do this. First: [
 
 Anyway, I've since learned that the vast majority of the Ruby and Rails community uses either OSX or some flavor of Linux as their Operating System of choice...
 
-Great, but what is a Windows guy like me to do under these circumstances? Well, there are a few options. Assuming they would like/need to keep using Windows as their main OS, they could virtualize some version of Linux (using something like Hyper-V or VitrualBox) or go dual boot with a native Linux installation on their current hardware. Provided you can set something like these up, these solutions can work beautifully, but they have their drawbacks.
+Great, but what is a Windows guy like me to do under these circumstances? Well, there are a few options. Assuming they would like/need to keep using Windows as their main OS, they could virtualize some version of Linux (using something like Hyper-V or VitrualBox) or go dual boot with a native Linux installation on their current hardware. Provided you can set something like these up, these solutions can work beautifully, but they can sometimes have their drawbacks.
 
-Virtual machines, depending on how you set them up and for graphical interfaces at least, can take a bit of a performance hit when compared to running the OS natively. So, having your entire development environment in one can get annoying after a while. The dual boot scenario gets rid of any performance degradation but then you have to go through the hassle of restarting anytime you want to work in a different OS. This was not an option for me as I actively maintain Windows-based .NET projects as well.
+Virtual machines, depending on how you set them up and for graphical interfaces specially, can take a bit of a performance hit when compared to running the OS natively. So, having your entire development environment in one can get annoying after a while. The dual boot scenario gets rid of any performance degradation but then you have to go through the hassle of restarting anytime you want to work in a different OS. This can become a problem if you need to actively work on Windows-based projects as well.
 
-> There's also se option of using something like [Cygwin](https://www.cygwin.com/) to create an environment very close to what you'd see in a Linux distribution. I personally haven't had much experience with that one so I can't speak on how capable it is as far as Ruby and Rails development goes.
+> There's also se option of using something like [Cygwin](https://www.cygwin.com/) to create an environment very close to what you'd see in a Linux distribution.
 
 Luckily for me, it turns out that Microsoft's own Windows Subsystem for Linux is up to the task of providing a drama-free solution for working in a Linux environment within Windows. That's why I thought I'd give it a shot in setting up my Ruby/Rails development environment. I can happily say that this exercise ended up being a resounding success.
 
@@ -166,7 +166,7 @@ Nice. This Ruby, since it's the only one we have installed so far (remember that
 
 At this point, it's the usual Ruby process of installing the Bundler gem and creating our skeleton Rails app. Let's breeze through it.
 
-# 3. Create a new Rails app 
+# 3. Create a new Rails app
 
 ## 3.1. Set up Rails skeleton app
 
@@ -436,7 +436,7 @@ Again, feel free to look around the `launch.json` file that the Ruby extension h
 ### Gotcha: Ruby versions 2.5.0 and 2.5.1 have some issues
 
 > At this point there's one big gotcha. Ruby versions 2.5.0 and 2.5.1 have some issues that prevent doing this kind of debugging in Rails apps. You can read more about that [here](https://superuser.com/questions/1359747/is-it-possible-to-get-visual-studio-code-ide-debugging-of-apps-on-rails-5-2-to-w). Thankfully, there's a quick workaround: Replace the `require 'bootsnap/setup'` line in the `config\boot.rb` file with something like this:
-> 
+>
 > ```ruby
 > unless ( (('2.5.0'..'2.5.1').include? RUBY_VERSION) && defined?>(Debugger) )
 >     require 'bootsnap/setup' # Speed up boot time by caching expensive operations.
