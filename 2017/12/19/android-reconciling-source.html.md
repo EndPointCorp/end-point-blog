@@ -1,7 +1,7 @@
 ---
 author: "Zed Jensen"
 title: "Reconciling Android source code"
-tags: android, software-archaeology
+tags: android, software
 gh_issue_number: 1356
 ---
 

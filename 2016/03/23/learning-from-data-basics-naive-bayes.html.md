@@ -1,7 +1,7 @@
 ---
 author: Kamil Ciemniewski
 gh_issue_number: 1215
-tags: machine-learning, optimization, probability-theory, ruby
+tags: machine-learning, optimization, probability, ruby
 title: "Learning from data basics: the Naive Bayes model"
 ---
 
