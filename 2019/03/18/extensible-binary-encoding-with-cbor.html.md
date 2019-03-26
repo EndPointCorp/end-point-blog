@@ -2,6 +2,7 @@
 author: "Matt Vollrath"
 title: "Extensible Binary Encoding with CBOR"
 tags: performance, optimization, browsers, scalability, nodejs, benchmarks
+gh_issue_number: 1509
 ---
 
 CBOR is a relatively new IETF draft standard extensible binary data format. Compared to similar formats like MessagePack and BSON, CBOR was developed from the ground up with clear goals:

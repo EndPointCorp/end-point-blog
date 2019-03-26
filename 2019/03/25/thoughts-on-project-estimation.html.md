@@ -2,6 +2,7 @@
 author: Árpád Lajos
 title: "Thoughts on Project Estimation: The Star, the Planet and the Habitable Zone"
 tags: tips, project-management
+gh_issue_number: 1508
 ---
 
 <img src="/blog/2019/03/25/thoughts-on-project-estimation/planet_orbit.jpg" alt="planet in orbit" /><a href="https://www.flickr.com/photos/esoastronomy">Photo by ESO on Flickr</a> · <a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0</a>
