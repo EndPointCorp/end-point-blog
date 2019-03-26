@@ -5,8 +5,6 @@ tags: liquid-galaxy, sysadmin
 title: Using cec-client to Control HDMI Devices
 ---
 
-
-
 Maintaining the horde of computers it takes to run [Liquid Galaxies](https://liquidgalaxy.endpoint.com/) in all corners of the globe is a big job. As of November of 2012, we’re monitoring 154 computers at permanent installations in addition to keeping our development and testing systems running like the well-oiled machines we want them to be. All that fluff aside, end users never see the fruits of our labor unless the TVs are working as expected! Without methods for getting and setting the status of displays, we are completely blind to what people are actually experiencing in front of a Liquid Galaxy.
 
 Enter [HDMI-CEC](https://en.wikipedia.org/wiki/HDMI#CEC). CEC is a protocol that allows HDMI-connected devices to control each other in various ways. It has a set of standard features that make it easy for home users with a stack of DVD players or TiVos or other devices to change the active source, put everything on standby, control the volume, and some other handy tricks.
@@ -83,8 +81,6 @@ $ echo 'on 0' | cec-client -s /dev/ttyACM0
 
 The first command will put the TV on standby, the second will turn it on. In this case, we don’t need to specify the command source, only the destination of TV (0). Also notice that we used the -s argument to cec-client and it exited as soon as it sent the command. -s is short for --single-command, which sends a command and then exits. We didn’t use -s in the above menu language query because it causes cec-client to exit before we get the response back from the TV! For automated cec-client commands, such as automatic screen sleeping at night, -s is quite useful since the process doesn’t “hang” after execution.
 
-These are the basics of cec-client. For more information on the app itself, you can consult the cec-client manpage or visit the [libcec project on GitHub](httpss://github.com/Pulse-Eight/libcec).
+These are the basics of cec-client. For more information on the app itself, you can consult the cec-client manpage or visit the [libcec project on GitHub](https://github.com/Pulse-Eight/libcec).
 
 Happy hacking!
-
-

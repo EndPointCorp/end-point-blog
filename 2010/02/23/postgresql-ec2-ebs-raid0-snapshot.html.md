@@ -32,83 +32,86 @@ Well, why not try it anyway? Filesystem metadata doesn’t change that often, es
 
 I wanted to know if it was crazy or not, so I tried it on a new set of services in a separate AWS account. Here are the notes and some details of what I did:
 
-1. Created one EC2 image:
+1\. Created one EC2 image:
 
-Amazon EC2 Debian 5.0 lenny AMI built by Eric Hammond
+Amazon EC2 Debian 5.0 lenny AMI built by Eric Hammond<br>
+Debian AMI ID ami-4ffe1926 (x86_64)<br>
+Instance Type: High-CPU Extra Large (c1.xlarge) — 7 GB RAM, 8 CPU cores
 
-Debian AMI ID ami-4ffe1926 (x86_64)
+2\. Created 4 x 10 GB EBS volumes
 
-Instance Type:  High-CPU Extra Large (c1.xlarge) — 7 GB RAM, 8 CPU cores
+3\. Attached volumes to the image
 
-1. Created 4 x 10 GB EBS volumes
+4\. Created software RAID 0 device:
 
-1. Attached volumes to the image
-
-1. Created software RAID 0 device:
-```nohighlight
+```bash
 mdadm -C /dev/md0 -n 4 -l 0 -z max /dev/sdf /dev/sdg /dev/sdh /dev/sdi
 ```
 
-1. Created XFS filesystem on top of RAID 0 device:
-```nohighlight
+5\. Created XFS filesystem on top of RAID 0 device:
+
+```bash
 mkfs -t xfs -L /pgdata /dev/md0
 ```
 
-1. Set up in /etc/fstab and mounted:
-```nohighlight
+6\. Set up in /etc/fstab and mounted:
+
+```bash
 mkdir /pgdata
 # edit /etc/fstab, with noatime
 mount /pgdata
 ```
 
-1. Installed PostgreSQL 8.3
+7\. Installed PostgreSQL 8.3
 
-1. Configured postgresql.conf to be similar to primary production database server
+8\. Configured postgresql.conf to be similar to primary production database server
 
-1. Created empty new database cluster with data directory in /pgdata
+9\. Created empty new database cluster with data directory in /pgdata
 
-1. Started Postgres and imported a play database (from public domain census name data and Project Gutenberg texts), resulting in about 820 MB in data directory
+10\. Started Postgres and imported a play database (from public domain census name data and Project Gutenberg texts), resulting in about 820 MB in data directory
 
-1. Ran some bulk inserts to grow database to around 5 GB
+11\. Ran some bulk inserts to grow database to around 5 GB
 
-1. Rebooted EC2 instance to confirm everything came back up correctly on its own
+12\. Rebooted EC2 instance to confirm everything came back up correctly on its own
 
-1. Set up two concurrent data-insertion processes:
+13\. Set up two concurrent data-insertion processes:
 
-    - 50 million row insert based on another local table (INSERT INTO ... SELECT ...), in a single transaction (hits disk hard, but nothing should be visible in the snapshot because the transaction won’t have committed before the snapshot is taken)
+- 50 million row insert based on another local table (INSERT INTO ... SELECT ...), in a single transaction (hits disk hard, but nothing should be visible in the snapshot because the transaction won’t have committed before the snapshot is taken)
 
-    - Repeated single inserts in autocommit mode (Python script writing INSERT statements using random data from /usr/share/dict/words piped into psql), to verify that new inserts made it into the snapshot, and no partial row garbage leaked through
+- Repeated single inserts in autocommit mode (Python script writing INSERT statements using random data from /usr/share/dict/words piped into psql), to verify that new inserts made it into the snapshot, and no partial row garbage leaked through
 
-1. Started those “beater” jobs, which mostly consumed 2-3 CPU cores
+14\. Started those “beater” jobs, which mostly consumed 2-3 CPU cores
 
-1. Manually inserted a known test row and created a known view that should appear in the snapshot
+15\. Manually inserted a known test row and created a known view that should appear in the snapshot
 
-1. Started Postgres’s backup mode that allows for copying binary data files in a non-atomic manner, which also does a CHECKPOINT and thus also a filesystem sync:
+16\. Started Postgres’s backup mode that allows for copying binary data files in a non-atomic manner, which also does a CHECKPOINT and thus also a filesystem sync:
+
 ```sql
 SELECT pg_start_backup('raid_backup');
 ```
 
-1. Manually inserted a 2nd known test row & 2nd known test view that I don’t want to appear in the snapshot after recovery
+17\. Manually inserted a 2nd known test row & 2nd known test view that I don’t want to appear in the snapshot after recovery
 
-1. Ran snapshot script which calls ec2-create-snapshot on each of the 4 EBS volumes—​during first run, run serially quite slowly taking about 1 minute total; during second run, run in parallel such that the snapshot point was within 1 second for all 4 volumes
+18\. Ran snapshot script which calls ec2-create-snapshot on each of the 4 EBS volumes—​during first run, run serially quite slowly taking about 1 minute total; during second run, run in parallel such that the snapshot point was within 1 second for all 4 volumes
 
-1. Tell Postgres the backup’s over:
+19\. Tell Postgres the backup’s over:
+
 ```sql
 SELECT pg_stop_backup();
 ```
 
-1. Ran script to create new EBS volumes derived from the 4 snapshots (which aren’t directly usable and always go into S3), using ec2-create-volume --snapshot
+20\. Ran script to create new EBS volumes derived from the 4 snapshots (which aren’t directly usable and always go into S3), using `ec2-create-volume --snapshot`
 
-1. Run script to attach new EBS volumes to devices on the new EC2 instance using ec2-attach-volume
+21\. Run script to attach new EBS volumes to devices on the new EC2 instance using `ec2-attach-volume`
 
-1. Then, on the new EC2 instance for doing backups:
+22\. Then, on the new EC2 instance for doing backups:
 
-    - mdadm --assemble --scan
-    - mount /pgdata
-    - Start Postgres
-    - Count rows on the 2 volatile tables; confirm that the table with the in-process transaction doesn’t show any new rows, and that the table getting individual rows committed to reads correctly
-    - VACUUM VERBOSE — and confirm no errors or inconsistencies detected
-    - pg_dumpall # confirmed no errors and data looks sound
+- `mdadm --assemble --scan`
+- `mount /pgdata`
+- Start Postgres
+- Count rows on the 2 volatile tables; confirm that the table with the in-process transaction doesn’t show any new rows, and that the table getting individual rows committed to reads correctly
+- `VACUUM VERBOSE` — and confirm no errors or inconsistencies detected
+- `pg_dumpall` # confirmed no errors and data looks sound
 
 It worked! No errors or problems, and pretty straightforward to do.
 

@@ -2,7 +2,7 @@
 author: Steph Skardal
 gh_issue_number: 459
 tags: company, conference, ecommerce, liquid-galaxy
-title: End Point at Internet Retailer 2011
+title: End Point to be at Internet Retailer 2011
 ---
 
 We’re excited to announce that End Point will be in full force at Internet Retailer 2011. A team of six (Rick, Ben, Jon, Ron, Carl, and myself) will be managing a booth during the 3 day Conference and Exhibition in San Diego from June 14th-17th.

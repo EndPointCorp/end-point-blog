@@ -1,30 +1,30 @@
 ---
 author: Wojtek Ziniewicz
 gh_issue_number: 1292
-tags: machine-learning, ros, ruby, spree, ecommerce, conference
-title: Wrocloverb 2017 part 1
+tags: machine-learning, ruby, spree, ecommerce, conference
+title: wroc_love.rb 2017 part 1
 ---
 
-Wrocloverb is a single-track 3-day conference that takes place in Wrocław (Poland) every year in March.
+[wroc_love.rb](https://wrocloverb.com/) is a single-track 3-day conference that takes place in Wrocław, Poland, every year in March.
 
-Here's a subjective list of most interesting talks from the first day
+Here’s a subjective list of most interesting talks from the first day:
 
-### Kafka / Karafka (by Maciej Mensfeld)
+### Kafka / Karafka by Maciej Mensfeld
 
-[Karafka](https://github.com/karafka/karafka) is another library that simplifies Apache Kafka usage in Ruby. It lets Ruby on Rails apps benefit from horizontally scalable message busses in a pub-sub (or publisher/consumer) type of network.
+[Karafka](https://github.com/karafka/karafka) is another library that simplifies Apache Kafka usage in Ruby. It lets Ruby on Rails apps benefit from horizontally scalable message busses in a pub-sub (or publisher/​consumer) type of network.
 
-**Why [Kafka](https://kafka.apache.org/) is (*probably*) better message/task broker for your app:**
+**Why [Kafka](https://kafka.apache.org/) is (*probably*) better message/​task broker for your app:**
 
-- broadcasting is a real power feature of kafka (http lacks that)
-- author claims that it's easier to support it rather than ZeroMQ/RabbitMQ
-- it's namespaced with topics (similar to [Robot Operating System](http://www.ros.org/))
+- broadcasting is a real power feature of Kafka (HTTP lacks that)
+- author claims that it’s easier to support than ZeroMQ/​RabbitMQ
+- it’s namespaced with topics (similar to ROS, the [Robot Operating System](http://www.ros.org/))
 - great replacement for [ruby-kafka](https://github.com/zendesk/ruby-kafka) and [Poseidon](https://github.com/bpot/poseidon)
 
 > Karafka [https://t.co/g9LQZiAV4i](https://t.co/g9LQZiAV4i) microframework to have [#rails](https://twitter.com/hashtag/rails?src=hash)-like development performance with [#kafka](https://twitter.com/hashtag/kafka?src=hash) in [#ruby](https://twitter.com/hashtag/ruby?src=hash) [@maciejmensfeld](https://twitter.com/maciejmensfeld) [#wrocloverb](https://twitter.com/hashtag/wrocloverb?src=hash)
 >
 > — Maciek Rząsa (@mjrzasa) [17 marzo 2017](https://twitter.com/mjrzasa/status/842771868239192064)
 
-### Machine Learning to the Rescue (Mariusz Gil)
+### Machine Learning to the Rescue by Mariusz Gil
 
 This talk was devoted to Machine Learning success (and failure) story of the author.
 
@@ -39,7 +39,7 @@ Author underlined that Machine Learning is a **process** and proposed following 
 7. select final model
 8. validate final model (test using production data)
 
-Mariusz described few ML problems that he has dealt with in the past. One of them was a project designed to estimate cost of a code review. He outlined the process of tuning the input data. Here's a list of what comprised the input for a code review estimation cost:
+Mariusz described few ML problems that he has dealt with in the past. One of them was a project designed to estimate cost of a code review. He outlined the process of tuning the input data. Here’s a list of what comprised the input for a code review estimation cost:
 
 - number of lines changed
 - number of files changed
@@ -49,17 +49,17 @@ Mariusz described few ML problems that he has dealt with in the past. One of the
 - number of interfaces
 - inheritance level
 - number of method calls
-- lloc metric
-- lcom metric (whether single responsibility pattern is followed or not)
+- LLOC metric (Logical Lines of Code, excluding empty or comment lines)
+- LCOM metric (Lack of Cohesion between Methods—​whether single responsibility pattern is followed or not)
 
 ### Spree lightning talk by [sparksolutions.co](https://sparksolutions.co/)
 
-One of the lightning talks was devoted to Spree. Here's some interesting latest data from the Spree world:
+One of the lightning talks was devoted to Spree. Here’s some interesting latest data from the Spree world:
 
-- number of contributors of spree - 700
-- it's very modular
-- it's API driven
-- it's one of the biggest repos on GitHub
+- number of contributors to Spree: 700
+- it’s very modular
+- it’s API driven
+- it’s one of the biggest repos on GitHub
 - very large number of extensions
 - it drives thousands of stores worldwide
 - [Spark Solutions](https://sparksolutions.co/) is a maintainer
