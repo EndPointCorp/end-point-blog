@@ -7,13 +7,13 @@ gh_issue_number: 1507
 
 <img src="/blog/2019/03/23/switching-google-maps-leaflet/leaflet-weather-map-us.jpg" alt="Leaflet Weather map example" /><br>Photo: <a href="https://www.extendedforecast.net/radsat">RadSat HD</a>
 
-It’s no news for anyone who has Google Maps running on their websites that Google started charging for using their API. We saw it coming when, back in 2016, they started requiring a key to add a map using their Javascript API. And on June 11, 2018, they did a major upgrade to their API and billing system.
+It’s no news for anyone who has Google Maps running on their websites that Google started charging for using their API. We saw it coming when, back in 2016, they started requiring a key to add a map using their JavaScript API. And on June 11, 2018, they did a major upgrade to their API and billing system.
 
-<b>The consequence?</b> Any website with more than 25,000 page loads per day will have to pay. And if you are using a dynamic map (a map with custom styling and/or content) you only have roughly 28,000 free monthly page loads. We must create a billing account, *even if we have a small website with a couple daily visitors*, hand credit card information to Google, and monitor our stats to make sure we won’t be charged. And if we don’t do that, our map will be dark and will have a “For development only” message in the background.
+<b>The consequence?</b> Any website with more than 25,000 page loads per day will have to pay. And if you are using a dynamic map (a map with custom styling and/or content) you only have roughly 28,000 free monthly page loads. We must create a billing account, *even if we have a small website with a couple of daily visitors*, hand credit card information to Google, and monitor our stats to make sure we won’t be charged. And if we don’t do that, our map will be dark and will have a “For development only” message in the background.
 
 So what are your options? You can either pay or completely remove Google Maps from your websites. Even enterprise weather websites like <a href="https://weather.com/weather/radar/interactive/l/USNY0996:1:US">The Weather Channel</a> or <a href="https://www.wunderground.com/wundermap">Weather Underground</a> have now replaced their Google Maps API calls with an alternative like Leaflet or MapBox (in some cases, they even gained some functionality in the process).
 
-I have a <a href="https://www.extendedforecast.net">personal weather website</a>, and when I heard big changes were coming, I started to move away from Google as well. My choice at that moment was Leaflet: It has everything you may need to build a robust tile-based map, add layers, markers, animations, custom tiles, etc. And the most important thing: It’s BSD-licensed <b>open source and free</b>.
+I have a <a href="https://www.extendedforecast.net">personal weather website</a>, and when I heard big changes were coming, I started to move away from Google Maps as well. My choice at that moment was Leaflet: It has everything you may need to build a robust tile-based map, add layers, markers, animations, custom tiles, etc. And it’s BSD-licensed <b>open source and free</b>.
 
 ###Creating a basic map
 
@@ -27,7 +27,7 @@ First thing we need to do is to remove the Google Maps API reference from our we
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=[your_api_key]"></script>
 ```
 
-With the references to the Leaflet map Javascript and stylesheet URIs.
+With the references to the Leaflet map JavaScript and stylesheet URIs.
 
 ```
 <script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script>
@@ -52,7 +52,7 @@ var map = new google.maps.Map(document.getElementById("map"), {
 var map = new L.Map("map", {
 	center: new L.LatLng(40.7401, -73.9891),
 	zoom: 12,
-	layers: new L.TileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png")
+	layers: new L.TileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png")
 });
 ```
 
@@ -62,7 +62,7 @@ Quite similar, isn’t it? The main difference is that, in Leaflet, we need to p
 * <b>Topographic</b>: ```https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png```
 * <b>Black and white</b>: ```https://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}{r}.png```
 
-You can browse other free tile layer providers for Leaflet on <a href="https://leaflet-extras.github.io/leaflet-providers/preview/">this link</a>. And of course, if you want to pay there’s a lot of affordable payed tiles out there too.
+You can browse other free tile layer providers for Leaflet on <a href="https://leaflet-extras.github.io/leaflet-providers/preview/">this link</a>. And of course, if you want to pay there’s a lot of affordable paid tiles out there too.
 
 
 ###Adding a marker
@@ -108,7 +108,7 @@ And that’s it: we have a working Leaflet map with a marker that displays a tex
     var map = new L.Map("map", {
       center: endPointLocation,
       zoom: 12,
-      layers: new L.TileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png")
+      layers: new L.TileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png")
     });
     var marker = new L.Marker(endPointLocation);
     marker.bindPopup("End Point Corporation");
@@ -140,7 +140,7 @@ There is some extended functionality in Google Maps that is not available in Lea
 You can find more plugins at the <a href="https://github.com/Leaflet/">Leaflet GitHub account</a>. And of course, you can (and should!) contribute to improve them.
 
 
-There is also some alternatives to additional services offered by Google like geocoding or routing. They might have some limitations involved, so it would be wise to take a look and their usage policies first.
+There is also some alternatives to additional services offered by Google like geocoding or routing. They might have some limitations involved, so it would be wise to take a look at their usage policies first.
 
 * <b>Geocoding API</b>: <a href="https://wiki.openstreetmap.org/wiki/Nominatim">Nominatim</a>.
 * <b>Routing</b>: <a href="http://project-osrm.org/">Project ORSM</a> (free version has limited use).

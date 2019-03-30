@@ -1,6 +1,6 @@
 ---
 author: Árpád Lajos
-title: "Thoughts on Project Estimation: The Star, the Planet and the Habitable Zone"
+title: "Thoughts on Project Estimation: The Star, the Planet, and the Habitable Zone"
 tags: tips, project-management
 gh_issue_number: 1508
 ---
@@ -27,6 +27,6 @@ So, the rules we would like to adhere to are:
 - Be open when you cannot achieve the precision you would like for the estimation.
 - Give alternatives when something takes too much energy, if possible.
 - Pleasantly surprise the client by completing the work before the deadline, both in terms of agreed hours and end date, whenever we are able to.
-- Be detailed about what and how was done, so if the work requires more time than we thought the client will understand the reason
+- Be detailed about what and how was done, so if the work requires more time than we thought the client will understand the reason.
 
-Communication is often not counted into the estimation and there could be other things we forget. Make sure to think about what you’re forgetting before you send an estimation.
+Communication is often not counted into the estimation and there could be other things we forget. Make sure to think about what you’re forgetting before you send an estimation. Asking colleagues for review can help you with your blind spots.

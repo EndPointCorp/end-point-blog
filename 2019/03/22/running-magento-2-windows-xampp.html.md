@@ -7,7 +7,7 @@ gh_issue_number: 1506
 
 <img src="/blog/2019/03/22/running-magento-2-windows-xampp/e-commerce-safe.jpg" alt="Ecommerce" /><br><a href="https://burst.shopify.com/photos/computer-security-lock-and-payment?q=e-commerce">Photo by Nicole De Khors</a> · <a href="https://burst.shopify.com/licenses/shopify-some-rights-reserved">Burst, Some Rights Reserved</a>
 
-Magento is an open source Ecommerce platform, written in PHP and relying on MySQL/MariaDB for persistence. According to <a href="https://trends.builtwith.com/shop">BuiltWith</a>, Magento is the third most used platform in Ecommerce websites. It began its life in 2008 with its first general release, and a major update (Magento 2) was released in 2015.
+Magento is an open source ecommerce platform, written in PHP and relying on MySQL/​MariaDB for persistence. According to <a href="https://trends.builtwith.com/shop">BuiltWith</a>, Magento is the third most used platform in ecommerce websites. It began its life in 2008 with its first general release, and a major update (Magento 2) was released in 2015.
 
 And now, more than three years after, Magento 1 is slowly dying: There won’t be any more quality fixes or security updates from June 2020, and there won’t be extended support for fixes or new payment methods. So the obvious choice will be Magento 2 from now on.
 
@@ -17,7 +17,7 @@ So a good approach might be to get a clean Magento 2 version deployed locally, t
 
 ###Environment setup
 
-The environment I used for this testing installation was Windows 10 Professional. As a first step, we’ll need to make sure that localhost is published in our local hosts file:
+The environment I used for this testing installation was Windows 10 Professional. As a first step, we’ll need to make sure that `localhost` is published in our local hosts file:
 
 * Navigate to the folder ```%SystemRoot%\system32\drivers\etc```
 * Backup the existing hosts file
@@ -26,12 +26,12 @@ The environment I used for this testing installation was Windows 10 Professional
 * Make sure the first line after the commented (#) lines is ```127.0.0.1 localhost``` and the second is ```::1 localhost```
 * Open a cmd window with administrator rights and run the command ```ipconfig /flushdns```
 
-Now we’re ready to install the environment needed to run Magento. I recommend using <a href="https://www.apachefriends.org/">XAMPP</a>, a free Apache distribution for Windows that includes MariaDB, PHP and Perl in a single package. Magento 2 currently runs with PHP 7.2 and it will not work with newer versions.
+Now we’re ready to install the environment needed to run Magento. I recommend using <a href="https://www.apachefriends.org/">XAMPP</a>, a free Apache distribution for Windows that includes MariaDB, PHP, and Perl in a single package. Magento 2 currently runs with PHP 7.2 and it will not work with newer versions.
 
 * Install XAMPP 7.2 with default settings: <a href="https://www.apachefriends.org/xampp-files/7.2.15/xampp-win32-7.2.15-0-VC15-installer.exe">apachefriends.org/xampp-files/7.2.15/xampp-win32-7.2.15-0-VC15-installer.exe</a>
 * Download Magento 2. You will need to register on the website first: <a href="https://magento.com/tech-resources/download">magento.com/tech-resources/download</a>
 * Create a new “magento” subfolder (or whatever name you prefer) inside the htdocs folder in the XAMPP installation (usually ```C:\xampp```) and uncompress the Magento 2 archive there.
-* Start the XAMPP Control Panel from the Windows start menu. In the “Apache” section, click the “Config” button and, on the menu that appears, select “PHP (php.ini)”. Remove the semicolon before the ```extension=intl```, ```extension=soap```, and ```extension=xsl``` texts (this will enable the intl, soap and xsl extensions).
+* Start the XAMPP Control Panel from the Windows start menu. In the “Apache” section, click the “Config” button and, on the menu that appears, select “PHP (php.ini)”. Remove the semicolon before the ```extension=intl```, ```extension=soap```, and ```extension=xsl``` texts to enable the intl, soap and xsl extensions.
 
 <img src="/blog/2019/03/22/running-magento-2-windows-xampp/xampp-control-panel.jpg" /><br><small>Screenshot of the XAMPP Control Panel with the PHP config menu displayed.</small>
 
@@ -69,14 +69,14 @@ The purpose of this article is to get Magento 2 up and running on Windows comput
 
 * Change the default store name and logo from the section Content > Design > Configuration and choose “Edit” in the “Default store view”.
 * Set up the default store configuration from the section Stores > Configuration.
-* Create the product categories from the section Catalog > Categories. Set up a category name and it’s dependency from another category, or from the default master category.
+* Create the product categories from the section Catalog > Categories. Set up a category name and its dependency from another category, or from the default master category.
 * Create/edit the product attributes from the section Stores > Attributes (check the option “visible in storefront” to show the products in the product page). For example, custom attributes for book products would be Author, Publisher...
 * Add the attributes to the default attribute set from the section Stores > Attribute. This is required for the attributes to show up when adding a new product by default.
 * Create a set of products from the section Catalog > Products. Set the custom variations for each product from the “Customizable options” section. Set up a short and long description, a custom SKU for each customizable option, and a tax mode.
-* Add a widget to the homepage to show the product catalog from the section Content > Homepage > Edit > Show/Hide Editor > Add widget > Products list. Here we can also add any content we like, including HTML tags, images and third-party content.
+* Add a widget to the homepage to show the product catalog from the section Content > Homepage > Edit > Show/Hide Editor > Add widget > Products list. Here we can also add any content we like, including HTML tags, images, and third-party content.
 
 ###Conclusion
 
-It’s possible–and pretty straightforward—to run a Magento 2 instance in Windows with XAMPP. But this is just a kick-off, a simple overview: there’s a lot more to do if we want to get a full Ecommerce website that is ready to scale up and support enterprise-level traffic, like caching optimization, load balancing and advanced server-side monitoring.
+It’s possible—​and pretty straightforward—​to run a Magento 2 instance in Windows with XAMPP. But this is just a kick-off, a simple overview: there’s a lot more to do if we want to get a full ecommerce website that is ready to scale up and support enterprise-​level traffic, like caching optimization, load balancing, and advanced server-​side monitoring.
 
-At End Point, we have professionals with a strong background in deploying powerful, reliable, fully responsive, fast and SEO optimized Ecommerce websites. We have experience in migrating Magento to newer versions, and even creating full Magento 2 websites from scratch. <a href="/contact">Drop a line if you want to hear more.</a>
+At End Point, we have professionals with a strong background in deploying powerful, reliable, fully responsive, fast, and SEO-​optimized ecommerce websites. We have experience in migrating Magento to newer versions, and even creating full Magento 2 websites from scratch. <a href="/contact">Drop us a line if you want to hear more.</a>
