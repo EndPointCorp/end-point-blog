@@ -28,6 +28,7 @@ We serve many development and hosting clients ranging from small family business
 ### What you bring:
 
 Professional experience with Linux system administration and web application support:
+
 - Cloud providers such as DigitalOcean, Linode, AWS, Azure, Google Cloud, Heroku, etc.
 - Networking
 - TLS and PKI
@@ -38,6 +39,7 @@ Professional experience with Linux system administration and web application sup
 - Security consciousness, and ideally familiarity with PCI DSS, HIPAA, etc.
 
 And just as important:
+
 - Strong verbal and written communication skills
 - A good remote work environment
 - An eye for detail
