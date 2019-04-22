@@ -7,7 +7,7 @@ title: Proxy Nginx ports using a regular expression
 
 I’m working on a big Rails project for Phenoms Fantasy Sports that uses the [ActiveMerchant gem](https://rubygems.org/gems/activemerchant) to handle [Dwolla](https://www.dwolla.com/developers) payments. One of the developers, [Patrick](/team/patrick_lewis), ran into an issue where his code wasn’t receiving the expected postback from the Dwolla gateway. His code looked right, the Dwolla account UI showed the sandbox transactions, but we never saw any evidence of the postback hitting our development server.
 
-Patrick’s theory was that Dwolla was stripping the port number off the postback URL he was sending with the request. We tested that theory by using the [Requestb.in service](https://requestb.in/) for the postback URL, and it showed Dwolla making the postback successfully. Next, we needed to verify that Dwolla could hit our development server on port 80.
+Patrick’s theory was that Dwolla was stripping the port number off the postback URL he was sending with the request. We tested that theory by using the [RequestBin.com service](https://requestbin.com/) for the postback URL, and it showed Dwolla making the postback successfully. Next, we needed to verify that Dwolla could hit our development server on port 80.
 
 I started Nginx on port 80 of our dev server and Patrick fired his Dwolla transaction test again. The expected POST requests hit the Nginx logfile. Suspicions confirmed. It looked like we would just have to work around the Dwolla weirdness by proxying port 80 to the port that Patrick’s development instance was running on. Then we’d need a way to make that work for the other developers’ instances on the dev. server, as well.
 
@@ -19,7 +19,7 @@ We now have the following tidbit in our Nginx config:
 
 ```nohighlight
 server {
-    [SNIP unrelated config stuff]
+    # [SNIP unrelated config stuff]
 
     server_name ~^(?<portname>\d\d)\.camp\.;
 
