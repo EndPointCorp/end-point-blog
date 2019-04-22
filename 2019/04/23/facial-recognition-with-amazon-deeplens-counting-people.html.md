@@ -19,7 +19,7 @@ This camera is the first of its kind---likely the first of many, given the ongoi
 
 3.  Counting the number of people using an LG at a given time
 
-The first idea would depend on parsing facial expressions. Perhaps a certain moment in a user experience causes people to look confused, or particularly delighted---valuable insights. The second idea would generate data that could help us assess the platform's impact, using a metric crucial to any potential clients whose goals involve engaging audiences. The third idea would create a similar metric---however with the limitation that repeat visitors would be double-counted. Nevertheless, the third idea has a key advantage over the second: it doesn't require distinguishing between people, which makes it a much more tractable project. This post focuses on the third idea.
+The first idea would depend on parsing facial expressions. Perhaps a certain moment in a user experience causes people to look confused, or particularly delighted---valuable insights. The second idea would generate data that could help us assess the platform's impact, using a metric crucial to any potential clients whose goals involve engaging audiences. The third idea would create a simpler metric: the average number of people engaging with the system over a period of time. Nevertheless, this idea has a key advantage over the second: it doesn't require distinguishing between people, which makes it a much more tractable project. This post focuses on the third idea.
 
 ### Computer Vision and the Amazon DeepLens
 
@@ -88,7 +88,7 @@ The model matched my performance in conditions 1 and 2, which makes a strong sta
 
 It would be useful to experiment with the multiple faces condition again, to see how robust these findings are. It would also be helpful to keep track of factors like how much people move, the lighting, and the orientation of the camera, to see if they might impact the results. It would also be useful to automate the data collection and analysis.
 
-This investigation has showed me that the DeepLens has a lot of potential as a tool for measuring engagement. Perhaps a future post will examine how it can be used to measure users' reactions.
+This investigation has showed me that the DeepLens has a lot of potential as a tool for measuring engagement. Perhaps a future post will examine how it can be used to count users.
 
 * * * * *
 
