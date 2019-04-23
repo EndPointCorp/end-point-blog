@@ -5,7 +5,7 @@ tags: machine-learning, artificial-intelligence, ai, deeplens, aws
 gh_issue_number: 1515
 ---
 
-I have been exploring the possible uses of a machine-learning-enabled camera for the Liquid Galaxy. The AWS [DeepLens](https://aws.amazon.com/deeplens/) is a camera that can receive and transmit data over wifi, and that has computing hardware built in. Since its hardware enables it to use machine learning models, it can perform computer vision in the field.
+I have been exploring the possible uses of a machine-learning-enabled camera for the Liquid Galaxy. The AWS [DeepLens](https://aws.amazon.com/deeplens/) is a camera that can receive and transmit data over wifi, and that has computing hardware built in. Since its hardware enables it to use machine learning models, it can perform computer vision tasks in the field.
 
 ![deeplens-front-angle](/blog/2019/04/23/facial-recognition-with-amazon-deeplens-counting-people/deeplens-front-angle.jpg)
 
@@ -20,6 +20,8 @@ This camera is the first of its kind---likely the first of many, given the ongoi
 3.  Counting the number of people using an LG at a given time
 
 The first idea would depend on parsing facial expressions. Perhaps a certain moment in a user experience causes people to look confused, or particularly delighted---valuable insights. The second idea would generate data that could help us assess the platform's impact, using a metric crucial to any potential clients whose goals involve engaging audiences. The third idea would create a simpler metric: the average number of people engaging with the system over a period of time. Nevertheless, this idea has a key advantage over the second: it doesn't require distinguishing between people, which makes it a much more tractable project. This post focuses on the third idea.
+
+To set up the camera, the user has to plug it into a power outlet and connect it to WiFi. The camera will still work even with a slow network connection, though when the connection is slower the delay between the camera seeing something and reporting it is longer. However, this delay was hardly noticable on my home network which has slow-to-moderate speeds of about 17 Mbps down and 33 Mbps up.
 
 ### Computer Vision and the Amazon DeepLens
 
