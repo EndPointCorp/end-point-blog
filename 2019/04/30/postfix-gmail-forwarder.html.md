@@ -55,8 +55,8 @@ First, install Postfix as appropriate for your Linux distribution:
 
 ```plain
 # dnf install postfix    # Fedora
-# yum install postfix    # CentOS/RHEL
-# apt install postfix    # Debian/Ubuntu
+# yum install postfix    # CentOS/​RHEL
+# apt install postfix    # Debian/​Ubuntu
 ```
 
 Now, time to edit the default Postfix configuration. The options are all [well-documented on the Postfix website](http://www.postfix.org/postconf.5.html) but there are a *lot* of them and it can take a while to figure out what you need and want.
