@@ -5,7 +5,7 @@ tags: vue, testing
 gh_issue_number: 1520
 ---
 
-<img src="/blog/2019/05/02/introduction-to-snapshot-testing-vue-components/banner.png" alt="Camera and instant photos" /> [Photo](https://www.flickr.com/photos/freestocks/34484018071) by [freestocks](https://www.flickr.com/photos/freestocks), used under [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/)
+<img src="/blog/2019/05/02/introduction-to-snapshot-testing-vue-components/banner.jpg" alt="Camera and instant photos" /> [Photo](https://www.flickr.com/photos/freestocks/34484018071) by [freestocks](https://www.flickr.com/photos/freestocks), used under [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/)
 
 [Snapshot Testing](https://jestjs.io/docs/en/snapshot-testing) is one of the features of the [Jest](https://jestjs.io/en/) testing framework that most interested me when I began researching methods for testing Vue.js applications. Most of my testing experience has involved writing many verbose RSpec unit tests for Rails applications, and the promise of being able to use snapshot tests to cover more of a Vue component’s output while writing less code appealed to me. Snapshot testing does have its [critics](https://engineering.ezcater.com/the-case-against-react-snapshot-testing), so I have been interested to start exploring snapshot tests myself to see if they can be a valuable addition to my testing toolkit, or if they are not worth the effort.
 
