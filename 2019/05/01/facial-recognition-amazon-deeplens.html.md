@@ -9,7 +9,7 @@ I have been exploring the possible uses of a machine-learning-enabled camera for
 
 ### The Amazon DeepLens camera
 
-<img style="float: left; width: 400px; padding-right: 2em;" src="/blog/2019/04/23/facial-recognition-amazon-deeplens/deeplens-front-angle.jpg" alt="DeepLens" />
+<img style="float: left; width: 400px; padding-right: 2em;" src="/blog/2019/05/01/facial-recognition-amazon-deeplens/deeplens-front-angle.jpg" alt="DeepLens" />
 
 This camera is the first of its kind—likely the first of many, given the ongoing rapid adoption of Internet of Things (IoT) devices and computer vision. It came to End Point’s attention as hardware that could potentially interface with and extend End Point’s immersive visualization platform, the [Liquid Galaxy](https://liquidgalaxy.endpoint.com/). We’ve thought of several ways computer vision could potentially work to enhance the platform, for example:
 
@@ -33,10 +33,10 @@ Remote management of the DeepLens depends on [AWS Lambda](https://aws.amazon.com
 
 Amazon’s IoT service saves information about each DeepLens, and allows users to manage their devices, for example by choosing which model is active on the device, or viewing a live stream from the camera. It also keeps track of what’s going on with the hardware, even when it’s off. When a model is running on the DeepLens, you can view a live stream of its inferences about what it’s seeing (the labeled images). Amazon has released various pretrained models designed to work on the DeepLens. Using a model for detecting faces, we can get a live stream that looks like this:
 
-![one-face-recognition](/blog/2019/04/23/facial-recognition-amazon-deeplens/one-face-recognition.png)
+![one-face-recognition](/blog/2019/05/01/facial-recognition-amazon-deeplens/one-face-recognition.png)
 Me looking at the DeepLens in my kitchen
 
-![multi-face-recognition](/blog/2019/04/23/facial-recognition-amazon-deeplens/multi-face-recognition.png)
+![multi-face-recognition](/blog/2019/05/01/facial-recognition-amazon-deeplens/multi-face-recognition.png)
 Facial recognition inferences on multiple people. (Witness my smile of satisfaction at finally finding enthusiastic subjects of facial recognition.)
 
 
@@ -82,7 +82,7 @@ In the last code snippet above, iot_topic refers to an Amazon “MQTT topic” (
 
 I wanted to test how data from this model would compare to a human’s perception. The first step was to understand what data the camera offers. It produces data about each frame analyzed: a timestamp (in 13-digit [unix time](https://en.wikipedia.org/wiki/Unix_time)), and the predicted probability that something it identifies is a face. To gather this data, I used the AWS IoT service to manually subscribe to a secure MQTT topic where the DeepLens published its predictions. Each frame processed produces data like this:
 
-![deeplens-json](/blog/2019/04/23/facial-recognition-amazon-deeplens/deeplens-json.png)
+![deeplens-json](/blog/2019/05/01/facial-recognition-amazon-deeplens/deeplens-json.png)
 
 ```
 {
@@ -111,7 +111,7 @@ I’ll spoil one aspect of the results right away: there were no false positives
 Another important note: I noticed early in the experiment that it almost never detects a face further than 15 feet away. For the use case of a Liquid Galaxy, the 15-foot range is too short to capture all types of engagement (some people look at it across the room), but from my experience with the system I think that users within this range could be accurately described as focused users—something worth measuring, but certainly not everything worth measuring. After noticing this, I retested condition 2 with my face about 5 feet from the DeepLens, after initially trying it from across a room.
 
 ### How did the DeepLens counts compare to my counts?
-![results](/blog/2019/04/23/facial-recognition-amazon-deeplens/results.png)
+![results](/blog/2019/05/01/facial-recognition-amazon-deeplens/results.png)
 
 The model matched my performance in conditions 1 and 2, which makes a strong statement about its reliability in relatively static and close-up conditions such as looking at an empty room, or looking at someone stare at their laptop across a small table. In contrast, it did not count as many faces as I did in condition 3—so I’m happy to report I can still outperform A.I. on something. Anyway, this suggests that the model is somewhat conservative, at least compared to my count (likely partly due to my eyes having a range larger than 15 feet). Therefore, when considering usage statistics gathered by a similar method, it might make most sense to think of the results as a lower bound, e.g. “the average number of people focused on the system was more than 2.1”.
 
