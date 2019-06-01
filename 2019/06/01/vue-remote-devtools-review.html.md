@@ -1,7 +1,7 @@
 ---
 author: "Patrick Lewis"
 title: "Vue.js Remote Devtools Review"
-tags: vue, browsers
+tags: vue, browsers, tools
 gh_issue_number: 1527
 ---
 
