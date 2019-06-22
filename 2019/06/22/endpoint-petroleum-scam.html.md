@@ -2,7 +2,7 @@
 title: "SCAM ALERT: EndPoint Petroleum Corporation"
 author: Benjamin Goldstein
 gh_issue_number: 1530
-tags: scam
+tags: scam, security
 ---
 
 <img src="/blog/2019/06/22/endpoint-petroleum-scam/image-0.jpg" alt="Person using laptop computers" /><br>Photo by <a href="https://unsplash.com/photos/9SoCnyQmkzI">Jefferson Santos</a> on Unsplash
