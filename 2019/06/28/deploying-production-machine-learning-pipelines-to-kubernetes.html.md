@@ -4,7 +4,7 @@ title: "Deploying production Machine Learning pipelines to Kubernetes with Argo"
 tags: machine-learning, kubernetes, natural-language-processing, python
 ---
 
-<img src="/blog/2019/06/28/deploying-production-machine-learning-pipelines-to-kubernetes/machine.jpg" alt="Rube Goldberg machine" /><br><a href="https://commons.wikimedia.org/wiki/File:Rube_Goldberg_Machine_(278696130).jpg">Image by Wikimedia Commons</a>
+<img src="/2019/06/28/deploying-production-machine-learning-pipelines-to-kubernetes/machine.jpg" alt="Rube Goldberg machine" /><br><a href="https://commons.wikimedia.org/wiki/File:Rube_Goldberg_Machine_(278696130).jpg">Image by Wikimedia Commons</a>
 
 In some sense, most machine learning projects look exactly the same. There are 4 stages to be concerned with no matter what the project is:
 
