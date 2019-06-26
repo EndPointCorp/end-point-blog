@@ -2,9 +2,10 @@
 author: "Kamil Ciemniewski"
 title: "Deploying production Machine Learning pipelines to Kubernetes with Argo"
 tags: machine-learning, kubernetes, natural-language-processing, python
+gh_issue_number: 1534
 ---
 
-<img src="/blog/2019/06/28/deploying-production-machine-learning-pipelines-to-kubernetes/machine.jpg" alt="Rube Goldberg machine" /><br><a href="https://commons.wikimedia.org/wiki/File:Rube_Goldberg_Machine_(278696130).jpg">Image by Wikimedia Commons</a>
+<img src="/blog/2019/06/28/deploying-production-pipelines-to-kubernetes/image-0.jpg" alt="Rube Goldberg machine" /><br><a href="https://commons.wikimedia.org/wiki/File:Rube_Goldberg_Machine_(278696130).jpg">Image by Wikimedia Commons</a>
 
 In some sense, most machine learning projects look exactly the same. There are 4 stages to be concerned with no matter what the project is:
 
@@ -13,42 +14,42 @@ In some sense, most machine learning projects look exactly the same. There are 4
 3. Building the model
 4. Deploying it
 
-It's been said that #1 and #2 take most of ML engineers time. This is to emphasize how little time it can feel the most fun part — #3 — gets to have.
+It’s been said that #1 and #2 take most of ML engineers’ time. This is to emphasize how little time it sometimes feels the most fun part—#3—gets.
 
-In the real world though, #4 over time can take not much less than the previous three. 
+In the real world, though, #4 over time can take almost as much as the previous three. 
 
-Deployed models sometimes need to be rebuilt. They consume data that need to constantly go through points #1 and #2. It certainly isn't always what's shown in the classroom: where datasets perfectly fit in the memory and model training takes at most a couple hours on an old laptop.
+Deployed models sometimes need to be rebuilt. They consume data that need to constantly go through points #1 and #2. It certainly isn’t always what’s shown in the classroom, where datasets perfectly fit in the memory and model training takes at most a couple hours on an old laptop.
 
-Working with gigantic datasets isn't the only problem. Data pipelines can take long hours to complete. What if some part of your infrastructure has an unexpected downtime? Do you just start it all over again — from the very beginning? 
+Working with gigantic datasets isn’t the only problem. Data pipelines can take long hours to complete. What if some part of your infrastructure has an unexpected downtime? Do you just start it all over again from the very beginning? 
 
-Many solutions of course exist. With this article, I'd like to go over this problem space and present an approach that feels really nice and clean.
+Many solutions of course exist. With this article, I’d like to go over this problem space and present an approach that feels really nice and clean.
 
 ### Project description
 
-The End Point Corporation has been on the market since 1995. That's 24 years! About 9 years from its inception, [the oldest article](https://www.endpoint.com/blog/2004/10/04/red-hat-enterprise-linux-3-update-3) on the company's blog has been published. Since that time, a staggering number of 1435 unique articles have been published. That's a lot of words! This is something we can definitely use in a smart way.
+End Point Corporation was founded in 1995. That’s 24 years! About 9 years later, [the oldest article](/blog/2004/10/04/red-hat-enterprise-linux-3-update-3) on the company’s blog was published. Since that time, a staggering number of 1435 unique articles have been published. That’s a lot of words! This is something we can definitely use in a smart way.
 
-For the purpose of having fun with building a production-grade data pipeline, let's imagine the following project:
+For the purpose of having fun with building a production-grade data pipeline, let’s imagine the following project:
 
-- A [doc2vec](https://cs.stanford.edu/~quocle/paragraph_vector.pdf) model trained on the corpus of End Point's blog articles
+- A [doc2vec](https://cs.stanford.edu/~quocle/paragraph_vector.pdf) model trained on the corpus of End Point’s blog articles
 - Use of the paragraph vectors for each article to find the 10 other, most similar articles
 
-I blogged about using the [matrix factorization](https://www.endpoint.com/blog/2018/07/17/recommender-mxnet) as a simple [collaborative filtering](https://en.wikipedia.org/wiki/Recommender_system#Collaborative_filtering) style of the recommender system. We can think about today's doc2vec-based model as an example of the [content based filtering](https://en.wikipedia.org/wiki/Recommender_system#Content-based_filtering). The business value would be the potentially increased blog traffic from users staying longer on the website.
+I blogged about using the [matrix factorization](/blog/2018/07/17/recommender-mxnet) as a simple [collaborative filtering](https://en.wikipedia.org/wiki/Recommender_system#Collaborative_filtering) style of the recommender system. We can think about today’s doc2vec-based model as an example of the [content based filtering](https://en.wikipedia.org/wiki/Recommender_system#Content-based_filtering). The business value would be the potentially increased blog traffic from users staying longer on the website.
 
 ### Scalable pipelines
 
-The data pipelines problem certainly found some really great solutions. The [Hadoop](http://hadoop.apache.org) project brought in the HDFS — a distributed file system for huge data artifacts. Its MapReduce component plays a vital role in distributed data processing.
+The data pipelines problem certainly found some really great solutions. The [Hadoop](http://hadoop.apache.org) project brought in the HDFS—a distributed file system for huge data artifacts. Its MapReduce component plays a vital role in distributed data processing.
 
-Then, the fantastic [Spark](https://spark.apache.org) project came in. Its architecture makes data reside in memory by default — with explicit caching of the data on disks. The project claims to be running workloads 100 times faster than Hadoop.
+Then, the fantastic [Spark](https://spark.apache.org) project came in. Its architecture makes data reside in memory by default—with explicit caching of the data on disks. The project claims to be running workloads 100 times faster than Hadoop.
 
-Both projects though require the developer to use a very specific set of libraries. It's not easy e. g. to distribute [spaCy](https://spacy.io) training and inference on Spark.
+Both projects though require the developer to use a very specific set of libraries. It’s not easy, for example, to distribute [spaCy](https://spacy.io) training and inference on Spark.
 
 ### Containers
 
-On the other side of the spectrum, there's [Dask](https://dask.org). It's a Python package that wraps [Numpy](https://www.numpy.org), [Pandas](https://pandas.pydata.org) and [Scikit-Learn](https://scikit-learn.org/stable/). It makes developers able to load huge piles of data — just as they would with the smaller datasets. The data is partitioned and distributed among the cluster nodes. It can work with groups of processes as well as clusters of containers. The APIs of the above-mentioned projects are (mostly) preserved while all the processing is suddenly distributed.
+On the other side of the spectrum, there’s [Dask](https://dask.org). It’s a Python package that wraps [Numpy](https://www.numpy.org), [Pandas](https://pandas.pydata.org) and [Scikit-Learn](https://scikit-learn.org/stable/). It enables developers to load huge piles of data, just as they would with the smaller datasets. The data is partitioned and distributed among the cluster nodes. It can work with groups of processes as well as clusters of containers. The APIs of the above-mentioned projects are (mostly) preserved while all the processing is suddenly distributed.
 
 Some teams like to use Dask along with [Luigi](https://luigi.readthedocs.io/en/stable/) and build production pipelines around [Docker](https://www.docker.com) or [Kubernetes](https://kubernetes.io).
 
-In this article, I'd like to present another Dask-friendly solution: Kubernetes-native workflows using [Argo](https://argoproj.github.io). What's great about it compared to Luigi, is that you don't even need to care about having a certain version of Python and Luigi installed to orchestrate the pipeline. All you need is the Kubernetes cluster and Argo installed on it.
+In this article, I’d like to present another Dask-friendly solution: Kubernetes-native workflows using [Argo](https://argoproj.github.io). What’s great about it compared to Luigi, is that you don’t even need to care about having a certain version of Python and Luigi installed to orchestrate the pipeline. All you need is the Kubernetes cluster and Argo installed on it.
 
 ### Hands down work on the project
 
@@ -59,13 +60,13 @@ The first thing to do when developing this project is to get access to the Kuber
 
 I love them both. The first is developed by Canonical while the second by the Kubernetes team itself.
 
-This isn't going to be a step-by-step tutorial on using Kubernetes. I encourage you to read the documentation or possibly seek out a good online course if you don't know anything yet. Read on even in this case though — it's nothing that would be overly complex.
+This isn’t going to be a step-by-step tutorial on using Kubernetes. I encourage you to read the documentation or possibly seek out a good online course if you don’t know anything yet. Read on even in this case though—it’s nothing that would be overly complex.
 
-Next, you'll need the Argo Workflows. The installation is really easy. The full yet simple documentation can be found [here](https://argoproj.github.io/docs/argo/demo.html).
+Next, you’ll need the Argo Workflows. The installation is really easy. The full yet simple documentation can be found [here](https://argoproj.github.io/docs/argo/demo.html).
 
 #### The project structure
 
-Here's how the project looks like in the end:
+Here’s what the project looks like in the end:
 
 ```bash
 .
@@ -134,7 +135,7 @@ stop_notebooks:
 FORCE: ;
 ```
 
-When using this Makefile with `make run`, it will need to resolve the `images` dependency. This, in turn, will ask to resolve all of the `task/**/Dockerfile` dependencies too. Notice how the `TASK_IMAGES` variable is constructed: it uses the make's `shell` command to use the Unix's `find` to find the subdirectories of `tasks` that contain the Dockerfile. Here's what the output would be if you were to use it directly:
+When using this Makefile with `make run`, it will need to resolve the `images` dependency. This, in turn, will ask to resolve all of the `task/**/Dockerfile` dependencies too. Notice how the `TASK_IMAGES` variable is constructed: it uses the make’s `shell` command to use the Unix’s `find` to find the subdirectories of `tasks` that contain the Dockerfile. Here’s what the output would be if you were to use it directly:
 
 ```bash
 $ find tasks -name Dockerfile -printf '%h '
@@ -143,7 +144,7 @@ tasks/notebooks tasks/base tasks/preprocess tasks/infer tasks/build_model tasks/
 
 #### Setting up Jupyter Notebooks as a scratch pad and for EDA
 
-Let's start off by defining our base Docker image:
+Let’s start off by defining our base Docker image:
 
 ```Dockerfile
 FROM python:3.7
@@ -217,21 +218,21 @@ $ kubectl apply -f notebooks.yml
 
 #### Exploration
 
-The [notebook itself](https://github.com/kamilc/endpoint-blog-nlp/blob/master/notebooks/scratch.ipynb) feels more like a scratch pad than an exploratory data analysis. You can see that it's very informal and doesn't include much of the exploration or visualization. You're likely not to omit those in more real-world code.
+The [notebook itself](https://github.com/kamilc/endpoint-blog-nlp/blob/master/notebooks/scratch.ipynb) feels more like a scratch pad than an exploratory data analysis. You can see that it’s very informal and doesn’t include much of the exploration or visualization. You’re likely not to omit those in more real-world code.
 
-I used it to validate if the model would work at all. I then was able to grab portions of the code and paste it directly into step definitions.
+I used it to ensure the model would work at all. I then was able to grab portions of the code and paste it directly into step definitions.
 
 #### Implementation
 
 ##### Step 1: Source blog articles
 
-The blog's articles are stored on [GitHub](https://github.com/EndPointCorp/end-point-blog) in Markdown files.
+The blog’s articles are stored on [GitHub](https://github.com/EndPointCorp/end-point-blog) in Markdown files.
 
-Our first pipeline task will need to either clone the repo or pull from it if it's present in the pipeline's shared volume.
+Our first pipeline task will need to either clone the repo or pull from it if it’s present in the pipeline’s shared volume.
 
-We'll use the Kubernetes [hostPath](https://kubernetes.io/docs/concepts/storage/volumes/#hostpath) as the cross-step volume. What's nice about it is that it's easy to peek into the volume during development to see if the data artifacts are being generated correctly.
+We’ll use the Kubernetes [hostPath](https://kubernetes.io/docs/concepts/storage/volumes/#hostpath) as the cross-step volume. What’s nice about it is that it’s easy to peek into the volume during development to see if the data artifacts are being generated correctly.
 
-In our example here, I'm hardcoding the path on my local system:
+In our example here, I’m hardcoding the path on my local system:
 
 ```yaml
 # ...
@@ -243,7 +244,7 @@ volumes:
 # ...
 ```
 
-This is one of the downsides of the `hostPath` — it only accepts absolute paths. This will do just fine for now though.
+This is one of the downsides of the `hostPath`—it only accepts absolute paths. This will do just fine for now though.
 
 In the `pipeline.yml` we define the task container with:
 
@@ -261,7 +262,7 @@ templates:
 # ...
 ```
 
-The full pipeline forms a tree which is expressed conveniently as a directed acyclic graph within the Argo. Here's the definition of the whole pipeline (some steps were not shown yet):
+The full pipeline forms a tree which is expressed conveniently as a directed acyclic graph within the Argo. Here’s the definition of the whole pipeline (some steps were not shown yet):
 
 ```yaml
 # ...
@@ -282,7 +283,7 @@ The full pipeline forms a tree which is expressed conveniently as a directed acy
 # ...
 ```
 
-Notice how the `dependencies` field makes it easy to tell Argo what order to take when executing the tasks. The Argo steps can also define inputs and outputs — just like Luigi. For this simple example, I decided to omit them and enforce the convention for the steps to expect data artifacts in a certain location in the mounted volume. If you're curious about other Argo features though, [here](https://argoproj.github.io/docs/argo/examples/readme.html#parameters) is its documentation.
+Notice how the `dependencies` field makes it easy to tell Argo what order to take when executing the tasks. The Argo steps can also define inputs and outputs—just like Luigi. For this simple example, I decided to omit them and enforce the convention for the steps to expect data artifacts in a certain location in the mounted volume. If you’re curious about other Argo features though, [here](https://argoproj.github.io/docs/argo/examples/readme.html#parameters) is its documentation.
 
 The entry point script for the task is pretty simple:
 
@@ -302,24 +303,24 @@ fi
 
 ##### Step 2: Data wrangling
 
-At this point, we'd have the source files for the blog articles in Markdown files. To be able to run them through any kind of machine learning modeling, we need to source it into the data frame. We'll also need to clean the text a bit. Here is the reasoning behind the cleanup routine:
+At this point, we’d have the source files for the blog articles in Markdown files. To be able to run them through any kind of machine learning modeling, we need to source it into the data frame. We’ll also need to clean the text a bit. Here is the reasoning behind the cleanup routine:
 
 - I want the relations between the articles to omit the code snippets: **not** to group them by the used programming language or a library just by the keywords they contain
-- I also want the metadata about the tags and authors to be omitted too as I don't want to see only e. g. mine articles listed as similar to my other ones
+- I also want the metadata about the tags and authors to be omitted too as I don’t want to see only e. g. mine articles listed as similar to my other ones
 
-The full source for the `run.py` of the "preprocess" task can be viewed [here](https://github.com/kamilc/endpoint-blog-nlp/blob/master/tasks/preprocess/run.py).
+The full source for the `run.py` of the “preprocess” task can be viewed [here](https://github.com/kamilc/endpoint-blog-nlp/blob/master/tasks/preprocess/run.py).
 
-Notice that unlike make or Luigi, the Argo workflows would run the same task fully again even with the step artifact already being created. I **like** this flexibility — it's extremely easy after all to just skip the processing in Python or shell script if it already exists.
+Notice that unlike make or Luigi, the Argo workflows would run the same task fully again even with the step artifact already being created. I **like** this flexibility—it’s extremely easy after all to just skip the processing in Python or shell script if it already exists.
 
 At the end of this step, the data frame is written as the [Apache Parquet](https://parquet.apache.org) file.
 
 ##### Step 3: Building the model
 
-The model from the paper mentioned earlier has already been implemented in a variety of other projects. There are implementations for each major deep learning framework on GitHub. There's also a pretty good one included in [Gensim](https://radimrehurek.com/gensim/index.html). Its documentation can be found [here](https://radimrehurek.com/gensim/models/doc2vec.html).
+The model from the paper mentioned earlier has already been implemented in a variety of other projects. There are implementations for each major deep learning framework on GitHub. There’s also a pretty good one included in [Gensim](https://radimrehurek.com/gensim/index.html). Its documentation can be found [here](https://radimrehurek.com/gensim/models/doc2vec.html).
 
-The [run.py](https://github.com/kamilc/endpoint-blog-nlp/blob/master/tasks/build_model/run.py) is pretty short and straight forward as well. This is one of the goals for the pipeline. In the end, it's writing the trained model into the shared volume as well.
+The [run.py](https://github.com/kamilc/endpoint-blog-nlp/blob/master/tasks/build_model/run.py) is pretty short and straight forward as well. This is one of the goals for the pipeline. In the end, it’s writing the trained model into the shared volume as well.
 
-Notice that re-running the pipeline with the model already stored will not trigger the training again. This is what we want. Imagine a new article being pushed into the repository. It's very unlikely that retraining with it would affect the model's performance in any significant way. We'll still need to predict the similar other documents for it. The model building step would short-circuit though with:
+Notice that re-running the pipeline with the model already stored will not trigger the training again. This is what we want. Imagine a new article being pushed into the repository. It’s very unlikely that retraining with it would affect the model’s performance in any significant way. We’ll still need to predict the similar other documents for it. The model building step would short-circuit though with:
 
 ```python
 if __name__ == '__main__':
@@ -331,7 +332,7 @@ if __name__ == '__main__':
 
 ##### Step 4: Predict similar articles
 
-The listing of the [run.py](https://github.com/kamilc/endpoint-blog-nlp/blob/master/tasks/infer/run.py) isn't overly long:
+The listing of the [run.py](https://github.com/kamilc/endpoint-blog-nlp/blob/master/tasks/infer/run.py) isn’t overly long:
 
 ```python
 import pandas as pd
@@ -363,9 +364,9 @@ if __name__ == '__main__':
 
 The idea is to load up the saved Gensim model and the data frame with articles first. Then for each article use the model to get the 10 most similar other articles.
 
-As the step's output, the listing of similar articles is placed in the `similar.yml` file for each article's subdirectory.
+As the step’s output, the listing of similar articles is placed in the `similar.yml` file for each article’s subdirectory.
 
-The blog's Markdown → HTML compiler could then use this file and e. g. inject the "You might find those articles interesting too" section.
+The blog’s Markdown → HTML compiler could then use this file and e. g. inject the “You might find those articles interesting too” section.
 
 #### Results
 
@@ -500,12 +501,12 @@ $ cat ~/data/endpoint-blog-src/blog/2013/03/15/similar.yaml
 - 2018/07/09/training-tesseract-models-from-scratch.html.md
 ```
 
-Although it's difficult to quantify, those sets of "similar" documents do seem to be linked in many ways to their "anchor" articles. You're invited to read them and see for yourself!
+Although it’s difficult to quantify, those sets of “similar” documents do seem to be linked in many ways to their “anchor” articles. You’re invited to read them and see for yourself!
 
 ### Closing words
 
-The code presented here is hosted [on GitHub](https://github.com/kamilc/endpoint-blog-nlp). There's lots of room for improvement of course. It shows a nice approach that could be used for both small model deployments (like the one above) but also very big ones too.
+The code presented here is hosted [on GitHub](https://github.com/kamilc/endpoint-blog-nlp). There’s lots of room for improvement of course. It shows a nice approach that could be used for both small model deployments (like the one above) but also very big ones too.
 
-The Argo workflows could be used in tandem with Kubernetes deployments. You could e. g run a distributed [TensorFlow](https://www.tensorflow.org) model training and then deploy it on Kubernetes via [TensorFlow Serving](https://www.tensorflow.org/tfx/guide/serving). If you're more into [PyTorch](https://pytorch.org), then distributing the training would be possible via [Horovod](https://eng.uber.com/horovod/). Have data scientists that use R? Deploy [RStudio Server](https://www.rstudio.com) instead of the JupyterLab with [the image from DockerHub](https://hub.docker.com/r/rocker/rstudio) and run some or all tasks with the [simpler one](https://hub.docker.com/r/rocker/r-ver) with R-base only.
+The Argo workflows could be used in tandem with Kubernetes deployments. You could e. g run a distributed [TensorFlow](https://www.tensorflow.org) model training and then deploy it on Kubernetes via [TensorFlow Serving](https://www.tensorflow.org/tfx/guide/serving). If you’re more into [PyTorch](https://pytorch.org), then distributing the training would be possible via [Horovod](https://eng.uber.com/horovod/). Have data scientists that use R? Deploy [RStudio Server](https://www.rstudio.com) instead of the JupyterLab with [the image from DockerHub](https://hub.docker.com/r/rocker/rstudio) and run some or all tasks with the [simpler one](https://hub.docker.com/r/rocker/r-ver) with R-base only.
 
-If you have any questions or projects you'd like us to help you with — contact us right away through the [contact form](https://www.endpoint.com/contact) or directly on [ask@endpoint.com](mailto:ask@endpoint.com).
+If you have any questions or projects you’d like us to help you with, contact us right away through the [contact form](/contact) or directly at [ask@endpoint.com](mailto:ask@endpoint.com).
