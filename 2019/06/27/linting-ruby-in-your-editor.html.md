@@ -2,6 +2,7 @@
 author: "Patrick Lewis"
 title: "Linting Ruby In Your Editor"
 tags: ruby, vim, emacs, visual-studio-code, tools
+gh_issue_number: 1533
 ---
 
 <img src="/blog/2019/06/27/linting-ruby-in-your-editor/banner.jpg" alt="Cotton" /> [Photo](https://flic.kr/p/azENYB) by [Kimberly Vardeman](https://www.flickr.com/people/kimberlykv/), used under [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/)
