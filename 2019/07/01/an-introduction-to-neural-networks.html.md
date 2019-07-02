@@ -2,6 +2,7 @@
 author: "Ben Ironside Goldstein"
 title: "An Introduction to Neural Networks"
 tags: machine-learning, artificial-intelligence
+gh_issue_number: 1535
 ---
 
 <img src="/blog/2019/07/01/an-introduction-to-neural-networks/image-0.jpg" alt="Weird Tree Art (Neural Network)" /> [Photo](https://flic.kr/p/5eL8Ag) by [Sudhamshu Hebbar](https://www.flickr.com/photos/sudhamshu/), used under [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/)
