@@ -255,7 +255,7 @@ namespace MockProject.Tests.Common
 
 And now we're ready to run our test. Visual Studio will first compile both projects and then run all the tests. The result looks good:
 
-<img src="mocking-asynchronous-database-calls-net-core/mockproject-test-results.jpg" alt="MockProject test results" />
+<img src="mocking-asynchronous-database-calls-net-core/visual-studio-mockproject-test-results.jpg" alt="MockProject test results" />
 
 Finally, I would recommend checking how much code is actually being covered by unit tests. There are different tools to achieve this, but I like using <a href="https://dev.to/nlowe/easy-automated-code-coverage-for-net-core-1khh" target="_blank">MiniCover</a>. It's one of the simplest tools and we can prepare a simple batch file to get a detailed list of lines covered per file. This batch file is located in the root of the ```MockProject.Tests``` project.
 
@@ -276,7 +276,7 @@ dotnet minicover report --workdir ../ --threshold 60
 
 After running the file, we'll come to these results:
 
-<img src="mocking-asynchronous-database-calls-net-core/minicover-results.jpg" alt="MiniCover results" />
+<img src="mocking-asynchronous-database-calls-net-core/dotnet-minicover-results.jpg" alt="MiniCover results" />
 
 The percentage of code that should be covered by tests depends greatly on the type of application (for example, a WebAPI project will probably have more testable code than a Razors Pages project), but as a general rule, we can expect that a well-tested project will exceed 70% of code coverage.
 
