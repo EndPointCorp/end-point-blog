@@ -22,7 +22,23 @@ Install-Package Moq -Version 4.12.0
 
 One of the first showstoppers I've encountered when trying to add unit tests to an existing project was to mock objects that contain asynchronous calls to the database: If we want to run offline (in-memory) tests against a set of code that performs an asynchronous query over a ```DbSet<T>```, we would have to set up some helpers first.
 
+So for example, let's suppose we have a ```GetUserIDByEmail()``` function that returns the ID of the user that matches an email passed by parameter, and that function uses an asyncronous query to the database to find that user:
+
+* <b>UserHandler.cs</b> (extract)
+
+```c#
+public async Task<int> GetUserIDByEmail(string Email)
+{
+    var User = await _DbContext.Users.Where(x => x.Email.Equals(Email)).FirstOrDefaultAsync();
+    return User.ID;
+}
+```
+
+This function is returning a ```Task<int>``` that will be created by the ```FirstOrDefaultAsync()``` method from Entity Framework. If we want to test this function with a in-memory set of data, the test will fail because our test data won't support the interfaces needed to make the asynchronous call.
+
 Why? Because the traditional provider for ```IQueryable``` and ```IEnumerable``` (the interfaces used for traditional sets) don't implement the ```IAsyncQueryProvider``` interface that is needed for the Entity Framework asynchronous extension methods to work. So what we need to do is create a set of classes that will allow us to mock asynchronous calls to our in-memory lists.
+
+
 
 * <b>TestClasses.cs</b>
 
