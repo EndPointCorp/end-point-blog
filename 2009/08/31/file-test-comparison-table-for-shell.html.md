@@ -25,7 +25,10 @@ Unless otherwise specified, these tests follow symbolic links and operate on the
 
 All tests return boolean true or false unless otherwise noted.
 
-<table class="fancy">
+<style>
+tr { background: #f1f1f1 !important; }
+</style>
+<table>
 <tbody><tr>
 <th>Test</th>
 <th>bash/ksh/zsh</th>
