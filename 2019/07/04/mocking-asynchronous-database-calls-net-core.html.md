@@ -240,7 +240,7 @@ REM Clean and build the project
 dotnet clean
 dotnet build /p:DebugType=Full
 
-REM Instrument assemblies in our test project to detect hits for source files from our main project
+REM Instrument assemblies in our test project to detect hits to source files on our main project
 dotnet minicover instrument --workdir ../ --assemblies MockProject.Tests/**/bin/**/*.dll --sources MockProject/**/*.cs --exclude-sources MockProject/*.cs
 
 REM Reset previous counters
