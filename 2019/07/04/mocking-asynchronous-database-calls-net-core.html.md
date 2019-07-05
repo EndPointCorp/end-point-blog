@@ -15,7 +15,7 @@ Whenever we like -or are forced!- to develop using a TDD (test-driven developmen
 So, assuming we already have a .NET Core solution with a test project included, all we need to do to add Moq is install the package from the NuGet console in Visual Studio:
 
 ```
-Install-Package Moq -Version 4.12.0
+Install-Package Moq
 ``` 
 
 ###Mocking data with async calls support
@@ -38,7 +38,18 @@ public async Task<int?> GetUserIDByEmail(string Email)
 }
 ```
 
-This function is returning a ```Task<int?>``` that will be created by the ```FirstOrDefaultAsync()``` method from Entity Framework. If we want to test this function with a in-memory set of data, the test will fail because our test data won't support the interfaces needed to make the asynchronous call.
+Where \_DbContext is a reference to the interface ```IMockProjectDbContext```, defined as:
+
+* <b>MockProjectDbContext.cs</b>
+
+```c#
+public interface IMockProjectDbContext
+{
+    DbSet<User> Users { get; set; }
+}
+```
+
+The ```GetUserIDByEmail()``` will return a ```Task<int?>``` that will be created by the ```FirstOrDefaultAsync()``` method from Entity Framework. If we want to test this function with a in-memory set of data, the test will fail because our test data won't support the interfaces needed to make the asynchronous call.
 
 Why? Because the traditional provider for ```IQueryable``` and ```IEnumerable``` (the interfaces used for traditional sets) don't implement the ```IAsyncQueryProvider``` interface needed for the Entity Framework asynchronous extension methods. So what we need to do is create a set of classes that will allow us to mock asynchronous calls to our in-memory lists.
 
@@ -138,7 +149,9 @@ internal class TestAsyncEnumerator<T> : IAsyncEnumerator<T>
 }
 ```
 
-The ```TestAsyncQueryProvider``` class implements the ```IAsyncQueryProvider``` interface supplying the provider methods needed to make asynchronous calls. The ```TestAsyncEnumerable``` class implements the ```IAsyncEnumerable``` interface, and finally the ```TestAsyncEnumerator``` class implements the ```IAsyncEnumerator``` interface, returning a Task when the ```MoveNext()``` function is called from Entity Framework.
+* The ```TestAsyncQueryProvider``` class implements the ```IAsyncQueryProvider``` interface supplying the provider methods needed to make asynchronous calls.
+* The ```TestAsyncEnumerable``` class implements the ```IAsyncEnumerable``` interface, returning our provider class when required by the framework.
+* Finally, the ```TestAsyncEnumerator``` class implements the ```IAsyncEnumerator``` interface, returning a Task when the ```MoveNext()``` function is called.
 
 Now we can create a function (taking advantage of <a href="https://www.geeksforgeeks.org/c-sharp-generics-introduction/" target="_blank">generics</a>) that will return a mock version of a ```DbSet<T>``` containing the data we pass as the TestData parameter. The resulting ```DbSet<T>``` will have support to asynchronous calls because it will implement our custom classes.
 
@@ -180,7 +193,7 @@ public static IQueryable<User> Users
 }
 ```
 
-We should add the minimum data needed to emulate all use cases of the objects we want to test. For example, if we want to test a function that returns the user ID based on an email address, we should at least add two users to make sure the function will return only the correct one.
+In this example, we're adding two users to the set because that's the minimum data we need to properly exercise our unit test.
 
 
 ###Putting it all together
@@ -222,16 +235,28 @@ This batch file will first clean and build the project, and then it calls ```Min
 
 ```batch
 @echo off
+
+REM Clean and build the project
 dotnet clean
 dotnet build /p:DebugType=Full
+
+REM Instrument assemblies in our test project to detect hits for source files from our main project
 dotnet minicover instrument --workdir ../ --assemblies MockProject.Tests/**/bin/**/*.dll --sources MockProject/**/*.cs --exclude-sources MockProject/*.cs
+
+REM Reset previous counters
 dotnet minicover reset --workdir ../
+
+REM Run the tests
 dotnet test --no-build
+
+REM Uninstrument assemblies in case we want to deploy
 dotnet minicover uninstrument --workdir ../
-dotnet minicover report --workdir ../ --threshold 60
+
+REM Print the console report
+dotnet minicover report --workdir ../ --threshold 70
 ```
 
-After running the file, we'll come to these results:
+After running the script, we'll come to these results:
 
 <img src="mocking-asynchronous-database-calls-net-core/dotnet-minicover-results.jpg" alt="MiniCover results" />
 
