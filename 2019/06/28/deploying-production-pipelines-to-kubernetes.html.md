@@ -105,7 +105,7 @@ The main parts are as follows:
 - `tasks/base` defines the base Docker image for other tasks
 - `tasks/**/run.(py|sh)` is a single entry point for a given pipeline step
 
-The idea is to minimize the boilerplate while retaining the features offered e. g. by Luigi.
+The idea is to minimize the boilerplate while retaining the features offered e.g. by Luigi.
 
 #### Makefile
 
@@ -210,7 +210,7 @@ spec:
     targetPort: 8888
 ```
 
-This can be ran using our Makefile with `make start_notebooks` or directly with:
+This can be run using our Makefile with `make start_notebooks` or directly with:
 
 ```bash
 $ kubectl apply -f notebooks.yml
@@ -306,7 +306,7 @@ fi
 At this point, we’d have the source files for the blog articles in Markdown files. To be able to run them through any kind of machine learning modeling, we need to source it into the data frame. We’ll also need to clean the text a bit. Here is the reasoning behind the cleanup routine:
 
 - I want the relations between the articles to omit the code snippets: **not** to group them by the used programming language or a library just by the keywords they contain
-- I also want the metadata about the tags and authors to be omitted too as I don’t want to see only e. g. mine articles listed as similar to my other ones
+- I also want the metadata about the tags and authors to be omitted too as I don’t want to see only e.g. my articles listed as similar to my other ones
 
 The full source for the `run.py` of the “preprocess” task can be viewed [here](https://github.com/kamilc/endpoint-blog-nlp/blob/master/tasks/preprocess/run.py).
 
@@ -366,7 +366,7 @@ The idea is to load up the saved Gensim model and the data frame with articles f
 
 As the step’s output, the listing of similar articles is placed in the `similar.yml` file for each article’s subdirectory.
 
-The blog’s Markdown → HTML compiler could then use this file and e. g. inject the “You might find those articles interesting too” section.
+The blog’s Markdown → HTML compiler could then use this file and e.g. inject the “You might find those articles interesting too” section.
 
 #### Results
 
@@ -507,6 +507,6 @@ Although it’s difficult to quantify, those sets of “similar” documents do 
 
 The code presented here is hosted [on GitHub](https://github.com/kamilc/endpoint-blog-nlp). There’s lots of room for improvement of course. It shows a nice approach that could be used for both small model deployments (like the one above) but also very big ones too.
 
-The Argo workflows could be used in tandem with Kubernetes deployments. You could e. g run a distributed [TensorFlow](https://www.tensorflow.org) model training and then deploy it on Kubernetes via [TensorFlow Serving](https://www.tensorflow.org/tfx/guide/serving). If you’re more into [PyTorch](https://pytorch.org), then distributing the training would be possible via [Horovod](https://eng.uber.com/horovod/). Have data scientists that use R? Deploy [RStudio Server](https://www.rstudio.com) instead of the JupyterLab with [the image from DockerHub](https://hub.docker.com/r/rocker/rstudio) and run some or all tasks with the [simpler one](https://hub.docker.com/r/rocker/r-ver) with R-base only.
+The Argo workflows could be used in tandem with Kubernetes deployments. You could e.g. run a distributed [TensorFlow](https://www.tensorflow.org) model training and then deploy it on Kubernetes via [TensorFlow Serving](https://www.tensorflow.org/tfx/guide/serving). If you’re more into [PyTorch](https://pytorch.org), then distributing the training would be possible via [Horovod](https://eng.uber.com/horovod/). Have data scientists that use R? Deploy [RStudio Server](https://www.rstudio.com) instead of the JupyterLab with [the image from DockerHub](https://hub.docker.com/r/rocker/rstudio) and run some or all tasks with the [simpler one](https://hub.docker.com/r/rocker/r-ver) with R-base only.
 
-If you have any questions or projects you’d like us to help you with, contact us right away through the [contact form](/contact) or directly at [ask@endpoint.com](mailto:ask@endpoint.com).
+If you have any questions or projects you’d like us to help you with, contact us right away through the [contact form](/contact) or email [ask@endpoint.com](mailto:ask@endpoint.com).
