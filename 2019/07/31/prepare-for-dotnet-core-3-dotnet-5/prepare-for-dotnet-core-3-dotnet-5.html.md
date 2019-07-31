@@ -4,7 +4,7 @@ title: "Prepare for .NET Core 3 and .NET 5"
 tags: dotnet, dotnet core 3, dotnet 5
 ---
 
-<img src="https://raw.githubusercontent.com/juanpabloventoso/end-point-blog/net-5-post/2019/07/31/prepare-for-dotnet-core-3-dotnet-5/dotnet-core-laptop.jpg" alt="Prepare for .NET 5" /> [Photo](https://unsplash.com/photos/fPkvU7RDmCo) by Caspar Camille Rubin on Unsplash, edited by Juan Pablo Ventoso
+<img src="https://raw.githubusercontent.com/juanpabloventoso/end-point-blog/new-dotnet-post/2019/07/31/prepare-for-dotnet-core-3-dotnet-5/dotnet-core-laptop.jpg" alt="Prepare for .NET 5" /> [Photo](https://unsplash.com/photos/fPkvU7RDmCo) by Caspar Camille Rubin on Unsplash, edited by Juan Pablo Ventoso
 
 
 ###Introduction
@@ -18,7 +18,7 @@ But it also has drawbacks: Some third party libraries are still not fully suppor
 
 In the 2019 Build Conference that took place in May, <a href="https://devblogs.microsoft.com/dotnet/announcing-net-core-3/" target="_blank">.NET Core 3 was announced</a>: It's expected to be released in November this year, and it will finally include support for Windows desktop development (WPF, UWP and Windows Forms). It will also include Entity Framework 6, since most existing Windows Forms and WPF applications use that framework to access data.
 
-![.NET Core 3 features and tools](https://raw.githubusercontent.com/juanpabloventoso/end-point-blog/net-5-post/2019/07/31/prepare-for-dotnet-core-3-dotnet-5/dotnet-3-features.jpg)
+![.NET Core 3 features and tools](https://raw.githubusercontent.com/juanpabloventoso/end-point-blog/new-dotnet-post/2019/07/31/prepare-for-dotnet-core-3-dotnet-5/dotnet-3-features.jpg)
 
 .NET Core 3 will also include support for IoT (Internet-of-things) applications, aiming for internet-enabled devices like smart locks or glasses, and will allow AI development through ML.NET (an open-source machine learning framework built for .NET). For those who can't wait and want to try it out before its release, previews are <a href="https://devblogs.microsoft.com/dotnet/announcing-net-core-3-0-preview-7/" target="_blank">available to download</a>.
 
@@ -27,7 +27,7 @@ In the 2019 Build Conference that took place in May, <a href="https://devblogs.m
 
 In the same conference, on May 7, Microsoft also announced that they are planning to release a new platform for building applications targetting all devices and operative systems in november 2020: <a href="https://devblogs.microsoft.com/dotnet/introducing-net-5/" target="_blank">.NET 5</a>. And while it will be based on .NET Core, the word "core" will be removed because Microsoft is aiming to unify .NET Framework into this new platform as well (that's why its version number will be 5: to avoid confusion with existing 4.x versions of .NET Framework).
 
-![.NET 5 features and tools](https://raw.githubusercontent.com/juanpabloventoso/end-point-blog/net-5-post/2019/07/31/prepare-for-dotnet-core-3-dotnet-5/dotnet-5-unified-platform-features.jpg)
+![.NET 5 features and tools](https://raw.githubusercontent.com/juanpabloventoso/end-point-blog/new-dotnet-post/2019/07/31/prepare-for-dotnet-core-3-dotnet-5/dotnet-5-unified-platform-features.jpg)
 
 Microsoft defines .NET 5 as a "game changer": In one hand, we can expect some important features to be improved. So far, Microsoft has stated that cross-platform will be mantained and even improved, and we will have two runtimes to choose (<a href="https://github.com/mono/mono" target="_blank">Mono</a> or <a href="https://github.com/dotnet/coreclr" target="_blank">CoreCLR</a>). Java, Objective-C and Swift interoperability will be also supported for all platforms.
 
@@ -40,7 +40,7 @@ But having .NET 5 built upon .NET Core doesn't mean that .NET Framework will cea
 
 After .NET 5 is released, Microsoft plans to ship a new major release of .NET once a year, as we can see from the schedule roadmap posted on their .NET blog.
 
-![.NET schedule roadmap](https://raw.githubusercontent.com/juanpabloventoso/end-point-blog/net-5-post/2019/07/31/prepare-for-dotnet-core-3-dotnet-5/dotnet-schedule-roadmap.jpg)
+![.NET schedule roadmap](https://raw.githubusercontent.com/juanpabloventoso/end-point-blog/new-dotnet-post/2019/07/31/prepare-for-dotnet-core-3-dotnet-5/dotnet-schedule-roadmap.jpg)
 
 
 ###Conclusion
