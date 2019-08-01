@@ -5,7 +5,7 @@ tags: conference, dancer, interchange, perl
 title: Perl Dancer Conference 2015 Report—​Conference Days
 ---
 
-In my [last post](/2015/10/perl-dancer-conference-2015-report.html), I shared about the Training Days from the [Perl Dancer](http://perl.dance) 2015 conference, in Vienna, Austria. This post will cover the two days of the conference itself.
+In my [last post](/blog/2015/10/28/perl-dancer-conference-2015-report), I shared about the Training Days from the [Perl Dancer](http://perl.dance) 2015 conference, in Vienna, Austria. This post will cover the two days of the conference itself.
 
 While there were *several* wonderful talks, [Gert van der Spoel](https://www.perl.dance/users/21) did a great job of writing recaps of all of them ([Day 1](https://www.perl.dance/wiki/node/First%20Day%20of%20Conference), [Day 2](https://www.perl.dance/wiki/node/Second%20Day%20of%20Conference)), so here I’ll cover the ones that stood out most to me.
 
