@@ -259,7 +259,7 @@ dotnet minicover report --workdir ../ --threshold 70
 
 After running the script, we’ll come to these results:
 
-![MiniCover results](/blog/2019/07/16/mocking-asynchronous-database-calls-net-core/image-1.jpg)
+![MiniCover results](/blog/2019/07/16/mocking-asynchronous-database-calls-net-core/image-2.jpg)
 
 The percentage of code that should be covered by tests depends greatly on the type of application (for example, a WebAPI project will probably have more testable code than a Razor Pages project), but as a general rule, we can expect that a well-tested project will exceed 70% of code coverage.
 
