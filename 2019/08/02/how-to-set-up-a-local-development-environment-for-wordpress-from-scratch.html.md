@@ -6,13 +6,13 @@ tags: wordpress, web-development, mysql, php, ubuntu, visual-studio-code, xdebug
 
 ![Banner](/2019/08/02/how-to-set-up-a-local-development-environment-for-wordpress-from-scratch/banner.png)
 
-I recently got pulled into a project for a client that wanted to have a new WordPress website developed for them. I’m fairly green when it comes to WordPress development. However, I knew what the first step was: set up a development environment with the niceties that I’m used to from my other application development work. That is, a development server, interactive debugging, linting and a good editor.
+I recently got pulled into a project for a client that wanted to have a new WordPress website developed for them. I'm fairly green when it comes to WordPress development. However, I knew what the first step was: set up a development environment with the niceties that I'm used to from my other application development work. That is, a development server, interactive debugging, linting and a good editor.
 
-Another thing that I wanted was not to have to deal with LAMP or WAMP or XAMPP or any of that. I wanted a clean, from scratch installation where I knew and controlled everything that was there. I’ve got nothing against those packages, but I think that, by setting up everything manually, I'd be able to better learn the technology as I would know exactly how everything is set up under the hood. The shortcuts could come later.
+Another thing that I wanted was not to have to deal with LAMP or WAMP or XAMPP or any of that. I wanted a clean, from scratch installation where I knew and controlled everything that was there. I've got nothing against those packages, but I think that, by setting up everything manually, I'd be able to better learn the technology as I would know exactly how everything is set up under the hood. The shortcuts could come later.
 
-Luckily for me, there aren’t many pieces when it comes to setting up a basic, running development environment for WordPress. You only need three things: 1. MySQL, 2. PHP and 3. WordPress itself. I also wanted a few other goodies and we’ll get there.
+Luckily for me, there aren't many pieces when it comes to setting up a basic, running development environment for WordPress. You only need three things: 1. MySQL, 2. PHP and 3. WordPress itself. I also wanted a few other goodies and we'll get there.
 
-Let’s go through the steps that I took to set all of this up.
+Let's go through the steps that I took to set all of this up.
 
 ### 1. Setup PHP
 
@@ -22,7 +22,7 @@ In Ubuntu, installing PHP is easy enough. Just run the following command:
 sudo apt-get install php
 ```
 
-After that’s done, run `php -v` to validate that it was successfully installed. It should result in something like this:
+After that's done, run `php -v` to validate that it was successfully installed. It should result in something like this:
 
 ```
 PHP 7.2.19-0ubuntu0.18.04.1 (cli) (built: Jun  4 2019 14:48:12) ( NTS )
@@ -31,17 +31,17 @@ Zend Engine v3.2.0, Copyright (c) 1998-2018 Zend Technologies
     with Zend OPcache v7.2.19-0ubuntu0.18.04.1, Copyright (c) 1999-2018, by Zend Technologies
 ```
 
-There’s one particular PHP extensions that we’re going to need. Let’s install it with:
+There's one particular PHP extension that we're going to need. Let's install it with:
 
 ```
 sudo apt-get install php-mysql
 ```
 
-The `php-mysql` extension is necessary for our PHP installation to be able to interact with MySQL. That’s all that’s needed to run WordPress as far as PHP is concerned.
+The `php-mysql` extension is necessary for our PHP installation to be able to interact with MySQL. That's all that's needed to run WordPress as far as PHP is concerned.
 
 ### 2. Setup MySQL
 
-WordPress uses MySQL for all of its data storage concerns. So, let’s install it. Again, in Ubuntu, installing and setting up MySQL is super easy.
+WordPress uses MySQL for all of its data storage concerns. So, let's install it. Again, in Ubuntu, installing and setting up MySQL is super easy.
 
 First, we need to run this command:
 
@@ -49,7 +49,7 @@ First, we need to run this command:
 sudo apt-get install mysql-server
 ```
 
-This will install both the MySQL database engine and a command line client for us to connect to it and do some initial configuration. We now need to log into our freshly installed MySQL instance. But first, make sure that it’s running with:
+This will install both the MySQL database engine and a command line client for us to connect to it and do some initial configuration. We now need to log into our freshly installed MySQL instance. But first, make sure that it's running with:
 
 ```
 sudo service mysql start
@@ -69,7 +69,7 @@ We now need to create a new MySQL user that will be used by WordPress to log int
 CREATE USER 'wordpress_user'@'localhost' IDENTIFIED BY 'password';
 ```
 
-Obviously, choose a username and password that work for you. I like to keep things simple and obvious so that’s what I use. Also obviously, don’t use such weak credentials in a production environment.
+Obviously, choose a username and password that work for you. I like to keep things simple and obvious so that's what I use. Also obviously, don't use such weak credentials in a production environment.
 
 Now, create a new database that will be used by WordPress with:
 
@@ -79,17 +79,17 @@ CREATE DATABASE wordpress_dev;
 
 Again, feel free to choose a name that suits your needs. For the purposes of this tutorial, this works just fine.
 
-Now, we need to allow the user that we created a few steps ago to access and control that new database. Since this is only a dev environment, let’s just give our WordPress user access to everything. This can be done with:
+Now, we need to allow the user that we created a few steps ago to access and control that new database. Since this is only a dev environment, let's just give our WordPress user access to everything. This can be done with:
 
 ```sql
 GRANT ALL ON *.* TO 'wordpress_user'@'localhost'
 ```
 
-With that, we’re done with MySQL, we can close the CLI client with the exit command.
+With that, we're done with MySQL, we can close the CLI client with the exit command.
 
 ### 3. Setup WordPress
 
-Now that we have our prerequisites ready, we can proceed to setting up the actual WordPress site. It turns out, this is pretty easy as well. Get a new directory ready and let’s get started.
+Now that we have our prerequisites ready, we can proceed to setting up the actual WordPress site. It turns out, this is pretty easy as well. Get a new directory ready and let's get started.
 
 First, we need to download the package of WordPress files from the official site. In Ubuntu, this can be done with this command:
 
@@ -135,7 +135,7 @@ define( 'DB_COLLATE', '' );
 
 ### 4. Run WordPress
 
-Now we’re finally ready to actually run WordPress. WordPress, as a web application, needs a web server like Apache to run. We don’t have Apache though, what we have is PHP’s built-in development web server. From within our `wordpress` directory, we can fire up the built-in web server with:
+Now we're finally ready to actually run WordPress. WordPress, as a web application, needs a web server like Apache to run. We don't have Apache though, what we have is PHP's built-in development web server. From within our `wordpress` directory, we can fire up the built-in web server with:
 
 ```
 php -S localhost:3000
@@ -188,7 +188,7 @@ Time: 103ms; Memory: 10MB
 
 > Prerequisites: VS Code, XDebug and the PHP Debug VS Code extension
 
-For writing PHP, my editor of choice is VS Code. You can get the editor from the [official download site](https://code.visualstudio.com/download). VS Code has a huge extensions ecosystem where you can find almost anything. Naturally, there’s a debugger for PHP. It's aptly called PHP Debug, and you can find the instructions on how to set it up [here](https://marketplace.visualstudio.com/items?itemName=felixfbecker.php-debug). The PHP Debug extension works on top of XDebug, a debugger for PHP. Luckily for us, PHP Debug’s instructions page includes all the details on how to install and setup both itself and XDebug.
+For writing PHP, my editor of choice is VS Code. You can get the editor from the [official download site](https://code.visualstudio.com/download). VS Code has a huge extensions ecosystem where you can find almost anything. Naturally, there's a debugger for PHP. It's aptly called PHP Debug, and you can find the instructions on how to set it up [here](https://marketplace.visualstudio.com/items?itemName=felixfbecker.php-debug). The PHP Debug extension works on top of XDebug, a debugger for PHP. Luckily for us, PHP Debug's instructions page includes all the details on how to install and setup both itself and XDebug.
 
 If you followed the instructions, you should now have a new `.vscode/launch.json` file within your `wordpress` directory with the following contents:
 
@@ -206,17 +206,17 @@ If you followed the instructions, you should now have a new `.vscode/launch.json
 }
 ```
 
-This is what’s called a `launch configuration` in VS Code speak. This tells VS Code’s debugger all the info it needs to attach to a running PHP process. To see it in action, fire up the built-in web development server with:
+This is what's called a `launch configuration` in VS Code speak. This tells VS Code's debugger all the info it needs to attach to a running PHP process. To see it in action, fire up the built-in web development server with:
 
 ```
 php -S localhost:3000
 ```
 
-Then, click the `Start Debugging` button. That’s the green triangle icon near the top of the screen, when you select the Debug sidebar in VS Code. It should have the `Listen for XDebug` option selected.
+Then, click the `Start Debugging` button. That's the green triangle icon near the top of the screen, when you select the Debug sidebar in VS Code. It should have the `Listen for XDebug` option selected.
 
 ![VS Code Start Debugger](/2019/08/02/how-to-set-up-a-local-development-environment-for-wordpress-from-scratch/vscode-start-debugger.png)
 
-Now it’s just a matter of putting a breakpoint anywhere within the source code and request the page from your browser. You can put a breakpoint by clicking right next to the line number indicator, within any file. Here, I’ve put a breakpoint on line 14 in `index.php`:
+Now it's just a matter of putting a breakpoint anywhere within the source code and request the page from your browser. You can put a breakpoint by clicking right next to the line number indicator, within any file. Here, I've put a breakpoint on line 14 in `index.php`:
 
 ![VS Code Breakpoint](/2019/08/02/how-to-set-up-a-local-development-environment-for-wordpress-from-scratch/vscode-breakpoint.png)
 
