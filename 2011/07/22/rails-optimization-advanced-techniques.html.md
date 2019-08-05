@@ -1,7 +1,7 @@
 ---
 author: Steph Skardal
 gh_issue_number: 478
-tags: performance, ruby, rails
+tags: performance, ruby, rails, solr, sunspot
 title: 'Rails Optimization: Advanced Techniques with Solr'
 ---
 
