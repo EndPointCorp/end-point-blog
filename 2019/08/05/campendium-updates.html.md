@@ -24,7 +24,7 @@ If a user is searching for campgrounds in a broad location, they can see where c
 Another exciting was the introduction of advanced filtering in the search interface, presented in combination with map display. Users can filter campgrounds by category (e.g. Public Land, RV Parking, Parking, Dump Station), filter by price (with a slider), hookups, campground policy (e.g. age or pet restrictions), discounts, recreation, and facilities. All of this search filtering is driven by [Sunspot](https://github.com/sunspot/sunspot), a Ruby on Rails gem for working with the popular [Solr](https://lucene.apache.org/solr/) search engine. Results can be sorted by user provided reviews, price or distance from a specific GPS location. Here, much care was given to provide the best user interface for presenting this valuable functionality.
 
 
-### “Supporters Only” Features (and Caching)
+### “Supporters Only” Features
 
 ![Campendium Supporters only, Subscriptions](/blog/2019/08/05/campendium-updates/supporters.jpg)
 
