@@ -35,6 +35,8 @@ Today’s youth is growing up and developing in a digital age surrounded by tech
 
 <img src="/blog/2019/08/06/moon-landing-and-education-of-children/image-3.jpg" alt="An excited kid points at the Liquid Galaxy"/>
 
+This exhibit was made possible by the generous donation of [Brian McClendon](https://en.wikipedia.org/wiki/Brian_McClendon) and [Beth Ellyn McClendon](https://bethellyn.com/).
+
 For more information on liquid Galaxy, visit: [liquidgalaxy.endpoint.com](https://liquidgalaxy.endpoint.com/).
 
 For more information on the Cosmosphere Museum, visit: [cosmo.org](https://cosmo.org/)
