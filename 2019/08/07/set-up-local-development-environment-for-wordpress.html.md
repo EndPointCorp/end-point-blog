@@ -1,7 +1,7 @@
 ---
 author: "Kevin Campusano"
 title: "How to set up a local development environment for WordPress from scratch"
-tags: wordpress, development, mysql, php, ubuntu, visual-studio-code, xdebug, composer, php-code-sniffer
+tags: wordpress, development, mysql, php, ubuntu, visual-studio-code, xdebug, composer
 gh_issue_number: 1549
 ---
 

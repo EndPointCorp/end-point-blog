@@ -1,7 +1,7 @@
 ---
 author: "Kevin Campusano"
 title: "How to set up your Ruby on Rails development environment in Windows 10 Pro with Visual Studio Code and Windows Subsystem for Linux"
-tags: ruby, ruby-on-rails, windows, visual-studio-code
+tags: ruby, rails, windows, visual-studio-code
 gh_issue_number: 1513
 ---
 
