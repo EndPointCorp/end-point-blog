@@ -9,9 +9,9 @@ gh_issue_number: 1551
 
 It had been a while since I last needed to rip a CD into audio files (and compress them), but the need recently arose. This particular disc was a language learning supplement to a book, and a CD was a reasonable way to distribute that.
 
-(Even though audio file downloads and streaming have become a far more common way to distribute audio than physical CDs, electronic formats don’t preserve our same rights to resell, lend, and making backups. But that is a topic for another blog post!)
+(Even though audio file downloads and streaming have become a far more common way to distribute audio than physical CDs, electronic formats don’t preserve our same rights to resell, lend, and make backups. But that is a topic for another blog post!)
 
-I was ripping the CD with [abcde](https://abcde.einval.com/wiki/) (A Better CD Encoder), a text-based CD ripping, tagging, and compressing front-end I used often in the past. Unexpectedly I got an error, as shown in this terminal output:
+I was ripping the CD with [abcde](https://abcde.einval.com/wiki/) (A Better CD Encoder), a text-based CD ripping, tagging, and compressing front-end I have used often in the past. Unexpectedly I got an error, as shown in this terminal output:
 
 ```plain
 Executing customizable pre-read function... done.
