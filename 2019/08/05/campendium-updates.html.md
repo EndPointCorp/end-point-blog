@@ -1,7 +1,7 @@
 ---
 title: "Campendium v2019: A Summary of Recent Updates"
 author: Steph Skardal
-tags: rails, solr, sunspot, react, maps, javascript, user-interface
+tags: rails, solr, sunspot, react, maps, javascript, user-interface, ruby, clients
 gh_issue_number: 1547
 ---
 
