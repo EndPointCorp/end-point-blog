@@ -1,7 +1,7 @@
 ---
 author: Steph Skardal
 gh_issue_number: 523
-tags: rails, search
+tags: rails, search, solr, sunspot
 title: 'Sunspot, Solr, Rails: Working with Results'
 ---
 

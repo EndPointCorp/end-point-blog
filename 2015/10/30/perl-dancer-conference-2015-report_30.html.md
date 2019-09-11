@@ -2,12 +2,12 @@
 author: Josh Lavin
 gh_issue_number: 1168
 tags: conference, dancer, interchange, perl
-title: Perl Dancer Conference 2015 Report—Conference Days
+title: Perl Dancer Conference 2015 Report—​Conference Days
 ---
 
-In my [last post](/2015/10/perl-dancer-conference-2015-report.html), I shared about the Training Days from the [Perl Dancer](http://perl.dance) 2015 conference, in Vienna, Austria. This post will cover the two days of the conference itself.
+In my [last post](/blog/2015/10/28/perl-dancer-conference-2015-report), I shared about the Training Days from the [Perl Dancer](https://www.perl.dance/) 2015 conference, in Vienna, Austria. This post will cover the two days of the conference itself.
 
-While there were *several* wonderful talks, [Gert van der Spoel](https://www.perl.dance/users/21) did a great job of writing recaps of all of them ([Day 1](https://www.perl.dance/wiki/node/First%20Day%20of%20Conference), [Day 2](https://www.perl.dance/wiki/node/Second%20Day%20of%20Conference)), so here I’ll cover the ones that stood out most to me.
+While there were *several* wonderful talks, [Gert van der Spoel](https://www.perl.dance/users/21) did a great job of writing recaps of all of them ([Day 1](https://www.perl.dance/wiki/node/2015%20Day%201%20Summary), [Day 2](https://www.perl.dance/wiki/node/2015%20Day%202%20Summary)), so here I’ll cover the ones that stood out most to me.
 
 ### Day One
 
@@ -28,7 +28,7 @@ Items coming soon to Dancer may include: Web Sockets (supported in [Plack](http:
 
 [Thomas Klausner](https://twitter.com/domm_favors_irc) shared about *[OAuth & Microservices](https://www.perl.dance/talks/18-oauth2%2C-resty-apis%2C-microservices)*. Microservices are a good tool to manage complexity, but you might want to aim for “monolith first”, [according to Martin Fowler](http://martinfowler.com/bliki/MonolithFirst.html), and only later break up your app into microservices. In the old days, we had “fat” back-ends, which did everything and delivered the results to a browser. Now, we have “fat” front-ends, which take info from a back-end and massage it for display. One advantage of the microservice way of thinking is that mobile devices (or even third parties) can access the same APIs as your front-end website.
 
-[OAuth](http://oauth.net/) allows a user to login at your site, using their credentials from another site (such as Facebook or Google), so they don’t need a password for your site itself. This typically happens via JavaScript and cookies. However, to make your back-end “stateless”, you could use [JSON Web Tokens](http://jwt.io/) (JWT). Thomas showed some examples of all this in action, using the [OX Perl module](http://p3rl.org/OX).
+[OAuth](https://oauth.net/) allows a user to login at your site, using their credentials from another site (such as Facebook or Google), so they don’t need a password for your site itself. This typically happens via JavaScript and cookies. However, to make your back-end “stateless”, you could use [JSON Web Tokens](https://jwt.io/) (JWT). Thomas showed some examples of all this in action, using the [OX Perl module](http://p3rl.org/OX).
 
 One thing I found interesting that Thomas mentioned: *Plack middleware is the correct place to implement most of the generic part of a web app. The framework is the wrong part.* I think this mindset goes along with Sawyer’s comments about *Web App + App* in the Training Days.
 
@@ -47,7 +47,7 @@ Gert presented on *[Social Logins & eCommerce](https://www.perl.dance/talks/9-so
     - Expected customer retention
     - Expected increase in sales
     - Better target customers
-    - “Plug & Play” (if you pay)—​some services exist to make it simple to integrate social logins, where you just integrate with them, and then you are effectively integrated with whatever social login providers they support. These include [Janrain](http://janrain.com/) and [LoginRadius](http://www.loginradius.com/)
+    - “Plug & Play” (if you pay)—​some services exist to make it simple to integrate social logins, where you just integrate with them, and then you are effectively integrated with whatever social login providers they support. These include Janrain and LoginRadius
 - **Cons—​customer:**
     - Privacy concerns (sharing their social identity with your site)
     - Security concerns (if their social account is hacked, so are all their accounts where they have used their social login)
@@ -62,16 +62,17 @@ Gert presented on *[Social Logins & eCommerce](https://www.perl.dance/talks/9-so
     - Brand association (maybe you don’t want your site associated with certain social sites)
 - **Cons—​social provider:**
     - ???
+
 Šimun Kodžoman spoke on *[Dancer + Meteor = mobile app](https://www.perl.dance/talks/22-dancer-%2B-meteor-%3D-mobile-app)*. [Meteor](https://www.meteor.com/) is a JavaScript framework for both server-side and client-side. It seems one of the most interesting aspects is you can use Meteor with the Android or iOS SDK to auto-generate a true mobile app, which has many more advantages than a simple HTML “app” created with [PhoneGap](http://phonegap.com/). Šimun is using Dancer as a back-end for Meteor, because the server-side Meteor aspect is still new and unstable, and is also dependent on [MongoDB](https://www.mongodb.org/), which cannot be used for everything.
 
-End Point’s own [Sam Batschelet](/team/sam_batschelet) shared his work on *[Space Camp](https://www.perl.dance/talks/4-space-camp---the-final-frontier)*, a new container-based setup for development environments. This pulls together several pieces, including [CoreOS](https://coreos.com/), [systemd-nspawn](http://www.freedesktop.org/software/systemd/man/systemd-nspawn.html), and [etcd](https://coreos.com/etcd/) to provide a futuristic version of [DevCamps](http://www.devcamps.org/).
+End Point’s own Sam Batschelet shared his work on *[Space Camp](https://www.perl.dance/talks/4-space-camp---the-final-frontier)*, a new container-based setup for development environments. This pulls together several pieces, including [CoreOS](https://coreos.com/), [systemd-nspawn](http://www.freedesktop.org/software/systemd/man/systemd-nspawn.html), and [etcd](https://coreos.com/etcd/) to provide a futuristic version of [DevCamps](http://www.devcamps.org/).
 
 ### Day Two
 
 <div class="separator" style="clear: both; text-align: center; float:right"><a href="/blog/2015/10/30/perl-dancer-conference-2015-report_30/image-2-big.jpeg" imageanchor="1" style="clear: right; float: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" src="/blog/2015/10/30/perl-dancer-conference-2015-report_30/image-2.jpeg"/></a>
-<br/><br/><small><a href="https://twitter.com/sbatschelet/status/657493819135541248">Conference goers, by Sam</a> (used with permission)</small></div>
+<br/><br/><small><a href="https://twitter.com/sbatschelet/status/657493819135541248">Conference goers, by Sam</a><br/>(used with permission)</small></div>
 
-[Andrew Baerg](https://twitter.com/pullingshots) spoke on *[Taming the 1000-lb Gorilla](https://www.perl.dance/talks/20-taming-a-thousand-pound-gorilla)* that is [Interchange 5](http://www.interchangecommerce.org/). He shared how they have endeavored to manage their Interchange development in more modern ways, such as using unit tests and [DBIC](http://p3rl.org/DBIx::Class). One item I found especially interesting was the use of [DBIx::Class::Fixtures](http://p3rl.org/DBIx::Class::Fixtures) to allow saving bits of information from a database to keep with a test. This is helpful when you have a bug from some database entry which you want to fix and ensure stays fixed, as databases can change over time, and without a “fixture” your test would not be able to run.
+[Andrew Baerg](https://twitter.com/pullingshots) spoke on *[Taming the 1000-lb Gorilla](https://www.perl.dance/talks/20-taming-a-thousand-pound-gorilla)* that is [Interchange 5](https://www.interchangecommerce.org/). He shared how they have endeavored to manage their Interchange development in more modern ways, such as using unit tests and [DBIC](http://p3rl.org/DBIx::Class). One item I found especially interesting was the use of [DBIx::Class::Fixtures](http://p3rl.org/DBIx::Class::Fixtures) to allow saving bits of information from a database to keep with a test. This is helpful when you have a bug from some database entry which you want to fix and ensure stays fixed, as databases can change over time, and without a “fixture” your test would not be able to run.
 
 [Russell Jenkins](https://twitter.com/veryrusty) shared *[HowTo Contribute to Dancer 2](https://www.perl.dance/talks/24-howto-contributeto-dancer2)*. He went over the use of [Git](https://git-scm.com/), including such helpful commands and tips as:
 
@@ -97,7 +98,7 @@ Alexis mentioned that **Dancer 1 is frozen—​Dancer 2 full-speed ahead!** He 
 
 While at the conference, Alexis even wrote a Dancer2 plugin, [Dancer2::Plugin::ProbabilityRoute](https://metacpan.org/pod/Dancer2::Plugin::ProbabilityRoute), which allows you to do [A/B Testing](https://en.wikipedia.org/wiki/A/B_testing) in your Dancer app. (Another similar plugin is [Dancer2::Plugin::Sixpack](https://metacpan.org/pod/Dancer2::Plugin::Sixpack).)
 
-Also check out [Alexis’ recap](http://blog.sukria.net/2015/10/22/perl-dancer-2015-report/).
+Also check out [Alexis’ recap](https://web.archive.org/web/20151108214937/http://blog.sukria.net/2015/10/22/perl-dancer-2015-report/).
 
 Finally, I was privileged to speak as well, on *[AngularJS & Dancer for Modern Web Development](https://www.perl.dance/talks/11-angularjs-%26-dancer-for-modern-web-development)*. Since this post is already pretty long, I’ll save the details for [another post](/blog/2015/10/30/angularjs-dancer-for-modern-web).
 
