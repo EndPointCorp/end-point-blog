@@ -5,7 +5,7 @@ tags: clients, machine-learning, natural-language-processing
 gh_issue_number: 1555
 ---
 
-![](/blog/2019/09/10/openiti-arabic-ocr-catalyst-project/banner.jpg)
+<img src="/blog/2019/09/10/openiti-arabic-ocr-catalyst-project/banner.jpg" alt="Decorative Arabic calligraphy" /> [Photo](https://www.flickr.com/photos/firaskaheel/16680667070) by Free Quran Pictures 4K, cropped, [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/)
 
 Congratulations to the [Open Islamicate Texts Initiative](https://iti-corpus.github.io/) (OpenITI) on their new project the Arabic-script OCR Catalyst Project (AOCP)! This project received funding from the The Andrew W. Mellon Foundation this summer.
 
