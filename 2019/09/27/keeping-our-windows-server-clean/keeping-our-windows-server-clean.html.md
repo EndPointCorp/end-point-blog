@@ -9,9 +9,9 @@ tags: Windows, Windows Server, IIS, Logs, Clean logs
 
 ###Introduction
 
-I have been running websites and web applications under Windows Server for years, for both work and personal purposes. Some (most) of them were small websites with a few daily visitors, but one particular case (a <a href="https://www.pronosticoextendido.net" target="_blank">weather website</a> I originally created as a hobby) grew over time to around one million pageviews per month.
+I have been running websites and web applications under Windows Server for years, for both work and personal purposes. Some (most) of them were small websites with a few daily visitors, but one particular case (a <a href="https://www.pronosticoextendido.net" target="_blank">weather website</a> I originally created as a hobby) grew over time to around one million page views per month.
 
-The website is mostly ASP.NET, with some services and componentes written in PHP and Python, and uses MySQL for persistance (as well as a bunch of XML/PNG files to cache weather forecasts and weather imagery). As months passed by, I've discovered that the default IIS and Windows log files will grow drastically so, while checking its content periodically to detect issues and vulnerabilities, we need to take action to preserve free disk space and server performance.
+The website is mostly ASP.NET, with some services and components written in PHP and Python, and uses MySQL for persistence (as well as a bunch of XML/PNG files to cache weather forecasts and weather imagery). As months passed by, I've discovered that the default IIS and Windows log files will grow drastically so, while checking its content periodically to detect issues and vulnerabilities, we need to take action to preserve free disk space and server performance.
 
 
 ###Internet Information Services log files
@@ -35,7 +35,7 @@ This script traverses through all files on the folder passed by parameter that a
 
 There is another location where different Operative System logs are stored: ```C:\Windows\System32\LogFiles```. And when we navigate there, we will find an ```HTTPERR``` folder which will also start consuming free space as our websites are visited. The log files in that folder will save information regarding HTTP errors from any API/Service running on our IIS instance.
 
-So depending on the web traffic our applications have, it will grow faster or slower. But in any case, I recommend to create a batch file to clean old log files using the ```del``` command, and to run that file on a daily basis by configuring scheduled task.
+So depending on the web traffic our applications have, it will grow faster or slower. But in any case, I recommend creating a batch file to clean old log files using the ```del``` command, and to run that file on a daily basis by configuring a scheduled task.
 
 * <b>CleanHTTPERRLogs.bat</b>
 
@@ -43,7 +43,7 @@ So depending on the web traffic our applications have, it will grow faster or sl
 ForFiles /D -10 /P "C:\Windows\System32\LogFiles\HTTPERR" /C "cmd /c del /f /q @path"
 ```
 
-This script, just as the previous one, will search for all files more than 10 days old and delete them. We don't need to search for subfolders in this case because Windows stores all HTTPERR logs in the same level. After running the task, we can open the folder properties and check that the used space will be the roughly same over the days:
+This script, just as the previous one, will search for all files more than 10 days old and delete them. We don't need to search for subfolders in this case because of Windows storing all HTTPERR logs at the same level. After running the task, we can open the folder properties and check that the used space will be the roughly the same over the days:
 
 ![Folder properties after cleanup](https://raw.githubusercontent.com/juanpabloventoso/end-point-blog/master/2019/09/27/keeping-our-windows-server-clean/httperr-space-green-check.jpg)
 
@@ -62,7 +62,7 @@ So an alternative would be to create a script to compress the files instead of d
 forfiles /D -10 /P "C:\inetpub\logs\LogFiles" /S /C "cmd /c compact @path"
 ```
 
-And of course, we can create more scripts other locations, like the ```C:\Windows\Temp``` folder for example. I mentioned earlier that my website creates a lot of XML and PNG files: I have another script whose mission is keeping those folders at bay, deleting forecast files that hasn't been used for more than one day (the local forecast will be outdated and would need to refresh it from the external web service anyway).
+And of course, we can create more scripts other locations, like the ```C:\Windows\Temp``` folder for example. I mentioned earlier that my website creates a lot of XML and PNG files: I have another script whose mission is keeping those folders at bay, deleting forecast files that haven't been used for more than one day (the local forecast will be outdated and would need to refresh it from the external web service anyway).
 
 
 ###More resources
