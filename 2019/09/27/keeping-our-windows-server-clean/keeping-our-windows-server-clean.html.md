@@ -4,7 +4,7 @@ title: "Keeping our Windows Server clean"
 tags: Windows, Windows Server, IIS, Logs, Clean logs
 ---
 
-<img src="keeping-our-windows-server-clean/cover.jpg" alt="Keeping our Windows Server clean" /> [Photo](https://flic.kr/p/ofjEj4) by [Shawn O'Neil](https://www.flickr.com/photos/oneilsh/), used under [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/), cropped from original
+<img src="https://raw.githubusercontent.com/juanpabloventoso/end-point-blog/master/2019/09/27/keeping-our-windows-server-clean/cover.jpg" alt="Keeping our Windows Server clean" /> [Photo](https://flic.kr/p/ofjEj4) by [Shawn O'Neil](https://www.flickr.com/photos/oneilsh/), used under [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/), cropped from original
 
 
 ###Introduction
