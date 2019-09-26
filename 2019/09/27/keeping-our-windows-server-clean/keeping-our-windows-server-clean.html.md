@@ -28,7 +28,7 @@ ForFiles /D -10 /P "C:\inetpub\logs\LogFiles" /S /C "cmd /c del /f /q @path"
 
 This script traverses through all files on the folder passed by parameter that are more than 10 days old, and for each file, it executes the ```del``` command in quiet mode. This script will search for all files within the folder and all subfolders that are more than 10 days old and delete them. After running the task, we should confirm that the used space was reduced:
 
-![Folder properties after cleanup](https://raw.githubusercontent.com/juanpabloventoso/end-point-blog/windows-server-post/2019/09/27/keeping-our-windows-server-clean/logfiles-space-green-check.jpg)
+![Folder properties after cleanup](https://raw.githubusercontent.com/juanpabloventoso/end-point-blog/master/2019/09/27/keeping-our-windows-server-clean/logfiles-space-green-check.jpg)
 
 
 ###HTTP Error logs
@@ -45,7 +45,7 @@ ForFiles /D -10 /P "C:\Windows\System32\LogFiles\HTTPERR" /C "cmd /c del /f /q @
 
 This script, just as the previous one, will search for all files more than 10 days old and delete them. We don't need to search for subfolders in this case because Windows stores all HTTPERR logs in the same level. After running the task, we can open the folder properties and check that the used space will be the roughly same over the days:
 
-![Folder properties after cleanup](https://raw.githubusercontent.com/juanpabloventoso/end-point-blog/windows-server-post/2019/09/27/keeping-our-windows-server-clean/httperr-space-green-check.jpg)
+![Folder properties after cleanup](https://raw.githubusercontent.com/juanpabloventoso/end-point-blog/master/2019/09/27/keeping-our-windows-server-clean/httperr-space-green-check.jpg)
 
 (I know, still 1GB after cleanup, gotta do something about those bad requests!)
 
