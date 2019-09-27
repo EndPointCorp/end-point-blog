@@ -20,7 +20,7 @@ In our IIS public folder (by default ```C:\inetpub```) we will have a path ```lo
 
 To prevent this, we can create a batch file that can be run on a daily basis from a scheduled task.
 
-* <b>CleanISSLogs.bat</b>
+* <b>CleanIISLogs.bat</b>
 
 ```batch
 ForFiles /D -10 /P "C:\inetpub\logs\LogFiles" /S /C "cmd /c del /f /q @path"
@@ -54,9 +54,9 @@ This script, just as the previous one, will search for all files more than 10 da
 
 If we need to comply with strict security/auditing policies, and if we don't have a backup device with enough capacity, deleting old files might not be an option. If that's the case, we can compress the files to save space on disk.
 
-So an alternative would be to create a script to compress the files instead of deleting them using the ```compact``` command. This is an example of a batch file that will compress all files in the ISS LogFiles folder that are more than 10 days old.
+So an alternative would be to create a script to compress the files instead of deleting them using the ```compact``` command. This is an example of a batch file that will compress all files in the IIS LogFiles folder that are more than 10 days old.
 
-* <b>CompressISSLogs.bat</b>
+* <b>CompressIISLogs.bat</b>
 
 ```batch
 forfiles /D -10 /P "C:\inetpub\logs\LogFiles" /S /C "cmd /c compact @path"
