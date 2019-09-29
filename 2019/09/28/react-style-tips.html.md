@@ -2,7 +2,7 @@
 title: "React: Style Tips"
 author: Zed Jensen
 tags: javascript, react, css
-gh_issue_number: 
+gh_issue_number: 1558
 ---
 
 <img src="/blog/2019/09/28/react-style-tips/image-0.jpg" alt="Icon design" /><br>Photo by <a href="https://unsplash.com/photos/_zKxPsGOGKg">Harpal Singh</a> on Unsplash
