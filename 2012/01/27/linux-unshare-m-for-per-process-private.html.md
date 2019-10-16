@@ -5,7 +5,7 @@ tags: debian, linux, redhat, security, sysadmin, ubuntu
 title: Linux unshare -m for per-process private filesystem mount points
 ---
 
-## Private mount points with unshare
+### Private mount points with unshare
 
 Linux offers some pretty interesting features that are either new, borrowed, obscure, experimental, or any combination of those qualities. One such feature that is interesting is the **unshare() function**, which the unshare(2) man page says “allows a process to disassociate parts of its execution context that are currently being shared with other processes. Part of the execution context, such as the mount namespace, is shared implicitly when a new process is created using fork(2) or vfork(2)”.
 
@@ -15,7 +15,7 @@ Running `unshare -m` gives the calling process a private copy of its mount names
 
 Yes, completely private mount points for each process. Isn’t that interesting and strange?
 
-## A demonstration
+### A demonstration
 
 Here’s a demonstration on an Ubuntu 11.04 system. In one terminal:
 
@@ -68,7 +68,7 @@ drwxrwxrwt 21 root root 36864 2011-11-03 22:18 ../
 
 It’s all secret!
 
-## Use cases
+### Use cases
 
 This feature makes it possible for us to create a private temporary filesystem that even other root-owned processes cannot see or browse through, raising the bar considerably for a naive attacker to get access to sensitive files or even see that they exist, at least when they’re not currently open and visible to e.g. lsof.
 
@@ -76,7 +76,7 @@ Of course a sophisticated attacker would presumably have a tool to troll through
 
 Another possible use of this feature is to have a process unmount a filesystem privately, perhaps to reduce the exposure of other files on a system to a running daemon if it is compromised.
 
-## /etc/mtab vs. /proc/mounts
+### /etc/mtab vs. /proc/mounts
 
 Experimenting with this feature also drew my attention to differences in how popular Linux distributions expose mount points. There are actually traditionally two places that the list of mounts is stored on a Linux system.
 
@@ -86,7 +86,7 @@ Second, the Linux-specific **/proc/mounts**, which is real-time, exact, and accu
 
 Ubuntu 11.04 still has both, with a separate /etc/mtab. Fedora 16 has done away with /etc/mtab entirely and made it merely a symlink to /proc/mounts, which makes sense, but that is a newer convention and leads to the surprising difference here.
 
-## Linux distributions and unshare
+### Linux distributions and unshare
 
 The unshare userland command in util-linux(-ng) comes with RHEL 6, Debian 6, Ubuntu 11.04, and Fedora 16, but *not* on the very common RHEL 5 or CentOS 5. Because we needed it on RHEL 5, I made a simple package that contains only the unshare(1) command and peacefully coexists with the older stock RHEL 5 util-linux. It’s called util-linux-unshare and here are the RPM downloads for RHEL 5:
 
@@ -96,7 +96,7 @@ The unshare userland command in util-linux(-ng) comes with RHEL 6, Debian 6, Ubu
 
 I hope you’ve found this as interesting as I did!
 
-## Further reading
+### Further reading
 
 - Karel Zak is the util-linux maintainer and a Red Hat employee; see his [detailed blog post about the unshare command](http://karelzak.blogspot.com/2009/12/unshare1.html)
 - [unshare(2)](http://linux.die.net/man/2/unshare) function man page
