@@ -17,7 +17,7 @@ Live streaming is based on [RTMP](https://en.wikipedia.org/wiki/Real-Time_Messag
 
 The most popular combination for video/audio streaming is Adobe Flash Player as a client software and a proprietary [Adobe Flash Media Server](https://www.adobe.com/products/adobe-media-server-family.html) as a server software. Another option is Wowza Streaming solutions.
 
-<a href="/blog/2012/04/27/streaming-live-with-red5-media-server/image-0.png" imageanchor="1" style="clear: right; float: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" height="79" src="/blog/2012/04/27/streaming-live-with-red5-media-server/image-0.png" width="200"/></a>
+<a href="/blog/2012/04/27/streaming-live-with-red5-media-server/image-1.png" imageanchor="1" style="clear: right; float: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" height="79" src="/blog/2012/04/27/streaming-live-with-red5-media-server/image-1.png" width="200"/></a>
 
 Luckily for us there is an open-source [Red5 Media Server](http://red5.org/)—​the most popular if not the only one stable of all open-source media streaming servers. We will be leveraging Red5 to dive into RTMP world and the cutting edge streaming technologies.
 
@@ -31,7 +31,7 @@ After installation is complete, we can launch the demo for Simple Broadcaster ap
 
 If we use another browser  to open Simple Subscriber application, or even another laptop with the IP  of the broadcasting computer, we will be able to stream the video live. It is quite noticeable that quality drops in Simple Subscriber.
 
-<div class="separator" style="clear: both; text-align: center;"><a href="/blog/2012/04/27/streaming-live-with-red5-media-server/image-1-big.jpeg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="265" src="/blog/2012/04/27/streaming-live-with-red5-media-server/image-1.jpeg" width="400"/></a></div>
+<div class="separator" style="clear: both; text-align: center;"><a href="/blog/2012/04/27/streaming-live-with-red5-media-server/image-2-big.jpeg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="265" src="/blog/2012/04/27/streaming-live-with-red5-media-server/image-2.jpeg" width="400"/></a></div>
 
 In this example we also learned that rtmp://localhost/oflaDemo is the server communication point to where we publish and stream videos.
 
@@ -57,11 +57,11 @@ Step 1.
 
 Let’s open simpleBroadcaster.fla located in the very root of the download in Flash CS5.
 
-<a href="/blog/2012/04/27/streaming-live-with-red5-media-server/image-2-big.jpeg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="333" src="/blog/2012/04/27/streaming-live-with-red5-media-server/image-2.jpeg" width="400"/></a>
+<a href="/blog/2012/04/27/streaming-live-with-red5-media-server/image-3-big.jpeg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="333" src="/blog/2012/04/27/streaming-live-with-red5-media-server/image-3.jpeg" width="400"/></a>
 
 and take a pick at the Library panel.
 
-<a href="/blog/2012/04/27/streaming-live-with-red5-media-server/image-3-big.jpeg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="400" src="/blog/2012/04/27/streaming-live-with-red5-media-server/image-3.jpeg" width="332"/></a>
+<a href="/blog/2012/04/27/streaming-live-with-red5-media-server/image-4-big.jpeg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="400" src="/blog/2012/04/27/streaming-live-with-red5-media-server/image-4.jpeg" width="332"/></a>
 
 Let’s double-click on the Embedded Video 1, open Window -> Properties panel and modify the size of the video to occupy the full documents area. Alternatively, we may change the document size to fit the video: right-click on the grey area, pick Document settings from the context menu and adjust dimensions. Either way, now we should drag the video rectangle to fit the document. We will save the document and repeat the same sequence of actions for simpleSubscriber.fla, because they are really no different.
 
@@ -69,7 +69,7 @@ Step 2.
 
 Let’s now open the “red5” directory that we checked out in FlashBuilder.
 
-<a href="/blog/2012/04/27/streaming-live-with-red5-media-server/image-4-big.jpeg" imageanchor="1" style="clear: left; float: left; margin-bottom: 1em; margin-right: 1em;"><img border="0" height="424" src="/blog/2012/04/27/streaming-live-with-red5-media-server/image-4.jpeg" width="640"/></a>
+<a href="/blog/2012/04/27/streaming-live-with-red5-media-server/image-5-big.jpeg" imageanchor="1" style="clear: left; float: left; margin-bottom: 1em; margin-right: 1em;"><img border="0" height="424" src="/blog/2012/04/27/streaming-live-with-red5-media-server/image-5.jpeg" width="640"/></a>
 
 We immediately find the main class for simpleBroadcaster.fla org.red5.samples.livestream.broadcaster.Main in “classes” directory.
 
@@ -243,7 +243,7 @@ Then we will create the `watch.html` file:
 
 At this point we are able to start a broadcast at `http://localhost/broadcast.html` and watch it at `http://localhost/watch.html`! In this case I am broadcasting from a MacBook and streaming to a Windows laptop.
 
-<a href="/blog/2012/04/27/streaming-live-with-red5-media-server/image-5-big.jpeg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="218" src="/blog/2012/04/27/streaming-live-with-red5-media-server/image-5.jpeg" width="640"/></a>
+<a href="/blog/2012/04/27/streaming-live-with-red5-media-server/image-6-big.jpeg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="218" src="/blog/2012/04/27/streaming-live-with-red5-media-server/image-6.jpeg" width="640"/></a>
 
 Sweet! Next step is to implement the actual two-way hangout with Red5 Media Server!
 
