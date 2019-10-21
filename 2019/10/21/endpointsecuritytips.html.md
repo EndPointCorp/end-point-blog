@@ -52,7 +52,7 @@ The security vulnerability testing would generate a report outlining problematic
 - <A href=https://www.rapidfiretools.com/products/network-detective/ target=_blank>Rapid Fire Tools Network Detective</a>
 - <A href=https://www.rapidfiretools.com/products/cyber-hawk/ target=_blank>Rapid Fire Tools Cyberhawk</a>
 
-<sup>1</sup><a style="font-size: 9px; text-decoration: none" href=https://www.pcworld.com/article/3400698/nsa-warns-that-bluekeep-vulnerability-in-windows-xp-and-windows-7-is-especially-dangerous.html target=_blank><sup>https://www.pcworld.co/article/3400698/nsa-warns-that-bluekeep-vulnerability-in-windows-xp-and-windows-7-is-especially-dangerous.html</sup></a>
+<sup>1</sup><a style="font-size: 9px; text-decoration: none" href=https://www.pcworld.com/article/3400698/nsa-warns-that-bluekeep-vulnerability-in-windows-xp-and-windows-7-is-especially-dangerous.html target=_blank>https://www.pcworld.co/article/3400698/nsa-warns-that-bluekeep-vulnerability-in-windows-xp-and-windows-7-is-especially-dangerous.html</a>
 
 #### Enterprise Antivirus Systems
 Antivirus software should be a mandatory technology running on all servers, or computers. Basically, this is the last line of defense if a malware or viruses enter your computer. The antivirus itself would not protect you 100% from being infected by malware or virus but if you have multiple layers of security in place, then the chances are much lower that your organization’s technologies would not be compromised. <img src=/2019/11/02/image-0.png  align="right" hspace="10">A company called<sup>2</sup> AV-Comparatives did an assessment on some of the popular antivirus software’s out in today’s market. The success rates range from 98% to 100%. The 2% difference could potentially compromise your network. It only takes one malware or virus to enter your network and becomes destructive.
@@ -65,8 +65,8 @@ New variants of viruses and malware are developed everyday thus the antivirus co
 - <A href=https://www.webroot.com/us/en/business/smb/endpoint-protection target=_blank>Webroot Antivirus</a>
 - <A href=https://www.symantec.com/products/endpoint-protection target=_blank>Symantec Antivirus</a>
 
-<sup>2</sup><a style="font-size: .6em; text-decoration: none" href=https://www.av-comparatives.org/tests/business-security-test-2019-march-june/ target=_blank><sup>https://www.av-comparatives.org/tests/business-security-test-2019-march-june/</sup></a><br>
-<sup>3</sup><sup><a style="font-size: .6em; text-decoration: none" href=https://techcrunch.com/2019/05/12/wannacry-two-years-on/ target=_blank>https://techcrunch.com/2019/05/12/wannacry-two-years-on/</sup></a>
+<sup>2</sup><sup><a style="font-size: .6em; text-decoration: none" href=https://www.av-comparatives.org/tests/business-security-test-2019-march-june/ target=_blank>https://www.av-comparatives.org/tests/business-security-test-2019-march-june/</a></sup><br>
+<sup>3</sup><sup><a style="font-size: .6em; text-decoration: none" href=https://techcrunch.com/2019/05/12/wannacry-two-years-on/ target=_blank>https://techcrunch.com/2019/05/12/wannacry-two-years-on/</a></sup>
 
 
 #### Web Filtering Technology
