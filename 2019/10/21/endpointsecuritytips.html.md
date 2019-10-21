@@ -65,8 +65,8 @@ New variants of viruses and malware are developed everyday thus the antivirus co
 - <A href=https://www.webroot.com/us/en/business/smb/endpoint-protection target=_blank>Webroot Antivirus</a>
 - <A href=https://www.symantec.com/products/endpoint-protection target=_blank>Symantec Antivirus</a>
 
-<sup>2</sup><sup><a style="font-size: .6em; text-decoration: none" href=https://www.av-comparatives.org/tests/business-security-test-2019-march-june/ target=_blank>https://www.av-comparatives.org/tests/business-security-test-2019-march-june/</a></sup><br>
-<sup>3</sup><sup><a style="font-size: .6em; text-decoration: none" href=https://techcrunch.com/2019/05/12/wannacry-two-years-on/ target=_blank>https://techcrunch.com/2019/05/12/wannacry-two-years-on/</a></sup>
+<sup>2</sup><sup><a href=https://www.av-comparatives.org/tests/business-security-test-2019-march-june/ target=_blank>https://www.av-comparatives.org/tests/business-security-test-2019-march-june/</a></sup><br>
+<sup>3</sup><sup><a href=https://techcrunch.com/2019/05/12/wannacry-two-years-on/ target=_blank>https://techcrunch.com/2019/05/12/wannacry-two-years-on/</a></sup>
 
 
 #### Web Filtering Technology
@@ -149,8 +149,8 @@ A few incidents that occurred recently has shown that we have a long way in prot
 4. 09/23/19:  <A style="font-size: .8em; text-decoration: none" href=https://www.zdnet.com/article/hackers-target-transportation-and-shipping-industries-in-new-trojan-malware-campaign/ target=_blank>Hackers Target Transportation and Shipping Companies in New Trojan Malware Campaign</a> 
 5. 09/25/19: <A style="font-size: .8em; text-decoration: none" href=https://inc42.com/buzz/hacking-routers-webcams-printers-are-the-most-searched-keywords-on-the-dark-web/ target=_blank>Hacking of IoT – Internet of Things (webcams, security cams, printers, home routers)</a> 
 
-<sup>4</sup><a href=https://www.sslshopper.com/why-ssl-the-purpose-of-using-ssl-certificates.html target=_blank><sup>
-SSL Shopper</sup></a>
+<sup>4</sup><sup><a href=https://www.sslshopper.com/why-ssl-the-purpose-of-using-ssl-certificates.html target=_blank>
+SSL Shopper</a></sup>
 
 ### Conclusion
 
