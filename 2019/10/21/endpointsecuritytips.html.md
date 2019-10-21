@@ -149,11 +149,11 @@ https://www.sslshopper.com/why-ssl-the-purpose-of-using-ssl-certificates.html</a
 
 A few incidents that occurred recently has shown that we have a long way in protecting our technology usage. A few articles below will detail the incident. 
 
-1. 08/27/19:  <A style="font-size: .8em; text-decoration: none" href=https://www.nbcnewyork.com/news/local/Long-Island-Schools-Hacked-District-Forced-to-Pay-88000-in-Ransom-558396441.html target=_blank>Long Island Schools Hacked; District Forced to Pay $88,000 in Ransom</a> 
-2. 09/03/19:  <A style="font-size: .8em; text-decoration: none" href=https://www.nbcnewyork.com/news/local/NY-School-Delays-Start-of-Year-After-Ransomware-Attack-559322971.html target=_blank>NY School Delays Start of Year After Ransomware Attack</a> 
-3. 09/25/19:  <A style="font-size: .8em; text-decoration: none" href=https://www.newsweek.com/tortoiseshell-hacker-hire-military-heroes-fake-website-1461320 target=_blank>Veterans Targeted by Hackers Through Fake Military Heroes Hiring Website</a> 
-4. 09/23/19:  <A style="font-size: .8em; text-decoration: none" href=https://www.zdnet.com/article/hackers-target-transportation-and-shipping-industries-in-new-trojan-malware-campaign/ target=_blank>Hackers Target Transportation and Shipping Companies in New Trojan Malware Campaign</a> 
-5. 09/25/19: <A style="font-size: .8em; text-decoration: none" href=https://inc42.com/buzz/hacking-routers-webcams-printers-are-the-most-searched-keywords-on-the-dark-web/ target=_blank>Hacking of IoT – Internet of Things (webcams, security cams, printers, home routers)</a> 
+1. 08/27/19:  <A href=https://www.nbcnewyork.com/news/local/Long-Island-Schools-Hacked-District-Forced-to-Pay-88000-in-Ransom-558396441.html target=_blank>Long Island Schools Hacked; District Forced to Pay $88,000 in Ransom</a> 
+2. 09/03/19:  <A href=https://www.nbcnewyork.com/news/local/NY-School-Delays-Start-of-Year-After-Ransomware-Attack-559322971.html target=_blank>NY School Delays Start of Year After Ransomware Attack</a> 
+3. 09/25/19:  <A href=https://www.newsweek.com/tortoiseshell-hacker-hire-military-heroes-fake-website-1461320 target=_blank>Veterans Targeted by Hackers Through Fake Military Heroes Hiring Website</a> 
+4. 09/23/19:  <A href=https://www.zdnet.com/article/hackers-target-transportation-and-shipping-industries-in-new-trojan-malware-campaign/ target=_blank>Hackers Target Transportation and Shipping Companies in New Trojan Malware Campaign</a> 
+5. 09/25/19: <A href=https://inc42.com/buzz/hacking-routers-webcams-printers-are-the-most-searched-keywords-on-the-dark-web/ target=_blank>Hacking of IoT – Internet of Things (webcams, security cams, printers, home routers)</a> 
 
 
 
