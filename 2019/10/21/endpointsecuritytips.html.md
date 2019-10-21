@@ -52,6 +52,7 @@ The security vulnerability testing would generate a report outlining problematic
 - <A href=https://www.rapidfiretools.com/products/network-detective/ target=_blank>Rapid Fire Tools Network Detective</a>
 - <A href=https://www.rapidfiretools.com/products/cyber-hawk/ target=_blank>Rapid Fire Tools Cyberhawk</a>
 
+
 <sup>1</sup><sup><a href=https://www.pcworld.com/article/3400698/nsa-warns-that-bluekeep-vulnerability-in-windows-xp-and-windows-7-is-especially-dangerous.html target=_blank>https://www.pcworld.co/article/3400698/nsa-warns-that-bluekeep-vulnerability-in-windows-xp-and-windows-7-is-especially-dangerous.html</a></sup>
 
 #### Enterprise Antivirus Systems
@@ -64,6 +65,7 @@ New variants of viruses and malware are developed everyday thus the antivirus co
 ##### Antivirus Softwares:
 - <A href=https://www.webroot.com/us/en/business/smb/endpoint-protection target=_blank>Webroot Antivirus</a>
 - <A href=https://www.symantec.com/products/endpoint-protection target=_blank>Symantec Antivirus</a>
+
 
 <sup>2</sup><sup><a href=https://www.av-comparatives.org/tests/business-security-test-2019-march-june/ target=_blank>https://www.av-comparatives.org/tests/business-security-test-2019-march-june/</a></sup><br>
 <sup>3</sup><sup><a href=https://techcrunch.com/2019/05/12/wannacry-two-years-on/ target=_blank>https://techcrunch.com/2019/05/12/wannacry-two-years-on/</a></sup>
@@ -139,6 +141,10 @@ The SSL certificate usage have been around for a long time. The practice of usin
 
 When it comes to online transactions, in order to accept credit card information on your website, you must pass certain audits that show that you are complying with the Payment Card Industry (PCI) standards. One of the requirements is properly using an SSL Certificate. Other areas where you could implement a SSL certificate include VMware vSphere ESXi host to vCenter communication. The cost is small to obtain a SSL certificate for each system compared to better your overall security. 
 
+
+<sup>4</sup><sup><a href=https://www.sslshopper.com/why-ssl-the-purpose-of-using-ssl-certificates.html target=_blank>
+https://www.sslshopper.com/why-ssl-the-purpose-of-using-ssl-certificates.html</a></sup>
+
 ### Recent Destructive Incidents
 
 A few incidents that occurred recently has shown that we have a long way in protecting our technology usage. A few articles below will detail the incident. 
@@ -149,8 +155,7 @@ A few incidents that occurred recently has shown that we have a long way in prot
 4. 09/23/19:  <A style="font-size: .8em; text-decoration: none" href=https://www.zdnet.com/article/hackers-target-transportation-and-shipping-industries-in-new-trojan-malware-campaign/ target=_blank>Hackers Target Transportation and Shipping Companies in New Trojan Malware Campaign</a> 
 5. 09/25/19: <A style="font-size: .8em; text-decoration: none" href=https://inc42.com/buzz/hacking-routers-webcams-printers-are-the-most-searched-keywords-on-the-dark-web/ target=_blank>Hacking of IoT – Internet of Things (webcams, security cams, printers, home routers)</a> 
 
-<sup>4</sup><sup><a href=https://www.sslshopper.com/why-ssl-the-purpose-of-using-ssl-certificates.html target=_blank>
-SSL Shopper</a></sup>
+
 
 ### Conclusion
 
