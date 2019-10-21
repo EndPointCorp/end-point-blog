@@ -2,7 +2,7 @@
 author: "Charles Chang"
 title: "End Point Security Tips: Securing your Infrastructure"
 tags: security, windows, infrastructure
-gh_issue_number: 1562
+gh_issue_number: 1561
 ---
 
  ![Going Phishing](/2019/11/02/image-4.jpg)
