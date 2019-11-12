@@ -1,11 +1,9 @@
 ---
 author: Greg Sabino Mullane
 gh_issue_number: 511
-tags: database, monitoring, performance, postgres, reporting
+tags: database, monitoring, performance, postgres
 title: Finding PostgreSQL temporary_file problems with tail_n_mail
 ---
-
-
 
 <a href="/blog/2011/11/10/postgres-temporary-files-workmem-and/image-0-big.jpeg" onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5673407150243656402" src="/blog/2011/11/10/postgres-temporary-files-workmem-and/image-0.jpeg"/></a>
 
@@ -92,5 +90,3 @@ CREATE TEMPORARY TABLE tmp_sales_by_month AS SELECT * FROM sales_by_month_view;
 ```
 
 While it still needs a little polishing (such as showing which file each smallest/largest came from), it has already been an indispensible tool forfinding queries that causing I/O problems via frequent and/or large temporary files.
-
-
