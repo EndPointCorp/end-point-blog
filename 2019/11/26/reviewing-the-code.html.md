@@ -1,6 +1,6 @@
 ---
 title: "Reviewing the Code"
-author: Kürşat Aydemir
+author: Kürşat Kutlu Aydemir
 tags: development
 gh_issue: 1573
 ---
