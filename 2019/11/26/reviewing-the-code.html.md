@@ -2,6 +2,7 @@
 title: "Reviewing the Code"
 author: Kürşat Aydemir
 tags: development
+gh_issue: 1573
 ---
 
 ![Magnifying glass](/blog/2019/11/26/reviewing-the-code/review_magnifier.png)
