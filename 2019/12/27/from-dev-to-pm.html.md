@@ -1,7 +1,7 @@
 ---
 author:"Greg Hanson"
 title:"e-commerce Client Project Management"
-tags:"management, clients,e-commerce,e-commerce"
+tags:management, clients, e-commerce
 ---
 
 ### E-commerce Client Project Management (for Developers)
@@ -217,14 +217,18 @@ Managing projects is a challenging proposition. But if you put things in perspec
 you will find that it can be simplified and rewarding. Try to keep the big picture in 
 mind as you proceed through the project. Its easy to get drawn into the details of a 
 project, and sometimes that is what is required. However, if you have good resources 
-available to you, it is up to you to put the areas of responsibility into the proper hands. 
+available to you, it is up to you to put the areas of responsibility into the proper hands.
+Coming from developement, this will be a real temptation. But you have a new title now,
+so put it to work!
+
 Remember, you are not working on this project to create something that you like, or that 
-your developers like. You are creating something for your client. What the projects goals
-consist of are dependent on your client. I am not saying that you cannot create something that
-you like, or that your developers like.. quite the contrary. I am suggesting that by sharing
-the expertise of you and your team WITH the client, you can arrive at something that will not
-only work extremely well for your client, but also provide you and your team a great sense of 
-accomplishment as well.
+your developers like. You are creating something for your client. The projects goals
+are largely dependent on your clients needs. 
+I am not saying that you cannot create something that you like, or that your developers like.. 
+quite the contrary. I am suggesting that by focusing on the needs of the client, and really 
+listening to them, then sharing the expertise of you and your team WITH the client, you can 
+arrive at something that will not only work extremely well for your client, 
+but also provide you and your team a great sense of accomplishment.
 </pre>
 
 
