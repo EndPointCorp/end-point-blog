@@ -219,7 +219,7 @@ There are other configurations in ASP.NET to set our output cache policy: We can
 
 GZip compression allows us, when the client supports it, to compress the response before sending it over the network. That way we can save up more than 70% of the bandwidth needed to load our website. Enabling GZip compression for dynamic and static content is relatively simple at least in Windows Server with IIS: We need to go to the "Compression" section on the IIS Manager and check the options "Enable dynamic/static content compression".
 
-![Enabling compression in IIS](https://raw.githubusercontent.com/juanpabloventoso/end-point-blog/blob/master/2020/01/08/increasing-website-load-speed/enabling-compression-iis.jpg)
+![Enabling compression in IIS](increasing-website-load-speed/enabling-compression-iis.jpg)
 
 Now, if we are running an ASP.NET MVC/WebForms website, this won't be enough: We will also need to add some custom code to our `global.asax` file in our website root, for all dynamic content to be compressed before sending the response to the client:
 
@@ -294,7 +294,7 @@ Now, if we are running an ASP.NET MVC/WebForms website, this won't be enough: We
 
 And to make sure our code is working properly, we can use an external tool like <a href="https://www.giftofspeed.com/gzip-test/">this website</a> that will kindly inform us if our website is using GZip or not.
 
-![It works!](https://raw.githubusercontent.com/juanpabloventoso/end-point-blog/blob/master/2020/01/08/increasing-website-load-speed/gzip-compression-enabled.jpg)
+![It works!](increasing-website-load-speed/gzip-compression-enabled.jpg)
 
 
 ###Summary
@@ -303,6 +303,6 @@ There are many ways of increasing the loading speed on a website. Most are commo
 
 This is a view from Google Analytics from one of my websites, where I applied most of these formulas gradually. The latest change I did a month ago was the deferred ad loading, and while it's not huge, it clearly made an impact on the average page load speed:
 
-![View from Google Analytics](https://raw.githubusercontent.com/juanpabloventoso/end-point-blog/blob/master/2020/01/08/increasing-website-load-speed/analytics-average-page-load.jpg)
+![View from Google Analytics](increasing-website-load-speed/analytics-average-page-load.jpg)
 
 Do you have any other page load optimization techniques? <b>Leave a comment below!</b>
