@@ -13,7 +13,7 @@ We live in a competitive world, so why the web should be any different? (Well, m
 There are some obvious things to do if our website is responding slowly, like having a better hosting plan, locating our server physically near our main traffic source, using a CDN if we have many visitors from several countries... But there are also other things we can do, that may have slipped under our radar. And some of them can be achieved with only a couple hours of coding.
 
 
-####Inline styles and scripts for the topmost content
+###Inline styles and scripts for the topmost content
 
 Of course, this will depend on the niche our website is, but as an average, <a href="https://www.statista.com/statistics/277125/share-of-website-traffic-coming-from-mobile-devices/" target="_blank">more than half of web traffic is generated from mobile devices</a>. And when you tap on a Google search result, you don't want to see a blank page or a loading GIF for many seconds. That's why optimizing the first content your page will display is crucial.
 
@@ -43,7 +43,7 @@ The content that will appear immediately to the user without needing to scroll t
 ```
 
 
-####Deferred loading of ads
+###Deferred loading of ads
 
 If you're using Google AdSense to monetize your website or another ad agency that uses scripting to show ads on your pages, you should consider loading them once the content is fully rendered. This will probably have a minor impact on your revenue (although almost unnoticeable in most cases), but it will not only increase the user experience but also improve your loading speed drastically.
 
@@ -107,7 +107,7 @@ This code will wait for one second once the document is ready, and then tell Goo
 <b>Tip</b>: You can also enable balancing for your ads, improving the average load speed and increasing the user experience since you won't be showing any ad at all when the max possible revenue is deprecable. And if you're not sure if displaying fewer ads is better, <a href="https://fatstacksblog.com/adsense-ad-balance-experiment/">you should try out an experiment</a> as I did. The right balance will depend on your niche and website characteristics.
 
 
-####Lazy load for images
+###Lazy load for images
 
 Loading all images from content below-the-fold right from the start doesn't make much sense, since the user will probably have most of his time reading the content above-the-fold, and probably even bouncing out from the page or tapping on a link before scrolling. So adding a custom lazy-loading script (or deferred-loading, loading-on-scroll, there are several ways to name it) is relatively simple, although we would probably have to change our backend code as well. The idea behind this approach is simple:
 
@@ -192,7 +192,7 @@ window.onafterprint = afterPrint;
 This script will search for all `<img>` tags with class `lazy`, and copy the `data-src` attribute to the `src` attribute once the image became visible due to scrolling. It also has some additional logic to set the `src` attribute before printing the page.
 
 
-####Server-side caching
+###Server-side caching
 
 Server-side caching allows to output the same content to the client over a period of time from a temporary copy of the response, instead of performing all the backend calculations that rendered that response. That way we will decrease our response time but also, save some resources on the server.
 
@@ -215,7 +215,7 @@ Will be saved and then served from different cache copies. If we only set the `i
 There are other configurations in ASP.NET to set our output cache policy: We can vary the output based on the browser, on the request headers, or even on custom strings. <a href="https://www.c-sharpcorner.com/UploadFile/chinnasrihari/Asp-Net-mvc-framework-server-side-html-caching-techniques/">This page</a> has more useful information on this subject.
 
 
-####GZip compression
+###GZip compression
 
 GZip compression allows us, when the client supports it, to compress the response before sending it over the network. That way we can save up more than 70% of the bandwidth needed to load our website. Enabling GZip compression for dynamic and static content is relatively simple at least in Windows Server with IIS: We need to go to the "Compression" section on the IIS Manager and check the options "Enable dynamic/static content compression".
 
