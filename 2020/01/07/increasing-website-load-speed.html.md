@@ -260,6 +260,7 @@ Now, if we are running an ASP.NET MVC/WebForms website, this won't be enough: We
             app.Response.AppendHeader("Content-Encoding", "gzip");
         }
     }
+    
 </script>
 ```
 
