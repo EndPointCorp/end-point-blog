@@ -271,7 +271,7 @@ And to make sure our code is working properly, we can use an external tool like 
 
 ###Summary
 
-There are many ways of increasing the loading speed on a website. Most are common and expensive, but there are also other minor tweaks that can help us bring a better user experience and also gain a couple of positions in the search engine results. And on SEO, every tiny bit of optimization counts to our goal. Every fraction of a second we can save matters -to both us and the user-, especially on mobile where people expect to get what they want almost immediately.
+There are many ways of increasing the loading speed of a website. Most are common and expensive, but there are also other minor tweaks that can help us bring a better user experience and also gain a couple of positions in the search engine results. And on SEO, every tiny bit of optimization counts to our goal. Every fraction of a second we can save matters -to both us and the user-, especially on mobile where people expect to get what they want almost immediately.
 
 This is a Google Analytics view from one of my websites, where I applied most of these formulas over several months to assess the results. The latest change I did a month ago was the deferred ad loading, and while it's not huge, it clearly made an impact on the average page load speed:
 
