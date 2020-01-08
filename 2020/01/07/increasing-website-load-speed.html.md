@@ -260,28 +260,6 @@ Now, if we are running an ASP.NET MVC/WebForms website, this won't be enough: We
             app.Response.AppendHeader("Content-Encoding", "gzip");
         }
     }
-		
-    void Application_Error(object sender, EventArgs e)
-    {
-    }	
-
-    void Application_Start(object sender, EventArgs e) 
-    {
-    }
-    
-    void Application_End(object sender, EventArgs e) 
-    {
-    }
-
-    void Session_Start(object sender, EventArgs e) 
-    {
-    }
-
-    void Session_End(object sender, EventArgs e) 
-    {
-    }
-	
-       
 </script>
 ```
 
