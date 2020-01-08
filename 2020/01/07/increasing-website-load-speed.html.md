@@ -188,7 +188,7 @@ This script will search for all `<img>` tags with class `lazy`, and copy the `da
 
 ###Server-side caching
 
-Server-side caching allows to output the same content to the clients over a period of time from a temporary copy of the response, instead of performing all the backend calculations that rendered that response every time. That way we will decrease our response time but also save some resources on the server.
+Server-side caching allows to output the same content to the clients over a period of time from a temporary copy of the response, instead of performing all the backend calculations that rendered the content every time. That way we will decrease our response time but also save some resources on the server.
 
 There are several ways to enable server-side caching, and it will depend of the backend language we're using, our hosting platform (Windows/IIS vs. Linux/Apache), and other things. Since I'm mostly a Windows user, I'll make an example on enabling server-side caching on ASP.NET (C#).
 
