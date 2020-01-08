@@ -8,22 +8,22 @@ tags: google, seo, html, csharp, dotnet
 
 ###Introduction
 
-We live in a competitive world, so why the web should be any different? (Well, maybe it should, but it isn't). And when it comes to organic traffic (the visitors we're getting from search engines), having a low latency on our website is crucial to any SEO strategy, at least for the main landing pages. It's one of the most important keys to having a better ranking.
+We live in a competitive world, so why the web should be any different? (Well, maybe it should, but it isn't). And when it comes to organic traffic (the visitors we're getting from search engines), having a low latency on our website is crucial to any SEO strategy, at least for the main landing pages. It's one of the most important keys in order to improve our website ranking.
 
-There are some obvious things to do if our website is responding slowly, like having a better hosting plan, locating our server physically near our main traffic source, using a CDN if we have many visitors from several countries... But there are also other things we can do, that may have slipped under our radar. And some of them can be achieved with only a couple hours of coding.
+There are some obvious things to do if our response time is high, like having a better hosting plan, locating our server physically near our main traffic source, or using a CDN if we have many visitors from several countries... But there are also other things we can do that may have slipped under our radar. And some of them can be achieved with only a couple hours of coding.
 
 
 ###Inline styles and scripts for the topmost content
 
-Of course, this will depend on the niche our website is, but as an average, <a href="https://www.statista.com/statistics/277125/share-of-website-traffic-coming-from-mobile-devices/" target="_blank">more than half of web traffic is generated from mobile devices</a>. And when you tap on a Google search result, you don't want to see a blank page or a loading GIF for many seconds. That's why optimizing the first content your page will display is crucial.
+Of course, this will depend on the niche our website is, but as an average, <a href="https://www.statista.com/statistics/277125/share-of-website-traffic-coming-from-mobile-devices/" target="_blank">more than half of web traffic is generated from mobile devices</a>. And when you tap on a Google search result, you don't want to see a blank page or a loading GIF for many seconds. That's why optimizing the first initial rendering of your page is crucial.
 
-The content that will appear immediately to the user without needing to scroll the page is called "above-the-fold content", and there is where our optimization efforts should be aiming to. So we need to create a plan to load and display that content as fast as possible:
+The content that will appear immediately to the user without needing to scroll down the page is called "above-the-fold content", and there is where our optimization efforts should be aiming to. So we need to create a plan to load and display it as fast as possible:
 
 * First, we need to differentiate the critical styles and scripts we would need to render the topmost content, and separate it from the rest of our stylesheet and external script references.
 
-* Then, we <a href="https://www.imperva.com/learn/performance/minification/">minify</a> the separated <a href="https://csscompressor.com/">styles and <a href="https://jscompress.com/">scripts</a>, and insert it directly on our page template, right before the closing `</head>` tag.
+* Then, we need to <a href="https://www.imperva.com/learn/performance/minification/">minify</a> the separated <a href="https://csscompressor.com/">styles and <a href="https://jscompress.com/">scripts</a>, and insert it directly on our page template, right before the closing `</head>` tag.
 
-* Finally, we should move the stylesheet and scripts link references from the `<head>` tag (where it's usually located) to the end of the above-the-fold content, so the user won't have to wait until all references are loaded before seeing any content. <b>Tip</b>: Remember to use the <a href="https://www.w3schools.com/tags/att_script_async.asp">async</a> tag on scripts whenever possible.
+* Finally, we have to move the stylesheet and scripts link references from the `<head>` tag (where it's usually located) to the end of the above-the-fold content, so the user won't have to wait until all references are loaded before seeing any content. <b>Tip</b>: Remember to use the <a href="https://www.w3schools.com/tags/att_script_async.asp">async</a> tag on scripts whenever possible.
 
 * <b>example.html</b>:
 
@@ -45,9 +45,9 @@ The content that will appear immediately to the user without needing to scroll t
 
 ###Deferred loading of ads
 
-If you're using Google AdSense to monetize your website or another ad agency that uses scripting to show ads on your pages, you should consider loading them once the content is fully rendered. This will probably have a minor impact on your revenue (although almost unnoticeable in most cases), but it will not only increase the user experience but also improve your loading speed drastically.
+If you're using Google AdSense to monetize your website, or another ad agency that uses scripting to show ads on your pages, you should consider loading ads once the content is fully rendered. This will probably have some impact on your revenue (although almost unnoticeable in most cases), but it will not only increase the user experience but also improve your loading speed.
 
-There are several ways to achieve this, but a technique I did on several websites is removing all the script references to Google AdSense until your page is fully loaded. You can even add a short delay to make sure the user will start looking at your content before showing ads.
+There are several ways to achieve this: a technique I did on many websites is removing all the script references to Google AdSense until your page is fully loaded. You can even add a short delay to make sure the user will start browsing your content before showing ads.
 
 * Remove both script references, the comment and extra spaces from your ad original code, to convert it from something like this...
 
@@ -70,7 +70,7 @@ There are several ways to achieve this, but a technique I did on several website
 <ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-XXXXXXXXXXXXXXXXX" data-ad-slot="XXXXXXXXX"></ins>
 ```
 
-Quite shorter, isn't it? This will create only an empty slot in which we will load our ad once the page is fully rendered. To accomplish that, we should create a new script that will have this content (assuming we have jQuery on our website):
+Quite shorter, isn't it? This will only create an empty slot in which we will load our ad after the page is fully rendered. To accomplish that, we need to create a new script like this one (assuming we have jQuery on our website):
 
 * <b>async-ads.js</b>:
 
@@ -102,16 +102,16 @@ $(document).ready(function() {
 });
 ```
 
-This code will wait for one second once the document is ready, and then tell Google to push a new ad for each slot we have created. Finally, we will load the AdSense external script to start filling all the slots with ads.
+This code will wait for one second once the document is ready, and then leave instructions for Google to push a new ad for each slot we have created. Finally, we will load the AdSense external script so Google will read the instructions and start filling all the slots with ads.
 
-<b>Tip</b>: You can also enable balancing for your ads, improving the average load speed and increasing the user experience since you won't be showing any ad at all when the max possible revenue is deprecable. And if you're not sure if displaying fewer ads is better, <a href="https://fatstacksblog.com/adsense-ad-balance-experiment/">you should try out an experiment</a> as I did. The right balance will depend on your niche and website characteristics.
+<b>Tip</b>: You can also enable balancing from your AdSense dashboard, improving the average load speed and increasing the user experience since you won't be showing any ads at all when the expected revenue is deprecable. And if you're not sure if displaying fewer ads is better, <a href="https://fatstacksblog.com/adsense-ad-balance-experiment/">you should try out an experiment</a> as I did. A balance of 50% worked for me, but the right balance will depend on your niche and website characteristics.
 
 
 ###Lazy load for images
 
-Loading all images from content below-the-fold right from the start doesn't make much sense, since the user will probably have most of his time reading the content above-the-fold, and probably even bouncing out from the page or tapping on a link before scrolling. So adding a custom lazy-loading script (or deferred-loading, loading-on-scroll, there are several ways to name it) is relatively simple, although we would probably have to change our backend code as well. The idea behind this approach is simple:
+Loading all images from content below-the-fold right from the start doesn't make much sense, since the user will probably spend most of his time reading the content above-the-fold, and probably even bouncing out from the page or tapping on a link before scrolling. So adding a custom lazy-loading script (or deferred-loading, loading-on-scroll, there are several ways to name it) for images is relatively simple, although we would probably have to change our backend code as well. The idea behind this approach is simple:
 
-* Replacing the `src` attributes from all images that will have lazy loading with a custom attribute (like `data-src`. This will probably involve some backend changes) and set a custom class for them, like `lazy`.
+* Replacing the `src` attributes from all images that will have lazy loading with a custom attribute (like `data-src`. This step will probably involve some backend changes) and set a custom class for them, like `lazy`.
 
 * Creating a script that will copy the `data-src` content into the `src` attribute as we scroll through the page.
 
@@ -168,33 +168,27 @@ $(document).ready(function() {
 
 // Set the correct attribute when printing
 var beforePrint = function() {
-	$("img.lazy").each(function(){
+	$("img.lazy").each(function() {
 		$(this).trigger("lazy");
 		this.style.opacity = 1;
 	});        
 };
-var afterPrint = function() {};
 if (window.matchMedia) {
 	var mediaQueryList = window.matchMedia('print');
 	mediaQueryList.addListener(function(mql) {
-		if (mql.matches) {
+		if (mql.matches)
 			beforePrint();
-		} else {
-			afterPrint();
-		}
 	});
 }
-
 window.onbeforeprint = beforePrint;
-window.onafterprint = afterPrint;
 ```
 
-This script will search for all `<img>` tags with class `lazy`, and copy the `data-src` attribute to the `src` attribute once the image became visible due to scrolling. It also has some additional logic to set the `src` attribute before printing the page.
+This script will search for all `<img>` tags with class `lazy`, and copy the `data-src` attribute to the `src` attribute once the image became visible due to scrolling. It also includes some additional logic to set the `src` attribute before printing the page.
 
 
 ###Server-side caching
 
-Server-side caching allows to output the same content to the client over a period of time from a temporary copy of the response, instead of performing all the backend calculations that rendered that response. That way we will decrease our response time but also, save some resources on the server.
+Server-side caching allows to output the same content to the clients over a period of time from a temporary copy of the response, instead of performing all the backend calculations that rendered that response every time. That way we will decrease our response time but also save some resources on the server.
 
 There are several ways to enable server-side caching, and it will depend of the backend language we're using, our hosting platform (Windows/IIS vs. Linux/Apache), and other things. Since I'm mostly a Windows user, I'll make an example on enabling server-side caching on ASP.NET (C#).
 
@@ -210,7 +204,7 @@ What this declaration is telling the compiler is that we want to cache the outpu
 * https://www.ourhost.com/cached-page/?id=2&date=2020-01-01
 * https://www.ourhost.com/cached-page/?id=2&date=2020-02-01
 
-Will be saved and then served from different cache copies. If we only set the `id` parameter as a source for caching, pages with different dates will be served from the same cache source (this can be useful is the `date` parameter is only evaluated on client-side scripts).
+Will be saved and then served from different cache copies. If we only set the `id` parameter as a source for caching, pages with different dates will be served from the same cache source (this can be useful is the `date` parameter is only evaluated on frontend scripts and ignored in the backend).
 
 There are other configurations in ASP.NET to set our output cache policy: We can vary the output based on the browser, on the request headers, or even on custom strings. <a href="https://www.c-sharpcorner.com/UploadFile/chinnasrihari/Asp-Net-mvc-framework-server-side-html-caching-techniques/">This page</a> has more useful information on this subject.
 
@@ -221,7 +215,7 @@ GZip compression allows us, when the client supports it, to compress the respons
 
 ![Enabling compression in IIS](increasing-website-load-speed/enabling-compression-iis.jpg)
 
-Now, if we are running an ASP.NET MVC/WebForms website, this won't be enough: We will also need to add some custom code to our `global.asax` file in our website root, for all dynamic content to be compressed before sending the response to the client:
+Now, if we are running an ASP.NET MVC/WebForms website, this won't be enough: We will also need to add some custom code to our `global.asax` file in our website root, for all backend responses to be compressed before sending the response to the client:
 
 * <b>global.asax</b>:
 
@@ -292,17 +286,17 @@ Now, if we are running an ASP.NET MVC/WebForms website, this won't be enough: We
 </script>
 ```
 
-And to make sure our code is working properly, we can use an external tool like <a href="https://www.giftofspeed.com/gzip-test/">this website</a> that will kindly inform us if our website is using GZip or not.
+And to make sure our code is working properly, we can use an external tool like <a href="https://www.giftofspeed.com/gzip-test/">this website</a> that will kindly inform us if we're GZip enabled or not.
 
 ![It works!](increasing-website-load-speed/gzip-compression-enabled.jpg)
 
 
 ###Summary
 
-There are many ways of increasing the loading speed on a website. Most are common and expensive, but there are also other minor tweaks that can help us bring better user experience and also gaining a couple of positions in the search engine results. And on SEO, every tiny bit of optimization counts to a goal. Every fraction of a second we can save matters, especially on mobile where people expect to get what they want almost immediately.
+There are many ways of increasing the loading speed on a website. Most are common and expensive, but there are also other minor tweaks that can help us bring a better user experience and also gain a couple of positions in the search engine results. And on SEO, every tiny bit of optimization counts to our goal. Every fraction of a second we can save matters -to both us and the user-, especially on mobile where people expect to get what they want almost immediately.
 
-This is a view from Google Analytics from one of my websites, where I applied most of these formulas gradually. The latest change I did a month ago was the deferred ad loading, and while it's not huge, it clearly made an impact on the average page load speed:
+This is a view from Google Analytics from one of my websites, where I applied most of these formulas over several months to assess the results. The latest change I did a month ago was the deferred ad loading, and while it's not huge, it clearly made an impact on the average page load speed:
 
 ![View from Google Analytics](increasing-website-load-speed/analytics-average-page-load.jpg)
 
-Do you have any other page load optimization techniques? <b>Leave a comment below!</b>
+Do you have any other page load optimization techniques? <b>Leave us a comment below!</b>
