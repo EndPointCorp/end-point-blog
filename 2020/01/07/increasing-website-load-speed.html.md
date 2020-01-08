@@ -200,9 +200,9 @@ The best -and also easiest- way to do this is by adding a declaration in the top
 
 What this declaration is telling the compiler is that we want to cache the output from the server for 10 minutes, and we will save different versions based on the `id` and `date` URL parameters. So pages like:
 
-* https://www.ourhost.com/cached-page/?id=1&date=2020-01-01
-* https://www.ourhost.com/cached-page/?id=2&date=2020-01-01
-* https://www.ourhost.com/cached-page/?id=2&date=2020-02-01
+* https://www.your-url.com/cached-page/?id=1&date=2020-01-01
+* https://www.your-url.com/cached-page/?id=2&date=2020-01-01
+* https://www.your-url.com/cached-page/?id=2&date=2020-02-01
 
 Will be saved and then served from different cache copies. If we only set the `id` parameter as a source for caching, pages with different dates will be served from the same cache source (this can be useful is the `date` parameter is only evaluated on frontend scripts and ignored in the backend).
 
