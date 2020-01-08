@@ -21,7 +21,7 @@ The content that will appear immediately to the user without needing to scroll d
 
 * First, we need to differentiate the critical styles and scripts we would need to render the topmost content, and separate it from the rest of our stylesheet and external script references.
 
-* Then, we need to <a href="https://www.imperva.com/learn/performance/minification/">minify</a> the separated <a href="https://csscompressor.com/">styles and <a href="https://jscompress.com/">scripts</a>, and insert it directly on our page template, right before the closing `</head>` tag.
+* Then, we need to <a href="https://www.imperva.com/learn/performance/minification/">minify</a> the separated <a href="https://csscompressor.com/">styles</a> and <a href="https://jscompress.com/">scripts</a>, and insert it directly on our page template, right before the closing `</head>` tag.
 
 * Finally, we have to move the stylesheet and scripts link references from the `<head>` tag (where it's usually located) to the end of the above-the-fold content, so the user won't have to wait until all references are loaded before seeing any content. <b>Tip</b>: Remember to use the <a href="https://www.w3schools.com/tags/att_script_async.asp">async</a> tag on scripts whenever possible.
 
