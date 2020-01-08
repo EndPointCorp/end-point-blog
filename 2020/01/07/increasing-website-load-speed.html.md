@@ -259,7 +259,6 @@ Now, if we are running an ASP.NET MVC/WebForms website, this won't be enough: We
                 System.IO.Compression.CompressionMode.Compress);
             app.Response.AppendHeader("Content-Encoding", "gzip");
         }
-		app.Response.Filter = new WhitespaceFilter(app.Response.Filter);
     }
 		
     void Application_Error(object sender, EventArgs e)
