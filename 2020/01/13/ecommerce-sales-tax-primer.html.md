@@ -30,8 +30,8 @@ Luckily for anyone starting to collect sales tax, there are some very good SaaS 
 
 After you’ve worked with your tax accountant on what you need, start looking at the available software. The two main companies End Point has worked with are [TaxJar](http://taxjar.com/) and [Avalara](https://www.avalara.com/), though there are a number of other vendors in the market.
 
-<img src="/blog/2020/01/13/ecommerce-sales-tax-primer/image-1.svg" alt="TaxJar" width="48%" style="padding-right: 1%"/>
-<img src="/blog/2020/01/13/ecommerce-sales-tax-primer/image-2.svg" alt="Avalara" width="48%" style="padding-left: 1%" />
+<img src="/blog/2020/01/13/ecommerce-sales-tax-primer/image-1.svg" alt="TaxJar" width="48%" style="padding-right: 2%" />
+<img src="/blog/2020/01/13/ecommerce-sales-tax-primer/image-2.svg" alt="Avalara" width="48%" style="padding-left: 2%" />
 
 ####Why use an automated tax solution?
 - They automatically update tax rates as they change with local and state regulation.
