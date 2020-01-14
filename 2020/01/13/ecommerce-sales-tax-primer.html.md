@@ -1,7 +1,7 @@
 ---
 author: "Elizabeth Garrett Christensen"
 title: "Ecommerce sales tax primer"
-tags: ecommerce
+tags: ecommerce, saas, payments, magento, interchange
 gh_issue_number: 1583
 ---
 
