@@ -64,5 +64,3 @@ Google Analytics is a great tool that allows you to measure analytics such as th
 
 Note that the data presented in this article is fictitious.
 I don’t think Milton and Roger will be linking to End Point’s site any time soon!
-
-
