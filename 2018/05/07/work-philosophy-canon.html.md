@@ -45,7 +45,7 @@ Because we work in the software development industry, it is important that not o
 These articles and books are targeted primarily at developers:
 
 * [The Admin Zen](https://adminzen.org/) by Michael Prokop—​in true DevOps fashion, this system administration advice applies to development too
-* [You don’t know JavaScript](http://www.w2lessons.com/2011/04/you-dont-know-javascript.html) by Michael Woloszynowicz—​the lessons apply to most technologies
+* [You don’t know JavaScript](https://web.archive.org/web/20190626055515/http://www.w2lessons.com/2011/04/you-dont-know-javascript.html) by Michael Woloszynowicz—​the lessons apply to most technologies
 * [A summary of the international standard date and time notation](http://www.cl.cam.ac.uk/~mgk25/iso-time.html) by Markus Kuhn
 * [Things You Should Never Do, Part I](https://www.joelonsoftware.com/2000/04/06/things-you-should-never-do-part-i/) by Joel Spolsky—​don’t rewrite things from scratch (almost never, anyway)
 * [How to Read Other People’s Code—​and Why](https://designbygravity.wordpress.com/2009/10/23/how-to-read-other-peoples-code-and-why/) by Christopher Schanck
