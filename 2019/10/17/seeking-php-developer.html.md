@@ -9,6 +9,8 @@ gh_issue_number: 1561
 
 <!-- Photo by Jon Jensen -->
 
+**(This position has been filled.)**
+
 We are looking for another PHP software engineer, to work with us during business hours somewhere in the UTC-7 to UTC-4 time zones (U.S. Pacific to Eastern Time). This is a contract-to-hire role, and can be full time or part time.
 
 End Point is a 23-​year-old Internet technology consulting company based in New York City, with about 50 employees, most working remotely from home offices. We collaborate using SSH, GitLab, GitHub, chat, video conferencing, and good old email and phones.
