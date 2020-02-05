@@ -29,6 +29,7 @@ var myLoc = new google.maps.LatLng(results[0].geometry.location.lat(), results[0
 
 I was curious about this so I mapped out the differences between the three latest versions of the API:
 
+<div class="table-scroll">
 <table><thead>
 <tr>       <th>API Version</th>       <th>Latitude Property</th>       <th>Longitude Property</th>       <th>Constructor Name</th>     </tr>
 </thead>   <tbody>
@@ -36,5 +37,6 @@ I was curious about this so I mapped out the differences between the three lates
 <tr>      <td>3.20.x (release)</td>      <td>A</td>      <td>F</td>      <td>pf</td>     </tr>
 <tr>      <td>3.19.x (frozen)</td>      <td>k</td>      <td>D</td>      <td>pf</td>     </tr>
 </tbody> </table>
+</div>
 
 It seems to me that the property name changes are a result of running the Google Maps API code through the [Closure Compiler](https://developers.google.com/closure/compiler/). Make sure to use the built-in lat() and lng() methods as these property names are very likely to change again in future!
