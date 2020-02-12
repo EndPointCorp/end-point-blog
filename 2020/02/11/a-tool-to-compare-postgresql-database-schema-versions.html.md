@@ -5,23 +5,16 @@ tags: postgres, database, migration, schema
 ---
 
 
-Recently we have completed a major data intensive application migration from one tech stack to another which had completely restructured database schema. The consortium who developed the new application have written migration scripts to transfer data from their old stack to the new one. The old application stack vendor abandoned development and support many years back. So old application stack was evolved with custom changes and new features independently in recent years. 
-
-
-It is evident that consortium migration scripts can not be directly applied to our client application. But writing migration scripts from scratch will be reinventing the wheel, due to the fact that it’s much more labor-intensive and time-consuming. We were looking to reuse the scripts and customize to make sure it is a 100% match with our client application custom changes.
+The End Point development team has completed a major data-intensive application migration from one tech stack to another. Many years ago, the vendor maintaining the old stack abandoned support and development. This led to a stack evolution riddled with independent custom changes and new features in the following years. The new application was developed by a consortium that allowed migration scripts to transfer data to a fresh stack resulting in a completely restructured database schema. While consortium migration scripts cannot be directly applied to our client application, attempting to create migration scripts from scratch would be tedious due to more labor-intensive and time-consuming tasks. Our development team looked to reuse and customize the scripts in order to ensure an exact match of the customized changes to the client’s application.
 
 
 ### Liquibase - Schema Comparison Tool
 
-We have researched for a suitable solution to match with our needs and requirements. The search led us to an awesome open-source schema comparison tool called “Liquibase” with the diff command to figure out following line items. 
-
-* Missing Objects
-* Changed Objects
-* Unexpected Objects
+After an arduous hunt to acquire a suitable solution, the End Point team came across Liquibase - an open-source schema comparison tool that utilizes the diff command to assess line items such as missing, changed, and unexpected objects.
 
 ### Installation and Usage
 
-Let's see how to use Liquibase and collect insights in results offered by the diff command. The liquibase tarball format binary package is available in github. Download the latest version and extract into the installation path. The default package doesn't have a driver, it’s advisable to add PostgreSQL driver to the lib folder. It can be used for other databases with necessary libraries and drivers as well.
+Below is an example of how to use Liquibase as well as review the insights and results offered by the diff command. Before beginning, download the latest version of [liquibase tarball](https://github.com/liquibase/liquibase/releases/) format binary package from GitHub and extract the installation path. As the default package doesn't have it’s own driver, it would be wise to add the PostgreSQL driver to the lib folder (this can also be used for other databases with necessary libraries and drivers).
 
 
 ```bash
@@ -47,7 +40,7 @@ Diff \
 ```
 
 ### Comparison Results
-The following output shows the list of all sections[removed details to save the page :)] with missing, changed and newly added objects to the section.
+The following output shows the list of all sections with missing, changed, and newly added objects to each section.
 
 ```bash
 $ cat liquibase_output.txt
@@ -113,5 +106,5 @@ Changed View(s): NONE
 Liquibase command 'Diff' was executed successfully.
 ```
 
-### Benefits
-It helped us to compare the 100+ tables in the old application stack database schema version between our client and consortium. The data migration part was challenging due to volume and the variety of data but knowing the schema differences through liquibase on table level, columns, references, indexes, views..etc helped in accuracy on the migration process. So it played a wonderful role in our migration work and hope it will be helpful for you.
+### Conclusion
+Although comparing and contrasting the 100+ tables from the old application was beneficial, the data migration aspect of the undertaking was challenging due to volume and variety of data. However, with the help of Liquibase, we became more familiarized with differences in the schema (including table level, columns, references, indexes, views, .etc). With this leading to an increase in accuracy, we found the software to be very helpful during the migration process. The End Point development team hopes that by sharing its findings, others will also benefit from this tool and all that it offers.
