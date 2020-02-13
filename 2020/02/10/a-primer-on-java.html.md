@@ -7,47 +7,19 @@ tags: java, wildfly, language
 
 ###What is Java and why is it interesting?
 
-Java is a descendant of C++ and it is a C-based language. C was therefore the original language and it is probably not an overstatement to say that C is the most popular programming language in history. Most programmers speak at least C or one of its descendants. Let’s take a quick look on the [list of C-based languages](https://github.com/AnanthaRajuCprojects/List-of-programming-language-lists/blob/master/C-family%20programming%20languages.md):
+Java is a descendant of C++ and it is a C-based language. C was therefore the original language and it is probably not an overstatement to say that C is the most popular programming language in history. Most programmers speak at least C or one of its descendants. Let’s take a quick look on the most popular languages of [list of C-based languages](https://github.com/AnanthaRajuCprojects/List-of-programming-language-lists/blob/master/C-family%20programming%20languages.md):
 
 - C
-- Ratfor
 - C++
-- Objective C
-- C*
-- Java
-- S-Lang (library)
-- Perl
-- C--
 - C#
-- Not Quite C
-- Cilk
-- Chapel
-- Go
-- Seed7
-- Handel-C
-- CINT
-- Ch
-- AWK
-- ApeScript
-- AMPL
-- Alef
-- Falcon
 - ECMAScript
-- Limbo
-- Telescript
-- PHP
-- S-Lang
-- Linden Scripting Language
-- BitC
-- PROMAL
-- Cyclone
-- SAC
-- Swift
-- Agora
-- Newsqueak
-- Split-C
 - Fantom
-- BCPL
+- Go
+- Java
+- Objective C
+- Perl
+- PHP
+- Swift
  
 Java is a member of a large family of programming languages and as a result, if someone learns Java, then they will have an easier time learning one of its cousins. And at the same time, if someone already speaks a C-based language, then Java is not too difficult to learn. Also, if someone is already a programmer and does not speak a C-based language yet, then it is in his/her interest in most cases to learn a C-based language and thus to have an understanding of the most popular language family. One can achieve this by speaking Java, for example.
  
@@ -152,7 +124,7 @@ of course, one may use a different server config. It also has a Windows alternat
 
 I have been using several different ORMs in the past, like LINQ, Flourishlib, Doctrine, to name a few examples, in Java I have been using Hibernate in recent times. I can nicely work with object entities using [Hibernate](https://hibernate.org/), which represent table rows and am very satisfied with Hibernate in general.
 
-The entities in Hibernate are defined as POJO classes, where data members are private and they are accessible via public setters and getters. The classes and tables can be mapped via a mapping configuration XML. There are nice examples available online, for instance [this](https://www.tutorialspoint.com/hibernate/hibernate_examples.htm) one. One has the option to use Hibernate annotations as well, like [here](https://www.tutorialspoint.com/hibernate/hibernate_annotations.htm).
+The entities in Hibernate are defined as [POJO](https://en.wikipedia.org/wiki/Plain_old_Java_object) (Plain old Java object) classes, where data members are private and they are accessible via public setters and getters. The classes and tables can be mapped via a mapping configuration XML. There are nice examples available online, for instance [this](https://www.tutorialspoint.com/hibernate/hibernate_examples.htm) one. One has the option to use Hibernate annotations as well, like [here](https://www.tutorialspoint.com/hibernate/hibernate_annotations.htm).
 
 Besides methods that can be used with the help of session objects, one can write custom Hibernate queries as well, like
 
