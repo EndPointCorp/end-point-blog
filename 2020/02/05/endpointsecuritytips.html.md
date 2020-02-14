@@ -6,7 +6,8 @@ gh_issue_number: 1561
 ---
 
 
- <div style="float: left"><img src="/blog/2020/01/30/endpointsecuritytips/image-4.jpg" alt="phishingemail"  align="left"></div>
+ <div style="float: left"><img src="/blog/2020/02/05/endpointsecuritytips/image-4.jpg" alt="phishingemail"  align="left"></div>
+ [Photo](https://flic.kr/p/24YXTiY) from [comparitech.com](https://www.comparitech.com/blog/information-security/common-phishing-scams-how-to-avoid/)
 
 
 ### Implement Security Measures to Protect Your Organization & Employees
@@ -30,10 +31,10 @@ Train everyone in your organization on these fundamentals:
 8. Websites would not ask to reset your password without warning; generally, they would expire the password or delete your account over time if not used.
 
 ### A Security Concern: Going Phishing!
-   <div style="float: right; padding: 20px;"><img src="/blog/2020/01/30/endpointsecuritytips/image-1.jpg" alt="phishing fraud" align="right" hspace="10"></div>One of the more common ways to steal someone’s private information is through phishing.There are few other ways which someone could steal your personal information, but phishing is one of the more common ways. Phishing is like fishing; you try to catch something. In this case, the ‘fish’ is your data.  Someone with malicious intent would send you an email and attempt to influence you to click on the link, picture, content etc. within the email. Once you click the link or content within the email, it might take you to a website to enter or reset your password, even ask for your social security number, or personal information. The person with malicious intent would use the information collect to open accounts, purchase items online or resell your personal data. The links within the phishing email might even redirect you to a fake website that mimics a real website to collect your personal data. The goal is to confuse the email recipient into believing that the email message is legit and attempts to collect personal information from the user. 
+   <div style="float: right; padding: 20px;"><img src="/blog/2020/02/05/endpointsecuritytips/image-1.jpg" alt="phishing fraud" align="right" hspace="10"><p><a href="https://flic.kr/p/2gLaNqk">Photo</a> by <a href="http://www.epictop10.com/">Epic Top 10 Site</a></div>One of the more common ways to steal someone’s private information is through phishing.There are few other ways which someone could steal your personal information, but phishing is one of the more common ways. Phishing is like fishing; you try to catch something. In this case, the ‘fish’ is your data. Someone with malicious intent would send you an email and attempt to influence you to click on the link, picture, content etc. within the email. Once you click the link or content within the email, it might take you to a website to enter or reset your password, even ask for your social security number, or personal information. The person with malicious intent would use the information collect to open accounts, purchase items online or resell your personal data. The links within the phishing email might even redirect you to a fake website that mimics a real website to collect your personal data. The goal is to confuse the email recipient into believing that the email message is legit and attempts to collect personal information from the user. 
 
 #### Phishing Exercises
-<img src="/blog/2020/01/30/endpointsecuritytips/image-2.jpg" alt="phishing attack" align="left" hspace="10">One way to help the staff better their understanding of a phishing email is to practice phishing exercises by setting up an experiment to see which users would click on your test phishing email. If the user clicks on the experiment phishing email, the email administrator would notify the compliance officer and he or she would re-train the staff on how to properly differentiate real emails from phishing emails. Phishing exercises is a great activity for the employees to avoid the email scams and exert caution in the future. 
+<div style="float: left; padding: 20px;"><img src="/blog/2020/02/05/endpointsecuritytips/image-2.jpg" alt="phishing attack" hspace="10"><p><a href="https://flic.kr/p/x9zZ4A">Photo</a> by <a href="https://www.flickr.com/photos/christiaancolen/">Christiaan Colen</a></p></div>One way to help the staff better their understanding of a phishing email is to practice phishing exercises by setting up an experiment to see which users would click on your test phishing email. If the user clicks on the experiment phishing email, the email administrator would notify the compliance officer and he or she would re-train the staff on how to properly differentiate real emails from phishing emails. Phishing exercises is a great activity for the employees to avoid the email scams and exert caution in the future. 
 
 ### Essential Security Tools
 
@@ -92,14 +93,14 @@ Probably one of the easiest and oldest methods to infect or phish someone’s in
 
 Cloud email services such as Microsoft Office 365 are superior to on-premise email servers due to having all the bells and whistle to proactively protect your email environment and provides many important email services such as a spam filter, antivirus filter, and email archiving for retention purposes. Microsoft 365 email service cost is affordable compared to an on-premise email systems which requires a separate system to filter spam and viruses. If you need email encryption to protect sensitive emails, this feature is also available. 
 
-The distinct advantage using Microsoft 365 email service is that your email administrator do not have to worry about updating the email server, or update the hardware firmware and drivers which is necessary to maintain the email system over time. The Microsoft cloud email service would always provide you with the latest tools and technology to combat spam and viruses. This advantage allows the email administrator to easily manage the email systems since the email is a critical part of communication for all businesses.  
+The distinct advantage using Microsoft 365 email service is that your email administrator do not have to worry about updating the email server, or update the hardware firmware and drivers which is necessary to maintain the email system over time. The Microsoft cloud email service would always provide you with the latest tools and technology to combat spam and viruses. This advantage allows the email administrator to easily manage the email systems since the email is a critical part of communication for all businesses.
 
 ##### Email Filtering Technology:
 - <A href=https://products.office.com/en-us/exchange/advance-threat-protection target=_blank>Office 365 Advanced Threat Protection</a>
 - <A href=https://www.forcepoint.com/product/email-security target=_blank>Forcepoint Email Filtering</a>
 - <A href=https://www.spamtitan.com/email-filtering-service/ target=_blank>Spam Titan</a>
 
-#### Two Factor Authentication  
+#### Two Factor Authentication
 Companies like Duo (owned by Cisco) and Googles’ two factor authentication technology are great tools to implement to improve your overall security. Basically, your smartphone is unique to you so the phone would be used to authorize the access to a website, an application or a network. If someone attempts to compromise your account with a known working password, the two-factor authentication running on your phone would be the final layer of protection to prevent un-authorize access. This technology is the latest trend most companies are adapting to improve overall infrastructure security. Keep in mind two factor authentication are available for most mainstream technology but not all. If you would like us to determine which solution best fits your environment, please contact us for more information.
 
 ##### Two Factor Authentication:
@@ -107,12 +108,12 @@ Companies like Duo (owned by Cisco) and Googles’ two factor authentication tec
 - <A href=https://www.google.com/landing/2step/ target=_blank>Google Authenticator</a>
 
 #### VPN (Virtual Private Network)
-Virtual Private Network technology allows businesses to provide a secure access to office systems or applications to employees who travels, or work from a remote location. VPN allow secured, encrypted access to internal networks initiated by an employee.  Why is VPN important? Well for one the data traveling to and from the source is encrypted meaning that the data would be impossible to capture and decrypt. Confidential information, and personal data will be well protected with VPN. VPN solution has been around for years and it’s a must have technology to securely and safely protect all data. 
+Virtual Private Network technology allows businesses to provide a secure access to office systems or applications to employees who travels, or work from a remote location. VPN allow secured, encrypted access to internal networks initiated by an employee. Why is VPN important? Well for one the data traveling to and from the source is encrypted meaning that the data would be impossible to capture and decrypt. Confidential information, and personal data will be well protected with VPN. VPN solution has been around for years and it’s a must have technology to securely and safely protect all data. 
 
 #### Password Reset Systems
 Why are self service password reset systems necessary and is it secure? The reason to have a password reset systems is to be able to eliminate manual mistakes, and the system allows an organization to integrate two factor authentication to securely reset a staff’s Active Directory password (Windows password). The two factor authentication used to reset the password would be unique to the user. The user in your organization would need to register their phone number within the two factor authentication system and thus allow a safe way to reset your password without the need of an IT staff to intervene. Onboarding will be needed for each user which is done by sending them an email with a link to register. 
 
-The password reset system could be an internal system only available to your organization. Another possibility is to access the system via VPN or even through a proxy server in the DMZ to allow password reset from anywhere.  If setting up a proxy server in the DMZ, your security practice to secure the server in the DMZ should be implemented. 
+The password reset system could be an internal system only available to your organization. Another possibility is to access the system via VPN or even through a proxy server in the DMZ to allow password reset from anywhere. If setting up a proxy server in the DMZ, your security practice to secure the server in the DMZ should be implemented. 
 
 ##### Password Reset Systems:
 - <A href=https://www.manageengine.com/products/self-service-password/ target=_blank>ManageEngine ADSelfService Plus</a>
@@ -125,9 +126,9 @@ Data backup and disaster recovery practice is a critical component for a busines
 
 Basically, ransomware would take your desktop or server hostage and then affect other systems within your network/office. To build back your environment post-ransomware attacks, you would need the backups or disaster recovery plan to recover. If you did not have an adequate backup or disaster recovery plan, your organization or company would have to start from scratch and rebuild all systems and desktops which could take weeks if not months to recover.
 
-One of the better affordable backup solutions I worked with is Acronis Cloud Backup Solution which have the flexibility to mix and match to fit your configuration needs. Acronis Cloud Backup allows you to back up to a local storage, backup to the cloud and have a copy off-premise, recover a system using a USB key, backup office 365 emails, or backup VMware or Hyper V environment. It would also allow you to recover a single file if needed.  
+One of the better affordable backup solutions I worked with is Acronis Cloud Backup Solution which have the flexibility to mix and match to fit your configuration needs. Acronis Cloud Backup allows you to back up to a local storage, backup to the cloud and have a copy off-premise, recover a system using a USB key, backup office 365 emails, or backup VMware or Hyper V environment. It would also allow you to recover a single file if needed.
 
-The cost of backup will not be felt until something happens. Let's say you did not have a backup solution and ransomware attacks your system. If this occurs, it might be days, or weeks before your organization is able to operate normally. The lost wages, and possibly clients, due to unavailable systems and desktop to operate, probably would cost you more money or even customers, if you cannot recover quickly. In technology, the more options you have, the chances are better that you will get out of a bind easier and not prolong the situation. 
+The cost of backup will not be felt until something happens. Let’s say you did not have a backup solution and ransomware attacks your system. If this occurs, it might be days, or weeks before your organization is able to operate normally. The lost wages, and possibly clients, due to unavailable systems and desktop to operate, probably would cost you more money or even customers, if you cannot recover quickly. In technology, the more options you have, the chances are better that you will get out of a bind easier and not prolong the situation. 
 
 ##### Backup Solutions:
 - <A href=https://www.acronis.com/en-us/cloud/service-provider/backup/ target=_blank>Acronis Backup Solution</a>
@@ -137,7 +138,7 @@ The cost of backup will not be felt until something happens. Let's say you did n
 ### Additional Security Recommendations
 
 #### SSL Certificates 
-What is a SSL certificate? <sup>4</sup>  The primary reason why SSL is used is to keep sensitive information sent across the Internet encrypted so that only the intended recipient can access it.  When an SSL certificate is used, the information becomes unreadable to everyone except for the server you are sending the information to. 
+What is a SSL certificate? <sup>4</sup> The primary reason why SSL is used is to keep sensitive information sent across the Internet encrypted so that only the intended recipient can access it. When an SSL certificate is used, the information becomes unreadable to everyone except for the server you are sending the information to. 
 
 The SSL certificate usage have been around for a long time. The practice of using SSL is more common in today’s world to protect and encrypt data at all cost. SSL certificate are commonly used on web servers but you could find SSL usage for simple server access, SFTP servers, B2B server to server communication, VPN access, email systems, etc. 
 
