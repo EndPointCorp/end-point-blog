@@ -5,7 +5,7 @@ tags: security, windows, infrastructure
 gh_issue_number: 1586
 ---
 
-<div style="float: left"><img src="/blog/2020/02/05/endpointsecuritytips/image-4.jpg" alt="phishingemail" align="left"></div>
+<div style="float: left"><img src="/blog/2020/02/05/end-point-security-tips/image-4.jpg" alt="phishingemail" align="left"></div>
 [Photo](https://flic.kr/p/24YXTiY) from [comparitech.com](https://www.comparitech.com/blog/information-security/common-phishing-scams-how-to-avoid/)
 
 ### Implement Security Measures to Protect Your Organization & Employees
@@ -30,13 +30,13 @@ Train everyone in your organization on these fundamentals:
 
 ### A Security Concern: Going Phishing!
 
-<div style="float: right; padding: 20px;"><img src="/blog/2020/02/05/endpointsecuritytips/image-1.jpg" alt="phishing fraud" align="right" hspace="10"><p><a href="https://flic.kr/p/2gLaNqk">Photo</a> by <a href="http://www.epictop10.com/">Epic Top 10 Site</a></div>
+<div style="float: right; padding: 20px;"><img src="/blog/2020/02/05/end-point-security-tips/image-1.jpg" alt="phishing fraud" align="right" hspace="10"><p><a href="https://flic.kr/p/2gLaNqk">Photo</a> by <a href="http://www.epictop10.com/">Epic Top 10 Site</a></div>
 
 One of the more common ways to steal someone’s private information is through phishing. Phishing is like fishing: you try to catch something. In this case, the ‘fish’ is your data. Someone with malicious intent sends you email to attempt to get you to click on the link, picture, content, etc. within the email. Once you click the link or content within the email, it might take you to a website to enter or reset your password, even ask for your social security number or other personal information. The person with malicious intent would use the information collect to open accounts, purchase items online or resell your personal data. The links within the phishing email might even redirect you to a fake website that mimics a real website to collect your personal data. The goal is to confuse the email recipient into believing that the email message is legit in its attempt to collect personal information from the user.
 
 #### Phishing Exercises
 
-<div style="float: left; padding: 20px;"><img src="/blog/2020/02/05/endpointsecuritytips/image-2.jpg" alt="phishing attack" hspace="10"><p><a href="https://flic.kr/p/x9zZ4A">Photo</a> by <a href="https://www.flickr.com/photos/christiaancolen/">Christiaan Colen</a></p></div>
+<div style="float: left; padding: 20px;"><img src="/blog/2020/02/05/end-point-security-tips/image-2.jpg" alt="phishing attack" hspace="10"><p><a href="https://flic.kr/p/x9zZ4A">Photo</a> by <a href="https://www.flickr.com/photos/christiaancolen/">Christiaan Colen</a></p></div>
 
 One way to help the staff better their understanding of a phishing email is to practice phishing exercises by setting up an experiment to see which users would click on your test phishing email. If the user clicks on the experiment phishing email, the email administrator would notify the compliance officer and he or she would re-train the staff on how to properly differentiate real emails from phishing emails. Phishing exercises make a great activity for the employees to avoid the email scams and exert more caution in the future.
 
