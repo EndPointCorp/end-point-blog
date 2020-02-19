@@ -25,7 +25,7 @@ Java is a member of a large family of programming languages and as a result, if 
  
 Let’s see the list of popular languages according to [Stackify](https://stackify.com/popular-programming-languages-2018/8/):
 
-<img src="/blog/2020/02/10/a-primer-on-java/language-list.png">
+<div style="width: 100%; text-align: center;"><img src="/blog/2020/02/10/a-primer-on-java/language-list.png"></div>
 
 Yes, Java has lost almost a percent from its popularity according to the list above, but even though the trend is suboptimal for Java at the time of this writing, it’s still ahead of the second-placed C in a convincing manner, since between the two there is almost a whole percent and has an advantage of more than 6% over Python, which is not a C-based language, but nevertheless it’s popular and rapidly gaining popularity, but it’s still very far from Java. Any other language is way below the popularity of Java, not even close.
  
@@ -37,7 +37,7 @@ What this means:
  
 According to [Towards Data Science](https://towardsdatascience.com/20-predictions-about-software-development-trends-in-2020-afb8b110d9a0), based on the data acquired from [TIOBE](https://www.tiobe.com/tiobe-index/), Java has been the most popular language since 2002 with two “pauses”, when C briefly took over, but even then, Java was the second:
 
-<img src="/blog/2020/02/10/a-primer-on-java/language-graph.png">
+<div style="width: 100%; text-align: center;"><img src="/blog/2020/02/10/a-primer-on-java/language-graph.png"></div>
 
 As a result, taking into account the current situation, it is an imperative to speak a C-based language at least and due to Java’s popularity, it is advisable for programmers to be prepared to work in Java, by acquiring at least some practical knowledge about the language. Web programmers will naturally speak at least one C-based language if they work on the front-end, since in browsers JavaScript is standard.
  
@@ -58,9 +58,9 @@ Java enforces object-oriented coding, which helps us a lot, because that way, if
 
 If one just starts to code with Java, or has to work with classes or methods he/​she is not very experienced with, then the brilliantly written [documentation](https://docs.oracle.com/javase/9/docs/api/overview-summary.html) can help them. 
 
-<img src="/blog/2020/02/10/a-primer-on-java/doc-example.png">
+<div style="width: 100%; text-align: center;"><img src="/blog/2020/02/10/a-primer-on-java/doc-example.png"></div>
 
-This method is the add method of ArrayList. We know that ArrayList is logically a collection (technically it’s inherited from AbstractList, which is inherited from AbstractCollection), so, adding an item to it is the capability of putting an item at the end of the set of items present in the collection. We can also see that it is public and it will return a boolean, which represents success (or lack of it). Some parameter of the type E is passed to it. Since the ArrayList is denoted as ArrayList<E> at the start of the [article](https://docs.oracle.com/javase/9/docs/api/java/util/ArrayList.html#add-E-), it’s clear that E is the type of the elements. So, taking a single glance on the first line inside the box one already understands the core information.
+This method is the add method of ArrayList. We know that ArrayList is logically a collection (technically it’s inherited from AbstractList, which is inherited from AbstractCollection), so, adding an item to it is the capability of putting an item at the end of the set of items present in the collection. We can also see that it is public and it will return a boolean, which represents success (or lack of it). Some parameter of the type E is passed to it. Since the ArrayList is denoted as ArrayList&lt;E&gt; at the start of the [article](https://docs.oracle.com/javase/9/docs/api/java/util/ArrayList.html#add-E-), it’s clear that E is the type of the elements. So, taking a single glance on the first line inside the box one already understands the core information.
 
 Of course, I had some prerequisite knowledge in C and C++ before sitting down for two hours to learn Java, but even then, being able to learn how to work with Java and being very comfortable with doing so in just two hours is a great achievement, but it’s not my achievement. It’s Java’s wonderful syntax, documentation and a great friend with the patience to teach, who achieved this for me. I only had to be curious.
 
@@ -146,7 +146,7 @@ That example is from [Tutorials Point](https://www.tutorialspoint.com/hibernate/
 
 Java is a language. It’s not slow or fast. Performance depends on what is running and how. Natively compiled languages like C or C++ are in general faster, but the difference is not in the language itself, but the way the code is executed. Java runs through the JVM (Java Virtual Machine).
 
-<img src="/blog/2020/02/10/a-primer-on-java/jvm.png"><br />
+<div style="width: 100%; text-align: center;"><img src="/blog/2020/02/10/a-primer-on-java/jvm.png"></div><br />
 Taken from [net-informations.com](http://net-informations.com/java/intro/jvm.htm)
 
 That’s slower than running the compiler separately for each target platform and avoiding the usage of a virtual machine at runtime. The JVM helps us to avoid worrying about different platforms, and performance issues due to the language itself are an unlikely cause of performance issues in general. However, if one has a Java project with performance problems and the culprit is JVM, then one can compile Java bytecode into machine code. Alternatively, Java code can be converted automatically into C or C++.
@@ -165,7 +165,7 @@ In Java there are primitive types and reference types. Reference types are Objec
 
 One cannot create a List of int, but a List of Integer can be created without problems. Integer is a reference type, hence we can use it as a specification for generics. I consider this to be a drawback of the language. I think that conceptually one might say that primitives and references are all types. So, if we could define some ultimately generic type as something special that represents the ultimate generic, even more abstract than Object, with the convention that any primitive or Object is of this generic type, then we should be able to create lists or collections of int or double.
 
-I understand that this is not possible in the language, but I believe that this abstraction should be done under the hood. For example ArrayList<int> should be either inherently supported, or interpreted as ArrayList<Integer>. Of course, in order to establish this, some rules need to be implemented and tested thoroughly, but as a result we would be able to get rid of the unnecessary rule that primitive types cannot be referred to by generics.
+I understand that this is not possible in the language, but I believe that this abstraction should be done under the hood. For example ArrayList&lt;int&gt; should be either inherently supported, or interpreted as ArrayList&lt;Integer&gt;. Of course, in order to establish this, some rules need to be implemented and tested thoroughly, but as a result we would be able to get rid of the unnecessary rule that primitive types cannot be referred to by generics.
 
 ###Summary
 
