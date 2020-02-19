@@ -1,7 +1,7 @@
 ---
 author: Jon Jensen
 gh_issue_number: 272
-tags: cloud, database, hosting, postgres, scalability
+tags: aws, cloud, database, hosting, postgres, scalability
 title: PostgreSQL EC2/EBS/RAID 0 snapshot backup
 ---
 
