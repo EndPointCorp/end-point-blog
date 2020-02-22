@@ -111,7 +111,42 @@ This will start a Q&A, which will be a discussion between Symfony console and th
 
 The documentation gives us a [very good example](https://symfony.com/doc/current/doctrine.html#creating-an-entity-class), resulting in:
 
-<div style="width: 100%; text-align: center;"><img src="/blog/2020/02/21/symfony-quickstart/entity-class.png"></div>
+```
+// src/Entity/Product.php
+namespace App\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity(repositoryClass="App\Repository\ProductRepository")
+ */
+class Product
+{
+    /**
+     * @ORM\Id
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
+     */
+    private $id;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $name;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $price;
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    // ... getter and setter methods
+}
+```
 
 We can notice a few things here. First of all, that there is an annotation.
 
@@ -135,7 +170,21 @@ Means that the ```column``` is ```integer```, a ```primary key``` and it’s gen
 
 The entity class is paired with a repository of its own, like:
 
-<div style="width: 100%; text-align: center;"><img src="/blog/2020/02/21/symfony-quickstart/repository-class.png"></div>
+```
+namespace App\Repository;
+
+use App\Entity\Product;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Persistence\ManagerRegistry;
+
+class ProductRepository extends ServiceEntityRepository
+{
+    public function __construct(ManagerRegistry $registry)
+    {
+        parent::__construct($registry, Product::class);
+    }
+}
+```
 
 Note that it extends [ServiceEntityRepository](https://github.com/doctrine/DoctrineBundle/blob/master//Repository/ServiceEntityRepository.php). This offers quite a lot of features if we use it as a Doctrine repository. In the controller we can load a repository, like:
 
@@ -145,7 +194,29 @@ $this->getDoctrine()->getRepository(Product::class)
 
 One can search for objects via find, findBy or findOneBy, as described in the [API documentation](https://www.doctrine-project.org/api/orm/latest/Doctrine/ORM/EntityRepository.html). This way, we can load data from the database and use them as objects. Example:
 
-<div style="width: 100%; text-align: center;"><img src="/blog/2020/02/21/symfony-quickstart/doctrine-functions.png"></div>
+```
+$repository = $this->getDoctrine()->getRepository(Product::class);
+
+// look for a single Product by its primary key (usually "id")
+$product = $repository->find($id);
+
+// look for a single Product by name
+$product = $repository->findOneBy(['name' => 'Keyboard']);
+// or find by name and price
+$product = $repository->findOneBy([
+    'name' => 'Keyboard',
+    'price' => 1999,
+]);
+
+// look for multiple Product objects matching the name, ordered by price
+$products = $repository->findBy(
+    ['name' => 'Keyboard'],
+    ['price' => 'ASC']
+);
+
+// look for *all* Product objects
+$products = $repository->findAll();
+```
 
 In general, the criteria to search by is an array of key-value pairs. The same can be said about sorting.
 
@@ -182,7 +253,9 @@ php bin/console doctrine:migrations:migrate
 
 Honestly I’m not very fond of changing the database schema based on entity classes, I consider this to be an anti-pattern, because we use a tool to generate a schema based on entities. Such a tool can have bugs, or, we might have errors in the entities. It is much better to do it the other way around, that is, make a proper database schema, write SQL commands to change the schema whenever we need it and generate entity classes that way. Luckily Doctrine offers that feature as well:
 
-<div style="width: 100%; text-align: center;"><img src="/blog/2020/02/21/symfony-quickstart/doctrine-import.png"></div>
+```
+php bin/console doctrine:mapping:import "App\Entity" annotation --path=src/Entity
+```
 
 Unfortunately it’s a trend to write entity classes and generate schema changes based on those, but that way we add a layer of complexity around schema planning, which should be as simple as possible. If something goes south with these migrations for any reason, that could result in very serious problems, while if we are to write schema-changing scripts in SQL rather than generating them from entity classes that we write (or generate), then we at least have the means to acquire full understanding of what happens with the schema. Not everyone is a database specialist and most of the programmers are much more comfortable in writing or even generating entity classes, but even if we generate them, it’s not much simpler in most cases than writing a small script which creates a table or alters it or drops it, so the objective gain from generating schema-changing scripts from entity classes is negligible at best.
 
@@ -208,7 +281,28 @@ php bin/console make:crud <YourEntity>
 
 The documentation provides a simple example:
 
-<div style="width: 100%; text-align: center;"><img src="/blog/2020/02/21/symfony-quickstart/controller.png"></div>
+```
+// src/Controller/LuckyController.php
+namespace App\Controller;
+
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+
+class LuckyController
+{
+    /**
+     * @Route("/lucky/number/{max}", name="app_lucky_number")
+     */
+    public function number($max)
+    {
+        $number = random_int(0, $max);
+
+        return new Response(
+            '<html><body>Lucky number: '.$number.'</body></html>'
+        );
+    }
+}
+```
 
 Note that there is annotation for this controller:
 
@@ -220,9 +314,51 @@ Note that there is annotation for this controller:
 
 The first parameter describes the path. Of course we can elaborate our routes more, let’s consider the example below:
 
-<div style="width: 100%; text-align: center;"><img src="/blog/2020/02/21/symfony-quickstart/controller-example.png"></div>
+```
+namespace App\Controller;
 
-Screenshot taken from [zetcode.com](http://zetcode.com/symfony/routeannotation/).
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+
+class MyController extends AbstractController
+{
+    /**
+     * @Route("/home")
+     */
+    public function home()
+    {
+        return new Response("home",  Response::HTTP_OK,
+            ['content-type' => 'text/plain']);
+    }
+
+    /**
+     * @Route("/about", methods={"GET", "POST"})
+     */
+    public function about(Request $request)
+    {
+        $method = $request->getRealMethod();
+        $msg = "about: " . $method;
+
+        return new Response($msg,  Response::HTTP_OK,
+            ['content-type' => 'text/plain']);
+    }    
+
+    /**
+     * @Route("/news/{id}", requirements={"page"="\d+"})
+     */
+    public function news($id)
+    {
+        $msg = 'News ' . $id;
+
+        return new Response($msg,  Response::HTTP_OK,
+            ['content-type' => 'text/plain']);
+    }    
+}
+```
+
+Code taken from [zetcode.com](http://zetcode.com/symfony/routeannotation/).
 
 As we can see, we can specify what HTTP methods we support or even specify regular expressions for the URL parameters. Generating a URL is not difficult at all, one just needs to call ```$this->generateURL```.
 
