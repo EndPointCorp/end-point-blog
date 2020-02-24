@@ -111,7 +111,7 @@ This will start a Q&A, which will be a discussion between Symfony console and th
 
 The documentation gives us a [very good example](https://symfony.com/doc/current/doctrine.html#creating-an-entity-class), resulting in:
 
-```
+```php
 // src/Entity/Product.php
 namespace App\Entity;
 
@@ -150,19 +150,19 @@ class Product
 
 We can notice a few things here. First of all, that there is an annotation.
 
-```
+```php
 /**
- * @ORM\Entity(repositoryClass=”App\Repository\ProductRepository”)
+ * @ORM\Entity(repositoryClass="App\Repository\ProductRepository")
  */
 ```
 
 means that this entity class has a [repository](https://en.wikipedia.org/wiki/Software_repository) class called ```ProductRepository``` in the namespace mentioned above.
 
-```
+```php
 /**
  * @ORM\Id
  * @ORM\GeneratedValue
- * @ORM\Column(type=”integer”)
+ * @ORM\Column(type="integer")
  */
 ```
 
@@ -170,7 +170,7 @@ Means that the ```column``` is ```integer```, a ```primary key``` and it’s gen
 
 The entity class is paired with a repository of its own, like:
 
-```
+```php
 namespace App\Repository;
 
 use App\Entity\Product;
@@ -188,13 +188,13 @@ class ProductRepository extends ServiceEntityRepository
 
 Note that it extends [ServiceEntityRepository](https://github.com/doctrine/DoctrineBundle/blob/master//Repository/ServiceEntityRepository.php). This offers quite a lot of features if we use it as a Doctrine repository. In the controller we can load a repository, like:
 
-```
+```php
 $this->getDoctrine()->getRepository(Product::class)
 ```
 
 One can search for objects via find, findBy or findOneBy, as described in the [API documentation](https://www.doctrine-project.org/api/orm/latest/Doctrine/ORM/EntityRepository.html). This way, we can load data from the database and use them as objects. Example:
 
-```
+```php
 $repository = $this->getDoctrine()->getRepository(Product::class);
 
 // look for a single Product by its primary key (usually "id")
@@ -222,8 +222,8 @@ In general, the criteria to search by is an array of key-value pairs. The same c
 
 One can load a repository from within another by calling
 
-```
-$this->getEntityManager()->getRepository(“name”)
+```php
+$this->getEntityManager()->getRepository("name")
 ```
 
 However, in general I would suggest that repositories should not have interdependency. It’s far better in my opinion to have a business layer, a Service between the controller and the repository classes, which would combine different operations of different repositories if needed.
@@ -232,7 +232,7 @@ Getting or setting values of data members can be done via getters and setters in
 
 There is no ORM which solves everything, sometimes we want to write our own scripts. We can of course do it, but Doctrine offers [DQL](https://www.doctrine-project.org/projects/doctrine-orm/en/2.7/reference/dql-doctrine-query-language.html) (Doctrine Query Language) as a compromise.
 
-```
+```php
 <?php
 $query = $em->createQuery('SELECT u FROM ForumUser u WHERE (u.username = :name OR u.username = :name2) AND u.id = :id');
 $query->setParameters(array(
@@ -281,7 +281,7 @@ php bin/console make:crud <YourEntity>
 
 The documentation provides a simple example:
 
-```
+```php
 // src/Controller/LuckyController.php
 namespace App\Controller;
 
@@ -306,15 +306,15 @@ class LuckyController
 
 Note that there is annotation for this controller:
 
-```
+```php
 /**
- * @Route(“/lucky/nunmber/{max}”, name=”app_lucky_number”)
+ * @Route("/lucky/number/{max}", name="app_lucky_number")
  /*
 ```
 
 The first parameter describes the path. Of course we can elaborate our routes more, let’s consider the example below:
 
-```
+```php
 namespace App\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
@@ -366,33 +366,33 @@ As we can see, we can specify what HTTP methods we support or even specify regul
 
 As we could see earlier, Symfony actions are returning a Response. One can send a JSON as Response, or even a JSONResponse, as the [documentation](https://symfony.com/doc/current/components/http_foundation.html#creating-a-json-response) describes. One can even specify a JSONP callback via
 
-```
-$response->setCallback(‘handleResponse’)
+```php
+$response->setCallback('handleResponse')
 ```
 
 Don’t be afraid of this, it’s not very difficult and it’s well-documented.
 
 Requests are also handled [nicely](https://symfony.com/doc/current/introduction/http_fundamentals.html),
 
-```
-$request->query->get(‘id’)
+```php
+$request->query->get('id')
 ```
 
 gets a  GET parameter, while
 
-```
-$request->request->get(‘category’, ‘default value’)
+```php
+$request->request->get('category', 'default value')
 ```
 
 is getting a post value.
 
-```
+```php
 $request->query->all()
 ```
 
 retrieves all GET parameters
 
-```
+```php
 $request->request->all()
 ```
 
