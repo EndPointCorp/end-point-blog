@@ -25,7 +25,124 @@ Java is a member of a large family of programming languages and as a result, if 
  
 Let’s see the list of popular languages according to [Stackify](https://stackify.com/popular-programming-languages-2018/8/):
 
-<div style="width: 100%; text-align: center;"><img src="/blog/2020/02/10/a-primer-on-java/language-list.png"></div>
+<style>
+#java-primer-table td {
+  text-align: right;
+}
+
+#java-primer-table td:first-child {
+  text-align: left;
+}
+</style>
+<div class="table-scroll">
+  <table style="margin: auto" id="java-primer-table">
+    <tr>
+      <th><p style="margin-right: 200px"><b>Programming Language</b></p></th>
+      <th><p style="margin-right: 40px"><b>Ratings</b></p></th>
+      <th><p><b>Change</b></p></th>
+    </tr>
+    <tr>
+      <td><p>Java</p></td>
+      <td><p>16.028%</p></td>
+      <td><p>-0.85%</p></td>
+    </tr>
+    <tr>
+      <td><p>C</p></td>
+      <td><p>15.154%</p></td>
+      <td><p>+0.19%</p></td>
+    </tr>
+    <tr>
+      <td><p>Python</p></td>
+      <td><p>10.020%</p></td>
+      <td><p>+3.03%</p></td>
+    </tr>
+    <tr>
+      <td><p>C++</p></td>
+      <td><p>6.057%</p></td>
+      <td><p>-1.41%</p></td>
+    </tr>
+    <tr>
+      <td><p>C#</p></td>
+      <td><p>3.842%</p></td>
+      <td><p>+0.30%</p></td>
+    </tr>
+    <tr>
+      <td><p>Visual Basic .NET</p></td>
+      <td><p>3.695%</p></td>
+      <td><p>-1.07%</p></td>
+    </tr>
+    <tr>
+      <td><p>JavaScript</p></td>
+      <td><p>2.258%</p></td>
+      <td><p>-0.15%</p></td>
+    </tr>
+    <tr>
+      <td><p>PHP</p></td>
+      <td><p>2.075%</p></td>
+      <td><p>-0.85%</p></td>
+    </tr>
+    <tr>
+      <td><p>Objective-C</p></td>
+      <td><p>1.690%</p></td>
+      <td><p>+0.33%</p></td>
+    </tr>
+    <tr>
+      <td><p>SQL</p></td>
+      <td><p>1.625%</p></td>
+      <td><p>-0.69%</p></td>
+    </tr>
+    <tr>
+      <td><p>Ruby</p></td>
+      <td><p>1.316%</p></td>
+      <td><p>+0.13%</p></td>
+    </tr>
+    <tr>
+      <td><p>MATLAB</p></td>
+      <td><p>1.274%</p></td>
+      <td><p>-0.09%</p></td>
+    </tr>
+    <tr>
+      <td><p>Groovy</p></td>
+      <td><p>1.225%</p></td>
+      <td><p>+1.04%</p></td>
+    </tr>
+    <tr>
+      <td><p>Delphi/Object Pascal</p></td>
+      <td><p>1.194%</p></td>
+      <td><p>-0.18%</p></td>
+    </tr>
+    <tr>
+      <td><p>Assembly language</p></td>
+      <td><p>1.114%</p></td>
+      <td><p>-0.30%</p></td>
+    </tr>
+    <tr>
+      <td><p>Visual Basic</p></td>
+      <td><p>1.025%</p></td>
+      <td><p>+0.10%</p></td>
+    </tr>
+    <tr>
+      <td><p>Go</p></td>
+      <td><p>0.973%</p></td>
+      <td><p>-0.02%</p></td>
+    </tr>
+    <tr>
+      <td><p>Swift</p></td>
+      <td><p>0.890%</p></td>
+      <td><p>-0.49%</p></td>
+    </tr>
+    <tr>
+      <td><p>Perl</p></td>
+      <td><p>0.860%</p></td>
+      <td><p>-0.31%</p></td>
+    </tr>
+    <tr>
+      <td><p>R</p></td>
+      <td><p>0.822%</p></td>
+      <td><p>-0.14%</p></td>
+    </tr>
+  </table>
+</div>
 
 Yes, Java has lost almost a percent from its popularity according to the list above, but even though the trend is suboptimal for Java at the time of this writing, it’s still ahead of the second-placed C in a convincing manner, since between the two there is almost a whole percent and has an advantage of more than 6% over Python, which is not a C-based language, but nevertheless it’s popular and rapidly gaining popularity, but it’s still very far from Java. Any other language is way below the popularity of Java, not even close.
  
