@@ -1,17 +1,17 @@
 ---
-author:"Greg Hanson"
-title:"e-commerce Client Project Management"
-tags:management, clients, e-commerce
+author: "Greg Hanson"
+title: "e-commerce Client Project Management"
+tags: management, clients, e-commerce
 ---
 
 ### E-commerce Client Project Management (for Developers)
-##### <em>Moving from writing code to managing the show.</em>
+##### *Moving from writing code to managing the show.*
 
 
 
 <pre>
 Many times engineers / developers make the move from development to project management.
-It's a natural move, we want folks who know the nuts and bolts of e-commerce projects to
+It's a natural move, we want the folks who know the nuts and bolts of e-commerce projects to
 eventually manage them.
 
 So that's all fine and dandy, but what if you haven't been a "manager" before?
@@ -21,13 +21,12 @@ How do you manage an e-commerce project?
 How do you manage engineers / developers for an e-commerce project.
 
 An answer for each of the above is always: "It depends".
-(or maybe more familiarly for Perl devs TIMTOWTDI)
+(or maybe more familiarly for Perl devs [TIMTOWTDI](https://en.wikipedia.org/wiki/There%27s_more_than_one_way_to_do_it))
 
 The reason for that of course is that all of the above questions have variables that will
 change for every situation.
 
 So lets put this into terms a developer may be familiar with:
-
 
 my $client = "Know your client";
 my $project = "Learn the project";
@@ -52,7 +51,7 @@ So if you are new to project management, the first piece of advice I will give i
 ### 1. Know your $client
 <pre>
 Everything flows from the client. Always remember, the client is paying you to
-represent his or her best interest. This can sometimes mean that you will need to tell the client
+represent their best interest. This can sometimes mean that you will need to tell the client
 that you are not the best choice for a particular project!
 "Wait..." you will ask, "why would I tell a client to use someone other than me to manage their
 project? And how would that benefit me?  I am in business to manage projects after all!"
@@ -65,32 +64,32 @@ you needed a very specific type of vehicle because you deliver a highly perishab
 Let's also assume that this salesperson did not have that specific vehicle on his lot, but that
 he also knew of another "lot B" where the exact vehicle was sitting. What would you want that
 salesperson to do? Would you want him to just tell you that they could customize a vehicle on their
-lot to do what you need? Would you want him to refer you to the other dealership?
+lot to do most of what you need? Would you want him to refer you to the other dealership?
 
 Or, would you like him to explain all options that he knew of that might apply to your situation?
-
-To further reinforce this, remember, <b>very few clients only need one project managed</b>.
+If you chose this last option, score extra points for your potential future as a project manager.
+To further reinforce this, remember, **very few clients only need one project managed**.
 
 Ok, so we have established that you need to know your client. That sounds easy, or does it?
-How do you "know your client"?  Again, a very far reaching statement, but lets try to simmer
+How do you "know your client"?  Again, a very far reaching statement, but lets try to distill
 it down a bit. There are many ways of "knowing" someone. We can know their personality, their
 family, their business, their religion .. politics... ok enough already. But believe it or not,
 all of the aforementioned points will come into play with a long term client. But we want to talk
 about the basics here. We will assume we have a first time client, with a first time (to us)
 project.
 
-Find out about the clients business. How do they make money with this business? While you are
+Find out about the clients' business. How do they make money with this business? While you are
 talking to the client about this, ask questions that get the client to explain and promote
 their business to you. For most, this will be easy... sometimes to the point of having to learn
 how to politely stop them!  But you will learn far more about their business, and their personal
-approach to that business by listening.. than you will by talking. Just get them started, and let
+approach to that business by *listening*.. than you will by talking. Just get them started, and let
 them roll. In the early meetings, ask questions about why and how the client feels their
 product / service is superior to others.
 Find out who in the company was responsible for various aspects of the product / service. Learn who
 the stakeholders are. Try not to ask too many technical questions until the project outline has
 been defined, and you personally have a good feel for what it is comprised of.
 
-<b>Clients are not free</b>
+**Clients are not free**
 
 Clients are a long term (and ongoing) proposition. Take care of them and they will return
 again and again.  Ignore them and they will respond in kind, and usually very quickly. The amount
@@ -103,21 +102,21 @@ Try not to waste it.
 <pre>
 If you have a good understanding of the client and their business, you next want them to explain
 to you, what they are attempting to accomplish with this project. Let me clarify here, you do NOT
-want them to explain how they want to do a project, you want to first learn <b>what the client
-wants to accomplish with the project</b>.
+want them to explain how they want to do a project, you want to first learn **what the client
+wants to accomplish with the project**.
 
 This is important, and should be <u>understood completely</u> ... because if you blow this phase
 you can easily miss one of the major points of e-commerce project management. I have found that
 about 7 of 10 clients have major misconceptions about how things actually work in our business.
-They usually have a very good idea of <b>what</b> they want to have happen in the end, but not so
-much <b>how</b> to make that happen.
+They usually have a very good idea of **what** they want to have happen in the end, but not so
+much **how** to make that happen.
 
 When I say <u>understand completely</u>, I am talking about the 3 of 10 that DO know what they are
-talking about and <b>need</b> to be taken literally.
+talking about and **need** to be taken literally.
 
 It will be up to you to determine what type of client you are dealing with. Use your past
 experiences with people to figure this out. It can be hard. You have to make sure you don't insult
-someones intelligence, and at the same time you need to know if they have it!  I have found its
+someone's intelligence, and at the same time you need to know if they have it!  I have found it's
 best to let the client talk, try to ask "steering" questions, that can unearth what level of
 experience you are dealing with. These conversations will set the stage for the rest of the
 project. You will determine how much you will need to supply in the way of structure and advice
@@ -144,7 +143,7 @@ small project on its own.
 
 Again, estimating a project is an art in itself, and is not part of this post.
 
-Normally, in all of the above other than #1, you will need to confer with your developer(s)
+Normally, in all of the above other than #1, you will need to confer with developers on your team
 to supply the client with an accurate estimate of costs. Of course, in order to be an efficient
 PM, you first need to
 </pre>
@@ -175,7 +174,7 @@ All this so far is great, if you are the point of communication for your company
 will prove to be best for this to happen. You can monitor all conversations, communications, and
 prevent misunderstandings and hopefully anticipate problems before they occur.
 
-But if you need to have your developers talk directly to the clients rep, you have some thinking
+But if you need to have your developers talk directly to the client's rep, you have some thinking
 to do. I cannot give particulars here for obvious reasons, but certain traits do not mix well:
 If your client is very opinionated about their project, try to work out directions and methods
 BEFORE allowing comms between devs and client. (Use Trello, Slack, etc to assign specific tasks for
@@ -190,7 +189,7 @@ Use your resources. If you have 2 front end people, and you have friction betwee
 one of them, introduce the other for a separate task. Observe, did it work out? Do I need to
 phase out one in favor of another?
 
-If possible never "pull" a developer completely off a project, unless of course its requested /
+If possible never "pull" a developer completely off a project, unless of course it's requested /
 required. (do the words "burning your bridges" sound familiar?)
 
 Always talk to the developer in private about whatever the issue is, and always point out to
@@ -215,7 +214,7 @@ When you get one of those, you will understand very quickly, and be very thankfu
 <pre>
 Managing projects is a challenging proposition. But if you put things in perspective,
 you will find that it can be simplified and rewarding. Try to keep the big picture in 
-mind as you proceed through the project. Its easy to get drawn into the details of a 
+mind as you proceed through the project. It's easy to get drawn into the details of a 
 project, and sometimes that is what is required. However, if you have good resources 
 available to you, it is up to you to put the areas of responsibility into the proper hands.
 Coming from developement, this will be a real temptation. But you have a new title now,
