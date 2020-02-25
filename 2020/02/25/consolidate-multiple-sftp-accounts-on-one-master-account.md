@@ -36,20 +36,21 @@ Match Group sftpusers
 * Restart SSH Server to apply changes
 
 ```bash
-$ /etc/init.d/ssh restart
+$ systemctl restart ssh
 ```
 
 * Create an SFTP user account for a facility and place in a folder on the home path to receive data
 
 ```bash
-useradd $USERNAME
-usermod -g sftpusers -s /usr/sbin/nologin $USERNAME
-mkdir -p /home/$USERNAME
-mkdir -p /home/$USERNAME/INPUT_PATH/
-chown -R root:root /home/$USERNAME
+# set new user name
+sftpuser=the-new-username
+useradd $sftpuser
+usermod -g sftpusers -s /usr/sbin/nologin $sftpuser
+mkdir -p /home/$sftpuser/INPUT_PATH/
+chown -R root:root /home/$sftpuser
 ```
 
-As the number of facilities increases, additional communication points are added. If the permissible amount of points is exceeded on the app by even one, it will not continue its service until more blocks are paid for. The implementation of this process will directly benefit our client.
+As the number of facilities increases, additional communication points are created in third party application to interact with sftp accounts and pick up the files to process. At a point, The subscribed number of communication points limit is reached on the third party application and need to buy another block of communication points even to create one more. The implementation of following process directly benefited our client to comfortably stayed within existing subscribed limit.
 
 ### Multiple Accounts Mounts to One Account
 
@@ -71,7 +72,8 @@ $ passwd master
 
 # Add master user to sftpgroup group
 usermod -a -G sftpgroup master
-getent group | grep master
+getent group sftpgroup
+
 
 # MOUNT_PATH and sub folders
 mkdir -p /home/master/MOUNT_PATH/{Input,Pickup,Backup,Archive}
@@ -85,31 +87,30 @@ chown -R master:master /home/master/MOUNT_PATH
 
 # sh create_sftp_account.sh sftpfacilityone FACILITY_ONE
 
-USERNAME=$1
-FACILITY_NAME=$2      
+sftpuser=$1
+facility_name=$2
 
 # Create SFTP account and add to sftpgroup 
-useradd $USERNAME
-usermod -g sftpusers -s /usr/sbin/nologin $USERNAME
-usermod -a -G sftpgroup $USERNAME
-mkdir -p /home/$USERNAME
-chown root:root /home/$USERNAME
-mkdir -p /home/$USERNAME/INPUT_PATH
+useradd $sftpuser
+usermod -g sftpusers -s /usr/sbin/nologin $sftpuser
+usermod -a -G sftpgroup $sftpuser
+mkdir -p /home/$sftpuser
+chown root:root /home/$sftpuser
+mkdir -p /home/$sftpuser/INPUT_PATH
 
 # Create path specific to facility in master account Input folder
-mkdir -p /home/master/MOUNT_PATH/Input/$FACILITY_NAME
-chown -R $USERNAME:sftpgroup /home/master/MOUNT_PATH/Input/$FACILITY_NAME
+mkdir -p /home/master/MOUNT_PATH/Input/$facility_name
+chown -R $sftpuser:sftpgroup /home/master/MOUNT_PATH/Input/$facility_name
 
 
 # Mount sftp account into master account and set permissions
-mount --bind /home/master/MOUNT_PATH/Input/$FACILITY_NAME /home/$USERNAME/INPUT_PATH
-chmod g+s /home/$USERNAME/INPUT_PATH
-chown -R $USERNAME:sftpgroup /home/$USERNAME/INPUT_PATH
-setfacl -d -m g::rwx /home/$USERNAME/INPUT_PATH
+mount --bind /home/master/MOUNT_PATH/Input/$facility_name /home/$sftpuser/INPUT_PATH
+chown -R $sftpuser:sftpgroup /home/$sftpuser/INPUT_PATH
+chmod g=rwxs /home/$sftpuser/INPUT_PATH
 
 # Add fstab entry to persist and mount on reboot
-echo "/home/master/MOUNT_PATH/Input/$FACILITY_NAME        /home/$USERNAME/INPUT_PATH        none        bind        0        0" >> /etc/fstab
-echo "Created user $USERNAME at $FACILITY_NAME mount point successfully"
+echo "/home/master/MOUNT_PATH/Input/$facility_name        /home/$sftpuser/INPUT_PATH        none        bind        0        0" >> /etc/fstab
+echo "Created user $sftpuser at $facility_name mount point successfully"
 ```
 
 ### Files to One Location
