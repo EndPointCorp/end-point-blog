@@ -50,8 +50,6 @@ mkdir -p /home/$sftpuser/INPUT_PATH/
 chown -R root:root /home/$sftpuser
 ```
 
-As the number of facilities increases, additional communication points are created in third party application to interact with sftp accounts and pick up the files to process. At a point, The subscribed number of communication points limit is reached on the third party application and need to buy another block of communication points even to create one more. The implementation of following process directly benefited our client to comfortably stayed within existing subscribed limit.
-
 ### Multiple Accounts Mounts to One Account
 
 The goal here is to point the data from many facilities to one location. Yet, using a single account and path for multiple sites’ data will result in a breach in security and privacy. However, mounting the receiving path of a facility’s data onto a single master account to then “mount point” with a unique facility name takes care of this issue. The process continues on to consolidate files from individual paths on a master account in one place where the application picks up messages for further processing.
