@@ -1,15 +1,13 @@
 ---
 author: "Greg Hanson"
-title: "e-commerce Client Project Management"
-tags: management, clients, e-commerce
+title: "E-commerce Client Project Management"
+tags: management, clients, ecommerce
 ---
 
 ### E-commerce Client Project Management (for Developers)
 ##### *Moving from writing code to managing the show.*
 
 
-
-<pre>
 Many times engineers / developers make the move from development to project management.
 It's a natural move, we want the folks who know the nuts and bolts of e-commerce projects to
 eventually manage them.
@@ -18,7 +16,7 @@ So that's all fine and dandy, but what if you haven't been a "manager" before?
 
 How do you manage an e-commerce client?
 How do you manage an e-commerce project?
-How do you manage engineers / developers for an e-commerce project.
+How do you manage engineers / developers for an e-commerce project?
 
 An answer for each of the above is always: "It depends".
 (or maybe more familiarly for Perl devs [TIMTOWTDI](https://en.wikipedia.org/wiki/There%27s_more_than_one_way_to_do_it))
@@ -26,30 +24,31 @@ An answer for each of the above is always: "It depends".
 The reason for that of course is that all of the above questions have variables that will
 change for every situation.
 
-So lets put this into terms a developer may be familiar with:
+As a developer, you understand the large number of outcomes that can be introduced into an application by using a single variable. You also understand that the number of outcomes increases proportionally with the number of variables.
 
-my $client = "Know your client";
-my $project = "Learn the project";
-my $developers = "Know your developers";
+The same holds true for management. When you are faced with managing a project, your "variables" now move from placeholders in your code, to placeholders in your project. Where you may have assigned a variable for a "string", "integer", or "boolean", you now may have a "client", "project" or "team of developers". 
 
-my @team = ($client,$developers,'me');
+The point here is that while variables will change from project to project, the "structure" of how you run that project can still remain consistent. Much like designing code to return consistent results while using a wide range of variables.
 
-How do you manage an e-commerce $client?
-How do you manage an e-commerce $project?
-How do you manage an e-commerce @team?
-How do you manage $developers for an e-commerce $project for $client.
+In order to achieve this type of consistency, the core operations that run within the project, need to be reliable. Over time you will come to develop processes in your projects that will be reliable, and that you will return to time after time, project after project. To get you started, here are a few that should be at the core any project management:
+
+1. Know your Client. 
+2. Learn the Project.
+3. Know your Developers.
+
+These are 3 basic rules that should guide any project, and we will explore each in more detail below.
 
 Now as you can see, each situation will vary widely. A good project manager will understand
 that any project is multifaceted, and consists largely of human resources.
 
-Let me also note that while this topic is titled "e-commerce Client Project Management", it could
+Let me also note that while this topic is titled "E-commerce Client Project Management", it could
 just as easily be titled "Client Project Management". The principles of Project Management apply
 to many different environments.
 
 So if you are new to project management, the first piece of advice I will give is to:
-</pre>
-### 1. Know your $client
-<pre>
+
+### 1. Know your Client
+
 Everything flows from the client. Always remember, the client is paying you to
 represent their best interest. This can sometimes mean that you will need to tell the client
 that you are not the best choice for a particular project!
@@ -97,9 +96,9 @@ of time you spend with client relationships is normally non-billable. So keep th
 next time a client is hard to deal with and you think "We don't need clients like this, lets
 just find a new one". You will invest a lot of time and energy with a client.
 Try not to waste it.
-</pre>
-### 2. Learn your $project
-<pre>
+
+### 2. Learn your Project
+
 If you have a good understanding of the client and their business, you next want them to explain
 to you, what they are attempting to accomplish with this project. Let me clarify here, you do NOT
 want them to explain how they want to do a project, you want to first learn **what the client
@@ -116,7 +115,8 @@ talking about and **need** to be taken literally.
 
 It will be up to you to determine what type of client you are dealing with. Use your past
 experiences with people to figure this out. It can be hard. You have to make sure you don't insult
-someone's intelligence, and at the same time you need to know if they have it!  I have found it's
+someone's intelligence, and at the same time you need to know on what level you should attempt to
+communicate with them.  I have found it's
 best to let the client talk, try to ask "steering" questions, that can unearth what level of
 experience you are dealing with. These conversations will set the stage for the rest of the
 project. You will determine how much you will need to supply in the way of structure and advice
@@ -146,9 +146,9 @@ Again, estimating a project is an art in itself, and is not part of this post.
 Normally, in all of the above other than #1, you will need to confer with developers on your team
 to supply the client with an accurate estimate of costs. Of course, in order to be an efficient
 PM, you first need to
-</pre>
-### 3. Know your $developers
-<pre>
+
+### 3. Know your Developers
+
 This should be pretty self explanatory, but obviously you are not going to put a front end
 developer on a code intensive back end project.
 Another obvious point is that we are talking about a situation in which you have the luxury of
@@ -175,14 +175,17 @@ will prove to be best for this to happen. You can monitor all conversations, com
 prevent misunderstandings and hopefully anticipate problems before they occur.
 
 But if you need to have your developers talk directly to the client's rep, you have some thinking
-to do. I cannot give particulars here for obvious reasons, but certain traits do not mix well:
+to do. Certain traits do not mix well:
 If your client is very opinionated about their project, try to work out directions and methods
 BEFORE allowing comms between devs and client. (Use Trello, Slack, etc to assign specific tasks for
-specific people) Try to track progress of predefined tasks rather than agile development.
+specific people) Try to track progress of predefined tasks, and limit freelance or creation of undiscussed features.
+Stick to the program, this is not the place for "developer creativity". This is where you really get tested,
+you have to know your developers so that you do not create resentment through restraint, but at the same 
+time picky clients will not accept drawing outside the lines. 
 
 If your client is tech savvy, easy to get along with, and you can convince your devs of that,
 direct interaction can be extremely productive. But don't just assume this will work, be on the
-the first phone calls or Zoom meetings.. observe the dynamics... try to be a fly on the wall..
+the first phone calls or video conferences ... observe the dynamics... try to be a fly on the wall..
 don't run the meeting, step in only if necessary.
 
 Use your resources. If you have 2 front end people, and you have friction between the client and
@@ -209,9 +212,9 @@ is the best solution for their project.
 
 Other clients may require a soft approach and may completely understand "how this stuff works".
 When you get one of those, you will understand very quickly, and be very thankful.
-</pre>
+
 ### Summary
-<pre>
+
 Managing projects is a challenging proposition. But if you put things in perspective,
 you will find that it can be simplified and rewarding. Try to keep the big picture in 
 mind as you proceed through the project. It's easy to get drawn into the details of a 
@@ -220,14 +223,14 @@ available to you, it is up to you to put the areas of responsibility into the pr
 Coming from developement, this will be a real temptation. But you have a new title now,
 so put it to work!
 
-Remember, you are not working on this project to create something that you like, or that 
-your developers like. You are creating something for your client. The projects goals
+Remember, you are not working on this project to create something for you, or 
+your developers. You are creating something for your client. The projects goals
 are largely dependent on your clients needs. 
-I am not saying that you cannot create something that you like, or that your developers like.. 
+I am not saying that you cannot create something that you or your developers like.. 
 quite the contrary. I am suggesting that by focusing on the needs of the client, and really 
 listening to them, then sharing the expertise of you and your team WITH the client, you can 
 arrive at something that will not only work extremely well for your client, 
 but also provide you and your team a great sense of accomplishment.
-</pre>
+
 
 
