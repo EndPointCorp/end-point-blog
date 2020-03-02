@@ -129,7 +129,7 @@ technical questions, to get a very good feel for how you will manage the project
 
 Once you have figured out how much of what type of role you will have to play in the project,
 you will need to either define the proposed scope of the project, or examine scope definition
-given to you by the client. There are many threads that stem from this, but are not topic
+given to you by the client. There are many threads that can stem from this, but are not germane
 in this post, and we can move on to resourcing or how to manage your developers.
 
 Depending on the project, you will most likely need to:
@@ -163,7 +163,7 @@ that is preferably somewhat technical, has authority to make some level of chang
 and that is appointed by a high ranking person in the company. This person should be the contact
 point, representing the client for all daily project decisions and questions. In larger projects,
 this person may oversea a team from the client, that will interface with your team of developers.
-Without this person, you should warn the client that undo and excessive delays due to
+Without this person, you should warn the client that undue and excessive delays due to
 communications WILL occur.
 If the client is a smaller company, try to get an owner or other heavily committed person to be
 your point of contact. That will automatically escalate your questions so that you do not have
