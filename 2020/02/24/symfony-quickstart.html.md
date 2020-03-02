@@ -47,7 +47,7 @@ Whenever you are pulling work done by others, you will need to make sure that th
 
 ## Yarn
 
-Yarn is a package manager which we can use in order to manage client-side packages. If one already has a NodeJS server installed, then installing yarn is as simple as
+Yarn is a package manager which we can use in order to manage client-side packages if we choose to do so(Symfony does not enforce its use). If one already has a NodeJS server installed, then installing yarn is as simple as
 
 ```
 sudo npm install -g yarn
@@ -65,7 +65,7 @@ You may consult the [documentation](https://classic.yarnpkg.com/en/docs/) of Yar
 
 ## Webpack
 
-[Webpack](https://webpack.js.org/) is responsible for bundling the client-side files. One may configure webpack to pack file content from a source location and bring the packed content into a target location. [Read more](https://symfony.com/doc/current/frontend/encore/simple-example.html#configuring-encore-webpack).
+[Webpack](https://webpack.js.org/) is responsible for bundling the client-side files if we choose to use it. One may configure webpack to pack file content from a source location and bring the packed content into a target location. [Read more](https://symfony.com/doc/current/frontend/encore/simple-example.html#configuring-encore-webpack).
 
 Encore can be restarted via
 
@@ -95,7 +95,7 @@ Model-View-Controller, as a pattern is a standard for Symfony. Controllers are t
 
 ## Doctrine
 
-[Doctrine](https://www.doctrine-project.org/projects/doctrine-orm/en/2.7/index.html) is an ORM, which is very much helpful in general for working with databases. Symfony does not enforce its use. One may use Flourishlib instead, or write his/her own queries. One can create an entity class (which represents a given table in the database) manually, but there is an automatic way to achieve that as well:
+[Doctrine](https://www.doctrine-project.org/projects/doctrine-orm/en/2.7/index.html) is an ORM([Object-Relational Mapping](https://en.wikipedia.org/wiki/Object-relational_mapping)), which is very much helpful in general for working with databases. Symfony does not enforce its use. One may use Flourishlib instead, or write his/her own queries. One can create an entity class (which represents a given table in the database) manually, but there is an automatic way to achieve that as well:
 
 ```
 php bin/console make:entity
@@ -228,7 +228,7 @@ $this->getEntityManager()->getRepository("name")
 
 However, in general I would suggest that repositories should not have interdependency. It’s far better in my opinion to have a business layer, a Service between the controller and the repository classes, which would combine different operations of different repositories if needed.
 
-Getting or setting values of data members can be done via getters and setters in a very simple manner. As the [documentation](https://www.doctrine-project.org/projects/doctrine-orm/en/2.7/reference/working-with-objects.html) says, ```persist``` and ```remove``` are methods that notify the [Unit Of Work](https://www.programmingwithwolfgang.com/repository-and-unit-of-work-pattern/) that some write operations should occur, but the write operations are not executed yet at this point. The reason is simple: we may have multiple write operations to do and we might want to avoid doing them all as separate requests to the database, which might be on an entirely different machine at the other side of the globe behind a network. Requests to the database are costly operations and they accumulate. To avoid this, the application server first acknowledges what should be done, or, in other words, prepares some write operations. The ```flush``` method does the actual request sending for the write operations.
+Getting or setting values of data members can be done via getters and setters in a very simple manner. As the [documentation](https://www.doctrine-project.org/projects/doctrine-orm/en/2.7/reference/working-with-objects.html) says, ```persist``` and ```remove``` are methods that notify the [Unit Of Work](https://www.programmingwithwolfgang.com/repository-and-unit-of-work-pattern/) that some write operations should occur, but the write operations are not executed yet at this point. The reason is simple: we may have multiple write operations to do and we might want to avoid doing them all as separate requests to the database, which might be on an entirely different machine at the other side of the globe. Requests to the database are costly operations and they accumulate. To avoid this, the application server first acknowledges what should be done, or, in other words, prepares some write operations. The ```flush``` method does the actual request sending for the write operations.
 
 There is no ORM which solves everything, sometimes we want to write our own scripts. We can of course do it, but Doctrine offers [DQL](https://www.doctrine-project.org/projects/doctrine-orm/en/2.7/reference/dql-doctrine-query-language.html) (Doctrine Query Language) as a compromise.
 
@@ -273,7 +273,7 @@ php bin/console make:controller <NamedController>
 
 The command above will actually generate a controller class and ensure that it can be used in the project. Read more [here](https://symfony.com/doc/current/controller.html#generating-controllers).
 
-One can generate a whole CRUD for an entity via
+One can generate a whole CRUD (support for Create, Read, Update, Delete features) for an entity via
 
 ```
 php bin/console make:crud <YourEntity>
@@ -406,7 +406,7 @@ Symfony supports caching with the caching module, which, if switched on will cac
 bin/console cache:clear && bin/console cache:warmup
 ```
 
-Whether or not to switch on caching for your application at dev mode depends on the frequency of a need to cache cleanup. Read more [here].
+Whether or not to switch on caching for your application at dev mode depends on the frequency of a need to cache cleanup. Read more [here](https://symfony.com/doc/current/cache.html).
 
 ## Configuration
 
@@ -420,10 +420,10 @@ Symfony is well-paired with Twig, a popular template engine. Why don’t we use 
 
 Using template engines instead of allowing the developers to use PHP as a template engine has the drawback of limiting the options, however, the exact reason they are used, especially by large teams is the exact same thing that we can outline as its drawback. Yes, it limits the options of the developers, but this way developers will not find it so easy and convenient to temporarily (?) implement their business logic as part of the view.
 
-If my opinion matters, I’m okay with using PHP as a template engine as long as we do not mix up the layers of the application and, by convention the view will remain “only” the view. I’m also okay with using template engines, even though it is less convenient to use when we need to do some experimenting and writing some code for a very short time, after which it is reverted. In that kind of experimental work one feels that enforcing this separation is unnecessary bureaucracy, but the gain is that we will not have to deal with views where lots of things are implemented which should not be there. So, this is a harmless form of bureaucracy, if such a thing exists.
+I’m okay with using PHP as a template engine as long as we do not mix up the layers of the application and, by convention the view will remain “only” the view. I’m also okay with using template engines, even though it is less convenient to use when we need to do some experimenting and writing some code for a very short time, after which it is reverted. In that kind of experimental work one feels that enforcing this separation is unnecessary bureaucracy, but the gain is that we will not have to deal with views where lots of things are implemented which should not be there. So, this is a harmless form of bureaucracy, if such a thing exists.
 
 ## Summary
 
-Symfony is a Framework which provides us with a way to work in conformity with the MVC pattern. Models are Entity classes along with their Repository pair, representing database tables, while Doctrine watches over the whole process, unless one chooses not to use Doctrine. Views are templates that generate HTML, for which Twig is a convenient tool, but one can use Symfony without relying on the usage of Twig. Configuration can be written in YAML, XML or PHP. PHP dependencies are handled by Composer, client-side dependencies are handled by Yarn. Symfony has its own console that can be used to run different commands.
+Symfony is a Framework which provides us with a way to work in conformity with the MVC pattern. Models are Entity classes along with their Repository pair, representing database tables, while Doctrine watches over the whole process, unless one chooses not to use Doctrine. Views are templates that generate HTML, for which Twig is a convenient tool, but one can use Symfony without relying on the usage of Twig. Configuration can be written in YAML, XML or PHP. PHP dependencies are handled by Composer, client-side dependencies can be handled by Yarn. Symfony has its own console that can be used to run different commands.
 
 All in all, there are lots of features which Symfony offers, so using Symfony is definitely an option to consider when planning a project, but if someone just starts to work using Symfony, then the initial period might be more difficult. This article aims to reduce this difficulty.
