@@ -5,33 +5,33 @@ tags: java, architecture. security, programming, php
 ---
 
 One of our customers asked us to host a new suite of web-based applications for them and to protect them with a single sign-on (SSO) solution. Ok, easy enough;
-the applications in question were in fact designed with a particular SSO system in mind already. But for various good reasons, our customer didn't want that
-solution, and asked us to implement a different one. We eventually settled on "Central Authentication Service", or CAS, and I'd like to describe the conversion
-process we went through.
+the applications in question were in fact designed with a particular SSO system in mind already. But for various good reasons, our customer needed a different
+system, and we eventually settled on [Apereo's "Central Authentication Server" project](https://www.apereo.org/projects/cas), or CAS, and I'd like to describe
+the conversion process we went through.
 
 ## The ingredients
 
-This suite included one principle Java application using [JAAS
-authentication](https://docs.oracle.com/javase/7/docs/technotes/guides/security/jaas/JAASRefGuide.html), another Java application based on Spring Security, one PHP application (later
-joined by another), and a few automated tasks that also needed to authenticate. In their original form, these applications expected each request to include a
-header identifying an authenticated user. This works fine, of course, provided some gateway system reliably sanitizes request headers to ensure malicious users
-cannot forge a header themselves. But it wouldn't work for our purposes, so after some discussion with our customers, we settled on replacing that system with
-[Apereo's CAS implementation](https://www.apereo.org/projects/cas), which is both open source, and the reference implementation of the CAS protocol. In
-browser-based applications, for which CAS is best suited, applications redirect unauthenticated requests to a CAS server, which identifies the application
-requesting service, authenticates the user through any of various configurable methods, and redirects the user back to the original application. This last
-redirect includes a new parameter called a "Service Ticket", a number identifying this particular authentication request. The original application contacts the
-CAS server directly to validate the service ticket and collect information to identify the user, and then proceeds with its own internal processes to establish
-a session for that user and to go about its normal work.
+Our customer's application suite included one principle Java application using [JAAS
+authentication](https://docs.oracle.com/javase/7/docs/technotes/guides/security/jaas/JAASRefGuide.html), another Java application based on [Spring
+Security](https://spring.io/projects/spring-security), one PHP application (later joined by another), and a few automated tasks that also needed to
+authenticate. In their original form, these applications supported single sign-on by expecting each request to include a header identifying an authenticated
+user. This works fine, of course, provided some gateway system reliably sanitizes request headers to ensure malicious users cannot forge a header themselves.
+CAS is a bit more complex: in browser-based applications, for which CAS is best suited, applications redirect unauthenticated requests to a CAS server, which
+identifies the application requesting service, and authenticates the user through any of various configurable methods. The CAS server then redirects the user back
+to the original application with a parameter called a "Service Ticket", a seemingly random number identifying this particular authentication request. The
+original application contacts the CAS server directly to validate the service ticket and to collect information to identify the user, and then proceeds with its
+own internal processes to establish a session for that user and to go about its normal work.
 
-To CAS-enable an application, we incorporate a CAS client library. Clients exist in one form or another for various languages, and though the documentation
-suggests avoiding this, it probably wouldn't be too difficult to implement a client for a particular use case from scratch. The protocol involves only standard
-HTTP query parameters, lots of HTTP 302 redirects, and occasional XML. Truthfully, I was a bit concerned by what appeared to be limited selection of actively
-supported client libraries, but we found software to meet our needs without much difficulty.
+To CAS-enable an application, we incorporate a CAS client library.
+[Clients](https://apereo.github.io/cas/6.1.x/integration/CAS-Clients.html#build-your-own-cas-client) exist in one form or another for various languages. In fact
+we won't use the Java client directly, but rather we'll incorporate compponents that extend it. Truthfully, I was a bit concerned by what appeared to be limited
+selection of actively supported client libraries, and of course your results may vary, but we found software to meet our own needs without too much difficulty.
 
 ## Configuring Wildfly Authentication
 
 I mentioned above that our applications use a variety of languages, and a variety of authentication systems. We had to teach each one to cooperate with the CAS
-server, each in a different way. The most important application in the suite depends on the JAAS-based security subsystem of the Wildfy Application Server it's
+server, each in a different way. The most important application in the suite depends on the JAAS-based security subsystem of the [Wildfy application
+server](https://www.wildfly.org/) it's
 deployed to, and originally it used a custom [LoginModule](https://docs.oracle.com/javase/7/docs/api/javax/security/auth/spi/LoginModule.html) that checked for
 the magic header I mentioned to find the ID of the right user. Our first modification was to configure our proxy server to remove that magic header from every
 request. That way, although we planned to disable the old authentication system entirely, we ensured that users couldn't forge a header to log in, even if we
@@ -69,11 +69,11 @@ an example snippet.
     </security-constraint>
 ```
 
-We started by installing the [cas-extension library](https://github.com/soulwing/cas-extension) in our Wildfly server to handle the CAS protocol. Authentication
+We installed the [cas-extension library](https://github.com/soulwing/cas-extension) in our Wildfly server to handle the CAS protocol. Authentication
 works in a series of steps: First, an unauthenticated user attempts to access a URL matching a pattern in one of the security constraints described above. This
-triggers the CAS extension to redirect the user to the CAS server, and to accept and validate the security ticket when the CAS server sends the user back again.
+triggers the CAS extension to redirect the user to the CAS server, and to accept and validate the service ticket when the CAS server sends the user back again.
 Assuming the user authenticates successfully, we determine the user's roles with a database query, using a role mapper built into Wildfly. With an authenticated
-user and that user's roles, the process is complete.
+user and that user's roles, the authentication process is complete.
 
 Configuration of the cas-extension begins with a CAS profile, a combination of the URL of the CAS server and the URL of the service the extension should
 protect.
@@ -84,9 +84,9 @@ protect.
     </subsystem>
 ```
 
-This tells the extension where to send authentication requests, where to listen for requests returning from the CAS server, and where to verify service tickets,
-whereupon the CAS extension can create an "identity assertion", and send that back to the Wildfly security subsystem. Next we need to validate that identity
-assertion, and figure out what roles belong to the user. This happens in a [Wildfly security
+This tells the extension where to send authentication requests, where to listen for requests returning from the CAS server, and where to validate service
+tickets, whereupon the CAS extension can create an "identity assertion", and send that back to the Wildfly security subsystem. Next we need to validate that
+identity assertion, and figure out what roles belong to the user. This happens in a [Wildfly security
 domain](https://docs.wildfly.org/14/Admin_Guide.html#security-domains).
 
 ```xml
@@ -124,21 +124,22 @@ This configuration proved sufficient to let users log in and use the application
 more work to let them log out properly. By default, each application in the suite sets a cookie in the user's browser to identify its session. The CAS server
 likewise sets a cookie. So a user can log out of the application, destroying the application's session cookie, but we need to destroy the CAS server's session
 cookie as well as the other applications' cookies. Single log-out can be complicated, and I won't go into the full setup here. Suffice it to say we did need to
-fetch the proper logout URL from the CAS extension API and redirect to it once users log out of the application itself.
+fetch the proper logout URL from the CAS extension API and redirect to it once users log out of the application itself, using API calls provided by
+cas-extension.
 
 ## Configuring Spring Authentication
 
 Another Java-based application in our suite uses Spring Security, for which CAS configuration proceeded differently. [This
 document](https://docs.spring.io/spring-security/site/docs/3.0.x/reference/cas.html) describes the bulk of the configuration, which in my opinion was more
 complex than for the first case I described, and for brevity I'll include only the broad strokes. This system functions by intercepting AuthenticationException
-objects and inserting the CAS process, finishing with a Spring
+objects and inserting itself to handle the CAS process. We also configured a Spring
 [UserDetailsService](https://docs.spring.io/spring-security/site/docs/3.2.3.RELEASE/apidocs/org/springframework/security/core/userdetails/UserDetailsService.html)
 to execute the same database query we used above to find the user's roles. It works just fine for our purposes, but I'm not fully conversant in the large stack
 of beans Spring uses to manage the process, and I admit it took some time to get this configuration sorted out.
 
 ## Enter PHP
 
-One of our applications uses PHP, which meant yet another configuration. Apereo maintains a [PHP client](https://github.com/apereo/phpCAS), which includes
+Some of these applications use PHP, which meant yet another configuration. Apereo maintains a [PHP client](https://github.com/apereo/phpCAS), which includes
 several helpful examples. Once I refreshed my memory about how to use PHP, I tracked down the part of the application that authenticates users, and replaced the
 existing code with calls to phpCAS:
 
@@ -149,8 +150,8 @@ existing code with calls to phpCAS:
 ```
 
 The `forceAuthentication` call determines the current phase of the authentication process this request is in, whether unauthenticated, fully authenticated, or
-requring validation of a service ticket, and responds appropriately. We then set a session variable to the ID of the authenticated user, exactly what the
-original authentication code would have done.
+requring validation of a service ticket, and responds appropriately. We then set a session variable to the ID of the authenticated user, which replicates what
+the original authentication code would have done.
 
 This application requires access to a REST API exposed by the first application, a situation which CAS calls "proxy" authentication. Here, CAS issues not only
 its usual service ticket, but also a "proxy granting ticket". When the application wants to use the API, it uses the proxy granting ticket to request a service
@@ -174,4 +175,4 @@ existing infrastructure in a way that makes it easy to manage and monitor was an
 to prevent it from offering users an imaginary method to recover forgotten passwords. The series of redirected browser requests involved in the CAS protocol
 presents a notable performance impact under some circumstances. And it has taken me no small effort to learn to appreciate the CAS server's sometimes
 distressingly circular [documentation](https://apereo.github.io/cas/6.1.x/index.html). But several months into the project, CAS seems to be working well enough
-for our purposes that other users of the same software have begun to express interest.
+for our purposes that other users of the same application suite have begun to express interest.
