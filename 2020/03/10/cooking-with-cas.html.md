@@ -6,8 +6,9 @@ tags: java, architecture. security, programming, php
 
 One of our customers asked us to host a new suite of web-based applications for them and to protect them with a single sign-on (SSO) solution. Ok, easy enough;
 the applications in question were in fact designed with a particular SSO system in mind already. But for various good reasons, our customer needed a different
-system, and we eventually settled on [Apereo's "Central Authentication Server" project](https://www.apereo.org/projects/cas), or CAS, and I'd like to describe
-the conversion process we went through.
+system, and we eventually settled on [Apereo's "Central Authentication Server"
+project](https://www.apereo.org/projects/cas), or CAS. I'd like to describe the
+conversion process we went through.
 
 ## The ingredients
 
