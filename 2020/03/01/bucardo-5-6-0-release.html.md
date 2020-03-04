@@ -26,16 +26,15 @@ Detached signature (signed with key ID DF9B65B8):
   - Add config option `log_timer_format` to `glog()` to customize timestamp output
 
   - Change handling of file-path config settings so that they are no longer lower-cased—the new `log_timer_format` config will also be case-preserved
- 
+
   - Fixed the relation parameter to the add customcode command to support schema-qualified relation names
- 
+
   - Optimized table lookup when validating syncs to a single query, rather than separate queries for each table. Also added checks to avoid purging “toast” tables and old delta tables
- 
+
   - Improve the unique conflict exception handler sample code and test
- 
+
   - Map timestamp from PostgreSQL to MongoDB datetime
- 
+
   - Safer system for determining Postgres version on install
- 
+
   - Correction that `array_agg` was introduced in Postgres 8.4, not 8.3
- 
