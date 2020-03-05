@@ -4,6 +4,9 @@ title: "Cooking with CAS"
 tags: java, architecture. security, programming, php
 ---
 
+<img src="/blog/2020/03/10/cooking-with-cas/4696900602_77582d1d5d_c.jpg" alt="passwords" />
+[Photo](https://www.flickr.com/photos/reidrac/4696900602/in/photolist-8a3QUS-XN6XAe) by Flickr user [reidrac](https://www.flickr.com/photos/reidrac/)
+
 One of our customers asked us to host a new suite of web-based applications for them and to protect them with a single sign-on (SSO) solution. Ok, easy enough;
 these applications were in fact designed with a particular SSO system in mind already, but our situation required a different done, and we eventually chose
 Apereo's open source [Central Authentication Server project](https://www.apereo.org/projects/cas), or CAS. I'd like to describe the conversion process we went
