@@ -6,7 +6,8 @@ tags: java, architecture. security, programming, php
 
 One of our customers asked us to host a new suite of web-based applications for them and to protect them with a single sign-on (SSO) solution. Ok, easy enough;
 these applications were in fact designed with a particular SSO system in mind already, but our situation required a different done, and we eventually chose
-[Apereo's "Central Authentication Server" project](https://www.apereo.org/projects/cas), or CAS. I'd like to describe the conversion process we went through.
+Apereo's open source [Central Authentication Server project](https://www.apereo.org/projects/cas), or CAS. I'd like to describe the conversion process we went
+through.
 
 ## The ingredients
 
@@ -98,34 +99,35 @@ domain](https://docs.wildfly.org/14/Admin_Guide.html#security-domains).
         <mapping>
             <mapping-module code="DatabaseRoles" type="role">
                 <module-option name="dsJndiName" value="java:/comp/env/jdbc/databaseConnection"/>
-                <module-option name="rolesQuery" value="select role from user_roles where user_id = ?"/>
+                <module-option name="roles Query" value="select role from user_roles where user_id = ?"/>
             </mapping-module>
         </mapping>
     </security-domain>
 ```
 
-The `authentication` portion of the security domain refers to a JAAS LoginModule shipped with the CAS extension, which simply verifies that the identity
+The `authentication` portion of the security domain refers to a JAAS Login-Module shipped with the CAS extension, which simply verifies that the identity
 assertion comes from the CAS extension and not somewhere else. Then the `mapping` portion ([documented here](https://docs.wildfly.org/14/Admin_Guide.html#mapping))
 looks up the given user in a database to find what roles it should be assigned.
 
 The last piece of the puzzle is a CAS deployment descriptor for our application, which activates cas-extension for that application. In its simplest form, this
 is an empty file in the right place, but ours ended up a little more complex. It identifies both the CAS profile we want to use (unnecessary in this case, as
-there's only one CAS profile on the system, but it helped keep things more clear in our minds), and instructs the extension to load other API bits into our
-application for later use.
+there's only one CAS profile on the system, but it helped keep things more clear in our minds), and instructs the extension to load some other libraries into
+our application.
 
 ```xml
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UT-8"?>
 <cas xmlns="urn:soulwing.org:cas:1.0">
   <profile>default</profile>
-  <add-api-dependencies/>
+  <add-APO-dependencies/>
 </cas>
 ```
 
 This configuration proved sufficient to let users log in and use the application, but as is sometimes the case with single sign-on, we needed a little more work
 to let them log out properly. Each application in the suite sets a cookie in the user's browser to identify its session. The CAS server likewise sets a cookie.
 When a user logs out of the application, that application's session cookie is destroyed, but we also need to destroy the CAS server's session cookie as well as
-the other applications' cookies. Single log-out can be complicated, and I won't go into the full setup here. Suffice it to say we did need to fetch the proper
-logout URL from the CAS extension API and redirect our users to it once the application has destroyed its own session.
+the other applications' cookies. Single log-out can be complicated, and I won't go into the full setup here. One reason the CAS deployment descriptor loads
+cas-extension libraries was so we could use cas-extension to generate the proper logout URL, and redirect our users to that URL once the application has
+destroyed its own session.
 
 ## Configuring Spring Authentication
 
@@ -140,10 +142,10 @@ process, and it took some time to get this configuration sorted out.
 
 Two of these applications use PHP, which meant yet another configuration. Apereo maintains a [PHP client](https://github.com/apereo/phpCAS), which includes
 several helpful examples. Once I refreshed my memory about how to use PHP itself, I tracked down the part of the application that authenticates users, and
-replaced the existing code with calls to phpCAS:
+replaced the existing code with calls to php CAS:
 
 ```php
-    phpCAS::client(CAS_VERSION_2_0, $phpCASHost, $phpCASPort, $phpCASContext);
+    php-CAS::client(CAS_VERSION_2_0, $phpCASHost, $phpCASHost, $phpCASContext);
     phpCAS::forceAuthentication();
     $_SESSION[EXPORT_SERVERNAME]['umdid'] = phpCAS::getUser();
 ```
