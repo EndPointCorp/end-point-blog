@@ -5,10 +5,12 @@ tags: java, architecture. security, programming, php
 ---
 
 <img src="/blog/2020/03/10/cooking-with-cas/4696900602_77582d1d5d_c.jpg" alt="passwords" />
-[Photo](https://www.flickr.com/photos/reidrac/4696900602/in/photolist-8a3QUS-XN6XAe) by Flickr user [reidrac](https://www.flickr.com/photos/reidrac/)
+[Photo](https://www.flickr.com/photos/reidrac/4696900602/in/photolist-8a3QUS-XN6XAe)
+by Flickr user [reidrac](https://www.flickr.com/photos/reidrac/), licensed
+under [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/)
 
 One of our customers asked us to host a new suite of web-based applications for them and to protect them with a single sign-on (SSO) solution. Ok, easy enough;
-these applications were in fact designed with a particular SSO system in mind already, but our situation required a different done, and we eventually chose
+these applications were in fact designed with a particular SSO system in mind already, but our situation required a different one, and we eventually chose
 Apereo's open source [Central Authentication Server project](https://www.apereo.org/projects/cas), or CAS. I'd like to describe the conversion process we went
 through.
 
@@ -16,7 +18,7 @@ through.
 
 Our customer's application suite included:
 
-* The principle Java application using [JAAS authentication](https://docs.oracle.com/javase/7/docs/technotes/guides/security/jaas/JAASRefGuide.html)
+* The principal Java application using [JAAS authentication](https://docs.oracle.com/javase/7/docs/technotes/guides/security/jaas/JAASRefGuide.html)
 * Another Java application based on [Spring Security](https://spring.io/projects/spring-security)
 * A pair of PHP applications
 * A few automated tasks that needed to authenticate.
@@ -44,7 +46,7 @@ to disable the old authentication system entirely, of course, but this change en
 couldn't exploit it for access.
 
 This application uses a declarative security policy: the deployment descriptor identifies a set of user roles, and another set of "security constraints". Each
-security constraint describes one or more URL patterns used in the application, and the set of user roles allowed to access URLs matching those patterns. Here's
+security constraint describes one or more URL patterns used in the application, and the set of user roles allowed to access URLs matching those patterns. Here
 are two examples:
 
 ```xml
@@ -102,13 +104,13 @@ domain](https://docs.wildfly.org/14/Admin_Guide.html#security-domains).
         <mapping>
             <mapping-module code="DatabaseRoles" type="role">
                 <module-option name="dsJndiName" value="java:/comp/env/jdbc/databaseConnection"/>
-                <module-option name="roles Query" value="select role from user_roles where user_id = ?"/>
+                <module-option name="rolesQuery" value="select role from user_roles where user_id = ?"/>
             </mapping-module>
         </mapping>
     </security-domain>
 ```
 
-The `authentication` portion of the security domain refers to a JAAS Login-Module shipped with the CAS extension, which simply verifies that the identity
+The `authentication` portion of the security domain refers to a JAAS LoginModule shipped with the CAS extension, which simply verifies that the identity
 assertion comes from the CAS extension and not somewhere else. Then the `mapping` portion ([documented here](https://docs.wildfly.org/14/Admin_Guide.html#mapping))
 looks up the given user in a database to find what roles it should be assigned.
 
@@ -118,10 +120,10 @@ there's only one CAS profile on the system, but it helped keep things more clear
 our application.
 
 ```xml
-<?xml version="1.0" encoding="UT-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <cas xmlns="urn:soulwing.org:cas:1.0">
   <profile>default</profile>
-  <add-APO-dependencies/>
+  <add-api-dependencies/>
 </cas>
 ```
 
@@ -144,11 +146,10 @@ process, and it took some time to get this configuration sorted out.
 ## Enter PHP
 
 Two of these applications use PHP, which meant yet another configuration. Apereo maintains a [PHP client](https://github.com/apereo/phpCAS), which includes
-several helpful examples. Once I refreshed my memory about how to use PHP itself, I tracked down the part of the application that authenticates users, and
-replaced the existing code with calls to php CAS:
+several helpful examples. I tracked down the part of the application that authenticates users, and replaced the existing code with calls to phpCAS:
 
 ```php
-    php-CAS::client(CAS_VERSION_2_0, $phpCASHost, $phpCASHost, $phpCASContext);
+    phpCAS::client(CAS_VERSION_2_0, $phpCASHost, $phpCASPort, $phpCASContext);
     phpCAS::forceAuthentication();
     $_SESSION[EXPORT_SERVERNAME]['umdid'] = phpCAS::getUser();
 ```
