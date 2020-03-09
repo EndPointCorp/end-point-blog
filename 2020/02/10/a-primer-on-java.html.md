@@ -1,5 +1,5 @@
 ---
-author: "Lajos Árpád"
+author: "Árpád Lajos"
 title: "A primer on Java"
 tags: java, wildfly, language
 gh_issue_number: 1590
