@@ -263,7 +263,7 @@ That example is from [Tutorials Point](https://www.tutorialspoint.com/hibernate/
 
 Java is a language. It’s not slow or fast. Performance depends on what is running and how. Natively compiled languages like C or C++ are in general faster, but the difference is not in the language itself, but the way the code is executed. Java runs through the JVM (Java Virtual Machine).
 
-<div style="width: 100%; text-align: center;"><img src="/blog/2020/02/10/a-primer-on-java/jvm.png"></div><br />
+<img src="/blog/2020/02/10/a-primer-on-java/jvm.svg" style="display: block; margin: auto"><br />
 Taken from [net-informations.com](http://net-informations.com/java/intro/jvm.htm)
 
 That’s slower than running the compiler separately for each target platform and avoiding the usage of a virtual machine at runtime. The JVM helps us to avoid worrying about different platforms, and performance issues due to the language itself are an unlikely cause of performance issues in general. However, if one has a Java project with performance problems and the culprit is JVM, then one can compile Java bytecode into machine code. Alternatively, Java code can be converted automatically into C or C++.
