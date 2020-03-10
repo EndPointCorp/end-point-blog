@@ -219,9 +219,58 @@ You should be able to open up the page in your browser and marvel at what we've 
 
 ### The other problem that Webpack solves
 
-browser compatibility issues with new JS features.
+Ok, we've made a great accomplishmet here. We've managed to leverage Webpack to write modular JavaScript. The importance of this cannot be understated. However, Webpack offers us much more. Another problem that has historically plagued front end web development is compatibility across multiple browsers. Webpack helps us with that as well via Loaders.
 
-### Loaders and Plugins
+### Concepts: Loaders
+
+In a nutshell, Loaders are components that Webpack uses to transform source code files during its bundling process, in order to make them available to the app. They basically allow Webpack to turn things, other than JavaScript, into modules that can be used by the application via `import`. By itself, Webpack only knows how to process JavaScript and JSON files. Using Loaders however, Webpack can also process other types of files like CSS and its various flavors like LESS or SASS; or even JavaScript derived languages like TypeScript or CoffeeScript.
+
+### Writing modern JavaScript with Babel
+
+Here's where the browser compatibility solution that I eluded to earlier comes into play: the `babel-loader`. This loader makes it so we can write bleeding edge JavaScript, with all the newest features of the language, without having to worry if our target browsers support them.
+
+Babel is a compiler that takes code written with the latest version of the language and turns it into plain old JavaScript that can run anywhere. `babel-loader` is how Babel integrates with Webpack. I like being able to take advantage of the JavaScript's latest features, so, to me, setting up Babel in any new project is a must. Luckily for us, with Webpack, setting it up is easy.
+
+> Note: You can learn more about Babel and the latest JavaScript features in https://babeljs.io/docs/en/ and https://babeljs.io/docs/en/learn.
+
+Like everything else, Babel is distributed as an NPM package. So let's go ahead and install it with
+
+```
+npm install --save-dev babel-loader @babel/core @babel/preset-env
+```
+
+This will install the core Babel package as well as the Loader for Webpack, and the `env` preset.
+
+> The concept of "preset" is actually a Babel related one, not really having anything to do with Webpack. You can learn more about them here https://babeljs.io/docs/en/babel-preset-env, but, for our purposes here, suffice it to say that Babel presets are a specification of the features that are available to use. There are many presets (i.e. feature sets) against which you can configure Babel to compile. `env` is just a very convenient one that provides support for all the latest features.
+
+Again, we're installing these as dev only dependencies because they are not needed for the app at runtime. Only at build time.
+
+Now, we go to our `webpack.config.js` file and add these lines:
+
+```js
+module.exports = {
+    // ...
+    module: {
+        rules: [
+            { test: /\.js$/, exclude: /node_modules/, loader: "babel-loader" }
+        ]
+    }
+};
+```
+
+This is how we specify that we want the babel-loader to transform our JavaScript files before Webpack bundles them together. Inside `module.rules`, there's an array of objects. Each of the elements of that array is a rule specifying which files it applies to, via the regular expression in the `test` field; and which loader will be used to process them, via the `loader` field. The `exclude` field makes sure that files under our `node_modules` directory are not affected by `babel-loader`. We don't want to be transforming the packages we downloaded from NPM after all, those are ready to use as they are. We only want to transform our own code.
+
+Finally, Babel itself requires a little bit of configuration. So let's give it what it needs by creating a `.babelrc` file in our project's root with these contents:
+
+```js
+{
+    "presets": ["@babel/preset-env"]
+}
+```
+
+Pretty self-explanatory. This configuration tells Babel to use the `env` preset when processing our files.
+
+Now run `npx webpack --config webpack.config.js` and hope for the best. Just kidding! Everything should work like a charm and with that, we have just unlocked JavaScript's full potential for our project. Open the page again and you will see nothin has changed. What we have gained is the ability to write modern JavaScript without having to worry about compatibility.
 
 ```
 code
