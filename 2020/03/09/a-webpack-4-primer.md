@@ -274,9 +274,39 @@ Now run `npx webpack --config webpack.config.js` and hope for the best. Just kid
 
 ### Bonus: Multiple Entry Points
 
-When building a SPA, a single Entry Point is approprate. However, sometimes, we have apps with several pages, each one of which is a sort of advanced front end application in its own right. From a Webpack perspective, apps like that have multiple Entry Points. One for each page. Because each page has its own set of client side code that runs independentyl from each other. They may share common parts under the hood (via class or library reuse, for example) but the main, initial script is different.
+When building a [SPA](https://en.wikipedia.org/wiki/Single-page_application), a single Entry Point is approprate. However, sometimes, we have apps with several pages, each one of which is a sort of advanced front end application in its own right. From a Webpack perspective, apps like that have multiple Entry Points. One for each page. Because each page has its own set of client side code that runs independently from each other. They may share common parts under the hood (via class or library reuse, for example) but the main, initial script is different.
 
-Webpack's build process supports that style of application as well via multiple Entry Points configuration. Here's how to do it:
+Let's consider our calculator. So far, that app has only one page. Imagine we want to add a new one. Let's say, an admin control panel. To make that happen, let's add new `admin.html` and `src/admin.js` files to the project. Their contents don't matter. All I need is for them to exist in order to illustrate the multiple Entry Points capability.
+
+As far as Webpack is concerned, we can configure the build process to support that style of application by updating our `webpack.config.js` like so:
+
+```diff
+ module.exports = {
+     mode: "development",
+-    entry: "./src/index.js",
++    entry : {
++        index: "./src/index.js",
++        admin: "./src/admin.js"
++    },
+     output: {
+-        filename: "index.js",
++        filename: "[name].js",
+         path: path.resolve(__dirname, "dist"),
+     },
+ }
+```
+
+As you can see, we've chnaged our config object's `entry` field to include two separate Entry Points. One for our existing `index.js` Entry Point, and another for the new `admin.js` one. We've also tweaked the output configuration. Instead of a static name for the resulting output bundle, we use a pattern to describe them. In this case, `[name].js` makes it so we end up with two bundle files named after their corresponding Entry Points. The `[name]` part is where the magic happens. When creating the compiled bundle files, Webpack knows to substitute that "variable" with the corresponding value from the Entry Point configuration.
+
+Go ahead and run `npx webpack --config webpack.config.js` again and inspect the `dist` directory. You will see that we now have two bundles: `index.js` and `admin.js`.
+
+```
+dist/
+├── admin.js
+└── index.js
+```
+
+### Bonus: CSS Can also be as modules
 
 
 
