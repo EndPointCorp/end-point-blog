@@ -108,7 +108,7 @@ Luckily for us, those are exactly the kinds of problems that Webpack helps us de
 
 ### Installing Webpack into our project
 
-> Note: If you are following along and downloaded the source code from the GitHub repo; then whenever I say "root", I mean that repo's `original` directory. That's where the original version of the Automatic Calculator app's source code lives. As it is before introducing Webpack. You can work directly from there or take the contents of that directory and put them wherever it is most confortable to you. The `final` directory contains the source code as it will be by the end of this post.
+> If you are following along and downloaded the source code from the GitHub repo; then whenever I say "root", I mean that repo's `original` directory. That's where the original version of the Automatic Calculator app's source code lives. As it is before introducing Webpack. You can work directly from there or take the contents of that directory and put them wherever it is most confortable to you. The `final` directory contains the source code as it will be by the end of this post.
 
 The first thing we need to do is install Webpack into our project. That's super easy if you already have NodeJS and NPM installed. Intalling NodeJS and NPM is out of the scope of this discussion, so I would recommend following NodeJS's documentation to get them installed.
 
@@ -227,11 +227,11 @@ In a nutshell, Loaders are components that Webpack uses to transform source code
 
 ### Writing modern JavaScript with Babel
 
-Here's where the browser compatibility solution that I eluded to earlier comes into play: the `babel-loader`. This loader makes it so we can write bleeding edge JavaScript, with all the newest features of the language, without having to worry if our target browsers support them.
+Here's where the browser compatibility solution that I alluded to earlier comes into play: the `babel-loader`. This loader makes it so we can write bleeding edge JavaScript, with all the newest features of the language, without having to worry if our target browsers support them.
 
 Babel is a compiler that takes code written with the latest version of the language and turns it into plain old JavaScript that can run anywhere. `babel-loader` is how Babel integrates with Webpack. I like being able to take advantage of the JavaScript's latest features, so, to me, setting up Babel in any new project is a must. Luckily for us, with Webpack, setting it up is easy.
 
-> Note: You can learn more about Babel and the latest JavaScript features in https://babeljs.io/docs/en/ and https://babeljs.io/docs/en/learn.
+> You can learn more about Babel and the latest JavaScript features in https://babeljs.io/docs/en/ and https://babeljs.io/docs/en/learn.
 
 Like everything else, Babel is distributed as an NPM package. So let's go ahead and install it with
 
@@ -306,10 +306,62 @@ dist/
 └── index.js
 ```
 
-### Bonus: CSS Can also be as modules
+The new `admin.js` file can be added to the new `admin.html` page like usual, via a `<script>` tag. Just like we did with `index.html`.
 
+### Bonus: CSS can also be a module
 
+When discussing Loaders, I mentioned the posibility of making things other than JavaScript behave like modules and be available to the application. Let's demonstrate how we can make that happen.
+
+First, let's install the loaders that we need with:
+
+```
+npm install --save-dev css-loader style-loader
+```
+
+Then, create a new CSS file under `/css/index.css` with some random fabulous styling:
+
+```css
+body {
+    background-color: aquamarine;
+}
+
+button, input {
+    border: grey solid 1px;
+    background-color: white;
+    padding: 5px;
+}
+
+input:hover, button:hover {
+    background-color: teal;
+}
+```
+
+Now "import" it into our `index.js` file with a line like this near the top of the file:
+
+```javascript
+import "../css/index.css";
+```
+
+And finally, configure Webpack so that it knows what to do when it finds this weird import css line. We do so by updating our `module.rules` config:
+
+```javascript
+ module: {
+     rules: [
+-        { test: /\.js$/, exclude: /node_modules/, loader: "babel-loader" }
++        { test: /\.js$/, exclude: /node_modules/, loader: "babel-loader" },
++        { test: /\.css$/, use: ['style-loader', 'css-loader'] }
+     ]
+ }
+```
+
+What we did here was add the new loaders to the Webpack buld pipeline. With this, it now knows how to handle CSS files and apply whatever styling rules are defined in that CSS. Pretty neat trick, huh?
+
+> These loaders are doing more than meets the eye. You can learn more about them in https://github.com/webpack-contrib/css-loader and https://github.com/webpack-contrib/style-loader.
 
 ### Further reading: Plugins
+
+There's one core concept that we haven't discussed yet: Plugins. Plugins offer yet another avenue for further customizing Webpack's behavior. I won't go into too much detail on them here because I think that, with the understanding we have gained on Entry Points, Outputs and Loaders; we've added really powerful tools into our toolboxes. Tools that will be enough in most cases or at least allow us to get any new project up and running. But this time, with more insight into what's actually happening under Webpack's hood. If you are so inclined, you can learn more about them here: https://webpack.js.org/concepts/plugins/. In a nutshell, Plugins are for "doing anything else that a loader cannot do" as Webpack's own documentation puts it.
+
+~
 
 And that's it for now. Thanks for joining me while I explored Webpack, a pretty neat piece of software that makes many a front end developer's life easier. Mine included.
