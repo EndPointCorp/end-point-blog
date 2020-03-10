@@ -207,7 +207,7 @@ npx webpack --config webpack.config.js
 
 As a result of that command, you should see a new `dist` directory with a single `index.js` file in it. Just like we specified as the output in our Webpack configuration file.
 
-And that's it! We have set up a Webpack build process for our app. Don't forget to change the `index.html` page so that it only includes this new compiled asset. With something like this:
+And that's it! We have set up a Webpack build process for our app. Don't forget to change the `index.html` page so that it only includes this new compiled asset. With something like this, at the end of the `<body>`:
 
 ```html
 <script src="dist/index.js"></script>
@@ -216,10 +216,6 @@ And that's it! We have set up a Webpack build process for our app. Don't forget 
 You should be able to open up the page in your browser and marvel at what we've accomplished:
 
 ![Image](a-webpack-4-primer/the-app.png)
-
-
-
-
 
 ### The other problem that Webpack solves
 
