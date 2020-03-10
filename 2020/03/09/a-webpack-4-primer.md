@@ -272,12 +272,6 @@ Pretty self-explanatory. This configuration tells Babel to use the `env` preset 
 
 Now run `npx webpack --config webpack.config.js` and hope for the best. Just kidding! Everything should work like a charm and with that, we have just unlocked JavaScript's full potential for our project. Open the page again and you will see nothin has changed. What we have gained is the ability to write modern JavaScript without having to worry about compatibility.
 
-```
-code
-```
+### Bonus: Multiple Entry Points
 
-`inline code`
-
-![Image](/blog/2019/08/07/a-webpack-4-primer/wordpress-language-select.png)
-
-[link](https://getcomposer.org/download/)
+### Further reading: Plugins
