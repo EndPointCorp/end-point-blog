@@ -54,8 +54,7 @@ Webpack is a nice tool and can be useful when used well, but it’s a good idea 
 
 ### MVC
 
-<div style="width: 100%; text-align: center;"><img src="/blog/2020/03/02/symfony-quickstart/mvc.png"></div>
-Image from [tutorialspoint](https://www.tutorialspoint.com/mvc_framework/mvc_framework_introduction.htm).
+<img src="/blog/2020/03/02/symfony-quickstart/mvc.svg" style="display: block; height: 300px; margin: auto" />
 
 Model-View-Controller as a pattern is a standard for Symfony. Model means domain model, usually represented by entity and repository classes along with the business logic that uses them. View is the templating that eventually generates the HTML which will be served to the browser and displayed to the user. Controllers are the engines, the driving force, since the actions allowed to be performed can be found in them, putting everything together.
 
