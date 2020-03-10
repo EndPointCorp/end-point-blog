@@ -38,7 +38,7 @@ Let’s see the list of popular languages according to [Stackify](https://stacki
   <table style="margin: auto" id="java-primer-table">
     <tr>
       <th><p style="margin-right: 200px"><b>Programming Language</b></p></th>
-      <th><p style="margin-right: 40px"><b>Ratings</b></p></th>
+      <th><p style="margin-left: 40px"><b>Ratings</b></p></th>
       <th><p><b>Change</b></p></th>
     </tr>
     <tr>
@@ -107,7 +107,7 @@ Let’s see the list of popular languages according to [Stackify](https://stacki
       <td><p>+1.04%</p></td>
     </tr>
     <tr>
-      <td><p>Delphi/Object Pascal</p></td>
+      <td><p>Delphi/​Object Pascal</p></td>
       <td><p>1.194%</p></td>
       <td><p>-0.18%</p></td>
     </tr>
