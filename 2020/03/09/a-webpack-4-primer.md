@@ -252,7 +252,7 @@ module.exports = {
     // ...
     module: {
         rules: [
-            { test: /\.js$/, exclude: /node_modules/, loader: "babel-loader" }
+            { test: /\.js$/, exclude: /node_modules/, loader: "babel-loader" },
         ]
     }
 };
@@ -344,11 +344,10 @@ import "../css/index.css";
 
 And finally, configure Webpack so that it knows what to do when it finds this weird import css line. We do so by updating our `module.rules` config:
 
-```javascript
+```diff
  module: {
      rules: [
--        { test: /\.js$/, exclude: /node_modules/, loader: "babel-loader" }
-+        { test: /\.js$/, exclude: /node_modules/, loader: "babel-loader" },
+         { test: /\.js$/, exclude: /node_modules/, loader: "babel-loader" },
 +        { test: /\.css$/, use: ['style-loader', 'css-loader'] }
      ]
  }
