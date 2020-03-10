@@ -274,4 +274,12 @@ Now run `npx webpack --config webpack.config.js` and hope for the best. Just kid
 
 ### Bonus: Multiple Entry Points
 
+When building a SPA, a single Entry Point is approprate. However, sometimes, we have apps with several pages, each one of which is a sort of advanced front end application in its own right. From a Webpack perspective, apps like that have multiple Entry Points. One for each page. Because each page has its own set of client side code that runs independentyl from each other. They may share common parts under the hood (via class or library reuse, for example) but the main, initial script is different.
+
+Webpack's build process supports that style of application as well via multiple Entry Points configuration. Here's how to do it:
+
+
+
 ### Further reading: Plugins
+
+And that's it for now. Thanks for joining me while I explored Webpack, a pretty neat piece of software that makes many a front end developer's life easier. Mine included.
