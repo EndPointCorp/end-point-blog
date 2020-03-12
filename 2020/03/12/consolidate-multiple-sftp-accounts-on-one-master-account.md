@@ -23,8 +23,9 @@ $ addgroup sftpusers
 
 ```bash
 $ vi /etc/ssh/sshd_config
-
-Subsystem       sftp    internal-sftp
+...
+# override default of no subsystems
+Subsystem       sftp    internal-sftp...
 
 Match Group sftpusers
     ChrootDirectory /home/%u
@@ -113,39 +114,8 @@ echo "Created user $sftpuser at $facility_name mount point successfully"
 
 ### Files to One Location
 
-Now, data files from facilities are available at individual folders under MOUNT_PATH/Input on the master account. These files need to be collected and moved to a single path where the application picks up and copies. The files are then stored in both Backup and Archive paths as processed files will be modified by the application. The following file script is scheduled at cron to run every minute and processes new files as they emerge:
+Now, data files from facilities are available at individual folders under MOUNT_PATH/Input on the master account. It helps third party application to pick up files in a straight forward way to proceed with further processing. Also our client access the data files for review from master account in a effortless way without navigating into each facility account.
 
-
-```bash
-cat MOUNT_PATH/master_sftp_file_processor.sh
-#!/bin/bash
-# master_sftp_file_processor.sh
-# Path configuration
-BASE='/home/master/MOUNT_PATH/'
-INPUT='Input/'
-ARCHIVE='Archive/'
-BACKUP='Backup/'
-DESTINATION='Input/All_SFTP/'
-UNDERSCORE=_
-# validate file path exists
-DATE=`date '+%Y-%m-%d %H:%M:%S'`
-find "$BASE$INPUT" -type f -not -path "*$DESTINATION*" -print0 | while IFS= read -d $'\0' file
-do
-# create archive path if not exist
-
-        echo "$DATE File : $file"
-        file_path=$(dirname "${file}")
-        file_name=$(basename "${file}")
-        relative_file_path=${file_path#$BASE$INPUT}
-        file_prefix=$relative_file_path
-        mkdir -p "$BASE$ARCHIVE$relative_file_path"
-        cp $file "$BASE$ARCHIVE$relative_file_path"
-        # mkdir -p "$BASE$DESTINATION$relative_file_path"
-        echo "$BASE$DESTINATION$file_prefix$UNDERSCORE$file_name"
-        cp $file "$BASE$DESTINATION$file_prefix$UNDERSCORE$file_name"
-        mv $file "$BASE$BACKUP"
-done
-```
 
 ### Summary
 Mounting multiple SFTP accounts on one master account that collects files at a single path turns out to be a very efficient and rewarding method of consolidating data. Both safe and secure, running individual SFTP accounts establishes an exclusively private link between facilities and servers. Only the master account has the unique ability to access files belonging to each facility in order to process the data further. 
