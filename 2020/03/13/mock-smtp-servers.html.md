@@ -2,15 +2,16 @@
 author: "Patrick Lewis"
 title: "Capturing Outgoing Email With Mock SMTP Servers"
 tags: ruby, rails, email, testing
+gh_issue_number: 1604
 ---
 
-<img src="/blog/2020/03/10/mock-smtp-servers/banner.jpg" alt="Mailboxes" /> [Photo](https://flic.kr/p/5pw1mA) by [Seattleye](https://www.flickr.com/photos/seattleye/), used under [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/), cropped from original.
+<img src="/blog/2020/03/13/mock-smtp-servers/banner.jpg" alt="Mailboxes" /> [Photo](https://flic.kr/p/5pw1mA) by [Seattleye](https://www.flickr.com/photos/seattleye/), used under [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/), cropped from original.
 
 Sending automated email to users is a common requirement of most web applications and can take the form of things like password reset emails or order confirmation invoices.
 
-It is important for developers working in development/staging environments to verify that an application is sending email correctly without _actually_ delivering messages to users' inboxes. If you were testing a background task that searches an e-commerce site for abandoned shopping carts and emails users to remind them that they have not completed a checkout, you would not want to run that in development and end up repeatedly emailing live user email addresses.
+It is important for developers working in development/staging environments to verify that an application is sending email correctly without _actually_ delivering messages to users’ inboxes. If you were testing a background task that searches an e-commerce site for abandoned shopping carts and emails users to remind them that they have not completed a checkout, you would not want to run that in development and end up repeatedly emailing live user email addresses.
 
-A mock SMTP server is useful for development and testing because it lets you configure the email settings of your development environment almost exactly the same as you would for outgoing SMTP email in your production site. The mock SMTP server will capture all of the outbound email and allow you to review it in a web interface instead of actually delivering it to users' inboxes.
+A mock SMTP server is useful for development and testing because it lets you configure the email settings of your development environment almost exactly the same as you would for outgoing SMTP email in your production site. The mock SMTP server will capture all of the outbound email and allow you to review it in a web interface instead of actually delivering it to users’ inboxes.
 
 ### Mock SMTP Servers
 
@@ -41,9 +42,9 @@ Rails.application.configure do
 end
 ```
 
-MailHog runs in the foreground and will display output as it receives outbound email. Opening a web browser to http://localhost:8025 shows MailHog's web interface and allows you to view a list of the email that it has captured or click on an email to show its full details:
+MailHog runs in the foreground and will display output as it receives outbound email. Opening a web browser to http://localhost:8025 shows MailHog’s web interface and allows you to view a list of the email that it has captured or click on an email to show its full details:
 
-<img src="/blog/2020/03/10/mock-smtp-servers/mailhog.png" alt="Mailhog screenshot" />
+<img src="/blog/2020/03/13/mock-smtp-servers/mailhog.png" alt="Mailhog screenshot" />
 
 ### Conclusion
 
