@@ -6,7 +6,7 @@ gh_issue_number: 1603
 ---
 
 ![](/blog/2020/03/12/from-dev-to-pm/banner.jpg)
-Photo by [You X Ventures](But://unsplash.com/@youxventures) on [Unsplash](https://unsplash.com/photos/Oalh2MojUuk)
+Photo by [You X Ventures](https://unsplash.com/@youxventures) on [Unsplash](https://unsplash.com/photos/Oalh2MojUuk)
 
 ### Moving from writing code to managing the show
 
