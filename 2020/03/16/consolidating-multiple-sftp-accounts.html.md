@@ -9,19 +9,19 @@ gh_issue_number: 1605
 
 [Photo](https://unsplash.com/photos/kzSNNqqS3Qs) by [Dan Meyers](https://unsplash.com/@dmey503)
 
-Recently, a client implemented a data-intensive workflow to generate various reports and insights from a list of facilities. Because a significant portion of these files contain sensitive data, they would need to strictly adhere to HIPAA compliance. Optimally, facilities should be able to transfer files securely and exclusively to our server. Arguably, the best method of achieving this is to create individual SSH File Transfer Protocol (SFTP) accounts for each source.
+Recently, a client implemented a data-intensive workflow to generate various reports and insights from a list of facilities. Because a significant portion of these files contain sensitive data, they needed to strictly adhere to HIPAA compliance. Optimally, facilities should be able to transfer files securely and exclusively to our server. One of the best methods of achieving this is to create individual SSH File Transfer Protocol (SFTP) accounts for each source.
 
 ### SFTP Account
 
 Private SFTP accounts were established for each facility and the data was received at a designated path. At these individual points of contact, a third party application picks up the data and processes further into the pipeline. The following demonstrates how SFTP accounts are developed and configured:
 
-* Create a user group for SFTP accounts
+* Create a user group for SFTP accounts:
 
 ```bash
 $ addgroup sftpusers
 ```
 
-* Configure the following settings in sshd_config (this enables an SFTP account and sets the default location as the home path)
+* Configure the following settings in sshd_config (this enables an SFTP account and sets the default location as the home path):
 
 ```bash
 $ vi /etc/ssh/sshd_config
@@ -36,13 +36,13 @@ Match Group sftpusers
     ForceCommand internal-sftp
 ```
 
-* Restart SSH Server to apply changes
+* Restart SSH server to apply changes:
 
 ```bash
 $ systemctl restart ssh
 ```
 
-* Create an SFTP user account for a facility and place in a folder on the home path to receive data
+* Create an SFTP user account for a facility and place in a folder on the home path to receive data:
 
 ```bash
 # set new user name
@@ -55,7 +55,7 @@ chown -R root:root /home/$sftpuser
 
 ### Mount Multiple Accounts to One Account
 
-The goal here is to point the data from many facilities to one location. But using a single account and path for multiple sites’ data would result in a breach of security and privacy. However, mounting the receiving path of a facility’s data onto a single master account to then “mount point” with a unique facility name takes care of this issue. The process continues on to consolidate files from individual paths on a master account in one place where the application picks up messages for further processing.
+The goal here is to point the data from many facilities to one location, but using a single account and path for multiple sites’ data could result in a breach of security and/​or privacy. Mounting the receiving path of a facility’s data onto a single master account and then to a “mount point” with a unique facility name takes care of this issue. The process next consolidates files from individual paths on a master account in one place where the application picks up messages for further processing.
 
 The SFTP accounts and the master account should be attached to the same group. This will permit individual accounts to write on the master account-mounted path. In turn, the master account can read files from the same location. This location now has administrative rights for both the SFTP user the group. Group permission of the mounted folder is set to sftpgroup and user permission is set to the facility account.
 
@@ -73,7 +73,7 @@ mkdir -p /home/master/MOUNT_PATH/{Input,Pickup,Backup,Archive}
 chown -R master:master /home/master/MOUNT_PATH
 ```
 
-A script is written to automate the list of actions in order to create an SFTP account, mount it at the master account path, and add fstab entries to save the mount in the case of a reboot. The script not only saved time, but also avoided human error when creating accounts for all facilities in addition to future usage.
+A script was written to automate the process of creating an SFTP account, mounting it at the master account path, and adding fstab entries to save the mount in the case of a reboot. The script not only saved time, but also avoided human error when creating accounts for all facilities in addition to future usage.
 
 ```bash
 #!/bin/bash
@@ -83,7 +83,7 @@ A script is written to automate the list of actions in order to create an SFTP a
 sftpuser=$1
 facility_name=$2
 
-# Create SFTP account and add to sftpgroup 
+# Create SFTP account and add to sftpgroup
 useradd $sftpuser
 usermod -g sftpusers -s /usr/sbin/nologin $sftpuser
 usermod -a -G sftpgroup $sftpuser
@@ -105,11 +105,11 @@ echo "/home/master/MOUNT_PATH/Input/$facility_name        /home/$sftpuser/INPUT_
 echo "Created user $sftpuser at $facility_name mount point successfully"
 ```
 
-### Files to One Location
+### Files at one location
 
-Now, data files from facilities are available at individual folders under MOUNT_PATH/Input on the master account. It helps third party applications pick up files in a straightforward way to proceed with further processing. It also helps our client access the files for review from the master account in an effortless way without navigating into each separate account.
+Now, data files from facilities are available at individual folders under MOUNT_PATH/Input on the master account. This enables third party applications to pick up files in a straightforward way to proceed with further processing. It also helps our client access the files for review from the master account easily without navigating into each separate account.
 
 ### Summary
-Mounting multiple SFTP accounts onto one master account turns out to be a very efficient and rewarding method of consolidating data. Both safe and secure, running individual SFTP accounts establishes an exclusively private link between facilities and servers. The master account has the unique ability to access files belonging to each facility in order to process the data further. 
+Mounting multiple SFTP accounts onto one master account turns out to be a very efficient and rewarding method of consolidating data. Both safe and secure, running separate SFTP accounts establishes an exclusive private link between facilities and servers. The master account has the unique ability to access files belonging to each facility in order to process the data further.
 
-**Tip**: In order to avoid broken mounts, check the status by using the mount -fav command. Broken mounts can cause issues when rebooting the server.
+**Tip**: In order to avoid broken mounts, check the status by using the command `mount -fav`. Broken mounts can cause issues when rebooting the server.
