@@ -4,7 +4,7 @@ title: "An Introduction to Webpack 4: Setting up a modern, modular JavaScript fr
 tags: web development, front end development, javascript, webpack, module bundler, babel, ES2015, ES6
 ---
 
-![Banner](a-webpack-4-primer/banner.png)
+![Banner](an-intro-to-webpack-4/banner.png)
 
 Image taken from https://webpack.js.org/
 
@@ -151,7 +151,7 @@ Now we have the actual Webpack build settings. The `mode` field can be either `d
 
 The `entry` field defines the Entry Point for the build process. Like discussed before, this is the first file that Webpack will start from when figuring out the whole [dependency graph](https://webpack.js.org/concepts/dependency-graph/). That is, all of the files that, via `import` and `export` statements (more on that later), specify that they need one another to work. In our app, our dependency graph looks like this:
 
-![Image](a-webpack-4-primer/dependency-graph.png)
+![Image](an-intro-to-webpack-4/dependency-graph.png)
 
 That is, `index.js` depends on `calculator.js`; `calculator.js` in turn depends on `addition.js`, `subtraction.js`, `multiplication.js` and `division.js`; and all of the later four ones depend on `operation.js`. Here, we have specified `./src/index.js` as our Entry Point. But wait, our `index.js` file lives inside our `js` dir. What gives? We'll change that soon. When we prepare our files to use ES2015 modules and have an overall more conventional organization, as far as Webpack is concerned.
 
@@ -217,7 +217,7 @@ And that's it! We have set up a Webpack build process for our app. Don't forget 
 
 You should be able to open up the page in your browser and marvel at what we've accomplished:
 
-![Image](a-webpack-4-primer/the-app.png)
+![Image](an-intro-to-webpack-4/the-app.png)
 
 ### The other problem that Webpack solves
 
