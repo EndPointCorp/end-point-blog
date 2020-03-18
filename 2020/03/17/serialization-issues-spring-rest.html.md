@@ -1,6 +1,6 @@
 ---
 title: "Serialization and Deserialization Issues in Spring REST"
-author: Kursat Aydemir
+author: Kürşat Kutlu Aydemir
 tags: json
 gh_issue_number: 1607
 ---
@@ -8,13 +8,13 @@ gh_issue_number: 1607
 
 [Photo](https://unsplash.com/photos/hCzHhu1v0fA) by [Annie Spratt](https://unsplash.com/@anniespratt)
 
-Spring Boot projects primarily use the Jackson JSON library to serialize and deserialize objects. It is especially useful that Jackson automatically serializes the returned output objects of REST APIs and deserializes the complex type parameters like `@RequestBody`.
+[Spring Boot](https://spring.io/projects/spring-boot) projects primarily use the JSON library [Jackson](https://github.com/FasterXML/jackson) to serialize and deserialize objects. It is especially useful that Jackson automatically serializes objects returned from REST APIs and deserializes complex type parameters like `@RequestBody`.
 
-In a Spring Boot project the automatically registered `MappingJackson2HttpMessageConverter` is usually enough and makes everything simple for JSON conversions, but may have some issues which need custom configuration. Let’s see a few good practices of them.
+In a Spring Boot project the automatically registered `MappingJackson2HttpMessageConverter` is usually enough and makes JSON conversions simple, but this may have some issues which need custom configuration. Let’s go over a few good practices for them.
 
 ### Configuring a Custom Jackson ObjectMapper
 
-In Spring REST projects a custom implementation of `MappingJackson2HttpMessageConverter`, as seen below, simply helps creating the custom `ObjectMapper`. Whatever custom implementation you need to add to the custom `ObjectMapper` can be handled by this custom `MappingJackson2HttpMessageConverter`:
+In Spring REST projects a custom implementation of `MappingJackson2HttpMessageConverter` helps to create the custom `ObjectMapper`, as seen below. Whatever custom implementation you need to add to the custom `ObjectMapper` can be handled by this custom `MappingJackson2HttpMessageConverter`:
 
 ```java
 public class CustomHttpMessageConverter extends MappingJackson2HttpMessageConverter {
@@ -29,9 +29,9 @@ public class CustomHttpMessageConverter extends MappingJackson2HttpMessageConver
 }
 ```
 
-Additionally, some overridable `MappingJackson2HttpMessageConverter` methods, such as `writeInternal`, can be useful to override in certain cases. I’ll give a few samples in this article.
+Additionally, some `MappingJackson2HttpMessageConverter` methods, such as `writeInternal`, can be useful to override in certain cases. I’ll give a few examples in this article.
 
-In Spring Boot you also need to register this custom `MappingJackson2HttpMessageConverter` like below. This makes sure the `MappingJackson2HttpMessageConverter` of the Spring boot project is registered as your `CustomHttpMessageConverter` object.
+In Spring Boot you also need to register a custom `MappingJackson2HttpMessageConverter` like below. This makes sure the `MappingJackson2HttpMessageConverter` of the Spring boot project is registered as your `CustomHttpMessageConverter` object.
 
 ```java
 @Bean
@@ -44,7 +44,7 @@ MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter() {
 
 #### Pretty-printing
 
-Ppretty-printing in Jackson is disabled by default. By enabling `SerializationFeature.INDENT_OUTPUT` of the `ObjectMapper` configuration pretty-print output is enabled (as in the example below). Normally a custom `ObjectMapper` is not necessary for setting the pretty-print configuration. In some cases, however, like one case of mine in a recent customer project, this configuration might be necessary.
+Pretty-printing in Jackson is disabled by default. By enabling `SerializationFeature.INDENT_OUTPUT` in the `ObjectMapper` configuration pretty-print output is enabled (as in the example below). Normally a custom `ObjectMapper` is not necessary for setting the pretty-print configuration. In some cases, however, like one case of mine in a recent customer project, this configuration might be necessary.
 
 For example, passing a URL parameter can enable pretty-printing. In this case having a custom `ObjectMapper` with pretty-print enabled and keeping the default `ObjectMapper` of `MappingJackson2HttpMessageConverter` as-is could be a better option.
 
@@ -86,7 +86,7 @@ public class UserResponse {
 }
 ```
 
-Here we add a filter called `userCodeFilter`—as we added to the custom `ObjectMapper` of `CustomHttpMessageConverter`—to include the `UserResponse` class’ code field in the serialization if its value is greater than 0. You can add multiple filters to `ObjectMapper` for different models.
+Here we add a filter called `userCodeFilter`—like the one we added to the custom `ObjectMapper` of `CustomHttpMessageConverter`—which will include the `UserResponse` class’ code field in the serialization if its value is greater than 0. You can add multiple filters to `ObjectMapper` for different models.
 
 ```java
 public class CustomHttpMessageConverter extends MappingJackson2HttpMessageConverter {
@@ -140,11 +140,11 @@ public class CustomHttpMessageConverter extends MappingJackson2HttpMessageConver
 
 ### Deserialization
 
-#### JSON String Parse Error Handling In Spring Boot
+#### JSON String Parse Error Handling in Spring Boot
 
-Ok, this one is a little tricky. Deserialization of a JSON `@RequestParam` object can cause parsing errors if the JSON object is not well formed. The errors thrown in Jackson’s deserialization level just before it’s pushed to Spring Boot occur at that level, so Spring Boot doesn’t catch these errors.
+This one is a little tricky. Deserialization of a JSON `@RequestParam` object can cause parsing errors if the JSON object is not well-formed. The errors thrown in Jackson’s deserialization level just before it’s pushed to Spring Boot occur at that level, so Spring Boot doesn’t catch these errors.
 
-Deserialization of Jackson maps JSON to POJOs and finally returns the expected Java class object. If the JSON is not well formed parsing cannot be done and `MappingJackson2HttpMessageConverter` internally throws parsing errors. Since this exception is not caught by Spring Boot and no object is returned, the REST controller would be unresponsive, having a badly formed JSON payload.
+Deserialization of Jackson maps JSON to POJOs and finally returns the expected Java class object. If the JSON is not well-formed, parsing cannot be done and `MappingJackson2HttpMessageConverter` internally throws a parsing error. Since this exception is not caught by Spring Boot and no object is returned, the REST controller would be unresponsive, having a badly-formed JSON payload.
 
 Here we can override the internal `read` method of `MappingJackson2HttpMessageConverter`, hack the `ReadJavaType` with a `customReadJavaType` method, and make it return an internal error when the deserialization fails to parse the JSON input, rather than throwing an exception which is not seen or handled by Spring Boot.
 
@@ -154,7 +154,7 @@ public Object read(Type type, @Nullable Class<?> contextClass, HttpInputMessage 
 		throws IOException, HttpMessageNotReadableException {
 
 	objectMapper.enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
-    
+
 	JavaType javaType = getJavaType(type, contextClass);
 	return customReadJavaType(javaType, inputMessage);
 }
@@ -181,4 +181,4 @@ private Object customReadJavaType(JavaType javaType, HttpInputMessage inputMessa
 }
 ```
 
-This way you can return errors occurring at the deserialization level to Spring Boot, which expects a deserialized object but gets a `String` value which can be caught and translated into a `ControllerAdvice` handled exception. This also makes it more comfortable to catch JSON parsing errors without using any third party JSON libraries like Gson.
+This way you can return errors occurring at the deserialization level to Spring Boot, which expects a deserialized object but gets a `String` value which can be caught and translated into a `ControllerAdvice` handled exception. This also makes it easier to catch JSON parsing errors without using any third party JSON libraries like Gson.
