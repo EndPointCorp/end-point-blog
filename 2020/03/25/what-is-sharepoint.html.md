@@ -1,7 +1,7 @@
 ---
 author: "Dan Briones"
 title: "What is SharePoint?"
-tags: collaboration
+tags: tools
 gh_issue_number: 1608
 ---
 
@@ -11,7 +11,7 @@ gh_issue_number: 1608
 
 People often ask me about SharePoint, Microsoft’s browser-based collaboration platform which allows users to upload and share all kinds of documents, images, messages, and more. The product has over two decades of history and there are still many who don’t know much about it.
 
-The SharePoint platform has grown over those years, but its capabilities have expanded in such a way that it can be quickly dismissed from consideration out of fear of the complexity of its implementation and the cost of deployment. These fears may be unfounded, especially if you are already on Office 365, SharePoint may be included in your plan.
+The SharePoint platform has grown over those years, but its capabilities have expanded in such a way that it can be quickly dismissed from consideration out of fear of the complexity of its implementation and the cost of deployment. These fears may be unfounded, however. Especially if you are already on Office 365, SharePoint may be included in your plan.
 
 SharePoint was designed as a framework to create and share content on the web without the need to write code. Its purpose was to allow everyone in the organization to collaborate without any specific programming skills. This framework grew over time, adding many different types of content allowing for interactions with other frameworks increasing the effectiveness of any organization’s work product or intellectual property and communications.
 
@@ -19,11 +19,11 @@ There are two ‘flavors’ of SharePoint. You can use Microsoft’s cloud-based
 
 On the other hand, on-premises SharePoint Server licensing is very expensive, especially if you wish to design for high availability and create a well-balanced SharePoint server farm. This requires CALs (Client Access Licenses) as well. But the cloud licensing model is very attractive in pricing, especially if you are planning to move your organization’s Exchange email into the Office 365 offering because SharePoint licensing is included in the top two Business tiers and all the Enterprise licensing plans.
 
-Over the years I have helped many small- to medium-sized businesses create their intranets using both on-prem SharePoint servers and the SharePoint Online offering, mostly to leverage document management features and their content search capabilities. SharePoint is very good at indexing all Microsoft Office formats, data and metadata allowing for the inclusion of custom extended tags that can be applied to files and folders to further categorize them and make them easy to organize and find. It also indexes content and metadata from readable PDF format.
+Over the years I have helped many small- to medium-sized businesses create their intranets using both on-prem SharePoint servers and the SharePoint Online offering, mostly to leverage document management features and their content search capabilities. SharePoint is very good at indexing all Microsoft Office formats, data and metadata, allowing for the inclusion of custom extended tags that can be applied to files and folders to further categorize them and make them easy to organize and find. It also indexes content and metadata from readable PDF format.
 
 Because the environment is highly customizable or “brandable”, companies quickly expand on its use once they are introduced to its basic capabilities. I’m often surprised by how creative non-technical staff can be as they come up with new ways to use the platform.
 
-SharePoint is also a secure way to share documents on a variety of devices including mobile, via the web, leveraging Active Directory or SAML compliant single-sign on (SSO) services like OKTA, OneLogin, or Duo for authentication. The framework has its own content permission groups capabilities that are simple to manage without giving content-managers access to AD or auth servers. This framework is attractive because it provides, without much training, the ability for employees to create and share content with granular permissions, manage data and custom lists, and create individual web pages or entire sites within the Portal.
+SharePoint is also a secure way to share documents on a variety of devices including mobile, via the web, leveraging Active Directory or SAML compliant single-sign on (SSO) services like Okta, OneLogin, or Duo for authentication. The framework has its own content permission group capabilities that are simple to manage without giving content-managers access to AD or auth servers. This framework is attractive because it provides, without much training, the ability for employees to create and share content with granular permissions, manage data and custom lists, and create individual web pages or entire sites within the Portal.
 
 Let’s discuss SharePoint Sites. SharePoint allows users with permissions to create individual pages or entire “Team Sites” to organize and secure content with permissions that the site creator can define. The ability to create content and assign these permissions within the organization or with external partners or customers can be delegated by an administrator to team leaders who wish to control their own content. However, global administrators retain the control to secure the company’s data and intellectual property via built-in tools, policies, auditing, and alerts. There is also a reporting system for compliance reporting.
 
@@ -39,7 +39,7 @@ With all these out-of-the-box capabilities, SharePoint is perfect for intranet p
 
 All this functionality and capability sometimes intimidates some businesses. It would seem that you could easily overwhelm your users. To combat that, the whole system, at every level, allows users to “follow” content. This is functionality that has been in the platform since inception and is one of my favorite features. For every page, every site or component at any level, users have the ability to subscribe to content. You can follow with one click any document and be notified in your portal homepage or via notifications of actions taken or content changed. This means that you can allow people to be as connected as they feel they need to be. Nobody needs to suffer from information overload or out-of-control mobile notifications.
 
-If you are already a Microsoft Office 365 tenant, odds are you already have access to this incredible tool without any additional cost. How can you leverage this for your business? Visit the following content, or [contact us](/contact) at End Point for additional information.
+If you are already a Microsoft Office 365 subscriber, odds are you already have access to this incredible tool without any additional cost. How can you leverage this for your business? Visit the following content, or [contact us](/contact) at End Point for additional information.
 
 - [The SharePoint Community](https://techcommunity.microsoft.com/t5/sharepoint/ct-p/SharePoint)
 - [SharePoint Developer Network](https://developer.microsoft.com/en-us/sharepoint)

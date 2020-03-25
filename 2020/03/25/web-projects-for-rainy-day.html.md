@@ -9,11 +9,11 @@ gh_issue_number: 1609
 
 [Image](https://www.flickr.com/photos/yellowstonenps/32984582893/) by [Yellowstone NPS on Flickr](https://www.flickr.com/photos/yellowstonenps/)
 
-With the Coronavirus quarantine disrupting life for many of us, I thought I’d put together a list of things you can do with your website on a rainy day. These are things to keep your business moving even if you’re at home and some of your projects are stuck waiting on things to reopen. If you’re looking for some useful things to do to fill your days in the next few months, this post is for you:
+With the COVID-19 quarantine disrupting life for many of us, I thought I’d put together a list of things you can do with your website on a rainy day. These are things to keep your business moving even if you’re at home and some of your projects are stuck waiting on things to reopen. If you’re looking for some useful things to do to fill your days over the next few months, this post is for you!
 
 ### Major Version Updates
 
-Make a list of your entire stack, from OS to database to development frameworks. Note the current version and research the current supported versions. I find Wikipedia pages to be fairly reliable for this (e.g. [https://en.wikipedia.org/wiki/CentOS](en.wikipedia.org/wiki/CentOS)). Ok, so what things need to be updated, or will need to be in the next year? Start on those now and use some downtime to get ahead of your updates.
+Make a list of your entire stack, from OS to database to development frameworks. Note the current version and research the current supported versions. I find Wikipedia pages to be fairly reliable for this (e.g. [https://en.wikipedia.org/wiki/CentOS](https://en.wikipedia.org/wiki/CentOS)). Ok, so what things need to be updated, or will need to be in the next year? Start on those now and use some downtime to get ahead of your updates.
 
 #### Sample of a client’s stack review
 
@@ -31,7 +31,7 @@ Make a list of your entire stack, from OS to database to development frameworks.
     </thead>
     <tr>
       <td>CentOS</td>
-      <td>OS for ecommerce server</td>
+      <td>OS for e-commerce server</td>
       <td>7</td>
       <td>July 2014</td>
       <td>June 2024</td>
@@ -104,9 +104,9 @@ Make a list of your entire stack, from OS to database to development frameworks.
 
 ### Content Cleanup & SEO Review
 
-Everyone’s website gets cluttered with outdated content. Take a look at your pages, review, and update what needs to be changed. Pay attention to SEO concerns as you go through it. Make sure your content has headers, accurate keywords, and good meta-descriptions. Research SEO best practices if you need a refresher.
+Everyone’s website gets cluttered with outdated content. Take a look at your pages, review, and update what needs to be changed. Pay attention to search engine optimization (SEO) concerns as you go through it. Make sure your content has headers, accurate keywords, and good meta-descriptions. Research SEO best practices if you need a refresher.
 
-Nowadays, reducing repeated content has huge benefits for SEO so we recommend any content review includes a review of duplication. If you have a small site, you can go through your content and SEO manually. Larger projects can utilize some tools on the market (for example, [Siteliner](http://www.siteliner.com/) or [WPOptimize](https://wordpress.org/plugins/wp-optimize/).
+Nowadays, reducing repeated content has huge benefits for SEO so we recommend any content review includes a review of duplication. If you have a small site, you can go through your content and SEO manually. Larger projects can utilize tools on the market such as [Siteliner](http://www.siteliner.com/) or [WPOptimize](https://wordpress.org/plugins/wp-optimize/).
 
 While you’re taking a dive into content, don’t forget to review your Google Analytics and understand what content is being used and what isn’t. Google has added many new features to Analytics and Ads, so it’s a good idea to refresh yourself on the updated documentation and new features.
 
@@ -120,7 +120,7 @@ I wouldn’t be a good project manager if I didn’t throw this one in the list.
 
 ### Disaster Recovery Tests
 
-For anyone with business-critical infrastructure, you need to ensure you know how to get everything back up and running in the case of a major failure, either with on-prem or cloud hosting. Now’s a good time to clarify with your hosting vendor things like: What are your backups like? What is your disaster recovery plan? What is the timeline for recovering the application in the event of a major failure? If you can, take time to do a simulation and make sure all the pieces are there if they need to be. Simply said, we also need to test our backups in order to ensure that they actually work.
+For anyone with business-critical infrastructure, you need to ensure you know how to get everything back up and running in the case of a major failure, either with on-premises or cloud hosting. Now’s a good time to clarify with your hosting vendor things like: What are your backups like? What is your disaster recovery plan? What is the timeline for recovering the application in the event of a major failure? If you can, take time to do a simulation and make sure all the pieces are there if they need to be. Simply said, we also need to test our backups in order to ensure that they actually work.
 
 ### Redesign
 
@@ -146,9 +146,9 @@ Taking a few days to review your personal security and that of your application 
 
 Most of the time new features have higher priority than improving the performance of an existing system. It could be the right time to review core functionalities and list out the areas that need improvement in serving a better experience to customers by optimization. The areas can be focused on optimizing code, database queries, image size, data compression over network,  adding cache, CDN, and so on. We’ve been moving quite a few clients to the [Cloudflare](https://www.cloudflare.com/) DNS and CDN service and we’ve been really happy with it. Optimization work will definitely influence the customer retention rate which helps to increase profitability long term.
 
-### Refactoring:
+### Refactoring
 
-Along the same likes as optimization, code refactoring can have some long term gains in performance and ease of future development. Think of this like house cleaning. It is always easy and time saving to find any item in the house when things are properly arranged in a manner. Similarly the organized and generalized clean code base will play a vital role on future code changes and development to reduce the chances of unexpected bugs, save time making changes at one place and co-workers readability on code. The disciplined refactoring delivers readable, reusable, non-redundant capabilities. The refactoring can be applied to the database and user interface as well.
+Along the same lines as optimization, code refactoring can have long term gains in performance and ease of future development. Think of this like house cleaning. It is always easier to find any item in the house when things are arranged in an orderly manner. Similarly, the organized and clean code base will play a vital role in future code changes and development, helping to reduce the chances of unexpected bugs, save time making changes at one place and improving code readability. Disciplined refactoring delivers readable, reusable, non-redundant code. Refactoring can be applied to your databases and user interfaces as well.
 
 Want to get started on some background projects for your website? [Talk to us today](/contact).
 
