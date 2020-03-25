@@ -28,8 +28,9 @@ All tests return boolean true or false unless otherwise noted.
 <style>
 tr { background: #f1f1f1 !important; }
 </style>
+<div class="table-scroll">
 <table>
-<tbody><tr>
+<tr>
 <th>Test</th>
 <th>bash/ksh/zsh</th>
 <th>Perl</th>
@@ -37,6 +38,7 @@ tr { background: #f1f1f1 !important; }
 <th>Python</th>
 </tr>
 
+<tbody>
 <tr>
 <td rowspan="2">File is readable by effective uid/gid</td>
 <td rowspan="2"></td>
@@ -431,7 +433,7 @@ tr { background: #f1f1f1 !important; }
 <td>os.stat('file1').st_mtime == os.stat('file2').st_mtime</td>
 </tr>
 
-</tbody></table>
+</tbody></table></div>
 
 Complete details are in the manuals for each language:
 

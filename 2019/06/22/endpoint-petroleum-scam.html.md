@@ -1,5 +1,5 @@
 ---
-title: "SCAM ALERT: EndPoint Petroleum Corporation"
+title: "SCAM ALERT: EndPoint Petroleum Corporation, P&amp;Z Petroleum"
 author: Benjamin Goldstein
 gh_issue_number: 1530
 tags: scam, security
@@ -50,3 +50,24 @@ Below are several attachments that have been forwarded to us by one of their int
   </tr>
 </table>
 
+### December 2019 Update: P&amp;Z Petroleum
+
+Several potential victims have informed us that the scammers have begun using another name, P&amp;Z Petroleum or PZ Petroleum, signing letters with:
+
+Mr. Gary Mason<br>
+Human Resource Manager<br>
+3422 San Felipe Street<br>
+Houston, TX 77056-2723<br>
+United States<br>
+hr.department@pzpetroleum.com
+
+Contact Person: Mr. Kris Clark<br>
+STAR TRAVELS AGENCY<br>
+2400 Augusta Dr<br>
+Houston, TX 77057, USA<br>
+Phone Number: +1 832-861-1505<br>
+Email: kris.clark@startravelsagency.com
+
+They are also trying to lure medical doctors and nurses, in addition to various management and engineering roles.
+
+**If they have contacted you, run away and report them to the authorities!**

@@ -27,6 +27,7 @@ See the charts below to learn when service will end for various versions of Wind
 
 * * * * *
 
+<div class="table-scroll">
 <table>
 <thead><tr><th>OS version</th><th>Date of availability</th><th>End of service for Home, Pro, and Pro for Workstation Editions</th><th>End of service for Enterprise and Education Editions</th></tr></thead><tbody>
  <tr><td>Windows&nbsp;10, version 1809</td><td>November 13, 2018</td><td>May 12, 2020</td><td>May 11, 2021</td></tr>
@@ -37,6 +38,7 @@ See the charts below to learn when service will end for various versions of Wind
  <tr><td>Windows&nbsp;10, version 1511</td><td>November 10, 2015</td><td>October 10, 2017</td><td>October 10, 2017</td></tr>
  <tr><td>Windows&nbsp;10, released July 2015 (version 1507)</td><td>July 29, 2015</td><td>May 9, 2017</td><td>May 9, 2017</td></tr>
 </tbody></table>
+</div>
 
 ### Enterprise LTSC/​LTSB Editions
 
@@ -44,12 +46,14 @@ See the charts below to learn when service will end for various versions of Wind
 
 Windows&nbsp;10 LTSC/​LTSB editions also follow the Fixed Lifecycle policy. To learn more, see [Microsoft Business, Developer and Desktop Operating Systems Policy](https://support.microsoft.com/en-us/help/14085).
 
+<div class="table-scroll">
 <table>
 <thead><tr><th>OS version</th><th>Date of availability</th><th>Mainstream support end date</th><th>Extended support end date</th></tr></thead><tbody>
  <tr><td>Windows&nbsp;10 Enterprise LTSC 2019 / Windows&nbsp;10 IoT Enterprise LTSC 2019</td><td>November 13, 2018</td><td>January 9, 2024</td><td>January 9, 2029</td></tr>
  <tr><td>Windows&nbsp;10 Enterprise 2016 LTSB / Windows&nbsp;10 IoT Enterprise 2016 LTSB</td><td>August 2, 2016</td><td>October 12, 2021</td><td>October 13, 2026</td></tr>
  <tr><td>Windows&nbsp;10 Enterprise 2015 LTSB / Windows&nbsp;10 IoT Enterprise 2015 LTSB</td><td>July 29, 2015</td><td>October 13, 2020</td><td>October 14, 2025</td></tr>
 </tbody></table>
+</div>
 
 Note: Not all features in an update will work on all devices. A device may not be able to receive updates if the device hardware is incompatible, lacks current drivers, or is otherwise outside the original equipment manufacturer’s (OEM) support period.
 
@@ -61,11 +65,13 @@ For more information on the Windows&nbsp;10 lifecycle, see [Windows&nbsp;10 Clie
 
 Prior releases of the Windows operating system are likewise governed by the Fixed Lifecycle Policy. This policy comprises two phases: mainstream support and extended support. See [Microsoft Business, Developer and Desktop Operating Systems Policy](https://support.microsoft.com/en-us/help/14085) for more details.
 
+<div class="table-scroll">
 <table>
 <thead><tr><th>OS version</th><th>End of mainstream support</th><th>End of extended support</th></tr></thead><tbody>
  <tr><td>Windows&nbsp;8.1</td><td>January 9, 2018</td><td>January 10, 2023</td></tr>
  <tr><td>Windows&nbsp;7, service pack 1*</td><td>January 13, 2015</td><td>January 14, 2020</td></tr>
 </tbody></table>
+</div>
 
 \* Support for Windows&nbsp;7 RTM without service packs ended on April 9, 2013. Be sure to install [Windows&nbsp;7 Service Pack 1](https://support.microsoft.com/en-us/help/15090) to continue to receive support and updates.
 

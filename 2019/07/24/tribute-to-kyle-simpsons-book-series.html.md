@@ -1,7 +1,7 @@
 ---
 author: "Árpád Lajos"
 title: "A tribute to Kyle Simpson’s JavaScript book series"
-tags: javascript, books, programming
+tags: javascript, books, development
 gh_issue_number: 1524
 ---
 

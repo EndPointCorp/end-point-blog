@@ -35,7 +35,7 @@ Yesterday, I tried **Google Hangouts** with a friend from my Windows laptop. I w
 
 ### Other Stuff
 
-[Jon](/team/jon_jensen) mentioned that the Android app for Google+ is nice. I haven’t examined Sparks much, but it is similar to sharing in Facebook. I also just read that the iPhone app for Google+ is on it’s way (from a Google+ contact). Finally, I’d consider shifting my photo backups from Flickr to Picasa if future Picasa updates justify the switch, which would allow me to easily share and tag photos, as well as back-up those 2-3 MB photos!
+[Jon](/team/jon_jensen) mentioned that the Android app for Google+ is nice. I haven’t examined Sparks much, but it is similar to sharing in Facebook. I also just read that the iPhone app for Google+ is on its way (from a Google+ contact). Finally, I’d consider shifting my photo backups from Flickr to Picasa if future Picasa updates justify the switch, which would allow me to easily share and tag photos, as well as back-up those 2-3 MB photos!
 
 ### Conclusion
 

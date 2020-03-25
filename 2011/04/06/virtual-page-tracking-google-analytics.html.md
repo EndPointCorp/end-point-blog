@@ -102,12 +102,8 @@ You can also compare regular segments of traffic: e.g. users that found your sit
 
 You can compare advanced segments of visitors: e.g. marketing campaign #1 versus marketing campaign #2. This type of comparison may give you more actionable metrics to determine which marketing campaign to put more resources into.
 
-
-
 <a href="/blog/2011/04/06/virtual-page-tracking-google-analytics/image-3-big.png" onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5592103553415454706" src="/blog/2011/04/06/virtual-page-tracking-google-analytics/image-3.png" style="display:block; margin:0px auto 10px; text-align:center;cursor:pointer; cursor:hand;width: 750px; height: 289px;"/></a>
 
 Last but not least, you can visualize the funnel of conversion to see where you might be losing customers. This might also be actionable in that you may be able to A/B test checkout process (or another type of conversion) changes to improve conversion.
 
 <a href="/blog/2011/04/06/virtual-page-tracking-google-analytics/image-4-big.jpeg" onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5592478865317278466" src="/blog/2011/04/06/virtual-page-tracking-google-analytics/image-4.jpeg" style="display:block; margin:0px auto 10px; text-align:center;cursor:pointer; cursor:hand;width: 750px; height: 548px;"/></a>
-
-

@@ -2,10 +2,8 @@
 author: Matt Galvin
 gh_issue_number: 1071
 tags: ecommerce, rails, spree
-title: 'Spree Commerce “invalid value for Integer(): \"09\"” in Spree::Checkout/update'
+title: "Spree Commerce “invalid value for Integer(): \"09\"” in Spree​::Checkout​/update"
 ---
-
-
 
 Hello again all. I like to monitor the orders and exceptions of the Spree sites I work on to ensure everything is working as intended. One morning I noticed an unusual error: “invalid value for Integer(): \"09\"” in Spree::Checkout/update on a Spree 2.1.x site.
 
