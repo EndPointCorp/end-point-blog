@@ -33,8 +33,8 @@ var fs = require('fs');
 var path = require('path');
 
 run();
-async function run(){
-   //salesforce code goes here...
+async function run() {
+    // salesforce code goes here...
 }
 ```
 
@@ -44,24 +44,26 @@ I usually store my Salesforce credentials and instance URL as a JSON object in a
 
 ```json
 {
-   "username": [your username],
-   "password": [your password],
-   "url": "https://na111.salesforce.com"
+    "username": [your username],
+    "password": [your password],
+    "url": "https://na111.salesforce.com"
 }
 ```
 
 To connect to Salesforce simply retrieve the credentials from the file and use them with the JSforce Connection class to login. Be sure to wrap all JSforce code in a try-catch block, to catch any errors coming back from Salesforce.
 
 ```javascript
-let creds = JSON.parse(fs.readFileSync(path.resolve(__dirname,'./salesforce-creds.json')).toString());
-let conn = new jsforce.Connection({ loginUrl : creds.url });
+let creds = JSON.parse(fs.readFileSync(path.resolve(__dirname, './salesforce-creds.json')).toString());
+let conn = new jsforce.Connection({
+    loginUrl: creds.url
+});
 try {
-   await conn.login(creds.username, creds.password);
-   console.log('Connected to Salesforce!');
-   //now you can use conn to read/write data...
-   await conn.logout();
+    await conn.login(creds.username, creds.password);
+    console.log('Connected to Salesforce!');
+    // now you can use conn to read/write data...
+    await conn.logout();
 } catch (err) {
-   console.error(err);
+    console.error(err);
 }
 ```
 
@@ -80,16 +82,20 @@ let cooper = accounts.records
     .filter(x => x.Name === 'Twin Peaks Sheriff Dept.')[0].Contacts.records
     .filter(y => y.FirstName === 'Dale' && y.LastName === 'Cooper')[0];
 console.log(cooper);
-//Console output:
-// { attributes:
-//     { type: 'Contact',
-//       url: '/services/data/v42.0/sobjects/Contact/0033h000001sDzDAAU' },
-//    Id: '0033h000001sDzDAAU',
-//    FirstName: 'Dale',
-//    LastName: 'Cooper',
-//    Email_Verified__c: true,
-//    Enrollment_Status__c: 'Pending'
-//  }
+
+// Console output:
+// {
+//     attributes: {
+//         type: 'Contact',
+//         url: '/services/data/v42.0/sobjects/Contact/0033h000001sDzDAAU'
+//     },
+//     Id: '0033h000001sDzDAAU',
+//     FirstName: 'Dale',
+//     LastName: 'Cooper',
+//     Email_Verified__c: true,
+//     Enrollment_Status__c: 'Pending'
+// }
+
 cooper.Enrollment_Status__c = 'Accepted';
 let ret = await conn.sobject('Contact').update(cooper);
 if (ret.success) {
@@ -109,16 +115,19 @@ The record limit for standard promise-style SOQL querying, as in our example abo
 let contacts = [];
 let soql = 'SELECT Id, FirstName, LastName, Email_Verified__c, Enrollment_Status__c from Contact';
 let query = await conn.query(soql)
-.on("record", (record) => {
-    contacts.push(record);
-})
-.on("end", async () => {
-    console.log(`Fetched Contacts. Total records fetched: ${contacts.length}`);
-})
-.on("error", (err) => {
-  console.error(err);
-})
-.run({ autoFetch : true, maxFetch : 5000 });
+    .on("record", (record) => {
+        contacts.push(record);
+    })
+    .on("end", async () => {
+        console.log(`Fetched Contacts. Total records fetched: ${contacts.length}`);
+    })
+    .on("error", (err) => {
+        console.error(err);
+    })
+    .run({
+        autoFetch: true,
+        maxFetch: 5000
+    });
 ```
 
 #### Loading Data with the Bulk API
@@ -134,21 +143,31 @@ Running a bulk operation is simple using the `bulk.load` method, which takes thr
 If you’re working with thousands of objects, it’s good to set the pollTimeout property manually to one minute or more, to avoid Salesforce connection timeouts. Also note that the possible values for operation type are: ‘insert’, ‘update’, ‘upsert’, ‘delete’, or ‘hardDelete’.
 
 ```javascript
-//set poll timeout to one minute for larger datasets
+// set poll timeout to one minute for larger datasets
 sfConnection.bulk.pollTimeout = 240000;
-//normally you will have thousands of Accounts, this is just an example
-let accounts = [
-    { Name: 'Saul Goodman, LLC' },
-    { Name: 'Los Pollos Hermanos Inc' },
-    { Name: 'Hamlin, Hamlin & McGill' }
+
+// normally you will have thousands of Accounts, this is just an example
+let accounts = [{
+        Name: 'Saul Goodman, LLC'
+    },
+    {
+        Name: 'Los Pollos Hermanos Inc'
+    },
+    {
+        Name: 'Hamlin, Hamlin & McGill'
+    }
 ];
-let results = await conn.bulk.load('Account','insert', accounts);
+let results = await conn.bulk.load('Account', 'insert', accounts);
 console.log(results);
+
 // Console output:
-// [ { id: '0013h000006bdd2AAA', success: true, errors: [] },
-// { id: '0013h000006bdd3AAA', success: true, errors: [] },
-// { id: '0013h000006bdd4AAA', success: true, errors: [] } ]
-if (accounts.length === results.filter(x => x.success).length){
+// [
+//     { id: '0013h000006bdd2AAA', success: true, errors: [] },
+//     { id: '0013h000006bdd3AAA', success: true, errors: [] },
+//     { id: '0013h000006bdd4AAA', success: true, errors: [] }
+// ]
+
+if (accounts.length === results.filter(x => x.success).length) {
     console.log('All account successfully loaded.');
 }
 ```
@@ -186,30 +205,32 @@ npm install socket.io
 Then delete the `run` function in your script.js file, which contained the code from the samples above, and replace it with the following:
 
 ```javascript
-async function run(){
-  //listen with express
-  server.listen(3000, function(){
-      console.log('listening on *:3000');
-  });
+async function run() {
+    // listen with express
+    server.listen(3000, function() {
+        console.log('listening on *:3000');
+    });
 
-  //connect to Salesforce
-  let creds = JSON.parse(fs.readFileSync(path.resolve(__dirname,'./salesforce-creds.json')).toString());
-  let conn = new jsforce.Connection({ loginUrl : creds.url });
-  try {
-      await conn.login(creds.username, creds.password);
-  } catch (err) {
-      console.error(err);
-  }
+    // connect to Salesforce
+    let creds = JSON.parse(fs.readFileSync(path.resolve(__dirname, './salesforce-creds.json')).toString());
+    let conn = new jsforce.Connection({
+        loginUrl: creds.url
+    });
+    try {
+        await conn.login(creds.username, creds.password);
+    } catch (err) {
+        console.error(err);
+    }
 
-  //when the client connects, emit streaming updates from salesforce to client
-  io.on("connection", (socket) => {
-     console.log('A socket connection was made!');
-     let eventHandler = (message) => {
-          console.log('New streaming event received from Salesforce:', message);
-          socket.emit('UserChange', message);
-      };
-     conn.streaming.topic('UserChange').subscribe(eventHandler);
-  });
+    // when the client connects, emit streaming updates from salesforce to client
+    io.on("connection", (socket) => {
+        console.log('A socket connection was made!');
+        let eventHandler = (message) => {
+            console.log('New streaming event received from Salesforce:', message);
+            socket.emit('UserChange', message);
+        };
+        conn.streaming.topic('UserChange').subscribe(eventHandler);
+    });
 }
 ```
 
@@ -225,10 +246,10 @@ If you follow the nice little [tutorial from Socket.IO](https://socket.io/get-st
 
 ```html
 <script>
-   var socket = io();
-   socket.on('UserChange', function(msg){
-     console.log(msg);
-   });
+    var socket = io();
+    socket.on('UserChange', function(msg) {
+        console.log(msg);
+    });
 </script>
 ```
 
