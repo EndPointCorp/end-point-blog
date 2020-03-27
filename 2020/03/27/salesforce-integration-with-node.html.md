@@ -2,18 +2,18 @@
 author: "Dylan Wooters"
 title: Salesforce Integration with Node.js
 tags: nodejs, javascript, integration
-gh_issue_number:
+gh_issue_number: 1612
 ---
 
 ![Patterned roof](/blog/2020/03/27/salesforce-integration-with-node/fulton-ceiling.jpg)
 
-<small>Photo by Dylan Wooters 2020</small>
+<small>Photo by Dylan Wooters, 2020</small>
 
-Salesforce is huge. It is currently the dominant CRM provider, accounting for [around 20%](https://www.forbes.com/sites/louiscolumbus/2019/06/22/salesforce-now-has-over-19-of-the-crm-market/#75a6cdf9333a) of market share. Businesses are using Salesforce not only as a traditional customer relationship management (CRM) solution, but also for novel purposes. Salesforce can serve as a backend database and admin portal for custom apps, or as a reporting tool that pulls data from various systems.
+Salesforce is huge. It is currently the dominant customer relationship management (CRM) provider, accounting for [around 20%](https://www.forbes.com/sites/louiscolumbus/2019/06/22/salesforce-now-has-over-19-of-the-crm-market/#75a6cdf9333a) of market share. Businesses are using Salesforce not only as a traditional CRM solution, but also for novel purposes. Salesforce can serve as a backend database and admin portal for custom apps, or as a reporting tool that pulls data from various systems.
 
-This growth leads to increasing demand for Salesforce integrations. The term “Salesforce integration” may conjure up images of expensive enterprise software or dense API documentation, but it doesn’t have to be that way. You can work with Salesforce easily using Node.js and the npm package [JSforce](https://jsforce.github.io/). An example of a project that might benefit from this kind of Node.js integration is an ecommerce website, where order data is loaded to and from Salesforce for order fulfillment, tracking, and reporting.
+This growth leads to increasing demand for Salesforce integrations. The term “Salesforce integration” may conjure up images of expensive enterprise software or dense API documentation, but it doesn’t have to be that way. You can work with Salesforce easily using Node.js and the npm package [JSforce](https://jsforce.github.io/). An example of a project that might benefit from this kind of Node.js integration is an e-commerce website where order data is loaded to and from Salesforce for order fulfillment, tracking, and reporting.
 
-In this post we’ll cover how to connect to Salesforce using JSforce, the basics of reading and writing data, as well as some advanced topics like working with large amounts of data and streaming data with Socket.IO.
+In this post we’ll cover how to connect to Salesforce using JSforce, the basics of reading and writing data, as well as some advanced topics like working with large amounts of data and streaming data with [Socket.IO](https://socket.io/).
 
 ### Setting Up
 
@@ -38,7 +38,7 @@ async function run(){
 }
 ```
 
-###Connecting to Salesforce
+### Connecting to Salesforce
 
 I usually store my Salesforce credentials and instance URL as a JSON object in a separate file, which I gitignore. This ensures that sensitive data does not appear in Git. Below is the content of my salesforce-creds.json file. You’ll want to add your Salesforce username and password and update the instance URL, if necessary.
 
@@ -101,7 +101,7 @@ if (ret.success) {
 
 You may need to read and write large amounts of data, for example if you are using Salesforce for reporting and loading data to and from other systems.
 
-### Event-driven Querying
+#### Event-driven Querying
 
 The record limit for standard promise-style SOQL querying, as in our example above, is 2000 records. To query more than that, it is best to shift to the event-driven style of querying. This will ensure that all records are successfully retrieved from Salesforce. You can use the `maxFetch` property to set the upper limit of records returned. By default, `maxFetch` is set to 10,000.
 
@@ -121,7 +121,7 @@ let query = await conn.query(soql)
 .run({ autoFetch : true, maxFetch : 5000 });
 ```
 
-### Loading Data with the Bulk API
+#### Loading Data with the Bulk API
 
 Loading a large amount of data into Salesforce is best accomplished through the [Bulk API](https://jsforce.github.io/document/#bulk-api) via JSforce. There are a couple good reasons for this approach.
 
