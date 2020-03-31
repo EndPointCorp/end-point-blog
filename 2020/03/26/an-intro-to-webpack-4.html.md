@@ -222,7 +222,7 @@ You should be able to open up the page in your browser and marvel at what we’v
 
 ### The other problem that webpack solves
 
-Ok, we’ve made a great accomplishment here. We’ve managed to leverage webpack to write modular JavaScript. The importance of this cannot be understated. However, webpack offers us much more. Another problem that has historically plagued front-end web development is compatibility across multiple browsers. webpack helps us with that as well via loaders.
+Ok, we’ve made a great accomplishment here. We’ve managed to leverage webpack to write modular JavaScript. The importance of this should not be understated. However, webpack offers us much more. Another problem that has historically plagued front-end web development is compatibility across multiple browsers. webpack helps us with that as well via loaders.
 
 ### Concept: Loaders
 
