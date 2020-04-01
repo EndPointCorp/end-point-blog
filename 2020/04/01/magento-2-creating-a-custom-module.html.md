@@ -28,7 +28,7 @@ Where should the new directory for our module be placed? We have two options to 
 
 If your module is intended for a specific website you're working on, you can use the first option. But if you're creating a module with the intention of it being reused on several websites, it would be best to choose the second option. For this example, let's just choose the first one.
 
-So let's create a directory named `EndPoint` and a subdirectory inside it, `MyModule`, using the command line:
+Let's create a directory named `EndPoint` (our vendor name) and a subdirectory inside it, `MyModule`, using the command line:
 
 ```bash
 cd {website_root}
@@ -39,7 +39,7 @@ mkdir app/code/EndPoint/MyModule
 #### Creating the registration.php script
 
 The `registration.php` file’s purpose is to tell Magento to register the new module under a specific name and location.
-So we will create a file named `app/code/EndPoint/MyModule/registration.php` with the folllowing content:
+We will need to create a file named `app/code/EndPoint/MyModule/registration.php` with the folllowing content:
 
 ```php
 <?php
@@ -50,7 +50,7 @@ So we will create a file named `app/code/EndPoint/MyModule/registration.php` wit
 );
 ```
 
-So we are telling Magento that our module will be named EndPoint_MyModule.
+We are telling Magento that our module will be named EndPoint_MyModule.
 
 #### Creating the etc/module.xml information file
 
@@ -82,7 +82,7 @@ Magento will output a list of module names and configuration updates, and our ne
 
 ### Adding a custom route to our module
 
-We have a working, enabled module, but it's not doing anything at all! So what would be a simple thing for us to check that our module is enabled? We can set up a custom route, so if we hit an URL like `https://{our_website}/mymodule/test/helloworld` we can return a custom response from a controller.
+We have a working, enabled module, but it's not yet doing anything at all! So what would be a simple thing for us to check that our module is enabled? We can set up a custom route, so if we hit an URL like `https://{our_website}/mymodule/test/helloworld` we can return a custom response from a controller.
 
 Creating a custom route will need some steps on its own:
 
