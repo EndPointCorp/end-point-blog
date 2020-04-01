@@ -6,9 +6,9 @@ tags: magento, php, ecommerce
 
 <img src="magento-2-creating-a-custom-module/bridge-wires.jpg" alt="Bridge with wires" /> [Photo](https://unsplash.com/photos/q4ZBGVzJskE) by [Babatunde Olajide](https://unsplash.com/@olajidetunde), cropped form original
 
-<b>What is a Magento module?</b> It's a set of classes and routines that will depend and interact with other Magento classes in order to add a specific feature to a Magento application. While a theme is orientated towards the front-end and user experience, a module is orientated towards the backend logic and the business flow.
+<b>What is a Magento module?</b> It's a set of classes and routines that will depend and interact with other Magento classes in order to add a specific feature to a Magento application. While a <a href="https://devdocs.magento.com/guides/v2.3/frontend-dev-guide/themes/theme-overview.html" target="_blank">theme</a> is orientated towards the front-end and user experience, a <a href="https://devdocs.magento.com/guides/v2.3/architecture/archi_perspectives/components/modules/mod_intro.html" target="_blank">module</a> is orientated towards the backend logic and the application flow.
 
-We will need to create a custom module if we need to add or change the existing business logic at a level where Magento doesn’t provide a setting or option for it. For example, if our business has a specific feature or set of features that are not common to the market.
+We will need to create a custom module if we need to add or change the existing logic at a level where Magento doesn’t provide a setting or option for it. For example, if our business has a specific feature or set of features or requirements that are not common to the market.
 
 ### Creating a basic Magento 2 module
 
