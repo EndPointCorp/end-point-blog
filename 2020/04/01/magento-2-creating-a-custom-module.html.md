@@ -10,9 +10,9 @@ tags: magento, php, ecommerce
 
 We will need to create a custom module if we need to add or change the existing business logic at a level where Magento doesn’t provide a setting or option for it. For example, if our business has a specific feature or set of features that are not common to the market.
 
-### Creating a basic Magento module
+### Creating a basic Magento 2 module
 
-Luckily, creating a simple Magento 2 module is not that hard. We will need to accomplish the following tasks:
+Creating a simple module in Magento 2 is not that hard. We will need to accomplish the following tasks:
 
 * Creating a new directory for the module
 * Creating the registration.php script
@@ -38,7 +38,7 @@ mkdir app/code/EndPoint/MyModule
 
 #### Creating the registration.php script
 
-The registration.php file’s purpose is to tell Magento to register the new module under a specific name and location.
+The `registration.php` file’s purpose is to tell Magento to register the new module under a specific name and location.
 So we will create a file named `app/code/EndPoint/MyModule/registration.php` with the folllowing content:
 
 ```php
@@ -78,7 +78,7 @@ That's it! We have everything we need to install our new module. Now, we need to
 php bin/magento setup:upgrade
 ```
 
-Magento will output a bunch of module names and configuration updates, and our new module `EndPoint_MyModule` should be listed within that output.
+Magento will output a list of module names and configuration updates, and our new module `EndPoint_MyModule` should be listed within that output.
 
 ### Adding a custom route to our module
 
@@ -87,7 +87,7 @@ We have a working, enabled module, but it's not doing anything at all! So what w
 Creating a custom route will need some steps on its own:
 
 * Creating a new directory for the controller
-* Creating the etc/routes.xml file
+* Creating the `etc/routes.xml` file
 * Creating the controller
 * Upgrading the new module
 
