@@ -1,7 +1,7 @@
 ---
 author: "Josh Williams"
 title: "Camping in the Clouds with Terraform and Ansible"
-tags: camps, cloud, development
+tags: camps, cloud, development, terraform, ansible
 gh_issue_number: 1491
 ---
 

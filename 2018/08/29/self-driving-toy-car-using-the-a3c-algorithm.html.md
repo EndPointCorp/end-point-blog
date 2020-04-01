@@ -20,7 +20,7 @@ gh_issue_number: 1450
 </style>
 
 <center>
-  <video width="100%" controls poster="poster.png">
+  <video width="100%" controls poster="/blog/2018/08/29/self-driving-toy-car-using-the-a3c-algorithm/poster.png">
     <source src="/blog/2018/08/29/self-driving-toy-car-using-the-a3c-algorithm/892-openaigym.video.90.68.video000000.mp4" type="video/mp4">
   </video>
 </center>
@@ -771,19 +771,19 @@ Instead of presenting hard-core statistics about the model’s performance — w
 Have fun watching and even more fun coding it yourself too!
 
 <center>
-  <video width="100%" controls poster="poster.png">
+  <video width="100%" controls poster="/blog/2018/08/29/self-driving-toy-car-using-the-a3c-algorithm/poster.png">
     <source src="/blog/2018/08/29/self-driving-toy-car-using-the-a3c-algorithm/873-openaigym.video.92.68.video000000.mp4" type="video/mp4">
   </video>
 </center>
 
 <center>
-  <video width="100%" controls poster="poster.png">
+  <video width="100%" controls poster="/blog/2018/08/29/self-driving-toy-car-using-the-a3c-algorithm/poster.png">
     <source src="/blog/2018/08/29/self-driving-toy-car-using-the-a3c-algorithm/892-openaigym.video.90.68.video000000.mp4" type="video/mp4">
   </video>
 </center>
 
 <center>
-  <video width="100%" controls poster="poster.png">
+  <video width="100%" controls poster="/blog/2018/08/29/self-driving-toy-car-using-the-a3c-algorithm/poster.png">
     <source src="/blog/2018/08/29/self-driving-toy-car-using-the-a3c-algorithm/904-openaigym.video.77.68.video000000.mp4" type="video/mp4">
   </video>
 </center>

@@ -5,7 +5,7 @@ tags: optimization, postgres, testing
 title: Speeding Up Integration Tests with PostgreSQL - Follow Up
 ---
 
-Last week I wrote a blog article about [speeding up integration tests using PostgreSQL](speeding-up-integration-tests-with.html). I proposed there changing a couple of PostgreSQL cluster settings. The main drawback of this method is that those settings need to be changed for the whole cluster. When you have some important data in other databases, you can have a trouble.
+Last week I wrote a blog article about [speeding up integration tests using PostgreSQL](/blog/2012/06/22/speeding-up-integration-tests-postgresql). I proposed there changing a couple of PostgreSQL cluster settings. The main drawback of this method is that those settings need to be changed for the whole cluster. When you have some important data in other databases, you can have a trouble.
 
 In one of the comments Greg proposed using the unlogged table. This feature appeared in PostgreSQL 9.1. The whole difference is that you should use CREATE UNLOGGED TABLE instead of CREATE TABLE for creating all your tables.
 
@@ -16,12 +16,12 @@ All the things I describe here are for integrations tests. When database crashes
 The bad thing about unlogged tables is that you cannot change normal table to unlogged. There is nothing like:
 
 ```sql
-ALTER TABLE SET UNLOGGED
+ALTER TABLE SET UNLOGGED;
 ```
 
 The easiest way which I found for changing the table into unlogged was to create a database dump and add UNLOGGED to all the table creation commands. To have it a little bit faster, I used this command:
 
-```shell
+```bash
 pg_dump pbench | sed 's/^CREATE TABLE/CREATE UNLOGGED TABLE/' > pbench.dump.sql
 ```
 
