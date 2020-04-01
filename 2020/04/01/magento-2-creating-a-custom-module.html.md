@@ -26,7 +26,7 @@ Where should the new directory for our module be placed? We have two options to 
 * `app/code/{vendor}/`
 * `vendor/{vendor}/`
 
-If your module is intended for a specific website you're working on, you can use the first option. But if you're creating a module with the intention of it being reused on several websites, it would be best to choose the second option. From now on, let's suppose we chose the first one.
+If your module is intended for a specific website you're working on, you can use the first option. But if you're creating a module with the intention of it being reused on several websites, it would be best to choose the second option. For this example, let's just choose the first one.
 
 So let's create a directory named `EndPoint` and a subdirectory inside it, `MyModule`, using the command line:
 
