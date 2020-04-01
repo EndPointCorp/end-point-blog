@@ -171,4 +171,4 @@ This process can take some minutes to complete, but after it's done we can try t
 
 That will mean our module is working!
 
-And that's all for now. In the next posts, we'll start complicating things a bit by overriding Magento classes with our custom ones or creating custom controllers that will return information from the Magento core classes. And don't forget to add any questions, suggestions or issues below!
+And that's all for now. In the next posts, we'll start complicating things a bit by overriding Magento classes with our custom ones or creating custom controllers that will return information from the Magento core classes. We will also explore how to customize the front-end by creating a theme. And don't forget to add any questions, suggestions or issues below!
