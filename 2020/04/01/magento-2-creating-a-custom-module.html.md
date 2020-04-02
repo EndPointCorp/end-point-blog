@@ -9,9 +9,9 @@ gh_issue_number: 1615
 
 [Photo](https://unsplash.com/photos/q4ZBGVzJskE) by [Babatunde Olajide](https://unsplash.com/@olajidetunde), cropped from original
 
-Magento modules are a set of classes and routines that will depend on and interact with other Magento classes in order to add a specific feature to a Magento application. While a [theme](https://devdocs.magento.com/guides/v2.3/frontend-dev-guide/themes/theme-overview.html) is orientated towards the front-end and user experience, a [module](https://devdocs.magento.com/guides/v2.3/architecture/archi_perspectives/components/modules/mod_intro.html) is orientated towards backend logic and application flow.
+A Magento module is a set of classes and routines that will depend on and interact with other Magento classes in order to add a specific feature to a Magento application. While a [theme](https://devdocs.magento.com/guides/v2.3/frontend-dev-guide/themes/theme-overview.html) is orientated towards the front-end and user experience, a [module](https://devdocs.magento.com/guides/v2.3/architecture/archi_perspectives/components/modules/mod_intro.html) is orientated towards backend logic and application flow.
 
-We will need to create a custom module if we want to add or change the existing logic at a level where Magento doesn’t provide a setting or option for it. For example, if our business has a specific feature or set of features or requirements that are not common to the market.
+We will need to create a custom module if we want to add or change the existing logic at a level where Magento doesn’t provide a setting or option for it. For example, if our business has a specific feature or set of features or requirements that are not common to the market, a module can fill that gap for us.
 
 ### Creating a basic Magento 2 module
 
@@ -29,9 +29,9 @@ Where should the new directory for our module be placed? We have two options to 
 - `app/code/{vendor}/`
 - `vendor/{vendor}/`
 
-If your module is intended for a specific website you’re working on, you can use the first option. But if you’re creating a module with the intention of it being used on several websites, it’s best to choose the second option. We’ll use the first for this example.
+If your module is intended for a specific website you’re working on, you can use the first option. If you’re creating a module with the intention of it being used on several websites, it’s best to choose the second option. We’ll use the first for this example.
 
-Let’s create a directory named `EndPoint` (our vendor name) and a subdirectory inside it, `MyModule`:
+Let’s create a directory named `EndPoint` (our vendor name) with a subdirectory inside it, `MyModule`:
 
 ```bash
 cd {website_root}
@@ -84,7 +84,7 @@ Magento will output a list of module names and configuration updates, and our ne
 
 ### Adding a custom route to our module
 
-Now we have a working, enabled module, but it’s not doing anything yet! So what’s a simple thing to check that our module is enabled? We can set up a custom route, so if we hit a URL like `https://{our_website}/mymodule/test/helloworld` we can return a custom response from a controller.
+Now we have a working, enabled module, but it’s not doing anything yet! What’s a simple way to check that our module is enabled? Let’s set up a custom route, so if we hit a URL like `https://{our_website}/mymodule/test/helloworld` we can return a custom response from a controller.
 
 Creating a custom route will need some steps on its own:
 
@@ -95,7 +95,7 @@ Creating a custom route will need some steps on its own:
 
 #### Creating a new directory for the controller
 
-First, we need to create a new directory where we will create the new PHP controller for our custom route. The new directory path should be:
+First, we need to create a new directory where the new PHP controller for our custom route will live. The new directory path should be:
 
 - `app/code/EndPoint/MyModule/Controller`
 
@@ -173,4 +173,4 @@ This process can take a few minutes to complete, but after it’s done we can tr
 
 That means our module is working!
 
-That’s all for now. In upcoming posts, we’ll start complicating things a bit by overriding Magento classes with our custom ones and creating custom controllers that will return information from the Magento core classes. We will also explore how to customize the front-end by creating a theme. Don’t forget to add any questions, suggestions or issues below!
+That’s all for now. In upcoming posts, we’ll start complicating things a bit by overriding Magento classes with our custom ones and creating custom controllers that will return information from the Magento core classes. We will also explore how to customize the front-end by creating a theme. Don’t forget to add any questions, suggestions or issues in the comments below!
