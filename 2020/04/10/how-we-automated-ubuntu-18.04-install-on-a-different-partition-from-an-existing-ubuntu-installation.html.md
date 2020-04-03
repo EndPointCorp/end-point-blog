@@ -4,8 +4,8 @@ title: How we automated Ubuntu-18.04 install on a different partition from an ex
 tags: Linux, ubuntu, update, open-source, sysadmin, DevOps, scalability, chef
 ---
 
-![Clean setup](/blog/2020/04/10/how-we-automated-ubuntu-18.04-install-on-a-different-partition-from-an-existing-ubuntu-installation/banner.jpg)
-Photo by [Patryk Grądys](https://unsplash.com/@patrykgradyscom) on [Unsplash](https://unsplash.com/photos/4pPzKfd6BEg)
+![Clean setup](how-we-automated-ubuntu-18.04-install-on-a-different-partition-from-an-existing-ubuntu-installation/banner.jpg)
+[Photo](https://unsplash.com/photos/4pPzKfd6BEg) by [Patryk Grądys](https://unsplash.com/@patrykgradyscom) on [Unsplash](https://unsplash.com)
 
 Our liquid Galaxy systems are running on the physical hardware with Ubuntu 14.04 LTS Operating systems and it’s located on the different remote locations.
 We decided to upgrade them to the Ubuntu 18.04 LTS as Ubuntu 14.04 LTS reaches the end of life on April 30, 2019
