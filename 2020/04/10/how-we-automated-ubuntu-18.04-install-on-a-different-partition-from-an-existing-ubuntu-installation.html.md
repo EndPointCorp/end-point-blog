@@ -1,6 +1,5 @@
-
 ---
-author: "Bharathi Ponnusamy"
+author: Bharathi Ponnusamy
 title: How we automated Ubuntu-18.04 install on a different partition from an existing Ubuntu installation
 tags: Linux, ubuntu, update, open-source, sysadmin, DevOps, scalability, chef
 ---
