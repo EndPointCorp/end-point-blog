@@ -80,9 +80,7 @@ org.quartz.jobStore.driverDelegateClass = org.quartz.impl.jdbcjobstore.PostgreSQ
 There are more occurrences in this file. Carefully do the necessary changes in all the places.
 
 - biserver-ee/pentaho-solutions/system/jackrabbit/repository.xml
-
 - biserver-ee/pentaho-solutions/system/jackrabbit/repository/workspaces/default/workspace.xml
-
 - biserver-ee/tomcat/webapps/pentaho/META-INF/context.xml
 
 ```xml
@@ -147,15 +145,13 @@ $ ./install_license.sh install ../license/Pentaho\ BI\ Platform\ Enterprise\ Edi
 
 Install plugins
 
-Archive mode of installation installs only BI Server. Necessary plugins can to be installed manually. Here install the plugins for reporting, analyzer and dashboard. Plugins are available at the same place where download BI server. Download these three files and place at any path on server
+Archive mode of installation installs only BI Server. Necessary plugins can to be installed manually. Here install the plugins for reporting, analyzer and dashboard. Plugins are available at the same place where download BI server. Download these three files and place at any path on server:
 
-Reporting—​pir-plugin-ee-5.x-dist.zip
+* Reporting—​pir-plugin-ee-5.x-dist.zip
+* Analyzer—​pdd-plugin-ee-5.0.0.1-dist.zip
+* Dashboard—​paz-plugin-ee-5.0.0.1-dist.zip
 
-Analyzer—​pdd-plugin-ee-5.0.0.1-dist.zip
-
-Dashboard—​paz-plugin-ee-5.0.0.1-dist.zip
-
-All the plugins installed through same procedure
+All the plugins installed through same procedure.
 
 - Unzip the plugins and navigate to extracted directory
 
@@ -165,13 +161,13 @@ All the plugins installed through same procedure
 $ java -jar installer.jar -console
 ```
 
-Lets start the BI server
+Let’s start the BI server
 
 ```bash
 biserver-ee$ ./start-pentaho.sh
 ```
 
-Install the licenses for the plugins by login as admin user (default—​Admin:password) or install through the command line
+Install the licenses for the plugins by login as admin user (default—​Admin:password) or install through the command line:
 
 Administration -> License -> install licenses for plugin by click +
 

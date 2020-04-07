@@ -1,15 +1,13 @@
 ---
 author: Jon Jensen
 gh_issue_number: 626
-tags: java, open-source, rails
+tags: java, open-source, rails, epitrax, ruby, development
 title: TriSano and Pentaho at our NYC company meeting
 ---
 
-
-
 Josh Tolley just spoke to us about the [TriSano](https://web.archive.org/web/20120723110816/http://www.trisano.com/) open source project he works on. It helps track and report on public health events, using data at least partly gathered from doctors following special legal reporting requirements to look for epidemics.
 
-<a href="https://www.flickr.com/photos/80083124@N08/7183675839/" title="IMG_0713.JPG by endpoint920, on Flickr"><img alt="IMG_0713.JPG" height="375" src="/blog/2012/06/13/trisano-and-pentaho-at-our-nyc-company/image-0.jpeg" width="500"/></a>
+<a href="https://www.flickr.com/photos/80083124@N08/7183675839/"><img alt="Josh Tolley speaking at End Point office" height="375" src="/blog/2012/06/13/trisano-and-pentaho-at-our-nyc-company/image-0.jpeg" width="500"/></a>
 
 A lot of this is about data warehousing. Public health officials collect a lot of data and want to easily report on it. Typically they use SPSS. Need to filter the data before doing analysis.
 
@@ -21,7 +19,7 @@ Pentaho is what we use for the query interface. To get done what we need to do, 
 
 Brian Buchalter then took over and delved more into the TriSano Rails side of the project.
 
-<a href="https://www.flickr.com/photos/80083124@N08/7368955894/" title="IMG_0717.JPG by endpoint920, on Flickr"><img alt="IMG_0717.JPG" height="500" src="/blog/2012/06/13/trisano-and-pentaho-at-our-nyc-company/image-1.jpeg" width="375"/></a>
+<a href="https://www.flickr.com/photos/80083124@N08/7368955894/"><img alt="Brian Buchalter speaking at End Point office" height="500" src="/blog/2012/06/13/trisano-and-pentaho-at-our-nyc-company/image-1.jpeg" width="375"/></a>
 
 Let’s talk about the challenge of maintaining Rails applications. Getting them to work today is fine. Getting them to be flexible and change over time is a challenge. The early benefit of Rails was organizational: Having empty directories to put things into. But starting to use standard classic object oriented patterns is finally happening more in Rails.
 
@@ -46,5 +44,3 @@ Refactoring needs to be built into the development cycle, or else we end up fore
 Comprehensive tests that take 75 minutes to run won’t get run by developers very often! The project automatically runs tests on check-in, but getting the result back takes too long. Would be good to speed up tests.
 
 Lots of good topics to follow up on here.
-
-

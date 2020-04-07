@@ -151,4 +151,3 @@ Most of the time new features have higher priority than improving the performanc
 Along the same lines as optimization, code refactoring can have long term gains in performance and ease of future development. Think of this like house cleaning. It is always easier to find any item in the house when things are arranged in an orderly manner. Similarly, the organized and clean code base will play a vital role in future code changes and development, helping to reduce the chances of unexpected bugs, save time making changes at one place and improving code readability. Disciplined refactoring delivers readable, reusable, non-redundant code. Refactoring can be applied to your databases and user interfaces as well.
 
 Want to get started on some background projects for your website? [Talk to us today](/contact).
-

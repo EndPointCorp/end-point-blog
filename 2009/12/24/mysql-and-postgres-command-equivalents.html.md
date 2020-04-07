@@ -5,8 +5,6 @@ tags: database, mysql, open-source, postgres, tips
 title: MySQL and Postgres command equivalents (mysql vs psql)
 ---
 
-
-
 Users toggling between MySQL and Postgres are often confused by the equivalent commands to accomplish basic tasks. Here’s a chart listing some of the differences between the command line client for MySQL (simply called **mysql**), and the command line client for Postgres (called **psql**).
 
 <table cellpadding="0" cellspacing="0" id="toggle" style="border: medium none ;"><tbody>
