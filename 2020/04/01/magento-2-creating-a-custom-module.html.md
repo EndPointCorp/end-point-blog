@@ -35,8 +35,7 @@ Let’s create a directory named `EndPoint` (our vendor name) with a subdirector
 
 ```bash
 cd {website_root}
-mkdir app/code/EndPoint
-mkdir app/code/EndPoint/MyModule
+mkdir -p app/code/EndPoint/MyModule
 ```
 
 #### Creating the registration.php script
@@ -56,7 +55,7 @@ We’re telling Magento that our module will be named EndPoint_MyModule.
 
 #### Creating the etc/module.xml information file
 
-Now, let’s create our module information file, where we’ll specify the module version number. First, we need to create the `etc` directory inside `app/code/EndPoint/MyModule`,
+Now, let’s create our module information file, where we’ll specify the module version number. First, we need to create the `etc` directory inside `app/code/EndPoint/MyModule`:
 
 ```bash
 mkdir app/code/EndPoint/MyModule/etc
@@ -95,9 +94,9 @@ Creating a custom route will need some steps on its own:
 
 #### Creating a new directory for the controller
 
-First, we need to create a new directory where the new PHP controller for our custom route will live. The new directory path should be:
+First we need to create a new directory where the new PHP controller for our custom route will live. The new directory path should be:
 
-- `app/code/EndPoint/MyModule/Controller`
+`app/code/EndPoint/MyModule/Controller`
 
 We can create as many directory levels we want, depending on our desired path. For example, if we create a class named `Index` in `app/code/EndPoint/MyModule/Controller`, the URL that will be routed to this controller will be `https://{our_website}/mymodule/index` (the “Controller” directory is ignored). If we create a class named `HelloWorld` in `app/code/EndPoint/MyModule/Controller/Test`, the resulting URL will be `https://{our_website}/mymodule/test/helloworld`.
 
@@ -127,8 +126,7 @@ In this example, we want the base URL to be `MyModule`, so we need to create an 
 If we want to respond to requests for `https://{our_website}/mymodule/test/helloworld` we first need to create the base `Controller` directory and the `Test` subdirectory:
 
 ```bash
-mkdir app/code/EndPoint/MyModule/Controller
-mkdir app/code/EndPoint/MyModule/Controller/Test
+mkdir -p app/code/EndPoint/MyModule/Controller/Test
 ```
 
 Under this directory, we’ll create our custom Magento controller. All route controllers should extend `\Magento\Framework\App\Action\Action`. We also need to have a public `construct()` method to pass the context to our ancestor and an `execute()` function that will be called when the URL is hit:
@@ -173,4 +171,4 @@ This process can take a few minutes to complete, but after it’s done we can tr
 
 That means our module is working!
 
-That’s all for now. In upcoming posts, we’ll start complicating things a bit by overriding Magento classes with our custom ones and creating custom controllers that will return information from the Magento core classes. We will also explore how to customize the front-end by creating a theme. Don’t forget to add any questions, suggestions or issues in the comments below!
+That’s all for now. In upcoming posts, we’ll start complicating things a bit by overriding Magento classes with our custom ones and creating custom controllers that will return information from the Magento core classes. We will also explore how to customize the front-end by creating a theme. Don’t forget to add any questions, suggestions, or issues in the comments below!

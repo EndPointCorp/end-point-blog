@@ -1,7 +1,7 @@
 ---
 author: "Kürşat Kutlu Aydemir"
 title: "Creating a Messaging App Using Spring for Apache Kafka, Part 1"
-tags: spring, java, frameworks
+tags: spring, java, frameworks, kafka
 gh_issue_number: 1619
 ---
 
@@ -26,13 +26,15 @@ I won’t address detailed configuration or adding dependencies of Spring and Ma
 
 ### Design and architecture
 
-Before adding the dependencies, including Kafka, we need to make a high level design of this simple project and figure out how to proceed with development. Messaging apps seem simple in view but the architecture behind them can be quite complex. There are different kinds of technology stacks you can pick and move. Which base protocol we choose (XMPP, SIP, or WebSocket) depends on what our app’s aim is. Sometimes multiple protocols can be used and interconnected to provide more features; XMPP is mostly used for chatting, SIP is designed for VoIP and media transfer. We’ll use WebSocket to communicate with Kafka over TCP.
+Before adding the dependencies, including Kafka, we need to make a high-level design of this simple project and figure out how to proceed with development. Messaging apps seem simple at first glance but the architecture behind them can be quite complex.
+
+There are different kinds of technology stacks you can choose from. Which base protocol we choose (XMPP, SIP, or WebSocket) depends on what our app’s aim is. Sometimes multiple protocols can be used and interconnected to provide more features; XMPP is mostly used for chatting, SIP is designed for VoIP and media transfer. We’ll use WebSocket to communicate with Kafka over TCP.
 
 By understanding the architectural model of Kafka, you’ll get an understanding of how Kafka is going to maintain most of the backend processes.
 
-Kafka, as I mentioned previously, is horizontally scalable, meaning that Kafka clusters can be increased to span several data sources. Basically, message producers and message consumers (all client messaging apps are both producers and consumers) are producing and consuming messages through Kafka topics.
+Kafka, as I mentioned previously, is horizontally scalable, and Kafka clusters can grow to span several data sources. Message producers and message consumers (all client messaging apps are both producers and consumers) produce and consume messages through Kafka topics.
 
-So, taking into account the principals for designing the architecture of such a client–server-based messaging app, here are the components and their communication directions:
+So, taking into account the principles for designing the architecture of such a client–server-based messaging app, here are the components and their communication directions:
 
 * Kafka Cluster
 * Spring Boot REST API, which will handle user authentication and login
