@@ -172,7 +172,8 @@ sed -i 's/GRUB_DEFAULT=.*/GRUB_DEFAULT="TRUSTY"/' /etc/default/grub
 update-grub
 ```
 
-#### On the target system(Bionic):
+#### On the target system (Bionic):
+
 Create the custom menu entry for Ubuntu 14.04 and Ubuntu 18.04 on the target system.
 
 ```bash
