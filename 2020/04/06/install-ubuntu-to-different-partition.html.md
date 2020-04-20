@@ -133,30 +133,32 @@ EOF
 
 ### Set Ubuntu 14.04 to boot default
 
-`cat 42_custom_template_trusty`
+Create file `42_custom_template_trusty`:
 
 ```bash
 #!/bin/sh
-#Entry for trusty system
+# Entry for trusty system
 menuentry 'TRUSTY' --class liquid --class gnu-linux --class gnu --class os {
-        <!— Skipped lines —>
+        # Skipped lines
         linux   /trusty/vmlinuz-$trusty_kernel_version root=/dev/mapper/headVG-root ro nomodeset biosdevname=0 modprobe.blacklist=gma500_gfx quiet
         initrd  /trusty/initrd.img-$trusty_kernel_version
 }
 ```
 
-`cat 42_custom_template_bionic`
+Create file `42_custom_template_bionic`:
 
 ```bash
+#!/bin/sh
 # Entry for bionic system
 menuentry 'BIONIC' --class liquid --class gnu-linux --class gnu --class os {
-        <!— Skipped lines —>
+        # Skipped lines
         linux   /vmlinuz-$bionic_kernel_version-generic root=/dev/mapper/headVG-root18 ro nomodeset net.ifnames=0 biosdevname=0 modprobe.blacklist=gma500_gfx quiet
         initrd  /initrd.img-$bionic_kernel_version-generic
 }
 ```
 
-#### On the Current system(trusty):
+#### On the Current system (Trusty):
+
 Back up the current Trusty kernel files into `/boot/trusty` and create a custom menu entry configuration for Ubuntu 14.04 on `42_custom_trusty`. Update `/etc/default/grub` to set Ubuntu 14.04 as the default menu entry and run `update-grub` to apply it to the current system. This will be used as a fail-safe method to run Trusty again if there is a problem with the new installation.
 
 ```bash
@@ -177,9 +179,9 @@ Create the custom menu entry for Ubuntu 14.04 and Ubuntu 18.04 on the target sys
 mkdir -p /mnt/root18/etc/grub.d
 envsubst '${trusty_kernel_version}' < 42_custom_template_trusty > /mnt/root18/etc/grub.d/42_custom_template_trusty
 envsubst '${bionic_kernel_version}' < 42_custom_template_bionic > /mnt/root18/etc/grub.d/42_custom_template_bionic
-chmod +x /mnt/root18/etc/grub.d/42_custom_template_trusty
-chmod +x /mnt/root18/etc/grub.d/42_custom_template_bionic
+chmod +x /mnt/root18/etc/grub.d/42_custom_template_{trusty,bionic}
 ```
+
 `chroot` into the target system and update `/etc/default/grub` to set Ubuntu 14.04 as the default menu entry and run `update-grub`. This will also update the GRUB configuration to boot Ubuntu 14.04 as default and update the 0th menu entry to Ubuntu 18.04 (Bionic).
 
 ```bash
