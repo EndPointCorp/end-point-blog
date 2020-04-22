@@ -13,7 +13,7 @@ I’ve worked on a couple of large React projects over the last few years. In my
 
 Libraries like Material-UI (which I’ll discuss next) do a lot of the work of styling for you. However, sometimes you’ll still need to define styles unique to your project, and the most common way is with CSS.
 
-For projects created with [create-react-app](https://github.com/facebook/create-react-app), any CSS you include in a React project isn’t scoped. This means that if you define a class `tall` in one component that has a height of 40 pixels and a class `tall` in another component with a height of 80 pixels, one of your rules will overwrite the other—whichever makes it into the compiled CSS file last. However, Webpack allows you to use CSS modules, which restrict your CSS rules to components that explicitly import them. It took me a long time to figure out how to use them due to lack of relevant documentation, but eventually I discovered a very easy way to do it.
+For projects created with [create-react-app](https://github.com/facebook/create-react-app), any CSS you include in a React project isn’t scoped. This means that if you define a class `tall` in one component that has a height of 40 pixels and a class `tall` in another component with a height of 80 pixels, one of your rules will overwrite the other—whichever makes it into the compiled CSS file last. However, webpack allows you to use CSS modules, which restrict your CSS rules to components that explicitly import them. It took me a long time to figure out how to use them due to lack of relevant documentation, but eventually I discovered a very easy way to do it.
 
 If your file structure looks like this:
 

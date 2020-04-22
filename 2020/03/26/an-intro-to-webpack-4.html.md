@@ -7,7 +7,7 @@ gh_issue_number: 1611
 
 ![Banner](/blog/2020/03/26/an-intro-to-webpack-4/banner.png)
 
-Image taken from [https://webpack.js.org/](https://webpack.js.org/)
+Image taken from [webpack.js.org](https://webpack.js.org/)
 
 I’ve got a confession to make: Even though I’ve developed many JavaScript-heavy, client side projects with complex build pipelines, I’ve always been somewhat confused by the engine that drives these pipelines under the hood: [webpack](https://webpack.js.org).
 

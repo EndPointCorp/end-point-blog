@@ -43,7 +43,7 @@ After testing direct access to the origin server via `/etc/hosts` modification, 
 
 The errors being generated were similar to errors I’d encountered before during development where the generated DOM in the SSR content was mismatched with the version of the client-side Vue application.
 
-One of the big differences here was that production was being served via Cloudflare (CF), however we had not run into any issues with stale versions (i.e., older versions of code being returned) and the like in the past. Our resources were stamped hashes via Webpack, so per-application version shouldn’t have been utilizing cached old versions of the generated resources in question.
+One of the big differences here was that production was being served via Cloudflare (CF), however we had not run into any issues with stale versions (i.e., older versions of code being returned) and the like in the past. Our resources were stamped hashes via webpack, so per-application version shouldn’t have been utilizing cached old versions of the generated resources in question.
 
 Because we could not really debug this issue on production and this was still just a theory that CF was the issue, we ended up setting up a development environment behind Cloudflare.
 
