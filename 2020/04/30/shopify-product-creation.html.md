@@ -66,4 +66,6 @@ The Sidekiq approach to queueing up all of the card uploads worked great; I was 
 
 ### Conclusion
 
-I was pleased with how this project turned out; it was rewarding to be able to create a custom application that leveraged several APIs and made it possible to automate a task that would have been extremely repetitive, and probably impossibly time-consuming, to do manually. It was really cool to do a successful push of a card for the first time and see it show up in Shopify with artwork, prices, and variant details all included.
+ A custom Ruby application using the Shopify API is a powerful solution for online storefronts that need to sell a large number of different products. I was pleased with how this project turned out; it was rewarding to create a custom application that leveraged several APIs and automated a task that would have been extremely repetitive, and probably impossibly time-consuming, to do manually. It was encouraging to do my first upload of a card and see it show up on the Shopify store with artwork, pricing, and card details pre-populated.
+
+ I think that the development model used for this project could be applied to stores in a wide variety of markets. This project used external APIs to retrieve product information but that data source could easily be replaced with a spreadsheet, CSV file, or some other export file containing bulk information on products to be sold.
