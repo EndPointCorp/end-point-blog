@@ -7,9 +7,9 @@ gh_issue_number: 1624
 
 ![Spring pasture](/blog/2020/04/29/messaging-app-spring-kafka-pt-two/spring-pasture.jpg)
 
-This article is part of a [series](/blog/tags/spring-kafka-series)
+This article is part of a [series](/blog/tags/spring-kafka-series).
 
-In this part let’s walk through Kafka’s servers and processes, the basics of spring-kafka producers and consumers, persistence, and caching configurations.
+In this part I’ll walk through Kafka’s servers and processes, the basics of spring-kafka producers and consumers, persistence, and caching configurations.
 
 ### Kafka Servers
 
@@ -69,7 +69,7 @@ bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic myTestTo
 
 When you run the consumer on the console with the from-beginning parameter you’ll see all the messages sent previously shown in the console.
 
-Here we ran Kafka as a single server. You’ll need to optimize and scale the Kafka clusters for production and large-scale distributed systems. So far, we’ve become familiar with some Kafka components but for further Kafka configurations you can refer to the corresponding tutorials.
+Here we ran Kafka as a single server. You’ll need to optimize and scale the Kafka clusters for production and large-scale distributed systems. So far, we’ve become familiar with some Kafka components but for further Kafka configuration you can refer to the corresponding tutorials.
 
 ### spring-kafka Configuration
 
@@ -86,7 +86,7 @@ spring.kafka.consumer.key-deserializer=org.apache.kafka.common.serialization.Str
 spring.kafka.consumer.value-deserializer=org.apache.kafka.common.serialization.StringDeserializer
 ```
 
-A simple Kafka consumer is defined as a Spring `@KafkaListener` annotated method like below:
+A simple Kafka consumer is defined as a Spring `@KafkaListener` annotated method like this:
 
 ```java
 @Configuration
@@ -100,7 +100,7 @@ public class MyKafkaConsumer {
 }
 ```
 
-We are going to define different Kafka consumer methods listening different topics for different purposes in our messaging app.
+We are going to define different Kafka consumer methods listening to different topics for different purposes in our messaging app.
 
 #### Producer Configuration
 
@@ -130,7 +130,7 @@ public class MyKafkaProducer {
 }
 ```
 
-So far we have configured Kafka in a Spring Boot project and seen simple consumer and producer examples. Before going further on Kafka configurations, let’s configure the persistence and cache repositories.
+So far we have configured Kafka in a Spring Boot project and seen simple consumer and producer examples. Before going further with Kafka configuration, let’s configure the persistence and cache repositories.
 
 ### Persistence Configuration
 
