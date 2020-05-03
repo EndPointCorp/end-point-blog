@@ -28,10 +28,10 @@ JasperReports takes .jrxml files as input and outputs a .jasper report. Possible
 - **June 2001:** Teodor Danciu began working on JasperReports.
 - **September 2001:** Jasper was registered on SourceForge.
 - **November 2001:** JasperReports 0.1.5 was released.
-- **2004:** Panscopic teamed up with Teodor Danciu, acquired ownership of the product and changed its name to [JasperSoft](https://www.jaspersoft.com/).
+- **2004:** Panscopic teamed up with Teodor Danciu, acquired ownership of the product and changed its name to [Jaspersoft](https://www.jaspersoft.com/).
 - **2005:** JasperReports 1.0 was released.
 - **2007:** Brian Gentile became CEO of the company.
-- **2014:** TIBCO acquired JasperSoft for ~$185 million.
+- **2014:** TIBCO acquired Jaspersoft for ~$185 million.
 
 ### Best reporting tools
 
@@ -326,7 +326,7 @@ There’s still one problem: testing is a high-cost operation in the project I a
 
 ### Long story short
 
-For more information, see JasperSoft’s [website](https://www.jaspersoft.com/).
+For more information, see Jaspersoft’s [website](https://www.jaspersoft.com/).
 
 JasperReports is free and open source. However, you have to pay a fee to consult the help documentation. It’s easily a competitor in quality with other reporting tools, which are less reasonably priced. When I first had to work with Jasper reports, I didn’t know anything about it, but was able to complete the tasks at hand in a few hours, which shows that getting into the Jasper universe isn’t too hard. One may have difficulty understanding .jrxml files at first, but trust me, it’s worth it.
 
