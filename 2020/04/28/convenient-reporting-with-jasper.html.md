@@ -1,15 +1,15 @@
 ---
 author: "Árpád Lajos"
 title: "Convenient Reporting with Jasper"
-tags: java, reporting, jasper, wildfly
+tags: java, reporting, jasper
 gh_issue_number: 1623
 ---
 
 ![Basalt pillars](/blog/2020/04/28/convenient-reporting-with-jasper/symphony-of-stones.jpg)
 
-Business Intelligence (BI) reporting is a huge problem space in custom software. There’s a wide range of business needs for looking at past and predictive behavior. Building a reporting tool can be a much more cost effective way to get this data compared to writing individual queries or manually generating reports.  
+Business Intelligence (BI) reporting is a huge problem space in custom software. There’s a wide range of business needs for looking at past and predictive behavior. Building a reporting tool can be a very cost effective way to get this data, especially compared to writing individual queries or manually generating reports.
 
-I’ve been working with Jasper in the Java project space and wanted to write about some research I’ve collected on the topic. 
+I’ve been working with Jasper in the Java project space and wanted to write about some research I’ve collected on the topic.
 
 JasperReports takes .jrxml files as input and outputs a .jasper report. Possible output targets include:
 
@@ -27,11 +27,11 @@ JasperReports takes .jrxml files as input and outputs a .jasper report. Possible
 
 - **June 2001:** Teodor Danciu began working on JasperReports.
 - **September 2001:** Jasper was registered on SourceForge.
-- **November 3, 2001:** JasperReports 0.1.5 was released.
-- **2004:** Panscopic teamed up with Teodor Danciu, acquired intellectual ownership of the product and changed its name to [JasperSoft](https://www.jaspersoft.com/).
+- **November 2001:** JasperReports 0.1.5 was released.
+- **2004:** Panscopic teamed up with Teodor Danciu, acquired ownership of the product and changed its name to [JasperSoft](https://www.jaspersoft.com/).
 - **2005:** JasperReports 1.0 was released.
 - **2007:** Brian Gentile became CEO of the company.
-- **2014:** [TIBCO](https://www.tibco.com/) acquired JasperSoft for ~$185 million.
+- **2014:** TIBCO acquired JasperSoft for ~$185 million.
 
 ### Best reporting tools
 
@@ -39,9 +39,9 @@ Let’s compare some popular reporting tools:
 
 - **JasperReports** is a free and open source Java-based reporting tool, which supports lots of possible outputs, as mentioned earlier. Generating reports can be difficult if you’re less technical. More technical aspects can be more difficult as well; embedding JasperReports into a project is not necessarily simple, but once it’s done, the tool will be reliable.
 - **Crystal Reports** supports many inputs, including Access, Excel, XML, ODBC, and JDBC. It also has good multi-language support. It’s easy to embed into a .NET project, but software updates are unstable. The process can be very slow and there is no control of data-level security. A trial version is offered, but if one wants to use it long-term, then the price is a one-time payment of $495 or more, for larger companies.
-- **Domo** is another a popular reporting tool. It provides a trial version, and, according to [yurbi.com](https://www.yurbi.com/blog/everything-need-know-domos-new-pricing-page/), a 5 user plan costs $5700/year.
-- **Zoho analytics** is an easy-to-use BI reporting tool, priced between $22-$445, depending on the number of users and data.
-- **Host analytics** is a great tool for finance automation. Pricing is available upon request.
+- **Domo** is another a popular reporting tool. It provides a trial version, and a 5 user plan costs $5700/year\*.
+- **Zoho analytics** is an easy-to-use BI reporting tool, priced between $22–$445, depending on the number of users and data.
+- **Host analytics** is a great tool for finance automation. Pricing not publicized.
 - **Tableau** is an excellent reporting tool, with a thriving community online, but its quote-based price is high.
 - **Pentaho** is a Java-based reporting tool, which provides data integration, online analytical processing and reporting, among other features. Pentaho offers a 30-day trial period. Contract pricing isn’t disclosed.
 
@@ -51,7 +51,7 @@ So, if you are writing software and already use Java, or using Java reporting is
 
 To install JasperReports Server, you need a computer with a fully functional JRE (Java Runtime Environment). The server might be Tomcat or GlassFish. An RDBMS is also needed. since JasperReports has its own database, this could be PostgreSQL, Oracle, MySQL, DB2, or SQL Server. JasperReports prefers PostgreSQL and Tomcat, so these will be included with an automatic install. You may choose to use your existing Tomcat/PostgreSQL or have it install them as well.
 
-Manual installation is also possible, as the described [here](https://community.jaspersoft.com/documentation/tibco-jasperreports-server-installation-guide/v630/installing-jasperreports-server). At my first encounter with Jasper I installed Tomcat with the installer and used it for generating JasperReports, while the application I was working with was running Wildfly, using a MySQL database. Needless to say, this was unnecessary, but I was not aware of that at the time. JasperServer can be configured to work with JBoss and MySQL as well.
+Manual installation is also possible, as described [here](https://community.jaspersoft.com/documentation/tibco-jasperreports-server-installation-guide/v630/installing-jasperreports-server). At my first encounter with Jasper I installed Tomcat with the installer and used it for generating JasperReports, while the application I was working with was running WildFly (formerly JBoss), using a MySQL database. Needless to say, this was unnecessary, but I was not aware of that at the time. JasperServer can be configured to work with JBoss and MySQL as well.
 
 The core of JasperReports is the [JasperReports Library](https://community.jaspersoft.com/wiki/getting-started-jasperreports-library), which was already integrated into the project I was working with and is integrated into JasperReports Server as well as into popular IDEs, like TIBCO Jaspersoft Studio or iReport Designer.
 
@@ -59,7 +59,7 @@ The core of JasperReports is the [JasperReports Library](https://community.jaspe
 
 JasperReports provides example databases for imaginary companies, like FoodMart:
 
-![](/blog/2020/04/28/convenient-reporting-with-jasper/foodmart.jpg)
+![](/blog/2020/04/28/convenient-reporting-with-jasper/foodmart.png)
 
 As we can see these are normal tables, having a primary key and some other fields.
 
@@ -72,8 +72,7 @@ jrxml, which stands for Jasper XML, contains report definitions in XML format. T
 <!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
 
 <jasperReport name="JFreeChartReport" pageWidth="595" pageHeight="842" columnWidth="515" leftMargin="40" rightMargin="40" topMargin="50" bottomMargin="50" scriptletClass="JFreeChartScriptlet">
-	<variable name="Chart" class="net.sf.jasperreports.engine.JRRenderable" calculation="System">
-	</variable>
+	<variable name="Chart" class="net.sf.jasperreports.engine.JRRenderable" calculation="System"/>
 	<title>
 		<band height="742">
 			<line>
@@ -109,7 +108,7 @@ It starts with the xml tag, specifying that this file should be interpreted as X
 
 ![](/blog/2020/04/28/convenient-reporting-with-jasper/preview.png)
 
-Don’t worry, this is just the preview, the actual result looks like this:
+Don’t worry about the broken images; this is just the preview, the actual result looks like this:
 
 ![](/blog/2020/04/28/convenient-reporting-with-jasper/piechart.jpg)
 
@@ -129,16 +128,11 @@ Let’s consider a datasource sample, also taken from the [community](https://co
 	<style name="Arial_Normal" isDefault="true" fontName="Arial" fontSize="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 	<style name="Arial_Bold" isDefault="false" fontName="Arial" fontSize="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 	<style name="Arial_Italic" isDefault="false" fontName="Arial" fontSize="12" isBold="false" isItalic="true" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
-	<parameter name="ReportTitle" class="java.lang.String">
-	</parameter>
-	<parameter name="DataFile" class="java.lang.String">
-	</parameter>
-	<field name="id" class="java.lang.Integer">
-	</field>
-	<field name="name" class="java.lang.String">
-	</field>
-	<field name="street" class="java.lang.String">
-	</field>
+	<parameter name="ReportTitle" class="java.lang.String"/>
+	<parameter name="DataFile" class="java.lang.String"/>
+	<field name="id" class="java.lang.Integer"/>
+	<field name="name" class="java.lang.String"/>
+	<field name="street" class="java.lang.String"/>
 	<field name="the_city" class="java.lang.String">
 		<fieldDescription>me.me.city</fieldDescription>
 	</field>
@@ -262,8 +256,8 @@ Let’s consider a datasource sample, also taken from the [community](https://co
 			<textField bookmarkLevel="1">
 				<reportElement x="0" y="10" width="515" height="15"/>
 				<textElement textAlignment="Center"/>
-				<textFieldExpression class="java.lang.String"><![CDATA["There were " + 
-					String.valueOf($V{REPORT_COUNT}) + 
+				<textFieldExpression class="java.lang.String"><![CDATA["There were " +
+					String.valueOf($V{REPORT_COUNT}) +
 					" address records on this report."]]></textFieldExpression>
 				<anchorNameExpression><![CDATA["Summary"]]></anchorNameExpression>
 			</textField>
@@ -286,7 +280,7 @@ Let’s consider a datasource sample, also taken from the [community](https://co
 </jasperReport>
 ```
 
-As we can see, there are fields defined, like `id`, `name`, `street`, and `the_city`. We also have a group called `CityGroup`, so when the items from the data source are iterated, their group is known via `the_city`. It’s worth looking at how the paging works. The key is `evaluationTime`, which is telling the engine to not evaluate a given element at iteration time, but rather when an event occurs. `evaluationTime="Report"` means that we need to evaluate the value when the *Report* event occurs. At that time `$V{PAGE_NUMBER}` already has the value equal to the number of pages. Let’s see the preview:
+As we can see, there are fields defined like `id`, `name`, `street`, and `the_city`. We also have a group called `CityGroup`, so when the items from the data source are iterated through, their group is known via `the_city`. It’s worth looking at how the paging works. The key is `evaluationTime`, which is telling the engine to not evaluate a given element at iteration time, but rather when an event occurs. `evaluationTime="Report"` means that we need to evaluate the value when the *Report* event occurs. At that time `$V{PAGE_NUMBER}` already has the value equal to the number of pages. Let’s see the preview:
 
 ![](/blog/2020/04/28/convenient-reporting-with-jasper/page1.jpg)
 
@@ -301,18 +295,18 @@ Again, we don’t need to worry about the missing image icons, since this is onl
 Since we have a few interfaces that we need to respect, we can easily integrate Hibernate with our Jasper reports as data source, we just need to make sure we are using the field and data source interfaces they defined. [Here](https://developer.jboss.org/wiki/UsingJasperReportsWithHibernate) we have a few examples, notably the following:
 
 ```java
-List cats = session.find("from eg.Cat");  
-  
-Map parameters = new HashMap();  
-parameters.put("Title", "The Cat Report");  
-  
-InputStream reportStream = this.class.getResourceAsStream("/the-cat-report.xml");  
-JasperDesign jasperDesign = JasperManager.loadXmlDesign(reportStream);  
-JasperReport jasperReport = JasperManager.compileReport(jasperDesign);  
-  
-JRBeanCollectionDataSource ds = new JRBeanCollectionDataSource(cats);  
-JasperPrint jasperPrint = JasperManager.fillReport(jasperReport, parameters, ds);  
-  
+List cats = session.find("from eg.Cat");
+
+Map parameters = new HashMap();
+parameters.put("Title", "The Cat Report");
+
+InputStream reportStream = this.class.getResourceAsStream("/the-cat-report.xml");
+JasperDesign jasperDesign = JasperManager.loadXmlDesign(reportStream);
+JasperReport jasperReport = JasperManager.compileReport(jasperDesign);
+
+JRBeanCollectionDataSource ds = new JRBeanCollectionDataSource(cats);
+JasperPrint jasperPrint = JasperManager.fillReport(jasperReport, parameters, ds);
+
 JasperManager.printReportToPdfFile(jasperPrint, "the-cat-report.pdf");
 ```
 
@@ -332,8 +326,12 @@ There’s still one problem: testing is a high-cost operation in the project I a
 
 ### Long story short
 
+For more information, see JasperSoft’s [website](https://www.jaspersoft.com/).
+
 JasperReports is free and open source. However, you have to pay a fee to consult the help documentation. It’s easily a competitor in quality with other reporting tools, which are less reasonably priced. When I first had to work with Jasper reports, I didn’t know anything about it, but was able to complete the tasks at hand in a few hours, which shows that getting into the Jasper universe isn’t too hard. One may have difficulty understanding .jrxml files at first, but trust me, it’s worth it.
 
 If you are already using Java and want to generate reports, Jasper is a good candidate. It can periodically generate reports for you and even send them attached to an email to you. I couldn’t write better closing words than a poster I found:
 
 ![](/blog/2020/04/28/convenient-reporting-with-jasper/breaking-news.jpg)
+
+\* Pricing found at [yurbi.com](https://www.yurbi.com/blog/everything-need-know-domos-new-pricing-page/).
