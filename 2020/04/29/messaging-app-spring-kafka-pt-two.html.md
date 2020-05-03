@@ -1,5 +1,5 @@
 ---
-author: "Kursat Aydemir"
+author: "Kürşat Kutlu Aydemir"
 title: "Creating a Messaging App Using Spring for Apache Kafka, Part 2"
 tags: java, spring, frameworks, kafka, spring-kafka-series
 gh_issue_number: 1624
@@ -13,7 +13,7 @@ In this part I’ll walk through Kafka’s servers and processes, the basics of 
 
 ### Kafka Servers
 
-Kafka uses [Apache ZooKeper](https://zookeeper.apache.org/) as the distributed coordination server. You can download the Apache Kafka with ZooKeeper bundle [here](https://kafka.apache.org/downloads).
+Kafka uses [Apache ZooKeeper](https://zookeeper.apache.org/) as the distributed coordination server. You can download the Apache Kafka with ZooKeeper bundle [here](https://kafka.apache.org/downloads).
 
 When you download and untar the Kafka bundle Kafka’s console scripts can be found in the `bin` directory. To enable Kafka connectivity and prepare the Kafka configuration let’s start the Kafka servers and see how to create Kafka topics and test console producers and consumers.
 
@@ -119,13 +119,13 @@ A very simple Kafka producer could be configured like below. Spring `KafkaTempla
 @Configuration
 public class MyKafkaProducer {
 
-  @Autowired
-  private KafkaTemplate<String, String> kafkaTemplate;
+    @Autowired
+    private KafkaTemplate<String, String> kafkaTemplate;
 
-  public void sendMessage(String topic, String message) {
-    System.out.println(String.format("Message is being sent to topic %s", topic));
-    kafkaTemplate.send(topic, message);
-  }
+    public void sendMessage(String topic, String message) {
+        System.out.println(String.format("Message is being sent to topic %s", topic));
+        kafkaTemplate.send(topic, message);
+    }
 
 }
 ```
@@ -190,23 +190,23 @@ public class JedisFactory {
     @Value("${cache.redis.password}")
     private static String password;
 
-  // hide the constructor
-  private JedisFactory() {
+    // hide the constructor
+    private JedisFactory() {
 
     }
 
     private static JedisPool jedisPool;
 
-    static  {
+    static {
         JedisPoolConfig poolConfig = new JedisPoolConfig();
         poolConfig.setMaxTotal(128);
 
         jedisPool = new JedisPool(
-                poolConfig,
-                host,
-                port,
-                timeout,
-                password
+            poolConfig,
+            host,
+            port,
+            timeout,
+            password
         );
     }
 
