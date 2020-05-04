@@ -334,4 +334,4 @@ If you are already using Java and want to generate reports, Jasper is a good can
 
 ![](/blog/2020/04/28/convenient-reporting-with-jasper/breaking-news.jpg)
 
-\* Pricing found at [yurbi.com](https://www.yurbi.com/blog/everything-need-know-domos-new-pricing-page/).
+\* Domo plan pricing was found at [yurbi.com](https://www.yurbi.com/blog/everything-need-know-domos-new-pricing-page/).
