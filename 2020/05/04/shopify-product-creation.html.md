@@ -5,7 +5,8 @@ tags: shopify, ecommerce, ruby, rails
 gh_issue_number: 1626
 ---
 
-<img src="/blog/2020/05/04/shopify-product-creation/banner.jpg" alt="Cash Register" /> [Photo](https://flic.kr/p/qJhs9) by [Chris Young](https://www.flickr.com/photos/mrvjtod/), used under [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/), cropped from original.
+![Cash Register](/blog/2020/05/04/shopify-product-creation/banner.jpg)
+[Photo](https://flic.kr/p/qJhs9) by [Chris Young](https://www.flickr.com/photos/mrvjtod/), used under [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/), cropped from original.
 
 I recently worked on an interesting project for a store owner who was facing a daunting task: he had an inventory of hundreds of thousands of [Magic: The Gathering](https://en.wikipedia.org/wiki/Magic%3A_The_Gathering) (MTG) cards that he wanted to sell online through his Shopify store. The logistics of tracking down artwork and current market pricing for each card made it impossible to do manually.
 
@@ -15,9 +16,9 @@ My solution was to create a custom Rails application that retrieves card data fr
 
 The main requirements for the Rails application were:
 
-* Retrieve product data for MTG cards by merging results from a combination of sources/APIs
-* Map card attributes and metadata into the format expected by the Shopify Admin API for creating Product records
-* Perform a bulk push of products to Shopify
+* Retrieving product data for MTG cards by merging results from a combination of sources/APIs
+* Mapping card attributes and metadata into the format expected by the Shopify Admin API for creating Product records
+* Performing a bulk push of products to Shopify
 
 There were some additional considerations like staying within rate limits for both the card data and Shopify APIs, but I will address those further in a follow-up post.
 
@@ -25,7 +26,7 @@ There were some additional considerations like staying within rate limits for bo
 
 I ended up using a combination of two APIs to retrieve MTG card data: [MTGJSON](https://mtgjson.com/) for card details like the name of the card and the set it belonged to, and [Scryfall](https://scryfall.com/) for retrieving card images and current market pricing. It was relatively easy to combine the two because MTGJSON provided Scryfall IDs for all of its records, allowing me to merge results from the two APIs together.
 
-### Working with the Shopify Admin API in Ruby
+### Working With the Shopify Admin API in Ruby
 
 The [Shopify Admin API](https://shopify.dev/docs/admin-api) deals in terms of generic [Product](https://shopify.dev/docs/admin-api/rest/reference/products/product) records with predefined attributes like `title` and `product_type`. The official [shopify_api](https://github.com/Shopify/shopify_api) Ruby gem made it very easy to connect to my client’s Shopify store and create new products by creating `Shopify::Product` objects with a hash of attributes like so:
 
@@ -69,4 +70,4 @@ The Sidekiq approach to queueing up all of the card uploads worked great; I was 
 
  A custom Ruby application using the Shopify API is a powerful solution for online storefronts that need to sell a large number of different products. I was pleased with how this project turned out; it was rewarding to create a custom application that leveraged several APIs and automated a task that would have been extremely repetitive, and probably impossibly time-consuming, to do manually. It was encouraging to do my first upload of a card and see it show up on the Shopify store with artwork, pricing, and card details pre-populated.
 
- I think that the development model used for this project could be applied to stores in a wide variety of markets. This project used external APIs to retrieve product information but that data source could easily be replaced with a spreadsheet, CSV file, or some other export file containing bulk information on products to be sold.
+ The development model used for this project could be applied to stores in a wide variety of markets. This project used external APIs to retrieve product information but that data source could easily be replaced with a spreadsheet, CSV file, or some other export file containing bulk information on products to be sold.
