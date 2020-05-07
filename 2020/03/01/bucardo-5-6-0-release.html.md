@@ -1,7 +1,7 @@
 ---
 author: "David Christensen"
 title: "Bucardo 5.6.0 Released"
-tags: postgres, bucardo, replication
+tags: postgres, bucardo, replication, mongodb
 gh_issue_number: 1596
 ---
 

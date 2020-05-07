@@ -1,11 +1,11 @@
 ---
 author: Josh Williams
 gh_issue_number: 909
-tags: automation, linux, python, testing
+tags: automation, linux, python, testing, cassandra, mongodb
 title: Spot On Cost Effective Performance Testing
 ---
 
-AWS is, in my humble opinion, pricy. However, they provide a nice alternative to the on-demand EC2 instances most people are familiar with: Spot instances. In essence, spot instances allow you to bid on otherwise compute idle time. Recent changes to the web console seem to highlight spot instances a bit more than they used to, but I still don’t see them mentioned often.
+AWS is, in my humble opinion, pricey. However, they provide a nice alternative to the on-demand EC2 instances most people are familiar with: Spot instances. In essence, spot instances allow you to bid on otherwise compute idle time. Recent changes to the web console seem to highlight spot instances a bit more than they used to, but I still don’t see them mentioned often.
 
 The advantage is you get the same selection of instance sizes, and they perform the same as a normal on-demand instance for (usually) a fraction of the price. The downside is that they may disappear at a moment’s notice if there’s not enough spare capacity when someone else spins up a normal on-demand instance, or simply outbids you. It certainly happened to us on occasion, but not as frequently as I originally expected. They also take a couple minutes to evaluate the bid price when you put in a request, which can be a bit of a surprise if you’re used to the almost-instantaneous on-demand instance provision time.
 

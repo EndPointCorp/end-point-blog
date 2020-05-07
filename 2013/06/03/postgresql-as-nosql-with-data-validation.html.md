@@ -1,7 +1,7 @@
 ---
 author: Szymon Lipiński
 gh_issue_number: 810
-tags: json, nosql, postgres
+tags: json, nosql, postgres, couchdb
 title: PostgreSQL as NoSQL with Data Validation
 ---
 

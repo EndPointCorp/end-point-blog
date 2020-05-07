@@ -24,7 +24,7 @@ Present,
 Here we are storing huge amount of data, so we need a processing system to handle and analyse the data in efficient manner. In current world, the data is growing like anything and 3Vs are phenomenal of growing (Big)Data. We need to handle the huge Volume of Variety of data in a Velocity. MongoDB follows certain things to satisfy the current requirement.
 
 <div class="separator" style="clear: both; text-align: center;">
-  <a href="/blog/2014/11/19/mongodb-and-openstack-osi-days-2014/image-1.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;">
+  <a href="/blog/2014/11/19/mongodb-and-openstack-osi-days-2014/image-1.png" style="margin-left: 1em; margin-right: 1em;">
     <img border="0" height="152" src="/blog/2014/11/19/mongodb-and-openstack-osi-days-2014/image-1.png" width="400" />
   </a>
 </div>

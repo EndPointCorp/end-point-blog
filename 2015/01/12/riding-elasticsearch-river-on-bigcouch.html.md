@@ -5,8 +5,6 @@ tags: couchdb, elasticsearch, rails
 title: 'Riding the Elasticsearch River on a CouchDB: Part 1'
 ---
 
-
-
 As you may guessed from my perfect tan and rugged good looks, I am Phunk, your river guide. In this multi-part series, I will guide us through an exploration of [Elasticsearch](https://www.elastic.co/), its [CouchDB/BigCouch River plugin](https://github.com/elastic/elasticsearch-river-couchdb), its source, the [CouchDB document store](http://couchdb.apache.org/), and the surrounding flora and fauna that are the Ruby on Rails based tools I created to help [the DPLA](https://dp.la/) project manage this ecosystem.
 
 Before we get our feet wet, let’s go through a quick safety briefing to discuss the terms I’ll be using as your guide on this trip. Elasticsearch: A schema-less, JSON-based, distributed RESTful search engine. The River: An Elasticsearch plugin that automatically indexes changes in your upstream (heh) document store, in real-time. CouchDB: The fault-tolerant, distributed NoSQL database / document store. DPLA: The Digital Public Library of America open source project for which all this work was done.
@@ -52,5 +50,3 @@ That same document is updated in CouchDB, the _changes feed emits:
 It’s tough to tell from this contrived example document, but the _changes feed actually includes the entire source document JSON for creates and updates. (I’ll talk more about that in part 2.) From the above JSON examples, the River would pass the inner-most document containing the _id, _rev and my_field data up to Elasticsearch. Elasticsearch uses that JSON to update the corresponding document (keyed by _id) in its search index and voila, the document you updated in CouchDB is now updated in your Elasticsearch search index in real-time.
 
 We have now gotten our feet wet with how a document flows from one end to the other in this architecture. In part 2, we’ll dive deeper into the DevOps-heavy care, feeding, monitoring and testing of the River. We’ll also look at some slick River tricks that can transform your documents before Elasticsearch gets them, and any other silly River puns I can come up with. I’ll also be reading the entire thing in my best [David Attenborough](http://www.bbc.co.uk/nature/collections/p0048522) impression and posting it on SoundCloud.
-
-

@@ -5,8 +5,6 @@ tags: camps, environment, tools, vagrant
 title: Looking at development environments with DevCamps and Vagrant
 ---
 
-
-
 For most web developers, you have practices and tools that you are used to using to do your work. And for most web developers this means setting up your workstation with all the things you need to do your editing, compiling, testing, and pushing code to some place for sharing or deployment. This is a very common practice even though it is fraught with problems- like getting a database setup properly, configuring a web server, any other services (memcached, redis, mongodb, etc), and many more issues.
 
 Hopefully at some point you realize the pain that is involved in doing everything on your workstation directly and start looking for a better way to do web development. In this post I will be looking at some ways to do this better: using a virtual machine (VM), Vagrant, and DevCamps.
@@ -95,5 +93,3 @@ It seems that Vagrant and DevCamps certainly have some good things going for the
 - Sharing access to a VM should not depend on Vagrant Cloud, but instead should use some sort of internal service on the VM server to automate VM hostname/DNS for browser and ssh access to the VM.
 
 I’m sure there are more pros and cons that I’ve missed. Add your thoughts to the comments below. Thanks.
-
-
