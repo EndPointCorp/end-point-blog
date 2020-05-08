@@ -5,37 +5,35 @@ tags: database, postgres, rails
 title: 'Postgres system triggers error: permission denied'
 ---
 
-
-
 This mystifying Postgres error popped up for one of my coworkers lately while using Ruby on Rails:
 
-```
-<span class="e">ERROR:  permission denied: "RI_ConstraintTrigger_16410" is a system trigger</span>
+```plain
+ERROR:  permission denied: "RI_ConstraintTrigger_16410" is a system trigger
 ```
 
 On PostgreSQL version 9.2 and newer, the error may look like this:
 
-```
-<span class="e">ERROR:  permission denied: "RI_ConstraintTrigger_a_32778" is a system trigger
+```plain
+ERROR:  permission denied: "RI_ConstraintTrigger_a_32778" is a system trigger
 
-ERROR:  permission denied: "RI_ConstraintTrigger_c_32780" is a system trigger</span>
+ERROR:  permission denied: "RI_ConstraintTrigger_c_32780" is a system trigger
 ```
 
 I labelled this as mystifying because, while Postgres’ error system is generally 
 well designed and gives clear messages, this one stinks. A better one would 
 be something similar to:
 
-```
-<span class="e">ERROR:  Cannot disable triggers on a table containing foreign keys unless superuser</span>
+```plain
+ERROR:  Cannot disable triggers on a table containing foreign keys unless superuser
 ```
 
 <div class="separator" style="clear: both; text-align: center;">
-<a href="/blog/2012/10/25/postgres-system-triggers-error/image-0-big.png" imageanchor="1" style="clear:right; float:right; margin-left:1em; margin-bottom:1em"><img border="0" height="280" src="/blog/2012/10/25/postgres-system-triggers-error/image-0.png" width="270"/></a></div>
+<a href="/blog/2012/10/25/postgres-system-triggers-error/image-0-big.png" style="clear:right; float:right; margin-left:1em; margin-bottom:1em"><img border="0" src="/blog/2012/10/25/postgres-system-triggers-error/image-0.png"/></a></div>
 
 As you can now guess, this error is caused by a non-superuser trying to disable triggers 
 on a table that is used in a foreign key relationship, via the SQL command:
 
-```
+```sql
 ALTER TABLE foobar DISABLE TRIGGERS ALL;
 ```
 
@@ -51,43 +49,43 @@ Note that if you are not a superuser *and* you are not the owner of the
 table, you will get a much better error message when you try to disable 
 all the triggers:
 
-```
-<span class="e">ERROR:  must be owner of relation foobar</span>
+```plain
+ERROR:  must be owner of relation foobar
 ```
 
 To reproduce the original error, we will create two tables, and then link them together 
 via a foreign key:
 
-```
-<span class="p">postgres=#</span> <span class="t">create user alice;</span>
+```plain
+postgres=# create user alice;
 CREATE ROLE
 
-<span class="p">postgres=#</span> <span class="t">\c postgres alice</span>
+postgres=# \c postgres alice
 You are now connected to database "postgres" as user "alice".
 
-<span class="c">-- Verify that we are not a superuser</span>
-<span class="p">postgres=></span> <span class="t">select usename, usesuper from pg_user where usename = (select current_user);</span>
+-- Verify that we are not a superuser
+postgres=> select usename, usesuper from pg_user where usename = (select current_user);
  usename | usesuper 
 ---------+----------
  alice   | f
 
-<span class="p">postgres=></span> <span class="t">create table foo(a int unique);</span>
+postgres=> create table foo(a int unique);
 NOTICE:  CREATE TABLE / UNIQUE will create implicit index "foo_a_key" for table "foo"
 CREATE TABLE
 
-<span class="p">postgres=></span> <span class="t">create table bar(b int);</span>
+postgres=> create table bar(b int);
 CREATE TABLE
 
-<span class="p">postgres=></span> <span class="t">alter table bar add constraint baz foreign key (b) references foo(a);</span>
+postgres=> alter table bar add constraint baz foreign key (b) references foo(a);
 ALTER TABLE
 ```
 
 Let’s take a look at both tables, and then try to disable triggers on each one. 
 Because the triggers enforcing the foreign key are internal, they will not show up 
-when we do a \d:
+when we do a `\d`:
 
-```
-<span class="p">postgres=></span> <span class="t">\d foo</span>
+```plain
+postgres=> \d foo
       Table "public.foo"
  Column |  Type   | Modifiers 
 --------+---------+-----------
@@ -97,7 +95,7 @@ Indexes:
 Referenced by:
     TABLE "bar" CONSTRAINT "baz" FOREIGN KEY (b) REFERENCES foo(a)
 
-<span class="p">postgres=></span> <span class="t">\d bar</span>
+postgres=> \d bar
       Table "public.bar"
  Column |  Type   | Modifiers 
 --------+---------+-----------
@@ -105,36 +103,36 @@ Referenced by:
 Foreign-key constraints:
     "baz" FOREIGN KEY (b) REFERENCES foo(a)
 
-<span class="p">postgres=></span> <span class="t">alter table foo disable trigger all;</span>
-<span class="e">ERROR:  permission denied: "RI_ConstraintTrigger_41047" is a system trigger</span>
+postgres=> alter table foo disable trigger all;
+ERROR:  permission denied: "RI_ConstraintTrigger_41047" is a system trigger
 
-<span class="p">postgres=></span> <span class="t">alter table bar disable trigger all;</span>
-<span class="e">ERROR:  permission denied: "RI_ConstraintTrigger_41049" is a system trigger</span>
+postgres=> alter table bar disable trigger all;
+ERROR:  permission denied: "RI_ConstraintTrigger_41049" is a system trigger
 ```
 
 If we try the same thing as a superuser, we have no problem:
 
-```
-<span class="p">postgres=#</span> <span class="t">\c postgres postgres</span>
+```plain
+postgres=# \c postgres postgres
 You are now connected to database "postgres" as user "postgres".
 
-<span class="p">postgres=#</span> <span class="t">select usename, usesuper from pg_user where usename = (select current_user);</span>
+postgres=# select usename, usesuper from pg_user where usename = (select current_user);
  usename  | usesuper 
 ----------+----------
  postgres | t
 
-<span class="p">postgres=#</span> <span class="t">alter table foo disable trigger all;</span>
+postgres=# alter table foo disable trigger all;
 ALTER TABLE
 
-<span class="p">postgres=#</span> <span class="t">alter table bar disable trigger all;</span>
+postgres=# alter table bar disable trigger all;
 ALTER TABLE
 
-<span class="c">-- Don’t forget to re-enable the triggers!</span>
+-- Don’t forget to re-enable the triggers!
 
-<span class="p">postgres=#</span> <span class="t">alter table foo enable trigger all;</span>
+postgres=# alter table foo enable trigger all;
 ALTER TABLE
 
-<span class="p">postgres=#</span> <span class="t">alter table bar enable trigger all;</span>
+postgres=# alter table bar enable trigger all;
 ALTER TABLE
 ```
 
@@ -149,20 +147,20 @@ much easier to **adjust the session_replication_role**. In short, this
 disables *all* triggers and rules, on all tables, until it is switched 
 back again. Do NOT forget to switch it back again! Usage is like this:
 
-```
-<span class="p">postgres=#</span> <span class="t">\c postgres postgres</span>
+```plain
+postgres=# \c postgres postgres
 You are now connected to database "postgres" as user "postgres".
 
-<span class="p">postgres=#</span> <span class="t">set session_replication_role to replica;</span>
+postgres=# set session_replication_role to replica;
 SET
 
-<span class="c">-- Do what you need to do - triggers and rules will not fire!</span>
+-- Do what you need to do - triggers and rules will not fire!
 
-<span class="p">postgres=#</span> <span class="t">set session_replication_role to default;</span>
+postgres=# set session_replication_role to default;
 SET
 ```
 
-Note: while you can do “SET LOCAL” to limit the changes to the current 
+Note: While you can do “SET LOCAL” to limit the changes to the current 
 transaction, I always feel safer to explicitly set it before and after 
 the changes, rather than relying on the implicit change back via 
 commit and rollback.
@@ -171,11 +169,11 @@ It may be that you are simply trying to disable one or more of the
 "normal” triggers that appear on the table. In which case, you can 
 simply **disable user triggers manually** rather than use “all”:
 
-```
-<span class="p">postgres=#</span> <span class="t">\c postgres alice</span>
+```plain
+postgres=# \c postgres alice
 You are now connected to database "postgres" as user "alice".
 
-<span class="p">postgres=></span> <span class="t">\d bar</span>
+postgres=> \d bar
       Table "public.bar"
  Column |  Type   | Modifiers 
 --------+---------+-----------
@@ -186,18 +184,18 @@ Triggers:
     trunk AFTER INSERT ON bar FOR EACH STATEMENT EXECUTE PROCEDURE funk()
     vupd BEFORE UPDATE ON bar FOR EACH ROW EXECUTE PROCEDURE verify_update();
 
-<span class="p">postgres=></span> <span class="t">alter table bar disable trigger trunk</span>;
+postgres=> alter table bar disable trigger trunk;
 ALTER TABLE
 
-<span class="p">postgres=></span> <span class="t">alter table bar disable trigger vupd</span>;
+postgres=> alter table bar disable trigger vupd;
 ALTER TABLE
 
-<span class="c">-- Do what you need to do, then:</span>
+-- Do what you need to do, then:
 
-<span class="p">postgres=></span> <span class="t">alter table bar enable trigger trunk</span>;
+postgres=> alter table bar enable trigger trunk;
 ALTER TABLE
 
-<span class="p">postgres=></span> <span class="t">alter table bar enable trigger vupd</span>;
+postgres=> alter table bar enable trigger vupd;
 ALTER TABLE
 ```
 
@@ -206,16 +204,16 @@ is to remove the foreign key relationship yourself. You cannot disable
 the trigger, but you can **drop the foreign key** that created it in 
 the first place. Of course, you have to add it back in as well:
 
-```
-<span class="p">postgres=#</span> <span class="t">\c postgres alice</span>
+```plain
+postgres=# \c postgres alice
 You are now connected to database "postgres" as user "alice".
 
-<span class="p">postgres=></span> <span class="t">alter table bar drop constraint baz</span>;
+postgres=> alter table bar drop constraint baz;
 ALTER TABLE
 
-<span class="c">-- Do what you need to do then:</span>
+-- Do what you need to do then:
 
-<span class="p">postgres=></span> <span class="t">alter table bar add constraint baz foreign key (b) references foo(a)</span>;
+postgres=> alter table bar add constraint baz foreign key (b) references foo(a);
 ALTER TABLE
 ```
 
@@ -228,7 +226,7 @@ can be performed some other way.
 All of these solutions have their advantages and disadvantages. 
 And that’s what charts are good for!:
 
-<table class="greg">
+<table>
 <tbody><tr class="h1">
 <th colspan="3">Permission denied: "RI_ConstraintTrigger" is a system trigger - now what?</th>
 </tr>
@@ -271,27 +269,27 @@ And that’s what charts are good for!:
 </tbody></table>
 
 For the rest of this article, we will tie up two loose ends. First, 
-how can we see the triggers if \d will not show them? Second, what’s 
+how can we see the triggers if `\d` will not show them? Second, what’s 
 up with the crappy trigger name?
 
-As seen above, the output of \d in the psql program shows us the triggers 
+As seen above, the output of `\d` in the psql program shows us the triggers 
 on a table, but not the internal system triggers, such as those created 
 by foreign keys. Here is how triggers normally appear:
 
-```
-<span class="p">postgres=#</span> <span class="t">\c postgres postgres</span>
+```plain
+postgres=# \c postgres postgres
 You are now connected to database "postgres" as user "postgres".
 
-<span class="p">postgres=#</span> <span class="t">create language plperl</span>;
+postgres=# create language plperl;
 CREATE LANGUAGE
 
-<span class="p">postgres=#</span> <span class="t">create function funk() returns trigger language plperl as $$ return undef; $$</span>;
+postgres=# create function funk() returns trigger language plperl as $$ return undef; $$;
 CREATE FUNCTION
 
-<span class="p">postgres=#</span> <span class="t">create trigger trunk after insert on bar for each statement execute procedure funk()</span>;
+postgres=# create trigger trunk after insert on bar for each statement execute procedure funk();
 CREATE TRIGGER
 
-<span class="p">postgres=#</span> <span class="t">\d bar</span>
+postgres=# \d bar
       Table "public.bar"
  Column |  Type   | Modifiers 
 --------+---------+-----------
@@ -301,10 +299,10 @@ Foreign-key constraints:
 Triggers:
     trunk AFTER INSERT ON bar FOR EACH STATEMENT EXECUTE PROCEDURE funk()
 
-<span class="p">postgres=#</span> <span class="t">alter table bar disable trigger all</span>;
+postgres=# alter table bar disable trigger all;
 ALTER TABLE
 
-<span class="p">postgres=#</span> <span class="t">\d bar</span>
+postgres=# \d bar
       Table "public.bar"
  Column |  Type   | Modifiers 
 --------+---------+-----------
@@ -315,7 +313,7 @@ Disabled triggers:
     trunk AFTER INSERT ON bar FOR EACH STATEMENT EXECUTE PROCEDURE funk()
 ```
 
-Warning: Versions older than 8.3 will not tell you in the \d output 
+Warning: Versions older than 8.3 will not tell you in the `\d` output 
 that the trigger is disabled! Yet another reason to upgrade as soon 
 as possible because 
 [8.2 and earlier are end of life](https://www.postgresql.org/support/versioning/).
@@ -325,7 +323,7 @@ you will need to look at the pg_trigger table directly. Here is the query
 that psql uses when generating a list of triggers on a table. Note the 
 exclusion based on the tgisinternal column:
 
-```
+```plain
 SELECT t.tgname, pg_catalog.pg_get_triggerdef(t.oid, true), t.tgenabled
 FROM pg_catalog.pg_trigger t
 WHERE t.tgrelid = '32774' AND NOT t.tgisinternal
@@ -337,20 +335,20 @@ two triggers created by the foreign key. All of them are enabled. Disabled
 triggers will show as a ‘D’ in the tgenabled column. (O stands for origin, 
 and has to do with session_replication_role).
 
-```
-<span class="p">postgres=#</span> <span class="t">select tgname,tgenabled,tgisinternal from pg_trigger </span>
-<span class="p">postgres-#</span> <span class="t"> where tgrelid = 'bar'::regclass</span>;
+```plain
+postgres=# select tgname,tgenabled,tgisinternal from pg_trigger 
+postgres-#  where tgrelid = 'bar'::regclass;
             tgname            | tgenabled | tgisinternal 
 ------------------------------+-----------+--------------
  RI_ConstraintTrigger_c_32780 | D         | t
  RI_ConstraintTrigger_c_32781 | D         | t
  trunk                        | D         | f
 
-<span class="p">postgres=#</span> <span class="t">alter table bar enable trigger all</span>;
+postgres=# alter table bar enable trigger all;
 ALTER TABLE
 
-<span class="p">postgres=#</span> <span class="t">select tgname,tgenabled,tgisinternal from pg_trigger</span>
-<span class="p">postgres-#</span> <span class="t"> where tgrelid = 'bar'::regclass</span>;
+postgres=# select tgname,tgenabled,tgisinternal from pg_trigger
+postgres-#  where tgrelid = 'bar'::regclass;
             tgname            | tgenabled | tgisinternal 
 ------------------------------+-----------+--------------
  RI_ConstraintTrigger_c_32780 | O         | t
@@ -359,11 +357,11 @@ ALTER TABLE
 
 ```
 
-As you recall, the original error - with the system trigger that had a rather 
-non-intuitive named - looked like this:
+As you recall, the original error — with the system trigger that had a rather 
+non-intuitive name — looked like this:
 
-```
-<span class="e">ERROR:  permission denied: "RI_ConstraintTrigger_16509" is a system trigger</span>
+```plain
+ERROR:  permission denied: "RI_ConstraintTrigger_16509" is a system trigger
 ```
 
 We can break it apart to see what it is doing. The “RI” is short for 
@@ -374,5 +372,3 @@ is a little redundant, as it is extraordinarily unlikely you will ever come acro
 this trigger without some context (such as the error message above) that 
 tells you it is a trigger. The final number is simply the oid 
 of the trigger itself. Stick them all together and you get a fairly obscure trigger name that is hopefully not as mysterious now!
-
-
