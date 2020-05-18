@@ -5,7 +5,7 @@ tags: postgres
 title: Converting JSON to PostgreSQL values, simply
 ---
 
-In the [previous post](/2016/02/24/storing-statistics-json-data-in) I showed a simple PostgreSQL table for storing JSON data. Let’s talk about making the JSON data easier to use.
+In the [previous post](/blog/2016/02/24/storing-statistics-json-data-in) I showed a simple PostgreSQL table for storing JSON data. Let’s talk about making the JSON data easier to use.
 
 One of the requirements was to store the JSON from the files unchanged.
 However using the JSON operators for deep attributes is a little bit unpleasant.
