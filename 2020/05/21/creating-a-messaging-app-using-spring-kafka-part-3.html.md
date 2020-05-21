@@ -281,7 +281,7 @@ public class Message implements Serializable {
 }
 ```
 
-If you noticed that we didn't use underscores in the class field names for the corresponding table field names like `userId` for `user_id`. We're going to use Spring [CrudRepository](https://docs.spring.io/spring-data/commons/docs/current/api/org/springframework/data/repository/CrudRepository.html) model to create our data repositories. These CrudRepository has functionality that uses some keywords to automatically create logic using the given interface method names. And the underscores are reserved characters too. You can still escape using double underscore in the CrudRepository method names but it won't look good. So I chose to use camel case which is also complying the Java syntax.
+If you noticed that we didn't use underscores in the class field names for the corresponding table field names like `userId` for `user_id`. We're going to use Spring [CrudRepository](https://docs.spring.io/spring-data/commons/docs/current/api/org/springframework/data/repository/CrudRepository.html) model to create our data repositories. CrudRepository has a functionality that uses some keywords to automatically create logic using the given interface method names. And the underscores are reserved characters too. You can still escape using double underscore in the CrudRepository method names but it won't look good. So I chose to use camel case which is also complying the Java syntax.
 
 
 
@@ -351,21 +351,19 @@ public interface ContactRepository extends CrudRepository<Contact, Long> {
 ```java
 package com.endpoint.SpringKafkaMessaging.persistent.repository;
 
-import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import com.endpoint.SpringKafkaMessaging.persistent.model.Contact;
+import com.endpoint.SpringKafkaMessaging.persistent.model.AccessToken;
 
 @Repository
-public interface ContactRepository extends CrudRepository<Contact, Long> {
+public interface AccessTokenRepository extends CrudRepository<AccessToken, Long> {
 
-	List<Contact> findAllByUserId(Long userId);
-	
-	Contact findByContactUserId(Long contactUserId);
+	AccessToken findByUserId(Long userId);
 
-	void deleteByContactUserId(Long contactUserId);
+	void deleteByUserId(Long userId);
+
 }
 ```
 
@@ -392,7 +390,7 @@ public interface MessageRepository extends CrudRepository<Message, Long> {
 
 # Cache
 
-We're not integrating the cache environment as Spring persistent data and so won't be using the CrudRepository implementation for cache repository. Instead let's create the cache repository interface and create an implementation of it. Caching is going to used for quick activation and authentication responses. To achieve this we're going to store and query simple key-value pairs in the Redis data structure.
+We're not integrating the cache environment as Spring persistent data and so won't be using the CrudRepository implementation for cache repository. Instead let's create the cache repository interface and create an implementation of it. Caching is going to be used for quick activation and authentication responses. To achieve this we're going to store and query simple key-value pairs in the Redis data structure.
 
 ## Repository
 
