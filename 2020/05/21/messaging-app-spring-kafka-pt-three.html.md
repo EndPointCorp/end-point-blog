@@ -7,7 +7,7 @@ gh_issue_number: 1630
 
 ![Spring-Kafka](/blog/2020/05/21/messaging-app-spring-kafka-pt-three/spring-day.jpg)
 
-Photo by [Pascal Debrunner](https://unsplash.com/@debrupas) on [Unsplash](https://unsplash.com)
+[Photo](https://unsplash.com/photos/OKolJZ5jos4) by [Pascal Debrunner](https://unsplash.com/@debrupas) on [Unsplash](https://unsplash.com)
 
 This article is part of a [series](/blog/tags/spring-kafka-series).
 
@@ -17,15 +17,12 @@ In this article we’ll create the persistence and cache models and repositories
 
 #### Database
 
-We are going to keep the persistence model as simple as possible to focus on the overall functionality. Let’s first create our PostgreSQL database and schema to form our persistent model. Here is the list of tables that we’re going to create:
+We are going to keep the persistence model as simple as possible so we can focus on the overall functionality. Let’s first create our PostgreSQL database and schema. Here is the list of tables that we’re going to create:
 
-**users** will hold the users who are registered to use this messaging service.
-
-**access_token** will hold the unique authentication tokens per session. We’re not going to implement an authentication and authorization server specifically in this series but rather will generate a simple token and store simply in this table.
-
-**contacts** will hold relationships of existing users.
-
-**messages** will hold messages sent to users.
+- **users**: will hold the users who are registered to use this messaging service.
+- **access_token**: will hold the unique authentication tokens per session. We’re not going to implement an authentication and authorization server specifically in this series but rather will generate a simple token and store it in this table.
+- **contacts**: will hold relationships of existing users.
+- **messages**: will hold messages sent to users.
 
 Let’s create our tables:
 
@@ -62,7 +59,7 @@ CREATE TABLE kafkamessaging.messages (
 
 ### Model
 
-Before creating the models I want to add another dependency called [Lombok](https://projectlombok.org/) in `pom.xml` as below. Lombok provides very helpful annotations which automatically create getters, setters and many others of a class. 
+Before creating the models we’ll add another dependency called [Lombok](https://projectlombok.org/) in `pom.xml` as shown below. Lombok provides very helpful annotations which automatically create getters, setters and many other parts of a class. 
 
 ```xml
     <dependency>
@@ -71,7 +68,7 @@ Before creating the models I want to add another dependency called [Lombok](http
     </dependency>
 ```
 
-So here are the persistent model classes of the corresponding tables we created in the database. You’re going to notice the lombok and javax.persistence annotations in the model classes.
+So here are the persistent model classes of the corresponding tables we created in the database. Notice the Lombok and javax.persistence annotations in the model classes:
 
 #### User
 
@@ -270,11 +267,13 @@ public class Message implements Serializable {
 }
 ```
 
-Notice that we didn’t use underscores in the class field names for the corresponding table field names like `userId` for `user_id`. We’re going to use Spring’s [CrudRepository](https://docs.spring.io/spring-data/commons/docs/current/api/org/springframework/data/repository/CrudRepository.html) interface to create our data repositories. CrudRepository can use some keywords to automatically create logic using the given interface method names. Underscores are reserved characters, and even though you can still escape using double underscore in the CrudRepository method names, it won’t look good. So I chose to use camel case which is also complying the Java syntax.
+Note also that we didn’t use underscores in the class field names for the corresponding table field names like `userId` for `user_id`.
+
+We’re going to use Spring’s [CrudRepository](https://docs.spring.io/spring-data/commons/docs/current/api/org/springframework/data/repository/CrudRepository.html) interface to create our data repositories. CrudRepository can use keywords to automatically create logic using the given interface method names. Underscores are reserved characters, and even though you can still escape using double underscore in the CrudRepository method names, it doesn’t look good. I chose to use camel case, which also complies with Java convention.
 
 ### Repository
 
-Now I’m going to add the corresponding persistent repositories for each data model.
+Now let’s add the corresponding persistent repositories for each data model:
 
 #### UserRepository
 
@@ -365,7 +364,7 @@ public interface MessageRepository extends CrudRepository<Message, Long> {
 
 ### Cache
 
-We’re not integrating the cache environment as Spring persistent data and so we won’t be using the CrudRepository implementation for the cache repository. Instead let’s create the cache repository interface and create an implementation of it. Caching is going to be used for quick activation and authentication responses. To achieve this we’re going to store and query simple key-value pairs in the Redis data structure.
+We’re not going to integrate the cache environment as Spring persistent data, so we won’t be using the CrudRepository implementation for the cache repository. Instead, let’s create the cache repository interface and create an implementation of it. Caching is going to be used for quick activation and authentication responses. To achieve this we’re going to store and query simple key-value pairs with Redis.
 
 ### Repository
 
@@ -458,7 +457,7 @@ public class CacheRepositoryImpl implements CacheRepository {
 
 ### Activation and Authentication
 
-Activation would a one-time process to activate a mobile number for such a messaging service client. After an activation our simple authentication service will provide an access token to messaging client and this access token will be used for future client logins. To achieve these simple processes let’s create our authentication service interface.
+Activation is a one-time process to activate a mobile number for our messaging service client. After an activation our simple authentication service will provide an access token to messaging client, and this access token will be used for future client logins. To achieve these simple processes let’s create our authentication service interface.
 
 #### AuthService
 
