@@ -33,7 +33,7 @@ Finally he demonstrated a MEAN Stack demo application provisioned with help of S
 
 ### Moving fast with high performance Hack and PHP
 
-Dushyant Min spoke about the way Facebook optimised the PHP code base to deliver better performance when they supposed to handle a massive growth of users. Earlier there were compilers HipHop for PHP(HPHPc) or HPHPi(developer mode) to convert the php code to C++ binary and executed to provide the response. After sometime, Facebook developed a new compilation engine called [HipHop Virtual Machine](https://hhvm.com/) which uses Just-In-Time(JIT) compilation approach and converts the code to HipHop ByteCode (HHBC). Both Facebook’s production and development environment code runs over HHVM.
+Dushyant Min spoke about the way Facebook optimised the PHP code base to deliver better performance when they supposed to handle a massive growth of users. Earlier there were compilers HipHop for PHP (HPHPc) or HPHPi (developer mode) to convert the php code to C++ binary and executed to provide the response. After sometime, Facebook developed a new compilation engine called [HipHop Virtual Machine](https://hhvm.com/) which uses Just-In-Time (JIT) compilation approach and converts the code to HipHop ByteCode (HHBC). Both Facebook’s production and development environment code runs over HHVM.
 
 Facebook also created a new language called [Hack](http://hacklang.org/) which is very similar to PHP which added static typing and many other new features. The main reason for Hack is to get the fastest development cycle to add new features and release frequent versions. Hack also uses the HHVM engine.
 
@@ -41,7 +41,7 @@ HHVM engine supports both PHP and Hack, also it provides better performance comp
 
 <div class="separator" style="clear: both; text-align: center;"><a href="/blog/2015/01/12/web-development-big-data-and-devops-osi/image-1.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="480" src="/blog/2015/01/12/web-development-big-data-and-devops-osi/image-1.png" width="640"/></a></div>
 
-Also PHP code can be migrated to Hack by changing the <?php tag to <?hh and there are some converters (hackficator) available for code migration. Both PHP and Hack provide almost the same performance on the HHVM engine, but Hack has some additional developer-focussed features.
+Also PHP code can be migrated to Hack by changing the `<?php` tag to `<?hh` and there are some converters (hackficator) available for code migration. Both PHP and Hack provide almost the same performance on the HHVM engine, but Hack has some additional developer-focussed features.
 
 ### Application Monitoring and Log Management
 
@@ -61,7 +61,7 @@ ELK Stack = Elasticsearch, LogStash, Kibana. The architecture and the data flow 
 
 ### Apache Spark
 
-Prajod and Namitha presented the overview of Apache Spark which is a real time data processing system. It can work on top of Hadoop Distributed FileSystem(HDFS). [Apache Spark](https://spark.apache.org/) performs 100x faster in memory and 10x faster in disk compare to Hadoop. It fits with Streaming and Interactive scale of Big Data processing.
+Prajod and Namitha presented the overview of Apache Spark which is a real time data processing system. It can work on top of Hadoop Distributed FileSystem (HDFS). [Apache Spark](https://spark.apache.org/) performs 100x faster in memory and 10x faster in disk compare to Hadoop. It fits with Streaming and Interactive scale of Big Data processing.
 
 <div class="separator" style="clear: both; text-align: center;"><a href="/blog/2015/01/12/web-development-big-data-and-devops-osi/image-4.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="480" src="/blog/2015/01/12/web-development-big-data-and-devops-osi/image-4.png" width="640"/></a></div>
 

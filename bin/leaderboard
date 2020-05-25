@@ -1,0 +1,10 @@
+#!/bin/bash
+
+cd "$( dirname "${BASH_SOURCE[0]}" )"/.. > /dev/null || exit 1
+
+for y in 2???
+do
+	echo -n $y': '
+	grep -hc ^author: $y/*/*/*md | wc -l
+	grep -h  ^author: $y/*/*/*md | sed 's/^author: //; s/"//g' | sort | uniq -c | sort -nr
+done

@@ -5,9 +5,9 @@ tags: graphics, linux, liquid-galaxy, monitoring
 title: (Image|Graphics)Magick trick for monitoring or visualizations
 ---
 
-It’s a good time for all when we start poking fun at the visual assault of stereotypical PPT Presentations. On the other hand, when data is presented in an effective visual format, human brains are able to quickly grasp the ideas involved and pick out important pieces of information, or “outliers”.
+It’s a good time for all when we start poking fun at the visual assault of stereotypical PowerPoint presentations. On the other hand, when data is presented in an effective visual format, human brains are able to quickly grasp the ideas involved and pick out important pieces of information, such as “outliers”.
 
-Without getting into a long trumpeting session about the usefulness of data visualization (there are plenty of [books](https://www.amazon.com/s/ref=nb_sb_noss?url=search-alias%3Daps&field-keywords=Data+Visualization&x=0&y=0) on the subject), I’d like to jump directly into a Magick trick or two for creating simple visualizations.
+Without getting into a long trumpeting session about the usefulness of data visualization (there are plenty of [books](https://www.amazon.com/s?url=search-alias%3Daps&field-keywords=Data+Visualization) on the subject), I’d like to jump directly into a Magick trick or two for creating simple visualizations.
 
 Let’s imagine we’ve got a group of machines [serving a particular purpose](https://liquidgalaxy.endpoint.com/). Now let’s say I want quick insight into not only the internal activity of all 8 machines, but also what the systems believe they are sending to their displays.
 

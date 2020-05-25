@@ -1,7 +1,7 @@
 ---
 author: Steph Skardal
 gh_issue_number: 319
-tags: database, ecommerce, nosql, ruby, rails, spree
+tags: database, ecommerce, nosql, ruby, rails, spree, mongodb
 title: 'NoSQL at RailsConf 2010: An Ecommerce Example'
 ---
 

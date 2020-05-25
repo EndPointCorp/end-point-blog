@@ -5,8 +5,6 @@ tags: database, mysql, open-source, postgres, tips
 title: MySQL and Postgres command equivalents (mysql vs psql)
 ---
 
-
-
 Users toggling between MySQL and Postgres are often confused by the equivalent commands to accomplish basic tasks. Here’s a chart listing some of the differences between the command line client for MySQL (simply called **mysql**), and the command line client for Postgres (called **psql**).
 
 <table cellpadding="0" cellspacing="0" id="toggle" style="border: medium none ;"><tbody>
@@ -83,7 +81,7 @@ Change the current pager program</td><td>Environment variable <span style="font-
 
 Change the prompt</td><td><b>\set PROMPT1 <em>string</em></b>
 
-(same)</td><td>Note that the Postgres prompt cannot be reset by omitting an argument. A good prompt to use is:<b>\set PROMPT1 <span style="white-space: nowrap;">'%n@%`hostname`:%>%R%#%x%x%x '</span></b></td></tr><tr class="alt"><td><b>\T <em>filename</em></b>
+(same)</td><td>Note that the Postgres prompt cannot be reset by omitting an argument. A good prompt to use is: <b>\set PROMPT1 <span style="white-space: nowrap;">'%n@%`hostname`:%>%R%#%x%x%x '</span></b></td></tr><tr class="alt"><td><b>\T <em>filename</em></b>
 
 Sets the tee output file</td><td>No direct equivalent</td><td>Postgres can output to a pipe, so you can do: <b><span style="white-space: nowrap;">\o | tee <em>filename</em></span></b></td></tr><tr><td><b>\W</b>
 
@@ -162,6 +160,4 @@ Mostly the same</td><td>Most CREATE commands are similar or identical. Lookup sp
 
 If there are any commands not listed you would like to see, or if there are errors in the above, please let me know. There are differences in how you invoke **mysql** and **psql**, and in the flags that they use, but that’s a topic for another day.
 
-**Updates:** Added **PSQL_PAGER** and **\o |tee *filename***, thanks to the Davids in the comments section. Added **\t** back in, per Joe’s comment.
-
-
+**Updates:** Added **PSQL_PAGER** and <b>\o |tee *filename*</b>, thanks to the Davids in the comments section. Added **\t** back in, per Joe’s comment.

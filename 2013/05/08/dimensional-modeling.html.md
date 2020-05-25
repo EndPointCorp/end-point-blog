@@ -1,11 +1,9 @@
 ---
 author: Josh Tolley
 gh_issue_number: 795
-tags: database, pentaho
+tags: database, pentaho, reporting
 title: Dimensional Modeling
 ---
-
-
 
 People occasionally bring up the question, “What exactly is a data warehouse?” Though answers to this question vary, in short a data warehouse exists to analyze data and its behavior over large swaths of time or many different data sources. There’s more to it, though, than simply cramming historical data into the same old database. There are a number of defining characteristics, including the following:
 
@@ -30,5 +28,3 @@ Dimensional modeling is an interesting topic full of its own rules of thumb, whi
 Biggest among the limitations of an OLAP database is what’s called the “grain”. The grain describes exactly what information the fact table contains, and at what level of detail; it should be made clear during the first stages of warehouse design and widely understood by all involved. Queries that require information that isn’t part of the grain, or at finer levels of detail, must find a different fact table to use. But for queries which depend only on the available data, the fact table can be very efficient, as the database can partition it easily, and scan it unencumbered by simultaneous writes from other transactions, and filtered by simple conditions and INNER joins to the various dimension tables.
 
 Data warehouses differ from the traditional database in several other ways, but this covers some of the basics. Dimensional modeling alone is a well-developed field of study with numerous intricacies, where experience and careful training are important for developing a useful final model. But the analytical power of such databases has been proven.
-
-

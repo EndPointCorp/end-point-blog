@@ -5,8 +5,6 @@ tags: bucardo, database, mongodb, nosql, open-source, perl, postgres
 title: MongoDB replication from Postgres using Bucardo
 ---
 
-
-
 <a href="/blog/2011/06/12/mongodb-replication-from-postgres-using/image-0-big.png" onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5616998406288420578" src="/blog/2011/06/12/mongodb-replication-from-postgres-using/image-0.png" style="float:right; margin:0 0 10px 10px;cursor:pointer; cursor:hand;width: 200px; height: 128px;"/></a>
 
 One of the features of the upcoming version of [Bucardo](https://bucardo.org/Bucardo/) (a replication system for the PostgreSQL RDBMS) is the ability to replicate data to things other than [PostgreSQL](https://www.postgresql.org/) databases. One of those new targets is [MongoDB](https://www.mongodb.com/), a non-relational ‘document-based’ database. (to be clear, we can only use MongoDB as a target, not as a source)
@@ -265,5 +263,3 @@ A nice feature of MongoDB is its autovivification ability (aka dynamic schemas),
 Because MongoDB has no concept of transactions, and because Bucardo does not update, but does deletes plus inserts (for reasons I’ll not get into today), there is one more trick Bucardo does when replicating to a MongoDB instance. A collection named ‘bucardo_status’ is created and updated at the start and the end of a sync (a replication event). Thus, your application can pause if it sees this table has a ‘started’ value, and wait until it sees ‘complete’ or ‘failed’. Not foolproof by any means, but better than nothing :) You should, of course, carefully consider the way your app and Bucardo will coordinate things.
 
 Feedback from Postgres or MongoDB folk is much appreciated: there are probably some rough edges, but as you can see from above, the basics are there are working. Feel free to email the [bucardo-general mailing list](https://mail.endcrypt.com/mailman/listinfo/bucardo-general) or make a feature request / bug report on the [Bucardo GitHub page](https://github.com/bucardo/bucardo/issues).
-
-

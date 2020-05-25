@@ -1,7 +1,7 @@
 ---
 author: Kamil Ciemniewski
 gh_issue_number: 1219
-tags: classifiers, machine-learning, optimization, probability-theory, ruby
+tags: classifiers, machine-learning, optimization, probability, ruby
 title: "Learning from data basics II: simple Bayesian Networks"
 ---
 

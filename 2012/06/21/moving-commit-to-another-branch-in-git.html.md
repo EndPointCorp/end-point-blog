@@ -5,8 +5,6 @@ tags: git
 title: Moving a Commit to Another Branch in Git
 ---
 
-
-
 Perhaps you’ve made the same mistake I have. You’re right in the middle of developing a feature when a request comes up to fix a different completely unrelated problem. So, you jump right in and fix the issue and then you realize you forgot to start a new git feature branch. Suddenly you realize that you need to merge just the fix you made, but don’t want to merge the commits from the previous feature your working on.
 
 Git rocks at manipulating branches and I knew this, but I wasn’t sure how to just move one commit to the master branch. After some digging and a little trial and error, I finally figured it out. This may not be the simplest approach, but it worked for me and wanted to share. 
@@ -77,4 +75,3 @@ The last thing to do is delete my tmp branches.
 git branch -D tmp_master
 git branch -D tmp_feature
 ```
-

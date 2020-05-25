@@ -25,8 +25,12 @@ Unless otherwise specified, these tests follow symbolic links and operate on the
 
 All tests return boolean true or false unless otherwise noted.
 
-<table class="fancy">
-<tbody><tr>
+<style>
+tr { background: #f1f1f1 !important; }
+</style>
+<div class="table-scroll">
+<table>
+<tr>
 <th>Test</th>
 <th>bash/ksh/zsh</th>
 <th>Perl</th>
@@ -34,12 +38,13 @@ All tests return boolean true or false unless otherwise noted.
 <th>Python</th>
 </tr>
 
+<tbody>
 <tr>
 <td rowspan="2">File is readable by effective uid/gid</td>
 <td rowspan="2"></td>
 <td rowspan="2">-r 'file'</td>
 <td>test ?r, 'file'</td>
-<td rowspan="2"></td>
+<td rowspan="2">os.access('file', os.R_OK)</td>
 </tr>
 
 <tr>
@@ -51,7 +56,7 @@ All tests return boolean true or false unless otherwise noted.
 <td rowspan="2"></td>
 <td rowspan="2">-w 'file'</td>
 <td>test ?w, 'file'</td>
-<td rowspan="2"></td>
+<td rowspan="2">os.access('file', os.W_OK)</td>
 </tr>
 
 <tr>
@@ -63,7 +68,7 @@ All tests return boolean true or false unless otherwise noted.
 <td rowspan="2"></td>
 <td rowspan="2">-x 'file'</td>
 <td>test ?x, 'file'</td>
-<td rowspan="2"></td>
+<td rowspan="2">os.access('file', os.X_OK)</td>
 </tr>
 
 <tr>
@@ -428,7 +433,7 @@ All tests return boolean true or false unless otherwise noted.
 <td>os.stat('file1').st_mtime == os.stat('file2').st_mtime</td>
 </tr>
 
-</tbody></table>
+</tbody></table></div>
 
 Complete details are in the manuals for each language:
 
@@ -437,4 +442,4 @@ Complete details are in the manuals for each language:
 - zsh: [`man zshmisc`](https://linux.die.net/man/1/zshmisc) and search for “CONDITIONAL EXPRESSIONS”
 - Perl: [`perldoc -f -f`](https://perldoc.perl.org/functions/-X.html), [filetest pragma](https://perldoc.perl.org/filetest.html)
 - Ruby: [File class](https://ruby-doc.org/core-2.5.1/File.html) ([summary version](https://www.tutorialspoint.com/ruby/ruby_file_methods.htm)) and [test() built-in](https://ruby-doc.org/core-1.8.7/Kernel.html#M001085), [IO class](https://ruby-doc.org/core-2.5.1/IO.html) docs
-- Python: [os.stat](https://docs.python.org/3/library/os.html#os.stat), [stat() results](https://docs.python.org/3/library/stat.html), [os.path](https://docs.python.org/3/library/os.path.html#module-os.path)
+- Python: [os.access](https://docs.python.org/3/library/os.html#os.access), [os.stat](https://docs.python.org/3/library/os.html#os.stat), [stat() results](https://docs.python.org/3/library/stat.html), [os.path](https://docs.python.org/3/library/os.path.html#module-os.path)

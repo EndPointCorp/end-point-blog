@@ -1,11 +1,9 @@
 ---
 author: Josh Tolley
 gh_issue_number: 169
-tags: database, open-source
+tags: database, open-source, pentaho, reporting
 title: MDX
 ---
-
-
 
 Recently I’ve been working with Mondrian, an open source MDX engine. MDX stands for “multi-dimensional expressions”, and is a query language used in analytical databases. In MDX, data are considered in “cubes” made up of “dimensions”, which are concepts analogous to “tables” and “columns”, respectively, in a relational database. And in MDX, much as in SQL, queries written in a special query language tell the MDX engine to return a data set by describing filters in terms of the various dimensions.
 
@@ -40,7 +38,4 @@ This image shows what a more complex Mondrian MDX session might look like. The c
 
 <a href="https://2.bp.blogspot.com/_Q7kwFwwUJ0o/SlyDHK7jmgI/AAAAAAAAAPk/4VtQYz1bdI0/s1600-h/JPivot.png" onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5358301815880522242" src="/blog/2009/07/14/mdx/image-0.png" style="margin: 0px auto 10px; display: block; text-align: center; cursor: pointer; width: 320px; height: 309px;"/></a>
 
-
 For more on MDX query syntax or MDX in general, see [this Microsoft library MDX reference](https://docs.microsoft.com/en-us/sql/mdx/multidimensional-expressions-mdx-reference?view=sql-server-2017).
-
-

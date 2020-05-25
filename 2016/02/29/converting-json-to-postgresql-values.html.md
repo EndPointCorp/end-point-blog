@@ -5,7 +5,7 @@ tags: postgres
 title: Converting JSON to PostgreSQL values, simply
 ---
 
-In the [previous post](/2016/02/storing-statistics-json-data-in.html) I showed a simple PostgreSQL table for storing JSON data. Let’s talk about making the JSON data easier to use.
+In the [previous post](/blog/2016/02/24/storing-statistics-json-data-in) I showed a simple PostgreSQL table for storing JSON data. Let’s talk about making the JSON data easier to use.
 
 One of the requirements was to store the JSON from the files unchanged.
 However using the JSON operators for deep attributes is a little bit unpleasant.
@@ -31,20 +31,20 @@ I’ve made a simple view for this:
 ```sql
 CREATE VIEW stats AS
 SELECT
-  id                                                          as id,
-  created_at                                                  as created_at,
-  to_timestamp((data->>'start_ts')::double precision)         as start_ts,
-  to_timestamp((data->>'end_ts')::double precision)           as end_ts,
+  id                                                    AS id,
+  created_at                                            AS created_at,
+  to_timestamp((data->>'start_ts')::double precision)   AS start_ts,
+  to_timestamp((data->>'end_ts')::double precision)     AS end_ts,
   tstzrange(
     to_timestamp((data->>'start_ts')::double precision),
     to_timestamp((data->>'end_ts')::double precision)
-  )                                                           as ts_range,
+  )                                                     AS ts_range,
   ( SELECT array_agg(x)::INTEGER[]
-    FROM jsonb_array_elements_text(data->'resets') x)         as resets,
-  (data->'sessions')                                          as sessions,
-  (data->'metadata'->>'country')                              as country,
-  (data->'metadata'->>'installation')                         as installation,
-  (data->>'status')                                           as status
+    FROM jsonb_array_elements_text(data->'resets') x)   AS resets,
+  (data->'sessions')                                    AS sessions,
+  (data->'metadata'->>'country')                        AS country,
+  (data->'metadata'->>'installation')                   AS installation,
+  (data->>'status')                                     AS status
 FROM stats_data;
 ```
 
@@ -84,16 +84,16 @@ And now the view can be changed to this:
 ```sql
 CREATE VIEW stats AS
 SELECT
-  id                                                   as id,
-  created_at                                           as created_at,
-  to_timestamp(data->'start_ts')                       as start_ts,
-  to_timestamp(data->'end_ts'  )                       as end_ts,
-  to_timestamp_range(data->'start_ts', data->'end_ts') as ts_range,
-  to_array(data->'resets')                             as resets,
-  (data->'sessions')                                   as sessions,
-  (data->'metadata'->>'country')                       as country,
-  (data->'metadata'->>'installation')                  as installation,
-  (data->>'status')                                    as status
+  id                                                   AS id,
+  created_at                                           AS created_at,
+  to_timestamp(data->'start_ts')                       AS start_ts,
+  to_timestamp(data->'end_ts'  )                       AS end_ts,
+  to_timestamp_range(data->'start_ts', data->'end_ts') AS ts_range,
+  to_array(data->'resets')                             AS resets,
+  (data->'sessions')                                   AS sessions,
+  (data->'metadata'->>'country')                       AS country,
+  (data->'metadata'->>'installation')                  AS installation,
+  (data->>'status')                                    AS status
 FROM stats_data;
 ```
 
@@ -103,7 +103,6 @@ which is there as JSON for a purpose.
 The types made by PostgreSQL are:
 
 ```sql
-
                  View "public.stats"
     Column    │           Type           │ Modifiers
 ──────────────┼──────────────────────────┼───────────
@@ -130,15 +129,13 @@ created_at   | 2016-02-09 16:46:15.369802+01
 start_ts     | 2015-08-03 21:10:33+02
 end_ts       | 2015-08-03 21:40:33+02
 ts_range     | ["2015-08-03 21:10:33+02","2015-08-03 21:40:33+02")
-resets       | <null>
+resets       | \N
 sessions     | [{"end_ts": 1438629089, "start_ts": 1438629058, "application": "first"},
                 {"end_ts": 1438629143, "start_ts": 1438629123, "application": "second"},
                 {"end_ts": 1438629476, "start_ts": 1438629236, "application": "third"}]
 country      | USA
 installation | FIRST
 status       | on
-
-</null>
 ```
 
 The last part left is to extract information about the sessions.
@@ -154,15 +151,14 @@ The sessions view looks like this:
 ```sql
 CREATE MATERIALIZED VIEW sessions AS
 SELECT
-  id                                                                            as id,
-  country                                                                       as country,
-  installation                                                                  as installation,
-  s->>'application'                                                             as appname,
-  to_timestamp_range(s->'start_ts', s->'end_ts')                                as ts_range,
-  COALESCE(bool(s->>'occupancy_triggered'), false)                              as occupancy_triggered,
-  to_timestamp(s->'end_ts') - to_timestamp(s->'start_ts')                       as session_length
-FROM stats, jsonb_array_elements(sessions) s
-;
+  id                                                      AS id,
+  country                                                 AS country,
+  installation                                            AS installation,
+  s->>'application'                                       AS appname,
+  to_timestamp_range(s->'start_ts', s->'end_ts')          AS ts_range,
+  COALESCE(bool(s->>'occupancy_triggered'), false)        AS occupancy_triggered,
+  to_timestamp(s->'end_ts') - to_timestamp(s->'start_ts') AS session_length
+FROM stats, jsonb_array_elements(sessions) s;
 
 CREATE INDEX i_sessions_country  ON sessions (country);
 CREATE INDEX i_sessions_retailer ON sessions (installation);
