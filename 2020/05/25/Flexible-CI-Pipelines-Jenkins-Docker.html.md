@@ -1,6 +1,6 @@
 ---
 author: "Will Plaut"
-title: "Flexible CI pipelines with Jenkins and Docker"
+title: "Designing Flexible CI pipelines with Jenkins and Docker"
 tags: pipelines, jenkins, docker, groovy, scripted, deployment, deploy
 ---
 # Designing Flexible CI with Jenkins and Docker
