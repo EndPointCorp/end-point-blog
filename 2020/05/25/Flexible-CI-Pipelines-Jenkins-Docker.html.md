@@ -1,7 +1,7 @@
 ---
 author: "Will Plaut"
 title: "Designing Flexible CI pipelines with Jenkins and Docker"
-tags: pipelines, jenkins, docker, groovy, scripted, deployment, deploy
+tags: pipelines, jenkins, docker, groovy, scripted, deployment, deploy ,scripted pipeline
 ---
 # Designing Flexible CI with Jenkins and Docker
 When deciding on how to implement Continuous Integration (CI) for a new project, you are presented with lots of choices. Whatever you end up choosing, your CI needs to work for you and your team. Keeping the CI process and its mechanisms clear and concise helps everyone working on the project. The setup we are currently employing, and what I am going to showcase here, has proven to be flexible and powerful. I’m going to highlight some of the things Jenkins and Docker do that are really helpful.
