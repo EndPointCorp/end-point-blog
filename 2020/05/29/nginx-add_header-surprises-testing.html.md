@@ -187,4 +187,10 @@ Time:        2.721s, estimated 3s
 Ran all test suites matching /.\/__tests__\/webserver\/security-headers.test.js/i.
 ```
 
+This can also be extended to ensure that certain headers do not exist, or do not contain details that you do not want exposed:
+
+* the `Server` header should not reveal the Apache version number — see the [ServerTokens](https://httpd.apache.org/docs/trunk/mod/core.html#servertokens) directive
+* the `X-Powered-By` header should be absent, not exposing the fact that you are using PHP, and the version number — see the [expose_php](https://www.php.net/manual/en/ini.core.php#ini.expose-php) directive for `php.ini`
+* or with the Java Wildfly server, both of those headers are sent by default! — see instructions on how to omit them [by editing XML](https://zenidas.wordpress.com/recipes/hideexpose-http-headers-in-wildfly-10-1/) or [using jboss-cli](https://mariusz.wyszomierski.pl/en/turn-off-x-powered-by-i-server-headers-in-wildfly-10/)
+
 Now what if I forget about the nginx `add_headers` behavior, make changes, and inadvertently break things? Instead of it being unnoticed, my test suite will alert me so I can fix it before it goes into production!
