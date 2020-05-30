@@ -100,7 +100,7 @@ In this model, the approach is to take on a bold assumption: that the probabilit
 
 The Markov Model is elegantly introduced in the blog post [Next Word Prediction using Markov Model](https://medium.com/ymedialabs-innovation/next-word-prediction-using-markov-model-570fc0475f96).
 
-Why it’s naive? Because we just know that the probability of the word “love” depends on the word “I” **given a broader context**. A model that’s always going to output “roses” would miss the best word more often than not.
+Why is it naive? Because we know that the probability of the word “love” depends on the word “I” **given a broader context**. A model that’s always going to output “roses” would miss the best word more often than not.
 
 #### Modeling with neural networks
 
@@ -163,7 +163,7 @@ This is better as it breaks the ordering and distancing assumptions. It doesn’
 
 #### A better approach: word embeddings
 
-How could we keep our vector representation (as in one-hot encoding) but also introduce the distance? I’ve already glanced over this concept in my [post about the simple recommender system](/blog/2018/07/17/recommender-mxnet). The idea is to have a vector of floating-point values so that the closer the words are in their meaning, the smaller is the angle between them. We can easily compute a metric following this logic by measuring the [cosine distance](http://blog.christianperone.com/2013/09/machine-learning-cosine-similarity-for-vector-space-models-part-iii/). This way, the word representations are easy to feed into the encoder, and they already contain a lot of the information in themselves.
+How could we keep our vector representation (as in one-hot encoding) but also introduce the distance? I’ve already glanced over this concept in my [post about the simple recommender system](/blog/2018/07/17/recommender-mxnet). The idea is to have a vector of floating-point values so that the closer the words are in their meaning, the smaller the angle is between them. We can easily compute a metric following this logic by measuring the [cosine distance](http://blog.christianperone.com/2013/09/machine-learning-cosine-similarity-for-vector-space-models-part-iii/). This way, the word representations are easy to feed into the encoder, and they already contain a lot of the information in themselves.
 
 #### Not only words
 
@@ -171,7 +171,7 @@ Can we only have vectors for words? Couldn’t we have vectors for paragraphs, s
 
 ### Auto-encoders
 
-We’re slowly approaching the model from the paper. We still have one concept that’s vital in order to get why the model is going to work.
+We’re slowly approaching the model from the paper. We still have one concept that’s vital to understand in order to get why the model is going to work.
 
 Up until now, we talked about the following structure of the typical sequence-to-sequence neural network model:
 
@@ -210,7 +210,7 @@ The authors are claiming that the latter helped them in solving the issue of the
 
 #### The code
 
-The full PyTorch implementation described in this blog post is available at [https://github.com/kamilc/neural-text-summarization](https://github.com/kamilc/neural-text-summarization). You may find some of its parts less clean than others — it’s a work in progress. Most specifically, the data download is almost left out.
+The full PyTorch implementation described in this blog post is available at [https://github.com/kamilc/neural-text-summarization](https://github.com/kamilc/neural-text-summarization). You may find some of its parts less clean than others — it’s a work in progress. Specifically, the data download is almost left out.
 
 You can find the WikiData preprocessing in a notebook in the repository. For the ROCStories, I just downloaded the CSV files and concatenated with Unix `cat`. There’s an additional `process.py` file generated from a very simple `IPython` session.
 
@@ -453,7 +453,7 @@ One of the biggest problems the authors ran into was with the decoder outputting
 
 Authors called this phenomenon the “segregation issue”. What they have found was that the encoder was mapping paragraphs and sentences into completely separate regions. The solution to this problem was to trick the encoder into making both representations indistinguishable. The following figure comes from the paper and shows the issue visualized:
 
-![Segregation problem](/blog/2020/05/28/summae-neural-text-summarization-denoising-autoencoder/segregation.png)
+![Segregation problem](/blog/2020/05/28/summae-neural-text-summarization-denoising-autoencoder/segregation.jpg)
 
 #### Better gists by using the “critic”
 
