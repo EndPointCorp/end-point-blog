@@ -137,8 +137,8 @@ const http = axios.create({
 
 describe('Check security headers', () => {
   const verifs = [
-    { header: 'Strict-Transport-Security', expect: (x) => x.toMatch(/max-age=\d{3,}/) },
-    { header: 'X-Content-Type-Options',    expect: (x) => x.toEqual('nosniff')        },
+    { header: 'strict-transport-security', expect: (x) => x.toMatch(/max-age=\d{3,}/) },
+    { header: 'x-content-type-options',    expect: (x) => x.toEqual('nosniff')        },
   ];
 
   const locs = [
@@ -152,17 +152,17 @@ describe('Check security headers', () => {
   // throw no exceptions for non-success HTTP response status
   const conf = { validateStatus: () => true };
 
-  for (const v of verifs) {
-    for (const l of locs) {
-      test(`${v.header} at ${l.status} ${l.path}`, async () => {
-        const res = await http.get(l.path, conf);
-        expect(res.status).toBe(l.status);
-        const h = v.header.toLowerCase();
-        v.expect(expect(res.headers[h]));
-      });
-    }
+  for (const l of locs) {
+    test(`${l.status} ${l.path}`, async () => {
+      const res = await http.get(l.path, conf);
+      expect(res.status).toBe(l.status);
+      for (const v of verifs) {
+        v.expect(expect(res.headers[v.header]));
+      }
+    });
   }
 });
+
 ```
 
 Here I run just this one test rather than the whole suite:
@@ -174,21 +174,16 @@ testing on https://https://your.dom.ain
 
  PASS  webserver/security-headers.test.js
   Check security headers
-    ✓ Strict-Transport-Security at 200 /robots.txt (60ms)
-    ✓ Strict-Transport-Security at 200 /feed/endpoint/of/interest (780ms)
-    ✓ Strict-Transport-Security at 403 /api/other/auth/endpoint (515ms)
-    ✓ Strict-Transport-Security at 404 /never/gonna/give/you/up! (7ms)
-    ✓ Strict-Transport-Security at 500 /api/dies/for/testing (12ms)
-    ✓ X-Content-Type-Options at 200 /robots.txt (4ms)
-    ✓ X-Content-Type-Options at 200 /feed/endpoint/of/interest (3ms)
-    ✓ X-Content-Type-Options at 403 /api/other/auth/endpoint (16ms)
-    ✓ X-Content-Type-Options at 404 /never/gonna/give/you/up! (3ms)
-    ✓ X-Content-Type-Options at 500 /api/dies/for/testing (11ms)
+    ✓ 200 /robots.txt (55ms)
+    ✓ 200 /feed/endpoint/of/interest (408ms)
+    ✓ 403 /api/other/auth/endpoint (18ms)
+    ✓ 404 /never/gonna/give/you/up! (6ms)
+    ✓ 500 /api/dies/for/testing (12ms)
 
 Test Suites: 1 passed, 1 total
-Tests:       10 passed, 10 total
+Tests:       5 passed, 5 total
 Snapshots:   0 total
-Time:        2.911s
+Time:        2.721s, estimated 3s
 Ran all test suites matching /.\/__tests__\/webserver\/security-headers.test.js/i.
 ```
 
