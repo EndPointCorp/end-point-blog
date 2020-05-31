@@ -1,6 +1,6 @@
 ---
 author: "Will Plaut"
-title: "Designing Flexible CI pipelines with Jenkins and Docker"
+title: "Designing flexible CI pipelines with Jenkins and Docker"
 tags: jenkins, docker, groovy
 gh_issue_number: 1633
 ---
