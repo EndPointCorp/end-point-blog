@@ -312,7 +312,7 @@ def decode(self, embeddings, encoded, lengths, modes):
         )
         decoded = self.decode_batch_norms[ix](decoded.transpose(2,1)).transpose(2,1)
 
-    decoded = decoded.transpose(1,0)# [:, 0:(decoded.shape[0] - 1), :]
+    decoded = decoded.transpose(1,0)
 
     return self.linear_logits(decoded)
 ```
