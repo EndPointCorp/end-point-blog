@@ -14,20 +14,28 @@ Speaking on upgrading libraries and dependencies,it is often said: “don't upda
 
 * Apply timely security patches to reduce vulnerabilities and defend from cyberattack
 * Identify deprecated functionality earlier and use alternatives
-* Remain on your Long Term Support (LTS) version
 * Apply fixes on known bugs in the library
+* Remain on latest version of software or library for stability
+
+In addition, staying on top of latest major version yields benefit of applying minior and patch release seamlessly without any risk. Most of the software or libraries follow semantic versioning method which is MAJOR.MINOR.PATCH format of version as stated below.
+
+* MAJOR version - Incompatible API changes
+* MINOR version - Add functionality with backward compatiblity
+* PATCH version - Bug fixes with backward compatibility
+
+So being on top of latest major version helps to apply minor and patch releases without breaking any existing functionalities of the application.
 
 ### Benefits
 New versions of software libraries are periodically released which means the latest release superior to the former. Why don’t we make use of the better version when it is available. It is recommended to keep those softwares and libraries updated to get benefits such as bug fixes, new features, boosted performance, improvements on stability, compatibility, and security measures. Most of the time software/libraries upgraded are ignored in projects due to very minimal effects in appearance. However frequent updates deliver benefits which clearly demonstrate the importance of upgrading software libraries.
 
 ### Real Time Difficulties
-In real-life scenarios, bug fixes and performance optimization of the application become a higher priority than upgrading libraries. In many cases, this results in a time discrepancy between the library’s version in application and the latest version upgrade. This discrepancy can lead to the following issues:
+In real-life scenarios, bug fixes and performance optimization of the application become a higher priority than upgrading libraries. In many cases, this results in a time discrepancy between the library’s version in application and the latest version upgrade. This discrepancy can lead to the following issues when upgrading libraries:
 
 * Unexpected error handling in new releases
 * Unexpected unsupported library dependency error
-* Complete end-to-end automated testing on library upgrade
+* Need to do complete end-to-end testing due to major version of library upgrade
 * Lack of demonstration of work being done can lead to a lack of confidence from client
-* Difficulty in estimatimating workload due to expectation of major unexpected errors
+* Difficulty in estimating workload due to expectation of major unexpected errors
 
 The following passages offer guidance in how to adequately prepare for these issues.  
 
