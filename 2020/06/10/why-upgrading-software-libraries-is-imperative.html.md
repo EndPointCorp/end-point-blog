@@ -51,11 +51,11 @@ Below are some examples of software lists you might have for a project (we left 
 ##### Programming software & servers
 
 <table><tbody>
-<tr><th>Software</th><th>Current</th><th>Release date</th></tr>
+<tr><th>Software</th><th>Running</th><th>Release date</th></tr>
 <tr><td>Ubuntu</td><td>12.04.5</td><td>2017-04-28</td></tr>
-<tr><td>nginx</td><td></td></tr>
+<tr><td>nginx</td><td>1.12.2</td><td>2017-10-17</td></tr>
 <tr><td>Jetty Java Servlet container</td><td>9.2.3</td><td>2014-09-05</td></tr>
-<tr><td>JVM/Java</td><td>1.7 </td><td></td></tr>
+<tr><td>JVM/Java</td><td>1.7u79</td><td>2015-04-14</td></tr>
 <tr><td>Scala</td><td>2.11</td><td>2014-04-21</td></tr>
 <tr><td>Kotlin</td><td>0.9.223</td><td>2014-10-23</td></tr>
 <tr><td>Lucene</td><td>4.10.0</td><td>2014-09-03</td></tr>
@@ -65,10 +65,10 @@ Below are some examples of software lists you might have for a project (we left 
 ##### Java libraries
 
 <table><tbody>
-<tr><th>Software</th><th>Current</th><th>Release date</th></tr>
+<tr><th>Software</th><th>Running</th><th>Release date</th></tr>
 <tr><td>joda-convert</td><td>1.3.1</td><td>2013-03-01</td></tr>
 <tr><td>joda-time</td><td>2.2</td><td>2013-03-01</td></tr>
-<tr><td>play-json</td><td>2.11</td><td></td></tr>
+<tr><td>play-json</td><td>2.7.0</td><td>2019-01</td></tr>
 <tr><td>httpclient</td><td>4.1.2</td><td>2011-07-10</td></tr>
 <tr><td>httpcore</td><td>4.1.2</td><td>2011-07-22</td></tr>
 <tr><td>httpmime</td><td>4.1.2</td><td>2011-07-29</td></tr>
@@ -104,18 +104,15 @@ Below are some examples of software lists you might have for a project (we left 
 ##### JavaScript libraries
 
 <table><tbody>
-<tr><th>Software</th><th>Current</th><th>Release date</th></tr>
+<tr><th>Software</th><th>Running</th><th>Release date</th></tr>
 <tr><td>angular</td><td>1.2.11</td><td>2014-02-03</td></tr>
 <tr><td>jQuery</td><td>1.10.2</td><td>2013-07-03</td></tr>
 <tr><td>calendar</td><td>1.51</td><td>2005-03-07</td></tr>
-<tr><td>calendar-en</td><td></td><td></td></tr>
 <tr><td>calendar-setup</td><td>1.25</td><td>2005-03-07</td></tr>
-<tr><td>fckeditor</td><td>-</td><td></td></tr>
-<tr><td>dom-drag</td><td></td><td>2001-10-28</td></tr>
-<tr><td>jt_</td><td></td><td></td></tr>
-<tr><td>jt_DialogBox</td><td>2007-08-23</td><td></td></tr>
-<tr><td>jt_AppDialogs</td><td>2005-04-09</td><td></td></tr>
-<tr><td>dialog_box</td><td></td><td></td></tr>
+<tr><td>fckeditor</td><td>2.6.11</td><td>2014-06-02</td></tr>
+<tr><td>dom-drag</td><td>—</td><td>2001-10-28</td></tr>
+<tr><td>jt_DialogBox</td><td>29</td><td>2012-08</td></tr>
+<tr><td>jt_AppDialogs</td><td>9</td><td>2005-05</td></tr>
 <tr><td>ng-grid</td><td>2.0.7</td><td>2013-06-07</td></tr>
 <tr><td>ng-grid-flexible-height</td><td>2.0.7</td><td>2013-06-07</td></tr>
 <tr><td>ng-grid.css</td><td>2.0.7</td><td>2013-06-07</td></tr>
