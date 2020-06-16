@@ -12,6 +12,8 @@ With the latest improvements coming to the [Windows Subsystem for Linux with its
 
 In this post, we'll walk through the steps that I had to take to set up a PHP development environment in Windows, running in a Ubuntu Docker container running on WSL2, and VS Code. Let's go.
 
+> Note: You have to be on the latest version of Windows 10 Pro (Version 2004) in order to install WSL2 by the usual methods. If not, you'd need to be part of the Windows insiders program in order to have access to the software.
+
 ## What's new with WSL 2.
 
 Many have written about this so I won't be redundant and just point you right to the source: https://docs.microsoft.com/en-us/windows/wsl/wsl2-index
@@ -36,7 +38,37 @@ Performance not whistanding, WSL's first release was pretty stable. I did howeve
 
 ## The development environment
 
-Ok, now with some of the motivation out of the way, let's try and build a quick PHP hello world app, run it in a Docker container inside WSL 2, which we can edit with VS Code and browse from a browser from Windows.
+Ok, now with some of the motivation out of the way, let's try and build a quick PHP hello world app, run it in a Docker container inside WSL 2, and make sure we can edit and debug it with VS Code and browse it in a browser from Windows.
+
+### Step 1: Install WSL2 and Ubuntu
+
+Step 1 in obviously to install a Linux distribution that we like and the engine that runs it. [Microsoft's own documentation](https://docs.microsoft.com/en-us/windows/wsl/install-win10) offers an excellent guide on how to do just that. But in summary, we need to:
+
+1. Enable the "Windows Subsystem for Linux" and "Virtual Machine Platform" features by running these on an elevated PowerShell:
+
+```ps
+dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+```
+
+2. Restart your machine.
+3. Set WSL 2 as the default version with: `wsl --set-default-version 2`. Also from a PowerShell.
+4. Install your desired distribution from the Microsoft Store. In my case, I chose [Ubuntu 20.04 LTS](https://www.microsoft.com/es-do/p/ubuntu-2004-lts/9n6svws3rx71?rtc=1&activetab=pivot:overviewtab).
+5. After installing, open the resulting new app from the Start menu and it should come up with a command line console, and wait for it to finish installing. It should prompt for a username and password along the way.
+
+Optionally, you can install the [Windows Terminal](https://github.com/microsoft/terminal) app to get a better command line experience. Windows Terminal can be used to interact with PowerShell and the classic CMD, and also with our WSL distributions.
+
+### Step 2: Install Docker
+
+Installing Docker is very straight forward. Just download the installer for [Docker Desktop for Windows](https://hub.docker.com/editions/community/docker-ce-desktop-windows/), execute it, and follow the wizard's steps. The only gotcha is to make sure that, during installation, the "Use the WSL 2 based engine" option is selected. In most cases, the installer will detect WSL 2 though, and automatically have the option selected.
+
+Follow the [official instructions](https://docs.docker.com/docker-for-windows/wsl/) for more details on the process, but it really is that simple.
 
 
-[AMD](https://github.com/amdjs/amdjs-api/blob/master/AMD.md)
+
+### Resources:
+
+- [Windows Subsystem for Linux Installation Guide for Windows 10](https://docs.microsoft.com/en-us/windows/wsl/install-win10)
+- [Using Docker in WSL 2](https://code.visualstudio.com/blogs/2020/03/02/docker-in-wsl2)
+- [Docker Desktop WSL 2 backend](https://docs.docker.com/docker-for-windows/wsl/)
+- [https://code.visualstudio.com/docs/remote/remote-overview](https://code.visualstudio.com/docs/remote/remote-overview)
