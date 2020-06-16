@@ -48,7 +48,7 @@ Much can be learned from a major upgrade on both a business and technical level,
 
 Below are some examples of software lists you might have for a project (we left out the latest versions for brevity in this post, but it’s helpful to have a column for those too!).
 
-##### Programming sofware & servers
+##### Programming software & servers
 
 <table><tbody>
 <tr><th>Software</th><th>Current</th><th>Release date</th></tr>
