@@ -64,7 +64,157 @@ Installing Docker is very straight forward. Just download the installer for [Doc
 
 Follow the [official instructions](https://docs.docker.com/docker-for-windows/wsl/) for more details on the process, but it really is that simple.
 
+### Step 3: Install some useful VS Code extensions
 
+Our objective is to create a new development environment inside a Docker container and connect to it directly with VS Code. To do that, we use a few useful extensions:
+
+1. [The Docker extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker) which allows us to browse and manage images and containers and other types of Docker assets.
+2. [The Remote - WSL extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl) which allows VS Code to connect to a WSL distribution.
+3. [The Remote - Containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) which allows VS Code to connect to a container.
+
+### Step 4: Create the development container
+
+The extensions that we installed will allow us to use VS Code to work on code from within our WSL Ubuntu as well as from the container. What we want though, is to connect VS Code to a container. There are a few ways to do this, but I will describe the one I think is the easiest, most convenient and "automagic" by fully leveraging the tools.
+
+Let's begin by opening a terminal session into our WSL Ubuntu, which will show something like this:
+
+```
+Welcome to Ubuntu 20.04 LTS (GNU/Linux 4.19.104-microsoft-standard x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+...
+
+kevin@kevin-thinkpad:/mnt/c/Users/kevin$
+```
+
+#### The project directory
+
+Let's change to our home, create a new directory for our new project, and change into it.
+
+```sh
+$ cd ~
+$ mkdir php-in-docker-demo
+$ cd php-in-docker-demo
+```
+
+Because we installed the Remote - WSL extension, we can open up this directory in VS Code with `code .`. Opening a terminal in this VS Code instance opens WSL console, not Windows.
+
+#### The Dockerfile
+
+Now let's create a new file called `Dockerfile` which will define what our development environment image will look like. For a no frills PHP environment, mine looks like this:
+
+```docker
+# Base the image on the official Ubuntu one from Docker Hub: https://hub.docker.com/_/ubuntu
+FROM ubuntu
+
+# The RUN statement executes the command that follows it inside the container
+# These install PHP and its prerequisite
+RUN apt-get update && apt-get install -y software-properties-common
+RUN apt-get update && apt-get install -y php
+
+# These ones install Xdebug and configure it so that the VS Code debugger can use it.
+RUN apt-get update && apt-get install -y php-xdebug
+RUN echo "xdebug.remote_enable=on" >> /etc/php/7.4/mods-available/xdebug.ini
+RUN echo "xdebug.remote_autostart=on" >> /etc/php/7.4/mods-available/xdebug.ini
+
+# This installs Composer
+RUN apt-get update && apt-get install -y composer
+
+# The CMD statement tells Docker which command to run when it starts up the container. Here, we just call bash
+CMD ["bash"]
+```
+
+This script will later be used to create our development container. It will have PHP, [Xdebug](https://xdebug.org/) and [Composer](https://getcomposer.org/). This is all we need for our simple hello world app. For more complex scenarios, other software like database clients or PHP extensions can be easily installed with additional `RUN` statements that call upon the `apt` package manager.
+
+Consider reading through [Docker's own official documentation](https://docs.docker.com/engine/reference/builder/) on Dockerfiles to learn more.
+
+#### The Configuration File
+
+Now, to leverage VS Code's capabilities, let's add a so-called "Development Container Configuration File". In our current location, we need to create a new directory called `.devcontainer` and, inside that, a new file called `devcontainer.json`. I put these contents in mine:
+
+```json
+{
+    // The name used by VS Code to identify this development environment
+    "name": "PHP in Docker Demo",
+
+    // Sets the run context to one level up instead of the .devcontainer folder.
+    "context": "..",
+
+    // Update the 'dockerFile' property if you aren't using the standard 'Dockerfile' filename.
+    "dockerFile": "../Dockerfile",
+
+    // Add the IDs of extensions you want installed when the container is created.
+    // This is the VS Code PHP Debug extension.
+    // It needs to be installed in the container for us to have access to it.
+    "extensions": [
+        "felixfbecker.php-debug"
+    ],
+
+    // Use 'forwardPorts' to make a list of ports inside the container available locally.
+    // When we run our PHP app, we will use this port.
+    "forwardPorts": [5000],
+}
+```
+
+A default version of this file can be automatically generated by running the "Remote-Containers: Add Development Container Configuration Files..." command in the Command Palette in VS Code (Ctrl + Shift + P).
+
+#### The Development Container
+
+Now that we have all that in place, we can create our image, run our container, and start coding our app. Bring up the VS Code Command Palette with Ctrl + Shift + P and run the "Remote-Containers: Reopen in Container" command. The command will:
+
+1. Read the Dockerfile and create an image based on that. This is like running `docker build -t AUTOGENERATED_IMAGE_ID .`
+2. Run that image with the settings specified in `.devcontainer/devcontainer.json`. In our case, all it will do is enable the container's port 5000 to be accessible by the host. This is more or less like running: `docker run -d -p 5000:5000 -v ${PWD}:/workspaces/php-in-docker-demo AUTOGENERATED_IMAGE_ID`
+3. Open a new VS Code instance connected to the container with the `/workspaces/php-in-docker-demo` directory open.
+
+It will take a while, but after it's done, we will have a VS Code instance running directly in the container. This is super awesome. Open the VS Code terminal with Ctrl + \` and see for yourself. It will show a prompt looking like this: 
+
+```sh
+root@ec5be7dd0b9b:/workspaces/php-in-docker-demo#
+```
+
+You can for example, run `php -v` in this terminal, and expect something along these lines:
+
+```
+PHP 7.4.3 (cli) (built: May 26 2020 12:24:22) ( NTS )
+Copyright (c) The PHP Group
+Zend Engine v3.4.0, Copyright (c) Zend Technologies
+    with Zend OPcache v7.4.3, Copyright (c), by Zend Technologies
+```
+
+This is PHP running, not in Windows, not in our WSL Ubuntu, but in the Docker container.
+
+#### Hello Windows + WSL2 + Ubuntu + Docker + PHP + Visual Studio Code
+
+Let's now create out app. Add a new `index.php` file containing something silly like:
+
+```php
+<?php
+
+echo "Hello Windows + WSL2 + Ubuntu + Docker + PHP + Visual Studio Code!";
+```
+
+Then, in the VS Code console (remember, Ctrl + \`), start up an instance of the built in PHP development server wth `php -S 0.0.0.0:5000`. It's important that we use port 5000 because that's the one that we configured our container to use.
+
+Navigate to `http://localhost:5000/` in your browser and feel good about a job well done.
+
+![Running app](./developing-in-linux-via-docker-in-windows-10-wsl2/running.png)
+
+#### Interactive debugging
+
+When configuring our Development Container, we added Xdebug and the PHP Debug VS Code extension. This means that VS Code can leverage Xdebug to provide an interactive debugging experience for PHP code.
+
+Almost everyting is set up at this point, we just need to do the usual VS Code configuration and add a `launch.json` file. To do so, in VS Code, press Ctrl + Shift + D to bring up the "Run" panel, click on the "create a launch.json file" link, and in the resulting "Select Environment" menu, select "PHP".
+
+![Running app](./developing-in-linux-via-docker-in-windows-10-wsl2/vscode-run.png)
+
+After that, the "Run" panel will show a green triangular "Start Debugging" button next to a "Listen to XDebug" text. If you haven't already, start up a dev web server with `php -S 0.0.0.0:5000`, click on the "Start Debugging" button, put a breakpoint somewhere in your `index.php` file, and finally open up `http://localhost:5000/` in a browser.
+
+![Running app](./developing-in-linux-via-docker-in-windows-10-wsl2/debug.png)
+
+We're interactively debugging PHP code running on a Docker container in WSL from our Windows IDE/editor. Pretty cool, huh?
 
 ### Resources:
 
