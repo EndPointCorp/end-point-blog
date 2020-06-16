@@ -12,16 +12,30 @@ With the latest improvements coming to the [Windows Subsystem for Linux with its
 
 In this post, we'll walk through the steps that I had to take to set up a PHP development environment in Windows, running in a Ubuntu Docker container running on WSL2, and VS Code. Let's go.
 
-### What's new with WSL 2.
+## What's new with WSL 2.
 
 Many have written about this so I won't be redundant and just point you right to the source: https://docs.microsoft.com/en-us/windows/wsl/wsl2-index
 
-Me being a WSL 1 veteran, what I can say is the few main features/aspects that made me interested in trying this latest WSL release.
+Being a WSL 1 veteran, what I can mention are the main improvements that have been made since the last time I used it which have sparked my interested in trying it again.
 
-1. It's faster and more compatible.
-3. It's better integrated with Windows.
-2. It can now run Docker.
-3. A newer version means several bugfixes.
+### 1. It's faster and more compatible.
 
-### subtitle
+WSL 2 introduces a complete architectural overhaul. Now, Windows ships with a full Linux Kernel which is what WSL 2 distributions use to run. This results in greatly improved file system performance and much better compatibility with Linux programs. It's no longer running a Linux look-alike, but rather, actual Linux.
+
+### 2. It's better integrated with Windows.
+
+This is a small one: we can now use the Windows explorer to browse files within a WSL distribution. This is not a WSL 2 exclusive feature, it has been there for a while now. I think it's worth mentioning though because it truly is a great convenience and a far cry from WSL's first release, where Microsoft specifically advised against browsing WSL distribution file systems from Windows. If anything else, this makes WSL feel like a first class citizen in the Windows ecosystem and shows that Microsoft actually cares about making it a good experience. 
+
+### 3. It can run Docker.
+
+I've recently been learning more and more about Docker and it's quickly becoming my preferred way of setting up development environments. Due to its lightweightness, ease of use, and VM-like compartmentalization, I find it really convenient to develop against a purpose-built Docker container, rather than directly in my local machine. And with VS Code's Remote development extension, the whole thing is very easy to set up. Docker for windows now supports running containers within WSL, so I'm eager to try that out and see how it all works.
+
+### 4. A newer version means several bugfixes.
+
+Performance not whistanding, WSL's first release was pretty stable. I did however, encounter some weird bugs and gotchas when working with the likes of SSH and Ruby during certain specific tasks. It was nothing major as workwrounds were readily available, so I won't bother mentioning them here again. I've already discussed some of them [here](https://www.endpoint.com/blog/2019/04/04/rails-development-in-windows-10-pro-with-visual-studio-code-and-wsl). But the fact that the technology has matured since last time I saw it, and considering the architectural direction it is going in, I'm excited to not have to deal with any number of quirks. Developing software is hard enough as it is, I don't need to also be fighting my OS.
+
+## The development environment
+
+
+
 [AMD](https://github.com/amdjs/amdjs-api/blob/master/AMD.md)
