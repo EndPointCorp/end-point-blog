@@ -36,6 +36,7 @@ Performance not whistanding, WSL's first release was pretty stable. I did howeve
 
 ## The development environment
 
+Ok, now with some of the motivation out of the way, let's try and build a quick PHP hello world app, run it in a Docker container inside WSL 2, which we can edit with VS Code and browse from a browser from Windows.
 
 
 [AMD](https://github.com/amdjs/amdjs-api/blob/master/AMD.md)
