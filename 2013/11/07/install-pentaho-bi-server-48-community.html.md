@@ -5,16 +5,14 @@ tags: analytics, pentaho, postgres
 title: Install Pentaho BI Server 4.8 Community Edition with PostgreSQL Repository
 ---
 
-Pentaho BI server community edition can be installed through archive file available from SourceForge.
+Pentaho BI server community edition can be installed through an archive file available from SourceForge.
 
 Prerequisites
 
 - Java 6
 - PostgreSQL
 
-Download Pentaho BI Server installation file (biserver-ce-4.8.0-stable.zip) from SourceForge
-
-http://sourceforge.net/projects/pentaho/files/Business%20Intelligence%20Server/4.8.0-stable
+Download Pentaho BI Server installation file (biserver-ce-4.8.0-stable.zip) from SourceForge: http://sourceforge.net/projects/pentaho/files/Business%20Intelligence%20Server/4.8.0-stable
 
 Unzip the archive file and navigate inside biserver-ce to set sh files to executable mode:
 
@@ -23,6 +21,7 @@ $ unzip biserver-ce-4.8.0-stable.zip
 $ cd biserver-ce
 $ find . -type f -iname '*.sh' -exec chmod a+x {} \;
 ```
+
 Pentaho community edition uses hsql database as default. Need to create two databases in Postgres for Pentaho. Find the SQL files to create databases under biserver-ce/data/postgresql. database_name, user_name and password are configurable through SQL files. Fix two errors before creating database using SQL files. Comment two lines in below files tables as commented.
 
 - create_quartz_postgresql.sql
@@ -49,6 +48,7 @@ ALTER TABLE qrtz_fired_triggers
 --    ADD COLUMN PRIORITY INTEGER NOT NULL;
 --    ALTER COLUMN PRIORITY SET NULL;
 ```
+
 Modify database name, username & password if necessary and create databases for configuration and scheduling by running below commands.
 
 ```bash
@@ -58,6 +58,7 @@ $ psql -U postgres -a -f create_sample_datasource_postgresql.sql
 $ psql -U postgres -a -f migrate_quartz_postgresql.sql
 $ psql -U postgres -a -f migration.sql
 ```
+
 Verify databases quartz (scheduling) and hibernate (configuration) and their tables.
 
 Now database name, username, password and driver should be configured in following places in files. By default hsql drivers, settings enabled in config files so comment hsql configurations and enable Postgres settings.
@@ -170,7 +171,8 @@ Let’s start the Pentaho BI server and try out its great features. Commands to 
 biserver-ce$ ./start-pentaho.sh
 biserver-ce$ ./stop-pentaho.sh
 ```
-Trouble shooting
+
+Troubleshooting:
 
 ```bash
 biserver-ce$ tail -f tomcat/logs/catalina.out

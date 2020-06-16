@@ -1,11 +1,9 @@
 ---
 author: Josh Tolley
 gh_issue_number: 216
-tags: open-source, postgres
+tags: open-source, postgres, pentaho, reporting, epitrax
 title: Automatically building Pentaho metadata
 ---
-
-
 
 Every so often I’ll hear of someone asking for a way to allow their users to write queries against their database without having to teach everyone SQL. There are various applications to do this: [BusinessObjects](https://web.archive.org/web/20091124142134/http://www.sap.com/solutions/sapbusinessobjects/index.epx) and [Cognos](https://www.ibm.com/products/cognos-analytics), are two common commercial examples, among many others. [Pentaho](http://www.pentaho.com) and [JasperReports](https://www.jaspersoft.com/) provide similar capabilities in the open-source world. These tools allow users to write reports by selecting fields from a user-friendly list, adding suitable constraints, and making other formatting and filtering choices, all without needing to understand SQL.
 
@@ -18,5 +16,3 @@ TriSano is a Ruby-on-Rails application, running on JRuby, and the ability to use
 In short, the script makes a new Pentaho metadata file entirely from scratch, using only information from a small number of purpose-built database tables, and database structure information taken directly from the PostgreSQL catalogs. It creates a schema file, populates it with descriptions of each of the actual database tables our users are interested in, assigns friendly names to each of the database objects with which users will interact, and divides up the results into user-defined groupings meaningful to their business.
 
 I’m not familiar with a commercial reporting package that allows for modification of the underlying metadata without user intervention; doing something like this without the benefit of open-source software would have been daunting indeed.
-
-

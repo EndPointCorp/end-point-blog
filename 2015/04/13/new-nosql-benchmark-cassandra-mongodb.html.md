@@ -1,7 +1,7 @@
 ---
 author: Jon Jensen
 gh_issue_number: 1112
-tags: benchmarks, big-data, database, nosql
+tags: benchmarks, big-data, database, nosql, cassandra, mongodb, couchdb
 title: 'New NoSQL benchmark: Cassandra, MongoDB, HBase, Couchbase'
 ---
 

@@ -1,7 +1,7 @@
 ---
 author: "Josh Tolley"
 title: "Cooking with CAS"
-tags: java, architecture, security, programming, php
+tags: java, architecture, security, programming, php, spring
 gh_issue_number: 1600
 ---
 

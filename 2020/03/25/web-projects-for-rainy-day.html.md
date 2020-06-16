@@ -21,12 +21,12 @@ Make a list of your entire stack, from OS to database to development frameworks.
   <table>
     <thead>
       <td>Software</td>
-      <td>What</td>
-      <td>Our Version</td>
-      <td>Date Released</td>
-      <td>End of Support</td>
-      <td>Next Update</td>
-      <td>Current Production Version</td>
+      <td>Purpose</td>
+      <td>Our version</td>
+      <td>Release date</td>
+      <td>End of support</td>
+      <td>Next update</td>
+      <td>Newest version</td>
       <td>Notes</td>
     </thead>
     <tr>
@@ -42,11 +42,11 @@ Make a list of your entire stack, from OS to database to development frameworks.
     <tr>
       <td>Nginx</td>
       <td>Web server</td>
-      <td>1.16.1</td>
+      <td>1.16.0</td>
       <td>March 2020</td>
       <td>Unclear</td>
       <td>Not imminent</td>
-      <td></td>
+      <td>1.16.1</td>
       <td><a href="https://nginx.org/">https://nginx.org/</a></td>
     </tr>
     <tr>
@@ -84,7 +84,7 @@ Make a list of your entire stack, from OS to database to development frameworks.
       <td>Search platform for product import/search</td>
       <td>5.6.x</td>
       <td>September 2017</td>
-      <td>EOL March 2019</td>
+      <td>March 2019</td>
       <td>Immediate, to version 6.8</td>
       <td>7.4</td>
       <td><a href="https://www.elastic.co/support/eol">https://www.elastic.co/support/eol</a></td>
@@ -94,10 +94,10 @@ Make a list of your entire stack, from OS to database to development frameworks.
       <td>Info site</td>
       <td>5.2.3</td>
       <td>September 2019</td>
-      <td>Long term</td>
-      <td>5.2.4. was shipped recently</td>
+      <td>Unclear</td>
+      <td>5.2.4 shipped recently</td>
       <td>5.2</td>
-      <td><a href="https://codex.wordpress.org/WordPress_Versions">https://codex.wordpress.org/WordPress_Versions</a></td>
+      <td><a href="https://codex.wordpress.org/Supported_Versions">https://codex.wordpress.org/Supported_Versions</a></td>
     </tr>
   </table>
 </div>
@@ -151,4 +151,3 @@ Most of the time new features have higher priority than improving the performanc
 Along the same lines as optimization, code refactoring can have long term gains in performance and ease of future development. Think of this like house cleaning. It is always easier to find any item in the house when things are arranged in an orderly manner. Similarly, the organized and clean code base will play a vital role in future code changes and development, helping to reduce the chances of unexpected bugs, save time making changes at one place and improving code readability. Disciplined refactoring delivers readable, reusable, non-redundant code. Refactoring can be applied to your databases and user interfaces as well.
 
 Want to get started on some background projects for your website? [Talk to us today](/contact).
-

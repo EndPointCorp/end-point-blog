@@ -1,11 +1,9 @@
 ---
 author: Ethan Rowe
 gh_issue_number: 277
-tags: database, nosql
+tags: database, nosql, mongodb, couchdb
 title: Quick Thoughts on NoSQL Live Boston Conference
 ---
-
-
 
 I’m back home now from the Boston “NoSQL Live” conference organized by [10gen.com](https://www.mongodb.com/) (the MongoDB folks). It was a good event. A lot of stuff covered, a broad range of topics. I have a fair amount to say, but need to digest, review notes, etc. In any case, thanks to 10gen and the various sponsors that made it happen.
 
@@ -17,5 +15,3 @@ Some quick, random thoughts:
 - There is a lot of good thinking and discussion going on in the space, it’s moving very fast, and the future looks bright.
 
 More later. Try to contain your anticipation.
-
-

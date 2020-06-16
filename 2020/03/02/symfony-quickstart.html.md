@@ -1,7 +1,7 @@
 ---
 author: "Árpád Lajos"
 title: "Symfony Quickstart"
-tags: symfony, php
+tags: symfony, php, webpack
 gh_issue_number: 1597
 ---
 
@@ -42,15 +42,15 @@ Yarn is a package manager which we can use to manage client-side packages if we 
 
 Consult Yarn’s [documentation](https://classic.yarnpkg.com/en/docs/) for more information.
 
-### Webpack
+### webpack
 
-[Webpack](https://webpack.js.org/) bundles client-side files. You can configure webpack to pack file content from a source location and send the packed content to a target location. Read more [here](https://symfony.com/doc/current/frontend/encore/simple-example.html#configuring-encore-webpack).
+[webpack](https://webpack.js.org/) bundles client-side files. You can configure webpack to pack file content from a source location and send the packed content to a target location. Read more [here](https://symfony.com/doc/current/frontend/encore/simple-example.html#configuring-encore-webpack).
 
 Encore can be restarted with `yarn run encore <env>`, which packs files into the target. However, this is unfriendly to the developer, because now each change in client-side code requires us running `yarn run encore <env>` to make sure that the newest client-side code will be used. This quickly becomes frustrating, since JavaScript and CSS, which never required deployment before, now need to be built. However, you can add the `--watch` switch like `yarn run encore <env> --watch` and from there on changes will be watched and detected, so you can be confident that client-side code will end up in the target path and you won’t have to worry about it.
 
 The drawback, of course, is that this will eat up resources and will still be time consuming if the client-side code is very large. As a result, it is much smarter to just use the source path while in development mode. Sometimes browser caching will still cause us trouble while working this way, but a seasoned frontend developer is already used to that.
 
-Webpack is a nice tool and can be useful when used well, but it’s a good idea to limit its use. Avoiding webpack in development mode can be very helpful, allowing us to nicely debug and not worry about building client-side code. In production mode it adds a lot of value in obfuscating, minifying, and packing the code.
+webpack is a nice tool and can be useful when used well, but it’s a good idea to limit its use. Avoiding webpack in development mode can be very helpful, allowing us to nicely debug and not worry about building client-side code. In production mode it adds a lot of value in obfuscating, minifying, and packing the code.
 
 ### MVC
 

@@ -7,9 +7,9 @@ title: How to split Git repositories into two
 
 Ever wondered how to split your Git repo into two repos?
 
-<div class="separator" style="clear: both; text-align: center;"><a href="/blog/2017/08/14/how-to-split-git-repositories-into-two/image-0-big.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="412" data-original-width="447" height="294" src="/blog/2017/08/14/how-to-split-git-repositories-into-two/image-0.png" width="320"/></a><br/> </div>
+<div class="separator" style="clear: both; text-align: center;"><a href="/blog/2017/08/14/how-to-split-git-repositories-into-two/image-0-big.png" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="/blog/2017/08/14/how-to-split-git-repositories-into-two/image-0.png"/></a></div>
 
-First you need to find out what files and directories you want to move to separate repos. In the above example we’re moving dir3, dir4 and dir7 to repo A, and dir1, dir2, dir5 and dir8 to repo B.
+First you need to find out what files and directories you want to move to separate repos. In the above example we’re moving dir3, dir4, and dir7 to repo A, and dir1, dir2, dir5, and dir8 to repo B.
 
 ### Steps
 
@@ -38,10 +38,10 @@ Following command will delete all dirs that exclusively belong to repo B, thus w
 
 ```bash
 cd repo_a
-git filter-branch --index-filter 'git rm --cached -r dir8, dir2 || true' -- --all
+git filter-branch --index-filter 'git rm --cached -r dir8 dir2 || true' -- --all
 
 cd repo_b
-git filter-branch --index-filter 'git rm --cached -r dir3, dir4, dir7 || true' -- --all
+git filter-branch --index-filter 'git rm --cached -r dir3 dir4 dir7 || true' -- --all
 ```
 
 Note that the `|| true` prevents git from failing to filter our dirs mentioned in the `rm` clause in early stages of the git history where the dirs did not yet exist.

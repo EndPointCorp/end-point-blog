@@ -1,7 +1,7 @@
 ---
 title: "Serialization and Deserialization Issues in Spring REST"
 author: Kürşat Kutlu Aydemir
-tags: json, java, frameworks
+tags: json, java, frameworks, spring
 gh_issue_number: 1607
 ---
 

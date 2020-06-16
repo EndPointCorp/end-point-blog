@@ -1,7 +1,7 @@
 ---
 title: GraphQL Server Libraries
 author: Zed Jensen
-tags: graphql
+tags: graphql, mongodb, nodejs, django
 gh_issue_number: 1536
 ---
 

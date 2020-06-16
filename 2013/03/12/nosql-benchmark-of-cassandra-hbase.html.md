@@ -1,11 +1,9 @@
 ---
 author: Jon Jensen
 gh_issue_number: 768
-tags: database, mongodb, nosql, performance
+tags: database, mongodb, nosql, performance, cassandra
 title: NoSQL benchmark of Cassandra, HBase, MongoDB
 ---
-
-
 
 <a href="https://www.datastax.com/wp-content/uploads/2013/02/WP-Benchmarking-Top-NoSQL-Databases.pdf" target="_blank"><img alt="Benchmarking Top NoSQL Databases" height="194" rel="facebox" src="/blog/2013/03/12/nosql-benchmark-of-cassandra-hbase/image-0.png" style="border: 1px solid #999;" width="150"/>Benchmark White Paper</a>
 
@@ -18,5 +16,3 @@ Because cloud computing resources are subject to “noisy neighbor” situations
 The project involved some interesting automation challenges for repeatedly spinning up the correct numbers and types of nodes, configuring the node software, running tests, and gathering and collating results data. We kept the AWS costs more reasonable by using Spot Instances for most instances.
 
 You can read more at [DataStax’s white paper page](https://www.datastax.com/resources/whitepapers/benchmarking-top-nosql-databases) and see all the details in the white paper itself.
-
-

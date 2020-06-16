@@ -1,11 +1,11 @@
 ---
 author: Greg Sabino Mullane
 gh_issue_number: 1001
-tags: bucardo, database, postgres, replication
+tags: bucardo, database, postgres, replication, mongodb, mysql
 title: Version 5 of Bucardo database replication system
 ---
 
-<div class="separator" style="clear: both; float:right; text-align: center;"><a href="/blog/2014/06/23/bucardo-5-multimaster-postgres-released/image-0.jpeg" imageanchor="1" style="clear: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" src="/blog/2014/06/23/bucardo-5-multimaster-postgres-released/image-0.jpeg" width="350"/></a>
+<div class="separator" style="clear: both; float:right; text-align: center;"><a href="/blog/2014/06/23/bucardo-5-multimaster-postgres-released/image-0.jpeg" style="clear: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" src="/blog/2014/06/23/bucardo-5-multimaster-postgres-released/image-0.jpeg" width="350"/></a>
 <br/><small><a href="https://flic.kr/p/6GYFk5">Goat & Kid</a> by Flickr user <a href="https://www.flickr.com/photos/bala_/">Bala Sivakumar</a></small></div>
 
 Bucardo 5, the next generation of the async multimaster replication system, has been released. This major release removes the previous two source database limitation, allowing you to have as many sources (aka masters) and as many targets (aka slaves) as you wish. Bucardo can also replicate to other targets, including MySQL, MariaDB, Oracle, SQLite, MongoDB, and Redis. Bucardo has been completely rewritten and is more powerful and efficient 

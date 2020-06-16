@@ -56,10 +56,10 @@ For many clients in my world of consulting, they care that we use efficient tool
 
 ### Side note: Other Notable Talks
 
-Here are a few other talks I’ll link up once the videos are released:
+Here are a few other talks I liked:
 
 * [Aaron Patterson](https://twitter.com/tenderlove)’s keynote. I was driving while he gave his keynote, but I’m confident it was funny, thought-provoking, and informative.
-* Talks related to [webpacker](https://github.com/rails/webpacker) or [Webpack](https://webpack.js.org/), because there are few job descriptions now that don’t mention a JavaScript framework.
+* Talks related to [webpacker](https://github.com/rails/webpacker) or [webpack](https://webpack.js.org/), because there are few job descriptions now that don’t mention a JavaScript framework.
 * [Who Destroyed Three Mile Island?](https://railsconf.com/program/sessions#session-544) by Nickolas Means. I didn’t attend this talk, but I heard it was great.
 * [Re-graphing The Mental Model of The Rails Router](https://railsconf.com/program/sessions#session-564) by Vaidehi Joshi of Tilde. This was a great talk. She has a great way of simplifying and condensing many complex computer science topics into a digestible talk. She also has a [blog and podcast](https://medium.com/basecs) with other CS topics.
 * Talks related to security, because that’s a timely and valuable topic.
