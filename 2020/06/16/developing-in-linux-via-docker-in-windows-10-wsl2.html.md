@@ -1,7 +1,7 @@
 ---
 author: "Kevin Campusano"
 title: "Developing in Linux via Docker in Windows 10 WSL2"
-tags: development, javascript, webpack, babel
+tags: windows, wsl, linux, docker, vscode, php
 ---
 
 ![Banner](/blog/2020/06/16/developing-in-linux-via-docker-in-windows-10-wsl2/banner.png)
