@@ -4,9 +4,9 @@ title: "Developing in Linux via Docker in Windows 10 WSL2"
 tags: windows, wsl, linux, docker, vscode, php
 ---
 
-![Banner](/blog/2020/06/16/developing-in-linux-via-docker-in-windows-10-wsl2/banner.png)
+![Banner](./developing-in-linux-via-docker-in-windows-10-wsl2/banner.png)
 
-I'm first and foremost a Windows guy. For a few years now though, moving away from working mainly with [.NET](https://dotnet.microsoft.com/) technologies and into a plethora of open source technologies has given me the opportunity to change platforms and run a Linux based system as my daily driver. Ubuntu, which I honestly love for work, has been serving me well by supporting my development workflow with languages like [PHP](https://www.php.net/), [JavaScript](https://www.javascript.com/) and [Ruby](https://www.ruby-lang.org/en/). And with the help of the excellent [Visual Studio Code](https://code.visualstudio.com/) editor, I've never looked back. There's always been an inclination in the back of my mind though, to take some time and try giving Windows another shot...
+I'm first and foremost a Windows guy. For a few years now though, moving away from working mostly with [.NET](https://dotnet.microsoft.com/) and into a plethora of open source technologies has given me the opportunity to change platforms and run a Linux based system as my daily driver. Ubuntu, which I honestly love for work, has been serving me well by supporting my development workflow with languages like [PHP](https://www.php.net/), [JavaScript](https://www.javascript.com/) and [Ruby](https://www.ruby-lang.org/en/). And with the help of the excellent [Visual Studio Code](https://code.visualstudio.com/) editor, I've never looked back. There's always been an inclination in the back of my mind though, to take some time and try giving Windows another shot...
 
 With the latest improvements coming to the [Windows Subsystem for Linux with its second version](https://docs.microsoft.com/en-us/windows/wsl/wsl2-index), the new and exciting [Windows Terminal](https://github.com/microsoft/terminal) and [Docker support for running containers inside WSL2](https://docs.docker.com/docker-for-windows/wsl/); I think the time is now.
 
