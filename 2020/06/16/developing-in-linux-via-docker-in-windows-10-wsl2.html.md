@@ -16,33 +16,33 @@ In this post, we'll walk through the steps that I had to take to set up a PHP de
 
 ## What's new with WSL 2.
 
-Many have written about this so I won't be redundant and just point you right to the source: https://docs.microsoft.com/en-us/windows/wsl/wsl2-index
+This is best explained by the official documentation at https://docs.microsoft.com/en-us/windows/wsl/wsl2-index.
 
-Being a WSL 1 veteran, what I can mention are the main improvements that have been made since the last time I used it which have sparked my interested in trying it again.
+However, being a WSL 1 veteran, what I can mention are the improvements that have been made which have sparked my interest in trying it again.
 
 ### 1. It's faster and more compatible.
 
-WSL 2 introduces a complete architectural overhaul. Now, Windows ships with a full Linux Kernel which is what WSL 2 distributions use to run. This results in greatly improved file system performance and much better compatibility with Linux programs. It's no longer running a Linux look-alike, but rather, actual Linux.
+WSL 2 introduces a complete architectural overhaul. Now, Windows ships with a full Linux Kernel which is what WSL 2 distributions run on. This results in greatly improved file system performance and much better compatibility with Linux programs. It's no longer running a Linux look-alike, but rather, actual Linux.
 
 ### 2. It's better integrated with Windows.
 
-This is a small one: we can now use the Windows explorer to browse files within a WSL distribution. This is not a WSL 2 exclusive feature, it has been there for a while now. I think it's worth mentioning though because it truly is a great convenience and a far cry from WSL's first release, where Microsoft specifically advised against browsing WSL distribution file systems from Windows. If anything else, this makes WSL feel like a first class citizen in the Windows ecosystem and shows that Microsoft actually cares about making it a good experience. 
+This is a small one: we can now use the Windows explorer to browse files within a WSL distribution. This is not a WSL 2 exclusive feature, it has been there for a while now. I think it's worth mentioning though because it truly is a great convenience and a far cry from WSL's first release, where Microsoft specifically advised against manipulating WSL distribution file systems from Windows. If anything else, this makes WSL feel like a first class citizen in the Windows ecosystem and shows that Microsoft actually cares about making it a good experience. 
 
 ### 3. It can run Docker.
 
-I've recently been learning more and more about Docker and it's quickly becoming my preferred way of setting up development environments. Due to its lightweightness, ease of use, and VM-like compartmentalization, I find it really convenient to develop against a purpose-built Docker container, rather than directly in my local machine. And with VS Code's Remote development extension, the whole thing is very easy to set up. Docker for windows now supports running containers within WSL, so I'm eager to try that out and see how it all works.
+I've recently been learning more and more about Docker and it's quickly becoming my preferred way of setting up development environments. Due to its lightweightness, ease of use, repeatability, and VM-like compartmentalization, I find it really convenient to develop against a purpose-built Docker container, rather than directly in my local machine. And with VS Code's Remote development extension, the whole thing is very easy to set up. Docker for windows now supports running containers within WSL, so I'm eager to try that out and see how it all works.
 
 ### 4. A newer version means several bugfixes.
 
-Performance not whistanding, WSL's first release was pretty stable. I did however, encounter some weird bugs and gotchas when working with the likes of SSH and Ruby during certain specific tasks. It was nothing major as workwrounds were readily available, so I won't bother mentioning them here again. I've already discussed some of them [here](https://www.endpoint.com/blog/2019/04/04/rails-development-in-windows-10-pro-with-visual-studio-code-and-wsl). But the fact that the technology has matured since last time I saw it, and considering the architectural direction it is going in, I'm excited to not have to deal with any number of quirks. Developing software is hard enough as it is, I don't need to also be fighting my OS.
+Performance not whistanding, WSL's first release was pretty stable. I did however, encounter some weird bugs and gotchas when working with the likes of SSH and Ruby during certain specific tasks. It was nothing major as workarounds were readily available, so I won't bother mentioning them here again. I've already discussed some of them [here](https://www.endpoint.com/blog/2019/04/04/rails-development-in-windows-10-pro-with-visual-studio-code-and-wsl). But the fact that the technology has matured since last time I saw it, and considering the architectural direction it is going in, I'm excited to not have to deal with any number of quirks.
 
 ## The development environment
 
-Ok, now with some of the motivation out of the way, let's try and build a quick PHP hello world app, run it in a Docker container inside WSL 2, and make sure we can edit and debug it with VS Code and browse it in a browser from Windows.
+Ok, now with some of the motivation out of the way, let's try and build a quick PHP hello world app, run it in a Docker container inside WSL 2, and make sure we can edit and debug it with VS Code, and access it in a browser from Windows.
 
 ### Step 1: Install WSL2 and Ubuntu
 
-Step 1 in obviously to install a Linux distribution that we like and the engine that runs it. [Microsoft's own documentation](https://docs.microsoft.com/en-us/windows/wsl/install-win10) offers an excellent guide on how to do just that. But in summary, we need to:
+Step 1 is obviously to install WSL and a Linux distribution that we like. [Microsoft's own documentation](https://docs.microsoft.com/en-us/windows/wsl/install-win10) offers an excellent guide on how to do just that. But in summary, we need to:
 
 1. Enable the "Windows Subsystem for Linux" and "Virtual Machine Platform" features by running these on an elevated PowerShell:
 
@@ -54,7 +54,7 @@ dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /nores
 2. Restart your machine.
 3. Set WSL 2 as the default version with: `wsl --set-default-version 2`. Also from a PowerShell.
 4. Install your desired distribution from the Microsoft Store. In my case, I chose [Ubuntu 20.04 LTS](https://www.microsoft.com/es-do/p/ubuntu-2004-lts/9n6svws3rx71?rtc=1&activetab=pivot:overviewtab).
-5. After installing, open the resulting new app from the Start menu and it should come up with a command line console, and wait for it to finish installing. It should prompt for a username and password along the way.
+5. After installing, open the "Ubuntu 20.04 LTS" app from the Start menu and it should come up with a command line console. Wait for it to finish installing. It should prompt for a username and password along the way. Choose something you won't forget.
 
 Optionally, you can install the [Windows Terminal](https://github.com/microsoft/terminal) app to get a better command line experience. Windows Terminal can be used to interact with PowerShell and the classic CMD, and also with our WSL distributions.
 
@@ -74,7 +74,7 @@ Our objective is to create a new development environment inside a Docker contain
 
 ### Step 4: Create the development container
 
-The extensions that we installed will allow us to use VS Code to work on code from within our WSL Ubuntu as well as from the container. What we want though, is to connect VS Code to a container. There are a few ways to do this, but I will describe the one I think is the easiest, most convenient and "automagic" by fully leveraging the tools.
+The extensions that we installed will allow us to use VS Code to work on code from within our WSL Ubuntu as well as from the container. Specifically, we want to connect VS Code to a container. There are a few ways to do this, but I will describe the one I think is the easiest, most convenient and "automagic" by fully leveraging the tools.
 
 Let's begin by opening a terminal session into our WSL Ubuntu, which will show something like this:
 
@@ -100,14 +100,14 @@ $ mkdir php-in-docker-demo
 $ cd php-in-docker-demo
 ```
 
-Because we installed the Remote - WSL extension, we can open up this directory in VS Code with `code .`. Opening a terminal in this VS Code instance opens WSL console, not Windows.
+Because we installed the Remote - WSL extension, we can open up this directory in VS Code with `code .`. Opening a terminal (Ctrl + \`) in this VS Code instance opens WSL console, not Windows.
 
 #### The Dockerfile
 
 Now let's create a new file called `Dockerfile` which will define what our development environment image will look like. For a no frills PHP environment, mine looks like this:
 
 ```docker
-# Base the image on the official Ubuntu one from Docker Hub: https://hub.docker.com/_/ubuntu
+# The FROM statement says that our image will be based on the official Ubuntu Docker image from Docker Hub: https://hub.docker.com/_/ubuntu
 FROM ubuntu
 
 # The RUN statement executes the command that follows it inside the container
@@ -123,7 +123,8 @@ RUN echo "xdebug.remote_autostart=on" >> /etc/php/7.4/mods-available/xdebug.ini
 # This installs Composer
 RUN apt-get update && apt-get install -y composer
 
-# The CMD statement tells Docker which command to run when it starts up the container. Here, we just call bash
+# The CMD statement tells Docker which command to run when it starts up the container.
+# Here, we just call bash
 CMD ["bash"]
 ```
 
@@ -166,10 +167,10 @@ A default version of this file can be automatically generated by running the "Re
 Now that we have all that in place, we can create our image, run our container, and start coding our app. Bring up the VS Code Command Palette with Ctrl + Shift + P and run the "Remote-Containers: Reopen in Container" command. The command will:
 
 1. Read the Dockerfile and create an image based on that. This is like running `docker build -t AUTOGENERATED_IMAGE_ID .`
-2. Run that image with the settings specified in `.devcontainer/devcontainer.json`. In our case, all it will do is enable the container's port 5000 to be accessible by the host. This is more or less like running: `docker run -d -p 5000:5000 -v ${PWD}:/workspaces/php-in-docker-demo AUTOGENERATED_IMAGE_ID`
+2. Run a container based on that image with the settings specified in `.devcontainer/devcontainer.json`. In our case, all it will do is enable the container's port 5000 to be accessible by the host. This is more or less like running: `docker run -d -p 5000:5000 -v ${PWD}:/workspaces/php-in-docker-demo AUTOGENERATED_IMAGE_ID`
 3. Open a new VS Code instance connected to the container with the `/workspaces/php-in-docker-demo` directory open.
 
-It will take a while, but after it's done, we will have a VS Code instance running directly in the container. This is super awesome. Open the VS Code terminal with Ctrl + \` and see for yourself. It will show a prompt looking like this: 
+It will take a while, but after it's done, we will have a VS Code instance running directly in the container. Open the VS Code terminal with Ctrl + \` and see for yourself. It will show a prompt looking like this: 
 
 ```sh
 root@ec5be7dd0b9b:/workspaces/php-in-docker-demo#
@@ -216,9 +217,13 @@ After that, the "Run" panel will show a green triangular "Start Debugging" butto
 
 We're interactively debugging PHP code running on a Docker container in WSL from our Windows IDE/editor. Pretty cool, huh?
 
+~
+
+And that's all for now. In this article we've learned how to set up a Linux development environment using Docker containers and WSL2, with Windows 10 Pro. This is a nice approach for anybody who's confortable on Windows and needs access to a Linux environment for development; and have that environment be easy to reproduce.
+
 ### Resources:
 
 - [Windows Subsystem for Linux Installation Guide for Windows 10](https://docs.microsoft.com/en-us/windows/wsl/install-win10)
 - [Using Docker in WSL 2](https://code.visualstudio.com/blogs/2020/03/02/docker-in-wsl2)
 - [Docker Desktop WSL 2 backend](https://docs.docker.com/docker-for-windows/wsl/)
-- [https://code.visualstudio.com/docs/remote/remote-overview](https://code.visualstudio.com/docs/remote/remote-overview)
+- [VS Code Remote Development](https://code.visualstudio.com/docs/remote/remote-overview)
