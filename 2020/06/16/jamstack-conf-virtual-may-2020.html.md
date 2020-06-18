@@ -11,7 +11,7 @@ gh_issue_number: 1639
 
 Last week I attended [Jamstack Conf Virtual 2020](https://jamstackconf.com/virtual/). It had originally been slated to take place in London, UK but was later transformed into a virtual event in light of the COVID-19 pandemic. The conference began at 2pm London time (thankfully I double-checked this the night before!)—​6am for those of us in the Pacific Time Zone.
 
-<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Up early for <a href="https://twitter.com/hashtag/jamstackconf?src=hash&amp;ref_src=twsrc%5Etfw">#jamstackconf</a> 😎☕️ <a href="https://t.co/ydjvrHWCZH">pic.twitter.com/ydjvrHWCZH</a></p>&mdash; Greg Davidson (@syncopated) <a href="https://twitter.com/syncopated/status/1265637434638778368?ref_src=twsrc%5Etfw">May 27, 2020</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Up early for <a href="https://twitter.com/hashtag/jamstackconf?src=hash&amp;ref_src=twsrc%5Etfw">#jamstackconf</a> 😎☕️ <a href="https://t.co/ydjvrHWCZH">pic.twitter.com/ydjvrHWCZH</a></p>— Greg Davidson (@syncopated) <a href="https://twitter.com/syncopated/status/1265637434638778368?ref_src=twsrc%5Etfw">May 27, 2020</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 Before getting too much further I wanted to mention that if you are not familiar with the Jamstack, You can read more about it at [jamstack.org](https://jamstack.org/).
 
@@ -29,7 +29,7 @@ To virtually participate in the conference we used an app called [Hopin](https:/
 
 [Laurie Voss](https://seldo.com/) [walked us through](https://slides.com/seldo/jamstack-survey-2020#/) the results of the [Jamstack Survey 2020](https://www.netlify.com/blog/2020/05/27/state-of-the-jamstack-survey-2020-first-results/). There were some interesting findings and surprises. Later on I read [Laurie’s post](https://seldo.com/posts/you-will-never-be-a-full-stack-developer) (which Matt had mentioned in his talk) and found that very interesting as well.
 
-### Fireside chat With Harper Reed
+### Fireside chat with Harper Reed
 
 ![Frances Berriman interviewed Harper Reed - fireside chat style](/blog/2020/06/16/jamstack-conf-virtual-may-2020/harper-phae-talk.png)
 
@@ -57,9 +57,9 @@ Another benefit Harper noted was how quickly and easily new team members could b
 
 ### Jamstack for emerging markets
 
-[Christian Nwamba](https://www.codebeast.dev/) described some of the challenges of building sites for users in Nigeria (low power devices, spotty connectivity, unreliable power). He shared that 55% of the most visited sites in Nigeria are global companies (Google, Facebook/Instagram, Netflix, Stack Overflow etc). Christian reviewed a large, popular banking site in Nigeria and noted its many shortcomings.
+[Christian Nwamba](https://www.codebeast.dev/) described some of the challenges of building sites for users in Nigeria (low power devices, spotty connectivity, unreliable power). He shared that 55% of the most visited sites in Nigeria are global companies (Google, Facebook/​Instagram, Netflix, Stack Overflow etc.). Christian reviewed a large, popular banking site in Nigeria and noted its many shortcomings.
 
-To demonstrate how the bank might do better he built [an app](https://aka.ms/quickbank) for transfering money between friends & family built in the Jamstack style and using serverless functions. The most interesting thing I picked up from this was his method of using serverless functions to protect the app secrets (API keys, etc). The front end of the application did not need to concern itself with this—​the serverless functions kept the secrets safe and acted as a proxy between the frontend and the backend APIs. Be sure to take a look at [Christian’s code](https://github.com/christiannwamba/quickbank) if you are interested.
+To demonstrate how the bank might do better he built [an app](https://aka.ms/quickbank) for transferring money between friends &amp; family built in the Jamstack style and using serverless functions. The most interesting thing I picked up from this was his method of using serverless functions to protect the app secrets (API keys, etc.). The front end of the application did not need to concern itself with this—​the serverless functions kept the secrets safe and acted as a proxy between the frontend and the backend APIs. Be sure to take a look at [Christian’s code](https://github.com/christiannwamba/quickbank) if you are interested.
 
 ### Managing diabetes with Jamstack
 
@@ -67,7 +67,7 @@ To demonstrate how the bank might do better he built [an app](https://aka.ms/qui
 
 ### Selling tickets without servers. Or frameworks. Or cookies.
 
-[Jan van Hellemond](https://jvhellemond.nl/) has volunteered for years at a very popular conference in Europe ([Fronteers](https://fronteers.nl/congres) I think). In previous years tickets sold out in 6 minutes one year, and 30 seconds in another! Their ticket vendor was struggling to handle to the load and this caused them to oversell early bird tickets. Jan built a Jamstack site to sell their tickets and was very pleased with the performance. He used simple, single-purpose vanilla JavaScript components and simple, single-purpose api handlers (serverless functions).
+[Jan van Hellemond](https://jvhellemond.nl/) has volunteered for years at a very popular conference in Europe ([Fronteers](https://fronteers.nl/congres) I think). In previous years tickets sold out in 6 minutes one year, and 30 seconds in another! Their ticket vendor was struggling to handle to the load and this caused them to oversell early bird tickets. Jan built a Jamstack site to sell their tickets and was very pleased with the performance. He used simple, single-purpose vanilla JavaScript components and simple, single-purpose API handlers (serverless functions).
 
 ![Jan presenting his Jamstack ticket selling app](/blog/2020/06/16/jamstack-conf-virtual-may-2020/tickets.png)
 
@@ -75,17 +75,17 @@ Jan prerendered as much as possible and seeded a relational database with the ti
 
 ### The business side of the Jamstack
 
-[Ana Rossetto](https://twitter.com/_anarossetto_) shared how her company has been having great success with the Jamstack. Previously, the agency had been building projects for clients with Drupal. She walked through a project she and the team built to encourage people to buy from small, locally owned businesses. She was impressed with what they were able to create in a very short amount of time.
+[Ana Rossetto](https://twitter.com/_anarossetto_) shared how her company has been having great success with the Jamstack. Previously, the agency had been building projects for clients with Drupal. She walked through a project she and the team built to encourage people to buy from small, locally-owned businesses. She was impressed with what they were able to create in a very short amount of time.
 
 ### Build plugin authors’ session
 
-After the main talks there were several sessions. In the hopin app, I was able to peek into some of these and the presenters and attendees were chatting (both text chat and video). This was very much like the experience of peeking into conference rooms at a physical venue and choosing whether to stay and participate or move on. After some wandering I chose to attend a session with three Netlify build plugin authors.
+After the main talks there were several sessions. In the Hopin app, I was able to peek into some of these and the presenters and attendees were chatting (both text chat and video). This was very much like the experience of peeking into conference rooms at a physical venue and choosing whether to stay and participate or move on. After some wandering I chose to attend a session with three Netlify build plugin authors.
 
 ![Peter telling us about subfont](/blog/2020/06/16/jamstack-conf-virtual-may-2020/subfont.png)
 
-[Peter Müller](https://mntr.dk/) built [Subfont](https://github.com/Munter/netlify-plugin-subfont) with a friend. He demonstrated how subsetting web fonts (i.e. only loading the characters & glyphs you really need) can dramatically improve frontend performance. He compared the [webpagetest](https://webpagetest.org/) results for Google Fonts with and without Subfont and Subfont was seconds faster! I have subset and locally hosted webfonts in several client projects here at End Point. It takes time and is a manual process. Peter’s plugin makes this excellent performance improvement relatively painless.
+[Peter Müller](https://mntr.dk/) built [Subfont](https://github.com/Munter/netlify-plugin-subfont) with a friend. He demonstrated how subsetting web fonts (i.e. only loading the characters &amp; glyphs you really need) can dramatically improve frontend performance. He compared the [WebPageTest](https://webpagetest.org/) results for Google Fonts with and without Subfont and Subfont was seconds faster! I have subset and locally hosted webfonts in several client projects here at End Point. It takes time and is a manual process. Peter’s plugin makes this excellent performance improvement relatively painless.
 
-[David Darnes](https://darn.es/) demoed his build plugin to [turn ghost content into markdown files](https://github.com/daviddarnes/netlify-plugin-ghost-markdown). Very interesting and it seemed flexible enough to work with other tools as well.
+[David Darnes](https://darn.es/) demoed his build plugin to [turn Ghost content into Markdown files](https://github.com/daviddarnes/netlify-plugin-ghost-markdown). Very interesting and it seemed flexible enough to work with other tools as well.
 
 [Gleb Bahmutov](https://twitter.com/bahmutov) presented the build plugin he created to run [Cypress](https://www.cypress.io/) tests as part of your Netlify build process. It was amazing to see how simple it was (single devDependency and single line in the netlify.toml config file).
 
