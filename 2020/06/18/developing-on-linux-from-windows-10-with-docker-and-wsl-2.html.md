@@ -1,10 +1,10 @@
 ---
 author: "Kevin Campusano"
-title: "Developing in Linux via Docker in Windows 10 WSL2"
+title: "Developing on Linux from Windows 10 with Docker and WSL 2"
 tags: windows, wsl, linux, docker, vscode, php
 ---
 
-![Banner](./developing-in-linux-via-docker-in-windows-10-wsl2/banner.png)
+![Banner](./developing-on-linux-from-windows-10-with-docker-and-wsl-2/banner.png)
 
 I'm first and foremost a Windows guy. For a few years now though, moving away from working mostly with [.NET](https://dotnet.microsoft.com/) and into a plethora of open source technologies has given me the opportunity to change platforms and run a Linux based system as my daily driver. Ubuntu, which I honestly love for work, has been serving me well by supporting my development workflow with languages like [PHP](https://www.php.net/), [JavaScript](https://www.javascript.com/) and [Ruby](https://www.ruby-lang.org/en/). And with the help of the excellent [Visual Studio Code](https://code.visualstudio.com/) editor, I've never looked back. There's always been an inclination in the back of my mind though, to take some time and try giving Windows another shot...
 
@@ -201,7 +201,7 @@ Then, in the VS Code console (remember, Ctrl + \`), start up an instance of the 
 
 Navigate to `http://localhost:5000/` in your browser and feel good about a job well done.
 
-![Running app](./developing-in-linux-via-docker-in-windows-10-wsl2/running.png)
+![Running app](./developing-on-linux-from-windows-10-with-docker-and-wsl-2/running.png)
 
 #### Interactive debugging
 
@@ -209,11 +209,11 @@ When configuring our Development Container, we added Xdebug and the PHP Debug VS
 
 Almost everyting is set up at this point, we just need to do the usual VS Code configuration and add a `launch.json` file. To do so, in VS Code, press Ctrl + Shift + D to bring up the "Run" panel, click on the "create a launch.json file" link, and in the resulting "Select Environment" menu, select "PHP".
 
-![Running app](./developing-in-linux-via-docker-in-windows-10-wsl2/vscode-run.png)
+![Running app](./developing-on-linux-from-windows-10-with-docker-and-wsl-2/vscode-run.png)
 
 After that, the "Run" panel will show a green triangular "Start Debugging" button next to a "Listen to XDebug" text. If you haven't already, start up a dev web server with `php -S 0.0.0.0:5000`, click on the "Start Debugging" button, put a breakpoint somewhere in your `index.php` file, and finally open up `http://localhost:5000/` in a browser.
 
-![Running app](./developing-in-linux-via-docker-in-windows-10-wsl2/debug.png)
+![Running app](./developing-on-linux-from-windows-10-with-docker-and-wsl-2/debug.png)
 
 We're interactively debugging PHP code running on a Docker container in WSL from our Windows IDE/editor. Pretty cool, huh?
 
