@@ -30,7 +30,7 @@ This is a small one: we can now use the Windows explorer to browse files within 
 
 ### 3. It can run Docker.
 
-I've recently been learning more and more about Docker and it's quickly becoming my preferred way of setting up development environments. Due to its lightweightness, ease of use, repeatability, and VM-like compartmentalization, I find it really convenient to develop against a purpose-built Docker container, rather than directly in my local machine. And with VS Code's Remote development extension, the whole thing is very easy to set up. Docker for windows now supports running containers within WSL, so I'm eager to try that out and see how it all works.
+I've recently been learning more and more about Docker and it's quickly becoming my preferred way of setting up development environments. Due to its lightweightness, ease of use, repeatability, and VM-like compartmentalization, I find it really convenient to develop against a purpose-built Docker container, rather than directly in my local machine. And with VS Code's Remote development extension, the whole thing is very easy to set up. Docker for Windows now supports running containers within WSL, so I'm eager to try that out and see how it all works.
 
 ### 4. A newer version means several bugfixes.
 
@@ -189,7 +189,7 @@ This is PHP running, not in Windows, not in our WSL Ubuntu, but in the Docker co
 
 #### Hello Windows + WSL2 + Ubuntu + Docker + PHP + Visual Studio Code
 
-Let's now create out app. Add a new `index.php` file containing something silly like:
+Let's now create our app. Add a new `index.php` file containing something silly like:
 
 ```php
 <?php
