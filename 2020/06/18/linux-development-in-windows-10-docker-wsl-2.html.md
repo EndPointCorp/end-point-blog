@@ -2,22 +2,22 @@
 author: "Kevin Campusano"
 title: "Linux Development in Windows 10 with Docker and WSL 2"
 tags: windows, linux, docker, php
-gh_issue_number: 
+gh_issue_number: 1641
 ---
 
 ![Banner](/blog/2020/06/18/linux-development-in-windows-10-docker-wsl-2/banner.png)
 
-I’m first and foremost a Windows guy. But for a few years now, moving away from working mostly with [.NET](https://dotnet.microsoft.com/) and into a plethora of open source technologies has given me the opportunity to change platforms and run a Linux-based system as my daily driver. Ubuntu, which I honestly love for work, has been serving me well by supporting my development workflow with languages like [PHP](https://www.php.net/), [JavaScript](https://www.javascript.com/) and [Ruby](https://www.ruby-lang.org/en/). And with the help of the excellent [Visual Studio Code](https://code.visualstudio.com/) editor, I’ve never looked back. There’s always been an inclination in the back of my mind though, to take some time and try giving Windows another shot.
+I’m first and foremost a Windows guy. But for a few years now, moving away from working mostly with .NET and into a plethora of open source technologies has given me the opportunity to change platforms and run a Linux-based system as my daily driver. Ubuntu, which I honestly love for work, has been serving me well by supporting my development workflow with languages like [PHP](https://www.php.net/), [JavaScript](https://www.javascript.com/) and [Ruby](https://www.ruby-lang.org/en/). And with the help of the excellent [Visual Studio Code](https://code.visualstudio.com/) editor, I’ve never looked back. There’s always been an inclination in the back of my mind though, to take some time and give Windows another shot.
 
-With the latest improvements coming to the [Windows Subsystem for Linux with its second version](https://docs.microsoft.com/en-us/windows/wsl/wsl2-index), the new and exciting [Windows Terminal](https://github.com/microsoft/terminal), and [Docker support for running containers inside WSL2](https://docs.docker.com/docker-for-windows/wsl/), I think the time is now.
+With the latest improvements coming to the Windows Subsystem for Linux with [its second version](https://docs.microsoft.com/en-us/windows/wsl/wsl2-index), the new and exciting [Windows Terminal](https://github.com/microsoft/terminal), and [Docker support for running containers inside WSL2](https://docs.docker.com/docker-for-windows/wsl/), I think the time is now.
 
-In this post, we’ll walk through the steps I had to take to set up a PHP development environment in Windows, running in a Ubuntu Docker container running on WSL 2, and VS Code. Let’s go.
+In this post, we’ll walk through the steps I took to set up a PHP development environment in Windows, running in a Ubuntu Docker container running on WSL 2, and VS Code. Let’s go.
 
 > Note: You have to be on the latest version of Windows 10 Pro (Version 2004) in order to install WSL 2 by the usual methods. If not, you’d need to be part of the Windows Insider Program to have access to the software.
 
 ### What’s new with WSL 2
 
-This is best explained by the [official documentation](https://docs.microsoft.com/en-us/windows/wsl/wsl2-index). However, being a WSL 1 veteran, what I can mention are the improvements made which have sparked my interest in trying it again.
+This is best explained by the [official documentation](https://docs.microsoft.com/en-us/windows/wsl/wsl2-index). However, being a WSL 1 veteran, I’ll a few improvements made which have sparked my interest in trying it again.
 
 #### 1. It’s faster and more compatible
 
@@ -33,11 +33,11 @@ I’ve recently been learning more and more about Docker and it’s quickly beco
 
 #### 4. A newer version means several bugfixes
 
-Performance notwithstanding, WSL’s first release was pretty stable. I did, however, encounter some weird bugs and gotchas when working with the likes of SSH and Ruby during certain tasks. It was nothing major, as workarounds were readily available, so I won’t bother mentioning them here again. I’ve already discussed some of them [here](/blog/2019/04/04/rails-development-in-windows-10-pro-with-visual-studio-code-and-wsl). But the fact that the technology has matured since last time I saw it, and considering the architectural direction it is going in, I’m excited to not have to deal with any number of quirks.
+Performance notwithstanding, WSL’s first release was pretty stable. I did, however, encounter some weird bugs and gotchas when working with the likes of SSH and Ruby during certain tasks. It was nothing major, as workarounds were readily available. I’ve already discussed some of them [here](/blog/2019/04/04/rails-development-in-windows-10-pro-with-visual-studio-code-and-wsl), so I won’t bother mentioning them here again. But thanks to the fact that the technology has matured since last time I saw it, and considering the architectural direction it is going in, I’m excited to not have to deal with any number of quirks.
 
 ### The development environment
 
-Ok, now with some of the motivation out of the way, let’s try and build a quick PHP hello world app running in a Docker container inside WSL 2, make sure we can edit and debug it with VS Code, and access it in a browser from Windows.
+Ok, now with some of the motivation out of the way, let’s try and build a quick PHP Hello World app running in a Docker container inside WSL 2, make sure we can edit and debug it with VS Code, and access it in a browser from Windows.
 
 #### Step 1: Install WSL 2 and Ubuntu
 
@@ -73,7 +73,7 @@ Our objective is to create a new development environment inside a Docker contain
 
 The extensions that we installed will allow us to use VS Code to work on code from within our WSL Ubuntu as well as from the container. Specifically, we want to connect VS Code to a container. There are a few ways to do this, but I will describe the one I think is the easiest, most convenient and “automagic” by fully leveraging the tools.
 
-Let’s begin by opening a terminal session into our WSL Ubuntu, which will show something like this:
+Let’s begin by opening a WSL Ubuntu terminal session, which will show something like this:
 
 ```bash
 Welcome to Ubuntu 20.04 LTS (GNU/Linux 4.19.104-microsoft-standard x86_64)
@@ -101,7 +101,7 @@ Because we installed the Remote - WSL extension, we can open up this directory i
 
 #### The Dockerfile
 
-Now let’s create a new file called `Dockerfile` which will define what our development environment image will look like. For a no frills PHP environment, mine looks like this:
+Now let’s create a new file called `Dockerfile` which will define what our development environment image will look like. For a no-frills PHP environment, mine looks like this:
 
 ```docker
 # The FROM statement says that our image will be based on the official Ubuntu Docker image from Docker Hub: https://hub.docker.com/_/ubuntu
@@ -125,13 +125,13 @@ RUN apt-get update && apt-get install -y composer
 CMD ["bash"]
 ```
 
-This script will later be used to create our development container. It will have PHP, [Xdebug](https://xdebug.org/) and [Composer](https://getcomposer.org/). This is all we need for our simple hello world app. For more complex scenarios, other software like database clients or PHP extensions can be easily installed with additional `RUN` statements that call upon the `apt` package manager.
+This script will later be used to create our development container. It will have PHP, [Xdebug](https://xdebug.org/) and [Composer](https://getcomposer.org/). This is all we need for our simple Hello World app. For more complex scenarios, other software like database clients or PHP extensions can be easily installed with additional `RUN` statements that call upon the `apt` package manager.
 
 Consider reading through [Docker’s official documentation](https://docs.docker.com/engine/reference/builder/) on Dockerfiles to learn more.
 
-#### The Configuration File
+#### The configuration file
 
-Now, to leverage VS Code’s capabilities, let’s add a “Development Container Configuration File”. In our current location, we need to create a new directory called `.devcontainer` and, inside that, a new file called `devcontainer.json`. I put these contents in mine:
+Now, to leverage VS Code’s capabilities, let’s add a development container configuration file. In our current location, we need to create a new directory called `.devcontainer` and, inside that, a new file called `devcontainer.json`. I put these contents in mine:
 
 ```json
 {
@@ -159,7 +159,7 @@ Now, to leverage VS Code’s capabilities, let’s add a “Development Containe
 
 A default version of this file can be automatically generated by running the “Remote-Containers: Add Development Container Configuration Files…” command in VS Code’s Command Palette (Ctrl + Shift + P).
 
-#### The Development Container
+#### The development container
 
 Now that we have all that in place, we can create our image, run our container, and start coding our app. Bring up the VS Code Command Palette with Ctrl + Shift + P and run the “Remote-Containers: Reopen in Container” command. The command will:
 
@@ -184,7 +184,7 @@ Zend Engine v3.4.0, Copyright (c) Zend Technologies
 
 This is PHP running, not in Windows, not in our WSL Ubuntu, but in the Docker container.
 
-#### Hello Windows + WSL 2 + Ubuntu + Docker + PHP + Visual Studio Code
+#### Hello Windows + WSL 2 + Ubuntu + Docker + PHP + VS Code
 
 Let’s now create our app. Add a new `index.php` file containing something silly like:
 
@@ -202,7 +202,7 @@ Navigate to `http://localhost:5000/` in your browser and feel good about a job w
 
 #### Interactive debugging
 
-When configuring our Development Container, we added Xdebug and the PHP Debug VS Code extension. This means that VS Code can leverage Xdebug to provide an interactive debugging experience for PHP code.
+When configuring our development container, we added Xdebug and the PHP Debug VS Code extension. This means that VS Code can leverage Xdebug to provide an interactive debugging experience for PHP code.
 
 Almost everyting is set up at this point, we just need to do the usual VS Code configuration and add a `launch.json` file. To do so, in VS Code, press Ctrl + Shift + D to bring up the “Run” panel, click on the “create a launch.json file” link, and in the resulting “Select Environment” menu, select “PHP”.
 
