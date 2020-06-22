@@ -17,7 +17,7 @@ In this post, we’ll walk through the steps I took to set up a PHP development 
 
 ### What’s new with WSL 2
 
-This is best explained by the [official documentation](https://docs.microsoft.com/en-us/windows/wsl/wsl2-index). However, being a WSL 1 veteran, I’ll a few improvements made which have sparked my interest in trying it again.
+This is best explained by the [official documentation](https://docs.microsoft.com/en-us/windows/wsl/wsl2-index). However, being a WSL 1 veteran, I’ll mention a few improvements made which have sparked my interest in trying it again.
 
 #### 1. It’s faster and more compatible
 
@@ -44,10 +44,12 @@ Ok, now with some of the motivation out of the way, let’s try and build a quic
 Step 1 is obviously to install WSL and a Linux distribution that we like. [Microsoft’s own documentation](https://docs.microsoft.com/en-us/windows/wsl/install-win10) offers an excellent guide on how to do just that. But in summary, we need to:
 
 1. Enable the “Windows Subsystem for Linux” and “Virtual Machine Platform” features by running these on an elevated PowerShell:
-  ```ps
-  dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
-  dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
-  ```
+
+```ps
+dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+```
+
 2. Restart your machine.
 3. Set WSL 2 as the default version with: `wsl --set-default-version 2`, also from PowerShell.
 4. Install your desired distribution from the Microsoft Store. I chose [Ubuntu 20.04 LTS](https://www.microsoft.com/en-us/p/ubuntu-2004-lts/9n6svws3rx71?rtc=2&activetab=pivot:overviewtab).
