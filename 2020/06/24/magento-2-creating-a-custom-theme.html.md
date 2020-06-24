@@ -11,7 +11,7 @@ In my previous post, we went through the steps needed to <a href="/blog/2020/04/
 
 ### Creating a new Magento 2 theme
 
-To create a new theme, we can either inherit it from an existing default "parent" theme, or create a new standalone theme from scratch. For most cases, I would reccommend to use the first option. For this example, we will choose <a href="http://magento2.demo.ubertheme.com/" target="_blank">Luma</a> as our parent theme. The other option would be inheriting from the default "blank" theme.
+To create a new theme, we can either inherit it from an existing default "parent" theme, or create a new standalone theme from scratch. In most cases, I would recommend to use the first option. For this example, we will choose <a href="http://magento2.demo.ubertheme.com/" target="_blank">Luma</a> as our parent theme. The other option would be inheriting from the default "blank" theme.
 
 Here's an initial task list to get our new theme ready:
 
@@ -85,11 +85,11 @@ Next step is to create our theme information file, where we will specify the the
 
 #### Activating the new theme
 
-That was easy! We have everything we need to activate our new theme. Now we need to log in into our admin area and enable our theme. Once in the dashboard, we need to go to Content > Design > Configuration, edit our store view, and select our new theme from the dropdown list:
+That was easy! We have everything we need to activate our new theme. Now we need to log in to our admin area and enable our theme. Once in the dashboard, we need to go to Content > Design > Configuration, edit our store view, and select our new theme from the dropdown list:
 
 ![Selecting our theme](magento-2-creating-a-custom-theme/magento-admin-select-theme.jpg)
 
-Magento will search for new themes every time we log in into the admin area, so our new theme will appear on the list automatically.
+Magento will search for new themes every time we log in to the admin area, so our new theme will appear on the list automatically.
 
 #### Adding custom content
 
@@ -138,11 +138,11 @@ Adding a logo to our theme is really simple. We just need to save our picture in
 </page>
 ```
 
-We can use different formats such as SVG, PNG or JPG. We can also use a custom width and height for the logo, and set a custom alternate text.
+We can use different formats such as SVG, PNG, or JPG. We can also use a custom width and height for the logo, and set a custom alternate text.
 
 ### Adding static files (Javascript/CSS/images/fonts)
 
-All the static files should be located inside the `web` directory. Common static files include Javascript files, stylesheets, images and fonts. The Javascript files should be located at `web/js`, stylesheets at `web/css`, images at `web/images`, and our custom fonts should be located at `web/fonts`.
+All the static files should be located inside the `web` directory. Common static files include Javascript files, stylesheets, images, and fonts. The Javascript files should be located at `web/js`, stylesheets at `web/css`, images at `web/images`, and our custom fonts should be located at `web/fonts`.
 
 All the static files will be published as direct links, without any processing from Magento, at the `pub/static/frontend/EndPoint/MyTheme/en_US` path (the default language is en_US, we can change it for our theme if needed).
 
