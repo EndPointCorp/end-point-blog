@@ -45,7 +45,7 @@ Step 1 is obviously to install WSL and a Linux distribution that we like. [Micro
 
 1. Enable the “Windows Subsystem for Linux” and “Virtual Machine Platform” features by running these on an elevated PowerShell:
 
-```ps
+```plain
 dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
 dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
 ```
@@ -77,7 +77,7 @@ The extensions that we installed will allow us to use VS Code to work on code fr
 
 Let’s begin by opening a WSL Ubuntu terminal session, which will show something like this:
 
-```bash
+```plain
 Welcome to Ubuntu 20.04 LTS (GNU/Linux 4.19.104-microsoft-standard x86_64)
 
  * Documentation:  https://help.ubuntu.com
@@ -105,22 +105,17 @@ Because we installed the Remote - WSL extension, we can open up this directory i
 
 Now let’s create a new file called `Dockerfile` which will define what our development environment image will look like. For a no-frills PHP environment, mine looks like this:
 
-```docker
+```plain
 # The FROM statement says that our image will be based on the official Ubuntu Docker image from Docker Hub: https://hub.docker.com/_/ubuntu
 FROM ubuntu
 
-# The RUN statement executes the command that follows it inside the container
-# These install PHP and its prerequisite
-RUN apt-get update && apt-get install -y software-properties-common
-RUN apt-get update && apt-get install -y php
+# Install packages, not allowing apt to ask any questions since we can't answer.
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update && apt-get install -y software-properties-common php php-xdebug composer
 
-# These ones install Xdebug and configure it so that the VS Code debugger can use it.
-RUN apt-get update && apt-get install -y php-xdebug
+# Configure Xdebug so that the VS Code debugger can use it.
 RUN echo "xdebug.remote_enable=on" >> /etc/php/7.4/mods-available/xdebug.ini
 RUN echo "xdebug.remote_autostart=on" >> /etc/php/7.4/mods-available/xdebug.ini
-
-# This installs Composer
-RUN apt-get update && apt-get install -y composer
 
 # The CMD statement tells Docker which command to run when it starts up the container.
 # Here, we just call bash
@@ -177,7 +172,7 @@ root@ec5be7dd0b9b:/workspaces/php-in-docker-demo#
 
 You can for example, run `php -v` in this terminal, and expect something along these lines:
 
-```
+```plain
 PHP 7.4.3 (cli) (built: May 26 2020 12:24:22) ( NTS )
 Copyright (c) The PHP Group
 Zend Engine v3.4.0, Copyright (c) Zend Technologies
