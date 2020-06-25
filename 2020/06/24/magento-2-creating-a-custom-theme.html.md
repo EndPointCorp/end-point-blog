@@ -102,7 +102,7 @@ We have the basic structure for our theme, but when enabled, it will look the sa
 
 ### Creating a custom view file
 
-The `etc/view.xml` file controls many frontend configurations like the product thumbnail width, how the product image gallery is displayed, and the image magnifier tool among other things. To add our custom view file to our theme, we need to copy the existing file from our parent theme. For Luma, it will be located at `vendor/magento/theme-frontend-blank/etc/view.xml`. To copy the file, in our website root, we need to run:
+The `etc/view.xml` file controls many frontend configurations like the product thumbnail width, how the product image gallery is displayed, and the image magnifier tool among other things. To add our custom view file to our theme, we need to copy the existing file from our parent theme. For Luma, it will be located at `vendor/magento/theme-frontend-luma/etc/view.xml`. To copy the file, in our website root, we need to run:
 
 
 ```bash
@@ -148,20 +148,23 @@ All the static files will be published as direct links, without any processing f
 
 ### Adding a custom layout
 
-Finally, if we want to use the new assets we added and have custom content on different sections of our website, we need to extend or override the existing layouts from our parent theme.
+Finally, if we want to use the new assets we added and have custom content on different sections of our website, we need to extend or override the existing layout files from our parent theme.
 
-For example, if we want to add a reference to a new stylesheet file we added, we need to extend the existing header layout from our parent theme. To do this, we will create a new layout file located at `Magento_Theme/layout/default_head_blocks.xml` inside our theme root:
+For example, if we want to add a reference to new stylesheet and Javascript files we added, we need to extend the existing header layout from our parent theme. To do this, we will create a new layout file located at `Magento_Theme/layout/default_head_blocks.xml` inside our theme root:
 
 ```
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
   <head>
     <!-- Custom stylesheet -->
     <css src="css/mytheme.css"/>
+
+    <!-- Custom Javascript -->
+    <script src="js/mytheme.js"/>
   </head>
 </page>
 ```
 
-This way we will be adding a reference to a new file named `mytheme.css` that we have inside the `web/css` directory of our theme.
+This way we will be adding a reference to a new stylesheet named `mytheme.css` that we have inside the `web/css` directory of our theme, and a new script named `mytheme.js` inside the `web/js` directory.
 
 After we made all the desired changes to our theme, we will need to tell Magento to update the frontend. We need to deploy the new changes and clear the cache. We can achieve that by running, from our website root:
 
