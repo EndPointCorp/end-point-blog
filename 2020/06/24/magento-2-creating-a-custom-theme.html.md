@@ -91,7 +91,7 @@ That was easy! We have everything we need to activate our new theme. Now we need
 
 Magento will search for new themes every time we log in to the admin area, so our new theme will appear on the list automatically.
 
-#### Adding custom content
+### Adding custom content
 
 We have the basic structure for our theme, but when enabled, it will look the same as its parent theme (Luma, in this case), since we didn't add any design rules or static files yet. Let's do some more things with our theme to change how it's displayed in the frontend:
 
@@ -100,7 +100,7 @@ We have the basic structure for our theme, but when enabled, it will look the sa
 * Adding static files (Javascript/CSS/images/fonts)
 * Adding a custom layout
 
-### Creating a custom view file
+#### Creating a custom view file
 
 The `etc/view.xml` file controls many frontend configurations like the product thumbnail width, how the product image gallery is displayed, and the image magnifier tool among other things. To add our custom view file to our theme, we need to copy the existing file from our parent theme. For Luma, it will be located at `vendor/magento/theme-frontend-luma/etc/view.xml`. To copy the file, in our website root, we need to run:
 
@@ -119,7 +119,7 @@ And then we can use our preferred text editor to change the values we want, like
   </image>
 ```
 
-### Adding a custom logo
+#### Adding a custom logo
 
 Adding a logo to our theme is really simple. We just need to save our picture in SVG format inside our theme root as `web/images/logo.svg`. If we want to use a different filename or format for our logo, we will have to create a default layout file for our theme in the path `/Magento_Theme/layout/default.xml` inside our theme root with a content similar to this:
 
@@ -140,13 +140,13 @@ Adding a logo to our theme is really simple. We just need to save our picture in
 
 We can use different formats such as SVG, PNG, or JPG. We can also use a custom width and height for the logo, and set a custom alternate text.
 
-### Adding static files (Javascript/CSS/images/fonts)
+#### Adding static files (Javascript/CSS/images/fonts)
 
 All the static files should be located inside the `web` directory. Common static files include Javascript files, stylesheets, images, and fonts. The Javascript files should be located at `web/js`, stylesheets at `web/css`, images at `web/images`, and our custom fonts should be located at `web/fonts`.
 
 All the static files will be published as direct links, without any processing from Magento, at the `pub/static/frontend/EndPoint/MyTheme/en_US` path (the default language is en_US, we can change it for our theme if needed).
 
-### Adding a custom layout
+#### Adding a custom layout
 
 Finally, if we want to use the new assets we added and have custom content on different sections of our website, we need to extend or override the existing layout files from our parent theme.
 
