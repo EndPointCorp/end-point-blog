@@ -6,7 +6,7 @@ gh_issue_number:
 ---
 
 ![Spice Baazar](/blog/2020/06/29/postgresql-improve-group-by-max-performance/banner.jpg)
-[Photo](https://www.flickr.com/photos/maxpax/3638954095/) by [Chris Young](https://www.flickr.com/photos/maxpax/), used under [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/), cropped from original.
+[Photo](https://www.flickr.com/photos/maxpax/3638954095/) by [Maxpax](https://www.flickr.com/photos/maxpax/), used under [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/), cropped from original.
 
 This blog article is one of a number of posts that I will write based on working with large tables in PostgreSQL.  When working with large datasets, it is important to understand your tools and use more efficient queries in order to accomplish more naive approaches with smaller datasets.  This article covers the case where you want to get the maximum value of some number of groupings in a single table.
 
