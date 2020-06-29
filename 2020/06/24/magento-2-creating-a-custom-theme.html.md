@@ -49,7 +49,7 @@ This way, Magento will know what path our theme will have.
 
 #### Creating theme.xml
 
-The next step is to create our theme information file, where we will specify the theme name and Parent theme. So our `app/design/frontend/EndPoint/MyTheme/theme.xml` file should have the following content:
+The next step is to create our theme information file, where we will specify the theme name and parent theme. So our `app/design/frontend/EndPoint/MyTheme/theme.xml` file should have the following content:
 
 ```xml
 <?xml version="1.0"?>
@@ -102,7 +102,7 @@ We have the basic structure for our theme, but when enabled, it will look the sa
 
 #### Creating a custom view file
 
-`etc/view.xml` controls many frontend configurations like the product thumbnail width, how the product image gallery is displayed, and the image magnifier tool among other things. To add our custom view file to our theme, we need to copy the existing file from our parent theme. For Luma, it will be located at `vendor/magento/theme-frontend-luma/etc/view.xml`. To copy the file, in our website’s root, we need to run:
+`etc/view.xml` controls many frontend configurations like the product thumbnail width, how the product image gallery is displayed, and the image magnifier tool, among other things. To add our custom view file to our theme, we need to copy the existing file from our parent theme. For Luma, it will be located at `vendor/magento/theme-frontend-luma/etc/view.xml`. To copy the file, we need to run the following in our website’s root:
 
 ```bash
 mkdir -p app/design/frontend/EndPoint/MyTheme/etc
@@ -120,7 +120,7 @@ And then we can use our preferred text editor to change the values we want, like
 
 #### Adding a custom logo
 
-Adding a logo to our theme is really simple. We just need to save our picture in SVG format as `web/images/logo.svg`. If we want to use a different filename or format for our logo, we will have to create a default layout file for our theme in the path `/Magento_Theme/layout/default.xml` inside our theme root with a content similar to this:
+Adding a logo to our theme is really simple. We just need to save our picture in SVG format as `web/images/logo.svg`. If we want to use a different filename or format for our logo, we will have to create a default layout file for our theme in the path `/Magento_Theme/layout/default.xml` inside our theme root with content similar to this:
 
 ```
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
@@ -165,15 +165,15 @@ For example, if we want to add a reference to new stylesheet and Javascript file
 
 This way we will be adding a reference to a new stylesheet named `mytheme.css` that we have inside the `web/css` directory of our theme, and a new script named `mytheme.js` inside the `web/js` directory.
 
-After we made all the desired changes to our theme, we will need to tell Magento to update the frontend. We need to deploy the new changes and clear the cache. We can achieve that by running, from our website root:
+After we make all the desired changes to our theme, we will need to tell Magento to update the frontend. We need to deploy the new changes and clear the cache. We can achieve that by running this from our website root:
 
 ```bash
 php bin/magento setup:static-content:deploy
 php bin/magento cache:clean
 ```
 
-This process can take some minutes to complete. After it’s done, we can try to browse our website and see if the frontend changes are applied:
+This process can take some minutes to complete. After it’s done, we can go to our website to see if the frontend changes are applied:
 
 ![Website homepage](magento-2-creating-a-custom-theme/magento-frontend.jpg)
 
-Of course, there’s a lot more we can do from there, from extending or overriding layouts from modules (Magento or third-party) to bundling scripts or using LESS files for our custom styles… But that is material for new posts, so that’s all for now! Please add any questions you might have below.
+Looks awesome! Of course, there’s a lot more we can do from there, from extending or overriding layouts from modules (Magento or third-party) to bundling scripts or using LESS files for our custom styles. But, that is material for new posts, so that’s all for now! Please add any questions you might have below.
