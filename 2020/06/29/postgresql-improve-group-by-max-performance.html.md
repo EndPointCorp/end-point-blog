@@ -1,16 +1,16 @@
 ---
 author: "David Christensen"
-title: "Large Data in PostgreSQL: Improving max() performance: GROUP BY vs CTE"
-tags: postgresql
-gh_issue_number: 
+title: "Improving max() performance in PostgreSQL: GROUP BY vs CTE"
+tags: postgresql, database
+gh_issue_number: 1645
 ---
 
 ![Spice Baazar](/blog/2020/06/29/postgresql-improve-group-by-max-performance/banner.jpg)
 [Photo](https://www.flickr.com/photos/maxpax/3638954095/) by [Maxpax](https://www.flickr.com/photos/maxpax/), used under [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/), cropped from original.
 
-This blog article is one of a number of posts that I will write based on working with large tables in PostgreSQL.  When working with large datasets, it is important to understand your tools and use more efficient queries in order to accomplish more naive approaches with smaller datasets.  This article covers the case where you want to get the maximum value of some number of groupings in a single table.
+When working with large datasets, it is important to understand your tools and use more efficient queries in order to accomplish more naive approaches with smaller datasets. This article covers the case where you want to get the maximum value of some number of groupings in a single table.
 
-(**Note:** We are using PostgreSQL 12, which supports some nice features like parallel btree index building, which can speed up parts of this process compared to earlier versions.  We are using the default settings for this, which lets PostgreSQL use up to 2 parallel backend workers to speed up some operations.)
+**Note:** We are using PostgreSQL 12, which supports some nice features like parallel btree index building, which can speed up parts of this process compared to earlier versions. We are using the default settings for this, which lets PostgreSQL use up to 2 parallel backend workers to speed up some operations.
 
 Say you have a table `table_a` with multiple grouping fields `field_a` and `field_b` and you want to find the maximum value of another table `field_c` for each group.
 
@@ -20,21 +20,21 @@ The direct approach is to do something like the following:
 SELECT field_a, field_b, max(field_c) from table_a GROUP BY 1,2;
 ```
 
-This is functional and very straightforward, however even if you have an index on `(field_a, field_b, field_c)` this can end up taking quite a bit more time if the tables are large.  Let’s look at an actual example and the numbers we use.
+This is functional and very straightforward, however even if you have an index on `(field_a, field_b, field_c)` this can end up taking quite a long time if the tables are large. Let’s look at an actual example and the numbers we use.
 
-So first, let’s create our table:
+First, let’s create our table:
 
 ```sql
 CREATE TABLE table_a (field_a varchar, field_b integer, field_c date);
 ```
 
-Populate with some data:
+And populate it with some data:
 
 ```sql
 INSERT INTO table_a SELECT field_a,field_b,now ()::date + (random()*100)::int as field_c from unnest(array['AAA','BBB','CCC','DDD','EEE','FFF']) field_a,generate_series(1,10000) field_b,generate_series(1,1000);
 ```
 
-This statement will populate this table with 60 million rows, consisting of 1000 random dates per each `field_a,field_b` pair; our task will now be to see how to efficiently find the max value for field_c for each grouping.
+This statement will populate this table with 60 million rows, consisting of 1000 random dates per each `field_a,field_b` pair; our task will now be to see how to efficiently find the max value for `field_c` for each grouping.
 
 Let’s now create an index on all 3 fields:
 
@@ -42,7 +42,7 @@ Let’s now create an index on all 3 fields:
 CREATE INDEX ON table_a (field_a, field_b, field_c);
 ```
 
-For the purposes of sanity/clarify when testing approaches, let’s VACUUM and ANALYZE that table:
+For the purposes of sanity/​clarity when testing approaches, let’s VACUUM and ANALYZE that table:
 
 ```sql
 VACUUM ANALYZE table_a;
@@ -74,7 +74,7 @@ Hypothetically, PostgreSQL *could* detect that we’re asking for a `max()` valu
 
 Since we have a btree index on all of the fields, we know that the max value is easy to find, so let’s consider the conditions in which we can find this:
 
-For one of the grouping `(field_a,field_b)`, we can find the maximum value for that group by using an `ORDER BY` clause and `LIMIT 1`, so if we knew the `(field_a,field_b)` pair the max could be found easily in the index by:
+For one of the grouping `(field_a,field_b)`, we can find the maximum value for that group by using an `ORDER BY` clause and `LIMIT 1`, so if we knew the `(field_a,field_b)` pair the max could be found easily in the index with:
 
 ```sql
 postgres=# SELECT field_c FROM table_a WHERE field_a = 'AAA' and field_b = 1 ORDER BY field_c DESC LIMIT 1;
@@ -96,11 +96,11 @@ postgres=# explain SELECT field_c FROM table_a WHERE field_a = 'AAA' and field_b
 (3 rows)
 ```
 
-Since we want to find *all* the values in this table, we effectively want to do this query for each `(field_a, field_b)` pairing; but how can we iterate over this in an efficient way?
+Since we want to find *all* the values in this table, we effectively want to do this query for each `(field_a, field_b)` pairing, but how can we iterate over this in an efficient way?
 
-The keyword “iterate” should bring to mind a `WITH RECURSIVE` CTE, and here is where the trick comes in.  Since we want *all* the values, we can use *any* of them to start with and end up checking against the last known value to find the next.
+The keyword “iterate” should bring to mind a `WITH RECURSIVE` CTE, and here is where the trick comes in. Since we want *all* the values, we can use *any* of them to start with and end up checking against the last known value to find the next.
 
-An important thing to know is that for a btree index over `(a,b,c)`, there is a well-defined index ordering of all leading subsets of columns, so we can compare `(a,b)` against `(a0,b0)` in an indexed way and use this to our advantage.  This means that `('AAA',1) < ('AAA',2) < ('BBB',1)` just by virtue of how the row indexing works.
+An important thing to know is that for a btree index over `(a,b,c)`, there is a well-defined index ordering of all leading subsets of columns, so we can compare `(a,b)` against `(a0,b0)` in an indexed way and use this to our advantage. This means that `('AAA',1) < ('AAA',2) < ('BBB',1)` just by virtue of how the row indexing works.
 
 Using this property, we can then construct the following query:
 
@@ -118,9 +118,9 @@ WITH RECURSIVE t AS
 ) SELECT * FROM t;
 ```
 
-Wow, pretty different, eh?  Breaking it down into what it does, we basically start with the most extreme value in the index, then recursively add the next row for fields `(field_a,field_b)` which is the next lowest value in the index.
+Wow, pretty different, eh? Breaking it down, we basically start with the most extreme value in the index, then recursively add the next row for fields `(field_a,field_b)`, which is the next lowest value in the index.
 
- Let’s see the plan:
+Let’s see the plan:
 
 ```sql
                                                                             QUERY PLAN
@@ -140,7 +140,7 @@ Wow, pretty different, eh?  Breaking it down into what it does, we basically sta
 
 Again, taking the best of 3 timings, we get 0.86s.
 
-As you can see, the CTE approach is 6 - 7 times faster over the same data for the same results.
+As you can see, the CTE approach is 6–7 times faster over the same data for the same results.
 
 This same approach can work for finding the `min()` value, by just changing the `ORDER` clauses and comparison operator:
 
@@ -170,5 +170,4 @@ SELECT field_a, field_b, min(field_c) FROM table_a GROUP BY 1,2;
 
 Timing: 5.45s
 
-This technique is generalizable to any number of fields in the table, it just relies on using the same index as you would want for `GROUP BY`.  This is another nice tool to have in the DBA toolbox.
-
+This technique is generalizable to any number of fields in the table, it just relies on using the same index as you would want for `GROUP BY`. This is another nice tool to have in the DBA toolbox.
