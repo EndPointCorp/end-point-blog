@@ -2,7 +2,7 @@
 author: "Juan Pablo Ventoso"
 title: "Magento 2: Creating a custom theme"
 tags: magento, php, ecommerce
-gh_issue_number: 
+gh_issue_number: 1647
 ---
 
 ![](/blog/2020/06/24/magento-2-creating-a-custom-theme/paint-orange-blue.jpg)
