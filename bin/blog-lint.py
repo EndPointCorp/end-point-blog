@@ -1,53 +1,66 @@
 #!/usr/bin/env python3
+
 import sys
 
-if not sys.version.startswith('3'):
-    print('This script requires Python 3.')
-    sys.exit()
+if sys.version_info[0] < 3 or (sys.version_info[0] == 3 and sys.version_info[1] < 6):
+    print('This program requires Python 3.6 or newer.')
+    sys.exit(1)
 
 import argparse
+import os
+import re
 
 parser = argparse.ArgumentParser(description='Lint blog posts.')
 parser.add_argument('input_file', help='blog post file to read')
+parser.add_argument('-o', dest='outfile', help='Make changes and write new version to given file')
+parser.add_argument('-f', dest='force', action='store_true', help='force writing output file')
 
 args = parser.parse_args()
 
-import os
 if not os.path.isfile(args.input_file):
     print(f'No such file: {args.input_file}')
-    sys.exit()
+    sys.exit(2)
 
-import re
+if args.outfile and not args.force and os.path.isfile(args.output_file):
+    print(f'File exists: {args.output_file}')
+    print("Use '-f' flag to overwrite")
+    sys.exit(3)
 
 highlight_languages = [
-    "ruby",
     "apache",
-    "plaintext",
-    "scss",
-    "javascript",
-    "perl",
-    "cpp",
-    "nginx",
-    "xml",
-    "markdown",
-    "python",
-    "ini",
-    "diff",
-    "http",
-    "sql",
     "bash",
-    "json",
-    "java",
-    "cs",
-    "vim",
-    "makefile",
-    "objectivec",
-    "shell",
-    "php",
-    "haskell",
     "coffeescript",
-    "r",
+    "cpp",
+    "cs",
     "css",
+    "diff",
+    "haskell",
+    "html",
+    "http",
+    "ini",
+    "java",
+    "javascript",
+    "js",
+    "json",
+    "makefile",
+    "markdown",
+    "nginx",
+    "no-highlight",
+    "nohighlight",
+    "objectivec",
+    "perl",
+    "php",
+    "plain",
+    "plaintext",
+    "python",
+    "r",
+    "ruby",
+    "scss",
+    "shell",
+    "sql",
+    "text",
+    "vim",
+    "xml",
 ]
 
 # Make a "Line" class that keeps track of its own line number
@@ -59,7 +72,6 @@ class Warning:
 
     def __str__(self):
         return args.input_file + ':' + str(self.line.number) + ': \t' + self.message
-        #return str(self.line.number) + ':\t' + self.line.line + '\n\t' + self.message
 
 class Line:
     def __init__(self, line, number):
@@ -126,7 +138,6 @@ def extract_code_blocks(block):
     
     return out
 
-#with open(args.input_file) as infile:
 errors = []
 warnings = []
 infile = open(args.input_file)
@@ -147,24 +158,24 @@ for b in code_blocks:
         errors.append(Warning(b.lines[0], 'Code blocks should be used only as their own paragraphs'))
         continue
 
-    # Check that a language is specified (or "plaintext")
+    # Check that a language is specified
     lang = re.sub(r'^```', '', b.lines[0].line).rstrip()
     if lang not in highlight_languages:
         errors.append(Warning(b.lines[0], "Code blocks should specify a valid language or 'plaintext'. Example: ```python"))
 
     has_tabs = False
-    largest_indent = None
+    smallest_indent = None
 
     # Check indentation level and whether tabs are used
     for l in b.lines:
         has_tabs = has_tabs or bool(re.match(r'.*\t.*', l.line))
         indent = len(l.line) - len(l.line.lstrip(' '))
-        if largest_indent is None or indent > largest_indent:
-            largest_indent = indent
-    if largest_indent and largest_indent > 0:
+        if smallest_indent is None or indent < smallest_indent:
+            smallest_indent = indent
+    if smallest_indent and smallest_indent > 0:
         errors.append(Warning(b.lines[0], 'Code blocks should be flush with left margin'))
     if has_tabs:
-        warnings.append(Warning(b.lines[0], 'Code blocks should not contain tabs, use spaces instead'))
+        warnings.append(Warning(b.lines[0], 'Code blocks should not contain tabs; use spaces instead'))
 
 def check_spelling(line, c):
     has_typo = False
@@ -180,39 +191,35 @@ spelling_checks = [
         'regex': r'javascript',
         'ideal': 'JavaScript',
         'flags': re.IGNORECASE,
-        'message': 'JavaScript spelled wrong'
+        'message': 'JavaScript spelled wrong',
     },
     {
         'regex': r'node\.?js',
         'ideal': 'Node.js',
         'flags': re.IGNORECASE,
-        'message': 'Node.js spelled wrong'
+        'message': 'Node.js spelled wrong',
     },
     {
         'regex': r"'",
         'ideal': '’',
         'flags': 0,
-        'message': "Use typographer's quotes"
-    }
+        'message': "Use typographers’ quotes",
+    },
 ]
 
 for line in body.lines:
     for c in spelling_checks:
         check_spelling(line, c)
 
-#merged = Block.merge(body, code)
-
-
 if len(errors) > 0:
     errors = sorted(errors, key=lambda e: e.line.number)
     print('Errors:') 
-for error in errors:
-    print(error)
-
-print('')
+    for error in errors:
+        print(error)
+    print('')
 
 if len(warnings) > 0:
     warnings = sorted(warnings, key=lambda w: w.line.number)
     print('Warnings:') 
-for warning in warnings:
-    print(warning)
+    for warning in warnings:
+        print(warning)
