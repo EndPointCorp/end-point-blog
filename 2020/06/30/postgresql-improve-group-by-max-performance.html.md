@@ -1,7 +1,7 @@
 ---
 author: "David Christensen"
 title: "Improving max() performance in PostgreSQL: GROUP BY vs CTE"
-tags: postgresql, database
+tags: postgres, database
 gh_issue_number: 1645
 ---
 
