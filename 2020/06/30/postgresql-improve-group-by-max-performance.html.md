@@ -5,7 +5,7 @@ tags: postgresql, database
 gh_issue_number: 1645
 ---
 
-![Spice Baazar](/blog/2020/06/29/postgresql-improve-group-by-max-performance/banner.jpg)
+![Spice Baazar](/blog/2020/06/30/postgresql-improve-group-by-max-performance/banner.jpg)
 [Photo](https://www.flickr.com/photos/maxpax/3638954095/) by [Maxpax](https://www.flickr.com/photos/maxpax/), used under [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/), cropped from original.
 
 When working with large datasets, it is important to understand your tools and use more efficient queries in order to accomplish more naive approaches with smaller datasets. This article covers the case where you want to get the maximum value of some number of groupings in a single table.
@@ -20,7 +20,7 @@ The direct approach is to do something like the following:
 SELECT field_a, field_b, max(field_c) from table_a GROUP BY 1,2;
 ```
 
-This is functional and very straightforward, however even if you have an index on `(field_a, field_b, field_c)` this can end up taking quite a long time if the tables are large. Let’s look at an actual example and the numbers we use.
+This is functional and very straightforward. However, even if you have an index on `(field_a, field_b, field_c), this can end up taking quite a long time if the tables are large. Let’s look at an actual example and the numbers we use.
 
 First, let’s create our table:
 
