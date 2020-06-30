@@ -5,7 +5,7 @@ tags: magento, php, ecommerce
 gh_issue_number: 1647
 ---
 
-![](/blog/2020/06/24/magento-2-creating-a-custom-theme/paint-orange-blue.jpg)
+![blue and yellow paint from a tube on a canvas](/blog/2020/06/24/magento-2-creating-a-custom-theme/paint-orange-blue.jpg)
 [Photo](https://flic.kr/p/Se3vkA) by [Maria Eklind](https://www.flickr.com/photos/mariaeklind/), [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/)
 
 In my previous post, we went through the steps needed to [create a custom module in Magento 2](/blog/2020/04/01/magento-2-creating-a-custom-module). While modules consist of a set of classes to add new features to Magento, a theme controls how these features, and the entire website in general, will be displayed to the user. As stated in the [Magento guide](https://devdocs.magento.com/guides/v2.3/frontend-dev-guide/themes/theme-overview.html), a theme uses a combination of custom templates, layouts, styles, and images to provide a consistent look and feel across a Magento store.
@@ -54,12 +54,12 @@ The next step is to create our theme information file, where we will specify the
 ```xml
 <?xml version="1.0"?>
 <theme xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Config/etc/theme.xsd">
-     <title>MyTheme</title>
-     <parent>Magento/luma</parent>
- </theme>
+    <title>MyTheme</title>
+    <parent>Magento/luma</parent>
+</theme>
 ```
 
-*Optional*: If we want our theme to be easily distributed as a package, we can also create a `composer.json` file in the theme’s root directory. The content for the file should be as follows, specifying the theme’s description, dependencies, version and license types:
+*Optional*: If we want our theme to be easily distributed as a package, we can also create a `composer.json` file in the theme’s root directory. The content for the file should be as follows, specifying the theme’s description, dependencies, version, and license types:
 
 ```json
 {
@@ -97,7 +97,7 @@ We have the basic structure for our theme, but when enabled, it will look the sa
 
 * Create a custom `etc/view.xml` file
 * Add a custom logo
-* Add static files (Javascript/CSS/images/fonts)
+* Add static files (JavaScript, CSS, images, fonts)
 * Add a custom layout
 
 #### Creating a custom view file
@@ -111,7 +111,7 @@ cp vendor/magento/theme-frontend-blank/etc/view.xml app/design/frontend/EndPoint
 
 And then we can use our preferred text editor to change the values we want, like setting a custom size for the images in the category page grid:
 
-```
+```html
 <image id="category_page_grid" type="small_image">
     <width>300</width>
     <height>300</height>
@@ -122,7 +122,7 @@ And then we can use our preferred text editor to change the values we want, like
 
 Adding a logo to our theme is really simple. We just need to save our picture in SVG format as `web/images/logo.svg`. If we want to use a different filename or format for our logo, we will have to create a default layout file for our theme in the path `/Magento_Theme/layout/default.xml` inside our theme root with content similar to this:
 
-```
+```xml
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
   <body>
     <referenceBlock name="logo">
@@ -137,27 +137,27 @@ Adding a logo to our theme is really simple. We just need to save our picture in
 </page>
 ```
 
-We can use different formats such as SVG, PNG, or JPG. We can also use a custom width and height for the logo, and set a custom alternate text.
+We can use different image formats such as SVG, PNG, or JPG. We can also use a custom width and height for the logo, and set a custom alternate text.
 
-#### Adding static files (Javascript/CSS/images/fonts)
+#### Adding static files (JavaScript/​CSS/​images/​fonts)
 
-All the static files should be located inside the `web` directory. Common static files include Javascript files, stylesheets, images, and fonts. The Javascript files should be located at `web/js`, stylesheets at `web/css`, images at `web/images`, and our custom fonts should be located at `web/fonts`.
+All the static files should be located inside the `web` directory. Common static files include JavaScript files, stylesheets, images, and fonts. The JavaScript files should be located at `web/js`, stylesheets at `web/css`, images at `web/images`, and our custom fonts should be located at `web/fonts`.
 
-All the static files will be published as direct links, without any processing from Magento, at the `pub/static/frontend/EndPoint/MyTheme/en_US` path (the default language is en_US, we can change it for our theme if needed).
+All the static files will be published as direct links, without any processing from Magento, at the `pub/static/frontend/EndPoint/MyTheme/en_US` path. The default locale/​language is en_US; we can change it for our theme if needed.
 
 #### Adding a custom layout
 
 Finally, if we want to use the new assets we added and have custom content on different sections of our website, we need to extend or override the existing layout files from our parent theme.
 
-For example, if we want to add a reference to new stylesheet and Javascript files we added, we need to extend the existing header layout from our parent theme. To do this, we will create a new layout file located at `Magento_Theme/layout/default_head_blocks.xml`:
+For example, if we want to add a reference to new stylesheet and JavaScript files we added, we need to extend the existing header layout from our parent theme. To do this, we will create a new layout file located at `Magento_Theme/layout/default_head_blocks.xml`:
 
-```
+```xml
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
   <head>
     <!-- Custom stylesheet -->
     <css src="css/mytheme.css"/>
 
-    <!-- Custom Javascript -->
+    <!-- Custom JavaScript -->
     <script src="js/mytheme.js"/>
   </head>
 </page>
@@ -176,4 +176,4 @@ This process can take some minutes to complete. After it’s done, we can go to 
 
 ![Website homepage](magento-2-creating-a-custom-theme/magento-frontend.jpg)
 
-Looks awesome! Of course, there’s a lot more we can do from there, from extending or overriding layouts from modules (Magento or third-party) to bundling scripts or using LESS files for our custom styles. But, that is material for new posts, so that’s all for now! Please add any questions you might have below.
+Looks awesome! Of course, there’s a lot more we can do from there, from extending or overriding layouts from modules (Magento or third-party) to bundling scripts or using Less files for our custom styles. But, that is material for later posts, so that’s all for now! Please add any questions you might have below.
