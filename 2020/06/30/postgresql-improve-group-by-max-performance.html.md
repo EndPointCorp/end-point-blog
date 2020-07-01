@@ -8,11 +8,11 @@ gh_issue_number: 1645
 ![Spice Baazar](/blog/2020/06/30/postgresql-improve-group-by-max-performance/banner.jpg)
 [Photo](https://www.flickr.com/photos/maxpax/3638954095/) by [Maxpax](https://www.flickr.com/photos/maxpax/), used under [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/), cropped from original.
 
-When working with large datasets, it is important to understand your tools and use more efficient queries in order to accomplish more naive approaches with smaller datasets. This article covers the case where you want to get the maximum value of some number of groupings in a single table.
+When working with large tables, even simple actions can have high costs to complete. What queries are acceptable for smaller tables can often be less than ideal when applied to large tables, so your specific choice of approach to a given problem becomes more important.
 
 **Note:** We are using PostgreSQL 12, which supports some nice features like parallel btree index building, which can speed up parts of this process compared to earlier versions. We are using the default settings for this, which lets PostgreSQL use up to 2 parallel backend workers to speed up some operations.
 
-Say you have a table `table_a` with multiple grouping fields `field_a` and `field_b` and you want to find the maximum value of another table `field_c` for each group.
+Say you have a table `table_a` with multiple grouping fields `field_a` and `field_b` and you want to find the maximum value of another field `field_c` for each group.
 
 The direct approach is to do something like the following:
 
@@ -70,7 +70,7 @@ postgres=# EXPLAIN SELECT field_a, field_b, max(field_c) FROM table_a GROUP BY 1
 (9 rows)
 ```
 
-We can see that the plan is using an index-only scan for our table, which is good, but it also is using a separate GroupAggregate group/gather in order to get the grouping done, which still has to iterate through all the rows in the ip
+We can see that the plan is using an index-only scan for our table, which is good, but it also is using a separate GroupAggregate group/​gather in order to get the grouping done, which still has to iterate through all the rows in the results to find the final answers.
 
 Best of 3 timings: 5.60s
 
