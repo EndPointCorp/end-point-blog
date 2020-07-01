@@ -1,6 +1,6 @@
 ---
 author: "David Christensen"
-title: "Improving max() performance in PostgreSQL: GROUP BY vs CTE"
+title: "Improving max() performance in PostgreSQL: GROUP BY vs. CTE"
 tags: postgres, database
 gh_issue_number: 1645
 ---
@@ -17,10 +17,10 @@ Say you have a table `table_a` with multiple grouping fields `field_a` and `fiel
 The direct approach is to do something like the following:
 
 ```sql
-SELECT field_a, field_b, max(field_c) from table_a GROUP BY 1,2;
+SELECT field_a, field_b, max(field_c) FROM table_a GROUP BY 1,2;
 ```
 
-This is functional and very straightforward. However, even if you have an index on `(field_a, field_b, field_c), this can end up taking quite a long time if the tables are large. Let’s look at an actual example and the numbers we use.
+This is functional and very straightforward. However, even if you have an index on `(field_a, field_b, field_c)`, this can end up taking quite a long time if the tables are large. Let’s look at an actual example and the numbers we use.
 
 First, let’s create our table:
 
@@ -31,10 +31,14 @@ CREATE TABLE table_a (field_a varchar, field_b integer, field_c date);
 And populate it with some data:
 
 ```sql
-INSERT INTO table_a SELECT field_a,field_b,now ()::date + (random()*100)::int as field_c from unnest(array['AAA','BBB','CCC','DDD','EEE','FFF']) field_a,generate_series(1,10000) field_b,generate_series(1,1000);
+INSERT INTO table_a
+SELECT field_a, field_b, now()::date + (random() * 100)::int AS field_c
+FROM unnest(array['AAA','BBB','CCC','DDD','EEE','FFF']) field_a,
+    generate_series(1, 10000) field_b,
+    generate_series(1, 1000);
 ```
 
-This statement will populate this table with 60 million rows, consisting of 1000 random dates per each `field_a,field_b` pair; our task will now be to see how to efficiently find the max value for `field_c` for each grouping.
+This statement will populate this table with 60 million rows, consisting of 1000 random dates per each `field_a, field_b` pair; our task will now be to see how to efficiently find the max value for `field_c` for each grouping.
 
 Let’s now create an index on all 3 fields:
 
@@ -74,7 +78,7 @@ Hypothetically, PostgreSQL *could* detect that we’re asking for a `max()` valu
 
 Since we have a btree index on all of the fields, we know that the max value is easy to find, so let’s consider the conditions in which we can find this:
 
-For one of the grouping `(field_a,field_b)`, we can find the maximum value for that group by using an `ORDER BY` clause and `LIMIT 1`, so if we knew the `(field_a,field_b)` pair the max could be found easily in the index with:
+For one of the grouping `(field_a, field_b)`, we can find the maximum value for that group by using an `ORDER BY` clause and `LIMIT 1`, so if we knew the `(field_a,field_b)` pair the max could be found easily in the index with:
 
 ```sql
 postgres=# SELECT field_c FROM table_a WHERE field_a = 'AAA' and field_b = 1 ORDER BY field_c DESC LIMIT 1;
@@ -87,7 +91,7 @@ postgres=# SELECT field_c FROM table_a WHERE field_a = 'AAA' and field_b = 1 ORD
 Plan:
 
 ```sql
-postgres=# explain SELECT field_c FROM table_a WHERE field_a = 'AAA' and field_b = 1 ORDER BY field_c DESC LIMIT 1;
+postgres=# EXPLAIN SELECT field_c FROM table_a WHERE field_a = 'AAA' AND field_b = 1 ORDER BY field_c DESC LIMIT 1;
                                                         QUERY PLAN
 ---------------------------------------------------------------------------------------------------------------------------
  Limit  (cost=0.43..4.43 rows=1 width=4)
@@ -105,20 +109,20 @@ An important thing to know is that for a btree index over `(a,b,c)`, there is a 
 Using this property, we can then construct the following query:
 
 ```sql
-WITH RECURSIVE t AS
-(
-    (SELECT field_a,field_b,field_c from table_a ORDER BY field_a DESC, field_b DESC, field_c DESC LIMIT 1)
+WITH RECURSIVE t AS (
+    (SELECT field_a, field_b, field_c FROM table_a ORDER BY field_a DESC, field_b DESC, field_c DESC LIMIT 1)
     UNION ALL
     SELECT s.field_a, s.field_b, s.field_c FROM t,
     LATERAL (
-        SELECT field_a, field_b, field_c FROM table_a
-        WHERE (table_a.field_a, table_a.field_b) < (t.field_a,t.field_b)
+        SELECT field_a, field_b, field_c
+        FROM table_a
+        WHERE (table_a.field_a, table_a.field_b) < (t.field_a, t.field_b)
         ORDER BY field_a DESC, field_b DESC, field_c DESC LIMIT 1
     ) s
 ) SELECT * FROM t;
 ```
 
-Wow, pretty different, eh? Breaking it down, we basically start with the most extreme value in the index, then recursively add the next row for fields `(field_a,field_b)`, which is the next lowest value in the index.
+Wow, pretty different, eh? Breaking it down, we basically start with the most extreme value in the index, then recursively add the next row for fields `(field_a, field_b)`, which is the next lowest value in the index.
 
 Let’s see the plan:
 
@@ -147,14 +151,14 @@ This same approach can work for finding the `min()` value, by just changing the 
 Compare:
 
 ```sql
-WITH RECURSIVE t AS
-(
-    (SELECT field_a,field_b,field_c from table_a ORDER BY field_a, field_b, field_c LIMIT 1)
+WITH RECURSIVE t AS (
+    (SELECT field_a, field_b, field_c FROM table_a ORDER BY field_a, field_b, field_c LIMIT 1)
     UNION ALL
     SELECT s.field_a, s.field_b, s.field_c FROM t,
     LATERAL (
-        SELECT field_a, field_b, field_c FROM table_a
-        WHERE (table_a.field_a, table_a.field_b) > (t.field_a,t.field_b)
+        SELECT field_a, field_b, field_c
+        FROM table_a
+        WHERE (table_a.field_a, table_a.field_b) > (t.field_a, t.field_b)
         ORDER BY field_a, field_b, field_c LIMIT 1
     ) s
 ) SELECT * FROM t;
@@ -162,7 +166,7 @@ WITH RECURSIVE t AS
 
 Timing: 0.81s
 
-vs `GROUP BY`:
+vs. `GROUP BY`:
 
 ```sql
 SELECT field_a, field_b, min(field_c) FROM table_a GROUP BY 1,2;
