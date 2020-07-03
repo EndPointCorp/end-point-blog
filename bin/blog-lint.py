@@ -71,7 +71,13 @@ class Warning:
         self.message = message
 
     def __str__(self):
-        return args.input_file + ':' + str(self.line.number) + ': \t' + self.message
+        return args.input_file + ':' + str(self.line.number + 1) + ': \t' + self.message
+    
+    def __hash__(self):
+        return hash((self.line, self.message))
+
+    def __eq__(self, other):
+        return self.line == other.line and self.message == other.message
 
 class Line:
     def __init__(self, line, number):
@@ -138,8 +144,8 @@ def extract_code_blocks(block):
     
     return out
 
-errors = []
-warnings = []
+errors = set()
+warnings = set()
 infile = open(args.input_file)
 data = infile.read()
 
@@ -155,13 +161,13 @@ code_blocks = extract_code_blocks(body)
 for b in code_blocks:
     # Check that code blocks are only being used on their own
     if re.match(r'^[^`]+```', b.lines[0].line):
-        errors.append(Warning(b.lines[0], 'Code blocks should be used only as their own paragraphs'))
+        errors.add(Warning(b.lines[0], 'Code blocks should be used only as their own paragraphs'))
         continue
 
     # Check that a language is specified
     lang = re.sub(r'^```', '', b.lines[0].line).rstrip()
     if lang not in highlight_languages:
-        errors.append(Warning(b.lines[0], "Code blocks should specify a valid language or 'plaintext'. Example: ```python"))
+        errors.add(Warning(b.lines[0], "Code blocks should specify a valid language or 'plaintext'. Example: ```python"))
 
     has_tabs = False
     smallest_indent = None
@@ -173,18 +179,21 @@ for b in code_blocks:
         if smallest_indent is None or indent < smallest_indent:
             smallest_indent = indent
     if smallest_indent and smallest_indent > 0:
-        errors.append(Warning(b.lines[0], 'Code blocks should be flush with left margin'))
+        errors.add(Warning(b.lines[0], 'Code blocks should be flush with left margin'))
     if has_tabs:
-        warnings.append(Warning(b.lines[0], 'Code blocks should not contain tabs; use spaces instead'))
+        warnings.add(Warning(b.lines[0], 'Code blocks should not contain tabs; use spaces instead'))
 
-def check_spelling(line, c):
-    has_typo = False
+def check_spelling(line, checks):
     without_code = re.sub(r'`[^`]*`', '', line.line)
-    for match in re.findall(c['regex'], without_code, flags=c['flags']):
-        if match != c['ideal']:
-            has_typo = True
-    if has_typo:
-        errors.append(Warning(line, c['message']))
+    for c in checks:
+        has_typo = False
+        if len(without_code) == 0 and len(line.line) > 0:
+            warnings.add(Warning(line, 'Code blocks on their own lines should use ```'))
+        for match in re.findall(c['regex'], without_code, flags=c['flags']):
+            if match != c['ideal']:
+                has_typo = True
+        if has_typo:
+            errors.add(Warning(line, c['message']))
 
 spelling_checks = [
     {
@@ -203,13 +212,60 @@ spelling_checks = [
         'regex': r"'",
         'ideal': '’',
         'flags': 0,
+        'message': "Use typographers’ apostrophe",
+    },
+    {
+        'regex': r'\"',
+        'ideal': '”',
+        'flags': 0,
         'message': "Use typographers’ quotes",
+    },
+    {
+        'regex': r'[^\s]/[^\s]',
+        'ideal': '',
+        'flags': 0,
+        'message': "Add zero-width breaking space after / between words"
+    },
+    {
+        'regex': r'\s+$',
+        'ideal': '',
+        'flags': 0,
+        'message': "Remove whitespace before end of line"
+    },
+    {
+        'regex': r'\d-\d',
+        'ideal': '',
+        'flags': 0,
+        'message': "Use en dashes for ranges"
+    },
+    {
+        'regex': r'--',
+        'ideal': '',
+        'flags': 0,
+        'message': "Use em dashes in prose"
+    },
+    {
+        'regex': r'^##?[^#]',
+        'ideal': '',
+        'flags': 0,
+        'message': "No headings larger than ###"
+    },
+    {
+        'regex': r'^######+',
+        'ideal': '',
+        'flags': 0,
+        'message': "No headings smaller than #####"
+    },
+    {
+        'regex': r'(__[^_ ]*__|\*\*[^* ]*\*\*)',
+        'ideal': '',
+        'flags': 0,
+        'message': "Consider using italics instead of single bolded words"
     },
 ]
 
 for line in body.lines:
-    for c in spelling_checks:
-        check_spelling(line, c)
+    check_spelling(line, spelling_checks)
 
 if len(errors) > 0:
     errors = sorted(errors, key=lambda e: e.line.number)
