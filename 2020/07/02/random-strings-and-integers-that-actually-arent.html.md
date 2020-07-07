@@ -5,11 +5,11 @@ tags: postgres, python, tips
 gh_issue_number: 1650
 ---
 
-![rowntree’s randoms sweets](/blog/2020/07/02/random-strings-and-integers-that-actually-arent/3579540830_a6bd472185_w.jpg)
+![rowntree’s randoms sweets](/blog/2020/07/02/random-strings-and-integers-that-actually-arent/banner.jpg)
 
 [Image](https://www.flickr.com/photos/fsse-info/3579540830/) from Flickr user fsse8info
 
-Recently the topic of generating random-looking coupon codes and other strings came up on internal chat. My go-to for something like that is always [this](https://wiki.postgresql.org/wiki/Pseudo_encrypt) solution based on Feistel networks, which I didn’t think was terribly obscure. But I was surprised when nobody else seemed to recognize it, so maybe it is. In any case here’s a little illustration of the thing in action.
+Recently the topic of generating random-looking coupon codes and other strings came up on internal chat. My go-to for something like that is always [this solution](https://wiki.postgresql.org/wiki/Pseudo_encrypt) based on Feistel networks, which I didn’t think was terribly obscure. But I was surprised when nobody else seemed to recognize it, so maybe it is. In any case here’s a little illustration of the thing in action.
 
 Feistel networks are the mathematical basis of the ciphers behind DES and other encryption algorithms. I won’t go into details (because that would suggest I fully understand it, and there are bits where I’m hazy) but ultimately it’s a somewhat simple and very fast mechanism that’s fairly effective for our uses here.
 
@@ -84,7 +84,7 @@ totesrandom=# SELECT COUNT(*) FROM generate_series (1,10000000) WHERE feistel_cr
 Time: 185151.416 ms (03:05.151)
 ```
 
-### The Cool Part: String Generation
+### The cool part: string generation
 
 Once we have that new value, the second part is even easier. We take the new integer and map that to a string, essentially creating a base-N representation of the number.
 
