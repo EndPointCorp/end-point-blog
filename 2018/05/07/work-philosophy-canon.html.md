@@ -50,7 +50,7 @@ These articles and books are targeted primarily at developers:
 * [Things You Should Never Do, Part I](https://www.joelonsoftware.com/2000/04/06/things-you-should-never-do-part-i/) by Joel Spolsky—​don’t rewrite things from scratch (almost never, anyway)
 * [How to Read Other People’s Code—​and Why](https://designbygravity.wordpress.com/2009/10/23/how-to-read-other-peoples-code-and-why/) by Christopher Schanck
 * [The Pragmatic Programmer](https://pragprog.com/titles/tpp20/) book by Andy Hunt and Dave Thomas
-* [Practices of an Agile Developer](https://pragprog.com/titles/pad/) book by Venkat Subramaniam and Andy Hunt—​kind of a sequel to The Pragmatic Programmer
+* [Practices of an Agile Developer](https://pragprog.com/titles/pad/) book by Venkat Subramaniam and Andy Hunt—​kind of a sequel to The Pragmatic Programmer (see the [review by our own Ethan Rowe](/blog/2006/06/20/review-practices-of-agile-developer))
 
 ### Any others?
 

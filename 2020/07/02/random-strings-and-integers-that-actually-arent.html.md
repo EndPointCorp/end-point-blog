@@ -5,7 +5,7 @@ tags: postgres, python, tips
 gh_issue_number: 1650
 ---
 
-![rowntree’s randoms sweets](/blog/2020/07/02/random-strings-and-integers-that-actually-arent/banner.jpg)
+![Rowntree’s Randoms sweets](/blog/2020/07/02/random-strings-and-integers-that-actually-arent/banner.jpg)
 
 [Image](https://www.flickr.com/photos/fsse-info/3579540830/) from Flickr user fsse8info
 
@@ -108,7 +108,7 @@ BEGIN
 END $function$;
 ```
 
-Voila, short random-looking strings you can use for coupon codes, email confirmation tokens, whatever you need:
+Voilà, short random-looking strings you can use for coupon codes, email confirmation tokens, whatever you need:
 
 ```sql
 totesrandom=# SELECT int_to_string(feistel_crypt(1)), int_to_string(feistel_crypt(2)), int_to_string(feistel_crypt(3)), int_to_string(feistel_crypt(4));
@@ -166,4 +166,3 @@ def stringify_integer(value):
 
     return output
 ```
-
