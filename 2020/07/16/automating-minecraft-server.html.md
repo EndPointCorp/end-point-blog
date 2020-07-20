@@ -2,7 +2,7 @@
 author: "Zed Jensen"
 title: "Deploying (Minecraft) Servers Automatically with Terraform"
 tags: automation, terraform, cloud
-gh_issue_number:1651
+gh_issue_number: 1651
 ---
 
 ![](/blog/2020/07/16/automating-minecraft-server/banner.jpg)
@@ -19,7 +19,7 @@ In this post, I’ll show how I got my server setup streamlined into one Terrafo
 
 ### Picking a provider
 
-As I mentioned earlier, I’ve used DigitalOcean in the past, but at the recommendation of my co-worker, I decided to try [UpCloud](https://upcloud.com/), a similar service based in Helsinki, Finland. They have datacenters in the US, Europe, and Singapore (the one I used is in Chicago). A full list can be found [here](https://developers.upcloud.com/1.3/5-zones/). They offer several affordable tiers of virtual machines, including these:
+As I mentioned earlier, I’ve used DigitalOcean in the past, but at the recommendation of my co-worker, I decided to try [UpCloud](https://upcloud.com/), a similar service based in Helsinki, Finland. They have datacenters in the US, Europe, and Singapore (the one I used is in Chicago—a full list of locations can be found [here](https://developers.upcloud.com/1.3/5-zones/)). They offer several affordable tiers of virtual machines, including these:
 
 <div class="table-scroll">
   <table>
