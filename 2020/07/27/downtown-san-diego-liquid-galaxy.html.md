@@ -2,7 +2,7 @@
 author: "Dave Jenkins"
 title: "Downtown San Diego Liquid Galaxy"
 tags: liquid-galaxy
-gh_issue_number:
+gh_issue_number: 1653
 ---
 
 ![](/blog/2020/07/27/downtown-san-diego-liquid-galaxy/san_diego_lg-1.jpg)
