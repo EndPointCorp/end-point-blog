@@ -9,6 +9,7 @@ if sys.version_info[0] < 3 or (sys.version_info[0] == 3 and sys.version_info[1] 
 import argparse
 import os
 import re
+import subprocess
 
 parser = argparse.ArgumentParser(description='Lint blog posts.')
 parser.add_argument('input_file', help='blog post file to read')
@@ -124,6 +125,18 @@ class Block:
                     return index
         raise Error('No matching line found')
 
+class cd:
+    """Context manager for changing the current working directory, from https://stackoverflow.com/a/13197763"""
+    def __init__(self, newPath):
+        self.newPath = os.path.expanduser(newPath)
+
+    def __enter__(self):
+        self.savedPath = os.getcwd()
+        os.chdir(self.newPath)
+
+    def __exit__(self, etype, value, traceback):
+        os.chdir(self.savedPath)
+
 def extract_code_blocks(block):
     matching_indices = []
 
@@ -155,6 +168,38 @@ body_index = post.find_line_index(r'^---$', 2) + 1
 
 header = Block(post.lines[:body_index])
 body = Block(post.lines[body_index:])
+
+# Header
+
+try:
+    bin_dir = os.path.dirname(os.path.realpath(__file__))
+    all_tags = []
+    result = None
+    with cd(bin_dir):
+        result = subprocess.run('./show-blog-tags -s', shell=True, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
+    all_tags = result.stdout.decode('utf-8').split('\n')
+
+    tag_line = None
+    for line in header.lines:
+        if line.line.startswith('tags: '):
+            tag_line = line
+
+    if tag_line is None:
+        errors.add(Warning(header.lines[0], 'No tags specified'))
+    else:
+        tags = tag_line.line[5:].strip().split(',')
+        tags = list(map(lambda t: t.strip(), tags))
+        tags = list(filter(lambda t: t != '', tags))
+
+        if len(tags) == 0:
+            errors.add(Warning(tag_line, 'No tags specified'))
+        for tag in tags:
+            if tag not in all_tags:
+                warnings.add(Warning(tag_line, 'No other occurences of tag "' + tag + '" in blog'))
+except:
+    print('There was an error checking tags')
+
+# Body
 
 code_blocks = extract_code_blocks(body)
 
