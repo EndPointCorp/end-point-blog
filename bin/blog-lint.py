@@ -176,7 +176,7 @@ for b in code_blocks:
     for l in b.lines:
         has_tabs = has_tabs or bool(re.match(r'.*\t.*', l.line))
         indent = len(l.line) - len(l.line.lstrip(' '))
-        if smallest_indent is None or indent < smallest_indent:
+        if (smallest_indent is None or indent < smallest_indent) and not l.line.startswith('```'):
             smallest_indent = indent
     if smallest_indent and smallest_indent > 0:
         errors.add(Warning(b.lines[0], 'Code blocks should be flush with left margin'))
