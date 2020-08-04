@@ -72,10 +72,25 @@ class Warning:
         self.message = message
 
     def __str__(self):
-        return args.input_file + ':' + str(self.line.number + 1) + ': \t' + self.message
+        if type(self.line) == Line:
+            return args.input_file + ':' + str(self.line.number + 1) + ': \t' + self.message
+        else:
+            return self.line + ': \t\t' + self.message
     
     def __hash__(self):
         return hash((self.line, self.message))
+
+    def __lt__(self, other):
+        if type(self.line) == Line:
+            if type(other.line) == Line:
+                return True
+            else:
+                return True
+        else:
+            if type(other.line) == Line:
+                return False
+            else:
+                return self.line.number < other.line.number
 
     def __eq__(self, other):
         return self.line == other.line and self.message == other.message
@@ -159,6 +174,32 @@ def extract_code_blocks(block):
 
 errors = set()
 warnings = set()
+
+# Check image sizes
+
+file_path = args.input_file
+path_parts = file_path.split('/')
+dir_name = ''
+if len(path_parts) == 1:
+    # We must be in same directory as .html.md file
+    dir_name = file_path[:-8]
+else:
+    dir_name = path_parts[-1][:-8]
+    dir_name = path_parts[:-1] + [dir_name]
+
+try:
+    with os.scandir(dir_name) as it:
+        for entry in it:
+            if not entry.name.startswith('.') and entry.is_file():
+                file_size = os.path.getsize(entry.path)
+                if file_size > (1024 * 300):
+                    errors.add(Warning(entry.path, 'File is too big (> 300 kB): ' + entry.name))
+                elif file_size > (1024 * 200):
+                    warnings.add(Warning(entry.path, 'File is pretty big (> 200 kB): ' + entry.name))
+except:
+    pass
+
+
 infile = open(args.input_file)
 data = infile.read()
 
@@ -313,14 +354,14 @@ for line in body.lines:
     check_spelling(line, spelling_checks)
 
 if len(errors) > 0:
-    errors = sorted(errors, key=lambda e: e.line.number)
+    errors = sorted(errors)
     print('Errors:') 
     for error in errors:
         print(error)
     print('')
 
 if len(warnings) > 0:
-    warnings = sorted(warnings, key=lambda w: w.line.number)
+    warnings = sorted(warnings)
     print('Warnings:') 
     for warning in warnings:
         print(warning)
