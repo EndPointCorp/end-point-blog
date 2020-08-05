@@ -271,11 +271,12 @@ for b in code_blocks:
 
 def check_spelling(line, checks):
     without_code = re.sub(r'`[^`]*`', '', line.line)
+    without_html = re.sub(r'<.*?>', '', without_code)
     for c in checks:
         has_typo = False
-        if len(without_code) == 0 and len(line.line) > 0:
+        if len(without_html) == 0 and len(line.line) > 0:
             warnings.add(Warning(line, 'Code blocks on their own lines should use ```'))
-        for match in re.findall(c['regex'], without_code, flags=c['flags']):
+        for match in re.findall(c['regex'], without_html, flags=c['flags']):
             if match != c['ideal']:
                 has_typo = True
         if has_typo:
