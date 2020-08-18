@@ -218,6 +218,9 @@ USER ${UID}:${GID}
 
 # Set this as the default directory when we log into the container.
 WORKDIR /workspaces/magento-demo
+
+# This is a quick hack to make sure the container has something to run when it starts, preventing it from closing itself automatically when created. You could also remove this and run the container with "docker run -t -d" to get the same effect. More on "docker run" further below.
+CMD ["sleep", "infinity"]
 ```
 
 Feel free to go through the comments in the file above for more details. But essentially, this Dockerfile describes what a machine ready to run Magento would look like. It's got PHP and all the necessary extensions, Xdebug and composer. It also includes the mysql CLI client.
@@ -266,7 +269,7 @@ elasticsearch                                               7.8.1               
 Ok now that we have an image that's capable of running Magento. Let's put it to work by creating a container based on it. We do that with:
 
 ```sh
-docker run -t -d \
+docker run -d \
   --name magento-demo-web \
   --network magento-demo-network \
   --network-alias web \
@@ -277,7 +280,7 @@ docker run -t -d \
 
 Line by line, this is telling Docker engine to:
 
-- `docker run -t -d`: Run the container in detached mode. The `-t` argument makes sure the container stays up and running even though there's no program or service running within it at the moment. Soon that will be PHP built in web server running our Magento app, but for now, it's just a container with nothing actively running in it.
+- `docker run -d`: Run the container in detached mode. You could also add the `-t` argument which makes sure the container stays up and running even if there's no program or service running within it.
 - `--name magento-demo-web`: Set the name of our container to `magento-demo-web`.
 - `--network magento-demo-network`: Make our container will part of the same network as the MySQL and Elasticsearch ones.
 - `--network-alias web`: Set our container's name within the network.
@@ -424,7 +427,7 @@ bin/magento cache:flush
 
 So turn off the PHP built in server, run these, wait a good while, and fire thebuilt in server once more. Your Magento app should now have catalog and all sorts of other data loaded in.
 
-## composing it all together
+## Composing it all together
 
 Now that was a lot. It was much easier than having to set everything from scratch without Docker, but still, I promised a minimal setup overhead. A single command. With Docker Compose we can do just that.
 
@@ -511,10 +514,128 @@ docker network rm magento-demo-network
 docker volume rm magento-demo-mysql-data
 ```
 
-Make sure you're in the directory where the Dockerfile lives in the host machine. Then create a new `docker-compose.yml` file and put all of the content avobe into it. Finally, run:
+Make sure you're in the directory where the Dockerfile lives in the host machine. Then create a new `docker-compose.yml` file and put all of the content above into it. Finally, run:
 
 ```sh
-docker-compose up
+docker-compose up -d
 ```
 
-CONTINUE
+This will take a little while, but at the end of it, you'll have a complete infrastructure with the three containers that we've created step by step throughout this article. With the `docker-compose.yml` file, `docker-compose up` essentially takes care of running all of our `docker build` and `docker run` commands.
+
+The `-d` option means that the the command will run in the background and give you back control of your console. You can also run it without it if you want the console to show the logs from the containers.
+
+You can still see the logs even in detached mode with:
+
+```sh
+docker-compose logs
+```
+
+You can also inspect the running contianers. For that, you can use:
+
+```sh
+docker-compose ps
+```
+
+Output will look something like this:
+
+```sh
+$ docker-compose ps
+           Name                         Command               State                       Ports                     
+--------------------------------------------------------------------------------------------------------------------
+magento-demo-elasticsearch   /tini -- /usr/local/bin/do ...   Up      0.0.0.0:9200->9200/tcp, 0.0.0.0:9300->9300/tcp
+magento-demo-mysql           docker-entrypoint.sh mysqld      Up      0.0.0.0:3306->3306/tcp, 33060/tcp             
+magento-demo-web             sleep infinity                   Up      0.0.0.0:5000->5000/tcp                        
+```
+
+Notice how `docker-compose ps` gives us out container names just as we specified them in the `docker-compose.yml` file.
+
+`docker-compose` has many other utilities. Check them out with `docker-compose --help`.
+
+Now, same as before, we still need to open a terminal into our Magento container to run some installation commands on it. To do so, we can run the following command:
+
+```sh
+docker-compose exec web bash
+```
+
+Notice how, with `docker-compose` we refer to the container via its service name. That is, the name we gave the container under the `services` section of `docker-compose.yml`.
+
+Of course, we can still use the same command that we used before, when we created our container directly with `docker`:
+
+```sh
+docker exec -it magento-demo-web bash
+```
+
+Now, once inside our container we need to install Magento again. Remember that we wiped out all the infrastructure we created manually these are new containers; akin to new "machines".
+
+If you were running this from scratch you would just go ahead and do...
+
+```sh
+composer create-project --repository-url=https://repo.magento.com/ magento/project-community-edition ./install
+```
+
+and
+
+```sh
+(shopt -s dotglob; mv -v ./install/* .)
+```
+
+In this case however, we already have all the Magento files in our directory. So we can save time and skip this step. We can reuse these files and just run our `bin/magento setup:install`.
+
+This is a new Magento installation though, so we do need to remove the config file before `setup:install`'ing. So go ahead and...
+
+```sh
+rm app/etc/env.php
+```
+
+...then:
+
+```sh
+bin/magento setup:install \
+  --base-url=http://localhost:5000 \
+  --db-host=mysql \
+  --db-name=magento_demo \
+  --db-user=kevin \
+  --db-password=password \
+  --admin-firstname=admin \
+  --admin-lastname=admin \
+  --admin-email=admin@admin.com \
+  --admin-user=admin \
+  --admin-password=admin123 \
+  --language=en_US \
+  --currency=USD \
+  --timezone=America/New_York \
+  --use-rewrites=1 \
+  --elasticsearch-host=elasticsearch \
+  --elasticsearch-port=9200
+```
+
+After a while, Magento will be fully installed in our new infrastructure created by Docker Compose and ready to be fired up via the PHP built in server:
+
+```sh
+php -S 0.0.0.0:5000 -t ./pub/ ./phpserver/router.php
+```
+## Bonus: Interactive debugging with Visual Studio Code
+
+So this is a fully functioning Magento installation with files that we can edit to our hearts' content. In terms of a "fully featured" development environment however, we need to spruce it up a bit.
+
+So install VS Code from https://code.visualstudio.com/ and install the [Remote Development plugin](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack).
+
+Open a new VS Code window and open the command palette with `Ctrl + Shift + P`. In there, type in `Remote-Containers: Attach to Running Container...` and press `Enter`. In the resulting menu, select our `magento-demo-web` container.
+
+That will result in a new VS Code instance that is connected to the container. Open an integrated terminal in VS Code and you'll see:
+
+![VS Code with Remote Development](./how-to-fully-containerize-a-magento-2.4-installation-with-docker-compose-for-development/vscode.png)
+
+Now, install the [PHP Debug extension](https://marketplace.visualstudio.com/items?itemName=felixfbecker.php-debug) so that we can take advantage of that Xdebug that we installed in our container via our Dockerfile.
+
+Create a new launch configuration for interactive debugging with PHP by clicking on the "Run" button in the action bar to the left (`Ctrl + Shift + D` also works). Click the "Show" link in the pane that appears. Then, in the resulting menu at the top of the window, click the "Add configuration..." option. Finally, select the "PHP" option from the resulting menu. Here's a screen capture for guidance:
+
+![Setting up debugging in VS Code](./how-to-fully-containerize-a-magento-2.4-installation-with-docker-compose-for-development/debug.png)
+
+That will result in a new `.vscode/launch.json` file created that contains the launch configuration for the PHP debugger.
+
+Now let's put a breakpoint anywhere, like in line 13 of the `pub/index.php` file; press the "Start debugging" button in the "Run" pane (making sure that the "Listen to XDebug" option is selected), and start up the PHP built in server from the integrated terminal with `php -S 0.0.0.0:5000 -t ./pub/ ./phpserver/router.php`. Now navigate to `localhost:5000` in your browser and enjoy VS Code's interactive debugging expetience:
+
+![Debugging Magento in VS Code](./how-to-fully-containerize-a-magento-2.4-installation-with-docker-compose-for-development/debugging.png)
+
+Whew! That was quite a bit. In this blog post, we've done a deep dive into how to set up all the pieces of a Magento application using Docker containers. Then, we captured all that knowledge into a single `docker-compose.yml` file which can be run with the `docker-compose` tool to provision all the infrastructure in out local machine. As a cherry on top, we set up interactive debugging of our Magento application with VS Code. Thanks to the safety net provided by these tools, I feel like I'm ready to really dig into Magento and start developing customizations, or debugging existing websites. If you've been following along this far, dear reader, I hope you do too.
