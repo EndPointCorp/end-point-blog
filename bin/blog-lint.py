@@ -76,7 +76,7 @@ class Warning:
             return args.input_file + ':' + str(self.line.number + 1) + ': \t' + self.message
         else:
             return self.line + ': \t\t' + self.message
-    
+
     def __hash__(self):
         return hash((self.line, self.message))
 
@@ -130,7 +130,7 @@ class Block:
         out = Block(lines)
         out.lines = sorted(out.lines, key=lambda l: l.number)
         return out
-        
+
     def find_line_index(self, regex, no=1):
         i = 0
         for index, line in enumerate(self.lines):
@@ -169,7 +169,7 @@ def extract_code_blocks(block):
     for b, a in zip(*[iter(matching_indices)]*2):
         out.append(Block(block.lines[a:b+1]))
         del block.lines[a:b+1]
-    
+
     return out
 
 errors = set()
