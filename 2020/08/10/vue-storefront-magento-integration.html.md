@@ -1,7 +1,7 @@
 ---
 author: "Kürşat Kutlu Aydemir"
 title: "Our Vue Storefront “Proof of Concept” Experience"
-tags: vue, javascript, ecommerce
+tags: vue, javascript, ecommerce, interchange, magento
 gh_issue_number: 1654
 ---
 
