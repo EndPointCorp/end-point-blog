@@ -252,16 +252,16 @@ Here's what this all means:
 - `--build-arg USER=kevin`: Specifies the username for the account with sudo access that we will log into our container as. I've chosen `kevin` here but you should use the one you're logged in as in your own machine.
 - `--build-arg UID=$(id -u)`: Uses the `id -u` to pass in the Id of the currently logged in user.
 - `--build-arg GID=$(id -g)`: Uses the `id -g` to pass in the Group Id of the currently logged in user.
-- `-t magento-demo .`: Specifies the name of the resulting image to be `magento-demo`. The `.` is a reference to the current working directory from where we're running the command, which is where our Dockerfile is located.
+- `-t magento-demo-web .`: Specifies the name of the resulting image to be `magento-demo-web`. The `.` is a reference to the current working directory from where we're running the command, which is where our Dockerfile is located.
 
-Run `docker image ls` and you should see our new home grown `magento-demo` image along with the other ones that we've downloaded from Docekr Hub:
+Run `docker image ls` and you should see our new home grown `magento-demo-web` image along with the other ones that we've downloaded from Docekr Hub:
 
 ```sh
-REPOSITORY                                                  TAG                 IMAGE ID            CREATED             SIZE
-magento-demo                                                latest              90d311df434f        22 minutes ago      452MB
-mysql                                                       5.7                 718a6da099d8        12 days ago         448MB
-ubuntu                                                      latest              1e4467b07108        3 weeks ago         73.9MB
-elasticsearch                                               7.8.1               a529963ec236        3 weeks ago         811MB
+REPOSITORY                                                      TAG                 IMAGE ID            CREATED             SIZE
+magento-demo-web                                                latest              90d311df434f        22 minutes ago      452MB
+mysql                                                           5.7                 718a6da099d8        12 days ago         448MB
+ubuntu                                                          latest              1e4467b07108        3 weeks ago         73.9MB
+elasticsearch                                                   7.8.1               a529963ec236        3 weeks ago         811MB
 ```
 
 ### The container
@@ -286,7 +286,7 @@ Line by line, this is telling Docker engine to:
 - `--network-alias web`: Set our container's name within the network.
 - `-p 5000:5000`: Open port `5000` to access our soon-to-be running Magento app.
 - `-v ${PWD}:/workspaces/magento-demo`: Create a new volume that makes our current working directory be the same as the `/workspaces/magento-demo` directory within the container. This is where we'll store all the Magento files. Binding these directories makes it possible to access and modify the Magento files both from the container and from the host machine. This just makes things easier and more convenient for development purposes.
-- `magento-demo-web`: Name our container this way.
+- `magento-demo-web`: Use this image.
 
 Running `docker container ls` will show a list of all running containers. Including the one we just created:
 
@@ -405,7 +405,7 @@ and
 
 As you can see, these are the same settings that we used to configure our MySQL and Elasticsearch containers. So make sure to do the same if you've been following along and decided to go with different values.
 
-Once that command is done, we're ready. We have a working Magento. Try it our by running...
+Once that command is done, we're ready. We have a working Magento. Try it out by running...
 
 ```sh
 php -S 0.0.0.0:5000 -t ./pub/ ./phpserver/router.php
@@ -531,7 +531,7 @@ You can still see the logs even in detached mode with:
 docker-compose logs
 ```
 
-You can also inspect the running contianers. For that, you can use:
+You can also inspect the running containers. For that, you can use:
 
 ```sh
 docker-compose ps
