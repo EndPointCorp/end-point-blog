@@ -4,7 +4,7 @@ title: "Containerizing Magento with Docker Compose: Elasticsearch, MySQL and Mag
 tags: magento, mysql, elasticsearch, docker, docker compose
 ---
 
-![Banner](./how-to-fully-containerize-a-magento-2.4-installation-with-docker-compose-for-development/banner.png)
+![Banner](./containerizing-magento-with-docker-compose-elasticsearch-mysql-and-magento/banner.png)
 
 [Magento](https://magento.com/) is a complex piece of software, and as such, we need all the help we can get when it comes to developing customizations for it. A fully featured local development environment can do just that, but these can often times be very complex as well. It'd be nice to have some way to completely capture all the setup for such an environment and be able to get it all up and running quickly, repeatably... With a single command even. Well, [Docker](https://www.docker.com/) containers can help with that. And they can be easily provisioned with the [Docker Compose](https://docs.docker.com/compose/) tool.
 
@@ -626,18 +626,18 @@ Open a new VS Code window and open the command palette with `Ctrl + Shift + P`. 
 
 That will result in a new VS Code instance that is connected to the container. Open an integrated terminal in VS Code and you'll see:
 
-![VS Code with Remote Development](./how-to-fully-containerize-a-magento-2.4-installation-with-docker-compose-for-development/vscode.png)
+![VS Code with Remote Development](./containerizing-magento-with-docker-compose-elasticsearch-mysql-and-magento/vscode.png)
 
 Now, install the [PHP Debug extension](https://marketplace.visualstudio.com/items?itemName=felixfbecker.php-debug) so that we can take advantage of that Xdebug that we installed in our container via our Dockerfile.
 
 Create a new launch configuration for interactive debugging with PHP by clicking on the "Run" button in the action bar to the left (`Ctrl + Shift + D` also works). Click the "create a launch.json file" link in the pane that appears. Then, in the resulting menu at the top of the window, select the "PHP" option. Here's a screen capture for guidance:
 
-![Setting up debugging in VS Code](./how-to-fully-containerize-a-magento-2.4-installation-with-docker-compose-for-development/debug.png)
+![Setting up debugging in VS Code](./containerizing-magento-with-docker-compose-elasticsearch-mysql-and-magento/debug.png)
 
 That will result in a new `.vscode/launch.json` file created that contains the launch configuration for the PHP debugger.
 
 Now let's put a breakpoint anywhere, like in line 13 of the `pub/index.php` file; press the "Start debugging" button in the "Run" pane, near the top left of the screen (making sure that the "Listen to XDebug" option is selected), and start up the PHP built in server from VS Code's integrated terminal with `php -S 0.0.0.0:5000 -t ./pub/ ./phpserver/router.php`. Now navigate to `localhost:5000` in your browser and enjoy VS Code's interactive debugging experience:
 
-![Debugging Magento in VS Code](./how-to-fully-containerize-a-magento-2.4-installation-with-docker-compose-for-development/debugging.png)
+![Debugging Magento in VS Code](./containerizing-magento-with-docker-compose-elasticsearch-mysql-and-magento/debugging.png)
 
 Whew! That was quite a bit. In this blog post, we've done a deep dive into how to set up all the pieces of a Magento application using Docker containers: MySQL, Ealsticsearch and Magento itself. Then, we captured all that knowledge into a single `docker-compose.yml` file which can be run with a single `docker-compose up` command to provision all the infrastructure in our local machine. As a cherry on top, we set up interactive debugging of our brand new Magento application with VS Code. Thanks to the safety net provided by these tools, I feel like I'm ready to really dig into Magento and start developing customizations, or debugging existing websites. If you've been following along this far, dear reader, I hope you do too.
