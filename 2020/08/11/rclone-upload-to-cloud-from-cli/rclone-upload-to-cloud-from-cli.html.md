@@ -70,7 +70,7 @@ Setting your own is recommended.
 See https://rclone.org/drive/#making-your-own-client-id for how to create your own.
 If you leave this blank, it will use an internal key which is low performance.
 Enter a string value. Press Enter for the default ("").
-client_id>                                                                                                                                 
+client_id>
 ```
 
 At this point, follow the instructions on how to [make your own client id](https://rclone.org/drive/#making-your-own-client-id) from rclone's website- or ours below. When you leave this blank, the app will use a shared client id and there is global rate limiting in effect for every rclone instance.
@@ -181,13 +181,16 @@ At this point, you can quit the configuration mode, and your new rclone remote i
 $ sudo mkdir /mnt/rclone/
 $ sudo mkdir /mnt/rclone/drive
 $ sudo chown -R $USER /mnt/rclone/
-$ rclone mount gdrive: /mnt/rclone/drive/
+$ rclone mount gdrive: /mnt/rclone/drive/ 
 ```
+*If you wish to have the above command run in the background, add & to the end of the command- you'll have to unmount it later with ```fusermount -u /mnt/rclone/drive```*
+
 At this point you can copy any files you like into the mount above. However, you could just do that with rclone directly (```rclone sourcefile gdrive:/.``` Will work) Instead- I used the following command, which I showed at the very beginning of the blog post:
 
 ```bash
 for i in $( ls /drives/source/directory ) ;
 do gpg --output /mnt/rclone/drive/$i.gpg --recipient recipient@email.com --encrypt /drives/source/directory/$i
+done
 ```
 
 Quite a bit of setup. But the result is a mounted folder into which you can copy encrypted files into directly, without any intermediary steps. The above command took a while, but by automating the task, the total work time was still less than it would have been trying to do it manually- especially given that we didn’t have the spare disk space to encrypt the drives in to.
