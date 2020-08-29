@@ -1,17 +1,13 @@
 ---
 author: Josh Tolley
 gh_issue_number: 338
-tags: open-source, postgres
+tags: open-source, postgres, search
 title: Creativity with fuzzy string search
 ---
 
+<img alt="magnifying glass" border="0" src="/blog/2010/08/10/creativity-with-fuzzy-string-search/image-0.png" style="float:left; margin:0 10px 10px 0; width:234px; height:320px"/></a>
 
-
-<a href="/blog/2010/08/10/creativity-with-fuzzy-string-search/image-0-big.png" onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5503909474319715506" src="/blog/2010/08/10/creativity-with-fuzzy-string-search/image-0.png" style="float:left; margin:0 10px 10px 0;cursor:pointer; cursor:hand;width: 234px; height: 320px;"/></a>
-
- 
-
-PostgreSQL provides a useful set of contrib modules for “fuzzy” string searching; that is, searching for something that sounds like or looks like the original search key, but that might not exactly match. One place this type of searching shows up frequently is when looking for peoples’ names. For instance, a receptionist at the dentist’s office doesn’t want to have to ask for the exact spelling of your name every time you call asking for an appointment, so the scheduling application allows “fuzzy” searches, and the receptionist doesn’t have to get it exactly right to find out who you really are. The PostgreSQL documentation provides an excellent introduction to the topic in terms of the available modules; [This blog post](http://www.postgresonline.com/journal/index.php?/archives/158-Where-is-soundex-and-other-warm-and-fuzzy-string-things.html) also demonstrates some of the things they can do.
+PostgreSQL provides a useful set of contrib modules for “fuzzy” string searching; that is, searching for something that sounds like or looks like the original search key, but that might not exactly match. One place this type of searching shows up frequently is when looking for peoples’ names. For instance, a receptionist at the dentist’s office doesn’t want to have to ask for the exact spelling of your name every time you call asking for an appointment, so the scheduling application allows “fuzzy” searches, and the receptionist doesn’t have to get it exactly right to find out who you really are. The PostgreSQL documentation provides an excellent introduction to the topic in terms of the available modules; [This blog post](https://www.postgresonline.com/journal/index.php?/archives/158-Where-is-soundex-and-other-warm-and-fuzzy-string-things.html) also demonstrates some of the things they can do.
 
 The [TriSano](https://web.archive.org/web/20100612002539/http://www.trisano.org/) application was originally written to use soundex search alone to find patient names, but that proved insufficient, particularly because common-sounding last names with unusual spellings would be ranked very poorly in the search results. Our solution, which has worked quite well in practice, involved creative use of PostgreSQL’s full-text search combined with the [pg_trgm contrib module](https://www.postgresql.org/docs/current/static/pgtrgm.html).
 
@@ -60,4 +56,3 @@ first_name text, sources text[], rank double precision)
  403 | Walberg     | Erik       | {trigram_fts}                                   |  0.145491883158684
  309 | Hammaker    | Erik       | {trigram_fts}                                   |  0.145491883158684
 ```
-
