@@ -108,7 +108,7 @@ Here’s how that command works:
 - `magento-demo-mysql` is the name we gave our container in the `docker run` command from before via the `--name magento-demo-mysql` option. This is why it’s useful to give names to containers: so we can use them in commands like this.
 - `mysql -u kevin -p` is the command that’s run within the container. This is just the usual way of connecting to a MySQL server instance using the `mysql` CLI client. We use `kevin` because that’s what we set `MYSQL_USER` to when we created our container before.
 
-After runnung the previous command, the console will ask you for your password. We set that to `password` via `MYSQL_PASSWORD` so that’s what we need to type in. This will eventually result in the `mysql` prompt showing up. Run `show databases` to confirm that the `magento_demo` database that we specified via `MYSQL_DATABASE` got created.
+After running the previous command, the console will ask you for your password. We set that to `password` via `MYSQL_PASSWORD` so that’s what we need to type in. This will eventually result in the `mysql` prompt showing up. Run `show databases` to confirm that the `magento_demo` database that we specified via `MYSQL_DATABASE` got created.
 
 ```plaintext
 mysql> show databases;
@@ -167,7 +167,7 @@ Like before, let’s dissect that command that we used. Very similar to the MySQ
 - `--network-alias elasticsearch`: Is the name by which other containers in the network can refer to this contianer.
 - `-p 9200:9200`: Opens port `9200` so that other containers within the network can talk to this one.
 - `-p 9300:9300`: Same thing but for a different port.
-- `-e "discovery.type=single-node"`: Sets up the `discovery.type` environment virable that the image uses to configure Elasticsearch with.
+- `-e "discovery.type=single-node"`: Sets up the `discovery.type` environment variable that the image uses to configure Elasticsearch with.
 - `elasticsearch:7.8.1`: Specifies that our container will be running version `7.8.1` of Elasticsearch.
 
 ### Containerizing Magento
@@ -188,7 +188,7 @@ FROM ubuntu
 
 # Here we define a few arguments to the Dockerfile. Specifically, the
 # user, user id and group id for a new account that we will use to work
-# as within our contianer.
+# as within our container.
 ARG USER=docker
 ARG UID=1000
 ARG GID=1000
@@ -233,7 +233,7 @@ CMD ["sleep", "infinity"]
 
 Feel free to go through the comments in the file above for more details, but essentially, this Dockerfile describes what a machine ready to run Magento should look like. It’s got PHP and all the necessary extensions, [Xdebug](https://xdebug.org/), and [Composer](https://getcomposer.org/). It also includes the `mysql` CLI client.
 
-Importantly, it allows for creating a user account with sudo access. Later, we’ll use this capability to create a user account, inside the container that mimics the one we’re using in our host machine, effectively using the same user both inside and outside the container. The purpose of this is to make it possible to work on the Magento source code files from inside the container without having to deal with Linux permissions issues when we try to do the same from outside the container (that is, directly via the host machine).
+Importantly, it allows for creating a user account with sudo access. Later, we’ll use this capability to create a user account, inside the container that mimics the one we’re using in our host machine, effectively using the same user both inside and outside the container. The purpose of this is to make it possible to work on the Magento source code files from inside the container without having to deal with Linux permission issues when we try to do the same from outside the container (that is, directly via the host machine).
 
 ### The image
 
