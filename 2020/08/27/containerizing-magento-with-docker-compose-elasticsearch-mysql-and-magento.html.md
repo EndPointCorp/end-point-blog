@@ -9,7 +9,7 @@ gh_issue_number: 1656
 
 [Magento](https://magento.com/) is a complex piece of software, and as such, we need all the help we can get when it comes to developing customizations for it. A fully featured local development environment can do just that, but these can often times be very complex as well. It’d be nice to have some way to completely capture all the setup for such an environment and be able to get it all up and running quickly, repeatably... even with a single command. Well, [Docker](https://www.docker.com/) containers can help with that. And they can be easily provisioned with the [Docker Compose](https://docs.docker.com/compose/) tool.
 
-In this post, we’re going to go in depth over how to fully containerize a Magento 2.4 installation for development, complete with its other dependencies [Elasticsearch](https://www.elastic.co/) and [MySQL](https://www.mysql.com/). By the end of it, we’ll have a single command that sets up all the infrastructure needed to install and run Magento, and develop for it. Let’s get started.
+In this post, we’re going to go in depth into how to fully containerize a Magento 2.4 installation for development, complete with its other dependencies [Elasticsearch](https://www.elastic.co/) and [MySQL](https://www.mysql.com/). By the end of it, we’ll have a single command that sets up all the infrastructure needed to install and run Magento, and develop for it. Let’s get started.
 
 ### Magento 2.4 application components
 
@@ -41,11 +41,11 @@ Output usually looks like this:
 
 ```plaintext
 $ docker network ls
-NETWORK ID          NAME                   DRIVER              SCOPE
-bd562b9cf5a4        bridge                 bridge              local
-adb9ec2365c5        host                   host                local
-2dba8d97410e        magento-demo-network   bridge              local
-c3473c60ed52        none                   null                local
+NETWORK ID    NAME                  DRIVER  SCOPE
+bd562b9cf5a4  bridge                bridge  local
+adb9ec2365c5  host                  host    local
+2dba8d97410e  magento-demo-network  bridge  local
+c3473c60ed52  none                  null    local
 ```
 
 There’s our `magento-demo-network` network among other networks that Docker creates by default.
@@ -72,8 +72,8 @@ And just like that, we have a running MySQL instance. Running `docker ps` can ge
 
 ```plaintext
 $ docker ps
-CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                               NAMES
-b73739ad5d66        mysql:5.7           "docker-entrypoint.s…"   22 seconds ago      Up 21 seconds       0.0.0.0:3306->3306/tcp, 33060/tcp   magento-demo-mysql
+CONTAINER ID  IMAGE      COMMAND                 CREATED         STATUS         PORTS                              NAMES
+b73739ad5d66  mysql:5.7  "docker-entrypoint.s…"  22 seconds ago  Up 21 seconds  0.0.0.0:3306->3306/tcp, 33060/tcp  magento-demo-mysql
 ```
 
 Let’s go through each one of the options from that command now to understand it better.
@@ -137,7 +137,7 @@ Same as before, `mysql` will ask you for the password and, once typed in, it wil
 
 ### Containerizing Elasticsearch
 
-Like MySQL, there’s an official [Elasticsearch Docker image up in Docker Hub](https://hub.docker.com/_/elasticsearch). As a result, getting a working Elasticsearch insallation is a piece of cake. It’s done with a command like this:
+Like MySQL, there’s an official [Elasticsearch Docker image up in Docker Hub](https://hub.docker.com/_/elasticsearch). As a result, getting a working Elasticsearch installation is a piece of cake. It’s done with a command like this:
 
 ```plaintext
 docker run -d \
@@ -150,10 +150,10 @@ docker run -d \
   elasticsearch:7.8.1
 ```
 
-You can validate that the Elasticsearch is running with `curl -X GET "localhost:9200/_cat/health"`. That should return something like this:
+You can validate that the Elasticsearch is running with `curl localhost:9200/_cat/health`. That should return something like this:
 
 ```plaintext
-$ curl -X GET "localhost:9200/_cat/health"
+$ curl localhost:9200/_cat/health
 1597622135 23:55:35 docker-cluster green 1 1 0 0 0 0 0 0 - 100.0%
 ```
 
@@ -176,19 +176,24 @@ Now this is the step where things get a little bit more involved. Nothing crazy 
 
 ### The Dockerfile
 
-There’s no image of Magento 2 that would be able to get us up and running as quickly as with MySQL or Elasticsearch, at least not that I could find, so we’re going to have to create our own. We can create our own images with the help of [Dockerfiles](https://docs.docker.com/engine/reference/builder/). A Dockerfile is a file that contains all the specifications needed for a container. The Docker engine uses it to create images which can then be used as basis for running containers. Here’s a Dockerfile for Magento 2.4 that I came up with:
+There’s no image of Magento 2 that would be able to get us up and running as quickly as with MySQL or Elasticsearch, at least not that I could find, so we’re going to have to create our own. We can create our own images with the help of [Dockerfiles](https://docs.docker.com/engine/reference/builder/). A Dockerfile is a file that contains all the specifications needed for a container. The Docker engine uses it to create images which can then be used as basis for running containers.
+
+Here’s a Dockerfile for Magento 2.4 that I came up with:
 
 ```dockerfile
 # /path/to/project/Dockerfile
-# Our image is based on ubuntu.
+
+# Our image is based on Ubuntu.
 FROM ubuntu
 
-# Here we define a few arguments to the Dockerfile. Specifically, the user, user id and group id for a new account that we will use to work as within our contianer.
+# Here we define a few arguments to the Dockerfile. Specifically, the
+# user, user id and group id for a new account that we will use to work
+# as within our contianer.
 ARG USER=docker
 ARG UID=1000
 ARG GID=1000
 
-# Installing PHP, composer and all extensions needed for Magento.
+# Install PHP, composer and all extensions needed for Magento.
 RUN apt-get update && apt-get install -y software-properties-common curl
 
 RUN add-apt-repository ppa:ondrej/php
@@ -198,29 +203,31 @@ RUN apt-get update && apt-get install -y \
     php-bcmath php-gd php-mbstring php-soap php-zip \
     composer
 
-# Installing Xdebug for a better developer experience.
+# Install Xdebug for a better developer experience.
 RUN apt-get update && apt-get install -y php-xdebug
 RUN echo "xdebug.remote_enable=on" >> /etc/php/7.4/mods-available/xdebug.ini
 RUN echo "xdebug.remote_autostart=on" >> /etc/php/7.4/mods-available/xdebug.ini
 
-# Installing the mysql CLI client.
+# Install the mysql CLI client.
 RUN apt-get update && apt-get install -y mysql-client
 
-# Set up a non root user with sudo access
+# Set up a non-root user with sudo access.
 RUN groupadd --gid $GID $USER \
     && useradd -s /bin/bash --uid $UID --gid $GID -m $USER \
-    # Add sudo support for the non-root user
     && apt-get install -y sudo \
-    && echo $USER ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USER\
+    && echo "$USER ALL=(root) NOPASSWD:ALL" > /etc/sudoers.d/$USER \
     && chmod 0440 /etc/sudoers.d/$USER
 
-# Use the non root user to log in as into the container
+# Use the non-root user to log in as into the container.
 USER ${UID}:${GID}
 
 # Set this as the default directory when we connect to the container.
 WORKDIR /workspaces/magento-demo
 
-# This is a quick hack to make sure the container has something to run when it starts, preventing it from closing itself automatically when created. You could also remove this and run the container with `docker run -t -d` to get the same effect. More on `docker run` further below.
+# This is a quick hack to make sure the container has something to run
+# when it starts, preventing it from closing itself automatically when
+# created. You could also remove this and run the container with `docker
+# run -t -d` to get the same effect. More on `docker run` further below.
 CMD ["sleep", "infinity"]
 ```
 
@@ -237,7 +244,7 @@ cd /path/to/project
 touch Dockerfile
 ```
 
-Then save the contents from above into it, and finally run this command:
+Then use a text editor to save the contents from above into it, and finally run this command:
 
 ```plaintext
 docker build \
@@ -258,11 +265,11 @@ Here’s what this all means:
 Run `docker image ls` and you should see our new home grown `magento-demo-web` image along with the other ones that we’ve downloaded from Docker Hub:
 
 ```plaintext
-REPOSITORY                                                      TAG                 IMAGE ID            CREATED             SIZE
-magento-demo-web                                                latest              90d311df434f        22 minutes ago      452MB
-mysql                                                           5.7                 718a6da099d8        12 days ago         448MB
-ubuntu                                                          latest              1e4467b07108        3 weeks ago         73.9MB
-elasticsearch                                                   7.8.1               a529963ec236        3 weeks ago         811MB
+REPOSITORY        TAG     IMAGE ID      CREATED         SIZE
+magento-demo-web  latest  90d311df434f  22 minutes ago  452MB
+mysql             5.7     718a6da099d8  12 days ago     448MB
+ubuntu            latest  1e4467b07108  3 weeks ago     73.9MB
+elasticsearch     7.8.1   a529963ec236  3 weeks ago     811MB
 ```
 
 ### The container
@@ -293,10 +300,10 @@ Running `docker container ls` will show a list of all running containers, includ
 
 ```plaintext
 docker container ls
-CONTAINER ID        IMAGE                 COMMAND                  CREATED             STATUS              PORTS                                            NAMES
-4af35c42e0bb        magento-demo-web      "/bin/bash"              5 minutes ago       Up 5 minutes        0.0.0.0:5000->5000/tcp                           magento-demo-web
-6c5ea65a7bd6        elasticsearch:7.8.1   "/tini -- /usr/local…"   2 hours ago         Up 2 hours          0.0.0.0:9200->9200/tcp, 0.0.0.0:9300->9300/tcp   magento-demo-elasticsearch
-b73739ad5d66        mysql:5.7             "docker-entrypoint.s…"   3 hours ago         Up 3 hours          0.0.0.0:3306->3306/tcp, 33060/tcp                magento-demo-mysql
+CONTAINER ID  IMAGE                COMMAND                 CREATED        STATUS        PORTS                                           NAMES
+4af35c42e0bb  magento-demo-web     "/bin/bash"             5 minutes ago  Up 5 minutes  0.0.0.0:5000->5000/tcp                          magento-demo-web
+6c5ea65a7bd6  elasticsearch:7.8.1  "/tini -- /usr/local…"  2 hours ago    Up 2 hours    0.0.0.0:9200->9200/tcp, 0.0.0.0:9300->9300/tcp  magento-demo-elasticsearch
+b73739ad5d66  mysql:5.7            "docker-entrypoint.s…"  3 hours ago    Up 3 hours    0.0.0.0:3306->3306/tcp, 33060/tcp               magento-demo-mysql
 ```
 
 ### Connecting to the container
@@ -341,7 +348,7 @@ Notice how this time we don’t use `localhost` or `127.0.0.1` to connect to our
 Same deal for the Elasticsearch container. We can do something like this to talk to it:
 
 ```plaintext
-curl -X GET "elasticsearch:9200/_cat/health"
+curl elasticsearch:9200/_cat/health
 ```
 
 Again, from the perspective of `magento-demo-web`, this is just another machine in the network which it can reach by using the `elasticsearch` network alias that we gave it when creating it.
@@ -438,9 +445,9 @@ For containers, the usual workflow is a three step process:
 2. Create or download an image.
 3. Run the container.
 
-Docker Compose can help us by capturing all the settings needed to create containers in a single file; which then can be taken by a CLI tool (i.e. `docker-compose`) and it can set up the complete infrastructure. This single file is named `docker-compose.yml` and this is what it may look like for our current setup:
+Docker Compose can help us by capturing all the settings needed to create containers in a single YAML file; which then can be taken by a CLI tool (i.e. `docker-compose`) and it can set up the complete infrastructure. This single file is named `docker-compose.yml` and this is what it may look like for our current setup:
 
-```yml
+```yaml
 version: "3.8"
 
 # Listing our three containers. Or "services", as known by Docker Compose.
@@ -504,7 +511,7 @@ networks:
     magento-demo-network:
 ```
 
-As you can see, most of `docker-compose.yml` is more or less rewriting the `docker run` commands in a YML format. With the exception of the `web` container/​service which includes a `build` section that reflects the `docker build` command that was used to take the Dockerfile and turn it into an image.
+As you can see, most of `docker-compose.yml` is more or less rewriting the `docker run` commands in a YAML format. With the exception of the `web` container/​service which includes a `build` section that reflects the `docker build` command that was used to take the Dockerfile and turn it into an image.
 
 If you want to try it out, make sure to remove all the infrastructure we’ve created, to avoid any conflicts. You can do so from your host machine with these commands:
 
