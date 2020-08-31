@@ -6,7 +6,7 @@ tags: cli, linux, cloud, storage,
 
 ### The swiss army knife of storage.
 
-Oftentimes, cloud storage providers like Google Drive are great solutions for storing files- You can upload the data and not have to worry about maintaining a separate system to host it, with all the security hassles that can bring. However- very few of the major cloud storage providers offer a command line interface, or even an open source API that can be interacted with.
+Oftentimes, cloud storage providers like Google Drive are great solutions for storing files- You can upload the data and not have to worry about maintaining a separate system to host it, with all the security hassles that can bring. However- very few of the major cloud storage providers offer a command line interface, or any official way to upload without using their web interface or closed-source binary tools, if that.
 
 This obviously makes uploading files from servers difficult- but not impossible, if you know the right tools.
 
@@ -18,9 +18,9 @@ They were too big, and some of them were not stored sparsely- empty space was ta
 
 Enter rclone. Rclone can connect to many different kinds of cloud storage providers, DIY cloud storage, and even things like FTP and Webdav. You can use rclone to copy files directly like rsync, or even use it to mount the remote storage as a local drive. The latter solution was what we chose to use.
 
-*Rclone can be used with a dizzying array of remote web services- including Dropbox, Box, Amazon S3, Mega, SugarSync, and even homebrew cloud like ownCloud! This example uses Google Drive, but the instructions for many cloud providers are similar- the app will guide you through how to use them*
+*Rclone can be used with a dizzying array of remote web services- including Dropbox, Box, Amazon S3, Mega, SugarSync, and even homebrew cloud like ownCloud! This example uses Google Drive, but the instructions for many cloud providers are similar- The setup wizard can guide you through each step.*
 
-We decided to mount the remote storage, then encrypt and compress the files with gpg outputting directly to the remote mount point, as this would allow us to set several different keys for decryption. rclone offers a crypt module for encrypting backups, but this requires keeping a password- We prefer each person who may need to decrypt this be able to use a key. This also allowed me to run the command and walk away rather than try to shepherd the process along manually.
+We decided to mount the remote storage, then encrypt and compress the files with gpg outputting directly to the remote mount point, as this would allow us to set several different keys for decryption. Rclone offers a crypt module for encrypting backups, but this requires keeping a password- We prefer each person who may need to decrypt this be able to use a key. This also allowed me to run the command and walk away rather than try to shepherd the process along manually.
 
 Once the rclone mount was in place, encrypting the files for upload was very simple. Having the storage mounted locally negated the need to encrypt it locally and then upload it. We simply ran the following:
 
