@@ -10,6 +10,8 @@ Oftentimes, cloud storage providers like Google Drive are great solutions for st
 
 This obviously makes uploading files from servers difficult- but not impossible, if you know the right tools.
 
+Previously, Jon Jensen penned a blog post about [gdrive](https://www.endpoint.com/blog/2019/09/30/google-drive-for-vm-images), a Google Drive command line tool. However, due to changes with Google's Drive security, that tool no longer works. This led me to look for a replacement.
+
 ### Our use case
 
 Recently I had to put some large files in to long term storage on Google Drive, as we needed the space back. We wanted to retain the data, but didn't foresee needing to access it for some time, if ever. Google Drive was a good solution for us, however, the problem became how to get it there.
@@ -32,9 +34,9 @@ Does this sound useful? Well, if it does...
 
 ### How to do this yourself
 
-Installing rclone is as simple as downloading the binary from their website, https://rclone.org/, or cloning the git repository and compiling it yourself- They also offer a script to automatically download the most recent version. There doesn't seem to be a repository at this time.
+Installing rclone is as simple as downloading the binary from their website, https://rclone.org/, or cloning the git repository and compiling it yourself- They also offer a script to automatically download the most recent version. There doesn't seem to be package manager repositories available at this time..
 
-Whichever method you choose, once you have RClone installed, you'll need to configure it to use your remote storage.
+Whichever method you choose, once you have rclone installed, you'll need to configure it to use your remote storage.
 
 ```bash
 $ rclone config
@@ -178,8 +180,7 @@ At this point, you can quit the configuration mode, and your new rclone remote i
 
 
 ```bash
-$ sudo mkdir /mnt/rclone/
-$ sudo mkdir /mnt/rclone/drive
+$ sudo mkdir -p /mnt/rclone/drive
 $ sudo chown -R $USER /mnt/rclone/
 $ rclone mount gdrive: /mnt/rclone/drive/
 ```
@@ -220,7 +221,7 @@ Enable the Google Drive API
 
 <a href="/2020/09/02/Rclone-upload-to-the-cloud-from-cli/rclone_google_api_4-full.png"><img src="/2020/09/02/Rclone-upload-to-the-cloud-from-cli/rclone_google_api_4-full.png" alt="A screenshot of the Google Drive API welcome screen"/></a>
 
-Once you have enabled this- Do not click 'Create Credentials' directly. Instead, click on Credentials in the left navigation pane, then 'Create Credentials' from that page.
+Once you have enabled this- Do not click 'Create Credentials' directly. (This takes you to the wrong wizard,) Instead, click on Credentials in the left navigation pane, then 'Create Credentials' from that page, which gives you the option to just create OAuth credentials, which is what we need.
 
 <a href="/2020/09/02/Rclone-upload-to-the-cloud-from-cli/rclone_google_api_5-full.png"><img src="/2020/09/02/Rclone-upload-to-the-cloud-from-cli/rclone_google_api_5-full.png" alt="A screenshot of the dashboard, showing how to navigate to the correct 'Create Credentials' screen"/></a>
 
