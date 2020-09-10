@@ -51,7 +51,7 @@ q) Quit config
 n/s/q>
 ```
 
-choose ‘n’ for a new remote, and name it something memorable.
+Choose ‘n’ for a new remote, and name it something memorable.
 
 ```bash
 n/s/q> n
