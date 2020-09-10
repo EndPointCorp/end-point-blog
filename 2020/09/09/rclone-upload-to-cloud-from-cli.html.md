@@ -1,5 +1,5 @@
 ---
-author: "Ardyn Elisabeth Majere"
+author: "Ardyn Majere"
 title: "Rclone: upload to the cloud from your command line and much more"
 tags: cli, linux, cloud, storage
 gh_issue_number: 1660
@@ -9,7 +9,7 @@ gh_issue_number: 1660
 
 ### The swiss army knife of storage
 
-Cloud storage providers like Google Drive are great solutions for storing files. You can upload your data and not worry about maintaining a separate system to host it, or all the security hassles that can bring. However, very few major cloud storage providers offer a command line interface or any other official way to upload without using their web interface or closed-source binary tools, if that.
+Cloud storage providers like Google Drive are great solutions for storing files. You can upload your data and not worry about maintaining a separate system to host it, or all the security hassles that can bring. However, very few major cloud storage providers offer a command line interface or any other official way to upload without using their web interface or closed-source binary tools, if they even offer that.
 
 This obviously makes uploading files from servers difficult, but not impossible if you know the right tools.
 
@@ -65,7 +65,7 @@ XX / Google Drive
 Storage> drive
 ```
 
-(At this point you could also choose a different storage type, and the rest of these instructions should still work)
+(At this point you could also choose a different storage type, and the rest of these instructions should still work.)
 
 ```bash
 ** See help for drive backend at: https://rclone.org/drive/ **
