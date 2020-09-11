@@ -1,19 +1,19 @@
 ---
 author: "Ardyn Majere"
 title: "Rclone: upload to the cloud from your command line and much more"
-tags: cli, linux, cloud, storage
+tags: sysadmin, cloud, storage
 gh_issue_number: 1660
 ---
 
 ![](/blog/2020/09/09/rclone-upload-to-cloud-from-cli/rclone_header_2_optimized.jpg)
 
-### The swiss army knife of storage
+### The Swiss army knife of storage
 
 Cloud storage providers like Google Drive are great solutions for storing files. You can upload your data and not worry about maintaining a separate system to host it, or all the security hassles that can bring. However, very few major cloud storage providers offer a command line interface or any other official way to upload without using their web interface or closed-source binary tools, if they even offer that.
 
 This obviously makes uploading files from servers difficult, but not impossible if you know the right tools.
 
-Previously, Jon Jensen penned a blog post about [gdrive](https://www.endpoint.com/blog/2019/09/30/google-drive-for-vm-images), a Google Drive command line tool. However, due to changes with Google’s Drive security, that tool no longer works. This led me to look for a replacement.
+About a year ago Jon Jensen penned [a blog post about gdrive](/blog/2019/09/30/google-drive-for-vm-images), a Google Drive command-line tool. However, due to changes with Google’s Drive security, that tool no longer works. This led me to look for a replacement.
 
 ### Our use case
 
@@ -21,7 +21,7 @@ Recently I had to put some large files in to long term storage on Google Drive, 
 
 The files were too big, and some of them were not stored sparsely—​empty space was tacked on to the disk images. We wanted to encrypt them, as the drives potentially contained customer information. So we had to sequentially process the files, encrypt them, and upload them. I felt like this would take quite a bit of time.
 
-Enter [rclone](https://rclone.org/). Rclone can connect to many different kinds of cloud storage providers, DIY cloud storage solutions, and even things like FTP and Webdav. You can use rclone to copy files directly like rsync, or even use it to mount the remote storage as a local drive. We chose to do the latter.
+Enter [rclone](https://rclone.org/). Rclone can connect to many different kinds of cloud storage providers, DIY cloud storage solutions, and even things like FTP and WebDAV. You can use rclone to copy files directly like rsync, or even use it to mount the remote storage as a local drive. We chose to do the latter.
 
 Rclone connects to a dizzying array of remote web services including Dropbox, Box, Amazon S3, Mega, SugarSync, and even homebrew cloud like ownCloud! This example uses Google Drive, but the instructions for many cloud providers are similar. The setup wizard can guide you through each step.
 
@@ -37,11 +37,11 @@ Does this sound useful? Well, if it does…
 
 ### How to do this yourself
 
-Installing rclone is as simple as downloading the binary from [rclone.org](https://rclone.org/) or cloning the git repository and compiling it yourself. They also offer a script to automatically download the most recent version. There don’t seem to be package manager repositories available at this time.
+Installing rclone is as simple as downloading the binary from [rclone.org](https://rclone.org/) or cloning the Git repository and compiling it yourself. They also offer a script to automatically download the most recent version. Packages are also available in most operating system repositories, though as usual those tend to be a little older.
 
 Whichever method you choose, once you have rclone installed, you’ll need to configure it to use your remote storage.
 
-```bash
+```plain
 $ rclone config
 2020/08/28 11:33:19 NOTICE: Config file "/home/user/.config/rclone/rclone.conf" not found - using defaults
 No remotes found - make a new one
@@ -53,7 +53,7 @@ n/s/q>
 
 Choose ‘n’ for a new remote, and name it something memorable.
 
-```bash
+```plain
 n/s/q> n
 name> gdrive
 Type of storage to configure.
@@ -67,7 +67,7 @@ Storage> drive
 
 (At this point you could also choose a different storage type, and the rest of these instructions should still work.)
 
-```bash
+```plain
 ** See help for drive backend at: https://rclone.org/drive/ **
 
 Google Application Client Id
@@ -80,7 +80,7 @@ client_id>
 
 At this point, follow the instructions on how to [make your own client id](https://rclone.org/drive/#making-your-own-client-id) from rclone’s website or keep reading. If you leave this blank, the app will use a shared client id and there is global rate limiting in effect for every rclone instance.
 
-```bash
+```plain
 client_id> [snip].apps.googleusercontent.com
 Google Application Client Secret
 Setting your own is recommended.
@@ -108,7 +108,7 @@ scope> 3
 
 At this point, choose a scope for the drive access. I’m not sure what the use cases are for the higher numbers, but 1–3 seem to be the most useful. For this demonstration, I chose 3—I want the app to be able to create new files but not read existing ones. For backups, I recommend 1 or 2.
 
-```bash
+```plain
 ID of the root folder
 Leave blank normally.
 
@@ -124,10 +124,10 @@ root_folder_id>
 
 You can also jail the app to a specific subfolder. You’ll need to use a folder ID for this, rather than a folder name. See [the documentation](https://rclone.org/drive/#root-folder-id) if you need to do this.
 
-```bash
+```plain
 Needed only if you want use SA instead of interactive login.
 Enter a string value. Press Enter for the default ("").
-service_account_file>  #I left this blank
+service_account_file>  # I left this blank
 Edit advanced config? (y/n)
 y) Yes
 n) No (default)
@@ -142,7 +142,7 @@ n) No
 
 For our use case, we are setting this up on a remote machine, but you can use the interactive login if you have a graphical user interface on the machine in question.
 
-```bash
+```plain
 y/n> n
 Please go to the following link: https://accounts.google.com/o/oauth2/auth?access_type=offline&client_id=[snip]
 Log in and authorize rclone for access
@@ -151,7 +151,7 @@ Enter verification code>
 
 At this point copy the URL and follow the instructions on screen. Agree to the data sharing—If you have created your own API key, this data will be only shared with yourself, another reason to create your own.
 
-```bash
+```plain
 Configure this as a team drive?
 y) Yes
 n) No (default)
@@ -178,7 +178,7 @@ gdrive               drive
 
 At this point, you can quit the configuration mode, and your new rclone remote is ready to use!
 
-### Mounting the remote drive (Putting it all together)
+### Mounting the remote drive (putting it all together)
 
 ```bash
 $ sudo mkdir -p /mnt/rclone/drive
@@ -186,9 +186,9 @@ $ sudo chown -R $USER /mnt/rclone/
 $ rclone mount gdrive: /mnt/rclone/drive/
 ```
 
-Note: If you wish to have the above command run in the background, add & to the end of the command. You’ll have to unmount it later with `fusermount -u /mnt/rclone/drive`
+Note: If you wish to have the above command run in the background, add &amp; to the end of the command. You’ll have to unmount it later with `fusermount -u /mnt/rclone/drive`
 
-At this point you can copy any files you like into the mount above. However, you could just do that with rclone directly (`rclone sourcefile gdrive:/.` Will work) Instead, I used the following command, which I showed at the very beginning of the blog post:
+At this point you can copy any files you like into the mount above. However, you could just do that with rclone directly: `rclone sourcefile gdrive:/.` will work. Instead, I used the following command, which I showed at the very beginning of the blog post:
 
 ```bash
 for i in $( ls /drives/source/directory ); do
@@ -196,9 +196,9 @@ for i in $( ls /drives/source/directory ); do
 done
 ```
 
-Quite a bit of setup. But the result is a mounted folder into which you can copy encrypted files into directly, without any intermediary steps. The above command took a while, but by automating the task, the total work time was still less than it would have been trying to do it manually, especially given that we didn’t have the spare disk space to encrypt our files.
+Quite a bit of setup. But the result is a mounted folder into which you can copy encrypted files directly, without any intermediary steps. The above command took a while, but by automating the task, the total work time was still less than it would have been trying to do it manually, especially given that we didn’t have the spare disk space to store a separate encrypted copy of our files.
 
-Want to do more? You could take a whole drive image with dd, run it through gzip and gpg, and pipe the output to the remote storage. You could use the crypt module for your own backups, rather than relying on gpg. The mount point acts as though it was a drive on your system, so any system utility like Timeshift could back up to the drive.
+Want to do more? You could take a whole drive image with dd, run it through gpg, and pipe the output to the remote storage. You could use the crypt module for your own backups, rather than relying on gpg. The mount point acts as though it was a drive on your system, so any system utility like Timeshift could back up to the drive.
 
 If you have any other suggestions for how this might be used, please leave a comment!
 
@@ -206,7 +206,7 @@ If you have any other suggestions for how this might be used, please leave a com
 
 These instructions can also be found on the [rclone website](https://rclone.org/drive/#making-your-own-client-id).
 
-For this blog post I used my personal account and went through the steps below. Some of the steps may be different for a G Suite account. It’s a little cumbersome but will only take 5-10 minutes.
+For this blog post I used my personal account and went through the steps below. Some of the steps may be different for a G Suite account. It’s a little cumbersome but will only take 5–10 minutes.
 
 Log in to the [API console](https://console.developers.google.com/) and create a new project.
 
@@ -224,7 +224,7 @@ Enable the Google Drive API.
 
 ![The Google Drive API welcome screen](/blog/2020/09/09/rclone-upload-to-cloud-from-cli/rclone_google_api_4-full.png)
 
-Once you have enabled this, do not click ‘Create Credentials’ directly (This takes you to the wrong wizard). Instead, click on Credentials in the left navigation pane, then ‘Create Credentials’, which gives you the option to just create OAuth credentials, which is what we need.
+Once you have enabled this, do not click ‘Create Credentials’ directly — this takes you to the wrong wizard. Instead, click on Credentials in the left navigation pane, then ‘Create Credentials’, which gives you the option to just create OAuth credentials, which is what we need.
 
 ![The dashboard, showing how to navigate to the correct ‘Create Credentials’ screen](/blog/2020/09/09/rclone-upload-to-cloud-from-cli/rclone_google_api_5-full.png)
 
@@ -236,8 +236,8 @@ Once you have done that, create your OAuth ID. Again, you can just name this rcl
 
 ![Creating a new OAuth ID.](/blog/2020/09/09/rclone-upload-to-cloud-from-cli/rclone_google_api_7-full.png)
 
-You’re done! You can now use the OAuth ID displayed on this screen with rclone- or go back and see it again from the dashboard under ‘Credentials’, then clicking the name of the OAuth ID you created.
+You’re done! You can now use the OAuth ID displayed on this screen with rclone. Or go back and see it again from the dashboard under ‘Credentials’, then clicking the name of the OAuth ID you created.
 
 When creating the ID, it’ll say you will need to verify the app. This is only true if you plan on heavy use. You can use it quite easily without this step for smaller use cases.
 
-These instructions were originally written by github user @balazer, and are adapted here with many thanks.
+(These instructions were originally written by GitHub user @balazer, and are adapted here with many thanks.)
