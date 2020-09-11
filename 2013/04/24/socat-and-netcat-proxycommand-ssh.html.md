@@ -5,11 +5,9 @@ tags: networking, ssh, sysadmin
 title: SSH ProxyCommand with netcat and socat
 ---
 
-
-
 <a href="/blog/2013/04/24/socat-and-netcat-proxycommand-ssh/image-0-big.jpeg" imageanchor="1"><img border="0" src="/blog/2013/04/24/socat-and-netcat-proxycommand-ssh/image-0.jpeg"/></a>
 
-[Picture](https://www.flickr.com/photos/tambako/5880777651/) by Flickr user [Tambako the Jaguar](https://www.flickr.com/photos/tambako/)
+[Picture](https://www.flickr.com/photos/tambako/5880777651/) by [Tambako the Jaguar](https://www.flickr.com/photos/tambako/)
 
 Most of my day to day is work is conducted via a terminal, using 
 [Secure Shell](https://en.wikipedia.org/wiki/Secure_Shell) 
@@ -27,17 +25,17 @@ what IPs they may have at the moment, engineers can access servers through certa
 trusted shell servers. Then our engineers can SSH to one of those servers, and from
 there on to the client’s servers. As one does not want to actually SSH twice every time a
 connection is needed, the ProxyCommand option allows a quick tunnel to be created. Here’s
-an example entry for a .ssh/config file:
+an example entry for a `.ssh/config` file:
 
-```
-<span class="gsma">Host</span> proxy
-<span class="gsma">User</span> greg
-<span class="gsma">HostName</span> proxy.example.com
+```plain
+Host proxy
+User greg
+HostName proxy.example.com
 
-<span class="gsma">Host</span> acme
-<span class="gsma">User</span> gmullane
-<span class="gsma">HostName</span> pgdev.acme.com
-<span class="gsma">ProxyCommand</span> ssh -q proxy nc -w 180 %h %p
+Host acme
+User gmullane
+HostName pgdev.acme.com
+ProxyCommand ssh -q proxy nc -w 180 %h %p
 ```
 
 So now when we run the command **ssh acme**, ssh actually first logs into proxy.example.com
@@ -53,21 +51,21 @@ it was a tightly locked down production box. However, it was reachable by other 
 within the company’s intranet, including pgdev.acme.com. Thus to login as gmullane
 on the calamity server, the .ssh/config file would normally look like this:
 
-```
-<span class="gsma">Host</span> proxy
-<span class="gsma">User</span> greg
-<span class="gsma">HostName</span> proxy.example.com
+```plain
+Host proxy
+User greg
+HostName proxy.example.com
 
-<span class="gsma">Host</span> acme
-<span class="gsma">User</span> gmullane
-<span class="gsma">HostName</span> pgdev.acme.com
-<span class="gsma">ProxyCommand</span> ssh -q proxy nc -w 180 %h %p
+Host acme
+User gmullane
+HostName pgdev.acme.com
+ProxyCommand ssh -q proxy nc -w 180 %h %p
 
-<span class="gsma">Host</span> acme_calamity
-<span class="gsma">User</span> gmullane
+Host acme_calamity
+User gmullane
 ## This is calamity.acme.com, but pgdev.acme.com cannot resolve that, so we use the IP
-<span class="gsma">HostName</span> 192.168.7.113
-<span class="gsma">ProxyCommand</span> ssh -q acme nc -w 180 %h %p
+HostName 192.168.7.113
+ProxyCommand ssh -q acme nc -w 180 %h %p
 ```
 
 Thus, we’d expect to run **ssh acme_calamity** and get a prompt on the calamity box.
@@ -82,11 +80,11 @@ any advanced functionality, however, just a simple bidirectional pipe which
 the SSH connections could flow over. The new entry in the config file thus
 became:
 
-```
-<span class="gsma">Host</span> acme_calamity
-<span class="gsma">User</span> gmullane
-<span class="gsma">HostName</span> 192.168.13.123
-<span class="gsma">ProxyCommand</span> ssh -q acme socat STDIN TCP:%h:%p
+```plain
+Host acme_calamity
+User gmullane
+HostName 192.168.13.123
+ProxyCommand ssh -q acme socat STDIN TCP:%h:%p
 ```
 
 After that, everything worked as expected. It’s perfectly fine to mix socat and
@@ -106,5 +104,3 @@ until manually killed.
 Even if both netcat and socat were not available, there are other solutions.
 In addition to other programs, it is easy enough to write a quick Perl script
 to create your own bidirectional pipe!
-
-

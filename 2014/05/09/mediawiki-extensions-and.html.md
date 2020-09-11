@@ -5,15 +5,16 @@ tags: git, mediawiki, troubleshooting
 title: MediaWiki extensions and wfLoadExtensionMessages
 ---
 
-<div class="separator" style="clear: both; float: right; text-align: center;"><a href="/blog/2014/05/09/mediawiki-extensions-and/image-0.jpeg" imageanchor="1" style="clear: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" src="/blog/2014/05/09/mediawiki-extensions-and/image-0.jpeg"/></a><br/><small><a href="https://flic.kr/p/dykcFR">Image</a> by Flickr user <a href="https://www.flickr.com/photos/yukonlife/">Susan Drury</a></small>
+<div class="separator" style="clear: both; float: right; text-align: center;"><a href="/blog/2014/05/09/mediawiki-extensions-and/image-0.jpeg" imageanchor="1" style="clear: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" src="/blog/2014/05/09/mediawiki-extensions-and/image-0.jpeg"/></a><br/><small><a href="https://flic.kr/p/dykcFR">Image</a> by <a href="https://www.flickr.com/photos/yukonlife/">Susan Drury</a></small>
 </div>
 
 Upgrading MediaWiki can be a challenging task, especially if you use a lot of extensions. 
 While the core upgrade process usually goes smoothly, it’s rare you can upgrade a major 
 version or two without having to muddle with your collection of extensions. Extensions are bits of code that extend what MediaWiki can do. Only a few are packaged with and maintained alongside MediaWiki itself—​the great majority are written by third-party developers. When the MediaWiki API changes, it is up to those developers to update their extension so it works with the new version of MediaWiki. This does not always happen. Take for example one of the more common errors seen on a MediaWiki upgrade since 1.21 was released:
 
-[Tue May 06 11:21:52 2014] [error] [client 12.34.56.78] PHP Fatal error:  
-Call to undefined function wfLoadExtensionMessages() in /home/beckett/mediawiki/extensions/PdfExport/PdfExport.php on line 83, referer: http://test.ziggy.com/wiki/Main_Page
+```plain
+[Tue May 06 11:21:52 2014] [error] [client 12.34.56.78] PHP Fatal error:  Call to undefined function wfLoadExtensionMessages() in /home/beckett/mediawiki/extensions/PdfExport/PdfExport.php on line 83, referer: http://test.ziggy.com/wiki/Main_Page
+```
 
 This is because the **wfLoadExtensionMessages** function, which many extensions use, has 
 been deprecated since MediaWiki version 1.16 and was finally removed in 1.21, resulting in the 
@@ -32,31 +33,29 @@ First, let’s verify that wfLoadExtensionMessages does not exist at all in vers
 these examples, I’ve checked out the MediaWiki code via git, and am relying on 
 the fact that lightweight git tags were made for all the versions we are interested in.
 
+```plain
 $ git clone https://github.com/SemanticMediaWiki/SemanticMediaWiki.git mediawiki
-
 $ cd mediawiki
-
 $ git grep wfLoadExtensionMessages 1.21.0
-
 1.21.0:HISTORY:* (bug 12880) wfLoadExtensionMessages does not use $fallback from MessagesXx.php
+```
 
-A nice feature of git-grep is the ability to simply use a tag after the search string. In this 
+A nice feature of `git grep` is the ability to simply use a tag after the search string. In this 
 case, we see that the only mention of wfLoadExtensionMessages in the entire codebase is an 
 old mention of it in the history file. Let’s see what version that bug is from:
 
+```plain
 $ git grep -n wfLoadExtensionMessages 1.21.0
-
 1.21.0:HISTORY:5280:* (bug 12880) wfLoadExtensionMessages does not use $fallback from MessagesXx.php
-
 $ git show 1.21.0:HISTORY | head -5280 | tac | grep '===' -m1
-
 === Bug fixes in 1.12 ===
+```
 
 That message is from way back in version 1.12, and doesn’t concern us. Let’s take a look at 
 what tags exist in the 1.20 branch so we can scan the latest one:
 
-```
-<span class="gsm">$ git tag | grep '^1\.20'
+```plain
+$ git tag | grep '^1\.20'
 1.20.0
 1.20.0rc1
 1.20.0rc2
@@ -67,20 +66,18 @@ what tags exist in the 1.20 branch so we can scan the latest one:
 1.20.5
 1.20.6
 1.20.7
-1.20.8</span>
+1.20.8
 ```
 
 Now we can peek inside version 1.20.8 and see what that function did before it was removed. 
 By using the -A and -B (after and before) arguments to grep, we can see the entire function in 
 context:
 
-```
-<span class="gsm">$ git grep wfLoadExtensionMessages 1.20.0
-1.20.0:HISTORY:* (bug 12880) wfLoadExtensionMessages does not 
-  use $fallback from MessagesXx.php
+```plain
+$ git grep wfLoadExtensionMessages 1.20.0
+1.20.0:HISTORY:* (bug 12880) wfLoadExtensionMessages does not use $fallback from MessagesXx.php
 1.20.0:includes/GlobalFunctions.php:function wfLoadExtensionMessages() {
-$ git show 1.20.8:includes/GlobalFunctions.php | \
-  grep -B6 -A2 LoadExtensionMessages
+$ git show 1.20.8:includes/GlobalFunctions.php | grep -B6 -A2 LoadExtensionMessages
 /**
  * Load an extension messages file
  *
@@ -90,7 +87,6 @@ $ git show 1.20.8:includes/GlobalFunctions.php | \
 function wfLoadExtensionMessages() {
     wfDeprecated( __FUNCTION__, '1.16' );
 }
-</span>
 ```
 
 Thus wfLoadExtensionMessages was basically a no-op in MediaWiki version 1.20, with the caveat that it will write 
@@ -98,25 +94,22 @@ a deprecation warning to your error log (or, in modern versions, the debug log u
 Next we want to find the last time this function did something useful—​which should be version 1.15 according to 
 the comment above. Thus:
 
-```
-<span class="gsm">$ git show 1.15.0:includes/GlobalFunctions.php | \
-  grep -A4 LoadExtensionMessages
+```plain
+$ git show 1.15.0:includes/GlobalFunctions.php | grep -A4 LoadExtensionMessages
 function wfLoadExtensionMessages( $extensionName, $langcode = false ) {
     global $wgExtensionMessagesFiles, $wgMessageCache, $wgLang, $wgContLang;
 
     #For recording whether extension message files have been loaded in a given language.
     static $loaded = array();
-</span>
 ```
 
 So, it’s a pretty safe bet that unless you are upgrading from 1.15.0 or earlier, it should 
 be completely safe to remove it. When was 1.16.0 released? There are no dates in the HISTORY 
 file (shame), but the date it was tagged should be a good guess:
 
-```
-<span class="gsm">$ git show 1.16.0 | grep -m1 Date
+```plain
+$ git show 1.16.0 | grep -m1 Date
 Date:   Wed Jul 28 07:11:03 2010 +0000
-</span>
 ```
 
 So what should you do with extensions that are still using this deprecated function? There are 
@@ -127,8 +120,8 @@ Changing the extension itself is certainly quick and easy. To get the PdfExport 
 we only have to comments out two calls to wfLoadExtensionMessages inside of the file 
 PdfExport.php, and one inside of PdfExport_body.php. The diff:
 
-```
-<span class="gsm">$ git difftool -y -x "diff -u1"
+```plain
+$ git difftool -y -x "diff -u1"
 --- /tmp/7YqvXv_PdfExport.php 2014-05-08 12:45:03 -0400
 +++ PdfExport.php             2014-05-08 12:34:39 -0400
 @@ -82,3 +82,3 @@
@@ -147,16 +140,14 @@ PdfExport.php, and one inside of PdfExport_body.php. The diff:
             // For backwards compatibility
 -             wfLoadExtensionMessages('PdfPrint');
 +             //wfLoadExtensionMessages('PdfPrint');
-</span>
 ```
 
 A better way is to add a dummy function to LocalSettings.php. This ensures that any extension 
 we add in the future will continue to work unmodified. Just throw this at the bottom 
 on your LocalSettings.php:
 
-```
-<span class="gsm">function wfLoadExtensionMessages() { }
-</span>
+```php
+function wfLoadExtensionMessages() { }
 ```
 
 Probably the best overall solution is to not only add that to your LocalSettings.php, 
