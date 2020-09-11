@@ -9,6 +9,8 @@ gh_issue_number: 1644
 
 <!-- Photo by Jon Jensen -->
 
+**(This position has been filled.)**
+
 We are looking for a PHP software engineer to work with us during business hours somewhere in the UTC-7 to UTC-4 time zones (U.S. Pacific to Eastern Time). This role can be full-time or part-time.
 
 We are an Internet technology consulting company based in New York City, with 50 employees serving many clients ranging from small family businesses to large corporations. The company turns 25 years old this year!  

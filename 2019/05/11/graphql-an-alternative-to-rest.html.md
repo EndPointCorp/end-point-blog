@@ -1,7 +1,7 @@
 ---
 author: "Zed Jensen"
 title: "GraphQL — An Alternative to REST"
-tags: graphql, database
+tags: graphql, database, nodejs
 gh_issue_number: 1523
 ---
 
@@ -116,7 +116,7 @@ Although you can get similar functionality by using GET parameters or creating e
 
 ### Try it!
 
-OK, so there are some of the things that sets GraphQL apart. However, reading about it is only so helpful—now I’ll show how to get a GraphQL backend up and running quickly using [Graph.cool](https://www.graph.cool/), a Node.js backend service that does most of the work of setting up a server, including setting up a database based on your schema. (Graphcool also offers a more flexible server option called Prisma, but graphcool itself is more than enough for this example.)
+OK, so there are some of the things that sets GraphQL apart. However, reading about it is only so helpful—now I’ll show how to get a GraphQL backend up and running quickly using [Graph.cool](https://www.graph.cool/), a Node.js backend service that does most of the work of setting up a server, including setting up a database based on your schema. (Graphcool was retired in mid-2020, so you should instead check out their more flexible server option called [Prisma](https://www.prisma.io/).)
 
 First, you need to install graphcool by running:
 
@@ -223,14 +223,6 @@ On the far right of the GraphQL Playground, there’s a tab labeled Schema that 
 
 If you want to keep messing around with GraphQL, I’d suggest trying to add your own new `Comment` type to types.graphql, emulating the way User and Post are related to each other. Keep in mind that you’ll have to run `graphcool deploy` and reload your browser to see your changes show up in the Playground.
 
-For more information and thorough documentation, the following sites are your best bet:
+For more information and thorough documentation, see the [GraphQL website](https://graphql.org/learn/).
 
-- [GraphQL website](https://graphql.org/learn/)
-- [Graphcool Docs](https://www.graph.cool/docs)
-
-If you want to try GraphQL without installing anything, these sites let you try it on their own servers:
-
-- [graphql.nodaljs.com](http://graphql.nodaljs.com/)
-- [try.sangria-graphql.com](http://try.sangria-graphql.org)
-- [trygql.com](https://trygql.com/)
-
+If you want to try GraphQL without installing anything, visit [graphql.nodaljs.com](http://graphql.nodaljs.com/) which lets you try it on their own server.

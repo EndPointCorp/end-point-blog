@@ -5,18 +5,13 @@ tags: monitoring, nagios, postgres, sysadmin
 title: 'Automating checking for new versions of PostgreSQL'
 ---
 
-<div class="separator" style="clear: both; text-align: center; float:right"><a href="/blog/2013/07/03/automating-checking-for-new-versions-of/image-0.jpeg" imageanchor="1" style="clear: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" src="/blog/2013/07/03/automating-checking-for-new-versions-of/image-0.jpeg"/></a><br/><small>Hubble image via Flickr user <a href="https://www.flickr.com/photos/77954350@N07/">castielstar</a></div>
+<div class="separator" style="clear: both; text-align: center; float:right"><a href="/blog/2013/07/03/automating-checking-for-new-versions-of/image-0.jpeg" imageanchor="1" style="clear: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" src="/blog/2013/07/03/automating-checking-for-new-versions-of/image-0.jpeg"/></a><br/><small>Hubble image by <a href="https://www.flickr.com/photos/77954350@N07/">castielstar</a></div>
 
-It is important to run the latest revision of the major branch of Postgres you 
-are using. While 
-[the pgsql-announce mailing list](https://www.postgresql.org/list/pgsql-announce/) is often touted as a canonical 
-way to become aware of new releases, a better method is to use 
-[the check_postgres program](https://bucardo.org/check_postgres/), which will let you know if the version you are running needs to be 
-upgraded or not. An example usage:
+It is important to run the latest revision of the major branch of Postgres you are using. While [the pgsql-announce mailing list](https://www.postgresql.org/list/pgsql-announce/) is often touted as a canonical way to become aware of new releases, a better method is to use [the check_postgres program](https://bucardo.org/check_postgres/), which will let you know if the version you are running needs to be upgraded or not. An example usage:
 
-```
-<span class="gsmp">$</span> check_postgres.pl --action=new_version_pg --dbhost=iroh
-<span class="gsmo">POSTGRES_NEW_VERSION_PG CRITICAL:  Please upgrade to version 9.2.4 of Postgres. You are running 9.2.2</span>
+```bash
+$ check_postgres.pl --action=new_version_pg --dbhost=iroh
+POSTGRES_NEW_VERSION_PG CRITICAL:  Please upgrade to version 9.2.4 of Postgres. You are running 9.2.2
 ```
 
 Postgres version numbers come in three sections. The first two indicate the “major version” 
@@ -42,39 +37,39 @@ as the **action** argument, as well as telling check_postgres which PostgreSQL
 instance you are checking. For example, to check that the Postgres running on 
 your internal host “zuko” is up to date, just run:
 
-```
+```bash
 check_postgres.pl --action=new_version_pg --dbhost=zuko
 ```
 
 Here is what the default output looks like, for both a matching and 
 a non-matching version:
 
-```
-<span class="gsmp">$</span> check_postgres.pl --action=new_version_pg --dbhost=appa
-<span class="gsmo">POSTGRES_NEW_VERSION_PG CRITICAL:  Please upgrade to version 9.2.4 of Postgres. You are running 9.2.2</span>
+```bash
+$ check_postgres.pl --action=new_version_pg --dbhost=appa
+POSTGRES_NEW_VERSION_PG CRITICAL:  Please upgrade to version 9.2.4 of Postgres. You are running 9.2.2
 
-<span class="gsmp">$</span> check_postgres.pl --action=new_version_pg --dbhost=toph
-<span class="gsmo">POSTGRES_NEW_VERSION_PG OK:  Version 9.2.4 is the latest for Postgres</span>
+$ check_postgres.pl --action=new_version_pg --dbhost=toph
+POSTGRES_NEW_VERSION_PG OK:  Version 9.2.4 is the latest for Postgres
 ```
 
 Those examples are very Nagios specific, of course, as evidenced by those uppercase strings at the beginning 
 of the output. If you are using Nagios, it’s a good idea to run this, perhaps once a day or more often. If 
 you are not using Nagios, you can make the output a little cleaner with the **--simple** argument:
 
-```
-<span class="gsmp">$</span> check_postgres.pl --action=new_version_pg --dbhost=azula
-<span class="gsmo">Please upgrade to version 9.2.4 of Postgres. You are running 9.2.2</span>
+```bash
+$ check_postgres.pl --action=new_version_pg --dbhost=azula
+Please upgrade to version 9.2.4 of Postgres. You are running 9.2.2
 
-<span class="gsmp">$</span> check_postgres.pl --action=new_version_pg --dbhost=sokka
-<span class="gsmo">Version 9.2.4 is the latest for Postgres</span>
+$ check_postgres.pl --action=new_version_pg --dbhost=sokka
+Version 9.2.4 is the latest for Postgres
 ```
 
 One quick and simple trick is to make this into a cron job and add the **--quiet** argument, which 
 prevents all output if the check was “OK”. In this way, cron will only send outout (e.g. mail 
 someone) when a new revision has been released. A cron example:
 
-```
-<span class="gsmc">## Twice a day, check that we are running the latest Postgres:</span>
+```plain
+## Twice a day, check that we are running the latest Postgres:
 0 7,18 * * * check_postgres.pl --action=new_version_pg --dbhost=cabbage --quiet
 ```
 
