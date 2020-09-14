@@ -17,7 +17,7 @@ So we're going to talk about automated testing, which in its own right is a very
 
 Let's get started.
 
-# What we're going to be talking about
+# The types of tests that we're going to write
 
 For web applications, as far as automated tests go, there are three categories which I think are essential to have and complement each other very well:
 
@@ -376,7 +376,7 @@ $this->assertEquals(
 
 This one tests for equality, but with a certain allowed difference. If the difference is within this margin of error, then the assertion deems that the two values are equal. Just what we need in this case. This basically says: "assert that the current timestamp and the resulting object's timestamp are 'pretty much' the same". That's as good a job as PHPUnit can do to for that assertion. Luckily, that's good enough for us. 
 
-### Testing the same behavior with varying input
+### Testing behavior with varying input
 
 Ok now we've tested one piece of functionality defined within the `WeatherQuery` class. There is something else to test though, the validation rules. The class has several validation rules defined as annotations. We are able to define validation rules like this thanks to Symfony's Validator component. To exercise the rules, we need to use the `Symfony\Component\Validator\Validation` class. This is a concept and style very specific to Symfony. Here's what a test that exercises those validation values looks like:
 
@@ -453,6 +453,16 @@ OK (8 tests, 9 assertions)
 
 As you can see, this results in PHPUnit running the `testValidation` method four times, once per each test case defined in `getValidationTestCases`, using their corresponding data as parameters.
 
+### Using mocks to test classes with dependencies
 
+### Verifying behavior instead of state: Expectations with PHPUnit
+
+## Integration tests
+
+### Testing database interaction
+
+### Testing calls to an external Web API
+
+## Functional tests
 
 <!-- There's a slight mental mapping that we need to do when we talk about our three-tier testing conceptual model and Symfony's. In the Symfony world, they talk about two types of tests: unit tests and functional tests. That's the distiction that the frameworks makes implementation wise. In terms of our conceptual categorization that we did earlier, Symfony's "unit tests" are the same as the "unit tests" that we described. Our other two catergories: integration and functional, fall into the "functional" type of Symfony tests. We'll see how that pans out shortly. -->
