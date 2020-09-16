@@ -432,7 +432,7 @@ public function getValidationTestCases()
 }
 ```
 
-As you can see, `getValidationTestCases` returns an associative array that contains four items. Each item's key is a description of the test case and the value is the data that makes up the test case. That data is what will get passed as parameters to `testValidation`. The keys are used in the TestDox output to make it more descriptive, like so:
+`getValidationTestCases` returns an associative array that contains four items. Each item's key is a description of the test case and the value is the data that makes up the test case. That data is what will get passed as parameters to `testValidation`. The keys are used in the TestDox output to make it more descriptive, like so:
 
 ```
 $ bin/phpunit --testdox tests/unit/Entity/WeatherQueryTest.php
@@ -453,11 +453,230 @@ OK (8 tests, 9 assertions)
 
 As you can see, this results in PHPUnit running the `testValidation` method four times, once per each test case defined in `getValidationTestCases`, using their corresponding data as parameters.
 
+I find PHPUnit's data provider feature very useful for testing input validation logic. However, it can be used for other types of tests as well. I always consider trying it out whenever I see a series of test cases that look very similar to each other. This usually means that they can be written in a generic way to eliminate repetition. The date provider feature makes it easy to push variability to the input arguments.
+
 ### Using mocks to test classes with dependencies
+
+Now let's move on to a set of classes that are generally a bit less straightforward to test: services. Service classes, as opposed to entities, are seldom so independent and self contained. Because of their very nature as intergrators and orchestrators of other classes in order to fulfill core business logic, services often have dependencies and collaborators.
+
+Take a look at our `WeatherService` class in `src/Service/WeatherService.php`. Just by looking at the constructor you can see that it depends on others to function:
+
+```php
+public function __construct(
+    ValidatorInterface $validator,
+    WeatherQueryRepository $repository,
+    WeatherApiClient $apiClient
+) {
+    $this->validator = $validator;
+    $this->repository = $repository;
+    $this->apiClient = $apiClient;
+}
+```
+
+In order to work properly, the `WeatherService` needs a few objects: a `ValidatorInterface`, a `WeatherQueryRepository`, and a `WeatherApiClient`. Instead of directly creating these objects though, this class uses a technique called Dependency Injection, where the objects that it needs are passed to it via its constructor. In other words, all of its "dependencies" are "injected" into it. Dependency Injection is key for unit testing. Here's why: for unit tests, our objective is to test a unit in complete isolation. This means that, within a given test case, we want to exercize the code of one class and one class alone. If an object leverages other objects to do some work, we don't care about those other objects. If we did, then the unit test loses focus. It becomes something else. The unit under test is no longer a unit.
+
+Dependency Injection allows client code to specify which concrete dependencies a given object will use. That's a feature that test cases can take advantage of to pass in fake objects that it controls. We call these mocks.
+
+Mocks are essentially fake objects that a test fixture uses to pass as dependencies to its test subject. They are objects that, to the eyes of the unit under test, are the real deal objects that they normally use and work with. However, in reality they are made up objects that look like the subject's dependencies that the test case fully controls and can inspect.
+
+> Why do unit tests need to test objects in isolation? Because unit tests need to be simple, fast, and easy to understand. Having a test case focused only on validating a small piece of functionality is a great way to achieve those three goals.
+
+Ok se let's see an example of some mock objects in action. consider the `testGetCurrentWeatherDoesNotReturnSuccessWhenTheApiCallIsUnsuccessful` test case in `tests/unit/Service/WeatherServiceTest.php`:
+
+```php
+public function testGetCurrentWeatherDoesNotReturnSuccessWhenTheApiCallIsUnsuccessful()
+{
+    // Arrange
+    $validator = Validation::createValidatorBuilder()
+        ->enableAnnotationMapping()
+        ->getValidator();
+
+    $mockRepository = $this->createMock(WeatherQueryRepository::class);
+
+    $mockApiClient = $this->createMock(WeatherApiClient::class);
+    $mockApiClient->method('getCurrentWeather')->willReturn([
+        'success' => false
+    ]);
+
+    $service = new WeatherService(
+        $validator,
+        $mockRepository,
+        $mockApiClient
+    );
+
+    // Act
+    $result = $service->getCurrentWeather('New York', 'NY');
+
+    // Assert
+    $this->assertFalse($result['success']);
+}
+```
+
+One feature of the `GetCurrentWeather` method in the `WeatherService` is that it uses a dependency, `WeatherApiClient`, to make an HTTP request to the OpenWeatherMap Web API, by calling its `getCurrentWeather` method. If the request is not successful, `WeatherApiClient` returns an array which contains a `success` field that's set to false. The good thing about a decoupled design made possible by Dependency Injection is that the `WeatherService` doesn't care about HTTP requests or responses or any of that. It only cares and knows about `WeatherApiClient`'s contract. In this case, the contract dictates that it returns an array with a `success` field. Knowing this, the test case can create a mock object that looks just like a `WeatherApiClient` instance and make it return something that will make the `WeatherService` think that the request failed. It's done like this:
+
+```php
+$mockApiClient = $this->createMock(WeatherApiClient::class);
+$mockApiClient->method('getCurrentWeather')->willReturn([
+    'success' => false
+]);
+```
+
+The first statement uses PHPUnit's `createMock` method to obtain a fake object. Then, the second statement configures it by specifying that, whenever the `getCurrentWeather` gets called on that mock, it ill return the value that will make `WeatherService` think that the request failed.
+
+After that's set up, the rest of the test should be self explanatory: in the Arrange section we set up other mocks for each of `WeatherService`'s constructor parameters (i.e. injected dependencies) and create a real instance of `WeatherService` which is our unit under test; in the Act section, we exercise our UUT by calling the method we want to test; and finally, in the Assert section, we validate that the UUT has returned a result that says that the operation was unsuccessful. By looking at the resulting array's `success` field.
 
 ### Verifying behavior instead of state: Expectations with PHPUnit
 
+In this last example, we used the mock to control the UUT's behavior and asserted on the result via veryfying data or state. Mocks can do much more than that though. We can configure them to return whatever value we want, like we just did, but we can also inspect them to know if they have been called, and what parameters where given to them, etc. This allows us to write slightly different style of test. One that, instead of veryfying state, verifies behavior. Here's an example of such a test case:
+
+```php
+public function testGetCurrentWeatherCallsOnTheApiClientToGetWeatherData()
+{
+    // Arrange
+    $validator = Validation::createValidatorBuilder()
+        ->enableAnnotationMapping()
+        ->getValidator();
+
+    $mockRepository = $this->createMock(WeatherQueryRepository::class);
+
+    $mockApiClient = $this->createMock(WeatherApiClient::class);
+    $mockApiClient->method('getCurrentWeather')->willReturn([
+        'success' => true,
+        'response' => $this->testApiResponse
+    ]);
+
+    $service = new WeatherService(
+        $validator,
+        $mockRepository,
+        $mockApiClient
+    );
+
+    // Expect
+    $mockApiClient
+        ->expects($this->once())
+        ->method('getCurrentWeather')
+        ->with('New York', 'NY')
+    ;
+
+    // Act
+    $service->getCurrentWeather('New York', 'NY');
+}
+```
+
+See how this test case is not veryfying a result from a method call. Instead, it veryfies whether our mock was called in a specific way by the unit under test. Also, our typical Arrange, Act, Assert formula has mutated a bit. The test now reads Arrange, Expect, Act. This is how we write expectation-style test cases in PHPUnit. Let's look at the statement:
+
+```php
+$mockApiClient
+    ->expects($this->once())
+    ->method('getCurrentWeather')
+    ->with('New York', 'NY')
+;
+```
+
+This basically says: "in this test case, expect that the mock `WeatherApiClient`'s `getCurrentWeather` method gets called with `'New York'` and `'NY'` as parameters.". If, within the test case, this doesn't happen, then it will be reported as a failure.
+
+### The thought process of writing mockist tests
+
+How do we write these types of tests though? Well, we read the code that we want to test. Line by line, and try to identify the spots where dependencies are used, and how their results affect the behavior of the unit under test. That way we can mock them properly, configuring those mocks so that we can trigger the execution paths within the unit under test that we want to exercise. These types of tests are as white box as can be, and are really coupled with the implementation. Most changes to the implementation will break them. This is good because subtle bugs can be caught. This could also be bad because tests breaking often means more work fixing them. I personally like my tests to have this fine grained focus, so I'm a big fan of mocking aggresively, but the most important thing is to find the balance that works best for you, your team and your project.
+
+For example, if we look at the `getCurrentWeather` method in `WeatherService`:
+
+```php
+public function getCurrentWeather(string $city, string $state)
+{
+    $weatherQuery = WeatherQuery::build($city, $state);
+
+    $this->repository->add($weatherQuery);
+
+    $result = $this->apiClient->getCurrentWeather($city, $state);
+
+    if (!$result['success']) {
+        return [
+            'success' => false,
+            'weatherQuery' => $weatherQuery
+        ];
+    }
+
+    $apiResponse = $result['response'];
+
+    $weather = Weather::build($weatherQuery, $apiResponse);
+
+    return [
+        'success' => true,
+        'weather' => $weather,
+        'weatherQuery' => $weatherQuery
+    ];
+}
+```
+
+We can work through it line by line we see that:
+
+First, it takes its parameters and creates a new instance of `WeatherQuery` with:
+
+```php
+$weatherQuery = WeatherQuery::build($city, $state);
+```
+
+Nothing to do with this for now from a testing perspective. We can't mock anything here because it's a static dependency. `WeatherQuery` is being referenced directly and its static `build` method is being called. It being a static dependency means that, as far as the test is concerned, `WeatherQuery::build` may as well be defined inside `WeatherService`. That's why we normally should try to avoid static dependencies like this and prefer using interfaces and passing dependencies into objects via Dependency Injection. If we wanted to test `WeatherService` without `WeatherQuery`, we wouldn't be able to do so. Because they are statically bound to one another. No big deal in this case, since this dependency is a simple factory method that saves `WeatherService` from having to construct an object that's pretty simple. If the logic to construct `WeatherQuery` instances was too complex to warrant it being isolated from `WeatherService` tests, then we'd be in trouble. We'd need to refactor to maybe add a new `WeatherQuery` factory class and pass that into `WeatherService` as an injected dependency that can be then mocked. We're good with what we have now though, as it is not that complex.
+
+Then, `getCurrentWeather` calls on the repository to store the `WeatherQuery` in the database:
+
+```php
+$this->repository->add($weatherQuery);
+```
+
+This one is interesting. This one is a text book example of a side effect that we can easily write a test for using mocks. The mock in this case would be of the `WeatherQueryRepository` dependency and we would veryfy that its `add` method gets called with the expected parameter. This unit test would be impossible to write without mocks, because the result of this call to `WeatherQueryRepository`'s `add` is not captured nor returned as part of `getCurrentWeather`'s result. The only insight that a test case could have into this aspect of `getCurrentWeather`'s execution is via a mock.
+
+The test case that covers this line is `testGetCurrentWeatherCallsOnTheRepositoryToSaveANewWeatherQuery`.
+
+Next up, we've got:
+
+```php
+$result = $this->apiClient->getCurrentWeather($city, $state);
+```
+
+This calls the `WeatherApiClient`'s `getCurrentWeather` method. This is also one that we can test by mocking the dependency, and doing some behavior verification on whether the method was called and how.
+
+The test case that does this is `testGetCurrentWeatherCallsOnTheApiClientToGetWeatherData`.
+
+We can also do state verification because the result gets captured in a variable and used for the unit under test's return value. As we can see in the conditional statement that follows:
+
+```php
+if (!$result['success']) {
+    return [
+        'success' => false,
+        'weatherQuery' => $weatherQuery
+    ];
+}
+```
+
+The tests that cover this are:
+
+- `testGetCurrentWeatherDoesNotReturnSuccessWhenTheApiCallIsUnsuccessful`
+- `testGetCurrentWeatherReturnsAWeatherQueryObjectWithCorrectFieldsWhenTheApiCallIsUnsuccessful`
+
+Finally, the method captures the API response, builds a `Weather` object based on it (again, a static dependency that we can't intercept with a mock), and returs a result.
+
+```php
+$apiResponse = $result['response'];
+
+$weather = Weather::build($weatherQuery, $apiResponse);
+
+return [
+    'success' => true,
+    'weather' => $weather,
+    'weatherQuery' => $weatherQuery
+];
+```
+
+Here, we can test that the resulting associative array's fields are being generated correctly. We do this with this trifecta of test cases:
+
+- `testGetCurrentWeatherReturnsSuccessWhenTheApiCallIsSuccessful`
+- `testGetCurrentWeatherReturnsAWeatherObjectWithCorrectFieldsWhenTheApiCallIsSuccessful`
+- `testGetCurrentWeatherReturnsAWeatherQueryObjectWithCorrectFieldsWhenTheApiCallIsSuccessful`
+
 ## Integration tests
+
 
 ### Testing database interaction
 
