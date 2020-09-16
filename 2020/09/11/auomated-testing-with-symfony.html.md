@@ -575,7 +575,7 @@ $mockApiClient
 
 This basically says: "in this test case, expect that the mock `WeatherApiClient`'s `getCurrentWeather` method gets called with `'New York'` and `'NY'` as parameters.". If, within the test case, this doesn't happen, then it will be reported as a failure.
 
-### The thought process of writing mockist tests
+### The thought process of writing tests with mocks
 
 How do we write these types of tests though? Well, we read the code that we want to test. Line by line, and try to identify the spots where dependencies are used, and how their results affect the behavior of the unit under test. That way we can mock them properly, configuring those mocks so that we can trigger the execution paths within the unit under test that we want to exercise. These types of tests are as white box as can be, and are really coupled with the implementation. Most changes to the implementation will break them. This is good because subtle bugs can be caught. This could also be bad because tests breaking often means more work fixing them. I personally like my tests to have this fine grained focus, so I'm a big fan of mocking aggresively, but the most important thing is to find the balance that works best for you, your team and your project.
 
@@ -674,6 +674,8 @@ Here, we can test that the resulting associative array's fields are being genera
 - `testGetCurrentWeatherReturnsSuccessWhenTheApiCallIsSuccessful`
 - `testGetCurrentWeatherReturnsAWeatherObjectWithCorrectFieldsWhenTheApiCallIsSuccessful`
 - `testGetCurrentWeatherReturnsAWeatherQueryObjectWithCorrectFieldsWhenTheApiCallIsSuccessful`
+
+You can run all of the unit tests in the demo with `bin/phpunit --testdox tests/unit`.
 
 ## Integration tests
 
