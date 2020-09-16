@@ -804,11 +804,11 @@ class WeatherApiClientTest extends KernelTestCase
 }
 ```
 
-The same key elements are here: A test class that inherits from `Symfony\Bundle\FrameworkBundle\Test\KernelTestCase`, a test method that starts up the Symfony kernel and obtains a fully configured instance of `WeatherApiClient`, and the usual Arrange, Act and Assert structure that should be familiar by now. The assertions are done using simple state verification to validate that the result from the call to the API contains the data that we expect. Simple.
+The same key elements are here: A test class that inherits from `Symfony\Bundle\FrameworkBundle\Test\KernelTestCase`, a test method that starts up the Symfony kernel and obtains a fully configured instance of `WeatherApiClient`, and the usual Arrange, Act and Assert structure that should be familiar by now. The Act portion just straight up calls the method that we want to test and captures its return value. The assertions are done using simple state verification to validate that the result from the call to the API contains the data that we expect. Simple.
 
 Running this test with a command like `bin/phpunit tests/functional/Service/WeatherApiClientTest.php` will actually make an HTTP request to the OpenWeatherMap Web API and return back its response.
 
-I think something interesting to discuss about this integration test is how different it is from a unit test written against the same class. If we look inside `src/Service/WeatherApiClient.php`, we see that the `getCurrentWeather` method is where the magic happens:
+Perhaps the most interesting aspect to discuss about this integration test is how different it is from a unit test written against the same class. If we look inside `src/Service/WeatherApiClient.php`, we see that the `getCurrentWeather` method is where the magic happens:
 
 ```php
 public function getCurrentWeather(string $city, string $state)
@@ -841,6 +841,70 @@ See how the method leverages the `$httpClient` (which is an object of type `Symf
 
 Which should be self explanatory at this point.
 
+Essentially, the integration test would break if the API was down at some point, or if its contract has changed and we call it incorrectly. The unit test would break if somebody modifies the way the algorithm functions. They complement each other well.
+
 ## Functional tests
 
-<!-- There's a slight mental mapping that we need to do when we talk about our three-tier testing conceptual model and Symfony's. In the Symfony world, they talk about two types of tests: unit tests and functional tests. That's the distiction that the frameworks makes implementation wise. In terms of our conceptual categorization that we did earlier, Symfony's "unit tests" are the same as the "unit tests" that we described. Our other two catergories: integration and functional, fall into the "functional" type of Symfony tests. We'll see how that pans out shortly. -->
+Now it's time to move on to the final type of test that we're going to discuss in this article, and the one that sits at the highest level of abstraction: Functional tests. The focus of this kind of test is to exercise the complete system, end to end, while trying to mimic the experience that a user would have with it. To achieve this, Symfony gives us some tools that we can use to interact with the application at the protocol level. Just like a browser would. That is, sending HTTP requests to and inspecting the responses from a complete application running in a sandbox, fully configured and integrated with all of its external components like databases, etc.
+
+Let's look at `tests/functional/Controller/WeatherControllerTest.php` to see that in action. The first thing to note is that functional test classes need to inherit from `Symfony\Bundle\FrameworkBundle\Test\WebTestCase`. This is how we tell Symfony that we need the tools necessary to talk to our application as if we were doing so via HTTP.
+
+```php
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+
+class WeatherControllerTest extends WebTestCase
+{
+    // ...
+}
+```
+
+Then, in the test cases themselves, we find our usual three step structure. Take the first one, for example:
+
+```php
+public function testIndexWorks()
+{
+    // Arrange
+    $client = static::createClient();
+
+    // Act
+    $client->request('GET', '/');
+
+    // Assert
+    $this->assertResponseStatusCodeSame(200);
+}
+```
+
+This is a simple test that just makes a GET request to the root route of the site and expects it to return a 200 HTTP status code. Notice how we use the `static::createClient()` method to obtain an HTTP client object that we can use to talk to our application. Next we use the client to do just that with `$client->request('GET', '/');` and finally use the `assertResponseStatusCodeSame` assertion to check that the request was successful. All of these methods are available for our test because we defined our test class by extending `WebTestCase`.
+
+We can go much deeper into our assertions on the responses though. Look at the `testShowDisplaysAllWeatherInfoIfGivenValidInput` test case, for example:
+
+```php
+public function testShowDisplaysAllWeatherInfoIfGivenValidInput()
+{
+    // Arrange
+    $client = static::createClient();
+
+    // Act
+    $client->request('GET', '/show/New%20York/NY');
+
+    // Assert
+    $this->assertSelectorTextContains('div.wrapper', 'The current weather');
+    $this->assertSelectorTextContains('div.wrapper', 'Temp');
+    $this->assertSelectorTextContains('div.wrapper', 'Feels like');
+    // ...
+}
+```
+
+This is very similar to the previous one. The main differences are that, first, we're requesting a different route (the one that results in a page that presents the actual weather data that was requested), and second, that instead of only asserting HTTP status code of the response, we assert on the actual contents of the page that would be rendered in a browser. We can use `assertSelectorTextContains` for that.
+
+Symfony includes many more goodies that help with functional testing. You can learn more [in the official docs](https://symfony.com/doc/current/testing.html#functional-tests). There are a few more examples in the demo source code so you may want to look them over now that you understand what their intent is and how they are written.
+
+## Closing thoughts
+
+In this article, we've gone through some of the basics of automated testing for web applications. We've used Symfony as a vehicle for conveying that information and as such, learned a little bit about what it takes to build a multi faceted test suite with that framework.
+
+We've discussed the three types of tests that I like to use in terms of their level of abstraction: unit tests, integration tests, and functional tests. What they are, what aspect of the system they focus on, and how to write them. I belive that a test suite that offers good coverage while inlcuding these three kinds of tests offers the best bang for the buck and gives us a cozy safety net to fall back to while we develop our applications. These three levels of testing complement each other very well.
+
+We've also touched on the general approach and thought process behing writing automated tests. We discussed a three step approach: Arrange, Act and Assert. We also talked about test cases that do classic state verification, where input is provided to a unit under test, the unit is exercised, and finally its output is verified. We also saw a more advanced testing tecnique where, by leveraging mock objects, we do behavior verification. Here, we assert on whether the unit under test has called its collaborators/dependencies in a certain way. A style which is great for testing side effects and classes that involve other dependencies in order to work. These two styles of tests work best when used together to compose a larger test suite.
+
+And that's it for now! This has been quite a trip into some aspecs on the topic of software testing. Like I said at the beginning, this discipline is huge, and one never stops learning. What we've discussed here though, I feel like is a good strarting point to continue deepening our understanding, while also serving as a competent enough strategy to use in a real world application.
