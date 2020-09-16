@@ -677,8 +677,84 @@ Here, we can test that the resulting associative array's fields are being genera
 
 ## Integration tests
 
+Like I said, I firmly believe that unit tests are the bread and butter of any serious automated test suite. However, I also like to do some higher level tests to suplement the unit tests. Integration tests are such tests. These focus on exercising system behavior that interacts with external components like databases and web APIs. In fact, in our demo app's test suite we have both. Let's look into them.
 
 ### Testing database interaction
+
+Many frameworks offer ways to help testing database interaction code by creating test specific databases. Symfony is no exception. The idea is simple: we create a new database thats exclusive for testing, configure the test runner to use that, and write some tests that exercises some code that talks to the database. Luckily for us, we decided to encapsulate all database interaction logic inside a repository class, so for our database integration tests, it's obvious where we should focus on: `WeatherQueryRepository`.
+
+Consider the sole test case at `tests/functional/Repository/WeatherQueryRepositoryTest.php`:
+
+```php
+public function testAddSavesANewRecordIntoTheDatabase()
+{
+    // Arrange
+    $testWeatherQuery1 = WeatherQuery::build('My City 1', 'MY STATE 1');
+    $testWeatherQuery2 = WeatherQuery::build('My City 2', 'MY STATE 2');
+
+    self::bootKernel();
+    $repository = self::$container->get(WeatherQueryRepository::class);
+
+    // Act
+    $repository->add($testWeatherQuery1);
+    $repository->add($testWeatherQuery2);
+
+    // Assert
+    $records = $repository->findAll();
+
+    $this->assertEquals(2, count($records));
+    $this->assertEquals('My City 1', $records[0]->getCity());
+    $this->assertEquals('MY STATE 1', $records[0]->getState());
+    $this->assertEquals('My City 2', $records[1]->getCity());
+    $this->assertEquals('MY STATE 2', $records[1]->getState());
+}
+```
+
+This one is pretty straightforward. We create two objects, we call the `add` method to insert them as records, then we query the database with `findAll`, and assert on the data to make sure the objects we get out from the database are the same that we put in.
+
+One interesting aspect about this test class is that we are calling two methods on `WeatherQueryRepository`: `add` and `findAll`. However, we only have a test case for `add`. Why is that? Well, if we look at `WeatherQueryRepository`'s implementation, we find out quickly: the `add` method is the only method in our class. The `findAll` one we get from `Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository`, a framework base class that our repository extends. The test sute for our app should only be concerned in testing the code that we wrote and own. Our test suite has no business testing code that belongs to Symfony, Doctrine or any other framework or library. Test cases for that belong in their test suites, not ours.
+
+Another interesting point is that we can't create a "real" `WeatherQueryRepository` to play with on our own, outside of the context of Symfony. that's why we, 1. have this test class extend `Symfony\Bundle\FrameworkBundle\Test\KernelTestCase` instead of plain old `PHPUnit\Framework\TestCase`, and 2: have to go through some hoops to obtain a `WeatherQueryRepository` instance:
+
+```php
+self::bootKernel();
+$repository = self::$container->get(WeatherQueryRepository::class);
+```
+
+This is just how Symfony allows us to obtain fully featured objects in the context of our tests. Just as they would be if they were being executed in the application's normal day-to-day runtime. We ask Symfony for an intance instead of us directly `new`ing it up. And this is good news, because with a framework like Symfony that uses Dependency Injection so heavily, and many of our custom classes depending on complex framework objects, instantiating them on our own can get complicated.
+
+In Symfony, there are a few configurations that need to happen so that we are able to run database integration tests. [Symfony's own documentation](https://symfony.com/doc/current/testing/database.html) is excellent for learning how to, but in a nutshell, here's what needs to happen:
+
+1. Install this bundle which allows each test case to run with the same, unmodified database: `composer require --dev dama/doctrine-test-bundle`.
+
+2. Enable it by adding the following to the `phpnuit.xml.dist` file: 
+
+```xml
+<phpunit>
+    <!-- ... -->
+    <extensions>
+        <extension class="DAMA\DoctrineTestBundle\PHPUnit\PHPUnitExtension"/>
+    </extensions>
+    <!-- ... -->
+</phpunit>
+```
+
+3. Create a test database with `bin/console doctrine:schema:create --env=test`.
+
+One that set up is done, tests can be run with something like `tests/functional/Repository/WeatherQueryRepositoryTest.php`.
+
+```
+$ bin/phpunit --testdox tests/functional/Repository/WeatherQueryRepositoryTest.php
+PHPUnit 7.5.20 by Sebastian Bergmann and contributors.
+
+Testing App\Tests\Functional\Repository\WeatherQueryRepositoryTest
+App\Tests\Functional\Repository\WeatherQueryRepository
+ ✔ Add saves a new record into the database
+
+Time: 160 ms, Memory: 20.00 MB
+
+OK (1 test, 5 assertions)
+```
 
 ### Testing calls to an external Web API
 
