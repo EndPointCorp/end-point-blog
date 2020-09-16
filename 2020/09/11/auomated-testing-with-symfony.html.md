@@ -760,6 +760,87 @@ OK (1 test, 5 assertions)
 
 ### Testing calls to an external Web API
 
+Another interesting aspect of our application that we should cover with an integration test is the logic that calls on the OpenWeatherMap Web API. In `tests/functional/Service/WeatherApiClientTest.php`, we've done just that. Look at the file and you'll see that it is pretty similar to our other integration test that we wrote for `WeatherQueryRepository`.
+
+```php
+<?php
+
+namespace App\Tests\Functional\Service;
+
+use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use App\Service\WeatherApiClient;
+
+class WeatherApiClientTest extends KernelTestCase
+{
+    public function testGetCurrentWeatherInvokesTheApiAndReturnsTheExpectedResponse()
+    {
+        // Arrange
+        self::bootKernel();
+        $apiClient = self::$container->get(WeatherApiClient::class);
+
+        // Act
+        $result = $apiClient->getCurrentWeather('New York', 'NY');
+
+        // Assert
+        $this->assertArrayHasKey('weather', $result['response']);
+        $this->assertGreaterThanOrEqual(1, $result['response']['weather']);
+        $this->assertArrayHasKey('main', $result['response']['weather'][0]);
+        $this->assertArrayHasKey('description', $result['response']['weather'][0]);
+        
+        $this->assertArrayHasKey('main', $result['response']);
+        $this->assertArrayHasKey('temp', $result['response']['main']);
+        $this->assertArrayHasKey('feels_like', $result['response']['main']);
+        $this->assertArrayHasKey('temp_min', $result['response']['main']);
+        $this->assertArrayHasKey('temp_max', $result['response']['main']);
+        $this->assertArrayHasKey('pressure', $result['response']['main']);
+        $this->assertArrayHasKey('humidity', $result['response']['main']);
+
+        $this->assertArrayHasKey('visibility', $result['response']);
+
+        $this->assertArrayHasKey('wind', $result['response']);
+        $this->assertArrayHasKey('speed', $result['response']['wind']);
+        $this->assertArrayHasKey('deg', $result['response']['wind']);
+    }
+}
+```
+
+The same key elements are here: A test class that inherits from `Symfony\Bundle\FrameworkBundle\Test\KernelTestCase`, a test method that starts up the Symfony kernel and obtains a fully configured instance of `WeatherApiClient`, and the usual Arrange, Act and Assert structure that should be familiar by now. The assertions are done using simple state verification to validate that the result from the call to the API contains the data that we expect. Simple.
+
+Running this test with a command like `bin/phpunit tests/functional/Service/WeatherApiClientTest.php` will actually make an HTTP request to the OpenWeatherMap Web API and return back its response.
+
+I think something interesting to discuss about this integration test is how different it is from a unit test written against the same class. If we look inside `src/Service/WeatherApiClient.php`, we see that the `getCurrentWeather` method is where the magic happens:
+
+```php
+public function getCurrentWeather(string $city, string $state)
+{
+    $response = $this->httpClient->request(
+        'GET',
+        'http://api.openweathermap.org/data/2.5/weather?q=' . $city . ',' . $state . ',us&appid=' . $this->openWeatherMapAppId
+    );
+
+    if ($response->getStatusCode() != 200) {
+        return [
+            'success' => false,
+        ];
+    }
+
+    $response = json_decode($response->getContent(), true);
+
+    return [
+        'success' => true,
+        'response' => $response,
+    ];
+}
+```
+
+See how the method leverages the `$httpClient` (which is an object of type `Symfony\Contracts\HttpClient\HttpClientInterface`, injected into our `WeatherApiClient` class by Symfony), to make an HTTP request to the OpenWeatherMap Web API endpoint. Depending on its response, it contructs and returns a result value There's some logic in this method, calls to dependencies being made, results being inspected, conditionals, associative arrays being constructed... Our integration test cares about none of that. In only cares that the Web API is getting called and that it returns what it expects. Unit tests on the other hand, do care about these details. As a result, `tests/unit/Service/WeatherApiClientTest.php`, which contains the unit tests for that same class, goes more in depth into it and exercises all the possible code paths, while providing mocks for the `HttpClientInterface` dependency. To make sure that the unit test does not execute code from anything other than the unit under test. So, we end up with unit test cases like:
+
+- `testGetCurrentWeatherCallsOnTheHttpClientToMakeAGetRequestToTheWeatherApi`
+- `testGetCurrentWeatherDoesNotReturnSuccessIfTheResponseStatusCodeIsNot200`
+- `testGetCurrentWeatherReturnsSuccessAndResponseDataAsArrayIfTheResponseStatusCodeIs200`
+
+Which should be self explanatory at this point.
+
 ## Functional tests
 
 <!-- There's a slight mental mapping that we need to do when we talk about our three-tier testing conceptual model and Symfony's. In the Symfony world, they talk about two types of tests: unit tests and functional tests. That's the distiction that the frameworks makes implementation wise. In terms of our conceptual categorization that we did earlier, Symfony's "unit tests" are the same as the "unit tests" that we described. Our other two catergories: integration and functional, fall into the "functional" type of Symfony tests. We'll see how that pans out shortly. -->
