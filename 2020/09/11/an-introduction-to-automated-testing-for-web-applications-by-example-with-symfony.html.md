@@ -5,7 +5,6 @@ tags: testing, automated-testing, unit-testing, integration-teting, functional-t
 ---
 
 ![Banner](an-introduction-to-automated-testing-for-web-applications-by-example-with-symfony/banner.png)
-https://stackoverflow.com/questions/61400/what-makes-a-good-unit-test
 
 # An introduction to automated testing for web applications by example with Symfony
 
@@ -39,7 +38,7 @@ The app obtains this information by contacting the [OpenWeatherMap Web API](http
 
 The site is a typical Symfony web app. It uses the [MVC](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller) pattern and [Domain Driven Design](https://martinfowler.com/bliki/DomainDrivenDesign.html) concepts like [entities](https://martinfowler.com/bliki/EvansClassification.html), [repositories](https://martinfowler.com/eaaCatalog/repository.html) and [services](https://martinfowler.com/bliki/EvansClassification.html). Here's a diagram explaining the static structure of the app:
 
-STATIC DIAGRAM HERE
+![Static Structure](an-introduction-to-automated-testing-for-web-applications-by-example-with-symfony/static-structure.png)
 
 For a simple app like this, our entities are litle more than containers for our data, the repositories take care of encapsulating the database access logic, and the services contain the logic that leverages the other objects to fulfill our business requirements.
 
@@ -49,7 +48,7 @@ So our only use case is the current weather request. We do have, however, a coup
 
 To get a better idea of how the classes interact with each other, here's an sequence diagram detailing how the app serves the main weather query scenario:
 
-SEQUENCE DIAGRAM HERE
+![Sequence diagram](an-introduction-to-automated-testing-for-web-applications-by-example-with-symfony/sequence-diagram.png)
 
 As you can see, the controller receives the request and calls upon the service class to validate the input and retrieve the information for the city specified by the user. Then, the service takes care of orchestrating the other objects like entities, repositories and other services in order to fulfill the request and return back the weather information that eventually gets rendered with the template.
 
