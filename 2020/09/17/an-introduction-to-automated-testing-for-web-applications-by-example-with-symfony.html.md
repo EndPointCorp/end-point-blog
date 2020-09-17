@@ -516,7 +516,7 @@ $mockApiClient->method('getCurrentWeather')->willReturn([
 
 The first statement uses PHPUnit's `createMock` method to obtain a fake object. Then, the second statement configures it by specifying that, whenever the `getCurrentWeather` gets called on that mock, it will return the value that will make `WeatherService` think that the request failed.
 
-After that's set up, the rest of the test should be straightforward: in the Arrange section we set up other mocks for each of `WeatherService`'s constructor parameters (i.e. injected dependencies) and create a real instance of `WeatherService` which is our unit under test; in the Act section, we exercise our UUT by calling the method we want to test; and finally, in the Assert section, we validate that the UUT has returned a result that signals that the operation was unsuccessful. By looking at the resulting array's `success` field.
+After that's set up, the rest of the test should be straightforward: in the Arrange section we set up other mocks for each of `WeatherService`'s constructor parameters (i.e. injected dependencies) and create a real instance of `WeatherService` which is our unit under test; in the Act section, we exercise our UUT by calling the method we want to test; and finally, in the Assert section, we validate that the UUT has returned a result that signals that the operation was unsuccessful by looking at the resulting array's `success` field.
 
 ### Verifying behavior instead of state: Expectations with PHPUnit
 
