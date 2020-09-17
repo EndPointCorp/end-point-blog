@@ -68,7 +68,7 @@ Once you've got all that set up, the app can be run by:
 
 You should now be able to see something like this:
 
-SCREENSHOT OF APP HERE
+![Screenshot](an-introduction-to-automated-testing-for-web-applications-by-example-with-symfony/screenshot.png)
 
 Ok now that we understand the system under test, what it does and how it works, we're ready to test it.
 
