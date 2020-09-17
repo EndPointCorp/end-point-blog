@@ -8,9 +8,9 @@ tags: testing, automated-testing, unit-testing, integration-teting, functional-t
 
 # An introduction to automated testing for web applications by example with Symfony
 
-Testing is an immense topic in software engineering. A lot has been written and a lot of experience has been collected about it by the greater software development community. There are many types of testing that can be done, many techniques and approaches, filosofies and strategies.
+Testing is an immense topic in software engineering. A lot has been written and a lot of experience has been collected about it by the greater software development community. There are many types of testing that can be done, many techniques and approaches, philosophies and strategies.
 
-With a big topic such as this, it would be futile to try to touch on every aspect of it in an article like this. Instead, I'll try to take a pragmatic approach and discuss a testing strategy that I've found success with in the past, and the amount of testing with which I feel confortable putting code into production. This article could also serve as a sort of introduction to automated testing, where we use the [Symfony framework](https://symfony.com/) as a vehicle to explore various types of testing without really diving too deep into edge cases or framework specifics, but instead, leaning more into the concepts and design decissions that go into writing them. Still, we will make sure to have a running and competent test suite by the end of it.
+With a big topic such as this, it would be futile to try to touch on every aspect of it in an article like this. Instead, I'll try to take a pragmatic approach and discuss a testing strategy that I've found success with in the past, and the amount of testing with which I feel comfortable putting code into production. This article could also serve as a sort of introduction to automated testing, where we use the [Symfony framework](https://symfony.com/) as a vehicle to explore various types of testing without really diving too deep into edge cases or framework specifics, but instead, leaning more into the concepts and design decissions that go into writing them. Still, we will make sure to have a running and competent test suite by the end of it.
 
 So we're going to talk about automated testing, which in its own right is a very important part of the bigger discipline of software testing; and a topic that, as a developer (and as such, responsible for implementing this type of tests), I'm passionate about.
 
@@ -20,19 +20,19 @@ Let's get started.
 
 For web applications, as far as automated tests go, there are three categories which I think are essential to have and complement each other very well:
 
-- [Unit tests](https://en.wikipedia.org/wiki/Unit_testing): This is the most numerous, low level and, in my opinion, the most important type of developer tests. Unit tests don't only make sure that the system does what it is supposed to do, but also that it is correctly factored, where individual components are decoupled. They need to be that way because unit tests focus on exercizing specific classes and methods running in complete isolation, which becomes harder if the class you want to test is very tighly coupled with its dependencies/collaborators. These tests validate the behavior of basic programing constructs like classes and the algorithms within them. They need to be small and fast, as their intent is to be run several times by developers as they implement features and change existing ones.
+- [Unit tests](https://en.wikipedia.org/wiki/Unit_testing): This is the most numerous, low level and, in my opinion, the most important type of developer tests. Unit tests don't only make sure that the system does what it is supposed to do, but also that it is correctly factored, where individual components are decoupled. They need to be that way because unit tests focus on exercising specific classes and methods running in complete isolation, which becomes harder if the class you want to test is very tightly coupled with its dependencies/collaborators. These tests validate the behavior of basic programing constructs like classes and the algorithms within them. They need to be small and fast, as their intent is to be run several times by developers as they implement features and change existing ones.
 
 - [Integration tests](https://martinfowler.com/bliki/IntegrationTest.html): These tests go one level of abstraction higher when compared to unit tests. They test that independently developed components work properly together. In the context of web applications, I like my integration tests to focus primarily on how the system interacts with external components. In this article, we're going to use integration level tests to validate functionality that has to do with interaction with a database and an external Web API. 
 
 - [Functional tests](https://en.wikipedia.org/wiki/Functional_testing): These are the tests at the highest level of abstraction. These try to closely mimic the user's experience with the system by interacting with it as a user would. In terms of a web application, this means making HTTP requests, clicking buttons, filling out and submitting forms, inspecting HTML results, etc. As these tests exercise the complete system end to end, they are allowed to be a bit slower. This is not an issue because they are not run as frequently as unit tests.
 
-If we can build an automated tests suite that provides good coverage, and exercizes the system at these three levels, I would feel confident that the [sytem under test](https://en.wikipedia.org/wiki/System_under_test) can work properly in production. An added bonus is that with tests like these, we would have a live documentation of the system, the features it provides and, to an extent, how it works.
+If we can build an automated tests suite that provides good coverage, and exercises the system at these three levels, I would feel confident that the [system under test](https://en.wikipedia.org/wiki/System_under_test) can work properly in production. An added bonus is that with tests like these, we would have a live documentation of the system, the features it provides and, to an extent, how it works.
 
-Virtually all serious software development ecosystems have at least one automated testing framewoek or library which we can leverage to write our tests. For our purposes in this article, we're going to be using the Symfony PHP framework which integrates beatifully with [PHPUnit](https://phpunit.de/) to provide developers with an effective, and even fun way to write tests.
+Virtually all serious software development ecosystems have at least one automated testing framework or library which we can leverage to write our tests. For our purposes in this article, we're going to be using the Symfony PHP framework which integrates beautifully with [PHPUnit](https://phpunit.de/) to provide developers with an effective, and even fun way to write tests.
 
 # Getting to know the system under test
 
-In order to help illustrate the topic by showing practical examples, I've prepared a simple weather app. The app is very straigt forward. It only offers one feature: it will allow the user to see the current weather of a given city in the US. It does this by presenting a form where people can type in a city and a state, submit it, and get their information back.
+In order to help illustrate the topic by showing practical examples, I've prepared a simple weather app. The app is very straightforward. It only offers one feature: it will allow the user to see the current weather of a given city in the US. It does this by presenting a form where people can type in a city and a state, submit it, and get their information back.
 
 The app obtains this information by contacting the [OpenWeatherMap Web API](https://openweathermap.org/). It also stores all requests in a database for posterity.
 
@@ -40,9 +40,9 @@ The site is a typical Symfony web app. It uses the [MVC](https://en.wikipedia.or
 
 ![Static Structure](an-introduction-to-automated-testing-for-web-applications-by-example-with-symfony/static-structure.png)
 
-For a simple app like this, our entities are litle more than containers for our data, the repositories take care of encapsulating the database access logic, and the services contain the logic that leverages the other objects to fulfill our business requirements.
+For a simple app like this, our entities are litlle more than containers for our data, the repositories take care of encapsulating the database access logic, and the services contain the logic that leverages the other objects to fulfill our business requirements.
 
-The front end, as you'll see, is super simple. Not really any client side JavaScript logic to speak of. So this is more of an old-school, backend only app. Good enough for what we're trying to do here though.
+The front end, as you'll see, is super simple. Not really any client side JavaScript logic to speak of. So this is more of an old-school, back end only app. Good enough for what we're trying to do here though.
 
 So our only use case is the current weather request. We do have, however, a couple alternate scenarios within that use case. First, if the user types in an invalid US state code, the app will show a validation error. Second, if the user inputs a city that does not exist (or, more specifically, one that the OpenWeatherMap Web API can't find), the app will show another error message.
 
@@ -76,9 +76,9 @@ Ok now that we understand the system under test, what it does and how it works, 
 
 ## Surveying a class to write unit tests for it
 
-I'd like to start by looking into the simplest kind of tests that we need to write for this app. Those would be unit tests for our entity classes. These tests are simple because the classes that they exercise are simple as well. If you look at our `Weather` and `WeatherQuery` classes inside `src/Entity` you'll see that they contain little more than some fields with their corresponding accessors and some convenience factory methods. They also don't have any dependencies, which is convenient because thats one less thing for our [test fixtures](https://en.wikipedia.org/wiki/Test_fixture) to worry about.
+I'd like to start by looking into the simplest kind of tests that we need to write for this app. Those would be unit tests for our entity classes. These tests are simple because the classes that they exercise are simple as well. If you look at our `Weather` and `WeatherQuery` classes inside `src/Entity` you'll see that they contain little more than some fields with their corresponding accessors and some convenience factory methods. They also don't have any dependencies, which is convenient because that's one less thing for our [test fixtures](https://en.wikipedia.org/wiki/Test_fixture) to worry about.
 
-So, the first step that I always take is inspect the class that I'm about to test, to try and determine what's interesting from a testing perspective. I try to think about what's the main responsibility of the class, what sort of logic is actually adding value, what things could be broken inadvertently by other developers, what potential changes in the code would I like the test suite to alert developers of (by failing tests!), what features would benefit from havng their API captured/documented in the form of an automated test. I ask myself these questions because often times it is not feasible to achieve 100% code coverage with unit tests (or with any kind of tests, for that matter). So, in those cases when we need to be strategic as to what tests we write, I try to write those that will add the most value. When faced with the reality of limited resources, I try to approach these things from a "bang for the buck" angle.
+So, the first step that I always take is inspect the class that I'm about to test, to try and determine what's interesting from a testing perspective. I try to think about what's the main responsibility of the class, what sort of logic is actually adding value, what things could be broken inadvertently by other developers, what potential changes in the code would I like the test suite to alert developers of (by failing tests!), what features would benefit from having their API captured/documented in the form of an automated test. I ask myself these questions because often times it is not feasible to achieve 100% code coverage with unit tests (or with any kind of tests, for that matter). So, in those cases when we need to be strategic as to what tests we write, I try to write those that will add the most value. When faced with the reality of limited resources, I try to approach these things from a "bang for the buck" angle.
 
 With that in mind, if we look at our `WeatherQuery` class, here are the things that come to my attention:
 
@@ -111,7 +111,7 @@ public function setState(string $state): self
 }
 ```
 
-These methods are very simple. If we were going for 100% coverage, we may have wanted to exrcise those accessors. Being the strategic developers that we are though, I think we can ignore those for now. The logic is very simple, not really a lot of oportunity for things to go wrong here.
+These methods are very simple. If we were going for 100% coverage, we may have wanted to exercise those accessors. Being the strategic developers that we are though, I think we can ignore those for now. The logic is very simple, not really a lot of oportunity for things to go wrong here.
 
 These types of methods become even less relevant in other languages like [C#](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/properties) or [Ruby](https://ruby-doc.org/docs/ruby-doc-bundle/UsersGuide/rg/accessors.html) which support accessors as language level constructs. Testing those would be a moot point in those languages, since it would mean testing language/framework features, and not code that we own. There's no good reason to do that.
 
@@ -133,7 +133,7 @@ public static function build(string $city, string $state): WeatherQuery
 }
 ```
 
-This `build` method has some interesting logic to it. There's some preprocessing that happens to the input parameters. It'd also be interesting for a test to exercise that the resulting object is correctly constructed.
+This `build` method has some interesting logic to it. There's some pre-processing that happens to the input parameters. It'd also be interesting for a test to exercise that the resulting object is correctly constructed.
 
 ## Deciding what tests to write
 
@@ -141,7 +141,7 @@ Ok so by analyzing our class we've identified parts of it that are interesting t
 
 Let's start with the build method as that one's easier.
 
-Now that we've identified the unit that we will test, we need to come up with test cases that exercize it in various ways. Looking at `build`'s code, line by line, I can come up with a few interesting test cases. Here's my thought process:
+Now that we've identified the unit that we will test, we need to come up with test cases that exercise it in various ways. Looking at `build`'s code, line by line, I can come up with a few interesting test cases. Here's my thought process:
 
 The first thing that I notice is that the method takes two parameters, city and state, and does this with them:
 
@@ -179,7 +179,7 @@ I think that this addresses the main concerns of this method. So now let's write
 
 In the demo application that hopefully you've downloaded and explored, we write our tests under the `tests` directory. This is the default location that Symfony gives us for our tests and I think it's a good one. For our unit tests, we will put them in `tests/unit`. Tests for this class in particular go in the `tests/unit/Entity/WeatherQueryTest.php` file.
 
-Notice our naming and file location convention. The name of the file that contains a given class' test cases is the same as the class itself, only with the word `Test` as a suffix. We've also made sure to mimic the project's `src` dierctory structure in our `tests/unit` directory. So, in this example, the `WeatherQuery` class is located in `src/Entity/WeatherQuery.php`. that means that its tests should live in `tests/unit/Entity/WeatherQueryTest.php`. Following this convention keeps things simple and easy to navigate and maintain.
+Notice our naming and file location convention. The name of the file that contains a given class' test cases is the same as the class itself, only with the word `Test` as a suffix. We've also made sure to mimic the project's `src` directory structure in our `tests/unit` directory. So, in this example, the `WeatherQuery` class is located in `src/Entity/WeatherQuery.php`. that means that its tests should live in `tests/unit/Entity/WeatherQueryTest.php`. Following this convention keeps things simple and easy to navigate and maintain.
 
 ### What a PHPUnit test class looks like
 
@@ -226,9 +226,9 @@ They begin with the word `test` in order to fulfill PHPUnit's requirements. Then
 
 ### The anatomy of a test case
 
-When it comes to actually writing the tests, I put great focus on making them as easy to understand as possible. Test cases do not only serve the purpose of validating system behavior. They also can serve as a live documentaiton of the system's features, and, in the case of unit tests, its inner workings. To be able to fulfill that purpose, tests need to be easy to read, navigate, and understand.
+When it comes to actually writing the tests, I put great focus on making them as easy to understand as possible. Test cases do not only serve the purpose of validating system behavior. They also can serve as a live documentation of the system's features, and, in the case of unit tests, its inner workings. To be able to fulfill that purpose, tests need to be easy to read, navigate, and understand.
 
-That's why I always like to call attention to the general three steps that almost every test follows: "Setup", "Execise" and "Verify". Or, as I like to call them: "Arrange", "Act" and "Assert". So the first thing I do is add those three as comments in the test method body:
+That's why I always like to call attention to the general three steps that almost every test follows: "Setup", "Exercise" and "Verify". Or, as I like to call them: "Arrange", "Act" and "Assert". So the first thing I do is add those three as comments in the test method body:
 
 
 ```php
@@ -244,7 +244,7 @@ public function testBuildAssignsTheParametersToTheCorrectFields()
 
 "Act" is quite simply where we have our unit under test be executed.
 
-"Assert" is where we verify that the unit under test behaved correctly. That it met the test case's expectations. We normally do this by checking the outout of the method or some other side effect that its execution causes.
+"Assert" is where we verify that the unit under test behaved correctly. That it met the test case's expectations. We normally do this by checking the output of the method or some other side effect that its execution causes.
 
 > In the [Behavior Driven Development](https://en.wikipedia.org/wiki/Behavior-driven_development) world, "Given", "When" and "Then" are parallels for these. You may see that terminology used as well. The spirit is the same.
 
@@ -294,7 +294,7 @@ public function testBuildAssignsTheParametersToTheCorrectFields()
 }
 ```
 
-PHPUnit has an extensive number of different types of assertion methods. In this case, we use one of the simpler omes: `assertEquals`. This method will compare two values and report the test as a failure if they are different. It will report it as a success if they are equal.
+PHPUnit has an extensive number of different types of assertion methods. In this case, we use one of the simpler ones: `assertEquals`. This method will compare two values and report the test as a failure if they are different. It will report it as a success if they are equal.
 
 In this test case, we want PHPUnit to validate for us that the resulting object's `city` field is the same that we passed in. Same of the object's `state` field.
 
@@ -324,7 +324,7 @@ OK (8 tests, 9 assertions)
 
 Notice how we just call the PHPUnit executable and pass it the file name that contains the tests that we want to run.
 
-I prefer the [TestDox](https://en.wikipedia.org/wiki/TestDox) style ouput though, so I like to use this instead:
+I prefer the [TestDox](https://en.wikipedia.org/wiki/TestDox) style output though, so I like to use this instead:
 
 ```
 bin/phpunit --testdox tests/unit/Entity/WeatherQueryTest.php
@@ -349,13 +349,13 @@ Time: 68 ms, Memory: 8.00 MB
 OK (8 tests, 9 assertions)
 ```
 
-And this is where us giving those really long and detailed names to the test methods pays off. Now running a test suite results in output that reads in plain english and serves as a specification of sorts on how a given class works. Fulfilling the automated tests suite's secondary objective of serving as live documentation for the system.
+And this is where us giving those really long and detailed names to the test methods pays off. Now running a test suite results in output that reads in plain English and serves as a specification of sorts on how a given class works. Fulfilling the automated tests suite's secondary objective of serving as live documentation for the system.
 
 ### Other interesting details
 
-Now that we've disccussed my thought process for writing this first unit test, the rest of the `build` unit tests should be pretty self explanatory. They all follow the same pattern, the only difference is the Arrange and Assert parts, which change according to what the particular tests's purpose is.
+Now that we've discussed my thought process for writing this first unit test, the rest of the `build` unit tests should be pretty self explanatory. They all follow the same pattern, the only difference is the Arrange and Assert parts, which change according to what the particular tests's purpose is.
 
-For instance, notice how the `testBuildCapitalizesTheGivenCityParameter` test passes the `build` function `'my city'` as the value for the city paramenter. Then, it asserts that the return object's property was set to `My City`. Thus, assuring that the `$city = ucwords($city);` line in the `build` method's implementation is working properly. If somebody changes this by mistake, the test will break and let them know that they have to fix it.
+For instance, notice how the `testBuildCapitalizesTheGivenCityParameter` test passes the `build` function `'my city'` as the value for the city parameter. Then, it asserts that the return object's property was set to `My City`. Thus, assuring that the `$city = ucwords($city);` line in the `build` method's implementation is working properly. If somebody changes this by mistake, the test will break and let them know that they have to fix it.
 
 Another interesting test case is this one: `testBuildSetsTheCurrentMomentAsTheCreatedField`. Here, we need to assert that the `WeatherQuery` object returned by the `build` method has its "created" field set to the current moment in time. However, timestamps are so precise, that one obtained before calling the method, and one obtained inside it, are different. We still need to assert equality though. So, to deal with that, we use this variation of the `assertEquals` assertion:
 
@@ -395,7 +395,7 @@ If you are familiar at all with Symfony, then you may know what all this is abou
 
 Now, that's how we validate an object in Symfony. However, validation is a common technique that's done regardless of framework. In general, to test validation rules, we always use the same approach: 1. we create the validation subject with some input data, 2. we call whatever component to validate said input data, and 3. we assert that the validation result is what we expect given the input.
 
-This means that testing a set of validation rules boils down to runinng the same process over and over again with different input. The input is the only thing that varies. PHPUnit has the [data provider](https://phpunit.readthedocs.io/en/9.3/writing-tests-for-phpunit.html#data-providers) concept which lends itself beautifully for these scenarios.
+This means that testing a set of validation rules boils down to running the same process over and over again with different input. The input is the only thing that varies. PHPUnit has the [data provider](https://phpunit.readthedocs.io/en/9.3/writing-tests-for-phpunit.html#data-providers) concept which lends itself beautifully for these scenarios.
 
 To illustrate this, let's continue with our validation example. Consider the annotation and signature of the test method:
 
@@ -450,7 +450,7 @@ I find PHPUnit's data provider feature very useful for testing input validation 
 
 ### Using mocks to test classes with dependencies
 
-Now let's move on to a set of classes that are generally a bit less straightforward to test: services. Service classes, as opposed to entities, are seldom so independent and self contained. Because of their very nature as intergrators and orchestrators of other classes that fulfill core business logic, services often have dependencies and collaborators.
+Now let's move on to a set of classes that are generally a bit less straightforward to test: services. Service classes, as opposed to entities, are seldom so independent and self contained. Because of their very nature as integrators and orchestrators of other classes that fulfill core business logic, services often have dependencies and collaborators.
 
 Take a look at our `WeatherService` class in `src/Service/WeatherService.php`. Just by looking at the constructor you can see that it depends on others to function:
 
@@ -474,7 +474,7 @@ Mocks are essentially fake objects that a test fixture uses to pass as dependenc
 
 > Why do unit tests need to test objects in isolation? Because unit tests need to be simple, fast, and easy to understand. Having a test case focused only on validating a single, small piece of functionality is a great way to achieve those three goals.
 
-Ok se let's see an example of some mock objects in action. consider the `testGetCurrentWeatherDoesNotReturnSuccessWhenTheApiCallIsUnsuccessful` test case in `tests/unit/Service/WeatherServiceTest.php`:
+Ok so let's see an example of some mock objects in action. consider the `testGetCurrentWeatherDoesNotReturnSuccessWhenTheApiCallIsUnsuccessful` test case in `tests/unit/Service/WeatherServiceTest.php`:
 
 ```php
 public function testGetCurrentWeatherDoesNotReturnSuccessWhenTheApiCallIsUnsuccessful()
@@ -516,11 +516,11 @@ $mockApiClient->method('getCurrentWeather')->willReturn([
 
 The first statement uses PHPUnit's `createMock` method to obtain a fake object. Then, the second statement configures it by specifying that, whenever the `getCurrentWeather` gets called on that mock, it will return the value that will make `WeatherService` think that the request failed.
 
-After that's set up, the rest of the test should be straightforwad: in the Arrange section we set up other mocks for each of `WeatherService`'s constructor parameters (i.e. injected dependencies) and create a real instance of `WeatherService` which is our unit under test; in the Act section, we exercise our UUT by calling the method we want to test; and finally, in the Assert section, we validate that the UUT has returned a result that signals that the operation was unsuccessful. By looking at the resulting array's `success` field.
+After that's set up, the rest of the test should be straightforward: in the Arrange section we set up other mocks for each of `WeatherService`'s constructor parameters (i.e. injected dependencies) and create a real instance of `WeatherService` which is our unit under test; in the Act section, we exercise our UUT by calling the method we want to test; and finally, in the Assert section, we validate that the UUT has returned a result that signals that the operation was unsuccessful. By looking at the resulting array's `success` field.
 
 ### Verifying behavior instead of state: Expectations with PHPUnit
 
-In this last example, we used the mock to control the UUT's behavior and asserted on the result by veryfying data or state. Mocks can do much more than that though. We can configure them to return whatever value we want, like we just did, but we can also inspect them to know if they have been called, what parameters where given to them, etc. This allows us to write a slightly different style of test. One that, instead of veryfying state, verifies behavior. Here's an example of such a test case:
+In this last example, we used the mock to control the UUT's behavior and asserted on the result by verifying data or state. Mocks can do much more than that though. We can configure them to return whatever value we want, like we just did, but we can also inspect them to know if they have been called, what parameters where given to them, etc. This allows us to write a slightly different style of test. One that, instead of verifying state, verifies behavior. Here's an example of such a test case:
 
 ```php
 public function testGetCurrentWeatherCallsOnTheApiClientToGetWeatherData()
@@ -556,7 +556,7 @@ public function testGetCurrentWeatherCallsOnTheApiClientToGetWeatherData()
 }
 ```
 
-See how this test case is not veryfying a result from a method call. Instead, it veryfies whether our mock was called in a specific way by the unit under test. Also, our typical Arrange, Act, Assert formula has changed a bit. The test now reads Arrange, Expect, Act. This is how we write expectation-style test cases in PHPUnit. Let's look at the statement:
+See how this test case is not verifying a result from a method call. Instead, it verifies whether our mock was called in a specific way by the unit under test. Also, our typical Arrange, Act, Assert formula has changed a bit. The test now reads Arrange, Expect, Act. This is how we write expectation-style test cases in PHPUnit. Let's look at the statement:
 
 ```php
 $mockApiClient
@@ -570,7 +570,7 @@ This basically says: "in this test case, expect that the mock `WeatherApiClient`
 
 ### The thought process of writing tests with mocks
 
-How do we write these types of tests though? Well, we read the code that we want to test. Line by line, and try to identify the spots where dependencies are used, and how their results affect the behavior of the unit under test. That way we can mock them properly, configuring those mocks so that we can trigger the execution paths within the unit under test that we want to exercise. These types of tests are as [white box](https://en.wikipedia.org/wiki/White-box_testing) as can be, and are really coupled with the implementation. Most changes to the implementation will break them. This is good because subtle bugs can be caught. This could also be bad because tests breaking often means more work fixing them. I personally like my tests to have this fine grained focus, so I'm a big fan of mocking aggresively, but the most important thing is to find the balance that works best for you, your team and your project.
+How do we write these types of tests though? Well, we read the code that we want to test. Line by line, and try to identify the spots where dependencies are used, and how their results affect the behavior of the unit under test. That way we can mock them properly, configuring those mocks so that we can trigger the execution paths within the unit under test that we want to exercise. These types of tests are as [white box](https://en.wikipedia.org/wiki/White-box_testing) as can be, and are really coupled with the implementation. Most changes to the implementation will break them. This is good because subtle bugs can be caught. This could also be bad because tests breaking often means more work fixing them. I personally like my tests to have this fine grained focus, so I'm a big fan of mocking aggressively, but the most important thing is to find the balance that works best for you, your team and your project.
 
 To continue our example, if we look at the `getCurrentWeather` method in `WeatherService`:
 
@@ -618,7 +618,7 @@ Then, `getCurrentWeather` calls on the repository to store the `WeatherQuery` in
 $this->repository->add($weatherQuery);
 ```
 
-This one is interesting. This one is a text book example of a side effect that we can easily write a test for using mocks. The mock in this case would be of the `WeatherQueryRepository` dependency and we would veryfy that its `add` method gets called with the expected parameter. This unit test would be impossible to write without mocks, because the result of this call to `WeatherQueryRepository`'s `add` is not captured nor returned as part of `getCurrentWeather`'s result. The only insight that a test case could have into this aspect of `getCurrentWeather`'s execution is via a mock.
+This one is interesting. This one is a text book example of a side effect that we can easily write a test for using mocks. The mock in this case would be of the `WeatherQueryRepository` dependency and we would verify that its `add` method gets called with the expected parameter. This unit test would be impossible to write without mocks, because the result of this call to `WeatherQueryRepository`'s `add` is not captured nor returned as part of `getCurrentWeather`'s result. The only insight that a test case could have into this aspect of `getCurrentWeather`'s execution is via a mock.
 
 The test case that covers this line is `testGetCurrentWeatherCallsOnTheRepositoryToSaveANewWeatherQuery`.
 
@@ -648,7 +648,7 @@ The tests that cover this are:
 - `testGetCurrentWeatherDoesNotReturnSuccessWhenTheApiCallIsUnsuccessful`
 - `testGetCurrentWeatherReturnsAWeatherQueryObjectWithCorrectFieldsWhenTheApiCallIsUnsuccessful`
 
-Finally, the method captures the API response, builds a `Weather` object based on it (again, a static dependency that we can't intercept with a mock), and returs a result.
+Finally, the method captures the API response, builds a `Weather` object based on it (again, a static dependency that we can't intercept with a mock), and returns a result.
 
 ```php
 $apiResponse = $result['response'];
@@ -672,7 +672,7 @@ You can run all of the unit tests in the demo with `bin/phpunit --testdox tests/
 
 # Integration tests
 
-Like I said, I firmly believe that unit tests are the bread and butter of any serious automated test suite. However, I also like to do some higher level tests to suplement the unit tests. Integration tests are such tests. These focus on exercising system behavior that interacts with external components like databases and web APIs. In fact, in our demo app's test suite we have both. Let's look into them.
+Like I said, I firmly believe that unit tests are the bread and butter of any serious automated test suite. However, I also like to do some higher level tests to supplement the unit tests. Integration tests are such tests. These focus on exercising system behavior that interacts with external components like databases and web APIs. In fact, in our demo app's test suite we have both. Let's look into them.
 
 ## Testing database interaction
 
@@ -716,7 +716,7 @@ self::bootKernel();
 $repository = self::$container->get(WeatherQueryRepository::class);
 ```
 
-This is just how Symfony allows us to obtain fully featured objects in the context of our tests. Just as they would be if they were being executed in the application's normal day-to-day runtime. We ask Symfony for an intance instead of us directly `new`ing it up. And this is good news, because with a framework like Symfony that uses Dependency Injection so heavily, and many of our custom classes end up depending on complex framework objects, instantiating them on our own can get complicated.
+This is just how Symfony allows us to obtain fully featured objects in the context of our tests. Just as they would be if they were being executed in the application's normal day-to-day runtime. We ask Symfony for an instance instead of us directly `new`ing it up. And this is good news, because with a framework like Symfony that uses Dependency Injection so heavily, and many of our custom classes end up depending on complex framework objects, instantiating them on our own can get complicated.
 
 In Symfony, there are a few configurations that need to happen so that we are able to run database integration tests. [Symfony's own documentation](https://symfony.com/doc/current/testing/database.html) is excellent for learning how to, but in a nutshell, here's what needs to happen:
 
@@ -826,7 +826,7 @@ public function getCurrentWeather(string $city, string $state)
 }
 ```
 
-See how the method leverages the `$httpClient` (which is an object of type `Symfony\Contracts\HttpClient\HttpClientInterface`, injected into our `WeatherApiClient` class by Symfony), to make an HTTP request to the OpenWeatherMap Web API endpoint. Depending on its response, it contructs and returns a result value. There's some logic in this method, calls to dependencies being made, results being inspected, conditionals, associative arrays being constructed... Our integration test cares about none of that. In only cares that the Web API is getting called and that it returns what it expects. Unit tests on the other hand, do care about these details. As a result, `tests/unit/Service/WeatherApiClientTest.php`, which contains the unit tests for that same class, goes more in depth into it and exercises all the possible code paths, while providing a mock for the `HttpClientInterface` dependency. This makes sure that the unit test does not execute code from anything other than the unit under test. So, we end up with unit test cases like:
+See how the method leverages the `$httpClient` (which is an object of type `Symfony\Contracts\HttpClient\HttpClientInterface`, injected into our `WeatherApiClient` class by Symfony), to make an HTTP request to the OpenWeatherMap Web API endpoint. Depending on its response, it constructs and returns a result value. There's some logic in this method, calls to dependencies being made, results being inspected, conditionals, associative arrays being constructed... Our integration test cares about none of that. In only cares that the Web API is getting called and that it returns what it expects. Unit tests on the other hand, do care about these details. As a result, `tests/unit/Service/WeatherApiClientTest.php`, which contains the unit tests for that same class, goes more in depth into it and exercises all the possible code paths, while providing a mock for the `HttpClientInterface` dependency. This makes sure that the unit test does not execute code from anything other than the unit under test. So, we end up with unit test cases like:
 
 - `testGetCurrentWeatherCallsOnTheHttpClientToMakeAGetRequestToTheWeatherApi`
 - `testGetCurrentWeatherDoesNotReturnSuccessIfTheResponseStatusCodeIsNot200`
@@ -896,8 +896,8 @@ Symfony includes many more goodies that help with functional testing. You can le
 
 In this article, we've gone through some of the basics of automated testing for web applications. We've used Symfony as a vehicle for conveying that information and as such, learned a little bit about what it takes to build a multi faceted test suite with that framework. And we did all that by offering many examples from a real (albeit simple) test suite that works.
 
-We've discussed the three types of tests that I like to use in terms of their level of abstraction: unit tests, integration tests, and functional tests. What they are, what aspect of the system they focus on, and how to write them. I belive that a test suite that offers good coverage while inlcuding these three kinds of tests offers the best bang for the buck and gives us a cozy safety net to fall back to while we develop our applications. These three levels of testing complement each other very well.
+We've discussed the three types of tests that I like to use in terms of their level of abstraction: unit tests, integration tests, and functional tests. What they are, what aspect of the system they focus on, and how to write them. I believe that a test suite that offers good coverage while including these three kinds of tests offers the best bang for the buck and gives us a cozy safety net to fall back to while we develop our applications. These three levels of testing complement each other very well.
 
-We've also touched on the general approach and thought process behind writing automated tests. We discussed a three step approach: Arrange, Act and Assert. We also talked about test cases that do classic state verification, where input is provided to a unit under test, the unit is exercised, and finally its output is verified. We also saw a more advanced testing tecnique where, by leveraging mock objects, we do behavior verification. Here, we assert on whether the unit under test has called its collaborators/dependencies in a certain way. A style which is great for testing side effects and classes that need other dependencies in order to work. These two styles of tests work best when used together to compose a larger test suite.
+We've also touched on the general approach and thought process behind writing automated tests. We discussed a three step approach: Arrange, Act and Assert. We also talked about test cases that do classic state verification, where input is provided to a unit under test, the unit is exercised, and finally its output is verified. We also saw a more advanced testing technique where, by leveraging mock objects, we do behavior verification. Here, we assert on whether the unit under test has called its collaborators/dependencies in a certain way. A style which is great for testing side effects and classes that need other dependencies in order to work. These two styles of tests work best when used together to compose a larger test suite.
 
-And that's it for now! This has been quite a trip into some aspecs in the topic of software testing. Like I said at the beginning, this discipline is huge, and one never stops learning. What we've discussed here though, I feel like is a good strarting point to continue deepening our understanding, while also serving as a competent enough strategy to use in a real world application.
+And that's it for now! This has been quite a trip into some aspects in the topic of software testing. Like I said at the beginning, this discipline is huge, and one never stops learning. What we've discussed here though, I feel like is a good starting point to continue deepening our understanding, while also serving as a competent enough strategy to use in a real world application.
