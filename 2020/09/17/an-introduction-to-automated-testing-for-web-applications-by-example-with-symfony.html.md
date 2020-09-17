@@ -709,7 +709,7 @@ This one is pretty straightforward. We create two objects, we call the `add` met
 
 One interesting aspect about this test class is that we are calling two methods on `WeatherQueryRepository`: `add` and `findAll`. However, we only have a test case for `add`. Why is that? Well, if we look at `WeatherQueryRepository`'s implementation, we find out quickly: the `add` method is the only method in our class. The `findAll` one we get from `Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository`, a framework base class that our repository inherits from. The test suite for our app should only be concerned in testing the code that we wrote and own. Our test suite has no business testing code that belongs to Symfony, Doctrine or any other framework or library. Test cases for that belong in their test suites, not ours.
 
-Another interesting point is that we can't create a "real" `WeatherQueryRepository` to play with on our own, outside of the context of Symfony. that's why we, 1. have this test class extend `Symfony\Bundle\FrameworkBundle\Test\KernelTestCase` instead of plain old `PHPUnit\Framework\TestCase`, and 2: have to go through some hoops to obtain a `WeatherQueryRepository` instance:
+Another interesting point is that we can't create a "real" `WeatherQueryRepository` to play with on our own, outside of the context of Symfony. That's why we, 1. have this test class extend `Symfony\Bundle\FrameworkBundle\Test\KernelTestCase` instead of plain old `PHPUnit\Framework\TestCase`, and 2. have to go through some hoops to obtain a `WeatherQueryRepository` instance:
 
 ```php
 self::bootKernel();
