@@ -4,7 +4,7 @@ title: "An introduction to automated testing for web applications by example wit
 tags: testing, automated-testing, unit-testing, integration-teting, functional-testing, symfony, phpunit, php
 ---
 
-![Banner](auomated-testing-with-symfony/banner.png)
+![Banner](an-introduction-to-automated-testing-for-web-applications-by-example-with-symfony/banner.png)
 https://stackoverflow.com/questions/61400/what-makes-a-good-unit-test
 
 # An introduction to automated testing for web applications by example with Symfony
