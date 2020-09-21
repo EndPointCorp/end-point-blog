@@ -1,7 +1,7 @@
 ---
 author: "Steve Yoman"
 title: "COVID-19 Support for the Kansas Department of Health and Environment"
-tags: epitrax
+tags: epitrax, clients, case-study, rails, vue
 gh_issue_number: 1663
 ---
 
