@@ -1,0 +1,22 @@
+title Get Weather Data Request
+
+actor User
+User->WeatherController: GET /show/{city}/{state}
+WeatherController->WeatherService: validateWeatherQuery($city, $state)
+WeatherService->WeatherQuery: ::build($city, $state)
+WeatherQuery->WeatherService: $weatherQuery
+WeatherService->ValidatorInterface: validate($weatherQuery)
+ValidatorInterface->WeatherService: $errors
+WeatherService->WeatherController: $validationResult
+note over WeatherController,WeatherService: if there are no validation errors
+WeatherController->WeatherService: getCurrentWeather($city, $state)
+WeatherService->WeatherQuery: ::build($city, $state)
+WeatherQuery->WeatherService: $weatherQuery
+WeatherService->WeatherQueryRepository: add($weatherQuery)
+WeatherService->WeatherApiClient: getCurrentWeather($city, $state)
+WeatherApiClient->WeatherService: $apiResponse
+note right of WeatherService: if the request to the API was successful
+WeatherService->Weather: ::build($weatherQuery, $apiResponse)
+Weather->WeatherService: $weather
+WeatherService->WeatherController: $weather
+WeatherController->User: Page with weather
