@@ -1,7 +1,7 @@
 ---
 author: "Kevin Campusano"
 title: "An introduction to automated testing for web applications by example with Symfony"
-tags: testing, automated-testing, unit-testing, integration-teting, functional-testing, symfony, phpunit, php
+tags: testing, automated-testing, unit-testing, integration-testing, functional-testing, symfony, phpunit, php
 ---
 
 ![Banner](an-introduction-to-automated-testing-for-web-applications-by-example-with-symfony/banner.png)
