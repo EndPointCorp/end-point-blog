@@ -11,7 +11,7 @@ Testing is an immense topic in software engineering. A lot has been written and 
 
 With such a big topic, it would be futile to try touching on every aspect of it in this article. Instead, I’ll try to take a pragmatic approach and discuss a testing strategy I’ve found success with in the past as well how much testing is necessary before I feel comfortable putting code into production. This article could also serve as a sort of introduction to automated testing using the [Symfony framework](https://symfony.com/) as a vehicle to explore various types of testing without diving too deep into edge cases or framework specifics, and instead leaning more into the concepts and design decissions that go into writing them. Still, we’ll make sure to have a running and competent test suite by the end.
 
-So we’re going to talk about automated testing, which in its own right is a very important part of the larger discipline of software testing. It’s also a topic that, being a developer (and as such, responsible for implementing this type of tests), I’m passionate about.
+So we’re going to talk about automated testing, which in its own right is a very important part of the larger discipline of software testing. It’s also a topic that, as a developer (and as such, responsible for implementing this type of tests), I’m passionate about.
 
 Let’s get started.
 
@@ -19,13 +19,13 @@ Let’s get started.
 
 For web applications, as far as automated tests go, there are three categories I think are essential to have and which complement each other very well:
 
-- [Unit tests](https://en.wikipedia.org/wiki/Unit_testing): These are the most numerous, low level, and, in my opinion, the most important type of developer tests. Unit tests don’t only make sure that the system does what it is supposed to do, but also that it’s correctly factored where individual components are decoupled. Unit tests focus on exercising specific classes and methods running in complete isolation, which becomes harder if the class you want to test is tightly coupled with its dependencies/collaborators. These tests validate the behavior of basic programing constructs like classes and the algorithms within them. They need to be small and fast, since their intent is to be run several times by developers as they implement features and change existing ones.
+- [Unit tests](https://en.wikipedia.org/wiki/Unit_testing): These are the most numerous, low level, and, in my opinion, the most important type of developer tests. Unit tests don’t only make sure that the system does what it is supposed to do, but also that it’s correctly factored where individual components are decoupled. Unit tests focus on exercising specific classes and methods running in complete isolation, which becomes harder if the class you want to test is tightly coupled with its dependencies/collaborators. These tests validate the behavior of basic programming constructs like classes and the algorithms within them. They need to be small and fast, since their intent is to be run several times by developers as they implement features and change existing ones.
 
 - [Integration tests](https://martinfowler.com/bliki/IntegrationTest.html): These tests go one level of abstraction higher when compared to unit tests. They make sure that independently developed components work properly together. In web apps, I like my integration tests to focus primarily on how the system interacts with external components. In this article, we’re going to use integration level tests to validate functionality that has to do with interaction with a database and an external Web API. 
 
 - [Functional tests](https://en.wikipedia.org/wiki/Functional_testing): These are the tests at the highest level of abstraction. These try to closely mimic the user’s experience with the system by interacting with the app as a user would. In terms of a web app, this means making HTTP requests, clicking buttons, filling out and submitting forms, inspecting HTML results, etc. As these tests exercise the complete system end to end, they are allowed to be a bit slower. This is not an issue because they are not run as frequently as unit or integration tests.
 
-If we can build an automated testing suite that provides good coverage and exercises the system at these three levels, I would feel confident that the [system under test](https://en.wikipedia.org/wiki/System_under_test) can work properly in production. An added bonus is that with tests like these, we would have a live documentation of the system, the features it provides and, to an extent, how it works.
+If we can build an automated testing suite that provides good coverage and exercises the system at these three levels, I will feel confident that the [system under test](https://en.wikipedia.org/wiki/System_under_test) can work properly in production. An added bonus is that with tests like these, we would have a live documentation of the system, the features it provides and, to an extent, how it works.
 
 Virtually all serious software development ecosystems have at least one automated testing framework or library which we can leverage to write our tests. For our purposes in this article, we’re going to be using the Symfony PHP framework which integrates beautifully with [PHPUnit](https://phpunit.de/) to provide developers with an effective, and even fun way to write tests.
 
@@ -41,11 +41,11 @@ The site is a typical Symfony web app. It uses the [MVC](https://en.wikipedia.or
 
 For a simple app like this, our entities are little more than containers for our data. The repositories take care of encapsulating the database access logic, and the services contain the logic that leverages the other objects to fulfill our business requirements.
 
-The front end, as you’ll see, is super simple. Not really any client side JavaScript logic to speak of. So this is more of an old-school, back end only app. Good enough for what we’re trying to do here though.
+The front end, as you’ll see, is super simple. Not really any client side JavaScript logic to speak of, so this is more of an old-school, back end only app. Good enough for what we’re trying to do here though.
 
 So our only use case is the current weather request. We do, however, have a couple alternate scenarios within that use case. First, if the user types in an invalid US state code, the app will show a validation error. Second, if the user inputs a city that does not exist (or, more specifically, one that the OpenWeatherMap Web API can’t find), the app will show another error message.
 
-To get a better idea of how the classes interact with each other, here’s an sequence diagram detailing how the app serves the main weather query scenario:
+To get a better idea of how the classes interact with each other, here’s a sequence diagram detailing how the app serves the main weather query scenario:
 
 ![Sequence diagram](/blog/2020/09/22/automated-testing-with-symfony/sequence-diagram.png)
 
