@@ -224,4 +224,4 @@ Just because asyncio never preempts, this doesn't mean you will never need to sy
 
 ### Conclusion
 
-If you're interested in using asyncio, I urge you to explore its interfaces further. We've only scratched the surface in these examples. If you are shoehorning asyncio into an existing application or want to use it with a library or framework that relies on threads, know there are asyncio interfaces for safely adding coroutines from a thread. Happy hacking!
+If you're interested in using asyncio, I urge you to [explore its interfaces further](https://docs.python.org/3/library/asyncio.html). We've only scratched the surface in these examples. If you are shoehorning asyncio into an existing application or want to use it with a library or framework that relies on threads, know there are asyncio interfaces for safely adding coroutines from a thread. Happy hacking!
