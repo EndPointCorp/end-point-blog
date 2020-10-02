@@ -29,7 +29,7 @@ Any discussion of Python concurrency should mention Python's GIL, or Global Inte
 
 Once a thread has acquired the GIL, there are two ways it can release the GIL for another thread to acquire:
 
-* Reaching a point in the script where it is sleeping, ending, waiting for I/O, or executing native code which explicitly releases the GIL. As a simple example, calling time.sleep(0) forces a thread to yield without ending the thread.
+* Reaching a point in the script where it is sleeping, ending, waiting for I/O, or executing native code which explicitly releases the GIL. As a simple example, calling `time.sleep(0)` forces a thread to release the GIL without ending the thread.
 * After executing for some amount of time and/or instructions, a thread may be forced to release the GIL for another thread to have a turn. Interrupting a thread in this way is preemption.
 
 Note that Python threads are not the same as operating system threads. They exist entirely within the context of the Python runtime. You could say that Python threads have most of the same pitfalls as OS threads, but less of the advantages. Because of the GIL, Python threads can not easily be used to run parallel processing in the same way as OS threads.
