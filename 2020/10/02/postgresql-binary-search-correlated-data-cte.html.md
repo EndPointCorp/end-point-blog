@@ -1,7 +1,7 @@
 ---
 author: "David Christensen"
 title: "Using CTEs to do a binary search of large tables with non-indexed correlated data"
-tags: postgresql, database, sql
+tags: postgres, database, sql
 gh_issue_number: 1668
 ---
 
