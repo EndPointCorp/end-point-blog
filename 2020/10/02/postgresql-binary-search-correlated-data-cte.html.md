@@ -131,7 +131,7 @@ just selecting `id = middle`, which you could do in a gapless sequence.
 
 1. In addition to not caring about gaps, we are also not trying to make sure this is using a
 balanced binary search; it would be not worth the computing effort to find the middlest existing row
-in an index, as we'd need to know the number of rows in the segment we're searching. Since in
+in an index, as we’d need to know the number of rows in the segment we’re searching. Since in
 PostgreSQL this would entail a `COUNT(*)` from a subselect, this would be quite slow and not worth
 the trouble.
 
