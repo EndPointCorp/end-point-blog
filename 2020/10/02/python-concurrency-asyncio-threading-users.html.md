@@ -196,13 +196,15 @@ class Counter():
       print(f'All values are {self.values[0]} at +{now - t0:.5f}s')
 
 
-if __name__ == '__main__':
-  counter = Counter()
+async def main():
+    counter = Counter()
 
-  asyncio.run(asyncio.wait(
-    [counter.count(), counter.heartbeat()],
-    return_when=asyncio.FIRST_COMPLETED,
-  ))
+    tasks = map(asyncio.create_task, [counter.count(), counter.heartbeat()])
+    await asyncio.wait(tasks, return_when=asyncio.FIRST_COMPLETED)
+
+
+if __name__ == '__main__':
+    asyncio.run(main())
 ```
 
 ```nohighlight
