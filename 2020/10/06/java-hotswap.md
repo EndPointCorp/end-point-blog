@@ -51,8 +51,8 @@ Hi
 The usual JVM doesn't include the HotSwap feature. For my purposes I downloaded
 [DCEVM](http://dcevm.github.io/), an alternative JVM which includes HotSwap.
 It's also possible to patch some existing JVMs to add HotSwap, if you'd prefer.
-When I run the same code with DCEVM, it does the same thing, with additional
-debugging output:
+When I run the same code with DCEVM, it runs the code just like it did with the
+normal JVM, with additional debugging output:
 
 ```
 Starting HotswapAgent '/home/josh/hotswaptest/dcevm/lib/hotswap/hotswap-agent.jar'
@@ -61,15 +61,16 @@ HOTSWAP AGENT: 15:01:24.189 INFO (org.hotswap.agent.config.PluginRegistry) - Dis
 ```
 
 To make hot swapping work automatically, we need to provide the JVM with a
-properties file in the JVM's classpath. Mine looks like this, and lives in build/classes/java/main:
+properties file in the JVM's classpath. Mine looks like this, and lives in
+build/classes/java/main, next to the compiled class files:
 
 ```
 autoHotswap=true
 LOGGER=debug
 ```
 
-These properties are pretty self-explanatory; they tell the JVM to hot swap
-automatically when it finds new code, and turns up logging to DEBUG level.
+These properties are pretty self-explanatory: they tell the JVM to hot swap
+automatically when it finds new code, and turn up logging to DEBUG level.
 
 So, with that all set up, let's run the program again, change the code and
 rebuild it, and see what happens. For this test, I'll just edit the message
@@ -104,14 +105,15 @@ Hi
 Hi
 ```
 
-But although it says it swapped the new code in just fine, it's still printing
-"Hi", not "Hello". Why?
+But although it says it swapped in the new code successfully, it's still
+printing "Hi", not "Hello". Why?
 
 It turns out this ability to hot swap new code isn't entirely unlimited, and
 one important limitation is that methods you're already running aren't
-reloaded. Since the `main()` method was running, it didn't get swapped out. If
-I add a second message to print the actual message, perhaps it will get swapped
-out the way I want. Here's some code to test that technique.
+reloaded. Since the `main()` method was running, it didn't get swapped out.
+What if I change the code so that instead of printing a string every second, it
+calls a method, and that method prints the string? Here's some code to test
+that technique.
 
 ```java
 import java.lang.Thread;
@@ -158,8 +160,10 @@ Here is printMsg v2.0
 ```
 
 As you can see, it swapped in the new code correctly, and now prints the new
-message. I imagine there are very few production environments where such a
-feature as this would be applicable, and even in development, getting this to
-work properly for something like a JEE app deployed to some application
-container isn't necessarily a simple task. But if it can cut down on
-redeployment cycles, it can certainly be a valuable developer tool.
+message. HotSwap was a success!
+
+I imagine there are very few production environments where such a feature as
+this would be applicable, and even in development, getting this to work
+properly for something like a JEE app deployed to some application container
+isn't necessarily a simple task. But if it can cut down on redeployment cycles,
+it can certainly be a valuable developer tool.
