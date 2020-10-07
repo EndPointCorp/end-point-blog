@@ -1,12 +1,13 @@
 ---
 author: "Matt Vollrath"
-title: "Python Concurrency: asyncio for threading users"
-tags: python
+title: "Python concurrency: asyncio for threading users"
+tags: python, performance
+gh_issue_number: 1670
 ---
 
 ![Freeway lanes](/blog/2020/10/05/python-concurrency-asyncio-threading-users/freeway-lanes.jpg)
 
-[Photo](https://unsplash.com/photos/XS7q-baZrmE) by [Adrian Schwarz](https://unsplash.com/@aeschwarz?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+[Photo](https://unsplash.com/photos/XS7q-baZrmE) by [Adrian Schwarz](https://unsplash.com/@aeschwarz)
 
 You’ve probably heard this classic software engineering mantra:
 
@@ -30,14 +31,14 @@ Any discussion of Python concurrency should mention Python’s GIL, or Global In
 
 Once a thread has acquired the GIL, there are two ways it can release the GIL for another thread to acquire:
 
-* Reaching a point in the script where it is sleeping, ending, waiting for I/O, or executing native code which explicitly releases the GIL. For example, calling `time.sleep(0)` forces a thread to release the GIL without ending the thread.
-* After executing for some amount of time and/or instructions, a thread may be forced to release the GIL for another thread to have a turn. Interrupting a thread in this way is preemption.
+1. Reaching a point in the script where it is sleeping, ending, waiting for I/O, or executing native code which explicitly releases the GIL. For example, calling `time.sleep(0)` forces a thread to release the GIL without ending the thread.
+1. After executing for some amount of time and/or instructions, a thread may be forced to release the GIL for another thread to have a turn. Interrupting a thread in this way is preemption.
 
 ### A Contrived Example of Thread Preemption
 
 Here I will set up a concurrency toy to demonstrate some characteristics of Python threading. One thread will increment a list of numbers in a for loop. The other thread will, roughly once per second, check the consistency of the list (all numbers are equal) and print a message. Observant readers can probably imagine a better non-threading solution to this problem, but allow me to entertain you.
 
-All posted results are from running the examples in Python 3.8.6 in a docker container on a laptop. Your results may vary.
+All posted results are from running the examples in Python 3.8.6 in a Docker container on a laptop. Your results may vary.
 
 Here is the naive approach, without any attempt at synchronization:
 
@@ -130,7 +131,7 @@ When you run this code you may notice that the consistency check never fails, bu
 
 This is happening because there is no guarantee that the counter thread will release the GIL while `values_lock` is available, or that `values_lock` won’t be acquired again by the counter thread immediately after releasing it.
 
-When multiple threads are waiting to acquire a `Lock`, the order in which they are woken up is not defined. We might expect or sometimes observe that the `Lock` will be acquired first-come, first-serve or first-in, first-out but Python makes no guarantees.
+When multiple threads are waiting to acquire a `Lock`, the order in which they are woken up is not defined. We might expect or sometimes observe that the `Lock` will be acquired first come, first served, or first in, first out, but Python makes no guarantees.
 
 Remembering that we can explicitly release the GIL, we cleverly try doing so immediately before the counter thread acquires `values_lock` to give the heartbeat thread a chance to win the race:
 
@@ -162,7 +163,7 @@ The [asyncio](https://docs.python.org/3/library/asyncio.html) approach to Python
 
 Contrasted with threads, asyncio coroutines may never be interrupted unless they explicitly yield the thread with `async` or `await` keywords. However, there is no guarantee that saying `async` or `await` will yield the thread to another task.
 
-The asyncio library is intended to be used for IO-bound applications such as high performance network servers, which spend much of their time waiting for the OS to send or receive data on a file descriptor or socket. However, as we will see when applying asyncio to our toy concurrency example, it can be applied to otherwise pure and isolated Python code too.
+The asyncio library is intended to be used for I/O-bound applications such as high performance network servers, which spend much of their time waiting for the OS to send or receive data on a file descriptor or socket. However, as we will see when applying asyncio to our toy concurrency example, it can be applied to otherwise pure and isolated Python code too.
 
 This example requires Python 3.7 for the `asyncio.run()` method.
 
@@ -217,14 +218,16 @@ All values are 400 at +5.24720s
 All values are 473 at +6.30465s
 ```
 
-This timing is now in the ballpark where we can compensate for drift by automatically adjusting the heartbeat sleep interval. There is no more racing for the GIL, instead the counter coroutine explicitly awaits whenever the state is consistent. It may not be interrupted by another coroutine at any other time, but it can still be interrupted by another thread or a signal.
+This timing is now in the ballpark where we can compensate for drift by automatically adjusting the heartbeat sleep interval. There is no more racing for the GIL. Instead the counter coroutine explicitly awaits whenever the state is consistent. It may not be interrupted by another coroutine at any other time, but it can still be interrupted by another thread or a signal.
 
 If we imagine that the `asyncio.sleep(0)` incantation is actually awaiting data on a file descriptor or network socket saturated with data, this example is immediately relevant to the intended use of asyncio. The pattern of running top-level coroutines with `asyncio.wait()`, among other asyncio task scheduling tools, can potentially replace many existing uses of daemon threads for background tasks.
 
-A caveat of asyncio is the consequence of one of its advantages: while a coroutine is running, it may never be interrupted by another coroutine unless it explicitly gives up control. One slow or malformed coroutine can freeze your entire application, where daemon threads would keep preempting and bypassing the blockage (at cost of some context-​switching overhead and developer sanity). If you must run blocking code concurrently you can [run it in an executor](https://docs.python.org/3.4/library/asyncio-eventloop.html#executor) to decouple it from the asyncio event loop, but understand that the usual thread synchronization problems may apply.
+A caveat of asyncio is the consequence of one of its advantages: While a coroutine is running, it may never be interrupted by another coroutine unless it explicitly gives up control. One slow or malformed coroutine can freeze your entire application, where daemon threads would keep preempting and bypassing the blockage (at cost of some context-​switching overhead and developer sanity). If you must run blocking code concurrently you can [run it in an executor](https://docs.python.org/3.4/library/asyncio-eventloop.html#executor) to decouple it from the asyncio event loop, but understand that the usual thread synchronization problems may apply.
 
 Just because asyncio never preempts doesn’t mean you will never need to synchronize access to shared state. The library does include threading-like synchronization primitives (which are not thread-safe), but the need for them should be the exception, not the norm.
 
 ### Conclusion
 
-If you’re interested in using asyncio, I urge you to [explore its interfaces further](https://docs.python.org/3/library/asyncio.html). We’ve only scratched the surface in these examples. If you are shoehorning asyncio into an existing application or want to use it with a library or framework that relies on threads, know there are asyncio interfaces for safely adding coroutines from a thread. Happy hacking!
+If you’re interested in using asyncio, I urge you to [explore its interfaces further](https://docs.python.org/3/library/asyncio.html). We’ve only scratched the surface in these examples. If you are shoehorning asyncio into an existing application or want to use it with a library or framework that relies on threads, know there are asyncio interfaces for safely adding coroutines from a thread.
+
+Happy hacking!
