@@ -2,12 +2,10 @@
 author: Marina Lohova
 gh_issue_number: 1010
 tags: social-networks
-title: Facebook, Twitter, Google Plus sharing with the url
+title: Facebook, Twitter, Google+ sharing with the URL
 ---
 
-
-
-This blog post is intended for the folks who spent way more time displaying social sharing buttons on their websites than originally planned. My buttons were supposed to bring up the Share Dialog for Facebook, Twitter and Google Plus platforms. I had the requirement to display a custom logo and a custom description. It seemed easy... until it turned out to be rather difficult.
+This blog post is intended for the folks who spent way more time displaying social sharing buttons on their websites than originally planned. My buttons were supposed to bring up the Share Dialog for Facebook, Twitter and Google+ platforms. I had the requirement to display a custom logo and a custom description. It seemed easy... until it turned out to be rather difficult.
 
 <div class="separator" style="clear: both; text-align: center;"><a href="/blog/2014/07/10/facebook-twitter-google-plus-sharing/image-0-big.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="/blog/2014/07/10/facebook-twitter-google-plus-sharing/image-0.png"/></a></div>
 
@@ -36,7 +34,7 @@ Facebook documentation hinted that addition of the OpenGraph Protocol standard t
 
 I wasn’t able to get it up and working with sharer.php. After spending considerable amount of time on this I had to give up and acknowledge that the only way to fully customize the dialog would require registering an app and utilizing APP_ID [https://developers.facebook.com/docs/sharing/reference/share-dialog](https://developers.facebook.com/docs/sharing/reference/share-dialog).
 
-I anticipated the same kind of trouble with the last button for Google Plus. And I wasn’t mistaken. The only allowed format for G+ is:
+I anticipated the same kind of trouble with the last button for Google+. And I wasn’t mistaken. The only allowed format for G+ is:
 
 ```ruby
 <a href="https://plus.google.com/share?url=<%= url %>">Google+</a>
@@ -58,8 +56,6 @@ Same here. Doesn’t work:
 <meta content="<%= desc %>" property="og:description"/>
 ```
 
-Eventually it turned out that it wasn’t possible to use parameters for GPlus link unless you sign up for the API key and use one of the API methods. I wasn’t planning to obtain a key at that time, so I had to simply drop the custom logo and text for G+.
+Eventually it turned out that it wasn’t possible to use parameters for G+ link unless you sign up for the API key and use one of the API methods. I wasn’t planning to obtain a key at that time, so I had to simply drop the custom logo and text for G+.
 
-Looks like both Facebook and Google Plus took steps to restrict the free usage of their share urls so more people would register their apps with them.
-
-
+Looks like both Facebook and Google+ took steps to restrict the free usage of their share urls so more people would register their apps with them.

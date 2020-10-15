@@ -5,8 +5,6 @@ tags: clients, liquid-galaxy
 title: End Point Partners with A-Zero to Expand Liquid Galaxy Services in South Korea
 ---
 
-
-
 [<img border="0" src="/blog/2013/12/19/end-point-partners-with-zero-to-expand/image-0.jpeg" style="clear: right; float: right; margin-bottom: 1em; margin-left: 1em;"/>](/blog/2013/12/19/end-point-partners-with-zero-to-expand/image-0-big.jpeg)
 
 End Point Corporation continues its global leadership for Liquid Galaxy development and professional services, and has signed a partnership agreement with A-Zero of South Korea to further expand those services for the display platform and its associated professional services.
@@ -24,5 +22,3 @@ As the lead agency for development and installation, End Point has brought Liqui
 Originally developed by Google, the Liquid Galaxy is a multi-screen display for 3D-rendered environments such as Google Earth, Google Street View, panoramic photos, videos, and GIS-data visualizations. End Point developers continue to extend that functionality with new data types, system integrations, visual interfaces for navigation, and content management for the display platform.
 
 End Point is based in New York City, and has been providing technical development and solutions to complex problems for their clients since 1995. With over 35 developers and visualization specialists, End Point is the lead agency for providing turn-key installation, customization, and ongoing support for the Liquid Galaxy platform.
-
-

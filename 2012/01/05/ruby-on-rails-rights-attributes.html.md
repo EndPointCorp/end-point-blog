@@ -5,7 +5,7 @@ tags: rails
 title: 'Ruby on Rails: Attributes Management through Rights'
 ---
 
-I’ve written a couple times about a large Rails project that a few End Pointers have been working on. The system has a fairly robust system for managing rights and accessibility. The basic data model for rights, users, groups, and roles is this:
+I’ve written a couple times about a large Rails project that a few End Pointers have been working on. The system has a fairly robust system for managing rights and access. The basic data model for rights, users, groups, and roles is this:
 
 <img border="0" height="337" src="/blog/2012/01/05/ruby-on-rails-rights-attributes/image-0.png" width="737"/>
 

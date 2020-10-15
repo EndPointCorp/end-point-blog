@@ -1,7 +1,7 @@
 ---
 author: Elizabeth Garrett Christensen
 gh_issue_number: 1244
-tags: clients, design, mobile
+tags: clients, design, mobile, case-study
 title: 'Case Study: Responsive Design Return on Investment'
 ---
 
@@ -15,8 +15,6 @@ There are two main reasons every e-commerce website, even a small one, needs to 
 
 - Your customers
 - Google
-
-<br/>
 
 The march toward mobile sales at this point is undeniable and unstoppable. As more and more people become comfortable using their phones and tablets to purchase things, the bigger this market share will become. Also, Google has begun de-prioritizing websites that do not cater to mobile users. If you are waiting to go responsive because of budget, you might surprised to learn how dramatically the mobile revenue increased for the customer in this case.
 
@@ -62,8 +60,6 @@ The first time we looked at the analytics following the responsive conversion, w
 To sanity check those numbers, we just re-ran some of the analytics recently and in May of 2016, revenue from mobile users is still up over 90% and **the clients total revenue year-over-year is up 12%**.
 
 <div class="separator" style="clear: both; text-align: center;"><a href="/blog/2016/07/21/case-study-responsive-design-return-on/image-1-big.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="478" src="/blog/2016/07/21/case-study-responsive-design-return-on/image-1.png" width="640"/></a></div>
-
-
 
 We also ran some numbers on the growth of mobile revenue as a percentage of overall revenue through this process. As you can see, two years ago mobile revenue was less than 1% and is now near 12%.
 
