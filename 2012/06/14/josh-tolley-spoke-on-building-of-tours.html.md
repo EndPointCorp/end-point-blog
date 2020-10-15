@@ -1,7 +1,7 @@
 ---
 author: Josh Ausborne
 gh_issue_number: 638
-tags: google-earth
+tags: google-earth, liquid-galaxy, kamelopard
 title: 'Josh Tolley: About Google Earth Tours'
 ---
 
@@ -13,6 +13,6 @@ Josh talked about what is required to display geographical data in Google Earth.
 
 He demonstrated how a KML file can contain data such as placemarks, polygons, time lapses, overlays, and animations, and he showed his own farm with an overlay placed in the wheat field. Now the zombies know where to find wheat. Josh talked about the uses of Google Earth tours, including the display of ocean currents, tsunami shock waves, wind patterns, and even historical events with a time lapse.
 
-Kamelopard is a Ruby-based KML writer which Josh has written. It uses Ruby code to identify a point, fly to it, stay there for a bit, then fly to the next place. It loops through all of the coordinates given and creates a tour. An example tour that Josh has written is one for Google’s Ocean Conservation Group, which displays fishery data around the world.
+[Kamelopard](https://github.com/LiquidGalaxy/kamelopard) is a Ruby-based KML writer that Josh created. It uses Ruby code to identify a point, fly to it, stay there for a bit, then fly to the next place. It loops through all of the coordinates given and creates a tour. An example tour that Josh has written is one for Google’s Ocean Conservation Group, which displays fishery data around the world.
 
 KML can handle large datasets, and has multiple ways of being displayed. It can have regions and ground overlays, and combining the two can show increasingly detailed images and sets of placemarks as the level of zoom increases. DataAppeal can create maps with various models in them, scaling and coloring them based upon users’ data.
