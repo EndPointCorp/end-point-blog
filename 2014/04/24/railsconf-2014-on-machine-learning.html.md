@@ -13,11 +13,11 @@ First, one must formulate a plan or a goal for which to collect actionable data.
 
 ### Act 1: Describe your Users
 
-First, John talked about a few tools used for describing your users. In the context of his story, he wanted to figure out what gender ratio of shirts to order for the company. He used the [sexmachine gem](https://github.com/bmuller/sexmachine ), which is based on census data, to predict the sex of a person based on a first name. The first name from all your users would be passed into this gem to segregate via gender, and from there you may be able to take action (e.g. order shirts with an estimated gender ratio).
+First, John talked about a few tools used for describing your users. In the context of his story, he wanted to figure out what gender ratio of shirts to order for the company. He used the [sexmachine gem](https://github.com/bmuller/sexmachine), which is based on census data, to predict the sex of a person based on a first name. The first name from all your users would be passed into this gem to segregate via gender, and from there you may be able to take action (e.g. order shirts with an estimated gender ratio).
 
-Next, John covered geolocation. John wanted to how to scale support hours to customers using the product, likely a very common reason for geolocation for any SaaS or customer-centric tools. His solution uses [freegeoip.net](http://freegeoip.net/), Python and Go, and free [Maxmind data](https://www.maxmind.com/en/geoip2-services-and-databases). The example code is available [here](https://github.com/johnpaulashenfelter/railsconf2014-ml/tree/master/ex2_geolocation).
+Next, John covered geolocation. John wanted to how to scale support hours to customers using the product, likely a very common reason for geolocation for any SaaS or customer-centric tools. His solution uses a free IP address lookup service, Python, and Go, and free [Maxmind data](https://www.maxmind.com/en/geoip2-services-and-databases). The example code is available [here](https://github.com/johnpaulashenfelter/railsconf2014-ml/tree/master/ex2_geolocation).
 
-With these tools, gender assignment & geolocation reveals basic but valuable information about your users. In the ecommerce space, determining gender ratios and geolocation may help determine the target of marketing and/or product development efforts, for example targeting a specific marketing message to a female East Coast demographic.
+With these tools, gender assignment & geolocation reveals basic but valuable information about your users. In the ecommerce space, determining gender ratios and geolocation may help determine the target of marketing and/or product development efforts, for example targeting a specific marketing message to a female east coast demographic.
 
 ### Act 2: Clustering
 
