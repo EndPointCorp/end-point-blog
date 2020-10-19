@@ -13,19 +13,19 @@ For its 20th anniversary in 2019, Dave and Andy created a new edition. They upda
 
 ### A classic
 
-This book is part of our company’s [“work philosophy canon”](https://www.endpoint.com/blog/2018/05/07/work-philosophy-canon) and that I ask every software developer at End Point to read, so for that reason and others I wanted to be familiar with the new edition and make sure it is still something I want to recommend so broadly.
+This book is part of our company’s [“work philosophy canon”](https://www.endpoint.com/blog/2018/05/07/work-philosophy-canon) that I ask every software developer at End Point to read, so for that reason and others I wanted to be familiar with the new edition and make sure it is still something I want to recommend so broadly.
 
-The book is also required reading for university courses at Cornell ([CS 3110: Data Structures and Functional Programming](https://www.cs.cornell.edu/courses/cs3110/2020sp/reflections.html)) and the University of Washington ([CSE 331: Software Design and Implementation](https://courses.cs.washington.edu/courses/cse331/19au/quizzes.html)).
+The book is also required reading for university courses at Cornell ([CS 3110: Data Structures and Functional Programming](https://www.cs.cornell.edu/courses/cs3110/2020sp/reflections.html)) and the University of Washington ([CSE 331: Software Design and Implementation](https://courses.cs.washington.edu/courses/cse331/19au/quizzes.html)), probably among others!
 
-I first read this book 19 years ago and really enjoyed it. I found that it clearly expressed many useful concepts I had stumbled upon in my own programming experience. More importantly, it showed me other helpful tips and warned of pitfalls. Having that all collected in book form with concise, memorable chapter names and tips gave me and others a shared vocabulary to use in our work.
+I first read this book 19 years ago and really enjoyed it. I found that it clearly expressed many useful concepts I had stumbled upon in my own programming experience. More importantly, it gave me other helpful guidance and warned of pitfalls. Having that all collected in book form with concise, memorable chapter names and tips gave me more shared vocabulary to use with others in our work.
 
-I also enjoyed reading the new 20th anniversary edition. It did not have the same personal impact, which is to be expected since I am at a very different point in my programming career, technical reading, and life experience. But I think the book has great or even increased power for new readers.
+I also enjoyed reading the new 20th anniversary edition. It did not have the same personal impact, which is to be expected since I am at a very different point in my programming career, technical reading, and life experience. But I think the new edition has as great or even increased power for new readers.
 
 ### Overview of changes
 
 The authors estimate that around 75% of the text has changed, and that seems about right. A few areas that stood out to me were:
 
-* The now widely-known adage “don’t repeat yourself” originally meant primarily not to duplicate knowledge, that each piece of data should appear in only one canonical location. Over time, “don’t repeat yourself” has been more often used to preach against copying and pasting code. While that is also a good general rule, it has been oversimplified and turned into a blanket prohibition. Dave & Andy mention cases where duplicating code is the right thing to do, because the problem space is not the same and factoring out all such code duplication will make later changes far more complicated and the code more difficult to change.
+* The now widely-known adage “don’t repeat yourself” originally meant primarily not to duplicate knowledge, that each piece of data should appear in only one canonical location. Over time, “don’t repeat yourself” has been more often used to preach against copying and pasting code. While that is also a good general rule, it has been oversimplified and turned into a blanket prohibition. Dave & Andy mention cases where duplicating code is the right thing to do, because the problem space is not the same and factoring out all such code duplication will make later changes far more complicated as the code has to behave differently for different callers.
 
 * Computer security was not nearly as big of a concern when they were writing the first edition in the late 1990s, and now that almost every computer is networked and attackers are motivated to reach every system from anywhere in the world, they gave the topic more attention.
 
@@ -33,7 +33,7 @@ The authors estimate that around 75% of the text has changed, and that seems abo
 
 * Unit testing was far less common in the late ’90s, and there were few good test frameworks, so they recommended you write your own. Now there are many good test frameworks for every language, so they of course recommend you choose one of those and use it.
 
-* Dave writes “A Confession” on page 223, telling us that writing tests for 30+ years made testing so much a part of the way he thinks and programs, that he now writes testable interfaces even when he doesn’t write tests. He isn’t saying that testing is no longer important, but rather that it’s not a religion, that it can and should be examined by experienced programmers, and it has important effects on the programmer aside from the tests themselves.
+* Dave writes “A Confession” on page 223: He tells us that writing tests for 30+ years made testing so much a part of the way he thinks and programs, that he now writes testable interfaces even when he doesn’t write tests. He isn’t saying that testing is no longer important, but rather that it’s not a religion, that it can and should be examined by experienced programmers, and it has important effects on the programmer aside from the tests themselves.
 
 * The old edition had checklists scattered throughout, and collected in the pull-out card at the end. The new edition doesn’t have checklists anymore, except the Debugging Checklist on page 97. I think that’s ok. They weren’t something I ever referred back to.
 
@@ -112,7 +112,7 @@ The new edition’s PDF version does not include the pull-out card with tips tha
 
 As you can see, there are many new tips. The text has been updated. It is still of excellent quality. So should you get the new edition?
 
-I mentioned earlier two university courses that use the book. In both courses the professors allowed students to use either the original 2000 version or the 2019 version. That seems like the right thing to do to me as well.
+I mentioned earlier two university courses that use the book. In both courses the professors allow students to use either the original 1999 version or the 2019 version. That seems like the right thing to do to me as well.
 
 If you already have the old edition of the book, I don’t think it’s necessary to rush out and buy the new edition. The old one is still quite good and relevant, and you’ll be learning a bit of software development history by reading the older one.
 
@@ -122,7 +122,7 @@ If you do not yet have the book, or if you will be going over it with others who
 
 I am glad that Dave and Andy updated their book. Their updates make sense and make the book more relevant to present-day readers.
 
-Relatedly, it would be good to also see an update of the book *Practices of an Agile Developer* by Venkat Subramaniam and Andy. That is coming up on 15 years old itself. Perhaps some of its topics have been incorporated in the new edition of *The Pragmatic Programmer*, but as I review the table of contents, it looks like it is still mostly additive. I have cited its important maxim “Different Makes a Difference” so often that I thought it was from *The Pragmatic Programmer* instead!
+Relatedly, it would be good to also see an update of the also excellent book *Practices of an Agile Developer* by Venkat Subramaniam and Andy. That is coming up on 15 years old itself. Perhaps some of its topics have been incorporated in the new edition of *The Pragmatic Programmer*, but as I review the table of contents, it looks like it is still mostly additive. I have cited its important maxim “Different Makes a Difference” so often that I thought it was from *The Pragmatic Programmer* instead!
 
 I’ll close with this good observation and advice from Andy in their Changelog podcast interview:
 
