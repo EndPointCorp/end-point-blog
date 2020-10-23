@@ -6,6 +6,12 @@ tags: ros
 
 Migrating from ROS1 to ROS2 is much more than a "flip of a switch." The internals of ROS are fundamentally changed, client libraries and their interfaces have been rewritten. The benefits of these changes are significant for users embedding ROS in a product.
 
+Some of these benefits include:
+* First class support for real-time and embedded platforms such as microcontrollers.
+* Higher reliability under less-than-ideal network conditions.
+* Distributed, cooperative robotics systems without a single "master".
+* More prescribed patterns for building systems with ROS.
+
 Because official ROS1 support ends in 2025, the clock is ticking for all ROS1 users to migrate their projects to ROS2. While the amount of work required to port a project scales with its size, codebases of all sizes should have a migration plan.
 
 By carefully approaching your ROS2 migration, disruption to ongoing development and maintenance of the project can be minimized while maintaining the mission critical reliability required in the robotics domain.
