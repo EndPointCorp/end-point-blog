@@ -20,7 +20,7 @@ By carefully approaching your ROS2 migration, disruption to ongoing development 
 
 Some ROS interfaces are compatible with both ROS1 and ROS2. These are a great place to start, because changes can be tested in your familiar ROS1 environment with minimal disruption.
 
-ROS1 packages using older distributions should begin by upgrading to the noetic distribution, the final ROS1 release. This release can be expected to have the most cross compatibility with ROS2, including Python 3 and newer package metadata formats.
+ROS1 packages using older distributions should begin by upgrading to the "noetic" distribution, the final ROS1 release. This release can be expected to have the most cross compatibility with ROS2, including Python 3 and newer package metadata formats.
 
 ### Porting the Code
 
