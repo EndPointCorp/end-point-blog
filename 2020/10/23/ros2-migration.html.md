@@ -20,6 +20,10 @@ Because official ROS 1 support ends in 2025, the clock is ticking for all ROS 
 
 By carefully approaching your ROS 2 migration, disruption to ongoing development and maintenance of the project can be minimized while maintaining the mission critical reliability required in the robotics domain.
 
+### Dependencies
+
+If your project depends on any of the numerous free open source ROS packages, they will need to be ported to ROS 2. Much progress has been made here, but it is not complete. Converging compatibility of all dependencies can be done in parallel with ongoing development, before making any changes to your own codebase.
+
 ### Forward Compatibility
 
 Some ROS interfaces are compatible with both ROS 1 and ROS 2. These are a great place to start, because changes can be tested in your familiar ROS 1 environment with minimal disruption.
