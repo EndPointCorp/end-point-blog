@@ -1,7 +1,7 @@
 ---
 author: "Elizabeth Garrett Christensen"
 title: "National Braille Press Releases Redesigned Website"
-tags: clients, design
+tags: clients, design, case-study, interchange, accessibility
 gh_issue_number: 1552
 ---
 
@@ -24,5 +24,3 @@ NBP’s wide reach in their community and long history means their website has h
 NBP’s user base is heavily centered in the low-vision community, so compliance with user accessibility standards was a main focus of the redesign effort. End Point worked with NBP to make sure all of the engineers on the project were trained in the Web Content Accessibility Guidelines (WCAG 2.0) AA standards and guidelines. Testing for compliance was done with [AXE](https://chrome.google.com/webstore/detail/axe/lhdoppojpmngadmnindnejefpokejbdd?hl=en-US) and [WAVE](https://wave.webaim.org/) Chrome accessibility plugins. NBP also completed direct user testing with screen readers and devices. 
 
 Congrats again to NBP on completing this project with us!
-
-

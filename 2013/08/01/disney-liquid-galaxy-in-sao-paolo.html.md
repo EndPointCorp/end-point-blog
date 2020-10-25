@@ -1,7 +1,7 @@
 ---
 author: Dave Jenkins
 gh_issue_number: 841
-tags: clients, liquid-galaxy
+tags: clients, liquid-galaxy, kamelopard
 title: Disney Liquid Galaxy in Sao Paolo
 ---
 

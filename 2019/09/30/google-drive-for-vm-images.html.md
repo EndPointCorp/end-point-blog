@@ -41,9 +41,7 @@ For “just in case” old archival data, these risks are pretty reasonable and 
 
 ### Google Drive
 
-Then we remembered that we have Google Drive as part of G Suite, and even though we don’t normally use it this way, it could be a place to store infrequently-needed large archival data such as this.
-
-Google’s G Suite Business edition currently costs $12 USD per user per month (plus tax). It includes 1 TB of cloud storage per user if you have fewer than 5 users, and unlimited cloud storage if you have 5 or more users. “Unlimited” sounds pretty helpful for this scenario. 😉
+Then we remembered that we have Google Drive as part of G Suite, and even though we don’t normally use it this way, it offers a lot of space and could be a place to store infrequently-needed large archival data such as this.
 
 Many of us think of Google Drive primarily as its browser-based folder and file interface, a graphical consumer or business user service. So our instinct is to first download a file our desktop and then upload it from there to Google Drive using the browser.
 

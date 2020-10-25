@@ -3,6 +3,9 @@ author: "Dylan Wooters"
 title: Salesforce Integration with Node.js
 tags: nodejs, javascript, integration
 gh_issue_number: 1612
+featured: yes
+featured_blurb: "Connecting to Salesforce using JSforce; advanced topics like working with lots of data and streaming with Socket.IO"
+background_url: "/blog/2020/03/27/salesforce-integration-with-node/fulton-ceiling.jpg"
 ---
 
 ![Patterned roof](/blog/2020/03/27/salesforce-integration-with-node/fulton-ceiling.jpg)
@@ -258,4 +261,3 @@ Then update a contact in Salesforce, changing the contact’s first name. If eve
 ### Summary
 
 Node.js and JSforce provide a straightforward and elegant way to interact with Salesforce. Whether you have an existing Node API that needs to work with Salesforce, or you are building a new application that is powered by Salesforce data, consider the recipes above as stepping stones for completing your project.
-

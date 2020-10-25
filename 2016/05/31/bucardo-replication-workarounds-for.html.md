@@ -1,7 +1,7 @@
 ---
 author: Greg Sabino Mullane
 gh_issue_number: 1231
-tags: bucardo, postgres
+tags: bucardo, postgres, database
 title: Bucardo replication workarounds for extremely large Postgres updates
 ---
 
@@ -120,7 +120,7 @@ the session_replication_role feature to prevent the triggers from firing. Of cou
 prevent *all* of the triggers on the table from firing. If there are some non-Bucardo triggers 
 that must fire during this update, you might wish to temporarily set them as ALWAYS triggers. 
 
-## Solution one: manual copy
+### Solution one: manual copy
 
 ```
 ## First, stop Bucardo. Although not necessary, the databases are going to be busy enough
@@ -147,7 +147,7 @@ $ grep Totals log.bucardo
 (11144) [Tue May 16 23:59:00 2016] KID (fiveway) Totals: deletes=126 inserts=73 conflicts=0
 ```
 
-## Solution two: truncate the delta
+### Solution two: truncate the delta
 
 As a second solution, what about the event involving a junior DBA who made all those updates on one 
 of the source databases without disabling triggers? When this happens, you would probably find that 
@@ -228,7 +228,7 @@ $ for db in gamma delta epsilon; do \
 Note: if your tables have a lot of constraints or indexes, you may want to disable those 
 to speed up the COPY. Or even turn fsync off. But that's the topic of another post.
 
-## Solution three: delta excision
+### Solution three: delta excision
 
 Our final solution is a variant on the last one. As before, the junior DBA has done a mass 
 update of one of the databases involved in the Bucardo sync. But this time, you decide it 

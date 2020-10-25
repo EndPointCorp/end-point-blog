@@ -1,19 +1,19 @@
 ---
 author: Steph Skardal
 gh_issue_number: 771
-tags: interchange, javascript, jquery, maps
-title: Interchange Case Study with Google Maps API
+tags: interchange, javascript, jquery, maps, case-study, clients
+title: Paper Source Case Study with Google Maps API
 ---
 
-<img border="0" src="/blog/2013/03/29/paper-source-case-study-with-google/image-0.png"/>
+<img alt="Basic Google map with location markers" border="0" src="/blog/2013/03/29/paper-source-case-study-with-google/image-0.png"/>
 
-Basic Google map with location markers.
+Recently, I’ve been working with the [Google Maps API](https://developers.google.com/maps/) for Paper Source, one of our large [Interchange](/technology/perl-interchange) clients with over 40 physical stores throughout the US.
 
-Recently, I’ve been working with the [Google Maps API](https://developers.google.com/maps/) for one of our large [Interchange](/technology/perl-interchange) clients with over 40 physical stores throughout the US. On their website, they had previously been managing static HTML pages for these 40 physical stores to share store information, location, and hours. They wanted to move in the direction of something more dynamic with interactive maps. After doing a bit of research on search options out there, I decided to go with the Google Maps API. This article discusses basic implementation of map rendering, search functionality, as well as interesting edge case behavior.
+On their website, they had previously been managing static HTML pages for these 40 physical stores to share store information, location, and hours. They wanted to move in the direction of something more dynamic with interactive maps. After doing a bit of research on search options out there, I decided to go with the Google Maps API. This article discusses basic implementation of map rendering, search functionality, as well as interesting edge case behavior.
 
 ### Basic Map Implementation
 
-In it’s most simple form, the markup required for adding a basic map with markers is the shown below. Read more at [Google Maps Documentation](https://developers.google.com/maps/).
+In its most simple form, the markup required for adding a basic map with markers is the shown below. Read more at [Google Maps Documentation](https://developers.google.com/maps/).
 
 ##### HTML
 
@@ -55,9 +55,7 @@ $.each(all_locations, function(i, loc) {
 
 ### Building Search Functionality
 
-<img border="0" src="/blog/2013/03/29/paper-source-case-study-with-google/image-1.png" width="700"/>
-
-Search interface. Search results are listed on the left, and map with markers is shown on the right.
+<img alt="Search interface: search results are listed on the left, and map with markers is shown on the right" border="0" src="/blog/2013/03/29/paper-source-case-study-with-google/image-1.png" width="700"/>
 
 Next up, I needed to build out search functionality. Google has its own geocoder to allow address searches. Here is the basic markup for running a search:
 

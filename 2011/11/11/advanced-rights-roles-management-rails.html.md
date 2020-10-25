@@ -5,7 +5,7 @@ tags: ruby, rails
 title: Advanced Rights and Roles Management in Rails
 ---
 
-I’ve been working with Phunk, Brian Buchalter, and Evan Tann on a large Rails 3.1 project that has included several unique challenges. One of these challenges is a complex rights, roles, and accessibility system, which I’ll discuss here.
+I’ve been working with Phunk, Brian Buchalter, and Evan Tann on a large Rails 3.1 project that has included several unique challenges. One of these challenges is a complex rights, roles, and access control system, which I’ll discuss here.
 
 Before I wrote any code, I researched existing authorization systems, and came across [this article](http://steffenbartsch.com/blog/2008/08/rails-authorization-plugins/) which lists a few of the popular authorization gems in Rails. After reading through the documentation on several more advanced current authorization gems, I found that no gem offered the level of complexity we needed, where rights are layered on top of roles and can be mapped out to specific actions. Because the client and my team were most familiar with [acl9](https://github.com/be9/acl9), we chose to work with it and layer rights on top of the existing access control subsystem. Here’s a look at the data model we were looking for:
 
@@ -125,7 +125,7 @@ end
 Note that in actuality, our application has additional complexities, such as:
 
 - The relationship between rights and $subject is polymorphic, where $subject is a user or a role. This slightly complicates the has_and_belongs_to_many relationship between rights and users or roles. The can_do_method? predicate is updated to consider both user assigned rights and role assigned rights.
-- Performance is a consideration in this application, so Rails low-level caching may be leveraged to minimize accessibility lookup.
+- Performance is a consideration in this application, so Rails low-level caching may be leveraged to minimize access control lookup.
 - There is a notion of a global right and an ownership-level right, which means that a user with an ownership-level right may have the ability to do certain method only if they own the thing. A user with a global right has the ability to do the method regardless of ownership. This complicates our can_do_method? predicate further, to determine if the user has the global right or ownership-level right for that method on that thing.
 - A few methods have more complex business logic which determine whether or not a user has the ability to do that method. In those cases, an additional access_control allow rule is created, and distinct conditional predicate is used to determine if the user can do that method (i.e. allow_generic_method? is not used for these actions).
 

@@ -3,6 +3,9 @@ author: "Dave Jenkins"
 title: "Downtown San Diego Liquid Galaxy"
 tags: liquid-galaxy
 gh_issue_number: 1653
+featured: yes
+featured_blurb: "New Liquid Galaxy system at Downtown San Diego Partnership lets public engage with immersive data models"
+background_url: "/blog/2020/07/27/downtown-san-diego-liquid-galaxy/san_diego_lg-1.jpg"
 ---
 
 ![](/blog/2020/07/27/downtown-san-diego-liquid-galaxy/san_diego_lg-1.jpg)

@@ -3,6 +3,9 @@ author: "Will Plaut"
 title: "Designing flexible CI pipelines with Jenkins and Docker"
 tags: jenkins, docker, groovy
 gh_issue_number: 1633
+featured: yes
+featured_blurb: "Continuous integration benefits of Jenkins and Docker for your team"
+background_url: "/blog/2020/05/25/flexible-ci-pipelines-jenkins-docker/pipes.jpg"
 ---
 
 ![Pipes](/blog/2020/05/25/flexible-ci-pipelines-jenkins-docker/pipes.jpg)

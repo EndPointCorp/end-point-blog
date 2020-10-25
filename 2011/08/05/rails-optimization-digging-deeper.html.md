@@ -9,7 +9,7 @@ I recently wrote about [raw caching performance in Rails](/blog/2011/07/12/raw-c
 
 In my application, the “show” action loaded at ~200 ms/request with low concurrency, with the use of Rails [fragment caching](https://apidock.com/rails/v2.0.0/ActionController/Caching/Fragments). And with high concurrency, the requests shot up to around 2000 ms/request. This wasn’t cutting it! So, I pursued implementing full-page caching with a follow-up AJAX request, outlined by this diagram:
 
-<img alt="" border="0" id="BLOGGER_PHOTO_ID_5637405702799042498" src="/blog/2011/08/05/rails-optimization-digging-deeper/image-0.png" style="display:block; margin:0px auto 10px; text-align:center;cursor:pointer; cursor:hand;" width="700"/>
+<img alt="" border="0" src="/blog/2011/08/05/rails-optimization-digging-deeper/image-0.png" style="display:block; margin:0px auto 10px; text-align:center;" width="700"/>
 
 First, the fully-cached is loaded (quickly). Next, an AJAX request is made to retrieve access information. The access information returns a JSON object with information on whether or not there is a user, and if that user has edit access to that thing. If there is no user, the page stays as is. If there is a user, but he does not have edit permissions, the log out button is shown and the username is populated. If there is a user and he has edit permissions, the log out button is shown, the username is populated, and additional buttons requiring edit access are shown.
 
@@ -92,11 +92,11 @@ end
 
 There are some additional notes to mention:
 
-- If a user were to hack the AJAX or JavaScript, server-side validation is still being performed when an “edit” action is submitted. In other words, if a hacker somehow enabled an edit button to show up and post an edit, a server-side response would prohibit the update because the hacker does not have appropriate accessibility.
+- If a user were to hack the AJAX or JavaScript, server-side validation is still being performed when an “edit” action is submitted. In other words, if a hacker somehow enabled an edit button to show up and post an edit, a server-side response would prohibit the update because the hacker does not have appropriate access.
 - HTML changes were made to accommodate this caching behavior, which was a bit tricky. HTML has to handle all potential use cases (no user, user & no edit access, user & edit access). jQuery itself can also be used to introduce new elements per use case.
 - The access level AJAX request is also hitting more low-level Rails caches: For example, the array of **things** that a user has edit permissions is cached and the cache is cleared with standard Rails sweepers. With this additional caching component, the access level AJAX request is hitting the database minimally.
 - Performance optimization scenarios such as this make an argument against inline editing of resources. If there were a backend admin interface to allow editing of **things**, full-page caching would be more straight-forward to implement.
 
 ### Conclusion
 
-With this functionality, fully cached pages are served with an average of less than 5 ms/request, and the AJAX accessibility request appears to be around 20 ms/request (although this is harder to test with simple command line tools). This is an improvement over the 200 ms/request initially implemented. Additionally, requests at a high concurrency don’t bog down the system as much.
+With this functionality, fully cached pages are served with an average of less than 5 ms/request, and the AJAX access request appears to be around 20 ms/request (although this is harder to test with simple command line tools). This is an improvement over the 200 ms/request initially implemented. Additionally, requests at a high concurrency don’t bog down the system as much.

@@ -1,7 +1,7 @@
 ---
 author: Josh Tolley
 gh_issue_number: 762
-tags: google-earth, liquid-galaxy, open-source, ruby, tools
+tags: google-earth, liquid-galaxy, open-source, ruby, kamelopard
 title: Kamelopard Updates
 ---
 

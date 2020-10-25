@@ -2,10 +2,8 @@
 author: Ben Witten
 gh_issue_number: 1257
 tags: liquid-galaxy
-title: 'Liquid Galaxy featured in Realtor Magazine '
+title: 'Liquid Galaxy featured in Realtor Magazine'
 ---
-
-
 
 <div class="separator" style="clear: both; text-align: center;"><a href="/blog/2016/09/30/liquid-galaxy-featured-in-realtor/image-0-big.png" imageanchor="1" style="clear: right; float: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" height="284" src="/blog/2016/09/30/liquid-galaxy-featured-in-realtor/image-0.png" width="320"/></a></div>
 
@@ -18,5 +16,3 @@ In a section titled “Amping up Office Offerings,” author Meg White writes �
 The article continues by mentioning the Liquid Galaxy’s standard configuration of an array of 55-inch screens. Users have the ability to enter any address they’d like, as well as explore the world using a 3D joystick. In addition, the Liquid Galaxy can display key information to real estate investors and developers, like population density and nearby transportation. The system is a great eye-catcher and crowd-pleaser, and outside of VR technology and actually being inside a building, it’s the only large and immersive way to view a new property.
 
 Real estate is one of the industries that effectively utilizes Liquid Galaxy the most. If you would like to learn more, you can visit our [Liquid Galaxy website](https://liquidgalaxy.endpoint.com/) or [contact us here](https://liquidgalaxy.endpoint.com/#contact).
-
-

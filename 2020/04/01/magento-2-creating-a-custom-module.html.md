@@ -3,9 +3,12 @@ author: "Juan Pablo Ventoso"
 title: "Magento 2: Creating a custom module"
 tags: magento, php, ecommerce
 gh_issue_number: 1615
+featured: yes
+featured_blurb: "How to maintainably modify logic where Magento doesn’t provide a way"
+background_url: "/blog/2020/04/01/magento-2-creating-a-custom-module/bridge-wires.jpg"
 ---
 
-![Bridge with wires](magento-2-creating-a-custom-module/bridge-wires.jpg)
+![Bridge with wires](/blog/2020/04/01/magento-2-creating-a-custom-module/bridge-wires.jpg)
 
 [Photo](https://unsplash.com/photos/q4ZBGVzJskE) by [Babatunde Olajide](https://unsplash.com/@olajidetunde), cropped from original
 

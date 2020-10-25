@@ -126,7 +126,7 @@ The above method would be a good candidate for Rails low-level caching or altern
 
 ### Sending Files
 
-As I mentioned above, download files should not be stored in the public directory for public accessibility. From the download list page, the “Download Now” link maps to the following method in the downloads controller:
+As I mentioned above, download files should not be stored in the public directory for public access. From the download list page, the “Download Now” link maps to the following method in the downloads controller:
 
 ```ruby
 class DownloadsController < ApplicationController
