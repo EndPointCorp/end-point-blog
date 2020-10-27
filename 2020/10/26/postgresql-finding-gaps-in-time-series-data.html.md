@@ -6,7 +6,6 @@ gh_issue_number: 1678
 ---
 
 ![Mosaic 18](/blog/2020/10/26/postgresql-finding-gaps-in-time-series-data/banner.jpg)
-
 [Photo](https://www.flickr.com/photos/phoebe_photo/33735147071/) by [Phoebe Baker](https://www.flickr.com/photos/phoebe_photo/)
 
 A client has a number of data feeds that are supposed to update at regular intervals. Like most things in the universe (thanks, entropy!) this does not always end up working out the way we want. We recently discovered that some of the data had not loaded as expected, and were brought in to assess the extent of the issue.
