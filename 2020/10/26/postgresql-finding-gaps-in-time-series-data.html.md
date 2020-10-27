@@ -2,33 +2,22 @@
 author: "David Christensen"
 title: "Detecting gaps in time-series data in PostgreSQL"
 tags: postgres, database
+gh_issue_number: 1678
 ---
 
 ![Mosaic 18](/blog/2020/10/26/postgresql-finding-gaps-in-time-series-data/banner.jpg)
-[Photo](https://www.flickr.com/photos/phoebe_photo/33735147071/) by [Phoebe Baker](https://www.flickr.com/photos/phoebe_photo/), under Public Domain.
 
+[Photo](https://www.flickr.com/photos/phoebe_photo/33735147071/) by [Phoebe Baker](https://www.flickr.com/photos/phoebe_photo/).
 
-A client has a number of data feeds that are supposed to update at regular intervals.  Like most
-things in the universe (thanks, entropy!) this does not always end up working out the way we want.
-We recently discovered that some of the data had not loaded as expected, and were brought in to
-assess the extent of the issue.
+A client has a number of data feeds that are supposed to update at regular intervals. Like most things in the universe (thanks, entropy!) this does not always end up working out the way we want. We recently discovered that some of the data had not loaded as expected, and were brought in to assess the extent of the issue.
 
-There were 2 main feeds that had issues, with different types of time data.  The first had
-date-based data with batches and the second had full-range timestamps.  We will examine each type
-individually, since they have similar---but not the same---characteristics.
+There were 2 main feeds that had issues, with different types of time data. The first had date-based data with batches and the second had full-range timestamps. We will examine each type individually, since they have similar — but not the same — characteristics. 
 
-Date-based, with batches
-========================
+### Date-based, with batches
 
-In the first data feed there was a table which tracked which files had been loaded by file date and
-batch number (there was a morning/evening batch designated by a `batch` field with either `A` or
-`B`).  Since the files that had not loaded successfully did not have entries in this table we could
-find that one or both of the day's batch files would be missing, but since the table tracked those
-which *did* get loaded, we needed to turn this list into something useful.
+In the first data feed there was a table which tracked which files had been loaded by file date and batch number (there was a morning/evening batch designated by a `batch` field with either `A` or `B`). Since the files that had not loaded successfully did not have entries in this table we could find that one or both of the day’s batch files would be missing, but since the table tracked those which *did* get loaded, we needed to turn this list into something useful.
 
-Any time I find myself considering sequences of data, I remember my friend `generate_series()`.
-While `generate_series()` is often called with numeric data, it can also generate date ranges, which
-can come in very handy:
+Any time I find myself considering sequences of data, I remember my friend `generate_series()`. While `generate_series()` is often called with numeric data, it can also generate date ranges, which can come in very handy:
 
 ```
 postgres=# SELECT * FROM generate_series('2020-01-01'::date, '2020-10-01'::date, interval '1 day') limit 10;
@@ -47,7 +36,7 @@ postgres=# SELECT * FROM generate_series('2020-01-01'::date, '2020-10-01'::date,
 (10 rows)
 ```
 
-Let's create our sample table and populate with data to simulate the situation we ran into:
+Let’s create our sample table and populate with data to simulate the situation we ran into:
 
 ```
 CREATE TABLE loader_manifest (filename text, batch char, status char, processed_at timestamptz);
@@ -84,15 +73,9 @@ postgres=# select * from loader_manifest limit 5;
 (5 rows)
 ```
 
-Since either the batch or entire days could have been missing we basically needed to generate the
-list of expected combinations and use a `LEFT JOIN` to find which values in this table were missing.
-While this example has only 2 batch options, this solution would work for additional numbers of
-expected batches.
+Since either the batch or entire days could have been missing we basically needed to generate the list of expected combinations and use a `LEFT JOIN` to find which values in this table were missing.  While this example has only 2 batch options, this solution would work for additional numbers of expected batches.
 
-Because `generate_series()` is a set-returning function we can use it as a source in our `FROM`
-clause, in combination with the explicit values we want for our `batch` field.  We also will need to
-extract the date pieces out in a way that we can match the expected `filename` format.  We use
-something similar to the following:
+Because `generate_series()` is a set-returning function we can use it as a source in our `FROM` clause, in combination with the explicit values we want for our `batch` field. We also will need to extract the date pieces out in a way that we can match the expected `filename` format. We use something similar to the following:
 
 ```
 postgres=# SELECT to_char(filename,'YYYYMMDD') as filename, batch FROM generate_series('2020-01-01'::date, '2020-10-01'::date, interval '1 day') as filename, (values ('A'),('B')) as batches(batch) limit 10;
@@ -111,8 +94,7 @@ postgres=# SELECT to_char(filename,'YYYYMMDD') as filename, batch FROM generate_
 (10 rows)
 ```
 
-So as we can see, this will generate the list of all expected filename/batch combinations that we
-can then check the original table against for missing values:
+So as we can see, this will generate the list of all expected filename/batch combinations that we can then check the original table against for missing values:
 
 ```sql
 SELECT
@@ -144,24 +126,15 @@ And the results from our sample dataset:
 (4 rows)
 ```
 
-As expected, this has identified the rows that we know are missing from the table.  Success!
+As expected, this has identified the rows that we know are missing from the table. Success!
 
-Non-date-based
-==============
+### Non-date-based
 
-The second type of query had to identify similar gaps in loaded data, but used a different approach.
-This data feed had a `processing_time_utc` field which would vary, but we expected this to have
-fairly regular updates.  This data feed could be processed somewhat erratically, but if the data was
-complete we would expect to see records with `processing_time_utc` approximately every 10 minutes.
-If we found that there were gaps much larger than every 10 minutes we could suspect missing data and
-would need to locate/reprocess the underlying data files.
+The second type of query had to identify similar gaps in loaded data, but used a different approach. This data feed had a `processing_time_utc` field which would vary, but we expected this to have fairly regular updates. This data feed could be processed somewhat erratically, but if the data was complete we would expect to see records with `processing_time_utc` approximately every 10 minutes. If we found that there were gaps much larger than every 10 minutes we could suspect missing data and would need to locate/reprocess the underlying data files.
 
-This approach also uses `generate_series()`, but since we do not have a single date that we can
-check existence of, the `JOIN` approach does not work directly.  This means that in order to find
-the gaps we care about, the need to check that at least *some* data exists within each timeperiod in
-question.
+This approach also uses `generate_series()`, but since we do not have a single date that we can check existence of, the `JOIN` approach does not work directly. This means that in order to find the gaps we care about, the need to check that at least *some* data exists within each timeperiod in question.
 
-Here's the query:
+Here’s the query:
 
 ```sql
 SELECT
@@ -172,25 +145,12 @@ LEFT JOIN LATERAL
 WHERE gap.day IS NULL;
 ```
 
-The key here is that we use `generate_series()` with an `INTERVAL` of the window size we care about,
-and then use that same `INTERVAL` when checking for any row's existence that fits that criteria.
-With the `LIMIT 1` on the `gap` subquery, we stop at the first record we find in that range, and
-thus we can exclude in the antijoin to find our results.
+The key here is that we use `generate_series()` with an `INTERVAL` of the window size we care about, and then use that same `INTERVAL` when checking for any row’s existence that fits that criteria. With the `LIMIT 1` on the `gap` subquery, we stop at the first record we find in that range, and thus we can exclude in the antijoin to find our results.
 
-I should note that this approach works regardless of the size of the logical date partitions, and
-can be used to identify all gaps of at least the interval size we are looking at; the same query can
-check for gaps every 10 minutes as for hourly, daily, weekly, etc; it is purely a matter of
-selecting the proper interval size in the query in question.
+I should note that this approach works regardless of the size of the logical date partitions, and can be used to identify all gaps of at least the interval size we are looking at; the same query can check for gaps every 10 minutes as for hourly, daily, weekly, etc; it is purely a matter of selecting the proper interval size in the query in question.
 
-Also note that the `processing_time_utc` field is indexed, or this would be painfully slow; we use a
-`LATERAL` query to pull in one specific row that matches the time interval we care about and ignore
-any others.  (Note that this technique finds only the cases where *no* data is present for the time
-interval, not less than expected.  You could certainly adapt this approach to that situation by
-using an appropriate query.)
+Also note that the `processing_time_utc` field is indexed, or this would be painfully slow; we use a `LATERAL` query to pull in one specific row that matches the time interval we care about and ignore any others. (Note that this technique finds only the cases where *no* data is present for the time interval, not less than expected. You could certainly adapt this approach to that situation by using an appropriate query.)
 
-Summary
-=======
+### Summary
 
-These approaches definitely come in handy when trying to isolate missing data based on time; which
-tack you take will depend on the expected data present, as well as the granularity in which you
-identify your gaps.
+These approaches definitely come in handy when trying to isolate missing data based on time; which tack you take will depend on the expected data present, as well as the granularity in which you identify your gaps.
