@@ -4,7 +4,7 @@ title: "Craft: A CMS for developers"
 tags: craft, cms, php, docker
 ---
 
-![Banner](craft/banner.png)
+![Banner](craft-a-cms-for-developers/banner.png)
 
 As a software engineer, I thrive and thoroughly enjoy working on fully custom software products. Applications concieved to model and help in the execution of some business process and that are built from the groud up by a team of developers.
 
@@ -100,7 +100,7 @@ Saving database credentials to your .env file ... done
 
 And that's it! Go ahead and open a browser to `localhost` or `127.0.0.1` and you should see your Craft 3 homepage.
 
-![Welcome to Craft](craft/welcome_to_craft.png)
+![Welcome to Craft](craft-a-cms-for-developers/welcome_to_craft.png)
 
 You can start playing with the control panel or the `templates/index.twig` right away.
 
@@ -112,11 +112,11 @@ Craft also allows you to set up [custom fields](https://craftcms.com/docs/3.x/fi
 
 Let's see what that looks like in concrete terms. Now that we have a Craft instance running in `localhost`, go to `localhost/admin` in your browser. You should see Craft's control panel. Click on the "Settings" option in the navigation bar to the left of the screen, then select the "Sections" item under "Content":
 
-![Control Panel > Settings > Sections](craft/control_panel_settings_sections.png)
+![Control Panel > Settings > Sections](craft-a-cms-for-developers/control_panel_settings_sections.png)
 
 Next, click on the "+ New Section" button by the top of the screen and you'll be shown the section creation form. We will create a "News" section so let's fill in the form like this:
 
-![Create a new section](craft/control_panel_new_section.png)
+![Create a new section](craft-a-cms-for-developers/control_panel_new_section.png)
 
 The "Name" and "Handle" fields are pretty self explanatory. The "[Section Type](https://craftcms.com/docs/3.x/entries.html#section-types)" is a concept we haven't discussed yet. We chose "[Channel](https://craftcms.com/docs/3.x/entries.html#channels)" for this one because, for a news section, which is a stream of multiple entries with the same structure, this is the most appropriate.
 
@@ -126,15 +126,15 @@ There are other types: "[Single](https://craftcms.com/docs/3.x/entries.html#sing
 
 Now that we've filled the form, click the "Save and edit entry types" button. This has created our new "News" section and defined the "[entry type](https://craftcms.com/docs/3.x/entries.html#entry-types)" that this section will be able to contain. The control panel now shows this:
 
-![The section's default entry type](craft/control_panel_entry_type.png)
+![The section's default entry type](craft-a-cms-for-developers/control_panel_entry_type.png)
 
 In Craft, a section can contain multiple types of entries. For our purposes with the news section though, just the default one is enough. Click on it, and you'll see an editor where you can select fields that make up that entry type:
 
-![The entry type's fields](craft/control_panel_entry_type_fields.png)
+![The entry type's fields](craft-a-cms-for-developers/control_panel_entry_type_fields.png)
 
 The editor I mentioned before is below the "Field Layout" title. Here's where we can pick and choose which fields make up the entries for the "News" section. We have a fresh installation of Craft though, so we don't have any fields. Let's create a few by going to Settings > Fields.
 
-![Defining new fields](craft/control_panel_new_fields.png)
+![Defining new fields](craft-a-cms-for-developers/control_panel_new_fields.png)
 
 This is where we can define new fields to be used for our entries throughout the site. Click the "+ New Field" button near the top of the screen and you'll be presented with the field creation form where you can specify all manner of details. For now, we just care about "Name", "Handle" and "Field Type", which should be obvious as to what they represent. Let's create three fields:
 
@@ -144,27 +144,27 @@ This is where we can define new fields to be used for our entries throughout the
 
 You should end up with something like this in the control panel's "Fields" page (`localhost/admin/settings/fields`):
 
-![New fields ready](craft/control_panel_three_fields.png)
+![New fields ready](craft-a-cms-for-developers/control_panel_three_fields.png)
 
 Now, if we go back to our "News" section's default entry type (which should be at `http://localhost/admin/settings/sections/1/entrytypes/1` and you can also reach it via Settings > Sections > News > Entry Types > News)...
 
-![New fields for News entries](craft/control_panel_field_layout.png)
+![New fields for News entries](craft-a-cms-for-developers/control_panel_field_layout.png)
 
 You can see how the new fields that we just created are present in the "Field Layout" panel. In order to make these fields available for our "News" entriesm, we just need to drag them into the box named "Content" inside the greyish, cuadriculated area.
 
-![New fields for News entries assigned](craft/control_panel_field_layout_applied.png)
+![New fields for News entries assigned](craft-a-cms-for-developers/control_panel_field_layout_applied.png)
 
 Click the "Save" button at the top, and that's all it takes to set up a "Channel" section, an entry type for it, and a few fields.
 
 Now that we've set up the blueprints for them, let's actually create a few entries in the "News" section. To do so, click on the "Entries" link in the navigation bar to the left which shoul've revealed itself by now, and you'll see this screen:
 
-![The entries screen](craft/control_panel_entries.png)
+![The entries screen](craft-a-cms-for-developers/control_panel_entries.png)
 
 If you're used to CMS back ends, them this is pretty familiar. In this screen you can create new entries and browse existing ones.
 
 Click the big red "+ New Entry" button and select "News" in the resulting popup menu. You should see a form with the fields that we defined in the "Field Layout" panel during previous steps. Feel free to create a few news entries. I've created these two:
 
-![Entries created](craft/control_panel_entries_created.png)
+![Entries created](craft-a-cms-for-developers/control_panel_entries_created.png)
 
 ## Craft gives you complete freedom over your front end
 
@@ -197,7 +197,7 @@ The only noteworthy aspect of this template is how we are injecting the data tha
 
 With that done, save and visit any of the entries you created and you'll see something like this:
 
-![Our first entry](craft/website_entry.png)
+![Our first entry](craft-a-cms-for-developers/website_entry.png)
 
 As you can see, this entry's URL is `localhost/news/i-just-learned-that-craft-uses-twig`. Yours will obviously differ depending on the title (and slug) that you gave them.
 
@@ -223,7 +223,7 @@ If you're familiar with any sort of templating language like those included in m
 
 Here's what the homepage looks like now:
 
-![Homepage is ready](craft/homepage_with_links.png)
+![Homepage is ready](craft-a-cms-for-developers/homepage_with_links.png)
 
 You can click on any of the links and they will take you to the specific entry page.
 
