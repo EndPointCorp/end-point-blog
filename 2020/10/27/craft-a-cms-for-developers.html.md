@@ -6,17 +6,17 @@ tags: craft, cms, php, docker
 
 ![Banner](craft-a-cms-for-developers/banner.png)
 
-As a software engineer, I thrive and thoroughly enjoy working on fully custom software products. Applications concieved to model and help in the execution of some business process and that are built from the groud up by a team of developers.
+As a software engineer, I thrive and thoroughly enjoy working on fully custom software products. Applications conceived to model and help in the execution of some business process and that are built from the ground up by a team of developers.
 
 Such projects are often complex and expensive though, and for some clients, they can be overkill. Some clients come up with requirements that are better served by off the shelf software solutions. One group of such off the shelf solutions are [Content Management Systems](https://en.wikipedia.org/wiki/Content_management_system). As a rule of thumb, if a client wants a website whose main purpose is to showcase some content, their brand or image, and custom business logic requirements are limited, then chances are that a CMS will fit the bill nicely.
 
-Lately we've been using the [Craft CMS](https://craftcms.com/) for a certain client that meets the aforementioned criteria, and I gotta say, I've been pleasantly suprised by the developer experience it offers.
+Lately we've been using the [Craft CMS](https://craftcms.com/) for a certain client that meets the aforementioned criteria, and I gotta say, I've been pleasantly surprised by the developer experience it offers.
 
 In this article I'm going to talk through a few of the key aspects of Craft that make me think that really, it's a CMS made for developers. So let's get started:
 
 ## Craft is easy to get up and running
 
-Craft is really just a [PHP](https://www.php.net/) application. And it is as typical as modern PHP applications go, capable of being initially set up with [Composer](https://getcomposer.org/) and of running on top of a [MySQL](https://www.mysql.com/) database (it also supports [Postgres](https://www.postgresql.org/!) and the [Apache web server](https://httpd.apache.org/). [It can all be done via console](https://craftcms.com/docs/3.x/console-commands.html) too, if that's how you roll.
+Craft is really just a [PHP](https://www.php.net/) application. And it is as typical as modern PHP applications go, capable of being initially set up with [Composer](https://getcomposer.org/) and of running on top of a [MySQL](https://www.mysql.com/) database (it also supports [Postgres](https://www.postgresql.org/)!) and the [Apache web server](https://httpd.apache.org/). [It can all be done via console](https://craftcms.com/docs/3.x/console-commands.html) too, if that's how you roll.
 
 If you already have a box with Apache, PHP, MySQL and Composer, it all amounts to little more than creating a MySQL database for Craft, `composer install`ing the Craft package, sorting out some permissions, running `php craft setup`, following the prompts, and finally, configuring a virtual host in Apache to serve the `web` directory from inside where Craft was installed.
 
@@ -39,7 +39,7 @@ If you want to follow along, clone that repo, and you'll end up with this file s
 1 directory, 4 files
 ```
 
-This setup includes two containers: one for running Apache and Craft, and another for running MySQL. The `apache_config/000-default.conf` contains some Apache Virtual Host configuration for serving the site. `docker-compose.yml` defines the whole infrastructure: both contianers, a network that they use to talk to each other, and a volume to persist MySQL database files. The `Dockerfile` is the definition of the image for the container that runs Apache and Craft. Feel free to explore the files, I've made sure to comment them out so that they are easy to understand and modify as you see fit.
+This setup includes two containers: one for running Apache and Craft, and another for running MySQL. The `apache_config/000-default.conf` contains some Apache Virtual Host configuration for serving the site. `docker-compose.yml` defines the whole infrastructure: both containers, a network that they use to talk to each other, and a volume to persist MySQL database files. The `Dockerfile` is the definition of the image for the container that runs Apache and Craft. Feel free to explore the files, I've made sure to comment them out so that they are easy to understand and modify as you see fit.
 
 > If you want to run them, be sure to change the `ServerAdmin` value in `apache_config/000-default.conf`, and the `USER`, `UID`, and `GID` values in `docker-compose.yml` under `services > web > build > args`; according to your environment and user account information.
 
@@ -120,7 +120,7 @@ Next, click on the "+ New Section" button by the top of the screen and you'll be
 
 The "Name" and "Handle" fields are pretty self explanatory. The "[Section Type](https://craftcms.com/docs/3.x/entries.html#section-types)" is a concept we haven't discussed yet. We chose "[Channel](https://craftcms.com/docs/3.x/entries.html#channels)" for this one because, for a news section, which is a stream of multiple entries with the same structure, this is the most appropriate.
 
-There are other types: "[Single](https://craftcms.com/docs/3.x/entries.html#singles)" is a type which you would use for entries that are unique, like a "homepage" or a "contact us" page. For sections of type "Single", there's generally one single entry that fits in them. This is unlike "Channels" which fit multiple entries. The other section type is "[Structure](https://craftcms.com/docs/3.x/entries.html#structures)". This type also accomodates multiple entries, but rather than a stream of ever growing content, it's more appropriate for similar entries that share a certain theme. A "Structrue" section type is appropriate for things like services offered or projects in a portfolio.
+There are other types: "[Single](https://craftcms.com/docs/3.x/entries.html#singles)" is a type which you would use for entries that are unique, like a "homepage" or a "contact us" page. For sections of type "Single", there's generally one single entry that fits in them. This is unlike "Channels" which fit multiple entries. The other section type is "[Structure](https://craftcms.com/docs/3.x/entries.html#structures)". This type also accommodates multiple entries, but rather than a stream of ever growing content, it's more appropriate for similar entries that share a certain theme. A "Structrue" section type is appropriate for things like services offered or projects in a portfolio.
 
 > Learn all about entries, sections, section types and more in [Craft's official docs](https://craftcms.com/docs/3.x/entries.html).
 
@@ -150,19 +150,19 @@ Now, if we go back to our "News" section's default entry type (which should be a
 
 ![New fields for News entries](craft-a-cms-for-developers/control_panel_field_layout.png)
 
-You can see how the new fields that we just created are present in the "Field Layout" panel. In order to make these fields available for our "News" entriesm, we just need to drag them into the box named "Content" inside the greyish, cuadriculated area.
+You can see how the new fields that we just created are present in the "Field Layout" panel. In order to make these fields available for our "News" entries, we just need to drag them into the box named "Content" inside the greyish area.
 
 ![New fields for News entries assigned](craft-a-cms-for-developers/control_panel_field_layout_applied.png)
 
 Click the "Save" button at the top, and that's all it takes to set up a "Channel" section, an entry type for it, and a few fields.
 
-Now that we've set up the blueprints for them, let's actually create a few entries in the "News" section. To do so, click on the "Entries" link in the navigation bar to the left which shoul've revealed itself by now, and you'll see this screen:
+Now that we've set up the blueprints for them, let's actually create a few entries in the "News" section. To do so, click on the "Entries" link in the navigation bar to the left which should've revealed itself by now, and you'll see this screen:
 
 ![The entries screen](craft-a-cms-for-developers/control_panel_entries.png)
 
 If you're used to CMS back ends, them this is pretty familiar. In this screen you can create new entries and browse existing ones.
 
-Click the big red "+ New Entry" button and select "News" in the resulting popup menu. You should see a form with the fields that we defined in the "Field Layout" panel during previous steps. Feel free to create a few news entries. I've created these two:
+Click the big red "+ New Entry" button and select "News" in the resulting pop up menu. You should see a form with the fields that we defined in the "Field Layout" panel during previous steps. Feel free to create a few news entries. I've created these two:
 
 ![Entries created](craft-a-cms-for-developers/control_panel_entries_created.png)
 
@@ -170,13 +170,13 @@ Click the big red "+ New Entry" button and select "News" in the resulting popup 
 
 Most CMSs can be thought of as having two components: a front end and a back end. The back end is where content is authored and the front end is where the style and structure in which the content is presented. In Craft, most of the effort has gone into creating a solid, highly customizable back end.
 
-As we've just seen, Craft comes out of the box with a back end control panel where site administrators and content creators can author new content. As far as front end goes though, Craft has nothing. For a developer well versed in front end web technologies, this is freeing, revelatory and transformative.
+As we've just seen, Craft comes out of the box with a back end control panel where site administrators and content creators can author new content. As far as front end goes though, Craft has nothing. For a developer well versed in front end web technologies, this is freeing and transformative.
 
-Craft makes no assumption and makes no decission for you when it comes to developing your site's look and feel. It gets out of your way and lets you do your job. There's no concept of "theme". There's no obscure framework to learn and integrate into. There's no proprietary templating language to struggle with. In Craft, you are completely free to write HTML, CSS and JS as you see fit to obtain your desired effect for your site.
+Craft makes no assumption and makes no decision for you when it comes to developing your site's look and feel. It gets out of your way and lets you do your job. There's no concept of "theme". There's no obscure framework to learn and integrate into. There's no proprietary templating language to struggle with. In Craft, you are completely free to write HTML, CSS and JS as you see fit to obtain your desired effect for your site.
 
 You do so by developing templates using the tried and true [Twig](https://twig.symfony.com/) templating engine. Which, if you have some experience with PHP, you've most likely already encountered and worked with it. All the content created in the backed is exposed to the Twig templates via objects. Let's see how.
 
-First we need to specify a template for our sections. Continuing with our exmaple, let's assign a template to our "News" section. Go to Settings > Sections > News and scroll down to find the "Site Settings" area. In the table there, type `news` into the "Template" column. Now go to the `template` directory where craft was installed and create a new `news.twig` file. The contents can be simple, like this:
+First we need to specify a template for our sections. Continuing with our example, let's assign a template to our "News" section. Go to Settings > Sections > News and scroll down to find the "Site Settings" area. In the table there, type `news` into the "Template" column. Now go to the `template` directory where craft was installed and create a new `news.twig` file. The contents can be simple, like this:
 
 ```html
 <html lang="en">
@@ -193,7 +193,7 @@ First we need to specify a template for our sections. Continuing with our exmapl
 </html>
 ```
 
-The only noteworthy aspect of this template is how we are injecting the data that we defined in the backend into this template. We do so by using the double curly bracket syntax to reference the `entry` variable. This is provided to Twig by Craft and it contains all the fields that we defined for our entries in the "News" section.
+The only noteworthy aspect of this template is how we are injecting the data that we defined in the back end into this template. We do so by using the double curly bracket syntax to reference the `entry` variable. This is provided to Twig by Craft and it contains all the fields that we defined for our entries in the "News" section.
 
 With that done, save and visit any of the entries you created and you'll see something like this:
 
