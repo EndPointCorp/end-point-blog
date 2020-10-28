@@ -229,6 +229,6 @@ You can click on any of the links and they will take you to the specific entry p
 
 > You can learn more about querying entries in Craft's [official documentation](https://craftcms.com/docs/3.x/entries.html#editing-entries).
 
-## Craft is cool
+## Craft is cool 🕶️
 
 So, in conclusion, I've found that Craft is a cool tool to have in the toolbox. It is a full fledged CMS with tons of customization opportunities for how to model and organize the content, the data, of your site. When it comes to developing the front end though, it gets our of your way and lets you do your job. That, to me, is a big win.
