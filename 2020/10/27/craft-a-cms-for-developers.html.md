@@ -8,7 +8,7 @@ tags: craft, cms, php, docker
 
 As a software engineer, I thrive and thoroughly enjoy working on fully custom software products. Applications conceived to model and help in the execution of some business process and that are built from the ground up by a team of developers.
 
-Such projects are often complex and expensive though, and for some clients, they can be overkill. Some clients come up with requirements that are better served by off the shelf software solutions. One group of such off the shelf solutions are [Content Management Systems](https://en.wikipedia.org/wiki/Content_management_system). As a rule of thumb, if a client wants a website whose main purpose is to showcase some content, their brand or image, and custom business logic requirements are limited, then chances are that a CMS will fit the bill nicely.
+Such projects are often complex and expensive though, and for some clients, they can be overkill. Some clients come up with requirements that are better served by off the shelf software solutions. One group of such solutions are [Content Management Systems](https://en.wikipedia.org/wiki/Content_management_system). As a rule of thumb, if a client wants a website whose main purpose is to showcase some content, their brand or image, and custom business logic requirements are limited, then chances are that a CMS will fit the bill nicely.
 
 Lately we've been using the [Craft CMS](https://craftcms.com/) for a certain client that meets the aforementioned criteria, and I gotta say, I've been pleasantly surprised by the developer experience it offers.
 
@@ -24,7 +24,7 @@ If you already have a box with Apache, PHP, MySQL and Composer, it all amounts t
 
 ## Craft is easy to put in containers
 
-For ease of development and project bootstrapping, I've even created a containerized setup with [Docker](https://www.docker.com/) and [Docker Compose](https://docs.docker.com/compose/) that encapsulates some infrasctructure tailored to my development needs. You can get the relevant files from here: https://github.com/megakevin/craft-cms-docker-bootstrap.
+For ease of development and project bootstrapping, I've even created a containerized setup with [Docker](https://www.docker.com/) and [Docker Compose](https://docs.docker.com/compose/) that encapsulates some infrastructure tailored to my development needs. You can get the relevant files from here: https://github.com/megakevin/craft-cms-docker-bootstrap.
 
 If you want to follow along, clone that repo, and you'll end up with this file structure:
 
@@ -231,4 +231,4 @@ You can click on any of the links and they will take you to the specific entry p
 
 ## Craft is cool 🕶️
 
-So, in conclusion, I've found that Craft is a cool tool to have in the toolbox. It is a full fledged CMS with tons of customization opportunities for how to model and organize the content, the data, of your site. When it comes to developing the front end though, it gets our of your way and lets you do your job. That, to me, is a big win.
+So, in conclusion, I've found that Craft is a cool tool to have in the toolbox. It is a full fledged CMS with tons of customization opportunities for how to model and organize the content, the data, of your site. When it comes to developing the front end though, it gets out of your way and lets you do your job. That, to me, is a big win.
