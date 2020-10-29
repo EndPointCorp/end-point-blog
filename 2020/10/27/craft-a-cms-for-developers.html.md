@@ -94,7 +94,7 @@ Testing database credentials ... success!
 Saving database credentials to your .env file ... done
 ```
 
-6. Next, sort out some Craft file permission requirements with these: `chmod -R o+w config && chmod -R o+w storage && chmod -R o+w web/cpresources`. These are just some directories that Craft needs write access to.
+6. Next, sort out some Craft file permission requirements with these: `chmod -R o+w config storage web/cpresources`. These are just some directories that Craft needs write access to.
 
 6. Now start up Apache with `sudo service apache2 start`.
 
