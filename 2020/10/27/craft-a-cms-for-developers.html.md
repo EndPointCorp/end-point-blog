@@ -183,7 +183,7 @@ First we need to specify a template for our sections. Continuing with our exampl
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ entry.title }} - Myt Craft Demo</title>
+    <title>{{ entry.title }} - My Craft Demo</title>
 </head>
 <body>
     <h1>{{ entry.heading }}</h1>
