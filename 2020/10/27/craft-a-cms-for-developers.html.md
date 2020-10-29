@@ -203,7 +203,7 @@ With that done, save and visit any of the entries you created and you'll see som
 
 As you can see, this entry's URL is `localhost/news/i-just-learned-that-craft-uses-twig`. Yours will obviously differ depending on the title (and slug) that you gave them.
 
-What this example lacks in complexity, it more than makes up in potential. This is a plain old HTML document that we've created here. Via a Twig template, of course. This is the complete freedom that I like about Craft. From this point on, you can do whatever you want in terms of front end development: use whatever CSS or JavaScript framework or library you want, organize your template files in a way that makes sense to you, your team and your website, etc. The sky is the limit. 
+What this example lacks in complexity, it more than makes up for in potential. This is a plain old HTML document that we've created here. Via a Twig template, of course. This is the complete freedom that I like about Craft. From this point on, you can do whatever you want in terms of front end development: use whatever CSS or JavaScript framework or library you want, organize your template files in a way that makes sense to you, your team and your website, etc. The sky is the limit. 
 
 That's good for individual news pages. But now let's try and link to them from the homepage. To do so, we need to edit the `templates/index.twig` file. Around line 174, remove the `<ul>` that's there along with all its `<li>`s and put this instead:
 
