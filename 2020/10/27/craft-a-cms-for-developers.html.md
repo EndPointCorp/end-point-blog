@@ -12,6 +12,8 @@ Such projects are often complex and expensive though, and for some clients, they
 
 Lately we've been using the [Craft CMS](https://craftcms.com/) for a certain client that meets the aforementioned criteria, and I gotta say, I've been pleasantly surprised by the developer experience it offers.
 
+> Unlike most of the technology and products we discuss in our blog, Craft CMS 3 is not completely free software. The source code is readily available in [GitHub](https://github.com/craftcms/cms) for anybody to use, study and modify, but certain features are exclusive to a so-called "Pro" edition. Learn more by reading their [license](https://github.com/craftcms/cms/blob/develop/LICENSE.md) and their [pricing structure](https://craftcms.com/pricing). The features that we will discuss in this article are all part of the free "Solo" edition of Craft CMS 3.
+
 In this article I'm going to talk through a few of the key aspects of Craft that make me think that really, it's a CMS made for developers. So let's get started:
 
 ## Craft is easy to get up and running
