@@ -8,7 +8,9 @@ gh_issue_number: 1680
 ![Sunset](/blog/posts/2020/10/30/electronic-messaging-staging-area/emsa-banner.jpg)
 [Photo](https://flic.kr/p/pnRYaf) by [Lee Roberts](https://flic.kr/ps/2bXFPr), [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/)
 
-End Point has been involved in disease surveillance work for over a decade. One component of that work is EMSA, short for “Electronic Messaging Staging Area”. The EMSA system we’re currently using was developed by a consortium of states led by Utah, Kansas, and Nevada. It is a PHP web application and can be hosted in the cloud or locally as you would any other PHP application. 
+End Point has been involved with developing disease surveillance software for over a decade. One component of that work is EMSA, short for “Electronic Messaging Staging Area”.
+
+The EMSA system we’re currently using was developed by a consortium of states led by Utah, Kansas, and Nevada. It is a PHP web application and can be hosted in the cloud or on-premises as you would any other PHP application. 
 
 ### EMSA:
 
@@ -26,10 +28,16 @@ End Point has also made custom modifications to EMSA allowing address validation
 EMSA can be deployed along with EpiTrax, the open source tracking system, or as a standalone application connected to a different disease surveillance system.
 
 ### Benefits of EMSA
+
+Aside from all the features mentioned above, EMSA as an open-source solution brings other benefits:
+
 - Reduced cost: Other than development and consulting to help set it up, there are no ongoing licensing costs.
 - Participating in the open source community that is growing in the healthcare industry.
 
-Interested in talking to us more about EMSA for your disease tracking? [Reach out today](/contact).
+### Help is available!
+
+Interested in talking to us more about EMSA for your disease tracking? [Reach out today.](/contact)
 
 ### References
-Roberts, E., Boulton, R., Ridderhoff, J., & Jeppson, T. (2018). Automated Processing of Electronic Data for Disease Surveillance. *Online Journal of Public Health Informatics, 10*(1). [https://doi.org/10.5210/ojphi.v10i1.8903](https://doi.org/10.5210/ojphi.v10i1.8903)
+
+Emily Roberts, Rachelle Boulton, Josh Ridderhoff, Theron Jeppson. “Automated Processing of Electronic Data for Disease Surveillance.” *Online Journal of Public Health Informatics, 10(1):e2, May 22, 2018.* [https://doi.org/10.5210/ojphi.v10i1.8903](https://doi.org/10.5210/ojphi.v10i1.8903)
