@@ -4,7 +4,7 @@ title: ".NET 5 will be released on the .NET Conf 2020"
 tags: dotnet, windows, microsoft
 ---
 
-![.NET 5 Platform](/blog/2020/11/04/dotnet-5-released-net-conf-2020/dotnet-5-platform.png)
+![.NET 5 Platform](/2020/11/04/dotnet-5-released-net-conf-2020/dotnet-5-platform.png)
 
 [Photo](https://devblogs.microsoft.com/dotnet/introducing-net-5/) by [Microsoft](https://www.microsoft.com/)
 
