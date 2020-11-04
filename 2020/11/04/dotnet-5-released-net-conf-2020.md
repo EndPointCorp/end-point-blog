@@ -32,9 +32,9 @@ EF will now integrate with the new C# 8, allowing to consume the query results a
 
 ### Updates to ML.NET
 
-.NET 5 will also include the latest version of <a href="https://dotnet.microsoft.com/learn/ml-dotnet/what-is-mldotnet" target="_blank">ML.NET</a> (a free, open-source and cross-platform machine learning framework for .NET), with some key features like the DatabaseLoader (allowing to load the data from any relational database with a connection string) or improvements to the object detection capabilities.
+.NET 5 will also include the latest version of <a href="https://dotnet.microsoft.com/learn/ml-dotnet/what-is-mldotnet" target="_blank">ML.NET</a> (a free, open-source and cross-platform machine learning framework for .NET), with some key features like the `DatabaseLoader` class (allowing to load the data from any relational database with a connection string) or improvements to the object detection capabilities.
 
 
-And of course, everything that was already on .NET Core 3 will be a part of .NET 5 (multi-platform mobile development, Azure Cloud access tools, gaming development with Unity and traditional ASP.NET development). The long-term support version of .NET Core is aimed to be launched in 2021, it will be called .NET 6, hopefully recollecting everything that might be improved based on the feedback for this GA release.
+And of course, everything that was already on .NET Core 3 will be a part of .NET 5 (multi-platform mobile development, Azure Cloud access tools, gaming development with Unity and traditional ASP.NET development). The long-term support (LTS) version of .NET Core is aimed to be launched in 2021, and it will be called .NET 6, hopefully recollecting everything that might be improved based on the feedback for this GA release.
 
-The .NET development team at End Point will be attending the main talks that will happen at the .NET Conf 2020. On Day 1, the focus will be the big .NET 5 release, so stay tuned! More to come.
+The .NET development team at End Point will be attending the main talks that will happen at the .NET Conf 2020. On Day 1, the focus will be put on this new release, so stay tuned! More to come.
