@@ -5,7 +5,7 @@ tags: cms, php, docker
 gh_issue_number: 1681
 ---
 
-![Craft CMS banner](/blog/posts/2020/10/30/craft-a-cms-for-developers/banner.png)
+![Craft CMS banner](craft-a-cms-for-developers/banner.png)
 
 As a software engineer, I thrive and thoroughly enjoy working on fully custom software products, applications conceived to model and help in the execution of some business process and that are built from the ground up by a team of developers.
 
