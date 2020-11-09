@@ -292,7 +292,7 @@ It works! The output is weird but we do get something here. For each file change
 
 Fortunately, the `Flux` package comes with the `throttle` function that we can reuse:
 
-```jula
+```julia
 function throttle(f, timeout; leading=true, trailing=false)
   cooldown = true
   later = nothing
