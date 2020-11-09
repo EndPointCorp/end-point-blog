@@ -5,7 +5,7 @@ tags: julia, automation, development, language, testing
 gh_issue_number: 1685
 ---
 
-![Automation](/blog/2020/11/04/rapid-tdd-in-julia/automation.jpg)
+![Automation](/blog/2020/11/09/rapid-tdd-in-julia/automation.jpg)
 
 The Julia programming language has been rising in ranks among the science-oriented programming languages lately. It has proven to be revolutionary in many ways. I’ve been watching its development for years now. It’s one of the most innovative of all the modern programming languages.
 
@@ -24,7 +24,7 @@ Here’s a simplified, brief outline of the steps in [Julia’s code execution m
     - If it has been compiled, execute it.
 4. Repeat until the program ends or the user closes the REPL.
 
-It’s quite apparent that the compilation and type inference happens at a very different time compared to other compiled languages. Using Rust, you compile your code just once. Execution isn’t taxed by consecutive recompilation.
+It’s quite apparent that the compilation and type inference happen at a very different time compared to other compiled languages. Using Rust, you compile your code just once. Execution isn’t taxed by consecutive recompilation.
 
 The result is quite a big negative surprise to Julia’s newcomers. Each time you run your app, there’s a significant slowdown before you see anything. It’s called the “time to first plot” issue. This is because, for example, a data scientist may want to generate some plots during her “exploratory data analysis”. Doing it in languages that are slower on paper — like R — makes those plots appear way quicker than in Julia.
 
