@@ -7,9 +7,11 @@ gh_issue_number: 1685
 
 ![Automation](/blog/2020/11/09/rapid-tdd-in-julia/automation.jpg)
 
-The Julia programming language has been rising in ranks among the science-oriented programming languages lately. It has proven to be revolutionary in many ways. I’ve been watching its development for years now. It’s one of the most innovative of all the modern programming languages.
+[//]: # ( Kamil wrote: image I've obtained from www.freepik.com where I have a paid account. The license type says: Premium license (Unlimited use without attribution). https://www.freepik.com/free-vector/isometric-automated-production-line-concept-with-industrial-conveyor-belt-robotic-mechanical-arms-isolated_10055534.htm )
 
-Julia’s design seems to be driven by two goals: to appeal to the scientific community and to achieve the best performance possible. This is an attempt to solve the “[two languages problem](https://thebottomline.as.ucsb.edu/2018/10/julia-a-solution-to-the-two-language-programming-problem)” where data analysis and model building is performed using a slower interpreted language (like R or Python) while making its production-ready calls for rewrites in a language like C or C++.
+The Julia programming language has been rising in the ranks among the science-oriented programming languages lately. It has proven to be revolutionary in many ways. I’ve been watching its development for years now. It’s one of the most innovative of all the modern programming languages.
+
+Julia’s design seems to be driven by two goals: to appeal to the scientific community and to achieve the best performance possible. This is an attempt to solve the “[two languages problem](https://thebottomline.as.ucsb.edu/2018/10/julia-a-solution-to-the-two-language-programming-problem)” where data analysis and model building is performed using a slower interpreted language (like R or Python) while performance-critical parts are written in a faster language like C or C++.
 
 The type-system is what allows Julia to meet its goals. The mix of strong and dynamic typing enables Python-like productivity with C++ or Rust-like performance. Julia is not an interpreted language. It compiles its code to native binary just like C, C++, Go, or Rust. The compilation and execution, though, are what sets it 1000 feet apart from all those other languages.
 
@@ -20,7 +22,7 @@ Here’s a simplified, brief outline of the steps in [Julia’s code execution m
 3. For each code chunk:
     - If it hasn’t yet been compiled, decide whether to interpret or JIT compile it and then execute:
         - If compile then **infer the types** and **use LLVM to produce native code**.
-        - Execute the newly created native code.
+        - Execute the newly-created native code.
     - If it has been compiled, execute it.
 4. Repeat until the program ends or the user closes the REPL.
 
@@ -30,9 +32,9 @@ The result is quite a big negative surprise to Julia’s newcomers. Each time yo
 
 ### There are more “time to first X” issues in Julia
 
-Julia’s execution model makes more aspects trickier than just seeing the first plot. If you’re a software engineer who’s used to following the [test-driven development](https://en.wikipedia.org/wiki/Test-driven_development) approach, you’re in for a big surprise.
+Julia’s execution model makes more aspects trickier than just seeing the first plot. If you’re a software engineer who’s used to following the [test-driven development](https://en.wikipedia.org/wiki/Test-driven_development) (TDD) approach, you’re in for a big surprise.
 
-In languages like Ruby or Rust, it’s easy to have a tool watch for any file changes and respond by running the project’s testing suite. I often use the [watchexec](https://github.com/watchexec/watchexec) tool which works with virtually any language, interpreter, or compiler. I run `watchexec -cw . “bundle exec rspec --fail-fast”` when working on a Ruby project, or `watchexec -cw . “cargo test”` with Rust.
+In languages like Ruby or Rust, it’s easy to have a tool watch for any file changes and respond by running the project’s testing suite. I often use the [watchexec](https://github.com/watchexec/watchexec) tool which works with virtually any language, interpreter, or compiler. I run `watchexec -cw . "bundle exec rspec --fail-fast"` when working on a Ruby project, or `watchexec -cw . "cargo test"` with Rust.
 
 With Julia this approach is not an option though — the “time to first test” is dramatically long. The wastefulness of continuous re-compilation steals my precious time, making me extremely unproductive.
 
@@ -40,7 +42,7 @@ With Julia this approach is not an option though — the “time to first test�
 
 The “time to first X” issue is only a problem if we’re closing the session in which our code has already been compiled. If we could move the file-watching and test-running steps all into the same session, the testing suite would run slowly only the first time. Julia’s standard library has built-in file watching functions that we could use to reproduce the `watchexec` in our code:
 
-```julia
+```plaintext
 julia> using FileWatching
 
 julia> watch_file
@@ -65,7 +67,7 @@ $ tree
 
 How do we watch for file changes in Julia? Let’s start up the REPL and see:
 
-```julia
+```plaintext
 julia> using FileWatching
 
 help?> watch_file
@@ -81,13 +83,12 @@ search: watch_file watch_folder unwatch_folder
   This behavior of this function varies slightly across platforms. See https://nodejs.org/api/fs.html#fs_caveats (https://nodejs.org/api/fs.html#fs_caveats) for more detailed information.
 
 julia> watch_file("src")
-
 ```
 
 The REPL didn’t return from the `watch_file` function.
 We can now change the “src/App.jl” file and see what happens:
 
-```julia
+```plaintext
 julia> watch_file("src")
 FileWatching.FileEvent(true, true, false)
 
@@ -96,7 +97,7 @@ julia>
 
 Good! The function returned a `FileEvent` struct. We can ask Julia for its definition:
 
-```julia
+```plaintext
 help?> FileWatching.FileEvent
   No documentation found.
 
@@ -118,24 +119,21 @@ We can see it tells us whether the file’s been renamed, changed, or if the tim
 
 So far so good, can we get it to notify us when the nested file changes too?
 
-```julia
+```plaintext
 julia> watch_file("src")
-
 ```
 
 Now changing the “src/nested/Other.jl”:
 
-```julia
+```plaintext
 julia> watch_file("src")
-
 ```
 
 Nothing happened. We’ll need to be specific about the nested directory to make it work:
 
-```julia
+```plaintext
 julia> watch_file("src/nested")
 FileWatching.FileEvent(true, true, false)
-
 ```
 
 With those experiments we can now conclude that:
@@ -145,7 +143,7 @@ With those experiments we can now conclude that:
 
 We’ll need a list of folders. My first idea was to use the `Glob` package:
 
-```julia
+```plaintext
 julia> using Glob
 
 julia> glob("**/*")
@@ -154,7 +152,7 @@ julia> glob("**/*")
  "src/nested"
 ```
 
-This seems legit but let’s nest another folder. Here’s how the project’s structure would look like now:
+This seems legit but let’s nest another folder. Here’s how the project’s structure would look now:
 
 ```bash
 $ tree .
@@ -171,7 +169,7 @@ $ tree .
 
 Trying the `Glob` package again:
 
-```julia
+```plaintext
 julia> glob("**/*")
 2-element Array{String,1}:
  "src/App.jl"
@@ -271,14 +269,13 @@ $ JULIA_NUM_THREADS=4 julia
 
 Let’s give it a go now:
 
-```julia
+```plaintext
 julia> onchange(f -> println(f))
-
 ```
 
 While the REPL is still “inside” the `onchange` function, let’s change some of those files in the dummy project and see what happens:
 
-```julia
+```plaintext
 julia> onchange(f -> println(f))
 4913
 App.jl
