@@ -1,7 +1,7 @@
 ---
 author: "Kamil Ciemniewski"
 title: "Rapid Test-Driven Development in Julia"
-tags: julia, automation, development, language, testing
+tags: julia, automation, development, testing
 gh_issue_number: 1685
 ---
 
