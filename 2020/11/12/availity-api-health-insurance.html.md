@@ -2,6 +2,7 @@
 author: "Patrick Lewis"
 title: "Availity: An API for Health Insurance"
 tags: ruby, rails
+gh_issue_number: 1689
 ---
 
 ![Stethoscope](/blog/2020/11/12/availity-api-health-insurance/banner.jpg)
@@ -15,7 +16,7 @@ The ability to query this health insurance information from an API in an automat
 
 Availity provides both REST and SOAP APIs in addition to a batch processing system that functions over SFTP. For the purposes of this article I will be focusing on the REST API which was the primary focus of my work for this project.
 
-The [developer documentation](https://developer.availity.com/partner/documentation) was mostly self-serve; after signing up for an account on the Availity site I was able to rely on their publicly-available documentation for all of the API details that I needed to start making requests.
+The [developer documentation](https://developer.availity.com/partner/documentation) was mostly self-serve; after signing up for an account on the Availity site I was able to rely on their publicly available documentation for all of the API details that I needed to start making requests.
 
 The application we were developing featured a Rails backend, so I used the Ruby [rest-client](https://github.com/rest-client/rest-client) gem when making requests to the Availity API.
 
@@ -23,7 +24,7 @@ The request payload was surprisingly small; most payers only require this combin
 
 * Patient birth date
 * Payer ID (Assigned by Availity to the health insurance company in the payer list linked above)
-* Member ID (The patient's membership ID with their insurer)
+* Member ID (The patient’s membership ID with their insurer)
 * Provider NPI
 * Service type
 
@@ -71,6 +72,6 @@ module Availity
 end
 ```
 
-The insurance coverage API then returns a link to a fairly long JSON response with a variety of information on the patient's health insurance plan. I added an additional class to parse that response for specific details such as name of primary care doctor, total and remaining deductibles for the year, copay amounts, etc.
+The insurance coverage API then returns a link to a fairly long JSON response with a variety of information on the patient’s health insurance plan. I added an additional class to parse that response for specific details such as name of primary care doctor, total and remaining deductibles for the year, copay amounts, etc.
 
-In addition to this insurance coverage API, Availity provides a variety of other [API end points](https://developer.availity.com/partner/node/503) related to health care claims and costs that could be equally valuable to the development of applications in the health care industry.
+In addition to this insurance coverage API, Availity provides various other [API end points](https://developer.availity.com/partner/node/503) related to health care claims and costs that could be equally valuable to the development of applications in the health care industry.
