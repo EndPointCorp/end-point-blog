@@ -15,9 +15,11 @@ The ability to query this health insurance information from an API in an automat
 
 Availity provides both REST and SOAP APIs in addition to a batch processing system that functions over SFTP. For the purposes of this article I will be focusing on the REST API which was the primary focus of my work for this project.
 
-The [developer documentation](https://developer.availity.com/partner/documentation) was mostly self-serve; after signing up for an account on the Availity site I was able to rely on their publicly-available documentation for all of the API details that I needed to start making requests.
+The [developer documentation](https://developer.availity.com/partner/documentation) for the REST API was mostly self-serve; after signing up for an account on the Availity site I was able to rely on their publicly-available documentation for all of the API details that I needed to start making requests.
 
-The application we were developing featured a Rails backend, so I used the Ruby [rest-client](https://github.com/rest-client/rest-client) gem when making requests to the Availity API.
+Unfortunately, the development process for integrating the SOAP API was not nearly as smooth; the [SOAP APIs](https://developer.availity.com/partner/) link on Availity's main developer portal page currently comes up blank, and I had to register a separate account in order to create a support request to obtain documentation on the SOAP API. Even with that documentation in hand, I found it difficult to determine things like the correct WSDL to use, and the process for generating X12 strings was much more complicated than making a more traditional REST request with a parameter hash. The large majority of payers supported by Availity are covered by the REST API, but there are some that are only supported by SOAP API requests and necessitate this more difficult process.
+
+The application we were developing featured a Rails backend, so I used the Ruby [rest-client](https://github.com/rest-client/rest-client) gem when making requests to the Availity REST API.
 
 The request payload was surprisingly small; most payers only require this combination of patient/provider details when making a request:
 
