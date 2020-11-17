@@ -5,7 +5,7 @@ tags: ruby, rails
 gh_issue_number: 1689
 ---
 
-![Stethoscope](/blog/2020/11/12/availity-api-health-insurance/banner.jpg)
+![Stethoscope](/blog/2020/11/16/availity-api-health-insurance/banner.jpg)
 [Photo](https://flic.kr/p/25e3v5L) by [Sergio Santos](https://www.flickr.com/people/143707811@N07/), used under [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/), cropped from original.
 
 I have been working on a tele-therapy application for a client in the health care industry over the past few months and had the opportunity to do some interesting work in the area of health insurance coverages and claims.
