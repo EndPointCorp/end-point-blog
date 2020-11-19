@@ -4,7 +4,7 @@ title: "Advanced Wordpress customizations"
 tags: wordpress, php
 ---
 
-![Wordpress](/blog/2020/11/19/advanced-wordpress-customizations/wordpress-logo-phone.jpg)
+![Wordpress](/2020/11/19/advanced-wordpress-customizations/wordpress-logo-phone.jpg)
 
 Photo by [Chris Harrison](https://www.flickr.com/photos/cdharrison/) on Flickr - Cropped from original
 
@@ -18,7 +18,7 @@ A pretty common scenario in Wordpress consists of installing a theme that fits m
 
 To make our way around this issue, some themes offer a section to add custom Javascript or CSS rules. But sometimes we need to move into a new theme in the middle of our developing process, so I usually rely on plugins to make my frontend changes. One simple, straightforward plugin I usually install to add custom styles and frontend scripts is [Simple Custom CSS and JS](https://wordpress.org/plugins/custom-css-js/).
 
-![Simple Custom CSS and JS](/blog/2020/11/19/advanced-wordpress-customizations/wordpress-simple-custom-css-js.jpg)
+![Simple Custom CSS and JS](/2020/11/19/advanced-wordpress-customizations/wordpress-simple-custom-css-js.jpg)
 
 It has several customization options I usually need for SEO purposes, including the possibility to create several independent code segments and load each one in a different section (header/footer) to improve loading speed. We can also include our custom content as embedded source/styles or as external references. It also includes an editor with syntax highlighting, and allows adding custom content to the Wordpress admin section.
 
@@ -28,7 +28,7 @@ Another thing I usually need when customizing a Wordpress website, is the abilit
 
 You can create your own PHP routines as snippets that can be inserted with shortcodes into a Wordpress page, posts, template, or whenever you can add a shortcode on. This will allow running any custom backend code anywhere on the website.
 
-![Custom PHP Code Snippet](/blog/2020/11/19/advanced-wordpress-customizations/wordpress-custom-php-snippet.jpg)
+![Custom PHP Code Snippet](/2020/11/19/advanced-wordpress-customizations/wordpress-custom-php-snippet.jpg)
 
 ### Hook custom logic into Wordpress
 
