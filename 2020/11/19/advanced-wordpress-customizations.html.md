@@ -22,6 +22,7 @@ To make our way around this issue, some themes offer a section to add custom Jav
 
 It has several customization options I usually need for SEO purposes, including the possibility to create several independent code segments and load each one in a different section (header/footer) to improve loading speed. We can also include our custom content as embedded source/styles or as external references. It also includes an editor with syntax highlighting, and allows adding custom content to the Wordpress admin section.
 
+
 ### Custom PHP code
 
 Another thing I usually need when customizing a Wordpress website, is the ability to run my own PHP code inside a Wordpress page or post. That is not allowed by the CMS by default, but like most things in Wordpress, there is a plugin that will make our lives easier: It’s called <a href=”https://wordpress.org/plugins/insert-php-code-snippet/” target=”_blank”>Insert PHP Code Snippet</a>.
@@ -29,6 +30,11 @@ Another thing I usually need when customizing a Wordpress website, is the abilit
 You can create your own PHP routines as snippets that can be inserted with shortcodes into a Wordpress page, posts, template, or whenever you can add a shortcode on. This will allow running any custom backend code anywhere on the website.
 
 ![Custom PHP Code Snippet](/2020/11/19/advanced-wordpress-customizations/wordpress-custom-php-snippet.jpg)
+
+To run the code on a page or post, all that needs to be done is pasting the shortcode on the content with the "PHP" button that appears on the button bar on the editor:
+
+![Shortcode example](/2020/11/19/advanced-wordpress-customizations/wordpress-custom-php-snippet-shortcode.jpg)
+
 
 ### Hook custom logic into Wordpress
 
@@ -46,6 +52,9 @@ function replace_text($text) {
 }
 add_filter('gettext', 'replace_text');
 ```
+
+We can add this function using the PHP Snippet plugin (recommended) or using the `functions.php` file included in our theme. This second option is not recommended since it has the difficulty we discussed above about missing our custom content after upgrading the theme.
+
 
 ### Conclusion
 
