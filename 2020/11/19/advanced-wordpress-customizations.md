@@ -8,7 +8,7 @@ tags: wordpress, php
 
 Photo by [Chris Harrison](https://www.flickr.com/photos/cdharrison/) on Flickr - Cropped from original
 
-Wordpress is the [most popular CMS](https://www.isitwp.com/popular-cms-market-share/), allowing to create a professional-looking website at a relatively low cost. It also has a really strong community behind it, creating great content and supporting developers across the world.
+WordpressX is the [most popular CMS](https://www.isitwp.com/popular-cms-market-share/), allowing to create a professional-looking website at a relatively low cost. It also has a really strong community behind it, creating great content and supporting developers across the world.
 
 But being popular also means being the main target of hacker attacks, and that’s why it’s crucial to keep the CMS, the theme, and all the plugins updated. When the requirements go beyond what Wordpress offers on the surface, we need to find an efficient way to add our custom logic into the CMS without interfering with version upgrades, keeping the focus on security.
 
