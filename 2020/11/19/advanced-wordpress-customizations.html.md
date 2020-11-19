@@ -12,6 +12,7 @@ Wordpress is the [most popular CMS](https://www.isitwp.com/popular-cms-market-sh
 
 But being popular also means being the main target of hacker attacks, and that’s why it’s crucial to keep the CMS, the theme, and all the plugins updated. When the requirements go beyond what Wordpress offers on the surface, we need to find an efficient way to add our custom logic into the CMS without interfering with version upgrades, keeping the focus on security.
 
+
 ### Custom CSS and Javascript
 
 A pretty common scenario in Wordpress consists of installing a theme that fits most of our basic requirements, but then we need to write a custom layer of functionality over it to get that custom look and user experience we need. Updating the theme files means that we cannot easily upgrade/change the theme without backing up our changes, and then restoring them after the upgrade, so that’s definitely not a good approach.
