@@ -74,7 +74,7 @@ In this article we intend to have solid ideas of how hierarchical data can be ex
 
 Now we have hierarchies to work with, possibly many. Nodes can have the parent-child relation, but they can have the ancestor-descendant relation as well. A is the ancestor and D is its descendant, if A is the parent of D, or we have a sequence of nodes S, where Si is the parent of Si+i for each neighboring pair of the sequence and A is the parent of S1, Sn is the parent of D. Consider this HTML code chunk:
 
-```
+```html
 <div class="dimensions">
     <div class="large-width">
         <div class="area">Area<span class="dimension-data">500</span> <span class="unit">sqm</span></div>
@@ -89,7 +89,7 @@ We see that the div having the class of dimensions is the parent of the div with
 
 In hierarchical structures we have some nodes, a (usually small) subset of which contains interesting data for us. For instance, in the example shown at point 2 we have a div which exists to style the shown data, which has some useful information in its descendants, which have the classes of area and height having the class of dimension-data.  However, the div having the class of large-width by itself does not have any useful information outside those descendant nodes, and frankly, it is just a styling node, which makes it irrelevant from our point of view. This means that the large-width div should not exist for us conceptually, we just need to know that we have a concept of dimensions, inside which we should be able to find the area and height. In terms of JavaScript selectors we know that we can find dimensions inside the document and area and height inside it, like this:
 
-```
+```js
 let dimensions = [];
 let dimensionContainers = document.querySelectorAll(".dimensions");
 for (let dimensionContainer of dimensionContainers) {
@@ -187,7 +187,9 @@ The semantic rules we define have a parent-child and ancestor-descendant relatio
 
 However, the entities to extract can vary greatly and there might be cases when  seemingly the same concept is distributed among various places. The word “seemingly” here means that even though at the end these concepts will be merged, at the phase of the actual data-mining we view these to be similar, but different concepts. The fact that a conceptual node might have several parents in the semantic rules only means that one of the parents of the list is to be expected, which means that all of the listed parents are possible. Consider a semantic rule which says that the parent of currency can be the description or the price:
 
-```parent: description,price```
+```
+parent: description,price
+```
 
 This means that the parent can be any of the elements of the list, that is, in the case of some elements the parent will be description, but in the case of some other elements, the parent will be price, so we do not violate by design our aim to have a semantic tree.
 
@@ -205,7 +207,7 @@ Why is “CURRENCY” special? It has two potential parents: “DESCRIPTION” o
 
 But why could a real-estate property have several different prices? Well, this is outside the scope of data-mining, but to have an understanding, it is good to consider a viable example. Let’s consider the example of an estate agent who has a 20% bonus if he/she successfully sells a given real-estate property within a month. In this case, the agent might want to draw buyers and put a 5% discount on the property for a month and if he/she is successful in selling it, then he/she will still have a nice bonus. Considering this economic mechanism the data-source might be showing the prices in a special way if there is such a discount, like:
 
-```
+```html
 <div class="description">
     <table class="prices">
         <tr>
@@ -224,7 +226,7 @@ But why could a real-estate property have several different prices? Well, this i
 
 while, if there is a single price, a different structure is generated:
 
-```
+```html
 <div class="description">
     <p class="price">
         <span>100000</span>
@@ -271,17 +273,21 @@ If a certain condition (c) is fulfilled, then we have a set of constant values f
 
 For example, let’s consider the table:
 
-```person(id, is_alive, has_right_to_vote, has_valid_passport)```
+```
+person(id, is_alive, has_right_to_vote, has_valid_passport)
+```
 
 Now, we can observe that:
 
-```(is_alive = 0) => ((has_right_to_vote = 0) ^ (has_valid_passport = 0))```
+```
+(is_alive = 0) => ((has_right_to_vote = 0) ^ (has_valid_passport = 0))
+```
 
 So, this is an association rule, which has the condition of is_alive = 0 (so the person is deceased) and we know for a fact that dead people will not vote and their passport is invalid.
 
 When we extract data from a source, there might be some association rules (field values are associated to a condition) we do not know about yet. If we find those out, then it will help us a lot. For instance, imagine the case when for whatever reason an insert/​update is attempted with values:
 
-```
+```python
 is_alive = 0
 has_right_to_vote = 1
 ```
@@ -292,21 +298,33 @@ In this case we can throw an exception, so, this way we can find bugs in the cod
 
 The column-set S (Source):
 
-```S = {S1, …, Sm}```
+```
+S = {S1, …, Sm}
+```
 
 determines the column-set D (Destination):
 
-```D = {D1, …, Dn}```
+```
+D = {D1, …, Dn}
+```
 
 The formula more explicitly looks like this:
 
-```{S1, …, Sm} → (D1, …, Dn)```
+```
+{S1, …, Sm} → (D1, …, Dn)
+```
 
 This relation means that if we have two different records/​entities with the same source values:
 
-```Source1 = Source2 = {s1, …, sm}```, then their destination will match as well:
+```
+Source1 = Source2 = {s1, …, sm}
+```
 
-```Destination1 = Destination2 = {d1, …, dn}```
+then their destination will match as well:
+
+```
+Destination1 = Destination2 = {d1, …, dn}
+```
 
 Inversely this is not necessarily true. If two records/​entities have the same destination values, then the functional dependency does not require them to have the very same sources.
 
@@ -314,11 +332,15 @@ Inversely this is not necessarily true. If two records/​entities have the same
 
 A CFD is a more generalized term of FD. It adds a condition to the formula, so that the functional dependency’s applicability is only guaranteed if the condition is met. We can describe functional dependencies as particular conditional functional dependencies, where the condition is inherently true:
 
-```(true => S → D) <=> S → D```
+```
+(true => S → D) <=> S → D
+```
 
 Also, an AR can be described as
 
-```c => {} → D```
+```
+c => {} → D
+```
 
 #### 5.1. The More Useful (MU) relation 
 
@@ -352,7 +374,9 @@ Let’s suppose that
 
 is true. Is
 
-```((c3 => c1) ^ (S1 ⊆ S3) ^ (D1 ⊇ D3))```
+```
+((c3 => c1) ^ (S1 ⊆ S3) ^ (D1 ⊇ D3))
+```
 
 also true?
 
@@ -366,9 +390,11 @@ The three transitivities together prove that MU is transitive.
 
 Neutral element (the least useful):
 
-```false => {} → All columns```
+```
+false => {} → All columns
+```
 
-```false => c``` is always true, ```{}``` is the subset of everything else, including itself and all columns is the subset of all combinations of columns, or, in other words, it’s a superset of all its subsets.
+`false => c` is always true, `{}` is the subset of everything else, including itself and all columns is the subset of all combinations of columns, or, in other words, it’s a superset of all its subsets.
 
 Antisymmetrical:
 
@@ -398,7 +424,9 @@ P1 <=> P2
 
 so the relation is antisymmetrical:
 
-```((P1 MU P2) ^ (P2 Mu P1)) <=> (P1 <=> P2)```
+```
+((P1 MU P2) ^ (P2 Mu P1)) <=> (P1 <=> P2)
+```
 
 This means that MU is a poset (partially ordered set) and all the algebra applicable for partially ordered sets in general can be used to analyze MU as well.
 
@@ -414,11 +442,13 @@ P1 join P2 = (c1 v c2) => (S1 ⋂ S2) → (D1 ⋃ D2)
 P1 meet P2 = (c1 ^ c2) => (S1 ⋃ S2) → (D1 ⋂ D2)
 ```
 
-Of course
+Of course:
 
-```(P1 join P2) MU (P1 meet P2)```
+```
+(P1 join P2) MU (P1 meet P2)
+```
 
-Proof
+Proof:
 
 ```
 (c1 ^ c2) => (c1 v c2) is trivially true and
@@ -458,11 +488,15 @@ Proof (reductio ad absurdum):
 
 Let’s assume that there is a finite n number of primes and there is no other, except them:
 
-```p1, …, pn```
+```
+p1, …, pn
+```
 
 Now, let’s consider the number:
 
-```N = (p1 * … * pn) + 1```
+```
+N = (p1 * … * pn) + 1
+```
 
 We know that N is indivisible with any of p1, …, pn, so there are two cases: N is either a prime or a composite number. If N is a prime, then we found a new prime. Otherwise, if N is composite, then it is divisible by at least a prime which is not among p1, …, pn. So, in either case we find a new prime, therefore there are infinitely many prime numbers.
 
@@ -474,7 +508,9 @@ The point of all this contemplation is that if something is very frequent or hig
 
 Now, if we accept a rule to be factually accurate, then we might want to make sure that it is respected. Assuming that
 
-```c => S → D```
+```
+c => S → D
+```
 
 is accurate, we also assume that if the condition is met and there is already a record having the source values of s1, …, sm, then, inserting/​updating another record with the same source values, but with different destination values leads to an error. Let’s suppose that we throw an exception when an accepted pattern is to be violated. If many such exceptions are thrown, then we have a problem. What could the problem be:
 

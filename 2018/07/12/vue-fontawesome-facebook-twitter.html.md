@@ -44,7 +44,7 @@ Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 This allows you to include icons in your view components like so:
 
-```vue
+```html
 <template>
   <div class="icons">
     <font-awesome-icon icon="user"/>
@@ -55,7 +55,7 @@ This allows you to include icons in your view components like so:
 
 This worked fine for me until I tried to use the `facebook` and `twitter` icon:
 
-```vue
+```html
 <template>
   <div class="icons">
     <font-awesome-icon icon="user"/>
@@ -68,7 +68,7 @@ This worked fine for me until I tried to use the `facebook` and `twitter` icon:
 
 Only blank spots and errors in the browser console like so:
 
-```console
+```plaintext
 [Error] Could not find one or more icon(s) (2)
 {prefix: "fas", iconName: "twitter"}
 {}
@@ -81,7 +81,7 @@ After turning up dry from a run to the Google well and scanning the docs, I dete
 
 I tested modifying things like follows, just to exercise potentially obvious answers. Sadly, this did not result in workage.
 
-```vue
+```html
 <template>
   <div class="icons">
     <font-awesome-icon icon="user"/>
@@ -118,7 +118,7 @@ AHA! The `icon` parameter is what was passed in in the `<font-awesome-icon>` com
 
 So I ended up trying:
 
-```vue
+```html
 <template>
   <div class="icons">
     <font-awesome-icon icon="user"/>
