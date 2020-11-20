@@ -37,15 +37,24 @@ To run the code on a page or post, all that needs to be done is pasting the shor
 ![Shortcode example](/2020/11/19/advanced-wordpress-customizations/wordpress-custom-php-snippet-shortcode.jpg)
 
 
-### Hook custom logic into Wordpress
+### Custom hooks
 
-When our custom logic needs to be fired up from an event on the CMS, or if we need to make changes to the way Wordpress behaves, we will need to use the [`add_action()`](https://developer.wordpress.org/reference/functions/add_action/) or the [`add_filter()`](https://developer.wordpress.org/reference/functions/add_filter/) functions.
+When our logic needs to be fired up from an event on the CMS, or if we need to make changes to the way Wordpress behavior or data, we will need to use the [`add_action()`](https://developer.wordpress.org/reference/functions/add_action/) or the [`add_filter()`](https://developer.wordpress.org/reference/functions/add_filter/) functions.
 
 - `add_action()` allow us to execute a PHP function on specific points of the Wordpress execution, for example when a post is created or commented, or when a user is created. A full list of actions is available [here](https://codex.wordpress.org/Plugin_API/Action_Reference).
 
 - `add_filter()` allow us to update information associated with Wordpress, for example, to set a custom CSS class for the body or to replace the login button text. A full list of filters is available [here](https://codex.wordpress.org/Plugin_API/Filter_Reference).
 
-The following example allows to to a text replacement across the website by using the add_filter() hook function:
+The following example sends an email to the webmaster when a new comment is created, using the `add_filter()` function:
+
+```php
+function email_comment() {
+	wp_mail('webmaster@website.com', 'New comment', 'New comment posted on the website');
+}
+add_action('comment_post','email_comment');
+```
+
+Here's another example that allows to perform a string replacement across the website by using the `add_action()` function:
 
 ```php
 function replace_text($text) {
@@ -54,7 +63,7 @@ function replace_text($text) {
 add_filter('gettext', 'replace_text');
 ```
 
-We can add this function using the PHP Snippet plugin (recommended) or using the `functions.php` file included in our theme. This second option is not recommended since it has the difficulty we discussed above about missing our custom content after upgrading the theme.
+We can add this code segments using the PHP Snippet plugin (recommended) or using the `functions.php` file included in our theme. This last option is not recommended since it has the difficulty we discussed above about missing our custom content after upgrading the theme.
 
 
 ### Conclusion
