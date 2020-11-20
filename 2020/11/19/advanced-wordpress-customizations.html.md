@@ -45,7 +45,7 @@ When our logic needs to be fired up from an event on the CMS, or if we need to m
 
 - `add_filter()` allow us to update information associated with Wordpress, for example, to set a custom CSS class for the body or to replace the login button text. A full list of filters is available [here](https://codex.wordpress.org/Plugin_API/Filter_Reference).
 
-The following example sends an email to the webmaster when a new comment is created, using the `add_filter()` function:
+The following example sends an email to the webmaster when a new comment is created, using the `add_action()` function:
 
 ```php
 function email_comment() {
@@ -54,7 +54,7 @@ function email_comment() {
 add_action('comment_post','email_comment');
 ```
 
-Here's another example that allows to perform a string replacement across the website by using the `add_action()` function:
+Here's another example that allows to perform a string replacement across the website by using the `add_filter()` function:
 
 ```php
 function replace_text($text) {
