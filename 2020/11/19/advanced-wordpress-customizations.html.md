@@ -15,7 +15,7 @@ But being popular also means being the main target of hacker attacks, and that�
 
 ### Custom CSS and Javascript
 
-A pretty common scenario in Wordpress consists of installing a theme that fits most of our basic requirements, but then we need to write a custom layer of functionality over it to get that custom look and user experience we need. Updating the theme files means that we cannot easily upgrade/change the theme without backing up our changes, and then restoring them after the upgrade, so that’s definitely not a good approach.
+A pretty common scenario in Wordpress consists of installing a theme that fits most of our requirements, and the posterior need of writing an extra layer of functionality over it to get that custom look and user experience we are looking for. Updating the theme files means that we cannot easily upgrade/change the theme without backing up our changes, and then restoring them after the upgrade, so that’s definitely not a good approach.
 
 To make our way around this issue, some themes offer a section to add custom Javascript or CSS rules. But sometimes we need to move into a new theme in the middle of our developing process, so I usually rely on plugins to make my frontend changes. One simple, straightforward plugin I usually install to add custom styles and frontend scripts is [Simple Custom CSS and JS](https://wordpress.org/plugins/custom-css-js/).
 
@@ -26,7 +26,7 @@ It has several customization options I usually need for SEO purposes, including 
 
 ### Custom PHP code
 
-Another thing I usually need when customizing a Wordpress website, is the ability to run my own PHP code inside a Wordpress page or post. That is not allowed by the CMS by default, but like most things in Wordpress, there is a plugin that will make our lives easier: It’s called <a href=”https://wordpress.org/plugins/insert-php-code-snippet/” target=”_blank”>Insert PHP Code Snippet</a>.
+Another thing I usually need when customizing a Wordpress website, is the ability to run my own PHP code inside a Wordpress page or post. That is not allowed by the CMS by default, but like most things in Wordpress, there is a plugin that will make our lives easier: It’s called [Insert PHP Code Snippet](https://wordpress.org/plugins/insert-php-code-snippet/).
 
 You can create your own PHP routines as snippets that can be inserted with shortcodes into a Wordpress page, posts, template, or whenever you can add a shortcode on. This will allow running any custom backend code anywhere on the website.
 
@@ -39,7 +39,7 @@ To run the code on a page or post, all that needs to be done is pasting the shor
 
 ### Custom hooks
 
-When our logic needs to be fired up from an event on the CMS, or if we need to make changes to the way Wordpress behavior or data, we will need to use the [`add_action()`](https://developer.wordpress.org/reference/functions/add_action/) or the [`add_filter()`](https://developer.wordpress.org/reference/functions/add_filter/) functions.
+When our logic needs to be fired up from an event on the CMS, or if we need to make changes to the default Wordpress behavior or data, we will need to use the [`add_action()`](https://developer.wordpress.org/reference/functions/add_action/) or the [`add_filter()`](https://developer.wordpress.org/reference/functions/add_filter/) functions.
 
 - `add_action()` allow us to execute a PHP function on specific points of the Wordpress execution, for example when a post is created or commented, or when a user is created. A full list of actions is available [here](https://codex.wordpress.org/Plugin_API/Action_Reference).
 
@@ -72,4 +72,4 @@ Wordpress is a great CMS with an elegant backend, a big list of themes and plugi
 
 The techniques we saw in this post are meant for websites that only need some small custom changes or improvements. If we need to include a complete layer of logic into a website, it's always recommended to write a custom plugin from scratch, if there is nothing out there that serves the purpose. But that's material for another blog post!
 
-At End Point, we build web solutions in Wordpress and several other technologies, but we always keep security and high standards in mind. [Contact us](/contact) if you want to find out more.
+At End Point, we build web solutions in Wordpress and several other technologies, keeping security and high standards in mind. [Contact us](/contact) if you want to find out more.
