@@ -4,7 +4,7 @@ title: "Demonstrating the HotSwap JVM"
 tags: development, java, language, tools, programming
 ---
 
-![zebras](/blog/2020/11/24/zebras-scale-crush.png)
+![zebras](/blog/2020/11/25/zebras-scale-crush.png)
 [Photo](https://unsplash.com/photos/dgH8NSdEDv0) by [Neil and Zulma Scott](https://unsplash.com/@valenciascott), cropped & filtered, [License](https://creativecommons.org/licenses/by/2.0://unsplash.com/license)
 
 For a recent Java development project I spent a while setting up an environment
