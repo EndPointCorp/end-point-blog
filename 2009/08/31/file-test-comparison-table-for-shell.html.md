@@ -307,7 +307,7 @@ tr { background: #f1f1f1 !important; }
 <td rowspan="2">-u file</td>
 <td rowspan="2">-u 'file'</td>
 <td>test ?u, 'file'</td>
-<td rowspan="2">os.stat('file').st_mode & stat.S_ISGID</td>
+<td rowspan="2">os.stat('file').st_mode & stat.S_ISUID</td>
 </tr>
 
 <tr>
@@ -319,7 +319,7 @@ tr { background: #f1f1f1 !important; }
 <td rowspan="2">-g file</td>
 <td rowspan="2">-g 'file'</td>
 <td>test ?g, 'file'</td>
-<td rowspan="2">os.stat('file').st_mode & stat.S_ISUID</td>
+<td rowspan="2">os.stat('file').st_mode & stat.S_ISGID</td>
 </tr>
 
 <tr>

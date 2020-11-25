@@ -1,7 +1,7 @@
 ---
 author: Josh Tolley
 gh_issue_number: 834
-tags: google-earth, graphics, kamelopard, liquid-galaxy, open-source, ruby, tools
+tags: google-earth, graphics, kamelopard, liquid-galaxy, open-source, ruby
 title: Kamelopard update—​Panoramic camera simulation, and splines have returned
 ---
 

@@ -2,7 +2,7 @@
 author: Ethan Rowe
 gh_issue_number: 154
 tags: spree, git
-title: 'Git rebase: Just-Workingness Baked Right In (If yourre cool enough)'
+title: 'Git rebase: Just-Workingness Baked Right In (If you’re cool enough)'
 ---
 
 Reading about rebase makes it seem somewhat abstract and frightening,
@@ -76,7 +76,7 @@ file, you would need to resolve it as part of rebasing, just like in a
 regular merge. But those changes for resolution would be part of X’,
 instead of being part of some merge-specific commit.
 
-## Considerations for choosing rebase versus merge
+### Considerations for choosing rebase versus merge
 
 Rebasing should generally be the default choice when you’re pulling from
 a remote into your repo.
@@ -97,16 +97,16 @@ Probably the most important rule for rebasing is: do not rebase a branch that ha
 
 Consider:
 
-- Steph has a [Spree fork on GitHub](http://github.com/stephskardal/spree/tree). So on her laptop, she has a repo that has her Github fork as its “origin” remote.
-- She also wants to easily pull in changes from the canonical Spree Github repo, so she has that repo set up as the “canonical” remote in her local repo.
-- Steph does work on a branch called “address_book”, unique to her Github fork (not in the canonical repo).
+- Steph has a [Spree fork on GitHub](http://github.com/stephskardal/spree/tree). So on her laptop, she has a repo that has her GitHub fork as its “origin” remote.
+- She also wants to easily pull in changes from the canonical Spree GitHub repo, so she has that repo set up as the “canonical” remote in her local repo.
+- Steph does work on a branch called “address_book”, unique to her GitHub fork (not in the canonical repo).
 - She pushes her stuff up to “address_book” in origin.
 - She decides she needs the latest and greatest from canonical. So she fetches canonical. She can then either: rebase canonical/master into address_book, or merge.
 
 The merge makes for an ugly commit history.
 
 The rebase, on the other hand, would make her local address_book branch
-incompatible with the upstream one she pushed to in her Github repo.
+incompatible with the upstream one she pushed to in her GitHub repo.
 Because whatever commits she pushed to origin/address_book that are
 specific to that branch (i.e. not on canonical/master) will get rebased
 on top of the latest from canonical/master, meaning they are now
@@ -136,7 +136,7 @@ git push origin address_book:refs/heads/address_book_release_candidate
 ```
 
 That would create a branch named “address_book_release_candidate” on
-Steph’s Github fork, that has been structured to have a nice commit
+Steph’s GitHub fork, that has been structured to have a nice commit
 history with canonical/master, meaning that the Spree corefolks could
 easily pull it into the canonical repo if it passes muster.
 

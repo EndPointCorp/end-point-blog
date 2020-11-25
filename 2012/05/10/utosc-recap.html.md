@@ -1,7 +1,7 @@
 ---
 author: Josh Tolley
 gh_issue_number: 611
-tags: community, conference, database, liquid-galaxy
+tags: community, conference, database, liquid-galaxy, kamelopard
 title: UTOSC Recap
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "Campendium: A Responsive, Fancy Detail Page"
 author: Steph Skardal
-tags: rails, solr, sunspot, react, maps, javascript, user-interface, ruby, clients
+tags: rails, solr, sunspot, react, maps, javascript, user-interface, ruby, clients, case-study
 gh_issue_number: 1554
 ---
 

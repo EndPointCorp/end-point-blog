@@ -5,8 +5,6 @@ tags: conference, javascript
 title: 'I Annotate 2014 Conference: Day 1'
 ---
 
-
-
 I’m here in San Francisco for the second annual [I Annotate](http://iannotate.org/2014/) conference. Today I’m presenting my work on the [H2O](https://h2o.law.harvard.edu/) project, but in this post I’ll share a couple of focus points for the conference thus far, described below.
 
 ### What do we mean by Annotations?
@@ -15,7 +13,7 @@ Annotation work is off the path of End Point’s ecommerce focus, and annotation
 
 ### Annotations in General
 
-One of the focuses of yesterday’s talks was the topic of how to allow for the powerful concept of annotations to succeed on the web. [Ivan Herman](https://www.ivan-herman.net/professional/index.html) of the W3C touched on why the web has succeeded, and what we can learn from that success to help the idea of annotations. The web has been a great idea, interoperable, decentralized, and open source and we hope that those concepts can translate to web annotations to help them be successful. Another interesting topic [Tom Lehman](https://en.wikipedia.org/wiki/Genius_(website)) of RapGenius touched on was how the actual implementation of annotation doesn’t matter, but rather it’s the community in place to encourage many high quality annotations. For RapGenius, that means offering a user hierarchy that awards users accessibility such as as moderators, editors, contributors, layering on a point-based ranking system, and including encouraging posting RapGenius annotated content in other sites. This talk struck a chord with me, because I know how hard it is to get high quality content for a website.
+One of the focuses of yesterday’s talks was the topic of how to allow for the powerful concept of annotations to succeed on the web. [Ivan Herman](https://www.ivan-herman.net/professional/index.html) of the W3C touched on why the web has succeeded, and what we can learn from that success to help the idea of annotations. The web has been a great idea, interoperable, decentralized, and open source and we hope that those concepts can translate to web annotations to help them be successful. Another interesting topic [Tom Lehman](https://en.wikipedia.org/wiki/Genius_(website)) of RapGenius touched on was how the actual implementation of annotation doesn’t matter, but rather it’s the community in place to encourage many high quality annotations. For RapGenius, that means offering a user hierarchy that awards users access such as as moderators, editors, contributors, layering on a point-based ranking system, and including encouraging posting RapGenius annotated content in other sites. This talk struck a chord with me, because I know how hard it is to get high quality content for a website.
 
 ### Specific Use Cases of Annotator
 
@@ -29,5 +27,3 @@ Yesterday’s talks also covered several interesting use cases of [Annotator](ht
 - [hypothes.is](https://web.hypothes.is/): Hypothes.is uses tool built on top of annotator, featuring several advanced features such as image annotation, bookmarklet annotation implementation, and real time stream updates with search.
 
 After the morning talks, we broke into two longer small group sessions, and I joined the sessions to delve into deeper issues and implementation details of Annotator, as well as the challenges and needs associated with annotation the law. I’ll share my presentation and more notes from today’s talks. Stay tuned!
-
-

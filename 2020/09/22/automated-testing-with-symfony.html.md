@@ -724,17 +724,17 @@ In Symfony, there are a few configurations that need to happen so that we are ab
 1. Install this bundle which allows each test case to run with the same, unmodified database: `composer require --dev dama/doctrine-test-bundle`.
 2. Enable it by adding the following to the `phpunit.xml.dist` file:
 
-```xml
-<phpunit> 
-    <!-- ... -->
-    <extensions>
-        <extension class="DAMA\DoctrineTestBundle\PHPUnit\PHPUnitExtension"/>
-    </extensions>
-    <!-- ... -->
-</phpunit>
-```
+    ```xml
+    <phpunit> 
+        <!-- ... -->
+        <extensions>
+            <extension class="DAMA\DoctrineTestBundle\PHPUnit\PHPUnitExtension"/>
+        </extensions>
+        <!-- ... -->
+    </phpunit>
+    ```
 
-3\. Create a test database with `bin/console doctrine:schema:create --env=test`.
+3. Create a test database with `bin/console doctrine:schema:create --env=test`.
 
 Once that setup is done, tests can be run with something like `tests/functional/Repository/WeatherQueryRepositoryTest.php`.
 

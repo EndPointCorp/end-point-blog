@@ -67,7 +67,7 @@ I’d like to share a checklist below that I used for a project recently. I didn
 
 - Minimize the accessibility of classes and members
 - Avoid excessive logs for unusual behavior
-- Release resources (streams, connections, etc) in all cases
+- Release resources (streams, connections, etc.) in all cases
 - Validate inputs
 - Validate outputs
 - Make public static fields final
@@ -94,11 +94,15 @@ I’d like to share a checklist below that I used for a project recently. I didn
 
 - For naming checklist items, the below code piece complies with the conventions as it uses the solution domains as packaging name.
 
-```package com.google.search.common;```
+```
+package com.google.search.common;
+```
 
 - On the other hand, the following line would violate the Java package naming conventions since its letter capitalizations and domain usage are inconsistent.
 
-```package COM.google_search.common;```
+```
+package COM.google_search.common;
+```
 
 - Sometimes a very long line of code could be used which usually violates the readability standards.
 

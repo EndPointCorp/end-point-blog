@@ -1,13 +1,11 @@
 ---
 author: Josh Tolley
 gh_issue_number: 898
-tags: kamelopard, liquid-galaxy, ruby
+tags: kamelopard, liquid-galaxy, ruby, open-source
 title: New Kamelopard version
 ---
 
-
-
-I recently pushed new Kamelopard version (v0.0.14), and thought I should briefly mention it here. This release includes a few bug fixes, including one that fatally affected several v0.0.13 installations, but its major improvement is a greatly expanded test suite. For quite some time many Kamelopard functions have had only placeholder tests, marked as “pending" in the code, or no test at all. In particular, this includes many of the more complex (or in other words, difficult to test) functions. Version 0.0.14 added 35 new tests, including for the frequently used orbit() function as well as for the relatively new multidimensional function logic.
+I recently pushed new [Kamelopard](https://github.com/LiquidGalaxy/kamelopard) version (v0.0.14), and thought I should briefly mention it here. This release includes a few bug fixes, including one that fatally affected several v0.0.13 installations, but its major improvement is a greatly expanded test suite. For quite some time many Kamelopard functions have had only placeholder tests, marked as “pending" in the code, or no test at all. In particular, this includes many of the more complex (or in other words, difficult to test) functions. Version 0.0.14 added 35 new tests, including for the frequently used orbit() function as well as for the relatively new multidimensional function logic.
 
 The typical Kamelopard test creates a Kamelopard object, test that it responds to the right set of methods, renders it to KML, and finally inspects the result for correctness. This can quickly become complicated, as some KML objects can take many different forms. Here are a few selections from one of the new tests, as an example. This is for the ColorStyle object, which is an abstract class handling part of the options in other style objects.
 
@@ -61,5 +59,3 @@ it 'should do its KML right' do
 ```
 
 This new Kamelopard version also includes the beginnings of what could be a very useful feature. The idea is that Kamelopard objects should be able to create themselves from their KML representation. So, for instance, you could provide some Kamelopard function with a KML file, and it could create a Kamelopard representation which you can then process further. We already support each_placemark(), which iterates through each placemark in a KML document and returns the data therein, but this would expand that ability. Right now we're far from having all Kamelopard objects support parsing themselves from KML, but when it's completed it will open up interesting possibilities. For instance, it was originally conceived as a way to take a pre-existing tour and make a [multicam](/blog/2013/07/16/kamelopard-update-panoramic-camera) version automatically. This, too, is still some way off.
-
-

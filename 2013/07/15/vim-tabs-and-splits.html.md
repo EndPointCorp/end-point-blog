@@ -2,16 +2,14 @@
 author: Mike Farmer
 gh_issue_number: 833
 tags: vim
-title: VIM - Tabs and Splits
+title: Vim tabs and splits
 ---
 
-
-
-[Vim](http://www.vim.org/) is my go-to code editor these days. After many years of using different editors, I’ve settled on vim as my editor of choice. There are some things I’ve done to make using vim more enjoyable and usable and this blog post is dedicated to some of those things that I use everyday.
+[Vim](http://www.vim.org/) is my go-to code editor these days. After many years of using different editors, I’ve settled on Vim as my editor of choice. There are some things I’ve done to make using Vim more enjoyable and usable and this blog post is dedicated to some of those things that I use everyday.
 
 ### Tabs
 
-I love using tabs in vim. I know there are some who are opposed to tabs, but I find them invaluable. The default shortcuts for manipulating tabs are a little cumbersome, which I believe deters many users. Here are some modifications that I added to my [vimrc](https://github.com/mikefarmer/dotfiles/blob/master/vimrc).
+I love using tabs in Vim. I know there are some who are opposed to tabs, but I find them invaluable. The default shortcuts for manipulating tabs are a little cumbersome, which I believe deters many users. Here are some modifications that I added to my [vimrc](https://github.com/mikefarmer/dotfiles/blob/master/vimrc).
 
 ```nohighlight
 nmap <silent> tt :tabnew<CR>
@@ -21,11 +19,11 @@ nmap <silent> [G :tabrewind<CR>
 nmap <silent> ]G :tablast<CR>
 ```
 
-First, I’m using nmap here which says to only map these keys in normal mode. Next, I use <silent> which keeps my editor clean of any distractions while performing the task. I find that the double tap short-cuts (see more below) tt work really well for normal mode and I love their simplicity. Double-tap t and you have a new tab. Using the bracket navigation is something that I’ve stolen from [Tim Pope’s](https://github.com/tpope) [vim-unimpaired](https://github.com/tpope/vim-unimpaired) plugin. Using g and G work for me, but you can use whatever you like.
+First, I’m using nmap here which says to only map these keys in normal mode. Next, I use <silent> which keeps my editor clean of any distractions while performing the task. I find that the double tap short-cuts (see more below) `tt` work really well for normal mode and I love their simplicity. Double-tap t and you have a new tab. Using the bracket navigation is something that I’ve stolen from [Tim Pope’s](https://github.com/tpope) [vim-unimpaired](https://github.com/tpope/vim-unimpaired) plugin. Using g and G work for me, but you can use whatever you like.
 
 ### Splits
 
-I believe most vim users use splits often. At first, I found that splitting my current buffer was also cumbersome using the default method in vim (:split and :vsplit). So utilizing the double-tap method I used for tabs, I created my own shortcuts:
+I believe most Vim users use splits often. At first, I found that splitting my current buffer was also cumbersome using the default method in Vim (:split and :vsplit). So utilizing the double-tap method I used for tabs, I created my own shortcuts:
 
 ```nohighlight
 nmap <silent> vv :vsp<CR>
@@ -41,7 +39,7 @@ map <C-k> <C-w>k
 map <C-l> <C-w>l
 ```
 
-After using vim’s splitting capability for a while, I noticed I didn’t always like where the split occurred. Sometimes above, sometimes to the left. To ensure that you have consistency, try these settings:
+After using Vim’s splitting capability for a while, I noticed I didn’t always like where the split occurred. Sometimes above, sometimes to the left. To ensure that you have consistency, try these settings:
 
 ```
 set splitright " When splitting vertically, split to the right
@@ -57,4 +55,3 @@ Want a quick way to get to your vimrc?
 ```nohighlight
 :e $MYVIMRC
 ```
-

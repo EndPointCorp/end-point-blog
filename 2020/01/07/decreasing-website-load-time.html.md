@@ -188,7 +188,7 @@ There are several ways to enable server-side caching, depending on factors such 
 
 The best and most efficient way to do this is by adding a declaration in the top of our ASP.NET page:
 
-```c#
+```csharp
 <%@ OutputCache Duration="10" VaryByParam="id;date" %>
 ```
 
@@ -212,7 +212,7 @@ However, if you are running an ASP.NET MVC/WebForms website, this won’t be eno
 
 * <b>global.asax</b>:
 
-```c#
+```csharp
 <%@ Application Language="C#" %>
 
 <script runat="server">

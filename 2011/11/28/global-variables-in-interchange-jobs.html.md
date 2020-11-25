@@ -1,11 +1,9 @@
 ---
 author: Mark Johnson
 gh_issue_number: 515
-tags: interchange, jobs, testing
+tags: interchange, automation, testing
 title: Global Variables in Interchange Jobs
 ---
-
-
 
 Those familiar with writing global code in Interchange are certainly familiar with the number of duplicate references of certain global variables in different namespaces. For example, the Values reference is found in both the main namespace ($::Values) as well as in Vend::Interpolate ($Values usually from within usertags). One can also access the Values reference through the Session reference, which itself can be found in main ($::Session), Vend ($Vend::Session), and Vend::Interpolate ($Session usually from within usertags) namespaces with, e.g., $::Session->{values}. Most times, as long as context allows, any of those access points are interchangeable, and there’s a good mix you see from developers using all of them.
 
@@ -36,7 +34,7 @@ EOP
 EOR
 ```
 
-I then created both a test page and an IC job that only called [ic-globals]. Running them both demonstrates the problem quite clearly.
+I then created both a test page and an Interchange job that only called [ic-globals]. Running them both demonstrates the problem quite clearly.
 
 From test page:
 
@@ -61,5 +59,3 @@ $Vend::Session: HASH(0xb221fa0)
 ```
 
 Interchange jobs provide yet a new context where you must consider your global variable usage. In particular, if you find code executed in the context of a job produces inconsistencies with the same code in other contexts, review your global variable usage and confirm those variables are what you assume they are.
-
-

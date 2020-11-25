@@ -27,7 +27,7 @@ So for example, let’s suppose we have a simple function called `GetUserIDByEma
 
 - **UserHandler.cs**
 
-```c#
+```csharp
 public async Task<int?> GetUserIDByEmail(string Email)
 {
     var User = await _DbContext.Users.Where(x => x.Email.Equals(Email)).FirstOrDefaultAsync();
@@ -43,7 +43,7 @@ Where \_DbContext is a reference to the interface ```IMockProjectDbContext```, d
 
 - **MockProjectDbContext.cs**
 
-```c#
+```csharp
 public interface IMockProjectDbContext
 {
     DbSet<User> Users { get; set; }
@@ -56,7 +56,7 @@ Why? Because the traditional provider for `IQueryable` and `IEnumerable` (the in
 
 - **TestClasses.cs**
 
-```c#
+```csharp
 // Async query provider for unit testing
 internal class TestAsyncQueryProvider<TEntity> : IAsyncQueryProvider
 {
@@ -158,7 +158,7 @@ Now we can create a function (taking advantage of [generics](https://www.geeksfo
 
 - **TestFunctions.cs**
 
-```c#
+```csharp
 // Return a DbSet of the specified generic type with support for async operations
 public static Mock<DbSet<T>> GetDbSet<T>(IQueryable<T> TestData) where T : class
 {
@@ -178,7 +178,7 @@ Next step will be to declare the data that we want to use for our tests. This ca
 
 - **TestData.cs**
 
-```c#
+```csharp
 // Test data for the DbSet<User> getter
 public static IQueryable<User> Users
 {
@@ -203,7 +203,7 @@ Now that we have the test data and the helper functions needed for that data to 
 
 - **UserHandlerTests.cs**
 
-```c#
+```csharp
 // Should return a user with ID 1
 [Fact]
 public async void GetUserIDByEmailTest()
@@ -234,7 +234,7 @@ This batch file will first clean and build the project, and then it calls `MiniC
 
 - **CodeCoverage.bat**
 
-```batch
+```bat
 @echo off
 
 REM Clean and build the project
