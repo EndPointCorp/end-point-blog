@@ -15,14 +15,14 @@ This worked out well in development and testing, however when it came time to ro
 
 The error in Chrome:
 
-```error
+```plaintext
 chunk-vendors.342a7610.js:21 Uncaught DOMException: Failed to execute 'appendChild' on 'Node': This node type does not support this method.
 ...
 ```
 
 The error in Safari:
 
-```error
+```plaintext
 [Error] HierarchyRequestError: The operation would yield an incorrect node tree.
 	get (chunk-vendors.342a7610.js:27:30686)
 	er (chunk-vendors.342a7610.js:27:30565)
@@ -57,7 +57,7 @@ I turned my attention to the HTML of the page itself. Comparing the CF-returned 
 
 And herein lay the issue; Vue SSR sticks in HTML comments as placeholders for nodes which are non-visible at server render time. So for example, if you had a Vue component like so:
 
-```vue
+```html
 <template>
   <div>
     My component!
@@ -99,7 +99,6 @@ I tested disabling `AutoMin` for the test site, which resulted in a functioning 
 
 I came across CF’s `Page Rules` settings, which let you modify its handling of specific URLs. I added an exception for the pages in question, turning off only the `AutoMin` setting for these pages, and voilà, the app worked while leaving this setting on for the rest of the site.
 
-TL;DR:
+### TL;DR:
 
 Cloudflare’s `AutoMin` setting can interfere with Vue SSR output by removing significant HTML comments. The fix is to disable `AutoMin` on the relevant pages using `Page Rules`.
-

@@ -38,7 +38,7 @@ How can we solve this problem? Let’s recall the rules of multiplying two matri
 
 Given two matrices: `A: m × k` and `B: k × n`, their product is another matrix `C: m × n`. We know that we can multiply matrices only if the second dimension of the first matrix equals the first one of the second matrix. In such a case, matrix `C` becomes a product of two factors: matrix `A` and matrix `B`:
 
-```latex
+```python
 C = AB
 ```
 
@@ -48,32 +48,32 @@ Notice also how this factorization is saving the space needed to persist the rat
 
 Let’s make `m` and `n` numbers into:
 
-```
+```python
 m = 1000000
 n = 10000
 ```
 
 Then the full representation takes:
 
-```
+```python
 m * n => 10,000,000,000
 ```
 
 We can now choose the value for `k`, to be later used when constructing the factorizing matrices:
 
-```
+```python
 k = 16
 ```
 
 Then to store both matrices: `A` and `B` we only need:
 
-```
+```python
 m * k + n * k => 16,160,000
 ```
 
 Making it into a fraction of the previous number:
 
-```
+```python
 (m * k + n * k) / (m * n) => 0.001616
 ```
 
@@ -180,7 +180,7 @@ def get_data(batch_size):
 
     all_raw = np.asarray(list(zip(user_ids, item_ids, ratings)), dtype='float32')
 
-    return DataIter(all_raw,  batch_size = batch_size)
+    return DataIter(all_raw, batch_size = batch_size)
 ```
 
 Notice that I’m dividing each rating by `10` to scale the ratings from `<-10,10>` to `<-1,1>`. I’m doing it because I found the process hitting numerical overflows when using the `Adam` optimizer.
@@ -273,7 +273,7 @@ fit(model, train, num_epoch=10)
 
 The training process is periodically outputting statistics similar to ones below:
 
-```
+```plaintext
 INFO:root:Epoch 1 / 10 | Batch 1000 | Mean Loss: 0.11189080774784088
 INFO:root:Epoch 1 / 10 | Batch 2000 | Mean Loss: 0.12274568527936935
 INFO:root:Epoch 1 / 10 | Batch 3000 | Mean Loss: 0.1204155907034874
@@ -547,7 +547,7 @@ def print_joke_stats(ix):
 
 Let’s see what jokes our system found to be cracking up the same kinds of people:
 
-```python
+```plaintext
 > print_joke_stats(87)
 
 Jokes making same people laugh compared to:

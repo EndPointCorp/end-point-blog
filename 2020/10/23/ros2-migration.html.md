@@ -7,6 +7,8 @@ gh_issue_number: 1675
 
 ![Photo of wilderness waterfall (Iris Falls in Yellowstone)](/blog/2020/10/23/ros2-migration/20200821-144901-crop.jpg)
 
+<!-- Photo by Jon Jensen -->
+
 Migrating from ROS 1 to ROS 2 is much more than a “flip of a switch”. The internals of ROS are fundamentally changed, client libraries and their interfaces have been rewritten. The benefits of these changes are significant for users embedding ROS in a product.
 
 Some of these benefits include:

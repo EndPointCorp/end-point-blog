@@ -7,7 +7,7 @@ title: 'Tracking down PostgreSQL XYZ error: tablespace, database, and relfilnode
 
 One of our Postgres clients recently had this error show up in their logs:
 
-```error
+```plaintext
 ERROR: could not read block 3 of relation 1663/18421/31582:
 read only 0 of 8192 bytes
 ```
@@ -26,7 +26,7 @@ The first number, **X**, indicates which tablespace this relation belongs to. [T
 
 What if the relation you are tracking is not inside of the default tablespace? The number **X** represents the OID inside the [pg_tablespace](https://www.postgresql.org/docs/9.1/static/catalog-pg-tablespace.html) system table, which will let you know where the tablespace is physically located. To illustrate, let’s create a new tablespace and then view the contents of the **pg_tablespace** table:
 
-```
+```plaintext
 $ mkdir /tmp/pgtest
 $ psql -c "CREATE TABLESPACE ttest LOCATION '/tmp/pgtest'"
 CREATE TABLESPACE
@@ -69,7 +69,7 @@ The columns may look different depending on your version of Postgres—​the im
 
 The final number in our X/Y/Z series, **Z**, represents a file on disk. You can look up which relation it is by querying the **pg_class** system table of the correct database:
 
-```
+```plaintext
 $ psql -d foobar -c "select relname,relkind from pg_class where relfilenode=31582"
 relname | relkind
 --------+-------
@@ -78,7 +78,7 @@ relname | relkind
 
 No rows, so as far as Postgres is concerned that file does not exist! Let’s verify that this is the case by looking on the disk. Recall that X was the default tablespace, which means we start in ***data_directory*/base**. Once we are in that directory, we can look for the subdirectory holding the database we want (Y or 18421)—​it is named after the OID of the database. We can then look for our relfilenode (Z or 31582) inside of that directory:
 
-```
+```plaintext
 $ psql -c 'show data_directory'
 
       data_directory       

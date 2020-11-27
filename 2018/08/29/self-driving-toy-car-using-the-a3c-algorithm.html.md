@@ -168,7 +168,7 @@ $$H(X)=-\sum_{i=1}^{n}P(x_i)log_b(P(x_i))$$
 
 Let’s look closer at the values this function produces using the following simple [Calca](https://calca.io) code:
 
-```calca
+```
 uniform = [0.25, 0.25, 0.25, 0.25]
 more confident = [0.5, 0.25, 0.15, 0.10]
 over confident = [0.95, 0.01, 0.01, 0.03]

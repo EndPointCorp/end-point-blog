@@ -7,6 +7,8 @@ gh_issue_number: 1673
 
 ![Photo of the original and 20th anniversary editions of The Pragmatic Programmer book, atop lawn and fall leaves](/blog/2020/10/16/the-pragmatic-programmer-20th-anniversary-edition/20201016_130906-sm.jpg)
 
+<!-- Photo by Jon Jensen -->
+
 The Pragmatic Programmer is a now-classic book about software development, first published in 1999. It is old enough that it predates the famous [Agile Manifesto](https://agilemanifesto.org/) of 2001. The authors of the book, Andy and Dave, were two of the 14 authors of that manifesto.
 
 For its 20th anniversary in 2019, Dave and Andy created a new edition. They updated things that had become dated, such as mentions of programming languages, tools, operating systems, websites, etc. That was, I imagine, the easy part. They went on to extensively revise the entire text and incorporate new lessons learned in the past two decades.

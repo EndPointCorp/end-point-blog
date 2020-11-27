@@ -166,7 +166,7 @@ Now that we have all that in place, we can create our image, run our container, 
 
 It will take a while, but after it’s done, we will have a VS Code instance running directly in the container. Open the VS Code terminal with Ctrl + \` and see for yourself. It will show a prompt looking like this: 
 
-```sh
+```shell
 root@ec5be7dd0b9b:/workspaces/php-in-docker-demo#
 ```
 
