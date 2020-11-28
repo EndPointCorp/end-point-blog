@@ -24,13 +24,13 @@ In Svelte, the concept and mechanics of components are similar to those of other
 <h1>{ message }!</h1>
 
 <script>
-	let message = "Hello World";
+  let message = "Hello World";
 </script>
 
 <style>
-	h1 {
-		color: royalblue;
-	}
+  h1 {
+    color: royalblue;
+  }
 </style>
 ```
 
@@ -60,10 +60,10 @@ Feel free to explore the app files. You'll see there's an `App.svelte` file that
 import App from './App.svelte';
 
 const app = new App({
-	target: document.body,
-	props: {
-		name: 'world'
-	}
+  target: document.body,
+  props: {
+    name: 'world'
+  }
 });
 
 export default app;
@@ -87,56 +87,56 @@ When it comes to templating, Svelte has everything that you would expect from a 
 
 ```html
 <script>
-	let title = 'Trying out some Svelte features';
-	let itsAllJustJavaScript = "It's all just JavaScript";
-	let youCanAlsoUseHtml = 'You can also use <b><em>HTML</em></b>';
-	let showThis = true;
-	let things = ['a thing', 'another thing', 'a thingy'];
-	let complicatedThings = [
-		{id: 1, what: 'car', why: 'it can go fast'},
-		{id: 2, what: 'plane', why: 'it can fly'},
-		{id: 3, what: 'submarine', why: 'it can go underwater'}
-	];
+  let title = 'Trying out some Svelte features';
+  let itsAllJustJavaScript = "It's all just JavaScript";
+  let youCanAlsoUseHtml = 'You can also use <b><em>HTML</em></b>';
+  let showThis = true;
+  let things = ['a thing', 'another thing', 'a thingy'];
+  let complicatedThings = [
+    {id: 1, what: 'car', why: 'it can go fast'},
+    {id: 2, what: 'plane', why: 'it can fly'},
+    {id: 3, what: 'submarine', why: 'it can go underwater'}
+  ];
 </script>
 
 <main>
-	<!-- We can use any variable that's declared in <script> -->
-	<h1>{title}</h1>
+  <!-- We can use any variable that's declared in <script> -->
+  <h1>{title}</h1>
 
-	<!-- We can use any valid JavaScript expression and its return value will be
-		rendered.-->
-	<p>{itsAllJustJavaScript.toUpperCase()}</p>
+  <!-- We can use any valid JavaScript expression and its return value will be
+    rendered.-->
+  <p>{itsAllJustJavaScript.toUpperCase()}</p>
 
-	<!-- Svelte will make sure to sanitize text so that no HTML is rendered by
-		mistake... -->
-	<p>{youCanAlsoUseHtml}</p>
+  <!-- Svelte will make sure to sanitize text so that no HTML is rendered by
+    mistake... -->
+  <p>{youCanAlsoUseHtml}</p>
 
-	<!-- ...unless you explicitly tell it not to by using @html -->
-	<p>{@html youCanAlsoUseHtml}</p>
+  <!-- ...unless you explicitly tell it not to by using @html -->
+  <p>{@html youCanAlsoUseHtml}</p>
 
-	<!-- Conditional logic works as you would expect. -->
-	{#if showThis}
-		<p>Showing this</p>
-	<!-- There's also {:else if ...} if you need it. -->
-	{:else}
-		<p>And not that</p>
-	{/if}
+  <!-- Conditional logic works as you would expect. -->
+  {#if showThis}
+    <p>Showing this</p>
+  <!-- There's also {:else if ...} if you need it. -->
+  {:else}
+    <p>And not that</p>
+  {/if}
 
-	<!-- It can iterate over an array. -->
-	<h2>Things</h2>
-	<ul>
-		{#each things as thing}
-			<li>{thing}</li>
-		{/each}
-	</ul>
+  <!-- It can iterate over an array. -->
+  <h2>Things</h2>
+  <ul>
+    {#each things as thing}
+      <li>{thing}</li>
+    {/each}
+  </ul>
 
-	<!-- It can also iterate over an array of objects and use their fields. -->
-	<h2>Complicated things</h2>
-	<ul>
-		{#each complicatedThings as thing}
-			<li>{thing.id}: a {thing.what} is complicated because {thing.why}</li>
-		{/each}	
-	</ul>
+  <!-- It can also iterate over an array of objects and use their fields. -->
+  <h2>Complicated things</h2>
+  <ul>
+    {#each complicatedThings as thing}
+      <li>{thing.id}: a {thing.what} is complicated because {thing.why}</li>
+    {/each}  
+  </ul>
 </main>
 ```
 
@@ -144,38 +144,38 @@ There's a more advanced feature that I think can prove very useful. Svelte suppo
 
 ```html
 <script>
-	// First, we define our promise and capture it in a variable.
-	let url = 'https://vpic.nhtsa.dot.gov/api/vehicles/getmodelsformake/subaru?format=json'
-	let promiseToGetSubarus = fetch(url).then(response => {
-		if (response.ok) {
-			return response.json()
-		} else {
-			throw new Error("Something went wrong ☹️");
-		}
-	});
+  // First, we define our promise and capture it in a variable.
+  let url = 'https://vpic.nhtsa.dot.gov/api/vehicles/getmodelsformake/subaru?format=json'
+  let promiseToGetSubarus = fetch(url).then(response => {
+    if (response.ok) {
+      return response.json()
+    } else {
+      throw new Error("Something went wrong ☹️");
+    }
+  });
 </script>
 
 <main>
-	<!-- Then, in the template, we await the promise and show a loading message
-		in the meantime. -->
-	{#await promiseToGetSubarus}
-		<p>loading Subarus...</p>
-	<!-- When the promise resolves, we can render the result. The "data"
-		variable here captures what our promise resovles with, in this case,
-		it's "response.json()", like we defined in our JavaScript code. -->
-	{:then data}
-		<p>Message: {data['Message']}</p>
+  <!-- Then, in the template, we await the promise and show a loading message
+    in the meantime. -->
+  {#await promiseToGetSubarus}
+    <p>loading Subarus...</p>
+  <!-- When the promise resolves, we can render the result. The "data"
+    variable here captures what our promise resovles with, in this case,
+    it's "response.json()", like we defined in our JavaScript code. -->
+  {:then data}
+    <p>Message: {data['Message']}</p>
 
-		<h2>Subaru Models</h2>
-		<ul>
-			{#each data['Results'] as model}
-				<li>{model['Model_Name']}</li>
-			{/each}
-		</ul>
-	<!-- We can also do some error handling in case our request fails. -->
-	{:catch error}
-		<p style="color: red">{error.message}</p>
-	{/await}
+    <h2>Subaru Models</h2>
+    <ul>
+      {#each data['Results'] as model}
+        <li>{model['Model_Name']}</li>
+      {/each}
+    </ul>
+  <!-- We can also do some error handling in case our request fails. -->
+  {:catch error}
+    <p style="color: red">{error.message}</p>
+  {/await}
 </main>
 ```
 
@@ -189,22 +189,22 @@ First of all, any value that you include in a template is fully reactive. So, to
 
 ```html
 <script>
-	// Here's our variable.
-	let count = 0;
+  // Here's our variable.
+  let count = 0;
 
-	// Here's a function that updates our "count" variable.
-	function handleClick() {
-		count += 1;
-	}
+  // Here's a function that updates our "count" variable.
+  function handleClick() {
+    count += 1;
+  }
 </script>
 
 <!-- This is how we tell svelte to respond to the click event on this button by
-	calling the handleClick function. -->
+  calling the handleClick function. -->
 <button on:click={handleClick}>
-	<!-- We use the count variable to render some markup here. It is reactive by
-		default. That means that the view will be updated automatically
-		everytime the value changes. That is, everytime the button is clicked. -->
-	Clicked {count} {count === 1 ? 'time' : 'times'}
+  <!-- We use the count variable to render some markup here. It is reactive by
+    default. That means that the view will be updated automatically
+    everytime the value changes. That is, everytime the button is clicked. -->
+  Clicked {count} {count === 1 ? 'time' : 'times'}
 </button>
 ```
 
@@ -220,23 +220,23 @@ In the context of our count example, we could use it with something like this:
 
 ```html
 <script>
-	let count = 0;
+  let count = 0;
 
-	// Here's a reactive declaration. It gets recalculated everytime "count"
-	// changes. That is, everytime the button is clicked. 
-	$: evenness = count % 2 == 0 ? 'even' : 'odd';
+  // Here's a reactive declaration. It gets recalculated everytime "count"
+  // changes. That is, everytime the button is clicked. 
+  $: evenness = count % 2 == 0 ? 'even' : 'odd';
 
-	function handleClick() {
-		count += 1;
-	}
+  function handleClick() {
+    count += 1;
+  }
 </script>
 
 <button on:click={handleClick}>
-	Clicked {count} {count === 1 ? 'time' : 'times'}
+  Clicked {count} {count === 1 ? 'time' : 'times'}
 </button>
 
 <!-- And as expected, this portion of the view also gets updated when "evenness"
-	changes. -->
+  changes. -->
 Evenness of count: {evenness}
 ```
 
@@ -250,13 +250,13 @@ $: console.log("The evenness changed to: " + evenness);
 
 // This gets executed everytime "evenness" or "count" changes.
 $: {
-	console.log("The evenness changed to: " + evenness);
-	console.log("The count is: " + count)
+  console.log("The evenness changed to: " + evenness);
+  console.log("The count is: " + count)
 }
 
 // This gets executed everytime "count" changes.
 $: if (count >= 10) {
-	alert("count is dangerously high!");
+  alert("count is dangerously high!");
 }
 ```
 
@@ -266,28 +266,28 @@ Svelte offers various mechanisms for going low level and directly handling the D
 
 ```html
 <script>
-	// First, we need to import the "onMount" function which allows us to
-	// execute some code when the Svelte component is fully mounted into the DOM
-	// and ready to use.
-	import { onMount } from 'svelte';
+  // First, we need to import the "onMount" function which allows us to
+  // execute some code when the Svelte component is fully mounted into the DOM
+  // and ready to use.
+  import { onMount } from 'svelte';
 
-	// Here we define this variable which we will use to capture a reference to
-	// one of our DOM elements.
-	let myDiv;
+  // Here we define this variable which we will use to capture a reference to
+  // one of our DOM elements.
+  let myDiv;
 
-	// The "myDiv" variable is initialized when the component is mounted. So any
-	// code that uses it needs to be inside an "onMount" callback. The variable
-	// contains a reference to our div element defined below.
-	onMount(() => {
-		console.log("Here's a reference to some div: ", myDiv);
-		myDiv.innerText = "The component has been mounted";
-	});
+  // The "myDiv" variable is initialized when the component is mounted. So any
+  // code that uses it needs to be inside an "onMount" callback. The variable
+  // contains a reference to our div element defined below.
+  onMount(() => {
+    console.log("Here's a reference to some div: ", myDiv);
+    myDiv.innerText = "The component has been mounted";
+  });
 </script>
 
 <!-- Using this 'bind:this="{div}"' binding, we tell Svelte to store a reference
-	to the DOM element represented by this div into the myDiv varaible. -->
+  to the DOM element represented by this div into the myDiv varaible. -->
 <div bind:this="{myDiv}">
-	This is some text that will go away.
+  This is some text that will go away.
 </div>
 ```
 
@@ -297,60 +297,60 @@ Another mechanism to perform low level DOM operations is via "actions" and the "
 
 ```html
 <script>
-	// This function encapsulates all direct DOM manipulations. It receives a
-	// "node" parameter which contains a reference to the DOM element that had
-	// the "use" directive called on it with this "customClickable" as a
-	// parameter. This function could have been defined in a separate file and
-	// imported here for easy reusability.
-	function customClickable(node) {
-		function handleOnClick(event) {
-			// We have full acces to the DOM element. We can use members like
-			// "id" or "dispatchEvent".
-			console.log(`dispatching ${node.id}'s customclick event`);
-			// Here we dispatch a custom event named "customclick" with some
-			// arbitrary parameters.
-			node.dispatchEvent(new CustomEvent('customclick', {
-				detail: { x: event.clientX, y: event.clientY }
-			}));
-		}
+  // This function encapsulates all direct DOM manipulations. It receives a
+  // "node" parameter which contains a reference to the DOM element that had
+  // the "use" directive called on it with this "customClickable" as a
+  // parameter. This function could have been defined in a separate file and
+  // imported here for easy reusability.
+  function customClickable(node) {
+    function handleOnClick(event) {
+      // We have full acces to the DOM element. We can use members like
+      // "id" or "dispatchEvent".
+      console.log(`dispatching ${node.id}'s customclick event`);
+      // Here we dispatch a custom event named "customclick" with some
+      // arbitrary parameters.
+      node.dispatchEvent(new CustomEvent('customclick', {
+        detail: { x: event.clientX, y: event.clientY }
+      }));
+    }
 
-		// Here we direcly use the DOM API to set up an event handler for our
-		// "node".
-		node.addEventListener('click', handleOnClick);
+    // Here we direcly use the DOM API to set up an event handler for our
+    // "node".
+    node.addEventListener('click', handleOnClick);
 
-		// We should return an object with a "destroy" method to be called by
-		// Svelte when the component is unmounted. In this case, all we do is
-		// remove the event listener that we added above.
-		return {
-			destroy() {
-				node.removeEventListener('click', handleOnClick);
-			}
-		};
-	}
+    // We should return an object with a "destroy" method to be called by
+    // Svelte when the component is unmounted. In this case, all we do is
+    // remove the event listener that we added above.
+    return {
+      destroy() {
+        node.removeEventListener('click', handleOnClick);
+      }
+    };
+  }
 
-	// This function gets passed the custom event data, just as
-	// "customClickable" defines it when it calls "dispatchEvent" on the "node".
-	function logCoordinates(event) {
-		console.log("Div clicked in ", {
-			x: event.detail.x, y: event.detail.y
-		});
-	}
+  // This function gets passed the custom event data, just as
+  // "customClickable" defines it when it calls "dispatchEvent" on the "node".
+  function logCoordinates(event) {
+    console.log("Div clicked in ", {
+      x: event.detail.x, y: event.detail.y
+    });
+  }
 </script>
 
 <!-- When defining our custom clickable div, we use the "use:customClickable"
-	directive to tell Svelte to call the "customClickable" function and pass it
-	the div's underlying DOM element. "customClickable" in turn augments the div
-	so that it can dispatch a new type of event: "customclick". Then, using
-	Svelte's usual event handling mechanisms, we set the element up so that when
-	the div dispatches the "customclick" event, "logCoordinates" gets executed.
+  directive to tell Svelte to call the "customClickable" function and pass it
+  the div's underlying DOM element. "customClickable" in turn augments the div
+  so that it can dispatch a new type of event: "customclick". Then, using
+  Svelte's usual event handling mechanisms, we set the element up so that when
+  the div dispatches the "customclick" event, "logCoordinates" gets executed.
 -->
 <div
-	id="my_custom_clickable_div"
-	style="border: 1px solid blue; padding: 10px; cursor: pointer;"
-	use:customClickable
-	on:customclick={logCoordinates}
+  id="my_custom_clickable_div"
+  style="border: 1px solid blue; padding: 10px; cursor: pointer;"
+  use:customClickable
+  on:customclick={logCoordinates}
 >
-	Click here and see what happens.
+  Click here and see what happens.
 </div>
 ```
 
