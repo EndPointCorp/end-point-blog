@@ -39,7 +39,7 @@ with compact clusters of many points, scattered sparsely across the landscape.
 <img src="/blog/2018/02/08/regionating-with-postgis/windfarms-dataset.jpg" alt="Wind turbine dataset" /><br />
 
 I wanted data sets with different types of geometric objects, so the [second
-data set](https://earthquake.usgs.gov/hazards/qfaults/) I chose describes
+data set](https://www.usgs.gov/natural-hazards/earthquake-hazards/faults) I chose describes
 geologic fault lines within the United States as multiple strings of connected
 line segments, comprising what’s known as a multilinestring object (see [the
 OpenGIS Consortium Simple Features for SQL
