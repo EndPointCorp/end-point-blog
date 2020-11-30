@@ -22,8 +22,10 @@ In Svelte, the concept and mechanics of components are similar to those of other
 
 ```html
 <h1>{ message }!</h1>
+<p>{ author }</a>
 
 <script>
+  export let author;
   let message = "Hello World";
 </script>
 
@@ -34,7 +36,9 @@ In Svelte, the concept and mechanics of components are similar to those of other
 </style>
 ```
 
-Very simple. Refreshing even. This content would live inside a `*.svelte` file which is what Svelte components should be named. As you can see, the `<style>` and `<script>` tags contain just plain old CSS and JavaScript, respectively. The rest of the file, the view template, is also plain HTML with some curly brace goodness injected by Svelte that allows us to render the results from JavaScript expressions. In this case, we are just rendering the `message` variable that we defined in the `<script>` portion of our component.
+Very simple. Refreshing even. This content would live inside a `*.svelte` file which is what Svelte components should be named. As you can see, the `<style>` and `<script>` tags contain just plain old CSS and JavaScript, respectively. `export let author` is how we declare component [props](https://svelte.dev/tutorial/declaring-props). That is, values that are supplied as parameters by the component that's parent to this one; or, if this was the top most component, then the prop is suplied by the client code that initializes the Svelte application.
+
+The rest of the file, the view template, is also plain HTML with some curly brace goodness injected by Svelte that allows us to render the results from JavaScript expressions. In this case, we are just rendering the `message` and `author` variable that we defined in the `<script>` portion of our component.
 
 Now, Svelte has a lot of features, so it does add some syntax to spice up HTML templates and it also uses some unconventional JavaScript to express some constructs. Nothing too revolutionary though, as we'll see later. 
 
@@ -69,9 +73,11 @@ const app = new App({
 export default app;
 ```
 
-This should be very familiar if you're used to the likes of VueJS. Here, we import the `App.svelte` file and instantiate the JavaScript component contained within by passing it it's target (that is, where in the DOM it is going to be mounted) and some props.
+This should be very familiar if you're used to the likes of VueJS. Here, we import the `App.svelte` file and instantiate the JavaScript component contained within by passing it it's target (that is, where in the DOM it is going to be mounted) and some [props](https://svelte.dev/tutorial/declaring-props).
 
 Notice how we import the component file directly and no Svelte library. We don't need it because our app does not need Svelte to run. It only needs Svelte to build. Svelte, after all, is a compiler. It's not a runtime dependency, but rather, a build time one.
+
+You can learn more about the parameters that Svelte components expect in [the official documentation](https://svelte.dev/docs#Client-side_component_API).
 
 Another interesting aspect of setting up a Svelte app is that it uses [Rollup](https://rollupjs.org) as a module bundler by default. You can confirm this by looking at the `my-svelte-project/rollup.config.js` file that was created. If you prefer [Webpack](https://webpack.js.org/), Svelte also supports it. All you need to do to build with Webpack instead of Rollup is use this command when creating your app:
 
@@ -79,7 +85,7 @@ Another interesting aspect of setting up a Svelte app is that it uses [Rollup](h
 npx degit sveltejs/template-webpack svelte-app
 ```
 
-This is just using the project template hosted in GitHub at https://github.com/sveltejs/template-webpack and it will build out a Webpack based application functionally identical to the one we've just created.
+This is just using the project template hosted in GitHub at https://github.com/sveltejs/template-webpack and it will build out a Webpack based application functionally identical to the one we've just created. You will see that such projects include a `webpack.config.js` file13w5r 79i instead of `rollup.config.js`.
 
 ## The templating capabilities are powerful
 
@@ -237,10 +243,12 @@ In the context of our count example, we could use it with something like this:
 
 <!-- And as expected, this portion of the view also gets updated when "evenness"
   changes. -->
-Evenness of count: {evenness}
+<p>
+  Evenness of count: {evenness}
+</p>
 ```
 
-The fist time I saw this `$:` syntax I thouhgt it was weird. And it kind of is. However, it's actually valid JavaScript. This is just a label (as explained in [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/label)). The Svelte magic comes into play when it finds a label like this one. The compiler looks at the statement to the right of the label and does what it needs to do in order to make it reactive.
+The fist time I saw this `$:` syntax I thouhgt it was weird, and it kind of is. However, it's actually valid JavaScript. This is just a label (as explained in [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/label)). The Svelte magic comes into play when it finds a label like this one. The compiler looks at the statement to the right of the label and does what it needs to do in order to make it reactive.
 
 Svelte can also reactively run arbitratry code. Pretty much any statement can be run reactively. For example, all of these work:
 
@@ -359,7 +367,7 @@ Again, this example is doing something completely unnecessary because divs are a
 And that's it for now. These are the features that called my attention as I dove into Svelte for the first time. Of course, Svelte offers many other features that I didn't discuss here like:
 
 - [Two way data binding](https://svelte.dev/tutorial/text-inputs) (for input elements in forms and even between components).
-- [Handling and dispatching DOM and custom events](https://svelte.dev/tutorial/dom-events) (to keep the flow of data through the component hierarchy clean).
+- [Handling and dispatching DOM and custom events](https://svelte.dev/tutorial/dom-events) (to keep the flow of data through the component hierarchy clean and obvious).
 - [Transitions](https://svelte.dev/tutorial/transition) and [Animations](https://svelte.dev/tutorial/animate) (which in Svelte are built in, first class citizens).
 - [Component composition](https://svelte.dev/tutorial/slots) (traditional nesting and via slots)
 - [Global application state management](https://svelte.dev/tutorial/writable-stores) (a la [Vuex](https://vuex.vuejs.org/) or [Redux](https://redux.js.org/)).
@@ -367,4 +375,6 @@ And that's it for now. These are the features that called my attention as I dove
 
 These are features that other frameworks also include and Svelte offers similar implementations, with its own particular flavor. I just wanted to mention them so you know they are there. To learn more, I'd encourage you to work through the [excellent official tutorial](https://svelte.dev/tutorial/).
 
-All in all, I think Svelte is a great contender. It offers all the features that put it right up there with the big guys. It also promises a great uplift in performance when compared to said big guys. As a cherry on top, it offers a great developer/code authoring experience which is familiar and also arguably better than existing frameworks. I for one am looking forward to seeing how the project evolves and matures and what cool things people make with it. And why not? Also try it out in some projects of my own.
+In the topic of features, Svelte has one advantage in that, since it's a compiler, it has more freedom than traditional frameworks to add a lot of functionality. They have this freedom because more features don't mean any aditional overhead (in space or performnace) for those who don't use them. Svelte is a compiler, so it has the ability to produce a bundle which includes only the features that are being used in your app. In other words, the framework can grow and not have to deal with the constraints of traditional library based frameworks.
+
+All in all, I think Svelte is a great contender. It offers all the features that put it right up there with the big guys. It also promises a great uplift in performance when compared to said big guys. As a cherry on top, it offers a great developer/code authoring experience which is familiar and also arguably better than existing frameworks. I for one am looking forward to seeing how the project evolves and matures and what cool things people make with it. And of course, also try it out in some projects of my own.
