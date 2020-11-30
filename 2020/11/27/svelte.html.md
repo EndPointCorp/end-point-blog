@@ -85,7 +85,7 @@ Another interesting aspect of setting up a Svelte app is that it uses [Rollup](h
 npx degit sveltejs/template-webpack svelte-app
 ```
 
-This is just using the project template hosted in GitHub at https://github.com/sveltejs/template-webpack and it will build out a Webpack based application functionally identical to the one we've just created. You will see that such projects include a `webpack.config.js` file13w5r 79i instead of `rollup.config.js`.
+This is just using the project template hosted in GitHub at https://github.com/sveltejs/template-webpack and it will build out a Webpack based application functionally identical to the one we've just created. You will see that such projects include a `webpack.config.js` file instead of `rollup.config.js`.
 
 ## The templating capabilities are powerful
 
