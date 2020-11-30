@@ -59,11 +59,11 @@ catch (Exception ex) {
 
 Now, make sure you aren't running Visual Studio as administrator, then build and run the project. QuickBooks and your application need to be running on the same user level, otherwise you'll receive an error message "Could not start QuickBooks".
 
-![Verifying the application with QuickBooks](/2020/11/30/automating-data-entry-with-quickbooks-desktop-sdk/verifying-the-application.PNG)
-
 Once you’ve run your application, a popup should appear from QuickBooks, asking you if you want to allow this application to access your company file. Select "Yes, always; allow access even if QuickBooks is not running", then click "Continue".
 
-Now, when you run the code example, it should return “Connected”. QuickBooks will make you verify your application the first time it tries to connect. In the sample, we've put "QuickBooks Web Api" as the application name. If you change this later, you'll be prompted with the same message
+![Verifying the application with QuickBooks](/2020/11/30/automating-data-entry-with-quickbooks-desktop-sdk/verifying-the-application.PNG)
+
+Now, when you run the code example, it should return “Connected”. QuickBooks will make you verify your application the first time it tries to connect. In the sample, we've put "QuickBooks Web Api" as the application name. If you change this later, you'll be prompted to verify your application again.
 
 ### Communicating with Quickbooks 
 
