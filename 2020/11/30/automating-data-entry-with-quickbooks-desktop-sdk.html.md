@@ -67,8 +67,7 @@ Now, when you run the code example, it should return “Connected”. QuickBooks
 
 ### Communicating with Quickbooks 
 
-Now that you can successfully open a connection and start a session, we'll add some code to send requests to QuickBooks, and write some code to make this process cleaner and more readable.
-We'll again be using the QBSessionManager class from the SDK to accomplish this. The key methods to be aware of here are:
+Now that you can successfully open a connection and start a session, we'll look at some code to send requests to QuickBooks. We'll again be using the `QBSessionManager` class from the SDK to accomplish this. The key methods to be aware of here are:
 
 * `IMsgSetRequest QBSessionManager::CreateMsgSetRequest(string, short, short)`
 * `IMsgSetResponse QBSessionManager::DoRequests(IMsgSetRequest)`
