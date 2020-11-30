@@ -74,7 +74,7 @@ Now that you can successfully open a connection and start a session, we'll look 
 
 The `QBSessionManager` sends a set of requests, contained in an SDK object of type `IMsgSetRequest`, to QuickBooks, which processes each of these requests and responds to each. All the responses are returned in another SDK object of type `IMsgSetResponse`.
 
-The `IMsgSetRequest` object contains methods to create each type of request. For example, if you wanted to get a list of all customers from QuickBooks, you could use the `IMsgSetRequest.AppendCustomerQueryRq()` method. Try creating a new `IMsgSetRequest` object in Visual Studio and typing `.` to see a list of all the Append methods available. There's one for each request listed in the api reference!
+The `IMsgSetRequest` object contains methods to create each type of request. For example, if you wanted to get a list of all customers from QuickBooks, you could use the `IMsgSetRequest.AppendCustomerQueryRq()` method, which creates a new `ICustomerQuery` request object, appends it to the message set, and returns the request object. Try creating a new `IMsgSetRequest` object in Visual Studio and typing `.` to see a list of all the Append methods available. There's one for each request listed in the api reference!
 
 ### Sending a Request to QuickBooks
 
