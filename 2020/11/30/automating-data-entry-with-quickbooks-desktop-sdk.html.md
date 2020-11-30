@@ -32,7 +32,7 @@ http://localhost:2211/QBSDK13.0/doc/html/GettingStarted.html.
 
 To add the SDK to your project in Visual Studio, right click on `References -> Add Reference`, and in the COM tab scroll down to qbFC13 1.0 Type Library, and click add. This should already be in the list once you’ve installed the SDK. 
 
-![Adding the reference to your project](/2020/11/30/automating-data-entry-with-quickbooks-desktop-sdk/adding-reference.png)
+![Adding the reference to your project](/2020/11/30/automating-data-entry-with-quickbooks-desktop-sdk/adding-reference.PNG)
 
 ### Opening a session with Quickbooks
 In order to get started communicating with QuickBooks, you'll have to open a new session using the `QBSessionManager` class provided in the SDK. This is the class you will use to send and receive data from QuickBooks. Before you write any code, make sure that you have a copy of QuickBooks installed on your machine, and that it's currently running. The below code snippet shows how to connect to Quickbooks via the `QBSessionManager`. 
