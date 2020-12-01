@@ -177,7 +177,7 @@ In this case we're limiting the amount of customers in the response to 50. Each 
 
 ### Conclusion
 
-The **Quickbooks Desktop SDK** makes it simple to move data around between your application and your company's Quickbooks installation. If you end up doing extensive work with the SDK, I'd recommend wrapping the `QBSessionManager` in a new class that can convert the responses into a `List<IResponse>`. This way, you can easily get any response you want by its type in a single line using a LINQ `Where` query.
+The **Quickbooks Desktop SDK** makes it simple to move data around between your application and your company's Quickbooks installation. If you end up doing extensive work with the SDK, I'd recommend wrapping the `QBSessionManager` in a new class that can convert the responses into a `List<IResponse>`. This way, you can easily get any response's `Detail` property by its type in a single line using a LINQ query.
 
 If you have any questions about the SDK, feel free to leave a comment!
 
