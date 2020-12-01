@@ -1,6 +1,6 @@
 ---
 author: "Dan Gomm"
-title: "Automating Data Entry With Quickbooks Desktop SDK"
+title: "Demonstrating The Quickbooks Desktop SDK"
 tags: quickbooks, csharp, dotnet
 ---
 
@@ -174,6 +174,12 @@ customerQuery.ORCustomerListQuery.CustomerListFilter.MaxReturned.SetValue(50);
 ```
 
 In this case we're limiting the amount of customers in the response to 50. Each request is a unique object with different properties, but many of the requests that *receive* data from QuickBooks provide a filter object that can be used to control the data that's included in the response.
+
+### Conclusion
+
+The **Quickbooks Desktop SDK** makes it simple to move data around between your application and your company's Quickbooks installation. If you end up doing extensive work with the SDK, I'd recommend wrapping the `QBSessionManager` in a new class that can convert the responses into a `List<IResponse>`. This way, you can easily get any response you want by its type in a single line using a LINQ `Where` query.
+
+If you have any questions about the SDK, feel free to leave a comment!
 
 ### Further Reading
 
