@@ -29,10 +29,9 @@ Even some 'traditional' storage can run in to issues these days- hybrid drives o
 
 So how to be sure?
 
-Ideally, I would recommend using a combination of these methods for security, but here's the ones 
+Ideally, I would recommend using a combination of these methods for security, but here's the main methods that are used at present.
 
-### 
-Run Shred and Hope for the Best.
+### Run Shred and Hope for the Best.
 
 This is an option, to be sure. Writing to every block of the disk will generally wipe the data securely enough- however if there are sectors that have been marked bad by the drive firmware, these won't be accessible. 
 
@@ -96,4 +95,4 @@ For spinning disks, a similar procedure is advised, though there are other optio
 ![Check your local laws and follow all safety procedures before engaging in creative drive destruction techniques! (depicted- a drive with several slugs embedded in it](/2020/12/05/drive_destruction/drive_destruction.jpg)
 
 ### Final thoughts.
-Use any or all of the above options and you'll be ahead of the game. Taking the time to sanitize your data is almost always a good investment.
+Use any or all of the above options and you'll be ahead of the game. Taking the time to sanitize your data- or better, taking the time to encrypt it to begin with, is almost always a good investment.
