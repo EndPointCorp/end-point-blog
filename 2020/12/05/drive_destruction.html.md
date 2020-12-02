@@ -92,7 +92,9 @@ For the home, [disassembling the drive](https://www.myfixguide.com/samsung-860-p
 
 For spinning disks, a similar procedure is advised, though there are other options, of course...
 
-![Check your local laws and follow all safety procedures before engaging in creative drive destruction techniques! (depicted- a drive with several slugs embedded in it)](/2020/12/05/drive_destruction/drive_destruction.jpg)
+![depicted- a drive with several slugs embedded in it](/2020/12/05/drive_destruction/drive_destruction.jpg)
+
+>_Check your local laws and follow all safety procedures before engaging in creative drive destruction techniques!_
 
 ### Final thoughts.
 Use any or all of the above options and you'll be ahead of the game. Taking the time to sanitize your data- or better, taking the time to encrypt it to begin with, is almost always a good investment.
