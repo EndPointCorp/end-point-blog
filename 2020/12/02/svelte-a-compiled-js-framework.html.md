@@ -21,7 +21,7 @@ After learning all that, I decided to take a closer look at Svelte and see how i
 
 In Svelte, the concept and mechanics of components are similar to those of other frameworks. Components encapsulate the HTML, CSS and JavaScript of a given portion of our applications in a reusable manner. Svelte components look very similar to plain old HTML files. [There’s minimal ceremony](https://svelte.dev/blog/write-less-code). Here’s what a “hello world” example could look like as a Svelte component:
 
-```svelte
+```html
 <h1>{ message }!</h1>
 <p>{ author }</a>
 
@@ -49,7 +49,7 @@ In front end web development, we spend most of the time authoring components lik
 
 All you need is to install [NodeJS](https://nodejs.org) so that you have `npm` and `npx` available and can run this:
 
-```
+```bash
 npx degit sveltejs/template my-svelte-project
 ```
 
@@ -82,7 +82,7 @@ You can learn more about the parameters that Svelte components expect in [the of
 
 Another interesting aspect of setting up a Svelte app is that it uses [Rollup](https://rollupjs.org) as a module bundler by default. You can confirm this by looking at the `my-svelte-project/rollup.config.js` file that was created. If you prefer [Webpack](https://webpack.js.org/), Svelte also supports it. All you need to do to build with Webpack instead of Rollup is use this command when creating your app:
 
-```
+```bash
 npx degit sveltejs/template-webpack svelte-app
 ```
 
@@ -92,7 +92,7 @@ This is just using the project template hosted on [GitHub](https://github.com/sv
 
 When it comes to templating, Svelte has everything that you would expect from a modern JavaScript front end framework and then some. You got your basics like interpolation and flow control, but there are also some more advanced features that look to be very useful. Here’s an example component that demonstrate some of the most common capabilities:
 
-```svelte
+```html
 <script>
   let title = 'Trying out some Svelte features';
   let itsAllJustJavaScript = "It's all just JavaScript";
@@ -149,7 +149,7 @@ When it comes to templating, Svelte has everything that you would expect from a 
 
 There’s a more advanced feature that I think can prove very useful. Svelte supports rendering of templates based on promises. Here’s an example demonstrating how easy it is to implement a very common pattern on front end development: displaying a loading message while we fetch some information via an HTTP request:
 
-```svelte
+```html
 <script>
   // First, we define our promise and capture it in a variable.
   let url = 'https://vpic.nhtsa.dot.gov/api/vehicles/getmodelsformake/subaru?format=json'
@@ -194,7 +194,7 @@ Svelte also checks the reactivity box, and it does so in some interesting ways.
 
 First of all, any value that you include in a template is fully reactive. So, to take an example from Svelte’s own documentation, this works as you’d expect:
 
-```svelte
+```html
 <script>
   // Here's our variable.
   let count = 0;
@@ -225,7 +225,7 @@ $: evenness = count % 2 == 0 ? 'even' : 'odd';
 
 In the context of our count example, we could use it with something like this:
 
-```svelte
+```html
 <script>
   let count = 0;
 
@@ -273,7 +273,7 @@ $: if (count >= 10) {
 
 Svelte offers various mechanisms for going low level and directly handling the DOM. One such method is the “this” binding. With it, we can take a given HTML element and have Svelte assign a reference to it into a variable of our choosing. Here’s how it works:
 
-```svelte
+```html
 <script>
   // First, we need to import the "onMount" function which allows us to
   // execute some code when the Svelte component is fully mounted into the DOM
@@ -304,7 +304,7 @@ The only thing to keep in mind is that we should only use the `myDiv` variable i
 
 Another mechanism to perform low level DOM operations is via “actions” and the “use” directive. This is a more robust and reusable alternative to the “this” binding in that it allows us to define a separate function to augment a given DOM element with custom functionality and interact with the rest of the Svelte app ecosystem via firing events. Here’s an example illustrating the most unnecessarily roundabout way of making a div clickable using the DOM API directly:
 
-```svelte
+```html
 <script>
   // This function encapsulates all direct DOM manipulations. It receives a
   // "node" parameter which contains a reference to the DOM element that had
