@@ -1,13 +1,13 @@
 ---
 author: "Kevin Campusano"
 title: "Svelte: A compiled JavaScript front-end framework"
-tags: javascript, web-development
+tags: javascript, web-development, frameworks
 gh_issue_number: 1700
 ---
 
 ![Svelte banner](/blog/2020/12/02/svelte-a-compiled-js-framework/banner.png)
 
-It seems like [JavaScript frameworks](https://en.wikipedia.org/wiki/Comparison_of_JavaScript_frameworks) are [a dime a dozen these days](https://dayssincelastjavascriptframework.com/). In the [JavaScript](https://www.javascript.com/) world, there are frameworks and libraries for almost every task that you can imagine, and there is much overlap. In the front-end web development area though, there are three who reign supreme: [Angular](https://angularjs.org/), [React](https://reactjs.org/), and [Vue.js](https://vuejs.org/). Whether you’re building [single-page apps](https://en.wikipedia.org/wiki/Single-page_application) or traditional web apps with some front-end zest, you can’t go wrong with any of these three.
+It seems like [JavaScript frameworks](https://en.wikipedia.org/wiki/Comparison_of_JavaScript_frameworks) are [a dime a dozen these days](https://dayssincelastjavascriptframework.com/). In the JavaScript world, there are frameworks and libraries for almost every task that you can imagine, and there is much overlap. In the front-end web development area though, there are three who reign supreme: [Angular](https://angularjs.org/), [React](https://reactjs.org/), and [Vue.js](https://vuejs.org/). Whether you’re building [single-page apps](https://en.wikipedia.org/wiki/Single-page_application) or traditional web apps with some front-end zest, you can’t go wrong with any of these three.
 
 Recently though, I discovered a new player in this field that promises to offer a similar developer experience to existing frameworks with [great performance gains](https://youtu.be/AdNJ3fydeao?t=1084). Its name is [Svelte](https://svelte.dev/), and it achieves this promise in a very interesting way: [it’s a compiler](https://svelte.dev/blog/svelte-3-rethinking-reactivity).
 
@@ -19,7 +19,7 @@ After learning all that, I decided to take a closer look at Svelte and see how i
 
 ### Simple components
 
-In Svelte, the concept and mechanics of components are similar to those of other frameworks. Components encapsulate the HTML, CSS and JavaScript of a given portion of our applications in a reusable manner. Svelte components look very similar to plain old HTML files. [minimal fluff](https://svelte.dev/blog/write-less-code). Here’s what a “hello world” example could look like as a Svelte component:
+In Svelte, the concept and mechanics of components are similar to those of other frameworks. Components encapsulate the HTML, CSS, and JavaScript of a given portion of our applications in a reusable manner. Svelte components look very similar to plain old HTML files, [minimal fluff](https://svelte.dev/blog/write-less-code). Here’s what a “hello world” example could look like as a Svelte component:
 
 ```html
 <h1>{ message }!</h1>
@@ -45,7 +45,7 @@ Now, Svelte has a lot of features, so it does add some syntax to spice up HTML t
 
 ### It’s easy to set up
 
-In front-end web development, we spend most of the time authoring components like these, so we’ll talk more about them later. In order for the components to do anything though, we need that compilation step that I mentioned earlier. That means setting up a new Svelte project in our development environment. Luckily for us, Svelte makes this easy.
+In front-end web development, we spend most of the time authoring components like these, so we’ll talk more about them later. In order for the components to do anything, though, we need that compilation step that I mentioned earlier. That means setting up a new Svelte project in our development environment. Luckily for us, Svelte makes this easy.
 
 All you need is to install [Node.js](https://nodejs.org) so that you have `npm` and `npx` available and can run this:
 
@@ -59,7 +59,7 @@ This will use the Svelte project template hosted [here](https://github.com/svelt
 
 ![Hello to the Svelte world](/blog/2020/12/02/svelte-a-compiled-js-framework/hello-world.png)
 
-Feel free to explore the app files. You’ll see there’s an `App.svelte` file that has our sole app component. It contains some HTML, CSS and JS. `main.js` is particularly interesting for us at this point because it shows us how a Svelte app is initiated.
+Feel free to explore the app files. You’ll see there’s an `App.svelte` file that has our sole app component. It contains some HTML, CSS, and JS. `main.js` is particularly interesting for us at this point because it shows us how a Svelte app is initiated.
 
 ```javascript
 import App from './App.svelte';
@@ -80,17 +80,17 @@ Notice how we import the component file directly and no Svelte library. We don�
 
 You can learn more about the parameters that Svelte components expect in [the official documentation](https://svelte.dev/docs#Client-side_component_API).
 
-Another interesting aspect of setting up a Svelte app is that it uses [Rollup](https://rollupjs.org) as a module bundler by default. You can confirm this by looking at the `my-svelte-project/rollup.config.js` file that was created. If you prefer [Webpack](https://webpack.js.org/), Svelte also supports it. All you need to do to build with Webpack-instead of Rollup is use this command when creating your app:
+Another interesting aspect of setting up a Svelte app is that it uses [Rollup](https://rollupjs.org) as a module bundler by default. You can confirm this by looking at the `my-svelte-project/rollup.config.js` file that was created. If you prefer [Webpack](https://webpack.js.org/), Svelte also supports it. All you need to do to build with Webpack instead of Rollup is use this command when creating your app:
 
 ```bash
 npx degit sveltejs/template-webpack svelte-app
 ```
 
-This is just using the project template hosted on [GitHub](https://github.com/sveltejs/template-webpack) and it will build out a Webpack based application functionally identical to the one we’ve just created. You will see that such projects include a `webpack.config.js` file instead of `rollup.config.js`.
+This is just using the project template hosted on [GitHub](https://github.com/sveltejs/template-webpack) and it will build out a Webpack-based application functionally identical to the one we’ve just created. You will see that such projects include a `webpack.config.js` file instead of `rollup.config.js`.
 
 ### The templating capabilities are powerful
 
-When it comes to templating, Svelte has everything that you would expect from a modern JavaScript front-end framework and then some. You got your basics like interpolation and flow control, but there are also some more advanced features that look to be very useful. Here’s an example component that demonstrate some of the most common capabilities:
+When it comes to templating, Svelte has everything that you would expect from a modern JavaScript front-end framework and then some. You’ve got your basics like interpolation and flow control, but there are also some more advanced features that look to be very useful. Here’s an example component that demonstrate some of the most common capabilities:
 
 ```html
 <script>
@@ -155,7 +155,7 @@ There’s a more advanced feature that I think can prove very useful. Svelte sup
   let url = 'https://vpic.nhtsa.dot.gov/api/vehicles/getmodelsformake/subaru?format=json'
   let promiseToGetSubarus = fetch(url).then(response => {
     if (response.ok) {
-      return response.json()
+      return response.json();
     } else {
       throw new Error("Something went wrong ☹️");
     }
@@ -205,12 +205,12 @@ First of all, any value that you include in a template is fully reactive. So, to
   }
 </script>
 
-<!-- This is how we tell svelte to respond to the click event on this button by
+<!-- This is how we tell Svelte to respond to the click event on this button by
   calling the handleClick function. -->
 <button on:click={handleClick}>
   <!-- We use the count variable to render some markup here. It is reactive by
     default. That means that the view will be updated automatically
-    everytime the value changes. That is, everytime the button is clicked. -->
+    every time the value changes. That is, every time the button is clicked. -->
   Clicked {count} {count === 1 ? 'time' : 'times'}
 </button>
 ```
@@ -313,7 +313,7 @@ Another mechanism to perform low level DOM operations is via “actions” and t
   // imported here for easy reusability.
   function customClickable(node) {
     function handleOnClick(event) {
-      // We have full acces to the DOM element. We can use members like
+      // We have full access to the DOM element. We can use members like
       // "id" or "dispatchEvent".
       console.log(`dispatching ${node.id}'s customclick event`);
       // Here we dispatch a custom event named "customclick" with some
@@ -367,15 +367,15 @@ Again, this example is doing something completely unnecessary because divs are a
 
 And that’s it for now. These are the features that called my attention as I dove into Svelte for the first time. Of course, Svelte offers many other features that I didn’t discuss here like:
 
-- [Two way data binding](https://svelte.dev/tutorial/text-inputs) (for input elements in forms and even between components).
-- [Handling and dispatching DOM and custom events](https://svelte.dev/tutorial/dom-events) (to keep the flow of data through the component hierarchy clean and obvious).
-- [Transitions](https://svelte.dev/tutorial/transition) and [Animations](https://svelte.dev/tutorial/animate) (which in Svelte are built in, first class citizens).
-- [Component composition](https://svelte.dev/tutorial/slots) (traditional nesting and via slots)
-- [Global application state management](https://svelte.dev/tutorial/writable-stores) (a la [Vuex](https://vuex.vuejs.org/) or [Redux](https://redux.js.org/)).
-- A full stack application framework in the form of [Sapper](https://sapper.svelte.dev/).
+- [Two-way data binding](https://svelte.dev/tutorial/text-inputs) for input elements in forms and even between components.
+- [Handling and dispatching DOM and custom events](https://svelte.dev/tutorial/dom-events) to keep the flow of data through the component hierarchy clean and obvious.
+- [Transitions](https://svelte.dev/tutorial/transition) and [Animations](https://svelte.dev/tutorial/animate) which in Svelte are built in, first-class citizens.
+- [Component composition](https://svelte.dev/tutorial/slots): traditional nesting and via slots.
+- [Global application state management](https://svelte.dev/tutorial/writable-stores) à la [Vuex](https://vuex.vuejs.org/) or [Redux](https://redux.js.org/).
+- A full-stack application framework in the form of [Sapper](https://sapper.svelte.dev/).
 
 These are features that other frameworks also include and Svelte offers similar implementations, with its own particular flavor. I just wanted to mention them so you know they are there. To learn more, I’d encourage you to work through the [excellent official tutorial](https://svelte.dev/tutorial/).
 
-When talking about features, Svelte has one advantage in that it has more freedom than traditional frameworks to add a lot of functionality. They have this freedom because more features don’t mean any additional overhead (in space or performance) for those who don’t use them. Svelte is a compiler, so it has the ability to produce a bundle which includes only the features that are being used in your app. In other words, the framework can grow and not have to deal with the constraints of traditional library based frameworks. The future seems bright.
+When talking about features, Svelte has one advantage in that it has more freedom than traditional frameworks to add a lot of functionality. They have this freedom because more features don’t mean any additional overhead (in space or performance) for those who don’t use them. Svelte is a compiler, so it has the ability to produce a bundle which includes only the features that are being used in your app. In other words, the framework can grow and not have to deal with the constraints of traditional library-based frameworks. The future seems bright.
 
-All in all, I think Svelte is a great contender. It offers all the features that put it right up there with the big guys. It also promises a great uplift in performance when compared to said big guys. As a cherry on top, it offers a great developer/​code authoring experience which is familiar and also arguably better than existing frameworks. I for one am looking forward to seeing how the project evolves and matures and what cool things people make with it. And of course, also try it out in some projects of my own.
+All in all, I think Svelte is a great contender. It offers all the features that put it right up there with the big guys. It also promises a great uplift in performance when compared to said big guys. As a cherry on top, it offers a great developer/​code authoring experience which is familiar and also arguably better than existing frameworks. I for one am looking forward to seeing how the project evolves and matures and what cool things people make with it. And of course, also trying it out in some projects of my own.

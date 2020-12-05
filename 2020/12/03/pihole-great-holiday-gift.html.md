@@ -1,6 +1,6 @@
 ---
 author: "Ardyn Majere"
-title: "A Great Gift for the Holidays: No ads!"
+title: "A great gift for the holidays: No ads!"
 tags: linux, security, networking
 gh_issue_number: 1701
 ---
@@ -29,7 +29,7 @@ Here’s some example stats from the author’s home. This is one (rather heavy)
 
 What sort of knowledge do you need in order to be able to install Pi-hole? Well, it does require some minimal command line knowledge. However, if you don’t already have this, then this is a great first project to learn with.
 
-The Pi-hole website offers [great instructions](https://docs.pi-hole.net/main/prerequisites/) for installing the software. While you may want to use it as initially intended—on a $35 Raspberry Pi board—you don’t have to purchase new hardware. You can run Pi-hole on any Linux server, or even on a Docker instance or using a Virtual Machine on many different services. 
+The Pi-hole website offers [great instructions](https://docs.pi-hole.net/main/prerequisites/) for installing the software. While you may want to use it as initially intended—on a $35 Raspberry Pi board—you don’t have to purchase new hardware. You can run Pi-hole on any Linux server, or even on a Docker instance or using a virtual machine on many different services. 
 
 > If you’re an End Point fan, our brand [Open Hosting](https://www.openhosting.com/) can provide you with an inexpensive Linux container machine for under $5 a month that will easily handle a large household’s DNS requirements.
 
@@ -37,7 +37,7 @@ Just make sure that whatever system you install Pi-hole on is always turned on a
 
 ### Adding blocklists
 
-Adding blocklists is as simple as putting in a link to a text file with the offending URLs. There are quite a few blocklists curated on the page. The trick is to choose blocklists that will meet your requirements—Some of the block lists can generate false positives. If you’re using Pi-hole for yourself, that’s probably not an issue since you can manually whitelist things as you go, but if you have a larger household, you may want to stick with the more conservative whitelists. Same if you’re setting this up for a relative or family member where you won’t be on site to fix things.
+Adding blocklists is as simple as putting in a link to a text file with the offending hostnames. There are quite a few blocklists curated on the page. The trick is to choose blocklists that will meet your requirements—Some of the block lists can generate false positives. If you’re using Pi-hole for yourself, that’s probably not an issue since you can manually whitelist things as you go, but if you have a larger household, you may want to stick with the more conservative whitelists. Same if you’re setting this up for a relative or family member where you won’t be on site to fix things.
 
 > [Firebog.net](https://firebog.net/) has a good list of block lists, sorted by category. Green checkmarks are best for minimal maintenance situations; the other categories may incur false positives that require whitelisting.
 
@@ -45,7 +45,7 @@ Adding blocklists is as simple as putting in a link to a text file with the offe
 
 While blocking ads is a great start, to add further security to your DNS, you have several options.
 
-You can enable DNSSEC, which doesn’t encrypt your DNS but does validate it, assuming the website owner actually enabled it. This is a good thing to enable, but it doesn’t replace true encrypted DNS. 
+You can enable DNSSEC, which doesn’t encrypt your DNS but does validate it, assuming the domain owner actually enabled it. This is a good thing to enable, but it doesn’t replace true encrypted DNS. 
 
 [Cloudflare](https://www.cloudflare.com/) is the service that Pi-hole officially recommends using, via the tool [cloudflared](https://docs.pi-hole.net/guides/dns-over-https/#configuring-dns-over-https). This routes all DNS traffic over https to Cloudflare’s DNS servers by default. There are also several other options, such as [DNSCrypt](https://www.dnscrypt.org/). There’s a debate going on about DNS over HTTPS vs DNS over TLS, which is summed up nicely by this [IEEE spectrum article](https://spectrum.ieee.org/tech-talk/telecom/security/the-fight-over-encrypted-dns-boils-over).
 
@@ -53,7 +53,7 @@ Do you need to do this? No. But taking this step is relatively easy and protects
 
 ### What can’t it do?
 
-For now, it won’t block ALL advertising. YouTube ads aren’t blocked, nor are most streaming services that display ads from their internal servers. It won’t block ads hosted directly on the website you’re visiting. 
+For now, it won’t block **all** advertising. YouTube ads aren’t blocked, nor are most streaming services that display ads from their internal servers. It won’t block ads hosted directly on the website you’re visiting. 
 
 To keep things running smoothly, there is some maintenance required: the OS and Pi-hole need to be updated periodically, and the blocklists as well, though these tasks are easily automated.
 
