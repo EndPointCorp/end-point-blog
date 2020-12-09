@@ -1,13 +1,13 @@
 ---
 author: "Bimal Gharti Magar"
 title: "Vue 3 is out with exciting new features"
-tags: vuejs, frameworks
+tags: vue, frameworks
 gh_issue_number: 1704
 ---
 
 ![Space Shuttle launch](/blog/2020/12/08/vue-3-notable-features/shuttle-launch.jpg)
 
-Photo courtesy [NASA](https://www.nasa.gov/mission_pages/shuttle/images)
+Photo courtesy of [NASA](https://www.nasa.gov/mission_pages/shuttle/images)
 
 Vue 3 was officially [released](https://github.com/vuejs/vue-next/releases/tag/v3.0.0) on September 18, 2020 with improved performance and some exciting new features.
 
@@ -245,7 +245,7 @@ Vue 3:
 </template>
 ```
 
-### Emits component Option
+### Emits component option
 
 In Vue 2, props for a component are declared in `props` option, making it easy to see which props are being used. But for custom events, we had to search the whole component to see what events are used. Now, custom events can be declared just like props via the `emits` option. Since this option accepts object notation, validators for arguments can be defined similar to validators in the props option.
 
@@ -386,8 +386,8 @@ nextTick(() => {
 })
 ```
 
-[Here](https://v3.vuejs.org/guide/migration/introduction.html#breaking-changes) are the list of more breaking changes.
+[Here](https://v3.vuejs.org/guide/migration/introduction.html#breaking-changes) is a list of more breaking changes.
 
-Many Vue libraries are yet to implement the changes that would work with Vue 3. For example, we use Vuetify in various client projects and this is not supported in Vue 3 as of writing this blog. There is [a roadmap](https://vuetifyjs.com/en/introduction/roadmap/) planned for Vuetify, with the alpha release in Q4 2020 and target release in summer 2021.
+Many Vue libraries are yet to implement the changes that would work with Vue 3. For example, we use Vuetify in various client projects and this is not supported in Vue 3 as of writing this blog. There is [a roadmap](https://vuetifyjs.com/en/introduction/roadmap/) planned for Vue 3 support in Vuetify, with the alpha release in Q4 2020 and target release in summer 2021.
 
 For information about migrating Vue 2 projects check out the [migration guide](https://v3.vuejs.org/guide/migration/introduction.html).
