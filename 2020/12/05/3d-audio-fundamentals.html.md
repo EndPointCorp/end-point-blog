@@ -8,7 +8,7 @@ gh_issue_number: 1703
 ![Concert hall acoustics](/blog/2020/12/05/3d-audio-fundamentals/acoustics.jpg)
 Photo by [PT Russell](https://unsplash.com/@pt_photos?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText) on [Unsplash](https://unsplash.com/?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText)</span>
 
-It’s easy to prove to yourself that you need two eyes to perceive how far away things are in the world around you. Shut one eye and the world appears flat. This ability is called stereoscopic vision. A less known exercise is proving that you also need two ears to perceive which direction a sound is coming from. Shut one ear and the world outside your vision is harder to track. This ability is called binaural hearing.
+It’s easy to prove to yourself that you need two eyes to perceive how far away things are in the world around you. Shut one eye and the world appears flat. This ability is called stereoscopic vision. A lesser-known exercise is proving that you also need two ears to perceive which direction a sound is coming from. Shut one ear and the world outside your vision is harder to track. This ability is called binaural hearing.
 
 As VR technology continues to push the boundaries of sight immersion with increasing accessibility, sound reproduction has not lagged behind. In fact, the consumer hardware needed for sound immersion has been accessible for decades. By leveraging 3D audio techniques, a pair of headphones can be turned into the aural equivalent of a VR headset.
 
