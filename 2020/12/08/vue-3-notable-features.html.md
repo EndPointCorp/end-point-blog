@@ -1,7 +1,7 @@
 ---
 author: "Bimal Gharti Magar"
 title: "Vue 3 is out with exciting new features"
-tags: vue, frameworks
+tags: vue, frameworks, javascript
 gh_issue_number: 1704
 ---
 
