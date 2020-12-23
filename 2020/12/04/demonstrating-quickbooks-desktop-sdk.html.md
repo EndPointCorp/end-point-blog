@@ -1,35 +1,34 @@
 ---
 author: "Daniel Gomm"
-title: "Demonstrating The QuickBooks Desktop SDK"
+title: "Demonstrating the QuickBooks Desktop SDK"
 tags: csharp, dotnet
 gh_issue_number: 1702
 ---
 
 ![Rock arch](/blog/2020/12/04/demonstrating-quickbooks-desktop-sdk/rock-arch.jpg)
+[Photo](https://unsplash.com/photos/KWvSPOQvAaw) by [Clarisse Meyer](https://unsplash.com/@clarissemeyer)
 
-[Photo](https://unsplash.com/photos/KWvSPOQvAaw) by [Clarisse Meyer](https://unsplash.com/@clarissemeyer).
-
-Is your client or company thinking about switching to [QuickBooks](https://quickbooks.intuit.com/)? If so, you might be discovering that migrating your existing financial and sales data out of your old system and into QuickBooks is both time consuming and tedious. You might even have an existing ecommerce site or database with tons of data and no clear way of getting the new orders into QuickBooks without manual entry.
+Is your client or company thinking about switching to [QuickBooks](https://quickbooks.intuit.com/)? If so, you might be discovering that migrating your existing financial and sales data out of your old system and into QuickBooks is both time consuming and tedious. You might even have an existing ecommerce site or database with tons of data and no clear way of getting the orders into QuickBooks without manual entry.
 
 Recently I was tasked with solving this problem. Our client needed to migrate data from an existing MySQL database into QuickBooks, and automatically add orders from our ecommerce site directly into QuickBooks going forward.
 
-In this article I’ll be going over how to use the **QuickBooks Desktop SDK** (also referred to as QBFC for “QuickBooks Foundation Classes” in the API documentation) to send and receive data from QuickBooks.
+In this article I’ll go over how to use the **QuickBooks Desktop SDK** (also referred to as QBFC for “QuickBooks Foundation Classes” in the API documentation) to send and receive data from QuickBooks.
 
 ### QuickBooks primer for developers
 
-For the uninitiated, QuickBooks is an accounting software made by [Intuit](https://www.intuit.com/). It can be used to manage lots of data, including lists of customers, inventory items, sales orders, and invoices. All of this data is stored in a “company file”, which is a file with a .qbw extension that uses a proprietary data format. This file gets created when setting up QuickBooks for the first time, and may be served to multiple machines across a network depending on the open mode.
+For the uninitiated, QuickBooks is an accounting software made by [Intuit](https://www.intuit.com/). It can be used to manage lots of data, including lists of customers, inventory items, sales orders, and invoices. All of this data is stored in a “company file”, which is a file with a .qbw extension that uses a proprietary data format. This file gets created when setting up QuickBooks for the first time, and may be served to multiple machines across a network depending on the “open mode”.
 
 The open mode determines how the company file can be accessed. In **multi-user mode**, there is one company file stored in a central location on the network which all users can access. You can use multi-user mode if your license supports multiple users, otherwise you will only be able to use **single-user mode**. In single-user mode, only one user can access the company file at a time.
 
 There are two methods of communicating with QuickBooks: The QuickBooks Desktop SDK, which I mentioned earlier, and the **QuickBooks Web Connector**. Both use **qbXML**, an XML data format that is used to communicate with QuickBooks, and defines tags for each type of request it can process.
 
-The QuickBooks Web Connector is a utility that comes included with QuickBooks and can send/receive SOAP messages from a web server. In order to set up the web connector, you would need to make a web service that implements the SOAP methods specified in the documentation (using, for example, ASP.NET). The web connector is configured by the user to check in with your web service at regular intervals, during which the web service can respond with qbXML requests for QuickBooks to process and respond back with.
+The QuickBooks Web Connector is a utility that comes included with QuickBooks and can send/receive SOAP messages from a web server. In order to set up the web connector, you need to make a web service that implements the SOAP methods specified in the documentation (using, for example, ASP.NET). The web connector is configured by the user to check in with your web service at regular intervals, during which the web service can respond with qbXML requests for QuickBooks to process and respond back with.
 
 The QuickBooks Desktop SDK is a Windows COM-based library that allows you to write code that can communicate directly with a local installation of QuickBooks. In order to use the SDK, you’ll need to make an application that runs on a machine that has QuickBooks installed locally, and is on the same local network where the company file is being served. It can be used to send qbXML requests to QuickBooks at any time, and provides a library of foundation classes that abstract away qbXML into an object-oriented API. For migrating data into a new installation of QuickBooks, this SDK is the best solution.
 
 ### Getting started
 
-To get started, you’ll need to download the latest version of the [QuickBooks Desktop C# SDK](https://developer.intuit.com/app/developer/qbdesktop/docs/get-started/download-and-install-the-sdk), and Visual Studio on your computer. to download the QuickBooks Desktop SDK. In order to download the SDK, you’ll also need to create a developer account with Intuit.
+To get started, you’ll need to download the latest version of the [QuickBooks Desktop C# SDK](https://developer.intuit.com/app/developer/qbdesktop/docs/get-started/download-and-install-the-sdk), and Visual Studio on your computer. In order to download the SDK, you’ll also need to create a developer account with Intuit.
 
 After the installer is done, the SDK is located in `C:\Program Files (x86)\Intuit\IDN`. Included in this folder are the assemblies for the SDK, and a local copy of the documentation. You can navigate to this documentation in your browser by going to the following URL:
 
@@ -41,24 +40,27 @@ To add the SDK to your project in Visual Studio, right click on `References -> A
 
 ### Opening a session with QuickBooks
 
-In order to get started communicating with QuickBooks, you’ll have to open a new session using the `QBSessionManager` class provided in the SDK. This is the class you will use to send and receive data from QuickBooks. Before you write any code, make sure that you have a copy of QuickBooks installed on your machine, and that it’s currently running. The below code snippet shows how to connect to QuickBooks via the `QBSessionManager`.
+In order to start communicating with QuickBooks, you’ll have to open a new session using the `QBSessionManager` class provided in the SDK. This is the class you will use to send to and receive data from QuickBooks. Before you write any code, make sure that you have a copy of QuickBooks installed on your machine, and that it’s currently running. The below code snippet shows how to connect to QuickBooks via the `QBSessionManager`:
 
 ```cpp
 // Open a new connection to QuickBooks within a try-catch. An exception
 // will be thrown if the connection fails.
-try {
+try
+{
     // Create a new QBSessionManager. This object is the entry point to
-    // interfacing with QuickBooks
+    // interfacing with QuickBooks.
     QBSessionManager sessMgr = new QBSessionManager();
 
     // Opens a new connection, which needs to happen before starting
     // a session. The second argument is the application name, which
-    // QuickBooks will use to identify you application in the future
+    // QuickBooks will use to identify your application in the future.
     sessMgr.OpenConnection("", "QuickBooks Web Api");
     sessMgr.BeginSession("", ENOpenMode.omDontCare);
     return "Connected";
 }
-catch (Exception ex) {
+
+catch (Exception ex)
+{
     return ex.Message;
 }
 ```
@@ -92,50 +94,49 @@ QBSessionManager sessMgr = new QBSessionManager();
 
 // Put your code in a try-catch, as the session manager will throw an
 // exception if an error occurs while sending the request or opening a
-// connection to QuickBooks
+// connection to QuickBooks.
 try
 {
     // Connect to QuickBooks and open a new session using the open mode
-    // currently in use by your local QuickBooks installation
+    // currently in use by your local QuickBooks installation.
     sessMgr.OpenConnection("", "QuickBooks Web Api");
     sessMgr.BeginSession("", ENOpenMode.omDontCare);
 
-    // Creates a request message set, which will contain the customer
+    // Create a request message set, which will contain the customer
     // query. The arguments specify the country (should match your
     // QuickBooks version) and qbXML version.
     IMsgSetRequest requestMessageSet = sessMgr.CreateMsgSetRequest("US", 13, 0);
 
     // Create the customer query and add to the request message set. The
     // append method adds the request to the set, and returns the new
-    // request
+    // request.
     ICustomerQuery customerQuery = requestMessageSet.AppendCustomerQueryRq();
 
-    // Adds a filter to the request that limits the number of items in
-    // the response to 50
+    // Add a filter to the request that limits the number of items in
+    // the response to 50.
     customerQuery.ORCustomerListQuery
         .CustomerListFilter
         .MaxReturned
         .SetValue(50);
 
-    // Executes all requests in the session manager’s request message
+    // Execute all requests in the session manager’s request message
     // set. The response list contains the responses for each request
     // sent to QuickBooks, in the order they were sent.
     IMsgSetResponse resp = sessMgr.DoRequests(requestMessageSet);
     IResponseList respList = resp.ResponseList;
 
     // Since we only made one request, our data is in the first (and
-    // only) item in the response list
+    // only) item in the response list.
     IResponse curResp = respList.GetAt(0);
 
     // Make sure response code is not less than 0 (which would denote an
-    // error)
-    if (curResp.StatusCode >= 0)
-    {
+    // error).
+    if (curResp.StatusCode >= 0) {
         // Get the customer list from the response Detail property
-        // (see OSR) and cast to the expected type
+        // (see OSR) and cast to the expected type.
         ICustomerRetList custList = (ICustomerRetList)curResp.Detail;
 
-        // Iterate through all customers and process
+        // Iterate through all customers and process.
         for (int i = 0; i < custList.Count; i++)
         {
             ICustomerRet cust = custList.GetAt(i);
@@ -147,13 +148,13 @@ try
     }
 }
 
-//  Catch any exceptions that occur and report them in the response
+// Catch any exceptions that occur and report them in the response.
 catch (Exception ex)
 {
     // < Handle the exception here >
 }
 
-// Finally close connection & session no matter what happens
+// Finally close connection & session no matter what happens.
 finally
 {
     sessMgr.EndSession();
@@ -183,12 +184,11 @@ In this case we’re limiting the amount of customers in the response to 50. Eac
 
 ### Conclusion
 
-The QuickBooks Desktop SDK makes it simple to move data around between your application and your company’s QuickBooks installation. If you end up doing extensive work with the SDK, I’d recommend wrapping the `QBSessionManager` in a new class that can convert the responses into a `List<IResponse>`. This way, you can easily get any response’s `Detail` property by its type in a single line using a LINQ query.
+The QuickBooks Desktop SDK makes it simple to move data around between your application and your company’s QuickBooks installation. If you end up doing extensive work with the SDK, I recommend wrapping the `QBSessionManager` in a new class that can convert the responses into a `List<IResponse>`. This way, you can easily get any response’s `Detail` property by its type in a single line using a LINQ query.
 
 If you have any questions about the SDK, feel free to leave a comment!
 
 ### Further reading
 
-[Official Intuit QuickBooks Desktop SDK Training Course](https://www.youtube.com/watch?v=3AjM5ocTgDY)
-
-[QuickBooks SDK Online API Documentation](https://developer.intuit.com/app/developer/qbdesktop/docs/api-reference/qbdesktop)
+* [Official Intuit QuickBooks Desktop SDK Training Course](https://www.youtube.com/watch?v=3AjM5ocTgDY)
+* [QuickBooks SDK Online API Documentation](https://developer.intuit.com/app/developer/qbdesktop/docs/api-reference/qbdesktop)
