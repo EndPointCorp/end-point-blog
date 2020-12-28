@@ -6,15 +6,17 @@ if sys.version_info[0] < 3 or (sys.version_info[0] == 3 and sys.version_info[1] 
     print('This program requires Python 3.6 or newer.')
     sys.exit(1)
 
+import subprocess
 import argparse
+import requests
 import os
 import re
-import subprocess
 
 parser = argparse.ArgumentParser(description='Lint blog posts.')
 parser.add_argument('input_file', help='blog post file to read')
 parser.add_argument('-o', dest='outfile', help='Make changes and write new version to given file')
 parser.add_argument('-f', dest='force', action='store_true', help='force writing output file')
+parser.add_argument('-k', dest='forKeepers', action='store_true', help='show verbose output for keepers of the blog')
 
 args = parser.parse_args()
 
@@ -67,9 +69,10 @@ highlight_languages = [
 # Make a "Line" class that keeps track of its own line number
 
 class Warning:
-    def __init__(self, line, message):
+    def __init__(self, line, message, forKeepers=False):
         self.line = line
         self.message = message
+        self.forKeepers = forKeepers
 
     def __str__(self):
         if type(self.line) == Line:
@@ -81,16 +84,13 @@ class Warning:
         return hash((self.line, self.message))
 
     def __lt__(self, other):
-        if type(self.line) == Line:
-            if type(other.line) == Line:
-                return True
-            else:
-                return True
+        if type(self.line) != Line:
+            return True
         else:
             if type(other.line) == Line:
-                return False
-            else:
                 return self.line.number < other.line.number
+            else:
+                return False
 
     def __eq__(self, other):
         return self.line == other.line and self.message == other.message
@@ -193,9 +193,9 @@ try:
             if not entry.name.startswith('.') and entry.is_file():
                 file_size = os.path.getsize(entry.path)
                 if file_size > (1024 * 300):
-                    errors.add(Warning(entry.path, 'File is too big (> 300 kB): ' + entry.name))
+                    errors.add(Warning(entry.path, 'File is too big (> 300 kB): ' + entry.name), True)
                 elif file_size > (1024 * 200):
-                    warnings.add(Warning(entry.path, 'File is pretty big (> 200 kB): ' + entry.name))
+                    warnings.add(Warning(entry.path, 'File is pretty big (> 200 kB): ' + entry.name), True)
 except:
     pass
 
@@ -236,7 +236,7 @@ try:
             errors.add(Warning(tag_line, 'No tags specified'))
         for tag in tags:
             if tag not in all_tags:
-                warnings.add(Warning(tag_line, 'No other occurences of tag "' + tag + '" in blog'))
+                warnings.add(Warning(tag_line, 'No other occurences of tag "' + tag + '" in blog'), True)
 except:
     print('There was an error checking tags')
 
@@ -269,90 +269,140 @@ for b in code_blocks:
     if has_tabs:
         warnings.add(Warning(b.lines[0], 'Code blocks should not contain tabs; use spaces instead'))
 
-def check_spelling(line, checks):
+def check_spellings(line):
+    spelling_checks = [
+        {
+            'regex': r'javascript',
+            'ideal': 'JavaScript',
+            'flags': re.IGNORECASE,
+            'message': 'JavaScript spelled wrong',
+        },
+        {
+            'regex': r'node\.?js',
+            'ideal': 'Node.js',
+            'flags': re.IGNORECASE,
+            'message': 'Node.js spelled wrong',
+        },
+        {
+            'regex': r"'",
+            'ideal': '’',
+            'message': "Use typographers’ apostrophe",
+            'forKeepers': True,
+        },
+        {
+            'regex': r'\"',
+            'ideal': '”',
+            'message': "Use typographers’ quotes",
+            'forKeepers': True,
+        },
+        {
+            'regex': r'[^\s]/[^\s]',
+            'ideal': '',
+            'message': "Add zero-width breaking space after / between words",
+            'forKeepers': True,
+            'skip': r''
+        },
+        {
+            'regex': r'\s+$',
+            'ideal': '',
+            'message': "Remove whitespace before end of line",
+            'forKeepers': True,
+        },
+        {
+            'regex': r'\d-\d',
+            'ideal': '',
+            'message': "Use en dashes for ranges",
+            'forKeepers': True,
+        },
+        {
+            'regex': r'--',
+            'ideal': '',
+            'message': "Use em dashes in prose",
+            'forKeepers': True,
+        },
+        {
+            'regex': r'^##?[^#]',
+            'ideal': '',
+            'message': "No headings larger than ###"
+        },
+        {
+            'regex': r'^######+',
+            'ideal': '',
+            'message': "No headings smaller than #####"
+        },
+        {
+            'regex': r'(__[^_ ]*__|\*\*[^* ]*\*\*)',
+            'ideal': '',
+            'message': "Consider using italics instead of single bolded words",
+            'forKeepers': True,
+        },
+    ]
+
     without_code = re.sub(r'`[^`]*`', '', line.line)
     without_html = re.sub(r'<.*?>', '', without_code)
+    without_links = re.sub(r'\[([^\]]*)\]\([^\)]*\)', r'\1', without_html)
     for c in checks:
         has_typo = False
         if len(without_html) == 0 and len(line.line) > 0:
             warnings.add(Warning(line, 'Code blocks on their own lines should use ```'))
-        for match in re.findall(c['regex'], without_html, flags=c['flags']):
+        for match in re.findall(c['regex'], without_links, flags=c['flags'] if 'flags' in c else 0):
             if match != c['ideal']:
                 has_typo = True
         if has_typo:
-            errors.add(Warning(line, c['message']))
+            errors.add(Warning(line, c['message'], c['forKeepers'] if 'forKeepers' in c else False))
 
-spelling_checks = [
-    {
-        'regex': r'javascript',
-        'ideal': 'JavaScript',
-        'flags': re.IGNORECASE,
-        'message': 'JavaScript spelled wrong',
-    },
-    {
-        'regex': r'node\.?js',
-        'ideal': 'Node.js',
-        'flags': re.IGNORECASE,
-        'message': 'Node.js spelled wrong',
-    },
-    {
-        'regex': r"'",
-        'ideal': '’',
-        'flags': 0,
-        'message': "Use typographers’ apostrophe",
-    },
-    {
-        'regex': r'\"',
-        'ideal': '”',
-        'flags': 0,
-        'message': "Use typographers’ quotes",
-    },
-    {
-        'regex': r'[^\s]/[^\s]',
-        'ideal': '',
-        'flags': 0,
-        'message': "Add zero-width breaking space after / between words"
-    },
-    {
-        'regex': r'\s+$',
-        'ideal': '',
-        'flags': 0,
-        'message': "Remove whitespace before end of line"
-    },
-    {
-        'regex': r'\d-\d',
-        'ideal': '',
-        'flags': 0,
-        'message': "Use en dashes for ranges"
-    },
-    {
-        'regex': r'--',
-        'ideal': '',
-        'flags': 0,
-        'message': "Use em dashes in prose"
-    },
-    {
-        'regex': r'^##?[^#]',
-        'ideal': '',
-        'flags': 0,
-        'message': "No headings larger than ###"
-    },
-    {
-        'regex': r'^######+',
-        'ideal': '',
-        'flags': 0,
-        'message': "No headings smaller than #####"
-    },
-    {
-        'regex': r'(__[^_ ]*__|\*\*[^* ]*\*\*)',
-        'ideal': '',
-        'flags': 0,
-        'message': "Consider using italics instead of single bolded words"
-    },
-]
+def check_links(line):
+    link_checks = [
+        {
+            'regex': r'^https://www.endpoint\.com',
+            'ideal': '',
+            'message': 'Links to EP website should be relative links',
+            'forKeepers': True
+        },
+        # This next one might be unnecessary since crawling it will reveal issues
+        {
+            'regex': r'^https://[^\.]*\.endpoint\.com',
+            'ideal': ['https://liquidgalaxy.endpoint.com', 'https://www.endpoint.com'],
+            'message': 'The only allowed subdomain for endpoint.com links is liquidgalaxy.endpoint.com',
+        }
+    ]
+
+    without_code = re.sub(r'`[^`]*`', '', line.line)
+    links = re.findall(r'\[[^\]]*\]\(([^\)]*)\)', without_code)
+    links += (re.findall(r'href="(.*)"', without_code))
+    for link in links:
+        # Check response codes
+        # print(f'Trying link {link}...')
+        to_try = link
+        if link.startswith('/'):
+            to_try= 'https://www.endpoint.com' + link
+        try:
+            response = requests.get(to_try, allow_redirects=False)
+            if response.status_code == 200:
+                pass
+            elif response.status_code >= 300 and response.status_code < 400:
+                warnings.add(Warning(line, f'Link {to_try} resulted in HTTP {response.status_code}, location {response.headers["Location"]}', True))
+            else:
+                errors.add(Warning(line, f'Link {to_try} resulted in HTTP {response.status_code}', True))
+        except Exception as error:
+            errors.add(Warning(line, f"Link {to_try} couldn't be reached: {str(error)}", True))
+
+        for c in link_checks:
+            has_issue = False
+            for match in re.findall(c['regex'], link, flags=c['flags'] if 'flags' in c else 0):
+                if (
+                    (type(c['ideal']) is str and match != c['ideal']) or
+                    (type(c['ideal']) is list and match not in c['ideal'])
+                    ):
+                    has_issue = True
+            if has_issue:
+                errors.add(Warning(line, c['message'], c['forKeepers'] if 'forKeepers' in c else False))
+
 
 for line in body.lines:
-    check_spelling(line, spelling_checks)
+    check_links(line)
+#for line in body.lines:
+#    check_spelling(line)
 
 if len(errors) > 0:
     errors = sorted(errors)
@@ -365,4 +415,9 @@ if len(warnings) > 0:
     warnings = sorted(warnings)
     print('Warnings:') 
     for warning in warnings:
-        print(warning)
+        if not warning.forKeepers:
+            print(warning)
+            continue
+
+        if args.forKeepers:
+            print(warning)
