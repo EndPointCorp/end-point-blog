@@ -1,6 +1,6 @@
 ---
 author: Dmitry Kiselev
-title: Cesium KML-CZML Editor  
+title: Cesium KML-CZML Editor
 tags: cesium, google-earth, gis, open-source
 gh_issue_number: 1707
 ---
@@ -32,19 +32,19 @@ Now let’s move the camera about in different ways, especially noticing how the
 
 <video controls>
   <source src="/blog/2020/12/21/cesium-kml-czml-editor/video-0.webm" type="video/webm">
-  Sorry, your browser doesn't support embedded videos.
+  Sorry, your browser doesn’t support embedded videos.
 </video>
 
 Then let’s open the same KML in Cesium with a 3D building tileset loaded, to compare apples to apples:
 
 <video controls>
   <source src="/blog/2020/12/21/cesium-kml-czml-editor/video-1.webm" type="video/webm">
-  Sorry, your browser doesn't support embedded videos.
+  Sorry, your browser doesn’t support embedded videos.
 </video>
 
-It's easy to see that the green frame which is placed around the geographic position stays around the building, but the icon point of rotation in Cesium doesn’t match the one in Google Earth and the pin falls through the roof and lfts up unfortunately high above the building.
+It’s easy to see that the green frame which is placed around the geographic position stays around the building, but the icon point of rotation in Cesium doesn’t match the one in Google Earth and the pin falls through the roof and lfts up unfortunately high above the building.
 
-KML doesn’t enforce certain aspects of its representation. If certain attributes are not specified or can’t be implemented exactly, then the KML browsers have the freedom to set different default values for them. In this example, Cesium and Google Earth display different pixel offsets for the pin icon, because in KML the offset is specified as a ratio of the image, but Cesium specifies the offset in pixels. Cesium converts the pixel offset of the pin from the ratio specified, but with some errors. Cesium reverses the X axis, and in some cases Cesium also calculates the pin icon image size incorrectly. So here it calculates the X offset as -4, which moves the pin icon to the left.  To fix that, we can reverse the X axis back to 4 or even move the pin icon 8 pixels further to the right.  
+KML doesn’t enforce certain aspects of its representation. If certain attributes are not specified or can’t be implemented exactly, then the KML browsers have the freedom to set different default values for them. In this example, Cesium and Google Earth display different pixel offsets for the pin icon, because in KML the offset is specified as a ratio of the image, but Cesium specifies the offset in pixels. Cesium converts the pixel offset of the pin from the ratio specified, but with some errors. Cesium reverses the X axis, and in some cases Cesium also calculates the pin icon image size incorrectly. So here it calculates the X offset as -4, which moves the pin icon to the left. To fix that, we can reverse the X axis back to 4 or even move the pin icon 8 pixels further to the right.
 
 ![](/blog/2020/12/21/cesium-kml-czml-editor/image-03.jpg)
 🡆
@@ -65,7 +65,7 @@ Here are the results for both options:
 
 <video controls>
   <source src="/blog/2020/12/21/cesium-kml-czml-editor/video-2.webm" type="video/webm">
-  Sorry, your browser doesn't support embedded videos.
+  Sorry, your browser doesn’t support embedded videos.
 </video>
 
 As you can see, now we have the pin-point of the marker stuck to the desired location.
@@ -96,7 +96,7 @@ So to get a polygon actually clamped to ground, we have to delete the Height pro
 
 ![](/blog/2020/12/21/cesium-kml-czml-editor/image-10.jpg)
 
-Now let’s add a 3D tileset:  
+Now let’s add a 3D tileset:
 
 ![](/blog/2020/12/21/cesium-kml-czml-editor/image-11.jpg)
 
@@ -106,7 +106,7 @@ Next, let’s use the Classification Type field, setting it to “TERRAIN” to 
 
 ![](/blog/2020/12/21/cesium-kml-czml-editor/image-12.jpg)
 
-Now, let's open some exported data. Here’s a typical set of exported points generated with geojson.io:
+Now, let’s open some exported data. Here’s a typical set of exported points generated with geojson.io:
 
 ![](/blog/2020/12/21/cesium-kml-czml-editor/image-13.jpg)
 
