@@ -6,7 +6,6 @@ gh_issue_number: 1704
 ---
 
 ![Space Shuttle launch](/blog/2020/12/08/vue-3-notable-features/shuttle-launch.jpg)
-
 Photo courtesy of [NASA](https://www.nasa.gov/mission_pages/shuttle/images)
 
 Vue 3 was officially [released](https://github.com/vuejs/vue-next/releases/tag/v3.0.0) on September 18, 2020 with improved performance and some exciting new features.
@@ -72,7 +71,7 @@ export default {
 </script>
 ```
 
-This component’s functions have several responsibilities, and as the code grows more functions with different responsibilities will be needed, making it more difficult to understand and implement new changes. Moreover, the related parts of code are scattered throughout each component’s options (data, computed, methods). 
+This component’s functions have several responsibilities, and as the code grows more functions with different responsibilities will be needed, making it more difficult to understand and implement new changes. Moreover, the related parts of code are scattered throughout each component’s options (data, computed, methods).
 
 The new Composition API enables us to organize related code. `setup` is a new component option in Vue 3, acting as the entry point for the Composition API. `setup` is executed before the component is created, and after the `props` are resolved, which means `this` cannot be accessed inside `setup`, but `props` and `context` can.
 
@@ -182,7 +181,7 @@ The two functions using the Composition API are now in two separate files, impor
 #### Summary
 
 * `setup()` is the entry point for composition API and can be used as a standalone composition function in a separate file. To learn more about `setup` [check out the Vue 3 docs](https://v3.vuejs.org/guide/composition-api-setup.html#setup).
-* `ref` can be used to make a variable reactive, and `.value` is used to access its value inside the `setup` function
+* `ref` can be used to make a variable reactive, and `.value` is used to access its value inside the `setup` function.
 * `computed` properties can be created using the function imported from Vue. `.value` should also be used here to access the value of computed properties.
 
 There are more options, like lifecycle hooks, `watch`, and `toRefs`, which we don’t use in the above code.
@@ -193,7 +192,7 @@ There are more options, like lifecycle hooks, `watch`, and `toRefs`, which we do
 
 ### Teleport
 
-[Teleport](https://v3.vuejs.org/guide/teleport.html) is another interesting feature which helps in making our HTML structure cleaner and more logical. Previously when we wanted to use a global modal or a notification/alert, it required deeply nested code. With teleport, the placing of components in the required location is easier. Let’s take a look:
+[Teleport](https://v3.vuejs.org/guide/teleport.html) is another interesting feature which helps in making our HTML structure cleaner and more logical. Previously when we wanted to use a global modal or a notification/​alert, it required deeply nested code. With teleport, the placing of components in the required location is easier. Let’s take a look:
 
 - The screenshot below shows the rendered DOM (without teleport code), where the Vue app is inserted into the DOM in `div#app`.
 
@@ -364,7 +363,7 @@ import App from './App.vue'
 createApp(App).mount('#app')
 ```
 
-- Global API methods like `nextTIck`, `set`, `observable` and others are now restructured with tree-shaking support.
+- Global API methods like `nextTick`, `set`, `observable` and others are now restructured with tree-shaking support.
 
 Vue 2:
 

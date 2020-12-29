@@ -32,7 +32,7 @@ A distance model reduces the loudness of sounds when their source positions are 
 
 ### Doppler Effect
 
-The doppler effect is caused by the compression and expansion of sound waves produced by sound sources moving towards or away from the listener. An example is the sound of a race car speed past, changing from higher pitch while approaching to lower pitch while receding. Changing the pitch of a sound’s playback depending on the source’s relative velocity simulates the physics of sound waves traveling through the air at the speed of sound. This effect is most desirable when rendering fast-moving objects.
+The Doppler effect is caused by the compression and expansion of sound waves produced by sound sources moving towards or away from the listener. An example is the sound of a race car speed past, changing from higher pitch while approaching to lower pitch while receding. Changing the pitch of a sound’s playback depending on the source’s relative velocity simulates the physics of sound waves traveling through the air at the speed of sound. This effect is most desirable when rendering fast-moving objects.
 
 ### HRTF
 
@@ -46,9 +46,9 @@ A subtle but important physical property of any indoor or outdoor space is the r
 
 ### 3D Audio with OpenAL
 
-[OpenAL](https://www.openal.org/) is a cross-platform 3D audio library created by Loki Software in 2000. It is now developed and maintained by a community of developers including Apple and Creative Technology. OpenAL support libraries are included with OS X and are freely available for Linux and Windows. The library interfaces are implemented in C with bindings available for other languages.
+[OpenAL](https://www.openal.org/) is a cross-platform 3D audio library created by Loki Software in 2000. It is now developed and maintained by a community of developers including Apple and Creative Technology. OpenAL support libraries are included with macOS and are freely available for Linux and Windows. The library interfaces are implemented in C with bindings available for other languages.
 
-The OpenAL specification includes many of the spatial audio fundamentals such as panning, distance model, and doppler effect. The open source OpenAL-soft library extends the OpenAL spec with optional HRTF and reverb effects. This library is a good place to start when integrating 3D audio in desktop applications.
+The OpenAL specification includes many of the spatial audio fundamentals such as panning, distance model, and Doppler effect. The open source [OpenAL Soft](https://openal-soft.org/) library extends the OpenAL spec with optional HRTF and reverb effects. This library is a good place to start when integrating 3D audio in desktop applications.
 
 ### 3D Audio with Web Audio API
 

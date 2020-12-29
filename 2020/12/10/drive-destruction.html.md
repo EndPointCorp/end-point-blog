@@ -10,7 +10,7 @@ gh_issue_number: 1705
 
 How valuable is your data? Losing it to a third party is usually a business’s worst nightmare—​and can cause legal or even criminal repercussions, depending on the drive’s contents and the business’s jurisdiction.
 
-Every system adminstrator worth their salt knows that running “rm” (or equivalent delete operations) doesn’t actually remove data, it simply removes the file from the filesystem and leaves the data in place on the disk.
+Every system adminstrator worth their salt knows that running “rm” (or equivalent delete operations) doesn’t actually remove data, it simply removes the file name from the filesystem and leaves the data in place on the disk.
 
 When dealing with traditional storage, destroying (intentionally or otherwise) your data used to be relatively easy. A wise system admin could simply run:
 
@@ -24,17 +24,17 @@ And be fairly certain of the result. A cautious one might run a demagnetizing wa
 
 Nowadays, most servers have switched away from storing data on rotating metal or glass platters. Solid state drives, or SSDs, are faster, less prone to errors from physical impact, and generally more sought after.
 
-SSDs have issues with speed if the drives are too full, and have a limited lifespan—​only a certain number of read/​write operations can be achieved. This is less of an issue with modern drives thanks to wear leveling built into the firmware of the drives. However, this leads to some issues as well.
+SSDs have issues with speed if the drives are too full, and have a limited lifespan—​only a certain number of write operations can be achieved. This is less of an issue with modern drives thanks to wear leveling built into the firmware of the drives. However, this leads to some issues as well.
 
 ### Complicated systems introduce issues
 
 Because SSDs manage which blocks of storage they write to, a simple shred won’t do. There could be hundreds of bytes, or even kilobytes or megabytes, of data that the shred doesn’t reach.
 
-Even some “traditional” storage can run in to issues these days. Hybrid drives offer some speed advantages, by leveraging a small amount of SSD storage, these drives save data to SSD first, then write it at slower speeds to the actual magnetic platters. The same issues with SSD storage can affect this cache of data.
+Even some “traditional” storage can run into such issues these days. Hybrid drives offer some speed advantages: By leveraging a small amount of SSD storage, these drives save data to SSD first, then write it at slower speeds to the actual magnetic platters. The same issues with SSD storage can affect this cache of data.
 
 So how to be sure?
 
-Ideally, I would recommend using a combination of these methods for security, but here are the main methods that are used at present.
+Ideally, I would recommend using a combination of methods for security. Here are the main methods that are used at present:
 
 ### Run shred and hope for the best
 
@@ -54,14 +54,14 @@ Drive manufacturers have thought of this issue as well. Most drive manufacturers
 
 ```bash
 hdparm --user-master u --security-set-pass TheEnd /dev/X
-hdparm -I /dev/X #Check that the master password is enabled
+hdparm -I /dev/X  # Check that the master password is enabled
 time hdparm --user-master u --security-erase TheEnd /dev/X
 ```
 
 This will show some output indicating success or failure. Once this is done…
 
 ```bash
-hdparm -I /dev/X #Check that the master password is not enabled. This indicates whether the wipe was succesful
+hdparm -I /dev/X  # Check that the master password is not enabled, which indicates the wipe was successful
 ```
 
 This is likely the best option for a savvy home user, combined with shred/​nwipe. However, if you are going to attempt this, I highly recommend [reading the full instructions](https://ata.wiki.kernel.org/index.php/ATA_Secure_Erase)!
