@@ -5,7 +5,7 @@ tags: cms, php, docker
 gh_issue_number: 1681
 ---
 
-![Craft CMS banner](craft-a-cms-for-developers/banner.png)
+![Craft CMS banner](/blog/2020/10/31/craft-a-cms-for-developers/banner.png)
 
 As a software engineer, I thrive and thoroughly enjoy working on fully custom software products, applications conceived to model and help in the execution of some business process and that are built from the ground up by a team of developers.
 
@@ -119,7 +119,7 @@ If you have Docker and Docker Compose installed in your machine, you can go to t
 
 And that’s it! Open a browser to `localhost` or `127.0.0.1` and you should see your Craft 3 homepage:
 
-![Welcome to Craft browser screenshot](craft-a-cms-for-developers/welcome_to_craft.jpg)
+![Welcome to Craft browser screenshot](/blog/2020/10/31/craft-a-cms-for-developers/welcome_to_craft.jpg)
 
 You can start playing with the control panel or the `templates/index.twig` right away.
 
@@ -131,11 +131,11 @@ Craft also allows you to set up [custom fields](https://craftcms.com/docs/3.x/fi
 
 Let’s see what that looks like in concrete terms. Now that we have a Craft instance running in `localhost`, go to `localhost/admin` in your browser. You should see Craft’s control panel. Click on the “Settings” option in the navigation bar to the left of the screen, then select the “Sections” item under “Content”:
 
-![Screenshot of Control Panel > Settings > Sections](craft-a-cms-for-developers/control_panel_settings_sections.png)
+![Screenshot of Control Panel > Settings > Sections](/blog/2020/10/31/craft-a-cms-for-developers/control_panel_settings_sections.png)
 
 Next, click on the “+ New Section” button by the top of the screen and you’ll be shown the section creation form. We will create a “News” section so let’s fill in the form like this:
 
-![Screenshot of Create a new section](craft-a-cms-for-developers/control_panel_new_section.png)
+![Screenshot of Create a new section](/blog/2020/10/31/craft-a-cms-for-developers/control_panel_new_section.png)
 
 The “Name” and “Handle” fields are pretty self explanatory. The “[Section Type](https://craftcms.com/docs/3.x/entries.html#section-types)” is a concept we haven’t discussed yet. “[Channel](https://craftcms.com/docs/3.x/entries.html#channels)” is the most appropriate for a news section, which is a stream of multiple entries with the same structure.
 
@@ -145,15 +145,15 @@ Learn all about entries, sections, section types, and more in [Craft’s officia
 
 Now that we’ve filled the form, click the “Save and edit entry types” button. This has created our new “News” section and defined the “[entry type](https://craftcms.com/docs/3.x/entries.html#entry-types)” that this section will be able to contain. The control panel now shows this:
 
-![Screenshot of The section’s default entry type](craft-a-cms-for-developers/control_panel_entry_type.png)
+![Screenshot of The section’s default entry type](/blog/2020/10/31/craft-a-cms-for-developers/control_panel_entry_type.png)
 
 In Craft, a section can contain multiple types of entries. For our purposes with the news section, though, just the default one is enough. Click on it, and you’ll see an editor where you can select fields that make up that entry type:
 
-![Screenshot of The entry type’s fields](craft-a-cms-for-developers/control_panel_entry_type_fields.png)
+![Screenshot of The entry type’s fields](/blog/2020/10/31/craft-a-cms-for-developers/control_panel_entry_type_fields.png)
 
 The editor I mentioned before is below the “Field Layout” title. Here’s where we can pick and choose which fields make up the entries for the “News” section. We have a fresh installation of Craft though, so we don’t have any fields. Let’s create a few by going to Settings > Fields.
 
-![Screenshot of Defining new fields](craft-a-cms-for-developers/control_panel_new_fields.png)
+![Screenshot of Defining new fields](/blog/2020/10/31/craft-a-cms-for-developers/control_panel_new_fields.png)
 
 This is where we can define new fields to be used for our entries throughout the site. Click the “+ New Field” button near the top of the screen and you’ll be presented with the field creation form where you can specify all manner of details. For now, we just care about “Name”, “Handle” and “Field Type”. Let’s create three fields:
 
@@ -163,27 +163,27 @@ This is where we can define new fields to be used for our entries throughout the
 
 You should end up with something like this in the control panel’s “Fields” page (`localhost/admin/settings/fields`):
 
-![Screenshot of New fields ready](craft-a-cms-for-developers/control_panel_three_fields.png)
+![Screenshot of New fields ready](/blog/2020/10/31/craft-a-cms-for-developers/control_panel_three_fields.png)
 
 Now, if we go back to our “News” section’s default entry type at `http://localhost/admin/settings/sections/1/entrytypes/1` or Settings > Sections > News > Entry Types > News…
 
-![Screenshot of New fields for News entries](craft-a-cms-for-developers/control_panel_field_layout.png)
+![Screenshot of New fields for News entries](/blog/2020/10/31/craft-a-cms-for-developers/control_panel_field_layout.png)
 
 You can see how the new fields that we just created are present in the “Field Layout” panel. In order to make these fields available for our “News” entries, we just need to drag them into the box named “Content” inside the greyish area.
 
-![Screenshot of New fields for News entries assigned](craft-a-cms-for-developers/control_panel_field_layout_applied.png)
+![Screenshot of New fields for News entries assigned](/blog/2020/10/31/craft-a-cms-for-developers/control_panel_field_layout_applied.png)
 
 Click the “Save” button at the top, and that’s all it takes to set up a “Channel” section, an entry type for it, and a few fields.
 
 Now that we’ve set up the blueprints for them, let’s actually create a few entries in the “News” section. To do so, click on the “Entries” link in the navigation bar to the left which should’ve revealed itself by now, and you’ll see this screen:
 
-![Screenshot of The entries screen](craft-a-cms-for-developers/control_panel_entries.png)
+![Screenshot of The entries screen](/blog/2020/10/31/craft-a-cms-for-developers/control_panel_entries.png)
 
 If you’re used to CMS back ends, this is pretty familiar. In this screen you can create new entries and browse existing ones.
 
 Click the big red “+ New Entry” button and select “News” in the resulting pop-up menu. You should see a form with the fields that we defined in the “Field Layout” panel during previous steps. Feel free to create a few news entries. I’ve created these two:
 
-![Screenshot of Entries created](craft-a-cms-for-developers/control_panel_entries_created.png)
+![Screenshot of Entries created](/blog/2020/10/31/craft-a-cms-for-developers/control_panel_entries_created.png)
 
 ### Craft gives you complete freedom over your front end
 
@@ -216,7 +216,7 @@ The only noteworthy aspect of this template is how we are injecting the data tha
 
 With that done, save and visit any of the entries you created and you’ll see something like this:
 
-![Screenshot of Our first entry](craft-a-cms-for-developers/website_entry.png)
+![Screenshot of Our first entry](/blog/2020/10/31/craft-a-cms-for-developers/website_entry.png)
 
 As you can see, this entry’s URL is `localhost/news/i-just-learned-that-craft-uses-twig`. Yours will obviously differ depending on the title (and slug) that you gave them.
 
@@ -242,7 +242,7 @@ If you’re familiar with any sort of templating language like those included in
 
 Here’s what the homepage looks like now:
 
-![Screenshot of Homepage is ready](craft-a-cms-for-developers/homepage_with_links.jpg)
+![Screenshot of Homepage is ready](/blog/2020/10/31/craft-a-cms-for-developers/homepage_with_links.jpg)
 
 You can click on any of the links and they will take you to the specific entry page.
 

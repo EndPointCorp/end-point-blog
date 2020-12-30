@@ -18,7 +18,7 @@ In the first data feed there was a table which tracked which files had been load
 
 Any time I find myself considering sequences of data, I remember my friend `generate_series()`. While `generate_series()` is often called with numeric data, it can also generate date ranges, which can come in very handy:
 
-```
+```plaintext
 postgres=# SELECT * FROM generate_series('2020-01-01'::date, '2020-10-01'::date, interval '1 day') LIMIT 10;
     generate_series
 ------------------------
@@ -59,7 +59,7 @@ DELETE FROM loader_manifest WHERE filename = '20201019';
 
 The data that we were trying to match against looked similar to the following:
 
-```
+```plaintext
 postgres=# SELECT * FROM loader_manifest LIMIT 5;
  filename | batch | status |         processed_at
 ----------+-------+--------+-------------------------------
@@ -75,7 +75,7 @@ Since either the batch or entire days could have been missing we basically neede
 
 Because `generate_series()` is a set-returning function we can use it as a source in our `FROM` clause, in combination with the explicit values we want for our `batch` field. We also will need to extract the date pieces out in a way that we can match the expected `filename` format. We use something similar to the following:
 
-```
+```plaintext
 postgres=# SELECT to_char(filename, 'YYYYMMDD') AS filename, batch FROM generate_series('2020-01-01'::date, '2020-10-01'::date, interval '1 day') AS filename, (VALUES ('A'), ('B')) AS batches(batch) LIMIT 10;
  filename  | batch
 ----------+-------
@@ -114,7 +114,7 @@ Here `candidates` is the generated list of all expected file/​batch combinatio
 
 And the results from our sample dataset:
 
-```
+```plaintext
  filename | batch
 ----------+-------
  20200218 | B

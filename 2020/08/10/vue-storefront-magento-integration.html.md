@@ -7,7 +7,7 @@ gh_issue_number: 1654
 
 Recently we experimented internally with integrating [Vue Storefront](https://www.vuestorefront.io/) and [Magento](https://magento.com/) 2.3. Vue Storefront is an open source Progressive Web App (PWA) that aims to work with many ecommerce platforms.
 
-What initially piqued our interest was the possibility of integrating Vue Storefront with the venerable ecommerce back-end platform [Interchange](https://www.interchangecommerce.org/), which many of our clients use. Vue Storefront’s promise of ease of integration with any ecommerce backend made us curious to see whether it would make a good modern front-end for Interchange.
+What initially piqued our interest was the possibility of integrating Vue Storefront with the venerable ecommerce back-end platform [Interchange](https://www.interchangecommerce.org/i/dev), which many of our clients use. Vue Storefront’s promise of ease of integration with any ecommerce backend made us curious to see whether it would make a good modern front-end for Interchange.
 
 Since Vue Storefront seems to be most commonly used with Magento, we decided to start our experiment with a standard Vue Storefront/​Magento 2.3 proof-of-concept integration. 
 
@@ -128,7 +128,7 @@ In order to achieve the API prototyping for our Interchange/​Vue Storefront in
 
 As the default SAP Commerce/​Vue Storefront integration suggests, I walked through the outputs of search results in “product”, “category”, and “attributes”. Product data JSON output has some universal attributes like name or title, description, or price, but it also has some custom product attributes adapted from the Magento 2 API (specifically, the data structure of Magento is applied).
 
-At this point I started questioning if Vue Storefront is not really platform agnostic, or if it is, but with some headaches. The next section will detail these headaches but to summarize, adapting the data structure of new ecommerce backends to Vue Storefront is a real pain. It forces you to use its data structure since that’s a part of core development, and they rely mainly on Elasticsearch, and I guess because of that the developers of Vue Storefront believe that Elasticsearch is an essential part of this “agnostic” approach. Refer to [Getting data from Elasticsearch](https://docs.vuestorefront.io/guide/data/elastic-queries.html#getting-data-from-elasticsearch) for custom implementations using the [core Elasticsearch lib](https://github.com/DivanteLtd/vue-storefront/tree/master/core/lib).
+At this point I started questioning if Vue Storefront is not really platform agnostic, or if it is, but with some headaches. The next section will detail these headaches but to summarize, adapting the data structure of new ecommerce backends to Vue Storefront is a real pain. It forces you to use its data structure since that’s a part of core development, and they rely mainly on Elasticsearch, and I guess because of that the developers of Vue Storefront believe that Elasticsearch is an essential part of this “agnostic” approach. Refer to [Getting data from Elasticsearch](https://docs.vuestorefront.io/guide/data/elastic-queries.html#getting-data-from-elasticsearch) for custom implementations using the [core Elasticsearch lib](https://github.com/vuestorefront/vue-storefront/tree/master/core/lib).
 
 Anyway, I moved on and produced product and product categories outputs that Vue Storefront expects as the search results at the homepage and the search box output results.
 

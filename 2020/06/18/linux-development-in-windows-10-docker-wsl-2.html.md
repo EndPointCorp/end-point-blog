@@ -9,7 +9,7 @@ gh_issue_number: 1641
 
 I’m first and foremost a Windows guy. But for a few years now, moving away from working mostly with .NET and into a plethora of open source technologies has given me the opportunity to change platforms and run a Linux-based system as my daily driver. Ubuntu, which I honestly love for work, has been serving me well by supporting my development workflow with languages like [PHP](https://www.php.net/), [JavaScript](https://www.javascript.com/) and [Ruby](https://www.ruby-lang.org/en/). And with the help of the excellent [Visual Studio Code](https://code.visualstudio.com/) editor, I’ve never looked back. There’s always been an inclination in the back of my mind though, to take some time and give Windows another shot.
 
-With the latest improvements coming to the Windows Subsystem for Linux with [its second version](https://docs.microsoft.com/en-us/windows/wsl/wsl2-index), the new and exciting [Windows Terminal](https://github.com/microsoft/terminal), and [Docker support for running containers inside WSL2](https://docs.docker.com/docker-for-windows/wsl/), I think the time is now.
+With the latest improvements coming to the Windows Subsystem for Linux with [its second version](https://docs.microsoft.com/en-us/windows/wsl/compare-versions#whats-new-in-wsl-2), the new and exciting [Windows Terminal](https://github.com/microsoft/terminal), and [Docker support for running containers inside WSL2](https://docs.docker.com/docker-for-windows/wsl/), I think the time is now.
 
 In this post, we’ll walk through the steps I took to set up a PHP development environment in Windows, running in a Ubuntu Docker container running on WSL 2, and VS Code. Let’s go.
 
@@ -17,7 +17,7 @@ In this post, we’ll walk through the steps I took to set up a PHP development 
 
 ### What’s new with WSL 2
 
-This is best explained by the [official documentation](https://docs.microsoft.com/en-us/windows/wsl/wsl2-index). However, being a WSL 1 veteran, I’ll mention a few improvements made which have sparked my interest in trying it again.
+This is best explained by the [official documentation](https://docs.microsoft.com/en-us/windows/wsl/compare-versions#whats-new-in-wsl-2). However, being a WSL 1 veteran, I’ll mention a few improvements made which have sparked my interest in trying it again.
 
 #### 1. It’s faster and more compatible
 
@@ -45,7 +45,7 @@ Step 1 is obviously to install WSL and a Linux distribution that we like. [Micro
 
 1. Enable the “Windows Subsystem for Linux” and “Virtual Machine Platform” features by running these on an elevated PowerShell:
 
-```plain
+```plaintext
 dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
 dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
 ```
@@ -77,7 +77,7 @@ The extensions that we installed will allow us to use VS Code to work on code fr
 
 Let’s begin by opening a WSL Ubuntu terminal session, which will show something like this:
 
-```plain
+```plaintext
 Welcome to Ubuntu 20.04 LTS (GNU/Linux 4.19.104-microsoft-standard x86_64)
 
  * Documentation:  https://help.ubuntu.com
@@ -105,7 +105,7 @@ Because we installed the Remote - WSL extension, we can open up this directory i
 
 Now let’s create a new file called `Dockerfile` which will define what our development environment image will look like. For a no-frills PHP environment, mine looks like this:
 
-```plain
+```plaintext
 # The FROM statement says that our image will be based on the official Ubuntu Docker image from Docker Hub: https://hub.docker.com/_/ubuntu
 FROM ubuntu
 
@@ -172,7 +172,7 @@ root@ec5be7dd0b9b:/workspaces/php-in-docker-demo#
 
 You can for example, run `php -v` in this terminal, and expect something along these lines:
 
-```plain
+```plaintext
 PHP 7.4.3 (cli) (built: May 26 2020 12:24:22) ( NTS )
 Copyright (c) The PHP Group
 Zend Engine v3.4.0, Copyright (c) Zend Technologies

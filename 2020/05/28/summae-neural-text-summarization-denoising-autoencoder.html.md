@@ -63,7 +63,7 @@ Example 3:
 
 #### Wikihow
 
-This is one of the most challenging openly available datasets for neural summarization. It consists of more than 200,000 long-sequence pairs of text + headline scraped from [WikiHow’s website](https://www.wikihow.com/).
+This is one of the most challenging openly available datasets for neural summarization. It consists of more than 200,000 long-sequence pairs of text + headline scraped from [WikiHow’s website](https://www.wikihow.com/Main-Page).
 
 Some examples:
 
@@ -119,21 +119,21 @@ Let’s see how could we go about teaching the model about the next token’s co
 
 Imagine that the model’s parameters aren’t performing well yet. We have an input sequence of: `["<start>", "I", "love", "biking", "during", "the", "summer", "<end>"]`. We’re training the model giving it the first token:
 
-```
+```python
 model(["<start>", context])
 # "I"
 ```
 
 Great, now let’s ask it for another one:
 
-```
+```python
 model(["<start>", "I"], context])
 # "wonder"
 ```
 
 Hmmm that’s not what we wanted, but let’s naively continue:
 
-```
+```python
 model(["<start>", "I", "wonder"], context)
 # "why"
 ```
@@ -142,7 +142,7 @@ We could continue gathering predictions and compute the loss at the end. The los
 
 There’s a better approach called [Teacher Forcing](https://machinelearningmastery.com/teacher-forcing-for-recurrent-neural-networks/). In this approach, you’re telling the model the true answer after each of its guesses. The last example would look like the following:
 
-```
+```python
 model(["<start>", "I", "love"], context)
 # "watching"
 ```

@@ -166,7 +166,7 @@ cache.redis.password=
 
 #### Redis Pooling Factory
 
-We’re going to use [Jedis](https://github.com/xetorthio/jedis) as the Redis client in our project. So let’s create a Jedis pooling factory class in our project called `JedisFactory` like below:
+We’re going to use [Jedis](https://github.com/redis/jedis) as the Redis client in our project. So let’s create a Jedis pooling factory class in our project called `JedisFactory` like below:
 
 ```java
 package com.endpoint.SpringKafkaMessaging.cache;

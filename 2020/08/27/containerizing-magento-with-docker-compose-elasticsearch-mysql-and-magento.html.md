@@ -180,7 +180,7 @@ There’s no image of Magento 2 that would be able to get us up and running as q
 
 Here’s a Dockerfile for Magento 2.4 that I came up with:
 
-```dockerfile
+```plaintext
 # /path/to/project/Dockerfile
 
 # Our image is based on Ubuntu.

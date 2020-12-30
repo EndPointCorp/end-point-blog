@@ -22,7 +22,7 @@ Although there were many similarities between the old system and the new, the di
 
 We had to understand the differences between our and their old databases. Due to the number of tables and average number of columns, manual comparison between databases was not really an option. We knew that the algorithm of handling the scripts would look like below:
 
-```plain
+```plaintext
 For each S in Scripts
     Analyze S and understand the intent behind it
     Compute a read-only version of S to avoid write operations
@@ -76,11 +76,11 @@ Next we needed to understand what the schema differences were between their old 
 
 We used Liquibase for this purpose. See [Selva’s article on comparing PostgreSQL database schema versions](/blog/2020/02/11/compare-postgresql-schema-versions).
 
-The actual command we used was [`diff`](https://www.liquibase.org/documentation/diff.html).
+The actual command we used was [`diff`](https://docs.liquibase.com/commands/community/diff.html).
 
 So, we needed to make sure we had a proper setup and then we could run the command. The example output the documentation gives is this:
 
-```plain
+```plaintext
 Diff Results:
 Reference Database: MYSCHEMA2 @ jdbc:oracle:thin:@localhost:1521:ORCL (Default Schema: MYSCHEMA2)
 Comparison Database: MYSCHEMA @ jdbc:oracle:thin:@localhost:1521:ORCL (Default Schema: MYSCHEMA)
@@ -198,7 +198,7 @@ Of course, we could do this job manually by listing all the tables with psql’s
 
 Yes, we can write software for this purpose, implementing an algorithm along the lines of
 
-```plain
+```plaintext
 tables = <execute \dt>
 For each (tables as table) do
     Differences[table] = difference(<execute \d table at db1>, <execute \d table at db2>)

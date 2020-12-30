@@ -7,7 +7,7 @@ gh_issue_number: 1617
 
 ![Clean setup](/blog/2020/04/06/install-ubuntu-to-different-partition/banner.jpg)
 
-[Photo](https://unsplash.com/photos/4pPzKfd6BEg) by [Patryk Grądys](https://unsplash.com/@patrykgradyscom) on [Unsplash](https://unsplash.com)
+Photo by [Patryk Grądys](http://web.archive.org/web/20200208071440/https://unsplash.com/@patrykgradyscom) on [Unsplash](https://unsplash.com)
 
 Our Liquid Galaxy systems are running on Ubuntu 14.04 LTS (Trusty). We decided to upgrade them to Ubuntu 18.04 LTS (Bionic) since Ubuntu 14.04 LTS reached its end of life on April 30, 2019.
 

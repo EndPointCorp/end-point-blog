@@ -5,7 +5,7 @@ tags: wordpress, php, cms
 gh_issue_number: 1692
 ---
 
-![WordPress](blog/2020/11/27/advanced-wordpress-customizations/wordpress-logo-phone.jpg)
+![WordPress](/blog/2020/11/27/advanced-wordpress-customizations/wordpress-logo-phone.jpg)
 
 [Photo](https://www.flickr.com/photos/cdharrison/4289847815/) by [Chris Harrison](https://www.flickr.com/photos/cdharrison/) on Flickr, [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/), cropped
 
@@ -19,7 +19,7 @@ A pretty common scenario in WordPress consists of installing a theme that fits m
 
 To make our way around this issue, some themes offer a section to add custom JavaScript or CSS rules. But sometimes we need change themes in the middle of our developing process, so I usually rely on plugins to make my frontend changes. One simple, straightforward plugin I usually install to add custom styles and frontend scripts is [Simple Custom CSS and JS](https://wordpress.org/plugins/custom-css-js/).
 
-![Simple Custom CSS and JS](blog/2020/11/27/advanced-wordpress-customizations/wordpress-simple-custom-css-js.jpg)
+![Simple Custom CSS and JS](/blog/2020/11/27/advanced-wordpress-customizations/wordpress-simple-custom-css-js.jpg)
 
 It has several customization options I usually need for SEO purposes, including the possibility to create several independent code segments and load each one in a different section (header/​footer) to improve loading speed. We can also include our custom content as embedded source/​styles or as external references. It also includes an editor with syntax highlighting, and allows adding custom content to the WordPress admin section.
 
@@ -29,11 +29,11 @@ Another thing I usually need when customizing a WordPress website is the ability
 
 You can create your own PHP routines as snippets that can be inserted with shortcodes into a WordPress page, posts, template, or whenever you can add a shortcode. This will allow running any custom backend code anywhere on the website.
 
-![Custom PHP Code Snippet](blog/2020/11/27/advanced-wordpress-customizations/wordpress-custom-php-snippet.jpg)
+![Custom PHP Code Snippet](/blog/2020/11/27/advanced-wordpress-customizations/wordpress-custom-php-snippet.jpg)
 
 To run the code on a page or post, all that needs to be done is pasting the shortcode on the content with the “PHP” button that appears on the button bar on the editor:
 
-![Shortcode example](blog/2020/11/27/advanced-wordpress-customizations/wordpress-custom-php-snippet-shortcode.jpg)
+![Shortcode example](/blog/2020/11/27/advanced-wordpress-customizations/wordpress-custom-php-snippet-shortcode.jpg)
 
 ### Custom hooks
 

@@ -24,7 +24,7 @@ When we are done with the initial project setup we press the “GENERATE” butt
 
 ![Eclipse](/blog/2020/04/08/messaging-app-spring-kafka-pt-one/eclipse_springproject.png)
 
-I won’t address detailed configuration or adding dependencies of Spring and Maven projects in this post. If you are not familiar with Spring and Maven, I recommend that you have a look at the [Spring documentation](https://docs.spring.io/spring/docs/current/spring-framework-reference/) first.
+I won’t address detailed configuration or adding dependencies of Spring and Maven projects in this post. If you are not familiar with Spring and Maven, I recommend that you have a look at the [Spring documentation](https://docs.spring.io/spring-framework/docs/current/reference/html/) first.
 
 ### Design and architecture
 

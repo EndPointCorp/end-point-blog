@@ -183,7 +183,7 @@ julia> glob("**/**/*")
 
 Turns out that Julia’s `Glob` package doesn’t support extensions that allow “recursive” globbing. We’ll need to roll our own code to return all the possible nested folders:
 
-```julia
+```plaintext
 julia> function subdirs(base="src")
          ret = [base]
 
@@ -211,7 +211,7 @@ Being able to list all the nested directories, we can now work on the file-watch
 3. Spin up threads for every nested directory found and watch for changes at the same time.
 4. When the file change is detected, queue it into the channel.
 
-```julia
+```plaintext
 function onchange(f, basedirs=["src"])
   channel = Channel()
 
@@ -289,7 +289,7 @@ It works! The output is weird but we do get something here. For each file change
 
 Fortunately, the `Flux` package comes with the `throttle` function that we can reuse:
 
-```julia
+```plaintext
 function throttle(f, timeout; leading=true, trailing=false)
   cooldown = true
   later = nothing
@@ -325,7 +325,7 @@ end
 
 And the final version of our function:
 
-```julia
+```plaintext
 function onchange(f, basedirs=["src", "test"], timeout=1)
   channel = Channel()
 
@@ -381,7 +381,7 @@ end
 
 Armed with the helper `onchange` function we can now set up our nice auto-test runner. Let’s add the “test/runtests.jl” file:
 
-```julia
+```plaintext
 using Test
 
 function runtests()

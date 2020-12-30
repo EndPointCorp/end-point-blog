@@ -13,7 +13,7 @@ These days when hosting websites it is common to configure the web server to sen
 
 For example, using the nginx web server we may add these directives to our `http` configuration scope to apply to everything served, or to specific `server` configuration scopes to apply only to particular websites we serve:
 
-```plain
+```plaintext
 add_header Strict-Transport-Security max-age=2592000 always;
 add_header X-Content-Type-Options    nosniff         always;
 ```
@@ -126,9 +126,9 @@ We can manually test various HTTP responses are as we expect using `curl -v` or 
 
 Even better, we can add to our automated test suite to confirm these HTTP response headers appear everywhere we expect, for static files and API endpoints backed by different application servers, and for various success and error responses.
 
-Here is a test adapted from one I put together for one of our clients. It uses JavaScript in [Node.js](https://nodejs.org/), the [Jest](https://jestjs.io/) test framework, and the [Axios](https://github.com/axios/axios) HTTP client. It ensures the security headers example I showed at the beginning of this article keeps working, even as we make nginx configuration changes over time:
+Here is a test adapted from one I put together for one of our clients. It uses JavaScript in [Node.js](https://nodejs.org/en/), the [Jest](https://jestjs.io/) test framework, and the [Axios](https://github.com/axios/axios) HTTP client. It ensures the security headers example I showed at the beginning of this article keeps working, even as we make nginx configuration changes over time:
 
-```js
+```javascript
 const axios = require('axios');
 
 const http = axios.create({
@@ -167,7 +167,7 @@ describe('Check security headers', () => {
 
 Here I run just this one test rather than the whole suite:
 
-```plain
+```plaintext
 % jest -w 6 ./__tests__/webserver/security-headers.test.js
 Determining test suites to run...
 testing on https://https://your.dom.ain
@@ -195,7 +195,7 @@ This can also be extended to ensure that certain headers do not exist, or do not
 
 Add to the `verifs` array in the code above:
 
-```js
+```javascript
     { header: 'server',                    expect: (x) => x.not.toMatch(/\d/)         },
     { header: 'x-powered-by',              expect: (x) => x.toBeUndefined()           },
 ```

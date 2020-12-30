@@ -51,7 +51,7 @@ HOTSWAP AGENT: 15:01:24.189 INFO (org.hotswap.agent.config.PluginRegistry) - Dis
 
 To make hot swapping work automatically, we need to provide the JVM with a properties file in the JVM’s classpath. Mine looks like this, and lives in build/​classes/​java/​main, next to the compiled class files:
 
-```
+```plaintext
 autoHotswap=true
 LOGGER=debug
 ```
