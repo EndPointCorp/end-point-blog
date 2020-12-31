@@ -7,13 +7,13 @@ title: 'Postgres system triggers error: permission denied'
 
 This mystifying Postgres error popped up for one of my coworkers lately while using Ruby on Rails:
 
-```plain
+```plaintext
 ERROR:  permission denied: "RI_ConstraintTrigger_16410" is a system trigger
 ```
 
 On PostgreSQL version 9.2 and newer, the error may look like this:
 
-```plain
+```plaintext
 ERROR:  permission denied: "RI_ConstraintTrigger_a_32778" is a system trigger
 
 ERROR:  permission denied: "RI_ConstraintTrigger_c_32780" is a system trigger
@@ -23,7 +23,7 @@ I labelled this as mystifying because, while Postgres’ error system is general
 well designed and gives clear messages, this one stinks. A better one would 
 be something similar to:
 
-```plain
+```plaintext
 ERROR:  Cannot disable triggers on a table containing foreign keys unless superuser
 ```
 
@@ -49,14 +49,14 @@ Note that if you are not a superuser *and* you are not the owner of the
 table, you will get a much better error message when you try to disable 
 all the triggers:
 
-```plain
+```plaintext
 ERROR:  must be owner of relation foobar
 ```
 
 To reproduce the original error, we will create two tables, and then link them together 
 via a foreign key:
 
-```plain
+```plaintext
 postgres=# create user alice;
 CREATE ROLE
 
@@ -84,7 +84,7 @@ Let’s take a look at both tables, and then try to disable triggers on each one
 Because the triggers enforcing the foreign key are internal, they will not show up 
 when we do a `\d`:
 
-```plain
+```plaintext
 postgres=> \d foo
       Table "public.foo"
  Column |  Type   | Modifiers 
@@ -112,7 +112,7 @@ ERROR:  permission denied: "RI_ConstraintTrigger_41049" is a system trigger
 
 If we try the same thing as a superuser, we have no problem:
 
-```plain
+```plaintext
 postgres=# \c postgres postgres
 You are now connected to database "postgres" as user "postgres".
 
@@ -147,7 +147,7 @@ much easier to **adjust the session_replication_role**. In short, this
 disables *all* triggers and rules, on all tables, until it is switched 
 back again. Do NOT forget to switch it back again! Usage is like this:
 
-```plain
+```plaintext
 postgres=# \c postgres postgres
 You are now connected to database "postgres" as user "postgres".
 
@@ -169,7 +169,7 @@ It may be that you are simply trying to disable one or more of the
 "normal” triggers that appear on the table. In which case, you can 
 simply **disable user triggers manually** rather than use “all”:
 
-```plain
+```plaintext
 postgres=# \c postgres alice
 You are now connected to database "postgres" as user "alice".
 
@@ -204,7 +204,7 @@ is to remove the foreign key relationship yourself. You cannot disable
 the trigger, but you can **drop the foreign key** that created it in 
 the first place. Of course, you have to add it back in as well:
 
-```plain
+```plaintext
 postgres=# \c postgres alice
 You are now connected to database "postgres" as user "alice".
 
@@ -276,7 +276,7 @@ As seen above, the output of `\d` in the psql program shows us the triggers
 on a table, but not the internal system triggers, such as those created 
 by foreign keys. Here is how triggers normally appear:
 
-```plain
+```plaintext
 postgres=# \c postgres postgres
 You are now connected to database "postgres" as user "postgres".
 
@@ -323,7 +323,7 @@ you will need to look at the pg_trigger table directly. Here is the query
 that psql uses when generating a list of triggers on a table. Note the 
 exclusion based on the tgisinternal column:
 
-```plain
+```plaintext
 SELECT t.tgname, pg_catalog.pg_get_triggerdef(t.oid, true), t.tgenabled
 FROM pg_catalog.pg_trigger t
 WHERE t.tgrelid = '32774' AND NOT t.tgisinternal
@@ -335,7 +335,7 @@ two triggers created by the foreign key. All of them are enabled. Disabled
 triggers will show as a ‘D’ in the tgenabled column. (O stands for origin, 
 and has to do with session_replication_role).
 
-```plain
+```plaintext
 postgres=# select tgname,tgenabled,tgisinternal from pg_trigger 
 postgres-#  where tgrelid = 'bar'::regclass;
             tgname            | tgenabled | tgisinternal 
@@ -360,7 +360,7 @@ postgres-#  where tgrelid = 'bar'::regclass;
 As you recall, the original error — with the system trigger that had a rather 
 non-intuitive name — looked like this:
 
-```plain
+```plaintext
 ERROR:  permission denied: "RI_ConstraintTrigger_16509" is a system trigger
 ```
 

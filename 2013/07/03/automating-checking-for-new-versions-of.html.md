@@ -68,7 +68,7 @@ One quick and simple trick is to make this into a cron job and add the **--quiet
 prevents all output if the check was “OK”. In this way, cron will only send outout (e.g. mail 
 someone) when a new revision has been released. A cron example:
 
-```plain
+```plaintext
 ## Twice a day, check that we are running the latest Postgres:
 0 7,18 * * * check_postgres.pl --action=new_version_pg --dbhost=cabbage --quiet
 ```

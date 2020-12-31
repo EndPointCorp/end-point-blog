@@ -16,7 +16,7 @@ Because the original IRC question involved a LIKE clause, let’s use one in our
 
 The first case is a LIKE with no wildcards. When Postgres sees this, it converts it to a simple equality clause, as if the LIKE was an equal sign. Thus, it is able to quite easily use the B-tree index:
 
-```plain
+```plaintext
 test# EXPLAIN SELECT 1 FROM pg_class WHERE relname LIKE 'foobar'
                           QUERY PLAN                                           
 --------------------------------------------------------------
@@ -27,7 +27,7 @@ test# EXPLAIN SELECT 1 FROM pg_class WHERE relname LIKE 'foobar'
 
 Now consider the case in which we only know the first part of the word, so we put a wildcard on the end:
 
-```plain
+```plaintext
 test# EXPLAIN SELECT 1 FROM pg_class WHERE relname LIKE 'foo%'
                              QUERY PLAN                                           
 ----------------------------------------------------------------------
@@ -40,7 +40,7 @@ As we know how the string starts, there is no problem in using the index. Notice
 
 Finally, the most interesting one: the case where we only know the end of the relname, so the wildcard goes in the front:
 
-```plain
+```plaintext
 test# EXPLAIN SELECT 1 FROM pg_class WHERE relname LIKE '%bar'
              QUERY PLAN                        
 -------------------------------------
@@ -52,14 +52,14 @@ In this case, Postgres falls back to a sequential scan of the main table, and do
 
 So those are the three potential variations of LIKE. When a prepared statement is created, the argument is unknown and left as a placeholder. In other words, Postgres does not know in advance if we are going to search for ‘foobar’, ‘foo%’, ‘%bar’, or something else. Watch what happens when we create a basic prepared statement based on the queries above:
 
-```plain
+```plaintext
 test# PREPARE zz(TEXT) AS SELECT 1 FROM pg_class WHERE relname LIKE $1
 PREPARE
 ```
 
 The $1 is the parameter that will be passed to this statement when it is executed. Because Postgres has no way of knowing what will be passed in, it must create a plan that can work with all possible inputs. This means using a sequential scan, for as we’ve seen above, a wildcard at the start of the input requires one. All the examples using indexes can safely fall back to a sequential scan as well. We can use EXPLAIN EXECUTE to see the plan in action:
 
-```plain
+```plaintext
 test# EXPLAIN EXECUTE zz('%bar');
          QUERY PLAN                        
 ---------------------------
@@ -69,7 +69,7 @@ test# EXPLAIN EXECUTE zz('%bar');
 
 As expected, this plan is the only one available for the query given, as the index cannot be used with a leading wildcard. Now for the fun part. Let’s put the wildcard on the end, and see what happens on Postgres version 9,1:
 
-```plain
+```plaintext
 test# SELECT substring(version() from '(.+?) on');
 PostgreSQL 9.1.13
 # EXPLAIN EXECUTE zz('foo%');
@@ -81,7 +81,7 @@ PostgreSQL 9.1.13
 
 That’s really not a good plan! It gets worse:
 
-```plain
+```plaintext
 # EXPLAIN EXECUTE zz('foobar');
          QUERY PLAN                        
 ---------------------------
@@ -97,7 +97,7 @@ Before version 9.2, the prepared statement’s plan was locked in place. This wa
 
 Yes, you read that correctly—​new plans can be generated to match the parameters! (In case you were wondering, things have been improved since this commit, as hoped for in the last sentence.) Let’s see what happens when we run the exact same prepared statements above, but on Postgres version 9.3:
 
-```plain
+```plaintext
 # SELECT substring(version() from '(.+?) on');
 PostgreSQL 9.3.4
 test# EXPLAIN EXECUTE zz('%bar');

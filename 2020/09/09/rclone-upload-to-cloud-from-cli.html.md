@@ -41,7 +41,7 @@ Installing rclone is as simple as downloading the binary from [rclone.org](https
 
 Whichever method you choose, once you have rclone installed, you’ll need to configure it to use your remote storage.
 
-```plain
+```plaintext
 $ rclone config
 2020/08/28 11:33:19 NOTICE: Config file "/home/user/.config/rclone/rclone.conf" not found - using defaults
 No remotes found - make a new one
@@ -53,7 +53,7 @@ n/s/q>
 
 Choose ‘n’ for a new remote, and name it something memorable.
 
-```plain
+```plaintext
 n/s/q> n
 name> gdrive
 Type of storage to configure.
@@ -67,7 +67,7 @@ Storage> drive
 
 (At this point you could also choose a different storage type, and the rest of these instructions should still work.)
 
-```plain
+```plaintext
 ** See help for drive backend at: https://rclone.org/drive/ **
 
 Google Application Client Id
@@ -80,7 +80,7 @@ client_id>
 
 At this point, follow the instructions on how to [make your own client id](https://rclone.org/drive/#making-your-own-client-id) from rclone’s website or keep reading. If you leave this blank, the app will use a shared client id and there is global rate limiting in effect for every rclone instance.
 
-```plain
+```plaintext
 client_id> [snip].apps.googleusercontent.com
 Google Application Client Secret
 Setting your own is recommended.
@@ -108,7 +108,7 @@ scope> 3
 
 At this point, choose a scope for the drive access. I’m not sure what the use cases are for the higher numbers, but 1–3 seem to be the most useful. For this demonstration, I chose 3—I want the app to be able to create new files but not read existing ones. For backups, I recommend 1 or 2.
 
-```plain
+```plaintext
 ID of the root folder
 Leave blank normally.
 
@@ -124,7 +124,7 @@ root_folder_id>
 
 You can also jail the app to a specific subfolder. You’ll need to use a folder ID for this, rather than a folder name. See [the documentation](https://rclone.org/drive/#root-folder-id) if you need to do this.
 
-```plain
+```plaintext
 Needed only if you want use SA instead of interactive login.
 Enter a string value. Press Enter for the default ("").
 service_account_file>  # I left this blank
@@ -142,7 +142,7 @@ n) No
 
 For our use case, we are setting this up on a remote machine, but you can use the interactive login if you have a graphical user interface on the machine in question.
 
-```plain
+```plaintext
 y/n> n
 Please go to the following link: https://accounts.google.com/o/oauth2/auth?access_type=offline&client_id=[snip]
 Log in and authorize rclone for access
@@ -151,7 +151,7 @@ Enter verification code>
 
 At this point copy the URL and follow the instructions on screen. Agree to the data sharing—If you have created your own API key, this data will be only shared with yourself, another reason to create your own.
 
-```plain
+```plaintext
 Configure this as a team drive?
 y) Yes
 n) No (default)

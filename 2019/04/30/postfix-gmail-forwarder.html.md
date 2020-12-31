@@ -53,7 +53,7 @@ This seems like a slight bit of overkill for just sending outgoing email, but Po
 
 First, install Postfix as appropriate for your Linux distribution:
 
-```plain
+```plaintext
 # dnf install postfix    # Fedora
 # yum install postfix    # CentOS/​RHEL
 # apt install postfix    # Debian/​Ubuntu
@@ -63,7 +63,7 @@ Now, time to edit the default Postfix configuration. The options are all [well-d
 
 Here is what I added to `/etc/postfix/main.cf`:
 
-```plain
+```plaintext
 relayhost = [smtp.gmail.com]:465
 
 smtp_tls_wrappermode = yes
@@ -107,7 +107,7 @@ I set `smtp_tls_loglevel` to 2 so that the Postfix logs will show helpful detail
 
 The next several `smtp_sasl_` options configure our use of a username and password. (SASL means “Simple Authentication and Security Layer”.) Note the `smtp_sasl_password_maps` file we specified. The file name is arbitrary. Let’s create that now in `/etc/postfix/smtp_auth`:
 
-```plain
+```plaintext
 [smtp.gmail.com]:465    user@gsuite.domain:apppassword
 ```
 
@@ -115,20 +115,20 @@ Of course substitute your own email address and Gmail app password there.
 
 We need to create a fast binary map equivalent of that file for Postfix to read, and since it contains a password that should be kept private, let’s make it unreadable by other users on the system:
 
-```plain
+```plaintext
 # postmap hash:smtp_auth
 # chmod go= smtp_auth*
 ```
 
 Next I set option `header_checks` to look for regular expressions in another file we need to create, `/etc/postfix/header_checks`:
 
-```plain
+```plaintext
 /^Received:\ (from|by)\ .*(yourhostname|localhost|localdomain)/      IGNORE
 ```
 
 That removes a pair of headers that Postfix normally adds to each message we send, tracking the receipt and forwarding on of the email:
 
-```plain
+```plaintext
 Received: by yourhostname.localdomain (Postfix, from userid 1000)
     id F2F7111C64A1; Tue, 30 Apr 2019 17:36:12 -0600 (MDT)
 Received: from localhost (localhost [127.0.0.1])
@@ -144,7 +144,7 @@ Finally, a minor nicety I like to enable is to set `smtp_address_preference` to 
 
 Now we’re ready to start Postfix, and set it to start automatically at boot time:
 
-```plain
+```plaintext
 # systemctl start postfix
 # systemctl enable postfix
 ```
@@ -153,13 +153,13 @@ Now you need to configure your mail client. My enthusiasm for [Pine (now Alpine)
 
 Whatever it is, set your mail client to send mail through local Postfix executable `/usr/sbin/sendmail` (the default for many), or through SMTP to `localhost:25`. For me, that meant editing `~/.pinerc`. When I was sending mail directly from Pine to Gmail, it contained:
 
-```plain
+```plaintext
 smtp-server=smtp.gmail.com/submit/tls/user=you@your.domain
 ```
 
 But now I want there to be no setting so it falls back to `/usr/sbin/sendmail`:
 
-```plain
+```plaintext
 smtp-server=
 ```
 
@@ -171,13 +171,13 @@ Let’s look at what Postfix logged when I sent a test message.
 
 When using rsyslog my complete log lines look like this:
 
-```plain
+```plaintext
 2019-04-30T17:59:11.887004-06:00 localhost postfix/smtpd[10962]: connect from localhost[127.0.0.1]
 ```
 
 That timestamp and hostname prefix waste a lot of room on each line here, so I will trim them from the rest of the xample:
 
-```plain
+```plaintext
 postfix/smtpd[10962]: connect from localhost[127.0.0.1]
 postfix/smtpd[10962]: DA75311C649C: client=localhost[127.0.0.1]
 postfix/smtpd[10962]: disconnect from localhost[127.0.0.1] ehlo=1 mail=1 rcpt=1 data=1 quit=1 commands=5
@@ -216,7 +216,7 @@ We can see that the TLS connection was made, negotiated over IPv6 with TLS 1.2 a
 
 Google has some of their SMTP servers offering the newer, unfinalized TLS 1.3 protocol, since I see that about half the time:
 
-```plain
+```plaintext
 postfix/smtp[13812]: Verified TLS connection established to smtp.gmail.com[2607:f8b0:4001:c06::6d]:465: TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits) key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
 ```
 

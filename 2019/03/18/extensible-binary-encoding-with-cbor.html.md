@@ -35,7 +35,7 @@ With CBOR, binary blobs of any length are supported out of the box and are encod
 
 For example, let’s try encoding a simple object with two fields: “name” and “data”. An abstract view of this object:
 
-```plain
+```plaintext
 name: "Strawberry Pie"
 data: <00 01 02 03 04 05 06 07 08 09>
 ```
@@ -60,7 +60,7 @@ a2646e616d656e5374726177626572727920506965696a7065675f646174614a0001020304050607
 
 Whoa, there. What do all these numbers and letters mean? I miss my JSON! The Node [cbor](https://www.npmjs.com/package/cbor) package has a handy [`cbor2comment` tool](https://github.com/hildjj/node-cbor/blob/master/bin/cbor2comment) to annotate this hex string for us.
 
-```plain
+```plaintext
   a2                -- Map, 2 pairs
     64              -- String, length: 4
       6e616d65      -- {Key:0}, "name"
@@ -76,7 +76,7 @@ Length: 35 bytes.
 
 Now let’s [benchmark JSON against CBOR using real JPEG data](https://github.com/mvollrath/cbor-bench). For this test I used a [modified version of cbor-js](https://github.com/mvollrath/cbor-js/tree/fast_byte_array_encoding), a library compatible with both Node and browsers, and encoded a 910,226 byte JPEG of strawberry rhubarb pie.
 
-```plain
+```plaintext
 |                           | JSON      | CBOR    |
 | :------------------------ | --------: | ------: |
 | Median encoding time (ms) | 3.983     | 0.538   |
@@ -112,7 +112,7 @@ Length: 69 bytes.
 
 If we were to help the encoder by sending it a regular `Array` it would still be pretty verbose, but the precision we weren’t using is truncated, so the overall length will vary wildly depending on the values in the `Array`:
 
-```plain
+```plaintext
 [1.234567,2.345678,3.456789]
 ```
 
@@ -120,7 +120,7 @@ Length: 28 bytes.
 
 The well-meaning Node cbor library can encode the `Float32Array` directly, but doesn’t try to optimize for size:
 
-```plain
+```plaintext
   83                -- Array, 3 items
     fb              -- Float, next 8 bytes
       3ff3c0c960000000 -- [0], 1.2345670461654663
@@ -134,7 +134,7 @@ Length: 28 bytes.
 
 Look at all that wasted precision, 64 bits for each 32-bit float, this just won’t do! The CBOR spec allows you to “tag” data for special treatment. According to the [list of registered CBOR tags](https://www.iana.org/assignments/cbor-tags/cbor-tags.xhtml), “IEEE 754 binary32, little endian, Typed Array” is tag 85. The consecutive bytes of the three numbers follow.
 
-```plain
+```plaintext
   d8                --  next 1 byte
     55              -- Tag #85
       4c            -- Bytes, length: 12

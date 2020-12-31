@@ -43,7 +43,7 @@ I reloaded the page, then commented out the $wgDebugLogFile line to stop it from
 growing large (the debug output can be quite verbose!). Here’s some snippets from 
 the generated log file:
 
-```plain
+```plaintext
 0.9151   4.2M  Start request GET /wiki/Main_Page
 ...
 [caches] main: SqlBagOStuff, message: SqlBagOStuff, parser: SqlBagOStuff
@@ -77,7 +77,7 @@ obscure
 two main logs Apache uses: access and error. The latter revealed nothing at all when I loaded the 
 main wiki page. The access logs looked fairly normal:
 
-```plain
+```plaintext
 85.236.207.120 - greg [19/Jan/2016:12:23:21 -0500] "GET /wiki/Main_Page HTTP/1.1" 200 23558 "-" "Mozilla/5.0 Firefox/43.0"
 85.236.207.120 - greg [19/Jan/2016:12:23:22 -0500] "GET /mediawiki/extensions/balloons/js/balloon.config.js HTTP/1.1" 200 4128 "https://wiki.endpoint.com/wiki/Main_Page
 " "Mozilla/5.0 Firefox/43.0"
@@ -92,7 +92,7 @@ Still nothing out of the ordinary. What to do next? When all else fails, go to t
 spawned and waiting for a connection. While there was no way to know which one would field my requests, some shell-fu allowed me 
 to strace them all at once:
 
-```plain
+```plaintext
 ## The -u prevents us from picking the parent httpd process, because it is owned by root!
 $ strace -o greg.httpd.trace -tt -ff `pgrep -u apache httpd | xargs -n 1 echo -p | xargs`
 Process 5148 attached
@@ -119,7 +119,7 @@ Process 4853 detached
 
 Looking at one of the output of one of these revealed some important clues:
 
-```plain
+```plaintext
 $ head greg.httpd.trace.4948
 13:00:28.799807 read(14, "\27\3\3\2\221\0\0\0\0\0\0\0\1\35-\332\3123(\200\302\"\251'g\256\363b5"..., 8000) = 666
 13:00:28.799995 stat("/wiki/htdocs/mediawiki/load.php", {st_mode=S_IFREG|0644, st_size=1755, ...}) = 0
@@ -133,7 +133,7 @@ $ head greg.httpd.trace.4948
 
 Aha! If you look close at those timestamps, you will notice that the time gap from the call to close() and the subsequent setitimer() is quite large at .69 seconds. That’s a long time for Apache to be waiting around for something. The second clue is the file it just opened: “htpasswd.users”. Seeing the top of the file, with the {SHA} in quotes, made me realize the problem—​htpasswd files now support bcrypt as an authentication method, and bcrypt is designed to be secure—​and slow. Sure enough, the htpasswd file had bcrypt entries with a high cost for the people that were having the most issues with the speed. This is what the file looked like (names and values changed):
 
-```plain
+```plaintext
 alice:{SHA}jA0EAgMCMEpo4Wa3n/9gybBBsDPa
 greg:$2y$13$+lE6+EwgtzP0m8K8VQDnYMRDRMf6rNMRZsCzko07QQpskKI9xbb/y9
 mallory:$2y$15$ww8Q4HMI1Md51kul2Hiz4ctetPqJ95cmspH8T81JHfqRvmg===rVgn
@@ -147,7 +147,7 @@ I recognized the bcrypt format right away ($2y$13$). The people who were complai
 
 The 'cost' is the number after the second dollar sign: as you can see, some of them had a cost of **15**, which is much more expensive than a cost of **13**, which is what my user (“greg”) was using. This was a smoking gun, but one more step was needed for proof. I adjusted the cost of my password to something low using the [htpasswd program](https://httpd.apache.org/docs/current/programs/htpasswd.html):
 
-```plain
+```plaintext
 $ htpasswd -B -C 6 /wiki/htpasswd.users greg
 New password: 
 Re-type new password: 
@@ -190,7 +190,7 @@ What encryption options are available for htpasswd program? The bcrypt option wa
 us that bcrypt is the only secure one, but allows for other legacy ones to be used. Also note that the range of costs for 
 bcrypt range from 4 to 31:
 
-```plain
+```plaintext
  -m  Force MD5 encryption of the password (default).
  -B  Force bcrypt encryption of the password (very secure).
  -C  Set the computing time used for the bcrypt algorithm
