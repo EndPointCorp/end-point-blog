@@ -9,6 +9,7 @@ if sys.version_info[0] < 3 or (sys.version_info[0] == 3 and sys.version_info[1] 
 import subprocess
 import argparse
 import requests
+import json
 import os
 import re
 
@@ -29,48 +30,10 @@ if args.outfile and not args.force and os.path.isfile(args.output_file):
     print("Use '-f' flag to overwrite")
     sys.exit(3)
 
-highlight_languages = [
-    "apache",
-    "bash",
-    "c-like",
-    "c",
-    "coffeescript",
-    "cpp",
-    "csharp",
-    "css",
-    "diff",
-    "go",
-    "http",
-    "ini",
-    "java",
-    "javascript",
-    "json",
-    "kotlin",
-    "less",
-    "lua",
-    "makefile",
-    "xml",
-    "markdown",
-    "nginx",
-    "objectivec",
-    "perl",
-    "php",
-    "php-template",
-    "plaintext",
-    "properties",
-    "python",
-    "python-repl",
-    "ruby",
-    "rust",
-    "scss",
-    "shell",
-    "sql",
-    "swift",
-    "typescript",
-    "yaml"
-]
+# Run `node update-hljs-list.js` to update
+highlight_languages = json.load(open('supported-languages.json', 'r'))
 
-# Make a "Line" class that keeps track of its own line number
+highlight_languages += ['nohighlight', 'plaintext']
 
 class Warning:
     def __init__(self, line, message, forKeepers=False):
