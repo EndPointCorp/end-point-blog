@@ -17,7 +17,7 @@ log_line_prefix = '%t [%p] %u@%d '
 
 This tells Postgres to print out the timestamp, the PID aka process id (inside of square brackets), the current username and database name, and finally a single space to help separate the prefix visually from the rest of the line. The above will generate lines that look like this:
 
-```plaintext
+```nohighlight
 2010-08-06 09:24:57.714 EDT [7229] joy@joymail LOG: execute dbdpg_p7228_5: SELECT count(id) FROM joymail WHERE folder = $1
 2010-08-06 09:24:57.714 EDT [7229] joy@joymail DETAIL:  parameters: $1 = '4'
 ```

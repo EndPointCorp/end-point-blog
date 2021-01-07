@@ -36,7 +36,7 @@ problem of conflicts, so non built-in strategies are preferred. Before getting i
 those other solutions, let’s see the default strategy (bucardo_latest) in
 action:
 
-```plaintext
+```nohighlight
 ## This is the default, but it never hurts to be explicit:
 bucardo update sync ctest conflict=bucardo_latest
 Set conflict strategy to 'bucardo_latest'
@@ -60,7 +60,7 @@ Under the hood, Bucardo actually applies the list of winning databases to each c
 
 As an alternative to the built-ins, you can set conflict_strategy to a list of the databases in the sync, ordered from highest priority to lowest, for example “C B A”. The list does not have to include all the databases, but it is a good idea to do so. Let’s see it in action. We will change the conflict_strategy for our test sync and then reload the sync to have it take effect:
 
-```plaintext
+```nohighlight
 bucardo update sync ctest conflict='B A C'
 Set conflict strategy to 'B A C'
 bucardo reload sync ctest
@@ -120,7 +120,7 @@ return;
 
 Let’s add in this customcode, and associate it with our sync. Then we will reload the sync and cause a conflict.
 
-```plaintext
+```nohighlight
 bucardo add customcode ctest whenrun=conflict src_code=ctest1.pl sync=ctest
 Added customcode "ctest"
 bucardo reload sync ctest
@@ -193,7 +193,7 @@ return;
 
 Let’s see that code in action. Assuming the above “bucardo add customcode” command was run, we will need to load an updated version, and then reload the sync. We create some conflicts, and check on the results:
 
-```plaintext
+```nohighlight
 bucardo update customcode ctest src_code=ctest2.pl
 Changed customcode "ctest" src_code with content of file "ctest2.pl"
 bucardo reload sync ctest

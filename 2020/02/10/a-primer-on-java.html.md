@@ -189,7 +189,7 @@ In this period I learned PHP, JavaScript, CSS, HTML, MySQL (this was easy, becau
  
 After a lot of struggle, doing a lot of negotiation and freelancing work for very different people, each having his/​her own preferences, cultural background, and temperament, I ended up working on .NET projects. Even though I enjoyed working with .NET as well, which was mostly in ASP.NET, I had difficulty working with Visual Basic, since my only coding with BASIC was some work I did with QBasic, when I was 11 years old. Even though I enjoyed working with QBasic as an early teen, writing code to display some graphic in motion, when I encountered Visual Basic with the purpose of developing the backend of ASP.NET projects, I had to relearn BASIC and having experience with C-based languages, I found it strange to see code like:
 
-```plaintext
+```nohighlight
 If foo IsNot Nothing AndAlso foo.IsValid Then
   'Some code
 ElseIf foo IsNot Nothing Then
@@ -203,7 +203,7 @@ instead of
 
 ```java
 if (foo != null && foo.isValid) {
-   //Some code
+  //Some code
 } else if (foo != null) {
   //Some code
 } else {
@@ -219,13 +219,13 @@ In general, when some work is completed, I build it with an [ant](https://ant.ap
 
 In Linux I run `jboss-cli.sh`, for Windows there is a `jboss-cli.bat` alternative. After running it, we need to:
 
-```plaintext
+```nohighlight
 connect
 ```
  
 and then deploy, like:
  
-```plaintext
+```nohighlight
 deploy <path to the ear file>
 ```
 

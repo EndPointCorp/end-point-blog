@@ -22,7 +22,7 @@ Although there were many similarities between the old system and the new, the di
 
 We had to understand the differences between our and their old databases. Due to the number of tables and average number of columns, manual comparison between databases was not really an option. We knew that the algorithm of handling the scripts would look like below:
 
-```plaintext
+```nohighlight
 For each S in Scripts
     Analyze S and understand the intent behind it
     Compute a read-only version of S to avoid write operations
@@ -80,7 +80,7 @@ The actual command we used was [`diff`](https://docs.liquibase.com/commands/comm
 
 So, we needed to make sure we had a proper setup and then we could run the command. The example output the documentation gives is this:
 
-```plaintext
+```nohighlight
 Diff Results:
 Reference Database: MYSCHEMA2 @ jdbc:oracle:thin:@localhost:1521:ORCL (Default Schema: MYSCHEMA2)
 Comparison Database: MYSCHEMA @ jdbc:oracle:thin:@localhost:1521:ORCL (Default Schema: MYSCHEMA)
@@ -198,7 +198,7 @@ Of course, we could do this job manually by listing all the tables with psql’s
 
 Yes, we can write software for this purpose, implementing an algorithm along the lines of
 
-```plaintext
+```nohighlight
 tables = <execute \dt>
 For each (tables as table) do
     Differences[table] = difference(<execute \d table at db1>, <execute \d table at db2>)

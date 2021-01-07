@@ -33,7 +33,7 @@ For ease of development and project bootstrapping, I’ve created a containerize
 
 If you want to follow along, clone that repo, and you’ll end up with this file structure (as shown by the `tree` command):
 
-```plaintext
+```nohighlight
 .
 ├── apache_config
 │   └── 000-default.conf

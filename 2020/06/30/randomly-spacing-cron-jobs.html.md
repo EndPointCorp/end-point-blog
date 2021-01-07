@@ -27,7 +27,7 @@ man 5 crontab
 
 Important in that document is the explanation of the space-separated time and date fields:
 
-```plaintext
+```nohighlight
 field          allowed values
 -----          --------------
 minute         0-59
@@ -41,7 +41,7 @@ A field may contain an asterisk (*), which always stands for "first-last".
 
 For example, to make a job run every Monday at 3:33 am in the server’s defined time zone:
 
-```plaintext
+```nohighlight
 33 3 * * 1 /path/to/executable
 ```
 
@@ -67,7 +67,7 @@ RANDOM_DELAY=10
 
 When it starts, cronie logs its random scaling factor so you can tell how long each `RANDOM_DELAY` will work out to be during the lifetime of this cron daemon. It looks like this:
 
-```plaintext
+```nohighlight
 # systemctl status crond
 ● crond.service - Command Scheduler
      Loaded: loaded (/usr/lib/systemd/system/crond.service; enabled; vendor preset: enabled)
@@ -88,7 +88,7 @@ Jun 29 19:05:50 myhost crond[60630]: (CRON) INFO (@reboot jobs will be run at co
 
 If we restart cronie with `systemctl restart crond`, we will (probably) see a different scaling factor:
 
-```plaintext
+```nohighlight
 Jun 29 22:42:02 myhost crond[75200]: (CRON) INFO (RANDOM_DELAY will be scaled with factor 29% if used.)
 ```
 

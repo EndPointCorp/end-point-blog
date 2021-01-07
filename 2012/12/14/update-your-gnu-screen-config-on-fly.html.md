@@ -29,7 +29,7 @@ There are a couple of options at this point. I could put up with the default / n
 
 The source command can be used to load or reload a Screen configuration file. It can be invoked from inside a Screen session like so: 
 
-```plaintext
+```nohighlight
 C-a :source /absolute/path/to/config_file
 ```
 
@@ -39,7 +39,7 @@ It is important to note that you must use the absolute path to the config file. 
 
 I like to use [tmux](http://tmux.sourceforge.net/) as well and was happy to [find](http://www.openbsd.org/cgi-bin/man.cgi?query=tmux&sektion=1) it had a similar feature. The source-file command (`source` is aliased as well) is invoked in the exactly the same way: 
 
-```plaintext
+```nohighlight
 C-prefix :source /absolute/path/to/config_file
 ```
 
@@ -51,13 +51,13 @@ Another related issue I often run into is wishing I had started my Screen or tmu
 
 For Screen, the chdir command can be used: 
 
-```plaintext
+```nohighlight
 C-a :chdir /some/new/directory
 ```
 
 In tmux, the default-path command can be used: 
 
-```plaintext
+```nohighlight
 C-prefix :default-path /some/new/directory
 ```
 
