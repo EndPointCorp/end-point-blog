@@ -8,6 +8,8 @@ gh_issue_number: 1688
 ![rows of barrels](/blog/2020/11/13/job-postgresql-database-administrator-developer/12648792923_b4780df1da_o-mod.jpg)
 [Photo](https://www.flickr.com/photos/13476480@N07/12648792923/) by [manhhai](https://www.flickr.com/people/13476480@N07/), cropped & filtered, [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/)
 
+**(This position has been filled.)**
+
 We are seeking a full-time PostgreSQL database administrator and developer to support and consult with our clients. For this role we prefer those living in the Western Hemisphere.
 
 End Point is an Internet technology consulting company based in New York City, with 50 employees serving many clients ranging from small family businesses to large corporations. The company turned 25 years old this year!
