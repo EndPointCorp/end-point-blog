@@ -1,7 +1,7 @@
 ---
 author: "Kursat Aydemir"
 title: "Creating a Messaging App using Spring - Kafka (Part 4)"
-tags: java, spring, kafka
+tags: java, spring, kafka, spring-kafka-series
 ---
 
 ![Spring-Kafka](/blog/2021/01/14/creating-a-messaging-app-using-spring-kafka-part-4.png)
