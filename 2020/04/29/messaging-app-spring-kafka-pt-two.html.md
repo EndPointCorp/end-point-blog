@@ -7,7 +7,7 @@ gh_issue_number: 1624
 
 ![Spring pasture](/blog/2020/04/29/messaging-app-spring-kafka-pt-two/spring-pasture.jpg)
 
-This article is part of a [series](/blog/tags/spring-kafka-series).
+This article is part of a [series](/blog/tags/spring-kafka-series). The GitHub repository with code examples can be found [here](https://github.com/ashemez/SpringKafkaMessaging).
 
 In this part I’ll walk through Kafka’s servers and processes, the basics of spring-kafka producers and consumers, persistence, and caching configurations.
 

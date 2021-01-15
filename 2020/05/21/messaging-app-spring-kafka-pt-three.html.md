@@ -9,7 +9,7 @@ gh_issue_number: 1630
 
 [Photo](https://unsplash.com/photos/OKolJZ5jos4) by [Pascal Debrunner](https://unsplash.com/@debrupas) on [Unsplash](https://unsplash.com)
 
-This article is part of a [series](/blog/tags/spring-kafka-series).
+This article is part of a [series](/blog/tags/spring-kafka-series). The GitHub repository with code examples can be found [here](https://github.com/ashemez/SpringKafkaMessaging).
 
 In this article we’ll create the persistence and cache models and repositories. We’re also going to create our PostgreSQL database and the basic schema that we’re going to map to the persistence model.
 
@@ -637,6 +637,6 @@ public class AuthController {
 }
 ```
 
-In the next chapter we’ll shape and complete the authentication service and controller and add message sender and receiver services. We’ll also configure and enable [Spring WebSocket](https://docs.spring.io/spring-framework/docs/current/reference/html/web-reactive.html#webflux-websocket).
+In the [next chapter](/blog/2021/01/14/messaging-app-spring-kafka-pt-four), we’ll shape and complete the authentication service and controller and add message sender and receiver services. We’ll also configure and enable [Spring WebSocket](https://docs.spring.io/spring-framework/docs/current/reference/html/web-reactive.html#webflux-websocket).
 
 In the final chapter, we’ll create a simple web app interface as a messaging client to test our spring-kafka messaging application.
