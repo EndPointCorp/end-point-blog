@@ -16,7 +16,7 @@ The website says "Endless OS uses OSTree, a non-destructive and atomic technique
 
 According to its website, the operating system is free for individuals and non-commercial use up to 500 computers. 
 
-![](/2021/01/18/linux-for-kids/desktop.png)
+![](end-point-blog/2021/01/18/linux-for-kids/desktop.png)
 
 ###Package installation
 We could use several ways to install new packages (or to update them). One way of doing it is by using the Control Centre and the other one (if we want to install remotely) is by using the command line. Although Endless OS is based on Debian, the apt-get command does not work here. You could use Flatpak's command for e.g `flatpak install <package name>`. Flatpak is quite helpful in assisting the user to install a new package - in a way that if you just typed the package name half correctly then it will suggest the approximately similar name so that you would be able to choose the correct package's name.  
