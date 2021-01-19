@@ -8,7 +8,7 @@ We were done with the year 2020, with some of us needing to work at home taking 
 
 I previously installed several Linux distros for my kids' desktop computer but then I find it quite difficult to get a fair control between a strict no-no or no control at all. Then I came across with [Endless OS](https://endlessos.com/) - a Linux distro which was built based from Debian but with heavy customizations.
 
-###Installation
+### Installation
 The installation process was smooth and easy. The installer's image that I chose was quite huge though - it was around 16GB. But then given we could just use USB disk as the installation medium nowadays then this should not be a big issue.  Endless OS' installer does not seems to give option to encrypt my hard disk with LUKS during the installation phase.
 
 Endless OS is powered by [OSTree](https://people.gnome.org/~walters/ostree/doc-onepage/) (which is defined as "a system for versioning updates of Linux-based operating systems") and [Flatpak](https://flatpak.org/). The default environment is a customized Gnome.
@@ -18,7 +18,7 @@ According to its website, the operating system is free for individuals and non-c
 
 ![](end-point-blog/2021/01/19/linux-for-kids/desktop.png)
 
-###Package installation and packge updates
+### Package installation and packge updates
 We could use several ways to install new packages (or to update them). One way of doing it is by using the Control Centre and the other one (if we want to install remotely) is by using the command line. Although Endless OS is based on Debian, the apt-get command does not work here. You could use Flatpak's command for e.g `flatpak install <package name>`. Flatpak is quite helpful in assisting the user to install a new package - in a way that if you just typed the package name half correctly then it will suggest the approximately similar name so that you would be able to choose the correct package's name.  
 For Flatpak related introduction and commands, you can refer them [here](https://itsfoss.com/flatpak-guide/)
 
@@ -28,7 +28,7 @@ For Flatpak related introduction and commands, you can refer them [here](https:/
 
 ![](/2021/01/19/linux-for-kids/flatpak-update.png)
 
-###Package control
+### Package control
 By default, the OpenSSH service is not enabled. The user need to enable the connection through the GUI based `Settings->Sharing->Remote Login`.
 
 ![](/2021/01/19/linux-for-kids/sharing-ssh.png)
@@ -47,7 +47,7 @@ We could disable browser in the parental control settings, however we could not 
 
 As Endless OS is running unlike the other Linux distros - fortunately you can still do your work inside it if you need to - by using [Podman](https://support.endlessos.org/en/apps/podman) inside it. 
 
-###Browsing management
+### Browsing management
 I tried to search for the related contents for the Internet management however I could not find one. My office colleague's previously [wrote](https://www.endpoint.com/blog/2020/12/03/pihole-great-holiday-gift) about Pi-hole, so I decided to give a try. I found a tutorial on using Pi-hole in a container, for example [this note](https://codeopolis.com/posts/running-pi-hole-in-docker-is-remarkably-easy/). I did a minor modifications from the docker's note that I previously referred. As Endless OS has already podman shipped within, we can just use the docker's command or adapt it to podman . So this is what I did (changed the --restart flag to --restart=always and use podman). The rests are similar as in the original note
 
 ```bash
