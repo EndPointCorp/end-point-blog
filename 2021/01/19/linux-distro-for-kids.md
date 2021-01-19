@@ -22,9 +22,9 @@ According to its website, the operating system is free for individuals and non-c
 We could use several ways to install new packages (or to update them). One way of doing it is by using the Control Centre and the other one (if we want to install remotely) is by using the command line. Although Endless OS is based on Debian, the apt-get command does not work here. You could use Flatpak's command for e.g `flatpak install <package name>`. Flatpak is quite helpful in assisting the user to install a new package - in a way that if you just typed the package name half correctly then it will suggest the approximately similar name so that you would be able to choose the correct package's name.  
 For Flatpak related introduction and commands, you can refer them [here](https://itsfoss.com/flatpak-guide/)
 
-![](/2021/01/19/linux-for-kids/installer.png)
+![](/2021/01/19/linux-for-kids/installer-reduced.png)
 
-![](/2021/01/19/linux-for-kids/app-centre.png)
+![](/2021/01/19/linux-for-kids/app-centre-reduced.png)
 
 
 ###Package control
@@ -37,7 +37,7 @@ By default, the OpenSSH service is not enabled. The user need to enable the conn
 We could limit the type of applications that the user could use on Endless OS. For example, we could disable the browser from being used from the Control Centre, and the user could use the other applications but not the browser. Also, the default administrative level user in Endless OS is ***administrator*** - and then you can run the sudo command ever here (in the other words, the “administrator” user is included in the “sudo” group. However you could just drop your SSH key in the root account if you insist on using the root login to get into the shell account. In my experience, I also need to remove the "shared" user account as it does not ask for any password. The kids in the house will have to use the account that I created and assigned for them.  
 
 
-![](/2021/01/19/linux-for-kids/parental-control.png)
+![](/2021/01/19/linux-for-kids/parental-control-reduced.png)
 
 We could disable browser in the parental control settings, however we could not define where they could/could not go from the settings.
 
@@ -66,7 +66,7 @@ pihole/pihole
 
 We could then later browse Pi-hole’s admin page by going to  `http://<server>/admin`
 
-![](/2021/01/19/linux-for-kids/pi-hole-eos2.png)
+![](/2021/01/19/linux-for-kids/pi-hole-eos2-reduced.png)
 
 ### Conclusion
 I like Endless OS for my kid’s usage, however I think the distro needs a lot of help from the community to make it appealing to the working adults too. I previously found that I could not get the curl package to be installed from the flatpak command (and I could not use the apt-get command too to install it). So what I did what I build curl with the manifest file that Ireferred from [here](https://community.endlessos.com/t/package-installer/9314/2)
