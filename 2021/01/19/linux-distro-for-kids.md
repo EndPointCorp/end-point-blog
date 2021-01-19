@@ -47,9 +47,7 @@ We could disable browser in the parental control settings, however we could not 
 As Endless OS is running unlike the other Linux distros - fortunately you can still do your work inside it if you need to - by using [Podman](https://support.endlessos.org/en/apps/podman) inside it. 
 
 ###Browsing management
-I tried to search for the related contents for the Internet management however I could not find one. So I decided to adapt the related articles/notes that already succeeded in deploying Pi-hole in a container, for example [this note](https://codeopolis.com/posts/running-pi-hole-in-docker-is-remarkably-easy/) and inspired from my office colleague's [write up](https://www.endpoint.com/blog/2020/12/03/pihole-great-holiday-gift).
-
-I did a minor modifications from the docker's note that I previously referred. As Endless OS has already podman shipped, we can just use the docker's command or adapt it to podman . So this is what I did (changed the --restart flag to --restart=always and use podman). The rests are similar as in the original note
+I tried to search for the related contents for the Internet management however I could not find one. My office colleague's previously [wrote](https://www.endpoint.com/blog/2020/12/03/pihole-great-holiday-gift) about Pi-hole, so I decided to give a try. I found a tutorial on using Pi-hole in a container, for example [this note](https://codeopolis.com/posts/running-pi-hole-in-docker-is-remarkably-easy/). I did a minor modifications from the docker's note that I previously referred. As Endless OS has already podman shipped within, we can just use the docker's command or adapt it to podman . So this is what I did (changed the --restart flag to --restart=always and use podman). The rests are similar as in the original note
 
 ```bash
 podman run \
