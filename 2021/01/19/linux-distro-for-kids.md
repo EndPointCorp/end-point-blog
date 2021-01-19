@@ -20,7 +20,7 @@ According to its website, the operating system is free for individuals and non-c
 
 ### Package installation and packge updates
 We could use several ways to install new packages (or to update them). One way of doing it is by using the Control Centre and the other one (if we want to install remotely) is by using the command line. Although Endless OS is based on Debian, the apt-get command does not work here. You could use Flatpak's command for e.g `flatpak install <package name>`. Flatpak is quite helpful in assisting the user to install a new package - in a way that if you just typed the package name half correctly then it will suggest the approximately similar name so that you would be able to choose the correct package's name.  
-For Flatpak related introduction and commands, you can refer them [here](https://itsfoss.com/flatpak-guide/)
+For Flatpak related introduction and commands, you can refer about them [here](https://itsfoss.com/flatpak-guide/)
 
 ![](/2021/01/19/linux-for-kids/installer-reduced.png)
 
@@ -70,7 +70,7 @@ We could then later browse Pi-hole’s admin page by going to  `http://<server>/
 ![](/2021/01/19/linux-for-kids/pi-hole-eos2-reduced.png)
 
 ### Conclusion
-I like Endless OS for my kid’s usage, however I think the distro needs a lot of help from the community to make it appealing to the working adults too. I previously found that I could not get the curl package to be installed from the flatpak command (and I could not use the apt-get command too to install it). So what I did what I build curl with the manifest file that Ireferred from [here](https://community.endlessos.com/t/package-installer/9314/2)
+I like Endless OS for my kid’s usage, however I think the distro needs a lot of help from the community to make it appealing to the working adults too. I previously found that I could not get the curl package to be installed from the flatpak command (and I could not use the apt-get command too to install it). So what I did what I build curl with the manifest file which I referred from [here](https://community.endlessos.com/t/package-installer/9314/2)
 
 ![](/2021/01/19/linux-for-kids/curl-build.png)
 
