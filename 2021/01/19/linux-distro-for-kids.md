@@ -74,7 +74,7 @@ I like Endless OS for my kid’s usage, however I think the distro needs a lot o
 
 ![](/2021/01/19/linux-for-kids/curl-build.png)
 
-The points that I love about this distro: browser management, flatpak to install latest software/games from flathub. I might be seeing other points too later once I use it more and more. As for now, whatever they are offering to me is already enough. Maybe what I need is a screen time management and an internal URL blocking manager rather than installing an external application. 
+The points that I loved about this distro: browser management, flatpak to install latest software/games from flathub. I might be seeing other points too later once I use it more and more. As for now, whatever they are offering to me is already enough. Maybe what I need is a screen time management and an internal URL blocking manager rather than installing an external application. 
 
 That is all that I could write about the Endless OS after a few weeks of usage on my kid’s computer. If you have been using it too and want to add useful information, please let me know.
 
