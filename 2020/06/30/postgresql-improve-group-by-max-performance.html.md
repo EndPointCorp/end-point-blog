@@ -54,7 +54,7 @@ VACUUM ANALYZE table_a;
 
 And let’s check out the plan:
 
-```
+```nohighlight
 postgres=# EXPLAIN SELECT field_a, field_b, max(field_c) FROM table_a GROUP BY 1,2;
                                              QUERY PLAN
 -----------------------------------------------------------------------------------------------------

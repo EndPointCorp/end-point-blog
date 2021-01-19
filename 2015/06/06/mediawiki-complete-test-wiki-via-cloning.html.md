@@ -11,7 +11,7 @@ Being able to create a quick copy of your [MediaWiki](https://www.mediawiki.org/
 
 Before creating a copy, there are two things that should be done to an existing MediaWiki installation: [use git](http://sixrevisions.com/resources/git-tutorials-beginners/), and move the **images** directory. By "use git", I mean to put your existing mediawiki directory (e.g. where your LocalSettings.php file lives) into version control. Because the MediaWiki software is not that large, it is simplest to just add nearly everything into git, with the exception of the images and the cache information. Here is a recipe to do just that:
 
-```plain
+```nohighlight
 $ cd /var/www/mediawiki
 $ git init .
 Initialized empty Git repository in /var/www/mediawiki/.git/</span>
@@ -81,7 +81,7 @@ I like to create a new git branch right away, to avoid any confusion with the �
 repository in the production mediawiki directory. If you do end up making any changes in the test directory, it’s easy enough to roll them into the other git repo. 
 Branch names should be short and clearly indicate why you have created this copy of the wiki. Doing this means the name shows up as the first line whenever you do a “git status”, which is nice.
 
-```plain
+```nohighlight
 $ cd /var/www/test_mediawiki
 $ git checkout -b testing_version_1.25.2
 Switched to a new branch 'testing_version_1.25.2'
@@ -146,13 +146,13 @@ $ convert End_Point.logo.png -caption "TEST WIKI ONLY\!" -gravity center -polaro
 
 At this point, all of the changes to the test wiki are complete, so we/you should commit all your changes:
 
-```plain
+```nohighlight
 $ git commit -a -m "Changes for the test wiki"
 ```
 
 The final step is to make your test wiki active by adjusting your web server. Generally this is easy and basically means copying the existing wiki parameters. For Apache, it can be as simple as adding a new Alias directive to your `httpd.conf` file:
 
-```plain
+```nohighlight
 Alias /testwiki /var/www/test_mediawiki/index.php
 ```
 

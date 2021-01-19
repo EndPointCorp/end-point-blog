@@ -43,7 +43,7 @@ We also have output. Output is the result of a webpack bundling operation. When 
 
 But let me show rather than tell. Consider a simple calculator application, whose source code file structure looks like this:
 
-```
+```nohighlight
 .
 ├── index.html
 └── js
@@ -82,7 +82,7 @@ As you can see, our little Automatic Calculator logic is separated into a series
 
 If we look at our script files, we see more related problems. Consider `js/index.js`, for example. This is the file that starts up the app. It defines an App class which it then instantiates and runs. Here’s what it looks like (explore the source code in the git repo if you want to see the whole thing):
 
-```js
+```javascript
 class App {
     constructor() {
         this.calculator = new Calculator();
@@ -113,13 +113,13 @@ Luckily for us, those are exactly the kinds of problems that webpack helps us de
 
 > If you are following along and downloaded the source code from the GitHub repo, note that whenever I say “root”, I mean that repo’s `original` directory. That’s where the original version of the Automatic Calculator app’s source code lives as it is before introducing webpack. You can work directly from there or take the contents of that directory and put them wherever it is most comfortable to you. The `final` directory contains the source code as it will be by the end of this post.
 
-The first thing we need to do is install webpack into our project. That’s super easy if you already have [Node.js](https://nodejs.org/) and [NPM](https://www.npmjs.com/) installed. How to install Node.js and NPM is out of the scope of this discussion, so I would recommend following Node.js’s documentation to get them installed.
+The first thing we need to do is install webpack into our project. That’s super easy if you already have [Node.js](https://nodejs.org/en/) and [NPM](https://www.npmjs.com/) installed. How to install Node.js and NPM is out of the scope of this discussion, so I would recommend following Node.js’s documentation to get them installed.
 
 Once you have that, go to our project’s root and run `npm init -y`. This will create a `package.json` file with some default configuration. This effectively makes our code a proper Node.js project.
 
 After that, installing webpack is as easy as going to our project’s root and running:
 
-```
+```bash
 npm install webpack webpack-cli --save-dev
 ```
 
@@ -129,7 +129,7 @@ That will create a new `node_modules` directory and install both the `webpack` a
 
 Now, we need to create a `webpack.config.js` file which tells webpack how to take our files and produce said deployment assets, i.e. the compiled bundle. Here’s what a simple config file tailored to our app would look like.
 
-```js
+```javascript
 const path = require('path');
 
 module.exports = {
@@ -164,13 +164,13 @@ Like I discussed before, webpack allows us to express our dependencies using the
 
 Anyway, we have to add this line at the beginning of `index.js`:
 
-```js
+```javascript
 import Calculator from "./calculator/calculator.js";
 ```
 
 Nice, this is an explicit dependency declaration for our `index.js` file. Now webpack (and readers of our code!) can know that this file uses the Calculator class. And like that, we go file by file adding dependencies. In `calculator.js`, we add:
 
-```js
+```javascript
 import Addition from "./operations/addition.js";
 import Subtraction from "./operations/subtraction.js";
 import Multiplication from "./operations/multiplication.js";
@@ -179,7 +179,7 @@ import Division from "./operations/division.js";
 
 In all of those four files, we add:
 
-```js
+```javascript
 import Operation from "./operation.js";
 ```
 
@@ -204,7 +204,7 @@ The only thing left is to rename our `js` directory to `src` to match our webpac
 
 Anyway, with that rename done, you can go ahead and run
 
-```
+```bash
 npx webpack --config webpack.config.js
 ```
 
@@ -238,7 +238,7 @@ Here’s where the browser compatibility solution that I alluded to earlier come
 
 Like most JavaScript packages, Babel is distributed as an NPM package. So let’s go ahead and install it with
 
-```
+```bash
 npm install --save-dev babel-loader @babel/core @babel/preset-env
 ```
 
@@ -250,7 +250,7 @@ Again, we’re installing these as dev-only dependencies because they are not ne
 
 Now, we go to our `webpack.config.js` file and add these lines:
 
-```js
+```javascript
 module.exports = {
     // ...
     module: {
@@ -267,7 +267,7 @@ In summary, this rule tells webpack to “run all `.js` files by `babel-loader` 
 
 Finally, Babel itself requires a little bit of configuration. So let’s give it what it needs by creating a `.babelrc` file in our project’s root with these contents:
 
-```js
+```javascript
 {
     "presets": ["@babel/preset-env"]
 }
@@ -305,7 +305,7 @@ As you can see, we’ve changed our config object’s `entry` field to include t
 
 Go ahead and run `npx webpack --config webpack.config.js` again and inspect the `dist` directory. You will see that we now have two bundles: `index.js` and `admin.js`.
 
-```
+```nohighlight
 dist/
 ├── admin.js
 └── index.js
@@ -319,7 +319,7 @@ When discussing loaders, I mentioned the possibility of making things other than
 
 First, let’s install the loaders that we need with:
 
-```
+```bash
 npm install --save-dev css-loader style-loader
 ```
 

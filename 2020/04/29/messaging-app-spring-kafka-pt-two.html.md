@@ -7,7 +7,7 @@ gh_issue_number: 1624
 
 ![Spring pasture](/blog/2020/04/29/messaging-app-spring-kafka-pt-two/spring-pasture.jpg)
 
-This article is part of a [series](/blog/tags/spring-kafka-series).
+This article is part of a [series](/blog/tags/spring-kafka-series). The GitHub repository with code examples can be found [here](https://github.com/ashemez/SpringKafkaMessaging).
 
 In this part I’ll walk through Kafka’s servers and processes, the basics of spring-kafka producers and consumers, persistence, and caching configurations.
 
@@ -166,7 +166,7 @@ cache.redis.password=
 
 #### Redis Pooling Factory
 
-We’re going to use [Jedis](https://github.com/xetorthio/jedis) as the Redis client in our project. So let’s create a Jedis pooling factory class in our project called `JedisFactory` like below:
+We’re going to use [Jedis](https://github.com/redis/jedis) as the Redis client in our project. So let’s create a Jedis pooling factory class in our project called `JedisFactory` like below:
 
 ```java
 package com.endpoint.SpringKafkaMessaging.cache;

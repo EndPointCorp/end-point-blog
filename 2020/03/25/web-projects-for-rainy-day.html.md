@@ -5,7 +5,7 @@ tags: optimization, development, seo, reporting, testing
 gh_issue_number: 1609
 ---
 
-![raindrops on a plant](/blog/posts/2020/03/25/web-projects-for-rainy-day/image-0.jpg)
+![raindrops on a plant](/blog/2020/03/25/web-projects-for-rainy-day/image-0.jpg)
 
 [Image](https://www.flickr.com/photos/yellowstonenps/32984582893/) by [Yellowstone NPS on Flickr](https://www.flickr.com/photos/yellowstonenps/)
 
@@ -106,13 +106,13 @@ Make a list of your entire stack, from OS to database to development frameworks.
 
 Everyone’s website gets cluttered with outdated content. Take a look at your pages, review, and update what needs to be changed. Pay attention to search engine optimization (SEO) concerns as you go through it. Make sure your content has headers, accurate keywords, and good meta-descriptions. Research SEO best practices if you need a refresher.
 
-Nowadays, reducing repeated content has huge benefits for SEO so we recommend any content review includes a review of duplication. If you have a small site, you can go through your content and SEO manually. Larger projects can utilize tools on the market such as [Siteliner](http://www.siteliner.com/) or [WPOptimize](https://wordpress.org/plugins/wp-optimize/).
+Nowadays, reducing repeated content has huge benefits for SEO so we recommend any content review includes a review of duplication. If you have a small site, you can go through your content and SEO manually. Larger projects can utilize tools on the market such as [Siteliner](https://www.siteliner.com/) or [WPOptimize](https://wordpress.org/plugins/wp-optimize/).
 
 While you’re taking a dive into content, don’t forget to review your Google Analytics and understand what content is being used and what isn’t. Google has added many new features to Analytics and Ads, so it’s a good idea to refresh yourself on the updated documentation and new features.
 
 ### Reporting
 
-A lot of clients with big ecommerce data sets or other applications that collect data benefit from a separate reporting or business analytics tool. A rainy day can be a good time to think about what reports you want on last year’s business, what data will help you plan for the future. End Point has worked with a few different reporting tools that easily add on to your database, like [Pentaho](https://www.hitachivantara.com/en-us/products/data-management-analytics/pentaho-platform.html) or [Jasper](https://www.jaspersoft.com/reporting-software) and those can be really useful.
+A lot of clients with big ecommerce data sets or other applications that collect data benefit from a separate reporting or business analytics tool. A rainy day can be a good time to think about what reports you want on last year’s business, what data will help you plan for the future. End Point has worked with a few different reporting tools that easily add on to your database, like [Pentaho](https://www.hitachivantara.com/en-us/products/data-management-analytics/pentaho.html) or [Jasper](https://www.jaspersoft.com/reporting-software) and those can be really useful.
 
 ### Documentation
 

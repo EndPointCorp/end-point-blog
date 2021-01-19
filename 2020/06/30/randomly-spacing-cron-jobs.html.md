@@ -27,7 +27,7 @@ man 5 crontab
 
 Important in that document is the explanation of the space-separated time and date fields:
 
-```plain
+```nohighlight
 field          allowed values
 -----          --------------
 minute         0-59
@@ -41,7 +41,7 @@ A field may contain an asterisk (*), which always stands for "first-last".
 
 For example, to make a job run every Monday at 3:33 am in the server’s defined time zone:
 
-```plain
+```nohighlight
 33 3 * * 1 /path/to/executable
 ```
 
@@ -67,7 +67,7 @@ RANDOM_DELAY=10
 
 When it starts, cronie logs its random scaling factor so you can tell how long each `RANDOM_DELAY` will work out to be during the lifetime of this cron daemon. It looks like this:
 
-```plain
+```nohighlight
 # systemctl status crond
 ● crond.service - Command Scheduler
      Loaded: loaded (/usr/lib/systemd/system/crond.service; enabled; vendor preset: enabled)
@@ -88,7 +88,7 @@ Jun 29 19:05:50 myhost crond[60630]: (CRON) INFO (@reboot jobs will be run at co
 
 If we restart cronie with `systemctl restart crond`, we will (probably) see a different scaling factor:
 
-```plain
+```nohighlight
 Jun 29 22:42:02 myhost crond[75200]: (CRON) INFO (RANDOM_DELAY will be scaled with factor 29% if used.)
 ```
 
@@ -146,7 +146,7 @@ In OpenBSD 6.7 cron a new feature was introduced using the symbol `~`. The [Open
 
 > A random value (within the legal range) may be obtained by using the ‘~’ character in a field. The interval of the random value may be specified explicitly, for example “0~30” will result in a random value between 0 and 30 inclusive. If either (or both) of the numbers on either side of the ‘~’ are omitted, the appropriate limit (low or high) for the field will be used.
 
-There is an important caveat not mentioned in the manual, [explained on StackOverflow](https://unix.stackexchange.com/a/580493) by [user Kusalananda](https://unix.stackexchange.com/users/116858/kusalananda):
+There is an important caveat not mentioned in the manual, [explained on StackOverflow](https://unix.stackexchange.com/questions/179598/cron-job-random-start-but-within-timeframe/580493#580493) by [user Kusalananda](https://unix.stackexchange.com/users/116858/kusalananda):
 
 > The random times are picked randomly, but they are fixed until the crontab is reloaded, i.e. until the cron daemon restarts or when the crontab is edited with crontab -e. This would therefore not provide you with a new random value for each run of the job, like using sleep with $RANDOM would do.
 

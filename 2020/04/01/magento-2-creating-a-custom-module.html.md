@@ -170,7 +170,7 @@ php bin/magento cache:flush
 
 This process can take a few minutes to complete, but after it’s done we can try to reach our new custom URL. If we get a response like the one below:
 
-![Hello world!](magento-2-creating-a-custom-module/magento-hello-world-response.jpg)
+![Hello world!](/blog/2020/04/01/magento-2-creating-a-custom-module/magento-hello-world-response.jpg)
 
 That means our module is working!
 

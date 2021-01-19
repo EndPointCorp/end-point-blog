@@ -1,4 +1,24 @@
 #!/bin/bash
 
+show_help=0
+hide_counts=0
+
+while getopts "hs" opt; do
+    case "$opt" in
+    h)
+        echo "Usage: ./show-blog-tags [-s]"
+        echo "s   Short format (hide counts)"
+        exit 0
+        ;;
+    s)  hide_counts=1
+        ;;
+    esac
+done
+
 cd $( cd "$( dirname "${BASH_SOURCE[0]}" )" > /dev/null && pwd )/.. || exit 1
-git grep -h '^tags:' | perl -pe 's/^tags: *//; s/ *, */\n/g' | sort | uniq -c | sort -nr
+
+if [ $hide_counts == 1 ]; then
+    git grep -h '^tags:' | perl -pe 's/^tags: *//; s/ *, */\n/g' | sort | uniq | sort -nr
+else
+    git grep -h '^tags:' | perl -pe 's/^tags: *//; s/ *, */\n/g' | sort | uniq -c | sort -nr
+fi

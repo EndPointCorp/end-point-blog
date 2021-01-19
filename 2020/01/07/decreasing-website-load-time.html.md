@@ -5,7 +5,7 @@ tags: seo, optimization, html, csharp, dotnet
 gh_issue_number: 1582
 ---
 
-<img src="/blog/2020/01/07/decreasing-website-load-time/mobile-desktop-browsing.jpg" alt="Decreasing our website load time" /> [Photo](https://flic.kr/p/bmJtgf) by [Johan Larsson](https://www.flickr.com/photos/johanl/), used under [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/)
+<img src="/blog/2020/01/07/decreasing-website-load-time/mobile-desktop-browsing.jpg" alt="Decreasing our website load time" /> [Photo](https://www.flickr.com/photos/johanl/6798184016/) by [Johan Larsson](https://www.flickr.com/photos/johanl/), used under [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/)
 
 We live in a competitive world, and the web is no different. Improving latency issues is crucial to any Search Engine Optimization (SEO) strategy, increasing the website’s ranking and organic traffic (visitors from search engines) as a result.
 
@@ -29,14 +29,14 @@ Now, the user won’t have to wait until all references are loaded before seeing
 
 ```html
 <head>
-	<style>{above-the-fold minified inline styles goes here}</style>
-	<script type="text/javascript">{above-the-fold critical scripts goes here}</script>
+    <style>{above-the-fold minified inline styles goes here}</style>
+    <script type="text/javascript">{above-the-fold critical scripts goes here}</script>
 </head>
 <body>
-	<div class="above-the-fold-content"></div>
-	<link rel="stylesheet" href="{below-the-fold minified stylesheet reference goes here}" />
-	<script async src="{below-the-fold minified javascript reference goes here}" />
-	<div class="below-the-fold-content"></div>
+    <div class="above-the-fold-content"></div>
+    <link rel="stylesheet" href="{below-the-fold minified stylesheet reference goes here}" />
+    <script async src="{below-the-fold minified javascript reference goes here}" />
+    <div class="below-the-fold-content"></div>
 </body>
 ```
 
@@ -73,27 +73,27 @@ A lot shorter, isn’t it? This will create an empty slot in which the ad will b
 ```javascript
 // Create a script reference
 function addScript(src, async, callback) {
-	var js = document.createElement("script");
-	js.type = "text/javascript";
-	if (async)
-		js.async = true;
-	if (callback)
-		js.onload = callback;
-	js.src = src;
-	document.body.appendChild(js);
+    var js = document.createElement("script");
+    js.type = "text/javascript";
+    if (async)
+        js.async = true;
+    if (callback)
+        js.onload = callback;
+    js.src = src;
+    document.body.appendChild(js);
 }
 
 // Called when document is ready
 $(document).ready(function() {
 
-	// Wait for one second to ensure the user started browsing
-	setTimeout(function() {
-		(adsbygoogle = window.adsbygoogle || []);
-		$("ins.adsbygoogle").each(function() {
-			$("<script>(adsbygoogle = window.adsbygoogle || []).push({})</script>").insertAfter($(this));
-		});
-		addScript("https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js", true);
-	}, 1000);
+    // Wait for one second to ensure the user started browsing
+    setTimeout(function() {
+        (adsbygoogle = window.adsbygoogle || []);
+        $("ins.adsbygoogle").each(function() {
+            $("<script>(adsbygoogle = window.adsbygoogle || []).push({})</script>").insertAfter($(this));
+        });
+        addScript("https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js", true);
+    }, 1000);
 
 });
 ```
@@ -115,65 +115,65 @@ Because the user will most likely spend the majority of the visit reading above-
 ```javascript
 ;(function($) {
 
-	$.fn.lazy = function(threshold, callback) {
-		var $w = $(window),
-		th = threshold || 0,
-		attrib = "data-src",
-		images = this,
-		loaded;
-		this.one("lazy", function() {
-			var source = this.getAttribute(attrib);
-			source = source || this.getAttribute("data-src");
-			if (source) {
-				this.setAttribute("src", source);
-				if (typeof callback === "function") callback.call(this);
-			}
-		});
+    $.fn.lazy = function(threshold, callback) {
+        var $w = $(window),
+        th = threshold || 0,
+        attrib = "data-src",
+        images = this,
+        loaded;
+        this.one("lazy", function() {
+            var source = this.getAttribute(attrib);
+            source = source || this.getAttribute("data-src");
+            if (source) {
+                this.setAttribute("src", source);
+                if (typeof callback === "function") callback.call(this);
+            }
+        });
 
-		function lazy() {
-			var inview = images.filter(function() {
-				var $e = $(this);
-				if ($e.is(":hidden")) return;
-				var wt = $w.scrollTop(),
-				wb = wt + $w.height(),
-				et = $e.offset().top,
-				eb = et + $e.height();
-				return eb >= wt - th && et <= wb + th;
-			});
-			loaded = inview.trigger("lazy");
-			images = images.not(loaded);
-		}
+        function lazy() {
+            var inview = images.filter(function() {
+                var $e = $(this);
+                if ($e.is(":hidden")) return;
+                var wt = $w.scrollTop(),
+                wb = wt + $w.height(),
+                et = $e.offset().top,
+                eb = et + $e.height();
+                return eb >= wt - th && et <= wb + th;
+            });
+            loaded = inview.trigger("lazy");
+            images = images.not(loaded);
+        }
 
-		$w.scroll(lazy);
-		$w.resize(lazy);
-		lazy();
-		return this;
-	};
+        $w.scroll(lazy);
+        $w.resize(lazy);
+        lazy();
+        return this;
+    };
 
 })(window.jQuery);
 
 $(document).ready(function() {
-	$('.lazy').each(function () {
-		$(this).lazy(0, function() {
-		$(this).load(function() {
-			this.style.opacity = 1;
-		});
-	});
+    $('.lazy').each(function () {
+        $(this).lazy(0, function() {
+        $(this).load(function() {
+            this.style.opacity = 1;
+        });
+    });
 });
 
 // Set the correct attribute when printing
 var beforePrint = function() {
-	$("img.lazy").each(function() {
-		$(this).trigger("lazy");
-		this.style.opacity = 1;
-	});
+    $("img.lazy").each(function() {
+        $(this).trigger("lazy");
+        this.style.opacity = 1;
+    });
 };
 if (window.matchMedia) {
-	var mediaQueryList = window.matchMedia('print');
-	mediaQueryList.addListener(function(mql) {
-		if (mql.matches)
-			beforePrint();
-	});
+    var mediaQueryList = window.matchMedia('print');
+    mediaQueryList.addListener(function(mql) {
+        if (mql.matches)
+            beforePrint();
+    });
 }
 window.onbeforeprint = beforePrint;
 ```
@@ -206,7 +206,7 @@ There are other configurations in ASP.NET to set our output cache policy. The ou
 
 GZip compression—when the client supports it—allows compressing the response before sending it over the network. In this way, more than 70% of the bandwidth can be saved when loading the website. Enabling GZip compression for dynamic and static content on a Windows Server with IIS is simple: Just go to the “Compression” section on the IIS Manager and check the options “Enable dynamic/static content compression”.
 
-![Enabling compression in IIS](decreasing-website-load-time/enabling-compression-iis.jpg)
+![Enabling compression in IIS](/blog/2020/01/07/decreasing-website-load-time/enabling-compression-iis.jpg)
 
 However, if you are running an ASP.NET MVC/WebForms website, this won’t be enough. For all backend responses to be compressed before sending them to the client, some custom code will also need to be added to the `global.asax` file in the website root:
 
@@ -234,9 +234,9 @@ However, if you are running an ASP.NET MVC/WebForms website, this won’t be eno
         if (acceptEncoding == null || acceptEncoding.Length == 0)
             return;
 
-		if (Request.ServerVariables["SCRIPT_NAME"].ToLower().Contains(".axd")) return;
-		if (Request.ServerVariables["SCRIPT_NAME"].ToLower().Contains(".js")) return;
-		if (Request.QueryString.ToString().Contains("_TSM_HiddenField_")) return;
+        if (Request.ServerVariables["SCRIPT_NAME"].ToLower().Contains(".axd")) return;
+        if (Request.ServerVariables["SCRIPT_NAME"].ToLower().Contains(".js")) return;
+        if (Request.QueryString.ToString().Contains("_TSM_HiddenField_")) return;
 
         acceptEncoding = acceptEncoding.ToLower();
 
@@ -259,7 +259,7 @@ However, if you are running an ASP.NET MVC/WebForms website, this won’t be eno
 
 To make sure our code is working properly, an external tool like <a href="https://www.giftofspeed.com/gzip-test/">this</a> will inform you if GZip is enabled or not.
 
-![It works!](decreasing-website-load-time/gzip-compression-enabled.jpg)
+![It works!](/blog/2020/01/07/decreasing-website-load-time/gzip-compression-enabled.jpg)
 
 ###Summary
 
@@ -267,6 +267,6 @@ While there are many ways of decreasing the load time of a website, most are com
 
 The image below is a Google Analytics report from one of my websites where, over several months, I implemented most of these formulas. A month ago, I made the latest change of deferring ad loading, which had an observable impact on the average loading speed of the page:
 
-![Report from Google Analytics](decreasing-website-load-time/analytics-average-page-load.jpg)
+![Report from Google Analytics](/blog/2020/01/07/decreasing-website-load-time/analytics-average-page-load.jpg)
 
 Do you have any other page load optimization techniques? <b>Leave a comment below!</b>

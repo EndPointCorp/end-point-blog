@@ -23,7 +23,7 @@ Java is a descendant of C++ and it is a C-based language. C was therefore the or
  
 Java is a member of a large family of programming languages and as a result, if someone learns Java, then they will have an easier time learning one of its cousins. And at the same time, if someone already speaks a C-based language, then Java is not too difficult to learn. Also, if someone is already a programmer and does not speak a C-based language yet, then it is in his/​her interest in most cases to learn a C-based language and thus to have an understanding of the most popular language family.
  
-Let’s see the list of popular languages according to [Stackify](https://stackify.com/popular-programming-languages-2018/8/):
+Let’s see the list of popular languages according to [Stackify](https://stackify.com/popular-programming-languages-2018/):
 
 <style>
 #java-primer-table td {
@@ -189,13 +189,13 @@ In this period I learned PHP, JavaScript, CSS, HTML, MySQL (this was easy, becau
  
 After a lot of struggle, doing a lot of negotiation and freelancing work for very different people, each having his/​her own preferences, cultural background, and temperament, I ended up working on .NET projects. Even though I enjoyed working with .NET as well, which was mostly in ASP.NET, I had difficulty working with Visual Basic, since my only coding with BASIC was some work I did with QBasic, when I was 11 years old. Even though I enjoyed working with QBasic as an early teen, writing code to display some graphic in motion, when I encountered Visual Basic with the purpose of developing the backend of ASP.NET projects, I had to relearn BASIC and having experience with C-based languages, I found it strange to see code like:
 
-```plain
+```nohighlight
 If foo IsNot Nothing AndAlso foo.IsValid Then
-	'Some code
+  'Some code
 ElseIf foo IsNot Nothing Then
-	'Some code
+  'Some code
 Else
-	'Some code
+  'Some code
 End If
 ```
 
@@ -203,29 +203,29 @@ instead of
 
 ```java
 if (foo != null && foo.isValid) {
- 	//Some code
+  //Some code
 } else if (foo != null) {
-	//Some code
+  //Some code
 } else {
-	//Some code
+  //Some code
 }
 ```
 
 I could work with either of the syntaxes, but the C-based syntax required much less characters to be typed on my part and the use of whitespace as operation separators is a source of worry for me (what happens if for any reason tabs are switched with spaces and vice-versa in Python, for example), which is a small problem for a small code but a bigger a problem if the code is bigger. But even though the situation was not very dramatic for me, I enjoyed [a parody about Java and .NET immensely](https://www.youtube.com/watch?v=RnqAXuLZlaE).
 
-Over the years every now and then I received Java projects, mostly console or desktop applications, but occasionally I had some web work with Java as well. Since I began working with End Point I have been working on several Java projects running under [Wildfly](https://wildfly.org/), a very nice application server, developed by Red Hat.
+Over the years every now and then I received Java projects, mostly console or desktop applications, but occasionally I had some web work with Java as well. Since I began working with End Point I have been working on several Java projects running under [Wildfly](https://www.wildfly.org/), a very nice application server, developed by Red Hat.
 
 In general, when some work is completed, I build it with an [ant](https://ant.apache.org/) command and deploy it using jboss.
 
 In Linux I run `jboss-cli.sh`, for Windows there is a `jboss-cli.bat` alternative. After running it, we need to:
 
-```plain
+```nohighlight
 connect
 ```
  
 and then deploy, like:
  
-```plain
+```nohighlight
 deploy <path to the ear file>
 ```
 

@@ -62,7 +62,7 @@ Model-View-Controller as a pattern is a standard for Symfony. Model means domain
 
 [Doctrine](https://www.doctrine-project.org/projects/doctrine-orm/en/2.7/index.html) is an [ORM](https://en.wikipedia.org/wiki/Object-relational_mapping), which is very helpful in general for working with databases. Symfony does not enforce its use. You can use Flourishlib instead, or write your own queries. You can create an entity class (which represents a given table in the database) manually, but there is an automatic way to achieve that as well:
 
-```
+```bash
 php bin/console make:entity
 ```
 
@@ -157,7 +157,7 @@ Note that it extends [ServiceEntityRepository](https://github.com/doctrine/Doctr
 $this->getDoctrine()->getRepository(Product::class)
 ```
 
-You can search for objects via find, findBy or findOneBy, as described in the [API documentation](https://www.doctrine-project.org/api/orm/latest/Doctrine/ORM/EntityRepository.html). This way, we can load data from the database and use them as objects. Example:
+You can search for objects via find, findBy or findOneBy, as described in the [API documentation](https://www.doctrine-project.org/projects/doctrine-orm/en/2.7/reference/working-with-objects.html#by-simple-conditions). This way, we can load data from the database and use them as objects. Example:
 
 ```php
 $repository = $this->getDoctrine()->getRepository(Product::class);
@@ -212,13 +212,13 @@ The example above is a parameterized query, where we search by username and id, 
 
 You can apply entity changes upon the database via
 
-```
+```bash
 php bin/console doctrine:migrations:migrate
 ```
 
 Honestly I’m not very fond of changing the database schema based on entity classes; I consider this to be an anti-pattern, because we use a tool to generate a schema based on entities. Such a tool can have bugs or cause errors in the entities. It is much better to do it the other way around—that is, make a proper database schema, write SQL commands to change the schema whenever we need it and generate entity classes that way. Luckily Doctrine offers that feature as well:
 
-```
+```bash
 php bin/console doctrine:mapping:import "App\Entity" annotation --path=src/Entity
 ```
 
@@ -232,7 +232,7 @@ In short, my advice is to try to avoid generating schema changes based on entity
 
 You can write or generate a controller. This is how you would generate one:
 
-```
+```bash
 php bin/console make:controller <NamedController>
 ```
 
@@ -240,7 +240,7 @@ The command above will actually generate a controller class and ensure that it c
 
 You can generate a whole CRUD (support for Create, Read, Update, Delete features) for an entity via
 
-```
+```bash
 php bin/console make:crud <YourEntity>
 ```
 
@@ -367,7 +367,7 @@ retrieves all POST parameters.
 
 Symfony supports caching through the Cache module, which, when switched on, will cache configuration and routes. If controller actions or routes are changed, then it is advisable to clear the cache via:
 
-```
+```bash
 bin/console cache:clear && bin/console cache:warmup
 ```
 

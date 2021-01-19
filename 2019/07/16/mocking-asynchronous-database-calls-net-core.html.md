@@ -17,7 +17,7 @@ So, assuming we already have a .NET Core solution with a test project included, 
 
 ```
 Install-Package Moq
-``` 
+```
 
 ### Mocking data with async calls support
 

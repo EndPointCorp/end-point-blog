@@ -15,14 +15,14 @@ This worked out well in development and testing, however when it came time to ro
 
 The error in Chrome:
 
-```plaintext
+```nohighlight
 chunk-vendors.342a7610.js:21 Uncaught DOMException: Failed to execute 'appendChild' on 'Node': This node type does not support this method.
 ...
 ```
 
 The error in Safari:
 
-```plaintext
+```nohighlight
 [Error] HierarchyRequestError: The operation would yield an incorrect node tree.
 	get (chunk-vendors.342a7610.js:27:30686)
 	er (chunk-vendors.342a7610.js:27:30565)

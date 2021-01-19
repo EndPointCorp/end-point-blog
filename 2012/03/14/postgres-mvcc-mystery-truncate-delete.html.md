@@ -13,7 +13,7 @@ down is one of the best parts of the job. Presented below is an error message we
 via [tail_n_mail](https://bucardo.org/tail_n_mail/) from one of our client’s production servers.
 See if you can figure out what was going on as I walk through it. This is from a “read only” database that acts as a [Bucardo]() target (aka slave), and as such, the only write activity should be from Bucardo.
 
-```plaintext
+```nohighlight
  05:46:11 [85]: ERROR: duplicate key value violates unique constraint "foobar_id"
  05:46:11 [85]: CONTEXT: COPY foobar, line 1: "12345#011...
 ```
@@ -21,7 +21,7 @@ See if you can figure out what was going on as I walk through it. This is from a
 Okay, so there was a unique violation during a COPY. Seems harmless enough. However, 
 this should never happen, as Bucardo always deletes the rows it is about to add in with the COPY command. Sure enough, going to the logs showed the delete right above it:
 
-```plaintext
+```nohighlight
  05:45:51 [85]: LOG: statement: DELETE FROM public.foobar WHERE id IN (12345)
  05:46:11 [85]: ERROR: duplicate key value violates unique constraint "foobar_id"
  05:46:11 [85]: CONTEXT: COPY foobar, line 1: "12345#011...
@@ -36,7 +36,7 @@ another transaction could have added row 12345 and committed after we did the DE
 but before we ran the COPY. A great theory that fits the facts, except that Bucardo always 
 sets the isolation level manually to avoid just such problems. Scanning back for the previous command for that PID revealed:
 
-```plaintext
+```nohighlight
  05:45:51 [85]: LOG: statement: SET TRANSACTION ISOLATION LEVEL SERIALIZABLE READ WRITE
  05:45:51 [85]: LOG: statement: DELETE FROM public.foobar WHERE id IN (12345)
  05:46:11 [85]: ERROR: duplicate key value violates unique constraint "foobar_id"
@@ -61,7 +61,7 @@ bunch of rows back in. As truncate is *not* MVCC-safe, this explains our mystery
 bit of a race condition, to be sure, but it can and does happen. Here’s some more logs showing 
 the complete sequence of events for two separate processes, which I have labeled A and B:
 
-```plaintext
+```nohighlight
 A 05:45:47 [44]: LOG: statement: SET TRANSACTION ISOLATION LEVEL SERIALIZABLE READ WRITE
 A 05:45:47 [44]: LOG: statement: TRUNCATE TABLE public.foobar
 A 05:45:47 [44]: LOG: statement: COPY public.foobar FROM STDIN
@@ -79,7 +79,7 @@ So despite transaction B doing the correct thing, it still got tripped up by tra
 which did a truncate, added some rows back in (including row 12345), and committed. If process A had done a 
 DELETE instead of a TRUNCATE, the COPY still would have failed, but with a better error message:
 
-```plaintext
+```nohighlight
 ERROR: could not serialize access due to concurrent update
 ```
 
@@ -131,7 +131,7 @@ else {
 
 Running the above gives us:
 
-```plaintext
+```nohighlight
  ERROR:  duplicate key value violates unique constraint "foobar_a_key"
  DETAIL:  Key (a)=(42) already exists
 ```
@@ -140,14 +140,14 @@ This should not happen, of course, as process B did a delete of the entire table
 before trying an INSERT, and was in SERIALIZABLE mode. If we switch out the TRUNCATE 
 with a DELETE, we get a completely different (and arguably better) error message:
 
-```plaintext
+```nohighlight
  ERROR:  could not serialize access due to concurrent update 
 ```
 
 However, it we try it with a DELETE on PostgreSQL version 9.1 or better, which 
 features a brand new true serializable mode, we see yet another error message:
 
-```plaintext
+```nohighlight
  ERROR:  could not serialize access due to read/write dependencies among transactions
  DETAIL:  Reason code: Canceled on identification as a pivot, during write.
  HINT:  The transaction might succeed if retried

@@ -6,8 +6,7 @@ gh_issue_number: 1600
 ---
 
 <img src="/blog/2020/03/10/cooking-with-cas/4696900602_77582d1d5d_c.jpg" alt="passwords" />
-[Photo](https://www.flickr.com/photos/reidrac/4696900602/in/photolist-8a3QUS-XN6XAe)
-by Flickr user [reidrac](https://www.flickr.com/photos/reidrac/), licensed
+Photo by Flickr user [reidrac](http://web.archive.org/web/20190305093832/https://www.flickr.com/photos/reidrac/), licensed
 under [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/)
 
 One of our customers asked us to host a new suite of web-based applications for them and to protect them with a single sign-on (SSO) solution. Ok, easy enough;

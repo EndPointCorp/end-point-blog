@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# Update the preview HTML fragments head.html and foot.html
+# using a page from the current production blog
+
+set -euo pipefail
+trap "exit 1" INT
+
+cd "$( dirname "${BASH_SOURCE[0]}" )"
+
+tmpfile=head.html.$$
+
+# Grab our first blog post since it doesn't matter which one we use
+url=https://www.endpoint.com/blog/2004/10/04/red-hat-enterprise-linux-3-update-3
+curl -s -o $tmpfile $url
+
+# Don't overwrite the real files till we know we fetched the URL successfully
+chmod --reference=head.html $tmpfile
+mv $tmpfile head.html
+cp -p head.html foot.html
+
+perl -0777 -pi -e 's,(.+?<article class=.page.>\s*).+,$1,s; s,(<head.*?>),$1\n<base href="https://www.endpoint.com/">,s; s,(<title.*?>).*?((?:\s*\|.+?)?<.title>),${1}Blog Preview$2,s' head.html
+perl -0777 -pi -e 's,.+?(\s*</article>.+),$1,s' foot.html

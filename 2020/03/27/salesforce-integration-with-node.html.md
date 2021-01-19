@@ -200,7 +200,7 @@ Then, back in your Node app, install Express and Socket.IO.
 
 Next, you’ll want to create a very basic Express server that will listen for updates from the Salesforce PushTopic, and emit them to your reporting site. Start by installing Express and Socket.IO.
 
-```
+```bash
 npm install express
 npm install socket.io
 ```

@@ -9,7 +9,7 @@ background_url: "/blog/2020/05/04/shopify-product-creation/banner.jpg"
 ---
 
 ![Cash Register](/blog/2020/05/04/shopify-product-creation/banner.jpg)
-[Photo](https://flic.kr/p/qJhs9) by [Chris Young](https://www.flickr.com/photos/mrvjtod/), used under [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/), cropped from original.
+[Photo](https://www.flickr.com/photos/mrvjtod/279845948/) by [Chris Young](https://www.flickr.com/photos/mrvjtod/), used under [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/), cropped from original.
 
 I recently worked on an interesting project for a store owner who was facing a daunting task: he had an inventory of hundreds of thousands of [Magic: The Gathering](https://en.wikipedia.org/wiki/Magic%3A_The_Gathering) (MTG) cards that he wanted to sell online through his Shopify store. The logistics of tracking down artwork and current market pricing for each card made it impossible to do manually.
 

@@ -12,7 +12,7 @@ In my previous post, we went through the steps needed to [create a custom module
 
 ### Creating a new Magento 2 theme
 
-We can create a theme based on a default “parent” theme or create a standalone theme from scratch. In most cases, I would recommend the first option. For this example, we will use [Luma](http://magento2.demo.ubertheme.com/) as our parent theme. The other option would be inheriting from the default “blank” theme.
+We can create a theme based on a default “parent” theme or create a standalone theme from scratch. In most cases, I would recommend the first option. For this example, we will use [Luma](https://magento2-demo.magebit.com/) as our parent theme. The other option would be inheriting from the default “blank” theme.
 
 Here’s an initial task list to get our new theme ready:
 

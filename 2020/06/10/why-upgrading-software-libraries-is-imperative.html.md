@@ -5,7 +5,7 @@ tags: software, update
 gh_issue_number: 1638
 ---
 
-![](/blog/posts/2020/06/10/why-upgrading-software-libraries-is-imperative/image-0.jpg)
+![](/blog/2020/06/10/why-upgrading-software-libraries-is-imperative/image-0.jpg)
 
 [Image](https://unsplash.com/photos/PlBsJ5MybGc) by [Tolu Olubode](https://unsplash.com/@toluobde) on [Unsplash](https://unsplash.com)
 

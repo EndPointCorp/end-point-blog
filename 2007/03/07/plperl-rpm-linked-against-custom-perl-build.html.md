@@ -1,7 +1,7 @@
 ---
 author: "Jon Jensen"
 title: "Creating a PL/Perl RPM linked against a custom Perl build"
-tags: git, postgres, sysadmin
+tags: postgres, sysadmin, perl
 gh_issue_number: 1671
 ---
 
