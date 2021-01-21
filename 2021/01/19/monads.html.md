@@ -1,7 +1,7 @@
 ---
 author: "Kevin Campusano"
 title: "Monads: Another tool from the functional programming toolbox"
-tags: monads, functional programming
+tags: monads, functional programming, javascript
 ---
 
 ![banner](./monads/banner.png)
@@ -70,7 +70,7 @@ return orders.Where(isExpensive).Select(theCustomer);
 
 Reads almost like english.
 
-My learning process was such that whenever I had to write some code, I began with a fully imperative aproach, since that's what I was wired up to do. I wrote loops and conditionals manually. Then, I would take a step back and refactor into the more functional and declarative approach unlocked by LINQ, whenever it made sense for readability. I'm now at the point where the more functional style comes naturally, usually as a first instinct. I feel like I've gained proficiency with the tool. I haven't "rewired" myself, so to speak, to use iteration functions instead of loop primitives all the time, but rather, I've added "new wires" that allow me to use and apply the correct tool for the job. A great advantage is that most of the other languages that I use today (like JavaScript or Ruby) include similar functional style APIs for working with collections. Learning and getting used to those tools has proved to be a very good investment.
+My learning process was such that whenever I had to write some code, I began with a fully imperative aproach, since that's what I was wired up to do. I wrote loops and conditionals manually. Then, I would take a step back and refactor into the more functional and declarative approach unlocked by LINQ, whenever it made sense for readability. I'm now at the point where the more functional style comes naturally, usually as a first instinct. I feel like I've gained proficiency with the tool. I haven't "rewired" myself, so to speak, to use iteration functions instead of loop primitives all the time, but rather, I've added "new wires" that allow me to use and apply the correct tool for the job. A great advantage is that most of the other languages that I use today (like [JavaScript](https://www.javascript.com/) or [Ruby](https://www.ruby-lang.org/en/)) include similar functional style APIs for working with collections. Learning and getting used to those tools has proved to be a very good investment.
 
 Now, when it comes to monads, I've been hearing about them for a while now and decided to take some time to learn more about them, what sort of problems they can help solve and whether they would be a worthwile addition to the toolset that I use on a daily basis when writing code. If they give me the same thing that LINQ gave me all those years ago, then I'd say they are undoubtedly worth the time.
 
