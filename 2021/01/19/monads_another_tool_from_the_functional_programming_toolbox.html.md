@@ -4,7 +4,7 @@ title: "Monads: Another tool from the functional programming toolbox"
 tags: monads, functional programming, javascript
 ---
 
-![banner](./monads/banner.png)
+![banner](./monads_another_tool_from_the_functional_programming_toolbox/banner.png)
 
 I was first exposed to the world of [functional programming](https://en.wikipedia.org/wiki/Functional_programming) back in 2007 with the release of [.NET](https://dotnet.microsoft.com/) [Framework](https://dotnet.microsoft.com/download/dotnet-framework) [3.5](https://dotnet.microsoft.com/download/dotnet-framework/net35-sp1) and the introduction of [LINQ](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/) into the [C# language](https://docs.microsoft.com/en-us/dotnet/csharp/). At the time, I was just beginning to learn how to code and to me, LINQ seemed to be little more than an extension of the C# language that allowed programmers to use SQL-like syntax to interact with collections of data. Mostly useful when interacting with databases, via the so-called [LINQ to SQL](https://docs.microsoft.com/en-us/dotnet/framework/data/adonet/sql/linq/). The concept of "functional programming" never even crossed my mind back then.
 
