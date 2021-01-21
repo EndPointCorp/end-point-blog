@@ -223,7 +223,7 @@ If we go back to what Wikipedia promised us about monads, we can see the promise
 
 ## Handling exceptions
 
-When theres a series of unsafe operations executed in sequence, exception handling code can also get unwieldy if left unchecked due to nesting and such.
+When there's a series of unsafe operations executed in sequence, exception handling code can also get unwieldy if left unchecked due to nesting and such.
 
 Consider an `order` object that looks like this:
 
