@@ -6,16 +6,16 @@ tags: monads, functional programming
 
 ![banner](./monads/banner.png)
 
-I was first exposed to the world of functional programming back in 2007 with the release of .NET Framework 3.5 and the introduction of LINQ into the C# language. At the time, I was just beginning to learn how to code and to me, LINQ seemed to be little more than an extension of the C# language that allowed programmers to use SQL-like syntax to interact with collections of data. Mostly useful when interacting with databases, via the so-called LINQ to SQL. The concept of "functional programming" never even crossed my mind back then.
+I was first exposed to the world of [functional programming](https://en.wikipedia.org/wiki/Functional_programming) back in 2007 with the release of [.NET](https://dotnet.microsoft.com/) [Framework](https://dotnet.microsoft.com/download/dotnet-framework) [3.5](https://dotnet.microsoft.com/download/dotnet-framework/net35-sp1) and the introduction of [LINQ](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/) into the [C# language](https://docs.microsoft.com/en-us/dotnet/csharp/). At the time, I was just beginning to learn how to code and to me, LINQ seemed to be little more than an extension of the C# language that allowed programmers to use SQL-like syntax to interact with collections of data. Mostly useful when interacting with databases, via the so-called [LINQ to SQL](https://docs.microsoft.com/en-us/dotnet/framework/data/adonet/sql/linq/). The concept of "functional programming" never even crossed my mind back then.
 
-Once you had created a "LINQ to SQL Object Model" using the tools provided in Visual Studio, you could write code like this directly in C#:
+Once you had created a "[LINQ to SQL Object Model](https://docs.microsoft.com/en-us/dotnet/framework/data/adonet/sql/linq/creating-the-object-model)" using the tools provided in [Visual Studio](https://visualstudio.microsoft.com/), you could write code like this directly in C#:
 
 ```csharp
 var customersWithRecentExpensiveOrders =
     // Think of db.Orders as your hypothetical "orders" table.
     from o in db.Orders
     where o.Total >= 100.00 && o.Date == DateTime.Now
-    // All Orders have a customer
+    // All orders have a customer
     select o.Customer;
 ```
 
@@ -49,7 +49,7 @@ foreach (var order in orders) {
 return valuableCustomers;
 ```
 
-But I would often try to do something like:
+But I would often try to do something like this instead:
 
 ```csharp
 // a List<Order> orders variable is defined somewhere
@@ -70,11 +70,11 @@ return orders.Where(isExpensive).Select(theCustomer);
 
 Reads almost like english.
 
-My learning process was such that whenever I had to write some code, I began with a fully imperative aproach, since that's what I was wired up to do. I wrote loops and conditionals manually. Then, I would take a step back and refactor into the more functional and declarative approach unlocked by LINQ, whenever it made sense for readability. I'm now at the point where the more functional style comes naturally, usually as a first instinct. I feel like I've gained proficiency with the tool. I haven't "rewired" myself, so to speak, to use iteration functions instead of loop primitives all the time, but rather, I've added "new wires" and allow me to use and apply the correct tool for the job. A great advantage is that most of the other languages that I use today (like JavaScript or Ruby) include similar functional style APIs for working with collections. Learning and getting used to those tools has proved to be a very good investment.
+My learning process was such that whenever I had to write some code, I began with a fully imperative aproach, since that's what I was wired up to do. I wrote loops and conditionals manually. Then, I would take a step back and refactor into the more functional and declarative approach unlocked by LINQ, whenever it made sense for readability. I'm now at the point where the more functional style comes naturally, usually as a first instinct. I feel like I've gained proficiency with the tool. I haven't "rewired" myself, so to speak, to use iteration functions instead of loop primitives all the time, but rather, I've added "new wires" that allow me to use and apply the correct tool for the job. A great advantage is that most of the other languages that I use today (like JavaScript or Ruby) include similar functional style APIs for working with collections. Learning and getting used to those tools has proved to be a very good investment.
 
-Now, when it comes to Monads, I've been hearing about them for a while now and decided to take some time to learn more about them, what sort of problems they can help solve and whether they would be a worthwile addition to my programming toolset that I use on a daily basis. If they give me the same thing that LINQ gave me all those years ago, then I'd say they are undoubtedly worth the time.
+Now, when it comes to monads, I've been hearing about them for a while now and decided to take some time to learn more about them, what sort of problems they can help solve and whether they would be a worthwile addition to the toolset that I use on a daily basis when writing code. If they give me the same thing that LINQ gave me all those years ago, then I'd say they are undoubtedly worth the time.
 
-In this article I'm going to share the very first steps in my learning about monads, how to take advantage of the concepts and what sort of problems could benefit from being approached with monads in mind. Bear in mind that I'm no functional programming expert, nor am I super proficient when it comes to the super formal mathematics behind it. So this will be an exploration from the perspective of a software engineer mostly experienced in object oriented analysis and design; that uses his limited knowledge of funcional programming concepts as tools for expressing lower level implementation details like algorithms; within the context of an object oriented lanaguages with functional capabilities sprinkled in, like JavaScript or C#. So think OOP for the big chunks and FP for the smaller details, when it fits.
+In this article I'm going to share the very first steps in my learning about monads, how to take advantage of the concepts and what sort of problems could benefit from being approached with monads in mind. Bear in mind that I'm no functional programming expert, nor am I super proficient when it comes to the super formal mathematics behind it. So this will be an exploration from the perspective of a software engineer mostly experienced in object oriented analysis and design; that uses his limited knowledge of funcional programming concepts as tools for expressing lower level implementation details like algorithms; within the context of primarily object oriented lanaguages with functional capabilities sprinkled in, like JavaScript or C#. So think OOP for the big chunks and FP for the smaller details, when it fits.
 
 ## What is a monad?
 
@@ -88,7 +88,7 @@ Ok so right off the bat Wikipedia is telling us about a few key aspects of monad
 - "They allow us to structure programs generically". Sounds good. Generic things are often easy to reuse.
 - "They are their own data types". By data types, do you mean classes? 
 - "They represent computations". Computations, huh? That a very generic term. Can monads just do whatever you want?
-- "They wrap around the values of any basic type". Wrapping around values like a decorator design pattern?
+- "They wrap around the values of any basic type". Wrapping around values like a [decorator design pattern](https://en.wikipedia.org/wiki/Decorator_pattern)?
 - "They allow for function composition". Ok, I like function composition. I do it all the time with LINQ.
 
 That's quite a bit. My intuition and object oriented bias make me conclude a few things about this. This tells me that monads must be some sort of pattern where you have a class that augments other objects (like a decorator or wrapper). This class can implement some behavior, some computations (which can be considered boilerplate) which wrapped objects can take advantage of. The encapsulated behaviour/computation/boilerplate is generic though, so there should be great flexibility as to which types of objects can be wrapped in a monad. They also allow the decorated object to be operated on via method composition. That is, chaining together method calls, where the result of one method is the parameter for the next one. Maybe with a fluent API.
@@ -103,7 +103,7 @@ This is where the prospect of monads becomes exciting. "turn a complicated seque
 
 So now I'm convinced that I need to learn more about these monads. But how to even use these things? What does code that uses monads look like?
 
-Wikipedia does a good job in explaining the concepts in those introductory paragraphs. The code examples however, mostly fly over my head. This is when I looked at [Kyle Simpson](https://twitter.com/getify)'s excellent talk on monads "[Mo'Problems, Mo'Nads](https://www.youtube.com/watch?v=PXwtCYymzjE)" which was great for seeing code examples and a general introductory explanation of the concept. There's also [Mikhail Shilkov](https://mikhail.io/)'s blog post about [Monads explained in C# (again)](https://mikhail.io/2018/07/monads-explained-in-csharp-again/), which was great for me personally given my C# background, but also due to its style of arriving at the use of monads organically by discovering the need after writing some regular non-monadic code. Mikhail also points out some .NET Base Class Library elements which are actually monads. In my opinion, identifying where new concepts are used in the wild is always useful when trying to understad them.
+Wikipedia does a good job in explaining the concepts in those introductory paragraphs. The code examples however, mostly fly over my head. This is when I looked at [Kyle Simpson](https://twitter.com/getify)'s excellent talk on monads "[Mo'Problems, Mo'Nads](https://www.youtube.com/watch?v=PXwtCYymzjE)" which was great for seeing code examples and a general introductory explanation of the concept. There's also [Mikhail Shilkov](https://mikhail.io/)'s blog post about [Monads explained in C# (again)](https://mikhail.io/2018/07/monads-explained-in-csharp-again/), which was great for me personally given my C# background, but also due to its style of arriving at the use of monads organically by discovering the need after writing some regular non-monadic code. Mikhail also points out some .NET Base Class Library elements which are actually monads. In my opinion, identifying when new concepts are used out in the wild is always useful when trying to understad them.
 
 Se let's get into a few examples:
 
@@ -151,10 +151,12 @@ function getZipCode() {
       }
     }
   }
+
+  return null;
 }
 ```
 
-This works well and we still can understand it just fine. We're used to writing code like this. However, there's no denying that we've poluted our main algorithm somewhat with some boilerplate. The code is not as succint nor its intent as obvious anymore. It would be great if we could move all that null checking logic elsewhere, and reuse it easily. That would clean up this code. Lets see how monads can enter the picture and help us out here.
+This works well and we still can understand it just fine. We're used to writing code like this. However, there's no denying that we've poluted our main algorithm somewhat with some boilerplate. The code is not as succint nor its intent as obvious anymore. It would be great if we could move all that null checking logic elsewhere, and reuse it easily. That would clean up this code. Let's see how monads can enter the picture and help us out here.
 
 Let's define a new monad type to help us with this. In modern JavaScript, we can use a class to model our monad:
 
@@ -206,7 +208,7 @@ function getZipCode() {
 
 Pretty neat, huh? We've managed to get our `getZipCode` function back to a more succint style while still keeping the safety provided by the null checks on the values that we're working with: `order`, `customer`, `address` and `zip`. The repeated boilerplate of the conditionals with null checks is gone, abstracted away inside the monad class.
 
-If we go back to what Wikipedia pormised us about monads, we can see the promise fulfilled even in this small, trivial example. Wikipedia said that monads...
+If we go back to what Wikipedia promised us about monads, we can see the promise fulfilled even in this small, trivial example. Wikipedia said that monads...
 
 - "...can abstract away boiolerplate". Yes, we abstracted away the boilerplate null checks.
 - "...allow us to structure programs generically". Yes, our monad can work with any type of object.
@@ -215,7 +217,7 @@ If we go back to what Wikipedia pormised us about monads, we can see the promise
 - "...wrap around the values of any basic type". Yes, our monad is a wrapper. A decorator.
 - "...allow for function composition". Yes, we were able to use a funcion composition style syntax to get to our solution.
 
-> Note on the generic nature of monads: Claiming that some code is "generic" is easier in JavaScript, due to its dynamic typing and lack of compile time type checks. This advantage manifests in how or monad class is constructed. The constructor can accept any type: a number, a string, an array, an object. In statically typed languages like C# or Java, the implementation would be a bit more involved and would require the use of language features like generics. [Mikhail Shilkov](https://mikhail.io/) explains this perfectly in his blog post about [Monads explained in C# (again)](https://mikhail.io/2018/07/monads-explained-in-csharp-again/). Bottomline is, JavaScript dynamic nature does make it easier to write generic code, but it is perfectly possible in statically typed languages as well.
+> Note on the generic nature of monads: Claiming that some code is "generic" is easier in JavaScript, due to its dynamic typing and lack of "compile" time type checks. This advantage manifests in how our monad class is constructed. The constructor can accept any type: a number, a string, an array, an object. In statically typed languages like C# or Java, the implementation would be a bit more involved and would require the use of language features like [generics](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/generics/). [Mikhail Shilkov](https://mikhail.io/) explains this perfectly in his blog post about [Monads explained in C# (again)](https://mikhail.io/2018/07/monads-explained-in-csharp-again/). Bottomline is, JavaScript's dynamic nature does make it easier to write generic code, but it is perfectly possible to do so in statically typed languages as well.
 
 > By the way, this "NullHandlerMonad" type of monad is so common within functional programming circles that it's got its own name. It is called the "Maybe" or "Option" monad. Same pattern, different name.
 
@@ -400,7 +402,7 @@ let cities = [
 ];
 ```
 
-We may want to get a list of all the wheels for all the vehicles that we maintain, maybe to then determine which ones are due for chaning. We could write a function like this of obntain that list:
+We may want to get a list of all the wheels for all the vehicles that we maintain, maybe to then determine which ones are due for a change. We could write a function like this to obtain that list:
 
 ```js
 function getWheels() {
@@ -470,7 +472,7 @@ function getWheels() {
 }
 ```
 
-In fact, modern JavaScript already supports this pattern thanks to the built-in `Array.flatMap` method. It works directly on array so, if we were to use it, our function would look like this instead:
+In fact, modern JavaScript already supports this pattern thanks to the built-in `Array.flatMap` method. It works directly on arrays so, if we were to use it, our function would look like this instead:
 
 ```js
 function getWheels() {
@@ -487,11 +489,11 @@ Pretty nice, right? JavaScript itself already supports some of these monad-relat
 
 And that's it for now! 
 
-Admittedly, these are very simple examples, but I believe the serve very well the purpose of starting to get one's feet wet with the concept of monads, what can they do for us, and the mechanics behind them.
+Admittedly, these are very simple examples, but I believe they serve very well the purpose of starting to get one's feet wet with the concept of monads, what can they do for us, and the mechanics behind them.
 
-While the monads that we discussed here can become useful on their own, they really come to life when we introduce other supporting types and behaviors into the picture. That's where libraries can become useful. There's Kyle Simpson's [Monio](https://github.com/getify/monio) for example. Which is a JavaScript library that provides a set of monads and other utilities ("monads and friends", as he calls them) that are intended help with things like async code, managing side efects, conditional execution, error handling, etc. These are some of the things that we discussed and implemented by hand in this article; with the library though, we don't have to implement things by hand. The library, like I said, also includes other utilities that further unlock the power and flexibility of monads, so it's worth checking out.
+While the monads that we discussed here can become useful on their own, they really come to life when we introduce other supporting types and behaviors into the picture. That's where libraries can become useful. There's Kyle Simpson's [Monio](https://github.com/getify/monio) for example. Which is a JavaScript library that provides a set of monads and other utilities ("monads and friends", as he calls them) that are intended help with things like async code, managing side efects, conditional execution, error handling, etc. Some of these are things that we discussed and implemented by hand in this article; with the library though, we don't have to implement things by hand. The library, like I said, also includes other utilities that further unlock the power and flexibility of monads, so it's worth checking out.
 
-I think it's also useful to be on the lookout for monads in the code from frameworks and libraries that we use eveythey. As Mikhail Shilkov pointed out in his blog post, LINQ's `SelectMany` is pretty much a monad. And we implemented similar functionality in our `NestedIteratorMonad` example. The JavaScript language designers also implemented this same pattern via the `flatMap` method on Arrays.
+I think it's also useful to be on the lookout for monads in frameworks and libraries that we use everyday. As Mikhail Shilkov pointed out in his blog post, LINQ's `SelectMany` is pretty much a monad. And we implemented similar functionality in our `NestedIteratorMonad` example. The JavaScript language designers also implemented this same pattern via the `flatMap` method on arrays.
 
 Now, to conclude, I'm still not ready to say that the discovery of monads has caused a breakthrough in my programming style similar to what I had when I fist discovered LINQ in C#. What I can say is that, from now on, much like I did with LINQ; I will try to take a step back after I'm done writing some algorithm, and consider whether using monads would make it more readable. The journey continues, let's see where it takes us.
 
