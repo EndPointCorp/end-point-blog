@@ -392,13 +392,13 @@ let cities = [
               { position: 'Rear-Left', dateCode: 2002 },
             ]
           },
-          // ... more vehicles
+          // ...more vehicles
         ]
       },
-      // .. more locations
+      // ...more locations
     ]
   },
-  // more cities
+  // ...more cities
 ];
 ```
 
