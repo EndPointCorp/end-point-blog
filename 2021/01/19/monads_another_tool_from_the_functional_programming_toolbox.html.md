@@ -34,7 +34,7 @@ So I ran with it and little by little I discovered that the set of tools provide
 
 It was weird to write and think about at the beginning, but eventually, I adopted a programming style where I seldom wanted to write "vanilla" `foreach` loops. Looping manually, using accumulators, iterators and other types of temporary values began to feel clunky, inefficient and verbose. LINQ offered a much more succinct and declarative way of expressing such logic. It was transformative.
 
-So, given a variable called "orders" which contains a collection of all orders in our system, if we wanted all orders that were more expensive than $100.00, for example, we could certainly do something like:
+So, given a variable called "orders" which contains a collection of all orders in our system, if we wanted all customers who had made orders that were more expensive than $100.00, for example, we could certainly do something like:
 
 ```csharp
 // a List<Order> orders variable is defined somewhere
