@@ -491,7 +491,7 @@ Pretty nice, right? JavaScript itself already supports some of these monad-relat
 
 And that's it for now! 
 
-Admittedly, these are very simple examples, but I believe they serve very well the purpose of starting to get one's feet wet with the concept of monads, what can they do for us, and the mechanics behind them.
+Admittedly, these are very simple examples. However, I do believe they serve very well the purpose of starting to get one's feet wet with the concept of monads, what they can do for us, and the mechanics behind them.
 
 While the monads that we discussed here can become useful on their own, they really come to life when we introduce other supporting types and behaviors into the picture. That's where libraries can become useful. There's Kyle Simpson's [Monio](https://github.com/getify/monio) for example. Which is a JavaScript library that provides a set of monads and other utilities ("monads and friends", as he calls them) that are intended help with things like async code, managing side effects, conditional execution, error handling, etc. Some of these are things that we discussed and implemented by hand in this article; with the library though, we don't have to implement things by hand. The library, like I said, also includes other utilities that further unlock the power and flexibility of monads, so it's worth checking out.
 
