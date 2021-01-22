@@ -366,6 +366,8 @@ function getZipCode() {
 
 Once again we've arrived at code that's more compact and easier to read. Now, the monad takes care of all the exception handling logic and our `getZipCode` function is only concered with the core algorithm. The core workflow that we need for our solution. Like before, `getZipCode` returns null and logs to console a message if there is any error; if not, then the zip code is returned.
 
+> In functional programming, there's a common type of monad called "[Either](https://blog.logrocket.com/elegant-error-handling-javascript-either-monad/)" which is generally used for exception handling. "Either" does not have a `catch` method, like `ExceptionHandlerMonad` does. Instead, it uses sub types called "Right" and "Left" to express whether the result of a given operation has been a success or a failure (I.e. an error/exception). It then executes code according to that. Here, I've defined this `catch` method purely for convenience, sort of collapsing "Right" and "Left" logic into one class. Keep in mind that this approach is rather unorthodox as far as monads go.
+
 At this point we should be familiar with the mechanics of monads and the kinds of things we can do with them. Let's see another example.
 
 ## Handling nested iterations
