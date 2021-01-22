@@ -498,9 +498,3 @@ While the monads that we discussed here can become useful on their own, they rea
 I think it's also useful to be on the lookout for monads in frameworks and libraries that we use everyday. As Mikhail Shilkov pointed out in his blog post, LINQ's `SelectMany` is pretty much a monad. And we implemented similar functionality in our `NestedIteratorMonad` example. The JavaScript language designers also implemented this same pattern via the `flatMap` method on arrays.
 
 Now, to conclude, I'm still not ready to say that the discovery of monads has caused a breakthrough in my programming style similar to what I had when I fist discovered LINQ in C#. What I can say is that, from now on, much like I did with LINQ; I will try to take a step back after I'm done writing some algorithm, and consider whether using monads would make it more readable. The journey continues, let's see where it takes us.
-
-References:
-
-1. Kyle Simpson's "[Mo'Problems, Mo'Nads](https://www.youtube.com/watch?v=PXwtCYymzjE)" talk.
-2. Wikipedia's article on [monads](https://en.wikipedia.org/wiki/Monad_(functional_programming))
-3. Mikhail Shilkov's blog post about [Monads explained in C# (again)](https://mikhail.io/2018/07/monads-explained-in-csharp-again/)
