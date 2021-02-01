@@ -43,7 +43,7 @@ var valuableCustomers = new List<Customer>();
 
 foreach (var order in orders) {
   if (order.Total >= 100.00) {
-    orders.Add(order.Customer);
+    valuableCustomers.Add(order.Customer);
   }
 }
 
@@ -69,44 +69,54 @@ var theCustomer = o => o.Customer;
 return orders.Where(isExpensive).Select(theCustomer);
 ```
 
-Read salmost like English.
+Reads almost like English.
 
-My learning process was such that whenever I had to write some code, I began with a fully imperative approach, since that’s what I was wired up to do. I wrote loops and conditionals manually. Then, I would take a step back and refactor into the more functional and declarative approach unlocked by LINQ, whenever it made sense for readability. I’m now at the point where the more functional style comes naturally, usually as a first instinct. I feel like I’ve gained proficiency with the tool. I haven’t “rewired” myself, so to speak, to use iteration functions instead of loop primitives all the time, but rather, I’ve added “new wires” that allow me to use and apply the correct tool for the job. A great advantage is that most of the other languages that I use today (like [JavaScript](https://www.javascript.com/) or [Ruby](https://www.ruby-lang.org/en/)) include similar functional style APIs for working with collections. Learning and getting used to those tools has proved to be a very good investment.
+My learning process was such that whenever I had to write some code, I began with a fully imperative approach, since that’s what I was wired up to do. I wrote loops and conditionals manually. Then, I would take a step back and refactor into the more functional and declarative approach unlocked by LINQ, whenever it made sense for readability.
 
-Now, when it comes to monads, I’ve been hearing about them for a while now and decided to take some time to learn more about them, what sort of problems they can help solve and whether they would be a worthwhile addition to the tool set that I use on a daily basis when writing code. If they give me the same thing that LINQ gave me all those years ago, then I’d say they are undoubtedly worth the time.
+I’m now at the point where the more functional style comes naturally, usually as a first instinct. I feel like I’ve gained proficiency with the tool. I haven’t “rewired” myself, so to speak, to use iteration functions instead of loop primitives all the time, but rather, I’ve added “new wires” that allow me to use and apply the correct tool for the job.
 
-In this article I’m going to share the very first steps in my learning about monads, how to take advantage of the concepts and what sort of problems could benefit from being approached with monads in mind. Bear in mind that I’m no functional programming expert, nor am I proficient when it comes to the super formal mathematics behind it. So this will be an exploration from the perspective of a software engineer mostly experienced in object oriented analysis and design. I use my limited knowledge of functional programming concepts as tools for expressing lower level implementation details like algorithms within the context of primarily object oriented languages with functional capabilities sprinkled in, like JavaScript or C#. So think OOP for the big chunks and FP for the smaller details, when it fits.
+A great advantage is that most of the other languages that I use today (like [JavaScript](https://www.javascript.com/) or [Ruby](https://www.ruby-lang.org/en/)) include similar functional-style APIs for working with collections. Learning and getting used to those tools has proved to be a very good investment.
+
+Now, when it comes to monads, I’ve been hearing about them for a while now and decided to take some time to learn more about them, what sort of problems they can help solve, and whether they would be a worthwhile addition to the tool set that I use on a daily basis when writing code. If they give me the same thing that LINQ gave me all those years ago, then I’d say they are undoubtedly worth the time.
+
+In this article I’m going to share the very first steps in my learning about monads, how to take advantage of the concepts and what sort of problems could benefit from being approached with monads in mind. Bear in mind that I’m no functional programming expert, nor am I proficient when it comes to the formal mathematics behind it.
+
+So this will be an exploration from the perspective of a software engineer mostly experienced in object-oriented analysis and design. I use my limited knowledge of functional programming concepts as tools for expressing lower-level implementation details like algorithms within the context of primarily object-oriented languages with functional capabilities sprinkled in, like JavaScript or C#.
+
+So think OOP for the big chunks and FP for the smaller details, when it fits.
 
 ### What is a monad?
 
-This is the first question that I had and, in hindsight, as a total beginner, it is probably not the correct one to ask. Counter-intuitive, I know. A better question to ask would maybe be “what can I do with monads?” and we’ll get there soon. For now, let’s look at a few sentences of what [Wikipedia](https://en.wikipedia.org/wiki/Monad_(functional_programming)) says about them:
+This is the first question that I had and, in hindsight, as a total beginner, it is probably not the correct one to ask. Counter-intuitive, I know. A better question to ask would maybe be “what can I do with monads?” and we’ll get there soon. For now, let’s look at a few sentences of what [Wikipedia says about monads](https://en.wikipedia.org/wiki/Monad_(functional_programming)):
 
 > In functional programming, a monad is an abstraction that allows structuring programs generically. Supporting languages may use monads to abstract away boilerplate code needed by the program logic. Monads achieve this by providing their own data type (a particular type for each type of monad), which represents a specific form of computation, along with one procedure to wrap values of any basic type within the monad (yielding a monadic value) and another to compose functions that output monadic values (called monadic functions).
 
 Ok, so right off the bat Wikipedia is telling us about a few key aspects of monads:
 
-- “They can abstract away boilerplate”. What kind of boilerplate are we talking about here?
-- “They allow us to structure programs generically”. Sounds good. Generic things are often easy to reuse.
-- “They are their own data types”. By data types, do you mean classes? 
-- “They represent computations”. Computations, huh? That a very generic term. Can monads just do whatever you want?
-- “They wrap around the values of any basic type”. Wrapping around values like a [decorator design pattern](https://en.wikipedia.org/wiki/Decorator_pattern)?
-- “They allow for function composition”. Ok, I like function composition. I do it all the time with LINQ.
+- “They can abstract away boilerplate.” What kind of boilerplate are we talking about here?
+- “They allow us to structure programs generically.” Sounds good. Generic things are often easy to reuse.
+- “They are their own data types.” By data types, do you mean classes? 
+- “They represent computations.” Computations, huh? That is a very generic term. Can monads just do whatever you want?
+- “They wrap around the values of any basic type.” Wrapping around values like a [decorator design pattern](https://en.wikipedia.org/wiki/Decorator_pattern)?
+- “They allow for function composition.” Ok, I like function composition. I do it all the time with LINQ.
 
-That’s quite a bit. My intuition and object oriented bias make me conclude a few things about this. This tells me that monads must be some sort of pattern where you have a class that augments other objects (like a decorator or wrapper). This class can implement some behavior, some computations (which can be considered boilerplate) which wrapped objects can take advantage of. The encapsulated behavior/​computation/​boilerplate is generic though, so there should be great flexibility as to which types of objects can be wrapped in a monad. They also allow the decorated object to be operated on via method composition. That is, chaining together method calls, where the result of one method is the parameter for the next one. Maybe with a fluent API.
+That’s quite a bit. My intuition and object oriented bias make me conclude a few things about this. This tells me that monads must be some sort of pattern where you have a class that augments other objects (like a decorator or wrapper). This class can implement some behavior, some computations (which can be considered boilerplate) which wrapped objects can take advantage of.
+
+The encapsulated behavior/​computation/​boilerplate is generic though, so there should be great flexibility as to which types of objects can be wrapped in a monad. They also allow the decorated object to be operated on via method composition. That is, chaining together method calls, where the result of one method is the parameter for the next one. Maybe with a fluent API.
 
 Wikipedia also touches on how they can be useful:
 
 > This allows monads to simplify a wide range of problems, like handling potential undefined values (with the Maybe monad), or keeping values within a flexible, well-formed list (using the List monad). With a monad, a programmer can turn a complicated sequence of functions into a succinct pipeline that abstracts away auxiliary data management, control flow, or side-effects.
 
-This is where the prospect of monads becomes exciting. “turn a complicated sequence of functions into a succinct pipeline that abstracts away auxiliary data management, control flow, or side-effects," you say? I’m in.
+This is where the prospect of monads becomes exciting. “Turn a complicated sequence of functions into a succinct pipeline that abstracts away auxiliary data management, control flow, or side-effects,” you say? I’m in.
 
 ### How can we use monads?
 
 So now I’m convinced that I need to learn more about these monads. But how to even use these things? What does code that uses monads look like?
 
-Wikipedia does a good job in explaining the concepts in those introductory paragraphs. The code examples however, mostly fly over my head. This is when I looked at [Kyle Simpson](https://twitter.com/getify)’s excellent talk on monads, “[Mo’ Problems, Mo’ Nads](https://www.youtube.com/watch?v=PXwtCYymzjE)” which was great for seeing code examples and a general introductory explanation of the concept. There’s also [Mikhail Shilkov](https://mikhail.io/)’s blog post about [Monads explained in C# (again)](https://mikhail.io/2018/07/monads-explained-in-csharp-again/), which was great for me personally given my C# background, but also because of its approach of arriving at the use of monads organically by discovering the need after writing some regular non-monadic code. Mikhail also points out some .NET Base Class Library elements which are actually monads. In my opinion, identifying when new concepts are used out in the wild is always useful when trying to understand them.
+Wikipedia does a good job in explaining the concepts in those introductory paragraphs. The code examples however, mostly fly over my head. This is when I looked at [Kyle Simpson](https://twitter.com/getify)’s excellent talk on monads, “[Mo’ Problems, Mo’ Nads](https://www.youtube.com/watch?v=PXwtCYymzjE)” which was great for seeing code examples and a general introductory explanation of the concept. There’s also [Mikhail Shilkov](https://mikhail.io/)’s blog post [Monads explained in C# (again)](https://mikhail.io/2018/07/monads-explained-in-csharp-again/), which was great for me personally given my C# background, but also because of its approach of arriving at the use of monads organically by discovering the need after writing some regular non-monadic code. Mikhail also points out some .NET Base Class Library elements which are actually monads. In my opinion, identifying when new concepts are used out in the wild is always useful when trying to understand them.
 
-Se let’s get into a few examples:
+Se let’s get into a few examples.
 
 ### Handling null checks
 
