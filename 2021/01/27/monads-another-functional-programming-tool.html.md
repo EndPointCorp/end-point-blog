@@ -102,7 +102,7 @@ Ok, so right off the bat Wikipedia is telling us about a few key aspects of mona
 
 That’s quite a bit. My intuition and object oriented bias make me conclude a few things about this. This tells me that monads must be some sort of pattern where you have a class that augments other objects (like a decorator or wrapper). This class can implement some behavior, some computations (which can be considered boilerplate) which wrapped objects can take advantage of.
 
-The encapsulated behavior/​computation/​boilerplate is generic though, so there should be great flexibility as to which types of objects can be wrapped in a monad. They also allow the decorated object to be operated on via method composition. That is, chaining together method calls, where the result of one method is the parameter for the next one. Maybe with a fluent API.
+The encapsulated behavior/​computation/​boilerplate is generic though, so there should be great flexibility as to which types of objects can be wrapped in a monad. They also allow the decorated object to be operated on via method composition, that is, chaining together method calls, where the result of one method is the parameter for the next one. Maybe with a fluent API.
 
 Wikipedia also touches on how they can be useful:
 
@@ -147,7 +147,9 @@ function getZipCode() {
 }
 ```
 
-The `getZipCode` function is very simple, clear and succinct. Its implementation communicates its intention very well: getting the zip code of where the customer that placed the order is located. Now, in the real world things are not usually as simple. For example, it’s common for some of the elements in data structures such as this to be missing. In order to prevent null reference exceptions, we usually check for them manually, before accessing fields. To do such checks, our code would have to change. Our `getZipCode` function may end up looking like this:
+The `getZipCode` function is very simple, clear, and succinct. Its implementation communicates its intention very well: getting the zip code of where the customer that placed the order is located.
+
+Now, in the real world things are not usually as simple. For example, it’s common for some of the elements in data structures such as this to be missing. In order to prevent null reference exceptions, we usually check for them manually, before accessing fields. To do such checks, our code would have to change. Our `getZipCode` function may end up looking like this:
 
 ```js
 function getZipCode() {
@@ -167,7 +169,7 @@ function getZipCode() {
 }
 ```
 
-This works well and we still can understand it just fine. We’re used to writing code like this. However, there’s no denying that we’ve polluted our main algorithm somewhat with boilerplate. The code is not as succinct nor its intent as obvious anymore. It would be great if we could move all that null checking logic elsewhere, and reuse it easily. That would clean up this code. Let’s see how monads can enter the picture and help us out here.
+This works well and we still can understand it just fine. We’re used to writing code like this. However, there’s no denying that we’ve polluted our main algorithm somewhat with tedious validation. The code is not as succinct nor its intent as obvious anymore. It would be great if we could move all that null checking logic elsewhere, and reuse it easily. That would clean up this code. Let’s see how monads can enter the picture and help us out here.
 
 Let’s define a new monad type to help us with this. In modern JavaScript, we can use a class to model our monad:
 
@@ -189,10 +191,10 @@ class NullHandlerMonad {
   chain(operation) {
     // If the value is not null, execute the operation...
     if (this.value != null) {
-      return new NullHandlerMonad(operation(this.value))
+      return new NullHandlerMonad(operation(this.value));
     // ...if it is, then just return null wrapped in the monad
     } else {
-      return new NullHandlerMonad(null)
+      return new NullHandlerMonad(null);
     }
   }
 
@@ -203,7 +205,7 @@ class NullHandlerMonad {
 }
 ```
 
-Now what’s happening here? This is a class that defines a monad whose purpose is to abstract away null checks. In terms of good old object oriented principles, this is just a wrapper. It takes an object and augments it with certain logic. In this case, it allows calling code to use said object in a safe manner with regard to null checks. In other words, the calling code does not need to worry about null checks, it can delegate that into this class. Into the monad.
+Now what’s happening here? This is a class that defines a monad whose purpose is to abstract away null checks. In terms of good old object-oriented principles, this is just a wrapper. It takes an object and augments it with certain logic. In this case, it allows calling code to use said object in a safe manner with regard to null checks. In other words, the calling code does not need to worry about null checks, it can delegate that into this class. Into the monad.
 
 This new class allows us to rewrite our `getZipCode` function like so:
 
@@ -228,7 +230,7 @@ If we go back to what Wikipedia promised us about monads, we can see the promise
 - “…wrap around the values of any basic type”. Yes, our monad is a wrapper. A decorator.
 - “…allow for function composition”. Yes, we were able to use a function composition style syntax to get to our solution.
 
-> Note on the generic nature of monads: Claiming that some code is “generic” is easier in JavaScript, due to its dynamic typing and lack of “compile” time type checks. This advantage manifests in how our monad class is constructed. The constructor can accept any type: a number, a string, an array, an object. In statically typed languages like C# or Java, the implementation would be a bit more involved and would require the use of language features like [generics](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/generics/). [Mikhail Shilkov](https://mikhail.io/) explains this perfectly in his blog post about [Monads explained in C# (again)](https://mikhail.io/2018/07/monads-explained-in-csharp-again/). Bottom line is, JavaScript’s dynamic nature does make it easier to write generic code, but it is perfectly possible to do so in statically typed languages as well.
+> Note on the generic nature of monads: Claiming that some code is “generic” is easier in JavaScript, due to its dynamic typing and lack of compile-time type checks. This advantage manifests in how our monad class is constructed. The constructor can accept any type: a number, a string, an array, an object. In statically-typed languages like C# or Java, the implementation would be a bit more involved and would require the use of language features like [generics](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/generics/). [Mikhail Shilkov](https://mikhail.io/) explains this perfectly in his blog post about [Monads explained in C# (again)](https://mikhail.io/2018/07/monads-explained-in-csharp-again/). Bottom line is, JavaScript’s dynamic nature does make it easier to write generic code, but it is perfectly possible to do so in statically-typed languages as well.
 
 > By the way, this “NullHandlerMonad” type of monad is so common within functional programming circles that it’s got its own name. It is called the “Maybe” or “Option” monad. Same pattern, different name.
 
@@ -317,7 +319,7 @@ class ExceptionHandlerMonad {
   // If a previous operation in the chain has thrown an exception, the next
   // operation in the chain is skipped until a catch is called.
   //
-  // Returns this instance if the wrapped value is an error. That is, if a
+  // Returns this instance if the wrapped value is an error, that is, if a
   // previous operation has resulted in an error.
   // Returns a new ExceptionHandlerMonad containing the result of the given
   // operation when run on the wrapped value.
@@ -336,10 +338,10 @@ class ExceptionHandlerMonad {
   // Catches any exception that happens before in the chain.
   // Executes the given handler passing it the wrapped error.
   //
-  // Returns this instance if the wrapped value is not an error. That is, if
+  // Returns this instance if the wrapped value is not an error, that is, if
   // there hasn't been an exception previously in the chain.
-  // Returns a new empty ExceptionHandlerMonad if the value wrapped is an error.
-  // That is, if there has been an exception previously in the chain.
+  // Returns a new empty ExceptionHandlerMonad if the value wrapped is an error,
+  // that is, if there has been an exception previously in the chain.
   catch(handler) {
     if (!this.isError()) { return this; }
 
@@ -377,7 +379,7 @@ function getZipCode() {
 
 Once again we’ve arrived at code that’s more compact and easier to read. Now, the monad takes care of all the exception handling logic and our `getZipCode` function is only concered with the core algorithm. The core workflow that we need for our solution. Like before, `getZipCode` returns null and logs to console a message if there is any error; if not, then the zip code is returned.
 
-> In functional programming, there’s a common type of monad called “[Either](https://blog.logrocket.com/elegant-error-handling-javascript-either-monad/)” which is generally used for exception handling. “Either” does not have a `catch` method, like `ExceptionHandlerMonad` does. Instead, it uses sub types called “Right” and “Left” to express whether the result of a given operation has been a success or a failure (I.e. an error/exception). It then executes code according to that. Here, I’ve defined this `catch` method purely for convenience, sort of collapsing “Right” and “Left” logic into one class. Keep in mind that this approach is rather unorthodox as far as monads go.
+> In functional programming, there’s a common type of monad called “[Either](https://blog.logrocket.com/elegant-error-handling-javascript-either-monad/)” which is generally used for exception handling. “Either” does not have a `catch` method, like `ExceptionHandlerMonad` does. Instead, it uses subtypes called “Right” and “Left” to express whether the result of a given operation has been a success or a failure (i.e. an error/​exception). It then executes code according to that. Here, I’ve defined this `catch` method purely for convenience, sort of collapsing “Right” and “Left” logic into one class. Keep in mind that this approach is rather unorthodox as far as monads go.
 
 At this point we should be familiar with the mechanics of monads and the kinds of things we can do with them. Let’s see another example.
 
@@ -452,7 +454,7 @@ class NestedIteratorMonad {
   // selector from each of the elements in the array wrapped inside this
   // instance.
   // 
-  // selector must be a function that receives an element from this.values and
+  // Selector must be a function that receives an element from this.values and
   // returns an array.
   chain(selector) {
     let subValues = [];
@@ -504,7 +506,7 @@ And that’s it for now!
 
 Admittedly, these are very simple examples. However, I do believe they serve very well the purpose of getting your feet wet with the concept of monads, what they can do for us, and the mechanics behind them.
 
-While the monads that we discussed here can become useful on their own, they really come to life when we introduce other supporting types and behaviors into the picture. That’s where libraries can become useful. There’s Kyle Simpson’s [Monio](https://github.com/getify/monio) for example. Monio is a JavaScript library that provides a set of monads and other utilities (“monads and friends”, as he calls them) that are intended help with things like async code, managing side effects, conditional execution, error handling, etc. Some of these are things that we discussed and implemented by hand in this article; with the library though, we don’t have to implement things by hand. The library, like I said, also includes other utilities that further unlock the power and flexibility of monads, so it’s worth checking out.
+While the monads that we discussed here can become useful on their own, they really come to life when we introduce other supporting types and behaviors into the picture. That’s where libraries can become useful. There’s Kyle Simpson’s [Monio](https://github.com/getify/monio), for example. Monio is a JavaScript library that provides a set of monads and other utilities (“monads and friends”, as he calls them) that can help with things like async code, managing side effects, conditional execution, error handling, etc. Some of these are things that we discussed and implemented by hand in this article; with the library, though, we don’t have to implement things by hand. The library, like I said, also includes other utilities that further unlock the power and flexibility of monads, so it’s worth checking out.
 
 I think it’s also useful to be on the lookout for monads in frameworks and libraries that we use everyday. As Mikhail Shilkov pointed out in his blog post, LINQ’s `SelectMany` is pretty much a monad. And we implemented similar functionality in our `NestedIteratorMonad` example. The JavaScript language designers also implemented this same pattern via the `flatMap` method on arrays.
 
