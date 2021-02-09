@@ -29,25 +29,25 @@ JavaScript is a fairly dynamic language but types still exist in JavaScript,
 whether we like it or not. Because it's so dynamic it assumes that you the
 programmer know the type of every object you are using on every line of code
 and will do nothing to help you get it right. The type is specified by the
-context. The trouble is that in any non-trivial code base it becomes
+context. The trouble is that in any non-trivial codebase it becomes
 impossible to be absolutely 100% certain about the type of some particular
-object that's being passed around without reading the context, which if often
+object that's being passed around without reading the context, which is often
 a ton of code.
 
 By eagerly annotating our JavaScript code with types we can eliminate entire
-classes of bugs from our code base with no additional effort. TypeScript will
+classes of bugs from our codebase with no additional effort. TypeScript will
 never let you play loosey-goosey with integers and strings, for example. If
 you want a variable to be able to hold an int or a string you must explicitly
 declare it as type "integer or string". 
 
-TypeScript lowers the total-cost-of-ownership of a code base by saving time.
+TypeScript lowers the total-cost-of-ownership of a codebase by saving time.
 Programmers no longer have to guess or infer types and spend less time
 reading documentation and fixing bugs. Because fewer classes of errors are
-possible less testing is required. Serious problems never make it to the
-customer because developers never commit them to git. New developers on-board
-faster and make fewer mistakes. When multiple developers collaborate their
-intent WRT types is immediately known to all, including the TS compiler,
-without reading any docs.
+possible less testing is required. Entire classes of serious problems never
+make it to the customer because developers never commit them to Git. New
+developers on-board faster and make fewer mistakes. When multiple developers
+collaborate their intentions with respect to types are immediately known to
+all, including the TS compiler, without reading any docs.
 
 TypeScript is a proprietary language maintained by Microsoft. However it is
 "open" in the sense that it is free to use, the specification is publicly
