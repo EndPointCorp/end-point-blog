@@ -225,11 +225,7 @@ Pretty neat, huh? We’ve managed to get our `getZipCode` function back to a mor
 >
 > ```js
 > function getZipCode() {
->  return new NullHandlerMonad(order)
->    .chain(o => o.customer)
->    .chain(c => c.address)
->    .chain(a => a.zip)
->    .getValue();
+>  return order?.customer?.address?.zip;
 > }
 > ```
 >
