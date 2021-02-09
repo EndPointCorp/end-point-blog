@@ -26,14 +26,12 @@ import java.util.Map;
 import java.util.Set;
 
 public class WebSocketPool {
-
   public static Map<Long, Set<WebSocketSession>> websockets = new HashMap<>();
-
 }
 
 ```
 
-`WebSocketPool` holds client sessions in a map of `<user_id, <set of WebSocketSession>`. This map allows multiple sessions for one user, ensuring it will work from multiple client applications.
+`WebSocketPool` holds client sessions in a map of `<user_id, <set of WebSocketSession>>`. This map allows multiple sessions for one user, ensuring it will work from multiple client applications.
 
 ### MessageHandler
 
@@ -45,11 +43,8 @@ import org.springframework.web.socket.WebSocketSession;
 import java.io.IOException;
 
 public interface MessageHandler {
-
   public void addSessionToPool(Long userId, WebSocketSession session);
-
   public void sendMessageToUser(Long userId, String message) throws IOException;
-
   void removeFromSessionToPool(Long userId, WebSocketSession session);
 }
 
@@ -122,7 +117,7 @@ public class MessageHandlerImpl implements MessageHandler {
 
 With MessageHandler we are able to handle adding or removing `WebSocketSession` sessions from the pool as well as sending messages to a target user’s WebSocket sessions. On the other hand, `MessageSender` is going to define a KafkaTemplate broker to send the messages to a specified Kafka topic.
 
-## MessageSender
+### MessageSender
 
 ```java
 package com.endpoint.SpringKafkaMessaging.message.broker;
@@ -142,15 +137,14 @@ public class MessageSender {
   @Autowired
   private KafkaTemplate<String, String> kafkaTemplate;
 
-  public void send(String topic, String message){
-
+  public void send(String topic, String message) {
     kafkaTemplate.send(topic, message);
   }
 }
 
 ```
 
-Now we can create our WebSocketHandler. It will utilize MessageHandler to add and remove user sessions and MessageSender to send `WebSocketSession` messages to Kafka topics. I only used one topic in this messaging app, `SEND_MESSAGE`, but in a real application there would be a bunch of Kafka topics for sending different types of messages like new contact requests, notifications, etc..
+Now we can create our WebSocketHandler. It will utilize MessageHandler to add and remove user sessions and MessageSender to send `WebSocketSession` messages to Kafka topics. I only used one topic in this messaging app, `SEND_MESSAGE`, but in a real application there would be a bunch of Kafka topics for sending different types of messages like new contact requests, notifications, etc.
 
 ### WebSocketHandler
 
@@ -186,15 +180,15 @@ public class WebSocketHandler extends TextWebSocketHandler {
 
     String parameters[] = session.getUri().getQuery().split("=");
 
-    if(parameters.length == 2 && parameters[0].equals("accessToken")) {
+    if (parameters.length == 2 && parameters[0].equals("accessToken")) {
       String accessToken = parameters[1];
 
       Long senderUserId = 0L;
       String senderId = cacheRepository.getUserIdByAccessToken(accessToken);
 
-      if(senderId == null) {
+      if (senderId == null) {
         User sender = userRepository.findByToken(accessToken);
-        if(sender != null) {
+        if (sender != null) {
           senderUserId = sender.getUserId();
         }
       } else {
@@ -214,15 +208,15 @@ public class WebSocketHandler extends TextWebSocketHandler {
 
     String parameters[] = session.getUri().getQuery().split("=");
 
-    if(parameters.length == 2 && parameters[0].equals("accessToken")) {
+    if (parameters.length == 2 && parameters[0].equals("accessToken")) {
       String accessToken = parameters[1];
 
       Long senderUserId = 0L;
       String senderId = cacheRepository.getUserIdByAccessToken(accessToken);
 
-      if(senderId == null) {
+      if (senderId == null) {
         User sender = userRepository.findByToken(accessToken);
-        if(sender != null) {
+        if (sender != null) {
           senderUserId = sender.getUserId();
         }
       } else {
@@ -250,7 +244,7 @@ public class WebSocketHandler extends TextWebSocketHandler {
     String topic = jsonObject.getString("topic");
 
     // only SEND_MESSAGE topic is available
-    if(topic == null && !topic.equals("SEND_MESSAGE")) {
+    if (topic == null && !topic.equals("SEND_MESSAGE")) {
       return;
     }
 
@@ -274,7 +268,7 @@ import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry
 
 @Configuration
 @EnableWebSocket
-public class WebSocketConfig implements WebSocketConfigurer  {
+public class WebSocketConfig implements WebSocketConfigurer {
 
   @Bean
   public WebSocketHandler myMessageHandler() {
@@ -302,9 +296,7 @@ import com.endpoint.SpringKafkaMessaging.persistent.model.Message;
 import java.util.List;
 
 public interface MessageService {
-
   public void sendMessage(String accessToken, Long sendTo, String msg);
-
   List<Message> getMessageHistory(Long fromUserId, Long toUserId);
 }
 
@@ -333,7 +325,7 @@ import java.io.IOException;
 import java.util.List;
 
 @Service
-public class MessageServiceImpl implements MessageService{
+public class MessageServiceImpl implements MessageService {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(MessageServiceImpl.class);
 
@@ -355,9 +347,9 @@ public class MessageServiceImpl implements MessageService{
     Long senderUserId = 0L;
     String senderId = cacheRepository.getUserIdByAccessToken(accessToken);
 
-    if(senderId == null) {
+    if (senderId == null) {
       User sender = userRepository.findByToken(accessToken);
-      if(sender != null) {
+      if (sender != null) {
         senderUserId = sender.getUserId();
       }
     } else {
@@ -384,14 +376,12 @@ public class MessageServiceImpl implements MessageService{
   }
 
   private void storeMessageToUser(Message message) {
-
     messageRepository.save(message);
-
   }
 }
 ```
 
-We are going to use message brokers as `MessageSender` and `MessageReceiver`. We’re going to define a `KafkaListener` listening to `SEND_MESSAGE` topic inside `MessageReceiver`, which is actually sending message to the target user. Here notice that `MessageReceiver` is not a client method; because this is a server side message orchestration application, it does not directly serve as a client interface. Above we implemented the WebSocket sessions where the actual communication with the clients happening, but the client application is out of our scope.
+We are going to use message brokers as `MessageSender` and `MessageReceiver`. We’re going to define a `KafkaListener` listening to `SEND_MESSAGE` topic inside `MessageReceiver`, which is actually sending message to the target user. Here notice that `MessageReceiver` is not a client method; because this is a server side message orchestration application, it does not directly serve as a client interface. Above we implemented the WebSocket sessions where the actual communication with the clients happens, but the client application is out of our scope.
 
 ### MessageReceiver
 
@@ -502,9 +492,9 @@ public class AuthServiceImpl implements AuthService {
   @Override
   public Long loginWithAccessToken(String token) {
     String userIdStr = cacheRepository.getUserIdByAccessToken(token);
-    if(userIdStr == null) {
+    if (userIdStr == null) {
       User user = userRepository.findByToken(token);
-      if(user != null)
+      if (user != null)
         return user.getUserId();
       else
         return 0L;
@@ -575,14 +565,14 @@ public class AuthController {
   public ResponseEntity<Object> login(@RequestBody LoginRequest loginRequest) {
     String mobile = cacheRepository.queryMobileActivationCode(loginRequest.getMobile(), loginRequest.getActivationCode());
 
-    if(mobile == null) {
+    if (mobile == null) {
       return new ResponseEntity<>(
           "Mobile number not found!",
           HttpStatus.NOT_FOUND);
     } else {
       Long userId = 0L;
       User user = userRepository.findByMobile(loginRequest.getMobile());
-      if(user == null) {
+      if (user == null) {
         // save user in persistence
         userRepository.save(
             User.builder()
