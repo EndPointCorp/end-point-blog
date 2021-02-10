@@ -465,10 +465,10 @@ class NestedIteratorMonad {
   // Selector must be a function that receives an element from this.values and
   // returns an array.
   chain(selector) {
-    let subValues = [];
+    const subValues = [];
 
-    for (let value of this.values) {
-      for (let subValue of selector(value)) {
+    for (const value of this.values) {
+      for (const subValue of selector(value)) {
         subValues.push(subValue);
       }
     }
