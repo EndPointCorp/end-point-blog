@@ -9,7 +9,7 @@ gh_issue_number: 1630
 
 [Photo](https://unsplash.com/photos/OKolJZ5jos4) by [Pascal Debrunner](https://unsplash.com/@debrupas) on [Unsplash](https://unsplash.com)
 
-This article is part of a [series](/blog/tags/spring-kafka-series).
+This article is part of a [series](/blog/tags/spring-kafka-series). The GitHub repository with code examples can be found [here](https://github.com/ashemez/SpringKafkaMessaging).
 
 In this article we’ll create the persistence and cache models and repositories. We’re also going to create our PostgreSQL database and the basic schema that we’re going to map to the persistence model.
 
@@ -28,32 +28,32 @@ Let’s create our tables:
 
 ```sql
 CREATE TABLE kafkamessaging.users (
-	user_id BIGSERIAL PRIMARY KEY,
-	fname VARCHAR(32) NOT NULL,
-	lname VARCHAR(32) NOT NULL,
-	mobile VARCHAR(32) NOT NULL,
-	created_at DATE NOT NULL
+    user_id BIGSERIAL PRIMARY KEY,
+    fname VARCHAR(32) NOT NULL,
+    lname VARCHAR(32) NOT NULL,
+    mobile VARCHAR(32) NOT NULL,
+    created_at DATE NOT NULL
 );
 
 CREATE TABLE kafkamessaging.access_token (
-	token_id BIGSERIAL PRIMARY KEY,	
-	token VARCHAR(256) NOT NULL,
-	user_id BIGINT NOT NULL REFERENCES kafkamessaging.users(user_id),
-	created_at DATE NOT NULL
+    token_id BIGSERIAL PRIMARY KEY,    
+    token VARCHAR(256) NOT NULL,
+    user_id BIGINT NOT NULL REFERENCES kafkamessaging.users(user_id),
+    created_at DATE NOT NULL
 );
 
 CREATE TABLE kafkamessaging.contacts (
-	contact_id BIGSERIAL PRIMARY KEY,
-	user_id BIGINT NOT NULL REFERENCES kafkamessaging.users(user_id),
-	contact_user_id BIGINT NOT NULL REFERENCES kafkamessaging.users(user_id),
+    contact_id BIGSERIAL PRIMARY KEY,
+    user_id BIGINT NOT NULL REFERENCES kafkamessaging.users(user_id),
+    contact_user_id BIGINT NOT NULL REFERENCES kafkamessaging.users(user_id),
 );
 
 CREATE TABLE kafkamessaging.messages (
-	message_id BIGSERIAL PRIMARY KEY,
-	from_user_id BIGINT NOT NULL REFERENCES kafkamessaging.users(user_id),
-	to_user_id BIGINT NOT NULL REFERENCES kafkamessaging.users(user_id),
-	message VARCHAR(512) NOT NULL,
-	sent_at DATE NOT NULL
+    message_id BIGSERIAL PRIMARY KEY,
+    from_user_id BIGINT NOT NULL REFERENCES kafkamessaging.users(user_id),
+    to_user_id BIGINT NOT NULL REFERENCES kafkamessaging.users(user_id),
+    message VARCHAR(512) NOT NULL,
+    sent_at DATE NOT NULL
 );
 ```
 
@@ -201,7 +201,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Table(name="contacts")
 public class Contact implements Serializable {
-	
+    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="contact_id")
@@ -290,17 +290,17 @@ import com.endpoint.SpringKafkaMessaging.persistent.model.User;
 @Repository
 public interface UserRepository extends CrudRepository<User, Long> {
 
-	List<User> findAll();
+    List<User> findAll();
 
-	User findByUserId(Long userId);
-	
-	User findByMobile(String mobile);
-	
-	User findByFname(String fname);
-	
-	User findByLname(String lname);
+    User findByUserId(Long userId);
+    
+    User findByMobile(String mobile);
+    
+    User findByFname(String fname);
+    
+    User findByLname(String lname);
 
-	void deleteById(Long userId);
+    void deleteById(Long userId);
 
 }
 ```
@@ -320,11 +320,11 @@ import com.endpoint.SpringKafkaMessaging.persistent.model.Contact;
 @Repository
 public interface ContactRepository extends CrudRepository<Contact, Long> {
 
-	List<Contact> findAllByUserId(Long userId);
-	
-	Contact findByContactUserId(Long contactUserId);
+    List<Contact> findAllByUserId(Long userId);
+    
+    Contact findByContactUserId(Long contactUserId);
 
-	void deleteByContactUserId(Long contactUserId);
+    void deleteByContactUserId(Long contactUserId);
 }
 ```
 
@@ -340,9 +340,9 @@ import com.endpoint.SpringKafkaMessaging.persistent.model.AccessToken;
 @Repository
 public interface AccessTokenRepository extends CrudRepository<AccessToken, Long> {
 
-	AccessToken findByUserId(Long userId);
+    AccessToken findByUserId(Long userId);
 
-	void deleteByUserId(Long userId);
+    void deleteByUserId(Long userId);
 
 }
 ```
@@ -358,7 +358,7 @@ import org.springframework.stereotype.Repository;
 import com.endpoint.SpringKafkaMessaging.persistent.model.Message;
 @Repository
 public interface MessageRepository extends CrudRepository<Message, Long> {
-	
+    
 }
 ```
 
@@ -409,7 +409,7 @@ public class CacheRepositoryImpl implements CacheRepository {
             jedis.set(token, userId);
 
         } catch (Exception e) {
-        	e.printStackTrace();
+            e.printStackTrace();
         }
     }
 
@@ -421,7 +421,7 @@ public class CacheRepositoryImpl implements CacheRepository {
             return jedis.get(token);
 
         } catch (Exception e) {
-        	e.printStackTrace();
+            e.printStackTrace();
         }
 
         return null;
@@ -436,7 +436,7 @@ public class CacheRepositoryImpl implements CacheRepository {
             jedis.expire(mobile, 15 * 60);
 
         } catch (Exception e) {
-        	e.printStackTrace();
+            e.printStackTrace();
         }
     }
 
@@ -447,7 +447,7 @@ public class CacheRepositoryImpl implements CacheRepository {
 
             return jedis.hget(mobile, code);
         } catch (Exception e) {
-        	e.printStackTrace();
+            e.printStackTrace();
         }
 
         return null;
@@ -502,16 +502,16 @@ public class AuthServiceImpl implements AuthService {
 
         // store token in the persistence
         AccessToken accessToken = AccessToken.builder()
-        							.token(token)
-        							.userId(userId)
-        							.createdAt(Calendar.getInstance().getTime())
-        							.build();
+                                    .token(token)
+                                    .userId(userId)
+                                    .createdAt(Calendar.getInstance().getTime())
+                                    .build();
         accessTokenRepository.save(accessToken);
     }
 
     @Override
     public void loginWithAccessToken(String mobile, String code) {
-    	// TODO
+        // TODO
     }
 }
 ```
@@ -535,9 +535,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ActivationRequest {
-	
-	private String mobile;
-	
+    
+    private String mobile;
+    
 }
 ```
 
@@ -556,11 +556,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ActivationResponse {
-	
-	private String mobile;
-	
-	private String activationCode;
-	
+    
+    private String mobile;
+    
+    private String activationCode;
+    
 }
 ```
 
@@ -579,11 +579,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class LoginRequest {
-	
-	private String mobile;
-	
-	private String activationCode;
-	
+    
+    private String mobile;
+    
+    private String activationCode;
+    
 }
 ```
 
@@ -621,22 +621,22 @@ public class AuthController {
     
     @RequestMapping(value = "/getcode", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<Object> getCode(@Valid @RequestBody ActivationRequest activationRequest) {
-    	
-    	// TODO
-    	
-    	return null;
+        
+        // TODO
+        
+        return null;
     }
     
     @RequestMapping(value = "/login", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<String> login(@RequestBody LoginRequest loginRequest) {
-    	
-    	// TODO
-    	
-    	return null;
+        
+        // TODO
+        
+        return null;
     }
 }
 ```
 
-In the next chapter we’ll shape and complete the authentication service and controller and add message sender and receiver services. We’ll also configure and enable [Spring WebSocket](https://docs.spring.io/spring-framework/docs/5.0.0.BUILD-SNAPSHOT/spring-framework-reference/html/websocket.html).
+In the [next chapter](/blog/2021/01/14/messaging-app-spring-kafka-pt-four), we’ll shape and complete the authentication service and controller and add message sender and receiver services. We’ll also configure and enable [Spring WebSocket](https://docs.spring.io/spring-framework/docs/current/reference/html/web-reactive.html#webflux-websocket).
 
 In the final chapter, we’ll create a simple web app interface as a messaging client to test our spring-kafka messaging application.

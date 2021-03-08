@@ -11,19 +11,19 @@ Version 2.16.0 of [check_postgres](https://bucardo.org/check_postgres/), a monit
 
 Another recently added feature ([in version 2.15.0](https://github.com/bucardo/check_postgres/commit/c54c4d041bb164c201f5da2de217496c9f4e261c)) was the simple addition of a **--quiet** flag. All this does is to prevent any normal output when an OK status is found. I wrote this because sometimes even Nagios is overkill. In the default mode ([Nagios](https://www.nagios.org/), the other major mode is [MRTG](https://oss.oetiker.ch/mrtg/)), check_postgres will exit with one of four states, each with their own exit code: OK, WARNING, CRITICAL, or UNKNOWN. It also outputs a small message, per Nagios conventions, so a txn_idle action might exit with a value of 1 and output something similar to this:
 
-```plaintext
+```nohighlight
 POSTGRES_TXN_IDLE WARNING: (host:svr1) longest idle in txn: 4638s
 ```
 
 I had a situation where I wanted to use the functionality of check_postgres (to examine the lag on a warm standby server), but did not want the overhead of adding it into Nagios, and just needed a quick email to be sent if there were any problems. Thus, the use of the quiet flag yielded a quick and cheap Nagios replacement using cron:
 
-```plaintext
+```nohighlight
 */10 * * * * bin/check_postgres.pl --action=checkpoint -w 300 -c 600 --datadir=/dbdir --quiet
 ```
 
 So every 10 minutes the script gathers the number of seconds since the last checkpoint was run. If that number is under five minutes (300 seconds), it exits silently. If it’s over five minutes, it outputs something similar to this, which cron then sends in an email:
 
-```plaintext
+```nohighlight
 POSTGRES_CHECKPOINT CRITICAL:  Last checkpoint was 842 seconds ago
 ```
 

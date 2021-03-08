@@ -8,7 +8,7 @@ gh_issue_number: 1619
 ![spring-kafka](/blog/2020/04/08/messaging-app-spring-kafka-pt-one/banner.jpg)
 [Photo](https://unsplash.com/photos/7J90Bxj-vtI) by [Click and Learn Photography](https://unsplash.com/@clickandlearnphotography) at [Unsplash](https://unsplash.com/)
 
-This article is part of a [series](/blog/tags/spring-kafka-series).
+This article is part of a [series](/blog/tags/spring-kafka-series). The GitHub repository with code examples can be found [here](https://github.com/ashemez/SpringKafkaMessaging).
 
 [Spring](https://spring.io) is a popular Java application framework. [Apache Kafka](https://kafka.apache.org) is a fault-tolerant, fast, and horizontally scalable distributed stream-message broker. [Spring for Apache Kafka](https://spring.io/projects/spring-kafka) applies the overall concepts of Spring to Java applications based on Kafka.
 
@@ -24,7 +24,7 @@ When we are done with the initial project setup we press the “GENERATE” butt
 
 ![Eclipse](/blog/2020/04/08/messaging-app-spring-kafka-pt-one/eclipse_springproject.png)
 
-I won’t address detailed configuration or adding dependencies of Spring and Maven projects in this post. If you are not familiar with Spring and Maven, I recommend that you have a look at the [Spring documentation](https://docs.spring.io/spring/docs/current/spring-framework-reference/) first.
+I won’t address detailed configuration or adding dependencies of Spring and Maven projects in this post. If you are not familiar with Spring and Maven, I recommend that you have a look at the [Spring documentation](https://docs.spring.io/spring-framework/docs/current/reference/html/) first.
 
 ### Design and architecture
 

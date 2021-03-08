@@ -15,7 +15,9 @@ First the habitable zone should be found. This is a concept of the project which
  
 Whenever we create an estimation, we need to differentiate parts of the problem into two main categories. The first category is the subset of the problem where we can accurately foresee what is to be done and we can accurately estimate the needed time. The second category is the subset for problems where we have open questions. It’s good to offer the client alternatives: we could do a vague estimation for the problems where we have open questions, or we can do research to gather further knowledge and increase the subset of problems where we foresee the solution. In general:
  
-```T = (T(Known) + T(Unknown) + T(Unforeseen)) * HR```
+```nohighlight
+T = (T(Known) + T(Unknown) + T(Unforeseen)) * HR
+```
  
 T(Known) is the total time we estimate for the problems for which we mostly already know the solution. T(Unknown) is the total time we estimate for problems we have open questions about, the answer of which directly affects the time we need. T(Unforeseen) is the total time to work on problems we cannot foresee before starting the project. HR is the Habitable Ratio we multiply the time by. For example, if HR = 1.3, then we estimate the time of the project to be 30% higher than what we think it’ll take. The reason we need such a ratio is that T(Unknown) and T(Unforeseen) in reality can be much higher than our estimation. If we estimate a time to the client which is around or less than the time we think we can successfully finish our work, then the work will potentially be a stressful rush. If we take longer than the estimation, we lose our hard earned reputation. In this case we will either be at the edge of the habitable zone towards the star, or even between the star and the habitable zone. It is the perfect recipe to burn out quickly.
  

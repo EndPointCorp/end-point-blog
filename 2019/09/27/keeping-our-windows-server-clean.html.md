@@ -23,7 +23,7 @@ To prevent this, we can create a batch file that can be run on a daily basis fro
 
 * <b>CleanIISLogs.bat</b>
 
-```batch
+```bat
 forfiles /D -10 /P "C:\inetpub\logs\LogFiles" /S /C "cmd /c del /f /q @path"
 ```
 
@@ -40,7 +40,7 @@ So depending on the web traffic our applications have, it will grow faster or sl
 
 * <b>CleanHTTPERRLogs.bat</b>
 
-```batch
+```bat
 forfiles /D -10 /P "C:\Windows\System32\LogFiles\HTTPERR" /C "cmd /c del /f /q @path"
 ```
 
@@ -59,7 +59,7 @@ So an alternative would be to create a script to compress the files instead of d
 
 * <b>CompressIISLogs.bat</b>
 
-```batch
+```bat
 forfiles /D -10 /P "C:\inetpub\logs\LogFiles" /S /C "cmd /c compact @path"
 ```
 

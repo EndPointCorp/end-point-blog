@@ -66,7 +66,7 @@ If the language you speak uses Latin-based script in writing, you might be scrat
 
 The signature of the function reads as follows:
 
-```C
+```c
 fribidi_boolean fribidi_log2vis(
     /* input */
     FriBidiChar     *str,

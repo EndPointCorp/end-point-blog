@@ -57,4 +57,4 @@ If you are already a Microsoft Office 365 subscriber, odds are you already have 
 
 - [The SharePoint Community](https://techcommunity.microsoft.com/t5/sharepoint/ct-p/SharePoint)
 - [SharePoint Developer Network](https://developer.microsoft.com/en-us/sharepoint)
-- [SharePoint online training](https://support.office.com/en-us/article/sign-in-to-sharepoint-online-324a89ec-e77b-4475-b64a-13a0c14c45ec?ui=en-US&rs=en-US&ad=US)
+- [SharePoint online training](https://support.microsoft.com/en-us/office/sign-in-to-sharepoint-324a89ec-e77b-4475-b64a-13a0c14c45ec?ui=en-us&rs=en-us&ad=us)

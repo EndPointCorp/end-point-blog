@@ -9,13 +9,13 @@ gh_issue_number: 1639
 
 ### Welcome to Jamstack Conf Virtual 2020
 
-Last week I attended [Jamstack Conf Virtual 2020](https://jamstackconf.com/virtual/). It had originally been slated to take place in London, UK but was later transformed into a virtual event in light of the COVID-19 pandemic. The conference began at 2pm London time (thankfully I double-checked this the night before!)—​6am for those of us in the Pacific Time Zone.
+Last week I attended [Jamstack Conf Virtual 2020](https://jamstackconf.com/2020/may/). It had originally been slated to take place in London, UK but was later transformed into a virtual event in light of the COVID-19 pandemic. The conference began at 2pm London time (thankfully I double-checked this the night before!)—​6am for those of us in the Pacific Time Zone.
 
 <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Up early for <a href="https://twitter.com/hashtag/jamstackconf?src=hash&amp;ref_src=twsrc%5Etfw">#jamstackconf</a> 😎☕️ <a href="https://t.co/ydjvrHWCZH">pic.twitter.com/ydjvrHWCZH</a></p>— Greg Davidson (@syncopated) <a href="https://twitter.com/syncopated/status/1265637434638778368?ref_src=twsrc%5Etfw">May 27, 2020</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 Before getting too much further I wanted to mention that if you are not familiar with the Jamstack, You can read more about it at [jamstack.org](https://jamstack.org/).
 
-To virtually participate in the conference we used an app called [Hopin](https://hopin.to/). I had not heard of it before but was impressed with how well it worked. There were over 3000 attendees from 130+ countries one of the times I checked. [Phil Hawksworth](https://www.hawksworx.com/) was the Host/​MC for the event and did a great job. There were virtual spaces for the stage, sessions, expo (vendors), and networking. If you opted to, the networking feature paired you with a random attendee for a video chat. I’m not sure what I expected going into it but I thought it was fun. I met a fellow developer from the Dominican Republic. The experience was very similar though more serendipitous than the hallway track or lunch line at an in-person conference.
+To virtually participate in the conference we used an app called [Hopin](https://hopin.com/). I had not heard of it before but was impressed with how well it worked. There were over 3000 attendees from 130+ countries one of the times I checked. [Phil Hawksworth](https://www.hawksworx.com/) was the Host/​MC for the event and did a great job. There were virtual spaces for the stage, sessions, expo (vendors), and networking. If you opted to, the networking feature paired you with a random attendee for a video chat. I’m not sure what I expected going into it but I thought it was fun. I met a fellow developer from the Dominican Republic. The experience was very similar though more serendipitous than the hallway track or lunch line at an in-person conference.
 
 ![Phil Hawksworth welcoming the attendees](/blog/2020/06/16/jamstack-conf-virtual-may-2020/phil-welcome.png)
 
@@ -27,7 +27,7 @@ To virtually participate in the conference we used an app called [Hopin](https:/
 
 ![Laurie Voss reporting findings from the Jamstack Survey 2020](/blog/2020/06/16/jamstack-conf-virtual-may-2020/laurie-voss-talk.png)
 
-[Laurie Voss](https://seldo.com/) [walked us through](https://slides.com/seldo/jamstack-survey-2020#/) the results of the [Jamstack Survey 2020](https://www.netlify.com/blog/2020/05/27/state-of-the-jamstack-survey-2020-first-results/). There were some interesting findings and surprises. Later on I read [Laurie’s post](https://seldo.com/posts/you-will-never-be-a-full-stack-developer) (which Matt had mentioned in his talk) and found that very interesting as well.
+[Laurie Voss](https://seldo.com/) [walked us through](https://slides.com/seldo/jamstack-survey-2020#/) the results of the [Jamstack Survey 2020](https://www.netlify.com/blog/2020/05/27/state-of-the-jamstack-survey-2020-first-results/). There were some interesting findings and surprises. Later on I read [Laurie’s post](https://seldo.com/posts/you-will-never-be-a-full-stack-developer/) (which Matt had mentioned in his talk) and found that very interesting as well.
 
 ### Fireside chat with Harper Reed
 
@@ -39,7 +39,7 @@ Another benefit Harper noted was how quickly and easily new team members could b
 
 ### Lightning Launch: Netlify ⚡
 
-[David Calavera](https://twitter.com/calavera) gave a demo of Netlify’s new Edge Handlers feature which lets developers add logic to their code at the edge (e.g. the CDN servers geographically closest to the user). He demonstrated how Edge Handlers make it possible to examine the headers of the request to tailor the response to that unique request. Check out the [video of his talk](https://www.youtube.com/watch?v=D44n8YVb5iI) to watch him live code an example. I believe [Cloudflare Workers](https://workers.cloudflare.com/) and Fastly’s [Edge Compute](https://www.fastly.com/products/edge-compute) are operating in a similar problem space. I plan to look into each of these offerings more thoroughly in future.
+[David Calavera](https://twitter.com/calavera) gave a demo of Netlify’s new Edge Handlers feature which lets developers add logic to their code at the edge (e.g. the CDN servers geographically closest to the user). He demonstrated how Edge Handlers make it possible to examine the headers of the request to tailor the response to that unique request. Check out the [video of his talk](https://www.youtube.com/watch?v=D44n8YVb5iI) to watch him live code an example. I believe [Cloudflare Workers](https://workers.cloudflare.com/) and Fastly’s [Edge Compute](https://www.fastly.com/products/edge-compute/serverless) are operating in a similar problem space. I plan to look into each of these offerings more thoroughly in future.
 
 ### Lightning Launch: Prismic ⚡
 
@@ -53,13 +53,13 @@ Another benefit Harper noted was how quickly and easily new team members could b
 
 ![Erin Kissane presenting The COVID Tracking Project](/blog/2020/06/16/jamstack-conf-virtual-may-2020/kissane.png)
 
-[Erin Kissane](http://incisive.nu/) gave an inspiring talk about her work on [The COVID Tracking Project](https://covidtracking.com). She described it as an “interim public data rescue project”. Erin and some friends, journalists and volunteers worked together to create the site. They started by scraping COVID data from each state’s web site and storing it in a Google Sheet. They used [Gatsby](https://www.gatsbyjs.org/), [Contentful](https://www.contentful.com/), and [Sass modules](https://css-tricks.com/introducing-sass-modules/) and hosted the site on Netlify. Using the Jamstack approach allowed the site to remain performant and continue to be responsive under some huge traffic spikes. Over time, they iterated on the design and continue to improve the site daily. I highly recommend checking out the [video of the talk](https://www.youtube.com/watch?v=ryngYoHXNfQ) when you get a chance.
+[Erin Kissane](http://incisive.nu/) gave an inspiring talk about her work on [The COVID Tracking Project](https://covidtracking.com). She described it as an “interim public data rescue project”. Erin and some friends, journalists and volunteers worked together to create the site. They started by scraping COVID data from each state’s web site and storing it in a Google Sheet. They used [Gatsby](https://www.gatsbyjs.com/), [Contentful](https://www.contentful.com/), and [Sass modules](https://css-tricks.com/introducing-sass-modules/) and hosted the site on Netlify. Using the Jamstack approach allowed the site to remain performant and continue to be responsive under some huge traffic spikes. Over time, they iterated on the design and continue to improve the site daily. I highly recommend checking out the [video of the talk](https://www.youtube.com/watch?v=ryngYoHXNfQ) when you get a chance.
 
 ### Jamstack for emerging markets
 
 [Christian Nwamba](https://www.codebeast.dev/) described some of the challenges of building sites for users in Nigeria (low power devices, spotty connectivity, unreliable power). He shared that 55% of the most visited sites in Nigeria are global companies (Google, Facebook/​Instagram, Netflix, Stack Overflow etc.). Christian reviewed a large, popular banking site in Nigeria and noted its many shortcomings.
 
-To demonstrate how the bank might do better he built [an app](https://aka.ms/quickbank) for transferring money between friends &amp; family built in the Jamstack style and using serverless functions. The most interesting thing I picked up from this was his method of using serverless functions to protect the app secrets (API keys, etc.). The front end of the application did not need to concern itself with this—​the serverless functions kept the secrets safe and acted as a proxy between the frontend and the backend APIs. Be sure to take a look at [Christian’s code](https://github.com/christiannwamba/quickbank) if you are interested.
+To demonstrate how the bank might do better he built [an app](https://proud-flower-060c1e01e.azurestaticapps.net/) for transferring money between friends &amp; family built in the Jamstack style and using serverless functions. The most interesting thing I picked up from this was his method of using serverless functions to protect the app secrets (API keys, etc.). The front end of the application did not need to concern itself with this—​the serverless functions kept the secrets safe and acted as a proxy between the frontend and the backend APIs. Be sure to take a look at [Christian’s code](https://github.com/christiannwamba/quickbank) if you are interested.
 
 ### Managing diabetes with Jamstack
 

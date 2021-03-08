@@ -264,6 +264,6 @@ lstmtraining \
   --continue_from path/to/model/output/checkout \
   --model_output path/to/final/output \
   --stop_training
-``` 
+```
 
 And that’s it — you can now take the output file of that last command and place it inside your `tessdata` folder it immediately Tesseract will be able to use it.

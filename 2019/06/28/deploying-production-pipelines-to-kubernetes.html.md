@@ -109,7 +109,7 @@ The idea is to minimize the boilerplate while retaining the features offered e.g
 
 #### Makefile
 
-```Makefile
+```makefile
 SHELL := /bin/bash
 VERSION?=latest
 TASK_IMAGES:=$(shell find tasks -name Dockerfile -printf '%h ')
@@ -146,7 +146,7 @@ tasks/notebooks tasks/base tasks/preprocess tasks/infer tasks/build_model tasks/
 
 Let’s start off by defining our base Docker image:
 
-```Dockerfile
+```dockerfile
 FROM python:3.7
 
 COPY requirements.txt /requirements.txt
@@ -155,7 +155,7 @@ RUN pip install -r /requirements.txt
 
 Following is the Dockerfile that extends it and adds the Jupyter Lab:
 
-```Dockerfile
+```dockerfile
 FROM endpoint-blog-pipeline/base:latest
 
 RUN pip install jupyterlab

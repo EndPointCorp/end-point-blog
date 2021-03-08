@@ -5,7 +5,7 @@ tags: ruby, rails, email, testing
 gh_issue_number: 1604
 ---
 
-<img src="/blog/2020/03/13/mock-smtp-servers/banner.jpg" alt="Mailboxes" /> [Photo](https://flic.kr/p/5pw1mA) by [Seattleye](https://www.flickr.com/photos/seattleye/), used under [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/), cropped from original.
+<img src="/blog/2020/03/13/mock-smtp-servers/banner.jpg" alt="Mailboxes" /> [Photo](http://web.archive.org/web/20190215161746/https://www.flickr.com/photos/seattleye/2891561034/) by [Seattleye](http://web.archive.org/web/20191122092817/https://www.flickr.com/photos/seattleye/), used under [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/), cropped from original.
 
 Sending automated email to users is a common requirement of most web applications and can take the form of things like password reset emails or order confirmation invoices.
 

@@ -28,7 +28,7 @@ If you’re looking for someone to help, make sure this person has:
 
 Luckily for anyone starting to collect sales tax, there are some very good SaaS (software as a service) systems out there to make tax collection, reporting, and compliance easy. These software systems typically integrate with your ecommerce store by providing the store with the correct tax amount for the sale and collecting information for you on your reports and filing information to get the taxes paid to the correct authorities. Some systems might even file things for you.
 
-After you’ve worked with your tax accountant on what you need, start looking at the available software. The two main companies End Point has worked with are [TaxJar](http://taxjar.com/) and [Avalara](https://www.avalara.com/), though there are a number of other vendors in the market.
+After you’ve worked with your tax accountant on what you need, start looking at the available software. The two main companies End Point has worked with are [TaxJar](https://www.taxjar.com/) and [Avalara](https://www.avalara.com/us/en/index.html), though there are a number of other vendors in the market.
 
 <img src="/blog/2020/01/13/ecommerce-sales-tax-primer/image-1.svg" alt="TaxJar" width="48%" style="padding-right: 2%" />
 <img src="/blog/2020/01/13/ecommerce-sales-tax-primer/image-2.svg" alt="Avalara" width="48%" style="padding-left: 2%" />

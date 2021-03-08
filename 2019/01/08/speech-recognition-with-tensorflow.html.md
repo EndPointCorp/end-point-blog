@@ -1752,7 +1752,7 @@ First of all, I’m using Docker. This way I’m not constrained e.g. by the ver
 
 Here’s the Dockerfile for this project:
 
-```Dockerfile
+```dockerfile
 FROM tensorflow/tensorflow:latest-devel-gpu-py3
 
 RUN apt-get update
@@ -1781,7 +1781,7 @@ CMD supervisord -c /etc/supervisor.conf
 
 I also like to make my life easier and provide the Makefile that automates common project-​related tasks:
 
-```Makefile
+```makefile
 build:
     nvidia-docker build -t speech-recognition:latest .
 run:
