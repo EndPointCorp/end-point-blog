@@ -8,9 +8,9 @@ tags: mysql, database
 [Photo](https://flic.kr/p/nQNYxQ) by [Francois Powell](https://www.flickr.com/photos/119810478@N08/), [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/), cropped
 
 
-MySQL is one of the most widely used open-source relational databases. Most PHP websites rely on MySQL for persisting their information, which makes it one of the top three most popular databases along with Oracle and SQL Server.
+MySQL is one of the most widely used open-source relational databases. Most PHP websites rely on MySQL for persisting their information, which makes it one of the [top three most popular databases along with Oracle and SQL Server](https://towardsdatascience.com/top-10-databases-to-use-in-2021-d7e6a85402ba).
 
-But one of the aspects that is not that popular is that the engine supports working with spatial data, allowing to save different shapes (points, lines, polygons) and query information based on intersections, distances, or overlaps. This can be useful for many needs, including:
+But one of the aspects that is not that well-known is that the engine supports working with spatial data, allowing to save different shapes (points, lines, polygons) and query information based on intersections, distances, or overlaps. This can be useful for many needs, including:
 
 - Searching for places based on lat/long coordinates
 - Displaying information and areas as layers on maps
@@ -42,7 +42,7 @@ INSERT INTO restaurants VALUES ('Restaurant 3', ST_GeomFromText('POINT(-31.11924
 
 ### Querying and filtering with spatial data
 
-Let’s suppose we imported a list of US states from the website above, along with a shape field that holds the geometry associated with each state into a states table. Then, we will be able to get the geometry by just running a SELECT statement:
+Let’s suppose we imported a list of US states from the website above, along with a shape field that holds the geometry associated with each state into a `states` table. Then, we will be able to get the geometry by just running a SELECT statement:
 
 ```sql
 SELECT state_name, ST_AsText(shape) FROM states ORDER BY state_name;
@@ -57,7 +57,7 @@ SELECT state_name, ST_AsText(shape) FROM states ORDER BY state_name;
 *-----------------------------*
 ```
 
-The `ST_AsText()` function allows us to return the shape contents into a string representation instead of the original BLOB format, doing the inverse process of the `ST_GeomFromText()` function we used above. In our application, we can then parse that string and process it the way we need.
+The `ST_AsText()` function will convert the shape contents into a string representation for us to read and parse, doing the inverse process of the `ST_GeomFromText()` function we used above. In our application, we can then parse that string and process it the way we need.
 
 ### Intersecting
 
@@ -89,7 +89,7 @@ The image below shows several weather alerts that was rendered on a <a href="htt
 
 We can avoid writing our own routines to handle spatial data by using MySQL’s built-in spatial types and methods. For most websites, MySQL offers a set of functions (with extended support for geographic and ellipsoid computations since version 8.0) that will provide support for most common scenarios.
 
-On the other hand, if we need a complex solution for a robust spacial-based enterprise application, there are alternatives like PostgreSQL’s postGIS that might be better suited to our purpose. MySQL lacks some features like transformations, advanced topology, or BRIN indexes, that might have an impact on our development process, depending on our needs.
+On the other hand, if we need a complex solution for a robust spacial-based enterprise application, there are alternatives like [PostgreSQL’s postGIS](https://postgis.net/) that might be better suited to our purpose. MySQL lacks some advanced features like transformations, custom topology handling, or BRIN indexes, that might have an impact on our development process, depending on our needs.
 
 ### Resources
 
