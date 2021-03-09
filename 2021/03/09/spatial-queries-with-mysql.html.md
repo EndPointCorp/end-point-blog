@@ -4,7 +4,7 @@ title: 'Spatial queries with MySQL'
 tags: mysql, database
 ---
 
-<img src="/blog/2021/03/09/spatial-queries-with-mysql/spatial-queries-with-mysql.jpg" alt="Spatial queries with MySQL" />
+<img src="spatial-queries-with-mysql/spatial-queries-with-mysql.jpg" alt="Spatial queries with MySQL" />
 [Photo](https://flic.kr/p/nQNYxQ) by [Francois Powell](https://www.flickr.com/photos/119810478@N08/), [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/), cropped
 
 But one of the aspects that is not that popular is that the engine supports working with spatial data, allowing to save different shapes (points, lines, polygons) and query information based on intersections, distances, or overlaps. This can be useful for many needs, including:
@@ -80,7 +80,7 @@ This query will give us a list of restaurants, sorted by name, that are within 1
 
 The image below shows several weather alerts that was rendered on a <a href="https://leafletjs.com/" target="_blank">Leaflet.js</a> map and fetched from a polygon shape field in MySQL:
 
-![](/blog/2021/03/09/spatial-queries-with-mysql/polygons-in-leafletjs-map.jpg)
+![](spatial-queries-with-mysql/polygons-in-leafletjs-map.jpg)
 
 ### Conclusion
 
