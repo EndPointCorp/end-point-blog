@@ -67,7 +67,7 @@ For example, we can get a list of states that intersects with a given shape. To 
 SELECT s.state_name FROM states s WHERE ST_Intersects(s.shape, ST_GeomFromText(?, 1)) ORDER BY s.state_name;
 ```
 
-We can define our geometry to be any shape we need. For example, if we want to know which state contains a given point, we can set our parameter to something like `'POINT(40.69 -74.25)'`' which should return the state of New York.
+We can define our geometry to be any shape we need. For example, if we want to know which state contains a given point, we can set our parameter to something like `'POINT(40.69 -74.25)'` which should return the state of New York.
 
 If we have a polygon, we can set the parameter to specify a polygon shape, i.e. `'POLYGON((40.69 -74.25, 41.10 -74.25, 41.10 -76.11, 40.69 -76.11, 40.69 -74.25))'` will mean a rectangle that intersects the states of New York and Pennsylvania. In that case, our query will return two rows with both state names.
 
