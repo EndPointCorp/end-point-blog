@@ -64,7 +64,7 @@ The `ST_AsText()` function will convert the shape contents into a string represe
 For example, we can get a list of states that intersects with a given shape. To do that, we will use the `ST_Intersects()` function, which will return a boolean value indicating if two shapes intersect or not.
 
 ```sql
-SELECT s.state_name FROM states s WHERE ST_Intersects(s.shape, ST_GeomFromText(?, 1)) ORDER BY s.state_name;
+SELECT s.state_name FROM states s WHERE ST_Intersects(s.shape, ST_GeomFromText(?)) ORDER BY s.state_name;
 ```
 
 We can define our geometry to be any shape we need. For example, if we want to know which state contains a given point, we can set our parameter to something like `'POINT(40.69 -74.25)'` which should return the state of New York.
@@ -76,7 +76,7 @@ If we have a polygon, we can set the parameter to specify a polygon shape, i.e. 
 Let’s get back to our `restaurants` table. If we want to get a list of restaurants that are within 10 kilometers of our location, we can use the `ST_Distance_Sphere()` function that will return a distance in meters between two points in a sphere (defaulting to Earth’s radius):
 
 ```sql
-SELECT name FROM restaurants WHERE ST_Distance_Sphere(location, ST_GeomFromText(?, 1)) <= 10 * 1000 ORDER BY name;
+SELECT name FROM restaurants WHERE ST_Distance_Sphere(location, ST_GeomFromText(?)) <= 10 * 1000 ORDER BY name;
 ```
 
 This query will give us a list of restaurants, sorted by name, that are within 10 kilometers from the point we pass as a parameter. We should set the parameter as `'POINT(lat long)'` where lat and long represent our current geolocation.
