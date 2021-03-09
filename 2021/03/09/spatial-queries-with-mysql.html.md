@@ -26,8 +26,8 @@ Of course, we can also create a table ourselves that contains any kind of spatia
 
 ```sql
 CREATE TABLE restaurants (
-  name VARCHAR,
-  location GEOMETRY,
+  name VARCHAR(100),
+  location GEOMETRY NOT NULL,
 SPATIAL INDEX(location)
 );
 ```
