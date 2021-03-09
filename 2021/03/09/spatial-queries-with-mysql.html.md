@@ -20,7 +20,7 @@ My first experience with spacial queries was for a weather website I developed t
 
 ### Adding spatial information
 
-There are many resources available to import spatial information into our database. On the following link from the United States Census Bureau, we can find a [set of shapefiles with all US states and counties](https://www.census.gov/geographies/mapping-files/time-series/geo/carto-boundary-file.html). The [Back4App](https://www.back4app.com/) social database platform also has many datasets available to download for free.
+There are many resources available to import spatial information into our database. On the following link from the United States Census Bureau, we can find a [set of shapefiles with all US states and counties](https://www.census.gov/geographies/mapping-files/time-series/geo/carto-boundary-file.html). The [Back4App social database platform](https://www.back4app.com/database) also has many datasets available to download for free.
 
 Of course, we can also create a table ourselves that contains any kind of spatial information. In the example below, we will create a table named restaurants which will have a name and location (lat/long) geometry for each row.
 
