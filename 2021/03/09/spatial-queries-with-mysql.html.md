@@ -7,6 +7,9 @@ tags: mysql, database
 <img src="spatial-queries-with-mysql/spatial-queries-with-mysql.jpg" alt="Spatial queries with MySQL" />
 [Photo](https://flic.kr/p/nQNYxQ) by [Francois Powell](https://www.flickr.com/photos/119810478@N08/), [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/), cropped
 
+
+MySQL is one of the most widely used open-source relational databases. Most PHP websites rely on MySQL for persisting their information, which makes it one of the top three most popular databases along with Oracle and SQL Server.
+
 But one of the aspects that is not that popular is that the engine supports working with spatial data, allowing to save different shapes (points, lines, polygons) and query information based on intersections, distances, or overlaps. This can be useful for many needs, including:
 
 - Searching for places based on lat/long coordinates
