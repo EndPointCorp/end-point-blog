@@ -28,7 +28,7 @@ Of course, we can also create a table ourselves that contains any kind of spatia
 CREATE TABLE restaurants (
   name VARCHAR(100),
   location GEOMETRY NOT NULL,
-SPATIAL INDEX(location)
+  SPATIAL INDEX(location)
 );
 ```
 
