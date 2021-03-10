@@ -93,7 +93,7 @@ We should consider that, if we need a complex solution for a robust spacial-base
 
 ### Resources
 
-There are many other functions we can use to work with our spatial data. From getting the centroid associated to a shape in order to automatically center a map view, to simplifying/optimizing existing geometry, I recommend reviewing the following links and start trying things out:
+There are many other functions we can use to work with our spatial data, from getting the centroid associated to a shape in order to automatically center a map view, to simplifying/optimizing existing geometry. I recommend reviewing the following links and start trying things out:
 
 - MySQL spatial function reference (8.0): https://dev.mysql.com/doc/refman/8.0/en/spatial-function-reference.html
 
