@@ -81,7 +81,7 @@ SELECT name FROM restaurants WHERE ST_Distance_Sphere(location, ST_GeomFromText(
 
 This query will give us a list of restaurants, sorted by name, that are within 10 kilometers from the point we pass as a parameter. We should set the parameter as `'POINT(lat long)'` where lat and long represent our current geolocation.
 
-The image below shows several weather alerts that was rendered on a <a href="https://leafletjs.com/" target="_blank">Leaflet.js</a> map and fetched from a polygon shape field in MySQL:
+The image below shows several weather alerts rendered on a <a href="https://leafletjs.com/" target="_blank">Leaflet.js</a> map and fetched from a polygon shape field in MySQL:
 
 ![](spatial-queries-with-mysql/polygons-in-leafletjs-map.jpg)
 
