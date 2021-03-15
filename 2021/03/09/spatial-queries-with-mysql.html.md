@@ -10,7 +10,9 @@ tags: mysql, database
 
 MySQL is one of the most widely used open-source relational databases. Most PHP websites rely on MySQL for persisting their information, which makes it one of the [top three most popular databases along with Oracle and SQL Server](https://towardsdatascience.com/top-10-databases-to-use-in-2021-d7e6a85402ba).
 
-But one of the aspects that is not that well-known is that the engine supports working with spatial data, allowing to save different shapes (points, lines, polygons) and query information based on intersections, distances, or overlaps. This can be useful for many needs, including:
+But one of the aspects that is not that well-known is that the engine supports working with spatial data, allowing to save different shapes (points, lines, polygons) and query information based on intersections, distances, or overlaps. This capability was included in MySQL long time ago, but it became easier to use since version 5.6, when the distance and point intersection functions were added.
+
+Using spatial data can be useful for many needs, including:
 
 - Searching for places based on lat/long coordinates
 - Displaying information and areas as layers on maps
