@@ -3,6 +3,9 @@ author: "Matt Vollrath"
 title: "3D Audio Fundamentals"
 tags: audio
 gh_issue_number: 1703
+featured: yes
+featured_blurb: "Learn the basics of 3D audio: panning, Doppler, HRTF, Reverb, and OpenAL."
+background_url: "/blog/2020/12/05/3d-audio-fundamentals/acoustics.jpg"
 ---
 
 ![Concert hall acoustics](/blog/2020/12/05/3d-audio-fundamentals/acoustics.jpg)
