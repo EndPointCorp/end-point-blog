@@ -83,6 +83,8 @@ SELECT name FROM restaurants WHERE ST_Distance_Sphere(location, ST_GeomFromText(
 
 This query will give us a list of restaurants, sorted by name, that are within 10 kilometers from the point we pass as a parameter. We should set the parameter as `'POINT(lat long)'` where lat and long represent our current geolocation.
 
+![Example of a query to the restaurants table](spatial-queries-with-mysql/restaurants-query-example.jpg)
+
 We can use the distance function for many other purposes, like finding people that are close to each other or planning a road trip for the user.
 
 ### Conclusion
