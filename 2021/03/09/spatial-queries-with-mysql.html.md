@@ -78,7 +78,7 @@ If we have a polygon, we can set the parameter to specify a polygon shape, i.e. 
 Let’s get back to our `restaurants` table. If we want to get a list of restaurants that are close to our location, we can use the `ST_Distance_Sphere()` function that will return a distance in meters between two points in a sphere (defaulting to Earth’s radius):
 
 ```sql
-SELECT name FROM restaurants WHERE ST_Distance_Sphere(location, ST_GeomFromText(?)) <= 10 * 1000 ORDER BY name;
+SELECT * FROM restaurants WHERE ST_Distance_Sphere(location, ST_GeomFromText(?)) <= 10 * 1000 ORDER BY name;
 ```
 
 This query will give us a list of restaurants, sorted by name, that are within 10 kilometers from the point we pass as a parameter. We should set the parameter as `'POINT(lat long)'` where lat and long represent our current geolocation.
