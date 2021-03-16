@@ -75,7 +75,7 @@ If we have a polygon, we can set the parameter to specify a polygon shape, i.e. 
 
 ### Spherical distance
 
-Let’s get back to our `restaurants` table. If we want to get a list of restaurants that are within 10 kilometers of our location, we can use the `ST_Distance_Sphere()` function that will return a distance in meters between two points in a sphere (defaulting to Earth’s radius):
+Let’s get back to our `restaurants` table. If we want to get a list of restaurants that are close to our location, we can use the `ST_Distance_Sphere()` function that will return a distance in meters between two points in a sphere (defaulting to Earth’s radius):
 
 ```sql
 SELECT name FROM restaurants WHERE ST_Distance_Sphere(location, ST_GeomFromText(?)) <= 10 * 1000 ORDER BY name;
@@ -83,15 +83,17 @@ SELECT name FROM restaurants WHERE ST_Distance_Sphere(location, ST_GeomFromText(
 
 This query will give us a list of restaurants, sorted by name, that are within 10 kilometers from the point we pass as a parameter. We should set the parameter as `'POINT(lat long)'` where lat and long represent our current geolocation.
 
-The image below shows several weather alerts rendered on a <a href="https://leafletjs.com/" target="_blank">Leaflet.js</a> map that were fetched from a field of type `GEOMETRY` in MySQL:
-
-![](spatial-queries-with-mysql/polygons-in-leafletjs-map.jpg)
+We can use the distance function for many other purposes, like finding people that are close to each other or planning a road trip for the user.
 
 ### Conclusion
 
 We can avoid writing our own routines to handle spatial data by using MySQL’s built-in spatial types and methods. For most websites, MySQL offers a set of functions (with extended support for geographic and ellipsoid computations since version 8.0) that will provide support for most common scenarios.
 
 We should consider that, if we need a complex solution for a robust spacial-based enterprise application, there are alternatives like [PostgreSQL’s postGIS](https://postgis.net/) that might be better suited to our purpose. MySQL lacks some advanced features like transformations, custom topology handling, or BRIN indexes, that might have an impact on our development process, depending on our needs.
+
+The image below shows several weather alerts rendered on a <a href="https://leafletjs.com/" target="_blank">Leaflet.js</a> map that were fetched from a field of type `GEOMETRY` in MySQL:
+
+![](spatial-queries-with-mysql/polygons-in-leafletjs-map.jpg)
 
 ### Resources
 
