@@ -2,23 +2,22 @@
 author: Juan Pablo Ventoso
 title: 'Spatial queries with MySQL'
 tags: mysql, database
+gh_issue_number: 1725
 ---
 
-<img src="spatial-queries-with-mysql/spatial-queries-with-mysql.jpg" alt="Spatial queries with MySQL" />
+![Spatial queries with MySQL](/blog/2021/03/24/spatial-queries-with-mysql/spatial-queries-with-mysql.jpg)
+
 [Photo](https://flic.kr/p/nQNYxQ) by [Francois Powell](https://www.flickr.com/photos/119810478@N08/), [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/), cropped
 
-
-MySQL is one of the most widely used open-source relational databases. Most PHP websites rely on MySQL for persisting their information, which makes it one of the [top three most popular databases along with Oracle and SQL Server](https://towardsdatascience.com/top-10-databases-to-use-in-2021-d7e6a85402ba).
-
-But one of the aspects that is not that well-known is that the engine supports working with spatial data, allowing to save different shapes (points, lines, polygons) and querying information based on intersections, distances, or overlaps. This capability was included in MySQL a long time ago, but it became easier to use since version [5.6](https://dev.mysql.com/doc/refman/5.6/en/), when the distance and point intersection functions were added.
+MySQL is one of the most widely used open-source relational databases. Most PHP websites rely on MySQL for persisting their information, which makes it one of the [top three most popular databases along with Oracle and SQL Server](https://towardsdatascience.com/top-10-databases-to-use-in-2021-d7e6a85402ba). But one of the aspects that is not very well known is that the engine supports working with spatial data, allowing you to save different shapes (points, lines, polygons) and querying information based on intersections, distances, or overlaps. This capability was included in MySQL a long time ago, but it became easier to use starting in version [5.6](https://dev.mysql.com/doc/refman/5.6/en/), when the distance and point intersection functions were added.
 
 Using spatial data can be useful for many needs, including:
 
-- Searching for places based on lat/long coordinates
-- Displaying information and areas as layers on maps
-- Architecture or home design applications
+- Searching for places based on lat/long coordinates.
+- Displaying information and areas as layers on maps.
+- Architecture or home design applications.
 
-My first experience with spacial queries was for a weather website I developed that displays local alerts/warnings on a map, using MySQL spatial functions to return weather alerts that are active for a given location, or to inform if lightning has been observed near the user's current coordinates. So far, MySQL has given me all the resources I need to do such operations with relatively good performance and without needing to write lots of custom code.
+My first experience with spatial queries was for a weather website I developed that displays local alerts/warnings on a map using MySQL spatial functions to return active weather alerts for a given location, or to inform if lightning has been observed near the user’s current coordinates. So far, MySQL has given me all the resources I need to do such operations with relatively good performance and without needing to write lots of custom code.
 
 ### Adding spatial information
 
@@ -83,7 +82,7 @@ SELECT * FROM restaurants WHERE ST_Distance_Sphere(location, ST_GeomFromText(?))
 
 This query will give us a list of restaurants, sorted by name, that are within 10 kilometers from the point we pass as a parameter. We should set the parameter as `'POINT(lat long)'` where lat and long represent our current geolocation.
 
-![Example of a query to the restaurants table](spatial-queries-with-mysql/restaurants-query-example.jpg)
+![Example of a query to the restaurants table](/blog/2021/03/24/spatial-queries-with-mysql/restaurants-query-example.jpg)
 
 We can use the distance function for many other purposes, like finding people that are close to each other or planning a road trip for the user.
 
@@ -91,18 +90,18 @@ We can use the distance function for many other purposes, like finding people th
 
 We can avoid writing our own routines to handle spatial data by using MySQL’s built-in spatial types and methods. For most websites, MySQL offers a set of functions (with extended support for geographic and ellipsoid computations since version 8.0) that will provide support for most common scenarios.
 
-We should consider that, if we need a complex solution for a robust spacial-based enterprise application, there are alternatives like [PostgreSQL’s postGIS](https://postgis.net/) that might be better suited to our purpose. MySQL lacks some advanced features like transformations, custom topology handling, or BRIN indexes, that might have an impact on our development process, depending on our needs.
+We should consider that, if we need a complex solution for a robust spatial-based enterprise application, there are alternatives like [PostgreSQL’s postGIS](https://postgis.net/) that might be better suited to our purpose. MySQL lacks some advanced features like transformations, custom topology handling, or BRIN indexes, that might have an impact on our development process, depending on our needs.
 
-The image below shows several weather alerts rendered on a <a href="https://leafletjs.com/" target="_blank">Leaflet.js</a> map that were fetched from a field of type `GEOMETRY` in MySQL:
+The image below shows several weather alerts rendered on a [Leaflet.js](https://leafletjs.com/) map that were fetched from a field of type `GEOMETRY` in MySQL:
 
-![](spatial-queries-with-mysql/polygons-in-leafletjs-map.jpg)
+![](/blog/2021/03/24/spatial-queries-with-mysql/polygons-in-leafletjs-map.jpg)
 
 ### Resources
 
-There are many other functions we can use to work with our spatial data, from getting the centroid associated to a shape in order to automatically center a map view, to simplifying/optimizing existing geometry. I recommend reviewing the following links and start trying things out:
+There are many other functions we can use to work with our spatial data, from getting the centroid associated to a shape in order to automatically center a map view, to simplifying/​optimizing existing geometry. I recommend reviewing the following links and start trying things out:
 
-- MySQL spatial function reference (8.0): https://dev.mysql.com/doc/refman/8.0/en/spatial-function-reference.html
+- [MySQL spatial function reference (8.0)](https://dev.mysql.com/doc/refman/8.0/en/spatial-function-reference.html)
 
-- Supported geometry (based on OpenGIS model) (8.0): https://dev.mysql.com/doc/refman/8.0/en/opengis-geometry-model.html
+- [Supported geometry (based on OpenGIS model) (8.0)](https://dev.mysql.com/doc/refman/8.0/en/opengis-geometry-model.html)
 
-- GeoJSON support functions: https://dev.mysql.com/doc/refman/5.7/en/spatial-geojson-functions.html
+- [GeoJSON support functions](https://dev.mysql.com/doc/refman/5.7/en/spatial-geojson-functions.html)
