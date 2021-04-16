@@ -9,8 +9,8 @@ For me, setting up a service started as a clean one-liner that used `InstallUtil
 Creating an installer can be tricky, because not all the available features are easy to find. In fact, the setup project itself is not included by default in Visual Studio; you need to install an extension in order to create one. But once the installer is created, we can use it to do things like:
 
 - Configure the installer to copy the build output of a project to the `C:\Program Files (x86)` folder, as well as add custom files & folders to the installation
-- Add custom CLI flags to the installer so that the service Logon account can be customized at install time.
-- Add an installer class and write custom code to run at different stages of the installation.
+- Add custom CLI flags to the installer to specify the **Service Logon Account** at install time
+- Add an installer class to the service and use the installation lifecycle hooks to write custom code that gets run at any stage of the installation.
 
 Do note that for .NET Core and .NET 5.0 projects, you won't be able to add an installer class.
 
@@ -34,17 +34,17 @@ Here, clicking on any folder on the left shows its contents over on the right. I
 
 ![Application Folder Properties](/2021/04/15/automating-windows-service-installation/application-folder-properties-window.jpg)
 
-In the above example, we can see that the **Application Folder** is being output to a folder inside Program Files. You can add any folders you want to the file system by right-clicking on the file system to open the Special Folders context menu:
+In the above example, we can see that the **Application Folder** is being output to a folder inside `C:\Program Files (x86)`. You can add any folders you want to the file system by right-clicking on the file system to open the Special Folders context menu:
 
 ![Special Folder Context Menu](/2021/04/15/automating-windows-service-installation/special-folder-context-menu.jpg)
 
-Some default folders are shown here for convenience. But let’s say we wanted to make some files get added to the C:\ProgramData folder. To do this, select "Custom Folder", and give it a name. Then in the **Properties Window**, set the value of `DefaultLocation` to the correct path:
+Some default folders are shown here for convenience. But let’s say we wanted to make some files get added to the `C:\ProgramData` folder. To do this, select "Custom Folder", and give it a name. Then in the **Properties Window**, set the value of `DefaultLocation` to the correct path:
 
 ![ProgramData Properties](/2021/04/15/automating-windows-service-installation/program-data-properties-window.jpg)
 
-From here, you can use the right half of the view to add additional folders within C:\ProgramData\DotNetDemoService based on your needs.
+From here, you can use the right half of the view to add additional folders within `C:\ProgramData\DotNetDemoService` based on your needs.
 
-Another thing you’ll likely want to do is put the dlls from your application into a folder within C:\Program Files (x86)\. You can easily do this by mapping the primary build output of your project to the Application Folder in the installer’s file system. To do this, right-click on the **Application Folder**, and add project output:
+Another thing you’ll likely want to do is put the dlls from your application into a folder within `C:\Program Files (x86)`. You can easily do this by mapping the primary build output of your project to the Application Folder in the installer’s file system. To do this, right-click on the **Application Folder**, and add project output:
 
 ![Adding Project Output](/2021/04/15/automating-windows-service-installation/add-project-output.jpg)
 
