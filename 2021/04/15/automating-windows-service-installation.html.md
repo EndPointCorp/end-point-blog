@@ -12,7 +12,14 @@ Creating an installer can be tricky, because not all the available features are 
 - Add custom CLI flags to the installer to specify the **Service Logon Account** at install time
 - Add an installer class to the service and use the installation lifecycle hooks to write custom code that gets run at any stage of the installation.
 
-Do note that for .NET Core and .NET 5.0 projects, you won't be able to add an installer class.
+### A Note On Compatibility
+
+For .NET Core and .NET 5.0 projects, you won't be able to add an installer class. If you want to use either .NET Core or .NET 5.0 to make a service instead, you'd need to make a different kind of project called a **Worker Service**. A **Worker Service** differs from a traditional **Windows Service** in that it's more like a console application that spawns off a worker process on a new thread. It _can_ be configured to run as a windows service, but doesn't have to be. So instead of using an installer, for a **Worker Service** you'd publish the project to an output directory and then use the `SC.exe` utility to add it as a windows service:
+
+```bat
+dotnet publish -o C:\<PUBLISH_PATH>
+SC CREATE <WORKER_NAME> C:\<PUBLISH_PATH>
+```
 
 ### Creating a Windows Setup Project
 
