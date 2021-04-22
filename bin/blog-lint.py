@@ -31,7 +31,8 @@ if args.outfile and not args.force and os.path.isfile(args.output_file):
     sys.exit(3)
 
 # Run `node update-hljs-list.js` to update
-highlight_languages = json.load(open('supported_languages.json', 'r'))
+
+highlight_languages = json.load(open(os.path.join(os.path.dirname(__file__), 'supported_languages.json'), 'r'))
 
 highlight_languages += ['nohighlight', 'plaintext']
 
