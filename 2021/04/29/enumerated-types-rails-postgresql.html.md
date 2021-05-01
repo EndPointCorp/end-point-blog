@@ -1,21 +1,22 @@
 ---
 author: "Patrick Lewis"
 title: "Enumerated Types in Rails and PostgreSQL"
-tags: ruby, rails, postgresql
+tags: ruby, rails, postgres
+gh_issue_number: 1735
 ---
 
 ![enumeration](/blog/2021/04/29/enumerated-types-rails-postgresql/banner.jpg)
 [Photo](https://flic.kr/p/euTck) by [Jared Tarbell](https://flickr.com/people/generated/), used under [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/), cropped from original.
 
-[Enumerated types](https://en.wikipedia.org/wiki/Enumerated_type) are a useful programming tool when dealing with variables that have a predefined, limited set of potential values. An example of an enumerated type from Wikipedia is "the four suits in a deck of playing cards may be four enumerators named Club, Diamond, Heart, and Spade, belonging to an enumerated type named suit".
+Enumerated types are a useful programming tool when dealing with variables that have a predefined, limited set of potential values. An example of an enumerated type from [Wikipedia](https://en.wikipedia.org/wiki/Enumerated_type) is “the four suits in a deck of playing cards may be four enumerators named Club, Diamond, Heart, and Spade, belonging to an enumerated type named suit”.
 
-I use enumerated types in my Rails applications most often for model attributes like "status" or "category". Rails' implementation of enumerated types in [ActiveRecord::Enum](https://api.rubyonrails.org/classes/ActiveRecord/Enum.html) provides a way to define sets of enumerated types and automatically makes some convenient methods available on models for working with enumerated attributes. The simple syntax does belie some potential pitfalls when it comes to longer-term maintenance of applications, however, and as I'll describe later in this post, I would caution against using this basic 1-line syntax in most cases:
+I use enumerated types in my Rails applications most often for model attributes like “status” or “category”. Rails’ implementation of enumerated types in [ActiveRecord::Enum](https://api.rubyonrails.org/classes/ActiveRecord/Enum.html) provides a way to define sets of enumerated types and automatically makes some convenient methods available on models for working with enumerated attributes. The simple syntax does belie some potential pitfalls when it comes to longer-term maintenance of applications, however, and as I’ll describe later in this post, I would caution against using this basic 1-line syntax in most cases:
 
 ```ruby
 enum status: [:active, :archived]
 ```
 
-The Rails implementation of enumerated types maps values to integers in database rows by default. This can be surprising the first time it is encountered, as a Rails developer looking to store status values like "active" or "archived" would typically create a string-based column. Instead, Rails looks for an numeric type column and stores the index of the selected enumerated value (0 for active, 1 for archived, etc.).
+The Rails implementation of enumerated types maps values to integers in database rows by default. This can be surprising the first time it is encountered, as a Rails developer looking to store status values like “active” or “archived” would typically create a string-based column. Instead, Rails looks for an numeric type column and stores the index of the selected enumerated value (0 for active, 1 for archived, etc.).
 
 This exposes one of the first potential drawbacks of this minimalist enumerated type implementation: the stored integer values can be difficult to interpret outside the context of the Rails application. Although querying records in a Rails console will map the integer values back to their enumerated equivalents, other database clients are simply going to return the mapped integer values instead, leaving it up to the developer to look up what those 0 or 1 values are supposed to represent.
 
@@ -35,7 +36,7 @@ enum status: {
 }
 ```
 
-This provides the benefit of both documenting which integers are mapped to which enumerated values, and also provides more flexibility for future adjustments. For example, a new status value can now be added to the enumerated type without disrupting any of the existing records:
+This provides the benefit of documenting which integers are mapped to which enumerated values, and also provides more flexibility for future adjustments. For example, a new status value can now be added to the enumerated type without disrupting any of the existing records:
 
 ```ruby
 enum status: {
@@ -45,9 +46,9 @@ enum status: {
 }
 ```
 
-For Rails applications with PostgreSQL databases, it's possible to go one step further and get most of the best of both worlds; the efficiency of using predefined enumerated types while still maintaining the ability to store meaningful string values at the database level. This is made possible by combining Rails enums with [PostgreSQL Enumerated Types](https://www.postgresql.org/docs/current/datatype-enum.html).
+For Rails applications with PostgreSQL databases, it’s possible to go one step further and get most of the best of both worlds: the efficiency of using predefined enumerated types while still maintaining the ability to store meaningful string values at the database level. This is made possible by combining Rails enums with [PostgreSQL Enumerated Types](https://www.postgresql.org/docs/current/datatype-enum.html).
 
-This technique requires using a migration to first define a new enumerated type in the database, and then creating a column in the model's table to use that PostgreSQL type:
+This technique requires using a migration to first define a new enumerated type in the database, and then creating a column in the model’s table to use that PostgreSQL type:
 
 ```ruby
 class AddEnumeratedStatusToDevices < ActiveRecord::Migration[5.2]

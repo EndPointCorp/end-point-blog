@@ -1,7 +1,7 @@
 ---
 author: "Emre Hasegeli"
 title: "Database Design: Using Natural Keys"
-tags: database, postgresql
+tags: database, postgres
 gh_issue_number: 1723
 ---
 
