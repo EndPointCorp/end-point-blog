@@ -2,9 +2,13 @@
 author: "Daniel Gomm"
 title: "Integrating Laravel With a React Frontend"
 tags: php,laravel,react,integration
+gh_issue_number: 1737
 ---
 
-Frontend frameworks can be useful, and provide a lot of advantages over server-side rendering of views. It’s not uncommon now for websites to be purely presentational frontend applications. Thankfully Laravel provides some helpers for including a dedicated frontend, including a fantastic npm package, laravel-mix, which heavily simplifies the use of webpack.
+![](/blog/2021/05/04/integrating-laravel-with-a-react-frontend/banner.jpg)
+Photo by [Scott Webb](https://unsplash.com/@scottwebb) on [Unsplash](https://unsplash.com/photos/K8PXJMU2-3s)
+
+Frontend frameworks can be useful, and provide a lot of advantages over server-side rendering of views. It’s not uncommon now for websites to be purely presentational frontend applications. Thankfully [Laravel](https://laravel.com/) provides some helpers for including a dedicated frontend, including a fantastic npm package, laravel-mix, which heavily simplifies the use of webpack.
 
 In this article I’ll go over how to set up a new Laravel application to work with React as its frontend. While this article may focus on React, the main issues are the same regardless of framework. You’ll need to:
 
@@ -35,9 +39,9 @@ mix
   .sass("resources/sass/app.scss", "public/css");
 ```
 
-To run this build process, the `npm run dev` command. This will use laravel-mix to compile everything specified in `webpack.mix.js`. The output directory for the build is also specified there. You can also start a basic development server by running `php artisan serve`.
+To run this build process, use the `npm run dev` command. This will use laravel-mix to compile everything specified in `webpack.mix.js`. The output directory for the build is also specified there. You can also start a basic development server by running `php artisan serve`.
 
-This works just fine out of the box, but one thing worth noting is that by default, it’ll package all the code, including your dependencies, in the same file: `public/js/app.js`. This will cause the entire dependency tree to be reloaded by making even a single line change to your code. You can use the `mix.extract()` helper to put the modules into a separate file, `public/js/vendor.js`. This allows the browser to cache your dependencies, which won't change to much, separate from your application, which will change much more often. Here's how this looks in `webpack.mix.js`:
+This works just fine out of the box, but one thing worth noting is that by default, it’ll package all the code, including your dependencies, in the same file: `public/js/app.js`. This will cause the entire dependency tree to be reloaded if you make even a single line change to your code. You can use the `mix.extract()` helper to put the modules into a separate file, `public/js/vendor.js`. This allows the browser to cache your dependencies, which won't change t=o much, separately from your application, which will change much more often. Here's how this looks in `webpack.mix.js`:
 
 ```javascript
 mix
@@ -99,7 +103,7 @@ Make sure you add this at the very bottom of `/routes/web.php`, so that it’s t
 
 One other thing that’s important to mention is that by default Laravel has built in features for generating and verifying CSRF tokens. This is set up in the `VerifyCsrfToken` middleware class that comes bundled with a fresh application. It provides nice and easy helpers for Blade pages like `@csrf` to ease adding this to your forms as a hidden input. However, if you’re making forms outside of Blade in React, you might receive an error page that says **419 Page Expired** when you try to submit a form or send a request:
 
-![419 Page Expired Error](/2021/04/19/integrating-laravel-with-a-react-frontend/419-page-expired.jpg)
+![419 Page Expired Error](/blog/2021/05/04/integrating-laravel-with-a-react-frontend/419-page-expired.jpg)
 
 This error happens for both vanilla HTML forms, and when sending a POST request via javascript, depending on the library being used. For example, I’ve encountered this issue when using **jQuery**, but not **axios**.
 
@@ -121,7 +125,7 @@ class VerifyCsrfToken extends Middleware
 
 However, this removes CSRF protection entirely and in most cases, you’ll want the CSRF protection in your forms. This can be done by setting either `X-XSRF-TOKEN` or `X-CSRF-TOKEN` request headers, and also by adding a `_token` property to the request parameters containing the CSRF token. It’s important to note that these similarly named values are not the same thing. The **XSRF** token is just an encrypted version of the actual **CSRF** token. Laravel 8 always sets the `XSRF-TOKEN` cookie in the response headers by default:
 
-![XSRF-TOKEN Cookie](/2021/04/19/integrating-laravel-with-a-react-frontend/xsrf-token-cookie.jpg)
+![XSRF-TOKEN Cookie](/blog/2021/05/04/integrating-laravel-with-a-react-frontend/xsrf-token-cookie.jpg)
 
 This means that `XSRF-TOKEN` is defined in `document.cookie` when the page loads. You can configure jQuery to always set this header in every request with the `$.ajaxSetup()` function:
 
