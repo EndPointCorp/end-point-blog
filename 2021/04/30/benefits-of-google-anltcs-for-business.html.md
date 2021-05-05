@@ -5,7 +5,7 @@ tags: seo, analytics
 gh_issue_number: 1736
 ---
 
-![](/blog/2021/04/30/benefits-of-google-analytics-for-business/banner.png)
+![](/blog/2021/04/30/benefits-of-google-anltcs-for-business/banner.png)
 Image from [Google’s marketing platform blog](https://blog.google/products/marketingplatform/analytics/new_google_analytics/)
 
 Where is your traffic coming from? What drew the traffic to your website? Which parts of your website are most visited? How do visits change over time? And how can the answers to these questions help you?
@@ -24,14 +24,14 @@ Bottlenecks include traffic getting stuck on one page, when you want them to be 
 
 For example, we observed that our “Deployment Automation” Expertise subpage has had a 100% bounce rate over the past three months. This is concerning because it means that the content may not be engaging or there may not be a clear visitor navigation path, the end goal being a contact submission. Analytics helped us start looking at how to strengthen this subpage.
 
-![](/blog/2021/04/30/benefits-of-google-analytics-for-business/image-1.jpg)
+![](/blog/2021/04/30/benefits-of-google-anltcs-for-business/image-1.jpg)
 Image from [Google’s marketing platform blog](https://blog.google/products/marketingplatform/analytics/new_google_analytics/)
 
 ### Understanding your Audience
 
 Who is coming to your site, and how are they finding you? What referral sites, partner sites, media, and blog posts are directing the most traffic to your page? How can you leverage that?
 
-![](/blog/2021/04/30/benefits-of-google-analytics-for-business/image-2.png)
+![](/blog/2021/04/30/benefits-of-google-anltcs-for-business/image-2.png)
 
 In reviewing your inbound traffic, you will see some combination of the following types of traffic:
 
@@ -45,7 +45,7 @@ In reviewing your inbound traffic, you will see some combination of the followin
 
 We recommend reviewing each type of traffic to get a better understanding of their flow through your website, and noting any trends you find within individual web traffic sources and mediums.
 
-![](/blog/2021/04/30/benefits-of-google-analytics-for-business/image-3.png)
+![](/blog/2021/04/30/benefits-of-google-anltcs-for-business/image-3.png)
 
 ### Data-Driven Decision Making: Stop Relying on Assumptions and Rely on Data
 
