@@ -24,6 +24,7 @@ php artisan ui react
 This will add a new folder `resources/js/components/` with a single file called Example.js in it, which contains a basic stateless functional component called `Example`. It’ll also add a new line to `resources/js/app.js` that requires the `Example` component. Finally, `webpack.mix.js` will be updated to include adding React in the build. I’ll go over what this file does in the next section.
 
 ### Compiling Assets With Laravel Mix
+
 Laravel Mix is an npm package that comes bundled with every Laravel application. It’s not Laravel specific though; you can add it to any application where you want a simple build process. It defines helpers for popular frameworks, React included. The `mix.react()` helper automatically handles adding in Babel to support using JSX syntax.
 For Laravel, the frontend build process is configured in `webpack.mix.js`. By default, it includes some scaffolding code that gives you a general idea of how it can be used:
 
@@ -53,33 +54,15 @@ Then, to actually include your built javascript sources, go to `views/welcome.bl
 <head>
   . . .
   <!-- Include Frontend Application (webpack mix) -->
-  <script src="/js/manifest.js"></script>
-  <script src="/js/vendor.js"></script>
-  <script src="/js/app.js"></script>
+  <script defer src="/js/manifest.js"></script>
+  <script defer src="/js/vendor.js"></script>
+  <script defer src="/js/app.js"></script>
 </head>
 ```
 
 The order is important because each successive script depends on the content of the previous one being defined.
 
-### Getting Things Running
-
-You may notice that, after adding the React scaffolding from `laravel/ui`, it doesn’t work out of the box. The React ui helper we used doesn’t actually add a `div` to the HTML to render the `Example` component into. We can go ahead and replace the welcome page’s `body` section with a container `div`:
-
-```html
-<body class="antialiased">
-  <div id="example"></div>
-</body>
-```
-
-Then, if you give the application a refresh you’ll notice it still won’t load. This is because we also need to add some code to bootstrap the frontend after the page has loaded. I like to just wrap the call to `ReactDOM.render()` within jQuery’s `$(document).ready()` helper. You can do this by going to `Example.js` and adding that in:
-
-```javascript
-$(document).ready(() => {
-  if (document.getElementById("example")) {
-    ReactDOM.render(<Example />, document.getElementById("example"));
-  }
-});
-```
+Notice that all the script tags have the `defer` attribute added to them. This forces the browser to wait until the DOM has fully loaded in order to execute the scripts. If you don’t add the `defer` attribute, you’ll end up with a blank screen when you try to load the application. This happens because the browser will, by default, run your scripts as soon as they’re loaded. And, when they’re in the head section, they get loaded before the body. So, if the script loads before the body, the root element of the React application won’t be in the DOM yet, which in turn causes the application to fail to load.
 
 ### Handling Frontend Routing
 
@@ -123,27 +106,7 @@ However, this removes CSRF protection entirely and in most cases, you’ll want 
 
 ![XSRF-TOKEN Cookie](/2021/04/19/integrating-laravel-with-a-react-frontend/xsrf-token-cookie.jpg)
 
-This means that `XSRF-TOKEN` is defined in `document.cookie` when the page loads. You can configure jQuery to always set this header in every request with the `$.ajaxSetup()` function:
-
-```javascript
-$.ajaxSetup({
-  headers: { "X-XSRF-TOKEN": $.cookie("XSRF-TOKEN") },
-});
-```
-
-To get the actual **CSRF** token itself, you’ll need to use Blade. My preferred way to do this is to add it in as a `<meta>` tag in the `<head>` section of my layout view. In a fresh application, that’s `welcome.blade.php`. You can add it in like this:
-
-```html
-<meta name="csrf-token" content="{{ csrf_token() }}" />
-```
-
-Then you can access it globally with jQuery, and use the `$.ajaxSetup()` function:
-
-```javascript
-$.ajaxSetup({
-  headers: { "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content") },
-});
-```
+This means that `XSRF-TOKEN` is defined in `document.cookie` when the page loads. By default, **axios** (which is included with your new Laravel application) automatically looks for this value in the cookie, and adds it to the request headers.
 
 ### Conclusion
 
