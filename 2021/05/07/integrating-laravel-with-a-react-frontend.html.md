@@ -5,7 +5,7 @@ tags: php, laravel, react
 gh_issue_number: 1737
 ---
 
-![](/blog/2021/05/04/integrating-laravel-with-a-react-frontend/banner.jpg)
+![](/blog/2021/05/07/integrating-laravel-with-a-react-frontend/banner.jpg)
 Photo by [Scott Webb](https://unsplash.com/@scottwebb) on [Unsplash](https://unsplash.com/photos/K8PXJMU2-3s)
 
 Frontend frameworks can be useful, and provide a lot of advantages over server-side rendering of views. It’s not uncommon now for websites to be purely presentational frontend applications. Thankfully [Laravel](https://laravel.com/) provides some helpers for including a dedicated frontend, including a fantastic npm package, laravel-mix, which heavily simplifies the use of webpack.
@@ -86,7 +86,7 @@ Make sure you add this at the very bottom of `/routes/web.php`, so that it’s t
 
 One other thing that’s important to mention is that by default Laravel has built-in features for generating and verifying CSRF tokens. This is set up in the `VerifyCsrfToken` middleware class that comes bundled with a fresh application. It provides nice and easy helpers for Blade pages like `@csrf` to ease adding this to your forms as a hidden input. However, if you’re making forms outside of Blade in React, you might receive an error page that says **419 Page Expired** when you try to submit a form or send a request:
 
-![419 Page Expired Error](/blog/2021/05/04/integrating-laravel-with-a-react-frontend/419-page-expired.jpg)
+![419 Page Expired Error](/blog/2021/05/07/integrating-laravel-with-a-react-frontend/419-page-expired.jpg)
 
 This error happens for both vanilla HTML forms, and when sending a POST request via JavaScript, depending on the library being used. For example, I’ve encountered this issue when using **jQuery**, but not **axios**.
 
@@ -108,7 +108,7 @@ class VerifyCsrfToken extends Middleware
 
 However, this removes CSRF protection entirely and in most cases, you’ll want the CSRF protection in your forms. This can be done by setting either `X-XSRF-TOKEN` or `X-CSRF-TOKEN` request headers, and also by adding a `_token` property to the request parameters containing the CSRF token. It’s important to note that these similarly named values are not the same thing. The **XSRF** token is just an encrypted version of the actual **CSRF** token. Laravel 8 always sets the `XSRF-TOKEN` cookie in the response headers by default:
 
-![XSRF-TOKEN Cookie](/blog/2021/05/04/integrating-laravel-with-a-react-frontend/xsrf-token-cookie.jpg)
+![XSRF-TOKEN Cookie](/blog/2021/05/07/integrating-laravel-with-a-react-frontend/xsrf-token-cookie.jpg)
 
 This means that `XSRF-TOKEN` is defined in `document.cookie` when the page loads. By default, **axios** (which is included with your new Laravel application) automatically looks for this value in the cookie, and adds it to the request headers.
 
