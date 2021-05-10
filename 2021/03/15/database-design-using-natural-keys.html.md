@@ -115,7 +115,7 @@ Many of those frameworks have a rule like requiring all database tables to have 
 
 Even though I am writing this post to support using natural keys, strong conventions built around surrogate keys do certainly help developing complex systems in the “enterprise” environments. They help to keep systems consistent when the developers are more motivated to write code than to read what’s there, while working until they get a better offer from another company.
 
-### Database Performance
+### Performance Consideration
 
 Performance is often an argument in favour of surrogate keys. Surrogate keys can be small auto-incrementing integers which would keep the indexes small, next branches easy to predict, so well performing.
 
@@ -123,6 +123,6 @@ Surrogate keys would take a bit of extra space since otherwise we don’t need t
 
 Some relational databases maintain the tables indexed by the primary key. Such systems are more affected by the size of the primary key. On PostgreSQL all indexes are secondary including the primary key, therefore the primary key is not any more important than the other indexes on the table.
 
-### Multi-Column Keys
+### Composite Keys
 
 Natural keys are often unique together with other keys. This forces the database designer to use multiple columns as keys. Such design has many advantages, which I may cover in future blog posts.
