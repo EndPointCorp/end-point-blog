@@ -36,7 +36,7 @@ We are looking for another talented software developer to consult with our clien
 
 ### About us
 
-End Point is a 19-year-old web consulting company based in New York City, with 39 full-time employees working mostly remotely from home offices. We are experts in web development, database, and DevOps, collaborating using ssh, Screen/tmux, IRC, Google+ Hangouts, Skype, and good old phones.
+End Point is a 19-year-old web consulting company based in New York City, with 39 full-time employees working mostly remotely from home offices. We are experts in web development, database, and DevOps, collaborating using ssh, Screen/​tmux, IRC, Google+ Hangouts, Skype, and good old phones.
 
 We serve over 200 clients ranging from small family businesses to large corporations. We use free software frameworks in a variety of languages including JavaScript, Ruby, Python, Perl, PHP, and Java, tracked by Git, running on Linux.
 

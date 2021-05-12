@@ -6,7 +6,7 @@ gh_issue_number: 1586
 ---
 
 <div style="float: left"><img src="/blog/2020/02/05/end-point-security-tips/image-4.jpg" alt="phishingemail" align="left"></div>
-[Photo](https://flic.kr/p/24YXTiY) from [comparitech.com](https://www.comparitech.com/blog/information-security/common-phishing-scams-how-to-avoid/)
+[Photo](https://www.flickr.com/photos/136770128@N07/40682390390/) from [comparitech.com](https://www.comparitech.com/blog/information-security/common-phishing-scams-how-to-avoid/)
 
 ### Implement Security Measures to Protect Your Organization & Employees
 
@@ -30,13 +30,13 @@ Train everyone in your organization on these fundamentals:
 
 ### A Security Concern: Going Phishing!
 
-<div style="float: right; padding: 20px;"><img src="/blog/2020/02/05/end-point-security-tips/image-1.jpg" alt="phishing fraud" align="right" hspace="10"><p><a href="https://flic.kr/p/2gLaNqk">Photo</a> by <a href="http://www.epictop10.com/">Epic Top 10 Site</a></div>
+<div style="float: right; padding: 20px;"><img src="/blog/2020/02/05/end-point-security-tips/image-1.jpg" alt="phishing fraud" align="right" hspace="10"><p><a href="https://www.flickr.com/photos/182229932@N07/48413882051/">Photo</a> by <a href="https://www.epictop10.com/">Epic Top 10 Site</a></div>
 
 One of the more common ways to steal someone’s private information is through phishing. Phishing is like fishing: you try to catch something. In this case, the ‘fish’ is your data. Someone with malicious intent sends you email to attempt to get you to click on the link, picture, content, etc. within the email. Once you click the link or content within the email, it might take you to a website to enter or reset your password, even ask for your social security number or other personal information. The person with malicious intent would use the information collect to open accounts, purchase items online or resell your personal data. The links within the phishing email might even redirect you to a fake website that mimics a real website to collect your personal data. The goal is to confuse the email recipient into believing that the email message is legit in its attempt to collect personal information from the user.
 
 #### Phishing Exercises
 
-<div style="float: left; padding: 20px;"><img src="/blog/2020/02/05/end-point-security-tips/image-2.jpg" alt="phishing attack" hspace="10"><p><a href="https://flic.kr/p/x9zZ4A">Photo</a> by <a href="https://www.flickr.com/photos/christiaancolen/">Christiaan Colen</a></p></div>
+<div style="float: left; padding: 20px;"><img src="/blog/2020/02/05/end-point-security-tips/image-2.jpg" alt="phishing attack" hspace="10"><p><a href="https://www.flickr.com/photos/christiaancolen/20444222428/">Photo</a> by <a href="https://www.flickr.com/photos/christiaancolen/">Christiaan Colen</a></p></div>
 
 One way to help the staff better their understanding of a phishing email is to practice phishing exercises by setting up an experiment to see which users would click on your test phishing email. If the user clicks on the experiment phishing email, the email administrator would notify the compliance officer and he or she would re-train the staff on how to properly differentiate real emails from phishing emails. Phishing exercises make a great activity for the employees to avoid the email scams and exert more caution in the future.
 
@@ -50,8 +50,8 @@ Companies typically test their firewall with penetration tests and network scans
 
 Some hardware firewall devices to consider include:
 
-- <a href="https://www.watchguard.com/wgrd-products/rack-mount/firebox-m270-m370/" target="_blank">WatchGuard</a>
-- <a href="https://www.cisco.com/c/en/us/products/security/firewalls/index.html/" target="_blank">Cisco Firepower</a>
+- <a href="https://www.watchguard.com/wgrd-products/rack-mount/firebox-m270-m370" target="_blank">WatchGuard</a>
+- <a href="https://www.cisco.com/c/en/us/products/security/firewalls/index.html" target="_blank">Cisco Firepower</a>
 - <a href="https://www.ui.com/unifi-routing/unifi-security-gateway-pro-4/" target="_blank">UniFi Security Gateway Pro</a>
 
 #### Network Assessment &amp; Internal Threat Protection
@@ -76,7 +76,7 @@ New variants of viruses and malware are developed every day, so the antivirus co
 Some antivirus software includes:
 
 - <a href="https://www.webroot.com/us/en/business/smb/endpoint-protection" target="_blank">Webroot Antivirus</a>
-- <a href="https://www.symantec.com/products/endpoint-protection" target="_blank">Symantec Antivirus</a>
+- <a href="https://www.broadcom.com/products/cyber-security/endpoint/end-user" target="_blank">Symantec Antivirus</a>
 
 #### Web Filtering Technology
 
@@ -84,7 +84,7 @@ Web filtering technology blocks websites that are malicious or deemed not approp
 
 There are many competitors out there in this competitive market, and some vendors offer free proof-of-concept testing with their product before you make a big investment. Take a look at:
 
-- <a href="https://www.forcepoint.com/product/url-filtering/" target="_blank">Forcepoint Web Filtering</a>
+- <a href="https://www.forcepoint.com/product/url-filtering" target="_blank">Forcepoint Web Filtering</a>
 - <a href="https://www.webtitan.com/webtitan-gateway/" target="_blank">Web Titan Gateway</a>
 
 #### Data Loss Prevention
@@ -96,7 +96,7 @@ Physically you probably can’t stop someone from walking out with private infor
 Some DLP solutions to consider include:
 
 - <a href="https://www.forcepoint.com/product/dlp-data-loss-prevention" target="_blank">Forcepoint DLP</a>
-- <a href="https://www.symantec.com/products/data-loss-prevention" target="_blank">Symantec DLP</a>
+- <a href="https://www.broadcom.com/products/cyber-security/information-protection/data-loss-prevention" target="_blank">Symantec DLP</a>
 
 #### Email Filtering
 
@@ -108,7 +108,7 @@ The distinct advantage of using hosted email service is that the cost is predict
 
 Email filtering technology available includes:
 
-- <a href="https://products.office.com/en-us/exchange/advance-threat-protection" target="_blank">Office 365 Advanced Threat Protection</a>
+- <a href="https://www.microsoft.com/en-us/microsoft-365/security/office-365-defender" target="_blank">Microsoft Defender for Office 365</a>
 - <a href="https://www.forcepoint.com/product/email-security" target="_blank">Forcepoint Email Filtering</a>
 - <a href="https://www.spamtitan.com/email-filtering-service/" target="_blank">Spam Titan</a>
 
@@ -146,8 +146,8 @@ If you are attacked by ransomware and all the critical systems and desktops are 
 
 Some backup solutions I have worked with have the flexibility to mix and match to fit your configuration needs:
 
-- <a href="https://www.acronis.com/en-us/cloud/service-provider/backup/" target="_blank">Acronis Backup Solution</a>
-- <a href="https://www.rubrik.com/product/overview/" target="_blank">Rubrik</a>
+- <a href="https://www.acronis.com/en-us/products/cloud/backup/" target="_blank">Acronis Backup Solution</a>
+- <a href="https://www.rubrik.com/en/products/cloud-data-management" target="_blank">Rubrik</a>
 - <a href="https://azure.microsoft.com/en-us/services/backup/" target="_blank">Azure Backup</a>
 
 Acronis Cloud Backup allows you to back up to local storage, the cloud, and off-premise, recover a system using a USB drive, back up Office 365 emails, or backup VMware or Hyper-V environments. It also allows you to recover a single file if needed.
@@ -166,8 +166,8 @@ SSL certificates were historically used primarily for higher-security web server
 
 These incidents from just a few weeks in fall 2019 show that we have a long way to go in protecting our technology usage:
 
-1. <a href="https://www.nbcnewyork.com/news/local/Long-Island-Schools-Hacked-District-Forced-to-Pay-88000-in-Ransom-558396441.html" target="_blank">Long Island Schools Hacked; District Forced to Pay $88,000 in Ransom</a>
-2. <a href="https://www.nbcnewyork.com/news/local/NY-School-Delays-Start-of-Year-After-Ransomware-Attack-559322971.html" target="_blank">NY School Delays Start of Year After Ransomware Attack</a>
+1. <a href="https://www.nbcnewyork.com/news/local/long-island-schools-hacked-district-forced-to-pay-88000-in-ransom/1491924/" target="_blank">Long Island Schools Hacked; District Forced to Pay $88,000 in Ransom</a>
+2. <a href="https://www.nbcnewyork.com/news/local/ny-school-delays-start-of-year-after-ransomware-attack/1990459/" target="_blank">NY School Delays Start of Year After Ransomware Attack</a>
 3. <a href="https://www.newsweek.com/tortoiseshell-hacker-hire-military-heroes-fake-website-1461320" target="_blank">Veterans Targeted by Hackers Through Fake Military Heroes Hiring Website</a>
 4. <a href="https://www.zdnet.com/article/hackers-target-transportation-and-shipping-industries-in-new-trojan-malware-campaign/" target="_blank">Hackers Target Transportation and Shipping Companies in New Trojan Malware Campaign</a>
 5. <a href="https://inc42.com/buzz/hacking-routers-webcams-printers-are-the-most-searched-keywords-on-the-dark-web/" target="_blank">Hacking of IoT – Internet of Things (webcams, security cams, printers, home routers)</a>

@@ -8,7 +8,7 @@ gh_issue_number: 1705
 ![](/blog/2020/12/10/drive-destruction/garbage.jpg)
 [Photo](https://www.pexels.com/photo/garbage-lot-2967770/) by [Alex Fu](https://www.pexels.com/@alexfu) from Pexels
 
-How valuable is your data? Losing it to a third party is usually a business’s worst nightmare—​and can cause legal or even criminal repercussions, depending on the drive’s contents and the business’s jurisdiction.
+How valuable is your data? Losing it to a third party is usually a business’s worst nightmare—and can cause legal or even criminal repercussions, depending on the drive’s contents and the business’s jurisdiction.
 
 Every system adminstrator worth their salt knows that running “rm” (or equivalent delete operations) doesn’t actually remove data, it simply removes the file name from the filesystem and leaves the data in place on the disk.
 
