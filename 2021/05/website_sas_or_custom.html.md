@@ -39,8 +39,6 @@ In general, if your budget is small, under 10K, then SAS is most likely for you.
 - Your (brother, sister, friend, cousin) is a talented web progammer.
 - You or your relative have enough time to devot to this endeavor. You will need a lot.
 
-AND you or your (brother, sister, friend, cousin) has a lot of free time. 
-
 The fact is that custom websites are no longer appropriate for the average business owner with less than a 10k minimum start up cost, as well as an approximately 1k - 3k per month budget for ongoing improvements and maintenance. Fifteen  years ago, there was a large open source community, and a lot of unemployed, jack of all trade programmers, looking to team up with the next "big idea" for a piece of the pie.
 
 In todays world, the talented programmers are all working for SAS companies, building tools for you to use to build your own website. In fact, the SAS offerings are so much better and so much more numerous, that building a custom site for the average "small" business makes little sense. 
@@ -67,4 +65,4 @@ The point is that if you plan on doing any volume of business, at some point you
 
 ### Is that all?
 
-Absolutely not. There are endless considerations that can play into your decision. But you have heard the saying ["Analysis paralysis"](https://en.wikipedia.org/wiki/Analysis_paralysis) ? If you have read through this post, you should have some good ideas now where to start. Add or remove considerations to suite you and your business. The most important takeaway from this is to first get a good idea of your needs, so that you can investigate the right things.
+Absolutely not. There are endless considerations that can play into your decision. But you have heard the saying ["Analysis paralysis"](https://en.wikipedia.org/wiki/Analysis_paralysis) ? If you have read through this post, you should have some good ideas now where to start. Add or remove considerations to suite you and your business. The most important takeaway from this is to first get a good idea of your needs, and document them, so that you can investigate the right things. Then, use that list to take note of which solutions "fit" your needs, and which do not. And who knows, you may start with a SAS solution for a few years, and then when things are rolling and you have a better handle on what "custom" needs you have, migrate to a custom built site. There are no set rules. But doing your research, creating a plan, and following that plan will usually serve you much better than just deciding to use a certain approach because the ad you saw was appealing.
