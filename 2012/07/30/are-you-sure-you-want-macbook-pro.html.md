@@ -1,7 +1,7 @@
 ---
 author: Brian Buchalter
 gh_issue_number: 675
-tags: linux, mac
+tags: linux, mac, hardware
 title: Are you sure you want a MacBook Pro?
 ---
 
@@ -9,7 +9,7 @@ The “UltraBooks” trend has been been made popular by Apple’s efforts at ma
 
 ### MacBook Pro Advantages
 
-Let’s be clear, the MacBook Pro (MBP) has a number advantages over my Dell. The Retina display of course trounces my 1376 x 768 resolution on a 15” display. For designers, photographers, and video editors, Retina is a great asset. For someone who spends their day inside Vim and SSH, not so much. Similarly, the MBP’s seven hour battery life is impressive, although I’m sure with my processor intensive work load, it would be lower. But for me, I’m not terribly mobile. I need to be mobile from room to room perhaps, but I don’t find myself without power and needing to complete mission critical work less frequently than my replaceable 90 watt-hour battery can provide over 3 to 4 hours. Similarly, weight is not my number one concern; I simply stash the laptop in my backpack and go.
+Let’s be clear, the MacBook Pro (MBP) has a number advantages over my Dell. The Retina display of course trounces my 1376×768 resolution on a 15" display. For designers, photographers, and video editors, Retina is a great asset. For someone who spends their day inside Vim and SSH, not so much. Similarly, the MBP’s seven hour battery life is impressive, although I’m sure with my processor intensive work load, it would be lower. But for me, I’m not terribly mobile. I need to be mobile from room to room perhaps, but I don’t find myself without power and needing to complete mission critical work less frequently than my replaceable 90 watt-hour battery can provide over 3 to 4 hours. Similarly, weight is not my number one concern; I simply stash the laptop in my backpack and go.
 
 ### Incremental Upgrades
 

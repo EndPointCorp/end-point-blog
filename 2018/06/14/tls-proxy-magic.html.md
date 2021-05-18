@@ -1,7 +1,7 @@
 ---
 author: "David Christensen"
 title: "Instant TLS Upgrades Through Proxy Magic!"
-tags: ecommerce, nginx, proxies, rails, security, sysadmin, hosting, tls
+tags: ecommerce, nginx, rails, security, sysadmin, hosting, tls
 gh_issue_number: 1434
 ---
 

@@ -1,7 +1,7 @@
 ---
 author: Elizabeth Garrett Christensen
 title: Expert Help with Your SaaS System
-tags: ecommerce, saas, bigcommerce, shopify, wordpress, woocommerce, design, project-management
+tags: ecommerce, saas, wordpress, design, project-management
 gh_issue_number: 1415
 ---
 

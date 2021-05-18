@@ -1,7 +1,7 @@
 ---
 author: Juan Pablo Ventoso
 title: 'Spatial queries with MySQL'
-tags: mysql, database, gis
+tags: mysql, database, gis, leaflet
 gh_issue_number: 1725
 ---
 

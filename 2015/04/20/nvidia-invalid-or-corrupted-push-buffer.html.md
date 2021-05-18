@@ -1,7 +1,7 @@
 ---
 author: Neil Elliott
 gh_issue_number: 1116
-tags: linux, liquid-galaxy
+tags: linux, liquid-galaxy, hardware
 title: 'Nvidia: Invalid or Corrupted Push Buffer Stream'
 ---
 

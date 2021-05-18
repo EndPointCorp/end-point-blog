@@ -1,7 +1,7 @@
 ---
 author: Sean Schofield
 gh_issue_number: 68
-tags: ecommerce, spree
+tags: ecommerce, spree, localization
 title: Spree 0.4.0 Released
 ---
 

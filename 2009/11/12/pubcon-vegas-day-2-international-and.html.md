@@ -1,7 +1,7 @@
 ---
 author: Steph Skardal
 gh_issue_number: 219
-tags: conference, seo
+tags: conference, seo, localization
 title: 'PubCon Vegas Day 2: International and Mega Site SEO, and Tools for SEO'
 ---
 

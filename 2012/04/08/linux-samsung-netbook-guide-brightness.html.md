@@ -1,13 +1,11 @@
 ---
 author: Brian Buchalter
 gh_issue_number: 585
-tags: linux, tips
+tags: linux, tips, hardware
 title: Guide to Ubuntu 11.10 on a Samsung Netbook
 ---
 
-
-
-**12.04 UPDATE**: Unsurprisingly, after installing 12.04 which includes the 3.2.x kernel, brightness controls work perfectly out of the box. Sadly, it’s still necessary to tweak modprobe to get wireless working after a suspend/resume. Also, don’t forget to reboot after making the changes!
+**12.04 UPDATE**: Unsurprisingly, after installing 12.04 which includes the 3.2.x kernel, brightness controls work perfectly out of the box. Sadly, it’s still necessary to tweak modprobe to get wireless working after a suspend/​resume. Also, don’t forget to reboot after making the changes!
 
 -----------
 
@@ -25,15 +23,9 @@ Aside from choosing a distro, I found getting the installation to complete succe
 
 > ext4 Filesystem check failure on/dev/mapper/vgsamsungnetbook-lvroot:
 > 
-> 
-> 
 > Operational error.
 > 
-> 
-> 
 > Errors like this usually mean there is a problem with the filesystem that will require user interaction to repair. Before restarting installation reboot to rescue mode or another system that allows you to repair the filesystem interactively. Restart installation after you have corrected the problems on the filesystem.
-> 
-> 
 
 You can see how an error like this might prompt you to run hardware checks. To work around this, simply fire up one of the Live CD installations on your YUMI stick and offer Linux the following incantation:
 
@@ -116,7 +108,7 @@ echo linux-image-generic hold | dpkg --set-selections
 
 ### Choosing a Distro and Desktop Shell
 
-While I had originally planned to use Fedora 16 XCFE spin, I find myself wanting to stay with Ubuntu and Unity. The polish in the interface may be worth a bit of lag, and it seems it’s easy enough to switch shells at login with the little gear icon next to your username. You can easily [add additional shells](http://www.techdrivein.com/2011/05/top-4-lightweight-official-ubuntu-based.html) and experiment with what works for you.
+While I had originally planned to use Fedora 16 XFCE spin, I find myself wanting to stay with Ubuntu and Unity. The polish in the interface may be worth a bit of lag, and it seems it’s easy enough to switch shells at login with the little gear icon next to your username. You can easily [add additional shells](http://www.techdrivein.com/2011/05/top-4-lightweight-official-ubuntu-based.html) and experiment with what works for you.
 
 Unity2D works reasonably well, despite a bit of delay. Moreover, [adding lenses to Dash](https://askubuntu.com/questions/38772/what-lenses-for-unity-are-available) seems like it will make the interface even more usable. I guess I did want some of the bells and whistles, but not always, especially when I need to save battery life. But isn’t this kind of flexibility the point of Linux and Free software in general?
 
@@ -124,6 +116,4 @@ Unity2D works reasonably well, despite a bit of delay. Moreover, [adding lenses 
 
 Several times over the last few days of banging my head against the wall, I found myself thinking about Apple’s MacBook Air. It’s hard to argue the hardware is world class and OS X can be made to do most things a Linux distro can, while providing rock-solid power and device management with a slick UI. However, I just couldn’t bring myself to shell out $999 upfront, with the obligatory because-you’re-on-your-own-without AppleCare ($249), plus all the little Apple lock-in-gotchas that I knew were down the road.
 
-Instead, I paid $315 for hardware that I can actually modify with additional batteries ($75/each/4hrs life) and a [SSD upgrade ($85 for 40 GB)](https://www.newegg.com/Product/Product.aspx?Item=N82E16820167046). I guess the bottom line is, if you’re a developer, or a system administrator, it may seem like the Apple product is a way to avoid the pain of running Linux on something other than a server. However, by deciding to fight the good fight, I’ve saved $773 (after planned upgrades!) but spent 20 hours of time, which means I paid myself about $40/hr to learn a few things. That’s a great rate of return and now that the pain is over, it all seems worth it.
-
-
+Instead, I paid $315 for hardware that I can actually modify with additional batteries ($75/each/4hrs life) and a [SSD upgrade ($85 for 40 GB)](https://www.newegg.com/Product/Product.aspx?Item=N82E16820167046). I guess the bottom line is, if you’re a developer, or a system administrator, it may seem like the Apple product is a way to avoid the pain of running Linux on something other than a server. However, by deciding to fight the good fight, I’ve saved $773 (after planned upgrades!) but spent 20 hours of time, which means I paid myself about $40/hour to learn a few things. That’s a great rate of return and now that the pain is over, it all seems worth it.

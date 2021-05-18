@@ -1,7 +1,7 @@
 ---
 author: Jon Jensen
 title: Work philosophy canon
-tags: company, books, training
+tags: company, books, training, culture
 gh_issue_number: 1422
 ---
 

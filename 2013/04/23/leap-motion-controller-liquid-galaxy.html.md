@@ -1,7 +1,7 @@
 ---
 author: Dave Jenkins
 gh_issue_number: 789
-tags: google-earth, liquid-galaxy
+tags: google-earth, liquid-galaxy, hardware
 title: Leap Motion Controller + Liquid Galaxy
 ---
 
