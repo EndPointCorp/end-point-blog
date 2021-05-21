@@ -125,4 +125,4 @@ Some relational databases maintain the tables indexed by the primary key. Such s
 
 ### Composite Keys
 
-Natural keys are often unique together with other keys. This forces the database designer to use multiple columns as keys. Such design has many advantages, which I may cover in future blog posts.
+Natural keys are often unique together with other keys. This leads the database designer to use multiple columns as keys. Such design has many advantages, which I [cover in another blog post](/blog/2021/05/20/database-design-using-composite-keys).
