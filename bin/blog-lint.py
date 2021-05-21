@@ -299,7 +299,7 @@ for b in code_blocks:
 
     # Check indentation level and whether tabs are used
     for l in b.lines:
-        has_tabs = has_tabs or bool(re.match(r'.*\t.*', l.line))
+        has_tabs = has_tabs or bool(l.line.find('\t') >= 0)
         indent = len(l.line) - len(l.line.lstrip(' '))
         if (smallest_indent is None or indent < smallest_indent) and not l.line.startswith('```'):
             smallest_indent = indent
@@ -319,7 +319,7 @@ def check_spellings(line):
         {
             'regex': r'\s+$',
             'ideal': '',
-            'message': "Remove whitespace before end of line",
+            'message': "Remove whitespace at end of line",
             'forKeepers': True,
         },
     ]
@@ -350,7 +350,7 @@ def check_spellings(line):
             'forKeepers': True,
         },
         {
-            'regex': r'[^\s]/[^​]',
+            'regex': r'[^\s]/[^\u200b]',
             'ideal': '',
             'message': "Add zero-width breaking space after / between words",
             'forKeepers': True,
@@ -401,7 +401,7 @@ def check_spellings(line):
             errors.add(Warning(line, c['message'], c['forKeepers'] if 'forKeepers' in c else False))
 
 
-    without_code = re.sub(r'`[^`]*`', '', line.line)
+    without_code = re.sub(r'`[^`]+`', '', line.line)
     without_html = re.sub(r'<.*?>', '', without_code)
     without_links = re.sub(r'\[([^\]]*)\]\([^\)]*\)', r'\1', without_html)
 
@@ -434,22 +434,22 @@ def check_links(line):
         },
         # This next one might be unnecessary since fetching it will reveal issues
         {
-            'regex': r'^https://[^\.]*\.endpoint\.com',
+            'regex': r'^https://[^.]*\.endpoint\.com',
             'ideal': ['https://liquidgalaxy.endpoint.com', 'https://www.endpoint.com'],
             'message': 'The only allowed subdomain for endpoint.com links is liquidgalaxy.endpoint.com',
         }
     ]
 
-    without_code = re.sub(r'`[^`]*`', '', line.line)
+    without_code = re.sub(r'`[^`]+`', '', line.line)
     links = re.findall(r'\[[^\]]*\]\(([^\)]*)\)', without_code)
     links += (re.findall(r'href="([^"]*)"', without_code))
 
     for link in links:
         url_base = 'https://www.endpoint.com'
         check_certs = True
-        match = re.search(r'\/camp([0-9]{1,3})\/', os.getcwd())
+        match = re.search(r'\/camp([0-9]{1,2})\/', os.getcwd())
         if match:
-            url_base = f'https://www.{match.group(1)}.camp.endpoint.com:91{match.group(1)}'
+            url_base = f'https://www.{match.group(1)}.camp.endpoint.com:91{int(match.group(1)):02d}'
             check_certs = False
 
         # Check response codes
