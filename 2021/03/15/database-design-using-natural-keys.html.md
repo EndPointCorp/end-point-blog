@@ -1,7 +1,7 @@
 ---
 author: "Emre Hasegeli"
 title: "Database Design: Using Natural Keys"
-tags: database, design, development, mysql, performance, postgres, sql, sql-server, tips
+tags: database, development, performance, postgres, sql
 gh_issue_number: 1723
 ---
 
