@@ -1,18 +1,18 @@
 ---
 author: "Emre Hasegeli"
 title: "Database Design: Using Composite Keys"
-tags: database, design, development, mysql, performance, postgres, sql, sql-server, tips
+tags: database, development, performance, postgres, sql
 gh_issue_number: 1745
 ---
 
 ![](/blog/2021/05/20/database-design-using-composite-keys/shipping-containers.jpg)
 [Photo](https://unsplash.com/photos/kyCNGGKCvyw) by [Chuttersnap](https://unsplash.com/@chuttersnap)
 
-Whether to use single-column or composite keys is another long-debated subject of database design. I previously wrote to support [using natural keys](https://en.wikipedia.org/wiki/Natural_key) and here I want to make good cases for using composite keys.
+Whether to use single-column or composite keys is another long-debated subject of database design. I previously wrote to support [using natural keys](/blog/2021/03/15/database-design-using-natural-keys) and here I want to make good arguments for using composite keys.
 
-### Single-column vs Composite
+### Single-column vs. Composite
 
-Single-column keys are widely used nowadays. I wouldn’t be surprised if many developers today don’t even think database design with composite keys is possible, even though they were essential in the beginning. Relational databases make no assumption that the keys must be composed from a single column.
+Single-column keys are widely used nowadays. I wouldn’t be surprised if many developers today don’t even think database design with composite keys is possible, even though they were essential in the beginning. Relational databases make no assumption that the keys must be composed of a single column.
 
 Let’s see the composite keys with the corporate database example again. First, we’d need departments and employees:
 
@@ -100,7 +100,7 @@ ALTER TABLE employees
   ADD FOREIGN KEY (department_id, team_id) REFERENCES teams;
 ```
 
-With this method, we ensure data integrity and don’t need to disturb the existing users of the employees table while adding the teams. They can still reliably use `department_id` column. We can also set the `team_id` as NULL and still maintain the data integrity.
+With this method, we ensure data integrity and don’t need to disturb the existing users of the employees table while adding the teams. They can still reliably use the `department_id` column. We can also set the `team_id` as NULL and still maintain the data integrity.
 
 ### Ease of Change
 
@@ -162,7 +162,7 @@ ALTER TABLE employees
 
 ### Querying
 
-Another advantage of using composite keys is to have more possibility for joining of tables. For example using the tables we created we can join employees to sections without using the teams tables This would not be possible if we had used single-column keys everywhere.
+Another advantage of using composite keys is to have more possibility for joining of tables. For example using the tables we created we can join employees to sections without using the teams tables. This would not be possible if we had used single-column keys everywhere.
 
 Join conditions get complicated with composite keys. The `USING` clause helps. To demonstrate, let’s join all of the tables we created so far:
 
@@ -183,7 +183,7 @@ Another advantage of `USING` clause is to eliminate duplicate columns on the res
 
 One disadvantage of using composite keys is to store more data on tables as references. You would also need more space for the indexes as the reference columns often need to be indexed. However storage is the cheapest of resources, and the performance advantages easily outweigh the extra storage.
 
-The main performance advantage of using composite keys is eliminating the need for many joins as mentioned before. However, when you do need to join many tables, the query planner would have many different paths. It’s the query planners’ strong suit to find the best join order. Composite keys allow them to come up with better plans on many scenarios. To demonstrate this, let’s get our join-all-tables query and add some WHERE conditions:
+The main performance advantage of using composite keys is eliminating the need for many joins as mentioned before. However, when you do need to join many tables, the query planner would have many different paths. It’s the query planners’ strong suit to find the best join order. Composite keys allow them to come up with better plans in many scenarios. To demonstrate this, let’s get our join-all-tables query and add some WHERE conditions:
 
 ```sql
 SELECT *
