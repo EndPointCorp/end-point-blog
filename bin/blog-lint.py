@@ -6,17 +6,24 @@ if sys.version_info[0] < 3 or (sys.version_info[0] == 3 and sys.version_info[1] 
     print('This program requires Python 3.6 or newer.')
     sys.exit(1)
 
+
+from urllib3.exceptions import InsecureRequestWarning
 import subprocess
+import warnings as warnings_module
 import argparse
 import requests
 import json
 import os
 import re
 
+
+####################
+# Script arguments #
+####################
+
+
 parser = argparse.ArgumentParser(description='Lint blog posts.')
 parser.add_argument('input_file', help='blog post file to read')
-parser.add_argument('-o', dest='outfile', help='Make changes and write new version to given file')
-parser.add_argument('-f', dest='force', action='store_true', help='force writing output file')
 parser.add_argument('-k', dest='forKeepers', action='store_true', help='show verbose output for keepers of the blog')
 
 args = parser.parse_args()
@@ -25,16 +32,45 @@ if not os.path.isfile(args.input_file):
     print(f'No such file: {args.input_file}')
     sys.exit(2)
 
-if args.outfile and not args.force and os.path.isfile(args.output_file):
-    print(f'File exists: {args.output_file}')
-    print("Use '-f' flag to overwrite")
-    sys.exit(3)
+
+##################################################
+# Context manager for changing working directory #
+##################################################
+
+
+class cd:
+    """Context manager for changing the current working directory, from https://stackoverflow.com/a/13197763"""
+    def __init__(self, newPath):
+        self.newPath = os.path.expanduser(newPath)
+
+    def __enter__(self):
+        self.savedPath = os.getcwd()
+        os.chdir(self.newPath)
+
+    def __exit__(self, etype, value, traceback):
+        os.chdir(self.savedPath)
+
+
+############################################
+# Load list of languages supported by hljs #
+############################################
+
+
+bin_dir = os.path.dirname(os.path.realpath(__file__))
 
 # Run `node update-hljs-list.js` to update
 
-highlight_languages = json.load(open(os.path.join(os.path.dirname(__file__), 'supported_languages.json'), 'r'))
+highlight_languages = []
+with cd(bin_dir):
+    highlight_languages += json.load(open('supported_languages.json', 'r'))
 
-highlight_languages += ['nohighlight', 'plaintext']
+highlight_languages += ['nohighlight']
+
+
+######################################
+# Classes for error/warning messages #
+######################################
+
 
 class Warning:
     def __init__(self, line, message, forKeepers=False):
@@ -108,17 +144,11 @@ class Block:
                     return index
         raise Error('No matching line found')
 
-class cd:
-    """Context manager for changing the current working directory, from https://stackoverflow.com/a/13197763"""
-    def __init__(self, newPath):
-        self.newPath = os.path.expanduser(newPath)
 
-    def __enter__(self):
-        self.savedPath = os.getcwd()
-        os.chdir(self.newPath)
+##############################################
+# Helper function to separate code and prose #
+##############################################
 
-    def __exit__(self, etype, value, traceback):
-        os.chdir(self.savedPath)
 
 def extract_code_blocks(block):
     matching_indices = []
@@ -140,10 +170,20 @@ def extract_code_blocks(block):
 
     return out
 
+
+##########################
+# Initialize error lists #
+##########################
+
+
 errors = set()
 warnings = set()
 
-# Check image sizes
+
+#####################
+# Check image sizes #
+#####################
+
 
 file_path = args.input_file
 path_parts = file_path.split('/')
@@ -168,6 +208,11 @@ except:
     pass
 
 
+#################################
+# Open post file and split body #
+#################################
+
+
 infile = open(args.input_file)
 data = infile.read()
 
@@ -178,7 +223,11 @@ body_index = post.find_line_index(r'^---$', 2) + 1
 header = Block(post.lines[:body_index])
 body = Block(post.lines[body_index:])
 
-# Header
+
+################
+# Check header #
+################
+
 
 try:
     bin_dir = os.path.dirname(os.path.realpath(__file__))
@@ -208,7 +257,29 @@ try:
 except:
     print('There was an error checking tags')
 
-# Body
+try:
+    bin_dir = os.path.dirname(os.path.realpath(__file__))
+    authors_path = os.path.join(bin_dir, '../../../../build-complete/blog/authors.json')
+    result = None
+    all_authors = json.load(open(authors_path, 'r'))
+
+    author_line = None
+    for line in header.lines:
+        if line.line.startswith('author: '):
+            author_line = line
+
+    author_name = author_line.line[8:].strip().strip('"').strip("'")
+
+    if not author_name in all_authors:
+        warnings.add(Warning(author_line, "Unrecognized author; please double check spelling if this isn't their first post"))
+except Error as err:
+    print('There was an error getting the list of blog post authors' + err)
+
+
+###############
+# Code blocks #
+###############
+
 
 code_blocks = extract_code_blocks(body)
 
@@ -228,7 +299,7 @@ for b in code_blocks:
 
     # Check indentation level and whether tabs are used
     for l in b.lines:
-        has_tabs = has_tabs or bool(re.match(r'.*\t.*', l.line))
+        has_tabs = has_tabs or bool(l.line.find('\t') >= 0)
         indent = len(l.line) - len(l.line.lstrip(' '))
         if (smallest_indent is None or indent < smallest_indent) and not l.line.startswith('```'):
             smallest_indent = indent
@@ -237,8 +308,23 @@ for b in code_blocks:
     if has_tabs:
         warnings.add(Warning(b.lines[0], 'Code blocks should not contain tabs; use spaces instead'))
 
+
+###################
+# Spelling checks #
+###################
+
+
 def check_spellings(line):
-    spelling_checks = [
+    before_checks = [
+        {
+            'regex': r'\s+$',
+            'ideal': '',
+            'message': "Remove whitespace at end of line",
+            'forKeepers': True,
+        },
+    ]
+
+    after_checks = [
         {
             'regex': r'javascript',
             'ideal': 'JavaScript',
@@ -264,17 +350,11 @@ def check_spellings(line):
             'forKeepers': True,
         },
         {
-            'regex': r'[^\s]/[^\s]',
+            'regex': r'[^\s]/[^\u200b]',
             'ideal': '',
             'message': "Add zero-width breaking space after / between words",
             'forKeepers': True,
             'skip': r''
-        },
-        {
-            'regex': r'\s+$',
-            'ideal': '',
-            'message': "Remove whitespace before end of line",
-            'forKeepers': True,
         },
         {
             'regex': r'\d-\d',
@@ -304,12 +384,31 @@ def check_spellings(line):
             'message': "Consider using italics instead of single bolded words",
             'forKeepers': True,
         },
+        {
+            'regex': r'&(?!amp|gt|lt)[^;]*;',
+            'ideal': '',
+            'message': 'Use HTML entities only for <>&',
+            'forKeepers': True,
+        }
     ]
 
-    without_code = re.sub(r'`[^`]*`', '', line.line)
+    for c in before_checks:
+        has_typo = False
+        for match in re.findall(c['regex'], line.line, flags=c['flags'] if 'flags' in c else 0):
+            if match != c['ideal']:
+                has_typo = True
+        if has_typo:
+            errors.add(Warning(line, c['message'], c['forKeepers'] if 'forKeepers' in c else False))
+
+
+    without_code = re.sub(r'`[^`]+`', '', line.line)
     without_html = re.sub(r'<.*?>', '', without_code)
     without_links = re.sub(r'\[([^\]]*)\]\([^\)]*\)', r'\1', without_html)
-    for c in checks:
+
+    if re.match(r'^\s*$', without_links):
+        # Nothing of interest on this line
+        return
+    for c in after_checks:
         has_typo = False
         if len(without_html) == 0 and len(line.line) > 0:
             warnings.add(Warning(line, 'Code blocks on their own lines should use ```'))
@@ -319,6 +418,12 @@ def check_spellings(line):
         if has_typo:
             errors.add(Warning(line, c['message'], c['forKeepers'] if 'forKeepers' in c else False))
 
+
+###############
+# Link checks #
+###############
+
+
 def check_links(line):
     link_checks = [
         {
@@ -327,25 +432,40 @@ def check_links(line):
             'message': 'Links to EP website should be relative links',
             'forKeepers': True
         },
-        # This next one might be unnecessary since crawling it will reveal issues
+        # This next one might be unnecessary since fetching it will reveal issues
         {
-            'regex': r'^https://[^\.]*\.endpoint\.com',
+            'regex': r'^https://[^.]*\.endpoint\.com',
             'ideal': ['https://liquidgalaxy.endpoint.com', 'https://www.endpoint.com'],
             'message': 'The only allowed subdomain for endpoint.com links is liquidgalaxy.endpoint.com',
         }
     ]
 
-    without_code = re.sub(r'`[^`]*`', '', line.line)
+    without_code = re.sub(r'`[^`]+`', '', line.line)
     links = re.findall(r'\[[^\]]*\]\(([^\)]*)\)', without_code)
-    links += (re.findall(r'href="(.*)"', without_code))
+    links += (re.findall(r'href="([^"]*)"', without_code))
+
     for link in links:
+        url_base = 'https://www.endpoint.com'
+        check_certs = True
+        match = re.search(r'\/camp([0-9]{1,2})\/', os.getcwd())
+        if match:
+            url_base = f'https://www.{match.group(1)}.camp.endpoint.com:91{int(match.group(1)):02d}'
+            check_certs = False
+
         # Check response codes
-        # print(f'Trying link {link}...')
         to_try = link
+        if link.startswith('#') or link.startswith('mailto:'):
+            continue
         if link.startswith('/'):
-            to_try= 'https://www.endpoint.com' + link
+            to_try = url_base + link
         try:
-            response = requests.get(to_try, allow_redirects=False)
+            if not check_certs:
+                requests.packages.urllib3.disable_warnings(category=InsecureRequestWarning)
+            response = requests.get(to_try, allow_redirects=False, verify=check_certs, headers={
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36'
+                })
+            if not check_certs:
+                warnings_module.resetwarnings()
             if response.status_code == 200:
                 pass
             elif response.status_code >= 300 and response.status_code < 400:
@@ -367,10 +487,14 @@ def check_links(line):
                 errors.add(Warning(line, c['message'], c['forKeepers'] if 'forKeepers' in c else False))
 
 
+##########################################################
+# Run the checks and print resulting errors and warnings #
+##########################################################
+
+
 for line in body.lines:
     check_links(line)
-#for line in body.lines:
-#    check_spelling(line)
+    check_spellings(line)
 
 if len(errors) > 0:
     errors = sorted(errors)
@@ -389,3 +513,5 @@ if len(warnings) > 0:
 
         if args.forKeepers:
             print(warning)
+
+infile.close()
