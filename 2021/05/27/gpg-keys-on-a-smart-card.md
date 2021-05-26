@@ -6,7 +6,7 @@ tags: Security, gpg, Yubikey, encryption, security, airgapped, authentication, s
 
 Gnu Privacy Guard (or GPG) is a tool we use a lot at End Point. It's simplicity and quite decent security is a perfect fit for us- and there's a way to make it even safer.
 
-Gpg uses the OpenPGP (or Pretty Good Privacy) standard to encrypt files. Normally, one creates a pgp key on their computer and just keeps the keyfile safe. A password is generally used, but as with any private key, it's only as safe as the computer it's on.
+Gpg uses the OpenPGP (or Pretty Good Privacy) standard to encrypt files. Normally, one creates a PGP key on their computer and just keeps the keyfile safe. A password is generally used, but as with any private key, it's only as safe as the computer it's on.
 
 Using a smartcard can increase this security, especially if the key is generated on an airgapped machine. This way the keyfile is stored in the hardware security token, and is never exposed to the internet.
 
@@ -16,9 +16,9 @@ While there isn't full password locking on hardware tokens, Yubikey and almost a
 
 There are several options for smart cards- You can use any OpenPGP compatible card and reader, or an all in one solution that's compatible with OpenPGP. For myself, it was easiest to use a Yubikey, since I already had one. (Note, you'll need a full Yubikey if you go with that brand, not the cheaper Yubico FIDO card. Check the description and make sure it mentions OpenPGP.)
 
-The following instructions do require a basic understanding of both how to create a live cd / usb stick, as well as basic understanding of the command line, but if you're in the position of needing to use gpg, you'll probably already be at least somewhat familiar with these requirements.
+The following instructions do require a basic understanding of both how to create a live CD / USB stick, as well as basic understanding of the command line, but if you're in the position of needing to use gpg, you'll probably already be at least somewhat familiar with these requirements.
 
-To get started- you don't -have- to do this on an airgapped machine, but doing so affords the highest level of security. Simply booting from a livecd / usb is fairly easy, and if you choose an operating system that already has the smart card daemon (or sca
+To get started- you don't -have- to do this on an airgapped machine, but doing so affords the highest level of security. Simply booting from a live CD / USB is fairly easy, and if you choose an operating system that already has the smart card daemon (or sca
 
 Before you begin, you'll need:
 
