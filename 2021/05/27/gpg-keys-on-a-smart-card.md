@@ -18,7 +18,7 @@ There are several options for smart cards- You can use any OpenPGP compatible ca
 
 The following instructions do require a basic understanding of both how to create a live CD / USB stick, as well as basic understanding of the command line, but if you're in the position of needing to use gpg, you'll probably already be at least somewhat familiar with these requirements.
 
-To get started- you don't -have- to do this on an airgapped machine, but doing so affords the highest level of security. Simply booting from a live CD / USB is fairly easy, and if you choose an operating system that already has the smart card daemon (or sca
+To get started- you don't -have- to do this on an airgapped machine, but doing so affords the highest level of security. Simply booting from a live CD / USB is fairly easy- Choosing an operating sytem that omes with the smart card daemon (scdaemon) will help, if not, ensure you download a compatible version of the scdaemon package file for your operating system to include with the live cd
 
 Before you begin, you'll need:
 
