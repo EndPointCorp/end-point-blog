@@ -5,8 +5,6 @@ tags: postgres, unicode
 title: The Un-unaccentable Character
 ---
 
-
-
 I typed “Unicode” into an online translator, and it responded saying it had no idea what the language was but it roughly translates to “Surprise!”
 
 Recently a client sent over a problem getting some of their Postgres data through an ASCII-only ETL process.  They only needed to worry about some occasional accent marks, and not any of the more uncommon or odd Unicode characters, thankfully. ☺ Or so we thought.  The [unaccent extension](http://www.postgresql.org/docs/current/interactive/unaccent.html) was a great starting point, but the problem they sent over boiled down to this:
@@ -66,4 +64,3 @@ Note that 'extended' above will point to the extended.rules file.
     db=# ALTER TEXT SEARCH DICTIONARY extended (RULES='extended');
     ALTER TEXT SEARCH DICTIONARY
     ```
-

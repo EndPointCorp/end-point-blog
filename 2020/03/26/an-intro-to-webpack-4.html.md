@@ -1,7 +1,7 @@
 ---
 author: "Kevin Campusano"
 title: "An Introduction to webpack 4: Setting Up a Modern, Modular JavaScript Front-End Application"
-tags: development, javascript, webpack, babel
+tags: development, javascript, webpack
 gh_issue_number: 1611
 ---
 

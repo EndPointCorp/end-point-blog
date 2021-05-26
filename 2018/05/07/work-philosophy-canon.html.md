@@ -1,7 +1,7 @@
 ---
 author: Jon Jensen
 title: Work philosophy canon
-tags: company, books, training
+tags: company, books, training, culture
 gh_issue_number: 1422
 ---
 
@@ -19,7 +19,7 @@ No one article or book can be entirely authoritative for all situations, but eac
 
 ### Slow and steady
 
-When new employees start at End Point, we ask them to read the articles during their first week or so, and the relevant books within roughly their first year.
+When new employees start at End Point, we ask them to read the articles during their first week or two, and the relevant books within roughly their first year.
 
 Reading only a little at each sitting and spreading the reading out over time allows the ideas to sink in gradually and be incorporated into our work, rather than overwhelming with new information that cannot all be absorbed at once.
 
@@ -38,6 +38,7 @@ Because we work in the software development industry, it is important that not o
 * [Selling Without Being Salesy](https://thecleverconsultant.com/how-to-sell-consulting-services-without-being-salesy/) by Jason Parks
 * [Five Whys](https://www.startuplessonslearned.com/2008/11/five-whys.html) by Eric Ries (covered in more depth in his book [The Lean Startup](http://theleanstartup.com/book))
 * [Software Is a Mess and I Feel Fine](https://alanstevens.us/post/130828292006/softwareisamess) by Alan Stevens
+* [Choose Boring Technology](http://boringtechnology.club/) by Dan McKinley
 * [Getting Real](https://basecamp.com/books/getting-real) book by 37signals (now Basecamp)
 
 ### For developers
@@ -61,4 +62,4 @@ These articles and books are targeted primarily at developers but enlightening f
 
 We are always on the lookout for other readings that are helpful, so feel free to leave a comment with your favorites!
 
-(Updated on 2021-04-07 with articles on Git commit messages and history spelunking.)
+(Updated in early 2021 with articles on Git commit messages and history spelunking, and Choose Boring Technology.)

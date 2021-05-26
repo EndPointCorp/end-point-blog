@@ -1,7 +1,7 @@
 ---
 author: "Charles Chang"
 title: "End Point Security Tips: Securing your Infrastructure"
-tags: security, windows, infrastructure
+tags: security, windows, culture
 gh_issue_number: 1586
 ---
 

@@ -11,7 +11,7 @@ title: The Mystery of The Zombie Postgres Row
 Being a PostgreSQL DBA is always full of new challenges and mysteries. Tracking them 
 down is one of the best parts of the job. Presented below is an error message we received one day 
 via [tail_n_mail](https://bucardo.org/tail_n_mail/) from one of our client’s production servers.
-See if you can figure out what was going on as I walk through it. This is from a “read only” database that acts as a [Bucardo]() target (aka slave), and as such, the only write activity should be from Bucardo.
+See if you can figure out what was going on as I walk through it. This is from a “read only” database that acts as a Bucardo target (aka slave), and as such, the only write activity should be from Bucardo.
 
 ```nohighlight
  05:46:11 [85]: ERROR: duplicate key value violates unique constraint "foobar_id"

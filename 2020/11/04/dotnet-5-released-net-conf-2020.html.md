@@ -1,7 +1,7 @@
 ---
 author: "Juan Pablo Ventoso"
 title: ".NET 5 will be released at .NET Conf 2020"
-tags: dotnet, windows, microsoft
+tags: dotnet, windows
 gh_issue_number: 1684
 ---
 

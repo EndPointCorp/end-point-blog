@@ -1,7 +1,7 @@
 ---
 author: "Árpád Lajos"
 title: "Convenient Reporting with Jasper"
-tags: java, reporting, jasper
+tags: java, reporting
 gh_issue_number: 1623
 ---
 

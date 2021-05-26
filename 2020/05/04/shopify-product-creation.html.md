@@ -1,7 +1,7 @@
 ---
 author: "Patrick Lewis"
 title: "Shopify Admin API: Importing Products in Bulk"
-tags: shopify, ecommerce, ruby, rails
+tags: saas, ecommerce, ruby, rails
 gh_issue_number: 1626
 featured: yes
 featured_blurb: "Creating a custom Rails app to retrieve data about thousands of Magic: The Gathering cards"

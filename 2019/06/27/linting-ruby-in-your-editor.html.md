@@ -1,7 +1,7 @@
 ---
 author: "Patrick Lewis"
 title: "Linting Ruby In Your Editor"
-tags: ruby, vim, emacs, visual-studio-code, tools
+tags: ruby, vim, visual-studio-code, tools
 gh_issue_number: 1533
 ---
 

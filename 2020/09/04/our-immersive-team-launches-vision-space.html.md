@@ -1,7 +1,7 @@
 ---
 author: "Ben Witten"
 title: "Our Immersive Technology Team Launches Vision.Space"
-tags: liquid-galaxy, vision-space
+tags: liquid-galaxy
 gh_issue_number: 1658
 ---
 

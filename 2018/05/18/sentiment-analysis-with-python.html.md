@@ -1,7 +1,7 @@
 ---
 author: Muhammad Najmi bin Ahmad Zabidi
 title: "Sentiment Analysis with Python"
-tags: python, natural-language-processing, twitter
+tags: python, natural-language-processing, social-networks
 gh_issue_number: 1424
 ---
 
