@@ -14,7 +14,9 @@ In addition, you can even store an SSH key on the card, which will enable you to
 
 While there isn't full password locking on hardware tokens, Yubikey and almost all OpenPGP keys have two pin numbers- A user pin and an administrative pin to reset the user pin. If you enter either or both three times incorrectly, the card will lock and you'll need to reload from backup (or in some cases, throw the card away) Which is why it's critical to have a backup.
 
-There are several options for smart cards- You can use any OpenPGP compatible card and reader, or an all in one solution that's compatible with OpenPGP. For myself, it was easiest to use a Yubikey, since I already had one. (Note, you'll need a full Yubikey if you go with that brand, not the cheaper Yubico FIDO card. Check the description and make sure it mentions OpenPGP.)
+There are several options for smart cards- You can use any OpenPGP compatible card and reader, or an all in one solution that's compatible with OpenPGP. For myself, it was easiest to use a Yubikey, since I already had one.
+
+In case you haven't heard of them, Yubikeys are physical hardware keys that offer a variety of features, and can be used as a multi factor authentication token for quite a few websites, and can also be set up to fill in one time password (otp) fields, such as those used for Google Authenticator, on sites that don't support the Yubikey directly as a MFA token.
 
 The following instructions do require a basic understanding of both how to create a live CD / USB stick, as well as basic understanding of the command line, but if you're in the position of needing to use gpg, you'll probably already be at least somewhat familiar with these requirements.
 
@@ -46,11 +48,23 @@ Set a pin for your card, if you haven't.
 
 The default PIN for Yubikeys should 123456, and the default AdminPIN will be 12345678- Check the documentation that came with your key!
 
-`gpg/card> admin` - Enable Admin features first
+`gpg/card> admin`
+
+`Admin commands are allowed` - Enable Admin features first, will return 
 
 `gpg/card> passwd` - Set the passwords, both for the regular PIN and the AdminPIN. 
 
+```
+1 - change PIN <- Default 123456
+2 - unblock PIN <- To reset the pin with the AdminPin / Reset Code
+3 - change Admin PIN <- Default 12345678
+4 - set the Reset Code <- See below
+Q - quit
+```
+
 *Do not mix up your pin and adminpin! You can lock up your card, which will require a factory reset. (Which you can also do via gpg --edit-card - `gpg/card> factory-reset`*
+
+The reset code is set if you are setting up the card for someone else to use, and wish to give them a way to reset the PIN without having full access to the rest of the Admin functions. 
 
 Next step: Generate the keys. You'll want to generate at least 4096 bit RSA keys. 
 
