@@ -1,12 +1,12 @@
 ---
 author: Muhammad Najmi Ahmad Zabidi 
-title: 'Monitoring Java Process Monitoring tool (jps) with Icinga/Nagios'
+title: 'Fetching Outputs From Java Process Monitoring tool (jps) with Icinga/Nagios'
 tags: linux, monitoring, nrpe, nagios, icinga 
 gh_issue_number: 1655
 ---
 
 ### Java VM Process Status Tool, jps
-`jps` is Java's Virtual Machine Process Status Tool and it could be used much like how the `ps` command works on the *Nix environment. We encountered an issue when executing NRPE, the Nagios agent that runs on servers being monitored, from Icinga's head server. Usually the NRPE-related call should not be an issue to be executed on the target server as it will be declared in the sudoers (commonly /etc/sudoers) file. In this writing, I will explain the situation when I encountered an issue to get the output from jps (Java Virtual Machine Process Status Tool), which only could be executed as the “root” user on the terminal. 
+`jps` is Java's Virtual Machine Process Status Tool and it could be used much like how the `ps` command works on the *Nix environment. We encountered an issue when executing NRPE, a Nagios agent which runs on servers that being monitored, from Icinga's head server. Usually the NRPE-related call should not be an issue to be executed on the target server as it will be declared in the sudoers (commonly /etc/sudoers) file. In this writing, I will explain the situation when I encountered an issue to get the output from jps (Java Virtual Machine Process Status Tool), which only could be executed as the “root” user on the terminal. 
 
 In this writings, I want to get Icinga (Nagios' fork) to get the Java process’ state (in this case, the process is the “Lucene” process) from Icinga’s head server, remotely. 
 
