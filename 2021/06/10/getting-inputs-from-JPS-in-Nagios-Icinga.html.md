@@ -1,6 +1,6 @@
 ---
 author: Muhammad Najmi Ahmad Zabidi 
-title: 'Getting output from JPS with NRPE'
+title: 'Monitoring Java's Process Monitoring tool (jps) with Icinga/Nagios'
 tags: linux, monitoring, nrpe, nagios, icinga 
 gh_issue_number: 1655
 ---
