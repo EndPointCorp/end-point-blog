@@ -1,6 +1,6 @@
 ---
 author: Muhammad Najmi Ahmad Zabidi 
-title: 'Monitoring Java's Process Monitoring tool (jps) with Icinga/Nagios'
+title: 'Monitoring Java Process Monitoring tool (jps) with Icinga/Nagios'
 tags: linux, monitoring, nrpe, nagios, icinga 
 gh_issue_number: 1655
 ---
@@ -12,19 +12,20 @@ In this writings, I want to get Icinga (Nagios' fork) to get the Java process’
 
 ### Method
 Usually, NRPE should be able to execute the remote process (on the target server) from Icinga’s head. In this case we are going to create a workaround by :
-Dump the Java process ID into a text file
-Dump the running threads into another text file
-Put A) and B) into a single bash script
-Create a cronjob to automatically update to run the shell script
-Create a NRPE plugin so that it will be evaluate the results which were obtained from A) and B)
+
+1. Dump the Java process ID into a text file
+2. Dump the running threads into another text file
+3. Put ***item 1*** and ***item 2*** above into a single bash script
+4. Create a cronjob to automatically update to run the shell script
+5. Create a NRPE plugin so that it will be evaluate the results which were obtained from ***item 1*** and ***item 2***
 
 ### Test
 
 To illustrate this, I ran the intended command locally on the target server as the “nagios” user. Theoretically, this will emulate the NRPE call as if it was executed from Icinga’s server remotely. The file `check_lucene_indexing_deprecated` is a file which was meant to demonstrate the NRPE execution failure. Whereas `check_lucene_indexing` is the file which is expected to be able to run the NRPE plugin successfully. Both `check_lucene_indexing_deprecated` and `check_lucene_indexing` paths were already declared in /etc/sudoers file on the target machine 
 
-To show the differences, I ran two different scripts from Icinga’s head server which were named check_lucene_indexing_dep and check_lucene_indexing
+To show the differences, I ran two different scripts from the Icinga’s head server. 
 
-Script execution from the target machine locally  (first execution as the "nagios" user, the latter as the "root" user):
+The script execution from the target machine locally  (first execution as the "nagios" user, the latter as the "root" user):
 
 ```.bash
 #sudo -s -u nagios ./check_lucene_indexing_deprecated
@@ -34,7 +35,7 @@ CRITICAL -- Lucene indexing down
 OK -- 2 Lucene threads running
 ```
 
-As you can see, the script works fine if I run it as root, but that is not the case as the "nagios" user.
+As you can see, the script works fine if I ran it as "root", but that is not the case as the "nagios" user.
 
 
 
@@ -63,13 +64,13 @@ Let say I want to check the `jps` process ID (PID):
 
 As you can see, the output that is being shown by “jps” under the nagios user is different from the “root” user. 
 
-The intention of running the `jps -l` command is to get the process ID of `/usr/share/jetty9/start.jar`, which is 7541. However as indicated above, the “nagios” user’s result did not display the result, unlike if the command being executed as the “root” user. 
+The intention of running the `jps -l` command is to get the process ID of `/usr/share/jetty9/start.jar`, which is 7541. However as indicated above, the “nagios” user’s execution did not display the intended result, unlike if the command being executed as the “root” user. 
 
 ### The possible workaround
 
 We could get the process’ ID existence, by dumping the process ID inside a text file and let NRPE plugin to read it instead. 
 
-In order to get NRPE to fetch the current state of the process, we will create a cronjob. In this case it will be executed for every 10 minutes. This script will dump the process ID of the Java process onto a text file and later NRPE will another script which will analyze the content of the text file.
+In order to get NRPE to fetch the current state of the process, we will create a cronjob. In this case it will be executed for every 10 minutes. This script will dump the process ID of the Java process onto a text file and later NRPE will run another script which will analyze the content of the text file.
 
 #### Cronjob, creating dump files
 ```.bash
