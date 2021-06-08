@@ -64,11 +64,11 @@ Let say I want to check the `jps` process ID (PID):
 
 As you can see, the output that is being shown by “jps” under the nagios user is different from the “root” user. 
 
-The intention of running the `jps -l` command is to get the process ID of `/usr/share/jetty9/start.jar`, which is 7541. However as indicated above, the “nagios” user’s execution did not display the intended result, unlike if the command being executed as the “root” user. 
+The intention of running the `jps -l` command is to get the process ID of `/usr/share/jetty9/start.jar`, which is 7541. However, as indicated above, the “nagios” user’s execution did not display the intended result, unlike if the command being executed as the “root” user. 
 
 ### The possible workaround
 
-We could get the process’ ID existence, by dumping the process ID inside a text file and let NRPE plugin to read it instead. 
+We could get the process ID's existence, by dumping the process ID inside a text file and let NRPE plugin to read it instead. 
 
 In order to get NRPE to fetch the current state of the process, we will create a cronjob. In this case it will be executed for every 10 minutes. This script will dump the process ID of the Java process onto a text file and later NRPE will run another script which will analyze the content of the text file.
 
@@ -170,7 +170,7 @@ fi
 ```
 
 As you can see previously, `check_lucene_deprecated` was able to get the result *if* it is being executed locally on the target machine - but not from remote (Icinga's head server).
-This is due to `jps` will provide limited result if it was being executed as the "nagios" user as compared to the local root user. Note that I have define the path of the script in the sudoers file prior to the script execution.
+This is due to `jps` will provide limited results if it was being executed as the "nagios" user as compared to the local root user. Note that I have defined the path of the script in the sudoers file prior to the script execution.
 
 ```
 Defaults: nagios !requiretty
