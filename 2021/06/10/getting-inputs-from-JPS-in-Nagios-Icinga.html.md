@@ -180,7 +180,7 @@ nagios  ALL = NOPASSWD: /usr/local/lib/nagios/plugins/check_lucene_indexing_depr
 
 ## Conclusion
 
-There could be another way to solve this issue (which I might not be aware of). As of now this script works as expected - and if you want to reuse the script - please customize the script according to your environment so that you will be able to get the expected result that you want. Also, as being written in jps’ documentation - getting the output by parsing from jps’ output means we need to maintain the script given the new version of jps changed its output. The method which I shared above is just one of the ways to get jps’ report works with Icinga/Nagios plugin. Please let me know if you have experience with jps and Icinga/Nagios - and how do you handle the reporting. 
+There could be another way to solve this issue (which I might not be aware of). As of now this script works as expected - and if you want to reuse the script - please customize the script according to your environment so that you will be able to get the expected result that you want. Also, as written in jps’ documentation - getting the output by parsing from jps’ output means we need to maintain the script given the new version of jps changed its output. The method which I shared above is just one of the ways to get jps’ report works with Icinga/Nagios plugin. Please let me know if you have experience with jps and Icinga/Nagios - and how do you handle the reporting. 
 
 
 
