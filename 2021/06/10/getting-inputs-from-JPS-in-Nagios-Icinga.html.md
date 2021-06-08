@@ -6,9 +6,9 @@ gh_issue_number: 1655
 ---
 
 ### Java VM Process Status Tool, jps
-`jps` is Java's Virtual Machine Process Status Tool and it could be used much like how the `ps` command works on the *Nix environment. We encountered an issue when executing NRPE, a Nagios agent which runs on servers that being monitored, from Icinga's head server. Usually the NRPE-related call should not be an issue to be executed on the target server as it will be declared in the sudoers (commonly /etc/sudoers) file. In this writing, I will explain the situation when I encountered an issue to get the output from jps (Java Virtual Machine Process Status Tool), which only could be executed as the “root” user on the terminal. 
+`jps` is Java's Virtual Machine Process Status Tool and it could be used much like how the `ps` command works on the *Nix environment. We encountered an issue when executing NRPE, a Nagios agent which runs on servers that are being monitored, from Icinga's head server. Usually the NRPE-related call should not be an issue to be executed on the target server as it will be declared in the sudoers (commonly /etc/sudoers) file. In this writing, I will explain the situation when I encountered an issue to get the output from jps (Java Virtual Machine Process Status Tool), which only could be executed as the “root” user on the terminal. 
 
-In this writings, I want to get Icinga (Nagios' fork) to get the Java process’ state (in this case, the process is the “Lucene” process) from Icinga’s head server, remotely. 
+In this writing, I want to get Icinga (Nagios' fork) to get the Java process’ state (in this case, the “Lucene” process) from Icinga’s head server, remotely. 
 
 ### Method
 Usually, NRPE should be able to execute the remote process (on the target server) from Icinga’s head. In this case we are going to create a workaround by :
@@ -23,7 +23,7 @@ Usually, NRPE should be able to execute the remote process (on the target server
 
 To illustrate this, I ran the intended command locally on the target server as the “nagios” user. Theoretically, this will emulate the NRPE call as if it was executed from Icinga’s server remotely. The file `check_lucene_indexing_deprecated` is a file which was meant to demonstrate the NRPE execution failure. Whereas `check_lucene_indexing` is the file which is expected to be able to run the NRPE plugin successfully. Both `check_lucene_indexing_deprecated` and `check_lucene_indexing` paths were already declared in /etc/sudoers file on the target machine 
 
-To show the differences, I ran two different scripts from the Icinga’s head server. 
+To show the differences, I ran two different scripts from Icinga’s head server. 
 
 The script execution from the target machine locally  (first execution as the "nagios" user, the latter as the "root" user):
 
@@ -35,7 +35,7 @@ CRITICAL -- Lucene indexing down
 OK -- 2 Lucene threads running
 ```
 
-As you can see, the script works fine if I ran it as "root", but that is not the case as the "nagios" user.
+As you can see, the script works fine if I run it as "root", but that is not the case as the "nagios" user.
 
 
 
