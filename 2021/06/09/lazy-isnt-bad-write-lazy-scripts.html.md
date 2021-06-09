@@ -2,6 +2,7 @@
 author: "Ardyn Majere"
 title: "Lazy Isn’t Bad: Write Lazy Scripts"
 tags: automation, tips
+gh_issue_number: 1754
 ---
 
 ![](/blog/2021/06/09/lazy-isnt-bad-write-lazy-scripts/banner.jpg)
