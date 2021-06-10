@@ -78,7 +78,7 @@ We are an equal opportunity employer and value diversity at our company. We do n
     "@type": "Place",
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "215 Park Avenue South, Suite 1916"
+      "streetAddress": "215 Park Avenue South, Suite 1916",
       "addressLocality": "New York",
       "addressRegion": "NY",
       "postalCode": "10003",
@@ -88,7 +88,7 @@ We are an equal opportunity employer and value diversity at our company. We do n
     "@type": "Place",
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "4 Limited Centre, Suite 101"
+      "streetAddress": "4 Limited Centre, Suite 101",
       "addressLocality": "Johnson City",
       "addressRegion": "TN",
       "postalCode": "37604",
