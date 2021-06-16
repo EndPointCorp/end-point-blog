@@ -9,13 +9,17 @@ gh_issue_number: 1755
 
 We are looking for a full-time, experienced or entry-level engineer to join the End Point Immersive and Geospatial Support (I+G) Team—​a small, multidisciplinary team that supports our company’s clients with their [Liquid Galaxy systems](https://liquidgalaxy.endpoint.com/).
 
-The candidate will be based out of our Johnson City, TN or New York, NY office depending on where the candidate is located. With sufficient hardware and deployment experience, the engineer may eventually be asked to travel to, perform, and supervise system installations. Occasional evenings and weekend on-call shifts are shared amongst the team. This is a great entry-level opportunity to learn about all aspects of production computer systems and their deployment. More experienced individuals will have the opportunity to work directly in feature development on production systems and possibly assist with other ongoing consulting projects the I+G team takes on.
+The candidate will be based out of our Johnson City, Tennessee or New York City offices depending on where the candidate is located. With sufficient hardware and deployment experience, the engineer may eventually be asked to travel to, perform, and supervise system installations.
+
+Occasional evenings and weekend on-call shifts are shared amongst the team.
+
+This is a great entry-level opportunity to learn about all aspects of production computer systems and their deployment. More experienced individuals will have the opportunity to work directly in feature development on production systems and possibly assist with other ongoing consulting projects the I+G team takes on.
 
 ### Overview
 - **Job Level**: Experienced or entry-level, full-time.
 - **Location**: On-site expected with occasional remote work, on-call weekdays and weekends.
 - **Environment/​Culture**: Casual, remote management, lots of video meetings.
-- **Benefits**: 401(k), paid vacation and holidays, health insurance.
+- **Benefits**: paid vacation and holidays, 401(k), health insurance.
 
 ### Core responsibilities
 - Track, monitor, and resolve system issues on production computer systems.
