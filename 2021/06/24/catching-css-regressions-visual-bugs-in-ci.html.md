@@ -1,4 +1,4 @@
---- 
+---
 author: "Afif Sohaili"
 title: "Catching CSS Regressions and Visual Bugs in Continous Integration"
 tags: automation, user-interface, testing, css
