@@ -1,9 +1,11 @@
 ---
 author: "Afif Sohaili"
-title: "Catching CSS Regressions and Visual Bugs in Continous Integration"
+title: "Catching CSS Regressions and Visual Bugs in Continuous Integration"
 tags: automation, user-interface, testing, css
 gh_issue_number: 1757
 ---
+
+![Blue patterns](/blog/2021/06/24/catching-css-regressions-visual-bugs-in-ci/banner.jpg)
 
 Many web projects nowadays are equipped to simulate real users and automatically test a real use case, but these end-to-end tests still have a weakness. Browser automation tools run tests by performing the interactions and assertions in the context of the DOM of the pages. That is very different from how humans use web applications, which is by looking at the user interface. Due to this, the tests’ definition of a “functional web app” differs from that of a real human.
 
