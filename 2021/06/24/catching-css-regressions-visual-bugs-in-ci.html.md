@@ -30,11 +30,13 @@ In our end-to-end tests, one would typically instruct the test to check:
 
 If all of the above conditions were met, then the app is considered “functional”. However, the tests have no way to verify if the right colors are actually reflected on the buttons, or if the SVG icons on the button are properly loaded and shown to the users. Unfortunately, for a real user, both of these are very crucial in telling the user how the app functions. If the stylings for the buttons are not implemented or the SVG icons for the buttons fail to load, users will not have a clear indication on how the app works, and the app will *not* be considered “functional” by real users, even though the functionalities of both buttons are wired correctly in the code.
 
-Web developers also frequently deal with styling regressions. This can happen due to the “cascading” characteristic of CSS: badly scoped CSS values may affect other elements in unrelated areas unintentionally. Many times, styling regressions slip past even the end-to-end tests with browser automation because, again, end-to-end tests only verify that the app’s functionalities are wired together, but do not check if things appear the right way visually.
+Web developers also frequently deal with styling regressions. This can happen due to the “cascading” characteristic of CSS: Badly scoped CSS values may affect other elements in unrelated areas unintentionally. Many times, styling regressions slip past even the end-to-end tests with browser automation because, again, end-to-end tests only verify that the app’s functionalities are wired together, but do not check if things appear the right way visually.
 
 ### Visual regression testing to the rescue
 
-Visual regression testing adds another quality gate in the workflow to allow developers to verify that, after a code change, the user sees what is expected. For example, if the code change is supposed to modify the appearance of an element, developers can verify that it’s doing just that, or at the very least, the code change should not adversely affect other areas. Visual regression testing involves taking screenshots of tested scenarios with changes and comparing them against the baseline (usually screenshots from the stable branch). This type of test complements the other testing categories in the Testing Pyramid and ensure user experience is not adversely affected from any given code changes.
+Visual regression testing adds another quality gate in the workflow to allow developers to verify that, after a code change, the user sees what is expected. For example, if the code change is supposed to modify the appearance of an element, developers can verify that it’s doing just that, or at the very least, the code change should not adversely affect other areas. Visual regression testing involves taking screenshots of tested scenarios with changes and comparing them against the baseline (usually screenshots from the stable branch).
+
+This type of test complements the other testing categories in the test pyramid and ensures user experience is not adversely affected from any given code changes. For more information on the test pyramid and different categories of testing, visit [this blog post](/blog/2020/09/22/automated-testing-with-symfony) by my colleague, Kevin.
 
 There are many tools that help with visual regression testing. Here are some tools that you could look into:
 
@@ -53,7 +55,7 @@ Each tool has its own strengths and weaknesses. For today’s demonstration, we 
 
 ### Integrating Percy
 
-Percy provides comprehensive guides to get you started with many popular end-to-end test frameworks such as Selenium, Cypress, TestCafe, and Capybara. You can check the [documentation](https://garris.github.io/BackstopJS/) to see how to integrate it with your project. Since we work with Rails a lot at End Point, we are going to demonstrate Percy within a Rails project alongside Rspec/​Capybara-driven end-to-end tests.
+Percy provides comprehensive guides to get you started with many popular end-to-end test frameworks such as Selenium, Cypress, TestCafe, and Capybara. You can check the documentation to see how to integrate it with your project. Since we work with Rails a lot at End Point, we are going to demonstrate Percy within a Rails project alongside Rspec/​Capybara-driven end-to-end tests.
 
 In this article, we are going to use this [simple Rails project](https://github.com/afifsohaili-ep/dockified-demo) I built for fun as the demo. It is just a simple wiki project using Vue and Rails. Let’s start.
 
@@ -73,18 +75,29 @@ Great, we have now successfully set up Percy. There are other configurations in 
 
 Now, let’s look at how to integrate Percy with our demo Rails project. Percy provides a comprehensive guide to do that [here](https://docs.percy.io/docs/capybara).
 
-1. First, let’s export the `PERCY_TOKEN` provided to us in the *Builds* page into our environment variable.
-   `export PERCY_TOKEN=<value>`
-2. Then, we will add `percy-capybara` into our Gemfile and run `bundle install`.
-   `gem 'percy-capybara'`
-3. Next, let’s install `@percy/agent` via NPM/​Yarn.
-   `yarn add --dev @percy/agent`
+1\. First, let’s export the `PERCY_TOKEN` provided to us in the *Builds* page into our environment variable.
+
+```bash
+export PERCY_TOKEN=<value>
+```
+
+2\. Then, we will add `percy-capybara` into our Gemfile and run `bundle install`.
+
+```bash
+gem 'percy-capybara'
+```
+
+3\. Next, let’s install `@percy/agent` via npm/​Yarn.
+
+```bash
+yarn add --dev @percy/agent
+```
 
 That’s it! Now let’s look at adding Percy to our feature specs.
 
 #### 3. Percy in Feature Specs
 
-Percy has to be integrated into feature specs (i.e. end-to-end tests) because it requires the app to be running in order for it to be able to take screenshots. Hence, it will not work in unit tests where the application context is mocked and chunks of code are tested in isolation. For more information on different categories of testing, visit [this blog post](/blog/2020/09/22/automated-testing-with-symfony) by my colleague, Kevin.
+Percy has to be integrated into feature specs (i.e. end-to-end tests) because it requires the app to be running in order for it to be able to take screenshots. Hence, it will not work in unit tests where the application context is mocked and chunks of code are tested in isolation.
 
 First, we will check out the primary working branch `main` and take a look at the existing feature specs:
 
@@ -113,9 +126,9 @@ RSpec.feature "Add documents", js: true do
   scenario "User sees validation errors" do
     click_button 'Create'
 
-    expect(page).to have_text('Title can\'t be blank')
-    expect(page).to have_text('Body can\'t be blank')
-    expect(page).to have_text('Body is too short (minimum is 10 characters)')
+    expect(page).to have_text("Title can't be blank")
+    expect(page).to have_text("Body can't be blank")
+    expect(page).to have_text("Body is too short (minimum is 10 characters)")
   end
 end
 ```
@@ -158,9 +171,9 @@ RSpec.feature "Add documents", js: true do
   scenario "User sees validation errors" do
     click_button 'Create'
 
-    expect(page).to have_text('Title can\'t be blank')
-    expect(page).to have_text('Body can\'t be blank')
-    expect(page).to have_text('Body is too short (minimum is 10 characters)')
+    expect(page).to have_text("Title can't be blank")
+    expect(page).to have_text("Body can't be blank")
+    expect(page).to have_text("Body is too short (minimum is 10 characters)")
     # Screenshot when we see the errors
     Percy.snapshot(page, { name: 'Create document page validation error' })
   end
@@ -217,8 +230,8 @@ Add a `text-indent: -5rem` to the error messages to push the text out of its con
 
 Let’s run `bundle exec rspec`. We will get this output:
 
-```bash
->bundle exec rspec
+```nohighlight
+> bundle exec rspec
 Capybara starting Puma...
 * Version 5.3.2 , codename: Sweetnighter
 * Min threads: 0, max threads: 4
@@ -269,7 +282,7 @@ One way to deal with this is to not screenshot whole pages. Instead, screenshot 
 
 So, there you go! I hope this article has given you a good introduction to visual regression testing, why should you have it, and how to get started with it. Hope it will benefit you and your team in pushing great web applications!
 
-Other resources:
+### Other resources
 
 - [(YouTube) Your Tests Lack Vision: Adding Eyes to your Automation Framework](https://www.youtube.com/watch?v=spyKZ-p3UgE)
 - [(YouTube) Visual Regression Testing for Your Web Apps](https://www.youtube.com/watch?v=_ls5P97-REU)
