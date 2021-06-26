@@ -1,11 +1,8 @@
 ---
 author: "Ben Witten"
 title: "Our Immersive Technology Team Launches Vision.Space"
-tags: liquid-galaxy, vision-space
+tags: liquid-galaxy
 gh_issue_number: 1658
-featured: yes
-featured_blurb: "The most advanced enterprise conference room platform with multiple video walls, data streams, touch interaction points, and easy wireless connectivity"
-background_url: "/blog/2020/09/04/our-immersive-team-launches-vision-space/image-0.jpg"
 ---
 
 <img src="/blog/2020/09/04/our-immersive-team-launches-vision-space/image-0.jpg" />

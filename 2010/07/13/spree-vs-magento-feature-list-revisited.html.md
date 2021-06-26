@@ -1,7 +1,7 @@
 ---
 author: Steph Skardal
 gh_issue_number: 324
-tags: ecommerce, rails, spree, cms, magento
+tags: ecommerce, rails, spree, cms, magento, localization
 title: 'Spree vs. Magento: Feature List Revisited'
 ---
 

@@ -1,7 +1,7 @@
 ---
 author: Steph Skardal
 title: "Ecommerce Shakeups: Magento Acquisition and Etsy Rate Increases"
-tags: ecommerce, magento, etsy, saas
+tags: ecommerce, magento, saas
 gh_issue_number: 1436
 ---
 

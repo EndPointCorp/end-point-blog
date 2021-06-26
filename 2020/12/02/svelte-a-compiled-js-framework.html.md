@@ -1,7 +1,7 @@
 ---
 author: "Kevin Campusano"
 title: "Svelte: A compiled JavaScript front-end framework"
-tags: javascript, web-development, frameworks
+tags: javascript, development, frameworks
 gh_issue_number: 1700
 ---
 

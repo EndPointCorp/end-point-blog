@@ -1,11 +1,9 @@
 ---
 author: Kulbir Singh
 gh_issue_number: 1060
-tags: django, python, twilio
+tags: django, python, saas
 title: Integrate Twilio in Django
 ---
-
-
 
 ### Twilio
 
@@ -214,5 +212,3 @@ Fill out the form, and hit the submit button to send your SMS.
 ### CONCLUSION
 
 Congratulations, your SMS is successfully sent. Good luck!
-
-

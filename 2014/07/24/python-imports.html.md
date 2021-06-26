@@ -116,7 +116,7 @@ The first finder knows how to find built-in modules and since **re** is not a bu
 False
 ```
 
-The second finder knows how to find [frozen modules](), which **re** is not. The third knows how to find modules from a list of path entries called an import path. For **re** the import path is sys.path but for subpackages the import path can be the parent’s __path__ attribute.
+The second finder knows how to find frozen modules, which **re** is not. The third knows how to find modules from a list of path entries called an import path. For **re** the import path is sys.path but for subpackages the import path can be the parent’s __path__ attribute.
 
 ```bash
 >>>sys.path

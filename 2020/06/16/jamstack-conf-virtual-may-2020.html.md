@@ -1,7 +1,7 @@
 ---
 title: "Jamstack Conf Virtual 2020: Thoughts & Highlights"
 author: Greg Davidson
-tags: jamstack, html, css, javascript, conference, development
+tags: jamstack, html, css, javascript, conference, development, cdn
 gh_issue_number: 1639
 ---
 

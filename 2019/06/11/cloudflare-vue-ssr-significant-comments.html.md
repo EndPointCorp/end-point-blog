@@ -1,7 +1,7 @@
 ---
 author: "David Christensen"
 title: "Cloudflare and Vue SSR; Client Hydration Failures"
-tags: vue, cloudflare, javascript
+tags: vue, cdn, javascript
 gh_issue_number: 1529
 ---
 

@@ -92,7 +92,7 @@ initializer "piggybak_bundle_discounts.precompile_hook" do |app|
 end
 ```
 
-Finally, since Piggybak utilizes RailsAdmin for its admin system, we need to register the models as following the [RailsAdmin documentation]().
+Finally, since Piggybak utilizes RailsAdmin for its admin system, we need to register the models as following the RailsAdmin documentation.
 
 ```ruby
 initializer "piggybak_bundle_discounts.rails_admin_config" do |app|

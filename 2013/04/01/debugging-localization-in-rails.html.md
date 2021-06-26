@@ -1,11 +1,9 @@
 ---
 author: Mike Farmer
 gh_issue_number: 773
-tags: rails
+tags: rails, localization
 title: Debugging Localization in Rails
 ---
-
-
 
 Rails offers a very extensive library for handling localization using [the rails-i18n gem](https://github.com/svenfuchs/rails-i18n). If you’ve done any localization using Rails, you know that it can be difficult to keep track of every string on your web application that needs translation. During a recent project, I was looking for an easy way to visually see translation issues while browsing through the UI in our application.
 
@@ -109,5 +107,3 @@ With this initializer in place, I added the following CSS to my global styleshee
 Now all missing translation errors and fallbacks were noticeable while browsing the UI and all translation issues were logged to my development log. Now obviously, I don’t want these things showing up in production so I wrapped the whole thing in a if Rails.env.development? conditional. I could also think of times, like while working on implementing design, that I don’t really care about translation issues as well, so I added a flag for turning it off in development as well.
 
 You can see my entire solution on [a gist over at github.](https://gist.github.com/mikefarmer/5286140#file-debug_localization-rb) It was suggested by a fellow colleague that I should turn this into a gem, but I didn’t see the need if all you had to do is copy and paste this initializer. If a gem is something you’d like to see this in, please let me know and I’ll consider packaging it up.
-
-

@@ -77,7 +77,7 @@ In the past, the default was “smart”. Which often means your friendly neighb
 
 ### Feature: new “cluster_name” option
 
-When you run a lot of different Postgres clusters on your server, as I tend to do, it can be hard to tell them apart as the version and port are not reported in the ps output. I sometimes have nearly a dozen different clusters running, due to testing different versions and different applications. Similar in spirit to the [application_name]() option, the new cluster_name option solves the problem neatly by allowing a custom string to be put in to the process title. Thanks to Thomas Munro for inventing this. So instead of this:
+When you run a lot of different Postgres clusters on your server, as I tend to do, it can be hard to tell them apart as the version and port are not reported in the ps output. I sometimes have nearly a dozen different clusters running, due to testing different versions and different applications. Similar in spirit to the application_name option, the new cluster_name option solves the problem neatly by allowing a custom string to be put in to the process title. Thanks to Thomas Munro for inventing this. So instead of this:
 
 ```
 greg      7780     1  0 Mar01 pts/0    00:00:03 /home/greg/pg/9.5/bin/postgres -D data

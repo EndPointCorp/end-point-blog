@@ -23,7 +23,6 @@ $x = (1, 1, 1);  # $x is "3", the list size
 
 In list context, a list of things is still a list of things. That's pretty simple, but when you are expecting a scalar and you get a list, your world can get pretty confused.
 
-[]()
 Okay, now the know-it-alls have rejoined us. I had a Perl hashref being initialized with code something like this:
 
 ```nohighlight

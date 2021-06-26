@@ -127,7 +127,7 @@ Consider this JavaScript code:
 ```js
 // Imagine we have a order object that looks like this and comes from some
 // external source like a database or a web API.
-let order = {
+const order = {
   orderNumber: '123456',
   total: 100.00,
   customer: {
@@ -153,13 +153,13 @@ Now, in the real world things are not usually as simple. For example, it’s com
 
 ```js
 function getZipCode() {
-  if (order != null) {
-    let customer = order.customer;
+  if (order !== null) {
+    const customer = order.customer;
 
-    if (customer != null) {
-      let address = customer.address;
+    if (customer !== null) {
+      const address = customer.address;
 
-      if (address != null) {
+      if (address !== null) {
         return address.zip;
       }
     }
@@ -190,7 +190,7 @@ class NullHandlerMonad {
   // important so that a method chain can be written in fluent syntax.
   chain(operation) {
     // If the value is not null, execute the operation...
-    if (this.value != null) {
+    if (this.value !== null) {
       return new NullHandlerMonad(operation(this.value));
     // ...if it is, then just return null wrapped in the monad
     } else {
@@ -221,6 +221,16 @@ function getZipCode() {
 
 Pretty neat, huh? We’ve managed to get our `getZipCode` function back to a more succinct style while still keeping the safety provided by the null checks on the values that we’re working with: `order`, `customer`, `address` and `zip`. The repeated boilerplate of the conditionals with null checks is gone, abstracted away inside the monad class.
 
+> This repeated null check pattern is so common in fact, that the designers of JavaScript decided to add a solution to this problem at the language level. This solution comes in the form of the [optional chaining operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining). Using it, the implementation of our `getZipCode` function would look like this:
+>
+> ```js
+> function getZipCode() {
+>  return order?.customer?.address?.zip;
+> }
+> ```
+>
+> It would have the same effect of returning `zip` if it is able to reach it, while short circuiting and returning `null` if any element in the chain is missing.
+
 If we go back to what Wikipedia promised us about monads, we can see the promise fulfilled even in this small, trivial example. Wikipedia said that monads…
 
 - “…can abstract away boilerplate”. Yes, we abstracted away the boilerplate null checks.
@@ -243,7 +253,7 @@ Consider an `order` object that looks like this:
 ```js
 // Imagine we have a order object that looks like this and comes from some
 // external source like a database or a web API.
-let order = {
+const order = {
   orderNumber: '123456',
   total: 100.00,
 
@@ -299,7 +309,7 @@ function getZipCode() {
 }
 ```
 
-> This is an exaggeration. We could easily collapse all the try/catch combos into a single catch all at the end. This is, however, a good example to see monads in action.
+> In a simple example such as this, we could gain some readability back by collapsing all the try/catch combos into a single catch all at the end. Code like this however can and does get complicated in the real world. The `try` blocks could get more complex and the handling blocks could differ slightly from each other. This is, however, a good example to see monads in action.
 
 Here, we can see that the pattern of boilerplate that repeats itself many times is the try/catch. We could define a new type of monad which would help us rewrite this code in a more succinct manner. We could call it `ExceptionHandlerMonad` and it could look like this:
 
@@ -390,7 +400,7 @@ Another common task is iterating through various levels of nested arrays in orde
 Imagine we run a company that offers vehicle maintenance services to companies with fleets of vehicles. We may have a data structure like the following:
 
 ```js
-let cities = [
+const cities = [
   {
     name: 'Los Angeles',
     locations: [
@@ -421,14 +431,12 @@ We may want to get a list of all the wheels for all the vehicles that we maintai
 
 ```js
 function getWheels() {
-  let wheels = [];
+  const wheels = [];
 
-  for (let city of cities) {
-    for (let location of city.locations) {
-      for (let vehicle of location.vehicles) {
-        for (let wheel of vehicle.wheels) {
-          wheels.push(wheel);
-        }
+  for (const city of cities) {
+    for (const location of city.locations) {
+      for (const vehicle of location.vehicles) {
+        wheels.push(...vehicle.wheels);
       }
     }
   }
@@ -457,10 +465,10 @@ class NestedIteratorMonad {
   // Selector must be a function that receives an element from this.values and
   // returns an array.
   chain(selector) {
-    let subValues = [];
+    const subValues = [];
 
-    for (let value of this.values) {
-      for (let subValue of selector(value)) {
+    for (const value of this.values) {
+      for (const subValue of selector(value)) {
         subValues.push(subValue);
       }
     }
