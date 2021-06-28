@@ -3,53 +3,29 @@ author: "Kevin Campusano"
 title: "Building REST APIs with .NET 5, ASP.NET Core and PostgreSQL"
 tags: dotnet, asp.net core, c#, webapi, rest, postgresql
 ---
-- [Building REST APIs with .NET 5, ASP.NET Core and PostgreSQL](#building-rest-apis-with-net-5-aspnet-core-and-postgresql)
-- [What we're building](#what-were-building)
-  - [The demo application](#the-demo-application)
-  - [The data model](#the-data-model)
-- [The development environment](#the-development-environment)
-  - [Setting up the PostgreSQL database with Docker](#setting-up-the-postgresql-database-with-docker)
-  - [Installing the .NET 5 SDK](#installing-the-net-5-sdk)
-- [Setting up the project](#setting-up-the-project)
-  - [Creating our ASP.NET Core REST API project](#creating-our-aspnet-core-rest-api-project)
-  - [Installing packages we'll need](#installing-packages-well-need)
-  - [Connecting to the database and performing initial app configuration](#connecting-to-the-database-and-performing-initial-app-configuration)
-- [Building the application](#building-the-application)
-  - [Creating model entities, migrations and updating the database](#creating-model-entities-migrations-and-updating-the-database)
-  - [Creating controllers for CRUDing our tables](#creating-controllers-for-cruding-our-tables)
-  - [Adding unique constraints via indexes](#adding-unique-constraints-via-indexes)
-  - [Reponding with specific HTTP error codes (409 Conflict)](#reponding-with-specific-http-error-codes-409-conflict)
-  - [Adding a more complex entity to the model](#adding-a-more-complex-entity-to-the-model)
-  - [Adding composite unique indexes](#adding-composite-unique-indexes)
-  - [Adding controllers with custom routes](#adding-controllers-with-custom-routes)
-  - [Using resource models as DTOs for controllers](#using-resource-models-as-dtos-for-controllers)
-  - [Adding input validation](#adding-input-validation)
-  - [Implementing endpoints for quote rules and overrides](#implementing-endpoints-for-quote-rules-and-overrides)
-  - [Implementing the quote model](#implementing-the-quote-model)
-  - [Using Dependency Injection](#using-dependency-injection)
-  - [Adding seed data for lookup tables](#adding-seed-data-for-lookup-tables)
-  - [Improving the Swagger UI via XML comments](#improving-the-swagger-ui-via-xml-comments)
-  - [Configuring the app via settings files and environment variables](#configuring-the-app-via-settings-files-and-environment-variables)
-  - [That's all for now](#thats-all-for-now)
 
 # Building REST APIs with .NET 5, ASP.NET Core and PostgreSQL
 
-This is old news by now, but I'm still amazed by the fact that nowadays .NET is open source and can run on linux. I truly believe that this new direction can help the technology realize its true potential, since it's no longer shackled to Windows based deployments. I've personally been outside the .NET game for a good while, but with the milestone release of .NET 5, I think now is a great time to dive in.
+This is old news by now, but I'm still amazed by the fact that nowadays [.NET is open source and can run on linux](https://dotnet.microsoft.com/platform/open-source). I truly believe that this new direction can help the technology realize its true potential, since it's no longer shackled to Windows based environments. I've personally been outside the .NET game for a good while, but with [the milestone release that is .NET 5](https://docs.microsoft.com/en-us/dotnet/core/dotnet-five), I think now is a great time to dive back in.
 
-So I thought of taking some time to do just that, really dive in, see what's new, and get a sense of the general developer experience that the current incarnation of .NET offers. So in this blog post, I'm going to chronicle my experience developing a simple, but complete REST API application. Along the way, I'll touch on the most common problems that one runs into when develping such applications and how are they solved in the .NET world. So think of this piece as a sort of tutorial or overview of the most common framework features when it comes to developing REST APIs.
+So I thought of taking some time to do just that, really dive in, see what's new, and get a sense of the general developer experience that the current incarnation of .NET offers. So in this blog post, I'm going to chronicle my experience developing a simple, but complete [REST API](https://www.redhat.com/en/topics/api/what-is-a-rest-api) application. Along the way, I'll touch on the most common problems that one runs into when develping such applications and how are they solved in the .NET world. So think of this piece as a sort of tutorial or overview of the most common framework features when it comes to developing REST APIs.
 
 First, let's get familiar with what we're building.
+
+> There's a table of contents at the bottom: [Table of contents](#table-of-contents)
 
 # What we're building
 
 ## The demo application
+
+> You can find the finished product in https://github.com/megakevin/end-point-blog-dotnet-5-web-api
 
 The application that we'll be building throughout this article will address a request from a hypothetical car junker business. Our client wants to automate the proces of calculating how much money to offer their customers for their vehicles, given certain information about them. And they want an app to do that. We are building the back end component that will support that app. It is a REST API that allows users to provide vehicle information (year, make, model, condition, etc) and will produce a quote of how much money would our hypothetical client be willing to pay for it.
 
 Here's a short list of features that we need to implement in order to fulfill that requirement:
 
 1. Given a vechicle model and condition, calculate a price.
-2. Store and manage pricing rules that are used to calculate vehicle prices.
+2. Store and manage rules that are used to calculate vehicle prices.
 3. Store and manage pricing overrides on a vehicle model basis. Price overrides are used regardless of the current rules.
 4. CRUD vehicle models so that overrides can the specified for them.
 
@@ -63,9 +39,9 @@ The main table in our model is the `quotes` table. It stores all the requests fo
 
 The `quotes` table includes all the fields that identify a vehicle: year, make, model, body style and size. It also includes an `model_style_year_id` field which is an optional foreign key to another table. This FK points to the `model_style_years` table which contains specific vehicle models that our system can store explicitly.
 
-The idea of this is that, when a customer submits a request for a quote, if we have their vehicle registered in our database, then we can populate this foreign key and link the quote with the specific vehicle that it's quoting. If we don't have their vehicle registered, then we leave that field unpopulated. Either way, we can offer a quote. The only difference being the level or certainty of such quote.
+The idea of this is that, when a customer submits a request for a quote, if we have their vehicle registered in our database, then we can populate this foreign key and link the quote with the specific vehicle that it's quoting. If we don't have their vehicle registered, then we leave that field unpopulated. Either way, we can offer a quote. The only difference being the level or certainty of the quote.
 
-The records in the `model_style_years` table represent specific vechicles. That whole hierarchy works like this: A vehicle make (e.g. Honda, Toyota, etc in the `makes` table) has many models (e.g. Civic, Corolla, etc in the `models` table), each model has many styles (the `model_styles` table). Styles are combinations of body types (the `body_types` table) and sizes (the `sizes` table) (e.g. Mid-size Sedan, Compact Coupe, etc). And finally, each model style has many years (via the `model_style_years` table).
+The records in the `model_style_years` table represent specific vechicles. That whole hierarchy works like this: A vehicle make (e.g. Honda, Toyota, etc in the `makes` table) has many models (e.g. Civic, Corolla, etc in the `models` table), each model has many styles (the `model_styles` table). Styles are combinations of body types (the `body_types` table) and sizes (the `sizes` table) (e.g. Mid-size Sedan, Compact Coupe, etc). And finally, each model style has many years in which they were being produced (via the `model_style_years` table).
 
 This model allows us very fine grained differentiation between vehicles. For example, we can have a "2008 Honda Civic Hatchback which is a Compact car" and also a "1990 Honda Civic Hatchback which is a Sub-compact". That is, same model, different year, size or body type. 
 
@@ -77,11 +53,11 @@ Finally, we have a `quote_overrides` table which specifies a flat, static price 
 
 ## Setting up the PostgreSQL database with Docker
 
-For this project, our database of choice is PostgreSQL. Luckily for us, getting a PostgreSQL instance up and runnig is very easy thanks to docker.
+For this project, our database of choice is [PostgreSQL](https://www.postgresql.org/). Luckily for us, getting a PostgreSQL instance up and runnig is very easy thanks to [Docker](https://www.docker.com/).
 
 > If you want to learn more about dockerizing a typical web application, take a look at [this article](https://www.endpoint.com/blog/2020/08/27/containerizing-magento-with-docker-compose-elasticsearch-mysql-and-magento) that explains the process in detail.
 
-Once you have docker installed in your machine, getting a PostgreSQL instance is as symple as running the following command:
+Once you have [Docker installed](https://docs.docker.com/get-docker/) in your machine, getting a PostgreSQL instance is as symple as running the following command:
 
 ```sh
 $ docker run -d \
@@ -94,9 +70,9 @@ $ docker run -d \
     postgres
 ```
 
-Here we'er asking docker to run a new container based on the latest `postgres` image, name it `vehicle-quote-postgres`, specify the port to use the default PostgreSQL one, make it accessible to the local network (with the `--network host` option) and finally, specify a few environment variables that the `postgres` image uses when building our new instance to set up the default database name, user and password (with the three `-e` options).
+Here we're asking Docker to run a new [container](https://docs.docker.com/get-started/#what-is-a-container) based on the latest `postgres` [image](https://docs.docker.com/get-started/#what-is-a-container-image) from [DockerHub](https://hub.docker.com/_/postgres), name it `vehicle-quote-postgres`, specify the port to use the default PostgreSQL one, make it accessible to the local network (with the `--network host` option) and finally, specify a few environment variables that the `postgres` image uses when building our new instance to set up the default database name, user and password (with the three `-e` options).
 
-After docker is done working its magic, you should be able to access the databse with something like:
+After Docker is done working its magic, you should be able to access the databse with something like:
 
 ```sh
 $ docker exec -it vehicle-quote-postgres psql -U vehicle_quote
@@ -112,9 +88,9 @@ Type "help" for help.
 vehicle_quote=#
 ```
 
-This command is connecting to our new `vehicle-quote-postgres` container and then, from within the container, using the command line client `psql` in order to connect to the database.
+This command is connecting to our new `vehicle-quote-postgres` container and then, from within the container, using the [command line client `psql`](https://www.postgresql.org/docs/13/app-psql.html) in order to connect to the database.
 
-If you have `psql` installed in your own machine, you use it directly to connect to the PostgreSQL instance running inside the container:
+If you have `psql` [installed](https://www.compose.com/articles/postgresql-tips-installing-the-postgresql-client/) on your own machine, you can use it directly to connect to the PostgreSQL instance running inside the container:
 
 ```sh
 $ psql -h localhost -U vehicle_quote
@@ -128,7 +104,7 @@ Ok, with that out of the way, let's install .NET 5.
 
 .NET 5 truly is multiplatform, so whatever environment you prefer to work with, they've got you covered. You can go to [the .NET 5 download page](https://dotnet.microsoft.com/download/dotnet/5.0) and pick your desired flavor of the SDK.
 
-On Ubuntu 20.10, which is what I'm running, installation is painless. It's your typical process with APT and [this page from the official docs](https://docs.microsoft.com/en-us/dotnet/core/install/linux-ubuntu#2010-) has all the details.
+On Ubuntu 20.10, which is what I'm running, installation is painless. It's your typical process with [APT](https://en.wikipedia.org/wiki/APT_(software)) and [this page from the official docs](https://docs.microsoft.com/en-us/dotnet/core/install/linux-ubuntu#2010-) has all the details.
 
 First step is to add the Microsoft package repository:
 
@@ -138,7 +114,7 @@ $ wget https://packages.microsoft.com/config/ubuntu/20.10/packages-microsoft-pro
 $ sudo dpkg -i packages-microsoft-prod.deb
 ```
 
-Then, install with APT like one would any other software package:
+Then, install .NET 5 with APT like one would any other software package:
 
 ```sh
 $ sudo apt-get update; \
@@ -164,9 +140,9 @@ Ok now that we have our requirements, database and SDK, let's start setting up o
 $ dotnet new webapi -o VehicleQuotes
 ```
 
-This instructs the dotnet command line tool to create a new REST API web application project for us in a new `VehicleQuotes` directory.
+This instructs the `dotnet` command line tool to create a new REST API web application project for us in a new `VehicleQuotes` directory.
 
-As a result, dotnet will give you a `The template "ASP.NET Core Web API" was created successfully.` message and a new directory will be created with our web application files. The newly created `VehicleQuotes` looks like this:
+As a result, `dotnet` will give you a `The template "ASP.NET Core Web API" was created successfully.` message and a new directory will be created with our web application files. The newly created `VehicleQuotes` project looks like this:
 
 ```
 .
@@ -190,7 +166,7 @@ As a result, dotnet will give you a `The template "ASP.NET Core Web API" was cre
 
 Important things to note here are the `appsettings.json` and `appsettings.Development.json` files which contain environment specific configuration values; the `Controllers` directory where we define our application controllers and action methods (i.e. our REST API endpoints); the `Program.cs` and `Startup.cs` files that contain our application's entry point and bootstrapping logic; and finally `VehicleQuotes.csproj` which is the file that contains project wide configuration that the framework cares about like references, compilatin targets, and other options. Feel free to explore.
 
-The `dotnet new` command has given us quite a bit. These files make up a fully working application that we can run and play around with. It even has a Swagger UI, as I'll demonstrate shortly. A great place to get started from.
+The `dotnet new` command has given us quite a bit. These files make up a fully working application that we can run and play around with. It even has a [Swagger UI](https://swagger.io/tools/swagger-ui/), as I'll demonstrate shortly. It's a great place to get started from.
 
 > You can also get a pretty comprehensive `.gitignore` file by running the `dotnet new gitignore` command.
 
@@ -221,23 +197,23 @@ Open up a browser window and go to `https://localhost:5001/swagger` to find a Sw
 
 ![Initial Swagger UI](dotnet-5-web-api/initial-swagger.png)
 
-As you can see we've got a GET WeatherForecast endpoint in our app. This is included by default in the `webapi` project template that we specified in our call to `dotnet new`. You can see it defined in the `Controllers/WeatherForecastController.cs` file.
+As you can see we've got a `GET WeatherForecast` endpoint in our app. This is included by default in the `webapi` project template that we specified in our call to `dotnet new`. You can see it defined in the `Controllers/WeatherForecastController.cs` file.
 
 ## Installing packages we'll need 
 
-Now let's install all the tools and libraries we will need for our application. First, we install the ASP.NET Code Generator tool which we'll use later for scaffolding controllers:
+Now let's install all the tools and libraries we will need for our application. First, we install the [ASP.NET Code Generator](https://www.nuget.org/packages/dotnet-aspnet-codegenerator/) tool which we'll use later for scaffolding controllers:
 
 ```sh
 $ dotnet tool install --global dotnet-aspnet-codegenerator
 ```
 
-We also need to install the Entity Framework command line tools which help us with creating and applying database migrations:
+We also need to install the [Entity Framework command line tools](https://www.nuget.org/packages/dotnet-ef/) which help us with creating and applying database migrations:
 
 ```sh
 $ dotnet tool install --global dotnet-ef
 ```
 
-Now, we need to install a few libraries that we'll use in our project. First are all the packages that allow us to use Entity Framework Core, provide scaffolding support and give us a detailed debugging page for database errors:
+Now, we need to install a few libraries that we'll use in our project. First are all the packages that allow us to use [Entity Framework Core](https://docs.microsoft.com/en-us/ef/), provide scaffolding support and give us a detailed debugging page for database errors:
 
 ```sh
 $ dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
@@ -246,13 +222,13 @@ $ dotnet add package Microsoft.EntityFrameworkCore.SqlServer
 $ dotnet add package Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore
 ```
 
-We also need the EF Core driver for PostgreSQL which will allow us to interact with our database:
+We also need the [EF Core driver for PostgreSQL](https://www.npgsql.org/efcore/) which will allow us to interact with our database:
 
 ```sh
 $ dotnet add package Npgsql.EntityFrameworkCore.PostgreSQL
 ```
 
-Finally, we need another package that will allow us to use the snake case naming convention for our database tables, fields, etc. We need this because EF Core uses capitalized camel case by default, which is not very common in the PostgreSQL world, so this will allow us to play nice. This is the package:
+Finally, we need [another package](https://github.com/efcore/EFCore.NamingConventions) that will allow us to use the [snake case](https://en.wikipedia.org/wiki/Snake_case) naming convention for our database tables, fields, etc. We need this because EF Core uses [capitalized camel case](https://wiki.c2.com/?UpperCamelCase) by default, which is not very common in the PostgreSQL world, so this will allow us to play nice. This is the package:
 
 ```sh
 $ dotnet add package EFCore.NamingConventions
@@ -260,7 +236,7 @@ $ dotnet add package EFCore.NamingConventions
 
 ## Connecting to the database and performing initial app configuration
 
-In order to connect to, query and modify a database using EF Core, we need to create a `DbContext`. This is a class that serves as the entry point into the database. Create a new directory called `Data` in the project root and add this new `VehicleQuotesContext.cs` file to it:
+In order to connect to, query and modify a database using EF Core, we need to create a [`DbContext`](https://docs.microsoft.com/en-us/ef/core/dbcontext-configuration/). This is a class that serves as the entry point into the database. Create a new directory called `Data` in the project root and add this new `VehicleQuotesContext.cs` file to it:
 
 ```cs
 using Microsoft.EntityFrameworkCore;
@@ -277,9 +253,9 @@ namespace VehicleQuotes
 }
 ```
 
-As you can see this is just a simple class that inherits from EF Core's `DbContext` class. That's all we need for now. We will continue building on this class as we add new tables and cofigurations.
+As you can see this is just a simple class that inherits from EF Core's [`DbContext`](https://docs.microsoft.com/en-us/dotnet/api/microsoft.entityframeworkcore.dbcontext?view=efcore-5.0) class. That's all we need for now. We will continue building on this class as we add new tables and cofigurations.
 
-Now, we need to add this class into ASP.NET Core's built in IoC container so that it's available to controllers and other classes via Dependency Injection, and tell it how to find our database. Go to `Startup.cs` and add the following using statement near the top of the file:
+Now, we need to add this class into [ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/?view=aspnetcore-5.0)'s built in [IoC container](https://martinfowler.com/articles/injection.html) so that it's available to controllers and other classes via [Dependency Injection](https://en.wikipedia.org/wiki/Dependency_injection), and tell it how to find our database. Go to `Startup.cs` and add the following using statement near the top of the file:
 
 ```cs
 using Microsoft.EntityFrameworkCore;
@@ -300,9 +276,9 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-`services` contains all the objects (known as "services") that are available in the app for Dependency Injection. So here, we're adding our newly created `DbContext` to it, specifying that it will connect to a PostgreSQL database (via the `options.UseNpgsql` call), and that it will use a connection string named `VehicleQuotesContext` from the app's default configuration file. So let's add the connection string then. To do so, change the `appsettings.json` like so:
+> `UseNpgsql` is an [extension method](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/extension-methods) made available to us by the `Npgsql.EntityFrameworkCore.PostgreSQL` package that we installed in the previous step.
 
-> `UseNpgsql` is an extension method made available to us by the `Npgsql.EntityFrameworkCore.PostgreSQL` package that we installed in the previous step.
+The `services` variable contains all the objects (known as "services") that are available in the app for Dependency Injection. So here, we're adding our newly created `DbContext` to it, specifying that it will connect to a PostgreSQL database (via the `options.UseNpgsql` call), and that it will use a connection string named `VehicleQuotesContext` from the app's default configuration file. So let's add the connection string then. To do so, change the `appsettings.json` like so:
 
 ```diff
 {
@@ -321,7 +297,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-This is your typical PostgreSQL connection string. The only gotcha is that it needs to be specified under `ConnectionStrings` -> `VehicleQuotesContext` so that our call to `Configuration.GetConnectionString` can find it.
+This is your typical PostgreSQL connection string. The only gotcha is that it needs to be specified under the `ConnectionStrings` -> `VehicleQuotesContext` section so that our call to `Configuration.GetConnectionString` can find it.
 
 Now let's put the `EFCore.NamingConventions` package to good use and configure EF Core to use sake case when naming database objects. Add the following to the `ConfigureServices` method in `Startup.cs`:
 
@@ -397,7 +373,7 @@ Try it out. Do `dotnet run` and navigate to `https://localhost:5001` and you sho
 
 ## Creating model entities, migrations and updating the database
 
-Alright, with all that configuration out of the way, let's implement some of our actual application logic now. Refer back to our data model. We'll start by defining our three simplest tables: `makes`, `sizes` and `body_types`. With EF Core, we define tables via so-called POCO entities. Which are simple C# classes with some properties. The classes become tables and the properties become the table fields. Instances of these classes represent records in the databse.
+Alright, with all that configuration out of the way, let's implement some of our actual application logic now. Refer back to our data model. We'll start by defining our three simplest tables: `makes`, `sizes` and `body_types`. With EF Core, we define tables via so-called [POCO](https://en.wikipedia.org/wiki/Plain_old_CLR_object) entities. Which are simple C# classes with some properties. The classes become tables and the properties become the tables' fields. Instances of these classes represent records in the databse.
 
 So, create a new `Models` directory in our project's root and add these three files:
 
@@ -437,7 +413,7 @@ namespace VehicleQuotes.Models
 }
 ```
 
-Now, we add three corresponding `DbSet`s to our `DbContext` in `Data/VehicleQuoteContext.cs`. Here's the diff:
+Now, we add three corresponding [`DbSet`](https://docs.microsoft.com/en-us/dotnet/api/microsoft.entityframeworkcore.dbset-1?view=efcore-5.0)s to our `DbContext` in `Data/VehicleQuoteContext.cs`. Here's the diff:
 
 ```diff
 using Microsoft.EntityFrameworkCore;
@@ -459,13 +435,13 @@ namespace VehicleQuotes
 }
 ```
 
-This is how we tell EF Core to build tables in our databse for our entities. You'll see later how we use those `DbSet`s to access the data in those tables. For now, let's create a migration script that we can later run to apply changes to our database. Run the following to have EF Core create it for us:
+This is how we tell EF Core to build tables in our databse for our entities. You'll see later how we use those `DbSet`s to access the data in those tables. For now, let's create a [migration](https://docs.microsoft.com/en-us/ef/core/managing-schemas/migrations/?tabs=dotnet-core-cli) script that we can later run to apply changes to our database. Run the following to have EF Core create it for us:
 
 ```sh
 $ dotnet ef migrations add AddLookupTables
 ```
 
-Now take a loot at the newly created `Migrations` directory. It contains a few new files, but the one we care about right now is `Migrations/{TIMESTAMP}_AddLookupTables.cs`. In its `Up` method, it's got some code in there that will modify the databse structure when run. That's right, the EF Core tooling has inspected our project, identified the new entities, and automatically generated a migration script for us that creates tables for them. Notice also how the tables and fields use the snake case naming convention, just as we specified with the call to `UseSnakeCaseNamingConvention` in `Startup.cs`.
+Now take a loot at the newly created `Migrations` directory. It contains a few new files, but the one we care about right now is `Migrations/{TIMESTAMP}_AddLookupTables.cs`. In its `Up` method, it's got some code that will modify the databse structure when run. The EF Core tooling has inspected our project, identified the new entities, and automatically generated a migration script for us that creates tables for them. Notice also how the tables and fields use the snake case naming convention, just as we specified with the call to `UseSnakeCaseNamingConvention` in `Startup.cs`.
 
 Now, to actually run the migration script and apply the changes to the database, we do:
 
@@ -534,7 +510,7 @@ There are our tables in all their normalized, snake cased glory. The `__EFMigrat
 
 ## Creating controllers for CRUDing our tables
 
-Now that we have that, let's add a few endpoints to support basic CRUD of those tables. We can use the `dotnet-aspnet-codegenerator` scaffoldind tool that we installed earlier. For the three that we have, we would do:
+Now that we have that, let's add a few endpoints to support basic CRUD of those tables. We can use the `dotnet-aspnet-codegenerator` scaffoldind tool that we installed earlier. For the three tables that we have, we would do:
 
 ```
 $ dotnet aspnet-codegenerator controller \
@@ -564,12 +540,12 @@ $ dotnet aspnet-codegenerator controller \
 
 Those commands tell the scaffolding tool to create new controllers that:
 
-1. Is named as given by the `-name` option.
-2. Uses the model class specified in the `-m` option.
-3. Uses our `VehicleQuotesContext` to talk to the databse. As per the `-dc` option.
-4. Defines the methods using `async`/`await` syntax. Given by the `-async` option. 
-5. Is an API controller. Specified by the `-api` option.
-6. Is created in the `Controllers` directory. Via the `-outDir` option.
+1. Are named as given by the `-name` option.
+2. Use the model class specified in the `-m` option.
+3. Use our `VehicleQuotesContext` to talk to the databse. As per the `-dc` option.
+4. Define the methods using `async`/`await` syntax. Given by the `-async` option. 
+5. Are API controllers. Specified by the `-api` option.
+6. Are created in the `Controllers` directory. Via the `-outDir` option.
 
 Explore the new files that got created in the `Controllers` directory: `MakesController.cs`, `BodyTypesController.cd` and `SizesController.cs`. The controllers have been generated with the necessary [Action Methods](https://docs.microsoft.com/en-us/aspnet/mvc/overview/older-versions-1/controllers-and-routing/aspnet-mvc-controllers-overview-cs#understanding-controller-actions) to fetch, create, update and delete their corresponding entities. Try `dotnet run` and navigate to `https://localhost:5001` to see the new endpoints in the Swagger UI:
 
@@ -640,7 +616,7 @@ Now if you try to create, for example, a vehicle make with a repeated name, you'
 
 ## Reponding with specific HTTP error codes (409 Conflict)
 
-The fact that we can now enforce unique constraints is all well and good. But the error scenario is not very user friendly. Instead of returning a "500 Internal Server Error" status code with a wall of text, we should be responding with something more sensible. Maybe a 409 Conflict would be more appropriate for this kind of error. We can easily update our controllers to handle that scenario. What we need to do is update the methods that handle the `POST` and `PUT` endpoints so that they catch the `Microsoft.EntityFrameworkCore.DbUpdateException` exception and return the proper response. Here's how we would do it for the `MakesController`:
+The fact that we can now enforce unique constraints is all well and good. But the error scenario is not very user friendly. Instead of returning a "500 Internal Server Error" status code with a wall of text, we should be responding with something more sensible. Maybe a "409 Conflict" would be more appropriate for this kind of error. We can easily update our controllers to handle that scenario. What we need to do is update the methods that handle the `POST` and `PUT` endpoints so that they catch the `Microsoft.EntityFrameworkCore.DbUpdateException` exception and return the proper response. Here's how we would do it for the `MakesController`:
 
 ```diff
 // ...
@@ -693,7 +669,7 @@ namespace VehicleQuotes.Controllers
 }
 ```
 
-Go ahead and do the same for the other two, and try again to POST a repeated make name via the Swagger UI. You should see this now instead:
+Go ahead and do the same for the other two controllers, and try again to POST a repeated make name via the Swagger UI. You should see this now instead:
 
 ![HTTP 409 Conflict](dotnet-5-web-api/http-409-conflict.png)
 
@@ -703,7 +679,7 @@ Much better now, don't you think?
 
 Now let's work on an entity that's a little bit more complex: the one we will use to represent vehicle models.
 
-For this entity, we don't want our API to be as low level as for the other three, where it was basically a thin wrapper over database tables. We want it to be a little bit more abstract and not expose the entire database structure verbatim.
+For this entity, we don't want our API to be as low level as the one for the other three, where it was basically a thin wrapper over database tables. We want it to be a little bit more abstract and not expose the entire database structure verbatim.
 
 Refer back to the data model. We'll add `models`, `model_styles` and `model_style_years`. Let's start by adding the following classes:
 
@@ -768,6 +744,8 @@ Notice how some of these entities now include properties whose types are other e
 Take the `Model` entity for example. It has a property `Make` of type `Make`. It also has a `MakeID` property of type `int`. EF Core sees this and figures out that there's a relation between the `makes` and `models` tables. Specifically, that `models` have a `make`. A many-to-one relation where the `models` table stores a foreign key to the `makes` table.
 
 Similarly, the `Model` entity has a `ModelStyles` property of type `ICollection<ModelStyleYear>`. This tells EF Core that `models` have many `model_styles`. This one is a one-to-many relation from the perspective of the `models` table. The foreign key lives in the `model_styles` table and points back to `models`.
+
+> The official documentation is a great resource to learn more details about how relationships work in EF Core: [Relationships](https://docs.microsoft.com/en-us/ef/core/modeling/relationships?tabs=fluent-api%2Cfluent-api-simple-key%2Csimple-key#single-navigation-property-1).
 
 After that, same as before, we have to add the corresponding `DbSet`s to our `DbContext`:
 
@@ -858,7 +836,7 @@ $ dotnet ef database update
 
 ## Adding controllers with custom routes
 
-Our model dictates that vehicle models belong in a make. In other words, a vehicle model has no meaning by itself. It only has meaning within the context of a make. Ideally, we want our API routes to reflect this concept. In other words, instead of URLs for models to look like this: `/api/Models/{id}`; we'd rather them look like this: `/api/Makes/{makeId}/Models/{modelId}`. Let's go ahead and scaffold a controller for this entity:
+Our data model dictates that vehicle models belong in a make. In other words, a vehicle model has no meaning by itself. It only has meaning within the context of a make. Ideally, we want our API routes to reflect this concept. In other words, instead of URLs for models to look like this: `/api/Models/{id}`; we'd rather them look like this: `/api/Makes/{makeId}/Models/{modelId}`. Let's go ahead and scaffold a controller for this entity:
 
 ```
 $ dotnet aspnet-codegenerator controller \
@@ -876,13 +854,13 @@ Now let's change the resulting `Controllers/ModelsController.cs` to use the URL 
 [Route("api/Makes/{makeId}/[controller]/")]
 ```
 
-Do a `dotnet run` and take a peek at the Swagger UI on `https://localhost:5001` to see what the Models endpoint routes look like now:
+Do a `dotnet run` and take a peek at the Swagger UI on `https://localhost:5001` to see what the `Models` endpoint routes look like now:
 
 ![Nested routes](dotnet-5-web-api/nested-routes.png)
 
-The vehicle model routes are now nested within makes now, just like we wanted.
+The vehicle model routes are now nested within makes, just like we wanted.
 
-Of course, this is just eyecandy for now. We need to actually use this new `makeId` parameter for the logic in the endpoints. For example, one would expect a `GET` to `/api/Makes/1/Models` to return all the vehicle models that belong to the make with `id` 1. But right now, all vehicle models are returned regardless. All other endpoints behave similarly, there's no limit to the operations on the vehicle models. The given `makeId` is not used at all.
+Of course, this is just eyecandy for now. We need to actually use this new `makeId` parameter for the logic in the endpoints. For example, one would expect a `GET` to `/api/Makes/1/Models` to return all the vehicle models that belong to the make with `id` 1. But right now, all vehicle models are returned regardless. All other endpoints behave similarly, there's no limit to the operations on the vehicle models. The given `makeId` is not taken into consideration at all.
 
 Let's update the `ModelsController`'s `GetModels` method (which is the one that handles the `GET /api/Makes/{makeId}/Models` endpoint) to behave like one would expect. It should look like this:
 
@@ -901,7 +879,7 @@ public async Task<ActionResult<IEnumerable<Model>>> GetModels([FromRoute] int ma
 }
 ```
 
-See how we've included a new parameter to the method: `[FromRoute] int makeId`. This is how we tell ASP.NET Core that this endpoint will use that `makeId` parameter coming from the URL route. Then, we use our `DbContext` to try and find the make that corresponds to the given identifier. This is done in `_context.Makes.FindAsync(makeId)`. Then, if we couldn't find the given make, we return a `404 Not Found` HTTP status code as per the `return NotFound();` line. Finally, we query the `models` table for all the records whose `make_id` matches the given parameter. That's done in the last line of the method.
+See how we've included a new parameter to the method: `[FromRoute] int makeId`. This `[FromRoute]` [attribute](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/attributes/) is how we tell ASP.NET Core that this endpoint will use that `makeId` parameter coming from the URL route. Then, we use our `DbContext` to try and find the make that corresponds to the given identifier. This is done in `_context.Makes.FindAsync(makeId)`. Then, if we can't find the given make, we return a `404 Not Found` HTTP status code as per the `return NotFound();` line. Finally, we query the `models` table for all the records whose `make_id` matches the given parameter. That's done in the last line of the method.
 
 > We have access to the `DbContext` because it has been injected as a dependency into the controller via its constructor by the framework.
 
@@ -930,7 +908,7 @@ Let's update the `GetModel` method, which handles the `GET /api/Makes/{makeId}/M
 
 We've once again included the `makeId` as a parameter to the method and modified the EF Core query to use both the make id and the vehicle model id when looking for the record.
 
-And that's the gist of it. Other methods would be updated similarly. The next section with include these methods in their final form, so I won't go through each one of them here.
+And that's the gist of it. Other methods would need to be updated similarly. The next section with include these methods in their final form, so I won't go through each one of them here.
 
 ## Using resource models as DTOs for controllers
 
@@ -940,7 +918,7 @@ Now, I did say at the begining that we wanted the vehicle model endpoint to be a
 
 This is way too much. Let's make it a little bit more user friendly by making it more abstract.
 
-To do that, we will introduce what I like to call a Resource Model (or DTO, or View Model). This is a class whose only purpose is to streamline the API contract of the endpoint by defining a set of fields that clients will use to make requests and interpret responses. Something that's simpler than our actual database structure, but still captures all the information that's important for our application. We will update the `ModelsController` so that it's able to receive objects of this new class as requests, operate on them, translate them to our EF Core entities and actual database records, and return them as a response. The hope is that, by hiding the details of our database structure, we make it easier for clients to interact with our API.
+To do that, we will introduce what I like to call a Resource Model (or [DTO](https://martinfowler.com/eaaCatalog/dataTransferObject.html), or View Model). This is a class whose only purpose is to streamline the API contract of the endpoint by defining a set of fields that clients will use to make requests and interpret responses. Something that's simpler than our actual database structure, but still captures all the information that's important for our application. We will update the `ModelsController` so that it's able to receive objects of this new class as requests, operate on them, translate them to our EF Core entities and actual database records, and return them as a response. The hope is that, by hiding the details of our database structure, we make it easier for clients to interact with our API.
 
 So let's create a new `ResourceModels` directory in our project's root and add these two classes:
 
@@ -972,7 +950,7 @@ namespace VehicleQuotes.ResourceModels
 }
 ```
 
-With these two, instead of that mess from above, clients `POST`ing to `/api/Makes/{makeId}/Models` will be able to use a request body like this:
+Thanks yo these two, instead of that mess from above, clients `POST`ing to `/api/Makes/{makeId}/Models` will be able to use a request body like this:
 
 ```json
 {
@@ -989,7 +967,7 @@ With these two, instead of that mess from above, clients `POST`ing to `/api/Make
 }
 ```
 
-Which is much simpler. We have the vehicle model name and an array of styles. Each style has a body type and a size, which we can specify by their name because those are unique keys. We don't need their integer ids (i.e. primary keys) in order to find to them. Then, each style has an array of strings that contain the years in which those styles are available for that model. The make is part of the URL already, so we don't need to also specify it in the request payload.
+Which is much simpler. We have the vehicle model name and an array of styles. Each style has a body type and a size, which we can specify by their names because those are unique keys. We don't need their integer ids (i.e. primary keys) in order to find to them. Then, each style has an array of strings that contain the years in which those styles are available for that model. The make is part of the URL already, so we don't need to also specify it in the request payload.
 
 Let's update our `ModelsController` to use these Resource Models instead of the `Model` EF Core entity. Be sure to include the namespace where the Resource Models are defined by adding the following using statement: `using VehicleQuotes.ResourceModels;`. Now, let's update the `GetModels` method (which handles the `GET /api/Makes/{makeId}/Models` endpoint) so that it looks like this:
 
@@ -1026,7 +1004,7 @@ public async Task<ActionResult<IEnumerable<ModelSpecification>>> GetModels([From
 }
 ```
 
-The first thing that we chaged was the return type. Instead of `Task<ActionResult<IEnumerable<Model>>>`, the method now returns `Task<ActionResult<IEnumerable<ModelSpecification>>>`. We're going to use our new Resource Models as these endpoints contract so we need to make sure we are returning those. Next, we considerably changed the LINQ expression that searches the database for the vehicle model records we want. The filtering logic (given by the `Where`) is the same. That is, we're still seaching for vehicle models within the given make id. What we changed was the transformation logic in the `Select`. Our Action Method now returns a collection of `ModelSpecification` objects, so we updated the `Select` to produce such objects, based on the records from the `models` table that match our search criteria. We build `ModelSpecification`s using the data coming from `models` records and their related `model_styles` and `model_style_years`. Finally, we asynchronously execute the query to fetch the data from the database and return it.
+The first thing that we chaged was the return type. Instead of `Task<ActionResult<IEnumerable<Model>>>`, the method now returns `Task<ActionResult<IEnumerable<ModelSpecification>>>`. We're going to use our new Resource Models as these endpoints' contract, so we need to make sure we are returning those. Next, we considerably changed the LINQ expression that searches the database for the vehicle model records we want. The filtering logic (given by the `Where`) is the same. That is, we're still seaching for vehicle models within the given make id. What we changed was the projection logic in the `Select`. Our Action Method now returns a collection of `ModelSpecification` objects, so we updated the `Select` to produce such objects, based on the records from the `models` table that match our search criteria. We build `ModelSpecification`s using the data coming from `models` records and their related `model_styles` and `model_style_years`. Finally, we asynchronously execute the query to fetch the data from the database and return it.
 
 Next, let's move on to the `GetModel` method, which handles the `GET /api/Makes/{makeId}/Models/{id}` endpoint. This is what it should look like:
 
@@ -1073,7 +1051,7 @@ Next is the `PUT /api/Makes/{makeId}/Models/{id}` endpoint, handled by the `PutM
 // Expect `makeId` and `id` from the URL and a `ModelSpecification` from the request payload.
 public async Task<IActionResult> PutModel([FromRoute] int makeId, int id, ModelSpecification model)
 {
-    // Id the id in the URL and the request payload are different, return a 400.
+    // If the id in the URL and the request payload are different, return a 400.
     if (id != model.ID)
     {
         return BadRequest();
@@ -1229,11 +1207,11 @@ Which means that you can send in something like this, for example:
 }
 ```
 
-> This will work assuming you've created some make to add the vehicle model to, as well as a body type whose name is `Sedan` and a size whose name is `Compact`.
+> This will work assuming you've created at least one make to add the vehicle model to, as well as a body type whose name is `Sedan` and a size whose name is `Compact`.
 
 > There's also a `ModelExists` method in that controller which we don't need anymore. You can delete it.
 
-## Adding input validation
+## Validation using built-in Data Annotations.
 
 Depending on how "creative" you were in the previous section when trying to CRUD models, you may have run into an issue or two regarding the data that's allowed into our database. We solve that by implementing input validation. In ASP.NET Core, the easiest way to implement validation is via Data Annotation attributes on the entities or other objects that controllers receive as request payloads. So let's see about adding some validation to our app. Since our `ModelsController` uses the `ModelSpecification` and `ModelSpecificationStyle` Resource Models to talk to clients, let's start there. Here's the diff:
 
@@ -1311,7 +1289,9 @@ Pretty neat, huh? With minimal effort, we have some basic validation rules in pl
 
 > To learn more about model validation, including all the various validation attributes included in the framework, check the official documentation: [Model validation](https://docs.microsoft.com/en-us/aspnet/core/mvc/models/validation?view=aspnetcore-5.0), [System.ComponentModel.DataAnnotations Namespace](https://docs.microsoft.com/en-us/dotnet/api/system.componentmodel.dataannotations?view=net-5.0).
 
-Of course, the framework is never going to cover all possible validation scenarios with the built-in atributes. Case in point, It'd be great to validate that the `Years` array contians values that look like actual years. That is, four-character, digit-only strings. There are no validation attributes for that. So, we need to create our own. Let's add this file into a new `Validations` directory:
+## Validation using custom attributes
+
+Of course, the framework is never going to cover all possible validation scenarios with the built-in atributes. Case in point, it'd be great to validate that the `Years` array contains values that look like actual years. That is, four-character, digit-only strings. There are no validation attributes for that. So, we need to create our own. Let's add this file into a new `Validations` directory:
 
 ```cs
 // Validations/ContainsYearsAttribute.cs
@@ -1377,7 +1357,7 @@ namespace VehicleQuotes.Validation
 }
 ```
 
-Check the comments in the code for more details into how that class works. Then, we apply our custom attrobute to our `ModelSpecificationStyle` class in the same way that we applied the built in ones:
+Check the comments in the code for more details into how that class works. Then, we apply our custom attribute to our `ModelSpecificationStyle` class in the same way that we applied the built in ones:
 
 ```diff
 using System.ComponentModel.DataAnnotations;
@@ -1444,13 +1424,13 @@ Size = _context.Sizes.Single(size => size.Name == style.Size)
 
 They do so because we used the `Single` method, which is designed like that. It tries to find a body type or size whose name is the given value, can't find it, and thus, throws an exception.
 
-> If, for example, we wanted not founds to return `null`, we could have used `SingleOrDefault` instead.
+> If, for example, we wanted not-founds to return `null`, we could have used `SingleOrDefault` instead.
 
 This unhandled excception results in a response that's quite unbecoming:
 
 ![InvalidOperationException during POST](dotnet-5-web-api/invalid-operation-exception.png)
 
-So, to prevent that exception and control the error messaging, we need a couple new validation attributes that go into the `body_types` and `sizes` tables and check if the given values exist. Here's what they would look like:
+So, to prevent that exception and control the error messaging, we need a couple of new validation attributes that go into the `body_types` and `sizes` tables and check if the given values exist. Here's what one would look like:
 
 ```cs
 // Validations/VehicleBodyTypeAttribute.cs
@@ -1485,40 +1465,9 @@ namespace VehicleQuotes.Validation
 }
 ```
 
-```cs
-// Validations/VehicleSizeAttribute.cs
-using System;
-using System.ComponentModel.DataAnnotations;
-using Microsoft.EntityFrameworkCore;
-using System.Linq;
+> You can find the other one here: [Validations/VehicleSizeAttribute.cs](https://github.com/megakevin/end-point-blog-dotnet-5-web-api/blob/master/Validations/VehicleSizeAttribute.cs).
 
-namespace VehicleQuotes.Validation
-{
-    public class VehicleSizeAttribute : ValidationAttribute
-    {
-        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
-        {
-            if (value == null) return ValidationResult.Success;
-
-            var dbContext = validationContext.GetService(typeof(VehicleQuotesContext)) as VehicleQuotesContext;
-
-            var sizes = dbContext.Sizes.Select(s => s.Name).ToList();
-
-            if (!sizes.Contains(value))
-            {
-                var allowed = String.Join(", ", sizes);
-                return new ValidationResult(
-                    $"Invalid vehicle size {value}. Allowed values are {allowed}."
-                );
-            }
-
-            return ValidationResult.Success;
-        }
-    }
-}
-```
-
-These two are very similar to one another. The most interesting part is how we use the `IsValid` method's second parameter (`ValidationContext`) to obtain an instance of `VehicleQuotesContext` that we can use to query the database. The rest should be pretty self-explanatory. These attributes are classes that inherit from `System.ComponentModel.DataAnnotations`'s `ValidationAttribute` and implement the `IsValid` method. The method then checks that the value under scrutiny exists in the corresponding table and if it does not, raises a validation error. The validation error includes a list of allowed values. They can be applied to our `ModelSpecificationStyle` class like so:
+These two are very similar to one another. The most interesting part is how we use the `IsValid` method's second parameter (`ValidationContext`) to obtain an instance of `VehicleQuotesContext` that we can use to query the database. The rest should be pretty self-explanatory. These attributes are classes that inherit from `System.ComponentModel.DataAnnotations`'s `ValidationAttribute` and implement the `IsValid` method. The method then checks that the value under scrutiny exists in the corresponding table and if it does not, raises a validation error. The validation error includes a list of all allowed values. They can be applied to our `ModelSpecificationStyle` class like so:
 
 ```diff
 // ...
@@ -1574,17 +1523,17 @@ Produces a response like this:
 
 At this point we've explored many of the most common features avilable to us for developing Web APIs. So much so that implementing the next two pieces of functionality for our app doesn't really introduce any new concepts. So, I wont discuss that here in great detail.
 
-Feel free to browse the source code on GitHub if you want though. These are the relevant files:
+Feel free to browse the source code [on GitHub](https://github.com/megakevin/end-point-blog-dotnet-5-web-api) if you want though. These are the relevant files:
 
-- Controllers/QuoteOverridesController.cs
-- Controllers/QuoteRulesController.cs
-- Models/QuoteOverride.cs
-- Models/QuoteRule.cs
-- ResourceModels/QuoteOverrideSpecification.cs
-- Validation/FeatureTypeAttribute.cs
-- Migrations/20210627204444_AddQuoteRulesAndOverridesTables.cs
+- [Controllers/QuoteOverridesController.cs](https://github.com/megakevin/end-point-blog-dotnet-5-web-api/blob/master/Controllers/QuoteOverridesController.cs)
+- [Controllers/QuoteRulesController.cs](https://github.com/megakevin/end-point-blog-dotnet-5-web-api/blob/master/Controllers/QuoteRulesController.cs)
+- [Models/QuoteOverride.cs](https://github.com/megakevin/end-point-blog-dotnet-5-web-api/blob/master/Models/QuoteOverride.cs)
+- [Models/QuoteRule.cs](https://github.com/megakevin/end-point-blog-dotnet-5-web-api/blob/master/Models/QuoteRule.cs)
+- [ResourceModels/QuoteOverrideSpecification.cs](https://github.com/megakevin/end-point-blog-dotnet-5-web-api/blob/master/ResourceModels/QuoteOverrideSpecification.cs)
+- [Validation/FeatureTypeAttribute.cs](https://github.com/megakevin/end-point-blog-dotnet-5-web-api/blob/master/Validations/FeatureTypeAttribute.cs)
+- [Migrations/20210627204444_AddQuoteRulesAndOverridesTables.cs](https://github.com/megakevin/end-point-blog-dotnet-5-web-api/blob/master/Migrations/20210627204444_AddQuoteRulesAndOverridesTables.cs)
 
-The FeatureTypeAttribute class is interesting in that it provides another example of a validation attribute. This time is one that makes sure the value being validated is included in an array of strings.
+The `FeatureTypeAttribute` class is interesting in that it provides another example of a validation attribute. This time is one that makes sure the value being validated is included in an array of strings that's defined literally in the code.
 
 Other than that, it's all stuff we've already covered: models, migrations, scaffolding controllers, custom routes, resource models, etc.
 
@@ -1642,16 +1591,16 @@ namespace VehicleQuotes.Models
 
 This should be pretty familiar by now. It's a plain old class that defines a number of properties. One for each of the fields in the resulting table and a few navigation properties that serve to access related data.
 
-The only aspect worth noting is that we've defined the `ModelStyleYearID` property as a nullable integer (with `int?`). This is because, like we discussed at the beginning, the foreign key from `quotes` to `vehicle_style_years` is actually optional. The reason being that we may receive a quote request for a vehicle that we don't have registered in our database. We need to be able to support that, so if we don't have the requested vehicle registered, then that foreign key will stay unpopulated and we'll rely on the other fields (i.e. `Year`, `Make`, `Model`, `BodyTypeID` and `SizeID`) to identify the vehicle and calculate the quote for it.
+The only aspect worth noting is that we've defined the `ModelStyleYearID` property as a nullable integer (with `int?`). This is because, like we discussed at the beginning, the foreign key from `quotes` to `vehicle_style_years` is actually optional. The reason being that we may receive a quote request for a vehicle that we don't have registered in our database. We need to be able to support quoting those vehicles too, so if we don't have the requested vehicle registered, then that foreign key will stay unpopulated and we'll rely on the other fields (i.e. `Year`, `Make`, `Model`, `BodyTypeID` and `SizeID`) to identify the vehicle and calculate the quote for it.
 
 ## Using Dependency Injection
 
-So far we've been putting a lot logic in our controllers. That's generally not ideal, but fine as long as the logic is simple. The problem is that a design like that can quickly become a hindrance for maintainability and testing as our application grows more complex. For the logic that calculates a quote, we'd be better served by implementing it in its own class, outside of the controller that defines the endpoints and handles HTTP concerns. Then, the controller can be given access to that class and delegate to it all the quote calculation logic. Thankfully, ASP.NET Core includes an IoC container by default, which allows us to use Dependency Injection to solve these kinds of problems. Let's see what that looks like.
+So far we've been putting a lot logic in our controllers. That's generally not ideal, but fine as long as the logic is simple. The problem is that a design like that can quickly become a hindrance for maintainability and testing as our application grows more complex. For the logic that calculates a quote, we'd be better served by implementing it in its own class, outside of the controller that should only care about defining endpoints and handling HTTP concerns. Then, the controller can be given access to that class and delegate to it all the quote calculation logic. Thankfully, ASP.NET Core includes an IoC container by default, which allows us to use Dependency Injection to solve these kinds of problems. Let's see what that looks like.
 
 For working with quotes, we want to offer two endpoints:
 
 1. A `POST api/Quotes` that captures the vehicle information, calculates the quote, keeps record of the request, and responds with the calculated value.
-2. A `GET api/Quotes` that returns all the currently registered quotes on the system.
+2. A `GET api/Quotes` that returns all the currently registered quotes in the system.
 
 Using the Dependency Injection capabilities, a controller that implements those two could look like this:
 
@@ -1703,7 +1652,7 @@ namespace VehicleQuotes.Controllers
 }
 ```
 
-As you can see, we've once again opted to abstract away clients from the implementation details of our data model and used resource models for the API contract instead of the `Quote` entity directly. We have one for input data that's called `QuoteRequest` and another one for output: `SubmittedQuoteRequest`. Not very remarkable by themselves, but feel free to explore the source code in the GitHub repo.
+As you can see, we've once again opted to abstract away clients from the implementation details of our data model and used Resource Models for the API contract instead of the `Quote` entity directly. We have one for input data that's called [`QuoteRequest`](https://github.com/megakevin/end-point-blog-dotnet-5-web-api/blob/master/ResourceModels/QuoteRequest.cs) and another one for output: [`SubmittedQuoteRequest`](https://github.com/megakevin/end-point-blog-dotnet-5-web-api/blob/master/ResourceModels/SubmittedQuoteRequest.cs). Not very remarkable by themselves, but feel free to explore the source code in [the GitHub repo](https://github.com/megakevin/end-point-blog-dotnet-5-web-api/tree/master/ResourceModels).
 
 This controller has a dependency on `QuoteService`, which it uses to perform all of the necessary logic. This class is not defined yet so let's do that next: 
 
@@ -1907,15 +1856,15 @@ namespace VehicleQuotes.Services
 }
 ```
 
-Finally, we need to tell the framework that this class is available for Dependency Injection. Similar to how we did with the our `VehicleQuotesContext`, we do so in the `Startup.cs` file's `ConfigureServices` method. Just add this line at the top:
+Finally, we need to tell the framework that this class is available for Dependency Injection. Similarly to how we did with our `VehicleQuotesContext`, we do so in the `Startup.cs` file's `ConfigureServices` method. Just add this line at the top:
 
 ```cs
 services.AddScoped<Services.QuoteService>();
 ```
 
-> The core tenet of Inversion of Control is to depend on abstractions, not on implementations. So ideally, we would not have our controller directly call for a `QuoteService` instance. Instead, we would have it reference an abstraction, e.g. an interface like `IQuoteService`. The configuration on `Startup.cs` would then look like this instead: `services.AddScoped<Services.IQuoteService, Services.QuoteService>();`.
+> The core tenet of Inversion of Control is to depend on abstractions, not on implementations. So ideally, we would not have our controller directly call for a `QuoteService` instance. Instead, we would have it reference an abstraction, e.g. an interface like `IQuoteService`. The statement on `Startup.cs` would then look like this instead: `services.AddScoped<Services.IQuoteService, Services.QuoteService>();`.
 >
-> This is important because it would allow us to unit test the component that depends on our service class (i.e. the controller in this case) by passing it a mock object. One that also implements `IQuoteService` but does not really implement all the functionality of the actual `QuoteService` class. Since the controller only knows about the interface (that is, it "depends on an abstraction"), the actual object that we give it as a dependency doesn't matter to it, as long as it implements that interface. This ability to inject mocks as dependencies is invaluable during testing. Testing is beyond the scope of this article though, so I'll stick with the simpler approach with a static dependency on a concrete class. Know that this is not a good practice when it comes to actual production systems.
+> This is important because it would allow us to unit test the component that depends on our service class (i.e. the controller in this case) by passing it a [mock object](https://en.wikipedia.org/wiki/Mock_object). One that also implements `IQuoteService` but does not really implement all the functionality of the actual `QuoteService` class. Since the controller only knows about the interface (that is, it "depends on an abstraction"), the actual object that we give it as a dependency doesn't matter to it, as long as it implements that interface. This ability to inject mocks as dependencies is invaluable during testing. Testing is beyond the scope of this article though, so I'll stick with the simpler approach with a static dependency on a concrete class. Know that this is not a good practice when it comes to actual production systems.
 
 And that's all it takes. Once you add a few rules via `POST ​/api​/QuoteRules`, you should be able to get some vehicles quoted with `POST /api/Quotes`. And also see what the system has stored via `GET /api/Quotes`.
 
@@ -1951,7 +1900,7 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 }
 ```
 
-`OnModelCreating` is a hook that we can define to run some code at the time the model is being created for the first time. Here, we're using it to seed some data. In order to apply that, a migration needs to be created and executed. If you've added some data to the database, be sure to wipe it before runing the migration so that we don't run into unique constraint violations. Here are the migrations:
+[`OnModelCreating`](https://docs.microsoft.com/en-us/ef/core/modeling/#use-fluent-api-to-configure-a-model) is a hook that we can define to run some code at the time the model is being created for the first time. Here, we're using it to seed some data. In order to apply that, a migration needs to be created and executed. If you've added some data to the database, be sure to wipe it before runing the migration so that we don't run into unique constraint violations. Here are the migrations:
 
 ```
 $ dotnet ef migrations add AddSeedDataForSizesAndBodyTypes
@@ -1969,7 +1918,7 @@ After that's done, it no longer makes sense to allow creating, updating, deletin
 
 ## Improving the Swagger UI via XML comments
 
-Our current autogenerated Swagger UI is pretty awesome. Especially considering that we got it for free. It's a little lacking when it comes to more documentation when it comes to specific endpoint summaries or expected responses. The good news is that there's a way to leverage C# XML Comments in order to improve the Swagger UI.
+Our current autogenerated Swagger UI is pretty awesome. Especially considering that we got it for free. It's a little lacking when it comes to more documentation about specific endpoint summaries or expected responses. The good news is that there's a way to leverage [C# XML Comments](https://docs.microsoft.com/en-us/dotnet/csharp/codedoc) in order to improve the Swagger UI.
 
 We can add support for that by configuring our project to produce, at build time, an XML file with the docs that we write. In order to do so, we need to update the `VehicleQuotes.csproj` like this:
 
@@ -1990,7 +1939,7 @@ We can add support for that by configuring our project to produce, at build time
 
 You can run `dotnet build` and look for the new file in `bin/Debug/net5.0/VehicleQuotes.xml`.
 
-Then, we need to update `Startup.cs`. First we need to add the following `unsing` statements:
+Then, we need to update `Startup.cs`. First we need to add the following `using` statements:
 
 ```cs
 using System.IO;
@@ -2020,9 +1969,9 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-This makes it so the `SwaggerGen` service knows to look for the XML documentation file when building up the Open API specification used for generating the Swagger UI.
+This makes it so the `SwaggerGen` service knows to look for the XML documentation file when building up the Open API specification file used for generating the Swagger UI.
 
-Now that all of that is set up, we can actually write some XML comments and attributes that will enhance our Swagger UI.As an example, put this on top of `ModelsController`'s `Post` method:
+Now that all of that is set up, we can actually write some XML comments and attributes that will enhance our Swagger UI. As an example, put this on top of `ModelsController`'s `Post` method:
 
 ```cs
 /// <summary>
@@ -2117,8 +2066,41 @@ This will make the application use `123` instead of `77` when it comes to the `D
 
 ## That's all for now
 
-And that's it! In this article we've gone through many of the features offered in .NET 5, ASP.NET Core and Entity Framework Core to support some of the most common use cases when it comes to developing Web API applications.
+And that's it! In this article we've gone through many of the features offered in [.NET 5](https://docs.microsoft.com/en-us/dotnet/core/dotnet-five) , [ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/introduction-to-aspnet-core?view=aspnetcore-5.0) and [Entity Framework Core](https://docs.microsoft.com/en-us/ef/core/) to support some of the most common use cases when it comes to developing Web API applications.
 
 We've installed .NET 5 and created an ASP.NET Core Web API project with EF Core and a few bells and whistles, created controllers to support many different endpoints, played a little bit with routes and response codes, created and built upon a data model and updated a database via entities and migrations, implemented more advance database objects like indexes to enforce uniqueness constraints, implemented input validation using both built-in and custom validation attributes, implemented resource models as DTOs for defining the contract of some of our API endpoints, tapped into the built-in dependency injection capabilities, explored and improved the autogenerated Swagger UI, added seed data for our database, learned about configuration via settings files and environment variables.
 
 .NET 5 is looking great.
+
+# Table of contents
+
+- [Building REST APIs with .NET 5, ASP.NET Core and PostgreSQL](#building-rest-apis-with-net-5-aspnet-core-and-postgresql)
+- [What we're building](#what-were-building)
+  - [The demo application](#the-demo-application)
+  - [The data model](#the-data-model)
+- [The development environment](#the-development-environment)
+  - [Setting up the PostgreSQL database with Docker](#setting-up-the-postgresql-database-with-docker)
+  - [Installing the .NET 5 SDK](#installing-the-net-5-sdk)
+- [Setting up the project](#setting-up-the-project)
+  - [Creating our ASP.NET Core REST API project](#creating-our-aspnet-core-rest-api-project)
+  - [Installing packages we'll need](#installing-packages-well-need)
+  - [Connecting to the database and performing initial app configuration](#connecting-to-the-database-and-performing-initial-app-configuration)
+- [Building the application](#building-the-application)
+  - [Creating model entities, migrations and updating the database](#creating-model-entities-migrations-and-updating-the-database)
+  - [Creating controllers for CRUDing our tables](#creating-controllers-for-cruding-our-tables)
+  - [Adding unique constraints via indexes](#adding-unique-constraints-via-indexes)
+  - [Reponding with specific HTTP error codes (409 Conflict)](#reponding-with-specific-http-error-codes-409-conflict)
+  - [Adding a more complex entity to the model](#adding-a-more-complex-entity-to-the-model)
+  - [Adding composite unique indexes](#adding-composite-unique-indexes)
+  - [Adding controllers with custom routes](#adding-controllers-with-custom-routes)
+  - [Using resource models as DTOs for controllers](#using-resource-models-as-dtos-for-controllers)
+  - [Validation using built-in Data Annotations.](#validation-using-built-in-data-annotations)
+  - [Validation using custom attributes](#validation-using-custom-attributes)
+  - [Implementing endpoints for quote rules and overrides](#implementing-endpoints-for-quote-rules-and-overrides)
+  - [Implementing the quote model](#implementing-the-quote-model)
+  - [Using Dependency Injection](#using-dependency-injection)
+  - [Adding seed data for lookup tables](#adding-seed-data-for-lookup-tables)
+  - [Improving the Swagger UI via XML comments](#improving-the-swagger-ui-via-xml-comments)
+  - [Configuring the app via settings files and environment variables](#configuring-the-app-via-settings-files-and-environment-variables)
+  - [That's all for now](#thats-all-for-now)
+- [Table of contents](#table-of-contents)
