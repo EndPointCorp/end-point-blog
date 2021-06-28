@@ -16,8 +16,6 @@ tags: dotnet, asp.net core, c#, webapi, rest, postgresql
   - [Connecting to the database and performing initial app configuration](#connecting-to-the-database-and-performing-initial-app-configuration)
 - [Building the application](#building-the-application)
   - [Creating model entities, migrations and updating the database](#creating-model-entities-migrations-and-updating-the-database)
-    - [Creating the entities](#creating-the-entities)
-    - [Creating and aplying a migration](#creating-and-aplying-a-migration)
   - [Creating controllers for CRUDing our tables](#creating-controllers-for-cruding-our-tables)
   - [Adding unique constraints via indexes](#adding-unique-constraints-via-indexes)
   - [Reponding with specific HTTP error codes (409 Conflict)](#reponding-with-specific-http-error-codes-409-conflict)
