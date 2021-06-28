@@ -3,6 +3,36 @@ author: "Kevin Campusano"
 title: "Building REST APIs with .NET 5, ASP.NET Core and PostgreSQL"
 tags: dotnet, asp.net core, c#, webapi, rest, postgresql
 ---
+- [Building REST APIs with .NET 5, ASP.NET Core and PostgreSQL](#building-rest-apis-with-net-5-aspnet-core-and-postgresql)
+- [What we're building](#what-were-building)
+  - [The demo application](#the-demo-application)
+  - [The data model](#the-data-model)
+- [The development environment](#the-development-environment)
+  - [Setting up the PostgreSQL database with Docker](#setting-up-the-postgresql-database-with-docker)
+  - [Installing the .NET 5 SDK](#installing-the-net-5-sdk)
+- [Setting up the project](#setting-up-the-project)
+  - [Creating our ASP.NET Core REST API project](#creating-our-aspnet-core-rest-api-project)
+  - [Installing packages we'll need](#installing-packages-well-need)
+  - [Connecting to the database and performing initial app configuration](#connecting-to-the-database-and-performing-initial-app-configuration)
+- [Building the application](#building-the-application)
+  - [Creating model entities, migrations and updating the database](#creating-model-entities-migrations-and-updating-the-database)
+    - [Creating the entities](#creating-the-entities)
+    - [Creating and aplying a migration](#creating-and-aplying-a-migration)
+  - [Creating controllers for CRUDing our tables](#creating-controllers-for-cruding-our-tables)
+  - [Adding unique constraints via indexes](#adding-unique-constraints-via-indexes)
+  - [Reponding with specific HTTP error codes (409 Conflict)](#reponding-with-specific-http-error-codes-409-conflict)
+  - [Adding a more complex entity to the model](#adding-a-more-complex-entity-to-the-model)
+  - [Adding composite unique indexes](#adding-composite-unique-indexes)
+  - [Adding controllers with custom routes](#adding-controllers-with-custom-routes)
+  - [Using resource models as DTOs for controllers](#using-resource-models-as-dtos-for-controllers)
+  - [Adding input validation](#adding-input-validation)
+  - [Implementing endpoints for quote rules and overrides](#implementing-endpoints-for-quote-rules-and-overrides)
+  - [Implementing the quote model](#implementing-the-quote-model)
+  - [Using Dependency Injection](#using-dependency-injection)
+  - [Adding seed data for lookup tables](#adding-seed-data-for-lookup-tables)
+  - [Improving the Swagger UI via XML comments](#improving-the-swagger-ui-via-xml-comments)
+  - [Configuring the app via settings files and environment variables](#configuring-the-app-via-settings-files-and-environment-variables)
+  - [That's all for now](#thats-all-for-now)
 
 # Building REST APIs with .NET 5, ASP.NET Core and PostgreSQL
 
@@ -11,6 +41,8 @@ This is old news by now, but I'm still amazed by the fact that nowadays .NET is 
 So I thought of taking some time to do just that, really dive in, see what's new, and get a sense of the general developer experience that the current incarnation of .NET offers. So in this blog post, I'm going to chronicle my experience developing a simple, but complete REST API application. Along the way, I'll touch on the most common problems that one runs into when develping such applications and how are they solved in the .NET world. So think of this piece as a sort of tutorial or overview of the most common framework features when it comes to developing REST APIs.
 
 First, let's get familiar with what we're building.
+
+# What we're building
 
 ## The demo application
 
@@ -42,6 +74,8 @@ This model allows us very fine grained differentiation between vehicles. For exa
 We also have a `quote_rules` table which stores the rules that are applied when it comes to calculating a vehicle quote. The rules are pairs of key-values with an associated monetary value. So for example, rules like "a vehicle that has alloy wheels is worth $10 more" can be expressed in the table with a record where `feature_type` is "has_alloy_wheels", `feature_value` is "true" and `price_modifier` is "10".
 
 Finally, we have a `quote_overrides` table which specifies a flat, static price for specific vehicles (via the link to the `model_style_years` table). The idea here is that if some customer requests a quote for a vehicle for which we have an override, no price calculation rules are applied and they are offered what is specified in the override record.
+
+# The development environment
 
 ## Setting up the PostgreSQL database with Docker
 
@@ -121,6 +155,8 @@ Run `dotnet --version` in your console and you should see something like this:
 $ dotnet --version
 5.0.301
 ```
+
+# Setting up the project
 
 ## Creating our ASP.NET Core REST API project
 
@@ -245,7 +281,7 @@ namespace VehicleQuotes
 
 As you can see this is just a simple class that inherits from EF Core's `DbContext` class. That's all we need for now. We will continue building on this class as we add new tables and cofigurations.
 
-Now, we need to add this class into ASP.NET Core's built in IoC container so that it's available to controllers and other classes via dependency injection, and tell it how to find our database. Go to `Startup.cs` and add the following using statement near the top of the file:
+Now, we need to add this class into ASP.NET Core's built in IoC container so that it's available to controllers and other classes via Dependency Injection, and tell it how to find our database. Go to `Startup.cs` and add the following using statement near the top of the file:
 
 ```cs
 using Microsoft.EntityFrameworkCore;
@@ -266,7 +302,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-`services` contains all the objects (known as "services") that are available in the app for dependency injection. So here, we're adding our newly created `DbContext` to it, specifying that it will connect to a PostgreSQL database (via the `options.UseNpgsql` call), and that it will use a connection string named `VehicleQuotesContext` from the app's default configuration file. So let's add the connection string then. To do so, change the `appsettings.json` like so:
+`services` contains all the objects (known as "services") that are available in the app for Dependency Injection. So here, we're adding our newly created `DbContext` to it, specifying that it will connect to a PostgreSQL database (via the `options.UseNpgsql` call), and that it will use a connection string named `VehicleQuotesContext` from the app's default configuration file. So let's add the connection string then. To do so, change the `appsettings.json` like so:
 
 > `UseNpgsql` is an extension method made available to us by the `Npgsql.EntityFrameworkCore.PostgreSQL` package that we installed in the previous step.
 
@@ -358,6 +394,8 @@ public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 The magic is done by the `c.RoutePrefix = "";` line which makes it so there's no need to put any prefix in order to acess the autogenerated Swagger UI.
 
 Try it out. Do `dotnet run` and navigate to `https://localhost:5001` and you should see the Swagger UI there.
+
+# Building the application
 
 ## Creating model entities, migrations and updating the database
 
@@ -604,7 +642,7 @@ Now if you try to create, for example, a vehicle make with a repeated name, you'
 
 ## Reponding with specific HTTP error codes (409 Conflict)
 
-The fact that we can now enforce unique constraints is all well and good. But the error scenario is not very user friendly. Instead of returning an "500 Internal Server Error" status code with a wall of text, we should be responding with something more sensible. Maybe a 409 Conflict would be more appropriate for this kind of error. We can easily update our controllers to handle that scenario. What we need to do is update the methods that handle the `POST` and `PUT` endpoints so that they catch the `Microsoft.EntityFrameworkCore.DbUpdateException` exception and return the proper response. Here's how we would do it for the `MakesController`:
+The fact that we can now enforce unique constraints is all well and good. But the error scenario is not very user friendly. Instead of returning a "500 Internal Server Error" status code with a wall of text, we should be responding with something more sensible. Maybe a 409 Conflict would be more appropriate for this kind of error. We can easily update our controllers to handle that scenario. What we need to do is update the methods that handle the `POST` and `PUT` endpoints so that they catch the `Microsoft.EntityFrameworkCore.DbUpdateException` exception and return the proper response. Here's how we would do it for the `MakesController`:
 
 ```diff
 // ...
@@ -820,7 +858,7 @@ $ dotnet ef migrations add AddUniqueIndexesForVehicleModelTables
 $ dotnet ef database update
 ```
 
-## Adding controller with custom routes
+## Adding controllers with custom routes
 
 Our model dictates that vehicle models belong in a make. In other words, a vehicle model has no meaning by itself. It only has meaning within the context of a make. Ideally, we want our API routes to reflect this concept. In other words, instead of URLs for models to look like this: `/api/Models/{id}`; we'd rather them look like this: `/api/Makes/{makeId}/Models/{modelId}`. Let's go ahead and scaffold a controller for this entity:
 
@@ -894,7 +932,7 @@ Let's update the `GetModel` method, which handles the `GET /api/Makes/{makeId}/M
 
 We've once again included the `makeId` as a parameter to the method and modified the EF Core query to use both the make id and the vehicle model id when looking for the record.
 
-And that's the gist of it. Other methods would be updated similarly.
+And that's the gist of it. Other methods would be updated similarly. The next section with include these methods in their final form, so I won't go through each one of them here.
 
 ## Using resource models as DTOs for controllers
 
@@ -936,7 +974,7 @@ namespace VehicleQuotes.ResourceModels
 }
 ```
 
-With these two, instead of that mess from above, clients `POST`ing to `/api/Makes/{makeId}/Models` will be able to use a request like this:
+With these two, instead of that mess from above, clients `POST`ing to `/api/Makes/{makeId}/Models` will be able to use a request body like this:
 
 ```json
 {
@@ -955,37 +993,1134 @@ With these two, instead of that mess from above, clients `POST`ing to `/api/Make
 
 Which is much simpler. We have the vehicle model name and an array of styles. Each style has a body type and a size, which we can specify by their name because those are unique keys. We don't need their integer ids (i.e. primary keys) in order to find to them. Then, each style has an array of strings that contain the years in which those styles are available for that model. The make is part of the URL already, so we don't need to also specify it in the request payload.
 
-Let's update our ModelsController to use these Resource Models instead of the `Model` EF Core entity.
+Let's update our `ModelsController` to use these Resource Models instead of the `Model` EF Core entity. Be sure to include the namespace where the Resource Models are defined by adding the following using statement: `using VehicleQuotes.ResourceModels;`. Now, let's update the `GetModels` method (which handles the `GET /api/Makes/{makeId}/Models` endpoint) so that it looks like this:
+
+```cs
+[HttpGet]
+// Return a collection of `ModelSpecification`s and expect a `makeId` from the URL.
+public async Task<ActionResult<IEnumerable<ModelSpecification>>> GetModels([FromRoute] int makeId)
+{
+    // Look for the make identified by `makeId`.
+    var make = await _context.Makes.FindAsync(makeId);
+
+    // If we can't find the make, then we return a 404.
+    if (make == null)
+    {
+        return NotFound();
+    }
+
+    // Build a query to fetch the relevant records from the `models` table and
+    // build `ModelSpecification` with the data.
+    var modelsToReturn = _context.Models
+        .Where(m => m.MakeID == makeId)
+        .Select(m => new ModelSpecification {
+            ID = m.ID,
+            Name = m.Name,
+            Styles = m.ModelStyles.Select(ms => new ModelSpecificationStyle {
+                BodyType = ms.BodyType.Name,
+                Size = ms.Size.Name,
+                Years = ms.ModelStyleYears.Select(msy => msy.Year).ToArray()
+            }).ToArray()
+        });
+
+    // Execute the query and respond with the results.
+    return await modelsToReturn.ToListAsync();
+}
+```
+
+The first thing that we chaged was the return type. Instead of `Task<ActionResult<IEnumerable<Model>>>`, the method now returns `Task<ActionResult<IEnumerable<ModelSpecification>>>`. We're going to use our new Resource Models as these endpoints contract so we need to make sure we are returning those. Next, we considerably changed the LINQ expression that searches the database for the vehicle model records we want. The filtering logic (given by the `Where`) is the same. That is, we're still seaching for vehicle models within the given make id. What we changed was the transformation logic in the `Select`. Our Action Method now returns a collection of `ModelSpecification` objects, so we updated the `Select` to produce such objects, based on the records from the `models` table that match our search criteria. We build `ModelSpecification`s using the data coming from `models` records and their related `model_styles` and `model_style_years`. Finally, we asynchronously execute the query to fetch the data from the database and return it.
+
+Next, let's move on to the `GetModel` method, which handles the `GET /api/Makes/{makeId}/Models/{id}` endpoint. This is what it should look like:
+
+```cs
+[HttpGet("{id}")]
+// Return a `ModelSpecification`s and expect `makeId` and `id` from the URL.
+public async Task<ActionResult<ModelSpecification>> GetModel([FromRoute] int makeId, [FromRoute] int id)
+{
+    // Look for the model specified by the given identifiers and also load
+    // all related data that we care about for this method.
+    var model = await _context.Models
+        .Include(m => m.ModelStyles).ThenInclude(ms => ms.BodyType)
+        .Include(m => m.ModelStyles).ThenInclude(ms => ms.Size)
+        .Include(m => m.ModelStyles).ThenInclude(ms => ms.ModelStyleYears)
+        .FirstOrDefaultAsync(m => m.MakeID == makeId && m.ID == id);
+
+    // If we couldn't find it, respond with a 404.
+    if (model == null)
+    {
+        return NotFound();
+    }
+
+    // Use the fetched data to construct a `ModelSpecification` to use in the response.
+    return new ModelSpecification {
+        ID = model.ID,
+        Name = model.Name,
+        Styles = model.ModelStyles.Select(ms => new ModelSpecificationStyle {
+            BodyType = ms.BodyType.Name,
+            Size = ms.Size.Name,
+            Years = ms.ModelStyleYears.Select(msy => msy.Year).ToArray()
+        }).ToArray()
+    };
+}
+```
+
+Same as before, we changed the return type of the method to be `ModelSpecification`. Then, we modified the query so that it loads all the related data for the `Model` entity via its navigation properties. That's what the `Include` and `ThenInclude` calls do. We need this data loaded because we use it in the method's return statement to build the `ModelSpecification` that will be included in the response. The logic to build it is very similar to that of the previous method.
+
+> You can learn more about the various available approaches for loading data with EF Core in [the official documentation](https://docs.microsoft.com/en-us/ef/core/querying/related-data/).
+
+Next is the `PUT /api/Makes/{makeId}/Models/{id}` endpoint, handled by the `PutModel` method:
+
+```cs
+[HttpPut("{id}")]
+// Expect `makeId` and `id` from the URL and a `ModelSpecification` from the request payload.
+public async Task<IActionResult> PutModel([FromRoute] int makeId, int id, ModelSpecification model)
+{
+    // Id the id in the URL and the request payload are different, return a 400.
+    if (id != model.ID)
+    {
+        return BadRequest();
+    }
+
+    // Obtain the `models` record that we want to update. Include any related
+    // data that we want to update as well.
+    var modelToUpdate = await _context.Models
+        .Include(m => m.ModelStyles)
+        .FirstOrDefaultAsync(m => m.MakeID == makeId && m.ID == id);
+
+    // If we can't find the record, then return a 404.
+    if (modelToUpdate == null)
+    {
+        return NotFound();
+    }
+
+    // Update the record with what came in the request payload.
+    modelToUpdate.Name = model.Name;
+
+    // Build EF Core entities based on the incoming Resource Model object.
+    modelToUpdate.ModelStyles = model.Styles.Select(style => new ModelStyle {
+        BodyType = _context.BodyTypes.Single(bodyType => bodyType.Name == style.BodyType),
+        Size = _context.Sizes.Single(size => size.Name == style.Size),
+
+        ModelStyleYears = style.Years.Select(year => new ModelStyleYear {
+            Year = year
+        }).ToList()
+    }).ToList();
+
+    try
+    {
+        // Try saving the changes. This will run the UPDATE statement in the database.
+        await _context.SaveChangesAsync();
+    }
+    catch (Microsoft.EntityFrameworkCore.DbUpdateException)
+    {
+        // If there's an error updating, respond accordingly.
+        return Conflict();
+    }
+
+    // Finally return a 204 if everything went well.
+    return NoContent();
+}
+```
+
+The purpose of this endpoint is to update existing resources. So, it receives a representation of said resource as a parameter that comes from the request body. Before, it expected an instance of the `Model` entity, but now, we've changed it to receive a `ModelSpecification`. The rest of the method is your usual structure of first obtaining the record to update by the given ids, then changing its values according to what came in as a parameter, and finally, saving the changes.
+
+You probably get the idea by now: since the API is using the Resource Model, we need to change input and output values for the methods and run some logic to translate between Resource Model objects and Data Model objects that EF Core can understand so that it can perform its database operations.
+
+That said, here's what the `PostModel` Action Method, handler of the `POST /api/Makes/{makeId}/Models` endpoint, should look like:
+
+```cs
+[HttpPost]
+// Return a `ModelSpecification`s and expect `makeId` from the URL and a `ModelSpecification` from the request payload.
+public async Task<ActionResult<ModelSpecification>> PostModel([FromRoute] int makeId, ModelSpecification model)
+{
+    // First, try to find the make specified by the incoming `makeId`.
+    var make = await _context.Makes.FindAsync(makeId);
+
+    // Respond with 404 if not found.
+    if (make == null)
+    {
+        return NotFound();
+    }
+
+    // Build out a new `Model` entity, complete with all related data, based on
+    // the `ModelSpecification` parameter.
+    var modelToCreate = new Model {
+        Make = make,
+        Name = model.Name,
+
+        ModelStyles = model.Styles.Select(style => new ModelStyle {
+            // Notice how we search both body type and size by their name field.
+            // We can do that because their names are unique.
+            BodyType = _context.BodyTypes.Single(bodyType => bodyType.Name == style.BodyType),
+            Size = _context.Sizes.Single(size => size.Name == style.Size),
+
+            ModelStyleYears = style.Years.Select(year => new ModelStyleYear {
+                Year = year
+            }).ToArray()
+        }).ToArray()
+    };
+
+    // Add it to the DbContext.
+    _context.Add(modelToCreate);
+
+    try
+    {
+        // Try running the INSERTs.
+        await _context.SaveChangesAsync();
+    }
+    catch (Microsoft.EntityFrameworkCore.DbUpdateException)
+    {
+        // Return accordingly if an error happens.
+        return Conflict();
+    }
+
+    // Get back the autogenerated ID of the record we just INSERTed.
+    model.ID = modelToCreate.ID;
+
+    // Finally, return a 201 including a location header containing the newly
+    // created resource's URL and the resource itself in the response payload.
+    return CreatedAtAction(
+        nameof(GetModel),
+        new { makeId = makeId, id = model.ID },
+        model
+    );
+}
+```
+
+All that should be pretty self explanatory by now. Moving on to the `DeleteModel` method which handles the `DELETE /api/Makes/{makeId}/Models/{id}` endpoint:
+
+```cs
+[HttpDelete("{id}")]
+// Expect `makeId` and `id` from the URL.
+public async Task<IActionResult> DeleteModel([FromRoute] int makeId, int id)
+{
+    // Try to find the record identified by the ids from the URL.
+    var model = await _context.Models.FirstOrDefaultAsync(m => m.MakeID == makeId && m.ID == id);
+
+    // Respond with a 404 if we can't find it.
+    if (model == null)
+    {
+        return NotFound();
+    }
+
+    // Mark the entity for removal and run the DELETE.
+    _context.Models.Remove(model);
+    await _context.SaveChangesAsync();
+
+    // Respond with a 204.
+    return NoContent();
+}
+```
+
+And that's all for that controller. Hopefully that demonstrated what it looks like to have endpoints that operate using objects other than the EF Core entities. Fire up the app with `dotnet run` and explore the Swagger UI and you'll see the changes that we've made reflected in there. Try it out. Try CRUDing some vehicle models. And don't forget to take a look at our POST endpoint specification which looks much more manageable now:
+
+![POST Models endpoint](dotnet-5-web-api/post-model-endpoint.png)
+
+Which means that you can send in something like this, for example:
+
+```json
+{
+    "name": "Corolla",
+    "styles": [
+        {
+            "bodyType": "Sedan",
+            "size": "Compact",
+            "years": [ "2000", "2001" ]
+        }
+    ]
+}
+```
+
+> This will work assuming you've created some make to add the vehicle model to, as well as a body type whose name is `Sedan` and a size whose name is `Compact`.
+
+> There's also a `ModelExists` method in that controller which we don't need anymore. You can delete it.
 
 ## Adding input validation
 
-with built in data annotations attributes
+Depending on how "creative" you were in the previous section when trying to CRUD models, you may have run into an issue or two regarding the data that's allowed into our database. We solve that by implementing input validation. In ASP.NET Core, the easiest way to implement validation is via Data Annotation attributes on the entities or other objects that controllers receive as request payloads. So let's see about adding some validation to our app. Since our `ModelsController` uses the `ModelSpecification` and `ModelSpecificationStyle` Resource Models to talk to clients, let's start there. Here's the diff:
 
-with custom validation attributes for the years thing
+```diff
++using System.ComponentModel.DataAnnotations;
 
-with custom validation attributes for body type and size that talks to the databse for lookup table data
+namespace VehicleQuotes.ResourceModels
+{
+    public class ModelSpecification
+    {
+        public int ID { get; set; }
++       [Required]
+        public string Name { get; set; }
 
-## Adding controller for quote rules
++       [Required]
+        public ModelSpecificationStyle[] Styles { get; set; }
+    }
+}
+```
 
-incluing custom action method and route for getting feature types
+```diff
++using System.ComponentModel.DataAnnotations;
 
-add custom validation, unique constratint, 409
+namespace VehicleQuotes.ResourceModels
+{
+    public class ModelSpecificationStyle
+    {
++       [Required]
+        public string BodyType { get; set; }
++       [Required]
+        public string Size { get; set; }
 
-## Another example of resource models with quote overrides
++       [Required]
++       [MinLength(1)]
+        public string[] Years { get; set; }
+    }
+}
+```
 
-## Finally the quote model
+And just like that, we get a good amount of functionality. We use the `Required` and `MinLength` attributes from the `System.ComponentModel.DataAnnotations` namespace to specify that some fields are required, and that our `Years` array needs to contain at least one element. When the app receives a request to the PUT or POST endpoints, which are the ones that expect a `ModelSpecification` as the payload, validation kicks in. If it fails, the action method is never executed and a 400 status code is returned as a response. Try POSTing to `/api/Makes/{makeId}/Models` with a payload that vioaltes some of these rules to see for yourself. I tried for example sending this:
 
-optional foreign key
+```json
+{
+  "name": null,
+  "styles": [
+    {
+      "bodyType": "Sedan",
+      "size": "Full size",
+      "years": []
+    }
+  ]
+}
+```
 
-## New resource model and controller and service
+And I got back a 400 response with this payload:
 
-example of reflection, dependency injection
+```json
+{
+  "type": "https://tools.ietf.org/html/rfc7231#section-6.5.1",
+  "title": "One or more validation errors occurred.",
+  "status": 400,
+  "traceId": "00-0fd4f00eeb9f2f458ccefc180fcfba1c-79a618f13218394b-00",
+  "errors": {
+    "Name": [
+      "The Name field is required."
+    ],
+    "Styles[0].Years": [
+      "The field Years must be a string or array type with a minimum length of '1'."
+    ]
+  }
+}
+```
+
+Pretty neat, huh? With minimal effort, we have some basic validation rules in place and a pretty usable response for when errors occur.
+
+> To learn more about model validation, including all the various validation attributes included in the framework, check the official documentation: [Model validation](https://docs.microsoft.com/en-us/aspnet/core/mvc/models/validation?view=aspnetcore-5.0), [System.ComponentModel.DataAnnotations Namespace](https://docs.microsoft.com/en-us/dotnet/api/system.componentmodel.dataannotations?view=net-5.0).
+
+Of course, the framework is never going to cover all possible validation scenarios with the built-in atributes. Case in point, It'd be great to validate that the `Years` array contians values that look like actual years. That is, four-character, digit-only strings. There are no validation attributes for that. So, we need to create our own. Let's add this file into a new `Validations` directory:
+
+```cs
+// Validations/ContainsYearsAttribute.cs
+using System;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Runtime.CompilerServices;
+
+namespace VehicleQuotes.Validation
+{
+    // In the .NET Framework, attribute classes need to have their name suffixed with the word "Attribute".
+    // Validation attributes need to inherit from `System.ComponentModel.DataAnnotations`'s `ValidationAttribute` class
+    // and override the `IsValid` method.
+    public class ContainsYearsAttribute : ValidationAttribute
+    {
+        private string propertyName;
+
+        // This constructor is called by the framework the the attribute is applied to some member. In this specific
+        // case, we define a `propertyName` parameter annotated with a `CallerMemberName` attribute. This makes it so
+        // the framework sends in the name of the member to which our `ContainsYears` attribute is applied to.
+        // We store the value to use it later when constructing our validation error message.
+        // Check https://docs.microsoft.com/en-us/dotnet/api/system.runtime.compilerservices.callermembernameattribute?view=net-5.0
+        // for more info on `CallerMemberName`.
+        public ContainsYearsAttribute([CallerMemberName] string propertyName = null)
+        {
+            this.propertyName = propertyName;
+        }
+
+        // This method is called by the framework during validation. `value` is the actual value of the field that this
+        // attribute will validate.
+        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+        {
+            // By only only applying the validation checks when the value is not null, we make it possible for this
+            // attribute to work on optional fields. In other words, this attribute will skip validation if there is no
+            // value to validate.
+            if (value != null)
+            {
+                // Check if all the elements of the string array are valid years. Check the `IsValidYear` method below
+                // to see what checks are applied for each of the array elements.
+                var isValid = (value as string[]).All(IsValidYear);
+
+                if (!isValid)
+                {
+                    // If not, return an error.
+                    return new ValidationResult(GetErrorMessage());
+                }
+            }
+
+            // Return a successful validation result if no errors were detected.
+            return ValidationResult.Success;
+        }
+
+        // Determines if a given value is valid by making sure it's not null, nor empty, that its length is 4 and that
+        // all its characters are digits.
+        private bool IsValidYear(string value) =>
+            !String.IsNullOrEmpty(value) && value.Length == 4 && value.All(Char.IsDigit);
+
+        // Builds a user friendly error message which includes the name of the field that this validation attribute has
+        // been applied to.
+        private string GetErrorMessage() =>
+            $"The {propertyName} field must be an array of strings containing four numbers.";
+    }
+}
+```
+
+Check the comments in the code for more details into how that class works. Then, we apply our custom attrobute to our `ModelSpecificationStyle` class in the same way that we applied the built in ones:
+
+```diff
+using System.ComponentModel.DataAnnotations;
++using VehicleQuotes.Validation;
+
+namespace VehicleQuotes.ResourceModels
+{
+    public class ModelSpecificationStyle
+    {
+        // ...
+
+        [Required]
+        [MinLength(1)]
++       [ContainsYears]
+        public string[] Years { get; set; }
+    }
+}
+```
+
+Now do a `dotnet run` and try to POST this payload:
+
+```json
+{
+  "name": "Rav4",
+  "styles": [
+    {
+      "bodyType": "SUV",
+      "size": "Mid size",
+      "years": [ "not_a_year" ]
+    }
+  ]
+}
+```
+
+That should make the API respond with this:
+
+```json
+{
+  "type": "https://tools.ietf.org/html/rfc7231#section-6.5.1",
+  "title": "One or more validation errors occurred.",
+  "status": 400,
+  "traceId": "00-9980325f3e388f48a5975ef382d5b137-2d55da1bb9613e4f-00",
+  "errors": {
+    "Styles[0].Years": [
+      "The Years field must be an array of strings containing four numbers."
+    ]
+  }
+}
+```
+
+That's our custom validation attribute doing its job.
+
+There's another aspect that we could validate using a custom validation attribute. What happens if we try to POST a payload with a body type or size that doesn't exist? These queries from the `PostModel` method would throw an `InvalidOperationException`:
+
+```cs
+BodyType = _context.BodyTypes.Single(bodyType => bodyType.Name == style.BodyType)
+```
+
+and
+
+```cs
+Size = _context.Sizes.Single(size => size.Name == style.Size)
+```
+
+They do so because we used the `Single` method, which is designed like that. It tries to find a body type or size whose name is the given value, can't find it, and thus, throws an exception.
+
+> If, for example, we wanted not founds to return `null`, we could have used `SingleOrDefault` instead.
+
+This unhandled excception results in a response that's quite unbecoming:
+
+![InvalidOperationException during POST](dotnet-5-web-api/invalid-operation-exception.png)
+
+So, to prevent that exception and control the error messaging, we need a couple new validation attributes that go into the `body_types` and `sizes` tables and check if the given values exist. Here's what they would look like:
+
+```cs
+// Validations/VehicleBodyTypeAttribute.cs
+using System;
+using System.ComponentModel.DataAnnotations;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
+
+namespace VehicleQuotes.Validation
+{
+    public class VehicleBodyTypeAttribute : ValidationAttribute
+    {
+        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+        {
+            if (value == null) return ValidationResult.Success;
+
+            var dbContext = validationContext.GetService(typeof(VehicleQuotesContext)) as VehicleQuotesContext;
+
+            var bodyTypes = dbContext.BodyTypes.Select(bt => bt.Name).ToList();
+
+            if (!bodyTypes.Contains(value))
+            {
+                var allowed = String.Join(", ", bodyTypes);
+                return new ValidationResult(
+                    $"Invalid vehicle body type {value}. Allowed values are {allowed}."
+                );
+            }
+
+            return ValidationResult.Success;
+        }
+    }
+}
+```
+
+```cs
+// Validations/VehicleSizeAttribute.cs
+using System;
+using System.ComponentModel.DataAnnotations;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
+
+namespace VehicleQuotes.Validation
+{
+    public class VehicleSizeAttribute : ValidationAttribute
+    {
+        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+        {
+            if (value == null) return ValidationResult.Success;
+
+            var dbContext = validationContext.GetService(typeof(VehicleQuotesContext)) as VehicleQuotesContext;
+
+            var sizes = dbContext.Sizes.Select(s => s.Name).ToList();
+
+            if (!sizes.Contains(value))
+            {
+                var allowed = String.Join(", ", sizes);
+                return new ValidationResult(
+                    $"Invalid vehicle size {value}. Allowed values are {allowed}."
+                );
+            }
+
+            return ValidationResult.Success;
+        }
+    }
+}
+```
+
+These two are very similar to one another. The most interesting part is how we use the `IsValid` method's second parameter (`ValidationContext`) to obtain an instance of `VehicleQuotesContext` that we can use to query the database. The rest should be pretty self-explanatory. These attributes are classes that inherit from `System.ComponentModel.DataAnnotations`'s `ValidationAttribute` and implement the `IsValid` method. The method then checks that the value under scrutiny exists in the corresponding table and if it does not, raises a validation error. The validation error includes a list of allowed values. They can be applied to our `ModelSpecificationStyle` class like so:
+
+```diff
+// ...
+namespace VehicleQuotes.ResourceModels
+{
+    public class ModelSpecificationStyle
+    {
+        [Required]
++       [VehicleBodyType]
+        public string BodyType { get; set; }
+
+        [Required]
++       [VehicleSize]
+        public string Size { get; set; }
+
+        //...
+    }
+}
+```
+
+Now, a request like this:
+
+```json
+{
+  "name": "Rav4",
+  "styles": [
+    {
+      "bodyType": "not_a_body_type",
+      "size": "Mid size",
+      "years": [ "2000" ]
+    }
+  ]
+}
+```
+
+Produces a response like this:
+
+```json
+{
+  "type": "https://tools.ietf.org/html/rfc7231#section-6.5.1",
+  "title": "One or more validation errors occurred.",
+  "status": 400,
+  "traceId": "00-9ad59a7aff60944ab54c19a73be73cc7-eeabafe03df74e40-00",
+  "errors": {
+    "Styles[0].BodyType": [
+      "Invalid vehicle body type not_a_body_type. Allowed values are Coupe, Sedan, Convertible, Hatchback, SUV, Truck."
+    ]
+  }
+}
+```
+
+## Implementing endpoints for quote rules and overrides
+
+At this point we've explored many of the most common features avilable to us for developing Web APIs. So much so that implementing the next two pieces of functionality for our app doesn't really introduce any new concepts. So, I wont discuss that here in great detail.
+
+Feel free to browse the source code on GitHub if you want though. These are the relevant files:
+
+- Controllers/QuoteOverridesController.cs
+- Controllers/QuoteRulesController.cs
+- Models/QuoteOverride.cs
+- Models/QuoteRule.cs
+- ResourceModels/QuoteOverrideSpecification.cs
+- Validation/FeatureTypeAttribute.cs
+- Migrations/20210627204444_AddQuoteRulesAndOverridesTables.cs
+
+The FeatureTypeAttribute class is interesting in that it provides another example of a validation attribute. This time is one that makes sure the value being validated is included in an array of strings.
+
+Other than that, it's all stuff we've already covered: models, migrations, scaffolding controllers, custom routes, resource models, etc.
+
+If you are following along, be sure to add those files and run a `dotnet ef database update` to apply the migration.
+
+## Implementing the quote model
+
+Let's now start implementing the main capability of our app: calculating quotes for vehicles. Let's start with the `Quote` entity. This is what the new `Models/Quote.cs` file containing the entity class will look like:
+
+```cs
+// Models/Quote.cs
+using System;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace VehicleQuotes.Models
+{
+    public class Quote
+    {
+        public int ID { get; set; }
+
+        // Directly tie this quote record to a specific vehicle that we have
+        // registered in our db, if we have it.
+        public int? ModelStyleYearID { get; set; }
+
+        // If we don't have the specific vehicle in our db, then store the
+        // vehicle model details independently.
+        public string Year { get; set; }
+        public string Make { get; set; }
+        public string Model { get; set; }
+        public int BodyTypeID { get; set; }
+        public int SizeID { get; set; }
+
+        public bool ItMoves { get; set; }
+        public bool HasAllWheels { get; set; }
+        public bool HasAlloyWheels { get; set; }
+        public bool HasAllTires { get; set; }
+        public bool HasKey { get; set; }
+        public bool HasTitle { get; set; }
+        public bool RequiresPickup { get; set; }
+        public bool HasEngine { get; set; }
+        public bool HasTransmission { get; set; }
+        public bool HasCompleteInterior { get; set; }
+
+        public int OfferedQuote { get; set; }
+        public string Message { get; set; }
+        public DateTime CreatedAt { get; set; }
+
+        public ModelStyleYear ModelStyleYear { get; set; }
+
+        public BodyType BodyType { get; set; }
+        public Size Size { get; set; }
+    }
+}
+```
+
+This should be pretty familiar by now. It's a plain old class that defines a number of properties. One for each of the fields in the resulting table and a few navigation properties that serve to access related data.
+
+The only aspect worth noting is that we've defined the `ModelStyleYearID` property as a nullable integer (with `int?`). This is because, like we discussed at the beginning, the foreign key from `quotes` to `vehicle_style_years` is actually optional. The reason being that we may receive a quote request for a vehicle that we don't have registered in our database. We need to be able to support that, so if we don't have the requested vehicle registered, then that foreign key will stay unpopulated and we'll rely on the other fields (i.e. `Year`, `Make`, `Model`, `BodyTypeID` and `SizeID`) to identify the vehicle and calculate the quote for it.
+
+## Using Dependency Injection
+
+So far we've been putting a lot logic in our controllers. That's generally not ideal, but fine as long as the logic is simple. The problem is that a design like that can quickly become a hindrance for maintainability and testing as our application grows more complex. For the logic that calculates a quote, we'd be better served by implementing it in its own class, outside of the controller that defines the endpoints and handles HTTP concerns. Then, the controller can be given access to that class and delegate to it all the quote calculation logic. Thankfully, ASP.NET Core includes an IoC container by default, which allows us to use Dependency Injection to solve these kinds of problems. Let's see what that looks like.
+
+For working with quotes, we want to offer two endpoints:
+
+1. A `POST api/Quotes` that captures the vehicle information, calculates the quote, keeps record of the request, and responds with the calculated value.
+2. A `GET api/Quotes` that returns all the currently registered quotes on the system.
+
+Using the Dependency Injection capabilities, a controller that implements those two could look like this:
+
+```cs
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using VehicleQuotes.ResourceModels;
+using VehicleQuotes.Services;
+
+namespace VehicleQuotes.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class QuotesController : ControllerBase
+    {
+        private readonly QuoteService _service;
+
+        // When intiating the request processing logic, the framework recognizes
+        // that this controller has a dependency on QuoteService and expects an
+        // instance of it to be injected via the constructor. The framework then
+        // does what it needs to do in order to provide that dependency.
+        public QuotesController(QuoteService service)
+        {
+            _service = service;
+        }
+
+        // GET: api/Quotes
+        [HttpGet]
+        // This method returns a collection of a new resource model instead of just the `Quote` entity direcly.
+        public async Task<ActionResult<IEnumerable<SubmittedQuoteRequest>>> GetAll()
+        {
+            // Instead of directly implementing the logic in this method, we call on
+            // the service class and let it take care of the rest.
+            return await _service.GetAllQuotes();
+        }
+
+        // POST: api/Quotes
+        [HttpPost]
+        // This method receives as a paramater a `QuoteRequest` of just the `Quote` entity direcly.
+        // That way callers of this endpoint don't need to be exposed to the details of our data model implementation.
+        public async Task<ActionResult<SubmittedQuoteRequest>> Post(QuoteRequest request)
+        {
+            // Instead of directly implementing the logic in this method, we call on
+            // the service class and let it take care of the rest.
+            return await _service.CalculateQuote(request);
+        }
+    }
+}
+```
+
+As you can see, we've once again opted to abstract away clients from the implementation details of our data model and used resource models for the API contract instead of the `Quote` entity directly. We have one for input data that's called `QuoteRequest` and another one for output: `SubmittedQuoteRequest`. Not very remarkable by themselves, but feel free to explore the source code in the GitHub repo.
+
+This controller has a dependency on `QuoteService`, which it uses to perform all of the necessary logic. This class is not defined yet so let's do that next: 
+
+```cs
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using VehicleQuotes.Models;
+using VehicleQuotes.ResourceModels;
+
+namespace VehicleQuotes.Services
+{
+    public class QuoteService
+    {
+        private readonly VehicleQuotesContext _context;
+
+        // This constructor defines a dependency on VehicleQuotesContext, similar to most of our controllers.
+        // Via the built in dependency injection features, the framework makes sure to provide this parameter when
+        // creating new instances of this class.
+        public QuoteService(VehicleQuotesContext context)
+        {
+            _context = context;
+        }
+
+        // This method takes all the records from the `quotes` table and constructs `SubmittedQuoteRequest`s with them.
+        // Then returns that as a list.
+        public async Task<List<SubmittedQuoteRequest>> GetAllQuotes()
+        {
+            var quotesToReturn = _context.Quotes.Select(q => new SubmittedQuoteRequest
+            {
+                ID = q.ID,
+                CreatedAt = q.CreatedAt,
+                OfferedQuote = q.OfferedQuote,
+                Message = q.Message,
+
+                Year = q.Year,
+                Make = q.Make,
+                Model = q.Model,
+                BodyType = q.BodyType.Name,
+                Size = q.Size.Name,
+
+                ItMoves = q.ItMoves,
+                HasAllWheels = q.HasAllWheels,
+                HasAlloyWheels = q.HasAlloyWheels,
+                HasAllTires = q.HasAllTires,
+                HasKey = q.HasKey,
+                HasTitle = q.HasTitle,
+                RequiresPickup = q.RequiresPickup,
+                HasEngine = q.HasEngine,
+                HasTransmission = q.HasTransmission,
+                HasCompleteInterior = q.HasCompleteInterior,
+            });
+
+            return await quotesToReturn.ToListAsync();
+        }
+
+        // This method takes an incoming `QuoteRequest` and calculates a quote based on the vehicle described by it.
+        // To calculate this quote, it looks for any overrides before trying to use the currently existing rules defined
+        // in the `quote_rules` table. It also stores a record on the `quotes` table with all the incoming data and the
+        // quote calculation result. It returns back the quote value as well as a message explaining the conitions of
+        // the quote.
+        public async Task<SubmittedQuoteRequest> CalculateQuote(QuoteRequest request)
+        {
+            var response = this.CreateResponse(request);
+            var quoteToStore = await this.CreateQuote(request);
+            var requestedModelStyleYear = await this.FindModelStyleYear(request);
+            QuoteOverride quoteOverride = null;
+
+            if (requestedModelStyleYear != null)
+            {
+                quoteToStore.ModelStyleYear = requestedModelStyleYear;
+
+                quoteOverride = await this.FindQuoteOverride(requestedModelStyleYear);
+
+                if (quoteOverride != null)
+                {
+                    response.OfferedQuote = quoteOverride.Price;
+                }
+            }
+
+            if (quoteOverride == null)
+            {
+                response.OfferedQuote = await this.CalculateOfferedQuote(request);
+            }
+
+            if (requestedModelStyleYear == null)
+            {
+                response.Message = "Offer subject to change upon vehicle inspection.";
+            }
+
+            quoteToStore.OfferedQuote = response.OfferedQuote;
+            quoteToStore.Message = response.Message;
+
+            _context.Quotes.Add(quoteToStore);
+            await _context.SaveChangesAsync();
+
+            response.ID = quoteToStore.ID;
+            response.CreatedAt = quoteToStore.CreatedAt;
+
+            return response;
+        }
+
+        // Creates a `SubmittedQuoteRequest`, intialized with default values, using the data from the incoming
+        // `QuoteRequest`. `SubmittedQuoteRequest` is what gets returned in the response payload of the quote endpoints.
+        private SubmittedQuoteRequest CreateResponse(QuoteRequest request)
+        {
+            return new SubmittedQuoteRequest
+            {
+                OfferedQuote = 0,
+                Message = "This is our final offer.",
+
+                Year = request.Year,
+                Make = request.Make,
+                Model = request.Model,
+                BodyType = request.BodyType,
+                Size = request.Size,
+
+                ItMoves = request.ItMoves,
+                HasAllWheels = request.HasAllWheels,
+                HasAlloyWheels = request.HasAlloyWheels,
+                HasAllTires = request.HasAllTires,
+                HasKey = request.HasKey,
+                HasTitle = request.HasTitle,
+                RequiresPickup = request.RequiresPickup,
+                HasEngine = request.HasEngine,
+                HasTransmission = request.HasTransmission,
+                HasCompleteInterior = request.HasCompleteInterior,
+            };
+        }
+
+        // Creates a `Quote` based on the data from the incoming `QuoteRequest`. This is the object that gets eventually
+        // stored in the database.
+        private async Task<Quote> CreateQuote(QuoteRequest request)
+        {
+            return new Quote
+            {
+                Year = request.Year,
+                Make = request.Make,
+                Model = request.Model,
+                BodyTypeID = (await _context.BodyTypes.SingleAsync(bt => bt.Name == request.BodyType)).ID,
+                SizeID = (await _context.Sizes.SingleAsync(s => s.Name == request.Size)).ID,
+
+                ItMoves = request.ItMoves,
+                HasAllWheels = request.HasAllWheels,
+                HasAlloyWheels = request.HasAlloyWheels,
+                HasAllTires = request.HasAllTires,
+                HasKey = request.HasKey,
+                HasTitle = request.HasTitle,
+                RequiresPickup = request.RequiresPickup,
+                HasEngine = request.HasEngine,
+                HasTransmission = request.HasTransmission,
+                HasCompleteInterior = request.HasCompleteInterior,
+
+                CreatedAt = DateTime.Now
+            };
+        }
+
+        // Tries to find a registered vehicle that matches the one for which the quote is currently being requested.
+        private async Task<ModelStyleYear> FindModelStyleYear(QuoteRequest request)
+        {
+            return await _context.ModelStyleYears.FirstOrDefaultAsync(msy =>
+                msy.Year == request.Year &&
+                msy.ModelStyle.Model.Make.Name == request.Make &&
+                msy.ModelStyle.Model.Name == request.Model &&
+                msy.ModelStyle.BodyType.Name == request.BodyType &&
+                msy.ModelStyle.Size.Name == request.Size
+            );
+        }
+
+        // Tries to find an override for the vehicle for which the quote is currently being requested.
+        private async Task<QuoteOverride> FindQuoteOverride(ModelStyleYear modelStyleYear)
+        {
+            return await _context.QuoteOverides
+                .FirstOrDefaultAsync(qo => qo.ModelStyleYear == modelStyleYear);
+        }
+
+        // Uses the rules stored in the `quote_rules` table to calculate how much money to offer for the vehicle
+        // described in the incoming `QuoteRequest`.
+        private async Task<int> CalculateOfferedQuote(QuoteRequest request)
+        {
+            var rules = await _context.QuoteRules.ToListAsync();
+
+            // Given a vehicle feature type, find a rule that applies to that feature type and has the value that
+            // matches the condition of the incoming vehicle being quoted.
+            Func<string, QuoteRule> theMatchingRule = featureType =>
+                rules.FirstOrDefault(r =>
+                    r.FeatureType == featureType &&
+                    r.FeatureValue == request[featureType]
+                );
+
+            // For each vehicle feature that we care about, sum up the the monetary values of all the rules that match
+            // the given vehicle condition.
+            return QuoteRule.FeatureTypes.All
+                .Select(theMatchingRule)
+                .Where(r => r != null)
+                .Sum(r => r.PriceModifier);
+        }
+    }
+}
+```
+
+Finally, we need to tell the framework that this class is available for Dependency Injection. Similar to how we did with the our `VehicleQuotesContext`, we do so in the `Startup.cs` file's `ConfigureServices` method. Just add this line at the top:
+
+```cs
+services.AddScoped<Services.QuoteService>();
+```
+
+> The core tenet of Inversion of Control is to depend on abstractions, not on implementations. So ideally, we would not have our controller directly call for a `QuoteService` instance. Instead, we would have it reference an abstraction, e.g. an interface like `IQuoteService`. The configuration on `Startup.cs` would then look like this instead: `services.AddScoped<Services.IQuoteService, Services.QuoteService>();`.
+>
+> This is important because it would allow us to unit test the component that depends on our service class (i.e. the controller in this case) by passing it a mock object. One that also implements `IQuoteService` but does not really implement all the functionality of the actual `QuoteService` class. Since the controller only knows about the interface (that is, it "depends on an abstraction"), the actual object that we give it as a dependency doesn't matter to it, as long as it implements that interface. This ability to inject mocks as dependencies is invaluable during testing. Testing is beyond the scope of this article though, so I'll stick with the simpler approach with a static dependency on a concrete class. Know that this is not a good practice when it comes to actual production systems.
+
+And that's all it takes. Once you add a few rules via `POST ​/api​/QuoteRules`, you should be able to get some vehicles quoted with `POST /api/Quotes`. And also see what the system has stored via `GET /api/Quotes`.
+
+![A Quote](dotnet-5-web-api/a-quote.png)
+
+And that's all the functionality that we set out to build into our REST API! There are a few other neat things that I thought I'd include though.
 
 ## Adding seed data for lookup tables
 
-remove endpoints on body type and size that are not needed now
+Our vehicle size and body type data isn't meant to really chance much. In fact, we could even preload that data when our application starts. EF Core provides a data seeding feature that we can access via configurations on the `DbContext` itself. For our case, we could add this method to our `VehicleQuotesContext`:
 
-## Improving the swaagger doc via XML comments
+```cs
+protected override void OnModelCreating(ModelBuilder modelBuilder)
+{
+    modelBuilder.Entity<Size>().HasData(
+        new Size { ID = 1, Name = "Subcompact" },
+        new Size { ID = 2, Name = "Compact" },
+        new Size { ID = 3, Name = "Mid Size" },
+        new Size { ID = 5, Name = "Full Size" }
+    );
 
-## Configuring the app via json settings and environment variables
+    modelBuilder.Entity<BodyType>().HasData(
+        new BodyType { ID = 1, Name = "Coupe" },
+        new BodyType { ID = 2, Name = "Sedan" },
+        new BodyType { ID = 3, Name = "Hatchback" },
+        new BodyType { ID = 4, Name = "Wagon" },
+        new BodyType { ID = 5, Name = "Convertible" },
+        new BodyType { ID = 6, Name = "SUV" },
+        new BodyType { ID = 7, Name = "Truck" },
+        new BodyType { ID = 8, Name = "Mini Van" },
+        new BodyType { ID = 9, Name = "Roadster" }
+    );
+}
+```
 
+`OnModelCreating` is a hook that we can define to run some code at the time the model is being created for the first time. Here, we're using it to seed some data. In order to apply that, a migration needs to be created and executed. If you've added some data to the database, be sure to wipe it before runing the migration so that we don't run into unique constraint violations. Here are the migrations:
+
+```
+$ dotnet ef migrations add AddSeedDataForSizesAndBodyTypes
+
+$ dotnet ef database update
+```
+
+After that's done, it no longer makes sense to allow creating, updating, deleting and fetching individual sizes and body types, so I would delete those endpoints from the respective controllers.
+
+![Body Types, GET all only](dotnet-5-web-api/body-types-get-all-only.png)
+
+![Sizes, GET all only](dotnet-5-web-api/sizes-get-all-only.png)
+
+> There are other options for data seeding in EF Core. Take a look: [Data Seeding](https://docs.microsoft.com/en-us/ef/core/modeling/data-seeding).
+
+## Improving the Swagger UI via XML comments
+
+Our current autogenerated Swagger UI is pretty awesome. Especially considering that we got it for free. It's a little lacking when it comes to more documentation when it comes to specific endpoint summaries or expected responses. The good news is that there's a way to leverage C# XML Comments in order to improve the Swagger UI.
+
+We can add support for that by configuring our project to produce, at build time, an XML file with the docs that we write. In order to do so, we need to update the `VehicleQuotes.csproj` like this:
+
+```diff
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <!-- ... -->
++   <GenerateDocumentationFile>true</GenerateDocumentationFile>
++   <NoWarn>$(NoWarn);1591</NoWarn>
+  </PropertyGroup>
+
+  <!-- ... -->
+</Project>
+```
+
+`GenerateDocumentationFile` is the flag that tells the .NET 5 build tools to generate the documentation file. The `NoWarn` element prevents our build output from getting cluttered with a lot of warnings saying that some classes and methods are not properly documented. We don't want that because we just want to write enough documentation for the Swagger UI. And that includes only the controllers.
+
+You can run `dotnet build` and look for the new file in `bin/Debug/net5.0/VehicleQuotes.xml`.
+
+Then, we need to update `Startup.cs`. First we need to add the following `unsing` statements:
+
+```cs
+using System.IO;
+using System.Reflection;
+```
+
+And add the following code to the `ConfigureServices` method on `Startup.cs`:
+
+```diff
+public void ConfigureServices(IServiceCollection services)
+{
+    // ...
+
+    services.AddSwaggerGen(c =>
+    {
+        c.SwaggerDoc("v1", new OpenApiInfo { Title = "VehicleQuotes", Version = "v1" });
+
++       c.IncludeXmlComments(
++           Path.Combine(
++               AppContext.BaseDirectory,
++               $"{Assembly.GetExecutingAssembly().GetName().Name}.xml"
++           )
+        );
+    });
+
+    // ...
+}
+```
+
+This makes it so the `SwaggerGen` service knows to look for the XML documentation file when building up the Open API specification used for generating the Swagger UI.
+
+Now that all of that is set up, we can actually write some XML comments and attributes that will enhance our Swagger UI.As an example, put this on top of `ModelsController`'s `Post` method:
+
+```cs
+/// <summary>
+/// Creates a new vehicle model for the given make.
+/// </summary>
+/// <param name="makeId">The ID of the vehicle make to add the model to.</param>
+/// <param name="model">The data to create the new model with.</param>
+/// <response code="201">When the request is invalid.</response>
+/// <response code="404">When the specified vehicle make does not exist.</response>
+/// <response code="409">When there's already another model in the same make with the same name.</response>
+[HttpPost]
+[ProducesResponseType(StatusCodes.Status201Created)]
+[ProducesResponseType(StatusCodes.Status404NotFound)]
+[ProducesResponseType(StatusCodes.Status409Conflict)]
+public async Task<ActionResult<ModelSpecification>> Post([FromRoute] int makeId, ModelSpecification model)
+{
+    // ...
+}
+```
+
+Then, the Swagger UI now looks like this for this endpoint:
+
+![Fully documented POST Models endpoint](dotnet-5-web-api/fully-documented-post-models.png)
+
+## Configuring the app via settings files and environment variables
+
+Another aspect that's important to web applications is having them be configurable via things like configuration files or environment variables. The framework already has provision for this, we just need to use it. I'm talking about the `appsettings` files.
+
+We have two of them created for us by default: `appsettings.json` which is applied in all environments, and `appsettings.Development.json` that is applied only under development environments. The environment is given by the `ASPNETCORE_ENVIRONMENT` endvironment variable, and it can be set to either `Development`, `Staging` or `Production` by default. That means that if we had, for example a `appsettings.Staging.json` file, the settings defined within would be loaded if the `ASPNETCORE_ENVIRONMENT` endvironment variable were set to `Staging`. You get the idea.
+
+> You can learn more about [configuration](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/configuration/?view=aspnetcore-5.0) and [environments](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/environments?view=aspnetcore-5.0) in the official documentation.
+
+Anyway, let's add a new setting on `appsettings.json`:
+
+```diff
+{
+  // ...
++ "DefaultOffer": 77
+}
+```
+
+We'll use this setting to give default offers when we're not able to calculate appropriate quotes for vehicles. This can happen if we don't have rules, or if the ones we have don't match any of the incoming vehicle features or if for some other reason the final sum ends up in zero or negative number. We can use this setting in our `QuoteService` like so:
+
+```diff
+// ...
++using Microsoft.Extensions.Configuration;
+
+namespace VehicleQuotes.Services
+{
+    public class QuoteService
+    {
+        // ...
++       private readonly IConfiguration _configuration;
+
+-       public QuoteService(VehicleQuotesContext context)
++       public QuoteService(VehicleQuotesContext context, IConfiguration configuration)
+        {
+            _context = context;
++           _configuration = configuration;
+        }
+
+        // ...
+
+        public async Task<SubmittedQuoteRequest> CalculateQuote(QuoteRequest request)
+        {
+            // ...
+
++           if (response.OfferedQuote <= 0)
++           {
++               response.OfferedQuote = _configuration.GetValue<int>("DefaultOffer", 0);
++           }
+
+            quoteToStore.OfferedQuote = response.OfferedQuote;
+
+            // ...
+        }
+
+        // ...
+    }
+}
+```
+
+Here, we've added a new parameter to the constructor to specify that `VehicleQuotesContext` has a dependency on `IConfiguration`. This prompts the framework to provide an instance of that when instantiating the class. We can use that instance to access the settings that we defined in the `appsettings.json` file via its `GetValue` method, like I demonstrated above.
+
+The value of the settings in `appsettings.json` can be overridden by environment variables as well. On Linux, for example, we can run the app and set an enviornment value with a line like this:
+
+```
+$ DefaultOffer=123 dotnet run
+```
+
+This will make the application use `123` instead of `77` when it comes to the `DefaultOffer` setting. This flexibility is great from a DevOps perspective. And we had to do minimal work in order to get that going.
+
+## That's all for now
+
+And that's it! In this article we've gone through many of the features offered in .NET 5, ASP.NET Core and Entity Framework Core to support some of the most common use cases when it comes to developing Web API applications.
+
+We've installed .NET 5 and created an ASP.NET Core Web API project with EF Core and a few bells and whistles, created controllers to support many different endpoints, played a little bit with routes and response codes, created and built upon a data model and updated a database via entities and migrations, implemented more advance database objects like indexes to enforce uniqueness constraints, implemented input validation using both built-in and custom validation attributes, implemented resource models as DTOs for defining the contract of some of our API endpoints, tapped into the built-in dependency injection capabilities, explored and improved the autogenerated Swagger UI, added seed data for our database, learned about configuration via settings files and environment variables.
+
+.NET 5 is looking great.
