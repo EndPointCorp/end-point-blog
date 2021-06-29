@@ -6,13 +6,13 @@ tags: dotnet, asp.net core, c#, webapi, rest, postgresql
 
 # Building REST APIs with .NET 5, ASP.NET Core and PostgreSQL
 
-This is old news by now, but I'm still amazed by the fact that nowadays [.NET is open source and can run on linux](https://dotnet.microsoft.com/platform/open-source). I truly believe that this new direction can help the technology realize its true potential, since it's no longer shackled to Windows based environments. I've personally been outside the .NET game for a good while, but with [the milestone release that is .NET 5](https://docs.microsoft.com/en-us/dotnet/core/dotnet-five), I think now is a great time to dive back in.
+This is old news by now, but I'm still amazed by the fact that nowadays [.NET is open source and can run on Linux](https://dotnet.microsoft.com/platform/open-source). I truly believe that this new direction can help the technology realize its true potential, since it's no longer shackled to Windows based environments. I've personally been outside the .NET game for a good while, but with [the milestone release that is .NET 5](https://docs.microsoft.com/en-us/dotnet/core/dotnet-five), I think now is a great time to dive back in.
 
-So I thought of taking some time to do just that, really dive in, see what's new, and get a sense of the general developer experience that the current incarnation of .NET offers. So in this blog post, I'm going to chronicle my experience developing a simple, but complete [REST API](https://www.redhat.com/en/topics/api/what-is-a-rest-api) application. Along the way, I'll touch on the most common problems that one runs into when develping such applications and how are they solved in the .NET world. So think of this piece as a sort of tutorial or overview of the most common framework features when it comes to developing REST APIs.
+So I thought of taking some time to do just that, really dive in, see what's new, and get a sense of the general developer experience that the current incarnation of .NET offers. So in this blog post, I'm going to chronicle my experience developing a simple, but complete [REST API](https://www.redhat.com/en/topics/api/what-is-a-rest-api) application. Along the way, I'll touch on the most common problems that one runs into when developing such applications and how are they solved in the .NET world. So think of this piece as a sort of tutorial or overview of the most common framework features when it comes to developing REST APIs.
 
 First, let's get familiar with what we're building.
 
-> There's a table of contents at the bottom: [Table of contents](#table-of-contents)
+> There's a table of contents at the bottom: [Table of contents](#table-of-contents).
 
 # What we're building
 
@@ -20,11 +20,11 @@ First, let's get familiar with what we're building.
 
 > You can find the finished product in https://github.com/megakevin/end-point-blog-dotnet-5-web-api
 
-The application that we'll be building throughout this article will address a request from a hypothetical car junker business. Our client wants to automate the proces of calculating how much money to offer their customers for their vehicles, given certain information about them. And they want an app to do that. We are building the back end component that will support that app. It is a REST API that allows users to provide vehicle information (year, make, model, condition, etc) and will produce a quote of how much money would our hypothetical client be willing to pay for it.
+The application that we'll be building throughout this article will address a request from a hypothetical car junker business. Our client wants to automate the process of calculating how much money to offer their customers for their vehicles, given certain information about them. And they want an app to do that. We are building the back end component that will support that app. It is a REST API that allows users to provide vehicle information (year, make, model, condition, etc) and will produce a quote of how much money would our hypothetical client be willing to pay for it.
 
 Here's a short list of features that we need to implement in order to fulfill that requirement:
 
-1. Given a vechicle model and condition, calculate a price.
+1. Given a vehicle model and condition, calculate a price.
 2. Store and manage rules that are used to calculate vehicle prices.
 3. Store and manage pricing overrides on a vehicle model basis. Price overrides are used regardless of the current rules.
 4. CRUD vehicle models so that overrides can the specified for them.
@@ -41,7 +41,7 @@ The `quotes` table includes all the fields that identify a vehicle: year, make, 
 
 The idea of this is that, when a customer submits a request for a quote, if we have their vehicle registered in our database, then we can populate this foreign key and link the quote with the specific vehicle that it's quoting. If we don't have their vehicle registered, then we leave that field unpopulated. Either way, we can offer a quote. The only difference being the level or certainty of the quote.
 
-The records in the `model_style_years` table represent specific vechicles. That whole hierarchy works like this: A vehicle make (e.g. Honda, Toyota, etc in the `makes` table) has many models (e.g. Civic, Corolla, etc in the `models` table), each model has many styles (the `model_styles` table). Styles are combinations of body types (the `body_types` table) and sizes (the `sizes` table) (e.g. Mid-size Sedan, Compact Coupe, etc). And finally, each model style has many years in which they were being produced (via the `model_style_years` table).
+The records in the `model_style_years` table represent specific vehicles. That whole hierarchy works like this: A vehicle make (e.g. Honda, Toyota, etc in the `makes` table) has many models (e.g. Civic, Corolla, etc in the `models` table), each model has many styles (the `model_styles` table). Styles are combinations of body types (the `body_types` table) and sizes (the `sizes` table) (e.g. Mid-size Sedan, Compact Coupe, etc). And finally, each model style has many years in which they were being produced (via the `model_style_years` table).
 
 This model allows us very fine grained differentiation between vehicles. For example, we can have a "2008 Honda Civic Hatchback which is a Compact car" and also a "1990 Honda Civic Hatchback which is a Sub-compact". That is, same model, different year, size or body type. 
 
@@ -53,13 +53,13 @@ Finally, we have a `quote_overrides` table which specifies a flat, static price 
 
 ## Setting up the PostgreSQL database with Docker
 
-For this project, our database of choice is [PostgreSQL](https://www.postgresql.org/). Luckily for us, getting a PostgreSQL instance up and runnig is very easy thanks to [Docker](https://www.docker.com/).
+For this project, our database of choice is [PostgreSQL](https://www.postgresql.org/). Luckily for us, getting a PostgreSQL instance up and running is very easy thanks to [Docker](https://www.docker.com/).
 
 > If you want to learn more about dockerizing a typical web application, take a look at [this article](https://www.endpoint.com/blog/2020/08/27/containerizing-magento-with-docker-compose-elasticsearch-mysql-and-magento) that explains the process in detail.
 
-Once you have [Docker installed](https://docs.docker.com/get-docker/) in your machine, getting a PostgreSQL instance is as symple as running the following command:
+Once you have [Docker installed](https://docs.docker.com/get-docker/) in your machine, getting a PostgreSQL instance is as simple as running the following command:
 
-```sh
+```
 $ docker run -d \
     --name vehicle-quote-postgres \
     -p 5432:5432 \
@@ -72,15 +72,15 @@ $ docker run -d \
 
 Here we're asking Docker to run a new [container](https://docs.docker.com/get-started/#what-is-a-container) based on the latest `postgres` [image](https://docs.docker.com/get-started/#what-is-a-container-image) from [DockerHub](https://hub.docker.com/_/postgres), name it `vehicle-quote-postgres`, specify the port to use the default PostgreSQL one, make it accessible to the local network (with the `--network host` option) and finally, specify a few environment variables that the `postgres` image uses when building our new instance to set up the default database name, user and password (with the three `-e` options).
 
-After Docker is done working its magic, you should be able to access the databse with something like:
+After Docker is done working its magic, you should be able to access the database with something like:
 
-```sh
+```
 $ docker exec -it vehicle-quote-postgres psql -U vehicle_quote
 ```
 
 That will result in:
 
-```sh
+```
 $ docker exec -it vehicle-quote-postgres psql -U vehicle_quote
 psql (13.2 (Debian 13.2-1.pgdg100+1))
 Type "help" for help.
@@ -92,7 +92,7 @@ This command is connecting to our new `vehicle-quote-postgres` container and the
 
 If you have `psql` [installed](https://www.compose.com/articles/postgresql-tips-installing-the-postgresql-client/) on your own machine, you can use it directly to connect to the PostgreSQL instance running inside the container:
 
-```sh
+```
 $ psql -h localhost -U vehicle_quote
 ```
 
@@ -100,15 +100,15 @@ This is possible because we specified in our `docker run` command that the conta
 
 ## Installing the .NET 5 SDK
 
-Ok, with that out of the way, let's install .NET 5.
+OK, with that out of the way, let's install .NET 5.
 
-.NET 5 truly is multiplatform, so whatever environment you prefer to work with, they've got you covered. You can go to [the .NET 5 download page](https://dotnet.microsoft.com/download/dotnet/5.0) and pick your desired flavor of the SDK.
+.NET 5 truly is multi-platform, so whatever environment you prefer to work with, they've got you covered. You can go to [the .NET 5 download page](https://dotnet.microsoft.com/download/dotnet/5.0) and pick your desired flavor of the SDK.
 
 On Ubuntu 20.10, which is what I'm running, installation is painless. It's your typical process with [APT](https://en.wikipedia.org/wiki/APT_(software)) and [this page from the official docs](https://docs.microsoft.com/en-us/dotnet/core/install/linux-ubuntu#2010-) has all the details.
 
 First step is to add the Microsoft package repository:
 
-```sh
+```
 $ wget https://packages.microsoft.com/config/ubuntu/20.10/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
 
 $ sudo dpkg -i packages-microsoft-prod.deb
@@ -116,7 +116,7 @@ $ sudo dpkg -i packages-microsoft-prod.deb
 
 Then, install .NET 5 with APT like one would any other software package:
 
-```sh
+```
 $ sudo apt-get update; \
   sudo apt-get install -y apt-transport-https && \
   sudo apt-get update && \
@@ -125,7 +125,7 @@ $ sudo apt-get update; \
 
 Run `dotnet --version` in your console and you should see something like this:
 
-```sh
+```
 $ dotnet --version
 5.0.301
 ```
@@ -136,7 +136,7 @@ $ dotnet --version
 
 Ok now that we have our requirements, database and SDK, let's start setting up our project. We do so with the following command:
 
-```sh
+```
 $ dotnet new webapi -o VehicleQuotes
 ```
 
@@ -164,7 +164,7 @@ As a result, `dotnet` will give you a `The template "ASP.NET Core Web API" was c
 └── WeatherForecast.cs
 ```
 
-Important things to note here are the `appsettings.json` and `appsettings.Development.json` files which contain environment specific configuration values; the `Controllers` directory where we define our application controllers and action methods (i.e. our REST API endpoints); the `Program.cs` and `Startup.cs` files that contain our application's entry point and bootstrapping logic; and finally `VehicleQuotes.csproj` which is the file that contains project wide configuration that the framework cares about like references, compilatin targets, and other options. Feel free to explore.
+Important things to note here are the `appsettings.json` and `appsettings.Development.json` files which contain environment specific configuration values; the `Controllers` directory where we define our application controllers and action methods (i.e. our REST API endpoints); the `Program.cs` and `Startup.cs` files that contain our application's entry point and bootstrapping logic; and finally `VehicleQuotes.csproj` which is the file that contains project wide configuration that the framework cares about like references, compilation targets, and other options. Feel free to explore.
 
 The `dotnet new` command has given us quite a bit. These files make up a fully working application that we can run and play around with. It even has a [Swagger UI](https://swagger.io/tools/swagger-ui/), as I'll demonstrate shortly. It's a great place to get started from.
 
@@ -203,19 +203,19 @@ As you can see we've got a `GET WeatherForecast` endpoint in our app. This is in
 
 Now let's install all the tools and libraries we will need for our application. First, we install the [ASP.NET Code Generator](https://www.nuget.org/packages/dotnet-aspnet-codegenerator/) tool which we'll use later for scaffolding controllers:
 
-```sh
+```
 $ dotnet tool install --global dotnet-aspnet-codegenerator
 ```
 
 We also need to install the [Entity Framework command line tools](https://www.nuget.org/packages/dotnet-ef/) which help us with creating and applying database migrations:
 
-```sh
+```
 $ dotnet tool install --global dotnet-ef
 ```
 
 Now, we need to install a few libraries that we'll use in our project. First are all the packages that allow us to use [Entity Framework Core](https://docs.microsoft.com/en-us/ef/), provide scaffolding support and give us a detailed debugging page for database errors:
 
-```sh
+```
 $ dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
 $ dotnet add package Microsoft.EntityFrameworkCore.Design
 $ dotnet add package Microsoft.EntityFrameworkCore.SqlServer
@@ -224,13 +224,13 @@ $ dotnet add package Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore
 
 We also need the [EF Core driver for PostgreSQL](https://www.npgsql.org/efcore/) which will allow us to interact with our database:
 
-```sh
+```
 $ dotnet add package Npgsql.EntityFrameworkCore.PostgreSQL
 ```
 
 Finally, we need [another package](https://github.com/efcore/EFCore.NamingConventions) that will allow us to use the [snake case](https://en.wikipedia.org/wiki/Snake_case) naming convention for our database tables, fields, etc. We need this because EF Core uses [capitalized camel case](https://wiki.c2.com/?UpperCamelCase) by default, which is not very common in the PostgreSQL world, so this will allow us to play nice. This is the package:
 
-```sh
+```
 $ dotnet add package EFCore.NamingConventions
 ```
 
@@ -253,7 +253,7 @@ namespace VehicleQuotes
 }
 ```
 
-As you can see this is just a simple class that inherits from EF Core's [`DbContext`](https://docs.microsoft.com/en-us/dotnet/api/microsoft.entityframeworkcore.dbcontext?view=efcore-5.0) class. That's all we need for now. We will continue building on this class as we add new tables and cofigurations.
+As you can see this is just a simple class that inherits from EF Core's [`DbContext`](https://docs.microsoft.com/en-us/dotnet/api/microsoft.entityframeworkcore.dbcontext?view=efcore-5.0) class. That's all we need for now. We will continue building on this class as we add new tables and configurations.
 
 Now, we need to add this class into [ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/?view=aspnetcore-5.0)'s built in [IoC container](https://martinfowler.com/articles/injection.html) so that it's available to controllers and other classes via [Dependency Injection](https://en.wikipedia.org/wiki/Dependency_injection), and tell it how to find our database. Go to `Startup.cs` and add the following using statement near the top of the file:
 
@@ -333,9 +333,9 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-This will make sure full databse queries appear in the log in the console, including parameter values. This could expose sensitive data so be careful when using `EnableSensitiveDataLogging` in production.
+This will make sure full database queries appear in the log in the console, including parameter values. This could expose sensitive data so be careful when using `EnableSensitiveDataLogging` in production.
 
-We can also add the following service configuration to have the app display detailed error pages when something related to the databse or migrations goes wrong:
+We can also add the following service configuration to have the app display detailed error pages when something related to the database or migrations goes wrong:
 
 ```diff
 public void ConfigureServices(IServiceCollection services)
@@ -365,7 +365,7 @@ public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     }
 ```
 
-The magic is done by the `c.RoutePrefix = "";` line which makes it so there's no need to put any prefix in order to acess the autogenerated Swagger UI.
+The magic is done by the `c.RoutePrefix = "";` line which makes it so there's no need to put any prefix in order to access the auto generated Swagger UI.
 
 Try it out. Do `dotnet run` and navigate to `https://localhost:5001` and you should see the Swagger UI there.
 
@@ -373,7 +373,7 @@ Try it out. Do `dotnet run` and navigate to `https://localhost:5001` and you sho
 
 ## Creating model entities, migrations and updating the database
 
-Alright, with all that configuration out of the way, let's implement some of our actual application logic now. Refer back to our data model. We'll start by defining our three simplest tables: `makes`, `sizes` and `body_types`. With EF Core, we define tables via so-called [POCO](https://en.wikipedia.org/wiki/Plain_old_CLR_object) entities. Which are simple C# classes with some properties. The classes become tables and the properties become the tables' fields. Instances of these classes represent records in the databse.
+Alright, with all that configuration out of the way, let's implement some of our actual application logic now. Refer back to our data model. We'll start by defining our three simplest tables: `makes`, `sizes` and `body_types`. With EF Core, we define tables via so-called [POCO](https://en.wikipedia.org/wiki/Plain_old_CLR_object) entities. Which are simple C# classes with some properties. The classes become tables and the properties become the tables' fields. Instances of these classes represent records in the database.
 
 So, create a new `Models` directory in our project's root and add these three files:
 
@@ -435,23 +435,23 @@ namespace VehicleQuotes
 }
 ```
 
-This is how we tell EF Core to build tables in our databse for our entities. You'll see later how we use those `DbSet`s to access the data in those tables. For now, let's create a [migration](https://docs.microsoft.com/en-us/ef/core/managing-schemas/migrations/?tabs=dotnet-core-cli) script that we can later run to apply changes to our database. Run the following to have EF Core create it for us:
+This is how we tell EF Core to build tables in our database for our entities. You'll see later how we use those `DbSet`s to access the data in those tables. For now, let's create a [migration](https://docs.microsoft.com/en-us/ef/core/managing-schemas/migrations/?tabs=dotnet-core-cli) script that we can later run to apply changes to our database. Run the following to have EF Core create it for us:
 
-```sh
+```
 $ dotnet ef migrations add AddLookupTables
 ```
 
-Now take a loot at the newly created `Migrations` directory. It contains a few new files, but the one we care about right now is `Migrations/{TIMESTAMP}_AddLookupTables.cs`. In its `Up` method, it's got some code that will modify the databse structure when run. The EF Core tooling has inspected our project, identified the new entities, and automatically generated a migration script for us that creates tables for them. Notice also how the tables and fields use the snake case naming convention, just as we specified with the call to `UseSnakeCaseNamingConvention` in `Startup.cs`.
+Now take a loot at the newly created `Migrations` directory. It contains a few new files, but the one we care about right now is `Migrations/{TIMESTAMP}_AddLookupTables.cs`. In its `Up` method, it's got some code that will modify the database structure when run. The EF Core tooling has inspected our project, identified the new entities, and automatically generated a migration script for us that creates tables for them. Notice also how the tables and fields use the snake case naming convention, just as we specified with the call to `UseSnakeCaseNamingConvention` in `Startup.cs`.
 
 Now, to actually run the migration script and apply the changes to the database, we do:
 
-```sh
+```
 $ dotnet ef database update
 ```
 
 That command inspects our project to find any migrations that haven't been run yet, and applies them. In this case, we only have one, so that's what it runs. Look at the output in the console to see it working its magic step by step:
 
-```sh
+```
 $ dotnet ef database update
 Build started...
 Build succeeded.
@@ -510,7 +510,7 @@ There are our tables in all their normalized, snake cased glory. The `__EFMigrat
 
 ## Creating controllers for CRUDing our tables
 
-Now that we have that, let's add a few endpoints to support basic CRUD of those tables. We can use the `dotnet-aspnet-codegenerator` scaffoldind tool that we installed earlier. For the three tables that we have, we would do:
+Now that we have that, let's add a few endpoints to support basic CRUD of those tables. We can use the `dotnet-aspnet-codegenerator` scaffolding tool that we installed earlier. For the three tables that we have, we would do:
 
 ```
 $ dotnet aspnet-codegenerator controller \
@@ -542,7 +542,7 @@ Those commands tell the scaffolding tool to create new controllers that:
 
 1. Are named as given by the `-name` option.
 2. Use the model class specified in the `-m` option.
-3. Use our `VehicleQuotesContext` to talk to the databse. As per the `-dc` option.
+3. Use our `VehicleQuotesContext` to talk to the database. As per the `-dc` option.
 4. Define the methods using `async`/`await` syntax. Given by the `-async` option. 
 5. Are API controllers. Specified by the `-api` option.
 6. Are created in the `Controllers` directory. Via the `-outDir` option.
@@ -579,7 +579,7 @@ With that, we can create a new migration:
 $ dotnet ef migrations add AddUniqueIndexesToLookupTables
 ```
 
-That will result in a new migration script in `Migrations/{TIMESTAMP}_AddUniqueIndexesToLookupTables.cs`. It's `Up` method looks like this:
+That will result in a new migration script in `Migrations/{TIMESTAMP}_AddUniqueIndexesToLookupTables.cs`. Its `Up` method looks like this:
 
 ```cs
 protected override void Up(MigrationBuilder migrationBuilder)
@@ -606,7 +606,7 @@ protected override void Up(MigrationBuilder migrationBuilder)
 
 As you can see, new unique indexes are being created on the tables and fields that we specified. Like before, apply the changes to the database structure with:
 
-```sh
+```
 $ dotnet ef database update
 ```
 
@@ -614,7 +614,7 @@ Now if you try to create, for example, a vehicle make with a repeated name, you'
 
 ![Unique constraint violation](dotnet-5-web-api/unique-constraint-violation.png)
 
-## Reponding with specific HTTP error codes (409 Conflict)
+## Responding with specific HTTP error codes (409 Conflict)
 
 The fact that we can now enforce unique constraints is all well and good. But the error scenario is not very user friendly. Instead of returning a "500 Internal Server Error" status code with a wall of text, we should be responding with something more sensible. Maybe a "409 Conflict" would be more appropriate for this kind of error. We can easily update our controllers to handle that scenario. What we need to do is update the methods that handle the `POST` and `PUT` endpoints so that they catch the `Microsoft.EntityFrameworkCore.DbUpdateException` exception and return the proper response. Here's how we would do it for the `MakesController`:
 
@@ -860,7 +860,7 @@ Do a `dotnet run` and take a peek at the Swagger UI on `https://localhost:5001` 
 
 The vehicle model routes are now nested within makes, just like we wanted.
 
-Of course, this is just eyecandy for now. We need to actually use this new `makeId` parameter for the logic in the endpoints. For example, one would expect a `GET` to `/api/Makes/1/Models` to return all the vehicle models that belong to the make with `id` 1. But right now, all vehicle models are returned regardless. All other endpoints behave similarly, there's no limit to the operations on the vehicle models. The given `makeId` is not taken into consideration at all.
+Of course, this is just eye candy for now. We need to actually use this new `makeId` parameter for the logic in the endpoints. For example, one would expect a `GET` to `/api/Makes/1/Models` to return all the vehicle models that belong to the make with `id` 1. But right now, all vehicle models are returned regardless. All other endpoints behave similarly, there's no limit to the operations on the vehicle models. The given `makeId` is not taken into consideration at all.
 
 Let's update the `ModelsController`'s `GetModels` method (which is the one that handles the `GET /api/Makes/{makeId}/Models` endpoint) to behave like one would expect. It should look like this:
 
@@ -883,7 +883,7 @@ See how we've included a new parameter to the method: `[FromRoute] int makeId`. 
 
 > We have access to the `DbContext` because it has been injected as a dependency into the controller via its constructor by the framework.
 
-> [The official documentation](https://docs.microsoft.com/en-us/ef/core/querying/) is a great resource to learn about all the posibilities when querying data with EF Core.
+> [The official documentation](https://docs.microsoft.com/en-us/ef/core/querying/) is a great resource to learn about all the possibilities when querying data with EF Core.
 
 Let's update the `GetModel` method, which handles the `GET /api/Makes/{makeId}/Models/{id}` endpoint, similarly.
 
@@ -912,7 +912,7 @@ And that's the gist of it. Other methods would need to be updated similarly. The
 
 ## Using resource models as DTOs for controllers
 
-Now, I did say at the begining that we wanted the vehicle model endpoint to be a bit more abstract. Right now it's operating directly over the EF Core entities and our table. As a result, creating new vehicle models via the `POST /api/Makes/{makeId}/Models` endpoint is a pain. Take a look at the Swagger UI request schema for that endpoint:
+Now, I did say at the beginning that we wanted the vehicle model endpoint to be a bit more abstract. Right now it's operating directly over the EF Core entities and our table. As a result, creating new vehicle models via the `POST /api/Makes/{makeId}/Models` endpoint is a pain. Take a look at the Swagger UI request schema for that endpoint:
 
 ![Raw model request schema](dotnet-5-web-api/raw-model-request-schema.png)
 
@@ -1004,7 +1004,7 @@ public async Task<ActionResult<IEnumerable<ModelSpecification>>> GetModels([From
 }
 ```
 
-The first thing that we chaged was the return type. Instead of `Task<ActionResult<IEnumerable<Model>>>`, the method now returns `Task<ActionResult<IEnumerable<ModelSpecification>>>`. We're going to use our new Resource Models as these endpoints' contract, so we need to make sure we are returning those. Next, we considerably changed the LINQ expression that searches the database for the vehicle model records we want. The filtering logic (given by the `Where`) is the same. That is, we're still seaching for vehicle models within the given make id. What we changed was the projection logic in the `Select`. Our Action Method now returns a collection of `ModelSpecification` objects, so we updated the `Select` to produce such objects, based on the records from the `models` table that match our search criteria. We build `ModelSpecification`s using the data coming from `models` records and their related `model_styles` and `model_style_years`. Finally, we asynchronously execute the query to fetch the data from the database and return it.
+The first thing that we changed was the return type. Instead of `Task<ActionResult<IEnumerable<Model>>>`, the method now returns `Task<ActionResult<IEnumerable<ModelSpecification>>>`. We're going to use our new Resource Models as these endpoints' contract, so we need to make sure we are returning those. Next, we considerably changed the LINQ expression that searches the database for the vehicle model records we want. The filtering logic (given by the `Where`) is the same. That is, we're still searching for vehicle models within the given make id. What we changed was the projection logic in the `Select`. Our Action Method now returns a collection of `ModelSpecification` objects, so we updated the `Select` to produce such objects, based on the records from the `models` table that match our search criteria. We build `ModelSpecification`s using the data coming from `models` records and their related `model_styles` and `model_style_years`. Finally, we asynchronously execute the query to fetch the data from the database and return it.
 
 Next, let's move on to the `GetModel` method, which handles the `GET /api/Makes/{makeId}/Models/{id}` endpoint. This is what it should look like:
 
@@ -1251,7 +1251,7 @@ namespace VehicleQuotes.ResourceModels
 }
 ```
 
-And just like that, we get a good amount of functionality. We use the `Required` and `MinLength` attributes from the `System.ComponentModel.DataAnnotations` namespace to specify that some fields are required, and that our `Years` array needs to contain at least one element. When the app receives a request to the PUT or POST endpoints, which are the ones that expect a `ModelSpecification` as the payload, validation kicks in. If it fails, the action method is never executed and a 400 status code is returned as a response. Try POSTing to `/api/Makes/{makeId}/Models` with a payload that vioaltes some of these rules to see for yourself. I tried for example sending this:
+And just like that, we get a good amount of functionality. We use the `Required` and `MinLength` attributes from the `System.ComponentModel.DataAnnotations` namespace to specify that some fields are required, and that our `Years` array needs to contain at least one element. When the app receives a request to the PUT or POST endpoints, which are the ones that expect a `ModelSpecification` as the payload, validation kicks in. If it fails, the action method is never executed and a 400 status code is returned as a response. Try POSTing to `/api/Makes/{makeId}/Models` with a payload that violates some of these rules to see for yourself. I tried for example sending this:
 
 ```json
 {
@@ -1291,7 +1291,7 @@ Pretty neat, huh? With minimal effort, we have some basic validation rules in pl
 
 ## Validation using custom attributes
 
-Of course, the framework is never going to cover all possible validation scenarios with the built-in atributes. Case in point, it'd be great to validate that the `Years` array contains values that look like actual years. That is, four-character, digit-only strings. There are no validation attributes for that. So, we need to create our own. Let's add this file into a new `Validations` directory:
+Of course, the framework is never going to cover all possible validation scenarios with the built-in attributes. Case in point, it'd be great to validate that the `Years` array contains values that look like actual years. That is, four-character, digit-only strings. There are no validation attributes for that. So, we need to create our own. Let's add this file into a new `Validations` directory:
 
 ```cs
 // Validations/ContainsYearsAttribute.cs
@@ -1426,7 +1426,7 @@ They do so because we used the `Single` method, which is designed like that. It 
 
 > If, for example, we wanted not-founds to return `null`, we could have used `SingleOrDefault` instead.
 
-This unhandled excception results in a response that's quite unbecoming:
+This unhandled exception results in a response that's quite unbecoming:
 
 ![InvalidOperationException during POST](dotnet-5-web-api/invalid-operation-exception.png)
 
@@ -1521,7 +1521,7 @@ Produces a response like this:
 
 ## Implementing endpoints for quote rules and overrides
 
-At this point we've explored many of the most common features avilable to us for developing Web APIs. So much so that implementing the next two pieces of functionality for our app doesn't really introduce any new concepts. So, I wont discuss that here in great detail.
+At this point we've explored many of the most common features available to us for developing Web APIs. So much so that implementing the next two pieces of functionality for our app doesn't really introduce any new concepts. So, I wont discuss that here in great detail.
 
 Feel free to browse the source code [on GitHub](https://github.com/megakevin/end-point-blog-dotnet-5-web-api) if you want though. These are the relevant files:
 
@@ -1900,7 +1900,7 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 }
 ```
 
-[`OnModelCreating`](https://docs.microsoft.com/en-us/ef/core/modeling/#use-fluent-api-to-configure-a-model) is a hook that we can define to run some code at the time the model is being created for the first time. Here, we're using it to seed some data. In order to apply that, a migration needs to be created and executed. If you've added some data to the database, be sure to wipe it before runing the migration so that we don't run into unique constraint violations. Here are the migrations:
+[`OnModelCreating`](https://docs.microsoft.com/en-us/ef/core/modeling/#use-fluent-api-to-configure-a-model) is a hook that we can define to run some code at the time the model is being created for the first time. Here, we're using it to seed some data. In order to apply that, a migration needs to be created and executed. If you've added some data to the database, be sure to wipe it before running the migration so that we don't run into unique constraint violations. Here are the migrations:
 
 ```
 $ dotnet ef migrations add AddSeedDataForSizesAndBodyTypes
@@ -1918,7 +1918,7 @@ After that's done, it no longer makes sense to allow creating, updating, deletin
 
 ## Improving the Swagger UI via XML comments
 
-Our current autogenerated Swagger UI is pretty awesome. Especially considering that we got it for free. It's a little lacking when it comes to more documentation about specific endpoint summaries or expected responses. The good news is that there's a way to leverage [C# XML Comments](https://docs.microsoft.com/en-us/dotnet/csharp/codedoc) in order to improve the Swagger UI.
+Our current auto-generated Swagger UI is pretty awesome. Especially considering that we got it for free. It's a little lacking when it comes to more documentation about specific endpoint summaries or expected responses. The good news is that there's a way to leverage [C# XML Comments](https://docs.microsoft.com/en-us/dotnet/csharp/codedoc) in order to improve the Swagger UI.
 
 We can add support for that by configuring our project to produce, at build time, an XML file with the docs that we write. In order to do so, we need to update the `VehicleQuotes.csproj` like this:
 
@@ -2000,7 +2000,7 @@ Then, the Swagger UI now looks like this for this endpoint:
 
 Another aspect that's important to web applications is having them be configurable via things like configuration files or environment variables. The framework already has provision for this, we just need to use it. I'm talking about the `appsettings` files.
 
-We have two of them created for us by default: `appsettings.json` which is applied in all environments, and `appsettings.Development.json` that is applied only under development environments. The environment is given by the `ASPNETCORE_ENVIRONMENT` endvironment variable, and it can be set to either `Development`, `Staging` or `Production` by default. That means that if we had, for example a `appsettings.Staging.json` file, the settings defined within would be loaded if the `ASPNETCORE_ENVIRONMENT` endvironment variable were set to `Staging`. You get the idea.
+We have two of them created for us by default: `appsettings.json` which is applied in all environments, and `appsettings.Development.json` that is applied only under development environments. The environment is given by the `ASPNETCORE_ENVIRONMENT` environment variable, and it can be set to either `Development`, `Staging` or `Production` by default. That means that if we had, for example a `appsettings.Staging.json` file, the settings defined within would be loaded if the `ASPNETCORE_ENVIRONMENT` environment variable were set to `Staging`. You get the idea.
 
 > You can learn more about [configuration](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/configuration/?view=aspnetcore-5.0) and [environments](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/environments?view=aspnetcore-5.0) in the official documentation.
 
@@ -2056,7 +2056,7 @@ namespace VehicleQuotes.Services
 
 Here, we've added a new parameter to the constructor to specify that `VehicleQuotesContext` has a dependency on `IConfiguration`. This prompts the framework to provide an instance of that when instantiating the class. We can use that instance to access the settings that we defined in the `appsettings.json` file via its `GetValue` method, like I demonstrated above.
 
-The value of the settings in `appsettings.json` can be overridden by environment variables as well. On Linux, for example, we can run the app and set an enviornment value with a line like this:
+The value of the settings in `appsettings.json` can be overridden by environment variables as well. On Linux, for example, we can run the app and set an environment value with a line like this:
 
 ```
 $ DefaultOffer=123 dotnet run
@@ -2068,7 +2068,7 @@ This will make the application use `123` instead of `77` when it comes to the `D
 
 And that's it! In this article we've gone through many of the features offered in [.NET 5](https://docs.microsoft.com/en-us/dotnet/core/dotnet-five) , [ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/introduction-to-aspnet-core?view=aspnetcore-5.0) and [Entity Framework Core](https://docs.microsoft.com/en-us/ef/core/) to support some of the most common use cases when it comes to developing Web API applications.
 
-We've installed .NET 5 and created an ASP.NET Core Web API project with EF Core and a few bells and whistles, created controllers to support many different endpoints, played a little bit with routes and response codes, created and built upon a data model and updated a database via entities and migrations, implemented more advance database objects like indexes to enforce uniqueness constraints, implemented input validation using both built-in and custom validation attributes, implemented resource models as DTOs for defining the contract of some of our API endpoints, tapped into the built-in dependency injection capabilities, explored and improved the autogenerated Swagger UI, added seed data for our database, learned about configuration via settings files and environment variables.
+We've installed .NET 5 and created an ASP.NET Core Web API project with EF Core and a few bells and whistles, created controllers to support many different endpoints, played a little bit with routes and response codes, created and built upon a data model and updated a database via entities and migrations, implemented more advance database objects like indexes to enforce uniqueness constraints, implemented input validation using both built-in and custom validation attributes, implemented resource models as DTOs for defining the contract of some of our API endpoints, tapped into the built-in dependency injection capabilities, explored and improved the auto-generated Swagger UI, added seed data for our database, learned about configuration via settings files and environment variables.
 
 .NET 5 is looking great.
 
@@ -2089,7 +2089,7 @@ We've installed .NET 5 and created an ASP.NET Core Web API project with EF Core 
   - [Creating model entities, migrations and updating the database](#creating-model-entities-migrations-and-updating-the-database)
   - [Creating controllers for CRUDing our tables](#creating-controllers-for-cruding-our-tables)
   - [Adding unique constraints via indexes](#adding-unique-constraints-via-indexes)
-  - [Reponding with specific HTTP error codes (409 Conflict)](#reponding-with-specific-http-error-codes-409-conflict)
+  - [Responding with specific HTTP error codes (409 Conflict)](#responding-with-specific-http-error-codes-409-conflict)
   - [Adding a more complex entity to the model](#adding-a-more-complex-entity-to-the-model)
   - [Adding composite unique indexes](#adding-composite-unique-indexes)
   - [Adding controllers with custom routes](#adding-controllers-with-custom-routes)
