@@ -9,7 +9,7 @@ gh_issue_number: 1760
 
 First impressions are everything. You can have the best, most robust application in the world, but if it looks like it’s from 2004 most users won’t give it a second look. Automated testing can help ensure that the app the user sees is consistent and fully functional no matter the iteration.
 
-Selenium, Cypress, and other automated testing suites have become more and more popular for webapps. This trend has not carried over to mobile testing. This may be a bit surprising, as a fully functional frontend can be the difference between a professional-feeling app and a hacky one.
+Selenium, Cypress, and other automated testing suites have become more and more popular for webapps. This trend has not carried over to mobile native app testing. This may be a bit surprising, as a fully functional frontend can be the difference between a professional-feeling app and a hacky one.
 
 There are many frameworks that can be used to test mobile applications (Appium, UI Automator, Robotium, XCUITest, SeeTest, and TestComplete to name a few), but today we’ll be focusing on [Appium](https://appium.io/).
 
@@ -63,7 +63,7 @@ $ gem install rspec
 $ bundle install
 ```
 
-We also need to configure RSpec to find the correct AVD and apk to test.
+We also need to configure RSpec to find the correct AVD and APK to test.
 
 `/spec/spec_settings.rb`:
 
@@ -122,7 +122,7 @@ Even though there is no test written it should still run and pass the template t
 
 ### Recording a test with Inspector
 
-Open the Appium window that has the server running and click Start Inspector Session
+Open the Appium window that has the server running and click Start Inspector Session:
 
 ![Start Inspector](/blog/2021/06/30/appium-automated-mobile-testing/start-inspector.png)
 
