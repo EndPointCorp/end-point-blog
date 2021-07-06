@@ -7,6 +7,8 @@ gh_issue_number: 1701
 
 ![Pi-hole logo](/blog/2020/12/03/pihole-great-holiday-gift/pihole-logo.png)
 
+<!-- Image from Pi-Hole's website: https://pi-hole.net/trademark-rules-and-brand-guidelines/ -->
+
 Many people will bring home a pie during the holiday season, but perhaps you’ll find a place in your home network for a [Raspberry Pi](https://www.raspberrypi.org/) instead?
 
 With more people than ever working from home, many more people are using their personal infrastructure to conduct business, and aren’t able to rely on a crack team of network engineers to make sure their system is secure. While there are many things one can do to improve network security, from using a VPN to ensuring you update your system, a Pi-hole is one quick, inexpensive way to help keep your network a little safer not just on your phone or laptop, but on every device that connects to your router.

@@ -6,6 +6,7 @@ gh_issue_number: 1723
 ---
 
 ![Bank safe deposit boxes](/blog/2021/03/15/database-design-using-natural-keys/safe-boxes.jpg)
+[Photo](https://unsplash.com/photos/6AQY7pO1lS0) by [Jason Pofahl](https://unsplash.com/@jasonpofahlphotography)
 
 Whether to use natural or surrogate keys is a long-debated subject of database design. I am a fan of using natural keys. I think there are even more compelling reasons to use natural keys in databases as the systems grow more complex and interdependent.
 

@@ -7,6 +7,8 @@ gh_issue_number: 1715
 
 ![TypeScript logo](/blog/2021/02/09/intro-to-typescript/ts-lettermark-white.svg)
 
+<!-- Image from TypeScript's branding page: https://www.typescriptlang.org/branding/ -->
+
 TypeScript is a programming language defined as a superset of JavaScript. It adds static type information to JavaScript code using type annotations. These annotations permit strong type-checking at compile-time, kind of like a very strict linter. They are only used for static analysis. TypeScript is transpiled to JavaScript for execution in the browser or Node.js and the type annotations are stripped out. It is still possible to use standard JavaScript type information at run-time, such as that obtained using the `typeof` and `instanceof` operators.
 
 Adding type annotations brings many benefits. Most importantly, TypeScript can tell us when we’re doing something dumb that’s likely to cause a type-related bug. But more than that, it powers editors’/​IDEs’ context sensitive tool tips so when you hover or start typing the editor can supply helpful information so you can get your job done quicker. This is particularly useful to new developers as it saves them the trouble of reading all the sources to figure out the variable types from context, especially when debugging.

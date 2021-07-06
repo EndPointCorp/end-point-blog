@@ -7,6 +7,8 @@ gh_issue_number: 1700
 
 ![Svelte banner](/blog/2020/12/02/svelte-a-compiled-js-framework/banner.png)
 
+<!-- Image from Svelte's branding page: https://github.com/sveltejs/branding -->
+
 It seems like [JavaScript frameworks](https://en.wikipedia.org/wiki/Comparison_of_JavaScript_frameworks) are [a dime a dozen these days](https://dayssincelastjavascriptframework.com/). In the JavaScript world, there are frameworks and libraries for almost every task that you can imagine, and there is much overlap. In the front-end web development area though, there are three who reign supreme: [Angular](https://angularjs.org/), [React](https://reactjs.org/), and [Vue.js](https://vuejs.org/). Whether you’re building [single-page apps](https://en.wikipedia.org/wiki/Single-page_application) or traditional web apps with some front-end zest, you can’t go wrong with any of these three.
 
 Recently though, I discovered a new player in this field that promises to offer a similar developer experience to existing frameworks with [great performance gains](https://youtu.be/AdNJ3fydeao?t=1084). Its name is [Svelte](https://svelte.dev/), and it achieves this promise in a very interesting way: [it’s a compiler](https://svelte.dev/blog/svelte-3-rethinking-reactivity).

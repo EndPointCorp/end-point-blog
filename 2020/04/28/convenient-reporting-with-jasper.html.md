@@ -7,6 +7,8 @@ gh_issue_number: 1623
 
 ![Basalt pillars](/blog/2020/04/28/convenient-reporting-with-jasper/symphony-of-stones.jpg)
 
+<!-- Photo by Seth Jensen -->
+
 Business Intelligence (BI) reporting is a huge problem space in custom software. There’s a wide range of business needs for looking at past and predictive behavior. Building a reporting tool can be a very cost effective way to get this data, especially compared to writing individual queries or manually generating reports.
 
 I’ve been working with Jasper in the Java project space and wanted to write about some research I’ve collected on the topic.

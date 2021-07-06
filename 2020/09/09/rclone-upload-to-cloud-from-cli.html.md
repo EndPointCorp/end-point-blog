@@ -7,6 +7,8 @@ gh_issue_number: 1660
 
 ![](/blog/2020/09/09/rclone-upload-to-cloud-from-cli/rclone_header_2_optimized.jpg)
 
+[Image](https://pixabay.com/photos/saber-knife-swiss-army-knife-tools-3771701/) by [金召 步](https://pixabay.com/users/bujinzhao-10495661/)
+
 ### The Swiss army knife of storage
 
 Cloud storage providers like Google Drive are great solutions for storing files. You can upload your data and not worry about maintaining a separate system to host it, or all the security hassles that can bring. However, very few major cloud storage providers offer a command line interface or any other official way to upload without using their web interface or closed-source binary tools, if they even offer that.

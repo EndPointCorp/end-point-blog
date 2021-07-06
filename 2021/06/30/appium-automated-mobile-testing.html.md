@@ -7,6 +7,8 @@ gh_issue_number: 1760
 
 ![Clouds and a river](/blog/2021/06/30/appium-automated-mobile-testing/clouds.jpg)
 
+<!-- Image by Seth Jensen -->
+
 First impressions are everything. You can have the best, most robust application in the world, but if it looks like it’s from 2004 most users won’t give it a second look. Automated testing can help ensure that the app the user sees is consistent and fully functional no matter the iteration.
 
 Selenium, Cypress, and other automated testing suites have become more and more popular for webapps. This trend has not carried over to mobile native app testing. This may be a bit surprising, as a fully functional frontend can be the difference between a professional-feeling app and a hacky one.
