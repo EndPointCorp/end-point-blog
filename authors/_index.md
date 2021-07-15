@@ -6,6 +6,5 @@ aliases:
 post: false
 outputs:
 - html
-- atom
 - json
 ---
