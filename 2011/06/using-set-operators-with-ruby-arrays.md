@@ -54,7 +54,7 @@ Let’s face it, building nice interfaces using HTML forms can be a challenge, e
 
 #### Simple Bookshelf
 
-For my example here, I’m going to construct a simple bookshelf application. The entire finished application can be found on [under my github account](https://github.com/mikefarmer/Simple-Bookshelf). The idea is that we have a database table full of books. A user can create as many bookshelves as they want and place books on them. The database model for this will require a has-and-belongs-to-many association.
+For my example here, I’m going to construct a simple bookshelf application. The entire finished application can be found on [my GitHub account](https://github.com/mikefarmer/Simple-Bookshelf). The idea is that we have a database table full of books. A user can create as many bookshelves as they want and place books on them. The database model for this will require a has-and-belongs-to-many association.
 
 The ERD looks like this:
 
