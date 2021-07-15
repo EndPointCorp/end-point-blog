@@ -5,7 +5,6 @@ github_issue_number: 1304
 tags:
 - ecommerce
 - perl
-- ruby
 - shipping
 date: 2017-05-10
 ---
@@ -16,7 +15,7 @@ date: 2017-05-10
 
 I say *usually* because there are some countries that do not use postal codes at all. An ecommerce site that expects to ship products to buyers in one of those countries needs to allow for an empty postal code at checkout time. Otherwise, customers may leave thinking they aren’t welcome there. The more creative among them will make up something to put in there, such as “00000” or “99999” or “NONE”.
 
-Someone has helpfully assembled and maintains a machine-readable (in Ruby, easily convertible to JSON or other formats) [list of the countries that don’t require a postal code](https://gist.github.com/kennwilson/3902548). You may be surprised to see on the list such countries as Hong Kong, Ireland, Panama, Saudi Arabia, and South Africa. Some countries on the list actually do have postal codes but do not require them or commonly use them.
+Someone has helpfully assembled and maintains a machine-readable (in Ruby, easily convertible to JSON or other formats) [list of the countries that don’t require a postal code](https://web.archive.org/web/20201128190754/https://gist.github.com/kennwilson/3902548). You may be surprised to see on the list such countries as Hong Kong, Ireland, Panama, Saudi Arabia, and South Africa. Some countries on the list actually do have postal codes but do not require them or commonly use them.
 
 ### Do you really need the customer’s address?
 
