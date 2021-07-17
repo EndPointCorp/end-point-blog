@@ -5,6 +5,7 @@ github_issue_number: 1134
 tags:
 - html
 - javascript
+- api
 date: 2015-06-11
 ---
 

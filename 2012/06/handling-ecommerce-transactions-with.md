@@ -5,6 +5,7 @@ github_issue_number: 639
 tags:
 - ecommerce
 - payments
+- api
 date: 2012-06-14
 ---
 

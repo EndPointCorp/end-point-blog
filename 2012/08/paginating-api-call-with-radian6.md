@@ -4,6 +4,7 @@ title: Paginating API call with Radian6
 github_issue_number: 682
 tags:
 - rails
+- api
 date: 2012-08-24
 ---
 

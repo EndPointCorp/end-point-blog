@@ -5,6 +5,7 @@ title: Spree Active Shipping Gem “We are unable to calculate shipping rates fo
 github_issue_number: 926
 tags:
 - ecommerce
+- api
 - rails
 - shipping
 - spree

@@ -5,6 +5,7 @@ github_issue_number: 38
 tags:
 - testing
 - perl
+- rest
 date: 2008-08-06
 ---
 

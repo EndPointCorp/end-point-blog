@@ -4,6 +4,7 @@ title: Facebook, Twitter, Google+ sharing with the URL
 github_issue_number: 1010
 tags:
 - social-networks
+- api
 date: 2014-07-10
 ---
 

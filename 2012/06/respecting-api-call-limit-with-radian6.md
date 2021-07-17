@@ -5,6 +5,7 @@ github_issue_number: 663
 tags:
 - rails
 - social-networks
+- api
 date: 2012-06-29
 ---
 

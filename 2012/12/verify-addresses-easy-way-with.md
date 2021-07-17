@@ -5,6 +5,7 @@ github_issue_number: 739
 tags:
 - ecommerce
 - javascript
+- api
 date: 2012-12-20
 ---
 

@@ -6,6 +6,7 @@ tags:
 - ecommerce
 - payments
 - php
+- api
 date: 2012-10-19
 ---
 

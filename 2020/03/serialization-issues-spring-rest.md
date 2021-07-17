@@ -4,6 +4,7 @@ author: Kürşat Kutlu Aydemir
 github_issue_number: 1607
 tags:
 - json
+- rest
 - java
 - frameworks
 - spring

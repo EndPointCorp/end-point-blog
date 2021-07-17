@@ -5,6 +5,7 @@ github_issue_number: 1501
 tags:
 - ruby
 - graphql
+- api
 date: 2019-02-28
 ---
 

@@ -5,6 +5,8 @@ github_issue_number: 289
 tags:
 - ecommerce
 - rails
+- rest
+- api
 date: 2010-04-19
 ---
 

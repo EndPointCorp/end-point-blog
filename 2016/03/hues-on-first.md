@@ -5,6 +5,7 @@ title: 'Hue’s on First: How we used responsive bulbs to join software and hard
 github_issue_number: 1376
 tags:
 - case-study
+- api
 - design
 - user-interface
 - hardware

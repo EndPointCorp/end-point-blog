@@ -5,6 +5,7 @@ github_issue_number: 1421
 tags:
 - javascript
 - community
+- api
 date: 2017-11-14
 ---
 

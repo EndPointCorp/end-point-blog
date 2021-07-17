@@ -4,6 +4,7 @@ author: Zed Jensen
 github_issue_number: 1536
 tags:
 - graphql
+- api
 - mongodb
 - nodejs
 - django

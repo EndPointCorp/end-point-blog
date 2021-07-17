@@ -5,6 +5,8 @@ github_issue_number: 1689
 tags:
 - ruby
 - rails
+- api
+- rest
 date: 2020-11-16
 ---
 
