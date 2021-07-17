@@ -16,13 +16,15 @@ We’ve had a steady flow of booth visitors interested in hearing about our core
 
 Stop by if you’re here and interested in hearing more about End Point’s open source consulting and development services!
 
-<table cellpadding="0" cellspacing="0" width="100%">
-<tbody><tr>
-<td align="center" valign="bottom">Here at IRCE 2011!<br/><img alt="" border="0" id="BLOGGER_PHOTO_ID_5618528685408979330" src="/blog/2011/06/end-point-at-irce-2011/image-0.jpeg" style="display:block; margin:2px auto 10px; text-align:center;cursor:pointer; cursor:hand;width: 387px; height: 258px;"/>
-</td>
-<td align="center" valign="bottom">Ben navigates our Liquid Galaxy display.<br/><img alt="" border="0" id="BLOGGER_PHOTO_ID_5618528690524125730" src="/blog/2011/06/end-point-at-irce-2011/image-1.jpeg" style="display:block; margin:2px auto 10px; text-align:center;cursor:pointer; cursor:hand;width: 387px; height: 258px;"/></td>
-</tr>
-<tr>
-<td align="center" style="padding-right:10px;" valign="bottom">Rick navigates through San Diego before a team dinner.<br/><img alt="" border="0" id="BLOGGER_PHOTO_ID_5618528704018903938" src="/blog/2011/06/end-point-at-irce-2011/image-2.jpeg" style="display:block; margin:2px auto 10px; text-align:center;cursor:pointer; cursor:hand;width: 387px; height: 258px;"/></td>
-<td align="center" valign="bottom">Ben & Carl pose in front our our Liquid Galaxy display.<img alt="" border="0" id="BLOGGER_PHOTO_ID_5618528698301201538" src="/blog/2011/06/end-point-at-irce-2011/image-3.jpeg" style="display:block; margin:2px auto 10px; text-align:center;cursor:pointer; cursor:hand;width: 387px; height: 258px;"/></td>
-</tr></tbody></table>
+![Here at IRCE 2011!](/blog/2011/06/end-point-at-irce-2011/image-0.jpeg)<br>
+<small>Here at IRCE 2011!</small>
+
+![Ben navigates our Liquid Galaxy display.](/blog/2011/06/end-point-at-irce-2011/image-1.jpeg)<br>
+<small>Ben navigates our Liquid Galaxy display.</small>
+
+![Rick navigates through San Diego before a team dinner.](/blog/2011/06/end-point-at-irce-2011/image-2.jpeg)<br>
+<small>Rick navigates through San Diego before a team dinner.</small>
+
+![Ben & Carl pose in front our our Liquid Galaxy display.](/blog/2011/06/end-point-at-irce-2011/image-3.jpeg)<br>
+<small>Ben & Carl pose in front our our Liquid Galaxy display.</small>
+

@@ -15,11 +15,11 @@ This week we launched a new website for End Point. Not only did the site get a f
 
 Goodbye Old Site:
 
-<a href="http://2.bp.blogspot.com/_wWmWqyCEKEs/SsvS2MOICcI/AAAAAAAACMA/J9nqaCCDruM/s1600-h/oldsite.png" onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5389633207514171842" src="/blog/2009/10/new-end-point-site-rails-jquery-flot/image-0.png" style="display:block; margin:0px auto 10px; text-align:center;cursor:pointer; cursor:hand;width: 400px; height: 232px;"/></a>
+![Old site](/blog/2009/10/new-end-point-site-rails-jquery-flot/oldsite.png)
 
 Hello New Site:
 
-<a href="http://3.bp.blogspot.com/_wWmWqyCEKEs/SsvS2mgzMqI/AAAAAAAACMI/SHQQ4r70XXE/s1600-h/newsite.png" onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5389633214571819682" src="/blog/2009/10/new-end-point-site-rails-jquery-flot/image-0.png" style="display:block; margin:0px auto 10px; text-align:center;cursor:pointer; cursor:hand;width: 400px; height: 285px;"/></a>
+![New site](/blog/2009/10/new-end-point-site-rails-jquery-flot/newsite.png)
 
 Our old site was a Rails app with a Postgres database running on Apache and Passenger. It used a custom CMS to manage dynamic content for the bio, articles, and service pages. The old site was essentially JavaScript-less, with the exception of Google Analytics.
 
@@ -31,21 +31,21 @@ The first interesting JavaScript component I worked on was using flot to improve
 
 Flot has built in functionality for on hover events. When a point on the plot is hovered over, correlating employees are highlighted using jQuery and their information is presented to the right of the map.
 
-<a href="http://4.bp.blogspot.com/_wWmWqyCEKEs/SsvS2zMrfDI/AAAAAAAACMQ/kHZQMzOVueI/s1600-h/hover1.png" onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5389633217977089074" src="/blog/2009/10/new-end-point-site-rails-jquery-flot/image-0.png" style="display:block; margin:0px auto 10px; text-align:center;cursor:pointer; cursor:hand;width: 400px; height: 279px;"/></a>
+![End Point team page, hovering on New York](/blog/2009/10/new-end-point-site-rails-jquery-flot/hover1.png)
 
 When a bio picture is hovered over, the correlating location is highlighted using jQuery and flot data point highlighting.
 
-<a href="http://3.bp.blogspot.com/_wWmWqyCEKEs/SsvS3cUkbxI/AAAAAAAACMY/vHGF6qR8zg8/s1600-h/hover2.png" onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5389633229016035090" src="/blog/2009/10/new-end-point-site-rails-jquery-flot/image-0.png" style="display:block; margin:0px auto 10px; text-align:center;cursor:pointer; cursor:hand;width: 400px; height: 288px;"/></a>
+![End Point team page, hovering on Rick’s portrait in New York](/blog/2009/10/new-end-point-site-rails-jquery-flot/hover2.png)
 
 We also implemented a timeline using flot to map End Point's history. Check out the images below.
 
 When a point on the plot is hovered over, the history details are revealed in the section below.
 
-<a href="http://3.bp.blogspot.com/_wWmWqyCEKEs/SsvS30kSl5I/AAAAAAAACMg/aTQSewJkuKE/s1600-h/hover3.png" onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5389633235524425618" src="/blog/2009/10/new-end-point-site-rails-jquery-flot/image-0.png" style="display:block; margin:0px auto 10px; text-align:center;cursor:pointer; cursor:hand;width: 400px; height: 128px;"/></a>
+![History plot, hovering on 1963 (Founders Ben and Rick meet each other on a playground)](/blog/2009/10/new-end-point-site-rails-jquery-flot/hover3.png)
 
 The triangle image CSS position is adjusted when a point on the plot is activated.
 
-<a href="http://3.bp.blogspot.com/_wWmWqyCEKEs/SsvTFjTLKLI/AAAAAAAACMo/NvyO9gUwLW4/s1600-h/hover4.png" onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5389633471407401138" src="/blog/2009/10/new-end-point-site-rails-jquery-flot/image-0.png" style="display:block; margin:0px auto 10px; text-align:center;cursor:pointer; cursor:hand;width: 400px; height: 146px;"/></a>
+![History plot, hovered over 2008-2009](/blog/2009/10/new-end-point-site-rails-jquery-flot/hover4.png)
 
 ### Dynamic Rails Partial Generation
 
@@ -90,23 +90,23 @@ Another interesting JavaScript component I worked on for the new site was the ca
 
 Step 1: The page loads with visible bios surrounded by empty divs with preset width. The visibility of the bios is determined by CSS use of the overflow, position, and left attributes.
 
-<a href="http://4.bp.blogspot.com/_wWmWqyCEKEs/SsvTGL1yrSI/AAAAAAAACMw/rOsXWTBXQlg/s1600-h/step1.gif" onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5389633482290015522" src="/blog/2009/10/new-end-point-site-rails-jquery-flot/image-0.gif" style="display:block; margin:0px auto 10px; text-align:center;cursor:pointer; cursor:hand;width: 393px; height: 226px;"/></a>
+![](/blog/2009/10/new-end-point-site-rails-jquery-flot/image-6.gif)
 
 Step 2: Upon right carousel button click, new bios populate the right div via jQuery.
 
-<a href="http://2.bp.blogspot.com/_wWmWqyCEKEs/SsvTGeu7VdI/AAAAAAAACM4/ryncD9qtvok/s1600-h/step2.gif" onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5389633487361496530" src="/blog/2009/10/new-end-point-site-rails-jquery-flot/image-0.gif" style="display:block; margin:0px auto 10px; text-align:center;cursor:pointer; cursor:hand;width: 393px; height: 226px;"/></a>
+![](/blog/2009/10/new-end-point-site-rails-jquery-flot/image-7.gif)
 
 Step 3: To produce the carousel or slider effect, the left div uses jQuery animation functionality and shrinks to a width of 0px.
 
-<a href="http://4.bp.blogspot.com/_wWmWqyCEKEs/SsvTG5ar6aI/AAAAAAAACNA/AVMjNQUnWZA/s1600-h/step3.gif" onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5389633494524357026" src="/blog/2009/10/new-end-point-site-rails-jquery-flot/image-0.gif" style="display:block; margin:0px auto 10px; text-align:center;cursor:pointer; cursor:hand;width: 393px; height: 226px;"/></a>
+![](/blog/2009/10/new-end-point-site-rails-jquery-flot/image-8.gif)
 
 Step 4: Upon completion of the animation, the empty left div is removed, and a new empty div is created to the right of the new visible bios.
 
-<a href="http://1.bp.blogspot.com/_wWmWqyCEKEs/SsvTHL7TqmI/AAAAAAAACNI/fkjHsm87TvY/s1600-h/step4.gif" onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5389633499493018210" src="/blog/2009/10/new-end-point-site-rails-jquery-flot/image-0.gif" style="display:block; margin:0px auto 10px; text-align:center;cursor:pointer; cursor:hand;width: 393px; height: 226px;"/></a>
+![](/blog/2009/10/new-end-point-site-rails-jquery-flot/image-9.gif)
 
 Step 5: Finally, the left div's contents are emptied and the carousel is in its default position ready for action!
 
-<a href="http://1.bp.blogspot.com/_wWmWqyCEKEs/SsvTPBH79dI/AAAAAAAACNQ/BQwCsiCj52I/s1600-h/step5.gif" onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5389633634032154066" src="/blog/2009/10/new-end-point-site-rails-jquery-flot/image-0.gif" style="display:block; margin:0px auto 10px; text-align:center;cursor:pointer; cursor:hand;width: 393px; height: 226px;"/></a>
+![](/blog/2009/10/new-end-point-site-rails-jquery-flot/image-10.gif)
 
 Another request for functionality came from [Jon](/team/jon-jensen). He asked that we create and use "web 2.0" URLs to load specific content on page load for the dynamic content throughout our site, such as http://www.endpoint.com/clients#citypass, http://www.endpoint.com/clients#backcountry.
 
