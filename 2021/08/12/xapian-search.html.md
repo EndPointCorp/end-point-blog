@@ -15,7 +15,7 @@ solutions in different installations: plain SQL-based ones,
 
 While Solr and Elastic are very well known, Xapian, despite the fact
 that it's available and packaged in all the major GNU/Linux
-distributions, doesn't seem to be so famous, at least not among the
+distributions, doesn't seem to be so popular, at least not among the
 project managers.
 
 But Xapian is fast, advanced, can be configured to do faceted search
@@ -33,12 +33,12 @@ with an SQL query in the products table. And beware, even implementing
 a non-trivial SQL-based search could burn more hours than setting up
 Xapian.
 
-With Xapian you can prototype very quickly, without losing hours in
-a gazillion of obscure options, and still you have something which you
-can build upon all the features a typical full-text search needs.
+With Xapian you can prototype very quickly, without losing hours
+wading through obscure options. And yet, the prototype will allow you
+to build more advanced features once you need them.
 
-I'm a Perl guy, so I will refer to Perl code, but the procedure is the
-same for the other languages. Even the
+I'm a Perl guy, so I will show you some Perl code, but the procedure
+is the same for the other languages. Even the
 [documentation](https://github.com/xapian/xapian-docsprint) can be
 build specifically for your language!
 
@@ -54,8 +54,8 @@ and point to the same Xapian database, which is usually a directory
 Now, stripped down to the minimum, this is how an indexer code looks
 like:
 
-```
-#!/usr/local/bin/perl
+```perl
+#!/usr/bin/env perl
 use utf8;
 use strict;
 use warnings;
@@ -67,15 +67,15 @@ my $xapian = Search::Xapian::WritableDatabase->new($dblocation, DB_CREATE_OR_OPE
 my $indexer = Search::Xapian::TermGenerator->new;
 $indexer->set_database($xapian);
 $indexer->set_stemmer(Search::Xapian::Stem->new("english"));
-my @entries = ({ uri => '/blog/1', title => 'T1', text => '.....' },
-               { uri => '/blog/2', title => 'T2', text => '.....' });
+my @entries = ({ uri => '/blog/1', title => 'T1', text => 'Marco loves pizza' },
+               { uri => '/blog/2', title => 'T2', text => 'They love chapati' });
 foreach my $data (@entries) {
     my $doc = Search::Xapian::Document->new;
     my $qterm = 'Q' . $data->{uri};
     $doc->add_term($qterm);
-    $doc->set_data(encode_json({ uri => $data->{uri}, title => $data->{title}));
+    $doc->set_data(encode_json({ uri => $data->{uri}, title => $data->{title} }));
     $indexer->set_document($doc);
-    $indexer->index_text(data->{text});
+    $indexer->index_text($data->{text});
     $xapian->replace_document_by_term($qterm, $doc);
 }
 ```
@@ -83,6 +83,7 @@ foreach my $data (@entries) {
 This code will create a `xapiandb` directory with the Xapian database,
 indexing the blog posts in the `@entries` array. In a real script,
 they would come from the database.
+
 
 Still, there are a couple of things worth noting in this minimal code.
 
@@ -103,15 +104,181 @@ Of course the indexer will need to grow if you need more power and
 more structured data (like filtering or searching a specific field),
 but at this point we want just to show something to our client.
 
+The database can be inspected very easily. Xapian comes with a tool
+called `delve` (or `xapian-delve`):
+
+```bash
+xapian-delve xapiandb -a -v -1
+All terms in database (termfreq):
+Q/blog/1 1
+Q/blog/2 1
+Zchapati 1
+Zlove 2
+Zmarco 1
+Zpizza 1
+Zthey 1
+chapati 1
+love 1
+loves 1
+marco 1
+pizza 1
+they 1
+```
+
+And you can also try a search from the the command line with `quest`:
+
+```bash
+$ quest -d xapiandb "loves NOT chapati"
+Parsed Query: Query((Zlove@1 AND_NOT Zchapati@2))
+Exactly 1 matches
+MSet:
+1: [0.0953102]
+{"title":"T1","uri":"/blog/1"}
+
+$ quest -d xapiandb "pizza OR chapati" 
+Parsed Query: Query((Zpizza@1 OR Zchapati@2))
+Exactly 2 matches
+MSet:
+1: [0.405465]
+{"title":"T1","uri":"/blog/1"}
+2: [0.405465]
+{"uri":"/blog/2","title":"T2"}
+```
+
+As the example above shows, it should be clear that:
+
+ - search works as you would expect (with the logical operators) out
+   of the box
+
+ - the stemming works, searching for "loves" and "love" is the same.
+
+ - the results give us back the JSON we stored.
+
 So let's call it done and move to the next part, the searcher.
 
+Now, while the indexer is a single script, the search needs to be
+plugged into the live code of your site. For the purposes of this
+article, I will provide a script instead, which does basically the
+same thing of `quest`. The plugging into your application is left as
+an exercise for the reader. I would also suggest to put both the
+indexing and searching code in a single shared module, so you have all
+the logic in a single location.
 
+```perl
+#!/usr/bin/env perl
+use utf8;
+use strict;
+use warnings;
+use Search::Xapian ':all';
+use JSON;
 
+my ($cgi) = join(' ', @ARGV);
+my $dblocation = "xapiandb";
+my $database = Search::Xapian::Database->new($dblocation);
+my $enquire = Search::Xapian::Enquire->new($database);
+my $qp = Search::Xapian::QueryParser->new;
+$qp->set_database($database);
+$qp->set_stemmer(Search::Xapian::Stem->new("english"));
+$qp->set_stemming_strategy(STEM_SOME);
+$qp->set_default_op(OP_AND);
+my $query = $qp->parse_query($cgi, FLAG_PHRASE|FLAG_BOOLEAN|FLAG_WILDCARD);
+$enquire->set_query($query);
 
+# fetch the first 50 results
+my $mset = $enquire->get_mset(0, 50);
+print "Total results: " . $mset->get_matches_estimated . "\n";
 
+my $json_pretty = JSON->new->pretty(1)->utf8(1)->canonical(1);
+foreach my $m ($mset->items) {
+    my $data = decode_json($m->get_document->get_data);
+    # decode and reencode the json in a human-readable fashion
+    print $json_pretty->encode($data);
+}
+```
 
+If you're wondering what those constants are and where to look for
+more, they are in the module's
+[documentation](https://metacpan.org/pod/Search::Xapian#EXPORT), in
+plain sight (we asked for them when loading the module with the `:all`
+argument).
 
+Pretty much here is boilerplate, but that could change once you build
+up. Here we set the stemmer again for the same language, but most
+important, we set the query parser options, so you can use wildcard
+(`piz*`), the AND/OR operators, and quoting.
 
+Let's see the script in action.
 
+Wildcard:
 
+```
+marco@oslo /tmp % ./search.pl 'piz'              
+Total results: 0
+marco@oslo /tmp % ./search.pl 'piz*'
+Total results: 1
+{
+   "title" : "T1",
+   "uri" : "/blog/1"
+}
+```
+
+Operators:
+
+```
+marco@oslo /tmp % ./search.pl 'pizza OR chapati'
+Total results: 2
+{
+   "title" : "T1",
+   "uri" : "/blog/1"
+}
+{
+   "title" : "T2",
+   "uri" : "/blog/2"
+}
+marco@oslo /tmp % ./search.pl 'pizza AND chapati'
+Total results: 0
+```
+
+Quoting (beware here I need to double quote to escape the shell):
+
+```
+marco@oslo /tmp % ./search.pl '"loves chapati"'
+Total results: 0
+marco@oslo /tmp % ./search.pl '"love chapati"' 
+Total results: 1
+{
+   "title" : "T2",
+   "uri" : "/blog/2"
+}
+```
+
+And the whole thing already looks pretty good to me. Way better (and
+way faster to code and to execute) than a home-baked SQL search.
+
+As already noted, this is just scratching the surface. Xapian can
+do [much more](https://getting-started-with-xapian.readthedocs.io/en/latest/howtos/index.html):
+filtering, range queries, facets, sorting, even spelling corrections!
+
+I don't doubt that Solr&C. have their use-case, but for the common
+scenario of a small/mid-sized e-shop, blog, or site, this solution is
+more affordable and maintainable than having whole separate
+application (like a Solr server) to maintain, upgrade, and secure.
+Don't forget that here we haven't done a single HTTP request. We
+didn't have to manage daemons, opening/closing ports, and alike. We
+didn't have to configure a schema and a tokenizer in a separate
+application (and keep that up-to-date). It's all there in our (Perl)
+code in two files (as already noted, the logic should live in a single
+module).
+
+We just installed a library (big chances are that it's already
+installed) and a Perl module.
+
+Xapian database is on the disk, and your code has full control over it
+(it's not unheard that whole databases were leaked because the server
+installation was not properly secured). Also it's normally your
+GNU/Linux distribution taking care of the security upgrades.
+
+If your client is on a budget, building a full-text search Xapian can
+be the right choice, and you can scale it up on the go, once more
+features are required.
 
