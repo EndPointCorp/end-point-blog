@@ -6,7 +6,7 @@ tags:
 - xapian
 ---
 
-![searching](/blog/2021/08/12/searching.jpg)
+![searching](/blog/2021/08/12/xapian-search/searching.jpg)
 
 Over the years I’ve seen and implemented different full-text search
 applications using various technologies: plain SQL,
