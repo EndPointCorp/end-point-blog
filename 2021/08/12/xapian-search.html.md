@@ -6,7 +6,7 @@ tags:
 - xapian
 ---
 
-Over the years I've seen and implemented different full-text search
+Over the years I’ve seen and implemented different full-text search
 applications using various technologies: plain SQL,
 [PostgreSQL](https://www.postgresql.org/docs/13/textsearch.html),
 [Elastic Search](https://www.elastic.co/elasticsearch/),
@@ -14,22 +14,22 @@ applications using various technologies: plain SQL,
 [Xapian](https://xapian.org/).
 
 While Solr and Elastic are very well known, Xapian, despite the fact
-that it's available and packaged in all the major GNU/Linux
-distributions, doesn't seem to be so popular, at least not among the
+that it’s available and packaged in all the major GNU/Linux
+distributions, doesn’t seem to be so popular, at least not among the
 project managers.
 
 But Xapian is fast, advanced, can be configured to do faceted search
 (so the user can filter the search results), and, my favorite, is fast
 to build and has virtually no maintenance overhead.
 
-Its main feature is that it's not a stand-alone application, like Solr
-or Elastic Search, but instead it's a library written in C++ which has
+Its main feature is that it’s not a stand-alone application, like Solr
+or Elastic Search, but instead it’s a library written in C++ which has
 bindings for all the major languages (as advertised on its
 [homepage](https://xapian.org/)). It has also great
 [documentation](https://github.com/xapian/xapian-docsprint).
 
 Now, being in the e-commerce business, my typical use-case is that the
-client's shop needs something faster and better than a search using a
+client’s shop needs something faster and better than a search using a
 SQL query against the products table. And beware, even implementing a
 non-trivial SQL-based search could burn more hours than setting up
 Xapian.
@@ -39,7 +39,7 @@ wading through obscure options, setting up services and configuring
 firewalls. And yet, the prototype will allow you to build more
 advanced features once you need them.
 
-I'm a Perl guy, so I will show you some Perl code, but the procedure
+I’m a Perl guy, so I will show you some Perl code, but the procedure
 is the same for the other languages. Even the
 [documentation](https://github.com/xapian/xapian-docsprint) can be
 built specifically for your language!
@@ -94,7 +94,7 @@ call is parsed.
 
 Then we store the data structure we want to retrieve later with
 `set_data`. The best thing to do is probably to serialize it with
-JSON, in this case I'm excluding the full text, which we don't need in
+JSON, in this case I’m excluding the full text, which we don’t need in
 the output (but it would be wise to add a teaser).
 
 Also, we use a `Q`
@@ -156,7 +156,7 @@ As the example above shows, it should be clear that:
 
  - the results give us back the JSON we stored in the index.
 
-So let's call it done and move to the next part, the searcher.
+So let’s call it done and move to the next part, the searcher.
 
 Now, while the indexer is a single script, the search needs to be
 plugged into the live code of your site. For the purposes of this
@@ -198,8 +198,8 @@ foreach my $m ($mset->items) {
 }
 ```
 
-If you're wondering what those constants are and where to look for
-more, they are in the module's
+If you’re wondering what those constants are and where to look for
+more, they are in the module’s
 [documentation](https://metacpan.org/pod/Search::Xapian#EXPORT), in
 plain sight (we asked for them when loading the module with the `:all`
 argument).
@@ -209,7 +209,7 @@ you build up. Notably we set the stemmer for the current language and
 the query parser options, so we can use wildcard (e.g. `piz*`), the
 `AND`/`OR` operators, and quoting.
 
-Let's see the script in action.
+Let’s see the script in action.
 
 Wildcard:
 
@@ -261,22 +261,22 @@ As already noted, this is just scratching the surface. Xapian can
 do [much more](https://getting-started-with-xapian.readthedocs.io/en/latest/howtos/index.html):
 filtering, range queries, facets, sorting, even spelling corrections!
 
-I don't doubt that Solr&C. have their use-cases, but for the common
+I don’t doubt that Solr&C. have their use-cases, but for the common
 scenario of a small/mid-sized e-shop or site, I think that this
 solution is more affordable and maintainable than having whole
 separate application (like a Solr server) to maintain, upgrade and
-secure. Don't forget that here we haven't done a single HTTP request.
-We didn't have to manage daemons, opening/closing ports, and alike. We
-didn't have to configure a schema and a tokenizer in a separate
-application (and keep that aligned with the handling code). It's all
+secure. Don’t forget that here we haven’t done a single HTTP request.
+We didn’t have to manage daemons, opening/closing ports, and alike. We
+didn’t have to configure a schema and a tokenizer in a separate
+application (and keep that aligned with the handling code). It’s all
 there in our (Perl) code in two files (as already noted, the logic
 should live in a single module).
 
-We just installed a library (big chances are that it's already
+We just installed a library (big chances are that it’s already
 installed) and a Perl module.
 
 The Xapian database lives on the disk and your code has full control
-over it. Also it's normally your GNU/Linux distribution taking care of
+over it. Also it’s normally your GNU/Linux distribution taking care of
 the security upgrades.
 
 If your client is on a budget, building a full-text search Xapian can
