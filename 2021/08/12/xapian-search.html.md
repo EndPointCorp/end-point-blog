@@ -6,6 +6,8 @@ tags:
 - xapian
 ---
 
+![searching](/blog/2021/08/12/searching.jpg)
+
 Over the years I’ve seen and implemented different full-text search
 applications using various technologies: plain SQL,
 [PostgreSQL](https://www.postgresql.org/docs/13/textsearch.html),
