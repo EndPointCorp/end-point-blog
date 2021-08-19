@@ -1,21 +1,23 @@
 ---
 author: "Marco Pessotto"
+date: 2021-08-19
 title: "Full-text search on a budget: Xapian"
+github_issue_number: 1
 tags:
 - search
-- xapian
+- perl
 ---
 
-![searching](/blog/2021/08/12/xapian-search/searching.jpg)
+![Mounted telescope monocular pointing through a wire fence](/blog/2021/08/12/xapian-search/searching.jpg)
 
 Over the years I’ve seen and implemented different full-text search
 applications using various technologies: plain SQL,
 [PostgreSQL](https://www.postgresql.org/docs/13/textsearch.html),
-[Elastic Search](https://www.elastic.co/elasticsearch/),
-[Solr](https://solr.apache.org/) and finally
+[Elasticsearch](https://www.elastic.co/elasticsearch/),
+[Solr](https://solr.apache.org/), and finally
 [Xapian](https://xapian.org/).
 
-While Solr and Elastic are very well known, Xapian, despite the fact
+While Solr and Elasticsearch are very well known, Xapian, despite the fact
 that it’s available and packaged in all the major GNU/Linux
 distributions, doesn’t seem to be so popular, at least not among the
 project managers.
@@ -25,7 +27,7 @@ But Xapian is fast, advanced, can be configured to do faceted searches
 to build and has virtually no maintenance overhead.
 
 Its main feature is that it’s not a stand-alone application, like Solr
-or Elastic Search, but instead it’s a library written in C++ which has
+or Elasticsearch, but instead it’s a library written in C++ which has
 bindings for all the major languages (as advertised on its
 [homepage](https://xapian.org/)). It has also great
 [documentation](https://github.com/xapian/xapian-docsprint).
@@ -54,6 +56,8 @@ in the site.
 Both the indexer and the search code need to load the Xapian library
 and point to the same Xapian database, which is usually a directory
 (or a file pointing to a directory).
+
+### Indexing
 
 Now, stripped down to the minimum, this is what a typical indexer code looks
 like:
@@ -111,7 +115,7 @@ client.
 The database can be inspected very easily. Xapian comes with a tool
 called `delve` (or `xapian-delve`):
 
-```
+```plain
 $ xapian-delve xapiandb -a -v -1
 All terms in database (termfreq):
 Q/blog/1 1
@@ -131,7 +135,7 @@ they 1
 
 And you can also try a search from the command line with `quest`:
 
-```
+```plain
 $ quest -d xapiandb "loves NOT chapati"
 Parsed Query: Query((Zlove@1 AND_NOT Zchapati@2))
 Exactly 1 matches
@@ -139,7 +143,7 @@ MSet:
 1: [0.0953102]
 {"title":"T1","uri":"/blog/1"}
 
-$ quest -d xapiandb "pizza OR chapati" 
+$ quest -d xapiandb "pizza OR chapati"
 Parsed Query: Query((Zpizza@1 OR Zchapati@2))
 Exactly 2 matches
 MSet:
@@ -157,6 +161,8 @@ As the example above shows, it should be clear that:
  - the stemming works, searching for "loves" and "love" is the same.
 
  - the results give us back the JSON we stored in the index.
+
+### Searching
 
 So let’s call it done and move to the next part, the searcher.
 
@@ -215,8 +221,8 @@ Let’s see the script in action.
 
 Wildcard:
 
-```
-$ ./search.pl 'piz'              
+```plain
+$ ./search.pl 'piz'
 Total results: 0
 $ ./search.pl 'piz*'
 Total results: 1
@@ -228,7 +234,7 @@ Total results: 1
 
 Operators:
 
-```
+```plain
 $ ./search.pl 'pizza OR chapati'
 Total results: 2
 {
@@ -245,10 +251,10 @@ Total results: 0
 
 Quoting (beware here the double quotes to escape the shell):
 
-```
+```plain
 $ ./search.pl '"loves chapati"'
 Total results: 0
-$ ./search.pl '"love chapati"' 
+$ ./search.pl '"love chapati"'
 Total results: 1
 {
    "title" : "T2",
@@ -263,12 +269,12 @@ As already noted, this is just scratching the surface. Xapian can
 do [much more](https://getting-started-with-xapian.readthedocs.io/en/latest/howtos/index.html):
 filtering, range queries, facets, sorting, even spelling corrections!
 
-I don’t doubt that Solr&C. have their use-cases, but for the common
-scenario of a small/mid-sized e-shop or site, I think that this
+I don’t doubt that Solr & co. have their use-cases, but for the common
+scenario of a small/​mid-sized e-shop or site, I think that this
 solution is more affordable and maintainable than having a whole
 separate application (like a Solr server) to maintain, upgrade and
 secure. Don’t forget that here we haven’t done a single HTTP request.
-We didn’t have to manage daemons, opening/closing ports, and the like. We
+We didn’t have to manage daemons, opening/​closing ports, and the like. We
 didn’t have to configure a schema and a tokenizer in a separate
 application (and keep that aligned with the handling code). It’s all
 there in our (Perl) code in two files (as already noted, the logic
@@ -284,4 +290,3 @@ the security upgrades.
 If your client is on a budget, building a full-text search Xapian can
 be the right choice, and you can scale it up on the go, as more
 features are required.
-
