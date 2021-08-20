@@ -2,25 +2,28 @@
 author: "Marco Pessotto"
 date: 2021-08-19
 title: "Full-text search on a budget: Xapian"
-github_issue_number: 1
+github_issue_number: 1764
 tags:
+- database
 - search
 - perl
 ---
 
-![Mounted telescope monocular pointing through a wire fence](/blog/2021/08/12/xapian-search/searching.jpg)
+![Mounted telescope monocular pointing through a wire fence](/blog/2021/08/full-text-search-xapian/looking-glass.jpg)
+
+<!-- Photo from Pixabay: https://pixabay.com/photos/looking-glass-magnification-glass-919017/ -->
 
 Over the years I’ve seen and implemented different full-text search
 applications using various technologies: plain SQL,
 [PostgreSQL](https://www.postgresql.org/docs/13/textsearch.html),
 [Elasticsearch](https://www.elastic.co/elasticsearch/),
-[Solr](https://solr.apache.org/), and finally
+[Solr](https://solr.apache.org/), and most recently
 [Xapian](https://xapian.org/).
 
 While Solr and Elasticsearch are very well known, Xapian, despite the fact
 that it’s available and packaged in all the major GNU/Linux
-distributions, doesn’t seem to be so popular, at least not among the
-project managers.
+distributions, doesn’t seem to be so popular, at least not among project
+managers.
 
 But Xapian is fast, advanced, can be configured to do faceted searches
 (so the user can filter the search results), and my favorite, is fast
@@ -45,8 +48,7 @@ advanced features once you need them.
 
 I’m a Perl guy, so I will show you some Perl code, but the procedure
 is the same for the other languages. Even the
-[documentation](https://github.com/xapian/xapian-docsprint) can be
-built specifically for your language!
+documentation can be built specifically for your language!
 
 Typically, to add a search engine to your site you need two pieces: an
 indexer to which you feed the data (from static files or databases or
@@ -59,8 +61,8 @@ and point to the same Xapian database, which is usually a directory
 
 ### Indexing
 
-Now, stripped down to the minimum, this is what a typical indexer code looks
-like:
+Now, stripped down to the minimum, this is what a typical indexer's code
+looks like:
 
 ```perl
 #!/usr/bin/env perl
