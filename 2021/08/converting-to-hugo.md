@@ -12,7 +12,7 @@ tags:
 
 <!--Photo by Seth Jensen-->
 
-We recently converted our website from [Middleman](https://middlemanapp.com/) to [Hugo](https://gohugo.io). I’ll go into more detail shortly, but the general result has been *much* better build times with less configuration and better local development.
+We recently converted the End Point website from [Middleman](https://middlemanapp.com/) to [Hugo](https://gohugo.io). I’ll go into more detail shortly, but the general result has been *much* better build times with less configuration and better support for local development.
 
 ### Background
 
@@ -24,11 +24,11 @@ With over 1000 blog posts at the time, as well as lots of other pages, our site 
 
 Middleman had a nice development server, but due to some server-side rewrites, we couldn't use it. Instead, we got around the build times by writing a simple Ruby script to generate an HTML preview, letting our blog authors see what their post would look like, more or less. This worked okay, but was not 100% accurate and made copy-editing and formatting slower than it needed to be for us "Keepers of the Blog".
 
-We started hiding most of the blog from Middleman while building to save time, but build times were still 40 seconds or more. With our patience for long build times waning, as well as Middleman losing most of its support, we decided to get in the market for a new generator.
+We started hiding most of the blog from Middleman while building to save time, but build times were still 40 seconds or more. With our patience for long build times waning, as well as Middleman losing most of its support, we decided to get in the market for a new site generator.
 
 ### Shopping around
 
-Before we (🚨 spoiler alert 🚨) settled on Hugo, we tried using [Zola](https://www.getzola.org/), a site generator written in Rust and boasting tiny build times. Zola is a small project, and would have worked fairly well, but with a few caveats.
+Before we (🚨 spoiler alert 🚨) settled on Hugo, we tried using [Zola](https://www.getzola.org/), a site generator written in Rust and boasting tiny build times. Zola is a small project, and would have worked fairly well, but it had several downsides.
 
 - Initial build times were very promising, but slowed down more than expected after adding our 1500+ blog posts. We still ended up with very respectable build times; less than 15 seconds.
 - As far as I could tell, Zola would have required an `_index.md` file in every section and subsection, to hold section settings or to make it a transparent section, passing its files to the parent section. I didn't like the sound of having a couple hundred extra markdown files for every blog year and month.
@@ -44,13 +44,13 @@ I partially converted the site and blog, and found that Hugo solved our main con
 - You can dump as many subdirectories as you want in each section, and they'll still belong to the section but retain the original directory structure.
 - Hugo supports custom taxonomy paths through its [permalinks](https://gohugo.io/content-management/urls/).
 
-> We were able to shave off a lot of build time by analyzing our [template metrics](https://gohugo.io/troubleshooting/build-performance/)—this is one of my favorite features in Hugo.
+> We were also able to shave off a lot of build time by analyzing our [template metrics](https://gohugo.io/troubleshooting/build-performance/)—this is one of my favorite features in Hugo.
 
 #### Local development
 
 So far, we've had extremely smooth local development. Hugo (like Zola) requires only a single executable, so it's extremely easy to get started or update. This was a huge improvement from Middleman, which required a heap of Ruby gems and plugins. Now every blog author can easily clone our repo, run the development server, and edit their post directly, with the full site building in anywhere from ~10 seconds all the way down to ~2 seconds, depending on the author's machine.
 
-For blog authors, we were using a fork of an abandoned Middleman plugin. With Hugo, we're using their taxonomies, which have been fairly easy to set up. We were also able to use hugo's built-in Chroma highlighter, instead of loading highlight.js on every blog page.
+For blog authors, we were using a fork of an abandoned Middleman plugin. With Hugo, we're using their taxonomies, which have been fairly easy to set up. We were also able to use Hugo's built-in Chroma highlighter, instead of loading highlight.js on every blog page.
 
 #### Some drawbacks
 
@@ -60,7 +60,7 @@ One place Zola wins over Hugo is the ability to easily print the [entire context
 
 Documentation is another area where Hugo struggles sometimes. Pages often don't feel interconnected and examples are often lacking. Here's a few examples I encountered in the docs:
 
-* The Hugo Pipes page [SASS/​SCSS](https://gohugo.io/hugo-pipes/scss-sass/) shows how to transform Sass files to CSS, but did not link to the very useful [Page Resources](https://gohugo.io/hugo-pipes/scss-sass/) page. It turned out I just needed to link to `{{ $style.RelPermalink }}`, but as a new user it wasn't clear that the CSS file was considered a `Resource`. Not a huge deal, but having more links to useful pages or more examples would save some headache for newbies.
+* The Hugo Pipes page [SASS/​SCSS](https://gohugo.io/hugo-pipes/scss-sass/) shows how to transform Sass files to CSS, but did not link to the very useful [Page Resources](https://gohugo.io/hugo-pipes/scss-sass/) page. It turned out I just needed to link to `{{ $style.RelPermalink }}`, but as a new user it wasn't clear that the CSS file was considered a `Resource`. Having more links to related pages or more examples could save a lot of headaches for newbies.
 * [Lookup Order](https://gohugo.io/templates/lookup-order/#hugo-layouts-lookup-rules) says under the `Layout` section that it "can be set in page front matter," but I had to look under [Front Matter](https://gohugo.io/content-management/front-matter/) to see that `layout` is the key name. A small change, and didn't take long to experiment and find out, but especially since YAML is case sensitive, having a link to the actual front matter key would be better.
 * Enabling custom outputs on a per-taxonomy basis does not seem to be possible. We want to generate Atom feeds for our blog tags, but not for our blog authors, both of which are taxonomies. As far as I can tell, we have to enable them both and live with the cruft of unnecessary blog author feeds.
 
