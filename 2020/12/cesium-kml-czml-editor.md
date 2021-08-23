@@ -2,7 +2,7 @@
 author: Dmitry Kiselev
 title: Cesium KML-CZML Editor
 featured: true
-featured_blurb: The open-source Cesium KML-CZML Editor is a powerful tool for creating
+description: The open-source Cesium KML-CZML Editor is a powerful tool for creating
   CZML for Cesium, from scratch or converted from Google Earth KML.
 background_url: /blog/2020/12/cesium-kml-czml-editor/image-13.jpg
 github_issue_number: 1707

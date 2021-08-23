@@ -2,7 +2,7 @@
 author: Juan Pablo Ventoso
 title: 'Magento 2: Creating a custom module'
 featured: true
-featured_blurb: How to maintainably modify logic where Magento doesn’t provide a way
+description: How to maintainably modify logic where Magento doesn’t provide a way
 background_url: /blog/2020/04/magento-2-creating-a-custom-module/bridge-wires.jpg
 github_issue_number: 1615
 tags:

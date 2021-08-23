@@ -2,7 +2,7 @@
 author: Patrick Lewis
 title: 'Shopify Admin API: Importing Products in Bulk'
 featured: true
-featured_blurb: 'Creating a custom Rails app to retrieve data about thousands of Magic:
+description: 'Creating a custom Rails app to retrieve data about thousands of Magic:
   The Gathering cards'
 background_url: /blog/2020/05/shopify-product-creation/banner.jpg
 github_issue_number: 1626
