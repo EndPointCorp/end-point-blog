@@ -2,6 +2,7 @@
 author: Seth Jensen
 title: Converting to Hugo
 date: 2021-08-23
+github_issue_number: 1765
 tags:
 - company
 - design
