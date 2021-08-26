@@ -1,24 +1,47 @@
 #!/bin/bash
 
-show_help=0
-hide_counts=0
+set -euo pipefail
+IFS=$'\n\t'
 
-while getopts "hs" opt; do
-    case "$opt" in
-    h)
-        echo "Usage: ./show-blog-tags [-s]"
-        echo "s   Short format (hide counts)"
-        exit 0
-        ;;
-    s)  hide_counts=1
-        ;;
-    esac
-done
+: || cat <<END
 
-cd $( cd "$( dirname "${BASH_SOURCE[0]}" )" > /dev/null && pwd )/.. || exit 1
+This program extracts tags from a directory full of blog posts containing frontmatter of this form:
 
-if [ $hide_counts == 1 ]; then
-    git grep -h '^tags:' | perl -pe 's/^tags: *//; s/ *, */\n/g' | sort | uniq | sort -nr
-else
-    git grep -h '^tags:' | perl -pe 's/^tags: *//; s/ *, */\n/g' | sort | uniq -c | sort -nr
-fi
+---
+author: "Kevin Campusano"
+date: 2021-07-09
+title: "Building REST APIs with .NET 5, ASP.NET Core, and PostgreSQL"
+github_issue_number: 1761
+tags:
+- dotnet
+- csharp
+- rest
+- postgres
+---
+
+and then prints a list of tags sorted by number of appearances in descending order.
+
+The things I'll do to avoid an external dependency such as yq ...
+
+END
+
+cd $( cd "$( dirname "${BASH_SOURCE[0]}" )" > /dev/null && pwd )/..
+
+
+{
+    git grep -l ^tags: |
+        xargs perl -n0E '
+            /\A---\n.*?tags:\s*\n
+                (
+                    (?: -\s*\w[\w-]*\s*\n )+
+                )
+                .*?^---$
+            /msx
+                and do {
+                    say for
+                        grep { /\S/a }
+                        map { s/^-\s*//; $_ }
+                        split(/\n/, $1)
+                }
+        '
+} | sort | uniq -c | sort -nr
