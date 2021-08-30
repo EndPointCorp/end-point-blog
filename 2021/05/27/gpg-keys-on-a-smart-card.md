@@ -88,7 +88,7 @@ You might as well generate an SSH key now. If you don't use it, there's no harm 
 `gpg --expert --edit-key <your email/key id>`
 
 * `gpg/card> addkey` to add a key
-* Type 8, rsa (set your own capabilities)
+* Type 8, rsa (set your own capabilities) (If this option doesn't show up, ensure you used --expert above)
 * Enable authentication and disable signing and encrypting - type s, e, a, then q to save.
 * 4096 bits best bits- at least, for RSA on modern Yubikeys- If you have an older key you may be limited to 3072 or 2048. 
 * You can choose to have the key expire, but ensure you have a backup method of logging in- this should be easily extended, but…
@@ -96,18 +96,29 @@ You might as well generate an SSH key now. If you don't use it, there's no harm 
 
 *For more indepth instructions, visit: https://opensource.com/article/19/4/gpg-subkeys-ssh*
 
+Export the public keys - 
+`gpg --export --armor <key id> > /media/amnesia/thumbdrive/<email>_pub.asc`
+`gpg --export-ssh <key id> > /media/amnesia/thumbdrive/yubikey_id_rsa.pub`
+
 Once you have the key added to your key ring, you'll need to transfer that key to your card
 
 `gpg --edit-key <key id>`
 
+
+To export the public ssh key you'll need to put on remote servers, you can run the command:  gpg --export-ssh-key 0x123456789ABCDE
 * `gpg> keytocard` - confirm you want to move the primary key, store this in position 1 of the card
-* Enter the commands key 1, keytocard, and store the subkey in position 2,
+* Enter the commands 
+* * `gpg> key 1` (To select the encryption key)
+* * `gpg> keytocard `store the encryption key in the encryption slot.
+* If you have an encryption key, run:
+* * `gpg> key 1` (to deselect the key)
+* * `gpg> key 2` (to select the authentication key)
+* * `gpg> keytocard` store in the authentication slot.
 * repeat this for as many subkeys as you have. 
 * Once you're done, quit, and confirm the saved changes.
 
-If you're using an sdcard/thumb drive to back up the key, copy it over now. Remember- label the thumbdrive, keep it safe, and don't connect it to a non-airgapped machine.
 
-To export the public ssh key you'll need to put on remote servers, you can run the command:  gpg --export-ssh-key 0x123456789ABCDE
+
 
 Test your new key, make sure it works.
 
