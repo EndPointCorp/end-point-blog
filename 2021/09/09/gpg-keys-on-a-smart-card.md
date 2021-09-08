@@ -72,7 +72,7 @@ Q - quit
 
 The reset code is set if you are setting up the card for someone else to use, and wish to give them a way to reset the PIN without having full access to the rest of the Admin functions. 
 
-##Generating the keys:
+## Generating the keys:
 
 
 Run the following to generate the key:
@@ -106,7 +106,7 @@ Export the public keys -
 
 `gpg --export-ssh <key id> > /media/amnesia/thumbdrive/yubikey_id_rsa.pub`
 
-##Moving the keys to your card.
+## Moving the keys to your card.
 
 Once you have the key added to your key ring, you'll need to transfer that key to your card
 
@@ -130,11 +130,11 @@ Test your new key, make sure it works.
 
 And that's it. Publish your new public gpg key, use your new ssh key - secure in the knowledge that your private key is protected by an additional hardware layer from malicious attack.
 
-##What to do if it all went wrong? What if I locked up the card?
+## What to do if it all went wrong? What if I locked up the card?
 
 You can start again. The following command will restore the GPG compatible portion of your yubikey to factory settings. You will lose any keys stored on the card. (I don't believe it'll cause any OTP/2FA set up with the card to be lost, if they're using the other YubiKey functions, but I make no guarantees)
 
-###ONLY RUN THE FOLLOWING IF YOUR PIN IS LOCKED: 
+### ONLY RUN THE FOLLOWING IF YOUR PIN IS LOCKED: 
 `gpg --edit-card`  
 `gpg/card> factory-reset`
 Follow the confirmation steps on screen.
