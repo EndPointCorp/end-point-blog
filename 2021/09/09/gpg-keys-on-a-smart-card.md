@@ -20,15 +20,15 @@ In case you haven't heard of them, Yubikeys are physical hardware keys that offe
 
 The following instructions do require a basic understanding of both how to create a live CD / USB stick, as well as basic understanding of the command line, but if you're in the position of needing to use gpg, you'll probably already be at least somewhat familiar with these requirements.
 
-To get started- you don't -have- to do this on an airgapped machine, but doing so affords the highest level of security. Simply booting from a live CD / USB is fairly easy- Choosing an operating sytem that omes with the smart card daemon (scdaemon) will help, if not, ensure you download a compatible version of the scdaemon package file for your operating system to include with the live cd
+An airgapped machine isn't required for these instructions. You could do this on any machine you trust- but using a machine with a fresh OS that hasn't been connected to the internet affords the highest level of security. Simply booting from a live CD / USB is fairly easy- Choosing an operating sytem that comes with the smart card daemon (scdaemon) will help, if not, ensure you download a compatible version of the scdaemon package file for your operating system to include with the live cd.
 
 Before you begin, you'll need:
 
 * A smartcard solution as described above.
 * A backup smart card, or external media on which to store an encrypted copy of the key.
 * A machine on which to generate the key. 
-* A live OS- For this demonstration I used TAILS - The Amnesic Incognito Live System.
-* A way to access these instructions.
+* A live OS- For this demonstration I used TAILS - The Amnesic Incognito Live System. It's specifically designed to not store logs or keep data from one reboot to another.
+* A way to access these instructions- Secomd computer, phone, printout, or a very good memory.
 
 Boot up the live machine. Note, if you're using TAILS- there are two settings you'll need to choose on the welcome screen. Click the plus button and choose the following:
 Set an Administrative password- TAILS by default doesn't set a root password, and thus disallows root access, for better security. You can set one yourself.
@@ -40,7 +40,7 @@ Ensure you can access the card, and that the smartcard daemon is installed by ty
 
 If your live OS is missing the requisite packages needed, don't access the internet with the machine in order to install it, that would defeat the airgap. Instead, copy the installation files across using sneakernet- (Add the files to a USB key, perhaps the one you'll be using to back up your PGP key.) The packages for a Debian based machine would be: scdaemon libccid pcscd rng-tools gnupg2 
 
-https://www.debian.org/doc/manuals/apt-offline/index.en.html
+Here's instructions on how to get packages to an airgapped machine: https://www.debian.org/doc/manuals/apt-offline/index.en.html
 
 Set a pin for your card, if you haven't. 
 
@@ -62,7 +62,7 @@ The default PIN for Yubikeys should 123456, and the default AdminPIN will be 123
 Q - quit
 ```
 
-*Do not mix up your pin and adminpin! You can lock up your card, which will require a factory reset. (Which you can also do via gpg --edit-card - `gpg/card> factory-reset`*
+*Do not mix up your pin and adminpin! You can lock up your card, which will require a factory reset.* 
 
 The reset code is set if you are setting up the card for someone else to use, and wish to give them a way to reset the PIN without having full access to the rest of the Admin functions. 
 
@@ -111,8 +111,8 @@ To export the public ssh key you'll need to put on remote servers, you can run t
 * * `gpg> key 1` (To select the encryption key)
 * * `gpg> keytocard `store the encryption key in the encryption slot.
 * If you have an encryption key, run:
-* * `gpg> key 1` (to deselect the key)
 * * `gpg> key 2` (to select the authentication key)
+* * `gpg> key 1` (to deselect the key first key. You should only have one key with an asterisk marking it.)
 * * `gpg> keytocard` store in the authentication slot.
 * repeat this for as many subkeys as you have. 
 * Once you're done, quit, and confirm the saved changes.
@@ -122,4 +122,13 @@ To export the public ssh key you'll need to put on remote servers, you can run t
 
 Test your new key, make sure it works.
 
-And that's it. Publish your new public gpg key, use your new ssh key - secure in the knowledge that your private key is locked away.
+And that's it. Publish your new public gpg key, use your new ssh key - secure in the knowledge that your private key is protected by an additional hardware layer from malicious attack.
+
+**What to do if it all went wrong? What if I locked up the card?**
+
+You can start again. The following command will restore the GPG compatible portion of your yubikey to factory settings. You will lose any keys stored on the card. (I don't believe it'll cause any OTP/2FA set up with the card to be lost, if they're using the other YubiKey functions, but I make no guarantees)
+
+ONLY RUN THE FOLLOWING IF YOUR PIN IS LOCKED: 
+`gpg --edit-card`  
+`gpg/card> factory-reset`
+Follow the confirmation steps on screen.
