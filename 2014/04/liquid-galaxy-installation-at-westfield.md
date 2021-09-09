@@ -2,6 +2,9 @@
 author: Will Plaut
 title: Liquid Galaxy installation at Westfield State University
 github_issue_number: 976
+featured:
+  visionport: true
+  image_url: /blog/2014/04/liquid-galaxy-installation-at-westfield/image-0.jpeg
 tags:
 - gis
 - liquid-galaxy

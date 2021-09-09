@@ -2,6 +2,9 @@
 author: Ben Witten
 title: Liquid Galaxy Success at U.S. Embassy’s Cultural Center
 github_issue_number: 1286
+featured:
+  visionport: true
+  image_url: /blog/2017/02/liquid-galaxy-success-at-us-embassys/image-0-big.png
 tags:
 - liquid-galaxy
 date: 2017-02-02

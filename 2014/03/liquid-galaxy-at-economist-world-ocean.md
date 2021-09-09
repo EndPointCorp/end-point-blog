@@ -2,6 +2,9 @@
 author: Dave Jenkins
 title: Liquid Galaxy at the Economist World Ocean Summit
 github_issue_number: 937
+featured:
+  visionport: true
+  image_url: /blog/2014/03/liquid-galaxy-at-economist-world-ocean/image-0-big.jpeg
 tags:
 - google-earth
 - liquid-galaxy

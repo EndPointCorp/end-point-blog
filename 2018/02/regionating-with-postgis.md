@@ -2,6 +2,9 @@
 author: Josh Tolley
 title: Regionation with PostGIS
 github_issue_number: 1378
+featured:
+  visionport: true
+  image_url: /blog/2018/02/regionating-with-postgis/reefs-far-banner.jpg
 tags:
 - postgres
 - gis

@@ -2,6 +2,9 @@
 author: Ben Witten
 title: Liquid Galaxy featured in Realtor Magazine
 github_issue_number: 1257
+featured:
+  visionport: true
+  image_url: /blog/2016/09/liquid-galaxy-featured-in-realtor/image-0-big.png
 tags:
 - liquid-galaxy
 date: 2016-09-30

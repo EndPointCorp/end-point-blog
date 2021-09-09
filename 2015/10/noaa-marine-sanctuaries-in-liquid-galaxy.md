@@ -2,6 +2,9 @@
 author: Erik Samsoe
 title: NOAA Marine Sanctuaries in Liquid Galaxy
 github_issue_number: 1166
+featured:
+  visionport: true
+  image_url: /blog/2015/10/noaa-marine-sanctuaries-in-liquid-galaxy/image-0.jpeg
 tags:
 - event
 - liquid-galaxy

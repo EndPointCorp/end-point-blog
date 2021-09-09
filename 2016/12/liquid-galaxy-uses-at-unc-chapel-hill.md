@@ -2,6 +2,9 @@
 author: Ben Witten
 title: Liquid Galaxy Uses at UNC Chapel Hill
 github_issue_number: 1280
+featured:
+  visionport: true
+  image_url: /blog/2016/12/liquid-galaxy-uses-at-unc-chapel-hill/image-0-big.jpeg
 tags:
 - liquid-galaxy
 date: 2016-12-29

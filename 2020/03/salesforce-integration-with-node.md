@@ -1,10 +1,10 @@
 ---
 author: Dylan Wooters
 title: Salesforce Integration with Node.js
-featured: true
-description: Connecting to Salesforce using JSforce; advanced topics like working
-  with lots of data and streaming with Socket.IO
-background_url: /blog/2020/03/salesforce-integration-with-node/fulton-ceiling.jpg
+featured:
+  endpoint: true
+  image_url: /blog/2020/03/salesforce-integration-with-node/fulton-ceiling.jpg
+description: Connecting to Salesforce using JSforce; advanced topics like working with lots of data and streaming with Socket.IO
 github_issue_number: 1612
 tags:
 - nodejs

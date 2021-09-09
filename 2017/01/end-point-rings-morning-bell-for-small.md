@@ -2,6 +2,9 @@
 author: Ben Witten
 title: End Point Rings the Morning Bell for Small Business
 github_issue_number: 1283
+featured:
+  visionport: true
+  image_url: /blog/2017/01/end-point-rings-morning-bell-for-small/image-0-big.jpeg
 tags:
 - company
 - liquid-galaxy

@@ -2,6 +2,9 @@
 author: Ben Witten
 title: Sketchfab on the Liquid Galaxy
 github_issue_number: 1227
+featured:
+  visionport: true
+  image_url: /blog/2016/05/sketchfab-on-liquid-galaxy/image-0-big.jpeg
 tags:
 - liquid-galaxy
 date: 2016-05-12

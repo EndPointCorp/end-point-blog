@@ -2,6 +2,9 @@
 author: Ben Witten
 title: Liquid Galaxy at CES
 github_issue_number: 1281
+featured:
+  visionport: true
+  image_url: /blog/2017/01/liquid-galaxy-at-ces/image-0-big.jpeg
 tags:
 - event
 - liquid-galaxy

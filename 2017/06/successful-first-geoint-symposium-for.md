@@ -2,6 +2,9 @@
 author: Ben Witten
 title: Successful First GEOINT Symposium for End Point Liquid Galaxy
 github_issue_number: 1313
+featured:
+  visionport: true
+  image_url: /blog/2017/06/successful-first-geoint-symposium-for/image-0-big.jpeg
 tags:
 - cesium
 - conference

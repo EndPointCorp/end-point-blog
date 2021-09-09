@@ -2,6 +2,9 @@
 author: Ben Witten
 title: End Point Liquid Galaxy at GEOINT Symposium
 github_issue_number: 1306
+featured:
+  visionport: true
+  image_url: /blog/2017/05/end-point-liquid-galaxy-at-geoint/image-0-big.jpeg
 tags:
 - video
 - conference

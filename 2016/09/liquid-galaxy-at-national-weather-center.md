@@ -2,6 +2,9 @@
 author: Ben Witten
 title: Liquid Galaxy at the National Weather Center
 github_issue_number: 1256
+featured:
+  visionport: true
+  image_url: /blog/2016/09/liquid-galaxy-at-national-weather-center/image-0-big.jpeg
 tags:
 - liquid-galaxy
 date: 2016-09-28

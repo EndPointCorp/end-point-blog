@@ -2,6 +2,9 @@
 author: Ben Witten
 title: 360° Panoramic Video on Liquid Galaxy
 github_issue_number: 1290
+featured:
+  visionport: true
+  image_url: /blog/2017/03/360-panoramic-video-on-liquid-galaxy/image-0-big.jpeg
 tags:
 - liquid-galaxy
 - video

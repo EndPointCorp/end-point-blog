@@ -2,6 +2,9 @@
 author: Bryan Berry
 title: Liquid Galaxy Goes to Chile for IMPAC4
 github_issue_number: 1325
+featured:
+  visionport: true
+  image_url: /blog/2017/09/liquid-galaxy-goes-to-chile-for-impac4/image-0.png
 tags:
 - conference
 - liquid-galaxy

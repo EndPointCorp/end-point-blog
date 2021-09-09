@@ -2,6 +2,9 @@
 title: "Video Conference Integration"
 author: Alejandro Ramon
 date: 2021-09-03
+featured:
+  visionport: true
+  image_url: /blog/2021/09/video-conference-integration/image-0.jpg
 github_issue_number: 1766
 tags:
 - liquid-galaxy
