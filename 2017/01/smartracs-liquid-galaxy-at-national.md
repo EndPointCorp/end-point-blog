@@ -2,6 +2,9 @@
 author: Ben Witten
 title: Smartrac’s Liquid Galaxy at National Retail Federation
 github_issue_number: 1285
+featured:
+  visionport: true
+  image_url: /blog/2017/01/smartracs-liquid-galaxy-at-national/image-0-big.jpeg
 tags:
 - cesium
 - conference

@@ -2,6 +2,9 @@
 author: Ben Witten
 title: Liquid Galaxy Featured on Reef Builders
 github_issue_number: 1245
+featured:
+  visionport: true
+  image_url: /blog/2016/07/liquid-galaxy-featured-on-reef-builders/image-0-big.png
 tags:
 - liquid-galaxy
 date: 2016-07-21

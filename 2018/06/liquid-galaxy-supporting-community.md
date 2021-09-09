@@ -2,6 +2,9 @@
 author: Ben Witten
 title: Liquid Galaxy Supporting the Community During Natural Disaster
 github_issue_number: 1427
+featured:
+  visionport: true
+  image_url: /blog/2018/06/liquid-galaxy-supporting-community/image-0.jpg
 tags:
 - liquid-galaxy
 - event

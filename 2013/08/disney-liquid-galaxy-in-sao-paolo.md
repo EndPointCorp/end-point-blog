@@ -2,6 +2,9 @@
 author: Dave Jenkins
 title: Disney Liquid Galaxy in Sao Paolo
 github_issue_number: 841
+featured:
+  visionport: true
+  image_url: /blog/2013/08/disney-liquid-galaxy-in-sao-paolo/image-0-big.jpeg
 tags:
 - clients
 - liquid-galaxy

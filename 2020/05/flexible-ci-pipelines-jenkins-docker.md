@@ -1,9 +1,10 @@
 ---
 author: Will Plaut
 title: Designing flexible CI pipelines with Jenkins and Docker
-featured: true
+featured:
+  endpoint: true
+  image_url: /blog/2020/05/flexible-ci-pipelines-jenkins-docker/pipes.jpg
 description: Continuous integration benefits of Jenkins and Docker for your team
-background_url: /blog/2020/05/flexible-ci-pipelines-jenkins-docker/pipes.jpg
 github_issue_number: 1633
 tags:
 - jenkins

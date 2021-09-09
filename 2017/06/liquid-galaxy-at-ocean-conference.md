@@ -2,6 +2,9 @@
 author: Ben Witten
 title: Liquid Galaxy at The Ocean Conference
 github_issue_number: 1314
+featured:
+  visionport: true
+  image_url: /blog/2017/06/liquid-galaxy-at-ocean-conference/image-0-big.jpeg
 tags:
 - conference
 - event

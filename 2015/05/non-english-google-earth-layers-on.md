@@ -2,6 +2,9 @@
 author: Josh Ausborne
 title: Non-English Google Earth Layers on the Liquid Galaxy
 github_issue_number: 1126
+featured:
+  visionport: true
+  image_url: /blog/2015/05/non-english-google-earth-layers-on/image-0-big.png
 tags:
 - google-earth
 - liquid-galaxy

@@ -2,6 +2,9 @@
 author: Dave Jenkins
 title: Liquid Galaxy at UNC Chapel Hill
 github_issue_number: 1040
+featured:
+  visionport: true
+  image_url: /blog/2014/10/liquid-galaxy-at-unc-chapel-hill/image-0-big.jpeg
 tags:
 - liquid-galaxy
 date: 2014-10-03
