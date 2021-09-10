@@ -11,7 +11,7 @@ tags:
 ![](/blog/2021/09/gpg-keys-on-a-yubikey/banner.jpg)
 [Photo](https://unsplash.com/photos/4hfpVsi-gSg) by [Mauro Sbicego](https://unsplash.com/@maurosbicego) on Unsplash
 
-[Gnu Privacy Guard](https://gnupg.org/) (GPG) is a tool we use a lot at End Point. Its ubiquity and quite decent security is a perfect fit for us — and there's a way to make it even safer.
+[Gnu Privacy Guard](https://gnupg.org/) (GnuPG or GPG) is a tool we use a lot at End Point. Its ubiquity and quite decent security is a perfect fit for us — and there's a way to make it even safer.
 
 GPG uses the OpenPGP standard to encrypt files. Normally, one creates a PGP key on their computer and just keeps the keyfile safe. A password is generally used, but as with any private key, it's only as safe as the computer it's on.
 
