@@ -14,21 +14,23 @@ A .NET Core-based project can be published into any platform (as long as we’re
 
 ### Our .NET project
 
-We won’t review the steps needed to set up a new .NET 5 project, since we are focusing on publishing what we already have developed. But to understand how our application will integrate with IIS and the framework, it’s important to note some fundamental changes any .NET 5 project has in comparison with a .NET Framework one.
+We won’t review the steps needed to set up a new .NET 5 project, since this time we are only focusing on publishing what we already have developed. But to understand how our application will integrate with IIS and the framework, it’s important to note a fundamental change any .NET 5 project has in comparison with a .NET Framework one:
 
-Since .NET 5 is .NET Core in its foundation, our project output will actually be a console application that is executed by the `dotnet` process. If we create a new .NET Core project, no matter which version we are using, we will find a `Program.cs` file in the root with an application entry point in it, that will look somewhat similar to the one below:
+Since .NET 5 is .NET Core in its foundation, our project output will actually be a console application. If we create a new .NET Core project, no matter which version we are using, we will find a `Program.cs` file in the root with an application entry point in it, that will look somewhat similar to the one below:
 
 ![A common .NET Core app entry point](/2021/09/deploying-dotnet-5-app-iis/dotnet-core-entry-point.jpg)
 
-The [`WebHost`](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/host/web-host?view=aspnetcore-5.0) object will be the one processing requests to the app, as well as setting configurations like the content root, accessing environment variables, and logging.
+> The [`WebHost`](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/host/web-host?view=aspnetcore-5.0) object will be the one processing requests to the app, as well as setting configurations like the content root, accessing environment variables, and logging.
 
-### Installing the runtime
+This application needs to be executed by the `dotnet` process, which comes with any .NET 5 runtime.
+
+### Installing a .NET 5 runtime
 
 The first step we need to do in our destination server, is to prepare the environment to run .NET 5 apps by installing the [.NET 5 Hosting Bundle](https://dotnet.microsoft.com/download/dotnet/thank-you/runtime-aspnetcore-5.0.9-windows-hosting-bundle-installer), a 65 Mb setup file which has all the basic stuff needed ro tun .NET 5 on Windows. Since .NET can also run in Linux/macOS, on the [official downloads page](https://dotnet.microsoft.com/download/dotnet/5.0)) we can find installer/binaries for these operative systems as well.
 
 ![Installing the hosting bundle](/2021/09/deploying-dotnet-5-app-iis/dotnet-hosting-bundle-screenshot.jpg)
 
-Once the installation finishes, we will need to restart IIS by typing `iisreset` on an elevated command prompt.
+> Once the installation finishes, we will need to restart IIS by typing `iisreset` on an elevated command prompt.
 
 ### Creating the application pool
 
