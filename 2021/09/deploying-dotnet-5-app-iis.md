@@ -14,7 +14,7 @@ tags:
 
 .NET 5 is been around for a few years now, after being released at the [.NET Conf 2020](/blog/2020/11/dotnet-5-released-net-conf-2020/), containing the best of both worlds: .NET Core, including multi-platform support and several performance improvements, and .NET Framework, including Windows desktop development support with WPF and Windows Forms (UWP is also supported, but not officially yet).
 
-A .NET Core-based project can be published into any platform (as long as we’re not depending on libraries targeted to .NET Framework), allowing us to save costs by hosting in Linux servers and increasing performance for scalability. But most developers are still using Windows with Internet Informacion Services (IIS) as the publishing target: This might be related to the almost 20 years of history of .NET Framework, comparing to the relatively short history of .NET Core, launched in 2016.
+A .NET Core-based project can be published into any platform (as long as we’re not depending on libraries targeted to .NET Framework), allowing us to save costs by hosting in Linux servers and increasing performance by having cheaper scalability options. But most developers are still using Windows with Internet Informacion Services (IIS) as the publishing target: This might be related to the almost 20 years of history of .NET Framework, comparing to the relatively short history of .NET Core, launched in 2016.
 
 ### Our .NET project
 
@@ -22,7 +22,20 @@ We won’t review the steps needed to set up a new .NET 5 project, since this ti
 
 Since .NET 5 is .NET Core in its foundation, our project output will actually be a console application. If we create a new .NET Core project, no matter which version we are using, we will find a `Program.cs` file in the root with an application entry point in it, that will look somewhat similar to the one below:
 
-![A common .NET Core app entry point](/blog/2021/09/deploying-dotnet-5-app-iis/dotnet-core-entry-point.jpg)
+```c#
+public class Program
+{
+	public static void Main(string[] args)
+	{
+		BuildWebHost(args).Run();
+	}
+
+	public static IWebHost BuildwebHost(string[] args) =>
+		WebHost.CreateDefaultBuilder(args)
+			.UseStartup<Startup>()
+			.Build();
+}
+```
 
 > The [`WebHost`](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/host/web-host?view=aspnetcore-5.0) object will be the one processing requests to the app, as well as setting configurations like the content root, accessing environment variables, and logging.
 
@@ -30,7 +43,7 @@ This application needs to be executed by the `dotnet` process, which comes with 
 
 ### Installing a .NET 5 runtime
 
-The first step we need to do in our destination server, is to prepare the environment to run .NET 5 apps by installing the [.NET 5 Hosting Bundle](https://dotnet.microsoft.com/download/dotnet/thank-you/runtime-aspnetcore-5.0.9-windows-hosting-bundle-installer), a 65 Mb setup file which has all the basic stuff needed ro tun .NET 5 on Windows. Since .NET can also run in Linux/macOS, on the [official downloads page](https://dotnet.microsoft.com/download/dotnet/5.0)) we can find installer/binaries for these operative systems as well.
+The first step we need to do in our destination server, is to prepare the environment to run .NET 5 apps by installing the [.NET 5 Hosting Bundle](https://dotnet.microsoft.com/download/dotnet/thank-you/runtime-aspnetcore-5.0.9-windows-hosting-bundle-installer), a 65 MB setup file which has all the basic stuff needed to run .NET 5 on Windows. Since .NET can also run in Linux/macOS, on the [official downloads page](https://dotnet.microsoft.com/download/dotnet/5.0)) we can find installer/executables for these operating systems as well.
 
 ![Installing the hosting bundle](/blog/2021/09/deploying-dotnet-5-app-iis/dotnet-hosting-bundle-screenshot.jpg)
 
@@ -48,7 +61,7 @@ That means that, when we are creating our application pool, we will need to set 
 
 ### Creating the new website
 
-With the bundle installed and a new application pool created, it’s time to add the new website where our application will be published to. Rick-click on the “Sites” section on the IIS Manager sidebar and choose the “Add Website” option.
+With the bundle installed and a new application pool created, it’s time to add the new website where our application will be published to. Right-click on the “Sites” section on the IIS Manager sidebar and choose the “Add Website” option.
 
 We can put any name to identify the new website. The important thing is to point the website to the newly created application pool, and bind it to the correct IP address and domain/host name, as shown below: 
 
