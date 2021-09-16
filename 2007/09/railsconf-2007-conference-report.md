@@ -1,0 +1,43 @@
+---
+author: PJ Cabrera
+title: RailsConf 2007 Conference Report
+github_issue_number: 23
+tags:
+- conference
+- rails
+date: 2007-09-14
+---
+
+From Wednesday, May 17th to Saturday, May 20th, 2007, around 1600 people attended the Rails Conference (RailsConf) in beautiful Portland, Oregon, at the Oregon Convention Center. I was among them, and this is my report.
+
+Conferences offer a varied mix of experiences to the attendee. There is the experience of a new city for many attendees, for example. While everyone refers to the technical sessions as their main draw, the social aspects of a conference are equally important and valuable. RailsConf offered plenty of socializing opportunities by providing continental breakfast, bagged salad or sandwich lunches, and coffee and soda breaks twice per day. There were also many evening parties sponsored by conference expo floor vendors and by some of Portland's Rails development companies and the local Ruby brigade, PDX.rb.
+
+From my informal prodding and questioning of attendees I met during these social times, it seemed almost half the attendees had come to RailsConf to get their first training in Rails. Between 45 to 50 percent of attendees I talked to had no previous real world experience with Rails or Ruby, having worked a number of years in other platforms, mostly in Java, but a few had worked on MS .Net as well. A few of the attendees who where new to Rails had PHP, Perl, Python, ColdFusion, or ASP experience. Those who did have some previous Rails experience had learned it after the fall of 2005, which is when I first started learning Rails. Their average experience was one year. Except for the few Rails core members and conference organizers and speakers I met in the hallways, I met few other attendees who had been using Rails for much longer than a year.
+
+The majority of the conference technical sessions were very valuable and informative. The most memorable one for me was "Clean Code" by Robert Martin, one of the object oriented and component programming gurus of the early '90s, and author of "Agile Software Development - Principles, Patterns and Practices." In this talk, Mr. Martin proceeded to write a command-line parser in Ruby, with tests in RSpec. I really enjoyed his live coding of the project with narration. It was great.
+
+There were many talks on strategies for improving the performance of Rails applications, but I think the one most worth attending was the Cache-Fu talk by Chris Wanstrath. In this talk he explained first how he had worked on Gamespot.com, and had helped develop a PHP system which used memcached to withstand 50 million page hits in a 24 hour period. He then gave an overview of the several Rails plugins and gems that implement memcached in Ruby. He finally showed the latest iteration on all that was learned from the other memcached Ruby implementations, the cache-fu plugin. He then provided best practices on session, page, and action caching with memcached, particularly when used in a clustered web and app server environment.
+
+There were also many other talks about improving one's effectiveness as a Rails developer from a best practices and tools point of view. The presentation titled "Fixtures: Friend or Foe" by Tom Preston-Werner, combined each approach as he gave a best practices survey of how to deal with fixtures for unit and functional testing, as well as presenting a plugin that implemented a combined distillation of the best of the best practices under one tool.
+
+One interesting aspect was the popularity of talks dedicated to discussing the performance of alternative web servers, such as nginx and the evented Mongrel fork. These talks were some of the most popular. I found this interesting, given that nearly half of the attendees were likely new to Rails as a development platform. While web server scalability is important for large scale deployments, many of the attendees were not likely to be working on the next million user web hit. Although it was obvious from the buzz in the hallways that many attendees wish they did.
+
+The one disappointing aspect of RailsConf is one I noticed to be a part of O'Reilly Media's conference planning modus operandi since at least 2005. This was the giving of keynote time to diamond conference sponsors. I understand that diamond sponsors want something more in return of their sponsorship than a few hanging banners and logos on conference materials. On the second day of the conference, Sun Microsystems and Thoughtworks spoke to attendees for almost an hour. While the speakers and their speeches had their merits, the subject was mainly one of product marketing, and not of Rails community, Rails technical knowledge, or even about development skill building. These keynotes, compared to the other four keynotes of the conference, were not very well received. Many people I spoke to felt they took valuable time from what we really wanted to get at as quickly as possible: Rails technical know-how. I don't think O'Reilly, Ruby Central, Sun Microsystems and Thoughtworks know how little they were respected for filling a keynote with sales talk.
+
+One interesting activity of this year's RailsConf was the unofficial "RejectConf," where people were invited to give presentations that were not accepted by the RailsConf organizers. It was held at 10 p.m. on Friday, May 19th, after the last RailsConf Birds-of-a-feather session closed. It was a crowded event at less than 90 people, mostly because of the size of the small warehouse where it was held, three blocks from the Oregon Convention Center. There were three RailsConf sponsor parties with open bars that night, which might explain the low attendance. The warehouse could not fit more people at any rate. Attendees were spilling out the door as the event started.
+
+RejectConf was a Gong Show type of event, where presenters had up to 5 minutes to present their plugins, gems, Rails or Ruby applications, or just their latest idea. The only rule was that it had to be Ruby related, and they could get booed off the stage at any time within their 5 minutes. The most amazing thing is that nobody got booed, everyone was very respectful of the presenters, and many of the presentations graciously took less than their alloted time.
+
+The upside of this was that the hour was taken up with presentations about lots of amazing little projects. Nearly 20 people presented their pet projects, little Ruby things that they were proud to show off, and which had solved a development problem for them in the last recent months. The downside was that it was impossible to take notes! You had to be really attentive, or you could miss half of someone's important message. There were so many people interested in presenting, that there was no time for Q & A at the event.
+
+If I could change one thing about RejectConf, I would hold it halfway through next year's RailsConf, and not on the last night of the conference. That way, people have a better chance of meeting up with that person from that super interesting presentation from RejectConf. The best one could hope for this year was recognizing a face and talking to them in the main conference hallways, during the very last six hours of the conference.
+
+Speaking of the last hours of the event... To me, the first hour of the last day of the conference was the highlight of the event. The Saturday morning keynote was titled [The Rails Way](http://therailsway.com). According to the site, The Rails Way is all about teaching best practices in Rails application design. During this keynote, Jamis Buck and Michael Koziarski dissected a Rails application's source code and proceeded to explain how they would rewrite it in a way more typical of an experienced Ruby and Rails developer.
+
+All in all, this last talk epitomizes why so many had signed up for the RailsConf 2007 event. We were not interested in enterprise sales pitches and marketing talk. Many attendees were not interested in the latest web server re-implementation, no matter how many theoretical dummy HTTP requests it can serve per second. Many were not after how to monetize the world's N thousandth social network application.
+
+We came to learn best practices and tools to make us more effective Rails developers. Many talks provided this in spades, but none better than "The Rails Way" keynote and website.
+
+RailsConf showed me the Rails community as very dynamic, diverse, energetic and enthusiastic. There were developers from all walks of life among the attendees.
+
+I enjoyed the conference very much, because of the many Rails tricks learned and the opportunities to connect to the varied attendees. I made some new friends, and the city of Portland is always a pleasure to visit.

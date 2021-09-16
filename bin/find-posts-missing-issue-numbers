@@ -1,4 +1,4 @@
 #!/bin/bash
 
 cd $( cd "$( dirname "${BASH_SOURCE[0]}" )" > /dev/null && pwd )/.. || exit 1
-find . -type f -name \*.md -print0 | xargs -0 perl -n -0777 -E 'say $ARGV if !/gh_issue_number:/'
+find . -mindepth 2 -type f -name \*.md \! -name _index.md -print0 | xargs -0 perl -n -0777 -E 'say $ARGV if !/github_issue_number:\s*\d+/'

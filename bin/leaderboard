@@ -5,6 +5,9 @@ cd "$( dirname "${BASH_SOURCE[0]}" )"/.. > /dev/null || exit 1
 for y in 2???
 do
 	echo -n $y': '
-	grep -hc ^author: $y/*/*/*md | wc -l
-	grep -h  ^author: $y/*/*/*md | sed 's/^author: //; s/"//g' | sort | uniq -c | sort -nr
+	authors=$(grep -h ^author: $y/*/*.md)
+	author_count=$(echo "$authors" | sort -u | wc -l | sed 's/ *//g')
+	total_count=$(echo "$authors" | wc -l | sed 's/ *//g')
+	echo "$total_count posts by $author_count authors"
+	echo "$authors" | sed 's/^author: //; s/"//g' | sort | uniq -c | sort -nr
 done
