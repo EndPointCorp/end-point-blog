@@ -18,7 +18,7 @@ We won’t review the steps needed to set up a new .NET 5 project, since we are 
 
 Since .NET 5 is .NET Core in its foundation, our project output will actually be a console application that is executed by the `dotnet` process. If we create a new .NET Core project, no matter which version we are using, we will find a `Program.cs` file in the root with an application entry point in it, that will look somewhat similar to the one below:
 
-![A common .NET Core app entry point](/blog/2021/09/deploying-dotnet-5-app-iis/dotnet-core-entry-point.jpg)
+![A common .NET Core app entry point](/2021/09/deploying-dotnet-5-app-iis/dotnet-core-entry-point.jpg)
 
 The [`WebHost`](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/host/web-host?view=aspnetcore-5.0) object will be the one processing requests to the app, as well as setting configurations like the content root, accessing environment variables, and logging.
 
@@ -26,7 +26,7 @@ The [`WebHost`](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/host/w
 
 The first step we need to do in our destination server, is to prepare the environment to run .NET 5 apps by installing the [.NET 5 Hosting Bundle](https://dotnet.microsoft.com/download/dotnet/thank-you/runtime-aspnetcore-5.0.9-windows-hosting-bundle-installer), a 65 Mb setup file which has all the basic stuff needed ro tun .NET 5 on Windows. Since .NET can also run in Linux/macOS, on the [official downloads page](https://dotnet.microsoft.com/download/dotnet/5.0)) we can find installer/binaries for these operative systems as well.
 
-![Installing the hosting bundle](/blog/2021/09/deploying-dotnet-5-app-iis/dotnet-hosting-bundle-screenshot.jpg)
+![Installing the hosting bundle](/2021/09/deploying-dotnet-5-app-iis/dotnet-hosting-bundle-screenshot.jpg)
 
 Once the installation finishes, we will need to restart IIS by typing `iisreset` on an elevated command prompt.
 
@@ -38,7 +38,7 @@ Since .NET 5 is based in .NET Core, the application pool we create will not be l
 
 That means that, when we are creating our application pool, we will need to set the .NET CLR version to "No managed code" before saving changes, as shown below:
 
-![App pool settings](/blog/2021/09/deploying-dotnet-5-app-iis/iis-new-app-pool.jpg)
+![App pool settings](/2021/09/deploying-dotnet-5-app-iis/iis-new-app-pool.jpg)
 
 ### Creating the new website
 
@@ -46,7 +46,7 @@ With the bundle installed and a new application pool created, it’s time to add
 
 We can put any name to identify the new website. The important thing is to point the website to the newly created application pool, and bind it to the correct IP address and domain/host name, as shown below: 
 
-![Setting up a new website](/blog/2021/09/deploying-dotnet-5-app-iis/iis-new-website.jpg)
+![Setting up a new website](/2021/09/deploying-dotnet-5-app-iis/iis-new-website.jpg)
 
 Once we accept the changes, the new website will be automatically started, which means we should be able to reach the IP/hostname we entered. We will get a default page or a 404 response, depending on how our IIS instance is configured, since we haven’t published our application yet.
 
@@ -58,7 +58,7 @@ I usually prefer to do a manual publish into a local folder, and then decide whi
 
 If we choose to let Visual Studio handle the publishing process, we need to choose "Web Server (IIS) / Web deploy" as our publish destination and enter the information needed for Visual Studio to connect to the server and copy the files:
 
-![Publishing the website](/blog/2021/09/deploying-dotnet-5-app-iis/visual-studio-publish-screen.jpg)
+![Publishing the website](/2021/09/deploying-dotnet-5-app-iis/visual-studio-publish-screen.jpg)
 
 > We need to make sure that the "site name" we enter here corresponds to the site name we entered when we created the new website on the server.
 
