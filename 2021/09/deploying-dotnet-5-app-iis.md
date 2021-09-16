@@ -52,7 +52,7 @@ We can put any name to identify the new website. The important thing is to point
 
 Once we accept the changes, the new website will be automatically started, which means we should be able to reach the IP/hostname we entered. We will get a default page or a 404 response, depending on how our IIS instance is configured, since we haven’t published our application yet.
 
-## Publishing our project
+### Publishing our project
 
 Finally, it’s time to publish our .NET application into the new website. If we have Visual Studio, we can have the IDE automatically upload our content to IIS and publish it by right-clicking on our project and choosing "Publish". Or we can use the `dotnet` command with the [`publish`](https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-publish) parameter to do it ourselves.
 
