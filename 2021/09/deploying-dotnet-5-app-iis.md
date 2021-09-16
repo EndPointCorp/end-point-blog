@@ -10,7 +10,7 @@ tags:
 
 ![Puzzle](/blog/2021/09/deploying-dotnet-5-app-iis/puzzle-cropped.jpg)
 
-[Photo](https://flic.kr/p/4riBj8) by [Christian Cable](https://www.flickr.com/photos/nexus_icon/)
+[Photo](https://flic.kr/p/4riBj8) by [Christian Cable](https://www.flickr.com/photos/nexus_icon/). CC BY 2.0
 
 .NET 5 is been around for a few years now, after being released at the [.NET Conf 2020](/blog/2020/11/dotnet-5-released-net-conf-2020/), containing the best of both worlds: .NET Core, including multi-platform support and several performance improvements, and .NET Framework, including Windows desktop development support with WPF and Windows Forms (UWP is also supported, but not officially yet).
 
