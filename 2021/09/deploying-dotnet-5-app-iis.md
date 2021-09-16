@@ -14,7 +14,7 @@ tags:
 
 .NET 5 is been around for a few years now, after being released at the [.NET Conf 2020](/blog/2020/11/dotnet-5-released-net-conf-2020/), containing the best of both worlds: .NET Core, including multi-platform support and several performance improvements, and .NET Framework, including Windows desktop development support with WPF and Windows Forms (UWP is also supported, but not officially yet).
 
-A .NET Core-based project can be published into any platform (as long as we’re not depending on libraries targeted to .NET Framework), allowing us to save costs by hosting in Linux servers and increasing performance by having cheaper scalability options. But most developers are still using Windows with Internet Informacion Services (IIS) as the publishing target: This might be related to the almost 20 years of history of .NET Framework, comparing to the relatively short history of .NET Core, launched in 2016.
+A .NET Core-based project can be published into any platform (as long as we’re not depending on libraries targeted to .NET Framework), allowing us to save costs by hosting in Linux servers and increasing performance by having cheaper scalability options. But most developers are still using Windows with Internet Information Services (IIS) as the publishing target: This might be related to the almost 20 years of history of .NET Framework, comparing to the relatively short history of .NET Core, launched in 2016.
 
 ### Our .NET project
 
