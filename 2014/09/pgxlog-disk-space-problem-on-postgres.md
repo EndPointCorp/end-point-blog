@@ -85,7 +85,7 @@ The easiest solution is to clear up space by removing any non-WAL files that are
 This problem occurs often enough that I have a best practice: create a dummy file on your pg_xlog partition whose sole purpose is to get deleted after this problem occurs, and thus free up enough space to allow Postgres to start! Disk space is cheap these days, so just create a 300MB file and put it in place like so (on Linux):
 
 ```
-dd if=/bin/zero of=/pgdata/pg_xlog/DO_NOT_MOVE_THIS_FILE bs=1MB count=300
+dd if=/dev/zero of=/pgdata/pg_xlog/DO_NOT_MOVE_THIS_FILE bs=1MB count=300
 ```
   
 
