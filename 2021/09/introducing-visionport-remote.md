@@ -8,7 +8,7 @@ tags:
 - company
 ---
 
-![VisionPort Remote screenshot](/blog/2021/09/introducing-visionport-remote/vpremote.jpg)
+[![VisionPort Remote screenshot](/blog/2021/09/introducing-visionport-remote/vpremote.jpg)](/blog/2021/09/introducing-visionport-remote/vpremote-large.jpg)
 
 Welcome to End Point Liquid Galaxy’s new VisionPort Remote! This application not only allows the user to show their content on screen, but also gives control over Google Earth navigation through a number of touch actions. In addition to serving as a remote touchscreen of the system, Remote doubles as a portal that creators can use to test their content from their own devices. A new feature of Remote permits a shareable “guest view” allowing the presentation host to show their content without the possibility of a guest intervening.
 
