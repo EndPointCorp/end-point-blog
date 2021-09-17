@@ -15,7 +15,7 @@ Running out of disk space in the pg_xlog directory is a fairly common Postgres p
 
 When the pg_xlog directory fills up and new files cannot be written to it, Postgres will stop running, try to automatically restart, fail to do so, and give up. The pg_xlog directory is so important that Postgres cannot function until there is enough space cleared out to start writing files again. When this problem occurs, the Postgres logs will give you a pretty clear indication of the problem. They will look similar to this:
 
-```
+```plain
 PANIC:  could not write to file "pg_xlog/xlogtemp.559": No space left on device
 STATEMENT:  insert into abc(a) select 123 from generate_series(1,12345)
 LOG:  server process (PID 559) was terminated by signal 6: Aborted
@@ -36,7 +36,6 @@ PANIC:  could not write to file "pg_xlog/xlogtemp.563": No space left on device
 LOG:  startup process (PID 563) was terminated by signal 6: Aborted
 LOG:  aborting startup due to startup process failure
 ```
-  
 
 The “PANIC” seen above is the most severe [log_level Postgres has](https://www.postgresql.org/docs/current/static/runtime-config-logging.html#RUNTIME-CONFIG-SEVERITY-LEVELS), and it basically causes a “full stop right now!”. You will note in the above snippet that a normal SQL command caused the problem, which then caused all other Postgres processes to terminate. Postgres then tried to restart itself, but immediately ran into the same problem (no disk space) and thus refused to start back up. (The “FATAL” line above was another client trying to connect while all of this was going on.)
 
@@ -44,17 +43,17 @@ Before we can look at how to fix things, a little background will help. When Pos
 
 The first step is to determine why the WAL files are not being removed. The most common case is a failing [archive_command](https://www.postgresql.org/docs/current/static/continuous-archiving.html). If this is the case, you will see archive-specific errors in your Postgres log. The usual causes are a failed network, downed remote server, or incorrect copying permissions. You might see some errors like this:
 
-```
+```plain
 2013-05-06 23:51:35 EDT [19421]: [206-1] user=,db=,remote= LOG:  archive command failed with exit code 14
 2013-05-06 23:51:35 EDT [19421]: [207-1] user=,db=,remote= DETAIL:  The failed archive command was: rsync --whole-file --ignore-existing --delete-after -a pg_xlog/000000010000006B00000016 backup:/archive/000000010000006B00000016
 rsync: Failed to exec ssh: Permission denied (13)
-# the above was from an actual bug report; the problem was SELinux
 ```
-  
+
+(The above was from an actual bug report; the problem was SELinux.)
 
 There are some other reasons why WAL would not be removed, such as failure to complete a checkpoint, but they are very rare so we will focus on archive_command. The quickest solution is to fix the underlying problem by bringing the remote server back up, fixing the permissions, etc. (To debug, try emulating the archive_command you are using with a small text file, as the postgres user. It is generally safe to ship non-WAL files to the same remote directory). If you cannot easily or quickly get your archive_command working, change it to a dummy command that always returns true:
 
-```
+```plain
 # On Nix boxes:
 archive_command = '/bin/true'
 # On BSD boxes:
@@ -62,11 +61,10 @@ archive_command = '/usr/bin/true'
 # On Windows boxes:
 archive_command = 'REM'
 ```
-  
 
 This will allow the archive_command to complete successfully, and thus lets Postgres start removing older, unused WAL files. Note that changing the archive_command means you will need to change the archive_command back later and create fresh base backups, so do that as a last resort. Even after changing the archive_command, you cannot start the server yet, because the lack of disk space is still a problem. Here is what the logs would look like if you tried to start it up again:
 
-```
+```plain
 LOG:  database system shutdown was interrupted; last known up at 2014-09-16 10:38:54 EDT
 LOG:  database system was not properly shut down; automatic recovery in progress
 LOG:  redo starts at 0/162FE44
@@ -76,7 +74,6 @@ PANIC:  could not write to file "pg_xlog/xlogtemp.602": No space left on device
 LOG:  startup process (PID 602) was terminated by signal 6: Aborted
 LOG:  aborting startup due to startup process failure
 ```
-  
 
 At this point, you must provide Postgres a little bit of room in the partition/disk that the pg_xlog directory is in. There are four approaches to doing so: removing non-WAL files to clear space, moving the pg_xlog directory, resizing the partition it is on, and removing some of the WAL files yourself.
 
@@ -84,10 +81,9 @@ The easiest solution is to clear up space by removing any non-WAL files that are
 
 This problem occurs often enough that I have a best practice: create a dummy file on your pg_xlog partition whose sole purpose is to get deleted after this problem occurs, and thus free up enough space to allow Postgres to start! Disk space is cheap these days, so just create a 300MB file and put it in place like so (on Linux):
 
-```
+```bash
 dd if=/dev/zero of=/pgdata/pg_xlog/DO_NOT_MOVE_THIS_FILE bs=1MB count=300
 ```
-  
 
 This is a nice trick, because you don’t have to worry about finding a file to remove, or determine which WALs to delete—​simply move or delete the file and you are done. Once things are back to normal, don’t forget to put it back in place.
 
@@ -97,17 +93,16 @@ Another way to get more space in your pg_xlog partition is to resize it. Obvious
 
 The final way is to remove some older WAL files. This should be done as a last resort! It is far better to create space, as removing important WAL files can render your database unusable! If you go this route, first determine which files are safest to remove. One way to determine this is to use the [pg_controldata program](https://www.postgresql.org/docs/current/static/app-pgcontroldata.html). Just run it with the location of your data directory as the only argument, and you should be rewarded with a screenful of arcane information. The important lines will look like this:
 
-```
+```plain
 Latest checkpoint's REDO location:    0/4000020
 Latest checkpoint's REDO WAL file:    000000010000000000000005
 ```
-  
 
 This second line represents the last WAL file processed, and it should be safe to remove any files older than that one. (Unfortunately, older versions of PostgreSQL will not show that line, and only the REDO location. While the canonical way to translate the location to a filename is with the pg_xlogfile_name() function, it is of little use in this situation, as it requires a live database! Thus, you may need another solution.) 
 
 Once you know which WAL file to keep by looking at the pg_controldata output, you can simply delete all WAL files older than that one. (As Craig points out in the comments below, you can use the [pg_archivecleanup](https://www.postgresql.org/docs/9.3/static/pgarchivecleanup.html) program in standalone mode, which will actually work all the way back to version 8.0). As with all mass deletion actions, I recommend a three-part approach. First, back everything up. This could be as simple as copying all the files in the pg_xlog directory somewhere else. Second, do a trial run. This means seeing what the deletion would do without actually deleting the files. For some commands, this means using a --dry-run or similar option, but in our example below, we can simply leave out the “-delete” argument. Third, carefully perform the actual deletion. In our example above, we could clear the old WAL files by doing:
 
-```
+```bash
 $ cp -r /pgdata/pg_xlog/* /home/greg/backups/
 $ find -L /pgdata/pg_xlog -not -newer /pgdata/pg_xlog/000000010000000000000005 -not -samefile /pgdata/pg_xlog/000000010000000000000005| sort | less
 $ find -L /pgdata/pg_xlog -not -newer /pgdata/pg_xlog/000000010000000000000005 -not -samefile /pgdata/pg_xlog/000000010000000000000005 -delete
@@ -117,12 +112,11 @@ It’s worth a mention that to find files **older** than the specific file it’
 
 Once you have straightened out the archive_command and cleared out some disk space, you are ready to start Postgres up. You may want to adjust your pg_hba.conf to keep everyone else out until you verify all is working. When you start Postgres, the logs will look like this:
 
-```
+```plain
 LOG:  database system was shut down at 2014-09-16 10:28:12 EDT
 LOG:  database system is ready to accept connections
 LOG:  autovacuum launcher started
 ```
-  
 
 After a few minutes, check on the pg_xlog directory, and you should see that Postgres has deleted all the extra WAL files, and the number left should be roughly twice the checkpoint_segments setting. If you adjusted pg_hba.conf, adjust it again to let clients back in. If you changed your archive_command to always return truth, remember to change it back as well as generate a new [base backup](https://www.postgresql.org/docs/current/static/app-pgbasebackup.html)
 
