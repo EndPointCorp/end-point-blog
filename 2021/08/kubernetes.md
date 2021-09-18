@@ -1,6 +1,6 @@
 ---
 author: "Kevin Campusano"
-title: "Kubernetes 101: Deploying a web application with its database"
+title: "Kubernetes 101: Deploying a web application and database"
 tags:
 - kubernetes
 - kustomize
@@ -12,9 +12,9 @@ tags:
 ![A market at night](kubernetes/market-cropped.jpg)
 [Photo](https://unsplash.com/photos/cpbWNtkKoiU) by [Sam Beasley](https://unsplash.com/@sam_beasley)
 
-The devops world seems to have been taken over by [Kubernetes](https://kubernetes.io/) during the past few years. And rightfully so, I believe, as it is a great piece of sorftware that promises and delivers when it comes to managing deployments of complex systems.
+The devops world seems to have been taken over by [Kubernetes](https://kubernetes.io/) during the past few years. And rightfully so, I believe, as it is a great piece of software that promises and delivers when it comes to managing deployments of complex systems.
 
-Kubernetes is hard though. But it's all good, I'm not a devops engineer, I'm a software developer. I shouldn't care about any of that. Or should I? Well... Yes. I know that very well after being thrown head first into a project that heavily involves Kubernetes, without knowing the first thing about it.
+Kubernetes is hard though. But it's all good, I'm not a devops engineer. As a software developer, I shouldn't care about any of that. Or should I? Well... Yes. I know that very well after being thrown head first into a project that heavily involves Kubernetes, without knowing the first thing about it.
 
 Even if I wasn't in the role of a devops engineer, as a software developer, I had to work with it in order to set up dev environments, troubleshoot system issues, and make sound design and architectural decisions.
 
@@ -28,7 +28,7 @@ Simply put, Kubernetes is software for managing [computer clusters](https://en.w
 
 Once you've designed an application's complete execution environment and associated components, using Kubernetes you can specify all that declaratively via configuration files. Then, you'll be able to deploy that application with a single command. Once deployed, Kubernetes will give you tools to check on the health of your application, recover from issues, keep it running, scale it, etc.
 
-There are a few basic concepts that we need to be familiar with in order to effectively work with Kubernetes. I think the official documentation does a great job in explaining this, but I'll try to summarize.
+There are a few basic concepts that we need to be familiar with in order to effectively work with Kubernetes. I think the [official documentation](https://kubernetes.io/docs/concepts/) does a great job in explaining this, but I'll try to summarize.
 
 ## Nodes, pods and containers
 
@@ -46,7 +46,7 @@ Then there's "[pods](https://kubernetes.io/docs/concepts/workloads/pods/)". Pods
 
 These three work very closely together within Kubernetes. To sumarize: containers run within pods which in turn exist within nodes in the cluster.
 
-There are other key components to talk about like [deployments](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/), [services](https://kubernetes.io/docs/concepts/services-networking/service/), [replica sets](https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/) and [persistent volumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/). But I think that's enough theory for now. We'll learn more about these and the previous ones we already discussed as we get our hand dirty working though our example. So let's get started with our demo and we'll be discovering and discusing them organically as we go through it.
+There are other key components to talk about like [deployments](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/), [services](https://kubernetes.io/docs/concepts/services-networking/service/), [replica sets](https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/) and [persistent volumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/). But I think that's enough theory for now. We'll learn more about all these as we get our hands dirty working though our example. So let's get started with our demo and we'll be discovering and discusing them organically as we go through it.
 
 # Installing and setting up Kubernetes
 
@@ -135,7 +135,10 @@ As we work though our example, we'll see how the dashboard and the other add-ons
 
 # Deployments and services
 
-Pods are very much the stars of the show when it comes to Kubernetes. However, most times we don't create them directly. We usually do so through "[deployments](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)". Deployments are a more abstract concept in Kubernetes. They basically control pods and make sure they are behaving as specified. You can think of them as wrappers for pods which make our lives easier than if we had to handle pods directly. Let's go ahead and create a deployment, that way things will be clearer.
+Pods are very much the stars of the show when it comes to Kubernetes. However, most of the time we don't create them directly. We usually do so through "[deployments](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)". Deployments are a more abstract concept in Kubernetes. They basically control pods and make sure they behave as specified. You can think of them as wrappers for pods which make our lives easier than if we had to handle pods directly. Let's go ahead and create a deployment, that way things will be clearer.
+
+
+
 
 
 
