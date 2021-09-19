@@ -418,7 +418,7 @@ How cool is that? We have identical, replicated NGINX instances running in a kub
 
 # Building up our own custom application
 
-Alright we've already learned a lot about nodes, pods, deployments, services and how they all work together to run and serve an application from a kubernetes cluster. Now, let's try and do that for a completely custom application of our own.
+Alright, by deploying NGINX, we've learned a lot about nodes, pods, deployments, services and how they all work together to run and serve an application from a kubernetes cluster. Now, let's take all that knowledge and try and do the same for a completely custom application of our own.
 
 ## Deploying a database
 
