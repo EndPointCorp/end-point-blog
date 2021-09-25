@@ -24,11 +24,14 @@ The VisionPort remote helps content creators visualize the content that they are
 
 ### How it works
 
-The host of Remote holds control of the system and presentation, allowing people from anywhere to enjoy the Liquid Galaxy.
+The host of Remote holds control of the system and presentation, allowing others to view but not affect the Liquid Galaxy.
 
-The “Earth preview” displays a live view of content that is being displayed on the Liquid Galaxy, and gives the presenter the ability to navigate the map as one normally would with the SpaceNav, the 3D joystick which supports easy motion in all directions. The lower portion of the interface controls the presentation and scene. Scenes, presentations and playlists can be selected to be displayed on the Liquid Galaxy as well as within the preview window. To the left of the scene controls is a window with preview display modes. These buttons will show a zoomed-in portion of the displays for a better view of their content. By default, wall is selected and shows an entire view of a presentation, as it would be displayed against the 7 screen wall. The other options show a view of the selected section.
+The “Earth preview” displays a live view of content that is being displayed on the Liquid Galaxy, and gives the presenter the ability to navigate the map as one normally would with the SpaceNav, the 3D joystick which supports easy motion in all directions.
+
+The lower portion of the interface controls the presentation and scene. Scenes, presentations and playlists can be selected to be displayed on the Liquid Galaxy as well as within the preview window.
+
+To the left of the scene controls is a window with preview display modes. These buttons will show a zoomed-in portion of the displays for a better view of their content. By default, wall is selected and shows an entire view of a presentation, as it would be displayed against the 7 screen wall. The other options show a view of the selected section.
 
 The share button in the top right corner features a view-only option for the guest viewing the presentation. The guest only has the option to view the different preview display modes as they are presented. Press the share button, copy the link, and send it to your intended audience.
 
 If you have any questions please [reach out to us](/contact/)!
-
