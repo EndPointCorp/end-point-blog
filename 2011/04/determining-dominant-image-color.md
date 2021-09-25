@@ -19,7 +19,7 @@ Another approach makes use of the powerful ImageMagick library. There’s a huge
 
 <img height="117px;" src="/blog/2011/04/determining-dominant-image-color/image-0.jpeg" width="156px;"/>
 
-```nohighlight
+```plain
 $ convert Waffle.jpg -scale 1x1\! -format '%[pixel:u]' info:-
 rgb(219,166,94)
 ```

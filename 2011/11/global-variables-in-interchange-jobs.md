@@ -42,7 +42,7 @@ I then created both a test page and an Interchange job that only called [ic-glob
 
 From test page:
 
-```nohighlight
+```plain
       $Session: HASH(0xb0e1898)
 $Vend::Session: HASH(0xb0e1898)
     $::Session: HASH(0xb0e1898)
@@ -53,7 +53,7 @@ $Vend::Session: HASH(0xb0e1898)
 
 Output from job:
 
-```nohighlight
+```plain
       $Session:
 $Vend::Session: HASH(0xb221fa0)
     $::Session:

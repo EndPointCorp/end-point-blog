@@ -11,7 +11,7 @@ I love broken Postgres. Really. Well, not nearly as much as I love the usual wor
 
 As a member of the PostgreSQL support team at End Point a number of diverse situations tend to cross my desk. So imagine my excitement when I get an email containing a bit of log output that would normally make a DBA tremble in fear:
 
-```nohighlight
+```plain
 LOG:  server process (PID 10023) was terminated by signal 11
 LOG:  terminating any other active server processes
 FATAL:  the database system is in recovery mode
@@ -20,7 +20,7 @@ LOG:  all server processes terminated; reinitializing
 
 Oops, signal 11 is SIGSEGV, Segmentation Fault. Really not supposed to happen, especially in day to day activities. That’ll cause Postgres to drop all of its current sessions and restart itself, as the log lines indicate. That crash was in response to a specific query their application was running, which essentially runs a process on a column across an entire table. Upon running pg_dump they received a different error:
 
-```nohighlight
+```plain
 ERROR:  invalid memory alloc request size 2667865904
 STATEMENT:  COPY public.different_table (etc, etc) TO stdout
 ```
@@ -47,7 +47,7 @@ testdb=# SELECT ctid, * FROM gs;
 
 We select the system column ctid to tell us the page where the problem occurs. Or more specifically, the page and positions leading up to the problem:
 
-```nohighlight
+```plain
  (439,226) |           99878
  (439,227) |           99879
 server closed the connection unexpectedly
@@ -92,7 +92,7 @@ Huh, so through perhaps either a kernel bug, a disk controller problem, or bizar
 
 With a corrupt page identified, if it’s fairly clear the invalid data covers most or all of the page it’s probably not too likely we’ll be able to recover any rows from it. Our best bet is to “zero out” the page so that Postgres will skip over it and let us pull the rest of the data from the table. We can use `dd` to seek to the corrupt block in the table and write out an 8k block of zero-bytes in its place. Shut down Postgres (just to make sure it doesn’t re-overwrite your work later) and note the conv=notrunc that’ll keep dd from truncating the rest of the table.
 
-```nohighlight
+```plain
 demo:~/p82$ dd if=/dev/zero of=data/base/16393/16394 bs=8192 seek=440 count=1 conv=notrunc
 1+0 records in
 1+0 records out

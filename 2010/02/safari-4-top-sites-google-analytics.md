@@ -23,7 +23,7 @@ Thus every preview request looks just like a regular user visit, and this skews 
 
 The solution is to simply not output any analytics code when the X-Purpose header is set to “preview”. In [Interchange](/technology/perl-interchange) this is easily done if you have an include file for your analytics code, by wrapping the file with an [if] block such as this:
 
-```nohighlight
+```plain
 [tmp x_purpose][env HTTP_X_PURPOSE][/tmp]
 [if scratch x_purpose eq 'preview']
 <!-- skip analytics for browser previews -->

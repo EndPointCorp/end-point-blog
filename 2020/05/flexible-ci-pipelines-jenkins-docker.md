@@ -37,7 +37,7 @@ Using our Jenkins pipeline, we can take builds triggered by tags and push an ass
 
 Let’s take a look at a basic scripted `Jenkinsfile` (scripted in Groovy) that utilizes a `Dockerfile` in the source repo to build, test, and deploy a project:
 
-```nohighlight
+```plain
 node() {
   properties([gitLabConnection('gitlab-connect')])
 

@@ -39,7 +39,7 @@ In order to integrate Worldship seamlessly you will need to make a few database 
 
 This is the bare information needed by Worldship in order to fill in the shipping information for a package. I have added two other columns ‘tracking’, and ‘tracking_sent’. The ‘tracking’ column will hold the tracking number for this order. The ‘tracking_sent’ is a boolean that will keep track of our tracking number emails discussed later in this post.
 
-```nohighlight
+```plain
 Column                   |         Type          |
 -------------------------+-----------------------+
  id                      | integer               |
@@ -58,7 +58,7 @@ Column                   |         Type          |
 
 This table acts as a temporary holding table for the tracking number for an individual order. I have found that it is much easier to have Worldship insert rows to a table and have a trigger copy the information to the ‘orders’ table (or something similar depending on your database), as opposed to updating a table. Since this is the case we smiply need to create a trigger that will updated the ‘orders’ table when a row is inserted into ‘ups_order_tracking’.
 
-```nohighlight
+```plain
 Column        |         Type          |
 --------------+-----------------------+
  order_id     | integer               |
@@ -72,7 +72,7 @@ This article is written with Postgres used as the database. You will need to mak
 - Updating the ‘order.order_status_id’ column with a shipped flag (in this example 2 means it has been shipped)
 - Updating ‘order.tracking’ with the tracking number supplied by Worldship
 
-```nohighlight
+```plain
 BEGIN
 :
 :  UPDATE order

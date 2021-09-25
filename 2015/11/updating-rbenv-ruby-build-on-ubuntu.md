@@ -16,14 +16,14 @@ I develop locally and I use [rbenv](https://github.com/sstephenson/rbenv) on Ubu
 
 I found many directions for updating rbenv and ruby-build with [Homebrew](http://brew.sh/) via Google, but that doesn’t apply here. Most of the instructions point to running a git pull on rbenv (probably located in ~/.rbenv), but give no references to upgrading ruby-build.
 
-```nohighlight
+```plain
 cd ~/.rbenv
 git pull
 ```
 
 I did a bit of experimenting and simply tried pulling to update the ruby-build plugin (also a git repo):
 
-```nohighlight
+```plain
 cd ~/.rbenv/plugins/ruby-build/
 git pull
 ```

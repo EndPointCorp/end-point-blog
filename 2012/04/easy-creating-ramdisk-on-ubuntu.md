@@ -17,7 +17,7 @@ I will mount the ramdisk in my local directory. I use Ubuntu 11.10, my user name
 
 I create the directory for mounting the ramdisk in my home dir:
 
-```nohighlight
+```plain
 mkdir /home/szymon/ramdisk
 ```
 
@@ -31,14 +31,14 @@ I want to have a ramdisk that won’t be able to use all of my ram, and I want t
 
 The following command will mount a simple ramdisk in my new local directory.
 
-```nohighlight
+```plain
 $ sudo mount -t tmpfs -o size=512M,mode=777 tmpfs
 /home/szymon/ramdisk
 ```
 
 I can even unmount it with:
 
-```nohighlight
+```plain
 $ sudo umount /home/szymon/ramdisk
 ```
 
@@ -46,21 +46,21 @@ Let’s check if the ramdisk is really there. I can do so in a couple of ways.
 
 I can use df -h to check the size of the mounted device:
 
-```nohighlight
+```plain
 $ df -h | grep szymon
 tmpfs                 512M     0  512M   0% /home/szymon/ramdisk
 ```
 
 I can also use mount to report on the mounted devices:
 
-```nohighlight
+```plain
 $ mount | grep ramdisk
 tmpfs on /home/szymon/ramdisk type tmpfs (rw,size=512M,mode=777)
 ```
 
 There is one more thing to do—​make the ramdisk load automatically at machine start. This can be done by adding the following line into /etc/fstab:
 
-```nohighlight
+```plain
 tmpfs    /home/szymon/ramdisk    tmpfs    rw,size=512M,mode=777 0    0
 ```
 

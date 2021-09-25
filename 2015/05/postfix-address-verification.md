@@ -28,7 +28,7 @@ In our case, we wanted to only accept messages with a valid recipient address. R
 
 Adding Recipient Address Verification it’s easy. Just add these lines to /etc/postfix/main.cf:
 
-```nohighlight
+```plain
 # Your relaying configuration will already be in place. For example:
 # relayhost = [next.hop.ip.address]
 

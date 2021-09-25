@@ -22,7 +22,7 @@ end
 
 This function is the bare minimum you need to test an application, however, it won’t be easy or enjoyable to use. The first step to improve this is to make error messages more clear. This is what the current *assert* function will return for an error:
 
-```nohighlight
+```plain
 path/to/microtest.rb:2:in `assert': Failed test (RuntimeError)
         from test.rb:5:in `<main>'
 ```
@@ -37,7 +37,7 @@ end
 
 A failed *assert* will now throw this error, which does a better job of explaining where things went wrong:
 
-```nohighlight
+```plain
 test.rb:5:in `<main>': Failed test (RuntimeError)
 ```
 
@@ -54,7 +54,7 @@ assert_equal 5, 2+2 # this will raise an error
 
 Great, right? Wrong! Unfortunately, the error messages have gone right back to being unhelpful:
 
-```nohighlight
+```plain
 path/to/microtest.rb:6:in `assert_equal': Failed test (RuntimeError)
         from test.rb:9:in `<main>'
 ```
@@ -224,14 +224,14 @@ end
 
 Now, when we run the tests, it will look something like this:
 
-```nohighlight
+```plain
 % ruby test.rb
 ...
 ```
 
 Indicating that we had three successful tests. But what happens if a test fails?
 
-```nohighlight
+```plain
 % ruby test.rb
 .test.rb:20:in `test_assert_equal_bad': Failed assert_equal 5 vs 4 (RuntimeError)
   [...tons of blah blah...]
@@ -357,7 +357,7 @@ end
 
 By creating this *Reporter* class, we move all IO out of the *Test* class. This is a big improvement, but there’s a problem with this class. It takes too many arguments to get the information it needs, and it’s not even getting everything it should have! See what happens when we run tests with *Reporter*:
 
-```nohighlight
+```plain
 .
 Failure: #<reporter:0x007fb64c0a6e78>#test_assert_bad:
 Failed test
@@ -494,7 +494,7 @@ end
 
 Now, we have one more step to improve reporting. As of right now, errors will be printed with the dots. This can make it difficult to get an overview of how many tests passed or failed. To fix this, we can move failure printing and progress reporting into two different sections. One will be an overview made up of dots and "F"s, and the other a detailed summary, for example:
 
-```nohighlight
+```plain
 ...F..F..F
 
 Failure: TestClass#test_method1: failure message 1

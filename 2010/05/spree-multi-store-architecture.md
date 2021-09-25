@@ -80,7 +80,7 @@ end
 
 The default layout includes the main and site specific stylesheets:
 
-```nohighlight
+```plain
   <%= stylesheet_link_tag "style" %>
   <%= stylesheet_link_tag "#{@asset_location}/site" %>
 ```

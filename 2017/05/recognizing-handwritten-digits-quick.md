@@ -43,7 +43,7 @@ Learning from labelled data is what is called “supervised learning”. It’s 
 
 In all such scenarios we can express the data and labels as:
 
-```nohighlight
+```plain
 Y ~ X1, X2, X3, X4, ..., Xn
 ```
 
@@ -53,7 +53,7 @@ Classification is when the dependent variable Y is so called *categorical*—​
 
 In the digits recognition challenge we’re faced with the classification task. The dependent variable takes values from the set:
 
-```nohighlight
+```plain
 Y = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 }
 ```
 
@@ -629,7 +629,7 @@ confusionMatrix(data=predicted, reference=labels)
 
 The function returns an R list that gets pretty printed to the R console. In our case it looks like the following:
 
-```nohighlight
+```plain
 Confusion Matrix and Statistics
 
           Reference

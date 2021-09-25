@@ -24,7 +24,7 @@ At this point, the SQL-oriented reader says, “Well, you can do all this in SQL
 
 A simple MDX query might look like this:
 
-```nohighlight
+```plain
 SELECT
   NON EMPTY {[Measures].[Quantity]} ON COLUMNS,
   NON EMPTY

@@ -16,7 +16,7 @@ I was getting a sporadic exception while trying to save an instance of my Stored
 
 The exception message:
 
-```nohighlight
+```plain
 #<NoMethodError: undefined method 'uniq' for "":String>
 #Backtrace:
 ... acts-as-taggable-on-2.2.2/lib/acts_as_taggable_on/acts_as_taggable_on/<b>core.rb</b>:264:in 'block in save_tags'

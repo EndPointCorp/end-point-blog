@@ -51,7 +51,7 @@ Finally, some coding versus talking!
 
 Red5 sources are conveniently available on [GitHub](https://github.com/Red5), in server-side and Flash-side.
 
-```nohighlight
+```plain
 > git clone https://github.com/Red5/red5-flash red5
 ```
 
@@ -183,7 +183,7 @@ Unfortunately Red5 is written in ActionScript 2. We can’t really use any of th
 
 The compiler needs to be supplied with the correct MX Component libraries to compile Red5 classes. Flash CS6 has those libraries, but in case you don’t have CS6 handy I put them on [GitHub](https://github.com/marinalohova/mtasc-mx) for you.
 
-```nohighlight
+```plain
 > export PATH="/path/to/mtasc-mx/bin:/path/to/mtasc-mx/std:$PATH"
 > cd "/path/to/red5/classes"
 > mtasc -cp . -swf ../simpleBroadcaster.swf -mx org/red5/samples/livestream/broadcaster/Main.as -v
@@ -201,7 +201,7 @@ We will then download the [swfobject.js](https://github.com/swfobject/swfobject)
 
 We will create the `broadcast.html` file:
 
-```nohighlight
+```plain
 <html>
   <head>
     <title>Red5 Demo - Simple Broadcaster</title>
@@ -223,7 +223,7 @@ We will create the `broadcast.html` file:
 
 Then we will create the `watch.html` file:
 
-```nohighlight
+```plain
 <html>
 <head>
   <title>Red5 Demo - Simple Subscriber</title>

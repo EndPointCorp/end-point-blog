@@ -13,7 +13,7 @@ This makes sense on some levels. We use Git for most everything here at End Poin
 
 As an example, one of the files I often check into version control is postgresql.conf, the main configuration file for the Postgres database. Before I even edit the file, I’ll check it in, so the sequence of events looks like this:
 
-```nohighlight
+```plain
 mkdir RCS
 ci -l postgresql.conf
 edit postgresql.conf
@@ -23,32 +23,32 @@ The creation of the RCS directory is optional but recommended. RCS (which stands
 
 Once the file has been modified, checking in the changes made is as simple as once again doing:
 
-```nohighlight
+```plain
 ci -l postgresql.conf
 ```
 
 Now that it has been checked in, I can perform other common version control tasks against it. To see the complete log of changes:
 
-```nohighlight
+```plain
 rlog postgresql.conf
 ```
 
 To see the differences between the current version and the last checkin, or against a specific version:
 
-```nohighlight
+```plain
 rcsdiff postgresql.conf
 rcsdiff -r1.3 postgresql.conf
 ```
 
 To find a string in a specific previous version:
 
-```nohighlight
+```plain
 co -p -r1.3 postgresql.conf | grep foobar
 ```
 
 Using Git for this purpose is fairly similar. The first steps now become:
 
-```nohighlight
+```plain
 git init
 git add postgresql.conf
 git commit postgresql.conf
@@ -57,26 +57,26 @@ edit postgresql.conf
 
 Technically, one more step than before, but not really a big deal. Note that we don’t need to create a special directory to hold the versioning information: by default, Git puts everything in a “.git” directory. Once we’ve made changes to the file, we can commit out changes with:
 
-```nohighlight
+```plain
 git commit postgresql.conf
 ```
 
 to see the log of changes:
 
-```nohighlight
+```plain
 git log postgresql.conf
 ```
 
 To see the differences between the current version and the last checkin, or against a specific version:
 
-```nohighlight
+```plain
 git diff postgresql.conf
 git diff 11a049bc80fe4a2f4584465fe13d8bb4ee479f23 postgresql.conf
 ```
 
 To find a string in a specific previous version:
 
-```nohighlight
+```plain
 git show 11a049bc80fe4a2f4584465fe13d8bb4ee479f23:postgresql.conf | grep foobar
 ```
 
@@ -114,14 +114,14 @@ Here’s one area where Git wins hands down. For RCS, you do a checkin, and the 
 
 As an aside, how do we do the assignment mentioned above in a shared account? Setting the author for Git commits is as simple as setting environment variables like so:
 
-```nohighlight
+```plain
 $ export GIT_AUTHOR_NAME="Greg Sabino Mullane"
 $ export GIT_AUTHOR_EMAIL="greg@endpoint.com"
 ```
 
 On a shared account, just create an alias. For example:
 
-```nohighlight
+```plain
 cat > .gregs_stuff
 export GIT_AUTHOR_NAME="Greg Sabino Mullane"
 export GIT_AUTHOR_EMAIL="greg@endpoint.com"

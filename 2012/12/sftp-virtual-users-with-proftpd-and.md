@@ -20,7 +20,7 @@ I recently worked on a Rails 3.2 project that used the sweet [PLupload](http://w
 
 Starting from the inside-out, you need to configure ProFTPD to enable virtual users. Here are the relevant parts from our proftpd.conf:
 
-```nohighlight
+```plain
 ##
 # Begin proftpd.conf excerpt. For explanation of individual config directives, see the 
 # great ProFTPD docs at http://www.proftpd.org/docs/directives/configuration_full.html

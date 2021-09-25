@@ -71,13 +71,13 @@ Given these constraints, this is the minimal configuration that I came up with (
 
 /etc/hosts:
 
-```nohighlight
+```plain
 example.domain.com 127.0.0.1
 ```
 
 nginx.conf:
 
-```nohighlight
+```plain
 worker_processes 1;
 
 events {

@@ -20,7 +20,7 @@ System administrators may want to make more sense of visitor IP addresses they s
 
 For example, let’s look at DNS for End Point’s main website at www.endpoint.com using the standard Unix tool “host”:
 
-```nohighlight
+```plain
 % host www.endpoint.com
 www.endpoint.com has address 208.43.132.31
 www.endpoint.com has IPv6 address 2607:f0d0:2001:103::31
@@ -36,7 +36,7 @@ The www.endpoint.com name points to both an IPv4 and an IPv6 address, so there a
 
 So, is a PTR record like these useful to know about visitors to your website? Sometimes. Let’s take a look at a random sample of visitors to a different website we manage. How much can you tell about each of the visitors based on their reverse DNS PTR records? Is it a bot, someone at home or the office, in which country, and who is their Internet provider? How common is it for a visitor’s IP address to have no PTR record? And keep in mind that most of the visitors have no idea what their IP address or its PTR record is.
 
-```nohighlight
+```plain
 % host 93.137.189.55
 55.189.137.93.in-addr.arpa domain name pointer 93-137-189-55.adsl.net.t-com.hr.
 % host 66.249.73.121
@@ -82,7 +82,7 @@ Did you notice that one IP address returned two different PTR records? That is a
 
 The reverse DNS PTR can be set misleadingly, such that a forward lookup on the name does not point back to the same IP address. In the end the way to really know who controls that IP address (or at least a network provider who supplies the ultimately responsible person) is with a “whois” lookup. We can check that the 208.43.132.31 IP address really is hosted at SoftLayer, and for which customer, like this:
 
-```nohighlight
+```plain
 % whois 208.43.132.31
 [Querying whois.arin.net]
 [Redirected to rwhois.softlayer.com:4321]

@@ -183,7 +183,7 @@ Example taxonomies created with Spree sample data
 
 My last step in creating Spree sample data is to add product images. I’ve typically added the image via the Spree backend first, and then copied the images my site extension directory.
 
-```nohighlight
+```plain
 # upload Spree images
 
 # create sample image directory

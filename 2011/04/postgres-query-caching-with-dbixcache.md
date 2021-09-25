@@ -14,7 +14,7 @@ date: 2011-04-25
 
 A few years back, I started working on a module named DBIx::Cache which would add a caching layer at the database driver level. The project that was driving it got put on hold indefinitely, so it’s been on my long-term todo list to release what I did have to the public in the hope that someone else may find it useful. Hence, I’ve just released version 1.0.1 of DBIx::Cache. Consider it the closest thing Postgres has at the moment for query caching. :) The canonical webpage:
 
-```nohighlight
+```plain
 http://bucardo.org/wiki/DBIx-Cache
 ```
 
@@ -26,7 +26,7 @@ git clone git://bucardo.org/dbixcache.git/
 
 or through the indispensable github:
 
-```nohighlight
+```plain
 https://github.com/bucardo/dbixcache
 ```
 

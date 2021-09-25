@@ -19,7 +19,7 @@ Since Heroku includes a free offering to be used for development, it’s a great
 
 **1.** After a failed attempt to setup the basic Heroku installation described [here](https://devcenter.heroku.com/articles/how-heroku-works) because of a RubyGems 1.3.6 requirement, I discovered the need for [Heroku’s bamboo deployment stack](https://web.archive.org/web/20100308035824/http://docs.heroku.com/bamboo), which requires you to declare the gems required for your application. I also found a Spree Heroku extension and reviewed the code, but I wanted to take a more simple approach initially since the extension offers several features that I didn’t need. After some testing, I created a .gems file in the main application directory including the contents below to specify the gems required on the Badious Bamboo Heroku stack.
 
-```nohighlight
+```plain
 rails -v 2.3.5
 highline -v '1.5.1'
 authlogic -v '>=2.1.2'
@@ -63,19 +63,19 @@ Obviously, this isn’t the preference setting that will be used for the product
 
 **1.** To create a Heroku application running on the Bamboo stack, I ran:
 
-```nohighlight
+```plain
 heroku create --stack bamboo-ree-1.8.7 --remote bamboo
 ```
 
 **2.** Since my git repository is hosted on github, I ran the following to push the existing repository to my heroku app:
 
-```nohighlight
+```plain
 git push bamboo master
 ```
 
 **3.** To run the Spree database bootstrap (or database reload), I ran the following:
 
-```nohighlight
+```plain
 heroku rake db:bootstrap AUTO_ACCEPT=1
 ```
 

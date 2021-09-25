@@ -24,7 +24,7 @@ First of all we chose that we wanted to have as much as possible running and con
 
 Then since we wanted to keep as clean as possible the root user environment (and system status), we also decided to use **pyenv**. To be conservative we chose the latest Python 2.7 stable release, *2.7.10*.
 
-```nohighlight
+```plain
 git clone https://github.com/yyuu/pyenv.git ~/.pyenv
 echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bash_profile
 echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bash_profile
@@ -40,7 +40,7 @@ python --version
 
 In order to use img.bi, we also needed NodeJS and following the same approach we chose to use [nvm](https://github.com/creationix/nvm) and install the latest NodeJS stable version:
 
-```nohighlight
+```plain
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.25.4/install.sh | bash
 nvm install stable
 nvm list
@@ -51,7 +51,7 @@ node --version
 
 As a short note to the usage of the **bad practice** of blindly using:
 
-```nohighlight
+```plain
 curl -o- https://some_obscure_link_or_not | bash
 ```
 
@@ -61,14 +61,14 @@ Furthermore going through the entire Python and NodeJS installation as a regular
 
 Anyway after that we updated **pip** and then installed all the needed Python modules:
 
-```nohighlight
+```plain
 pip install --upgrade pip
 pip install redis m2crypto web.py bcrypt pysha3 zbase62 pyutil flup
 ```
 
 Then it’s time to clone the actual img.bi code from the **GitHub** repo, install a few missing dependencies and then use the bower and npm .json files to add the desired packages:
 
-```nohighlight
+```plain
 git clone https://github.com/imgbi/img.bi.git
 cd img.bi/
 npm install -g bower grunt grunt-cli grunt-multiresize
@@ -79,7 +79,7 @@ bower install
 
 We also faced an issue which made **Grunt** fail to start correctly. Grunt was complaining about an “undefined property” called “prototype”. If you happen to have the same problem just type
 
-```nohighlight
+```plain
 cd node_modules/grunt-connect-proxy/node_modules/http-proxy
 npm install eventemitter3@0.1.6
 cd -
@@ -89,7 +89,7 @@ That’ll basically install the eventemitter3 NodeJS package module locally to t
 
 You should use your favourite editor to change the file *config.json*, which basically contains all your local needed configuration. In particular our host is not exposed on the I2P or Tor network, so we "visually" disabled those options.
 
-```nohighlight
+```plain
 # lines with "+" needs to be replace the ones starting with a "-"
 -  "name": "img.bi",
 +  "name": "img.bi - End Point image sharing service",
@@ -109,7 +109,7 @@ You should use your favourite editor to change the file *config.json*, which bas
 
 Save and close the file. At this point you should be able to run “grunt” to build the project but if it fails on the multiresize task, just run
 
-```nohighlight
+```plain
 grunt --force
 ```
 
@@ -117,7 +117,7 @@ to ignore the warnings.
 
 That’s about everything you need for the *frontend* part, so it’s now time to take care of the API.
 
-```nohighlight
+```plain
 cd
 git clone https://github.com/imgbi/img.bi-api.git
 cd /home/imgbi/img.bi-api/
@@ -125,7 +125,7 @@ cd /home/imgbi/img.bi-api/
 
 You now need to edit the two Python files which are the core of the API.
 
-```nohighlight
+```plain
 # edit code.py expired.py
 -upload_dir = '/home/img.bi/img.bi-files'
 +upload_dir = '/home/imgbi/img.bi-files'
@@ -133,25 +133,25 @@ You now need to edit the two Python files which are the core of the API.
 
 Verify that you’re not having any Python import related error, due to missing modules or else, by running the Python code.py file directly.
 
-```nohighlight
+```plain
 ./code.py
 ```
 
 If that’s working okay, just create a symlink in the build directory in order to have the API created files available to the frontend
 
-```nohighlight
+```plain
 ln -s /home/imgbi/img.bi-files /home/imgbi/img.bi/build/download
 ```
 
 And then it’s time to spawn the actual Python daemon:
 
-```nohighlight
+```plain
 spawn-fcgi -f /home/imgbi/img.bi-api/code.py -a 127.0.0.1 -p 1234
 ```
 
 The expired.py file is used by a cronjob which periodically checks if there’s any image/content that should be removed because its time has expired. First of all let’s call the script directly and if there’s no error, let’s create the crontab:
 
-```nohighlight
+```plain
 python /home/imgbi/img.bi-api/expired.py
 
 crontab -e
@@ -162,7 +162,7 @@ crontab -e
 
 It’s now time to install nginx and Redis (if you still haven’t done so), and then configure them. For Redis you can just follow the usual simple, basic installation and that’ll be just okay. Same is true for nginx but we’ll add our configuration/vhost file content here as an example /etc/nginx/sites-enabled/imgbi.example.conf for everyone who may need it:
 
-```nohighlight
+```plain
 upstream imgbi-fastcgi {
   server 127.0.0.1:1234;
 }

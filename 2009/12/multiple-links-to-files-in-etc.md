@@ -11,7 +11,7 @@ date: 2009-12-11
 
 I came across an unfamiliar error in /var/log/messages on a RHEL 5 server the other day:
 
-```nohighlight
+```plain
 Dec  2 17:17:23 <em>X</em> restorecond: Will not restore a file with more than one hard link (/etc/resolv.conf) No such file or directory
 ```
 

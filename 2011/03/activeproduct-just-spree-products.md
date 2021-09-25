@@ -69,7 +69,7 @@ as a guide to create a generator for it in the engine. With
 the migration set up as a generator, I went to my sandbox
 rails app and ran the migration by doing the following:
 
-```nohighlight
+```plain
 $ rails g active_product create_migration_file
 $ rake db:migrate
 ```
@@ -79,7 +79,7 @@ $ rake db:migrate
 At this point, I had some the tables in the database and the model files in
 place it was time to see if things worked.
 
-```nohighlight
+```plain
 $ rails console
 rb(main):001:0> p = Product.new
 ```
@@ -162,7 +162,7 @@ Now when I tried to instantiate the class I found that it called a
 couple of methods that I’m not quite sure what I am going to do with
 yet. These are:
 
-```nohighlight
+```plain
 make_permalink
 search_methods
 ```

@@ -26,7 +26,7 @@ The main ideas for the options management are:
 
 The basic config file is:
 
-```nohighlight
+```plain
 [example]
 repo-branch = another
 ```
@@ -154,7 +154,7 @@ One question: can you spot the bug in the code?
 
 The problem is that the script reads the config file. Then overwrites all the values with the command line ones. What if there is no command line argument for --repo-branch? Then the default one will be used, and it will overwrite the config one.
 
-```nohighlight
+```plain
 ./example.py --config=../example.cfg
 repo-branch from command line is: something
 repo-branch from config is: another

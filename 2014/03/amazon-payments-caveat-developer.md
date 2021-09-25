@@ -12,7 +12,7 @@ A client of ours needed me to install Amazon Payments for them. Now there are se
 
 Amazon starts with a JavaScript widget that asks you to log in or create an Amazon account. The widget returns an order reference ID:
 
-```nohighlight
+```plain
 <div id="payWithAmazonDiv" style="padding-top: 1.2em;">
   <br />
    <img src="https://payments.amazon.com/gp/widgets/button?sellerId=[Amazonseller id]&size=large&color=orange" 
@@ -41,7 +41,7 @@ The Id returned looks like “P##-#######-#######.” and must be saved for futu
 
 Amazon next wants you specify a shipping address and that’s when the fun begins: Amazon provides a way to specify a callback function that gets invoked when an address has been selected. You use this function to ask Amazon to provide the details of the order so that you can calculate a shipping cost. To do this part you first need to provide the order reference, your Amazon access key id and sellerId (both provided to you by Amazon), Then you must compute a signature using the SignatureMethod specified. Also be sure to format your time stamp in the way Amazon requires it (%Y-%m-%dT%H:%M.000Z).
 
-```nohighlight
+```plain
 https://mws.amazonservices.com/OffAmazonPayments
 ?AWSAccessKeyId=[Amazon ACCESS KEY]
 &Action=GetOrderReferenceDetails

@@ -16,7 +16,7 @@ The code that assesses whether AVS passes is done in its own [calc]. From within
 
 After the code had been in production for some time, David Christensen brought to my attention that he noticed in development a test order attempt, where the order attempt failed, but both the auth and the capture succeeded. I was highly dubious of this claim and went over in great detail just what he had done. We narrowed down the condition that produced the problem to (b) above: a successful auth, but abort the order attempt anyway because a high-value product in the cart was coupled with a questionable AVS. When I went to the logs, I could see the result spelled out, but the result made no sense to my understanding:
 
-```nohighlight
+```plain
 ### starting credit card processing ###
 Real-time full auth succeeded. ID=***
 0

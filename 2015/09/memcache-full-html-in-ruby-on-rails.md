@@ -53,7 +53,7 @@ See, it’s not that much! The rest of the gem was not modified much, and the in
 
 Next, I had to set up nginx to serve the HTML from memcached. This was the tricky part (for me). After much experimentation and logging, I finally settled on the following simplified config:
 
-```nohighlight
+```plain
 location / {
     set $memcached_key $uri;
     set $memcached_request 1;
@@ -80,7 +80,7 @@ The desired logic here is to look up the memcached pages for all requests. If th
 
 Due to the infinite loop problem, Rails was receiving all requests with /nocache/ prepended to it. A simple solution to handle this was to add a Rack::Rewrite rule to internally rewrite the URL to ignore the /nocache/ fragment, shown below. The nice thing about this change is that if caching is disabled (e.g. on the development server), this rewrite rule won’t affect any requests.
 
-```nohighlight
+```plain
 config.middleware.insert_before(Rack::Runtime, Rack::Rewrite) do
   rewrite %r{/nocache/(.*)}, '/$1'
 end

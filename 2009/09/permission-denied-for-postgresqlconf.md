@@ -19,7 +19,7 @@ I recently saw a problem in which Postgres would not startup when called via the
 
 Looking into the script showed that output from the startup attempt should be going to /var/lib/pgsql/pgstartup.log. Tailing that file showed this message:
 
-```nohighlight
+```plain
   postmaster cannot access the server configuration file
   "/var/lib/pgsql/data/postgresql.conf": Permission denied
 ```
@@ -27,7 +27,7 @@ Looking into the script showed that output from the startup attempt should be go
 
 However, the postgres user *can* see this file, as evidenced by an su to the account and viewing the file. What’s going on? Well, anytime you see something odd when using Linux, especially if permissions are involved, you should suspect [SELinux](http://fedoraproject.org/wiki/SELinux/FAQ). The first thing to check is if SELinux is running, and in what mode:
 
-```nohighlight
+```plain
 # sestatus
 
 SELinux status:                 enabled
@@ -41,7 +41,7 @@ Policy from config file:        targeted
 
 Yes, it is running and most importantly, in 'enforcing’ mode. SELinux logs to /var/log/audit/ by default on most distros, although some older ones may log directly to /var/log/messages. In this case, I quickly found the problem in the logs:
 
-```nohighlight
+```plain
 # grep postgres /var/log/audit/audit.log | grep denied | tail -1
 
 type=AVC msg=audit(1234567890.334:432): avc:  denied  { read } for
@@ -67,7 +67,7 @@ Now that we know SELinux is the problem, what can we do about it? There are four
 
 First, we can simply edit the PGDATA assignment within the /etc/init.d/postgresql file to point to the actual data dir, and bypass the symlink. In this case, we’d change the line as follows:
 
-```nohighlight
+```plain
 #PGDATA=/var/lib/pgsql/data
 PGDATA=/mnt/newpgdisk/data
 ```

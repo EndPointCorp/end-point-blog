@@ -18,7 +18,7 @@ Perl has two contexts for evaluating expressions: list and scalar. (All who know
 
 In scalar context, a scalar is a scalar is a scalar, but a list becomes a scalar that represents the number of items in the list. Thus,
 
-```nohighlight
+```plain
 @x = (1, 1, 1);  # @x is a list of three 1s
 # vs.
 $x = (1, 1, 1);  # $x is "3", the list size
@@ -28,7 +28,7 @@ In list context, a list of things is still a list of things. That's pretty simpl
 
 Okay, now the know-it-alls have rejoined us. I had a Perl hashref being initialized with code something like this:
 
-```nohighlight
+```plain
 my $hr = {
   KEY1 => $value1,
   KEY2 => $value2,
@@ -39,18 +39,18 @@ my $hr = {
 
 So here is the issue: if mysub() returns a list, then the hashref will get extra data. Remember, Perl n00bs, "=>" is not a magical operator, it's just a "fat comma". So a construction like this:
 
-```nohighlight
+```plain
 1 => (2, 3, 4)
 ```
 
 is really the same as:
-```nohighlight
+```plain
 1, 2, 3, 4
 ```
 
 Here's a complete example to illustrate just what size and shape hole I fell into:
 
-```nohighlight
+```plain
 use strict;
 use Data::Dumper;
 
@@ -72,7 +72,7 @@ sub mysub {
 
 This outputs:
 
-```nohighlight
+```plain
 $VAR1 = 'Data::Dumper';
 $VAR2 = {
           'extrajunk' => 'KEY3',
@@ -85,7 +85,7 @@ $VAR2 = {
 
 Now, the actual subroutine involved in my little adventure was even more insidious: it returned a list context because it was evaluating a regular expression, in a list context. Its actual source:
 
-```nohighlight
+```plain
 sub is_yes {
    return( defined($_[0]) && ($_[0] =~ /^[yYtT1]/));
 }

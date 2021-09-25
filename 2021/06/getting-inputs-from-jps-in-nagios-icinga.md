@@ -176,7 +176,7 @@ fi
 
 As you can see, `check_lucene_deprecated` was able to get the result *if* it is being executed locally on the target machine - but not from the remote (Icinga’s head server). This is because `jps` will provide limited results when executed as the nagios compared to the local root user. Note that I have defined the path of the script in the sudoers file prior to the script execution.
 
-```nohighlight
+```plain
 Defaults: nagios !requiretty
 nagios  ALL = NOPASSWD: /usr/local/lib/nagios/plugins/check_lucene_indexing
 nagios  ALL = NOPASSWD: /usr/local/lib/nagios/plugins/check_lucene_indexing_deprecated

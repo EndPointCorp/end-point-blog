@@ -65,7 +65,7 @@ If socket communication fails, httpd returns a 503 “Temporarily Unavailable”
 
 In the course of our testing SELinux denials like the following appeared:
 
-```nohighlight
+```plain
   host=example.com type=AVC msg=audit(1262803154.315:1851): avc:  denied  { execmem } for  pid=5337 comm="httpd" scontext=root:system_r:httpd_t:s0 tcontext=root:system_r:httpd_t:s0 tclass=process
 ```
 
@@ -79,7 +79,7 @@ Unusual behavior like this is usually best allowed by [creating application-spec
 
 This will output source for a new policy module. You might review the .te file before compiling. Ours looks like this:
 
-```nohighlight
+```plain
 module wsgi 1.0;
 
 require {

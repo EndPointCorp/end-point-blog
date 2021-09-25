@@ -69,7 +69,7 @@ In some cases, I also had to add a couple more modules, and explicitly decode in
 
 And with that, now Bucardo accepts non-ASCII table names.
 
-```nohighlight
+```plain
 [~/devel/bucardo]$ prove t/10-object-names.t 
 t/10-object-names.t .. ok     
 All tests successful.

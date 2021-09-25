@@ -20,7 +20,7 @@ $('input[name=foobar]').change(...).change();
 
 What I failed to contemplate was how this would impact another page, which just happened to have * some * (but not all) of the same form elements, and referenced the same JS code at page load. Specifically, my page’s sibling had:
 
-```nohighlight
+```plain
 <input name="foobar" type="hidden">
 ```
 

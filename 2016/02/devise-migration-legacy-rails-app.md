@@ -34,7 +34,7 @@ end
 
 Next, I commented out all the legacy authentication code sprinkled throughout the application. (I deleted it afterwards, but I kept it around for reference during this work.) I powered through setting the Devise routes, tweaking the Devise views for sign in and password changes, and aliasing helper methods to call the new Devise versions. Lastly, I created Cucumber tests for the common scenarios. Each test expectation verified that the page contained the expected string as they're defined in config/locales/devise.en.yml.
 
-```nohighlight
+```plain
 Feature: User authentication
 
 Background:

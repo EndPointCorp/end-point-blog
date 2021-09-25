@@ -73,7 +73,7 @@ The postgresql.conf file is fairly long, and can be confusing to read with its m
 
 This avoids having to hunt for settings, prevents the gotcha of when a setting is changed twice in the file, and makes things much easier to read visually. Here’s what I put at the top of the postgresql.conf:
 
-```nohighlight
+```plain
 ##
 ## PLEASE MAKE ALL CHANGES TO THE BOTTOM OF THIS FILE!
 ##
@@ -83,7 +83,7 @@ I then add a good 20+ empty lines, so anyone viewing the file is forced to focus
 
 The next step is to put all the settings you care about at the bottom of the file. Which ones should you care about? Any setting you have changed (obviously), any setting that you *might* change in the future, and any that you may not have changed, but someone may want to look up. In practice, this means a list of about 25 items. After aligning all the values to the right and breaking things into logical groups, here’s what the bottom of the postgresql.conf looks like:
 
-```nohighlight
+```plain
 ## Connecting
 port                            = 5432
 listen_addresses                = '*'
@@ -130,7 +130,7 @@ Because everything is in one place, at the bottom of the file, and not commented
 
 Sometimes people change important settings in a group, such as for bulk loading of data. In this case, I usually make a separate group for it at the very bottom. This makes it easy to switch back and forth, and helps to prevent people from (for example) forgetting to switch fsync back on:
 
-```nohighlight
+```plain
 ## Bulk loading only - leave 'on' for everyday use!
 autovacuum                      = off
 fsync                           = off

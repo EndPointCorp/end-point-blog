@@ -16,7 +16,7 @@ Organizing seed files in a specific structure within a project’s **db/seeds/**
 
 Given a file structure like:
 
-```nohighlight
+```plain
 db/seeds/
   courses.seeds.rb
   development/
@@ -26,7 +26,7 @@ db/seeds/
 
 Seedbank will generate tasks including:
 
-```nohighlight
+```plain
 rails db:seed                   # load data from db/seeds.rb, db/seeds/*.seeds.rb, and db/seeds/[ENVIRONMENT]/*.seeds.rb
 rails db:seed:courses           # load data from db/seeds/courses.seeds.rb
 rails db:seed:common            # load data from db/seeds.rb, db/seeds/*.seeds.rb

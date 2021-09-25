@@ -28,7 +28,7 @@ Many new Linux distributions are naming network interfaces based on their physic
 
 Rather than spend more time going down this route, I decided to change gears and look to see if there was any way to patch the Hetzner install scripts to use a GPT partition table with my install instead of msdos. I found and read through the source code for their scripts and soon stumbled on something that just might solve my problem. In the file /root/.oldroot/nfs/install/functions.sh I found mention of a config variable **FORCE_GPT**.  If this is set to “1” then it will try to use a GPT partition table unless it thinks the OS won’t like it, and it thinks that CentOS won’t like it (no matter the version). But if you set **FORCE_GPT** to “2” it will use a GPT partition table no matter what. This config setting just needs to be added to the file you edit where you list out your partitions and LVM volumes.
 
-```nohighlight
+```plain
 FORCE_GPT 2
 
 PART /boot ext3 512M
@@ -41,7 +41,7 @@ LV  vg0  home  /home ext4 400G
 
 I then ran the installer script and added the secret config option and... Bingo! It worked perfectly! No need to manually patch anything or install manually. And now we have a CentOS 7 server with full 3 TB of disk space usable.
 
-```nohighlight
+```plain
 (parted) print
 Model: DELL PERC H710 (scsi)
 Disk /dev/sda: 3000GB

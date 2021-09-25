@@ -24,7 +24,7 @@ In similar situations in the past, using earlier versions of PostgreSQL, we’ve
 
 The first step is to install the right software, called mysql_fdw. It comes to us via Dave Page, PostgreSQL core team member and contributor to many projects. It’s worth noting Dave’s warning that he considers this experimental code. For our purposes it works fine, but as will be seen in this post, we didn’t push it too hard. We opted to [download the source](https://github.com/EnterpriseDB/mysql_fdw) and build it, but installing using pgxn works as well:
 
-```nohighlight
+```plain
 $ env USE_PGXS=1 pgxnclient install mysql_fdw
 INFO: best version: mysql_fdw 1.0.1
 INFO: saving /tmp/tmpjrznTj/mysql_fdw-1.0.1.zip
@@ -42,7 +42,7 @@ Here I’ll refer to the documentation provided in [mysql_fdw’s README](https:
 
 The final step in setting things up is to create a foreign table. In MySQL’s case, this is sort of like a view, in that it creates a PostgreSQL table from the results of a MySQL query. For our purposes, we needed access to several thousand structurally identical MySQL tables (I mentioned the goal is to move off of this one day, right?), so I automated the creation of each table with a simple bash script, which I piped into psql:
 
-```nohighlight
+```plain
 for i in `cat mysql_tables`; do
     echo "CREATE FOREIGN TABLE mysql_schema.$i ( ... table definition ...)
         SERVER mysql_server OPTIONS (
@@ -54,7 +54,7 @@ done
 
 In a step not shown above, this script also consolidates the data from each table into one, native PostgreSQL table, to simplify later reporting. In our case, pulling the data once and reporting on the results is perfectly acceptable; in other words, data a few seconds old wasn’t a concern. We also didn’t need to write back to MySQL, which presumably could complicate things somewhat. We did, however, run into the same data validation problems PostgreSQL users habitually complain about when working with MySQL. Here’s an example, in my own test database:
 
-```nohighlight
+```plain
 mysql> create table bad_dates (mydate date);
 Query OK, 0 rows affected (0.07 sec)
 
@@ -65,7 +65,7 @@ Records: 2  Duplicates: 0  Warnings: 0
 
 Note that MySQL silently transformed ‘2013-02-30’ into ‘0000-00-00’. Sigh. Then, in psql we do this:
 
-```nohighlight
+```plain
 josh=# create extension mysql_fdw;
 CREATE EXTENSION
 

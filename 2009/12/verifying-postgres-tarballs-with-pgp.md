@@ -20,7 +20,7 @@ Note that I’ve also added a sha1sum for each tarball, as a precaution against 
 
 While this is far from a fool-proof system, it’s much, much better than the existing system, and provides a way for changed tarballs to be detected. If anyone ever finds a mismatch please let me know (or better yet, email pgsql-general@postgresql.org)
 
-```nohighlight
+```plain
 -----BEGIN PGP SIGNED MESSAGE-----                                   
 Hash: RIPEMD160                                                      
 

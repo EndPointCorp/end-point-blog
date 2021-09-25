@@ -63,7 +63,7 @@ var twitterAfter_advanced = function(obj) {
 
 Here is an example Twitter feed to be used with this client side code:
 
-```nohighlight
+```plain
 2009-09-13 9:00 - 6:00pm Sept 12th from web
 2009-09-12 8:30 - 7:00pm Sept 11th from web
 2009-09-10 22:00 - 5:00pm Sept 10th from web
@@ -71,7 +71,7 @@ Here is an example Twitter feed to be used with this client side code:
 
 The above example Twitter feed would yield the following availability:
 
-```nohighlight
+```plain
 Sept 10th 5pm - Sept 10th 10pm: Not Available
 Sept 10th 10pm - Sept 11th 7pm: Available
 Sept 11th 7pm - Sept 12th 8:30am: Not Available

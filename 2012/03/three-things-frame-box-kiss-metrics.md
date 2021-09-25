@@ -17,7 +17,7 @@ First up is an article sent over by [Jon](/team/jon-jensen). [This](https://blog
 
 Next up is a quick system admin command line that I came across while troubleshooting something with [Richard](/team/richard-templet):
 
-```nohighlight
+```plain
 apache2ctl -t -D DUMP_VHOSTS
 ```
 

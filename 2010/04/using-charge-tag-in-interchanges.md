@@ -16,7 +16,7 @@ One of the standard ways to charging in older versions of the Interchange demo w
 
 Here’s a stripped down example of where a profile will have tags executed before the other profile checks:
 
-```nohighlight
+```plain
 lname=required Last name required
 fname=required First name required
 &fatal=yes
@@ -31,7 +31,7 @@ In this situation even if lname, fname or the credit card number are invalid, ch
 
 The way around this is either to move the credit card charging out of the order profile into log_transaction or use the &charge command like so:
 
-```nohighlight
+```plain
 &charge=[var MV_PAYMENT_MODE] amount=[scratch some_total_calculation]
 ```
 

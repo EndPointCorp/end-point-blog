@@ -24,7 +24,7 @@ for x in $GEMS; do sudo gem uninstall $x --ignore-dependencies -a; done
 
 Then, I ran gem install rails to install Rails 3 and dependencies. The following gems were installed:
 
-```nohighlight
+```plain
 abstract (1.0.0)
 actionmailer (3.0.1)
 actionpack (3.0.1)
@@ -53,7 +53,7 @@ tzinfo (0.3.23)
 
 Next, I cloned the Spree edge with the following command from [here](https://github.com/railsdog/spree):
 
-```nohighlight
+```plain
 git clone http://github.com/railsdog/spree.git
 ```
 
@@ -61,7 +61,7 @@ In most cases, developers will run Spree from the gem and not the source code ([
 
 After checking out the source code, the first new task to run with edge Spree was bundle install. The bundler gem is intalled by default in Rails 3. It works out of the box in Rails 3, and can work in Rails 2.3 with  additional file and configuration changes. Bundler is a dependency management tool. Gemfile and Gemfile.lock in the Spree core specify which gems are required for the application. Several gems were installed with Spree’s bundler configuration, including:
 
-```nohighlight
+```plain
 Installing webrat (0.7.2.beta.1) 
 Installing rspec-rails (2.0.0.beta.19) 
 Installing ruby-debug-base (0.10.3) with native extensions 
@@ -81,7 +81,7 @@ The only snag I hit during bundle install was that the nokogiri gem required two
 
 To create a project and run all the necessary setup, I ran rake sandbox, which completed the tasks listed below. The tasks created a new project, completed the basic gem setup, installed sample data and images, and ran the sample data bootstrap migration. In some cases, Spree sample data will not be used – the latter two steps can be skipped. The sandbox/ application directory contained a directory of folders that one might expect when developing in Rails (app, db, lib, etc.) and sandbox/ itself runs as a Rails Engine.
 
-```nohighlight
+```plain
 steph@machine:/var/www/spree$ rake sandbox
 (in /var/www/spree)
          run  rails new sandbox -GJT from "."

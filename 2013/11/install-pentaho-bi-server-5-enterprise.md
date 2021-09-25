@@ -61,7 +61,7 @@ Pentaho uses postgresql as default database and files are configured to use post
 
 - biserver-ee/pentaho-solutions/system/quartz/quartz.properties
 
-```nohighlight
+```plain
 org.quartz.jobStore.driverDelegateClass = org.quartz.impl.jdbcjobstore.PostgreSQLDelegate
 ```
 

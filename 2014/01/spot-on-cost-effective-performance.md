@@ -111,7 +111,7 @@ It almost feels like cheating. Each step is distributed to all the client nodes 
 
 Between each step, we perform a little sanity check, and push out a sysstat comment. Not strictly necessary, but if we’re looking through a server’s metrics it makes it easy to see which phase/test we’re looking at, rather than try to refer back to timestamps.
 
-```nohighlight
+```plain
 run_across_nodes(data_nodes+client_nodes, "/usr/lib/sysstat/sadc -C \\'Workload {0} finished.\\' -".format(workload))
 ```
 

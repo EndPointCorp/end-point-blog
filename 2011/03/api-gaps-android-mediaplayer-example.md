@@ -52,7 +52,7 @@ This gap between low-level and high-level interfaces is another small lesson I�
 
 There’s one final unanswered question I had earlier: Was STREAM_MUSIC really the default output stream? Empirically that seemed to be the case, but I didn’t see it stated explicitly anywhere in the documentation. To find out for sure we have to delve into the native C++ code that backs MediaPlayer, in [libmedia/mediaplayer.cpp](https://github.com/aosp-mirror/platform_frameworks_base/blob/gingerbread/media/libmedia/mediaplayer.cpp#L48), and sure enough, in the constructor the default is set:
 
-```nohighlight
+```plain
 mStreamType = AudioSystem::MUSIC;
 ```
 

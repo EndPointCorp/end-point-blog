@@ -25,7 +25,7 @@ Once you’ve built and installed the binaries, you need to be careful
 to remove your existing fileserver’s bos configuration (i.e., fs)
 and put a dafs one in place; e.g.,
 
-```nohighlight
+```plain
 $ bos stop localhost fs -localauth
 $ bos delete localhost fs -localauth
 ```
@@ -34,7 +34,7 @@ Once the fs bnode is deleted, you need to install the new
 binaries and create the dafs entry. You should pass your
 normal command line arguments to the fileserver and volserver processes:
 
-```nohighlight
+```plain
 $ bos create localhost dafs dafs "/usr/afs/bin/fileserver -my-usual-options" \
     /usr/afs/bin/volserver \
     /usr/afs/bin/salvageserver /usr/afs/bin/salvager

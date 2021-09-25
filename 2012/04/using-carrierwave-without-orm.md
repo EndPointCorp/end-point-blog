@@ -207,7 +207,7 @@ end
 
 And then in my form I have the following (haml):
 
-```nohighlight
+```plain
 = form_tag admin_checkout_view_settings_path, :method => :put, :multipart => true do
   #formTop
     %fieldset

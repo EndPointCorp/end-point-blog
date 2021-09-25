@@ -89,7 +89,7 @@ We don’t use 32-bit (i386) RHEL or CentOS 6, so you’re on your own with that
 
 If during the yum localinstall you get an error like this that references a URL containing %24releasever:
 
-```nohighlight
+```plain
 [Errno 14] PYCURL ERROR 22 - "The requested URL returned error: 404 Not Found"
 Error: Cannot retrieve repository metadata (repomd.xml) for repository
 ```
@@ -98,14 +98,14 @@ Then you need to temporarily disable that add-on yum repository until after the 
 
 If all goes well, nothing will look any different at all, except you’ll now see:
 
-```nohighlight
+```plain
 # cat /etc/redhat-release
 CentOS release 5.9 (Final)
 ```
 
 or:
 
-```nohighlight
+```plain
 # cat /etc/redhat-release
 CentOS release 6.4 (Final)
 ```

@@ -26,7 +26,7 @@ Note the use of two specific 9.1 features, though. The plpy object contains nice
 
 But with that in place, the page shows the 404 error, and picks up where it left off with subsequent requests:
 
-```nohighlight
+```plain
 Error code 404.
 
 Message: Table not found.

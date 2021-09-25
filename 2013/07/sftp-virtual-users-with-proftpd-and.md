@@ -25,7 +25,7 @@ The user can click that button to open the SFTP UI, or the Plupload widget will 
 
 Let’s go look at our shiny new virtual user in the sftp_users table:
 
-```nohighlight
+```plain
 -[ RECORD 1 ]-+-----------------------------------
 id            | 1
 user_id       | 3

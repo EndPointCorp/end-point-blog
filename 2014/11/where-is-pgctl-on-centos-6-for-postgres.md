@@ -16,7 +16,7 @@ You could just copy them to /usr/bin/ or create symlinks for them, but both of t
 
 So instead, let’s look at how Postgres’ other commands get installed when you install the rpm. When you run “yum install postgresql93” the rpm contains not only all the files for that package but it also includes some scripts to run (in this case one at install time and another at uninstall time). To view everything that is getting installed and to see the scripts that are run use this command: “rpm -qilv --scripts postgresql93”. There will be a lot of output, but in there you will see:
 
-```nohighlight
+```plain
 ...
 postinstall scriptlet (using /bin/sh):
 /usr/sbin/update-alternatives --install /usr/bin/psql pgsql-psql /usr/pgsql-9.3/bin/psql 930
@@ -31,7 +31,7 @@ Now, not all the commands we’re interested in are installed by the package “
 
 In the postgresql93-server package the preinstall and postinstall scripts only set up the postgres user on the system, set up /var/log/pgsql, add postgres to the init scripts, and set up the postgres user’s .bash_profile. That’s it. But, now that we know what commands are run for getting psql, clusterdb, and createdb into the path, we can manually run the same commands for the postgres commands that we need. Like this:
 
-```nohighlight
+```plain
 /usr/sbin/update-alternatives --install /usr/bin/initdb pgsql-initdb /usr/pgsql-9.3/bin/initdb 930
 /usr/sbin/update-alternatives --install /usr/bin/pg_ctl pgsql-pg_ctl /usr/pgsql-9.3/bin/pg_ctl 930
 /usr/sbin/update-alternatives --install /usr/bin/pg_config pgsql-pg_config /usr/pgsql-9.3/bin/pg_config 930

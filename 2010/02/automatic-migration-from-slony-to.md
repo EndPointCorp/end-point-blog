@@ -19,7 +19,7 @@ For these examples, I’m using the [pagila sample database](http://pgfoundry.or
 
 The slony_migrator.pl script has three possible actions, the first of which is to connect to a running Slony cluster and print a synopsis of the Slony setup it discovers. You can do this safely against a running, production Slony cluster; it gathers all its necessary information from a few simple Slony queries. Here’s the synopsis the script writes for the simple configuration I described above:
 
-```nohighlight
+```plain
 josh@eddie:~/devel/bucardo/scripts$ ./slony_migrator.pl -db pagila1 -H myfreebsd
 Slony version: 1.2.16
 psql version: 8.3
@@ -35,7 +35,7 @@ SET 1: All pagila tables
 
 The script has reported the Slony, PostgreSQL, and psql versions, the Slony schema name, and shows that there’s only one set, replicated from the master node to one slave node, including connection information for each node. Here is the output of the same action, run against the complex slony setup. Notice that node 3 has node 2 as its provider, not node 1:
 
-```nohighlight
+```plain
 josh@eddie:~/devel/bucardo/scripts$ ./slony_migrator.pl -db pagila1 -H myfreebsd
 Slony version: 1.2.16
 psql version: 8.3
@@ -59,7 +59,7 @@ This is a simple way to get an idea of how a Slony cluster is organized. Again, 
 
 Slony gets its configuration entirely through scripts passed to an application called Slonik, which writes configuration entries into a Slony schema within a replicated database. At least as far as I know, however, Slony doesn’t provide a way to regenerate those scripts based on the contents of that schema. The slony_migrator.pl script will do that for you with the --slonik option. For example, here is the Slonik script it generates for the simple configuration:
 
-```nohighlight
+```plain
 josh@eddie:~/devel/bucardo/scripts$ ./slony_migrator.pl -db pagila1 -H myfreebsd --slonik
 CLUSTER NAME = pagila;
 NODE 1 ADMIN CONNINFO = 'dbname=pagila1 host=myfreebsd user=postgres';
@@ -85,7 +85,7 @@ SUBSCRIBE SET (ID = 1, PROVIDER = 1, RECEIVER = 2, FORWARD = YES);
 
 The pagila database contains many tables and sequences, and I’ve removed the repetitive commands to tell Slony about all of them, for the sake of brevity, but in its original form, the code above would rebuild the simple Slony cluster exactly, and can be very useful for getting an idea of how an otherwise unknown cluster is configured. I won’t promise the Slonik code is ideal, but it does recreate a working cluster. The more complex Slonik output is very similar, differing only in how the sets are subscribed. Here I’ll show only the major differences, which are the commands required to create the more complex Slony subscription scheme. In the downloadable script package I mentioned above, this subscription code is somewhat more complex, specifically because Slony won’t let you subscribe node 3 to updates from node 2 until node 2 is fully subscribed itself. The slony_migrator.pl script isn’t smart enough on its own to add necessary WAIT FOR EVENT Slonik commands, but it does get most of the code right, and, importantly, creates the subscriptions in the proper order.
 
-```nohighlight
+```plain
 SET ADD SEQUENCE (ID = 10, ORIGIN = 1, SET ID = 1, FULLY QUALIFIED NAME = 'public.payment_payment_id_seq', COMMENT = 'public.payment_payment_id_seq');
 SET ADD SEQUENCE (ID = 5, ORIGIN = 1, SET ID = 1, FULLY QUALIFIED NAME = 'public.country_country_id_seq', COMMENT = 'public.country_country_id_seq');
 SUBSCRIBE SET (ID = 1, PROVIDER = 1, RECEIVER = 4, FORWARD = YES);
@@ -97,7 +97,7 @@ SUBSCRIBE SET (ID = 1, PROVIDER = 2, RECEIVER = 3, FORWARD = YES);
 
 The final slony_migrator.pl option will create a set of bucardo_ctl commands to create a Bucardo cluster to match an existing Slony setup. Although Bucardo can be configured by directly modifying its configuration database, a great deal of work of late has gone into making configuration easier through the bucardo_ctl program. Here’s the output from slony_migrator.pl on the simple Slony cluster. Note the --bucardo command-line option, which invokes this function:
 
-```nohighlight
+```plain
 josh@eddie:~/devel/bucardo/scripts$ ./slony_migrator.pl -db pagila1 -H myfreebsd --bucardo
 ./bucardo_ctl add db pagila_1 dbname=pagila1  host=myfreebsd user=postgres
 ./bucardo_ctl add db pagila_2 dbname=pagila2  host=myfreebsd2 user=postgres
@@ -116,7 +116,7 @@ josh@eddie:~/devel/bucardo/scripts$ ./slony_migrator.pl -db pagila1 -H myfreebsd
 
 The Bucardo model of a replication system differs from Slony, but the two match fairly closely, especially for a simple scenario like this one. But slony_migrator.pl will work for the more complex Slony example I’ve been using, shown here:
 
-```nohighlight
+```plain
 josh@eddie:~/devel/bucardo/scripts$ ./slony_migrator.pl -db pagila1 -H myfreebsd --bucardo
 ./bucardo_ctl add db pagila_1 dbname=pagila1  host=myfreebsd user=postgres
 ./bucardo_ctl add db pagila_4 dbname=pagila4  host=myfreebsd user=postgres
@@ -146,7 +146,7 @@ I mentioned the Bucardo data model differs from that of Slony. Slony contains a 
 
 This post is getting long, but for the sake of demonstration let’s show a migration from Slony to Bucardo, using the more complex Slony example. First, I’ll create a blank database, and install Bucardo in it:
 
-```nohighlight
+```plain
 josh@eddie:~/devel/bucardo$ createdb bucardo
 josh@eddie:~/devel/bucardo$ ./bucardo_ctl install
 This will install the bucardo database into an existing Postgres cluster.
@@ -167,7 +167,7 @@ Enter a number to change it, P to proceed, or Q to quit:
 
 I’ll make the necessary configuration changes, and run the installation by following the simple menu.
 
-```nohighlight
+```plain
 Current connection settings:
 1. Host:          /tmp
 2. Port:          5432
@@ -193,7 +193,7 @@ Change any setting by using: ./bucardo_ctl set foo=bar
 
 Now I’ll use slony_migrator.pl to get a set of bucardo_ctl scripts to build my Bucardo cluster:
 
-```nohighlight
+```plain
 josh@eddie:~/devel/bucardo/scripts$ ./slony_migrator.pl -db pagila1 -H myfreebsd --bucardo > pagila-slony2bucardo.sh
 josh@eddie:~/devel/bucardo/scripts$ head pagila-slony2bucardo.sh 
 ./bucardo_ctl add db pagila_1 dbname=pagila1  host=myfreebsd user=postgres
@@ -210,7 +210,7 @@ josh@eddie:~/devel/bucardo/scripts$ head pagila-slony2bucardo.sh
 
 I’ll run the script...
 
-```nohighlight
+```plain
 josh@eddie:~/devel/bucardo$ sh scripts/pagila-slony2bucardo.sh
 Added database "pagila_1"   
 Added database "pagila_4"   
@@ -239,7 +239,7 @@ Added sync "pagila_set1_node2_to_node3"
 
 Now all that’s left is to shut down Slony (I just use the "pkill slon" command on each database server), start Bucardo, and, eventually, remove the Slony schemas. Note that Bucardo runs only on one machine (which in this case isn’t either of the database servers I’m using for this demonstration—​Bucardo can run effectively anywhere you want).
 
-```nohighlight
+```plain
 josh@eddie:~/devel/bucardo$ ./bucardo_ctl start
 Checking for existing processes
 Removing /home/josh/devel/bucardo/pid/fullstopbucardo
@@ -259,7 +259,7 @@ josh@eddie:~/devel/bucardo$ tail -f log.bucardo
 
 Based on those logs, it looks like everything’s running fine, but just to make sure, I’ll use bucardo_ctl’s "list syncs" and "status" commands:
 
-```nohighlight
+```plain
 josh@eddie:~/devel/bucardo$ ./bucardo_ctl list syncs
 Sync: pagila_set1_node1_to_node2  (pushdelta)  pagila_node1_set1 =>  pagila_2  (Active)
 Sync: pagila_set1_node1_to_node4  (pushdelta)  pagila_node1_set1 =>  pagila_4  (Active)
@@ -278,7 +278,7 @@ Everything looks good. Before I test that data are really replicated correctly, 
 
 Finally, I’ll tail the Bucardo logs while inserting rows in the pagila1 database, to see what happens. These rows tell me it’s working:
 
-```nohighlight
+```plain
 [Mon Feb  1 21:55:42 2010]  KID Setting sequence public.payment_payment_id_seq to value of 32098, is_called is 1
 [Mon Feb  1 21:55:42 2010]  KID Setting sequence public.inventory_inventory_id_seq to value of 4581, is_called is 1
 [Mon Feb  1 21:55:42 2010]  KID Setting sequence public.country_country_id_seq to value of 109, is_called is 1
@@ -297,7 +297,7 @@ Finally, I’ll tail the Bucardo logs while inserting rows in the pagila1 databa
 
 In this case I need to "kick" the node 2 -> node 3 sync to get it to replicate, but I could configure the sync with a timeout so that happened automatically. Once I do that, I get log messages for it as well.
 
-```nohighlight
+```plain
 [Mon Feb  1 22:00:34 2010]  CTL Got notice "bucardo_syncdone_pagila_set1_node2_to_node3_pagila_3" from 22963
 [Mon Feb  1 22:00:34 2010]  CTL Sent notice "bucardo_syncdone_pagila_set1_node2_to_node3"
 ```

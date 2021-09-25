@@ -15,7 +15,7 @@ You may have heard the saying that nothing is more permanent than a temporary fi
 
 As an illustration of this, I recently came across the initial commit to the source code repository of our endpoint.com website when we ported it to Ruby on Rails back in April 2007. Our then co-worker PJ’s comment is a perfect example of how long-lasting some of our planned temporary work can be:
 
-```nohighlight
+```plain
 commit 2ee55da6ed953c049b3ef6f9f132ed3c1e0d4de9
 Author: PJ Cabreras <pj@endpoint.com>
 Date:   Wed Apr 18 13:07:46 2007 +0000

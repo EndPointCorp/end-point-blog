@@ -16,7 +16,7 @@ Lately, I’ve upgraded a few Spree projects with the recent Spree releases. Spr
 
 First, I made sure my application was running and committed all recent changes to have a clean branch. I follow the development principles outlined [here](/blog/2010/03/spree-software-development) that describe methodology for developing custom functionality on top of the Spree framework core. All of my custom functionality lives in the RAILS_ROOT/vendor/extensions/site/ directory, so that directory probably won’t be touched during the upgrade.
 
-```nohighlight
+```plain
 steph@The-Laptop:/var/www/ep/myproject$ git status
 # On branch master
 nothing to commit (working directory clean)
@@ -24,7 +24,7 @@ nothing to commit (working directory clean)
 
 Then, I tried the rake spree:upgrade task with the following results. I haven’t upgraded Spree recently, and I vaguely remembered there being an upgrade task.
 
-```nohighlight
+```plain
 steph@The-Laptop:/var/www/ep/myproject$ rake spree:upgrade
 (in /var/www/ep/myproject)
 [find_by_param error] database not available?
@@ -33,14 +33,14 @@ This task has been deprecated.  Run 'spree --update' command using the newest ge
 
 OK. The upgrade task has been removed. So, I try spree --update:
 
-```nohighlight
+```plain
 Updating to Spree 0.11.0 ...
 Finished.
 ```
 
 That was easy! I run ‘git status’ and saw that there were several modified config/ files, and a few new config/ files:
 
-```nohighlight
+```plain
 # On branch master
 # Changed but not updated:
 #   (use "git add <file>..." to update what will be committed)
@@ -104,7 +104,7 @@ Most of the changes were not surprising, except that the locale changes here are
 
 For this particular upgrade, my git log shows changes in the files below. The config/ files were made when I ran the update, and the public/ files were modified when I restarted the server as gem public/ files are copied over during a restart.
 
-```nohighlight
+```plain
 commit 96a68e86064aa29f51c5052631f896845c11c266
 Author: Steph Powell <steph@endpoint.com>
 Date:   Mon Jun 28 13:44:50 2010 -0600

@@ -99,7 +99,7 @@ Now database name, username, password and driver should be configured in followi
 
 - biserver-ce/pentaho-solutions/system/applicationContext-spring-security-hibernate.properties
 
-```nohighlight
+```plain
 jdbc.driver=org.postgresql.Driver
 jdbc.url=jdbc:postgresql://localhost:5432/hibernate
 jdbc.username=hibuser
@@ -123,7 +123,7 @@ hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
 ```
 - biserver-ce/pentaho-solutions/system/simple-jndi/jdbc.properties
 
-```nohighlight
+```plain
 Hibernate/type=javax.sql.DataSource
 Hibernate/driver=org.postgresql.Driver
 Hibernate/url=jdbc:postgresql://localhost:5432/hibernate

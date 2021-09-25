@@ -67,7 +67,7 @@ The code above produces a hash with three components:
 
 In the view, the output of size and color arrays is used to generate a table. In this hardcoded view, sizes are displayed as the horizontal option across the top of the table, and colors as the vertical option along the left side of the table.
 
-```nohighlight
+```plain
 ...
 <% if @sc_matrix -%>
 <p>Choose your colour, size and quantity below.</p>

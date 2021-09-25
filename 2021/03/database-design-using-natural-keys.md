@@ -23,7 +23,7 @@ When applications expose the keys on the URLs and APIs, others start relying on 
 
 Let’s elaborate with an example corporate database where employees are identified by their usernames and the departments with their domains. So our data would look like this:
 
-```nohighlight
+```plain
 | department        | username  | job                     |
 | ----------------- | --------- | ----------------------- |
 | sysadm.corp-x.com | hasegeli  | Database Administrator  |

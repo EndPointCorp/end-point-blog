@@ -47,7 +47,7 @@ With Julia this approach is not an option though — the “time to first test�
 
 The “time to first X” issue is only a problem if we’re closing the session in which our code has already been compiled. If we could move the file-watching and test-running steps all into the same session, the testing suite would run slowly only the first time. Julia’s standard library has built-in file watching functions that we could use to reproduce the `watchexec` in our code:
 
-```nohighlight
+```plain
 julia> using FileWatching
 
 julia> watch_file
@@ -72,7 +72,7 @@ $ tree
 
 How do we watch for file changes in Julia? Let’s start up the REPL and see:
 
-```nohighlight
+```plain
 julia> using FileWatching
 
 help?> watch_file
@@ -93,7 +93,7 @@ julia> watch_file("src")
 The REPL didn’t return from the `watch_file` function.
 We can now change the “src/App.jl” file and see what happens:
 
-```nohighlight
+```plain
 julia> watch_file("src")
 FileWatching.FileEvent(true, true, false)
 
@@ -102,7 +102,7 @@ julia>
 
 Good! The function returned a `FileEvent` struct. We can ask Julia for its definition:
 
-```nohighlight
+```plain
 help?> FileWatching.FileEvent
   No documentation found.
 
@@ -124,19 +124,19 @@ We can see it tells us whether the file’s been renamed, changed, or if the tim
 
 So far so good, can we get it to notify us when the nested file changes too?
 
-```nohighlight
+```plain
 julia> watch_file("src")
 ```
 
 Now changing the “src/nested/Other.jl”:
 
-```nohighlight
+```plain
 julia> watch_file("src")
 ```
 
 Nothing happened. We’ll need to be specific about the nested directory to make it work:
 
-```nohighlight
+```plain
 julia> watch_file("src/nested")
 FileWatching.FileEvent(true, true, false)
 ```
@@ -148,7 +148,7 @@ With those experiments we can now conclude that:
 
 We’ll need a list of folders. My first idea was to use the `Glob` package:
 
-```nohighlight
+```plain
 julia> using Glob
 
 julia> glob("**/*")
@@ -174,7 +174,7 @@ $ tree .
 
 Trying the `Glob` package again:
 
-```nohighlight
+```plain
 julia> glob("**/*")
 2-element Array{String,1}:
  "src/App.jl"
@@ -188,7 +188,7 @@ julia> glob("**/**/*")
 
 Turns out that Julia’s `Glob` package doesn’t support extensions that allow “recursive” globbing. We’ll need to roll our own code to return all the possible nested folders:
 
-```nohighlight
+```plain
 julia> function subdirs(base="src")
          ret = [base]
 
@@ -216,7 +216,7 @@ Being able to list all the nested directories, we can now work on the file-watch
 3. Spin up threads for every nested directory found and watch for changes at the same time.
 4. When the file change is detected, queue it into the channel.
 
-```nohighlight
+```plain
 function onchange(f, basedirs=["src"])
   channel = Channel()
 
@@ -274,13 +274,13 @@ $ JULIA_NUM_THREADS=4 julia
 
 Let’s give it a go now:
 
-```nohighlight
+```plain
 julia> onchange(f -> println(f))
 ```
 
 While the REPL is still “inside” the `onchange` function, let’s change some of those files in the dummy project and see what happens:
 
-```nohighlight
+```plain
 julia> onchange(f -> println(f))
 4913
 App.jl
@@ -294,7 +294,7 @@ It works! The output is weird but we do get something here. For each file change
 
 Fortunately, the `Flux` package comes with the `throttle` function that we can reuse:
 
-```nohighlight
+```plain
 function throttle(f, timeout; leading=true, trailing=false)
   cooldown = true
   later = nothing
@@ -330,7 +330,7 @@ end
 
 And the final version of our function:
 
-```nohighlight
+```plain
 function onchange(f, basedirs=["src", "test"], timeout=1)
   channel = Channel()
 
@@ -386,7 +386,7 @@ end
 
 Armed with the helper `onchange` function we can now set up our nice auto-test runner. Let’s add the “test/runtests.jl” file:
 
-```nohighlight
+```plain
 using Test
 
 function runtests()

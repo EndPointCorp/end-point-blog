@@ -13,7 +13,7 @@ I’ve just released version 1.10.1 of [tail_n_mail.pl](https://bucardo.org/tail
 
 Much of the recent work on tail_n_mail has been in improving the parsing of statements in order to normalize them and give reports like this:
 
-```nohighlight
+```plain
 [1] From files A to Q Count: 839
 First: [A] 2010-05-08T05:10:46-05:00 alpha postgres[13567]
 Last:  [Q] 2010-05-09T05:02:27-05:00 bravo postgres[19334]
@@ -42,7 +42,7 @@ Needless to say, using the --mailpass option from the command line or even in a 
 
 The tailnmailrc file is very straightforward: each line is a name and value pair, separated by a colon or an equal sign. Lines starting with a ‘#’ indicate a comment and are skipped. So someone using the new Net::SMTP::SSL method might have a .tailnmailrc in their home directory that looks like this:
 
-```nohighlight
+```plain
 mailmode=smtp
 mailserver=mail.example.com
 mailuser=greg@example.com

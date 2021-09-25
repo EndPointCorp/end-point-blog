@@ -13,7 +13,7 @@ I am *not* an expert in Apache configuration. When I have to delve into a *.conf
 
 My application recently had added some new URLs, which were being parsed by your typical [MVC](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller) route handler (although in Perl, because that’s how I roll, and not in [Dancer](http://perldancer.org/), because … well, I don’t think it had been invented yet when this application first drew breath). 99.9% of the URLs worked just fine:
 
-```nohighlight
+```plain
 /browse/:brand/:category (the pattern)
 /browse/acme/widget
 /browse/ben-n-jerry/ice-cream
@@ -21,13 +21,13 @@ My application recently had added some new URLs, which were being parsed by your
 
 and so on. Suddenly a report reached me that one particular brand was failing:
 
-```nohighlight
+```plain
 /browse/unseen-images/stuff
 ```
 
 (“unseen-images” has been changed to protect the innocent. The key here is the word “images”; put a pin in that and hang on.)
 
-```nohighlight
+```plain
 /browse/unseen-images
 ```
 
@@ -35,27 +35,27 @@ worked just fine. What’s worse, instrumenting the route handler code proved th
 
 Making sure my bottle of aspirin was at hand, I dove into the Apache configuration. I added –
 
-```nohighlight
+```plain
 RewriteLog /path-to-logs/logs/rewrite_log
 RewriteLogLevel 9
 ```
 
 and while its output was fascinating, it wasn’t very enlightening. However, I did stumble upon this gem:
 
-```nohighlight
+```plain
 RewriteRule  ^/.*images/.*   -       [NE,PT,L]
 ```
 
 Aha! Oho! A runaway regular expression is our culprit. I’m pretty sure this was added innocently, hoping to catch things like
 
-```nohighlight
+```plain
 /css/images/foo.jpg
 /images/foo.png
 ```
 
 and so on, but it misfired and gathered up my application URL. I replaced this temporarily with:
 
-```nohighlight
+```plain
 RewriteRule  ^/(.+/)*images/.*   -       [NE,PT,L]
 ```
 

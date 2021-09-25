@@ -69,7 +69,7 @@ Spree with new product data for test site.
 
 First, I created an extension with the following code. Spree’s extensions are roughly based off of [Radiant’s](http://radiantcms.org/) extension system. It’s relatively simple to get an extension up and running with the following code (and server restart).
 
-```nohighlight
+```plain
 script/generate extension StephsPhotos
 ```
 
@@ -85,7 +85,7 @@ remove :sidebar
 
 - Next, I added a new view in the extension to include the new stylesheet.
 
-```nohighlight
+```plain
 # RAILS_ROOT/vendor/extensions/stephs_photos/app/views/shared/_styles.erb
 <link type="text/css" rel="stylesheet" href="/stylesheets/stephs_photos.css">
 ```
@@ -159,7 +159,7 @@ insert_before :homepage_products, 'shared/stephs_promo'
 
 - Next, I added the view using core Spree user functionality.
 
-```nohighlight
+```plain
 # RAILS_ROOT/vendor/extensions/stephs_photos/app/views/shared/_stephs_promo.erb
 <% if current_user -%>
 <img src="http://www.blogger.com/images/promo10.png" alt="10 off" />
@@ -195,7 +195,7 @@ replace :product_description, 'shared/generic_product_description'
 
 - Next, I created the view with the generic product description.
 
-```nohighlight
+```plain
 # RAILS_ROOT/vendor/extensions/stephs_photos/app/views/shared/_generic_product_description.erb
 all prints are 4x6 matte prints.<br />
 all photos ship in a folder.

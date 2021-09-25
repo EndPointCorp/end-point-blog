@@ -21,13 +21,13 @@ Perlbrew offers many of the same features found in RVM for Ruby. It’s easy to 
 
 Getting started with perlbrew couldn’t be easier. A quick one-liner is all it takes to install perlbrew in your home directory.
 
-```nohighlight
+```plain
 $ curl -L http://xrl.us/perlbrewinstall | bash
 ```
 
 If you need to install perlbrew somewhere other than your home directory, just download the installer and pass it the PERLBREW_ROOT environment variable.
 
-```nohighlight
+```plain
 $ curl -LO http://xrl.us/perlbrew
 $ chmod +x perlbrew
 $ PERLBREW_ROOT=/mnt/perlbrew ./perlbrew install
@@ -37,27 +37,27 @@ Follow the instructions on screen and you’ll be ready to use perlbrew in no ti
 
 Once you’re done installing perlbrew there are a couple commands you’ll want to run before installing your own Perl versions or CPAN modules. The perlbrew init command is mandatory; this initializes your perlbrew directory. It can also be used later if you need to modify your PERLBREW_ROOT setting. The perlbrew mirror is optional (but recommended) to help you select a preferred CPAN mirror.
 
-```nohighlight
+```plain
 $ perlbrew init
 $ perlbrew mirror
 ```
 
 Next comes the fun part. Start off by verifying the Perl version(s) that perlbrew sees.
 
-```nohighlight
+```plain
 $ perlbrew list
 * /usr/bin/perl (5.10.1)
 ```
 
 Install a newer version of Perl.
 
-```nohighlight
+```plain
 $ perlbrew install 5.12.3
 ```
 
 Now switch to the newer Perl.
 
-```nohighlight
+```plain
 $ perlbrew list
 * /usr/bin/perl (5.10.1)
 perl-5.12.3
@@ -94,7 +94,7 @@ perl-5.12.3
 
 A quick peek behind the curtain reveals much of the simplicity behind perlbrew.
 
-```nohighlight
+```plain
 $ ls -l ~/perl5/perlbrew/
 total 2680
 -rw-r--r--  1 testy  users      408 Feb 10 23:58 Conf.pm

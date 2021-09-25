@@ -25,7 +25,7 @@ Debian Wheezy’s repo list maxed out at libnss3==2:3.14 and I would need libnss
 
 This is accomplished by setting repo priorities. I created a “jessie” specific APT sources list and added the Debian repo url’s for jessie:
 
-```nohighlight
+```plain
 $ cat /etc/apt/sources.list.d/jessie.list
 ## DEBIAN JESSIE
 deb ftp://ftp.debian.org/debian/ jessie main
@@ -34,7 +34,7 @@ deb-src ftp://ftp.debian.org/debian/ jessie main
 
 And set pin priorities for libnss3 to fetch jessie libraries over wheezy while defining a lower priority of all other jessie packages:
 
-```nohighlight
+```plain
 $ cat /etc/apt/preferences
 Package: *
 Pin: release a=waldorf
@@ -55,7 +55,7 @@ Pin-Priority: 510
 
 Now, update apt and confirm higher libnss3 installation candidates:
 
-```nohighlight
+```plain
 $ sudo apt-get update && sudo apt-cache policy libnss3
 libnss3:
   Installed: 2:3.14.5-1+deb7u3
@@ -73,7 +73,7 @@ libnss3:
 
 Install new libnss3 candidate:
 
-```nohighlight
+```plain
 $ sudo apt-get install libnss3=2:3.17.2-1.1
 ```
 

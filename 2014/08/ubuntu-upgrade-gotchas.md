@@ -22,7 +22,7 @@ During the install, the following warning appeared:
 
 First, this is a terrible message. I’m sure it has caused lots of confusion, as most users probably do not know what what xscreensaver and xlockmore are. Is it so hard for the installer to tell which one is in use? Why in the world can the installer not simply stop these programs itself?! The solution was simple enough: in a terminal, I ran:
 
-```nohighlight
+```plain
 pgrep -l screensaver
 pkill screensaver
 pgrep -l screensaver
@@ -34,7 +34,7 @@ The first command was to see if I had any programs running with “screensaver�
 
 Once suspended and revived, the wireless would simply not work. Everything looked normal: networking was enabled, wifi hotspots were detected, but a connection could simply not be made. After going through bug reports online and verifying the sanity of the output of commands such as “nmcli nm” and “lshw -C network”, I found a solution. This was the hardest issue to solve, as it had no intuitive solution, nothing definitive online, and was full of red herrings. What worked for me was to *remove* the suspension of the iwlwifi module. I commented out the line from **/etc/pm/config.d/modules**, in case I ever need it again, so the file now looks like this:
 
-```nohighlight
+```plain
 # SUSPEND_MODULES=“iwlwifi”
 ```
 

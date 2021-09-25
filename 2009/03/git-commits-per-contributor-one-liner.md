@@ -10,7 +10,7 @@ date: 2009-03-18
 
 Just for fun, in the [Spree Git repository](https://github.com/spree/spree):
 
-```nohighlight
+```plain
 git log | grep ^Author: | sed 's/ <.*//; s/^Author: //' | sort | uniq -c | sort -nr
     813 Sean Schofield
      97 Brian Quinn

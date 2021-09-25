@@ -13,7 +13,7 @@ date: 2013-07-15
 
 I love using tabs in Vim. I know there are some who are opposed to tabs, but I find them invaluable. The default shortcuts for manipulating tabs are a little cumbersome, which I believe deters many users. Here are some modifications that I added to my [vimrc](https://github.com/mikefarmer/dotfiles/blob/master/vimrc).
 
-```nohighlight
+```plain
 nmap <silent> tt :tabnew<CR>
 nmap <silent> [g :tabprevious<CR>
 nmap <silent> ]g :tabnext<CR>
@@ -27,14 +27,14 @@ First, I’m using nmap here which says to only map these keys in normal mode. N
 
 I believe most Vim users use splits often. At first, I found that splitting my current buffer was also cumbersome using the default method in Vim (:split and :vsplit). So utilizing the double-tap method I used for tabs, I created my own shortcuts:
 
-```nohighlight
+```plain
 nmap <silent> vv :vsp<CR>
 nmap <silent> ss :sp<CR>
 ```
 
 Once you have a split, navigating between them can be a little bit of a pain as well. Here’s my optimization:
 
-```nohighlight
+```plain
 map <C-h> <C-w>h
 map <C-j> <C-w>j
 map <C-k> <C-w>k
@@ -54,6 +54,6 @@ Using splits and tabs give you a lot of flexibility in managing the code you are
 
 Want a quick way to get to your vimrc?
 
-```nohighlight
+```plain
 :e $MYVIMRC
 ```

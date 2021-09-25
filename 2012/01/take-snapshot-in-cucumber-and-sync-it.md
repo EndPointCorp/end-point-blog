@@ -21,7 +21,7 @@ I often develop inside of my dropbox folder because A) all my code is automatica
 
 The first thing we need to do is setup our take a snapshot step. For our app, it made the most sense to put this in web_steps.rb but you can add it to any of your step_definitions files.  The step looks like this:
 
-```nohighlight
+```plain
 Then /take a snapshot/ do
   # save a html snapshot
   html_snapshot = save_page
@@ -37,7 +37,7 @@ end
 
 The first line there is fairly simple. Capybara provides a save_page method by default which is going to save the page to tmp/capybara off the root of your app. The file will look something like this: capybara-20111228210921591550991.html. You can see the source code [on the rdoc page](http://rubydoc.info/github/jnicklas/capybara/master/Capybara/Session:save_page) for more information on how this works. If you want to customize the file name, you can do that by calling Capybara.save_page directly like this:
 
-```nohighlight
+```plain
 Capybara.save_page(body, 'my_custom_file.html')
 ```
 
@@ -53,13 +53,13 @@ I didn’t know this until recently but you can [run dropbox on a linux server](
 
 For 32 bit: 
 
-```nohighlight
+```plain
 cd ~ && wget -O - http://www.dropbox.com/download?plat=lnx.x86 | tar xzf -
 ```
 
 or 64 bit: 
 
-```nohighlight
+```plain
 cd ~ && wget -O - http://www.dropbox.com/download?plat=lnx.x86_64 | tar xzf -
 ```
 
@@ -67,14 +67,14 @@ You’ll also need a small python script for working with the daemon. You can do
 
 The dropbox cli will walk you through a simple authentication process and then start downloading your dropbox folder in your ~/Dropbox directory when you run dropbox.py start for the first time. If your dropbox folder is like mine, this is going to download way more stuff than you’d probably want on your server so you’ll need to add some exceptions. I created a folder in Dropbox for my screenshots called ~/Dropbox/cuke_snapshots and then excluded everything else. Here’s how I did it with the dropbox.py file (I renamed dropbox.py to just dropbox for ease and clarity. It’s also helpful to put it in a directory that’s in your PATH):
 
-```nohighlight
+```plain
 cd ~/Dropbox
 dropbox exlcude add Public Photos
 ```
 
 That adds the Public and Photos folders to the exclusion list and Dropbox deletes them from the system for you. The nice thing is that you can continue to add folder names to the end of that command so you can get rid of stuff really quick. There are a bunch of options using the dropbox cli that make working with dropbox on the server very simple and flexible.
 
-```nohighlight
+```plain
 status       get current status of the dropboxd
 help         provide help
 puburl       get public url of a file in your dropbox
@@ -90,7 +90,7 @@ lansync      enables or disables LAN sync
 
 The last step is to create a symbolic link from your app into your dropbox folder. I did this with the following command:
 
-```nohighlight
+```plain
 mkdir -p ~/Dropbox/cuke_snapshots/my_app/capybara
 cd ~/rails_apps/my_app/tmp
 rm -rf capybara   (if it already exists)
@@ -103,7 +103,7 @@ Of course there are many ways you could set this up, but this will get the job d
 
 Once you have everything setup, all you need to do is call the cucumber step from within your scenarios. Here’s a contrived example:
 
-```nohighlight
+```plain
 @javascript   # may not be needed if everything is using webkit-capybara
 Scenario: A shopper wants to checkout
   When I go to the address step

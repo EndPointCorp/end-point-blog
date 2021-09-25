@@ -41,7 +41,7 @@ CREATE TABLE employees (
 
 Then our database grows, and we need to split the departments into multiple teams. Here’s what they’ll look like:
 
-```nohighlight
+```plain
 | id | department  | team           | members |
 | -- | ----------- | -------------- | ------- |
 |  1 | sysadmin    | infrastructure |       5 |
@@ -75,7 +75,7 @@ ALTER TABLE employees
 
 Now, we know both the department and the team of an employee, but the problem is that they can point to inconsistent rows. For example, I can INSERT myself as an employee:
 
-```nohighlight
+```plain
 | username | department_id | team_id |
 | -------- | ------------- | ------- |
 | hasegeli | sysadmin      |       3 |

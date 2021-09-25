@@ -19,25 +19,25 @@ SANs are added to the certificate when the certificate signing request is create
 
 First uncomment the line which says:
 
-```nohighlight
+```plain
 req_extensions = v3_req
 ```
 
 Next in the [v3_req] section, add the SANs. There are two ways to do this, either inline or as a separate section. Inline is in the format:
 
-```nohighlight
+```plain
 subjectAltName=DNS:*.0.camp.foo.com,DNS:*.1.camp.foo.com [...]
 ```
 
 Sectional is in the format:
 
-```nohighlight
+```plain
 subjectAltName=@alt_names
 ```
 
 And then a section [alt_names] is created later in the file:
 
-```nohighlight
+```plain
 [alt_names]
 DNS.1=*.0.camp.foo.com
 DNS.2=*.1.camp.foo.com
@@ -50,13 +50,13 @@ The sectional format seems more convenient for programmatic generation of the cn
 
 Once the cnf file is created, the CSR is generated in the normal way, with the new cnf file specified:
 
-```nohighlight
+```plain
 openssl req -new -out camp.foo.com.csr -key camp.foo.com.key -config foo.com.openssl.cnf
 ```
 
 This creates the CSR file, which can then be signed by the CA or the camp.foo.com key in the normal way, with one important point: the cnf file used by the CA must have the following line uncommented:
 
-```nohighlight
+```plain
 copy_extensions = copy
 ```
 
@@ -64,13 +64,13 @@ This line ensures that the v3 extension sections for subjectAltNames are copied 
 
 The resultant certificate will contain the subjectAltNames specified, and can be verified by looking at the contents of the certificate with:
 
-```nohighlight
+```plain
 openssl x509 -in camp.foo.com.crt -text -noout
 ```
 
 There will be a lot of output, but will contain something like:
 
-```nohighlight
+```plain
 X509v3 Subject Alternative Name:
      DNS:*.0.camp.foo.com, DNS:*.1.camp.foo.com, DNS:*.2.camp.foo.com [...]
 ```
