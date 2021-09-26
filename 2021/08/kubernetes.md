@@ -426,7 +426,7 @@ The application that we are going to deploy into our cluster is a simple one wit
 
 > If you're interested in learning more about the process of actually writing that app, it's all documented in another blog post: [Building REST APIs with .NET 5, ASP.NET Core, and PostgreSQL](https://www.endpoint.com/blog/2021/07/dotnet-5-web-api/).
 
-## Deploying a database
+# Deploying the database
 
 Let's begin with the Postgres database. Similar as before, we start by setting up a deployment with one pod and one container. We can do so with a deployment configuration YAML file like this:
 
@@ -546,6 +546,8 @@ In Kubernetes, pods are supposed to be treated as ephemeral entities. The idea i
 
 We will use a persistent volume (PV) to define a directory in our host machine that we will allow our Postgres container to use to store data files. Then, a persistent volume claim (PVC) is used to define a "request" for some of that available disk space that a specific container can make. In short, a persistent volume says to k8s "here's some storage that the cluster can use"; and a persistent volume claim says "here's a portion of that storage that's available for containers to use".
 
+## Configuration files for the PV and PVC
+
 Start by tearing down our currently broken Postgres deployment:
 
 ```
@@ -582,6 +584,8 @@ In this config file, we already know about the `kind` and `metadata` fields. A f
 - `spec.accessModes`: Defines how the PV can be accessed. In this case, we're using `ReadWriteOnce` so that it can only be used by a single node in the cluste which is allowed to read from and write into the PV.
 - `spec.hostPath.path`: Specifies the directory in the host machine's file system where the PV will be mounted. Simply put, the containers in the cluster will have access to the specific directory defined here. I've used `"/home/kevin/projects/vehicle-quotes-postgres-data"` because that makes sense on my own machine. I've you're following along, make sure to set it to something that makes sense in your environment.
 
+> hostPath is just one type of persistent volume which works well for development deployments. For production, managed Kubernetes implementations like the ones from Google or Amazon have their own types which are more appropriate for production.
+
 We also need another config file for the persistent volume claim:
 
 ```yaml
@@ -605,10 +609,117 @@ Like I said, PVCs are essentially usage requests for PVs. So, the config file is
 - `spec.volumeName`: Is the name of the PV that this PVC is going to access. Notice how it matches the name that we defined in the PV's config file.
 - `spec.resources.requests`: Defines how much space this PVC requests from the PV. In this case, we're just requesting all the space that the PV has available to it, as given by its config file: 5Gi.
 
+## Configuring the deployment to use the PVC
 
+After saving those files, all that's left is to update the database deployment configuration to use the PVC. Here's what the updated config file would look like:
 
+```diff
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vehicle-quotes-db
+spec:
+  selector:
+    matchLabels:
+      app: vehicle-quotes-db
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: vehicle-quotes-db
+    spec:
+      containers:
+        - name: vehicle-quotes-db
+          image: postgres:13
+          ports:
+            - containerPort: 5432
+              name: "postgres"
++         volumeMounts:
++           - mountPath: "/var/lib/postgresql/data"
++             name: vehicle-quotes-postgres-data-storage
+          env:
+            - name: POSTGRES_DB
+              value: vehicle_quotes
+            - name: POSTGRES_USER
+              value: vehicle_quotes
+            - name: POSTGRES_PASSWORD
+              value: password
+          resources:
+            limits:
+              memory: 4Gi
+              cpu: "2"
++     volumes:
++       - name: vehicle-quotes-postgres-data-storage
++         persistentVolumeClaim:
++           claimName: vehicle-quotes-postgres-data-persisent-volume-claim
+```
 
+First, notice the `volumes` section at the bottom of the file. Here's where we define the volume that will be available to the container, give it a name and specify which PVC it will use. The `spec.template.volumes[0].persistentVolumeClaim.claimName` needs to match the name of the PVC that we defined in `db-persistent-volume-claim.yaml`.
 
+Then, up in the `containers` section, we define a `volumeMounts` element. We use that to specify which directory within the container will map to our PV. In this case, we've set the container's `/var/lib/postgresql/data` directory to use the volume that we defined at the bottom of the file. That volume is backed by our persistent volume claim, which is in turn backed by our persistent volume. The significance of the `/var/lib/postgresql/data` directory is that this is where Postgres stores database files by default.
+
+In summary: We created a persistent volume that defines some disk space in our machine that's available to the cluster; then, we defined a persistent volume claim that represents a request of some of that space that a container can have access to; after that, we defined a volume within our pod configuration in our deployment to point to that persistent volume claim; and finally, we defined a volume mount in our container that uses that volume to store Postgres' database files.
+
+By setting it up this way, we've made it so that regardless of how many Postgres pods come and go, the database files will always be persisted, because they now live outside the container. They are stored in our host machine instead.
+
+## Applying changes
+
+Now let's see it in action. Run the following three commands to create the objects:
+
+```
+$ kubectl apply -f db-persistent-volume.yaml
+$ kubectl apply -f db-persistent-volume-claim.yaml
+$ kubectl apply -f db-deployment.yaml
+```
+
+After a while, they will show up in the dashboard. You already know how to look for deployments and pods. For persistent volumes, click the "Persistent Volumes" option under the "Cluster" section in the sidebar:
+
+![Dashboard persistent volume](kubernetes/dashboard-persistent-volume.png)
+
+Persistent volume claims can be found in the the "Persistent Volume Claims" option under the "Config and Storage" section in the sidebar:
+
+![Dashboard persistent volume claim](kubernetes/dashboard-persistent-volume-claim.png)
+
+Now, try connecting to the database (using `kubectl exec -it vehicle-quotes-db-5fb576778-gx7j6 -- bash` and then `psql -U vehicle_quotes`) and creating some tables. Something simple like this would work:
+
+```sql
+CREATE TABLE test (test_field varchar);
+```
+
+Now, delete the objects:
+
+```
+$ kubectl delete -f db-deployment.yaml
+$ kubectl delete -f db-persistent-volume-claim.yaml
+$ kubectl delete -f db-persistent-volume.yaml
+```
+
+Create them again:
+
+```
+$ kubectl apply -f db-persistent-volume.yaml
+$ kubectl apply -f db-persistent-volume-claim.yaml
+$ kubectl apply -f db-deployment.yaml
+```
+
+Connect to the database again and you should see that the table is still there:
+
+```
+vehicle_quotes=# \c vehicle_quotes 
+You are now connected to database "vehicle_quotes" as user "vehicle_quotes".
+vehicle_quotes=# \dt
+           List of relations
+ Schema | Name | Type  |     Owner      
+--------+------+-------+----------------
+ public | test | table | vehicle_quotes
+(1 row)
+```
+
+That's just what we wanted: the database is persisting independently of what happens to the pods and containers.
+
+# Deploying the web application
+
+Now that we've got the database sorted out, let's turn our attention to the app itself. As you've seen, Kubernetes runs apps as containers. That means that we need images to build those containers. A custom web application is no exception. We need to build a custom image that contains our application so that it can be deployed into Kubernetes. 
 
 
 
