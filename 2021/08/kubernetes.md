@@ -190,7 +190,7 @@ spec:
 
 > This example is taken straight from [the official documentation](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/).
 
-Don't worry if most of that doesn't make sense at this point. I'll explain it into detail later. First, lets actually do something with it.
+Don't worry if most of that doesn't make sense at this point. I'll explain it into detail later. First, let's actually do something with it.
 
 Save that in a new file. You can call it `nginx-deployment.yaml`. Once that's done, you can actually create the deployment (and its associated objects) in your k8s cluster with this command:
 
@@ -232,7 +232,7 @@ nginx-deployment   3/3     3            3           2m54s
 
 As you can see, the deployment that we just created is right there with the name that we gave it.
 
-Like I said, deployments are used to manage pods, and that's just what the `READY`, `UP-TO-DATE` and `AVAILABLE` columns allude to with those values of `3`. This deployment has three pods because, in our yaml file, we specified we wanted three replicas with the `replicas: 3` line. Each "replica" is a pod. For our example, that means that we will have three instances of nginx running side by side.
+Like I said, deployments are used to manage pods, and that's just what the `READY`, `UP-TO-DATE` and `AVAILABLE` columns allude to with those values of `3`. This deployment has three pods because, in our yaml file, we specified we wanted three replicas with the `replicas: 3` line. Each "replica" is a pod. For our example, that means that we will have three instances of [NGINX](https://www.nginx.com/) running side by side.
 
 We can see the pods that have been created for us with this command:
 
@@ -310,10 +310,10 @@ This example is very simple, but it touches on the key aspects of deployment con
 - `spec.template`: Specifies the configuration of the pods that will be part of the deployment.
 - `spec.template.metadata.labels`: Very similar to `metadata.labels`. The only difference is that those labels are added to the deployment; while these ones are added to the pods. The only notable thing is that these labels are key for the deplopyment to know which pods it should care about. As explained in above.
 - `spec.template.spec`: This section specifies the actual functional configuration of the pods.
-- `spec.template.spec.container`: This section specifies the configuration of the containers that will be running inside the pods. It's an array so there can be many. In our example we have only one.
-- `spec.template.spec.container[0].name`: The name of the container.
-- `spec.template.spec.container[0].image`: The image that will be used to build the container.
-- `spec.template.spec.container[0].ports[0].containerPort`: A port through which the contianer will accept traffic from the outside. In this case, `80`.
+- `spec.template.spec.containers`: This section specifies the configuration of the containers that will be running inside the pods. It's an array so there can be many. In our example we have only one.
+- `spec.template.spec.containers[0].name`: The name of the container.
+- `spec.template.spec.containers[0].image`: The image that will be used to build the container.
+- `spec.template.spec.containers[0].ports[0].containerPort`: A port through which the contianer will accept traffic from the outside. In this case, `80`.
 
 > You can find a detailed description of all the fields supported by deployment configuration files [in the official API reference documentation](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#deployment-v1-apps). And much more!
 
@@ -412,22 +412,204 @@ We can access our service in a few different ways. We can use its "cluster IP" w
 
 Another way is by using the "NodePort". Remember that the "NodePort" specifies the port in which the service will be available on every node of the cluster. With our current microk8s setup, our own machine is a node in the cluster. So, we can also access the nginx that's running in our kubernetes cluster using `localhost:30080`. `30080` is given by the `spec.ports[0].nodePort` field in the service configuration file from before. Try it out:
 
-![NGINX via NdoePort](kubernetes/nginx-via-nodeport.png)
+![NGINX via NodePort](kubernetes/nginx-via-nodeport.png)
 
 How cool is that? We have identical, replicated NGINX instances running in a kubernetes cluster that's installed locally in our machine.
 
-# Building up our own custom application
+# Deploying our own custom application
 
 Alright, by deploying NGINX, we've learned a lot about nodes, pods, deployments, services and how they all work together to run and serve an application from a kubernetes cluster. Now, let's take all that knowledge and try and do the same for a completely custom application of our own.
 
+## What are we building
+
+The application that we are going to deploy into our cluster is a simple one with only two components: a REST API written with [.NET 5](https://dotnet.microsoft.com/) and a [Postgres](https://www.postgresql.org/) database. You can find the source code [in GitHub](https://github.com/megakevin/end-point-blog-dotnet-5-web-api). It's an API for supporting a hypothetical front end application for capturing used vehicle information and calculating their value in dollars.
+
+> If you're interested in learning more about the process of actually writing that app, it's all documented in another blog post: [Building REST APIs with .NET 5, ASP.NET Core, and PostgreSQL](https://www.endpoint.com/blog/2021/07/dotnet-5-web-api/).
+
 ## Deploying a database
 
-# Persistent volumes and claims
+Let's begin with the Postgres database. Similar as before, we start by setting up a deployment with one pod and one container. We can do so with a deployment configuration YAML file like this:
+
+```yml
+# db-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vehicle-quotes-db
+spec:
+  selector:
+    matchLabels:
+      app: vehicle-quotes-db
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: vehicle-quotes-db
+    spec:
+      containers:
+        - name: vehicle-quotes-db
+          image: postgres:13
+          ports:
+            - containerPort: 5432
+              name: "postgres"
+          env:
+            - name: POSTGRES_DB
+              value: vehicle_quotes
+            - name: POSTGRES_USER
+              value: vehicle_quotes
+            - name: POSTGRES_PASSWORD
+              value: password
+          resources:
+            limits:
+              memory: 4Gi
+              cpu: "2"
+```
+
+This deployment configuration YAML file is similar to the one we used for NGINX before, but it introduces a few new elements:
+
+- `spec.template.spec.containers[0].ports[0].name`: We can give specific names to ports which we can reference later, elsewhere in the k8s configurations.
+- `spec.template.spec.containers[0].env`: This is a list of environment variables that will be defined in the container inside the pod. In this case, we've specified a few variables that are necessary to configure the Postgres instance that will be running. We're using [the official Postgres image from Dockerhub](https://hub.docker.com/_/postgres), and it calls for these variables. Their purpose should be self explanatory, they specify database name, username and password.
+- `spec.template.spec.containers[0].resources`: This field defines the hardware resources that the container needs in order to function. We can specify upper limits with `limits` and lower ones with `requests`. You can learn more about resource management in [the official documentation](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/). In our case, we've kept it simple and used `limits` to prevent the container from using more than 4Gi of memory and 2 CPU cores.
+
+Now, let's save that YAML into a new file called `db-deployment.yaml` and run the following:
+
+```
+$ kubectl apply -f db-deployment.yaml 
+```
+
+Which should output:
+
+```
+deployment.apps/vehicle-quotes-db created
+```
+
+After a few seconds, you should be able to see the new deployment and pod via `kubectl`:
+
+```
+$ kubectl get deployment -A
+NAMESPACE            NAME                        READY   UP-TO-DATE   AVAILABLE   AGE
+...
+default              vehicle-quotes-db           1/1     1            1           9m20s
+```
+
+```
+$ kubectl get pods -A
+NAMESPACE            NAME                                         READY   STATUS    RESTARTS   AGE
+...
+default              vehicle-quotes-db-5fb576778-gx7j6            1/1     Running   0          9m22s
+```
+
+Remember you can also see them in the dashboard:
+
+![Dashboard DB deployment and pod](kubernetes/dashboard-db-deployment-and-pod.png)
+
+Let's try connecting to the Postgres instance that we just deployed. Take note of the pod's name and and try:
+
+```
+$ kubectl exec -it <DB_POD_NAME> -- bash
+```
+
+You'll get a bash session on the container that's running the database. For me, given the pod's autogenerated name, it looks like this:
+
+```
+root@vehicle-quotes-db-5fb576778-gx7j6:/#
+```
+
+From here, you can connect to the database using the [psql](https://www.postgresql.org/docs/13/app-psql.html) command line client. Remember that we told the Postgres instance to create a `vehicle_quotes` user. We set it up via the container environment variables on our deployment configuration. As a result, we can do `psql -U vehicle_quotes` to connect to the database. Put together, it all looks like this:
+
+```
+$ kubectl exec -it vehicle-quotes-db-5fb576778-gx7j6 -- bash
+root@vehicle-quotes-db-5fb576778-gx7j6:/# psql -U vehicle_quotes
+psql (13.3 (Debian 13.3-1.pgdg100+1))
+Type "help" for help.
+
+vehicle_quotes=# \l
+                                            List of databases
+      Name      |     Owner      | Encoding |  Collate   |   Ctype    |         Access privileges         
+----------------+----------------+----------+------------+------------+-----------------------------------
+ postgres       | vehicle_quotes | UTF8     | en_US.utf8 | en_US.utf8 | 
+ template0      | vehicle_quotes | UTF8     | en_US.utf8 | en_US.utf8 | =c/vehicle_quotes                +
+                |                |          |            |            | vehicle_quotes=CTc/vehicle_quotes
+ template1      | vehicle_quotes | UTF8     | en_US.utf8 | en_US.utf8 | =c/vehicle_quotes                +
+                |                |          |            |            | vehicle_quotes=CTc/vehicle_quotes
+ vehicle_quotes | vehicle_quotes | UTF8     | en_US.utf8 | en_US.utf8 | 
+(4 rows)
+```
+
+Pretty cool, don't you think? We have a database running on our cluster now with minimal effort. There's a slight problem though...
+
+## Persistent volumes and claims
+
+The problem in our database is that any changes are lost if the pod or container were to shut down or reset for some reason. This is because all the database files live inside the container's file system. So if the container is gone, the data is also gone.
+
+In Kubernetes, pods are supposed to be treated as ephemeral entities. The idea is that pods should easily be brought down and replaced by new podsm, and users and clients shouldn't even notice. This is all Kubernetes working as expected. That is to say, pods should be as stateless as possible to work well with this behavior. However, a database is, by definition, not stateless. So, what we need to do to solve this problem is have some available disk space from outside the cluster that can be used by our database to store its files. Something persistent that won't go away if the pod or container goes away. That's where [persistent volumes and persistent volume claims](https://kubernetes.io/docs/concepts/storage/persistent-volumes/) come in.
+
+We will use a persistent volume (PV) to define a directory in our host machine that we will allow our Postgres container to use to store data files. Then, a persistent volume claim (PVC) is used to define a "request" for some of that available disk space that a specific container can make. In short, a persistent volume says to k8s "here's some storage that the cluster can use"; and a persistent volume claim says "here's a portion of that storage that's available for containers to use".
+
+Start by tearing down our currently broken Postgres deployment:
+
+```
+$ kubectl delete -f db-deployment.yaml
+```
+
+Now let's add two new YAML configuration files. One for the persistent volume:
+
+```yaml
+# db-persistent-volume.yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: vehicle-quotes-postgres-data-persisent-volume
+  labels:
+    type: local
+spec:
+  claimRef:
+    namespace: default
+    name: vehicle-quotes-postgres-data-persisent-volume-claim
+  storageClassName: manual
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/home/kevin/projects/vehicle-quotes-postgres-data"
+```
+
+In this config file, we already know about the `kind` and `metadata` fields. A few of the other elements are interesting though:
+
+- `spec.claimRef`: Contains identifying information about the claim that's associated with the PV. Used to bind the PVC with a specific PVC. Notice how it matches the name defined in the PVC config file from below.
+- `spec.capacity.storage`: Is pretty straightforward in that it specifies the size of the persistent volume.
+- `spec.accessModes`: Defines how the PV can be accessed. In this case, we're using `ReadWriteOnce` so that it can only be used by a single node in the cluste which is allowed to read from and write into the PV.
+- `spec.hostPath.path`: Specifies the directory in the host machine's file system where the PV will be mounted. Simply put, the containers in the cluster will have access to the specific directory defined here. I've used `"/home/kevin/projects/vehicle-quotes-postgres-data"` because that makes sense on my own machine. I've you're following along, make sure to set it to something that makes sense in your environment.
+
+We also need another config file for the persistent volume claim:
+
+```yaml
+# db-persistent-volume-claim.yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: vehicle-quotes-postgres-data-persisent-volume-claim
+spec:
+  volumeName: vehicle-quotes-postgres-data-persisent-volume
+  storageClassName: manual
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+```
+
+Like I said, PVCs are essentially usage requests for PVs. So, the config file is simple in that it's mostly specified to match the PV.
+
+- `spec.volumeName`: Is the name of the PV that this PVC is going to access. Notice how it matches the name that we defined in the PV's config file.
+- `spec.resources.requests`: Defines how much space this PVC requests from the PV. In this case, we're just requesting all the space that the PV has available to it, as given by its config file: 5Gi.
 
 
 
 
-# What are we building
+
+
 
 
 # Building the web application image
