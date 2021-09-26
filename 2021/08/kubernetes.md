@@ -503,6 +503,8 @@ Remember you can also see them in the dashboard:
 
 ![Dashboard DB deployment and pod](kubernetes/dashboard-db-deployment-and-pod.png)
 
+## Connecting to the database
+
 Let's try connecting to the Postgres instance that we just deployed. Take note of the pod's name and and try:
 
 ```
@@ -717,17 +719,126 @@ vehicle_quotes=# \dt
 
 That's just what we wanted: the database is persisting independently of what happens to the pods and containers.
 
-# Deploying the web application
+## Exposing the database as a service
 
-Now that we've got the database sorted out, let's turn our attention to the app itself. As you've seen, Kubernetes runs apps as containers. That means that we need images to build those containers. A custom web application is no exception. We need to build a custom image that contains our application so that it can be deployed into Kubernetes. 
+Lastly, we need to expose the database as a service so that the rest of the cluster can access it without having to use explicit pod names.
 
-
-
-# Building the web application image
-
-# Making the image accessible to the cluster
+<!-- TODO: Do the service -->
 
 # Deploying the web application
+
+Now that we've got the database sorted out, let's turn our attention to the app itself. As you've seen, Kubernetes runs apps as containers. That means that we need images to build those containers. A custom web application is no exception. We need to build a custom image that contains our application so that it can be deployed into Kubernetes.
+
+> If you're following along, now would be a good time to download the source code of the web application that we're going to be playing with. You can find it on [GitHub](https://github.com/megakevin/end-point-blog-dotnet-5-web-api).
+
+## Building the web application image
+
+The first step for building a container image is writing a [Dockerfile](https://docs.docker.com/engine/reference/builder/). Since our application is a [Web API](https://dotnet.microsoft.com/apps/aspnet/apis) built using .NET 5, I'm going to use a slightly modified version of the Dockerfile used by [Visual Studio Code](https://code.visualstudio.com/)'s [development container demo for .NET](https://github.com/microsoft/vscode-remote-try-dotnetcore/blob/main/.devcontainer/Dockerfile
+). These development containers are excellent for, well... development. You can see the original in the link above, but here's mine:
+
+```dockerfile
+# [Choice] .NET version: 5.0, 3.1, 2.1
+ARG VARIANT="5.0"
+FROM mcr.microsoft.com/vscode/devcontainers/dotnet:0-${VARIANT}
+
+# [Option] Install Node.js
+ARG INSTALL_NODE="false"
+
+# [Option] Install Azure CLI
+ARG INSTALL_AZURE_CLI="false"
+
+# Install additional OS packages.
+RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
+    && apt-get -y install --no-install-recommends postgresql-client-common postgresql-client
+
+# Run the remaining commands as the "vscode" user
+USER vscode
+
+# Install EF and code generator development tools
+RUN dotnet tool install --global dotnet-ef
+RUN dotnet tool install --global dotnet-aspnet-codegenerator
+RUN echo 'export PATH="$PATH:/home/vscode/.dotnet/tools"' >> /home/vscode/.bashrc
+
+WORKDIR /app
+
+# Prevent the container from closing automatically
+ENTRYPOINT ["tail", "-f", "/dev/null"]
+```
+
+> There are [many other](https://github.com/microsoft/vscode-dev-containers/tree/main/containers) development containers for other languages and fameworks. Take a look at the [microsoft/vscode-dev-containers GitHub repo](https://github.com/microsoft/vscode-dev-containers) to learn more.
+
+An interesting thing about this Dockerfile is that we install the `psql` command line client so that we can connect to our Postgres database from within the web application container. The rest is stuff specific to .NET and the particular image we're basing this Dockerfile on, so don't sweat it too much.
+
+Be sure to save that into a new file called `Dockerfile`.
+
+## Making the image accessible to Kubernetes
+
+Now that we have a Dockerfile, we can use it to build an image that Kubernetes is able to use to build a container to deploy. So that Kubernetes can see it, we need to build it in a specific way and push it into a registry that's accessible to Kubernetes. Remember how we ran `microk8s enable registry` to install the registry add-on when we were setting up microk8s? That will pay off now.
+
+First, we build the image:
+
+```
+$ docker build . -f Dockerfile -t localhost:32000/vehicle-quotes-dev:registry
+```
+
+That will take some time to download and set up everything. Once that's done, we push the image to the registry:
+
+```
+$ docker push localhost:32000/vehicle-quotes-dev:registry
+```
+
+That will also take a little while.
+
+## Deploying the web application
+
+The next step is to create a deployment for the web app. Like usual, we start with a deployment YAML configuration file. Let's call it `web-deployment.yaml`:
+
+```yaml
+# web-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vehicle-quotes-web
+spec:
+  selector:
+    matchLabels:
+      app: vehicle-quotes-web
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: vehicle-quotes-web
+    spec:
+      containers:
+        - name: vehicle-quotes-web
+          image: localhost:32000/vehicle-quotes-dev:registry
+          ports:
+            - containerPort: 5000
+              name: "http"
+            - containerPort: 5001
+              name: "https"
+          volumeMounts:
+            - mountPath: "/app"
+              name: vehicle-quotes-source-code-storage
+          env:
+            - name: POSTGRES_DB
+              value: vehicle_quotes
+            - name: POSTGRES_USER
+              value: vehicle_quotes
+            - name: POSTGRES_PASSWORD
+              value: password
+            - name: CUSTOMCONNSTR_VehicleQuotesContext
+              value: Host=$(VEHICLE_QUOTES_DB_SERVICE_NAME);Database=$(POSTGRES_DB);Username=$(POSTGRES_USER);Password=$(POSTGRES_PASSWORD)
+          resources:
+            limits:
+              memory: 2Gi
+              cpu: "1"
+      volumes:
+        - name: vehicle-quotes-source-code-storage
+          persistentVolumeClaim:
+            claimName: vehicle-quotes-source-code-persisent-volume-claim
+```
+
 
 # Exposing the components as services
 
