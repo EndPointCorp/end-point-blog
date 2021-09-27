@@ -935,7 +935,7 @@ spec:
 
 ```
 
-Should be pretty self explanatory at this point. In this case, we expose two ports, one for HTTP and another for HTTPS. Our .NET 5 Web API works with both so that's why we specify them here. This configuration says that the service should expose port `30000` and send traffic to port `5000` on the container. Likewise, Traffic comming into the cluster from the outside world into port `30001` will be sent to port `5001` in the container. 
+Should be pretty self explanatory at this point. In this case, we expose two ports, one for HTTP and another for HTTPS. Our .NET 5 Web API works with both so that's why we specify them here. This configuration says that the service should expose port `30000` and send traffic that comes into that port from the outside world into port `5000` on the container. Likewise, outside traffic coming to port `30001` will be sent to port `5001` in the container. 
 
 Save that file as `web-service.yaml` and we're ready to apply the changes:
 
