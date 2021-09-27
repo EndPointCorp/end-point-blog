@@ -935,7 +935,7 @@ spec:
 
 ```
 
-Should be pretty self explanatory at this point. In this case, we expose two ports, one for HTTP and another for HTTPS. Our .NET 5 Web API works with both so that's why we specify them here.
+Should be pretty self explanatory at this point. In this case, we expose two ports, one for HTTP and another for HTTPS. Our .NET 5 Web API works with both so that's why we specify them here. This configuration says that the service should expose port `30000` and send traffic to port `5000` on the container. Likewise, Traffic comming into the cluster from the outside world into port `30001` will be sent to port `5001` in the container. 
 
 Save that file as `web-service.yaml` and we're ready to apply the changes:
 
@@ -1014,6 +1014,8 @@ It indicates that the application is up and running. Now, navigate to `http://lo
 
 ![Swagger!](kubernetes/swagger.png)
 
+Notice that `30000` is the port we specified in the `web-service.yaml`'s `nodePort` for the `http` port. That's the port that the service exposes to the world outside the cluster. Notice also how our .NET web app's development server listens to traffic coming from ports `5000` and `5001` for HTTP and HTTPS respectively. That's why we configured `web-service.yaml` like we did.
+
 Outstanding! All our hard work has paid off and we have a full fledged web application running in our Kubernetes cluster. This is quite a momentous occasion. We've built a custom image that can be used to create containers to run a .NET web application, pushed that image into our local registry so that k8s could use it, and deployed a fully functioning application. As a cherry on top, we made it so the source code is super easy to edit, as it lives within our own machine's filesystem and the container in the cluster accesses it directly from there. Quite an accomplishment.
 
 Now it's time to go the extra mile and organize things a bit. Let's talk about Kustomize next.
@@ -1031,3 +1033,5 @@ Config maps and vars
 # Building a deployment for the web application for prod
 
 patches
+
+
