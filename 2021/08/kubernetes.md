@@ -1022,6 +1022,8 @@ Now it's time to go the extra mile and organize things a bit. Let's talk about K
 
 # Putting it all together with Kustomize
 
+Kustomize is a tool that, together with declarative management using configuration files (which is what we've been doing thoughout this post), helps us improve our Kubernetes configurations. Kustomize has useful features that help with better organizing configuration files, managing configuration values, support for deployment variants (for things like dev vs test vs prod environments)
+
 Config maps and vars
 
 # Bonus: Using the cluster as a development environment with Visual Studio Code
