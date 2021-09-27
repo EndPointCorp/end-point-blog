@@ -948,6 +948,76 @@ $ kubectl apply -f web-service.yaml
 
 Feel free to explore the dashboard's "Deployments", "Pods", "Services", "Persistent Volumes" and "Persistent Volume Claims" sections to see the fruits of our labor.
 
+## Starting the application
+
+Let's now do some final setup and start up our application. Start by connecting to the web application pod:
+
+```
+$ kubectl exec -it vehicle-quotes-web-86cbc65c7f-5cpg8 -- bash
+```
+
+> Remember that the pod name will be different for you, so copy it from the dashboard or `kubectl get pods -A`.
+
+You'll get a prompt like this:
+
+```
+vscode ➜ /app (master ✗) $
+```
+
+Try `ls` to see all of the app's source code files courtesy of the PV that we set up before:
+
+```
+vscode ➜ /app (master ✗) $ ls
+Controllers     Dockerfile.prod  Models      README.md       Startup.cs            appsettings.Development.json  k8s      queries.sql
+Data            K8S_README.md    Program.cs  ResourceModels  Validations           appsettings.json              k8s_wip
+Dockerfile.dev  Migrations       Properties  Services        VehicleQuotes.csproj  database.dbml                 obj
+```
+
+Now it's just a few .NET commands to get the app up and running. First, compile and download packages:
+
+```
+$ dotnet build
+```
+
+That will take a while. Once done, let's build the databse schema:
+
+```
+$ dotnet ef database update
+```
+
+And finally, run the development web server:
+
+```
+$ dotnet run
+```
+
+> If you get a "System.InvalidOperationException: Unable to configure HTTPS endpoint." error message while trying `dotnet run`. Then follow the error message's instructions and run `dotnet dev-certs https --trust`. This will generate a development certificate so that the dev server can serve HTTPS.
+
+As a result, you should see this:
+
+```
+vscode ➜ /app (master ✗) $ dotnet run
+Building...
+info: Microsoft.Hosting.Lifetime[0]
+      Now listening on: https://0.0.0.0:5001
+info: Microsoft.Hosting.Lifetime[0]
+      Now listening on: http://0.0.0.0:5000
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /app
+```
+
+It indicates that the application is up and running. Now, navigate to `http://localhost:30000` in your browser of choice and you should see out REST API's Swagger UI:
+
+![Swagger!](kubernetes/swagger.png)
+
+Outstanding! All our hard work has paid off and we have a full fledged web application running in our Kubernetes cluster. This is quite a momentous occasion. We've built a custom image that can be used to create containers to run a .NET web application, pushed that image into our local registry so that k8s could use it, and deployed a fully functioning application. As a cherry on top, we made it so the source code is super easy to edit, as it lives within our own machine's filesystem and the container in the cluster accesses it directly from there. Quite an accomplishment.
+
+Now it's time to go the extra mile and organize things a bit. Let's talk about Kustomize next.
+
 # Putting it all together with Kustomize
 
 Config maps and vars
