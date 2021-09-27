@@ -721,9 +721,27 @@ That's just what we wanted: the database is persisting independently of what hap
 
 ## Exposing the database as a service
 
-Lastly, we need to expose the database as a service so that the rest of the cluster can access it without having to use explicit pod names.
+Lastly, we need to expose the database as a service so that the rest of the cluster can access it without having to use explicit pod names. We don't need this for our testing, but we do need it for later when we deploy our web app, so that it can reach the database. As you've seen, services are easy to create. Here's the YAML config file:
 
-<!-- TODO: Do the service -->
+```yaml
+# db-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: vehicle-quotes-db-service
+spec:
+  type: NodePort
+  selector:
+    app: vehicle-quotes-db
+  ports:
+    - name: "postgres"
+      protocol: TCP
+      port: 5432
+      targetPort: 5432
+      nodePort: 30432
+```
+
+Save that into a new `db-service.yaml` file and don't forget to `kubectl apply -f db-service.yaml`.
 
 # Deploying the web application
 
