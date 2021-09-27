@@ -846,7 +846,7 @@ spec:
             - name: POSTGRES_PASSWORD
               value: password
             - name: CUSTOMCONNSTR_VehicleQuotesContext
-              value: Host=$(VEHICLE_QUOTES_DB_SERVICE_NAME);Database=$(POSTGRES_DB);Username=$(POSTGRES_USER);Password=$(POSTGRES_PASSWORD)
+              value: Host=$(VEHICLE_QUOTES_DB_SERVICE_SERVICE_HOST);Database=$(POSTGRES_DB);Username=$(POSTGRES_USER);Password=$(POSTGRES_PASSWORD)
           resources:
             limits:
               memory: 2Gi
@@ -857,8 +857,96 @@ spec:
             claimName: vehicle-quotes-source-code-persisent-volume-claim
 ```
 
+This deployment configuration should look very familiar to you by now as it is very similar to the ones we've already seen. There are a few notable elements though:
 
-# Exposing the components as services
+- Notice how whe specified `localhost:32000/vehicle-quotes-dev:registry` as the container image. This is the exact same name of the image that we built and pushed into the registry before.
+- In the environment variables section, the one named `CUSTOMCONNSTR_VehicleQuotesContext` is interesting for a couple of reasons:
+  - First, the value is a Postgres connection string being built off of other environment variables using the following format: `$(ENV_VAR_NAME)`. That's a neat feature of Kubernetes config files that allows us to reference variables to build other ones.
+  - Second, the `VEHICLE_QUOTES_DB_SERVICE_SERVICE_HOST` environment variable used within that connection string is not defined anywhere in our configuration files. That's an automatic environment variable that Kubernetes injects on all containers when there are services available. In this case, it contains the hostname of the `vehicle-quotes-db-service` that we created a few sections ago. The automatic injection of this `*_SERVICE_HOST` variable always happens as long as the service is already created by the time that the pod gets created. We have already created the service so we should be fine using the variable here. As usual, there's more info in the [official documentation](https://kubernetes.io/docs/concepts/services-networking/service/#environment-variables).
+
+As you may have noticed, this deployment has a persistent volume. That's to store the application's source code. Or, more accurately, to make the source code, which lives in our machine, available to the container. This is a development setup after all, so we want to be able to edit the code from the comfort of our own file system, and have the container inside the cluster be aware of that.
+
+Anyway, let's create the assocuated persistet volume and persistent volume claim. Here's the PV (save it as `web-persistent-volume.yaml`):
+
+```yaml
+# web-persistent-volume.yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: vehicle-quotes-source-code-persisent-volume
+  labels:
+    type: local
+spec:
+  claimRef:
+    namespace: default
+    name: vehicle-quotes-source-code-persisent-volume-claim
+  storageClassName: manual
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/home/kevin/projects/vehicle-quotes"
+```
+
+And here's the PVC (save it as `web-persistent-volume-claim.yaml`):
+
+```yaml
+# web-persistent-volume-claim.yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: vehicle-quotes-source-code-persisent-volume-claim
+spec:
+  volumeName: vehicle-quotes-source-code-persisent-volume
+  storageClassName: manual
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+```
+
+The only notable element here is the PV's `hostPath`. I have it pointing to the path where I downloaded the app's source code from [GitHub](https://github.com/megakevin/end-point-blog-dotnet-5-web-api). Make sure to do the same on your end.
+
+Finally, tie it all up with a service that will expose the development build of our REST API. Here's the config file:
+
+```yaml
+# web-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: vehicle-quotes-web-service
+spec:
+  type: NodePort
+  selector:
+    app: vehicle-quotes-web
+  ports:
+    - name: "http"
+      protocol: TCP
+      port: 5000
+      targetPort: 5000
+      nodePort: 30000
+    - name: "https"
+      protocol: TCP
+      port: 5001
+      targetPort: 5001
+      nodePort: 30001
+
+```
+
+Should be pretty self explanatory at this point. In this case, we expose two ports, one for HTTP and another for HTTPS. Our .NET 5 Web API works with both so that's why we specify them here.
+
+Save that file as `web-service.yaml` and we're ready to apply the changes:
+
+```
+$ kubectl apply -f web-persistent-volume.yaml
+$ kubectl apply -f web-persistent-volume-claim.yaml
+$ kubectl apply -f web-deployment.yaml
+$ kubectl apply -f web-service.yaml
+```
+
+Feel free to explore the dashboard's "Deployments", "Pods", "Services", "Persistent Volumes" and "Persistent Volume Claims" sections to see the fruits of our labor.
 
 # Putting it all together with Kustomize
 
