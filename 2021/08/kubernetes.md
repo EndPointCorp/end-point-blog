@@ -1022,13 +1022,208 @@ Now it's time to go the extra mile and organize things a bit. Let's talk about K
 
 # Putting it all together with Kustomize
 
-Kustomize is a tool that, together with declarative management using configuration files (which is what we've been doing thoughout this post), helps us improve our Kubernetes configurations. Kustomize has useful features that help with better organizing configuration files, managing configuration values, support for deployment variants (for things like dev vs test vs prod environments)
+[Kustomize](https://kubectl.docs.kubernetes.io/guides/introduction/kustomize/) is a tool that helps us improve Kubernetes declarative object management with configuration files (which is what we've been doing throughout this post). Kustomize has useful features that help with better organizing configuration files, managing configuration variables and support for deployment variants (for things like dev vs test vs prod environments). Let's explore what Kustomize has to offer.
 
-Config maps and vars
+First, be sure to tear down all the objects that we have created so far as we will be replacing them later once we have a setup with Kustomize. This will work for that:
+
+```
+$ kubectl delete -f db-service.yaml
+$ kubectl delete -f db-deployment.yaml
+$ kubectl delete -f db-persistent-volume-claim.yaml
+$ kubectl delete -f db-persistent-volume.yaml
+
+$ kubectl delete -f web-service.yaml
+$ kubectl delete -f web-deployment.yaml
+$ kubectl delete -f web-persistent-volume-claim.yaml
+$ kubectl delete -f web-persistent-volume.yaml
+```
+
+Next, let's reorganize our `db-*` and `web-*` YAML files like this:
+
+```
+k8s
+├── db
+│   ├── db-deployment.yaml
+│   ├── db-persistent-volume-claim.yaml
+│   ├── db-persistent-volume.yaml
+│   └── db-service.yaml
+└── web
+    ├── web-deployment.yaml
+    ├── web-persistent-volume-claim.yaml
+    ├── web-persistent-volume.yaml
+    └── web-service.yaml
+```
+
+As you can see, we've put them all inside a new `k8s` directory, and further divided them into `db` and `web` sub-directories. `web-*` files went into the `web` directory and `db-*` files went into `db`. At this point, the prefixes on the files are a bit redundant so we can remove them. After all, we know what component they belong to because of the name of their respective sub-directories.
+
+So it should end up looking like this:
+
+```
+k8s
+├── db
+│   ├── deployment.yaml
+│   ├── persistent-volume-claim.yaml
+│   ├── persistent-volume.yaml
+│   └── service.yaml
+└── web
+    ├── deployment.yaml
+    ├── persistent-volume-claim.yaml
+    ├── persistent-volume.yaml
+    └── service.yaml
+```
+
+> kubectl's `apply` and `delete` commands support directories as well, not only individual files. That means that, at this point, to build up all of our objects you could simply do `kubectl apply -f k8s/db` and `kubectl apply -f k8s/web`. This is much better than what we've been doing until now where we had to specify every single file. Still, with Kustomize, we can do better than that...
+
+## The Kustomization file
+
+We can bring everything together with a `kustomization.yaml` file. For our setup, here's what it could look like:
+
+```yaml
+# k8s/kustomization.yaml
+kind: Kustomization
+
+resources:
+  - db/persistent-volume.yaml
+  - db/persistent-volume-claim.yaml
+  - db/service.yaml
+  - db/deployment.yaml
+  - web/persistent-volume.yaml
+  - web/persistent-volume-claim.yaml
+  - web/service.yaml
+  - web/deployment.yaml
+```
+
+This first iteration of the Kustomization file is simple. It just lists all of our other config files in the [`resources`](https://kubectl.docs.kubernetes.io/references/kustomize/kustomization/resource/) section in their relative locations. Save that as `k8s/kustomization.yaml` and you can apply it with the following:
+
+```
+$ kubectl apply -k k8s
+```
+
+The `-k` option tells `kubectl apply` to look for a Kustomization within the given directory and use that to build the cluster objects. After running it, you should see the familiar output:
+
+```
+service/vehicle-quotes-db-service created
+service/vehicle-quotes-web-service created
+persistentvolume/vehicle-quotes-postgres-data-persisent-volume created
+persistentvolume/vehicle-quotes-source-code-persisent-volume created
+persistentvolumeclaim/vehicle-quotes-postgres-data-persisent-volume-claim created
+persistentvolumeclaim/vehicle-quotes-source-code-persisent-volume-claim created
+deployment.apps/vehicle-quotes-db created
+deployment.apps/vehicle-quotes-web created
+```
+
+Feel free to explore the dashboard or `kubectl get` commands to see the objects that got created. You can connect to pods, run the app, query the database, everything. Just like we did before. The only difference is that now everything is neatly organized and there's a single file that serves as a bootstrap for the whole setup. All thanks to Kustomize and the `-k` option.
+
+`kubectl delete -k k8s` can be used to tear everything down.
+
+## Defining reusable configuration values with ConfigMaps
+
+Another useful feature of Kustomize is [ConfigMaps](https://kubernetes.io/docs/concepts/configuration/configmap/). These allow us to specify configuration variables in the Kustomization and use them throughout the rest of the resource config files. A good candidate to demonstrate their use are the environment variables that configure our Postgres database and the connection string in our web application.
+
+We're going to make changes to the config so be sure to tear everything down with `kubectl delete -k k8s`.
+
+We can start by adding the following to the `kustomization.yaml` file:
+
+```diff
+# k8s/kustomization.yaml
+kind: Kustomization
+
+resources:
+  - db/persistent-volume.yaml
+  - db/persistent-volume-claim.yaml
+  - db/service.yaml
+  - db/deployment.yaml
+  - web/persistent-volume.yaml
+  - web/persistent-volume-claim.yaml
+  - web/service.yaml
+  - web/deployment.yaml
+
++configMapGenerator:
++  - name: postgres-config
++    literals:
++      - POSTGRES_DB=vehicle_quotes
++      - POSTGRES_USER=vehicle_quotes
++      - POSTGRES_PASSWORD=password
+```
+
+The `configMapGenerator` section is where the magic happens. We've kept it simple and defined the variables as literals. `configMapGenerator` is much more flexible than that though, accepting external configuration files. [The official documentation](https://kubectl.docs.kubernetes.io/references/kustomize/kustomization/configmapgenerator/) has more details.
+
+Now, let's see what we have to do to actually use those values in our configuration.
+
+First up is the database deployment configuration file, `k8s/db/deployment.yaml`. Update its `env` section like so:
+
+```diff
+# k8s/db/deployment.yaml
+# ...
+env:
+-  - name: POSTGRES_DB
+-    value: vehicle_quotes
+-  - name: POSTGRES_USER
+-    value: vehicle_quotes
+-  - name: POSTGRES_PASSWORD
+-    value: password
++  - name: POSTGRES_DB
++    valueFrom:
++      configMapKeyRef:
++        name: postgres-config
++        key: POSTGRES_DB
++  - name: POSTGRES_USER
++    valueFrom:
++      configMapKeyRef:
++        name: postgres-config
++        key: POSTGRES_USER
++  - name: POSTGRES_PASSWORD
++    valueFrom:
++      configMapKeyRef:
++        name: postgres-config
++        key: POSTGRES_PASSWORD
+# ...
+```
+
+Notice how we've replaced the simple key-value pairs with new, more complex objects. Their `name`s are still the same, the have to be because that's what the Postgres database container expects. But instead of a litetal, "hard coded" value, we have cahnged them to these `valueFrom.configMapKeyRef` objects. Their `name`s match the `name` of the `configMapGenerator` we configured in the Kustomization. Their `key`s match the keys of the literal values that we specified in the `configMapGenerator`'s `literals` field. That's how it all ties together.
+
+Similarly, we can update the web application deployment configuration file, `k8s/web/deployment.yaml`. Its `env` section would look like this:
+
+```diff
+# k8s/web/deployment.yaml
+# ...
+env:
+-  - name: POSTGRES_DB
+-    value: vehicle_quotes
+-  - name: POSTGRES_USER
+-    value: vehicle_quotes
+-  - name: POSTGRES_PASSWORD
+-    value: password
++  - name: POSTGRES_DB
++    valueFrom:
++      configMapKeyRef:
++        name: postgres-config
++        key: POSTGRES_DB
++  - name: POSTGRES_USER
++    valueFrom:
++      configMapKeyRef:
++        name: postgres-config
++        key: POSTGRES_USER
++  - name: POSTGRES_PASSWORD
++    valueFrom:
++      configMapKeyRef:
++        name: postgres-config
++        key: POSTGRES_PASSWORD
+  - name: CUSTOMCONNSTR_VehicleQuotesContext
+    value: Host=$(VEHICLE_QUOTES_DB_SERVICE_SERVICE_HOST);Database=$(POSTGRES_DB);Username=$(POSTGRES_USER);Password=$(POSTGRES_PASSWORD)
+# ...
+```
+
+The exact same change as with the database deployment. Out with the hard coded values and in with the new ConfigMap-driven ones.
+
+Try `kubectl apply -k k8s` and you'll see that things are still working well. Try to connect to the web application pod and build and run the app.
+
+## Using bases, overlays and patches to create variants for production and development environments
+
+
 
 # Bonus: Using the cluster as a development environment with Visual Studio Code
 
-# Creating variants for a production and development environments
 
 # Building the prod web application image
 
