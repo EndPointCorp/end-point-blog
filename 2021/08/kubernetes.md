@@ -1218,7 +1218,7 @@ The exact same change as with the database deployment. Out with the hard coded v
 
 Try `kubectl apply -k k8s` and you'll see that things are still working well. Try to connect to the web application pod and build and run the app.
 
-## Using bases, overlays and patches to create variants for production and development environments
+# Creating variants for production and development environments
 
 The crowning achievement of Kustomize is its ability to fascilitate multiple deployment variants. Variants, as the name suggests, are variations of deployment configurations that are ideal for setting up various execution environments for an application. Think development, staging, production, etc. All based on a common set of reusable configurations to avoid superfluous repetition.
 
@@ -1227,6 +1227,8 @@ Kustomize does this by introducing the concepts of [bases and overlays](https://
 To demonstrate this, let's build two variants: one for development and another for production. Let's consider the one we've already built to be the development variant and work towards properly specifying it as so, and building a new production variant.
 
 > Note that the so-called "production" variant is not meant to be production worthy. It's just an example to illustrate the concepts and process of building bases and overlays. It does not meet the rigors of a proper production system.
+
+## Creating the base and overlays
 
 The strategy I like to use is to just copy everything over from one variant to another, impleemnt the differences, and identify the common elements and extract them into a base that both use.
 
@@ -1362,6 +1364,13 @@ At this point, you can run `kubectl apply -k k8s/dev` or `kubectl apply -k k8s/p
 
 > Don't forget to also do `kubectl delete -k k8s/dev` or `kubectl delete -k k8s/dev` when you're done testing the previous commands, as we'll continue doing changes to the configs.
 
+## Developing the production variant
+
+## Init containers
+
+## Overrriding container images via the Kustomization
+
+## Using patches for small, precise changes
 
 # Bonus: Using the cluster as a development environment with Visual Studio Code
 
