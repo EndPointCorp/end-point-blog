@@ -1220,6 +1220,147 @@ Try `kubectl apply -k k8s` and you'll see that things are still working well. Tr
 
 ## Using bases, overlays and patches to create variants for production and development environments
 
+The crowning achievement of Kustomize is its ability to fascilitate multiple deployment variants. Variants, as the name suggests, are variations of deployment configurations that are ideal for setting up various execution environments for an application. Think development, staging, production, etc. All based on a common set of reusable configurations to avoid superfluous repetition.
+
+Kustomize does this by introducing the concepts of [bases and overlays](https://kubectl.docs.kubernetes.io/guides/introduction/kustomize/#2-create-variants-using-overlays). A base is a set of configs that can be reused but not deployed on its own, and overlays are the actual configurations that use and extend the base and can be deployed.
+
+To demonstrate this, let's build two variants: one for development and another for production. Let's consider the one we've already built to be the development variant and work towards properly specifying it as so, and building a new production variant.
+
+> Note that the so-called "production" variant is not meant to be production worthy. It's just an example to illustrate the concepts and process of building bases and overlays. It does not meet the rigors of a proper production system.
+
+The strategy I like to use is to just copy everything over from one variant to another, impleemnt the differences, and identify the common elements and extract them into a base that both use.
+
+Let's begin by creating a new `k8s/dev` directory and move all of our YAML files into it. That will be our "development overlay". Then, make a copy the `k8s/dev` directory and all of its contents and call it `k8s/prod`. That will be our "production overlay". Let's also create a `k8s/base` directory to store the common files. That will be our "base". It should be like this:
+
+```
+k8s
+├── base
+├── dev
+│   ├── kustomization.yaml
+│   ├── db
+│   │   ├── deployment.yaml
+│   │   ├── persistent-volume-claim.yaml
+│   │   ├── persistent-volume.yaml
+│   │   └── service.yaml
+│   └── web
+│       ├── deployment.yaml
+│       ├── persistent-volume-claim.yaml
+│       ├── persistent-volume.yaml
+│       └── service.yaml
+└── prod
+    ├── kustomization.yaml
+    ├── db
+    │   ├── deployment.yaml
+    │   ├── persistent-volume-claim.yaml
+    │   ├── persistent-volume.yaml
+    │   └── service.yaml
+    └── web
+        ├── deployment.yaml
+        ├── persistent-volume-claim.yaml
+        ├── persistent-volume.yaml
+        └── service.yaml
+```
+
+Now we have two variants, but they don't do us any good because they aren't any different. we'll now go through each file one by one and identify which aspects need to be the same and which need to be different between our two variants:
+
+1. `db/deployment.yaml`: I want the same database instance configuration for both our variants. So we copy the file into `base/db/deployment.yaml` and delete `dev/db/deployment.yaml` and `prod/db/deployment.yaml`.
+2. `db/persistent-volume-claim.yaml`: This one is also the same for both variants. So we copy the file into `base/db/persistent-volume-claim.yaml` and delete `dev/db/persistent-volume-claim.yaml` and `prod/db/persistent-volume-claim.yaml`.
+3. `db/persistent-volume.yaml`: This file defines the location in the host machine that will be available for the Postgres instance that's running in the cluster to store its data files. I do want this path to be different between variants. So let's leave them where they are and do the following changes to them: For `dev/db/persistent-volume.yaml`, change its `spec.hostPath.path` to `"/path/to/vehicle-quotes-postgres-data-dev"`. For `prod/db/persistent-volume.yaml`, change its `spec.hostPath.path` to `"/path/to/vehicle-quotes-postgres-data-prod"`. Of course, adjust the paths to something that makes sense in your environment.
+4. `db/service.yaml`: There doesn't need to be any difference on this file between the variants so we copy the file into `base/db/service.yaml` and delete `dev/db/service.yaml` and `prod/db/service.yaml`.
+5. `web/deployment.yaml`: There are going to be quite a few differences between the dev and prod deplopyments of the web application. So we leave them as they are. Later we'll see the differences in great detail.
+6. `web/persistent-volume-claim.yaml`: This is also going to be different. Let's leave it be now and we'll come back to it later.
+7. `web/persistent-volume.yaml`: Same as `web/persistent-volume-claim.yaml`. Leave it be for now.
+8. `wev/service.yaml`: This one is going to be the same for both dev and prod so let's do the usual and copy it into `base/web/service.yaml` and remove `dev/web/service.yaml` and `prod/web/service.yaml`
+
+> The decissions taken when designing the overlays and the base may seem arbitrary. That's because they totally are. The purpose of this article is to demonstrate Kustomize's features, not produce a real world, production worthy setup.
+
+Once all those changes are done, you should have the following file structure:
+
+```
+k8s
+├── base
+│   ├── db
+│   │   ├── deployment.yaml
+│   │   ├── persistent-volume-claim.yaml
+│   │   └── service.yaml
+│   └── web
+│       └── service.yaml
+├── dev
+│   ├── db
+│   │   └── persistent-volume.yaml
+│   ├── kustomization.yaml
+│   └── web
+│       ├── deployment.yaml
+│       ├── persistent-volume-claim.yaml
+│       └── persistent-volume.yaml
+└── prod
+    ├── db
+    │   └── persistent-volume.yaml
+    ├── kustomization.yaml
+    └── web
+        ├── deployment.yaml
+        ├── persistent-volume-claim.yaml
+        └── persistent-volume.yaml
+```
+
+Much better, huh? We've gotten rid of quite a bit of repetition. But we're not done just yet. The base also needs a Kustomization file. Let's create it as `base/kustomization.yaml` and add these contents:
+
+```yaml
+# base/kustomization.yaml
+kind: Kustomization
+
+resources:
+  - db/persistent-volume-claim.yaml
+  - db/service.yaml
+  - db/deployment.yaml
+  - web/service.yaml
+
+configMapGenerator:
+  - name: postgres-config
+    literals:
+      - POSTGRES_DB=vehicle_quotes
+      - POSTGRES_USER=vehicle_quotes
+      - POSTGRES_PASSWORD=password
+```
+
+As you can see, the file is very similar to the other one we created. We just list the resources that we moved into the `base` directory and define the database environment variables via the `configMapGenerator`. We need to define the `configMapGenerator` here because we've moved all the other files that use them into here.
+
+Now that we have the base defined, we need to update the `kustomization.yaml` file of the overlays to use it. We also need to update them so that they only point to the resources that they need to.
+
+Here's what the changes to the "dev" overlay's `kustomization.yaml` file look like:
+
+```diff
+# dev/kustomization.yaml
+kind: Kustomization
+
++bases:
++  - ../base
+
+resources:
+  - db/persistent-volume.yaml
+-  - db/persistent-volume-claim.yaml
+-  - db/service.yaml
+-  - db/deployment.yaml
+  - web/persistent-volume.yaml
+  - web/persistent-volume-claim.yaml
+-  - web/service.yaml
+  - web/deployment.yaml
+
+-configMapGenerator:
+-  - name: postgres-config
+-    literals:
+-      - POSTGRES_DB=vehicle_quotes
+-      - POSTGRES_USER=vehicle_quotes
+-      - POSTGRES_PASSWORD=password
+```
+
+As you can see we removed the `configMapGenerator` and the individual resources that were already defined in the base. Most importantly, we've added a `bases` that indicates that our Kustomization over on the `base` directory is this overlay's base.
+
+The changes to the "prod" overlay's `kustomization.yaml` file are identical. Go ahead and make them.
+
+At this point, you can run `kubectl apply -k k8s/dev` or `kubectl apply -k k8s/prod` and things should work just like before.
+
+> Don't forget to also do `kubectl delete -k k8s/dev` or `kubectl delete -k k8s/dev` when you're done testing the previous commands, as we'll continue doing changes to the configs.
 
 
 # Bonus: Using the cluster as a development environment with Visual Studio Code
