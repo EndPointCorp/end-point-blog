@@ -1502,21 +1502,189 @@ This deployment config is similar to the one from the dev variant, but we've cha
 
 ## Init containers
 
-The most notable change is that we added an `initContainers` section. Init Containers are one-and-done containers that run specific processes during pod initialization. They are good for doing any sort of initialization tasks that need to be run once before a pod is ready to work. After they've done their task, they go away, and the pod is left with the containers specified in the `containers` section, like usual. In this case, we've added two init containers.
+The most notable change is that we added an `initContainers` section. Init Containers are one-and-done containers that run specific processes during pod initialization. They are good for doing any sort of initialization tasks that need to be run once, before a pod is ready to work. After they've done their task, they go away, and the pod is left with the containers specified in the `containers` section, like usual. In this case, we've added two init containers.
 
-First is the `await-db-ready` one. This is a simple container based on the `postgres:13` image that just sits there waiting for the database to be available. This is thanks to its `command` and `args`, which make up a simple shell script that leverages the `pg_isready` tool to continuously checks if connections can be made to our database.
+First is the `await-db-ready` one. This is a simple container based on the `postgres:13` image that just sits there waiting for the database to be available. This is thanks to its `command` and `args`, which make up a simple shell script that leverages the `pg_isready` tool to continuously checks if connections can be made to our database:
 
-## Overrriding container images via the Kustomization
+```yaml
+command: ["/bin/sh"]
+args: ["-c", "until pg_isready -h $(VEHICLE_QUOTES_DB_SERVICE_SERVICE_HOST) -p 5432; do echo waiting for database; sleep 2; done;"]
+```
+
+This will cause pod initialization stops until the database is ready.
+
+We need to wait for the database to be ready before continuing because of what the second init container does. Among other things, the `build` init container sets up the database. The database needs to be available for it to be able to to do that. The init container also downloads dependencies, builds the app, produces the deployable artifacts and copies them over to the directory from which the app will run:: `/app`. You can see that all that is specified in the `command` and `args` elements, which define a few shell commands to do those tasks.
+
+```yaml
+command: ["/bin/sh"]
+args: ["-c", "dotnet restore -v n && dotnet ef database update && dotnet publish -c release -o /app --no-restore"]
+```
+
+Another interesting aspect of this deployment is the volume that we've defined. It's at the bottom of the file, take a quick look:
+
+```yaml
+volumes:
+  - name: vehicle-quotes-source-code-storage
+    emptyDir: {}
+```
+
+This one is different from the ones we've seen before which relied on persistent volumes and persistent volume claims. This one uses `emptyDir`. This means that this volume will provide storage that is persistent throughout the lifetime of the pod. That is, not tied to any specific container. In other words, even when the container dies, the files in this volume will live on. This is a mechamism that's useful when we want one container to produce some files that another container will use. In our case, the `build` init container produces the artifacts/binaries that the main `vehicle-quotes-web` container will use to actually run the web app.
+
+The other only notable difference of this deployment is how its containers use the new prod image that we built before, instead of the dev one. That is, it uses `localhost:32000/vehicle-quotes-prod:registry` instead of `localhost:32000/vehicle-quotes-dev:registry`.
+
+The rest of the deployment doesn't have anything we haven't already seen. Feel free to explore it.
+
+As you saw, this prod variant doesn't need to access the source code via a persistent volume pointing to a path in the host machine. So, we don't need PV and PVC deffinitions for this variant. So feel free to delete `k8s/prod/web/persistent-volume.yaml` and `k8s/prod/web/persistent-volume-claim.yaml`. Remember to also remove them from the `resources` section in `k8s/prod/kustomization.yaml`.
+
+With those changes done, we can fire up our prod varians with:
+
+```
+$ kubectl apply -k k8s_wip/prod
+```
+
+The web pod will take quite a while to properly start up because it's downloading dependencies and building the .NET project. Remember that you can use `kubectl get pods -A` to see their current status. Take note of their names and you would also be able to see container specific logs.
+
+- Use `kubectl logs -f <vehicle-quotes-web-pod-name> await-db-ready` to see the logs from the `await-db-ready` init conainer.
+- Use `kubectl logs -f <vehicle-quotes-web-pod-name> build` to see the logs from the `build` init conainer.
+
+This deployment automatically starts the web app, so after the pods are running (or green in the dashboard!), we can just navigate to it via a web browser. We've configured the deployment to only work over HTTPS (as given by the `ports` section in the `vehicle-quotes-web` container) so, this is the only URL that's available to us: https://localhost:30001. We can navigate to it and see the familiar screen:
+
+![SwaggerUI on prod](kubernetes/swagger-prod.png)
+
+At this point, we fianlly have fully working, distinct variants. However, we can take our configuration a few steps further by leveraging some aditional Kustomize features.
 
 ## Using patches for small, precise changes
 
-# Bonus: Using the cluster as a development environment with Visual Studio Code
+Right now, the persistent volume configurations for the databases of both variants are pretty much identical. The only difference is the `hostPath`. With patches, we can focus in on that property and variate it specifically.
 
+To do it, we first copy either of the variant's `db/persistent-volume.yaml` into `k8s/base/db/persistent-volume.yaml`. That will serve as the common ground for overlays to "patch over". Then, we can create the patches.
 
-# Building the prod web application image
+First, the one for the one for the dev variant:
 
-# Building a deployment for the web application for prod
+```yaml
+# k8s/dev/db/persistent-volume-host-path.yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: vehicle-quotes-postgres-data-persisent-volume
+spec:
+  hostPath:
+    path: "/home/kevin/projects/vehicle-quotes-postgres-data-dev"
+```
 
-patches
+And then the one for the prod variant:
 
+```yaml
+# k8s/prod/db/persistent-volume-host-path.yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: vehicle-quotes-postgres-data-persisent-volume
+spec:
+  hostPath:
+    path: "/home/kevin/projects/vehicle-quotes-postgres-data-prod"
+```
 
+As you can see, these patches are sort of truncated persistent volume configs which only include the "kind", "name" and the value that actually changes: the `hostPath`.
+
+Once those are saved, we need to specify them in their respective `kustomization.yaml`. It's the same modification to both `k8s/dev/kustomization.yaml` and `k8s/prod/kustomization.yaml`. Just remove the `db/persistent-volume.yaml` item from their `resources` sections and add the following to both of them:
+
+```yaml
+patches:
+  - db/persistent-volume-host-path.yaml
+```
+
+Rigth now, `k8s/dev/kustomization.yaml` should be:
+
+```yaml
+# k8s/dev/kustomization.yaml
+kind: Kustomization
+
+bases:
+  - ../base
+
+resources:
+  - web/persistent-volume.yaml
+  - web/persistent-volume-claim.yaml
+  - web/deployment.yaml
+
+patches:
+  - db/persistent-volume-host-path.yaml
+```
+
+And `k8s/prod/kustomization.yaml` should be:
+
+```yaml
+# k8s/prod/kustomization.yaml
+kind: Kustomization
+
+bases:
+  - ../base
+
+resources:
+  - web/deployment.yaml
+
+patches:
+  - db/persistent-volume-host-path.yaml
+```
+
+## Overriding container images
+
+Another improvement that we can do is use the `images` element in the `kustomization.yaml` file to control the web app images used by the deployments in the variants. This is easier for maintenance as it's defined in one single, expected place. Also, the full name of the image doesn't have to be used throughout the configs so it prevents repetition. 
+
+To put it in practice, add the following at the end of the `k8s/dev/kustomization.yaml` file:
+
+```yaml
+images:
+  - name: vehicle-quotes-web
+    newName: localhost:32000/vehicle-quotes-dev
+    newTag: registry
+```
+
+Similar thing with `k8s/prod/kustomization.yaml`, only use the prod image for this one:
+
+```yaml
+images:
+  - name: vehicle-quotes-web
+    newName: localhost:32000/vehicle-quotes-prod
+    newTag: registry
+```
+
+Now, we can replace any mention of `localhost:32000/vehicle-quotes-dev` in the dev variant, and any mention of `localhost:32000/vehicle-quotes-prod` in the prod variant with `vehicle-quotes-web`. Which is simpler.
+
+In `k8s/dev/web/deployment.yaml`:
+
+```diff
+# ...
+    spec:
+      containers:
+        - name: vehicle-quotes-web
+-          image: localhost:32000/vehicle-quotes-dev:registry
++          image: vehicle-quotes-web
+          ports:
+# ...
+```
+
+And in `k8s/prod/web/deployment.yaml`:
+
+```diff
+# ...
+
+        - name: build
+-          image: localhost:32000/vehicle-quotes-prod:registry
++          image: vehicle-quotes-web
+          workingDir: "/source"
+          command: ["/bin/sh"]
+# ...
+
+      containers:
+        - name: vehicle-quotes-web
+-          image: localhost:32000/vehicle-quotes-prod:registry
++          image: vehicle-quotes-web
+          workingDir: "/app"
+# ...
+```
+
+Once that's all done, you should be able to `kubectl apply -k k8s/dev` or `kubectl apply -k k8s/prod` and everything should work fine. Be sure to `kubectl delete` before `kubectl apply`'ing a different variant though, as both of them cannot coexist in the same cluster, due to many objects having the same name.
+
+# Useful commands
