@@ -426,6 +426,10 @@ The application that we are going to deploy into our cluster is a simple one wit
 
 > If you're interested in learning more about the process of actually writing that app, it's all documented in another blog post: [Building REST APIs with .NET 5, ASP.NET Core, and PostgreSQL](https://www.endpoint.com/blog/2021/07/dotnet-5-web-api/).
 
+> If you're following along, now would be a good time to download the source code of the web application that we're going to be playing with. You can find it on [GitHub](https://github.com/megakevin/end-point-blog-dotnet-5-web-api). From now on, we'll use that as the root deirectory of all the files we create and modify.
+
+> Also, be sure to delete or put aside the `k8s` directory. We'll be building that throughot the rest of this post.
+
 # Deploying the database
 
 Let's begin with the Postgres database. Similar as before, we start by setting up a deployment with one pod and one container. We can do so with a deployment configuration YAML file like this:
@@ -747,8 +751,6 @@ Save that into a new `db-service.yaml` file and don't forget to `kubectl apply -
 
 Now that we've got the database sorted out, let's turn our attention to the app itself. As you've seen, Kubernetes runs apps as containers. That means that we need images to build those containers. A custom web application is no exception. We need to build a custom image that contains our application so that it can be deployed into Kubernetes.
 
-> If you're following along, now would be a good time to download the source code of the web application that we're going to be playing with. You can find it on [GitHub](https://github.com/megakevin/end-point-blog-dotnet-5-web-api).
-
 ## Building the web application image
 
 The first step for building a container image is writing a [Dockerfile](https://docs.docker.com/engine/reference/builder/). Since our application is a [Web API](https://dotnet.microsoft.com/apps/aspnet/apis) built using .NET 5, I'm going to use a slightly modified version of the Dockerfile used by [Visual Studio Code](https://code.visualstudio.com/)'s [development container demo for .NET](https://github.com/microsoft/vscode-remote-try-dotnetcore/blob/main/.devcontainer/Dockerfile
@@ -866,7 +868,7 @@ This deployment configuration should look very familiar to you by now as it is v
 
 As you may have noticed, this deployment has a persistent volume. That's to store the application's source code. Or, more accurately, to make the source code, which lives in our machine, available to the container. This is a development setup after all, so we want to be able to edit the code from the comfort of our own file system, and have the container inside the cluster be aware of that.
 
-Anyway, let's create the assocuated persistet volume and persistent volume claim. Here's the PV (save it as `web-persistent-volume.yaml`):
+Anyway, let's create the associated persistent volume and persistent volume claim. Here's the PV (save it as `web-persistent-volume.yaml`):
 
 ```yaml
 # web-persistent-volume.yaml
@@ -1288,17 +1290,17 @@ k8s
 │   └── web
 │       └── service.yaml
 ├── dev
+│   ├── kustomization.yaml
 │   ├── db
 │   │   └── persistent-volume.yaml
-│   ├── kustomization.yaml
 │   └── web
 │       ├── deployment.yaml
 │       ├── persistent-volume-claim.yaml
 │       └── persistent-volume.yaml
 └── prod
+    ├── kustomization.yaml
     ├── db
     │   └── persistent-volume.yaml
-    ├── kustomization.yaml
     └── web
         ├── deployment.yaml
         ├── persistent-volume-claim.yaml
@@ -1362,11 +1364,147 @@ The changes to the "prod" overlay's `kustomization.yaml` file are identical. Go 
 
 At this point, you can run `kubectl apply -k k8s/dev` or `kubectl apply -k k8s/prod` and things should work just like before.
 
-> Don't forget to also do `kubectl delete -k k8s/dev` or `kubectl delete -k k8s/dev` when you're done testing the previous commands, as we'll continue doing changes to the configs.
+> Don't forget to also do `kubectl delete -k k8s/dev` or `kubectl delete -k k8s/prod` when you're done testing the previous commands, as we'll continue doing changes to the configs.
 
 ## Developing the production variant
 
+I want our production variant to use a different image for the web application. That means a new Dockerfile. If you downloaded the source code from the GitHub repo, you should see the production Dockerfile in the root directory of the repo. It's called `Dockerfile.prod`.
+
+> The other one we created before for development is there as well as `Dockerfile.dev`
+
+Here's what it looks like:
+
+```Dockerfile
+# Dockerfile.prod
+ARG VARIANT="5.0"
+FROM mcr.microsoft.com/dotnet/sdk:${VARIANT}
+
+RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
+    && apt-get -y install --no-install-recommends postgresql-client-common postgresql-client
+
+RUN dotnet tool install --global dotnet-ef
+ENV PATH $PATH:/root/.dotnet/tools
+
+RUN dotnet dev-certs https
+
+WORKDIR /source
+
+COPY . .
+
+ENTRYPOINT ["tail", "-f", "/dev/null"]
+```
+
+The first takewaway from this production Dockerfile is that it is simpler, when compared to the development one. The image here is based on the official `dotnet/sdk` instead of the one from `vscode/devcontainers/dotnet`. Also, this Dockerfile just copies all the source code into a `/source` directory within the image. This is because we want to "ship" the image with everything it needs to work without much manual intervention. Also, we won't be editing code live on the container, as opposed to how we set up the dev variant which allowed that. So we just copy the files over instead of leaving them out to provision them later via volumes. We'll see how that pans out later.
+
+Now that we have our production Dockerfile, we can built an image with it and push it to the registry so that Kubernetes can use it. So, save that file as `Dockerfile.prod` (or just use the one that's already in the repo), and run the following commands:
+
+Build the image with:
+
+```
+$ docker build . -f Dockerfile.prod -t localhost:32000/vehicle-quotes-prod:registry
+```
+
+And push it to the registry with:
+
+```
+$ docker push localhost:32000/vehicle-quotes-prod:registry
+```
+
+Now, we need to modify our prod variant's deployment configuration so that it can work well with this new prod image. Here's what the new `k8s/prod/web/deployment.yaml` should look like:
+
+```yaml
+# k8s/prod/web/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vehicle-quotes-web
+spec:
+  selector:
+    matchLabels:
+      app: vehicle-quotes-web
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: vehicle-quotes-web
+    spec:
+      initContainers:
+        - name: await-db-ready
+          image: postgres:13
+          command: ["/bin/sh"]
+          args: ["-c", "until pg_isready -h $(VEHICLE_QUOTES_DB_SERVICE_SERVICE_HOST) -p 5432; do echo waiting for database; sleep 2; done;"]
+        - name: build
+          image: localhost:32000/vehicle-quotes-dev:registry
+          workingDir: "/source"
+          command: ["/bin/sh"]
+          args: ["-c", "dotnet restore -v n && dotnet ef database update && dotnet publish -c release -o /app --no-restore"]
+          volumeMounts:
+            - mountPath: "/app"
+              name: vehicle-quotes-source-code-storage
+          env:
+            - name: POSTGRES_DB
+              valueFrom:
+                configMapKeyRef:
+                  name: postgres-config
+                  key: POSTGRES_DB
+            - name: POSTGRES_USER
+              valueFrom:
+                configMapKeyRef:
+                  name: postgres-config
+                  key: POSTGRES_USER
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  name: postgres-config
+                  key: POSTGRES_PASSWORD
+            - name: CUSTOMCONNSTR_VehicleQuotesContext
+              value: Host=$(VEHICLE_QUOTES_DB_SERVICE_SERVICE_HOST);Database=$(POSTGRES_DB);Username=$(POSTGRES_USER);Password=$(POSTGRES_PASSWORD)
+      containers:
+        - name: vehicle-quotes-web
+          image: localhost:32000/vehicle-quotes-dev:registry
+          workingDir: "/app"
+          command: ["/bin/sh"]
+          args: ["-c", "dotnet VehicleQuotes.dll --urls=https://0.0.0.0:5001/"]
+          ports:
+            - containerPort: 5001
+              name: "https"
+          volumeMounts:
+            - mountPath: "/app"
+              name: vehicle-quotes-source-code-storage
+          env:
+            - name: POSTGRES_DB
+              valueFrom:
+                configMapKeyRef:
+                  name: postgres-config
+                  key: POSTGRES_DB
+            - name: POSTGRES_USER
+              valueFrom:
+                configMapKeyRef:
+                  name: postgres-config
+                  key: POSTGRES_USER
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  name: postgres-config
+                  key: POSTGRES_PASSWORD
+            - name: CUSTOMCONNSTR_VehicleQuotesContext
+              value: Host=$(VEHICLE_QUOTES_DB_SERVICE_SERVICE_HOST);Database=$(POSTGRES_DB);Username=$(POSTGRES_USER);Password=$(POSTGRES_PASSWORD)
+          resources:
+            limits:
+              memory: 2Gi
+              cpu: "1"
+      volumes:
+        - name: vehicle-quotes-source-code-storage
+          emptyDir: {}
+```
+
+This deployment config is similar to the one from the dev variant, but we've changed a few elements on it.
+
 ## Init containers
+
+The most notable change is that we added an `initContainers` section. Init Containers are one-and-done containers that run specific processes during pod initialization. They are good for doing any sort of initialization tasks that need to be run once before a pod is ready to work. After they've done their task, they go away, and the pod is left with the containers specified in the `containers` section, like usual. In this case, we've added two init containers.
+
+First is the `await-db-ready` one. This is a simple container based on the `postgres:13` image that just sits there waiting for the database to be available. This is thanks to its `command` and `args`, which make up a simple shell script that leverages the `pg_isready` tool to continuously checks if connections can be made to our database.
 
 ## Overrriding container images via the Kustomization
 
