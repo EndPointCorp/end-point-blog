@@ -9,9 +9,6 @@ tags:
 - postgres
 ---
 
-![A market at night](kubernetes/market-cropped.jpg)
-[Photo](https://unsplash.com/photos/cpbWNtkKoiU) by [Sam Beasley](https://unsplash.com/@sam_beasley)
-
 The devops world seems to have been taken over by [Kubernetes](https://kubernetes.io/) during the past few years. And rightfully so, I believe, as it is a great piece of software that promises and delivers when it comes to managing deployments of complex systems.
 
 Kubernetes is hard though. But it's all good, I'm not a devops engineer. As a software developer, I shouldn't care about any of that. Or should I? Well... Yes. I know that very well after being thrown head first into a project that heavily involves Kubernetes, without knowing the first thing about it.
@@ -1696,4 +1693,24 @@ And in `k8s/prod/web/deployment.yaml`:
 
 Once that's all done, you should be able to `kubectl apply -k k8s/dev` or `kubectl apply -k k8s/prod` and everything should work fine. Be sure to `kubectl delete` before `kubectl apply`'ing a different variant though, as both of them cannot coexist in the same cluster, due to many objects having the same name.
 
+# Closing thoughts
+
+Wow! That was a good one. In this post I've captured all the knowledge that I wish I had when I first encountered Kuebrnetes. We went from knowing nothing to being able to put together a competent environment. We figured out how to install Kubernetes locally via microk8s, along with a few interesting add-ons. We learned about the main concepts in Kubernetes like nodes, pods, images, containers, deployments, services and persistent volumes. Most importantly, we learned how to define and create them using a declarative configuration file approach.
+
+Then, we learned about Kustomize and how to use it to implement variants of our configurations. And we did all that by actually getting our hands dirty and, step by step, deploying a real web application and it's backing database system. When all was said and done, a simple `kubeclt apply -k <kustomization>` was all it took to get the app up and running fully. Not bad, eh?
+
 # Useful commands
+
+- Start up microk8s: `microk8s start`
+- Shut down microk8s: `microk8s stop`
+- Check microk8s info: `microk8s status`
+- Start up the k8s dashboard: `microk8s dashboard-proxy`
+- Get available pods on all namespaces: `kubectl get pods -A`
+- Watch and follow the logs on a specific container in a pod: `kubectl logs -f <POD_NAME> <CONTAINER_NAME>`
+- Open a shell into the default container in a pod: `kubectl exec -it <POD_NAME> -- bash`
+- Create a k8s resource given a YAML file or directory: `kubectl apply -f <file_name_or_directory>`
+- Delete a k8s resource given a YAML file or directory: `kubectl delete -f <file_name_or_directory>`
+- Create k8s resources with Kustomize: `kubectl apply -k <kustomization_dir>`
+- Delete k8s resources with Kustomize: `kubectl delete -k <kustomization_dir>`
+- Build custom images for the k8s registry: `docker build . -f <DOCKERFILE> -t localhost:32000/<IMAGE_NAME>:registry`
+- Push custom images to the k8s registry: `docker push localhost:32000/<IMAGE_NAME>:registry`
