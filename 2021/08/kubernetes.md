@@ -31,9 +31,9 @@ There are a few basic concepts that we need to be familiar with in order to effe
 
 First up is "[containers](https://kubernetes.io/docs/concepts/containers/)". If you're interested in Kubernetes, chances are that you've already been exposed to some sort of container technology like [Docker](https://www.docker.com/). If not, no worries. For our purposes here, we can think of containers as an isolated process, with its own resources and file system, in which an application can run.
 
-A container has all the software dependencies that an application needs to run, including the application itself. From the application's perspective, the container is its execution environment: the "machine" in which it's running. In more practical terms, a container is a form of packaging, delivering and executing an application. The advantage is that, instead of installing the application and its dependencies directly into the machine that's going to run it; having it containerized allows for a container runtime (like Docker) to just run it as a self-contained unit. This makes it possible for the application to be able to run anywhere that has the container runtime installed, with minimal configuration.
+A container has all the software dependencies that an application needs to run, including the application itself. From the application's perspective, the container is its execution environment: the "machine" in which it's running. In more practical terms, a container is a form of packaging, delivering and executing an application. The advantage is that, instead of installing the application and its dependencies directly into the machine that's going to run it; having it containerized allows for a container runtime (like Docker) to just run it as a self-contained unit. This makes it possible for the application to run anywhere that has the container runtime installed, with minimal configuration.
 
-Something very related to containers is the concept of [images](https://kubernetes.io/docs/concepts/containers/images/). You can think of images as basically the blueprint for containers. An image is the spec, and the container is the instance that's actually running.
+Something very closely related to containers is the concept of [images](https://kubernetes.io/docs/concepts/containers/images/). You can think of images as the blueprint for containers. An image is the spec, and the container is the instance that's actually running.
 
 When deploying applications into Kubernetes, this is how it runs them: via containers. In other words, for Kubernetes to be able to run an application, it needs to be delivered to it within a container.
 
@@ -97,13 +97,13 @@ NAME     STATUS   ROLES    AGE   VERSION
 pop-os   Ready    <none>   67d   v1.21.4-3+e5758f73ed2a04
 ```
 
-The only node in the cluster is your own machine. In my case, my machine is called "pop-os" so that's what shows up. Yout can get more information out of this commant by using `kubectl get nodes -o wide`.
+The only node in the cluster is your own machine. In my case, my machine is called "pop-os" so that's what shows up. You can get more information out of this commant by using `kubectl get nodes -o wide`.
 
 ## Installing add-ons
 
 microk8s supports many add-ons that we can use to enhance our Kubernetes installation. We are going to need a few of them so let's install them now. They are:
 
-1. The [dashboard](https://microk8s.io/docs/addon-dashboard), which gives us a nice web GUI which serves as a window into our cluster. In there we can see all that's running, see logs, run commands, etc.
+1. The [dashboard](https://microk8s.io/docs/addon-dashboard), which gives us a nice web GUI which serves as a window into our cluster. In there we can see everything that's running, see logs, run commands, etc.
 2. [dns](https://microk8s.io/docs/addon-dns), which sets up DNS for within the cluster. In general it's a good idea to enable this one because other add-ons use it.
 3. storage, which allows the cluster to access the host machine's disk for storage. The application that we will deploy needs a persistent database so we need that plugin to make it happen.
 4. registry, which sets up a [container image](https://kubernetes.io/docs/concepts/containers/images/) registry that Kubernetes can access. Like I said, Kubernetes runs containerized applications. Containers are based on images. So, having this add-on allows us to define an image for our application and make it available to Kubernetes.
@@ -127,7 +127,7 @@ The dashboard is one we can play with right now. In order to access it, first ru
 $ microk8s dashboard-proxy
 ```
 
-That will start up a proxy that will allow is access into the dashboard. The command will give you an URL and login token that you can use to access the dashboard. It results in an output like this:
+That will start up a proxy into the dashboard. The command will give you an URL and login token that you can use to access the dashboard. It results in an output like this:
 
 ```
 Checking if Dashboard is running.
@@ -158,7 +158,7 @@ In kubernetes, there are various ways of managing objects like deployments. For 
 
 > You can learn more about the different ways of interacting with kubernetes objects in [the official documentation](https://kubernetes.io/docs/concepts/overview/working-with-objects/object-management/).
 
-So, simply put, if we want to create a deployment then we need to author a file that defines it. A simple deployment specification looks like this:
+So, simply put, if we want to create a deployment, then we need to author a file that defines it. A simple deployment specification looks like this:
 
 ```yml
 # nginx-deployment.yaml
@@ -229,7 +229,7 @@ nginx-deployment   3/3     3            3           2m54s
 
 As you can see, the deployment that we just created is right there with the name that we gave it.
 
-Like I said, deployments are used to manage pods, and that's just what the `READY`, `UP-TO-DATE` and `AVAILABLE` columns allude to with those values of `3`. This deployment has three pods because, in our yaml file, we specified we wanted three replicas with the `replicas: 3` line. Each "replica" is a pod. For our example, that means that we will have three instances of [NGINX](https://www.nginx.com/) running side by side.
+Like I said, deployments are used to manage pods, and that's just what the `READY`, `UP-TO-DATE` and `AVAILABLE` columns allude to with those values of `3`. This deployment has three pods because, in our YAML file, we specified we wanted three replicas with the `replicas: 3` line. Each "replica" is a pod. For our example, that means that we will have three instances of [NGINX](https://www.nginx.com/) running side by side.
 
 We can see the pods that have been created for us with this command:
 
@@ -246,7 +246,7 @@ nginx-deployment-66b6c48dd5-xmnl2   1/1     Running   0          55m
 nginx-deployment-66b6c48dd5-sfzxm   1/1     Running   0          55m
 ```
 
-The exact names will vary, as the ids are autogenerated. But as you can see, this command gives us some basic information about our pods. Remember that pods are the ones that actually run our workloads via containers. The `READY` field is particularly insteresting in this sense then because it tells us hoy many containers are running in the pods vs how many are supposed to run. So, `1/1` means that the pod has one container ready out of 1. In other words, the pod is fully ready.
+The exact names will vary, as the ids are autogenerated. But as you can see, this command gives us some basic information about our pods. Remember that pods are the ones that actually run our workloads via containers. The `READY` field is particularly insteresting in this sense because it tells us how many containers are running in the pods vs how many are supposed to run. So, `1/1` means that the pod has one container ready out of 1. In other words, the pod is fully ready.
 
 ## Using the dashboard to explore a deployment
 
@@ -260,7 +260,7 @@ There's also "Workload status" that has some nice graphs giving us a glance at t
 
 > Don't worry too much about replica sets right now, as we seldom interact with them directly. Suffice it to say, replica sets are objects that deployments rely on to make sure that the number of specified replica pods is maintained. As always, there's more info in [the official documentation](https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/).
 
-Scroll down a little bit more and you'll find the "Deployments" and "Pods" sections, which contain the inforamtion that we've already seen via `kubectl` before.
+Scroll down a little bit more and you'll find the "Deployments" and "Pods" sections, which contain the information that we've already seen via `kubectl` before.
 
 ![Dashboard home: deployments and pods](kubernetes/dashboard-home-deployments-and-pods.png)
 
@@ -297,15 +297,15 @@ spec:
 
 This example is very simple, but it touches on the key aspects of deployment configuration. We will be building more complex deployments as we work through this article, but this is a great start. Let's start at the top:
 
-- `apiVersion`: Under the hood, a kubernetes cluster exposes its functionality via a REST API. We seldom interact with this API directly because we have `kubectl` that takes care of it for us. `kubectl` takes our commands, translates them into HTTP requests that the k8s REST API can understand, sends them, and gives us back the results. So, this `apiVersion` field specifies which version of the k8s REST API are we expecting to talk to.
-- `kind`: It represents the type of object that the configuration file defines. All objects in kubernetes can be managed via yml configuration files and `kubectl apply`. So, this field specifies which one we are managing at any given time.
+- `apiVersion`: Under the hood, a kubernetes cluster exposes its functionality via a REST API. We seldom interact with this API directly because we have `kubectl` that takes care of it for us. `kubectl` takes our commands, translates them into HTTP requests that the k8s REST API can understand, sends them, and gives us back the results. So, this `apiVersion` field specifies which version of the k8s REST API we are expecting to talk to.
+- `kind`: It represents the type of object that the configuration file defines. All objects in kubernetes can be managed via YAML configuration files and `kubectl apply`. So, this field specifies which one we are managing at any given time.
 - `metadata.name`: Quite simply, the name of the object. It's how we and kubernetes refers to it.
 - `metadata.labels`: These help us further categorize cluster objects. These have no real effect in the system so they are useful for user help more than anything else.
 - `spec`: This contains the actual functional specification for the behavior of the deployment. More details below.
 - `spec.replicas`: The number of replica pods that the deployment should create. We already talked a bit about this before.
 - `spec.selector.labels`: This is one case when labels are actually important. Remember that when we create deployments, replica sets and pods are created with it. Within the k8s cluster, they each are their own individual objects though. This field is the mechanism that k8s uses to associate a given deployment with its replica set and pods. In practice, that means that whatever labels are in this field need to match the labels in `spec.template.metadata.labels`. More on that one below.
 - `spec.template`: Specifies the configuration of the pods that will be part of the deployment.
-- `spec.template.metadata.labels`: Very similar to `metadata.labels`. The only difference is that those labels are added to the deployment; while these ones are added to the pods. The only notable thing is that these labels are key for the deplopyment to know which pods it should care about. As explained in above.
+- `spec.template.metadata.labels`: Very similar to `metadata.labels`. The only difference is that those labels are added to the deployment; while these ones are added to the pods. The only notable thing is that these labels are key for the deplopyment to know which pods it should care about. As explained in above in `spec.selector.labels`.
 - `spec.template.spec`: This section specifies the actual functional configuration of the pods.
 - `spec.template.spec.containers`: This section specifies the configuration of the containers that will be running inside the pods. It's an array so there can be many. In our example we have only one.
 - `spec.template.spec.containers[0].name`: The name of the container.
@@ -316,7 +316,7 @@ This example is very simple, but it touches on the key aspects of deployment con
 
 ## Connecting to the containers in the pods
 
-Kubernetes allows us to connect to the containers running inside pods. This is pretty easy to do with `kubectl`. All we need to know the name of the pod and the container that we want to connect to. If the pod is running only one container (like our nginx one does), then we don't need the container name. We can find out the names of our pods with:
+Kubernetes allows us to connect to the containers running inside pods. This is pretty easy to do with `kubectl`. All we need to know the name of the pod and the container that we want to connect to. If the pod is running only one container (like our NGINX one does), then we don't need the container name. We can find out the names of our pods with:
 
 ```
 $ kubectl get pods
@@ -354,7 +354,7 @@ The dashboard is quite useful, right?
 
 So far, we've learned quite a bit about deployments. How to specify and create them, how to explore them via command line and the dashboard, how to interact with the pods, etc. We haven't seen a very important part yet though: Actually accessing the application that has been deployed. That's where [services](https://kubernetes.io/docs/concepts/services-networking/service/) come in. We use services to expose an application running in a set of pods to the world outside the cluster.
 
-Here's what a configuration file for a service that exposes access to our nginx deployment could look like:
+Here's what a configuration file for a service that exposes access to our NGINX deployment could look like:
 
 ```yml
 # nginx-service.yaml
@@ -407,7 +407,7 @@ We can access our service in a few different ways. We can use its "cluster IP" w
 
 ![NGINX via Cluster IP](kubernetes/nginx-via-cluster-ip.png)
 
-Another way is by using the "NodePort". Remember that the "NodePort" specifies the port in which the service will be available on every node of the cluster. With our current microk8s setup, our own machine is a node in the cluster. So, we can also access the nginx that's running in our kubernetes cluster using `localhost:30080`. `30080` is given by the `spec.ports[0].nodePort` field in the service configuration file from before. Try it out:
+Another way is by using the "NodePort". Remember that the "NodePort" specifies the port in which the service will be available on every node of the cluster. With our current microk8s setup, our own machine is a node in the cluster. So, we can also access the NGINX that's running in our kubernetes cluster using `localhost:30080`. `30080` is given by the `spec.ports[0].nodePort` field in the service configuration file from before. Try it out:
 
 ![NGINX via NodePort](kubernetes/nginx-via-nodeport.png)
 
@@ -423,9 +423,9 @@ The application that we are going to deploy into our cluster is a simple one wit
 
 > If you're interested in learning more about the process of actually writing that app, it's all documented in another blog post: [Building REST APIs with .NET 5, ASP.NET Core, and PostgreSQL](https://www.endpoint.com/blog/2021/07/dotnet-5-web-api/).
 
-> If you're following along, now would be a good time to download the source code of the web application that we're going to be playing with. You can find it on [GitHub](https://github.com/megakevin/end-point-blog-dotnet-5-web-api). From now on, we'll use that as the root deirectory of all the files we create and modify.
+> If you're following along, now would be a good time to download the source code of the web application that we're going to be playing with. You can find it on [GitHub](https://github.com/megakevin/end-point-blog-dotnet-5-web-api). From now on, we'll use that as the root directory of all the files we create and modify.
 
-> Also, be sure to delete or put aside the `k8s` directory. We'll be building that throughot the rest of this post.
+> Also, be sure to delete or put aside the `k8s` directory. We'll be building that throughout the rest of this post.
 
 # Deploying the database
 
@@ -468,8 +468,8 @@ spec:
 
 This deployment configuration YAML file is similar to the one we used for NGINX before, but it introduces a few new elements:
 
-- `spec.template.spec.containers[0].ports[0].name`: We can give specific names to ports which we can reference later, elsewhere in the k8s configurations.
-- `spec.template.spec.containers[0].env`: This is a list of environment variables that will be defined in the container inside the pod. In this case, we've specified a few variables that are necessary to configure the Postgres instance that will be running. We're using [the official Postgres image from Dockerhub](https://hub.docker.com/_/postgres), and it calls for these variables. Their purpose should be self explanatory, they specify database name, username and password.
+- `spec.template.spec.containers[0].ports[0].name`: We can give specific names to ports which we can reference later, elsewhere in the k8s configurations. This field is for that.
+- `spec.template.spec.containers[0].env`: This is a list of environment variables that will be defined in the container inside the pod. In this case, we've specified a few variables that are necessary to configure the Postgres instance that will be running. We're using [the official Postgres image from Dockerhub](https://hub.docker.com/_/postgres), and it calls for these variables. Their purpose is straightforward: they specify database name, username and password.
 - `spec.template.spec.containers[0].resources`: This field defines the hardware resources that the container needs in order to function. We can specify upper limits with `limits` and lower ones with `requests`. You can learn more about resource management in [the official documentation](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/). In our case, we've kept it simple and used `limits` to prevent the container from using more than 4Gi of memory and 2 CPU cores.
 
 Now, let's save that YAML into a new file called `db-deployment.yaml` and run the following:
@@ -545,7 +545,7 @@ Pretty cool, don't you think? We have a database running on our cluster now with
 
 The problem in our database is that any changes are lost if the pod or container were to shut down or reset for some reason. This is because all the database files live inside the container's file system. So if the container is gone, the data is also gone.
 
-In Kubernetes, pods are supposed to be treated as ephemeral entities. The idea is that pods should easily be brought down and replaced by new podsm, and users and clients shouldn't even notice. This is all Kubernetes working as expected. That is to say, pods should be as stateless as possible to work well with this behavior. However, a database is, by definition, not stateless. So, what we need to do to solve this problem is have some available disk space from outside the cluster that can be used by our database to store its files. Something persistent that won't go away if the pod or container goes away. That's where [persistent volumes and persistent volume claims](https://kubernetes.io/docs/concepts/storage/persistent-volumes/) come in.
+In Kubernetes, pods are supposed to be treated as ephemeral entities. The idea is that pods should easily be brought down and replaced by new pods, and users and clients shouldn't even notice. This is all Kubernetes working as expected. That is to say, pods should be as stateless as possible to work well with this behavior. However, a database is, by definition, not stateless. So, what we need to do to solve this problem is have some available disk space from outside the cluster that can be used by our database to store its files. Something persistent that won't go away if the pod or container goes away. That's where [persistent volumes and persistent volume claims](https://kubernetes.io/docs/concepts/storage/persistent-volumes/) come in.
 
 We will use a persistent volume (PV) to define a directory in our host machine that we will allow our Postgres container to use to store data files. Then, a persistent volume claim (PVC) is used to define a "request" for some of that available disk space that a specific container can make. In short, a persistent volume says to k8s "here's some storage that the cluster can use"; and a persistent volume claim says "here's a portion of that storage that's available for containers to use".
 
@@ -584,10 +584,10 @@ In this config file, we already know about the `kind` and `metadata` fields. A f
 
 - `spec.claimRef`: Contains identifying information about the claim that's associated with the PV. Used to bind the PVC with a specific PVC. Notice how it matches the name defined in the PVC config file from below.
 - `spec.capacity.storage`: Is pretty straightforward in that it specifies the size of the persistent volume.
-- `spec.accessModes`: Defines how the PV can be accessed. In this case, we're using `ReadWriteOnce` so that it can only be used by a single node in the cluste which is allowed to read from and write into the PV.
+- `spec.accessModes`: Defines how the PV can be accessed. In this case, we're using `ReadWriteOnce` so that it can only be used by a single node in the cluster which is allowed to read from and write into the PV.
 - `spec.hostPath.path`: Specifies the directory in the host machine's file system where the PV will be mounted. Simply put, the containers in the cluster will have access to the specific directory defined here. I've used `"/home/kevin/projects/vehicle-quotes-postgres-data"` because that makes sense on my own machine. I've you're following along, make sure to set it to something that makes sense in your environment.
 
-> hostPath is just one type of persistent volume which works well for development deployments. For production, managed Kubernetes implementations like the ones from Google or Amazon have their own types which are more appropriate for production.
+> `hostPath` is just one type of persistent volume which works well for development deployments. For production, managed Kubernetes implementations like the ones from Google or Amazon have their own types which are more appropriate for production.
 
 We also need another config file for the persistent volume claim:
 
@@ -610,7 +610,7 @@ spec:
 Like I said, PVCs are essentially usage requests for PVs. So, the config file is simple in that it's mostly specified to match the PV.
 
 - `spec.volumeName`: Is the name of the PV that this PVC is going to access. Notice how it matches the name that we defined in the PV's config file.
-- `spec.resources.requests`: Defines how much space this PVC requests from the PV. In this case, we're just requesting all the space that the PV has available to it, as given by its config file: 5Gi.
+- `spec.resources.requests`: Defines how much space this PVC requests from the PV. In this case, we're just requesting all the space that the PV has available to it, as given by its config file: `5Gi`.
 
 ## Configuring the deployment to use the PVC
 
@@ -663,7 +663,7 @@ Then, up in the `containers` section, we define a `volumeMounts` element. We use
 
 In summary: We created a persistent volume that defines some disk space in our machine that's available to the cluster; then, we defined a persistent volume claim that represents a request of some of that space that a container can have access to; after that, we defined a volume within our pod configuration in our deployment to point to that persistent volume claim; and finally, we defined a volume mount in our container that uses that volume to store Postgres' database files.
 
-By setting it up this way, we've made it so that regardless of how many Postgres pods come and go, the database files will always be persisted, because they now live outside the container. They are stored in our host machine instead.
+By setting it up this way, we've made it so that regardless of how many Postgres pods come and go, the database files will always be persisted, because the files now live outside of the container. They are stored in our host machine instead.
 
 ## Applying changes
 
@@ -683,13 +683,13 @@ Persistent volume claims can be found in the the "Persistent Volume Claims" opti
 
 ![Dashboard persistent volume claim](kubernetes/dashboard-persistent-volume-claim.png)
 
-Now, try connecting to the database (using `kubectl exec -it vehicle-quotes-db-5fb576778-gx7j6 -- bash` and then `psql -U vehicle_quotes`) and creating some tables. Something simple like this would work:
+Now, try connecting to the database (using `kubectl exec -it <VEHICLE_QUOTES_DB_POD_NAME> -- bash` and then `psql -U vehicle_quotes`) and creating some tables. Something simple like this would work:
 
 ```sql
 CREATE TABLE test (test_field varchar);
 ```
 
-Now, delete the objects:
+Now, close `psql` and the `bash` in the pod and delete the objects:
 
 ```
 $ kubectl delete -f db-deployment.yaml
@@ -750,8 +750,7 @@ Now that we've got the database sorted out, let's turn our attention to the app 
 
 ## Building the web application image
 
-The first step for building a container image is writing a [Dockerfile](https://docs.docker.com/engine/reference/builder/). Since our application is a [Web API](https://dotnet.microsoft.com/apps/aspnet/apis) built using .NET 5, I'm going to use a slightly modified version of the Dockerfile used by [Visual Studio Code](https://code.visualstudio.com/)'s [development container demo for .NET](https://github.com/microsoft/vscode-remote-try-dotnetcore/blob/main/.devcontainer/Dockerfile
-). These development containers are excellent for, well... development. You can see the original in the link above, but here's mine:
+The first step for building a container image is writing a [Dockerfile](https://docs.docker.com/engine/reference/builder/). Since our application is a [Web API](https://dotnet.microsoft.com/apps/aspnet/apis) built using .NET 5, I'm going to use a slightly modified version of the Dockerfile used by [Visual Studio Code](https://code.visualstudio.com/)'s [development container demo for .NET](https://github.com/microsoft/vscode-remote-try-dotnetcore/blob/main/.devcontainer/Dockerfile). These development containers are excellent for, well... development. You can see the original in the link above, but here's mine:
 
 ```dockerfile
 # [Choice] .NET version: 5.0, 3.1, 2.1
@@ -786,16 +785,16 @@ ENTRYPOINT ["tail", "-f", "/dev/null"]
 
 An interesting thing about this Dockerfile is that we install the `psql` command line client so that we can connect to our Postgres database from within the web application container. The rest is stuff specific to .NET and the particular image we're basing this Dockerfile on, so don't sweat it too much.
 
-Be sure to save that into a new file called `Dockerfile`.
+If you've downloaded the source code, this Dockerfile should already be there as `Dockerfile.dev`.
 
 ## Making the image accessible to Kubernetes
 
-Now that we have a Dockerfile, we can use it to build an image that Kubernetes is able to use to build a container to deploy. So that Kubernetes can see it, we need to build it in a specific way and push it into a registry that's accessible to Kubernetes. Remember how we ran `microk8s enable registry` to install the registry add-on when we were setting up microk8s? That will pay off now.
+Now that we have a Dockerfile, we can use it to build an image that Kubernetes is able to use to build a container to deploy. So that Kubernetes can see it, we need to build it in a specific way and push it into a registry that's accessible to Kubernetes. Remember how we ran `microk8s enable registry` to install the registry add-on when we were setting up microk8s? That will pay off now, as that's the registry to which we'll push our image.
 
 First, we build the image:
 
 ```
-$ docker build . -f Dockerfile -t localhost:32000/vehicle-quotes-dev:registry
+$ docker build . -f Dockerfile.dev -t localhost:32000/vehicle-quotes-dev:registry
 ```
 
 That will take some time to download and set up everything. Once that's done, we push the image to the registry:
@@ -1009,7 +1008,7 @@ info: Microsoft.Hosting.Lifetime[0]
       Content root path: /app
 ```
 
-It indicates that the application is up and running. Now, navigate to `http://localhost:30000` in your browser of choice and you should see out REST API's Swagger UI:
+It indicates that the application is up and running. Now, navigate to `http://localhost:30000` in your browser of choice and you should see our REST API's Swagger UI:
 
 ![Swagger!](kubernetes/swagger.png)
 
@@ -1021,7 +1020,7 @@ Now it's time to go the extra mile and organize things a bit. Let's talk about K
 
 # Putting it all together with Kustomize
 
-[Kustomize](https://kubectl.docs.kubernetes.io/guides/introduction/kustomize/) is a tool that helps us improve Kubernetes declarative object management with configuration files (which is what we've been doing throughout this post). Kustomize has useful features that help with better organizing configuration files, managing configuration variables and support for deployment variants (for things like dev vs test vs prod environments). Let's explore what Kustomize has to offer.
+[Kustomize](https://kubectl.docs.kubernetes.io/guides/introduction/kustomize/) is a tool that helps us improve Kubernetes' declarative object management with configuration files (which is what we've been doing throughout this post). Kustomize has useful features that help with better organizing configuration files, managing configuration variables and support for deployment variants (for things like dev vs test vs prod environments). Let's explore what Kustomize has to offer.
 
 First, be sure to tear down all the objects that we have created so far as we will be replacing them later once we have a setup with Kustomize. This will work for that:
 
@@ -1054,6 +1053,8 @@ k8s
 ```
 
 As you can see, we've put them all inside a new `k8s` directory, and further divided them into `db` and `web` sub-directories. `web-*` files went into the `web` directory and `db-*` files went into `db`. At this point, the prefixes on the files are a bit redundant so we can remove them. After all, we know what component they belong to because of the name of their respective sub-directories.
+
+> There's already a `k8s` directory in the repo. Feel free to get rid of it as we will build it back up from scratch now.
 
 So it should end up looking like this:
 
@@ -1098,7 +1099,7 @@ This first iteration of the Kustomization file is simple. It just lists all of o
 $ kubectl apply -k k8s
 ```
 
-The `-k` option tells `kubectl apply` to look for a Kustomization within the given directory and use that to build the cluster objects. After running it, you should see the familiar output:
+The `-k` option tells `kubectl apply` to look for a Kustomization within the given directory and use that to build the cluster objects. After running it, you should see familiar output:
 
 ```
 service/vehicle-quotes-db-service created
@@ -1111,7 +1112,7 @@ deployment.apps/vehicle-quotes-db created
 deployment.apps/vehicle-quotes-web created
 ```
 
-Feel free to explore the dashboard or `kubectl get` commands to see the objects that got created. You can connect to pods, run the app, query the database, everything. Just like we did before. The only difference is that now everything is neatly organized and there's a single file that serves as a bootstrap for the whole setup. All thanks to Kustomize and the `-k` option.
+Feel free to explore the dashboard or `kubectl get` commands to see the objects that got created. You can connect to pods, run the app, query the database, everything. Just like we did before. The only difference is that now everything is neatly organized and there's a single file that serves as bootstrap for the whole setup. All thanks to Kustomize and the `-k` option.
 
 `kubectl delete -k k8s` can be used to tear everything down.
 
@@ -1179,7 +1180,7 @@ env:
 # ...
 ```
 
-Notice how we've replaced the simple key-value pairs with new, more complex objects. Their `name`s are still the same, the have to be because that's what the Postgres database container expects. But instead of a litetal, "hard coded" value, we have cahnged them to these `valueFrom.configMapKeyRef` objects. Their `name`s match the `name` of the `configMapGenerator` we configured in the Kustomization. Their `key`s match the keys of the literal values that we specified in the `configMapGenerator`'s `literals` field. That's how it all ties together.
+Notice how we've replaced the simple key-value pairs with new, more complex objects. Their `name`s are still the same, they have to be because that's what the Postgres database container expects. But instead of a litetal, "hard coded" value, we have changed them to these `valueFrom.configMapKeyRef` objects. Their `name`s match the `name` of the `configMapGenerator` we configured in the Kustomization. Their `key`s match the keys of the literal values that we specified in the `configMapGenerator`'s `literals` field. That's how it all ties together.
 
 Similarly, we can update the web application deployment configuration file, `k8s/web/deployment.yaml`. Its `env` section would look like this:
 
@@ -1213,7 +1214,7 @@ env:
 # ...
 ```
 
-The exact same change as with the database deployment. Out with the hard coded values and in with the new ConfigMap-driven ones.
+This is the exact same change as with the database deployment. Out with the hard coded values and in with the new ConfigMap-driven ones.
 
 Try `kubectl apply -k k8s` and you'll see that things are still working well. Try to connect to the web application pod and build and run the app.
 
@@ -1223,13 +1224,13 @@ The crowning achievement of Kustomize is its ability to fascilitate multiple dep
 
 Kustomize does this by introducing the concepts of [bases and overlays](https://kubectl.docs.kubernetes.io/guides/introduction/kustomize/#2-create-variants-using-overlays). A base is a set of configs that can be reused but not deployed on its own, and overlays are the actual configurations that use and extend the base and can be deployed.
 
-To demonstrate this, let's build two variants: one for development and another for production. Let's consider the one we've already built to be the development variant and work towards properly specifying it as so, and building a new production variant.
+To demonstrate this, let's build two variants: one for development and another for production. Let's consider the one we've already built to be the development variant and work towards properly specifying it as so, and then building a new production variant.
 
 > Note that the so-called "production" variant is not meant to be production worthy. It's just an example to illustrate the concepts and process of building bases and overlays. It does not meet the rigors of a proper production system.
 
 ## Creating the base and overlays
 
-The strategy I like to use is to just copy everything over from one variant to another, impleemnt the differences, and identify the common elements and extract them into a base that both use.
+The strategy I like to use is to just copy everything over from one variant to another, implement the differences, identify the common elements and extract them into a base that both use.
 
 Let's begin by creating a new `k8s/dev` directory and move all of our YAML files into it. That will be our "development overlay". Then, make a copy the `k8s/dev` directory and all of its contents and call it `k8s/prod`. That will be our "production overlay". Let's also create a `k8s/base` directory to store the common files. That will be our "base". It should be like this:
 
@@ -1262,13 +1263,13 @@ k8s
         └── service.yaml
 ```
 
-Now we have two variants, but they don't do us any good because they aren't any different. we'll now go through each file one by one and identify which aspects need to be the same and which need to be different between our two variants:
+Now we have two variants, but they don't do us any good because they aren't any different. We'll now go through each file one by one and identify which aspects need to be the same and which need to be different between our two variants:
 
 1. `db/deployment.yaml`: I want the same database instance configuration for both our variants. So we copy the file into `base/db/deployment.yaml` and delete `dev/db/deployment.yaml` and `prod/db/deployment.yaml`.
 2. `db/persistent-volume-claim.yaml`: This one is also the same for both variants. So we copy the file into `base/db/persistent-volume-claim.yaml` and delete `dev/db/persistent-volume-claim.yaml` and `prod/db/persistent-volume-claim.yaml`.
 3. `db/persistent-volume.yaml`: This file defines the location in the host machine that will be available for the Postgres instance that's running in the cluster to store its data files. I do want this path to be different between variants. So let's leave them where they are and do the following changes to them: For `dev/db/persistent-volume.yaml`, change its `spec.hostPath.path` to `"/path/to/vehicle-quotes-postgres-data-dev"`. For `prod/db/persistent-volume.yaml`, change its `spec.hostPath.path` to `"/path/to/vehicle-quotes-postgres-data-prod"`. Of course, adjust the paths to something that makes sense in your environment.
-4. `db/service.yaml`: There doesn't need to be any difference on this file between the variants so we copy the file into `base/db/service.yaml` and delete `dev/db/service.yaml` and `prod/db/service.yaml`.
-5. `web/deployment.yaml`: There are going to be quite a few differences between the dev and prod deplopyments of the web application. So we leave them as they are. Later we'll see the differences in great detail.
+4. `db/service.yaml`: There doesn't need to be any difference on this file between the variants so we copy it into `base/db/service.yaml` and delete `dev/db/service.yaml` and `prod/db/service.yaml`.
+5. `web/deployment.yaml`: There are going to be quite a few differences between the dev and prod deployments of the web application. So we leave them as they are. Later we'll see the differences in great detail.
 6. `web/persistent-volume-claim.yaml`: This is also going to be different. Let's leave it be now and we'll come back to it later.
 7. `web/persistent-volume.yaml`: Same as `web/persistent-volume-claim.yaml`. Leave it be for now.
 8. `wev/service.yaml`: This one is going to be the same for both dev and prod so let's do the usual and copy it into `base/web/service.yaml` and remove `dev/web/service.yaml` and `prod/web/service.yaml`
@@ -1304,10 +1305,10 @@ k8s
         └── persistent-volume.yaml
 ```
 
-Much better, huh? We've gotten rid of quite a bit of repetition. But we're not done just yet. The base also needs a Kustomization file. Let's create it as `base/kustomization.yaml` and add these contents:
+Much better, huh? We've gotten rid of quite a bit of repetition. But we're not done just yet. The base also needs a Kustomization file. Let's create it as `k8s/base/kustomization.yaml` and add these contents:
 
 ```yaml
-# base/kustomization.yaml
+# k8s/base/kustomization.yaml
 kind: Kustomization
 
 resources:
@@ -1326,7 +1327,7 @@ configMapGenerator:
 
 As you can see, the file is very similar to the other one we created. We just list the resources that we moved into the `base` directory and define the database environment variables via the `configMapGenerator`. We need to define the `configMapGenerator` here because we've moved all the other files that use them into here.
 
-Now that we have the base defined, we need to update the `kustomization.yaml` file of the overlays to use it. We also need to update them so that they only point to the resources that they need to.
+Now that we have the base defined, we need to update the `kustomization.yaml` files of the overlays to use it. We also need to update them so that they only point to the resources that they need to.
 
 Here's what the changes to the "dev" overlay's `kustomization.yaml` file look like:
 
@@ -1355,19 +1356,17 @@ resources:
 -      - POSTGRES_PASSWORD=password
 ```
 
-As you can see we removed the `configMapGenerator` and the individual resources that were already defined in the base. Most importantly, we've added a `bases` that indicates that our Kustomization over on the `base` directory is this overlay's base.
+As you can see we removed the `configMapGenerator` and the individual resources that were already defined in the base. Most importantly, we've added a `bases` element that indicates that our Kustomization over on the `base` directory is this overlay's base.
 
 The changes to the "prod" overlay's `kustomization.yaml` file are identical. Go ahead and make them.
 
 At this point, you can run `kubectl apply -k k8s/dev` or `kubectl apply -k k8s/prod` and things should work just like before.
 
-> Don't forget to also do `kubectl delete -k k8s/dev` or `kubectl delete -k k8s/prod` when you're done testing the previous commands, as we'll continue doing changes to the configs.
+> Don't forget to also do `kubectl delete -k k8s/dev` or `kubectl delete -k k8s/prod` when you're done testing the previous commands, as we'll continue doing changes to the configs. Keep in mind also that both variants can't be deployed at the same time. So be sure `delete` one before `apply`'ing the other.
 
 ## Developing the production variant
 
 I want our production variant to use a different image for the web application. That means a new Dockerfile. If you downloaded the source code from the GitHub repo, you should see the production Dockerfile in the root directory of the repo. It's called `Dockerfile.prod`.
-
-> The other one we created before for development is there as well as `Dockerfile.dev`
 
 Here's what it looks like:
 
@@ -1391,9 +1390,9 @@ COPY . .
 ENTRYPOINT ["tail", "-f", "/dev/null"]
 ```
 
-The first takewaway from this production Dockerfile is that it is simpler, when compared to the development one. The image here is based on the official `dotnet/sdk` instead of the one from `vscode/devcontainers/dotnet`. Also, this Dockerfile just copies all the source code into a `/source` directory within the image. This is because we want to "ship" the image with everything it needs to work without much manual intervention. Also, we won't be editing code live on the container, as opposed to how we set up the dev variant which allowed that. So we just copy the files over instead of leaving them out to provision them later via volumes. We'll see how that pans out later.
+The first takewaway from this production Dockerfile is that it is simpler, when compared to the development one. The image here is based on the official `dotnet/sdk` instead of the dev-ready one from `vscode/devcontainers/dotnet`. Also, this Dockerfile just copies all the source code into a `/source` directory within the image. This is because we want to "ship" the image with everything it needs to work without too much manual intervention. Also, we won't be editing code live on the container, as opposed to how we set up the dev variant which allowed that. So we just copy the files over instead of leaving them out to provision them later via volumes. We'll see how that pans out later.
 
-Now that we have our production Dockerfile, we can built an image with it and push it to the registry so that Kubernetes can use it. So, save that file as `Dockerfile.prod` (or just use the one that's already in the repo), and run the following commands:
+Now that we have our production Dockerfile, we can build an image with it and push it to the registry so that Kubernetes can use it. So, save that file as `Dockerfile.prod` (or just use the one that's already in the repo), and run the following commands:
 
 Build the image with:
 
@@ -1501,16 +1500,16 @@ This deployment config is similar to the one from the dev variant, but we've cha
 
 The most notable change is that we added an `initContainers` section. Init Containers are one-and-done containers that run specific processes during pod initialization. They are good for doing any sort of initialization tasks that need to be run once, before a pod is ready to work. After they've done their task, they go away, and the pod is left with the containers specified in the `containers` section, like usual. In this case, we've added two init containers.
 
-First is the `await-db-ready` one. This is a simple container based on the `postgres:13` image that just sits there waiting for the database to be available. This is thanks to its `command` and `args`, which make up a simple shell script that leverages the `pg_isready` tool to continuously checks if connections can be made to our database:
+First is the `await-db-ready` one. This is a simple container based on the `postgres:13` image that just sits there waiting for the database to become available. This is thanks to its `command` and `args`, which make up a simple shell script that leverages the `pg_isready` tool to continuously check if connections can be made to our database:
 
 ```yaml
 command: ["/bin/sh"]
 args: ["-c", "until pg_isready -h $(VEHICLE_QUOTES_DB_SERVICE_SERVICE_HOST) -p 5432; do echo waiting for database; sleep 2; done;"]
 ```
 
-This will cause pod initialization stops until the database is ready.
+This will cause pod initialization to stop until the database is ready.
 
-We need to wait for the database to be ready before continuing because of what the second init container does. Among other things, the `build` init container sets up the database. The database needs to be available for it to be able to to do that. The init container also downloads dependencies, builds the app, produces the deployable artifacts and copies them over to the directory from which the app will run:: `/app`. You can see that all that is specified in the `command` and `args` elements, which define a few shell commands to do those tasks.
+We need to wait for the database to be ready before continuing because of what the second init container does. Among other things, the `build` init container sets up the database. The database needs to be available for it to be able to to do that. The init container also downloads dependencies, builds the app, produces the deployable artifacts and copies them over to the directory from which the app will run: `/app`. You can see that all that is specified in the `command` and `args` elements, which define a few shell commands to do those tasks.
 
 ```yaml
 command: ["/bin/sh"]
@@ -1525,30 +1524,30 @@ volumes:
     emptyDir: {}
 ```
 
-This one is different from the ones we've seen before which relied on persistent volumes and persistent volume claims. This one uses `emptyDir`. This means that this volume will provide storage that is persistent throughout the lifetime of the pod. That is, not tied to any specific container. In other words, even when the container dies, the files in this volume will live on. This is a mechamism that's useful when we want one container to produce some files that another container will use. In our case, the `build` init container produces the artifacts/binaries that the main `vehicle-quotes-web` container will use to actually run the web app.
+This one is different from the ones we've seen before which relied on persistent volumes and persistent volume claims. This one uses `emptyDir`. This means that this volume will provide storage that is persistent throughout the lifetime of the pod. That is, not tied to any specific container. In other words, even when the container goes away, the files in this volume will stay. This is a mechamism that's useful when we want one container to produce some files that another container will use. In our case, the `build` init container produces the artifacts/binaries that the main `vehicle-quotes-web` container will use to actually run the web app.
 
-The other only notable difference of this deployment is how its containers use the new prod image that we built before, instead of the dev one. That is, it uses `localhost:32000/vehicle-quotes-prod:registry` instead of `localhost:32000/vehicle-quotes-dev:registry`.
+The only other notable difference of this deployment is how its containers use the new prod image that we built before, instead of the dev one. That is, it uses `localhost:32000/vehicle-quotes-prod:registry` instead of `localhost:32000/vehicle-quotes-dev:registry`.
 
 The rest of the deployment doesn't have anything we haven't already seen. Feel free to explore it.
 
-As you saw, this prod variant doesn't need to access the source code via a persistent volume pointing to a path in the host machine. So, we don't need PV and PVC deffinitions for this variant. So feel free to delete `k8s/prod/web/persistent-volume.yaml` and `k8s/prod/web/persistent-volume-claim.yaml`. Remember to also remove them from the `resources` section in `k8s/prod/kustomization.yaml`.
+As you saw, this prod variant doesn't need to access the source code via a persistent volume. So, we don't need PV and PVC deffinitions for it. So feel free to delete `k8s/prod/web/persistent-volume.yaml` and `k8s/prod/web/persistent-volume-claim.yaml`. Remember to also remove them from the `resources` section in `k8s/prod/kustomization.yaml`.
 
 With those changes done, we can fire up our prod varians with:
 
 ```
-$ kubectl apply -k k8s_wip/prod
+$ kubectl apply -k k8s/prod
 ```
 
-The web pod will take quite a while to properly start up because it's downloading dependencies and building the .NET project. Remember that you can use `kubectl get pods -A` to see their current status. Take note of their names and you would also be able to see container specific logs.
+The web pod will take quite a while to properly start up because it's downloading a lot of dependencies. Remember that you can use `kubectl get pods -A` to see their current status. Take note of their names and you would also be able to see container specific logs.
 
 - Use `kubectl logs -f <vehicle-quotes-web-pod-name> await-db-ready` to see the logs from the `await-db-ready` init conainer.
 - Use `kubectl logs -f <vehicle-quotes-web-pod-name> build` to see the logs from the `build` init conainer.
 
-This deployment automatically starts the web app, so after the pods are running (or green in the dashboard!), we can just navigate to it via a web browser. We've configured the deployment to only work over HTTPS (as given by the `ports` section in the `vehicle-quotes-web` container) so, this is the only URL that's available to us: https://localhost:30001. We can navigate to it and see the familiar screen:
+This deployment automatically starts the web app, so after the pods are in the "Running" status (or green in the dashboard!), we can just navigate to the app via a web browser. We've configured the deployment to only work over HTTPS (as given by the `ports` section in the `vehicle-quotes-web` container), so this is the only URL that's available to us: https://localhost:30001. We can navigate to it and see the familiar screen:
 
 ![SwaggerUI on prod](kubernetes/swagger-prod.png)
 
-At this point, we fianlly have fully working, distinct variants. However, we can take our configuration a few steps further by leveraging some aditional Kustomize features.
+At this point, we finally have fully working, distinct variants. However, we can take our configuration a few steps further by leveraging some aditional Kustomize features.
 
 ## Using patches for small, precise changes
 
@@ -1591,9 +1590,9 @@ spec:
     path: "/home/kevin/projects/vehicle-quotes-postgres-data-prod"
 ```
 
-As you can see, these patches are sort of truncated persistent volume configs which only include the "kind", "name" and the value that actually changes: the `hostPath`.
+As you can see, these patches are sort of truncated persistent volume configs which only include the `kind`, `metadata.name` and the value that actually changes: the `hostPath`.
 
-Once those are saved, we need to specify them in their respective `kustomization.yaml`. It's the same modification to both `k8s/dev/kustomization.yaml` and `k8s/prod/kustomization.yaml`. Just remove the `db/persistent-volume.yaml` item from their `resources` sections and add the following to both of them:
+Once those are saved, we need to include them in their respective `kustomization.yaml`. It's the same modification to both `k8s/dev/kustomization.yaml` and `k8s/prod/kustomization.yaml`. Just remove the `db/persistent-volume.yaml` item from their `resources` sections and add the following to both of them:
 
 ```yaml
 patches:
@@ -1636,7 +1635,7 @@ patches:
 
 ## Overriding container images
 
-Another improvement that we can do is use the `images` element in the `kustomization.yaml` file to control the web app images used by the deployments in the variants. This is easier for maintenance as it's defined in one single, expected place. Also, the full name of the image doesn't have to be used throughout the configs so it prevents repetition. 
+Another improvement that we can do is use the `images` element in the `kustomization.yaml` files to control the web app images used by the deployments in the variants. This is easier for maintenance as it's defined in one single, expected place. Also, the full name of the image doesn't have to be used throughout the configs so it reduces repetition. 
 
 To put it in practice, add the following at the end of the `k8s/dev/kustomization.yaml` file:
 
@@ -1695,9 +1694,9 @@ Once that's all done, you should be able to `kubectl apply -k k8s/dev` or `kubec
 
 # Closing thoughts
 
-Wow! That was a good one. In this post I've captured all the knowledge that I wish I had when I first encountered Kuebrnetes. We went from knowing nothing to being able to put together a competent environment. We figured out how to install Kubernetes locally via microk8s, along with a few interesting add-ons. We learned about the main concepts in Kubernetes like nodes, pods, images, containers, deployments, services and persistent volumes. Most importantly, we learned how to define and create them using a declarative configuration file approach.
+Wow! That was a good one. In this post I've captured all the knowledge that I wish I had when I first encountered Kuebrnetes. We went from knowing nothing to being able to put together a competent environment. We figured out how to install Kubernetes locally via microk8s, along with a few useful add-ons. We learned about the main concepts in Kubernetes like nodes, pods, images, containers, deployments, services and persistent volumes. Most importantly, we learned how to define and create them using a declarative configuration file approach.
 
-Then, we learned about Kustomize and how to use it to implement variants of our configurations. And we did all that by actually getting our hands dirty and, step by step, deploying a real web application and it's backing database system. When all was said and done, a simple `kubeclt apply -k <kustomization>` was all it took to get the app up and running fully. Not bad, eh?
+Then, we learned about Kustomize and how to use it to implement variants of our configurations. And we did all that by actually getting our hands dirty and, step by step, deploying a real web application and its backing database system. When all was said and done, a simple `kubeclt apply -k <kustomization>` was all it took to get the app up and running fully. Not bad, eh?
 
 # Useful commands
 
@@ -1708,9 +1707,9 @@ Then, we learned about Kustomize and how to use it to implement variants of our 
 - Get available pods on all namespaces: `kubectl get pods -A`
 - Watch and follow the logs on a specific container in a pod: `kubectl logs -f <POD_NAME> <CONTAINER_NAME>`
 - Open a shell into the default container in a pod: `kubectl exec -it <POD_NAME> -- bash`
-- Create a k8s resource given a YAML file or directory: `kubectl apply -f <file_name_or_directory>`
-- Delete a k8s resource given a YAML file or directory: `kubectl delete -f <file_name_or_directory>`
-- Create k8s resources with Kustomize: `kubectl apply -k <kustomization_dir>`
-- Delete k8s resources with Kustomize: `kubectl delete -k <kustomization_dir>`
+- Create a k8s resource given a YAML file or directory: `kubectl apply -f <FILE_NAME_OR_DIRECTORY>`
+- Delete a k8s resource given a YAML file or directory: `kubectl delete -f <FILE_NAME_OR_DIRECTORY>`
+- Create k8s resources with Kustomize: `kubectl apply -k <KUSTOMIZATION_DIR>`
+- Delete k8s resources with Kustomize: `kubectl delete -k <KUSTOMIZATION_DIR>`
 - Build custom images for the k8s registry: `docker build . -f <DOCKERFILE> -t localhost:32000/<IMAGE_NAME>:registry`
 - Push custom images to the k8s registry: `docker push localhost:32000/<IMAGE_NAME>:registry`
