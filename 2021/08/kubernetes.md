@@ -1509,6 +1509,8 @@ args: ["-c", "until pg_isready -h $(VEHICLE_QUOTES_DB_SERVICE_SERVICE_HOST) -p 5
 
 This will cause pod initialization to stop until the database is ready.
 
+> Thanks to [this blog post](https://medium.com/@xcoulon/initializing-containers-in-order-with-kubernetes-18173b9cc222) for the very useful recipe.
+
 We need to wait for the database to be ready before continuing because of what the second init container does. Among other things, the `build` init container sets up the database. The database needs to be available for it to be able to to do that. The init container also downloads dependencies, builds the app, produces the deployable artifacts and copies them over to the directory from which the app will run: `/app`. You can see that all that is specified in the `command` and `args` elements, which define a few shell commands to do those tasks.
 
 ```yaml
