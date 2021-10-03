@@ -1557,9 +1557,18 @@ At this point, we fianlly have fully working, distinct variants. However, we can
 
 Right now, the persistent volume configurations for the databases of both variants are pretty much identical. The only difference is the `hostPath`. With patches, we can focus in on that property and variate it specifically.
 
-To do it, we first copy either of the variant's `db/persistent-volume.yaml` into `k8s/base/db/persistent-volume.yaml`. That will serve as the common ground for overlays to "patch over". Then, we can create the patches.
+To do it, we first copy either of the variant's `db/persistent-volume.yaml` into `k8s/base/db/persistent-volume.yaml`. We also need to add it under `resources` on `k8s/base/kustomization.yaml`:
 
-First, the one for the one for the dev variant:
+```diff
+# k8s/base/kustomization.yaml
+# ...
+resources:
++  - db/persistent-volume.yaml
+  - db/persistent-volume-claim.yaml
+# ...
+```
+
+That will serve as the common ground for overlays to "patch over". Now we can create the patches. First, the one for the one for the dev variant:
 
 ```yaml
 # k8s/dev/db/persistent-volume-host-path.yaml
