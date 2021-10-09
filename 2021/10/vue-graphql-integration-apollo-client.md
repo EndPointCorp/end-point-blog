@@ -13,9 +13,10 @@ tags:
 [Photo](https://unsplash.com/photos/kd5dc1yzieE) by [Mathew Benoit](https://unsplash.com/@benoitphoto) on Unsplash
 
 ### Introduction
-In this post I’ll go over everything you need to know to get your Vue app using GraphQL to send and receive data. This post only covers the frontend -- stay tuned for my next post on making a GraphQL server using Django and graphene-python! 
 
-For the uninitiated, [GraphQL](https://graphql.org/) is a query language that aims to replace the traditional REST API. The idea is that, instead of having separate endpoints for each resource in your API, you use one endpoint that accepts GraphQL queries and mutations for all of your resources. Overall, this makes data access on the frontend more like querying a database. Not only does it give you more control over your data, but it also can be much faster than using a REST API, providing a better user experience. 
+In this post I’ll go over everything you need to know to get your Vue app using GraphQL to send and receive data. This post only covers the frontend — stay tuned for my next post on making a GraphQL server using Django and graphene-python! 
+
+For the uninitiated: [GraphQL](https://graphql.org/) is a query language that aims to replace the traditional REST API. The idea is that, instead of having separate endpoints for each resource in your API, you use one endpoint that accepts GraphQL queries and mutations for all of your resources. Overall, this makes data access on the frontend more like querying a database. Not only does it give you more control over your data, but it also can be much faster than using a REST API, providing a better user experience. 
 
 ### Getting started
 
@@ -207,9 +208,9 @@ this.$apollo.mutate({
     mutation: ADD_POST,
     variables: { content: this.newPostContent },
     update: (cache, result) => {
-        // the new post returned from the server. notice how 
+        // The new post returned from the server. Notice how 
         // the field on data matches the name of the mutation 
-        // in the graphql code.
+        // in the GraphQL code.
         let newPost = result.data.addPost;
 
         // Queries are cached using the query itself, and the
@@ -221,12 +222,12 @@ this.$apollo.mutate({
 
         // Get the old list from the cache, and create a new array
         // containing the new item returned from the server along 
-        // with the existing items
+        // with the existing items.
         const data = cache.readQuery(cacheId);
         const newData = [...data.postsByUser, newPost];
 
         // Write the new array of data for this query into 
-        // the cache
+        // the cache.
         cache.writeQuery({
             ...cacheId,
             data: { postsByUser: newData },
@@ -236,7 +237,7 @@ this.$apollo.mutate({
     // to update the cache before receiving a response from the 
     // server. This means the UI will be updated much quicker.
     optimisticResponse: {
-            __typename: "Mutation",
+        __typename: "Mutation",
         addPost: {
             __typename: "Post",
             id: "xyz-?",
@@ -253,7 +254,6 @@ As you can see, manually updating the cache requires quite a bit of code to acco
 
 ### Conclusion
 
-And that’s it! My experience converting an existing Vue codebase to use Apollo/GraphQL was a very positive one. The resulting code had much better performance than manually sending requests and updating a Vuex store, and was a lot easier to work on. 
+And that’s it! My experience converting an existing Vue codebase to use Apollo/​GraphQL was a very positive one. The resulting code had much better performance than manually sending requests and updating a Vuex store, and was a lot easier to work on. 
 
 Have any questions? Feel free to leave a comment!
-
