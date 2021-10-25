@@ -77,9 +77,9 @@ Providing the username and issuer will display it in the list of configured acco
 
 ### Reference
 
-See a [simple explanation of otpauth URI format](https://www1.auth.iij.jp/smartkey/en/uri_v1.html) used by TOTP.
-See [RFC 6238](https://datatracker.ietf.org/doc/html/rfc6238) for full details about TOTP.
-See [RFC 4648](https://datatracker.ietf.org/doc/html/rfc4648#section-6) for the base 32 specification used to encode the secret key.
-A recent similar Perl implementation Terminal QR Code with Unicode characters by Flavio Poletti that builds on Text::QRCode which uses libqrencode.
+* See a [simple explanation of otpauth URI format](https://www1.auth.iij.jp/smartkey/en/uri_v1.html) used by TOTP.
+* See [RFC 6238](https://datatracker.ietf.org/doc/html/rfc6238) for full details about TOTP.
+* See [RFC 4648](https://datatracker.ietf.org/doc/html/rfc4648#section-6) for the base 32 specification used to encode the secret key.
+* A recent similar Perl implementation Terminal QR Code with Unicode characters by Flavio Poletti that builds on Text::QRCode which uses libqrencode.
 
 
