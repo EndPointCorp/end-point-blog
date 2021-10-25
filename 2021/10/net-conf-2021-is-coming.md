@@ -6,7 +6,7 @@ tags:
 - windows
 ---
 
-![.NET 5 Platform](net-conf-2021-is-coming/dotnet-conf-2021)
+![.NET 5 Platform](net-conf-2021-is-coming/dotnet-conf-2021.jpg)
 
 [.NET — A unified platform](https://devblogs.microsoft.com/dotnet/introducing-net-5/) by Microsoft
 
@@ -25,12 +25,12 @@ The [Hot Reload feature](https://devblogs.microsoft.com/dotnet/introducing-net-h
 
 We will see several changes to the web mobile app development works under .NET 6. With a smaller, optimized and optional SDK for mobile based on [Xamarin](https://dotnet.microsoft.com/apps/xamarin), now called Multi-platform App UI or MAUI, developing an app that aims multiple mobile platforms should be simpler than ever.
 
-[.NET 6 and MAUI](net-conf-2021-is-coming/dotnet-maui.jpg)
+![.NET 6 and MAUI](net-conf-2021-is-coming/dotnet-maui.jpg)
 
 
 Along with this, there are several optimization improvements to several aspects of the framework, including [AOT compilation](https://www.reddit.com/r/dotnet/comments/o21i5k/webassembly_aot_support_is_now_available_with_net/) or the [Minimal API Framework](https://dotnetcoretutorials.com/2021/07/16/building-minimal-apis-in-net-6/), along with build speed improvements. A complete list of breaking changes can be seen [here](https://docs.microsoft.com/en-us/dotnet/core/compatibility/6.0).
 
-[.NET 5 vs. .NET 6 build improvements](net-conf-2021-is-coming/dotnet-5-vs-dotnet-6-improvements.jpg)
+![.NET 5 vs. .NET 6 build improvements](net-conf-2021-is-coming/dotnet-5-vs-dotnet-6-improvements.jpg)
 
 
 Although not part of the event itself, the new version of Visual Studio will also be available from November 8th, after the launch on an [online event](https://visualstudio.microsoft.com/launch/) that Microsoft is preparing with several presentations from the team.
