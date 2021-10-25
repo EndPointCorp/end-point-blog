@@ -6,9 +6,7 @@ tags:
 - windows
 ---
 
-![.NET 5 Platform](net-conf-2021-is-coming/dotnet-conf-2021.jpg)
-
-[.NET — A unified platform](https://devblogs.microsoft.com/dotnet/introducing-net-5/) by Microsoft
+![.NET Conf 2021 Poster](net-conf-2021-is-coming/dotnet-conf-2021.jpg)
 
 
 It's that time of the year again! It has been almost one year since .NET 5 was launched on the [.NET Conf 2020](/blog/2020/11/dotnet-5-released-net-conf-2020/), unifying .NET Framework and .NET Core into a single, open-source and cross-platform framework. And with .NET 6 around the corner, it's time to prepare for the new edition: [.NET Conf 2021](https://www.dotnetconf.net/), starting on November 9th.
