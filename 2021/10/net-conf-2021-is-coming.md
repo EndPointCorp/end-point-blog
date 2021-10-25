@@ -23,7 +23,7 @@ We will see several changes to the web mobile app development works under .NET 6
 
 ### Hot reload (after some struggling)
 
-The [Hot Reload feature](https://devblogs.microsoft.com/dotnet/introducing-net-hot-reload/), which will allow to make and apply changes to the code in execution time, will be finally available in .NET 6. There was some noise about it in the past days since Microsoft made a decision to lock it to Visual Studio 2022, which is a Windows-limited mostly-paid product. But after the open source community made it clear they were angry about it, Microsoft reversed the change and the feature will be available for all platforms.
+The [Hot Reload feature](https://devblogs.microsoft.com/dotnet/introducing-net-hot-reload/), which will allow to make and apply changes to the code in execution time, will be finally available in .NET 6. There was some noise about it in the past days since Microsoft made a decision to lock it to Visual Studio 2022, which is a Windows-limited mostly-paid product. But after the open source community made it clear they were angry about it, Microsoft [reversed the change](https://devblogs.microsoft.com/dotnet/update-on-net-hot-reload-progress-and-visual-studio-2022-highlights/) and the feature will be available for all platforms.
 
 ### LTS (Long Term Support)
 
