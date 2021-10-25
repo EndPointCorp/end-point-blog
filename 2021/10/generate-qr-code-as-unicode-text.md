@@ -62,10 +62,10 @@ otpauth://totp/{username}?secret={key}&issuer={provider_name}
 
 The provider_name can contain spaces, however, they need to be URL-encoded and entered as %20 for auth to work correctly on iOS. Otherwise, an invalid barcode error will be shown when adding the code.
 
-For example, if you generate the QR code with key "JSZE5V4676DZFCUCFW4GLPAHEFDNY447" for the account root@example.com, the resulting would be:
+For example, if you generate the QR code with key `JSZE5V4676DZFCUCFW4GLPAHEFDNY447` for the account `root@example.com`, the resulting would be:
 
 Command:
-% qr "otpauth://totp/Example:root@example.com?secret=JSZE5V4676DZFCUCFW4GLPAHEFDNY447&issuer=Superhost"
+'% qr "otpauth://totp/Example:root@example.com?secret=JSZE5V4676DZFCUCFW4GLPAHEFDNY447&issuer=Superhost"'
 
 ![qrcode](/blog/2021/10/generate-qr-code-as-unicode-text/qrcode.jpg)
 
