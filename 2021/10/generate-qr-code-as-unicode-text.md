@@ -66,7 +66,7 @@ For example, if you generate the QR code with key `JSZE5V4676DZFCUCFW4GLPAHEFDNY
 
 Command:
 ```
-% qr "otpauth://totp/Example:root@example.com?secret=JSZE5V4676DZFCUCFW4GLPAHEFDNY447&issuer=Superhost" 
+$ qr "otpauth://totp/Example:root@example.com?secret=JSZE5V4676DZFCUCFW4GLPAHEFDNY447&issuer=Superhost" 
 ```
 
 ![qrcode](/blog/2021/10/generate-qr-code-as-unicode-text/qrcode.jpg)
