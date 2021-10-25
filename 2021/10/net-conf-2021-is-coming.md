@@ -11,7 +11,7 @@ tags:
 
 It's that time of the year again! It has been almost one year since .NET 5 was launched on the [.NET Conf 2020](/blog/2020/11/dotnet-5-released-net-conf-2020/), unifying .NET Framework and .NET Core into a single, open-source and cross-platform framework. And with .NET 6 around the corner, it's time to prepare for the new edition: [.NET Conf 2021](https://www.dotnetconf.net/), starting on November 9th.
 
-This edition will be the 11th online conference, and the [Agenda](https://www.dotnetconf.net/agenda) will mainly focus the .NET 6 launch and the new C# 10, along with some coding challenges and community sessions. The event is organized by both the .NET Community and Microsoft. The main changes that will likely be discussed at the conference -based on what we've seen through the previews- might include:
+This edition will be the 11th online conference, and the [Agenda](https://www.dotnetconf.net/agenda) will mainly focus on the .NET 6 launch and the new C# 10, along with some coding challenges and community sessions. The event is organized by both the .NET Community and Microsoft. The main changes that will likely be discussed at the conference -based on what we've seen through the previews- might include:
 
 ### Mobile development
 
