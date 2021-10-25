@@ -33,7 +33,7 @@ print $/;
 
 produces the following output:
 
-```nohighlight
+```plain
 [mark@sokt ~]$ perl demo.pl 
 Some stuff
 $@ in outer eval: Oops. Bad inner eval at demo.pl line 7.
@@ -63,7 +63,7 @@ print $/;
 
 which produces:
 
-```nohighlight
+```plain
 [mark@sokt ~]$ perl demo.pl 
 Some stuff
 $@ in outer eval: Oops. Bad inner eval at demo.pl line 7.
@@ -117,7 +117,7 @@ else {
 
 Output as follows:
 
-```nohighlight
+```plain
 [mark@sokt ~]$ perl test1.pl 
 $@ comes from code in DESTROY at test1.pl line 7.
 [mark@sokt ~]$ 
@@ -158,7 +158,7 @@ else {
 
 Output as follows:
 
-```nohighlight
+```plain
 [mark@sokt ~]$ perl test2.pl 
 Happy days! Our eval code ran to completion. Woot!
 [mark@sokt ~]$ 
@@ -200,7 +200,7 @@ else {
 
 Output as follows:
 
-```nohighlight
+```plain
 [mark@sokt ~]$ perl test3.pl 
 Super important stuff that must finish or we really need to know about it!
 Happy days! Our eval code ran to completion. Woot!
@@ -247,7 +247,7 @@ else {
 
 Output as follows:
 
-```nohighlight
+```plain
 [mark@sokt ~]$ perl test1.pl 
 $@ comes from code in main eval at test1.pl line 17.
 [mark@sokt ~]$ 
@@ -289,7 +289,7 @@ else {
 
 Output as follows:
 
-```nohighlight
+```plain
 [mark@sokt ~]$ perl test2.pl 
 $@ comes from code in main eval at test2.pl line 17.
 [mark@sokt ~]$ 

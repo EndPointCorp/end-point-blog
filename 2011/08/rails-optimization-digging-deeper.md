@@ -44,7 +44,7 @@ end
 
 My HTML has some bits of code sprinkled throughout it:
 
-```nohighlight
+```plain
 ...
 <a href="#" id="edit_thing" class="requires_editability">Edit</a>
 ...

@@ -16,7 +16,7 @@ Having multiple URLs linking to the same page opens more doors to search engine 
 
 Normally in most other programming languages, you would need to use an Apache rewrite rule to accomplish this. This rule will detect a digit in a file name and pass it along as a parameter to another dynamically generated page.
 
-```nohighlight
+```plain
 RewriteRule ^/.*([0-9]+).*$ /index.php?i=$1 [R=301,L]
 ```
 

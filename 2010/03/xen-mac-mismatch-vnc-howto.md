@@ -26,19 +26,19 @@ The guest wasn’t using much CPU (as shown by xm top), so I figured it wasn’t
 
 The way I’ve done this before is using VNC to access the virtual console remotely. The Xen host was configured to accept VNC connections on localhost, which I could see by looking in /etc/xen/xend-config.sxp:
 
-```nohighlight
+```plain
 (vnc-listen '127.0.0.1')
 ```
 
 There are 11 Xen guests, with consoles listening on TCP ports 5900-5910. Which one was the one? I don’t know any simple way to get a list that maps ports to Xen guests, but I did it this way:
 
-```nohighlight
+```plain
 ps auxww | grep qemu-dm
 ```
 
 I noted the PID of the process that was running for my guest as revealed in its command line. Then I looked for the listener running under that PID:
 
-```nohighlight
+```plain
 netstat -nlp
 ```
 
@@ -46,7 +46,7 @@ I looked for $pid/qemu-dm in the PID/Program Name column and could then see the 
 
 So I set up an ssh tunnel to the server for my VNC traffic:
 
-```nohighlight
+```plain
 ssh -f -N -L 5903:localhost:5903 root@$remote_host &
 ```
 

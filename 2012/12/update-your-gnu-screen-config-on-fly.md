@@ -34,7 +34,7 @@ I wanted to be able to update the configuration and have **all** of the **existi
 
 The source command can be used to load or reload a Screen configuration file. It can be invoked from inside a Screen session like so: 
 
-```nohighlight
+```plain
 C-a :source /absolute/path/to/config_file
 ```
 
@@ -46,7 +46,7 @@ Once the source command has been issued, the configuration will be applied to **
 
 I like to use tmux as well and was happy to [find in its manpage](https://man.openbsd.org/tmux.1) that it has a similar feature. The source-file command (`source` is aliased as well) is invoked in the exactly the same way: 
 
-```nohighlight
+```plain
 C-prefix :source /absolute/path/to/config_file
 ```
 
@@ -58,13 +58,13 @@ Another related issue I often run into is wishing I had started my Screen or tmu
 
 For Screen, the chdir command can be used: 
 
-```nohighlight
+```plain
 C-a :chdir /some/new/directory
 ```
 
 In tmux, the default-path command can be used: 
 
-```nohighlight
+```plain
 C-prefix :default-path /some/new/directory
 ```
 

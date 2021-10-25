@@ -52,6 +52,6 @@ All in all, I’m impressed that we’ve continued to maintain expertise in long
 
 P.S. If you are interested in generating word statistics via command line, the following will get you the top 20 words given a text file:
 
-```nohighlight
+```plain
 tr -c '[:alnum:]' '[\n*]' < some_text_file.txt | sort | uniq -c | sort -nr | head -20
 ```

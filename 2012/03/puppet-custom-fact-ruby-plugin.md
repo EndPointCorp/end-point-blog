@@ -28,7 +28,7 @@ resource section to a puppet manifest. For example, we might control
 such a file inside a manifest named “foobar” by writing the file 
 **puppet/modules/foobar/init.pp** as so:
 
-```nohighlight
+```plain
 class foobar {
 
   user {
@@ -82,7 +82,7 @@ underneath the main puppet directory, inside the “foobar” directory, and in 
 “files”. The level above “files” is where one would create different subdirectories based on 
 $pg_environment, so your module might look like this:
 
-```nohighlight
+```plain
 modules/
    └──foobar/
          ├─manifests/
@@ -146,7 +146,7 @@ A custom fact is created by a Ruby function: this function should be in its own 
 in the “lib/facter” directory of the relevant module. So in our case, we will create a small 
 ruby file named “postgres_homedir.rb” and stick it here:
 
-```nohighlight
+```plain
 modules/
    └──foobar/
          ├─lib/
@@ -192,7 +192,7 @@ Now that we have a way of knowing what the home directory of the postgres user
 will be *before* the manifest is compiled into a catalog, we can rewrite 
 **puppet/foobar/manifests/init.pp** like so:
 
-```nohighlight
+```plain
 class foobar {
 
   file {

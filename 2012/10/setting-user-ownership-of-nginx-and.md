@@ -13,7 +13,7 @@ date: 2012-10-02
 
 Do this now on all your production Rails app servers:
 
-```nohighlight
+```plain
 ps ux | grep Rails
 ```
 
@@ -29,7 +29,7 @@ This article assumes you are running nginx compiled with Passenger support and t
 
 The changes required in nginx are very straight forward.
 
-```nohighlight
+```plain
 # Added in the main, top-level section
 user rails-app;
 
@@ -40,7 +40,7 @@ passenger_default_user rails-app;
 
 The first directive tells nginx to run it's worker processes as the rails-app user. It's not completely clear to me why this was required, but failing to include this resulted in the following error. Bonus points to any one who can help me understand this one.
 
-```nohighlight
+```plain
 [error] 1085#0: *1 connect() to unix:/tmp/passenger.1064/master/helper_server.sock failed (111: Connection refused) while connecting to upstream, client: XXX, server: XXX, request: "GET XXX HTTP/1.0", upstream: "passenger://unix:/tmp/passenger.1064/master/helper_server.sock:", host: "XXX"
 ```
 

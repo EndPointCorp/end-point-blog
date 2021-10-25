@@ -108,7 +108,7 @@ done
 
 Finally, I added newsize1_image and newsize2_image methods throughout the views, e.g.:
 
-```nohighlight
+```plain
 <%= link_to newsize1_image(product), product %>
 <%= link_to newsize2_image(taxon.products.first), seo_url(taxon) %>
 ```

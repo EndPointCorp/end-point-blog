@@ -276,7 +276,7 @@ fit(model, train, num_epoch=10)
 
 The training process is periodically outputting statistics similar to ones below:
 
-```nohighlight
+```plain
 INFO:root:Epoch 1 / 10 | Batch 1000 | Mean Loss: 0.11189080774784088
 INFO:root:Epoch 1 / 10 | Batch 2000 | Mean Loss: 0.12274568527936935
 INFO:root:Epoch 1 / 10 | Batch 3000 | Mean Loss: 0.1204155907034874
@@ -550,7 +550,7 @@ def print_joke_stats(ix):
 
 Let’s see what jokes our system found to be cracking up the same kinds of people:
 
-```nohighlight
+```plain
 > print_joke_stats(87)
 
 Jokes making same people laugh compared to:

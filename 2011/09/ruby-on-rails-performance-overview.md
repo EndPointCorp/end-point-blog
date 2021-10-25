@@ -17,7 +17,7 @@ Over the last few months, I’ve been involved in a Ruby on Rails (version 2.3) 
 
 Before I started on the project, there was already a significant amount of [fragment caching](http://guides.rubyonrails.org/caching_with_rails.html#fragment-caching) in use throughout the site. In it’s most basic form, fragment caching wraps a cache method around existing view code:
 
-```nohighlight
+```plain
 <%= cache "product-meta-#{product.id}" %>
 #insert view code
 <% end %>

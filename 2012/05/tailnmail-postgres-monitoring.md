@@ -31,7 +31,7 @@ on the fly. This particular client of ours consolidates all of their logs to som
 logging boxes via rsyslog. For the host in question that issued the PANIC, we had two 
 tail_n_mail config files that looked like this:
 
-```nohighlight
+```plain
 ## Config file for the tail_n_mail program
 ## This file is automatically updated
 ## Last updated: Fri Apr 27 18:00:01 2012
@@ -44,7 +44,7 @@ LASTFILE: /var/log/2012/groucho/04/27/18/pgsql-err.log
 OFFSET: 10199
 ```
 
-```nohighlight
+```plain
 ## Config file for the tail_n_mail program
 ## This file is automatically updated
 ## Last updated: Fri Apr 27 18:00:01 2012
@@ -84,7 +84,7 @@ a new tail_n_mail was ready. This one (version 1.25.0) allows multiple values of
 inside of a single config. Thus, for the above, I was able to combine everything into a single 
 tail_n_mail config file like so:
 
-```nohighlight
+```plain
 MAILSUBJECT: Groucho fatals: NUMBER
 
 INHERIT: tail_n_mail.fatals.global.txt
@@ -99,7 +99,7 @@ single file: in this case, groucho and a bunch of other similar
 hosts all use it. It contains the rules on what tail_n_mail 
 should care about, and looks similar to this:
 
-```nohighlight
+```plain
 ## Global behavior for all "fatals" configs
 EMAIL: acme-alerts@endpoint.com
 FROM: postgres@endpoint.com
@@ -134,7 +134,7 @@ putting multiple hosts into a single file. In this client’s case, there were o
 hosts very similar to “groucho” that had files we wanted to monitor. Thus, the 
 config file was changed to look like this:
 
-```nohighlight
+```plain
 MAILSUBJECT: Acme fatals: NUMBER
 
 INHERIT: tail_n_mail.fatals.global.txt
@@ -156,7 +156,7 @@ We’ve just whittled nine config files down to a single one. Of course, the con
 does its first rewrite of the config file, it will assign numbers to 
 each FILE, and the file will then look something like this:
 
-```nohighlight
+```plain
 FILE1: /var/log/%Y/groucho/%m/%d/%H/pgsql-warning.log
 LASTFILE1: /var/log/2012/groucho/04/27/18/pgsql-warning.log
 OFFSET1: 100

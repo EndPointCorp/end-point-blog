@@ -38,7 +38,7 @@ public class HotSwapTest {
 
 If I build this into build/​classes/​java/​main and run it, as expected it prints out “Hi” every second:
 
-```nohighlight
+```plain
 josh@igtre:~/hotswaptest$ java -cp build/classes/java/main/ HotSwapTest
 Hi
 Hi
@@ -48,7 +48,7 @@ Hi
 
 The usual JVM doesn’t include the HotSwap feature. For my purposes I downloaded [DCEVM](https://dcevm.github.io/), an alternative JVM which includes HotSwap. It’s also possible to patch some existing JVMs to add HotSwap, if you’d prefer. When I run the same code with DCEVM, it runs the code just like it did with the normal JVM, with additional debugging output:
 
-```nohighlight
+```plain
 Starting HotswapAgent '/home/josh/hotswaptest/dcevm/lib/hotswap/hotswap-agent.jar'
 HOTSWAP AGENT: 15:01:23.423 INFO (org.hotswap.agent.HotswapAgent) - Loading Hotswap agent {1.4.1} - unlimited runtime class redefinition.
 HOTSWAP AGENT: 15:01:24.189 INFO (org.hotswap.agent.config.PluginRegistry) - Discovered plugins: [JdkPlugin, Hotswapper, WatchResources, ClassInitPlugin, AnonymousClassPatch, Hibernate, Hibernate3JPA, Hibernate3, Spring, Jersey1, Jersey2, Jetty, Tomcat, ZK, Logback, Log4j2, MyFaces, Mojarra, Omnifaces, ELResolver, WildFlyELResolver, OsgiEquinox, Owb, Proxy, WebObjects, Weld, JBossModules, ResteasyRegistry, Deltaspike, GlassFish, Vaadin, Wicket, CxfJAXRS, FreeMarker, Undertow, MyBatis]
@@ -56,7 +56,7 @@ HOTSWAP AGENT: 15:01:24.189 INFO (org.hotswap.agent.config.PluginRegistry) - Dis
 
 To make hot swapping work automatically, we need to provide the JVM with a properties file in the JVM’s classpath. Mine looks like this, and lives in build/​classes/​java/​main, next to the compiled class files:
 
-```nohighlight
+```plain
 autoHotswap=true
 LOGGER=debug
 ```
@@ -65,7 +65,7 @@ These properties are pretty self-explanatory: they tell the JVM to hot swap auto
 
 So, with that all set up, let’s run the program again, change the code and rebuild it, and see what happens. For this test, I’ll just edit the message printed in each loop from “Hi” to “Hello”.
 
-```nohighlight
+```plain
 josh@igtre:~/hotswaptest$ ./dcevm/bin/java -cp build/classes/java/main/ HotSwapTest
 Starting HotswapAgent '/home/josh/hotswaptest/dcevm/lib/hotswap/hotswap-agent.jar'
 HOTSWAP AGENT: 15:36:22.132 INFO (org.hotswap.agent.HotswapAgent) - Loading Hotswap agent {1.4.1} - unlimited runtime class redefinition.
@@ -78,7 +78,7 @@ HOTSWAP AGENT: 15:36:22.550 DEBUG (org.hotswap.agent.util.HotswapTransformer) - 
 
 The flurry of DEBUG messages tells me that it must have read my properties file correctly, and when I change the code and rebuild, I see the JVM respond with still more debug messages, saying it found and reloaded my code:
 
-```nohighlight
+```plain
 HOTSWAP AGENT: 15:38:27.066 DEBUG (org.hotswap.agent.watch.nio.WatcherNIO2) - Watch event 'ENTRY_DELETE' on '/home/josh/hotswaptest/build/classes/java/main/HotSwapTest.class' --> HotSwapTest.class
 HOTSWAP AGENT: 15:38:27.118 DEBUG (org.hotswap.agent.watch.nio.WatcherNIO2) - Watch event 'ENTRY_CREATE' on '/home/josh/hotswaptest/build/classes/java/main/HotSwapTest.class' --> HotSwapTest.class
 HOTSWAP AGENT: 15:38:27.119 DEBUG (org.hotswap.agent.watch.nio.WatcherNIO2) - Watch event 'ENTRY_MODIFY' on '/home/josh/hotswaptest/build/classes/java/main/HotSwapTest.class' --> HotSwapTest.class
@@ -119,7 +119,7 @@ public class HotSwapTest {
 
 Now, I start the JVM over again, and as expected, it prints “Here is printMsg” once every second. When I change to “Here is printMsg v2.0” and rebuild, this happens:
 
-```nohighlight
+```plain
 Here is printMsg
 Here is printMsg
 HOTSWAP AGENT: 15:48:34.923 DEBUG (org.hotswap.agent.watch.nio.WatcherNIO2) - Watch event 'ENTRY_DELETE' on '/home/josh/hotswaptest/build/classes/java/main/HotSwapTest.class' --> HotSwapTest.class

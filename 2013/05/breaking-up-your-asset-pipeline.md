@@ -41,7 +41,7 @@ So I thought there should be a way to break up the manifest file so that only ja
 
 The solution lies in the first point raised earlier about the asset pipeline. The fact is, **you can create a manifest file anywhere in your assets directory and use the same directives to load the javascript**. For example, in the app/assets/javascripts/ directory the application.js file is used by default. But it can be named anything and placed anywhere. For my problem, I only wanted my javascript application loaded when I explicitly called it. My directory structure looked like this:
 
-```nohighlight
+```plain
 |~app/
 | |~assets/
 | | |+fonts/

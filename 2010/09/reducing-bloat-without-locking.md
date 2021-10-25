@@ -13,7 +13,7 @@ It’s not altogether uncommon to find a database where someone has turned off v
 
 Recently I’ve been experimenting with an alternative method—​sort of a VACUUM FULL Lite. Vanilla VACUUM **can** reduce table size when the pages at the end of a table are completely empty. The trick is to empty those pages of live data. You do that by paying close attention to the table’s *ctid* column:
 
-```nohighlight
+```plain
 5432 josh@josh# \d foo
       Table "public.foo"
  Column |  Type   | Modifiers 
@@ -33,7 +33,7 @@ Indexes:
 
 The *ctid* is one of several hidden columns found in each PostgreSQL table. It shows up in query results only if you explicitly ask for it, and tells you two values: a page number, and a tuple number. Pages are numbered sequentially from zero, starting with the first page in the relation’s first file, and ending with the last page in its last file. Tuple numbers refer to entries within each page, and are numbered sequentially starting from one. When I update a row, the row’s ctid changes, because the update creates a new version of the row and leaves the old version behind (see [this page](http://www.postgresql.org/docs/current/static/mvcc.html) for explanation of that behavior).
 
-```nohighlight
+```plain
 5432 josh@josh# update foo set a = 3 where a = 2;
 UPDATE 1
 5432 josh@josh*# select ctid, * from foo;
@@ -46,7 +46,7 @@ UPDATE 1
 
 Note the changed ctid for the second row. If I vacuum this table now, I’ll see it remove one dead row version, from both the table and its associated index:
 
-```nohighlight
+```plain
 5432 josh@josh# VACUUM verbose foo;
 INFO:  vacuuming "public.foo"
 INFO:  scanned index "foo_pkey" to remove 1 row versions
@@ -68,7 +68,7 @@ VACUUM
 
 So given these basics, how can I make tables smaller? Let’s build a bloated table:
 
-```nohighlight
+```plain
 5432 josh@josh# truncate foo;
 TRUNCATE TABLE
 5432 josh@josh*# insert into foo select generate_series(1, 1000);
@@ -107,7 +107,7 @@ COMMIT
 
 Here I’m not changing the row at all, but the tuples are moving around into dead space earlier in the table; this is apparent because the number of rows affected decreases. For the first update or two, there’s room enough on the page to store all the new rows, but after a few updates they have to start moving to new pages. Eventually the row count goes to zero, meaning there are no rows on or after page #3, so vacuum can truncate that page:
 
-```nohighlight
+```plain
 5432 josh@josh# vacuum verbose foo;
 INFO:  vacuuming "public.foo"
 ...

@@ -21,7 +21,7 @@ A first stop in optimization was to investigate if memcached would speed up the 
 
 Next, I re-examined the debug log to see what was taking so much time. The debug log looked like this (note that table names have been changed):
 
-```nohighlight
+```plain
 Processing ThingsController#index (for 174.111.14.48 at 2011-07-12 16:32:04) [GET]
   Parameters: {"action"=>"index", "controller"=>"things"}
 Thing Load (441.2ms)  SELECT * FROM "things" WHERE ("things"."id" IN (22,6,23,7,35,24,36,25,14,9,37,26,15,...)) 
@@ -134,14 +134,14 @@ end
 
 My view contains the standard will_paginate reference:
 
-```nohighlight
+```plain
 There are <%= pluralize @things.total_entries, 'Thing' %> Total
 <%= will_paginate @things %>
 ```
 
 And I pass the result set in a partial as a collection to display my listed items:
 
-```nohighlight
+```plain
 <%= render :partial => 'shared/single_thing', :collection => @things %>
 ```
 

@@ -30,7 +30,7 @@ In terms of infrastructure, this is pretty straightforward. It would cleanly tra
 
 Since we want to create three separate containers that can talk to each other, we need to ask the Docker engine to create a network for them. This can be done with this self-explanatory command:
 
-```nohighlight
+```plain
 docker network create magento-demo-network
 ```
 
@@ -38,13 +38,13 @@ docker network create magento-demo-network
 
 You can run the following command to check your newly created network:
 
-```nohighlight
+```plain
 docker network ls
 ```
 
 Output usually looks like this:
 
-```nohighlight
+```plain
 $ docker network ls
 NETWORK ID    NAME                  DRIVER  SCOPE
 bd562b9cf5a4  bridge                bridge  local
@@ -59,7 +59,7 @@ There’s our `magento-demo-network` network among other networks that Docker cr
 
 Getting a MySQL instance up and running is super easy these days thanks to Docker. There’s already [an official image for MySQL](https://hub.docker.com/_/mysql) in [Docker Hub](https://hub.docker.com/) so we will use that. We can set it up with this command:
 
-```nohighlight
+```plain
 docker run -d \
   --name magento-demo-mysql \
   --network magento-demo-network \
@@ -75,7 +75,7 @@ docker run -d \
 
 And just like that, we have a running MySQL instance. Running `docker ps` can get you a list of currently running containers. The one we just created should show up there.
 
-```nohighlight
+```plain
 $ docker ps
 CONTAINER ID  IMAGE      COMMAND                 CREATED         STATUS         PORTS                              NAMES
 b73739ad5d66  mysql:5.7  "docker-entrypoint.s…"  22 seconds ago  Up 21 seconds  0.0.0.0:3306->3306/tcp, 33060/tcp  magento-demo-mysql
@@ -103,7 +103,7 @@ Let’s go through each one of the options from that command now to understand i
 
 The easiest way of connecting to the MySQL instance is by running `mysql` CLI client from within the container itself. You can do that with:
 
-```nohighlight
+```plain
 docker exec -it magento-demo-mysql mysql -u kevin -p
 ```
 
@@ -115,7 +115,7 @@ Here’s how that command works:
 
 After running the previous command, the console will ask you for your password. We set that to `password` via `MYSQL_PASSWORD` so that’s what we need to type in. This will eventually result in the `mysql` prompt showing up. Run `show databases` to confirm that the `magento_demo` database that we specified via `MYSQL_DATABASE` got created.
 
-```nohighlight
+```plain
 mysql> show databases;
 +--------------------+
 | Database           |
@@ -132,7 +132,7 @@ You can `Ctrl + D` your way out of that when you’re done exploring the contain
 
 We can also connect to the MySQL instance running in the container, directly from our host machine. We can use:
 
-```nohighlight
+```plain
 mysql -h localhost -P 3306 --protocol=tcp -u kevin -p
 ```
 
@@ -144,7 +144,7 @@ Same as before, `mysql` will ask you for the password and, once typed in, it wil
 
 Like MySQL, there’s an official [Elasticsearch Docker image up in Docker Hub](https://hub.docker.com/_/elasticsearch). As a result, getting a working Elasticsearch installation is a piece of cake. It’s done with a command like this:
 
-```nohighlight
+```plain
 docker run -d \
   --name magento-demo-elasticsearch \
   --network magento-demo-network \
@@ -157,7 +157,7 @@ docker run -d \
 
 You can validate that the Elasticsearch is running with `curl localhost:9200/_cat/health`. That should return something like this:
 
-```nohighlight
+```plain
 $ curl localhost:9200/_cat/health
 1597622135 23:55:35 docker-cluster green 1 1 0 0 0 0 0 0 - 100.0%
 ```
@@ -185,7 +185,7 @@ There’s no image of Magento 2 that would be able to get us up and running as q
 
 Here’s a Dockerfile for Magento 2.4 that I came up with:
 
-```nohighlight
+```plain
 # /path/to/project/Dockerfile
 
 # Our image is based on Ubuntu.
@@ -244,14 +244,14 @@ Importantly, it allows for creating a user account with sudo access. Later, we�
 
 Alright, now that we have our image defined in the form of our Dockerfile, let’s create it. To do that, we go into our project directory, create a new file named `Dockerfile`:
 
-```nohighlight
+```plain
 cd /path/to/project
 touch Dockerfile
 ```
 
 Then use a text editor to save the contents from above into it, and finally run this command:
 
-```nohighlight
+```plain
 docker build \
   --build-arg USER=kevin \
   --build-arg UID=$(id -u) \
@@ -269,7 +269,7 @@ Here’s what this all means:
 
 Run `docker image ls` and you should see our new home grown `magento-demo-web` image along with the other ones that we’ve downloaded from Docker Hub:
 
-```nohighlight
+```plain
 REPOSITORY        TAG     IMAGE ID      CREATED         SIZE
 magento-demo-web  latest  90d311df434f  22 minutes ago  452MB
 mysql             5.7     718a6da099d8  12 days ago     448MB
@@ -281,7 +281,7 @@ elasticsearch     7.8.1   a529963ec236  3 weeks ago     811MB
 
 Ok, now that we have an image that’s capable of running Magento, let’s put it to work by creating a container based on it. We do that with:
 
-```nohighlight
+```plain
 docker run -d \
   --name magento-demo-web \
   --network magento-demo-network \
@@ -303,7 +303,7 @@ Line by line, this is telling the Docker engine to:
 
 Running `docker container ls` will show a list of all running containers, including the one we just created:
 
-```nohighlight
+```plain
 docker container ls
 CONTAINER ID  IMAGE                COMMAND                 CREATED        STATUS        PORTS                                           NAMES
 4af35c42e0bb  magento-demo-web     "/bin/bash"             5 minutes ago  Up 5 minutes  0.0.0.0:5000->5000/tcp                          magento-demo-web
@@ -315,7 +315,7 @@ b73739ad5d66  mysql:5.7            "docker-entrypoint.s…"  3 hours ago    Up 3
 
 With the container up and running, we can connect to it with:
 
-```nohighlight
+```plain
 docker exec -it magento-demo-web bash
 ```
 
@@ -323,13 +323,13 @@ You may remember this as the same command we used before to connect to the MySQL
 
 After that, a prompt like this should show up:
 
-```nohighlight
+```plain
 kevin@4af35c42e0bb:/workspaces/magento-demo$
 ```
 
 We’re now inside our container. Notice how we’re automatically taken to `/workspaces/magento-demo`. This is just like we specified in our Dockerfile with the `WORKDIR` command. Feel free to run `php -v` or `composer -V` to validate that the setup from our Dockerfile got all the way into our container:
 
-```nohighlight
+```plain
 kevin@4af35c42e0bb:/workspaces/magento-demo$ php -v
 PHP 7.4.9 (cli) (built: Aug  7 2020 14:30:01) ( NTS )
 Copyright (c) The PHP Group
@@ -344,7 +344,7 @@ Composer 1.10.1 2020-03-13 20:34:27
 
 We also need to validate that our containers are actually able to talk to each other via the network that we set up. If all went according to plan, still from within our `magento-demo-web` container, this command should open a `mysql` session:
 
-```nohighlight
+```plain
 mysql -h mysql -u kevin -p
 ```
 
@@ -352,7 +352,7 @@ Notice how this time we don’t use `localhost` or `127.0.0.1` to connect to our
 
 Same deal for the Elasticsearch container. We can do something like this to talk to it:
 
-```nohighlight
+```plain
 curl elasticsearch:9200/_cat/health
 ```
 
@@ -362,7 +362,7 @@ Again, from the perspective of `magento-demo-web`, this is just another machine 
 
 Now that we have our environment ready for Magento, let’s install it. First order of business is to create the Composer project:
 
-```nohighlight
+```plain
 composer create-project --repository-url=https://repo.magento.com/ magento/project-community-edition ./install
 ```
 
@@ -371,13 +371,13 @@ If you’re familiar with Composer, then this should look very familiar to you. 
 1. First, Magento is not openly available to download just like that. As such, Composer will ask for authentication in order to do so. Follow [this guide](https://devdocs.magento.com/guides/v2.4/install-gde/prereq/connect-auth.html) to obtain the authentication keys from the Magento Marketplace. When Composer asks for a username, type in the public key; when it asks for password, type in the private key.
 1. Second, you’ll notice that I specified `./install` at the end of that command. This is where all the files will be downloaded. I’ve chosen this (an `install` directory inside our current one) because `composer create-project` will refuse to download the files in a directory that’s not empty. Ours isn’t, because we’ve got our Dockerfile in it. But that’s nothing to worry about, once Composer finishes downloading everything, we’ll just copy the files over to their rightful location at `/workspaces/magento-demo`. You can do so with some Linux sorcery like this:
 
-```nohighlight
+```plain
 (shopt -s dotglob; mv -v ./install/* .)
 ```
 
 This Composer operation will take a good while, but when it’s done, make sure to move all the contents of `./install` into `/workspaces/magento-demo`. We now need to actually install Magento:
 
-```nohighlight
+```plain
 bin/magento setup:install \
   --base-url=http://localhost:5000 \
   --db-host=mysql \
@@ -399,7 +399,7 @@ bin/magento setup:install \
 
 Even if you have never installed Magento before, the command above should be pretty straightforward. An interesting thing to note is how we’ve set up our database and Elasticsearch settings here:
 
-```nohighlight
+```plain
   --db-host=mysql \
   --db-name=magento_demo \
   --db-user=kevin \
@@ -408,7 +408,7 @@ Even if you have never installed Magento before, the command above should be pre
 
 and
 
-```nohighlight
+```plain
   --elasticsearch-host=elasticsearch \
   --elasticsearch-port=9200
 ```
@@ -419,7 +419,7 @@ As you can see, these are the same settings that we used to configure our MySQL 
 
 Once that command is done, we’re ready. We have a working Magento. Try it out by running this:
 
-```nohighlight
+```plain
 php -S 0.0.0.0:5000 -t ./pub/ ./phpserver/router.php
 ```
 
@@ -429,7 +429,7 @@ And navigating to `localhost:5000` in your browser. You should see your empty Ma
 
 If you’re planning some custom extension, or to just play with Magento to get to know it better, you may want to add some sample data. Luckily, the Magento devs have graciously provided such a thing in the form of a Composer package. If you want, you can install it with this recipe:
 
-```nohighlight
+```plain
 bin/magento sampledata:deploy
 bin/magento setup:upgrade
 bin/magento indexer:reindex
@@ -520,7 +520,7 @@ As you can see, most of `docker-compose.yml` is more or less rewriting the `dock
 
 If you want to try it out, make sure to remove all the infrastructure we’ve created, to avoid any conflicts. You can do so from your host machine with these commands:
 
-```nohighlight
+```plain
 docker container rm -f magento-demo-web magento-demo-elasticsearch magento-demo-mysql
 docker image rm magento-demo-web
 docker network rm magento-demo-network
@@ -529,7 +529,7 @@ docker volume rm magento-demo-mysql-data
 
 Make sure you’re in the directory where the Dockerfile lives in the host machine. Then create a new `docker-compose.yml` file and put all the content above into it. Finally, run:
 
-```nohighlight
+```plain
 docker-compose up -d
 ```
 
@@ -539,19 +539,19 @@ The `-d` option means that the the command will run in the background and give y
 
 You can still see the logs even in detached mode with:
 
-```nohighlight
+```plain
 docker-compose logs
 ```
 
 You can also inspect the running containers. For that, you can use:
 
-```nohighlight
+```plain
 docker-compose ps
 ```
 
 Output will look something like this:
 
-```nohighlight
+```plain
 $ docker-compose ps
            Name                         Command               State                       Ports                     
 --------------------------------------------------------------------------------------------------------------------
@@ -566,7 +566,7 @@ Notice how `docker-compose ps` gives us our container names just as we specified
 
 Now, same as before, we still need to open a terminal into our Magento container to run some installation commands on it. To do so, we can run the following command:
 
-```nohighlight
+```plain
 docker-compose exec web bash
 ```
 
@@ -574,7 +574,7 @@ Notice how with `docker-compose` we refer to the container via its service name.
 
 Of course, we can still use the same command that we used before, when we created our container directly with `docker`:
 
-```nohighlight
+```plain
 docker exec -it magento-demo-web bash
 ```
 
@@ -582,13 +582,13 @@ Now, once inside our container we need to install Magento again. Remember that w
 
 If you were running this from scratch you would just go ahead and do...
 
-```nohighlight
+```plain
 composer create-project --repository-url=https://repo.magento.com/ magento/project-community-edition ./install
 ```
 
 and
 
-```nohighlight
+```plain
 (shopt -s dotglob; mv -v ./install/* .)
 ```
 
@@ -596,13 +596,13 @@ In this case, however, we already have all the Magento files in our directory, S
 
 But since this is a new Magento installation, we do need to remove the config file before `setup:install`’ing. So go ahead and…
 
-```nohighlight
+```plain
 rm app/etc/env.php
 ```
 
 …then:
 
-```nohighlight
+```plain
 bin/magento setup:install \
   --base-url=http://localhost:5000 \
   --db-host=mysql \
@@ -624,7 +624,7 @@ bin/magento setup:install \
 
 After a while, Magento will be fully installed in our new infrastructure created by Docker Compose and ready to be fired up via the PHP built in server:
 
-```nohighlight
+```plain
 php -S 0.0.0.0:5000 -t ./pub/ ./phpserver/router.php
 ```
 

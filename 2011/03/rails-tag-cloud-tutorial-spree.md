@@ -127,7 +127,7 @@ end
 
 The data is presented to the user in the following view:
 
-```nohighlight
+```plain
 <h3>Tag Cloud:</h3>
 <div id="tag_cloud">
 <% @results.each do |b| %>

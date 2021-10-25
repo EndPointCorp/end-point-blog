@@ -15,7 +15,7 @@ I’m doing some comparative analysis of various distributed non-relational data
 
 I relied upon the standard “erlang” debian package, which installs cleanly on a basically bare system without a hitch (as one would expect). However, the latest Riak’s “make” tasks fail to run; this is because the rebar script on which the make tasks rely chokes on various bad characters:
 
-```nohighlight
+```plain
 riak@nosql-01:~/riak$ make all rel
 ./rebar compile
 ./rebar:2: syntax error before: PK

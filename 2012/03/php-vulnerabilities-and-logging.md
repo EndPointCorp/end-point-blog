@@ -14,7 +14,7 @@ I’ve recently been working on a Ruby on Rails site on my personal [Linode](htt
 
 Since I was not working on the site and I did not expect to see search traffic to the site, I was not sure what caused the alert. I logged on to the server and checked the Rails development log to see the following:
 
-```nohighlight
+```plain
 Started GET "/muieblackcat" for 200.195.156.242 at 2012-02-15 10:01:18 -0500
 Started GET "/admin/index.php" for 200.195.156.242 at 2012-02-15 10:01:21 -0500
 Started GET "/admin/pma/index.php" for 200.195.156.242 at 2012-02-15 10:01:22 -0500

@@ -12,13 +12,13 @@ date: 2015-01-21
 
 Recently I worked on a project using the Perl web application framework [Dancer](http://www.perldancer.org) that had multiple paths to order a product:
 
-```nohighlight
+```plain
  /product => /cart => /checkout => /receipt
 ```
 
 That’s the standard approach. Then there was a “phone order” approach:
 
-```nohighlight
+```plain
  /create_order => /checkout => /receipt
 ```
 
@@ -26,7 +26,7 @@ A “phone order” is one taken down (usually by phone), where the user who is 
 
 As a consequence, the phone order page flow actually ended up as:
 
-```nohighlight
+```plain
  get /create_order => post /create_order => /checkout
 ```
 
@@ -62,7 +62,7 @@ Hmm, redirect doesn’t support a parameter hash. Oh, well, no problem:
 
 That gets the job done, but at a price: now instead of a nice, clean URL at my final destination, I get:
 
-```nohighlight
+```plain
    .../checkout?param1=value1&param2=...
 ```
 

@@ -23,7 +23,7 @@ While I’ve worked with a few Rails 3 apps, I haven’t been involved in the ac
 
 The rails_upgrade provides a few new rake tasks for checking compatibility, upgrading the routes, creating a Gemfile, and upgrading configuration. For me, the most valuable task was the **rake rails:upgrade:check** task. Here’s what the output looked like for this app:
 
-```nohighlight
+```plain
 <b>Deprecated session secret setting</b>
 Previously, session secret was set directly on ActionController::Base; it's now config.secret_token.
 More information: http://lindsaar.net/2010/4/7/rails_3_session_secret_and_session_store

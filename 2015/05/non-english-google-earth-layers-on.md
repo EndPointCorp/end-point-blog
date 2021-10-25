@@ -21,7 +21,7 @@ To disable these layers, we modify the GECommonSettings.conf file on the machine
 
 Here’s an example of some of the entries contained within the GECommonSettings.conf file:
 
-```nohighlight
+```plain
 1st%20Level%20Admin%20Names%20%28States_Provinces%29=false
 2nd%20Level%20Admin%20Regions%20%28Counties%29=false
 Islands=false
@@ -50,7 +50,7 @@ It took some trial and error, but I was eventually able to figure out what to do
 
 Here’s an example of some of the new entries that are now contained within my GECommonSettings.conf file:
 
-```nohighlight
+```plain
 http%3A__kh.google.com%3A80_\%UAD6D%UACBD=false
 http%3A__kh.google.com%3A80_\%UAD6D%UAC00%UBA85=false
 http%3A__kh.google.com%3A80_\%UD574%UC548%UC120=false

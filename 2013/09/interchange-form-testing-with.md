@@ -91,7 +91,7 @@ $ grep "some pattern that identifies my 200" *.html | perl compare_pages.pl
 
 I also had to adjust my Interchange configuration so my script would be accepted as a “robot”:
 
-```nohighlight
+```plain
 RobotUA compare-pages
 ```
 

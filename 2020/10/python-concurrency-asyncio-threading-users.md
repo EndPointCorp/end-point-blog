@@ -121,7 +121,7 @@ class Counter():
       print(f'All values are {self.values[0]} at +{now - t0:.5f}s')
 ```
 
-```nohighlight
+```plain
 All values are 693 at +9.12154s
 All values are 797 at +10.60691s
 All values are 877 at +11.83219s
@@ -147,7 +147,7 @@ def count(self):
         self.values[i] += 1
 ```
 
-```nohighlight
+```plain
 All values are 114 at +1.41245s
 All values are 206 at +2.57230s
 All values are 315 at +4.05285s
@@ -212,7 +212,7 @@ if __name__ == '__main__':
     asyncio.run(main())
 ```
 
-```nohighlight
+```plain
 All values are 84 at +1.04261s
 All values are 169 at +2.08948s
 All values are 254 at +3.13599s

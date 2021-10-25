@@ -14,7 +14,7 @@ date: 2009-08-12
 
 From the [Changes](https://fastapi.metacpan.org/source/TURNSTEP/DBD-Pg-2.15.1/Changes) file for 2.15.0:
 
-```nohighlight
+```plain
 CHANGE:
  - Allow execute_array and bind_param_array to take oddly numbered items, 
    such that DBI will make missing entries undef/null (CPAN bug #39829) [GSM]
@@ -92,7 +92,7 @@ $sth->execute_array(undef);
 
 -----------
 
-```nohighlight
+```plain
 CHANGE:
  - Use PQexecPrepared even when no placeholders (CPAN bug #48155) [GSM]
 ```
@@ -101,7 +101,7 @@ Sending queries to Postgres via DBD::Pg usually involves two steps: prepare and 
 
 -----------
 
-```nohighlight
+```plain
 CHANGE:
  - Fix quoting of booleans to respect more Perlish variants (CPAN bug #41565) [GSM]
 ```
@@ -126,7 +126,7 @@ Value 'false' is FALSE
 
 -----------
 
-```nohighlight
+```plain
 CHANGE:
   - Return ints and bools-cast-to-number from the db as true Perlish numbers.
     (CPAN bug #47619) [GSM]

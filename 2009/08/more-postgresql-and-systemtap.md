@@ -26,7 +26,7 @@ COMMIT
 
 This leaves me with a three-column index on 1000 rows of the following:
 
-```nohighlight
+```plain
 5432 josh@josh*# SELECT * FROM a LIMIT 10;
  i | j  |  k  
 ---+----+-----
@@ -45,7 +45,7 @@ This leaves me with a three-column index on 1000 rows of the following:
 
 Now I need to make a query that will use the index. That’s easy enough, with these two queries. As shown by the index condition, the first query uses all three columns of the index, and the second, only two.
 
-```nohighlight
+```plain
 5432 josh@josh# EXPLAIN SELECT * FROM a WHERE i > 8 AND j > 80 AND k > 800;
                             QUERY PLAN                             
 -------------------------------------------------------------------
@@ -71,7 +71,7 @@ Since PostgreSQL doesn’t come with a DTrace probe built into the _bt_first() f
 
 The test script I used is as follows:
 
-```nohighlight
+```plain
 probe process("/usr/local/pgsql/bin/postgres").function("_bt_first")
 {
           /* Time of call */
@@ -85,7 +85,7 @@ probe process("/usr/local/pgsql/bin/postgres").function("_bt_first")
 
 Note that the script above accesses variables in the _bt_first() function just as standard C functions would. The script has the following output:
 
-```nohighlight
+```plain
 [josh@localhost ~]$ sudo /usr/local/bin/stap -v test.d
 Pass 1: parsed user script and 59 library script(s) in 130usr/70sys/196real ms.
 Pass 2: analyzed script: 2 probe(s), 3 function(s), 0 embed(s), 0 global(s) in 50usr/50sys/103real ms.
@@ -108,7 +108,7 @@ _bt_first at time 49379987397126
 
 You’ll note several indexes get scanned immediately. These are indexes from the PostgreSQL catalog. The index we created above has OID 16388. First, I’ll run the query with three scan keys, followed by the query with two keys:
 
-```nohighlight
+```plain
 _bt_first at time 50357469430819
 3 scan keys
 16388 index oid

@@ -47,7 +47,7 @@ Once the partitioning is set up as required, we boot the CentOS 5 rescue CD for 
 
 The first installation step at this stage is to modify anaconda so that it doesn’t produce an unskippable error due to there being an “unsupported” GPT. First create a ramdisk to contain a copy of the anaconda libraries:
 
-```nohighlight
+```plain
 mkdir /mnt/anacondalib
 mount -t tmpfs none /mnt/anacondalib
 cp -R /mnt/runtime/usr/lib/anaconda/* /mnt/anacondalib/
@@ -57,13 +57,13 @@ Now edit the python file at /mnt/anacondalib/partitions.py, and on line 1082 (vi
 
 Now we mount the changed library directory over the read-only version from the installation media:
 
-```nohighlight
+```plain
 mount -o bind /mnt/anacondalib/ /mnt/runtime/usr/lib/anaconda/
 ```
 
 Now we have to move /sbin out of way otherwise anaconda will fail complaining that /sbin already exists:
 
-```nohighlight
+```plain
 export PATH=$PATH:/sbin.bak
 mv /sbin /sbin.bak
 mkdir /sbin
@@ -71,7 +71,7 @@ mkdir /sbin
 
 Now we can start anaconda:
 
-```nohighlight
+```plain
 centos_mirror="http://vault.centos.org/5.10/os/x86_64/"
 anaconda --dmraid --selinux -T -m $centos_mirror
 ```
@@ -87,7 +87,7 @@ Once the OS installation is complete, you will be prompted to eject any media an
 
 Then:
 
-```nohighlight
+```plain
 mkdir /mnt/boot
 mount /dev/sda1 /mnt/boot   # mount your /boot partition to /mnt/boot
 cp /lib/grub/x86_64/* /mnt/boot/grub/

@@ -23,7 +23,7 @@ Now, for the gritty details. Don’s post shows the JavaScript he uses to find t
 
 Or in HAML:
 
-```haml
+```plain
 %input{type: "hidden", name: "gh_issue", value: current_page.data.gh_issue_number}
 ```
 
@@ -39,7 +39,7 @@ Our blog is over 9 years old now, with over 1,300 posts and comments on many of 
 
 We wanted to preserve original author and timestamp information, so I had my script prepend the comment body with that information in a code block so it could be easily read by people reading comments on GitHub and parsed by JavaScript:
 
-```
+```plain
 original author: ...
 date: ...
 ```

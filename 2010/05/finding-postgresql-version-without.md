@@ -28,7 +28,7 @@ Fpostmaster.cL1507
 
 In this case, we can clearly see that line 1507 of postmaster.c was throwing the error. After firing up a few more versions of Postgres and recording the line numbers, I found that all versions since 7.3 were hitting the same chunk of code from postmaster.c:
 
-```nohighlight
+```plain
 /* Check we can handle the protocol the frontend is using. */
 
 if (PG_PROTOCOL_MAJOR(proto) <> PG_PROTOCOL_MAJOR(PG_PROTOCOL_LATEST) ||
@@ -194,7 +194,7 @@ exit;
 
 The only thing left is the DATA section, which I’ll show here to be complete:
 
-```nohighlight
+```plain
 __DATA__
 
 ## Format: filename line version

@@ -15,7 +15,7 @@ date: 2009-11-23
 
 We used XZ for the first time in the [Interchange project](http://www.icdevgroup.org/i/dev) in the [Interchange 5.7.3](http://www.icdevgroup.org/i/dev/news?mv_arg=00039) packages. Compared to gzip and bzip2, the file sizes were as follows:
 
-```nohighlight
+```plain
 interchange-5.7.3.tar.gz   2.4M
 interchange-5.7.3.tar.bz2  2.1M
 interchange-5.7.3.tar.xz   1.7M

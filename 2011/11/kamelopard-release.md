@@ -18,7 +18,7 @@ After completing no small amount of refactoring, I’m pleased to announce a new
 - Kamelopard classes now live within a module, preventing namespace collisions. This is important for any large-ish library, and probably should have been done all along. Previous to this, some classes had awfully strange names designed to prevent namespace collisions; these classes have been changed to simpler, more intuitive names now that collisions aren’t a problem.
 - Perhaps the biggest change is the incorporation of a large and (hopefully) comprehensive test suite. I’m a fan of test-driven development, but didn’t start off on the right foot with Kamelopard. It originally shipped with a Ruby script that tried a few examples and hoped it didn’t crash; that has been replaced with a full [RSpec](http://rspec.info/)-based test suite, including tests for each class and in particular, extensive test of the KML output to ensure it meets the KML specification. Run these tests from the Kamelopard source with the command
 
-```nohighlight
+```plain
 rspec spec/*
 ```
 
@@ -45,7 +45,7 @@ puts Kamelopard::Document.instance.get_kml_document.to_s
 
 Along with some trigonometry and linear algebra to calculate the heading, tilt, and roll, and a CSV file of data points, the script above is all it took; the KML result runs correctly in Google Earth without further modification. Kamelopard has been published to RubyGems.org, so installation is simply 
 
-```nohighlight
+```plain
 gem install kamelopard
 ```
 

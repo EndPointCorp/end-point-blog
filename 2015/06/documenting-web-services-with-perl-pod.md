@@ -22,7 +22,7 @@ get time => sub {
 Your application might have several, or even dozens of these, with various parameters, returning data in JSON or TXT or CSV or who-knows-what.
 I chose to document these in Perl [POD (Plain Old Documentation)](http://perldoc.perl.org/perlpod.html) format, e.g.,
 
-```nohighlight
+```plain
 =pod
 
 =head1 time

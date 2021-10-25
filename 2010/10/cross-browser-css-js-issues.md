@@ -180,7 +180,7 @@ This is a pretty common scenario. In IE, if the combined widths of consecutive f
 
 The simplest and minimalist change I’ve found to work can be described in a few steps. Let’s say your floating elements are <div>’s inside a <div> with an id of “products”:
 
-```nohighlight
+```plain
 <div id="products">
   <div class="product">product 1</div>
   <div class="product">product 2</div>
@@ -209,7 +209,7 @@ Complete these steps:
 
 Yielding:
 
-```nohighlight
+```plain
 <div id="outer_products">
   <div id="products">
     <div class="product">product 1</div>

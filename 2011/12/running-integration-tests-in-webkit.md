@@ -23,13 +23,13 @@ What capybara-webkit does for you is enable you to run your tests inside of WebK
 
 To install capybara-webkit you will need to install the Qt development toolkit. It’s fairly straight forward so I’ll just refer you to the [github wiki](https://github.com/thoughtbot/capybara-webkit/wiki/Installing-QT) page for instructions for the various platforms. In Ubuntu, I just ran the following:
 
-```nohighlight
+```plain
 sudo apt-get install libqt4-dev
 ```
 
 If you are installing on a server environment, you’ll also need to install Xvfb. You can do that in Ubuntu with the following command:
 
-```nohighlight
+```plain
 sudo apt-get install xvfb
 ```
 
@@ -37,32 +37,32 @@ It’s a little outside the scope of this blog post to go into other little thin
 
 The next step is to configure your cucumber tests to use the capybara-webkit driver. To do that, add
 
-```nohighlight
+```plain
 gem "capybara-webkit"
 ```
 
 to your Gemfile in the development and test group. Then in your env.rb file for cucumber add the following lines:
 
-```nohighlight
+```plain
 Capybara.javascript_driver = :webkit
 ```
 
 In some cases, I’ve found it helpful to also specify a server port and app_host as follows:
 
-```nohighlight
+```plain
 Capybara.server_port = '8000'
 Capybara.app_host = 'http://localhost:8000'
 ```
 
 Now your tests are setup to run in WebKit. The final step is running the tests. To do this, you’ll need to run them from within xvfb. You can do that with the following command:
 
-```nohighlight
+```plain
 xvfb-run bundle exec cucumber
 ```
 
 I’ve created an alias for this and dropped it in my .bashrc file. Here’s my entry, but you can set it up anyway you’d like.
 
-```nohighlight
+```plain
 alias xcuke="xvfb-run bundle exec cucumber"
 ```
 

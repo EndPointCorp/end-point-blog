@@ -35,7 +35,7 @@ $::Tag->tmpn("product_list", $results);
 
 In the actual HTML page, you would do this:
 
-```nohighlight
+```plain
 <table cellpadding=0 cellspacing=2 border=1>
 <tr>
   <th>Image</th>

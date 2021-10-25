@@ -75,7 +75,7 @@ def download_csv(self, request, queryset):
 
 After selecting two rows and running the action, it created a file some.csv in the main project directory with the following content.
 
-```nohighlight
+```plain
 code,country,ip,url,count
 B,BB,BBB,BBBB,22
 C,CC,CCC,CCCC,33

@@ -20,7 +20,7 @@ This can -- sort of. So long as you have those transaction logs, at least. If yo
 
 I tested this technique on a pgbench database on stock PostgreSQL 9.4, apart from the following postgresql.conf settings that (sort of) turn on WAL archival -- or at least make sure the WAL segments are kept around:
 
-```nohighlight
+```plain
 wal_level = archive
 archive_mode = on
 archive_command = '/bin/false'

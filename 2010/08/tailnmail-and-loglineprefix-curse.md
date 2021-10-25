@@ -16,20 +16,20 @@ One of the problems I had when writing [tail_n_mail](https://bucardo.org/tail_n_
 
 What you can put in the log_line_prefix parameter is a string of sprintf style escapes, which Postgres will expand for you as it writes the log. There are a large number of escapes, but only a few are commonly used or useful. Here’s a log_line_prefix I commonly use:
 
-```nohighlight
+```plain
 log_line_prefix = '%t [%p] %u@%d '
 ```
 
 This tells Postgres to print out the timestamp, the PID aka process id (inside of square brackets), the current username and database name, and finally a single space to help separate the prefix visually from the rest of the line. The above will generate lines that look like this:
 
-```nohighlight
+```plain
 2010-08-06 09:24:57.714 EDT [7229] joy@joymail LOG: execute dbdpg_p7228_5: SELECT count(id) FROM joymail WHERE folder = $1
 2010-08-06 09:24:57.714 EDT [7229] joy@joymail DETAIL:  parameters: $1 = '4'
 ```
 
 As you might imagine, the customizability of log_line_prefix makes parsing the log files all but impossible without some prior knowledge. I didn’t want to go the pgfouine route and make people change their log_line_prefix to a specific setting. I think it’s kind of rude to force your database to change its logging to accommodate your tools :). The original quick solution I came up with was to have a set of predefined regular expressions and the user would pick one that most closely matched their logs. For tail_n_mail to work properly, it needs to pick up at least the PID so it can tell when one statement ends a new one begins. For example, if you chose “regex #1”, the log parsing regex would look like this:
 
-```nohighlight
+```plain
 (\d\d\d\d\-\d\d\-\d\d \d\d:\d\d:\d\d).+?(\d+)
 ```
 
@@ -37,13 +37,13 @@ This works fine on the example above, and gets us the timestamp and the PID from
 
 Enter the current solution: building a regex on the fly. Since we don’t have a connection to the database at all, merely to the the log files, this requires that the user enter in their current log_line_prefix. This is a simple entry into the **tailnmailrc** file that looks just like the entry in postgresql.conf, e.g.:
 
-```nohighlight
+```plain
 log_line_prefix = '%t [%p] %u@%d '
 ```
 
 The tail_n_mail script uses that variable to build a custom regex specifically tailored to that log_line_prefix and thus to the Postgres logs being used. Not only can we grab whatever bits we want (currently we only care about the timestamp (%t and %m) and the PID (%p)), but we can now cleanly break apart each line in the log into the prefix and the actual statement. This means the canonicalization/flattening of the queries is more effective, and allows us to only output the prefix information once. The output of tail_n_mail looks something like this:
 
-```nohighlight
+```plain
 Date: Fri Aug  6 11:01:03 2010 UTC
 Host: whale.example.com
 Unique items: 7

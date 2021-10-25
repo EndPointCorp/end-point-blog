@@ -22,7 +22,7 @@ The first and easiest solution is to simply upgrade. Debian has made a “workar
 
 The next best solution, for those rare cases when you cannot upgrade, is to apply Debian’s solution yourself by patching the ‘pg_wrapper’ program that Debian uses. In order to support running different versions of Postgres on the same box in a sane and standard fashion, Debian uses some wrapper scripts around some of the Postgres command-line utilities such as psql. Thus, the psql command in /usr/bin/psql is actually a symlink to the shell script pg_wrapper, which parses some arguments and then calls the **actual** psql binary, which is no longer in the default path. So, to apply the Debian fix, just patch your pg_wrapper file like so:
 
-```nohighlight
+```plain
 *** pg_wrapper  2011/07/18 03:46:49     1.1
 --- pg_wrapper  2011/07/18 03:48:23
 ***************
@@ -60,7 +60,7 @@ The second best solution, after patching pg_wrapper, is to simply define LD_PREL
 
 Another solution is to use the ‘rlwrap’ program, which is a wrapper around some arbitrary program (in this case, psql) which routes the user input through readline. So a quick alias would be:
 
-```nohighlight
+```plain
 alias p='rlwrap psql --no-readline'
 ```
 

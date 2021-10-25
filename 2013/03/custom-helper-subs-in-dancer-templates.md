@@ -30,7 +30,7 @@ I found [this blog post](http://quispiam.com/adding-custom-helper-methods-to-dan
 
 And the URLs are output fully qualified:
 
-```nohighlight
+```plain
 http://localhost:3000/
 http://localhost:3000/contact
 ```

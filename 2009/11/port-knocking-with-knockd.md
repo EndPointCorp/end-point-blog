@@ -15,7 +15,7 @@ Let’s step back a moment and see why this solution is needed. Before SSH there
 
 So, back to port knocking. It turns out that any system connected to the internet is basically going to come under attack. One common target is SSH—​specifically, people connecting to the SSH port, then trying combinations of usernames and passwords in the hopes that one of them is right. The best prevention against these attacks is to have a good password. Because public key authentication is so easy, and makes typing in the actual account password such a rare event, you can make the password something very secure, such as:
 
-```nohighlight
+```plain
 gtsmef#3ZdbVdAebAS@9e[AS4fed';8fS14S0A8d!!9~d1aAQ5.81sa0'ed
 ```
 
@@ -29,7 +29,7 @@ What exactly is the knock? It’s a series of connections to TCP or UDP ports. I
 
 Here’s a sample knockd configuration file:
 
-```nohighlight
+```plain
 [options]
   logfile = /var/log/knockd.log
 
@@ -64,7 +64,7 @@ telnet: connect to address 123.456.789.000: Connection refused
 
 Note that we reveived a bunch of “Connection refused”—​the same message as if we tried any other random port. Also the same message that people trying to connect to a port knock protected SSH will see. If you look in the logs for knockd (set as /var/log/knockd.log in the example file above), you’ll see some lines like this if all went well:
 
-```nohighlight
+```plain
 [2009-11-09 14:01] 100.200.300.400: openSSH: Stage 1
 [2009-11-09 14:01] 100.200.300.400: openSSH: Stage 2
 [2009-11-09 14:01] 100.200.300.400: openSSH: Stage 3
@@ -74,7 +74,7 @@ Note that we reveived a bunch of “Connection refused”—​the same message 
 
 Voila! Your iptables should now contain a new line:
 
-```nohighlight
+```plain
 $ iptables -L -n | grep 100.200
 ACCEPT     tcp  --  100.200.300.400  anywhere            tcp dpt:ssh
 ```
@@ -91,7 +91,7 @@ You’ll note that we used “A” to append the DROP to the bottom of the INPUT
 
 One flaw in the above scheme the sharp reader may have spotted is that although the SSH port cannot be reached without a knock, the sequence of knocks used can easily be intercepted and played back. While this doesn’t gain the potential bad guy too much, there is a way to overcome it. The knockd program allows the port knocking combinations to be stored inside of a file, and read from, one line at a time. Each successful knock will move the required knocks to the next line, so that even knowing someone else’s knock sequence will not help, as it changes each time. To implement this, just replace the ‘sequence’ line as seen in the above configuration file with a line like this:
 
-```nohighlight
+```plain
 one_time_sequences = /etc/knockd.sequences.txt
 ```
 

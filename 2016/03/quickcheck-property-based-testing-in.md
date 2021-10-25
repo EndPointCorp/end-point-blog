@@ -248,7 +248,7 @@ The jsVerify DSL takes some time to get used to. It cannot take advantage of the
 
 Running *jsc.assert* we might have expected to get a success, but this time we’re getting:
 
-```nohighlight
+```plain
 Error: Failed after 1 tests and 5 shrinks. rngState: 001d40a68297fbce35; Counterexample: 0;
 ```
 
@@ -319,7 +319,7 @@ var graphG = jsc.array(jsc.nat).smap(
 
 When running the assert for that property we’re getting an error:
 
-```nohighlight
+```plain
 Error: Failed after 1 tests and 1 shrinks. rngState: 085f6c82ea10439d7b; Counterexample: {"_map":{"21":[44]}}; Exception: self._map.delete is not a function
 ```
 
@@ -334,7 +334,7 @@ self.removeNode = function(node) {
 
 When running again, we’re getting an error we were expecting:
 
-```nohighlight
+```plain
 Error: Failed after 8 tests and 2 shrinks. rngState: 8c97e25bc36f41da08; Counterexample: {"_map":{"2":[7]}};
 ```
 

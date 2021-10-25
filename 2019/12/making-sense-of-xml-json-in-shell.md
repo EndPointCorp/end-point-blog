@@ -88,7 +88,7 @@ xmlstarlet sel -T -t -n \
 
 The output looks like this:
 
-```nohighlight
+```plain
 ------------------------------
 Area: Gombak,Petaling,Sepang,Hulu Langat,Hulu Selangor,Rawang,S.Alam
 Date: 26-12-2019 00:37:31

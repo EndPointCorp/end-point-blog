@@ -79,7 +79,7 @@ You’ll also need to install the UpCloud plugin. This is detailed in the earlie
 
 Once you’ve got Terraform and UpCloud’s plugin installed, create a directory for your project (`mkdir minecraft`) and run `terraform init` in it. Once you’ve done that, using Terraform is as simple as creating a configuration file describing your server. How exactly that looks depends on your provider, but my initial file, which I named `server.tf`, looked something like this:
 
-```nohighlight
+```plain
 provider "upcloud" {
   # Your UpCloud credentials are read from the environment variables
   # export UPCLOUD_USERNAME="Username for UpCloud API user"
@@ -137,7 +137,7 @@ The last two in particular need some attention; I created an SSH key specificall
 
 After providing credentials via environment variables as per UpCloud’s tutorial, you can run `terraform plan` to see what your current configuration looks like:
 
-```nohighlight
+```plain
 zed@zeds-pc:~/minecraft $ terraform plan
 Refreshing Terraform state in-memory prior to plan...
 The refreshed state will be used to calculate this plan, but will not be
@@ -205,7 +205,7 @@ To get my new virtual machine running a Minecraft server, I needed to perform so
 
 The sections I added to my `upcloud` resource block in my `server.tf` file look like this:
 
-```nohighlight
+```plain
   provisioner "remote-exec" {
     inline = [ 
       "wget http://zedjensen.com/init_minecraft.sh && chmod +x init_minecraft.sh && ./init_minecraft.sh -f && rm init_minecraft.sh"
@@ -227,7 +227,7 @@ The provisioners `remote-exec` and `local-exec` tell Terraform to run these comm
 
 For reference, the relevant parts of my init script and ssh_config look something like this:
 
-```nohighlight
+```plain
 #!/bin/bash
 
 echo "StrictHostKeyChecking accept-new" >> /etc/ssh/ssh_config
@@ -249,7 +249,7 @@ done
 mkdir -p minecraft/server
 ```
 
-```nohighlight
+```plain
 StrictHostKeyChecking no
 UserKnownHostsFile /dev/null
 ```
@@ -258,7 +258,7 @@ UserKnownHostsFile /dev/null
 
 After the last steps, you should be able to get a server up and running, but you’d have to use the IP address to connect to it directly. I have the domain `zedjensen.com`, so I decided to use `minecraft.zedjensen.com`. Luckily, Terraform also supports Cloudflare, so I set up Cloudflare as my DNS provider for `zedjensen.com` and added a new section to my `server.tf`:
 
-```nohighlight
+```plain
 provider "cloudflare" {
   version = "~> 2.0"
   email = "zed@whatever.com"
@@ -282,7 +282,7 @@ As you can probably guess, this resource block tells Terraform to add a new A re
 
 Lastly, I needed to make sure that when I was shutting my server down, my Minecraft world was safely copied off first. Terraform supports hooks for shutting down as well! I added a final section to the server block of my `server.tf`:
 
-```nohighlight
+```plain
 server {
 
   // ...
@@ -300,7 +300,7 @@ This is similar to the provisioners I added earlier, but it runs only when I’m
 
 After completing all the above steps, here’s my completed `server.tf`:
 
-```nohighlight
+```plain
 provider "upcloud" {
   # Your UpCloud credentials are read from the environment variables
   # export UPCLOUD_USERNAME="Username for UpCloud API user"
@@ -390,7 +390,7 @@ resource "cloudflare_record" "minecraft1" {
 
 Now that we’ve defined our server configuration, created scripts to set the remote server up, and added provisioners for startup and takedown, we should be able to run our script and see the magic happen. We’ll use the `-out` option this time so that we only have to review the configuration once.
 
-```nohighlight
+```plain
 zed@zeds-pc:~/minecraft $ terraform plan -out plan
 
 Refreshing Terraform state in-memory prior to plan...
@@ -470,7 +470,7 @@ To perform exactly these actions, run the following command to apply:
 
 After reviewing the list of changes to be made, we can apply our changes by following the instructions and running `terraform apply plan`:
 
-```nohighlight
+```plain
 zed@zeds-pc:~/minecraft $ terraform apply plan
 
 upcloud_server.minecraft1: Creating...
@@ -547,7 +547,7 @@ State path: terraform.tfstate
 
 Awesome! It takes a while to transfer files over, but once it’s done, my Minecraft server is up and running! To destroy, it’s just as easy:
 
-```nohighlight
+```plain
 zed@zeds-pc:~/minecraft$ terraform destroy
 upcloud_server.minecraft1: Refreshing state... [id=things]
 cloudflare_record.minecraft1: Refreshing state... [id=stuff]

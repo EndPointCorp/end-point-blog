@@ -16,21 +16,21 @@ First, let’s look at Dovecot. We have a somewhat busy mail server and as it gr
 
 Raising the number of processes in Dovecot is easy. Edit /etc/dovecot.conf and change from the prior (now commented-out) limits to the new limits:
 
-```nohighlight
+```plain
 #login_max_processes_count = 128
 login_max_processes_count = 512
 ```
 
 and later in the file:
 
-```nohighlight
+```plain
 #max_mail_processes = 512
 max_mail_processes = 2048
 ```
 
 However, then Dovecot won’t start at all due to a shortage of available file descriptors. There are various ways to change that, including munging the init scripts, changing the system defaults, etc. The most standard and non-interventive way to do so with this RHEL 5 Dovecot RPM package is to edit /etc/sysconfig/dovecot and add:
 
-```nohighlight
+```plain
 ulimit -n 131072
 ```
 
@@ -40,7 +40,7 @@ Similarly, on another server we needed to increase the number of connections all
 
 We edited /etc/nginx/nginx.conf and changed the events block like this:
 
-```nohighlight
+```plain
 events {
     worker_connections  65536;
 }
@@ -48,7 +48,7 @@ events {
 
 But then nginx wouldn’t start at all. The same problem and same solution applied. We edited /etc/sysconfig/nginx to add:
 
-```nohighlight
+```plain
 ulimit -n 131072
 ```
 

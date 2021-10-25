@@ -66,7 +66,7 @@ Next, we need a couple things to happen:
 
 First, all products are retrieved in this category with a query like this:
 
-```nohighlight
+```plain
 SELECT products.*,
   COALESCE((SELECT GROUP_CONCAT(fo.url_slug) FROM filters_options_item foi
     JOIN filters_options fo ON fo.id = foi.filter_option_id

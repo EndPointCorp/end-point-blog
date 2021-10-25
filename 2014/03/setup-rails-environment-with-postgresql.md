@@ -103,7 +103,7 @@ $ rails new SampleApp
 ```
 Configure database details under SampleApp/config/database.yml
 
-```nohighlight
+```plain
 development:
   adapter: postgresql
   encoding: unicode

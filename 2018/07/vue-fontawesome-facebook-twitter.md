@@ -71,7 +71,7 @@ This worked fine for me until I tried to use the `facebook` and `twitter` icon:
 
 Only blank spots and errors in the browser console like so:
 
-```nohighlight
+```plain
 [Error] Could not find one or more icon(s) (2)
 {prefix: "fas", iconName: "twitter"}
 {}

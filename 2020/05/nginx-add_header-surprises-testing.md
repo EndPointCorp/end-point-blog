@@ -20,7 +20,7 @@ These days when hosting websites it is common to configure the web server to sen
 
 For example, using the nginx web server we may add these directives to our `http` configuration scope to apply to everything served, or to specific `server` configuration scopes to apply only to particular websites we serve:
 
-```nohighlight
+```plain
 add_header Strict-Transport-Security max-age=2592000 always;
 add_header X-Content-Type-Options    nosniff         always;
 ```
@@ -174,7 +174,7 @@ describe('Check security headers', () => {
 
 Here I run just this one test rather than the whole suite:
 
-```nohighlight
+```plain
 % jest -w 6 ./__tests__/webserver/security-headers.test.js
 Determining test suites to run...
 testing on https://https://your.dom.ain

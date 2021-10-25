@@ -64,7 +64,7 @@ After testing on a few images, I found I could get Retina images within 2-3 KB o
 
 These are the total file sizes for each image on our [team page](/team):
 
-```nohighlight
+```plain
 Retina  Normal  Filename
  10K    9.3K    adam_spangenthal.jpg
  13K     13K    adam_vollrath.jpg

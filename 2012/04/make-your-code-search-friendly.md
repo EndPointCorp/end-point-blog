@@ -23,7 +23,7 @@ return $string;
 
 Now someone’s going to experience this error and wonder where it occurs. So armed with grep, or ack, or git-grep, they set off into the wilderness:
 
-```nohighlight
+```plain
 $ git grep 'could not be processed'
 $ git grep 'charge card error'
 $ git grep -e 'transaction.*charge.*error'

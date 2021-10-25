@@ -30,13 +30,13 @@ The Propel website offers great documentation on how to do that:
 
 After you have set everything up, in particular the build.properties file, you can now generate your schema.xml file. This generated file describes your database in XML, everything form datatypes to the relationships between tables. Run the following command to generate this XML file:
 
-```nohighlight
+```plain
   propel-gen reverse
 ```
 
 Now we want to generate the PHP classes that you will use to interact with your data. Do this by running the following command.
 
-```nohighlight
+```plain
   propel-gen .
 ```
 

@@ -24,7 +24,7 @@ Not long ago a software vendor we work with delivered a patch for a bug we’d b
 
 Assuming the original .tgz file was unpacked into a directory called “old”, and the new one into “new”, this tells me which files exist in one directory and not other, and which files exist in both in different forms. Here’s an example using a few random files in two directories:
 
-```nohighlight
+```plain
 josh@eddie:~/tmp/transient$ ls -l old new
 new:
 total 16

@@ -17,7 +17,7 @@ Step 1 was to build SystemTap. This was a straightforward ./configure, make, mak
 
 Here’s where the fun starts. SystemTap’s syntax differs from DTrace syntax. Here’s an example probe SystemTap would accept:
 
-```nohighlight
+```plain
 probe process("/usr/local/pgsql/bin/postgres").function("eqjoinsel")
 {
         printf ("%d\n", pid())
@@ -26,7 +26,7 @@ probe process("/usr/local/pgsql/bin/postgres").function("eqjoinsel")
 
 This tells SystemTap to print out the process ID (which comes from the SystemTap pid() function) each time the PostgreSQL eqjoinsel function is called. That’s the function to estimate join selectivity with most equality operators, and gets called a lot, so it’s a decently useful test. It also shows that SystemTap can probe inside programs without an explicitly defined probe. I saved this file as test.d, and ran it like this:
 
-```nohighlight
+```plain
 [josh@localhost ~]$ sudo stap -v test.d
 Pass 1: parsed user script and 52 library script(s) in 160usr/220sys/641real ms.
 Pass 2: analyzed script: 1 probe(s), 1 function(s), 1 embed(s), 0 global(s) in 40usr/60sys/331real ms.
@@ -44,7 +44,7 @@ Pass 5: starting run.
 
 Now for something more interesting. Although SystemTap lets me probe whatever function I want, it’s nice to be able to use the defined DTrace probes, because that way I don’t have to find the function name I’m interested in, in order to trace something. Here are some examples I added to my test.d script, pulled more or less at random from the [list of available DTrace probes in the PostgreSQL documentation](https://www.postgresql.org/docs/8.4/static/dynamic-trace.html). Note that whereas the documentation lists the probe names with dashes (or are these hyphens?), to make it work with SystemTap, I needed to use double-underscores, so “transaction-start” in the docs becomes “transaction__start” in my script.
 
-```nohighlight
+```plain
 probe process("/usr/local/pgsql/bin/postgres").mark("transaction__start")
 {      
         printf("Transaction start: %d\n", pid())
@@ -65,7 +65,7 @@ probe process("/usr/local/pgsql/bin/postgres").mark("smgr__md__write__done") {
 
 ...which resulted in something like this when I ran pgbench:
 
-```nohighlight
+```plain
 [josh@localhost ~]$ sudo stap -v test.d
 Pass 1: parsed user script and 52 library script(s) in 130usr/150sys/286real ms.
 Pass 2: analyzed script: 7 probe(s), 4 function(s), 2 embed(s), 0 global(s) in 30usr/30sys/120real ms.
@@ -92,7 +92,7 @@ UPDATE: As has been pointed out in the comments, compiling PostgreSQL with --ena
 
 UPDATE 2: It’s important to note that the defined DTrace probes include sets of useful variables that DTrace and SystemTap scripts might be interested in. For instance, it’s possible to get the transaction ID within the transaction__start probe. In SystemTap, these variables are referenced as $arg1, $arg2, etc. So in a transaction__start probe, you could say:
 
-```nohighlight
+```plain
 printf("Transaction with ID %d started\n", $arg1)
 ```
 

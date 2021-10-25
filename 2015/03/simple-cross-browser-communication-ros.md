@@ -173,7 +173,7 @@ setInterval(function() {
 
 If you need to troubleshoot communications or are just interested in seeing how it works, ROS comes with some neat command line tools for publishing and subscribing to topics.
 
-```nohighlight
+```plain
 ### show messages on /example/topicname
 $ rostopic echo /example/topicname
 

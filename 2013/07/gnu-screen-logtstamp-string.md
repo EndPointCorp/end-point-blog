@@ -14,7 +14,7 @@ You can add configuration to `~/.screenrc` or another configuration file named b
 
 Consider this configuration:
 
-```nohighlight
+```plain
 logfile path/to/screen-output.%Y%m%d.log
 logfile flush 1
 logtstamp on
@@ -32,13 +32,13 @@ Finally, `log on` turns on the logging.
 
 Now, what if we want to customize the timestamp? The default looks like this:
 
-```nohighlight
+```plain
 -- 0:process-name -- time-stamp -- Jul/24/13  9:09:56 --
 ```
 
 The manpage says that can be customized with `logtstampt string ...`, where the default is:
 
-```nohighlight
+```plain
 -- %n:%t -- time-stamp -- %M/%d/%y %c:%s --\n
 ```
 
@@ -46,13 +46,13 @@ The manpage earlier says that arguments may be separated by single or double quo
 
 The solution I worked out by trial and error is that you must double-quote the string and use octal escape value `\012`. Single-quoting that will output a literal backslash 0 1 2, and `\n` simply is not a recognized escape. Thus our final configuration directive is:
 
-```nohighlight
+```plain
 logtstamp string "-- time-stamp -- %Y-%m-%d %0c:%s --\012"
 ```
 
 which results in output like:
 
-```nohighlight
+```plain
 -- time-stamp -- 2013-07-24 09:59:35 --
 ```
 

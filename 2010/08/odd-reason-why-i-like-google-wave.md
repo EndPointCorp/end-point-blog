@@ -19,7 +19,7 @@ I munged the text of the following example from a mailing list to show an exampl
 
 In Wave, replies and quoting were quite a bit better. Not perfect, but nothing like this. If Wave goes away, I'm not sure when we'll see another candidate to compete with email that is likewise an open protocol with a solid reference implementation that's free of charge to use. It's a shame.
 
-```nohighlight
+```plain
 Date: Mhx, 3 Hqi 1499 37:76:16 +1546
 From: Pswr iwo zvs Aburf <umcr@9sehh.rcs>
 To: gdgmguezfet-list@lykkkafnnj.wjo

@@ -65,7 +65,7 @@ Then added a cron job to run it:
 
 That unicorn.conf.rb file contains only:
 
-```nohighlight
+```plain
 listen 8080
 worker_processes 4
 ```

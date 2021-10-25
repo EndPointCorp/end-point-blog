@@ -41,7 +41,7 @@ Distributed transactions are most common, it seems, in Java applications. Full J
 
 This script uses two databases, which I’ve called “athos” and “porthos”. Each has [same schema](http://josh.endpoint.com/athos.sql), which provides a simple framework for the sharded bank example described above. This schema provides a table for account names, another for ledger information, and a simple trigger to raise an exception when a transaction would bring a person’s balance below $0. I’ll first populate athos with Alice’s account information. She gets $200 to start. Bob will go in the porthos database, with no initial balance.
 
-```nohighlight
+```plain
 5432 josh@athos# insert into accounts values ('Alice');
 INSERT 0 1
 5432 josh@athos*# insert into ledger values ('Alice', 200);
@@ -98,13 +98,13 @@ end
 
 When I run this, Bitronix gives me a bunch of output, which I haven’t bothered to suppress, but among it all is the “Successfully committed” string I told it to print on success. Since Alice is debited $100 each time we run this, and she started with $200, we can run it twice before hitting errors. On the third time, we get this:
 
-```nohighlight
+```plain
 Something bad happened: org.postgresql.util.PSQLException: ERROR: Rejecting operation; account owner Alice’s balance would drop below 0
 ```
 
 This is our trigger firing, to tell us that we can’t debit Alice any more. If I look in the two databases, I can see that everything worked as planned:
 
-```nohighlight
+```plain
 5432 josh@athos*# select get_balance('Alice');
  get_balance 
 -------------

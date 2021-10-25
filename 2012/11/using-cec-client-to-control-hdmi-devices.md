@@ -16,7 +16,7 @@ We typically use Samsung TVs which support CEC under the trade name “Anynet+�
 
 libCEC is available on apt for Ubuntu users:
 
-```nohighlight
+```plain
 $ sudo apt-get install cec-utils
 ```
 
@@ -24,7 +24,7 @@ Once installed, we have access to all kinds of fun commands. [CEC-O-Matic](http:
 
 The syntax of a libCEC “tx” command is like this:
 
-```nohighlight
+```plain
 $ echo 'tx <src-dst> <cmd> <args...>' | cec-client <device>
 ```
 
@@ -36,7 +36,7 @@ Arguments are situational, and many commands will not require any arguments. We�
 
 The device can be found with the ever-handy:
 
-```nohighlight
+```plain
 $ cec-client -l
 Found devices: 1
 
@@ -51,7 +51,7 @@ We want to use that COM port, “/dev/ttyACM0”.
 
 For example, let’s query the menu language of the TV connected to the first CEC adapter.
 
-```nohighlight
+```plain
 $ echo 'tx 10 91' | cec-client /dev/ttyACM0
 [ . . . ]
 DEBUG:   [             492] << requesting power status of 'TV' (0)
@@ -77,7 +77,7 @@ At this point, cec-client is idling. Use Ctrl-C to end the process gracefully.
 
 What if we want to change the power setting of the TV? In this case, libCEC has built-in commands to make it a little more intuitive.
 
-```nohighlight
+```plain
 $ echo 'standby 0' | cec-client -s /dev/ttyACM0
 $ echo 'on 0' | cec-client -s /dev/ttyACM0
 ```

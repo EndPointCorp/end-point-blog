@@ -17,7 +17,7 @@ This is on Postgres 8.3 in a rather locked down environment, by the way. Coordin
 
 Got me thinking, what if we could just drop an entry into the log file, and use it to filter things out later? My first instinct was to start looking at seeing if a patch would be accepted, maybe a wrapper for ereport(), something easy. Turns out, it’s even easier than that...
 
-```nohighlight
+```plain
 pubsite=# DO $$BEGIN RAISE LOG 'MARK: 60 users'; END;$$;
 DO
 Time: 0.464 ms
@@ -31,7 +31,7 @@ Time: 0.700 ms
 
 Of course the above will only work on version 9.0 and up (eventually). Previous versions that have PL/pgSQL turned can just create a function that does the same thing. The “LOG” severity level is an informational message that’s supposed to always make it into the log files. So with those in place, a grep through the log can reveal just where they appear, and sed can extract the sections of log between those lines and feed them into your favorite analysis utility:
 
-```nohighlight
+```plain
 postgres@mothra:~$ grep -n 'LOG:  MARK' /var/log/postgresql/postgresql-9.0-main.log 
 19180:2011-03-31 20:20:37 EDT LOG:  MARK: 60 users
 19478:2011-03-31 20:25:48 EDT LOG:  MARK: 120 users

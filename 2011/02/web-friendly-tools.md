@@ -37,7 +37,7 @@ A “kit” I created for use on a personal site.
 
 I signed up for a free Typekit account and created a “kit” with 2 fonts to be used on my personal site. After publishing my kit, I implement the kit by including some Javascript (shown below), and adding my typekit classes (tk-fertigo-script and tk-ff-enzo-web) to the regions where the kit fonts should apply.
 
-```nohighlight
+```plain
 <script type="text/javascript" src="http://use.typekit.com/kitid.js"></script>
 <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 ```

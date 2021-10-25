@@ -48,7 +48,7 @@ We also have output. Output is the result of a webpack bundling operation. When 
 
 But let me show rather than tell. Consider a simple calculator application, whose source code file structure looks like this:
 
-```nohighlight
+```plain
 .
 ├── index.html
 └── js
@@ -310,7 +310,7 @@ As you can see, we’ve changed our config object’s `entry` field to include t
 
 Go ahead and run `npx webpack --config webpack.config.js` again and inspect the `dist` directory. You will see that we now have two bundles: `index.js` and `admin.js`.
 
-```nohighlight
+```plain
 dist/
 ├── admin.js
 └── index.js

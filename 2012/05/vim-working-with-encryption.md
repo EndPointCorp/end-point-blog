@@ -52,7 +52,7 @@ vim -xn <filename>
 
 In order to seamlessly integrate with GPG encrypted files you will need to add the following to your .vimrc file
 
-```nohighlight
+```plain
 " Transparent editing of gpg encrypted files.
 " By Wouter Hanegraaff
 augroup encrypted

@@ -29,7 +29,7 @@ sed 's/<h3 class="r">/\n/g; s/class="l"/LINK\n/g' search.html | grep LINK | sed 
 
 There you have it. Interestingly enough, the order of pages can be an indicator of which pages rank well. Typically, pages with higher PageRank will be near the top, although I have seen some strange exceptions. End Point’s indexed pages:
 
-```nohighlight
+```plain
 http://www.endpoint.com/
 http://www.endpoint.com/clients
 http://www.endpoint.com/team
@@ -65,7 +65,7 @@ done
 
 And I called the script above with:
 
-```nohighlight
+```plain
 ./list_google_index.sh one.html two.html three.html four.html
 ```
 

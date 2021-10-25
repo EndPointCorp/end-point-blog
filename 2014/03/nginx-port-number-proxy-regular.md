@@ -21,7 +21,7 @@ I tweaked the Nginx config for the port 80 instance to use a regex to capture th
 
 We now have the following tidbit in our Nginx config:
 
-```nohighlight
+```plain
 server {
     # [SNIP unrelated config stuff]
 

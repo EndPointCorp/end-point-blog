@@ -41,7 +41,7 @@ At first, the bug seemed to be that the “X” wasn’t actually a link, and th
 
 The development.log file on the server corraborated the story and showed a successful delete:
 
-```nohighlight
+```plain
 Started DELETE "/stored_files/78/comments/25"
   Processing by CommentsController#destroy as JS
   Parameters: {"stored_file_id"=>"78", "id"=>"25"}

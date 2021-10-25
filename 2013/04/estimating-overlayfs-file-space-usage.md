@@ -17,7 +17,7 @@ We often allocate 4GB of system memory to the ramdisk containing the “upper”
 
 The df command properly displays total usage for the overlayfs “upper” filesystem mounted at /.
 
-```nohighlight
+```plain
 $ df -h
 Filesystem              Size  Used Avail Use% Mounted on
 /cow                    3.9G  2.2G  1.8G  55% /
@@ -29,7 +29,7 @@ But how can we identify which files are consuming that space? Because the root d
 
 The `mount` command shows the / filesystem is type “overlayfs”.
 
-```nohighlight
+```plain
 $ mount
 /cow on / type overlayfs (rw)
 /dev/loop0 on /cdrom type iso9660 (ro,noatime)
@@ -38,7 +38,7 @@ $ mount
 
 The find command does indicate that most directories exist in the filesystem of type “overlayfs”, and most unmodified files are on the “lower” filesystem, in this case “squashfs”.
 
-```nohighlight
+```plain
 $ sudo find / -printf '%F\t%D\t%p\n' | head -n 7 ### fstype, st_dev, filename
 overlayfs 17 /
 overlayfs 17 /bin
@@ -51,7 +51,7 @@ squashfs 1793 /bin/bzdiff
 
 However, the modified files are reported to be on an “unknown” filesystem on a device 16. These are the files that have been copied to the “upper” filesystem upon writing.
 
-```nohighlight
+```plain
 $ find /home/lg/ -printf '%F\t%D\t%p\n' | head -n 33
 overlayfs 17 /home/lg/
 squashfs 1793 /home/lg/.Xresources
@@ -68,7 +68,7 @@ I couldn’t quickly discern how find is identifying the filesystem type, but it
 
 Now that we have a reliable list of which files have been written to and copied, we can see which are consuming the most disk space by piping that list to du. We’ll pass it a null-terminated list of files to accommodate any special characters, then we’ll sort the output to identify the largest disk space hogs.
 
-```nohighlight
+```plain
 $ sudo find / -fstype unknown -print0 | du --files0-from=- --total | sort -nr | head -n 4
 2214228 total
 38600 /var/cache/apt/pkgcache.bin

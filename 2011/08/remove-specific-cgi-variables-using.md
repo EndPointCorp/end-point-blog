@@ -16,7 +16,7 @@ Sometime you need to remove a single CGI variable from a query string in your pu
 
 The following snippet serves to rewrite any URL which has a query string parameter named id to one the exact same without that CGI variable. Since mod_rewrite uses PCRE, we can use this to our advantage by using \b word break anchors to ensure we’re only picking up a CGI variable named **exactly** the same, so (say) id=bar will be removed but tid=foo will pass on through the rewrite unaltered.
 
-```nohighlight
+```plain
 # already assume RewriteEngine on
 
 RewriteCond %{QUERY_STRING} ^(.*)\bid=(\w*)\b(.*)

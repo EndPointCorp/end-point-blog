@@ -43,7 +43,7 @@ pg_standby the only change to an existing
 restore_command already using pg_standby would be
 the addition of the -p /path/to/pausefile argument; e.g.:
 
-```nohighlight
+```plain
 restore_command = 'pg_standby -p /tmp/pausefile /path/to/archive %f %p'
 ```
 
@@ -108,7 +108,7 @@ pause-while as a wrapper for the existing
 restore_command, thus adjusting recovery.conf to
 something like this:
 
-```nohighlight
+```plain
 restore_command = 'pause-while /tmp/standby.pause pg_standby ... <args>'
 ```
 

@@ -14,7 +14,7 @@ The new branch I should have used wasn’t created yet. I had to revert all my c
 
 Creating the branch named NEW_BRANCH is as easy as:
 
-```nohighlight
+```plain
 $ git branch NEW_BRANCH
 ```
 
@@ -22,7 +22,7 @@ Now the harder part... how to delete the commits pushed to the main repo. After 
 
 As an example of this, I created a simple file, added a couple of lines there, and made four commits. The git log looks like this:
 
-```nohighlight
+```plain
 $ git log
 commit dc47a884f7b303fc8b207550104f5a1de192c91c
 Author: Szymon Guz
@@ -55,7 +55,7 @@ Let’s call these the ‘down’ and ‘up’ diff files: ‘down’ for revert
 
 The up diff can be created with:
 
-```nohighlight
+```plain
 $ git diff 73e586bb6d401f4049cf977703f25bf47c93b227 dc47a884f7b303fc8b207550104f5a1de192c91c
 diff --git a/test b/test
 index 7898192..3171744 100644
@@ -69,7 +69,7 @@ index 7898192..3171744 100644
 
 The down diff can be created using exactly the same command, but with switched parameters:
 
-```nohighlight
+```plain
 $ git diff dc47a884f7b303fc8b207550104f5a1de192c91c 73e586bb6d401f4049cf977703f25bf47c93b227
 diff --git a/test b/test
 index 3171744..7898192 100644
@@ -87,7 +87,7 @@ On the old branch I want to revert the changes, after doing this I will just com
 
 I reverted the changes on current branch with:
 
-```nohighlight
+```plain
 $ patch -p1 < down.diff
 patching file test
 $ git commit -a -m "reverted the changes, moved to another branch"
@@ -96,25 +96,25 @@ $ git commit -a -m "reverted the changes, moved to another branch"
 Now let’s move the changes into the new branch.
 I need to create the new branch from the repo after the first commit:
 
-```nohighlight
+```plain
 $ git branch NEW_BRANCH 73e586bb6d401f4049cf977703f25bf47c93b227
 ```
 
 Switch to the new branch:
 
-```nohighlight
+```plain
 $ git checkout NEW_BRANCH
 ```
 
 Apply the up.diff patch to the new branch:
 
-```nohighlight
+```plain
 patch -p1 < up.diff
 ```
 
 And commit the changes:
 
-```nohighlight
+```plain
 $ git commit -a -m "Applied changes from the other branch"
 ```
 

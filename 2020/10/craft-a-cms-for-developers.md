@@ -37,7 +37,7 @@ For ease of development and project bootstrapping, I’ve created a containerize
 
 If you want to follow along, clone that repo, and you’ll end up with this file structure (as shown by the `tree` command):
 
-```nohighlight
+```plain
 .
 ├── apache_config
 │   └── 000-default.conf
@@ -62,7 +62,7 @@ If you have Docker and Docker Compose installed in your machine, you can go to t
 
 3. Once in there, run `composer create-project craftcms/craft ./install` to install Craft with Composer. In other words, it will download all of the files that Craft needs to run. You should see something like this at the end:
 
-    ```plaintext
+    ```plain
     > @php craft setup/welcome
 
        ______ .______          ___       _______ .___________.
@@ -99,7 +99,7 @@ If you have Docker and Docker Compose installed in your machine, you can go to t
 
 5. Now do `php craft setup` to use Craft’s CLI to set up the site, its configuration, and its database structure. Just follow the prompts. When it asks you for database configuration, choose `mysql` as the database driver, set `mysql` as the database server name (because that’s the name we’ve given it in our `docker-compose.yml`), and use the environment variables defined in `docker-compose.yml` around lines 14 to 17 for the rest of the values. You can change these to whatever you want as long as you make sure that it coincides with how you defined your MySQL database container in the `docker-compose.yml` file. The prompts should look something like this:
 
-    ```plaintext
+    ```plain
     Which database driver are you using? [mysql,pgsql,?]: mysql
     Database server name or IP address: [127.0.0.1] mysql
     Database port: [3306]

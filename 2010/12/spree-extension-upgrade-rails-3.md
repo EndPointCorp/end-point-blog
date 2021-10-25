@@ -56,7 +56,7 @@ index 6cc6b70..92f2118 100644
 
 While troubleshooting the upgrade, I came across the following warning:
 
-```nohighlight
+```plain
 DEPRECATION WARNING: Using #request_uri is deprecated. Use fullpath instead. (called from ...)
 ```
 

@@ -12,19 +12,19 @@ Today I needed to do a 301 redirect for an old category page on a client’s sit
 
 The rewrite rule needed to rewrite:
 
-```nohighlight
+```plain
 /scan/mp=cat/se=Video Games
 ```
 
 to:
 
-```nohighlight
+```plain
 /scan/mp=cat/se=DS Video Games
 ```
 
 I was able to get the first part of the rewrite rule quickly:
 
-```nohighlight
+```plain
 ^/scan/mp=cat/se=Video\sGames\.html$
 ```
 
@@ -32,6 +32,6 @@ The issue was figuring out how to properly escape the space on the destination p
 
 The final rule:
 
-```nohighlight
+```plain
 RewriteRule ^/scan/mp=cat/se=Video\sGames\.html$ http://www.site.com/scan/mp=cat/se=DS\ Video\ Games.html [L,R=301]
 ```

@@ -16,7 +16,7 @@ date: 2016-02-16
 
 Using the standard Dockerfile configurations and continuing the example above, you could create a Tomcat application server with a corresponding PostgreSQL database server using two separate containers. Here is an example of the Tomcat Dockerfile:
 
-```nohighlight
+```plain
 FROM java:8-jre
 
 ENV CATALINA_HOME /usr/local/tomcat
@@ -57,7 +57,7 @@ CMD ["catalina.sh", "run"]
 
 Here is an example of the PostgreSQL Dockerfile:
 
-```nohighlight
+```plain
 # vim:set ft=dockerfile:
 FROM debian:jessie
 
@@ -114,7 +114,7 @@ CMD ["postgres"]
 
 Using [Docker Compose](https://docs.docker.com/compose/) you can define multiple container images within a single configuration file so to keep them together as a single logical unit. In order to do so you give each container a name, and then provide within the definition for each container the same Docker parameters you would use in a regular Dockerfile. Here is an example of the situation discussed earlier where you have a Tomcat image and a PostgreSQL image container which go together:
 
-```nohighlight
+```plain
 db:
   image: postgres
 web:
@@ -135,7 +135,7 @@ Within these configuration values, there are a number of things being defined. F
 
 After starting the containers you should see output in 'docker ps' showing the new containers. Here is the output from my test with Tomcat/PostgreSQL from when I was doing some testing on the Struts 2 web framework for Java:
 
-```nohighlight
+```plain
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                    NAMES
 3e3656879a7b        strutsdocker_web    "/usr/local/tomcat/bi"   3 weeks ago         Up 3 weeks          0.0.0.0:8080->8080/tcp   strutsdocker_web_1
 cb756e473ed8        postgres            "/docker-entrypoint.s"   8 weeks ago         Up 3 weeks          5432/tcp                 strutsdocker_db_1

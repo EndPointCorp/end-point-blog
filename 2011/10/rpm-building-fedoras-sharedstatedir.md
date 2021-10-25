@@ -17,7 +17,7 @@ On RHEL that macro has been set to /usr/com, a strange nonexistent path that app
 
 The easiest and most compatible way to make the change without munging the system- or user-wide RPM macros is to add this definition to the top of the spec file where it’s needed:
 
-```nohighlight
+```plain
 %define _sharedstatedir /var/lib
 ```
 

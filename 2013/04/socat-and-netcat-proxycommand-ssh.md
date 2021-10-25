@@ -31,7 +31,7 @@ there on to the client’s servers. As one does not want to actually SSH twice e
 connection is needed, the ProxyCommand option allows a quick tunnel to be created. Here’s
 an example entry for a `.ssh/config` file:
 
-```nohighlight
+```plain
 Host proxy
 User greg
 HostName proxy.example.com
@@ -55,7 +55,7 @@ it was a tightly locked down production box. However, it was reachable by other 
 within the company’s intranet, including pgdev.acme.com. Thus to login as gmullane
 on the calamity server, the .ssh/config file would normally look like this:
 
-```nohighlight
+```plain
 Host proxy
 User greg
 HostName proxy.example.com
@@ -84,7 +84,7 @@ any advanced functionality, however, just a simple bidirectional pipe which
 the SSH connections could flow over. The new entry in the config file thus
 became:
 
-```nohighlight
+```plain
 Host acme_calamity
 User gmullane
 HostName 192.168.13.123

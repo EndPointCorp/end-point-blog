@@ -12,14 +12,14 @@ date: 2009-09-25
 
 When you want to forcibly replace a symbolic link on some kind of Unix (here I’m using the version of ln from GNU coreutils), you can do it the manual way:
 
-```nohighlight
+```plain
 rm -f /path/to/symlink
 ln -s /new/target /path/to/symlink
 ```
 
 Or you can provide the -f argument to ln to have it replace the existing symlink automatically:
 
-```nohighlight
+```plain
 ln -sf /new/target /path/to/symlink
 ```
 
@@ -29,7 +29,7 @@ Anyway, that’s convenient, but I ran into a gotcha which was confusing. If the
 
 To replace an existing directory symlink, use the -n argument to ln:
 
-```nohighlight
+```plain
 ln -sfn /new/target /path/to/symlink
 ```
 

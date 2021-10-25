@@ -56,7 +56,7 @@ Files in tab-separated values (TSV) format are also fairly common, using tabs in
 
 Because the tab character is rarely used in text put into table format, it is less of a problem as a separator than the very frequently-occurring comma. Typically no quoting or escaping of any kind is needed or possible in a TSV file.
 
-```nohighlight
+```plain
 name	favorite_food_name	favorite_food_prep_time	recent_book
 Zed	Pizza	30	Leviathan Wakes
 ```
@@ -236,7 +236,7 @@ echo serialize($obj);
 
 And the result:
 
-```plaintext
+```plain
 a:3:{s:4:"name";s:3:"Zed";s:12:"recent_books";a:2:{i:0;s:15:"Leviathan Wakes";i:1;s:27:"Pride and Prejudice and Zombies";}s:13:"favorite_food";a:2:{s:4:"name";s:5:"Pizza";s:9:"prep_time";i:30;}}
 ```
 

@@ -17,32 +17,32 @@ A quick and easy version for setting up a user with this is as follows:
 
 Ensure you are in the home directory. Then, clone the repository into a .rbenv directory
 
-```nohighlight
+```plain
 git clone git://github.com/sstephenson/rbenv.git .rbenv
 ```
 Adjust your users path to find the newly installed commands
 
-```nohighlight
+```plain
 echo 'export PATH=$HOME/.rbenv/shims:$HOME/.rbenv/bin:$PATH' >> ~/.bash_profile
 ```
 Install Ruby version 1.9.3-p0
 
-```nohighlight
+```plain
 rbenv install 1.9.3-p0
 ```
 Make Ruby version 1.9.3-p0 your default version every time you log in
 
-```nohighlight
+```plain
 rbenv global 1.9.3-p0
 ```
 Install the bundler gem for Ruby version 1.9.3-p0
 
-```nohighlight
+```plain
 gem install bundler
 ```
 Refresh rbenv to let it know the new system command bundler exists
 
-```nohighlight
+```plain
 rbenv rehash
 ```
 
@@ -50,7 +50,7 @@ Now you are ready to use the bundler gem to install any other gems required for 
 
 The normal camps setup assumes you are going to be using Apache for the web server. In this case, we wanted to use Nginx due to memory constraints. We decided to use the proxy capability and just proxy through to Unicorn instead of having to build our own version Nginx to use Passenger. To do this, we had to use a feature in the local-config file in camps that allows you to skip the Apache setup and use your own commands to start, stop and restart your web server and application.  Here is the example from our local-config that controlls Nginx and Unicorn. This approach could also be used with Interchange or any other application if you need other services started when mkcamp is run.
 
-```nohighlight
+```plain
 skip_apache:1
 httpd_start:/usr/sbin/nginx -c __CAMP_PATH__/nginx/nginx.conf
 httpd_stop:pid=`cat __CAMP_PATH__/var/run/nginx.pid 2>/dev/null` && kill $pid
@@ -61,7 +61,7 @@ app_restart:pid=`cat __CAMP_PATH__/var/run/unicorn.pid 2>/dev/null` && kill $pid
 ```
 The contents of the start-app script is simply.
 
-```nohighlight
+```plain
 cd __CAMP_PATH__ && bundle exec unicorn_rails -c __CAMP_PATH__/config/unicorn.conf.rb -D
 ```
 

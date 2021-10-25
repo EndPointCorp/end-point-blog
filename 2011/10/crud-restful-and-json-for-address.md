@@ -51,7 +51,7 @@ sub list {
 
 In the HTML template, Interchange’s loop tag is used to loop through the addresses. Note: There may be a better way to avoid trailing commas in Interchange’s loop tag – please share it if you know the secret!
 
-```nohighlight
+```plain
 <script type="text/javascript">
 var addresses = {
 [loop object.mv_results=`$Scratch->{user_addresses}`]

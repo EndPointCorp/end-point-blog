@@ -28,7 +28,7 @@ That will run xargs once for each very long list of files to be removed, so the 
 
 How long can the argument list to xargs be? It depends on the system, but xargs --show-limits will tell us. Here's output from a RHEL 5 x86_64 system (using findutils 4.2.27):
 
-```nohighlight
+```plain
 % xargs --show-limits
 Your environment variables take up 2293 bytes
 POSIX lower and upper limits on argument length: 2048, 129024
@@ -40,7 +40,7 @@ The numbers are similar on Debian Etch and Lenny.
 
 And here's output from an Ubuntu 10.04 x86_64 system (using findutils 4.4.2):
 
-```nohighlight
+```plain
 % xargs --show-limits
 Your environment variables take up 1370 bytes
 POSIX upper limit on argument length (this system): 2093734

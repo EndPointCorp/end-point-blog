@@ -26,7 +26,7 @@ $ echo -en "$(hostname) GPID: $( pgrep googleearth-bin ). APPID: $( pgrep -u roo
 
 Which gives us output something like this:
 
-```nohighlight
+```plain
 lg1 - GPID: 5265. APPID: 10452.
 CRASH: 3. MEMF: 4646240kB.
 ```
@@ -42,7 +42,7 @@ This is one long command and might be hard to read, but it is simply using “co
 
 **Second**, let’s get our little overlay image composited with a screenshot from X:
 
-```nohighlight
+```plain
 $ DISPLAY=:0 import -window root miff:- | composite -gravity south -geometry +0+3 miff:/tmp/text miff:- -resize 600 miff:/tmp/$(hostname).miff
 ```
 

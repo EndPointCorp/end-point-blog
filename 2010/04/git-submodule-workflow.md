@@ -13,7 +13,7 @@ Last week, I asked some coworkers at End Point about the normal workflow for usi
 
 You should use git submodule add to add a new submodule. So for example you would issue the commands:
 
-```nohighlight
+```plain
 git submodule add git://github.com/stephskardal/extension1.git extension
 git submodule init
 ```
@@ -24,7 +24,7 @@ Then you would git add extension (the path of the submodule installation), git c
 
 The super project repo stores a .gitmodules file. A sample:
 
-```nohighlight
+```plain
 [submodule "extension1"]
         path = extension
         url = git://github.com/stephskardal/extension1.git
@@ -37,7 +37,7 @@ The super project repo stores a .gitmodules file. A sample:
 
 Generally, you will issue the commands below when you clone a super project repository. These commands will “install” the submodule under the main repository.
 
-```nohighlight
+```plain
 git submodule init
 git submodule update
 ```
@@ -48,7 +48,7 @@ Given an existing git project in the “project” directory, and a git submodul
 
 First, a status check on the main project:
 
-```nohighlight
+```plain
 ~/project> git status
 # On branch master
 nothing to commit (working directory clean)
@@ -56,7 +56,7 @@ nothing to commit (working directory clean)
 
 Next, a status check on the git submodule:
 
-```nohighlight
+```plain
 ~/project> cd extension/
 ~/project/extension> git status
 # Not currently on any branch.
@@ -65,7 +65,7 @@ nothing to commit (working directory clean)
 
 Next, an update of the extension:
 
-```nohighlight
+```plain
 ~/project/extension> git fetch
 remote: Counting objects: 30, done.
 remote: Compressing objects: 100% (18/18), done.
@@ -94,7 +94,7 @@ nothing to commit (working directory clean)
 
 Next, back to the main project:
 
-```nohighlight
+```plain
 ~/project/extension> cd ..
 ~/project> git status
 # On branch master
@@ -110,7 +110,7 @@ no changes added to commit (use "git add" and/or "git commit -a")
 
 Now, a commit to include the submodule repository change. Brian has made it a convention to manually include SUBMODULE UPDATE: extension_name in the commit message to inform other developers that a submodule update is required.
 
-```nohighlight
+```plain
 ~/project> git add extension
 ~/project> git commit
 [master eba52d5] SUBMODULE UPDATE: extension

@@ -16,7 +16,7 @@ On some of our development servers, we run many instances of the Apache httpd we
 
 On Red Hat Enterprise Linux 5, with somewhere in the range of 30 to 40 Apache instances on a server, you can run into failures at startup time with this error or another similar one in the error log:
 
-```nohighlight
+```plain
 [error] (28)No space left on device: Cannot create SSLMutex
 ```
 
@@ -24,20 +24,20 @@ The exact error will depend on what Apache modules you are running. The “space
 
 You can see what your limits are like this:
 
-```nohighlight
+```plain
 # cat /proc/sys/kernel/sem
 250 32000 32 128
 ```
 
 I typically double those limits by adding this line to /etc/sysctl.conf:
 
-```nohighlight
+```plain
 kernel.sem = 500 64000 64 256
 ```
 
 That makes sure you’ll get the change at the next boot. To make the change take immediate effect:
 
-```nohighlight
+```plain
 # sysctl -p
 ```
 

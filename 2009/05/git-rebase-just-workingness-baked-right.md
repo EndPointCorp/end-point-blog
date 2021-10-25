@@ -15,13 +15,13 @@ are very similar.
 
 Given branch “foo” with a sequence of commits:
 
-```nohighlight
+```plain
 foo: D --> C --> B --> A
 ```
 
 I can make a branch “bar” off of foo: (git branch bar foo)
 
-```nohighlight
+```plain
 foo: D --> C --> B --> A
 bar: D --> C --> B --> A
 ```
@@ -29,7 +29,7 @@ bar: D --> C --> B --> A
 Then I do some development on bar, and commit. Meanwhile, somebody else
 develops on foo, and commits. Introducing new, unrelated commit structures.
 
-```nohighlight
+```plain
 foo: E --> D --> C --> B --> A
 bar: X --> D --> C --> B --> A
 ```
@@ -45,7 +45,7 @@ push local foo upstream, or rebase bar to foo and then push.
 A merge will show up as a separate commit. Meaning, merging bar into
 foo will result in commit history:
 
-```nohighlight
+```plain
 foo: M --> X --> D --> C --> B --> A
       \
        E --> D --> C --> B --> A
@@ -59,7 +59,7 @@ Therefore, the commits in “bar” more recent than D would be pulled out
 and applied on top of the full commit history of “foo”. Meaning, you
 get the history:
 
-```nohighlight
+```plain
 bar: X' --> E --> D --> C --> B --> A
 ```
 
@@ -84,7 +84,7 @@ instead of being part of some merge-specific commit.
 Rebasing should generally be the default choice when you’re pulling from
 a remote into your repo.
 
-```nohighlight
+```plain
 git pull --rebase
 ```
 
@@ -127,7 +127,7 @@ So, in this workflow, a final step for publishing a set of changes
 intended for upstream consumption and potential merge into the main
 project would be, from Steph’s local address_book branch:
 
-```nohighlight
+```plain
 # get the latest from canonical repo
 git fetch canonical
 # rebase the address book branch onto canonical/master
@@ -145,7 +145,7 @@ easily pull it into the canonical repo if it passes muster.
 
 What you would not **ever** do is:
 
-```nohighlight
+```plain
 git fetch canonical
 # make a branch based off of canonical/master
 git branch canonical_master canonical/master

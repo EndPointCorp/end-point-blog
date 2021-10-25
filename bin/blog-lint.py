@@ -64,8 +64,6 @@ highlight_languages = []
 with cd(bin_dir):
     highlight_languages += json.load(open('supported_languages.json', 'r'))
 
-highlight_languages += ['nohighlight']
-
 
 ######################################
 # Classes for error/warning messages #
