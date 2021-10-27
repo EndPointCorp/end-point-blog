@@ -6,6 +6,7 @@ tags:
 - windows
 - conference
 date: 2021-10-27
+github_issue_number: 1786
 ---
 
 ![.NET Conf 2021 is coming!](/blog/2021/10/net-conf-2021-is-coming/dotnet-conf-2021.jpg)
