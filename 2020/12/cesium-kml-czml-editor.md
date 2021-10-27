@@ -16,7 +16,7 @@ date: 2020-12-21
 
 ![](/blog/2020/12/cesium-kml-czml-editor/image-00.jpg)
 
-End Point’s immersive technology team is happy to present a great new tool for the rapidly growing Cesium community: [Cesium KML-CZML Editor](https://vision.space/cesium-kml-czml-editor/). The editor gives users the ability to visually and dynamically edit KML and CZML in its Cesium browser window. Updates made with it can be exported at any time to CZML, the native markup language for Cesium.
+End Point’s immersive technology team is happy to present a great new tool for the rapidly growing Cesium community: [Cesium KML-CZML Editor](https://www.visionport.com/cesium-kml-czml-editor/). The editor gives users the ability to visually and dynamically edit KML and CZML in its Cesium browser window. Updates made with it can be exported at any time to CZML, the native markup language for Cesium.
 
 The Cesium KML-CZML Editor addresses an important but hitherto unaddressed need of the Cesium community: It provides an intuitive interface for making adjustments to fix the many inconsistencies with how KML created for (and often by) Google Earth appears on 3D maps rendered with Cesium. It is a powerful tool for converting and adapting KML for Google Earth into CZML that displays nicely in Cesium. The editor also works as a visual editor for creating and editing CZML, regardless of whether you’re converting from KML.
 
