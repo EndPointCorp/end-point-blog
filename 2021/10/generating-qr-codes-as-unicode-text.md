@@ -13,21 +13,21 @@ github_issue_number: 1787
 
 (QR = “Quick Response” — good to know!)
 
-Python’s QR code generator library generates QR codes from a secret key and outputs to a terminal using Unicode characters, not a PNG graphic as most other libraries do. We can store that in a text file. Why would we want that?
+Python’s QR code generator library [qrcode](https://pypi.org/project/qrcode/) generates QR codes from a secret key and outputs to a terminal using Unicode characters, not a PNG graphic as most other libraries do. We can store that in a text file. This is a neat thing to do, but how is this functionality useful?
 
 ##### Benefits of having Unicode QR code as a text file:
 
-* Storing the QR code in a text file takes less disk space than a PNG image.
-* It is easy to read the QR code over ssh using the `cat` command, rather than downloading the file to a local workstation.
-* It is simple to manage QR codes as text files in Git compared to PNG images.
+* Storing the QR code as a text file takes less disk space than a PNG image.
+* It is easy to read the QR code over ssh using the `cat` command; you don't even have to download the file to your own workstation.
+* It is simpler to manage QR codes in Git as text files than as PNG images.
 
 This can be used for any kind of QR code, but we have found it especially useful for managing shared multi-factor authentication (MFA, including 2FA for 2-factor authentication) secrets for TOTPs (Time-based One-Time Passwords).
 
 ### Multi-factor authentication (MFA)
 
-Many services provide a separate account and login for each user so that accounts do not need to be shared, and thus passwords and multi-factor authentication do not need to be shared either. This is ideal, and what we insist on for our most important accounts.
+Many services provide a separate account and login for each user so that accounts do not need to be shared, and thus passwords and multi-factor authentication secrets do not need to be shared either. This is ideal, and what we insist on for our most important accounts.
 
-But unfortunately, some services provide only a single login per account, or only a single primary account login with the other accounts being limited in serious ways (preventing access to billing, account management, etc.) so that any business relying on them needs to share the access between several authorized users. A single point of failure in an account login is a serious problem when that one person is unavailable.
+Unfortunately, however, some services provide only a single login per account, or only a single primary account login with the other accounts being limited in serious ways (no access to billing, account management, etc.) so that any business relying on them needs to share the access between several authorized users. A single point of failure in an account login is a serious problem when that one person is unavailable.
 
 ### TOTP mobile apps
 
@@ -49,7 +49,7 @@ The `qrcode` Python library provides a `qr` executable that can print your QR co
 apt install python3-qrcode
 ```
 
-Or visit https://pypi.org/project/qrcode/ 
+Or visit https://pypi.org/project/qrcode/
 
 The contents of the QR code are a URL in the format:
 
@@ -57,7 +57,7 @@ The contents of the QR code are a URL in the format:
 otpauth://totp/{username}?secret={key}&issuer={provider_name}
 ```
 
-The `provider_name` can contain spaces, however, they need to be URL-encoded and entered as %20 for auth to work correctly on iOS. Otherwise, an invalid barcode error will be shown when adding the code.
+The `provider_name` can contain spaces; however, they need to be URL-encoded and entered as %20 for auth to work correctly on iOS. Otherwise, an invalid barcode error will be shown when adding the code.
 
 For example, if you generate the QR code with key `JSZE5V4676DZFCUCFW4GLPAHEFDNY447` for the account `root@example.com`, the resulting command would be:
 
@@ -65,12 +65,12 @@ For example, if you generate the QR code with key `JSZE5V4676DZFCUCFW4GLPAHEFDNY
 $ qr "otpauth://totp/Example:root@example.com?secret=JSZE5V4676DZFCUCFW4GLPAHEFDNY447&issuer=Superhost" 
 ```
 
-And its output:
+Here's what its output looks like:
 
 ![qrcode](/blog/2021/10/generating-qr-codes-as-unicode-text/qrcode.jpg)
 
 
-Providing the username and issuer will display it in the list of configured accounts in your authenticator application. For example: `Superhost (Example:root@example.com)`
+Providing the username and issuer will display it properly in the list of configured accounts in your authenticator application. For example: `Superhost (Example:root@example.com)`
 
 
 ### Reference
