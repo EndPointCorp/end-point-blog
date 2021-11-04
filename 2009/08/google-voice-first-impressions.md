@@ -25,12 +25,10 @@ Google Voice is still available only by invite, but I only had to wait about 3 d
 
 **Silent participants dropped:** The second-biggest problem is that Google Voice apparently intentionally drops the call without warning whenever one side is silent for more than a few minutes. I haven’t seen this documented anywhere, and Google doesn’t tell you in any way, but it’s pretty clear that’s what’s happening. As long as both sides are talking fairly frequently it’s fine, but on conference calls I often have to stay muted for many minutes while others are talking, and then I’m unceremoniously dropped. So that’s strike two against using Google Voice for conference calls right now.
 
-**Voice mail transcription:** Voice mail left at Google Voice is available via the Android app, the web app, can be emailed to you, but most amazingly, if in English, is automatically transcribed and sent via SMS text message! It was hard to imagine this would work very well. I had Kiel test it for me. Compare [his voice mail recording](https://jon.endpoint.com/google-voice-kiel-transcription.mp3) to the transcription:
+**Voice mail transcription:** Voice mail left at Google Voice is available via the Android app, the web app, can be emailed to you, but most amazingly, if in English, is automatically transcribed and sent via SMS text message! It was hard to imagine this would work very well. I had Kiel test it for me. Compare [his voice mail recording](https://jon.endpointdev.com/google-voice-kiel-transcription.mp3) to the transcription:
 
->
 > A little cutie of the corner told me to leave you not Grandmama call messages and so the core in based cheese card test, kittens From, trucking, and you know from getting to
 > fat until all the super caliper at July 6th and if that’s not ballistic. I don’t even know it’s realistic. Because let’s just face it. Corn is, where’s that. See you. 
->
 
 Note that it displays the transcription lighter or darker depending on its level of confidence in each word. The transcription is not perfect, and Kiel deliberately chose words and phrases to be difficult to decode, but it’s definitely close enough to give an idea of what the message is about without having to listen to the recording. Very useful if you’re somewhere you can only peek at the phone for a few moments and can decide if the message warrants excusing yourself from the room or not.
 

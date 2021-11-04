@@ -201,7 +201,7 @@ Before the introduction of hooks, the standard method of overriding or extending
 -  </div>
 - </div>
   <%= render 'shared/google_analytics' %>
-+ <p><a href="http://www.endpoint.com/">End Point</a></p>
++ <p><a href="https://www.endpointdev.com/">End Point</a></p>
 ```
 
 ### Sample data

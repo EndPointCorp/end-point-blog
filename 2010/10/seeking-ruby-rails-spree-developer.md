@@ -11,6 +11,8 @@ tags:
 date: 2010-10-09
 ---
 
+**(This job has been filled.)**
+
 Today I realized that we never posted our job announcement on our own blog even though we’d posted it to several job boards. So here it is:
 
 We are looking for a developer who can consult with our clients and develop Ruby web applications. Most of our needs center around Rails, Spree, and SQL, but Sinatra, DataMapper, and NoSQL are lately coming into play too.
@@ -19,4 +21,4 @@ End Point is a 15-year-old web consulting company based in New York City, with 2
 
 Experience with mobile and location-based technologies is a plus.
 
-Please email [jobs@endpoint.com](mailto:jobs@endpoint.com) to apply.
+~~Please email jobs&#x40;endpoint.com to apply.~~

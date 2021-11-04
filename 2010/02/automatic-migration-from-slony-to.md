@@ -7,13 +7,11 @@ tags:
 date: 2010-02-01
 ---
 
-
-
-About [a month ago](https://mail.endcrypt.com/pipermail/bucardo-general/2009-December/000489.html), Bucardo added an interesting set of features in the form of a [new script called slony_migrator.pl](https://github.com/bucardo/bucardo/blob/master/scripts/slony_migrator.pl). In this post I’ll describe slony_migrator.pl and its three major functions.
+About [a month ago](https://bucardo.org/pipermail/bucardo-general/2009-December/000489.html), Bucardo added an interesting set of features in the form of a [new script called slony_migrator.pl](https://github.com/bucardo/bucardo/blob/master/scripts/slony_migrator.pl). In this post I’ll describe slony_migrator.pl and its three major functions.
 
 ### The Setup
 
-For these examples, I’m using the [pagila sample database](http://pgfoundry.org/projects/dbsamples/) along with a set of scripts I wrote and made available [here](http://josh.endpoint.com/slony-pagila.tgz). These scripts build two different Slony clusters. The first is a simple one, which replicates this database from a database called "pagila1" on one host to a database "pagila2" on another host. The second is more complex. Its one master node replicates the pagila database to two slave nodes, one of which replicates it again to a fourth slave using Slony’s FORWARD function as described [here](/blog/2010/01/postgres-slony-cascading-subscription). I implemented this setup on two FreeBSD virtual machines, known as myfreebsd and myfreebsd2. The reset-simple.sh and reset-complex.sh scripts in the script package I’ve linked to will build all the necessary databases from one pagila database and do all the Slony configuration.
+For these examples, I’m using the [pagila sample database](http://pgfoundry.org/projects/dbsamples/) along with a set of scripts I wrote and made available [here](https://josh.endpointdev.com/slony-pagila.tgz). These scripts build two different Slony clusters. The first is a simple one, which replicates this database from a database called "pagila1" on one host to a database "pagila2" on another host. The second is more complex. Its one master node replicates the pagila database to two slave nodes, one of which replicates it again to a fourth slave using Slony’s FORWARD function as described [here](/blog/2010/01/postgres-slony-cascading-subscription/). I implemented this setup on two FreeBSD virtual machines, known as myfreebsd and myfreebsd2. The reset-simple.sh and reset-complex.sh scripts in the script package I’ve linked to will build all the necessary databases from one pagila database and do all the Slony configuration.
 
 ### Slony Synopsis
 
@@ -303,5 +301,3 @@ In this case I need to "kick" the node 2 -> node 3 sync to get it to replicate, 
 ```
 
 Please consider giving slony_migrator.pl a try. I’d be glad to hear how it works out.
-
-

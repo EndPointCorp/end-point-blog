@@ -62,7 +62,7 @@ require 'rexml/document'
 The feed is retrieved and a REXML object created from the feed in the rake task:
 
 ```ruby
-data = open('https://www.endpoint.com/blog/feed.xml', 'User-Agent' => 'Ruby-Wget').read
+data = open('https://www.endpointdev.com/blog/feed.xml', 'User-Agent' => 'Ruby-Wget').read
 doc = REXML::Document.new(data)
 ```
 
@@ -108,7 +108,7 @@ Step 5: Finally, the left div's contents are emptied and the carousel is in its 
 
 ![](/blog/2009/10/new-end-point-site-rails-jquery-flot/image-10.gif)
 
-Another request for functionality came from [Jon](/team/jon-jensen). He asked that we create and use "web 2.0" URLs to load specific content on page load for the dynamic content throughout our site, such as http://www.endpoint.com/clients#citypass, http://www.endpoint.com/clients#backcountry.
+Another request for functionality came from [Jon](/team/jon-jensen). He asked that we create and use "web 2.0" URLs to load specific content on page load for the dynamic content throughout our site, such as www.endpoint.com/clients#citypass, www.endpoint.com/clients#backcountry.
 
 Upon page load, JavaScript is used to detect if a relative link exists:
 
@@ -146,7 +146,7 @@ An array containing all the titles of all tweets is created.
 The blog RSS feed is retrieved and parsed. An array of hashes is created to track the un-tweeted blog articles.
 
 ```ruby
-    data = open('http://blog.endpoint.com/feeds/posts/default?alt=rss&max-results=10000', 'User-Agent' => 'Ruby-Wget').read
+    data = open('https://www.endpointdev.com/blog/feed.xml', 'User-Agent' => 'Ruby-Wget').read
     doc = REXML::Document.new(data)
     found_recent = false
     doc.root.each_element('//item') do |item|

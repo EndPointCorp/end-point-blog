@@ -18,4 +18,4 @@ If the screen in front of you is a northern view, then the screens to your right
 
 The experience of Liquid Galaxy is unique and marvelous because your peripheral vision comes alive in it. Not until you’ve been inside Liquid Galaxy can you truly appreciate how fundamental and useful our peripheral vision is to our overall visual experience. The world has more than two dimensions, so it’s particularly appropriate that Google Earth now does too.
 
-See the [End Point Liquid Galaxy website](https://liquidgalaxy.endpoint.com/) for more information. We’ve posted a nice YouTube video made by [Eugenia Loli-Queru](http://eugenia.queru.com/) with Jason Holt, Google’s lead engineer for the project, at the helm.
+See the [End Point Liquid Galaxy website](https://www.visionport.com/) for more information. We’ve posted a nice YouTube video made by [Eugenia Loli-Queru](http://eugenia.queru.com/) with Jason Holt, Google’s lead engineer for the project, at the helm.
