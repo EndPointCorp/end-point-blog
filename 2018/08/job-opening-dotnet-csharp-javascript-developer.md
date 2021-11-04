@@ -10,6 +10,8 @@ date: 2018-08-30
 
 <img src="/blog/2018/08/job-opening-dotnet-csharp-javascript-developer/25677299412_9934b2ec91_o-mod.jpg" alt="programmer at keyboard on desk" /><br><a href="https://www.wocintechchat.com/">Photo by #WOCinTech Chat</a> · <a href="https://www.flickr.com/photos/wocintechchat/25677299412/">CC BY 2.0, modified</a>
 
+**(This job has been filled.)**
+
 We are looking for another talented full-time software developer to join us, working with **.NET and C# on Windows, JavaScript, and at least one of PHP, Java, or Ruby**.
 
 If you like to solve business problems and can take responsibility for getting a job done well without intensive oversight, please read on!
@@ -49,6 +51,8 @@ We are experts in web development, databases, and DevOps, and we use mostly open
 
 We are an equal opportunity employer and value diversity at our company. We do not discriminate on the basis of gender, race, religion, color, national origin, sexual orientation, age, marital status, veteran status, or disability status.
 
-Please email us an introduction to [jobs@endpoint.com](mailto:jobs@endpoint.com) to apply. Include a resume, your GitHub or LinkedIn URLs, or whatever else that would help us get to know you.
+~~Please email us an introduction to jobs&#x40;endpoint.com to apply.~~
+**(This job has been filled.)**
+Include a resume, your GitHub or LinkedIn URLs, or whatever else that would help us get to know you.
 
 We look forward to hearing from you! Full-time employment seekers only, please—​this role is not for agencies or subcontractors.

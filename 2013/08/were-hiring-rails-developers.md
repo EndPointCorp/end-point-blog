@@ -9,6 +9,8 @@ tags:
 date: 2013-08-22
 ---
 
+**(This job has been filled.)**
+
 We’re looking for a few more talented Ruby on Rails developers to consult with our clients and develop their web applications. Do you like to focus on solving business problems? Do you take responsibility for getting a job done well without intensive oversight? Then please read on!
 
 End Point is an 18-year-old web consulting company based in New York City, with 38 full-time employees working mostly remotely from home offices in the United States, Canada, and Europe. Our team is made up of strong ecommerce, database, and system administration talent, working together using ssh, tmux and screen, IRC, phone, Google+ hangouts, and Skype.
@@ -49,4 +51,6 @@ What is in it for you?
 - 401(k) retirement savings plan (for U.S. employees)
 - Ability to move without being tied to your job location
 
-You may apply by emailing us an introduction to [jobs@endpoint.com](mailto:jobs@endpoint.com). Include a resume, your GitHub or LinkedIn URLs, and anything else that will help us get to know you. We look forward to hearing from you! Full-time job seekers only, please. No agencies or subcontractors.
+~~You may apply by emailing us an introduction to jobs&#x40;endpoint.com.~~
+**(This job has been filled.)**
+Include a resume, your GitHub or LinkedIn URLs, and anything else that will help us get to know you. We look forward to hearing from you! Full-time job seekers only, please. No agencies or subcontractors.

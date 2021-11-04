@@ -8,6 +8,8 @@ tags:
 date: 2017-04-20
 ---
 
+**(This job has been filled.)**
+
 We are looking for another talented software developer to consult with our clients and develop web applications for them in Ruby on Rails, Django, AngularJS, Java, .NET, Node.js, and other technologies. If you like to solve business problems and can take responsibility for getting a job done well without intensive oversight, please read on!
 
 End Point is a 20-year-old web consulting company based in New York City, with 45 full-time employees working mostly remotely from home offices. We are experts in web development, databases, and DevOps, collaborating using SSH, Screen/tmux, chat, Hangouts, Skype, and good old phones.
@@ -42,4 +44,6 @@ We serve over 200 clients ranging from small family businesses to large corporat
 
 We are an equal opportunity employer and value diversity at our company. We do not discriminate on the basis of gender, race, religion, color, national origin, sexual orientation, age, marital status, veteran status, or disability status.
 
-Please email us an introduction to [jobs@endpoint.com](mailto:jobs@endpoint.com) to apply. Include a resume, your GitHub or LinkedIn URLs, or whatever else that would help us get to know you. We look forward to hearing from you! Full-time employment seekers only, please—​this role is not for agencies or subcontractors.
+~~Please email us an introduction to jobs&#x40;endpoint.com to apply.~~
+**(This job has been filled.)**
+Include a resume, your GitHub or LinkedIn URLs, or whatever else that would help us get to know you. We look forward to hearing from you! Full-time employment seekers only, please—​this role is not for agencies or subcontractors.

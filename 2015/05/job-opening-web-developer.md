@@ -8,6 +8,8 @@ tags:
 date: 2015-05-13
 ---
 
+**(This job has been filled.)**
+
 We are looking for another talented software developer to consult with our clients and develop their web applications in AngularJS, Node.js, Ruby on Rails, and other technologies. If you like to focus on solving business problems and can take responsibility for getting a job done well without intensive oversight, please read on!
 
 ### What is in it for you?
@@ -47,4 +49,6 @@ We are an equal opportunity employer and value diversity at our company. We do n
 
 ### How to apply
 
-Please email us an introduction to [jobs@endpoint.com](mailto:jobs@endpoint.com) to apply. Include a resume, your GitHub or LinkedIn URLs, or whatever else that would help us get to know you. We look forward to hearing from you! Full-time employment seekers only, please. No agencies or subcontractors.
+~~Please email us an introduction to jobs&#x40;endpoint.com to apply.~~
+**(This job has been filled.)**
+Include a resume, your GitHub or LinkedIn URLs, or whatever else that would help us get to know you. We look forward to hearing from you! Full-time employment seekers only, please. No agencies or subcontractors.

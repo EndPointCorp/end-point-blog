@@ -62,7 +62,7 @@ These work traits are just as important:
 
 ### Get in touch with us:
 
-Please email us an introduction to [jobs@endpoint.com](mailto:jobs@endpoint.com) to apply. Include your location, a resume/​CV, your Git repository or LinkedIn URLs, and whatever else may help us get to know you.
+Please email us an introduction to jobs@endpointdev.com to apply. Include your location, a resume/​CV, your Git repository or LinkedIn URLs, and whatever else may help us get to know you.
 
 We look forward to hearing from you! Direct work seekers only, please—​this role is not for agencies or subcontractors.
 

@@ -68,7 +68,9 @@ And just as important:
 
 ### Getting in touch with us:
 
-Please email us an introduction to [jobs@endpoint.com](mailto:jobs@endpoint.com) to apply. Include your location, a resume/​CV, your GitHub or LinkedIn URLs, or whatever else helps us get to know you.
+~~Please email us an introduction to jobs&#x40;endpoint.com to apply.~~
+**(This job has been filled.)**
+Include your location, a resume/​CV, your GitHub or LinkedIn URLs, or whatever else helps us get to know you.
 
 We look forward to hearing from you! Full-time employment seekers only, please—​this role is not for agencies or subcontractors.
 

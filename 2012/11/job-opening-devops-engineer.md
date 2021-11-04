@@ -9,6 +9,8 @@ tags:
 date: 2012-11-22
 ---
 
+**(This job has been filled.)**
+
 We're looking for a full-time, salaried DevOps engineer to work with our existing hosting and system administration team and consult with our clients on their needs. If you like to figure out problems, solve them, can take responsibility for getting a job done well without intensive oversight, please read on!
 
 ## What is in it for you?
@@ -55,4 +57,6 @@ End Point is a 17-year-old Internet consulting company based in New York City, w
 
 ## How to apply
 
-Please email us an introduction to jobs@endpoint.com to apply. Include a resume and your GitHub or other URLs that would help us get to know you. We look forward to hearing from you!
+~~Please email us an introduction to jobs&#x40;endpoint.com to apply.~~
+**(This job has been filled.)**
+Include a resume and your GitHub or other URLs that would help us get to know you. We look forward to hearing from you!

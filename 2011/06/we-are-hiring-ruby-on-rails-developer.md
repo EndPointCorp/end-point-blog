@@ -11,6 +11,8 @@ tags:
 date: 2011-06-24
 ---
 
+**(This job has been filled.)**
+
 **Job Description:**
 
 End Point is looking for a talented software developer who can consult with our clients and develop their Rails web applications. We need someone that focuses on the client and will deliver quality, tested code.
@@ -54,6 +56,7 @@ We service over 200 clients ranging from small mom and pop shops to large corpor
 - System administration and deployment
 - Mobile and location-based technologies
 
-Please email [jobs@endpoint.com](mailto:jobs@endpoint.com) to apply.
+~~Please email jobs&#x40;endpoint.com to apply.~~
+**(This job has been filled.)**
 
 Does this job description not quite fit what you do? Do you have other software development skills such as Perl, Python, or PHP, and think End Point is the place for you to work? We are always looking for talented people, so send us your resume and we’ll let you know if there is another position that might be a better fit.
