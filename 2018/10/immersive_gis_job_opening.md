@@ -5,7 +5,7 @@ github_issue_number: 1458
 tags:
 - company
 - liquid-galaxy
-- jobs
+- jobs-closed
 - gis
 date: 2018-10-02
 ---

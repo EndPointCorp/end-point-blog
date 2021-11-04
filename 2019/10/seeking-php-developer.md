@@ -4,7 +4,7 @@ title: Seeking a PHP developer
 github_issue_number: 1561
 tags:
 - company
-- jobs
+- jobs-closed
 - php
 - remote-work
 date: 2019-10-17

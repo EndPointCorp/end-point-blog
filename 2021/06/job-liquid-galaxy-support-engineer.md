@@ -4,7 +4,7 @@ author: Benjamin Goldstein
 github_issue_number: 1755
 tags:
 - company
-- jobs
+- jobs-closed
 - liquid-galaxy
 date: 2021-06-10
 ---

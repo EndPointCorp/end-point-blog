@@ -4,7 +4,7 @@ title: Liquid Galaxy engineer job opening
 github_issue_number: 999
 tags:
 - company
-- jobs
+- jobs-closed
 - liquid-galaxy
 date: 2014-06-21
 ---

@@ -4,7 +4,7 @@ title: Seeking a Ruby, Rails, Spree developer
 github_issue_number: 362
 tags:
 - company
-- jobs
+- jobs-closed
 - ruby
 - rails
 - spree

@@ -4,7 +4,7 @@ title: Liquid Galaxy Support Engineer Job Opening
 github_issue_number: 1474
 tags:
 - company
-- jobs
+- jobs-closed
 - liquid-galaxy
 date: 2018-12-13
 ---

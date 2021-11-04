@@ -4,7 +4,7 @@ title: 'Job opening: PHP / JavaScript developer'
 github_issue_number: 1644
 tags:
 - company
-- jobs
+- jobs-closed
 - php
 - remote-work
 date: 2020-06-29

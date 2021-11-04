@@ -4,7 +4,7 @@ title: 'Job opening: Windows Systems Integrator'
 github_issue_number: 1652
 tags:
 - company
-- jobs
+- jobs-closed
 - windows
 date: 2020-07-23
 ---

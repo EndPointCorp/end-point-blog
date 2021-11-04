@@ -3,7 +3,7 @@ author: Benjamin Goldstein
 title: End Point’s New Tennessee Office — We’re Hiring!
 github_issue_number: 913
 tags:
-- jobs
+- jobs-closed
 - liquid-galaxy
 - company
 date: 2014-01-14

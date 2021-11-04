@@ -5,7 +5,7 @@ github_issue_number: 473
 tags:
 - company
 - ecommerce
-- jobs
+- jobs-closed
 - ruby
 - rails
 date: 2011-06-24

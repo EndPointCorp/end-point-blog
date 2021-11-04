@@ -4,7 +4,7 @@ title: 'Job opening: PostgreSQL database administrator & developer'
 github_issue_number: 1688
 tags:
 - company
-- jobs
+- jobs-closed
 - postgres
 - database
 - remote-work

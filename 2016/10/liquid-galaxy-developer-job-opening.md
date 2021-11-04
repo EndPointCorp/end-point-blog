@@ -4,7 +4,7 @@ title: Liquid Galaxy developer job opening
 github_issue_number: 1260
 tags:
 - company
-- jobs
+- jobs-closed
 - liquid-galaxy
 date: 2016-10-13
 ---

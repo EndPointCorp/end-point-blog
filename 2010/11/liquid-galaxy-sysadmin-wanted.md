@@ -3,7 +3,7 @@ author: Benjamin Goldstein
 title: Liquid Galaxy Sysadmin+ Wanted
 github_issue_number: 382
 tags:
-- jobs
+- jobs-closed
 - linux
 - liquid-galaxy
 - sysadmin

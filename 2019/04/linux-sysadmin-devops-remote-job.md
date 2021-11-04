@@ -4,7 +4,7 @@ title: 'Job opening: Linux system administration and DevOps remote engineer'
 github_issue_number: 1514
 tags:
 - company
-- jobs
+- jobs-closed
 - devops
 - remote-work
 date: 2019-04-18

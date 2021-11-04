@@ -4,7 +4,7 @@ title: 'Job opening: Fulfillment Manager'
 github_issue_number: 1276
 tags:
 - company
-- jobs
+- jobs-closed
 date: 2016-12-13
 ---
 
