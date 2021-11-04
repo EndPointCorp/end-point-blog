@@ -3,11 +3,14 @@ author: Jon Jensen
 title: DevOps engineer job opening (remote)
 github_issue_number: 812
 tags:
+- jobs-closed
 - company
 - devops
 - remote-work
 date: 2013-06-04
 ---
+
+**(This job has been filled.)**
 
 End Point continues to grow! We are looking for a full-time, salaried DevOps engineer to work on projects with our internal server hosting team and our external clients. If you like to figure out and solve problems, if you take responsibility for getting a job done well without intensive oversight, please read on.
 
@@ -55,4 +58,6 @@ End Point is a 17-year-old Internet consulting company based in New York City, w
 
 ### How to apply
 
-Please email us an introduction to [jobs@endpoint.com](mailto:jobs@endpoint.com) to apply. Include a resume and your GitHub or other URLs that would help us get to know you. We look forward to hearing from you!
+~~Please email us an introduction to jobs&#x40;endpoint.com to apply.~~
+**(This job has been filled.)**
+Include a resume and your GitHub or other URLs that would help us get to know you. We look forward to hearing from you!

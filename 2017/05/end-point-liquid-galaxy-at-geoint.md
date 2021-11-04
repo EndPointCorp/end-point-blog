@@ -27,6 +27,6 @@ End Point has deployed Liquid Galaxy systems around the world. This includes man
 
 [GEOINT](http://geoint2017.com/) is hosted and produced by the United States Geospatial Intelligence Foundation (USGIF). It is the nation’s largest gathering of industry, academia, and government to include Defense, Intelligence and Homeland Security communities as well as commercial, Fed/Civil, State and Local geospatial intelligence stakeholders.
 
-We look forward to meeting you at booth #1012 at GEOINT. In the meantime, if you have any questions please visit [our website](https://liquidgalaxy.endpoint.com/) or email [ask@endpoint.com](mailto:ask@endpoint.com).
+We look forward to meeting you at booth #1012 at GEOINT. In the meantime, if you have any questions please visit [our Liquid Galaxy website](https://www.visionport.com/)!
 
 <a href="/blog/2017/05/end-point-liquid-galaxy-at-geoint/image-1-big.png" imageanchor="1"><img border="0" height="640" src="/blog/2017/05/end-point-liquid-galaxy-at-geoint/image-1.png" width="495"/></a>

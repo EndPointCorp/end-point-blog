@@ -26,6 +26,6 @@ Given the incredible draw of the Liquid Galaxy, the GEOINT team took special int
 
 <iframe allowfullscreen="" frameborder="0" height="315" src="https://www.youtube.com/embed/w6aEGE8lmrg" width="560"></iframe>
 
-We look forward to developing the relationships we created at GEOINT, and hope to participate further in this great community moving forward. If you would like to learn more please visit [our website](https://liquidgalaxy.endpoint.com/) or email [ask@endpoint.com](mailto:ask@endpoint.com).
+We look forward to developing the relationships we created at GEOINT, and hope to participate further in this great community moving forward. If you would like to learn more please visit [our Liquid Galaxy website](https://www.visionport.com/)!
 
 <a href="/blog/2017/06/successful-first-geoint-symposium-for/image-1-big.png" imageanchor="1"><img border="0" data-original-height="845" data-original-width="1504" height="225" src="/blog/2017/06/successful-first-geoint-symposium-for/image-1.png" width="400"/></a>

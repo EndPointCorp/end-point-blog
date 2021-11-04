@@ -11,7 +11,7 @@ date: 2016-11-30
 
 <img border="0" height="306" src="/blog/2016/11/perl-dancer-conference-2016-day-1/image-0.jpeg" width="320"/>
 
-## Perl Dancer Conference Day 1
+### Perl Dancer Conference Day 1
 
 The [Perl Dancer Conference](https://perl.dance/) is a great event, now in its third year. <img align="left" border="0" height="90" src="/blog/2016/11/perl-dancer-conference-2016-day-1/image-1.png" width="130"/> The event took place in the same location as last year in Vienna, Austria at the Hotel Schani Wien. For those of you who have never visited Vienna, it is a perfect place to bring the family. From visiting the beautiful parks to taking a scenic ride on the Danube River, the beautiful and historic city is known for its rich art and musical culture, and has much to offer.
 
@@ -45,6 +45,6 @@ Jason has become a regular on the #dancer freenode IRC channel. This year he dec
 
 ### Stefan Seifert (nine) — Perl 5 and Perl 6 — a great team
 
-Stefan is a great presence at the conference, and his fun and witty personality carried over to his presentation. After opening with a really funny skit as a reporter reading the the news, he continued to outline the current state of Perl6 and how important it is for all of us as a community to embrace the fact that we are all in this together. He reminded us of the perils of Python3’s launch and the lack of support even today. He then began to focus on the capabilities of using Perl5 with Perl6 together with Inline::Perl5 and Inline::Perl6 modules. To be honest before his talk I had given Perl6 very little time. Stefan’s talk opened my eyes to the possibilities of utilizing the two versions together and the advantages that ecosystem has.
+Stefan is a great presence at the conference, and his fun and witty personality carried over to his presentation. After opening with a really funny skit as a reporter reading the the news, he continued to outline the current state of Perl6 and how important it is for all of us as a community to embrace the fact that we are all in this together. He reminded us of the perils of Python 3’s launch and the lack of support even today. He then began to focus on the capabilities of using Perl 5 with Perl 6 together with Inline::Perl5 and Inline::Perl6 modules. To be honest before his talk I had given Perl 6 very little time. Stefan’s talk opened my eyes to the possibilities of utilizing the two versions together and the advantages that ecosystem has.
 
-Please stop back for links to day 2 of the conference and a breakdown of my talk outlining [etcd](https://coreos.com/etcd/) integration with Perl and [Dancer2](http://perldancer.org/).
+Please stop back for links to day 2 of the conference and a breakdown of my talk outlining [etcd](https://coreos.com/etcd/) integration with Perl and [Dancer2](https://perldancer.org/).

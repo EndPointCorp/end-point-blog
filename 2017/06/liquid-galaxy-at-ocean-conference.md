@@ -28,6 +28,6 @@ Liquid Galaxy content created for The Ocean Conference included:
 * A guided tour of the Monaco Explorations 3 Year Expedition
 * National Marine Sanctuaries around the United States
 
-We were grateful to be able to create content for such a good cause, and hope to be able to do more good work for the IUCN and the UN! If you’d like to learn more, please visit [our website](https://liquidgalaxy.endpoint.com/) or email [ask@endpoint.com](mailto:ask@endpoint.com).
+We were grateful to be able to create content for such a good cause, and hope to be able to do more good work for the IUCN and the UN! If you’d like to learn more, please visit [our Liquid Galaxy website](https://www.visionport.com/).
 
 <p style="text-align: center"><a href="/blog/2017/06/liquid-galaxy-at-ocean-conference/image-2-big.jpeg"><img width="570" height="369" src="/blog/2017/06/liquid-galaxy-at-ocean-conference/image-2.jpeg"></a><br><small>From left to right: Dan Thomas, Susan Thomas, Sylvia Earle, Jenifer Austin, David Koch, Trammel Crowe.</small></p>

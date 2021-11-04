@@ -29,7 +29,7 @@ and easiest way I found to answer the first question is to try and
 connect to a non-existent database. Normally, this is a FATAL message,
 as seen here:
 
-```
+```plain
 $ psql testdb -p 5432
 testdb=# \c ghostdb
 FATAL:  database "ghostdb" does not exist
@@ -40,7 +40,7 @@ testdb=#
 However, a slightly different ERROR message is returned if the same
 thing is attempted while connected to PgBouncer:
 
-```
+```plain
 $ psql testdb -p 6432
 testdb=# \c ghostdb
 ERROR:  No such database: ghostdb
@@ -57,7 +57,7 @@ pgBouncer 1.6 has not been released, but it will have the ability to customize
 the [application_name](https://www.postgresql.org/docs/current/static/runtime-config-logging.html#GUC-APPLICATION-NAME). This is a configurable session-level variable that is fairly new in Postgres.
 Andrew Dunstan [wrote a patch](http://adpgtech.blogspot.com/2014/05/pgbouncer-enhancements.html) which enables adding this to your **pgbouncer.ini** file:
 
-```
+```plain
 application_name_add_host = 1
 ```
 
@@ -69,7 +69,7 @@ that PgBouncer suffers from. Here is what it looks like on both a normal
 Postgres connection, and a PgBouncer connection. As you can see, this is an
 easier check than the “invalid database connection” check above:
 
-```
+```plain
 ## Postgres:
 $ psql testdb -p 5432 -c 'show application_name'
  application_name
@@ -87,7 +87,6 @@ $ perl testme.tmp.pl --port 6432
 app - unix(6772@gtsm.com):6432
 ```
 
-
 Now we have answered question of “are we connected to PgBouncer
 or not?”. The next question is which pool mode we are in.
 There are three pool modes you can set for PgBouncer, which
@@ -103,7 +102,7 @@ enter a transaction (e.g. by issuing a BEGIN command). A very PgBouncer specific
 error about “Long transactions not allowed” is issued back to the client
 like so:
 
-```
+```plain
 $ psql testdb -p 6432
 testdb=# begin;
 ERROR:  Long transactions not allowed
@@ -123,7 +122,7 @@ any prepared statements, temporary tables, and other transaction-spanning,
 session-level items. Thus, our test will see if these session-level
 artifacts get discarded or not:
 
-```
+```plain
 ## Direct Postgres:
 $ psql testdb -p 5432
 testdb=# prepare abc(int) as select $1::text;
@@ -159,7 +158,7 @@ If we create a temporary table in one pgbouncer connection, then connect
 again as a new client, the temporary table will only show up if we are
 sharing sessions but not transactions. Easier shown than explained, I suspect:
 
-```
+```plain
 ## Regular Postgres gets a fresh session:
 $ psql test1 -p 5432
 test1=# create temp table abc(a int);

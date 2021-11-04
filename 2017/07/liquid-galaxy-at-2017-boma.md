@@ -23,4 +23,4 @@ The content that was created demonstrates how brokers and directors at commercia
 
 We were able to effectively showcase our ability to incorporate 3D models and mapping layers at BOMA through the use of Google Earth, Cesium, ArcGIS, Unity, and Sketchfab. We were also able to pull data and develop content for neighboring booths and visitors, demonstrating what an easy and data-agnostic platform Liquid Galaxy can be.
 
-We’re very excited about the increasing traction we have in the real estate industry, and hope our involvement with BOMA will take that to the next level. If you’d like to learn more about Liquid Galaxy, please visit [our website](https://liquidgalaxy.endpoint.com/) or email [ask@endpoint.com](mailto:ask@endpoint.com).
+We’re very excited about the increasing traction we have in the real estate industry, and hope our involvement with BOMA will take that to the next level. If you’d like to learn more about Liquid Galaxy, please visit [our website](https://www.visionport.com/).

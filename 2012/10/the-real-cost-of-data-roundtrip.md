@@ -23,7 +23,7 @@ I will convert the text stored in database changing all the htmlentities into re
 - The second will be an external program which downloads the text column from database, changes it externally and loads into database.
 - The third method will be almost the same as the second, however it will download whole rows.
 
-## Generate Data
+### Generate Data
 
 So, for this test I need to have some data. Let's write a simple data generator.
 
@@ -109,9 +109,9 @@ INSERT INTO script SELECT * FROM data;
 INSERT INTO script_full SELECT * FROM data;
 ```
 
-## The Tests
+### The Tests
 
-### SQL
+#### SQL
 
 Many programmers think that such operations are not normally available inside a database. However PostgreSQL has quite a nice feature, it can execute functions written in many different languages. For the purpose of this test I will use the language pl/perlu which allows me to use external libraries. I will also use HTML::Entities package for the conversion.
 
@@ -130,7 +130,7 @@ The update of the data can be done using the following query:
 UPDATE query SET t = decode_html_entities(t);
 ```
 
-### Application
+#### Application
 
 In order to have those tests comparable, I will write a simple perl script using exactly the same package for converting html entities.
 
@@ -164,7 +164,7 @@ $dbh->do('COMMIT');
 $dbh->disconnect();
 ```
 
-### The Worst Application
+#### The Worst Application
 
 There is another terrible idea implemented by programmers too often. Why select only the column you want to change? Let's select all the rows and send them back to database.
 
@@ -200,7 +200,7 @@ $dbh->do('COMMIT');
 $dbh->disconnect();
 ```
 
-## Results.
+### Results
 
 The query using **pl/perlu function** executed in **26 seconds**.
 

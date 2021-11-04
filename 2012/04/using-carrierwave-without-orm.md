@@ -12,7 +12,7 @@ I was recently adding some settings to Spree (an open source Ruby on Rails ecomm
 
 The uploader I’ll be working on is to add a banner to the checkout process in Spree (0.60.x). The idea is to store the image url in Spree::Config (the general preferences mechanism within Spree). For those who unfamiliar, Spree::Config acts very similar to a Hash object that is persisted to the preferences table in the database.
 
-## The RSpec
+### The RSpec
 
 Here are the tests that I will be using for the class. Hopefully these are fairly self explanatory.
 
@@ -71,7 +71,7 @@ The first thing I do here is mock the Spree config so that I can watch when the 
 
 In the next test, I want to make sure that I can use the standard conventions for setting the image straight from the class. The next two test cases I want to test the ability to pass a set of params as they would come from a form submission to save and remove an image. This matches the behavior you get when attaching CarrierWave to an ActiveRecord object.
 
-## Building the Class
+### Building the Class
 
 One of the really nice things about CarrierWave is the design of the library. The record that is going to hold the information about the uploaded file can be any class so long as it implements a few methods for handling the reading and the writing of a serialized identifier. In ActiveRecord, this is a string field. For our example here, we are going to use the Spree::Config object. But it could be any method you choose to implement.
 
@@ -180,7 +180,7 @@ end
 
 First, I do some parameter checking so that only params that I want to processed are actually sent. Since I’m using metaprogramming here, I don’t want to introduce a case where someone could run various methods by passing bad params (much like mass-assignment vulnerabilities). Then I loop through the params and run the commands needed to save the image.
 
-## The Implementation
+### The Implementation
 
 To use my class in my controller I just setup the following update method:
 

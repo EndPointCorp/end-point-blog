@@ -13,7 +13,7 @@ Amenities include free wifi, furniture, conference room access, kitchen access, 
 
 Our company, End Point, is a tech company that builds ecommerce sites, and also develops the Liquid Galaxy. There are typically 4 or 5 of us in the office on a given day. We are quiet, friendly, and respectful.
 
-Please contact us at [ask@endpoint.com](mailto:ask@endpoint.com) for more information.
+Please [contact us](/contact/) for more information.
 
 <a href="/blog/2016/12/office-space-available-at-end-point-hq/image-0-big.jpeg" imageanchor="1"><img border="0" height="219" src="/blog/2016/12/office-space-available-at-end-point-hq/image-0.jpeg" width="320"/></a>
 

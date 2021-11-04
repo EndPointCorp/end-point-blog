@@ -12,9 +12,7 @@ tags:
 date: 2012-09-26
 ---
 
-
-
-## Browser Testing
+### Browser Testing
 
 While many Web Developers prefer to build sites and web applications with browsers like [Chrome](https://www.google.com/intl/en/chrome/browser/) or [Firefox](http://getfirefox.com) it's important for us to keep an eye on the [browser market share](http://marketshare.hitslink.com/browser-market-share.aspx?qprid=0&qpcustomd=0&qpcustomc=) for **all** web users. [Internet Explorer](http://windows.microsoft.com/en-US/internet-explorer/products/ie/home) (IE) still owns a large piece of this pie and because of this, it is important to test sites and applications to ensure they work properly when viewed in IE. This poses a potential problem for developers who do not use Windows.
 
@@ -22,7 +20,7 @@ Although I use OS X on my desktop, I have Windows virtual machines with IE 6,7,8
 
 I did some IE8 testing for a colleague a short time ago and suggested she should give VirtualBox a shot. Her response was "You should write a blog post about that!". So here we are.
 
-## Free Tools
+### Free Tools
 
 [VirtualBox](https://www.virtualbox.org/) is a free virtualization application similar to [Parallels](http://www.parallels.com/) or [VMWare](http://www.vmware.com/). These applications aim to solve this problem by allowing us to run different "guest" operating systems on the "host" operating system of our choice. For example, I run several versions of IE and Windows on my computer which is running OS X.
 
@@ -37,11 +35,11 @@ For our purposes, we will be building a Windows 7 virtual machine running Intern
 
 There will likely be some differences creating virtual machines for the various images but the process will be similar to what we'll document here for Windows 7 / IE.
 
-## Linux and OS X Users
+### Linux and OS X Users
 
 In researching this article I came across a very helpful project on GitHub. The [ievms project](https://github.com/xdissent/ievms#readme) by [xdissent](https://github.com/xdissent) is a bash script that automates this process. I was able to run the script and run my newly created Windows 7 / IE virtual machine shortly afterward.
 
-## Requirements
+### Requirements
 
 To start we'll need to download and install VirtualBox. Be sure you have the most recent version available as it gets updated quite often. We'll also need to install the VirtualBox Extension Pack. Both are available on the [VirtualBox Downloads page](https://www.virtualbox.org/wiki/Downloads).
 
@@ -54,7 +52,7 @@ Because the [VPC images](http://www.microsoft.com/en-us/download/details.aspx?id
 
 Once the files have been extracted we have created our virtual machine the disk will take up close to 10 GB. Make sure you have enough disk space available. I run my virtual machines on an external USB hard drive which works well if your local hard drive is starved for space.
 
-## Extract the VPC Files
+### Extract the VPC Files
 
 Once you have all of the the VPC image files downloaded you'll need to extract them:
 
@@ -64,13 +62,13 @@ Once you have all of the the VPC image files downloaded you'll need to extract t
 
 Once you have unrar installed, issue the following command in the directory containing all of the VPC image files:
 
-```
-`unrar e -y Windows_7_IE8.part01.exe`
+```plain
+unrar e -y Windows_7_IE8.part01.exe
 ```
 
 This will extract the files and combine them into a single .vhd file. The -y flag tells unrar to say "yes" to the EULA from Microsoft so be aware of that.
 
-## Create a new Machine
+### Create a new Machine
 
 Once the .vhd file is ready we can create a new machine in VirtualBox. Start up VirtualBox and click the "New" button:
 
@@ -78,7 +76,7 @@ Once the .vhd file is ready we can create a new machine in VirtualBox. Start up 
 
 Click "Continue" to proceed. 
 
-## VM Name and OS Type
+### VM Name and OS Type
 
 We'll enter a name (IE8 / Windows 7) and select "Microsoft" and "Windows 7" in the Operating System and Version drop-downs:
 
@@ -86,13 +84,13 @@ We'll enter a name (IE8 / Windows 7) and select "Microsoft" and "Windows 7" in t
 
 Click "Continue" to proceed. 
 
-## Memory
+### Memory
 
 Specify how much memory (RAM) you'd like to allocate to the virtual machine. This really depends on how much you have available but it is best to go with the minimum at the very least: <img alt="Vbox mem config" border="0" height="345" src="/blog/2012/09/test-web-sites-with-internet-explorer/image-2.png" title="vbox-mem-config.png" width="600"/>
 
 Click "Continue" to proceed. 
 
-## Disk
+### Disk
 
 Select the "Do not add a virtual hard drive" option.: <img alt="Vbox do not add hdd 1" border="0" height="394" src="/blog/2012/09/test-web-sites-with-internet-explorer/image-3.png" title="vbox-do-not-add-hdd-1.png" width="600"/>
 
@@ -100,21 +98,21 @@ The reason we skip this for now is because we want to add the hard disk as an ID
 
 Click "Continue" to proceed **and** click "Continue" again when presented with the warning about not attaching a hard disk. 
 
-## Review Settings and Create the VM
+### Review Settings and Create the VM
 
 At this point you can review the settings you've made and click "Create" to complete the process:
 
 <img alt="Vbox review and create" border="0" height="369" src="/blog/2012/09/test-web-sites-with-internet-explorer/image-4.png" title="vbox-review-and-create.png" width="600"/>
 
-## Configure Storage Settings
+### Configure Storage Settings
 
 Highlight your newly created virtual machine and click the "Settings" button. From there, click the "Storage" tab and add a hard disk to the IDE controller: <img alt="Vbox storage add hd" border="0" height="509" src="/blog/2012/09/test-web-sites-with-internet-explorer/image-5.png" title="vbox-storage-add-hd.png" width="600"/>
 
-## Absolute Pointing Device
+### Absolute Pointing Device
 
 In the Settings, click on the "System" tab and uncheck "Enable absolute pointing device". I had to do this in order to to get the mouse working properly.
 
-## Start it Up
+### Start it Up
 
 We're almost there: next we need to start up the VM by clicking the "Start" button. You'll see Administrator and IEUser accounts and the password for both is "Password1". Log in as Administrator and check it out! It's important to note when the virtual machine has the keyboard and mouse focus. When you click inside the virtual machine window, it will capture the input from your mouse and keyboard. To return focus back to your computer you will need to press the "host key" sequence on your computer:
 
@@ -122,7 +120,7 @@ We're almost there: next we need to start up the VM by clicking the "Start" butt
 
 The "host-key" sequence can be configured in the VirtualBox preferences. On my computer, the host-key sequence is the left CTRL key (displayed as Left ^). When the arrow icon is illuminated, the guest computer – Windows 7 in this case, has the focus. When I press the left CTRL key on my computer the arrow icon goes tray to indicate focus has been returned to my computer. 
 
-## Activation
+### Activation
 
 As soon as you log in you will be presented with the Windows Activation wizard. Follow the steps to activate this copy of Windows. Once that is complete you will be prompted to restart your computer. Go ahead and do that.
 
@@ -130,7 +128,7 @@ As soon as you log in you will be presented with the Windows Activation wizard. 
 
 The screen resolution in the virtual machine will be quite low at first — I believe 800x600 is the default. Don't worry about this as it will be addressed in the next step. 
 
-## Guest Additions
+### Guest Additions
 
 Log in as Administrator (Password1) and Install the VirtualBox Guest Additions. To do this,  navigate to Devices in the VirtualBox menu on your computer (the "host" machine"). Choose the menu option to "Install Guest Additions". Each time you are prompted with the "Would you like to install..." dialog, choose "Install":
 
@@ -138,7 +136,7 @@ Log in as Administrator (Password1) and Install the VirtualBox Guest Additions. 
 
 This will install some drivers optimized by VirtualBox which allow you to change the screen resolution, improve the interaction between your host computer and the Windows guest operating system. Once the install process is complete you will be prompted to restart your virtual machine once more.
 
-## Finished Product
+### Finished Product
 
 With Windows activated and the Guest Additions installed you should be able to log in to your very own Windows 7 / IE8 testing machine!
 
@@ -146,10 +144,8 @@ With Windows activated and the Guest Additions installed you should be able to l
 
 This free copy of Windows will operate for 30 days and the trial period can be extended twice by running the following at the command prompt:
 
-```
+```plain
 slmgr –rearm
 ```
 
 Check out [the documentation](http://www.microsoft.com/en-us/download/details.aspx?id=11575#overview) at Microsoft for more details.
-
-

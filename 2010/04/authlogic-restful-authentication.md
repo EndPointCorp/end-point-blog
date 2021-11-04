@@ -14,7 +14,7 @@ I recently did a bit of digging around for the migration of user data from RESTf
 
 I was given a subset of the database dump for new and old users in addition to sample user login data for testing. I didn’t necessarily want to use the application to test login functionality, so I examined the repositories [here](https://github.com/technoweenie/restful-authentication) and [here](https://github.com/binarylogic/authlogic) and came up with the two blocks of code shown below to replicate and verify encryption methods and data for both plugins.
 
-## RESTful Authentication
+### RESTful Authentication
 
 ```ruby
 user = User.find_by_email('test@endpoint.com')
@@ -30,7 +30,7 @@ REST_AUTH_DIGEST_STRETCHES.times { digest = Digest::SHA1.hexdigest([digest, user
 
 Note that the stretches value for RESTful authentication defaults to 10, but it can be adjusted. If no REST_AUTH_SITE_KEY is provided, the value defaults to an empty string. Also note that RESTful authentication uses the SHA-1 hash function by default.
 
-## Authlogic
+### Authlogic
 
 ```ruby
 user = User.find_by_email('test2@endpoint.com')
