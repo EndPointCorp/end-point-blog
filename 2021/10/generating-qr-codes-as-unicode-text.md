@@ -45,7 +45,7 @@ The `qrcode` Python library provides a `qr` executable that can print your QR co
 
 #### Installation
 
-```
+```plain
 apt install python3-qrcode
 ```
 
@@ -53,7 +53,7 @@ Or visit https://pypi.org/project/qrcode/
 
 The contents of the QR code are a URL in the format:
 
-```
+```plain
 otpauth://totp/{username}?secret={key}&issuer={provider_name}
 ```
 
@@ -61,14 +61,13 @@ The `provider_name` can contain spaces; however, they need to be URL-encoded and
 
 For example, if you generate the QR code with key `JSZE5V4676DZFCUCFW4GLPAHEFDNY447` for the account `root@example.com`, the resulting command would be:
 
-```
+```plain
 $ qr "otpauth://totp/Example:root@example.com?secret=JSZE5V4676DZFCUCFW4GLPAHEFDNY447&issuer=Superhost" 
 ```
 
 Here's what its output looks like:
 
 ![qrcode](/blog/2021/10/generating-qr-codes-as-unicode-text/qrcode.jpg)
-
 
 Providing the username and issuer will display it properly in the list of configured accounts in your authenticator application. For example: `Superhost (Example:root@example.com)`
 
@@ -78,6 +77,4 @@ Providing the username and issuer will display it properly in the list of config
 * See a [simple explanation of otpauth URI format](http://www1.auth.iij.jp/smartkey/en/uri_v1.html) used by TOTP.
 * See [RFC 6238](https://datatracker.ietf.org/doc/html/rfc6238) for full details about TOTP.
 * See [RFC 4648](https://datatracker.ietf.org/doc/html/rfc4648#section-6) for the base 32 specification used to encode the secret key.
-* A recent similar Perl implementation Terminal: [QR Code with Unicode characters](https://github.polettix.it/ETOOBUSY/2021/09/26/text-qrcode-unicode/) by Flavio Poletti that builds on `Text::QRCode`, which uses `libqrencode`.
-
-
+* A recent similar Perl implementation [Terminal: QR Code with Unicode characters](https://github.polettix.it/ETOOBUSY/2021/09/26/text-qrcode-unicode/) by Flavio Poletti that builds on `Text::QRCode`, which uses `libqrencode`.
