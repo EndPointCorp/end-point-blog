@@ -33,7 +33,7 @@ Reading only a little at each sitting and spreading the reading out over time al
 Because we work in the software development industry, it is important that not only technical people such as developers, database experts, and system administrators be part of the shared culture. Everyone else at End Point including designers, project managers, sales, marketing, etc. should also be familiar with these articles and the terms and concepts they discuss:
 
 * [Speed matters: Why working quickly is more important than it seems](https://jsomers.net/blog/speed-matters) by James Somers
-* [Please don’t just say hello in chat](https://www.nohello.com/) by Brandon High
+* [Please don’t just say hello in chat](https://web.archive.org/web/20210722033422/https://www.nohello.com/) by Brandon High
 * [Learn to Read the Source, Luke](https://blog.codinghorror.com/learn-to-read-the-source-luke/) by Jeff Atwood—​practical reasons free software and open source matter, and why actually using the source code matters
 * [What is free software?](https://www.gnu.org/philosophy/free-sw.html) by the Free Software Foundation and Richard Stallman
 * [The Open Source Definition](https://opensource.org/osd) by the Open Source Initiative
