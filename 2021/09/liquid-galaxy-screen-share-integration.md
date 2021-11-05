@@ -2,6 +2,9 @@
 title: "Liquid Galaxy Screen Share Integration"
 author: Alejandro Ramon
 date: 2021-09-29
+featured:
+  visionport: true
+  image_url: /blog/2021/09/liquid-galaxy-screen-share-integration/click-small.jpg
 github_issue_number: 1777
 tags:
 - liquid-galaxy

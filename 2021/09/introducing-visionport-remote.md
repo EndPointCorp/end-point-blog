@@ -3,6 +3,9 @@ title: "Introducing VisionPort Remote"
 author: Alejandro Ramon
 date: 2021-09-17
 github_issue_number: 1771
+featured:
+  visionport: true
+  image_url: /blog/2021/09/introducing-visionport-remote/vpremote-small.jpg
 tags:
 - liquid-galaxy
 - company

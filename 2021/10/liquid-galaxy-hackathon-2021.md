@@ -2,6 +2,9 @@
 title: "Liquid Galaxy Hackathon 2021"
 author: Seth Jensen
 date: 2021-10-02
+featured:
+  visionport: true
+  image_url: /blog/2021/10/liquid-galaxy-hackathon-2021/image-0.jpg
 github_issue_number: 1778
 tags:
 - liquid-galaxy
