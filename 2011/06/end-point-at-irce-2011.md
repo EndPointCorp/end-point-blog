@@ -6,7 +6,7 @@ tags:
 - company
 - conference
 - ecommerce
-- liquid-galaxy
+- visionport
 date: 2011-06-15
 ---
 

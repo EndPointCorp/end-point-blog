@@ -7,7 +7,7 @@ featured:
   image_url: /blog/2017/01/liquid-galaxy-at-ces/image-0-big.jpeg
 tags:
 - event
-- liquid-galaxy
+- visionport
 date: 2017-01-10
 ---
 

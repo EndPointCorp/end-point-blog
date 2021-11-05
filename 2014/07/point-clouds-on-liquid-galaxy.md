@@ -7,7 +7,7 @@ featured:
   image_url: /blog/2014/07/point-clouds-on-liquid-galaxy/image-0.jpeg
 tags:
 - graphics
-- liquid-galaxy
+- visionport
 date: 2014-07-31
 ---
 

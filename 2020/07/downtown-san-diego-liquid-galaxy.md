@@ -8,7 +8,7 @@ featured:
 description: New Liquid Galaxy system at Downtown San Diego Partnership lets public engage with immersive data models
 github_issue_number: 1653
 tags:
-- liquid-galaxy
+- visionport
 date: 2020-07-27
 ---
 

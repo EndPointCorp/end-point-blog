@@ -5,7 +5,7 @@ github_issue_number: 1182
 tags:
 - gis
 - google-earth
-- liquid-galaxy
+- visionport
 - ros
 date: 2015-12-14
 ---

@@ -5,7 +5,7 @@ github_issue_number: 791
 tags:
 - google-earth
 - linux
-- liquid-galaxy
+- visionport
 - sysadmin
 - ubuntu
 date: 2013-04-24

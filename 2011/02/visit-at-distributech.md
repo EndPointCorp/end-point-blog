@@ -5,7 +5,7 @@ github_issue_number: 405
 tags:
 - conference
 - environment
-- liquid-galaxy
+- visionport
 date: 2011-02-02
 ---
 

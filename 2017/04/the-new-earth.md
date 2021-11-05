@@ -5,7 +5,7 @@ github_issue_number: 1302
 tags:
 - browsers
 - google-earth
-- liquid-galaxy
+- visionport
 date: 2017-04-21
 ---
 

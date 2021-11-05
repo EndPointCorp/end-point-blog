@@ -8,7 +8,7 @@ featured:
 tags:
 - conference
 - event
-- liquid-galaxy
+- visionport
 date: 2017-06-19
 ---
 

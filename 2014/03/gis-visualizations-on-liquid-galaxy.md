@@ -5,7 +5,7 @@ github_issue_number: 952
 tags:
 - visualization
 - gis
-- liquid-galaxy
+- visionport
 date: 2014-03-25
 ---
 

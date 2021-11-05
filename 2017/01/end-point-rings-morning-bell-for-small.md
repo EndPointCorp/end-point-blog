@@ -7,7 +7,7 @@ featured:
   image_url: /blog/2017/01/end-point-rings-morning-bell-for-small/image-0-big.jpeg
 tags:
 - company
-- liquid-galaxy
+- visionport
 date: 2017-01-20
 ---
 

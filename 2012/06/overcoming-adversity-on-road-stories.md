@@ -3,7 +3,7 @@ author: Mark Johnson
 title: 'Overcoming Adversity on the Road: Stories Behind the Liquid Galaxy'
 github_issue_number: 643
 tags:
-- liquid-galaxy
+- visionport
 - travel
 date: 2012-06-14
 ---

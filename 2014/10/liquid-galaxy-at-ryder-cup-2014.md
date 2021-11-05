@@ -4,7 +4,7 @@ title: Liquid Galaxy at the Ryder Cup 2014
 github_issue_number: 1043
 tags:
 - event
-- liquid-galaxy
+- visionport
 date: 2014-10-06
 ---
 

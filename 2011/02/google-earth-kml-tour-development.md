@@ -4,7 +4,7 @@ title: Google Earth KML Tour Development Challenges on Liquid Galaxy
 github_issue_number: 416
 tags:
 - google-earth
-- liquid-galaxy
+- visionport
 date: 2011-02-24
 ---
 

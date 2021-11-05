@@ -3,7 +3,7 @@ author: Ben Witten
 title: Custom cabinets for the Liquid Galaxy
 github_issue_number: 1560
 tags:
-- liquid-galaxy
+- visionport
 featured:
   visionport: true
   image_url: /blog/2019/10/liquid-galaxy-cabinets/image-0.jpg

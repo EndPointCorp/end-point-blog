@@ -5,7 +5,7 @@ github_issue_number: 380
 tags:
 - graphics
 - linux
-- liquid-galaxy
+- visionport
 - monitoring
 date: 2010-11-03
 ---

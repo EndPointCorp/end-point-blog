@@ -6,7 +6,7 @@ featured:
   visionport: true
   image_url: /blog/2018/06/liquid-galaxy-supporting-community/image-0.jpg
 tags:
-- liquid-galaxy
+- visionport
 - event
 date: 2018-06-07
 ---

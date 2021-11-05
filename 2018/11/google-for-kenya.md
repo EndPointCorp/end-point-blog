@@ -6,7 +6,7 @@ featured:
   visionport: true
   image_url: /blog/2018/11/google-for-kenya/google-for-kenya.jpeg
 tags:
-- liquid-galaxy
+- visionport
 - event
 date: 2018-11-02
 ---

@@ -7,7 +7,7 @@ featured:
   image_url: /blog/2021/08/liquid-galaxy-ksu/liquid-galaxy-ksu.jpg
 github_issue_number: 1763
 tags:
-- liquid-galaxy
+- visionport
 ---
 
 ![KSU's new Liquid Galaxy](/blog/2021/08/liquid-galaxy-ksu/liquid-galaxy-ksu.jpg)

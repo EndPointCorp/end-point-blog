@@ -6,7 +6,7 @@ featured:
   visionport: true
   image_url: /blog/2016/09/liquid-galaxy-at-national-weather-center/image-0-big.jpeg
 tags:
-- liquid-galaxy
+- visionport
 date: 2016-09-28
 ---
 

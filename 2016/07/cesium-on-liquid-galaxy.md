@@ -6,7 +6,7 @@ tags:
 - cesium
 - visualization
 - javascript
-- liquid-galaxy
+- visionport
 date: 2016-07-13
 ---
 

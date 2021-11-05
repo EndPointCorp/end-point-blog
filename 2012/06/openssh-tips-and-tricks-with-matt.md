@@ -3,7 +3,7 @@ author: Brian Buchalter
 title: OpenSSH Tips and Tricks with Matt Vollrath
 github_issue_number: 640
 tags:
-- liquid-galaxy
+- visionport
 - ssh
 - tips
 date: 2012-06-14

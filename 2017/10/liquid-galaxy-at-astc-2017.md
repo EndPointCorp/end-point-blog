@@ -5,7 +5,7 @@ github_issue_number: 1331
 tags:
 - conference
 - event
-- liquid-galaxy
+- visionport
 date: 2017-10-18
 ---
 

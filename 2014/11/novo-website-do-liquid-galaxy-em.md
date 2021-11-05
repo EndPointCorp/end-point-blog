@@ -4,7 +4,7 @@ title: Novo website do Liquid Galaxy em Português!
 github_issue_number: 1056
 tags:
 - company
-- liquid-galaxy
+- visionport
 date: 2014-11-17
 ---
 

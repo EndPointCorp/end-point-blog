@@ -3,7 +3,7 @@ author: Dave Jenkins
 title: Liquid Galaxy for the Daniel Island School
 github_issue_number: 1025
 tags:
-- liquid-galaxy
+- visionport
 - clients
 date: 2014-08-22
 ---

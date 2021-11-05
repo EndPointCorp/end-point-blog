@@ -5,7 +5,7 @@ github_issue_number: 426
 tags:
 - clients
 - company
-- liquid-galaxy
+- visionport
 date: 2011-03-09
 ---
 

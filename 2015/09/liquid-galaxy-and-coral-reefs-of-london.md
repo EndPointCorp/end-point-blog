@@ -4,7 +4,7 @@ title: Liquid Galaxy and the Coral Reefs of London
 github_issue_number: 1156
 tags:
 - event
-- liquid-galaxy
+- visionport
 date: 2015-09-02
 ---
 

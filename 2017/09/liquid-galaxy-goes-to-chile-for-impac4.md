@@ -7,7 +7,7 @@ featured:
   image_url: /blog/2017/09/liquid-galaxy-goes-to-chile-for-impac4/image-0.png
 tags:
 - conference
-- liquid-galaxy
+- visionport
 date: 2017-09-26
 ---
 

@@ -7,7 +7,7 @@ featured:
   image_url: /blog/2015/10/noaa-marine-sanctuaries-in-liquid-galaxy/image-0.jpeg
 tags:
 - event
-- liquid-galaxy
+- visionport
 date: 2015-10-26
 ---
 

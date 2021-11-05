@@ -6,7 +6,7 @@ tags:
 - chef
 - browsers
 - jenkins
-- liquid-galaxy
+- visionport
 - python
 - testing
 date: 2015-06-09

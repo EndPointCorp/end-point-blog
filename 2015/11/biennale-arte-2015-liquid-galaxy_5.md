@@ -4,7 +4,7 @@ title: Biennale Arte 2015 Liquid Galaxy Installation
 github_issue_number: 1175
 tags:
 - event
-- liquid-galaxy
+- visionport
 date: 2015-11-05
 ---
 

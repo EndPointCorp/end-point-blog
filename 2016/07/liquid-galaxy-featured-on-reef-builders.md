@@ -6,7 +6,7 @@ featured:
   visionport: true
   image_url: /blog/2016/07/liquid-galaxy-featured-on-reef-builders/image-0-big.png
 tags:
-- liquid-galaxy
+- visionport
 date: 2016-07-21
 ---
 

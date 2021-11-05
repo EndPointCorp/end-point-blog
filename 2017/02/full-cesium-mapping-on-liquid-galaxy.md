@@ -4,7 +4,7 @@ title: Full Cesium Mapping on the Liquid Galaxy
 github_issue_number: 1287
 tags:
 - cesium
-- liquid-galaxy
+- visionport
 date: 2017-02-07
 ---
 

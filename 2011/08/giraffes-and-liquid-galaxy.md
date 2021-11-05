@@ -4,7 +4,7 @@ title: Giraffes and Liquid Galaxy
 github_issue_number: 489
 tags:
 - google-earth
-- liquid-galaxy
+- visionport
 - kamelopard
 date: 2011-08-25
 ---

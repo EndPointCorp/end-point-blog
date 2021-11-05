@@ -6,7 +6,7 @@ featured:
   visionport: true
   image_url: /blog/2012/12/oceanographic-museum-of-monaco-liquid/image-0-big.jpeg
 tags:
-- liquid-galaxy
+- visionport
 date: 2012-12-31
 ---
 

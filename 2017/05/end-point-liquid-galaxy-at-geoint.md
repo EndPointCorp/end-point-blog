@@ -10,7 +10,7 @@ tags:
 - conference
 - visualization
 - gis
-- liquid-galaxy
+- visionport
 - event
 date: 2017-05-22
 ---

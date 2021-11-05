@@ -6,7 +6,7 @@ featured:
   visionport: true
   image_url: /blog/2018/12/liquid-galaxy-at-austin-startup-week/img-1.jpg
 tags:
-- liquid-galaxy
+- visionport
 - event
 date: 2018-12-19
 ---

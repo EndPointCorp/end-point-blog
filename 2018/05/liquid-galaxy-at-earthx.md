@@ -6,7 +6,7 @@ featured:
   visionport: true
   image_url: /blog/2018/05/liquid-galaxy-at-earthx/39546767-25e05db2-4e1b-11e8-969a-6e1f2403d02a-sm.jpg
 tags:
-- liquid-galaxy
+- visionport
 - conference
 date: 2018-05-02
 ---

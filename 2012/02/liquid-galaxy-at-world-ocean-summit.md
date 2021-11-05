@@ -3,7 +3,7 @@ author: Gerard Drazba
 title: Liquid Galaxy at the World Oceans Summit
 github_issue_number: 559
 tags:
-- liquid-galaxy
+- visionport
 - event
 date: 2012-02-24
 ---

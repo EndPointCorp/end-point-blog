@@ -6,7 +6,7 @@ featured:
   visionport: true
   image_url: /blog/2017/03/360-panoramic-video-on-liquid-galaxy/image-0-big.jpeg
 tags:
-- liquid-galaxy
+- visionport
 - video
 date: 2017-03-06
 ---

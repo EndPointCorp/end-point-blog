@@ -4,7 +4,7 @@ title: ASTC Day 1
 github_issue_number: 871
 tags:
 - conference
-- liquid-galaxy
+- visionport
 date: 2013-10-31
 ---
 

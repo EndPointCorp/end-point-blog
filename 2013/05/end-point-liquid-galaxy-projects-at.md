@@ -5,7 +5,7 @@ github_issue_number: 806
 tags:
 - conference
 - event
-- liquid-galaxy
+- visionport
 - maps
 date: 2013-05-23
 ---

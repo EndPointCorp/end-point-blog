@@ -4,7 +4,7 @@ title: New Kamelopard version
 github_issue_number: 898
 tags:
 - kamelopard
-- liquid-galaxy
+- visionport
 - ruby
 - open-source
 date: 2013-12-16

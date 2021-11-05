@@ -4,7 +4,7 @@ title: End Point’s New Tennessee Office
 github_issue_number: 913
 tags:
 - jobs-closed
-- liquid-galaxy
+- visionport
 - company
 date: 2014-01-14
 ---

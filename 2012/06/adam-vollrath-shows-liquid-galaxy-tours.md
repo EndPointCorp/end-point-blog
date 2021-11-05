@@ -3,7 +3,7 @@ author: Gerard Drazba
 title: Adam Vollrath shows Liquid Galaxy Tours at the End Point Company Meeting
 github_issue_number: 637
 tags:
-- liquid-galaxy
+- visionport
 date: 2012-06-14
 ---
 

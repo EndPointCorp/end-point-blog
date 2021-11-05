@@ -5,7 +5,7 @@ github_issue_number: 1260
 tags:
 - company
 - jobs-closed
-- liquid-galaxy
+- visionport
 date: 2016-10-13
 ---
 

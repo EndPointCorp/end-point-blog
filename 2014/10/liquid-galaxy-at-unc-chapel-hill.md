@@ -6,7 +6,7 @@ featured:
   visionport: true
   image_url: /blog/2014/10/liquid-galaxy-at-unc-chapel-hill/image-0-big.jpeg
 tags:
-- liquid-galaxy
+- visionport
 date: 2014-10-03
 ---
 

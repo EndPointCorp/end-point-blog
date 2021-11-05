@@ -7,7 +7,7 @@ featured:
   image_url: /blog/2014/03/liquid-galaxy-at-economist-world-ocean/image-0-big.jpeg
 tags:
 - google-earth
-- liquid-galaxy
+- visionport
 - event
 date: 2014-03-03
 ---

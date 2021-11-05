@@ -5,7 +5,7 @@ github_issue_number: 1316
 tags:
 - cesium
 - conference
-- liquid-galaxy
+- visionport
 - graphics
 - unity
 date: 2017-07-03

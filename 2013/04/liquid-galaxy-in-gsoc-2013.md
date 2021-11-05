@@ -4,7 +4,7 @@ title: Liquid Galaxy in GSoC 2013!
 github_issue_number: 787
 tags:
 - community
-- liquid-galaxy
+- visionport
 date: 2013-04-10
 ---
 

@@ -4,7 +4,7 @@ author: Jonathan Blessing
 github_issue_number: 1346
 tags:
 - company
-- liquid-galaxy
+- visionport
 date: 2017-11-17
 ---
 

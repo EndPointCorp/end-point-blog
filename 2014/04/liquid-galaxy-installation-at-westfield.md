@@ -7,7 +7,7 @@ featured:
   image_url: /blog/2014/04/liquid-galaxy-installation-at-westfield/image-0.jpeg
 tags:
 - gis
-- liquid-galaxy
+- visionport
 date: 2014-04-30
 ---
 

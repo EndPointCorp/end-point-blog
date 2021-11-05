@@ -4,7 +4,7 @@ title: End Point at the Utah Open Source Conference
 github_issue_number: 607
 tags:
 - conference
-- liquid-galaxy
+- visionport
 date: 2012-05-05
 ---
 

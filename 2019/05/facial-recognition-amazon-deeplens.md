@@ -6,7 +6,7 @@ tags:
 - machine-learning
 - artificial-intelligence
 - aws
-- liquid-galaxy
+- visionport
 featured:
   visionport: true
   image_url: /blog/2019/05/facial-recognition-amazon-deeplens/deeplens-front-angle.jpg

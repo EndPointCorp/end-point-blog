@@ -3,7 +3,7 @@ author: Ben Witten
 title: Liquid Galaxy for Real Estate
 github_issue_number: 1222
 tags:
-- liquid-galaxy
+- visionport
 date: 2016-04-22
 ---
 

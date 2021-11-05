@@ -3,7 +3,7 @@ author: Yaqi Chen
 title: We are bigger than VR gear - Liquid Galaxy
 github_issue_number: 1223
 tags:
-- liquid-galaxy
+- visionport
 - virtualization
 date: 2016-04-27
 ---

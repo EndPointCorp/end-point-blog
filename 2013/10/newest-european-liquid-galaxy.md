@@ -5,7 +5,7 @@ github_issue_number: 861
 tags:
 - clients
 - google-earth
-- liquid-galaxy
+- visionport
 date: 2013-10-02
 ---
 

@@ -5,7 +5,7 @@ github_issue_number: 625
 tags:
 - company
 - conference
-- liquid-galaxy
+- visionport
 date: 2012-06-13
 ---
 

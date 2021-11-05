@@ -4,7 +4,7 @@ title: Social Innovation Summit 2014
 github_issue_number: 1079
 tags:
 - conference
-- liquid-galaxy
+- visionport
 date: 2015-01-28
 ---
 

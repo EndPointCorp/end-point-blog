@@ -4,7 +4,7 @@ title: Brazilian Portuguese Liquid Galaxy website launch!
 github_issue_number: 1057
 tags:
 - company
-- liquid-galaxy
+- visionport
 date: 2014-11-17
 ---
 

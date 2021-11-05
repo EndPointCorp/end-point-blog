@@ -6,7 +6,7 @@ tags:
 - gis
 - google-earth
 - kamelopard
-- liquid-galaxy
+- visionport
 - open-source
 date: 2014-05-22
 ---

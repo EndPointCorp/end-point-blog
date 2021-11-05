@@ -3,7 +3,7 @@ author: Bianca Rodrigues
 title: Liquid Galaxy Technology Showcase at Situation Interactive
 github_issue_number: 1003
 tags:
-- liquid-galaxy
+- visionport
 date: 2014-06-24
 ---
 

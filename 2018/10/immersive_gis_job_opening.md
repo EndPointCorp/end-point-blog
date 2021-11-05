@@ -4,7 +4,7 @@ title: Immersive and GIS Developer Job Opening
 github_issue_number: 1458
 tags:
 - company
-- liquid-galaxy
+- visionport
 - jobs-closed
 - gis
 date: 2018-10-02

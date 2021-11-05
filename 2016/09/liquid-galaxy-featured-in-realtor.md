@@ -6,7 +6,7 @@ featured:
   visionport: true
   image_url: /blog/2016/09/liquid-galaxy-featured-in-realtor/image-0-big.png
 tags:
-- liquid-galaxy
+- visionport
 date: 2016-09-30
 ---
 

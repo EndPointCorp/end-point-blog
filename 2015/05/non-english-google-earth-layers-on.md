@@ -7,7 +7,7 @@ featured:
   image_url: /blog/2015/05/non-english-google-earth-layers-on/image-0-big.png
 tags:
 - google-earth
-- liquid-galaxy
+- visionport
 date: 2015-05-12
 ---
 

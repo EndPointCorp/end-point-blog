@@ -4,7 +4,7 @@ title: Kamelopard Updates
 github_issue_number: 762
 tags:
 - google-earth
-- liquid-galaxy
+- visionport
 - open-source
 - ruby
 - kamelopard

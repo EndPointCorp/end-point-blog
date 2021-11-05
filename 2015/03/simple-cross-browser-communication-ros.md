@@ -4,7 +4,7 @@ title: Simple cross-browser communication with ROS
 github_issue_number: 1107
 tags:
 - javascript
-- liquid-galaxy
+- visionport
 - ros
 date: 2015-03-24
 ---

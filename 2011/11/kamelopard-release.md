@@ -3,7 +3,7 @@ author: Josh Tolley
 title: Kamelopard Release
 github_issue_number: 517
 tags:
-- liquid-galaxy
+- visionport
 - open-source
 - ruby
 - kamelopard

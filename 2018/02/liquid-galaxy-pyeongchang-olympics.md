@@ -6,7 +6,7 @@ featured:
   visionport: true
   image_url: /blog/2018/02/liquid-galaxy-pyeongchang-olympics/pyeongchang-lg-1-small.jpg
 tags:
-- liquid-galaxy
+- visionport
 - event
 - clients
 date: 2018-02-13

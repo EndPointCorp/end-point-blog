@@ -7,7 +7,7 @@ featured:
   image_url: /blog/2013/08/disney-liquid-galaxy-in-sao-paolo/image-0-big.jpeg
 tags:
 - clients
-- liquid-galaxy
+- visionport
 - kamelopard
 date: 2013-08-01
 ---

@@ -4,7 +4,7 @@ title: Liquid Galaxy Website Launch
 github_issue_number: 593
 tags:
 - company
-- liquid-galaxy
+- visionport
 date: 2012-04-17
 ---
 

@@ -7,7 +7,7 @@ featured:
   visionport: true
   image_url: /blog/2021/09/introducing-visionport-remote/vpremote-small.jpg
 tags:
-- liquid-galaxy
+- visionport
 - company
 ---
 

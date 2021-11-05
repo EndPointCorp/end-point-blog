@@ -3,7 +3,7 @@ author: Matt Vollrath
 title: Using cec-client to Control HDMI Devices
 github_issue_number: 721
 tags:
-- liquid-galaxy
+- visionport
 - sysadmin
 date: 2012-11-08
 ---

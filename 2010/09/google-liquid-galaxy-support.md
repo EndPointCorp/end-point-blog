@@ -4,7 +4,7 @@ title: Google Liquid Galaxy Support
 github_issue_number: 358
 tags:
 - company
-- liquid-galaxy
+- visionport
 date: 2010-09-30
 ---
 
