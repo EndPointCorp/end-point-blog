@@ -14,7 +14,7 @@ It’s a good time for all when we start poking fun at the visual assault of ste
 
 Without getting into a long trumpeting session about the usefulness of data visualization (there are plenty of [books](https://www.amazon.com/s?url=search-alias%3Daps&field-keywords=Data+Visualization) on the subject), I’d like to jump directly into a Magick trick or two for creating simple visualizations.
 
-Let’s imagine we’ve got a group of machines [serving a particular purpose](https://liquidgalaxy.endpoint.com/). Now let’s say I want quick insight into not only the internal activity of all 8 machines, but also what the systems believe they are sending to their displays.
+Let’s imagine we’ve got a group of machines [serving a particular purpose](https://www.visionport.com/). Now let’s say I want quick insight into not only the internal activity of all 8 machines, but also what the systems believe they are sending to their displays.
 
 With a little magick (of the ImageMagick or GraphicsMagick variety), we can save ourselves from running “ps” and “free” and from having to be in the same room (or the same country) as the system we’re checking up on.
 
@@ -48,7 +48,7 @@ $ DISPLAY=:0 import -window root miff:- | composite -gravity south -geometry +0+
 
 So, in a single pipeline we imported a screenshot of the root window, then used “composite” to overlay our semi-transparent stats image and resize the whole thing to be a bit more manageable.
 
-**Finally**, we want to perform these things across all the systems and be left with something we can quickly glance at to see if there are obvious problems. So, let’s create a quick shell loop and execute our commands via ssh, placing the resize/composite burden on the shoulders of each individual system (be sure to escape variables for remote interpolation!):
+**Finally**, we want to perform these things across all the systems and be left with something we can quickly glance at to see if there are obvious problems. So, let’s create a quick shell loop and execute our commands via ssh, placing the resize/​composite burden on the shoulders of each individual system (be sure to escape variables for remote interpolation!):
 
 ```bash
 #!/bin/bash
