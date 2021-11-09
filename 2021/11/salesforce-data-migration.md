@@ -98,7 +98,6 @@ After the migration script runs, you'll need a way to verify that the data was l
 Once you have the migration script and test plan completed, you'll want to run the script against a copy of Salesforce production. The easiest way to do this is to create a new Full sandbox in Salesforce. However, if you're short on full sandbox licenses, you can create a Partial Copy, choosing only the options that are targeted in your script. Both sandboxes can be created by navigating to the Setup page in Salesforce, and then going to Platform Tools > Environments > Sandboxes.
 
 ![Salesforce sandboxes](salesforce-data-migration/salesforce-sandboxes.png)
-<small>Here is where to find sandboxes in Salesforce.</small>
 
 After the script runs successfully, you can evaluate the data in the target Sandbox to make sure everything looks correct. In our case, this involved pointing a test version of the new site to the migrated data.
 
@@ -124,6 +123,7 @@ List<Yourobject__c> SobjLst = [select id from Yourobject__c]; delete SobjLst;
  3. Finally, re-insert the data using the CSV backups from step 4. In the Data Loader, choose the Insert method, and log into Salesforce. Be sure to use an account with the proper write permissions. Then go through the Data Loader wizard, choosing the applicable CSV backup file and load the data back into Salesforce. Repeat for each affected object.
 
 ![Salesforce Data Loader](salesforce-data-migration/salesforce-data-loader.png)
+
 <small>Not the prettiest application, at least on a Mac. Circled in red is the Insert button.</small>
 
 This process turned out to be quite cumbersome for our project, due to the complexity of the data. It ended up taking several rounds of manual work in Excel (vlookups) to align all of the connected object ids correctly. It took me back to my first job after college. Hopefully your attempt will be easier! If it proves to be challenging, check out the [online version](https://dataloader.io/) of the Data Loader. It has expanded features that make it easier to import objects with relationships. Note, however, that the online version is only free for up to 10,000 records.
@@ -131,6 +131,7 @@ This process turned out to be quite cumbersome for our project, due to the compl
 ### 7. Run the script against production
 
 ![Launch in slack](salesforce-data-migration/slack-rumble.png)
+
 <small>Starting the "livestream" of our website launch in Slack!</small>
 
 Finally it's time for the main event. Before you run your script against Salesforce production, be sure to export both the data from the Sandbox and the data from Production (steps 1 and 4). This will ensure that the most recent data gets migrated, and will set you up for a rollback if something goes wrong. 
