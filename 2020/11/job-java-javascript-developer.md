@@ -4,7 +4,7 @@ title: 'Job opening: Java & JavaScript developer'
 github_issue_number: 1687
 tags:
 - company
-- jobs
+- jobs-closed
 - java
 - javascript
 - remote-work
@@ -14,6 +14,8 @@ date: 2020-11-13
 <img src="/blog/2020/11/job-java-javascript-developer/20201107-124658-crop.jpg" alt="Person on boulder overlooking valley with lake" />
 
 <!-- Photo by Jon Jensen -->
+
+**(This job has been filled.)**
 
 We are seeking a full-time Java software engineer to work with us on our clients’ applications.
 
@@ -62,7 +64,9 @@ These work traits are just as important:
 
 ### Get in touch with us:
 
-Please email us an introduction to jobs@endpointdev.com to apply. Include your location, a resume/​CV, your Git repository or LinkedIn URLs, and whatever else may help us get to know you.
+~~Please email us an introduction to jobs&#x40;endpoint.com to apply.~~
+**(This job has been filled.)**
+Include your location, a resume/​CV, your Git repository or LinkedIn URLs, and whatever else may help us get to know you.
 
 We look forward to hearing from you! Direct work seekers only, please—​this role is not for agencies or subcontractors.
 
