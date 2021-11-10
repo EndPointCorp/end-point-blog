@@ -2,8 +2,8 @@
 author: Dylan Wooters
 title: 'Salesforce Data Migration: Promoting Data Changes from a Sandbox to Production'
 featured:
-  endpoint: true
-  image_url: /blog/2020/03/salesforce-integration-with-node/fulton-ceiling.jpg
+ endpoint: true
+ image_url: /blog/2020/03/salesforce-integration-with-node/fulton-ceiling.jpg
 description: A tutorial on migrating data from a Salesforce sandbox to production
 tags:
 - salesforce
@@ -28,7 +28,7 @@ In this blog post, I will outline the solution we developed, which involved writ
 
 The Salesforce [Data Loader](https://developer.salesforce.com/docs/atlas.en-us.234.0.dataLoader.meta/dataLoader/data_loader.htm) is a clunky yet reliable application that allows you to load large amounts of data directly into a Salesforce org. It will work to migrate data if the requirements are not complex. For example, if you only need to load data into a few objects, and there are no connected objects or parent-child relationships. We chose not to use Data Loader for a few important reasons:
 
- - The data we were migrating was complex. Three levels of hierarchical categories were stored in Salesforce as separate custom objects, attached to another custom object representing products.  To make things worse, the category objects were also all attached to each other in a parent-child hierarchy. To load this data using the Data Loader and CSV files was very time-consuming and error-prone.
+ - The data we were migrating was complex. Three levels of hierarchical categories were stored in Salesforce as separate custom objects, attached to another custom object representing products. To make things worse, the category objects were also all attached to each other in a parent-child hierarchy. To load this data using the Data Loader and CSV files was very time-consuming and error-prone.
  - We needed a fast and reproducible migration process. We had a strict cutover time for the launch of the new website, and the migration therefore had to run quickly.
 
 We did end up using Data Loader as part of our rollback process, but more on that later in step 6.
@@ -52,42 +52,42 @@ My basic approach to writing the script started with asking the question, **what
 Here is a basic example from the migration script, where we are reading data from the JSON exported from the sandbox and loading it into Salesforce production.
 
 ```javascript
-import  *  as  fs  from  'fs';
-import  *  as  path  from  'path';
-import  *  as  jsforce  from  'jsforce';
+import * as fs from 'fs';
+import * as path from 'path';
+import * as jsforce from 'jsforce';
 
-const  openConnection = async() => {
-  let  conn = new  jsforce.Connection({
-    loginUrl :  process.env.instanceURL
-  });
-  await  conn.login(process.env.username  as  string, process.env.password  as  string);
-  console.log('info',`Connected to Salesforce.`);
-  return  conn;
+const openConnection = async() => {
+ let conn = new jsforce.Connection({
+  loginUrl : process.env.instanceURL
+ });
+ await conn.login(process.env.username as string, process.env.password as string);
+ console.log('info',`Connected to Salesforce.`);
+ return conn;
 }
 
-const  getJson = (filename: string) => {
-  return  JSON.parse(
-    fs.readFileSync(
-      path.resolve(__dirname,'sandbox-data/' + filename)
-    ).toString()
-  );
+const getJson = (filename: string) => {
+ return JSON.parse(
+  fs.readFileSync(
+   path.resolve(__dirname,'sandbox-data/' + filename)
+  ).toString()
+ );
 };
 
-const  segmentData = getJson('new-segments.json');
-const  connection = await  openConnection();
+const segmentData = getJson('new-segments.json');
+const connection = await openConnection();
 
-for (let  i=0;i<segmentData.records.length;i++) {
-  let  segment = segmentData.records[i];
-  //Ignore Marine Equipment segment since it already exists
-  if (segment.Name != 'Marine Equipment') {
-    await  connection.sobject('Segment__c').create({
-      Name:  segment.Name,
-      Description__c:  segment.Description__c,
-      Meta_Description__c:  segment.Meta_Description__c,
-      Meta_Keywords__c:  segment.Meta_Keywords__c,
-      SubHeader__c:  segment.SubHeader__c
-    });
-  }
+for (let i=0;i<segmentData.records.length;i++) {
+ let segment = segmentData.records[i];
+ //Ignore Marine Equipment segment since it already exists
+ if (segment.Name != 'Marine Equipment') {
+  await connection.sobject('Segment__c').create({
+   Name: segment.Name,
+   Description__c: segment.Description__c,
+   Meta_Description__c: segment.Meta_Description__c,
+   Meta_Keywords__c: segment.Meta_Keywords__c,
+   SubHeader__c: segment.SubHeader__c
+  });
+ }
 }
 ```
 ### 3. Come up with a plan for testing data changes
