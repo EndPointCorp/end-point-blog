@@ -3,7 +3,6 @@ author: Jon Jensen
 title: Ruby on Rails software developer needed
 github_issue_number: 676
 tags:
-- company
 - jobs-closed
 - rails
 date: 2012-07-31

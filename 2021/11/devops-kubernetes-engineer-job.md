@@ -3,7 +3,6 @@ author: Jon Jensen
 title: 'DevOps & Kubernetes engineer job opening'
 github_issue_number: 1790
 tags:
-- company
 - jobs
 - kubernetes
 - devops

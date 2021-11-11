@@ -8,7 +8,6 @@ featured:
 github_issue_number: 1777
 tags:
 - visionport
-- company
 ---
 
 [![Screen Share Integration](/blog/2021/09/liquid-galaxy-screen-share-integration/click-small.jpg)](/blog/2021/09/liquid-galaxy-screen-share-integration/click-large.jpg)

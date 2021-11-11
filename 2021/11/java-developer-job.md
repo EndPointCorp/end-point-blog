@@ -3,7 +3,6 @@ author: Jon Jensen
 title: 'Java developer job opening'
 github_issue_number: 1788
 tags:
-- company
 - jobs
 - java
 - remote-work

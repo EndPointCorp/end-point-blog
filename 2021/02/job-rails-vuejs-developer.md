@@ -3,7 +3,6 @@ author: Jon Jensen
 title: 'Job opening: Ruby on Rails & Vue.js developer'
 github_issue_number: 1721
 tags:
-- company
 - jobs-closed
 - ruby
 - rails

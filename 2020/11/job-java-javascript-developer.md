@@ -3,7 +3,6 @@ author: Jon Jensen
 title: 'Job opening: Java & JavaScript developer'
 github_issue_number: 1687
 tags:
-- company
 - jobs-closed
 - java
 - javascript

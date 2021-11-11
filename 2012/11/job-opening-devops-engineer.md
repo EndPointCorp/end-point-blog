@@ -3,7 +3,6 @@ author: Jon Jensen
 title: 'Job Opening: DevOps Engineer'
 github_issue_number: 725
 tags:
-- company
 - hosting
 - jobs-closed
 date: 2012-11-22

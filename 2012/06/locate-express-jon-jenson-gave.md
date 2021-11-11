@@ -3,7 +3,6 @@ author: Terry Grant
 title: Locate Express presentation
 github_issue_number: 652
 tags:
-- company
 - clients
 date: 2012-06-15
 ---

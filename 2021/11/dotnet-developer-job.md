@@ -3,7 +3,6 @@ author: Jon Jensen
 title: '.NET/C# developer job opening'
 github_issue_number: 1792
 tags:
-- company
 - jobs
 - dotnet
 - remote-work

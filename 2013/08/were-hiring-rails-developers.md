@@ -3,7 +3,6 @@ author: Jon Jensen
 title: We’re hiring Rails developers!
 github_issue_number: 847
 tags:
-- company
 - jobs-closed
 - rails
 date: 2013-08-22

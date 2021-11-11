@@ -3,7 +3,6 @@ author: Jon Jensen
 title: 'Job opening: PHP / JavaScript developer'
 github_issue_number: 1644
 tags:
-- company
 - jobs-closed
 - php
 - remote-work

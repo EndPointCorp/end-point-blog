@@ -3,12 +3,12 @@ author: David Christensen
 title: Integration Experiences
 github_issue_number: 633
 tags:
-- company
+- clients
 - integration
 date: 2012-06-13
 ---
 
-<div class="separator" style="clear: both; text-align: center;"><a href="/blog/2012/06/integration-experiences/image-0-big.jpeg" imageanchor="1" style="clear: right; float: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" height="200" src="/blog/2012/06/integration-experiences/image-0.jpeg" width="143"/></a></div>
+<img border="0" src="/blog/2012/06/integration-experiences/image-0.jpeg" align="right" />
 
 Szymon Guz gave a talk which covered his experiences working for a large client on integrating an acquired business’ website and fulfillment processes into their existing backend and fulfillment systems.
 

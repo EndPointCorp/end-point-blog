@@ -3,7 +3,6 @@ author: Jon Jensen
 title: 'Job opening: Web developer'
 github_issue_number: 1301
 tags:
-- company
 - jobs-closed
 date: 2017-04-20
 ---

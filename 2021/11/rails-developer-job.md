@@ -3,7 +3,6 @@ author: Jon Jensen
 title: 'Rails developer job opening'
 github_issue_number: 1789
 tags:
-- company
 - jobs
 - ruby
 - rails

@@ -3,7 +3,6 @@ author: Jon Jensen
 title: 'Job opening: .NET/​C# and JavaScript developer'
 github_issue_number: 1451
 tags:
-- company
 - jobs-closed
 date: 2018-08-30
 ---

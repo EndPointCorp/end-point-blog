@@ -4,7 +4,6 @@ title: Cybergenetics Helps Free Innocent Man
 github_issue_number: 1224
 tags:
 - community
-- company
 - clients
 date: 2016-04-27
 ---

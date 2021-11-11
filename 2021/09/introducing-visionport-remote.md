@@ -8,7 +8,6 @@ featured:
   image_url: /blog/2021/09/introducing-visionport-remote/vpremote-small.jpg
 tags:
 - visionport
-- company
 ---
 
 [![VisionPort Remote screenshot](/blog/2021/09/introducing-visionport-remote/vpremote-small.jpg)](/blog/2021/09/introducing-visionport-remote/vpremote-large.jpg)

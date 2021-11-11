@@ -3,7 +3,6 @@ author: Jon Jensen
 title: Liquid Galaxy developer job opening
 github_issue_number: 1260
 tags:
-- company
 - jobs-closed
 - visionport
 date: 2016-10-13

@@ -3,7 +3,6 @@ author: Jon Jensen
 title: Seeking a PHP developer
 github_issue_number: 1561
 tags:
-- company
 - jobs-closed
 - php
 - remote-work

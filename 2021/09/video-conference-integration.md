@@ -8,7 +8,6 @@ featured:
 github_issue_number: 1766
 tags:
 - visionport
-- company
 ---
 
 ![Liquid Galaxy being displayed in a Zoom call](/blog/2021/09/video-conference-integration/image-0.jpg)

@@ -3,7 +3,6 @@ author: Ron Phipps
 title: 'We are hiring: Ruby on Rails Developer'
 github_issue_number: 473
 tags:
-- company
 - ecommerce
 - jobs-closed
 - ruby

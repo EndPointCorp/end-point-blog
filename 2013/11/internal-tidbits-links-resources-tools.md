@@ -3,7 +3,6 @@ author: Steph Skardal
 title: 'Internal Tidbits: Links, Resources, Tools'
 github_issue_number: 882
 tags:
-- company
 - tools
 date: 2013-11-13
 ---

@@ -3,7 +3,6 @@ author: Benjamin Goldstein
 title: Liquid Galaxy Support Engineer Job Opening
 github_issue_number: 1474
 tags:
-- company
 - jobs-closed
 - visionport
 date: 2018-12-13

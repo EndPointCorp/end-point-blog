@@ -3,7 +3,6 @@ author: Jon Jensen
 title: 'Job opening: Linux system administration and DevOps remote engineer'
 github_issue_number: 1514
 tags:
-- company
 - jobs-closed
 - devops
 - remote-work

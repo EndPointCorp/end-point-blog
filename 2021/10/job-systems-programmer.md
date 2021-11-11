@@ -3,8 +3,8 @@ title: 'Job opening: Systems Programmer'
 author: Matt Vollrath
 github_issue_number: 1782
 tags:
-- company
 - jobs
+- remote-work
 date: 2021-10-13
 ---
 

@@ -6,7 +6,6 @@ tags:
 - angular
 - case-study
 - clients
-- company
 - django
 date: 2016-12-23
 ---

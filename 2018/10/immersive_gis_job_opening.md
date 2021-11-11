@@ -3,7 +3,6 @@ author: Benjamin Goldstein
 title: Immersive and GIS Developer Job Opening
 github_issue_number: 1458
 tags:
-- company
 - visionport
 - jobs-closed
 - gis

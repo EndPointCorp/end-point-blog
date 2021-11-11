@@ -8,6 +8,7 @@ tags:
 - seo
 - reporting
 - testing
+- company
 date: 2020-03-25
 ---
 
@@ -19,7 +20,7 @@ With the COVID-19 quarantine disrupting life for many of us, I thought I’d put
 
 ### Major Version Updates
 
-Make a list of your entire stack, from OS to database to development frameworks. Note the current version and research the current supported versions. I find Wikipedia pages to be fairly reliable for this (e.g. [https://en.wikipedia.org/wiki/CentOS](https://en.wikipedia.org/wiki/CentOS)). Ok, so what things need to be updated, or will need to be in the next year? Start on those now and use some downtime to get ahead of your updates.
+Make a list of your entire stack, from OS to database to development frameworks. Note the current version and research the current supported versions. I find Wikipedia pages to be fairly reliable for this (e.g. [en.wikipedia.org/wiki/CentOS](https://en.wikipedia.org/wiki/CentOS)). Ok, so what things need to be updated, or will need to be in the next year? Start on those now and use some downtime to get ahead of your updates.
 
 #### Sample of a client’s stack review
 
@@ -146,7 +147,7 @@ Automated DevOps deployment tools can also be nice to work on. Tools like Ansibl
 
 ### Security Audit and Monitoring
 
-Taking a few days to review your personal security and that of your application is something you should do regularly and now’s a good time to plan for it. Charlie’s got [a great security post](/blog/2020/02/end-point-security-tips) that’s a good top-level review. For application security, End Point uses some tools for vulnerability scanning. We also have a checklist of basic security items that include password handling, PII data, and other common security holes. For certain projects/clients we must also take HIPAA or PCI DSS compliance into account. Also, don’t neglect to review your TLS status and ensure that web applications run on TLS 1.2 and are TLS 1.3 ready. This also may relate to the underlying operating systems—whether they are able to support the latest TLS version natively.
+Taking a few days to review your personal security and that of your application is something you should do regularly and now’s a good time to plan for it. Charlie’s got [a great security post](/blog/2020/02/end-point-security-tips/) that’s a good top-level review. For application security, End Point uses some tools for vulnerability scanning. We also have a checklist of basic security items that include password handling, PII data, and other common security holes. For certain projects/clients we must also take HIPAA or PCI DSS compliance into account. Also, don’t neglect to review your TLS status and ensure that web applications run on TLS 1.2 and are TLS 1.3 ready. This also may relate to the underlying operating systems—whether they are able to support the latest TLS version natively.
 
 ### Optimization and Performance:
 
@@ -156,4 +157,4 @@ Most of the time new features have higher priority than improving the performanc
 
 Along the same lines as optimization, code refactoring can have long term gains in performance and ease of future development. Think of this like house cleaning. It is always easier to find any item in the house when things are arranged in an orderly manner. Similarly, the organized and clean code base will play a vital role in future code changes and development, helping to reduce the chances of unexpected bugs, save time making changes at one place and improving code readability. Disciplined refactoring delivers readable, reusable, non-redundant code. Refactoring can be applied to your databases and user interfaces as well.
 
-Want to get started on some background projects for your website? [Talk to us today](/contact).
+Want to get started on some background projects for your website? [Talk to us today](/contact/).

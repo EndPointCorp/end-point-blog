@@ -4,7 +4,6 @@ title: DevOps engineer job opening (remote)
 github_issue_number: 812
 tags:
 - jobs-closed
-- company
 - devops
 - remote-work
 date: 2013-06-04
