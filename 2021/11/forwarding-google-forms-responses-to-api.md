@@ -1,8 +1,8 @@
 ---
 author: "Afif Sohaili"
-date: 2021-11-08
-title: "Forward Google Forms responses to an external API"
-github_issue_number:
+date: 2021-11-16
+title: "Forwarding Google Forms responses to an external API"
+github_issue_number: 1797
 tags:
 - google-apps-script
 - javascript
@@ -10,7 +10,9 @@ tags:
 - google-forms
 ---
 
-Google Forms is a great form service that many people use for surveys, research, questionnaires, etc. It has an intuitive and flexible interface for building forms and is fairly easy to use for everyone. Once you get a response, you can view the results in the admin section of the form or in a Google Sheets document in which Google will automatically insert all your responses. However, you may need to do something else with the responses. For example, what if you want to have the response printed in your Slack channel or Discord server? Or what if you want to make more complex visualizations with the raw responses that Google Sheets otherwise cannot do?
+![Sunrise over the Wasatch mountains](/blog/2021/11/forwarding-google-forms-responses-to-api/banner.jpg)
+
+Google Forms is a great form service that many people use for surveys, research, questionnaires, etc. It has an intuitive and flexible interface for building forms and is fairly easy to use for everyone. Once you get a response, you can view the results in the admin section of the form or in a Google Sheets document in which Google will automatically insert all your responses. However, you may need to do something else with the responses. For example, what if you want to have the response printed in your Slack channel or Discord server? Or what if you want to use the raw data to make more complex visualizations than Google Sheets is capable of?
 
 ### Google Apps Script to the rescue!
 
@@ -21,12 +23,12 @@ Even though Google Apps Script is basically just JavaScript, there are a few key
 #### 1. Start a new Google Apps Script project
 
 1. Head to [Google Forms](https://forms.google.com) and create a new form.
-2. Click the triple-dots icon at the top-right corner of the form and choose _Script Editor_.
-3. You should now see the Google Apps Script editor. Great! Let's change the project name to something more descriptive (e.g. _Forward to API_).
+2. Click the triple-dots icon at the top-right corner of the form and choose "Script Editor".
+3. You should now see the Google Apps Script editor. Great! Let's change the project name to something more descriptive (e.g. "Forward to API").
 
 #### 2. Add triggers to the script for initialization
 
-Google Apps Script allows you to install triggers to the current form. The ones we are interested in right now are `onOpen`, which runs when a user that has edit access opens the form, and `onInstall`, which runs when a user installs the add-on in the Google Forms form. There are other events that you might be interested in, listed [here](https://developers.google.com/apps-script/guides/triggers).
+Google Apps Script allows you to install triggers to the current form. The ones we are interested in right now are `onOpen`, which runs when a user that has edit access opens the form, and `onInstall`, which runs when a user installs the add-on in the Google Forms form. There are other events that you might be interested in listed [here](https://developers.google.com/apps-script/guides/triggers).
 
 We will also need to provide a way for users to set the outgoing URL for each response. The easiest would be to hardcode it in the code, but we can make our add-on a little bit more configurable; let's also create a sidebar that contains the configuration interface for the users to change the settings for our add-on, in this case the destination URL for the responses.
 
@@ -63,7 +65,7 @@ function showSidebar() {
 
 // Load settings
 ```
-Here, we have three functions. First, we would like to have a menu item on the form to access the add-on. This is done through the  `createAddonMenu().addItem` function within the `onOpen` trigger. We also have the `onInstall` trigger that does the same thing as what `onOpen` is doing. With these, both installing the add-on for the first time and opening the form creates an add-on menu item called "Configure".
+First, we would like to have a menu item on the form to access the add-on. This is done through the  `createAddonMenu().addItem` function within the `onOpen` trigger. We also have the `onInstall` trigger that does the same thing as what `onOpen` is doing. With these, both installing the add-on for the first time and opening the form creates an add-on menu item called "Configure".
 
 `createAddonMenu().addItem` accepts two arguments, a label (`Configure`) and a function name to be executed when the item is selected (`showSidebar`). In the code above, it will run the `showSidebar` function. `showSidebar` initializes the add-on's view by loading and running the HTML file we specified in `createHtmlOutputFromFile`. Since we are passing `sidebar` to the function, it will automatically assume the filename `sidebar.html` and load the file from our project.
 
@@ -123,14 +125,14 @@ In the previous step, we specified our menu item to show the sidebar. Now, let's
 
 ###### Test your sidebar
 
-1. Go back to your Google Forms form and hit refresh. You should now get an add-on menu on your form, with your add-on listed in the dropdown.
-2. Choose your add-on and click `Configure`. This is the add-on menu item that we declared in step 1.
+1. Go back to your Google Forms form and refresh. You should now get an add-on menu on your form, with your add-on listed in the dropdown.
+2. Choose your add-on and click "Configure". This is the add-on menu item that we declared in step 1.
 3. You should now be prompted to authorize the script. Follow the instructions to allow the script permission to run on your Google Forms forms.
-4. Once you're done, go to the add-on menu, choose your add-on, and choose `Configure` again. You should now see a sidebar on the right side of the form with a text field to fill in the destination URL and a submit button to save the settings.
+4. Once you're done, go to the add-on menu, choose your add-on, and choose "Configure" again. You should now see a sidebar on the right side of the form with a text field to fill in the destination URL and a submit button to save the settings.
 
-![Authorization](/blog/2021/11/forward-google-forms-responses-to-your-app/forms-authorization.png)
+![Authorization](/blog/2021/11/forwarding-google-forms-responses-to-api/forms-authorization.png)
 
-![Your sidebar](/blog/2021/11/forward-google-forms-responses-to-your-app/sidebar-1.png)
+![Your sidebar](/blog/2021/11/forwarding-google-forms-responses-to-api/sidebar-1.png)
 
 #### 4. Saving your configuration
 
@@ -207,7 +209,7 @@ Now, let's go through the code:
 
 The `$(function() {})` block is run at document load. Two things happen here:
 - The `loadSettingsAndPopulateForm` function runs the `fetchSettings` function from the backend. Then it populates the text input field `#url` with the saved settings.
-- Then it'll install an event listener on the configuration form submit to save the settings to the server. This listener, the `saveSettingsToServer` function, gathers all the values from the input fields, and runs the `saveSettings` function on the backend, with the input field values as the arguments.
+- It installs an event listener on the configuration form submit to save the settings to the server. This listener, the `saveSettingsToServer` function, gathers all the values from the input fields, and runs the `saveSettings` function on the backend, with the input field values as the arguments.
 
 ##### google.script.run
 
@@ -220,8 +222,8 @@ To see more, read the [documentation](https://developers.google.com/apps-script/
 Now that we're able to pinpoint the address we want send the form data to, we can start instructing Google Forms to send the data our way when someone submits the form. In order to do that, we:
 
 1. Code the form submit trigger to submit the data on the form response.
-2. If there's no existing form submit trigger and URL is set, install the form submit trigger.
-3. If there is an existing form submit trigger and URL is unset, remove the trigger.
+2. If there's no existing form submit trigger and the URL is set, install the form submit trigger.
+3. If there is an existing form submit trigger and the URL is unset, remove the trigger.
 
 Let's write the form submit trigger first. Paste this code at the end of `Code.gs`:
 
@@ -303,14 +305,14 @@ This function is pretty straightforward. It checks if there is a URL saved in th
 #### 6. Test the triggers
 
 Now we can test the submission. Let's configure our add-on with a valid URL to our app, add a couple of questions to our form, then hit `Preview` in the top navigation bar to test our form submit trigger.
-![Form](/blog/2021/11/forward-google-forms-responses-to-your-app/forms-question.png)
+![Form](/blog/2021/11/forwarding-google-forms-responses-to-api/forms-question.png)
 
 Once we've filled the form, hit `Submit`. You should now see your form response gets sent to your destination URL as a POST request. 
-![Form submit](/blog/2021/11/forward-google-forms-responses-to-your-app/forms-sample-response.png)
+![Form submit](/blog/2021/11/forwarding-google-forms-responses-to-api/forms-sample-response.png)
 
 Here's what I get from a simple Express app I developed to receive the response:
-![Express response](/blog/2021/11/forward-google-forms-responses-to-your-app/forms-sample-post.png)
+![Express response](/blog/2021/11/forwarding-google-forms-responses-to-api/forms-sample-post.png)
 
 ### Conclusion
 
-That's it. We can now send Google Forms responses to our app for better data processing and visualization.
+That's it! We can now send Google Forms responses to our app for better data processing and visualization.
