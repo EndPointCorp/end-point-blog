@@ -12,7 +12,11 @@ tags:
 
 ![Sunrise over the Wasatch mountains](/blog/2021/11/forwarding-google-forms-responses-to-api/banner.jpg)
 
-Google Forms is a great form service that many people use for surveys, research, questionnaires, etc. It has an intuitive and flexible interface for building forms and is fairly easy to use for everyone. Once you get a response, you can view the results in the admin section of the form or in a Google Sheets document in which Google will automatically insert all your responses. However, you may need to do something else with the responses. For example, what if you want to have the response printed in your Slack channel or Discord server? Or what if you want to use the raw data to make more complex visualizations than Google Sheets is capable of?
+<!-- Photo by Mira Jensen -->
+
+Google Forms is a great form service that many people use for surveys, research, questionnaires, etc. It has an intuitive and flexible interface for building forms and is fairly easy to use for everyone. Once you get a response, you can view the results in the admin section of the form or in a Google Sheets document in which Google will automatically insert all your responses.
+
+However, you may need to do something else with the responses. For example, what if you want to have the response printed in your Slack channel or Discord server? Or what if you want to use the raw data to make more complex visualizations than Google Sheets is capable of?
 
 ### Google Apps Script to the rescue!
 
@@ -33,6 +37,7 @@ Google Apps Script allows you to install triggers to the current form. The ones 
 We will also need to provide a way for users to set the outgoing URL for each response. The easiest would be to hardcode it in the code, but we can make our add-on a little bit more configurable; let's also create a sidebar that contains the configuration interface for the users to change the settings for our add-on, in this case the destination URL for the responses.
 
 Now, in the Google Apps Script code editor, paste the following code:
+
 ```javascript
 /**
  * Adds a custom menu to the active form to show the add-on sidebar.
@@ -65,6 +70,7 @@ function showSidebar() {
 
 // Load settings
 ```
+
 First, we would like to have a menu item on the form to access the add-on. This is done through the  `createAddonMenu().addItem` function within the `onOpen` trigger. We also have the `onInstall` trigger that does the same thing as what `onOpen` is doing. With these, both installing the add-on for the first time and opening the form creates an add-on menu item called "Configure".
 
 `createAddonMenu().addItem` accepts two arguments, a label (`Configure`) and a function name to be executed when the item is selected (`showSidebar`). In the code above, it will run the `showSidebar` function. `showSidebar` initializes the add-on's view by loading and running the HTML file we specified in `createHtmlOutputFromFile`. Since we are passing `sidebar` to the function, it will automatically assume the filename `sidebar.html` and load the file from our project.
@@ -76,52 +82,53 @@ In the previous step, we specified our menu item to show the sidebar. Now, let's
 1. On the Files panel, click the `+` icon and choose `HTML` in the dropdown menu.
 2. Name the file `sidebar.html` when prompted. This is important as we have specified the name `sidebar` to the `createHtmlOutputFromFile` function within `showSidebar`.
 3. Open the HTML file and paste the following HTML content:
-   ```html
-    <!DOCTYPE html>
-    <html>
-      <head>
-        <base target="_top">
-        <style>
-          body {
-            font-family: sans-serif;
-            font-size: 14px;
-          }
 
-          input {
-            border: 1px solid #3f3f3f;
-            padding: 0.25rem;
-            width: 100%;
-          }
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <style>
+      body {
+        font-family: sans-serif;
+        font-size: 14px;
+      }
 
-          #error {
-            margin-top: 0.5rem;
-          }
+      input {
+        border: 1px solid #3f3f3f;
+        padding: 0.25rem;
+        width: 100%;
+      }
 
-          .input-field {
-            margin-bottom: 1rem;
-          }
-        </style>
-      </head>
-      <body>
-        <form>
-          <div class="input-field">
-            <label for="url">URL to send responses to:</label>
-            <input id="url" type="text" name="url" placeholder="e.g. https://some-api.com/accept/responses"/>
-          </div>
-          <div class="block" id="button-bar">
-            <button class="action" id="save-settings">Save</button>
-            <p id="response"></p>
-          </div>
-        </form>
-        
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js">
-        </script>
-        <script>
-        // Our JavaScript code
-        </script>
-      </body>
-    </html>
-   ```
+      #error {
+        margin-top: 0.5rem;
+      }
+
+      .input-field {
+        margin-bottom: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <form>
+      <div class="input-field">
+        <label for="url">URL to send responses to:</label>
+        <input id="url" type="text" name="url" placeholder="e.g. https://some-api.com/accept/responses"/>
+      </div>
+      <div class="block" id="button-bar">
+        <button class="action" id="save-settings">Save</button>
+        <p id="response"></p>
+      </div>
+    </form>
+    
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js">
+    </script>
+    <script>
+    // Our JavaScript code
+    </script>
+  </body>
+</html>
+```
 
 ###### Test your sidebar
 
@@ -139,7 +146,8 @@ In the previous step, we specified our menu item to show the sidebar. Now, let's
 Now we need to be able to save the URL we want to send the responses to and create a form trigger out of that. Let's go ahead and add that:
 
 Add the following script in the `<script>` block under the `// Our JavaScript code` comment.
- ```javascript
+
+```javascript
 // sidebar.html
 $(function() {
   // Load settings from the server
@@ -205,6 +213,7 @@ function fetchSettings() {
   return PropertiesService.getDocumentProperties().getProperties();
 }
 ```
+
 Now, let's go through the code:
 
 The `$(function() {})` block is run at document load. Two things happen here:
@@ -270,6 +279,7 @@ Let's break it down. First, we compile the data that we want to send to our appl
 ##### Adjusting the form trigger
 
 Right now, `sendResponse` is not hooked to any function. Let's hook it to the form trigger with this code:
+
 ```javascript
 function adjustFormSubmitTrigger() {
   var form = FormApp.getActiveForm();
@@ -305,13 +315,40 @@ This function is pretty straightforward. It checks if there is a URL saved in th
 #### 6. Test the triggers
 
 Now we can test the submission. Let's configure our add-on with a valid URL to our app, add a couple of questions to our form, then hit `Preview` in the top navigation bar to test our form submit trigger.
+
 ![Form](/blog/2021/11/forwarding-google-forms-responses-to-api/forms-question.png)
 
 Once we've filled the form, hit `Submit`. You should now see your form response gets sent to your destination URL as a POST request. 
+
 ![Form submit](/blog/2021/11/forwarding-google-forms-responses-to-api/forms-sample-response.png)
 
 Here's what I get from a simple Express app I developed to receive the response:
-![Express response](/blog/2021/11/forwarding-google-forms-responses-to-api/forms-sample-post.png)
+
+```plaintext
+Example app listening at http://localhost:4000
+```
+```json
+{
+  "form": {
+    "id": "1zm_anJLsYnnmI-MlRqLcEhK8Eemd90rg_oJmsThiONw",
+    "title": "HR Benefits Survey",
+    "is_private": true,
+    "is_published": true
+  },
+  "response": {
+    "id": "2_ABaOnufmy5dDzYsUl3-G5vlkQaOPoW-Jf5Wskk9SZHhXvpgnTzx6LGVq9YGDqivvo6TXpko",
+    "email": "",
+    "timestamp": "2021-11-07T08:56:08.299Z",
+    "data": {
+      "What's the most important thing for you?": "4-day workweek",
+      "Select games you'd like to have at the office": [
+        "Foosball",
+        "Dart"
+      ]
+    }
+  }
+}
+```
 
 ### Conclusion
 
