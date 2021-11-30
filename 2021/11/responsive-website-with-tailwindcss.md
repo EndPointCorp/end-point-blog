@@ -10,13 +10,13 @@ tags:
 - ui
 ---
 
-Tailwind CSS is a CSS framework, like Bootstrap, Bulma and Foundation, just to name a few. However, Tailwind CSS does things in a less conventional way when compared to traditional CSS frameworks. Instead of providing CSS classes based on components or functional roles (e.g. `.card` or `.row`), Tailwind only provides utility classes, in which each class does only one specific thing a CSS attribute usually does, such as `m-4` for `margin: 1rem` or `mt-8` for `margin-top: 2rem`. 
+Tailwind CSS is a CSS framework, like Bootstrap, Bulma, and Foundation. However, Tailwind CSS does things in a less conventional way when compared to traditional CSS frameworks. Instead of providing CSS classes based on components or functional roles (e.g. `.card` or `.row`), Tailwind only provides utility classes, in which each class does only one specific thing a CSS attribute usually does, such as `m-4` for `margin: 1rem` or `mt-8` for `margin-top: 2rem`. 
 
 In Bootstrap, one can simply apply the provided `.card` CSS class to have a `<div>` styled like a card the Bootstrap way. In Tailwind, the styles have to be constructed with a string of different atomic classes. e.g. The equivalent of a Bootstrap's `.card` would be something like `relative flex flex-col break-words bg-white bg-clip-border min-w-0 rounded border`. Verbose, yes, but this gives flexibility for the developers to define the appearance of a `.card` element themselves (e.g. there could be multiple variants of appearances of a `.card`) without having to worry about overriding inherited/cascading CSS classes, which are typically the cause for CSS bugs in production.
 
 ## Atomic CSS
 
-The first thing one would notice when developing with Tailwind is how verbose a CSS class list can be. It feels almost like using the `style=""` attribute to write CSS, except it does not. In the traditional approach to CSS, suppose there are two elements with identical margins:
+The first thing you notice when developing with Tailwind is how wordy a CSS class list can be. It feels almost like using the `style=""` attribute to write CSS. In the traditional approach to CSS, suppose there are two elements with identical margins:
 ```css
 .card {
   display: block;
@@ -37,9 +37,9 @@ With Tailwind, however, this is how the equivalent would be written:
 <div class="m-4">
 </div>
 ```
-Here, both of the `<div>`s are reusing the same class `m-4`, which is provided out-of-the-box by Tailwind. This approach ensures that the project's CSS does not grow, and that is actually important for good user experience. Constructing the CSS of a page is a render-blocking task in a web page load. So, the bigger the CSS, the longer the wait time for a user to see something on the browser. Yes, the HTML payload *will* grow albeit just by a little.
+Here, both of the `<div>`s are reusing the same class `m-4`, which is provided out-of-the-box by Tailwind. This approach ensures that the project's CSS does not grow, which is important for good user experience. Constructing the CSS of a page is a render-blocking task in a web page load. So, the bigger the CSS, the longer the wait time for a user to see something on the browser. Yes, the HTML payload will grow, albeit just by a little.
 
-One other biggest difference between using Tailwind CSS classes and using `style` attribute, is that the latter cannot be used to style pseudoclasses (e.g. `:hover`, `:disabled`). With CSS classes, that is achievable, but there are special prefixes that Tailwind provides for each of the variants to take effect.
+One of the differences between using Tailwind CSS classes and using `style` attribute is that the latter cannot be used to style pseudoclasses (e.g. `:hover`, `:disabled`). With CSS classes, that is achievable, but there are special prefixes that Tailwind provides for each of the variants to take effect.
 
 e.g.
 ```html
@@ -67,15 +67,15 @@ module.exports = {
 }
 ```
 
-Or, if the project is on Tailwind CSS v2.1+, the developers can enable Just-in-Time mode, which grants access to *all* variants out-of-the-box while also being more performant in development mode.
+Or, if the project is on Tailwind CSS v2.1+, the developers can enable Just-in-Time mode, which grants access to all variants out-of-the-box while also being more functional in development mode.
 
 See [Just-in-Time mode](https://tailwindcss.com/docs/just-in-time-mode) for more details.
 
 ## Shaking off the unused CSS
 
-By default, Tailwind will be loading the whole Tailwind CSS project files, with CSS declarations on almost every possible CSS rules, and there are a lot in there that a developer might never use. To put that into context, there are *105* different values for just grid and flexbox gaps. No projects could possibly use them all, so Tailwind needs a way to remove the unused CSS when generating the final CSS build for production use.
+By default, Tailwind will be loading the whole Tailwind CSS project files, with CSS declarations on almost every possible CSS rule. There are a lot in there that a developer might never use. To put that into context, there are 105 different values for just grid and flexbox gaps. No projects could possibly use them all, so Tailwind needs a way to remove the unused CSS when generating the final CSS build for production use.
 
-This is where PurgeCSS comes in. PurgeCSS is a plugin that analyzes all CSS, HTML, and JavaScript files in the project and removes unused CSS declarations from the final build. This tool is available as a PostCSS, Webpack, Gulp, Grunt, or Gatsby plugins. 
+This is where PurgeCSS comes in. PurgeCSS is a plugin that analyzes all CSS, HTML, and JavaScript files in the project and removes unused CSS declarations from the final build. This tool is available as a PostCSS, Webpack, Gulp, Grunt, or Gatsby plugin. 
 
 Because PurgeCSS analyzes the project's source code to find exact matches of a given CSS style, a CSS class cannot be used through string concatenations or PurgeCSS will not be able to detect that the given Tailwind class is used.
 ```react
@@ -114,7 +114,7 @@ render(
 )
 ```
 
-Therefore, Tailwind is easier to be implemented in component-based frameworks, such as Vue or React. But even if you're not using any of them and are just building a plain HTML file, Tailwind provides a way to compose these classes together by using `@apply`:
+Therefore, Tailwind is easier to implement in component-based frameworks, such as Vue or React. But even if you're not using any of them and are just building a plain HTML file, Tailwind provides a way to compose these classes together by using `@apply`:
 
 ```css
 .button {
@@ -185,7 +185,7 @@ First, let's have the basic page layout:
 </div>
 ```
 
-Tailwind official documentation recommends taking a mobile-first approach. Hence, all classes *without* any screen-size variants will be applied to all screen sizes. Tailwind then provides several screen-size variants such as `sm`, `lg`, `xl`, and `2xl` that can be used to control the appearance on specific screen sizes range.
+Tailwind official documentation recommends taking a mobile-first approach. Hence, all classes without any screen-size variants will be applied to all screen sizes. Tailwind then provides several screen-size variants such as `sm`, `lg`, `xl`, and `2xl` that can be used to control the appearance on specific screen sizes range.
 
 This is what we're doing here. As you can see, we're using flexbox layout to collapse all elements down to a single column.
 
@@ -204,15 +204,15 @@ Now, let's add Tailwind's responsive variants so that the page is responsive to 
 </div>
 ```
 
-`flex-col md:flex-row` here does the trick for us. `md` variants, by default, kicks in when the screen width is at a minimum of 768px. At that point, our flexbox will change from the column layout to the row layout, displaying our `aside` and `main` elements side-by-side in one row. To better distribute the width, we specify `md:w-1/3` and `lg:w-1/4` classes to the sidebar. `w-1/3` and `w-1/4` sets the width of the elements to one-third and one-fourth of the parent container respectively. The `md` and `lg` variants both control at what screen sizes should Tailwind apply which styles.
+`flex-col md:flex-row` here does the trick for us. `md` variants, by default, kick in when the screen width is at a minimum of 768px. At that point, our flexbox will change from the column layout to the row layout, displaying our `aside` and `main` elements side-by-side in one row. To better distribute the width, we specify `md:w-1/3` and `lg:w-1/4` classes to the sidebar. `w-1/3` and `w-1/4` sets the width of the elements to one-third and one-fourth of the parent container respectively. The `md` and `lg` variants both control at what screen sizes should Tailwind apply which styles.
 
 <iframe width="770" height="434" src="https://www.youtube.com/embed/M9Wj5dG_N6w" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Conclusion
 
-Tailwind CSS can be a bit daunting to start, but once you get a handle on it, Tailwind CSS is a great option for rapidly building user interfaces with total control over the styles. Unlike other frameworks, Tailwind does not attempt to provide with a default styling of any component, allowing every site that uses Tailwind to be truly unique from one another.
+It can be a bit daunting to start, but once you get a handle on it, Tailwind CSS is a great option for rapidly building user interfaces with total control over the styles. Unlike other frameworks, Tailwind does not attempt to provide a default styling of any component, allowing every site that uses Tailwind to be truly unique from another.
 
-These responsive variants can be applied to any other CSS classes from Tailwind, providing a powerful way to build responsive user interfaces. The very thin abstraction over CSS provides developers with a greater flexibility and control over the design while being a good constraint to guide the development process.
+These responsive variants can be applied to any other CSS class from Tailwind, providing a powerful way to build responsive user interfaces. The very thin abstraction over CSS provides developers with a greater flexibility and control over the design while being a good constraint to guide the development process.
 
 Happy trying!
 
