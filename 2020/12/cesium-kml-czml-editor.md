@@ -12,6 +12,9 @@ tags:
 - gis
 - open-source
 - visionport
+featured:
+  visionport: true
+  image_url: /blog/2020/12/cesium-kml-czml-editor/image-00.jpg
 date: 2020-12-21
 ---
 
