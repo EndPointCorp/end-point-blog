@@ -1,8 +1,8 @@
 ---
 author: "Afif Sohaili"
-date: 2021-11-09
-title: "Build responsive websites with Tailwind CSS"
-github_issue_number: 1765
+date: 2021-12-03
+title: "Building responsive websites with Tailwind CSS"
+github_issue_number: 1803
 tags:
 - css
 - frontend
@@ -10,13 +10,16 @@ tags:
 - ui
 ---
 
-Tailwind CSS is a CSS framework, like Bootstrap, Bulma, and Foundation. However, Tailwind CSS does things in a less conventional way when compared to traditional CSS frameworks. Instead of providing CSS classes based on components or functional roles (e.g. `.card` or `.row`), Tailwind only provides utility classes, in which each class does only one specific thing a CSS attribute usually does, such as `m-4` for `margin: 1rem` or `mt-8` for `margin-top: 2rem`. 
+![](/blog/2021/12/banner.jpg)
 
-In Bootstrap, one can simply apply the provided `.card` CSS class to have a `<div>` styled like a card the Bootstrap way. In Tailwind, the styles have to be constructed with a string of different atomic classes. e.g. The equivalent of a Bootstrap's `.card` would be something like `relative flex flex-col break-words bg-white bg-clip-border min-w-0 rounded border`. Verbose, yes, but this gives flexibility for the developers to define the appearance of a `.card` element themselves (e.g. there could be multiple variants of appearances of a `.card`) without having to worry about overriding inherited/cascading CSS classes, which are typically the cause for CSS bugs in production.
+[Tailwind CSS](https://tailwindcss.com/) is a CSS framework, like Bootstrap, Bulma, and Foundation. However, Tailwind does things in a less conventional way when compared to traditional CSS frameworks. Instead of providing CSS classes based on components or functional roles (e.g. `.card` or `.row`), Tailwind only provides utility classes, in which each class does only one specific thing a CSS attribute usually does, such as `m-4` for `margin: 1rem` or `mt-8` for `margin-top: 2rem`. 
 
-## Atomic CSS
+In Bootstrap, one can simply apply the provided `.card` CSS class to have a `<div>` styled like a card the Bootstrap way. In Tailwind, the styles have to be constructed with a string of different atomic classes. e.g. The equivalent of a Bootstrap's `.card` would be something like `relative flex flex-col break-words bg-white bg-clip-border min-w-0 rounded border`. Verbose, yes, but this gives flexibility for the developers to define the appearance of a `.card` element themselves (e.g. there could be multiple variants of appearances of a `.card`) without having to worry about overriding inherited/cascading CSS classes, which are typically the cause of many CSS bugs in production.
 
-The first thing you notice when developing with Tailwind is how wordy a CSS class list can be. It feels almost like using the `style=""` attribute to write CSS. In the traditional approach to CSS, suppose there are two elements with identical margins:
+### Atomic CSS
+
+The first thing most notice when developing with Tailwind is how wordy CSS class lists can get. It feels almost like using the `style=""` attribute to write CSS. In the traditional approach to CSS, suppose there are two elements with identical margins:
+
 ```css
 .card {
   display: block;
@@ -27,9 +30,11 @@ The first thing you notice when developing with Tailwind is how wordy a CSS clas
   margin: 1rem;
 }
 ```
+
 Here, we can see that margin is declared twice. Those duplicates are going to be a few extra bytes in the final CSS payload.
 
 With Tailwind, however, this is how the equivalent would be written:
+
 ```html
 <div class="block m-4">
 </div>
@@ -37,11 +42,13 @@ With Tailwind, however, this is how the equivalent would be written:
 <div class="m-4">
 </div>
 ```
-Here, both of the `<div>`s are reusing the same class `m-4`, which is provided out-of-the-box by Tailwind. This approach ensures that the project's CSS does not grow, which is important for good user experience. Constructing the CSS of a page is a render-blocking task in a web page load. So, the bigger the CSS, the longer the wait time for a user to see something on the browser. Yes, the HTML payload will grow, albeit just by a little.
+
+Here, both of the `<div>`s are reusing the same class `m-4`, which is provided out-of-the-box by Tailwind. This approach ensures that the project's CSS does not grow, which is important for good user experience. Constructing the CSS of a page is a render-blocking task in a web page load. So, the bigger the CSS, the longer the wait time for a user to see something on the browser. Yes, the HTML payload will grow, but just by a little.
 
 One of the differences between using Tailwind CSS classes and using `style` attribute is that the latter cannot be used to style pseudoclasses (e.g. `:hover`, `:disabled`). With CSS classes, that is achievable, but there are special prefixes that Tailwind provides for each of the variants to take effect.
 
-e.g.
+For example:
+
 ```html
 <!-- margin: 1rem by default, margin: 2rem on hover -->
 <div class="m-4 hover:m-8"></div> 
@@ -71,13 +78,14 @@ Or, if the project is on Tailwind CSS v2.1+, the developers can enable Just-in-T
 
 See [Just-in-Time mode](https://tailwindcss.com/docs/just-in-time-mode) for more details.
 
-## Shaking off the unused CSS
+### Shaking off the unused CSS
 
-By default, Tailwind will be loading the whole Tailwind CSS project files, with CSS declarations on almost every possible CSS rule. There are a lot in there that a developer might never use. To put that into context, there are 105 different values for just grid and flexbox gaps. No projects could possibly use them all, so Tailwind needs a way to remove the unused CSS when generating the final CSS build for production use.
+By default, Tailwind will be loading the whole Tailwind CSS project files, with CSS declarations on almost every possible CSS rule. There are a lot in there that a developer might never use. To put that into context, there are 105 different values just for grid and flexbox gaps. Most projects aren't likely to use them all, so Tailwind needs a way to remove the unused CSS when generating the final CSS build for production use.
 
 This is where PurgeCSS comes in. PurgeCSS is a plugin that analyzes all CSS, HTML, and JavaScript files in the project and removes unused CSS declarations from the final build. This tool is available as a PostCSS, Webpack, Gulp, Grunt, or Gatsby plugin. 
 
 Because PurgeCSS analyzes the project's source code to find exact matches of a given CSS style, a CSS class cannot be used through string concatenations or PurgeCSS will not be able to detect that the given Tailwind class is used.
+
 ```react
 // SomeComponent.jsx
 const SomeComponent = (props) => {
@@ -93,9 +101,10 @@ const SomeComponent = (props) => {
 // production build because it does not know that the component is using it.
 ```
 
-## DRYing it up
+### DRYing it up
 
-Suppose we have two cards on the page and their appearance should look consistent; in the traditional CSS approach, both these two cards will just have the `.card` CSS class, and the same styles would be applied to both of them. In Tailwind, however, it does not make sense to be repeating 7, 8 different class names on both HTML elements on the page.
+Suppose we have two cards on the page and we want their appearance to be consistent. In the traditional CSS approach, both these two cards will just have the `.card` CSS class, and the same styles would be applied to both of them. In Tailwind we can't do that, however, and it doesn't make sense to be repeating 7 or 8 or more different class names on both HTML elements on the page.
+
 ```react
 const AppButton = () => (
   <button className='py-2 px-4 font-semibold rounded-lg shadow-md'>
@@ -114,7 +123,7 @@ render(
 )
 ```
 
-Therefore, Tailwind is easier to implement in component-based frameworks, such as Vue or React. But even if you're not using any of them and are just building a plain HTML file, Tailwind provides a way to compose these classes together by using `@apply`:
+Therefore, Tailwind can be easier to implement in component-based frameworks, such as Vue or React. But even if you're not using any of them and are just building a plain HTML file, Tailwind provides a way to compose these classes together by using `@apply`:
 
 ```css
 .button {
@@ -125,7 +134,9 @@ Therefore, Tailwind is easier to implement in component-based frameworks, such a
   @apply py-2 px-4 font-semibold rounded-lg shadow-md text-white bg-green-400;
 }
 ```
+
 Then, `.button` and `.button.success` classes will be available to us for reuse like how it would be in traditional CSS.
+
 ```html
 <!-- py-2 px-4 font-semibold rounded-lg shadow-md gets applied when using "button" -->
 <button class="button">I'm a button</button>
@@ -134,17 +145,18 @@ Then, `.button` and `.button.success` classes will be available to us for reuse 
 <button class="button success">I'm a green button</button>
 ```
 
-## Building a responsive page using Tailwind
+### Building a responsive page using Tailwind
 
 Now let's look at responsive design. Suppose we want to implement a page with a navigation bar, a sidebar, a content area, and a footer:
 
-![Layout with Tailwind CSS - desktop view](/blog/2021/11/responsive-website-with-tailwindcss/responsive-desktop.png)
+![Layout with Tailwind CSS - desktop view](/blog/2021/12/responsive-website-with-tailwindcss/responsive-desktop.png)
 
 And the sidebar and content area should collapse into one column on mobile devices, like this:
 
-![Layout with Tailwind CSS - mobile view](/blog/2021/11/responsive-website-with-tailwindcss/responsive-mobile.png)
+![Layout with Tailwind CSS - mobile view](/blog/2021/12/responsive-website-with-tailwindcss/responsive-mobile.png)
 
 First, let's have the basic page layout:
+
 ```html
 <nav class="p-4 bg-gray-100">
   <ul class="flex gap-2 justify-end">
@@ -208,12 +220,12 @@ Now, let's add Tailwind's responsive variants so that the page is responsive to 
 
 <iframe width="770" height="434" src="https://www.youtube.com/embed/M9Wj5dG_N6w" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-## Conclusion
+### Conclusion
 
 It can be a bit daunting to start, but once you get a handle on it, Tailwind CSS is a great option for rapidly building user interfaces with total control over the styles. Unlike other frameworks, Tailwind does not attempt to provide a default styling of any component, allowing every site that uses Tailwind to be truly unique from another.
 
 These responsive variants can be applied to any other CSS class from Tailwind, providing a powerful way to build responsive user interfaces. The very thin abstraction over CSS provides developers with a greater flexibility and control over the design while being a good constraint to guide the development process.
 
-Happy trying!
+Happy styling!
 
 
