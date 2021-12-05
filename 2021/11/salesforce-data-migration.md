@@ -1,13 +1,12 @@
 ---
 author: Dylan Wooters
 title: 'Salesforce data migration: promoting data changes from a sandbox to production'
-description: A tutorial on migrating data from a Salesforce sandbox to production
 tags:
 - salesforce
 - jsforce
 - typescript
 - migration
-date: 2021-11-18
+date: 2021-11-24
 github_issue_number: 1799
 ---
 
@@ -15,7 +14,8 @@ github_issue_number: 1799
 Photo by Dylan Wooters, 2021
 
 ### Intro
-End Point recently completed a [new e-commerce website](https://www.eiffeltrading.com/) built using Nuxt, Node.js and Algolia and backed by Salesforce data. As part of the project, the client also wanted to re-categorize their products. They had already updated the data in a Salesforce sandbox and needed a way to move their changes to production in conjunction with the launch of the new website.
+
+End Point recently completed a [new e-commerce website](https://www.eiffeltrading.com/) built using Nuxt, Node.js, and Algolia and backed by Salesforce data. As part of the project, the client also wanted to re-categorize their products. They had already updated the data in a Salesforce sandbox and needed a way to move their changes to production in conjunction with the launch of the new website.
 
 This data migration initially seemed like a simple request, but it ended up being one of the more challenging parts of the project. While there are clear instructions on how to migrate *code* changes from a sandbox to production (via [change sets](https://help.salesforce.com/s/articleView?id=sf.changesets.htm&type=5)), there is very little information on how to migrate *data*. 
 
@@ -34,7 +34,7 @@ We did end up using Data Loader as part of our rollback process, but more on tha
 
 #### 1. Export JSON data from the sandbox
 
-For our source data, I exported JSON from the Salesforce sandbox using the [JSForce CLI](https://jsforce.github.io/start/#command-line-interface), specifically the [query](https://jsforce.github.io/document/#query) function. Having the source data in JSON was easier than parsing CSV files exported directly from Salesforce. I committed the query commands to our git repo for easy access during the actual production migration.
+For our source data, I exported JSON from the Salesforce sandbox using the [JSForce CLI](https://jsforce.github.io/start/#command-line-interface), specifically the [query](https://jsforce.github.io/document/#query) function. Having the source data in JSON was easier than parsing CSV files exported directly from Salesforce. I committed the query commands to our Git repo for easy access during the actual production migration.
 
 Here is a basic example of how to export data using the JSForce CLI.
 
@@ -45,7 +45,7 @@ jsforce -c dylan@endpointdev.com \
 
 #### 2. Write a custom migration script
 
-We were already using JSForce in our project to sync Salesforce data with the Algolia search engine, so we decided to also use the library to migrate data. I won't dive into the specifics of how to use JSForce in this article, since we have [another post](https://www.endpointdev.com/blog/2020/03/salesforce-integration-with-node/) that does that well. 
+We were already using JSForce in our project to sync Salesforce data with the Algolia search engine, so we decided to also use the library to migrate data. I won't dive into the specifics of how to use JSForce in this article, since we have [another post](/blog/2020/03/salesforce-integration-with-node/) that does that well. 
 
 My basic approach to writing the script started with asking the question "What would we do if we had direct access to the Salesforce database"? Once I had all of the set-based INSERT and UPDATE operations mapped out, I then translated that into procedural TypeScript code. 
 
@@ -61,14 +61,14 @@ const openConnection = async() => {
     loginUrl : process.env.instanceURL
   });
   await conn.login(process.env.username as string, process.env.password as string);
-  console.log('info',`Connected to Salesforce.`);
+  console.log('info', `Connected to Salesforce.`);
   return conn;
 }
 
 const getJson = (filename: string) => {
   return JSON.parse(
     fs.readFileSync(
-      path.resolve(__dirname,'sandbox-data/' + filename)
+      path.resolve(__dirname, 'sandbox-data/' + filename)
     ).toString()
   );
 };
@@ -76,23 +76,23 @@ const getJson = (filename: string) => {
 const segmentData = getJson('new-segments.json');
 const connection = await openConnection();
 
-for (let i=0;i<segmentData.records.length;i++) {
+for (let i = 0; i < segmentData.records.length; i++) {
   let segment = segmentData.records[i];
-  //Ignore Marine Equipment segment since it already exists
+  // Ignore Marine Equipment segment since it already exists
   if (segment.Name != 'Marine Equipment') {
     await connection.sobject('Segment__c').create({
-    Name: segment.Name,
-    Description__c: segment.Description__c,
-    Meta_Description__c: segment.Meta_Description__c,
-    Meta_Keywords__c: segment.Meta_Keywords__c,
-    SubHeader__c: segment.SubHeader__c
+      Name: segment.Name,
+      Description__c: segment.Description__c,
+      Meta_Description__c: segment.Meta_Description__c,
+      Meta_Keywords__c: segment.Meta_Keywords__c,
+      SubHeader__c: segment.SubHeader__c
     });
   }
 }
 ```
 #### 3. Come up with a plan for testing data changes
 
-After the migration script runs, you'll need a way to verify that the data was loaded successfully and according to the requirements. For us, this meant working with our client to develop a smoke testing plan. After running our script, we switched a test version of the website to run against the migrated data in a Salesforce sandbox, and then used the plan to test all of the website functionality to make sure everything worked and the data looked correct. You'll want to develop a plan based on your specific use case, whether that means verifying changes in Salesforce or an integrated system/website.
+After the migration script runs, you'll need a way to verify that the data was loaded successfully and according to the requirements. For us, this meant working with our client to develop a smoke testing plan. After running our script, we switched a test version of the website to run against the migrated data in a Salesforce sandbox, and then used the plan to test all of the website functionality to make sure everything worked and the data looked correct. You'll want to develop a plan based on your specific use case, whether that means verifying changes in Salesforce or an integrated system/​website.
 
 #### 4. Test the migration script against a copy of production
 
@@ -117,7 +117,7 @@ After you test the migration script, if you find that the data is incorrect, you
  - [Download and install](https://developer.salesforce.com/docs/atlas.en-us.234.0.dataLoader.meta/dataLoader/loader_install_general.htm) the Data Loader for your platform
  - Delete all the data for each affected object. To do this, log into Salesforce and open the Developer Console, then click on the "Debug" menu and choose "Open execution anonymous window". Use the following code snippet to delete all data, replacing the `Yourobject__c` with the name of the target object. Again, you'll need to do this for each object that was affected by your script.
 
-```
+```plain
 List<Yourobject__c> SobjLst = [select id from Yourobject__c];
 delete SobjLst;
 ```
