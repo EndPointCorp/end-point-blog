@@ -3,7 +3,6 @@ author: Dylan Wooters
 title: 'Salesforce data migration: promoting data changes from a sandbox to production'
 tags:
 - salesforce
-- jsforce
 - typescript
 - migration
 date: 2021-11-24
