@@ -5,16 +5,17 @@ title: "Building responsive websites with Tailwind CSS"
 github_issue_number: 1803
 tags:
 - css
-- frontend
 - tailwindcss
-- ui
+- design
 ---
 
-![](/blog/2021/12/banner.jpg)
+![Sunset over lake and mountains](/blog/2021/12/responsive-website-with-tailwindcss/banner.jpg)
+
+<!-- photo by Seth Jensen -->
 
 [Tailwind CSS](https://tailwindcss.com/) is a CSS framework, like Bootstrap, Bulma, and Foundation. However, Tailwind does things in a less conventional way when compared to traditional CSS frameworks. Instead of providing CSS classes based on components or functional roles (e.g. `.card` or `.row`), Tailwind only provides utility classes, in which each class does only one specific thing a CSS attribute usually does, such as `m-4` for `margin: 1rem` or `mt-8` for `margin-top: 2rem`. 
 
-In Bootstrap, one can simply apply the provided `.card` CSS class to have a `<div>` styled like a card the Bootstrap way. In Tailwind, the styles have to be constructed with a string of different atomic classes. e.g. The equivalent of a Bootstrap's `.card` would be something like `relative flex flex-col break-words bg-white bg-clip-border min-w-0 rounded border`. Verbose, yes, but this gives flexibility for the developers to define the appearance of a `.card` element themselves (e.g. there could be multiple variants of appearances of a `.card`) without having to worry about overriding inherited/cascading CSS classes, which are typically the cause of many CSS bugs in production.
+In Bootstrap, one can simply apply the provided `.card` CSS class to have a `<div>` styled like a card the Bootstrap way. In Tailwind, the styles have to be constructed with a string of different atomic classes. E.g. the equivalent of a Bootstrap's `.card` would be something like `relative flex flex-col break-words bg-white bg-clip-border min-w-0 rounded border`. Verbose, yes, but this gives flexibility for the developers to define the appearance of a `.card` element themselves (e.g. there could be multiple variants of appearances of a `.card`) without having to worry about overriding inherited/​cascading CSS classes, which are typically the cause of many CSS bugs in production.
 
 ### Atomic CSS
 
@@ -57,7 +58,7 @@ For example:
 <input class="bg-white disabled:bg-gray-100"/> 
 ```
 
-Keep in mind that not all variants/pseudoclasses are supported by default, as this would make the development output of a Tailwind CSS file really big to cater all of the possible variants. To have them supported, it has to be configured inside the project's `tailwind.config.js`
+Keep in mind that not all variants/​pseudoclasses are supported by default, as this would make the development output of a Tailwind CSS file really big to cater all of the possible variants. To have them supported, it has to be configured inside the project's `tailwind.config.js`:
 
 ```javascript
 // tailwind.config.js
@@ -135,7 +136,7 @@ Therefore, Tailwind can be easier to implement in component-based frameworks, su
 }
 ```
 
-Then, `.button` and `.button.success` classes will be available to us for reuse like how it would be in traditional CSS.
+Then, `.button` and `.button.success` classes will be available to us for reuse as in traditional CSS.
 
 ```html
 <!-- py-2 px-4 font-semibold rounded-lg shadow-md gets applied when using "button" -->
@@ -227,5 +228,3 @@ It can be a bit daunting to start, but once you get a handle on it, Tailwind CSS
 These responsive variants can be applied to any other CSS class from Tailwind, providing a powerful way to build responsive user interfaces. The very thin abstraction over CSS provides developers with a greater flexibility and control over the design while being a good constraint to guide the development process.
 
 Happy styling!
-
-
