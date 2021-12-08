@@ -6,6 +6,10 @@ tags:
 - company
 date: 2021-11-23
 github_issue_number: 1800
+featured:
+  endpoint: true
+  image_url: /blog/2021/11/from-liquid-galaxy-to-visionport/banner.jpg
+description: We are rebranding! VisionPort is the next phase for Liquid Galaxy.
 ---
 
 ![A VisionPort system](/blog/2021/11/from-liquid-galaxy-to-visionport/banner.jpg)

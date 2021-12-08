@@ -7,6 +7,10 @@ tags:
 - migration
 date: 2021-11-24
 github_issue_number: 1799
+featured:
+  endpoint: true
+  image_url: /blog/2021/11/salesforce-data-migration/manhattan-upper-skyline.jpg
+description: A fast and reliably repeatable process leads to a successful migration.
 ---
 
 ![Manhattan skyline](/blog/2021/11/salesforce-data-migration/manhattan-upper-skyline.jpg)

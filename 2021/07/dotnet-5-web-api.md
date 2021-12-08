@@ -9,6 +9,10 @@ tags:
 - rest
 - api
 - postgres
+featured:
+  endpoint: true
+  image_url: /blog/2021/07/dotnet-5-web-api/market-cropped.jpg
+description: "A step-by-step tutorial using the modern, fully open-source .NET stack"
 ---
 
 ![A market at night](/blog/2021/07/dotnet-5-web-api/market-cropped.jpg)
