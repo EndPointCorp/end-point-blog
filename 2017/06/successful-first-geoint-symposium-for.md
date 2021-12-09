@@ -16,7 +16,7 @@ date: 2017-06-16
 
 <div class="separator" style="clear: both; text-align: center;"><a href="/blog/2017/06/successful-first-geoint-symposium-for/image-0-big.jpeg" imageanchor="1" style="clear: right; float: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" data-original-height="1201" data-original-width="1600" height="240" src="/blog/2017/06/successful-first-geoint-symposium-for/image-0.jpeg" width="320"/></a></div>
 
-This past week, End Point attended GEOINT Symposium to showcase [Liquid Galaxy](https://liquidgalaxy.endpoint.com/) as an immersive panoramic GIS solution to GEOINT attendees and exhibitors alike.
+This past week, End Point attended GEOINT Symposium to showcase [Liquid Galaxy](https://www.visionport.com/) as an immersive panoramic GIS solution to GEOINT attendees and exhibitors alike.
 
 At the show, we showcased Cesium integrating with ArcGIS and WMS, Google Earth, Street View, Sketchfab, Unity, and panoramic video. Using our Content Management System, we created content around these various features so visitors to our booth could take in the full spectrum of capabilities that the Liquid Galaxy provides.
 

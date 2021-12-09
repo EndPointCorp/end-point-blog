@@ -9,9 +9,7 @@ tags:
 date: 2014-08-01
 ---
 
-
-
-For our [Liquid Galaxy](https://liquidgalaxy.endpoint.com/) installations, we use a master computer known as a “head node” and a set of slave computers known as “display nodes.” The slave computers all PXE-boot from the head node, which directs them to boot from a specific ISO disk image.
+For our [Liquid Galaxy](https://www.visionport.com/) installations, we use a master computer known as a “head node” and a set of slave computers known as “display nodes.” The slave computers all PXE-boot from the head node, which directs them to boot from a specific ISO disk image.
 
 In general, this system works great. We connect to the head node and from there can communicate with the display nodes. We can boot them, change their ISO, and do all sorts of other maintenance tasks.
 
@@ -25,39 +23,39 @@ IPMI stands for [Intelligent Platform Media Interface](https://en.wikipedia.org
 
 I connected to the head node and ran the following command and got the following output:
 
-```
-    admin@headnode:~ ipmitool -H 10.42.41.33 -I lanplus -P 'xxxxxx' chassis status
-    System Power         : off
-    Power Overload       : false
-    Power Interlock      : inactive
-    Main Power Fault     : false
-    Power Control Fault  : false
-    Power Restore Policy : always-off
-    Last Power Event     : ac-failed
-    Chassis Intrusion    : inactive
-    Front-Panel Lockout  : inactive
-    Drive Fault          : false
-    Cooling/Fan Fault    : true
+```plain
+admin@headnode:~ ipmitool -H 10.42.41.33 -I lanplus -P 'xxxxxx' chassis status
+System Power         : off
+Power Overload       : false
+Power Interlock      : inactive
+Main Power Fault     : false
+Power Control Fault  : false
+Power Restore Policy : always-off
+Last Power Event     : ac-failed
+Chassis Intrusion    : inactive
+Front-Panel Lockout  : inactive
+Drive Fault          : false
+Cooling/Fan Fault    : true
 ```
 
 While Asus’s Linux support is pretty lacking, and most of the options we find here don’t work with with the open source ipmitool, we did find “System Power : off” in the output, which is a pretty good indicator of our problem.  This tells me that the BIOS settings have been lost for some reason, as we had previously set the system to power on when AC power was restored.  I ran the following to tell it to boot into the BIOS, then powered on the machine:
 
-```
-    admin@headnode:~ ipmitool -H 10.42.41.33 -I lanplus -P 'xxxxxx' chassis bootdev bios
-    admin@headnode:~ ipmitool -H 10.42.41.33 -I lanplus -P 'xxxxxx' chassis power on
+```plain
+admin@headnode:~ ipmitool -H 10.42.41.33 -I lanplus -P 'xxxxxx' chassis bootdev bios
+admin@headnode:~ ipmitool -H 10.42.41.33 -I lanplus -P 'xxxxxx' chassis power on
 ```
 
 At this point, the machine is ready for me to be able to access the BIOS through a terminal window. I opened a new terminal window and typed the following:
 
-```
-    admin@headnode:~ ipmitool -H ipmi-lg2-3 -U admin -I lanplus sol activate
-    Password:
+```plain
+admin@headnode:~ ipmitool -H ipmi-lg2-3 -U admin -I lanplus sol activate
+Password:
 ```
 
 After typing in the password, I get the ever-helpful dialog below:
 
-```
-    [SOL Session operational.  Use ~? for help]
+```plain
+[SOL Session operational.  Use ~? for help]
 ```
 
 I didn’t bother with the ~? because I knew that the BIOS would eventually just show up in my terminal. There are, however, other commands that pressing ~? would show.
@@ -79,5 +77,3 @@ Now that the BIOS was up, it’s as if I was really right in front of the comput
 <a href="/blog/2014/08/the-beauty-of-ipmi/image-3.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="450" src="/blog/2014/08/the-beauty-of-ipmi/image-3.png" width="640"/></a></div>
 
 And this, my friends, is why systems should have IPMI. I state the obvious here when I say that life as a system administrator is so much easier when one can get into the BIOS on a remote system.
-
-

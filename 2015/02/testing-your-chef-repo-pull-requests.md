@@ -10,7 +10,7 @@ tags:
 date: 2015-02-18
 ---
 
-All [Liquid Galaxy](https://liquidgalaxy.endpoint.com/) setups deployed by End Point are managed by [Chef](https://www.chef.io/chef/). Typical deployment consists of approx 3 to 9 Linux boxes from which only 1 is managed and the rest is an ISO booted from this machine via network with copy-on-write root filesystem. Because of this, typical deployment involves more steps than just updating your code and restarting application. Deployment + rollback may be even 10 times longer compared with typical web application. Due to this fact, we need to test our infrastructure extensively.
+All [Liquid Galaxy](https://www.visionport.com/) setups deployed by End Point are managed by [Chef](https://www.chef.io/chef/). Typical deployment consists of approx 3 to 9 Linux boxes from which only 1 is managed and the rest is an ISO booted from this machine via network with copy-on-write root filesystem. Because of this, typical deployment involves more steps than just updating your code and restarting application. Deployment + rollback may be even 10 times longer compared with typical web application. Due to this fact, we need to test our infrastructure extensively.
 
 What are we to do in order to make sure that our infrastructure is **tested** **well** **before it hits production?**
 

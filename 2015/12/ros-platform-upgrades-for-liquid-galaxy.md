@@ -78,4 +78,4 @@ The Liquid Galaxy will be enhanced to view completely virtual 3D environments us
 
 ### Next Steps
 
-If you’re considering the Liquid Galaxy platform, [contact us](https://liquidgalaxy.endpoint.com/#contact) to discuss these latest enhancements and how they can improve the communications and presentation tools for your organization.
+If you’re considering the Liquid Galaxy platform, [contact us](https://www.visionport.com/contact/) to discuss these latest enhancements and how they can improve the communications and presentation tools for your organization.

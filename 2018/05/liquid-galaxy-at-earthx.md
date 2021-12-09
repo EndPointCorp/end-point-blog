@@ -30,6 +30,6 @@ Our 3 Liquid Galaxy systems at the conference performed admirably and fulfilled 
 
 We now have a wealth of environmental presentations available for our Liquid Galaxy partners should any of them wish to load the content on their own systems. We also now have many many new friends in the environmental movement, and hope to work with them more at future conferences and events.
 
-See more use cases at our [Liquid Galaxy website](https://liquidgalaxy.endpoint.com/)!
+See more use cases at our [Liquid Galaxy website](https://www.visionport.com/)!
 
 <img src="/blog/2018/05/liquid-galaxy-at-earthx/39546760-1eeb13ee-4e1b-11e8-930c-8b2fff5c3eca-sm.jpg" width="770" height="359" alt="Municipal data visualization on Liquid Galaxy" />

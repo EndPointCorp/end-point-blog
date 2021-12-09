@@ -15,7 +15,7 @@ date: 2017-09-26
 
 Marine Protected Areas: Bringing the people and ocean together
 
-Earlier this month, [The Marine Conservation Institute](https://marine-conservation.org/) and the [Waitt Foundation](http://waittfoundation.org/) brought a [Liquid Galaxy](https://liquidgalaxy.endpoint.com/) to Chile to showcase interactive and panoramic ocean content at the Fourth International Marine Protected Areas Congress in La Serena.  This conference was a convergence of marine biologists, ocean agencies, and environmentalists from around the globe to discuss the state of and future development initiatives of Marine Protected Areas worldwide.
+Earlier this month, [The Marine Conservation Institute](https://marine-conservation.org/) and the [Waitt Foundation](http://waittfoundation.org/) brought a [Liquid Galaxy](https://www.visionport.com/) to Chile to showcase interactive and panoramic ocean content at the Fourth International Marine Protected Areas Congress in La Serena.  This conference was a convergence of marine biologists, ocean agencies, and environmentalists from around the globe to discuss the state of and future development initiatives of Marine Protected Areas worldwide.
 
  The Marine Conservation Institute is working on a mapping project called MPAtlas that visually catalogs the development of Marine Protected Areas across the globe as well as the Global Ocean Refuge System which pushes for elevated standards for Marine Protected Areas and advocates for a 30% protected marine ecosystem by 2030.  
 

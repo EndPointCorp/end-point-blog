@@ -12,7 +12,7 @@ tags:
 date: 2015-06-09
 ---
 
-This post describes some of our experiences at End Point in designing and working on comprehensive QA/CI facilities for a new system which is closely related to the [Liquid Galaxy](https://liquidgalaxy.endpoint.com/).
+This post describes some of our experiences at End Point in designing and working on comprehensive QA/CI facilities for a new system which is closely related to the [Liquid Galaxy](https://www.visionport.com/).
 
 Due to the design of the system, the full deployment cycle can be [rather lengthy](/blog/2015/02/testing-your-chef-repo-pull-requests) and presents us with extra reasons for investing heavily in unit test development. Because of the very active ongoing development on the system we benefit greatly from running the tests in an automated fashion on the [Jenkins CI](https://jenkins-ci.org/) (Continuous Integration) server.
 
