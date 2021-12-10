@@ -667,7 +667,9 @@ In summary: We created a persistent volume that defines some disk space in our m
 
 By setting it up this way, we've made it so that regardless of how many Postgres pods come and go, the database files will always be persisted, because the files now live outside of the container. They are stored in our host machine instead.
 
-> There's another limitation that's important to note. Just using the approach that we discussed, it's not possible to deploy multiple replicas of Postgres which work in tandem and operate on the same data. Even though the data files can be defined outside of the cluster and persisted that way, there can only be one single Postgres instance running against it at any given time. The high availability problem is better solved leveraging the features provided by the database software itself. [Postgres offers various options in that area](https://www.postgresql.org/docs/9.1/different-replication-solutions.html).
+> There's another limitation that's important to note. Just using the approach that we discussed, it's not possible to deploy multiple replicas of Postgres which work in tandem and operate on the same data. Even though the data files can be defined outside of the cluster and persisted that way, there can only be one single Postgres instance running against it at any given time.
+>
+> In production, the high availability problem is better solved leveraging the features provided by the database software itself. [Postgres offers various options in that area](https://www.postgresql.org/docs/9.1/different-replication-solutions.html). Or, if you are deploying to the cloud, maybe the best strategy is to use a relational database service managed by your cloud provider. Like [Amazon's RDS](https://aws.amazon.com/rds/) or [Microsoft's Azure SQL Database](https://azure.microsoft.com/en-us/products/azure-sql/database/).
 
 ## Applying changes
 
