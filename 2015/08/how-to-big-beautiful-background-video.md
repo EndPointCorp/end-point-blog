@@ -9,8 +9,6 @@ tags:
 date: 2015-08-04
 ---
 
-
-
 One pretty common request for every web developer is to “please, make our Stone age website look sleek and modern”. Well, no more head scratching about the meaning of “sleek” or “modern” (or “the Stone age” for some?). In times of the crisp and stunning visuals there’s no better way to make an impression than to use a big beautiful background video on the home page.
 
 Paired with some impressive infinite scroll which I already [covered here](/blog/2013/11/pagination-days-are-over-infinite) and a nice full-screen image gallery (which I will cover later), it will definitely help to bring your website up to date.
@@ -73,5 +71,3 @@ Please, note the “ambient:true” setting. This setting does the trick of play
 The sad truth is that the video backgrounds are not supported on touch devices, because HTML5 does not allow autoplay there. Instead there will be a “play” button underneath your content and the user will need to click on it to activate the ambient video. Not so ambient anymore, right? The best option for now is to use a full screen image instead of the video as described [here](http://dfcb.github.io/BigVideo.js/example-ambient-touch.html).
 
 Hope you enjoyed the blog post. Let me know your thoughts!
-
-

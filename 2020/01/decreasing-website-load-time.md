@@ -8,6 +8,7 @@ tags:
 - html
 - csharp
 - dotnet
+- compression
 date: 2020-01-07
 ---
 

@@ -123,7 +123,7 @@ A lot of clients with big ecommerce data sets or other applications that collect
 
 ### Documentation
 
-I wouldn’t be a good project manager if I didn’t throw this one in the list. Documentation is so, so important, yet really we can always do more. End Point uses a few different tools, including wikis running [MediaWiki](https://www.mediawiki.org/wiki/MediaWiki)  and Google Docs, for keeping track of project details. Now’s a good time to set up a nice documentation system or do a big review and make sure everything is updated and back in order. Maybe dream of a vacation you *might* be able to take when this is over and make sure everything’s ready for you to do that.
+I wouldn’t be a good project manager if I didn’t throw this one in the list. Documentation is so, so important, yet really we can always do more. End Point uses a few different tools, including wikis running [MediaWiki](https://www.mediawiki.org/wiki/MediaWiki) and Google Docs, for keeping track of project details. Now’s a good time to set up a nice documentation system or do a big review and make sure everything is updated and back in order. Maybe dream of a vacation you *might* be able to take when this is over and make sure everything’s ready for you to do that.
 
 ### Disaster Recovery Tests
 
@@ -151,7 +151,7 @@ Taking a few days to review your personal security and that of your application 
 
 ### Optimization and Performance:
 
-Most of the time new features have higher priority than improving the performance of an existing system. It could be the right time to review core functionalities and list out the areas that need improvement in serving a better experience to customers by optimization. The areas can be focused on optimizing code, database queries, image size, data compression over network,  adding cache, CDN, and so on. We’ve been moving quite a few clients to the [Cloudflare](https://www.cloudflare.com/) DNS and CDN service and we’ve been really happy with it. Optimization work will definitely influence the customer retention rate which helps to increase profitability long term.
+Most of the time new features have higher priority than improving the performance of an existing system. It could be the right time to review core functionalities and list out the areas that need improvement in serving a better experience to customers by optimization. The areas can be focused on optimizing code, database queries, image size, data compression over network, adding cache, CDN, and so on. We’ve been moving quite a few clients to the [Cloudflare](https://www.cloudflare.com/) DNS and CDN service and we’ve been really happy with it. Optimization work will definitely influence the customer retention rate which helps to increase profitability long term.
 
 ### Refactoring
 

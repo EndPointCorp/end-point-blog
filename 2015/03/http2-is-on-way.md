@@ -5,6 +5,7 @@ github_issue_number: 1101
 tags:
 - networking
 - sysadmin
+- compression
 date: 2015-03-13
 ---
 

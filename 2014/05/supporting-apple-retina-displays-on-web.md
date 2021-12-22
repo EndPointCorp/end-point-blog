@@ -5,6 +5,7 @@ github_issue_number: 987
 tags:
 - graphics
 - browsers
+- compression
 date: 2014-05-27
 ---
 

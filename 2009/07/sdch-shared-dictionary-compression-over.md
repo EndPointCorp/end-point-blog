@@ -7,6 +7,7 @@ tags:
 - hosting
 - networking
 - security
+- compression
 date: 2009-07-27
 ---
 

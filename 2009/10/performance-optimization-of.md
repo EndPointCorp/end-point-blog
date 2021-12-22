@@ -6,6 +6,7 @@ tags:
 - performance
 - interchange
 - seo
+- compression
 date: 2009-10-23
 ---
 

@@ -4,6 +4,7 @@ title: 'Postgres WAL files: best compression methods'
 github_issue_number: 1294
 tags:
 - postgres
+- compression
 date: 2017-03-28
 ---
 

@@ -1,15 +1,14 @@
 ---
 author: David Christensen
-title: Postgres SQL Backup Gzip Shrinkage, aka DON’T PANIC!!!
+title: Postgres SQL Backup Gzip Shrinkage, aka Don’t Panic!!!
 github_issue_number: 250
 tags:
 - database
 - postgres
 - tips
+- compression
 date: 2010-01-09
 ---
-
-
 
 I was investigating a recent Postgres server issue, where we had
 discovered that one of the RAM modules on the server in question had
@@ -109,5 +108,3 @@ So the good news was that CLUSTER will save you space in your SQL
 dumps as well (if you’re compressing), the bad news was that it took
 an emergency situation and an almost heart-attack for this engineer to
 figure it all out. Hope I’ve saved you the trouble... :-)
-
-
