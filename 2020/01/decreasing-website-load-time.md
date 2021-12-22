@@ -17,7 +17,7 @@ We live in a competitive world, and the web is no different. Improving latency i
 
 There are many factors that can lead to a faster response time, including optimization of your hosting plan, server proximity to your main traffic source, or utilization of a Content Distribution Network (CDN) if you are expecting visitors on an international level. Some of these solutions and many others can be implemented with only a couple hours of coding.
 
-###Inline styles and scripts for the topmost content
+### Inline styles and scripts for the topmost content
 
 Nobody enjoys waiting for long load times. When opening a Google search link, being met with a blank page or a loading GIF for several seconds can seem agonizing. That’s why optimizing the initial rendering of your page is crucial.
 
@@ -31,7 +31,7 @@ The content that immediately appears to the user without the need to scroll down
 
 Now, the user won’t have to wait until all references are loaded before seeing content. <b>Tip</b>: Remember to use the <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script#attr-async">async</a> tag on scripts whenever possible.
 
-* <b>example.html</b>:
+**example.html:**
 
 ```html
 <head>
@@ -46,13 +46,13 @@ Now, the user won’t have to wait until all references are loaded before seeing
 </body>
 ```
 
-###Deferred loading of ads
+### Deferred loading of ads
 
 If you’re monetizing your website through Google AdSense or another ad agency that uses scripts to load ads, consider loading ads after the content is fully rendered. This may have a small impact on your revenue, but will improve the user’s experience while optimizing the load speed.
 
 Although there are several ways to achieve this, a technique I have successfully used on many websites is removing all of the script references to Google AdSense until your page is fully loaded. A short delay can be added in order to allow some browsing time before showing ads.
 
-* Remove script references, the comment, and extra spaces from your original ad code, to convert it from something like this...
+Remove script references, the comment, and extra spaces from your original ad code, to convert it from something like this...
 
 ```html
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
@@ -66,7 +66,7 @@ Although there are several ways to achieve this, a technique I have successfully
 </script>
 ```
 
-* ...to something like this:
+... to something like this:
 
 ```html
 <ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-XXXXXXXXXXXXXXXXX" data-ad-slot="XXXXXXXXX"></ins>
@@ -74,7 +74,7 @@ Although there are several ways to achieve this, a technique I have successfully
 
 A lot shorter, isn’t it? This will create an empty slot in which the ad will be displayed after the page is fully rendered. To accomplish that, a new script like the one below must be added (assuming jQuery is present on the website):
 
-* <b>async-ads.js</b>:
+**async-ads.js:**
 
 ```javascript
 // Create a script reference
@@ -108,7 +108,7 @@ This code will wait for one second once the document is ready, and then leave in
 
 <b>Tip</b>: Enabling balancing from your AdSense dashboard may improve the average load speed as well as the user’s experience since ads will not be shown when the expected revenue is deprecable. And if you’re still on the fence about showing fewer ads, <a href="https://fatstacksblog.com/adsense-ad-balance-experiment/">try out an experiment</a> like I did. A balance of 50% worked well in my case, but the right balance will depend on your niche and website characteristics.
 
-###Lazy load for images
+### Lazy load for images
 
 Because the user will most likely spend the majority of the visit reading above-the-fold content (and may even leave before scrolling at all), loading all images from content below-the-fold at first is impractical. Implementing a custom lazy-loading script (also referred to as deferred-loading or loading-on-scroll) for images can be an easy process. Even though changes to the backend would be likely, the concept of this approach is simple:
 
@@ -116,7 +116,7 @@ Because the user will most likely spend the majority of the visit reading above-
 
 * Creating a script that will copy the `data-src` content into the `src` attribute as we scroll through the page.
 
-* <b>lazy-load.js</b>:
+**lazy-load.js:**
 
 ```javascript
 ;(function($) {
@@ -186,7 +186,7 @@ window.onbeforeprint = beforePrint;
 
 This script will search for all `<img>` tags with class `lazy`, and change the `data-src` attribute to the `src` attribute once the image becomes visible due to scrolling. It also includes some additional logic to set the `src` attribute before printing the page.
 
-###Server-side caching
+### Server-side caching
 
 Instead of performing all the backend rendering calculations every time, server-side caching allows you to output the same content to the clients over a period of time from a temporary copy of the response. This not only results in a decreased response time but also saves some resources on the server.
 
@@ -200,15 +200,15 @@ The best and most efficient way to do this is by adding a declaration in the top
 
 This declaration is telling the compiler that we want to cache the output from the server for 10 minutes, and we will save different versions based on the `id` and `date` URL parameters. So pages like:
 
-* https://www.your-url.com/cached-page/?id=1&date=2020-01-01
-* https://www.your-url.com/cached-page/?id=2&date=2020-01-01
-* https://www.your-url.com/cached-page/?id=2&date=2020-02-01
+* https&#58;//www.your-url.com/cached-page/?id=1&date=2020-01-01
+* https&#58;//www.your-url.com/cached-page/?id=2&date=2020-01-01
+* https&#58;//www.your-url.com/cached-page/?id=2&date=2020-02-01
 
 will be saved and then served from different cache copies. If we only set the `id` parameter as a source for caching, pages with different dates will be served from the same cache source (this can be useful as the `date` parameter is only evaluated on frontend scripts and ignored in the backend).
 
 There are other configurations in ASP.NET to set our output cache policy. The output can be set to be based on the browser, the request headers, or even custom strings. <a href="https://www.c-sharpcorner.com/UploadFile/chinnasrihari/Asp-Net-mvc-framework-server-side-html-caching-techniques/">This page</a> has more useful information on this subject.
 
-###GZip compression
+### GZip compression
 
 GZip compression—when the client supports it—allows compressing the response before sending it over the network. In this way, more than 70% of the bandwidth can be saved when loading the website. Enabling GZip compression for dynamic and static content on a Windows Server with IIS is simple: Just go to the “Compression” section on the IIS Manager and check the options “Enable dynamic/static content compression”.
 
@@ -216,7 +216,7 @@ GZip compression—when the client supports it—allows compressing the response
 
 However, if you are running an ASP.NET MVC/WebForms website, this won’t be enough. For all backend responses to be compressed before sending them to the client, some custom code will also need to be added to the `global.asax` file in the website root:
 
-* <b>global.asax</b>:
+**global.asax:**
 
 ```csharp
 <%@ Application Language="C#" %>
@@ -267,7 +267,7 @@ To make sure our code is working properly, an external tool like <a href="https:
 
 ![It works!](/blog/2020/01/decreasing-website-load-time/gzip-compression-enabled.jpg)
 
-###Summary
+### Summary
 
 While there are many ways of decreasing the load time of a website, most are common and expensive. However, with a few minor tweaks, we can offer a better user experience in addition to improve our position in the search engine results. Every bit of optimization counts towards the goal with SEO. Load time is a very important factor (to both the developer and the user), especially on mobile platforms where users expect to get what they want instantly.
 

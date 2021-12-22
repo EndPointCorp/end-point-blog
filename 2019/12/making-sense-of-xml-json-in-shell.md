@@ -14,9 +14,9 @@ Working as a system administrator means I have to spend quite some time during m
 
 Some of the websites I visit use XML and JSON, which we could parse with Bash scripting. Previously I wrote a Ruby script to call Nokogiri to parse the XML elements until I found a Bash tool that could do the same thing.
 
-These tools have already been around for quite a while—I’d just like to share what I did with them. The tools I used are xmlstarlet for XML parsing and jq for JSON.
+These tools have already been around for quite a while—I’d just like to share what I did with them. The tools I used are `xmlstarlet` for XML parsing and `jq` for JSON.
 
-###XML
+### XML
 
 I have the following XML elements, and I’ll save them to a file called data.xml:
 
@@ -129,7 +129,7 @@ xmlstarlet sel -T -t -n \
 
 Now, after making it executable with `chmod +x xmlstarlet-time.sh`, I can just run the script whenever I need the info. In my case, I would type `./xmlstarlet-time.sh SGR01` in order to get the above information. I got the code (in my case) from the XML URL above. Your use case will likely be different.
 
-###JSON
+### JSON
 
 Let’s say I want to grab the latest currency exchange, taking the base of USD from exchangeratesapi.io. I can use curl to get the data.
 
@@ -222,7 +222,7 @@ Then I can save the script into a file called moneychanger-with-api.sh and make 
 
 And now the script will do the parsing for me, without the need for a browser.
 
-```
+```plain
 $ ./moneychanger-with-api.sh 100 usd eur
 Price per unit: 1 USD =  EUR 0.90
 Source money: USD 100
