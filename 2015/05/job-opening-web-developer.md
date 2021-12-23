@@ -7,8 +7,6 @@ tags:
 date: 2015-05-13
 ---
 
-**(This job has been filled.)**
-
 We are looking for another talented software developer to consult with our clients and develop their web applications in AngularJS, Node.js, Ruby on Rails, and other technologies. If you like to focus on solving business problems and can take responsibility for getting a job done well without intensive oversight, please read on!
 
 ### What is in it for you?

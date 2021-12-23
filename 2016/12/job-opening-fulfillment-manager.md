@@ -7,8 +7,6 @@ tags:
 date: 2016-12-13
 ---
 
-**Update: This position has been filled! Thanks to everyone who expressed interest.**
-
 This role is based in our Bluff City, Tennessee office, and is responsible for everything about fulfillment of our Liquid Galaxy and other custom-made hardware products, from birth to installation. See [visionport.com](https://www.visionport.com/) to learn more about Liquid Galaxy.
 
 ### What is in it for you?

@@ -10,8 +10,6 @@ tags:
 date: 2011-06-24
 ---
 
-**(This job has been filled.)**
-
 **Job Description:**
 
 End Point is looking for a talented software developer who can consult with our clients and develop their Rails web applications. We need someone that focuses on the client and will deliver quality, tested code.

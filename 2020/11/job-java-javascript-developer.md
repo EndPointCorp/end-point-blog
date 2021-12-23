@@ -14,8 +14,6 @@ date: 2020-11-13
 
 <!-- Photo by Jon Jensen -->
 
-**(This job has been filled.)**
-
 We are seeking a full-time Java software engineer to work with us on our clients’ applications.
 
 End Point is an Internet technology consulting company based in New York City, with 50 employees serving many clients ranging from small family businesses to large corporations. The company turned 25 years old this year!

@@ -10,8 +10,6 @@ tags:
 date: 2010-11-18
 ---
 
-**(This job has been filled.)**
-
 End Point Corporation is hiring for a motivated and creative GNU/Linux systems administrator. The work will primarily involve installing, supporting, maintaining and developing infrastructure improvements for Google Liquid Galaxy systems. Liquid Galaxy is an impressive panoramic system for Google Earth and other applications. [Check it out!](https://www.visionport.com/)
 
 Responsibilities:

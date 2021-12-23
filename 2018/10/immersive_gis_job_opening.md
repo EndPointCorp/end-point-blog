@@ -11,8 +11,6 @@ date: 2018-10-02
 
 <img src="/blog/2018/10/immersive_gis_job_opening/image-0.jpg" alt="Liquid Galaxy Installation" />
 
-**(This job has been filled.)**
-
 We are looking for a full-time, salaried engineer to help us further develop our software, infrastructure, and hardware integration for our shared immersive system, <a href="https://www.visionport.com/">End Point Liquid Galaxy</a>.
 
 ### What you will be doing:

@@ -8,8 +8,6 @@ tags:
 date: 2014-06-21
 ---
 
-**(This job has been filled.)**
-
 We are looking for a full-time, salaried engineer to help us further develop our software, infrastructure, and hardware integration for the [Liquid Galaxy](https://www.visionport.com/) created by Google. Liquid Galaxy is an impressive panoramic system for Google Earth and other applications.
 
 What is in it for you?

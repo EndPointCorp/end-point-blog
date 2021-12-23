@@ -8,8 +8,6 @@ tags:
 date: 2016-10-13
 ---
 
-**This position has been filled! Thanks to everyone who expressed interest.**
-
 We are looking for a full-time, salaried engineer to help us further develop our software, infrastructure, and hardware integration for the impressive [Liquid Galaxy](https://www.visionport.com/). The Liquid Galaxy was created by Google to provide an immersive experience of Google Earth and other applications.
 
 This position is located at either our satellite office in Bluff City, Tennessee, or in Eugene, Oregon.

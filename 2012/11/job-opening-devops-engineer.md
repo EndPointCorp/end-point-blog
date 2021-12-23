@@ -8,8 +8,6 @@ tags:
 date: 2012-11-22
 ---
 
-**(This job has been filled.)**
-
 We're looking for a full-time, salaried DevOps engineer to work with our existing hosting and system administration team and consult with our clients on their needs. If you like to figure out problems, solve them, can take responsibility for getting a job done well without intensive oversight, please read on!
 
 ### What is in it for you?
