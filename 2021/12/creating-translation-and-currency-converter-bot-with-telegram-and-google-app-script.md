@@ -206,7 +206,7 @@ Throughout the process that I learned to use the Google App Script, I found seve
 var ssId = "<spreadsheet's ID>"; 
 var sheet = SpreadsheetApp.openById(ssId).getSheetByName("<the sheet's name>");
 ```
-given that there are (possibly) many sheets that inside the spreadsheet file.
+given that there are (possibly) many sheets inside the spreadsheet file.
 
 Or we could use `SpreadsheetApp.getActiveSpreadsheet()` but it depends on the active sheet inside the spreadsheet's UI, as described [here](https://developers.google.com/apps-script/reference/spreadsheet/spreadsheet-app#getactivesheet)
 
