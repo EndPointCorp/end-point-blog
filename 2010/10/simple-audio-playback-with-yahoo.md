@@ -3,12 +3,10 @@ author: Jeff Boes
 title: Simple audio playback with Yahoo Mediaplayer
 github_issue_number: 372
 tags:
-- cloud
 - javascript
+- audio
 date: 2010-10-20
 ---
-
-
 
 Recently I had need to show a list of MP3 files with a click-to-play interface.
 
@@ -44,5 +42,3 @@ You could use various ways to identify the links to be player-ized, but I chose 
 ```
 
 Obviously, if jQuery is in use for your page, you can reduce the code to an even smaller snippet.
-
-
