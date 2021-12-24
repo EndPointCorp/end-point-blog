@@ -8,6 +8,7 @@ featured:
 tags:
 - conference
 - visionport
+- event
 date: 2017-09-26
 ---
 

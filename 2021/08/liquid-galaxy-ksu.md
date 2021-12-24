@@ -8,6 +8,7 @@ featured:
 github_issue_number: 1763
 tags:
 - visionport
+- clients
 ---
 
 ![KSU's new Liquid Galaxy](/blog/2021/08/liquid-galaxy-ksu/liquid-galaxy-ksu.jpg)

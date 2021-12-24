@@ -7,6 +7,7 @@ featured:
   image_url: /blog/2017/02/liquid-galaxy-success-at-us-embassys/image-0-big.png
 tags:
 - visionport
+- clients
 date: 2017-02-02
 ---
 

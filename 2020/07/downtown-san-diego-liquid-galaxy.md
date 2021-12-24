@@ -9,6 +9,7 @@ description: New Liquid Galaxy system at Downtown San Diego Partnership lets pub
 github_issue_number: 1653
 tags:
 - visionport
+- clients
 date: 2020-07-27
 ---
 

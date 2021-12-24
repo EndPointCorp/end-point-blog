@@ -8,6 +8,7 @@ featured:
 tags:
 - visionport
 - conference
+- event
 date: 2018-05-02
 ---
 <img src="/blog/2018/05/liquid-galaxy-at-earthx/39546767-25e05db2-4e1b-11e8-969a-6e1f2403d02a-sm.jpg" width="770" height="343" alt="Coral reef panorama displayed on Liquid Galaxy" />

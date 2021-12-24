@@ -5,6 +5,7 @@ github_issue_number: 1346
 tags:
 - company
 - visionport
+- event
 date: 2017-11-17
 ---
 
