@@ -7,6 +7,7 @@ featured:
 github_issue_number: 1810
 tags:
 - visionport
+- clients
 date: 2021-12-24
 ---
 
@@ -14,7 +15,7 @@ date: 2021-12-24
 
 Auburn University’s Liquid Galaxy/​VisionPort installation was the first of its kind, built into a stunning wooden cabinet. A technological showpiece that is a highlight of Auburn’s campus, the VisionPort platform is used to showcase incredible imagery and presentations created by students and faculty alike. 
 
-Auburn’s Liquid Galaxy/​VisionPort is located on the first floor of the RBD Library. As stated on [Auburn’s Library webpage](https://lib.auburn.edu/liquidgalaxy/), “It provides a one-of-a-kind platform for 3D geospatial visualization, panoramic images, video, tours, and more in a shared immersive environment. Auburn holds the distinction of being one of the few institutions in the Southeast to make this unique and innovative resource available to its patrons.”
+Auburn’s Liquid Galaxy/​VisionPort is located on the first floor of the RBD (Ralph Brown Draughon) Library. As stated on [Auburn’s Library webpage](https://lib.auburn.edu/liquidgalaxy/), “It provides a one-of-a-kind platform for 3D geospatial visualization, panoramic images, video, tours, and more in a shared immersive environment. Auburn holds the distinction of being one of the few institutions in the Southeast to make this unique and innovative resource available to its patrons.”
 
 ![The Auburn VisionPort in its custom wooden cabinet](/blog/2019/10/liquid-galaxy-cabinets/image-0.jpg)
 
@@ -25,4 +26,8 @@ Auburn University’s Liquid Galaxy/​VisionPort is also used for Creative Expl
 ![Wade Hall presentation on the Auburn VisionPort](/blog/2021/12/visionport-success-at-auburn-university/wade-hall.jpg)
 <small>A Liquid Galaxy/​VisionPort exhibit honoring native Alabama author and educator Dr. Wade Hall by Auburn University Libraries’ Special Collections and Archives Department.</small>
 
-We look forward to continuing to support Auburn University in leveraging the VisionPort platform for great educational uses. To learn more about VisionPort, please visit [www.visionport.com](https://www.visionport.com).
+We look forward to continuing to support Auburn University in leveraging the VisionPort platform for great educational uses.
+
+To learn more about VisionPort/​Liquid Galaxy installations in custom cabinets, flat floor-mounted grids, two rows of screens, and other unique configurations, see my earlier article [Custom cabinets for the Liquid Galaxy](/blog/2019/10/liquid-galaxy-cabinets/).
+
+Read more about VisionPort in general at [www.visionport.com](https://www.visionport.com).

@@ -18,6 +18,10 @@ Cabinets provide a perfect hybrid solution for clients who want the look of perm
 
 In the case of the recent installation at Auburn University (pictured top), the library staff elected to have a cabinet built because the wood-grained structure was more conducive to the architectural integrity of their beautiful library and the popular location they wanted it to be in.
 
+(Update in December 2021: You can learn more about Auburn University's installation in [my follow-up after two years of operation](/blog/2021/12/visionport-success-at-auburn-university/) at the library.)
+
+### Other custom creations
+
 Since 2012, the Liquid Galaxy immersive visual platform has been a primary focus for End Point. Since our first installation at the Smithsonian National Air and Space Museum, we have installed and supported many types of systems ranging from 3 to 48 screens. These systems have expanded across 20 countries and 6 different continents! We have supported many customized and innovative projects, including these:
 
 <img src="/blog/2019/10/liquid-galaxy-cabinets/image-1.jpg" alt="Liquid Galaxy in a flat layout" />
