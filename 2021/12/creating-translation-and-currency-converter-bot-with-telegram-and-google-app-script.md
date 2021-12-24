@@ -9,7 +9,11 @@ tags:
 - spreadsheet
 ---
 
-In the previous [writing](/blog/2021/11/forwarding-google-forms-responses-to-api/) written by Afif, he elaborated on how to use Google App Script with Google Form. Coincidentally last year I learned a bit on how to use Google App Script with Telegram Bot as a Personal Ledger Tool written by [Mars Escobin](https://medium.com/@mars_escobin/telegram-inline-keyboards-using-google-app-script-f0a0550fde26).The base code that she wrote could be referred [here](https://github.com/mariannetrizha/budgetter/blob/master/budgetter_bot.js)
+In the previous [writing](/blog/2021/11/forwarding-google-forms-responses-to-api/) written by Afif, he elaborated on how to use Google App Script with Google Form. Coincidentally last year I learned a bit on how to use Google App Script with Telegram Bot as a Personal Ledger Tool written by [Mars Escobin](https://medium.com/@mars_escobin/telegram-inline-keyboards-using-google-app-script-f0a0550fde26).The base code that she wrote can be referred [here].(https://github.com/mariannetrizha/budgetter/blob/master/budgetter_bot.js)
+
+The following how the Telegram Bot that I learned from Mars looks like
+
+(/blog/2021/12/creating-translation-and-currency-converter-bot-with-telegram-and-google-app-script/najmi-budget.jpg)
 
 In this writing I will share a bit on how to adapt Mars’ code and use Telegram Bot to get the input from the user and let Google App Script to call Google’s cloud based services (translation and finance) and later return the outputs to the user. 
 
@@ -96,7 +100,7 @@ var sheet = SpreadsheetApp.openById(ssId).getSheetByName("terjemah");
 
 (/blog/2021/12/creating-translation-and-currency-converter-bot-with-telegram-and-google-app-script/najmi-currency.jpg)
 
-There are (at least, maybe) two possible ways to create a currency converter bot with Telegram+Google App Script. I could either invoke a curl-alike method by calling an external API (which is not related with Google) or just manipulating whatever Google Finance offers. I did some searching, but I could not find any built-in class in order to do the conversion within the code. However I remember that Google Spreadsheet could actually call Google Finance within its cell. So I decided  to let Spreadsheet do the conversion and then I will fetch the result to the requestor.
+There are (at least, maybe) two possible ways to create a currency converter bot with Telegram+Google App Script. I could either invoke a curl-alike method by calling an external API (which is not related with Google) or just manipulating whatever Google Finance offers. I did some search but I could not find any built-in class in order to do the conversion within the code. However I remember that Google Spreadsheet could actually call Google Finance within its cell. So I decided  to let Spreadsheet do the conversion and then I will fetch the result and return it to the requestor.
 
 This is shown in the following snippet:
 ```.javascript
@@ -109,8 +113,7 @@ This is shown in the following snippet:
 and later we fetched the value from `“d2”` cell with
 
 ```.javascript
-
-    var value = SpreadsheetApp.getActiveSheet().getRange('d2').getValue();
+var value = SpreadsheetApp.getActiveSheet().getRange('d2').getValue();
 ```
 
 As the default value is taking many decimal points, I made it fixed to two decimal points
