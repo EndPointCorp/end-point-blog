@@ -9,7 +9,7 @@ tags:
 - spreadsheet
 ---
 
-In the previous [writing](/blog/2021/11/forwarding-google-forms-responses-to-api/) written by Afif, he elaborated on how to use Google App Script with Google Form. Coincidentally last year I learned a bit on how to use Google App Script with Telegram Bot as a Personal Ledger Tool written by [Mars Escobin](https://medium.com/@mars_escobin/telegram-inline-keyboards-using-google-app-script-f0a0550fde26).The base code that she wrote can be referred [here].(https://github.com/mariannetrizha/budgetter/blob/master/budgetter_bot.js)
+In the previous [writing](/blog/2021/11/forwarding-google-forms-responses-to-api/) written by Afif, he elaborated on how to use Google App Script with Google Form. Coincidentally last year I learned a bit on how to use Google App Script with Telegram Bot as a Personal Ledger Tool written by [Mars Escobin](https://medium.com/@mars_escobin/telegram-inline-keyboards-using-google-app-script-f0a0550fde26).The base code that she wrote can be referred [here](https://github.com/mariannetrizha/budgetter/blob/master/budgetter_bot.js)
 
 The following how the Telegram Bot that I learned from Mars looks like
 
@@ -63,7 +63,7 @@ function sendMessage(id, text) {
  
 function doPost(e) {
 var contents = JSON.parse(e.postData.contents);
-var ssId = "";
+var ssId = "<insert your webAppURL which is generated from Google App Script UI over here>";
 var sheet = SpreadsheetApp.openById(ssId).getSheetByName("terjemah");
  
    if (contents.message){
@@ -158,7 +158,7 @@ function sendMessage(id, text) {
 
 function doPost(e) {
 var contents = JSON.parse(e.postData.contents);
-var ssId = ""; 
+var ssId = "<insert the spreadhsheet ID over here, you can get it from the URL on the browser URL bar>"; 
 var sheet = SpreadsheetApp.openById(ssId).getSheetByName("mymoney"); // put the name of the spreadsheet page that you want to refer over here
    
     if (contents.message){
@@ -198,6 +198,23 @@ SpreadsheetApp.getActiveSheet().getRange('c2').setValue('=GOOGLEFINANCE("currenc
    
  }
 ```
+
+## Special Notes
+Throughout the process that I learned to use the Google App Script, I found several ways for us to refer to spreadsheet that we want deal inside the code. For example we can use:
+
+```.javascript
+var ssId = "<spreadsheet's ID>"; 
+var sheet = SpreadsheetApp.openById(ssId).getSheetByName("<the sheet's name>");
+```
+given that there are (possibly) many sheets that inside the spreadsheet file.
+
+Or we could use `SpreadsheetApp.getActiveSpreadsheet()` but it depends on the active sheet inside the spreadsheet's UI, as described [here](https://developers.google.com/apps-script/reference/spreadsheet/spreadsheet-app#getactivesheet)
+
+Nevertheless both of the mentioned method above are inside the `SpreadsheetApp` Class.
+
+# Conclusion
+
+I would say the are many more stuffs that could be done by the Google App Script and it will be really helpful to automate stuffs that we routinely do across many files. In my example that I gave above, it just being used on two different spreadsheets - just as a placeholder so that I could get the result to be returned to my Telegram bot. 
 
 
 
