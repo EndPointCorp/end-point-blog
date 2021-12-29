@@ -27,7 +27,7 @@ print "hello world\n";
 
 to this:
 
-```perl
+```plain
 jeff@Wyvern:~$ perl bin/eyedrops.pl
 1 shapes completed.
 use re 'eval';
