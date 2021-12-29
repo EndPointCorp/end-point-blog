@@ -6,7 +6,7 @@ tags:
 - ecommerce
 - unicode
 - sql
-- postgresql
+- postgres
 date: 2021-12-29
 ---
 
