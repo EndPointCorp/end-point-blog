@@ -19,7 +19,7 @@ I’m going to take the coward’s way out on this one right away. Go see for yo
   
 ### 2. [Acme::EyeDrops](http://search.cpan.org/~asavige/Acme-EyeDrops-1.62/lib/Acme/EyeDrops.pm)
   
-Really, anything in the Acme::* (meaning “perfect”) namespace is just programmer-comedy gold, depending on what you find amusing and what is just plain forehead-smacking stupid to you. This one allows you to transform your Perl programs (small ones work better) from this:
+Really, anything in the Acme::\* (meaning “perfect”) namespace is just programmer-comedy gold, depending on what you find amusing and what is just plain forehead-smacking stupid to you. This one allows you to transform your Perl programs (small ones work better) from this:
 
 ```perl
 print "hello world\n";
@@ -27,9 +27,60 @@ print "hello world\n";
 
 to this:
 
-<img src="/blog/2015/11/funniest-perl-modules/image-0.png"/>
+```perl
+jeff@Wyvern:~$ perl bin/eyedrops.pl
+1 shapes completed.
+use re 'eval';
+                                      ''=~('('.'?'
+           .'{'.(                   '`'|'%').("\["^
+        '-').('`'|                '!').('`'|',').'"'
+ .('['^'+')  .('['^              ')').('`'|')').('`'|
+'.').('['^'/').('{'^            '[').'\\'.'"'.('`'|'('
+).('`'|'%').('`'|',')          .('`'|',').('`'|"\/").(
+  '{'^'[').('['^',').        ('`'|'/').('['^')').("\`"|
+       ',').('`'|'$')      .'\\'.'\\'.('`'|'.').'\\'.'"'
+      .';'.('!'^'+')     .'"'.'}'.')');$:='.'^'~';$~='@'|
+     '(';$^=')'^'[';   $/='`'|'.';$,='('^'}';$\='`'|'!';$:
+    =')'^'}';$~='*'   |'`';$^='+'^'_';$/='&'|'@';$,='['&'~';
+    $\=','^"\|";$:=  '.'^'~';$~='@'|'(';$^=')'^'[';$/='`'|'.'
+    ;$,='('^'}';$\  ='`'|'!';$:=')'^'}';$~='*'|'`';$^='+'^'_'
+    ;$/='&'|'@';$,  ='['&'~';$\=','^'|';$:='.'^'~';$~='@'|'(';
+    $^=')'^'[';$/='`'|'.';$,='('^'}';$\='`'|'!';$:=')'^'}';$~=
+    '*'|'`';$^='+'^'_';$/='&'|'@';$,='['&'~';$\=','^'|';$:='.'^
+     '~';$~='@'|'(';$^=')'^'[';$/='`'|'.';$,='('^'}';$\='`'|'!'
+     ;$:=')'^'}';$~='*'|'`';$^='+'^'_';$/='&'|'@';$,='['&'~';$\=
+      ','^'|';$:='.'^'~';$~='@'|'(';$^=')'^'[';$/='`'|'.';$,='('^
+       '}';$\='`'|'!';$:=')'^'}';$~='*'|'`';$^='+'^'_';$/='&'|'@'
+        ;$,='['&'~';$\=','^'|';$:='.'^'~';$~='@'|'(';$^="\)"^ '['
+         ;$/='`'|'.';$,='('^'}';$\='`'|'!';$:=')'^'}';$~='*'  |((
+          '`'));$^='+'^'_';$/='&'|'@';$,='['&'~';$\ =','^'|'  ;$:
+            ='.'^'~';$~='@'|'(';$^=')'^'[';$/='`'|  '.';$,=   '('
+             ^'}'; $\='`'|'!';$:=')'^'}';$~="\*"|   '`';$^=   '+'
+                   ^'_';$/='&'|'@';$,='['&'~';$\    =(',')^   '|'
+                   ;$:='.'^    '~';$~='@' |"\(";     $^=')'   ^+
+                   '[';$/=     '`'|'.';   $,='('     ^"\}";  $\
+                   =('`')|     "\!";$:=   "\)"^       "\}";  (
+                   ($~))=      '*'|'`';   ($^)         ='+'
+                   ^"\_";     $/=('&')|   '@';         ($,)
+                    ='['&     "\~";$\=    ','^         '|';
+                    ($:)=     '.'^'~'     ;$~=         '@'|
+                    '(';     $^=')'       ^'['         ;$/=
+                    '`'|     '.'          ;$,=         '('^
+                    '}';      $\=         '`'          |((
+                    '!'        ));       $:=           ')'
+                    ^((         '}'     ));            $~=
+                    '*'          |((   '`'              ))
+                    ;(             ($^))=               ((
+                    ((              '+'))               ))
+                    ^+             "\_";$/=             ((
+                   '&'            ))|+ "\@";            $,
+                  =((           '['))&  '~';           $\=
+                 ','^         "\|";$:=   '.'          ^'~'
+               ;($~)=                                ('@')|
+             "\(";$^=                               ')'^'['
+```
 
-Oh, that’s not just a picture of a camel. That’s actual Perl code; you can run that, and it executes in the exact same way as the original one-liner. So much more stylish. Plus, you can impress your boss/cow-orker/[heroic scientist boyfriend](http://nightvale.wikia.com/wiki/Carlos).
+Oh, that’s not just a picture of a camel. That’s actual Perl code; you can run that, and it executes in the exact same way as the original one-liner. So much more stylish. Plus, you can impress your boss/cow-orker/[heroic scientist boyfriend](https://nightvale.fandom.com/wiki/Carlos_the_Scientist).
 
 ### 3. [common::sense](http://search.cpan.org/~mlehmann/common-sense-3.74/sense.pod)
 
