@@ -1,14 +1,14 @@
 ---
 title: "VisionPort Success at Auburn University"
 author: Ben Witten
-featured:
-  visionport: true
-  image_url: 
+date: 2021-12-24
 github_issue_number: 1810
 tags:
 - visionport
 - clients
-date: 2021-12-24
+featured:
+  visionport: true
+  image_url: /blog/2021/12/visionport-success-at-auburn-university/auburn-1.jpg
 ---
 
 ![Street view on the Auburn VisionPort](/blog/2021/12/visionport-success-at-auburn-university/auburn-1.jpg)

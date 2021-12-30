@@ -1,10 +1,13 @@
 ---
 title: "Liquid Galaxy Media Stream Integration"
 author: Alejandro Ramon
+date: 2021-11-11
+github_issue_number: 1795
 tags:
 - visionport
-github_issue_number: 1795
-date: 2021-11-11
+featured:
+  visionport: true
+  image_url: /blog/2021/11/liquid-galaxy-media-stream-integration/banner.jpg
 ---
 
 ![Media Stream Integration](/blog/2021/11/liquid-galaxy-media-stream-integration/banner.jpg)

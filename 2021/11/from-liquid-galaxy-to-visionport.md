@@ -1,13 +1,14 @@
 ---
 title: "From Liquid Galaxy to VisionPort"
 author: Alejandro Ramon
+date: 2021-11-23
+github_issue_number: 1800
 tags:
 - visionport
 - company
-date: 2021-11-23
-github_issue_number: 1800
 featured:
   endpoint: true
+  visionport: true
   image_url: /blog/2021/11/from-liquid-galaxy-to-visionport/banner.jpg
 description: We are rebranding! VisionPort is the next phase for Liquid Galaxy.
 ---
