@@ -7,6 +7,7 @@ tags:
 - artificial-intelligence
 - aws
 - visionport
+- serverless
 featured:
   visionport: true
   image_url: /blog/2019/05/facial-recognition-amazon-deeplens/deeplens-front-angle.jpg

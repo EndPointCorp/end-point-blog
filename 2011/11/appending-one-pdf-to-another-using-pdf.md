@@ -5,10 +5,9 @@ github_issue_number: 514
 tags:
 - tips
 - tools
+- pdf
 date: 2011-11-22
 ---
-
-
 
 Ever need to manipulate PDFs? Prefer the command line? Us too. Imagine you have a contract in PDF format. When people print, sign, and re-scan the contract, that’s good documentation of the signature, but the clarity of the original machine-readable text is lost and the the file’s size is unnecessarily large. One solution is to append the scanned signature page to the original contract document.
 
@@ -39,5 +38,3 @@ pdftk contract.pdf scanned\ contract.pdf cat output signed_contract.pdf
 ```
 
 The PDF Toolkit is licensed under GNU General Public License (GPL) Version 2. PDF Labs’s website provides a host of other [examples](https://www.pdflabs.com/docs/pdftk-cli-examples/) including how to encrypt, password-protect, and repair PDFs.
-
-

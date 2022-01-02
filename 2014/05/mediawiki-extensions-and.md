@@ -6,6 +6,7 @@ tags:
 - git
 - mediawiki
 - troubleshooting
+- pdf
 date: 2014-05-09
 ---
 

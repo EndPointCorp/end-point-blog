@@ -4,12 +4,11 @@ title: Generating PDF documents in the browser
 github_issue_number: 769
 tags:
 - javascript
+- pdf
 date: 2013-03-15
 ---
 
-
-
-### What you will learn.
+### What you will learn
 
 - How to generate PDF documents in the browser with JavaScript
 - How to generate them out of *normal* HTML
@@ -37,7 +36,7 @@ I strongly encourage you to visit their website. There is a nice live coding edi
 
 The whole process looks like this:
 
-```python
+```javascript
 # 1. create jsPDF object:
 doc = new jsPDF()
 
@@ -67,7 +66,7 @@ And in the *doc* directory you will find nicely generated docs out of the projec
 
 Yes you can. On the project’s website the authors are warning us that this feature is still **experimental**. But I have to say that last time I used it, all went well and the code produces nice PDF to this day (yay!).
 
-```python
+```javascript
 doc.fromHTML $('.report_web').get(0), 10, 10,
   'width': 170,
   'elementHandlers': 
@@ -102,7 +101,7 @@ You may have notice in one of above examples, that we were simply creating new w
 
 To recap, opening PDF documents in new window:
 
-```python
+```javascript
 doc.output 'dataurlnewwindow', {}
 ```
 
@@ -110,7 +109,7 @@ doc.output 'dataurlnewwindow', {}
 
 Nesting the PDF document inside the DOM seems way cooler. To do so:
 
-```python
+```javascript
 data = doc.output 'dataurlstring', {}
 $('#report').html "<iframe src='#{data}'></iframe>"
 ```
@@ -118,5 +117,3 @@ $('#report').html "<iframe src='#{data}'></iframe>"
 You will notice that the *#output* method takes a string which tells it how you’d like to generate the PDF. If you specify the **‘dataurlstring’** it will return a string containing the url data you use in your iframe. That is how the last example works.
 
 There is much more to jsPDF than shown in this short post. If you’re interested, you can browse the docs included in the projects repository. There are a lot of useful methods for creating almost any type of document you would want.
-
-

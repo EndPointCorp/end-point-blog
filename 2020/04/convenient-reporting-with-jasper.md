@@ -5,6 +5,7 @@ github_issue_number: 1623
 tags:
 - java
 - reporting
+- pdf
 date: 2020-04-28
 ---
 

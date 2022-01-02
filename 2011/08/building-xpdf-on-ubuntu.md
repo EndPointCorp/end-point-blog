@@ -7,10 +7,9 @@ tags:
 - open-source
 - tips
 - ubuntu
+- pdf
 date: 2011-08-31
 ---
-
-
 
 It may happen that you need to use [Xpdf](https://www.xpdfreader.com/), even though it no longer ships with [Ubuntu](https://www.ubuntu.com/) and is considered ... outdated? buggy? insecure? In any case, it still renders some PDFs that [Poppler](https://poppler.freedesktop.org/)-based viewers such as [Evince](https://wiki.gnome.org/Apps/Evince) don’t, or allows some troublesome PDFs to print as fonts and line art instead of a rasterized mess.
 
@@ -31,5 +30,3 @@ sudo make install
 ```
 
 That’s it. Not as nice as the old native Debian/Ubuntu packages, but gets the job done.
-
-
