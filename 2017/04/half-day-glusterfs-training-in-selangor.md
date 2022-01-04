@@ -15,13 +15,13 @@ In GlusterFS the data section is called as “brick”. Hence we could have a lo
 
 The GlusterFS packages could be installed as a superuser with the following command:
 
-```nohighlight
+```plain
 apt-get install glusterfs-server
 ```
 
 Since we were using a bridged VM during the demo, we simply edited the /etc/hosts in the each VM so they could communicate between each other by using hostname instead of using typing the IP manually.
 
-```nohighlight
+```plain
 root@gluster2:~# grep gluster /etc/hosts
 192.168.1.11 gluster1
 127.0.0.1 gluster2
@@ -29,14 +29,14 @@ root@gluster2:~# grep gluster /etc/hosts
 
 Here we will try to probe the remote host whether it is reachable:
 
-```nohighlight
+```plain
 root@gluster2:~# gluster peer probe gluster1
 peer probe: success. Host gluster1 port 24007 already in peer list
 ```
 
 The following commands create the storage volume. Later, whatever we put in the /data partition will be reachable on the other gluster node.
 
-```nohighlight
+```plain
 gluster volume create datastore1 replica 2 transport tcp gluster1:/data gluster2:/data
 gluster volume create datastore1 replica 2 transport tcp gluster1:/data gluster2:/data force
 gluster volume start datastore1
@@ -44,7 +44,7 @@ gluster volume start datastore1
 
 Most of the parts here could be retrieved from the link that I gave above. But let’s see what will happen later on when the mounting part is done.
 
-```nohighlight
+```plain
 cd /datastore1/
 root@gluster2:/datastore1# touch blog
 root@gluster2:/datastore1# ls -lth
@@ -55,7 +55,7 @@ total 512
 
 The same output could be retrieved from gluster1
 
-```nohighlight
+```plain
 root@gluster1:/datastore1# ls -lth
 total 512
 -rw-r--r-- 1 root root  0 Mar 14 21:33 blog

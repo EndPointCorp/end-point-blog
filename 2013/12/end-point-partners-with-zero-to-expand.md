@@ -4,7 +4,7 @@ title: End Point Partners with A-Zero to Expand Liquid Galaxy Services in South 
 github_issue_number: 902
 tags:
 - clients
-- liquid-galaxy
+- visionport
 date: 2013-12-19
 ---
 

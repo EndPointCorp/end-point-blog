@@ -3,7 +3,7 @@ author: Jacob Minshall
 title: ROS architecture of Liquid Galaxy
 github_issue_number: 1183
 tags:
-- liquid-galaxy
+- visionport
 - python
 - ros
 date: 2015-12-18

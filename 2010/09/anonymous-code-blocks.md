@@ -15,7 +15,7 @@ With the release of PostgreSQL 9.0 comes the ability to execute “anonymous cod
 
 The first language to support DO was PL/pgSQL. The PostgreSQL documentation provides an example to answer the original question: how do I grant permissions on everything to a particular user.
 
-```nohighlight
+```plain
 DO $$DECLARE r record;
 BEGIN
     FOR r IN SELECT table_schema, table_name FROM information_schema.tables
@@ -28,7 +28,7 @@ END$$;
 
 Notice that this doesn’t actually tell us what language to use. If no language is specified, DO defaults to PL/pgSQL (which, in 9.0, is enabled by default). But you can use other languages as well:
 
-```nohighlight
+```plain
 DO $$
 HAI
     BTW Calculate pi using Gregory-Leibniz series

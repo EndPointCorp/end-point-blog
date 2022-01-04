@@ -23,7 +23,7 @@ This search helped, but wasn’t quite good enough. We finally borrowed a simpli
 
 Update: One of the comments suggested a demonstration of the results, which of course makes perfect sense. So I resurrected some of the scripts I used when developing the technique. In addition to the scripts used to install the fuzzystrmatch and pg_trgm modules and the name_search.sql script linked above, I had a script that populated the *people* table with a bunch of fake names. Then, it’s easy to test the search mechanism like this:
 
-```nohighlight
+```plain
 select * from search_for_name('John Doe')
 as a(id integer, last_name text, first_name text, sources text[], rank double precision);
 
@@ -48,7 +48,7 @@ as a(id integer, last_name text, first_name text, sources text[], rank double pr
 
 This isn’t all the results it returned, but it gives an idea what the results look like. The rank value ranks results based on the rankings given by each of the underlying search methods, and the sources column shows which of the search methods found this particular entry. Some search methods may show up twice, because that search method found multiple matches between the input text and the result record. These results don’t look particularly good, because there isn’t really a good match for “John Doe” in the data set. But if I horribly misspell “Jamie Elswick”, the search does a good job:
 
-```nohighlight
+```plain
 select * from search_for_name('Jomy Elswik') as a(id integer, last_name text,                                                 
 first_name text, sources text[], rank double precision)
 

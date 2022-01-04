@@ -24,7 +24,7 @@ It is the latter issue that I wish to address because there is—​and has been
 
 You can leverage “permanent more” by adding the boolean **mv_more_permanent**, or the shorthand **pm**, to your search conditions. E.g.:
 
-```nohighlight
+```plain
 Link:
 
     <a href="[area search="

@@ -3,7 +3,7 @@ author: Jon Jensen
 title: DevOps engineer job opening (remote)
 github_issue_number: 812
 tags:
-- company
+- jobs-closed
 - devops
 - remote-work
 date: 2013-06-04
@@ -24,7 +24,7 @@ What is in it for you?
 What you will be doing:
 
 - Remotely set up and maintain Linux servers (mostly RHEL/CentOS, Debian, and Ubuntu), with custom software written mostly in Ruby, Python, Perl, and PHP
-- Audit and improve security, backups,reliability, monitoring (with Nagios etc.)
+- Audit and improve security, backups, reliability, monitoring (with Nagios etc.)
 - Support developer use of major language ecosystems: Perl’s CPAN, Python PyPI (pip/easy_install), Ruby gems, PHP PEAR/PECL, etc.
 - Automate provisioning with Ansible, Chef, Puppet, etc.
 - Use open source tools and contribute back as opportunity arises
@@ -55,4 +55,6 @@ End Point is a 17-year-old Internet consulting company based in New York City, w
 
 ### How to apply
 
-Please email us an introduction to [jobs@endpoint.com](mailto:jobs@endpoint.com) to apply. Include a resume and your GitHub or other URLs that would help us get to know you. We look forward to hearing from you!
+~~Please email us an introduction to jobs&#x40;endpoint.com to apply.~~
+**(This job has been filled.)**
+Include a resume and your GitHub or other URLs that would help us get to know you. We look forward to hearing from you!

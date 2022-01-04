@@ -3,8 +3,7 @@ author: Jon Jensen
 title: Seeking a PHP developer
 github_issue_number: 1561
 tags:
-- company
-- jobs
+- jobs-closed
 - php
 - remote-work
 date: 2019-10-17
@@ -13,8 +12,6 @@ date: 2019-10-17
 <img src="/blog/2019/10/seeking-php-developer/20190701-164659-crop.jpg" alt="decommissioned pay phone" />
 
 <!-- Photo by Jon Jensen -->
-
-**(This position has been filled.)**
 
 We are looking for another PHP software engineer, to work with us during business hours somewhere in the UTC-7 to UTC-4 time zones (U.S. Pacific to Eastern Time). This is a contract-to-hire role, and can be full time or part time.
 
@@ -63,7 +60,9 @@ And just as important:
 
 ### Getting in touch with us:
 
-Please email us an introduction to [jobs@endpoint.com](mailto:jobs@endpoint.com) to apply. Include your location, a resume/​CV, your GitHub or LinkedIn URLs, or whatever else helps us get to know you.
+~~Please email us an introduction to jobs&#x40;endpoint.com to apply.~~
+**(This job has been filled.)**
+Include your location, a resume/​CV, your GitHub or LinkedIn URLs, or whatever else helps us get to know you.
 
 We look forward to hearing from you! Direct work seekers only, please—​this role is not for agencies or subcontractors.
 

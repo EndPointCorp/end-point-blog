@@ -83,7 +83,7 @@ sub show_notices { ## Function to return any notices received
 
 The output of the above script on a 8.4 Postgres server is:
 
-```nohighlight
+```plain
 Postgres version is 80401
 Process one has a PID of 18238
 Process two has a PID of 18239
@@ -117,7 +117,7 @@ $dbh2->commit();
 
 Here’s what the output looks like under version 9.0 of Postgres:
 
-```nohighlight
+```plain
 Postgres version is 90000
 Process one has a PID of 19089
 Process two has a PID of 19090

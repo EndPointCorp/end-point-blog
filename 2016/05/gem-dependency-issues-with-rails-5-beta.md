@@ -14,7 +14,7 @@ In this post I’ll illustrate this issue by showing the steps required to get r
 
 After installing the current beta3 version of Rails 5 with gem install rails --pre and creating a Rails 5 project with rails new I decided to address the first requirement of my application, admin interface, by installing the popular Rails Admin gem. The [rubygems page for rails_admin](https://rubygems.org/gems/rails_admin) shows that its most recent release 0.8.1 from mid-November 2015 lists Rails 4 as a requirement. And indeed, trying to install rails_admin 0.8.1 in a Rails 5 app via bundler fails with a dependency error:
 
-```nohighlight
+```plain
 Resolving dependencies...
 Bundler could not find compatible versions for gem "rails":
 In snapshot (Gemfile.lock):
@@ -35,7 +35,7 @@ gem 'rails_admin', github: 'sferik/rails_admin'
 
 This solved the above dependency of rails_admin on Rails 4 but revealed some new issues with gems that rails_admin itself depends on:
 
-```nohighlight
+```plain
 Resolving dependencies...
 Bundler could not find compatible versions for gem "rack":
 In snapshot (Gemfile.lock):
@@ -73,7 +73,7 @@ gem 'rack-pjax', github: 'afcapel/rack-pjax', branch: 'master'
 
 resolves the rack dependency conflict, and bundle install now completes without error. Things are looking up! At least until you try to run the Rake task to rails g rails_admin:install and you’re presented with this mess:
 
-```nohighlight
+```plain
 /Users/patrick/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/actionpack-5.0.0.beta3/lib/action_dispatch/middleware/stack.rb:108:in `assert_index': No such middleware to insert after: ActionDispatch::ParamsParser (RuntimeError)
 from /Users/patrick/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/actionpack-5.0.0.beta3/lib/action_dispatch/middleware/stack.rb:80:in `insert_after'
 ```

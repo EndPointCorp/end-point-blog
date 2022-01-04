@@ -11,7 +11,7 @@ date: 2014-01-07
 
 We have been working on adding comments to our iptables rules to makes it a lot easier to know what each rule is for when reviewing the output of /sbin/iptables -L. If you aren’t familiar with the comment ability in iptables it is pretty straight forward to use. You just add this to an existing or new rule:
 
-```nohighlight
+```plain
 -m comment --comment "testing 1 2 3"
 ```
 
@@ -19,14 +19,14 @@ I had the displeasure of learning this weekend, while updating a system, that th
 
 When the server rebooted I noticed that iptables didn’t start as expected so I tried to start it using service iptables start and was greeted with this error: 
 
-```nohighlight
+```plain
 iptables: Applying firewall rules: Bad argument `1'
 Error occurred at line: 30
 ```
 
 I loaded up the /etc/sysconfig/iptables file in vim and started to try to figure out what had changed on line 30. I reviewed the rule and it looked pretty straight forward.
 
-```nohighlight
+```plain
 -A INPUT  -s 1.2.3.4 -p tcp -m multiport --dports 22,80 -j ACCEPT -m comment --comment 'testing 1 2 3'
 ```
 
@@ -34,7 +34,7 @@ Why was it freaking out over the 1 in the comment? I knew we had done comments b
 
 Today I decided to circle back and get a better idea on why the single quotes were causing the problem so I started testing different setups. My first test was to remove the quotes completely and see if that worked. It failed as expected which was good to see. My second test was to switch back to single quotes and remove all spaces. This did work but didn’t generate the results I was expecting. What I ended up with in iptables -L was output that looked like this:
 
-```nohighlight
+```plain
 ACCEPT     tcp  --  1.2.3.4         0.0.0.0/0           multiport dports 22,80 /* 'testing' */ 
 ```
 

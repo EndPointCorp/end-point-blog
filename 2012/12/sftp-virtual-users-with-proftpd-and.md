@@ -12,15 +12,13 @@ tags:
 date: 2012-12-20
 ---
 
-
-
 I recently worked on a Rails 3.2 project that used the sweet [PLupload](http://www.plupload.com/) JavaScript/Flash upload tool to upload files to the web app. To make it easier for users to upload large and/or remote files to the app, we also wanted to let them upload via SFTP. The catch was, our users didn't have SFTP accounts on our server and we didn't want to get into the business of creating and managing SFTP accounts. Enter: [ProFTPD](http://www.proftpd.org/) and virtual users.
 
 [ProFTPD's virtual users](http://www.proftpd.org/docs/directives/linked/config_ref_SQLAuthenticate.html) concept allows you to point ProFTPD at a SQL database for your user and group authentication. This means SFTP logins don't need actual system logins (although you can mix and match if you want). Naturally, this is perfect for dynamically creating and destroying SFTP accounts. Give your web app the ability to create disposable SFTP credentials and automatically clean up after the user is done with them, and you have a self-maintaining system.
 
 Starting from the inside-out, you need to configure ProFTPD to enable virtual users. Here are the relevant parts from our proftpd.conf:
 
-```nohighlight
+```plain
 ##
 # Begin proftpd.conf excerpt. For explanation of individual config directives, see the 
 # great ProFTPD docs at http://www.proftpd.org/docs/directives/configuration_full.html
@@ -89,5 +87,3 @@ SQLDefaultGID  500
 The CreateHome piece was the trickiest to get working just right for our use-case. But there are two reasons for that; we needed our web app to be able to read/delete the uploaded files, and we wanted to make ProFTPD create those home directories itself. (And it only creates that home directory once a user successfully logs in via SFTP. That means you can be more liberal in your UI with generating credentials that may never get used without having to worry about a ton of empty home directories lying about.)
 
 That's it for the introductory "Part 1" of this article. In Part 2, I'll show how we generate credentials, the workflow behind displaying those credentials, and our SftpUser ActiveRecord model that handles it all. In Part 3, I'll finish up by running through exactly how our web app accesses these files, and how it cleans up after it's done.
-
-

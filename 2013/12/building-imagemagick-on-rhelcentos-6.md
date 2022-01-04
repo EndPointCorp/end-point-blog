@@ -18,7 +18,7 @@ The first task, then, was to locate the matching older version of PerlMagick fro
 
 However, that fails to build without applying a patch to make it compatible with newer versions of Perl. The patch is available from [http://trac.imagemagick.org/changeset?format=diff&new=4950](http://trac.imagemagick.org/changeset?format=diff&new=4950), or you can just create a file called typemap in the root of the unpacked directory, with one line:
 
-```nohighlight
+```plain
 Image::Magick T_PTROBJ
 ```
 

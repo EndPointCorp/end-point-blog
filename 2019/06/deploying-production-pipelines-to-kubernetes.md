@@ -514,4 +514,4 @@ The code presented here is hosted [on GitHub](https://github.com/kamilc/endpoint
 
 The Argo workflows could be used in tandem with Kubernetes deployments. You could e.g. run a distributed [TensorFlow](https://www.tensorflow.org) model training and then deploy it on Kubernetes via [TensorFlow Serving](https://www.tensorflow.org/tfx/guide/serving). If you’re more into [PyTorch](https://pytorch.org), then distributing the training would be possible via [Horovod](https://eng.uber.com/horovod/). Have data scientists that use R? Deploy [RStudio Server](https://www.rstudio.com) instead of the JupyterLab with [the image from DockerHub](https://hub.docker.com/r/rocker/rstudio) and run some or all tasks with the [simpler one](https://hub.docker.com/r/rocker/r-ver) with R-base only.
 
-If you have any questions or projects you’d like us to help you with, contact us right away through the [contact form](/contact) or email [ask@endpoint.com](mailto:ask@endpoint.com).
+If you have any questions or projects you’d like us to help you with, reach out right away through our [contact form](/contact/)!

@@ -16,7 +16,7 @@ The primary purpose of the module is to prevent showing the PHP and database ver
 
 As with most MediaWiki extensions, installation is easy: download the tarball, unzip it into your **extensions** directory, and add this line to your LocalSettings.php file:
 
-```nohighlight
+```plain
 require_once( "$IP/extensions/ControlSpecialVersion/ControlSpecialVersion.php" );
 ```
 

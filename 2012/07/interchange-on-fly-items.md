@@ -13,7 +13,7 @@ Interchange has a handy feature (which, in my almost-seven-years of involvement,
 
 First, you need to tell Interchange that you’re going to make use of this feature (in catalog.cfg).
 
-```nohighlight
+```plain
 OnFly onfly
 ```
 
@@ -24,7 +24,7 @@ Then, you need to submit some special form parameters to set up the cart:
 - mv_order_item: the item number identifying this line
 - mv_order_fly: a structured string with | (vertical bar) delimiters. Each sub-field specifies something about the custom item, thus:
 
-```nohighlight
+```plain
 description=My custom item|price=12.34
 ```
 

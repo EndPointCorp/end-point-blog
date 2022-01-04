@@ -2,8 +2,11 @@
 author: Dave Jenkins
 title: Liquid Galaxy at Austin Startup Week
 github_issue_number: 1471
+featured:
+  visionport: true
+  image_url: /blog/2018/12/liquid-galaxy-at-austin-startup-week/img-1.jpg
 tags:
-- liquid-galaxy
+- visionport
 - event
 date: 2018-12-19
 ---

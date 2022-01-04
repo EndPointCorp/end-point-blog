@@ -5,6 +5,7 @@ github_issue_number: 83
 tags:
 - hardware
 - linux
+- audio
 date: 2008-12-19
 ---
 
@@ -22,4 +23,10 @@ Then ... I discovered a third USB port near the back of the computer that I hadn
 
 In the process I also fixed a problem that *was* in software: The external speakers didn’t mute when headphones are plugged in, as [others have described](https://bugs.launchpad.net/ubuntu/+source/linux/+bug/253422) as well. One of their solutions worked.
 
-In /etc/modprobe.d/alsa-base add: “options snd-hda-intel model=targa-2ch-dig” and reboot. Or, if you dread rebooting as I do, exit all applications using audio, modprobe -r snd-hda-intel then modprobe snd-hda-intel. Finally, uncheck the “Headphones” checkbox in the sound control panel.
+In `/etc/modprobe.d/alsa-base` add:
+
+```plain
+options snd-hda-intel model=targa-2ch-dig
+```
+
+and reboot. Or, if you dread rebooting as I do, exit all applications using audio, `modprobe -r snd-hda-intel` then `modprobe snd-hda-intel`. Finally, uncheck the “Headphones” checkbox in the sound control panel.

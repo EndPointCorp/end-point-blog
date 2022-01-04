@@ -2,8 +2,11 @@
 author: Will Plaut
 title: End Point at Google for Kenya
 github_issue_number: 1465
+featured:
+  visionport: true
+  image_url: /blog/2018/11/google-for-kenya/google-for-kenya.jpeg
 tags:
-- liquid-galaxy
+- visionport
 - event
 date: 2018-11-02
 ---

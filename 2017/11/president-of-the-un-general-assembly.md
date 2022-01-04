@@ -4,18 +4,19 @@ author: Jonathan Blessing
 github_issue_number: 1346
 tags:
 - company
-- liquid-galaxy
+- visionport
+- event
 date: 2017-11-17
 ---
 
 The President of UN General Assembly, Peter Thomson, thanked End Point for supporting the [Ocean Conference](https://oceanconference.un.org/), which was held at the United Nations Headquarters this past summer to bring attention and action to saving the world’s oceans.
 
-End Point’s [Liquid Galaxy](https://liquidgalaxy.endpoint.com/) helped bring to life “Reconnecting Humanity to the Sea,” an exhibition meant to showcase the beauty of the ocean and the challenges it faces today. [End Point created the presentation’s content and showcased it at the conference.](/blog/2017/06/liquid-galaxy-at-ocean-conference)
+End Point’s [Liquid Galaxy](https://www.visionport.com/) helped bring to life “Reconnecting Humanity to the Sea,” an exhibition meant to showcase the beauty of the ocean and the challenges it faces today. [End Point created the presentation’s content and showcased it at the conference.](/blog/2017/06/liquid-galaxy-at-ocean-conference/)
 
 > “We were very pleased to see End Point’s Liquid Galaxy used to promote a hopeful future for the world’s oceans.  It’s very satisfying to see our technology used to make an important story that much more compelling.”
 >
 > Rick Peltzman  
-> End Point, CEO
+> CEO, End Point
 
 This UN press release explains more about the conference and its results:  
 [“UN Ocean Conference wraps up with actions to restore ocean health, protect marine life”](https://www.un.org/apps/news/story.asp?NewsID=56947)

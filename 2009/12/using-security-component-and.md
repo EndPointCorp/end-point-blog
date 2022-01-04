@@ -96,7 +96,7 @@ function beforeFilter() {
 
 After more troubleshooting, we determined that if the CakePHP core Security component wasn’t included in the controller, the parameters were not deleted and the action **did it’s stuff**. A review of the CakePHP core Security component revealed that the component performs a validation on posts, which includes a check for a Token input. Because the post to this action originated from a legacy PHP page, it did not include any special hidden form variables included with the use of the CakePHP form helper (much like the Token inputs included via the Rails form helper):
 
-```nohighlight
+```plain
 <input type="hidden" value="POST" name="_method"/>
 <input type="hidden" id="Token123123123 value="123123123131231231223" name="data[_Token][key]"/>
 ```

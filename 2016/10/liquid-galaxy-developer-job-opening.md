@@ -3,15 +3,12 @@ author: Jon Jensen
 title: Liquid Galaxy developer job opening
 github_issue_number: 1260
 tags:
-- company
-- jobs
-- liquid-galaxy
+- jobs-closed
+- visionport
 date: 2016-10-13
 ---
 
-**This position has been filled! Thanks to everyone who expressed interest.**
-
-We are looking for a full-time, salaried engineer to help us further develop our software, infrastructure, and hardware integration for the impressive [Liquid Galaxy](https://liquidgalaxy.endpoint.com/). The Liquid Galaxy was created by Google to provide an immersive experience of Google Earth and other applications.
+We are looking for a full-time, salaried engineer to help us further develop our software, infrastructure, and hardware integration for the impressive [Liquid Galaxy](https://www.visionport.com/). The Liquid Galaxy was created by Google to provide an immersive experience of Google Earth and other applications.
 
 This position is located at either our satellite office in Bluff City, Tennessee, or in Eugene, Oregon.
 
@@ -23,7 +20,7 @@ What you will be doing:
 - Build tours and supporting tools for emerging markets
 - Integrate and test new hardware to work with the system
 
-<div class="separator" style="clear: both; text-align: center;"><a href="https://liquidgalaxy.endpoint.com/" imageanchor="1" style="clear: right; float: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" height="232" src="/blog/2016/10/liquid-galaxy-developer-job-opening/image-0.png" width="320"/></a></div>
+<div class="separator" style="clear: both; text-align: center;"><a href="https://www.visionport.com/" imageanchor="1" style="clear: right; float: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" height="232" src="/blog/2016/10/liquid-galaxy-developer-job-opening/image-0.png" width="320"/></a></div>
 
 What’s in it for you?
 
@@ -60,4 +57,6 @@ End Point is a technology consulting company founded in 1995 and based in New Yo
 
 ### How to apply
 
-Please email us an introduction to [jobs@endpoint.com](mailto:jobs@endpoint.com) to apply. Include a resume and any URLs that would help us get to know you. We look forward to hearing from you!
+~~Please email us an introduction to jobs&#x40;endpoint.com to apply.~~
+**(This job has been filled.)**
+Include a resume and any URLs that would help us get to know you. We look forward to hearing from you!

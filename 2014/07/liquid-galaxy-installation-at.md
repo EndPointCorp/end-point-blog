@@ -3,7 +3,7 @@ author: Szymon Lipiński
 title: Liquid Galaxy installation at Sparkassen-Finanzportal Forum 2014
 github_issue_number: 1011
 tags:
-- liquid-galaxy
+- visionport
 date: 2014-07-11
 ---
 

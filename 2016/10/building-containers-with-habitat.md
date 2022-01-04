@@ -21,7 +21,7 @@ To examine how the various parts of the build environment work, I picked an exam
 
 For the most basic Habitat build, you must define a plan.sh file which will contain all the build process logic as well as all configuration values to define the application. Within my Node.js example, this file contains this content:
 
-```nohighlight
+```plain
 pkg_origin=daehlie
 pkg_name=mytutorialapp
 pkg_version=0.3.0
@@ -50,7 +50,7 @@ Within this is defined all the application details like the name of the author, 
 
 Additionally to define this application we must provide the logic for how to start the Node application server, and provide configuration on what ports to listen on as well as the message to be displayed once it has started. To do so we must create a stub Node.js config.json which provides the port and message values:
 
-```nohighlight
+```plain
 {
     "message": "Hello, World",
     "port": "8080"
@@ -63,7 +63,7 @@ We also need two hooks which will be executed at package install time and at run
 
  In this example, both the message to be displayed to the user, as well as the port that the Node.js application server will listen on are hard-coded into our build, and all the images that resulted from it would be identical. In order to allow for some customizing of the resulting image, you can replace the hard-coded values in the Node.js config.json into variables which can be replaced during the build process:
 
-```nohighlight
+```plain
 {
     "message": "{{cfg.message}}",
     "port": "{{cfg.port}}"
@@ -72,7 +72,7 @@ We also need two hooks which will be executed at package install time and at run
 
 To complete the replacement, we would provide a “Tom’s Obvious, Minimal Language” (.toml) file with has a key-value pair for each of these configuration variables we want to set. This .toml file will be interpreted during each build to populate these values, creating an opportunity to customize our builds by injecting specific values into the variables defined in the application configuration. Here is an example of the syntax from this example:
 
-```nohighlight
+```plain
 # Message of the Day
 message = "Hello, World of Habitat"
 

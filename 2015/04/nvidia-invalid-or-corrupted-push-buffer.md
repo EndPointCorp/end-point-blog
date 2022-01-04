@@ -4,7 +4,7 @@ title: 'Nvidia: Invalid or Corrupted Push Buffer Stream'
 github_issue_number: 1116
 tags:
 - linux
-- liquid-galaxy
+- visionport
 - hardware
 date: 2015-04-20
 ---
@@ -15,7 +15,7 @@ In addition to providing regular security and system updates, End Point typicall
 
 The issue presents when the system ceases all video output functions as Xorg crashes. The kernel log contains the following error message:
 
-```nohighlight
+```plain
 2015-04-14T19:59:00.000083+00:00 lg2 kernel: [  719.850677] NVRM: Xid (0000:01:00): 32, Channel ID 00000003 intr 02000000
 ```
 

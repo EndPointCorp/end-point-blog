@@ -2,10 +2,13 @@
 author: Dave Jenkins
 title: Liquid Galaxy for Google.org at SXSW
 github_issue_number: 1106
+featured:
+  visionport: true
+  image_url: /blog/2015/03/liquid-galaxy-for-googleorg-at-sxsw/image-0-big.jpeg
 tags:
 - event
 - google-earth
-- liquid-galaxy
+- visionport
 date: 2015-03-24
 ---
 

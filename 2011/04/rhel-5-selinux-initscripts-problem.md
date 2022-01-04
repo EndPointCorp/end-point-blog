@@ -23,7 +23,7 @@ Tonight I ran into the problem again, this time on a build server where downtime
 
 The error from yum looked like this (the same problem affected the screen package as affected initscripts):
 
-```nohighlight
+```plain
 Downloading Packages:
 screen-4.0.3-4.el5.i386.rpm          | 559 kB      00:00
 Running rpm_check_debug
@@ -45,7 +45,7 @@ Complete!
 
 The way I dealt with this initially was to temporarily disable SELinux enforcing, update the package, then reboot (to also load a kernel update):
 
-```nohighlight
+```plain
 # setenforce 0
 # yum -y upgrade
 # shutdown -r now
@@ -53,21 +53,21 @@ The way I dealt with this initially was to temporarily disable SELinux enforcing
 
 But following up on the specific error message showed:
 
-```nohighlight
+```plain
 # ls -lFaZ /etc/group
 -rw-r--r--  root root system_u:object_r:file_t:s0      /etc/group
 ```
 
 Aha! The SELinux context is wrong. Given that this has happened a couple of different machines, I’m guessing some past upgrade broke the context. What should it be? Let’s check /etc/passwd for reference:
 
-```nohighlight
+```plain
 # ls -lFaZ /etc/passwd
 -rw-r--r--  root root system_u:object_r:etc_t:s0       /etc/passwd
 ```
 
 That’s confirmed the correct context for /etc/group on another working server. To fix:
 
-```nohighlight
+```plain
 # chcon system_u:object_r:etc_t:s0 /etc/group
 ```
 

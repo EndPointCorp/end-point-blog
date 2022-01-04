@@ -5,6 +5,7 @@ github_issue_number: 205
 tags:
 - hosting
 - git
+- compression
 date: 2009-10-06
 ---
 

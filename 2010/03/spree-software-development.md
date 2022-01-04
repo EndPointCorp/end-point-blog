@@ -24,7 +24,7 @@ Git rebase is lovely. Ethan describes some examples of using git rebase [here](/
 
 Git submodules are lovely, also. An overview on git submodules with contributions from Brian Miller and [David Christensen](/blog/authors/david-christensen) can be read [here](/blog/2010/04/git-submodule-workflow). Below is an example of a .gitmodules from a recent project that includes several extensions written by folks in the Spree community:
 
-```nohighlight
+```plain
 [submodule "vendor/extensions/faq"]
         path = vendor/extensions/faq
         url = git://github.com/joshnuss/spree-faq.git
@@ -169,7 +169,7 @@ end
 
 And from the view, the two methods can be called within the following block:
 
-```nohighlight
+```plain
 <% @products.each do |product| -%>
 <%= product.master_price %> vs <%= product.spree_master_price.to_s %>
 <% end -%>
@@ -201,7 +201,7 @@ Before the introduction of hooks, the standard method of overriding or extending
 -  </div>
 - </div>
   <%= render 'shared/google_analytics' %>
-+ <p><a href="http://www.endpoint.com/">End Point</a></p>
++ <p><a href="https://www.endpointdev.com/">End Point</a></p>
 ```
 
 ### Sample data

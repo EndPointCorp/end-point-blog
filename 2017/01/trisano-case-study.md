@@ -5,7 +5,6 @@ github_issue_number: 1284
 tags:
 - case-study
 - clients
-- company
 - hosting
 - rails
 - epitrax

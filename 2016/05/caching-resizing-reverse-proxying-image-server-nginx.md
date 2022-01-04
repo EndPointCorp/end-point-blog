@@ -96,7 +96,7 @@ Note that we may also use [image_filter](https://nginx.org/en/docs/http/ngx_http
 
 You should now be able to fire up your browser and access an URL like:
 
-```nohighlight
+```plain
 http://www.example.com/image/150x150/wikipedia/commons/0/01/Tiger.25.jpg
 ```
 

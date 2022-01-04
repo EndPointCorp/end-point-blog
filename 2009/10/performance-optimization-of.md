@@ -6,6 +6,7 @@ tags:
 - performance
 - interchange
 - seo
+- compression
 date: 2009-10-23
 ---
 
@@ -15,7 +16,7 @@ Some years ago Davor Ocelić redesigned [icdevgroup.org](http://www.icdevgroup.o
 
 There is currently no separate logged-in user area of icdevgroup.org, so Interchange is primarily used here as a templating system and database interface. The automatic read/write of a server-side user session is thus unneeded overhead, as is periodic culling of the old sessions. So I turned off permanent sessions by making all visitors appear to be search bots. Adding to interchange.cfg:
 
-```nohighlight
+```plain
 RobotUA *
 ```
 
@@ -23,7 +24,7 @@ That would not work for most Interchange sites, which need a server-side session
 
 By default, Interchange writes user page requests to a special tracking log as part of its UserTrack facility. It also outputs an X-Track HTTP response header with some information about the visit which can be used by a (to my knowledge) long defunct analytics package. Since we don't need either of those features, we can save a tiny bit of overhead. Adding to catalog.cfg:
 
-```nohighlight
+```plain
 UserTrack No
 ```
 
@@ -37,7 +38,7 @@ First, gzip/deflate compression of textual content should be enabled. That cuts 
 
 We're hosting icdevgroup.org on Debian GNU/Linux with Apache 2.2, which has a reasonable default configuration of mod_deflate that does this, so it's easy to enable:
 
-```nohighlight
+```plain
 a2enmod deflate
 ```
 
@@ -45,7 +46,7 @@ That sets up symbolic links in /etc/apache2/mods-enabled for deflate.load and de
 
 I added two content types for CSS & JavaScript to the default in deflate.conf:
 
-```nohighlight
+```plain
 AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css application/x-javascript
 ```
 
@@ -57,7 +58,7 @@ There is, of course, a tradeoff to this. Once the browser has the file cached, y
 
 So I added to the Apache configuration file for this virtual host:
 
-```nohighlight
+```plain
 ExpiresActive On
 ExpiresByType image/gif  "access plus 1 hour"
 ExpiresByType image/jpeg "access plus 1 hour"

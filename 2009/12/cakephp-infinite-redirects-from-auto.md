@@ -43,7 +43,7 @@ With the debug statement shown above, I was able to compare the normal and infin
 
 #### normal output
 
-```nohighlight
+```plain
 2009-12-09 11:44:55 Debug: d3c2297ddea9b76605cb7a459f45965b:/:     User does not exist!
 2009-12-09 11:44:55 Debug: d3c2297ddea9b76605cb7a459f45965b:/:     Success in auto login!
 2009-12-09 11:44:55 Debug: d3c2297ddea9b76605cb7a459f45965b:/:     redirecting to /sale
@@ -53,7 +53,7 @@ With the debug statement shown above, I was able to compare the normal and infin
 
 #### infinite redirect output
 
-```nohighlight
+```plain
 2009-12-09 11:43:30 Debug: 65cb23e4ca358b7270513cca4a52e9b7:/:      User does not exist!
 2009-12-09 11:43:30 Debug: 65cb23e4ca358b7270513cca4a52e9b7:/:      Success in auto login!
 2009-12-09 11:43:30 Debug: 65cb23e4ca358b7270513cca4a52e9b7:/:      redirecting to /sale

@@ -50,7 +50,7 @@ Step 1 is obviously to install WSL and a Linux distribution that we like. [Micro
 
 1. Enable the “Windows Subsystem for Linux” and “Virtual Machine Platform” features by running these on an elevated PowerShell:
 
-```nohighlight
+```plain
 dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
 dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
 ```
@@ -82,7 +82,7 @@ The extensions that we installed will allow us to use VS Code to work on code fr
 
 Let’s begin by opening a WSL Ubuntu terminal session, which will show something like this:
 
-```nohighlight
+```plain
 Welcome to Ubuntu 20.04 LTS (GNU/Linux 4.19.104-microsoft-standard x86_64)
 
  * Documentation:  https://help.ubuntu.com
@@ -110,7 +110,7 @@ Because we installed the Remote - WSL extension, we can open up this directory i
 
 Now let’s create a new file called `Dockerfile` which will define what our development environment image will look like. For a no-frills PHP environment, mine looks like this:
 
-```nohighlight
+```plain
 # The FROM statement says that our image will be based on the official Ubuntu Docker image from Docker Hub: https://hub.docker.com/_/ubuntu
 FROM ubuntu
 
@@ -177,7 +177,7 @@ root@ec5be7dd0b9b:/workspaces/php-in-docker-demo#
 
 You can for example, run `php -v` in this terminal, and expect something along these lines:
 
-```nohighlight
+```plain
 PHP 7.4.3 (cli) (built: May 26 2020 12:24:22) ( NTS )
 Copyright (c) The PHP Group
 Zend Engine v3.4.0, Copyright (c) Zend Technologies

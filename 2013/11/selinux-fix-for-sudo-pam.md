@@ -16,13 +16,13 @@ As Lele explains, the SELinux dontaudit flag suppresses certain very common SELi
 
 In my somewhat unusual case there is an Apache CGI shell script that calls sudo to invoke another program as a different user without using setuid or suEXEC. Everything works fine with SELinux enforcing, but there are some strange errors in the logs. In /var/log/secure:
 
-```nohighlight
+```plain
 sudo: PAM audit_log_acct_message() failed: Permission denied
 ```
 
 And in the Apache error_log is the apparently strangely unbuffered output:
 
-```nohighlight
+```plain
 [error] sudo
 [error] :
 [error] unable to send audit message
@@ -33,7 +33,7 @@ And in the Apache error_log is the apparently strangely unbuffered output:
 
 To show the dontaudit AVC denials, I ran semodule -DB as Lele explained, and then I saw in /var/log/audit/audit.log:
 
-```nohighlight
+```plain
 type=AVC msg=audit(1384959223.974:4192): avc:  denied  { write } for  pid=14836 comm="sudo" scontext=system_u:system_r:httpd_sys_script_t:s0 tcontext=system_u:system_r:httpd_sys_script_t:s0 tclass=netlink_audit_socket
 type=AVC msg=audit(1384959223.975:4194): avc:  denied  { read } for  pid=14836 comm="sudo" scontext=system_u:system_r:httpd_sys_script_t:s0 tcontext=system_u:system_r:httpd_sys_script_t:s0 tclass=netlink_audit_socket
 type=AVC msg=audit(1384959223.999:4196): avc:  denied  { write } for  pid=14836 comm="sudo" scontext=system_u:system_r:httpd_sys_script_t:s0 tcontext=system_u:system_r:httpd_sys_script_t:s0 tclass=key

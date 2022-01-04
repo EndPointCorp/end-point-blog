@@ -21,11 +21,11 @@ How you get to the correct set of files (which means finding the proper Git comm
 
 This is the easiest one to solve. If all you need is to see how the repository looked around a certain point in time, you can use git checkout with git-rev-parse to get it. I covered this in detail in [an earlier post](/blog/2014/05/git-checkout-at-specific-date), but the best answer is below. For all of these examples, I am using the public Bucardo repository at `git clone git://bucardo.org/bucardo.git`
 
-```
+```plain
 $ DATE='Sep 3 2014'
 $ git checkout `git rev-list -1 --before="$DATE" master`
 Note: checking out '79ad22cfb7d1ea950f4ffa2860f63bd4d0f31692'.
-<small>
+
 You are in 'detached HEAD' state. You can look around, make experimental
 changes and commit them, and you can discard any commits you make in this
 state without impacting any branches by performing another checkout.
@@ -40,7 +40,7 @@ HEAD is now at 79ad22c... Need to update validate_sync with new columns</small>
 
 Or if you prefer xargs over backticks:
 
-```
+```bash
 $ DATE='Sep 3 2014'
 $ git rev-list -1 --before="$DATE" master | xargs -Iz git checkout z
 ```
@@ -49,7 +49,7 @@ What about the case in which there were multiple important commits on the given 
 
 Once you have found the commit you want, it’s a good idea to tag it right away. This applies to any of the three classes of clues in this article. I usually add a lightweight Git tag immediately after doing the checkout. Then you can easily come back to this commit simply by using the name of the tag. Give it something memorable and easy, such as the bug number being reported. For example:
 
-```
+```bash
 $ git checkout `git rev-list -1 --before="$DATE" master`
 ## Give a lightweight tag to the current commit
 $ git tag bug_23142
@@ -69,7 +69,7 @@ Sometimes you can find the commit you need by looking for a specific version of 
 As an example, a user in the Bucardo project has encountered a problem when running HEAD, but all they know is that they checked it out of sometime in the last four months. They also run “md5sum Bucardo.pm” and report that the MD5 of the file Bucardo.pm is 
 767571a828199b6720f6be7ac543036e. Here’s the easiest way to find what version of the repository they are using:
 
-```
+```plain
 $ SUM=767571a828199b6720f6be7ac543036e
 $ git log --format=%H \
   | xargs -Iz sh -c \
@@ -82,7 +82,7 @@ commit b462c256e62e7438878d5dc62155f2504353be7f
 Author: Greg Sabino Mullane <greg@endpoint.com>
 Date:   Fri Feb 24 08:34:50 2012 -0500
 
-    Fix typo regarding piddir</greg@endpoint.com>
+    Fix typo regarding piddir
 ```
 
 I’m using variables in these examples both to make copy and paste easier, and because it’s always a good idea to save away constant but hard-to-remember bits of information. The first part of the pipeline grabs a list of all commit IDs: **git log --format=%H**.
@@ -97,7 +97,7 @@ You may wonder if a sha1sum would be better, as Git uses those internally. Sadly
 
 Another piece of information the user can give you very easily is the size of a file. For example, they may tell you that their copy of Bucardo.pm weighs in at 167092 bytes. As this file changes often, it can be a unique-enough marker to help you determine when they checkout out the repository. Finding the matching size is a matter of walking backwards through each commit and checking the file size of every Bucardo.pm as it existed:
 
-```
+```plain
 $ SIZE=167092
 $ git rev-list --all \
   | while read commit
@@ -117,7 +117,7 @@ The git ls-tree command generates a list of all blobs (files) for a given commit
 This is very similar to the size method above, except that we are given the file itself, not the size, so we need to generate some metadata about it. You could run a checksum or a filesize and use one of the recipes above, or you could do it the Git way and find the SHA1 checksum that Git uses for this file (aka a blob) by using 
 [git hash-object](https://www.kernel.org/pub/software/scm/git/docs/git-hash-object.html). Once you find that, you can use git ls-tree as before, as the blob hash is listed next to the filename. Thus:
 
-```
+```plain
 $ HASH=`git hash-object ./bucardo.clue`
 $ echo $HASH
 639b247aab027b79bda788182c8b6785ed319662
@@ -136,7 +136,7 @@ cd1d776307204cb77a731aa1b15c3c43a275c70e
 
 Sometimes the only clue you are given is an error message, or some other snippet that you can trace back to one or more commits. For example, someone once mailed the list to ask about this error that they received:
 
-```
+```plain
 DBI connect('dbname=bucardo;host=localhost;port=5432',
   'bucardo',...) failed: fe_sendauth: no password supplied at 
   /usr/local/bin/bucardo line 8627.
@@ -144,7 +144,7 @@ DBI connect('dbname=bucardo;host=localhost;port=5432',
 
 A quick glance at line 8627 of the file “bucardo” in HEAD showed only a closing brace, so it must be an earlier version of the file. What was needed was to walk backwards in time and check that line for every commit until we find one that could have triggered the error. Here is one way to do that:
 
-```
+```plain
 $ git log --format=%h \
   | xargs -n 1 -I sh -c \
   "echo -n {}; git show {}:bucardo | head -8627 | tail -1" \

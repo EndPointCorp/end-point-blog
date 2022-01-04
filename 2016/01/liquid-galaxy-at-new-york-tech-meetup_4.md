@@ -4,7 +4,7 @@ title: Liquid Galaxy at New York Tech Meetup
 github_issue_number: 1188
 tags:
 - event
-- liquid-galaxy
+- visionport
 date: 2016-01-04
 ---
 

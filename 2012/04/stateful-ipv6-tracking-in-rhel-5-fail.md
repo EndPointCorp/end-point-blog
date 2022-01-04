@@ -14,7 +14,7 @@ Are you a RHEL 5 user? Or CentOS or Scientific Linux, for that matter? Have you 
 
 The short version: The 2.6.18 kernel RHEL 5 ships doesn’t have a working conntrack module for IPv6. The conntrack module is what ip6tables uses for stateful packet tracking. You may already be familiar with it from the IPv4 version of iptables, looking something like this in your firewall config:
 
-```nohighlight
+```plain
 -m state --state ESTABLISHED,RELATED -j ACCEPT
 ```
 
@@ -24,7 +24,7 @@ Incoming connections will of course work fine, as those don’t rely on the stat
 
 See this [Red Hat Bugzilla bug](https://bugzilla.redhat.com/show_bug.cgi?id=232933) for a few details, but essentially this version of the kernel sets all packets to the INVALID state. The SYN packet goes out to the remote server, it just doesn’t match the return SYN/ACK reply. So instead of doing stateful tracking, we have to resort to stateless. We’ll lose that fancy connection tracking which can be useful for protocols like FTP that make multiple connections. Rather, in allowing in anything that’s not starting a new connection, this should do the job:
 
-```nohighlight
+```plain
 -A INPUT -p tcp -m tcp ! --syn -j ACCEPT
 ```
 

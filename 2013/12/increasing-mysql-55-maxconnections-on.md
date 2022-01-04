@@ -15,7 +15,7 @@ Busy database-backed websites often hit scalability limits in the database first
 
 When using MySQL 5.5 from Oracle’s RPMs through cPanel (MySQL55-server-5.5.32-1.cp1136) on RHEL 5.10 x86_64, there is an interesting problem if you try to increase the max_connections setting beyond 214 in /etc/my.cnf. It will silently be ignored, and the limit remains 214:
 
-```nohighlight
+```plain
 mysql> show variables like 'max_connections';
 +-----------------+-------+
 | Variable_name   | Value |
@@ -29,7 +29,7 @@ The problem is that the maximum number of open files allowed is too small, by de
 
 There are plenty of online guides that explain how to handle this, including increasing the kernel fs.file-max setting, which may be necessary by editing /etc/sysctl.conf, in this example to double the default:
 
-```nohighlight
+```plain
 fs.file-max = 2459688
 ```
 
@@ -37,7 +37,7 @@ Then run sysctl -p to make the change take immediate effect. (It’ll remain aft
 
 There are also many guides that say you need to change /etc/security/limits.conf along these lines:
 
-```nohighlight
+```plain
 mysql           soft    nofile         4096
 mysql           hard    nofile         4096
 ```
@@ -48,7 +48,7 @@ With standard Red Hat mysql-server (5.1) package that provides /etc/init.d/mysql
 
 But the ulimit -n setting hacked into the init script or put into /etc/sysconfig/mysqld isn’t really needed after all, because you can simply set open_files_limit in /etc/my.cnf:
 
-```nohighlight
+```plain
 [mysqld]
 open_files_limit = 8192
 max_connections = 1000
@@ -59,7 +59,7 @@ max_connections = 1000
 
 After service mysql restart you can verify the new open file limit in the running process, like this:
 
-```nohighlight
+```plain
 # cat /var/lib/mysql/*.pid
 30697
 # ps auxww | grep 30697
@@ -85,7 +85,7 @@ Max realtime priority     0                    0
 
 And the running MySQL server will reveal the desired max_connections setting stuck this time:
 
-```nohighlight
+```plain
 mysql> show variables like 'max_connections';
 +-----------------+-------+
 | Variable_name   | Value |
@@ -97,7 +97,7 @@ mysql> show variables like 'max_connections';
 
 The relevant code in /usr/bin/mysqld_safe is here:
 
-```nohighlight
+```plain
 if test -w / -o "$USER" = "root"
 then
   # ... [snip] ...

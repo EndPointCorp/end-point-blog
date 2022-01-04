@@ -60,7 +60,7 @@ sub redirect_old_links {
 
 We normally create these as two different files and put them into our own directory structure under the Interchange directory called custom/GlobalSub and then add this, include custom/GlobalSub/*.sub, to the interchange.cfg file to make sure they get loaded when Interchange restarts. After those files are loaded, you’ll need to tell the catalog that you want it to Autoload this subroutine and to do that you use the Autoload directive in your catalog.cfg file like this:
 
-```nohighlight
+```plain
 Autoload redirect_old_links
 ```
 

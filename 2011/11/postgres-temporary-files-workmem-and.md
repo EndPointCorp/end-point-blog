@@ -20,7 +20,7 @@ This is usually an unwanted event: not only is going to disk much slower than ke
 
 How do you tell when you work_mem needs adjusting, or more to the point, when Postgres is writing files to disk? The key is the setting in postgresql.conf called [log_temp_files](https://www.postgresql.org/docs/current/static/runtime-config-logging.html#GUC-LOG-TEMP-FILES). By default it is set to **-1**, which does no logging at all. Not very useful. A better setting is **0**, which is my preferred setting: it logs *all* temporary files that are created. Setting **log_temp_files** to a positive number will only log entries that have an on-disk size greater than the given number (in kilobytes). Entries about temporary files used by Postgres will appear like this in your log file:
 
-```nohighlight
+```plain
 2011-01-12 16:33:34.175 EST LOG:  temporary file: path "base/pgsql_tmp/pgsql_tmp16501.0", size 130220032
 ```
 
@@ -28,7 +28,7 @@ The only important part is the size, in bytes. In the example above, the size is
 
 To enter this mode, just name your config file with “tempfile” in its name, and have it find the lines containing the temporary file information. It’s also recommended you make use of the tempfile_limit parameter, which limits the results to the “top X” ones, as the report can get very verbose otherwise. An example config file and an example invocation via cron:
 
-```nohighlight
+```plain
 $ cat tail_n_mail.tempfile.myserver.txt
 
 ## Config file for the tail_n_mail program
@@ -56,7 +56,7 @@ For the client I wrote this for, we run this once a day and it mails us a nice r
 
 Here is a slightly edited version of an actual tempfile report email:
 
-```nohighlight
+```plain
 Date: Mon Nov  7 06:39:57 2011 EST
 Host: myserver.example.com
 Total matches: 1342

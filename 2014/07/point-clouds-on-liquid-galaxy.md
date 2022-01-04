@@ -2,9 +2,12 @@
 author: Josh Tolley
 title: Point Clouds on the Liquid Galaxy
 github_issue_number: 1019
+featured:
+  visionport: true
+  image_url: /blog/2014/07/point-clouds-on-liquid-galaxy/image-0.jpeg
 tags:
 - graphics
-- liquid-galaxy
+- visionport
 date: 2014-07-31
 ---
 

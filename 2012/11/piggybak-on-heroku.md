@@ -32,7 +32,7 @@ That should be it. From there, you can manipulate and modify the demo to experim
 
 A full set of commands for this tutorial includes:
 
-```nohighlight
+```plain
 # Clone and set up the demo app
 git clone git://github.com/piggybak/demo.git
 bundle install

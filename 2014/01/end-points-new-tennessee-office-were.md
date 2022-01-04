@@ -1,10 +1,10 @@
 ---
 author: Benjamin Goldstein
-title: End Point’s New Tennessee Office — We’re Hiring!
+title: End Point’s New Tennessee Office
 github_issue_number: 913
 tags:
-- jobs
-- liquid-galaxy
+- jobs-closed
+- visionport
 - company
 date: 2014-01-14
 ---
@@ -19,6 +19,6 @@ However, over the last four years our work with Liquid Galaxy systems has presen
 
 <div class="separator" style="clear: both; text-align: center;"><a href="/blog/2014/01/end-points-new-tennessee-office-were/image-1-big.jpeg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="/blog/2014/01/end-points-new-tennessee-office-were/image-1.jpeg"/></a></div>
 
-We moved into our Tennessee facility in November and have been whipping it into shape since then. Our Liquid Galaxy team remains distributed, with a good number of staffers in our NYC office, plus elsewhere in the US and internationally, but we now have a core of talented personnel in our new office too: [Matt Vollrath](/team/matt-vollrath), [Will Plaut](/team/will-plaut), and [Neil Elliott](/team/neil-elliott). And, we will be adding to our staff in the new office as well. At last we have lots of space! If you are interested in joining us in our Bluff City office developing and supporting Liquid Galaxy systems and have excellent Linux or Geospatial Information Systems skills then let us know through our [contact form](/contact).
+We moved into our Tennessee facility in November and have been whipping it into shape since then. Our Liquid Galaxy team remains distributed, with a good number of staffers in our NYC office, plus elsewhere in the US and internationally, but we now have a core of talented personnel in our new office too: [Matt Vollrath](/team/matt-vollrath/), [Will Plaut](/team/will-plaut/), and [Neil Elliott](/team/neil-elliott/). And, we will be adding to our staff in the new office as well. At last we have lots of space! If you are interested in joining us in our Bluff City office developing and supporting Liquid Galaxy systems and have excellent Linux or Geospatial Information Systems skills then let us know through our [contact form](/contact/).
 
 <div class="separator" style="clear: both; text-align: center;"><a href="/blog/2014/01/end-points-new-tennessee-office-were/image-2-big.jpeg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="/blog/2014/01/end-points-new-tennessee-office-were/image-2.jpeg"/></a></div>

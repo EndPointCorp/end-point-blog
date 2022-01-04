@@ -1,13 +1,15 @@
 ---
 author: Dave Jenkins
 title: Downtown San Diego Liquid Galaxy
-featured: true
-description: New Liquid Galaxy system at Downtown San Diego Partnership lets public
-  engage with immersive data models
-background_url: /blog/2020/07/downtown-san-diego-liquid-galaxy/san_diego_lg-1.jpg
+featured:
+  endpoint: true
+  visionport: true
+  image_url: /blog/2020/07/downtown-san-diego-liquid-galaxy/san_diego_lg-1.jpg
+description: New Liquid Galaxy system at Downtown San Diego Partnership lets public engage with immersive data models
 github_issue_number: 1653
 tags:
-- liquid-galaxy
+- visionport
+- clients
 date: 2020-07-27
 ---
 

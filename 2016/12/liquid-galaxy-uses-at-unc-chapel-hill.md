@@ -2,18 +2,18 @@
 author: Ben Witten
 title: Liquid Galaxy Uses at UNC Chapel Hill
 github_issue_number: 1280
+featured:
+  visionport: true
+  image_url: /blog/2016/12/liquid-galaxy-uses-at-unc-chapel-hill/image-0-big.jpeg
 tags:
-- liquid-galaxy
+- visionport
+- clients
 date: 2016-12-29
 ---
 
-
-
-An article was posted on [The Tech Broadcast](http://www.thetechbroadcast.com/2016/12/23/constructing-student-learning-using-makerspaces-and-liquid-galaxy/) last week that featured the UNC Chapel Hill Center for Faculty Excellence’s Faculty Showcase. The faculty showcase included a fantastic presentation featuring the many ways students and faculty use their [Liquid Galaxy](https://liquidgalaxy.endpoint.com/), and discussed other opportunities for using the system in the future. 
+An article was posted on [The Tech Broadcast](http://www.thetechbroadcast.com/2016/12/23/constructing-student-learning-using-makerspaces-and-liquid-galaxy/) last week that featured the UNC Chapel Hill Center for Faculty Excellence’s Faculty Showcase. The faculty showcase included a fantastic presentation featuring the many ways students and faculty use their [Liquid Galaxy](https://www.visionport.com/), and discussed other opportunities for using the system in the future. 
 
 <a href="/blog/2016/12/liquid-galaxy-uses-at-unc-chapel-hill/image-0-big.jpeg" imageanchor="1"><img border="0" height="436" src="/blog/2016/12/liquid-galaxy-uses-at-unc-chapel-hill/image-0.jpeg" width="640"/></a>
-
- 
 
 Exciting examples cited of great classroom successes making use of the Liquid Galaxy include:
 
@@ -50,7 +50,3 @@ Faculty members expressed interest and excitement when learning more about the L
 We at End Point were very excited to learn more about the many ways that Liquid Galaxy is being successfully used at UNC as a tool for research, for fun, and to bring together students and faculty alike. We look forward to seeing how UNC, among the many other research libraries that use Liquid Galaxy, will implement the system in courses and on campus in the future.       
 
 <iframe allowfullscreen="" frameborder="0" height="337" src="https://www.youtube.com/embed/C27ZNPavMgo" width="600"></iframe>
-
- 
-
-

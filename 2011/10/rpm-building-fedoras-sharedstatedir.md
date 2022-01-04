@@ -9,7 +9,7 @@ tags:
 date: 2011-10-25
 ---
 
-When Red Hat Enterprise Linux does not offer packages that we need, [EPEL](https://fedoraproject.org/wiki/EPEL) (Extra Packages for Enterprise Linux) often has what we want, kept compatible with RHEL. When EPEL also doesn’t have a package, or we need a newer release than is offered, we rebuild packages from [Fedora](https://getfedora.org/), which has consistently high-quality packages even in its “rawhide” development phase. We then distribute our packages in several compatibility-oriented Yum repositories at [packages.endpoint.com](https://packages.endpoint.com/).
+When Red Hat Enterprise Linux does not offer packages that we need, [EPEL](https://fedoraproject.org/wiki/EPEL) (Extra Packages for Enterprise Linux) often has what we want, kept compatible with RHEL. When EPEL also doesn’t have a package, or we need a newer release than is offered, we rebuild packages from [Fedora](https://getfedora.org/), which has consistently high-quality packages even in its “rawhide” development phase. We then distribute our packages in several compatibility-oriented Yum repositories at [packages.endpointdev.com](https://packages.endpointdev.com/).
 
 Of course some things in the latest Fedora are not compatible with RHEL. In rebuilding the [logcheck](http://logcheck.org/) package (needed as a dependency for another package), I found that Fedora RPM spec files have begun using the _sharedstatedir macro in /usr/lib/rpm/macros, which RHEL has never used before.
 
@@ -17,10 +17,10 @@ On RHEL that macro has been set to /usr/com, a strange nonexistent path that app
 
 The easiest and most compatible way to make the change without munging the system- or user-wide RPM macros is to add this definition to the top of the spec file where it’s needed:
 
-```nohighlight
+```plain
 %define _sharedstatedir /var/lib
 ```
 
 And then the RPM build is happy.
 
-In related news, alongside the new logcheck package, there are also new [End Point RHEL 5 x86_64 packages](https://packages.endpoint.com/rhel/5/os/x86_64/) for the brand-new [Git](https://git-scm.com/) 1.7.7.1 and [pbzip2](https://linux.die.net/man/1/pbzip2) 1.1.5, the multi-CPU core parallel compressor that has had several bugfix releases this year.
+In related news, alongside the new logcheck package, there are also new [End Point RHEL 5 x86_64 packages](https://packages.endpointdev.com/rhel/5/os/x86_64/) for the brand-new [Git](https://git-scm.com/) 1.7.7.1 and [pbzip2](https://linux.die.net/man/1/pbzip2) 1.1.5, the multi-CPU core parallel compressor that has had several bugfix releases this year.

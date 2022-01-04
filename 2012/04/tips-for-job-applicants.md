@@ -7,7 +7,7 @@ tags:
 date: 2012-04-12
 ---
 
-Consider this a public service announcement. This is a list of assorted suggestions to job applicants I’ve collected over the years based on my own observations and conversations I’ve had with others who were hiring.
+This a public service announcement for job applicants, a list of assorted suggestions I’ve collected over the years based on my own observations and conversations I’ve had with others who were hiring.
 
 ### General
 
@@ -15,11 +15,15 @@ Consider this a public service announcement. This is a list of assorted suggesti
 
 - This is old advice, but important as always: Don’t claim to have abilities or experience that you don’t! Be honest about your strengths and if directly asked, admit what you lack. We will find out anyway, and it’s pretty embarrassing to all of us to have to see you’re dishonest and clueless about something you claimed as a skill.
 
-- If you’re applying for a programming job, be prepared to show recent code samples. Saying that all your work is under NDA with employers may be true, but doesn’t help me see what your code is like. If you can’t show any code from work, you’ll need to have code from side projects or open source projects to show, most conveniently on GitHub. How else is anyone supposed to get familiar with your work?
+### Code samples and technical evaluation
+
+- If you’re applying for a programming job, be prepared to show recent code samples. Saying that all your work is under NDA with employers may be true, but doesn’t help us see what your code is like. If you can’t show any code from work, assemble code from side projects or open source projects to show, most conveniently on GitHub or GitLab.
+
+- Software developers may also be asked to do a short take-home work assignment to show how you approach work chosen by the employer, during a limited period of time.
 
 ### Do some research
 
-- Take a few minutes to become at least minimally familiar with our company. If conversation reveals that you have not even reviewed the major sections of their website, it shows you’re not really interested and probably just spammed your application as widely as possible.
+- Take a few minutes to become at least minimally familiar with the company. If conversation reveals that you have not even reviewed the major sections of their website, it shows you’re not really interested and probably just spammed your application as widely as possible.
 
 - Read the complete job posting and pay attention to the details. You should already know whether it’s a contract or salaried position, full- or part-time, in office or telecommuting, etc. if the job description made that clear.
 
@@ -27,28 +31,28 @@ Consider this a public service announcement. This is a list of assorted suggesti
 
 ### Watch your email
 
-- Sending me an empty email with only a resume attached is really lame.
+- Sending an empty email with only a resume attached does not show real interest in the company or the job.
 
-- When responding about a job by email, write a cover letter directly in the email body, specific to our company and the job.
+- When responding about a job by email, write a cover letter directly in the email body, specific to the company and the job.
 
-- Why would you use anything other than your first & last name in your email From: header when writing about a job? Cute nicknames look silly in this context and your first or last name only will not be easily searchable. The From text is often the first thing someone sees in an inbox, so make it presentable.
+- Use your usual given & last names in your email From: header when writing about a job. Cute nicknames look silly in this context and a partial name or none at all is not easily searchable. The From text is often the first thing someone sees in an inbox, so make it presentable.
 
-- Send your resume in standard PDF format. Other formats are far more likely to have rendering oddities on computers other than your own. A link to your online resume is ok, but if that’s all you provide, make sure your website stays up! Yes, I’ve really had candidates provide only a link to an online resume and the website was down or displaying errors when I went to look at it.
+- Send your resume as a PDF. Other formats are far more likely to have rendering oddities on computers other than your own. A link to your online resume is ok, but if that’s all you provide, make sure your website stays up! Yes, I’ve really had candidates provide only a link to an online resume and the website was down or displaying errors when I went to look at it.
 
-- While you’re looking for a job, check your email spam folder regularly to look for false positives from potential employers. It’s your loss if you overlook email that wrongly goes there.
+- While you’re looking for a job, check your email spam folder regularly to look for false positives from potential employers. You don’t want to accidentally ghost a potential employer who is interested in you.
 
 ### Interviewing
 
-- When it’s time to schedule an interview, don’t share irrelevant details about how busy you are, and what you’re doing when that makes scheduling difficult. Just make time for the interview at one of the times when the interviewer can meet.
+- When it’s time to schedule an interview, don’t share irrelevant details about how busy you are, and what you’re doing when that makes scheduling difficult. Just do your best to make time for the interview at one of the times when the interviewer can meet.
 
-- Be on time for scheduled interviews, whether on the phone or in person. That means paying attention to travel time, and time zone differences. And tracking your appointments on some kind of calendar.
+- Be on time for scheduled interviews, whether on the phone or in person. Pay attention to travel time and time zone differences. Track your appointments on a calendar and set up appointment reminders.
 
-- During a phone interview, make sure you’re in a fairly quiet place and have a reliable phone connection. Cell phones often have poor audio quality, but if you must use one, use it somewhere that you know has good reception and stay put.
+- Be prepared to have a video chat on Google Meet, Zoom, Skype, or similar. Talk from a place with a simple background or use your video chat application's virtual background or background blurring.
 
-- Give an interview your undivided attention. You shouldn’t be answering your phone, reading email or text messages, or spacing out and saying “sorry, can you repeat that?”
+- During a remote interview, make sure you’re in a fairly quiet place and have a reliable phone or Internet connection. Mobile phones often have poor audio quality, but if you must use one, use it somewhere that you know has good reception and stay in one place.
 
-- Be prepared to have a video chat on a Google+ Hangout, Skype, or similar.
+- Give an interview your undivided attention. Don't answer your phone, read email or text messages, or space out and say “Sorry, can you repeat that?”
 
-This wasn’t meant to be an exhaustive list, but will help the attentive job-seeker. Much of it applies to all of us in normal business communication with our co-workers and others as well.
+This isn’t an exhaustive list, but will help the attentive job-seeker. Much of it applies to all of us in normal business communication with our co-workers and others as well.
 
 On a distantly related note, I recently came across this list of tips called [How to Get the Best Customer Service (Anywhere)](https://web.archive.org/web/20120509130857/http://blog.softlayer.com/2012/how-to-get-the-best-customer-service-anywhere/). It appeared on SoftLayer’s blog and has a similar overall theme of approaching others respectfully, and communicating effectively.

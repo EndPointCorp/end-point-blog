@@ -45,7 +45,7 @@ Note that many of the resource-limiting changes I made above to Apache and Passe
 
 I wrote about these topics a year ago in a blog post about [Interchange ecommerce performance optimization](/blog/2009/10/performance-optimization-of). I’ve since expanded the list of MIME types I typically enable static asset caching for in Apache. Here’s a sample configuration snippet to put in the <VirtualHost> container in httpd.conf:
 
-```nohighlight
+```plain
     ExpiresActive On
     ExpiresByType image/gif   "access plus 2 hours"
     ExpiresByType image/jpeg  "access plus 2 hours"

@@ -15,7 +15,7 @@ I recently [wrote about upgrading a simple Rails app](/blog/2011/09/rails-31-upg
 
 Prior to the upgrade, my assets were organized in the following structure:
 
-```nohighlight
+```plain
 RAILS_ROOT/
   public/
     javascripts/
@@ -35,7 +35,7 @@ As you can see, the JavaScript files were already split into page specific code 
 
 In Rails 3.1, the generators encourage you to build out individual JavaScript and CSS files for each controller by creating the files upon each controller instantiation. While in development, those files are served individually, but production serves compiled files application.js and application.css by default (Note: you have the option of controlling the compiled file name and you have the option of including more than one compiled file). With this organization structure in mind, I reorganized my JavaScript and stylesheet assets to the following structure:
 
-```nohighlight
+```plain
 RAILS_ROOT/
   app/
     assets/
@@ -60,7 +60,7 @@ RAILS_ROOT/
 
 I also moved external JavaScript code to the vendor/assets directory, which can be explicitly included in application.js, to add separation between application specific JavaScript and external libraries. Note that Rails will look in app/assets, vendor/assets, and lib/assets for assets by default, and additional locations may be added by updating the **Rails.application.config.assets.paths** variable.
 
-```nohighlight
+```plain
 RAILS_ROOT/
   vendor/
     assets/
@@ -72,7 +72,7 @@ RAILS_ROOT/
 
 To enforce loading order of JavaScript files, application.js contains the following. Note that [jQuery-ujs](https://github.com/rails/jquery-ujs) is not included because the application does not have any AJAX form submissions.
 
-```nohighlight
+```plain
 //= require jquery
 //= require excanvas.min
 //= require jquery.flot

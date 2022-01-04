@@ -3,8 +3,7 @@ author: Jon Jensen
 title: We’re hiring Rails developers!
 github_issue_number: 847
 tags:
-- company
-- jobs
+- jobs-closed
 - rails
 date: 2013-08-22
 ---
@@ -49,4 +48,6 @@ What is in it for you?
 - 401(k) retirement savings plan (for U.S. employees)
 - Ability to move without being tied to your job location
 
-You may apply by emailing us an introduction to [jobs@endpoint.com](mailto:jobs@endpoint.com). Include a resume, your GitHub or LinkedIn URLs, and anything else that will help us get to know you. We look forward to hearing from you! Full-time job seekers only, please. No agencies or subcontractors.
+~~You may apply by emailing us an introduction to jobs&#x40;endpoint.com.~~
+**(This job has been filled.)**
+Include a resume, your GitHub or LinkedIn URLs, and anything else that will help us get to know you. We look forward to hearing from you! Full-time job seekers only, please. No agencies or subcontractors.

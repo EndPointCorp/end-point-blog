@@ -2,8 +2,11 @@
 author: Marco Manchego
 title: Liquid Galaxy at MundoGeo in Brazil
 github_issue_number: 985
+featured:
+  visionport: true
+  image_url: /blog/2014/05/liquid-galaxy-at-mundogeo-in-brazil/image-0.jpeg
 tags:
-- liquid-galaxy
+- visionport
 date: 2014-05-22
 ---
 

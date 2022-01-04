@@ -3,14 +3,11 @@ author: Jon Jensen
 title: 'Job opening: Fulfillment Manager'
 github_issue_number: 1276
 tags:
-- company
-- jobs
+- jobs-closed
 date: 2016-12-13
 ---
 
-**Update: This position has been filled! Thanks to everyone who expressed interest.**
-
-This role is based in our Bluff City, Tennessee office, and is responsible for everything about fulfillment of our Liquid Galaxy and other custom-made hardware products, from birth to installation. See [liquidgalaxy.endpoint.com](https://liquidgalaxy.endpoint.com/) to learn more about Liquid Galaxy.
+This role is based in our Bluff City, Tennessee office, and is responsible for everything about fulfillment of our Liquid Galaxy and other custom-made hardware products, from birth to installation. See [visionport.com](https://www.visionport.com/) to learn more about Liquid Galaxy.
 
 ### What is in it for you?
 
@@ -57,4 +54,6 @@ End Point is a 21-year-old Internet consulting company with 50 full-time employe
 
 We are an equal opportunity employer and value diversity at our company. We do not discriminate on the basis of gender, race, religion, color, national origin, sexual orientation, age, marital status, veteran status, or disability status.
 
-Please email us an introduction to [jobs@endpoint.com](mailto:jobs@endpoint.com) to apply. Include your resume and anything else that would help us get to know you. We look forward to hearing from you! Full-time employment seekers only, please. No agencies or subcontractors.
+~~Please email us an introduction to jobs&#x40;endpoint.com to apply.~~
+**(This job has been filled.)**
+Include your resume and anything else that would help us get to know you. We look forward to hearing from you! Full-time employment seekers only, please. No agencies or subcontractors.

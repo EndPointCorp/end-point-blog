@@ -3,7 +3,7 @@ author: Benjamin Goldstein
 title: Liquid Galaxy Project in GSoC 2011!
 github_issue_number: 431
 tags:
-- liquid-galaxy
+- visionport
 date: 2011-03-18
 ---
 

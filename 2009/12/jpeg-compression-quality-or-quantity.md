@@ -6,6 +6,7 @@ tags:
 - browsers
 - graphics
 - optimization
+- compression
 date: 2009-12-24
 ---
 
@@ -36,8 +37,6 @@ Compare the subtle (or otherwise) differences in the following images (mouseover
 </tr></tbody></table>
 
 Mouseover each image for the file size and ImageMagick compression setting. Additional comparisons are below. Each image can be opened in a separate browser tab for easy A/B comparison. I think many would find the setting of 8 to have too many artifacts, even though it’s 10 times smaller than image compressed at a setting of 95. Some would find the setting of 50 to be an acceptable tradeoff between quality and size, since it sends 3.4 times fewer bytes.
-
-
 
 Here is the code I wrote to make the comparison (shell script is great for this stuff):
 

@@ -2,9 +2,12 @@
 author: Dave Jenkins
 title: Liquid Galaxy at UNESCO in Paris
 github_issue_number: 1177
+featured:
+  visionport: true
+  image_url: /blog/2015/11/liquid-galaxy-at-unesco-in-paris/image-0-big.jpeg
 tags:
 - event
-- liquid-galaxy
+- visionport
 - ros
 date: 2015-11-09
 ---

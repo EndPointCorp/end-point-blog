@@ -32,7 +32,7 @@ CREATE RULE users_disable_update AS ON UPDATE TO replica.users DO INSTEAD NOTHIN
 
 Plus any permission adjustments the app user might need. On the master server this schema and view are pretty much ignored, as the application user just uses the default search path. But on the replica, we adjust the default search path in postgresql.conf so that it applies to just that server:
 
-```nohighlight
+```plain
 search_path = '"$user",replica,public'
 ```
 ```sql

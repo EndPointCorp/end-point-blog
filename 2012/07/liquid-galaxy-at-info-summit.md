@@ -3,7 +3,7 @@ author: Josh Ausborne
 title: Liquid Galaxy at the INFO Summit
 github_issue_number: 670
 tags:
-- liquid-galaxy
+- visionport
 date: 2012-07-18
 ---
 

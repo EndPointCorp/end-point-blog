@@ -236,7 +236,7 @@ Add a `text-indent: -5rem` to the error messages to push the text out of its con
 
 Let’s run `bundle exec rspec`. We will get this output:
 
-```nohighlight
+```plain
 > bundle exec rspec
 Capybara starting Puma...
 * Version 5.3.2 , codename: Sweetnighter

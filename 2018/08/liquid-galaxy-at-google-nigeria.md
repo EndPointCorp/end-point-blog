@@ -2,8 +2,11 @@
 author: Brian Zenone
 title: Liquid Galaxy at Google for Nigeria
 github_issue_number: 1447
+featured:
+  visionport: true
+  image_url: /blog/2018/08/liquid-galaxy-at-google-nigeria/image-0.jpg
 tags:
-- liquid-galaxy
+- visionport
 - event
 date: 2018-08-06
 ---

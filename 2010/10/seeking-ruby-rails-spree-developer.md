@@ -3,8 +3,7 @@ author: Jon Jensen
 title: Seeking a Ruby, Rails, Spree developer
 github_issue_number: 362
 tags:
-- company
-- jobs
+- jobs-closed
 - ruby
 - rails
 - spree
@@ -19,4 +18,5 @@ End Point is a 15-year-old web consulting company based in New York City, with 2
 
 Experience with mobile and location-based technologies is a plus.
 
-Please email [jobs@endpoint.com](mailto:jobs@endpoint.com) to apply.
+~~Please email jobs&#x40;endpoint.com to apply.~~
+**(This job has been filled.)**

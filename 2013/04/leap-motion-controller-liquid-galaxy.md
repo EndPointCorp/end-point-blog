@@ -4,7 +4,7 @@ title: Leap Motion Controller + Liquid Galaxy
 github_issue_number: 789
 tags:
 - google-earth
-- liquid-galaxy
+- visionport
 - hardware
 date: 2013-04-23
 ---

@@ -46,7 +46,7 @@ GROUP BY o.id
 
 The result, taken from a sample data set I created for demonstration purposes, is this:
 
-```nohighlight
+```plain
  id |         created_at         | user_id |        order_items         
 ----+----------------------------+---------+----------------------------
   4 | 2013-06-04 17:56:22.857817 |       3 | {"(2,3)"}
@@ -92,7 +92,7 @@ WINDOW user_order_partition AS (PARTITION BY user_id, order_items ORDER BY creat
 
 This gives these results:
 
-```nohighlight
+```plain
  id | user_id |         created_at         | first_id |       first_created        
 ----+---------+----------------------------+----------+----------------------------
   1 |       1 | 2013-06-04 17:56:16.017938 |        1 | 2013-06-04 17:56:16.017938
@@ -130,7 +130,7 @@ WITH order_items_array AS (
 
 ...which returns this one result:
 
-```nohighlight
+```plain
  ?column?
 ----------------------------------
  DELETE FROM orders WHERE id = 2;

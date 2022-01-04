@@ -19,19 +19,19 @@ A few years ago my co-worker [Adam Vollrath](/blog/authors/adam-vollrath) wrote 
 
 If you’re tempted to disable SELinux, consider leaving it on, but in “permissive” mode. That will leave it running but stop it from blocking disallowed actions until you have time to deal with them properly. It’s as simple as:
 
-```nohighlight
+```plain
 setenforce 0
 ```
 
 That will last until you reboot, unless otherwise changed manually. You can edit /etc/sysconfig/selinux and set:
 
-```nohighlight
+```plain
 SELINUX=permissive
 ```
 
 To keep permissive mode even after a reboot. To see what mode SELinux is in, you can do either of:
 
-```nohighlight
+```plain
 getenforce
 # or
 cat /selinux/enforce
@@ -41,7 +41,7 @@ cat /selinux/enforce
 
 First make sure you have installed:
 
-```nohighlight
+```plain
 yum install policycoreutils
 yum install policycoreutils-python   # also needed on RHEL 6
 yum install policycoreutils-devel    # also needed on RHEL 7
@@ -59,21 +59,21 @@ Run semodule -l to list the existing modules. For this example I’ll use “epm
 
 Create a directory for your new policy module:
 
-```nohighlight
+```plain
 mkdir -p /root/local-policy-modules/epmail
 cd /root/local-policy-modules/epmail
 ```
 
 Copy relevant error messages verbatim from /var/log/audit/audit.log to a new file. Here for example are two denials of a script called by Postfix as a transport agent, which needed to connect to PostgreSQL locally:
 
-```nohighlight
+```plain
 type=AVC msg=audit(1335581974.308:69047): avc:  denied  { write } for  pid=14649 comm=F9616121202873696E676C65206D65 name=".s.PGSQL.5432" dev=sda2 ino=79924 scontext=system_u:system_r:postfix_pipe_t:s0 tcontext=system_u:object_r:postgresql_tmp_t:s0 tclass=sock_file
 type=AVC msg=audit(1335581974.308:69047): avc:  denied  { connectto } for  pid=14649 comm=F9616121202873696E676C65206D65 path="/tmp/.s.PGSQL.5432" scontext=system_u:system_r:postfix_pipe_t:s0 tcontext=system_u:system_r:postgresql_t:s0 tclass=unix_stream_socket
 ```
 
 In the logs you want to look for “AVC”, which stands for Access Vector Cache and is how SELinux logs denials. You can grab all the recent denials with:
 
-```nohighlight
+```plain
 grep ^type=AVC /var/log/audit/audit.log > epmail.log
 ```
 
@@ -81,13 +81,13 @@ and then filter it manually to contain just what you need.
 
 You can see a usually more informative explanation of each error by piping it into audit2why:
 
-```nohighlight
+```plain
 audit2why < epmail.log
 ```
 
 Now you’re ready to create your policy module:
 
-```nohighlight
+```plain
 audit2allow -m epmail < epmail.log > epmail.te
 checkmodule -M -m -o epmail.mod epmail.te
 semodule_package -o epmail.pp -m epmail.mod
@@ -98,7 +98,7 @@ That’s a somewhat longwinded way to do things, but that’s how I learned it f
 
 A more streamlined way that has audit2allow performing the functions of checkmodule and semodule_package is:
 
-```nohighlight
+```plain
 audit2allow -M $module_name -R -i epmail.log
 semodule -i epmail.pp
 ```
@@ -109,7 +109,7 @@ You will of course need to keep an eye on the audit log to look for any more AVC
 
 Finally, I have not normally had to do this, but if you need to force reload the SELinux policy on the server, you can do it with:
 
-```nohighlight
+```plain
 semodule -R
 ```
 

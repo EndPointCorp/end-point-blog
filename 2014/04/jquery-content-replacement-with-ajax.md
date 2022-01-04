@@ -24,7 +24,7 @@ Let’s say you have a product flypage for a widget that comes in several colors
 
 Probably the page is generated into a template based on a parameter or path segment:
 
-```nohighlight
+```plain
 http://.../app/product/WDGT-001-RED
 ```
 

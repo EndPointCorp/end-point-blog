@@ -13,7 +13,7 @@ date: 2013-11-08
 
 I was recently working on a Spree Commerce site that utilizes Spree’s Volume Pricing extension. For those who may not be familiar, the [Spree Commerce Volume Pricing extension](https://github.com/spree/spree_volume_pricing) allows a user to offer a variety of ‘price ranges’. These price ranges represent discounted prices per unit for larger quantity orders. For example (we will use this t-shirt pricing table for the remainder of the post) from the **[Spree Volume Pricing Github](https://github.com/spree/spree_volume_pricing)**
 
-```nohighlight
+```plain
    Variant                Name               Range        Amount         Position
    -------------------------------------------------------------------------------
    Rails T-Shirt          1-5                (1..5)       19.99          1

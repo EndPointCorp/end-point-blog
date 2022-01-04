@@ -54,7 +54,7 @@ The Thrift::EventMachine transport performs the actual Thrift network operations
 
 Therefore, in the code snippet above, the “foo” row will be inserted first, and then the “bar” row. Every time. The output always is:
 
-```nohighlight
+```plain
 Wrote foo.
 Wrote bar.
 ```
@@ -81,7 +81,7 @@ end
 ```
 
 You don’t know how this is going to play out, but the typical output proves the concurrent operation of the two fibers involved:
-```nohighlight
+```plain
 Writing foo.
 Writing bar.
 Wrote foo.

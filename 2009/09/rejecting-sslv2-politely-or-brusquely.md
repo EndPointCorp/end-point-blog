@@ -17,7 +17,7 @@ At least 4 years ago, people began to discuss disabling SSLv2 entirely due to fu
 
 To politely alert people using those older browsers, yet still refusing to transport confidential information over the insecure SSLv2 and with ciphers weaker than 128 bits, we used an [Apache](https://httpd.apache.org/) configuration such as this:
 
-```nohighlight
+```plain
 # Require SSLv3 or TLSv1 with at least 128-bit cipher
 <Directory "/">
     SSLRequireSSL
@@ -31,7 +31,7 @@ That accepts their SSLv2 connection, but displays an error page explaining the p
 
 Recently we’ve decided to drop that extra fuss and block SSLv2 entirely with Apache configuration such as this:
 
-```nohighlight
+```plain
 SSLProtocol all -SSLv2
 SSLCipherSuite ALL:!ADH:!EXPORT56:RC4+RSA:+HIGH:+MEDIUM:-LOW:-SSLv2:-EXP
 ```

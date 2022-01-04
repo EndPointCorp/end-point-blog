@@ -3,7 +3,10 @@ author: Ben Witten
 title: Custom cabinets for the Liquid Galaxy
 github_issue_number: 1560
 tags:
-- liquid-galaxy
+- visionport
+featured:
+  visionport: true
+  image_url: /blog/2019/10/liquid-galaxy-cabinets/image-0.jpg
 date: 2019-10-01
 ---
 
@@ -14,6 +17,10 @@ End Point is proud to announce a new offering in its product line: Liquid Galaxy
 Cabinets provide a perfect hybrid solution for clients who want the look of permanence and grace that comes with a wall-mounted system, but are somehow limited by their physical space. Until now, clients were given options of an entry-level system on a portable aluminum frame (great for those in need of moving displays to various locations) or permanent wall-hung systems that are a build-out of a curved reinforced wall.
 
 In the case of the recent installation at Auburn University (pictured top), the library staff elected to have a cabinet built because the wood-grained structure was more conducive to the architectural integrity of their beautiful library and the popular location they wanted it to be in.
+
+(Update in December 2021: You can learn more about Auburn University's installation in [my follow-up after two years of operation](/blog/2021/12/visionport-success-at-auburn-university/) at the library.)
+
+### Other custom creations
 
 Since 2012, the Liquid Galaxy immersive visual platform has been a primary focus for End Point. Since our first installation at the Smithsonian National Air and Space Museum, we have installed and supported many types of systems ranging from 3 to 48 screens. These systems have expanded across 20 countries and 6 different continents! We have supported many customized and innovative projects, including these:
 

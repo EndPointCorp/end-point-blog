@@ -2,8 +2,11 @@
 author: Dave Jenkins
 title: Liquid Galaxy at the Pyeongchang 2018 Winter Olympics
 github_issue_number: 1381
+featured:
+  visionport: true
+  image_url: /blog/2018/02/liquid-galaxy-pyeongchang-olympics/pyeongchang-lg-1-small.jpg
 tags:
-- liquid-galaxy
+- visionport
 - event
 - clients
 date: 2018-02-13

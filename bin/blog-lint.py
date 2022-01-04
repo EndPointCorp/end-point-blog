@@ -64,8 +64,6 @@ highlight_languages = []
 with cd(bin_dir):
     highlight_languages += json.load(open('supported_languages.json', 'r'))
 
-highlight_languages += ['nohighlight']
-
 
 ######################################
 # Classes for error/warning messages #
@@ -427,16 +425,16 @@ def check_spellings(line):
 def check_links(line):
     link_checks = [
         {
-            'regex': r'^https://www.endpoint\.com',
+            'regex': r'^https://www\.endpointdev\.com',
             'ideal': '',
-            'message': 'Links to EP website should be relative links',
+            'message': 'Links to End Point Dev website should be relative links',
             'forKeepers': True
         },
         # This next one might be unnecessary since fetching it will reveal issues
         {
-            'regex': r'^https://[^.]*\.endpoint\.com',
-            'ideal': ['https://liquidgalaxy.endpoint.com', 'https://www.endpoint.com'],
-            'message': 'The only allowed subdomain for endpoint.com links is liquidgalaxy.endpoint.com',
+            'regex': r'^https://[^.]*\.endpointdev\.com',
+            'ideal': ['https://www.endpointdev.com'],
+            'message': 'No subdomains for endpoint.com should be used',
         }
     ]
 
@@ -445,7 +443,7 @@ def check_links(line):
     links += (re.findall(r'href="([^"]*)"', without_code))
 
     for link in links:
-        url_base = 'https://www.endpoint.com'
+        url_base = 'https://www.endpointdev.com'
         check_certs = True
         match = re.search(r'\/camp([0-9]{1,2})\/', os.getcwd())
         if match:

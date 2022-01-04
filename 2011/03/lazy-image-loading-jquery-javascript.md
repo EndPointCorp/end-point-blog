@@ -14,7 +14,7 @@ This week I had a *duh* moment while working on a little jQuery-driven interface
 
 I’ve occasionally used or attempted to do image preloading in JavaScript, jQuery, and YUI. Preloading images happens after a page is loaded: follow-up image requests are made for images that may be needed, such as hover images, larger sizes of thumbnail images on the page, or images below the fold that do not need to load at page request time. Adobe Fireworks spits out this code for preloading images, which is a bit **gross** because the JavaScript is typically inline and it doesn’t take advantage of common JavaScript libraries. But this is probably acceptable for standalone HTML files that get moved between various locations during design iterations.
 
-```nohighlight
+```plain
 <body onload="MM_preloadImages('/images/some_image.png','/images/some_other_image.png')">
 ```
 

@@ -4,7 +4,7 @@ title: End Point Upgrades Liquid Galaxy at Ann Arbor Hands On Museum
 github_issue_number: 783
 tags:
 - clients
-- liquid-galaxy
+- visionport
 date: 2013-04-05
 ---
 

@@ -12,7 +12,7 @@ This is an article aimed at beginner-to-intermediate Interchange developers.
 
 A typical approach to a hierarchical Interchange site is:
 
-```nohighlight
+```plain
 Categories -> Category -> Product
 ```
 
@@ -20,14 +20,14 @@ I.e., you list all your categories as links, each of which opens up a search res
 
 Recently I upgraded a site so the category URLs were a bit more SEO-friendly. The original category filtering search produced these lovely specimens:
 
-```nohighlight
+```plain
 /search.html?fi=products&st=db&co=1&sf=category&se=Shoes&op=rm
    &sf=inactive&se=yes&op=ne&tf=category&ml=100
 ```
 
 but what I really wanted was:
 
-```nohighlight
+```plain
 /cat/Shoes.html
 ```
 
@@ -41,7 +41,7 @@ First, I copied my “results.html” page to “catpage.html”. That way, my o
 
 The search results were displayed via:
 
-```nohighlight
+```plain
 [search-region]
 ...
 [/search-region]
@@ -49,7 +49,7 @@ The search results were displayed via:
 
 I converted this to a database query:
 
-```nohighlight
+```plain
 [query sql="SELECT * FROM products WHERE NOT inactive AND category = [sql-quote][cgi category][/sql-quote]"
  type=list prefix=item]
 ...

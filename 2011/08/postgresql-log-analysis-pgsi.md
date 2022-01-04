@@ -21,7 +21,7 @@ End Point recently started working with a new client (a startup in [stealth mode
 
 Both programs work basically the same: given a large number of log lines from Postgres, normalize the queries, see how long they took, and produce some pretty output.If you only want to look at the longest queries, it’s usually enough to set your log_min_duration_statement to something sane (such as 200), and then run a daily [tail_n_mail](https://bucardo.org/tail_n_mail/) job against it. This is what we are doing with this client, and it sends a daily report that looks like this:
 
-```nohighlight
+```plain
 Date: Mon Aug 29 11:22:33 2011 UTC
 Host: acme-postgres-1
 Minimum duration: 2000 ms
@@ -41,7 +41,7 @@ album.singer WHERE id < 1000 AND track <> 1
 
 However, the PGSI program was born of the need to look at ***all*** the queries in the database, not just the slowest-running ones; the cumulative effect of many short queries can have much more of an impact on the server than a smaller number of long-running queries. Thus, PGSI looks not only at how long a query takes to run, but how many times it has run in a certain period, as well as how often it runs. All of this information is put together to give a score to each normalized query, known as the “system impact”. Like the costs on a Postgres explain plan, this is a unit-less number and of little importance in and of itself—​the important thing is to compare it to the other queries to see the relative impact. We also have that report emailed out, it looks similar to this (this is a text version of the HTML produced):
 
-```nohighlight
+```plain
 Log file: /var/log/pg_log/postgres-2011-08-29.log
 
  * SELECT (24)
@@ -75,7 +75,7 @@ All of this is run by cron. The first problem is how to update the postgresql.co
 
 The exact incantation looks like this:
 
-```nohighlight
+```plain
 0 11 * * * perl bin/modify_postgres_conf --quiet \
   --pgconf /etc/postgresql/9.0/main/postgresql.conf \
   --change log_min_duration_statement=0
@@ -89,7 +89,7 @@ This changes log_min_duration_statement to 0 at 11AM, and then back to 200 15 mi
 
 Now for the tricky bit: extracting out just the section of logs that we want and sending it to PGSI. Here’s the recipe I came up with for this client:
 
-```nohighlight
+```plain
 16 11 * * * tac `ls -1rt /var/log/pg_log/postgres*log \
   | tail -1` \
   | sed -n '/statement" changed to "200"/,/statement" changed to "0"/ p' \

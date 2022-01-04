@@ -9,7 +9,8 @@ tags:
 date: 2020-02-05
 ---
 
-<div style="float: left"><img src="/blog/2020/02/end-point-security-tips/image-4.jpg" alt="phishingemail" align="left"></div>
+<img src="/blog/2020/02/end-point-security-tips/image-4.jpg" alt="phishing key on keyboard">
+
 [Photo](https://flic.kr/p/24YXTiY) from [comparitech.com](https://www.comparitech.com/blog/information-security/common-phishing-scams-how-to-avoid/)
 
 ### Implement Security Measures to Protect Your Organization & Employees

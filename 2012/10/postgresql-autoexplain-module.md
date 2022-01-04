@@ -22,7 +22,7 @@ At the beginning let's see how my logs look when I run "SELECT 1" query:
 
 Your logs can look a little bit different depending on your settings. The settings I use for logging on my development machine are:
 
-```nohighlight
+```plain
 log_destination = 'stderr'
 logging_collector = on
 log_directory = '/var/log/postgresql/'

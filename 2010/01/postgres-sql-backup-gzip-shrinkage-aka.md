@@ -1,15 +1,14 @@
 ---
 author: David Christensen
-title: Postgres SQL Backup Gzip Shrinkage, aka DON’T PANIC!!!
+title: Postgres SQL Backup Gzip Shrinkage, aka Don’t Panic!!!
 github_issue_number: 250
 tags:
 - database
 - postgres
 - tips
+- compression
 date: 2010-01-09
 ---
-
-
 
 I was investigating a recent Postgres server issue, where we had
 discovered that one of the RAM modules on the server in question had
@@ -33,7 +32,7 @@ I logged into the backup server and looked at the backup dumps; from
 the alerts that we’d gotten, the memory was flagged bad on January 3.
 I listed the files, and noticed the following oddity:
 
-```nohighlight
+```plain
  -rw-r--r-- 1 postgres postgres  2379274138 Jan  1 04:33 backup-Jan-01.sql.gz
  -rw-r--r-- 1 postgres postgres  1957858685 Jan  2 09:33 backup-Jan-02.sql.gz
 ```
@@ -56,7 +55,7 @@ stayed the same or with a modest increase.
 Obviously we needed to compare the two files in order to determine
 what had changed between the two days. I tried:
 
-```nohighlight
+```plain
  diff <(zcat backup-Jan-01.sql.gz | head -2300) <(zcat backup-Jan-02.sql.gz | head -2300)
 ```
 
@@ -70,7 +69,7 @@ data to try and see if some of the aforementioned temporary tables had
 been truncated or if some catastrophic deletion had occurred or...you
 get the idea. I tried:
 
-```nohighlight
+```plain
  diff <(zcat backup-Jan-01.sql.gz) <(zcat backup-Jan-02.sql.gz)
 ```
 
@@ -79,7 +78,7 @@ decided to unzip the files and manually diff the two files in case it
 had something to do with the parallel unzips, and here was a mystery;
 after unzipping the dumps in question, we saw the following:
 
-```nohighlight
+```plain
  -rw-r--r-- 1 root root 10200609877 Jan  8 02:19 backup-Jan-01.sql
  -rw-r--r-- 1 root root 10202928838 Jan  8 02:24 backup-Jan-02.sql
 ```
@@ -109,5 +108,3 @@ So the good news was that CLUSTER will save you space in your SQL
 dumps as well (if you’re compressing), the bad news was that it took
 an emergency situation and an almost heart-attack for this engineer to
 figure it all out. Hope I’ve saved you the trouble... :-)
-
-

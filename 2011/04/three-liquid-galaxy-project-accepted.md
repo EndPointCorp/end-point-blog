@@ -3,7 +3,7 @@ author: Adam Vollrath
 title: Three Liquid Galaxy Projects Accepted for Google Summer of Code 2011
 github_issue_number: 444
 tags:
-- liquid-galaxy
+- visionport
 date: 2011-04-26
 ---
 

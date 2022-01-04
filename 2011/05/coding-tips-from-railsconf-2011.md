@@ -37,7 +37,7 @@ When gathering input, Avdi recommends that developers employ strategies to deal 
 
 In part 2 of the narrative, perform work, I liked Avdi’s comments about how conditionals should be reserved for business logic. For example, consider the following two conditionals:
 
-```nohighlight
+```plain
 A) if post.published?  ... end
 B) if post ... end
 ```

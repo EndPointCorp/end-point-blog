@@ -16,13 +16,13 @@ I never thought I’d say it, but these days technology is simply moving too fas
 
 Before I get to that, I want to mention some trouble we’d recently started seeing with nginx failing to start on boot. It’s just been on our most recently obtained servers, both Debian-based (including Ubuntu) and RHEL-based installations. Some were Linode VM’s, others were bare metal hardware systems. After boot and once we got in to try and see what was happening, nginx would happily start manually. The only clue was one line that had been left in the error log:
 
-```nohighlight
+```plain
 2014/06/14 23:33:20 [emerg] 2221#0: bind() to [2607:f0d0:2001:103::8]:80 failed (99: Cannot assign requested address)
 ```
 
 And it wasn’t just nginx; Apache httpd in one instance gave us similar trouble:
 
-```nohighlight
+```plain
 Starting httpd: (99)Cannot assign requested address: make_sock: could not bind to address [2600:3c00::f03c:91ff:fe73:687f]:80
 no listening sockets available, shutting down
 ```

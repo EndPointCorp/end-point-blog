@@ -3,11 +3,11 @@ author: Ben Witten
 title: Liquid Galaxy on PBS
 github_issue_number: 1240
 tags:
-- liquid-galaxy
+- visionport
 date: 2016-07-12
 ---
 
-[PBS](http://www.pbs.org/) recently aired a segment about the [Liquid Galaxy](https://liquidgalaxy.endpoint.com/)! Just before we presented at [New York Tech Meetup](/blog/2016/01/liquid-galaxy-at-new-york-tech-meetup_4), we were interviewed about the Liquid Galaxy for [SciTech Now](http://www.scitechnow.org/), a PBS publication. The interview took place in NYU’s Skirball Center For The Performing Arts, which is where New York Tech Meetup takes place every month. 
+[PBS](http://www.pbs.org/) recently aired a segment about the [Liquid Galaxy](https://www.visionport.com/)! Just before we presented at [New York Tech Meetup](/blog/2016/01/liquid-galaxy-at-new-york-tech-meetup_4), we were interviewed about the Liquid Galaxy for [SciTech Now](http://www.scitechnow.org/), a PBS publication. The interview took place in NYU’s Skirball Center For The Performing Arts, which is where New York Tech Meetup takes place every month. 
 
 <iframe allowfullscreen="" frameborder="0" height="315" src="https://www.youtube.com/embed/aZxWTgR8w3U" width="560"></iframe>
 

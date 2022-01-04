@@ -18,7 +18,7 @@ First the habitable zone should be found. This is a concept of the project which
  
 Whenever we create an estimation, we need to differentiate parts of the problem into two main categories. The first category is the subset of the problem where we can accurately foresee what is to be done and we can accurately estimate the needed time. The second category is the subset for problems where we have open questions. It’s good to offer the client alternatives: we could do a vague estimation for the problems where we have open questions, or we can do research to gather further knowledge and increase the subset of problems where we foresee the solution. In general:
  
-```nohighlight
+```plain
 T = (T(Known) + T(Unknown) + T(Unforeseen)) * HR
 ```
  

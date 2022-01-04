@@ -3,12 +3,12 @@ author: Matt Vollrath
 title: Using cec-client to Control HDMI Devices
 github_issue_number: 721
 tags:
-- liquid-galaxy
+- visionport
 - sysadmin
 date: 2012-11-08
 ---
 
-Maintaining the horde of computers it takes to run [Liquid Galaxies](https://liquidgalaxy.endpoint.com/) in all corners of the globe is a big job. As of November of 2012, we’re monitoring 154 computers at permanent installations in addition to keeping our development and testing systems running like the well-oiled machines we want them to be. All that fluff aside, end users never see the fruits of our labor unless the TVs are working as expected! Without methods for getting and setting the status of displays, we are completely blind to what people are actually experiencing in front of a Liquid Galaxy.
+Maintaining the horde of computers it takes to run [Liquid Galaxy installations](https://www.visionport.com/installations/) in all corners of the globe is a big job. As of November of 2012, we’re monitoring 154 computers at permanent installations in addition to keeping our development and testing systems running like the well-oiled machines we want them to be. All that fluff aside, end users never see the fruits of our labor unless the TVs are working as expected! Without methods for getting and setting the status of displays, we are completely blind to what people are actually experiencing in front of a Liquid Galaxy.
 
 Enter [HDMI-CEC](https://en.wikipedia.org/wiki/HDMI#CEC). CEC is a protocol that allows HDMI-connected devices to control each other in various ways. It has a set of standard features that make it easy for home users with a stack of DVD players or TiVos or other devices to change the active source, put everything on standby, control the volume, and some other handy tricks.
 
@@ -16,7 +16,7 @@ We typically use Samsung TVs which support CEC under the trade name “Anynet+�
 
 libCEC is available on apt for Ubuntu users:
 
-```nohighlight
+```plain
 $ sudo apt-get install cec-utils
 ```
 
@@ -24,7 +24,7 @@ Once installed, we have access to all kinds of fun commands. [CEC-O-Matic](http:
 
 The syntax of a libCEC “tx” command is like this:
 
-```nohighlight
+```plain
 $ echo 'tx <src-dst> <cmd> <args...>' | cec-client <device>
 ```
 
@@ -36,7 +36,7 @@ Arguments are situational, and many commands will not require any arguments. We�
 
 The device can be found with the ever-handy:
 
-```nohighlight
+```plain
 $ cec-client -l
 Found devices: 1
 
@@ -51,7 +51,7 @@ We want to use that COM port, “/dev/ttyACM0”.
 
 For example, let’s query the menu language of the TV connected to the first CEC adapter.
 
-```nohighlight
+```plain
 $ echo 'tx 10 91' | cec-client /dev/ttyACM0
 [ . . . ]
 DEBUG:   [             492] << requesting power status of 'TV' (0)
@@ -77,7 +77,7 @@ At this point, cec-client is idling. Use Ctrl-C to end the process gracefully.
 
 What if we want to change the power setting of the TV? In this case, libCEC has built-in commands to make it a little more intuitive.
 
-```nohighlight
+```plain
 $ echo 'standby 0' | cec-client -s /dev/ttyACM0
 $ echo 'on 0' | cec-client -s /dev/ttyACM0
 ```

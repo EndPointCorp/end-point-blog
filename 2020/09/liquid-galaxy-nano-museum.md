@@ -2,8 +2,11 @@
 author: Dave Jenkins
 title: Liquid Galaxy at the Nano Museum in Seoul
 github_issue_number: 1665
+featured:
+  visionport: true
+  image_url: /blog/2020/09/liquid-galaxy-nano-museum/image-0.jpg
 tags:
-- liquid-galaxy
+- visionport
 - clients
 date: 2020-09-17
 ---

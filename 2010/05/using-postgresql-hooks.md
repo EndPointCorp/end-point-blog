@@ -87,7 +87,7 @@ auto_explain also resets the hook variables in its _PG_fini() function. Since un
 
 Back to passwordcheck. Having set the hook variable, all that remains is to get PostgreSQL to load this library. The easiest way to do that is to set shared_preload_libraries in postgresql.conf:
 
-```nohighlight
+```plain
 josh@eddie:~/devel/pgsrc/pg-eggyknap/contrib/passwordcheck$ psql
 psql (9.0devel)
 Type "help" for help.
@@ -101,7 +101,7 @@ Type "help" for help.
 
 Restarting PostgreSQL loads the library, proven as follows:
 
-```nohighlight
+```plain
 5432 josh@josh# create user badpass with password 'bad';
 ERROR:  password is too short
 ```

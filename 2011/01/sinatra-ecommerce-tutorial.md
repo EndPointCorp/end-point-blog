@@ -23,7 +23,7 @@ A snapshot of our final working app.
 
 I create a new directory for the project with the following directories:
 
-```nohighlight
+```plain
 sinatrashop/
   db/
     migrate/
@@ -120,7 +120,7 @@ end
 
 Now, let’s think about the views we’ll present to users. There are many template rendering options in Sinatra, but we’ll go with erb and create an index.erb file. By default, Sinatra looks for views in the ROOT/views directory. This will be our only view and layout and below is a breakdown of what it will include:
 
-```nohighlight
+```plain
 # header information
 <body>
 # product information

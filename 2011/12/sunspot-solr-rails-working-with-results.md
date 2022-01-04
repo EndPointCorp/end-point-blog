@@ -57,7 +57,7 @@ end
 
 In the view, one can iterate through the result set, where results is an array of Thing instances.
 
-```nohighlight
+```plain
 <% @search.results.each do |result| -%>
 <h2><%= result.field3 %></h2>
 <%= result.field1 %>
@@ -68,7 +68,7 @@ In the view, one can iterate through the result set, where results is an array o
 
 The above code works. It works nicely until you display many results on one page where instantiation of things is not expensive. But the above code will call the query below for every search, and subsequently instantiate Ruby objects for each of the things found. This can become sluggish when the result set is large or the items themselves are expensive to instantiate.
 
-```nohighlight
+```plain
 # development.log
 Thing Load (0.9ms)  SELECT "things".* FROM "things" WHERE "things"."id" IN (6, 12, 7, 13, 8, ...)
 ```
@@ -99,7 +99,7 @@ end
 
 And working with the data in the view may look like this:
 
-```nohighlight
+```plain
 <% @hits.each do |result| -%>
 <h2><%= hit.stored(:field3) %></h2>
 <%= hit.stored(:field1) %>

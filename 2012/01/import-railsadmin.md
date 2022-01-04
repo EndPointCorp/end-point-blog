@@ -42,7 +42,7 @@ In my routes file, I introduced a new named route for import to point to the new
 
 Next, I copied over the RailsAdmin app/views/rails_admin/_model_links.html.haml view to my application to override RailsAdmin's view. I made the following addition to this file:
 
-```nohighlight
+```plain
 ...
 - can_import = authorized? :import, abstract_model
 
@@ -71,7 +71,7 @@ I now see an Import tab in the admin:
 
 Next, I created a view for displaying the import form. Here's a generic example to display the set of fields that can be imported, and the form:
 
-```nohighlight
+```plain
 <h1>Import</h1>
 <h2>Fields</h2>
 <ul>

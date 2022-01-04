@@ -28,7 +28,7 @@ I’ve used a lot of email clients over the years (and may have been using email
 
 So I tried running imapfilter per usual on my new system and noticed an odd thing: each item in my filter was getting a minimum of 66 ‘hits’, even when there was not even 66 total emails in my inbox! I output the number of matches to each filter I use, so instead of seeing what I was usually did:
 
-```nohighlight
+```plain
 Mediawiki emails moved:    1
 Backcountry emails moved:  10
 Perl QA messages moved:    0
@@ -41,7 +41,7 @@ Mail filtering complete
 
 I saw everything at N+66 instead:
 
-```nohighlight
+```plain
 Mediawiki emails moved:   67
 Backcountry emails moved: 76
 Perl QA messages moved:   66
@@ -58,7 +58,7 @@ Obviously, something was wonky. Glancing at the release notes showed that versio
 
 Okay, but where was the 66 coming from? I created a ~/.imapfilter/test.lua file to show me exactly what was happening inside the loop over the results table. (imapfilter is written in a nice language called [Lua](https://www.lua.org/), which calls its main data structures [“tables”](https://www.lua.org/pil/2.5.html). Probably to the chagrin of those using Lua/database crossover tools like [Pl/Lua](https://github.com/pllua) :) The test.lua file looked like this:
 
-```nohighlight
+```plain
 myaccount = IMAP {
   server   = 'mail.example.com',
   username = 'greg',
@@ -99,7 +99,7 @@ Total count for ipairs: 0
 
 So it looked like the results table simply contained two entries, with keys of 9 and 32 (which correspond to where those emails happened to appear in my inbox). Calling ipairs yielded zero matches, which makes sense: there is no key of 1 (which is what Lua tables start with by convention, rather than 0 like almost everything else in the computer world :). The ipairs function goes through each key in order starting with 1 until a nil (undefined) key is found. In this case, 1 itself is nil. The output looks much different when I ran it using the new version (2.3) of imapfilter:
 
-```nohighlight
+```plain
 [~/code] imapfilter -c ~/.imapfilter/test.lua
   1      Call to pairs:    1              table: 0x82b0bd8
   2      Call to pairs:    2              table: 0x82b0c48
@@ -122,7 +122,7 @@ This tells us a quite a few things, and solves the mystery of the 66, which repr
 
 The next step was to get my filters working again—​this was simply a matter of a global search and replace (M-x query-replace-regexp) from “pairs” to “ipairs”.This is a good a point as any to explain what my file looks like (stored as ~/.imapfilter/config.lua). The first part simply sets some common options—​for details on what they do, check out the [manpage for imapfilter_config](http://manpages.ubuntu.com/manpages/bionic/en/man5/imapfilter_config.5.html).
 
-```nohighlight
+```plain
 options.cache        = true
 options.certificates = true
 options.create       = false
@@ -133,7 +133,7 @@ options.expunge      = false
 
 Next, a new table is created with the IMAP function. After that, we exclude all messages that are already marked as deleted, that have not yet been read, and have not been flagged. In other words, everything in my inbox I’ve already seen, but not flagged as urgent or deleted. The ‘*’ in this case is a logical ‘AND’, and the output is the search result table we saw in the above code.
 
-```nohighlight
+```plain
 myaccount = IMAP {
   server   = 'mail.example.com',
   username = 'greg',
@@ -146,7 +146,7 @@ baseresult = inbox:is_seen() * inbox:is_unflagged() * inbox:is_undeleted()
 
 Now that we have a search result, we simply start looking for things of interest and handling them. For example, to move messages to an existing IMAP folder:
 
-```nohighlight
+```plain
 -- Put Mediawiki messages into their folder
 result = baseresult
   * (
@@ -164,7 +164,7 @@ Searches can be applied to an existing search result to create a new table. In t
 
 Deletion is handled in a similar way:
 
-```nohighlight
+```plain
 -- Delete wiki alerts
 result = baseresult
   * inbox:contain_from('WikiAdmin <wikiadmin@example.com>')

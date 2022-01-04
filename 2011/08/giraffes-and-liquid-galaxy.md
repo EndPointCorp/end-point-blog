@@ -4,14 +4,14 @@ title: Giraffes and Liquid Galaxy
 github_issue_number: 489
 tags:
 - google-earth
-- liquid-galaxy
+- visionport
 - kamelopard
 date: 2011-08-25
 ---
 
 <a href="https://en.wikipedia.org/wiki/File:Al_Ain_Zoo_Giraffe.JPG" onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}"><img alt="" border="0" src="/blog/2011/08/giraffes-and-liquid-galaxy/image-0.jpeg" style="display:block; margin:0px auto 10px; text-align:center;cursor:pointer; cursor:hand;width: 614px; height: 411px;"/></a>
 
-We build lots and lots of Google Earth tours, typically for use with a [Liquid Galaxy](https://liquidgalaxy.endpoint.com/). These tours tell Google Earth to start at one point and fly to another, displaying various images along the way. They’re written in an XML-based language called [Keyhole Markup Language](https://en.wikipedia.org/wiki/Keyhole_Markup_Language), or [KML](https://developers.google.com/kml/documentation/kmlreference?csw=1). Various KML elements describe points on the globe, 3D objects, tracks through space, or other items, and a series of Google-specific KML extensions can define an automated tour in which Google Earth flies through these objects.
+We build lots and lots of Google Earth tours, typically for use with a [Liquid Galaxy](https://www.visionport.com/). These tours tell Google Earth to start at one point and fly to another, displaying various images along the way. They’re written in an XML-based language called [Keyhole Markup Language](https://en.wikipedia.org/wiki/Keyhole_Markup_Language), or [KML](https://developers.google.com/kml/documentation/kmlreference?csw=1). Various KML elements describe points on the globe, 3D objects, tracks through space, or other items, and a series of Google-specific KML extensions can define an automated tour in which Google Earth flies through these objects.
 
 Now for a bit of dogma: writing large volumes of XML by hand is a drag. Writing KML is no exception. So when I started building KML tours, I was keen to build or find tools to make it easier. For my first KML project, making a tour through each End Point employee’s home city, I built a Perl script to convert a file of employee data to KML. This worked well enough, but I soon learned typing out all the KML was just half the pain. The other half was adjusting camera paths, camera angles, timing, and all sorts of other little things. Unfortunately all these adjustments had to be done by trial and error, and all by hand. Getting Google Earth’s camera to circle a particular point, for instance, takes about three screens worth of KML code. If a point’s coordinates were off or a tour’s timing wasn’t quite right, I had to find the right spot in a vast field of KML, tweak a number, and try it all again.
 

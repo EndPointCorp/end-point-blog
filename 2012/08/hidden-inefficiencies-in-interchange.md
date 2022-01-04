@@ -13,7 +13,7 @@ A very common, somewhat primitive approach to Interchange searching uses an appr
 
 The search profile contains something along the lines of
 
-```nohighlight
+```plain
   mv_search_type=db
   mv_search_file=products
   mv_column_op=rm
@@ -29,7 +29,7 @@ The search profile contains something along the lines of
 
 In other words, we search the products table for rows whose column “category” matches an expression (with a single query), and we list all the matches (description only). However, this can be inefficient depending on your database implementation: the item-field tag *issues a query* every time it’s encountered, which you can see if you “tail” your database log. If your item-list contains many different columns from the search result, you’ll end up issuing *many* such queries:
 
-```nohighlight
+```plain
 [item-list]
     [item-field description], [item-field weight], [item-field color],
     [item-field size], [item field ...]
@@ -50,13 +50,13 @@ SELECT size FROM products WHERE sku='ABC123'
 
 Fortunately, it’s easy to correct:
 
-```nohighlight
+```plain
 mv_return_fields=*
 ```
 
 and then
 
-```nohighlight
+```plain
 ...
     [item-param description]
 ...

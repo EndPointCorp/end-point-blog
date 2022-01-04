@@ -6,6 +6,8 @@ tags:
 - browsers
 - graphics
 - nginx
+- compression
+- optimization
 date: 2014-01-28
 ---
 
@@ -65,7 +67,7 @@ Let’s plan to have both common format (JPEG or PNG) and WebP files side by sid
 
 It’s possible to set up the web server to transparently serve WebP instead of JPEG or PNG if a matching file exists. Based on some examples other people posted, we used this nginx configuration:
 
-```nohighlight
+```plain
     set $webp "";
     set $img "";
     if ($http_accept ~* "image/webp") { set $webp "can"; }
@@ -105,7 +107,7 @@ The image is still being requested with a name ending in .jpg or .png, but that�
 
 One remedy for that is to serve the WebP file via a 301 or 302 redirect instead of transparently in the response, so that the browser knows it’s dealing with a different file named $something.webp. To do that we changed the nginx configuration like this:
 
-```nohighlight
+```plain
     rewrite "(.*)\.\w+$" $1.webp permanent;
 ```
 

@@ -5,12 +5,13 @@ github_issue_number: 1101
 tags:
 - networking
 - sysadmin
+- compression
 date: 2015-03-13
 ---
 
 ### HTTPS and SPDY
 
-Back in August 2014, we made our websites [www.endpoint.com](/) and [liquidgalaxy.endpoint.com](https://liquidgalaxy.endpoint.com/) HTTPS-only, which allowed us to turn on [HTTP Strict Transport Security](https://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security) and earn a grade of [A+ from Qualys’ SSL Labs](https://www.ssllabs.com/ssltest/analyze.html?d=endpoint.com&latest) server test.
+Back in August 2014, we made our websites [www.endpoint.com](/) and [liquidgalaxy.endpoint.com](https://www.visionport.com/) HTTPS-only, which allowed us to turn on [HTTP Strict Transport Security](https://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security) and earn a grade of [A+ from Qualys’ SSL Labs](https://www.ssllabs.com/ssltest/analyze.html?d=endpoint.com&latest) server test.
 
 Given the widely-publicized surveillance of Internet traffic and injection of advertisements and tracking beacons into plain HTTP traffic by some unscrupulous Internet providers, we felt it would be good to start using TLS encryption on even our non-confidential public websites.
 

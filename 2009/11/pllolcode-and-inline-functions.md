@@ -15,7 +15,7 @@ PostgreSQL procedural languages all have a language handler function, which gets
 
 As of when the change was committed in PostgreSQL, only PL/pgSQL supported inline functions. Other languages may now support them; today I spent the surprisingly short time needed to add the capability to PL/LOLCODE. Here’s a particularly useless example:
 
-```nohighlight
+```plain
 DO $$
 HAI
  VISIBLE "This is a test of INLINE stuff"

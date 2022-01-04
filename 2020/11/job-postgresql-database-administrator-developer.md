@@ -3,8 +3,7 @@ author: Jon Jensen
 title: 'Job opening: PostgreSQL database administrator & developer'
 github_issue_number: 1688
 tags:
-- company
-- jobs
+- jobs-closed
 - postgres
 - database
 - remote-work
@@ -13,8 +12,6 @@ date: 2020-11-13
 
 ![rows of barrels](/blog/2020/11/job-postgresql-database-administrator-developer/12648792923_b4780df1da_o-mod.jpg)
 [Photo](https://www.flickr.com/photos/13476480@N07/12648792923/) by [manhhai](https://www.flickr.com/people/13476480@N07/), cropped & filtered, [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/)
-
-**(This position has been filled.)**
 
 We are seeking a full-time PostgreSQL database administrator and developer to support and consult with our clients. For this role we prefer those living in the Western Hemisphere.
 
@@ -66,7 +63,9 @@ These work traits are just as important:
 
 ### Get in touch with us:
 
-Please email us an introduction to [jobs@endpoint.com](mailto:jobs@endpoint.com) to apply. Include your location, a resume/​CV, your Git repository or LinkedIn URLs, and whatever else may help us get to know you.
+~~Please email us an introduction to jobs&#x40;endpoint.com to apply.~~
+**(This job has been filled.)**
+Include your location, a resume/​CV, your Git repository or LinkedIn URLs, and whatever else may help us get to know you.
 
 We look forward to hearing from you! Direct work seekers only, please—​this role is not for agencies or subcontractors.
 

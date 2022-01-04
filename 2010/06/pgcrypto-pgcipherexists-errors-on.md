@@ -27,7 +27,7 @@ psql:<stdin>:2657: ERROR:  function public.cipher_exists(text) does not exist
 
 While it doesn’t stop the rest of the dump from importing, I like to remove any errors I can. In this case, it really *was* a [SMOP](https://en.wikipedia.org/wiki/Small_matter_of_programming). Inside the Postgres 8.4 source tree, in the **contrib/pgcrypto** directory, I added the following declarations to **pgcrypto.h**:
 
-```nohighlight
+```plain
 Datum       pg_cipher_exists(PG_FUNCTION_ARGS);
 Datum       pg_digest_exists(PG_FUNCTION_ARGS);
 Datum       pg_hmac_exists(PG_FUNCTION_ARGS);

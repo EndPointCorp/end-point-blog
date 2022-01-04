@@ -5,7 +5,7 @@ github_issue_number: 1331
 tags:
 - conference
 - event
-- liquid-galaxy
+- visionport
 date: 2017-10-18
 ---
 
@@ -15,7 +15,7 @@ date: 2017-10-18
 
 End Point is pleased to be participating in ASTC 2017, alongside our partners BWC Visual Technology. [ASTC](http://www.astc.org/conference/), which stands for the Association of Science-Technology Centers, is holding their annual conference at The Tech Museum of Innovation, located in San Jose, CA. We were excited to hear that the conference takes place at The Tech Museum, as we have a Liquid Galaxy set up in the museum!
 
-A 3-screen desktop [Liquid Galaxy](https://liquidgalaxy.endpoint.com/) display will be set up by Liquid Galaxy Engineer Josh Ausborne at Booth 1103. This display will be showcasing content that includes Sketchfab and Unity 3D Models, Cesium content with interactive weather data, 360 panoramic video, Google Earth/Google Streetview content, and engaging presentations about National Parks and National Marine Sanctuaries.
+A 3-screen desktop [Liquid Galaxy](https://www.visionport.com/) display will be set up by Liquid Galaxy Engineer Josh Ausborne at Booth 1103. This display will be showcasing content that includes Sketchfab and Unity 3D Models, Cesium content with interactive weather data, 360 panoramic video, Google Earth/Google Streetview content, and engaging presentations about National Parks and National Marine Sanctuaries.
 
 We are very excited to be showcasing our technology with BWC Visual Technology. BWC is a distributor and licensed re-seller of state-of-the-art, interactive exhibit technology for museums and science centers. We have great respect for their team and technologies, and are excited to be showcasing Liquid Galaxy with them.
 

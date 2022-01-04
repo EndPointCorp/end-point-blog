@@ -44,7 +44,7 @@ The combination of a graph like the one above and the probability distribution t
 
 The fact that our distribution is part of the Bayesian Network, allows us to use the formula for simplifying the distribution itself. The formula is called the **chain rule for Bayesian Networks** and for our particular example looks like the following:
 
-```nohighlight
+```plain
 p(cat, sex, age, rel, loc) = p(sex) * p(age) * p(loc) * p(rel | age) * p(cat | sex, age)
 ```
 
@@ -58,25 +58,25 @@ Before going further, I strongly advise you to make sure you read the [previous 
 
 Let’s take our chain rule equation and simplify it:
 
-```nohighlight
+```plain
 p(cat, sex, age, rel, loc) = p(sex) * p(age) * p(loc) * p(rel | age) * p(cat | sex, age)
 ```
 
 Again a conditional distrubution can be expressed as:
 
-```nohighlight
+```plain
 p(a | b) = p(a, b) / p(b)
 ```
 
 This gives us:
 
-```nohighlight
+```plain
 p(cat, sex, age, rel, loc) = p(sex) * p(age) * p(loc) * (p(rel, age)/ p(age)) * (p(cat, sex, age) / p(sex, age))
 ```
 
 We can easily factor out the p(age) with:
 
-```nohighlight
+```plain
 p(cat, sex, age, rel, loc) = p(sex) * p(loc) * p(rel, age) * (p(cat, sex, age) / p(sex, age))
 ```
 
@@ -158,7 +158,7 @@ infer.call :elders, :female, :in_relationship, :canada
 
 Which yields:
 
-```nohighlight
+```plain
 Best match for [:teens, :male, :single, :us]:
    snacks => 0.020610837341908994
 Full pointed at:

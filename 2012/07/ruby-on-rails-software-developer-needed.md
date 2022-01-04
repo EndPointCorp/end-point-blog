@@ -3,8 +3,7 @@ author: Jon Jensen
 title: Ruby on Rails software developer needed
 github_issue_number: 676
 tags:
-- company
-- jobs
+- jobs-closed
 - rails
 date: 2012-07-31
 ---
@@ -49,4 +48,6 @@ Bonus points for experience:
 - Contributing to gems or other open source projects
 - Handling system administration and deployment
 
-Please email us an introduction to [jobs@endpoint.com](mailto:jobs@endpoint.com) to apply. Include a resume, your GitHub or LinkedIn URLs, or whatever else that would help us get to know you. We look forward to hearing from you!
+~~Please email us an introduction to jobs&#x40;endpoint.com to apply.~~
+**(This job has been filled.)**
+Include a resume, your GitHub or LinkedIn URLs, or whatever else that would help us get to know you. We look forward to hearing from you!

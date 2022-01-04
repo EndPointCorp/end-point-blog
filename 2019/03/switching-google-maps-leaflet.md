@@ -21,7 +21,7 @@ So what are your options? You can either pay or completely remove Google Maps fr
 
 I have a <a href="https://www.extendedforecast.net">personal weather website</a>, and when I heard big changes were coming, I started to move away from Google Maps as well. My choice at that moment was Leaflet: It has everything you may need to build a robust tile-based map, add layers, markers, animations, custom tiles, etc. And it’s BSD-licensed <b>open source and free</b>.
 
-###Creating a basic map
+### Creating a basic map
 
 <img src="/blog/2019/03/switching-google-maps-leaflet/google-vs-leaflet-look-and-feel.jpg" /><br><small>Google Map conversion to Leaflet can be almost seamless if the same tiles are used.</small>
 
@@ -52,7 +52,7 @@ var map = new google.maps.Map(document.getElementById("map"), {
 });
 ```
 
-* Leaflet:
+Leaflet:
 
 ```javascript
 var map = new L.Map("map", {
@@ -64,18 +64,18 @@ var map = new L.Map("map", {
 
 Quite similar, isn’t it? The main difference is that, in Leaflet, we need to provide a tile layer for the base map because there isn’t one by default. There are a lot of excellent tile layers available to use at no cost. Here are some of them:
 
-* <b>Bright</b>: ```https://a.tiles.mapbox.com/v3/mapbox.world-bright/{z}/{x}/{y}.png```
-* <b>Topographic</b>: ```https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png```
-* <b>Black and white</b>: ```https://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}{r}.png```
+* <b>Bright</b>: `https://a.tiles.mapbox.com/v3/mapbox.world-bright/{z}/{x}/{y}.png`
+* <b>Topographic</b>: `https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png`
+* <b>Black and white</b>: `https://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}{r}.png`
 
 You can browse other free tile layer providers for Leaflet on <a href="https://leaflet-extras.github.io/leaflet-providers/preview/">this link</a>. And of course, if you want to pay there’s a lot of affordable paid tiles out there too.
 
 
-###Adding a marker
+### Adding a marker
 
 Adding a marker is quite straightforward as well. It even looks easier on Leaflet than Google.
 
-* Google:
+Google:
 
 ```javascript
 var marker = new google.maps.Marker({
@@ -85,7 +85,7 @@ var marker = new google.maps.Marker({
 });
 ```
 
-* Leaflet:
+Leaflet:
 
 ```javascript
 var marker = new L.Marker(new L.LatLng(40.7401, -73.9891));
@@ -123,7 +123,7 @@ And that’s it: we have a working Leaflet map with a marker that displays a tex
 </body>
 ```
 
-###Layers and controls
+### Layers and controls
 
 From this point, we can start doing more complex things if we need to:
 
@@ -134,8 +134,7 @@ From this point, we can start doing more complex things if we need to:
 
 You can browse the <a href="https://leafletjs.com/reference-1.4.0.html">Leaflet API reference</a> for further details.
 
-
-###Plugins and tools
+### Plugins and tools
 
 There is some extended functionality in Google Maps that is not available in Leaflet by default unless we use a plugin. For example, if we want to add the “fullscreen” button to the top right corner, just as Google has it, or if we want to let the user draw polygons on top of the map, we’ll need to download and add the reference to the required plugins. Here is a list of the ones I’ve already used:
 
@@ -153,8 +152,7 @@ There is also some alternatives to additional services offered by Google like ge
 
 More services can be found at <a href="https://switch2osm.org/other-uses/">switch2osm.org/other-uses</a>.
 
-
-###Putting it all together
+### Putting it all together
 
 I’ve been using Leaflet for almost a year now in an interactive weather map originally made with the Google Maps API. Of course, I’ve had some minor hiccups along the way, but having full control of the source code and resources allows you to add functionality, fix things or even rewrite whatever you need.
 

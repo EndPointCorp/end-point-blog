@@ -8,8 +8,6 @@ tags:
 date: 2013-05-08
 ---
 
-
-
 Like many web developers, I use [Google Chrome](https://www.google.com/intl/en/chrome/) to develop my front-end user interface. I do this because the [Chrome Developer Tools](https://developer.chrome.com/devtools) are very nice at letting me fix CSS styles and debug JavaScript. One downfall to using Google Chrome as my only view of my website while developing, however, is that I often find that I’ve used some feature of HTML or CSS that isn’t supported by other browsers. While this problem seems to come less often these days, I still find the occasional glitch. Most notably, this seems to happen with Microsoft’s Internet Explorer (IE) more than any other browser.
 
 During a recent project, I finished up the UI so that everything looked and felt great. Then I popped open IE to see what sort of things I would need to fix. One feature of HTML that I didn’t know wasn’t supported by IE was that of placeholder text for form inputs. For example:
@@ -99,5 +97,3 @@ Modernizr.load
 Now my Placeholders.js library only loads when the browser doesn’t support input placeholders. Hooray! 
 
 Note: One thing that tripped me up a little is that you can either use the development Modernizr library or you can [build your own](https://modernizr.com/download/) with just the functionality you want to detect. This corresponds directly to the test line in the load function options. Make sure if you build your own modernizr.js file that you include all the features you test. In my case, I had to include the “Input Attributes” option.
-
-

@@ -37,7 +37,7 @@ sudo vi /etc/apache2/httpd.conf
 
 Uncomment the following lines to look like this:
 
-```nohighlight
+```plain
 LoadModule php5_module libexec/apache2/libphp5.so
 LoadModule userdir_module libexec/apache2/mod_userdir.so
 Include /private/etc/apache2/extra/httpd-userdir.conf
@@ -51,7 +51,7 @@ sudo vi /etc/apache2/extra/httpd-userdir.conf
 
 Uncomment the following line to look like this:
 
-```nohighlight
+```plain
 Include /private/etc/apache2/users/*.conf
 ```
 
@@ -63,7 +63,7 @@ sudo vi /etc/apache2/users/~YOURUSERNAME.conf
 
 Type the following in there:
 
-```nohighlight
+```plain
 <Directory "/Users/~YOURUSERNAME/Sites/">
     AddLanguage en .en
     LanguagePriority en fr de
@@ -86,7 +86,7 @@ Go to http://localhost/~YOURUSER/wordpress-heroku/ and enjoy the results of your
 
 ### Enabling PostgreSQL for PHP
 
-```nohighlight
+```plain
 Your PHP installation appears to be missing the PostgreSQL extension which is required by WordPress with PG4WP.
 ```
 
@@ -122,7 +122,7 @@ Now 5 hours later, you are completely ready for the famous 5-min install ;D. Go 
 
 What to do next? Of course, upload a custom theme or plugin.
 
-```nohighlight
+```plain
 Unable to create directory wp-content/uploads/2015/08. Is its parent directory writable by the server?
 $ cd ~/Sites/THESITE
 $ sudo chown -R _www wordpress
@@ -131,7 +131,7 @@ $ sudo chmod -R g+w wordpress
 
 If you encounter an error asking you for FTP credentials in order to do this:
 
-```nohighlight
+```plain
 To perform the requested action, WordPress needs to access your web server.
 Please enter your FTP credentials to proceed.
 

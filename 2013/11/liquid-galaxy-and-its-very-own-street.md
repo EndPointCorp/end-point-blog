@@ -4,7 +4,7 @@ title: Liquid Galaxy and its Very Own Street View App
 github_issue_number: 881
 tags:
 - javascript
-- liquid-galaxy
+- visionport
 - nodejs
 date: 2013-11-09
 ---

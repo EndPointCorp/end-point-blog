@@ -3,14 +3,13 @@ author: Steph Skardal
 title: Google+
 github_issue_number: 475
 tags:
-- company
 - social-networks
 date: 2011-07-11
 ---
 
-<a href="/blog/2011/07/google/image-0-big.jpeg" onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5628111307653947618" src="/blog/2011/07/google/image-0.jpeg" style="display:block; margin:0px auto 10px; text-align:center;cursor:pointer; cursor:hand;width: 360px; height: 225px;"/></a>
+<img border="0" src="/blog/2011/07/google/image-0.jpeg" />
 
-Over the weekend, I dug into [Google+](https://plus.google.com/) a bit. I wanted to share a few notes about the experience with my coworkers and the world.
+Over the weekend, I dug into Google+ a bit. I wanted to share a few notes about the experience with my coworkers and the world.
 
 ### Speed
 
@@ -38,8 +37,8 @@ Yesterday, I tried **Google Hangouts** with a friend from my Windows laptop. I w
 
 ### Other Stuff
 
-[Jon](/team/jon-jensen) mentioned that the Android app for Google+ is nice. I haven’t examined Sparks much, but it is similar to sharing in Facebook. I also just read that the iPhone app for Google+ is on its way (from a Google+ contact). Finally, I’d consider shifting my photo backups from Flickr to Picasa if future Picasa updates justify the switch, which would allow me to easily share and tag photos, as well as back-up those 2-3 MB photos!
+[Jon](/team/jon-jensen/) mentioned that the Android app for Google+ is nice. I haven’t examined Sparks much, but it is similar to sharing in Facebook. I also just read that the iPhone app for Google+ is on its way (from a Google+ contact). Finally, I’d consider shifting my photo backups from Flickr to Picasa if future Picasa updates justify the switch, which would allow me to easily share and tag photos, as well as back-up those 2-3 MB photos!
 
 ### Conclusion
 
-I’m impressed with the speed and usability of Google+. I’m interested to see the upcoming features **and** equally as interested to see how much cross-posting is going to happen between Google+ and Facebook, brought up by [Dave Jenkins](http://www.davejenkins.com/), who has also [written about Google+](https://web.archive.org/web/20120103022906/http://www.davejenkins.com/2011/06/29/early-impressions-of-google/) after he received an early invite.
+I’m impressed with the speed and usability of Google+. I’m interested to see the upcoming features **and** equally as interested to see how much cross-posting is going to happen between Google+ and Facebook, brought up by [Dave Jenkins](/blog/authors/dave-jenkins/), who has also [written about Google+](https://web.archive.org/web/20120103022906/http://www.davejenkins.com/2011/06/29/early-impressions-of-google/) after he received an early invite.

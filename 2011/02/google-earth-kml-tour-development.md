@@ -4,7 +4,7 @@ title: Google Earth KML Tour Development Challenges on Liquid Galaxy
 github_issue_number: 416
 tags:
 - google-earth
-- liquid-galaxy
+- visionport
 date: 2011-02-24
 ---
 
@@ -20,7 +20,7 @@ But tours can also [use chronological elements](https://developers.google.com/km
 
 Taking this technique a step further, we also “wrapped” some very large KML datasets in NetworkLink elements, and wrapped those NetworkLinks in Folder elements with TimeStamp elements as well. This allowed fine control over when to fetch and render the large set, just-in-time to be featured in its own tour. These large loads can cause the Earth client to stutter, so we also stopped the flight motion and displayed a balloon full of text for the audience. A KML example of this wrapper is below.
 
-```nohighlight
+```plain
 <Folder>
     <name>Region Link Two</name>
     <TimeStamp><when>2010-09-19T16:00:00Z</when></TimeStamp>

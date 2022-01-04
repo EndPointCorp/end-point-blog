@@ -9,7 +9,7 @@ date: 2015-02-10
 
 Today, I sat down to read through a few recent End Point blog articles and was impressed at the depth of topics in recent posts ([PostgreSQL](/blog/2015/02/postgres-custom-casts-and-pgdump), [Interchange](/blog/2015/02/interchange-loop-optimization), [SysAdmin](/blog/2015/02/cron-wrapper-keep-your-cron-jobs), [Text Editors (Vim)](/blog/2015/02/vim-plugin-spotlight-ctrlp), [Dancer](/blog/2015/02/filling-in-header-elements-with-dancer), [AngularJS](/blog/2015/02/polemics-on-opinions-about-angularjs)) from my coworkers. The list continues if I look further back covering technologies in both front and back end web development. And, this list doesn’t even cover the topics I typically write about such as Ruby on Rails & JavaScript.
 
-While 5 years ago, we may have said we predominately worked with ecommerce clients, our portfolio has evolved to include [Liquid Galaxy](https://liquidgalaxy.endpoint.com/) clients and many non-ecommerce sites as well. With the inspiration from reading through these recent posts, I decided to share some updated stats.
+While 5 years ago, we may have said we predominately worked with ecommerce clients, our portfolio has evolved to include [Liquid Galaxy](https://www.visionport.com/) clients and many non-ecommerce sites as well. With the inspiration from reading through these recent posts, I decided to share some updated stats.
 
 Do you remember [my post on Wordle](/blog/2011/02/in-our-own-words) from early 2011? [Wordle](http://www.wordle.net/) is a free online word cloud generator. I grabbed updated text from 2013 and on from our blog, using the code [included in my original post](/blog/2011/02/in-our-own-words), and generated a new word cloud from End Point blog content:
 
@@ -17,7 +17,7 @@ Do you remember [my post on Wordle](/blog/2011/02/in-our-own-words) from early 2
 
 End Point blog Word cloud from 2013 to present
 
-I removed common words from the word cloud not removed from the original post, including “one”, “like”, etc. Compared to the original post, it looks like database related topics (e.g. [PostgreSQL](/technology/postgresql)) still have strong representation on the blog in terms of word count, and many other common developer words. [Liquid Galaxy](https://liquidgalaxy.endpoint.com/) now shows up in the word cloud (not surprising), but many of the other technology specific terms are still present (Spree, [Rails](/technology/ruby-on-rails), [Bucardo](/technology/replication)).
+I removed common words from the word cloud not removed from the original post, including “one”, “like”, etc. Compared to the original post, it looks like database related topics (e.g. [PostgreSQL](/technology/postgresql)) still have strong representation on the blog in terms of word count, and many other common developer words. [Liquid Galaxy](https://www.visionport.com/) now shows up in the word cloud (not surprising), but many of the other technology specific terms are still present (Spree, [Rails](/technology/ruby-on-rails), [Bucardo](/technology/replication)).
 
 I also took a look at the top 10 blog posts by page views, as compared to [this post](/blog/2010/01/2009-end-point-blogging):
 
@@ -42,7 +42,7 @@ How do End Point services break down?
 
 Trying to explain the broad range and depth of our services can be challenging. Here are a few additional notes related to the pie chart:
 
-- Our [Liquid Galaxy](https://liquidgalaxy.endpoint.com/) work spans across the topics of Hardware & Hosting, Cloud Systems, and Databases.
+- Our [Liquid Galaxy](https://www.visionport.com/) work spans across the topics of Hardware & Hosting, Cloud Systems, and Databases.
 - Our [Ecommerce](/ecommerce) services typically includes work in the topics of Backend & Client Side Development, as well as Databases.
 - Our development in mobile applications spans Backend & Client Side Development.
 
@@ -52,6 +52,6 @@ All in all, I’m impressed that we’ve continued to maintain expertise in long
 
 P.S. If you are interested in generating word statistics via command line, the following will get you the top 20 words given a text file:
 
-```nohighlight
+```plain
 tr -c '[:alnum:]' '[\n*]' < some_text_file.txt | sort | uniq -c | sort -nr | head -20
 ```

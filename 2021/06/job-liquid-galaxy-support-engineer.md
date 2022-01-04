@@ -3,15 +3,14 @@ title: 'Job opening: Liquid Galaxy support engineer'
 author: Benjamin Goldstein
 github_issue_number: 1755
 tags:
-- company
-- jobs
-- liquid-galaxy
+- jobs-closed
+- visionport
 date: 2021-06-10
 ---
 
 ![Liquid Galaxy cabinet](/blog/2021/06/job-liquid-galaxy-support-engineer/lg-cabinet.jpg)
 
-We are looking for a full-time, experienced or entry-level engineer to join the End Point Immersive and Geospatial Support (I+G) Team—​a small, multidisciplinary team that supports our company’s clients with their [Liquid Galaxy systems](https://liquidgalaxy.endpoint.com/).
+We are looking for a full-time, experienced or entry-level engineer to join the End Point Immersive and Geospatial Support (I+G) Team—​a small, multidisciplinary team that supports our company’s clients with their [Liquid Galaxy systems](https://www.visionport.com/).
 
 The candidate will be based out of our Johnson City, Tennessee or New York City offices depending on where the candidate is located. With sufficient hardware and deployment experience, the engineer may eventually be asked to travel to, perform, and supervise system installations.
 
@@ -55,8 +54,11 @@ This is a great entry-level opportunity to learn about all aspects of production
 
 End Point was founded in New York City in 1995 as a full-service software development consultancy. The products and designs we produce are stable, scalable, and long-lasting. Over the past two decades, we’ve automated business processes, brought new ideas to market, and built large-scale, dynamic infrastructure.
 
-### Get in touch with us:
-Please email us an introduction to [jobs@endpoint.com](mailto:jobs@endpoint.com) to apply! Include your location, a resume/​CV, your Git repository or LinkedIn URLs (if any), and whatever else may help us get to know you. You can expect to interview with the Support Lead and Team Manager, and do a hands-on Linux work exercise. 
+### Get in touch with us
+
+~~Please email us an introduction to jobs&#x40;endpoint.com to apply!~~
+**(This job has been filled.)**
+Include your location, a resume/​CV, your Git repository or LinkedIn URLs (if any), and whatever else may help us get to know you. You can expect to interview with the Support Lead and Team Manager, and do a hands-on Linux work exercise. 
 
 We look forward to hearing from you! Direct work seekers only, please—​this role is not for agencies or subcontractors.
 

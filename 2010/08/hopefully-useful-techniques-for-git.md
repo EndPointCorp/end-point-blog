@@ -69,12 +69,12 @@ Given those things, we can follow a simple process:
 
 When you’re just starting the rebase, this might mean:
 
-```nohighlight
+```plain
 [you@yours repo] git checkout -b shiny_rebase_01 shiny
 ```
 
 But for the next iteration, you would have shiny_rebase_01 checked out, and use it as your starting place:
-```nohighlight
+```plain
 # The use of "shiny_rebase_01" is implied assuming our previous checkout above
 [you@yours repo] git checkout -b shiny_rebase_02
 
@@ -94,13 +94,13 @@ Make your life easy by using the last target tag as the starting place for this 
 
 At this point you may say “but I don’t have a last target tag!” The first time through, you won’t have one because you haven’t done an iteration yet. So for the first time, you can start from where git rebase itself would start:
 
-```nohighlight
+```plain
 [you@yours repo] git whatchanged `git merge-base master shiny`..master
 ```
 
 But subsequent iterations will have a tag to reference (see the next step), so the next couple times through might look like:
 
-```nohighlight
+```plain
 [you@yours repo] git whatchanged shiny_rebase_target_01..master
 
 [you@yours repo] git whatchanged shiny_rebase_target_02..master
@@ -112,7 +112,7 @@ This is addressing items 2 and 3: we’re looking at what’s coming before we l
 
 1. Having identified the commit you want to use as your next rebasing point, make a tag for it. Name the tags consistently, so they reflect the stage to which they apply. So, if this is our first pass through and we’ve determined that we want to use commit a723ff127 for our first rebase point, we say:
 
-```nohighlight
+```plain
 [you@yours repo] git tag shiny_rebase_target_01 a723ff127
 ```
 
@@ -122,7 +122,7 @@ This gives us a list of tags representing the different points in the master ont
 
 So, for example:
 
-```nohighlight
+```plain
 [you@yours repo] git rebase shiny_rebase_target_01 >> ~/shiny_rebase_work/target_01.log 2>&1
 ```
 
@@ -130,7 +130,7 @@ You would naturally update the tag and logfile per stage.
 
 Review the logfile in your pager of choice. Is there a merge conflict reported at the bottom? Well, capture that information *before* you dive in and resolve it:
 
-```nohighlight
+```plain
 # Log the basic info about the current state
 [you@yours repo] git status >> ~/shiny_rebase_work/target_01.log 2>&1
 # Log specifically what the conflicts are
@@ -139,7 +139,7 @@ Review the logfile in your pager of choice. Is there a merge conflict reported a
 
 Now go and resolve your conflicts per usual, but remember to preserve your output when you resume:
 
-```nohighlight
+```plain
 [you@yours repo] git rebase --continue >> ~/shiny_rebase_work/target_01.log 2>&1
 ```
 

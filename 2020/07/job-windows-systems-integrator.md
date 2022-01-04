@@ -3,8 +3,7 @@ author: Jon Jensen
 title: 'Job opening: Windows Systems Integrator'
 github_issue_number: 1652
 tags:
-- company
-- jobs
+- jobs-closed
 - windows
 date: 2020-07-23
 ---
@@ -12,8 +11,6 @@ date: 2020-07-23
 <img src="/blog/2020/07/job-windows-systems-integrator/20181204-063141-sm.jpg" alt="New York City East River & FDR Drive" />
 
 <!-- Photo by Jon Jensen -->
-
-**(This position has been filled.)**
 
 We are looking for a Windows systems integrator in the New York City metropolitan region to work with us.
 
@@ -52,7 +49,9 @@ This position requires (at least once COVID-19 subsides) some work in our Manhat
 
 ### How to contact us
 
-Please email us an introduction to [jobs@endpoint.com](mailto:jobs@endpoint.com) to apply. Include your location, a resume/​CV, your LinkedIn URL (if you have one), and whatever else helps us get to know you.
+~~Please email us an introduction to jobs&#x40;endpoint.com to apply.~~
+**(This job has been filled.)**
+Include your location, a resume/​CV, your LinkedIn URL (if you have one), and whatever else helps us get to know you.
 
 We look forward to hearing from you! Direct work seekers only, please—​this role is not for agencies or subcontractors.
 

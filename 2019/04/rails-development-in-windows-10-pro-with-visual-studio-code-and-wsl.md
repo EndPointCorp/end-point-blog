@@ -43,7 +43,7 @@ There are multiple options here but I decided to go with Ubuntu 18.04 LTS. Ok, c
 
 Your console should look something like this now:
 
-```nohighlight
+```plain
 Installing, this may take a few minutes...
 Please create a default UNIX user account. The username does not need to match your Windows username.
 For more information visit: https://aka.ms/wslusers
@@ -60,7 +60,7 @@ kevin@KEVIN-SATELLITE:~$
 
 Let’s look at our freshly installed distribution’s version:
 
-```nohighlight
+```plain
 kevin@KEVIN-SATELLITE:~$ lsb_release -a
 No LSB modules are available.
 Distributor ID: Ubuntu
@@ -88,7 +88,7 @@ gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB8
 
 After running the second command, among other things, we get something like this in the console:
 
-```nohighlight
+```plain
 ...
 
 Installing RVM to /home/kevin/.rvm/
@@ -109,7 +109,7 @@ source /home/kevin/.rvm/scripts/rvm
 
 And, finally, to confirm that our RVM has installed correctly:
 
-```nohighlight
+```plain
 kevin@KEVIN-SATELLITE:~$ rvm -v
 rvm 1.29.4 (latest) by Michal Papis, Piotr Kuczynski, Wayne E. Seguin [https://rvm.io]
 ```
@@ -124,7 +124,7 @@ rvm list known
 
 RVM responds with something like this:
 
-```nohighlight
+```plain
 # MRI Rubies
 [ruby-]1.8.6[-p420]
 [ruby-]1.8.7[-head] # security released on head
@@ -157,13 +157,13 @@ ruby -v
 
 Which responds with:
 
-```nohighlight
+```plain
 ruby 2.5.1p57 (2018-03-29 revision 63029) [x86_64-linux]
 ```
 
 For those of you out there that are more on the curious side, we can run `which ruby` and see that the Ruby that we’re running is actually installed inside the RVM installation directory. Take a look:
 
-```nohighlight
+```plain
 kevin@KEVIN-SATELLITE:~$ which ruby
 /home/kevin/.rvm/rubies/ruby-2.5.1/bin/ruby
 ```
@@ -216,7 +216,7 @@ kevin@KEVIN-SATELLITE:~/railsdemo/my-rails-app$ rails server
 
 Oops! Unfortunately, that doesn’t work. We get a bunch of stuff in the console ending in this:
 
-```nohighlight
+```plain
 Could not find a JavaScript runtime. See https://github.com/rails/execjs for a list of available runtimes. (ExecJS::RuntimeUnavailable)
 ```
 
@@ -238,7 +238,7 @@ We’re explicitly telling Rails to use the WEBrick development server here beca
 
 You should now see something like this in the prompt:
 
-```nohighlight
+```plain
 => Booting WEBrick
 => Rails 5.2.1.1 application starting in development on http://localhost:3000
 => Run `rails server -h` for more startup options
@@ -468,7 +468,7 @@ rdebug-ide ./bin/rails server webrick
 
 Run this in your WSL terminal and it should respond with something like this:
 
-```nohighlight
+```plain
 Fast Debugger (ruby-debug-ide 0.6.1, debase 0.2.2, file filtering is supported) listens on 127.0.0.1:1234
 ```
 
@@ -486,7 +486,7 @@ After doing this, a few things happen:
 
 3. The previous prompt that we had in our terminal about `Fast Debugger` and whatnot, continues and shows the rest of the usual WEBrick output:
 
-```nohighlight
+```plain
 => Booting WEBrick
 => Rails 5.2.2 application starting in development on http://localhost:3000
 => Run `rails server -h` for more startup options

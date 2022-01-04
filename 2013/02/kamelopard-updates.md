@@ -4,7 +4,7 @@ title: Kamelopard Updates
 github_issue_number: 762
 tags:
 - google-earth
-- liquid-galaxy
+- visionport
 - open-source
 - ruby
 - kamelopard
@@ -43,7 +43,7 @@ write_actions_to 'actions.yml'
 
 In addition to the VSRAction object, these changes introduce a few new functions, including those shown here: band(a, b) returns a +/- b, in an array; lat_check() and long_check() ensure each value in the array is a valid latitude or longitude; and to_constraint() turns this validated array into a string suitable for use in a viewsyncrelay constraint. As I mentioned, this may prove awkward, but it’s a first step. This code creates a file called actions.yml, ready for use in viewsyncrelay:
 
-```nohighlight
+```plain
 ---
 actions:
 - name: action name

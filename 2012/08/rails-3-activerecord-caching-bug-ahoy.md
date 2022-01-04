@@ -36,7 +36,7 @@ Notice how in MimeTypeCategory.all, we are eager loading each MimeTypeCategory�
 
 Now, to reproduce this Rails caching bug, I clear my app’s cache using ‘Rails.cache.clear’ in the rails console, then load any page in my app that calls MimeTypeCategory.all. The page loads successfully and shows no errors. Doesn’t sound like a bug so far, right? If I load that same page a second time, I will get the standard Rails error page with:
 
-```nohighlight
+```plain
 undefined class/module MimeType
 ...
 (app/models/mime_type_category.rb:17:in 'all')

@@ -3,7 +3,11 @@ title: VISGRAF and the Moreira Salles Institute to Collaborate Using Liquid Gala
 author: Benjamin Goldstein
 github_issue_number: 1483
 tags:
-- liquid-galaxy
+- visionport
+- clients
+featured:
+  visionport: true
+  image_url: /blog/2019/01/liquid-galaxy-at-instituto-moreira-salles/image-0.jpg
 date: 2019-01-09
 ---
 

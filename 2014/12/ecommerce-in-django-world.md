@@ -16,18 +16,18 @@ Mezzanine ([http://mezzanine.jupo.org/](http://mezzanine.jupo.org/)) is a powerf
 
 Installing the Mezzanine CMS system from scratch can be accomplished in two methods, either by using the pip python package manager, or you can clone the current source from the git repository from the software maintainers. If you were planning to modify either Mezzanine or Cartridge to customize the setup for your own needs the latter would likely be preferable as you could then easily begin creating custom branches off the original source to track the customization work. However for this example I will show the pip method of installation:
 
-```nohighlight
+```plain
 pip install -U cartridge
 ```
 
 Once installed, there is a mezzanine-project command which will allow you to create a new blank Mezzanine environment within a new directory, and in this case we will also send an option to instruct the command to install the Cartridge module as well.
-```nohighlight
+```plain
 mezzanine-project -a cartridge new_cartridge_project
 ```
 
 At this point you will have a blank Mezzanine environment with the cartridge module installed, now the Django database must be populated with the model information for the application, and then the Django application server will be started.
 
-```nohighlight
+```plain
 cd new_cartridge_project
 python manage.py createdb
 python manage.py runserver

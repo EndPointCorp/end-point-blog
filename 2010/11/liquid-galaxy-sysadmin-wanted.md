@@ -3,14 +3,14 @@ author: Benjamin Goldstein
 title: Liquid Galaxy Sysadmin+ Wanted
 github_issue_number: 382
 tags:
-- jobs
+- jobs-closed
 - linux
-- liquid-galaxy
+- visionport
 - sysadmin
 date: 2010-11-18
 ---
 
-End Point Corporation is hiring for a motivated and creative GNU/Linux systems administrator. The work will primarily involve installing, supporting, maintaining and developing infrastructure improvements for Google Liquid Galaxy systems. Liquid Galaxy is an impressive panoramic system for Google Earth and other applications. [Check it out!](https://liquidgalaxy.endpoint.com/)
+End Point Corporation is hiring for a motivated and creative GNU/Linux systems administrator. The work will primarily involve installing, supporting, maintaining and developing infrastructure improvements for Google Liquid Galaxy systems. Liquid Galaxy is an impressive panoramic system for Google Earth and other applications. [Check it out!](https://www.visionport.com/)
 
 Responsibilities:
 
@@ -41,4 +41,5 @@ If you have experience with any of the following it is likely to be useful:
 
 While we have a strong preference that this position be a hire for our New York City office where most of our Liquid Galaxy team is located, we don’t entirely rule out the possibility of hiring someone who works out of his or her home office if the fit is right.
 
-Please email [jobs@endpoint.com](mailto:jobs@endpoint.com) to apply.
+~~Please email jobs&#x40;endpoint.com to apply.~~
+**(This job has been filled.)**

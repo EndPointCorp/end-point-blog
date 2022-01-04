@@ -32,7 +32,7 @@ The simplest probability scenario many of us are already accustomed with is the 
 
 So in this case we’d have a random variable—​let’s call it **T** (for “toss”) that can take values of: “heads” or “tails”. We then define the probability distribution P(T) as a function from the random variable value to a real number between 0 and 1 inclusively on both sides. In real world the probability values after e. g 10000 tosses might look like the following:
 
-```nohighlight
+```plain
 +-------+---------------------+
 | toss  | value               |
 +-------+---------------------+
@@ -453,7 +453,7 @@ end
 
 Which yields the following to the console (the full distribution is truncated due to its size):
 
-```nohighlight
+```plain
 +-----------+---------------------+
 | category  | value               |
 +-----------+---------------------+
@@ -641,7 +641,7 @@ infer.call :elders, :female, :in_relationship, :canada
 
 This gave the following results on the console:
 
-```nohighlight
+```plain
 Best match for [:teens, :male, :single, :us]:
    snacks => 0.016252573282200262
 Full pointed at:

@@ -3,7 +3,6 @@ author: Elizabeth Garrett Christensen
 title: The Dollars and Sense of Hiring Software Consultants
 github_issue_number: 1550
 tags:
-- jobs
 - company
 - training
 date: 2019-08-16

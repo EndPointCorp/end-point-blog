@@ -111,7 +111,7 @@ end
 
 After creating the extension based migration files and creating the above rake tasks, one would run the following from the application (sandbox/) directory:
 
-```nohighlight
+```plain
 steph@machine:/var/www/spree/sandbox$ rake foo:install
 (in /var/www/spree/sandbox)
 INFO: Mirroring assets from /var/www/spree/sandbox/foo/lib/tasks/../../db to /var/www/spree/sandbox/db

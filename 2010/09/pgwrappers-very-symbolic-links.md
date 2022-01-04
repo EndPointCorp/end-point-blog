@@ -14,13 +14,13 @@ I like pg_wrapper. For a development environment, or testing replication scenari
 
 Well, usually reliably. We were helping a client upgrade their production boxes from Postgres 8.1 to 8.4. This was just before the 9.0 release, otherwise we’d consider moving the directly to that instead. It was going fairly smoothly until on one box we hit this message:
 
-```nohighlight
+```plain
 Could not parse locale out of pg_controldata output
 ```
 
 Oops, they had pinned the older postgres-common version. An upgrade of those packages and no more error!
 
-```nohighlight
+```plain
 $ pg_lsclusters
 Version Cluster   Port Status Owner    Data directory                     Log file
 8.1     main      5439 online postgres /var/lib/postgresql/8.1/main       custom
@@ -31,7 +31,7 @@ Hmm, interesting. Okay, so not quite, got a little bit more work to do. This one
 
 The second place it looks is a symlink in the same /etc/postgresql/<version>/<cluster-name>/ directory. While that’s the old way of doing things, it at least let us get things looking reasonable:
 
-```nohighlight
+```plain
 # ln -s /var/lib/postgresql/8.4/main /etc/postgresql/8.4/main/pgdata
 # /etc/init.d/postgresql-8.4 status
 8.1     main      5439 online postgres /var/lib/postgresql/8.1/main       custom

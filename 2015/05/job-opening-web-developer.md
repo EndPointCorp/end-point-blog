@@ -3,8 +3,7 @@ author: Jon Jensen
 title: 'Job opening: Web developer'
 github_issue_number: 1301
 tags:
-- company
-- jobs
+- jobs-closed
 date: 2015-05-13
 ---
 
@@ -47,4 +46,6 @@ We are an equal opportunity employer and value diversity at our company. We do n
 
 ### How to apply
 
-Please email us an introduction to [jobs@endpoint.com](mailto:jobs@endpoint.com) to apply. Include a resume, your GitHub or LinkedIn URLs, or whatever else that would help us get to know you. We look forward to hearing from you! Full-time employment seekers only, please. No agencies or subcontractors.
+~~Please email us an introduction to jobs&#x40;endpoint.com to apply.~~
+**(This job has been filled.)**
+Include a resume, your GitHub or LinkedIn URLs, or whatever else that would help us get to know you. We look forward to hearing from you! Full-time employment seekers only, please. No agencies or subcontractors.

@@ -5,7 +5,7 @@ github_issue_number: 952
 tags:
 - visualization
 - gis
-- liquid-galaxy
+- visionport
 date: 2014-03-25
 ---
 
@@ -19,4 +19,4 @@ The Liquid Galaxy has separate instances of Google Earth running on each screen.
 
 End Point has developed skills and methods to take GIS data sets (commonly found as KML files, but any spreadsheet of data with latitude and longitude can be adapted), apply the geometric adjustments for multiple screens, and build incredible presentations for our clients. Sample data (in the video) includes: utility power usage, offshore oil & gas leases, population growth by state, school districts, and earthquakes along the San Andreas fault.
 
-End Point welcomes the opportunity to work with GIS consultancies in bringing their data to the Liquid Galaxy and then presenting an immersive visual platform to their clients and customers. For more information, please email [sales@endpoint.com](mailto:sales@endpoint.com) or [contact us here](https://liquidgalaxy.endpoint.com/contactus).
+End Point welcomes the opportunity to work with GIS consultancies in bringing their data to the Liquid Galaxy and then presenting an immersive visual platform to their clients and customers. For more information, please [see our Liquid Galaxy website](https://www.visionport.com/).

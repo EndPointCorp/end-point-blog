@@ -161,7 +161,7 @@ You are probably aware that the shorthand “TL;DR” means “too long; didn’
 
 I have been trying to get used to the newer `ss` (which stands for “socket statistics”) which can replace `netstat` and `lsof`, so I took a look at what the TLDR pages had to say about it:
 
-```nohighlight
+```plain
 % tldr ss
 
   ss
@@ -201,7 +201,7 @@ There is a nice command-line utility for dealing with Unicode in various ways. R
 
 Install with `cpanm App::Uni` or however else you prefer to install Perl modules from CPAN. It has a few useful options:
 
-```nohighlight
+```plain
 % uni
 usage:
   uni SEARCH-TERMS...    - find codepoints with matching names or values
@@ -216,14 +216,14 @@ usage:
 
 If you see a Unicode character out in the wild and can copy and paste it, `uni` can identify it for you:
 
-```nohighlight
+```plain
 % uni 🦆
 🦆 - U+1F986 - DUCK
 ```
 
 I most commonly use its implicit search function:
 
-```nohighlight
+```plain
 % uni horse
 ⻢- U+02EE2 - CJK RADICAL C-SIMPLIFIED HORSE
 ⾺- U+02FBA - KANGXI RADICAL HORSE
@@ -240,7 +240,7 @@ That Unicode character 🝖 = “alchemical symbol for horse dung” is a deligh
 
 `uni` is also useful for showing the characters for given code points:
 
-```nohighlight
+```plain
 % uni -u 25c8 25c9 25ca
 ◈ - U+025C8 - WHITE DIAMOND CONTAINING BLACK SMALL DIAMOND
 ◉ - U+025C9 - FISHEYE
@@ -249,7 +249,7 @@ That Unicode character 🝖 = “alchemical symbol for horse dung” is a deligh
 
 There is also an unrelated [Go version of `uni`](https://github.com/arp242/uni) that is fairly similar: 
 
-```nohighlight
+```plain
 % uni help
 Usage: uni [-hrq] [help | identify | search | print | emoji]
 
@@ -293,7 +293,7 @@ Commands:
 
 Its search function is roughly the same as its Perl counterpart with the `-8` option and additionally showing the decimal code point (which I’ve never seen used) and the HTML hex entity:
 
-```nohighlight
+```plain
 % uni search horse
      cpoint  dec    utf-8       html       name
 '⻢' U+2EE2  12002  e2 bb a2    &#x2ee2;   CJK RADICAL C-SIMPLIFIED HORSE (Other_Symbol)

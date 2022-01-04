@@ -25,7 +25,7 @@ pgbouncer’s description of its pools consists of “client” elements and “
 
 Most installations probably don’t want any client connections stuck waiting for PostgreSQL connections to service them, meaning the cl_waiting and maxwait metrics ought to be zero. This example will check those two metrics and complain when they’re nonzero, for a pgbouncer installation on port 5433 with pools “pgbouncer” and “maindb”:
 
-```nohighlight
+```plain
 postgres@db:~$ ./check_postgres.pl --action=pgb_pool_cl_waiting -p 5433 -w 3 -c 8
 POSTGRES_PGB_POOL_CL_WAITING OK: (port=5433) pgbouncer=0 * maindb=0 | time=0.01 time=0.01
 

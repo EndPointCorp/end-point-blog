@@ -26,7 +26,7 @@ Unlike most check_postgres actions, which deal with the current state of a singl
 
 The above command will connect to three databases, as three different users, and compare their schemas (i.e. structures). Note that we don’t need to specify a warning or critical value: we consider this an ‘OK’ Nagios check if the schemas match, otherwise it is ‘CRITICAL’. Each database gets assigned a number for ease of reporting, and the output looks like this:
 
-```nohighlight
+```plain
 POSTGRES_SAME_SCHEMA CRITICAL: (databases:prod,qa,dev)
   Databases were different. Items not matched: 1 | time=0.54s 
 DB 1: port=5432 dbname=prod user=alice
@@ -64,14 +64,14 @@ The final and most exciting large change is the ability to compare a database to
 
 To enable time-based checks, simply provide a single database to check. The first time it is run, same_schema simply gathers all the schema information and stores it on disk. The next time it is run, it detects the file, reads it in as database "2", and compares it to the current database (number "1"). The **--replace** argument will rewrite the file with the current data when it is done. So the cronjob for the aforementioned client is as simple as:
 
-```nohighlight
+```plain
 10 0 * * * ~/bin/check_postgres.pl --action=same_schema \
   --host=bar --dbname=abc --quiet --replace
 ```
 
 The **--quiet** argument ensures that no output is given if everything is ‘OK’. If everything is not okay (i.e. if differences are found), cron gets a bunch of input sent to it and duly mails it out. Thus, a few minutes after 10AM each day, a report is sent if anything has changed in the last day. Here’s a slightly redacted version of this morning’s report, which shows that a schema named "stat_backup" was dropped at some point in the last 24 hours (which was a known operation):
 
-```nohighlight
+```plain
 POSTGRES_SAME_SCHEMA CRITICAL: DB "abc" (host:bar)
   Databases were different. Items not matched: 1 | time=516.56s
 DB 1: port=5432 host=bar dbname=abc user=postgres
@@ -91,7 +91,7 @@ As you can see, the first part is a standard Nagios-looking output, followed by 
 
 Sometimes you want to store more than one version at a time: for example, if you want both a daily and a weekly view. To enable this, use the **--suffix** argument to create different instances of the saved file. For example:
 
-```nohighlight
+```plain
 10 0 * * * ~/bin/check_postgres.pl --action=same_schema \
   --host=bar --dbname=abc --quiet --replace --suffix=daily
 10 0 * * Fri ~/bin/check_postgres.pl --action=same_schema \

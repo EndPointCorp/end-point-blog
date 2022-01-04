@@ -11,8 +11,6 @@ tags:
 date: 2014-03-12
 ---
 
-
-
 Given the [recent DBD::Pg 3.0.0 release](/blog/2014/02/dbdpg-utf-8-perl-postgresql), with its improved Unicode support, it seemed like a good time to work on a [Bucardo bug](https://github.com/bucardo/bucardo/issues/47) we’ve wanted fixed for a while. Although [Bucardo](https://bucardo.org) will replicate Unicode data without a problem, it runs into difficulties when table or column in the database include non-ASCII characters. Teaching Bucardo to handle Unicode data has been an interesting exercise.
 
 Without information about its encoding, string data at its heart is meaningless. Programs that exchange string information without paying attention to the encoding end up with problems exactly like that described in the bug, with nonsense characters all over. Further, it’s impossible even to compare two different strings reliably. So not only would Bucardo’s logs and program output contain junk data, Bucardo would simply fail to find database objects that clearly existed, because it would end up querying for the wrong object name, or the keys of the hashes it uses internally would be meaningless. Even communication between different Bucardo processes needs to be decoded correctly. The recent DBD::Pg 3.0.0 release takes care of decoding strings sent from PostgreSQL, but other inputs, such as command-line arguments, must be treated individually. All output handles, such as STDOUT, STDERR, and the log file output, must be told to expect data in a particular encoding to ensure their output is handled correctly.
@@ -69,11 +67,10 @@ In some cases, I also had to add a couple more modules, and explicitly decode in
 
 And with that, now Bucardo accepts non-ASCII table names.
 
-```nohighlight
+```plain
 [~/devel/bucardo]$ prove t/10-object-names.t 
 t/10-object-names.t .. ok     
 All tests successful.
 Files=1, Tests=20, 24 wallclock secs ( 0.01 usr  0.01 sys +  2.01 cusr  0.22 csys =  2.25 CPU)
 Result: PASS
 ```
-

@@ -16,13 +16,13 @@ I work with a lot of open source projects, and I use the command-line for almost
 
 MediaWiki exists on Github as [wikimedia/mediawiki-core](https://github.com/wikimedia/mediawiki-core). The MediaWiki project tags all of their releases in the format X.Y.Z, so in this example we can use the git tags **1.22.0** and **1.23.0**. Github is very nice because you can view a specific file at a certain commit (aka a tag), and even grab it over the web as a plain text file. The format is:
 
-```nohighlight
+```plain
 https://raw.githubusercontent.com/PROJECTNAME/BRANCH-OR-TAG/FILE
 ```
 
 Note that you can use a tag ***OR*** a branch! So to compare these two files, we can use one of these pairs:
 
-```nohighlight
+```plain
 https://raw.githubusercontent.com/wikimedia/mediawiki-core/REL1_21/includes/UserMailer.php
 https://raw.githubusercontent.com/wikimedia/mediawiki-core/REL1_22/includes/UserMailer.php
 
@@ -32,7 +32,7 @@ https://raw.githubusercontent.com/wikimedia/mediawiki-core/1.22.0/includes/UserM
 
 All that is left is to treat git as a web service and compare the two files at the command line ourselves. The program **curl** is a great tool for downloading the files, as it dumps to stdout by default. We will add a **-s** flag (for “silent”) to prevent it from showing the progress meter as it usually does. The last bit of the puzzle is to use <(), bash’s process substitution feature, to trick diff into comparing the curl outputs as if they were files. So our final command is:
 
-```nohighlight
+```plain
 diff <(curl -s https://raw.githubusercontent.com/wikimedia/mediawiki-core/1.21.0/includes/UserMailer.php) \
 <(curl -s https://raw.githubusercontent.com/wikimedia/mediawiki-core/1.22.0/includes/UserMailer.php) \
 | more
@@ -47,7 +47,7 @@ diff -c <(curl -s https://raw.githubusercontent.com/postgres/postgres/REL9_3_4/s
 
 You are not limited to diff, of course. For a final example, let’s see how many times Tom Lane is mentioned in the version 9 release notes:
 
-```nohighlight
+```plain
 for i in {0,1,2,3,4}
 do grep -Fc 'Tom Lane' \
 <(curl -s https://raw.githubusercontent.com/postgres/postgres/master/doc/src/sgml/release-9.$i.sgml)

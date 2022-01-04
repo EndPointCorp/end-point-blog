@@ -64,4 +64,4 @@ Since we build RPMs of our local Perl, we want this PL/Perl RPM to depend on the
 
 After applying the patch(es) (adjusted for your own custom Perl build, of course), rebuild the RPM, and install the postgresql-plperl (8.2 or newer) or postgresql-pl (8.1 and earlier) RPM. With a `service postgresql restart`, you’re ready to go.
 
-For pre-built PostgreSQL 8.3 RPMs that link against unthreaded local Perl 5.10.0, for Red Hat Enterprise Linux 5 x86_64, see the [packages.endpoint.com Yum repositories](https://packages.endpoint.com/).
+For pre-built PostgreSQL 8.3 RPMs that link against unthreaded local Perl 5.10.0, for Red Hat Enterprise Linux 5 x86_64, see the [packages.endpointdev.com Yum repositories](https://packages.endpointdev.com/).

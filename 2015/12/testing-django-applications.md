@@ -8,11 +8,11 @@ tags:
 - python
 - testing
 - cms
-- liquid-galaxy
+- visionport
 date: 2015-12-14
 ---
 
-This post summarizes some observations and guidelines originating from introducing the [pytest](http://pytest.org/latest/) unit testing framework into our CMS (Content Management System) component of the [Liquid Galaxy](https://liquidgalaxy.endpoint.com/).
+This post summarizes some observations and guidelines originating from introducing the [pytest](http://pytest.org/latest/) unit testing framework into our CMS (Content Management System) component of the [Liquid Galaxy](https://www.visionport.com/).
 Our Django-based CMS allows users to define scenes, presentations and assets (StreetView, Earth tours, panos, etc) to be displayed on the
 [Liquid Galaxy](https://www.youtube.com/watch?v=2VonXkA6YYg).
 

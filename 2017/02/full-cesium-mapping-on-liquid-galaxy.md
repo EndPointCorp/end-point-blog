@@ -4,13 +4,13 @@ title: Full Cesium Mapping on the Liquid Galaxy
 github_issue_number: 1287
 tags:
 - cesium
-- liquid-galaxy
+- visionport
 date: 2017-02-07
 ---
 
 
 
-A few months ago, we shared a video and some [early work](/blog/2016/07/cesium-on-liquid-galaxy) we had done with bringing the Cesium open source mapping application to the Liquid Galaxy. We've now completed a full deployment for [Smartrac](https://www.smartrac-group.com/), a retail tracking analytics provider, using Cesium in a production environment!  This project presented a number of technical challenges beyond the early prototype work, but also brought great results for the client and garnered a fair amount of attention in the press, to everyone's benefit.
+A few months ago, we shared a video and some [early work](/blog/2016/07/cesium-on-liquid-galaxy/) we had done with bringing the Cesium open source mapping application to the Liquid Galaxy. We've now completed a full deployment for [Smartrac](https://www.smartrac-group.com/), a retail tracking analytics provider, using Cesium in a production environment!  This project presented a number of technical challenges beyond the early prototype work, but also brought great results for the client and garnered a fair amount of attention in the press, to everyone's benefit.
 
 <iframe allowfullscreen="" frameborder="0" height="315" src="https://www.youtube.com/embed/CntuRx3Nig4" width="560"></iframe>
 

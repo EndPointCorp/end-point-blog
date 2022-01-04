@@ -11,7 +11,7 @@ date: 2009-03-09
 
 PostgreSQL ships with several utility applications to administer the server life cycle and clean up in the event of problems. I spent some time lately looking at what is probably one of the least well known of these, [pg_controldata](https://www.postgresql.org/docs/current/static/app-pgcontroldata.html). This useful utility dumps out a number of useful tidbits about a database cluster, given the data directory it should look at. Here’s an example from a little-used 8.3.6 instance:
 
-```nohighlight
+```plain
 josh@eddie:~$ pg_controldata
 pg_control version number:            833
 Catalog version number:               200711281

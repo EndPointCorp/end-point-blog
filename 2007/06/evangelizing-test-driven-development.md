@@ -15,9 +15,9 @@ If you're not familiar with the principle, it basically boils down to this: When
 
 I originally greeted this idea with skepticism, or viewed it as unrealistic. It also struck me as overkill for small projects. However, as I've been writing more tests, and finally came around to writing tests first, it's really demonstrated its value to me. I'll list an abstract set of benefits, and then provide a hopefully-not-too-tedious example.
 
-## Benefits
+### Benefits
 
-### 1. Cleaner interfaces
+#### 1. Cleaner interfaces
 
 In order to test something, you test its interfaces. Which means you think through how the interface would really need to work from the
 user's perspective. Of course, one should always plan a clean interface, but writing a test helps you think more concretely about what the exact
@@ -25,12 +25,12 @@ inputs and output should be. Furthermore, it serves to effectively document thos
 behaviors. It isn't exactly a substitute for documentation, but it's worlds better than code with no tests and no docs. In fact, I would
 argue that code with working tests and no docs is better than code with docs but no tests.
 
-### 2. Separation of concerns
+#### 2. Separation of concerns
 
 When trying to write test cases for some new widget interface, it can become clear early on when you're trying to put too much into your magical widget,
 and really need to be building separate, less magical, widgets.
 
-### 3. Coverage
+#### 3. Coverage
 
 Manual testing of something in the web-app space tends to mean banging on the website front-end. This does not guarantee coverage of all the
 functional possibilities in your component. On the other hand, if you commit yourself to writing the tests for a method before you implement a method, you've got coverage on all your methods.
@@ -40,11 +40,11 @@ test per component method would only suffice in very simple cases, and probably 
 
 You can use Devel::Cover (in Perl) to check the percentage of code covered by your tests, meaning you can empirically measure how rigorous your testing is.
 
-### 4. Reliability
+#### 4. Reliability
 
 Manual testing depends on the whims, time, patience, and attention to detail of a human test user. Users are people, and not to be trusted, no matter how good their intentions. Users do not do the same thing the same way every time. Users forget. They get impatient. They make bad assumptions. Etc. Users are people, people are animals, and animals are shifty. Would you trust a dog to test your app? A racoon? I would not. Mammals are silly things. Birds, reptiles, fish, etc. are also silly.
 
-### 5. Reusability
+#### 5. Reusability
 
 Manual tests take time, and that time cannot be recovered. Furthermore, the manual test does not produce anything lasting; your testing procedures and
 results are excreted away into the ether, never to benefit anyone or anything ever again. They might as well have never happened, at least once you change anything at all in your code, data, or the environment it all runs in, when everything needs to be tested again.
@@ -53,7 +53,7 @@ Tests written alongside the test target component are concrete scripts that can 
 component as a basic sanity check. They can be used any time you feel like it, even if it isn't strictly necessary. They can be incorporated into a
 larger framework to run periodic tests of a full staging environment. Thus, the time spent developing a test is an investment in the future. The time spent manually testing a component that could be tested in automated fashion simply cannot add any kind of long-term value.
 
-### 6. Precision
+#### 6. Precision
 
 Manual testing works in big chunks; you're testing the overall observable behavior of a system. This is valuable and has its place. But when
 something goes wrong, you then need to peel back the layers of your system onion to spot the piece(s) that cause your problem.
@@ -63,9 +63,9 @@ be realistically achieved). You will find your little problem spots long before 
 portion with much greater confidence knowing that all the little pieces in your system have been empirically demonstrated to "work". Your manual
 testing can focus only on higher-level concerns, and will usually take much less time.
 
-## Objections refuted
+### Objections refuted
 
-### "But writing tests takes time, and I don't want to pay extra for it!"
+#### "But writing tests takes time, and I don't want to pay extra for it!"
 
 Nobody really *wants* to pay for anything. However, you expect the software you pay for to work, which means you expect the developers to
 test it. Therefore, given that the developers (and you) both *are* going to test the software, it follows that you *do* have time to write the tests.
@@ -78,7 +78,7 @@ automated tests always work the same way, so the effort put into them is an inve
 
 It may vary for each individual, I suppose. For me, writing the test first made a lot of sense.
 
-### "You don't really mean 'write the test first', do you? That doesn't make sense."
+#### "You don't really mean 'write the test first', do you? That doesn't make sense."
 
 It seems overly structured at first, until you get into the swing of it.
 
@@ -163,7 +163,7 @@ attributes correctly; I haven't tested anything specific to the problem domain. 
 module's interface, the tests started flowing, and writing the tests became a way of sorting out mentally how the interface should behave. At one
 point, I wrote something like 6 or 7 tests all in a row before returning to the module to implement the stuff that would actually get tested.
 
-## Final thoughts
+### Final thoughts
 
 Object-oriented programming books and classes talk about documenting your preconditions and postconditions, and documenting the "object contract". It
 doesn't always work that well to figure these things out on paper or in your head ahead of time, though, and documenting the stuff doesn't always help

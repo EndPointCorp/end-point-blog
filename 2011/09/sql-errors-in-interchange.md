@@ -12,7 +12,7 @@ date: 2011-09-07
 
 Interchange has a little feature whereby errors in a [query] tag are reported back to the session just like form validation errors. That is, given the intentional syntax error here:
 
-```nohighlight
+```plain
 [query ... sql="select 1 from foo where 1="]
 ```
 
@@ -26,7 +26,7 @@ That’s great, but it comes with a price: now you have a potential for a page w
 
 Simple solution:
 
-```nohighlight
+```plain
   DatabaseDefault LOG_SESSION_ERROR 0
 ```
 

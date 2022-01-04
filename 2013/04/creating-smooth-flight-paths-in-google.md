@@ -5,7 +5,7 @@ github_issue_number: 788
 tags:
 - google-earth
 - kamelopard
-- liquid-galaxy
+- visionport
 - open-source
 - ruby
 date: 2013-04-15

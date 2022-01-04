@@ -3,8 +3,7 @@ author: Jon Jensen
 title: 'Job opening: PHP / JavaScript developer'
 github_issue_number: 1644
 tags:
-- company
-- jobs
+- jobs-closed
 - php
 - remote-work
 date: 2020-06-29
@@ -13,8 +12,6 @@ date: 2020-06-29
 <img src="/blog/2020/06/job-php-javascript-developer/20200518-194421-sm.jpg" alt="waterfall and mountains" />
 
 <!-- Photo by Jon Jensen -->
-
-**(This position has been filled.)**
 
 We are looking for a PHP software engineer to work with us during business hours somewhere in the UTC-7 to UTC-4 time zones (U.S. Pacific to Eastern Time). This role can be full-time or part-time.
 
@@ -63,7 +60,9 @@ These work traits are just as important:
 
 ### Get in touch with us:
 
-Please email us an introduction to [jobs@endpoint.com](mailto:jobs@endpoint.com) to apply. Include your location, a resume/​CV, your GitHub or LinkedIn URLs, and whatever else helps us get to know you.
+~~Please email us an introduction to jobs&#x40;endpoint.com to apply.~~
+**(This job has been filled.)**
+Include your location, a resume/​CV, your GitHub or LinkedIn URLs, and whatever else helps us get to know you.
 
 We look forward to hearing from you! Direct work seekers only, please—​this role is not for agencies or subcontractors.
 

@@ -3,7 +3,7 @@ author: Ben Witten
 title: End Pointers’ Favorite Liquid Galaxy Tours
 github_issue_number: 1173
 tags:
-- liquid-galaxy
+- visionport
 date: 2015-11-04
 ---
 

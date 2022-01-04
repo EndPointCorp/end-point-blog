@@ -4,7 +4,7 @@ title: Liquid Galaxy at Le Pavillon de l’Arsenal in Paris
 github_issue_number: 524
 tags:
 - clients
-- liquid-galaxy
+- visionport
 date: 2011-12-12
 ---
 

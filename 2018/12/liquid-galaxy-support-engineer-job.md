@@ -3,15 +3,14 @@ author: Benjamin Goldstein
 title: Liquid Galaxy Support Engineer Job Opening
 github_issue_number: 1474
 tags:
-- company
-- jobs
-- liquid-galaxy
+- jobs-closed
+- visionport
 date: 2018-12-13
 ---
 
 <img src="/blog/2018/10/immersive_gis_job_opening/image-0.jpg" alt="Liquid Galaxy Installation" />
 
-We are looking for a full-time engineer to help us further support the software, infrastructure, and hardware integration for our [Liquid Galaxy](https://liquidgalaxy.endpoint.com/) and related systems. Liquid Galaxy is an impressive panoramic system for Google Earth, Street View, CesiumJS, panoramic photos and videos, 3D visualizations, and other applications.
+We are looking for a full-time engineer to help us further support the software, infrastructure, and hardware integration for our [Liquid Galaxy](https://www.visionport.com/) and related systems. Liquid Galaxy is an impressive panoramic system for Google Earth, Street View, CesiumJS, panoramic photos and videos, 3D visualizations, and other applications.
 
 Since Liquid Galaxy is a global operation, we are looking for an engineer who will cover shifts from 5 PM U.S. Eastern Time from Wednesday through Friday; as well as both Saturday & Sunday from approximately 9 AM until 6 PM U.S. Eastern Time. These hours may have to be adjusted slightly.
 
@@ -50,4 +49,6 @@ End Point is a technology consulting company founded in 1995 and based in New Yo
 
 ### How to apply
 
-Please email us an introduction to [jobs@endpoint.com](mailto:jobs@endpoint.com) to apply. Include a resume and your GitHub or other URLs that would help us get to know you. We look forward to hearing from you!
+~~Please email us an introduction to jobs&#x40;endpoint.com to apply.~~
+**(This job has been filled.)**
+Include a resume and your GitHub or other URLs that would help us get to know you. We look forward to hearing from you!

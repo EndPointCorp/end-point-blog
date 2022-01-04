@@ -18,7 +18,7 @@ If you're using MySQL replication, then you're probably counting on it for some 
 
 At first it wasn't clear what packages would be appropriate packages to install.  I was initially misled by the naming of the nrpe package, but I found the correct packages to be:
 
-```nohighlight
+```plain
 sudo apt-get install nagios-nrpe-server nagios-plugins
 ```
 
@@ -32,13 +32,13 @@ Further down in the configuration, you'll see lines like command[check_users]=/u
 
 After verifying you've got your NRPE configuration completed and made sure to open the appropriate ports on your firewall(s), let's restart the NRPE service:
 
-```nohighlight
+```plain
 service nagios-nrpe-server restart
 ```
 
 This would also be an appropriate time to confirm that the nagios-nrpe-server service is configured to start on boot.  I prefer the chkconfig package to help with this task, so if you don't already have it installed:
 
-```nohighlight
+```plain
 sudo apt-get install chkconfig
 chkconfig | grep nrpe
 
@@ -53,7 +53,7 @@ chkconfig nagios-nrpe-server on
 
 Before going any further, log into your Nagios server and run check_nrpe and make sure you can execute at least one of the commands you chose to support in nrpe.cfg.  This way, if there are any issues, it is obvious now, while we've not started modifying your Nagios server configuration.  The location of your check_nrpe binary may vary, but the syntax is the same:
 
-```nohighlight
+```plain
 check_nrpe -H host_of_new_nrpe_client -c command_name
 ```
 
@@ -70,13 +70,13 @@ There is a lot of noise out there on Google for Nagios plugins which offer MySQL
 
 With the plugin now in place, add a command to your nrpe.cfg.
 
-```nohighlight
+```plain
 command[check_mysql_replication]=sudo /usr/lib/nagios/plugins/check_mysql_replication.sh -H <slave_host_address></slave_host_address>
 ```
 
 At this point you may be saying, WAIT!  How will the user running this command (nagios) have login credentials to the MySQL server?  Thankfully we can create a home directory for that nagios user, and add a .my.cnf configuration with the appropriate credentials.
 
-```nohighlight
+```plain
 usermod -d /home/nagios nagios #set home directory
 mkdir /home/nagios
 chmod 755 /home/nagios
@@ -93,7 +93,7 @@ chown nagios:nagios /home/nagios/.my.cnf
 
 This would again be an appropriate place to run a pre flight check and run the check_nrpe from your Nagios server to make sure this configuration works as expected.  But first we need to add this command to the sudoer's file.
 
-```nohighlight
+```plain
 nagios ALL= NOPASSWD: /usr/lib/nagios/plugins/check_mysql_replication.sh
 ```
 

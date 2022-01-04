@@ -17,7 +17,7 @@ First, I created the base wordpress file to append the code near the footer of t
 ```php
   <?php /*
     Plugin Name: SiteCatalyst for WordPress
-    Plugin URI: http:www.endpoint.com/
+    Plugin URI: https://www.endpointdev.com/
     Version: 1.0
     Author: Steph Powell
     */

@@ -10,6 +10,7 @@ tags:
 - conference
 - development
 - cdn
+- serverless
 date: 2020-06-16
 ---
 

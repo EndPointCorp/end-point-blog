@@ -3,13 +3,12 @@ author: Jon Jensen
 title: Liquid Galaxy engineer job opening
 github_issue_number: 999
 tags:
-- company
-- jobs
-- liquid-galaxy
+- jobs-closed
+- visionport
 date: 2014-06-21
 ---
 
-We are looking for a full-time, salaried engineer to help us further develop our software, infrastructure, and hardware integration for the [Liquid Galaxy](https://liquidgalaxy.endpoint.com/) created by Google. Liquid Galaxy is an impressive panoramic system for Google Earth and other applications.
+We are looking for a full-time, salaried engineer to help us further develop our software, infrastructure, and hardware integration for the [Liquid Galaxy](https://www.visionport.com/) created by Google. Liquid Galaxy is an impressive panoramic system for Google Earth and other applications.
 
 What is in it for you?
 
@@ -52,4 +51,6 @@ End Point is technology consulting company founded in 1995 and based in New York
 
 ### How to apply
 
-Please email us an introduction to [jobs@endpoint.com](mailto:jobs@endpoint.com) to apply. Include a resume and your GitHub or other URLs that would help us get to know you. We look forward to hearing from you!
+~~Please email us an introduction to jobs&#x40;endpoint.com to apply.~~
+**(This job has been filled.)**
+Include a resume and your GitHub or other URLs that would help us get to know you. We look forward to hearing from you!

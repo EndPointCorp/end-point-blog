@@ -31,7 +31,7 @@ With my recent upgrade from Rails 2.3 to Rails 4.1, I initially chose the simple
 
 Before I go into the performance details, I want to describe the inherent challenge associated with the application’s data model, which combines nesting of listed items and polymorphism. In the diagram below, ItemA, ItemB, ItemC, and ItemD are all Rails models. A model of type ItemA has a list of items (of class ListItem). Each of those list items points to another item via a polymorphic relationship (of class ItemA, ItemB, ItemC, ItemD). The nested referenced item can include further nesting. Nesting is allowed at up to 4 levels and infinite nested loops are not allowed. When the top-level ItemA loads, there are some metrics pulled from the aggregate of all of its nested list items, which requires all nested items to be loaded from the database. Because of this nested data model, one must pay special attention to eager loading in Rails (via the includes() method, or default scope). In some cases, eager loading of all nested items is necessary and in other cases it only becomes a performance burden if the data is not needed. This nested polymorphic data model has created some challenges in terms of performance and cache invalidation.
 
-```nohighlight
+```plain
 ItemA
   ListItem => ItemA
     ListItem => ItemA

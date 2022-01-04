@@ -4,7 +4,7 @@ title: 'Josh Tolley: About Google Earth Tours'
 github_issue_number: 638
 tags:
 - google-earth
-- liquid-galaxy
+- visionport
 - kamelopard
 date: 2012-06-14
 ---

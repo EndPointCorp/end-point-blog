@@ -3,8 +3,7 @@ author: Jon Jensen
 title: 'Job opening: .NET/​C# and JavaScript developer'
 github_issue_number: 1451
 tags:
-- company
-- jobs
+- jobs-closed
 date: 2018-08-30
 ---
 
@@ -49,6 +48,8 @@ We are experts in web development, databases, and DevOps, and we use mostly open
 
 We are an equal opportunity employer and value diversity at our company. We do not discriminate on the basis of gender, race, religion, color, national origin, sexual orientation, age, marital status, veteran status, or disability status.
 
-Please email us an introduction to [jobs@endpoint.com](mailto:jobs@endpoint.com) to apply. Include a resume, your GitHub or LinkedIn URLs, or whatever else that would help us get to know you.
+~~Please email us an introduction to jobs&#x40;endpoint.com to apply.~~
+**(This job has been filled.)**
+Include a resume, your GitHub or LinkedIn URLs, or whatever else that would help us get to know you.
 
 We look forward to hearing from you! Full-time employment seekers only, please—​this role is not for agencies or subcontractors.

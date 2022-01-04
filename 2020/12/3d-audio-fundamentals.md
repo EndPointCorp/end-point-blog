@@ -1,10 +1,10 @@
 ---
 author: Matt Vollrath
 title: 3D Audio Fundamentals
-featured: true
-description: 'Learn the basics of 3D audio: panning, Doppler, HRTF, Reverb, and
-  OpenAL.'
-background_url: /blog/2020/12/3d-audio-fundamentals/acoustics.jpg
+featured:
+  endpoint: true
+  image_url: /blog/2020/12/3d-audio-fundamentals/acoustics.jpg
+description: 'Learn the basics of 3D audio: panning, Doppler, HRTF, Reverb, and OpenAL.'
 github_issue_number: 1703
 tags:
 - audio

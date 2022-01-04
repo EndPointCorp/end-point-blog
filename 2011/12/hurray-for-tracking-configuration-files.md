@@ -14,7 +14,7 @@ In one case we have a centralized Nagios instance that does little more than rec
 
 We don’t need a flood of false alerts over email, but I don’t want to completely revert the config and lose all those services...
 
-```nohighlight
+```plain
 [root nagios]# git stash; service nagios restart; git stash apply
 Saved working directory and index state WIP on master: 0e9113b Made up commit for blog
 HEAD is now at 0e9113b Made up commit for blog

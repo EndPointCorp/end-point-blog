@@ -17,7 +17,7 @@ Because I was joining an existing project in progress, the system administration
 
 RabbitMQ is a message broker; at its most basic it sends and receives messages between sender (publisher) and receiver (consumer) applications. It’s written in [Erlang](http://www.erlang.org/) which helps to make it highly parallel and reliable. The [RabbitMQ web site](http://www.rabbitmq.com/) is a great place to learn more about the project. For my purposes I needed to create a user and virtual host (vhost) and set up permissions for Celery to communicate with the RabbitMQ server. This was done with the [rabbitmqctl](http://www.rabbitmq.com/rabbitmqctl.8.html) command. I issued the following command to start up the server and let the process run in the background.
 
-```nohighlight
+```plain
 rabbitmq-server -detached
 ```
 

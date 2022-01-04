@@ -3,7 +3,7 @@ author: Benjamin Goldstein
 title: Two Cool Things about Liquid Galaxy
 github_issue_number: 360
 tags:
-- liquid-galaxy
+- visionport
 - hardware
 date: 2010-10-04
 ---

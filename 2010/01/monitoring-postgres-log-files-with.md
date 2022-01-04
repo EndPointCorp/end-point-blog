@@ -24,7 +24,7 @@ To use, just specify a a configuration file as the first argument. Typically, th
 Here’s what a typical config file looks like. In this example, we’ll look for any FATAL or PANIC notices from Postgres, while ignoring a few known errors 
 that we don’t care about.
 
-```nohighlight
+```plain
  ## Config file for the tail_n_mail.pl program
  ## This file is automatically updated
  EMAIL: greg@endpoint.com, postgres@endpoint.com
@@ -46,7 +46,7 @@ It should be setup to run often from cron:
 
 The resulting mail message will look like this:
 
-```nohighlight
+```plain
 Matches from /var/log/pg_log/postgres-2010-01-01.log: 42
 Date: Fri Jan  1 10:34:00 2010
 Host: pollo

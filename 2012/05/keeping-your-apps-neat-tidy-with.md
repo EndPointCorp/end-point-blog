@@ -18,7 +18,7 @@ date: 2012-05-17
 ### File Structure
 
 The following is the file structure I used for this project:
-```nohighlight
+```plain
 ├── index.html
 └── scripts
     ├── main.js
@@ -37,7 +37,7 @@ The dependencies included RequireJS bundled together with [jQuery](https://jquer
 
 RequireJS is included in the page with a script tag and the data-main attribute is used to specify additional files to load. In this case “scripts/main” tells RequireJS to load the main.js file that resides in the scripts directory. Require will load the specified files asynchronously. This is what index.html looks like:
 
-```nohighlight
+```plain
 <!DOCTYPE html><br/><html><br/><head><br/>    <title>RequireJS Example</title><br/></head><br/><body><br/>    <h1>RequireJS Example</h1><br/>    <!-- This is a special version of jQuery with RequireJS built-in --><br/>    <script data-main="scripts/main" src="scripts/require-jquery.js"></script><br/></body><br/></html><br/>
 ```
 
@@ -101,7 +101,7 @@ Next, we define a view with some data for our Mustache template and render it.
 
 I really like this approach because it allows me to keep my HTML, CSS and JavaScript separate and also lets me write my templates in HTML instead of long, messy JavaScript strings. This is what our template looks like:
 
-```nohighlight
+```plain
 <ul class="hot-products"><br/>  {{#products}}<br/>  <li class="product"><br/>    {{name}}: ${{price}} {{#soldByEach}}each{{/soldByEach}}{{#soldByPound}}per lb{{/soldByPound}}<br/>  </li><br/>  {{/products}}<br/></ul><br/>
 ```
 
@@ -126,7 +126,7 @@ When we view our page, we see that the template was was rendered and appended to
 
 One disadvantage of keeping everything separate and using modules in this way is that it adds to the number of HTTP requests on the page. We can combat this by using the the [RequireJS Optimizer](http://requirejs.org/docs/optimization.html). The r.js script can be used a part of a build process and runs on both [node.js](https://nodejs.org/en/) and [Rhino](https://developer.mozilla.org/en-US/docs/Mozilla/Projects/Rhino). The Optimizer script can minify some or all of your dependencies with [UglifyJS](https://github.com/mishoo/UglifyJS) or Google’s [Closure Compiler](https://developers.google.com/closure/compiler/) and will concatenate everything into a single JavaScript file to improve performance. By following the documentation I was able to create a simple build script for my project and build the project with the following command:
 
-```nohighlight
+```plain
 node ../../r.js -o app.build.js
 ```
 

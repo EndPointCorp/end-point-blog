@@ -35,7 +35,7 @@ It is common to use a regular expression to validate UK postcodes in software, a
 
 We recently had a client get a customer report of a valid UK postcode being rejected during checkout on their ecommerce site. The validation code was using a regex that is widely copied in software in the wild:
 
-```nohighlight
+```plain
 [A-PR-UWYZ0-9][A-HK-Y0-9][AEHMNPRTVXY0-9]?[ABEHMNPRVWXY0-9]?[0-9][ABD-HJLN-UW-Z]{2}
 ```
 

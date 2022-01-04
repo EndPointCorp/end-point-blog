@@ -6,11 +6,11 @@ tags:
 - cesium
 - visualization
 - javascript
-- liquid-galaxy
+- visionport
 date: 2016-07-13
 ---
 
-Data visualization continues to evolve, with ever-more complex data sets available openly, and a corresponding increased pace in visualization tools. In mapping GIS data, the Cesium app is gaining quite a bit of traction. As we continue to branch out with new functionality and visualization apps for the [Liquid Galaxy](https://liquidgalaxy.endpoint.com/), we wanted to try the Cesium app as well.
+Data visualization continues to evolve, with ever-more complex data sets available openly, and a corresponding increased pace in visualization tools. In mapping GIS data, the Cesium app is gaining quite a bit of traction. As we continue to branch out with new functionality and visualization apps for the [Liquid Galaxy](https://www.visionport.com/), we wanted to try the Cesium app as well.
 
 <iframe allowfullscreen="" frameborder="0" height="315" src="https://www.youtube.com/embed/e0xbeQGUoa8" width="560"></iframe>
 

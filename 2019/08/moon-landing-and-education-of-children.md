@@ -3,7 +3,10 @@ author: Jonathan Perlin
 title: A Moon Landing and the Education of Our Children
 github_issue_number: 1548
 tags:
-- liquid-galaxy
+- visionport
+featured:
+  visionport: true
+  image_url: /blog/2019/08/moon-landing-and-education-of-children/image-0.jpg
 date: 2019-08-06
 ---
 
@@ -39,6 +42,6 @@ Today’s youth is growing up and developing in a digital age surrounded by tech
 
 This exhibit was made possible by the generous donation of [Brian McClendon](https://en.wikipedia.org/wiki/Brian_McClendon) and [Beth Ellyn McClendon](https://bethellyn.com/).
 
-For more information on liquid Galaxy, visit: [liquidgalaxy.endpoint.com](https://liquidgalaxy.endpoint.com/).
+For more information on liquid Galaxy, visit: [liquidgalaxy.endpoint.com](https://www.visionport.com/).
 
 For more information on the Cosmosphere Museum, visit: [cosmo.org](https://cosmo.org/)
