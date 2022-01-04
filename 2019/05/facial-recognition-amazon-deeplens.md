@@ -7,6 +7,7 @@ tags:
 - artificial-intelligence
 - aws
 - visionport
+- serverless
 featured:
   visionport: true
   image_url: /blog/2019/05/facial-recognition-amazon-deeplens/deeplens-front-angle.jpg
@@ -19,7 +20,7 @@ I have been exploring the possible uses of a machine-learning-enabled camera for
 
 <img style="float: left; width: 400px; padding-right: 2em;" src="/blog/2019/05/facial-recognition-amazon-deeplens/deeplens-front-angle.jpg" alt="DeepLens" />
 
-This camera is the first of its kind—likely the first of many, given the ongoing rapid adoption of Internet of Things (IoT) devices and computer vision. It came to End Point’s attention as hardware that could potentially interface with and extend End Point’s immersive visualization platform, the [Liquid Galaxy](https://liquidgalaxy.endpoint.com/). We’ve thought of several ways computer vision could potentially work to enhance the platform, for example:
+This camera is the first of its kind—likely the first of many, given the ongoing rapid adoption of Internet of Things (IoT) devices and computer vision. It came to End Point’s attention as hardware that could potentially interface with and extend End Point’s immersive visualization platform, the [Liquid Galaxy](https://www.visionport.com/). We’ve thought of several ways computer vision could potentially work to enhance the platform, for example:
 
 1.  Monitoring users’ reactions
 2.  Counting unique visitors to the LG
@@ -131,4 +132,4 @@ This investigation has showed me that the DeepLens has a lot of potential as a t
 
 * * * * *
 
-Thanks for reading! You are welcome to learn more about [End Point Liquid Galaxy](https://liquidgalaxy.endpoint.com/) and [AWS DeepLens](https://aws.amazon.com/deeplens/).
+Thanks for reading! You are welcome to learn more about [End Point Liquid Galaxy](https://www.visionport.com/) and [AWS DeepLens](https://aws.amazon.com/deeplens/).

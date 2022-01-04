@@ -28,4 +28,4 @@ Matt and Kiel appreciated the hands-on support of Andreu Ibàñez, from End Poin
 
 Feedback from show attendees was overwhelmingly positive, the whole Google Maps area drawing quite a crowd to take part in each experience.
 
-End Point welcomes opportunities to work with creative agencies and event planners to build unique and compelling visualization experiences that utilize the Liquid Galaxy platform. Please contact us if you’ve got an idea. Also, see our [Liquid Galaxy website](https://liquidgalaxy.endpoint.com) to see some of the many uses for the system.
+End Point welcomes opportunities to work with creative agencies and event planners to build unique and compelling visualization experiences that utilize the Liquid Galaxy platform. Please contact us if you’ve got an idea. Also, see our [Liquid Galaxy website](https://www.visionport.com) to see some of the many uses for the system.

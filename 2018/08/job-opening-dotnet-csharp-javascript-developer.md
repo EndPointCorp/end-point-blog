@@ -9,8 +9,6 @@ date: 2018-08-30
 
 <img src="/blog/2018/08/job-opening-dotnet-csharp-javascript-developer/25677299412_9934b2ec91_o-mod.jpg" alt="programmer at keyboard on desk" /><br><a href="https://www.wocintechchat.com/">Photo by #WOCinTech Chat</a> · <a href="https://www.flickr.com/photos/wocintechchat/25677299412/">CC BY 2.0, modified</a>
 
-**(This job has been filled.)**
-
 We are looking for another talented full-time software developer to join us, working with **.NET and C# on Windows, JavaScript, and at least one of PHP, Java, or Ruby**.
 
 If you like to solve business problems and can take responsibility for getting a job done well without intensive oversight, please read on!

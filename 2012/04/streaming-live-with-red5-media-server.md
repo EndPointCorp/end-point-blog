@@ -4,6 +4,7 @@ title: Streaming Live with Red5 Media Server
 github_issue_number: 603
 tags:
 - video
+- audio
 date: 2012-04-27
 ---
 

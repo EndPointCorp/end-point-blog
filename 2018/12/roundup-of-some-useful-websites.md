@@ -5,6 +5,8 @@ github_issue_number: 1478
 tags:
 - tips
 - tools
+- compression
+- optimization
 date: 2018-12-21
 ---
 

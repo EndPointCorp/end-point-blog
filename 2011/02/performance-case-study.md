@@ -5,6 +5,8 @@ github_issue_number: 410
 tags:
 - css
 - performance
+- compression
+- optimization
 date: 2011-02-09
 ---
 

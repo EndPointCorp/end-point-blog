@@ -9,8 +9,6 @@ tags:
 date: 2014-07-15
 ---
 
-
-
 Over a year ago, [I wrote about JavaScript-driven interactive highlighting](/blog/2013/01/javascript-driven-interactive) that emulates the behavior of physical highlighting and annotating text. It’s interesting how much technology can change in a short time. This spring, I’ve been busy at work for on a major upgrade of both Rails (2.3 to 4.1) and of the annotation capabilities for [H2O](https://cyber.law.harvard.edu/research/h2o). As I explained in the original post, this highlighting functionality is one of the most interesting and core features of the platform. Here I’ll go through a brief history and the latest round of changes.
 
 <div class="separator" style="clear: both; text-align: center;"><img border="0" src="/blog/2014/07/interactive-highlighting-and/image-0.png" style="margin-bottom:3px;"/><br/>
@@ -63,5 +61,3 @@ One of the most difficult customization points was building out the functionalit
 ### Learn More
 
 Make sure to check out the [Annotator website](http://annotatorjs.org/) if you are interested in learning more about this plugin. The active community has interesting support for annotating images, video, and audio, and is always focused on improving plugin capabilities. One group is currently focused on cross browser support, including support of IE8.
-
-

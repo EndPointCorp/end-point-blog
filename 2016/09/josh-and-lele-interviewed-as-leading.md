@@ -12,7 +12,7 @@ date: 2016-09-07
 
 End Point’s Josh Williams and Lele Calò were recently interviewed for a piece that is now published on [Clutch](https://clutch.co/), a site offering B2B research and reviews. Josh and Lele were interviewed as experts in leading cloud technologies. The interview can be found [here](https://clutch.co/cloud/expert-interview/end-point).
 
-Josh and Lele began the interview by giving some background on End Point and its various offerings. These offerings include software development, hosting, consulting, and the [Liquid Galaxy](https://liquidgalaxy.endpoint.com/) division.
+Josh and Lele began the interview by giving some background on End Point and its various offerings. These offerings include software development, hosting, consulting, and the [Liquid Galaxy](https://www.visionport.com/) division.
 
 Josh and Lele then answered questions regarding cloud technologies. These questions included technologies they work with, challenges that cloud technologies help companies overcome, and recommendation for companies moving toward cloud services. Recently, End Point has had customers using Amazon Web Services [AWS], Rackspace, OVH, Google Cloud, Linode, and DigitalOcean. Josh and Lele agree that cloud services are quite beneficial in dealing with usage profiles and load inconsistencies. Josh and Lele also agreed that when it comes to companies moving into cloud services, moving components in a modular fashion and not all at once is a key to success.
 

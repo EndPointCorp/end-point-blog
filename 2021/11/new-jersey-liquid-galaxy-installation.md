@@ -1,11 +1,14 @@
 ---
 title: "New Jersey Liquid Galaxy Installation"
 author: Ben Witten
+date: 2021-11-10
+github_issue_number: 1794
 tags:
 - visionport
 - clients
-github_issue_number: 1794
-date: 2021-11-10
+featured:
+  visionport: true
+  image_url: /blog/2021/11/new-jersey-liquid-galaxy-installation/banner.jpg
 ---
 
 ![Another successful Liquid Galaxy conference room](/blog/2021/11/new-jersey-liquid-galaxy-installation/banner.jpg)

@@ -97,9 +97,9 @@ Ubuntu 11.04 still has both, with a separate /etc/mtab. Fedora 16 has done away 
 
 The unshare userland command in util-linux(-ng) comes with RHEL 6, Debian 6, Ubuntu 11.04, and Fedora 16, but *not* on the very common RHEL 5 or CentOS 5. Because we needed it on RHEL 5, I made a simple package that contains only the unshare(1) command and peacefully coexists with the older stock RHEL 5 util-linux. It’s called util-linux-unshare and here are the RPM downloads for RHEL 5:
 
-- x86_64: [util-linux-unshare-2.20.1-3.ep.x86_64.rpm](https://packages.endpoint.com/rhel/5/os/x86_64/util-linux-unshare-2.20.1-3.ep.x86_64.rpm)
-- i386: [util-linux-unshare-2.20.1-3.ep.i386.rpm](https://packages.endpoint.com/rhel/5/os/i386/util-linux-unshare-2.20.1-3.ep.i386.rpm)
-- SRPM: [util-linux-unshare-2.20.1-3.ep.src.rpm](https://packages.endpoint.com/rhel/5/os/SRPMS/util-linux-unshare-2.20.1-3.ep.src.rpm)
+- x86_64: [util-linux-unshare-2.20.1-3.ep.x86_64.rpm](https://packages.endpointdev.com/rhel/5/os/x86_64/util-linux-unshare-2.20.1-3.ep.x86_64.rpm)
+- i386: [util-linux-unshare-2.20.1-3.ep.i386.rpm](https://packages.endpointdev.com/rhel/5/os/i386/util-linux-unshare-2.20.1-3.ep.i386.rpm)
+- SRPM: [util-linux-unshare-2.20.1-3.ep.src.rpm](https://packages.endpointdev.com/rhel/5/os/SRPMS/util-linux-unshare-2.20.1-3.ep.src.rpm)
 
 I hope you’ve found this as interesting as I did!
 

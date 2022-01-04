@@ -10,8 +10,6 @@ date: 2021-06-10
 
 ![Liquid Galaxy cabinet](/blog/2021/06/job-liquid-galaxy-support-engineer/lg-cabinet.jpg)
 
-**(This job has been filled.)**
-
 We are looking for a full-time, experienced or entry-level engineer to join the End Point Immersive and Geospatial Support (I+G) Team—​a small, multidisciplinary team that supports our company’s clients with their [Liquid Galaxy systems](https://www.visionport.com/).
 
 The candidate will be based out of our Johnson City, Tennessee or New York City offices depending on where the candidate is located. With sufficient hardware and deployment experience, the engineer may eventually be asked to travel to, perform, and supervise system installations.

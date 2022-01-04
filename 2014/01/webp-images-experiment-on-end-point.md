@@ -6,6 +6,8 @@ tags:
 - browsers
 - graphics
 - nginx
+- compression
+- optimization
 date: 2014-01-28
 ---
 

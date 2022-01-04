@@ -13,8 +13,6 @@ date: 2019-04-18
 
 [//]: # (from https://unsplash.com/license - Unsplash grants you an irrevocable, nonexclusive, worldwide copyright license to download, copy, modify, distribute, perform, and use photos from Unsplash for free, including for commercial purposes, without permission from or attributing the photographer or Unsplash.)
 
-**(This position has been filled.)**
-
 We are looking for a full-​time, salaried engineer to work during business hours in UTC-10 to UTC-6 (somewhere between Hawaii Time and Mountain Time) in the fun space where operations and development overlap!
 
 End Point is a 23-​year-old Internet technology consulting company based in New York City, with about 50 employees, most working remotely from home offices. We collaborate using SSH, GitLab, GitHub, chat, video conferencing, and good old email and phones.

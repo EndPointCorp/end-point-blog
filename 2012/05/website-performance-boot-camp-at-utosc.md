@@ -12,27 +12,13 @@ tags:
 date: 2012-05-21
 ---
 
-
-
 I’ll keep brief my last post about this year’s Utah Open Source Conference.
 
 I was asked to give on both day one and day two a talk called “Website Performance Boot Camp” which carried this brief description:
 
-> 
-> 
-> 
-> 
 > What’s the difference between a snappy website and a sloth that you turn away from in frustration? A lot of little things, usually. It’s rarely worth doing 100% of the optimization you could do, but getting 75% of the way isn’t hard if you know where to look.
 > 
-> 
-> 
-> 
-> 
 > We’ll look at HTTP caching, compression, proxying, CDNs, CSS sprites, minification, and more, how to troubleshoot, and what’s best to leave alone when you have limited time or tolerance for risk.
-> 
-> 
-> 
-> 
 
 Here is the video recording of the first time I presented the talk. (The technician noted its audio was “a little hot”.)
 
@@ -43,5 +29,3 @@ Use this [Website Performance Boot Camp](https://www.youtube.com/watch?v=ItkF8V7
 The slides for this [Website Performance Boot Camp](https://jon.endpoint.com/utosc-2012/website-performance-boot-camp.html) presentation are available.
 
 Thanks again to the conference organizers and the other speakers and sponsors, and the nice venue [Utah Valley University](https://www.uvu.edu/), for making it a great conference!
-
-

@@ -7,6 +7,10 @@ tags:
 - database
 - search
 - perl
+featured:
+  endpoint: true
+  image_url: /blog/2021/08/full-text-search-xapian/looking-glass.jpg
+description: Your custom search engine can be lightweight, fast, and affordable.
 ---
 
 ![Mounted telescope monocular pointing through a wire fence](/blog/2021/08/full-text-search-xapian/looking-glass.jpg)

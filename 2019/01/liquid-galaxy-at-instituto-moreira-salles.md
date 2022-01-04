@@ -4,6 +4,7 @@ author: Benjamin Goldstein
 github_issue_number: 1483
 tags:
 - visionport
+- clients
 featured:
   visionport: true
   image_url: /blog/2019/01/liquid-galaxy-at-instituto-moreira-salles/image-0.jpg

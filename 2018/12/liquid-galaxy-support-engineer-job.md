@@ -10,8 +10,6 @@ date: 2018-12-13
 
 <img src="/blog/2018/10/immersive_gis_job_opening/image-0.jpg" alt="Liquid Galaxy Installation" />
 
-**(This job has been filled.)**
-
 We are looking for a full-time engineer to help us further support the software, infrastructure, and hardware integration for our [Liquid Galaxy](https://www.visionport.com/) and related systems. Liquid Galaxy is an impressive panoramic system for Google Earth, Street View, CesiumJS, panoramic photos and videos, 3D visualizations, and other applications.
 
 Since Liquid Galaxy is a global operation, we are looking for an engineer who will cover shifts from 5 PM U.S. Eastern Time from Wednesday through Friday; as well as both Saturday & Sunday from approximately 9 AM until 6 PM U.S. Eastern Time. These hours may have to be adjusted slightly.

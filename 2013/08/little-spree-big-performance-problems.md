@@ -8,6 +8,7 @@ tags:
 - ruby
 - rails
 - spree
+- pdf
 date: 2013-08-05
 ---
 
@@ -18,27 +19,27 @@ The website worked in the following environment:
 - Ruby 1.9.2
 - Spree 0.60
 - Heroku, Bamboo stack
-- PostgreSQL v9.2.4
+- PostgreSQL 9.2.4
 
-### H12 timeout errors 
+### H12 timeout errors
 
 The performance problems started when we migrated Bamboo to Cedar on Heroku and replaced Thin webserver with Unicorn. We started getting a lot of [Heroku Request timeout errors - H12](https://devcenter.heroku.com/articles/request-timeout):
 
-<a href="/blog/2013/08/little-spree-big-performance-problems/image-0.png" imageanchor="1"><img border="0" src="/blog/2013/08/little-spree-big-performance-problems/image-0.png"/></a>
+<img border="0" src="/blog/2013/08/little-spree-big-performance-problems/image-0.png"/>
 
 The problems happened mostly when logging in to admin dashboard or during the checkout for the certain orders. H12 errors occur when a HTTP request takes longer than 30 seconds to complete. For example, if a Rails app takes 35 seconds to render the page, the HTTP router returns a 503 after 30 seconds and abandons the incomplete Rails request for good. The Rails request will keep working and logging the normal errorless execution. After completion, the request will indefinitely hang in the application dyno.
 
 We started debugging H12: we set Unicorn timeout to 20 seconds to prevent the runaway requests and installed the rack-timeout gem with the timeout of 10 seconds to raise an error on a slow request. It all came down to a trivial database timeout!
 
-<a href="/blog/2013/08/little-spree-big-performance-problems/image-1.png" imageanchor="1"><img border="0" src="/blog/2013/08/little-spree-big-performance-problems/image-1.png"/></a>
+<img border="0" src="/blog/2013/08/little-spree-big-performance-problems/image-1.png"/>
 
-The application source has not changed during the transition from Bamboo to Cedar, but apparently Cedar/Unicorn is much more sensitive to the troubled code. Below is the list of performance bottlenecks and solutions in Spree. Some of them exist in version 0.60 only, but a lot of them are still present in Spree 1.x, which means that your application may have them too.  
+The application source has not changed during the transition from Bamboo to Cedar, but apparently Cedar/Unicorn is much more sensitive to the troubled code. Below is the list of performance bottlenecks and solutions in Spree. Some of them exist in version 0.60 only, but a lot of them are still present in Spree 1.x, which means that your application may have them too.
 
 ### Issue #1: Real-time reports
 
 Let’s take a closer look at the earlier database timeout code. It came from Admin Dashboard and admin/overview_controller.rb.
 
-<a href="/blog/2013/08/little-spree-big-performance-problems/image-2.png" imageanchor="1"><img border="0" src="/blog/2013/08/little-spree-big-performance-problems/image-2.png"/></a>
+<img border="0" src="/blog/2013/08/little-spree-big-performance-problems/image-2.png"/>
 
 The “Best Selling variants" report was being calculated real-time right in the web process:
 
@@ -61,7 +62,7 @@ irb(main):002:0> Order.count
 irb(main):003:0> Variant.count
 => 14418
 ```
-Other reports on the Dashboard experience the same problem. They would cause the timeout in turns when logging into Admin: 
+Other reports on the Dashboard experience the same problem. They would cause the timeout in turns when logging into Admin:
 
 - top_grossing_variants
 - best_selling_taxons
@@ -72,7 +73,7 @@ Other reports on the Dashboard experience the same problem. They would cause the
 
 Fortunately, in Spree 1.x the internal reporting system has been replaced with [Jirafe](https://web.archive.org/web/20130807090154/http://jirafe.com:80/):
 
-<a href="/blog/2013/08/little-spree-big-performance-problems/image-3.png" imageanchor="1"><img border="0" src="/blog/2013/08/little-spree-big-performance-problems/image-3.png"/></a>
+<img border="0" src="/blog/2013/08/little-spree-big-performance-problems/image-3.png"/>
 
 If switching to Spree 1.x is not an option, another way is to move the calculation into a background job, using, for example, delayed_job gem and Heroku Scheduler Addon:
 
@@ -82,17 +83,19 @@ task :statistics => :environment do
 end
 ```
 
-### Issue #2: Large numbers <div class="separator" style="clear: both; text-align: center;"><a href="/blog/2013/08/little-spree-big-performance-problems/image-4.jpeg" imageanchor="1" style="clear: right; float: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" src="/blog/2013/08/little-spree-big-performance-problems/image-4.jpeg"/></a></div>
+### Issue #2: Large numbers
 
-It is an established fact that humans eat a lot! Think about an order of a thousand Heineken 6-pack cans... 
+<div class="separator" style="clear: both"><img border="0" src="/blog/2013/08/little-spree-big-performance-problems/image-4.jpeg" style="clear: right; float: right; margin-bottom: 1em; margin-left: 1em;" /></div>
+
+It is an established fact that humans eat a lot! Think about an order of a thousand Heineken 6-pack cans...
 
 Or even something like this:
 
-<div class="separator" style="clear: both; text-align: center;"><a href="/blog/2013/08/little-spree-big-performance-problems/image-5.png" imageanchor="1" style="clear: left; float: left; margin-bottom: 1em; margin-right: 1em;"><img border="0" src="/blog/2013/08/little-spree-big-performance-problems/image-5.png"/></a></div>
+<div class="separator" style="clear: both"><img border="0" src="/blog/2013/08/little-spree-big-performance-problems/image-5.png"/></div>
 
 or this:
 
-<div class="separator" style="clear: both; text-align: center;"><a href="/blog/2013/08/little-spree-big-performance-problems/image-6.jpeg" imageanchor="1" style="clear: left; float: left; margin-bottom: 1em; margin-right: 1em;"><img border="0" src="/blog/2013/08/little-spree-big-performance-problems/image-6.jpeg"/></a></div>
+<div class="separator" style="clear: both; text-align: center;"><img border="0" src="/blog/2013/08/little-spree-big-performance-problems/image-6.jpeg"/></div>
 
 Spree, both 0.60 and 1.x, proved to have a huge problem if an order has a lot of line items and/or a large quantity of single line items. The potentially dangerous code can be found all over the place. Consider the following example:
 
@@ -105,6 +108,7 @@ class InventoryUnit < ActiveRecord::Base
       inventory_unit.destroy
     end
   end
+end
 ```
 
 Now imagine what will happen with the order from the first screenshot. We have 15100 inventory units for that one. They will be meticulously destroyed from the inventory one by one in a loop after the checkout. This method was born to crash the application!
@@ -123,10 +127,12 @@ InventoryUnit.
     where(:order_id => order.id,:variant_id => variant.id).
     order('state asc').limit(quantity.ceil).
     destroy_all
-   end
+end
 ```
 
-### Issue #3: Real-time emails <div class="separator" style="clear: both; text-align: center;"><a href="/blog/2013/08/little-spree-big-performance-problems/image-7-big.jpeg" imageanchor="1" style="clear: right; float: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" src="/blog/2013/08/little-spree-big-performance-problems/image-7.jpeg"/></a></div>
+### Issue #3: Real-time emails
+
+<div class="separator" style="clear: both; text-align: center;"><img border="0" src="/blog/2013/08/little-spree-big-performance-problems/image-4.jpeg" style="clear: right; float: right; margin-bottom: 1em; margin-left: 1em;" /></div>
 
 All emails in Spree are sent in real-time.
 
@@ -145,16 +151,16 @@ Why is it bad? Let’s look at the following example from my application:
 ```ruby
 def confirm_email(order)
   attachments["invoice.pdf"] = {
-    'Content-type' => 'application/pdf', 
+    'Content-type' => 'application/pdf',
     :content => OrderInvoice.new.to_pdf(order)}
 
-  mail(:subject  => 'Order #' + order.number, 
-       :from   =>    Spree::Config[:order_from],  
+  mail(:subject  => 'Order #' + order.number,
+       :from   =>    Spree::Config[:order_from],
        :to => order.email)
 end
 ```
 
-In my application “confirm_email” was overridden and generated the pdf invoice. The invoice listed all the products in the order and had about 200 lines in it. Again, it lead to the H12 timeout error.
+In my application “confirm_email” was overridden and generated the PDF invoice. The invoice listed all the products in the order and had about 200 lines in it. Again, it lead to the H12 timeout error.
 
 ### Solution
 
@@ -164,7 +170,9 @@ All emails should be sent in the background rather than in the web request. Firs
 OrderMailer.delay.confirm_email(self)
 ```
 
-### Issue #4: Lazy-loading <div class="separator" style="clear: both; text-align: center;"><a href="/blog/2013/08/little-spree-big-performance-problems/image-7-big.jpeg" imageanchor="1" style="clear: right; float: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" src="/blog/2013/08/little-spree-big-performance-problems/image-7.jpeg"/></a></div>
+### Issue #4: Lazy-loading
+
+<div class="separator" style="clear: both; text-align: center;"><img border="0" src="/blog/2013/08/little-spree-big-performance-problems/image-4.jpeg" style="clear: right; float: right; margin-bottom: 1em; margin-left: 1em;" /></div>
 
 Ecommerce objects are usually complicated with a lot of associations. This is totally fine as long as you eager-load the associations that will be used most with the loaded object later on. In most cases, Spree does not preload associations for its orders. For example, in spree/base_controller.rb:
 
@@ -174,9 +182,9 @@ Ecommerce objects are usually complicated with a lot of associations. This is to
 
 As the result, here is what I see in server console while loading the order display page on the frontend:
 
-<div class="separator" style="clear: both; text-align: center;"><a href="/blog/2013/08/little-spree-big-performance-problems/image-9-big.png" imageanchor="1" style="clear: left; margin-bottom: 1em; margin-right: 1em;"><img border="0" src="/blog/2013/08/little-spree-big-performance-problems/image-9.png"/></a></div>
+<div class="separator" style="clear: both"><img border="0" src="/blog/2013/08/little-spree-big-performance-problems/image-9.png"/></div>
 
-...And five more screens like this! The associations of the order - line items, variants and products - generate an additional chain of queries to the database during lazy-loading.
+...And five more screens like this! The associations of the order — line items, variants and products — generate an additional chain of queries to the database during lazy-loading.
 
 ### Solution: Eager-loading
 
@@ -190,11 +198,13 @@ If I modify the line from the controller like this...
 
 ...SQL queries will shrink down to this:
 
-<div class="separator" style="clear: both; text-align: center;"><a href="/blog/2013/08/little-spree-big-performance-problems/image-10-big.png" imageanchor="1" style="clear: left; margin-bottom: 1em; margin-right: 1em;"><img border="0" src="/blog/2013/08/little-spree-big-performance-problems/image-10.png"/></a></div>
+<div class="separator" style="clear: both; text-align: center;"><img border="0" src="/blog/2013/08/little-spree-big-performance-problems/image-10.png"/></div>
 
 Eager-loading did the trick. Of course, not everything needs to be loaded eagerly, and the solution varies from case to case. It worked like charm in my case.
 
-### Issue #5: Dangerous code all over the place <div class="separator" style="clear: both; text-align: center;"><a href="/blog/2013/08/little-spree-big-performance-problems/image-7-big.jpeg" imageanchor="1" style="clear: right; float: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" src="/blog/2013/08/little-spree-big-performance-problems/image-7.jpeg"/></a></div>
+### Issue #5: Dangerous code all over the place
+
+<div class="separator" style="clear: both; text-align: center;"><img border="0" src="/blog/2013/08/little-spree-big-performance-problems/image-4.jpeg" style="clear: right; float: right; margin-bottom: 1em; margin-left: 1em;" /></div>
 
 There a lot of places in the Spree source code that are not optimized for performance. We don’t need to look far for an example, because there is another killer method right near the "destroy_units" one we inspected earlier!
 
@@ -202,12 +212,12 @@ There a lot of places in the Spree source code that are not optimized for perfor
 class InventoryUnit < ActiveRecord::Base
   def self.create_units(order, variant, sold, back_order)
     shipment = order.shipments.detect {|shipment| !shipment.shipped? }
-    sold.ceil.times { 
-order.inventory_units.create(:variant => variant, :state => “sold”, :shipment => shipment)
-}
-   back_order.ceil.times {     
-order.inventory_units.create(:variant => variant, :state => “backordered”, :shipment => shipment)
-}
+    sold.ceil.times {
+      order.inventory_units.create(:variant => variant, :state => "sold", :shipment => shipment)
+    }
+    back_order.ceil.times {
+      order.inventory_units.create(:variant => variant, :state => "backordered", :shipment => shipment)
+    }
   end
 end
 ```
@@ -241,11 +251,11 @@ Another example: every line item has the after_create and after_save callbacks. 
 
 ```ruby
 def update_totals
-    self.payment_total = payments.completed.map(&:amount).sum
-    self.item_total = line_items.map(&:amount).sum
-    self.adjustment_total = adjustments.map(&:amount).sum
-    self.total = item_total + adjustment_total
-  end
+  self.payment_total = payments.completed.map(&:amount).sum
+  self.item_total = line_items.map(&:amount).sum
+  self.adjustment_total = adjustments.map(&:amount).sum
+  self.total = item_total + adjustment_total
+end
 ```
 
 Now imagine the order from the second screenshot with a lot of line items. During the checkout “update_totals” will be called each time the line item is saved. Typically, this line would produce a timeout, because the  “line_items” association was, of course, not preloaded:
@@ -254,13 +264,13 @@ Now imagine the order from the second screenshot with a lot of line items. Durin
 line_items.map(&:amount).sum
 ```
 
-I couldn’t list every circumstance like that, because it would require a lot of context to explain the catch, but I can still say many times: “No long-running tasks in the web request!”.
+I couldn’t list every circumstance like that, because it would require a lot of context to explain the catch, but I can still say many times …
 
 ### No long-running tasks in the web request!
 
-Be it Spree, Heroku or any other context, environment or platform, please, never do the following in the web process:
+Be it Spree, Heroku, or any other context, environment or platform, please, never do the following in the web process:
 
-<div class="separator" style="clear: both; text-align: center;"><a href="/blog/2013/08/little-spree-big-performance-problems/image-12-big.png" imageanchor="1" style="clear: left; float: left; margin-bottom: 1em; margin-right: 1em;"><img border="0" src="/blog/2013/08/little-spree-big-performance-problems/image-12.png"/></a></div>
+<div class="separator" style="clear: both"><img border="0" src="/blog/2013/08/little-spree-big-performance-problems/image-12.png" style="clear: left; float: left; margin-bottom: 1em; margin-right: 1em;" /></div>
 
 - (!!!) Heavy database usage (slow or numerous queries, N+1 queries)
 - Sending an email
@@ -268,4 +278,4 @@ Be it Spree, Heroku or any other context, environment or platform, please, never
 - Rendering an image or PDF
 - Heavy computation (computing a fibonacci sequence, etc.)
 
-### Say “No” to all these things to ensure a much happier life for your application!
+Say “No” to all these things to ensure a much happier life for your application!

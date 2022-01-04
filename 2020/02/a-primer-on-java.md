@@ -8,7 +8,7 @@ tags:
 date: 2020-02-10
 ---
 
-###What is Java and why is it interesting?
+### What is Java and why is it interesting?
 
 Java is a descendant of C++ and it is a C-based language. C was therefore the original language and it is probably not an overstatement to say that C is the most popular programming language in history. Most programmers speak at least C or one of its descendants. Let’s take a quick look at the most popular on the [list of C-based languages](https://github.com/AnanthaRajuCprojects/List-of-programming-language-lists/blob/master/C-family%20programming%20languages.md):
 
@@ -163,7 +163,7 @@ As a result, taking into account the current situation, it is an imperative to s
  
 Since there are many servers using Java and on smartphones Android is Java-based, Java’s future looks bright, so, if someone knows how to work with Java, then this knowledge will not lose its relevance in the foreseeable future.
 
-###“A long time ago in a galaxy far, far away...”
+### “A long time ago in a galaxy far, far away...”
 
 (Or, in other words, when I was still a university student, when a deadline was closely linked to homework and exam sessions.)
 
@@ -184,7 +184,7 @@ This method is the add method of ArrayList. We know that ArrayList is logically 
 
 Of course, I had some prerequisite knowledge in C and C++ before sitting down for two hours to learn Java, but even then, being able to learn how to work with Java and being very comfortable with doing so in just two hours is a great achievement, but it’s not my achievement. It’s Java’s wonderful syntax, documentation and a great friend with the patience to teach, who achieved this for me. I only had to be curious.
 
-###Java consulting
+### Java consulting
 
 My first work was in C++, but after realizing that I do not intend to go to an office each morning in the long term, I had the bold idea of finding remote work. So I started to work as a freelancer, doing small and poorly paid work remotely, often investing more energy into winning projects via negotiation than actually doing the work, but I was confident that my efforts will pay off long term.
 
@@ -242,7 +242,7 @@ Of course, this will only work if Wildfly is running. In order to make sure it i
 
 Of course, one may use a different server config. It also has a Windows alternative, a file named `standalone.bat`, having the same purpose.
 
-###Java ORM
+### Java ORM
 
 I used several different database object-relational mappers (ORMs) in the past, like LINQ, Flourishlib, Doctrine, to name a few examples. In Java I have been using [Hibernate](https://hibernate.org/) in recent times and am very satisfied with it in general. I can nicely work with object entities to represent table rows using Hibernate.
 
@@ -262,7 +262,7 @@ System.out.println("Rows affected: " + result);
 
 That example is from [Tutorials Point](https://www.tutorialspoint.com/hibernate/hibernate_query_language.htm).
 
-###Is Java slow, or is that a myth?
+### Is Java slow, or is that a myth?
 
 Java is a language. It’s not slow or fast. Performance depends on what is running and how. Natively compiled languages like C or C++ are in general faster, but the difference is not in the language itself, but the way the code is executed. Java runs through the JVM (Java Virtual Machine).
 
@@ -279,7 +279,7 @@ Consider the example when someone is speaking in English and a translator has to
 
 In short, Java, as a language is not slow, especially if it was translated into machine code. If it’s running via the JVM, then there is a performance price we pay in order to have no worries about platforms, but that’s rarely felt nowadays because of today’s general computing power.
 
-###Primitive and reference types
+### Primitive and reference types
 
 In Java there are primitive types and reference types. Reference types are Object and anything inherited from it. Primitive types, like float, int, or double are not objects and hence they cannot be used in a generic manner. To overcome this issue, Java offers wrapper classes for primitives, which are like Float, Integer or Double.
 
@@ -287,7 +287,7 @@ One cannot create a List of int, but a List of Integer can be created without pr
 
 I understand that this is not possible in the language, but I believe that this abstraction should be done under the hood. For example ArrayList&lt;int&gt; should be either inherently supported, or interpreted as ArrayList&lt;Integer&gt;. Of course, in order to establish this, some rules need to be implemented and tested thoroughly, but as a result we would be able to get rid of the unnecessary rule that primitive types cannot be referred to by generics.
 
-###Summary
+### Summary
 
 - Java is the most popular programming language and it is a C-based language.
 - C-based languages are the most popular programming language family and it’s the interest of every programmer to have an understanding of C-like syntaxes.

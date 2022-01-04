@@ -9,8 +9,6 @@ tags:
 date: 2013-06-04
 ---
 
-**(This job has been filled.)**
-
 End Point continues to grow! We are looking for a full-time, salaried DevOps engineer to work on projects with our internal server hosting team and our external clients. If you like to figure out and solve problems, if you take responsibility for getting a job done well without intensive oversight, please read on.
 
 What is in it for you?

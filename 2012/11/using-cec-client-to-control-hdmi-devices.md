@@ -8,7 +8,7 @@ tags:
 date: 2012-11-08
 ---
 
-Maintaining the horde of computers it takes to run [Liquid Galaxies](https://liquidgalaxy.endpoint.com/) in all corners of the globe is a big job. As of November of 2012, we’re monitoring 154 computers at permanent installations in addition to keeping our development and testing systems running like the well-oiled machines we want them to be. All that fluff aside, end users never see the fruits of our labor unless the TVs are working as expected! Without methods for getting and setting the status of displays, we are completely blind to what people are actually experiencing in front of a Liquid Galaxy.
+Maintaining the horde of computers it takes to run [Liquid Galaxy installations](https://www.visionport.com/installations/) in all corners of the globe is a big job. As of November of 2012, we’re monitoring 154 computers at permanent installations in addition to keeping our development and testing systems running like the well-oiled machines we want them to be. All that fluff aside, end users never see the fruits of our labor unless the TVs are working as expected! Without methods for getting and setting the status of displays, we are completely blind to what people are actually experiencing in front of a Liquid Galaxy.
 
 Enter [HDMI-CEC](https://en.wikipedia.org/wiki/HDMI#CEC). CEC is a protocol that allows HDMI-connected devices to control each other in various ways. It has a set of standard features that make it easy for home users with a stack of DVD players or TiVos or other devices to change the active source, put everything on standby, control the volume, and some other handy tricks.
 

@@ -12,8 +12,6 @@ date: 2020-07-23
 
 <!-- Photo by Jon Jensen -->
 
-**(This position has been filled.)**
-
 We are looking for a Windows systems integrator in the New York City metropolitan region to work with us.
 
 We are an Internet technology consulting company based in NYC, with 50 employees serving many clients ranging from small family businesses to large corporations. The company turns 25 years old this year!

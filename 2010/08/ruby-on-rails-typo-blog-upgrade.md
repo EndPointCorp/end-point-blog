@@ -18,7 +18,7 @@ I needed to migrate a Typo blog (built on Ruby on Rails) from one RHEL 5 x86_64 
 - [Ruby on Rails](https://rubyonrails.org/) 2.2.2 to 2.3.8
 - [Typo](http://typosphere.org/) 5.3 to 5.5
 
-I used the following packages from [End Point’s Yum repository](https://packages.endpoint.com/) for RHEL 5 x86_64:
+I used the following packages from [End Point’s Yum repository](https://packages.endpointdev.com/) for RHEL 5 x86_64:
 
 - nginx-0.7.64-2.ep
 - ruby-enterprise-1.8.7-3.ep

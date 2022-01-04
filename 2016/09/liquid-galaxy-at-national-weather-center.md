@@ -10,8 +10,6 @@ tags:
 date: 2016-09-28
 ---
 
-
-
 <div class="separator" style="clear: both; text-align: center;"><a href="/blog/2016/09/liquid-galaxy-at-national-weather-center/image-0-big.jpeg" imageanchor="1" style="clear: right; float: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" height="240" src="/blog/2016/09/liquid-galaxy-at-national-weather-center/image-0.jpeg" width="320"/></a></div>
 
 The National Weather Center (NWC) recently deployed a 7-screen Liquid Galaxy system in their Visitor’s Center, the first room visitors see as they enter the breathtaking NWC building on the University of Oklahoma campus in Norman, Oklahoma. 
@@ -28,8 +26,6 @@ Content has already been built for the system, including scenes with videos and 
 
 <div class="separator" style="clear: both; text-align: center;"><a href="/blog/2016/09/liquid-galaxy-at-national-weather-center/image-2-big.jpeg" imageanchor="1" style="clear: right; float: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" height="222" src="/blog/2016/09/liquid-galaxy-at-national-weather-center/image-2.jpeg" width="320"/></a></div>
 
-Thus far, the Liquid Galaxy at NWC has been a great success. NWC’s Liquid Galaxy is a popular exhibit that is getting utilized by many in the building.  The day after installation, the University’s Provost and Board of Regents came to see the system firsthand and were pleased with the new exhibit. 
+Thus far, the Liquid Galaxy at NWC has been a great success. NWC’s Liquid Galaxy is a popular exhibit that is getting utilized by many in the building. The day after installation, the University’s Provost and Board of Regents came to see the system firsthand and were pleased with the new exhibit. 
 
-We are delighted with how this installation turned out. If you would like to learn more, you can visit our [Liquid Galaxy website](https://liquidgalaxy.endpoint.com/) or [contact us here](https://liquidgalaxy.endpoint.com/#contact).
-
-
+We are delighted with how this installation turned out. If you would like to learn more, you can [contact us here](https://www.visionport.com/contact/).

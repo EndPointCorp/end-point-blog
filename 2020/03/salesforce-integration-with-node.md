@@ -7,6 +7,7 @@ featured:
 description: Connecting to Salesforce using JSforce; advanced topics like working with lots of data and streaming with Socket.IO
 github_issue_number: 1612
 tags:
+- salesforce
 - nodejs
 - javascript
 - integration
