@@ -1,7 +1,7 @@
 ---
 author: "Kevin Campusano"
 title: "Kubernetes 101: Deploying a web application and database"
-date: 2022-01-07
+date: 2022-01-08
 github_issue_number: 1818
 tags:
 - kubernetes
@@ -34,7 +34,7 @@ There are a few basic concepts that we need to be familiar with in order to effe
 
 #### Nodes, pods, and containers
 
-First up is "[containers](https://kubernetes.io/docs/concepts/containers/)". If you're interested in Kubernetes, chances are that you've already been exposed to some sort of container technology like [Docker](https://www.docker.com/). If not, no worries. For our purposes here, we can think of containers as an isolated process, with its own resources and file system, in which an application can run.
+First up are [containers](https://kubernetes.io/docs/concepts/containers/). If you're interested in Kubernetes, chances are that you've already been exposed to some sort of container technology like [Docker](https://www.docker.com/). If not, no worries. For our purposes here, we can think of a container as an isolated process with its own resources and file system in which an application can run.
 
 A container has all the software dependencies that an application needs to run, including the application itself. From the application's perspective, the container is its execution environment: the "machine" in which it's running. In more practical terms, a container is a form of packaging, delivering, and executing an application. What's the advantage? Instead of installing the application and its dependencies directly into the machine that's going to run it, having it containerized allows for a container runtime (like Docker) to just run it as a self-contained unit. This makes it possible for the application to run anywhere that has the container runtime installed, with minimal configuration.
 
@@ -42,9 +42,9 @@ Something very closely related to containers is the concept of [images](https://
 
 When deploying applications into Kubernetes, this is how it runs them: via containers. In other words, for Kubernetes to be able to run an application, it needs to be delivered within a container.
 
-Next is the concept of a "[node](https://kubernetes.io/docs/concepts/architecture/)". This is very straightforward and not even specific to Kubernetes. A node is a computer within the cluster. That's it. Like I said before, Kubernetes is built to manage computer clusters. A "node" is just one computer, either virtual or physical, within that cluster.
+Next is the concept of a [node](https://kubernetes.io/docs/concepts/architecture/). This is very straightforward and not even specific to Kubernetes. A node is a computer within the cluster. That's it. Like I said before, Kubernetes is built to manage computer clusters. A node is just one computer, either virtual or physical, within that cluster.
 
-Then there's "[pods](https://kubernetes.io/docs/concepts/workloads/pods/)". Pods are the main executable units in Kubernetes. When we deploy an application or service into a Kubernetes cluster, it runs within a pod. Kubernetes works with containerized applications though, so it is the pods that take care of running said containers within them.
+Then there are [pods](https://kubernetes.io/docs/concepts/workloads/pods/). Pods are the main executable units in Kubernetes. When we deploy an application or service into a Kubernetes cluster, it runs within a pod. Kubernetes works with containerized applications though, so it is the pods that take care of running said containers within them.
 
 These three work very closely together within Kubernetes. To summarize: containers run within pods which in turn exist within nodes in the cluster.
 
@@ -52,7 +52,7 @@ There are other key components to talk about like [deployments](https://kubernet
 
 ### Installing and setting up Kubernetes
 
-The first thing we need is a Kubernetes environment. There are many Kubernetes implementations out there. [Google](https://cloud.google.com/kubernetes-engine), [Microsoft](https://azure.microsoft.com/en-us/services/kubernetes-service/), and [Amazon](https://aws.amazon.com/eks) offer Kubernetes solutions on their respective cloud platforms, for example. There are also implementations that one can install and run on their own, like [kind](https://kind.sigs.k8s.io/docs/), [minikube](https://minikube.sigs.k8s.io/docs/), and [MicroK8s](https://microk8s.io/). We are going to use MicroK8s for our demo. For no particular reason other than "this is the one I know".
+The first thing we need is a Kubernetes environment. There are many Kubernetes implementations out there. [Google](https://cloud.google.com/kubernetes-engine), [Microsoft](https://azure.microsoft.com/en-us/services/kubernetes-service/), and [Amazon](https://aws.amazon.com/eks) offer Kubernetes solutions on their respective cloud platforms, for example. There are also implementations that one can install and run on their own, like [kind](https://kind.sigs.k8s.io/docs/), [minikube](https://minikube.sigs.k8s.io/docs/), and [MicroK8s](https://microk8s.io/). We are going to use MicroK8s for our demo, for no particular reason other than "this is the one I know".
 
 When done installing, MicroK8s will have set up a whole Kubernetes cluster, with your machine as its one and only node.
 
@@ -64,7 +64,7 @@ So, if you're in Ubuntu and have [snapd](https://snapcraft.io/docs/installing-sn
 $ sudo snap install microk8s --classic --channel=1.21
 ```
 
-MicroK8s will create a user group which is best to add your user account to in order to execute commands that would otherwise require admin privileges. You can do so with:
+MicroK8s will create a user group which is best to add your user account to so you can execute commands that would otherwise require admin privileges. You can do so with:
 
 ```plain
 $ sudo usermod -a -G microk8s $USER
@@ -108,10 +108,10 @@ The only node in the cluster is your own machine. In my case, my machine is call
 
 MicroK8s supports many add-ons that we can use to enhance our Kubernetes installation. We are going to need a few of them so let's install them now. They are:
 
-1. The [dashboard](https://microk8s.io/docs/addon-dashboard), which gives us a nice web GUI which serves as a window into our cluster. In there we can see everything that's running, see logs, run commands, etc.
+1. The [dashboard](https://microk8s.io/docs/addon-dashboard), which gives us a nice web GUI which serves as a window into our cluster. In there we can see everything that's running, read logs, run commands, etc.
 2. [dns](https://microk8s.io/docs/addon-dns), which sets up DNS for within the cluster. In general it's a good idea to enable this one because other add-ons use it.
-3. storage, which allows the cluster to access the host machine's disk for storage. The application that we will deploy needs a persistent database so we need that plugin to make it happen.
-4. registry, which sets up a [container image](https://kubernetes.io/docs/concepts/containers/images/) registry that Kubernetes can access. Like I said, Kubernetes runs containerized applications. Containers are based on images. So, having this add-on allows us to define an image for our application and make it available to Kubernetes.
+3. storage, which allows the cluster to access the host machine's disk for storage. The application that we will deploy needs a persistent database so we need this plugin to make it happen.
+4. registry, which sets up a [container image](https://kubernetes.io/docs/concepts/containers/images/) registry that Kubernetes can access. Kubernetes runs containerized applications, containers are based on images. So, having this add-on allows us to define an image for our application and make it available to Kubernetes.
 
 To install these, just run the following commands:
 
@@ -234,9 +234,9 @@ NAME               READY   UP-TO-DATE   AVAILABLE   AGE
 nginx-deployment   3/3     3            3           2m54s
 ```
 
-As you can see, the deployment that we just created is right there with the name that we gave it.
+Now you can see that the deployment that we just created is right there with the name that we gave it.
 
-Like I said, deployments are used to manage pods, and that's just what the `READY`, `UP-TO-DATE` and `AVAILABLE` columns allude to with those values of `3`. This deployment has three pods because, in our YAML file, we specified we wanted three replicas with the `replicas: 3` line. Each "replica" is a pod. For our example, that means that we will have three instances of [NGINX](https://www.nginx.com/) running side by side.
+As I said earlier, deployments are used to manage pods, and that's just what the `READY`, `UP-TO-DATE` and `AVAILABLE` columns allude to with those values of `3`. This deployment has three pods because, in our YAML file, we specified we wanted three replicas with the `replicas: 3` line. Each "replica" is a pod. For our example, that means that we will have three instances of [NGINX](https://www.nginx.com/) running side by side.
 
 We can see the pods that have been created for us with this command:
 
@@ -312,7 +312,7 @@ This example is very simple, but it touches on the key aspects of deployment con
 - `spec.replicas`: The number of replica pods that the deployment should create. We already talked a bit about this before.
 - `spec.selector.labels`: This is one case when labels are actually important. Remember that when we create deployments, replica sets and pods are created with it. Within the K8s cluster, they each are their own individual objects though. This field is the mechanism that K8s uses to associate a given deployment with its replica set and pods. In practice, that means that whatever labels are in this field need to match the labels in `spec.template.metadata.labels`. More on that one below.
 - `spec.template`: Specifies the configuration of the pods that will be part of the deployment.
-- `spec.template.metadata.labels`: Very similar to `metadata.labels`. The only difference is that those labels are added to the deployment while these ones are added to the pods. The only notable thing is that these labels are key for the deployment to know which pods it should care about. As explained in above in `spec.selector.labels`.
+- `spec.template.metadata.labels`: Very similar to `metadata.labels`. The only difference is that those labels are added to the deployment while these ones are added to the pods. The only notable thing is that these labels are key for the deployment to know which pods it should care about (as explained in above in `spec.selector.labels`).
 - `spec.template.spec`: This section specifies the actual functional configuration of the pods.
 - `spec.template.spec.containers`: This section specifies the configuration of the containers that will be running inside the pods. It's an array so there can be many. In our example we have only one.
 - `spec.template.spec.containers[0].name`: The name of the container.
@@ -323,7 +323,7 @@ This example is very simple, but it touches on the key aspects of deployment con
 
 #### Connecting to the containers in the pods
 
-Kubernetes allows us to connect to the containers running inside pods. This is pretty easy to do with `kubectl`. All we need to know is the name of the pod and the container that we want to connect to. If the pod is running only one container (like our NGINX one does) then we don't need the container name. We can find out the names of our pods with:
+Kubernetes allows us to connect to the containers running inside a pod. This is pretty easy to do with `kubectl`. All we need to know is the name of the pod and the container that we want to connect to. If the pod is running only one container (like our NGINX one does) then we don't need the container name. We can find out the names of our pods with:
 
 ```plain
 $ kubectl get pods
@@ -550,7 +550,7 @@ Pretty cool, don't you think? We have a database running on our cluster now with
 
 #### Persistent volumes and claims
 
-The problem in our database is that any changes are lost if the pod or container were to shut down or reset for some reason. This is because all the database files live inside the container's file system. So if the container is gone, the data is also gone.
+The problem in our database is that any changes are lost if the pod or container were to shut down or reset for some reason. This is because all the database files live inside the container's file system, so when the container is gone, the data is also gone.
 
 In Kubernetes, pods are supposed to be treated as ephemeral entities. The idea is that pods should easily be brought down and replaced by new pods and users and clients shouldn't even notice. This is all Kubernetes working as expected. That is to say, pods should be as stateless as possible to work well with this behavior. However, a database is, by definition, not stateless. So what we need to do to solve this problem is have some available disk space from outside the cluster that can be used by our database to store its files. Something persistent that won't go away if the pod or container goes away. That's where [persistent volumes and persistent volume claims](https://kubernetes.io/docs/concepts/storage/persistent-volumes/) come in.
 
@@ -564,7 +564,7 @@ Start by tearing down our currently broken Postgres deployment:
 $ kubectl delete -f db-deployment.yaml
 ```
 
-Now let's add two new YAML configuration files. One for the persistent volume:
+Now let's add two new YAML configuration files. One is for the persistent volume:
 
 ```yaml
 # db-persistent-volume.yaml
@@ -674,7 +674,7 @@ By setting it up this way, we've made it so that regardless of how many Postgres
 
 > There's another limitation that's important to note. Just using the approach that we discussed, it's not possible to deploy multiple replicas of Postgres which work in tandem and operate on the same data. Even though the data files can be defined outside of the cluster and persisted that way, there can only be one single Postgres instance running against it at any given time.
 >
-> In production, the high availability problem is better solved leveraging the features provided by the database software itself. [Postgres offers various options in that area](https://www.postgresql.org/docs/9.1/different-replication-solutions.html). Or, if you are deploying to the cloud, maybe the best strategy is to use a relational database service managed by your cloud provider. Like [Amazon's RDS](https://aws.amazon.com/rds/) or [Microsoft's Azure SQL Database](https://azure.microsoft.com/en-us/products/azure-sql/database/).
+> In production, the high availability problem is better solved leveraging the features provided by the database software itself. [Postgres offers various options in that area](https://www.postgresql.org/docs/9.1/different-replication-solutions.html). Or, if you are deploying to the cloud, the best strategy may be to use a relational database service managed by your cloud provider. Examples are [Amazon's RDS](https://aws.amazon.com/rds/) and [Microsoft's Azure SQL Database](https://azure.microsoft.com/en-us/products/azure-sql/database/).
 
 #### Applying changes
 
@@ -1239,7 +1239,7 @@ Kustomize does this by introducing the concepts of [bases and overlays](https://
 
 To demonstrate this, let's build two variants: one for development and another for production. Let's consider the one we've already built to be the development variant and work towards properly specifying it as so, and then building a new production variant.
 
-> Note that the so-called "production" variant is not meant to be production worthy. It's just an example to illustrate the concepts and process of building bases and overlays. It does not meet the rigors of a proper production system.
+> Note that the so-called "production" variant we'll build is not actually meant to be production worthy. It's just an example to illustrate the concepts and process of building bases and overlays. It does not meet the rigors of a proper production system.
 
 #### Creating the base and overlays
 
@@ -1287,7 +1287,7 @@ Now we have two variants, but they don't do us any good because they aren't any 
 7. `web/persistent-volume.yaml`: Same as `web/persistent-volume-claim.yaml`. Leave it be for now.
 8. `wev/service.yaml`: This one is going to be the same for both dev and prod so let's do the usual and copy it into `base/web/service.yaml` and remove `dev/web/service.yaml` and `prod/web/service.yaml`
 
-> The decisions taken when designing the overlays and the base may seem arbitrary. That's because they totally are. The purpose of this article is to demonstrate Kustomize's features, not produce a real world, production worthy setup.
+> The decisions made when designing these overlays and the base may seem arbitrary. That's because they totally are. The purpose of this article is to demonstrate Kustomize's features, not produce a real world, production worthy setup.
 
 Once all those changes are done, you should have the following file structure:
 
