@@ -31,11 +31,11 @@ There are a few basic concepts that we need to be familiar with in order to effe
 
 First up is "[containers](https://kubernetes.io/docs/concepts/containers/)". If you're interested in Kubernetes, chances are that you've already been exposed to some sort of container technology like [Docker](https://www.docker.com/). If not, no worries. For our purposes here, we can think of containers as an isolated process, with its own resources and file system, in which an application can run.
 
-A container has all the software dependencies that an application needs to run, including the application itself. From the application's perspective, the container is its execution environment: the "machine" in which it's running. In more practical terms, a container is a form of packaging, delivering and executing an application. The advantage is that, instead of installing the application and its dependencies directly into the machine that's going to run it; having it containerized allows for a container runtime (like Docker) to just run it as a self-contained unit. This makes it possible for the application to run anywhere that has the container runtime installed, with minimal configuration.
+A container has all the software dependencies that an application needs to run, including the application itself. From the application's perspective, the container is its execution environment: the "machine" in which it's running. In more practical terms, a container is a form of packaging, delivering, and executing an application. What's the advantage? Instead of installing the application and its dependencies directly into the machine that's going to run it, having it containerized allows for a container runtime (like Docker) to just run it as a self-contained unit. This makes it possible for the application to run anywhere that has the container runtime installed, with minimal configuration.
 
 Something very closely related to containers is the concept of [images](https://kubernetes.io/docs/concepts/containers/images/). You can think of images as the blueprint for containers. An image is the spec, and the container is the instance that's actually running.
 
-When deploying applications into Kubernetes, this is how it runs them: via containers. In other words, for Kubernetes to be able to run an application, it needs to be delivered to it within a container.
+When deploying applications into Kubernetes, this is how it runs them: via containers. In other words, for Kubernetes to be able to run an application, it needs to be delivered within a container.
 
 Next is the concept of a "[node](https://kubernetes.io/docs/concepts/architecture/)". This is very straightforward and not even specific to Kubernetes. A node is a computer within the cluster. That's it. Like I said before, Kubernetes is built to manage computer clusters. A "node" is just one computer, either virtual or physical, within that cluster.
 
@@ -43,11 +43,11 @@ Then there's "[pods](https://kubernetes.io/docs/concepts/workloads/pods/)". Pods
 
 These three work very closely together within Kubernetes. To summarize: containers run within pods which in turn exist within nodes in the cluster.
 
-There are other key components to talk about like [deployments](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/), [services](https://kubernetes.io/docs/concepts/services-networking/service/), [replica sets](https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/) and [persistent volumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/). But I think that's enough theory for now. We'll learn more about all these as we get our hands dirty working though our example. So let's get started with our demo and we'll be discovering and discussing them organically as we go through it.
+There are other key components to talk about like [deployments](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/), [services](https://kubernetes.io/docs/concepts/services-networking/service/), [replica sets](https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/), and [persistent volumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/). But I think that's enough theory for now. We'll learn more about all these as we get our hands dirty working though our example. So let's get started with our demo and we'll be discovering and discussing them organically as we go through it.
 
 # Installing and setting up Kubernetes
 
-The first thing we need is a Kubernetes environment. There are many Kubernetes implementations out there. [Google](https://cloud.google.com/kubernetes-engine), [Microsoft](https://azure.microsoft.com/en-us/services/kubernetes-service/) and [Amazon](https://aws.amazon.com/eks) offer Kubernetes solutions on their respective cloud platforms, for example. There are also implementations that one can install and run on their own, like [kind](https://kind.sigs.k8s.io/docs/), [minikube](https://minikube.sigs.k8s.io/docs/) and [microk8s](https://microk8s.io/). We are going to use microk8s for our demo. For no particular reason other than "this is the one I know".
+The first thing we need is a Kubernetes environment. There are many Kubernetes implementations out there. [Google](https://cloud.google.com/kubernetes-engine), [Microsoft](https://azure.microsoft.com/en-us/services/kubernetes-service/), and [Amazon](https://aws.amazon.com/eks) offer Kubernetes solutions on their respective cloud platforms, for example. There are also implementations that one can install and run on their own, like [kind](https://kind.sigs.k8s.io/docs/), [minikube](https://minikube.sigs.k8s.io/docs/), and [microk8s](https://microk8s.io/). We are going to use microk8s for our demo. For no particular reason other than "this is the one I know".
 
 When done installing, microk8s will have set up a whole Kubernetes cluster, with your machine as its one and only node.
 
@@ -74,7 +74,7 @@ $ microk8s status --wait-ready
 
 You should see a "microk8s is running" message along with some specifications on your cluster. Including the available add-ons, which ones are enabled and which ones are disabled. 
 
-You can also shutdown your cluster anytime with `microk8s stop`. Use `microk8s start` to bring it back up.
+You can also shut down your cluster anytime with `microk8s stop`. Use `microk8s start` to bring it back up.
 
 ## Introducing kubectl
 
@@ -127,7 +127,7 @@ The dashboard is one we can play with right now. In order to access it, first ru
 $ microk8s dashboard-proxy
 ```
 
-That will start up a proxy into the dashboard. The command will give you an URL and login token that you can use to access the dashboard. It results in an output like this:
+That will start up a proxy into the dashboard. The command will give you a URL and login token that you can use to access the dashboard. It results in an output like this:
 
 ```
 Checking if Dashboard is running.
@@ -140,11 +140,11 @@ Now you can navigate to that URL in your browser and you'll find a screen like t
 
 ![Dashboard login](kubernetes/dashboard-login.png)
 
-Make sure the "Token" option is selected, and take the login token generated by the `microk8s dashboard-proxy` command from before and paste it in the field in the page. Click the "Sign In" button and you'll be able to see the dashboard, allowing you access to many aspects of your cluster. It should look like this:
+Make sure the "Token" option is selected and take the login token generated by the `microk8s dashboard-proxy` command from before and paste it in the field in the page. Click the "Sign In" button and you'll be able to see the dashboard, allowing you access to many aspects of your cluster. It should look like this:
 
 ![Dashboard home](kubernetes/dashboard-home.png)
 
-Feel free to play around with it a little bit. You don't have to understand everything yet though. As we work though our example, we'll see how the dashboard and the other add-ons come into play.
+Feel free to play around with it a little bit. You don't have to understand everything yet though. As we work through our example, we'll see how the dashboard and the other add-ons come into play.
 
 > There's also a very useful command line tool called [k9s](https://k9scli.io/), which helps in interacting with our cluster. We will not be discussing it further in this article but feel free to explore it if you need or want a command line alternative to the built-in dashboard.
 
@@ -189,7 +189,7 @@ spec:
 
 > This example is taken straight from [the official documentation](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/).
 
-Don't worry if most of that doesn't make sense at this point. I'll explain it into detail later. First, let's actually do something with it.
+Don't worry if most of that doesn't make sense at this point. I'll explain it in detail later. First, let's actually do something with it.
 
 Save that in a new file. You can call it `nginx-deployment.yaml`. Once that's done, you can actually create the deployment (and its associated objects) in your k8s cluster with this command:
 
@@ -270,7 +270,7 @@ Feel free to click around and explore the capabilities of the dashboard.
 
 ## Dissecting the deployment configuration file
 
-Now that we have a basic understanding of deployments and pods, and how to create them. Let's look more closely into the configuration file that defines it. This is what we had:
+Now that we have a basic understanding of deployments and pods and how to create them, let's look more closely into the configuration file that defines it. This is what we had:
 
 ```yaml
 # nginx-deployment.yaml
@@ -307,7 +307,7 @@ This example is very simple, but it touches on the key aspects of deployment con
 - `spec.replicas`: The number of replica pods that the deployment should create. We already talked a bit about this before.
 - `spec.selector.labels`: This is one case when labels are actually important. Remember that when we create deployments, replica sets and pods are created with it. Within the k8s cluster, they each are their own individual objects though. This field is the mechanism that k8s uses to associate a given deployment with its replica set and pods. In practice, that means that whatever labels are in this field need to match the labels in `spec.template.metadata.labels`. More on that one below.
 - `spec.template`: Specifies the configuration of the pods that will be part of the deployment.
-- `spec.template.metadata.labels`: Very similar to `metadata.labels`. The only difference is that those labels are added to the deployment; while these ones are added to the pods. The only notable thing is that these labels are key for the deployment to know which pods it should care about. As explained in above in `spec.selector.labels`.
+- `spec.template.metadata.labels`: Very similar to `metadata.labels`. The only difference is that those labels are added to the deployment while these ones are added to the pods. The only notable thing is that these labels are key for the deployment to know which pods it should care about. As explained in above in `spec.selector.labels`.
 - `spec.template.spec`: This section specifies the actual functional configuration of the pods.
 - `spec.template.spec.containers`: This section specifies the configuration of the containers that will be running inside the pods. It's an array so there can be many. In our example we have only one.
 - `spec.template.spec.containers[0].name`: The name of the container.
@@ -318,7 +318,7 @@ This example is very simple, but it touches on the key aspects of deployment con
 
 ## Connecting to the containers in the pods
 
-Kubernetes allows us to connect to the containers running inside pods. This is pretty easy to do with `kubectl`. All we need to know the name of the pod and the container that we want to connect to. If the pod is running only one container (like our NGINX one does), then we don't need the container name. We can find out the names of our pods with:
+Kubernetes allows us to connect to the containers running inside pods. This is pretty easy to do with `kubectl`. All we need to know is the name of the pod and the container that we want to connect to. If the pod is running only one container (like our NGINX one does) then we don't need the container name. We can find out the names of our pods with:
 
 ```
 $ kubectl get pods
@@ -328,7 +328,7 @@ nginx-deployment-66b6c48dd5-x5b4x   1/1     Running   0          25s
 nginx-deployment-66b6c48dd5-wvkhc   1/1     Running   0          25s
 ```
 
-Pick one of those, and we can open a bash session in it with:
+Pick one of those and we can open a bash session in it with:
 
 ```
 $ kubectl exec -it nginx-deployment-66b6c48dd5-85nwq -- bash
@@ -346,7 +346,7 @@ We can also connect to containers via the dashboard. Go back to the dashboard in
 
 ![Dashboard pod exec](kubernetes/dashboard-pod-exec.png)
 
-Click it, and you'll be taken to a screen with a console just like the one we obtained via `kubectl exec`:
+Click it and you'll be taken to a screen with a console just like the one we obtained via `kubectl exec`:
 
 ![Dashboard pod bash](kubernetes/dashboard-pod-bash.png)
 
@@ -409,7 +409,7 @@ We can access our service in a few different ways. We can use its "cluster IP" w
 
 ![NGINX via Cluster IP](kubernetes/nginx-via-cluster-ip.png)
 
-Another way is by using the "NodePort". Remember that the "NodePort" specifies the port in which the service will be available on every node of the cluster. With our current microk8s setup, our own machine is a node in the cluster. So, we can also access the NGINX that's running in our Kubernetes cluster using `localhost:30080`. `30080` is given by the `spec.ports[0].nodePort` field in the service configuration file from before. Try it out:
+Another way is by using the "NodePort". Remember that the "NodePort" specifies the port in which the service will be available on every node of the cluster. With our current microk8s setup, our own machine is a node in the cluster, so we can also access the NGINX that's running in our Kubernetes cluster using `localhost:30080`. `30080` is given by the `spec.ports[0].nodePort` field in the service configuration file from before. Try it out:
 
 ![NGINX via NodePort](kubernetes/nginx-via-nodeport.png)
 
@@ -417,7 +417,7 @@ How cool is that? We have identical, replicated NGINX instances running in a Kub
 
 # Deploying our own custom application
 
-Alright, by deploying NGINX, we've learned a lot about nodes, pods, deployments, services and how they all work together to run and serve an application from a Kubernetes cluster. Now, let's take all that knowledge and try and do the same for a completely custom application of our own.
+Alright, by deploying NGINX, we've learned a lot about nodes, pods, deployments, services, and how they all work together to run and serve an application from a Kubernetes cluster. Now, let's take all that knowledge and try to do the same for a completely custom application of our own.
 
 ## What are we building
 
@@ -470,8 +470,8 @@ spec:
 
 This deployment configuration YAML file is similar to the one we used for NGINX before, but it introduces a few new elements:
 
-- `spec.template.spec.containers[0].ports[0].name`: We can give specific names to ports which we can reference later, elsewhere in the k8s configurations. This field is for that.
-- `spec.template.spec.containers[0].env`: This is a list of environment variables that will be defined in the container inside the pod. In this case, we've specified a few variables that are necessary to configure the Postgres instance that will be running. We're using [the official Postgres image from Dockerhub](https://hub.docker.com/_/postgres), and it calls for these variables. Their purpose is straightforward: they specify database name, username and password.
+- `spec.template.spec.containers[0].ports[0].name`: We can give specific names to ports which we can reference later, elsewhere in the k8s configurations, which is what this field is for.
+- `spec.template.spec.containers[0].env`: This is a list of environment variables that will be defined in the container inside the pod. In this case, we've specified a few variables that are necessary to configure the Postgres instance that will be running. We're using [the official Postgres image from Dockerhub](https://hub.docker.com/_/postgres), and it calls for these variables. Their purpose is straightforward: they specify database name, username, and password.
 - `spec.template.spec.containers[0].resources`: This field defines the hardware resources that the container needs in order to function. We can specify upper limits with `limits` and lower ones with `requests`. You can learn more about resource management in [the official documentation](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/). In our case, we've kept it simple and used `limits` to prevent the container from using more than 4Gi of memory and 2 CPU cores.
 
 Now, let's save that YAML into a new file called `db-deployment.yaml` and run the following:
@@ -547,9 +547,9 @@ Pretty cool, don't you think? We have a database running on our cluster now with
 
 The problem in our database is that any changes are lost if the pod or container were to shut down or reset for some reason. This is because all the database files live inside the container's file system. So if the container is gone, the data is also gone.
 
-In Kubernetes, pods are supposed to be treated as ephemeral entities. The idea is that pods should easily be brought down and replaced by new pods, and users and clients shouldn't even notice. This is all Kubernetes working as expected. That is to say, pods should be as stateless as possible to work well with this behavior. However, a database is, by definition, not stateless. So, what we need to do to solve this problem is have some available disk space from outside the cluster that can be used by our database to store its files. Something persistent that won't go away if the pod or container goes away. That's where [persistent volumes and persistent volume claims](https://kubernetes.io/docs/concepts/storage/persistent-volumes/) come in.
+In Kubernetes, pods are supposed to be treated as ephemeral entities. The idea is that pods should easily be brought down and replaced by new pods and users and clients shouldn't even notice. This is all Kubernetes working as expected. That is to say, pods should be as stateless as possible to work well with this behavior. However, a database is, by definition, not stateless. So what we need to do to solve this problem is have some available disk space from outside the cluster that can be used by our database to store its files. Something persistent that won't go away if the pod or container goes away. That's where [persistent volumes and persistent volume claims](https://kubernetes.io/docs/concepts/storage/persistent-volumes/) come in.
 
-We will use a persistent volume (PV) to define a directory in our host machine that we will allow our Postgres container to use to store data files. Then, a persistent volume claim (PVC) is used to define a "request" for some of that available disk space that a specific container can make. In short, a persistent volume says to k8s "here's some storage that the cluster can use"; and a persistent volume claim says "here's a portion of that storage that's available for containers to use".
+We will use a persistent volume (PV) to define a directory in our host machine that we will allow our Postgres container to use to store data files. Then, a persistent volume claim (PVC) is used to define a "request" for some of that available disk space that a specific container can make. In short, a persistent volume says to k8s "here's some storage that the cluster can use" and a persistent volume claim says "here's a portion of that storage that's available for containers to use".
 
 ## Configuration files for the PV and PVC
 
@@ -587,7 +587,7 @@ In this config file, we already know about the `kind` and `metadata` fields. A f
 - `spec.claimRef`: Contains identifying information about the claim that's associated with the PV. Used to bind the PVC with a specific PVC. Notice how it matches the name defined in the PVC config file from below.
 - `spec.capacity.storage`: Is pretty straightforward in that it specifies the size of the persistent volume.
 - `spec.accessModes`: Defines how the PV can be accessed. In this case, we're using `ReadWriteOnce` so that it can only be used by a single node in the cluster which is allowed to read from and write into the PV.
-- `spec.hostPath.path`: Specifies the directory in the host machine's file system where the PV will be mounted. Simply put, the containers in the cluster will have access to the specific directory defined here. I've used `"/home/kevin/projects/vehicle-quotes-postgres-data"` because that makes sense on my own machine. I've you're following along, make sure to set it to something that makes sense in your environment.
+- `spec.hostPath.path`: Specifies the directory in the host machine's file system where the PV will be mounted. Simply put, the containers in the cluster will have access to the specific directory defined here. I've used `"/home/kevin/projects/vehicle-quotes-postgres-data"` because that makes sense on my own machine. If you're following along, make sure to set it to something that makes sense in your environment.
 
 > `hostPath` is just one type of persistent volume which works well for development deployments. For production, managed Kubernetes implementations like the ones from Google or Amazon have their own types which are more appropriate for production.
 
@@ -611,7 +611,7 @@ spec:
 
 Like I said, PVCs are essentially usage requests for PVs. So, the config file is simple in that it's mostly specified to match the PV.
 
-- `spec.volumeName`: Is the name of the PV that this PVC is going to access. Notice how it matches the name that we defined in the PV's config file.
+- `spec.volumeName`: The name of the PV that this PVC is going to access. Notice how it matches the name that we defined in the PV's config file.
 - `spec.resources.requests`: Defines how much space this PVC requests from the PV. In this case, we're just requesting all the space that the PV has available to it, as given by its config file: `5Gi`.
 
 ## Configuring the deployment to use the PVC
@@ -663,7 +663,7 @@ First, notice the `volumes` section at the bottom of the file. Here's where we d
 
 Then, up in the `containers` section, we define a `volumeMounts` element. We use that to specify which directory within the container will map to our PV. In this case, we've set the container's `/var/lib/postgresql/data` directory to use the volume that we defined at the bottom of the file. That volume is backed by our persistent volume claim, which is in turn backed by our persistent volume. The significance of the `/var/lib/postgresql/data` directory is that this is where Postgres stores database files by default.
 
-In summary: We created a persistent volume that defines some disk space in our machine that's available to the cluster; then, we defined a persistent volume claim that represents a request of some of that space that a container can have access to; after that, we defined a volume within our pod configuration in our deployment to point to that persistent volume claim; and finally, we defined a volume mount in our container that uses that volume to store Postgres' database files.
+In summary: We created a persistent volume that defines some disk space in our machine that's available to the cluster; then we defined a persistent volume claim that represents a request of some of that space that a container can have access to; after that we defined a volume within our pod configuration in our deployment to point to that persistent volume claim; and finally we defined a volume mount in our container that uses that volume to store Postgres' database files.
 
 By setting it up this way, we've made it so that regardless of how many Postgres pods come and go, the database files will always be persisted, because the files now live outside of the container. They are stored in our host machine instead.
 
