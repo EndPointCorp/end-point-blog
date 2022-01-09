@@ -579,3 +579,5 @@ Put those two together and we've updated our test suite so that every test case 
 > To learn more about database transactions with Entity Framework Core, you can look at [the official docs](https://docs.microsoft.com/en-us/ef/core/saving/transactions).
 
 > You can learn more about xUnit.net's test class fixtures in [the samples repository](https://github.com/xunit/samples.xunit/tree/main/ClassFixtureExample).
+
+Alright, that's all for now. It is great to see that implementing automated tests that interact with the database is actually fairly straightforward using .NET, xUnit.net and Entity Framework. Even if it isn't quite as easy as it is in Rails, it is perfectly doable.
