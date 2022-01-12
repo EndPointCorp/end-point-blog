@@ -1,18 +1,24 @@
 ---
 author: "Kevin Campusano"
 title: "Database integration testing with .NET"
-date: 2022-01-03
+date: 2022-01-11
 tags:
 - dotnet
-- integration testing
-- database testing
+- integration
+- database
+- testing
+github_issue_number: 1821
 ---
+
+![Sunset over lake in mountains](/blog/2022/01/database-integration-testing-with-dotnet/banner.jpg)
+
+<!-- Image by Zed Jensen, 2021 -->
 
 [Ruby on Rails](https://rubyonrails.org/) is great. We use it at End Point for many projects with great success. One of Rails' cool features is how easy it is to write database integration tests. Out of the box, Rails projects come with all the configuration necessary to set up a database that's exclusive for the automated test suite. This database includes all the tables and other objects that exist within the regular database that the app uses during its normal execution. So, it is very easy to write automated tests that cover the application components that interact with the database.
 
-[ASP.NET Core](https://dotnet.microsoft.com/en-us/apps/aspnet) (which is also great!) however, doesn't have this feature out of the box. Let's see if we can't do it ourselves.
+[ASP.NET Core](https://dotnet.microsoft.com/en-us/apps/aspnet) (which is also great!), however, doesn't have this feature out of the box. Let's see if we can't do it ourselves.
 
-# The sample project
+### The sample project
 
 As a sample project we will use a REST API that I wrote for [another article](https://www.endpointdev.com/blog/2021/07/dotnet-5-web-api/). Check it out if you want to learn more about the ins and outs of developing REST APIs with .NET. You can find the source code [on GitHub](https://github.com/megakevin/end-point-blog-dotnet-5-web-api).
 
@@ -22,13 +28,11 @@ The logic for that feature is backed by a specific class and it depends heavily 
 
 In order to add automated tests, the first step is to organize our project so that it supports them. Let's do that next.
 
-# Organizing the source code to allow for automated testing
+### Organizing the source code to allow for automated testing
 
-In general, the source code of most real world .NET applications is organized as one or more "projects" under one "solution". Simply put, a solution is a collection of related projects. And a project is something that produces a deployment artifact. That is, a library (i.e. a `*.dll` file) or something that can be executed like a console or web app.
+In general, the source code of most real world .NET applications is organized as one or more "projects" under one "solution". A solution is a collection of related projects, and a project is something that produces a deployment artifact. An artifact is a library (i.e. a `*.dll` file) or something that can be executed like a console or web app.
 
-Our sample app is a stand-alone ["webapi" project](https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-web-api?view=aspnetcore-6.0&tabs=visual-studio-code). Meaning that it's not within a solution. For automated tests however, we need to create a new project, parallel to the existing one, that's dedicated to tests. This means that we need a solution to contain and relate those two projects.
-
-That means that we need to reorganize the sample app's source code in order to comply with the "one solution and two projects" structure that I just described.
+Our sample app is a stand-alone ["webapi" project](https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-web-api?view=aspnetcore-6.0&tabs=visual-studio-code), meaning that it's not within a solution. For automated tests, however, we need to create a new project for tests, parallel to our main one. Now that we have two projects instead of one, we need to reorganize the sample app's source code to comply with the "projects in a solution" structure I mentioned earlier.
 
 Let's start by moving all the files in the root directory into a new `VehicleQuotes` directory. That's one project. Then, we create a new automated tests project by running the following, still from the root directory:
 
@@ -76,7 +80,7 @@ With all that setup out of the way, we can now start writing some tests.
 
 > You can learn more about project organization in the [official online documentation](https://docs.microsoft.com/en-us/dotnet/core/tutorials/testing-with-cli).
 
-# Creating a DbContext instance to talk to the database
+### Creating a DbContext instance to talk to the database
 
 The `VehicleQuotes.Tests` automated tests project got created with a default test file named `UnitTest1.cs`. You can delete it or ignore it, since we will not use it.
 
@@ -107,7 +111,7 @@ namespace VehicleQuotes.Tests.Services
 
 This is the basic structure for tests using xUnit.net. Any method annotated with a `[Fact]` attribute will be picked up and ran by the test framework. In this case, I've created one such method called `GetAllQuotesReturnsEmptyWhenThereIsNoDataStored` which should give away its intention. This test case will validate that `QuoteService`'s `GetAllQuotes` method returns an empty set when called with no data on the database.
 
-Before we can write this test case though, the suite needs access to the test database. Our app uses [Entity Framework Core](https://docs.microsoft.com/en-us/ef/core/) for database interaction, which means that the database is accessed via a `DbContext` class. Looking at the source code of our sample app, we can see that the `DbContext` being used is `VehicleQuotesContext`, defined in `VehicleQuotes/Data/VehicleQuotesContext.cs`. Let's add a utility method to the `QuoteServiceTests` class which can be used to create new instances of `VehicleQuotesContext`:
+Before we can write this test case, though, the suite needs access to the test database. Our app uses [Entity Framework Core](https://docs.microsoft.com/en-us/ef/core/) for database interaction, which means that the database is accessed via a `DbContext` class. Looking at the source code of our sample app, we can see that the `DbContext` being used is `VehicleQuotesContext`, defined in `VehicleQuotes/Data/VehicleQuotesContext.cs`. Let's add a utility method to the `QuoteServiceTests` class which can be used to create new instances of `VehicleQuotesContext`:
 
 ```csharp
 // VehicleQuotes.Tests/Services/QuoteServiceTests.cs
@@ -195,7 +199,7 @@ context.Database.EnsureCreated();
 
 This is the database that our test suite will use.
 
-# Defining the test database connection string in the appsettings.json file
+### Defining the test database connection string in the appsettings.json file
 
 One quick improvement that we can do to the code we've written so far is move the connection string for the test database into a separate configuration file, instead of having it hardcoded. Let's do that next.
 
@@ -209,7 +213,7 @@ We need to create a new `appsettings.json` file under the `VehicleQuotes.Tests` 
 }
 ```
 
-This is the standard way of configuring connection strings in .NET. Now, to actually fetch this value from within our test suite code, we do the following changes:
+This is the standard way of configuring connection strings in .NET. Now, to actually fetch this value from within our test suite code, we make the following changes:
 
 ```diff
 // ...
@@ -244,13 +248,13 @@ namespace VehicleQuotes.Tests.Services
 }
 ```
 
-First we add a few using statements. We need `Microsoft.Extensions.Hosting` so that we can have access to the `Host` class through which we obtain access to the application's execution context. This allows us to access the built-in configuration service. We also need `Microsoft.Extensions.Configuration` to have access to the `IConfiguration` interface which is how we reference the configuration service which allows us access to the `appsettings.json` config file. And we also need the `Microsoft.Extensions.DependencyInjection` namespace which allows us to tap into the built-in dependency injection mechanism, through which we can access the default configuration service I mentioned before. Specifically, that namespace is where the `GetRequiredService` extension method lives.
+First we add a few `using` statements. We need `Microsoft.Extensions.Hosting` so that we can have access to the `Host` class through which we obtain access to the application's execution context. This allows us to access the built-in configuration service. We also need `Microsoft.Extensions.Configuration` to have access to the `IConfiguration` interface which is how we reference the configuration service which allows us access to the `appsettings.json` config file. And we also need the `Microsoft.Extensions.DependencyInjection` namespace which allows us to tap into the built-in dependency injection mechanism, through which we can access the default configuration service I mentioned before. Specifically, that namespace is where the `GetRequiredService` extension method lives.
 
 All this translates into the few code changes that you see in the previous diff: First getting the app's host, then getting the configuration service, then using that to fetch our connection string.
 
 > You can refer to [the official documentation](https://docs.microsoft.com/en-us/dotnet/core/extensions/configuration) to learn more about configuration in .NET.
 
-# Writing a simple test case that fetches data
+### Writing a simple test case that fetches data
 
 Now that we have a way to access the database from within the test suite, we can finally write an actual test case. Here's the `GetAllQuotesReturnsEmptyWhenThereIsNoDataStored` one that I alluded to earlier:
 
@@ -280,11 +284,11 @@ namespace VehicleQuotes.Tests.Services
 }
 ```
 
-This one is a very simple test. We obtain a new `VehicleQuotesContext` instance that we can use to pass as a parameter when instantiating the component that we want to test: the `QuoteService`. We then call the `GetAllQuotes` method and assert that it returned an empty set. The test database was just created, so there should be no data in it. Hence the empty resource set.
+This one is a very simple test. We obtain a new `VehicleQuotesContext` instance that we can use to pass as a parameter when instantiating the component that we want to test: the `QuoteService`. We then call the `GetAllQuotes` method and assert that it returned an empty set. The test database was just created, so there should be no data in it, hence the empty resource set.
 
 To run this test, we do `dotnet test`. I personally like a more verbose output so I like to use this variant of the command: `dotnet test --logger "console;verbosity=detailed"`. Here's what the output looks like.
 
-```sh
+```plaintext
 $ dotnet test --logger "console;verbosity=detailed"
   Determining projects to restore...
   All projects are up-to-date for restore.
@@ -310,13 +314,13 @@ Total tests: 1
  Total time: 3.7762 Seconds
 ```
 
-# Resetting the state of the database after each test
+### Resetting the state of the database after each test
 
-Now we need to start looking at writing a tests that actually write data into the database. However, every test case needs to start with the database in its original state. In other words, the changes that one test case does to the test database should not be seen, affect or be expected by any subsequent test. That will make it so our test cases are isolated and repeatable. That's not possible with out current implementation though.
+Now we need to write a test that actually writes data into the database. However, every test case needs to start with the database in its original state. In other words, the changes that one test case does to the test database should not be seen, affect or be expected by any subsequent test. That will make it so our test cases are isolated and repeatable. That's not possible with our current implementation, though.
 
 > You can read more about the FIRST principles of testing [here](https://medium.com/@tasdikrahman/f-i-r-s-t-principles-of-testing-1a497acda8d6).
 
-Luckily, that's a problem that's easily solved with Entity Framework Core. All we need to do is call a method that "ensures that the database is deleted" just before it "ensures that it is created". Here's what it looks like:
+Luckily, that's a problem that's easily solved with Entity Framework Core. All we need to do is call a method that ensures that the database is deleted just before it ensures that it is created. Here's what it looks like:
 
 ```diff
 private VehicleQuotesContext CreateDbContext()
@@ -342,11 +346,11 @@ And that's all. Now every test case that calls `CreateDbContext` in order to obt
 
 Now, depending on the size of the database, this can be quite expensive. For integration tests, performance is not as big of a concern as for unit tests. This is because integration tests should be fewer in number and less frequently run.
 
-We will make it better though. Instead of deleting and recreating the database before each test case, we will take a page out of Ruby on Rails' book and run each test case within a database transaction which gets rolled back after the test is done. For now though, let's try and write another test case. This time, one where we insert new records into the database.
+We can make it better though. Instead of deleting and recreating the database before each test case, we'll take a page out of Ruby on Rails' book and run each test case within a database transaction which gets rolled back after the test is done. For now though, let's try and write another test case; this time, one where we insert new records into the database.
 
 > If you want to hear a more in-depth discussion about automated testing in general, I go into further detail on the topic in this article: [An introduction to automated testing for web applications with Symfony](https://www.endpointdev.com/blog/2020/09/automated-testing-with-symfony/).
 
-# Writing another simple test case that stores data
+### Writing another simple test case that stores data
 
 Now let's write another test that exercises `QuoteService`'s `GetAllQuotes` method. This time though, let's add a new record to the database before calling it so that the method's result is not empty. Here's what the test looks like:
 
@@ -416,9 +420,9 @@ First we include the `VehicleQuotes.Models` namespace so that we can use the `Qu
 
 Other than that, the test case itself is pretty self-explanatory. We start by obtaining an instance of `VehicleQuotesContext` via the `CreateDbContext` method. Remember that this also resets the whole database so that the test case can run over a clean slate. Then, we create a new `Quote` object and use our `VehicleQuotesContext` to insert it as a record into the database. We do this so that the later call to `QuoteService`'s `GetAllQuotes` method actually finds some data to return this time. Finally, the test case validates that the result contains a record and that its data is identical to what we set manually.
 
-Neat! At this point we have what I think is the bare minimum infrastructure when it comes to serviceable and effective database integration tests. Namely, access to a test database. We can take it one step further though, and make things more reusable and a little bit better performing.
+Neat! At this point we have what I think is the bare minimum infrastructure when it comes to serviceable and effective database integration tests (namely, access to a test database). We can take it one step further though, and make things more reusable and a little bit better performing.
 
-# Refactoring into a fixture for reusability
+### Refactoring into a fixture for reusability
 
 We can use the test fixture functionality offered by xUnit.net in order to make the database interactivity aspect of our test suite into a reusable component. That way, if we had other test classes focused on other components that interact with the database, we could just plug that code in. We can define a fixture by creating a new file called, for example, `VehicleQuotes.Tests/Fixtures/DatabaseFixture.cs` with these contents:
 
@@ -537,9 +541,9 @@ Here we've updated the `QuoteServiceTests` class definition so that it inherits 
 
 One important aspect to note about this fixture is that it is initialized once per whole test suite run, not once per test case. Specifically, the code within the `DatabaseFixture`'s constructor gets executed once, before all of the test cases. Similarly, the code in `DatabaseFixture`'s `Dispose` method get executed once at the end, after all test cases have been run.
 
-This means that our test database deletion and recreation step now happens only once for the entire test suite. This is not good with our current implementation because that means that individual test cases no longer run with a fresh, empty database. This can be good for performance though, as long as we update our test cases so that they run within database transactions. Let's do just that.
+This means that our test database deletion and recreation step now happens only once for the entire test suite. This is not good with our current implementation because that means that individual test cases no longer run with a fresh, empty database. This can be good for performance though, as long as we update our test cases to run within database transactions. Let's do just that.
 
-# Using transactions to reset the state of the database
+### Using transactions to reset the state of the database
 
 Here's how we update out test class so that each test case runs within a transaction:
 
