@@ -1,7 +1,7 @@
 ---
 author: "Kevin Campusano"
 title: "Database integration testing with .NET"
-date: 2022-01-11
+date: 2022-01-12
 tags:
 - dotnet
 - integration
@@ -14,13 +14,13 @@ github_issue_number: 1821
 
 <!-- Image by Zed Jensen, 2021 -->
 
-[Ruby on Rails](https://rubyonrails.org/) is great. We use it at End Point for many projects with great success. One of Rails' cool features is how easy it is to write database integration tests. Out of the box, Rails projects come with all the configuration necessary to set up a database that's exclusive for the automated test suite. This database includes all the tables and other objects that exist within the regular database that the app uses during its normal execution. So, it is very easy to write automated tests that cover the application components that interact with the database.
+[Ruby on Rails](https://rubyonrails.org/) is great. We use it at End Point for many projects with great success. One of Rails’ cool features is how easy it is to write database integration tests. Out of the box, Rails projects come with all the configuration necessary to set up a database that's exclusive for the automated test suite. This database includes all the tables and other objects that exist within the regular database that the app uses during its normal execution. So, it is very easy to write automated tests that cover the application components that interact with the database.
 
-[ASP.NET Core](https://dotnet.microsoft.com/en-us/apps/aspnet) (which is also great!), however, doesn't have this feature out of the box. Let's see if we can't do it ourselves.
+[ASP.NET Core](https://dotnet.microsoft.com/en-us/apps/aspnet) is also great! However, it doesn't have this feature out of the box. Let's see if we can't do it ourselves.
 
 ### The sample project
 
-As a sample project we will use a REST API that I wrote for [another article](https://www.endpointdev.com/blog/2021/07/dotnet-5-web-api/). Check it out if you want to learn more about the ins and outs of developing REST APIs with .NET. You can find the source code [on GitHub](https://github.com/megakevin/end-point-blog-dotnet-5-web-api).
+As a sample project we will use a REST API that I wrote for [another article](/blog/2021/07/dotnet-5-web-api/). Check it out if you want to learn more about the ins and outs of developing REST APIs with .NET. You can find the source code [on GitHub](https://github.com/megakevin/end-point-blog-dotnet-5-web-api).
 
 The API is very straightforward. It provides a few endpoints for [CRUDing](https://developer.mozilla.org/en-US/docs/Glossary/CRUD) some database tables. It also provides an endpoint which, when given some vehicle information, will calculate a monetary value for that vehicle. That's a feature that would be interesting for us to cover with some tests.
 
@@ -40,7 +40,7 @@ Let's start by moving all the files in the root directory into a new `VehicleQuo
 dotnet new xunit -o VehicleQuotes.Tests
 ```
 
-That creates a new automated tests project named `VehicleQuotes.Tests` (under a new aptly named `VehicleQuotes.Tests` directory) which uses the [xUnit.net](https://xunit.net) test framework. There are other options when it comes to test frameworks in .NET. E.g. [MSTest](https://docs.microsoft.com/en-us/dotnet/core/testing/unit-testing-with-mstest) and [NUnit](https://nunit.org/). We're going to use xUnit.net, but the others should work just as well for our purposes.
+That creates a new automated tests project named `VehicleQuotes.Tests` (under a new aptly-named `VehicleQuotes.Tests` directory) which uses the [xUnit.net](https://xunit.net) test framework. There are other options when it comes to test frameworks in .NET, such as [MSTest](https://docs.microsoft.com/en-us/dotnet/core/testing/unit-testing-with-mstest) and [NUnit](https://nunit.org/). We're going to use xUnit.net, but the others should work just as well for our purposes.
 
 Now, we need to create a new solution to contain those two projects. Solutions come in the form of `*.sln` files and we can create ours like so:
 
@@ -50,7 +50,7 @@ dotnet new sln -o vehicle-quotes
 
 That should've created a new `vehicle-quotes.sln` file for us. We should now have a file structure like this:
 
-```
+```plain
 .
 ├── vehicle-quotes.sln
 ├── VehicleQuotes
@@ -72,7 +72,7 @@ dotnet sln add ./VehicleQuotes.Tests/VehicleQuotes.Tests.csproj
 
 Finally, we update the `VehicleQuotes.Tests` project so that it references the `VehicleQuotes` project. That way, the test suite will have access to all the classes defined in the REST API. Here's the command for that:
 
-```
+```sh
 dotnet add ./VehicleQuotes.Tests/VehicleQuotes.Tests.csproj reference ./VehicleQuotes/VehicleQuotes.csproj
 ```
 
@@ -109,7 +109,7 @@ namespace VehicleQuotes.Tests.Services
 }
 ```
 
-This is the basic structure for tests using xUnit.net. Any method annotated with a `[Fact]` attribute will be picked up and ran by the test framework. In this case, I've created one such method called `GetAllQuotesReturnsEmptyWhenThereIsNoDataStored` which should give away its intention. This test case will validate that `QuoteService`'s `GetAllQuotes` method returns an empty set when called with no data on the database.
+This is the basic structure for tests using xUnit.net. Any method annotated with a `[Fact]` attribute will be picked up and run by the test framework. In this case, I've created one such method called `GetAllQuotesReturnsEmptyWhenThereIsNoDataStored` which should give away its intention. This test case will validate that `QuoteService`'s `GetAllQuotes` method returns an empty set when called with no data in the database.
 
 Before we can write this test case, though, the suite needs access to the test database. Our app uses [Entity Framework Core](https://docs.microsoft.com/en-us/ef/core/) for database interaction, which means that the database is accessed via a `DbContext` class. Looking at the source code of our sample app, we can see that the `DbContext` being used is `VehicleQuotesContext`, defined in `VehicleQuotes/Data/VehicleQuotesContext.cs`. Let's add a utility method to the `QuoteServiceTests` class which can be used to create new instances of `VehicleQuotesContext`:
 
@@ -145,7 +145,7 @@ namespace VehicleQuotes.Tests.Services
 
 As you can see, we need to go through three steps to create the `VehicleQuotesContext` instance and get a database that's ready for testing:
 
-First, we create a `DbContextOptionsBuilder` and use that to obtain the `options` object that the `VehicleQuotesContext` needs as a constructor parameter. We needed to include the `Microsoft.EntityFrameworkCore` namespace in order to have access to the `DbContextOptionsBuilder`. For this, I just copied, and slightly modified this statement from the `ConfigureServices` method in the REST API's `VehicleQuotes/Startup.cs` file:
+First, we create a `DbContextOptionsBuilder` and use that to obtain the `options` object that the `VehicleQuotesContext` needs as a constructor parameter. We needed to include the `Microsoft.EntityFrameworkCore` namespace in order to have access to the `DbContextOptionsBuilder`. For this, I just copied and slightly modified this statement from the `ConfigureServices` method in the REST API's `VehicleQuotes/Startup.cs` file:
 
 ```csharp
 // VehicleQuotes/Startup.cs
@@ -168,7 +168,7 @@ public void ConfigureServices(IServiceCollection services)
 
 This is a method that runs when the application is starting up to set up all the services that the app uses to work. Here, it's setting up the `DbContext` to enable database interaction. For the test suite, I took this statement as a starting point and removed the logging configurations and specified a hardcoded connection string that specifically points to a new `vehicle_quotes_test` database that will be used for testing.
 
-If you're following along, then you need a Postgres instance that you can use to run the tests. In my case, I have one running that is reachable via the connection string I specified: `Host=db;Database=vehicle_quotes_test;Username=vehicle_quotes;Password=password`.
+If you're following along, then you need a PostgreSQL instance that you can use to run the tests. In my case, I have one running that is reachable via the connection string I specified: `Host=db;Database=vehicle_quotes_test;Username=vehicle_quotes;Password=password`.
 
 If you have Docker, a quick way to get a Postgres database up and running is with this command:
 
@@ -250,7 +250,7 @@ namespace VehicleQuotes.Tests.Services
 
 First we add a few `using` statements. We need `Microsoft.Extensions.Hosting` so that we can have access to the `Host` class through which we obtain access to the application's execution context. This allows us to access the built-in configuration service. We also need `Microsoft.Extensions.Configuration` to have access to the `IConfiguration` interface which is how we reference the configuration service which allows us access to the `appsettings.json` config file. And we also need the `Microsoft.Extensions.DependencyInjection` namespace which allows us to tap into the built-in dependency injection mechanism, through which we can access the default configuration service I mentioned before. Specifically, that namespace is where the `GetRequiredService` extension method lives.
 
-All this translates into the few code changes that you see in the previous diff: First getting the app's host, then getting the configuration service, then using that to fetch our connection string.
+All this translates into the few code changes that you see in the previous diff: first getting the app's host, then getting the configuration service, then using that to fetch our connection string.
 
 > You can refer to [the official documentation](https://docs.microsoft.com/en-us/dotnet/core/extensions/configuration) to learn more about configuration in .NET.
 
@@ -316,39 +316,39 @@ Total tests: 1
 
 ### Resetting the state of the database after each test
 
-Now we need to write a test that actually writes data into the database. However, every test case needs to start with the database in its original state. In other words, the changes that one test case does to the test database should not be seen, affect or be expected by any subsequent test. That will make it so our test cases are isolated and repeatable. That's not possible with our current implementation, though.
+Now we need to write a test that actually writes data into the database. However, every test case needs to start with the database in its original state. In other words, the changes that one test case does to the test database should not be seen, affect, or be expected by any subsequent test. That will make it so our test cases are isolated and repeatable. That's not possible with our current implementation, though.
 
 > You can read more about the FIRST principles of testing [here](https://medium.com/@tasdikrahman/f-i-r-s-t-principles-of-testing-1a497acda8d6).
 
 Luckily, that's a problem that's easily solved with Entity Framework Core. All we need to do is call a method that ensures that the database is deleted just before it ensures that it is created. Here's what it looks like:
 
 ```diff
-private VehicleQuotesContext CreateDbContext()
-{
-    var host = Host.CreateDefaultBuilder().Build();
-    var config = host.Services.GetRequiredService<IConfiguration>();
+ private VehicleQuotesContext CreateDbContext()
+ {
+     var host = Host.CreateDefaultBuilder().Build();
+     var config = host.Services.GetRequiredService<IConfiguration>();
 
-    var options = new DbContextOptionsBuilder<VehicleQuotesContext>()
-        .UseNpgsql(config.GetConnectionString("VehicleQuotesContext"))
-        .UseSnakeCaseNamingConvention()
-        .Options;
+     var options = new DbContextOptionsBuilder<VehicleQuotesContext>()
+         .UseNpgsql(config.GetConnectionString("VehicleQuotesContext"))
+         .UseSnakeCaseNamingConvention()
+         .Options;
 
-    var context = new VehicleQuotesContext(options);
+     var context = new VehicleQuotesContext(options);
 
-+   context.Database.EnsureDeleted();
-    context.Database.EnsureCreated();
++    context.Database.EnsureDeleted();
+     context.Database.EnsureCreated();
 
-    return context;
-}
+     return context;
+ }
 ```
 
 And that's all. Now every test case that calls `CreateDbContext` in order to obtain a `DbContext` instance will effectively trigger a database reset. Feel free to `dotnet test` again to validate that the test suite is still working.
 
 Now, depending on the size of the database, this can be quite expensive. For integration tests, performance is not as big of a concern as for unit tests. This is because integration tests should be fewer in number and less frequently run.
 
-We can make it better though. Instead of deleting and recreating the database before each test case, we'll take a page out of Ruby on Rails' book and run each test case within a database transaction which gets rolled back after the test is done. For now though, let's try and write another test case; this time, one where we insert new records into the database.
+We can make it better though. Instead of deleting and recreating the database before each test case, we'll take a page out of Ruby on Rails’ book and run each test case within a database transaction which gets rolled back after the test is done. For now though, let's write another test case: this time, one where we insert new records into the database.
 
-> If you want to hear a more in-depth discussion about automated testing in general, I go into further detail on the topic in this article: [An introduction to automated testing for web applications with Symfony](https://www.endpointdev.com/blog/2020/09/automated-testing-with-symfony/).
+> If you want to hear a more in-depth discussion about automated testing in general, I go into further detail on the topic in this article: [An introduction to automated testing for web applications with Symfony](/blog/2020/09/automated-testing-with-symfony/).
 
 ### Writing another simple test case that stores data
 
@@ -420,7 +420,7 @@ First we include the `VehicleQuotes.Models` namespace so that we can use the `Qu
 
 Other than that, the test case itself is pretty self-explanatory. We start by obtaining an instance of `VehicleQuotesContext` via the `CreateDbContext` method. Remember that this also resets the whole database so that the test case can run over a clean slate. Then, we create a new `Quote` object and use our `VehicleQuotesContext` to insert it as a record into the database. We do this so that the later call to `QuoteService`'s `GetAllQuotes` method actually finds some data to return this time. Finally, the test case validates that the result contains a record and that its data is identical to what we set manually.
 
-Neat! At this point we have what I think is the bare minimum infrastructure when it comes to serviceable and effective database integration tests (namely, access to a test database). We can take it one step further though, and make things more reusable and a little bit better performing.
+Neat! At this point we have what I think is the bare minimum infrastructure when it comes to serviceable and effective database integration tests, namely, access to a test database. We can take it one step further, though, and make things more reusable and a little bit better performing.
 
 ### Refactoring into a fixture for reusability
 
@@ -475,66 +475,66 @@ All this class does is define the `CreateDbContext` method that we're already fa
 With that, our `QuoteServiceTests` test class can use it if we make the following changes to it:
 
 ```diff
-using System;
-using Xunit;
+ using System;
+ using Xunit;
 -using Microsoft.EntityFrameworkCore;
-using VehicleQuotes.Services;
+ using VehicleQuotes.Services;
 -using Microsoft.Extensions.Hosting;
 -using Microsoft.Extensions.Configuration;
 -using Microsoft.Extensions.DependencyInjection;
-using VehicleQuotes.Models;
-using System.Linq;
+ using VehicleQuotes.Models;
+ using System.Linq;
 +using VehicleQuotes.Tests.Fixtures;
 
-namespace VehicleQuotes.Tests.Services
-{
--   public class QuoteServiceTests
-+   public class QuoteServiceTests : IClassFixture<DatabaseFixture>
-    {
-+       private VehicleQuotesContext dbContext;
+ namespace VehicleQuotes.Tests.Services
+ {
+-    public class QuoteServiceTests
++    public class QuoteServiceTests : IClassFixture<DatabaseFixture>
+     {
++        private VehicleQuotesContext dbContext;
 
-+       public QuoteServiceTests(DatabaseFixture fixture)
-+       {
-+           dbContext = fixture.DbContext;
-+       }
++        public QuoteServiceTests(DatabaseFixture fixture)
++        {
++            dbContext = fixture.DbContext;
++        }
 
--       private VehicleQuotesContext CreateDbContext()
--       {
--           var host = Host.CreateDefaultBuilder().Build();
--           var config = host.Services.GetRequiredService<IConfiguration>();
+-        private VehicleQuotesContext CreateDbContext()
+-        {
+-            var host = Host.CreateDefaultBuilder().Build();
+-            var config = host.Services.GetRequiredService<IConfiguration>();
 
--           var options = new DbContextOptionsBuilder<VehicleQuotesContext>()
--               .UseNpgsql(config.GetConnectionString("VehicleQuotesContext"))
--               .UseSnakeCaseNamingConvention()
--               .Options;
+-            var options = new DbContextOptionsBuilder<VehicleQuotesContext>()
+-                .UseNpgsql(config.GetConnectionString("VehicleQuotesContext"))
+-                .UseSnakeCaseNamingConvention()
+-                .Options;
 
--           var context = new VehicleQuotesContext(options);
+-            var context = new VehicleQuotesContext(options);
 
--           context.Database.EnsureDeleted();
--           context.Database.EnsureCreated();
+-            context.Database.EnsureDeleted();
+-            context.Database.EnsureCreated();
 
--           return context;
--       }
+-            return context;
+-        }
 
-        [Fact]
-        public async void GetAllQuotesReturnsEmptyWhenThereIsNoDataStored()
-        {
-            // Given
--           var dbContext = CreateDbContext();
+         [Fact]
+         public async void GetAllQuotesReturnsEmptyWhenThereIsNoDataStored()
+         {
+             // Given
+-            var dbContext = CreateDbContext();
 
-            // ...
-        }
+             // ...
+         }
 
-        [Fact]
-        public async void GetAllQuotesReturnsTheStoredData()
-        {
-            // Given
--           var dbContext = CreateDbContext();
+         [Fact]
+         public async void GetAllQuotesReturnsTheStoredData()
+         {
+             // Given
+-            var dbContext = CreateDbContext();
 
-            // ...
-        }
-    }
-}
+             // ...
+         }
+     }
+ }
 ```
 
 Here we've updated the `QuoteServiceTests` class definition so that it inherits from [`IClassFixture<DatabaseFixture>`](https://github.com/xunit/xunit/blob/main/src/xunit.v3.core/IClassFixture.cs). This is how we tell xUnit.net that our tests use the new fixture that we created. Next, we define a constructor that receives a `DatabaseFixture` object as a parameter. That's how xUnit.net allows our test class to access the capabilities provided by the fixture. In this case, we take the fixture's `DbContext` instance, and store it for later use in all of the test cases that need database interaction. We also removed the `CreateDbContext` method because now that's defined within the fixture. We also removed a few `using` statements that became unnecessary.
@@ -548,30 +548,30 @@ This means that our test database deletion and recreation step now happens only 
 Here's how we update out test class so that each test case runs within a transaction:
 
 ```diff
-// ...
+ // ...
 
-namespace VehicleQuotes.Tests.Services
-{
--   public class QuoteServiceTests : IClassFixture<DatabaseFixture>
-+   public class QuoteServiceTests : IClassFixture<DatabaseFixture>, IDisposable
-    {
-        private VehicleQuotesContext dbContext;
+ namespace VehicleQuotes.Tests.Services
+ {
+-    public class QuoteServiceTests : IClassFixture<DatabaseFixture>
++    public class QuoteServiceTests : IClassFixture<DatabaseFixture>, IDisposable
+     {
+         private VehicleQuotesContext dbContext;
 
-        public QuoteServiceTests(DatabaseFixture fixture)
-        {
-            dbContext = fixture.DbContext;
+         public QuoteServiceTests(DatabaseFixture fixture)
+         {
+             dbContext = fixture.DbContext;
 
-+           dbContext.Database.BeginTransaction();
-        }
++            dbContext.Database.BeginTransaction();
+         }
 
-+       public void Dispose()
-+       {
-+           dbContext.Database.RollbackTransaction();
-+       }
++        public void Dispose()
++        {
++            dbContext.Database.RollbackTransaction();
++        }
 
-        # ...
-    }
-}
+         # ...
+     }
+ }
 ```
 
 The first thing to note here is that we added a call to `BeginTransaction` in the test class constructor. xUnit.net creates a new instance of the test class for each test case. This means that this constructor is run before each and every test case. We use that opportunity to begin a database transaction.
@@ -581,7 +581,7 @@ The other interesting point is that we've updated the class to implement the [`I
 Put those two together and we've updated our test suite so that every test case runs within the context of its own database transaction. Try it out with `dotnet test` and see what happens.
 
 > To learn more about database transactions with Entity Framework Core, you can look at [the official docs](https://docs.microsoft.com/en-us/ef/core/saving/transactions).
-
+>
 > You can learn more about xUnit.net's test class fixtures in [the samples repository](https://github.com/xunit/samples.xunit/tree/main/ClassFixtureExample).
 
-Alright, that's all for now. It is great to see that implementing automated database integration tests is actually fairly straightforward using .NET, xUnit.net and Entity Framework. Even if it isn't quite as easy as it is in Rails, it is perfectly doable.
+Alright, that's all for now. It is great to see that implementing automated database integration tests is actually fairly straightforward using .NET, xUnit.net, and Entity Framework. Even if it isn't quite as easy as it is in Rails, it is perfectly doable.
