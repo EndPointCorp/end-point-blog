@@ -42,7 +42,7 @@ images.push({
   image: 'img1.jpg',
   title: 'Image 1',
   thumb: 'img1_thumb.jpg',
-  url: 'http://www.endpoint.com'
+  url: 'https://www.endpointdev.com'
 });
 images.push({
   type: 'YOUTUBE',

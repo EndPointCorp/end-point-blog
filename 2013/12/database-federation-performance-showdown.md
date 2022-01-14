@@ -10,7 +10,8 @@ tags:
 date: 2013-12-19
 ---
 
-<div class="separator" style="clear: left; float: left; margin-bottom: 1em; margin-right: 1em;"><a href="https://www.flickr.com/photos/garryknight/" imageanchor="1"><img border="0" src="/blog/2013/12/database-federation-performance-showdown/image-0.jpeg"/></a><p align="center"><small>Flickr user <a href="https://www.flickr.com/photos/garryknight/">garryknight</a></small></p></div>
+<img border="0" src="/blog/2013/12/database-federation-performance-showdown/image-0.jpeg"/><br/>
+<small>Flickr user <a href="https://www.flickr.com/photos/garryknight/">garryknight</a></small>
 
 The [PostgreSQL Foreign Data Wrapper](https://www.postgresql.org/docs/9.3/static/postgres-fdw.html) has gotten a fair bit of attention since its release in PostgreSQL version 9.3. Although it does much the same thing the [dblink](https://www.postgresql.org/docs/9.3/static/dblink.html) contrib module has long done, it is simpler to implement for most tasks and reuses the same foreign data wrapper infrastructure employed by several other contrib modules. It allows users to “federate” distinct PostgreSQL databases; that is, it allows them to work in combination as though they were one database. This topic of database federation has interested me for some time—​I [wrote about it](/blog/2010/07/distributed-transactions-and-two-phase) a couple years ago—​and when postgres_fdw came out I wanted to see how it compared to the solution I used back then.
 
@@ -39,7 +40,7 @@ aramis=# create foreign table pgbench_accounts (aid integer not null, bid intege
 CREATE FOREIGN TABLE
 ```
 
-The [test script](http://josh.endpoint.com/bitronix2.rb) I wrote has two modes: Bitronix mode, and postgres_fdw mode. For each, it repeats the pgbench test queries a fixed number of times, grouping a certain number of these iterations into a single transaction. It then changes the number of iterations per transaction, and repeats the test. In the end, it gave me the following results, which I found very interesting:
+The [test script](https://josh.endpointdev.com/bitronix2.rb) I wrote has two modes: Bitronix mode, and postgres_fdw mode. For each, it repeats the pgbench test queries a fixed number of times, grouping a certain number of these iterations into a single transaction. It then changes the number of iterations per transaction, and repeats the test. In the end, it gave me the following results, which I found very interesting:
 
 <div class="separator" style="clear: both; text-align: center;"><a href="/blog/2013/12/database-federation-performance-showdown/image-1-big.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="/blog/2013/12/database-federation-performance-showdown/image-1.png"/></a></div>
 

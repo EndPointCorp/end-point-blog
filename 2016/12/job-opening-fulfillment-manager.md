@@ -54,6 +54,6 @@ End Point is a 21-year-old Internet consulting company with 50 full-time employe
 
 We are an equal opportunity employer and value diversity at our company. We do not discriminate on the basis of gender, race, religion, color, national origin, sexual orientation, age, marital status, veteran status, or disability status.
 
-~~Please email us an introduction to jobs&#x40;endpoint.com to apply.~~
+~~Please email us an introduction to jobs&#x40;endpointdev.com to apply.~~
 **(This job has been filled.)**
 Include your resume and anything else that would help us get to know you. We look forward to hearing from you! Full-time employment seekers only, please. No agencies or subcontractors.

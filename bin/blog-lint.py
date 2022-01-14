@@ -434,7 +434,7 @@ def check_links(line):
         {
             'regex': r'^https://[^.]*\.endpointdev\.com',
             'ideal': ['https://www.endpointdev.com'],
-            'message': 'No subdomains for endpoint.com should be used',
+            'message': 'No subdomains for endpointdev.com should be used',
         }
     ]
 

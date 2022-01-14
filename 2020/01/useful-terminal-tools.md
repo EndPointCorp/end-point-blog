@@ -23,7 +23,7 @@ Given how commonly-used curl, wget, and GET/POST (lwp-request) are, it is nice t
 Here is a simple example that demonstrates several HTTP redirects with full request and response headers, colorized:
 
 ```bash
-http -v --pretty=all --follow endpoint.com | less -R
+http -v --pretty=all --follow endpointdev.com | less -R
 ```
 
 The color highlighting of the body, not just response headers, is the main difference here from curl, wget, etc.
@@ -34,11 +34,11 @@ Also nice for ad-hoc interactive use is that the verbose header output is sent t
 
 In the above example, the client makes 3 requests, because the first 2 are redirects:
 
-* http://endpoint.com/
-* https://endpoint.com/
-* https://www.endpoint.com/
+* http://endpointdev.com/
+* https://endpointdev.com/
+* https://www.endpointdev.com/
 
-Normally we would want to reduce the number of HTTP redirects, so why not redirect straight from `http://endpoint.com/` to `https://www.endpoint.com/`?
+Normally we would want to reduce the number of HTTP redirects, so why not redirect straight from `http://endpointdev.com/` to `https://www.endpointdev.com/`?
 
 Before the introduction of [HTTP Strict Transport Security](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security) (HSTS) to the web, that is what we did.
 
