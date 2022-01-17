@@ -54,32 +54,36 @@ More generally, our query is returning the Nth matching group instead of returni
 
 ### PLPERL Function
 
-Since the regexp_matches function doesn’t satisfy our requirements, I attempted to use perl regex through the plperl function. The plperl function also created with the perl regex pattern but the plperl regex function resulted in the same behavior.
+Since the regexp_matches function doesn’t satisfy our requirements, I have attempted to use perl regex through the plperl function. The plperl function is created with the perl regex pattern and the plperl regex function produced expected answer.
 
 ```postgres
-=# CREATE OR REPLACE FUNCTION perl_regexp_matches (text) RETURNS text AS $$
+=# CREATE OR REPLACE FUNCTION perl_regexp_matches (IN str text, IN pattern text) RETURNS text AS $$
     # PL/Perl function body
-    $input = $_[0];
-    ($output) = $input =~ m/([A-Za-z0-9 ]+ ){2}/g;
-    print $output;
-    return $output;
+    my ($input, $pattern) = @_;
+    $output = [$input =~ m/($pattern)/];
+    return $output->[0]
 $$ LANGUAGE plperl;
 
-=# SELECT perl_regexp_matches('||121212^^^2^ID 1|676767||SELVA^KUMAR^^^^|19480203|M||B||123456 SAMPLE ROAD^^New York City^NY^12345^USA^H^^New York||123456-7890|||M|NON|4000|');
+=# SELECT perl_regexp_matches('||121212^^^2^ID 1|676767||SELVA^KUMAR^^^^|19480203|M||B||123456 SAMPLE ROAD^^New York City^NY^12345^USA^H^^New York||123456-7890|||M|NON|4000|', '([A-Za-z0-9 ,/-]*\^){8}[A-Za-z0-9 ]*');
+                    perl_regexp_matches
  perl_regexp_matches 
----------------------
- SAMPLE 
+                    perl_regexp_matches
+------------------------------------------------------------
+ 123456 SAMPLE ROAD^^New York City^NY^12345^USA^H^^New York
+(1 row)
 ```
+
+But researched for simple solution to achieve the result without using function and plperl extension.
 
 ### Solution
 
 In regular Postgres expressions, parentheses ( ) create a numbered capture group which leads to returning the quantitative matching results. To get the entire matching data, the regex should have a question mark (?) and a colon (:) added at the beginning of the regex pattern to create a non-capturing group to receive the complete matching group.
 
 ```postgres
-=# SELECT REGEXP_MATCHES('||121212^^^2^ID 1|676767||SELVA^KUMAR^^^^|19480203|M||B||123456 SAMPLE ROAD^^New York City^NY^12345^USA^H^^New York||123456-7890|||M|NON|4000|', E'(?:[A-Za-z0-9 ]*\\^){8}[A-Za-z0-9 ]*', 'g');
-                         regexp_matches                         
-----------------------------------------------------------------
- {"123456 SAMPLE ROAD^^New York City^NY^12345^USA^H^^New York"}
+=# SELECT substring('||121212^^^2^ID 1|676767||SELVA^KUMAR^^^^|19480203|M||B||123456 SAMPLE ROAD^^New York City^NY^12345^USA^H^^New York||123456-7890|||M|NON|4000|' FROM '(?:[A-Za-z0-9 ,/-]*\^){8}[A-Za-z0-9 ]*');
+                         substring
+------------------------------------------------------------
+ 123456 SAMPLE ROAD^^New York City^NY^12345^USA^H^^New York
 (1 row)
 ```
 
