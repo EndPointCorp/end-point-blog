@@ -76,10 +76,10 @@ $$ LANGUAGE plperl;
 In regular Postgres expressions, parentheses ( ) create a numbered capture group which leads to returning the quantitative matching results. To get the entire matching data, the regex should have a question mark (?) and a colon (:) added at the beginning of the regex pattern to create a non-capturing group to receive the complete matching group.
 
 ```postgres
-=# SELECT REGEXP_MATCHES('||121212^^^2^ID 1|676767||SELVA^KUMAR^^^^|19480203|M||B||123456 SAMPLE ROAD^^New York City^NY^12345^USA^H^^New York||123456-7890|||M|NON|4000|', E'(?:[A-Za-z0-9 ]*\\^){8}[A-Za-z0-9 ]*', 'g');
-                         regexp_matches                         
-----------------------------------------------------------------
- {"123456 SAMPLE ROAD^^New York City^NY^12345^USA^H^^New York"}
+=# SELECT substring('||121212^^^2^ID 1|676767||SELVA^KUMAR^^^^|19480203|M||B||123456 SAMPLE ROAD^^New York City^NY^12345^USA^H^^New York||123456-7890|||M|NON|4000|' FROM '(?:[A-Za-z0-9 ]*\^){8}[A-Za-z0-9 ]*');
+                         substring
+------------------------------------------------------------
+ 123456 SAMPLE ROAD^^New York City^NY^12345^USA^H^^New York
 (1 row)
 ```
 
