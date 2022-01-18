@@ -62,7 +62,7 @@ HTTP/1.1 200 OK<br>
 <span style="font-weight:bold;">Content-Type</span>: application/json<br>
 <br>
 {"squadName":"Super hero squad","homeTown":"Metro City","formed":2016,"secretBase":"Super tower","active":true,"members":[{"name":"Molecule Man","age":29,"secretIdentity":"Dan Jukes","powers":["Radiation resistance","Turning tiny","Radiation blast"]},{"name":"Madame Uppercut","age":39,"secretIdentity":"Jane Wilson","powers":["Million tonne punch","Damage resistance","Superhuman reflexes"]},{"name":"Eternal Flame","age":1000000,"secretIdentity":"Unknown","powers":["Immortality","Heat Immunity","Inferno","Teleportation","Interdimensional travel"]}]}
-</code>
+</code><p></p>
 
 to HTTPie’s pretty-printed output:
 
@@ -120,7 +120,7 @@ to HTTPie’s pretty-printed output:
 </span><span style="color: rgb(138,138,138);">&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:white;"></span><span style="color: rgb(0,135,255);">&quot;secretBase&quot;</span><span style="color:white;"></span><span style="color: rgb(138,138,138);">:</span><span style="color:white;"></span><span style="color: rgb(138,138,138);"> </span><span style="color:white;"></span><span style="color: rgb(0,175,175);">&quot;Super tower&quot;</span><span style="color:white;"></span><span style="color: rgb(138,138,138);">,</span><span style="color:white;"><br>
 </span><span style="color: rgb(138,138,138);">&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:white;"></span><span style="color: rgb(0,135,255);">&quot;squadName&quot;</span><span style="color:white;"></span><span style="color: rgb(138,138,138);">:</span><span style="color:white;"></span><span style="color: rgb(138,138,138);"> </span><span style="color:white;"></span><span style="color: rgb(0,175,175);">&quot;Super hero squad&quot;</span><span style="color:white;"><br>
 </span><span style="color: rgb(138,138,138);">}</span>
-</code>
+</code><p></p>
 
 Of course you can use something like the popular `jq` to do your pretty-printing, but getting it in one tool with no options is nice.
 
@@ -319,6 +319,6 @@ It works well for me. Sadly, Google discontinued manufacturing the Chromecast Au
 
 ### Mega-meta list of tools
 
-Finally, if the above has not given you enough new toys to play with, see [The Book of Secret Knowledge](https://github.com/trimstray/the-book-of-secret-knowledge), “A collection of inspiring lists, manuals, cheatsheets, blogs, hacks, one-liners, CLI/web tools, and more”.
+Finally, if the above has not given you enough new toys to play with, see [The Book of Secret Knowledge](https://github.com/trimstray/the-book-of-secret-knowledge), “A collection of inspiring lists, manuals, cheatsheets, blogs, hacks, one-liners, CLI/​web tools, and more”.
 
 Some of its list is links to other lists. I’ll see you in a few years when you get through all that!

@@ -40,12 +40,12 @@ Once suspended and revived, the wireless would simply not work. Everything looke
 
 Once that was commented out, everything worked fine. I tested by doing **sudo pm-suspend** from the command-line, and then bringing the computer back up and watching it automatically reconnect to my local wifi.
 
-### Issue 3: color diffs in git
+### Issue 3: color diffs in Git
 
 I use the command-line a lot, and a day never goes by without heavy use of
-[git](https://en.wikipedia.org/wiki/Git_%28software%29) as well. On running a “git diff” in the new Ubuntu version, I was surprised to see a bunch of escape codes instead of the usual pretty colors I was used to:
+[Git](https://en.wikipedia.org/wiki/Git_%28software%29) as well. On running a `git diff` in the new Ubuntu version, I was surprised to see a bunch of escape codes instead of the usual pretty colors I was used to:
 
-```
+```palin
 ESC[1mdiff --git a/t/03dbmethod.t b/t/03dbmethod.tESC[m
 ESC[1mindex 108e0c5..ffcab48 100644ESC[m
 ESC[1m--- a/t/03dbmethod.tESC[m
@@ -58,22 +58,22 @@ ESC[31m-plan tests => 543;ESC[m
 ESC[32m+ESC[mESC[32mplan tests => 545;ESC[m
 ```
 
-After poking around with terminal settings and the like, a coworker suggested I simply tell git to use an intelligent pager with the command **git config --global core.pager "less -r"**. The output immediately improved:
+After poking around with terminal settings and the like, a coworker suggested I simply tell git to use an intelligent pager with the command `git config --global core.pager "less -r"`. The output immediately improved:
 
-```
-<span style="color:blue">diff --git a/t/03dbmethod.t b/t/03dbmethod.t
+```diff
+diff --git a/t/03dbmethod.t b/t/03dbmethod.t
 index 108e0c5..ffcab48 100644
 --- a/t/03dbmethod.t
-+++ b/t/03dbmethod.t</span>
-<span style="color:cyan">@@ -26,7 +26,7 @@</span> my $dbh = connect_database();
++++ b/t/03dbmethod.t
+@@ -26,7 +26,7 @@ my $dbh = connect_database();
  if (! $dbh) {
     plan skip_all => 'Connection to database failed, cannot continue testing';
  }
-<span style="color:red">-plan tests => 543;</span>
-<span style="color:green">+plan tests => 545;</span>
+-plan tests => 543;
++plan tests => 545;
 ```
 
-Thanks [Josh Williams](/team/josh-williams)! The above fix worked perfectly. I’m a little unsure of this solution as I think the terminal and not git is really to blame, but it works for me and I’ve seen no other terminal issues yet.
+Thanks, [Josh Williams](/team/josh-williams/)! The above fix worked perfectly.
 
 ### Issue 4: cannot select text in emacs
 
