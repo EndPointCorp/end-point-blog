@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Fun with Rational Numbers</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	</head>
+
+	<body>
+		<h1>Fun with Rational Numbers</h1>
+
+		<h2>Colors and Sounds</h2>
+
+		<table>
+			<tr>
+				<td>
+					<strong>A positive integer — generally a nice prime</strong>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<h3>
+						<label>Calculate the Reciprocal: 1.0 /</label>
+						<input type="text" id="rational_in" value="23" size="5" />
+					</h3>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="4">
+					<label>Calculated Digits:</label>
+					<p id="digits"></p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label>How many digits found before repeating:</label>
+					<p id="length"></p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<h3>Show and Play</h3>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<input type="button" name="lines only" onclick="return calculate(0)" value="arcs and lines" />
+					<input type="button" name="colored rectangles" onclick="return calculate(2)" value="colored rectangles" />
+					<input type="button" name="lines and colored rectangles" onclick="return calculate(1)" value="lines and colored rectangles" />
+				</td>
+			</tr>
+		</table>
+
+		<canvas id="myCanvas" width="800" height="400" style="border:1px solid #d3d3d3;">
+			Your browser does not support the HTML5 canvas tag.
+		</canvas>
+		<div id="mask"></div>
+		<div id="repeat_from"></div>
+
+		<script src="demo.js"></script>
+	</body>
+</html>
