@@ -59,7 +59,7 @@ For example, here is a screenshot of what the reciprocal of 7 (1 divided by 7) l
 
 ### A demo
 
-<a href="/blog/2022/02/fun-with-rational-numbers/demo.html" target="_blank">Click here to try it out for yourself!</a>
+<a href="/blog/2022/02/fun-with-rational-numbers/demo/" target="_blank">Click here to try it out for yourself!</a>
 
 And make sure your sound is turned up a bit.
 
