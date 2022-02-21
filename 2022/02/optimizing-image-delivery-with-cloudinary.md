@@ -44,7 +44,7 @@ The project I mentioned above was a [NuxtJS](https://nuxtjs.org/) application wi
 
 The component works great, except for one bug that we found that didn't allow us to fully use their image component with server-side rendering enabled. Between that drawback and some issues trying to use the lazy loading setting, we ended up creating a Vue component ourselves that used a standard image tag instead. But we still used their component to generate most of the API calls and render the results.
 
-![Using the Cloudinary image component for NuxtJS](/2022/02/optimizing-image-delivery-with-cloudinary/cloudinary-nuxtjs-component-example)<br>
+![Using the Cloudinary image component for NuxtJS](/2022/02/optimizing-image-delivery-with-cloudinary/cloudinary-nuxtjs-component-example.jpg)<br>
 Using the Cloudinary image component for NuxtJS
 
 ### Alternatives
