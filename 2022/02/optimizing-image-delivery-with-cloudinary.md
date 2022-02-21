@@ -9,7 +9,7 @@ tags:
 date: 2022-02-21
 ---
 
-![Mountain and clouds](/blog/2022/02/optimizing-image-delivery-with-cloudinary/la-cumbrecita-202201.jpg)
+![Mountain and clouds](/2022/02/optimizing-image-delivery-with-cloudinary/la-cumbrecita-202201.jpg)
 
 <!-- Photo by Juan Pablo Ventoso -->
 
@@ -31,7 +31,7 @@ When we specify a (gravity position)[https://cloudinary.com/documentation/resizi
 
 Another cool feature is the [automatic format](https://cloudinary.com/documentation/transformation_reference#f_auto), which will use your request headers to find the most efficient picture format for your browser type and version. For example, if the browser supports it, Cloudinary will return the image in WEBP format, which is generally more efficient than standard JPG, as End Point CTO Jon Jensen demonstrates on his recent [blog post](https://www.endpointdev.com/blog/2022/02/webp-heif-avif-jpegxl/).
 
-![Automatic format in action: Returning a WEBP image in Chrome](/blog/2022/02/optimizing-image-delivery-with-cloudinary/image-response.jpg)<br>
+![Automatic format in action: Returning a WEBP image in Chrome](/2022/02/optimizing-image-delivery-with-cloudinary/image-response.jpg)<br>
 Automatic format in action: Returning a WEBP image in Chrome
 
 ### Other features
@@ -44,7 +44,7 @@ The project I mentioned above was a [NuxtJS](https://nuxtjs.org/) application wi
 
 The component works great, except for one bug that we found that didn't allow us to fully use their image component with server-side rendering enabled. Between that drawback and some issues trying to use the lazy loading setting, we ended up creating a Vue component ourselves that used a standard image tag instead. But we still used their component to generate most of the API calls and render the results.
 
-![Using the Cloudinary image component for NuxtJS](/blog/2022/02/optimizing-image-delivery-with-cloudinary/cloudinary-nuxtjs-component-example)<br>
+![Using the Cloudinary image component for NuxtJS](/2022/02/optimizing-image-delivery-with-cloudinary/cloudinary-nuxtjs-component-example)<br>
 Using the Cloudinary image component for NuxtJS
 
 ### Alternatives
