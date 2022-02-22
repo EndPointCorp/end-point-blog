@@ -25,7 +25,7 @@ When you make a request for an image, you can instruct the Cloudinary API to [re
 
 ### Gravity position
 
-When we specify a (gravity position)[https://cloudinary.com/documentation/resizing_and_cropping#control_gravity] to crop an image, the service will keep the area of the image we decide to use as the focal point. We can choose a corner (i.e. top left), but also -and this is probably one of the most interesting capabilities on this service- we can specify ["special positions"](https://cloudinary.com/documentation/transformation_reference#g_special_position): By using machine learning, we can instruct Cloudinary to use facial detection, or even focus on other objects, like an animal or a flower on the picture.
+When we specify a [gravity position](https://cloudinary.com/documentation/resizing_and_cropping#control_gravity) to crop an image, the service will keep the area of the image we decide to use as the focal point. We can choose a corner (i.e. top left), but also -and this is probably one of the most interesting capabilities on this service- we can specify ["special positions"](https://cloudinary.com/documentation/transformation_reference#g_special_position): By using machine learning, we can instruct Cloudinary to use facial detection, or even focus on other objects, like an animal or a flower on the picture.
 
 ### Automatic format
 
