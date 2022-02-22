@@ -15,7 +15,7 @@ date: 2022-02-21
 
 I remember how we needed to deal with different image formats and sizes years ago: From using the Wordpress-style approach of automatically saving different resolutions on the server when uploading a picture, to using a PHP script to resize or crop images on the fly and return the result as a response to the frontend. Of course, many of those approaches were expensive, and not fully optimized for different browsers or device sizes.
 
-With those experiences in mind, it was a nice surprise for me to discover [Cloudinary](https://cloudinary.com/) when working on a new project some months ago. It's basically a cloud service that saves and delivers media content with a lot of transformations and management settings for us to use. [There's a free version](https://cloudinary.com/pricing)that has a usage limit: Up to 25K transformations or 25 GB of storage/bandwidth, which should be enough for most non-enterprise websites. The cheapest paid service is $99 per month.
+With those experiences in mind, it was a nice surprise for me to discover [Cloudinary](https://cloudinary.com/) when working on a new project some months ago. It's basically a cloud service that saves and delivers media content with a lot of transformations and management settings for us to use. [There is a free version](https://cloudinary.com/pricing) with a usage limit: Up to 25K transformations or 25 GB of storage/bandwidth, which should be enough for most non-enterprise websites. The cheapest paid service is $99 per month.
 
 Here's a list of the image features we used on that project. I know they offer many other things that can be used as well, but I think this is a good start for anyone who hasn't used this service yet:
 
