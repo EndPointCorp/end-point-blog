@@ -1,5 +1,5 @@
 ---
-title: Data Reporting With Epitrax
+title: Data Reporting with EpiTrax
 author: Shannon Sandall
 date: 2022-02-16
 github_issue_number: 1833
@@ -7,6 +7,10 @@ tags:
 - epitrax
 - clients
 - case-study
+featured:
+  endpoint: true
+  image_url: /blog/2022/02/data-reporting-with-epitrax/20220107_002143-sm.webp
+description: Rapid response to the pandemic by customizing open-source public health software
 ---
 
 ![Sunset view from mountain height overlooking valley with city, lake, mountains with some snow, below yellow horizon and orange clouds under a blue sky](/blog/2022/02/data-reporting-with-epitrax/20220107_002143-sm.webp)
