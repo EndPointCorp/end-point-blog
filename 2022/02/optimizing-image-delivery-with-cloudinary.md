@@ -48,19 +48,19 @@ Below is an example of using the cloudinary image component on a template:
 
 ```html
 <template>
-	<div>
-		<cld-image
-			:public-id="publicId"
-			width="200"
-			height="200"
-			crop="fill"
-			gravity="auto:subject"
-			radius="max"
-			fetchFormat="auto"
-			quality="auto"
-			alt="An image example with Cloudinary"
-		/>
-	</div>
+  <div>
+    <cld-image
+      :public-id="publicId"
+      width="200"
+      height="200"
+      crop="fill"
+      gravity="auto:subject"
+      radius="max"
+      fetchFormat="auto"
+      quality="auto"
+      alt="An image example with Cloudinary"
+    />
+  </div>
 </template>
 ```
 
