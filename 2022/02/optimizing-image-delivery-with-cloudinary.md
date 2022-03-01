@@ -29,10 +29,10 @@ When we specify a [gravity position](https://cloudinary.com/documentation/resizi
 
 ### Automatic format
 
-Another cool feature is the [automatic format](https://cloudinary.com/documentation/transformation_reference#f_auto), which will use your request headers to find the most efficient picture format for your browser type and version. For example, if the browser supports it, Cloudinary will return the image in WEBP format, which is generally more efficient than standard JPG, as End Point CTO Jon Jensen demonstrates on his recent [blog post](https://www.endpointdev.com/blog/2022/02/webp-heif-avif-jpegxl/).
+Another cool feature is the [automatic format](https://cloudinary.com/documentation/transformation_reference#f_auto), which will use your request headers to find the most efficient picture format for your browser type and version. For example, if the browser supports it, Cloudinary will return the image in WebP format, which is generally more efficient than standard JPG, as End Point CTO Jon Jensen demonstrates on his recent [blog post](https://www.endpointdev.com/blog/2022/02/webp-heif-avif-jpegxl/).
 
-![Automatic format in action: Returning a WEBP image in Chrome](/2022/02/optimizing-image-delivery-with-cloudinary/image-response.jpg)<br>
-Automatic format in action: Returning a WEBP image in Chrome
+![Automatic format in action: Returning a WebP image in Chrome](/2022/02/optimizing-image-delivery-with-cloudinary/image-response.jpg)<br>
+Automatic format in action: Returning a WebP image in Chrome
 
 ### Other features
 
@@ -44,11 +44,28 @@ The project I mentioned above was a [NuxtJS](https://nuxtjs.org/) application wi
 
 The component works great, except for one bug that we found that didn't allow us to fully use their image component with server-side rendering enabled. Between that drawback and some issues trying to use the lazy loading setting, we ended up creating a Vue component ourselves that used a standard image tag instead. But we still used their component to generate most of the API calls and render the results.
 
-![Using the Cloudinary image component for NuxtJS](/2022/02/optimizing-image-delivery-with-cloudinary/cloudinary-nuxtjs-component-example.jpg)<br>
-Using the Cloudinary image component for NuxtJS
+Below is an example of using the cloudinary image component on a template:
+
+```html
+<template>
+	<div>
+		<cld-image
+			:public-id="publicId"
+			width="200"
+			height="200"
+			crop="fill"
+			gravity="auto:subject"
+			radius="max"
+			fetchFormat="auto"
+			quality="auto"
+			alt="An image example with Cloudinary"
+		/>
+	</div>
+</template>
+```
 
 ### Alternatives
 
-Of course, Cloudinary is not the only image processing and CDN company out there: There are other companies offering similar services, like [Cloudimage](https://www.cloudimage.io/), or [imagekit.io](https://imagekit.io/).
+Of course, Cloudinary is not the only image processing and CDN company out there: There are other companies offering similar services, like [Cloudflare images](https://www.cloudflare.com/products/cloudflare-images/), [Cloudimage](https://www.cloudimage.io/), or [imagekit.io](https://imagekit.io/).
 
 Do you know any other good alternatives, or have you used any other Cloudinary feature that is not listed here? Feel free to add a comment below!
