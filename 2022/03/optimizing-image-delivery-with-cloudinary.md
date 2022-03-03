@@ -6,32 +6,34 @@ tags:
 - graphics
 - browsers
 - optimization
+- saas
 date: 2022-03-01
+github_issue_number: 1837
 ---
 
-![Mountain and clouds](/2022/02/optimizing-image-delivery-with-cloudinary/la-cumbrecita-202201.jpg)
+![Beautiful cloudy mountain scene with river flowing by lush banks with people swimming, relaxing, and walking towards multistory buildings](/blog/2022/03/optimizing-image-delivery-with-cloudinary/la-cumbrecita-202201.webp)
 
 <!-- Photo by Juan Pablo Ventoso -->
 
-I remember how we needed to deal with different image formats and sizes years ago: From using the Wordpress-style approach of automatically saving different resolutions on the server when uploading a picture, to using a PHP script to resize or crop images on the fly and return the result as a response to the frontend. Of course, many of those approaches were expensive, and not fully optimized for different browsers or device sizes.
+I remember how we needed to deal with different image formats and sizes years ago: From using the WordPress-style approach of automatically saving different resolutions on the server when uploading a picture, to using a PHP script to resize or crop images on the fly and return the result as a response to the frontend. Of course, many of those approaches were expensive, and not fully optimized for different browsers or device sizes.
 
-With those experiences in mind, it was a nice surprise for me to discover [Cloudinary](https://cloudinary.com/) when working on a new project a couple of months ago. It's basically a cloud service that saves and delivers media content with a lot of transformations and management options for us to use. [There is a free version](https://cloudinary.com/pricing) with a usage limit: Up to 25K transformations or 25 GB of storage/bandwidth, which should be enough for most non-enterprise websites. The cheapest paid service is $99 per month.
+With those experiences in mind, it was a nice surprise for me to discover [Cloudinary](https://cloudinary.com/) when working on a new project a couple of months ago. It's basically a cloud service that saves and delivers media content with a lot of transformations and management options for us to use. [There is a free version](https://cloudinary.com/pricing) with a usage limit: Up to 25K transformations or 25 GB of storage/​bandwidth, which should be enough for most non-enterprise websites. The cheapest paid service is $99 per month.
 
 Here's a list of the image features we used on that project. I know they offer many other things that can be used as well, but I think this is a good start for anyone who hasn't used this service yet:
 
 ### Resizing and cropping
 
-When you make a request for an image, you can instruct the Cloudinary API to [retrieve it with a given size](https://cloudinary.com/documentation/resizing_and_cropping), which will trigger a transformation on their end before delivering the content. You can also use a cropping method (fill, fill with padding, scale down, etc.).
+When you make a request for an image, you can instruct the Cloudinary API to [retrieve it with a given size](https://cloudinary.com/documentation/resizing_and_cropping), which will trigger a transformation on their end before delivering the content. You can also use a cropping method: fill, fill with padding, scale down, etc.
 
 ### Gravity position
 
-When we specify a [gravity position](https://cloudinary.com/documentation/resizing_and_cropping#control_gravity) to crop an image, the service will keep the area of the image we decide to use as the focal point. We can choose a corner (i.e. top left), but also -and this is probably one of the most interesting capabilities on this service- we can specify ["special positions"](https://cloudinary.com/documentation/transformation_reference#g_special_position): By using machine learning, we can instruct Cloudinary to use facial detection, or even focus on other objects, like an animal or a flower on the picture.
+When we specify a [gravity position](https://cloudinary.com/documentation/resizing_and_cropping#control_gravity) to crop an image, the service will keep the area of the image we decide to use as the focal point. We can choose a corner (for example, top left), but also—and this is probably one of the most interesting capabilities on this service—we can specify ["special positions"](https://cloudinary.com/documentation/transformation_reference#g_special_position): By using machine learning, we can instruct Cloudinary to use face detection, or even focus on other objects, like an animal or a flower in the picture.
 
 ### Automatic format
 
-Another cool feature is the [automatic format](https://cloudinary.com/documentation/transformation_reference#f_auto), which will use your request headers to find the most efficient picture format for your browser type and version. For example, if the browser supports it, Cloudinary will return the image in WebP format, which is generally more efficient than standard JPG, as End Point CTO Jon Jensen demonstrates on his recent [blog post](https://www.endpointdev.com/blog/2022/02/webp-heif-avif-jpegxl/).
+Another cool feature is the [automatic format](https://cloudinary.com/documentation/transformation_reference#f_auto), which will use your request headers to find the most efficient picture format for your browser type and version. For example, if the browser supports it, Cloudinary will return the image in WebP format, which is generally more efficient than standard JPEG, as End Point CTO Jon Jensen demonstrates on his recent [blog post](https://www.endpointdev.com/blog/2022/02/webp-heif-avif-jpegxl/).
 
-![Automatic format in action: Returning a WebP image in Chrome](/2022/02/optimizing-image-delivery-with-cloudinary/image-response.jpg)<br>
+![Screenshot of Chrome browser dev tools showing network response for a WebP image](/blog/2022/03/optimizing-image-delivery-with-cloudinary/image-response.jpg)<br>
 Automatic format in action: Returning a WebP image in Chrome
 
 ### Other features
