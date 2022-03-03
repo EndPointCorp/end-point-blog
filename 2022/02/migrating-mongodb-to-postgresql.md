@@ -1,6 +1,6 @@
 ---
 title: Migrating a Node.js app database from MongoDB to PostgreSQL
-author: Phin Jensen
+author: Phineas Jensen
 date: 2022-02-25
 github_issue_number: 1835
 tags:

@@ -1,5 +1,5 @@
 ---
-author: Phin Jensen
+author: Phineas Jensen
 title: End Point’s 20th anniversary meeting
 github_issue_number: 1170
 tags:

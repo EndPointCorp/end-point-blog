@@ -1,5 +1,5 @@
 ---
-author: Phin Jensen
+author: Phineas Jensen
 title: Company Update January 2013
 github_issue_number: 746
 tags:

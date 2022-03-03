@@ -1,5 +1,5 @@
 ---
-author: Phin Jensen
+author: Phineas Jensen
 title: Using PostgreSQL cidr and inet types, operators, and functions
 github_issue_number: 1327
 tags:

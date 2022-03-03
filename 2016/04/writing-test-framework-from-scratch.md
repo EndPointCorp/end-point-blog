@@ -1,5 +1,5 @@
 ---
-author: Phin Jensen
+author: Phineas Jensen
 title: Writing a Test Framework from Scratch
 github_issue_number: 1218
 tags:

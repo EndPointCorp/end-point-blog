@@ -1,5 +1,5 @@
 ---
-author: Phin Jensen
+author: Phineas Jensen
 title: Supporting Apple Retina displays on the Web
 github_issue_number: 987
 tags:
