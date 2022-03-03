@@ -122,7 +122,7 @@ So, rather than having comments be a subfield of a blog post, we want them to be
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
-const Comment = mongoos.model(
+const Comment = mongoose.model(
   "Comment",
   new Schema({
     body: String,
