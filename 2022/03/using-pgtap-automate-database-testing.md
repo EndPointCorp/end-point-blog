@@ -11,7 +11,7 @@ tags:
 github_issue_number: 1844
 ---
 
-![Old piano outdoors, focused on keyboard with most keytops missing and some snow on it](/blog/2022/03/using-pgtap/piano.webp)
+![Old piano outdoors, focused on keyboard with most keytops missing and some snow on it](/blog/2022/03/using-pgtap-automate-database-testing/piano.webp)
 Photo from [PxHere](https://pxhere.com/en/photo/1292458)
 
 Recently I started learning to tune pianos. There are many techniques and variations, but the traditional method, and the one apparently most accepted by ardent piano tuning purists, involves tuning one note to a reference, tuning several other notes in relation to the first, and testing the results by listening closely to different combinations of notes.
