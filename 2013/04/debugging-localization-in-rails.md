@@ -12,7 +12,7 @@ Rails offers a very extensive library for handling localization using [the rails
 
 ### Missing Translations
 
-I’ve known for some time that when I was missing a translation for a given text that it would appear in the HTML with a special <span> tag with the class .translation_missing. So in my global CSS I added the following:
+I’ve known for some time that when I was missing a translation for a given text that it would appear in the HTML with a special `<span>` tag with the class `translation_missing`. So in my global CSS I added the following:
 
 ```css
 .translation_missing { background-color: red; color: white !important; }
@@ -46,7 +46,9 @@ end
 
 ### I18n Fallbacks
 
-After using this solution for a while I ran into another issue. When I would change the locale in my app to something like es (Spanish) and look for translation issues, I was noticing some text that wasn’t being translated but it wasn’t being marked as red by my CSS. When I looked at the text further I noticed that it wasn’t even being surrounded by the <span class="translation_missing"> tag. As it turned out, I did have a translation for that text in English, but not in the language that was set to my current locale. The reason for this is what I18n refers to as Fallbacks. Fallbacks tell the I18n what alternate, or default, locale to “fall back" to if a translation isn’t available for the current locale. By default, the fallback locale is en. Since I had a translation for that text in my en.yml there was no indicator that I had “fallen back" even though it was obvious that there was a translation issue.
+After using this solution for a while I ran into another issue. When I would change the locale in my app to something like es (Spanish) and look for translation issues, I was noticing some text that wasn’t being translated but it wasn’t being marked as red by my CSS. When I looked at the text further I noticed that it wasn’t even being surrounded by the `<span class="translation_missing">` tag.
+
+As it turned out, I did have a translation for that text in English, but not in the language that was set to my current locale. The reason for this is what I18n refers to as Fallbacks. Fallbacks tell the I18n what alternate, or default, locale to “fall back" to if a translation isn’t available for the current locale. By default, the fallback locale is en. Since I had a translation for that text in my en.yml there was no indicator that I had “fallen back" even though it was obvious that there was a translation issue.
 
 Coming up with a way to be notified of fallbacks wasn’t nearly as simple as my initial solution. After a lot of googling and reading in StackOverflow, I found that perhaps the best solution was to [override the translate method](https://github.com/svenfuchs/i18n/blob/master/lib/i18n/backend/fallbacks.rb#L37) in the I18n gem. This sounds really scary, but it actually wasn’t too bad. Back in my initializer, I removed the solution that I had originally come up with and added the following:
 
@@ -107,6 +109,6 @@ With this initializer in place, I added the following CSS to my global styleshee
 .translation_fallback { background-color: green; color: white !important; }
 ```
 
-Now all missing translation errors and fallbacks were noticeable while browsing the UI and all translation issues were logged to my development log. Now obviously, I don’t want these things showing up in production so I wrapped the whole thing in a if Rails.env.development? conditional. I could also think of times, like while working on implementing design, that I don’t really care about translation issues as well, so I added a flag for turning it off in development as well.
+Now all missing translation errors and fallbacks were noticeable while browsing the UI and all translation issues were logged to my development log. Now obviously, I don’t want these things showing up in production so I wrapped the whole thing in a `if Rails.env.development?` conditional. I could also think of times, like while working on implementing design, that I don’t really care about translation issues as well, so I added a flag for turning it off in development as well.
 
-You can see my entire solution on [a gist over at github.](https://gist.github.com/mikefarmer/5286140#file-debug_localization-rb) It was suggested by a fellow colleague that I should turn this into a gem, but I didn’t see the need if all you had to do is copy and paste this initializer. If a gem is something you’d like to see this in, please let me know and I’ll consider packaging it up.
+You can see my entire solution on [a gist over at GitHub](https://gist.github.com/mikefarmer/5286140#file-debug_localization-rb). It was suggested by a fellow colleague that I should turn this into a gem, but I didn’t see the need if all you had to do is copy and paste this initializer. If a gem is something you’d like to see this in, please let me know and I’ll consider packaging it up.

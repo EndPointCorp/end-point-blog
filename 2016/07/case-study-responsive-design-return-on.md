@@ -56,19 +56,19 @@ Last, once we had a responsive checkout sequence, we changed the rest of the int
 
 ### Results
 
-The first time we looked at the analytics following the responsive conversion, we were SHOCKED! Using a small sample period, from just a year prior, we saw a **280%** increase in mobile purchases.
+The first time we looked at the analytics following the responsive conversion, we were **shocked**! Using a small sample period, from just a year prior, we saw a **280%** increase in mobile purchases.
 
-<div class="separator" style="clear: both; text-align: center;"><a href="/blog/2016/07/case-study-responsive-design-return-on/image-0-big.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="440" src="/blog/2016/07/case-study-responsive-design-return-on/image-0.png" width="640"/></a></div>
+<div class="separator" style="clear: both; text-align: center;"><img border="0" src="/blog/2016/07/case-study-responsive-design-return-on/image-0.png" /></div>
 
 *The timeframe for these comparison numbers was August 2014 before the responsive transition and August of 2015, after the transition.*
 
 To sanity check those numbers, we just re-ran some of the analytics recently and in May of 2016, revenue from mobile users is still up over 90% and **the clients total revenue year-over-year is up 12%**.
 
-<div class="separator" style="clear: both; text-align: center;"><a href="/blog/2016/07/case-study-responsive-design-return-on/image-1-big.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="478" src="/blog/2016/07/case-study-responsive-design-return-on/image-1.png" width="640"/></a></div>
+<div class="separator" style="clear: both; text-align: center;"><img border="0" src="/blog/2016/07/case-study-responsive-design-return-on/image-1.png" /></div>
 
 We also ran some numbers on the growth of mobile revenue as a percentage of overall revenue through this process. As you can see, two years ago mobile revenue was less than 1% and is now near 12%.
 
-<div class="separator" style="clear: both; text-align: center;"><span id="docs-internal-guid-f57a6475-0a0d-16c8-5d92-cd6e7299326c" style='background-color: transparent; color: black; font-family: "times new roman"; font-size: 16px; font-style: normal; font-variant: normal; font-weight: 400; margin-left: 1em; margin-right: 1em; text-decoration: none; vertical-align: baseline;'><img alt="Untitled drawing.jpg" height="468" src="/blog/2016/07/case-study-responsive-design-return-on/image-2.jpeg" style="border: medium none; transform: rotate(0rad);" width="624"/></span></div>
+<div class="separator" style="clear: both; text-align: center;"><img src="/blog/2016/07/case-study-responsive-design-return-on/image-2.jpeg" /></div>
 
 In this case, I didn’t go into all the ways to slice and dice the numbers in Google Analytics. However I'm happy to speak with you if you want to know more about mobile users, this client’s data, or how responsive design might help grow your e-commerce business.
 

@@ -1,5 +1,5 @@
 ---
-author: Joshua Tolley
+author: Josh Tolley
 title: Demonstrating the HotSwap JVM
 github_issue_number: 1693
 tags:

@@ -42,6 +42,6 @@ Today’s youth is growing up and developing in a digital age surrounded by tech
 
 This exhibit was made possible by the generous donation of [Brian McClendon](https://en.wikipedia.org/wiki/Brian_McClendon) and [Beth Ellyn McClendon](https://bethellyn.com/).
 
-For more information on liquid Galaxy, visit: [liquidgalaxy.endpoint.com](https://www.visionport.com/).
+For more information on Liquid Galaxy, visit: [www.visionport.com](https://www.visionport.com/).
 
 For more information on the Cosmosphere Museum, visit: [cosmo.org](https://cosmo.org/)

@@ -49,6 +49,6 @@ End Point is a technology consulting company founded in 1995 and based in New Yo
 
 ### How to apply
 
-~~Please email us an introduction to jobs&#x40;endpoint.com to apply.~~
+~~Please email us an introduction to jobs&#x40;endpointdev.com to apply.~~
 **(This job has been filled.)**
 Include a resume and your GitHub or other URLs that would help us get to know you. We look forward to hearing from you!

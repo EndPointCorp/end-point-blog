@@ -55,6 +55,6 @@ We are looking for a full-time, salaried engineer to help us further develop our
 
 End Point is a technology consulting company founded in 1995 and based in New York City, with around 50 employees working from our offices in New York City, the tri-cities area in eastern Tennessee, and from home offices around the globe. We serve over 200 clients ranging from small family businesses to large corporations, using a variety of open source technologies. Our team works together using collaboration tools including SSH, tmux, Zulip, Google Hangouts, wiki, Trello, and GitHub.
 
-~~Please contact us at jobs&#x40;endpoint.com to apply.~~
+~~Please contact us at jobs&#x40;endpointdev.com to apply.~~
 **(This job has been filled.)**
 Include a resume, your GitHub and/or LinkedIn URLs, and anything else that would help us get to know you. We’re excited to hear from you!

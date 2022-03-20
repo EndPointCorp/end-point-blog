@@ -8,7 +8,7 @@ tags:
 date: 2020-10-30
 ---
 
-![Sunset](/blog/posts/2020/10/30/electronic-messaging-staging-area/emsa-banner.jpg)
+![Sunset](/blog/2020/10/electronic-messaging-staging-area/emsa-banner.jpg)
 [Photo](https://flic.kr/p/pnRYaf) by [Lee Roberts](https://flic.kr/ps/2bXFPr), [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/)
 
 End Point has been involved with developing disease surveillance software for over a decade. One component of that work is EMSA, short for “Electronic Messaging Staging Area”.

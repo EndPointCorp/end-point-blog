@@ -1,5 +1,5 @@
 ---
-author: Phin Jensen
+author: Phineas Jensen
 title: Regular Expression Inconsistencies With Unicode
 github_issue_number: 1368
 tags:

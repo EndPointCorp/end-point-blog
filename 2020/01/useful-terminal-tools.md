@@ -23,7 +23,7 @@ Given how commonly-used curl, wget, and GET/POST (lwp-request) are, it is nice t
 Here is a simple example that demonstrates several HTTP redirects with full request and response headers, colorized:
 
 ```bash
-http -v --pretty=all --follow endpoint.com | less -R
+http -v --pretty=all --follow endpointdev.com | less -R
 ```
 
 The color highlighting of the body, not just response headers, is the main difference here from curl, wget, etc.
@@ -34,11 +34,11 @@ Also nice for ad-hoc interactive use is that the verbose header output is sent t
 
 In the above example, the client makes 3 requests, because the first 2 are redirects:
 
-* http://endpoint.com/
-* https://endpoint.com/
-* https://www.endpoint.com/
+* http://endpointdev.com/
+* https://endpointdev.com/
+* https://www.endpointdev.com/
 
-Normally we would want to reduce the number of HTTP redirects, so why not redirect straight from `http://endpoint.com/` to `https://www.endpoint.com/`?
+Normally we would want to reduce the number of HTTP redirects, so why not redirect straight from `http://endpointdev.com/` to `https://www.endpointdev.com/`?
 
 Before the introduction of [HTTP Strict Transport Security](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security) (HSTS) to the web, that is what we did.
 
@@ -62,7 +62,7 @@ HTTP/1.1 200 OK<br>
 <span style="font-weight:bold;">Content-Type</span>: application/json<br>
 <br>
 {"squadName":"Super hero squad","homeTown":"Metro City","formed":2016,"secretBase":"Super tower","active":true,"members":[{"name":"Molecule Man","age":29,"secretIdentity":"Dan Jukes","powers":["Radiation resistance","Turning tiny","Radiation blast"]},{"name":"Madame Uppercut","age":39,"secretIdentity":"Jane Wilson","powers":["Million tonne punch","Damage resistance","Superhuman reflexes"]},{"name":"Eternal Flame","age":1000000,"secretIdentity":"Unknown","powers":["Immortality","Heat Immunity","Inferno","Teleportation","Interdimensional travel"]}]}
-</code>
+</code><p></p>
 
 to HTTPie’s pretty-printed output:
 
@@ -120,7 +120,7 @@ to HTTPie’s pretty-printed output:
 </span><span style="color: rgb(138,138,138);">&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:white;"></span><span style="color: rgb(0,135,255);">&quot;secretBase&quot;</span><span style="color:white;"></span><span style="color: rgb(138,138,138);">:</span><span style="color:white;"></span><span style="color: rgb(138,138,138);"> </span><span style="color:white;"></span><span style="color: rgb(0,175,175);">&quot;Super tower&quot;</span><span style="color:white;"></span><span style="color: rgb(138,138,138);">,</span><span style="color:white;"><br>
 </span><span style="color: rgb(138,138,138);">&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:white;"></span><span style="color: rgb(0,135,255);">&quot;squadName&quot;</span><span style="color:white;"></span><span style="color: rgb(138,138,138);">:</span><span style="color:white;"></span><span style="color: rgb(138,138,138);"> </span><span style="color:white;"></span><span style="color: rgb(0,175,175);">&quot;Super hero squad&quot;</span><span style="color:white;"><br>
 </span><span style="color: rgb(138,138,138);">}</span>
-</code>
+</code><p></p>
 
 Of course you can use something like the popular `jq` to do your pretty-printing, but getting it in one tool with no options is nice.
 
@@ -319,6 +319,6 @@ It works well for me. Sadly, Google discontinued manufacturing the Chromecast Au
 
 ### Mega-meta list of tools
 
-Finally, if the above has not given you enough new toys to play with, see [The Book of Secret Knowledge](https://github.com/trimstray/the-book-of-secret-knowledge), “A collection of inspiring lists, manuals, cheatsheets, blogs, hacks, one-liners, CLI/web tools, and more”.
+Finally, if the above has not given you enough new toys to play with, see [The Book of Secret Knowledge](https://github.com/trimstray/the-book-of-secret-knowledge), “A collection of inspiring lists, manuals, cheatsheets, blogs, hacks, one-liners, CLI/​web tools, and more”.
 
 Some of its list is links to other lists. I’ll see you in a few years when you get through all that!

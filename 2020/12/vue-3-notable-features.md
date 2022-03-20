@@ -18,7 +18,7 @@ Vue 3 was officially [released](https://github.com/vuejs/vue-next/releases/tag/v
 
 The [Composition API](https://v3.vuejs.org/api/composition-api.html#setup) is one of the most significant changes. It helps with logically grouping related fragments of components. In Vue 2, we used the Options API to pass various options during component configuration:
 
-```javascript
+```html
 // src/components/ProductList.vue
 <template>
   <div class="child">
@@ -81,7 +81,7 @@ The new Composition API enables us to organize related code. `setup` is a new co
 
 The following code uses the Composition API to recreate the earlier ProductList example component.
 
-```javascript
+```html
 // src/components/ProductList3.vue
 <template>
   <div class="child">
@@ -198,23 +198,23 @@ There are more options, like lifecycle hooks, `watch`, and `toRefs`, which we do
 
 [Teleport](https://v3.vuejs.org/guide/teleport.html) is another interesting feature which helps in making our HTML structure cleaner and more logical. Previously when we wanted to use a global modal or a notification/​alert, it required deeply nested code. With teleport, the placing of components in the required location is easier. Let’s take a look:
 
-- The screenshot below shows the rendered DOM (without teleport code), where the Vue app is inserted into the DOM in `div#app`.
+- The screenshot below shows the rendered DOM (without teleport code), where the Vue app is inserted into the DOM in `div#app`.<br/>
 
    ![](/blog/2020/12/vue-3-notable-features/no-teleport.jpg)
 
-- Now we are going to add `<div id="destination"></div>` just above the Vue application. This `div` is highlighted in the screenshot below. Notice that the `div` we added is outside of the Vue application.
+- Now we are going to add `<div id="destination"></div>` just above the Vue application. This `div` is highlighted in the screenshot below. Notice that the `div` we added is outside of the Vue application.<br/>
 
    ![](/blog/2020/12/vue-3-notable-features/div-outside-app.jpg)
 
-- Now in the Vue component we will add `<teleport to="#destination">Teleported outside Vue App component</teleport>`. This code uses the `to` prop to pass a reference of which element to use as parent instead of the Vue app.
+- Now in the Vue component we will add `<teleport to="#destination">Teleported outside Vue App component</teleport>`. This code uses the `to` prop to pass a reference of which element to use as parent instead of the Vue app.<br/>
 
    ![](/blog/2020/12/vue-3-notable-features/added-teleport-after-parent-div.jpg)
 
-- After adding the teleport code, we can see that its contents, “Teleported outside Vue App component”, are rendered in HTML outside the Vue app. Normally, it would be rendered in its place in the app (the red region) but due to teleport it’s rendered in the teleport destination (the green region).
+- After adding the teleport code, we can see that its contents, “Teleported outside Vue App component”, are rendered in HTML outside the Vue app. Normally, it would be rendered in its place in the app (the red region) but due to teleport it’s rendered in the teleport destination (the green region).<br/>
 
    ![](/blog/2020/12/vue-3-notable-features/teleport-rendered-placeholder.jpg)
 
-- We can see in the browser that the teleported code is at the top of the page rather than within the Vue app.
+- We can see in the browser that the teleported code is at the top of the page rather than within the Vue app.<br/>
 
    ![](/blog/2020/12/vue-3-notable-features/browser-teleport-rendered-placeholder.jpg)
 
@@ -254,7 +254,7 @@ In Vue 2, props for a component are declared in `props` option, making it easy t
 
 Below you can see that we are passing custom events from the parent component to the child component and using the `emits` option to declare the custom event in the child component.
 
-```javascript
+```html
 // src/App.vue
 <template>
   <div class="parent">
@@ -300,7 +300,7 @@ export default {
 </script>
 ```
 
-```javascript
+```html
 // src/components/ProductList3.vue
 <template>
   . . .

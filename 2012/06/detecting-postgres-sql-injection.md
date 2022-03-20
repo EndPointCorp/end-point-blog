@@ -10,9 +10,7 @@ tags:
 date: 2012-06-10
 ---
 
-
-
-<a href="/blog/2012/06/detecting-postgres-sql-injection/image-0-big.png" imageanchor="1" style="clear:right; float:right; margin-left:1em; margin-bottom:1em"><img border="0" height="206" src="/blog/2012/06/detecting-postgres-sql-injection/image-0.png" width="200"/></a>
+<a href="/blog/2012/06/detecting-postgres-sql-injection/image-0-big.png" style="clear:right; float:right; margin-left:1em; margin-bottom:1em"><img border="0" height="206" src="/blog/2012/06/detecting-postgres-sql-injection/image-0.png" width="200"/></a>
 
 SQL injection attacks are often treated with scorn among seasoned 
 DBAs and developers—​“oh it could never happen to **us**!”. Until it does, 
@@ -32,7 +30,7 @@ For example, you have a page in which the a logged-in customer can look up
 their orders by an order_number, a text field on a web form. The query thus 
 looks like this in your code:
 
-```
+```perl
 $order_id = cgi_param('order_number');
 
 $sql = "SELECT * FROM order WHERE order_id = $order_id AND order_owner = '$username'";
@@ -44,27 +42,26 @@ Because there is nothing to limit what the user enters in the order_number
 field, they can inject their own SQL into to the middle of your SQL query 
 by creating a non-standard order_number such as:
 
-```
+```plain
 12345 --
 ```
 
 This would return information on anyone’s order, without checking the order_owner 
 column, as the SQL sent to the database would become:
 
-```
-
-SELECT * FROM order WHERE order_id = <span class="i">12345 -- </span>AND order_owner = 'alice'
+```sql
+SELECT * FROM order WHERE order_id = 12345 -- AND order_owner = 'alice'
 ```
 
 Much more creative (and destructive) choices are available to the attacker as well, 
 such as:
 
-```
-SELECT * FROM order WHERE order_id = <span class="i">12345; UPDATE user 
-  SET admin=TRUE WHERE username = 'alice'; --</span>AND order_owner = 'alice';
+```sql
+SELECT * FROM order WHERE order_id = 12345; UPDATE user 
+  SET admin=TRUE WHERE username = 'alice'; --AND order_owner = 'alice';
 
-SELECT * FROM order WHERE order_id = <span class="i">12345; TRUNCATE TABLE invoices; 
-  SELECT * FROM order WHERE order_id = 12345</span> AND order_owner = 'alice';
+SELECT * FROM order WHERE order_id = 12345; TRUNCATE TABLE invoices; 
+  SELECT * FROM order WHERE order_id = 12345 AND order_owner = 'alice';
 ```
 
 The above is a very simplistic generic-language example, but there are many ways for 
@@ -75,7 +72,7 @@ languages).
 
 The correct approach to the above would be to use placeholders:
 
-```
+```perl
 $order_id = cgi_param('order_number');
 
 $sql = 'SELECT * FROM order WHERE order_id = ? AND order_owner = ?';
@@ -140,17 +137,17 @@ be accessing those items.
 Another thing to watch out for strange offsets. Because the information an attacker 
 can get back is often limited to a row at a time due to the limitations of 
 the original query, SQL injections often pull back the same information from, 
-say, information_schema.tables, with a “LIMIT 1 OFFSET 1” tacked on, Then 
+say, information_schema.tables, with a `LIMIT 1 OFFSET 1` tacked on, Then 
 they call the page again and inject their SQL, but with an offset of 2, then an 
 offset of 3, etc. Nothing says SQL injection like seeing an OFFSET 871 in your logs.
 
 Speaking of logs, you may have noticed that the above checks will only work 
-if you are logging all statements, by adjusting **log_statement** in 
-your postgresql.conf file. Setting this parameter to **'all'** is *highly* 
+if you are logging all statements, by adjusting `log_statement` in 
+your postgresql.conf file. Setting this parameter to `'all'` is *highly* 
 recommended, and SQL injection detection (and forensics!) are merely two of the 
 many reasons for doing so.
 
-If you don’t have log_statement set to ‘all’, your only hope of direct detection is 
+If you don’t have log_statement set to `'all'`, your only hope of direct detection is 
 if one of the queries happens to get logged for some other reason, such 
 as going over your log_min_duration_statement setting. Good luck with that. 
 /sarcasm.
@@ -172,21 +169,19 @@ guidelines:
 #### Use version control
 
 More specifically, use 
-[git](https://git-scm.com/). For everything related to your site. Application code, 
-HTML pages, system configurations. There are many advantages to git, but it is particularly 
+[Git](https://git-scm.com/). For everything related to your site. Application code, 
+HTML pages, system configurations. There are many advantages to Git, but it is particularly 
 useful when you are (quickly!) trying to figure out how some bad code (e.g. with SQL injection 
 holes) got into your app, and what safe version you can replace it with. The powers of 
-git log -p, git bisect, git blame, and git checkout will make you wonder how you ever 
+`git log -p`, `git bisect`, `git blame`, and `git checkout` will make you wonder how you ever 
 lived without them.
 
 #### More than one set of eyes
 
- 
-
 Never commit code that hasn’t been looked at by at least one other person not involved 
 in its writing. This can be as informal as leaning over and asking someone else to look 
 at the patch, to setting up a complex enforcement system via something like 
-[gerrit](https://www.gerritcodereview.com/). The most important thing is to 
+[Gerrit](https://www.gerritcodereview.com/). The most important thing is to 
 have it reviewed by someone qualified, and to note the review in your commit message.
 
 Email is a great way to do this, especially if you have a list of people qualified to 
@@ -214,7 +209,7 @@ tweak that regex someday.
 
 #### Be proactive in looking for problems
 
-See the section about about using tail_n_mail. There are also companies / tools 
+See the section about about using tail_n_mail. There are also companies/​tools 
 that will attempt to find SQL injection problems in your application. While not 
 foolproof, these can be useful, particularly if you have a very large website 
 with a very large codebase.
@@ -242,12 +237,12 @@ run some reports from home against the production database.
 Make sure you are taking full advantage of roles and users in your database. 
 This means an application should have the bare minimum rights it needs to 
 do its job. No creating of functions, no creating tables, and explicit 
-GRANTs to the tables/views/functions it truly needs. Limit severely what 
+GRANTs to the tables/​views/​functions it truly needs. Limit severely what 
 runs as a superuser. If something really needs to run as a superuser, 
-consider wrapping the data/logic in a SECURITY DEFINER function. Having 
+consider wrapping the data/​logic in a SECURITY DEFINER function. Having 
 separate “readonly” and “readwrite” versions of each application’s user is 
 a great idea as well, and may even help you to scale by being able to send 
-your readonly user to a different database (via hot standby or a Bucardo/Slony slave), 
+your readonly user to a different database (via hot standby or a Bucardo/​Slony slave), 
 or even send them to different pg_bouncer ports with different pooling methods.
 
 Access can be further limited by the use of views, which can limit which 
@@ -275,7 +270,7 @@ run something like
 [same_schema in historical mode](/blog/2011/10/viewing-schema-changes-over-time-with) to find out the answer to that last question.
 
 Now comes the hard part: seeing what was changed. If you do not have 
-**log_statment='all'** set in your postgresql.conf (as I will once again 
+`log_statement='all'` set in your postgresql.conf (as I will once again 
 highly recommend you should have) finding what has changed becomes a 
 very, very difficult task. Your best bet at this point is to go to your backups and 
 start comparing things, and perhaps running some sanity checks on your data 
@@ -287,7 +282,7 @@ the attacker captured all the possible data the database user was allowed
 to see.
 
 Enough about the worst case scenario above—​what about those of us 
-with **log_statment='all'**? Well, now we go through the logs to see 
+with `log_statement='all'`? Well, now we go through the logs to see 
 what exact SQL was injected, and what commands have been succesfully run. At this point, 
 you should know what the SQL involved in the attack looks like, and more to the point, 
 where in your code it came from. Now its a matter of filtering out the good stuff 
@@ -301,12 +296,12 @@ Most SQL injection results in a string of additional SQL in place of where
 a single value should be, with an adding of quotes. So, for example, if someone 
 forgot to escape an OFFSET at the end of the query, your program could simply 
 look for any variations of the query that ended in something other than 
-OFFSET \d$. If the unescaped value was in the middle of the query, I find that 
-a simple but reliable test is to look for whitespace or a ‘*’ character. This assumes 
-that whitespace or ‘*’ would not normally appear for that value, but as long as it’s 
-not common, it should still work. (The ‘*’ is needed because one can use SQL comments 
-as a means of whitespace, for example **SELECT/**/*/*foo*/FROM/**/pg_tables**). 
-Your script should ignore any queries in which the value has no whitespace or ‘*’ character, 
+`OFFSET \d+$`. If the unescaped value was in the middle of the query, I find that 
+a simple but reliable test is to look for whitespace or a `*` character. This assumes 
+that whitespace or `*` would not normally appear for that value, but as long as it’s 
+not common, it should still work. (The `*` is needed because one can use SQL comments 
+as a means of whitespace, for example `SELECT/**/*/*foo*/FROM/**/pg_tables`). 
+Your script should ignore any queries in which the value has no whitespace or `*` character, 
 and focus on the ones that do. Then normalize the queries (for example collapse ones that 
 differ only by the OFFSET value), and generate a report. Of course, the exact method to 
 differentiate between “good” and “bad” queries will vary. Find your best Perl hacker and 
@@ -314,7 +309,7 @@ set them on it.
 
 I should point out that a script is almost always necessary, for three reasons. 
 First, manually reading logs is a time-wasting and error-prone bore. Second, 
-log_statment='all' leads to some really, really big logs. Third, SQL injection 
+`log_statement='all'` leads to some really, really big logs. Third, SQL injection 
 attacks usually involve some sort of scripted attack, which can mean a **lot** 
 of entries. For example, a client recently had over 8000 lines from a SQL injection 
 attack spread out over 20 GB of log files. (This one had a happy ending: the 
@@ -323,5 +318,3 @@ so no damage was done.)
 
 So remember: SQL injection can happen to you. Make sure you are able to detect it, 
 recognize it, fix it, and inspect the damage!
-
-

@@ -34,6 +34,6 @@ I gave a talk on GNU Screen vs. tmux, which was fun (and ends with a live demo t
 
 <iframe allowfullscreen="" frameborder="0" height="315" src="https://www.youtube.com/embed/QxTse5Elq8s" width="560"></iframe>
 
-Follow this [Direct YouTube link](https://www.youtube.com/watch?v=QxTse5Elq8s) in case the embedded version doesn’t work for you. And here are the [presentation slides](https://jon.endpoint.com/utosc-2012/screen-vs-tmux-faceoff.html).
+Follow this [Direct YouTube link](https://www.youtube.com/watch?v=QxTse5Elq8s) in case the embedded version doesn’t work for you. And here are the [presentation slides](https://jon.endpointdev.com/utosc-2012/screen-vs-tmux-faceoff.html).
 
 I have a bit more to cover from the conference later!
