@@ -15,8 +15,7 @@ I thought it'd be useful to capture that discussion in written form. Let's start
 
 # What is a code review?
 
-[Wikipedia's article on code reviews](https://en.wikipedia.org/wiki/code_review
-) says that a code review is...
+[Wikipedia's article on code reviews](https://en.wikipedia.org/wiki/code_review) says that a code review is...
 
 > A **software quality assurance** activity in which **one or several people** check a program mainly by viewing and **reading parts of its source code**, and they do so **after implementation** or as an interruption of implementation.
 
