@@ -8,7 +8,7 @@ tags:
 github_issue_number: 1846
 ---
 
-![Winter scene with pine trees behind snow on tall grasses around a winding stream crossed by a primited bridge of 8 logs, below blue sky with white clouds](/blog/2022/03/code-reviews/20220219-194926-sm.webp)
+![Winter scene with pine trees behind snow on tall grasses around a winding stream crossed by a primitive bridge of 8 logs, below blue sky with white clouds](/blog/2022/03/code-reviews/20220219-194926-sm.webp)
 
 <!-- Photo by Jon Jensen -->
 
