@@ -3,7 +3,7 @@ author: "Kevin Campusano"
 title: "Code Reviews"
 date: 2022-03-21
 tags:
-- software
+- development
 - culture
 github_issue_number: 1846
 ---
