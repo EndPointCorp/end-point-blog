@@ -1,65 +1,72 @@
 ---
-author: "Kursat Aydemir"
+author: "Kürşat Kutlu Aydemir"
 title: "Extending Your Jetty Distribution's Capabilities"
-tags: java, jetty, web-server
+date: "2022-03-31"
+tags:
+- java
+- jetty
+- development
+github_issue_number: 1849
 ---
 
-![Jetty Logo](/blog/2022/04/01/jetty-logo.svg)
+![Jetty Logo](/blog/2022/03/extending-jetty-distribution-capabilities/jetty-logo.svg)
 
-## What is Jetty?
+### What is Jetty?
 
-"Jetty is a lightweight highly scalable java based web server and servlet engine." ([GitHub Jetty Project](https://github.com/eclipse/jetty.project)) Jetty can run standalone or embedded in a Java application and the details about running a Jetty webserver can be found in the Jetty Project GitHub repository and [documentation](https://www.eclipse.org/jetty/documentation) as well. Jetty project has been hosted by Eclipse Foundation since 2009 ([Jetty, Eclipse](https://www.eclipse.org/jetty/)).
+"Jetty is a lightweight highly scalable Java-based web server and servlet engine." ([Jetty Project](https://github.com/eclipse/jetty.project))
 
+Jetty can run standalone or embedded in a Java application and the details about running a Jetty webserver can be found in the Jetty Project Git repository and [documentation](https://www.eclipse.org/jetty/documentation) as well. The Jetty project has been hosted at the Eclipse Foundation since 2009 ([Jetty, Eclipse](https://www.eclipse.org/jetty/)).
 
+### Know Your Jetty
 
-## Know  Your Jetty
-
-In many legacy environments using Jetty web-server there possibly be found an older version of Jetty. If you know the version of the Jetty distribution in your environment then you can find its source code backwards in the Jetty project GitHub repo. Some of the distributions are in project releases but most of the distributions can be found in the tags as well.
+In many legacy environments using the Jetty web server there may be an older version of Jetty. If you know the version of the Jetty distribution in your environment then you can find its source code in the Jetty project GitHub repo. Some of the distributions are in project releases but most of the distributions can be found in the tags as well.
 
 For instance `jetty-9.4.15.v20190215` distribution can be found in the Jetty project tags at this URL: `https://github.com/eclipse/jetty.project/releases/tag/jetty-9.4.15.v20190215` 
 
-When you clone jetty.project github repo, you can then easily switch to any specific release tag and build or add your custom code in that version of yours like the following example.
+When you clone the `jetty.project` Git repo, you can then easily switch to any specific release tag:
 
-```shell
+```sh
 $ git clone git@github.com:eclipse/jetty.project.git
 $ git checkout jetty-9.4.15.v20190215
 ```
 
-The reason you might want to switch to a specific tag is probably you have a specific Jetty version in your environment and want to add some custom handlers or wrappers so that you can add additional capabilities in your environment.
+Then you can build or add your custom code in that version.
 
+### Extending Your Jetty Capabilities
 
+The reason you might want to build Jetty yourself is that you have a specific Jetty version in your environment and want to add some custom handlers or wrappers so that you can add additional capabilities in your environment.
 
-## Extending   Your  Jetty  Capabilities
+Jetty is written in Java and you can add new features or patch your own fork like other open-source Java projects. 
 
-It might be questionable what you may need from a light-weight web-server like Jetty to provide you more than it already has. Jetty is written in Java and you can somehow add new features or patch your own fork like other open-source Java projects. 
+### Build
 
-### Find Your Version
+Once you have your target version code base you can just work on that individually. This is one way to add new features to your Jetty distribution.
 
-The first tricky part here is finding the right version matching your Jetty distribution. Above I explained how to find a specific version from Jetty's GitHub repository. 
+After you add your custom code you'll need to build. You can find the building instructions on Jetty Project GitHub home, which is simply:
 
-#### Build
-
-Once you have your target version code base you can just work on that individually. This is one way to add new features to your Jetty distribution. After you finish working on your custom code you'll need to build. You can find the building instructions on Jetty Project GitHub home as below:
-
-```shell
+```sh
 $ mvn clean install
 ```
 
 If you want to skip the tests the option below is your friend:
 
-```shell
+```sh
 $ mvn clean install -DskipTests
 ```
 
-#### Compile Classes Individually
+### Compile Classes Individually
 
 This is a tricky way to inject your newly created custom classes into your Jetty distribution. In this way, instead of building the whole Jetty project, you can just create individual custom Java classes consuming Jetty libraries and compile them manually. You don't need the whole project this way.
 
-If we come back to the question: what new features would I want to add to my new or ancient local Jetty distribution? Well, that really depends on the issues you face or improvements you need to add etc. For one of our customers, once we needed to log request and response headers in Jetty. However we couldn't find a configuration to log Request and Response headers of Jetty. Since there is a `RequestLog` configuration can be enabled in the `jetty.xml` configuration the custom RequestLog features like the one I mentioned above are lacking. So I decided to create a custom RequestLog handler class and inject this into the Jetty deployment we already have rather than building the whole project.
+If we come back to the question: what new features would I want to add to my new or ancient local Jetty distribution? Well, that really depends on the issues you face or improvements you need to add.
 
-Even if you don't build the whole project it is still useful and handy to get the whole project code to refer the existing code and prepare your code by getting the advantage of the existing manner in the project.
+For one of our customers, once we needed to log request and response headers in Jetty. We couldn't find an existing way to do that. So I decided to create a custom RequestLog handler class and inject this into the Jetty deployment we already have rather than building the whole project.
 
-I found `RequestLog` interface in `jetty-server` sub-project and it is created under `org.eclipse.jetty.server` package. There is also a class `RequestLogCollection` in the same level implementing `RequestLog` which may give you some idea about the implementations. So I followed the structure and created my custom RequestLog handler in the same level and implemented `RequestLog`. Below is a part of my `CustomRequestLog` class:
+Even if you don't build the whole project it is still useful and handy to get the whole project code to refer the existing code and prepare your code by learning the existing way things are done in the project.
+
+I found `RequestLog` interface in `jetty-server` sub-project and it is created under `org.eclipse.jetty.server` package. There is also a class `RequestLogCollection` in the same level implementing `RequestLog` which may give you some idea about the implementations.
+
+So I followed the structure and created my custom handler in the same level and implemented `RequestLog`. Below is a part of my `CustomRequestLog` class:
 
 ```java
 package org.eclipse.jetty.server;
@@ -75,7 +82,6 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
-
 
 public class CustomRequestLog extends ContainerLifeCycle implements RequestLog
 {
@@ -198,30 +204,35 @@ public class CustomRequestLog extends ContainerLifeCycle implements RequestLog
 
 In this custom RequestLog class the most interesting part is `public void log(Request request, Response response)` method where the logging operation is actually done. You can simply override the existing logging behaviour and put anything you want. Here I added the raw request and response headers coming and going through Jetty server.
 
-Now it is time to compile this class. You can find many tutorials about compiling a single Java class using classpath. Here I'm telling shortly by giving how I compiled this code:
+Now it is time to compile this class. You can find many tutorials about compiling a single Java class using classpath. Here's how I did it:
 
-```bash
-$ javac -cp ".:JETTY_HOME/lib/jetty-server-9.4.15.v20190215.jar:JETTY_HOME/lib/jetty-http-9.4.15.v20190215.jar:JETTY_HOME/lib/jetty-util-9.4.15.v20190215.jar:JETTY_HOME/lib/servlet-api-3.1.jar:JETTY_HOME/lib/gson-2.8.2.jar" CustomRequestLog.java
+```sh
+$ javac -cp ".:$JETTY_HOME/lib/jetty-server-9.4.15.v20190215.jar:$JETTY_HOME/lib/jetty-http-9.4.15.v20190215.jar:$JETTY_HOME/lib/jetty-util-9.4.15.v20190215.jar:$JETTY_HOME/lib/servlet-api-3.1.jar:$JETTY_HOME/lib/gson-2.8.2.jar" CustomRequestLog.java
 ```
 
-If you look at my classpath I even added a third party library `gson-2.8.2.jar` since I also used this in my custom code. Remember to put this in JETTY_HOME lib directory as well.
+If you look at my classpath I even added a third party library `gson-2.8.2.jar` since I also used this in my custom code. Remember to put this in your `$JETTY_HOME` directory as well.
 
-The command above generates CustomRequestLog.class file which is now available to be injected. So where do you need to inject this? Since I followed where the RequestLog interface is located and packaged we better inject this into the same project jar file, which is jetty-server.jar. In my environment it is `jetty-server-9.4.15.v20190215.jar`. I also added other required dependencies in the classpath to compile this code. 
+The command above generates the `CustomRequestLog.class` file which is now available to be injected. So where do you need to inject this?
 
-Now, I want to inject `CustomRequestLog.class` into `jetty-server-9.4.15.v20190215.jar`. I copied this jar into a temp directory and I extracted the content of `jetty-server-9.4.15.v20190215.jar`into the temp directory using this command:
+Since I followed where the `RequestLog` interface is located and packaged we better inject this into the same project JAR file, which is `jetty-server.jar`. In my environment it is `jetty-server-9.4.15.v20190215.jar`. I also added other required dependencies in the classpath to compile this code. 
 
-```bash
+Now, I want to inject `CustomRequestLog.class` into `jetty-server-9.4.15.v20190215.jar`. I copied this jar into a temporary directory and I extracted the content of `jetty-server-9.4.15.v20190215.jar` into the temp directory using this command:
+
+```sh
 $ jar xf jetty-server-9.4.15.v20190215.jar
 ```
-This command extracts all the content of the jar file including resource files and the classes in their corresponding directory structure `org/eclipse/jetty/server`. You would see `RequestLog.class` also extracted in this directory. So what we need to do is now just simply copying our CustomRequestLog.class into this extracted `org/eclipse/jetty/server` directory and packing up the jar file again by running this command:
 
-```bash
+This command extracts all the content of the jar file including resource files and the classes in their corresponding directory structure `org/eclipse/jetty/server`. You would see `RequestLog.class` also extracted in this directory.
+
+So what we need to do is now simply copy our `CustomRequestLog.class` into this extracted `org/eclipse/jetty/server` directory and pack up the JAR file again by running this command:
+
+```sh
 $ jar cvf jetty-server-9.4.15.v20190215.jar org/ META-INF/
 ```
 
-This command re-bundles compiled code along with the other extracted resources (in this case META-INF/ directory only) and creates our injected jar file. You better create this injected Jetty jar file in the temp directory so that you can control the backup of existing original jar files.
+This command re-bundles compiled code along with the other extracted resources (in this case the `META-INF/` directory only) and creates our injected JAR file. You'd better create this injected Jetty JAR file in the temp directory so that you can control the backup of existing original JAR files.
 
-For this specific case I added this custom RequestLog handler in my Jetty config file `jetty.xml`. It may not be the case for all the custom changes or extensions you'd add to your Jetty instance.
+For this specific case I added this custom `RequestLog` handler in my Jetty config file `jetty.xml`. It may not be the case for all the custom changes or extensions you'd add to your Jetty instance.
 
 Here is an example `RequestLog` config entry for this custom handler:
 
@@ -258,4 +269,5 @@ Here is an example `RequestLog` config entry for this custom handler:
   </New>
 </Set>
 ```
+
 That's all.
