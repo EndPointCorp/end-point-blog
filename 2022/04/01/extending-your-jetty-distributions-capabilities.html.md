@@ -55,9 +55,9 @@ $ mvn clean install -DskipTests
 
 This is a tricky way to inject your newly created custom classes into your Jetty distribution. In this way, instead of building the whole Jetty project, you can just create individual custom Java classes consuming Jetty libraries and compile them manually. You don't need the whole project this way.
 
-If we come back to the question: what new features would I want to add to my new or ancient local Jetty distribution? Well, that really depends on the issues you face or improvements you need to add etc. For one of our customers, once we needed to log request and response headers in Jetty. However we couldn't find a configuration to log Request and Response headers of Jetty. Since there is a `RequestLog` configuration can be enabled in the `jetty.xml` configuration the custom RequestLog features like the one I mentioned above are lacking. So I decided to create a custom RequestLog handler class and injet this into the Jetty deployment we already have rather than building the whole project.
+If we come back to the question: what new features would I want to add to my new or ancient local Jetty distribution? Well, that really depends on the issues you face or improvements you need to add etc. For one of our customers, once we needed to log request and response headers in Jetty. However we couldn't find a configuration to log Request and Response headers of Jetty. Since there is a `RequestLog` configuration can be enabled in the `jetty.xml` configuration the custom RequestLog features like the one I mentioned above are lacking. So I decided to create a custom RequestLog handler class and inject this into the Jetty deployment we already have rather than building the whole project.
 
-Event if you don't build the whole project it is still useful and handy to get the whole project code to refer the existing code and prepare your code by getting the advantage of the existing manner in the project.
+Even if you don't build the whole project it is still useful and handy to get the whole project code to refer the existing code and prepare your code by getting the advantage of the existing manner in the project.
 
 I found `RequestLog` interface in `jetty-server` sub-project and it is created under `org.eclipse.jetty.server` package. There is also a class `RequestLogCollection` in the same level implementing `RequestLog` which may give you some idea about the implementations. So I followed the structure and created my custom RequestLog handler in the same level and implemented `RequestLog`. Below is a part of my `CustomRequestLog` class:
 
@@ -201,19 +201,19 @@ In this custom RequestLog class the most interesting part is `public void log(Re
 Now it is time to compile this class. You can find many tutorials about compiling a single Java class using classpath. Here I'm telling shortly by giving how I compiled this code:
 
 ```bash
-$ javac -cp ".:JETTY_HOME/lib/jetty-server-9.4.15.v20190215.jar:JETTY_HOME/lib/jetty-http-9.4.15.v20190215.jar:JETTY_HOME/lib/jetty-util-9.4.15.v20190215.jar:JETTY_HOME/lib/servlet-api-3.1.jar:JETTY_HOME/lib/gson-2.8.2.jar" CustomHeaderLog.java
+$ javac -cp ".:JETTY_HOME/lib/jetty-server-9.4.15.v20190215.jar:JETTY_HOME/lib/jetty-http-9.4.15.v20190215.jar:JETTY_HOME/lib/jetty-util-9.4.15.v20190215.jar:JETTY_HOME/lib/servlet-api-3.1.jar:JETTY_HOME/lib/gson-2.8.2.jar" CustomRequestLog.java
 ```
 
-If you look at my classpath I even added a third party library `gson-2.8.2.jar` since I also used this in my custom code. Remember to put this in in JETTY_HOME lib directory as well.
+If you look at my classpath I even added a third party library `gson-2.8.2.jar` since I also used this in my custom code. Remember to put this in JETTY_HOME lib directory as well.
 
-The command above generates CustomHeaderLog.class file which is now available to injected. So where do you need to inject this? Since I followed the where the RequestLog interface is located and packaged we better inject this into the same project jar file, which is jetty-server.jar. In my environment it is `jetty-server-9.4.15.v20190215.jar`. I also added other required dependencies in the classpath to compile this code. 
+The command above generates CustomRequestLog.class file which is now available to be injected. So where do you need to inject this? Since I followed where the RequestLog interface is located and packaged we better inject this into the same project jar file, which is jetty-server.jar. In my environment it is `jetty-server-9.4.15.v20190215.jar`. I also added other required dependencies in the classpath to compile this code. 
 
-Now, I want to inject `CustomHeaderLog.class` into `jetty-server-9.4.15.v20190215.jar`. I copied this jar into a temp directory and I extracted the content of `jetty-server-9.4.15.v20190215.jar`into the temp directory using this command:
+Now, I want to inject `CustomRequestLog.class` into `jetty-server-9.4.15.v20190215.jar`. I copied this jar into a temp directory and I extracted the content of `jetty-server-9.4.15.v20190215.jar`into the temp directory using this command:
 
 ```bash
 $ jar xf jetty-server-9.4.15.v20190215.jar
 ```
-This command extracts all the content of the jar file including resource files and the classes in their corresponding directory structure `org/eclipse/jetty/server`. You would see `RequestLog.class` also extracted in this directory. So what we need to do is now just simply copying our CustomHeaderLog.class into this extracted `org/eclipse/jetty/server` directory and packing up the jar file again by running this command:
+This command extracts all the content of the jar file including resource files and the classes in their corresponding directory structure `org/eclipse/jetty/server`. You would see `RequestLog.class` also extracted in this directory. So what we need to do is now just simply copying our CustomRequestLog.class into this extracted `org/eclipse/jetty/server` directory and packing up the jar file again by running this command:
 
 ```bash
 $ jar cvf jetty-server-9.4.15.v20190215.jar org/ META-INF/
