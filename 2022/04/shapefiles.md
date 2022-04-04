@@ -11,6 +11,9 @@ tags:
 - postgis
 ---
 
+![Partial map of the voyage of the Endurance, from "South", E.H. Shackleton](/blog/2022/04/shapefiles/endurance-clip.png)
+Partial map of the voyage of the Endurance, from ["South", by E.H. Shackleton](https://www.gutenberg.org/ebooks/5199)
+
 The shapefile format is commonly used in geospatial vector data interchange, but as it's managed by a commercial entity, Esri, and as GIS is a fairly specialized field, and perhaps because the format specification is only ["mostly open"](https://en.wikipedia.org/wiki/Shapefile), these files can sometimes be confusing to the newcomer. Perhaps these notes can help clarify things. Though the name "shapefile" would suggest a single file in filesystem parlance, a shapefile requires at least three different files, including filename extensions .shp, .shx, and .dbf, stored in the same directory, and the term "shapefile" often refers to that directory, or to an archive such as a zipfile or tarball containing that directory.
 
 ## QGIS
