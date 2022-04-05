@@ -1,6 +1,6 @@
 ---
 author: "Kürşat Kutlu Aydemir"
-title: "Extending Your Jetty Distribution's Capabilities"
+title: "Extending Your Jetty Distribution’s Capabilities"
 date: "2022-03-31"
 tags:
 - java
