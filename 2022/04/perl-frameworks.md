@@ -3,12 +3,14 @@ author: "Marco Pessotto"
 date: 2022-04-08
 title: "Perl Web Frameworks"
 tags:
+ - cgi
  - perl
  - web
  - mojolicious
  - catalyst
  - dancer
  - interchange
+ - mvc
 ---
 
 ### CGI
@@ -21,9 +23,9 @@ error in the logs (this simple mechanism can still be used for small
 programs, but large applications usually wants to save the start-up
 time and live longer than just a request).
 
-At that time, Perl was way more used and it had (and still has) the
-[CGI.pm](https://metacpan.org/pod/CGI) module to help the programmer
-to get the job done.
+At that time, Perl was way more used than now and it had (and still
+has) the [CGI.pm](https://metacpan.org/pod/CGI) module to help the
+programmer to get the job done.
 
 ```
 #!/usr/bin/env perl
@@ -49,23 +51,28 @@ Content-Type: text/html; charset=ISO-8859-1
 <p>Hello Marco</p>
 ```
 
-Of course here the script mixes logic and formatting, and the encoding
-it produces by default tells us that this comes from another age...
-But still, if you want something not persistent in the machine memory,
-which the webserver executes on demand, this is still a viable option.
+Here the script mixes logic and formatting and the encoding it
+produces by default tells us that this comes from another age... But
+if you want something which is seldom used and gets executed on demand
+without persisting in the machine's memory, this is still an option.
+
+However, there are frameworks which can work in CGI mode, so there are
+almost no reason to use CGI.pm, beside having to maintain legacy
+programs.
 
 # Mojolicious
 
 Fast-forward to 2022.
 
-Nowadays Perl is just another language between dozens of them. But
+Nowadays Perl is just another language between dozens of them. But it
 still gets the job done and let you write nice, maintainable code like
 any other modern language.
 
 [Mojolicious](https://mojolicious.org/) is currently the top choice if
 you want to do web development in Perl. It is an amazing framework,
 with a large and active community, and appears to have collected the
-best web frameworks have to offer.
+best concepts that other web frameworks from other languages have to
+offer.
 
 Let's hack an app in a couple of minutes, in a single file:
 
@@ -94,7 +101,7 @@ Hello <%= $name %>
 Here the structure is a bit different. 
 
 First, there's a Domain Specific Language (DSL) to give you some sugar
-(in the "Lite" version) and you declare that the root (`/`) of your
+(in the "Lite" version) and declare that the root (`/`) of your
 application is executing some code. It populates the "stash" with some
 variables, and finally renders a template. If you execute the script,
 you get:
@@ -122,7 +129,9 @@ This is basically what a modern framework is supposed to do.
 
 The nice thing in this example is that we created prototype in a
 single file and launched it as a CGI. But we can also launch it as
-daemon and visit the given address with a browser.
+daemon and visit the given address with a browser (which is how you
+should normally deploy it, usually behind a reverse proxy like
+[nginx](https://nginx.org/en/).
 
 ```
 ./mojo.pl daemon
@@ -134,15 +143,15 @@ Web application available at http://127.0.0.1:3000
 [2022-04-08 14:48:48.53808] [163409] [debug] [CwM6zoUQ] 200 OK (0.001209s, 827.130/s)
 ```
 
-If you want you can launch it with HTTPS as well, giving it the SSL
-certificates:
+If you want you can even launch it with HTTPS as well (please note the
+syntax to pass the certificates).
 
 ```
 ./mojo.pl daemon -l 'https://[::]:8080?cert=./ssl/fullchain.pem&key=./ssl/privkey.pem' -m production
 ```
 
-For a small application this is already enough and the whole
-deployment problem goes away.
+For a small application which listen on a high port this is already
+enough and the whole deployment problem goes away.
 
 Speaking about deployment, Mojolicious has basically no dependencies
 beside the core modules, and comes with a lot of goodies, for example
@@ -153,13 +162,18 @@ the process, we wanted to make the requests in parallel. And here's
 the gist of the code:
 
 ```
-use Mojo::User-Agent;
+package MyApp::Async;
+
+# ... more modules here
+
+use Mojo::UserAgent;
 use Mojo::Promise;
 
-my $ua = Mojo::UserAgent->new;
+# .... other methods here
 
 sub example {
     my $email = 'test@example.com'
+    my $ua = Mojo::UserAgent->new;
     foreach my $list ($self->get_lists) {
         my $promise = $ua->post_p($self->_url("/api/v2/endpoint/$list->{code}"),
                                   json => { email => $email })
@@ -177,6 +191,7 @@ sub example {
     }
     my $return = 0;
     Mojo::Promise->all(@promises)->then(sub { $return = 1 }, sub { $return = 0})->wait;
+    return $return;
 }
 ```
 
@@ -186,18 +201,18 @@ common paradigms taken from other languages and frameworks were
 implemented here, and you can find the best of them in this nice
 package.
 
-But the point here is that it doesn't need dozens of new modules. It's
-just a single module in pure Perl that you can even install in your
-application tree. This is a huge advantage if you're dealing with a
-legacy application which has an old Perl tree and you want to play
-safe.
+But the point here is that it doesn't need dozens of new modules
+installed or upgraded. It's just a single module in pure Perl that you
+can even install in your application tree. This is a huge advantage if
+you're dealing with a legacy application which has an old Perl tree
+and you want to play safe.
 
 So, if you're starting from scratch, go with Mojolicious. It lets you
 prototype fast and doesn't let you down later.
 
 However, starting from scratch is not always an option. Actually, it's
 a rare opportunity. There's a whole world of "legacy" working
-applications which generate real work and real money. It's simply not
+applications which day by day generate real money. It's simply not
 possible or even desirable to throw away something that works for
 something that would do the same thing but in a "cooler" way. In ten
 years, the way we're coding will look old as well, probably.
@@ -205,10 +220,10 @@ years, the way we're coding will look old as well, probably.
 ### Interchange
 
 Wait. Isn't [Interchange](https://www.interchangecommerce.org) an old
-e-commerce platform? Yes, it's not exactly a generic web framework, on
-the contrary, it's a specialized one, but it still a framework and you
-can still do things in a maintainable fashion. The key is using the
-so-called action maps:
+e-commerce framework? Yes, it's not exactly a generic web framework,
+on the contrary, it's a specialized one, but it still a framework and
+you can still do things in a maintainable fashion. The key is using
+the so-called action maps:
 
 ```
 ActionMap jump <<EOR
@@ -227,19 +242,32 @@ sub {
 
     # or serve a file
     $Tag->deliver({ type => 'text/plain', body => $bigfile });
+
+    # or populate the "stash" and serve a template page in pages/test.html
+
+    $Tag->tmp(stash_variable => "Marco");
+    # and in test.html "<p>Hello [scratch stash_variable]</p>
+    $CGI->{mv_nextpage} = "test.html"
 }
 EOR
 ```
 
 Now, I can't show you a simple script which demonstrate this and
-you'll have to take my word for it. Interchange is old, and it shows
-its years, but it is actively maintained. It lacks many of the Mojo's
-goodies, *but* you can still do modern things in a reasonable way. The
-key is to use the action maps, so that code will execute when /jump/
-is hit, and the whole path passed to the routine. So you can split at
-`/`, apply your logic, and finally either set `$CGI->{mv_nextpage}` to
-a file under `pages/` or output the response body with `deliver`.
-That's basically the core of what a framework like
+you'll have to take my word for it (we can't go through the
+installation process for a demo). Interchange is old, and it shows its
+years, but it is actively maintained. It lacks many of the Mojo's
+goodies, *but* you can still do things in a reasonable way. The key is
+to use the action maps, so that code will execute when /jump/ is hit,
+and the whole path is passed to the routine. So you can split at `/`,
+apply your logic, and finally either set `$CGI->{mv_nextpage}` to a
+file under `pages/` or output the response body with `deliver`. 
+
+Interchange comes with a `$Session` data structure which you can
+leverage to keep the client's state.
+
+It's a bit of a poor man's
+[MVC](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller)
+but it works. That's basically the core of what a framework like
 [Dancer](https://metacpan.org/pod/Dancer2) does.
 
 ### Dancer (1 & 2)
@@ -251,12 +279,151 @@ exception.
 
 Let's see it in an action:
 
+```
+#!/usr/bin/env perl
+use strict;
+use warnings;
+use Dancer2;
+ 
+get '/' => sub {
+    my $name = "Marco";
+    return "Hello $name\n";
+};
+ 
+start;
+```
+
+Start the script:
+
+```
+Dancer2 v0.400000 server 22969 listening on http://0.0.0.0:3000
+```
+
+Try it with `curl`:
+
+```
+$ curl -D - http://0.0.0.0:3000
+HTTP/1.0 200 OK
+Date: Mon, 11 Apr 2022 07:22:18 GMT
+Server: Perl Dancer2 0.400000
+Server: Perl Dancer2 0.400000
+Content-Length: 12
+Content-Type: text/html; charset=UTF-8
+
+Hello Marco
+```
+
+If in the script you say `use Dancer;` instead of `use Dancer2`, you get:
 
 
+```
+$ curl -D - http://0.0.0.0:3000
+HTTP/1.0 200 OK
+Server: Perl Dancer 1.3513
+Content-Length: 12
+Content-Type: text/html
+X-Powered-By: Perl Dancer 1.3513
+
+Hello Marco
+```
+
+The Dancer's core doesn't do much more than routing. And you'll also
+notice that the syntax is very similar to the Mojolicious::Lites's. So
+to get anything done you need to start installing plugins which will
+provide the needed glue to interact with a database, work with your
+template system of choice, and more.
+
+Today you would wonder why you should use Dancer and not Mojolicious,
+but when Dancer was at the peak of its popularity the games were still
+open. There was plenty of plugins being written and published on CPAN.
+
+Now, it was probably around 2013 when the Dancer's development team
+decided to rewrite it to make it better. The problem was that plugins
+and templates needed to be adapted as well.
+
+I'm under the impression that the energy got divided and the momentum
+was lost. Now there are two codebases and two plugin namespaces which
+do basically the same thing, because for the end user there is not
+much difference.
+
+### Catalyst
+
+So what did attract people to Dancer? When Dancer came out, Perl had a
+great MVC framework which is still around,
+[Catalyst](http://catalyst.perl.org/) (please note that the main
+Mojolicious developer came from the Catalyst team).
+
+Now, the problem is that to get started with Catalyst, even if it has
+plenty of documentation, you need to be already acquainted with a lot
+of concepts and technologies. For example, the
+[tutorial](https://metacpan.org/dist/Catalyst-Manual/view/lib/Catalyst/Manual/Tutorial/03_MoreCatalystBasics.pod)
+starts to talk about
+[TemplateToolkit](http://www.template-toolkit.org/) and
+[DBIC](https://metacpan.org/pod/DBIx::Class) very early. Strictly they
+are not needed, but 
+
+These two modules are great and powerful and they deserve to be
+studied, but for someone new to modern web development it feels
+overwhelming.
+
+So, why Catalyst? Catalyst has the stability which Mojo, in its very
+active development, lacked, at least at the beginning. The
+back-compatibility is a priority for Catalyst.
+
+Even if Catalyst predates all the hyper-modern features that Mojo has,
+it's still a modern framework, and a good one. I can't show you a self
+contained script (you need a tree of files), but I'd like to show you
+what makes it very nice and powerful:
 
 
+```
+package MyApp::Controller::Root;
+
+use Moose;
+use namespace::autoclean;
+
+BEGIN { extends 'Catalyst::Controller'; }
+
+sub foo :Chained('/') CaptureArgs(1) {
+    my ($self, $c, $arg) = @_;
+    $c->stash(name => "$arg");
+}
+ 
+sub bar :Chained('foo') Args(1) {
+    my ($self, $c, $arg ) = @_;
+    $c->detach($c->view('JSON'));
+}
+
+sub another :Chained('foo') Args(1) {
+    my ($self, $c, $arg ) = @_;
+    $c->detach($c->view('HTML'));
+}
 
 
+```
 
+So, if you hit `/foo/marco/bar` the second path fragment will be
+processed by the first method and saved in the stash. Then the second
+`bar` method will be chained to it and the `name` will be available in
+the stash. The last method will be hit with `/foo/marco/another`.
+(Incidentally, please note that Mojolicious has
+[nested](https://docs.mojolicious.org/Mojolicious/Guides/Routing#Nested-routes)
+routes as well).
 
+Now, I think it's clear that this way you can build deep hierarchies
+of paths with reusable components. This works really great with
+[DBIx::Class](https://metacpan.org/pod/DBIx::Class), where you can
+chain the query as well, but as you can image, this is far from a
+simple setup. On the contrary, this is an advanced setup for people
+which already know their way around web frameworks.
+
+### Conclusion
+
+So, to sum up this excursion in the amazing land of the Perl web
+frameworks: if you build something from scratch, go with Mojolicious,
+it's your best bet. If nothing else, it's super-easy to install, with
+basically no dependencies. However, there's no need to make a religion
+out of it. Rewriting code without a clear gain is a waste of time and
+money. A good developer should still be able to write maintainable
+code with legacy tools.
 
