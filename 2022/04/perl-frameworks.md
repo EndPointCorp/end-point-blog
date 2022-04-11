@@ -402,11 +402,12 @@ sub another :Chained('foo') Args(1) {
 
 ```
 
-So, if you hit `/foo/marco/bar` the second path fragment will be
-processed by the first method and saved in the stash. Then the second
-`bar` method will be chained to it and the `name` will be available in
-the stash. The last method will be hit with `/foo/marco/another`.
-(Incidentally, please note that Mojolicious has
+So, if you hit `/foo/marco/bar/test` the second path fragment will be
+processed by the first method (`CapturedArgs(1)`) and saved in the
+stash. Then the second `bar` method will be chained to it and the
+`name` will be available in the stash. The last method will be hit
+with `/foo/marco/another/test2`. (Incidentally, please note that
+Mojolicious has
 [nested](https://docs.mojolicious.org/Mojolicious/Guides/Routing#Nested-routes)
 routes as well).
 
