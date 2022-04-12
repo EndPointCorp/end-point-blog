@@ -14,14 +14,14 @@ Photo by Mat Brown from Pexels: https://www.pexels.com/photo/round-silver-colore
 
 Besides its advanced features, most basic and frequently used feature is job scheduling and job execution. Some frameworks like `Spring Scheduler` has their integration practice using Quartz-Scheduler which allows using its default scheduling method.
 
-In this post I am going to tell you a different approach to show how we can use Quartz Scheduler to schedule our jobs using different approach. We actually still be using the existing scheduling mechanism of Quartz but we're going to show how we can manage the scheduled and unscheduled jobs online. This way you can manage all the available jobs or create new ones on the fly.
+In this post I am going to tell you a different approach to show how we can use Quartz Scheduler to schedule our jobs. We actually still be using the existing scheduling mechanism of Quartz but we're going to show how we can manage the scheduled and unscheduled jobs online. This way you can manage all the available jobs or create new ones on the fly.
 
 
 # Quartz-Scheduler as a Service
 
 Previously I led development of an enterprise `Business Service Management` software to replace IBM's TBSM product at a major Telco company in Turkey. This was a challenging project and it really got its place in the customer environment after a successful release.
 
-Scheduled KPI retrieval and background reporting jobs had been a significant part of this project as well. KPIs were either internal business service availability and health metrics or measured metrics calculated and stored in external datasources. Reports are also another scheduling job needing part since there always are predefined interval reports also your customer can be in a need to create their own scheduled jobs for getting various reports to various recipients.
+Scheduled KPI retrieval and background reporting jobs had been a significant part of this project as well. KPIs were either internal business service availability and health metrics or measured metrics calculated and stored in external datasources. Reports are also another schedulable jobs  as many organizations need the data to be reported in certain intervals.
 
 In an enterprise web-app having such needs you would need to allow your customer to create their own customized scheduled jobs (KPIs, reports etc.) in an easily managable way. For doing this I came up with a simple solution by blending the existing Quartz-Scheduler scheduling mechanism with some spice.
 
@@ -29,11 +29,11 @@ So here is the model I suggested and applied successfully so that we could integ
 
 * A DB table for creating/updating scheduler job definitions
 * Observer Schduler Job for observing the scheduler job table if there are any updates in the scheduled jobs (new job, updated job or disabled job etc.)
-* Scheduled Job - you might define different schedulable job types, KPI is one of those and I am going to give an example on this one.
+* Business Job - you might define serveral schedulable business job types, KPI is one of those and I am going to give an example on this one.
 
 Simplicity should be the ultimate goal in a design, however the details can have their complexities.
 
-This design doesn't replace or provide an alternative to how Quartz-Scheduler is scheduling its jobs. How Quartz-Scheduler is scheduling is subject to job persistence and it is out of this article's scope and I am assuming we are scheduling the jobs all in RAM store.
+This design doesn't replace or provide an alternative to how Quartz-Scheduler is scheduling its jobs. How Quartz-Scheduler is scheduling is subject to job persistence and it is out of this article's scope and I am assuming we are scheduling the jobs all in Quartz-Scheduler's RAM-store or Job-store.
 
 
 ### Read and Manage Job Data
@@ -50,7 +50,7 @@ You can use any framework or even without using any framework you can create you
 
 ### Design
 
-As I suggested a model above as a scheduling service solution here is a high level design of the model.
+As I suggested a model above as a scheduling service solution, here is a high level design of the model.
 
 ![](/blog/2022/04/12/qs-service-design.png)
 
@@ -452,11 +452,11 @@ Let's change the `cron` scheduling rule of `critical_ticket_count` job to `0 0 3
 2022-04-11 13:55:12.356  INFO 13033 --- [eduler_Worker-3] com.example.qscheduler.KPIObserverJob    : rescheduling job: kpiJobName critical_ticket_count , new cron: 0 0 3 ? * * *
 ```
 
-Observer job now rescheduled the job we changed its cron job. These are all how we make observer job manage the KPI business jobs. If you have more attributes and if you want your observer job to reschedule or perform different operations on business job definition updates you should enrich your `ObserverJob`.
+Observer job now rescheduled the job that we changed its cron rule. These are all how we make observer job manage the KPI business jobs. If you have more attributes and if you want your observer job to reschedule or perform different operations on business job definition updates you should enrich your `ObserverJob`.
 
 
 ### Extend By Creating a Managing UI and Conclusion
 
 Managing the scheduler jobs using a UI is not in the scope of this post. But that is not much different than managing any data on a web application or so. I encourage you to do your own implementations if this solution sounds useful to you.
-This solution helps you create create your own scheduling job management solution on the fly and let's you create, update or delete the quartz-scheduler jobs dynamically.
+This solution helps you create your own scheduling job management solution on the fly and let's you create, update or delete the quartz-scheduler jobs dynamically.
 The complete implementation can be found in the [GitHub project](https://github.com/ashemez/QScheduler).
