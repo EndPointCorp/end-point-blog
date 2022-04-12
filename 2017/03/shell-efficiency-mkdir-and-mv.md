@@ -10,7 +10,17 @@ date: 2017-03-10
 
 Little tools can be a nice improvement. Not everything needs to be thought-leaderish.
 
-For example, once upon a time in my Unix infancy I didn’t know that `mkdir` has the `-p` option to make intervening directories automatically. So back then, in order to create the path a/b/c/ I would’ve run: `mkdir a; mkdir a/b; mkdir a/b/c` when I could instead have simply run: `mkdir -p a/b/c`.
+For example, once upon a time in my Unix infancy I didn’t know that `mkdir` has the `-p` option to make intervening directories automatically. So back then, in order to create the path a/b/c/ I would’ve run:
+
+```shell
+mkdir a; mkdir a/b; mkdir a/b/c
+```
+
+when I could instead have simply run:
+
+```shell
+mkdir -p a/b/c
+```
 
 In working at the shell, particularly on my own local machine, I often find myself wanting to move one or several files into a different location, to file them away. For example:
 
