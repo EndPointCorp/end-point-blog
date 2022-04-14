@@ -175,14 +175,15 @@ iris_df = pd.DataFrame(iris.data, columns = iris.feature_names)
 iris_df.head()
 ```
 
-| sepal length (cm) | sepal width (cm) | petal length (cm) | petal width (cm) |
-| --- | --- | --- | --- | --- |
-| 0   | 5.1 | 3.5 | 1.4 | 0.2 |
-| 1   | 4.9 | 3.0 | 1.4 | 0.2 |
-| 2   | 4.7 | 3.2 | 1.3 | 0.2 |
-| 3   | 4.6 | 3.1 | 1.5 | 0.2 |
-| 4   | 5.0 | 3.6 | 1.4 | 0.2 |
-
+<table>
+<tr><td></td><td>sepal length (cm)</td><td>sepal width (cm)</td><td>petal length (cm)</td><td>petal width (cm)</td><tr>
+<tr>
+<td>0</td><td>5.1</td><td>3.5</td><td>1.4</td><td>0.2</td>
+</tr>
+<tr>
+<td>1</td><td>4.9</td><td>3.0</td><td>1.4</td><td>0.2</td>
+</tr>
+</table>
 
 Since `iris.data` and `iris.target` are already of `numpy.ndarray` as I implemented in my function I don't need any further dataset manipulation here. Now let's finally call `myplotGrid` function and render the pair-plot for `Iris` dataset.
 
