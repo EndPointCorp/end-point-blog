@@ -18,13 +18,13 @@ Seaborn's higher level pre-built plot functions provide us a good practice. Pair
 ![Seaborn pairplot](/blog/2022/04/14/pairplot_3_0.png)
 Figure 1: Seaborn pairplot
 
-Using a pair-plot we aim to visualize the correlation of each feature pair in a dataset against the class distribution. The diagonal of the pairplot is different than the other pairwise plots as you see in Figure 1. That is because the diagonal plots are rendering for the same feature pairs. So we wouldn't need to plot the correlation of the feature in the diagonal. Instead we can just plot the class distribution for that pair using one kind of plot type. The different feature pair plots are usually kind of scatter plot or sometimes can be heatmaps so that the class distribution makes sense in terms of correlation. Also the the plot type of diagonal can be chosen among the mostly used kind of plots such as histogram, KDE (kernel density estimate) which essentially plots the density distribution of the classes.
+Using a pair-plot we aim to visualize the correlation of each feature pair in a dataset against the class distribution. The diagonal of the pairplot is different than the other pairwise plots as you see in Figure 1. That is because the diagonal plots are rendering for the same feature pairs. So we wouldn't need to plot the correlation of the feature in the diagonal. Instead we can just plot the class distribution for that pair using one kind of plot type. The different feature pair plots are usually kind of scatter plot or sometimes can be heatmaps so that the class distribution makes sense in terms of correlation. Also the plot type of diagonal can be chosen among the mostly used kind of plots such as histogram, KDE (kernel density estimate) which essentially plots the density distribution of the classes.
 
 Since `pair-plot` visually gives an idea of correlation of each feature pair, it helps us to understand and quickly analyse the `correlation matrix` (Pearson) of the dataset as well.
 
 ## Custom Pair-Plot using Matplotlib
 
-Since `matplotlib` is a relatively primitive and doesn't provide ready to use pair-plot function we can do it ourselves in a similar way `seaborn` does. You normally won't necessarily create such home-made functions if they are already available in modules like `seaborn`. But you'd want to implement your visualization methods in a custom way would give you a chance to know what you plot and may be sometimes in a very different than the existing ones. But I am not going to introduce an exceptional case here but creating our pair-plot grid using `matplotlib`.
+Since `matplotlib` is a relatively primitive and doesn't provide ready to use pair-plot function we can do it ourselves in a similar way `seaborn` does. You normally won't necessarily create such home-made functions if they are already available in modules like `seaborn`. But you'd want to implement your visualization methods in a custom way would give you a chance to know what you plot and may be sometimes in a very different than the existing ones. I am not going to introduce an exceptional case here but creating our pair-plot grid using `matplotlib`.
 
 ### Plot Grid Area
 
@@ -42,7 +42,7 @@ for i in range(0, 3):
         plotPair()
 ```
 
-For cleaner code it is better to move the single pair plotting in another function. Below is a function I previously created for one of my courseworks assignments (in Dec. 2021, UoL). Plotting a single pair in a grid needs to get the current axis for the current grid cell and identify the current feature data values to on the current axis. Another thing to consider is where to render the labels of axes. If we were plotting a single chart it would be easy to render the labels on each axis of the chart. But in a pair plot it is better to plot the labels on the left-most and bottom-most of the grid area so that we won't bother the inner subplots with the dirty labeling.
+For cleaner code it is better to move the single pair plotting in another function. Below is a function I previously created for one of my courseworks assignments (in Dec. 2021, UoL). Plotting a single pair in a grid needs to get the current axis for the current grid cell and identify the current feature data values on the current axis. Another thing to consider is where to render the labels of axes. If we were plotting a single chart it would be easy to render the labels on each axis of the chart. But in a pair plot it is better to plot the labels on the left-most and bottom-most of the grid area so that we won't bother the inner subplots with the dirty labeling.
 
 ```Python
 def plot_single_pair(ax, feature_ind1, feature_ind2, _X, _y, _features, colormap):
@@ -117,7 +117,7 @@ In my `plot-single_pair` function notice that I also used a `colormap` `dictiona
 
 Here is my final grid plot function for pair-plot:
 
-```
+```Python
 def myplotGrid(X, y, features, colormap={0: "red", 1: "green", 2: "blue"}):
     """Plots a pair grid of the given features.
 
@@ -152,25 +152,25 @@ def myplotGrid(X, y, features, colormap={0: "red", 1: "green", 2: "blue"}):
 
 ### Pair-Plot a Dataset
 
-Let's now prepare a dataset and plot using our custom pair-plot implementation. Notice in that in my `plot_single_pair` function I passed the feature and target values as `numpy.ndarray` type.
+Let's now prepare a dataset and plot using our custom pair-plot implementation. Notice that in my `plot_single_pair` function I passed the feature and target values as `numpy.ndarray` type.
 
-Let's get `iris` dataset from `SciKit-Learn` dataset collection and do a quick exploratory data analysis..
+Let's get `iris` dataset from `SciKit-Learn` dataset collection and do a quick exploratory data analysis.
 
-```
+```Python
 from sklearn import datasets
 iris = datasets.load_iris()
 ```
 
 Here are the targets (classes) of iris dataset:
 
-```
+```Python
 iris.target_names
 array(['setosa', 'versicolor', 'virginica'], dtype='<U10')
 ```
 
 And here we can see the feature names and a few lines of the dataset values.
 
-```
+```Python
 iris_df = pd.DataFrame(iris.data, columns = iris.feature_names)
 iris_df.head()
 ```
@@ -189,7 +189,7 @@ Since `iris.data` and `iris.target` are already of `numpy.ndarray` as I implemen
 
 Note that you can change color per target in `colormap` as you wish.
 
-```
+```Python
 myplotGrid(iris.data, iris.target, iris.feature_names, colormap={0: "red", 1: "green", 2: "blue"})
 ```
 
