@@ -60,7 +60,7 @@ Please note that there are frameworks which can work in CGI mode, so
 there is no reason to use CGI.pm, beside having to maintain legacy
 programs.
 
-# Mojolicious
+### Mojolicious
 
 Fast-forward to 2022.
 
