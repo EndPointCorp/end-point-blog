@@ -6,6 +6,9 @@ tags:
 - jobs
 - visionport
 date: 2022-04-14
+featured:
+  visionport: true
+  image_url: /blog/2021/06/job-liquid-galaxy-support-engineer/lg-cabinet.jpg
 ---
 
 ![VisionPort cabinet with 7 HDTV screens in portrait orientation](/blog/2021/06/job-liquid-galaxy-support-engineer/lg-cabinet.jpg)
