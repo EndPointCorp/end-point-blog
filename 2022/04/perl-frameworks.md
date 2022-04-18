@@ -15,7 +15,7 @@ tags:
 
 ### CGI
 
-When I started programming, back in the days, CGI was still widely
+When I started programming, back in the day, CGI was still widely
 used. Usually the Apache webserver would just execute a script or a
 binary with some environment variables set and serve whatever the
 executable sent to the standard output, while keeping the standard
@@ -23,7 +23,7 @@ error in the logs (this simple and straightforward mechanism can still
 be used for small programs, but larger applications usually want to
 save the start-up time and live longer than just a request).
 
-At that time Perl was way more used than now and it had (and still
+At that time Perl was used far more often than now, and it had (and still
 has) the [CGI.pm](https://metacpan.org/pod/CGI) module to help the
 programmer to get the job done.
 
@@ -64,8 +64,8 @@ programs.
 
 Fast-forward to 2022.
 
-Nowadays Perl is just another language between dozens of them. But it
-still gets the job done and let you write nice, maintainable code like
+Nowadays Perl is just another language among dozens of them. But it
+still gets the job done and lets you write nice, maintainable code like
 any other modern language.
 
 [Mojolicious](https://mojolicious.org/) is currently the top choice if
@@ -103,7 +103,7 @@ Here the structure is a bit different.
 
 First, there's a Domain Specific Language (DSL) to give you some sugar
 (this is the "Lite" version, while the well-structured Mojolicious one
-prefer to write class methods) and declare that the root (`/`) of your
+prefers to write class methods) and declare that the root (`/`) of your
 application is going to execute some code. It populates the "stash"
 with some variables, and finally renders a template which can access
 the stashed variables. If you execute the script, you get:
@@ -156,10 +156,10 @@ For a small application listening on a high port this is already
 enough and the whole deployment problem goes away.
 
 Speaking about deployment, Mojolicious has basically no dependencies
-beside the core modules and comes with a lot of goodies, for example
+other than the core modules and comes with a lot of goodies, for example
 a [non blocking user-agent](https://docs.mojolicious.org/Mojo/UserAgent).
 
-Recently a legacy application needed to do some API call. To speed up
+Recently a legacy application needed to make some API calls. To speed up
 the process, we wanted to make the requests in parallel. And here's
 the gist of the code:
 
@@ -197,7 +197,7 @@ sub example {
 }
 ```
 
-So the bunch of requests are run in parallel and then synced before
+So a bunch of requests are run in parallel and then synced before
 returning. Does it remind you of Javascript? Of course. A lot of
 common paradigms taken from other languages and frameworks were
 implemented here, and you can find the best of them in this nice
@@ -214,7 +214,7 @@ prototype fast and doesn't let you down later.
 
 However, starting from scratch is not always an option. Actually, it's
 a rare opportunity. There's a whole world of legacy applications and
-they generate real money day by day. It's simply not possible or even
+they generate real money every day. It's simply not possible or even
 desirable to throw away something that works for something that would
 do the same thing but in a "cooler" way. In ten years, the way we're
 coding will look old anyway.
@@ -223,7 +223,7 @@ coding will look old anyway.
 
 Wait. Isn't [Interchange](https://www.interchangecommerce.org) an old
 e-commerce framework? Yes, it's not exactly a generic web framework,
-on the contrary, it's a specialized one, but it still a framework and
+on the contrary, it's a specialized one, but it's still a framework and
 you can still do things in a maintainable fashion. The key is using
 the so-called action maps:
 
@@ -254,7 +254,7 @@ sub {
 EOR
 ```
 
-Now, I can't show you a simple script which demonstrate this and
+Now, I can't show you a simple script which demonstrates this and
 you'll have to take my word for it (we can't go through the
 installation process for a demo). Interchange is old, and it shows its
 years, but it is actively maintained. It lacks many of the Mojo's
@@ -336,7 +336,7 @@ template system of choice, and more.
 
 Today you would wonder why you should use Dancer and not Mojolicious,
 but when Dancer was at the peak of its popularity the games were still
-open. There was plenty of plugins being written and published on CPAN.
+open. There were plenty of plugins being written and published on CPAN.
 
 Now, it was probably around 2013 when the Dancer's development team
 decided to rewrite it to make it better. The problem was that plugins
@@ -369,7 +369,7 @@ Perl, it feels (and actually is) overwhelming.
 So, why would you choose Catalyst today? Catalyst has the stability
 which Mojo, at least at the beginning, lacked, while the
 back-compatibility is a priority for Catalyst. The other way to look
-at this is that with Catalyst doesn't see much
+at this is that Catalyst doesn't see much
 [development](https://metacpan.org/dist/Catalyst-Runtime/changes), but
 someone could see this as a feature.
 
@@ -415,11 +415,11 @@ Mojolicious has
 [nested](https://docs.mojolicious.org/Mojolicious/Guides/Routing#Nested-routes)
 routes as well).
 
-Now, I think it's clear that this way you can build deep hierarchies
+Now, I think it's clear that in this way you can build deep hierarchies
 of paths with reusable components. This works really great with the
 [DBIx::Class](https://metacpan.org/pod/DBIx::Class) ORM, where you can
-chain queries as well. As you can image, this is far from a simple
-setup. On the contrary, this is an advanced setup for people which
+chain queries as well. As you can imagine, this is far from a simple
+setup. On the contrary, this is an advanced setup for people who
 already know their way around web frameworks.
 
 ### Conclusion
