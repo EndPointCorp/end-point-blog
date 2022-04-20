@@ -13,6 +13,11 @@ tags:
  - mvc
 ---
 
+![Cobweb](/blog/2022/04/perl-frameworks/nature-wing-black-and-white-web-line-insect-1244977.jpeg)
+
+<!-- Photo: https://pxhere.com/en/photo/1244977 CC0 Public Domain -->
+
+
 ### CGI
 
 When I started programming, back in the day, CGI was still widely
