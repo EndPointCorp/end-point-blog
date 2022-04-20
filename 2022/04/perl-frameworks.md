@@ -59,7 +59,7 @@ Content-Type: text/html; charset=ISO-8859-1
 Here the script mixes logic and formatting and the encoding it
 produces by default tells us that this comes from another age... But
 if you want something which is seldom used and gets executed on demand
-without persisting in the machine's memory, this is still an option.
+without persisting in the machine’s memory, this is still an option.
 
 Please note that there are frameworks which can work in CGI mode, so
 there is no reason to use CGI.pm, beside having to maintain legacy
@@ -79,7 +79,7 @@ with a large and active community, and appears to have collected the
 best concepts that other web frameworks from other languages have to
 offer.
 
-Let's hack an app in a couple of minutes in a single file, like during
+Let’s hack an app in a couple of minutes in a single file, like during
 the CGI days:
 
 ```
@@ -106,10 +106,10 @@ Hello <%= $name %>
 
 Here the structure is a bit different. 
 
-First, there's a Domain Specific Language (DSL) to give you some sugar
-(this is the "Lite" version, while the well-structured Mojolicious one
+First, there’s a Domain Specific Language (DSL) to give you some sugar
+(this is the “Lite” version, while the well-structured Mojolicious one
 prefers to write class methods) and declare that the root (`/`) of your
-application is going to execute some code. It populates the "stash"
+application is going to execute some code. It populates the “stash”
 with some variables, and finally renders a template which can access
 the stashed variables. If you execute the script, you get:
 
@@ -165,7 +165,7 @@ other than the core modules and comes with a lot of goodies, for example
 a [non blocking user-agent](https://docs.mojolicious.org/Mojo/UserAgent).
 
 Recently a legacy application needed to make some API calls. To speed up
-the process, we wanted to make the requests in parallel. And here's
+the process, we wanted to make the requests in parallel. And here’s
 the gist of the code:
 
 ```
@@ -208,27 +208,27 @@ common paradigms taken from other languages and frameworks were
 implemented here, and you can find the best of them in this nice
 package.
 
-But the point here is that it doesn't need dozens of new modules
-installed or upgraded. It's just a single module in pure Perl that you
+But the point here is that it doesn’t need dozens of new modules
+installed or upgraded. It’s just a single module in pure Perl that you
 can even install in your application tree. This is a huge advantage if
-you're dealing with a legacy application which uses an old Perl tree
+you’re dealing with a legacy application which uses an old Perl tree
 and you want to play safe.
 
-So, if you're starting from scratch, go with Mojolicious. It lets you
-prototype fast and doesn't let you down later.
+So, if you’re starting from scratch, go with Mojolicious. It lets you
+prototype fast and doesn’t let you down later.
 
-However, starting from scratch is not always an option. Actually, it's
-a rare opportunity. There's a whole world of legacy applications and
-they generate real money every day. It's simply not possible or even
+However, starting from scratch is not always an option. Actually, it’s
+a rare opportunity. There’s a whole world of legacy applications and
+they generate real money every day. It’s simply not possible or even
 desirable to throw away something that works for something that would
-do the same thing but in a "cooler" way. In ten years, the way we're
+do the same thing but in a “cooler” way. In ten years, the way we’re
 coding will look old anyway.
 
 ### Interchange
 
-Wait. Isn't [Interchange](https://www.interchangecommerce.org) an old
-e-commerce framework? Yes, it's not exactly a generic web framework,
-on the contrary, it's a specialized one, but it's still a framework and
+Wait. Isn’t [Interchange](https://www.interchangecommerce.org) an old
+e-commerce framework? Yes, it’s not exactly a generic web framework,
+on the contrary, it’s a specialized one, but it’s still a framework and
 you can still do things in a maintainable fashion. The key is using
 the so-called action maps:
 
@@ -259,10 +259,10 @@ sub {
 EOR
 ```
 
-Now, I can't show you a simple script which demonstrates this and
-you'll have to take my word for it (we can't go through the
+Now, I can’t show you a simple script which demonstrates this and
+you’ll have to take my word for it (we can’t go through the
 installation process for a demo). Interchange is old, and it shows its
-years, but it is actively maintained. It lacks many of the Mojo's
+years, but it is actively maintained. It lacks many of the Mojo’s
 goodies, *but* you can still do things in a reasonable way. The key is
 to use the so-called action maps. In the example the code will execute
 when a path starting with `/jump/` is requested. The whole path is
@@ -271,19 +271,19 @@ finally either set `$CGI->{mv_nextpage}` to a file in the `pages`
 directory or output the response body directly with `deliver`. This
 way you can easily build, as a classical example, an API.
 
-It's a bit of a poor man's
+It’s a bit of a poor man’s
 [MVC](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller)
-but it works. That's basically the core of what a framework like
+but it works. That’s basically the core of what a framework like
 [Dancer](https://metacpan.org/pod/Dancer2) does.
 
 ### Dancer (1 & 2)
 
-Dancer is basically Ruby's
+Dancer is basically Ruby’s
 [Sinatra](https://github.com/sinatra/sinatra) ported to Perl. As
 already mentioned, ideas developed in other languages and frameworks
 are often ported to Perl, and this is no exception.
 
-Let's see it in an action:
+Let’s see it in an action:
 
 ```
 #!/usr/bin/env perl
@@ -333,7 +333,7 @@ X-Powered-By: Perl Dancer 1.3513
 Hello Marco
 ```
 
-The Dancer's core doesn't do much more than routing. And you'll also
+The Dancer’s core doesn’t do much more than routing. And you’ll also
 notice that the syntax is very similar to Mojolicious::Lites. So to
 get something done you need to start installing plugins which will
 provide the needed glue to interact with a database, work with your
@@ -343,11 +343,11 @@ Today you would wonder why you should use Dancer and not Mojolicious,
 but when Dancer was at the peak of its popularity the games were still
 open. There were plenty of plugins being written and published on CPAN.
 
-Now, it was probably around 2013 when the Dancer's development team
+Now, it was probably around 2013 when the Dancer’s development team
 decided to rewrite it to make it better. The problem was that plugins
 and templates needed to be adapted as well.
 
-I'm under the impression that the energy got divided and the momentum
+I’m under the impression that the energy got divided and the momentum
 was lost. Now there are two codebases and two plugin namespaces which
 do basically the same thing, because for the end user there is not
 much difference.
@@ -374,13 +374,13 @@ Perl, it feels (and actually is) overwhelming.
 So, why would you choose Catalyst today? Catalyst has the stability
 which Mojo, at least at the beginning, lacked, while the
 back-compatibility is a priority for Catalyst. The other way to look
-at this is that Catalyst doesn't see much
+at this is that Catalyst doesn’t see much
 [development](https://metacpan.org/dist/Catalyst-Runtime/changes), but
 someone could see this as a feature.
 
 Even if Catalyst predates all the hyper-modern features that Mojo has,
-it's still a modern framework, and a good one. I can't show you a self
-contained script (you need a tree of files), but I'd like to show you
+it’s still a modern framework, and a good one. I can’t show you a self
+contained script (you need a tree of files), but I’d like to show you
 what makes it very nice and powerful:
 
 
@@ -420,7 +420,7 @@ Mojolicious has
 [nested](https://docs.mojolicious.org/Mojolicious/Guides/Routing#Nested-routes)
 routes as well).
 
-Now, I think it's clear that in this way you can build deep hierarchies
+Now, I think it’s clear that in this way you can build deep hierarchies
 of paths with reusable components. This works really great with the
 [DBIx::Class](https://metacpan.org/pod/DBIx::Class) ORM, where you can
 chain queries as well. As you can imagine, this is far from a simple
@@ -431,8 +431,8 @@ already know their way around web frameworks.
 
 So, to sum up this excursion in the amazing land of the Perl web
 frameworks: if you build something from scratch, go with Mojolicious,
-it's your best bet. If nothing else, it's super-easy to install, with
-basically no dependencies. However, there's no need to make a religion
+it’s your best bet. If nothing else, it’s super-easy to install, with
+basically no dependencies. However, there’s no need to make a religion
 out of it. Rewriting code without a clear gain is a waste of time and
 money. A good developer should still be able to write maintainable
 code with the existing tools.
