@@ -1,72 +1,77 @@
 ---
-author: "Kursat Aydemir"
-title: "Quartz-Scheduler as a Service"
-tags: java, quartz-scheduler, development
+author: "Kürşat Kutlu Aydemir"
+title: "Quartz Scheduler as a Service"
+date: 2022-04-18
+tags:
+- java
+- development
+- automation
+github_issue_number: 1856
 ---
 
-![Image not found: /blog/2022/04/12/pexels-mat-brown-552598.jpg](/blog/2022/04/12/qs-.svg "Image not found: /blog/2022/04/12/pexels-mat-brown-552598.jpg")
+![Close-up view of mechanical watch with roman numerals and day of month and month pointers](/blog/2022/04/quartz-scheduler-as-a-service/pexels-mat-brown-552598.webp)
 
-Photo by Mat Brown from Pexels: https://www.pexels.com/photo/round-silver-colored-chronograph-watch-552598/
+Photo by Mat Brown from Pexels
 
-# Quartz Scheduler
+[//]: # (from https://www.pexels.com/photo/round-silver-colored-chronograph-watch-552598/)
 
-"Quartz is a richly featured, open source job scheduling library that can be integrated within virtually any Java application - from the smallest stand-alone application to the largest e-commerce system." ([Quartz Scheduler](http://www.quartz-scheduler.org/overview/)). 
+### Quartz Job Scheduler
 
-Besides its advanced features, most basic and frequently used feature is job scheduling and job execution. Some frameworks like `Spring Scheduler` has their integration practice using Quartz-Scheduler which allows using its default scheduling method.
+"Quartz is a richly featured, open source job scheduling library that can be integrated within virtually any Java application — from the smallest stand-alone application to the largest e-commerce system." ([Quartz Scheduler overview](http://www.quartz-scheduler.org/overview/))
 
-In this post I am going to tell you a different approach to show how we can use Quartz Scheduler to schedule our jobs. We actually still be using the existing scheduling mechanism of Quartz but we're going to show how we can manage the scheduled and unscheduled jobs online. This way you can manage all the available jobs or create new ones on the fly.
+Besides its advanced features, most basic and frequently used feature is job scheduling and job execution. Some frameworks like Spring Scheduler have their integration practice using Quartz Scheduler which allows using its default scheduling method.
 
+In this post I am going to tell you a different approach to show how we can use Quartz Scheduler to schedule our jobs. We actually still will be using the existing scheduling mechanism of Quartz but we're going to show how we can manage the scheduled and unscheduled jobs online. This way you can manage all the available jobs or create new ones on the fly.
 
-# Quartz-Scheduler as a Service
+### Quartz Scheduler as a Service
 
-Previously I led development of an enterprise `Business Service Management` software to replace IBM's TBSM product at a major Telco company in Turkey. This was a challenging project and it really got its place in the customer environment after a successful release.
+Previously I led development of an enterprise "Business Service Management" software to replace IBM's TBSM product at a major telco company in Turkey. This was a challenging project and found a solid place in the customer environment after a successful release.
 
-Scheduled KPI retrieval and background reporting jobs had been a significant part of this project as well. KPIs were either internal business service availability and health metrics or measured metrics calculated and stored in external datasources. Reports are also another schedulable jobs  as many organizations need the data to be reported in certain intervals.
+Scheduled key performance indicators (KPI) retrieval and background reporting jobs were a significant part of this project. KPIs were either internal business service availability and health metrics or measured metrics calculated and stored in external data sources. Reports are also another type of schedulable jobs as many organizations need the data to be reported at certain intervals.
 
-In an enterprise web-app having such needs you would need to allow your customer to create their own customized scheduled jobs (KPIs, reports etc.) in an easily managable way. For doing this I came up with a simple solution by blending the existing Quartz-Scheduler scheduling mechanism with some spice.
+In an enterprise web application with such needs you would need to allow your customer to create their own customized scheduled jobs (KPIs, reports, etc.) in an easily manageable way. For this I came up with a simple solution by blending the existing Quartz Scheduler scheduling mechanism with some spice.
 
-So here is the model I suggested and applied successfully so that we could integrate a managable scheduling service within this enterprise app.
+So here is the model we used:
 
-* A DB table for creating/updating scheduler job definitions
-* Observer Schduler Job for observing the scheduler job table if there are any updates in the scheduled jobs (new job, updated job or disabled job etc.)
-* Business Job - you might define serveral schedulable business job types, KPI is one of those and I am going to give an example on this one.
+* A database table for creating/​updating scheduler job definitions
+* Observer Schduler Job for observing the scheduler job table to watch for any updates in the scheduled jobs: new job, updated job, or disabled job, etc.
+* Business Job: You might define several schedulable business job types. KPI is one of those and I am going to give an example of it.
 
-Simplicity should be the ultimate goal in a design, however the details can have their complexities.
+Simplicity should be a design goal, however the details can have their complexities.
 
-This design doesn't replace or provide an alternative to how Quartz-Scheduler is scheduling its jobs. How Quartz-Scheduler is scheduling is subject to job persistence and it is out of this article's scope and I am assuming we are scheduling the jobs all in Quartz-Scheduler's RAM-store or Job-store.
+This design doesn't replace or provide an alternative to how Quartz Scheduler schedules its jobs. That is subject to job persistence and is out of this article's scope. I am assuming we are scheduling the jobs all in Quartz Scheduler's RAM-store or Job-store.
 
-
-### Read and Manage Job Data
+#### Read and Manage Job Data
 
 Ideally you should store and manage the jobs as services in a database and you can then connect to this job storage either via DB connection or API. For security reasons even if you think that your application or services are internal and totally authenticated and authorised you should still perform DB operations via APIs. But for capability perspective yes you can use many ways to read and manage a data storage.
 
-For this simple project I am not going to use a database but a JSON file as job service definitions repository. But you can simply convert this method to a database or API method.
+For this simple project I am not going to use a database but instead a JSON file as job service definitions repository. But you can simply convert this method to a database or API method.
 
-I am going to use a JSON file named `kpi.json` in my project and define a simple set of attributes for each KPI item. Any service or scheduled job can have more or less attributes according to the requirements of the business use-case. 
+I am going to use a JSON file named `kpi.json` in my project and define a simple set of attributes for each KPI item. Any service or scheduled job can have more or fewer attributes according to the requirements of the business use case.
 
-### Spring Application
+#### Spring Application
 
-You can use any framework or even without using any framework you can create your application from scratch and build agains JAR target. Here in this project I chose to go with Spring framework. You can also simply initialize a Spring application [here](https://start.spring.io/).
+You can use any framework or even without using any framework you can create your application from scratch and build a JAR. Here in this project I chose to go with Spring framework. You can also simply initialize a Spring application [here](https://start.spring.io/).
 
-### Design
+#### Design
 
-As I suggested a model above as a scheduling service solution, here is a high level design of the model.
+As I suggested a model above as a scheduling service solution, here is a high-level design of the model.
 
-![](/blog/2022/04/12/qs-service-design.png)
+![Quartz Scheduler service model diagram](/blog/2022/04/quartz-scheduler-as-a-service/qs-service-design.png)
 
-It is self-explanatory but if I explain shortly, the overall solution would have a data storage for holding scheduled job service definitions and a UI for managing their attributes like enabling-disabling or changing scheduling dates etc.
+The overall solution would have a data storage for holding scheduled job service definitions and a UI for managing their attributes like enabling/​disabling or changing scheduling dates etc.
 
-In this solution we have two different Quartz-Scheduler job types: `observer job` and `business job`. Observer job is a single job triggered frequently (say every 5 seconds or every 1 minute etc.) and checks the existing job definitions in the job storage. If it sees any update on the job definitions or new jobs it behaves accordingly. Business jobs are the job definitions found in job storage and designed to perform certain business actions. The business jobs can be notification jobs, KPI measuring jobs, and any other scheduled business jobs which should have their own scheduling interval.
+In this solution we have two different Quartz Scheduler job types: observer job and business job. Observer job is a single job triggered frequently, say, every 5 seconds or every 1 minute, and checks the existing job definitions in the job storage. If it sees any update on the job definitions or new jobs it behaves accordingly. Business jobs are the job definitions found in job storage and designed to perform certain business actions. The business jobs can be notification jobs, KPI measuring jobs, and any other scheduled business jobs which should have their own scheduling interval.
 
-In this example project I specifically used KPI term as the business case just to make it more relevant. I can use KPI term as it appears in the code from now on.
+In this example project I specifically used KPI term as the business case just to make it more relevant.
 
-### Scheduler
+#### Scheduler
 
 `KPIJobWatcher` class is responsible to schedule the observer job. In Spring application startup this is going to be our starting point to the scheduling service management.
 
 #### Spring Application Startup
 
-```Java
+```java
 @SpringBootApplication
 public class QSchedulerApplication {
 
@@ -86,7 +91,6 @@ public class QSchedulerApplication {
 			// watcher runs an observer job which monitors and manages KPI jobs
 			KPIJobWatcher watcher = new KPIJobWatcher(kpiScheduler);
 			watcher.run();
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -94,9 +98,9 @@ public class QSchedulerApplication {
 }
 ```
 
-`KPIJobWatcher` schedules the Observer Job.
+`KPIJobWatcher` schedules the Observer job:
 
-```Java
+```java
 public class KPIJobWatcher {
     private static final Logger logger = LoggerFactory.getLogger(KPIJobWatcher.class);
 
@@ -141,18 +145,16 @@ public class KPIJobWatcher {
 }
 ```
 
-Before moving on to observer job here I want to notice that you can use a custom `JobFactory` and attach it to the current scheduler object so that you can use custom jobs with custom constructors created within this custom JobFactory as part of factory design pattern.
+Before moving on to observer job here I want to notice that you can use a custom `JobFactory` and attach it to the current scheduler object so that you can use custom jobs with custom constructors created within this custom JobFactory as part of the factory design pattern.
 
-##### JobFactory
+#### JobFactory
 
-```Java
+```java
 public class KPIJobFactory implements JobFactory {
     Scheduler kpiScheduler;
-    public KPIJobFactory(Scheduler s)
-    {
+    public KPIJobFactory(Scheduler s) {
         kpiScheduler = s;
     }
-
 
     public KPIObserverJob newJob(TriggerFiredBundle bundle, Scheduler Scheduler) throws SchedulerException {
 
@@ -169,13 +171,13 @@ public class KPIJobFactory implements JobFactory {
 }
 ```
 
-### Observer Job
+#### Observer Job
 
-As suggested in the model above the observer job is a single observer job triggered frequently and manages the overall scheduling job service in the background. I created `KPIObserverJob` class as the observer job in this project and as you can see in the previous section `KPIJobFactory` creates instancesof this observer job (`KPIObserverJob`).
+As suggested in the model above the observer job is triggered frequently and manages the overall scheduling job service in the background. I created the `KPIObserverJob` class as the observer job in this project and as you can see in the previous section `KPIJobFactory` creates instances of this observer job.
 
-#### KPIObserverJob
+##### KPIObserverJob
 
-Observer Job has some specific methods like `ScheduleJob`, `UnscheduleJob` to manage scheduling jobs.
+Observer Job has some specific methods like `ScheduleJob` and `UnscheduleJob` to manage scheduling jobs.
 
 ```Java
 public class KPIObserverJob implements Job {
@@ -202,10 +204,10 @@ public class KPIObserverJob implements Job {
 
         jobList = new ArrayList<JobDetail>();
 
-        // get all KPIs and create their jobs
+        // Get all KPIs and create their jobs
         CreateJobs();
 
-        // get the list of currently scheduled kpi jobs
+        // Get the list of currently scheduled KPI jobs
         try {
             for (String groupName : kpiScheduler.getJobGroupNames()) {
                 for (JobKey jk : kpiScheduler.getJobKeys(GroupMatcher.jobGroupEquals(groupName))) {
@@ -218,35 +220,32 @@ public class KPIObserverJob implements Job {
                     alreadyScheduledJobList.put(jobName, jd);
 
                     logger.info("already scheduled jobName {}", jobName);
-
                 }
             }
         } catch (SchedulerException e) {
             e.printStackTrace();
         }
 
-        // schedule or unschedule KPI jobs if not done yet
-        for(JobDetail job : jobList) {
+        // Schedule or unschedule KPI jobs if not done yet
+        for (JobDetail job : jobList) {
             try {
-                if(!scheduledJobList.contains(job.getKey().getName()))
+                if (!scheduledJobList.contains(job.getKey().getName()))
                 {
-                    if(job.getJobDataMap().getInt("isRunning") == 1)
-                    {
+                    if (job.getJobDataMap().getInt("isRunning") == 1) {
                         logger.info("scheduling job: kpiJobName_{}", job.getJobDataMap().getString("kpiName"));
                         ScheduleJob(job);
                     }
                 } else {
-
-                    // check any changes in the KPI job definition
+                    // Check any changes in the KPI job definition
                     JobDetail sJD = alreadyScheduledJobList.get("kpiJobName_" + job.getJobDataMap().getString("kpiName"));
-                    if(!job.getJobDataMap().getString("cron").equals(sJD.getJobDataMap().getString("cron"))) {
+                    if (!job.getJobDataMap().getString("cron").equals(sJD.getJobDataMap().getString("cron"))) {
                         logger.info("rescheduling job: kpiJobName {} , new cron: {}",
                                 job.getJobDataMap().getString("kpiName"), job.getJobDataMap().getString("cron"));
                         UnscheduleJob(job.getJobDataMap().getString("kpiName"));
                         ScheduleJob(job);
                     }
 
-                    if(job.getJobDataMap().getInt("isRunning") == 0) {
+                    if (job.getJobDataMap().getInt("isRunning") == 0) {
                         logger.info("Unscheduling: kpiJobName {}" + job.getJobDataMap().getString("kpiName"));
                         UnscheduleJob(job.getJobDataMap().getString("kpiName"));
                     }
@@ -256,24 +255,21 @@ public class KPIObserverJob implements Job {
             }
         }
 
-        // Finally uncshedule deleted jobs if they are not listed anymore
-        for(String kpiName : scheduledJobList)
-        {
+        // Finally unschedule deleted jobs if they are not listed anymore
+        for (String kpiName : scheduledJobList) {
             boolean unschedule = true;
-            if(!kpiName.equals("observerJob")) {
-
+            if (!kpiName.equals("observerJob")) {
                 JobDetail toBeRemovedJob = null;
-                for(JobDetail jdetail : jobList) {
-                    if(jdetail.getKey().getName().equals(kpiName)) {
+                for (JobDetail jdetail : jobList) {
+                    if (jdetail.getKey().getName().equals(kpiName)) {
                         unschedule = false;
                     }
                 }
 
-                if(unschedule) {
+                if (unschedule) {
                     logger.info("Unscheduling: " + "kpiJobId" + kpiName.split("_")[1]);
                     UnscheduleJob(kpiName.split("_")[1]);
                 }
-
             }
         }
     }
@@ -281,7 +277,7 @@ public class KPIObserverJob implements Job {
     private static final Type KPI_JSON_TYPE = new TypeToken<List<KPI_JSON>>() {}.getType();
 
     /**
-     * Create Quartz-Scheduler jobs from the job records read from a datasource
+     * Create Quartz Scheduler jobs from the job records read from a data source
      */
     private void CreateJobs() {
 
@@ -311,7 +307,6 @@ public class KPIObserverJob implements Job {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     /**
@@ -333,8 +328,7 @@ public class KPIObserverJob implements Job {
      * Unschedule a job
      * @param kpiName
      */
-    private void UnscheduleJob(String kpiName)
-    {
+    private void UnscheduleJob(String kpiName) {
         TriggerKey tk = new TriggerKey("kpiJobName_" + kpiName + "_trigger", "kpigroup");
         try {
             kpiScheduler.unscheduleJob(tk);
@@ -343,22 +337,18 @@ public class KPIObserverJob implements Job {
             e.printStackTrace();
         }
     }
-
 }
 ```
 
+#### Business Jobs
 
-### Business Jobs
+Business jobs, as suggested in the model, can be any schedulable jobs. Managing/​updating the business jobs frequently is a key point here. As the enterprise demands grow and change continuously, KPIs are generated at intervals (daily, weekly, monthly, etc.) and for frequent notification needs this kind of scheduling job management can be an important part of a solution.
 
-Business jobs, as suggested in the model, can be any schedulable jobs. In this project I used a KPI use-case and as a very promising business case in enterprise environments. Managing/updating the business jobs frequently is a key point here. As the enterprise demands grow and change continuously, KPIs generates every intervals (daily, weekly, monthly etc.) and frequent notifications need stands there all the time this kind of scheduling job management can be an important part of a solution.
+Here I created `KPIJSONJob` as my business job:
 
-Here I created `KPIJSONJob` as my business job.
-
-```Java
+```java
 public class KPIJSONJob implements Job {
-
     private static final Logger logger = LoggerFactory.getLogger(KPIJSONJob.class);
-
     private KPI_JSON kpi;
 
     @Override
@@ -391,11 +381,11 @@ public class KPIJSONJob implements Job {
 }
 ```
 
-### Running this Solution
+#### Running this Solution
 
-Let's give it a try and see it in action. Say we have the `kpi.json` as our job storage has the following KPI jobs defined:
+Let's give it a try and see it in action. Say we have the `kpi.json` as our job storage, with the following KPI jobs defined:
 
-```JSON
+```json
 [
   {
     "name": "critical_ticket_count",
@@ -422,18 +412,17 @@ Let's give it a try and see it in action. Say we have the `kpi.json` as our job 
 
 When we run the Spring application it starts logging like below:
 
-```shell
+```plain
 2022-04-11 13:48:12.354  INFO 13033 --- [eduler_Worker-1] com.example.qscheduler.KPIObserverJob    : Found KPI in kpi.json: critical_ticket_count , enabled: 0
 2022-04-11 13:48:12.355  INFO 13033 --- [eduler_Worker-1] com.example.qscheduler.KPIObserverJob    : Found KPI in kpi.json: failed_customer_api_call , enabled: 0
 2022-04-11 13:48:12.355  INFO 13033 --- [eduler_Worker-1] com.example.qscheduler.KPIObserverJob    : already scheduled jobName observerJob
 ```
 
-Initially I set the `isRunning` attribute of those KPI jobs to 0 and my scheduler service is not scheduling them. My KPIObserverJob triggers every 10 seconds because I set to trigger that way in `KPIJobWatcher`.
+Initially I set the `isRunning` attribute of those KPI jobs to 0 and my scheduler service is not scheduling them. My KPIObserverJob triggers every 10 seconds because I set it to trigger that way in `KPIJobWatcher`.
 
 Now let's see if I update `critical_ticket_count` KPI's `isRunning` value to 1:
 
-
-```shell
+```plain
 2022-04-11 13:52:32.347  INFO 13033 --- [eduler_Worker-7] com.example.qscheduler.KPIObserverJob    : Found KPI in kpi.json: critical_ticket_count , enabled: 1
 2022-04-11 13:52:32.348  INFO 13033 --- [eduler_Worker-7] com.example.qscheduler.KPIObserverJob    : Found KPI in kpi.json: failed_customer_api_call , enabled: 0
 2022-04-11 13:52:32.348  INFO 13033 --- [eduler_Worker-7] com.example.qscheduler.KPIObserverJob    : already scheduled jobName observerJob
@@ -444,7 +433,7 @@ As you can see from the logs `ObserverJob` noticed the enabled job and scheduled
 
 Let's change the `cron` scheduling rule of `critical_ticket_count` job to `0 0 3 ? * * *` and see the logs again:
 
-```shell
+```plain
 2022-04-11 13:55:12.354  INFO 13033 --- [eduler_Worker-3] com.example.qscheduler.KPIObserverJob    : Found KPI in kpi.json: critical_ticket_count , enabled: 1
 2022-04-11 13:55:12.355  INFO 13033 --- [eduler_Worker-3] com.example.qscheduler.KPIObserverJob    : Found KPI in kpi.json: failed_customer_api_call , enabled: 0
 2022-04-11 13:55:12.356  INFO 13033 --- [eduler_Worker-3] com.example.qscheduler.KPIObserverJob    : already scheduled jobName observerJob
@@ -452,11 +441,14 @@ Let's change the `cron` scheduling rule of `critical_ticket_count` job to `0 0 3
 2022-04-11 13:55:12.356  INFO 13033 --- [eduler_Worker-3] com.example.qscheduler.KPIObserverJob    : rescheduling job: kpiJobName critical_ticket_count , new cron: 0 0 3 ? * * *
 ```
 
-Observer job now rescheduled the job that we changed its cron rule. These are all how we make observer job manage the KPI business jobs. If you have more attributes and if you want your observer job to reschedule or perform different operations on business job definition updates you should enrich your `ObserverJob`.
+The Observer job now rescheduled the job since we changed its cron rule. These are all how we make observer job manage the KPI business jobs. If you have more attributes and if you want your observer job to reschedule or perform different operations on business job definition updates you should enrich your `ObserverJob`.
 
+### Extend by Creating a Management UI
 
-### Extend By Creating a Managing UI and Conclusion
+Managing the scheduler jobs using a UI is not in the scope of this post. But that is not much different than managing any data on a web application. I encourage you to do your own implementations if this solution sounds useful to you.
 
-Managing the scheduler jobs using a UI is not in the scope of this post. But that is not much different than managing any data on a web application or so. I encourage you to do your own implementations if this solution sounds useful to you.
-This solution helps you create your own scheduling job management solution on the fly and let's you create, update or delete the quartz-scheduler jobs dynamically.
+### Conclusion
+
+This solution helps you create your own scheduling job management solution on the fly and lets you create, update, or delete the Quartz Scheduler jobs dynamically.
+
 The complete implementation can be found in the [GitHub project](https://github.com/ashemez/QScheduler).
