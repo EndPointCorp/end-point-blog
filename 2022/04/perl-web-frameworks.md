@@ -12,7 +12,7 @@ tags:
 github_issue_number: 1858
 ---
 
-![Spider webs and spiders](/blog/2022/04/perl-frameworks/nature-wing-black-and-white-web-line-insect-1244977.webp)
+![Spider webs and spiders](/blog/2022/04/perl-web-frameworks/nature-wing-black-and-white-web-line-insect-1244977.webp)
 
 <!-- Photo: https://pxhere.com/en/photo/1244977 CC0 Public Domain -->
 
