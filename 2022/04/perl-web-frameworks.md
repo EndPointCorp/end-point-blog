@@ -1,41 +1,41 @@
 ---
 author: "Marco Pessotto"
-date: 2022-04-08
+date: 2022-04-19
 title: "Perl Web Frameworks"
 tags:
- - cgi
- - perl
- - web
- - mojolicious
- - catalyst
- - dancer
- - interchange
- - mvc
+- cgi
+- perl
+- mojolicious
+- catalyst
+- dancer
+- interchange
+github_issue_number: 1858
 ---
 
-![Cobweb](/blog/2022/04/perl-frameworks/nature-wing-black-and-white-web-line-insect-1244977.jpeg)
+![Spider webs and spiders](/blog/2022/04/perl-frameworks/nature-wing-black-and-white-web-line-insect-1244977.webp)
 
 <!-- Photo: https://pxhere.com/en/photo/1244977 CC0 Public Domain -->
 
-
 ### CGI
 
-When I started programming, back in the day, CGI was still widely
+When I started programming, back in the day, CGI (the Common Gateway Interface) was still widely
 used. Usually the Apache webserver would just execute a script or a
 binary with some environment variables set and serve whatever the
 executable sent to the standard output, while keeping the standard
-error in the logs (this simple and straightforward mechanism can still
+error in the logs.
+
+This simple and straightforward mechanism can still
 be used for small programs, but larger applications usually want to
-save the start-up time and live longer than just a request).
+save the start-up time and live longer than just a single request.
 
 At that time Perl was used far more often than now, and it had (and still
 has) the [CGI.pm](https://metacpan.org/pod/CGI) module to help the
 programmer to get the job done.
 
-```
+```perl
 #!/usr/bin/env perl
 
-use utf8; 
+use utf8;
 use strict;
 use warnings;
 use CGI;
@@ -49,7 +49,7 @@ print "\n";
 
 And it will output:
 
-```
+```plain
 ./cgi.pl
 Content-Type: text/html; charset=ISO-8859-1
 
@@ -57,7 +57,7 @@ Content-Type: text/html; charset=ISO-8859-1
 ```
 
 Here the script mixes logic and formatting and the encoding it
-produces by default tells us that this comes from another age... But
+produces by default tells us that this comes from another age. But
 if you want something which is seldom used and gets executed on demand
 without persisting in the machine’s memory, this is still an option.
 
@@ -82,7 +82,7 @@ offer.
 Let’s hack an app in a couple of minutes in a single file, like during
 the CGI days:
 
-```
+```perl
 #!/usr/bin/env perl
 use utf8;
 use strict;
@@ -101,19 +101,18 @@ app->start;
 __DATA__
 @@ index.html.ep
 Hello <%= $name %>
-
 ```
 
-Here the structure is a bit different. 
+Here the structure is a bit different.
 
-First, there’s a Domain Specific Language (DSL) to give you some sugar
-(this is the “Lite” version, while the well-structured Mojolicious one
-prefers to write class methods) and declare that the root (`/`) of your
+First, there’s a Domain Specific Language (DSL) to give you some sugar.
+This is the “Lite” version, while in a well-structured Mojolicious app one
+prefers to write class methods. We declare that the root (`/`) URL path of the
 application is going to execute some code. It populates the “stash”
 with some variables, and finally renders a template which can access
 the stashed variables. If you execute the script, you get:
 
-```
+```plain
 ./mojo.pl cgi 2> /dev/null
 Status: 200 OK
 Content-Length: 12
@@ -123,9 +122,9 @@ Content-Type: text/html;charset=UTF-8
 Hello Marco
 ```
 
-The logging in the standard error is:
+The logging to the standard error stream is:
 
-```
+```plain
 [2022-04-08 14:33:52.92508] [163133] [debug] [82ae3iV2] GET "/"
 [2022-04-08 14:33:52.92532] [163133] [debug] [82ae3iV2] Routing to a callback
 [2022-04-08 14:33:52.92565] [163133] [debug] [82ae3iV2] Rendering template "index.html.ep" from DATA section
@@ -136,11 +135,11 @@ This is basically what a modern framework is supposed to do.
 
 The nice thing in this example is that we created a single-file
 prototype and launched it as a CGI. But we can also launch it as
-daemon and visit the given address with a browser (which is how you
+daemon and visit the given address with a browser, which is how you
 should normally deploy it, usually behind a reverse proxy like
 [nginx](https://nginx.org/en/).
 
-```
+```plain
 ./mojo.pl daemon
 [2022-04-08 14:48:42.01827] [163409] [info] Listening at "http://*:3000"
 Web application available at http://127.0.0.1:3000
@@ -153,7 +152,7 @@ Web application available at http://127.0.0.1:3000
 If you want you can even launch it with HTTPS as well (please note the
 syntax to pass the certificates).
 
-```
+```sh
 ./mojo.pl daemon -l 'https://[::]:8080?cert=./ssl/fullchain.pem&key=./ssl/privkey.pem' -m production
 ```
 
@@ -168,7 +167,7 @@ Recently a legacy application needed to make some API calls. To speed up
 the process, we wanted to make the requests in parallel. And here’s
 the gist of the code:
 
-```
+```perl
 package MyApp::Async;
 
 # ... more modules here
@@ -179,7 +178,7 @@ use Mojo::Promise;
 # .... other methods here
 
 sub example {
-    my $email = 'test@example.com'
+    my $email = 'test@example.com';
     my $ua = Mojo::UserAgent->new;
     foreach my $list ($self->get_lists) {
         my $promise = $ua->post_p($self->_url("/api/v2/endpoint/$list->{code}"),
@@ -203,7 +202,7 @@ sub example {
 ```
 
 So a bunch of requests are run in parallel and then synced before
-returning. Does it remind you of Javascript? Of course. A lot of
+returning. Does it remind you of JavaScript? Of course. A lot of
 common paradigms taken from other languages and frameworks were
 implemented here, and you can find the best of them in this nice
 package.
@@ -232,11 +231,11 @@ on the contrary, it’s a specialized one, but it’s still a framework and
 you can still do things in a maintainable fashion. The key is using
 the so-called action maps:
 
-```
+```plain
 ActionMap jump <<EOR
 sub {
     # get the path parameters
-    my ($action, @args) = split(/\//, shift); 
+    my ($action, @args) = split(/\//, shift);
 
     # get the query/body parameters
     my $param = $CGI->{param};
@@ -250,21 +249,28 @@ sub {
     # or serve a file
     $Tag->deliver({ type => 'text/plain', body => $bigfile });
 
-    # or populate the "stash" and serve a template page in pages/test.html
-
+    # or populate the "stash" and serve a template page
     $Tag->tmp(stash_variable => "Marco");
-    # and in test.html "<p>Hello [scratch stash_variable]</p>
-    $CGI->{mv_nextpage} = "test.html"
+    $CGI->{mv_nextpage} = "test.html";
 }
 EOR
 ```
 
+In `pages/test.html` you would put this template:
+
+```html
+<p>Hello [scratch stash_variable]</p>
+```
+
 Now, I can’t show you a simple script which demonstrates this and
-you’ll have to take my word for it (we can’t go through the
-installation process for a demo). Interchange is old, and it shows its
-years, but it is actively maintained. It lacks many of the Mojo’s
-goodies, *but* you can still do things in a reasonable way. The key is
-to use the so-called action maps. In the example the code will execute
+you’ll have to take my word for it since we can’t go through the
+installation process here for a demo.
+
+Interchange is old, and it shows its
+years, but it is actively maintained. It lacks many of Mojo’s
+goodies, *but* you can still do things in a reasonable way.
+
+In the example the code will execute
 when a path starting with `/jump/` is requested. The whole path is
 passed to the routine, so you can split at `/`, apply your logic, and
 finally either set `$CGI->{mv_nextpage}` to a file in the `pages`
@@ -285,29 +291,29 @@ are often ported to Perl, and this is no exception.
 
 Let’s see it in an action:
 
-```
+```perl
 #!/usr/bin/env perl
 use strict;
 use warnings;
 use Dancer2;
- 
+
 get '/' => sub {
     my $name = "Marco";
     return "Hello $name\n";
 };
- 
+
 start;
 ```
 
 Start the script:
 
-```
+```plain
 Dancer2 v0.400000 server 22969 listening on http://0.0.0.0:3000
 ```
 
 Try it with `curl`:
 
-```
+```plain
 $ curl -D - http://0.0.0.0:3000
 HTTP/1.0 200 OK
 Date: Mon, 11 Apr 2022 07:22:18 GMT
@@ -321,8 +327,7 @@ Hello Marco
 
 If in the script you say `use Dancer;` instead of `use Dancer2`, you get:
 
-
-```
+```plain
 $ curl -D - http://0.0.0.0:3000
 HTTP/1.0 200 OK
 Server: Perl Dancer 1.3513
@@ -333,8 +338,8 @@ X-Powered-By: Perl Dancer 1.3513
 Hello Marco
 ```
 
-The Dancer’s core doesn’t do much more than routing. And you’ll also
-notice that the syntax is very similar to Mojolicious::Lites. So to
+Dancer’s core doesn’t do much more than routing. And you’ll also
+notice that the syntax is very similar to Mojolicious::Lite. So to
 get something done you need to start installing plugins which will
 provide the needed glue to interact with a database, work with your
 template system of choice, and more.
@@ -343,38 +348,36 @@ Today you would wonder why you should use Dancer and not Mojolicious,
 but when Dancer was at the peak of its popularity the games were still
 open. There were plenty of plugins being written and published on CPAN.
 
-Now, it was probably around 2013 when the Dancer’s development team
-decided to rewrite it to make it better. The problem was that plugins
-and templates needed to be adapted as well.
-
-I’m under the impression that the energy got divided and the momentum
-was lost. Now there are two codebases and two plugin namespaces which
-do basically the same thing, because for the end user there is not
-much difference.
+Around 2013 Dancer’s development team decided to rewrite it to make
+it better. The problem was that plugins and templates needed to be
+adapted as well. I’m under the impression that the energy got divided
+and the momentum was lost. Now there are two codebases and two
+plugin namespaces which do basically the same thing, because for
+the end user there is not much difference.
 
 ### Catalyst
 
 So what was attracting people to Dancer? When Dancer came out, Perl
 had a great MVC framework, which is still around,
-[Catalyst](http://catalyst.perl.org/) (please note that the main
-Mojolicious developer was in the Catalyst team).
+[Catalyst](http://catalyst.perl.org/). (And note that the main
+Mojolicious developer was on the Catalyst team.)
 
 Now, the problem is that to get started with Catalyst, even if it has
 plenty of documentation, you need to be already acquainted with a lot
 of concepts and technologies. For example, the
 [tutorial](https://metacpan.org/dist/Catalyst-Manual/view/lib/Catalyst/Manual/Tutorial/03_MoreCatalystBasics.pod)
 starts to talk about
-[TemplateToolkit](http://www.template-toolkit.org/) and
-[DBIC](https://metacpan.org/pod/DBIx::Class) very early.
+[Template Toolkit](http://www.template-toolkit.org/) and
+the [DBIx::Class](https://metacpan.org/pod/DBIx::Class) ORM very early.
 
 These two modules are great and powerful and they deserve to be
 studied, but for someone new to modern web development, or even to
 Perl, it feels (and actually is) overwhelming.
 
 So, why would you choose Catalyst today? Catalyst has the stability
-which Mojo, at least at the beginning, lacked, while the
-back-compatibility is a priority for Catalyst. The other way to look
-at this is that Catalyst doesn’t see much
+which Mojo, at least at the beginning, lacked, while
+backward compatibility is a priority for Catalyst. The other way to look
+at this is that Catalyst doesn’t see much current
 [development](https://metacpan.org/dist/Catalyst-Runtime/changes), but
 someone could see this as a feature.
 
@@ -383,8 +386,7 @@ it’s still a modern framework, and a good one. I can’t show you a self
 contained script (you need a tree of files), but I’d like to show you
 what makes it very nice and powerful:
 
-
-```
+```perl
 package MyApp::Controller::Root;
 
 use Moose;
@@ -397,43 +399,44 @@ sub foo :Chained('/') CaptureArgs(1) {
     my ($self, $c, $arg) = @_;
     $c->stash(name => "$arg");
 }
- 
+
 # /foo/XX/bar/YY
 sub bar :Chained('foo') Args(1) {
-    my ($self, $c, $arg ) = @_;
+    my ($self, $c, $arg) = @_;
     $c->detach($c->view('JSON'));
 }
 
-# /foo/XX/another/YY 
+# /foo/XX/another/YY
 sub another :Chained('foo') Args(1) {
-    my ($self, $c, $arg ) = @_;
+    my ($self, $c, $arg) = @_;
     $c->detach($c->view('HTML'));
 }
 ```
 
 So, if you hit `/foo/marco/bar/test` the second path fragment will be
-processed by the first method (`CapturedArgs(1)`) and saved in the
+processed by the first method (`CaptureArgs(1)`) and saved in the
 stash. Then the second `bar` method will be chained to it and the
 `name` will be available in the stash. The last method will be hit
 with `/foo/marco/another/test2`. (Incidentally, please note that
 Mojolicious has
 [nested](https://docs.mojolicious.org/Mojolicious/Guides/Routing#Nested-routes)
-routes as well).
+routes as well.)
 
 Now, I think it’s clear that in this way you can build deep hierarchies
 of paths with reusable components. This works really great with the
-[DBIx::Class](https://metacpan.org/pod/DBIx::Class) ORM, where you can
+DBIx::Class ORM, where you can
 chain queries as well. As you can imagine, this is far from a simple
 setup. On the contrary, this is an advanced setup for people who
 already know their way around web frameworks.
 
 ### Conclusion
 
-So, to sum up this excursion in the amazing land of the Perl web
-frameworks: if you build something from scratch, go with Mojolicious,
-it’s your best bet. If nothing else, it’s super-easy to install, with
-basically no dependencies. However, there’s no need to make a religion
+So, to sum up this excursion in the amazing land of Perl web
+frameworks: If you build something from scratch, go with Mojolicious.
+It’s your best bet. If nothing else, it’s super-easy to install, with
+basically no dependencies.
+
+However, there’s no need to make a religion
 out of it. Rewriting code without a clear gain is a waste of time and
 money. A good developer should still be able to write maintainable
 code with the existing tools.
-
