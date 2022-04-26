@@ -1,6 +1,6 @@
 ---
 author: Jon Jensen
-title: Creating a PL/Perl RPM linked against a custom Perl build
+title: Creating a PL/Perl RPM linked against a custom Perl build (updated)
 github_issue_number: 78
 tags:
 - perl
