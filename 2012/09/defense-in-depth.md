@@ -4,6 +4,7 @@ title: Defense in Depth
 github_issue_number: 698
 tags:
 - security
+- backups
 date: 2012-09-28
 ---
 

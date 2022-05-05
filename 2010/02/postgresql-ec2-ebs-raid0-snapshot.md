@@ -9,6 +9,7 @@ tags:
 - hosting
 - postgres
 - scalability
+- backups
 date: 2010-02-23
 ---
 
