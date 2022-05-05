@@ -22,10 +22,10 @@ In a couple recent articles, I wrote about the first steps for developing an eco
 </tr>
 <tr>
 <td valign="top">
-In the <a href="/blog/2011/01/sinatra-ecommerce-tutorial">first article</a>, a single table data model existed with a couple of Sinatra methods defined.
+In the <a href="/blog/2011/01/sinatra-ecommerce-tutorial/">first article</a>, a single table data model existed with a couple of Sinatra methods defined.
 </td>
 <td valign="top">
-In the <a href="/blog/2011/01/ruby-ecommerce-sinatra-products-admin">second article</a>, users and products were introduced to the data model. The Sinatra app still has minimal customer-facing routes (get "/", post "/") defined, but also introduces backend admin management to view orders and manage products.
+In the <a href="/blog/2011/01/ruby-ecommerce-sinatra-products-admin/">second article</a>, users and products were introduced to the data model. The Sinatra app still has minimal customer-facing routes (get "/", post "/") defined, but also introduces backend admin management to view orders and manage products.
 </td>
 </tr>
 <tr>
