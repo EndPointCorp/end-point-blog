@@ -38,8 +38,8 @@ We at End Point have always believed in the ability of the immersive Liquid Gala
 
 - Kiel Christofferson — Was handed the custom programming requirements with only days to go before delivery and built the touchscreen interface and many of the individual tours.
 
-- [Josh Tolley](/team/josh-tolley) — Pitched in with some work in Kamelopard, the fly-to authoring and management tool developed by End Point.
+- [Josh Tolley](/team/josh-tolley/) — Pitched in with some work in Kamelopard, the fly-to authoring and management tool developed by End Point.
 
-- [Adam Vollrath](/blog/authors/adam-vollrath) — Joined Marco and Gerard to clean up some slight network issues on the morning of the expo at the venue and then it was SHOWTIME!
+- [Adam Vollrath](/blog/authors/adam-vollrath/) — Joined Marco and Gerard to clean up some slight network issues on the morning of the expo at the venue and then it was SHOWTIME!
 
 The Expo opened July 13 running through Aug 1 at the TransAmerica Center in Sao Paulo and the Liquid Galaxy is dazzling and amazing as usual. Kids, adults, and everyone in-between is seeing the magic of our planet as they zoom from location to location. We’re proud of this opportunity to continue working with Google and to add Disney to our list of Liquid Galaxy deployments!

@@ -11,7 +11,7 @@ date: 2009-09-24
 
 First of all, if you’re not using [GNU Screen](http://www.gnu.org/software/screen/), start now :).
 
-Years ago, [Jon](/team/jon-jensen) and I spoke of submitting patches to implement some form of “follow the leader” (like the children’s game, but with a work-specific purpose) in GNU Screen. This was around the time he was patching screen to raise the hard-coded limit of 40 windows allowed within a given session, which might give an idea of how much screen gets used around here (a lot).
+Years ago, [Jon](/team/jon-jensen/) and I spoke of submitting patches to implement some form of “follow the leader” (like the children’s game, but with a work-specific purpose) in GNU Screen. This was around the time he was patching screen to raise the hard-coded limit of 40 windows allowed within a given session, which might give an idea of how much screen gets used around here (a lot).
 
 The basic idea was that sometimes we just want to “watch” a co-worker’s process as they’re working on something within a shared screen session. Of course, they’re going to be switching between screen windows and if they forget to announce “I’ve switched to screen 13!” on the phone, then one might quickly become lost. What if the cooperative work session doesn’t include a phone call at all?
 

@@ -9,7 +9,7 @@ date: 2016-01-13
 
 <div class="separator" style="clear: both; float:right; text-align: center;"><a href="/blog/2016/01/mediawiki-major-upgrade-process/image-0-big.jpeg" id="jA0ECgMCAgq+j/dF5fVg0p8B+8AMgSoFokDOSe5KCFaxWZJhpt3VCeVufE4QxYsVo4JdJsN/neWFX+7wvaOGwJ4PWGvCJkIhTWbhp40tAbTL4uxmK3Qn7vru5vFtQvwJab4uSmKNp+lG4rTqWrHU2gi0wLlpFCKQ7WabVQ5cAdwwUInGP/13zrBj9J0Cg9FAZVjb5M9qFDNl6kip6Gg8dl5IXp+PKyhRd09Nng4yBKM==zRAb" imageanchor="1" style="clear: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" src="/blog/2016/01/mediawiki-major-upgrade-process/image-0.jpeg"/></a><br/><small><a href="https://flic.kr/p/26krAr">Flower photo</a> by <a href="https://www.flickr.com/photos/mayrace/">May Race</a></small></div>
 
-Keeping your MediaWiki site up to date with the latest version is, like many sysadmin tasks, a never-ending chore. In a previous article I covered how to [upgrade minor revisions of MediaWiki with patches.](/blog/2014/10/mediawiki-minor-upgrade-with-patches) In this one, I’ll cover my solution to doing a “major” upgrade to MediaWiki. While the [official upgrade instructions](https://www.mediawiki.org/wiki/Manual:Upgrading) are good, they don’t cover everything.
+Keeping your MediaWiki site up to date with the latest version is, like many sysadmin tasks, a never-ending chore. In a previous article I covered how to [upgrade minor revisions of MediaWiki with patches.](/blog/2014/10/mediawiki-minor-upgrade-with-patches/) In this one, I’ll cover my solution to doing a “major” upgrade to MediaWiki. While the [official upgrade instructions](https://www.mediawiki.org/wiki/Manual:Upgrading) are good, they don’t cover everything.
 
 MediaWiki, like Postgres, uses a three-section version number in which the first two 
 numbers combined give the major version, and the number on the end the revision of 
@@ -20,7 +20,7 @@ software changes, whereas a minor update (in which only the revision changes) si
 provides bug fixes.
 
 The first step to a major MediaWiki upgrade is to try it on a cloned, test version of your wiki.
-See [this article](/blog/2015/06/mediawiki-complete-test-wiki-via-cloning) on how to make such a clone. Then run through the steps below to find any problems 
+See [this article](/blog/2015/06/mediawiki-complete-test-wiki-via-cloning/) on how to make such a clone. Then run through the steps below to find any problems 
 that may crop up. When done, run through again, but this time on the actual live site.
 For this article, we will use MediaWiki installed in **~intranet/htdocs/mediawiki**, and 
 going from version 1.25.3 to 1.26.2

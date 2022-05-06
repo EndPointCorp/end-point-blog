@@ -24,10 +24,10 @@ The Series Digital team began working at End Point on April 3rd, 2017.
 
 The CEO of Series Digital is Jonathan Blessing. He joins End Point’s leadership team as  Director of Client Engagements. End Point has had a relationship with Jonathan since 2010, and looks forward with great anticipation to the role he will play expanding End Point’s consulting business.
 
-To help support End Point’s expansion into .NET solutions, End Point has hired [Dan Briones](/team/dan-briones), a 25-year veteran of IT infrastructure engineering, to serve as Project and Team Manager for the Series Digital group. Dan started working with End Point at the end of March.
+To help support End Point’s expansion into .NET solutions, End Point has hired [Dan Briones](/team/dan-briones/), a 25-year veteran of IT infrastructure engineering, to serve as Project and Team Manager for the Series Digital group. Dan started working with End Point at the end of March.
 
 The End Point leadership team is very excited by the addition of Dan, Jonathan, and the rest of the talented Series Digital team: Jon Allen, Ed Huott, Dylan Wooters, Vasile Laur, Liz Flyntz, Andrew Grosser, William Yeack, and Ian Neilsen.
 
 End Point’s reputation has been built upon its excellence in e-commerce, managed infrastructure, and database support. We are excited by the addition of Series Digital, which both deepens those abilities, and allows us to offer new services.
 
-[Talk to us](/contact) to hear about the new ways we can help you!
+[Talk to us](/contact/) to hear about the new ways we can help you!

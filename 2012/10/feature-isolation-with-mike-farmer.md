@@ -121,4 +121,4 @@ FastModel and the stubbing library are included as part of cucumber_tool's [no_r
 cucumber -r no_rails.rb path/to/feature.feature
 ```
 
-Mike recommends avoiding the standard env.rb usage of cucumber to avoid loading Rails until you need it later. Mike says these tools were thrown together very quickly to capture the concept of "Feature Isolation" so any pull requests would be greatly appreciated. For more details, please visit Mike's [follow up article](/blog/2012/10/feature-isolation-overview).
+Mike recommends avoiding the standard env.rb usage of cucumber to avoid loading Rails until you need it later. Mike says these tools were thrown together very quickly to capture the concept of "Feature Isolation" so any pull requests would be greatly appreciated. For more details, please visit Mike's [follow up article](/blog/2012/10/feature-isolation-overview/).

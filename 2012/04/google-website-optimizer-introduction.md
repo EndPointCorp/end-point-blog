@@ -9,7 +9,7 @@ tags:
 date: 2012-04-17
 ---
 
-On End Point’s website, [Jon](/team/jon-jensen) and I recently discussed testing out use of Google Website Optimizer to run a few A/B tests on content and various website updates. I’ve worked with a couple of clients who use Google Website Optimizer, but I’ve never installed it from start to finish. Here are a few basic notes that I made during the process.
+On End Point’s website, [Jon](/team/jon-jensen/) and I recently discussed testing out use of Google Website Optimizer to run a few A/B tests on content and various website updates. I’ve worked with a couple of clients who use Google Website Optimizer, but I’ve never installed it from start to finish. Here are a few basic notes that I made during the process.
 
 ### What’s the Point?
 

@@ -8,7 +8,7 @@ tags:
 date: 2013-07-25
 ---
 
-PostgreSQL has huge support for JSON type, [ like I wrote recently](/2013/06/postgresql-as-nosql-with-data-validation.html). It also has some operators for converting data to and from JSON, and the JSON type itself is great for ensuring that the JSON stored in database is always valid.
+PostgreSQL has huge support for JSON type, [ like I wrote recently](/blog/2013/06/postgresql-as-nosql-with-data-validation/). It also has some operators for converting data to and from JSON, and the JSON type itself is great for ensuring that the JSON stored in database is always valid.
 
 ### Pretty Printing JSON
 

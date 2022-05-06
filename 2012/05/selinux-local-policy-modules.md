@@ -13,7 +13,7 @@ date: 2012-05-11
 
 If you don’t want to use SELinux, fair enough. But I find many system administrators would like to use it but get flustered at the first problem it causes, and disable it. That’s unfortunate, because often it’s simple to customize SELinux policy by creating what’s known as a local policy module. That way you allow the actions you need while retaining the added security SELinux brings to the system as a whole.
 
-A few years ago my co-worker [Adam Vollrath](/blog/authors/adam-vollrath) wrote an [article on this same subject](/blog/2010/10/selinux-httpd-modwsgi-26-rhel-centos-5) for Red Hat Enterprise Linux (RHEL) 5, and went into more detail on SELinux file contexts, booleans, etc. I recently went through the process of building an SELinux local policy module on RHEL 6 and RHEL 7 mail servers and found a few differences and want to document some of the details here. This applies to RHEL 5, RHEL 6, and RHEL 7, and near relatives CentOS, Scientific Linux, et al.
+A few years ago my co-worker [Adam Vollrath](/blog/authors/adam-vollrath/) wrote an [article on this same subject](/blog/2010/10/selinux-httpd-modwsgi-26-rhel-centos-5/) for Red Hat Enterprise Linux (RHEL) 5, and went into more detail on SELinux file contexts, booleans, etc. I recently went through the process of building an SELinux local policy module on RHEL 6 and RHEL 7 mail servers and found a few differences and want to document some of the details here. This applies to RHEL 5, RHEL 6, and RHEL 7, and near relatives CentOS, Scientific Linux, et al.
 
 ### When under pressure …
 

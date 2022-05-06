@@ -210,6 +210,6 @@ Another tool for the toolbag!
 
 <hr>
 
-<a name="footnote1"></a>[1 (back)](#jump1): [Improving max() performance in PostgreSQL: GROUP BY vs. CTE](/blog/2020/06/postgresql-improve-group-by-max-performance)
+<a name="footnote1"></a>[1 (back)](#jump1): [Improving max() performance in PostgreSQL: GROUP BY vs. CTE](/blog/2020/06/postgresql-improve-group-by-max-performance/)
 
 <a name="footnote2"></a>[2 (back)](#jump2): See [nerdsniping](https://xkcd.com/356/)

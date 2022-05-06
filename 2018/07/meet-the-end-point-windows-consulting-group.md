@@ -33,4 +33,4 @@ Charles has 21 years of experience in IT ranging from managing Windows infrastru
 
 Chris has 10 years of experience in IT, network support, and development. He has extensive cross-platform development and hardware knowledge. Chris excels at mail migrations, Active Directory and Windows Server environments, site-to-site website migrations, and cloud-based phone systems.
 
-Learn more about the [services our Windows consulting group offers](/technology/windows-systems-consulting) and talk to us today about how we can help you too!
+Learn more about the [services our Windows consulting group offers](/expertise/windows-systems/) and talk to us today about how we can help you too!

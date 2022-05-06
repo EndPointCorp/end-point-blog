@@ -13,7 +13,7 @@ tags:
 date: 2015-01-12
 ---
 
-This is the second part of an article about the conference [Open Source India](https://opensourceindia.in/osidays/), 2014 was held at Bengaluru, India. The first part is available [here](/blog/2014/11/mongodb-and-openstack-osi-days-2014). The second day of the conference started with the same excitement level. I plan to attend talks covering Web, Big Data, Logs monitoring and Docker.
+This is the second part of an article about the conference [Open Source India](https://opensourceindia.in/osidays/), 2014 was held at Bengaluru, India. The first part is available [here](/blog/2014/11/mongodb-and-openstack-osi-days-2014/). The second day of the conference started with the same excitement level. I plan to attend talks covering Web, Big Data, Logs monitoring and Docker.
 
 ### Web Personalisation
 

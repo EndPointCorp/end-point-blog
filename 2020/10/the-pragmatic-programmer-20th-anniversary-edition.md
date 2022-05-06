@@ -19,7 +19,7 @@ For its 20th anniversary in 2019, Dave and Andy created a new edition. They upda
 
 ### A classic
 
-This book is part of our company’s [“work philosophy canon”](/blog/2018/05/work-philosophy-canon) that I ask every software developer at End Point to read, so for that reason and others I wanted to be familiar with the new edition and make sure it is still something I want to recommend so broadly.
+This book is part of our company’s [“work philosophy canon”](/blog/2018/05/work-philosophy-canon/) that I ask every software developer at End Point to read, so for that reason and others I wanted to be familiar with the new edition and make sure it is still something I want to recommend so broadly.
 
 The book is also required reading for university courses at Cornell ([CS 3110: Data Structures and Functional Programming](https://www.cs.cornell.edu/courses/cs3110/2020sp/reflections.html)) and the University of Washington ([CSE 331: Software Design and Implementation](https://courses.cs.washington.edu/courses/cse331/19au/quizzes.html)), probably among others!
 
@@ -161,4 +161,4 @@ Thanks, Andy & Dave!
 #### Book pages
 
 * [The Pragmatic Programmer, 20th Anniversary Edition](https://pragprog.com/titles/tpp20/the-pragmatic-programmer-20th-anniversary-edition/) book home page, errata, source code downloads, and links to buy
-* [Practices of an Agile Developer](https://pragprog.com/titles/pad/practices-of-an-agile-developer/) book home page, samples, pull-out card, and [review by Ethan Rowe](/blog/2006/06/review-practices-of-agile-developer)
+* [Practices of an Agile Developer](https://pragprog.com/titles/pad/practices-of-an-agile-developer/) book home page, samples, pull-out card, and [review by Ethan Rowe](/blog/2006/06/review-practices-of-agile-developer/)

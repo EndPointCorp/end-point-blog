@@ -262,4 +262,4 @@ Below are some screenshots from the resulting app with shopping cart functionali
 </tr>
 </tbody></table>
 
-The code described in this article is part of an ongoing Sinatra based ecommerce application available [here](https://github.com/stephskardal/sinatrashop). The repository has several branches corresponding to the previous articles and potential future articles. I'd like thank [Jon](/team/jon-jensen) for contributing to the section in this article regarding cart storage options.
+The code described in this article is part of an ongoing Sinatra based ecommerce application available [here](https://github.com/stephskardal/sinatrashop). The repository has several branches corresponding to the previous articles and potential future articles. I'd like thank [Jon](/team/jon-jensen/) for contributing to the section in this article regarding cart storage options.

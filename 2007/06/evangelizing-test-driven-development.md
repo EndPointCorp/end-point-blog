@@ -8,7 +8,7 @@ tags:
 date: 2007-06-02
 ---
 
-I read [Practices of an Agile Developer](/page/news/technews/practices_of_agile_developer_review) shortly after it was published,
+I read [Practices of an Agile Developer](/page/news/technews/practices_of_agile_developer_review/) shortly after it was published,
 and I got pretty fired up about many ideas in it, with particular interest in test-driven development. From that point I did progressively more with testing in my day-to-day work, but everything changed for me once I went all-out and literally employed "test-driven development" for a minor project where I once wouldn't have worried about testing at all.
 
 If you're not familiar with the principle, it basically boils down to this: When you are developing something, write the tests first.

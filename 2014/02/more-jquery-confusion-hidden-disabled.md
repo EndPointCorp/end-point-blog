@@ -8,7 +8,7 @@ tags:
 date: 2014-02-24
 ---
 
-As you may have read in my [earlier post](/blog/2014/01/unbalanced-html-considered-harmful-for), I have a proclivity for stumbling into oddball bits of jQuery behavior. (Maybe it’s not just me.)
+As you may have read in my [earlier post](/blog/2014/01/unbalanced-html-considered-harmful-for/), I have a proclivity for stumbling into oddball bits of jQuery behavior. (Maybe it’s not just me.)
 
 Here’s another I discovered recently. I was debugging an odd AJAX bug in a form, one of those dynamically updating form widgets in a page:
 

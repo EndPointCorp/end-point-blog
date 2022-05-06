@@ -20,4 +20,4 @@ Clutch asked Josh and Lele about costs in utilizing cloud technologies. Lele exp
 
 Next, Josh and Lele were asked about how they go about choosing the right platform for projects. They made sure to stress that needs vary for every client, and that the right platform for one client may not be the right platform for another. The two agreed that AWS has at times been an appealing option due to its many features. For projects where fewer features are necessary and cost is tight, Rackspace has been a good option. Josh and Lele also touched on the support that the various cloud technologies offer, and their strengths and weaknesses. Finally, Josh and Lele were asked to rate different platforms in terms of functionality, ease of use, response time, whether they would recommend the service, and what their satisfaction level has been.
 
-If you’re interested in learning more about our cloud services, please [contact us here](/contact) for more information.
+If you’re interested in learning more about our cloud services, please [contact us here](/contact/) for more information.

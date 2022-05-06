@@ -37,4 +37,4 @@ While Etsy might offer a nice low-investment starting point, more exposure and m
 
 On the flip side, many of End Point clients have businesses that are further along and the more enterprisey versions or custom software development solutions make great sense for them, with or without in-house development staff.
 
-If you’re interested in finding out more about setting up a SaaS shop, moving away from Etsy, or understanding your options with Magento, [contact us](/contact) to find out how we can support your business goals. 
+If you’re interested in finding out more about setting up a SaaS shop, moving away from Etsy, or understanding your options with Magento, [contact us](/contact/) to find out how we can support your business goals. 

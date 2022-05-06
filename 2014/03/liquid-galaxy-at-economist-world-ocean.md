@@ -21,7 +21,7 @@ End Point had the distinct privilege of providing a Liquid Galaxy to the *Econom
 
 This deployment used a custom configuration with six large HDTVs arrayed in a curved 3x2 panorama. The Liquid Galaxy is able to show this content as a single large surface with geometrically-adjusted angles. In short, it’s like a bay window on a submarine. Viewers are able to navigate to different locations through a touchscreen interface, and then rotate and zoom in on detailed panoramic photos with a 6-axis controller.
 
-End Point enjoys a close working relationship with Google, and is happy to provide a Liquid Galaxy for such events. Our engineer [Neil](/team/neil-elliott) assembled a custom frame to hold the 3x2 screen configuration (deployed for the first time here), tested all devices, adjusted viewing angles, and then deployed and supported the full rig onsite at the Ritz-Carlton Hotel in Half Moon Bay.
+End Point enjoys a close working relationship with Google, and is happy to provide a Liquid Galaxy for such events. Our engineer [Neil](/team/neil-elliott/) assembled a custom frame to hold the 3x2 screen configuration (deployed for the first time here), tested all devices, adjusted viewing angles, and then deployed and supported the full rig onsite at the Ritz-Carlton Hotel in Half Moon Bay.
 
 <div class="separator" style="clear: both; text-align: center;">
 <a href="/blog/2014/03/liquid-galaxy-at-economist-world-ocean/image-1-big.jpeg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="/blog/2014/03/liquid-galaxy-at-economist-world-ocean/image-1.jpeg"/></a></div>

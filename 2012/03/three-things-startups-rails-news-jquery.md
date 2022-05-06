@@ -9,7 +9,7 @@ tags:
 date: 2012-03-23
 ---
 
-*I recently had a conversation with [Jon](/team/jon-jensen) about End Point blogging, microblogging, and tweeting. Many of us End Pointer’s have tips and tools that we encounter regularly that aren’t worthy of an entire blog post, but are worthy of sharing. Here’s my first attempt at sharing smaller bits of info – stay tuned to see how it works out.*
+*I recently had a conversation with [Jon](/team/jon-jensen/) about End Point blogging, microblogging, and tweeting. Many of us End Pointer’s have tips and tools that we encounter regularly that aren’t worthy of an entire blog post, but are worthy of sharing. Here’s my first attempt at sharing smaller bits of info – stay tuned to see how it works out.*
 
 ### 1. Paul Graham’s Ambitious Startup
 

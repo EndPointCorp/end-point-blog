@@ -13,7 +13,7 @@ tags:
 date: 2010-06-14
 ---
 
-Even more so than Rails 3, [NoSQL](https://en.wikipedia.org/wiki/NoSQL) was a popular technical topic at RailsConf this year. I haven’t had much exposure to NoSQL except for reading a few articles written by Ethan ([Quick Thoughts on NoSQL Live Boston Conference](/blog/2010/03/quick-thoughts-on-nosql-live-boston), [NoSQL Live: The Dynamo Derivatives (Cassandra, Voldemort, Riak)](/blog/2010/03/nosql-live-dynamo-derivatives-cassandra), and [Cassandra, Thrift, and Fibers in EventMachine](/blog/2010/05/cassandra-thrift-and-fibers-in)), so I attended a few sessions to learn more.
+Even more so than Rails 3, [NoSQL](https://en.wikipedia.org/wiki/NoSQL) was a popular technical topic at RailsConf this year. I haven’t had much exposure to NoSQL except for reading a few articles written by Ethan ([Quick Thoughts on NoSQL Live Boston Conference](/blog/2010/03/quick-thoughts-on-nosql-live-boston/), [NoSQL Live: The Dynamo Derivatives (Cassandra, Voldemort, Riak)](/blog/2010/03/nosql-live-dynamo-derivatives-cassandra/), and [Cassandra, Thrift, and Fibers in EventMachine](/blog/2010/05/cassandra-thrift-and-fibers-in/)), so I attended a few sessions to learn more.
 
 First, it was reinforced several times that if you can read JSON, you should have no problem comprehending NoSQL. So, it shouldn’t be too hard to jump into code examples! Next, I found it helpful when one of the speakers presented high-level categorization of NoSQL, whether or not the categories meant much to me at the time:
 

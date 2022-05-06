@@ -17,6 +17,6 @@ We partnered with system integrator [Pixel Projects](https://web.archive.org/web
 
  <img height="211" src="/blog/2013/10/newest-european-liquid-galaxy/image-0.jpeg" style="text-align: right;" width="320"/>
 
-End Point worked under the direction of the retail experience agency, [Make Retail](http://www.makeretail.com/), to design a fully integrated experience. Once the unique configuration of the Liquid Galaxy was set, we sent along one of our top engineers, [Matt Vollrath](/team/matt-vollrath), to oversee the final hardware and software integration and installations, together with our local deployment partners Pixel.
+End Point worked under the direction of the retail experience agency, [Make Retail](http://www.makeretail.com/), to design a fully integrated experience. Once the unique configuration of the Liquid Galaxy was set, we sent along one of our top engineers, [Matt Vollrath](/team/matt-vollrath/), to oversee the final hardware and software integration and installations, together with our local deployment partners Pixel.
 
 As a new step for Google in Europe, the Liquid Galaxy creates a fantastic experience for consumers and enhances the impact of the retail store.

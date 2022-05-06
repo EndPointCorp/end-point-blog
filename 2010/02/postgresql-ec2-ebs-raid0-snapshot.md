@@ -12,7 +12,7 @@ tags:
 date: 2010-02-23
 ---
 
-One of our clients uses [Amazon Web Services](https://aws.amazon.com/) to host their production application and database servers on EC2 with EBS (Elastic Block Store) storage volumes. Their main database is [PostgreSQL](/technology/postgresql).
+One of our clients uses [Amazon Web Services](https://aws.amazon.com/) to host their production application and database servers on EC2 with EBS (Elastic Block Store) storage volumes. Their main database is [PostgreSQL](/expertise/postgresql/).
 
 A big benefit of Amazon’s cloud services is that you can easily add and remove virtual server instances, storage space, etc. and pay as you go. One known problem with Amazon’s EBS storage is that it is much more I/O limited than, say, a nice SAN.
 

@@ -43,7 +43,7 @@ The biggest wins came from enabling HTTP keepalive, which allows serving multipl
 
 Note that many of the resource-limiting changes I made above to Apache and Passenger would be too restrictive if more RAM or CPU were available, as is typical on a dedicated server with 2 GB RAM or more. But when running on a memory-constrained VPS, it’s important to put such limits in place or you’ll practically undo any other tuning efforts you make.
 
-I wrote about these topics a year ago in a blog post about [Interchange ecommerce performance optimization](/blog/2009/10/performance-optimization-of). I’ve since expanded the list of MIME types I typically enable static asset caching for in Apache. Here’s a sample configuration snippet to put in the <VirtualHost> container in httpd.conf:
+I wrote about these topics a year ago in a blog post about [Interchange ecommerce performance optimization](/blog/2009/10/performance-optimization-of/). I’ve since expanded the list of MIME types I typically enable static asset caching for in Apache. Here’s a sample configuration snippet to put in the <VirtualHost> container in httpd.conf:
 
 ```plain
     ExpiresActive On

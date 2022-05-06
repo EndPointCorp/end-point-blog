@@ -23,7 +23,7 @@ At this point I need to remind you about one of the most unusual aspects of UTF-
 
 We had no need to try to fix the truly broken data, but we wanted to convert everything possible to UTF-8 and at the very least guarantee no invalid UTF-8 strings appeared in what we sent.
 
-I previously wrote about [converting a PostgreSQL database dump to UTF-8](/blog/2010/03/postgresql-utf-8-conversion), and used the Perl CPAN module [IsUTF8](https://metacpan.org/pod/IsUTF8).
+I previously wrote about [converting a PostgreSQL database dump to UTF-8](/blog/2010/03/postgresql-utf-8-conversion/), and used the Perl CPAN module [IsUTF8](https://metacpan.org/pod/IsUTF8).
 
 I was going to use that again, but looked around and found an even better module, exactly targeting this use case: [Encoding::FixLatin](https://metacpan.org/release/Encoding-FixLatin), by Grant McLean. Its documentation says it “takes mixed encoding input and produces UTF-8 output” and that’s exactly what it does, focusing on input with mixed UTF-8, Latin-1, and Windows-1252.
 
@@ -31,7 +31,7 @@ It worked as advertised, very well. We would need to use a different module to c
 
 There’s even a standalone [fix_latin](https://metacpan.org/pod/Encoding::FixLatin) program designed specifically for processing Postgres pg_dump output from legacy encodings, with some nice examples of how to use it.
 
-One gotcha is similar to a catch that David Christensen reported with the Encode module in a [blog post here about a year ago](/blog/2010/12/character-encoding-in-perl-decodeutf8): If the Perl string already has the UTF-8 flag set, Encoding::FixLatin immediately returns it, rather than trying to process it. So it’s important that the incoming data be a pure byte stream, or that you otherwise turn off the UTF-8 flag, if you expect it to change anything.
+One gotcha is similar to a catch that David Christensen reported with the Encode module in a [blog post here about a year ago](/blog/2010/12/character-encoding-in-perl-decodeutf8/): If the Perl string already has the UTF-8 flag set, Encoding::FixLatin immediately returns it, rather than trying to process it. So it’s important that the incoming data be a pure byte stream, or that you otherwise turn off the UTF-8 flag, if you expect it to change anything.
 
 Along the way I found some other CPAN modules that look useful for cases where I need more manual control than Encoding::FixLatin gives:
 

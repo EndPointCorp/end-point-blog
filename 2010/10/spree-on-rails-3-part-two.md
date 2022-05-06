@@ -9,7 +9,7 @@ tags:
 date: 2010-10-25
 ---
 
-Yesterday, I [discussed my experiences on getting Rails 3 based Spree](/blog/2010/10/spree-on-rails-3-part-one) up and running. I’ve explained in several blog articles ([here](/blog/2010/03/spree-software-development) and [here](/blog/2010/01/rails-ecommerce-spree-hooks-tutorial)) that customizing Spree through extensions will produce the most maintainable code – it is not recommended to work directly with source code and make changes to core classes or views. Working through extension development was one of my primary goals after getting Spree up and running.
+Yesterday, I [discussed my experiences on getting Rails 3 based Spree](/blog/2010/10/spree-on-rails-3-part-one/) up and running. I’ve explained in several blog articles ([here](/blog/2010/03/spree-software-development/) and [here](/blog/2010/01/rails-ecommerce-spree-hooks-tutorial/)) that customizing Spree through extensions will produce the most maintainable code – it is not recommended to work directly with source code and make changes to core classes or views. Working through extension development was one of my primary goals after getting Spree up and running.
 
 To create an extension named “foo”, I ran rails g spree:extension foo. Similar to pre-Rails 3.0 Spree, a foo directory is created (albeit inside the sandbox/) directory as a Rails Engine. The generator appends the foo directory details to the sandbox/ Gemfile. Without the Gemfile update, the rails project won’t include the new foo extension directory (and encompassed functionality). I reviewed the extension directory structure and files and found that foo/lib/foo.rb was similar to the the *_extension.rb file.
 
@@ -157,7 +157,7 @@ Layers of Rails Engines in Spree with extensions.
 
 After some quick googling, I found two helpful articles on Engines in Rails 3 [here](https://web.archive.org/web/20100414171720/http://www.themodestrubyist.com/2010/03/01/rails-3-plugins---part-1---the-big-picture/) and [here](https://web.archive.org/web/20101112142245/http://www.themodestrubyist.com/2010/03/05/rails-3-plugins---part-2---writing-an-engine/). The Spree API has been inconsistent until now—​hopefully the introduction of Rails Engine will force the API to become more consistent which may improve the extension community.
 
-I didn’t notice much deviation of controllers, models, or views from previous versions of Spree, except for massive reorganization. Theme support (including [Spree hooks](/blog/2010/01/rails-ecommerce-spree-hooks-tutorial)) is still present in the core. Authorization in Spree still uses authlogic, but I heard rumors of moving to devise eventually. The spree_dash (admin dashboard) gem still is fairly lightweight and doesn’t contain much functionality. Two fairly large code changes I noticed were:
+I didn’t notice much deviation of controllers, models, or views from previous versions of Spree, except for massive reorganization. Theme support (including [Spree hooks](/blog/2010/01/rails-ecommerce-spree-hooks-tutorial/)) is still present in the core. Authorization in Spree still uses authlogic, but I heard rumors of moving to devise eventually. The spree_dash (admin dashboard) gem still is fairly lightweight and doesn’t contain much functionality. Two fairly large code changes I noticed were:
 
 - The checkout state machine has been merged into order and the checkout model will be eliminated in the future.
 - The spree_promo gem has a decent amount of new functionality.

@@ -12,7 +12,7 @@ date: 2018-03-01
 
 <img src="/blog/2018/03/vue-router-in-ecommerce/vue-shop.png" alt="Vue Shop created by Matheus Azzi" /><br />
 
-I recently wrote about [Vue in Ecommerce](/blog/2018/02/vue-in-ecommerce) and pointed to a handful of references to get started. Today, I’ll talk about using [vue-router](https://router.vuejs.org/en/) in a small ecommerce application, combined with [vuex-persist](https://www.npmjs.com/package/vuex-persist) for state storage.
+I recently wrote about [Vue in Ecommerce](/blog/2018/02/vue-in-ecommerce/) and pointed to a handful of references to get started. Today, I’ll talk about using [vue-router](https://router.vuejs.org/en/) in a small ecommerce application, combined with [vuex-persist](https://www.npmjs.com/package/vuex-persist) for state storage.
  
 I forked this [Vue Shop on GitHub](https://github.com/matheusazzi/shop-vue) from Matheus Azzi. It was a great starting point for to see how basic component organization and state management might look in a Vue ecommerce application, but it is a single page ecommerce app with no separate page for a product detail, checkout, or static pages, so here I go into some details on routing and persistence in a Vue ecommerce application.
 

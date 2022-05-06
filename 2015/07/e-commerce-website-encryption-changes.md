@@ -93,7 +93,7 @@ PCI DSS will require client applications to stop using TLS 1.0 also, which may m
 
 ### Summary
 
-**Your systems need to stop supporting TLS 1.0 by June 2016 at the latest.** Start planning the migration now! [We are available to help](/contact) our current and new clients test, assess needs, and plan upgrades and migrations.
+**Your systems need to stop supporting TLS 1.0 by June 2016 at the latest.** Start planning the migration now! [We are available to help](/contact/) our current and new clients test, assess needs, and plan upgrades and migrations.
 
 ### Reference
 

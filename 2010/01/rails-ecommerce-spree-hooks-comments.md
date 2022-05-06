@@ -8,7 +8,7 @@ tags:
 date: 2010-01-13
 ---
 
-Yesterday, I went through some examples using [hook and theme implementation in Spree](/blog/2010/01/rails-ecommerce-spree-hooks-tutorial), an open source Ruby on Rails ecommerce platform. I decided to follow-up with closing thoughts and comments today.
+Yesterday, I went through some examples using [hook and theme implementation in Spree](/blog/2010/01/rails-ecommerce-spree-hooks-tutorial/), an open source Ruby on Rails ecommerce platform. I decided to follow-up with closing thoughts and comments today.
 
 I only spent a few hours working with the new Spree edge code (Version 0.9.5), but I was relatively happy with the Spree theme and hook implementation, as it does a better job decoupling the extension views with Spree core functionality and views. However, I found several issues that are potential areas for improvement with this release or releases to come.
 
@@ -33,7 +33,7 @@ A more ideal approach to decouple appearance and functionality would require hoo
 
 **Conclusion**
 
-In the tutorial, I also didn’t address extended core functionality with models and controllers in the extensions. The logic discussed the article [Rails Ecommerce Product Optioning in Spree](/blog/2009/12/rails-ecommerce-product-optioning-in) and [Rails Approach for Spree Shopping Cart Customization](/blog/2009/10/rails-approach-to-spree-shopping-cart) should work with some view modifications to use existing hooks instead of overriding core views.
+In the tutorial, I also didn’t address extended core functionality with models and controllers in the extensions. The logic discussed the article [Rails Ecommerce Product Optioning in Spree](/blog/2009/12/rails-ecommerce-product-optioning-in/) and [Rails Approach for Spree Shopping Cart Customization](/blog/2009/10/rails-approach-to-spree-shopping-cart/) should work with some view modifications to use existing hooks instead of overriding core views.
 
 <a href="https://2.bp.blogspot.com/_wWmWqyCEKEs/S0j-TThOmsI/AAAAAAAADBg/gUtsc4sUTdk/s1600-h/image3.png" onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5424865358778374850" src="/blog/2010/01/rails-ecommerce-spree-hooks-comments/image-2.png" style="display:block; margin:0px auto 10px; text-align:center;cursor:pointer; cursor:hand;width: 400px; height: 148px;"/></a>
 

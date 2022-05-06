@@ -11,7 +11,7 @@ date: 2010-10-11
 
 
 
-A couple of months ago, I wrote about [setting up Spree sample data in your Spree project with fixtures](/blog/2010/07/spree-sample-product-data) to encourage consistent feature development and efficient testing. I discussed how to create sample product data and provided examples of creating products, option types, variants, taxonomies, and adding product images. In this article, I’ll review the sample order structure more and give an example of data required for a sample order.
+A couple of months ago, I wrote about [setting up Spree sample data in your Spree project with fixtures](/blog/2010/07/spree-sample-product-data/) to encourage consistent feature development and efficient testing. I discussed how to create sample product data and provided examples of creating products, option types, variants, taxonomies, and adding product images. In this article, I’ll review the sample order structure more and give an example of data required for a sample order.
 
 The first step for understanding how to set up Spree order sample data might require you to revisit a simplified data model to examine the elements that relate to a single order. See below for the interaction between the tables orders, checkouts, addresses, users, line items, variants, and products. Note that the data model shown here applies to Spree version 0.11 and there are significant changes with Spree 0.30.
 

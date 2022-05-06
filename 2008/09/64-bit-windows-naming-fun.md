@@ -38,7 +38,7 @@ I’ve been using 64-bit Linux since 2005 and found there to be some learning cu
 
 The [Debian Etch approach](https://www.debian-administration.org/articles/534) is to treat the 64-bit architecture as “normal”, for lack of a better word, with 64-bit libraries residing in /lib and /usr/lib as always. It’s recommended to run a 32-bit chroot with important libraries in [the ia32-libs package](https://web.archive.org/web/20090726073930/http://packages.debian.org/stable/ia32-libs) going into /emul/ia32-linux. [Ubuntu is similar](https://web.archive.org/web/20110813093451/https://help.ubuntu.com/community/32bit_and_64bit), but its ia32-libs puts its ia32-libs files into /usr/lib32.
 
-The [Red Hat approach](https://web.archive.org/web/20080915055508/http://www.redhat.com/magazine/009jul05/features/multilib/) called “multilib” keeps 32-bit libraries in /lib and /usr/lib with new 64-bit libraries living in /lib64 and /usr/lib64. (I mentioned this a while back while discussing [building a custom Perl on 64-bit Red Hat OSes](/blog/2008/07/building-perl-on-64-bit).)
+The [Red Hat approach](https://web.archive.org/web/20080915055508/http://www.redhat.com/magazine/009jul05/features/multilib/) called “multilib” keeps 32-bit libraries in /lib and /usr/lib with new 64-bit libraries living in /lib64 and /usr/lib64. (I mentioned this a while back while discussing [building a custom Perl on 64-bit Red Hat OSes](/blog/2008/07/building-perl-on-64-bit/).)
 
 Each way has its tradeoffs, and causes a bit of trouble. That’s just the cost of dealing with multiple architectures in a single running OS, where no such support was previously needed.
 

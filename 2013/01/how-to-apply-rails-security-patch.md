@@ -8,7 +8,7 @@ tags:
 date: 2013-01-29
 ---
 
-With [the announcement of CVE-2013-0333](https://groups.google.com/forum/?hl=en&fromgroups=#!topic/rubyonrails-security/1h2DR63ViGo), it’s time again to secure your Rails installation. ([Didn’t we just do this?](/blog/2013/01/rails-cve-2013-0156-metasploit)) If you are unable to upgrade to the latest, secure release of Rails, this post will help you apply a Rail security patch, using CVE-2013-0333 as an example.
+With [the announcement of CVE-2013-0333](https://groups.google.com/forum/?hl=en&fromgroups=#!topic/rubyonrails-security/1h2DR63ViGo), it’s time again to secure your Rails installation. ([Didn’t we just do this?](/blog/2013/01/rails-cve-2013-0156-metasploit/)) If you are unable to upgrade to the latest, secure release of Rails, this post will help you apply a Rail security patch, using CVE-2013-0333 as an example.
 
 ### Fork Rails, Patch
 

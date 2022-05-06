@@ -15,7 +15,7 @@ Because Red Hat is the source or origin of packages that ultimately end up in Ce
 
 Thanks to this close similarity and the tradeoff between rapidity of updates vs. cost and entitlement tracking, we find reasons to use both RHEL and CentOS, depending on the situation.
 
-Sometimes we want to convert RHEL to CentOS or vice versa, on a running machine, without the expense and destabilizing effect of having to reinstall the operating system. In the past I’ve written on this blog about [converting from CentOS 6 to RHEL 6](/blog/2011/12/converting-centos-6-to-rhel-6), and earlier about [converting from RHEL 5 to CentOS 5](/blog/2009/10/upgrading-from-rhel-52-to-centos-54).
+Sometimes we want to convert RHEL to CentOS or vice versa, on a running machine, without the expense and destabilizing effect of having to reinstall the operating system. In the past I’ve written on this blog about [converting from CentOS 6 to RHEL 6](/blog/2011/12/converting-centos-6-to-rhel-6/), and earlier about [converting from RHEL 5 to CentOS 5](/blog/2009/10/upgrading-from-rhel-52-to-centos-54/).
 
 I recently needed to migrate several servers from RHEL to CentOS, and found an update of the procedure was in order because some URLs and package versions had changed. Here are current instructions on how to migrate from RHEL 5.9 to CentOS 5.9, and RHEL 6.4 to CentOS 6.4.
 

@@ -78,7 +78,7 @@ We chose SVG and saved it. After opening the SVG diagram, we saw that the schema
 
 Next we needed to understand what the schema differences were between their old database and our old database to determine what selections in the scripts will not work properly and to determine how we needed to modify it to fit our technical nuances.
 
-We used Liquibase for this purpose. See [Selva’s article on comparing PostgreSQL database schema versions](/blog/2020/02/compare-postgresql-schema-versions).
+We used Liquibase for this purpose. See [Selva’s article on comparing PostgreSQL database schema versions](/blog/2020/02/compare-postgresql-schema-versions/).
 
 The actual command we used was [`diff`](https://docs.liquibase.com/commands/community/diff.html).
 
@@ -239,4 +239,4 @@ We were able to do the release on a weekend and the three of us moved on to solv
 
 -----
 
-(Written with help from [Selvakumar Arumugam](/team/selvakumar-arumugam) and [Joshua Tolley](/team/josh-tolley).)
+(Written with help from [Selvakumar Arumugam](/team/selvakumar-arumugam/) and [Joshua Tolley](/team/josh-tolley/).)

@@ -65,7 +65,7 @@ If everything went well your PHP code trying to connect via FTP should now be wo
 
 Feel free to skim through our other articles for some ideas and hints:
 
-- [SELinux fix for sudo PAM audit_log_acct_message() failed](/blog/2013/11/selinux-fix-for-sudo-pam)
-- [SELinux and the need of talking about problems](/blog/2013/11/selinux-and-need-of-talking-about)
-- [SELinux Local Policy Modules](/blog/2012/05/selinux-local-policy-modules)
-- [Passenger and SELinux](/blog/2009/03/passenger-and-selinux)
+- [SELinux fix for sudo PAM audit_log_acct_message() failed](/blog/2013/11/selinux-fix-for-sudo-pam/)
+- [SELinux and the need of talking about problems](/blog/2013/11/selinux-and-need-of-talking-about/)
+- [SELinux Local Policy Modules](/blog/2012/05/selinux-local-policy-modules/)
+- [Passenger and SELinux](/blog/2009/03/passenger-and-selinux/)

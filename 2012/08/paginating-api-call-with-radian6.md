@@ -10,7 +10,7 @@ date: 2012-08-24
 
 
 
-I wrote about Radian6 in my [earlier blog post](/blog/2012/06/respecting-api-call-limit-with-radian6). Today I will review one more aspect of Radian6 API - call pagination.
+I wrote about Radian6 in my [earlier blog post](/blog/2012/06/respecting-api-call-limit-with-radian6/). Today I will review one more aspect of Radian6 API - call pagination.
 
 Most Radian6 requests return paginated data. This introduces extra complexity of making request several times in the loop in order to get all results. Here is one simple way to retrieve the paginated data from Radian6 using the powerful Ruby blocks.
 

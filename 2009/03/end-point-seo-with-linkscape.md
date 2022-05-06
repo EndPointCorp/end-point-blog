@@ -81,7 +81,7 @@ On the other hand, www.endpoint.com has many external links passed from client w
 
 This emphasizes the fact that having high popularity external links can significantly influence page popularity (www.endpoint.com passing to blog.endpoint.com in this case).
 
-When explaining this to a fellow End Pointer ([Jon](/team/jon-jensen)), he also commented, “based on [the data], if nothing external changes, it’s pretty much impossible for the blog to overtake www.endpoint.com in ranking”—​another good point to realize. We can continue to work on improving www.endpoint.com’s popularity and it will continue to pass along value to blog.endpoint.com.
+When explaining this to a fellow End Pointer ([Jon](/team/jon-jensen/)), he also commented, “based on [the data], if nothing external changes, it’s pretty much impossible for the blog to overtake www.endpoint.com in ranking”—​another good point to realize. We can continue to work on improving www.endpoint.com’s popularity and it will continue to pass along value to blog.endpoint.com.
 
 **#2:**
 

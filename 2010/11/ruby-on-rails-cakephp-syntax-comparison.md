@@ -290,7 +290,7 @@ or
 </tr>
 </tbody></table>
 
-If you are looking for guidance on choosing one of these technologies, below are common arguments. In End Point’s case, we choose whatever technology makes the most sense for the client. We implemented a nifty solution for JackThreads to avoid a complete rewrite, described [here](/blog/2009/12/iterative-migration-of-legacy) in detail. We also work with existing open source ecommerce platforms such as [Interchange](http://www.icdevgroup.com/i/dev) and [Spree](https://www.spreecommerce.org/) and try to choose the best fit for each client.
+If you are looking for guidance on choosing one of these technologies, below are common arguments. In End Point’s case, we choose whatever technology makes the most sense for the client. We implemented a nifty solution for JackThreads to avoid a complete rewrite, described [here](/blog/2009/12/iterative-migration-of-legacy/) in detail. We also work with existing open source ecommerce platforms such as [Interchange](http://www.icdevgroup.com/i/dev) and [Spree](https://www.spreecommerce.org/) and try to choose the best fit for each client.
 
 <table cellpadding="5" cellspacing="0" class="phprails" width="100%"><tbody><tr class="alt">   <th valign="middle" width="10%"><h3>Pick Me!</h3></th>   <td align="center" valign="middle" width="45%">Ruby on Rails</td>   <td align="center" valign="middle" width="45%">CakePHP</td> </tr>
 <tr>   <td></td>   <td valign="top">     <ul><li>Ruby is prettier than PHP.</li>

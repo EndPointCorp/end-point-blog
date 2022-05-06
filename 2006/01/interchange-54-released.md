@@ -7,7 +7,7 @@ tags:
 date: 2006-01-07
 ---
 
-At the end of December 2005, a new major version of [Interchange](/technology/perl-interchange) was released, making widely available the improvements developed over the previous year and a half.
+At the end of December 2005, a new major version of [Interchange](/expertise/perl-interchange/) was released, making widely available the improvements developed over the previous year and a half.
 
 While many of the hundreds of important changes are small and incremental, Interchange 5.4 offers a number of larger improvements as well:
 
@@ -37,6 +37,6 @@ While many of the hundreds of important changes are small and incremental, Inter
 
 - ... and many other feature enhancements and bugfixes.
 
-Ethan Rowe and [Jon Jensen](/team/jon-jensen), two End Point engineers and members of the Interchange Development Group, added several of these new features based on work done earlier for our clients. We value highly the whole Interchange team's commitment to stability and reliability in the code, and cooperation and ongoing improvement together. In particular we appreciate the efforts of Mike Heins, Stefan Hornburg, and Davor Ocelic, whose regular contributions make Interchange's progress impressive. And Interchange would be weaker without the valuable work of Kevin Walsh, Ton Verhagen, Jonathan Clark, Dan Browning, Paul Vinciguerra, Ed LaFrance, and others.
+Ethan Rowe and [Jon Jensen](/team/jon-jensen/), two End Point engineers and members of the Interchange Development Group, added several of these new features based on work done earlier for our clients. We value highly the whole Interchange team's commitment to stability and reliability in the code, and cooperation and ongoing improvement together. In particular we appreciate the efforts of Mike Heins, Stefan Hornburg, and Davor Ocelic, whose regular contributions make Interchange's progress impressive. And Interchange would be weaker without the valuable work of Kevin Walsh, Ton Verhagen, Jonathan Clark, Dan Browning, Paul Vinciguerra, Ed LaFrance, and others.
 
 We look forward to seeing this latest and greatest version of Interchange being used by the wider Interchange community.

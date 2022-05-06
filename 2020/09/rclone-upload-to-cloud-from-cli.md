@@ -17,7 +17,7 @@ Cloud storage providers like Google Drive are great solutions for storing files.
 
 This obviously makes uploading files from servers difficult, but not impossible if you know the right tools.
 
-About a year ago Jon Jensen penned [a blog post about gdrive](/blog/2019/09/google-drive-for-vm-images), a Google Drive command-line tool. However, due to changes with Google’s Drive security, that tool no longer works. This led me to look for a replacement.
+About a year ago Jon Jensen penned [a blog post about gdrive](/blog/2019/09/google-drive-for-vm-images/), a Google Drive command-line tool. However, due to changes with Google’s Drive security, that tool no longer works. This led me to look for a replacement.
 
 ### Our use case
 

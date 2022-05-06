@@ -11,7 +11,7 @@ tags:
 date: 2010-06-10
 ---
 
-At RailsConf 2010, popular technical topics this year are Rails 3 and NoSQL technologies. My first two articles on RailsConf 2010 so far ([here](/blog/2010/06/railsconf-2010-ecommerce-smackdown) and [here](/blog/2010/06/railsconf-2010-review-rails-application)) have been less technical, so I wanted to cover some technical aspects of Rails 3 and some tasty code goodness in standard ecommerce examples.
+At RailsConf 2010, popular technical topics this year are Rails 3 and NoSQL technologies. My first two articles on RailsConf 2010 so far ([here](/blog/2010/06/railsconf-2010-ecommerce-smackdown/) and [here](/blog/2010/06/railsconf-2010-review-rails-application/)) have been less technical, so I wanted to cover some technical aspects of Rails 3 and some tasty code goodness in standard ecommerce examples.
 
 ### Bundler
 

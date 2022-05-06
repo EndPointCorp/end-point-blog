@@ -368,7 +368,7 @@ $bc$;
 CREATE FUNCTION
 ```
 
-Note that because we are making external changes, we marked the function as VOLATILE, which ensures that it will always be run every time it is called, and not cached in any form. We are also using [a Postgres service file](/blog/2016/10/postgres-connection-service-file) with the 'db:Pg:service=auditor'. This means that the connection information (username, password, database) is contained in an external file. This is not only tidier than hard-coding those values into this function, but safer as well, as the function itself can be viewed by Alice. Finally, note that we are passing the 'username' directly into the function this time, as we have a brand new connection which is no longer linked to the 'alice' user, so we have to derive it ourselves from "SELECT session_user" and then pass it along.
+Note that because we are making external changes, we marked the function as VOLATILE, which ensures that it will always be run every time it is called, and not cached in any form. We are also using [a Postgres service file](/blog/2016/10/postgres-connection-service-file/) with the 'db:Pg:service=auditor'. This means that the connection information (username, password, database) is contained in an external file. This is not only tidier than hard-coding those values into this function, but safer as well, as the function itself can be viewed by Alice. Finally, note that we are passing the 'username' directly into the function this time, as we have a brand new connection which is no longer linked to the 'alice' user, so we have to derive it ourselves from "SELECT session_user" and then pass it along.
 
 Once this new function is in place, and we re-run the same queries as we did before, we see three entries in our audit table:
 

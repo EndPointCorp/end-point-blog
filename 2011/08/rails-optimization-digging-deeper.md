@@ -9,7 +9,7 @@ tags:
 date: 2011-08-05
 ---
 
-I recently wrote about [raw caching performance in Rails](/blog/2011/07/raw-caching-performance-in-rubyrails) and [advanced Rails performance techniques](/blog/2011/07/rails-optimization-advanced-techniques). In the latter article, I explained how to use a Rails low-level cache to store lists of **things** during the index or list request. This technique works well for list pages, but it doesn’t necessarily apply to requests to an individual **thing**, or what is commonly referred to as the “show” action in Rails applications.
+I recently wrote about [raw caching performance in Rails](/blog/2011/07/raw-caching-performance-in-rubyrails/) and [advanced Rails performance techniques](/blog/2011/07/rails-optimization-advanced-techniques/). In the latter article, I explained how to use a Rails low-level cache to store lists of **things** during the index or list request. This technique works well for list pages, but it doesn’t necessarily apply to requests to an individual **thing**, or what is commonly referred to as the “show” action in Rails applications.
 
 In my application, the “show” action loaded at ~200 ms/request with low concurrency, with the use of Rails [fragment caching](https://apidock.com/rails/v2.0.0/ActionController/Caching/Fragments). And with high concurrency, the requests shot up to around 2000 ms/request. This wasn’t cutting it! So, I pursued implementing full-page caching with a follow-up AJAX request, outlined by this diagram:
 

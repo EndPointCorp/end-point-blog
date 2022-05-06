@@ -7,7 +7,7 @@ tags:
 date: 2012-06-13
 ---
 
-[David Christensen](/blog/authors/david-christensen) is talking today about Git workflows.
+[David Christensen](/blog/authors/david-christensen/) is talking today about Git workflows.
 
 <a href="https://www.flickr.com/photos/80083124@N08/7369039912/" title="IMG_0721.JPG by endpoint920, on Flickr"><img alt="IMG_0721.JPG" height="375" src="/blog/2012/06/git-workflows/image-0.jpeg" width="500"/></a>
 

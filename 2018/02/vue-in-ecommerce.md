@@ -40,7 +40,7 @@ You might have noticed I mentioned a few Vue libraries and tools. Here are addit
 
 ### Incremental Adoption
 
-While I am writing a Vue ecommerce shop based on the shop-vue GitHub repo mentioned above, in the ecommerce space, we commonly take on incremental ecommerce updates rather than “The Big Rewrite”, as noted in [Greg’s article](/blog/2017/12/enhancing-your-sites-with-vue). Components that could be introduced incrementally into existing ecommerce applications might include:
+While I am writing a Vue ecommerce shop based on the shop-vue GitHub repo mentioned above, in the ecommerce space, we commonly take on incremental ecommerce updates rather than “The Big Rewrite”, as noted in [Greg’s article](/blog/2017/12/enhancing-your-sites-with-vue/). Components that could be introduced incrementally into existing ecommerce applications might include:
 
 * Dynamic marketing elements on homepage or product listing page, e.g. promo tools, “Customers Also Looked at”, “Products Recently Viewed”
 * Cart + Checkout process (standalone component)

@@ -13,7 +13,7 @@ date: 2021-01-14
 ![Spring-Kafka](/blog/2021/01/messaging-app-spring-kafka-pt-four/banner.jpg)
 Photo by [Daniel Tran](https://unsplash.com/@dtmtran) on [Unsplash](https://unsplash.com/photos/FPE6bG8JWRE)
 
-This article is part of a [series](/blog/tags/spring-kafka-series). The GitHub repository with code examples can be found [here](https://github.com/ashemez/SpringKafkaMessaging).
+This article is part of a [series](/blog/tags/spring-kafka-series/). The GitHub repository with code examples can be found [here](https://github.com/ashemez/SpringKafkaMessaging).
 
 After a long break from this series let’s keep moving further.
 

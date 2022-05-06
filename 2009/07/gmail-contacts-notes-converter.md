@@ -7,7 +7,7 @@ tags:
 date: 2009-07-21
 ---
 
-As I [mentioned previously](/blog/2009/05/google-io-2009-day-1), I recently got a Google Ion phone running Android. I recently began using it as my main mobile phone, and thus needed to finally migrate the contacts from my Nokia 6126 phone to Android.
+As I [mentioned previously](/blog/2009/05/google-io-2009-day-1/), I recently got a Google Ion phone running Android. I recently began using it as my main mobile phone, and thus needed to finally migrate the contacts from my Nokia 6126 phone to Android.
 
 This is apparently easy to do by first copying all the contacts from the Nokia 6126 internal memory to the SIM card, then moving the SIM card to the Ion and importing the contacts. But that only works if all your contacts fit on the SIM card. If not, they’re truncated, and you have to delete many contacts on the Nokia to fit more, which would be a nonreversable move.
 

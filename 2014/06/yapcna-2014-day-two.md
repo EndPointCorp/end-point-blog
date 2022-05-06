@@ -10,7 +10,7 @@ date: 2014-06-25
 
 
 
-YAPC::NA 2014 (in Orlando, FL) continues after a brief interruption for sleep ... see [my previous post](/blog/2014/06/yapcna-2014-day-one) for the beginning of the story. And now, the exciting middle of our story:
+YAPC::NA 2014 (in Orlando, FL) continues after a brief interruption for sleep ... see [my previous post](/blog/2014/06/yapcna-2014-day-one/) for the beginning of the story. And now, the exciting middle of our story:
 
 This time I’m giving you a much less chronological treatment; instead, we’re starting with the biggest impression, then moving on to less gripping but still important items. Remember, all talks are available at [YouTube](https://www.youtube.com/user/yapcna).
 

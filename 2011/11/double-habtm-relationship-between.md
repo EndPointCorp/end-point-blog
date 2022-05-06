@@ -88,4 +88,4 @@ class Group < ActiveRecord::Base
 end
 ```
 
-Performance techniques such as calling raw SQL or with Rails low-level caching can potentially be applied to these methods, since I would not expect them to be highly performing as they are shown above. Examples of raw SQL and Rails low-level caching are described [here](/blog/2011/09/ruby-on-rails-performance-overview)!
+Performance techniques such as calling raw SQL or with Rails low-level caching can potentially be applied to these methods, since I would not expect them to be highly performing as they are shown above. Examples of raw SQL and Rails low-level caching are described [here](/blog/2011/09/ruby-on-rails-performance-overview/)!

@@ -54,4 +54,4 @@ The above method instantiates a connection to Mailchimp and checks if the user i
 
 ### What’s Next?
 
-In addition to expanding the product buyback capabilities, we expect to integrate additional features such as external-API driven address verification, social media integration, referral management, and more advanced user account management features. The project will continue to involve various members of our team such as [Richard](/team/richard-templet), [Greg D.](/team/greg-davidson), Tim Case, [Kamil](/blog/authors/kamil-ciemniewski), [Josh W.](/team/josh-williams) and me.
+In addition to expanding the product buyback capabilities, we expect to integrate additional features such as external-API driven address verification, social media integration, referral management, and more advanced user account management features. The project will continue to involve various members of our team such as [Richard](/team/richard-templet/), [Greg D.](/team/greg-davidson/), Tim Case, [Kamil](/blog/authors/kamil-ciemniewski/), [Josh W.](/team/josh-williams/) and me.

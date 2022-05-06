@@ -10,7 +10,7 @@ tags:
 date: 2008-11-29
 ---
 
-I recently needed to refer to [a post I made on March 7, 2007](/blog/2007/03/plperl-rpm-linked-against-custom-perl-build), showing how to build a PL/Perl RPM linked against a custom Perl build. A few things have changed since that time, so I’ve reworked it here, updated for local Perl 5.10.0 built into RPMs:
+I recently needed to refer to [a post I made on March 7, 2007](/blog/2007/03/plperl-rpm-linked-against-custom-perl-build/), showing how to build a PL/Perl RPM linked against a custom Perl build. A few things have changed since that time, so I’ve reworked it here, updated for local Perl 5.10.0 built into RPMs:
 
 We sometimes have to install a custom Perl build without thread support, and to have some specific newer and/or older versions of CPAN modules, and we don’t want to affect the standard distribution Perl that lives in /usr/bin/perl and /usr/lib/perl5. We use standard PGDG RPMs to install PostgreSQL. We also use PL/Perl, and want PL/Perl to link against our custom Perl build in /usr/local/bin and /usr/local/lib/perl5.
 

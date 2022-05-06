@@ -14,7 +14,7 @@ date: 2020-03-16
 
 [Photo](https://unsplash.com/photos/kzSNNqqS3Qs) by [Dan Meyers](https://unsplash.com/@dmey503)
 
-Recently, a client implemented a data-intensive workflow to generate various reports and insights from a list of facilities as part of an [EpiTrax](/expertise/epitrax) installation. Because a significant portion of these files contain sensitive healthcare data, they needed to strictly comply with HIPAA. Optimally, facilities should be able to transfer files securely and exclusively to our server. One of the best methods of achieving this is to create individual SSH File Transfer Protocol (SFTP) accounts for each source.
+Recently, a client implemented a data-intensive workflow to generate various reports and insights from a list of facilities as part of an [EpiTrax](/expertise/epitrax/) installation. Because a significant portion of these files contain sensitive healthcare data, they needed to strictly comply with HIPAA. Optimally, facilities should be able to transfer files securely and exclusively to our server. One of the best methods of achieving this is to create individual SSH File Transfer Protocol (SFTP) accounts for each source.
 
 ### SFTP account
 

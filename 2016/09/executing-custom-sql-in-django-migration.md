@@ -99,4 +99,4 @@ Hand-written migrations can be used for many other operations, including data mi
 
 -----------
 
-(This post originally covered South migrations and was updated by [Phin Jensen](/blog/authors/phin-jensen) to illustrate the now-native Django migrations.)
+(This post originally covered South migrations and was updated by [Phin Jensen](/blog/authors/phin-jensen/) to illustrate the now-native Django migrations.)

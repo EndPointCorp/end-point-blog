@@ -11,7 +11,7 @@ date: 2011-07-12
 
 Last week, I set up [memcached](https://memcached.org/) with a Rails application in hopes of further improving performance after getting a recommendation to pursue it. We’re already using many [Rails low-level caches](http://blog.nathanhumbert.com/2011/01/data-caching-in-rails-3.html) and [fragment caches](https://guides.rubyonrails.org/caching_with_rails.html#fragment-caching) throughout the application because of its complex role management system. Those are stored in NFS on a [NetApp](https://www.netapp.com/us/) filer, and I was hoping switching to memcached would speed things up. Unfortunately, my http request performance tests (using [ab](https://linux.die.net/man/1/ab)) did not back this up: using file caching on NFS with the NetApp was about 20% faster than memcached from my tests.
 
-I brought this up to [Jon](/team/jon-jensen), who suggested we run performance tests on the caching mechanism only rather than testing caching via full http requests, given how many layers of the stack are involved and influence the overall performance number. From the console, I ran the following:
+I brought this up to [Jon](/team/jon-jensen/), who suggested we run performance tests on the caching mechanism only rather than testing caching via full http requests, given how many layers of the stack are involved and influence the overall performance number. From the console, I ran the following:
 
 ```ruby
 $ script/console   # This app is on Rails 2.3

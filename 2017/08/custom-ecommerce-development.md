@@ -36,7 +36,7 @@ We offer a **full range of business consultancy and IT development** services. W
 
 The following is a real-life example of services we have provided for one client. 
 
-#### [Case Study: Vervante](/blog/2017/08/client-case-study-vervante-publishing)
+#### [Case Study: Vervante](/blog/2017/08/client-case-study-vervante-publishing/)
 
 ### Consultant vs Service
 

@@ -71,7 +71,7 @@ At this point you may be wondering how we get all the queries into the log. This
 
 1. Turn on “full logging” by dropping log_min_duration_statement to zero1. Some time later, set log_min_duration_statement back to what it was (e.g. 200)1. Extract the logs from the time it was set to zero to when it was flipped back.1. Run PGSI against the log subsection we pulled out1. Mail the results out
 
-All of this is run by cron. The first problem is how to update the postgresql.conf file and have Postgres re-read it, all automatically. As [covered previously](/blog/2011/08/changing-postgresqlconf-from-script), we use the [modify_postgres.pl](https://github.com/bucardo/modify_postgres_config) script for this.
+All of this is run by cron. The first problem is how to update the postgresql.conf file and have Postgres re-read it, all automatically. As [covered previously](/blog/2011/08/changing-postgresqlconf-from-script/), we use the [modify_postgres.pl](https://github.com/bucardo/modify_postgres_config) script for this.
 
 The exact incantation looks like this:
 

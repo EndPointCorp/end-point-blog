@@ -15,7 +15,7 @@ One of the more frightening things you can run across as a DBA (whether using Po
 
 The first step is to look at why it is not starting up by examining the logs. Check your normal Postgres logs, but also check the filename passed to the **--log** argument for
 [pg_ctl](https://www.postgresql.org/docs/current/static/app-pg-ctl.html), as Postgres may not have even gotten far enough to start normal logging. Most of the time these errors are not serious, are fairly self-explanatory, and can be cured easily—​such as
-[running out of disk space](/blog/2014/09/pgxlog-disk-space-problem-on-postgres). When in doubt, search the web or ask in the
+[running out of disk space](/blog/2014/09/pgxlog-disk-space-problem-on-postgres/). When in doubt, search the web or ask in the
 [#postgresql IRC channel](https://www.postgresql.org/community/irc/) and you will most likely find a solution.
 
 Sometimes the error is more serious, or the solution is not so obvious. Consider this problem someone had in the #postgresql channel a while back:
@@ -63,7 +63,7 @@ If you are not able to fix things with single-user mode, it’s time to get seri
 
 Time to use pg_resetxlog, right? No, not at all. Use of the [pg_resetxlog utility](https://www.postgresql.org/docs/9.6/static/app-pgresetxlog.html) should be done as an absolute last resort, and there are still some things you should try first. Your problem may have already been solved—​so the next step should be to upgrade Postgres to the latest revision. With Postgres, a revision (the last number in the version string) is always reserved for bug fixes only. Further, changing the revision is almost always as simple as installing a new binary. So if you are running Postgres version 9.0.3, upgrade to the latest in the 9.0 series (9.0.18 as of this writing). Check the release notes, make the upgrade, and try to start up Postgres.
 
-Still stumped? Consider asking for help. For fast, free help, try the #postgresql IRC channel. For slightly slower free help, try the [pgsql-general mailing list](https://www.postgresql.org/list/). For both of these options, the majority of the subscribers are clustered near the US Eastern time zone, so response times will be faster at 3PM New York time versus 3AM New York time. For paid help, you can find a Postgres expert (such as [End Point!](/technology/postgresql)) at the [list of professional services](https://www.postgresql.org/support/professional_support/) at postgresql.org,
+Still stumped? Consider asking for help. For fast, free help, try the #postgresql IRC channel. For slightly slower free help, try the [pgsql-general mailing list](https://www.postgresql.org/list/). For both of these options, the majority of the subscribers are clustered near the US Eastern time zone, so response times will be faster at 3PM New York time versus 3AM New York time. For paid help, you can find a Postgres expert (such as [End Point!](/expertise/postgresql/)) at the [list of professional services](https://www.postgresql.org/support/professional_support/) at postgresql.org,
 
 The next steps depend on the error, but another route is to hack the source code for Postgres to work around the error preventing the startup. This could mean, for example, changing a FATAL exception to an WARNING, or other trickery. This is expert-level stuff, to be sure, but done carefully can still be safer than pg_resetxlog. If possible, try this on a copy of the data!
 
