@@ -5,10 +5,6 @@ github_issue_number: 1783
 tags:
 - company
 date: 2021-10-21
-featured:
-  endpoint: true
-  image_url: /blog/2021/10/moving-to-endpointdev-dot-com/20211016_155639-sm.webp
-description: We have changed our domain name from EndPoint.com to EndPointDev.com!
 ---
 
 ![scene of seashore, palm trees, bridges, old stone walls, grass](/blog/2021/10/moving-to-endpointdev-dot-com/20211016_155639-sm.webp)
