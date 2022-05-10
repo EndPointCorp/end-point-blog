@@ -7,6 +7,7 @@ tags:
 - integration
 - database
 - testing
+- docker
 github_issue_number: 1821
 ---
 

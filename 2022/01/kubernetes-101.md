@@ -8,6 +8,7 @@ tags:
 - docker
 - dotnet
 - postgres
+- containers
 featured:
   endpoint: true
   image_url: /blog/2022/01/kubernetes-101/2021-11-26_092823-sm.webp

@@ -7,6 +7,7 @@ tags:
 - kubernetes
 - natural-language-processing
 - python
+- docker
 date: 2019-06-28
 ---
 

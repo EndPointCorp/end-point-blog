@@ -4,6 +4,7 @@ title: News of FreeOTP, RHEL/CentOS, Ruby, Docker, HTTP
 github_issue_number: 912
 tags:
 - containers
+- docker
 - open-source
 - perl
 - redhat

@@ -9,6 +9,7 @@ tags:
 - rest
 - api
 - postgres
+- docker
 featured:
   endpoint: true
   image_url: /blog/2021/07/dotnet-5-web-api/market-cropped.jpg

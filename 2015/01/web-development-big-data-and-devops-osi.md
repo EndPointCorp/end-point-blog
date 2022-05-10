@@ -5,6 +5,7 @@ github_issue_number: 1069
 tags:
 - angular
 - conference
+- docker
 - containers
 - mongodb
 - nodejs

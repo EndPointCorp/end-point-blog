@@ -8,6 +8,7 @@ tags:
 - mongodb
 - nodejs
 - django
+- docker
 date: 2019-07-12
 ---
 
