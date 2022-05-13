@@ -11,7 +11,7 @@ tags:
 date: 2020-08-10
 ---
 
-Recently we experimented internally with integrating [Vue Storefront](https://www.vuestorefront.io/) and [Magento](https://magento.com/) 2.3. Vue Storefront is an open source Progressive Web App (PWA) that aims to work with many ecommerce platforms.
+Recently we experimented internally with integrating [Vue Storefront](https://www.vuestorefront.io/) and [Magento](https://business.adobe.com/products/magento/open-source.html) 2.3. Vue Storefront is an open source Progressive Web App (PWA) that aims to work with many ecommerce platforms.
 
 What initially piqued our interest was the possibility of integrating Vue Storefront with the venerable ecommerce back-end platform [Interchange](https://www.interchangecommerce.org/i/dev), which many of our clients use. Vue Storefront’s promise of ease of integration with any ecommerce backend made us curious to see whether it would make a good modern front-end for Interchange.
 
