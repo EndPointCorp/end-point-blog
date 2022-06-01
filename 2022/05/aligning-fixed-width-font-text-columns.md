@@ -344,6 +344,6 @@ Your selection will be replaced by the output.
 
 ### Unicode stumbling blocks
 
-Note that these tools all presume one visual character takes byte of input, so for any UTF-8 characters outside the limited classic ASCII character set that take more than 1 byte each, these tools will miscalculate the needed space between columns.
+Note that these tools all presume one visual character takes one byte of input, so for any UTF-8 characters outside the limited classic ASCII character set that take more than 1 byte each, these tools will miscalculate the needed space between columns.
 
 Perhaps you would like to take on the programming challenge and submit a patch to add a new `-u` option to take visual width of Unicode characters into account. 😊
