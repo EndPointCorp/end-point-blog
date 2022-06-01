@@ -7,6 +7,7 @@ tags:
 - open-source
 - tools
 - postgres
+- vim
 github_issue_number: 1861
 ---
 

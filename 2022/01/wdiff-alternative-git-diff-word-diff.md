@@ -6,6 +6,7 @@ tags:
 - git
 - terminal
 - visual-studio-code
+- intellij-idea
 - tips
 github_issue_number: 1816
 ---

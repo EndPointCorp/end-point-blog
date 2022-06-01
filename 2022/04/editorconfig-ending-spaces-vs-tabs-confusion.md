@@ -5,6 +5,9 @@ date: 2022-04-30
 tags:
 - development
 - tips
+- intellij-idea
+- vim
+- emacs
 github_issue_number: 1862
 ---
 

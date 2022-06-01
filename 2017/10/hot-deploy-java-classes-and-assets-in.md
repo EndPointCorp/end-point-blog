@@ -4,6 +4,7 @@ title: Hot-deploy Java classes and assets in Wildfly 8/9/10
 github_issue_number: 1333
 tags:
 - java
+- intellij-idea
 date: 2017-10-27
 ---
 

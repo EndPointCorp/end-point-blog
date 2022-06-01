@@ -6,6 +6,7 @@ tags:
 - ruby
 - vim
 - visual-studio-code
+- emacs
 - tools
 date: 2019-06-27
 ---

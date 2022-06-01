@@ -5,6 +5,9 @@ date: 2022-05-30
 tags:
 - tips
 - tools
+- vim
+- visual-studio-code
+- intellij-idea
 github_issue_number: 1868
 ---
 
