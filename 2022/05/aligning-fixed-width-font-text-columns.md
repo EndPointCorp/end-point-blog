@@ -345,8 +345,8 @@ You can use these programs as filters inside your favorite text editor or IDE. F
 
 Your selection will be replaced by the output.
 
-### Unicode stumbling blocks
+### Unicode
 
-Note that these tools all presume one visual character takes one byte of input, so for any UTF-8 characters outside the limited classic ASCII character set that take more than 1 byte each, these tools will miscalculate the needed space between columns.
+These tools come from an era when one byte of input resulted in one visual character, so for any UTF-8 characters outside the limited classic ASCII character set, we could expect old tools may miscalculate the needed space between columns.
 
-Perhaps you would like to take on the programming challenge and submit a patch to add a new `-u` option to take visual width of Unicode characters into account. 😊
+Originally in my testing they appeared not to be aware of some Unicode characters’ width, perhaps due to combining characters or alternate forms. But surprisingly they have been modernized and seem to work fine with most Unicode characters such as Latin letters with diacritics, letters in other alphabets, Chinese characters, and even emoji! 😊
