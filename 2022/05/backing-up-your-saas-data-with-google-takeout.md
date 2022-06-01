@@ -24,7 +24,7 @@ I recently realized I had about five years of photos, nine years of Google Drive
 
 Google introduced Takeout in 2011 as a service to export and download your data stored in Google products. It seems like the perfect option to easily back up all your files from Google's servers. But how is the process, and how useful is the actual downloaded data?
 
-[Downloading from Takeout](https://support.google.com/accounts/answer/3024190?hl=en) is quite painless. You select the services you want to back up, the formats you want them in (when there are multiple options), and start an export. When it's ready, you get an email linking to a compressed file containing your data. You can export either to a `.zip` archive or a `.tgz` archive. Zip is more universally accessible, so if you don't have or want extra software (such as 7-Zip), it is probably the better option.
+[Downloading from Takeout](https://support.google.com/accounts/answer/3024190?hl=en) is quite painless. You select the services you want to back up, the formats you want them in (when there are multiple options), and start an export. When it's ready, you get an email linking to a compressed file containing your data. You can export either to a `.zip` archive or a `.tgz` (`.tar.gz`) archive. Zip is more universally accessible, so if you don't have or want extra software (such as 7-Zip), it is probably the better option.
 
 One of the hardest things about keeping SaaS backups, even when they are easy to manage, is just remembering to do it. Backups become less useful if they're six months or even years out of date.
 
