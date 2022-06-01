@@ -3,7 +3,7 @@ title: 'Job opening: VisionPort support engineer (western U.S.)'
 author: Alejandro Ramon
 github_issue_number: 1854
 tags:
-- jobs
+- jobs-closed
 - visionport
 date: 2022-04-14
 featured:
@@ -60,7 +60,8 @@ End Point was founded in 1995 and now has over 60 engineers based throughout Nor
 
 ### Get in touch with us
 
-Please email us an introduction to jobs@visionport.com to apply!
+~~Please email us an introduction to jobs\@visionport.com to apply!~~
+**(This job has been filled.)**
 
 Include your location, resume, LinkedIn URL (if any), and whatever else may help us get to know you. You can expect to interview with the Support Lead and Team Manager.
 
@@ -80,7 +81,7 @@ We are an equal opportunity employer and value diversity at our company. We do n
     "value": "visionport-202204"
   },
   "datePosted": "2022-04-14",
-  "validThrough": "2022-07-14",
+  "validThrough": "2022-05-31",
   "employmentType": ["FULL_TIME", "PART_TIME"],
   "hiringOrganization": {
     "@type": "Organization",
