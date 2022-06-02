@@ -11,7 +11,7 @@ github_issue_number: 1864
 ![Shipping containers stacked at a port](/blog/2022/05/container-boot-camp/pexels-samuel-wölfl-1427541.webp)
 [Photo by Samuel Wölfl](https://www.pexels.com/photo/intermodal-container-stacked-on-port-1427541/)
 
-In the modern landscape of web development, it’s almost impossible to avoid seeing or using _containers_: isolated, virtualized, user space for program to run in. Containers make it easy to develop and deploy various components of applications without respect to the specific system and dependencies they run on.
+In the modern landscape of web development, it’s almost impossible to avoid seeing or using _containers_: isolated, virtualized, user space for programs to run in. Containers make it easy to develop and deploy various components of applications without respect to the specific system and dependencies they run on.
 
 If that’s confusing, worry not; this post and the tutorials in this boot camp aim to clarify things for new developers and experienced developers who haven’t gotten around to using containers yet.
 

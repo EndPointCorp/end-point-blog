@@ -10,6 +10,8 @@ tags:
 
 ![A concrete building with rectangular windows at sunset](/blog/2022/05/backing-up-your-saas-data-with-google-takeout/banner.webp)
 
+<!-- Photo by Seth Jensen -->
+
 Keeping backups is extremely important.
 
 Losing important files can feel like a far-off problem, but the chance of misplacing a drive, theft, drive failure, accidental deletion, house fire, flood, etc., is much greater than we may think. The benefits outweigh the cost of backups, for files that matter at all. So everyone should make regular backups of data that they care about and that can't be replaced.
