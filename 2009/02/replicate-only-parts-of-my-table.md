@@ -7,7 +7,7 @@ tags:
 date: 2009-02-19
 ---
 
-A day or two ago in [#slony](irc://irc.freenode.net/slony), someone asked if Slony would replicate only selected columns of a table. A natural response might be to create a view containing only the columns you’re interested in, and have Slony replicate that. But Slony is trigger-based—​the only reason it knows there’s something to replicate is because a trigger has told it so—​and you can’t have a trigger on a view. So that won’t work. [Greg](/blog/authors/greg-sabino-mullane) chimed in to say that Bucardo could do it, and mentioned a Bucardo feature I’d not yet noticed.
+A day or two ago in [#slony](irc://irc.freenode.net/slony), someone asked if Slony would replicate only selected columns of a table. A natural response might be to create a view containing only the columns you’re interested in, and have Slony replicate that. But Slony is trigger-based—​the only reason it knows there’s something to replicate is because a trigger has told it so—​and you can’t have a trigger on a view. So that won’t work. [Greg](/blog/authors/greg-sabino-mullane/) chimed in to say that Bucardo could do it, and mentioned a Bucardo feature I’d not yet noticed.
 
 [Bucardo](https://bucardo.org/) is trigger-based, like Slony, so defining a view won’t work. But it allows you to specify a special query string for each table you’re replicating. This query is called a “customselect”, and can serve to limit the columns you replicate, transform the rows as they’re being replicated, etc., and probably a bunch of other stuff I haven’t thought of yet. A simple example:
 

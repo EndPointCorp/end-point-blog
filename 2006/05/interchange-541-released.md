@@ -27,4 +27,4 @@ There were a few important bugfixes:
 
 There were also numerous other minor bugfixes in core code, tags, the admin, and the Standard demo.
 
-We invite you to [learn more about Interchange](/technology/perl-interchange) if you're not familiar with it.
+We invite you to [learn more about Interchange](/expertise/perl-interchange/) if you're not familiar with it.

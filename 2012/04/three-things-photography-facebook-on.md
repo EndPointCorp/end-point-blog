@@ -39,4 +39,4 @@ With this change, the Facebook error message disappeared and all appeared to be 
 
 ### 3. The watch Command
 
-I was talking to [Jon](/team/jon-jensen) recently about monitoring disk usage and he mentioned the [watch](https://www.lifewire.com/watch-linux-command-4091891) command. Specifically, the watch command might be a good tool to monitor disk usage if you expect to see the disk fill up quickly while you are actively developing on it. I’m always learning random tips from End Point’s sysadmin experts, and this one may come in handy at some point.
+I was talking to [Jon](/team/jon-jensen/) recently about monitoring disk usage and he mentioned the [watch](https://www.lifewire.com/watch-linux-command-4091891) command. Specifically, the watch command might be a good tool to monitor disk usage if you expect to see the disk fill up quickly while you are actively developing on it. I’m always learning random tips from End Point’s sysadmin experts, and this one may come in handy at some point.

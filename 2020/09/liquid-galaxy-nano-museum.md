@@ -19,4 +19,4 @@ This project presented some technical challenges for our hardware team: the 21-s
 
 We wrote these specific configurations in our build lab in Tennessee, then shipped everything to our partner A-Zero in Seoul. They installed the servers, connected them to the displays, and after some short video conferences to confirm some configuration changes, everything looks great!
 
-If your museum has a large video wall, and you want to bring the entire Earth, Moon, and Mars, and Ceres to your guests, please [contact us](/contact) today!
+If your museum has a large video wall, and you want to bring the entire Earth, Moon, and Mars, and Ceres to your guests, please [contact us](/contact/) today!

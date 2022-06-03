@@ -23,7 +23,7 @@ In addition to providing a comprehensive, granular paging service for doctors, F
 
 <div class="separator" style="clear: both; text-align: center;"><img border="0" src="/blog/2016/03/hues-on-first/FastTrackapp.jpg"/></div>
 
-I asked Danny Divita, one of the main developers on this project, to tell us more about the [Hue](http://www2.meethue.com/en-us/)/ [FastTrack](http://www.fasttrackmed.com) interface.
+I asked Danny Divita, one of the main developers on this project, to tell us more about the [Hue](http://www2.meethue.com/en-us/)/ [FastTrack](https://web.archive.org/web/20180107115334/http://www.fasttrackmed.com/) interface.
 
 *LF: Describe the project for which we used Hue bulbs. What were all the pieces that needed fitting together?*
 

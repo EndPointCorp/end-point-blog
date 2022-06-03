@@ -44,7 +44,7 @@ The old attribute, **pg_enable_utf8**, will be deprecated, and have no effect. W
 A beta version of DBD::Pg (2.99.9_1) with these changes has been uploaded to CPAN for anyone to experiment with. Right now, none of this is set in stone, but we did want to get a working version out there to start the discussion and see how it interacts with applications that were making use of the
 pg_enable_utf8 flag. You can web search for “dbdpg” and look for the “Latest Dev. Release”, or jump straight to [the page for DBD::Pg 2.99.9_1](https://metacpan.org/release/TURNSTEP/DBD-Pg-2.99.9_1). The trailing underscore is a CPAN convention that indicates this is a development version only, and thus will not replace the latest production version (2.18.1 as of this writing).
 
-As a reminder, DBD::Pg has [switched to using git](/blog/2011/06/dbdpg-moves-to-git), so you can follow along with the development
+As a reminder, DBD::Pg has [switched to using git](/blog/2011/06/dbdpg-moves-to-git/), so you can follow along with the development
 with:
 
 ```bash

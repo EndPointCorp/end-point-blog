@@ -9,7 +9,7 @@ tags:
 date: 2010-10-20
 ---
 
-Coding cross browser friendly JavaScript and CSS got you down? In a recent project, [Ron](/team/ron-phipps), [David](/blog/authors/david-christensen), and I worked through some painful cross browser issues. Ron noted that he **even** banged his head against the wall over a couple of them :) Three of these issues come up frequently in my other projects full of CSS and JS development, so I wanted to share.
+Coding cross browser friendly JavaScript and CSS got you down? In a recent project, [Ron](/team/ron-phipps/), [David](/blog/authors/david-christensen/), and I worked through some painful cross browser issues. Ron noted that he **even** banged his head against the wall over a couple of them :) Three of these issues come up frequently in my other projects full of CSS and JS development, so I wanted to share.
 
 ### Variable Declaration in JS
 

@@ -9,7 +9,7 @@ date: 2014-02-21
 
 
 
-This is a continuation of my previous post: [Python decorator basics](/blog/2013/12/python-decorator-basics). Here I’ll talk about a decorator with optional arguments. Let’s say we want to pass an optional argument to the same debug decorator:
+This is a continuation of my previous post: [Python decorator basics](/blog/2013/12/python-decorator-basics/). Here I’ll talk about a decorator with optional arguments. Let’s say we want to pass an optional argument to the same debug decorator:
 
 ```python
 def debug(msg=None):

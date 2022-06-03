@@ -1,6 +1,6 @@
 ---
 author: Jon Jensen
-title: 'Job opening for web developer in GIS, mapping, Cesium, JavaScript'
+title: 'Web developer in GIS, mapping, Cesium, JavaScript job opening'
 github_issue_number: 1830
 tags:
 - jobs

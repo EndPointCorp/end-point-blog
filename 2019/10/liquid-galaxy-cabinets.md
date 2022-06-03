@@ -36,4 +36,4 @@ Whether portable and free-standing, permanent in-wall, or built within a beautif
 
 <img src="/blog/2019/10/liquid-galaxy-cabinets/image-5.jpg" alt="Liquid Galaxy cabinet diagram" />
 
-We are very happy with the success of our new cabinet offering and look forward to developing and installing more cabinets and Liquid Galaxies for our clients. Please do not hesitate to [reach out to us](/contact) to learn more!
+We are very happy with the success of our new cabinet offering and look forward to developing and installing more cabinets and Liquid Galaxies for our clients. Please do not hesitate to [reach out to us](/contact/) to learn more!

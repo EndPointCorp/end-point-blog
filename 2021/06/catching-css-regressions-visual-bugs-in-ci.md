@@ -42,7 +42,7 @@ Web developers also frequently deal with styling regressions. This can happen du
 
 Visual regression testing adds another quality gate in the workflow to allow developers to verify that, after a code change, the user sees what is expected. For example, if the code change is supposed to modify the appearance of an element, developers can verify that it’s doing just that, or at the very least, the code change should not adversely affect other areas. Visual regression testing involves taking screenshots of tested scenarios with changes and comparing them against the baseline (usually screenshots from the stable branch).
 
-This type of test complements the other testing categories in the test pyramid and ensures user experience is not adversely affected from any given code changes. For more information on the test pyramid and different categories of testing, visit [this blog post](/blog/2020/09/automated-testing-with-symfony) by my colleague, Kevin.
+This type of test complements the other testing categories in the test pyramid and ensures user experience is not adversely affected from any given code changes. For more information on the test pyramid and different categories of testing, visit [this blog post](/blog/2020/09/automated-testing-with-symfony/) by my colleague, Kevin.
 
 There are many tools that help with visual regression testing. Here are some tools that you could look into:
 

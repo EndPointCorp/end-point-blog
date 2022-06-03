@@ -14,7 +14,7 @@ date: 2011-03-08
 
 I was recently approached by a client’s system administrator with a small but interesting training/development project. The sys-admin, named Rod, had built a simple intranet web application that used a few PHP pages, running on an Amazon EC2 instance, to accept some user input and kick off multiple long-running server side QA deployment processes. He wanted to use Ajax to start the process as well as incrementally display its output, line-by-line, on the same web page. However, waiting for the entire process to finish to display its output was a poor user experience, and he wasn’t able to get an Ajax call to return any output incrementally over the lifetime of the request.
 
-Rod asked me to help him get his web app working and train him on what I did to get it working. He admitted that this project was a good excuse for him to learn a bit of [jQuery](https://jquery.com/) (a good example of [keeping your tools sharp](/blog/2010/10/keep-your-tools-sharp-to-avoid-personal)) even if it wasn’t necessarily the best solution in this case. I have always enjoy training others, so we fired up Skype, got into an IRC channel, and dove right in.
+Rod asked me to help him get his web app working and train him on what I did to get it working. He admitted that this project was a good excuse for him to learn a bit of [jQuery](https://jquery.com/) (a good example of [keeping your tools sharp](/blog/2010/10/keep-your-tools-sharp-to-avoid-personal/)) even if it wasn’t necessarily the best solution in this case. I have always enjoy training others, so we fired up Skype, got into an IRC channel, and dove right in.
 
 First, I started with the javascript development basics: 
 

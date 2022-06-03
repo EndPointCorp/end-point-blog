@@ -14,7 +14,7 @@ date: 2020-04-08
 ![spring-kafka](/blog/2020/04/messaging-app-spring-kafka-pt-one/banner.jpg)
 [Photo](https://unsplash.com/photos/7J90Bxj-vtI) by [Click and Learn Photography](https://unsplash.com/@clickandlearnphotography) at [Unsplash](https://unsplash.com/)
 
-This article is part of a [series](/blog/tags/spring-kafka-series). The GitHub repository with code examples can be found [here](https://github.com/ashemez/SpringKafkaMessaging).
+This article is part of a [series](/blog/tags/spring-kafka-series/). The GitHub repository with code examples can be found [here](https://github.com/ashemez/SpringKafkaMessaging).
 
 [Spring](https://spring.io) is a popular Java application framework. [Apache Kafka](https://kafka.apache.org) is a fault-tolerant, fast, and horizontally scalable distributed stream-message broker. [Spring for Apache Kafka](https://spring.io/projects/spring-kafka) applies the overall concepts of Spring to Java applications based on Kafka.
 
@@ -111,4 +111,4 @@ After creating a model and components let’s add our dependencies to the `pom.x
 </dependencies>
 ```
 
-Continued in [Part 2](/blog/2020/04/messaging-app-spring-kafka-pt-two)!
+Continued in [Part 2](/blog/2020/04/messaging-app-spring-kafka-pt-two/)!

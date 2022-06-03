@@ -13,7 +13,7 @@ date: 2018-09-12
 ![](/blog/2018/09/postgis-raster-generation/raster-banner.jpg)
 
 In a [past blog
-post](/blog/2018/06/systematic-query-building-with-ctes)
+post](/blog/2018/06/systematic-query-building-with-ctes/)
 I described a method I’d used to digest raw statistics from the Mexican
 government statistics body, INEGI, quantifying the relative educational level
 of residents in Mexico City. In the post, I divided these data into squares

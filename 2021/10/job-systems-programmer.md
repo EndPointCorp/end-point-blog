@@ -3,7 +3,7 @@ title: 'Job opening: Systems Programmer'
 author: Matt Vollrath
 github_issue_number: 1782
 tags:
-- jobs
+- jobs-closed
 - remote-work
 date: 2021-10-13
 ---
@@ -48,7 +48,10 @@ We are looking for a **C++ developer** to join our team full-time to develop new
 
 ### How to contact us
 
-Please email us an introduction to jobs@endpointdev.com to apply. Include your location, your resume/​CV, your LinkedIn URL (if you have one), and whatever else helps us get to know you.
+~~Please email us an introduction to jobs\@endpointdev.com to apply.~~
+**(This job has been filled.)**
+
+Include your location, your resume/​CV, your LinkedIn URL (if you have one), and whatever else helps us get to know you.
 
 We look forward to hearing from you! Direct employment seekers only, please—​this role is not for agencies or subcontractors.
 

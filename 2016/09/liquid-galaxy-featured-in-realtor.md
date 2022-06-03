@@ -12,7 +12,7 @@ date: 2016-09-30
 
 <div class="separator" style="clear: both; text-align: center;"><a href="/blog/2016/09/liquid-galaxy-featured-in-realtor/image-0-big.png" imageanchor="1" style="clear: right; float: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" height="284" src="/blog/2016/09/liquid-galaxy-featured-in-realtor/image-0.png" width="320"/></a></div>
 
-[Liquid Galaxy](https://www.visionport.com/) was recently featured in Realtor Magazine as new mapping technology that can benefit real estate companies. The article was featured online as well as in their print magazine. The online version can be found [here](http://realtormag.realtor.org/technology/feature/article/2016/09/new-mapping-tech-can-help-attract-clients). 
+[Liquid Galaxy](https://www.visionport.com/) was recently featured in Realtor Magazine as new mapping technology that can benefit real estate companies. The article was featured online as well as in their print magazine. The online version can be found [here](https://magazine.realtor/technology/feature/article/2016/09/new-mapping-tech-can-help-attract-clients). 
 
 The article discussed how new innovations in mapping technology have led to new and exciting tools for real estate professionals to connect with current and future clients. Liquid Galaxy is a prime example of that. 
 

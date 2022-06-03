@@ -124,8 +124,8 @@ Full custom action can be viewed [here](https://gist.github.com/marinalohova/203
 
 End Point has been using RailsAdmin for an ecommerce project that uses [Piggybak](https://github.com/piggybak/piggybak). Here are a few related articles:
 
-- [RailsAdmin and Import functionality](/blog/2012/02/railsadmin-import-part-2)
-- [Piggybak: A Mountable Ruby on Rails Ecommerce Engine](/blog/2012/01/piggybak-mountable-ecommerce-ruby-on)
-- [RailsAdmin in ecommerce](/blog/2011/08/railsadmin-gem-ecommerce)
+- [RailsAdmin and Import functionality](/blog/2012/02/railsadmin-import-part-2/)
+- [Piggybak: A Mountable Ruby on Rails Ecommerce Engine](/blog/2012/01/piggybak-mountable-ecommerce-ruby-on/)
+- [RailsAdmin in ecommerce](/blog/2011/08/railsadmin-gem-ecommerce/)
 
 

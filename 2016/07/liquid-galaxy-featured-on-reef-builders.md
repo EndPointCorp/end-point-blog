@@ -18,6 +18,6 @@ The Liquid Galaxy is an amazing tool for aquariums (not to mention other kinds o
 
 The Liquid Galaxy lets visitors explore coral reefs and underwater environments the exact same way they navigate Street View (it’s the same app and data set) with a full set of screens to give a totally immersive experience. While viewing the dazzling immersive display, the user can make use of the Liquid Galaxy touchpad and 3D joystick to look around and navigate through the display.
 
-A video demonstrating how the Liquid Galaxy is utilized in aquariums can be found below. If you’re interested in learning more about Liquid Galaxy for your aquarium, please [contact us here](/contact) for more information.
+A video demonstrating how the Liquid Galaxy is utilized in aquariums can be found below. If you’re interested in learning more about Liquid Galaxy for your aquarium, please [contact us here](/contact/) for more information.
 
 <iframe allowfullscreen="" frameborder="0" height="315" src="https://www.youtube.com/embed/G9eqPEWnuvE" width="560"></iframe>

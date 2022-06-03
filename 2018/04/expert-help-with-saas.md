@@ -63,4 +63,4 @@ Working with a consultant agency can really give your SaaS project the professio
 
 ---
 
-([Jon Allen](/blog/authors/jon-allen) co-authored this article.)
+([Jon Allen](/blog/authors/jon-allen/) co-authored this article.)

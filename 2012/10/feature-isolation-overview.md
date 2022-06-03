@@ -9,7 +9,7 @@ tags:
 date: 2012-10-10
 ---
 
-Yesterday, Brian Buchalter blogged about a recent [presentation I did for End Point Rails developers](/blog/2012/10/feature-isolation-with-mike-farmer).
+Yesterday, Brian Buchalter blogged about a recent [presentation I did for End Point Rails developers](/blog/2012/10/feature-isolation-with-mike-farmer/).
 
 While the blog article did a great job of capturing some of the nitty gritty detail from the presentation, I'd like to just followup with a quick overview statement about Feature Isolation. I've also made [my slides](https://docs.google.com/presentation/d/1M4AV8ePgL7EKcZuEfjWdTJ4V1ULU79B4ffUixWuk0fs/edit) available for anyone who is interested.
 

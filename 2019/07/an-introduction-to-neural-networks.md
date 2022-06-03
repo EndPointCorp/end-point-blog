@@ -10,7 +10,7 @@ date: 2019-07-01
 
 <img src="/blog/2019/07/an-introduction-to-neural-networks/image-0.jpg" alt="Weird Tree Art (Neural Network)" /> [Photo](https://flic.kr/p/5eL8Ag) by [Sudhamshu Hebbar](https://www.flickr.com/photos/sudhamshu/), used under [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/)
 
-Earlier this year I wrote a [post](/blog/2019/05/facial-recognition-amazon-deeplens) about my work with a machine-learning camera, the [AWS DeepLens](https://aws.amazon.com/deeplens/), which has onboard processing power to enable AI capabilities without sending data to the cloud. Neural networks are a type of ML model which achieves very impressive results on certain problems (including computer vision), so in this post I give a more thorough introduction to neural networks, and share some useful resources for those who want to dig deeper.
+Earlier this year I wrote a [post](/blog/2019/05/facial-recognition-amazon-deeplens/) about my work with a machine-learning camera, the [AWS DeepLens](https://aws.amazon.com/deeplens/), which has onboard processing power to enable AI capabilities without sending data to the cloud. Neural networks are a type of ML model which achieves very impressive results on certain problems (including computer vision), so in this post I give a more thorough introduction to neural networks, and share some useful resources for those who want to dig deeper.
 
 ### Neurons and Nodes
 
@@ -36,7 +36,7 @@ One of the most interesting details of the entire process has to do with how the
 ### Further reading
 
 - It turns out that a relatively simple neural network can approximate any function. This remarkable [demonstration](https://towardsdatascience.com/can-neural-networks-really-learn-any-function-65e106617fc6) is quite accessible.
-- There are countless useful implementations of neural network models. End Pointer [Kamil Ciemniewski](/blog/authors/kamil-ciemniewski) wrote two in-depth and fascinating blogs about neural network projects which he completed in the past year: [Speech Recognition From Scratch](/blog/2019/01/speech-recognition-with-tensorflow), and [Self-Driving Toy Car](/blog/2018/08/self-driving-toy-car-using-the-a3c-algorithm).
+- There are countless useful implementations of neural network models. End Pointer [Kamil Ciemniewski](/blog/authors/kamil-ciemniewski/) wrote two in-depth and fascinating blogs about neural network projects which he completed in the past year: [Speech Recognition From Scratch](/blog/2019/01/speech-recognition-with-tensorflow/), and [Self-Driving Toy Car](/blog/2018/08/self-driving-toy-car-using-the-a3c-algorithm/).
 - If you’re interested in getting a sense for the general state of the art, [here](https://www.topbots.com/most-important-ai-research-papers-2018/) are summaries of some of the most influential papers in machine learning since 2018.
 - For those curious about the inner workings of the training process, here’s one about [back-propagation](http://neuralnetworksanddeeplearning.com/chap2.html).
 - This blog post describes “densely connected” network layers; here’s an article about [convolutional layers](https://towardsdatascience.com/a-comprehensive-guide-to-convolutional-neural-networks-the-eli5-way-3bd2b1164a53).

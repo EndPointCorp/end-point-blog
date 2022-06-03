@@ -9,7 +9,7 @@ tags:
 date: 2011-03-07
 ---
 
-<a href="/blog/2011/02/in-our-own-words"><img border="0" src="/blog/2011/03/rails-tag-cloud-tutorial-spree/image-0.png" width="754px"/></a>
+<a href="/blog/2011/02/in-our-own-words/"><img border="0" src="/blog/2011/03/rails-tag-cloud-tutorial-spree/image-0.png" width="754px"/></a>
 
 A tag cloud from a recent End Point blog post.
 

@@ -8,7 +8,7 @@ tags:
 date: 2011-03-15
 ---
 
-One of the more challenging yet rewarding projects [Richard Templet](/team/richard-templet) and I have worked on over the past year has been an ecommerce product personalization project with [Paper Source](https://www.papersource.com/). I haven’t blogged about it much, but wanted to write about the technical challenges of the project in addition to shamelessly self-promote (a bit).
+One of the more challenging yet rewarding projects [Richard Templet](/team/richard-templet/) and I have worked on over the past year has been an ecommerce product personalization project with [Paper Source](https://www.papersource.com/). I haven’t blogged about it much, but wanted to write about the technical challenges of the project in addition to shamelessly self-promote (a bit).
 
 <a href="/blog/2011/03/ecommerce-product-personalization/image-0-big.png" onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5584675341866725922" src="/blog/2011/03/ecommerce-product-personalization/image-0.png" style="display:block; margin:0px auto 10px; text-align:center;cursor:pointer; cursor:hand;width: 400px; height: 291px;"/></a>
 

@@ -6,6 +6,7 @@ tags:
 - chef
 - conference
 - containers
+- docker
 - open-source
 date: 2015-03-04
 ---

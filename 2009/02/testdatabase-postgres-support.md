@@ -11,7 +11,7 @@ date: 2009-02-08
 
 At our recent company meeting, we organized a ‘hackathon’ at which the company was split into small groups to work on specific projects. My group was Postgres-focused and we chose to add Postgres support to the new Perl module [Test::Database](https://metacpan.org/release/Test-Database).
 
-This turned out to be a decent sized task for the few hours we had to accomplish it. The team consisted of myself (Greg Sabino Mullane), [Mark Johnson](/team/mark-johnson), [Selena Deckelmann](http://www.chesnok.com/daily/), and [Josh Tolley](/team/josh-tolley). While I undertook the task of downloading the latest version and putting it into a local git repository, others were assigned to get an overview of how it worked, examine the API, and start writing some unit tests.
+This turned out to be a decent sized task for the few hours we had to accomplish it. The team consisted of myself (Greg Sabino Mullane), [Mark Johnson](/team/mark-johnson/), [Selena Deckelmann](http://www.chesnok.com/daily/), and [Josh Tolley](/team/josh-tolley/). While I undertook the task of downloading the latest version and putting it into a local git repository, others were assigned to get an overview of how it worked, examine the API, and start writing some unit tests.
 
 In a nutshell, the Test::Database module allows an easy interface to creating and destroying test databases. This can be a non-trivial task on some systems, so putting it all into a module make sense (as well as the benefits of preventing everyone from reinventing this particular wheel). Once we had a basic understanding of how it worked, we were off.
 

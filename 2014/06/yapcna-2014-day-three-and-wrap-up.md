@@ -8,7 +8,7 @@ tags:
 date: 2014-06-27
 ---
 
-My final day at YAPC::NA (Yet Another Perl Conference, North American flavor) summarized below. (For [Day Two](/blog/2014/06/yapcna-2014-day-two) and [Day One](/blog/2014/06/yapcna-2014-day-one), see the links.)
+My final day at YAPC::NA (Yet Another Perl Conference, North American flavor) summarized below. (For [Day Two](/blog/2014/06/yapcna-2014-day-two/) and [Day One](/blog/2014/06/yapcna-2014-day-one/), see the links.)
 
 The conference organizers know their audience: day one started at 8 AM, day two at 9 AM, and the final day at 10 AM. (I took advantage of this lenient schedule to go for a swim in the hotel pool and grab a nice off-site breakfast.—​Oh, dear, does my boss read this blog? :-)
 

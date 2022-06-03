@@ -10,7 +10,7 @@ tags:
 date: 2016-03-16
 ---
 
-In my [last article](/blog/2016/03/strict-typing-fun-example-free-monads), I presented a [functional programming](https://en.wikipedia.org/wiki/Functional_programming) pattern. The goal was to reach out to the developers who weren’t familiar with advanced type systems like the one found in Haskell and make them a bit curious. This time I’d like to take a step further and present a testing approach coming from the same world, that can be used with mainstream languages with a great success.
+In my [last article](/blog/2016/03/strict-typing-fun-example-free-monads/), I presented a [functional programming](https://en.wikipedia.org/wiki/Functional_programming) pattern. The goal was to reach out to the developers who weren’t familiar with advanced type systems like the one found in Haskell and make them a bit curious. This time I’d like to take a step further and present a testing approach coming from the same world, that can be used with mainstream languages with a great success.
 
 ### Many ways to test the code
 

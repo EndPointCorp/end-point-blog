@@ -16,8 +16,8 @@ The 2015 [Perl Dancer Conference](https://www.perl.dance) has recently released 
 
 ### Conference Recap
 
-- [Training Days](/blog/2015/10/perl-dancer-conference-2015-report)
-- [Conference Days](/blog/2015/10/perl-dancer-conference-2015-report_30)
+- [Training Days](/blog/2015/10/perl-dancer-conference-2015-report/)
+- [Conference Days](/blog/2015/10/perl-dancer-conference-2015-report_30/)
 
 ### Conference Presentations
 

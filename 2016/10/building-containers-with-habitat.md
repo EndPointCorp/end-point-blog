@@ -5,6 +5,7 @@ github_issue_number: 1262
 tags:
 - chef
 - containers
+- docker
 - devops
 date: 2016-10-17
 ---

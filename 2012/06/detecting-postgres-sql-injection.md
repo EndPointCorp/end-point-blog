@@ -267,7 +267,7 @@ do this by assuming the worst case scenario. What database user was used
 in the attack, and what rights does it have? Could tables have been updated? 
 Data deleted? Were tables dropped or views altered? This may be a good time to 
 run something like 
-[same_schema in historical mode](/blog/2011/10/viewing-schema-changes-over-time-with) to find out the answer to that last question.
+[same_schema in historical mode](/blog/2011/10/viewing-schema-changes-over-time-with/) to find out the answer to that last question.
 
 Now comes the hard part: seeing what was changed. If you do not have 
 `log_statement='all'` set in your postgresql.conf (as I will once again 

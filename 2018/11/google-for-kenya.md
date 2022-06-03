@@ -19,7 +19,7 @@ Kenya is home to the first Google office in Africa (opened 11 years ago) and Goo
 
 <img src="/blog/2018/11/google-for-kenya/kenyashot1.jpeg" alt="Liquid Galaxy" />
 
-In July we did a similar Next Billion Users <a href="/blog/2018/08/liquid-galaxy-at-google-nigeria">Google event in Lagos, Nigeria</a>. The Nigerian event was open to the public and had around 7,000 guests so it was a nice change of pace to have only a couple hundred guests at the Google for Kenya event.
+In July we did a similar Next Billion Users <a href="/blog/2018/08/liquid-galaxy-at-google-nigeria/">Google event in Lagos, Nigeria</a>. The Nigerian event was open to the public and had around 7,000 guests so it was a nice change of pace to have only a couple hundred guests at the Google for Kenya event.
 
 The Liquid Galaxy was center stage and guests took turns finding Street Views of their houses/​apartments and then looking through the spectacular Street View scenes from across the country. The Street View of the Tusks of Mombasa seemed to put a smile on everyone's face. My personal favorite was a panosphere taken from a drone of the great wildebeest migration in Maasai Mara.
 

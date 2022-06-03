@@ -5,6 +5,7 @@ github_issue_number: 1022
 tags:
 - linux
 - ubuntu
+- emacs
 date: 2014-08-16
 ---
 

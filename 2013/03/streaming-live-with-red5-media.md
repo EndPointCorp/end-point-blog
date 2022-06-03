@@ -9,7 +9,7 @@ tags:
 date: 2013-03-07
 ---
 
-I already wrote about [the basics of publishing and broadcasting](/blog/2012/04/streaming-live-with-red5-media-server) with Red5 Media Server. Let’s fast forward to the advanced topics and create a video conference now!
+I already wrote about [the basics of publishing and broadcasting](/blog/2012/04/streaming-live-with-red5-media-server/) with Red5 Media Server. Let’s fast forward to the advanced topics and create a video conference now!
 
 ### Getting Ready
 

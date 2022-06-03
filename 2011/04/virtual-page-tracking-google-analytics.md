@@ -11,7 +11,7 @@ date: 2011-04-06
 
 Sometimes I come across websites that don’t use RESTful URLs or have too unique (with an order number) URLs during checkout and I need to implement Goal Tracking in Google Analytics on these user interactions. I’ve also had to implement Goal Tracking in a non-ecommerce web application where tabbed on-page browsing guides users through a 3-step process. Examples of situations that pose challenges to traditional page tracking in Google Analytics include:
 
-- Throughout [Interchange’s](/technology/perl-interchange) checkout, URLs are posts to “/process”, which makes the user interactions difficult to distinguish.
+- Throughout [Interchange’s](/expertise/perl-interchange/) checkout, URLs are posts to “/process”, which makes the user interactions difficult to distinguish.
 - Throughout Spree’s checkout, URLs are posts to “/order/:id/edit”, which are distinct and can be difficult to aggregate.
 - In a Sinatra application we developed recently, the single page URL is “/locate.html”, but tabbed browsing occurs through three unique steps.
 

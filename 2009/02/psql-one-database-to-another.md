@@ -11,7 +11,7 @@ date: 2009-02-01
 
 I recently had to move information from one database to another in an automatic function. I centralized some auditing information such that specific information about each database in the cluster could be stored in a single table, inside a single database. While I still needed to copy the associated functions and views to each database, I was able to make use of the new [“COPY TO query”](https://www.postgresql.org/docs/current/interactive/sql-copy.html)feature to do it all on one step via cron.
 
-At the top of the [cron script](/blog/2008/12/best-practices-for-cron), I added two lines defining the database I was pulling the information from (“alpha”), and the database I was sending the information to (“postgres”):
+At the top of the [cron script](/blog/2008/12/best-practices-for-cron/), I added two lines defining the database I was pulling the information from (“alpha”), and the database I was sending the information to (“postgres”):
 
 ```
 PSQL_ALPHA='/usr/bin/psql -X -q -t -d alpha'

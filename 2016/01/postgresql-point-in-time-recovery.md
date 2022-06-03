@@ -48,4 +48,4 @@ With any issue, there is a takeaway, so what are those here?
 
 - Always use explicit transactions when manually modifying data, or modify your production environment’s `~/.psqlrc` to add `\set AUTOCOMMIT off`.
 - Not all data-loss situations can be fixed with replication alone—​Point in Time Recovery is absolutely still relevant these days.
-- It helps to have a PostgreSQL expert on hand day and night. End Point offers 24x7 PostgreSQL support, which you can engage by getting a hold of us [here](/contact).
+- It helps to have a PostgreSQL expert on hand day and night. End Point offers 24x7 PostgreSQL support, which you can engage by getting a hold of us [here](/contact/).

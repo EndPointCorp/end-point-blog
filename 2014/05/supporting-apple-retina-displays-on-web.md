@@ -63,7 +63,7 @@ We read that you can serve Retina images to everyone, but we immediately thought
 
 After testing on a few images, I found I could get Retina images within 2-3 KB of the normal images while keeping the visual fidelity, by dropping the JPEG compression rate. How? Because the images were being displayed at a smaller size than they were, the compression artifacts weren’t nearly as noticeable.
 
-These are the total file sizes for each image on our [team page](/team):
+These are the total file sizes for each image on our [team page](/team/):
 
 ```plain
 Retina  Normal  Filename

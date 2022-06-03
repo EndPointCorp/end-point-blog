@@ -13,7 +13,7 @@ date: 2012-05-10
 
 <div class="separator" style="clear: both; text-align: center;"><a href="/blog/2012/05/utosc-recap/utos-logo.png" imageanchor="1" style="clear:right; float:right; margin-left:1em; margin-bottom:1em"><img border="0" height="100" src="/blog/2012/05/utosc-recap/utos-logo.png" width="257"/></a></div>
 
-I spent three days last week attending the [Utah Open Source Conference](https://web.archive.org/web/20120525040559/http:/conference.utos.org/), in company with [Josh Ausborne](/team/josh-ausborne/) and [Jon Jensen](/team/jon-jensen/). Since End Point is a “distributed company”, I’d never met Josh Ausborne before, and was glad to spend a few days helping and learning from him as we demonstrated the Liquid Galaxy he has [already written about](/blog/2012/05/end-point-at-utah-open-source).
+I spent three days last week attending the [Utah Open Source Conference](https://web.archive.org/web/20120525040559/http:/conference.utos.org/), in company with [Josh Ausborne](/team/josh-ausborne/) and [Jon Jensen](/team/jon-jensen/). Since End Point is a “distributed company”, I’d never met Josh Ausborne before, and was glad to spend a few days helping and learning from him as we demonstrated the Liquid Galaxy he has [already written about](/blog/2012/05/end-point-at-utah-open-source/).
 
 This time around, the conference schedule struck me as being particularly oriented toward front-end web development. The talks were chosen based on a vote taken on the conference website, so apparently that’s what everyone wanted, but front-end stuff is not generally my cup of tea. That fact notwithstanding, I found plenty to appeal to my particular interests, and a number of talks I didn’t make it to but wished I had.
 

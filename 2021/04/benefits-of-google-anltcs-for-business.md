@@ -65,4 +65,4 @@ There have always been various options for web visitor analytics. Google Analyti
 - [Matomo](https://matomo.org/), formerly known as Piwik, a fully-featured SaaS or on-premises paid package with a limited open source version.
 - [Open Web Analytics](http://www.openwebanalytics.com/), a customizable open source analytics framework.
 
-We at End Point have found success with these core ideas and several of these services. We are happy to provide a [free consultation](/contact) to discuss your website needs.
+We at End Point have found success with these core ideas and several of these services. We are happy to provide a [free consultation](/contact/) to discuss your website needs.

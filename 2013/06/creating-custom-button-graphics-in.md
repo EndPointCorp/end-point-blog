@@ -8,7 +8,7 @@ tags:
 date: 2013-06-07
 ---
 
-In the Android timesheet app I’m working on, I have a scrollable layout of RadioButtons for the user to pick how much time they’ve spent on a project (see [my earlier blog post about it](/blog/2013/05/dynamically-adding-custom-radio-buttons)), and for that I use custom button graphics to make it look nice. So, I’m going to show you how to do that with 9-patch PNGs and selector XML.
+In the Android timesheet app I’m working on, I have a scrollable layout of RadioButtons for the user to pick how much time they’ve spent on a project (see [my earlier blog post about it](/blog/2013/05/dynamically-adding-custom-radio-buttons/)), and for that I use custom button graphics to make it look nice. So, I’m going to show you how to do that with 9-patch PNGs and selector XML.
 
 First, what’s a 9-patch PNG? A 9-patch is a special PNG image where you specify regions that can be stretched to make room for text. Android will automatically resize a 9-patch to best fit whatever contents you give it. The tool you need to create a 9-patch image is included in the Android SDK Tools, so download that if you haven’t already.
 

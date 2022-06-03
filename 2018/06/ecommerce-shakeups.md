@@ -17,7 +17,7 @@ If you’ve been paying any attention to much in the ecommerce world, there have
 
 A few weeks ago, [it was announced](http://news.adobe.com/press-release/corporate/adobe-acquire-magento-commerce) Adobe would acquire Magento in a large acquisition. We’ve seen Magento clients come and go. It used to be the case that the Magento Community version was free and open source, but lacking in features, and the Magento Enterprise version was not free and came with many more features but was closed source.
 
-But, times change, and admittedly I haven’t looked into the current Magento offerings until writing this post. The two current options for Magento are Magento Commerce Starter and Magento Commerce Pro, more details [here](https://magento.com/trial/plans-comparison). These plans are not for small potatoes, starting at $2k/mo. I can see how the cost of this is worth it in lieu of paying a full time developer, but this is not a good fit for small businesses just getting started.
+But, times change, and admittedly I haven’t looked into the current Magento offerings until writing this post. The two current options for Magento are Magento Commerce Starter and Magento Commerce Pro, more details [here](https://web.archive.org/web/20180610090249/https://magento.com/trial/plans-comparison). These plans are not for small potatoes, starting at $2k/mo. I can see how the cost of this is worth it in lieu of paying a full time developer, but this is not a good fit for small businesses just getting started.
 
 There at not many public details on the acquisition, other than bringing Magento to Adobe’s range of “physical and digital goods across a range of industries, including consumer packaged goods, retail, wholesale, manufacturing, and the public sector”. Only time will tell.
 
@@ -37,4 +37,4 @@ While Etsy might offer a nice low-investment starting point, more exposure and m
 
 On the flip side, many of End Point clients have businesses that are further along and the more enterprisey versions or custom software development solutions make great sense for them, with or without in-house development staff.
 
-If you’re interested in finding out more about setting up a SaaS shop, moving away from Etsy, or understanding your options with Magento, [contact us](/contact) to find out how we can support your business goals. 
+If you’re interested in finding out more about setting up a SaaS shop, moving away from Etsy, or understanding your options with Magento, [contact us](/contact/) to find out how we can support your business goals. 

@@ -10,7 +10,7 @@ tags:
 date: 2012-10-31
 ---
 
-I recently had a problem with Rails named scopes while working on minor refactoring in [Piggybak](https://github.com/piggybak/piggybak), an open source Ruby on Rails ecommerce platform that End Point created and maintains. The problem was that I found that [named scopes](http://guides.rubyonrails.org/active_record_querying.html#scopes) were not returning uncommitted or new records. Named scopes allow you to specify ActiveRecord query conditions and can be combined with joins and includes to query associated data. For example, based on recent [line item rearchitecture](/blog/2012/10/piggybak-update-line-item-rearchitecture), I wanted order.line_items.sellables, order.line_items.taxes, order.line_items.shipments to return all line items where line_item_type was sellable, tax, or shipment, respectively. With named scopes, this might look like:
+I recently had a problem with Rails named scopes while working on minor refactoring in [Piggybak](https://github.com/piggybak/piggybak), an open source Ruby on Rails ecommerce platform that End Point created and maintains. The problem was that I found that [named scopes](http://guides.rubyonrails.org/active_record_querying.html#scopes) were not returning uncommitted or new records. Named scopes allow you to specify ActiveRecord query conditions and can be combined with joins and includes to query associated data. For example, based on recent [line item rearchitecture](/blog/2012/10/piggybak-update-line-item-rearchitecture/), I wanted order.line_items.sellables, order.line_items.taxes, order.line_items.shipments to return all line items where line_item_type was sellable, tax, or shipment, respectively. With named scopes, this might look like:
 
 ```ruby
 class Piggybak::LineItem < ActiveRecord::Base
@@ -33,7 +33,7 @@ order.line_items.select { |li| li.new_record? && li.line_item_type == "payment" 
 
 ### Association Extensions
 
-I felt that the above workaround was crufty and not very readable and sent out a request to my coworkers in hopes that there was a solution for improving the readability and clarity of the code. [Kamil](/blog/authors/kamil-ciemniewski) confirmed that named scopes do not return uncommitted records, and Tim Case offered an alternative solution by suggesting [association extensions](http://guides.rubyonrails.org/association-basics.html#association-extensions). An association extension allows you to add new finders, creators or methods that are only used as part of the association. After some investigation, I settled on the following code to extend the line_items association:
+I felt that the above workaround was crufty and not very readable and sent out a request to my coworkers in hopes that there was a solution for improving the readability and clarity of the code. [Kamil](/blog/authors/kamil-ciemniewski/) confirmed that named scopes do not return uncommitted records, and Tim Case offered an alternative solution by suggesting [association extensions](http://guides.rubyonrails.org/association-basics.html#association-extensions). An association extension allows you to add new finders, creators or methods that are only used as part of the association. After some investigation, I settled on the following code to extend the line_items association:
 
 ```ruby
 class Piggybak::Order < ActiveRecord::Base

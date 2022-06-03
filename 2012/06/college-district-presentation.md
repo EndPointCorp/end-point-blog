@@ -10,7 +10,7 @@ tags:
 date: 2012-06-14
 ---
 
-Our company meeting at End Point opened today with a presentation about one of our clients, [College District](http://www.collegedistrict.com/) by Terry Grant and [Ron Phipps](/team/ron-phipps), explaining how the site works from a mostly technical angle. College District is a “community where fans and designers create, grade, and promote collegiate products you can’t find anywhere else.” Each team has its own site: for example, the University of Florida Gators can be found at [GatorDistrict.com](https://web.archive.org/web/20120211103614/http://www.gatordistrict.com/).
+Our company meeting at End Point opened today with a presentation about one of our clients, [College District](http://www.collegedistrict.com/) by Terry Grant and [Ron Phipps](/team/ron-phipps/), explaining how the site works from a mostly technical angle. College District is a “community where fans and designers create, grade, and promote collegiate products you can’t find anywhere else.” Each team has its own site: for example, the University of Florida Gators can be found at [GatorDistrict.com](https://web.archive.org/web/20120211103614/http://www.gatordistrict.com/).
 
 <a href="/blog/2012/06/college-district-presentation/image-0-big.png" imageanchor="1" style="margin-left:1em; margin-right:1em"><img border="0" height="170" src="/blog/2012/06/college-district-presentation/image-0.png" width="400"/></a>
 

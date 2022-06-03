@@ -67,4 +67,4 @@ Read the brief but helpful article [10 Ways to Do What You Don’t Want to Do](h
 * Embrace that it won’t be fun and do it anyway.
 * Set constraints.
 
-Then do at least a little bit of the work to get started. As our co-worker [Mike Heins](/team/mike-heins) has said to me on a few occasions over the years, you’ll never finish until you start.
+Then do at least a little bit of the work to get started. As our co-worker [Mike Heins](/team/mike-heins/) has said to me on a few occasions over the years, you’ll never finish until you start.

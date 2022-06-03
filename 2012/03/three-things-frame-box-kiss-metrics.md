@@ -11,11 +11,11 @@ Here’s my latest installment of sharing content that doesn’t necessarily mer
 
 ### 1. Kiss Metrics on Design and Conversion
 
-First up is an article sent over by [Jon](/team/jon-jensen). [This](https://blog.kissmetrics.com/shocking-truth-about-graphics/) is a great article from [The Kiss Metrics Blog](https://blog.kissmetrics.com/). Several of us at End Point have been a part of redesigning the End Point website and this is an interesting article that discusses how design decisions affect conversion, and how it’s important to justify design decisions with metrics and testing.
+First up is an article sent over by [Jon](/team/jon-jensen/). [This](https://blog.kissmetrics.com/shocking-truth-about-graphics/) is a great article from [The Kiss Metrics Blog](https://blog.kissmetrics.com/). Several of us at End Point have been a part of redesigning the End Point website and this is an interesting article that discusses how design decisions affect conversion, and how it’s important to justify design decisions with metrics and testing.
 
 ### 2. DUMP_VHOSTS
 
-Next up is a quick system admin command line that I came across while troubleshooting something with [Richard](/team/richard-templet):
+Next up is a quick system admin command line that I came across while troubleshooting something with [Richard](/team/richard-templet/):
 
 ```plain
 apache2ctl -t -D DUMP_VHOSTS

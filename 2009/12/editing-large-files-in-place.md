@@ -6,10 +6,10 @@ tags:
 - database
 - postgres
 - tips
+- emacs
+- vim
 date: 2009-12-13
 ---
-
-
 
 Running out of disk space seems to be an all too common problem lately, especially when dealing with large databases. One situation that came up recently was a client who needed to import a large Postgres dump file into a new database. Unfortunately, they were very low on disk space and the file needed to be modified. Without going into all the reasons, we needed the databases to use template1 as the template database, and not template0. This was a very large, multi-gigabyte file, and the amount of space left on the disk was measured in megabytes. It would have taken too long to copy the file somewhere else to edit it, so I did a low-level edit using the Unix utility **dd**. The rest of this post gives the details.
 
@@ -170,5 +170,3 @@ $ rmdir ramtest
 ```
 
 Keep in mind that dd is a very powerful and thus very dangerous utility, so treat it with care. It can be invaluable for times like this however!
-
-

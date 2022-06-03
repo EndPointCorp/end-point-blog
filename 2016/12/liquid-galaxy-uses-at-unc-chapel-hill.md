@@ -11,7 +11,7 @@ tags:
 date: 2016-12-29
 ---
 
-An article was posted on [The Tech Broadcast](http://www.thetechbroadcast.com/2016/12/23/constructing-student-learning-using-makerspaces-and-liquid-galaxy/) last week that featured the UNC Chapel Hill Center for Faculty Excellence’s Faculty Showcase. The faculty showcase included a fantastic presentation featuring the many ways students and faculty use their [Liquid Galaxy](https://www.visionport.com/), and discussed other opportunities for using the system in the future. 
+An article was posted on [The Tech Broadcast](https://web.archive.org/web/20170203144054/http://www.thetechbroadcast.com/2016/12/23/constructing-student-learning-using-makerspaces-and-liquid-galaxy/) last week that featured the UNC Chapel Hill Center for Faculty Excellence’s Faculty Showcase. The faculty showcase included a fantastic presentation featuring the many ways students and faculty use their [Liquid Galaxy](https://www.visionport.com/), and discussed other opportunities for using the system in the future. 
 
 <a href="/blog/2016/12/liquid-galaxy-uses-at-unc-chapel-hill/image-0-big.jpeg" imageanchor="1"><img border="0" height="436" src="/blog/2016/12/liquid-galaxy-uses-at-unc-chapel-hill/image-0.jpeg" width="640"/></a>
 
@@ -45,7 +45,7 @@ During the faculty showcase, faculty members listed off some of the great benefi
 
 1. From a faculty standpoint, a lot of time was spent planning and trying to work out the class structure, which has developed a lot. Dedicating class-time for the Liquid Galaxy was beneficial, and resulted in teaching less but in more depth and in different ways. The teacher thinks there was more benefit to that, and it was a great learning experience for all parties involved.   
 
-Faculty members expressed interest and excitement when learning more about the Liquid Galaxy and the ways it is used. There was a lot of interest in using the Liquid Galaxy for interdisciplinary studies between different departments to study how different communities and cultures work. There was also interest in further utilization of the system’s visualization capabilities. A professor from the School of Dentistry spoke of how he could picture using the Liquid Galaxy to teach someone about an exam of the oral cavity through the LG. Putting up 3D models of the oral cavity using [our new Sketchfab capabilities](/blog/2016/05/sketchfab-on-liquid-galaxy) would be a perfect way to achieve this!       
+Faculty members expressed interest and excitement when learning more about the Liquid Galaxy and the ways it is used. There was a lot of interest in using the Liquid Galaxy for interdisciplinary studies between different departments to study how different communities and cultures work. There was also interest in further utilization of the system’s visualization capabilities. A professor from the School of Dentistry spoke of how he could picture using the Liquid Galaxy to teach someone about an exam of the oral cavity through the LG. Putting up 3D models of the oral cavity using [our new Sketchfab capabilities](/blog/2016/05/sketchfab-on-liquid-galaxy/) would be a perfect way to achieve this!       
 
 We at End Point were very excited to learn more about the many ways that Liquid Galaxy is being successfully used at UNC as a tool for research, for fun, and to bring together students and faculty alike. We look forward to seeing how UNC, among the many other research libraries that use Liquid Galaxy, will implement the system in courses and on campus in the future.       
 

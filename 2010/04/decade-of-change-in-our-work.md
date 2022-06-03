@@ -8,8 +8,6 @@ tags:
 date: 2010-04-16
 ---
 
-
-
 Lately I’ve been looking back a bit at how things have changed in our work during the past decade. Maybe I’m a little behind the times since this is a little like a new year’s reflection.
 
 Since 2000, in our world of open source/free software ecommerce and other Internet application development, many things have stayed the same or become more standard.
@@ -121,5 +119,3 @@ Other changes in the larger Internet ecosystem are more visible and have been mo
 I don’t mean to say that the preceding decades were any less noteworthy. Those working with the Internet should expect a lot of change, as it’s still a young industry.
 
 It’s interesting to look back and consider the journey, and a little daunting to realize how much work has gone into adapting to each wave of change, and how much work remains to upgrade, migrate, and adapt the large amount of legacy code and infrastructure we’ve created. That, in addition to working on the next improvements we see a need for. Lots to learn, and lots to do!
-
-

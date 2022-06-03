@@ -5,6 +5,7 @@ github_issue_number: 1661
 tags:
 - sysadmin
 - storage
+- backups
 date: 2020-09-10
 ---
 

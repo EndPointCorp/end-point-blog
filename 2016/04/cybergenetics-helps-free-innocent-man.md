@@ -16,4 +16,4 @@ TrueAllele can separate out the people who contributed their DNA to a mixed DNA 
 
 End Point has worked with Cybergenetics since 2003 and consults with them on security, database infrastructure, and website hosting. We congratulate Cybergenetics on their success in being part of the happy ending for Darryl Pinkins and his family!
 
-More of the story is available at [Cybergenetics’ Newsroom](https://www.cybgen.com/information/newsroom/2016/apr/TrueAllele-helps-free-innocent-Indiana-man-after-24-years-in-prison.shtml) or the [Chicago Tribune](http://www.chicagotribune.com/suburbs/post-tribune/news/ct-ptb-pinkins-prison-release-st-0426-20160425-story.html).
+More of the story is available at [Cybergenetics’ Newsroom](https://www.cybgen.com/information/newsroom/2016/apr/TrueAllele-helps-free-innocent-Indiana-man-after-24-years-in-prison.shtml) or the [Chicago Tribune](https://www.chicagotribune.com/suburbs/post-tribune/ct-ptb-pinkins-prison-release-st-0426-20160425-story.html).

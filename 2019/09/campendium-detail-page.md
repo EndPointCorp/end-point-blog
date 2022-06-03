@@ -18,7 +18,7 @@ date: 2019-09-09
 
 ![](/blog/2019/09/campendium-detail-page/banner.jpg)
 
-This week, I was very excited to deploy a project for [Campendium](https://www.campendium.com/), one of our long-time clients. As noted in [my recent post on Campendium updates for the year](/blog/2019/08/campendium-updates), Campendium has thousands of listings of places to camp and provides a great infrastructure for the development of a rich community of travelers around North America.
+This week, I was very excited to deploy a project for [Campendium](https://www.campendium.com/), one of our long-time clients. As noted in [my recent post on Campendium updates for the year](/blog/2019/08/campendium-updates/), Campendium has thousands of listings of places to camp and provides a great infrastructure for the development of a rich community of travelers around North America.
 
 For the past few months, I’ve been working on a significant update to Campendium’s campground detail page, the page template where in-depth information is provided for each of Campendium’s locations. This is equivalent to a product detail page on an ecommerce site.
 

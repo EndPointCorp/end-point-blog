@@ -14,7 +14,7 @@ date: 2012-11-26
 
  
 
-In a  [recent article](/blog/2012/11/postgres-alter-column-problems-and), I mentioned that changing the column definition of a  Postgres table will sometimes cause a full table rewrite, but sometimes  it will not. The rewrite depends on both the nature of the change and the  version of Postgres you are using. So how can you tell for sure if changing  a large table will do a rewrite or not? I'll show one method using the internal system column **ctid**. 
+In a  [recent article](/blog/2012/11/postgres-alter-column-problems-and/), I mentioned that changing the column definition of a  Postgres table will sometimes cause a full table rewrite, but sometimes  it will not. The rewrite depends on both the nature of the change and the  version of Postgres you are using. So how can you tell for sure if changing  a large table will do a rewrite or not? I'll show one method using the internal system column **ctid**. 
 
 Naturally, you do not want to perform this test using your actual table.  In this example, we will create a simple dummy table. As long as the  column types are the same as your real table, you can determine if the  change will do a table rewrite on your version of PostgreSQL.
 

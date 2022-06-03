@@ -250,4 +250,4 @@ At this point we are able to start a broadcast at `http://localhost/broadcast.h
 
 Sweet! Next step is to implement the actual two-way hangout with Red5 Media Server!
 
-Read on here: [Streaming Live with Red5 Media Server: Two-Way](/blog/2013/03/streaming-live-with-red5-media)
+Read on here: [Streaming Live with Red5 Media Server: Two-Way](/blog/2013/03/streaming-live-with-red5-media/)

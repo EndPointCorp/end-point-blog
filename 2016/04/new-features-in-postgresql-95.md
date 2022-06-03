@@ -35,7 +35,7 @@ DO UPDATE SET login='ho ho ho';
 
 The only requirement is that there should be a UNIQUE constraint on a column which should fail while inserting a row.
 
-The version above makes the UPDATE when the INSERT fails. There is also another form of the UPSERT query, which I used in [this blog post](/2016/03/loading-json-files-into-postgresql-95.html).
+The version above makes the UPDATE when the INSERT fails. There is also another form of the UPSERT query, which I used in [this blog post](/blog/2016/03/loading-json-files-into-postgresql-95/).
 You can just ignore the INSERT failure:
 
 ```sql

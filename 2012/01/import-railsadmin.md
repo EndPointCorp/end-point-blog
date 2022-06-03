@@ -9,7 +9,7 @@ tags:
 date: 2012-01-19
 ---
 
-**Update #1: Read an update to this functionality [here](/blog/2012/02/railsadmin-import-part-2).**
+**Update #1: Read an update to this functionality [here](/blog/2012/02/railsadmin-import-part-2/).**
 
 **Update #2: This article was written in January of 2012, and the code related to the RailsAdmin actions no longer applies to the current release. Please make sure to read the [RailsAdmin](https://github.com/sferik/rails_admin) documentation regarding current action implementation.**
 

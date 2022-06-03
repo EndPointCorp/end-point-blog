@@ -7,6 +7,8 @@ tags:
 - sysadmin
 - ssh
 - tips
+- docker
+- containers
 date: 2022-01-26
 github_issue_number: 1827
 ---

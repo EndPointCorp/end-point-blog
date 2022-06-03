@@ -58,6 +58,7 @@ End Point was founded in New York City in 1995 as a full-service software develo
 
 ~~Please email us an introduction to jobs&#x40;endpointdev.com to apply!~~
 **(This job has been filled.)**
+
 Include your location, a resume/​CV, your Git repository or LinkedIn URLs (if any), and whatever else may help us get to know you. You can expect to interview with the Support Lead and Team Manager, and do a hands-on Linux work exercise. 
 
 We look forward to hearing from you! Direct work seekers only, please—​this role is not for agencies or subcontractors.

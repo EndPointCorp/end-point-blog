@@ -9,7 +9,7 @@ tags:
 date: 2012-02-01
 ---
 
-I recently wrote about [importing data in RailsAdmin](/blog/2012/01/import-railsadmin). [RailsAdmin](https://github.com/sferik/rails_admin) is a Rails engine that provides a nice admin interface for managing your data, which comes packed with configuration options.
+I recently wrote about [importing data in RailsAdmin](/blog/2012/01/import-railsadmin/). [RailsAdmin](https://github.com/sferik/rails_admin) is a Rails engine that provides a nice admin interface for managing your data, which comes packed with configuration options.
 
 In a recent Ruby on Rails ecommerce project, I’ve been using RailsAdmin, [Piggybak (a Rails ecommerce gem supported by End Point)](https://github.com/piggybak/piggybak), and have been building out custom front-end features such as advanced search and downloadable product support. When this client came to End Point with the project, we offered several options for handling data migration from a legacy system to the new Rails application:
 

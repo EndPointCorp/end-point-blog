@@ -49,4 +49,4 @@ I took copious notes, but it seems that the true learning takes place only as on
 
 The training days were truly like drinking from a firehose, with so much good information. I am looking forward to putting this into practice!
 
-Stay tuned for my [next blog post](/blog/2015/10/perl-dancer-conference-2015-report_30) on the Conference Days.
+Stay tuned for my [next blog post](/blog/2015/10/perl-dancer-conference-2015-report_30/) on the Conference Days.

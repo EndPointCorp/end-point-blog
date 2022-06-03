@@ -23,5 +23,5 @@ The crontab entry would look something like this:
 34 12 * * * bin/cron-wrapper bin/blog-update.pl
 ```
 
-The -l on the executing of bash makes it act like it is logging in. Therefore it picks up anything in the ~/.bash_profile and has that available to the env command. This means the cron job runs in the same environment that is setup when you run it from the command line, helping to stop those annoying times where it works fine from the command line but breaks in cron. Jon Jensen went into much greater detail on the benefits of using the -l [here](/blog/2013/05/login-shells-in-scripts-called-from-cron).
+The -l on the executing of bash makes it act like it is logging in. Therefore it picks up anything in the ~/.bash_profile and has that available to the env command. This means the cron job runs in the same environment that is setup when you run it from the command line, helping to stop those annoying times where it works fine from the command line but breaks in cron. Jon Jensen went into much greater detail on the benefits of using the -l [here](/blog/2013/05/login-shells-in-scripts-called-from-cron/).
 Hope this helps!

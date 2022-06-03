@@ -78,7 +78,7 @@ Small</td>
 </tr>
 </tbody></table>
 
-And let’s give a real-life example data model, this one from a [previous article on Spree’s product data model](/blog/2010/07/spree-sample-product-data):
+And let’s give a real-life example data model, this one from a [previous article on Spree’s product data model](/blog/2010/07/spree-sample-product-data/):
 
 <img alt="" border="0" id="BLOGGER_PHOTO_ID_5598028813657050850" src="/blog/2011/04/product-variant-code-challenge/image-7.png" style="display:block; margin:0px auto 10px; text-align:center;cursor:pointer; cursor:hand;width: 537px; height: 279px;"/>
 

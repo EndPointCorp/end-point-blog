@@ -155,7 +155,7 @@ This straightforward code accomplished the  major updates required for download 
 
 If you are interested in this project, check out these related articles:
 
-- [Introducing Piggybak: A Mountable Ruby on Rails Ecommerce Engine](/blog/2012/01/piggybak-mountable-ecommerce-ruby-on)
-- [ActiveRecord Callbacks for Order Processing in Ecommerce Applications](/blog/2012/01/activerecord-callbacks-ecommerce-order)
-- [Importing into RailsAdmin: Part 1](/blog/2012/01/import-railsadmin)
-- [Importing into RailsAdmin: Part 2](/blog/2012/02/railsadmin-import-part-2)
+- [Introducing Piggybak: A Mountable Ruby on Rails Ecommerce Engine](/blog/2012/01/piggybak-mountable-ecommerce-ruby-on/)
+- [ActiveRecord Callbacks for Order Processing in Ecommerce Applications](/blog/2012/01/activerecord-callbacks-ecommerce-order/)
+- [Importing into RailsAdmin: Part 1](/blog/2012/01/import-railsadmin/)
+- [Importing into RailsAdmin: Part 2](/blog/2012/02/railsadmin-import-part-2/)

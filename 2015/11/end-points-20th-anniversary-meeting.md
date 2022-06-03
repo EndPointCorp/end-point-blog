@@ -8,7 +8,7 @@ tags:
 date: 2015-11-02
 ---
 
-Friday, October 2nd, was the second and final day of our company meeting. (See the earlier [report on day 1 of our meeting](/blog/2015/10/end-points-20th-anniversary-meeting) if you missed it.) Another busy day of talks, this day was kicked off by Ben Goldstein, who gave us a more detailed rundown of End Point’s roots.
+Friday, October 2nd, was the second and final day of our company meeting. (See the earlier [report on day 1 of our meeting](/blog/2015/10/end-points-20th-anniversary-meeting/) if you missed it.) Another busy day of talks, this day was kicked off by Ben Goldstein, who gave us a more detailed rundown of End Point’s roots.
 
 <div class="separator" style="clear: both; text-align: center;"><a href="/blog/2015/11/end-points-20th-anniversary-meeting/image-0.jpeg" imageanchor="1" style="clear: right; float: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" src="/blog/2015/11/end-points-20th-anniversary-meeting/image-0.jpeg"/></a></div>
 
@@ -88,7 +88,7 @@ tee $filename lets you pipe to STDOUT and a file at the same time. For example, 
 
 ls -d */ will list all directories in the current directory.
 
-These are just a few of the neat things they showed us. See their [blog post about these and other Unix commands](/blog/2015/11/favourite-unix-command-line-tools).
+These are just a few of the neat things they showed us. See their [blog post about these and other Unix commands](/blog/2015/11/favourite-unix-command-line-tools/).
 
 <a data-flickr-embed="true" href="https://www.flickr.com/photos/end-point/21741059554/" title="20151002_200437"><img height="360" src="/blog/2015/11/end-points-20th-anniversary-meeting/image-1.jpeg" style="max-width: 100%" width="640"/></a>
 
