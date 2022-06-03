@@ -8,7 +8,7 @@ tags:
 date: 2016-02-08
 ---
 
-The [Zurb Foundation 5](http://foundation.zurb.com/sites/docs/v/5.5.3/) front-end framework provides many convenient features such as the ability to control the visibility of HTML elements for different browser window sizes using CSS classes. Foundation CSS classes like “show-for-small-only” and “hide-for-large-up” (full list at [http://foundation.zurb.com/sites/docs/v/5.5.3/components/visibility.html](http://foundation.zurb.com/sites/docs/v/5.5.3/components/visibility.html)) make it easy to add mobile-specific content to your page or prevent certain page elements from being displayed on mobile devices.
+The [Zurb Foundation 5](https://get.foundation/sites/docs-v5/) front-end framework provides many convenient features such as the ability to control the visibility of HTML elements for different browser window sizes using CSS classes. Foundation CSS classes like “show-for-small-only” and “hide-for-large-up” (full list at [https://get.foundation/sites/docs-v5/components/visibility.html](https://get.foundation/sites/docs-v5/components/visibility.html)) make it easy to add mobile-specific content to your page or prevent certain page elements from being displayed on mobile devices.
 
 Having an easy way to show/hide elements based on viewport size is nice, but what if you want to style an element differently based on the size of the browser that’s viewing the page? Foundation has you covered there, too, though the method is less obvious. It’s possible to use Foundation’s media query SCSS variables when writing your own custom styles in order to apply different styling rules for different viewport sizes.
 

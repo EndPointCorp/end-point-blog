@@ -15,7 +15,7 @@ date: 2016-11-30
 
 The [Perl Dancer Conference](https://perl.dance/) is a great event, now in its third year. <img align="left" border="0" height="90" src="/blog/2016/11/perl-dancer-conference-2016-day-1/image-1.png" width="130"/> The event took place in the same location as last year in Vienna, Austria at the Hotel Schani Wien. For those of you who have never visited Vienna, it is a perfect place to bring the family. From visiting the beautiful parks to taking a scenic ride on the Danube River, the beautiful and historic city is known for its rich art and musical culture, and has much to offer.
 
-I was very excited to not only attend but also give a talk this year. My talk titled [“Dancing in the Clouds”](https://www.perl.dance/talks/45-dancing-in-the-clouds) also coincided with the release of 2 new Perl modules [Etcd3](https://metacpan.org/pod/Etcd3) and [Dancer2::Plugin::Etcd](https://metacpan.org/pod/Dancer2::Plugin::Etcd). This article will be the first of a 3 part series, with the final article a focus on my talk and usage examples with the new modules.
+I was very excited to not only attend but also give a talk this year. My talk titled [“Dancing in the Clouds”](https://www.perl.dance/talks/45-dancing-in-the-clouds) also coincided with the release of 2 new Perl modules [Etcd3](https://metacpan.org/release/HEXFUSION/Etcd3-0.007/view/lib/Etcd3.pm) and [Dancer2::Plugin::Etcd](https://metacpan.org/pod/Dancer2::Plugin::Etcd). This article will be the first of a 3 part series, with the final article a focus on my talk and usage examples with the new modules.
 
 ### Sawyer X (Sawyer X) — A bus tour through Dancer core
 

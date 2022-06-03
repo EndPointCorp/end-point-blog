@@ -10,7 +10,7 @@ tags:
 date: 2016-12-23
 ---
 
-[Carjojo](https://www.carjojo.com/)’s site makes use of some of the best tools on the market today for accessing and displaying data. Carjojo is a car buying application that takes data about car pricing, dealer incentives, and rebate programs and aggregates that into a location-specific vehicle pricing search tool. The Carjojo work presented a great opportunity for End Point to utilize our technical skills to build a state-of-the-art application everyone is very proud of. End Point worked on the Carjojo development project from October of 2014 through early 2016, and the final Carjojo application launched in the summer of 2016. This case study shows that End Point can be a technology partner for a startup, enabling the client to maintain their own business once our part of the project is over.
+[Carjojo](https://web.archive.org/web/20161221010712/https://www.carjojo.com/)’s site makes use of some of the best tools on the market today for accessing and displaying data. Carjojo is a car buying application that takes data about car pricing, dealer incentives, and rebate programs and aggregates that into a location-specific vehicle pricing search tool. The Carjojo work presented a great opportunity for End Point to utilize our technical skills to build a state-of-the-art application everyone is very proud of. End Point worked on the Carjojo development project from October of 2014 through early 2016, and the final Carjojo application launched in the summer of 2016. This case study shows that End Point can be a technology partner for a startup, enabling the client to maintain their own business once our part of the project is over.
 
 ### Why End Point?
 

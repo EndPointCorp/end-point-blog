@@ -18,7 +18,7 @@ I was recently looking to build a full screen image and video gallery for our cl
 
 <div class="separator" style="clear: both; text-align: center;">    <a href="/blog/2016/01/full-screen-gallery-with-supersized-and/image-0-big.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;">       <img border="0" src="/blog/2016/01/full-screen-gallery-with-supersized-and/image-0.png" width="600"/>     </a>   </div>
 
-After scouring the Internet to find a suitable jQuery plugin I finally decided on [Supersized, Full screen background slideshow plugin for jQuery](https://www.buildinternet.com/2009/05/supersized-20-full-screen-imagebackground-slideshow-jquery-plugin-w-transitions-and-controls/).
+After scouring the Internet to find a suitable jQuery plugin I finally decided on [Supersized, Full screen background slideshow plugin for jQuery](https://web.archive.org/web/20170629183603/http://buildinternet.com/2009/05/supersized-20-full-screen-imagebackground-slideshow-jquery-plugin-w-transitions-and-controls/).
 
 After downloading the library, include it on the page:
 

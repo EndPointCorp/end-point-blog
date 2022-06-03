@@ -9,7 +9,7 @@ date: 2016-11-16
 
 This is yet another yesteryear’s story!
 
-I had a chance to attend a DNS/BIND training which was organized by Malaysia’s domain registry [(MyNIC)](https://www.mynic.my/en/). The training took two days and was organized in Bangi, Selangor, Malaysia. Dated November 23 to 24, 2015, the two days’ training was packed with technical training for the Domain Name System (DNS) using BIND software. Our trainer was Mr Amir Haris, who is running his own DNS specialist company named [Localhost Sendirian Berhad](http://www.localhost.my/) (Sendirian Berhad is equivalent to “Private Limited”).
+I had a chance to attend a DNS/BIND training which was organized by Malaysia’s domain registry [(MyNIC)](https://www.mynic.my). The training took two days and was organized in Bangi, Selangor, Malaysia. Dated November 23 to 24, 2015, the two days’ training was packed with technical training for the Domain Name System (DNS) using BIND software. Our trainer was Mr Amir Haris, who is running his own DNS specialist company named [Localhost Sendirian Berhad](http://www.localhost.my/) (Sendirian Berhad is equivalent to “Private Limited”).
 
 ### Day One
 
