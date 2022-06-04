@@ -1,7 +1,7 @@
 ---
 author: "Kürşat Kutlu Aydemir"
 title: "Understanding Linear Regression"
-date: 2022-05-31
+date: 2022-06-01
 github_issue_number: 1869
 tags:
 - machine-learning
@@ -13,9 +13,7 @@ tags:
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.js" integrity="sha384-ljao5I1l+8KYFXG7LNEA7DyaFvuvSCmedUf6Y6JI7LJqiu8q5dEivP2nDdFH31V4" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"></script>
 
-
-![Green Striped](/blog/2022/05/understanding-linear-regression/banner.webp)
-
+![Green Striped](/blog/2022/06/understanding-linear-regression/banner.webp)
 [Photo by Scott Webb](https://www.pexels.com/photo/green-striped-wallpaper-136740/)
 
 Linear regression is a regression model which outputs a numeric value. It is used to predict an outcome based on a linear set of input. The simplest hypothesis function of linear regression model is a univariate function as shown in the equation below:
@@ -24,13 +22,13 @@ $$
 h_θ = θ_0 + θ_1x_1
 $$ 
 
-As you can guess this function represents a linear line in the coordinate system. Hypothesis function (h<sub>0</sub>) approximates the output given input.
+As you can guess this function represents a linear line in the coordinate system. The hypothesis function (h<sub>0</sub>) approximates the output given input.
 
-![Linear Regression](/blog/2022/05/understanding-linear-regression/linear-regression-1.webp)
+![Linear Regression](/blog/2022/06/understanding-linear-regression/linear-regression-1.webp)
 
 θ<sub>0</sub> is the `intercept`, also called `bias term`. θ<sub>1</sub> is the `gradient` or `slope`.
 
-A Linear Regression model can either represent a univariate or a multivariate problem. So if we generalize the equation of the hypothesis as summation:
+A Linear Regression model can either represent a univariate or a multivariate problem. So we can generalize the equation of the hypothesis as summation:
 
 $$
 h_θ = \sum{θ\_ix\_i}
@@ -82,7 +80,7 @@ In this function we took X input (`univariate` in this implementation) and theta
 
 L2 Loss function — sometimes called Mean Squared Error (MSE) — is the total error of the current hypothesis over the given training dataset. During the training, by calculating the MSE, we can target minimizing the cumulative error.
 
-![L2 Loss](/blog/2022/05/understanding-linear-regression/linear-regression-2-mse.webp)
+![L2 Loss](/blog/2022/06/understanding-linear-regression/linear-regression-2-mse.webp)
 
 $$
 J(θ) = \frac{\sum{(h_θ(x_i) - y_i)^2}}{2m}
@@ -96,7 +94,7 @@ The more the linear function aligned, the optimized center of the data points wi
 
 Each time we iterate and calculate a new theta (θ), we get a new theta<sub>1</sub> (slope) value. If we plot each slope value in the gradient descent batch update we will have a curve like below. This curve has a minimum value which can't get lower. Our goal is to find an optimal low value of theta<sub>1</sub> that reaches a point where our curve doesn't get lower anymore or the change can be ignored. That is where the convergence achieved and the loss is minimized.
 
-![Gradient Descent](/blog/2022/05/understanding-linear-regression/linear-regression-3-gradient-descent.webp)
+![Gradient Descent](/blog/2022/06/understanding-linear-regression/linear-regression-3-gradient-descent.webp)
 
 Let's do a little bit more math. Gradients of the loss is the partial derivatives of θ. We calculate partial differential of loss for θ<sub>0</sub> and θ<sub>1</sub> separately. For `multivariate` functions our θ<sub>1</sub> is a generalized version for all available θ<sub>i</sub> since the partial derivatives are calculated similarly. You can simply calculate the partial derivatives of loss function yourself too.
 
@@ -213,7 +211,7 @@ MSE:  5320.89741757879
 R2 Score 0.14348916154815183
 ```
 
-![Linear Regression Plot](/blog/2022/05/understanding-linear-regression/gd-evaluate.webp)
+![Linear Regression Plot](/blog/2022/06/understanding-linear-regression/gd-evaluate.webp)
 
 Now let's evaluate `SK-Learn` Linear Regression model with the same training and test datasets we used. I'm going to use default parameters without optimizing.
 
@@ -244,7 +242,7 @@ MSE:  5544.283378702411
 R2 Score 0.10753047228113943
 ```
 
-![SK-Learn Linear Regression Plot](/blog/2022/05/understanding-linear-regression/sklearn-lr-evaluate.webp)
+![SK-Learn Linear Regression Plot](/blog/2022/06/understanding-linear-regression/sklearn-lr-evaluate.webp)
 
 If you notice the intercept of my Linear Regression model and SK-Learn's Linear Regression model are very close with value of around ~151. MSE values are calculated very close too. Also both plotted their predictions very similar as well.
 
