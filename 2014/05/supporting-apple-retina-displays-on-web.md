@@ -49,7 +49,7 @@ Take a look at this [CSS-Tricks](https://css-tricks.com/snippets/css/retina-disp
 
 ### Server-side checks for Retina images
 
-A very efficient way to handle all types of images is to have the browser JavaScript set a cookie that tells the web server whether to serve Retina or standard images. That will keep data transfer to a minimum, with a minimum of trickery required in the browser. You’ll still need to create an extra Retina-resolution image for every standard image on the server. And you’ll need to have a dynamic web process run for every image served. The [Retina Images](http://retina-images.complexcompulsions.com/) open source PHP program shows how to do this.
+A very efficient way to handle all types of images is to have the browser JavaScript set a cookie that tells the web server whether to serve Retina or standard images. That will keep data transfer to a minimum, with a minimum of trickery required in the browser. You’ll still need to create an extra Retina-resolution image for every standard image on the server. And you’ll need to have a dynamic web process run for every image served. The [Retina Images](https://web.archive.org/web/20141109113432/http://retina-images.complexcompulsions.com/) open source PHP program shows how to do this.
 
 ### Why we didn’t use these methods
 

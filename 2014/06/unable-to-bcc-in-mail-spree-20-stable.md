@@ -8,11 +8,11 @@ tags:
 date: 2014-06-09
 ---
 
-Hello again all.  As usual, I was working on a [Spree Commerce](http://spreecommerce.com/) website.  I recently encountered an issue when trying to bcc order confirmation emails.  Others have been asking about this on [Github](https://github.com/spree/spree/issues/4484) and also on the [Spree mailing list](https://groups.google.com/forum/#!msg/spree-user/50yjID6znOE/QSr51V1xgrUJ), so it was time to write about the problem and the solution that worked for me.
+Hello again all.  As usual, I was working on a [Spree Commerce](https://spreecommerce.org/) website.  I recently encountered an issue when trying to bcc order confirmation emails.  Others have been asking about this on [Github](https://github.com/spree/spree/issues/4484) and also on the [Spree mailing list](https://groups.google.com/forum/#!msg/spree-user/50yjID6znOE/QSr51V1xgrUJ), so it was time to write about the problem and the solution that worked for me.
 
 First, I’d like to briefly describe the use case here.  As with any typical e-commerce site, a user visits the site, adds some items to their cart, and checks out.  After which, an order confirmation (order summary) email is sent to the user with their order details and any extra information provided by the seller.
 
-Spree pretty much handles all this for you automatically.  What about if you as the business owner would like a copy of this e-mail?  Easy enough.  If you review the [Spree documentation](http://guides.spreecommerce.com/user/configuring_mail_methods.html) you will see simple instructions for the  “Mail Method Settings” to set up in the Spree Admin Interface.
+Spree pretty much handles all this for you automatically.  What about if you as the business owner would like a copy of this e-mail?  Easy enough.  If you review the [Spree documentation](https://web.archive.org/web/20160606002703/http://guides.spreecommerce.org/user/configuring_mail_methods.html) you will see simple instructions for the  “Mail Method Settings” to set up in the Spree Admin Interface.
 
 <div class="separator" style="clear: both; text-align: center;"><a href="/blog/2014/06/unable-to-bcc-in-mail-spree-20-stable/image-0.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="/blog/2014/06/unable-to-bcc-in-mail-spree-20-stable/image-0.png"/></a></div>
 
