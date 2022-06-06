@@ -46,13 +46,13 @@ h_θ =
 θ_0 & θ_1 & θ_2   \dots θ_n
 \end{bmatrix}
 x
-\begin{bmatrix}
-x_0 \\
-x_1 \\
-x_2 \\
-\vdots \\
+\\begin{bmatrix}
+x_0 \\\\ 
+x_1 \\\\ 
+x_2 \\\\ 
+\\vdots \\\\ 
 x_n
- \end{bmatrix}
+\\end{bmatrix}
 $$
 
 ### Linear Regression Model
@@ -289,12 +289,12 @@ h_θ =
 \end{bmatrix}
 x
 \begin{bmatrix}
-θ_0 \\
-θ_1 \\
-θ_2 \\
- \vdots \\
+θ_0 \\\\ 
+θ_1 \\\\ 
+θ_2 \\\\ 
+ \vdots \\\\ 
 θ_n
- \end{bmatrix}
+\end{bmatrix}
 $$
 
 Here the data is non-linear but the parameters are linear and we can still apply the gradient descent algorithm.
