@@ -442,4 +442,20 @@ The strategy that we will use is create a new API endpoint that clients can `POS
 
 We will pick a random endpoint to secure, just to serve as an example. That is, an endpoint that requires authentication in order to be accessed. `GET api/BodyTypes` is a good candidate. It is defined in `VehicleQuotes/Controllers/BodyTypesController.cs`'s `GetBodyTypes` action method. Feel free to test it out.
 
+### Creating tokens
+
+Let's start by creating the new endpoint that clients will call to obtain the auth tokens. In order to do so, we need a few things:
+
+1. A class that represents incoming request data.
+2. A class that represents outgoing response data.
+3. A class that can generate tokens for a given user.
+4. A new action method in `UsersController` that does the work.
+
+> Note that this way of defining dependencies is not recommended and only done this way here to keep things simple for an illustrative app that's never going to run in production. Ideally what you want to do here is define the dependenty as an abstraction (i.e. an interface) and a concrete implementation that fulfills it. For example:
+> 
+>```csharp
+>services.AddScoped<ITokenCreationService, JwtService>();
+>```
+>This way, classes that depend on this service can reference the interface, not the concrete type. This way they adhere to the [Dependency Inversion](https://en.wikipedia.org/wiki/Dependency_inversion_principle) principle and become more easily testable because they allow mocks to be provided as dependencies.
+
 ## Implementing API Key authentication
