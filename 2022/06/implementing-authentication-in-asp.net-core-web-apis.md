@@ -451,11 +451,280 @@ Let's start by creating the new endpoint that clients will call to obtain the au
 3. A class that can generate tokens for a given user.
 4. A new action method in `UsersController` that does the work.
 
-> Note that this way of defining dependencies is not recommended and only done this way here to keep things simple for an illustrative app that's never going to run in production. Ideally what you want to do here is define the dependenty as an abstraction (i.e. an interface) and a concrete implementation that fulfills it. For example:
+#### The request data structure
+
+To deal with step one, let's defne a new class in `VehicleQuotes/ResourceModels/AuthenticationRequest.cs` that looks like this:
+
+```csharp
+using System.ComponentModel.DataAnnotations;
+
+namespace VehicleQuotes.ResourceModels
+{
+    public class AuthenticationRequest
+    {
+        [Required]
+        public string UserName { get; set; }
+        [Required]
+        public string Password { get; set; }
+    }
+}
+```
+
+All users need to authenticate is provide a set of credentials. I.e. username and password. So, we have this class that contains fields for both and that will be used as input for our endpoint.
+
+#### The response data structure
+
+Next, we need to define a class to represent that endpoint's response. I've added the following class in `VehicleQuotes/ResourceModels/AuthenticationResponse.cs`:
+
+```csharp
+using System;
+
+namespace VehicleQuotes.ResourceModels
+{
+    public class AuthenticationResponse
+    {
+        public string Token { get; set; }
+        public DateTime Expiration { get; set; }
+    }
+}
+```
+
+Just a simple data structure containing the token itself and a date letting clients know when they can expect it to expire.
+
+#### The class that creates JWTs
+
+Step 3 is creating a class that can produce the tokens. This is the most interesting part in terms of complexity. Before we can do that though, let's add the following configurations to `VehicleQuotes/appsettings.json`:
+
+```json
+  "Jwt": {
+    "Key": "this is the secret key for the jwt, it must be kept secure",
+    "Issuer": "vehiclequotes.endpointdev.com",
+    "Audience": "vehiclequotes.endpointdev.com",
+    "Subject": "JWT for vehiclequotes.endpointdev.com"
+  },
+```
+
+Well go over the purpose of each them as they come up as we continue writing our code.
+
+> Here we'll gloss over some details on the inner workings of JWTs as a standard. You can learn more about them at [jwt.io](https://jwt.io/introduction).
+
+For now, let's add the following class in `VehicleQuotes/Services/JwtService.cs`:
+
+```csharp
+using System;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
+using VehicleQuotes.ResourceModels;
+
+namespace VehicleQuotes.Services
+{
+    public class JwtService
+    {
+        private const int EXPIRATION_MINUTES = 1;
+
+        private readonly IConfiguration _configuration;
+
+        public JwtService(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+
+        public AuthenticationResponse CreateToken(IdentityUser user)
+        {
+            var expiration = DateTime.UtcNow.AddMinutes(EXPIRATION_MINUTES);
+
+            var token = CreateJwtToken(
+                CreateClaims(user),
+                CreateSigningCredentials(),
+                expiration
+            );
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+
+            return new AuthenticationResponse {
+                Token = tokenHandler.WriteToken(token),
+                Expiration = expiration
+            };
+        }
+
+        private JwtSecurityToken CreateJwtToken(Claim[] claims, SigningCredentials credentials, DateTime expiration) =>
+            new JwtSecurityToken(
+                _configuration["Jwt:Issuer"],
+                _configuration["Jwt:Audience"],
+                claims,
+                expires: expiration,
+                signingCredentials: credentials
+            );
+
+        private Claim[] CreateClaims(IdentityUser user) =>
+            new[] {
+                new Claim(JwtRegisteredClaimNames.Sub, _configuration["Jwt:Subject"]),
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString()),
+                new Claim(ClaimTypes.NameIdentifier, user.Id),
+                new Claim(ClaimTypes.Name, user.UserName),
+                new Claim(ClaimTypes.Email, user.Email)
+            };
+
+        private SigningCredentials CreateSigningCredentials() =>
+            new SigningCredentials(
+                new SymmetricSecurityKey(
+                    Encoding.UTF8.GetBytes(_configuration["Jwt:Key"])
+                ),
+                SecurityAlgorithms.HmacSha256
+            );
+    }
+}
+```
+
+The `CreateToken` method is the element that's most worth discussing here. It receives an instace of `IdentityUser` as a parameter (which, remember, is the entity class that represents our user accounts), uses is to construct a JWT and returns it within a `AuthenticationResponse` object (which is what we decided that our endpoint would return). To do so, we use various classes built into .NET.
+
+The main class that represents the JWT is `JwtSecurityToken`. We new-up one of those in the `CreateJwtToken` method with this call:
+
+```csharp
+new JwtSecurityToken (
+    _configuration["Jwt:Issuer"],
+    _configuration["Jwt:Audience"],
+    claims,
+    expires: expiration,
+    signingCredentials: credentials
+);
+```
+
+"Issuer" and "Audience" are two important values for how JWTs work. They specify which entity is creating the token (i.e. the "Issuer") and which entity is the token intended for for (i.e. the "Audience"). We use the `IConfiguration` instance that we got as a dependency to fetch their values from the `VehicleQuotes/appsettings.json` file.
+
+> The "Issuer" and "Audience" parameters in `JwtSecurityToken`'s constructor correspond to JWT claims `iss` and `aud`, respectively. You can learn more about them and other claims in [the RFC](https://datatracker.ietf.org/doc/html/rfc7519#section-4.1).
+
+The next parameter that `JwtSecurityToken`'s constructor needs is the claims array. In JWT terms, a claim is essentially a statement about the entity for which the token is generated. Some data that identifies it. For example if we're generating a token for a user, what you would expect to see in such a token's claims are things like username, email, and any other non-secret profile info.
+
+In our case, as you can see in the `CreateClaims` method, we add a number of claims:
+
+```csharp
+new[] {
+    new Claim(JwtRegisteredClaimNames.Sub, _configuration["Jwt:Subject"]),
+    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+    new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString()),
+    new Claim(ClaimTypes.NameIdentifier, user.Id),
+    new Claim(ClaimTypes.Name, user.UserName),
+    new Claim(ClaimTypes.Email, user.Email)
+};
+```
+
+Along with the user id, name and email, we also add `sub`, `jti` and `iat` claims. These are standardized claims of which you can learn more about in [the RFC](https://datatracker.ietf.org/doc/html/rfc7519#section-4.1). Suffice it to say, the data that we put in here will make its way into the encoded token that our API caller eventually sees. We'll see that later.
+
+The next parameter to `JwtSecurityToken` is the expiration date of the token. Here we are setting it to just one minute in the future to comply with our original requirement that the token should be short lived so that it only allows a handful of requests over a short period of time.
+
+Finally there's the `signingCredentials` parameter which tells the `JwtSecurityToken` how to cryptographically sign the token. As you can see in the code:
+
+```csharp
+new SigningCredentials(
+    new SymmetricSecurityKey(
+        Encoding.UTF8.GetBytes(_configuration["Jwt:Key"])
+    ),
+    SecurityAlgorithms.HmacSha256
+);
+```
+
+That's a `SigningCredentials` instance that we create using the "key" that we have configured in `VehicleQuotes/appsettings.json`, along with the algorithm to use to produce it.
+
+And that's about it. There isn't much else to this class. It is somewhat involved but that's just how it is in .NET when it comes to creating JWTs.
+
+#### The action method that puts it all together
+
+Now all we need to do is actually create an endpooint that exposes this functionality to clients. Since we have the core logic encapsulated in our `JwtService` class, the actual action method is simple. Here are the changes that we need to make in order to implement it:
+
+First, on `VehicleQuotes/Controllers/UsersController.cs`, we add a new using statement so that we can reference our new `JwtService` class:
+
+```csharp
+using VehicleQuotes.Services;
+```
+
+Next, we declare a new parameter of that type in the controller's constructor so that we signal ASP.NET Core's Dependency Injection subsystem that we want to use one of those. We also hold onto it via a new instance variable called `_jwtService`:
+
+```diff
+// ...
+public class UsersController : ControllerBase
+{
+    private readonly UserManager<IdentityUser> _userManager;
++   private readonly JwtService _jwtService;
+
+    public UsersController(
+        UserManager<IdentityUser> userManager,
++       JwtService jwtService
+    ) {
+        _userManager = userManager;
++       _jwtService = jwtService;
+    }
+    // ...
+}
+```
+
+We also need to tell ASP.NET Core that `JwtService` should be available for Dependency Injection. To do so, we can add this line in `VehicleQuotes/Startup.cs`'s `ConfigureServices` method:
+
+```csharp
+services.AddScoped<Services.JwtService>();
+```
+
+> Note that this way of defining dependencies is not recommended and only done this way here to keep things simple for an illustrative app that's never going to run in production. Ideally what you want to do here is define the dependency as an abstraction (i.e. an interface) and a concrete implementation that fulfills it. For example:
 > 
 >```csharp
 >services.AddScoped<ITokenCreationService, JwtService>();
 >```
->This way, classes that depend on this service can reference the interface, not the concrete type. This way they adhere to the [Dependency Inversion](https://en.wikipedia.org/wiki/Dependency_inversion_principle) principle and become more easily testable because they allow mocks to be provided as dependencies.
+>This way, classes that depend on this service can reference the interface, not the concrete type. In doing that, they adhere to the [Dependency Inversion](https://en.wikipedia.org/wiki/Dependency_inversion_principle) principle and become more easily testable because they allow mocks to be provided as dependencies.
+
+Finally, we write the actual action method:
+
+```csharp
+// POST: api/Users/BearerToken
+[HttpPost("BearerToken")]
+public async Task<ActionResult<AuthenticationResponse>> CreateBearerToken(AuthenticationRequest request)
+{
+    if (!ModelState.IsValid)
+    {
+        return BadRequest("Bad credentials");
+    }
+
+    var user = await _userManager.FindByNameAsync(request.UserName);
+
+    if (user == null)
+    {
+        return BadRequest("Bad credentials");
+    }
+
+    var isPasswordValid = await _userManager.CheckPasswordAsync(user, request.Password);
+
+    if (!isPasswordValid)
+    {
+        return BadRequest("Bad credentials");
+    }
+
+    var token = _jwtService.CreateToken(user);
+
+    return Ok(token);
+}
+```
+
+Here too we're leveraging the `UserManager` instance that ASP.NET Core Identity so graciously provided us with. In summary, we find the user account by name using the incomin request data, check if the given password is correct, the ask our `JwtService` to create a token for this user, and finally return it wrapped in a 200 response.
+
+If you hit that endpoint with a POST and a set of existing credentials, you should see something like this:
+
+![Successful JTW creation in Postman](implementing-authentication-in-asp.net-core-web-apis/post-bearer-token.png)
+
+If you take that big string that came back in the `"token"` field in the response JSON, and paste it in [jwt.io](https://jwt.io/)'s token decoder, you should be able to see all the claims that we added to the token:
+
+![The JTW decoded showing all the claims](implementing-authentication-in-asp.net-core-web-apis/jwt-decoded.png)
+
+> Notice that the keywords here are "Encoded" and "Decoded". The claims that we put in opur JWTs are not protected in any way. As such, we should never put secrets in there.
+
+### Securing an endpoint with JWT authentication
+
+Now that we have a way for obtaining tokens, let's see how we can actually use them to gain access to some resources.
+
+
+
 
 ## Implementing API Key authentication
