@@ -718,13 +718,100 @@ If you take that big string that came back in the `"token"` field in the respons
 
 ![The JTW decoded showing all the claims](implementing-authentication-in-asp.net-core-web-apis/jwt-decoded.png)
 
-> Notice that the keywords here are "Encoded" and "Decoded". The claims that we put in opur JWTs are not protected in any way. As such, we should never put secrets in there.
+> Notice that the keywords here are "Encoded" and "Decoded". The claims that we put in our JWTs are not protected in any way. As such, we should never put secrets in there.
 
 ### Securing an endpoint with JWT authentication
 
-Now that we have a way for obtaining tokens, let's see how we can actually use them to gain access to some resources.
+Now that we have a way for obtaining tokens, let's see how we can actually use them to gain access to some resources. To demonstrate that, let's secure an endpoint in a way that it denies unauthenticated requests.
 
+First we need to signal ASP.NET Core that the endpoint requires auth. We do that by annotating the corresponding action method with the `Authorize` attribute. At the beginnig of this article, we decided we were going to use `VehicleQuotes/Controllers/BodyTypesController.cs`'s `GetBodyTypes` method as a guinea pig. So, let's go into that file and add the following `using` statement:
 
+```csharp
+using Microsoft.AspNetCore.Authorization;
+```
 
+That will allow us access to the attribute, which we can apply to the action method like so:
+
+```diff
+ // GET: api/BodyTypes
++ [Authorize]
+  [HttpGet]
+  public async Task<ActionResult<IEnumerable<BodyType>>> GetBodyTypes()
+  {
+      return await _context.BodyTypes.ToListAsync();
+  }
+```
+
+With this, we've told ASP.NET Core that we want it to require auth for this endpoint. Now, we need to tell it how to actually perform the check. To do that, we need to install the [`Microsoft.AspNetCore.Authentication.JwtBearer`](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.JwtBearer) NuGet package. We can do from the `VehicleQuotes` directory with the following command:
+
+```sh
+$ dotnet add package Microsoft.AspNetCore.Authentication.JwtBearer
+```
+
+Once we have that installed, we get access to aditional services which we can use to configure the "JwtBearer" authentication scheme. As usual, we do the configuration in `VehicleQuotes/Startup.cs`'s. Here's what we need to do:
+
+Add a few new `using` statements:
+
+```csharp
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+```
+
+Add the following code at the end of the `ConfigureServices` method:
+
+```csharp
+services
+    .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters()
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ValidAudience = Configuration["Jwt:Audience"],
+            ValidIssuer = Configuration["Jwt:Issuer"],
+            IssuerSigningKey = new SymmetricSecurityKey(
+                Encoding.UTF8.GetBytes(Configuration["Jwt:Key"])
+            )
+        };
+    });
+```
+
+The call to `AddAuthentication` includes all the internal core service classes that are needed to do authentication in our app.
+
+The `JwtBearerDefaults.AuthenticationScheme` parameter that we give it is the name of the authentication scheme to use as the default. More on that later. For now, know that ASP.NET Core supports multiple authentication schemes to be used at the same time. In fact, our own plan here is to eventually support two auth schemes: JWTs and API Keys. We're starting with JWT first and as such, that's the one we specify as the default.
+
+The call to `AddJwtBearer` configures the JWT authentication scheme. That is, it allows the app to perform authentication checks based on an incoming JWT token.
+
+The most important part of the configuration is the values that we are passing to `TokenValidationParameters`. As you can see, we are able to specify which aspects of the incoming JWTs to validate. You can see all available options for `TokenValidationParameters` in [the official documentation](https://docs.microsoft.com/en-us/dotnet/api/microsoft.identitymodel.tokens.tokenvalidationparameters?view=azure-dotnet). Here we've chosen to validate obvious things like the issuer, audience, and signing key.
+
+The last configuration step is to add this line right before `app.UseAuthorization();` in the `Configure` method:
+
+```csharp
+app.UseAuthentication();
+```
+
+That will enable the authentication [middleware](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/middleware/?view=aspnetcore-6.0). That way the framework will perform authentication checks as part of the request processing pipeline. In other words, actually put all the configuration that we've done to good use.
+
+Alright, now that we have all the configuration ready and have secured an endpoint, let's try hitting it with a GET on `api/BodyTypes` and see what happens:
+
+![Unauthorized response for unauthenticated request](implementing-authentication-in-asp.net-core-web-apis/unauthorized-response.png)
+
+Ok! So far so good. We made an unauthenticated request into an endpoint that requries authentication and as a result we got a 401 back. That's just what we wanted.
+
+Now, let's get a token by POSTing to `api/Users/BearerToken`:
+
+![Another successful JTW creation in Postman](implementing-authentication-in-asp.net-core-web-apis/post-bearer-token-2.png)
+
+We can copy that token and include as a header in the GET request to `api/BodyTypes`. The header key should be `Authorization` and the value should be `Bearer <our token>`. In Postman, we can setup a similar request if we choose the "Authorization" tab, select "Bearer Token" in the "Type" dropdown and paste the token in the "Token" textbox.
+
+Do that, and you should now see a 200 response from the endpoint:
+
+![Successful response for authenticated request](implementing-authentication-in-asp.net-core-web-apis/anuthorized-response.png)
+
+Neat! Now that we passed a valid token, it wants to talk to us again. Let a few minutes pass, enough for the token to expire and try the request again to see how it's 401'ing again.
 
 ## Implementing API Key authentication
