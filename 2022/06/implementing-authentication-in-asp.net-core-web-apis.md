@@ -23,7 +23,7 @@ The project that we will work with is a simple ASP.NET Web API backed by a [Post
 
 You can find it [on GitHub](https://github.com/megakevin/end-point-blog-dotnet-5-web-api). If you'd like to follow along, clone the repository and checkout this commit: [cd290c765fcd2c6693008d3dc76fa931098dcaa0](https://github.com/megakevin/end-point-blog-dotnet-5-web-api/tree/cd290c765fcd2c6693008d3dc76fa931098dcaa0). It represents the project as it was before applying all the changes from this article.
 
-<!-- TODO: Write a quick thing about getting the app up and runnig -->
+You can follow the instructions in [the project's README file](https://github.com/megakevin/end-point-blog-dotnet-5-web-api/blob/json-web-token/VehicleQuotes/README.md) in order to get the app up and running.
 
 # Managing user accounts with ASP.NET Core Identity
 
