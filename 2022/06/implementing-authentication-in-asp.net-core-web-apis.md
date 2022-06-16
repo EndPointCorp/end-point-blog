@@ -211,7 +211,7 @@ vehicle_quotes=# \dt
 (14 rows)
 ```
 
-And that's pretty much it when it comes to having a sensible storage for user accounts. That was pretty inexpensive wasn't it? All we had to do was install some NuGet packages, tweak our existing DbContext, and run some migrations.
+And that's pretty much it when it comes to having a sensible storage for user accounts. That was pretty inexpensive, wasn't it? All we had to do was install some NuGet packages, tweak our existing DbContext, and run some migrations.
 
 The best thing is that we're not done yet. We can also take advantage of ASP.NET Core Identity to manage users programmatically. Instead of interacting with these tables directly, we will use the service classes provided by Identity to create new users, fetch existing ones and validate their credentials.
 
@@ -362,7 +362,7 @@ With that, we can test our API. Fire it up with `dotnet run` (or [`dotnet watch`
 ```json
 {
   "userName": "newuser000",
-  "email": "newuser000@endpoint.com",
+  "email": "newuser000@endpointdev.com",
   "password": "password"
 }
 ```
@@ -380,7 +380,7 @@ vehicle_quotes=# select id, user_name, email, password_hash from "AspNetUsers";
 -[ RECORD 1 ]-+--------------------------------------
 id            | aaad07b4-f109-4255-8caa-185fd7694c72
 user_name     | newuser000
-email         | newuser000@endpoint.com
+email         | newuser000@endpointdev.com
 password_hash | AQAAAAEAACcQAAAAEJJTV7M2Ejqd3K3iC...
 ```
 
@@ -595,7 +595,7 @@ new JwtSecurityToken (
 
 > The "Issuer" and "Audience" parameters in `JwtSecurityToken`'s constructor correspond to JWT claims `iss` and `aud`, respectively. You can learn more about them and other claims in [the RFC](https://datatracker.ietf.org/doc/html/rfc7519#section-4.1).
 
-The next parameter that `JwtSecurityToken`'s constructor needs is the claims array. In JWT terms, a claim is essentially a statement about the entity for which the token is generated. Some data that identifies it. For example if we're generating a token for a user, what you would expect to see in such a token's claims are things like username, email, and any other non-secret profile info.
+The next parameter that `JwtSecurityToken`'s constructor needs is the claims array. In JWT terms, a claim is essentially a statement about the entity for which the token is generated. Some data that identifies it. For example, if we're generating a token for a user, what you would expect to see in such a token's claims are things like username, email, and any other non-secret profile info.
 
 In our case, as you can see in the `CreateClaims` method, we add a number of claims:
 
@@ -938,7 +938,9 @@ namespace VehicleQuotes.Services
 }
 ```
 
-As you can see, this class' single method, aptly named `CreateApiKey`, just takes the given user and creates a new `UserApiKey` that's associated with it and saves it into the database. The key values themselves are just two [GUIDs](https://en.wikipedia.org/wiki/Universally_unique_identifier) concatenated.
+As you can see, this class' single public method, aptly named `CreateApiKey`, just takes the given user and creates a new `UserApiKey` that's associated with it and saves it into the database. The key values themselves are just two [GUIDs](https://en.wikipedia.org/wiki/Universally_unique_identifier) concatenated.
+
+> This is an admittedly simplistic and not-all-that-secure method for generating the keys themselves. For simplicity, we've gone with this. In a production app however, it'd be better to use a true cryptographically secure string. [Here's an article](https://jonathancrozier.com/blog/how-to-generate-a-cryptographically-secure-random-string-in-dot-net-with-c-sharp) that explains how to do that with .NET.
 
 Naturally, this class needs to be used elsewhere in the application, so let's make it available for Dependency Injection by adding the following line to `VehicleQuotes/Startup.cs`'s `ConfigureServices` method.
 
@@ -1103,7 +1105,7 @@ namespace VehicleQuotes.Authentication.ApiKey
 
 The first thing to note is how we've defined the base class: `AuthenticationHandler<AuthenticationSchemeOptions>`. `AuthenticationHandler` is a generic, and it allows us to control the type of options object that it accepts. In this case, we've used `AuthenticationSchemeOptions`, which is just a default one already provided by the framework. This is because we don't really need any custom options.
 
-> If we did, then we would define a new class that inherits from `AuthenticationSchemeOptions`, give it the new fields that we need, and use that as a generic time parameter instead. We would then be able to set values for these new fields during configuration in the app's `Startup` class. Just like we've done with the "Jwt Bearer" auth scheme via the `AddJwtBearer` method
+> If we did, then we would define a new class that inherits from `AuthenticationSchemeOptions`, give it the new fields that we need, and use that as a generic time parameter instead. We would then be able to set values for these new fields during configuration in the app's `Startup` class. Just like we've done with the "Jwt Bearer" auth scheme via the `AddJwtBearer` method.
 
 The next point of interest in this class is its constructor. The key aspect of it is that it calls base and passes it a series of parameters that it itself gets. This is because `AuthenticationHandler` does have some constructor logic that needs to be run for things to work properly, so we make sure to do that.
 
@@ -1156,7 +1158,7 @@ A simple configuration as far as auth schemes go. We specify both the types of t
 
 ### Updating the Authorize attribute to use our two schemes
 
-Now that the auth scheme is configured, we need to secure an endpoint using it. We can use the same that we used for JWT: `POST api/BodyTypes`, defined in `BodyTypesController`'s `GetBodyTypes` action method. Remember though, that we wanted to have both auth schemes (JWT and API Key) work on the endpoint. For that, the `Authorize` attribute allows a comma separated string of scheme names as a parameter. So, we can get both our configured schemes working if we update the attribute like this:
+Now that the auth scheme is configured, we need to use it to secure an endpoint. We can use the same that we used for JWT: `POST api/BodyTypes`, defined in `BodyTypesController`'s `GetBodyTypes` action method. Remember though, that we wanted to have both auth schemes (JWT and API Key) work on the endpoint. For that, the `Authorize` attribute allows a comma separated string of scheme names as a parameter. So, we can get both our configured schemes working if we update the attribute like this:
 
 ```csharp
 [Authorize(AuthenticationSchemes = $"{JwtBearerDefaults.AuthenticationScheme},ApiKey")]
