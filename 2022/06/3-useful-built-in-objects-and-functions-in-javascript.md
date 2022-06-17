@@ -2,16 +2,22 @@
 author: Phineas Jensen
 title: 3 useful built-in objects and functions in JavaScript
 date: 2022-06-15
+github_issue_number: 1873
 description: How to use the JavaScript Set, URLSearchParams, and array.prototype objects.
 tags:
 - javascript
+- tips
 ---
+
+![Three semi trucks parked on concrete, with a dog standing watch over them](/blog/2022/06/3-useful-built-in-objects-and-functions-in-javascript/dog-with-trucks.webp)
+
+<!-- Photo by Seth Jensen -->
 
 I love learning (and learning about) programming languages. Right now I'm teaching myself Rust and trying to learn about 3D rendering. Every time I find a list of programming languages I have to look up every one that I haven't heard of, and when I see posts about Zig or Haskell or any other cool project on Hacker News, I can't help reading through the comments and seeing people discuss the unique features, quirks, and drawbacks of each language.
 
 One thing I enjoy about learning about these languages (sometimes in an all-too-shallow way) is seeing all the different methods and syntaxes that exist for solving problems, and while it's always tempting to think the grass is greener on the other side, it's also important to do the same kind of exploration within the languages I'm using right now. Not only is it important, it actually makes using those languages a lot more enjoyable as I find new, more efficient ways to do things I've probably done dozens of times before.
 
-With that spirit, here's a little list of cool objects and functions in JavaScript that have given me that feeling of excitement and made the language more fun and satisfying to use. Like any JavaScript feature, support will vary from browser to browser, runtime to runtime, and version to version, but with tools like Webpack becoming ubiquitous, that's becoming less and less of a problem.
+With that spirit, here's a little list of cool objects and functions in JavaScript that have given me that feeling of excitement and made the language more fun and satisfying to use. Like any JavaScript feature, support will vary from browser to browser, runtime to runtime, and version to version, but with tools like Webpack becoming ubiquitous, that's becoming less of a problem.
 
 ### The Set object
 
@@ -113,7 +119,7 @@ Much nicer, and requires no copy-pasting of code from Stack Overflow or installi
 
 ### The Array iterator functions
 
-If you've used a lot of JavaScript or used languages like Perl, Python, Ruby, Rust, functional languages or languages with iterators, you've probably seen functions like `map` or `forEach`. I've used them pretty extensively but still find that a lot of people don't seem to know about them. For people coming from languages like C or C++, where they aren't available, or for people who are fresh out of a university program where neat things like that are often not taught in favor of theory, that's not much of a surprise.
+If you've used a lot of JavaScript or used languages like Perl, Python, Ruby, Rust, functional languages, or languages with iterators, you've probably seen functions like `map` or `forEach`. I've used them pretty extensively but still find that a lot of people don't seem to know about them. For people coming from languages like C or C++, where they aren't available, or for people who are fresh out of a university program where neat things like that are often not taught in favor of theory, that's not much of a surprise.
 
 `Array.prototype.forEach` is pretty straightforward. Compare the following equivalent code snippets:
 
@@ -147,7 +153,7 @@ for (let i = 0; i < names.length; i++) {
 const uppercaseNames = names.map(name => name.substr(0,1).toUpperCase() + name.substr(1));
 ```
 
-There are similar cool functions that return `true` or `false` if the callback function returns `true` for *every* or *any* item in the list:
+There are similar cool functions that return `true` or `false` if the callback function returns `true` for *every* or *some* item in the list:
 
 ```javascript
 const names = ["bob", "roberta", "alice", "reza", "spaces are good"];
