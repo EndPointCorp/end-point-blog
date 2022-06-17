@@ -2,6 +2,7 @@
 author: Phineas Jensen
 title: 3 useful built-in objects and functions in JavaScript
 date: 2022-06-15
+description: How to use the JavaScript Set, URLSearchParams, and array.prototype objects.
 tags:
 - javascript
 ---
@@ -12,7 +13,7 @@ One thing I enjoy about learning about these languages (sometimes in an all-too-
 
 With that spirit, here's a little list of cool objects and functions in JavaScript that have given me that feeling of excitement and made the language more fun and satisfying to use. Like any JavaScript feature, support will vary from browser to browser, runtime to runtime, and version to version, but with tools like Webpack becoming ubiquitous, that's becoming less and less of a problem.
 
-## The Set object
+### The Set object
 
 The [`Set` object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set) has a lot of use cases, but one I find myself using a lot is a set of selected items in a list like this:
 
@@ -80,7 +81,7 @@ function Example(props) {
 
 This is because React will [bail out of the state update](https://reactjs.org/docs/hooks-reference.html#bailing-out-of-a-state-update) if the values are the same according to the [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) function.
 
-## The URL API’s URLSearchParams object
+### The URL API’s URLSearchParams object
 
 Imagine you're writing a function that needs to parse and use a URL's search parameters. Pretty simple task, right? It wouldn't be too hard to do by hand, but there's probably a library out there somewhere, so you do a google search for "javascript parse url parameters" and click on the [first Stack Overflow answer](https://stackoverflow.com/questions/8486099/how-do-i-parse-a-url-query-parameters-in-javascript) in the results. You're greeted with an answer that defines a function using `.split()` a few times and then a much longer and more complex function that decodes the parameters in a non-standard way. Is this really necessary?
 
@@ -110,7 +111,7 @@ for (const [k, v] of params) {
 
 Much nicer, and requires no copy-pasting of code from Stack Overflow or installing dependencies!
 
-## The Array iterator functions
+### The Array iterator functions
 
 If you've used a lot of JavaScript or used languages like Perl, Python, Ruby, Rust, functional languages or languages with iterators, you've probably seen functions like `map` or `forEach`. I've used them pretty extensively but still find that a lot of people don't seem to know about them. For people coming from languages like C or C++, where they aren't available, or for people who are fresh out of a university program where neat things like that are often not taught in favor of theory, that's not much of a surprise.
 
@@ -184,6 +185,6 @@ Obviously, it's not terribly useful in this case, but can be extremely useful fo
 
 Consider keeping the [Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array) reference on hand to keep these functions close to your heart and start to learn some of their other features. As new versions of ECMAScript come out, new prototype functions will crop up too. Note that some of these functions will vary in performance compared to normal loop iterations. If you're using them in heavy workload or low-latency scenarios, make sure to compare and benchmark performance as needed.
 
-## Conclusion
+### Conclusion
 
 Okay, that was actually more than 3 things, but they fit into three categories, so I'm keeping the post's name. JavaScript's [built-in objects](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects) and the generally available [Web APIs](https://developer.mozilla.org/en-US/docs/Web/API) have a lot more cool APIs and functions and features that are very much worth checking out. MDN (which I linked several times throughout this article) is a fantastic resource to learn about them, so make sure to get familiar with it as you work with JavaScript. It'll pay off.
