@@ -108,7 +108,7 @@ Step 5: Finally, the left div's contents are emptied and the carousel is in its 
 
 ![](/blog/2009/10/new-end-point-site-rails-jquery-flot/image-10.gif)
 
-Another request for functionality came from [Jon](/team/jon-jensen). He asked that we create and use "web 2.0" URLs to load specific content on page load for the dynamic content throughout our site, such as www.endpoint.com/clients#citypass, www.endpoint.com/clients#backcountry.
+Another request for functionality came from [Jon](/team/jon-jensen/). He asked that we create and use "web 2.0" URLs to load specific content on page load for the dynamic content throughout our site, such as www.endpoint.com/clients#citypass, www.endpoint.com/clients#backcountry.
 
 Upon page load, JavaScript is used to detect if a relative link exists:
 

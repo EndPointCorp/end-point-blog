@@ -23,7 +23,7 @@ The -append argument will stack the images vertically, and +append will stack th
 
 ### RequestBin
 
-Recently, I needed to quickly examine the contents sent during a payment transaction. [Richard](/team/richard-templet) pointed me to [RequestBin](https://github.com/Runscope/requestbin) a neat and quick tool for examining the contents of an external request. I was testing the Elavon payment gateway integrated in an application using [Piggybak](https://github.com/piggybak/piggybak). In my code, I made the following change:
+Recently, I needed to quickly examine the contents sent during a payment transaction. [Richard](/team/richard-templet/) pointed me to [RequestBin](https://github.com/Runscope/requestbin) a neat and quick tool for examining the contents of an external request. I was testing the Elavon payment gateway integrated in an application using [Piggybak](https://github.com/piggybak/piggybak). In my code, I made the following change:
 
 ```ruby
 class ElavonGateway < ViaklixGateway

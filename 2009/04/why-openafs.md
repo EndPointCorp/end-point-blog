@@ -7,7 +7,7 @@ tags:
 date: 2009-04-24
 ---
 
-Once you’ve understood [what OpenAFS is](/blog/2009/01/what-is-openafs), you might ask “Why use OpenAFS?” There are several very good reasons to consider OpenAFS.
+Once you’ve understood [what OpenAFS is](/blog/2009/01/what-is-openafs/), you might ask “Why use OpenAFS?” There are several very good reasons to consider OpenAFS.
 
 First, if you need a cross-platform network filesystem, OpenAFS is a
 solid choice. While CIFS is the natural choice on Windows, and NFS is

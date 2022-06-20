@@ -36,9 +36,9 @@ Once your store has sales data for subscribers, and you’ve decided on the camp
 
 There are several off-the-shelf [integrations for ecommerce stores](https://connect.mailchimp.com/collections/e-commerce), including Magento and BigCommerce.
 
-Users of Perl and [Interchange](/technology/perl-interchange) can use our newly-released toolsets of the [Mail::Chimp3 CPAN module](http://p3rl.org/Mail::Chimp3) and the [integration for Interchange5](https://github.com/jdigory/interchange-extras/tree/master/mailchimp).
+Users of Perl and [Interchange](/expertise/perl-interchange/) can use our newly-released toolsets of the [Mail::Chimp3 CPAN module](http://p3rl.org/Mail::Chimp3) and the [integration for Interchange5](https://github.com/jdigory/interchange-extras/tree/master/mailchimp).
 
-[Contact us](/contact) today for expert help integrating one of these solutions with your ecommerce store.
+[Contact us](/contact/) today for expert help integrating one of these solutions with your ecommerce store.
 
 ### Go beyond the simple newsletter
 

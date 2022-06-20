@@ -19,6 +19,6 @@ This year I shared rooms with Robert Haas, so I got a good overview of his plans
 
 In contrast to other conferences, I didn’t have a particular itch of my own to scratch between sessions. During past conferences I’ve been eager to discuss ideas for multi-column statistics; though that work continues, slowly, time hasn’t permitted enough recent development even for the topic to be fresh in my mind, much less worthy of in-depth discussion. This lack of one overriding subject turned out to be a refreshing change, however, as it left the other hall track subjects less filtered.
 
-Finally, it was nice to spend time with co-workers, and in fact to meet (finally) in person the [one of the “Greg”s](/blog/authors/greg-sabino-mullane) I’d talked to on the phone many times, but never actually met in person. Various engagements in my family or his have gotten in the way in the past. One of the quirks of working for a distributed organization...
+Finally, it was nice to spend time with co-workers, and in fact to meet (finally) in person the [one of the “Greg”s](/blog/authors/greg-sabino-mullane/) I’d talked to on the phone many times, but never actually met in person. Various engagements in my family or his have gotten in the way in the past. One of the quirks of working for a distributed organization...
 
 Update: Fixed link to developers’ meeting wiki page, thanks to comment from roppert

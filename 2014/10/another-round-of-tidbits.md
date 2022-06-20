@@ -7,7 +7,7 @@ tags:
 date: 2014-10-20
 ---
 
-It’s [been a while](/blog/2013/11/internal-tidbits-links-resources-tools) since I shared a blog article where I share End Point *tidbits*, or bits of information passed around the [End Point team](/team) that don’t necessarily merit a single blog post, but are worth mentioning and archiving. Here are some notes shared since that last post that I’ve been collecting:
+It’s [been a while](/blog/2013/11/internal-tidbits-links-resources-tools/) since I shared a blog article where I share End Point *tidbits*, or bits of information passed around the [End Point team](/team/) that don’t necessarily merit a single blog post, but are worth mentioning and archiving. Here are some notes shared since that last post that I’ve been collecting:
 
 - [Skeuocard](http://kenkeiter.com/skeuocard/) and [creditcard.js](https://creditcardjs.com/) are intuitive user interface (JS, CSS) plugins for credit card form inputs (card number, security code, billing name).
 

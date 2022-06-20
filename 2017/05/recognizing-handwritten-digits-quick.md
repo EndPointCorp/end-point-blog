@@ -11,8 +11,8 @@ date: 2017-05-30
 
 Previous in series:
 
-- [Learning from data basics: the Naive Bayes model](/blog/2016/03/learning-from-data-basics-naive-bayes)
-- [Learning from data basics II: simple Bayesian Networks](/blog/2016/04/learning-from-data-basics-ii-simple)
+- [Learning from data basics: the Naive Bayes model](/blog/2016/03/learning-from-data-basics-naive-bayes/)
+- [Learning from data basics II: simple Bayesian Networks](/blog/2016/04/learning-from-data-basics-ii-simple/)
 
 In the previous two posts on machine learning, I presented a very basic introduction of an approach called “probabilistic graphical models”. In this post I’d like to take a tour of some different techniques while creating code that will recognize handwritten digits.
 

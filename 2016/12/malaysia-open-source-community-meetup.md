@@ -10,7 +10,7 @@ date: 2016-12-09
 
 After a year, finally I decided to publish this post to all of you!
 
-On November 26th 2015 I had a chance to give a talk in a local open source conference here in Malaysia. The organizer requested me to specifically deliver a talk on “remote work”. This meetup was organized by Malaysian Development Corporation (MDEC) with the sponsorship of Microsoft Malaysia. Microsoft recently started to become more “open source friendly” given that they are in the effort of pushing their cloud based product, Azure. The full schedule of the event can be referred [here](http://lanyrd.com/2015/moscmy2015/).
+On November 26th 2015 I had a chance to give a talk in a local open source conference here in Malaysia. The organizer requested me to specifically deliver a talk on “remote work”. This meetup was organized by Malaysian Development Corporation (MDEC) with the sponsorship of Microsoft Malaysia. Microsoft recently started to become more “open source friendly” given that they are in the effort of pushing their cloud based product, Azure. The full schedule of the event can be referred [here](https://web.archive.org/web/20170805182015/http://lanyrd.com/2015/moscmy2015/).
 
 The conference was divided into two sessions; where the morning session was held in Petronas Club, Tower One of Kuala Lumpur City Centre (KLCC) and the other session was held in Microsoft Malaysia’s office in Tower Two KLCC. Generally the morning session was for non parallel track (including my track) and the afternoon sessions were two parallel sessions slot.
 

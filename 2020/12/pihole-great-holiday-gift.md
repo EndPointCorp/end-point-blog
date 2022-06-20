@@ -35,8 +35,6 @@ What sort of knowledge do you need in order to be able to install Pi-hole? Well,
 
 The Pi-hole website offers [great instructions](https://docs.pi-hole.net/main/prerequisites/) for installing the software. While you may want to use it as initially intended—on a $35 Raspberry Pi board—you don’t have to purchase new hardware. You can run Pi-hole on any Linux server, or even on a Docker instance or using a virtual machine on many different services. 
 
-> If you’re an End Point fan, our brand [Open Hosting](https://www.openhosting.com/) can provide you with an inexpensive Linux container machine for under $5 a month that will easily handle a large household’s DNS requirements.
-
 Just make sure that whatever system you install Pi-hole on is always turned on and stable (unplug the Pi-hole and your internet may stop working for the house, something I know my own family hates to have happen).
 
 ### Adding blocklists
@@ -62,4 +60,3 @@ For now, it won’t block **all** advertising. YouTube ads aren’t blocked, nor
 To keep things running smoothly, there is some maintenance required: the OS and Pi-hole need to be updated periodically, and the blocklists as well, though these tasks are easily automated.
 
 The Pi-hole also won’t protect you from concerted attempts to get into your system. This isn’t a replacement for a good firewall or antivirus/​malware protection software, and you should of course remember to practice good browsing habits. But as a relatively simple project to set up, it’s a good way to make your browsing experience at least a little less annoying.
-

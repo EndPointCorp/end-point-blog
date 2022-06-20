@@ -360,7 +360,7 @@ if __name__ == '__main__' and RUN_TESTS:
 
 You can notice the import of the `doctest` module which adds support for [doc-string level tests](https://docs.python.org/2/library/doctest.html) which may come in handy as well.
 
-I also hugely recommend the [hypothesis library](https://hypothesis.readthedocs.io/en/latest/) for testing the QuickCheck way [as I blogged about it before](/blog/2016/03/quickcheck-property-based-testing-in).
+I also hugely recommend the [hypothesis library](https://hypothesis.readthedocs.io/en/latest/) for testing the QuickCheck way [as I blogged about it before](/blog/2016/03/quickcheck-property-based-testing-in/).
 
 ##### Data pipeline
 

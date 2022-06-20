@@ -1,5 +1,5 @@
 ---
-author: Phin Jensen
+author: Phineas Jensen
 title: Using GitHub for Blog Comments
 github_issue_number: 1421
 tags:

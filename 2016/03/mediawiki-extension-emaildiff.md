@@ -111,7 +111,7 @@ The extension has changed a lot over the years, moving forward along
 with MediaWiki, whose support of extensions gets better all the time. 
 The current version of the EmailDiff extension, 1.7, requires a 
 MediaWiki version of 1.25 or better, as it uses the 
-[new extension.json format](/blog/2015/10/mediawiki-extensionjson-change-in-125).
+[new extension.json format](/blog/2015/10/mediawiki-extensionjson-change-in-125/).
 
 Installation is pretty straightforward with four steps. First, visit the 
 [official extension page](https://www.mediawiki.org/wiki/Extension:EmailDiff) at mediawiki.org, download the tarball, and untar 

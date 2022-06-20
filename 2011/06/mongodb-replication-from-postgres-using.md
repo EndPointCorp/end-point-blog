@@ -17,7 +17,7 @@ date: 2011-06-12
 
 One of the features of the upcoming version of [Bucardo](https://bucardo.org/Bucardo/) (a replication system for the PostgreSQL RDBMS) is the ability to replicate data to things other than [PostgreSQL](https://www.postgresql.org/) databases. One of those new targets is [MongoDB](https://www.mongodb.com/), a non-relational ‘document-based’ database. (to be clear, we can only use MongoDB as a target, not as a source)
 
-To see this in action, let’s setup a quick example, modified from the [earlier blog post on running Bucardo 5](/blog/2011/06/bucardo-multi-master-for-postgresql). We will create a Bucardo instance that replicates from two Postgres master databases to a Postgres database target and a MongoDB instance target. We will start by setting up the prerequisites:
+To see this in action, let’s setup a quick example, modified from the [earlier blog post on running Bucardo 5](/blog/2011/06/bucardo-multi-master-for-postgresql/). We will create a Bucardo instance that replicates from two Postgres master databases to a Postgres database target and a MongoDB instance target. We will start by setting up the prerequisites:
 
 ```bash
 sudo aptitude install postgresql-server \
@@ -64,7 +64,7 @@ $  sudo cpan MongoDB
 
 If that did not work for you (case matters!), there are more detailed directions on the [Perl Language Center](http://www.mongodb.org/display/DOCS/Perl+Language+Center) page.
 
-Our next step is to grab the latest Bucardo, install it, and create a new Bucardo instance. See the [previous blog post](/blog/2011/06/bucardo-multi-master-for-postgresql) for more details about each step.
+Our next step is to grab the latest Bucardo, install it, and create a new Bucardo instance. See the [previous blog post](/blog/2011/06/bucardo-multi-master-for-postgresql/) for more details about each step.
 
 ```bash
 $ git clone git://bucardo.org/bucardo.git

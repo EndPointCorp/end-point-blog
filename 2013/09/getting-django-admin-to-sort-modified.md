@@ -1,5 +1,5 @@
 ---
-author: Phin Jensen
+author: Phineas Jensen
 title: Getting the Django Admin to sort modified columns
 github_issue_number: 860
 tags:

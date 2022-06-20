@@ -24,7 +24,7 @@ One of the talks I attended on Day two of RailsConf 2014 was *Tricks that Rails 
 - [Relation.merge](https://apidock.com/rails/ActiveRecord/SpawnMethods/merge), e.g. `Product.joins(:reviews).merge(Review.approved)`, allows you to utilize scope from another model rather than passing in exact SQL conditional, i.e. limiting knowledge of Review to Product.
 - Utilize [group counting](http://api.rubyonrails.org/classes/ActiveRecord/Calculations.html#method-i-count) to group results by a column and get the count. This also accepts multiple fields to group.
 - [relation.first!](http://api.rubyonrails.org/classes/ActiveRecord/FinderMethods.html#method-i-first-21) and [relation.last!](http://api.rubyonrails.org/classes/ActiveRecord/FinderMethods.html#method-i-last-21) are similar to first & last but raise exception RecordNotFound if there are no records.
-- [where.not](http://blog.remarkablelabs.com/2012/12/not-equal-support-for-active-record-queries-rails-4-countdown-to-2013) is a cool finder trick, e.g. `scope :some_scope`, -> `{ where.not status: 'draft' }`
+- [where.not](https://web.archive.org/web/20190907031355/http://blog.remarkablelabs.com/2012/12/not-equal-support-for-active-record-queries-rails-4-countdown-to-2013) is a cool finder trick, e.g. `scope :some_scope`, -> `{ where.not status: 'draft' }`
 - You can control eager or lazy loading in Rails via [eager_load](http://blog.plataformatec.com.br/tag/eager-load/) and [preload](http://blog.bigbinary.com/2013/07/01/preload-vs-eager-load-vs-joins-vs-includes.html). These are a little tricky to sum up in a small example, so hopefully those links provide more.
 - Instead of passing in SQL in finder methods or scopes, you can call with :desc, e.g. `scope :some_scope`, -> `{ order created_at: :desc }`
 - [pluck](https://apidock.com/rails/ActiveRecord/Calculations/pluck) is a wonderful tool. e.g. `Product.pluck(:name)`, but also `Product.pluck(:name, :price)` will retrieve product name and pricing information.
@@ -42,7 +42,7 @@ One of the talks I attended on Day two of RailsConf 2014 was *Tricks that Rails 
 
 ### Action View
 
-- [content_tag_for](http://api.rubyonrails.org/classes/ActionView/Helpers/RecordTagHelper.html#method-i-content_tag_for) builds HTML for a loop of objects.
+- [content_tag_for](https://api.rubyonrails.org/v4.2.5/classes/ActionView/Helpers/RecordTagHelper.html) builds HTML for a loop of objects.
 - [render(collection)](https://robots.thoughtbot.com/rendering-collections-in-rails) returns false if a collection is empty, so rather than clouding your view with an if / else block, you can do something like: `render(collection) || content_tag(:p, 'No Article Found')`
 - Learn more about [local_assigns](https://stackoverflow.com/questions/10819189/how-does-local-assigns-work-in-rails). I didn’t quite understand this tip in the talk but I found a Stack Overflow qna on the subject.
 - [truncate](http://api.rubyonrails.org/classes/ActionView/Helpers/TextHelper.html#method-i-truncate) does what you’d expect, truncate text after a number of characters.

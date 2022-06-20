@@ -29,7 +29,7 @@ I learned a bit about what was going in Postgres community organizations during 
 
 Common Table Expressions (CTE) were given a good explanation by David Fetter in his talk about doing Trees and More in SQL. Having worked on Nested Set and Adjacency List models, I was very interested in this new feature coming to 8.4. Starting with a simple recursive example, David built on it slide-by-slide until he had built and executed a brute force solution to a Traveling Salesman Problem (for a small number of cities in Italy) using only plain SQL. I’m excited to try this out and measure the performance.
 
-Mark Wong & Gabrielle Roth presented the results of testing that they completed. Selena also covered that information in her post about [Testing filesystems and RAID](/blog/2008/09/filesystem-io-what-we-presented). After that we talked Perl on the way to the Portland Paramount for the party.
+Mark Wong & Gabrielle Roth presented the results of testing that they completed. Selena also covered that information in her post about [Testing filesystems and RAID](/blog/2008/09/filesystem-io-what-we-presented/). After that we talked Perl on the way to the Portland Paramount for the party.
 
 On Sunday, I sat in on “Developing a PL (Procedural Language) for PostgreSQL”, by Joshua Tolley, as he carefully explained the parts and steps involved. LOLCODE humor peppered the useful information on the related Postgres libraries, Bison usage, and pitfalls.
 

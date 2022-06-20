@@ -62,4 +62,4 @@ In this post, we share some of the interesting tricks that were shown, and also 
 - [Vimcasts](http://vimcasts.org/) — free screencasts
 - [Tweets from Mastering Vim](https://twitter.com/MasteringVim/)
 
-*With contributions from [Sam Batschelet](/blog/authors/sam-batschelet)*
+*With contributions from [Sam Batschelet](/blog/authors/sam-batschelet/)*

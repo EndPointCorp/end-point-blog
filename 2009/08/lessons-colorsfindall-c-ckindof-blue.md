@@ -9,7 +9,7 @@ date: 2009-08-19
 
 As noted in this [nice article at Slate.com](https://www.slate.com/articles/arts/music_box/2009/08/kind_of_blue.html), the much-loved “Kind of Blue” celebrated its 50th anniversary recently. In the article, Fred Kaplan asks, and attempts to answer, “what makes this album so great?”
 
-As somebody who has made a point of introducing his daughter (at infancy) to Miles Davis, who succumbed to the allure of jazz thanks in no small part to this very album, I would be remiss in my duties as a Caring Human not to blog about it. And yet this is a corporate blog for a consulting company that does lots of stuff with free software (as demonstrated so effectively [here](/blog/2008/08/alaska-basin)). What to do?
+As somebody who has made a point of introducing his daughter (at infancy) to Miles Davis, who succumbed to the allure of jazz thanks in no small part to this very album, I would be remiss in my duties as a Caring Human not to blog about it. And yet this is a corporate blog for a consulting company that does lots of stuff with free software (as demonstrated so effectively [here](/blog/2008/08/alaska-basin/)). What to do?
 
 Fortunately, there’s something we in the software world can learn from this album and the lessons Mr. Kaplan derives from it. Let’s look at one key paragraph:
 

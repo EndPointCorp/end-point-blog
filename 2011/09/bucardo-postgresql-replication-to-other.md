@@ -10,8 +10,6 @@ tags:
 date: 2011-09-05
 ---
 
-
-
 <a href="/blog/2011/09/bucardo-postgresql-replication-to-other/image-0-big.jpeg" onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5648699560032368754" src="/blog/2011/09/bucardo-postgresql-replication-to-other/image-0.jpeg" style="cursor:pointer; cursor:hand;width: 320px; height: 214px;"/></a>
 
 Image by Flickr user [Soggydan](https://www.flickr.com/photos/soggydan/)
@@ -158,5 +156,3 @@ psql french4 -t -c 'select count(*) from banana.regions'
 ```
 
 As before, the update on a source causes the changes to propagate to the other source database, as well as both targets. Note that the ALTER TABLE also mutated the associated sequence for the table, so there will be warnings in Bucardo’s logs about the DEFAULT values for the primary keys in the regions’ tables being different. Since this post is getting long, I will save the discussion of customcols for another day.
-
-

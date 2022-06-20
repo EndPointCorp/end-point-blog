@@ -11,7 +11,7 @@ tags:
 date: 2020-01-13
 ---
 
-Co-authored by [Greg Hanson](/team/greg-hanson)
+Co-authored by [Greg Hanson](/team/greg-hanson/)
 
 ![Roman tax burning](/blog/2020/01/ecommerce-sales-tax-primer/image-0.jpg)
 [Source image](https://www.flickr.com/photos/internetarchivebookimages/14591980537)

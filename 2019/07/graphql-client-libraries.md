@@ -9,7 +9,7 @@ date: 2019-07-19
 
 <img src="/blog/2019/07/graphql-client-libraries/image-0.jpg" alt="three brown wooden boat on blue lake water taken at daytime" /><br>Photo by <a href="https://unsplash.com/photos/T7K4aEPoGGk">Pietro De Grandi</a> on Unsplash
 
-Last week I covered [some of the more popular GraphQL libraries for servers](/blog/2019/07/graphql-server-libraries). This post will cover some options for GraphQL clients. Similarly to last week, the examples in this post won’t necessarily be everything you’d need to get a server running; instead, they’re designed to give you an idea of what it might be like to use each library. If you’re unfamiliar with GraphQL, please check out my earlier post [GraphQL — An Alternative to REST](/blog/2019/05/graphql-an-alternative-to-rest) for more information.
+Last week I covered [some of the more popular GraphQL libraries for servers](/blog/2019/07/graphql-server-libraries/). This post will cover some options for GraphQL clients. Similarly to last week, the examples in this post won’t necessarily be everything you’d need to get a server running; instead, they’re designed to give you an idea of what it might be like to use each library. If you’re unfamiliar with GraphQL, please check out my earlier post [GraphQL — An Alternative to REST](/blog/2019/05/graphql-an-alternative-to-rest/) for more information.
 
 ### Apollo Client
 
@@ -262,6 +262,6 @@ GQL seems pretty straightforward, and is a little easier to set up and understan
 
 That covers a few of the most popular libraries for GraphQL! Hopefully these posts have been helpful in bringing to light options for implementing GraphQL in your project. If there’s one you feel I should add, please leave a comment. Following are a few relevant links for languages I didn’t cover:
 
-- End Pointer [Patrick Lewis](/team/patrick-lewis) documented some of his experiences using GraphQL with Ruby [here](/blog/2019/02/converting-graphql-ruby-resolvers-to-the-class-based-api) and [here](/blog/2019/03/eliminating-resolvers-in-graphql-ruby).
+- End Pointer [Patrick Lewis](/team/patrick-lewis/) documented some of his experiences using GraphQL with Ruby [here](/blog/2019/02/converting-graphql-ruby-resolvers-to-the-class-based-api/) and [here](/blog/2019/03/eliminating-resolvers-in-graphql-ruby/).
 - [Apollo Android](https://github.com/apollographql/apollo-android)
 - [graphql-php](https://github.com/webonyx/graphql-php)

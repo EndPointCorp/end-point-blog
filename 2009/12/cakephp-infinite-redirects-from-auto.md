@@ -7,7 +7,7 @@ tags:
 date: 2009-12-10
 ---
 
-Lately, [Ron](/team/ron-phipps), Ethan, and I have been blogging about several of our CakePHP learning experiences, such as [incrementally migrating to CakePHP](/blog/2009/12/iterative-migration-of-legacy), [using the CakePHP Security component](/blog/2009/12/using-security-component-and), and [creating CakePHP fixtures for HABTM relationships](/blog/2009/11/test-fixtures-for-cakephp-has-and). This week, I came across another blog-worthy topic while troubleshooting for [JackThreads](https://www.jackthreads.com) that involved auto login, requests that were forced to be secure, and infinite redirects.
+Lately, [Ron](/team/ron-phipps/), Ethan, and I have been blogging about several of our CakePHP learning experiences, such as [incrementally migrating to CakePHP](/blog/2009/12/iterative-migration-of-legacy/), [using the CakePHP Security component](/blog/2009/12/using-security-component-and/), and [creating CakePHP fixtures for HABTM relationships](/blog/2009/11/test-fixtures-for-cakephp-has-and/). This week, I came across another blog-worthy topic while troubleshooting for [JackThreads](https://www.jackthreads.com) that involved auto login, requests that were forced to be secure, and infinite redirects.
 
 <a href="https://2.bp.blogspot.com/_wWmWqyCEKEs/SyErTpCsuAI/AAAAAAAACyU/mLM1yidKsK0/s1600-h/infinite_redirect.png" onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5413655843510728706" src="/blog/2009/12/cakephp-infinite-redirects-from-auto/image-0.png" style="display:block; margin:0px auto 10px; text-align:center;cursor:pointer; cursor:hand;width: 400px; height: 201px;"/></a>
 

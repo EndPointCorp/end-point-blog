@@ -4,6 +4,7 @@ title: Creating Composite Docker Containers with Docker Compose
 github_issue_number: 1202
 tags:
 - containers
+- docker
 - sysadmin
 date: 2016-02-16
 ---

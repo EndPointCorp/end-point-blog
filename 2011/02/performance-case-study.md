@@ -40,7 +40,7 @@ And here’s a summary of the changes involved in each step:
 - Step 1
 
         <ul>
-          <li>Addition of CSS Sprites: I [wrote about CSS Sprites](/blog/2010/09/css-sprites) a while back and A List Apart has an older but still relevant article on CSS Sprites [here](https://web.archive.org/web/20110217044912/www.alistapart.com/articles/sprites). Repeating elements like navigation components, icons, and buttons are suitable for CSS sprites. Article or page-specific images are not typically suitable for CSS sprites. For Inspiredology’s site, I created two sprited images—​one with a large amount of navigation components, and one with some of their large background images. You can find a great tool for building CSS rules from a sprited image [here](https://web.archive.org/web/20110217071401/http://www.spritebox.net/).</li>
+          <li>Addition of CSS Sprites: I [wrote about CSS Sprites](/blog/2010/09/css-sprites/) a while back and A List Apart has an older but still relevant article on CSS Sprites [here](https://web.archive.org/web/20110217044912/www.alistapart.com/articles/sprites). Repeating elements like navigation components, icons, and buttons are suitable for CSS sprites. Article or page-specific images are not typically suitable for CSS sprites. For Inspiredology’s site, I created two sprited images—​one with a large amount of navigation components, and one with some of their large background images. You can find a great tool for building CSS rules from a sprited image [here](https://web.archive.org/web/20110217071401/http://www.spritebox.net/).</li>
           <li>Combination of JS and CSS files, where applicable. Any JavaScript or CSS files that are included throughout the site are suitable for combination. Files that can’t be combined include suckerfish JavaScript like Google Analytics or marketing service scripts.</li>
           <li>Moved JavaScript requests to the bottom of the HTML. This is recommended because JavaScript requests block parallel downloading. Moving them to the bottom allows page elements to be downloaded and rendered first, followed by JavaScript loading.</li>
         </ul>
@@ -48,14 +48,14 @@ And here’s a summary of the changes involved in each step:
 - Step 2
 
         <ul>
-          <li>Image compression with jpegtran, pngcrush, convert. I use pngcrush often. I read about jpegtran in [Yahoo’s Best Practices for Speeding Up Your Web Site](https://developer.yahoo.com/performance/rules.html). I [wrote a bit about image compression](/blog/2009/12/jpeg-compression-quality-or-quantity) a while ago and briefly experimented with image compression using imagemagick on Inspiredology’s images.</li>
+          <li>Image compression with jpegtran, pngcrush, convert. I use pngcrush often. I read about jpegtran in [Yahoo’s Best Practices for Speeding Up Your Web Site](https://developer.yahoo.com/performance/rules.html). I [wrote a bit about image compression](/blog/2009/12/jpeg-compression-quality-or-quantity/) a while ago and briefly experimented with image compression using imagemagick on Inspiredology’s images.</li>
         </ul>
 
 
 - Step 3
 
         <ul>
-          <li>Addition of expires headers and disabling ETags: These are standard optimization suggestions. [Jon Jensen](/team/jon-jensen) wrote about using these a bit [here](/blog/2010/11/speeding-up-spree-demo-site) and [here](/blog/2009/10/performance-optimization-of).</li>
+          <li>Addition of expires headers and disabling ETags: These are standard optimization suggestions. [Jon Jensen](/team/jon-jensen/) wrote about using these a bit [here](/blog/2010/11/speeding-up-spree-demo-site/) and [here](/blog/2009/10/performance-optimization-of/).</li>
         </ul>
 
 - Step 4
@@ -90,9 +90,9 @@ I would suggest:
 
 - Revisiting CSS spriting to further optimize. I only spent a short time spriting and didn’t work out all the kinks. There were a few requests that I didn’t sprite because they were repeating elements, but repeating elements can be sprited together. Another 5 requests might be eliminated with additional CSS spriting.
 - Server-optimization: Inspiredology runs on WordPress. We’ve used the [wp-cache](https://wordpress.org/plugins/wp-cache/) plugin for a couple of our clients running WordPress, which I believe helps. But note that the case study presented here is a static page with static assets, so there is obviously a huge gain to be had by optimizing serving images, CSS, and JavaScript.
-- Database optimization: Again, there’s no database in play in this static page experiment. But there’s always room for improvement on database optimization. [Josh Tolley](/team/josh-tolley) recently made performance improvements for one of our clients running on Rails with postgreSQL using [pgsi](https://bucardo.org/Pgsi/), our open source postgreSQL performance reporting tool, and had outrageously impressive benchmarked improvements.
+- Database optimization: Again, there’s no database in play in this static page experiment. But there’s always room for improvement on database optimization. [Josh Tolley](/team/josh-tolley/) recently made performance improvements for one of our clients running on Rails with postgreSQL using [pgsi](https://bucardo.org/Pgsi/), our open source postgreSQL performance reporting tool, and had outrageously impressive benchmarked improvements.
 - I just read an article about CSS selectors. The combined.css file I created for this case study has 2000 lines. Although there might be only a small win with optimization here, surely optimization and cleanup of that file can be beneficial.
-- I recently wrote about several [jQuery tips](/blog/2011/01/jquery-tips-ecommerce), including performance optimization techniques. This isn’t going to improve the serving of static assets, but it would be another customer-facing enhancement that can improve the usability of the site.
+- I recently wrote about several [jQuery tips](/blog/2011/01/jquery-tips-ecommerce/), including performance optimization techniques. This isn’t going to improve the serving of static assets, but it would be another customer-facing enhancement that can improve the usability of the site.
 
 I highly recommend reading [Yahoo’s Best Practices on Speeding Up Your Web Site](https://developer.yahoo.com/performance/rules.html). They have a great summary of performance recommendations, covering the topics described in this article and lots more.
 

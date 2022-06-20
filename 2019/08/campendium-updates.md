@@ -42,7 +42,7 @@ Another recent update to Campendium includes functionality to offer user subscri
 
 ### Always Responsive and Latency-Aware
 
-Because a large portion of the Campendium visitors are on the road, it’s important to have both a responsive design and to build for bandwidth limitations for users. Throughout the development of these new features, responsive and mobile friendly designs were implemented leveraging [Sass](https://sass-lang.com/), sometimes requiring help from the rest of the knowledgeable [End Point team](/team)!
+Because a large portion of the Campendium visitors are on the road, it’s important to have both a responsive design and to build for bandwidth limitations for users. Throughout the development of these new features, responsive and mobile friendly designs were implemented leveraging [Sass](https://sass-lang.com/), sometimes requiring help from the rest of the knowledgeable [End Point team](/team/)!
 
 Many of the pages throughout the site are fully cached including the homepage, search result pages, and campground detail page, and cookies are used to indicate user status. In some cases, user submitted campground images are lazy-loaded to mitigate bandwidth limitations.
 

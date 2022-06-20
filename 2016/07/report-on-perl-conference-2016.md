@@ -5,6 +5,7 @@ github_issue_number: 1246
 tags:
 - conference
 - perl
+- vim
 date: 2016-07-27
 ---
 

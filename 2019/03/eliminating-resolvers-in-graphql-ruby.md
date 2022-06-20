@@ -11,7 +11,7 @@ date: 2019-03-29
 
 <img src="/blog/2019/03/eliminating-resolvers-in-graphql-ruby/banner.png" alt="GraphQL Ruby code" />
 
-In this follow-up to my post from last month about [Converting GraphQL Ruby Resolvers to the Class-based API](/blog/2019/02/converting-graphql-ruby-resolvers-to-the-class-based-api) I’m going to show how I took the advice of the GraphQL gem’s [documentation on Resolvers](https://graphql-ruby.org/fields/resolvers.html) and started replacing the GraphQL-specific Resolver classes with plain old Ruby classes to facilitate easier testing and code reuse.
+In this follow-up to my post from last month about [Converting GraphQL Ruby Resolvers to the Class-based API](/blog/2019/02/converting-graphql-ruby-resolvers-to-the-class-based-api/) I’m going to show how I took the advice of the GraphQL gem’s [documentation on Resolvers](https://graphql-ruby.org/fields/resolvers.html) and started replacing the GraphQL-specific Resolver classes with plain old Ruby classes to facilitate easier testing and code reuse.
 
 The current documentation for the `GraphQL::Schema::Resolver` class essentially recommends that it not be used, except for cases with specific requirements as detailed in the documentation.
 

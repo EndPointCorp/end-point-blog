@@ -13,7 +13,7 @@ date: 2020-04-29
 
 ![Spring pasture](/blog/2020/04/messaging-app-spring-kafka-pt-two/spring-pasture.jpg)
 
-This article is part of a [series](/blog/tags/spring-kafka-series). The GitHub repository with code examples can be found [here](https://github.com/ashemez/SpringKafkaMessaging).
+This article is part of a [series](/blog/tags/spring-kafka-series/). The GitHub repository with code examples can be found [here](https://github.com/ashemez/SpringKafkaMessaging).
 
 In this part I’ll walk through Kafka’s servers and processes, the basics of spring-kafka producers and consumers, persistence, and caching configurations.
 
@@ -140,7 +140,7 @@ So far we have configured Kafka in a Spring Boot project and seen simple consume
 
 ### Persistence Configuration
 
-As I mentioned in the [first part](/blog/2020/04/messaging-app-spring-kafka-pt-one) of this blog series, I’m going to use [PostgreSQL](https://www.postgresql.org/) as a persistence environment and Spring data configuration will be like below in the `application.properties`:
+As I mentioned in the [first part](/blog/2020/04/messaging-app-spring-kafka-pt-one/) of this blog series, I’m going to use [PostgreSQL](https://www.postgresql.org/) as a persistence environment and Spring data configuration will be like below in the `application.properties`:
 
 ```properties
 spring.datasource.url=jdbc:postgresql://localhost:5432/epmessagingdb

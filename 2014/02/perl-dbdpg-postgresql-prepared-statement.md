@@ -11,7 +11,7 @@ date: 2014-02-28
 
 
 
-One of the changes in the recently released [DBD::Pg version 3](/blog/2014/02/perl-postgresql-driver-dbdpg-300) (in addition to the [big utf8 change](/blog/2014/02/dbdpg-utf-8-perl-postgresql)), is the addition of a new attribute, **pg_switch_prepared**. This accompanies a behavior change in the use of prepare/execute. DBD::Pg will now postpone creating a server-side PREPARE statement until the second time a query is run via the execute() method.
+One of the changes in the recently released [DBD::Pg version 3](/blog/2014/02/perl-postgresql-driver-dbdpg-300/) (in addition to the [big utf8 change](/blog/2014/02/dbdpg-utf-8-perl-postgresql/)), is the addition of a new attribute, **pg_switch_prepared**. This accompanies a behavior change in the use of prepare/execute. DBD::Pg will now postpone creating a server-side PREPARE statement until the second time a query is run via the execute() method.
 
 Technically, DBD::Pg will use **PQexecParams** (part of the underlying libpq system that DBD::Pg uses) the first time a statement is executed, and switch to using **PQexecPrepared** the second time the statement is executed (by calling **PQprepare** first). When it actually switches is controlled by the pg_switch_prepared attribute, which defaults to 2 (the behavior above). You can set it to 0 or 1 to always use PQexecPrepared (as the older versions did), or you can set it to -1 to always use PQexecParams and avoid creating prepared statements entirely.
 

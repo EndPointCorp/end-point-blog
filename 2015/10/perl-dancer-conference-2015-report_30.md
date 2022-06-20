@@ -10,7 +10,7 @@ tags:
 date: 2015-10-30
 ---
 
-In my [last post](/blog/2015/10/perl-dancer-conference-2015-report), I shared about the Training Days from the [Perl Dancer](https://www.perl.dance/) 2015 conference, in Vienna, Austria. This post will cover the two days of the conference itself.
+In my [last post](/blog/2015/10/perl-dancer-conference-2015-report/), I shared about the Training Days from the [Perl Dancer](https://www.perl.dance/) 2015 conference, in Vienna, Austria. This post will cover the two days of the conference itself.
 
 While there were *several* wonderful talks, [Gert van der Spoel](https://www.perl.dance/users/21) did a great job of writing recaps of all of them ([Day 1](https://www.perl.dance/wiki/node/2015%20Day%201%20Summary), [Day 2](https://www.perl.dance/wiki/node/2015%20Day%202%20Summary)), so here I’ll cover the ones that stood out most to me.
 
@@ -24,7 +24,7 @@ While there were *several* wonderful talks, [Gert van der Spoel](https://www.per
 [Sawyer X](https://twitter.com/PerlSawyer) spoke on the *[State of Dancer](https://www.perl.dance/talks/17-state-of-dancer)*. One thing mentioned, which came up again later in the conference, was: **Make the effort, move to Dancer 2! Dancer 1 is frozen.** There have been some recent changes to Dancer:
 
 - Middlewares for static files, so these are handled outside of Dancer
-- New [Hash::MultiValue](http://p3rl.org/Hash::MultiValue) parameter keywords (route_parameters, query_parameters, body_parameters; covered in my [earlier post](/2015/10/perl-dancer-conference-2015-report.html))
+- New [Hash::MultiValue](http://p3rl.org/Hash::MultiValue) parameter keywords (route_parameters, query_parameters, body_parameters; covered in my [earlier post](/blog/2015/10/perl-dancer-conference-2015-report/))
 - [Delayed responses](https://metacpan.org/pod/Dancer2::Manual#Delayed-responses-Async-Streaming) (asynchronous) with delayed keyword:
         - Runs on the server after the request has finished.
         - Streaming is also asynchronous, feeding the user chunks of data at a time.
@@ -105,7 +105,7 @@ While at the conference, Alexis even wrote a Dancer2 plugin, [Dancer2::Plugin::P
 
 Also check out [Alexis’ recap](https://web.archive.org/web/20151108214937/http://blog.sukria.net/2015/10/22/perl-dancer-2015-report/).
 
-Finally, I was privileged to speak as well, on *[AngularJS & Dancer for Modern Web Development](https://www.perl.dance/talks/11-angularjs-%26-dancer-for-modern-web-development)*. Since this post is already pretty long, I’ll save the details for [another post](/blog/2015/10/angularjs-dancer-for-modern-web).
+Finally, I was privileged to speak as well, on *[AngularJS & Dancer for Modern Web Development](https://www.perl.dance/talks/11-angularjs-%26-dancer-for-modern-web-development)*. Since this post is already pretty long, I’ll save the details for [another post](/blog/2015/10/angularjs-dancer-for-modern-web/).
 
 ### Summary
 

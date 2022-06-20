@@ -19,7 +19,7 @@ There is also parallel pg_dump which will lead to faster backups.
 
 The new Postgres version also has switched from SysV to Posix shared memory model. In short: you won’t need setting SHMMAX and SHMALL any more.
 
-There are also many new [JSON functions](http://www.postgresql.org/docs/9.3/static/functions-json.html), I used some of them in one my [previous posts](/blog/2013/06/postgresql-as-nosql-with-data-validation).
+There are also many new [JSON functions](http://www.postgresql.org/docs/9.3/static/functions-json.html), I used some of them in one my [previous posts](/blog/2013/06/postgresql-as-nosql-with-data-validation/).
 
 Another really great feature is the possibility of creating event triggers. So far you could create triggers on data changes. Since PostgreSQL 9.3 you can create a trigger on dropping or creating a table, or even on dropping another trigger.
 

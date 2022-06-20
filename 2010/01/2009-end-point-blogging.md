@@ -16,43 +16,43 @@ Here’s a breakdown of article categories (the categorization was a bit difficu
 
 In 2009, the top 10 articles with the highest number of unique visitors were:
 
-- [/blog/2008/07/git-push-know-your-refspecs](/blog/2008/07/git-push-know-your-refspecs)
-- [/blog/2008/11/10000-databases-on-postgresql-cluster](/blog/2008/11/10000-databases-on-postgresql-cluster)
-- [/blog/2009/02/slony1-200-postgresql-84devel](/blog/2009/02/slony1-200-postgresql-84devel)
-- [/blog/2009/01/slow-xen-virtualization-of-rhel-3-i386](/blog/2009/01/slow-xen-virtualization-of-rhel-3-i386)
-- [/blog/2009/08/file-test-comparison-table-for-shell](/blog/2009/08/file-test-comparison-table-for-shell)
-- [/blog/2009/12/mysql-and-postgres-command-equivalents](/blog/2009/12/mysql-and-postgres-command-equivalents)
-- [/blog/2008/08/switching-from-sendmail-to-postfix-on](/blog/2008/08/switching-from-sendmail-to-postfix-on)
-- [/blog/2008/11/multiple-reverse-dns-pointers-per-ip](/blog/2008/11/multiple-reverse-dns-pointers-per-ip)
-- [/blog/2008/08/acts-as-xapian-it-just-works](/blog/2008/08/acts-as-xapian-it-just-works)
-- [/blog/2008/12/truecrypte-whole-disk-encryption-for](/blog/2008/12/truecrypte-whole-disk-encryption-for)
+- [/blog/2008/07/git-push-know-your-refspecs](/blog/2008/07/git-push-know-your-refspecs/)
+- [/blog/2008/11/10000-databases-on-postgresql-cluster](/blog/2008/11/10000-databases-on-postgresql-cluster/)
+- [/blog/2009/02/slony1-200-postgresql-84devel](/blog/2009/02/slony1-200-postgresql-84devel/)
+- [/blog/2009/01/slow-xen-virtualization-of-rhel-3-i386](/blog/2009/01/slow-xen-virtualization-of-rhel-3-i386/)
+- [/blog/2009/08/file-test-comparison-table-for-shell](/blog/2009/08/file-test-comparison-table-for-shell/)
+- [/blog/2009/12/mysql-and-postgres-command-equivalents](/blog/2009/12/mysql-and-postgres-command-equivalents/)
+- [/blog/2008/08/switching-from-sendmail-to-postfix-on](/blog/2008/08/switching-from-sendmail-to-postfix-on/)
+- [/blog/2008/11/multiple-reverse-dns-pointers-per-ip](/blog/2008/11/multiple-reverse-dns-pointers-per-ip/)
+- [/blog/2008/08/acts-as-xapian-it-just-works](/blog/2008/08/acts-as-xapian-it-just-works/)
+- [/blog/2008/12/truecrypte-whole-disk-encryption-for](/blog/2008/12/truecrypte-whole-disk-encryption-for/)
 
 The top 10 “Top Pages”, according to a tool provided by [SEOmoz](https://moz.com/), which is calculated using SEOmoz popularity metrics based on external links and quality of external linking pages to the url, are:
 
-- [/blog/2009/09/migrating-postgres-with-bucardo-4](/blog/2009/09/migrating-postgres-with-bucardo-4)
-- [/blog/2009/08/text-sequences](/blog/2009/08/text-sequences)
-- [/blog/2008/07/git-push-know-your-refspecs](/blog/2008/07/git-push-know-your-refspecs)
-- [/blog/2009/07/bucardo-and-truncate-triggers](/blog/2009/07/bucardo-and-truncate-triggers)
-- [/blog/2009/09/seo-external-links-and-pagerank](/blog/2009/09/seo-external-links-and-pagerank)
-- [/blog/2009/09/permission-denied-for-postgresqlconf](/blog/2009/09/permission-denied-for-postgresqlconf)
-- [/blog/2009/07/mdx](/blog/2009/07/mdx)
-- [/blog/2009/08/two-quick-tips-egrep-sql-dumps-vim-and](/blog/2009/08/two-quick-tips-egrep-sql-dumps-vim-and)
-- [/blog/2009/07/slony-slstatus-and-diagnosing](/blog/2009/07/slony-slstatus-and-diagnosing)
-- [/blog/2009/08/perlpostgres-changes-in-dbdpg-2151](/blog/2009/08/perlpostgres-changes-in-dbdpg-2151)
+- [/blog/2009/09/migrating-postgres-with-bucardo-4](/blog/2009/09/migrating-postgres-with-bucardo-4/)
+- [/blog/2009/08/text-sequences](/blog/2009/08/text-sequences/)
+- [/blog/2008/07/git-push-know-your-refspecs](/blog/2008/07/git-push-know-your-refspecs/)
+- [/blog/2009/07/bucardo-and-truncate-triggers](/blog/2009/07/bucardo-and-truncate-triggers/)
+- [/blog/2009/09/seo-external-links-and-pagerank](/blog/2009/09/seo-external-links-and-pagerank/)
+- [/blog/2009/09/permission-denied-for-postgresqlconf](/blog/2009/09/permission-denied-for-postgresqlconf/)
+- [/blog/2009/07/mdx](/blog/2009/07/mdx/)
+- [/blog/2009/08/two-quick-tips-egrep-sql-dumps-vim-and](/blog/2009/08/two-quick-tips-egrep-sql-dumps-vim-and/)
+- [/blog/2009/07/slony-slstatus-and-diagnosing](/blog/2009/07/slony-slstatus-and-diagnosing/)
+- [/blog/2009/08/perlpostgres-changes-in-dbdpg-2151](/blog/2009/08/perlpostgres-changes-in-dbdpg-2151/)
 
 It would probably be more interesting to normalize the data above by the total number of days published to get an idea of which articles were the most impacting. This is likely an example of normalization that search engines employ in popularity algorithms.
 
 The **lamest** articles, ordered by the number of unique visitors ascending, were:
 
-- [/blog/2005/06/death-taxes-and-spam](/blog/2005/06/death-taxes-and-spam)
-- [/blog/2008/02/dbdpg-200-released](/blog/2008/02/dbdpg-200-released)
-- [/blog/2005/08/end-point-celebrates-10-years-of](/blog/2005/08/end-point-celebrates-10-years-of)
-- [/blog/2008/08/camps-presentation-at-utosc-2008](/blog/2008/08/camps-presentation-at-utosc-2008)
-- [/blog/2008/06/railsconf-2008-report](/blog/2008/06/railsconf-2008-report)
-- [/blog/2008/06/pgcon-2008-report](/blog/2008/06/pgcon-2008-report)
-- [/blog/2006/06/review-practices-of-agile-developer](/blog/2006/06/review-practices-of-agile-developer)
-- [/blog/2006/01/interchange-54-released](/blog/2006/01/interchange-54-released)
-- [/blog/2005/08/rowe-promotes-good-data-vpns](/blog/2005/08/rowe-promotes-good-data-vpns)
+- [/blog/2005/06/death-taxes-and-spam](/blog/2005/06/death-taxes-and-spam/)
+- [/blog/2008/02/dbdpg-200-released](/blog/2008/02/dbdpg-200-released/)
+- [/blog/2005/08/end-point-celebrates-10-years-of](/blog/2005/08/end-point-celebrates-10-years-of/)
+- [/blog/2008/08/camps-presentation-at-utosc-2008](/blog/2008/08/camps-presentation-at-utosc-2008/)
+- [/blog/2008/06/railsconf-2008-report](/blog/2008/06/railsconf-2008-report/)
+- [/blog/2008/06/pgcon-2008-report](/blog/2008/06/pgcon-2008-report/)
+- [/blog/2006/06/review-practices-of-agile-developer](/blog/2006/06/review-practices-of-agile-developer/)
+- [/blog/2006/01/interchange-54-released](/blog/2006/01/interchange-54-released/)
+- [/blog/2005/08/rowe-promotes-good-data-vpns](/blog/2005/08/rowe-promotes-good-data-vpns/)
 
 **Phew**—​none of my articles were on that list :)
 

@@ -31,7 +31,7 @@ Before we go any further, let’s talk a little bit about neural summarization i
 
 The first approach makes the model “focus” on the most important parts of the longer text - extracting them to form a summary.
 
-Let’s take a recent article, [“Shopify Admin API: Importing Products in Bulk”](/blog/2020/05/shopify-product-creation), by one of my great co-workers, [Patrick Lewis](/team/patrick-lewis), as an example and see what the extractive summarization would look like. Let’s take the first two paragraphs:
+Let’s take a recent article, [“Shopify Admin API: Importing Products in Bulk”](/blog/2020/05/shopify-product-creation/), by one of my great co-workers, [Patrick Lewis](/team/patrick-lewis/), as an example and see what the extractive summarization would look like. Let’s take the first two paragraphs:
 
 > I recently worked on an interesting project for a store owner who was facing a daunting task: he had an inventory of hundreds of thousands of Magic: The Gathering (MTG) cards that he wanted to sell online through his Shopify store. The logistics of tracking down artwork and current market pricing for each card made it impossible to do manually.
 >
@@ -168,7 +168,7 @@ This is better as it breaks the ordering and distancing assumptions. It doesn’
 
 #### A better approach: word embeddings
 
-How could we keep our vector representation (as in one-hot encoding) but also introduce the distance? I’ve already glanced over this concept in my [post about the simple recommender system](/blog/2018/07/recommender-mxnet). The idea is to have a vector of floating-point values so that the closer the words are in their meaning, the smaller the angle is between them. We can easily compute a metric following this logic by measuring the [cosine distance](http://blog.christianperone.com/2013/09/machine-learning-cosine-similarity-for-vector-space-models-part-iii/). This way, the word representations are easy to feed into the encoder, and they already contain a lot of the information in themselves.
+How could we keep our vector representation (as in one-hot encoding) but also introduce the distance? I’ve already glanced over this concept in my [post about the simple recommender system](/blog/2018/07/recommender-mxnet/). The idea is to have a vector of floating-point values so that the closer the words are in their meaning, the smaller the angle is between them. We can easily compute a metric following this logic by measuring the [cosine distance](http://blog.christianperone.com/2013/09/machine-learning-cosine-similarity-for-vector-space-models-part-iii/). This way, the word representations are easy to feed into the encoder, and they already contain a lot of the information in themselves.
 
 #### Not only words
 
@@ -466,7 +466,7 @@ The idea of a “critic” has been popularized along with the fantastic results
 
 For GANs that are generating realistic photos, the critic is there to guess if the photo was generated or if it’s real. A loss term is added based on how well it’s doing, penalizing the main network for generating photos that the critic is able to call out as fake.
 
-A similar idea was used in the A3C algorithm I blogged about ([Self-driving toy car using the Asynchronous Advantage Actor-Critic algorithm](/blog/2018/08/self-driving-toy-car-using-the-a3c-algorithm)). The “critic” part penalized the AI agent for taking steps that were on average less advantageous.
+A similar idea was used in the A3C algorithm I blogged about ([Self-driving toy car using the Asynchronous Advantage Actor-Critic algorithm](/blog/2018/08/self-driving-toy-car-using-the-a3c-algorithm/)). The “critic” part penalized the AI agent for taking steps that were on average less advantageous.
 
 Here, in the SummAE model, the critic adds a penalty to the loss to the degree to which it’s able to guess whether the gist comes from a paragraph or a sentence.
 

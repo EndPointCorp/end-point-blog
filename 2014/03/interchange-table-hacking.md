@@ -7,7 +7,7 @@ tags:
 date: 2014-03-11
 ---
 
-[Interchange](http://www.interchange.rtfm.info/docs/index.html) has a powerful but terribly obscure table administration tool called the Table Editor. You can create, update, and delete rows, and even upload whole spreadsheets of data, but the Table Editor isn’t the most flexible thing in the world, so sometimes it just flat-out refuses to do what you want.
+[Interchange](https://www.interchangecommerce.org/i/dev/about) has a powerful but terribly obscure table administration tool called the Table Editor. You can create, update, and delete rows, and even upload whole spreadsheets of data, but the Table Editor isn’t the most flexible thing in the world, so sometimes it just flat-out refuses to do what you want.
 
 So you trick it.
 

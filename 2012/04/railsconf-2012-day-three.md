@@ -11,7 +11,7 @@ date: 2012-04-25
 
 
 
-It’s Day 3 of RailsConf 2012 here in Austin Texas. Check out my posts from [Day 1](/blog/2012/04/railsconf-2012-day-one) and [Day 2](/blog/2012/04/railsconf-2012-day-two).
+It’s Day 3 of RailsConf 2012 here in Austin Texas. Check out my posts from [Day 1](/blog/2012/04/railsconf-2012-day-one/) and [Day 2](/blog/2012/04/railsconf-2012-day-two/).
 
 ### RailsConf 5k
 

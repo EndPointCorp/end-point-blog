@@ -9,7 +9,7 @@ tags:
 date: 2007-01-15
 ---
 
-End Point engineer [Greg Sabino Mullane](/blog/authors/greg-sabino-mullane) is a prolific writer of PostgreSQL tips, suggestions, and how-to articles in his Planet PostgreSQL blog. Some posts involve emergency procedures to diagnose and fix an ailing database, while others are helpful recipes developers can use. The strengths and weaknesses of various approaches are compared, and there are lots of neat things to learn along the way.
+End Point engineer [Greg Sabino Mullane](/blog/authors/greg-sabino-mullane/) is a prolific writer of PostgreSQL tips, suggestions, and how-to articles in his Planet PostgreSQL blog. Some posts involve emergency procedures to diagnose and fix an ailing database, while others are helpful recipes developers can use. The strengths and weaknesses of various approaches are compared, and there are lots of neat things to learn along the way.
 
 Here’s my list of favorites from those Greg has posted since last March, in reverse chronological order:
 

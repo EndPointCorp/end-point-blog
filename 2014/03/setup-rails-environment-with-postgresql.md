@@ -35,7 +35,7 @@ To install Command Line Tools, Open Xcode -> Xcode(menu bar) -> Preferences -> D
 Homebrew helps to install gems with ‘gem’ and its dependencies with help of brew. Homebrew makes our life easier by handling dependencies for us during installation.
 
 ```bash
-$ ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
+$ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 Note:-- Xcode already comes bundled with gcc. But install gcc using homebrew if you face any gcc problems while installing Rails.
 

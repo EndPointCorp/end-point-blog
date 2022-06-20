@@ -5,6 +5,7 @@ github_issue_number: 290
 tags:
 - open-source
 - postgres
+- backups
 date: 2010-04-20
 ---
 

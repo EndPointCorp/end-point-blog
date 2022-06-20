@@ -6,6 +6,7 @@ tags:
 - windows
 - linux
 - docker
+- containers
 - php
 date: 2020-06-18
 ---
@@ -38,7 +39,7 @@ I’ve recently been learning more and more about Docker and it’s quickly beco
 
 #### 4. A newer version means several bugfixes
 
-Performance notwithstanding, WSL’s first release was pretty stable. I did, however, encounter some weird bugs and gotchas when working with the likes of SSH and Ruby during certain tasks. It was nothing major, as workarounds were readily available. I’ve already discussed some of them [here](/blog/2019/04/rails-development-in-windows-10-pro-with-visual-studio-code-and-wsl), so I won’t bother mentioning them here again. But thanks to the fact that the technology has matured since last time I saw it, and considering the architectural direction it is going in, I’m excited to not have to deal with any number of quirks.
+Performance notwithstanding, WSL’s first release was pretty stable. I did, however, encounter some weird bugs and gotchas when working with the likes of SSH and Ruby during certain tasks. It was nothing major, as workarounds were readily available. I’ve already discussed some of them [here](/blog/2019/04/rails-development-in-windows-10-pro-with-visual-studio-code-and-wsl/), so I won’t bother mentioning them here again. But thanks to the fact that the technology has matured since last time I saw it, and considering the architectural direction it is going in, I’m excited to not have to deal with any number of quirks.
 
 ### The development environment
 

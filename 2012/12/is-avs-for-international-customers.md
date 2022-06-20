@@ -52,4 +52,4 @@ Certainly the value of AVS as fraud prevention depends a lot on how you implemen
 
 ### Acknowledgments
 
-This post was extensively edited and extended by [Jon Jensen](/team/jon-jensen), who has seen plenty of this pain first-hand as well.
+This post was extensively edited and extended by [Jon Jensen](/team/jon-jensen/), who has seen plenty of this pain first-hand as well.

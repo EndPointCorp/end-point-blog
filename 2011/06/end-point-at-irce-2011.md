@@ -10,7 +10,7 @@ tags:
 date: 2011-06-15
 ---
 
-We are in full force with a booth at at Internet Retailer Conference 2011 in San Diego. The exhibit hall opened yesterday afternoon after the last few stragglers flew in from North Carolina (me) and Idaho ([Jon](/team/jon-jensen)) to join [Ben](/team/benjamin-goldstein), [Rick](/team/rick-peltzman), Carl, and [Ron](/team/ron-phipps).
+We are in full force with a booth at at Internet Retailer Conference 2011 in San Diego. The exhibit hall opened yesterday afternoon after the last few stragglers flew in from North Carolina (me) and Idaho ([Jon](/team/jon-jensen/)) to join [Ben](/team/benjamin-goldstein/), [Rick](/team/rick-peltzman/), Carl, and [Ron](/team/ron-phipps/).
 
 We’ve had a steady flow of booth visitors interested in hearing about our core ecommerce services and Liquid Galaxy. We’ve also heard from a few companies interested in partnering, which is a nice way to learn about the latest popular technologies in ecommerce, such as mobile and tablet opportunities, live chat integration, real-time user interactivity ecommerce features, and shipping integration and analytics.
 

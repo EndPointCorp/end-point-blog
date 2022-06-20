@@ -1,5 +1,5 @@
 ---
-author: Phin Jensen
+author: Phineas Jensen
 title: End Point’s 20th anniversary meeting
 github_issue_number: 1170
 tags:
@@ -57,7 +57,7 @@ Greg Hanson and Mike Heins then reviewed the history of their company Perusion w
 
 Perusion started with just a few clients, getting business by word of mouth. Their first big client was Vervanté, an on-demand publishing firm built on Interchange. Vervanté started small but has grown to a large business supporting thousands of authors.
 
-We have written up more about Perusion in the blog post [Perusion has joined End Point!](/blog/2015/07/perusion-has-joined-end-point)
+We have written up more about Perusion in the blog post [Perusion has joined End Point!](/blog/2015/07/perusion-has-joined-end-point/)
 
 ### Stance
 
@@ -138,4 +138,4 @@ David says we need to avoid unrealistic engineer optimism and be honest about es
 
 Our day had some extra excitement when our office building was evacuated due to an electrical problem that may have posed a fire risk. We split up for short walks around the neighborhood, until Ben Witten found us a great temporary meeting place at [Rise New York](https://thinkrise.com/), a co-working space focused on helping financial startups work together. The rest of the afternoon our meeting continued there, a comfortable and convenient place just down the street from our office!
 
-Continue reading about [day 2 of our meeting](/blog/2015/11/end-points-20th-anniversary-meeting)!
+Continue reading about [day 2 of our meeting](/blog/2015/11/end-points-20th-anniversary-meeting/)!

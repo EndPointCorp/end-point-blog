@@ -37,4 +37,4 @@ A further complication is client_encoding: What if it defaults to something else
 
 Someone also raised the issue of marking ASCII-only strings as utf8. While *technically* this is not correct, it would be nice to avoid having to parse every single byte that comes out of the database to look for high bits. Hopefully, programs requesting data from a UTF-8 database will not be surprised when things come back marked as utf8.
 
-Feel free to comment here or on the [bug that started it all.](https://rt.cpan.org/Public/Bug/Display.html?id=40199) Thanks also to [David Christensen](/blog/authors/david-christensen), who has given me great input on this topic.
+Feel free to comment here or on the [bug that started it all.](https://rt.cpan.org/Public/Bug/Display.html?id=40199) Thanks also to [David Christensen](/blog/authors/david-christensen/), who has given me great input on this topic.

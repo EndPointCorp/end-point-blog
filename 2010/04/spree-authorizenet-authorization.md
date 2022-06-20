@@ -15,7 +15,7 @@ Last week I did a bit of reverse engineering on payment configuration in Spree. 
 
 The requested settings for an Authorize.Net payment gateway on the Spree backend.
 
-I researched in the Spree documentation for a bit and then sent out an email to the End Point team. [Mark Johnson](/team/mark-johnson) responded to my question on authorize versus authorize and capture that the Authorize.Net request type be changed from “AUTH-ONLY” to “AUTH_CAPTURE”. So, my first stop was a grep of the activemerchant gem, which is responsible for handling the payment transactions in Spree. I found the following code in the gem source:
+I researched in the Spree documentation for a bit and then sent out an email to the End Point team. [Mark Johnson](/team/mark-johnson/) responded to my question on authorize versus authorize and capture that the Authorize.Net request type be changed from “AUTH-ONLY” to “AUTH_CAPTURE”. So, my first stop was a grep of the activemerchant gem, which is responsible for handling the payment transactions in Spree. I found the following code in the gem source:
 
 ```ruby
 # Performs an authorization, which reserves the funds on the customer's credit card, but does not

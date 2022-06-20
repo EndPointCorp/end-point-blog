@@ -7,6 +7,7 @@ tags:
 - conference
 - devops
 - containers
+- docker
 date: 2015-09-30
 ---
 

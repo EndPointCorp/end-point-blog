@@ -15,4 +15,4 @@ In December 2004, End Point installed new email filters, powered by two state-of
 
 By filtering out the most egregious junk emails at the server level, far fewer undesirable emails reach our clients’ inboxes. Real mail downloads to their inboxes faster, and the painful morning routine of going through the pile of junk mail delivered overnight is gone. That time savings multiplied for each employee really adds up.
 
-We’re gratified to hear about the positive, immediate difference this change has made for our current email services clients. If you’re not currently using End Point’s email service, please [contact us](/contact). We’d be happy to discuss your requirements and explain how we can help meet your email needs.
+We’re gratified to hear about the positive, immediate difference this change has made for our current email services clients. If you’re not currently using End Point’s email service, please [contact us](/contact/). We’d be happy to discuss your requirements and explain how we can help meet your email needs.

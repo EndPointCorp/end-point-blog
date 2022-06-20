@@ -1,5 +1,5 @@
 ---
-author: Phin Jensen
+author: Phineas Jensen
 title: Web Security Services Roundup
 github_issue_number: 1324
 tags:

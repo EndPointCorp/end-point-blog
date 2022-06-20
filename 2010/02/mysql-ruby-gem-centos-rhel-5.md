@@ -41,6 +41,6 @@ These are correct but not sufficient. Because this gem compiles a library to int
 # gem install mysql -- --with-mysql-config=/usr/bin/mysql_config
 ```
 
-Alternatively, if you’re using your distro’s ruby (not a custom build like [Ruby Enterprise Edition](/blog/2009/06/ruby-enterprise-edition-rpm-packages)), you can install [EPEL](https://fedoraproject.org/wiki/EPEL)’s ruby-mysql package along with their rubygem-rails and other packages.
+Alternatively, if you’re using your distro’s ruby (not a custom build like [Ruby Enterprise Edition](/blog/2009/06/ruby-enterprise-edition-rpm-packages/)), you can install [EPEL](https://fedoraproject.org/wiki/EPEL)’s ruby-mysql package along with their rubygem-rails and other packages.
 
 

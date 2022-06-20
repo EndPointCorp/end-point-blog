@@ -14,7 +14,7 @@ tags:
 date: 2012-05-18
 ---
 
-It’s been two weeks now since the [Utah Open Source Conference](https://web.archive.org/web/20120525040559/http://conference.utos.org/) for 2012. My fellow End Pointers wrote previously about it: Josh Ausborne about the [mini Liquid Galaxy](/blog/2012/05/end-point-at-utah-open-source) we set up there for everyone to play with, and Josh Tolley with a [write-up of his talks](/blog/2012/05/utosc-recap) on database constraints and KML for geographic mapping markup.
+It’s been two weeks now since the [Utah Open Source Conference](https://web.archive.org/web/20120525040559/http://conference.utos.org/) for 2012. My fellow End Pointers wrote previously about it: Josh Ausborne about the [mini Liquid Galaxy](/blog/2012/05/end-point-at-utah-open-source/) we set up there for everyone to play with, and Josh Tolley with a [write-up of his talks](/blog/2012/05/utosc-recap/) on database constraints and KML for geographic mapping markup.
 
 There were a lot of interesting talks planned, and I could only attend some of them. I really enjoyed these:
 
@@ -24,7 +24,7 @@ There were a lot of interesting talks planned, and I could only attend some of t
 
 - Clint Savage about RPM packaging with [Mock](https://github.com/rpm-software-management/mock/wiki) & [Koji](https://fedoraproject.org/wiki/Koji)
 
-- Daniel Evans on testing web applications with [Capybara](https://github.com/teamcapybara/capybara), embedded WebKit, and Selenium (which End Pointer Mike Farmer [wrote about here](/blog/2011/12/running-integration-tests-in-webkit) back in December)
+- Daniel Evans on testing web applications with [Capybara](https://github.com/teamcapybara/capybara), embedded WebKit, and Selenium (which End Pointer Mike Farmer [wrote about here](/blog/2011/12/running-integration-tests-in-webkit/) back in December)
 
 - Aaron Toponce on [breaking full-disk encryption](https://www.youtube.com/watch?v=FGOoLGZB2Ps) (I missed this talk, but learned about it from Aaron in the hallway track and his slides afterwards)
 

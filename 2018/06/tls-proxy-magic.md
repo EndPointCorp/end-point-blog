@@ -167,8 +167,8 @@ While this example is using Authorize.net, you could use a similar setup for any
 ### Summary
 
 Hopefully this gives you some ideas about how you can use reverse proxies to upgrade the outgoing
-connection strength. If you need assistance getting something like this set up, feel free to [contact us](/contact) for help.
+connection strength. If you need assistance getting something like this set up, feel free to [contact us](/contact/) for help.
 
 <hr>
 
-(Co-authored by [Elizabeth Garrett Christensen](/blog/authors/elizabeth-garrett-christensen).)
+(Co-authored by [Elizabeth Garrett Christensen](/blog/authors/elizabeth-garrett-christensen/).)

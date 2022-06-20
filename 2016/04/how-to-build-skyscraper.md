@@ -1,5 +1,5 @@
 ---
-author: Phin Jensen
+author: Phineas Jensen
 title: How to Build a Skyscraper
 github_issue_number: 1220
 tags:

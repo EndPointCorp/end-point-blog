@@ -9,7 +9,7 @@ tags:
 date: 2012-04-06
 ---
 
-This is Part 2 of my [2012 Mountain West Ruby Conference Highlights](/blog/2012/03/mwrc-highlights-part-1-of-2) article I posted the week of the conference. To date, I **still** have a ton of TODO reading from the conference. Here are some of the things mentioned during [Day 2 of the conference](http://mtnwestrubyconf.org/2012/schedule) that are on that list.
+This is Part 2 of my [2012 Mountain West Ruby Conference Highlights](/blog/2012/03/mwrc-highlights-part-1-of-2/) article I posted the week of the conference. To date, I **still** have a ton of TODO reading from the conference. Here are some of the things mentioned during [Day 2 of the conference](http://mtnwestrubyconf.org/2012/schedule) that are on that list.
 
 ### Rollout: a gem that enables/disables sets of features for certain conditions, users, etc.
 
@@ -47,4 +47,4 @@ Spend a few weeks working on client B’s project with its specific environment 
 - Get it: It’s been a [Postgres extension](https://www.postgresql.org/docs/9.0/static/hstore.html) since Postgres 8.2.
 - Mentioned by [Will Leinweber](http://bitfission.com/) during his [“Schemaless SQL—​The Best of Both Worlds” talk](https://www.youtube.com/watch?v=r4lE4bxMJmk)
 
-This concludes my personal list of highlights for the Mountain West Ruby Conference. I urge you to check out the tools and people I’ve mentioned here and in [Part I](/blog/2012/03/mwrc-highlights-part-1-of-2). Both Part I and Part II actually took me quite a while to write, as there was so much interesting reading to be had once I hit these people’s blogs and GitHub pages. I would definitely invite you to, as Bruce Dickinson once said, “really explore the space.” Last but not least, here’s a shout out to Mike Farmer’s excellent review of the conference’s various [discussions on dealing with Rails application complexity](/blog/2012/03/dealing-with-rails-application).
+This concludes my personal list of highlights for the Mountain West Ruby Conference. I urge you to check out the tools and people I’ve mentioned here and in [Part I](/blog/2012/03/mwrc-highlights-part-1-of-2/). Both Part I and Part II actually took me quite a while to write, as there was so much interesting reading to be had once I hit these people’s blogs and GitHub pages. I would definitely invite you to, as Bruce Dickinson once said, “really explore the space.” Last but not least, here’s a shout out to Mike Farmer’s excellent review of the conference’s various [discussions on dealing with Rails application complexity](/blog/2012/03/dealing-with-rails-application/).

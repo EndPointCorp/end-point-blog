@@ -9,7 +9,7 @@ tags:
 date: 2014-03-19
 ---
 
-I’m working on a big Rails project for Phenoms Fantasy Sports that uses the [ActiveMerchant gem](https://rubygems.org/gems/activemerchant) to handle [Dwolla](https://www.dwolla.com/developers) payments. One of the developers, [Patrick](/team/patrick-lewis), ran into an issue where his code wasn’t receiving the expected postback from the Dwolla gateway. His code looked right, the Dwolla account UI showed the sandbox transactions, but we never saw any evidence of the postback hitting our development server.
+I’m working on a big Rails project for Phenoms Fantasy Sports that uses the [ActiveMerchant gem](https://rubygems.org/gems/activemerchant) to handle [Dwolla](https://developers.dwolla.com/) payments. One of the developers, [Patrick](/team/patrick-lewis/), ran into an issue where his code wasn’t receiving the expected postback from the Dwolla gateway. His code looked right, the Dwolla account UI showed the sandbox transactions, but we never saw any evidence of the postback hitting our development server.
 
 Patrick’s theory was that Dwolla was stripping the port number off the postback URL he was sending with the request. We tested that theory by using the [RequestBin.com service](https://requestbin.com/) for the postback URL, and it showed Dwolla making the postback successfully. Next, we needed to verify that Dwolla could hit our development server on port 80.
 

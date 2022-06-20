@@ -5,6 +5,7 @@ github_issue_number: 1680
 tags:
 - epitrax
 - open-source
+- emsa
 date: 2020-10-30
 ---
 
@@ -35,12 +36,12 @@ EMSA can be deployed along with EpiTrax, the open source tracking system, or as 
 Aside from all the features mentioned above, EMSA as an open-source solution brings other benefits:
 
 - Reduced cost: Other than development and consulting to help set it up, there are no ongoing licensing costs.
-- Designed to work as part of the open-source [EpiTrax disease surveillance system](/expertise/epitrax).
+- Designed to work as part of the open-source [EpiTrax disease surveillance system](/expertise/epitrax/).
 - Participating in the open source community that is growing in the healthcare industry.
 
 ### Help is available!
 
-Interested in talking to us more about EMSA for your disease tracking? [Reach out today.](/contact)
+Interested in talking to us more about EMSA for your disease tracking? [Reach out today.](/contact/)
 
 ### References
 

@@ -11,7 +11,7 @@ tags:
 date: 2013-10-28
 ---
 
-I recently attended the [eCommerce Innovation Conference 2013](http://www.ecommerce-innovation.com/) with fellow End Pointer [Richard Templet](/team/richard-templet) and presented on the work End Point has done to develop full-page caching in Interchange 5. The work is in final review currently for inclusion into core Interchange and should provide a roadmap for cache management in Nitesi/Interchange 6.
+I recently attended the [eCommerce Innovation Conference 2013](http://www.ecommerce-innovation.com/) with fellow End Pointer [Richard Templet](/team/richard-templet/) and presented on the work End Point has done to develop full-page caching in Interchange 5. The work is in final review currently for inclusion into core Interchange and should provide a roadmap for cache management in Nitesi/Interchange 6.
 
 ### Parameters of a Caching Solution
 
@@ -97,7 +97,7 @@ Take advantage of writing custom actionmaps, which allow the developer extreme f
 
 By default, search objects which Interchange uses for more lists, are restricted to access from the generating user’s session. This is a safeguard as often search results include personal data for access only to the requestor. However, for features such as category lists, this creates a difficult burden for the developer who wishes to cache the popular resources and whose results are identical across all users.
 
-We can overcome this difficulty by making the search definitions for category lists, or other canned searches, include the [permanent more](/blog/2012/01/interchange-search-caching-with) indicator. Permanent more causes all identical searches to share a common search object accessible by the same URLs, and freeing the usual coupling with the session of the search originator.
+We can overcome this difficulty by making the search definitions for category lists, or other canned searches, include the [permanent more](/blog/2012/01/interchange-search-caching-with/) indicator. Permanent more causes all identical searches to share a common search object accessible by the same URLs, and freeing the usual coupling with the session of the search originator.
 
 #### Address Common Session Variables
 

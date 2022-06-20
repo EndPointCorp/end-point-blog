@@ -40,7 +40,7 @@ Not only are more details provided, there is now the ability to control how verb
 
 ### Different targets
 
-Who says your slave (target) databases need to be Postgres? In addition to the ability to write text SQL files (for say, shipping to a different system), you can have Bucardo push to other systems as well. Stay tuned for more details on this. (Update: there is a [blog post about using MongoDB as a target](/blog/2011/06/mongodb-replication-from-postgres-using))
+Who says your slave (target) databases need to be Postgres? In addition to the ability to write text SQL files (for say, shipping to a different system), you can have Bucardo push to other systems as well. Stay tuned for more details on this. (Update: there is a [blog post about using MongoDB as a target](/blog/2011/06/mongodb-replication-from-postgres-using/))
 
 -----------
 

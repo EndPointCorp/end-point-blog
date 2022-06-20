@@ -9,7 +9,7 @@ tags:
 date: 2011-09-21
 ---
 
-Here at End Point, I’ve worked with a few Rails 3 applications in production and a couple of Rails 3.1 apps in development, so I’ve become familiar with the new features and functionality including the [Rails 3.1 Asset Pipeline](http://guides.rubyonrails.org/asset_pipeline.html) that [I mentioned](/blog/2011/05/rails-3-at-railsconf-2011) earlier this year. I thought it was a good time to upgrade [our website](/) to Rails 3.1 and share the experience.
+Here at End Point, I’ve worked with a few Rails 3 applications in production and a couple of Rails 3.1 apps in development, so I’ve become familiar with the new features and functionality including the [Rails 3.1 Asset Pipeline](http://guides.rubyonrails.org/asset_pipeline.html) that [I mentioned](/blog/2011/05/rails-3-at-railsconf-2011/) earlier this year. I thought it was a good time to upgrade [our website](/) to Rails 3.1 and share the experience.
 
 To start, here’s a quick summary of our website:
 

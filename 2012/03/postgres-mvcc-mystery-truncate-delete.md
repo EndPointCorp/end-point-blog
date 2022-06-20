@@ -49,7 +49,7 @@ sets the isolation level manually to avoid just such problems. Scanning back for
 
 So that rules out any effects of read committed isolation mode. We have Postgres set to the strictest 
 interpretation of MVCC it knows, SERIALIZABLE. (As this was on Postgres 8.3, it was not a 
-[“true” serializable mode](/blog/2011/09/postgresql-allows-for-different),
+[“true” serializable mode](/blog/2011/09/postgresql-allows-for-different/),
  but that does not matter here.) What else could be going on? If you look at the timestamps, you will note 
 that there is actually quite a large gap between the DELETE and the COPY error, despite it simply deleting and 
 adding a single row (I have changed the table and data names, but it was actually a single row). So something 

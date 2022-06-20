@@ -67,4 +67,4 @@ Finally, we can turn on nginx caching for specific pages of interest. Nginx will
 
 ### Where are we now?
 
-At the moment, I’ve made progress on steps 1-3 for several subsets of pages, including the thumbnail and product detail pages. I plan to continue these steps for additional bottleneck pages. I have worked out out a couple of minor kinks throughout the recent progress, but things have been progressing well. [Richard](/team/richard-templet) plans to make progress on the nginx related tasks in preparation for reaching the end goal.
+At the moment, I’ve made progress on steps 1-3 for several subsets of pages, including the thumbnail and product detail pages. I plan to continue these steps for additional bottleneck pages. I have worked out out a couple of minor kinks throughout the recent progress, but things have been progressing well. [Richard](/team/richard-templet/) plans to make progress on the nginx related tasks in preparation for reaching the end goal.
