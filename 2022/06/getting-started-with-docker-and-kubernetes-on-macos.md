@@ -1,6 +1,7 @@
 ---
 author: "Jeffry Johar"
 title: "Getting started with Docker and Kubernetes on macOS"
+github_issue_number: 1875
 date: 2022-06-20
 tags:
 - docker
