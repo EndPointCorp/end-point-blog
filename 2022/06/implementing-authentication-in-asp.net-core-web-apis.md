@@ -66,15 +66,15 @@ $ dotnet add package Microsoft.AspNetCore.Identity.EntityFrameworkCore
 That will add the following lines to the `VehicleQuotes/VehicleQuotes.csproj` project file:
 
 ```diff
-<Project Sdk="Microsoft.NET.Sdk.Web">
-  ...
-  <ItemGroup>
-    ...
-+   <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
-+   <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.5" />
-    ...
-  </ItemGroup>
-</Project>
+ <Project Sdk="Microsoft.NET.Sdk.Web">
+   ...
+   <ItemGroup>
+     ...
++    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
++    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.5" />
+     ...
+   </ItemGroup>
+ </Project>
 ```
 
 #### Update the DbContext to include the Identity tables
@@ -103,18 +103,18 @@ In summary, by having our `DbContext` class inherit from `IdentityUserContext<Id
 The change looks like this:
 
 ```diff
-- public class VehicleQuotesContext : DbContext
-+ public class VehicleQuotesContext : IdentityUserContext<IdentityUser>
+-public class VehicleQuotesContext : DbContext
++public class VehicleQuotesContext : IdentityUserContext<IdentityUser>
 ```
 
 Finally, `IdentityUserContext` has some logic that it needs to run when it is being created. In order to allow it to run that logic, let's add the following line to our `VehicleQuotesContext`'s `OnModelCreating` method:
 
 ```diff
-protected override void OnModelCreating(ModelBuilder modelBuilder)
-{
-+   base.OnModelCreating(modelBuilder);
-    // ...
-}
+ protected override void OnModelCreating(ModelBuilder modelBuilder)
+ {
++    base.OnModelCreating(modelBuilder);
+     // ...
+ }
 ```
 
 This calls `IdentityUserContext`'s own `OnModelCreating` implementation so that it can set itself up properly.
@@ -196,7 +196,7 @@ dotnet ef database update
 
 If you now connect to the database, you'll see the new tables in there.
 
-If you have the database running in a docker container like we discussed in the beginning of the article, you should be able to connect to it with:
+If you have the database running in a Docker container like we discussed in the beginning of the article, you should be able to connect to it with:
 
 ```plain
 $ psql -h localhost -U vehicle_quotes
@@ -221,7 +221,7 @@ And that's pretty much it when it comes to having a sensible storage for user ac
 
 The best thing is that we're not done yet. We can also take advantage of ASP.NET Core Identity to manage users programmatically. Instead of interacting with these tables directly, we will use the service classes provided by Identity to create new users, fetch existing ones and validate their credentials.
 
-Before we can do that though, we must first do some configuration in our app's `Startup` class so that said services are properly setup to our liking and are made available to our application.
+Before we can do that though, we must first do some configuration in our app's `Startup` class so that said services are properly set up to our liking and are made available to our application.
 
 <!-- Next step for us is creating and fetching users. Let's see how we can make that happen. -->
 
@@ -251,7 +251,7 @@ services
     .AddEntityFrameworkStores<VehicleQuotesContext>();
 ```
 
-The call to `AddIdentityCore` makes several Identity utility classes available to the application. Among those, `UserManager` is the only one we will use. We will use it later to... well, manage users. You can also see how we've set a few options related to how the user accounts are handled. `options.SignIn.RequireConfirmedAccount` controls whether new accounts need to be confirmed via email before they are available. With `options.User.RequireUniqueEmail`, we tell Identity to enforce uniqueness of emails on user accounts. And Finally the `options.Password.*` options configure the password strength requirements.
+The call to `AddIdentityCore` makes several Identity utility classes available to the application. Among those, `UserManager` is the only one we will use. We will use it later to... well, manage users. You can also see how we've set a few options related to how the user accounts are handled. `options.SignIn.RequireConfirmedAccount` controls whether new accounts need to be confirmed via email before they are available. With `options.User.RequireUniqueEmail`, we tell Identity to enforce uniqueness of emails on user accounts. And finally the `options.Password.*` options configure the password strength requirements.
 
 > You can explore all the available options in [the official docs](https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.identity.identityoptions?view=aspnetcore-6.0).
 
@@ -284,7 +284,7 @@ namespace VehicleQuotes.Controllers
 }
 ```
 
-As you can see, this controller defines a dependency on `UserManager<IdentityUser>`; an instance of which is injected via the constructor. This is one of the classes made available to us when we configured the Identity core services in our app's `Startup`. We will use it to create new user records.
+As you can see, this controller defines a dependency on `UserManager<IdentityUser>`, an instance of which is injected via the constructor. This is one of the classes made available to us when we configured the Identity core services in our app's `Startup`. We will use it to create new user records.
 
 Before that though, we need to define a new class that encapsulates the payload for a request to our endpoint. When it comes to creating user accounts, all we need is a username, a password, and an email. As such, we add the following class in a new `VehicleQuotes/ResourceModels/User.cs` file:
 
@@ -341,7 +341,7 @@ using VehicleQuotes.ResourceModels;
 
 `System.Threading.Tasks` allows us to reference the class `Task<>` which is the return type of the new `PostUser` method. `VehicleQuotes.ResourceModels` is where our new `User` class lives.
 
-Thanks to the instance of `UserManager<IdentityUser>` that we're holding onto, this method is very straight forward. The most interesting portion is this:
+Thanks to the instance of `UserManager<IdentityUser>` that we're holding onto, this method is very straightforward. The most interesting portion is this:
 
 ```csharp
 var result = await _userManager.CreateAsync(
@@ -375,13 +375,13 @@ With that, we can test our API. Fire it up with `dotnet run` (or [`dotnet watch`
 
 I just tried it in [Postman](https://www.postman.com/) and this is what it looked like:
 
-![Successful user creation request in Postman](/blog/2022/06/implementing-authentication-in-asp.net-core-web-apis/post-user.png)
+![Successful user creation request in Postman](/blog/2022/06/implementing-authentication-in-asp.net-core-web-apis/post-user.webp)
 
 Feel free to test it out further. Try repeated emails or usernames. Try passwords that don't meet the criteria we defined when configuring Identity in the app's `Startup` class. It all works as you'd expect.
 
 You can inspect the database and see the newly created record too:
 
-```psql
+```plain
 vehicle_quotes=# select id, user_name, email, password_hash from "AspNetUsers";
 -[ RECORD 1 ]-+--------------------------------------
 id            | aaad07b4-f109-4255-8caa-185fd7694c72
@@ -418,13 +418,13 @@ public async Task<ActionResult<User>> GetUser(string username)
 }
 ```
 
-This is even more straightforward than the previous one. We just call the `FindByNameAsync` method by giving it the username of the account we want, make sure that we actually found it, and then just return the data.
+This is even more straightforward than the previous one. We just call the `FindByNameAsync` method by giving it the username of the account we want, make sure that we actually found it, and then return the data.
 
 For the response, we use the same `User` class that we created to represent the input for the creation endpoint. If we added more fields to the user profile, we could include them here. Alas, we only have username and email for now.
 
 Restart the app and we can now make a request like this:
 
-![Successful user fetch request in Postman](/blog/2022/06/implementing-authentication-in-asp.net-core-web-apis/get-user.png)
+![Successful user fetch request in Postman](/blog/2022/06/implementing-authentication-in-asp.net-core-web-apis/get-user.webp)
 
 Pretty neat, huh? Try a username that does not exist and you should see the API respond with a 404.
 
@@ -440,7 +440,7 @@ Pretty neat, huh? Try a username that does not exist and you should see the API 
 
 Now that we have the user management capabilities that we need, let's implement some actual authentication. We will start by adding [JWT](https://jwt.io/)-based authentication to our API.
 
-The strategy that we will use is create a new API endpoint that clients can `POST` credentials to and that will respond to them with a fresh, short lived token. They will then be able to use that token for subsequent requests by including it via headers.
+The strategy that we will use is to create a new API endpoint that clients can `POST` credentials to and that will respond to them with a fresh, short-lived token. They will then be able to use that token for subsequent requests by including it via headers.
 
 We will pick a random endpoint to secure, just to serve as an example. That is, an endpoint that requires authentication in order to be accessed. `GET api/BodyTypes` is a good candidate. It is defined in `VehicleQuotes/Controllers/BodyTypesController.cs`'s `GetBodyTypes` action method. Feel free to test it out.
 
@@ -472,7 +472,7 @@ namespace VehicleQuotes.ResourceModels
 }
 ```
 
-All users need to authenticate is provide a set of credentials. I.e. username and password. So, we have this class that contains fields for both and that will be used as input for our endpoint.
+All users need to authenticate is provide a set of credentials: username and password. So we have this class that contains fields for both and that will be used as input for our endpoint.
 
 ##### The response data structure
 
@@ -583,7 +583,7 @@ namespace VehicleQuotes.Services
 }
 ```
 
-The `CreateToken` method is the element that's most worth discussing here. It receives an instance of `IdentityUser` as a parameter (which, remember, is the entity class that represents our user accounts), uses is to construct a JWT and returns it within a `AuthenticationResponse` object (which is what we decided that our endpoint would return). To do so, we use various classes built into .NET.
+The `CreateToken` method is the element that's most worth discussing here. It receives an instance of `IdentityUser` as a parameter (which, remember, is the entity class that represents our user accounts), uses it to construct a JWT, and returns it within a `AuthenticationResponse` object (which is what we decided that our endpoint would return). To do so, we use various classes built into .NET.
 
 The main class that represents the JWT is `JwtSecurityToken`. We `new` up one of those in the `CreateJwtToken` method with this call:
 
@@ -601,7 +601,7 @@ new JwtSecurityToken (
 
 > The "Issuer" and "Audience" parameters in `JwtSecurityToken`'s constructor correspond to JWT claims `iss` and `aud`, respectively. You can learn more about them and other claims in [the RFC](https://datatracker.ietf.org/doc/html/rfc7519#section-4.1).
 
-The next parameter that `JwtSecurityToken`'s constructor needs is the claims array. In JWT terms, a claim is essentially a statement about the entity for which the token is generated. Some data that identifies it. For example, if we're generating a token for a user, what you would expect to see in such a token's claims are things like username, email, and any other non-secret profile info.
+The next parameter that `JwtSecurityToken`'s constructor needs is the claims array. In JWT terms, a claim is essentially a statement about the entity for which the token is generated, some data that identifies it. For example, if we're generating a token for a user, what you would expect to see in such a token's claims are things like username, email, and any other non-secret profile info.
 
 In our case, as you can see in the `CreateClaims` method, we add a number of claims:
 
@@ -616,9 +616,9 @@ new[] {
 };
 ```
 
-Along with the user id, name and email, we also add `sub`, `jti` and `iat` claims. These are standardized claims of which you can learn more about in [the RFC](https://datatracker.ietf.org/doc/html/rfc7519#section-4.1). Suffice it to say, the data that we put in here will make its way into the encoded token that our API caller eventually sees. We'll see that later.
+Along with the user id, name and email, we also add `sub`, `jti` and `iat` claims. These are standardized claims of which you can learn more about in [the RFC](https://datatracker.ietf.org/doc/html/rfc7519#section-4.1). The data that we put in here will make its way into the encoded token that our API caller eventually sees. We'll see that later.
 
-The next parameter to `JwtSecurityToken` is the expiration date of the token. Here we are setting it to just one minute in the future to comply with our original requirement that the token should be short lived so that it only allows a handful of requests over a short period of time.
+The next parameter to `JwtSecurityToken` is the expiration date of the token. Here we are setting it to just one minute in the future to comply with our original requirement that the token should be short-lived so that it only allows a handful of requests over a short period of time.
 
 Finally there's the `signingCredentials` parameter which tells the `JwtSecurityToken` how to cryptographically sign the token. As you can see in the code:
 
@@ -648,21 +648,21 @@ using VehicleQuotes.Services;
 Next, we declare a new parameter of type `JwtService` in the controller's constructor so that we signal to ASP.NET Core's Dependency Injection subsystem that we want to use one of those. We also hold onto it via a new instance variable called `_jwtService`:
 
 ```diff
-// ...
-public class UsersController : ControllerBase
-{
-    private readonly UserManager<IdentityUser> _userManager;
-+   private readonly JwtService _jwtService;
-
-    public UsersController(
-        UserManager<IdentityUser> userManager,
-+       JwtService jwtService
-    ) {
-        _userManager = userManager;
-+       _jwtService = jwtService;
-    }
-    // ...
-}
+ // ...
+ public class UsersController : ControllerBase
+ {
+     private readonly UserManager<IdentityUser> _userManager;
++    private readonly JwtService _jwtService;
+ 
+     public UsersController(
+         UserManager<IdentityUser> userManager,
++        JwtService jwtService
+     ) {
+         _userManager = userManager;
++        _jwtService = jwtService;
+     }
+     // ...
+ }
 ```
 
 We also need to tell ASP.NET Core that `JwtService` should be available for Dependency Injection. To do so, we can add this line in `VehicleQuotes/Startup.cs`'s `ConfigureServices` method:
@@ -714,11 +714,11 @@ Here too we're leveraging the `UserManager` instance that ASP.NET Core Identity 
 
 If you hit that endpoint with a POST and a set of existing credentials, you should see something like this:
 
-![Successful JTW creation in Postman](/blog/2022/06/implementing-authentication-in-asp.net-core-web-apis/post-bearer-token.png)
+![Successful JTW creation in Postman](/blog/2022/06/implementing-authentication-in-asp.net-core-web-apis/post-bearer-token.webp)
 
 If you take that big string that came back in the `"token"` field in the response JSON, and paste it in [jwt.io](https://jwt.io/)'s token decoder, you should be able to see all the claims that we added to the token:
 
-![The JTW decoded showing all the claims](/blog/2022/06/implementing-authentication-in-asp.net-core-web-apis/jwt-decoded.png)
+![The JTW decoded showing all the claims](/blog/2022/06/implementing-authentication-in-asp.net-core-web-apis/jwt-decoded.webp)
 
 > Notice that the keywords here are "Encoded" and "Decoded". The claims that we put in our JWTs are not protected in any way. As such, we should never put secrets in there.
 
@@ -806,27 +806,29 @@ That will enable the authentication [middleware](https://docs.microsoft.com/en-u
 
 Alright, now that we have all the configuration ready and have secured an endpoint, let's try hitting it with a GET on `api/BodyTypes` and see what happens:
 
-![Unauthorized response for unauthenticated request](/blog/2022/06/implementing-authentication-in-asp.net-core-web-apis/unauthorized-response.png)
+![Unauthorized response for unauthenticated request](/blog/2022/06/implementing-authentication-in-asp.net-core-web-apis/unauthorized-response.webp)
 
 Ok! So far so good. We made an unauthenticated request into an endpoint that requires authentication and as a result we got a 401 back. That's just what we wanted.
 
 Now, let's get a token by POSTing to `api/Users/BearerToken`:
 
-![Another successful JTW creation in Postman](/blog/2022/06/implementing-authentication-in-asp.net-core-web-apis/post-bearer-token-2.png)
+![Another successful JTW creation in Postman](/blog/2022/06/implementing-authentication-in-asp.net-core-web-apis/post-bearer-token-2.webp)
 
 We can copy that token and include as a header in the GET request to `api/BodyTypes`. The header key should be `Authorization` and the value should be `Bearer <our token>`. In Postman, we can setup a similar request if we choose the "Authorization" tab, select "Bearer Token" in the "Type" drop-down list and paste the token in the "Token" text box.
 
 Do that, and you should now see a 200 response from the endpoint:
 
-![Successful response for request authenticated with JWT](/blog/2022/06/implementing-authentication-in-asp.net-core-web-apis/authorized-response-jwt.png)
+![Successful response for request authenticated with JWT](/blog/2022/06/implementing-authentication-in-asp.net-core-web-apis/authorized-response-jwt.webp)
 
 Neat! Now that we passed a valid token, it wants to talk to us again. Let a few minutes pass, enough for the token to expire and try the request again to see how it's 401'ing again.
 
 ### Implementing API Key authentication
 
-Now lets change gears from JWT and implement an alternate authentication strategy in our Web API: API Keys. Authentication with API Keys is fairly common in the Web Service world. The core idea of API Keys is that the API provider (in this case, us) produces a secret string that is given to the clients for safekeeping. The clients then can use that key to access the API. I.e. make as many requests as they want. So it's essentially just a glorified password.
+Now let's change gears from JWT and implement an alternate authentication strategy in our Web API: API Keys. Authentication with API Keys is fairly common in the web service world.
 
-The main functional differences when it comes to JWT as we have implemented it is that the API Keys wont expire and that we will store them in our database. Then, when processing incoming requests, as part of the authentication step, our app will check if the given API Key exists in our internal records. If it does, then the request is allowed to go through, if it does not, then a 401 is sent back.
+The core idea of API Keys is that the API provider (in this case, us) produces a secret string that is given to the clients for safekeeping. The clients then can use that key to access the API and make as many requests as they want. So it's essentially just a glorified password.
+
+The main functional differences when it comes to JWT as we have implemented it is that the API Keys won't expire and that we will store them in our database. Then, when processing incoming requests, as part of the authentication step, our app will check if the given API Key exists in our internal records. If it does, then the request is allowed to go through, if it does not, then a 401 is sent back.
 
 This is going to be interesting because ASP.NET Core does not include an authentication scheme out of the box for this kind of behavior. For JWT, we were able to use the `Microsoft.AspNetCore.Authentication.JwtBearer` package. For this we have to get our hands dirty and actually implement a custom authentication handler that will run the logic that we need.
 
@@ -842,7 +844,7 @@ Similarly to when we implemented JWTs, we'll start by creating the new endpoint 
 
 ##### The API Key model and database table
 
-For storing API Keys, we just need a simple table that is linked to users via a one-to-many relationship and includes a name and a value. In terms of Entity Framework, our model could look like this in `VehicleQuotes/Models/UserApiKey.cs`:
+For storing API Keys, we just need a simple table that is linked to users via a one-to-many relationship and includes a name and a value. Using Entity Framework, our model could look like this in `VehicleQuotes/Models/UserApiKey.cs`:
 
 ```csharp
 using System.ComponentModel.DataAnnotations;
@@ -959,22 +961,21 @@ services.AddScoped<Services.ApiKeyService>();
 Now let's finally write a new action method on `VehicleQuotes/Controllers/UsersController.cs` so that there's an endpoint that clients can call to get API Keys. Before adding the action method though, as usual, we need to declare the following dependency as a constructor parameter and hold it in an instance variable:
 
 ```diff
-public class UsersController : ControllerBase
-{
-    private readonly UserManager<IdentityUser> _userManager;
-    private readonly JwtService _jwtService;
+ public class UsersController : ControllerBase
+ {
+     private readonly UserManager<IdentityUser> _userManager;
+     private readonly JwtService _jwtService;
 +    private readonly ApiKeyService _apiKeyService;
-
-    public UsersController(
-        UserManager<IdentityUser> userManager,
-        JwtService jwtService,
+ 
+     public UsersController(
+         UserManager<IdentityUser> userManager,
+         JwtService jwtService,
 +        ApiKeyService apiKeyService 
-    ) {
-        _userManager = userManager;
-        _jwtService = jwtService;
+     ) {
+         _userManager = userManager;
+         _jwtService = jwtService;
 +        _apiKeyService = apiKeyService;
-    }}
-
+     }}
 ```
 
 The action method itself would look like this:
@@ -1015,7 +1016,7 @@ This method is very similar to the other one that generates JWTs. Painfully so. 
 
 Anyway, you can now try a POST into `api/Users/ApiKey`, pass it a valid set of credentials, and you should see it respond with a brand new API Key:
 
-![Successful response for authenticated request](/blog/2022/06/implementing-authentication-in-asp.net-core-web-apis/post-api-key.png)
+![Successful response for authenticated request](/blog/2022/06/implementing-authentication-in-asp.net-core-web-apis/post-api-key.webp)
 
 The key can also be found in the database:
 
@@ -1121,7 +1122,7 @@ Something interesting to note is how the `AuthenticationTicket`, similarly to th
 
 ##### Enabling and configuring the API Key authentication
 
-Now we need to tell the framework that we want it to use a new authentication scheme for our app, spearheaded by the custom authentication handler that we just wrote. There's two steps to make that happen.
+Now we need to tell the framework that we want it to use a new authentication scheme for our app, spearheaded by the custom authentication handler that we just wrote. There are two steps to make that happen.
 
 First, we configure our new scheme in the app's `Startup` class. For that, we need these two new `using` statements:
 
@@ -1133,31 +1134,31 @@ using VehicleQuotes.Authentication.ApiKey;
 Then we add this right after the `AddJwtBearer` call in the `ConfigureServices` method:
 
 ```diff
-public void ConfigureServices(IServiceCollection services)
-{
-    // ...
-    services
-        .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-        .AddJwtBearer(options =>
-        {
-            options.TokenValidationParameters = new TokenValidationParameters()
-            {
-                ValidateIssuer = true,
-                ValidateAudience = true,
-                ValidateLifetime = true,
-                ValidateIssuerSigningKey = true,
-                ValidAudience = Configuration["Jwt:Audience"],
-                ValidIssuer = Configuration["Jwt:Issuer"],
-                IssuerSigningKey = new SymmetricSecurityKey(
-                    Encoding.UTF8.GetBytes(Configuration["Jwt:Key"])
-                )
-            };
-        })
+ public void ConfigureServices(IServiceCollection services)
+ {
+     // ...
+     services
+         .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+         .AddJwtBearer(options =>
+         {
+             options.TokenValidationParameters = new TokenValidationParameters()
+             {
+                 ValidateIssuer = true,
+                 ValidateAudience = true,
+                 ValidateLifetime = true,
+                 ValidateIssuerSigningKey = true,
+                 ValidAudience = Configuration["Jwt:Audience"],
+                 ValidIssuer = Configuration["Jwt:Issuer"],
+                 IssuerSigningKey = new SymmetricSecurityKey(
+                     Encoding.UTF8.GetBytes(Configuration["Jwt:Key"])
+                 )
+             };
+         })
 +        .AddScheme<AuthenticationSchemeOptions, ApiKeyAuthenticationHandler>(
 +            "ApiKey",
 +            options => { }
 +        );
-}
+ }
 ```
 
 A simple configuration as far as auth schemes go. We specify both the types of the authentication handler and the options object that it accepts via the generic type parameters to the `AddScheme` method. `"ApiKey"` is just the name we've given our custom auth scheme. It can be anything as long as it's not "Bearer", which is the name of the Jwt Bearer scheme (which is the value returned by `JwtBearerDefaults.AuthenticationScheme`). We'll refer back to it later. Finally, since we have no special options to give it, we specify a lambda that does nothing with its options.
@@ -1184,7 +1185,7 @@ Make sure to create a new API Key by POSTing to `api/Users/ApiKey`, and copy the
 
 With that, we can make the request and see how the endpoint now allows authentication via API Keys:
 
-![Successful response for request authenticated with API Key](/blog/2022/06/implementing-authentication-in-asp.net-core-web-apis/authorized-response-api-key.png)
+![Successful response for request authenticated with API Key](/blog/2022/06/implementing-authentication-in-asp.net-core-web-apis/authorized-response-api-key.webp)
 
 Of course, requests authenticated via JWT will also work for this endpoint.
 
