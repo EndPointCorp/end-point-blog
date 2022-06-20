@@ -89,7 +89,7 @@ This is because React will [bail out of the state update](https://reactjs.org/do
 
 ### The URL API’s URLSearchParams object
 
-Imagine you're writing a function that needs to parse and use a URL's search parameters. Pretty simple task, right? It wouldn't be too hard to do by hand, but there's probably a library out there somewhere, so you do a google search for "javascript parse url parameters" and click on the [first Stack Overflow answer](https://stackoverflow.com/questions/8486099/how-do-i-parse-a-url-query-parameters-in-javascript) in the results. You're greeted with an answer that defines a function using `.split()` a few times and then a much longer and more complex function that decodes the parameters in a non-standard way. Is this really necessary?
+Imagine you're writing a function that needs to parse and use a URL's search parameters. Pretty simple task, right? It wouldn't be too hard to do by hand, but there's probably a library out there somewhere, so you do a Google search for "javascript parse url parameters" and click on the [first Stack Overflow answer](https://stackoverflow.com/questions/8486099/how-do-i-parse-a-url-query-parameters-in-javascript) in the results. You're greeted with an answer that defines a function using `.split()` a few times and then a much longer and more complex function that decodes the parameters in a non-standard way. Is this really necessary?
 
 With the built-in [`URLSearchParams`](https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams) object, no. Supported in every major browser except Internet Explorer (which just reached its end of support life), this nice object handles parsing and formatting of string parameters with proper encoding and decoding:
 
@@ -135,7 +135,7 @@ for (let i = 0; i < names.length; i++) {
 names.forEach(value => console.log(value.substr(0,1).toUpperCase() + value.substr(1)));
 ```
 
-`forEach` takes as its argument a *callback function*, which it then calls once for each item in the array. The callback function can take more arguments than just the value as well, see its [MDN page](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach).
+`forEach` takes as its argument a *callback function*, which it then calls once for each item in the array. The callback function can take more arguments than just the value as well; see its [MDN page](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach).
 
 I personally find `map` more interesting and useful. Map is very similar to `forEach`, except that the values returned by the callback function are assembled to make a new array of the same length as the old one, essentially returning a transformed array.
 
