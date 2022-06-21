@@ -1,6 +1,6 @@
 ---
 author: "Jeffry Johar"
-title: "A quick way to deploy a containerized application to AWS"
+title: "How to deploy containerized Django app with AWS Copilot"
 date: 2022-06-21
 tags:
 - Docker
