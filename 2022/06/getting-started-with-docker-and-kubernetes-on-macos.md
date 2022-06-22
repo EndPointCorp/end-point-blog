@@ -16,7 +16,8 @@ img {
 </style>
 
 ![Shipping infrastructure at a dock](/blog/2022/06/getting-started-with-docker-and-kubernetes-on-macos/shipping.webp)
-Photo from [PxHere](https://pxhere.com/en/photo/1222170)
+
+<!-- Photo licensed under CC0 (public domain) from https://pxhere.com/en/photo/1222170 -->
 
 What is the best way to master American English? One school of thought says that the best way to learn a language is to live in the country of the origin. For American English that would be the USA. Why is that so? Because we as the learners get to talk to native speakers daily. By doing this, we get to know how the natives use the language and its grammar in the real world.
 
