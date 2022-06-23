@@ -13,15 +13,11 @@ date: 2022-06-20
 
 <!-- Photo by Juan Pablo Ventoso -->
 
---
---
---
+Some time ago, I had the opportunity to collaborate on a cool [NuxtJS](https://nuxtjs.org/) project. I'm still somewhat new to [Vue.js](https://vuejs.org/) and its frameworks, meaning I'm discovering exciting new tools and third-party services that can be integrated with them every time a new requirement appears. And there is a particular concept that I heard of theorically, but never worked with until this project. I'm talking about using a [Headless CMS](https://en.wikipedia.org/wiki/Headless_content_management_system) to deliver content.
 
-Some time ago, I had the opportunity to collaborate on a fun [NuxtJS](https://nuxtjs.org/) project. I'm still somewhat new to [Vue.js](https://vuejs.org/) and its frameworks, meaning I'm discovering exciting new tools and third-party services that can be integrated with them every time a new requirement comes. And there is a particular a concept that I heard of theorically, but never worked with until this project. I'm talking about using a [Headless CMS](https://en.wikipedia.org/wiki/Headless_content_management_system) to deliver content.
+Essentially, a headless CMS allows creating a custom content model and make it accesible through one (or several) APIs, allowing to choose whatever presentation layer we prefer to handle the display. This approach decouples the content management part (the "body") from the design, templates and frontend logic (the "head"), becoming particularly useful when we have several application types that will interact with the same data, such as a website, a mobile app, or an [IoT](https://en.wikipedia.org/wiki/Internet_of_things) device.
 
-Essentially, using a headless CMS allows creating a custom content model and make it accesible through one (or several) APIs, allowing us to choose whatever presentation layer we prefer to handle the display. This approach allows decoupling the content management part (the "body") from the design, templates and frontend logic (the "head"). It's also particularly useful when we have several frontend application types that will interact with the same data, such as a website, a mobile app, or an [IoT](https://en.wikipedia.org/wiki/Internet_of_things) device.
-
-That's when [Contentful](https://www.contentful.com/) comes into play: It's a headless CMS, under the concept of content-as-a-service ([CaaS](https://www.contentful.com/r/knowledgebase/content-as-a-service/)), meaning the content is delivered on-demand from a platform to the consumer by implementing an API or web service. 
+With that in mind, let's talk about [Contentful](https://www.contentful.com/): It's a headless CMS, under the concept of content-as-a-service ([CaaS](https://www.contentful.com/r/knowledgebase/content-as-a-service/)), meaning the content is delivered on-demand from a cloud platform to the consumer by implementing an API or web service.
 
 --
 --
@@ -84,8 +80,12 @@ Below is an example of using the Cloudinary Image component on a Vue template:
 </template>
 ```
 
+
+--
+--
+
 ### Alternatives
 
-Of course, Cloudinary is not the only image processing and CDN company out there: There are other companies offering similar services, like [Cloudflare images](https://www.cloudflare.com/products/cloudflare-images/), [Cloudimage](https://www.cloudimage.io/), or [imagekit.io](https://imagekit.io/).
+There are several alternatives to Contentful out there: [Prismic CMS](https://prismic.io/) or [GraphCMS](https://graphcms.com/) -based entirely in GraphQL- are the most popular. There are also downloadable products, like [SilverStrap CMS](https://www.silverstripe.org/). Their pricing plans are varied, but all of them offer a free community plan for starters or small websites.
 
-Do you know any other good alternatives, or have you used any other Cloudinary feature that is not listed here? Feel free to add a comment below!
+Have you used any other headless CMS not listed here? We would love to hear your comments!
