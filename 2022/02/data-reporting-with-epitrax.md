@@ -7,6 +7,7 @@ tags:
 - epitrax
 - clients
 - case-study
+- emsa
 featured:
   endpoint: true
   image_url: /blog/2022/02/data-reporting-with-epitrax/20220107_002143-sm.webp

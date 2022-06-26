@@ -38,7 +38,7 @@ R Geoffrey Avery presented this talk, not as a way to get the application code t
 
 as well as setting up appropriate permissions, etc.
 
-Dancer was somewhat incidental to this talk. It’s another web framework (a way of connecting structured URLs into a web service so that a given URL runs a given chunk of code, and delivers output in a particular format, HTML, JSON, XML, or what-have you). Setting it up on a bare system can be a chore, especially if you aren’t a rugged, fearless [system administrator](http://geekswing.com/wp-content/uploads/2013/07/system-administrator-poster.jpg) type, so Avery gave us mortals a way to brute-force this installation without a lot of experience beforehand.
+Dancer was somewhat incidental to this talk. It’s another web framework (a way of connecting structured URLs into a web service so that a given URL runs a given chunk of code, and delivers output in a particular format, HTML, JSON, XML, or what-have you). Setting it up on a bare system can be a chore, especially if you aren’t a rugged, fearless [system administrator](https://web.archive.org/web/20170606205625/http://geekswing.com/wp-content/uploads/2013/07/system-administrator-poster.jpg) type, so Avery gave us mortals a way to brute-force this installation without a lot of experience beforehand.
 
 - Templates as a service—​with swig.js
 

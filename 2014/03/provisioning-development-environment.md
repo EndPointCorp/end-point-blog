@@ -29,7 +29,7 @@ The file my_machine.json can be the name of any json file and contains all the i
 
 ### The Builder Configuration
 
-[Builders](https://www.packer.io/docs/templates/builders.html) takes an array of JSON objects that specify different ways to build your machines. You can think of them as instructions on how to get your machine setup and running. For example, to get a machine up and running you need to create a machine, install an operating system (OS) and create a user so that you can login to the machine. There are many different types of builders, but for the example here, I’ll just use the `vmware-iso` machine type. Here’s a working JSON configuration file:
+[Builders](https://web.archive.org/web/20160318014945/https://www.packer.io/docs/templates/builders.html) takes an array of JSON objects that specify different ways to build your machines. You can think of them as instructions on how to get your machine setup and running. For example, to get a machine up and running you need to create a machine, install an operating system (OS) and create a user so that you can login to the machine. There are many different types of builders, but for the example here, I’ll just use the `vmware-iso` machine type. Here’s a working JSON configuration file:
 
 ```json
 {
@@ -68,7 +68,7 @@ The file my_machine.json can be the name of any json file and contains all the i
 }
 ```
 
-The [documentation](https://www.packer.io/docs/templates/builders.html) for these settings is really good but I want to point out a few things that weren’t immediately clear. Some of these pertain mostly to the vmware-iso builder type, but I believe they are worth pointing out because some of them apply to other builder types as well. 
+The [documentation](https://web.archive.org/web/20160318014945/https://www.packer.io/docs/templates/builders.html) for these settings is really good but I want to point out a few things that weren’t immediately clear. Some of these pertain mostly to the vmware-iso builder type, but I believe they are worth pointing out because some of them apply to other builder types as well. 
 
 First, the `iso_url` setting can be either an absolute path, a relative path, or a fully qualified url. The relative path is relative to the directory where you run the `packer` command. So here, when I run `packer`, I need to make sure that I do so from a directory that has an os subdirectory with the ubuntu iso located therein.
 
@@ -80,7 +80,7 @@ Since we are using Ubuntu as our main machine, we will need to use sudo to send 
 
 The `boot_command` is a series of keystrokes that you can send to the machine via VNC. If you have set up a Linux machine from scratch you know that you have to enter in a bunch of information to the machine about how to set it up for the first time such as time zone, keyboard layout, how to partition the hard drive, host name, etc. All these keystrokes needed to set up your machine can be used here.
 
-But if you think about it, that’s a ton of keystrokes and this command could get quite long. A better way to approach this is to use a preseed file. A [preseed.cfg](https://help.ubuntu.com/lts/installation-guide/s390x/apb.html) file contains the same information you enter when you setup a machine for the first time. This isn’t something provided by Packer, but it is provided by the operating system to automatically provision machines. For Ubuntu, a preseed file is used like so:
+But if you think about it, that’s a ton of keystrokes and this command could get quite long. A better way to approach this is to use a preseed file. A [preseed.cfg](https://web.archive.org/web/20210518144703/https://help.ubuntu.com/lts/installation-guide/s390x/apb.html) file contains the same information you enter when you setup a machine for the first time. This isn’t something provided by Packer, but it is provided by the operating system to automatically provision machines. For Ubuntu, a preseed file is used like so:
 
 - When you boot from the startup media (in this case an ISO image), you can choose the location of the preseed file via a URL.
 - The preseed file is uploaded into memory and the configuration is read.

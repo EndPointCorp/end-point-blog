@@ -8,6 +8,7 @@ tags:
 - case-study
 - rails
 - vue
+- emsa
 date: 2020-09-14
 ---
 
