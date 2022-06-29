@@ -21,16 +21,18 @@ Watch [Amazon's 2-minute introduction video](https://www.youtube.com/watch?v=Fzx
 
 We are going to work with the same Django application from [my last article on AWS Copilot](/blog/2022/06/how-to-deploy-containerized-django-app-with-aws-copilot/).
 
-In my last article, the Django application was deployed with SQLite as the DB. The application's data is stored in SQLite which resides internally inside the container. The problem with this setup is the data is not persistent. Whenever we redeploy the application, the container will get a new filesystem. Thus all old data will be removed automatically. Now we are moving away the application's data externally so that the life of the data does not depend on the container. We are going to put the data on the Aurora Serverless with PostgreSQL as the engine.
+In my last article, the Django application was deployed with SQLite as the database. The application's data is stored in SQLite which resides internally inside the container. The problem with this setup is the data is not persistent. Whenever we redeploy the application, the container will get a new filesystem. Thus all old data will be removed automatically.
 
-![django with sqlite](/blog/2022/06/how-to-deploy-django-app-with-aurora-serverless-and-copilot/django-sqlite.webp)
+Now we are moving away the application's data externally so that the life of the data does not depend on the container. We are going to put the data on the Aurora Serverless with PostgreSQL as the engine.
 
-<p style="text-align: center;"><B>Django with SQLite as the internal DB</B></p>
+![Diagram of Django app with SQLite database](/blog/2022/06/how-to-deploy-django-app-with-aurora-serverless-and-copilot/django-sqlite.webp)
+
+<p style="text-align: center; font-weight: bold">Django with SQLite as the internal database</p>
 <br>
 
-![django with aurora](/blog/2022/06/how-to-deploy-django-app-with-aurora-serverless-and-copilot/django-aurora.webp)
+![Diagram of Django app with AWS Aurora database](/blog/2022/06/how-to-deploy-django-app-with-aurora-serverless-and-copilot/django-aurora.webp)
 
-<p style="text-align: center;"><B>Django with Aurora Serverless as the external DB</B></p>
+<p style="text-align: center; font-weight: bold">Django with Aurora Serverless as the external database</p>
 <br>
 
 ### The Prerequisites
@@ -49,12 +51,12 @@ Go to the `django-aurora` directory and execute `docker-compose` to create a Dja
 
 ```plain
 $ cd django-aurora
-$ docker-compose run web django-admin startproject mydjango.
+$ docker-compose run web django-admin startproject mydjango
 ```
 
 ### The Deployment with AWS Copilot
 
-Execute the following command to create a AWS Copilot application with the name of "mydjango", a load balance container with the service name "django-web" which is made from the Dockerfile in the current directory.
+Execute the following command to create a AWS Copilot application with the name of "mydjango", a load balancer container with the service name "django-web" which is made from the Dockerfile in the current directory.
 
 ```plain
 $ copilot init \
@@ -81,7 +83,9 @@ $ copilot env init \
 --default-config
 ```
 
-Now we are going to generate a config for our Aurora Serveless database. Basically this is the CloudFormation template that will be used for Aurora Serverless. Execute the following to generate the configuration for an Aurora cluster named "mydjango-db" that we will use for the "django-web" application. The Aurora cluster will be using the PostgreSQL engine and the database name will be "mydb".
+Now we are going to generate a config for our Aurora Serverless database. Basically this is the CloudFormation template that will be used for Aurora Serverless.
+
+Execute the following to generate the configuration for an Aurora cluster named "mydjango-db" that we will use for the "django-web" application. The Aurora cluster will be using the PostgreSQL engine and the database name will be "mydb".
 
 ```plain
 $ copilot storage init \
@@ -92,7 +96,7 @@ django-web \
 --initial-db mydb
 ```
 
-Take note of the injected environment variable name. This is where the database info and credentials are stored, we will use this variable in later steps.
+Take note of the injected environment variable name. This is where the database info and credentials are stored, and we will use this variable in later steps.
 
 ```plain
 ✔ Wrote CloudFormation template at copilot/django-web/addons/mydjango-db.yml
@@ -135,14 +139,14 @@ Open the terminal of the service:
 $ copilot svc exec
 ```
 
-Execute the following commands to migrate the initial DB and to create a superuser id:
+Execute the following commands to migrate the initial database and to create a superuser account:
 
 ```plain
 $ python manage.py migrate
 $ python manage.py createsuperuser
 ```
 
-Execute the following command to check on the environment variable. Take note of the `MYDJANGODB_SECRET` variable. It is the variable that holds the DB information.
+Execute the following command to check on the environment variable. Take note of the `MYDJANGODB_SECRET` variable. It is the variable that holds the database information.
 
 ```plain
 $ env | grep MYDJANGODB_SECRET
@@ -154,23 +158,23 @@ We can use the [Query Editor at AWS Console](https://console.aws.amazon.com/rds/
 
 Click the DB base on the DB identifier from the injected environment variable and click Modify.
 
-![RDS Main](/blog/2022/06/how-to-deploy-django-app-with-aurora-serverless-and-copilot/rds-01-modify.webp)
+![Screenshot of Amazon RDS main control panel](/blog/2022/06/how-to-deploy-django-app-with-aurora-serverless-and-copilot/rds-01-modify.webp)
 
-Click the check box for AP.
+Click the check box for Data API.
 
-![RDS api](/blog/2022/06/how-to-deploy-django-app-with-aurora-serverless-and-copilot/rds-02-api.webp)
+![Screenshot of Amazon RDS Web Service Data API checkbox](/blog/2022/06/how-to-deploy-django-app-with-aurora-serverless-and-copilot/rds-02-api.webp)
 
 Select Apply Immediately.
 
-![RDS immediately](/blog/2022/06/how-to-deploy-django-app-with-aurora-serverless-and-copilot/rds-03-immediately.webp)
+![Screenshot of Amazon RDS Apply Immediately option](/blog/2022/06/how-to-deploy-django-app-with-aurora-serverless-and-copilot/rds-03-immediately.webp)
 
 Click Query Editor and fill in the Database information from the injected environment variable.
 
-![RDS info](/blog/2022/06/how-to-deploy-django-app-with-aurora-serverless-and-copilot/rds-04-dbinfo.webp)
+![Screenshot showing environment variable data extracted into the AWS RDS connection setup panel](/blog/2022/06/how-to-deploy-django-app-with-aurora-serverless-and-copilot/rds-04-dbinfo.webp)
 
-Now you may use the Query Editor to query the DB. Execute the following query to list all tables in the database:
+Now you may use the Query Editor to query the database. Execute the following query to list all tables in the database:
 
-![RDS info](/blog/2022/06/how-to-deploy-django-app-with-aurora-serverless-and-copilot/rds-05-query.webp)
+![Screenshot of Amazon RDS Query Editor and results](/blog/2022/06/how-to-deploy-django-app-with-aurora-serverless-and-copilot/rds-05-query.webp)
 
 ### The End
 
