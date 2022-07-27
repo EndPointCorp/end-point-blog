@@ -5,6 +5,10 @@ github_issue_number: 1881
 date: 2022-07-26
 tags:
 - visionport
+- event
+featured:
+  visionport: true
+  image_url: /blog/2022/07/visionport-at-university-of-tokyo-new-york-office/ground-zero.webp
 ---
 
 ![3D visualization of Hiroshima with photos pinned throughout](/blog/2022/07/visionport-at-university-of-tokyo-new-york-office/ground-zero.webp)<br>
@@ -33,6 +37,6 @@ The educational work that the University of Tokyo is doing with the VisionPort p
 
 [Register here](https://convergence_peace_activities.eventbrite.com/) and join us for this viewing on August 6th and 7th at the University of Tokyo’s New York office located at [145 W. 57th St., 21st Floor, New York, NY 10019](https://goo.gl/maps/Kgd9rFf3eBU1oR2t7).
 
-For more information about VisionPort, contact [sales@visionport.com](mailto:sales@visionport.com) or visit www.visionport.com.
+For more information about VisionPort, email [sales@visionport.com](mailto:sales@visionport.com) or visit [visionport.com](https://www.visionport.com/).
 
-Images and photography provided by the University of Tokyo, the department of Interfaculty Initiative in Information Studies, the lab of Professor Hidenori Watanave and the lab of Professor Taichi Furuhashi.
+Images and photography provided by the University of Tokyo, the department of Interfaculty Initiative in Information Studies, the lab of Professor Hidenori Watanave, and the lab of Professor Taichi Furuhashi.
