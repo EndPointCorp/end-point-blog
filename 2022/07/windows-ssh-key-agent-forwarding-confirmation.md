@@ -54,7 +54,7 @@ Now when we use PuTTY or another PuTTY agent-compatible program we’ll be prese
 
 ![KeeAgent’s confirmation dialog](/blog/2022/07/windows-ssh-key-agent-forwarding-confirmation/5-confirmation.webp)
 
-Notice that the default selected option is No. This is different than the standard openssh-askpass on Linux, which defaults to Yes. If you’re typing along in a fury and the windows pops up and you hit Enter or space, it’ll decline the use of your SSH key, rather than accepting it.
+Notice that the default selected option is No. This is different than the standard openssh-askpass on Linux, which defaults to Yes. If you’re typing along in a fury and the confirmation window pops up and you hit Enter or space, it will decline the use of your SSH key, rather than accepting it.
 
 If you have enabled SSH key forwarding in the PuTTY options for the connection you’ll be using you can then SSH to other servers using the same key and each time you do so the confirmation will be presented to you.
 
