@@ -112,7 +112,7 @@ unzip dvdrental.zip
 Execute the following command to import the data. It will restore the `dvdrental.tar` backup to our Postgres database.
 
 ```plain
-docker exec -i basic-postgres pg_restore -U postgres -v -d dvdrental dvdrental.tar
+docker exec -i basic-postgres pg_restore -U postgres -v -d dvdrental < dvdrental.tar
 ```
 
 Where:
@@ -123,7 +123,7 @@ Where:
 - `-U postgres` says to connect as the postgres user,
 - `-v` enables verbose mode,
 - `-d dvdrental` specifies the database to connect to, and
--  `dvdrental.tar` says which file pg_restore should read.
+- `< dvdrental.tar` says which file's data the shell should pass to pg_restore.
 
 Log in to the dvdrental database:
 
