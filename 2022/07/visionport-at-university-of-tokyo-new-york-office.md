@@ -20,7 +20,7 @@ We are extremely honored to be able to contribute to the [first exhibition at th
 
 It is said that those who do not learn from history are condemned to repeat it, and in that vein, the exhibition, drawing from the work of Professor Hidenori Watanave, will be using the VisionPort platform to educate viewers on the realities of the bombings of Hiroshima and Nagasaki, on the date of the 77th anniversary of the first nuclear weapon used in war.
 
-<img alt="Several women in a presentation on the VisionPort" style="max-width: 30rem" src="/blog/2022/07/visionport-at-university-of-tokyo-new-york-office/utokyo-visionport.webp" />
+![Several women and men in a presentation on the VisionPort](/blog/2022/07/visionport-at-university-of-tokyo-new-york-office/utokyo-visionport.webp)
 
 The team has been collecting and colorizing photographic material from the aftermath of the bombings for over 10 years. The exhibition will combine that work with interviews and writings from survivors on a GIS canvas to allow attendees to see what it looked like and to hear from those who were there.
 
