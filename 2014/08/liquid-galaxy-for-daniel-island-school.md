@@ -5,6 +5,7 @@ github_issue_number: 1025
 tags:
 - visionport
 - clients
+- education
 date: 2014-08-22
 ---
 

@@ -6,6 +6,7 @@ date: 2022-07-26
 tags:
 - visionport
 - event
+- education
 featured:
   visionport: true
   image_url: /blog/2022/07/visionport-at-university-of-tokyo-new-york-office/ground-zero.webp

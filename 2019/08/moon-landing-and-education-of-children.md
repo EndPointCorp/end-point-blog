@@ -4,6 +4,7 @@ title: A Moon Landing and the Education of Our Children
 github_issue_number: 1548
 tags:
 - visionport
+- education
 featured:
   visionport: true
   image_url: /blog/2019/08/moon-landing-and-education-of-children/image-0.jpg

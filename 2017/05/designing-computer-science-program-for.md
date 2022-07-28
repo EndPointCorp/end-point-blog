@@ -4,6 +4,7 @@ title: Designing a Computer Science Program for Free (or Cheap)
 github_issue_number: 1303
 tags:
 - training
+- education
 date: 2017-05-04
 ---
 
