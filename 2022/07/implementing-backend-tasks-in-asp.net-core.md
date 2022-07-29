@@ -1,10 +1,11 @@
 ---
 author: "Kevin Campusano"
 title: "Implementing Backend Tasks in ASP.NET Core"
-date: 2022-06-26
+date: 2022-07-29
 tags:
 - csharp
 - dotnet
+- asp.net
 ---
 
 # Implementing Backend Tasks in ASP.NET Core
@@ -498,4 +499,5 @@ This means that, unless you do one these, the changes that you make to the app b
 - [Setting up Dependency Injection in the Console App](#setting-up-dependency-injection-in-the-console-app)
 - [Improving the CLI with CommandLineParser](#improving-the-cli-with-commandlineparser)
 - [Deploying the Console App as a .NET tool](#deploying-the-console-app-as-a-net-tool)
+- [Table of contents](#table-of-contents)
 
