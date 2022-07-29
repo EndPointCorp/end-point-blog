@@ -11,7 +11,7 @@ tags:
 
 [As we've already established](https://www.endpointdev.com/blog/2022/01/database-integration-testing-with-dotnet/), [Ruby on Rails](https://rubyonrails.org/) is great. The amount and quality of tools that Rails puts at our disposal when it comes to developing web applications is truly outstanding. One aspect of web application development that Rails makes particularly easy is that of creating backend tasks.
 
-These can be anything from database maintenance, filesystem cleanup, overnight heavy computations, bulk email dispatch, etc. In general, functionality that is tipically initiated by an sysadmin in the backend, or scheduled in a [cron](https://en.wikipedia.org/wiki/Cron) job, which has no GUI, but rather, is invoked via command line.
+These can be anything from database maintenance, file system cleanup, overnight heavy computations, bulk email dispatch, etc. In general, functionality that is tipically initiated by an sysadmin in the backend, or scheduled in a [cron](https://en.wikipedia.org/wiki/Cron) job, which has no GUI, but rather, is invoked via command line.
 
 By integrating with [Rake](https://github.com/ruby/rake), Rails allows us to [very easily write such tasks](https://guides.rubyonrails.org/command_line.html#custom-rake-tasks) as plain old [Ruby](https://ruby-doc.org/) scrips. These scripts have access to all the domain logic and data that the full fledged Rails app has access to. The cherry on top is that the command line interface to invoke such tasks is very straightforward. It looks something like this: `bin/rails fulfillment:process_new_orders`.
 
@@ -23,7 +23,7 @@ However, I think we should be able to implement our own without too much hassle,
 
 # What we want to accomplish
 
-So, to put it in concrete terms, we want to create a backend task that has access to all the logic and data of an existing ASP.NET Core application. The task should be ivokable via command line interface, so that it can be easily executed via the likes of cron or other scripts.
+So, to put it in concrete terms, we want to create a backend task that has access to all the logic and data of an existing ASP.NET Core application. The task should be callable via command line interface, so that it can be easily executed via the likes of cron or other scripts.
 
 In order to meet these requirements, we will create a new .NET console app that:
 
@@ -66,7 +66,7 @@ Now, since we're using a solution file, let's add our brand new console app proj
 dotnet sln add VehicleQuotes.CreateUser
 ```
 
-Ok cool. That shoul've produced the following diff on `vehicle-quotes.sln`:
+Ok cool. That should've produced the following diff on `vehicle-quotes.sln`:
 
 ```diff
 diff --git a/vehicle-quotes.sln b/vehicle-quotes.sln
@@ -120,7 +120,7 @@ If we move to the `VehicleQuotes.CreateUser` directory, we can do that with the 
 dotnet add reference ../VehicleQuotes/VehicleQuotes.csproj
 ```
 
-The command itsef is pretty self-explanatory. It just expects to be given the `.csproj` file of the project that we want to add as a reference in order to do its magic.
+The command itself is pretty self-explanatory. It just expects to be given the `.csproj` file of the project that we want to add as a reference in order to do its magic.
 
 Running that should've added the following snippet to `VehicleQuotes.CreateUser/VehicleQuotes.CreateUser.csproj`:
 
@@ -230,7 +230,7 @@ services.AddTransient<UserCreator>();
 
 > Curious about what `Transient` means? [The official .NET documentation](https://docs.microsoft.com/en-us/dotnet/core/extensions/dependency-injection#service-lifetimes) has the answer.
 
-And that allows us to obtain an instace of it with:
+And that allows us to obtain an instance of it with:
 
 ```csharp
 var userCreator = host.Services.GetRequiredService<UserCreator>();
@@ -321,7 +321,7 @@ class CliOptions
 
 I've decided to name it `CliOptions` but really, it could have been anything. Go ahead and create it in `VehicleQuotes.CreateUser/CliOptions.cs`. There are a few interesting elements to note here.
 
-The key aspect is that we have a few properties: `Username`, `Email` and `Password`. These represent our three command line arguments. Thanks to the `Value` attributes that they have been annotatted with, `CommandLineParser` will know that that's their purpose. You can see how the attributes themselves also contain each argument's specification like the order in which they should be supplied, as well as their name and help text.
+The key aspect is that we have a few properties: `Username`, `Email` and `Password`. These represent our three command line arguments. Thanks to the `Value` attributes that they have been annotated with, `CommandLineParser` will know that that's their purpose. You can see how the attributes themselves also contain each argument's specification like the order in which they should be supplied, as well as their name and help text.
 
 This class also defines an `Examples` getter which is used by `CommandLineParser` to print out usage examples into the console when our app's help option is invoked.
 
@@ -458,7 +458,7 @@ You can invoke the tool from this directory using the following commands: 'dotne
 Tool 'vehiclequotes.createuser' (version '1.0.0') was successfully installed. Entry is added to the manifest file /path/to/solution/.config/dotnet-tools.json.
 ```
 
-It tells us all we need to know. Check out the `.config/dotnet-tools.json` to see how the tool has been addded there. Anyway, this means we can run our console app as a .NET tool:
+It tells us all we need to know. Check out the `.config/dotnet-tools.json` to see how the tool has been added there. Anyway, this means we can run our console app as a .NET tool:
 
 ```sh
 $ dotnet create_user --help
