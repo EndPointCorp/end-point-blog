@@ -28,7 +28,7 @@ So, to put it in concrete terms, we want to create a backend task that has acces
 In order to meet these requirements, we will create a new .NET console app that:
 
 1. References the existing ASP.NET Core project.
-2. Loads all the classes from it and makes instances of them available via dependency injection.
+2. Loads all the classes from it and makes instances of them available via [dependency injection](https://en.wikipedia.org/wiki/Dependency_injection).
 3. Has a usable, UNIX-like command line interface that sysadmins would be familiar with.
 4. Is invokable via the [.NET CLI](https://docs.microsoft.com/en-us/dotnet/core/tools/).
 
@@ -36,7 +36,7 @@ We will do all this within the context of an existing web application. One that 
 
 It is a simple ASP.NET Web API backed by a [Postgres](https://www.postgresql.org/) database. It has a few endpoints for [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete)ing automotive related data and for calculating values of vehicles based on various aspects of them.
 
-You can find it [on GitHub](https://github.com/megakevin/end-point-blog-dotnet-5-web-api). If you'd like to follow along, clone the repository and checkout this commit: [TODO](https://github.com/megakevin/end-point-blog-dotnet-5-web-api/tree/TODO). It represents the project as it was before applying all the changes from this article. The finished product can be found [here](TODO).
+You can find it [on GitHub](https://github.com/megakevin/end-point-blog-dotnet-5-web-api). If you'd like to follow along, clone the repository and checkout this commit: [9a078015ce](https://github.com/megakevin/end-point-blog-dotnet-5-web-api/tree/9a078015cec2e8a42a4898e203a1a50db69731e8). It represents the project as it was before applying all the changes from this article. The finished product can be found [here](https://github.com/megakevin/end-point-blog-dotnet-5-web-api/tree/backend-task).
 
 You can follow the instructions in [the project's README file](https://github.com/megakevin/end-point-blog-dotnet-5-web-api/blob/json-web-token/VehicleQuotes/README.md) if you want to get the app up and running.
 
@@ -46,9 +46,9 @@ Let's get to it.
 
 # Creating a new Console App that references the existing Web App as a library
 
-The codebase is structured as a [solution](https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-sln), as given away by the `vehicle-quotes.sln` file located at the root of the repository. Within this solution, there are two projects: `VehicleQuotes` which is our web app itself, and `VehicleQuotes.Tests` which contains the app's test suite. For this article, we only care about the web app.
+The codebase is structured as a [solution](https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-sln), as given away by the `vehicle-quotes.sln` file located at the root of the repository. Within this solution, there are two projects: `VehicleQuotes` which is the web app itself, and `VehicleQuotes.Tests` which contains the app's test suite. For this article, we only care about the web app.
 
-Like I said, the backend task that we will crate is nothing fancy in itself. It's a humble console app. So, we start by asking the `dotnet` CLI to create a new console app project for us.
+Like I said, the backend task that we will create is nothing fancy in itself. It's a humble console app. So, we start by asking the `dotnet` CLI to create a new console app project for us.
 
 From the repository's root directory, we can do so with this command:
 
@@ -122,7 +122,7 @@ dotnet add reference ../VehicleQuotes/VehicleQuotes.csproj
 
 The command itsef is pretty self-explanatory. It just expects to be given the `.csproj` file of the project that we want to add as a reference in order to do its magic.
 
-Running that should've added the following snippet to `VehicleQuotes/VehicleQuotes.csproj`:
+Running that should've added the following snippet to `VehicleQuotes.CreateUser/VehicleQuotes.CreateUser.csproj`:
 
 ```xml
 <ItemGroup>
@@ -130,21 +130,21 @@ Running that should've added the following snippet to `VehicleQuotes/VehicleQuot
 </ItemGroup>
 ```
 
-This way, .NET knows allows the code defined in the `VehicleQuotes` project to be used within the `VehicleQuotes.CreateUser` project.
+This way, .NET allows the code defined in the `VehicleQuotes` project to be used within the `VehicleQuotes.CreateUser` project.
 
 > You can learn more about the add reference command in [the official docs](https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-add-reference).
 
 # Setting up Dependency Injection in the Console App
 
-As a result of the previous steps, our new console app now has access to the classes defined within the web app. However, classes by themselves are no good if we can't actually create instances of them that we can interact with. The premier method for getting instance of classes in .NET is via dependency injection. So, we need to set that up for our little console app.
+As a result of the previous steps, our new console app now has access to the classes defined within the web app. However, classes by themselves are no good if we can't actually create instances of them that we can interact with. The premier method for making instances of classes available throughout a .NET application is via [dependency injection](https://docs.microsoft.com/en-us/dotnet/core/extensions/dependency-injection). So, we need to set that up for our little console app.
 
-Dependency injection is something that comes set up out of the box for ASP.NET web apps. Luckily for us, .NET makes it fairly easy for us to leverage the same components for use within console apps as well.
+Dependency injection is something that comes set up out of the box for ASP.NET web apps. Luckily for us, .NET makes it fairly easy to set this up in console apps as well by leveraging the same components.
 
 For this app, we want to create user accounts. In the web app, user account management is done via [ASP.NET Core Identity]((https://docs.microsoft.com/en-us/aspnet/core/security/authentication/identity?view=aspnetcore-6.0&tabs=netcore-cli)). Specifically, the `UserManager` class is used to create new user accounts. This console app will do the same.
 
-> Take a look at `VehicleQuotes/Controllers/UsersController.cs` to see how the user accounts are created. If you'd like to know more about integrating ASP.NET Core Identity into an existing web app, I wrote [an article](https://www.endpointdev.com/blog/2022/06/implementing-authentication-in-asp.net-core-web-apis/) about it.
+> Take a look at [`VehicleQuotes/Controllers/UsersController.cs`](https://github.com/megakevin/end-point-blog-dotnet-5-web-api/blob/backend-task/VehicleQuotes/Controllers/UsersController.cs) to see how the user accounts are created. If you'd like to know more about integrating ASP.NET Core Identity into an existing web app, I wrote [an article](https://www.endpointdev.com/blog/2022/06/implementing-authentication-in-asp.net-core-web-apis/) about it.
 
-Before we do the dependency injection setup, let's add a new class to our console app project that will encapsulate the logic of leveraging the `UserManager` for user account creation. In other words, this is the core of the backend task that we want the console app to perform. The new class will be defined in `VehicleQuotes.CreateUser/UserCreator.cs` and these will be its contents:
+Before we do the dependency injection setup, let's add a new class to our console app project that will encapsulate the logic of leveraging the `UserManager` for user account creation. This is the actual task that we want to perform. The new class will be defined in `VehicleQuotes.CreateUser/UserCreator.cs` and these will be its contents:
 
 ```csharp
 using Microsoft.AspNetCore.Identity;
@@ -197,9 +197,9 @@ var userCreator = host.Services.GetRequiredService<UserCreator>();
 userCreator.Run(args[0], args[1], args[2]);
 ```
 
-Let's dissect this line by line.
+Let's dissect this bit by bit.
 
-First off, we got a few `using` statements that we need in order to access some classes and extension methods that we need down below. `using Microsoft.Extensions.DependencyInjection` gives us access the the `AddTransient` and `GetRequiredService` methods which we will discuss shortly. `using Microsoft.Extensions.Hosting` allows us to use `IHost` and `Host` types. And finally `using VehicleQuotes.CreateUser` allows this file to see the `UserCreator` class that we defined above.
+First off, we've got a few `using` statements that we need in order to access some classes and extension methods that we need down below.
 
 Next, we create and configure a new `IHost` instance. .NET Core introduced the concept of a "host" as an abstraction for programs; and packed in there a lot of functionality to help with things like configuration, logging and, most importantly for us, dependency injection. To put it simply, the simplest way of enabling dependency injection in a console app is to use a `Host` and all the goodies that come within.
 
@@ -207,7 +207,7 @@ Next, we create and configure a new `IHost` instance. .NET Core introduced the c
 
 `Host.CreateDefaultBuilder(args)` gives us an `IHostBuilder` instance that we can use to configure our host. In our case, we've chosen to call `UseContentRoot(System.AppContext.BaseDirectory)` on it, which makes it possible for the app to find assets (like `appconfig.json` files!) regardless of where its deployed and where its being called from.
 
-This is important for us because, as you will see later, we will install this console app as a [.NET Tool](https://docs.microsoft.com/en-us/dotnet/core/tools/global-tools). .NET Tools are installed in directories picked by .NET and can be run from anywhere in the system. So we need to make sure that our app can find its assets wherever its executable may be. As long as said assets are deployed in the same directory as the executable itself that is!
+This is important for us because, as you will see later, we will install this console app as a [.NET Tool](https://docs.microsoft.com/en-us/dotnet/core/tools/global-tools). .NET Tools are installed in directories picked by .NET and can be run from anywhere in the system. So we need to make sure that our app can find its assets wherever it has been installed.
 
 After that, we call `ConfigureServices` where we do a nice trick in order to make sure our console app has all the same configuration as the web app as far as dependency inejction goes.
 
@@ -282,7 +282,7 @@ After that's done, a new section would've been added to `VehicleQuotes.CreateUse
 </ItemGroup>
 ```
 
-That allows our console app to use the classes provided by the package.
+Now our console app can use the classes provided by the package.
 
 All specifications for `CommandLineParser` are done via a plain old C# class that we need to define. For this console app, which accepts three mandatory arguments, such a class could look like this:
 
@@ -323,9 +323,9 @@ I've decided to name it `CliOptions` but really, it could have been anything. Go
 
 The key aspect is that we have a few properties: `Username`, `Email` and `Password`. These represent our three command line arguments. Thanks to the `Value` attributes that they have been annotatted with, `CommandLineParser` will know that that's their purpose. You can see how the attributes themselves also contain each argument's specification like the order in which they should be supplied, as well as their name and help text.
 
-This class also defines an `Examples` getter which is used by `CommandLineParser` to print out usage examples into the console when our app's help is invoked.
+This class also defines an `Examples` getter which is used by `CommandLineParser` to print out usage examples into the console when our app's help option is invoked.
 
-Other than that, the class itself is unremarkable. In summary, it's a number of fields annotated with attributes so that `CommandLineParser` know what to do with it.
+Other than that, the class itself is unremarkable. In summary, it's a number of fields annotated with attributes so that `CommandLineParser` knows what to do with it.
 
 In order to actually put it to work, we update our `VehicleQuotes.CreateUser/Program.cs` like so:
 
@@ -358,7 +358,7 @@ using VehicleQuotes.CreateUser;
 +    .WithParsed(options => Run(options));
 ```
 
-We've wrapped the original code that we had in `Program.cs` into a method simply called `Run`.
+We've wrapped `Program.cs`'s original code into a method simply called `Run`.
 
 Also, we've added this snippet at the bottom of the file:
 
@@ -370,7 +370,7 @@ Parser.Default
 
 That's how we ask `CommandLineParser` to parse the incoming CLI arguments, as specified by `CliOptions` and, if it can be done successfully, then execute the rest of the program by calling the `Run` method.
 
-Neatly, we also no longer have to use the `args` array directly in order to get the command line arguments provided to the app, instead we use the `options` object that `CommandLineParser` creates once it has done its parsing. You can see it in this line:
+Neatly, we also no longer have to use the `args` array directly in order to get the command line arguments provided to the app, instead we use the `options` object that `CommandLineParser` creates for us once it has done its parsing. You can see it in this line:
 
 ```csharp
 userCreator.Run(options.Username, options.Email, options.Password);
@@ -403,11 +403,9 @@ Create a new user account:
 
 As you can see, `CommandLineParser` detected that no arguments were given, and as such, it printed out an error message, along with the descriptions, help text and example that we defined. Basically the instructions on how to use our console app.
 
-Netx, let's see how we can deploy this console app as a .NET tool.
-
 # Deploying the Console App as a .NET tool
 
-Ok now we have a console app that does what it needs to do, with a decent interface. Let's make it even more accessible by deploying it as a .NET tool. If we do that, we'd be able to invoke it with a command like this:
+OK we now have a console app that does what it needs to do, with a decent interface. The final step is to make it even more accessible by deploying it as a .NET tool. If we do that, we'd be able to invoke it with a command like this:
 
 ```sh
 dotnet create_user Kevin kevin@gmail.com secretpw
@@ -436,7 +434,7 @@ dotnet pack
 
 That will build the application and produce a `VehicleQuotes.CreateUser/nupkg/VehicleQuotes.CreateUser.1.0.0.nupkg` file.
 
-We won't make the tool available for the entire system. Instead, we will make it available from within the our solution's directory only. We can make that happen if we create a tool manifest file in the source code's root directory. That's done with this command, ran from the root dir:
+We won't make the tool available for the entire system. Instead, we will make it available from within our solution's directory only. We can make that happen if we create a tool manifest file in the source code's root directory. That's done with this command, ran from the root dir:
 
 ```sh
 dotnet new tool-manifest
@@ -444,13 +442,13 @@ dotnet new tool-manifest
 
 That should create a new file: `.config/dotnet-tools.json`.
 
-Now, also from the root directory, we finally install our tool:
+Now, also from the root directory, we can finally install our tool:
 
 ```sh
 dotnet tool install --add-source ./VehicleQuotes.CreateUser/nupkg VehicleQuotes.CreateUser
 ```
 
-This is the regular command to install any tools in .NET. The interesting part is that we use the `--add-source` option to point it to the path where our package is located.
+This is the regular command to install any tools in .NET. The interesting part is that we use the `--add-source` option to point it to the path where our freshly built package is located.
 
 After that, .NET shows this output:
 
@@ -483,9 +481,9 @@ Create a new user account:
 
 Pretty sweet, huh? And yes, it has taken a lot more effort than what it would've taken in Ruby on Rails, but hey, the end result is pretty fabulous I think, and we learned a new thing. Besides, once you've done it once, the skeleton can be easily reused for all kinds of different backend tasks.
 
-Now, before we wrap this up, there's something we need to consider when actively developing these tools. That is, making changes and re-installing constantly.
+Now, before we wrap this up, there's something we need to consider when actively developing these tools. That is, when making changes and re-installing constantly.
 
-The main aspect to understand is that tools are just NuGet packages, and as such are beholden to the NuGet package infrastructure. Whcih includes caching. If you're in the process of developing your tool and are quickly making and deploying changes, NuGet wont update the cache unless you do one of two things:
+The main aspect to understand is that tools are just NuGet packages, and as such are beholden to the NuGet package infrastructure. Which includes caching. If you're in the process of developing your tool and are quickly making and deploying changes, NuGet wont update the cache unless you do one of two things:
 
 1. Manually clear it with a command like `dotnet nuget locals all --clear`.
 2. Bump up the version of the tool by updating the value of `<VersionSuffix>` in the project (`.csproj`) file.
