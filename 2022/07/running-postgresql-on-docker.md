@@ -119,11 +119,11 @@ Where:
 
 - `exec -i` executes something interactive,
 - `basic-postgres` specifies which container,
-- `pg_restore -U postgres -v -d dvdrental dvdrental.tar` is the pg_restore command with its own arguments:
-- `-U postgres` says to connect as the postgres user,
-- `-v` enables verbose mode,
-- `-d dvdrental` specifies the database to connect to, and
-- `< dvdrental.tar` says which file's data the shell should pass to pg_restore.
+- `pg_restore -U postgres -v -d dvdrental` is the pg_restore command with its own arguments:
+  - `-U postgres` says to connect as the postgres user,
+  - `-v` enables verbose mode,
+  - `-d dvdrental` specifies the database to connect to, and
+- `< dvdrental.tar` says which file's data the outside shell should pass into the container to pg_restore.
 
 Log in to the dvdrental database:
 
