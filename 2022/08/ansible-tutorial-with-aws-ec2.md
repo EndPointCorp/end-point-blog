@@ -52,27 +52,27 @@ In this section we will gather the IP of EC2 instances and setup the SSH keys fo
 3. Wed will choose the first EC2 to be the Ansible Control Node and the rest to be the Manage Nodes as follows:
 | Ansible Node | IP Adddress |
 |--------------|-------------|
-| Control Node | 13.215.254.77 |
-| Manage Nodes | 18.142.245.114<br>13.250.127.76<br>13.250.100.114 |
+| Control Node | 13.215.159.65 |
+| Manage Nodes | 18.138.255.51<br>13.229.198.36<br>18.139.0.15 |
 
 Screenshot:
-![Steps to EC2](/blog/2022/08/ansible-tutorial-with-aws-ec2/ansible03-ec2.webp)
+![Steps to EC2](/blog/2022/08/ansible-tutorial-with-aws-ec2/ansible-ng02.webp)
 
 Login Control Node by using our Key Pair. For me it is kaptenjeffry.pem
 ```plain 
-ssh -i kaptenjeffry.pem ec2-user@13.215.254.77
+ssh -i kaptenjeffry.pem ec2-user@13.215.159.65
 ```
 Open another terminal and copy the Key Pair to the Control Node
 ```plain
-scp -i kaptenjeffry.pem kaptenjeffry.pem ec2-user@13.215.254.77:~/.ssh
+scp -i kaptenjeffry.pem kaptenjeffry.pem ec2-user@13.215.159.65:~/.ssh
 ```
 Go back to the Control Node Terminal. Try to login from Control Node to one of the Manage Nodes by using the Key Pair. This is to ensure the Key Pair is usable to access the Managed Nodes
 ```plain
-ssh -i .ssh/kaptenjeffry.pem ec2-user@18.142.245.114
+ssh -i .ssh/kaptenjeffry.pem ec2-user@18.138.255.51
 ```
 Register the rest for the Manage Nodes as known hosts to the Control Nodes. This is to set the managed nodes as known hosts to Control Nodes in bulk. 
 ```plain
-ssh-keyscan -t ecdsa-sha2-nistp256 13.250.127.76 13.250.100.114 >> .ssh/known_hosts
+ssh-keyscan -t ecdsa-sha2-nistp256 13.229.198.36 18.139.0.15 >> .ssh/known_hosts
 ```
 
 ### Ansible Installation and Configuration
@@ -92,9 +92,9 @@ Where:
 2. Create a file named  myinventory.ini. Insert the IP addresses that we have identified earlier to be the managed node in the following format:
 ```ini
 [mynginx]
-red ansible_host=18.142.245.114
-green ansible_host=13.250.127.76
-blue ansible_host=13.250.100.114
+red ansible_host=18.138.255.51
+green ansible_host=13.229.198.36
+blue ansible_host=18.139.0.15
 ```
 Where:
 - [mynginx] =  the group name of the manage nodes
@@ -124,6 +124,8 @@ Ping module: To check ssh connectivity and python interpreter at the managed nod
 ```plain
 ansible mynginx -m ping -i myinventory.ini
 ```
+Sample output:
+![ping](/blog/2022/08/ansible-tutorial-with-aws-ec2/ansible04-ping-all.webp)
 
 Copy module: To copy file to managed node. To use module copy to copy a text file /home/ec2-user/hello.txt at Control node to /tmp/ at all manage nodes in the mynginx group.
 ```plain
@@ -192,20 +194,26 @@ Where:
 
 Lets try to execute this Playbook. Firstly we need to create the source index.html to be copied to managed node.
 ```plain
-echo "Hello World!" > index.html
+echo 'Hello World!' > index.html
 ```
 
 Execute the following ansible-playbook command against our Playbook. Just like the Adhoc command, we need to specify the Inventory by the -i switch.
 ```plain
-ansible-playbook myplaybook.yaml  -i myinventory.in
+ansible-playbook nginx-playbook.yaml  -i myinventory.in
 ```
+Sample output:
+![ping](/blog/2022/08/ansible-tutorial-with-aws-ec2/ansible-ng07.webp)
 
-Now we can curl our manage nodes to check the Nginx service and the custom index.html
+Now we can curl our manage nodes to check on the  Nginx service and the custom index.html
+```plain
+curl 18.138.255.51
+curl 13.229.198.36
+curl 18.139.0.15
 ```
-curl http://18.142.245.114
-curl http://13.250.127.76
-curl http://13.250.100.11
-```
+Sample output:
+<p align="center">
+<img src="/blog/2022/08/ansible-tutorial-with-aws-ec2/ansible-ng10.webp" width="600" />
+</p>
 
 ### Conclusion
 That’s all folks. We have successfully managed EC2 instances with Ansible. What covers in this tutorial are the fundamentals of Ansible to start managing remote servers. Ansible rises above its competitors due to its simplicity of its installation, configuration and usage.  To get further information for Ansible you may visit its [official documentation.](https://docs.ansible.com/ansible/latest/getting_started/index.html)
