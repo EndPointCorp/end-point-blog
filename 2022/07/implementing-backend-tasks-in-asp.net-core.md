@@ -12,7 +12,7 @@ tags:
 
 [As we've already established](https://www.endpointdev.com/blog/2022/01/database-integration-testing-with-dotnet/), [Ruby on Rails](https://rubyonrails.org/) is great. The amount and quality of tools that Rails puts at our disposal when it comes to developing web applications is truly outstanding. One aspect of web application development that Rails makes particularly easy is that of creating backend tasks.
 
-These can be anything from database maintenance, file system cleanup, overnight heavy computations, bulk email dispatch, etc. In general, functionality that is tipically initiated by an sysadmin in the backend, or scheduled in a [cron](https://en.wikipedia.org/wiki/Cron) job, which has no GUI, but rather, is invoked via command line.
+These can be anything from database maintenance, file system cleanup, overnight heavy computations, bulk email dispatch, etc. In general, functionality that is tipically initiated by a sysadmin in the backend, or scheduled in a [cron](https://en.wikipedia.org/wiki/Cron) job, which has no GUI, but rather, is invoked via command line.
 
 By integrating with [Rake](https://github.com/ruby/rake), Rails allows us to [very easily write such tasks](https://guides.rubyonrails.org/command_line.html#custom-rake-tasks) as plain old [Ruby](https://ruby-doc.org/) scrips. These scripts have access to all the domain logic and data that the full fledged Rails app has access to. The cherry on top is that the command line interface to invoke such tasks is very straightforward. It looks something like this: `bin/rails fulfillment:process_new_orders`.
 
@@ -41,7 +41,7 @@ You can find it [on GitHub](https://github.com/megakevin/end-point-blog-dotnet-5
 
 You can follow the instructions in [the project's README file](https://github.com/megakevin/end-point-blog-dotnet-5-web-api/blob/json-web-token/VehicleQuotes/README.md) if you want to get the app up and running.
 
-For our demo use case; we will try to develop a backend task that creates new user accounts for our existing application.
+For our demo use case, we will try to develop a backend task that creates new user accounts for our existing application.
 
 Let's get to it.
 
