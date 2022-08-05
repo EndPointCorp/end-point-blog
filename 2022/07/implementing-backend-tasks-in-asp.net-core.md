@@ -1,7 +1,7 @@
 ---
 author: "Kevin Campusano"
 title: "Implementing Backend Tasks in ASP.NET Core"
-date: 2022-07-29
+date: 2022-08-05
 tags:
 - csharp
 - dotnet
