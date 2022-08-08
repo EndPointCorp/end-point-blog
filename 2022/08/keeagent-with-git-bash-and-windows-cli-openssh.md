@@ -8,6 +8,10 @@ tags:
 - ssh
 ---
 
+![A leather couch in surprisingly good condition sits on a patch of grass between the sidewalk and the road. Harsh sunlight casts shadows of trees and buildings on the street and couch.](/blog/2022/08/keeagent-with-git-bash-and-windows-cli-openssh/street-couch.webp)
+
+<!-- Photo by Seth Jensen -->
+
 In a [previous blog post](/blog/2022/07/windows-ssh-key-agent-forwarding-confirmation/) we showed how to configure KeePass and KeeAgent on Windows to provide SSH key agent forwarding with confirmation while using PuTTY and other PuTTY agent compatible programs. In this post we’ll expand on that by showing how to use the same key agent to provide SSH key auth when using Git Bash and the Windows command line OpenSSH.
 
 ### Git Bash support
@@ -20,7 +24,7 @@ Check the two boxes in the Cygwin/MSYS Integration section.
 
 Directly after each box, fill in the path: `C:\Temp\cygwin-ssh.socket` for the Cygwin compatible socket file, and `C:\Temp\msys-ssh.socket` for the msysGit compatible socket file.
 
-![KeePass options, open to the KeeAgent tab. Highlightd is the Cygwin/MSYS section, with two boxes checked. One reads "Create Cygwin compatible socket file (works with some versions of MSYS)". The other reads "Create msysGit compatible socket file". After each is the path described above.](/blog/2022/08/keeagent-with-git-bash-and-windows-cli-openssh/1-options-gitbash.webp)
+![KeePass options, open to the KeeAgent tab. Highlighted is the Cygwin/MSYS section, with two boxes checked. One reads "Create Cygwin compatible socket file (works with some versions of MSYS)". The other reads "Create msysGit compatible socket file". After each is the path described above.](/blog/2022/08/keeagent-with-git-bash-and-windows-cli-openssh/1-options-gitbash.webp)
 
 Click OK.
 
