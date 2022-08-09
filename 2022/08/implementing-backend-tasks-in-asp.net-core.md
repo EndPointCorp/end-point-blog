@@ -6,7 +6,7 @@ github_issue_number: 1890
 tags:
 - csharp
 - dotnet
-- asp.net
+- aspdotnet
 ---
 
 ![](/blog/2022/08/implementing-backend-tasks-in-asp.net-core/mountain-path.webp)
