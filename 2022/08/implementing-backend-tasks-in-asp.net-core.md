@@ -83,8 +83,8 @@ index 537d864..5da277d 100644
  EndProject
  Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VehicleQuotes.Tests", "VehicleQuotes.Tests\VehicleQuotes.Tests.csproj", "{5F6470E4-12AB-4E30-8879-3664ABAA959D}"
  EndProject
-+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VehicleQuotes.CreateUser", "VehicleQuotes.CreateUser\VehicleQuotes.CreateUser.csproj", "{EDBB33E3-DCCE-4957-8A69-DC905D1BEAA4}"^M
-+EndProject^M
++Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VehicleQuotes.CreateUser", "VehicleQuotes.CreateUser\VehicleQuotes.CreateUser.csproj", "{EDBB33E3-DCCE-4957-8A69-DC905D1BEAA4}"
++EndProject
  Global
         GlobalSection(SolutionConfigurationPlatforms) = preSolution
                 Debug|Any CPU = Debug|Any CPU
@@ -92,18 +92,18 @@ index 537d864..5da277d 100644
                 {5F6470E4-12AB-4E30-8879-3664ABAA959D}.Release|x64.Build.0 = Release|Any CPU
                 {5F6470E4-12AB-4E30-8879-3664ABAA959D}.Release|x86.ActiveCfg = Release|Any CPU
                 {5F6470E4-12AB-4E30-8879-3664ABAA959D}.Release|x86.Build.0 = Release|Any CPU
-+               {EDBB33E3-DCCE-4957-8A69-DC905D1BEAA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU^M
-+               {EDBB33E3-DCCE-4957-8A69-DC905D1BEAA4}.Debug|Any CPU.Build.0 = Debug|Any CPU^M
-+               {EDBB33E3-DCCE-4957-8A69-DC905D1BEAA4}.Debug|x64.ActiveCfg = Debug|Any CPU^M
-+               {EDBB33E3-DCCE-4957-8A69-DC905D1BEAA4}.Debug|x64.Build.0 = Debug|Any CPU^M
-+               {EDBB33E3-DCCE-4957-8A69-DC905D1BEAA4}.Debug|x86.ActiveCfg = Debug|Any CPU^M
-+               {EDBB33E3-DCCE-4957-8A69-DC905D1BEAA4}.Debug|x86.Build.0 = Debug|Any CPU^M
-+               {EDBB33E3-DCCE-4957-8A69-DC905D1BEAA4}.Release|Any CPU.ActiveCfg = Release|Any CPU^M
-+               {EDBB33E3-DCCE-4957-8A69-DC905D1BEAA4}.Release|Any CPU.Build.0 = Release|Any CPU^M
-+               {EDBB33E3-DCCE-4957-8A69-DC905D1BEAA4}.Release|x64.ActiveCfg = Release|Any CPU^M
-+               {EDBB33E3-DCCE-4957-8A69-DC905D1BEAA4}.Release|x64.Build.0 = Release|Any CPU^M
-+               {EDBB33E3-DCCE-4957-8A69-DC905D1BEAA4}.Release|x86.ActiveCfg = Release|Any CPU^M
-+               {EDBB33E3-DCCE-4957-8A69-DC905D1BEAA4}.Release|x86.Build.0 = Release|Any CPU^M
++               {EDBB33E3-DCCE-4957-8A69-DC905D1BEAA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
++               {EDBB33E3-DCCE-4957-8A69-DC905D1BEAA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
++               {EDBB33E3-DCCE-4957-8A69-DC905D1BEAA4}.Debug|x64.ActiveCfg = Debug|Any CPU
++               {EDBB33E3-DCCE-4957-8A69-DC905D1BEAA4}.Debug|x64.Build.0 = Debug|Any CPU
++               {EDBB33E3-DCCE-4957-8A69-DC905D1BEAA4}.Debug|x86.ActiveCfg = Debug|Any CPU
++               {EDBB33E3-DCCE-4957-8A69-DC905D1BEAA4}.Debug|x86.Build.0 = Debug|Any CPU
++               {EDBB33E3-DCCE-4957-8A69-DC905D1BEAA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
++               {EDBB33E3-DCCE-4957-8A69-DC905D1BEAA4}.Release|Any CPU.Build.0 = Release|Any CPU
++               {EDBB33E3-DCCE-4957-8A69-DC905D1BEAA4}.Release|x64.ActiveCfg = Release|Any CPU
++               {EDBB33E3-DCCE-4957-8A69-DC905D1BEAA4}.Release|x64.Build.0 = Release|Any CPU
++               {EDBB33E3-DCCE-4957-8A69-DC905D1BEAA4}.Release|x86.ActiveCfg = Release|Any CPU
++               {EDBB33E3-DCCE-4957-8A69-DC905D1BEAA4}.Release|x86.Build.0 = Release|Any CPU
         EndGlobalSection
  EndGlobal
 ```
@@ -336,27 +336,27 @@ Other than that, the class itself is unremarkable. In summary, it's a number of 
 In order to actually put it to work, we update our `VehicleQuotes.CreateUser/Program.cs` like so:
 
 ```diff
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+ using Microsoft.Extensions.DependencyInjection;
+ using Microsoft.Extensions.Hosting;
 +using CommandLine;
-using VehicleQuotes.CreateUser;
-
+ using VehicleQuotes.CreateUser;
+ 
 +void Run(CliOptions options)
 +{
-    IHost host = Host.CreateDefaultBuilder(args)
-        .UseContentRoot(System.AppContext.BaseDirectory)
-        .ConfigureServices((context, services) =>
-        {
-            var startup = new VehicleQuotes.Startup(context.Configuration);
-            startup.ConfigureServices(services);
-
-            services.AddTransient<UserCreator>();
-        })
-        .Build();
-
-    var userCreator = host.Services.GetRequiredService<UserCreator>();
--   userCreator.Run(args[0], args[1], args[2]);
-+   userCreator.Run(options.Username, options.Email, options.Password);
+     IHost host = Host.CreateDefaultBuilder(args)
+         .UseContentRoot(System.AppContext.BaseDirectory)
+         .ConfigureServices((context, services) =>
+         {
+             var startup = new VehicleQuotes.Startup(context.Configuration);
+             startup.ConfigureServices(services);
+ 
+             services.AddTransient<UserCreator>();
+         })
+         .Build();
+ 
+     var userCreator = host.Services.GetRequiredService<UserCreator>();
+-    userCreator.Run(args[0], args[1], args[2]);
++    userCreator.Run(options.Username, options.Email, options.Password);
 +}
 +
 +Parser.Default
@@ -489,12 +489,12 @@ Pretty sweet, huh? And yes, it has taken a lot more effort than what it would've
 
 Now, before we wrap this up, there's something we need to consider when actively developing these tools. That is, when making changes and re-installing constantly.
 
-The main aspect to understand is that tools are just NuGet packages, and as such are beholden to the NuGet package infrastructure. Which includes caching. If you're in the process of developing your tool and are quickly making and deploying changes, NuGet won`t update the cache unless you do one of two things:
+The main aspect to understand is that tools are just NuGet packages, and as such are beholden to the NuGet package infrastructure. Which includes caching. If you're in the process of developing your tool and are quickly making and deploying changes, NuGet won't update the cache unless you do one of two things:
 
 1. Manually clear it with a command like `dotnet nuget locals all --clear`.
 2. Bump up the version of the tool by updating the value of `<VersionSuffix>` in the project (`.csproj`) file.
 
-This means that, unless you do one these, the changes that you make to the app between re-builds (with `dotnet pack`) and re-installs (with `dotnet dotnet tool install`) won`t ever make their way to the package that's actually installed in your system. So be sure to keep that in mind.
+This means that, unless you do one these, the changes that you make to the app between re-builds (with `dotnet pack`) and re-installs (with `dotnet dotnet tool install`) won't ever make their way to the package that's actually installed in your system. So be sure to keep that in mind.
 
 ### Table of contents
 
