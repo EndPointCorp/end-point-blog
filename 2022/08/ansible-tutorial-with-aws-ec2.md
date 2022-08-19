@@ -3,6 +3,9 @@ author: "Jeffry Johar"
 title: "Ansible tutorial with AWS EC2"
 github_issue_number: 1888
 date: 2022-08-11
+featured:
+  image_url: /blog/2022/08/ansible-tutorial-with-aws-ec2/wheel.webp
+description: Ansible is a tool to manage multiple remote systems from a single command center. This article covers how to use Ansible to manage multiple EC2 instances.
 tags:
 - ansible
 - aws
