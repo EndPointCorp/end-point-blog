@@ -1,6 +1,6 @@
 ---
 author: "Jeffry Johar"
-title: "Kubernetes Form Ground The Up With AWS EC2"
+title: "Kubernetes Form The Ground Up With AWS EC2"
 date: 2022-08-30
 tags:
 - kubernetes
