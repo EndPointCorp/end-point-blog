@@ -135,9 +135,9 @@ With the new component added to our project, we are ready to create a page (for 
 
 All we need to do, is to get the entry ID from the content we created in Contentful, and pass it to the entry-id parameter of the component, and that's it! Our content will be fetched from the API and displayed to the user. It will also work when rendering on the client, as well as for SSR.
 
-### Flexibility
+### Other content types
 
-Of course, we're not restricted to use Contentful to deliver static pages: We can use it for blog posts, listings, geolocation information, documents, and others. We have several field types that could be used for our content model, including location, media (images, videos), links, or JSON, among others. See the [data model section](https://www.contentful.com/developers/docs/concepts/data-model/) of their official documentation for reference.
+Of course, we're not restricted to use this service to deliver static pages: We can store and deliver blog posts, listings, events, geolocation information, documents, and more. We have several field types that could be used for our content model, including location, media (images, videos), links, or JSON, among others. See the [data model section](https://www.contentful.com/developers/docs/concepts/data-model/) of their official documentation for reference.
 
 ![Field types](/2022/09/integrating-contentful-with-nuxt/add-new-field-types.jpg)
 
