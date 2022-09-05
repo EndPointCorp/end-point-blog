@@ -3,7 +3,7 @@ author: Jon Jensen
 title: 'DevOps & Kubernetes engineer job opening'
 github_issue_number: 1790
 tags:
-- jobs
+- jobs-closed
 - kubernetes
 - devops
 - remote-work
@@ -62,7 +62,10 @@ Even before the pandemic most of us worked remotely from home offices. We collab
 
 ### Get in touch with us:
 
-Please email us an introduction to jobs@endpointdev.com to apply. Include your location, a resume/​CV, your Git repository or LinkedIn URLs, and whatever else may help us get to know you.
+~~Please email us an introduction to jobs@endpointdev.com to apply.~~
+**(This job has been filled.)**
+
+Include your location, a resume/​CV, your Git repository or LinkedIn URLs, and whatever else may help us get to know you.
 
 We look forward to hearing from you! Direct work seekers only, please—​this role is not for agencies or subcontractors.
 

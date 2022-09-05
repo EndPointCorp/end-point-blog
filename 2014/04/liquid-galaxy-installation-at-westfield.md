@@ -8,6 +8,7 @@ featured:
 tags:
 - gis
 - visionport
+- education
 date: 2014-04-30
 ---
 
