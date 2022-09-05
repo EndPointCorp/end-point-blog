@@ -135,6 +135,12 @@ With the new component added to our project, we are ready to create a page (for 
 
 All we need to do, is to get the entry ID from the content we created in Contentful, and pass it to the entry-id parameter of the component, and that's it! Our content will be fetched from the API and displayed to the user. It will also work when rendering on the client, as well as for SSR.
 
+### Flexibility
+
+Of course, we're not restricted to use Contentful to deliver static pages: We can use it for blog posts, listings, geolocation information, documents, and others. We have several field types that could be used for our content model, including location, media (images, videos), links, or JSON, among others. See the [data model section](https://www.contentful.com/developers/docs/concepts/data-model/) of their official documentation for reference.
+
+![Field types](/2022/09/integrating-contentful-with-nuxt/add-new-field-types.jpg)
+
 ### Alternatives
 
 There are several alternatives to Contentful out there: [Prismic CMS](https://prismic.io/) or [GraphCMS](https://graphcms.com/) -based entirely in GraphQL- are the most popular. There are also downloadable products, like [SilverStrap CMS](https://www.silverstripe.org/). Their pricing plans are varied, but all of them offer a free community plan for starters or small websites.
