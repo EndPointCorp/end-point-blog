@@ -9,7 +9,7 @@ tags:
 date: 2022-09-05
 ---
 
-![Fishing on a sunset at Rio de la Plata](/blog/2022/09/integrating-contentful-with-nuxt/fishing-rio-de-la-plata-sunset.jpg)
+![Fishing on a sunset at Rio de la Plata](/2022/09/integrating-contentful-with-nuxt/fishing-rio-de-la-plata-sunset.jpg)
 
 <!-- Photo by Juan Pablo Ventoso -->
 
@@ -23,7 +23,7 @@ With that in mind, let's have a quick look at [Contentful](https://www.contentfu
 
 For individual or small websites, the free option should be sufficient. It has a limit of 5 users and a size limit of 50MB for assets, and the technical support area is disabled. The next option (Medium, $489/month) also includes an additional role (author), additional locales, and you can create up to 10 different users. The asset size is also extended up to 1000MB.
 
-![Contentful pricing](/blog/2022/09/integrating-contentful-with-nuxt/contentful-pricing.jpg)
+![Contentful pricing](/2022/09/integrating-contentful-with-nuxt/contentful-pricing.jpg)
 
 You can review the full pricing details [here](https://www.contentful.com/pricing/).
 
@@ -35,7 +35,7 @@ In order to start creating content, there are two essencial steps:
 
 * We need to define the [model for our content](https://www.contentful.com/help/contentful-101/#step-3-create-the-content-model). The model is the type and structure that our content will have. For the integration below, we will need a new "Page" model, that will contain two fields to save the basic information for a static page: `title` and `content`. We could also add a publish date field, just for us to keep track of when the content was created.
 
-![Page content model](/blog/2022/09/integrating-contentful-with-nuxt/page-content-model.jpg)
+![Page content model](/2022/09/integrating-contentful-with-nuxt/page-content-model.jpg)
 
 ### Integration
 
