@@ -6,83 +6,134 @@ tags:
 - vue
 - cms
 - saas
-date: 2022-06-20
+date: 2022-09-05
 ---
 
-![Fishing on a sunset at Rio de la Plata](/blog/2022/06/integrating-contentful-with-nuxt/fishing-rio-de-la-plata-sunset.jpg)
+![Fishing on a sunset at Rio de la Plata](/blog/2022/09/integrating-contentful-with-nuxt/fishing-rio-de-la-plata-sunset.jpg)
 
 <!-- Photo by Juan Pablo Ventoso -->
 
-Some time ago, I had the opportunity to collaborate on a cool [NuxtJS](https://nuxtjs.org/) project. I'm still somewhat new to [Vue.js](https://vuejs.org/) and its frameworks, meaning I'm discovering exciting new tools and third-party services that can be integrated with them every time a new requirement appears. And there is a particular concept that I heard of theorically, but never worked with until this project. I'm talking about using a [Headless CMS](https://en.wikipedia.org/wiki/Headless_content_management_system) to deliver content.
+Some time ago, I had the opportunity to collaborate on a cool [NuxtJS](https://nuxtjs.org/) project. I'm still somewhat new to [Vue.js](https://vuejs.org/) and its related frameworks, meaning I'm still discovering exciting new tools and third-party services that can be integrated with them every time a new requirement appears. And there is a particular concept that I heard of, but never worked with... until this project: I'm talking about using a [Headless CMS](https://en.wikipedia.org/wiki/Headless_content_management_system) to deliver content.
 
-Essentially, a headless CMS allows creating a custom content model and make it accesible through one (or several) APIs, allowing to choose whatever presentation layer we prefer to handle the display. This approach decouples the content management part (the "body") from the design, templates and frontend logic (the "head"), becoming particularly useful when we have several application types that will interact with the same data, such as a website, a mobile app, or an [IoT](https://en.wikipedia.org/wiki/Internet_of_things) device.
+Essentially, a headless CMS permits creating a custom content model and make it accesible through one (or several) APIs that we can query, allowing to choose whatever presentation layer we prefer to handle the display. This approach decouples the content management part (the "body") of a project from the design, templates and frontend logic (the "head"), becoming particularly useful when we have several application types that will interact with the same data, such as a website, a mobile app, or an [IoT](https://en.wikipedia.org/wiki/Internet_of_things) device.
 
-With that in mind, let's talk about [Contentful](https://www.contentful.com/): It's a headless CMS, under the concept of content-as-a-service ([CaaS](https://www.contentful.com/r/knowledgebase/content-as-a-service/)), meaning the content is delivered on-demand from a cloud platform to the consumer by implementing an API or web service.
-
---
---
-
---
---
+With that in mind, let's have a quick look at [Contentful](https://www.contentful.com/): It's a headless CMS that is offered under the concept of content-as-a-service ([CaaS](https://www.contentful.com/r/knowledgebase/content-as-a-service/)), meaning the content is delivered on-demand from a cloud platform to the consumer by implementing an API or web service.
 
 ### Pricing
 
 For individual or small websites, the free option should be sufficient. It has a limit of 5 users and a size limit of 50MB for assets, and the technical support area is disabled. The next option (Medium, $489/month) also includes an additional role (author), additional locales, and you can create up to 10 different users. The asset size is also extended up to 1000MB.
 
-![Contentful pricing](/blog/2022/06/integrating-contentful-with-nuxt/contentful-pricing.jpg)
+![Contentful pricing](/blog/2022/09/integrating-contentful-with-nuxt/contentful-pricing.jpg)
 
 You can review the full pricing details [here](https://www.contentful.com/pricing/).
 
---
---
+### Creating content
 
+In order to start creating content, there are two essencial steps:
 
-When you make a request for an image, you can instruct the Cloudinary API to [retrieve it with a given size](https://cloudinary.com/documentation/resizing_and_cropping), which will trigger a transformation on their end before delivering the content. You can also use a cropping method: fill, fill with padding, scale down, etc.
+* We will need to [set up a new space](https://www.contentful.com/help/contentful-101/#step-2-create-a-space). A space is an area where the content will be grouped into a single project.
 
-### Gravity position
+* We need to define the [model for our content](https://www.contentful.com/help/contentful-101/#step-3-create-the-content-model). The model is the type and structure that our content will have. For the integration below, we will need a new "Page" model, that will contain two fields to save the basic information for a static page: `title` and `content`. We could also add a publish date field, just for us to keep track of when the content was created.
 
-When we specify a [gravity position](https://cloudinary.com/documentation/resizing_and_cropping#control_gravity) to crop an image, the service will keep the area of the image we decide to use as the focal point. We can choose a corner (for example, top left), but also—and this is probably one of the most interesting capabilities on this service—we can specify ["special positions"](https://cloudinary.com/documentation/transformation_reference#g_special_position): By using machine learning, we can instruct Cloudinary to use face detection, or even focus on other objects, like an animal or a flower in the picture.
+![Page content model](/blog/2022/09/integrating-contentful-with-nuxt/page-content-model.jpg)
 
-### Automatic format
+### Integration
 
-Another cool feature is the [automatic format](https://cloudinary.com/documentation/transformation_reference#f_auto), which will use your request headers to find the most efficient picture format for your browser type and version. For example, if the browser supports it, Cloudinary will return the image in WebP format, which is generally more efficient than standard JPEG, as End Point CTO Jon Jensen demonstrates on his recent [blog post](https://www.endpointdev.com/blog/2022/02/webp-heif-avif-jpegxl/).
+With our space created and our content model ready, it's time to add Contentful to our NuxtJS app. The integration process is quite simple, thanks to the [JavaScript client library](https://www.npmjs.com/package/contentful) provided by Contentful. The library is based on the [axios](https://github.com/axios/axios) client, allowing it to run on the client as well as on the server, for [SSR](https://nuxtjs.org/docs/concepts/server-side-rendering/). If we have [npm](https://www.npmjs.com/) set up, we can add it to our project by running:
 
-![Screenshot of Chrome browser dev tools showing network response for a WebP image](/blog/2022/03/optimizing-image-delivery-with-cloudinary/image-response.jpg)<br>
-Automatic format in action: Returning a WebP image in Chrome
+```bash
+npm install --save contentful
+```
 
-### Other features
+The most efficient way to use it across our app and have it ready for both client and server rendering, is to declare a new plugin. All we need to do is create a new file named `contentful.js` under our project's `plugins` folder:
 
-There are many other options for us to choose when querying their API, like setting up a default placeholder when we don’t have an image, applying color transformations, removing red eyes, among other things. The [Transformation reference page](https://cloudinary.com/documentation/transformation_reference) on their documentation section is a great resource.
+```js
+const contentful = require('contentful')
 
-### NuxtJS integration
+const config = {
+  space: process.env.CONTENTFUL_SPACE_ID,
+  accessToken: process.env.CONTENTFUL_API_ACCESS_TOKEN,
+}
 
-The project I mentioned above was a [NuxtJS](https://nuxtjs.org/) application with a [Node.js](https://nodejs.org/) backend. And since there's a [NuxtJS module for Cloudinary](https://cloudinary.nuxtjs.org/), it made sense to use it instead of building the queries to the API from scratch.
+module.exports = {
+  createClient() {
+    return contentful.createClient(config)
+  },
+}
+```
 
-The component works great, except for one bug that we found that didn't allow us to fully use their image component with server-side rendering enabled. Between that drawback and some issues trying to use the lazy loading setting, we ended up creating a Vue component ourselves that used a standard image tag instead. But we still used their component to generate most of the API calls and render the results.
+Next, we need to add the new environment variables to our project's .env file. The values that we need to provide are our [space ID](https://www.contentful.com/help/find-space-id/) and the [access token](https://www.contentful.com/developers/docs/references/authentication/) for querying the API:
 
-Below is an example of using the Cloudinary Image component on a Vue template:
+```
+CONTENTFUL_SPACE_ID={our_space_id}
+CONTENTFUL_API_ACCESS_TOKEN={our_access_token}
+```
+
+We're all set! Now, we have our plugin ready to use. One neat extra step that we did for this particular project, is creating a `ContentfulPage` component that will automatically pull the contents from Contentful based on the given entry ID. By doing that, we can simple use the component in all the static pages that we have in our website.
+
+First, let's create the component, containing a simple wrapper for the template section, and an `entryId` property that we will use to query the API. We can save it under `~/components/ContentfulPage.vue`:
+
+```html
+<template>
+  <div :id="entryId">
+    <p v-if="$fetchState.pending">Loading...</p>
+    <div v-else>
+      <h1>
+        {{ page.fields.title }}
+      </h1>
+      <div class="page-content" v-html="$md.render(page.fields.content)" />
+    </div>
+  </div>
+</template>
+
+<script>
+  import { createClient } from '~/plugins/contentful'
+  const contentful = createClient()
+
+  export default {
+    name: 'ContentfulPage',
+    props: {
+      entryId: {
+        type: String,
+        required: true,
+      },
+    },
+
+    data() {
+      return {
+        page: {},
+      }
+    },
+
+    async fetch() {
+      this.page = await contentful.getEntry(this.entryId)
+    },
+  }
+</script>
+```
+
+This component will load fetch the entry from Contentful asynchronously, and display a "loading" legend while it does so. Once the query is complete, the content will be shown inside the `div` element with the `page-content` class. The component expects the returned page to have at least two attributes: `title` and `content`.
+
+With the new component added to our project, we are ready to create a page (for example, `index.vue`) that uses it to render our content like this:
 
 ```html
 <template>
   <div>
-    <cld-image
-      :public-id="publicId"
-      width="200"
-      height="200"
-      crop="fill"
-      gravity="auto:subject"
-      radius="max"
-      fetchFormat="auto"
-      quality="auto"
-      alt="An image example with Cloudinary"
-    />
+    <contentful-page entry-id="{index_entry_id}" />
   </div>
 </template>
+
+<script>
+  import ContentfulPage from '~/components/ContentfulPage'
+  export default {
+    components: {
+      ContentfulPage,
+    },
+  }
+</script>
 ```
 
-
---
---
+All we need to do, is to get the entry ID from the content we created in Contentful, and pass it to the entry-id parameter of the component, and that's it! Our content will be fetched from the API and displayed to the user. It will also work when rendering on the client, as well as for SSR.
 
 ### Alternatives
 
