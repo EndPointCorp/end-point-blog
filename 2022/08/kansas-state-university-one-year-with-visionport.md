@@ -37,7 +37,7 @@ Ultimately, people don't expect this sort of device in a library and VisionPort 
 
 ##### What types of presentations have students and faculty been creating with VisionPort?
 
-The presentations our students and faculty have been most excited about feature video across our entire 7-panel display and 360° integration for photos and videos. Some have experimented with data visualization and location-to-location journeys, but an overwhelming number have been drawn to the simple navigation controls to use locations and sites as visual aids during group presentations and as a compliment to other examples they wheel in.
+The presentations our students and faculty have been most excited about feature video across our entire 7-panel display and 360° integration for photos and videos. Some have experimented with data visualization and location-to-location journeys, but an overwhelming number have been drawn to the simple navigation controls to use locations and sites as visual aids during group presentations and as a complement to other examples they wheel in.
 
 ##### What are some ways in which Google Earth is being utilized with VisionPort?
 
@@ -63,4 +63,4 @@ We are always happy to hear first-hand experiences universities are having with 
 
 Thank you to Mr. Sheldon for the great meeting. We look forward to hearing how KSU innovates with VisionPort over the next year!
 
-For more information about VisionPort, email [sales@visionport.com](mailto:sales@visionport.com) or visit www.visionport.com.
+For more information about VisionPort, email [sales@visionport.com](mailto:sales@visionport.com) or visit [www.visionport.com](https://www.visionport.com).
