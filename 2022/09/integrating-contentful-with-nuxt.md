@@ -13,7 +13,7 @@ date: 2022-09-05
 
 <!-- Photo by Juan Pablo Ventoso -->
 
-Some time ago, I had the opportunity to collaborate on a cool [NuxtJS](https://nuxtjs.org/) project. I'm still somewhat new to [Vue.js](https://vuejs.org/) and its related frameworks, meaning I'm still discovering exciting new tools and third-party services that can be integrated with them every time a new requirement appears. And there is a particular concept that I heard of, but never worked with... until this project: I'm talking about using a [Headless CMS](https://en.wikipedia.org/wiki/Headless_content_management_system) to deliver content.
+Some time ago, I had the opportunity to collaborate on a cool [NuxtJS](https://nuxtjs.org/) project. I'm still somewhat new to [Vue.js](https://vuejs.org/) and its related frameworks, meaning I'm discovering exciting new tools and third-party services that can be integrated with them every time a new requirement appears. And there is a particular concept that I heard of, but never worked with... until this project: I'm talking about using a [Headless CMS](https://en.wikipedia.org/wiki/Headless_content_management_system) to deliver content.
 
 Essentially, a headless CMS permits creating a custom content model, making it it accessible through one (or several) APIs that we can query, allowing us to choose whatever presentation layer we prefer to handle the display. This approach decouples the content management part (the "body") of a project from the design, templates and frontend logic (the "head"), becoming particularly useful when we have several application types that will interact with the same data, such as a website, a mobile app, or an [IoT](https://en.wikipedia.org/wiki/Internet_of_things) device.
 
