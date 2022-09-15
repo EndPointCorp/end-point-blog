@@ -13,7 +13,7 @@ tags:
 
 ![A wide view of KSU's campus from above, in Google Earth, showing what might be displayed on KSU's VisionPort.](/blog/2022/08/kansas-state-university-one-year-with-visionport/ksu_lg.webp)
 
-It has been almost a year since Kansas State University brought the VisionPort platform into their Hale library. I recently had the pleasure of connecting with Jeff Sheldon, Associate Director of the Sunderland Foundation, to discuss how the school has been using the platform.
+It has been almost a year since Kansas State University brought the VisionPort platform into their Hale library. I recently had the pleasure of connecting with Jeff Sheldon, Associate Director of the Sunderland Foundation Innovation Lab, to discuss how the school has been using the platform.
 
 It’s no surprise to hear that the Architecture, Planning and Design (AP) students have taken to VisionPort immediately. Being originally designed around displaying geographic information system (GIS) data, the platform allows users to fly over and through city streets and see buildings in 3D, as well as travel around the world looking for areas of possible real estate development. Many of our clients also use VisionPort to give panoramic, three-dimensional tours of building interiors, to show future tenants properties right from their office and brainstorm design possibilities.
 
