@@ -20,7 +20,7 @@ A development process that includes manual builds, tests, and deployments can wo
 
 If this sounds like your current situation, it’s likely time to consider building a Continuous Integration and Continuous Deployment pipeline, commonly known as “CI/CD”. A good CI/CD pipeline will help you automate the painful areas of building, testing, and deploying your code, as well as help to enforce best practices like pull requests and build verification.
 
-There are many great options to choose from when selecting a CI/CD tool. There are self-hosted options like [Jenkins](https://www.jenkins.io/) and [Team City](https://www.jetbrains.com/teamcity/). There are also providers like [GitHub](https://github.com/features/actions) and Azure DevOps, which offer CI/CD alongside cloud-hosted source control. All of these options have pros and cons, but if you’re looking for a large feature set, flexibility, and in particular good support for .NET solutions, you should consider Azure DevOps.
+There are many great options to choose from when selecting a CI/CD tool. There are self-hosted options like [Jenkins](https://www.jenkins.io/) and [TeamCity](https://www.jetbrains.com/teamcity/). There are also providers like [GitHub](https://github.com/features/actions) and Azure DevOps, which offer CI/CD alongside cloud-hosted source control. All of these options have pros and cons, but if you’re looking for a large feature set, flexibility, and in particular good support for .NET solutions, you should consider Azure DevOps.
 
 In this post, I’ll show you how to set up an Azure CI/CD pipeline for a self-hosted .NET MVC web solution targeting two different environments.
 
@@ -38,11 +38,13 @@ Then enter a name from the environment and select Virtual Machines and click Nex
 
 ![A dialog box called "New environment." The Name field is filled out as "UAT," and the Description field is filled out with "Testing environment." The Resource field has three radio buttons, with Virtual machines selected. There is a "Next" button at the bottom of the dialog, which is highlighted.](/blog/2022/08/cicd-with-azure-devops/new-env.webp)
 
-In the following window, select Generic Provider, and then select your OS, which in our case is Windows. You will see a registration script with a copy icon next to it. Click the icon to copy the (rather lengthy) Powershell registration script to the clipboard, and then paste it into a text file.
+In the following window, select Generic Provider, and then select your OS, which in our case is Windows. You will see a registration script with a copy icon next to it. Click the icon to copy the (rather lengthy) PowerShell registration script to the clipboard, and then paste it into a text file.
 
-![The same "New environment" dialog. Under the "Virtual machine resource" section, "Provider" has "Generic provider" selected, "Operating system" has "Windows" selected, and under "Registration script" is a copy icon with instructions to run it in Powershell.](/blog/2022/08/cicd-with-azure-devops/registration-script.webp)
+![The same "New environment" dialog. Under the "Virtual machine resource" section, "Provider" has "Generic provider" selected, "Operating system" has "Windows" selected, and under "Registration script" is a copy icon with instructions to run it in PowerShell.](/blog/2022/08/cicd-with-azure-devops/registration-script.webp)
 
-Next, connect to the target environment. Open a Powershell window as Administrator, copy and paste the registration script, and then click enter. The Powershell script will then do its magic and register the environment with Azure. It may take a minute to run, but afterwards you should see a success message. Now, if you head back to Azure DevOps and click on the Environment, you should see the server name of the machine that you ran the Powershell script on. The server name is referred to as a Resource in Azure.
+Next, connect to the target environment. Open a PowerShell window as Administrator, copy and paste the registration script, and then press Enter. The PowerShell script will then do its magic and register the environment with Azure. It may take a minute to run, but afterwards you should see a success message.
+
+Now, if you head back to Azure DevOps and click on the Environment, you should see the server name of the machine that you ran the PowerShell script on. The server name is referred to as a Resource in Azure.
 
 ![The UAT Environment, Resources tab. It shows a server with a redacted name and a latest job ID with a green check mark.](/blog/2022/08/cicd-with-azure-devops/uat-env.webp)
 
@@ -71,92 +73,92 @@ trigger:
 - main
 
 pool:
- vmImage: 'windows-latest'
+  vmImage: 'windows-latest'
 
 variables:
- projectPath: 'ci_tutorial/ci_tutorial_web.csproj'
- packageName: 'ci_tutorial_web.zip'
- solution: '**/*.sln'
- buildPlatform: 'AnyCPU'
- artifactName: 'AzureDrop'
- ${{ if eq(variables['Build.SourceBranchName'], 'uat') }}:
-   websiteName: 'ci_tutorial_uat'
-   buildConfiguration: 'UAT'
-   environmentName: 'UAT'
-   targetVM: 'UATWEBAPP1'
- ${{ if eq(variables['Build.SourceBranchName'], 'staging') }}:
-   websiteName: 'ci_tutorial_staging'
-   buildConfiguration: 'Staging'
-   environmentName: 'Production'
-   targetVM: 'WEBAPP1'
- ${{ if eq(variables['Build.SourceBranchName'], 'main') }}:
-   websiteName: 'ci_tutorial_prod'
-   buildConfiguration: 'Release'
-   environmentName: 'Production'
-   targetVM: 'WEBAPP1'
+  projectPath: 'ci_tutorial/ci_tutorial_web.csproj'
+  packageName: 'ci_tutorial_web.zip'
+  solution: '**/*.sln'
+  buildPlatform: 'AnyCPU'
+  artifactName: 'AzureDrop'
+  ${{ if eq(variables['Build.SourceBranchName'], 'uat') }}:
+    websiteName: 'ci_tutorial_uat'
+    buildConfiguration: 'UAT'
+    environmentName: 'UAT'
+    targetVM: 'UATWEBAPP1'
+  ${{ if eq(variables['Build.SourceBranchName'], 'staging') }}:
+    websiteName: 'ci_tutorial_staging'
+    buildConfiguration: 'Staging'
+    environmentName: 'Production'
+    targetVM: 'WEBAPP1'
+  ${{ if eq(variables['Build.SourceBranchName'], 'main') }}:
+    websiteName: 'ci_tutorial_prod'
+    buildConfiguration: 'Release'
+    environmentName: 'Production'
+    targetVM: 'WEBAPP1'
 
 stages:
 - stage: build
- jobs:
- - job: RestoreAndBuild
-   steps:
-   - task: NuGetToolInstaller@1
-   - task: NuGetCommand@2
-     inputs:
-       restoreSolution: '$(solution)'
-   - task: VSBuild@1
-     inputs:
-       solution: '$(projectPath)'
-       msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactStagingDirectory)"'
-       platform: '$(buildPlatform)'
-       configuration: '$(buildConfiguration)'
-   #- task: VSTest@2
-   #  inputs:
-   #    platform: '$(buildPlatform)'
-   #    configuration: '$(buildConfiguration)'
-   - task: PublishBuildArtifacts@1
-     inputs:
-       PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-       ArtifactName: '$(artifactName)'
-       publishLocation: 'Container'
+  jobs:
+  - job: RestoreAndBuild
+    steps:
+    - task: NuGetToolInstaller@1
+    - task: NuGetCommand@2
+      inputs:
+        restoreSolution: '$(solution)'
+    - task: VSBuild@1
+      inputs:
+        solution: '$(projectPath)'
+        msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactStagingDirectory)"'
+        platform: '$(buildPlatform)'
+        configuration: '$(buildConfiguration)'
+    #- task: VSTest@2
+    #  inputs:
+    #    platform: '$(buildPlatform)'
+    #    configuration: '$(buildConfiguration)'
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: '$(artifactName)'
+        publishLocation: 'Container'
 
 - stage: Deploy
- displayName: Deploy to IIS
- dependsOn: Build
- jobs:
- - deployment: DeploytoIIS
-   displayName: Deploy the web application to dev environment
-   environment:
-     name: ${{ variables.environmentName }}
-     resourceName: ${{ variables.targetVM }}
-     resourceType: VirtualMachine
-   strategy:
-     runOnce:
-       deploy:
-         steps:
-         - task: DownloadBuildArtifacts@0
-           inputs:
-             buildType: 'current'
-             downloadType: 'specific'
-             downloadPath: '$(System.ArtifactsDirectory)'
-         - task: IISWebAppManagementOnMachineGroup@0
-           displayName: 'Create App Pool and Website'
-           inputs:
-             WebsiteName: '$(websiteName)'
-             WebsitePhysicalPath: '%SystemDrive%\inetpub\wwwroot\$(websiteName)'
-             CreateOrUpdateAppPoolForWebsite: true
-             AppPoolNameForWebsite: '$(websiteName)'
-         # For testing, to confirm target website
-         - task: PowerShell@2
-           displayName: Display target websitename
-           inputs:
-             targetType: 'inline'
-             script: 'Write-Host "Target Website Name: $(websiteName)"'
-         - task: IISWebAppDeploymentOnMachineGroup@0
-           displayName: 'Deploy IIS Website'
-           inputs:
-             WebSiteName: '$(websiteName)'
-             Package: '$(System.ArtifactsDirectory)\$(artifactName)\$(packageName)'
+  displayName: Deploy to IIS
+  dependsOn: Build
+  jobs:
+  - deployment: DeploytoIIS
+    displayName: Deploy the web application to dev environment
+    environment:
+      name: ${{ variables.environmentName }}
+      resourceName: ${{ variables.targetVM }}
+      resourceType: VirtualMachine
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: DownloadBuildArtifacts@0
+            inputs:
+              buildType: 'current'
+              downloadType: 'specific'
+              downloadPath: '$(System.ArtifactsDirectory)'
+          - task: IISWebAppManagementOnMachineGroup@0
+            displayName: 'Create App Pool and Website'
+            inputs:
+              WebsiteName: '$(websiteName)'
+              WebsitePhysicalPath: '%SystemDrive%\inetpub\wwwroot\$(websiteName)'
+              CreateOrUpdateAppPoolForWebsite: true
+              AppPoolNameForWebsite: '$(websiteName)'
+          # For testing, to confirm target website
+          - task: PowerShell@2
+            displayName: Display target websitename
+            inputs:
+              targetType: 'inline'
+              script: 'Write-Host "Target Website Name: $(websiteName)"'
+          - task: IISWebAppDeploymentOnMachineGroup@0
+            displayName: 'Deploy IIS Website'
+            inputs:
+              WebSiteName: '$(websiteName)'
+              Package: '$(System.ArtifactsDirectory)\$(artifactName)\$(packageName)'
 ```
 
 ### Understanding the YAML
@@ -192,11 +194,11 @@ ${{ if eq(variables['Build.SourceBranchName'], 'main') }}:
   targetVM: 'WEBAPP1'
 ```
 
-Next, we get into the actual actions, or stages, of the pipeline. This pipeline has two stages: build and deploy. The build stage runs a Nuget restore and then a VS build, and then publishes the build output/​artifacts to an Azure cloud storage location. The last bit is something that took me a while to wrap my head around: **The build does not occur on the target environment via the runner—it actually occurs up in “Azure land”, on a Windows cloud VM.**
+Next, we get into the actual actions, or stages, of the pipeline. This pipeline has two stages: build and deploy. The build stage runs a NuGet restore and then a VS build, and then publishes the build output/​artifacts to an Azure cloud storage location. The last bit is something that took me a while to wrap my head around: **The build does not occur on the target environment via the runner—it actually occurs up in “Azure land”, on a Windows cloud VM.**
 
 The VM on which the build occurs can be defined using the `pool: vmImage` section. In our case, we are running the build on `windows-latest`, which currently translates to the brand new Windows Server 2022.
 
-The deploy stage then downloads the build artifacts from Azure and deploys them to IIS on the target machine, using the runner that you installed as part of the environment setup above. Note that the variables defined in the `if` statements come into play here–this is how the pipeline knows which environment/VM to target.
+The deploy stage then downloads the build artifacts from Azure and deploys them to IIS on the target machine, using the runner that you installed as part of the environment setup above. Note that the variables defined in the `if` statements come into play here---this is how the pipeline knows which environment/VM to target.
 
 ```yaml
 environment:
@@ -213,7 +215,7 @@ In order to ensure successful deployments to Production, you will likely want to
 
 Branch protection allows you to enforce reviews for pull requests into certain branches. Build validation is a feature that pre-compiles your .NET code to ensure that it builds prior to merging a pull request. Both features help to improve code quality and prevent broken deployments.
 
-To add branch protection, go to Repo → Branches → *your target branch* → *right side menu* , then select Branch Policies.
+To add branch protection, go to Repo → Branches → *your target branch* → *right side menu*, then select Branch Policies.
 
 ![Under the Branches header, the "main" branch has a menu expanded on the far right of its row. Highlighted is "Branch policies."](/blog/2022/08/cicd-with-azure-devops/branch-policies.webp)
 
@@ -223,7 +225,7 @@ To enforce reviews, turn on “Require a minimum number of reviewers”, and adj
 
 For build validation, scroll down to the Build Validation section, and click the plus button to add a new policy. Select the target build pipeline, adjust the policy settings as necessary (see below), and then give it a display name. Click save, and the build validation policy will be applied to the branch.
 
-> An important note here is that the build validation essentially runs the CI pipeline. In our case, that means it will run the build and the deployment. This is not ideal; we only want it to run the build (Nuget restore and VS build). So, it’s advisable to create a separate pipeline with only the build stage. This can be done easily by copying our example YAML and removing the “Deploy” stage, then saving it as a new pipeline. Then, choose that new pipeline as the target build pipeline in the validation policy.
+> An important note here is that the build validation essentially runs the CI pipeline. In our case, that means it will run the build and the deployment. This is not ideal; we only want it to run the build (NuGet restore and VS build). So, it’s advisable to create a separate pipeline with only the build stage. This can be done easily by copying our example YAML and removing the “Deploy” stage, then saving it as a new pipeline. Then, choose that new pipeline as the target build pipeline in the validation policy.
 
 ![A header reads "Add build policy." under that is a form, with "Build pipeline (required)" highlighted. Highlight text reads "Add your new 'build-only' pipeline here." "ci-tutorial" is selected.](/blog/2022/08/cicd-with-azure-devops/add-build-policy.webp)
 
