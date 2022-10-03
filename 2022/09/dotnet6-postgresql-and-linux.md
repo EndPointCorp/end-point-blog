@@ -218,7 +218,7 @@ Note that the pattern in `MapControllerRoute` points to a new controller and act
 
 ### Updating the config file
 
-The final task for this section is to update the `appsettings.json` file with a connection string for Postgres. Since I used Postgres.app to install Postgres, my connection string is simple. The username is the same as my Mac, and there is no password. Here is the full file:
+The final task to connect to Posgres is to update the `appsettings.json` file with a connection string. Since I used Postgres.app to install Postgres, my connection string is simple. The username is the same as my Mac, and there is no password. Here is the full file:
 
 ```
 {
@@ -241,7 +241,7 @@ Now that we have the database connection setup, let's make some small changes to
 
 Add a new file in the Controllers folder called `BookController.cs`. This file provides an Index controller action that queries the book data from Postgres using EFCore.
 
-*Program.cs*
+*Controllers/BooksController.cs*
 ```c#
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
@@ -335,7 +335,7 @@ With the above files in place, you are now ready to run your app. Go ahead and r
 
 ### Installing and configuring Nginx
 
-> Just a heads up that the proceeding sections borrow from the [MSDN article](https://learn.microsoft.com/en-us/aspnet/core/host-and-deploy/linux-nginx?view=aspnetcore-6.0) on hosting ASP.NET Core on Linux. Be sure to check out the article if you're in need of more info or additional help.
+> Just a heads up that the following sections borrow from the [MSDN article](https://learn.microsoft.com/en-us/aspnet/core/host-and-deploy/linux-nginx?view=aspnetcore-6.0) on hosting ASP.NET Core on Linux. Be sure to check out the article if you're in need of more info or additional help!
 
 Now that we have the application running, we can prepare to deploy it to a Linux server. The first step in preparing your server to host the application is to install Nginx. Nginx will act as a reverse proxy to your .NET application running on localhost. To install Nginx, use the appropriate package manager for your Linux distro. For example, if you're running Debian, use apt-get to install Nginx:
 
@@ -362,7 +362,7 @@ server {
 
     listen        80;
     listen       [::]:80;
-    server_name  admin.boundlessisrael.org;
+    server_name  dotnetsixdemo.org;
     return 404; # managed by Certbot
 }
 
@@ -420,7 +420,9 @@ At this point, all that's left to do is to copy the contents of the `publish` fo
 
 ### Running the app on the server
 
-Once you've copied the app to the server, your can run the app by navigating to the directory where the app was copied, and then running the command `dotnet [app_assembly].dll`. For our demo app, that would be `DotNetSix.Demo.dll`. This will run the app at http://127.0.0.1:5000, and it should now be accessible via the URL that you configured using Nginx. Based on the Nginx configuration provided above, that would be https://dotnetsixdemo.org. Go ahead and test your site in the browser to make sure it is accessible and the reverse proxy is working properly.
+Once you've copied the app to the server, you can start the app by navigating to the directory where the app was copied, and then running the command `dotnet [app_assembly].dll`. For our demo app, the target DLL would be `DotNetSix.Demo.dll`. 
+
+This will run the app at http://127.0.0.1:5000, and it should now be accessible via the URL that you configured using Nginx. Based on the Nginx configuration provided above, that would be https://dotnetsixdemo.org. Go ahead and test your site in the browser to make sure it is accessible and the reverse proxy is working properly.
 
 ### Using systemd to run the app as a services
 
