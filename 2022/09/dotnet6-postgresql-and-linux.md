@@ -9,12 +9,12 @@ date: 2022-09-15
 github_issue_number: tbd
 featured:
   endpoint: true
-  image_url: /blog/2022/09/dotnet6-postgresql-and-linux/boat-dar-es-salaam.jpg
+  image_url: /2022/09/dotnet6-postgresql-and-linux/boat-dar-es-salaam.jpg
 description: This post walks readers through how to build a web application using the .NET framework and Postgres, and how to host the app on Linux.
 ---
 
 
-![Fishing boat in Dar es Salaam. A traditional fishing boat sits on the beach at low tide, with the fading light of sunset behind. In the background, other boats float on the Msasani Bay, and several high-rise buildings are visible to the right on the Masaki peninsula.](/blog/2022/09/dotnet6-postgresql-and-linux/boat-dar-es-salaam.jpg)<br>
+![Fishing boat in Dar es Salaam. A traditional fishing boat sits on the beach at low tide, with the fading light of sunset behind. In the background, other boats float on the Msasani Bay, and several high-rise buildings are visible to the right on the Masaki peninsula.](/2022/09/dotnet6-postgresql-and-linux/boat-dar-es-salaam.jpg)<br>
 Photo by Dylan Wooters, 2022.
 
 For well over a decade, working with the .NET framework meant running Windows. With the release of .NET Core in 2016, developers were granted the freedom to choose their OS, including Linux. No longer were we bound to Windows. However, few took the plunge, at least in my experience. Why? Well we are comfortable with what we know, and afraid of what we don't.
@@ -31,9 +31,9 @@ First, you'll want to install Postgres locally. If you're using a Mac, this step
 
 Start by opening up Visual Studio and creating a new Web Application (MVC) project, and choosing .NET 6.0 as the target framework. I've named my project "DotNetSix.Demo". Here are the steps as they look in Visual Studio on my Mac. 
 
-![Visual Studio. A window is displayed called New Project. It shows two templates, with the Web Application (Model-View-Controller) template selected. A button on the bottom right shows "Continue".](/blog/2022/09/dotnet6-postgresql-and-linux/create-web-project-1.png)
+![Visual Studio. A window is displayed called New Project. It shows two templates, with the Web Application (Model-View-Controller) template selected. A button on the bottom right shows "Continue".](/2022/09/dotnet6-postgresql-and-linux/create-web-project-1.png)
 
-![Visual Studio. A window is displayed called New Project. At the top is reads "Configure your new Web Application (Model-View-Controller)". There is a Target Framework dropdown with ".NET 6.0" selected and second Authentication dropdown with "No Authentication" selected. Under Advanced, the "Configure for HTTPS" checkbox is checked, and the "Do not use top-level statements" checkbox is unchecked.](/blog/2022/09/dotnet6-postgresql-and-linux/create-web-project-2.png)
+![Visual Studio. A window is displayed called New Project. At the top is reads "Configure your new Web Application (Model-View-Controller)". There is a Target Framework dropdown with ".NET 6.0" selected and second Authentication dropdown with "No Authentication" selected. Under Advanced, the "Configure for HTTPS" checkbox is checked, and the "Do not use top-level statements" checkbox is unchecked.](/2022/09/dotnet6-postgresql-and-linux/create-web-project-2.png)
 
 On the final screen, go ahead and give your solution a name, and then click Create. Visual Studio should create a new solution for you, with a single web project. It will automatically create the necessary MVC folders, including, Controllers, Models, and Views.
 
@@ -156,7 +156,7 @@ namespace DotNetSix.Demo.Data
 
 At this point, you may notice some errors in your IDE. This is because we need to add two important Nuget packages: `Microsoft.EntityFrameworkCore` and `Npgsql.EntityFrameworkCore.PostgreSQL`. You can add these by right-clicking on the Dependencies folder and clicking "Manage Nuget Packages...". Here's how it looks in Visual Studio.
 
-![Visual Studio. The Nuget Packages window shows several packages in a column on the left, with the Microsoft.EntityFrameworkCore package selected. On the top right is a search bar to use to search for dependencies, and below it is an informational window on the dependency, as well as a "Add Package" button.](/blog/2022/09/dotnet6-postgresql-and-linux/add-nuget-dependency.png)
+![Visual Studio. The Nuget Packages window shows several packages in a column on the left, with the Microsoft.EntityFrameworkCore package selected. On the top right is a search bar to use to search for dependencies, and below it is an informational window on the dependency, as well as a "Add Package" button.](/2022/09/dotnet6-postgresql-and-linux/add-nuget-dependency.png)
 
 
 To round out the database connection, you'll want to update your `Program.cs` file, adding the DB Context and the initializing the database. Also, you may encounter an error when you first run your application, citing incompatible dates between .NET and Postgres. To fix this, we will set the `Npgsql.EnableLegacyTimestampBehavior` to true.
@@ -331,7 +331,7 @@ Now create an accompanying view. Add a "Books" folder under Views, and then add 
 
 With the above files in place, you are now ready to run your app. Go ahead and run the project in Visual Studio. You should then see the Books index page in your browser. Hopefully it looks like this:
 
-![Demo page in the web browser. A new window in Brave is pointing to https://localhost:7281/ and displays a top-level navigation with our app name (DotNetsix.Demo) and Home and Privacy links. Below the navigation is a simple table displaying the book data that is saved in Postgres.](/blog/2022/09/dotnet6-postgresql-and-linux/books-index-page.png)
+![Demo page in the web browser. A new window in Brave is pointing to https://localhost:7281/ and displays a top-level navigation with our app name (DotNetsix.Demo) and Home and Privacy links. Below the navigation is a simple table displaying the book data that is saved in Postgres.](/2022/09/dotnet6-postgresql-and-linux/books-index-page.png)
 
 ### Installing and configuring Nginx
 
