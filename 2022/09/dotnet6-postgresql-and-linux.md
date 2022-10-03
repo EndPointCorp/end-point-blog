@@ -15,7 +15,7 @@ description: This post walks readers through how to build a web application usin
 
 
 ![Fishing boat in Dar es Salaam. A traditional fishing boat sits on the beach at low tide, with the fading light of sunset behind. In the background, other boats float on the Msasani Bay, and several high-rise buildings are visible to the right on the Masaki peninsula.](/2022/09/dotnet6-postgresql-and-linux/boat-dar-es-salaam.jpg)<br>
-Photo by Dylan Wooters, 2022.
+<!-- Photo by Dylan Wooters, 2022 -->
 
 For well over a decade, working with the .NET framework meant running Windows. With the release of .NET Core in 2016, developers were granted the freedom to choose their OS, including Linux. No longer were we bound to Windows. However, few took the plunge, at least in my experience. Why? Well we are comfortable with what we know, and afraid of what we don't.
 
