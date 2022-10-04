@@ -146,7 +146,7 @@ To correct this, the compiler would need to be able to rule out `undefined` and 
 isEmpty(value?: any): value is not undefined | null;
 ```
 
-It's value to keep the limitations of this feature in mind when designing guard functions.
+It's worthwhile to keep the limitations of this feature in mind when designing guard functions.
 
 ### Conclusion
 
