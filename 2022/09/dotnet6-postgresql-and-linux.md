@@ -21,13 +21,17 @@ For well over a decade, working with the .NET framework meant running Windows. W
 
 The truth is that building a .NET application on Linux is not that hard, once you get over a few minor bumps in the road. And there are many advantages to this approach, including flexibility, simplicity, and lower costs.
 
-To demononstrate this, we will create a simple .NET MVC web application that connects to Postgres. Then, we will host the app on Linux with Nginx. Shall we start?
+To demonstrate this, we will create a simple .NET MVC web application that connects to Postgres. Then, we will host the app on Linux with Nginx. Shall we start?
 
 ### Preparing the database
 
 First, you'll want to install Postgres locally. If you're using a Mac, this step is very easy. Simply install [Postgres.app](https://postgresapp.com/) and you'll be ready to go.
 
+If you're using Windows, check out the [Windows Installers page](https://www.postgresql.org/download/windows/) on the Postgres to download the latest installer.
+
 ### Creating the projects
+
+To develop .NET 6 apps, you will need to install Visual Studio 2022. Check out the Visual Studio [downloads page](https://visualstudio.microsoft.com/downloads/) for options for both Windows and Mac.
 
 Start by opening up Visual Studio and creating a new Web Application (MVC) project, and choosing .NET 6.0 as the target framework. I've named my project "DotNetSix.Demo". Here are the steps as they look in Visual Studio on my Mac. 
 
@@ -218,7 +222,7 @@ Note that the pattern in `MapControllerRoute` points to a new controller and act
 
 ### Updating the config file
 
-The final task to connect to Posgres is to update the `appsettings.json` file with a connection string. Since I used Postgres.app to install Postgres, my connection string is simple. The username is the same as my Mac, and there is no password. Here is the full file:
+The final task to connect to Postgres is to update the `appsettings.json` file with a connection string. Since I used Postgres.app to install Postgres, my connection string is simple. The username is the same as my Mac, and there is no password. Here is the full file:
 
 ```
 {
@@ -452,7 +456,7 @@ WantedBy=multi-user.target
 
 Note that the paths in `WorkingDirectory` and `ExecStart` should match where you copied the application build files on the server, as part of the publish step above.
 
-Also, the `User` option specifies the user that manages the service and runs the process. In our example, this is the `dotnetsix` user. You'll want to create your own user, and importantly grant that user proper ownsership of the application files.
+Also, the `User` option specifies the user that manages the service and runs the process. In our example, this is the `dotnetsix` user. You'll want to create your own user, and importantly grant that user proper ownership of the application files.
 
 To finalize the new service, save the service file and then start the service with `sudo systemctl enable dot-net-six-demo.service`. This will run the app in the background via systemd.
 
