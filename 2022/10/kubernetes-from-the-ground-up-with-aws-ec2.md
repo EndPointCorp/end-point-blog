@@ -11,7 +11,7 @@ tags:
 - devops
 ---
 
-![A docked fishing ship faces the camera. A man stands on a dinghy next to it.](/blog/2022/08/kubernetes-from-the-ground-up-with-aws-ec2/ship.webp)<br>
+![A docked fishing ship faces the camera. A man stands on a dinghy next to it.](/blog/2022/10/kubernetes-from-the-ground-up-with-aws-ec2/ship.webp)<br>
 Photo by Darry Lin <!-- https://www.pexels.com/@darrylin/ -->
 
 One way to learn Kubernetes infrastructure is to build it from scratch. This way of learning was introduced by the founding father of Kubernetes himself: [Mr. Kelsey Hightower](https://twitter.com/kelseyhightower). The lesson is known as [“Kubernetes The Hard Way”](https://github.com/kelseyhightower/kubernetes-the-hard-way).
@@ -118,7 +118,7 @@ All Kubernetes nodes require some sort of container runtime engine. For these no
 
     ![The output of kubeadm, with the three important points highlighted. They read: 1: "Your Kubernetes control-lane as been initialized successfully!", 2: "mkdir -p $HOME/.kube;
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config;
-sudo chown $(id -u):$(id -g) $HOME/.kube/config", 3: "kubeadm join 172.XX.XX.XX:6643 --token XXXX --discover-token-ca-cert-hash XX"](/blog/2022/08/kubernetes-from-the-ground-up-with-aws-ec2/kubeadm01.webp)
+sudo chown $(id -u):$(id -g) $HOME/.kube/config", 3: "kubeadm join 172.XX.XX.XX:6643 --token XXXX --discover-token-ca-cert-hash XX"](/blog/2022/10/kubernetes-from-the-ground-up-with-aws-ec2/kubeadm01.webp)
 
 4. Create the configuration file for kubectl a.k.a. kubeconfig to connect to the Kubernetes cluster. The scripts are from previous output:
 
@@ -161,7 +161,7 @@ Execute the following in all worker nodes:
 
 2. Execute the join command with `sudo`. This command is from step #3 in the Kubernetes Control Plane Setup section.
 
-    ![A command and its results: sudo kubeadm join 172.XX.XX.XX:6443 --token XXXX --discovery-token-ca-cert-hash sha256:4XXX](/blog/2022/08/kubernetes-from-the-ground-up-with-aws-ec2/kubeadm-join.webp)
+    ![A command and its results: sudo kubeadm join 172.XX.XX.XX:6443 --token XXXX --discovery-token-ca-cert-hash sha256:4XXX](/blog/2022/10/kubernetes-from-the-ground-up-with-aws-ec2/kubeadm-join.webp)
 
 ### Hello, Kubernetes :)
 
@@ -175,7 +175,7 @@ kubectl get nodes
 
 Sample output:
 
-![Results of the kubectl get nodes. 3 nodes appear, each with the Ready status.](/blog/2022/08/kubernetes-from-the-ground-up-with-aws-ec2/kubeadm02.webp)
+![Results of the kubectl get nodes. 3 nodes appear, each with the Ready status.](/blog/2022/10/kubernetes-from-the-ground-up-with-aws-ec2/kubeadm02.webp)
 
 2. Deploy a sample Nginx web server
 
@@ -192,7 +192,7 @@ kubectl get pods -o wide
 
 Sample output:
 
-![Results of the kubectl get nodes and kubectl get pods. The two worker nodes are highlighted, pointing to their coinciding output from the command "kubectl get pods -o wide".](/blog/2022/08/kubernetes-from-the-ground-up-with-aws-ec2/kubeadm03.webp)
+![Results of the kubectl get nodes and kubectl get pods. The two worker nodes are highlighted, pointing to their coinciding output from the command "kubectl get pods -o wide".](/blog/2022/10/kubernetes-from-the-ground-up-with-aws-ec2/kubeadm03.webp)
 
 ### Conclusion
 
