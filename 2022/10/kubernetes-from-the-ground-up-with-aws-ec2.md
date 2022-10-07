@@ -1,55 +1,55 @@
 ---
 author: "Jeffry Johar"
 title: "Kubernetes From The Ground Up With AWS EC2"
-date: 2022-08-30
+date: 2022-10-06
 github_issue_number: 1898
-description: This article covers the major steps in creating a Kubernetes cluster and what is covered in CKA (Certified Kubernetes Administrator) exams.
-featured:
-  image_url: /blog/2022/08/kubernetes-from-the-ground-up-with-aws-ec2/ship.webp
 tags:
 - kubernetes
 - docker
 - containers
 - aws
+- devops
 ---
 
 ![A docked fishing ship faces the camera. A man stands on a dinghy next to it.](/blog/2022/08/kubernetes-from-the-ground-up-with-aws-ec2/ship.webp)<br>
-Photo by Darry Lin
+Photo by Darry Lin <!-- https://www.pexels.com/@darrylin/ -->
 
 One way to learn Kubernetes infrastructure is to build it from scratch. This way of learning was introduced by the founding father of Kubernetes himself: [Mr. Kelsey Hightower](https://twitter.com/kelseyhightower). The lesson is known as [“Kubernetes The Hard Way”](https://github.com/kelseyhightower/kubernetes-the-hard-way).
 
-For this blog entry I would like to take a less demanding approach than Kubernetes The Hard Way, while still being educational. I would like to highlight only the major steps in creating a Kubernetes cluster and what is covered in [CKA (Certified Kubernetes Administrator) exams](https://training.linuxfoundation.org/certification/certified-kubernetes-administrator-cka/). Thus we are going to use the `kubeadm` tools to build the Kubernetes cluster. The steps of creating a Kubernetes cluster are hidden to you if you are using a Kubernetes as a service such as AWS EKS, GCP GKE or the enterprise suites of Kubernetes such as Red Hat Openshift or VMware Tanzu. All of these products let you use Kubernetes without the need to worry about creating it.
+For this blog entry I would like to take a less demanding approach than Kubernetes The Hard Way, while still being educational. I would like to highlight only the major steps in creating a Kubernetes cluster and what is covered in [CKA (Certified Kubernetes Administrator) exams](https://training.linuxfoundation.org/certification/certified-kubernetes-administrator-cka/). Thus we are going to use the `kubeadm` tools to build the Kubernetes cluster.
+
+The steps of creating a Kubernetes cluster are hidden to you if you are using a Kubernetes as a service such as AWS EKS, GCP GKE or the enterprise suites of Kubernetes such as Red Hat Openshift or VMware Tanzu. All of these products let you use Kubernetes without the need to worry about creating it.
 
 ### Prerequisites
 
 For this tutorial we will need the following from AWS:
 
-- An active AWS account.
-- EC2 instances with Amazon Linux 2 as the OS.
-- AWS Keys for SSH to access control node and managed nodes.
-- Security group which allows SSH and HTTP.
-- A decent editor such as Vim or Notepad++ to create the inventory and the playbook.
+- An active AWS account
+- EC2 instances with Amazon Linux 2 as the OS
+- AWS Keys for SSH to access control node and managed nodes
+- Security group which allows SSH and HTTP
+- A decent editor such as Vim or Notepad++ to create the inventory and the playbook
 
 ### EC2 Instances provisioning
 
 Provisioning of the the control plane, a.k.a. the master node:
 
 1. Go to AWS Console → EC2 → Launch Instances.
-2. Set the Name tag to `Master`
+2. Set the Name tag to `Master`.
 3. Select the Amazon Linux 2 AMI.
 4. Select a key pair. If there are no available key pairs, please create one according to Amazon’s instructions.
-5. Allow SSH and 6443
-6. Set Number of Instances to 1
+5. Allow SSH and 6443 TCP ports.
+6. Set Number of Instances to 1.
 7. Click Launch Instance.
 
 Provisioning of the worker nodes, a.k.a. the minions:
 
 1. Go to AWS Console → EC2 → Launch Instances.
-2. Set the Name tag to `Node`
+2. Set the Name tag to `Node`.
 3. Select the Amazon Linux 2 AMI.
 4. Select a key pair. If there are no available key pairs, please create one according to Amazon’s instructions.
-5. Allow SSH
-6. Set Number of Instances to 2
+5. Allow SSH TCP port.
+6. Set Number of Instances to 2.
 7. Click Launch Instance.
 
 ### Installing the container runtime
@@ -76,7 +76,6 @@ All Kubernetes nodes require some sort of container runtime engine. For these no
     We should get an empty Docker status:
 
     ```plain
-    docker ps
     CONTAINER ID   IMAGE          COMMAND                  CREATED       STATUS      PORTS                    NAMES
     ```
 
@@ -91,10 +90,10 @@ All Kubernetes nodes require some sort of container runtime engine. For these no
 1. Add the Kubernetes repository. Log in to the node and paste the following:
 
     ```plain
-    cat <<EOF | sudo tee /etc/yum.repos.d/kubernetes.repo
+    cat <<'EOF' | sudo tee /etc/yum.repos.d/kubernetes.repo
     [kubernetes]
     name=Kubernetes
-    baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-\$basearch
+    baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-$basearch
     enabled=1
     gpgcheck=1
     gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
@@ -142,10 +141,10 @@ Execute the following in all worker nodes:
 1. Add the Kubernetes repository. Log in to the node and paste the following
 
     ```plain
-    cat <<EOF | sudo tee /etc/yum.repos.d/kubernetes.repo
+    cat <<'EOF' | sudo tee /etc/yum.repos.d/kubernetes.repo
     [kubernetes]
     name=Kubernetes
-    baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-\$basearch
+    baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-$basearch
     enabled=1
     gpgcheck=1
     gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
