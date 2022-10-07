@@ -9,13 +9,13 @@ tags:
 date: 2022-10-07
 ---
 
-![An orange sunset reflecting off of the sea at Rio de la Plata. A city skyline is silhouetted by the sunset.](/blog/2022/10/integrating-contentful-with-nuxt/fishing-rio-de-la-plata-sunset.jpg)
+![An orange sunset reflecting off of the sea at Rio de la Plata. A city skyline is silhouetted by the sunset.](/blog/2022/10/integrating-contentful-with-nuxt/fishing-rio-de-la-plata-sunset.webp)
 
 <!-- Photo by Juan Pablo Ventoso -->
 
-Some time ago, I had the opportunity to collaborate on a cool [NuxtJS](https://nuxtjs.org/) project. I'm still somewhat new to [Vue.js](https://vuejs.org/) and its related frameworks, meaning I'm discovering exciting new tools and third-party services that can be integrated with them every time a new requirement appears. And there is a particular concept that I heard of, but never worked with... until this project: I'm talking about using a [Headless CMS](https://en.wikipedia.org/wiki/Headless_content_management_system) to deliver content.
+Some time ago, I had the opportunity to collaborate on a cool [NuxtJS](https://nuxtjs.org/) project. I'm still somewhat new to [Vue.js](https://vuejs.org/) and its related frameworks, meaning I'm discovering exciting new tools and third-party services that can be integrated with them every time a new requirement appears. And there is a particular concept that I heard of, but never worked with until this project: using a [Headless CMS](https://en.wikipedia.org/wiki/Headless_content_management_system) to deliver content.
 
-Essentially, a headless CMS permits creating a custom content model, making it it accessible through one (or several) APIs that we can query, allowing us to choose whatever presentation layer we prefer to handle the display. This approach decouples the content management part (the "body") of a project from the design, templates, and frontend logic (the "head"), becoming particularly useful when we have several application types that will interact with the same data, such as a website, a mobile app, or an IoT device.
+Essentially, a headless CMS permits creating a custom content model, making it accessible through one (or several) APIs that we can query, allowing us to choose whatever presentation layer we prefer to handle the display. This approach decouples the content management part (the "body") of a project from the design, templates, and frontend logic (the "head"), becoming particularly useful when we have several application types that will interact with the same data, such as a website, a mobile app, or an IoT device.
 
 With that in mind, let's have a quick look at [Contentful](https://www.contentful.com/): It's a headless CMS that is offered under the concept of content-as-a-service ([CaaS](https://www.contentful.com/r/knowledgebase/content-as-a-service/)), meaning the content is delivered on demand from a cloud platform to the consumer by implementing an API or web service.
 
@@ -23,7 +23,7 @@ With that in mind, let's have a quick look at [Contentful](https://www.contentfu
 
 For individual or small websites, the free option should be sufficient. It has a limit of 5 users and a size limit of 50MB for assets, and the technical support area is disabled. The next option (Medium, $489/month) also includes an additional role (author), additional locales, and the possibility to create up to ten different user accounts. The asset size is also extended up to 1000MB.
 
-![Contentful pricing. Community tier is free, Team tier is $489 per month, Enterprise is custom pricing "to your needs."](/blog/2022/10/integrating-contentful-with-nuxt/contentful-pricing.jpg)
+![Contentful pricing: Community tier is free, Team tier is $489/month, Enterprise is custom pricing.](/blog/2022/10/integrating-contentful-with-nuxt/contentful-pricing.webp)
 
 You can review the full pricing details [on Contentful's website](https://www.contentful.com/pricing/).
 
@@ -35,7 +35,7 @@ In order to start creating content, there are two essential steps:
 
 * We need to define the [model for our content](https://www.contentful.com/help/contentful-101/#step-3-create-the-content-model). The model is the type and structure that our content will have. For the integration below, we will need a new "Page" model, that will contain two fields to save the information that we need for a static page: `title` and `content`. We can also include a `publishDate` field, just to know when each page was created.
 
-![Page content model. A GUI shows 3 fields: Title, a short text field; Content, a rich text field; and Publish date, a Date & time field.](/blog/2022/10/integrating-contentful-with-nuxt/page-content-model.jpg)
+![Page content model. A GUI shows 3 fields: Title, a short text field; Content, a rich text field; and Publish date, a Date & time field.](/blog/2022/10/integrating-contentful-with-nuxt/page-content-model.webp)
 
 ### Integration
 
@@ -139,7 +139,7 @@ All we need to do is get the entry ID from the content we created in Contentful,
 
 Of course, we're not restricted to using this service to deliver static pages: We can store and deliver blog posts, listings, events, geolocation information, documents, and more. We have several field types that could be used for our content model, including location, media (images, videos), links, or JSON, among others. See the [data model section](https://www.contentful.com/developers/docs/concepts/data-model/) of their official documentation for reference.
 
-![A GUI selection screen reading "Add new field" shows 9 field types: Rich text, Text, Number, Date and Time, Location, Media, Boolean, JSON object, and Reference.](/blog/2022/10/integrating-contentful-with-nuxt/add-new-field-types.jpg)
+![A GUI selection screen reading "Add new field" shows 9 field types: Rich text, Text, Number, Date and Time, Location, Media, Boolean, JSON object, and Reference.](/blog/2022/10/integrating-contentful-with-nuxt/add-new-field-types.webp)
 
 ### Alternatives
 
