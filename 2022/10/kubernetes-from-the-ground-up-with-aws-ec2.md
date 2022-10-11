@@ -9,6 +9,9 @@ tags:
 - containers
 - aws
 - devops
+description: This article covers the major steps in creating a Kubernetes cluster, which is covered in CKA (Certified Kubernetes Administrator) exams.
+featured:
+  image_url: /blog/2022/10/kubernetes-from-the-ground-up-with-aws-ec2/ship.webp
 ---
 
 ![A docked fishing ship faces the camera. A man stands on a dinghy next to it.](/blog/2022/10/kubernetes-from-the-ground-up-with-aws-ec2/ship.webp)<br>
