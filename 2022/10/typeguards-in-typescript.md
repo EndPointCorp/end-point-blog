@@ -1,29 +1,26 @@
 ---
 author: Nicholas Piano
 title: Typeguards in TypeScript
-date: 2022-10-03
-github_issue_number: 1900
+date: 2022-10-12
+github_issue_number: 1908
 featured:
   image_url: /blog/2022/10/typeguards-in-typescript/relief_map.png
 tags:
-- types
 - typescript
-description: A little known, but useful, feature of typescript
+description: A little known but useful feature of typescript
 ---
 
-![A relief map of Liverpool Street in London, UK](/blog/2022/10/typeguards-in-typescript/relief_map.png)
+![Looking up at trees and a building. The leaves are starting to turn yellow. The building's glass windows reflect the trees and the clear blue sky.](/blog/2022/10/typeguards-in-typescript/tree-reflections.webp)
 
 <!-- Photo by Seth Jensen, 2022 -->
 
-### Type guards in TypeScript
-
 Typescript has a very rich type system. Sometimes too rich. For example, interfaces and types perform the same function with slightly different syntax.
 
-This is a short intro to a powerful feature in TypeScript: Typeguards. This feature also exists in many strongly typed languages. While TypeScript is not strongly typed, it replicates this excellent feature.
+This post is a short intro to a powerful feature in TypeScript: Typeguards. This feature also exists in many strongly typed languages. While TypeScript is not strongly typed, it replicates this excellent feature.
 
 ### The feature
 
-Normally, a function can be annotated with `boolean` to indicate its return type. However, when the intention is to narrow the type of object being tested from a supertype to one of its subtypes, the annotation `argument is Type` can be used instead. This can allow the compiler to infer the type of the argument at other points in the code after the test has been passed.
+Normally, a function can be annotated with `boolean` to indicate its return type. However, when the intention is to narrow the type of object being tested from a supertype to one of its subtypes, the annotation `parameterName is Type` can be used instead. This allows the compiler to infer the type of the argument at other points in the code after the test has been passed.
 
 The following code demonstrates a use of this feature:
 
@@ -112,7 +109,7 @@ This is now valid as far as the compiler is concerned. The array is now of type 
 
 ### Limitations from an example in the wild: lodash.isEmpty
 
-The `isUndefined` function from the Lodash has the following signature:
+The `isUndefined` function from Lodash has the following signature:
 
 ```typescript
 isUndefined(value: any): value is undefined;
@@ -154,4 +151,4 @@ In conclusion, this feature should be taken advantage of whenever possible. It c
 
 However, there are limitations, such as the inability to detect when a variable does NOT satisfy a type.
 
-Refer to the [official TypeScript documentation](https://www.typescriptlang.org/docs/handbook/2/narrowing.html#using-type-predicates) for more.
+Refer to the official [TypeScript documentation](https://www.typescriptlang.org/docs/handbook/2/narrowing.html#using-type-predicates) for more.
