@@ -1,22 +1,22 @@
 ---
 author: Nicholas Piano
-title: Typeguards in TypeScript
+title: Type guards in TypeScript
 date: 2022-10-12
 github_issue_number: 1908
 featured:
-  image_url: /blog/2022/10/typeguards-in-typescript/relief_map.png
+  image_url: /blog/2022/10/typeguards-in-typescript/tree-reflections.webp
 tags:
 - typescript
-description: A little known but useful feature of typescript
+description: A little known but useful feature of TypeScript
 ---
 
 ![Looking up at trees and a building. The leaves are starting to turn yellow. The building's glass windows reflect the trees and the clear blue sky.](/blog/2022/10/typeguards-in-typescript/tree-reflections.webp)
 
 <!-- Photo by Seth Jensen, 2022 -->
 
-Typescript has a very rich type system. Sometimes too rich. For example, interfaces and types perform the same function with slightly different syntax.
+TypeScript has a very rich type system. Sometimes too rich. For example, interfaces and types perform the same function with slightly different syntax.
 
-This post is a short intro to a powerful feature in TypeScript: Typeguards. This feature also exists in many strongly typed languages. While TypeScript is not strongly typed, it replicates this excellent feature.
+This post is a short intro to a powerful feature in TypeScript: type guards. This feature also exists in many strongly typed languages. While TypeScript is not strongly typed, it replicates this excellent feature.
 
 ### The feature
 
@@ -149,6 +149,6 @@ It's worthwhile to keep the limitations of this feature in mind when designing g
 
 In conclusion, this feature should be taken advantage of whenever possible. It can greatly simplify code, making it clearer and easier to read.
 
-However, there are limitations, such as the inability to detect when a variable does NOT satisfy a type.
+However, there are limitations, such as the inability to detect when a variable does *not* satisfy a type.
 
 Refer to the official [TypeScript documentation](https://www.typescriptlang.org/docs/handbook/2/narrowing.html#using-type-predicates) for more.
