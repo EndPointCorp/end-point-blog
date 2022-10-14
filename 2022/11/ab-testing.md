@@ -64,8 +64,8 @@ Conversion samples for Page A + B:
 import pandas as pd
 import random
 
-conversion = [1] * 231
-conversion.extend([0] * 11779)
+conversion = [1] * 427
+conversion.extend([0] * 21602)
 random.shuffle(conversion)
 conversion = pd.Series(conversion)
 ```
@@ -74,7 +74,7 @@ conversion = pd.Series(conversion)
 
 To get the result for the purpose of claiming if the difference between the control and treatment groups is due to chance or not we could use [permutation test](https://en.wikipedia.org/wiki/Permutation_test). "In a permutation procedure, two or more samples are involved, typically the groups in an A/B or other hypothesis test. Permute means to change the order of a set of values." (P. Bruce, A. Bruce, P. Gedeck, Page 97, Practical Statistics for Data Scientists 2nd Edition).
 
-Permutation sampling is performed using the following steps;
+Permutation sampling is performed using the following steps steps as listed in the same reference;
 
 1. Combine the results from the different groups into a single data set.
 2. 2. Shuffle the combined data and then randomly draw (without replacement) a resample of the same size as group A (clearly it will contain some data from the other groups).
@@ -126,8 +126,8 @@ In this example our p-value is;
 
 `p_value = np.mean([diff > observed_percentage_diff for diff in perm_diffs])`
 
-which results 0.4204. Then we compare `p-value` with `alpha` which is usually taken as `0.05`. If the p-value is less then alpha then we reject the null hypothesis. So in our example the p-value is extremely high and we failed to reject the null hypothesis and the result and we can say that the difference between group A and group B is most like due to chance rather than the treatment we applied.
+which results 0.4204. Then we compare `p-value` with `alpha` which is usually taken as `0.05`. If the p-value is less then alpha then we reject the null hypothesis. So in our example the p-value is extremely high and we failed to reject the null hypothesis and the result and we can say that the difference between group A and group B is most likely due to chance rather than the treatment we applied.
 
 ## Conclusion
 
-The results of a significance tests are not explicitly taken to accept the null hypothesis, but rather helps to understand if the treatments are affecting the results of the experiments or the results are most like due to chance. The A/B (or in some cases more groups like C/D/E..) experiments are helpful to understand the treatment or chance is most likely to blame for the results.
+The results of a significance tests are not explicitly taken to accept the null hypothesis, but rather helps to understand if the treatments are affecting the results of the experiments or the results are most likely due to chance. The A/B (or in some cases more groups like C/D/E..) experiments are helpful to understand the treatment or chance is most likely to blame for the results.
