@@ -4,7 +4,7 @@ date: 2022-10-14
 title: "Upgrading PostgreSQL 14 to 15 on Fedora, RHEL, CentOS, Rocky, Alma Linux with PGDG RPM packages"
 github_issue_number: 1909
 tags:
-- postgresql
+- postgres
 - sysadmin
 - linux
 ---
