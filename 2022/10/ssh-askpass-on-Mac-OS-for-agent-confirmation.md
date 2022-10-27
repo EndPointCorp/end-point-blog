@@ -66,7 +66,7 @@ $ launchctl load -w ~/Library/LaunchAgents/ssh-askpass.plist
 $ brew services start theseal/ssh-askpass/ssh-askpass
 
 ```
-## Configure the ssh-agent with ` -c ` option
+## Configure the ssh-agent with `-c` option
 
 * Let's first verify that the ssh-agent is running and then add the private key with ` -c `option.
 
@@ -97,10 +97,6 @@ ssh-keys. To make it easier to press `OK`:
 
 
 Now you can press the tab ⇥ and then the spacebar to press `OK`.
-
-* Now no need to log out; you can add keys to the agent with `ssh-add -c`.
-
-* When you ssh, it prompts for confirmation.
 
 Enjoy!
 
