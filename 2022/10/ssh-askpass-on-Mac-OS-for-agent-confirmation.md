@@ -83,6 +83,9 @@ ssh-keys. To make it easier to press `OK`:
 
 ![keyboard shortscuts](/blog/2022/10/ssh-askpass-on-Mac-OS-for-agent-confirmation/keyboard_shortscuts.png)
 
+#### 13.0 Ventura
+![keyboard shortscuts](/blog/2022/10/ssh-askpass-on-Mac-OS-for-agent-confirmation/keyboard_shortscuts_on_ventura.png)
+
 Now you can press the tab ⇥ and then the spacebar to press `OK`.
 
 
