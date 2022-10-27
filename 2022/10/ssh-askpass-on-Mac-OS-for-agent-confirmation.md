@@ -38,8 +38,6 @@ If case if you don’t want to use agent confirmation, then it’s best to use P
 
 ### [Homebrew](https://brew.sh/)
 
-* Install:
-
 ```
     $ brew tap theseal/ssh-askpass
     $ brew install ssh-askpass
@@ -48,15 +46,12 @@ If case if you don’t want to use agent confirmation, then it’s best to use P
 * Follow caveats
 
 ### [MacPorts](https://www.macports.org)
-* Install:
 
 ```
     $ sudo port install ssh-askpass
 ```
 
-### [Without Homebrew/MacPorts]
-
-* Run:
+### Without Homebrew/MacPorts
 
 ```
 $ cp ssh-askpass /usr/local/bin/
