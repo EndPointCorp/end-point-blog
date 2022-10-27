@@ -58,24 +58,11 @@ $ cp ssh-askpass.plist ~/Library/LaunchAgents/
 $ launchctl load -w ~/Library/LaunchAgents/ssh-askpass.plist
 ```
 
-## Install X11R6 
- System Integrity Protection is a good security feature and doesn't need to be disabled in macOS 10.13+ to keep ssh_askpass working
-
-* (Re)install xquartz:
-This will officially recreate the /usr/X11R6 directory without disturbing SIP.
+## To start the ssh-askpass now and restart at login
 
 ```
-$ brew reinstall xquartz
-```
+$ brew services start theseal/ssh-askpass/ssh-askpass
 
-* Create Symbolic Links:
-
-```
-$ cd /usr/X11R6/bin
-
-$ sudo ln -s /usr/local/bin/ssh-askpass ssh-askpass
-or 
-$ sudo ln -s `which ssh-askpass` ssh-askpass
 ```
 
 ## Enabling keyboard navigation
