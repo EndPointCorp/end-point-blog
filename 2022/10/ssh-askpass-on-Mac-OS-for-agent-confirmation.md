@@ -34,30 +34,23 @@ When utilizing the ssh-askpass, a prompt will show on your local computer to con
 If case if you don’t want to use agent confirmation, then it’s best to use ProxyJump instead of agent forwarding.
 
 
-## Installation
-
-### [Homebrew](https://brew.sh/)
-
+### Install ssh-askpass with Homebrew
 ```
     $ brew tap theseal/ssh-askpass
     $ brew install ssh-askpass
-
 ```
-* Follow caveats
+You might see some warnings. Go ahead and proceed with them.
 
-### [MacPorts](https://www.macports.org)
-
+### Install ssh-askpass with MacPorts
 ```
     $ sudo port install ssh-askpass
 ```
 
-### Without Homebrew/MacPorts
-
+### Install ssh-askpass from Source Code
 ```
 $ cp ssh-askpass /usr/local/bin/
 $ cp ssh-askpass.plist ~/Library/LaunchAgents/
 $ launchctl load -w ~/Library/LaunchAgents/ssh-askpass.plist
-
 ```
 
 ## To start the ssh-askpass now and restart at login
@@ -71,30 +64,26 @@ $ brew services start theseal/ssh-askpass/ssh-askpass
 * Let's first verify that the ssh-agent is running and then add the private key with ` -c `option.
 
 ![ssh-add -c](/blog/2022/10/ssh-askpass-on-Mac-OS-for-agent-confirmation/ssh-add-c.png)
-* The Identity will get added if you provided the correct passphrase for the key. This can be confirmed by listing the keys again.
+* The Identity will get added if you provide the correct passphrase for the key. This can be confirmed by listing the keys again.
 
 ## ssh-askpass agent confirmation
 * Let's log into a remote server
 * It will be prompted to confirm the private key’s usage with the pop-up window.
 ![agent confirmation dialog](/blog/2022/10/ssh-askpass-on-Mac-OS-for-agent-confirmation/ssh-askpass.png)
 
-
-## Keyboard shortcuts
-For security reasons ssh-askpass defaults to cancel since it's too easy to
-press the spacebar and accept a connection or other actions which might use
-ssh-keys. To make it easier to press `OK`:
+## Setup keyboard shortcuts
+Since it's too easy to hit the spacebar and accept a connection, ssh-askpass defaults to the cancel option, and we can use the keyboard shortcuts to press `OK` by following the below steps.
 
 * Go to `System Preferences` and then `Keyboard`.
 
 #### 10.15+
-* At the bottom of the `Shortcuts` tab, check the option ` Use keyboard navigation to move focus between controls `.
-
+* Go to `Shortcuts` tab
+* check the option ` Use keyboard navigation to move focus between controls`.
 ![keyboard shortscuts](/blog/2022/10/ssh-askpass-on-Mac-OS-for-agent-confirmation/keyboard_shortscuts.png)
 
 #### 13.0 Ventura
 * Turn on the option ` Use keyboard navigation to move focus between controls `
 ![keyboard shortscuts](/blog/2022/10/ssh-askpass-on-Mac-OS-for-agent-confirmation/keyboard_shortscuts_on_ventura.png)
-
 
 Now you can press the tab ⇥ and then the spacebar to press `OK`.
 
