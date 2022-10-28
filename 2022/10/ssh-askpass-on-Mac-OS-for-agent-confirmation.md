@@ -36,14 +36,14 @@ If case if you don’t want to use agent confirmation, then it’s best to use P
 
 ### Install ssh-askpass with Homebrew
 ```
-    $ brew tap theseal/ssh-askpass
-    $ brew install ssh-askpass
+$ brew tap theseal/ssh-askpass
+$ brew install ssh-askpass
 ```
 You might see some warnings. Go ahead and proceed with them.
 
 ### Install ssh-askpass with MacPorts
 ```
-    $ sudo port install ssh-askpass
+$ sudo port install ssh-askpass
 ```
 
 ### Install ssh-askpass from Source Code
