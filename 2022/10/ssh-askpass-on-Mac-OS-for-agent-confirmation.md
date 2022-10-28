@@ -53,7 +53,7 @@ $ cp ssh-askpass.plist ~/Library/LaunchAgents/
 $ launchctl load -w ~/Library/LaunchAgents/ssh-askpass.plist
 ```
 
-## To start the ssh-askpass now and restart at login
+## To start ssh-askpass now and restart at login
 
 ```
 $ brew services start theseal/ssh-askpass/ssh-askpass
