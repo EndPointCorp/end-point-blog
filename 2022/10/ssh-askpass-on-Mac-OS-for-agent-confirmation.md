@@ -53,12 +53,23 @@ $ cp ssh-askpass.plist ~/Library/LaunchAgents/
 $ launchctl load -w ~/Library/LaunchAgents/ssh-askpass.plist
 ```
 
-## To start ssh-askpass now and restart at login
+## Start the Homebrew Services
+Note that it’s a `brew service` not just a regular daemon service.
 
 ```
 $ brew services start theseal/ssh-askpass/ssh-askpass
+=> Successfully started `ssh-askpass` (label: homebrew.mxcl.ssh-askpass)
 
 ```
+Behind the scenes, it just sets the `SSH_ASKPASS` and `SUDO_ASKPASS` environment variables and stops `ssh-agent`,  so that the ssh-agent can pick up these environment variables when it restarts.
+
+
+To List the services and make sure it’s started
+```
+$ brew services list | grep ssh-askpass
+ssh-askpass started ~/Library/LaunchAgents/homebrew.mxcl.ssh-askpass.plist
+```
+
 ## Configure the ssh-agent with `-c` option
 
 * Let's first verify that the ssh-agent is running and then add the private key with ` -c `option.
