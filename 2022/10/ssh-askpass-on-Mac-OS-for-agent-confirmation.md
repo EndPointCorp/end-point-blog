@@ -29,10 +29,9 @@ It is strongly recommended to use the `-c` option on `ssh-add` command when addi
 
 Agent forwarding has some inherent risk, however, this risk may be significantly reduced by using this `-c` option.
 
-When utilizing the ssh-askpass, a prompt will show on your local computer to confirm the usage of the key each time a request is made to use the private key loaded in the SSH agent. Doing this makes it harder for an attacker to utilize the private key without permission.
+Every time a request is made to utilize the private key stored in the SSH agent, the ssh-askpass will display a prompt on your local computer asking you to approve the usage of the key. By doing this,  it becomes more difficult for a remote attacker to use the private key without authorization.
 
-If case if you don’t want to use agent confirmation, then it’s best to use ProxyJump instead of agent forwarding.
-
+It is recommended to utilise ProxyJump rather than agent forwarding if you don't want to use the ssh-askpass agent confirmation.
 
 ### Install ssh-askpass with Homebrew
 ```
