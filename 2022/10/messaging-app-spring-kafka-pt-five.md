@@ -1,10 +1,10 @@
 ---
 author: "Kürşat Kutlu Aydemir"
 title: "Creating a Messaging App Using Spring for Apache Kafka, Part 5"
-date: 2022-10-27
+date: 2022-10-31
 github_issue_number: 1912
 featured:
-  image_url: /blog/2022/10/spring-kafka-messaging-pt-five/pencils-closeup.webp
+  image_url: /blog/2022/10/messaging-app-spring-kafka-pt-five/pencils-closeup.webp
 description: Authentication, activation, login, and seeing working messaging in an app created with Spring for Apache Kafka.
 tags:
 - spring
@@ -13,7 +13,7 @@ tags:
 - java
 ---
 
-![Close up photo of 5 pencils on a faux wood grain desk. The center pencil's coating is a bright orange, while the other four are a dark green, almost black.](/blog/2022/10/spring-kafka-messaging-pt-five/pencils-closeup.webp)
+![Close up photo of 5 pencils on a faux wood grain desk. The center pencil's coating is a bright orange, while the other four are a dark green, almost black.](/blog/2022/10/messaging-app-spring-kafka-pt-five/pencils-closeup.webp)
 
 <!-- Photo by BOOM 💥. https://www.pexels.com/photo/close-up-photo-of-pencils-12585543/ -->
 
@@ -27,7 +27,7 @@ Authentication and activation are managed through the `AuthController` class whe
 
 #### Activation
 
-Our activation step uses a dummy mobile phone number. You can think of it similarly to activating a messaging application (like Whatsapp) using a phone number. I didn't introduce any restrictions on the phone number for this application, so the phone number activation is just a pseudo-step and you can supply any number. In real life, the phone number activation would use real SMS or other activation services to activate your chat application against the user's real phone number.
+Our activation step uses a dummy mobile phone number. You can think of it similarly to activating a messaging application (like WhatsApp) using a phone number. I didn't introduce any restrictions on the phone number for this application, so the phone number activation is just a pseudo-step and you can supply any number. In real life, the phone number activation would use SMS or other activation services to activate your chat application against the user's phone number.
 
 The activation endpoint is `/api/auth/getcode`, and takes the mobile number as payload. A sample POST request is below:
 
@@ -68,7 +68,7 @@ The chat application is the final part of this series, and will show the messagi
 
 To add a web UI to our Spring application I've added two static files, `app.js` and `index.html`, in the `resources` directory. `index.html` serves as the chat application's UI and `app.js` is responsible for making AJAX calls and WebSocket connections from the client browser.
 
-![Three text boxes. The first is labeled "Mobile number (pretend) activation", and an "Activate" button follow. The next is labeled "login" with a "Login" button following. The next is labeled "Access Token, with no button following immediately. There is then a label reading "Chat Application:", followed by two buttons reading "Start New Chat" and "End Chat", in order from top to bottom.](/blog/2022/10/spring-kafka-messaging-pt-five/kafkamessagewebui.webp)
+![Three text boxes. The first is labeled "Mobile number (pretend) activation", and an "Activate" button follow. The next is labeled "login" with a "Login" button following. The next is labeled "Access Token, with no button following immediately. There is then a label reading "Chat Application:", followed by two buttons reading "Start New Chat" and "End Chat", in order from top to bottom.](/blog/2022/10/messaging-app-spring-kafka-pt-five/kafkamessagewebui.webp)
 
 I added all three steps to the chat application UI to make the workflow clearer. As you see in the chat screen above, these three steps are activation, login, and starting a new chat. Let's walk through these steps.
 
@@ -82,20 +82,19 @@ function activate() {
     'mobile': $("#mobile").val(),
   });
 
-  console.log("here we are")
   $.ajax({
     type: "POST",
     url: "http://localhost:8080/api/auth/getcode",
     data: mobileFormData,
-    contentType: "application/json;charset=utf-8",
-    success: function(result){
-        $("#activationCode").val(result.activationCode);
-    }
+    contentType: "application/json; charset=utf-8",
+    success: function(result) {
+      $("#activationCode").val(result.activationCode);
+    },
   });
 }
 ```
 
-The resulting `activationCode` is automatically inputted into the `login` field. We already know what this `activationCode` is and where it is stored in the backend. So, now our chat client can use this `activationCode` along with the mobile number to log in and get the access token. When you click on `Login` it POSTs to `/api/auth/login` and puts the access token into the `Access Token` input box this time.
+The resulting `activationCode` is automatically inputted into the `login` field. We already know what this `activationCode` is and where it is stored in the backend, so now our chat client can use this along with the mobile number to log in and get the access token. When you click on `Login` it POSTs to `/api/auth/login` and puts the access token into the `Access Token` input box this time.
 
 ```javascript
 function login() {
@@ -108,15 +107,15 @@ function login() {
     type: "POST",
     url: "http://localhost:8080/api/auth/login",
     data: loginFormData,
-    contentType: "application/json;charset=utf-8",
-    success: function(result){
-        $("#accessToken").val(result.accessToken);
-    }
+    contentType: "application/json; charset=utf-8",
+    success: function(result) {
+      $("#accessToken").val(result.accessToken);
+    },
   });
 }
 ```
 
-Now finally our web client can connect to our WebSocket URI. Without a login step we could let our application to accept WebSocket connections as well, however we simulated an authentication step and we want to know who is connecting to WebSocket handler.
+Now finally our web client can connect to our WebSocket URI. Without a login step we could let our application accept WebSocket connections as well. However, we simulated an authentication step and we want to know who is connecting to the WebSocket handler.
 
 ```javascript
 function connect() {
@@ -139,7 +138,7 @@ function connect() {
 
 #### WebSocket Handshake
 
-In our `WebSocketConfig` class I added an WebSocket handshake interceptor `WSHandshakeInterceptor` to authenticate the connecting user by checking the `accessToken`. So, the `accessToken` is necessary at the first step while connecting to the WebSocket registry. If the client doesn't provide an `accessToken` or provides an invalid `accessToken` then the handshake will fail.
+In our `WebSocketConfig` class I added an WebSocket handshake interceptor `WSHandshakeInterceptor` to authenticate the connecting user by checking the `accessToken`. So, the `accessToken` is necessary at the first step while connecting to the WebSocket registry. If the client doesn't provide an `accessToken` or provides an invalid one then the handshake will fail.
 
 ```java
 @Override
@@ -148,13 +147,13 @@ public boolean beforeHandshake(ServerHttpRequest serverHttpRequest, ServerHttpRe
     LOG.info("hand shaking for ws session url  " + serverHttpRequest.getURI().getPath() + " ? " + serverHttpRequest.getURI().getQuery());
     String parameters[] = serverHttpRequest.getURI().getQuery().split("=");
 
-    if(parameters.length == 2 && parameters[0].equals("accessToken")) {
+    if (parameters.length == 2 && parameters[0].equals("accessToken")) {
         String accessToken = parameters[1];
 
         Long senderUserId = 0L;
         String senderId = cacheRepository.getUserIdByAccessToken(accessToken);
 
-        if(senderId == null) {
+        if (senderId == null) {
             User sender = userRepository.findByToken(accessToken);
             if(sender != null) {
                 senderUserId = sender.getUserId();
@@ -191,11 +190,11 @@ When I open the chat application in two different browsers and login with differ
 
 On this screen I chose the `12345` contact to start messaging. I entered my message and clicked on `Send` button. Since both clients connected to the WebSocket I was able to send the message to `12345`, as you can see on the second client's window.
 
-![Two chat windows are open, with the same layout as the previous image. The left window's layout is extended to include the following: two checkboxes reading "12345" and "23456", with the first checked. Below is a text field containing a message reading "Hey dude, howdy?". Below it is a button labeled "Send". The right window is extended to include the following: a received message reading '{"msg":"Hey dude, howdy?","senderId":4,"topic":"SEND_MESSAGE"}', then an empty text area with a "Send" button.](/blog/2022/10/spring-kafka-messaging-pt-five/km-chat-in-action.webp)
+![Two chat windows are open, with the same layout as the previous image. The left window's layout is extended to include the following: two checkboxes reading "12345" and "23456", with the first checked. Below is a text field containing a message reading "Hey dude, howdy?". Below it is a button labeled "Send". The right window is extended to include the following: a received message reading '{"msg":"Hey dude, howdy?","senderId":4,"topic":"SEND_MESSAGE"}', then an empty text area with a "Send" button.](/blog/2022/10/messaging-app-spring-kafka-pt-five/km-chat-in-action.webp)
 
 The messages are not tidied here; I made the WebSocket message list the message on the client where it connected to its WebSocket session.
 
-Here is the JavaScript code sending the message to WebSocket session when you click on `Send` button:
+Here is the JavaScript code sending the message to WebSocket session when you click on the `Send` button:
 
 ```javascript
 function sendData() {
@@ -205,7 +204,7 @@ function sendData() {
       'accessToken': $("#accessToken").val(),
       'sendTo': $("#sendTo").val(),
       'msg': $("#messageArea").val(),
-    }
+    },
   })
   ws.send(data);
 }
@@ -257,10 +256,12 @@ Let's go back to the question of why we used Kafka and WebSockets for a messagin
 
 There are times when WebSocket has the advantage over HTTP or XMPP, and we can compare these protocols on a case-by-case basis. However, those debates won't be had in this post. WebSocket is simply a fast relaying and simple protocol which enables a web server app to communicate with a web browser, or more broadly, WebSocket clients, easily. So you can use WebSocket to create chat applications over the web and let the same user's multiple sessions run concurrently on multiple clients.
 
-Kafka, on the other hand, acts as a message orchestrator, highly aware of what is coming in and going out and upwardly scalable. You are guaranteed to be able to process each message which arrives at Kafka without worrying about concurrency and delay issues which you often face with traditional threads or services. Kafka is not a chat application backend essentially but can handle the millions and even billions of messages easily. The main purpose of this example application is not creating a chat application, but as the title says, a messaging application.
+Kafka, on the other hand, acts as a message orchestrator, highly aware of what is coming in and going out and upwardly scalable. You are guaranteed to be able to process each message which arrives at Kafka without worrying about concurrency and delay issues which you often face with traditional threads or services. Kafka is not essentially a chat application backend but can handle the millions and even billions of messages easily. The main purpose of this example application is not creating a chat application, but as the title says, a messaging application.
 
-So, while chatting would designate a narrow scope, messaging is used to address a broad application of handling high loads of data streaming environments.
+So, while chatting would designate a narrow scope, messaging covers a broad range of applications handling high loads of data streaming environments.
 
 ### Conclusion
 
-Kafka is used in several environments by lots of giants of the industry and startups. A few industry examples would be financial services, telecom, manufacturing and healthcare. You can make data streaming seamless and real-time using Kafka. Please share your experiences using Kafka and related technologies, even including ML and model training streams.
+Kafka is used in several environments by lots of giants of industry and startups. A few industry examples would be financial services, telecom, manufacturing, and healthcare. You can make data streaming seamless and real-time using Kafka.
+
+Please share with us in the comments your experiences using Kafka and related technologies, even including ML and model training streams.
