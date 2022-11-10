@@ -39,7 +39,7 @@ Start by opening up Visual Studio and creating a new Web Application (MVC) proje
 
 ![Visual Studio. A window is displayed called New Project. At the top is reads "Configure your new Web Application (Model-View-Controller)". There is a Target Framework dropdown with ".NET 6.0" selected and second Authentication dropdown with "No Authentication" selected. Under Advanced, the "Configure for HTTPS" checkbox is checked, and the "Do not use top-level statements" checkbox is unchecked.](/blog/2022/11/dotnet6-postgresql-and-linux/create-web-project-2.webp)
 
-On the final screen, go ahead and give your solution a name, and then click Create. Visual Studio should create a new solution for you, with a single web project. It will automatically create the necessary MVC folders, including, Controllers, Models, and Views.
+On the final screen, go ahead and give your solution a name, and then click Create. Visual Studio should create a new solution for you, with a single web project. It will automatically create the necessary MVC folders, including Controllers, Models, and Views.
 
 ### Setting up the database connection
 
@@ -357,7 +357,7 @@ sudo apt-get install nginx
 
 You can verify the installation by running `sudo nginx -v`, which should display the version. Finally, start Nginx using the command `sudo service nginx start`.
 
-Once Nginx is installed, you'll need to configure it to host the .NET Core application. Go ahead and create a new Nginx configuration file in `etc/nginx/conf.d`. In our case, we'll name it `dotnetsixdemo.conf`. Within this configuration file, we'll do a few things:
+Once Nginx is installed, you'll need to configure it to host the .NET Core application. Go ahead and create a new Nginx configuration file in `/etc/nginx/conf.d`. In our case, we'll name it `dotnetsixdemo.conf`. Within this configuration file, we'll do a few things:
 
 1. Redirect HTTP traffic to HTTPS.
 2. Use HTTPS with an SSL cert installed by Let's Encrypt [certbot](https://certbot.eff.org/).
@@ -435,7 +435,7 @@ Once you've copied the app to the server, you can start the app by navigating to
 
 This will run the app at `http://127.0.0.1:5000`, and it should now be accessible via the URL that you configured using Nginx. Based on the Nginx configuration provided above, that would be `https://dotnetsixdemo.org`. Go ahead and test your site in the browser to make sure it is accessible and the reverse proxy is working properly.
 
-### Using systemd to run the app as a services
+### Using systemd to run the app as a service
 
 As you might have noticed, there are a few problems with running the app directly using the `dotnet` command above. The app could easily stop running if the server encounters an issue, and the app is not monitorable. To fix this, let's use systemd to run and monitor the app process.
 
@@ -465,14 +465,16 @@ Note that the paths in `WorkingDirectory` and `ExecStart` should match where you
 
 Also, the `User` option specifies the user that manages the service and runs the process. In our example, this is the `dotnetsix` user. You'll want to create your own user, and importantly grant that user proper ownership of the application files.
 
-To finalize the new service, save the service file and then start the service with `sudo systemctl enable dot-net-six-demo.service`. This will run the app in the background via systemd.
+To finalize the new service, save the service file and then start the service with `sudo systemctl enable --now dot-net-six-demo.service`. This will run the app now in the background via systemd and ensure it also starts up after the next reboot.
 
 ### Viewing logs
 
-Since we are now running the app via systemd, we can use the `journalctl` to view logs. To view the logs for demo app, you would run the command `sudo journalctl -fu dot-net-six-demo.service`.
+Since we are now running the app via systemd, we can use the `journalctl` to view logs. To view the logs for the demo app, you would run the command `sudo journalctl -fu dot-net-six-demo.service`.
 
 ### Wrapping up
 
 That is all! We now have a .NET application running on our Linux server, hosted with Nginx via a reverse proxy, and connecting to a local PostgreSQL database. As we can see, there are several steps to take into account, but the process itself is not particularly complex.
 
-Have you had other problems working with .NET and Linux? Do you have any alternative solutions to the ones proposed here? We await your comment.
+See also my co-worker Kevin Campusano's blog post for [more tips on using .NET with PostgreSQL](/blog/2021/07/dotnet-5-web-api/).
+
+Have you had problems working with .NET and Linux? Do you have any alternative solutions to the ones proposed here? We await your comment.
