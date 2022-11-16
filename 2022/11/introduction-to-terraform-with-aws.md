@@ -3,7 +3,7 @@ author: "Jeffry Johar"
 title: "Introduction to Terraform with AWS"
 date: 2022-11-09
 featured:
-  image_url: /blog/2022/09/introduction-to-terraform-with-aws/portdickson.webp
+  image_url: /blog/2022/11/introduction-to-terraform-with-aws/portdickson.webp
 description: Terraform is a tool to enable infrastructure as code.
 github_issue_number: 1916
 tags:
@@ -13,12 +13,18 @@ tags:
 - sysadmin
 ---
 
-![Port Dickson, a Malaysian Beach. Rocks in the forground jut out into an inlet, across which is a line of red-roofed houses.](/blog/2022/09/introduction-to-terraform-with-aws/portdickson.webp)<br>
+![Port Dickson, a Malaysian Beach. Rocks in the forground jut out into an inlet, across which is a line of red-roofed houses.](/blog/2022/11/introduction-to-terraform-with-aws/portdickson.webp)<br>
 Photo by Jeffry Johar
 
-<!--- https://www.pexels.com/photo/malaysia-rocky-beach-hotel-by-the-beach-avilion-13550224/ --->
+<!-- https://www.pexels.com/photo/malaysia-rocky-beach-hotel-by-the-beach-avilion-13550224/ -->
 
-Terraform is a product from HashiCorp to enable infrastructure as code (IaC). This is a tool that enables users to define and manage the IT infrastructures in a source code form. Terraform is a declarative tool. It will ensure the desired state as defined by the user. Terraform comes with multiple plugins or providers which enable it to manage a wide variety of cloud providers and technologies such as but not limited to AWS, GCP, Azure, Kubernetes, Dockers and others. This blog will go over on how to use Terraform with AWS.
+Terraform is a tool from HashiCorp to enable infrastructure as code (IaC). With it users can define and manage IT infrastructure in source code form.
+
+Terraform is a declarative tool. It will ensure the desired state as defined by the user.
+
+Terraform comes with multiple plugins or providers which enable it to manage a wide variety of cloud providers and technologies such as but not limited to AWS, GCP, Azure, Kubernetes, Docker and others.
+
+This blog will go over how to use Terraform with AWS.
 
 ### Prerequisites
 
@@ -35,13 +41,13 @@ We need to set up the AWS CLI (command-line interface) for authentication and au
 Execute the following command to install the AWS CLI on macOS:
 
 ```plain
-$ curl -O "https://awscli.amazonaws.com/AWSCLIV2.pkg"
+$ curl -O https://awscli.amazonaws.com/AWSCLIV2.pkg
 $ sudo installer -pkg AWSCLIV2.pkg -target /
 ```
 
 For other OSes see [Amazon’s docs](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html).
 
-Execute the following command and enter the [AWS Account and Access Keys]( https://docs.aws.amazon.com/powershell/latest/userguide/pstools-appendix-sign-up.html):
+Execute the following command and enter the [AWS Account and Access Keys](https://docs.aws.amazon.com/powershell/latest/userguide/pstools-appendix-sign-up.html):
 
 ```plain
 $ aws configure
@@ -56,11 +62,13 @@ $ brew tap hashicorp/tap
 $ brew install hashicorp/tap/terraform
 ```
 
-For other OSes see [Terraform’s docs.](https://learn.hashicorp.com/tutorials/terraform/install-cli)
+For other OSes see [Terraform’s installation docs](https://learn.hashicorp.com/tutorials/terraform/install-cli).
 
 ### Create the Terraform configuration file
 
-Before we can create any Terraform configuration file for a project, we need to create a directory. This is because Terraform will pick up whatever configurations in the current directory and will store the state of the created infrastructure in a file in the directory. The name of the directory can be anything. For this tutorial we are going to name it `terraform-aws`. Create the directory and `cd` to it.
+Before we can create any Terraform configuration file for a project, we need to create a directory where Terraform will pick up any configuration in the current directory and will store the state of the created infrastructure in a file.
+
+The name of the directory can be anything. For this tutorial we are going to name it `terraform-aws`. Create the directory and `cd` to it:
 
 ```plain
 $ mkdir terraform-aws
@@ -70,7 +78,7 @@ $ cd terraform-aws
 Create the following file and name it `main.tf`. This is the main configuration file for our Terraform project. This configuration will provision an EC2 instance, install Amazon Linux 2 as the OS and install Nginx as the web server. The comments start with a hash `#`. They describe each section's function. For simplicity, the configuration is using the default VPC that comes with the selected AWS region.
 
 ```plain
-# Set AWS as the Cloud Provider
+# Set AWS as the cloud provider
 terraform {
   required_providers {
     aws = {
@@ -104,7 +112,7 @@ resource "aws_security_group" "ssh_http" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"] # make this your IP/IP Range
+    cidr_blocks = ["0.0.0.0/0"] # make this your IP address or range
   }
   ingress {
     from_port   = 80
@@ -121,7 +129,8 @@ resource "aws_security_group" "ssh_http" {
 }
 
 
-# AWS EC2 configuration. The user_data contains the script to install Nginx
+# AWS EC2 configuration
+# The user_data contains the script to install Nginx
 resource "aws_instance" "app_server" {
   ami           = "ami-0b89f7b3f054b957e"
   instance_type = "t2.micro"
@@ -172,7 +181,7 @@ $ terraform apply
 
 Sample output:
 
-![Terraform Apply output. Highlighted is a line reading "Enter a value:". "yes" has been entered as the answer. Also highlighted is a line under "Outputs:" reading "app_server_public_ip = "46.137.236.88".](/blog/2022/09/introduction-to-terraform-with-aws/blog08-01.webp)
+![Terraform Apply output. Highlighted is a line reading "Enter a value:". "yes" has been entered as the answer. Also highlighted is a line under "Outputs:" reading "app_server_public_ip = "46.137.236.88".](/blog/2022/11/introduction-to-terraform-with-aws/blog08-01.webp)
 
 ### Access the provisioned EC2 and Nginx
 
@@ -182,11 +191,14 @@ Use the `key_name` that is configured in `main.tf` and the generated public IP a
 $ ssh -i kaptenjeffry.pem ec2-user@46.137.236.88
 ```
 
-Use the generated public IP address in a web brower to access the Nginx service. Please ensure to use `http` protocol since the Nginx is running on port 80.
+Use the generated public IP address in a web browser to access the Nginx service. Please make sure to use `http` protocol since the Nginx is running on port 80.
 
-![The default Nginx page in a web browser. The top of the page reads "Welcome to nginx on Amazon Linux!"](/blog/2022/09/introduction-to-terraform-with-aws/blog08-02.webp)
-
+![The default Nginx page in a web browser. The top of the page reads "Welcome to nginx on Amazon Linux!"](/blog/2022/11/introduction-to-terraform-with-aws/blog08-02.webp)
 
 ### Conclusion
 
-That's all, folks. This is the bare minimum Terraform configuration to quickly deploy an EC2 instance at AWS. For more cool stuffs you can have a visit to the [Terraform main documentation for AWS](https://registry.terraform.io/providers/hashicorp/aws/latest/docs). Have a nice day :)
+That's all, folks. This is the bare minimum Terraform configuration to quickly deploy an EC2 instance at AWS.
+
+For more cool stuffs you can visit the [Terraform main documentation for AWS](https://registry.terraform.io/providers/hashicorp/aws/latest/docs).
+
+Have a nice day :)
