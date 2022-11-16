@@ -37,10 +37,10 @@ Because we work in the software development industry, it is important that not o
 * [Learn to Read the Source, Luke](https://blog.codinghorror.com/learn-to-read-the-source-luke/) by Jeff Atwood—​practical reasons free software and open source matter, and why actually using the source code matters
 * [What is free software?](https://www.gnu.org/philosophy/free-sw.html) by the Free Software Foundation and Richard Stallman
 * [The Open Source Definition](https://opensource.org/osd) by the Open Source Initiative
-* [Josh’s Rules (of Database Contracting)](https://www.toolbox.com/tech/data-management/blogs/joshs-rules-of-database-contracting-062707/) by Josh Berkus
+* [Josh’s Rules (of Database Contracting)](https://web.archive.org/web/20201030161227/https://www.toolbox.com/tech/data-management/blogs/joshs-rules-of-database-contracting-062707/) by Josh Berkus
 * [On excellence](/blog/2008/08/on-excellence/) by Ethan Rowe—​about ownership, taking responsibility for the problem at hand
 * [Conventions to know](/blog/2010/10/conventions/) by Jon Jensen—​little but important things that ease communication in our work
-* [Selling Without Being Salesy](https://thecleverconsultant.com/how-to-sell-consulting-services-without-being-salesy/) by Jason Parks
+* [Selling Without Being Salesy](https://web.archive.org/web/20180112070447/https://thecleverconsultant.com/how-to-sell-consulting-services-without-being-salesy/) by Jason Parks
 * [Five Whys](https://www.startuplessonslearned.com/2008/11/five-whys.html) by Eric Ries (covered in more depth in his book [The Lean Startup](http://theleanstartup.com/book))
 * [Software Is a Mess and I Feel Fine](https://alanstevens.us/post/130828292006/softwareisamess) by Alan Stevens
 * [Choose Boring Technology](http://boringtechnology.club/) by Dan McKinley
