@@ -7,7 +7,7 @@ date: 2022-11-17
 Photo by Jeffry Johar
 
 <!-- https://www.pexels.com/photo/thai-restaurant-14026238/ -->
-There are 3 ways to set environment variables for the container in the Kubernetes pod. They are the hard  coded way, Configmap and Secret. These methods exist to serve their purpose based on requirements and use cases. 
+There are 3 ways to set environment variables for the container in the Kubernetes pod. They are the hard  coded way, ConfigMaps and Secret. These methods exist to serve their purpose based on requirements and users use cases. 
 
 As for those who are taking the Certified Kubernetes Administrator exam,   you need to know all of these by heart. These skills fall under the domain of  workloads and scheduling which is 15% of the exam . Let go over how to create the environment variables based on these methods. 
 
@@ -61,8 +61,8 @@ Namespace:        default
 .
 ```
 
-### The Configmap
-Configmap  is a resource offered by Kubernetes to move away from the configuration portions of an application for its main container. We can use configmap to define our environment variables and use it in our pod manifest. Configmap can be created either by the imperative way or  the declarative way. The following are the 2 different ways of creating a configmap for holding  `PET01=cat` and `PET02=dog` variables.
+### The ConfigMaps
+ConfigMaps is a Kubernetes resource use to move away the configuration portions of an application for its main container. Thus it can be use to define environment variables and use them in pod's YAML. ConfigMaps can be created either by the imperative way or  the declarative way. The following are the 2 different ways of creating a ConfigMaps for holding  `PET01=cat` and `PET02=dog` variables.
 
 - The imperative
 ```plain
@@ -109,7 +109,7 @@ Events:  <none>
 ```
 
 - The usage of ConfigMaps in a Pod<br>
-After the creation of configmap, we need to create the Pod’s  YAML that will use the configmap. There are two ways to use the environment variables from the configmap. It is either to use all of the variables in the configmap or selectively choose which which environment variable to use
+After the creation of ConfigMaps, we need to create the Pod’s  YAML that will use the ConfigMaps. There are two ways to use the environment variables from the ConfigMaps. It is either to use all of the variables in the ConfigMaps or selectively choose which which environment variable to use
 
 
 1. To use all of the environment variables from the ConfigMaps<br>
@@ -144,7 +144,7 @@ Name:             nginx-cm01
 .
 ```
 
-2. To selectively use the environment variables from the configmap. In this example we are selecting both PET01 and PET02.<br> 
+2. To selectively use the environment variables from the ConfigMaps. In this example we are selecting both PET01 and PET02.<br> 
 `nginx-cm02.yaml`
 ```yaml
 apiVersion: v1
@@ -187,7 +187,7 @@ Name:             nginx-cm02
 ```
 
 ### The Secrets
-The secrets are just like configmaps except their values are hidden when you describe them. Please take note that the values in secret are not encrypted but rather they are just encoded with base64. Anybody with cluster admin privileges can get the values and decode them. The following are the 2 different ways of creating secrets for holding  PET01=cat and PET02=dog variables.
+The Secrets are just like ConfigMapss except their values are hidden when you describe them. Please take note that the values in Secrets are not encrypted but rather they are just encoded with base64. Anybody with cluster admin privileges can get the values and decode them. The following are the 2 different ways of creating Secrets for holding  PET01=cat and PET02=dog variables.
 
 - The imperative
 ```plain
@@ -237,7 +237,7 @@ PET01:  3 bytes
 ```
 
 
-Just like configmap, we can use all of the environment variables  or selectively choose the desired  variables. 
+Just like ConfigMaps, we can use all of the environment variables  or selectively choose the desired  variables. 
 
 1. To use all of the environment variables from the Secrets<br>
 `nginx-s01.yaml`
@@ -272,7 +272,7 @@ Name:             nginx-s01
 .
 ```
 
-2. To selectively use the environment variables from the secrets
+2. To selectively use the environment variables from the Secrets
 `nginx-s02.yaml`
 ```yaml
 apiVersion: v1
