@@ -398,7 +398,7 @@ To demonstrate how to write component tests using cypress we are going to write 
 Here we are going to assert the following;
 
 1. Text input is rendered with `placeholder` text "Add a new todo"
-2. When 'add' button is clicked 'newTodo' event is emitted with payload containing text that was type in the text input
+2. When 'add' button is clicked 'newTodo' event is emitted with payload containing text that was typed in the text input
 
 First create a spec `src/components/BaseTextInput.cy.js` and add the following code:
 
