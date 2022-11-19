@@ -434,6 +434,7 @@ describe('<BaseTextInput />', () => {
 ```
 
 To run the test, launch cypress using `cypress:open`. this time select "component testing", then click on `BaseTextInput.cy.js`  to run tests.
+
 ![Screenshot displaying BaseTextInput component tests that have run successfuly](/blog/2022/11/how-to-use-cypress-for-ui-testing/base-text-input-tests.png)
 
 
