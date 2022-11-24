@@ -1,6 +1,6 @@
 ---
 author: "Bharathi Ponnusamy"
-date: 2022-11-07
+date: 2022-11-23
 title: "ssh-askpass on macOS for SSH agent confirmation"
 github_issue_number: 1915
 tags:
@@ -16,21 +16,23 @@ At End Point Dev we mostly use SSH keys for authentication when connecting to re
 
 Enabling SSH agent forwarding makes it easier to reuse SSH private keys. It keeps the private keys on our local machine and uses them to authenticate with each server in the chain without entering a password.
 
-However, this approach comes with an inherent risk of the agent being hijacked. This means a bad guy could use the SSH keys to compromise downstream servers.
+However, this approach comes with an inherent risk of the agent being hijacked if one of the servers is compromised. This means a bad guy could use the SSH keys to compromise downstream servers.
 
-In this post, we’ll cover a simple way to protect against SSH agent hijacking. Also, we will see in detail how to configure a system-wide agent that runs under GUI for agent confirmation using ssh-askpass.
+In this post, we’ll cover a simple way to protect against SSH agent hijacking. We will see in detail on macOS how to configure a system-wide agent using ssh-askpass to pop up a graphical window to ask for confirmation before using the agent.
 
-### ssh-askpass: agent confirmation
+### How it works
 
 ![Agent confirmation dialog reading "Allow us of key /Users/(blank)/.ssh/id_rsa? Key fingerprint (blank) (blank). The cancel button is highlighted.](/blog/2022/11/ssh-askpass-on-mac-os-for-agent-confirmation/ssh-askpass.webp)
 
 It is strongly recommended to use the `-c` option on the `ssh-add` command when adding your SSH keys to the agent in order to protect yourself against SSH agent hijacking.
 
-Agent forwarding has some inherent risk, but this risk may be significantly reduced by using this `-c` option.
+With this, every time a request is made to utilize the private key stored in the SSH agent, ssh-askpass will display a prompt on your local computer asking you to approve the usage of the key. By doing this,  it becomes more difficult for a remote attacker to use the private key without authorization.
 
-Every time a request is made to utilize the private key stored in the SSH agent, ssh-askpass will display a prompt on your local computer asking you to approve the usage of the key. By doing this,  it becomes more difficult for a remote attacker to use the private key without authorization.
+If you don't want to use the ssh-askpass agent confirmation, I recommend using the OpenSSH feature ProxyJump rather than agent forwarding to get an equivalent level of security.
 
-It is recommended to utilise ProxyJump rather than agent forwarding if you don't want to use the ssh-askpass agent confirmation.
+### Installing ssh-askpass on macOS
+
+So let's set this up. The recommended way is with Homebrew:
 
 #### Install ssh-askpass with Homebrew
 
@@ -41,23 +43,7 @@ $ brew install ssh-askpass
 
 You might see some warnings. Go ahead and proceed with them.
 
-#### Install ssh-askpass with MacPorts
-
-```plain
-$ sudo port install ssh-askpass
-```
-
-#### Install ssh-askpass from Source Code
-
-```plain
-$ cp ssh-askpass /usr/local/bin/
-$ cp ssh-askpass.plist ~/Library/LaunchAgents/
-$ launchctl load -w ~/Library/LaunchAgents/ssh-askpass.plist
-```
-
-### Start the Homebrew Services
-
-Note that it’s a brew service, not just a regular daemon service.
+Now we need to start the Homebrew services. Note that this is a brew service, not a regular macOS daemon service.
 
 ```plain
 $ brew services start theseal/ssh-askpass/ssh-askpass
@@ -73,9 +59,27 @@ $ brew services list | grep ssh-askpass
 ssh-askpass started ~/Library/LaunchAgents/homebrew.mxcl.ssh-askpass.plist
 ```
 
-### Configure the SSH agent with the `-c` option
+#### Install ssh-askpass with MacPorts
 
-* Let's first verify that the agent is running, then add the private key with the `-c` option.
+If you prefer MacPorts, do:
+
+```plain
+$ sudo port install ssh-askpass
+```
+
+#### Install ssh-askpass from source code
+
+And of course you can install from source if you wish:
+
+```plain
+$ cp ssh-askpass /usr/local/bin/
+$ cp ssh-askpass.plist ~/Library/LaunchAgents/
+$ launchctl load -w ~/Library/LaunchAgents/ssh-askpass.plist
+```
+
+### Configure the SSH agent with the `ssh-add -c` option
+
+* Let's first verify that the agent is running, then add the private key with the confirmation option:
 
     ```plain
     $ ssh-add -l
@@ -86,25 +90,26 @@ ssh-askpass started ~/Library/LaunchAgents/homebrew.mxcl.ssh-askpass.plist
     The user must confirm each use of the key
     ```
 
-* The Identity will get added if you provide the correct passphrase for the key. This can be confirmed by listing the keys again.
+* The Identity will get added if you provide the correct passphrase for the key. This can be confirmed by listing the keys again with `ssh-add -l`.
 
 ### ssh-askpass agent confirmation
 
-* Let's log into a remote server.
-* You will be prompted to confirm the private key’s usage with the pop-up window.
+Now let's log into a remote server.
 
-    ![Agent confirmation dialog. Identical to the previous dialog.](/blog/2022/11/ssh-askpass-on-mac-os-for-agent-confirmation/ssh-askpass.webp)
+You will be prompted to confirm the private key’s usage with the pop-up window:
+
+![Agent confirmation dialog. Identical to the previous dialog.](/blog/2022/11/ssh-askpass-on-mac-os-for-agent-confirmation/ssh-askpass.webp)
 
 ### Set up keyboard shortcuts
 
-Since it's too easy to hit the spacebar and accept a connection, ssh-askpass defaults to the cancel option, and we can use the keyboard shortcuts to press `OK` by following the below steps.
+Since it's too easy to hit the spacebar and accept a connection, ssh-askpass defaults to the cancel option. We can use keyboard shortcuts to press "OK" by following the below steps.
 
-* Go to `System Preferences` and then `Keyboard`.
+* Go to "System Preferences" and then "Keyboard".
 
-#### 10.15+
+#### 10.15–12
 
-* Go to `Shortcuts` tab
-* check the option ` Use keyboard navigation to move focus between controls`.
+* Go to "Shortcuts" tab
+* check the option "Use keyboard navigation to move focus between controls".
 
     ![macOS 10.15+ settings open to the Keyboard section. First highlighted is the "Shortcuts" tab, and second is a checkbox at the bottom of the window reading "Use keyboard navigation to move focus between controls."](/blog/2022/11/ssh-askpass-on-mac-os-for-agent-confirmation/keyboard_shortcuts.webp)
 
@@ -114,6 +119,6 @@ Since it's too easy to hit the spacebar and accept a connection, ssh-askpass def
 
     ![macOS 13.0 settings open to the keyboard tab, with a slider button reading "Keyboard navigation" highlighted.](/blog/2022/11/ssh-askpass-on-mac-os-for-agent-confirmation/keyboard_shortcuts_on_ventura.webp)
 
-Now you can press tab ⇥ and then the spacebar to press `OK`.
+Now you can press tab ⇥ and then the spacebar to select "OK".
 
 Enjoy!
