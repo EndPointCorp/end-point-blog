@@ -106,14 +106,14 @@ Since it's too easy to hit the spacebar and accept a connection, ssh-askpass def
 
 * Go to "System Preferences" and then "Keyboard".
 
-#### 10.15–12
+#### macOS 10.15 Catalina, 11 Big Sur, 12 Monterey
 
 * Go to "Shortcuts" tab
 * check the option "Use keyboard navigation to move focus between controls".
 
     ![macOS 10.15+ settings open to the Keyboard section. First highlighted is the "Shortcuts" tab, and second is a checkbox at the bottom of the window reading "Use keyboard navigation to move focus between controls."](/blog/2022/11/ssh-askpass-on-mac-os-for-agent-confirmation/keyboard_shortcuts.webp)
 
-#### 13.0 Ventura
+#### macOS 13 Ventura
 
 * Turn on the "Keyboard navigation" option.
 
