@@ -80,7 +80,7 @@ When Cypress opens up you should be able to view the cypress launch pad as shown
 ![Screenshot of Cypress launcher window displaying testing options ](/blog/2022/11/how-to-use-cypress-for-ui-testing/cypress-launcher.png)
 
 
-Use the Launch pad to configure both E2E Testing and Component Testing. if you get stuck please visit this [link here](https://docs.cypress.io/guides/getting-started/opening-the-app#The-Launchpad) to cypress official docs on how to configure cypress. 
+Use the Launch pad to configure both E2E Testing and Component Testing, note that cypress will automatically generate configuration files as you configure the tests in the Launch pad. if you get stuck please visit this [link here](https://docs.cypress.io/guides/getting-started/opening-the-app#The-Launchpad) to cypress official docs on how to configure cypress. 
 
 
 
