@@ -6,6 +6,8 @@ tags:
 - Vue
 - JavaScript
 - Vue Test Utils
+- Mocha
+- Chai
 date: 2022-11-18
 featured:
   endpoint: true
