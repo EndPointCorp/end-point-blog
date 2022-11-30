@@ -9,7 +9,8 @@ tags:
 ---
 
 ![A chemist in complete PPE holds two test tubes holding green liquid.](/blog/2022/11/ab-testing/chemist.webp)<br>
-[Photo](https://www.pexels.com/photo/chemist-in-complete-ppe-holding-test-tubes-9243513/) by Mikhail Nilov
+Photo by Mikhail Nilov
+<!-- https://www.pexels.com/photo/chemist-in-complete-ppe-holding-test-tubes-9243513/ -->
 
 In statistics, A/B testing is "an experiment with two groups to establish which of two treatments, products, procedures, or the like is superior. Often one of the two treatments is the standard existing treatment, or no treatment" (Bruce 2020, 88).
 
@@ -26,7 +27,7 @@ Then we'll apply the A/B test on the dataset.
 
 ### Purpose
 
-The new and existing versions of our web page can show different performance in terms of marketing and visitor attention. By applying A/B tests we can understand which of the two web pages has better performance. We can also find out if any difference in performance is due to chance or due to a design change.
+The new and existing versions of our web page can show different performance in terms of marketing, visitor attention, and "conversion" to a particular goal. By applying A/B tests we can understand which of the two web pages has better performance. We can also find out if any difference in performance is due to chance or due to a design change.
 
 ### Example
 
@@ -44,19 +45,19 @@ Non-conversion visits: 9823
 
 The data to be sampled can vary. A very simple dataset could be a list of numeric results of observations: spent time on a control and a treatment web page, the weight of patients with and without treatments, etc. The permutation sampling of these results would be simply picking the values from the combined list of both groups.
 
-In our conversion example the nature of the groups is similar but the values are slightly different, as they store two states: conversion and not conversion. However, we can still use a simple statistic like `mean` to make our permutation test calculation.
+In our conversion example the nature of the groups is similar but the values are slightly different, as they store two states: conversion and not conversion. However, we can still use a simple statistic like the mean to make our permutation test calculation.
 
 ### Null hypothesis
 
-Let's build our null hypothesis around our experiment. In this example the null hypothesis would be `conversion rate of A ≥ conversion rate of B`. So, the alternative hypothesis would be `conversion rate of B > conversion rate of A`.
+Let's build our null hypothesis around our experiment. In this example the null hypothesis would be "conversion rate of A ≥ conversion rate of B". So, the alternative hypothesis would be "conversion rate of B > conversion rate of A".
 
 In a significance test we usually aim to answer the question of whether we will reject the null hypothesis or fail to reject the null hypothesis.
 
 ### Data preprocessing and clean-up
 
-Since the conversion/not conversion results are just yes/no (or binary) results we might prefer to store them as values of 1 or 0.
+Since the conversion/not conversion results are just yes/no (binary) results we might prefer to store them as values of 1 or 0.
 
-we will use Python with the `pandas` library to import conversion samples for Pages A and B as a pandas Series:
+We will use Python with the `pandas` library to import conversion samples for Pages A and B as a pandas Series:
 
 ```python
 import pandas as pd
@@ -72,7 +73,7 @@ conversion = pd.Series(conversion)
 
 To determine if the difference between the control and treatment groups is due to chance or not we can use [permutation testing](https://en.wikipedia.org/wiki/Permutation_test).
 
-Permutation sampling is performed using the following steps, as listed in Practical Statistics (see References):
+Permutation sampling is performed using the following steps, as listed in Practical Statistics (see the Reference section at the end):
 
 1. Combine the results from the different groups into a single data set.
 2. Shuffle the combined data and then randomly draw (without replacement) a resample of the same size as group A (which will contain some data from multiple groups).
@@ -134,8 +135,8 @@ This results in `0.4204` for our data. Then we compare `p_value` with an alpha v
 
 ### Conclusion
 
-The results of a significance tests do not explicitly accept the null hypothesis, but rather help to understand if the treatments are affecting the results of the experiments or the results are most likely due to chance. A/B (or in some cases more groups, like C/D/E..) experiments are helpful to understand whether the treatment or chance is most likely to blame for the results, as well as finding which group performs the best.
+The results of a significance test do not explicitly accept the null hypothesis, but rather help to understand if the treatments are affecting the results of the experiments or the results are most likely due to chance. A/B (or in some cases more groups, like C/D/E...) experiments are helpful to understand whether the treatment or chance is most likely the cause of the results, as well as finding which group performs the best.
 
-### References
+### Reference
 
-Bruce, Peter, Andrew Bruce, and Peter Gedeck. Practical Statistics for Data Scientists, 2nd Edition. O'Reilly Media, Inc., 2020.
+Bruce, Peter, Andrew Bruce, and Peter Gedeck. <em>Practical Statistics for Data Scientists</em>, 2nd Edition. O'Reilly Media, Inc., 2020.
