@@ -3,7 +3,7 @@ author: Jon Jensen
 title: 'Web developer in GIS, mapping, Cesium, JavaScript job opening'
 github_issue_number: 1830
 tags:
-- jobs
+- jobs-closed
 - gis
 - javascript
 - remote-work
@@ -51,7 +51,10 @@ Even prior to the pandemic most of us worked remotely from our home offices. We 
 
 ### Get in touch with us:
 
-Please email us an introduction to jobs@endpointdev.com to apply. Include your location, a resume/​CV, your LinkedIn or other profile URLs, and whatever else may help us get to know you.
+~~Please email us an introduction to jobs@endpointdev.com to apply.~~
+**(This job has been filled.)**
+
+Include your location, a resume/​CV, your LinkedIn or other profile URLs, and whatever else may help us get to know you.
 
 We look forward to hearing from you! Note that this role is not for agencies or subcontractors—direct work seekers only.
 

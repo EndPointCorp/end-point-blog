@@ -13,32 +13,32 @@ After wrapping up a report yesterday, I wondered if the external link data that 
 
 So, I investigated some data of well known and less well known sites to display a spectrum of external link and PageRank data. Here is the origin of some of the less well known domains referenced in the data below:
 
-- www.petfinder.com: This is where my dogs came from.
-- www.endpoint.com: That’s Us!
-- www.sonypictures.com/movies/district9/: The site for the movie District 9 — I saw it last weekend.
+- www\.petfinder.com: This is where my dogs came from.
+- www\.endpoint.com: That’s Us!
+- www\.sonypictures.com/movies/district9/: The site for the movie District 9 — I saw it last weekend.
 - marketstreetgrill.com: Market Street Grill is a great seafood restaurant in Salt Lake City.
 - divascupcakes.com: This is a great gourmet cupcake place in Salt Lake City.
 - rediguana.com: A great Mexican food restaurant in Salt Lake City.
 
 And here is the data:
 
-<a href="https://2.bp.blogspot.com/_wWmWqyCEKEs/SrFgLy3Hi4I/AAAAAAAAB1E/2UUhZMBFsMI/s1600-h/chart.png" onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5382188785432234882" src="/blog/2009/09/seo-external-links-and-pagerank/image-0.png" style="display:block; margin:0px auto 10px; text-align:center;cursor:pointer; cursor:hand;width: 400px; height: 121px;"/></a>
+<img border="0" src="/blog/2009/09/seo-external-links-and-pagerank/image-0.png" style="display:block; margin:0px auto 10px; text-align:center; width: 400px; height: 121px;"/>
 
-I retrieved the PageRank from a generic PageRank tool. [SEOmoz](http://www.moz.org/) was used to collect external link counts and external linking subdomains. Finally, [Yahoo Site Explorer](http://siteexplorer.search.yahoo.com/) was used to retrieve external link counts to the domain in question. I chose to examine both external link counts from SEOmoz and Yahoo Site Explorer to get a better representation of data. SEOmoz compiles their data about once a month and does not have as many urls indexed as Yahoo, which explains why their numbers may be lagging behind the Yahoo Site Explorer external link counts.
+I retrieved the PageRank from a generic PageRank tool. [SEOmoz](http://www.moz.org/) was used to collect external link counts and external linking subdomains. Finally, Yahoo Site Explorer was used to retrieve external link counts to the domain in question. I chose to examine both external link counts from SEOmoz and Yahoo Site Explorer to get a better representation of data. SEOmoz compiles their data about once a month and does not have as many urls indexed as Yahoo, which explains why their numbers may be lagging behind the Yahoo Site Explorer external link counts.
 
 Out of curiosity, I went on to plot the Page Rank data vs. Log (base 10) of the other data.
 
-PageRank vs. Log of SEOmoz external link count
+PageRank vs. Log of SEOmoz external link count:
 
-<a href="https://4.bp.blogspot.com/_wWmWqyCEKEs/SrFgM8LJsOI/AAAAAAAAB1U/09_gCPm13Kk/s1600-h/seomoz_externallinkingsubdomains.png" onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5382188805112049890" src="/blog/2009/09/seo-external-links-and-pagerank/image-1.png" style="display:block; margin:0px auto 10px; text-align:center;cursor:pointer; cursor:hand;width: 400px; height: 275px;"/></a>
+<img border="0" src="/blog/2009/09/seo-external-links-and-pagerank/image-1.png" style="display:block; margin:0px auto 10px; text-align:center; width: 400px; height: 275px;"/>
 
-PageRank vs. Log of SEOmoz external linking subdomain count
+PageRank vs. Log of SEOmoz external linking subdomain count:
 
-<a href="https://2.bp.blogspot.com/_wWmWqyCEKEs/SrFgMVgRncI/AAAAAAAAB1M/LzADTZuMNGA/s1600-h/seomoz_externallinks.png" onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5382188794731666882" src="/blog/2009/09/seo-external-links-and-pagerank/image-2.png" style="display:block; margin:0px auto 10px; text-align:center;cursor:pointer; cursor:hand;width: 400px; height: 272px;"/></a>
+<img border="0" src="/blog/2009/09/seo-external-links-and-pagerank/image-2.png" style="display:block; margin:0px auto 10px; text-align:center; width: 400px; height: 272px;"/>
 
-PageRank vs. Log of Yahoo SiteExplorer external link count
+PageRank vs. Log of Yahoo SiteExplorer external link count:
 
-<a href="https://3.bp.blogspot.com/_wWmWqyCEKEs/SrFgNPyv1aI/AAAAAAAAB1c/wpTS8GWWxH4/s1600-h/yahoo_externallinks.png" onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5382188810378401186" src="/blog/2009/09/seo-external-links-and-pagerank/image-3.png" style="display:block; margin:0px auto 10px; text-align:center;cursor:pointer; cursor:hand;width: 400px; height: 275px;"/></a>
+<img border="0" src="/blog/2009/09/seo-external-links-and-pagerank/image-3.png" style="display:block; margin:0px auto 10px; text-align:center; width: 400px; height: 275px;"/>
 
 PageRank is described as a theoretical probability value on a logarithmic scale and it’s based on inbound links, PageRank of inbound links, and other factors such as Google visit data, search click-through rates, etc. The true popularity rank is a rank between 1 and X, where X is equal to the total number of webpages crawled by search engine A. After pages are individually ranked between 1 and X, they are scaled logarithmically between 0 and 10.
 

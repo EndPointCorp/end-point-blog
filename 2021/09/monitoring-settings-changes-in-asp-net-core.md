@@ -6,6 +6,7 @@ github_issue_number: 1771
 tags:
 - monitoring
 - dotnet
+- aspdotnet
 ---
 
 ![Ripples in water](/blog/2021/09/monitoring-settings-changes-in-asp-net-core/ripples.jpg)  

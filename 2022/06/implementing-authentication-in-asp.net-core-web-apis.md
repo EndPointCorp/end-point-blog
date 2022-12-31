@@ -7,6 +7,7 @@ tags:
 - authentication
 - security
 - dotnet
+- aspdotnet
 ---
 
 ![Several buildings with a lightly cloudy blue sky](/blog/2022/06/implementing-authentication-in-asp.net-core-web-apis/stockholm-buildings.webp)

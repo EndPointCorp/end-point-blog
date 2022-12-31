@@ -4,6 +4,7 @@ title: What’s the deal with ASP.NET Core Razor Pages?
 github_issue_number: 1473
 tags:
 - dotnet
+- aspdotnet
 date: 2018-11-20
 ---
 

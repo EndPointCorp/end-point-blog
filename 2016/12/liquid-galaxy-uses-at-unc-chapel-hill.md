@@ -6,6 +6,7 @@ featured:
   visionport: true
   image_url: /blog/2016/12/liquid-galaxy-uses-at-unc-chapel-hill/image-0-big.jpeg
 tags:
+- education
 - visionport
 - clients
 date: 2016-12-29
