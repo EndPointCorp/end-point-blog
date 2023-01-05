@@ -12,7 +12,7 @@ tags:
 ## Updating Rails
 Updating your app to the latest version is an important part of the development process. It may seem like a waste to invest time and money into it, but it can bring as much value as a new feature.
 
-One good thing about using a framework like Rails is that security features are baked in. This saves development time as the devloper doesn't have to re-create the wheel for logins, permissions, authentication, etc. There are many users of the framework who work together to can catch and patch vulnerabilies. Unfortunately this means if your app hasn't been updated in becomes more obvious what its weaknesses are. A black hat developer even has access to a [list of previous Rails version vulnerabilies.](https://www.cvedetails.com/vulnerability-list/vendor_id-12043/product_id-22569/Rubyonrails-Rails.html)
+One good thing about using a framework like Rails is that security features are baked in. This saves development time as the devloper doesn't have to re-create the wheel for logins, permissions, authentication, etc. There are many users of the framework who work together to can catch and patch vulnerabilities. Unfortunately this means if your app hasn't been updated in becomes more obvious what its weaknesses are. A black hat developer even has access to a [list of previous Rails version vulnerabilities.](https://www.cvedetails.com/vulnerability-list/vendor_id-12043/product_id-22569/Rubyonrails-Rails.html)
 
 Have you ever been to a [website that hasn't been updated for a while](https://www.spacejam.com/) and found that everything moves slower than your used to? As technology improves and functions are optimized application processing time can be reduces. Most releases come with a performance update that can keep help your application keep up with the best of them.
 
@@ -39,7 +39,7 @@ After changing the Rails and Ruby version in the `Gemfile`, run `bundle update r
 
 ![Bundle Error](/blog/2022/12/updating-rails/bundle-error.png)
 
-Some Gems won't be happy with the Rails update and will also need to be updated. Once this is done run `bundle update rails` again. If there are more errors fix them. If it's successfull `bundle install` can then be run. This will ensure all the gems are properly installed.
+Some Gems won't be happy with the Rails update and will also need to be updated. Once this is done run `bundle update rails` again. If there are more errors, fix them. If it's successful `bundle install` can then be run. This will ensure all the gems are properly installed.
 
 Also make sure to start up your server and verify there's no problems there.
 
