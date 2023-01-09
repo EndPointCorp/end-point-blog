@@ -25,7 +25,7 @@ In this article, we're going to walk through doing just that. Let's get started.
 
 ## Setting up a new Rails project
 
-If you want to work along with me, and you like [Docker](https://www.docker.com/) and [VS Code](https://code.visualstudio.com/), take a look at [this blog post](https://www.endpointdev.com/blog/2022/12/setting-up-a-dev-container-for-rails-development-with-vs-code/) to learn how to set up a containerized development environment for Ruby on Rails with minimal effort.
+If you want to work along with me, and you like [Docker](https://www.docker.com/) and [VS Code](https://code.visualstudio.com/), take a look at [this blog post](https://www.endpointdev.com/blog/2023/01/developing-rails-apps-in-a-dev-container-with-vs-code/) to learn how to set up a containerized development environment for Ruby on Rails with minimal effort.
 
 If not, you can follow [the official docs](https://www.ruby-lang.org/en/documentation/installation/) for installing Ruby.
 
