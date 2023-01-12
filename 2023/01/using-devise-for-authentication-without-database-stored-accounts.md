@@ -69,7 +69,7 @@ That will create a new `PagesController` with a `home` action and its correspond
 
 Next, in the `config/routes.rb` file, replace the `get 'pages/home'` line created by the previous command with `root "pages#home"`.
 
-Also, like I said at the beginning, we won't use a database for storing accounts or validating credentials. So, we can comment out this line on the Devise initilizer at `config/initializers/devise.rb`:
+Also, like I said at the beginning, we won't use a database for storing accounts or validating credentials. So, we can comment out this line on the Devise initializer at `config/initializers/devise.rb`:
 
 ```ruby
 Devise.setup do |config|
