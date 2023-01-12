@@ -119,4 +119,4 @@ Open a browser and navigate to [http://127.0.0.1:3000/](http://127.0.0.1:3000/)`
 
 ![Hello Rails](developing-rails-apps-in-a-dev-container-with-vs-code/hello-rails.png)
 
-And that's all! I use Ruby on Rails on a daily basis, so that's what I've chosen to demonstrate here. However, there are many more options of programming languages and technologies when it comes to Dev Containers. All of them share very similar setup processes. And even if there isn't a image optimized for development readily available in the Microsoft Artifact Registry, you can always author your own custom Dockerfile and use that for whatever use case you may have.
+And that's all! I use Ruby on Rails on a daily basis, so that's what I've chosen to demonstrate here. However, there are many more options of programming languages and technologies when it comes to Dev Containers. All of them share very similar setup processes. And even if there isn't an image optimized for development readily available in the Microsoft Artifact Registry, you can always author your own custom Dockerfile and use that for whatever use case you may have.
