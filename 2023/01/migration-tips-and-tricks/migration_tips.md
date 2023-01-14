@@ -62,27 +62,28 @@ have a plan you're following.
 
 **Design the migration as a sequence of processes**. That is, first you might
 import one type of record, next another type of record that depends on the
-previous one, followed by several further steps importing a third source, clean
-it, map values from the legacy system to the new system, validate the results,
-and create records in the destination database. Of course the steps will vary
-from project to project, but the point is your migration will probably include
-several steps which need to be run in a specific order, so plan your
-development conventions accordingly. At End Point, we often like to **put each
-step in a SQL file, and name each file beginning with a number**, so you can
-run each script in order sorted by filename, and achieve the right result. We
-might have files called `01_import_products.sql`, `02_import_customers.sql`,
-and `03_import_order_history.sql`.
+previous one, followed by several further steps to import data from a third
+source, clean it, map values from the legacy system to the new system, validate
+the results, and create records in the destination database. Of course the
+steps will vary from project to project, but the point is your migration will
+probably include several steps which need to be run in a specific order, so
+plan your development conventions accordingly. At End Point, we often like to
+**put each step in a SQL file, and name each file beginning with a number**, so
+you can run each script in order sorted by filename, and achieve the correct
+result. We might have files called `01_import_products.sql`,
+`02_import_customers.sql`, and `03_import_order_history.sql`.
 
 It's also common to implement each step one at a time, and to need to run each
 step several times as it's being developed. We find it very helpful to **wrap
 each step in a transaction**. Often that means each SQL file begins with a
-`BEGIN;` statement, and ends with `COMMIT;`.  Often I'll leave out the `COMMIT`
+`BEGIN;` statement, and ends with `COMMIT;`. Often I'll leave out the `COMMIT`
 until I'm finished working on a file. That way to work on the code I can open a
-database session and run the migration script I'm working on, and it will leave
-me inside the open transaction where I can inspect the results of my work. I
-make changes to the script, roll back the transaction, and run the script
-again, for as many iterations as it takes. I only add a `COMMIT` when I've
-tested the rest of the file and think it's ready for the next step in testing.
+database session and run the migration script I'm working on, and when it
+completes, it will leave me inside the open transaction where I can inspect the
+results of my work. I make changes to the script, roll back the transaction,
+and run the script again, for as many iterations as it takes. I only add a
+`COMMIT` when I've tested the whole file and think it's ready for the next step
+in testing.
 
 I mentioned above that the customer may want to use this opportunity to clean
 their data. You should want this, too. **Make sure the data you're feeding your
@@ -99,18 +100,19 @@ constraint, or a foreign key, thanks to a migration I was working on.
 I wish I could truthfully claim all our migrations go off flawlessly, but that
 would be a lie. It's not unheard of to run into some corner case, a few weeks
 or even months after the migration goes live, which wasn't migrated correctly.
-It's certainly not uncommon for a customer or coworker to question some aspect
-of the migration that turns out to have been done correctly. In either case,
-it's important to **preserve a history of the migration** to investigate these
-concerns. We accomplish this with a few specific steps:
+It's certainly not uncommon for a customer or coworker to spot something that
+strikes them as odd, after the migration goes live, only find later that
+everything was in fact correct. In either case, it's important to **preserve a
+history of the migration** to investigate these concerns. We accomplish this
+with a few specific steps:
 
 * **Create a database schema for the migration, and a table within that schema for each data file, or object type we're importing.** I call these tables "staging tables", where the incoming data is "staged" as it's cleaned and validated. Having a separate schema means these tables can remain in the production database long after the migration is complete, generally without interfering with anything.
-* These staging tables should generally **use text fields, to be as forgiving as possible with the incoming data.** We can clean and reformat the data after it's imported.
-* **Don't change the data in these staging tables; add to the data instead.** In other words, if you need to map a value from the legacy system to a different value for your new system, don't change the value imported into the staging table; instead, add a new column to the staging table where you'll store the re-mapped value. If you need to parse a text field into a date (because you followed the instruction to use text fields!), don't change the type of an imported column; instead, add a new column of a date or timestamp type, to store the parsed value. That way, when three months down the road someone discovers that some of the imported records have weird dates, you have all the information you need to determine whether the fault lies with the imported data or some step of the migration progress, and you're that much more empowered to fix it.
-* **Keep track of your migrated records' primary keys, in the legacy system and the new system.** Imagine you're importing a list of customers. You receive a data file from your customer containing the customer information from their legacy system, including whatever primary key that system uses to track the customers. You import this data into one of these "staging" tables, and you intend to turn it into customer records in your new system. Let's say your customer table identifies its records with an integer sequence. You should add a column to the staging table for this new primary key value, populate it with new primary keys, and use those primary keys when creating customer records in your new system. That gives you several important abilities:
-** You can always connect a customer in the legacy system with one in the new system. When you're importing the order data later, and each order points to a customer using a legacy customer primary key, you can easily find the correct primary key to use in your system.
-** You can easily know if a record in your system comes from the migration, or from normal day-to-day business. You probably use this every time you're trying to debug something with your migration.
-** If you need to remove all imported customer records and re-import them, you can identify exactly which records those are. This should be only rarely needed.
+* These staging tables should generally **use text fields, to be as forgiving and flexible as possible with the incoming data.** We can clean, parse, and reformat the data after it's imported.
+* **Don't change the data in these staging tables; add to the data instead.** In other words, if you need to map a value from the legacy system to a different value for your new system, don't change the column you imported into the staging table; instead, add a new column to the staging table where you'll store the re-mapped value. If you need to parse a text field into a date (because you followed the instruction to use text fields!), don't change the type of an imported column; instead, add a new column of date or timestamp type, to store the parsed value. That way, when three months down the road someone discovers that some of the imported records have weird dates, you have all the information you need to determine whether the fault lies with the imported data or some step of the migration progress. Knowing exactly where the fault crept in leaves you that much more empowered to fix it.
+* **Keep track of your migrated records' primary keys, in the legacy system and the new system.** Imagine you've just imported your client's legacy customer list into a staging table. This data includes the legacy system's primary key. Add a new column to the table for your new system's primary key, and populate it. Many of our systems use an integer sequence as a primary key, so we'd add a new integer column to the staging table, and fill it with the next values from the sequence. Following this principle will give you several important abilities:
+** You can always connect a record in the legacy system with its corresponding record(s) in the new system. If you've imported a customer list in this fashion, then when you're importing the order data later, and each order points to a customer using a legacy customer primary key, you can easily find the correct customer primary key to use in your system.
+** You can easily know if a record in your system comes from the migration, or from normal day-to-day business. You will probably use this every time you try to debug something with your migration.
+** If you need to remove all imported records and re-import them, you can identify exactly which records those are. This should be only rarely needed.
 
 Finally, **document the decision making process, in comments directly in your
 code.** For instance, if you have a table of mappings from one value to
@@ -120,18 +122,19 @@ someone's going to question it later on. It's helpful to keep a comment around,
 something like, `# Joe Rogers verified this is the correct mapping in the
 daily standup meeting, 23 Nov 2022`. This is especially common if you
 eventually decide to ignore a certain class of records. `/* Rebecca says ignore
-all records with type = "ARCHIVED", via email to me 9 Jan 2023 */` is a very
+all records with type = "ARCHIVED", via group email 9 Jan 2023 */` is a very
 helpful clue when someone comes around wondering where those records went.
 
 ### Teamwork
 
-My remaining tips apply to almost any programming project. First, **commit your
-code often.** I can't count how often I've been grateful git had a backup of my
-work, or made my work accessible to fill some unexpected need on some other
-system, nor can I count how many times I've been stuck because someone else
-didn't commit their code so I couldn't get at it when I needed it. Let's not
-talk about how many times I've caused someone else to get stuck in the same
-way...
+My remaining tips apply to almost any programming project. First, **use source
+control, and commit your code to it often.** I can't count how often I've been
+grateful the git repository had a backup of my work, or made my work accessible
+to fill some unexpected need on some other system, nor can I count how many
+times I've been stuck because someone else didn't commit their code so I
+couldn't get at it when I needed it.  Let's not talk about how many times I've
+caused someone else to get stuck in the same way... Of course, don't commit
+your customer's data. But you should commit your code, and commit it often.
 
 Finally, where possible, **work with someone else.** Two programmers reviewing
 each other's code and collaborating on solutions are often far better than two
