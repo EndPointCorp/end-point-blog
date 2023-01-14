@@ -10,7 +10,7 @@ tags:
 ---
 
 When you're in the business of selling software to people, you tend to get a
-few changes to migrate data from their legacy software to your shiny new
+few chances to migrate data from their legacy software to your shiny new
 system. We've collected a few tips that may help you learn from our successes,
 as well as our mistak^Wparticularly educational experiences. 
 
