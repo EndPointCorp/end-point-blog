@@ -2,6 +2,10 @@
 author: "Kevin Campusano"
 title: "Developing Rails Apps in a Dev Container with VS Code"
 date: 2023-01-09
+github_issue_number: 1931
+featured:
+  image_url:
+description: "VS Code, with help from the Dev Containers extension, makes the task of setting up a container for software development easier than ever. To demonstrate that, we're going to walk through setting up such an environment for developing Ruby on Rails applications."
 tags:
 - ruby
 - rails
@@ -9,15 +13,19 @@ tags:
 - vscode
 ---
 
+![Icicles hang down from the opening of a cave, amid water falling into a pool lined with thick ice. Light from the cave's opening illuminates the bottom corner of the image, opposite the icicles.](/blog/2023/01/developing-rails-apps-in-a-dev-container-with-vs-code/icy-cave.webp)
+
+<!-- Photo by Seth Jensen -->
+
 One of the great gifts from the advent of [Docker](https://www.docker.com/) and [containers](https://www.docker.com/resources/what-container/) is the ability to get a competent development environment up and running very quickly. Regardless of programming language or tech stack, there is probably an image in [DockerHub](https://hub.docker.com/) or elsewhere that you can use to set up a container for development, either verbatim or as a basis for more complex setups. Moreover, even if your development environment is complex, once you have containerized it, it's easy to replicate for new team members.
 
 [VS Code](https://code.visualstudio.com/), one of the most popular editors/IDEs today, with help from the [Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) extension, makes the task of setting up a container for software development easier than ever.
 
 To demonstrate that, we're going to walk through setting up such an environment for developing Ruby on Rails applications.
 
-## Setting up a Ruby Dev Container
+### Setting up a Ruby Dev Container
 
-As I alluded to before, all we need is Docker, VS Code and the extension. Once you have those [installed](https://www.docker.com/get-started/), we can easily create a new Docker container ready for Ruby on Rails development and have VS Code connect to it, resulting in a fully featured development environment.
+As I alluded to before, all we need is Docker, VS Code, and the extension. Once you have those [installed](https://www.docker.com/get-started/), we can easily create a new Docker container ready for Ruby on Rails development and have VS Code connect to it, resulting in a fully featured development environment.
 
 ### Creating the configuration file
 
@@ -31,15 +39,15 @@ $ code .
 
 Now, in VS Code, bring up the [Command Palette](https://code.visualstudio.com/docs/getstarted/userinterface#_command-palette) with `Ctrl + Shift + P`. In it, run the "Dev Containers: Add Dev Container Configuration Files..." command. In the resulting menu, select "Show All Definitions..." option and look for Ruby.
 
-![Show all Definitions...](developing-rails-apps-in-a-dev-container-with-vs-code/add-dev-container-config-files-1.png)
+![A pop-up reading "Add Dev Container Configuration Files. The cursor is in a search box reading "Select a container configuration template". Selected is the option reading "Show All Definitions..."](/blog/2023/01/developing-rails-apps-in-a-dev-container-with-vs-code/add-dev-container-config-files-1.png)
 
-![Ruby in the Add Dev Container Config Files popup](developing-rails-apps-in-a-dev-container-with-vs-code/add-dev-container-config-files-2.png)
+![The Ruby option, selected in the Add Dev Container Configuration Files pop-up](/blog/2023/01/developing-rails-apps-in-a-dev-container-with-vs-code/add-dev-container-config-files-2.png)
 
-From here on, the menu will ask you to select a version of Ruby and whether you want to include any additional features in the resulting development container. At the time of this writing, 3.1 was the latest Ruby that appeared so I selected that. Also, we don't need any additional features so I selected none.
+From here on, the menu will ask you to select a version of Ruby and whether you want to include any additional features in the resulting development container. At the time of writing, 3.1 was the latest Ruby that appeared, so I selected that. Also, we don't need any additional features, so I selected none.
 
-> There are many options here for many different languages and tech stacks. For example, there's Ruby, which we selected, but there are also ones that come out of the box with [Sinatra](https://sinatrarb.com/), Rails and even [Postgres](https://www.postgresql.org/). Feel free to peruse! You can learn more about Dev Containers in [the official site](https://containers.dev/) and on [GitHub](https://github.com/devcontainers).
+> There are many options here for different languages and tech stacks. For example, there's Ruby, which we selected, but there are also ones that come out of the box with [Sinatra](https://sinatrarb.com/), Rails, and even [Postgres](https://www.postgresql.org/). Feel free to peruse! You can learn more about Dev Containers in [the official site](https://containers.dev/) and on [GitHub](https://github.com/devcontainers).
 
-Anyway, after going through that and clicking the OK button, the extension will have produced a `.devcontainer/devcontainer.json` file with these contents:
+Anyway, after going through that menu and clicking the OK button, the extension will have produced a `.devcontainer/devcontainer.json` file with these contents:
 
 ```json
 {
@@ -85,13 +93,13 @@ The `customizations` section installs the [Ruby VS Code extension](https://marke
 
 ### Running the Container
 
-Now, to actually run and connect VS Code to a new container using the image and configs specified in the `.devcontainer/devcontainer.json` file; bring up the [Command Palette](https://code.visualstudio.com/docs/getstarted/userinterface#_command-palette) again with `Ctrl + Shift + P` and run the "Dev Containers: Reopen in Container" command.
+Now, to actually run and connect VS Code to a new container using the image and configs specified in the `.devcontainer/devcontainer.json` file; bring up the Command Palette again with `Ctrl + Shift + P` and run the "Dev Containers: Reopen in Container" command.
 
 With that, VS Code will invoke Docker to download the image and create a new container based on it. It will also run and configure the container based on what's specified in `.devcontainer/devcontainer.json`, and finally, connect to it.
 
 > When that's done, you should be able to see the container running with `docker ps`.
 
-That will take a while, but once it's done, you'll be able to open VS Code's integrated terminal (with `` Ctrl + ` ``) and that will bring up a bash session in the container. From here, we can finally run all our usual Ruby and Rails commands to set up our project.
+That will take a while, but once it's done, you'll be able to open VS Code's integrated terminal (with `` Ctrl + ` ``), which will bring up a bash session in the container. From here, we can finally run all our usual Ruby and Rails commands to set up our project.
 
 > Feel free to explore the container's environment. `ruby -v` for example will show that Ruby is ready to go in there.
 
@@ -115,8 +123,8 @@ And finally, run the app:
 $ bin/rails server
 ```
 
-Open a browser and navigate to [http://127.0.0.1:3000/](http://127.0.0.1:3000/)` to see the classic Rails hello world screen:
+Open a browser and navigate to [http://127.0.0.1:3000/](http://127.0.0.1:3000/) to see the classic Rails hello world screen:
 
-![Hello Rails](developing-rails-apps-in-a-dev-container-with-vs-code/hello-rails.png)
+![Hello Rails. A browser navigated to http://127.0.0.1:3000/, with the webpage displaying the Rails logo, and underneath reading "Rails version: 7.0.4"; "Ruby version: ruby 3.1.3p185 (2022-11-24 revision 1a6b16756e)[x86_64-linux]](/blog/2023/01/developing-rails-apps-in-a-dev-container-with-vs-code/hello-rails.png)
 
 And that's all! I use Ruby on Rails on a daily basis, so that's what I've chosen to demonstrate here. However, there are many more options of programming languages and technologies when it comes to Dev Containers. All of them share very similar setup processes. And even if there isn't an image optimized for development readily available in the Microsoft Artifact Registry, you can always author your own custom Dockerfile and use that for whatever use case you may have.
