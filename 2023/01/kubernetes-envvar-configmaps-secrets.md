@@ -18,13 +18,15 @@ Photo by Jeffry Johar
 
 There are 3 ways to set environment variables for the container in the Kubernetes Pod: hard-coding, ConfigMaps, and Secrets, each with its own use case.
 
-For those who are taking the Certified Kubernetes Administrator exam, you need to know all of these by heart. These skills fall under the domain of workloads and scheduling, which is 15% of the exam. Let's go over how to create the environment variables based on these methods.
+For those who are taking the Certified Kubernetes Administrator exam, you need to know all of these by heart. These skills fall under the domain of workloads and scheduling, which is 15% of the exam.
+
+Let's go over how to create environment variables based on these methods.
 
 ### Hard-coding
 
 This is the method that enables us to define the environment variables in the `containers` section of the Pod manifest. When using this method the environment variables will be visible when we describe the Pod. The following is an example of defining the environment variables `PET01=cat` and `PET02=dog` in an nginx container.
 
-As with most Kubernetes resources, there are 2 ways of creating Pods. You can use either one of them. The first way is the imperative way, using the kubectl CLI. This is the preferred method for the CKA exam because it is convenient, fast, and saves time. The second way is the declarative way. Which requires you to build the YAML file and apply it.
+As with most Kubernetes resources, there are 2 ways of creating Pods. You can use either one of them. The first way is the imperative way, using the kubectl CLI. This is the preferred method for the CKA exam because it is convenient, fast, and saves time. The second way is the declarative way which requires you to build the YAML file and apply it.
 
 #### The imperative
 
@@ -34,7 +36,7 @@ kubectl run mynginx --image=nginx --env=PET01=cat --env=PET02=dog
 
 #### The declarative
 
-This method requires the creation of the YAML and then applying it. Create a 'mynginx.yaml' file in your favorite text editor:
+This method requires the creation of the YAML and then applying it. Create a `mynginx.yaml` file in your favorite text editor:
 
 ```yaml
 apiVersion: v1
@@ -81,7 +83,9 @@ Namespace:        default
 
 ### ConfigMaps
 
-ConfigMaps is a Kubernetes resource used to move away the configuration portions of an application for its main container. Thus it can be used to define environment variables and use them in a Pod's YAML. ConfigMaps can be created either the imperative way or the declarative way. Following are the 2 different ways of creating a ConfigMaps for holding the `PET01=cat` and `PET02=dog` variables.
+ConfigMap is a Kubernetes resource used to move away the configuration portions of an application for its main container. Thus it can be used to define environment variables and use them in a Pod's YAML.
+
+ConfigMaps can be created either the imperative way or the declarative way. Following are the 2 different ways of creating a ConfigMap for holding the `PET01=cat` and `PET02=dog` variables.
 
 #### The imperative
 
@@ -91,7 +95,7 @@ kubectl create configmap myconfigmap --from-literal=PET01=cat --from-literal=PET
 
 #### The declarative
 
-Create the YAML in "myconfigmap.yaml" and apply it:
+Create the YAML in `myconfigmap.yaml` and apply it:
 
 ```yaml
 apiVersion: v1
@@ -141,7 +145,7 @@ After the creation of ConfigMaps, we need to create the Pod’s YAML using the C
 
 #### Using all of the environment variables from ConfigMaps in a Pod
 
-Create "nginx-cm01.yaml":
+Create `nginx-cm01.yaml`:
 
 ```yaml
 apiVersion: v1
@@ -182,7 +186,7 @@ Name:             nginx-cm01
 
 In this example we are selecting both `PET01` and `PET02`.
 
-Create "nginx-cm02.yaml":
+Create `nginx-cm02.yaml`:
 
 ```yaml
 apiVersion: v1
@@ -243,13 +247,13 @@ kubectl create secret generic mysecret --from-literal=PET01=cat --from-literal=P
 For the declarative Secrets YAML we need to encode the values to base64.
 
 ```plain
-❯ echo -n "cat" | base64
+❯ echo -n cat | base64
 Y2F0
-❯ echo -n "dog" | base64
+❯ echo -n dog | base64
 ZG9n
 ```
 
-Then put the encoded values in the YAML file "mysecret.yaml".
+Then put the encoded values in the YAML file `mysecret.yaml`.
 
 ```yaml
 apiVersion: v1
@@ -293,7 +297,7 @@ Just like ConfigMaps, we can use all of the environment variables or selectively
 
 #### Using all of the environment variables from the Secrets
 
-Create "nginx-s01.yaml":
+Create `nginx-s01.yaml`:
 
 ```yaml
 apiVersion: v1
@@ -332,7 +336,7 @@ Name:             nginx-s01
 
 #### Selectively using the environment variables from the Secrets
 
-Create "nginx-s02.yaml":
+Create `nginx-s02.yaml`:
 
 ```yaml
 apiVersion: v1
@@ -362,7 +366,7 @@ Then run:
 kubectl apply -f nginx-s02.yaml
 ```
 
-The description of "nginx-s02.yaml":
+The description of `nginx-s02.yaml`:
 
 ```plain
 ❯ k describe pod nginx-s02
@@ -380,4 +384,6 @@ The description of "nginx-s02.yaml":
 
 ### Conclusion
 
-That's all, folks. I hope you understand how to get the environment variables in Kubernetes Pods. Good luck for those who are taking the CKA exam. Have a nice day!
+That's all, folks. I hope you understand how to get the environment variables in Kubernetes Pods.
+
+Good luck for those who are taking the CKA exam. Have a nice day!
