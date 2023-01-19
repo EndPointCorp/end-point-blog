@@ -1,7 +1,7 @@
 ---
 author: "Kevin Campusano"
 title: "Developing Rails Apps in a Dev Container with VS Code"
-date: 2023-01-09
+date: 2023-01-13
 github_issue_number: 1931
 featured:
   image_url:
@@ -11,13 +11,16 @@ tags:
 - rails
 - docker
 - vscode
+- containers
 ---
 
 ![Icicles hang down from the opening of a cave, amid water falling into a pool lined with thick ice. Light from the cave's opening illuminates the bottom corner of the image, opposite the icicles.](/blog/2023/01/developing-rails-apps-in-a-dev-container-with-vs-code/icy-cave.webp)
 
 <!-- Photo by Seth Jensen -->
 
-One of the great gifts from the advent of [Docker](https://www.docker.com/) and [containers](https://www.docker.com/resources/what-container/) is the ability to get a competent development environment up and running very quickly. Regardless of programming language or tech stack, there is probably an image in [DockerHub](https://hub.docker.com/) or elsewhere that you can use to set up a container for development, either verbatim or as a basis for more complex setups. Moreover, even if your development environment is complex, once you have containerized it, it's easy to replicate for new team members.
+One of the great gifts from the advent of [Docker](https://www.docker.com/) and [containers](https://www.docker.com/resources/what-container/) is the ability to get a good development environment up and running very quickly. Regardless of programming language or tech stack, there is probably an image in [DockerHub](https://hub.docker.com/) or elsewhere that you can use to set up a container for development, either verbatim or as a basis for more complex setups.
+
+Moreover, even if your development environment is complex, once you have containerized it, it's easy to replicate for new team members.
 
 [VS Code](https://code.visualstudio.com/), one of the most popular editors/IDEs today, with help from the [Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) extension, makes the task of setting up a container for software development easier than ever.
 
@@ -127,4 +130,6 @@ Open a browser and navigate to [http://127.0.0.1:3000/](http://127.0.0.1:3000/) 
 
 ![Hello Rails. A browser navigated to http://127.0.0.1:3000/, with the webpage displaying the Rails logo, and underneath reading "Rails version: 7.0.4"; "Ruby version: ruby 3.1.3p185 (2022-11-24 revision 1a6b16756e)[x86_64-linux]](/blog/2023/01/developing-rails-apps-in-a-dev-container-with-vs-code/hello-rails.png)
 
-And that's all! I use Ruby on Rails on a daily basis, so that's what I've chosen to demonstrate here. However, there are many more options of programming languages and technologies when it comes to Dev Containers. All of them share very similar setup processes. And even if there isn't an image optimized for development readily available in the Microsoft Artifact Registry, you can always author your own custom Dockerfile and use that for whatever use case you may have.
+And that's all! I use Ruby on Rails on a daily basis, so that's what I've chosen to demonstrate here. However, there are many more options of programming languages and technologies when it comes to Dev Containers. All of them share very similar setup processes.
+
+And even if there isn't an image optimized for development readily available in the Microsoft Artifact Registry, you can always author your own custom Dockerfile and use that for whatever use case you may have.
