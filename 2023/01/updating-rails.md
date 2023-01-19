@@ -1,6 +1,6 @@
 ---
 author: "Couragyn Chretien"
-title: "Updating Rails"
+title: "Updating Ruby on Rails"
 date: 2023-01-12
 github_issue_number: 1925
 tags:
@@ -13,27 +13,27 @@ tags:
 
 <!-- Photo by Seth Jensen, 2023 -->
 
-Updating your app to the latest version is an important part of the development process. It may seem like a waste to invest time and money into it, but it can bring as much value as a new feature.
+Updating your app to the latest versions of the framework it was built on, and dependencies it uses, is an important part of the development process. It may seem like a waste to invest time and money into it, but it can bring as much value as a new feature.
 
-One good thing about using a framework like Rails is that security features are baked in. This saves development time as the developer doesn't have to re-create the wheel for logins, permissions, authentication, etc. There are many users of the framework who work together to can catch and patch vulnerabilities. Unfortunately, this means if your app hasn't been updated its weaknesses becomes more obvious. A black hat developer even has access to a [list of previous Rails version vulnerabilities.](https://www.cvedetails.com/vulnerability-list/vendor_id-12043/product_id-22569/Rubyonrails-Rails.html)
+One good thing about using a framework like Ruby on Rails is that security features are baked in. This saves development time as the developer doesn't have to re-create the wheel for logins, permissions, authentication, etc. There are many users of the framework who work together to can catch and patch vulnerabilities. Unfortunately, this means if your app hasn't been updated its weaknesses become more obvious. A black hat attacker has easy access to a [list of past Rails vulnerabilities](https://www.cvedetails.com/vulnerability-list/vendor_id-12043/product_id-22569/Rubyonrails-Rails.html).
 
-Have you ever been to a [website that hasn't been updated for a while](https://www.spacejam.com/) and found that everything moves slower than your used to? As technology improves and functions are optimized application processing time can be reduced. Most releases come with a performance update that can help your application keep up with the best of them.
+Have you ever been to a [website that hasn't been updated for a while](https://www.spacejam.com/) and found that everything moves slower than you're used to? As technology improves and functions are optimized application processing time can be reduced. Most releases come with a performance update that can help your application keep up with the best of them.
 
-The gems of your application also come out with releases to add new features and functionality. Usually these releases are made to work with the latest Rails versions. If you want to utilize them you'll have to meet the minimum Rails version requirements.
+The gems your application uses also come out with updates to add new features and functionality. Usually these releases are made to work with the latest Rails versions. If you want to utilize them you'll have to meet the minimum Rails version requirements.
 
 ### Taking it step by step
 
-When updating your Rails app, you can't just jump to the latest version. Updating to the next major release one at a time is recommended. This allows you to fix bugs as you go rather than trying to figure out what broke what.
+When updating your Rails app, you can't just jump to the latest version. Updating to the next major release one at a time is recommended. This allows you to fix bugs as you go rather than trying to figure out what change broke what code.
 
-> [The full list of releases can be found here.](https://rubygems.org/gems/rails/versions)
+> [The full list of Rails releases can be found here.](https://rubygems.org/gems/rails/versions)
 
-Luckily you don't have to go through each one of these releases. Releases including `rc` or `beta` (`4.2.10.rc1`, `6.0.0.beta1`) can be skipped. Small releases can also be skipped (such as going from `6.0.0` to `6.0.1`).
+Luckily you don't have to go through each one of these releases. Releases including `rc` or `beta` (`4.2.10.rc1`, `6.0.0.beta1`) can be skipped. Small releases can also be skipped, such as going from `6.0.0` to `6.0.1`.
 
 If you wanted to update from `4.0.0` to `7.0.4`, I'd recommend this route:
 
 `4.0.0` → `4.1.0` → `4.2.0` → `5.0.0` → `5.1.0` → `5.2.0` → `6.0.0` → `6.1.0` → `7.0.0` → `7.0.4`
 
-Any of these updates can introduce bugs, but the biggest pain points will be the major version changes (4 to 5, 5 to 6, etc.).
+Any of these updates can introduce bugs, but the biggest pain points will be the major version changes: 4 to 5, 5 to 6, etc.
 
 ### Fixing bundle errors
 
@@ -58,7 +58,7 @@ Well...
 
 ### Manual testing
 
-Even if your app builds correctly that doesn't mean different parts of your app didn't explode. Functions that worked in a previous version might have been deprecated in the newest version
+Even if your app builds correctly that doesn't mean different parts of your app didn't explode. Functions that worked in a previous version might have been deprecated in the newest version.
 
 For example, I came across this error in a recent update:
 
@@ -83,6 +83,6 @@ Sometimes a gem will no longer be supported by the developer and no update has b
 
 We're in the home stretch now. Rails is now on the most recent version and everything in the app is working correctly.
 
-The last recommended task is to update all gems to their latest versions. This will open up the gems' latest features and make future Rails updates easier.
+The last recommended task is to update all gems to their latest versions. This will open up the gems' latest features and make future Ruby on Rails updates easier.
 
 Gems should be updated individually by running the command `bundle update #GemName`.
