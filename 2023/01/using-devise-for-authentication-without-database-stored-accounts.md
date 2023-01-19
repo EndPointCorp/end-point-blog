@@ -1,13 +1,22 @@
 ---
 author: "Kevin Campusano"
-title: "Using Devise for Authentication Without Database Stored Accounts"
-date: 2023-01-09
+title: "Using Devise for Authentication in Rails Without Database Stored Accounts"
+date: 2023-01-19
+github_issue_number: 1933
+featured:
+  endpoint: true
+  image_url: /blog/2023/01/using-devise-for-authentication-without-database-stored-accounts/sunset-plane.webp
+description: In this article, with the Devise gem, along with custom authentication strategies, we implement completely bespoke authentication logic while still enjoying a lot of the features that Devise offers out of the box.
 tags:
 - ruby
 - rails
 - devise
 - authentication
 ---
+
+![A plane flies low over a lake, which reflecs the orange sky of a sunset. The lake is backed by tall mountains which are given depth by the end of the day's haze.](/blog/2023/01/using-devise-for-authentication-without-database-stored-accounts/sunset-plane.webp)
+
+<!-- Photo by Seth Jensen, 2021 -->
 
 We can pretty much say that thanks to the venerable [Devise](https://github.com/heartcombo/devise) [gem](https://rubygems.org/), the authentication problem has been solved in [Ruby on Rails](https://rubyonrails.org/). There are some instances however, when the requirements veer a little further away from convention and some customization needs to happen.
 
@@ -23,9 +32,9 @@ In this article, we're going to walk through doing just that. Let's get started.
 > - [Custom authentication methods with Devise](http://blog.plataformatec.com.br/2019/01/custom-authentication-methods-with-devise/).
 > - [Warden strategies](https://github.com/wardencommunity/warden/wiki/Strategies).
 
-## Setting up a new Rails project
+### Setting up a new Rails project
 
-If you want to work along with me, and you like [Docker](https://www.docker.com/) and [VS Code](https://code.visualstudio.com/), take a look at [this blog post](https://www.endpointdev.com/blog/2023/01/developing-rails-apps-in-a-dev-container-with-vs-code/) to learn how to set up a containerized development environment for Ruby on Rails with minimal effort.
+If you want to work along with me, and you like [Docker](https://www.docker.com/) and [VS Code](https://code.visualstudio.com/), take a look at [this blog post](/blog/2023/01/developing-rails-apps-in-a-dev-container-with-vs-code/) to learn how to set up a containerized development environment for Ruby on Rails with minimal effort.
 
 If not, you can follow [the official docs](https://www.ruby-lang.org/en/documentation/installation/) for installing Ruby.
 
@@ -33,19 +42,19 @@ Either way, once you have your environment ready, we can go ahead and start sett
 
 First, make sure to install the rails gem:
 
-```sh
+```plain
 $ gem install rails
 ```
 
 Then, make sure you are located in the directory where you want to create the new project and do:
 
-```sh
+```plain
 $ rails new . --minimal
 ```
 
 > `--minimal` is an option to `rails new` added in version 6.1 that disables a lot of default features and gems. You can learn more about it [here](https://github.com/rails/rails/pull/39282).
 
-## Installing Devise
+### Installing Devise
 
 Now, we need to add the Devise gem by adding this to your `Gemfile`:
 
@@ -55,13 +64,13 @@ gem "devise"
 
 And then running the following to install it in the project:
 
-```sh
+```plain
 $ bin/rails generate devise:install
 ```
 
 Let's also create a "home" page to which we will point the app root route to. Run:
 
-```sh
+```plain
 $ bin/rails generate controller Pages home --no-helper
 ```
 
@@ -82,11 +91,11 @@ end
 
 Now we have a strong enough foundation to get started. Run `bin/rails server` and navigate to the URL that the Puma development server produced and you should see this:
 
-![Alt text](using-devise-for-authentication-without-database-stored-accounts/homepage.png)
+![A browser viewing localhost:3001. On the page, a header reads "Pages#home", with a sentence below reading "Find me in app/views/pages/home.html.erb".](/blog/2023/01/using-devise-for-authentication-without-database-stored-accounts/homepage.png)
 
-## Defining the User model
+### Defining the User model
 
-For Devise to work, it needs to be associated with a model class from our app that represents user accounts. Normally, this would be some `ActiveRecord::Base` derived class, like most conventional implementations. For us though, this will not work because, like I said at the beginning, we don't have a database. Accounts nor credentials will be stored locally but rather, in an external web service.
+For Devise to work, it needs to be associated with a model class from our app that represents user accounts. Normally, this would be some `ActiveRecord::Base` derived class, like most conventional implementations. For us, though, this will not work because, like I said at the beginning, we don't have a database. Neither accounts nor credentials will be stored locally, but rather in an external web service.
 
 So what we do instead is define a class that looks *enough* like an ActiveRercord such that Devise can work with it. Thanks to Rails' modularity, this is easy, as we only need to include a few modules into said class. Here's what our `User` model class ends up looking like:
 
@@ -104,20 +113,20 @@ class User
 end
 ```
 
-As you can see, all we have done is `include` and `extend` various modules as well as define the validation callbacks. This will augment the class with the APIs necessary for Devise to be able to interact with it properly. We also define an email and password fields which will be our credentials.
+As you can see, all we have done is `include` and `extend` various modules as well as define the validation callbacks. This will augment the class with the APIs necessary for Devise to be able to interact with it properly. We also define email and password fields which will be our credentials.
 
 > You can read more about `ActiveModel::Callbacks` and `define_model_callbacks` [here](https://api.rubyonrails.org/classes/ActiveModel/Callbacks.html).
 
 Now that this class is available, in order to tell Devise that it needs to work with it, we add the following line to the `config/routes.rb` file:
 
 ```diff
-Rails.application.routes.draw do
-  # ...
+ Rails.application.routes.draw do
+   # ...
 +  devise_for :users
-end
+ end
 ```
 
-## Implementing the custom authentication strategy
+### Implementing the custom authentication strategy
 
 Now that Devise is hooked up, let's finally implement the custom authentication strategy. For this we will take three steps:
 
@@ -125,7 +134,7 @@ Now that Devise is hooked up, let's finally implement the custom authentication 
 2. Write a component that implements the serialization logic.
 3. Register the new strategy in the initializer and model class.
 
-Let's get started with step 1, and here's what the class looks like:
+Let's get started with step 1. Here's what the class looks like:
 
 ```ruby
 # app/custom_auth/devise/strategies/custom_authenticatable.rb
@@ -176,11 +185,13 @@ module Devise
 end
 ```
 
-Feel free to read through that code and the comments for some explanations on what each piece does. There are a few key points to go over. First of all, the class needs to inherit from `Devise::Strategies::Authenticatable`. This is the base class that Devise provides for us to create custom authentication strategies. The most important method that we need to define is `authenticate!`. This method is invoked by the powers that be (i.e. Warden) to run the actual authentication logic. After calling it, Warden expects it to invoke either `success!` or `fail!`, depending on the authentication results, and the rest of the system will act accordingly. `success!` expects an instance of User being passed as an argument. This User instance represents the account that matches the given credentials.
+Feel free to read through that code and the comments for some explanations on what each piece does. There are a few key points to go over.
+
+First of all, the class needs to inherit from `Devise::Strategies::Authenticatable`. This is the base class that Devise provides for us to create custom authentication strategies. The most important method that we need to define is `authenticate!`. This method is invoked by the powers that be (i.e. Warden) to run the actual authentication logic. After calling it, Warden expects it to invoke either `success!` or `fail!`, depending on the authentication results, and the rest of the system will act accordingly. `success!` expects an instance of User being passed as an argument. This User instance represents the account that matches the given credentials.
 
 The `authenticate!` method is where Devise and Warden give you the ability to fully customize how to authenticate the given credentials. I've chosen to implement a simple check against hardcoded values for our example here, but this can be anything. In my real world use case, I had to make a call to an external web service, but you could also check a file, validate a token with some algorithm, anything that's possible with Ruby and Rails really.
 
-Next step is to implement the logic that serializes and deserializes the instance of User that represents the logged in account to and from the Rails session store. This is encapsulated in a very simple module that looks like this:
+The next step is to implement the logic to serialize and deserialize the instance of User that represents the logged-in account to and from the Rails session store. This is encapsulated in a very simple module that looks like this:
 
 ```ruby
 # app/custom_auth/devise/models/custom_authenticatable.rb
@@ -210,7 +221,7 @@ module Devise
 end
 ```
 
-And this one is very self-explanatory. There's a `serialize_into_session` method that receives the User instance for the logged in account and returns an array of the individual fields of it that we want Devise to include in the session data that persists across requests. And there's also a `serialize_from_session` method that receives the fields from the serialized array as individual parameters and has to return a new User instance.
+And this one is very self-explanatory. There's a `serialize_into_session` method that receives the User instance for the logged-in account and returns an array of the individual fields of it that we want Devise to include in the session data that persists across requests. And there's also a `serialize_from_session` method that receives the fields from the serialized array as individual parameters and has to return a new User instance.
 
 And finally, we need to register the new strategy and put it to work. We do that by adding these lines in the Devise initilizer at `config/initializers/devise.rb`:
 
@@ -227,9 +238,9 @@ Devise.setup do |config|
 end
 ```
 
-Here, we've registered our new custom authentication strategy with Warden and added it as a default. We've also declared a new Devise "module" (via the [`Devise.add_module`](https://www.rubydoc.info/github/plataformatec/devise/Devise.add_module) method) that will use that strategy (as given by the `strategy:` parameter) and act as part of the sessions-related functionality (as given by the `controller:` and `route:` parameters). This means that, by adding this module to our User model class, Devise will render the routes necessary for session handling. Namely, sign_in and sign_out. Like this:
+Here, we've registered our new custom authentication strategy with Warden and added it as a default. We've also declared a new Devise "module" (via the [`Devise.add_module`](https://www.rubydoc.info/github/plataformatec/devise/Devise.add_module) method) that will use that strategy (as given by the `strategy:` parameter) and act as part of the sessions-related functionality (as given by the `controller:` and `route:` parameters). This means that, by adding this module to our User model class, Devise will render the routes necessary for session handling. Namely, `sign_in` and `sign_out`. Like this:
 
-```sh
+```plain
  $ bin/rails routes
               Prefix Verb   URI Pattern               Controller#Action
     new_user_session GET    /users/sign_in(.:format)  devise/sessions#new
@@ -248,9 +259,9 @@ end
 
 Note how we specify the `authentication_keys` to be `email` and `password`. The same fields that `Devise::Strategies::CustomAuthenticatable` uses to run the validation logic, and are defined as attributes in `User`. These can be anything really. The nice thing about using `email` and `password` in particular is that Devise's default views and controllers already work with these fields, so no additional changes and configurations need to be done if we follow that convention.
 
-With all this, we're basically plugging some of our code right in the middle of Devise's logic for authentication and leveraging the rest of the functionality provided by it, like automatic views and controllers and such. As we'll see next.
+With all this, we're basically plugging some of our code right into the middle of Devise's logic for authentication and leveraging the rest of the functionality provided by it, like automatic views and controllers and such. As we'll see next.
 
-## Implementing session management
+### Implementing session management
 
 Now that we've laid out all the piping that we need, the rest of the work to add support for sessions to our little test app is actually just business as usual with Devise.
 
@@ -274,7 +285,7 @@ All this does is show a link to the log in page when there's no user logged in; 
 
 Run the app with `bin/rails server`, click the "Log in" link, and you'll see Devise's default log in page. Type in the hardcoded credentials from `Devise::Strategies::CustomAuthenticatable` and submit the form to see something like this:
 
-![Alt text](using-devise-for-authentication-without-database-stored-accounts/logged-in.png)
+![Alt text](/blog/2023/01/using-devise-for-authentication-without-database-stored-accounts/logged-in.png)
 
 We've just been redirected back to the root and are greeted and shown a result message courtesy of Devise.
 
