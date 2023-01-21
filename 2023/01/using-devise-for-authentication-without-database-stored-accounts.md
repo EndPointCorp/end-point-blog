@@ -6,11 +6,10 @@ github_issue_number: 1933
 featured:
   endpoint: true
   image_url: /blog/2023/01/using-devise-for-authentication-without-database-stored-accounts/sunset-plane.webp
-description: In this article, with the Devise gem, along with custom authentication strategies, we implement completely bespoke authentication logic while still enjoying a lot of the features that Devise offers out of the box.
+description: In this article, with the Devise gem and custom authentication strategies, we implement completely bespoke authentication logic while still enjoying features that Devise offers out of the box.
 tags:
 - ruby
 - rails
-- devise
 - authentication
 ---
 
@@ -27,10 +26,10 @@ Luckily for us, the Devise gem is customizable enough to be able to fulfill this
 In this article, we're going to walk through doing just that. Let's get started.
 
 > To learn more about this capability of Devise, and how it relates to the underlying [Warden](https://github.com/wardencommunity/warden) concepts, here are some interesting sources:
-> - [Remote authentication with devise](https://4trabes.com/2012/10/31/remote-authentication-with-devise/).
-> - [Devise authentication strategies](https://insights.kyan.com/devise-authentication-strategies-a1a6b4e2b891).
-> - [Custom authentication methods with Devise](http://blog.plataformatec.com.br/2019/01/custom-authentication-methods-with-devise/).
-> - [Warden strategies](https://github.com/wardencommunity/warden/wiki/Strategies).
+> - [Remote authentication with devise](https://4trabes.com/2012/10/31/remote-authentication-with-devise/)
+> - [Devise authentication strategies](https://insights.kyan.com/devise-authentication-strategies-a1a6b4e2b891)
+> - [Custom authentication methods with Devise](http://blog.plataformatec.com.br/2019/01/custom-authentication-methods-with-devise/)
+> - [Warden strategies](https://github.com/wardencommunity/warden/wiki/Strategies)
 
 ### Setting up a new Rails project
 
@@ -40,7 +39,7 @@ If not, you can follow [the official docs](https://www.ruby-lang.org/en/document
 
 Either way, once you have your environment ready, we can go ahead and start setting up our new Rails project.
 
-First, make sure to install the rails gem:
+First, install the rails gem:
 
 ```plain
 $ gem install rails
@@ -68,7 +67,7 @@ And then running the following to install it in the project:
 $ bin/rails generate devise:install
 ```
 
-Let's also create a "home" page to which we will point the app root route to. Run:
+Let's also create a "home" page which we will point the app root route to. Run:
 
 ```plain
 $ bin/rails generate controller Pages home --no-helper
@@ -151,7 +150,7 @@ module Devise
       def authenticate!
         if credentials_valid?
           # Signals Warden that the authentication was successful.
-          # Expects an instance of the model class that Device is configured to work with.
+          # Expects an instance of the model class that Devise is configured to work with.
           # This should be the user account that matches the provided credentials.
           success!(validated_user)
         else
@@ -223,7 +222,7 @@ end
 
 And this one is very self-explanatory. There's a `serialize_into_session` method that receives the User instance for the logged-in account and returns an array of the individual fields of it that we want Devise to include in the session data that persists across requests. And there's also a `serialize_from_session` method that receives the fields from the serialized array as individual parameters and has to return a new User instance.
 
-And finally, we need to register the new strategy and put it to work. We do that by adding these lines in the Devise initilizer at `config/initializers/devise.rb`:
+And finally, we need to register the new strategy and put it to work. We do that by adding these lines in the Devise initializer at `config/initializers/devise.rb`:
 
 ```ruby
 Devise.setup do |config|
@@ -257,7 +256,7 @@ class User
 end
 ```
 
-Note how we specify the `authentication_keys` to be `email` and `password`. The same fields that `Devise::Strategies::CustomAuthenticatable` uses to run the validation logic, and are defined as attributes in `User`. These can be anything really. The nice thing about using `email` and `password` in particular is that Devise's default views and controllers already work with these fields, so no additional changes and configurations need to be done if we follow that convention.
+Note how we specify the `authentication_keys` to be `email` and `password`, the same fields that `Devise::Strategies::CustomAuthenticatable` uses to run the validation logic, and are defined as attributes in `User`. These can be anything really. The nice thing about using `email` and `password` in particular is that Devise's default views and controllers already work with these fields, so no additional changes and configurations need to be done if we follow that convention.
 
 With all this, we're basically plugging some of our code right into the middle of Devise's logic for authentication and leveraging the rest of the functionality provided by it, like automatic views and controllers and such. As we'll see next.
 
@@ -289,4 +288,6 @@ Run the app with `bin/rails server`, click the "Log in" link, and you'll see Dev
 
 We've just been redirected back to the root and are greeted and shown a result message courtesy of Devise.
 
-And that's it! We've developed a pretty simple custom authentication strategy for Devise that's very straightforward. It does not use a database at all! The important thing though, is that we can use this pattern to implement any number of more complex procedures. And we've done so in a way that does not lock us out of leveraging the rest of Devise's out-of-the-box capabilities like automatic controllers and views.
+And that's it! We've developed a pretty simple custom authentication strategy for Devise that's very straightforward. It does not use a database at all!
+
+The important thing though, is that we can use this pattern to implement any number of more complex procedures. And we've done so in a way that does not lock us out of leveraging the rest of Devise's out-of-the-box capabilities like automatic controllers and views.
