@@ -1,7 +1,7 @@
 ---
 author: "Kevin Campusano"
 title: "Implementing Basic HTTP Authentication in Rails"
-date: 2023-01-18
+date: 2023-01-26
 github_issue_number: 1932
 tags:
 - ruby
@@ -9,11 +9,11 @@ tags:
 - authentication
 ---
 
-![Two deer stand on a steep mountian slope. The mountain is reddened by the sunset, and cuts the image in half diagonally, with the other half being dominated by a pale blue sky. In the bottom, behind the front slope, lies a tall, snow-covered peak.](/blog/2023/01/implementing-basic-http-authentication-in-rails/deer-on-hill.webp)
+![Two deer stand on a steep mountain slope. The mountain is reddened by the sunset, and cuts the image in half diagonally, with the other half being dominated by a pale blue sky. In the bottom, behind the front slope, lies a tall, snow-covered peak.](/blog/2023/01/implementing-basic-http-authentication-in-rails/deer-on-hill.webp)
 
 <!-- Photo by Seth Jensen, 2022 -->
 
-Nowadays it's rather unusual to deploy [Basic HTTP Authentication](https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication) in a production web application. However, one such requirement came up recently from a client. In a nutshell, due to integration requirements with a third party system, we had to provide a web app which expected credentials supplied via Basic HTTP Auth and validated against an external web service.
+Nowadays it's rather unusual to deploy [HTTP Basic Authentication](https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication) in a production web application. However, the need came up recently from a client. In a nutshell, due to integration requirements with a third party system, we had to provide a web app which expected credentials supplied via Basic HTTP Auth and validated against an external web service.
 
 Luckily for us, like a great many other things, this is very easy to implement with [Ruby on Rails](https://rubyonrails.org/).
 
@@ -65,7 +65,7 @@ That'll give us a "Pages" controller with a "home" action and its corresponding 
 
 Next, we replace the `get 'pages/home'` line in `routes.rb` with `root 'pages#home'`. That will make it so the root URL of our app points to the action created in the previous step.
 
-Going back to the browser, at [http://127.0.0.1:3000/](http://127.0.0.1:3000/), you should see this now:
+Going back to the browser at [http://127.0.0.1:3000/](http://127.0.0.1:3000/) you should see this now:
 
 ![A browser navigated to http://127.0.0.1:3000/. On the page, a header reads "Pages#home", with a sentence below reading "Find me in app/views/pages/home.html.erb".](/blog/2023/01/implementing-basic-http-authentication-in-rails/homepage.png)
 
