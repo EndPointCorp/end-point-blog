@@ -79,13 +79,15 @@ mydb=# select * from person where person::text ~* 'kilroy';
 This is my new favorite way of solving this problem, when I know what table I'm looking in but don't know the column. In cases where I don't know either, there's always this monstrosity:
 
 ```sql
-mydb=# select 'select ' || quote_literal(relname) || ' as relname, f.* from ' || oid::regclass || ' f where f::text ~* ''kilroy''' from pg_class where relkind = 'r' and relnamespace = 'public'::regnamespace; \gexec
+mydb=# select 'select ' || quote_literal(relname) || ' as relname, f.*
+from ' || oid::regclass || ' f where f::text ~* ''kilroy''' from pg_class
+where relkind = 'r' and relnamespace = 'public'::regnamespace; \gexec
 ```
 
 This will work only in `psql`, as it depends on the `\gexec` command. It composes one query for each table, and then executes them in turn. It produces rather a lot of probably useless output you'll need to sort through, and if you have (as I do) some tables with a large number of columns, I recommend trying it with `\x` turned on, to avoid having to page through quite so many results. But it did work, to find the entry I was looking for:
 
 ```bash
-...
+... Lots of output
 (0 rows)
 
 -[ RECORD 1 ]---------------+-------------------------------------
@@ -116,7 +118,7 @@ approximate_age_no_birthday |
 updated_at                  |
 
 (0 rows)
-...
+... Lots more output
 ```
 
 Do you have a different technique to solve this problem? Comment below!
