@@ -121,4 +121,16 @@ updated_at                  |
 ... Lots more output
 ```
 
-Do you have a different technique to solve this problem? Comment below!
+If I'm willing to expand beyond one-liner solutions, I can get `psql` to filter that useless output for me:
+
+```bash
+mydb=# \o | grep -i kilroy | grep -v select
+mydb=# select 'select ' || quote_literal(relname) || ' as rname, f.* from ' || oid::regclass || ' f where f::text ~* ''kilroy'''
+from pg_class where relkind = 'r' and relnamespace = 'public'::regnamespace; \gexec
+mydb=# \o
+ person | 633132 | F            | NH        |          | Cristen212 | 3e588085-5151-41dd-7592-560163842571 | Kilroy44  | 1983-09-28 00:00:00 |               | t    |                      |                  |                    |              | F              | USA              |           |           |                 |              |                     |             |                             |
+```
+
+When I did this, I had to use a final `\o` to set the output mode back to normal, before I saw results.
+
+Do you have a different technique to solve this problem? I'm sure there are many other possibilities out there! Comment below!
