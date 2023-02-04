@@ -11,16 +11,18 @@ tags:
 - data-processing
 - database
 - migration
+- epitrax
+- postgres
 ---
 
 ![Scattered leaves on grass fill the frame, made up of many colors; green, cyan, pale and bright yellow, with red leaves providing highlights](/blog/2023/02/migration-tips-and-tricks/leaves.webp)
 
 <!-- Photo by Seth Jensen, 2022 -->
 
-When you're in the business of selling software to people, you tend to get a
-few chances to migrate data from their legacy software to your shiny new
-system. We've collected a few tips that may help you learn from our successes,
-as well as our mistakes — particularly educational experiences.
+When you're in the business of selling software to people, you tend to get a few chances to migrate data from their legacy software to your shiny new system. Most recently for me that has involved public health data exported from legacy disease surveillance systems into [PostgreSQL databases](/expertise/postgresql/) for use by the open source [EpiTrax system](/expertise/epitrax/) and its companion [EMSA](/expertise/emsa/).
+
+We have collected a few tips that may help you learn from our successes,
+as well as our ~~mistakes~~particularly educational experiences.
 
 ### Customer Management
 
@@ -44,7 +46,7 @@ quickly and smoothly.
 **Be careful about the vocabulary you use** with your customer. Your system and
 the legacy system probably deal with the same kinds of data, and do generally
 the same kinds of things. Of course, your software does it better than the
-old'n'busted mess you're replacing, but in order to be better, your software
+old 'n' busted mess you're replacing, but in order to be better, your software
 has to be different from what it's replacing. Different software means
 different methods, different processes, and different concepts. You and your
 customer might use the same words to mean totally different things, and unless
@@ -68,7 +70,7 @@ technology you use, decide how you'll use it, to manage the considerations
 given here. You can change your mind later and refactor accordingly, but always
 have a plan you're following.
 
-**Design the migration as a sequence of processes**. That is, first you might
+**Design the migration as a sequence of processes.** That is, first you might
 import one type of record, next another type of record that depends on the
 previous one, followed by several further steps to import data from a third
 source, clean it, map values from the legacy system to the new system, validate
@@ -78,8 +80,11 @@ probably include several steps which need to be run in a specific order, so
 plan your development conventions accordingly. At End Point, we often like to
 **put each step in a SQL file, and name each file beginning with a number**, so
 you can run each script in order sorted by filename, and achieve the correct
-result. We might have files called `01_import_products.sql`,
-`02_import_customers.sql`, and `03_import_order_history.sql`.
+result. We might have files called:
+
+* 01_import_products.sql
+* 02_import_customers.sql
+* 03_import_order_history.sql
 
 It's also common to implement each step one at a time, and to need to run each
 step several times as it's being developed. We find it very helpful to **wrap
@@ -95,19 +100,19 @@ in testing.
 
 I mentioned above that the customer may want to use this opportunity to clean
 their data. You should want this, too. **Make sure the data you're feeding your
-new system is as clean and well-structured as possible**. You may find, as we
+new system is as clean and well-structured as possible.** You may find, as we
 do, that most of the work in your migrations is in validating the input data,
 and that actually creating new records in your application is almost an
 afterthought. That's OK. You may also find there are places where your
 application, wonderful though it may be, could stand to be more strict about
-the data it accepts. I've often discovered my application needs a uniqueness
+the data it accepts. I have often discovered my application's database needs a uniqueness
 constraint, or a foreign key, thanks to a migration I was working on.
 
 ### Data Migration History
 
 I wish I could truthfully claim all our migrations go off flawlessly, but that
 would be a lie. It's not unheard of to run into some corner case, a few weeks
-or even months after the migration goes live, which wasn't migrated correctly.
+or even months after the migration goes live, where data wasn't migrated correctly.
 
 On the other hand, it's certainly not uncommon for a customer or coworker to
 spot something that strikes them as odd, after the migration goes live, only to
@@ -139,7 +144,7 @@ helpful clue when someone comes around wondering where those records went.
 
 My remaining tips apply to almost any programming project. First, **use source
 control, and commit your code to it often.** I can't count how often I've been
-grateful the git repository had a backup of my work, or made my work accessible
+grateful the Git repository had a backup of my work, or made my work accessible
 to fill some unexpected need on some other system, nor can I count how many
 times I've been stuck because someone else didn't commit their code so I
 couldn't get at it when I needed it.  Let's not talk about how many times I've
