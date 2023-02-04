@@ -1,7 +1,11 @@
 ---
-author: "Joshua Tolley"
+author: "Josh Tolley"
 title: "Data Migration Tips"
-date: 2023-01-12
+date: 2023-02-04
+github_issue_number: 1936
+featured:
+  image_url: /blog/2023/02/migration-tips-and-tricks/leaves.webp
+description: "We've collected a few tips for migrating data that may help you learn from our successes, as well as our mistakes — particularly educational experiences."
 tags:
 - postgres
 - data-processing
@@ -9,16 +13,20 @@ tags:
 - migration
 ---
 
+![Scattered leaves on grass fill the frame, made up of many colors; green, cyan, pale and bright yellow, with red leaves providing highlights](/blog/2023/02/migration-tips-and-tricks/leaves.webp)
+
+<!-- Photo by Seth Jensen, 2022 -->
+
 When you're in the business of selling software to people, you tend to get a
 few chances to migrate data from their legacy software to your shiny new
 system. We've collected a few tips that may help you learn from our successes,
-as well as our mistak^Wparticularly educational experiences. 
+as well as our mistakes — particularly educational experiences.
 
 ### Customer Management
 
 Your job is to satisfy your customers, and **your customers want to know how
 the migration is progressing**. Give them an answer, even if it's just a
-generalization. This may be a burn down chart, a calculated percentage, a nifty
+generalization. This may be a burndown chart, a calculated percentage, a nifty
 graphic, or whatever, but something your project managers can show to their
 managers, to know more or less how far along things are.
 
@@ -27,7 +35,7 @@ shouldn't have to get their data into a specific format for you to make use of
 it. **Be as flexible as possible** in the data format and structure
 you'll accept. In theory, so long as your customer can provide the legacy data
 in a machine-readable format, you should be able to use it. Let them focus on
-getting the data out of their legacy system -- which is sometimes quite an
+getting the data out of their legacy system — which is sometimes quite an
 effort in itself! Real data is almost always messy data, and your customer will
 probably want to take the opportunity to clean things up; make it as easy as
 possible for them to do that, while still ensuring the migration proceeds
@@ -100,19 +108,21 @@ constraint, or a foreign key, thanks to a migration I was working on.
 I wish I could truthfully claim all our migrations go off flawlessly, but that
 would be a lie. It's not unheard of to run into some corner case, a few weeks
 or even months after the migration goes live, which wasn't migrated correctly.
-It's certainly not uncommon for a customer or coworker to spot something that
-strikes them as odd, after the migration goes live, only find later that
-everything was in fact correct. In either case, it's important to **preserve a
-history of the migration** to investigate these concerns. We accomplish this
-with a few specific steps:
 
-* **Create a database schema for the migration, and a table within that schema for each data file, or object type we're importing.** I call these tables "staging tables", where the incoming data is "staged" as it's cleaned and validated. Having a separate schema means these tables can remain in the production database long after the migration is complete, generally without interfering with anything.
+On the other hand, it's certainly not uncommon for a customer or coworker to
+spot something that strikes them as odd, after the migration goes live, only to
+find later that everything was in fact correct. In either case, it's important
+to **preserve a history of the migration** to investigate these concerns. We
+accomplish this with a few specific steps:
+
+* **Create a database schema for the migration, and a table within that schema for each data file or object type we're importing.** I call these tables "staging tables", where the incoming data is "staged" as it's cleaned and validated. Having a separate schema means these tables can remain in the production database long after the migration is complete, generally without interfering with anything.
 * These staging tables should generally **use text fields, to be as forgiving and flexible as possible with the incoming data.** We can clean, parse, and reformat the data after it's imported.
 * **Don't change the data in these staging tables; add to the data instead.** In other words, if you need to map a value from the legacy system to a different value for your new system, don't change the column you imported into the staging table; instead, add a new column to the staging table where you'll store the re-mapped value. If you need to parse a text field into a date (because you followed the instruction to use text fields!), don't change the type of an imported column; instead, add a new column of date or timestamp type, to store the parsed value. That way, when three months down the road someone discovers that some of the imported records have weird dates, you have all the information you need to determine whether the fault lies with the imported data or some step of the migration progress. Knowing exactly where the fault crept in leaves you that much more empowered to fix it.
 * **Keep track of your migrated records' primary keys, in the legacy system and the new system.** Imagine you've just imported your client's legacy customer list into a staging table. This data includes the legacy system's primary key. Add a new column to the table for your new system's primary key, and populate it. Many of our systems use an integer sequence as a primary key, so we'd add a new integer column to the staging table, and fill it with the next values from the sequence. Following this principle will give you several important abilities:
-** You can always connect a record in the legacy system with its corresponding record(s) in the new system. If you've imported a customer list in this fashion, then when you're importing the order data later, and each order points to a customer using a legacy customer primary key, you can easily find the correct customer primary key to use in your system.
-** You can easily know if a record in your system comes from the migration, or from normal day-to-day business. You will probably use this every time you try to debug something with your migration.
-** If you need to remove all imported records and re-import them, you can identify exactly which records those are. This should be only rarely needed.
+
+    * You can always connect a record in the legacy system with its corresponding record(s) in the new system. If you've imported a customer list in this fashion, then when you're importing the order data later, and each order points to a customer using a legacy customer primary key, you can easily find the correct customer primary key to use in your system.
+    * You can easily know if a record in your system comes from the migration, or from normal day-to-day business. You will probably use this every time you try to debug something with your migration.
+    * If you need to remove all imported records and re-import them, you can identify exactly which records those are. This should be only rarely needed.
 
 Finally, **document the decision making process, in comments directly in your
 code.** For instance, if you have a table of mappings from one value to
@@ -143,4 +153,4 @@ programmers working alone, or one programmer working twice as much.
 Speaking of working out solutions together, I'd love your help improving this
 list. What keys have you found are important for data migration projects? I
 welcome your comments. And if you're looking for someone to handle a data
-migration project for you, give us a call!
+migration project for you, [give us a call](/contact/)!
