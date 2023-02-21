@@ -1,7 +1,7 @@
 ---
 title: "How to create a Hugo website without a theme"
 author: Seth Jensen
-github_issue_number: X
+github_issue_number: 999999
 tags:
 - html
 - development
@@ -20,7 +20,7 @@ One of the sites I've built with Hugo is a simple site to keep notes for my univ
 
 First, [install Hugo](https://gohugo.io/installation/).
 
-> If you want to use SCSS, make sure to install the `extended` version of Hugo.
+If you want to use [SCSS](https://sass-lang.com/documentation/syntax), as I do in the example below, make sure to install the "extended" version of Hugo.
 
 Then, run the following command to create a Hugo site:
 
