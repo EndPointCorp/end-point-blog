@@ -8,6 +8,8 @@ tags:
 - database
 - open-source
 - postgres
+- bucardo
+- replication
 date: 2010-05-24
 ---
 
@@ -28,15 +30,10 @@ As near as I can tell, “eventually consistent” is the same as “asynchronou
 The next “talk” was the enigmatically labeled [Replication Panel](http://www.pgcon.org/2010/schedule/events/268.en.html). Enigmatic in this case as it had no description whatsoever. It’s a good thing I had decided to check it out anyway (I’m a sucker for any talk related to replication, in case it wasn’t obvious yet). I was apparently nominated to be on the panel, representing Bucardo! So much for getting all my speaking done and over with the first day. The panel represented a pretty wide swatch of Postgres replication technologies, and by the people who are very deep in the development of each one. From left to right on a cluster of stools at the front of the room was:
 
 - [Londiste](https://web.archive.org/web/20100529094424/http://skytools.projects.postgresql.org/doc/londiste.cmdline.html) (Marko Kreen)
-
 - [Slony](http://slony.info/) (Jan Wieck)
-
 - [pgpool-II](https://wiki.postgresql.org/wiki/Pgpool-II) ([Tatsuo Ishii](http://www.pgcon.org/2008/schedule/speakers/95.en.html))
-
 - [Hot standby](https://wiki.postgresql.org/wiki/Hot_Standby) and [Streaming replication](https://wiki.postgresql.org/wiki/Streaming_Replication) (Heikki Linnakangas)
-
 - [Bucardo](https://bucardo.org/) (Greg Sabino Mullane)
-
 - [Golconde](https://code.google.com/archive/p/golconde/) (Gavin M. Roy)
 
 After a quick one-minute each intro describing who we were and what our replication system was, we took questions from the audience. Rather, Dan Langille played the part of the moderator and gathered written questions from the audience which he read to us, and we each took turns answering. We managed to get through 16 questions. All were interesting, even if some did not apply to all the solutions. Some of the more relevant ones I remember:
