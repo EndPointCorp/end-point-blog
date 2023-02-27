@@ -11,8 +11,6 @@ tags:
 date: 2010-01-15
 ---
 
-
-
 I’ve just publicly released another Postgres-related script, this one called “boxinfo”. Basically, it gathers information about a box (server), hence the catchy and original name. It outputs the information it finds into an HTML page, or into a MediaWiki formatted page.
 
 The goal of boxinfo is to have a simple, single script that quickly gathers important information about a server into a web page, so that you can get a quick overview of what is installed on the server and how things are configured. It’s also useful as a reference page when you are trying to remember which server was it that had Bucardo version 4.5.0 installed and was running pgbouncer.
@@ -30,5 +28,3 @@ The main page for it is on the Bucardo wiki at [https://bucardo.org/wiki/Boxinfo
 What exactly does the output look like? We’ve got an example on the wiki showing the sample output from a run against my laptop. Some of the items were removed, but it should give you an idea of what the script can do, particularly with regards to the Postgres information: [https://bucardo.org/Boxinfo/Example/](https://bucardo.org/Boxinfo/Example/)
 
 The script is still a little rough, so we welcome any patches, bug reports, requests, or comments. The development version can be obtained by running: **git clone git://bucardo.org/boxinfo.git**
-
-

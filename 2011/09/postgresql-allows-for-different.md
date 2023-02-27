@@ -9,8 +9,6 @@ tags:
 date: 2011-09-28
 ---
 
-
-
 <a href="/blog/2011/09/postgresql-allows-for-different/image-0-big.jpeg" onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5657240288526769410" src="/blog/2011/09/postgresql-allows-for-different/image-0.jpeg" style="float:right; margin:0 0 10px 10px;cursor:pointer; cursor:hand;width: 240px; height: 160px;"/></a>
 
 PostgreSQL allows for different transaction isolation levels to be specified. Because [Bucardo](https://bucardo.org/Bucardo/) needs a consistent snapshot of each database involved in replication to perform its work, the first thing that the Bucardo daemon does when connecting to a remote [PostgreSQL](https://www.postgresql.org/) database is:
@@ -34,5 +32,3 @@ Since this can be a little confusing, here’s a handy chart showing how version
 <table border="2" cellpadding="7"><tbody><tr style="background-color: #00aaee"><th colspan="4">Postgres version 9.0 and earlier</th><th colspan="4">Postgres version 9.1 and later</th></tr><tr style="background-color: #00bbbb"><th>Requested isolation level</th><th>→</th><th>Actual internal isolation level</th><th colspan="2">Version comparison</th><th>Actual internal isolation level</th><th>←</th><th>Requested isolation level</th></tr><tr style="background-color: #ffcccc"><th>READ UNCOMMITTED</th><td>↘</td><th rowspan="2">Read committed</th><th colspan="2" rowspan="2">Exact same</th><th rowspan="2">Read committed</th><td>↙</td><th>READ UNCOMMITTED</th></tr><tr style="background-color: #ffcccc"><th>READ COMMITTED</th><td>↗</td><td>↖</td><th>READ COMMITTED</th></tr><tr style="background-color: #ffee99"><th>REPEATABLE READ</th><td>↘</td><th rowspan="2">Serializable</th><th colspan="2" rowspan="2">Functionally identical</th><th rowspan="2">Repeatable read</th><td rowspan="2">←</td><th rowspan="2">REPEATABLE READ</th></tr><tr style="background-color: #ffee99"><th>SERIALIZABLE</th><td>↗</td></tr><tr style="background-color: #aaffaa"><th colspan="3"> </th><th colspan="2">9.1 only!</th><th>Serializable (true)</th><td>←</td><th>SERIALIZABLE</th></tr></tbody></table>
 
 Congratulations and thanks to Kevin Grittner and Dan Ports for making true serializability a reality!
-
-

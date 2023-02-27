@@ -4,12 +4,11 @@ title: Inside PostgreSQL - Data Types and Operator Classes
 github_issue_number: 134
 tags:
 - postgres
+- bucardo
 date: 2009-04-28
 ---
 
-
-
-Two [separate](https://mail.endcrypt.com/pipermail/check_postgres/2009-April/000406.html) [posts](https://mail.endcrypt.com/pipermail/bucardo-general/2009-April/000272.html) taken from two separate mailing lists I’m on have gotten me thinking about PostgreSQL data types and operator classes today. The first spoke of a table where the poster had noticed that there was no entry in the [pg_stats](https://www.postgresql.org/docs/8.3/static/view-pg-stats.html) table for a particular column using the [point data type](https://www.postgresql.org/docs/8.3/static/datatype-geometric.html#AEN5480). The second talks about Bucardo failing when trying to select DISTINCT values from a [polygon](https://www.postgresql.org/docs/8.3/static/datatype-geometric.html#AEN5582) type column. I’ll only talk about the first, here, but both of these behaviors stem from the fact that the data types in question lack a few things more common types always have.
+Two [separate](https://bucardo.org/pipermail/check_postgres/2009-April/000406.html) [posts](https://bucardo.org/pipermail/bucardo-general/2009-April/000272.html) taken from two separate mailing lists I’m on have gotten me thinking about PostgreSQL data types and operator classes today. The first spoke of a table where the poster had noticed that there was no entry in the [pg_stats](https://www.postgresql.org/docs/8.3/static/view-pg-stats.html) table for a particular column using the [point data type](https://www.postgresql.org/docs/8.3/static/datatype-geometric.html#AEN5480). The second talks about Bucardo failing when trying to select DISTINCT values from a [polygon](https://www.postgresql.org/docs/8.3/static/datatype-geometric.html#AEN5582) type column. I’ll only talk about the first, here, but both of these behaviors stem from the fact that the data types in question lack a few things more common types always have.
 
 The first stems from the point type’s lack of a default b-tree operator class and lack of an explicitly-declared analyze function. What are those, you ask? In the pg_type table, the column typanalyze contains the OID of a function that will analyze the data type in question, so when you call ANALYZE on a table containing that data type, that function will be run. In a default installation of PostgreSQL, all rows contain 0 in this column, meaning use the default analyze function.
 
@@ -25,5 +24,3 @@ This whole line of thought stemmed from the point data type not having these fun
 All that said, if you can think of a nice set of statistics ANALYZE might get from point data that would be useful for later query planning, you might implement a custom analyze function to fill the pg_stats table, and selectivity estimation functions to consume the data you generate, to make queries on point data that much better...
 
 UPDATE: Those interested in the guts of a type-specific analyze function might take a look at [ts_typanalyze](https://doxygen.postgresql.org/ts__typanalyze_8c.html#608b1ac4a7bdb227da47459c9ef716e3), which is [in 8.4](https://www.postgresql.org/message-id/20080714005146.29D28754A84@cvs.postgresql.org). Note that on its own, the typanalyze function doesn’t do any good—​it needs selectivity functions, defined in [this file](https://web.archive.org/web/20090516074815/http://doxygen.postgresql.org/ts__selfuncs_8c-source.html), which also were [committed in 8.4](https://www.postgresql.org/message-id/20080919190341.3CAC67545A4@cvs.postgresql.org). Both patches courtesy of Jan Urbanski, and various reviewers.
-
-

@@ -12,7 +12,7 @@ Many of the blogs I follow recently published a list of most popular articles fr
 
 Here’s a breakdown of article categories (the categorization was a bit difficult: the “Tips, Community, Etc.” was a fallback category for any articles that didn’t have more than a few similar articles):
 
-<a href="https://3.bp.blogspot.com/_wWmWqyCEKEs/S0KCwEai_3I/AAAAAAAAC-g/VLa-3Z2TY6c/s1600-h/categorize.png" onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5423040663637917554" src="/blog/2010/01/2009-end-point-blogging/image-0.png" style="margin: 0px auto 10px; display: block; text-align: center; cursor: pointer; width: 400px; height: 327px;"/></a>
+<img src="/blog/2010/01/2009-end-point-blogging/image-0.png" style="margin: 0px auto 10px; display: block; text-align: center"/></a>
 
 In 2009, the top 10 articles with the highest number of unique visitors were:
 
@@ -62,11 +62,11 @@ I should probably note that those aren’t really **lame** articles. They likely
 
 This past year, I’ve approached blogging as a sales or marketing tool to get traffic from potential clients or to inform existing clients of the variety of services we provide. So, I was interested in comparing traffic between our blog and main site. The graph below shows the total page views for the main site and blog:
 
-<a href="https://2.bp.blogspot.com/_wWmWqyCEKEs/S0KCwn6r3CI/AAAAAAAAC-w/6DyFOwSt9iQ/s1600-h/traffic_comparison.png" onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5423040673167957026" src="/blog/2010/01/2009-end-point-blogging/image-0.png" style="margin: 0px auto 10px; display: block; text-align: center; cursor: pointer; width: 400px; height: 164px;"/></a>
+<img src="/blog/2010/01/2009-end-point-blogging/image-1.png" style="margin: 0px auto 10px; display: block; text-align: center"/>
 
 And I was interested in looking at the amount of referral traffic (page views again) our main site receives from the blog:
 
-<a href="http://3.bp.blogspot.com/_wWmWqyCEKEs/S0KCwf5ZqQI/AAAAAAAAC-o/7Fh1WtNpCWU/s1600-h/referral_comparison.png" onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5423040671015086338" src="/blog/2010/01/2009-end-point-blogging/image-0.png" style="margin: 0px auto 10px; display: block; text-align: center; cursor: pointer; width: 400px; height: 164px;"/></a>
+<img src="/blog/2010/01/2009-end-point-blogging/image-2.png" style="margin: 0px auto 10px; display: block; text-align: center"/>
 
 It’s pretty cool that in the last few months, our blog traffic has been 2 to 3 times as much as our main web site. And also interesting that 1/4 to 1/3 of the referral traffic to our main site came from our blog in the last few months. Referral traffic makes up roughly one third of our main site traffic, so we get about 10% of total traffic from blog referral traffic—​which is fairly effective.
 
