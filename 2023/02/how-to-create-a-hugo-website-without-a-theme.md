@@ -297,7 +297,14 @@ If you host the files yourself, just download and move the necessary files to `s
         ├── contrib
         │   └── auto-render.min.js
         ├── fonts
-        │   └── ✀
+        │   ├── KaTeX_AMS-Regular.ttf
+        │   ├── KaTeX_AMS-Regular.woff
+        │   ├── KaTeX_AMS-Regular.woff2
+        │   ├── KaTeX_Caligraphic-Bold.ttf
+        │   ├── KaTeX_Caligraphic-Bold.woff
+        │   ├── KaTeX_Caligraphic-Bold.woff2
+        │   ├── KaTeX_Caligraphic-Regular.ttf
+        │   └── … (more fonts here, not shown to save space)
         ├── katex.min.css
         └── katex.min.js
 ```
