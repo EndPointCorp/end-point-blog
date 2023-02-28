@@ -1,7 +1,7 @@
 ---
 title: "How to create a Hugo website without a theme"
 author: Seth Jensen
-github_issue_number: 999999
+github_issue_number: 1939
 tags:
 - html
 - development
@@ -37,7 +37,7 @@ title = "Notes"
 pluralizelisttitles = false
 ```
 
-Other than the title, the only thing I changed here is disabling `pluralizelisttitles`. Hugo expects you to name your sections something singular (e.g., put your blog posts in a `post` directory), then automatically pluralizes the title when listing content in that section (`Posts`). I prefer the singular for my classes (Math 112 instead of Math 112s and so on).
+Other than the title, the only thing I changed here is disabling `pluralizelisttitles`. Hugo expects you to name your sections something singular (e.g., put your blog posts in a `post` directory), then automatically pluralizes the title when listing content in that section (`Posts`). I prefer the singular for my university class names (Math 112 instead of Math 112s and so on).
 
 ### Layout
 
@@ -230,7 +230,7 @@ Can be done recursively: `sumto(5) = 5 + sumto(4)`
 Recursive function rules:
 
 1. have a base case (a case to stop the recursion)
-2. the recurive function must progress toward the base case (otherwise it will recurse infinitely)
+2. the recursive function must progress toward the base case (otherwise it will recurse infinitely)
 3. trust the induction
 4. Make sure that it won't make too many recursive calls
 5. Never run the same arguments of the recursive function twice. Caching may help
@@ -246,13 +246,14 @@ To deploy the site to the `build` directory, run:
 $ hugo
 ```
 
-Or to use Hugo's development server (one of its strongest features, in my opinion), go to the base site directory (`notes`) and run:
+Or to use Hugo's development server (one of its strongest features, in my opinion), go to the base site directory and start it:
 
 ```plain
+$ cd notes
 $ hugo serve
 ```
 
-It will give you a localhost address with a port (`1313` unless it's taken) that you can open in your browser of choice.
+It will give you a localhost address with a port (`1313` unless it's taken by another service) that you can open in your browser of choice.
 
 Now you should have a shiny new Hugo site to work with, no theme required!
 
@@ -286,9 +287,9 @@ Put the following in `layouts/partials/katex.html`:
 <script defer src="/katex/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
 ```
 
-I [downloaded](https://katex.org/docs/browser.html#download--host-things-yourself) KaTeX myself, but you could easily modify this partial to use CDN-hosted files.
+I [downloaded](https://katex.org/docs/browser.html#download--host-things-yourself) KaTeX myself, which is nice for serving your own content while offline. But you could easily modify this partial to use CDN-hosted files.
 
-If you host the files yourself, like I did, just download and move the necessary files to `static/katex`. You only need to keep a few files out of the ones KaTeX ships with:
+If you host the files yourself, just download and move the necessary files to `static/katex`. You only need to keep a few files out of the ones KaTeX ships with:
 
 ```plain
 └── static
