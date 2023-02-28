@@ -5,6 +5,7 @@ github_issue_number: 1939
 tags:
 - html
 - development
+- static-site-generator
 date: 2023-02-14
 ---
 
