@@ -143,7 +143,7 @@ After the earlier explanations understanding this one should be easy.
 - I placed the original query calculating the cumulative sum in the WITH block.
 - SELECT creates a row set with two columns
 
-        - The first column is date returns from subselect, just before ORDER BY. There are returned all dates between min and max date from the original data.
-        - The second column is a subquery getting calculated cumulative sum. It gets the sum for current date (from the first column), or the previous calculated.
+    - The first column is date returns from subselect, just before ORDER BY. There are returned all dates between min and max date from the original data.
+    - The second column is a subquery getting calculated cumulative sum. It gets the sum for current date (from the first column), or the previous calculated.
 
 - And of course we need ordering at the end. The database can reorder the data as it wants during executing the query, so we always need to declare the ordering at the end. Otherwise strange things can happen (like having the same ordering of rows for years, and suddenly a totally different one, just because someone added new row, deleted some other, or just restarted application).

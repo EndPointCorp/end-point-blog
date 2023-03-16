@@ -24,12 +24,12 @@ Since the last general update, we've tackled a number of additional changes:
 - SSL support: The Piggybak core now supports SSL for the checkout, which leverages the lightweight Rails gem [rack-ssl-enforcer](https://github.com/tobmatth/rack-ssl-enforcer). A Piggybak config variable specifying that checkout should be secure must be set to true in the main Rails application, which triggers that a specific set of pages should be secure. This configuration is not ideal to use if the main Rails application requires more complex management of secure pages.
 - Minor bug fixes & cleanup: The updates below include minor refactoring and/or bug fixes to the Piggybak core:
 
-        - Moved order confirmation outside of controller, to minimize failure of order processing if the email confirmation fails.
-        - RailsAdmin DRY cleanup
-        - Abilities (CanCan) cleanup to require less manual coding, which simplifies the code required in the CanCan model.
-        - Breakdown of orders/submit.html.erb, which allows for easier override of checkout page elements.
-        - Tax + coupons bug fixes.
-        - RailsAdmin upgrade to updated recent versions.
+    - Moved order confirmation outside of controller, to minimize failure of order processing if the email confirmation fails.
+    - RailsAdmin DRY cleanup
+    - Abilities (CanCan) cleanup to require less manual coding, which simplifies the code required in the CanCan model.
+    - Breakdown of orders/submit.html.erb, which allows for easier override of checkout page elements.
+    - Tax + coupons bug fixes.
+    - RailsAdmin upgrade to updated recent versions.
 
 - Heroku tutorial: Piggybak support in Piggybak was described [in this blog article](/blog/2012/11/piggybak-on-heroku/).
 - Advanced taxonomy or product organization: An extension for advanced product organization (e.g. categories, subcategories) was released, but we still plan to add more documentation regarding its functionality and use.

@@ -25,32 +25,32 @@ This morning kicked off with a [RubyRogues](https://devchat.tv/ruby-rogues) live
 
 - [James Edward Gray II](http://graysoftinc.com/)
 
-        - James focused on the point that experimentation is important and to perceive all code as experimental.
+    - James focused on the point that experimentation is important and to perceive all code as experimental.
 
 - [Avdi Grimm](https://twitter.com/avdi)
 
-        - Avdi’s main argument was a suggestion to practice deliberate and mindful coding. While he believes 
+    - Avdi’s main argument was a suggestion to practice deliberate and mindful coding. While he believes 
 that there is a place for the “shut up and code” mentality in some projects depending on risk, it’s not acceptable to have this perspective when it comes to community sharing of knowledge.
-        - Avdi recommends that exercising introspection by reviewing your code and explaining it to someone else (how and why) will make you a better programmer and communicator.
+    - Avdi recommends that exercising introspection by reviewing your code and explaining it to someone else (how and why) will make you a better programmer and communicator.
 
 - David Brady
 
-        - David shared that Ruby is not a [block oriented](http://www.functionblocks.org/Introduction.html) [lexically scoped](http://en.wikipedia.org/wiki/Scope_(computer_science)#Lexical_scoping_and_dynamic_scoping) language.
-        - He suggests that you should a) learn Ruby as if it’s unlike the other languages you know b) learn CoffeeScript because it 
+    - David shared that Ruby is not a [block oriented](http://www.functionblocks.org/Introduction.html) [lexically scoped](http://en.wikipedia.org/wiki/Scope_(computer_science)#Lexical_scoping_and_dynamic_scoping) language.
+    - He suggests that you should a) learn Ruby as if it’s unlike the other languages you know b) learn CoffeeScript because it 
 writes better JavaScript than you will c) join the community and d) don’t be a douchebag (translation: be humble, not arrogant)
 because d-bags make a bad stereotype for Rails programmers
 
 - [Josh Susser](http://blog.hasmanythrough.com/)
 
-        - Josh suggests to exercise prudence, or acting with or showing care and thought for the future by building a strong foundation.
-        - He also discussed how while he agrees with comments of previous keynotes (loss aversion is pillar of conservatism, experienced
+    - Josh suggests to exercise prudence, or acting with or showing care and thought for the future by building a strong foundation.
+    - He also discussed how while he agrees with comments of previous keynotes (loss aversion is pillar of conservatism, experienced
 developers have a lower tolerance for technical debt), that he also has the perspective that he has a limited budget for risk 
 in projects. From his experience, bundler was a huge win in minimizing risk, but asset pipeline (in its current state) spent all
 of his risk budget.
 
 - Charles Max Wood
 
-        - Charles focused on how the Rails community should try to encourage and bring other developers to the community by evangelizing it. We should reach out to other communities and groups to encourage them to try Rails.
+    - Charles focused on how the Rails community should try to encourage and bring other developers to the community by evangelizing it. We should reach out to other communities and groups to encourage them to try Rails.
 
 ### Lightning Talks
 
