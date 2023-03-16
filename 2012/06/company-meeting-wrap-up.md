@@ -8,7 +8,7 @@ tags:
 date: 2012-06-18
 ---
 
-<img border="0" src="/blog/2012/06/company-meeting-wrap-up/image-0.jpeg" width="750"/>
+<img border="0" src="/blog/2012/06/company-meeting-wrap-up/image-0.jpeg" width="750"/><br>
 End Pointers at our annual company meeting!
 
 Many of us End Pointers are back to work after last week’s annual company meeting of 2012 held in New York City. We attended a 3-day conference full of technical tips, client updates, and general company news. Everyone participated in live blogging during the conference, producing valuable documentation to allow us to revisit what was discussed. Here’s a list of all the articles in case you missed any, or felt overwhelmed by the articles in the RSS feed:
@@ -60,10 +60,10 @@ Many of us End Pointers are back to work after last week’s annual company meet
 </tr>
 </tbody></table>
 
-<img border="0" src="/blog/2012/06/company-meeting-wrap-up/image-1.jpeg" width="750"/>
+<img border="0" src="/blog/2012/06/company-meeting-wrap-up/image-1.jpeg" width="750"/><br>
 Bowling night! Here we are, divided up into our teams.
 
 Since the majority of us work remotely, the meeting also served as a good time to socialize and visit with our coworkers. We participated in a friendly bowling competition, a "Brain" bowl, went out to dinner, and saw some popular sites in NYC.
 
-<img border="0" src="/blog/2012/06/company-meeting-wrap-up/image-2.jpeg" width="750"/>
+<img border="0" src="/blog/2012/06/company-meeting-wrap-up/image-2.jpeg" width="750"/><br>
 View from the Empire State Building.
