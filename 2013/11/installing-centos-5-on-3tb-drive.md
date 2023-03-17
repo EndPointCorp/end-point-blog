@@ -21,27 +21,27 @@ Since the CentOS 5 installer cannot work with GPT partition tables, we needed to
 - Boot into the rescue CD
 - Use gdisk to first delete the old partition table to make sure you start cleanly.
 
-        - gdisk, then x (for extended commands), then z to delete.
+    - gdisk, then x (for extended commands), then z to delete.
 
 - Then go through the process to create the partitions as desired. We wanted:
 
-        - /boot 500M
-        - 1.5TB LVM physical disk
-        - remaining space LVM physical disk
+    - /boot 500M
+    - 1.5TB LVM physical disk
+    - remaining space LVM physical disk
 
 - Save the partition table and quit gdisk
 - Create LVM group and volumes as desired. Here’s what we did:
 
-        - pvcreate /dev/sda2, then pvcreate /dev/sda3
-        - vgcreate vg0 /dev/sda2 /dev/sda3
-        - lvcreate -L 32G -n swap vg0
-        - lvcreate -L 100G -n root vg0
+    - pvcreate /dev/sda2, then pvcreate /dev/sda3
+    - vgcreate vg0 /dev/sda2 /dev/sda3
+    - lvcreate -L 32G -n swap vg0
+    - lvcreate -L 100G -n root vg0
 
 - Then make the file systems for those volumes.
 
-        - mkfs.ext3 /dev/sda1 (the /boot partition)
-        - mkswap /dev/vg0/swap
-        - mkfs.ext4 /dev/vg0/root
+    - mkfs.ext3 /dev/sda1 (the /boot partition)
+    - mkswap /dev/vg0/swap
+    - mkfs.ext4 /dev/vg0/root
 
 Once the partitioning is set up as required, we boot the CentOS 5 rescue CD for the installation process. The installation disc also incidentally contains a rescue mode which can be used by typing linux rescue at the boot prompt. Follow the instructions to get to the rescue prompt. If the network install CD image is used, follow the menus until a choice as to how to load the rescue image is given, then select the appropriate method. We used the HTTP method, and specified vault.centos.org as the server name, and /5.10/os/x86_64 as the path (use your favorite mirror as needed); this step involves loading the rescue image which may take some time, at the end of which you will be prompted to find your existing OS, since there is none, select Skip and this will result in being dropped to the rescue prompt. Once at the rescue prompt, we can proceed to the OS installation step.
 

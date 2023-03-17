@@ -11,7 +11,7 @@ tags:
 date: 2021-02-24
 ---
 
-<img src="/blog/2021/02/job-rails-vuejs-developer/25677176162_c54b9effec_o-crop.jpg" alt="Two software developers at their computers" />
+<img src="/blog/2021/02/job-rails-vuejs-developer/25677176162_c54b9effec_o-crop.jpg" alt="Two software developers at their computers" /><br>
 [Photo](https://www.flickr.com/photos/wocintechchat/25677176162/) by [WOCinTech Chat](https://www.wocintechchat.com/), [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/), cropped
 
 We are seeking a full-time software engineer specializing in Ruby on Rails and Vue.js to work with us on our clients’ applications.

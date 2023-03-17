@@ -9,7 +9,7 @@ tags:
 date: 2020-03-02
 ---
 
-<img src="/blog/2020/03/symfony-quickstart/symphony.jpg" alt="symphony" />
+<img src="/blog/2020/03/symfony-quickstart/symphony.jpg" alt="symphony" /><br>
 [Photo](https://unsplash.com/photos/VEOk8qUl9DU) by [Arindam Mahanta](https://unsplash.com/@arindam_mahanta)
 
 This article is written for anyone who has experience working with PHP and is starting to work with Symfony. We won’t assume any prior knowledge you might have with Symfony, so if getting started with this framework is a high priority, then this article is for you. I know that it can be difficult and you may be unsure where to look; I was in the same situation when I first worked with Symfony.

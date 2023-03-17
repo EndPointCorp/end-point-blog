@@ -15,26 +15,26 @@ Here are some questions I consider on these topics:
 
 - What is the cost of extensibility?
 
-        - code complexity
-        - code maintenance (indirectly, as code complexity increases)
-        - harder learning curve for new developers (indirectly, as code complexity increases)
-        - performance implications (possibly, indirectly, as code complexity increases)
-        - difficulty in testing code (possibly)
+    - code complexity
+    - code maintenance (indirectly, as code complexity increases)
+    - harder learning curve for new developers (indirectly, as code complexity increases)
+    - performance implications (possibly, indirectly, as code complexity increases)
+    - difficulty in testing code (possibly)
 
 - What is the cost of modularity?
 
-        - same as cost of extensibility
-        - challenge of determining what features to include in core (or exclude from core)
-        - can be both performance implications and performance mitigation
+    - same as cost of extensibility
+    - challenge of determining what features to include in core (or exclude from core)
+    - can be both performance implications and performance mitigation
 
 - What are the values of extensibility?
 
-        - robustness of tool
-        - increased community involvement (indirectly, as robustness increases)
-        - further reach, increased use cases (indirectly, as robustness increases)
+    - robustness of tool
+    - increased community involvement (indirectly, as robustness increases)
+    - further reach, increased use cases (indirectly, as robustness increases)
 
 - What are the values of modularity
 
-        - same as values of extensibility
+    - same as values of extensibility
 
 From a cost-benefit perspective, the goal here should allow the values of extensibility and modularity to outweigh the disadvantages to allow for a flourishing, growing community of developers and users of the tool. Extensibility and modularity are not always easy to figure out, especially in some frameworks, but I think getting these two elements correct are very important factors in the success of an open source project. I also don’t think many tools "get it right" the first time around, so there’s always a chance to improve and refactor as the user base builds.
