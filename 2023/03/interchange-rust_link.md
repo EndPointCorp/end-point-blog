@@ -56,7 +56,7 @@ After each section label is the number of items in that section.
 
 Then that many items are given on one line each, beginning with the number of bytes in the value, followed by a space and then the value.
 
-Finally an `end` section concludes the preliminary values, and then the HTTP response body follows unmodified.
+Finally an `end` section concludes the preliminary values, and then the HTTP response body follows unmodified in the `entity` section.
 
 Here is an example request with an empty request body, as the CGI link program passes it to Interchange:
 
