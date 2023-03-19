@@ -26,8 +26,9 @@ While there were *several* wonderful talks, [Gert van der Spoel](https://www.per
 - Middlewares for static files, so these are handled outside of Dancer
 - New [Hash::MultiValue](http://p3rl.org/Hash::MultiValue) parameter keywords (route_parameters, query_parameters, body_parameters; covered in my [earlier post](/blog/2015/10/perl-dancer-conference-2015-report/))
 - [Delayed responses](https://metacpan.org/pod/Dancer2::Manual#Delayed-responses-Async-Streaming) (asynchronous) with delayed keyword:
-        - Runs on the server after the request has finished.
-        - Streaming is also asynchronous, feeding the user chunks of data at a time.
+
+    - Runs on the server after the request has finished.
+    - Streaming is also asynchronous, feeding the user chunks of data at a time.
 
 Items coming soon to Dancer may include: Web Sockets (supported in [Plack](http://p3rl.org/Plack)), per-route [serialization](https://metacpan.org/pod/Dancer2::Manual#Serializers1) (currently enabling a serializer such as JSON affects the entire app—​later on, [Russell](https://twitter.com/veryrusty) [released a module](http://p3rl.org/Dancer2::Plugin::SendAs) for this, which may make it back into the core), Dancer2::XS, and [critic/linter policies](https://github.com/PerlDancer/perl-lint-policy-dancer2).
 

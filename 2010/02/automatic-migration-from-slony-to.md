@@ -4,6 +4,8 @@ title: Automatic migration from Slony to Bucardo
 github_issue_number: 261
 tags:
 - postgres
+- bucardo
+- replication
 date: 2010-02-01
 ---
 

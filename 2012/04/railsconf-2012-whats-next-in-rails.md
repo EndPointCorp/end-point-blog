@@ -45,6 +45,7 @@ covered here, so check out [the slides](https://speakerdeck.com/wycats/rails-the
 - API between JS framework and Rails, as the popularity of JS frameworks grows
 
 <img border="0" src="/blog/2012/04/railsconf-2012-whats-next-in-rails/image-1.jpeg" width="750"/>
+
 Coding with convention (middle) allows developers* to avoid making diverging trivial decisions (left). Conventions provide the ability to share resources and domain expertise and add new features quickly, even if course correction (right) is needed on those conventions.
 
 * not to be confused with sperm :)

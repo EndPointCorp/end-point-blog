@@ -4,7 +4,7 @@ author: Couragyn Chretien
 tags:
 - ssh
 - tips
-- visual-studio-code
+- vscode
 date: 2022-01-06
 github_issue_number: 1817
 ---

@@ -10,7 +10,7 @@ date: 2015-04-17
 
 Next week, I’m headed to my 6th [RailsConf](https://railsconf.com/2015/) in Atlanta, with the whole family in tow:
 
-<img border="0" src="/blog/2015/04/railsconf-2015-coming-soon/image-0.png" style="margin-bottom:3px;"/>  
+<img border="0" src="/blog/2015/04/railsconf-2015-coming-soon/image-0.png" style="margin-bottom:3px;"/><br>
 The gang. Note: Dogs will not be attending conference.
 
 This will be a new experience since my husband will be juggling two kids while I attend the daily sessions. So it makes sense going into the conference fairly organized to aid in the kid juggling, right? So I’ve picked out a few sessions that I’m looking forward to attending. Here they are:

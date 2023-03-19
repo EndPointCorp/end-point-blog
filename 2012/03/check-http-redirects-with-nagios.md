@@ -22,11 +22,11 @@ In my travels, I found [check_http_redirect](https://exchange.nagios.org/directo
 
 ```bash
 -U          URL to retrieve (http or https)
-        -R          URL that must be equal to Header Location Redirect URL
-        -t          Timeout in seconds to wait for the URL to load. If the page fails to load, 
-                    check_http_redirect will exit with UNKNOWN state (default 60)
-        -c          Depth of redirects to follow (default 10)
-        -v          Print redirect chain
+-R          URL that must be equal to Header Location Redirect URL
+-t          Timeout in seconds to wait for the URL to load. If the page fails to load, 
+            check_http_redirect will exit with UNKNOWN state (default 60)
+-c          Depth of redirects to follow (default 10)
+-v          Print redirect chain
 ```
 
 If check_http_redirect is unable to find any redirects to follow or any of the redirects results in a 4xx or 5xx status code returned, the plugin will report a critical state code and the nature of the problem. Additionally, if the number of redirects exceeds the depth of redirects to follow as specified in the command arguments, it will notify you of this and exit with an unknown state code. An OK status will be returned only if the redirects result in a successful response to a URL which is a regex match against the options specified in the R argument.

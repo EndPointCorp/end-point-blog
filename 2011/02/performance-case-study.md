@@ -28,7 +28,7 @@ date: 2011-02-09
 </td>
 <td align="center" valign="top">
 <a href="/blog/2011/02/performance-case-study/image-2-big.png" onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5571698267043922738" src="/blog/2011/02/performance-case-study/image-2.png" style="display:block; margin:0px auto 10px; text-align:center;cursor:pointer; cursor:hand;width: 135px; height: 400px;"/></a>
-Inspiredology’s complete homepage.
+<p>Inspiredology’s complete homepage.</p>
 </td>
 </tr>
 </tbody></table>
@@ -39,31 +39,23 @@ And here’s a summary of the changes involved in each step:
 
 - Step 1
 
-        <ul>
-          <li>Addition of CSS Sprites: I [wrote about CSS Sprites](/blog/2010/09/css-sprites/) a while back and A List Apart has an older but still relevant article on CSS Sprites [here](https://web.archive.org/web/20110217044912/www.alistapart.com/articles/sprites). Repeating elements like navigation components, icons, and buttons are suitable for CSS sprites. Article or page-specific images are not typically suitable for CSS sprites. For Inspiredology’s site, I created two sprited images—​one with a large amount of navigation components, and one with some of their large background images. You can find a great tool for building CSS rules from a sprited image [here](https://web.archive.org/web/20110217071401/http://www.spritebox.net/).</li>
-          <li>Combination of JS and CSS files, where applicable. Any JavaScript or CSS files that are included throughout the site are suitable for combination. Files that can’t be combined include suckerfish JavaScript like Google Analytics or marketing service scripts.</li>
-          <li>Moved JavaScript requests to the bottom of the HTML. This is recommended because JavaScript requests block parallel downloading. Moving them to the bottom allows page elements to be downloaded and rendered first, followed by JavaScript loading.</li>
-        </ul>
+    - Addition of CSS Sprites: I [wrote about CSS Sprites](/blog/2010/09/css-sprites/) a while back and A List Apart has an older but still relevant article on CSS Sprites [here](https://web.archive.org/web/20110217044912/www.alistapart.com/articles/sprites). Repeating elements like navigation components, icons, and buttons are suitable for CSS sprites. Article or page-specific images are not typically suitable for CSS sprites. For Inspiredology’s site, I created two sprited images—​one with a large amount of navigation components, and one with some of their large background images. You can find a great tool for building CSS rules from a sprited image [here](https://web.archive.org/web/20110217071401/http://www.spritebox.net/).
+    - Combination of JS and CSS files, where applicable. Any JavaScript or CSS files that are included throughout the site are suitable for combination. Files that can’t be combined include suckerfish JavaScript like Google Analytics or marketing service scripts.
+    - Moved JavaScript requests to the bottom of the HTML. This is recommended because JavaScript requests block parallel downloading. Moving them to the bottom allows page elements to be downloaded and rendered first, followed by JavaScript loading.
 
 - Step 2
 
-        <ul>
-          <li>Image compression with jpegtran, pngcrush, convert. I use pngcrush often. I read about jpegtran in [Yahoo’s Best Practices for Speeding Up Your Web Site](https://developer.yahoo.com/performance/rules.html). I [wrote a bit about image compression](/blog/2009/12/jpeg-compression-quality-or-quantity/) a while ago and briefly experimented with image compression using imagemagick on Inspiredology’s images.</li>
-        </ul>
+    - Image compression with jpegtran, pngcrush, convert. I use pngcrush often. I read about jpegtran in [Yahoo’s Best Practices for Speeding Up Your Web Site](https://developer.yahoo.com/performance/rules.html). I [wrote a bit about image compression](/blog/2009/12/jpeg-compression-quality-or-quantity/) a while ago and briefly experimented with image compression using imagemagick on Inspiredology’s images.
 
 
 - Step 3
 
-        <ul>
-          <li>Addition of expires headers and disabling ETags: These are standard optimization suggestions. [Jon Jensen](/team/jon-jensen/) wrote about using these a bit [here](/blog/2010/11/speeding-up-spree-demo-site/) and [here](/blog/2009/10/performance-optimization-of/).</li>
-        </ul>
+    - Addition of expires headers and disabling ETags: These are standard optimization suggestions. [Jon Jensen](/team/jon-jensen/) wrote about using these a bit [here](/blog/2010/11/speeding-up-spree-demo-site/) and [here](/blog/2009/10/performance-optimization-of/).
 
 - Step 4
 
-        <ul>
-          <li>Serving gzipped content with mod_deflate: Also a fairly standard optimization suggestion. Although, I should note I had some issues gzipping a couple of the files and since the site was in a temporary location, I didn’t spend much time troubleshooting.
-          <li>A bit more cleanup of rogue html and CSS files. In particular, there was one HTML file requested that didn’t have any content in it and another that had JavaScript that I appended to the combined JavaScript file (combined.js).
-        </ul>
+    - Serving gzipped content with mod_deflate: Also a fairly standard optimization suggestion. Although, I should note I had some issues gzipping a couple of the files and since the site was in a temporary location, I didn’t spend much time troubleshoo
+    - A bit more cleanup of rogue html and CSS files. In particular, there was one HTML file requested that didn’t have any content in it and another that had JavaScript that I appended to the combined JavaScript file (combined
 
 A side-by-side comparison of webpagetest.org’s original versus step 4 results highlights the reduction of requests in the waterfall and the large reduction in requests on the repeat view:
 
