@@ -103,9 +103,9 @@ To ignore a file or certain paths under the directory, add the paths to the conf
 ]
 ```
 
-### Code Scan in Epitrax
+### Code Scan in EpiTrax
 
-The use of a code scan tool has become an integral part of Epitrax. By integrating Horusec into our software development process, we have been able to identify potential security vulnerabilities, code quality issues, and other problems before they can cause any significant harm.
+The use of a code scan tool has become an integral part of EpiTrax. By integrating Horusec into our software development process, we have been able to identify potential security vulnerabilities, code quality issues, and other problems before they can cause any significant harm.
 
 Moreover, it has helped us reduce the overall cost and time associated with bug-fixing and maintenance tasks, making our projects more efficient and effective. By automating the scanning process, we can identify issues quickly and accurately, allowing us to prioritize and address the most critical issues first.
 
