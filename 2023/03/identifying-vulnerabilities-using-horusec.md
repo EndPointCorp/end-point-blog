@@ -33,6 +33,11 @@ It can also be integrated with CI/CD to execute the scan every time a developer 
 ```
 curl -fsSL https://raw.githubusercontent.com/ZupIT/horusec/main/deployments/scripts/install.sh | bash -s latest
 ```
+<br>
+
+The main risk of piping unseen commands into the shell is that it can lead to unintended consequences and it is a bad security practice. If a user blindly pipes the output of one command to another without fully understanding what each command does, they may inadvertently execute malicious code or perform actions that could compromise the security of the system.
+
+To mitigate these risks, one solution is to use a virtual machine specifically set up for code scanning. This virtual machine should have no production data, no secret keys, and no other sensitive information. It should be used only for the purpose of scanning source code and nothing else.
 
 ### VS Code Extension
 
@@ -117,4 +122,5 @@ Moreover, it has helped us reduce the overall cost and time associated with bug-
 By leveraging the power of code scans, we can ensure that our code is of the highest quality, and our projects are as secure and reliable as possible.
 
 <br>
+
 _Special thanks to my colleagues Kürşat Kutlu Aydemir and Edgar Mlowe for their insights and feedback on this blog post._
