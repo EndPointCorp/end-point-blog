@@ -130,11 +130,48 @@ SELECT is(
 ```
 
 
-Test to check if a constraint is enforced:
+##### Test to check if a constraint is enforced:
+
+let's assume we have the following two tables. `orders` table with columns `id`, `customer_id`, and `amount`. `customers` table with columns `id` and `name`.
+
+There is a foreign key constraint between the `orders` table and the `customers` table on the `customer_id` column.
+
+1. First, create the two tables and add the foreign key constraint:
+
 ```sql
+CREATE TABLE customers (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE orders (
+  id SERIAL PRIMARY KEY,
+  customer_id INTEGER REFERENCES customers(id),
+  amount INTEGER
+);
+```
+
+2. Now, create a test script named fk_test.sql with the following content
+``` sql
+BEGIN;
+
+-- Create test data in customers table
+INSERT INTO customers (id, name) VALUES (1, 'Customer 1');
+
+-- Declare the number of tests
 SELECT plan(1);
-SELECT has_fk('public', 'your_table', 'referenced_table', 'your_column', 'Constraint should exist between your_table and referenced_table');
+
+-- Attempt to insert an order with an invalid customer_id
+-- This should fail due to the foreign key constraint
+SELECT throws_ok(
+    'INSERT INTO orders (id, customer_id, amount) VALUES (1, 969, 100);',
+    '23503',
+    'insert or update on table "orders" violates foreign key constraint "orders_customer_id_fkey"'
+);
+
+-- Conclude the test and discard changes
 SELECT finish();
+ROLLBACK;
 ```
 
 #### Organizing and Naming your test files based on Test Anything Protocol (TAP)
