@@ -76,12 +76,59 @@ SELECT is(your_function(), expected_result, 'your_function() should return expec
 SELECT finish();
 ```
 
-Test to check if a trigger is triggered:
+#### More pgTap Tests...
+
+##### Test to check if a trigger is triggered:
+Consider the following example. We have a table named employees and a table named audit_log. When a new employee is added to the employees table, a trigger named insert_employee_trigger fires and logs the new employee's ID and creation timestamp in the audit_log table. Lets test if the trigger gets fired and produces the expected outcome.
+
+
+1. Create the tables:
 ```sql
-SELECT plan(1);
-SELECT has_trigger('public', 'your_table', 'your_trigger', 'Trigger your_trigger should exist on your_table');
-SELECT finish();
+CREATE TABLE employees (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE audit_log (
+  id SERIAL PRIMARY KEY,
+  employee_id INTEGER NOT NULL,
+  created_at TIMESTAMP NOT NULL
+);
+
 ```
+
+2. Create the trigger and trigger function:
+``` sql
+CREATE OR REPLACE FUNCTION insert_employee_trigger_function()
+RETURNS TRIGGER AS $$
+BEGIN
+  INSERT INTO audit_log (employee_id, created_at) VALUES (NEW.id, NOW());
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER insert_employee_trigger
+  AFTER INSERT ON employees
+  FOR EACH ROW
+  EXECUTE FUNCTION insert_employee_trigger_function();
+```
+3. Now, write a test using pgTAP to test the trigger:
+``` sql
+-- Set the test plan
+SELECT plan(1);
+
+  -- Prepare test data and perform operations that should fire the trigger
+  INSERT INTO employees (name) VALUES ('John Doe');
+
+
+-- Check if the desired outcome of the trigger has occurred
+SELECT is( 
+  (SELECT name FROM employees WHERE id = (SELECT employee_id FROM audit_log ORDER BY id DESC LIMIT 1)),
+  'John Doe',
+  'The insert_employee_trigger should have been fired and produced the expected outcome'
+);
+```
+
 
 Test to check if a constraint is enforced:
 ```sql
