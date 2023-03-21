@@ -1,5 +1,5 @@
 ---
-author: "Indra Pranesh Palanisamy, Kürşat Kutlu Aydemir and Edgar Mlowe"
+author: "Indra Pranesh Palanisamy"
 title: "Identifying Vulnerabilities in Code using Horusec"
 featured:
   image_url: /blog/2023/03/identifying-vulnerabilities-using-horusec/pexels-indra-pranesh-palanisamy-15837790.webp
@@ -11,7 +11,7 @@ tags:
 - vulnerability
 ---
 
-![The sun has just started to rise over the horizon, casting a warm orange glow over the calm sea. A group of fishermen can be seen pushing their small wooden boats into the water, preparing to start their day's work. The air is still cool and quiet, with only the sound of waves gently lapping against the shore as the fishermen row out into the open sea, ready to begin their early morning fishing expedition.](/blog/2023/03/identifying-vulnerabilities-using-horusec/pexels-indra-pranesh-palanisamy-15837790.webp)
+![The sun has just started to rise over the horizon. A group of fishermen can be seen pushing their small wooden boats into the water, preparing to start their day's work. The air is still cool and quiet, with only the sound of waves gently lapping against the shore as the fishermen row out into the open sea, ready to begin their early morning fishing expedition.](/blog/2023/03/identifying-vulnerabilities-using-horusec/pexels-indra-pranesh-palanisamy-15837790.webp)
 
 <!-- Photo by Pranesh, 2022 -->
 
@@ -37,6 +37,8 @@ curl -fsSL https://raw.githubusercontent.com/ZupIT/horusec/main/deployments/scri
 ### VS Code Extension
 
 Horusec has a [VS code extension](https://docs.horusec.io/docs/extensions/visual-studio-code/) which is super helpful making complete code analysis with a single click.
+
+![Screenshot of Horusec VS code extension](/blog/2023/03/identifying-vulnerabilities-using-horusec/horusec-vscode.webp)
 
 ### Usage
 
@@ -86,10 +88,12 @@ The hashes to be ignored classified can be added to the configuration file horus
 
 ```
 "horusecCliFalsePositiveHashes": [
-    HASH1, HASH2
+    "f9e5abe187ad4246daa4e9113e0a11a175347e793fbc40acd7663df67b2f89d2",
+    "878c35116d043311403a0a2e8a64f2c8d00479a1c23373dcd50372ff35e123c8"
 ],
 "horusecCliRiskAcceptHashes": [
-    HASH1, HASH2
+    "5c9af42834ca77233a0e7afc98df317fb0e6041ea69a109754f278331039f844",
+    "b494003277bcd7792390f032ba39e9a860da66ddb1ccfcd8a581978eab744561"
 ],
 ```
 
@@ -99,7 +103,8 @@ To ignore a file or certain paths under the directory, add the paths to the conf
 
 ```
 "horusecCliFilesOrPathsToIgnore": [
-    PATH1, PATH2
+    "**/tmp/**",
+    "**/.vscode/**"
 ]
 ```
 
@@ -110,3 +115,6 @@ The use of a code scan tool has become an integral part of EpiTrax. By integrati
 Moreover, it has helped us reduce the overall cost and time associated with bug-fixing and maintenance tasks, making our projects more efficient and effective. By automating the scanning process, we can identify issues quickly and accurately, allowing us to prioritize and address the most critical issues first.
 
 By leveraging the power of code scans, we can ensure that our code is of the highest quality, and our projects are as secure and reliable as possible.
+
+<br>
+_Special thanks to my colleagues Kürşat Kutlu Aydemir and Edgar Mlowe for their insights and feedback on this blog post._
