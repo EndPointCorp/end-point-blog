@@ -8,8 +8,6 @@ tags:
 date: 2017-06-26
 ---
 
-
-
 Product pricing can be quite complex. A typical Interchange catalog will have at least one table in the ProductFiles directive (often products plus either options or variants) and those tables will often have one or more pricing fields (usually price and sales_price). But usually a single, static price isn’t sufficient for more complex needs, such as accessory adjustments, quantity pricing, product grouping--not to mention promotions, sales, or other conditional features that may change a product’s price for a given situation, dependent on the user’s account or session.
 
 Typically to handle these variety of pricing possibilities, a catalog developer will implement a CommonAdjust algorithm. CommonAdjust can accommodate all the above pricing adjustments and more, and is a powerful tool (yet can become quite arcane when reaching deeper complexity).  CommonAdjust is enabled by setting the PriceField directive to a non-existent field value in the tables specified in ProductFiles.
@@ -18,7 +16,7 @@ To give an adequate introduction and treatise on CommonAdjust would be at a mini
 
 To start, let’s create a CommonAdjust string that simply replaces the typical PriceField setting, and we’ll allow it to accommodate a static sales price:
 
-```
+```plain
 ProductFiles products
 PriceField 0
 CommonAdjust :sale_price ;:price
@@ -34,7 +32,7 @@ A few comments here:
 
 At this point, we finally introduce our situation, and one that is not at all uncommon. What if I *want* a zero price? Let’s say I have a promotion for buy one product, get this other product for free. Typically, a developer would be able to expect to override the prices from the database optionally by leveraging the “mv_price” parameter in the cart. So, let’s adjust our CommonAdjust to accommodate that:
 
-```
+```plain
 CommonAdjust $ ;:sale_price ;:price
 ```
 
@@ -44,28 +42,28 @@ In the specific case of using the $ settor in CommonAdjust, we *can* set mv_pric
 
 Fortunately, there is a rarely used CommonAdjust settor that will allow for a 0 price item in a general solution. As I mentioned above, CommonAdjust calculations can themselves return other CommonAdjust atoms, which will then be operated on in a subsequent iteration. This frees us from just the special handling that works on $ and mv_price as such an atom can be returned from *any* of the CommonAdjust atoms and work.
 
-The settor of interest is >>, and according to what documentation there is on it, it was never even intended to be used as a pricing settor! Rather, it was to be a way of redirecting to additional modes for shipping or tax calculations, which can also leverage CommonAdjust for their particular purposes. However, the key to its usefulness here is thus: it does not perform any test on the value tied to it. It is set, untested, into the final result of this call to the chain_cost() routine and returned. And with no test, the fact that it’s Perly false as numeric 0 is irrelevant.
+The settor of interest is `>>`, and according to what documentation there is on it, it was never even intended to be used as a pricing settor! Rather, it was to be a way of redirecting to additional modes for shipping or tax calculations, which can also leverage CommonAdjust for their particular purposes. However, the key to its usefulness here is thus: it does not perform any test on the value tied to it. It is set, untested, into the final result of this call to the chain_cost() routine and returned. And with no test, the fact that it’s Perly false as numeric 0 is irrelevant.
 
-So building on our current CommonAdjust, let’s leverage >> to allow our companion product to have a zero cost (assuming it is the 2nd line item in the cart):
+So building on our current CommonAdjust, let’s leverage `>>` to allow our companion product to have a zero cost (assuming it is the 2nd line item in the cart):
 
-```
+```plain
 [calcn]
     $Items->[1]{mv_price} = '>>0';
     return;
 [/calcn]
 ```
 
-Now what happens is, $ in the first atom picks up the value out of mv_price and, because it’s a CommonAdjust atom, is processed in a second iteration. But this CommonAdjust atom is very simple: take the value tied to >> and return it, untested.
+Now what happens is, $ in the first atom picks up the value out of mv_price and, because it’s a CommonAdjust atom, is processed in a second iteration. But this CommonAdjust atom is very simple: take the value tied to `>>` and return it, untested.
 
-Perhaps our pricing is more complex than we can (or would like to) support with using $. So we want to write a usertag, where we have the full power of global Perl at our disposal, but we still have circumstances where that usertag may need to return zero-cost items. Using the built-in “free” solution, we’re stuck, short of setting mv_price in the item hash within the usertag, which we may not want to do for a variety of reasons. But using >>, we have no such restriction. So let’s change CommonAdjust:
+Perhaps our pricing is more complex than we can (or would like to) support with using $. So we want to write a usertag, where we have the full power of global Perl at our disposal, but we still have circumstances where that usertag may need to return zero-cost items. Using the built-in “free” solution, we’re stuck, short of setting mv_price in the item hash within the usertag, which we may not want to do for a variety of reasons. But using `>>`, we have no such restriction. So let’s change CommonAdjust:
 
-```
+```plain
 CommonAdjust $ ;[my-special-pricing] ;:sale_price ;:price
 ```
 
 Now instead of setting mv_price in the item, let’s construct [my-special-pricing] to do some heavy lifting:
 
-```
+```plain
 UserTag my-special-pricing Routine <<EOR
 sub {
     # A bunch of conditional, complicated code, but then ...
