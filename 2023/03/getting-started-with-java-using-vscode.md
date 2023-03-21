@@ -10,11 +10,12 @@ tags:
 github_issue_number: 1946
 ---
 
-![A fall sunset above an open Utah plain. The yellow sun sets behind snowy mountains, casting orange glow on the left side of the sky, while the right side of the sky is dominated by dark storm clouds rising up and to the right in a dramatic diagonal. From the edge of the mountain towards the viewer spans a large brown plain. On it, directly below the sunset is a small shack, and to its right, across a faint road leading directly forward in the center of the image, is a small, run down tractor.](/blog/2023/03/getting-started-with-java-using-vscode/farm-sunset.webp)
+![A fall sunset above an open plain: The yellow sun sets behind snowy mountains, casting orange glow on the left side of the sky, while the right side of the sky is dominated by dark storm clouds rising up and to the right in a dramatic diagonal. From the edge of the mountain towards the viewer spans a large brown plain. On it is a small shack and in the center of the image is a small, run-down tractor.](/blog/2023/03/getting-started-with-java-using-vscode/farm-sunset.webp)<br>
+Photo by Garrett Skinner, 2022
 
-<!-- Photo by Garrett Skinner, 2022 -->
+Visual Studio Code is a free source-code editor available for Windows, macOS, and Linux. While it includes a lot of features out of the box, you will likely need to extend its functionality to suit your purpose for using it. There are many extensions available, each providing their own set of features and functions.
 
-Visual Studio Code is a free source-code editor available for Windows, macOS and Linux. While it includes a lot of features out of the box, you will likely need to extend its functionality to suit your purpose for using it. There are many extensions available, each providing their own set of features and functions. In this guide we will install the [Extension Pack for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack), which is a bundle of several extensions. Installing this extension pack will add the following features to Visual Studio Code:
+In this guide we will install the [Extension Pack for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack), which is a bundle of several extensions. Installing this extension pack will add the following features to Visual Studio Code:
 
 - **Java language support** for parsing and highlighting our code
 - **Java test runner** for testing our code
@@ -30,7 +31,7 @@ If you haven't yet, [download Visual Studio Code](https://code.visualstudio.com/
 
 ### Step 2: Install the extension pack
 
-Open Visual Studio Code and click on the extensions icon in the left sidebar. A screenshot of this icon is displayed below:
+Open Visual Studio Code and click on the extensions icon in the left sidebar, which looks like this:
 
 ![Three boxes stacked in an L shape, with a fourth box above and to the right of the empty space.](/blog/2023/03/getting-started-with-java-using-vscode/vscode-extensions-icon.png)
 
@@ -38,9 +39,9 @@ This will take you to the extensions marketplace. Type "Extension Pack for Java"
 
 ### Step 3: Use the extension pack
 
-Once the installation is complete, a "Get Started with Java Development" screen is displayed. The first item on this screen is "Get your runtime ready" with a "Install JDK" button. We already have a JDK installed, so we can skip this. The remaining items on the screen are helpful to review, as they give a brief overview of the features we have just added to our editor.
+Once the installation is complete, a "Get Started with Java Development" screen is displayed. The first item on this screen is "Get your runtime ready" with an "Install JDK" button. We already have a JDK installed, so we can skip this. The remaining items on the screen are helpful to review, as they give a brief overview of the features we have just added to our editor.
 
-To ensure our JDK and extension pack are working together correctly, click **File > New file...**. You will be prompted to choose a file type. Enter "Java" and select "Java Class". You will be prompted for a file name, enter `HelloWorld.java`. You will then be prompted to choose where to save the file. Create a new directory somewhere, and save the file inside of the newly created directory.
+To ensure our JDK and extension pack are working together correctly, click **File > New file...**. You will be prompted to choose a file type. Enter "Java" and select "Java Class". You will be prompted for a file name. Enter `HelloWorld.java`. You will then be prompted to choose where to save the file. Create a new directory somewhere, and save the file inside of the newly created directory.
 
 The file `HelloWorld.java` is now open in our editor. Add the following text to the file:
 
@@ -53,7 +54,7 @@ class HelloWorld {
 }
 ```
 
-Save the file, then click the play icon at the top right of the window. This is the **Run** button. By default, it will run your Java application normally.  You can also click the dropdown next to the icon and select **Debug** to run your Java application with the debugger attached. Running with the debugger attached is very helpful when problem solving.
+Save the file, then click the play icon at the top right of the window. This is the **Run** button. By default, it will run your Java application normally.  You can also click the dropdown next to the icon and select **Debug** to run your Java application with the debugger attached, which is very helpful when problem-solving.
 
 When you click the **Run** button, assuming everything is set up properly, your code will be compiled and executed. A terminal window will be opened, where your program may take in user input and/or write output. In this terminal window, the text "Hello, world!" will be written by the program.
 
