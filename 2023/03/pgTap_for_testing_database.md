@@ -30,7 +30,7 @@ EpiTrax relies on Postgres and its functions, making pgTap an ideal tool for tes
 
 To install pgtap for Postgres, you will need to follow these steps:
 
-1.download the pgtap source code from its GitHub repository
+1. download the pgtap source code from its GitHub repository
 
 ```bash
 git clone https://github.com/pgtap/pgtap.git
@@ -41,15 +41,15 @@ git clone https://github.com/pgtap/pgtap.git
 cd pgtap
 ```
 
+3. Install the required dependencies for pgtap
+```bash
+make && make install
+```
 4. Install the required dependencies for pgtap
 ```bash
 make && make install
 ```
-6. Install the required dependencies for pgtap
-```bash
-make && make install
-```
-8. Finally, connect to your Postgres database using psql or any other Postgres client and run the following SQL command to create the pgtap extension:
+5. Finally, connect to your Postgres database using psql or any other Postgres client and run the following SQL command to create the pgtap extension:
 ```sql
 CREATE EXTENSION pgtap;
 ```
