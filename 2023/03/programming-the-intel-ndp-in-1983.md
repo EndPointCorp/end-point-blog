@@ -23,6 +23,8 @@ Steve noticed the PC had an empty socket on the motherboard, next to the Intel 8
 
 The CPU could operate perfectly well on its own, but if the NDP was installed, they would both read the same code stream. The CPU would ignore NDP instructions and let the NDP execute them. The NDP would ignore non-NDP instructions and let the CPU execute them. While the 8088/86 is running code, it can’t do anything else. With the NDP, true parallel processing is possible.
 
+![Intel 8087 chip imprinted with part numbers and "© Intel '80 '81" alongside a U.S. 5¢ piece (nickel) for scale](/blog/2023/03/programming-the-intel-ndp-in-1983/8087_with_Nickel_003.webp)
+
 ### The Plan
 
 IBM selected Microsoft to produce its systems software: operating system, compilers, linkers, libraries, macro assembler, etc. Microsoft not only ignored the 8087, it devised a floating-point format incompatible with it. Steve had signed a contract with Intel to be the exclusive distributor of the NDP for a period of years—Intel wasn’t selling any to speak of, so why not?
