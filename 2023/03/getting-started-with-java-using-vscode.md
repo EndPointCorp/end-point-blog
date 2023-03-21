@@ -7,14 +7,14 @@ tags:
 - programming
 - java
 - vscode
-github_issue_number: 0
+github_issue_number: 1946
 ---
 
-<!-- TODO photo -->
+![A fall sunset above an open Utah plain. The yellow sun sets behind snowy mountains, casting orange glow on the left side of the sky, while the right side of the sky is dominated by dark storm clouds rising up and to the right in a dramatic diagonal. From the edge of the mountain towards the viewer spans a large brown plain. On it, directly below the sunset is a small shack, and to its right, across a faint road leading directly forward in the center of the image, is a small, run down tractor.](/blog/2023/03/getting-started-with-java-using-vscode/farm-sunset.webp)
 
-### Introduction
+<!-- Photo by Garrett Skinner, 2022 -->
 
-Visual Studio Code is a free source-code editor available for Windows, macOS and Linux. While it includes a lot of features out-of-the-box, you will likely need to extend its functionality to suit your purpose for using it. There are many extensions available, each providing their own set of features and functions. In this guide we will install the [Extension Pack for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack), which is a bundle of several extensions. Installing this extension pack will add the following features to Visual Studio Code:
+Visual Studio Code is a free source-code editor available for Windows, macOS and Linux. While it includes a lot of features out of the box, you will likely need to extend its functionality to suit your purpose for using it. There are many extensions available, each providing their own set of features and functions. In this guide we will install the [Extension Pack for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack), which is a bundle of several extensions. Installing this extension pack will add the following features to Visual Studio Code:
 
 - **Java language support** for parsing and highlighting our code
 - **Java test runner** for testing our code
@@ -32,7 +32,7 @@ If you haven't yet, [download Visual Studio Code](https://code.visualstudio.com/
 
 Open Visual Studio Code and click on the extensions icon in the left sidebar. A screenshot of this icon is displayed below:
 
-![Visual Sudio Code extensions icon](/blog/2023/03/getting-started-with-java-using-vscode/vscode-extensions-icon.png)
+![Three boxes stacked in an L shape, with a fourth box above and to the right of the empty space.](/blog/2023/03/getting-started-with-java-using-vscode/vscode-extensions-icon.png)
 
 This will take you to the extensions marketplace. Type "Extension Pack for Java" into the search bar and press enter. The extension we are looking for is authored by Microsoft. Once you find the extension pack in this list, click the **Install** button.
 
@@ -57,8 +57,10 @@ Save the file, then click the play icon at the top right of the window. This is 
 
 When you click the **Run** button, assuming everything is set up properly, your code will be compiled and executed. A terminal window will be opened, where your program may take in user input and/or write output. In this terminal window, the text "Hello, world!" will be written by the program.
 
-If you are seeing the expected behavior, then congratulations are in order! You have just finished setting up Visual Studio code for Java development.
+If you are seeing the expected behavior, then congratulations are in order! You have just finished setting up Visual Studio Code for Java development.
 
 If you are not seeing the expected behavior, restart from the beginning and confirm that you have followed each step correctly.
 
 Happy coding!
+
+> For more guides and a deeper dive on the content in this one, see VS Code's [Java docs](https://code.visualstudio.com/docs/java/java-tutorial).
