@@ -45,11 +45,8 @@ cd pgtap
 ```bash
 make && make install
 ```
-4. Install the required dependencies for pgtap
-```bash
-make && make install
-```
-5. Finally, connect to your Postgres database using psql or any other Postgres client and run the following SQL command to create the pgtap extension:
+
+4. Finally, connect to your Postgres database using psql or any other Postgres client and run the following SQL command to create the pgtap extension:
 ```sql
 CREATE EXTENSION pgtap;
 ```
