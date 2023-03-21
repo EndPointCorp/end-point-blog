@@ -13,7 +13,9 @@ tags:
 
 <!-- Photo by Juan Pablo Ventoso, 2022 -->
 
-New 3rd-party tax API support has been added to core Interchange. In the wake of the Wayfair decision<sup>1</sup>, many businesses running Interchange catalogs lack the necessary tools for full compliance. A new translation layer has been created in `Vend::Tax` to connect the standard sales tax structures and routines that operate within Interchange, and the development of vendor-specific 3rd-party tax providers. The goal of the `Vend::Tax` framework is to create a space to allow for development of any number of vendor-specific tax services to support tax calculation in Interchange.
+New 3rd-party tax API support has been added to core Interchange<sup>1</sup>.
+
+In the wake of the Wayfair court decision<sup>2</sup>, many businesses running Interchange catalogs lack the necessary tools for full compliance. A new translation layer has been created in `Vend::Tax` to connect the standard sales tax structures and routines that operate within Interchange, and the development of vendor-specific 3rd-party tax providers. The goal of the `Vend::Tax` framework is to create a space to allow for development of any number of vendor-specific tax services to support tax calculation in Interchange.
 
 `Vend::Tax` defines 3 new tags to support its function:
 
@@ -23,13 +25,13 @@ New 3rd-party tax API support has been added to core Interchange. In the wake of
 
 Conceptually, `Vend::Tax` is patterned off of `Vend::Payment` for payment transactions. It provides the defined interface that Interchange will use, via the 3 tags shown above, but must delegate to vendor-specific implementations through tax gateway modules.
 
-Additionally, connectors have already been constructed for TaxJar<sup>2</sup> and Avalara<sup>3</sup> in core Interchange, so that catalogs can convert to use either of these popular services for calculating their sales tax with an upgrade and a few adjustments to their catalog configuration. Both TaxJar and Avalara provide sales tax calculation, product categorization, and reporting tools that allow merchants to comply with Wayfair and keep their focus on their business.
+Additionally, connectors have already been constructed for TaxJar<sup>3</sup> and Avalara<sup>4</sup> in core Interchange, so that catalogs can convert to use either of these popular services for calculating their sales tax with an upgrade and a few adjustments to their catalog configuration. Both TaxJar and Avalara provide sales tax calculation, product categorization, and reporting tools that allow merchants to comply with Wayfair and keep their focus on their business.
 
-While currently only TaxJar and Avalara are supported — see `Vend::Tax::TaxJar` and `Vend::Tax::Avalara` — `Vend::Tax` was designed to facilitate and encourage the development of any 3rd-party providers through the creation of new `Vend::Tax::Service` modules. A review of either of the TaxJar or Avalara tax gateway modules should be instructive for the expected interface with the 3 usertags.
+While currently only TaxJar and Avalara are supported — see `Vend::Tax::TaxJar` and `Vend::Tax::Avalara` — `Vend::Tax` was designed to facilitate and encourage the development of any 3rd-party providers through the creation of new `Vend::Tax::<ServiceName>` modules. A review of either of the TaxJar or Avalara tax gateway modules should be instructive for the expected interface with the 3 usertags.
 
 For merchants who have, or wish to establish, relationships with other tax providers, they are free to build, or contract with consultants to build, their own provider's vendor-specific module and use that to back the work performed within `Vend::Tax`. Any such development projects are encouraged to be submitted for inclusion in Interchange core, giving the merchant and developer the benefit of community improvements and core inclusion on future upgrades.
 
-### Configuring Your Catalog to Use `Vend::Tax`
+### Configuring Your Catalog to Use Vend::Tax
 
 In order to leverage `[tax-lookup]` to back the `[salestax]` tag, use it with the `SalesTax` directive. For example:
 
@@ -70,14 +72,15 @@ NEXUS_ZIP [business zip]
 NEXUS_COUNTRY [business iso two-letter country code]
 ```
 
-Finally, like the payment modules, in order to make a particular tax service available, it must be required from interchange.cfg. For example:
+Finally, like the payment modules, in order to make a particular tax service available, it must be required from `interchange.cfg`. For example:
 
 ```plain
 Require module Vend::Tax::TaxJar
 ```
 
-### Links
+### References
 
+1. [https://www.interchangecommerce.org/](https://www.interchangecommerce.org/)
 1. [https://www.lbmc.com/blog/wayfair-case-sales-tax/](https://www.lbmc.com/blog/wayfair-case-sales-tax/)
 1. [https://www.taxjar.com/](https://www.taxjar.com/)
 1. [https://www.avalara.com/](https://www.avalara.com/)
