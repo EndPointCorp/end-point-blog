@@ -5,7 +5,7 @@ featured:
   image_url: /blog/2023/03/identifying-vulnerabilities-using-horusec/pexels-indra-pranesh-palanisamy-15837790.webp
 description: "In this blog post, we explore how Horusec, an open-source tool for identifying security vulnerabilities in code, can help developers improve the security of their applications by detecting potential threats and providing actionable insights. Learn how to integrate Horusec into your development process and enhance your code's security."
 github_issue_number: 1949
-date: 2023-03-07
+date: 2023-03-28
 tags:
 - security
 ---
