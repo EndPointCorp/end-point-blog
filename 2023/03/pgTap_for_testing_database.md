@@ -1,36 +1,36 @@
 ---
 author: Edgar Mlowe
-title: 'How to Set Up pgTap for Writing Postgres Database unit tests'
+title: 'How to Set Up pgTAP for Writing Postgres Database unit tests'
 tags:
 - Postgres
 - PL/pgSQL
 - SQL
-- pgTap
+- pgTAP
 
 date: 2023-03-20
 featured:
   endpoint: true
-description: This article walks readers through how to setup pgTap a unit testing framework for Postgres.
+description: This article walks readers through how to setup pgTAP a unit testing framework for Postgres.
 ---
 
 
 
 
-### How to Set Up pgTap for Writing Postgres Database unit tests
+### How to Set Up pgTAP for Writing Postgres Database unit tests
 
 #### Introduction
-In a previous blog post by [Josh Tolley](https://www.endpointdev.com/team/josh-tolley), he introduced the concept of using pgTap, a set of Postgres functions designed for writing unit tests within the database. This post will serve as a supplement to [Josh's blog, Using pgTAP to automate database testing
-](https://www.endpointdev.com/blog/2022/03/using-pgtap-automate-database-testing/), focusing on setting up pgTap for testing postgres database.
+In a previous blog post, [Josh Tolley](https://www.endpointdev.com/team/josh-tolley) introduced the concept of using pgTAP, a set of Postgres functions designed for writing unit tests within the database. This post will serve as a supplement to [Josh's blog, Using pgTAP to automate database testing
+](https://www.endpointdev.com/blog/2022/03/using-pgtap-automate-database-testing/), focusing on setting up pgTAP for testing Postgres database.
 
-#### pgTap in EpiTrax 
-EpiTrax relies on Postgres and its functions, making pgTap an ideal tool for testing the platform's database functions, ensuring data integrity, and maintaining the robustness of the system. By utilizing pgTap, EpiTrax  efficiently validates various aspects of its database structure and behavior.
+#### pgTAP in EpiTrax 
+EpiTrax relies on Postgres and its functions, making pgTAP an ideal tool for testing the platform's database functions, ensuring data integrity, and maintaining the robustness of the system. By utilizing pgTAP, EpiTrax  efficiently validates various aspects of its database structure and behavior.
 
-#### Installing & setting up pgTap
+#### Installing & setting up pgTAP
 **Note**: make sure you have Postgres installed on your system. If you don't have it, you can follow [postgres documentation](https://www.postgresql.org/download/) to learn how to install it.
 
-To install pgtap for Postgres, you will need to follow these steps:
+To install pgTAP for Postgres, you will need to follow these steps:
 
-1. download the pgtap source code from its GitHub repository
+1. download the pgTAP source code from its GitHub repository
 
 ```bash
 git clone https://github.com/pgtap/pgtap.git
@@ -41,20 +41,20 @@ git clone https://github.com/pgtap/pgtap.git
 cd pgtap
 ```
 
-3. Install the required dependencies for pgtap
+3. Install the required dependencies for pgTAP
 ```bash
 make && make install
 ```
 
-4. Finally, connect to your Postgres database using psql or any other Postgres client and run the following SQL command to create the pgtap extension:
+4. Finally, connect to your Postgres database using psql or any other Postgres client and run the following SQL command to create the pgTAP extension:
 ```sql
 CREATE EXTENSION pgtap;
 ```
 
-Now you should have pgtap installed and ready to use in your Postgres database. In case you face issues with Installation visit [pgtap documentation](https://pgtap.org/documentation.html#installation) for further help.
+Now you should have pgTAP installed and ready to use in your Postgres database. In case you face issues with Installation visit [pgtap documentation](https://pgtap.org/documentation.html#installation) for further help.
 
 
-####  Writing Simple Database tests with pgTap:
+####  Writing Simple Database tests with pgTAP:
 Test to check if a table exists:
 ```sql
 SELECT plan(1);
@@ -76,10 +76,10 @@ SELECT is(your_function(), expected_result, 'your_function() should return expec
 SELECT finish();
 ```
 
-#### More pgTap Tests...
+#### More pgTAP Tests...
 
 ##### Test to check if a trigger is triggered:
-Consider the following example. We have a table named employees and a table named audit_log. When a new employee is added to the employees table, a trigger named insert_employee_trigger fires and logs the new employee's ID and creation timestamp in the audit_log table. Lets test if the trigger gets fired and produces the expected outcome.
+Consider the following example. We have a table named employees and a table named audit_log. When a new employee is added to the employees table, a trigger named insert_employee_trigger fires and logs the new employee's ID and creation timestamp in the audit_log table. Let's test if the trigger gets fired and produces the expected outcome.
 
 
 1. Create the tables:
@@ -132,7 +132,7 @@ SELECT is(
 
 ##### Test to check if a constraint is enforced:
 
-let's assume we have the following two tables. `orders` table with columns `id`, `customer_id`, and `amount`. `customers` table with columns `id` and `name`.
+Let's assume we have the following two tables. `orders` table with columns `id`, `customer_id`, and `amount`. `customers` table with columns `id` and `name`.
 
 There is a foreign key constraint between the `orders` table and the `customers` table on the `customer_id` column.
 
@@ -226,4 +226,4 @@ Using pg_prove to automate your tests can save you a lot of time and effort, esp
 
 
 #### Conclusion:
-pgTap database unit tests provide numerous benefits, including ensuring code quality and simplifying the testing process. This guide should serve as a starting point for setting up pgTap, and we encourage you to explore the [pgTap documentation](https://pgtap.org/documentation.html#usingpgtap) and [Josh Tolley's blog post on Using pgTAP to automate database testing](https://www.endpointdev.com/blog/2022/03/using-pgtap-automate-database-testing/) for more in-depth information on writing and running tests with pgTap. By integrating pgTap in projects like EpiTrax, it's possible to improve overall database performance, stability, and security.
+pgTAP database unit tests provide numerous benefits, including ensuring code quality and simplifying the testing process. This guide should serve as a starting point for setting up pgTAP, and we encourage you to explore the [pgTap documentation](https://pgtap.org/documentation.html#usingpgtap) and [Josh Tolley's blog post on Using pgTAP to automate database testing](https://www.endpointdev.com/blog/2022/03/using-pgtap-automate-database-testing/) for more in-depth information on writing and running tests with pgTAP. By integrating pgTAP in projects like EpiTrax, it's possible to improve overall database performance, stability, and security.
