@@ -15,11 +15,13 @@ We just had our first company gathering in our Tennessee office after a hiatus o
 
 ### End Point Tennessee office (EPTN)
 
-Other than our Johnson City-based team, for many of us this was our first look at our Tennessee office from where the VisionPort systems are assembled, tested and shipped. 
+Other than our Johnson City-based team, for many of us this was our first look at our Tennessee office from which the VisionPort systems are assembled, tested and shipped. 
 
 ![EPTN main room image 1](/blog/2023/03/tennessee-hackathon-2023/eptn-1.jpg)
 
-Our Content Management System (CMS) team worked on some exciting updates to our VisionPort CMS, including some important modifications to our touchscreen systems, and improved the user interface in other ways. Meanwhile our Research & Development team worked on upgrades to the VisionPort system itself, focusing on integrating large and small touchscreens for multimedia presentations. One such improvement was support for 8 table-top touchscreens integrated to serve 16 museum visitors simultaneously.
+Our Content Management System (CMS) team worked on some exciting updates to our VisionPort CMS, including important modifications to our touchscreen systems and improvements to the user interface.
+
+Meanwhile our Research & Development team worked on upgrades to the VisionPort system itself, focusing on integrating large and small touchscreens for multimedia presentations. One such improvement was support for 8 tabletop touchscreens integrated to serve 16 museum visitors simultaneously.
 
 ![EPTN main room image 2](/blog/2023/03/tennessee-hackathon-2023/eptn-3.jpg)
 
@@ -29,7 +31,7 @@ Our support team worked on testing and spinning up documentation to bring our in
 
 ### Casablanca
 
-The luxurious lounge working space at one of our AirBnB locations, nicknamed Casablanca, enabled us to be comfortably spread out as we worked together on various projects.
+The luxurious lounge working space at one of our Airbnb locations, nicknamed Casablanca, enabled us to be comfortably spread out as we worked together on various projects.
 
 ![Casablance image 1](/blog/2023/03/tennessee-hackathon-2023/cbl-1.jpg)
 
@@ -53,13 +55,11 @@ Just across from Casablanca, we did some relaxing in the "Pigeon coop", another 
 
 ![Pigeon image 1](/blog/2023/03/tennessee-hackathon-2023/pigeon-1.jpg)
 
-![Pigeon image 2](/blog/2023/03/tennessee-hackathon-2023/pigeon-2.jpg)
-
 Impromptu roof terrace get together:
 
-![Pigeon image 3](/blog/2023/03/tennessee-hackathon-2023/pigeon-3.jpg)
+![Pigeon image 2](/blog/2023/03/tennessee-hackathon-2023/pigeon-2.jpg)
 
-![Pigeon image 4](/blog/2023/03/tennessee-hackathon-2023/pigeon-4.jpg)
+![Pigeon image 3](/blog/2023/03/tennessee-hackathon-2023/pigeon-3.jpg)
 
 ### Birthdays, dinner, and farewell 
 
