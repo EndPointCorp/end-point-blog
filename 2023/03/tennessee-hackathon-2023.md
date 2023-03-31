@@ -4,7 +4,7 @@ author: "Darius Clynes"
 date: 2023-03-30
 featured:
   visionport: true
-  image_url: /blog/2023/02/tennessee-hackathon-2023/eptn-1.jpg
+  image_url: /blog/2023/03/tennessee-hackathon-2023/eptn-1.jpg
 github_issue_number: 1950
 tags:
 - visionport
