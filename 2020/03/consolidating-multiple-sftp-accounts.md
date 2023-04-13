@@ -2,6 +2,9 @@
 author: Selvakumar Arumugam
 title: Consolidating Multiple SFTP Accounts Into One Master Account
 github_issue_number: 1605
+featured:
+  epitrax: true
+  image_url: /blog/2020/03/consolidating-multiple-sftp-accounts/image-0.jpg
 tags:
 - ssh
 - shell

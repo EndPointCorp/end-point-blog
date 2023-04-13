@@ -12,8 +12,8 @@ date: 2013-09-02
 
 Something that I’ve seen frequently these days on content rich sites are fixed navigation bars, or small abbreviated header in the form of a horizontal bar at the top of the screen that shows after a user has scrolled below the header. Here’s an example:
 
-<img border="0" src="/blog/2013/09/fixed-navigation-bar-html-css-and/image-0.png" width="740px;"/>A live example of an abbreviated fixed navigation bar at the top of the articles at [ABCNews.com](http://abcnews.go.com/).
-The background has a grey opaque layer for demonstration purposes only.
+<img border="0" src="/blog/2013/09/fixed-navigation-bar-html-css-and/image-0.png" width="740px;"/><br>
+A live example of an abbreviated fixed navigation bar at the top of the articles at [ABCNews.com](http://abcnews.go.com/). The background has a grey opaque layer for demonstration purposes only.
 
 I recently implemented this functionality for [H2O](http://cyber.law.harvard.edu/research/h2o), and I’ll go through the tools needed to do this.
 

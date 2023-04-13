@@ -11,8 +11,6 @@ tags:
 date: 2010-01-01
 ---
 
-
-
 We’ve just publically released a useful script named tail_n_mail that keeps an eye on your Postgres log files and mails interesting lines to one or more addresses. It’s released under a BSD license and is available at:
 
 [https://bucardo.org/tail_n_mail/](https://bucardo.org/tail_n_mail/)
@@ -74,5 +72,3 @@ There may be false positives, but it’s not designed to be a complete log parse
 Bugs and feature requests can be filed and tracked at:
 
 [https://github.com/bucardo/bucardo/issues](https://github.com/bucardo/bucardo/issues)
-
-

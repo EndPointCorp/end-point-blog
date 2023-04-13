@@ -29,9 +29,11 @@ At the point to finalize an order, a number of steps must be taken to complete t
 - Customer authorizes payment to transfer bitcoin from their digital wallet at the exchange rate provided from BitPay.
 - Once transferred, the invoice status moves to “paid” and the customer can then be presented with the order receipt, or in the case of redirect can click back on the merchant-provided backlink to the site to produce the receipt.
 - BitPay then negotiates a validation process over the bitcoin network, where the payment is “complete” after 6 block confirmations. Merchants can choose how quickly they want to accept the payment as valid, where a higher speed increases the odds of failing validation later in the process:
-        - High speed: immediately consider the payment “confirmed” once customer authorizes payment.
-        - Medium speed: consider payment “confirmed” once BitPay receives 1 block confirmation. Typically 5-10 minutes.
-        - Low speed: wait for all 6 block confirmations before considering the payment “confirmed”. Typically 45-60 minutes.
+
+    - High speed: immediately consider the payment “confirmed” once customer authorizes payment.
+    - Medium speed: consider payment “confirmed” once BitPay receives 1 block confirmation. Typically 5-10 minutes.
+    - Low speed: wait for all 6 block confirmations before considering the payment “confirmed”. Typically 45-60 minutes.
+
 - All payments must ultimately receive 6 block confirmations within 1 hour to complete. If this threshold cannot be met, the invoice status becomes “invalid” and the merchant must decide how to proceed.- Once the invoice status is “complete”, the transaction cannot be reversed. No chargebacks. Funds can be received by the merchant in the local currency or in bitcoin.
 - Invoices can be created with flags to either send notifications to an API the merchant creates, a designated email address, or both. This allows the merchant to keep on top of the transaction lifecycle in real time and minimize delays or disruptions on fulfillment.
 

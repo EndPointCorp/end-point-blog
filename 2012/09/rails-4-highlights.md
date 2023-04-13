@@ -28,19 +28,19 @@ config.queue = [:asynchronous, :synchronous, :resque]
 - **Routing Concern**: Rails 4.0 introduces some methods to help clean up your duplicate routes.
 - **Improvements to [ActiveRecord::Relation](http://api.rubyonrails.org/classes/ActiveRecord/Relation.html)**
 
-        - Relation.all: returns ActiveRecord::relation object. User.all => User.to_a
-        - Relation.none: Returns ActiveRecord::NullRelation, still chainable
-        - Relation.___!: mutates current relation, e.g. @users.where!, @users.include!
+    - Relation.all: returns ActiveRecord::relation object. User.all => User.to_a
+    - Relation.none: Returns ActiveRecord::NullRelation, still chainable
+    - Relation.___!: mutates current relation, e.g. @users.where!, @users.include!
 
 - **Deprecations**
 
-        - AR::Base.scoped
-        - Dynamic Finder Methods: e.g. find_all_by_*
-        - Hash-based Finders: e.g. User.find(:first)
-        - Eager Evaluated Scope: scope will require a lambda
-        - ActiveRecord::SessionStore
-        - ActiveResource
-        - Rails::Plugin
+    - AR::Base.scoped
+    - Dynamic Finder Methods: e.g. find_all_by_*
+    - Hash-based Finders: e.g. User.find(:first)
+    - Eager Evaluated Scope: scope will require a lambda
+    - ActiveRecord::SessionStore
+    - ActiveResource
+    - Rails::Plugin
 
 - **New Deprecation Policy**: Many of the above deprecations will still work in Rails 4.0 and included as gem dependencies, but will be removed in the jump to Rails 4.1. This means that the upgrade to Rails 4.1 may be more painful than the upgrade to Rails 4.0.
 

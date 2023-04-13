@@ -21,29 +21,29 @@ The authorized_keys for web_deployment on each box contains:
 
 - dev1
 
-        - alice
-        - bob
-        - carla
+    - alice
+    - bob
+    - carla
 
 - dev2
 
-        - alice
-        - bob
-        - carla
-        - dwayne
+    - alice
+    - bob
+    - carla
+    - dwayne
 
 - staging
 
-        - alice
-        - bob
-        - carla
-        - edward
+    - alice
+    - bob
+    - carla
+    - edward
 
 - prod
 
-        - alice
-        - bob
-        - carla
+    - alice
+    - bob
+    - carla
 
 ### Enter Ansible
 

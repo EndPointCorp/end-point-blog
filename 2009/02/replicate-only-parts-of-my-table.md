@@ -4,6 +4,8 @@ title: Replicate only parts of my table
 github_issue_number: 105
 tags:
 - postgres
+- bucardo
+- replication
 date: 2009-02-19
 ---
 

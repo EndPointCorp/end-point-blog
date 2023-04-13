@@ -5,10 +5,9 @@ github_issue_number: 147
 tags:
 - database
 - postgres
+- bucardo
 date: 2009-05-18
 ---
-
-
 
 Last time I described [the design and major functions of Bucardo version 1](/blog/2009/05/design-of-bucardo-version-1/) in detail. A natural question to ask about Bucardo 1 is, why didn’t I use something else already out there? And that’s a very good question.
 
@@ -79,5 +78,3 @@ DBI-Link isn’t about replication.
 ### (Summary)
 
 I assembled this list some time back and have made some updates to it. I’m sure there are more to consider today. Please comment if you have any corrections or additions.
-
-

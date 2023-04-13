@@ -8,7 +8,7 @@ tags:
 - mysql
 - php
 - ubuntu
-- visual-studio-code
+- vscode
 date: 2019-08-07
 ---
 
