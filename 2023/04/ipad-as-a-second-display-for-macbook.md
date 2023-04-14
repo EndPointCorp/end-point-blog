@@ -33,11 +33,12 @@ Macbook 2016 or later and iPad is 6th Generation ( Reference: https://support.ap
 1. Click Apple logo   > System Settings..
 2. Click Display > Advanced
 3. Click the following slider to activate them
-
+![mymac](/blog/2023/04/ipad-as-a-second-display-for-macbook/mac.webp)
 #### Steps at iPad
 1. Go to setting
 2. Click General > Click AirPlay & Handoff
 3. Click the following slider to activate them 
+![ipad](/blog/2023/04/ipad-as-a-second-display-for-macbook/ipad.webp)
     
 #### The final step
 Drag the mouse cursor to the edge of the monitor which is near to the iPad.  Wait for a few seconds and the cursor  will get to the edge of the iPad screen. Drag it even more into the iPad and we can control the iPad from our Macbook keyboard and mouse.
