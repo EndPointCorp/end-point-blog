@@ -1,8 +1,8 @@
 ---
 author: "Selvakumar Arumugam"
-title: "Unable to negotiate with xxxx port xx: no matching host key type found. Their offer: ssh-rsa [preauth]"
+title: "SSH host key verification: a few useful tips"
 github_issue_number: 1953
-date: 2023-04-04
+date: 2023-04-13
 tags:
 - ssh
 - authentication
@@ -19,7 +19,7 @@ Connection closed.
 Connection closed
 ```
 
-### Host Keys
+### Host keys
 
 By default, OpenSSH automatically generates a public-private key pair on the server and stores it in `/etc/ssh`. These keys, known as host keys, are created using several encryption algorithms including RSA, DSA, ECDSA, and ED25519.
 
@@ -89,9 +89,9 @@ The default list of host keys can be modified on the OpenSSH server by configuri
 
 | Symbol  | Description | Example |
 | ------------- | ------------- | ------------- |
-| +<algorithm_name>  | Algorithm will be appended to default set of list  |  +rsa-sha  |
-| -<algorithm_name>  | Algorithm will be removed  |  -rsa-sha  |
-| ^<algorithm_name>  | Algorithm will be default value on top of list  |  ^rsa-sha  |
+| `+<algorithm_name>`  | Algorithm will be appended to default set of list  |  `+rsa-sha`  |
+| `-<algorithm_name>`  | Algorithm will be removed  |  `-rsa-sha`  |
+| `^<algorithm_name>`  | Algorithm will be default value on top of list  |  `^rsa-sha`  |
 
 > You can see more in-depth info about SSH configuration with `man 5 ssh_config`.
 
@@ -260,3 +260,7 @@ debug1: Will attempt key: .ssh/id_rsa RSA
 SHA256:CmARXi+/8UwrvzwS7RkJNqD/rhroYTnfB285OnovVFs agent
 …
 ```
+
+#### Conclusion
+
+SSH is an incredible tool, but errors like the ones described here can make it a bit harder to work with if you're not aware of what's going on behind the scenes. Let us know in the comments if you've had any similar experiences!
