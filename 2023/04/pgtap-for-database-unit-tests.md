@@ -1,8 +1,8 @@
 ---
 author: Edgar Mlowe
-title: "How To Set Up pgTAP for Writing Postgres Database Unit Tests"
+title: "How To Set Up pgTAP for Writing PostgreSQL Database Unit Tests"
 github_issue_number: 1954
-date: 2023-04-03
+date: 2023-04-12
 tags:
 - postgres
 - sql
@@ -18,7 +18,7 @@ In a previous blog post, my colleague Josh Tolley [introduced the concept](/blog
 
 ### Installing & setting up pgTAP
 
-**Note**: make sure you have Postgres installed on your system. If you don't have it, you can follow [postgres documentation](https://www.postgresql.org/download/) to learn how to install it.
+**Note**: make sure you have Postgres installed on your system. If you don't have it, you can follow the [Postgres documentation](https://www.postgresql.org/download/) to learn how to install it.
 
 To install pgTAP for Postgres, you will need to follow these steps:
 
