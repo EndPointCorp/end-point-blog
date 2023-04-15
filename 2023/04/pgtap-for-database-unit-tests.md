@@ -8,6 +8,7 @@ tags:
 - sql
 - database
 - testing
+- epitrax
 ---
 
 ![A steep, green mountain slope divides the image with a steep diagonal downwards and to the right, reaching the bottom of the frame two thirds of the way to the right edge of the image. A small, red-roofed Georgian church sits on it. Another hill sinks down and to the left, creating an apex at the bottom. In the background, framed by these asymmetrical diagonals, is a tall, rocky ridgeline lined with snow anywhere the rocks aren't too steep to hold it.](/blog/2023/04/pgtap-for-database-unit-tests/georgian-mountains.webp)
@@ -48,7 +49,7 @@ To install pgTAP for Postgres, you will need to follow these steps:
 
 Now you should have pgTAP installed and ready to use in your Postgres database. If you face issues with installation, visit the [pgTAP documentation](https://pgtap.org/documentation.html#installation) for further help.
 
-###  Writing simple database tests with pgTAP
+### Writing simple database tests with pgTAP
 
 Test to check if a table exists:
 
@@ -234,7 +235,7 @@ Using pg_prove to automate your tests can save you a lot of time and effort, esp
 
 ### pgTAP in EpiTrax 
 
-EpiTrax relies on Postgres and its functions, making pgTAP an ideal tool for testing the platform's database functions, ensuring data integrity, and maintaining the robustness of the system. By utilizing pgTAP, EpiTrax  efficiently validates various aspects of its database structure and behavior.
+[EpiTrax](/expertise/epitrax/) relies on Postgres and its functions, making pgTAP an ideal tool for testing the platform's database functions, ensuring data integrity, and maintaining the robustness of the system. By utilizing pgTAP, EpiTrax efficiently validates various aspects of its database structure and behavior.
 
 ### Conclusion
 

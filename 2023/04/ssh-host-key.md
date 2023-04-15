@@ -6,11 +6,12 @@ date: 2023-04-13
 tags:
 - ssh
 - authentication
+- sysadmin
 ---
 
 ![A close shot of a large golden key sitting on top of a wooden fence. There is green grass visible behind the fence, on the left and right upper sides of the image.](/blog/2023/04/ssh-host-key/key.webp)
 
-The SSH connections between a client and a remote server begin with a host key verification as an initial handshake. If the default key algorithm is not supported between the client and server, the SSH connection attempt is closed with no matching host key type response. In this article, we will explore the host key verification process and discuss ways to handle the non-matching host key issue to establish the connection.
+The SSH connections between a client and a remote server begin with a host key verification as an initial handshake. If the default key algorithm is not supported between the client and server, the SSH connection attempt is closed with no matching host key type response.
 
 ```plain
 $ sftp username@domain
@@ -19,9 +20,11 @@ Connection closed.
 Connection closed
 ```
 
+In this article, we will explore the host key verification process and discuss ways to handle the non-matching host key issue to establish the connection.
+
 ### Host keys
 
-By default, OpenSSH automatically generates a public-private key pair on the server and stores it in `/etc/ssh`. These keys, known as host keys, are created using several encryption algorithms including RSA, DSA, ECDSA, and ED25519.
+By default, OpenSSH automatically generates a public-private key pair on the server and stores it in `/etc/ssh`. These keys, known as host keys, are created using several encryption algorithms including RSA, DSA, ECDSA, and ed25519.
 
 The pair of private and public keys is available on the host server at the path `/etc/ssh`.
 
