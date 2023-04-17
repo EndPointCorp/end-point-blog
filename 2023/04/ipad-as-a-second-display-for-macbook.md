@@ -14,38 +14,35 @@ tags:
 If you are hooked with your external monitor at your home or workstation, you will feel like missing a body part when you have to do your work outside, without it. Luckily we can control our iPad from our Macbook to make it as if it was a second display for our Macbook. Although not as good as a real monitor or as big as our beloved external monitor at home, the iPad as a second display has its own advantages.
 
 ### The Advantages
-Ipad as a second display for Macbook works out of the box without the need of installing any additional software. All we need to do is to configure the communication between the two devices as we will go through in the coming section. Another great thing about this setup is it is wireless. This is really light and compact for outside work. This setup could easily fit on any table at any coffee shop. 
-
-### The Caveat
-Please take note that we are not making an iPad as our external monitor. What we are doing here is to enable our Macbook keyboard and mouse to access the iPad and making it a second display for us. This ability is known as Universal Control. By doing this you could do any work at your Macbook and switch to another work at iPad by dragging the mouse cursor to iPad.  
-
-### The requirement
-Ensure both devices are login with the same apple id
-Ensure both devices are using the same wifi and the bluetooth is enable
-Macbook 2016 or later and iPad is 6th Generation ( Reference: https://support.apple.com/en-my/guide/ipad/aside/ipad8ee99438/16.0/ipados/16.0)
+Ipad as a second display for Macbook works out of the box without the need of installing any additional software. All we need to do is to configure the communication between the two devices as we will go through in the coming section. Another great thing about this setup is it is wireless. This is really light and compact for outside work. This setup could easily fit on any table at any coffee shop.
 
 
-### The Steps
+### The Requirement
+1. Ensure both devices are login with the same apple id. 
+2. Ensure both devices have wifi and the bluetooth is enabled.
+3. The Macbook is 2016 or later and the iPad is 6th Generation or later  [Reference: Apple Support](https://support.apple.com/en-my/guide/ipad/aside/ipad8ee99438/16.0/ipados/16.0)
 
 
-#### Steps at Macbook
-
+### The Enable iPad as Second Display
 1. Click Apple logo   > System Settings..
-2. Click Display > Advanced
-3. Click the following slider to activate them
-![mymac](/blog/2023/04/ipad-as-a-second-display-for-macbook/mac.webp)
-#### Steps at iPad
-1. Go to setting
-2. Click General > Click AirPlay & Handoff
-3. Click the following slider to activate them 
-![ipad](/blog/2023/04/ipad-as-a-second-display-for-macbook/ipad.webp)
-    
-#### The final step
-Drag the mouse cursor to the edge of the monitor which is near to the iPad.  Wait for a few seconds and the cursor  will get to the edge of the iPad screen. Drag it even more into the iPad and we can control the iPad from our Macbook keyboard and mouse.
+2. Click Display 
+3. Click the + sign and select the iPad
+![enable](/blog/2023/04/ipad-as-a-second-display-for-macbook/enable.webp)
+4. If successful , the iPad will appear next to the Macbook on the Display pane. Click Arrange to arrange the position of the iPad
+![disable](/blog/2023/04/ipad-as-a-second-display-for-macbook/disable.webp)
 
-### To disable what we have done
-Just undo what we have done in **The Steps** section
+### To Disable iPad as Second Display
+#### To Disable from Macbook
+1. Click Apple logo   > System Settings..
+2. Click Display 
+3. Click the + sign and select the iPad
+
+
+#### To Disable from iPad
+1. Touch the Disconnect button
+![disable-ipad](/blog/2023/04/ipad-as-a-second-display-for-macbook/disable-ipad.webp)
+
 
 ### Conclusion
-That is all folks. I hope you enjoyed this portable , wireless and freely available second display( assuming you already have an iPad). Have a nice day. 
+That is all folks. I hope you enjoyed this portable , wireless and freely available second display( assuming you already have an iPad). Have a nice day.
 
