@@ -2,7 +2,7 @@
 author: "Trevor Slocum"
 title: "How to use the Caps Lock key as an Escape key on Windows, macOS, and Linux"
 github_issue_number: 1955
-date: 2023-04-07
+date: 2023-04-17
 tags:
 - tips
 ---
@@ -13,7 +13,7 @@ tags:
 
 On most keyboards, the Escape key is distant from the most common keys. In order to
 reach it, you likely need to lift your hand from the keyboard. This interrupts
-the flow of typing and, over time, may cause repetitive strain injury.
+the flow of typing and, over time, may cause repetitive strain injuries.
 
 When using modal applications which require frequent use of the Escape key, such
 as the text editor [Vim](https://www.vim.org), shortening the distance your
@@ -28,20 +28,22 @@ Download and install [PowerToys](https://github.com/microsoft/PowerToys/releases
 a set of utilities created by Microsoft.
 
 Open PowerToys and browse to the **Keyboard Manager**. Enable the **Keyboard Manager**
-and click **Remap a key**.  Choose **Caps Lock -> Escape**.
+and click **Remap a key**. Choose **Caps Lock -> Escape**.
+
+Note that this fix requires PowerToys to be running.
 
 ### macOS instructions
 
-Go to **Apple menu -> System preferences -> Keyboard**.  If you have multiple
+Go to **Apple menu -> System preferences -> Keyboard**. If you have multiple
 keyboards, make sure your active keyboard is selected.
 
-Click on the **Modifier keys** button to open a popup dialog.  Open the dropdown
+Click on the **Modifier keys** button to open a popup dialog. Open the dropdown
 next to **Caps Lock** and select **Escape**.
 
 ### Linux instructions
 
 There are separate instructions for Linux depending on whether you are using X11
-or Wayland.  If you don't know what these are, you are likely using X11.
+or Wayland. If you don't know what these are, you are likely using X11.
 
 On Linux, after following the instructions below, it is still
 possible to toggle Caps Lock by holding Shift before pressing the Caps Lock key.
@@ -78,3 +80,7 @@ Or, in the man page for XKB:
 ```plain
 man xkeyboard-config
 ```
+
+#### Conclusion
+
+These aren't the only ways to make this swap. Furthermore, some prefer other key swaps, such as making Caps Lock an additional Control key. Let us know in the comments about your preferred fix!
