@@ -8,7 +8,7 @@ tags:
 date: 2023-04-18
 ---
 
-The N+1 query problem is a common performance issue if you’re using an ORM. It slows down page load, leads to poor user experience and inefficient database usage. The N+1 query problem occurs when instead of grabbing all the data you need in one optimized, efficient query, your app ends up running multiple individual queries just to fetch associated data.
+The N+1 query problem is a common performance issue if you’re using an ORM. It slows down page load, leads to poor user experience and inefficient database usage. The N+1 query problem occurs when instead of grabbing all the data you need in one optimized, efficient query, your app ends up running multiple individual queries just to fetch the associated data.
 
 ### Why are N+1 Queries so common in Rails?
 
@@ -51,7 +51,7 @@ end
 <% end %>
 ```
 
-For each book, a separate SQL query is executed to retrieve the author’s name. If we have 3 books, there are 4 queries in total. 1 to fetch all books and 3 additional queries for fetching associated authors. In the logs it would look something like this:
+For each book, a separate SQL query is executed to retrieve the author’s name. If we have 3 books, there are 4 queries in total. One to fetch all books and three additional queries for fetching associated authors. In the logs it would look something like this:
 
 ```ruby
 SELECT "books".* FROM "books"
