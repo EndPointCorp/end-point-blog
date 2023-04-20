@@ -62,11 +62,13 @@ end
 ```
 
 <img alt="" border="0" src="/blog/2011/08/railsadmin-gem-ecommerce/image-1.png" style="display:block; margin:0px auto 0px; text-align:center;cursor:pointer; cursor:hand;width:745px;"/>
+
 Users Tab removed from navigation
 
 ### List Views
 
 <img alt="" border="0" src="/blog/2011/08/railsadmin-gem-ecommerce/image-2.png" style="display:block; margin:0px auto; text-align:center;cursor:pointer; cursor:hand;width:745px;"/>
+
 Product List View, rails_admin Out of the Box
 
 Next, I updated my products list view with the following changes, to limit the list view to the name and price field, sort by the name, and format the price:
@@ -139,6 +141,7 @@ end
 ```
 
 <img alt="" border="0" src="/blog/2011/08/railsadmin-gem-ecommerce/image-4.png" style="display:block; margin:0px auto; text-align:center;cursor:pointer; cursor:hand;width:745px;"/>
+
 ckeditor used for content field.
 
 ### Paperclip Image Attachments
@@ -159,6 +162,7 @@ end
 ```
 
 <img alt="" border="0" src="/blog/2011/08/railsadmin-gem-ecommerce/image-5.png" style="display:block; margin:0px auto; text-align:center;cursor:pointer; cursor:hand;width:745px;"/>
+
 The products edit view is now a multitype form to allow for image upload.
 
 And to update the show view, I made this change:
@@ -178,6 +182,7 @@ end
 ```
 
 <img alt="" border="0" src="/blog/2011/08/railsadmin-gem-ecommerce/image-6.png" style="display:block; margin:0px auto; text-align:center;cursor:pointer; cursor:hand;width:745px;"/>
+
 Thumb image added to product show view.
 
 ### Overriding Views
@@ -193,9 +198,11 @@ Another common update in rails_admin might be the need to override views to chan
 ```
 
 <img alt="" border="0" src="/blog/2011/08/railsadmin-gem-ecommerce/image-7.png" style="display:block; margin:0px auto; text-align:center; cursor:pointer; cursor:hand;width:745px;"/>
+
 After overriding the header view, “My Store” now appears in the header.
 
 <img alt="" border="0" src="/blog/2011/08/railsadmin-gem-ecommerce/image-8.png" style="display:block; margin:0px auto; text-align:center; cursor:pointer; cursor:hand;width:745px;"/>
+
 And an override of app/views/layouts/rails_admin/main.html.haml removes “Rails Admin | 2011” from the bottom of the page.
 
 ### Conclusion

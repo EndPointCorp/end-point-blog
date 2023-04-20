@@ -3,7 +3,6 @@ title: 'Jamstack Conf Virtual 2020: Thoughts & Highlights'
 author: Greg Davidson
 github_issue_number: 1639
 tags:
-- jamstack
 - html
 - css
 - javascript
@@ -11,6 +10,7 @@ tags:
 - development
 - cdn
 - serverless
+- static-site-generator
 date: 2020-06-16
 ---
 

@@ -4,6 +4,9 @@ author: Katrease Hale
 date: 2022-12-01
 github_issue_number: 1922
 description: "In the first four months of End Point's partnership with Nevada, the team was able to accomplish what was believed to be impossible in so short a time: to migrate away from their surveillance system, NBS, to the open-source EpiTrax system."
+featured:
+  epitrax: true
+  image_url: /blog/2022/12/nevada-state-epitrax-launch/desert.webp
 tags:
 - epitrax
 - emsa

@@ -6,6 +6,7 @@ tags:
 - open-source
 - perl
 - postgres
+- bucardo
 date: 2009-09-16
 ---
 

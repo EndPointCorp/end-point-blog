@@ -21,9 +21,8 @@ As with the function of biological neural networks, the emergence of information
 ### Neural Network Architecture
 
 <img src="/blog/2019/07/an-introduction-to-neural-networks/image-1.png" style="float: right; max-width: 200px" /> 
-<p>
+
 Nodes are grouped in layers: the input layer, the output layer, and all the layers between them, known as hidden layers. Nodes can be networked in a variety of ways within and between layers, and sophisticated neural network models can include dozens of layers configured in various ways. These include layers which summarize, combine, eliminate, direct, or transform information. Each receives its input from the previous layer, and passes its output to the next layer. The last layer is designed such that its output answers the relevant question (for example, it would offer 9 options if the goal were to identify the hand-written numbers 1–9).
-</p>
 
 For all this information processing to achieve a given task, the parameters of each node need appropriate values. The process of choosing those values is called training. In order to train a neural network, one needs to provide examples of what the network should do. (For example, to train it to write requires examples of writing. To train it to identify objects in images requires images and their appropriately labeled counterparts.) The more data a model can learn from, the better it can work. Gathering enough data is typically a major undertaking.
 

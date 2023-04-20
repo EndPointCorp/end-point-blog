@@ -33,14 +33,14 @@ Next, Sarah talked about two methods of implementation using Backbone.js and wen
 
 - Greenfield App
 
-        - This approach tends to be more API driven and makes sense for an API-driven application that also requires buildout of native mobile apps.
-        - In this approach, the server side returns [JSON, etc.] data and doesn’t render HTML.
-        - Sarah noted that the amount of code required here can be substantial because the framework is lightweight, so she would recommended considering alternatives (such as ember.js).
+    - This approach tends to be more API driven and makes sense for an API-driven application that also requires buildout of native mobile apps.
+    - In this approach, the server side returns [JSON, etc.] data and doesn’t render HTML.
+    - Sarah noted that the amount of code required here can be substantial because the framework is lightweight, so she would recommended considering alternatives (such as ember.js).
 
 - “Backbone as Frosting” Implementation
 
-        - In this implementation, there is a mixture of server-side and client-side rendering.
-        - Sarah noted here that the lightweightedness of Backbone works nicely.
+    - In this implementation, there is a mixture of server-side and client-side rendering.
+    - Sarah noted here that the lightweightedness of Backbone works nicely.
 
 I haven’t used Backbone.js in any client projects, but I’ve looked into it recently out of interest. I like the general idea of improving JavaScript code organization via the frosting approach described by Sarah. A few code examples were shared during the presentation — check out the slides [here](https://speakerdeck.com/sarahmei/using-backbone-dot-js-with-rails).
 

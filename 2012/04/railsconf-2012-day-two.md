@@ -18,12 +18,16 @@ One of the talks I attended on Day 2 was *Let’s Make the Web Faster — tips f
 
 - [Navigation Timing Spec](https://web.archive.org/web/20120504042036/http://test.w3.org/webperf/specs/NavigationTiming/): The navigation timing spec defining an interface for web applications to access timing information related to navigation and elements. You can look at this timing information by checking out the performance object in a console:
 
-<img border="0" src="/blog/2012/04/railsconf-2012-day-two/image-0.jpeg" width="600"/>
-Example output of navigation timing spec data.
+    <img border="0" src="/blog/2012/04/railsconf-2012-day-two/image-0.jpeg" width="600"/>
+
+    Example output of navigation timing spec data.
 
 - Site Speed Tools in Google Analytics: Google Analytics now has elements of the page speed broken down that allows you to compare page load times and examine what the bottlenecks in the system are. To get there, you go to Content => Site Speed => Page Timings in Google Analytics. You can also measure and examine this data using Segments and Advanced segments.
-<img border="0" src="/blog/2012/04/railsconf-2012-day-two/image-1.png" width="600"/>
-Example metrics shown on Google Site Speed breakdown.
+
+    <img border="0" src="/blog/2012/04/railsconf-2012-day-two/image-1.png" width="600"/>
+
+    Example metrics shown on Google Site Speed breakdown.
+
 - [WebPageTest.org](https://www.webpagetest.org/) is a tool that we’ve blogged about before a few times. Now it also provides a video of how the page loads to examine how the page load is perceived.
 - [Speed Index](https://sites.google.com/a/webpagetest.org/docs/using-webpagetest/metrics/speed-index): Speed index is a new metric for measuring “visual completeness” of a page loading. This is an interesting/valuable metric to look at when you want to try to understand and improve user perceived latency. For example, can you force loading some images before peripheral scripts to improve the user perceived latency?
 - A few Google tools that Ilya reviewed were [PageSpeed Online](https://developers.google.com/speed/pagespeed/insights/) and its API, [PageSpeed SDK](https://code.google.com/archive/p/page-speed/wikis/DownloadPageSpeed.wiki), and [PageSpeed Service](https://developers.google.com/speed/pagespeed/service), which is in beta mode.

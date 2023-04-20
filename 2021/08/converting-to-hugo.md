@@ -7,6 +7,7 @@ tags:
 - company
 - design
 - html
+- static-site-generator
 ---
 
 ![A view of Manhattan from the Empire State Building](/blog/2021/08/converting-to-hugo/manhattan-view.jpg)

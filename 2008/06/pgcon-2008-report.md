@@ -7,6 +7,8 @@ tags:
 - database
 - open-source
 - postgres
+- bucardo
+- perl
 date: 2008-06-13
 ---
 
