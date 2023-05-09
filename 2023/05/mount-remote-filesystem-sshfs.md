@@ -1,14 +1,16 @@
 ---
 author: "Trevor Slocum"
 title: "Mount a remote filesystem over SSH using SSHFS"
-github_issue_number: 0
-date: 2023-05-02
+github_issue_number: 1965
+date: 2023-05-11
 tags:
 - ssh
 - tips
 ---
 
-<!-- TODO Photo -->
+![A painting of a Dutch port at the end of the day. On the left, sunlight peeks out from clouds low on the horizon, casting rays of light into the light blue sky of the fading day. Trading ships sail the waters, with some disappearing into the horizon. In the foreground, a smaller boat of people and barrels is rowed to an outcropping of land, on which is a boat being tarred by two sailors. A small fire heats a pot next to wooden dock equipment which protrudes into the air.](/blog/2023/05/mount-remote-filesystem-sshfs/estuary_at_days_end_crop.webp)
+
+<!-- Image: Simon de Vlieger, Estuary at Day's End, c. 1640/1645 (cropped from original). Public domain via CC0 -->
 
 While creating and debugging software, it is important to reduce the amount of
 friction between each iteration of making a change to the software and then
@@ -32,6 +34,14 @@ to edit files on a remote system, without copying the files back and forth...
 There is! [SSHFS](https://en.wikipedia.org/wiki/SSHFS) is a tool for mounting
 and interacting with remote directories over [SSH](https://en.wikipedia.org/wiki/Secure_Shell).
 
+### Notice
+
+The [SSHFS repository](https://github.com/libfuse/sshfs) has been archived for around a year at the time of writing; the latest release was on May 26, 2022. The repository now has a note about being orphaned and inviting other developers to take over the project. While there are a few forks (most notably [deadbeefsociety's](https://github.com/deadbeefsociety/sshfs) and [stephenxxiu's](https://github.com/stevenxxiu/sshfs)) with some traction, none is a definitive replacement yet.
+
+One alternative suggested by the ArchWiki is using [rclone's mount feature](https://rclone.org/commands/rclone_mount/).
+
+For macOS users, it's important to note that macFUSE is [no longer open-source](https://colatkinson.site/macos/fuse/2019/09/29/osxfuse/) as of 2017.
+
 ### Installation
 
 This guide contains installation instructions for macOS and Linux systems only.
@@ -40,7 +50,7 @@ If you are using Windows, check out [sshfs-win](https://github.com/winfsp/sshfs-
 
 #### macOS instructions
 
-Download the macFUSE and SSHFS packages from [this website](https://osxfuse.github.io)
+Download the macFUSE and SSHFS packages from [the osxfuse website](https://osxfuse.github.io)
 and install them as an administrator.
 
 #### Linux instructions
@@ -86,3 +96,5 @@ certain period of time will only be retrieved once.
 - `idmap=user` - Translate between UID of connecting user and remote user. This
 causes remote files to appear to be owned by you, even though they are actually 
 owned by the remote user on the remote system.
+
+To unmount on linux, run `fusermount -u /tmp/remote`. On macOS, run `umount /tmp/remote`.
