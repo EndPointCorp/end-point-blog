@@ -32,6 +32,14 @@ to edit files on a remote system, without copying the files back and forth...
 There is! [SSHFS](https://en.wikipedia.org/wiki/SSHFS) is a tool for mounting
 and interacting with remote directories over [SSH](https://en.wikipedia.org/wiki/Secure_Shell).
 
+### SSHFS archived
+
+The [SSHFS repository](https://github.com/libfuse/sshfs) has been archived for around a year at the time of writing; the latest release was on May 26, 2022. The repository now has a note about being orphaned and inviting other developers to take over the project. While there are a few forks (most notably [deadbeefsociety's](https://github.com/deadbeefsociety/sshfs) and [stephenxxiu's](https://github.com/stevenxxiu/sshfs)) with some traction, none is a definitive replacement yet.
+
+One alternative suggested by the ArchWiki is using [rclone's mount feature](https://rclone.org/commands/rclone_mount/).
+
+For macOS users, it's important to note that macFUSE is [no longer open-source](https://colatkinson.site/macos/fuse/2019/09/29/osxfuse/) as of 2017.
+
 ### Installation
 
 This guide contains installation instructions for macOS and Linux systems only.
