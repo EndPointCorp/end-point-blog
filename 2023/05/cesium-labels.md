@@ -13,23 +13,25 @@ tags:
 
 <!-- Image: Topographical Map of Ancient Rome by Nicolas Beatrizet, 1557. Public domain, acquired from https://www.nga.gov/collection/art-object-page.112707.html -->
 
-Improving place labels in Cesium has been a longstanding request from some of our clients.  The display of labels embedded in imagery is not up to their expectations. The names look upside down as the globe is rotated and there's no option to change the language.
+Improving place labels in Cesium has been a longstanding request from some of our VisionPort clients. The display of labels embedded in imagery has not been up to their expectations. The names look upside down as the globe is rotated and there's no option to change the language.
 
 ![The old Cesium labels. The 3D camera is rotated so that the labels reading "New York", "Kips Bay", etc., are at a 90 degree angle, making it difficult to read.](/blog/2023/05/cesium-labels/cesium-old-labels.webp)
 
-Cesium has vector labels which allows you to anchor some text to a point on a map which will always be aligned with the camera. However, there is no ready-to-use solution to display city names in particular and no way to load them according to a specific zoom level.
+Cesium has vector labels which allow you to anchor some text to a point on a map which will always be aligned with the camera. However, there is no ready-to-use solution to display city names in particular and no way to load them according to a specific zoom level.
 
-To improve performance when displaying labels in Cesium it would make sense to load labels as a tile tree and only show some of the top of the tree at different zoom levels in a manner similar to how [KML Regions with NetworkLinks] (https://developers.google.com/kml/documentation/regions?hl=en#smart-loading-of-region-based-network-links) work. Unfortunately, although Cesium supports KML, it doesn’t support KML Regions and NetworkLinks updates on Region change.
+To improve performance when displaying labels in Cesium it would make sense to load labels as a tile tree and only show some of the top of the tree at different zoom levels in a manner similar to how [KML Regions with NetworkLinks](https://developers.google.com/kml/documentation/regions?hl=en#smart-loading-of-region-based-network-links) work. Unfortunately, although Cesium supports KML, it doesn’t support KML Regions and NetworkLinks updates on Region change.
 
-Another way to use an off the shelf solution that might conceivable work would be to use Cesium 3D Tiles, but unfortunately, tiles do not support 2D Billboards.
+Another off-the-shelf solution that might conceivable work would be to use Cesium 3D tiles, but unfortunately, tiles do not support 2D Billboards.
 
-Calculating regions and their level of detail is complicated, but Cesium already does most of that work for us. Cesium already calculates visible tiles and their corresponding levels of detail for ImageryProviders. ImageryProvider is supposed to load imagery for a given tile’s coordinates and zoom level, which is almost what we want, except that we want to render some 3d primitives for labels, not 2d images for the earth surface. We  can read what tiles are going to be rendered by Cesium.
+Calculating regions and their level of detail is complicated, but Cesium already does most of that work for us. Cesium already calculates visible tiles and their corresponding levels of detail for ImageryProviders. An ImageryProvider is supposed to load imagery for a given tile’s coordinates and zoom level, which is almost what we want, except that we want to render some 3D primitives for labels, not 2D images for the earth surface.
+
+We can read what tiles are going to be rendered by Cesium and store them in a variable, `tilesToRender`:
 
 ```javascript
 const tilesToRender = viewer.scene.globe._surface._tilesToRender;
 ```
 
-Out of the visible tiles on screen, we get the [TMS](https://wiki.openstreetmap.org/wiki/TMS) coordinates. Then we calculate the difference between the currently visible tiles and the new ones. We grab all the new tiles that we need from that list, and then we create the [Entities](https://cesium.com/learn/cesiumjs/ref-doc/Entity.html) with labels and some other styling properties.
+Then, we get the [TMS](https://wiki.openstreetmap.org/wiki/TMS) coordinates out of the visible tiles on screen. Then we calculate the difference between the currently visible tiles and the new ones. We grab all the new tiles that we need from that list, and then we create the [Entities](https://cesium.com/learn/cesiumjs/ref-doc/Entity.html) with labels and some other styling properties.
 
 ### Backend and data source
 
@@ -45,9 +47,9 @@ Currently, the entity creation is done on the frontend, but we are planning to m
 
 ### Running On Your System
 
-We have released this code under the Apache license for everyone to use, here are some instructions on how to get this up and running on your local system.
+We have released this code [on our GitHub](https://github.com/EndPointCorp/tiled-city-labels) under the Apache license for everyone to use.
 
-It starts with a git clone:
+To get this up and running on your local system, start with a git clone:
 
 ```bash
 git clone https://github.com/EndPointCorp/tiled-city-labels.git
