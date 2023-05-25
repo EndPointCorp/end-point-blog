@@ -58,7 +58,7 @@ The sed & awk book touched on the “Understanding Regular Expression Syntax” 
 
 The other tools that I usually use are the `sort` and `uniq` commands. 
 
-The `find` command.
+### The `find` command.
 
 Say I searched from a full hard disk and found several files which I could confirm it is no longer useful
 
