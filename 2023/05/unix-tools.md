@@ -29,7 +29,7 @@ Sometimes there are certain cases where I need to use awk for scripting. But mos
 
 The “sed & awk” book started with the introduction of “ed” - a line editor. Then it touched on the field separator, which is represented by the -F flag. 
 
-In the following example, I ran a “blkid” command in order to check the UUID of the SCSI devices that connected to my computer.
+In the following example, I ran the `blkid` command in order to check the UUID of the SCSI devices that connected to my computer.
 
 Example:
 ```
