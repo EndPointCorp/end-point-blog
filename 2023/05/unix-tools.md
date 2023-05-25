@@ -6,7 +6,7 @@ For the system administration task, usually I just use a simple one-liner. Perha
 
 In this blogpost, I will write the common case that needs me to use the sed and awk tools as well as the most common regular expression that I use for the daily task.
 
-“sed & awk”
+### “sed & awk”
 
 The authors mentioned in the book’s preface, it is a natural progression to learn grep to sed to awk. These three tools are the tools that are commonly being used by a system administrator.
 
@@ -24,7 +24,7 @@ sed ‘s/server101/server102/g’ server102.cfg
 icinga -v /etc/icinga/icinga.cfg (this will check for Icinga would be able to understand the newly copied file)
 ```
 
-awk
+### awk
 Sometimes there are certain cases where I need to use awk for scripting. But most of the time, I will use awk for parsing IP addresses in the log file, or any other string in the log files (for example if there is any plaintext password in the log file, or any plain credit card details appeared anywhere in the place that it shouldn’t be).
 
 The “sed & awk” book started with the introduction of “ed” - a line editor. Then it touched on the field separator, which is represented by the -F flag. 
@@ -47,12 +47,12 @@ sudo blkid /dev/sd{d,e,g}|awk -F "\"" {'print $2'}
 ```
 
 
-Combining sed and awk
+### Combining sed and awk
 
 During my day-to-day work I seldom use both of them together. In page 23 of the “sed & awk book”  that I have, the authors showed an example where both of these tools are being used together. 
 
 
-sed, awk and regular expression
+### sed, awk and regular expression
 
 The sed & awk book touched on the “Understanding Regular Expression Syntax” - which means it is the best to have both books to be read together. I do not remember who suggested buying this pair of books which I bought almost twenty years ago, but I am really grateful for the person’s suggestion. 
 
