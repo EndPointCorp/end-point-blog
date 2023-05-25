@@ -56,9 +56,9 @@ During my day-to-day work I seldom use both of them together. In page 23 of the 
 
 The sed & awk book touched on the “Understanding Regular Expression Syntax” - which means it is the best to have both books to be read together. I do not remember who suggested buying this pair of books which I bought almost twenty years ago, but I am really grateful for the person’s suggestion. 
 
-The other tools that I usually use are the “sort” and “uniq” commands. 
+The other tools that I usually use are the `sort` and `uniq` commands. 
 
-The find command.
+The `find` command.
 
 Say I searched from a full hard disk and found several files which I could confirm it is no longer useful
 
