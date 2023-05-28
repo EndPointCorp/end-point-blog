@@ -1,19 +1,20 @@
 ---
 title: Cesium Labels
 author: Dmitry Kiselev
-date: 2023-05-19
+date: 2023-05-24
 tags:
 - visionport
 - cesium
 - gis
 - open-source
+github_issue_number: 1969
 ---
 
 ![A 16th-century topographical map of ancient Rome. Buildings are drawn in simple, clear, engraved lines. Streets and important structures like the Pantheon are labeled in Latin.](/blog/2023/05/cesium-labels/rome-map.webp)
 
 <!-- Image: Topographical Map of Ancient Rome by Nicolas Beatrizet, 1557. Public domain, acquired from https://www.nga.gov/collection/art-object-page.112707.html -->
 
-Improving place labels in Cesium has been a longstanding request from some of our VisionPort clients. The display of labels embedded in imagery has not been up to their expectations. The names look upside down as the globe is rotated and there's no option to change the language.
+Improving place labels in CesiumJS, the open source JavaScript library for 3D globes and maps, has been a longstanding request from some of our VisionPort clients. The display of labels embedded in imagery has not been up to their expectations. The names look upside down as the globe is rotated and there's no option to change the language:
 
 ![The old Cesium labels. The 3D camera is rotated so that the labels reading "New York", "Kips Bay", etc., are at a 90 degree angle, making it difficult to read.](/blog/2023/05/cesium-labels/cesium-old-labels.webp)
 
@@ -25,7 +26,7 @@ Another off-the-shelf solution that might conceivable work would be to use Cesiu
 
 Calculating regions and their level of detail is complicated, but Cesium already does most of that work for us. Cesium already calculates visible tiles and their corresponding levels of detail for ImageryProviders. An ImageryProvider is supposed to load imagery for a given tile’s coordinates and zoom level, which is almost what we want, except that we want to render some 3D primitives for labels, not 2D images for the earth surface.
 
-We can read what tiles are going to be rendered by Cesium and store them in a variable, `tilesToRender`:
+We can read what tiles are going to be rendered by Cesium and store them in a variable:
 
 ```javascript
 const tilesToRender = viewer.scene.globe._surface._tilesToRender;
@@ -35,11 +36,11 @@ Then, we get the [TMS](https://wiki.openstreetmap.org/wiki/TMS) coordinates out 
 
 ### Backend and data source
 
-To source the labels we used [GeoNames](https://www.geonames.org/). They have a nice dataset for cities with their population included in the data. We take the city labels they provide and store them into a quadtree. Each node in the quad tree has 10 labels associated with it, starting with the largest population at the top of the data structure going down. Based on the altitude we traverse a certain distance down the quadtree returning all cities from each node that corresponds to the tile requested.
+To source the labels we use [GeoNames](https://www.geonames.org/). They have a nice dataset for cities with their population included in the data. We take the city labels they provide and store them into a quadtree. Each node in the quad tree has 10 labels associated with it, starting with the largest population at the top of the data structure going down. Based on the altitude we traverse a certain distance down the quadtree returning all cities from each node that corresponds to the tile requested.
 
 Here is a video demonstrating how labels display with this new feature we’ve developed:
 
-<video type="video/mp4" controls src="/blog/2023/05/cesium-labels/cesium-new-labels.mp4" style="max-height:30rem;width:auto">
+<video type="video/mp4" controls src="/blog/2023/05/cesium-labels/cesium-new-labels.mp4" style="max-height:30rem;width:auto"></video>
 
 ### Future Plans
 
@@ -49,7 +50,7 @@ Currently, the entity creation is done on the frontend, but we are planning to m
 
 We have released this code [on our GitHub](https://github.com/EndPointCorp/tiled-city-labels) under the Apache license for everyone to use.
 
-To get this up and running on your local system, start with a git clone:
+To get this up and running on your local system, start with a Git clone:
 
 ```bash
 git clone https://github.com/EndPointCorp/tiled-city-labels.git
@@ -60,10 +61,11 @@ Then within the repo there’s a README to follow. We will give instructions her
 ```bash
 cd tiled-city-labels
 docker build -t cesium-labels .
-docker run -p 48088:48088 –rm cesium-labels
+docker run -p 48088:48088 --rm cesium-labels
 ```
 
 Then in a new terminal window still inside the project:
+
 ```bash
 cd demo/
 python -m SimpleHTTPServer 8000
