@@ -60,7 +60,41 @@ The sed & awk book touched on the “Understanding Regular Expression Syntax” 
 
 The other tools that I usually use are the `sort` and `uniq` commands. 
 
+### The `sort` command
+`sort` and `uniq` are usually being used together, although not compulsory. `sort`, as its name explains, being used to sort the parsed text with the requirement that we put into it.
 
+Assume that we have the following text:
+
+```
+$ cat  pattern.txt 
+chicken,$1.50
+duck,$1.20
+beef,$6.10
+lamb,$3.20
+fish,$4.09
+```
+
+By using the `sort` command we could sort the items according to the text seperator (`-`t) and the column that we want to prioritize (`-k`). Here, I want to sort the item based on data exist on the second column.
+
+```
+$ sort -t"," -k2  pattern.txt 
+duck,$1.20
+chicken,$1.50
+lamb,$3.20
+fish,$4.09
+beef,$6.10
+```
+
+Without the other parameters, `sort` will just use the first column to sort the data - in this case, alphabetically.
+
+```
+$ sort pattern.txt 
+beef,$6.10
+chicken,$1.50
+duck,$1.20
+fish,$4.09
+lamb,$3.20
+```
 
 ### The `find` command.
 
