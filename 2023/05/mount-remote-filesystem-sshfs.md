@@ -2,7 +2,7 @@
 author: "Trevor Slocum"
 title: "Mount a remote filesystem over SSH using SSHFS"
 github_issue_number: 1965
-date: 2023-05-11
+date: 2023-05-25
 tags:
 - ssh
 - tips
@@ -15,7 +15,7 @@ tags:
 While creating and debugging software, it is important to reduce the amount of
 friction between each iteration of making a change to the software and then
 testing that change. Over time, even small amounts of friction can lead to
-fatigue and decreased performance. Because of this, we should take every
+fatigue and decreased performance of a developer. Because of this, we should take every
 opportunity to make our workflow as smooth and comfortable as possible.
 
 A common source of friction when developing software running on remote systems
@@ -25,7 +25,7 @@ other hand, is likely configured to be easily available to everyone on your team
 
 You could copy files back and forth between systems using SFTP or some other
 file transfer protocol. This works for quick one-off changes, but for
-development requiring multiple iterations you would likely want a more
+development requiring multiple iterations you likely want a more
 streamlined workflow.
 
 If only there was a way to use the software installed on your personal system
@@ -76,8 +76,8 @@ serve as the local mount point:
 mkdir /tmp/remote
 ```
 
-Let's say we want to mount the remote directory `/var/www/html` on the remote
-system at `example.com` as the remote user `wildfly`. We want to mount this
+Let's say we want to mount the remote directory `/var/www/html` of the remote
+system at `example.com` while connected as the remote user `wildfly`. We want to mount this
 remote directory at the local directory `/tmp/remote`. To accomplish this, we
 would execute the following command:
 
