@@ -1,12 +1,14 @@
-Almost twenty years ago, I bought two O'Reilly books entitled "sed & awk - second edition," written by Dale Dougherty & Arnold Robbins, and "Mastering Regular Expressions," written by Jeffrey E.F. Friedl. These two books are used books that were printed in the late '90s (and I bought them in 2004). In this writing, when the page and book chapter are mentioned, it means that I am referring to the aforementioned books printed in that particular year. It's possible that newer editions have been updated with different chapters or page references.
+The command line interface (CLI) commands/tools in the UNIX-alike (\*NIX) are the most priceless elements for system administrators. CLI allows the system administrator  (or in this writings, I will just use the sysadmin short form) to handle the \*NIX systems either remotely or locally without having the need to install the Graphical User Interface (GUI) packages.
+
+Almost twenty years ago, I bought two O'Reilly books entitled "sed & awk - second edition," written by Dale Dougherty & Arnold Robbins, and "Mastering Regular Expressions," written by Jeffrey E.F. Friedl. These two books are used books that were printed in the late '90s (and I bought them in 2004). In this writing, when the page and book chapter are mentioned, it means that I am referring to the aforementioned books printed in that particular year. It's possible that newer editions have been updated with different chapters or page references. These two books explain in details on the previously mentioned topics. 
 
 Why did I mention these books? This is because previously my co-workers and I had several hourly meetups over several weeks in order to learn (from surface to the details) Regular Expressions. So I remember that I actually have the related books inside my bookshelves which I have not touched for years. 
 
-For the system administration task, usually I just use a simple one-liner. Perhaps it is not even a new thing for the reader, but just in case it is useful to someone else.
+For the system administration task, usually I just use a simple one-liner. Perhaps it is not even a new thing for the reader, but just in case it is useful to someone else. Apart from that, I would also recommend "UNIX and Linux System Administration Handbook" ( Nemeth, E., Snyder, G., Hein, T., Whaley, B., & Mackin, D. (2020). UNIX and Linux System Administration Handbook (5th ed.). Prentice Hall. )
 
-In this blogpost, I will write the common case that needs me to use the sed and awk tools as well as the most common regular expression that I use for the daily task.
+In this blogpost, I will write the common cases that I encountered from day to day task, together with related tools to handle it.
 
-### “sed & awk”
+### sed
 
 The authors mentioned in the book’s preface, it is a natural progression to learn grep to sed to awk. These three tools are the tools that are commonly being used by a system administrator.
 
@@ -54,9 +56,11 @@ During my day-to-day work I seldom use both of them together. In page 23 of the 
 
 ### sed, awk and regular expression
 
-The sed & awk book touched on the “Understanding Regular Expression Syntax” - which means it is the best to have both books to be read together. I do not remember who suggested buying this pair of books which I bought almost twenty years ago, but I am really grateful for the person’s suggestion. 
+The sed & awk book touched on the “Understanding Regular Expression Syntax” - which means in some way, system administrator might have to use regular expressions in certain cases where large/repetitive tasks is involved. I do not remember who suggested buying this pair of books which I bought almost twenty years ago, but I am really grateful for the person’s suggestion. 
 
 The other tools that I usually use are the `sort` and `uniq` commands. 
+
+
 
 ### The `find` command.
 
