@@ -8,11 +8,10 @@ For the system administration task, usually I just use a simple one-liner. Perha
 
 In this blogpost, I will write the common cases that I encountered from day to day task, together with related tools to handle it.
 
+The authors mentioned in the book’s preface, it is a natural progression to learn grep to sed to awk. `sed,`,`awk` and `grep` are among the tools that are commonly being used by a system administrator.
+
 ### sed
 
-The authors mentioned in the book’s preface, it is a natural progression to learn grep to sed to awk. These three tools are the tools that are commonly being used by a system administrator.
-
-sed
 During my day to day work as a system administrator, I usually deal with sed (stream editor) for string replacement across files and awk for the log file or file analysis with certain strings as the field separator (hence my favorite is the -F flag). 
 
 The benefit of using sed by copying over the existing, working file is that we could reduce the likeliness of having typos, since we only need to replace several strings.
@@ -59,6 +58,8 @@ During my day-to-day work I seldom use both of them together. In page 23 of the 
 The sed & awk book touched on the “Understanding Regular Expression Syntax” - which means in some way, system administrator might have to use regular expressions in certain cases where large/repetitive tasks is involved. I do not remember who suggested buying this pair of books which I bought almost twenty years ago, but I am really grateful for the person’s suggestion. 
 
 The other tools that I usually use are the `sort` and `uniq` commands. 
+
+Apart from the `sed`, `awk` and `grep`, there are other tools as well.
 
 ### The `sort` command
 `sort` and `uniq` are usually being used together, although not compulsory. `sort`, as its name explains, being used to sort the parsed text with the requirement that we put into it.
