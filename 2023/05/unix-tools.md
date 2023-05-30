@@ -133,4 +133,4 @@ drwxrwxrwx 4 najmi najmi 4096 Nov  25  2012 ./libreoffice
 drwxrwxrwx 3 najmi najmi 4096 Nov  25  2012 ./caja
 drwxrwxrwx 2 najmi najmi 4096 Dis  18  2012 ./Empathy
 ```
-Note: In Linux it is possible to use `ls {} -ld` or `ls -ld {}` flag assignation, but I realized in some other `*NIX variant, you always need to put the flag before the variable/parameter, that is `ls -ld {}`. 
+Note: In Linux it is possible to use `ls {} -ld` or `ls -ld {}` flag assignation, but I realized in some other \*NIX variant, you always need to put the flag before the variable/parameter, that is `ls -ld {}`. 
