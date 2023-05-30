@@ -134,3 +134,6 @@ drwxrwxrwx 3 najmi najmi 4096 Nov  25  2012 ./caja
 drwxrwxrwx 2 najmi najmi 4096 Dis  18  2012 ./Empathy
 ```
 Note: In Linux it is possible to use `ls {} -ld` or `ls -ld {}` flag assignation, but I realized in some other \*NIX variant, you always need to put the flag before the variable/parameter, that is `ls -ld {}`. 
+
+### Conclusion
+There are other tools, which may recently being deployed/provided by the recent Linux distros or BSD variants, so I could not cover them in this short write up. But at least for the person will use/currently use \*NIX, your time will be worth learning more about these tools in detail.
