@@ -1,11 +1,11 @@
 ---
 author: "Kevin Campusano"
-title: "I wrote the same app twice, with Hotwire and Blazor Server — here's what I learned"
-date: 2023-04-20
+title: "I wrote the same app twice, with Hotwire and Blazor Server — here’s what I learned"
+date: 2023-05-27
 github_issue_number: 1963
 featured:
   endpoint: true
-  image_url: /blog/2023/04/i-wrote-the-same-app-twice-with-hotwire-and-blazor-server/have-a-good-day.webp
+  image_url: /blog/2023/05/i-wrote-the-same-app-twice-with-hotwire-and-blazor-server/have-a-good-day.webp
 description: An in-depth comparison of Hotwire and Blazor Server, two new little-to-no-JavaScript frontend frameworks.
 tags:
 - frameworks
@@ -16,29 +16,29 @@ tags:
 - aspdotnet
 ---
 
-![A dark sky sprawls over a tall canyon. Misty clouds hang on jagged peaks on the hill to the left. The other hill on the right rises at a steep angle, making a "V" shape. Both hills are covered in different shades of green, mostly a deep, dark green due to the late hour. Some sun peeks through the overcast sky to let through a bit of bluer light.](/blog/2023/04/i-wrote-the-same-app-twice-with-hotwire-and-blazor-server/2022-09-14_193717.webp)
+![A dark sky sprawls over a tall canyon. Misty clouds hang on jagged peaks on the hill to the left. The other hill on the right rises at a steep angle, making a "V" shape. Both hills are covered in different shades of green, mostly a deep, dark green due to the late hour. Some sun peeks through the overcast sky to let through a bit of bluer light.](/blog/2023/05/i-wrote-the-same-app-twice-with-hotwire-and-blazor-server/2022-09-14_193717.webp)
 
 <!-- Photo by Seth Jensen, 2022. -->
 
 There's been a very interesting movement that has emerged recently in the world of frontend web development: a rise of little-to-no-JavaScript frontend frameworks.
 
-The promise here is that we would be able to develop web applications with rich interactive capabilities without the need to write a whole lot of JavaScript. As such, these new approaches present themselves as alternatives to the likes of Vue, React, etc.
+The promise here is that we would be able to develop web applications with rich interactive capabilities without the need to write a whole lot of JavaScript. As such, these new approaches present themselves as alternatives to the likes of Vue, React, Angular, etc.
 
 Two recent technologies that try to fulfill this promise come from two of the most prolific web application development frameworks of today: [Blazor](https://dotnet.microsoft.com/en-us/apps/aspnet/web-apps/blazor), built on .NET, and [Hotwire](https://hotwired.dev/), built on Ruby on Rails.
 
-Now, I love my JS frameworks as much as the next guy, but these new technologies are intriguing. And so, I decided to build the same application twice; with Hotwire and with Blazor. I learned a few things along the way that I would like to share in this blog post.
+Now, I love my JS frameworks as much as the next guy, but these new technologies are intriguing. So I decided to build the same application twice, with Hotwire and with Blazor. I learned a few things along the way that I would like to share in this blog post.
 
 > Note that there is a [table of contents](#table-of-contents) at the end of this post.
 
 ### What this article is
 
-I want to present some of my findings when working with these two technologies. I also want to discuss how they work and how they feel, how they are similar and how they are different. Maybe offer some pros and cons. How they take different routes to arrive at their ultimately similar destinations.
+I want to present some of my findings when working with these two technologies. I also want to discuss how they work and how they feel. How they are similar and how they are different. How they take different routes to arrive at their ultimately similar destinations. Maybe offer some pros and cons.
 
-This post assumes sufficient familiarity with [C#](https://learn.microsoft.com/en-us/dotnet/csharp/), [ASP.NET](https://dotnet.microsoft.com/en-us/apps/aspnet), [Ruby](https://www.ruby-lang.org/en/), [Rails](https://rubyonrails.org/) and the current state of the art of web development. I won't assume any familiarity with either Blazor or Hotwire, though. However, this is not a tutorial for either, so I won't explain in detail how to fully build apps with these technologies.
+This post assumes sufficient familiarity with [C#](https://learn.microsoft.com/en-us/dotnet/csharp/), [ASP.NET](https://dotnet.microsoft.com/en-us/apps/aspnet), [Ruby](https://www.ruby-lang.org/en/), [Ruby on Rails](https://rubyonrails.org/) and the current state of the art of web development. I won't assume any familiarity with either Blazor or Hotwire, but this is not a tutorial for either, so I won't explain in detail how to fully build apps with these technologies.
 
-So who am I writing this for? Essentially, for anybody who is curious about these technologies and is interested in understanding the big picture of what they are about, how they compare to each other, and building their next project with one of them. So, this article is intended to serve more as an introduction to both; a starting point for a conversation to help you make a decision for what's best for you and your team.
+So who am I writing this for? Essentially, for anybody who is curious about these technologies and is interested in understanding the big picture of what they are about, how they compare to each other, and building their next project with one of them. So, this article is intended to serve more as an introduction to both, a starting point for a conversation to help you make a decision on what's best for you and your team.
 
-Spoiler alert: both are great and you can't go wrong with either. It all comes down to your team's preferences and past experience.
+Spoiler alert: Both are great and you can't go wrong with either. It all comes down to your team's preferences and past experience.
 
 One final thing worth noting is that I'm focusing this article on "[Blazor Server](https://learn.microsoft.com/en-us/aspnet/core/blazor/?view=aspnetcore-7.0#blazor-server)" specifically. I'll be using the word "Blazor" moving forward, for short. Blazor as a framework has three variants: Blazor Server, Blazor WebAssembly and Blazor Hybrid. You can learn more about them [here](https://learn.microsoft.com/en-us/aspnet/core/blazor/?view=aspnetcore-7.0).
 
@@ -50,11 +50,11 @@ When it comes to how they are designed and the developer experience they offer, 
 
 The first thing we have to understand about Blazor is that it is a component framework, very much like Vue or React. So, with Blazor, applications are broken up into composable modules called "[Razor/Blazor components](https://learn.microsoft.com/en-us/aspnet/core/blazor/components/?view=aspnetcore-7.0)" that are essentially independent pieces of GUI bundled with their corresponding logic. Each component has three parts to it:
 
-1. HTML-like markup that describes the layout and UI elements to be rendered, 
+1. HTML-like markup that describes the layout and UI elements to be rendered,
 2. C# logic that defines the behavior of the component, like what actions to take when users interact with GUI elements, and
 3. CSS for styling the GUI elements.
 
-For example here's a simple a Blazor component that allows displaying, editing and deleting a particular type of record called "Quote". Don't worry about the details too much, we'll go over some of them next. For now, I just want us to get a sense of what Blazor components look like:
+For example here's a simple a Blazor component that allows displaying, editing, and deleting a particular type of record called "Quote". Don't worry about the details too much; we'll go over some of them next. For now, I just want us to get a sense of what Blazor components look like:
 
 ```csharp
 @using Microsoft.EntityFrameworkCore
@@ -108,9 +108,9 @@ else
 }
 ```
 
-You can see that we have some C# in the file (enclosed in a [`@code`](https://learn.microsoft.com/en-us/aspnet/core/mvc/views/razor?view=aspnetcore-7.0#code) block) with some event handlers and parameters. We also have some markup written with a mixture of HTML and C#. This markup has conditionals, wires up click event handlers, renders data from a given record, renders another component, etc. That markup is really just [Razor](https://learn.microsoft.com/en-us/aspnet/core/mvc/views/razor?view=aspnetcore-7.0), a templating language that has been widely used in ASP.NET for a good while now. And we also have some top level statements like [`@using`](https://learn.microsoft.com/en-us/aspnet/core/mvc/views/razor?view=aspnetcore-7.0#using) and [`@inject`](https://learn.microsoft.com/en-us/aspnet/core/mvc/views/razor?view=aspnetcore-7.0#inject) for including classes and objects that the component can use.
+You can see that we have some C# in the file (enclosed in a [`@code`](https://learn.microsoft.com/en-us/aspnet/core/mvc/views/razor?view=aspnetcore-7.0#code) block) with some event handlers and parameters. We also have some markup written with a mixture of HTML and C#. This markup has conditionals, wires up click event handlers, renders data from a given record, renders another component, etc. That markup is really just [Razor](https://learn.microsoft.com/en-us/aspnet/core/mvc/views/razor?view=aspnetcore-7.0), a templating language that has been widely used in ASP.NET for a good while now. And we also have some top-level statements like [`@using`](https://learn.microsoft.com/en-us/aspnet/core/mvc/views/razor?view=aspnetcore-7.0#using) and [`@inject`](https://learn.microsoft.com/en-us/aspnet/core/mvc/views/razor?view=aspnetcore-7.0#inject) for including classes and objects that the component can use.
 
-As far as CSS goes, [here's how it works](https://learn.microsoft.com/en-us/aspnet/core/blazor/components/css-isolation?view=aspnetcore-7.0): Suppose these are the contents of a file called `Example.razor`. The CSS for it would have to be defined in an `Example.razor.css` file sitting right next to it. Syntax wise, this would just be a plain old CSS file. One cool thing to mention about it, though, is that the CSS within it is visible only to the component. So there's no risk of conflicting rules between components.
+As far as CSS goes, [here's how it works](https://learn.microsoft.com/en-us/aspnet/core/blazor/components/css-isolation?view=aspnetcore-7.0): Suppose these are the contents of a file called `Example.razor`. The CSS for it would have to be defined in an `Example.razor.css` file sitting right next to it. Syntax-wise, this would just be a plain old CSS file. One cool thing to mention about it, though, is that the CSS within it is visible only to the component. So there's no risk of conflicting rules between components.
 
 If you're familiar with modern frontend web development and have used frameworks like Vue or React, this should look very familiar to you. In fact, I would venture to say this is one of Blazor's most attractive points. If you come from that background, and know .NET, it's not that big of a leap to get into Blazor. The development experience is very similar as its design shares many concepts with modern JS frameworks; they operate under a very similar mental model.
 
@@ -124,17 +124,17 @@ Essentially, all the code that you actually write executes on the server side. W
 
 [Microsoft's official documentation](https://learn.microsoft.com/en-us/aspnet/core/blazor/?view=aspnetcore-7.0#blazor-server) has an excellent diagram that helps explain the process:
 
-![On the left, a cloud icon sits in front of a server icon. The cloud is labeled "ASP.NET Core", and has two smaller boxes labeled "Razor Components" and ".NET". There are two arrows pointing to and from a web browser diagram, with the arrows labeled "SignalR". The web browser diagram has a smaller box in it labeled "DOM".](/blog/2023/04/i-wrote-the-same-app-twice-with-hotwire-and-blazor-server/blazor-server.png)
+![On the left, a cloud icon sits in front of a server icon. The cloud is labeled "ASP.NET Core", and has two smaller boxes labeled "Razor Components" and ".NET". There are two arrows pointing to and from a web browser diagram, with the arrows labeled "SignalR". The web browser diagram has a smaller box in it labeled "DOM".](/blog/2023/05/i-wrote-the-same-app-twice-with-hotwire-and-blazor-server/blazor-server.png)
 
 So, even though there is client side code running and browser DOM being manipulated, this is all happening under the hood. The developer doesn't need to be concerned with that and can just focus on authoring C# code, for the most part.
 
-This approach has a few implications worth noting. One of which is that this means higher load on the server when compared to more traditional web applications. This is mainly because there needs to be a connection always open between clients and the server, by design. Classic HTTP is purely stateless, and connections are typically opened and closed multiple times throughout a user's session, as they interact with the web app. Not so for Blazor, where this SignalR connection (most likely via [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API)) is always alive. So, for scalability concerns, we need to keep in mind that the more concurrent users our app has, the more resources the server will consume, even if the users are somewhat idle.
+This approach has a few implications worth noting. One is that this means higher load on the server compared to more traditional web applications. This is mainly because there needs to be a connection always open between clients and the server, by design. Classic HTTP is purely stateless, and connections are typically opened and closed multiple times throughout a user's session, as they interact with the web app. Not so for Blazor, where this SignalR connection (most likely via [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API)) is always alive. So, for scalability concerns, we need to keep in mind that the more concurrent users our app has, the more resources the server will consume, even if the users are somewhat idle.
 
 #### An abstraction over the request/response cycle
 
-A key element of Blazor is that it abstracts developers from the classic [HTTP request/response model](https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview#http_messages). With Blazor, one seldom has to consider that aspect, as all interactions between client and server are managed via the framework itself through the persistent connection we discussed in the last couple of paragraphs. To the developer, there's no real separation between the two. This is a big departure from classic [MVC](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc)-like frameworks where things like endpoints, actions, and controllers are front and center. Such concepts are simply not in play on Blazor apps. The idea is to make them feel more like desktop apps: fully integrated, monolithical, simple packages of GUI and functionality.
+A key element of Blazor is that it abstracts developers from the classic [HTTP request/​response model](https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview#http_messages). With Blazor, one seldom has to consider that aspect, as all interactions between client and server are managed via the framework itself through the persistent connection we discussed in the last couple of paragraphs. To the developer, there's no real separation between the two. This is a big departure from classic [MVC](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc)-like frameworks where things like endpoints, actions, and controllers are front and center. Such concepts are simply not in play on Blazor apps. The idea is to make them feel more like desktop apps: fully integrated, monolithic, simple packages of GUI and functionality.
 
-This could become a double-edged sword as, in general, it is always important to have a clear understanding of the underlying technologies that support the application stack you're working with. That is, the web is still there, even if you can't see it. As long as you're cognizant of that however, this approach can have great advantages too.
+This could become a double-edged sword as, in general, it is always important to have a clear understanding of the underlying technologies that support the application stack you're working with. That is, the web is still there, even if you can't see it. But as long as you're cognizant of that, this approach can have great advantages too.
 
 For example, thanks to this approach, there's no need to employ the classic [SPA pattern](https://developer.mozilla.org/en-US/docs/Glossary/SPA) of developing applications in two halves: 1. a backend Web API for domain logic written in some backend programming language, and 2. a frontend application written in JavaScript that implements the user experience and communicates with the backend over HTTP.
 
@@ -161,7 +161,7 @@ However, this flexibility also requires great discipline from the development te
 
 #### How Blazor supports common frontend framework features
 
-Something else to consider, which I touched on before, is that Blazor is built on top of .NET. That means that a solid understanding of .NET concepts is all but a necessity in order to be effective with Blazor. Most of the features that are now traditional and expected in frontend JavaScript frameworks exist in Blazor, and they are implemented using age-old .NET concepts. If your team has solid .NET experience, this is a blessing. If not, then Blazor becomes a larger investment, one that could be overwhelming depending on your time constraints.
+Something else to consider, which I touched on before, is that Blazor is built on top of .NET. That means that a solid understanding of .NET concepts is all but a necessity in order to be effective with Blazor. Most of the features that are now traditional and expected in frontend JavaScript frameworks exist in Blazor, and they are implemented using age-old .NET concepts. If your team has solid .NET experience, this is a blessing. If not, then Blazor requires a larger investment, one that could be overwhelming depending on your time constraints.
 
 Here are a few examples of how Blazor implements classic frontend framework features:
 
@@ -229,7 +229,7 @@ This will execute whatever method the parent component has registered as a handl
 
 ##### Handling component lifecycle events
 
-Other than DOM and custom events, much like in other frontend frameworks, Blazor components also offer ways of hooking up to their own internal lifecycle events. `OnInitialized` is one of the most important ones, which runs when the component is first starting up. To hook into it, and run some code when it happens, all a Blazor component has to do is implement it as a [method override](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/override) within its code section. Something like this:
+Other than DOM and custom events, much like in other frontend frameworks, Blazor components also offer ways of hooking up to their own internal lifecycle events. `OnInitialized` is one of the most important ones, which runs when the component is first starting up. To hook into it and run some code when it happens, all a Blazor component has to do is implement it as a [method override](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/override) within its code section. Something like this:
 
 ```csharp
 protected override void OnInitialized()
@@ -269,7 +269,7 @@ public int QuoteId { get; set; }.
 
 ##### State management
 
-Global application state management a la [Vuex](https://vuex.vuejs.org/) or [Redux](https://redux.js.org/) is also available in Blazor. The cool thing about how this is implemented in Blazor is that there is no need for any additional library or special components. A global app store can be a simple C# object that's configured to have a lifetime that spans that of the user's session. Here's an example of a class that's used to store global flash messages:
+Global application state management à la [Vuex](https://vuex.vuejs.org/) or [Redux](https://redux.js.org/) is also available in Blazor. The cool thing about how this is implemented in Blazor is that there is no need for any additional library or special components. A global app store can be a simple C# object that's configured to have a lifetime that spans that of the user's session. Here's an example of a class that's used to store global flash messages:
 
 ```csharp
 namespace QuoteEditorBlazor.AppState;
@@ -336,9 +336,9 @@ Then, you could have a component that renders those messages that looks like thi
 }
 ```
 
-Very simple too. This Blazor component uses a loop to render all the messages. There are a couple interesting things about this one. First, the component gets access to the instance of the `FlashStore` class via the `@inject` directive near the top of the file. That's how the `flashStore` variable is made available for the component to use both in C# code and in the template.
+Very simple too. This Blazor component uses a loop to render all the messages. There are a couple of interesting things about this one. First, the component gets access to the instance of the `FlashStore` class via the `@inject` directive near the top of the file. That's how the `flashStore` variable is made available for the component to use both in C# code and in the template.
 
-The second interesting element is how this component registers its [`StateHasChanged`](https://learn.microsoft.com/en-us/aspnet/core/blazor/components/lifecycle?view=aspnetcore-7.0#state-changes-statehaschanged) method to the `MessagesChanged` event defined in `FlashStore`. As you recall, `FlashStore` will trigger `MessagesChanged` every time messages are added or removed. By registering `StateHasChanged` to that event, we make sure that the component re-renders everytime the messages list changes; which in turn ensures that the most current messages are always rendered. Kind of a neat trick.
+The second interesting element is how this component registers its [`StateHasChanged`](https://learn.microsoft.com/en-us/aspnet/core/blazor/components/lifecycle?view=aspnetcore-7.0#state-changes-statehaschanged) method to the `MessagesChanged` event defined in `FlashStore`. As you recall, `FlashStore` will trigger `MessagesChanged` every time messages are added or removed. By registering `StateHasChanged` to that event, we make sure that the component re-renders every time the messages list changes; which in turn ensures that the most current messages are always rendered. Kind of a neat trick.
 
 And as you might expect, any piece of code throughout the app can submit new messages to `FlashStore` by getting hold of the global instance via dependency injection and then calling:
 
@@ -375,7 +375,7 @@ Like I said, the other way around also works: JavaScript code is able to call .N
 [JSInvokable]
 public static Task<string> getMessageFromServer()
 {
-    return Task.FromResult("Have a nide day!");
+    return Task.FromResult("Have a nice day!");
 }
 ```
 
@@ -398,13 +398,13 @@ There are a few noteworthy things here. First we have the `DotNet.invokeMethodAs
 
 [Hotwire](https://hotwired.dev/) makes a promise similar to Blazor's. However, the way it goes about it couldn't be more different.
 
-Hotwire is much simpler and more minimalistic than Blazor. Whereas in Blazor we let the framework take total control of the GUI, just like we do with other popular frontend frameworks, Hotwire feels more like a natural evolution of traditional pre-JavaScript-heavy web development. We still have [controllers](https://guides.rubyonrails.org/action_controller_overview.html) and [views](https://guides.rubyonrails.org/action_view_overview.html), we still render pages on the server, and we still work in tandem with HTTP's request/response model.
+Hotwire is much simpler and more minimalistic than Blazor. Whereas in Blazor we let the framework take total control of the GUI, just like we do with other popular frontend frameworks, Hotwire feels more like a natural evolution of traditional pre-JavaScript-heavy web development. We still have [controllers](https://guides.rubyonrails.org/action_controller_overview.html) and [views](https://guides.rubyonrails.org/action_view_overview.html), we still render pages on the server, and we still work in tandem with HTTP's request/​response model.
 
-What Hotwire gives us, if we were to boil it down to a single sentence, is a way to refresh only portions of our pages as a result of user interactions. That is, we're not forced to reload the entire page, as is the case with non-JavaScript web applications. For example, in Hotwire we have the ability to submit a form or click a link and, as a result of that, only update a particular message, picture or section.
+What Hotwire gives us, if we were to boil it down to a single sentence, is a way to refresh only portions of our pages as a result of user interactions. That is, we're not forced to reload the entire page, as is the case with non-JavaScript web applications. For example, in Hotwire we have the ability to submit a form or click a link and, as a result of that, only update a particular message, picture, or section.
 
 > ASP.NET veterans will find this awfully familiar. That's because all the way back in version 3.5, [ASP.NET AJAX](https://learn.microsoft.com/en-us/aspnet/web-forms/overview/older-versions-getting-started/aspnet-ajax/) offered a very similar feature: partial page updates with the UpdatePanel component. Indeed, Hotwire presents a very similar concept; only greatly improved and modernized.
 
-When it comes to actual coding, Hotwire's footprint is minimal. It augments traditional Rails controllers and views to produce the desired effect of page refreshes that are partial and targeted. Let's walk through an example and you'll see how we can start with a regular looking Rails app and then, through minor adjustments, we end up with a more richly interactive experience.
+When it comes to actual coding, Hotwire's footprint is minimal. It augments traditional Ruby on Rails controllers and views to produce the desired effect of page refreshes that are partial and targeted. Let's walk through an example and you'll see how we can start with a regular looking Rails app and then, through minor adjustments, we end up with a more richly interactive experience.
 
 Imagine we are beginning to develop support for CRUDing a particular type of record called "Quote", and we have these files:
 
@@ -459,52 +459,52 @@ end
 
 > This sample is using the `simple_form` gem, which you can learn more about [here](https://github.com/heartcombo/simple_form).
 
-If you're familiar with Rails, then you fully understand what's happening here. We have a simple `index` page with a heading and a link to another page. That other page contains a form to create new Quote records. It also contains a link to go back to the `index` page.
+If you're familiar with Rails, then you understand what's happening here. We have a simple `index` page with a heading and a link to another page. That other page contains a form to create new Quote records. It also contains a link to go back to the `index` page.
 
 #### Partial page updates with Turbo Frames
 
-As they are right now, these files would produce a traditional web application user experience. When links are clicked, the whole screen will be reloaded to show the page that the clicked link points to. But what if we wanted, for example, to have the new record creation form appear out of nowhere within the same `index` page? Without a full page reload? Here's what that would look like with Hotwire:
+As they are right now, these files would produce a traditional web application user experience. When links are clicked, the whole screen will be reloaded to show the page that the clicked link points to. But what if we wanted, for example, to have the new record creation form appear out of nowhere within the same `index` page, without a full page reload? Here's what that would look like with Hotwire:
 
 ```diff
-<!-- app/views/quotes/index.html.erb -->
-<main class="container">
-  <div class="header">
-    <h1>Quotes</h1>
-    <%= link_to "New quote",
-                new_quote_path,
-+               data: { turbo_frame: dom_id(Quote.new) } %>
-  </div>
+ <!-- app/views/quotes/index.html.erb -->
+ <main class="container">
+   <div class="header">
+     <h1>Quotes</h1>
+     <%= link_to "New quote",
+                 new_quote_path,
++                data: { turbo_frame: dom_id(Quote.new) } %>
+   </div>
 
 +  <%= turbo_frame_tag Quote.new %>
-</main>
+ </main>
 ```
 
 ```diff
-<!-- app/views/quotes/new.html.erb -->
-<main class="container">
-  <%= link_to sanitize("&larr; Back to quotes"), quotes_path %>
+ <!-- app/views/quotes/new.html.erb -->
+ <main class="container">
+   <%= link_to sanitize("&larr; Back to quotes"), quotes_path %>
 
-  <div class="header">
-    <h1>New quote</h1>
-  </div>
+   <div class="header">
+     <h1>New quote</h1>
+   </div>
 
 +  <%= turbo_frame_tag Quote.new do %>
-    <%= render "form", quote: @quote %>
+     <%= render "form", quote: @quote %>
 +  <% end %>
-</main>
+ </main>
 ```
 
 > Remember that these examples are taken from a fully working application. Feel free to read through [the source code](https://github.com/megakevin/quote-editor-hotwire) to have a more complete understanding of the context within which these files exist.
 
-And that's really all it takes. Let's go over it. With these changes, whenever a user clicks on the "New quote" link, instead of the browser triggering the usual GET request to then reload the screen and show the creation page; Hotwire's frontend component captures the click event and makes the request itself via [XHR](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest). The server then receives this request normally and routes it to the `new` action in the `quotes` controller. All that action does is render the `new.html.erb` template and send that back to the client as a response.
+And that's really all it takes. Let's go over it. With these changes, whenever a user clicks on the "New quote" link, instead of the browser triggering the usual GET request to then reload the screen and show the creation page, Hotwire's frontend component captures the click event and makes the request itself via [XHR](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest). The server then receives this request normally and routes it to the `new` action in the `quotes` controller. All that action does is render the `new.html.erb` template and send that back to the client as a response.
 
 When the Hotwire frontend component receives this, it notices that some of the response is enclosed in a `turbo_frame_tag` whose ID is that of an empty new Quote object. Now, because the link that the user clicked also had the ID of an empty new Quote object as its `data-turbo_frame` attribute, Hotwire looks for a `turbo_frame_tag` with the same ID in the page that's currently being shown an replaces its contents with the contents from the similarly named `turbo_frame_tag` from the incoming response.
 
-With that, you've seen in action some of the key elements that make Hotwire work. First of all we have the `turbo_frame_tag` helper, which produces a so-called "[Turbo Frame](https://turbo.hotwired.dev/handbook/frames)". Turbo Frames are the main building block that we use for partial page updates. Turbo Frames essentially say: "this section of the page is allowed to be dynamically updated without a full page refresh". In an app that uses Hotwire, whenever you're in a page that includes a Turbo Frame, if a request is made (whether it be navigation or form submission), and if the resulting response includes within it another Turbo Frame with the same ID, then Hotwire will notice the match and update the current page's Turbo Frame with the contents of the Turbo Frame from the response.
+With that, you've seen in action some of the key elements that make Hotwire work. First of all we have the `turbo_frame_tag` helper, which produces a so-called "[Turbo Frame](https://turbo.hotwired.dev/handbook/frames)". Turbo Frames are the main building block that we use for partial page updates. Turbo Frames essentially say: "This section of the page is allowed to be dynamically updated without a full page refresh." In an app that uses Hotwire, whenever you're in a page that includes a Turbo Frame, if a request is made (whether it be navigation or form submission), and if the resulting response includes within it another Turbo Frame with the same ID, then Hotwire will notice the match and update the current page's Turbo Frame with the contents of the Turbo Frame from the response.
 
-Looking back at the code, you can see how we achieved this. We added an empty Turbo Frame on the index page, right below the link to the creation page. We also wrapped the form from the creation page in a similarly named Turbo Frame. Finally, we added the `data-turbo_frame` attribute to the link in the index page to tell Hotwire that it should kick in for this link and target that specific Turbo Frame. If the link was inside the Turbo Frame, we would not have to do this. Since it is outside, Hotwire needs the little hint. So the hint essentially says: "treat this link as if it was inside this Turbo Frame".
+Looking back at the code, you can see how we achieved this. We added an empty Turbo Frame on the index page, right below the link to the creation page. We also wrapped the form from the creation page in a similarly named Turbo Frame. Finally, we added the `data-turbo_frame` attribute to the link in the index page to tell Hotwire that it should kick in for this link and target that specific Turbo Frame. If the link was inside the Turbo Frame, we would not have to do this. Since it is outside, Hotwire needs the little hint that says: "Treat this link as if it was inside this Turbo Frame."
 
-I feel like this is at the same time a little awkward to wrap your head around and deceptively simple. When compared to Blazor, which builds upon tried and true concepts (as far as the developer experience goes at least), Hotwire almost seems alien, with a much more unusual style. But all in all, one can't deny just how clean and simple all of this looks. In that "Rails magic" kind of way. And once it clicks, you can begin to see a world of possibilities opening up. The Hotwire developers managed to identify and extract a general design pattern of web application interactions. One that can be leveraged to produce a lot of varying rich interactive user experiences.
+I feel like this is at the same time a little awkward to wrap your head around and deceptively simple. When compared to Blazor, which builds upon tried and true concepts (as far as the developer experience goes at least), Hotwire almost seems alien, with a much more unusual style. But all in all, one can't deny just how clean and simple all of this looks, in that "Rails magic" kind of way. And once it clicks, you can begin to see a world of possibilities opening up. The Hotwire developers managed to identify and extract a general design pattern of web application interactions, one that can be leveraged to produce a lot of varying rich interactive user experiences.
 
 One neat aspect worth noting is that, if the user were to disable JavaScript, the app would still fully work. It would [gracefully degrade](https://developer.mozilla.org/en-US/docs/Glossary/Graceful_degradation). This is a direct consequence of Hotwire's paradigm of adding minimal features on top of the existing traditional Rails programming model.
 
@@ -521,34 +521,34 @@ Let's start by adding a list of quotes on the index page.
 In the controller, we query the database for all the quote records and store them in a variable that the view can later access.
 
 ```diff
-### app/controllers/quotes_controller.rb
-class QuotesController < ApplicationController
-  def index
-+   @quotes = Quote.all
-  end
+ ### app/controllers/quotes_controller.rb
+ class QuotesController < ApplicationController
+   def index
++    @quotes = Quote.all
+   end
 
-  def new
-    @quote = Quote.new
-  end
-end
+   def new
+     @quote = Quote.new
+   end
+ end
 ```
 
 In the index view template, we render the collection of records.
 
 ```diff
-<!-- app/views/quotes/index.html.erb -->
-<main class="container">
-  <div class="header">
-    <h1>Quotes</h1>
-    <%= link_to "New quote",
-                new_quote_path,
-                data: { turbo_frame: dom_id(Quote.new) } %>
-  </div>
+ <!-- app/views/quotes/index.html.erb -->
+ <main class="container">
+   <div class="header">
+     <h1>Quotes</h1>
+     <%= link_to "New quote",
+                 new_quote_path,
+                 data: { turbo_frame: dom_id(Quote.new) } %>
+   </div>
 
-  <%= turbo_frame_tag Quote.new %>
+   <%= turbo_frame_tag Quote.new %>
 
-+ <%= render @quotes %>
-</main>
++  <%= render @quotes %>
+ </main>
 ```
 
 Now we need to define a "_quote" partial view so that render statement we added on the index view can work [automagically](https://thesaurus.plus/img/synonyms/128/automagically.png).
@@ -565,30 +565,30 @@ With this, the `render @quotes` statement will loop through all the records in `
 Now let's add an action that can accept quote creation form submissions:
 
 ```diff
-### app/controllers/quotes_controller.rb
-class QuotesController < ApplicationController
-  def index
-    @quotes = Quote.all
-  end
+ ### app/controllers/quotes_controller.rb
+ class QuotesController < ApplicationController
+   def index
+     @quotes = Quote.all
+   end
 
-  def new
-    @quote = Quote.new
-  end
-
-+ def create
-+   @quote = Quote.new(quote_params)
+   def new
+     @quote = Quote.new
+   end
 +
-+   if @quote.save
-+     redirect_to quotes_path, notice: "Quote was successfully created."
-+   else
-+     render :new
-+   end
-+ end
-
-+ def quote_params
-+   params.require(:quote).permit(:name)
-+ end
-end
++  def create
++    @quote = Quote.new(quote_params)
++
++    if @quote.save
++      redirect_to quotes_path, notice: "Quote was successfully created."
++    else
++      render :new
++    end
++  end
++
++  def quote_params
++    params.require(:quote).permit(:name)
++  end
+ end
 ```
 
 A typical Rails recipe for a record creation endpoint. It takes the parameters coming from the request and uses them to create a new record via the `Quote` [Active Record](https://guides.rubyonrails.org/active_record_basics.html) model. If successful, it redirects to the index page; if not, it renders the creation page again (via the `new` action). The `new.html.erb` view template has some logic to render error messages when they are present so those are going to show up when that page is rendered as a result of unsuccessful calls to this `create` endpoint.
@@ -598,21 +598,21 @@ At this point, we're able to view all the quotes on record and create new ones. 
 First we wrap the list of quotes with a Turbo Frame named "`quotes`":
 
 ```diff
-<!-- app/views/quotes/index.html.erb -->
-<main class="container">
-  <div class="header">
-    <h1>Quotes</h1>
-    <%= link_to "New quote",
-                new_quote_path,
-                data: { turbo_frame: dom_id(Quote.new) } %>
-  </div>
+ <!-- app/views/quotes/index.html.erb -->
+ <main class="container">
+   <div class="header">
+     <h1>Quotes</h1>
+     <%= link_to "New quote",
+                 new_quote_path,
+                 data: { turbo_frame: dom_id(Quote.new) } %>
+   </div>
 
-  <%= turbo_frame_tag Quote.new %>
+   <%= turbo_frame_tag Quote.new %>
 
-+ <%= turbo_frame_tag "quotes" do %>
-    <%= render @quotes %>
-+ <% end %>
-</main>
++  <%= turbo_frame_tag "quotes" do %>
+     <%= render @quotes %>
++  <% end %>
+ </main>
 ```
 
 Next, we employ Turbo Streams. Like I said, Turbo Streams materialize themselves in code as if they were view templates. So, a new file is added that looks like this:
@@ -628,21 +628,21 @@ It sort of looks like a couple of imperative statements, does it not? The first 
 And finally, the controller action needs to make use of this new view template like so:
 
 ```diff
-### app/controllers/quotes_controller.rb
+ ### app/controllers/quotes_controller.rb
 
-def create
-  @quote = Quote.new(quote_params)
+ def create
+   @quote = Quote.new(quote_params)
 
-  if @quote.save
--   redirect_to quotes_path, notice: "Quote was successfully created."
-+   respond_to do |format|
-+     format.html { redirect_to quotes_path, notice: "Quote was successfully created." }
-+     format.turbo_stream
-+   end
-  else
-    render :new, status: :unprocessable_entity
-  end
-end
+   if @quote.save
+-    redirect_to quotes_path, notice: "Quote was successfully created."
++    respond_to do |format|
++      format.html { redirect_to quotes_path, notice: "Quote was successfully created." }
++      format.turbo_stream
++    end
+   else
+     render :new, status: :unprocessable_entity
+   end
+ end
 ```
 
 This is yet another familiar Rails pattern. This is how we specify different [response formats](https://guides.rubyonrails.org/action_controller_overview.html#rendering-xml-and-json-data), whether it be HTML, JSON, XML. Now, thanks to Hotwire, we can also specify Turbo Streams. This is one of the great aspects about Hotwire: it seamlessly integrates with Rails' existing features and concepts.
@@ -679,7 +679,7 @@ And now, the idea is to wire up this code so that it runs when the hypothetical 
 </button>
 ```
 
-Pretty self-explanatory. We specify the name of the controller to use via the `data-controller` attribute. We also specify, via `data-action`, what method to invoke within that controller as a result of which DOM event. `click` in this case.
+Pretty self-explanatory. We specify the name of the controller to use via the `data-controller` attribute. We also specify, via `data-action`, what method to invoke within that controller as a result of which DOM event, `click` in this case.
 
 And that's basically all it takes to sprinkle some JavaScript on Hotwire apps. Stimulus does offer a few more useful features, which you can read more about in [the official documentation](https://stimulus.hotwired.dev/handbook/introduction). But for us for now, it's enough to know that it exists, and what's the main idea behind it.
 
@@ -687,29 +687,32 @@ So as you can hopefully see, Hotwire is much smaller in scope to Blazor. And yet
 
 ### A final comparison
 
-I was initially thinking about ending this blog post with a flowchart of sorts to explain the process of deciding which of these two technologies you should use. But really, the decision is very simple: If your team is comfortable with .NET, use Blazor. If your team is comfortable with Ruby on Rails, use Hotwire. It's obvious really, so I won't claim to have made a great discovery here.
+I was initially thinking about ending this blog post with a flowchart of sorts to explain the process of deciding which of these two technologies you should use. But really, the decision is very simple: If your team is comfortable with .NET, use Blazor. If your team is comfortable with Ruby on Rails, use Hotwire. It's obvious, so I won't claim to have made a great discovery here.
 
 The only thing to add is that if your team is familiar with modern frontend web development framework concepts, you'll be even better served by Blazor and you'll hit the ground running. If not, then even for seasoned .NET people, there will be a decent learning curve, but not steep enough to be deterred. Moreover, if your team has no modern frontend development experience at all, then Hotwire is a godsend; thanks to its "augment classic backend-heavy web app development" style.
 
 With that said, let's close out with a summary of main aspects of both technologies and how they compare to each other.
 
-Overall, Hotwire is much simpler than Blazor. While Blazor is a full-fledged GUI component framework; Hotwire's approach is more like an augmentation of classic non-JavaScript web development patterns. That said, Hotwire's style is more unusual than Blazor's, so if your team is already familiar with modern frontend web development, Blazor can be a great fit.
+Overall, Hotwire is much simpler than Blazor. While Blazor is a full-fledged GUI component framework, Hotwire's approach is more like an augmentation of classic non-JavaScript web development patterns. That said, Hotwire's style is more unusual than Blazor's, so if your team is already familiar with modern frontend web development, Blazor can be a great fit.
 
 While both frameworks try to offer enough functionality to allow the development of rich interactive experiences without the need to write any JavaScript, the reality is that sometimes JavaScript does need to be written. Both technologies offer ways to make this happen. And while both are perfectly workable, Blazor's solution is a bit more clunky than Hotwire's.
 
-When it comes to classic web technologies like HTTP's request/response cycle and the separation between server and client, Blazor's style offers a big deviation from them. It greatly de-emphasizes them and presents instead a completely different programming model. One more akin to desktop application development. The concepts of request, response, client, and server seem to vanish. Not so for Hotwire, which builds upon these classic technologies in a way where they still need to be considered and are in fact in the spotlight. While Blazor attempts to do away with these, Hotwire embraces them.
+When it comes to classic web technologies like HTTP's request/​response cycle and the separation between server and client, Blazor's style offers a big deviation from them. It greatly de-emphasizes them and presents instead a completely different programming model, one more akin to desktop application development. The concepts of request, response, client, and server seem to vanish. Not so for Hotwire, which builds upon these classic technologies in a way where they still need to be considered and are in fact in the spotlight. While Blazor attempts to do away with these, Hotwire embraces them.
 
-In Blazor, client events are sent to the server, the server renders the DOM updates and sends them to the client for updates. This happens via the persistent SignalR/WebSockets connection.
+In Blazor, client events are sent to the server, the server renders the DOM updates and sends them to the client for updates. This happens via the persistent SignalR/​WebSockets connection.
 
-Hotwire, on the other hand, intercepts client events and sends classic HTTP requests (via AJAX/XHR) to the server. The server then executes the requests and sends back the responses to the client which carries out the necessary operations. Generally speaking, updating sections of the page that's already being displayed.
+Hotwire, on the other hand, intercepts client events and sends classic HTTP requests (via AJAX/XHR) to the server. The server then executes the requests and sends back the responses to the client which carries out the necessary operations, generally speaking, updating sections of the page that's already being displayed.
 
-That means that at the end of the day, both frameworks do the rendering on the server-side and send the rendered markup over the wire to the clients. But in Blazor, the client and server have a persistent connection. While Hotwire's connections come and go as normal HTTP requests and responses.
+That means that at the end of the day, both frameworks do the rendering on the server side and send the rendered markup over the wire to the clients. But in Blazor, the client and server have a persistent connection, while Hotwire's connections come and go as normal HTTP requests and responses.
 
-A neat aspect of Hotwire's programming model is that it allows an incremental approach to web development. Where you can start developing the app like you would a traditional, non reactive, non JS app; and then augment it with a little code to give it SPA capabilities.
+A neat aspect of Hotwire's programming model is that it allows an incremental approach to web development where you can start developing the app like you would a traditional, non-reactive, non-JS app, then augment it with a little code to give it SPA capabilities.
 
-And that's all for now! I for one am glad to see these types of technologies emerge. While there are many teams out there that are already effective and productive with the current landscape of frontend web development; these two are very interesting and seem capable in their own right. Besides, having alternatives is never a bad thing. Depending mainly on your previous experience, these could be a great fit for projects new and old. It's great to know that both .NET and Rails include these types of offerings and that they work pretty well.
+And that's all for now! I for one am glad to see these types of technologies emerge. While there are many teams out there that are already effective and productive with the current landscape of frontend web development, these two are very interesting and seem capable in their own right.
+
+Besides, having alternatives is never a bad thing. Depending mainly on your previous experience, these could be a great fit for projects new and old. It's great to know that both .NET and Rails include these types of offerings and that they work pretty well.
 
 ### Table of contents
+
 - [What this article is](#what-this-article-is)
 - [An overview of Blazor](#an-overview-of-blazor)
   - [How Blazor works under the hood](#how-blazor-works-under-the-hood)
@@ -729,4 +732,3 @@ And that's all for now! I for one am glad to see these types of technologies eme
   - [Imperative rendering with Turbo Streams](#imperative-rendering-with-turbo-streams)
   - [Adding JavaScript with Stimulus](#adding-javascript-with-stimulus)
 - [A final comparison](#a-final-comparison)
-- [Table of contents](#table-of-contents)
