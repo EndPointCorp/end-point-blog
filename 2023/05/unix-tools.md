@@ -81,27 +81,27 @@ starfruit
 
 To find all lines starting with "durian"
 
-```bash
+```console
 $ grep -P '^durian' file.txt
 durian rambutan
 ```
 
 To find the line that ended with "papaya"
 
-```bash
+```console
 $ grep -P "papaya$" file.txt 
 apple orange papaya
 ```
 
 To find lines that separated by two spaces
-```bash
+```console
 $ grep -P '\w+ \w+ \w+' file.txt
 apple banana orange
 apple orange papaya
 ```
 
 To find all lines containing a word starting with "a" or "d":
-```bash
+```console
 $ grep -P '\b(a|d)\w+' file.txt
 apple banana orange
 apple orange papaya
