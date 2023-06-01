@@ -111,7 +111,7 @@ lamb,$3.20
 ### The `find` command.
 
 Say I searched from a full hard disk and found several files which I could check whether they are still needed or not.
-In this case I search in the the current path with the dot `.` notation, and the `maxdepth 1` means the search task must not be done beyond the current directory (path). `-mtime +3000` means only select the directory that not being modified within the last 3000 days.
+In this case I search in the the current path with the dot `.` notation, and the `-maxdepth 1` means the search task must not be done beyond the current directory (path). `-mtime +3000` means only select the directory that not being modified within the last 3000 days.
 `-type d` means directory and not files (files use `-type f` flag). For the `-exec` flag, it will run the `ls -ld` command which will display the value that being passed to the `{}` placeholder. 
 
 ```console
