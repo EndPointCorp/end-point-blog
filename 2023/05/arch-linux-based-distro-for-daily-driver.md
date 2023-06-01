@@ -14,19 +14,16 @@ I have been using Manjaro Linux (Arch Linux-based) for my work desktop and PopOS
 - Has Linux Unified Key Setup (LUKS) option in the installation
 - If possible, the distro of choice should be able to trim down the number of default packages (for example, I am a Gnome desktop user, so maybe I don’t have to install the games packages which I rarely used). 
 
-I then decided to use [EndevourOS](https://endeavouros.com). One of the reason is that upon testing, I found out that my 1TB NVMe disk which has a theoretical speed of 7000MB/s could achieve 5000MB/s on this distro where as the other distros that I tried only achieved less than 4000MB/s (I only compared to one variant, not all since the disk must be installed on board in order for me to give a fair comparison, but that is not the main point of this write up.   
-
-After the basic installation, I usually need to do some other customizations before I am able to use it for my daily usage. 
+I then decided to use [EndevourOS](https://endeavouros.com). It has a strong community and most of Arch Linux's documentations/references still applicable on this distro.
 
 ### Installation
-EndevourOS is quite easy to install. It supports the features that I need. Linux Unified Key Setup (LUKS) encryption option is available during the installation process (however, distros that use [Calamares](https://calamares.io) installer tool also have this feature available too). Arch Linux’s documentation mostly still applies to Manjaro, EndevourOS and probably most Arch Linux variants out there, as long as they are using systemd.
+EndevourOS is quite easy to install. It supports the features that I need. Linux Unified Key Setup (LUKS) encryption option is available during the installation process (however, distros that use [Calamares](https://calamares.io) installer tool also have this feature available too). Arch Linux’s documentation mostly still applies to Manjaro, EndevourOS and probably most Arch Linux variants out there, as long as they are using systemd. After the basic installation, I usually need to do some other customizations before I am able to use it for my daily usage.
 
 ### Printing
 The printing support is quite easy to set up
-It has some application helper (most likely useful for the newbie, but could be useful for the seasoned Linux users who might have missed the boat for the new applications). For example an application called as “manjaro-application-utility” in Manjaro Linux.
-Since Archlinux-based distro could use AUR - many packages which are provided independently and do not have an official repository could be updated with the “yay” command. The AUR and yay tool will be explained later. 
+It has some application helper (most likely useful for the newbie, but could be useful for the seasoned Linux users who might have missed the boat for the new applications). I remember that when I installed Manjaro, there is an application called as “manjaro-application-utility” in Manjaro Linux. Since Archlinux-based distro could use AUR - many packages which are provided independently and do not have an official repository could be updated with the “yay” command. The AUR and yay tool will be explained later. 
 
-I am using Canon E410 printer, and in the event that the printer is not detected right away by the OS, we can use either CUPS configuration tool (accessible at https:localhost:631) or if you are using Gnome, you can try to add the printer through Gnome's printer selection in its settings. In my case, I used CUPS' administration tool and select the appropriate driver for my printer. The closest and workable driver for my printer is in "cnijfilter-e400series" package which I installed by using the "yay" tool.
+I am using Canon E410 printer, and in the event that the printer is not detected right away by the OS, we can use either CUPS configuration tool (accessible at https:localhost:631) or if you are using Gnome, you can try to add the printer through Gnome's printer selection in its settings. 
 
 ### Starting services
 If you want Bluetooth and cronjob to start automatically, check with
