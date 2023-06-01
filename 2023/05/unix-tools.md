@@ -41,7 +41,7 @@ $ sudo blkid /dev/sd{d,e,g}
 ```
 
 ```console
-sudo blkid /dev/sd{d,e,g}|awk -F "\"" {'print $2'}
+$ sudo blkid /dev/sd{d,e,g}|awk -F "\"" {'print $2'}
 7eb6302f-e727-4433-8c49-8a7842d18e1e
 68b2382e-13b8-4bdb-a6cb-15f6844d464b
 7237cc7d-0483-4c2a-a503-a11ea88b3690
