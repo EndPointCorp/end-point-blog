@@ -65,7 +65,7 @@ After finishing the wizard, you will have the new GA4 property connected to your
 
 ![Screenshot of Google Analytics Setup Assistant](/2023/06/migrating-universal-analytics-ga4/google-analytics-setup-assistant.jpg)
 
-Once the import finishes, the existing goals will appear as [conversion events](https://support.google.com/analytics/answer/9267568) on the GA4 property. If the Google tag was set up properly, the traffic information should start flowing to the new property, and the conversion events should be registering specific user actions under your website.
+That's it! Once the import finishes, the existing goals will appear as [conversion events](https://support.google.com/analytics/answer/9267568) on the GA4 property. If the Google tag was set up properly, the traffic information should start flowing to the new property, showing real time information about your traffic, and the conversion events should be registering specific user actions:
 
 ![Screenshot of Google Analytics GA4 Account enabled](/2023/06/migrating-universal-analytics-ga4/google-analytics-ga4-account-example.jpg)
 
