@@ -78,7 +78,7 @@ export EDITOR=/usr/bin/vim
   
 [ksshaskpass](https://invent.kde.org/plasma/ksshaskpass) is a KDE based sshaskpass client. We can install it with “yay”
 
-Check the availability first:
+Check the package's availability first:
 ```plain
 yay -Ss ksshaskpass
 
