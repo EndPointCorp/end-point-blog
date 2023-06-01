@@ -47,10 +47,7 @@ $ sudo blkid /dev/sd{d,e,g}|awk -F "\"" {'print $2'}
 7237cc7d-0483-4c2a-a503-a11ea88b3690
 ```
 
-
-### Combining sed and awk
-
-During my day-to-day work I seldom use both of them together. In page 23 of the “sed & awk book”  that I have, the authors showed an example where both of these tools are being used together. 
+During my day-to-day work I seldom use both `sed` and `awk` together. In page 23 of the “sed & awk book”  that I have, the authors showed an example where both of these tools are being used together. 
 
 
 ### Regular expression's usage in \*NIX tools
