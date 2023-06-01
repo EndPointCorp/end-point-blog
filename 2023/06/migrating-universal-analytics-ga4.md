@@ -11,7 +11,7 @@ tags:
 
 <!-- Image: Migration by Aivar Ruukel, 2014. Attribution 2.0 Generic (CC BY 2.0), obtained from https://flic.kr/p/pEy1Er -->
 
-Most public-facing websites rely on [Google Analytics](https://marketingplatform.google.com/about/analytics/) to track their traffic, analyze the user’s characteristics and behavior, run reports based on that information to improve marketing strategies, in order to engage their public and ultimately, increase the user’s loyalty.
+Most public-facing websites rely on [Google Analytics](https://marketingplatform.google.com/about/analytics/) to track their traffic, analyze the user’s characteristics and behavior, and run reports based on that information to improve marketing strategies, engage their public and ultimately, increase the user’s loyalty.
 
 ### Universal Analytics vs. Google Analytics 4
 
