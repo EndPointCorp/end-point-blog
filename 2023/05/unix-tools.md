@@ -53,7 +53,7 @@ sudo blkid /dev/sd{d,e,g}|awk -F "\"" {'print $2'}
 During my day-to-day work I seldom use both of them together. In page 23 of the “sed & awk book”  that I have, the authors showed an example where both of these tools are being used together. 
 
 
-### sed, awk and regular expression
+### Regular expression's usage in \*NIX tools
 
 The sed & awk book touched on the “Understanding Regular Expression Syntax” - which means in some way, system administrator might have to use regular expressions in certain cases where large/repetitive tasks is involved. I do not remember who suggested buying this pair of books which I bought almost twenty years ago, but I am really grateful for the person’s suggestion. 
 
