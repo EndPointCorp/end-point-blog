@@ -57,6 +57,10 @@ During my day-to-day work I seldom use both of them together. In page 23 of the 
 
 The sed & awk book touched on the “Understanding Regular Expression Syntax” - which means in some way, system administrator might have to use regular expressions in certain cases where large/repetitive tasks is involved. I do not remember who suggested buying this pair of books which I bought almost twenty years ago, but I am really grateful for the person’s suggestion. 
 
+Previously I just used the `grep` command with `-rw` (for recursive parsing) as well as the `always=color` flag in order to colorize the terminal output. I guess the recent `grep` command already has the "color" option by default and I don't have to explicitly call it anymore. 
+
+In order to extend the capability of grep for regular expression's usage, I use `-E`, but then I got to know that we could use `-P` flag to, in order to use Perl-compatible regular expression's characters. 
+
 The other tools that I usually use are the `sort` and `uniq` commands. 
 
 Apart from the `sed`, `awk` and `grep`, there are other tools as well.
