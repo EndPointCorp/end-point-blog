@@ -68,7 +68,47 @@ Wed Feb  1 11:30:01 AM +08 2023
 Wed Mar  1 11:30:01 AM +08 2023
 ```
 
-In order to extend the capability of grep for regular expression's usage, I use `-E`, but then I got to know that we could use `-P` flag to, in order to use Perl-compatible regular expression's characters. 
+In order to extend the capability of grep for regular expression's usage, I use `-E`, but then I got to know that we could use `-P` flag to, in order to use Perl-compatible regular expression's characters (PCRE). 
+
+Say I have a file named `file.txt` with the following contents:
+
+```
+apple banana orange
+apple orange papaya
+durian rambutan
+starfruit
+```
+
+To find all lines starting with "durian"
+
+```.console
+grep -P '^durian' file.txt
+durian rambutan
+```
+
+To find the line that ended with "papaya"
+
+```.console
+$ grep -P "papaya$" file.txt 
+apple orange papaya
+```
+
+To find lines that separated by two spaces
+```.console
+grep -P '\w+ \w+ \w+' file.txt
+apple banana orange
+apple orange papaya
+```
+
+To find all lines containing a word starting with "a" or "d":
+```.console
+grep -P '\b(a|d)\w+' file.txt
+apple banana orange
+apple orange papaya
+durian rambutan
+```
+
+These are few things that `grep` could do, and it could do many more with the PCRE capability.
 
 Apart from the `sed`, `awk` and `grep`, there are other tools as well; tools that I usually use are the `sort` and `uniq` commands. 
 
