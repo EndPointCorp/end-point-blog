@@ -8,7 +8,7 @@ tags:
 - Arch Linux
 ---
 
-I have been using Manjaro Linux for my work desktop and PopOS for my laptop for quite some time now and feel that I want to search for another Arch Linux-based distro for my daily driver. Rather than endlessly searching for hundreds (or maybe even thousands) of Linux distros out there, I put my several objectives that the distro that will be chosen should be:
+I have been using Manjaro Linux (Arch Linux-based) for my work desktop and PopOS (Ubuntu-based) for my laptop for quite some time now and feel that I want to search for another Arch Linux-based distro for my daily driver. Rather than endlessly searching for hundreds (or maybe even thousands) of Linux distros out there, I put my several objectives that the distro that will be chosen should be:
 - Easy to maintain 
 - Has a strong community support and stable development, otherwise I will need to search for another distro again
 - Has Linux Unified Key Setup (LUKS) option in the installation
