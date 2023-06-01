@@ -55,7 +55,7 @@ During my day-to-day work I seldom use both of them together. In page 23 of the 
 
 ### Regular expression's usage in \*NIX tools
 
-The sed & awk book touched on the “Understanding Regular Expression Syntax” - which means in some way, system administrator might have to use regular expressions in certain cases where large/repetitive tasks is involved. I do not remember who suggested buying this pair of books which I bought almost twenty years ago, but I am really grateful for the person’s suggestion. 
+The sed & awk book touched on the “Understanding Regular Expression Syntax” - which means in some way, system administrator might have to use regular expressions in certain cases where large/repetitive tasks are involved. I do not remember who suggested buying this pair of books which I bought almost twenty years ago, but I am really grateful for the person’s suggestion. 
 
 Previously I just used the `grep` command with `-rw` (for recursive parsing) as well as the `always=color` flag in order to colorize the terminal output. I guess the recent `grep` command already has the "color" option by default and I don't have to explicitly call it anymore. 
 
