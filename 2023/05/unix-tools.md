@@ -70,9 +70,7 @@ Wed Mar  1 11:30:01 AM +08 2023
 
 In order to extend the capability of grep for regular expression's usage, I use `-E`, but then I got to know that we could use `-P` flag to, in order to use Perl-compatible regular expression's characters. 
 
-The other tools that I usually use are the `sort` and `uniq` commands. 
-
-Apart from the `sed`, `awk` and `grep`, there are other tools as well.
+Apart from the `sed`, `awk` and `grep`, there are other tools as well; tools that I usually use are the `sort` and `uniq` commands. 
 
 ### The `sort` command
 `sort` and `uniq` are usually being used together, although not compulsory. `sort`, as its name explains, being used to sort the parsed text with the requirement that we put into it.
@@ -112,7 +110,9 @@ lamb,$3.20
 
 ### The `find` command.
 
-Say I searched from a full hard disk and found several files which I could confirm it is no longer useful
+Say I searched from a full hard disk and found several files which I could check whether they are still needed or not.
+In this case I search in the the current path with the dot `.` notation, and the `maxdepth 1` means the search task must not be done beyond the current directory (path). `-mtime +3000` means only select the directory that not being modified within the last 3000 days.
+`-type d` means directory and not files (files use `-type f` flag). For the `-exec` flag, it will run the `ls -ld` command which will display the value that being passed to the `{}` placeholder. 
 
 ```console
 $ find . -maxdepth 1  -mtime +3000 -type d -exec ls {} -ld \;
