@@ -28,7 +28,7 @@ icinga -v /etc/icinga/icinga.cfg (this will check for Icinga would be able to un
 ### awk
 Sometimes there are certain cases where I need to use awk for scripting. But most of the time, I will use awk for parsing IP addresses in the log file, or any other string in the log files (for example if there is any plaintext password in the log file, or any plain credit card details appeared anywhere in the place that it shouldn’t be).
 
-The “sed & awk” book started with the introduction of “ed” - a line editor. Then it touched on the field separator, which is represented by the -F flag. 
+The “sed & awk” book started with the introduction of `ed` - a line editor. Then it touched on the field separator, which is represented by the `-F` flag. 
 
 In the following example, I ran the `blkid` command in order to check the UUID of the SCSI devices that connected to my computer.
 
