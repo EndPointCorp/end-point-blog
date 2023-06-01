@@ -7,7 +7,7 @@ tags:
 - analytics
 ---
 
-![Birds migration](/blog/2023/06/migrating-universal-analytics-ga4/birds-migration.jpg)
+![Birds migration](/2023/06/migrating-universal-analytics-ga4/birds-migration.jpg)
 
 <!-- Image: Migration by Aivar Ruukel, 2014. Attribution 2.0 Generic (CC BY 2.0), obtained from https://flic.kr/p/pEy1Er -->
 
@@ -39,7 +39,7 @@ Once we navigated to the Analytics website, we need to do the following steps:
 - Click the GA4 Setup Assistant link
 - Create a new GA4 property with the assistant's help
 
-![Screenshot of Google Analytics GA4 Setup Assistant](/blog/2023/06/migrating-universal-analytics-ga4/google-analytics-ga4-setup-assistant.jpg)
+![Screenshot of Google Analytics GA4 Setup Assistant](/2023/06/migrating-universal-analytics-ga4/google-analytics-ga4-setup-assistant.jpg)
 
 If you already have a Google tag on the website that can be reused for GA4, you won't need to make any changes to your source code, and you will be all set. If your tag is not compatible, or Google can't detect it properly, the assistant will provide you a new tag. In that case, you will need to install the Javascript snippet that contains the tag on your website.
 
@@ -63,11 +63,11 @@ After finishing the wizard, you will have the new GA4 property connected to your
 - Select which goals should be imported into events on the GA4 property
 - Click "Import selected conversions"
 
-![Screenshot of Google Analytics Setup Assistant](/blog/2023/06/migrating-universal-analytics-ga4/google-analytics-setup-assistant.jpg)
+![Screenshot of Google Analytics Setup Assistant](/2023/06/migrating-universal-analytics-ga4/google-analytics-setup-assistant.jpg)
 
 Once the import finishes, the existing goals will appear as [conversion events](https://support.google.com/analytics/answer/9267568) on the GA4 property. If the Google tag was set up properly, the traffic information should start flowing to the new property, and the conversion events should be registering specific user actions under your website.
 
-![Screenshot of Google Analytics GA4 Account enabled](/blog/2023/06/migrating-universal-analytics-ga4/google-analytics-ga4-account-example.jpg)
+![Screenshot of Google Analytics GA4 Account enabled](/2023/06/migrating-universal-analytics-ga4/google-analytics-ga4-account-example.jpg)
 
 
 We already did several migrations to GA4, for many of our clients that were using Analytics during the past months. If you haven’t done it yet and you need any assistance with the process, don’t hesitate to [contact us](https://www.endpointdev.com/contact/)!
