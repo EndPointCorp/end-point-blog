@@ -15,7 +15,7 @@ Most public-facing websites rely on [Google Analytics](https://marketingplatform
 
 ### Universal Analytics vs. Google Analytics 4
 
-Until 2020, Google used [Universal Analytics](https://support.google.com/analytics/answer/2790010), a system that offered a set of reports that were mainly based on page visits and content visualization. But in October 2020, Google announced that the new [GA4](https://developers.google.com/analytics/devguides/collection/ga4) was launched, using an event-centered approach for metrics. That allows several improvements in the way the data is collected and analyzed, like taking into account several platforms and devices as a source for the data (for example, combining website traffic with mobile app usage and activity on social networks).
+Until 2020, Google relied on [Universal Analytics](https://support.google.com/analytics/answer/2790010), a system that offered a set of reports that were mainly based on page visits and content visualization. But in October 2020, Google announced that the new [GA4](https://developers.google.com/analytics/devguides/collection/ga4) was launched, using an event-centered approach for metrics. That allows several improvements in the way the data is collected and analyzed, like taking into account several platforms and devices as a source for the data (for example, combining website traffic with mobile app usage and activity on social networks).
 
 Another improvement is privacy: Among the new features, anonymous IP addresses are now the default setting for GA4. The user's IP address will be still registered and used to group data when doing the initial collection, but it won't be retained after, and only the location metadata will be used for reporting.
 
