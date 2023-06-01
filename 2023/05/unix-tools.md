@@ -19,8 +19,8 @@ The benefit of using sed by copying over the existing, working file is that we c
 Use cases:
 Updating Icinga’s monitoring file. Let’s say that we have a file name server101.cfg. Since most of the basic Icinga’s check is in this file we simply could use
 
-```
-cp server101.cfg server102.cfg
+```console
+$ cp server101.cfg server102.cfg
 sed ‘s/server101/server102/g’ server102.cfg
 icinga -v /etc/icinga/icinga.cfg (this will check for Icinga would be able to understand the newly copied file)
 ```
@@ -33,14 +33,14 @@ The “sed & awk” book started with the introduction of `ed` - a line editor. 
 In the following example, I ran the `blkid` command in order to check the UUID of the SCSI devices that connected to my computer.
 
 Example:
-```
-sudo blkid /dev/sd{d,e,g}
+```console
+$ sudo blkid /dev/sd{d,e,g}
 /dev/sdd: UUID="7eb6302f-e727-4433-8c49-8a7842d18e1e" TYPE="crypto_LUKS"
 /dev/sde: UUID="68b2382e-13b8-4bdb-a6cb-15f6844d464b" TYPE="crypto_LUKS"
 /dev/sdg: UUID="7237cc7d-0483-4c2a-a503-a11ea88b3690" TYPE="crypto_LUKS"
 ```
 
-```
+```console
 sudo blkid /dev/sd{d,e,g}|awk -F "\"" {'print $2'}
 7eb6302f-e727-4433-8c49-8a7842d18e1e
 68b2382e-13b8-4bdb-a6cb-15f6844d464b
@@ -57,7 +57,19 @@ During my day-to-day work I seldom use both of them together. In page 23 of the 
 
 The sed & awk book touched on the “Understanding Regular Expression Syntax” - which means in some way, system administrator might have to use regular expressions in certain cases where large/repetitive tasks are involved. I do not remember who suggested buying this pair of books which I bought almost twenty years ago, but I am really grateful for the person’s suggestion. 
 
-Previously I just used the `grep` command with `-rw` (for recursive parsing) as well as the `always=color` flag in order to colorize the terminal output. I guess the recent `grep` command already has the "color" option by default and I don't have to explicitly call it anymore. 
+Previously I just used the `grep` command with `-rw` (for recursive parsing) as well as the `color=always` flag in order to colorize the terminal output. I guess the recent `grep` command already has the "color" option by default and I don't have to explicitly call it anymore. We can also use `--color=never` if we want to remove the color matching. 
+
+```console
+$ grep 1 -w  --color=never tmp/file.txt 
+Mon Aug  1 11:30:01 AM +08 2022
+Thu Sep  1 11:30:01 AM +08 2022
+Sat Oct  1 11:30:01 AM +08 2022
+Tue Nov  1 11:30:01 AM +08 2022
+Thu Dec  1 11:30:01 AM +08 2022
+Sun Jan  1 11:30:01 AM +08 2023
+Wed Feb  1 11:30:01 AM +08 2023
+Wed Mar  1 11:30:01 AM +08 2023
+```
 
 In order to extend the capability of grep for regular expression's usage, I use `-E`, but then I got to know that we could use `-P` flag to, in order to use Perl-compatible regular expression's characters. 
 
@@ -70,7 +82,7 @@ Apart from the `sed`, `awk` and `grep`, there are other tools as well.
 
 Assume that we have the following text:
 
-```
+```console
 $ cat  pattern.txt 
 chicken,$1.50
 duck,$1.20
@@ -81,7 +93,7 @@ fish,$4.09
 
 By using the `sort` command we could sort the items according to the text seperator (`-`t) and the column that we want to prioritize (`-k`). Here, I want to sort the item based on data exist on the second column.
 
-```
+```console
 $ sort -t"," -k2  pattern.txt 
 duck,$1.20
 chicken,$1.50
@@ -92,7 +104,7 @@ beef,$6.10
 
 Without the other parameters, `sort` will just use the first column to sort the data - in this case, alphabetically.
 
-```
+```console
 $ sort pattern.txt 
 beef,$6.10
 chicken,$1.50
@@ -105,9 +117,8 @@ lamb,$3.20
 
 Say I searched from a full hard disk and found several files which I could confirm it is no longer useful
 
-```
+```console
 $ find . -maxdepth 1  -mtime +3000 -type d -exec ls {} -ld \;
-
 drwxrwxrwx 2 najmi najmi 4096 Nov  25  2012 ./Terminal
 drwxrwxrwx 3 najmi najmi 4096 Dis  27  2012 ./gnome-disk-utility
 drwxrwxrwx 8 najmi najmi 4096 Nov  27  2012 ./xfce4
