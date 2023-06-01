@@ -82,7 +82,7 @@ starfruit
 To find all lines starting with "durian"
 
 ```.console
-grep -P '^durian' file.txt
+$ grep -P '^durian' file.txt
 durian rambutan
 ```
 
@@ -95,14 +95,14 @@ apple orange papaya
 
 To find lines that separated by two spaces
 ```.console
-grep -P '\w+ \w+ \w+' file.txt
+$ grep -P '\w+ \w+ \w+' file.txt
 apple banana orange
 apple orange papaya
 ```
 
 To find all lines containing a word starting with "a" or "d":
 ```.console
-grep -P '\b(a|d)\w+' file.txt
+$ grep -P '\b(a|d)\w+' file.txt
 apple banana orange
 apple orange papaya
 durian rambutan
