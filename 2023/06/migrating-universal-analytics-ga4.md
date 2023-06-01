@@ -56,7 +56,7 @@ The snippet will look similar to the one below:
 </script>
 ```
 
-After finishing the wizard, you will have the new GA4 property connected to your account. Now you can navigate to it and start the second Setup Assistant, that will allow customize your property and import the existing data from Universal Analytics:
+After finishing the wizard, you will have the new GA4 property connected to your account. Now you can navigate to it and start the second Setup Assistant, that will allow you to customize your property and import the existing data from Universal Analytics:
 
 - Click on the "Set up conversions" option on the main screen of the assistant
 - Choose the option "Import from Universal Analytics"
@@ -70,4 +70,4 @@ That's it! Once the import finishes, the existing goals will appear as [conversi
 ![Screenshot of Google Analytics GA4 Account enabled](/2023/06/migrating-universal-analytics-ga4/google-analytics-ga4-account-example.jpg)
 
 
-We already did several migrations to GA4, for many of our clients that were using Analytics during the past months. If you haven’t done it yet and you need any assistance with the process, don’t hesitate to [contact us](https://www.endpointdev.com/contact/)!
+We have done several migrations to GA4 for clients that were using Analytics during the past months. If you haven’t done it yet and need any assistance with the process, don’t hesitate to [contact us](https://www.endpointdev.com/contact/)!
