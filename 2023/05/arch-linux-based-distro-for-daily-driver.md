@@ -92,4 +92,4 @@ extra/ksshaskpass 5.27.3-1 (29.7 KiB 101.9 KiB) [plasma] (Installed)
 ```
 Since I already installed ksshaskpass, we can see that the status indicated as “Installed”. If we want to install it for the first time, just type ```“yay -S ksshaskpass”```.
 
-In conclusion, Manjaro is one of Arch Linux-based distro and has strong support from the community. It is quite stable and able to ease up the users’ time to maintain their daily computer. There are many other Arch Linux-based distro, for example [Artix Linux](https://artixlinux.org/download.php) which offers a “systemd free” system - and offers OpenRC, s6, dinit and runit instead.  and [EndeavourOS](https://endeavouros.com)
+In conclusion, Arch Linux-based distros mostly have to same base and tool, except a few and have their own community. Arch Linux itself  is quite stable and able to ease up the users’ time to maintain their daily computer. 
