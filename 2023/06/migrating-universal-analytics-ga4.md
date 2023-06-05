@@ -19,7 +19,7 @@ Until 2020, Google relied on [Universal Analytics](https://support.google.com/an
 
 Another improvement is privacy: Among the new features, anonymous IP addresses are now the default setting for GA4. The user's IP address will be still registered and used to group data when doing the initial collection, but it won't be retained after, and only the location metadata will be used for reporting.
 
-At the present, both versions co-exist — but not for long! On [July 1](https://blog.google/products/marketingplatform/analytics/prepare-for-future-with-google-analytics-4/), GA4 will be the one option available, and Universal Analytics will disappear completely. That means we have a month (or less, depending on when you’re reading this!) to add a GA4 property and export the existing data from the Universal Analytics property.
+At the present, both versions co-exist—but not for long! On [July 1](https://blog.google/products/marketingplatform/analytics/prepare-for-future-with-google-analytics-4/), GA4 will be the one option available, and Universal Analytics will disappear completely. That means we have a month (or less, depending on when you’re reading this!) to add a GA4 property and export the existing data from the Universal Analytics property.
 
 One thing to consider is that the historical data will still be available under our Universal Analytics account for at least six months, but no new traffic will be processed.
 
@@ -33,14 +33,14 @@ First, a few considerations:
 
 After navigating to the Analytics website, we need to do the following steps:
 
-- Go to the Settings item on the lower left
-- Select the existing Universal Analytics property
-- Click the GA4 Setup Assistant link
-- Create a new GA4 property with the assistant's help
+- Go to the Settings item on the lower left.
+- Select the existing Universal Analytics property.
+- Click the GA4 Setup Assistant link.
+- Create a new GA4 property with the assistant's help.
 
 ![Screenshot of Google Analytics GA4 Setup Assistant](/blog/2023/06/migrating-universal-analytics-ga4/google-analytics-ga4-setup-assistant.jpg)
 
-If you already have a Google tag on the website that can be reused for GA4, you won't need to make any changes to your source code, and you will be all set. If your tag is not compatible, or Google can't detect it properly, the assistant will provide you a new tag. In that case, you will need to install the Javascript snippet that contains the tag on your website.
+If you already have a Google tag on the website that can be reused for GA4, you won't need to make any changes to your source code, and you will be all set. If your tag is not compatible, or Google can't detect it properly, the assistant will provide you a new tag. In that case, you will need to install the JavaScript snippet that contains the tag on your website.
 
 The snippet will look similar to the one below:
 
@@ -57,16 +57,15 @@ The snippet will look similar to the one below:
 
 After finishing the wizard, you will have the new GA4 property connected to your account. Now you can navigate to it and start the second Setup Assistant, that will allow you to customize your property and import the existing data from Universal Analytics:
 
-- Click on the "Set up conversions" option on the main screen of the assistant
-- Choose the option "Import from Universal Analytics"
-- Select which goals should be imported into events on the GA4 property
-- Click "Import selected conversions"
+- Click on the "Set up conversions" option on the main screen of the assistant.
+- Choose the option "Import from Universal Analytics".
+- Select which goals should be imported into events on the GA4 property.
+- Click "Import selected conversions".
 
 ![Screenshot of Google Analytics Setup Assistant](/blog/2023/06/migrating-universal-analytics-ga4/google-analytics-setup-assistant.jpg)
 
-That's it! Once the import finishes, the existing goals will appear as [conversion events](https://support.google.com/analytics/answer/9267568) on the GA4 property. If the Google tag was set up properly, the traffic information should start flowing to the new property, showing real time information about your traffic, and the conversion events should be registering specific user actions:
+That's it! Once the import finishes, the existing goals will appear as [conversion events](https://support.google.com/analytics/answer/9267568) on the GA4 property. If the Google tag was set up properly, the traffic information should start flowing to the new property, showing real-time information about your traffic, and the conversion events should be registering specific user actions:
 
 ![Screenshot of Google Analytics GA4 Account enabled](/blog/2023/06/migrating-universal-analytics-ga4/google-analytics-ga4-account-example.jpg)
-
 
 We have done several migrations to GA4 for clients that were using Analytics during the past months. If you haven’t done it yet and need any assistance with the process, don’t hesitate to [contact us](https://www.endpointdev.com/contact/)!
