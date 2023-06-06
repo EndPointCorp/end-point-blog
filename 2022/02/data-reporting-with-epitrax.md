@@ -4,6 +4,7 @@ author: Shannon Sandall
 date: 2022-02-16
 github_issue_number: 1833
 tags:
+- casepointer
 - epitrax
 - clients
 - case-study

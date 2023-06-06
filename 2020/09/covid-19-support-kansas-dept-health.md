@@ -6,6 +6,7 @@ featured:
   epitrax: true
   image_url: /blog/2020/09/covid-19-support-kansas-dept-health/dashboard.jpg
 tags:
+- casepointer
 - epitrax
 - clients
 - case-study

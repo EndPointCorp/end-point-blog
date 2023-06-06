@@ -6,6 +6,7 @@ featured:
   epitrax: true
   image_url: /blog/2020/10/electronic-messaging-staging-area/emsa-banner.jpg
 tags:
+- casepointer
 - epitrax
 - open-source
 - emsa

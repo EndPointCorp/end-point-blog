@@ -8,6 +8,7 @@ featured:
   epitrax: true
   image_url: /blog/2022/12/nevada-state-epitrax-launch/desert.webp
 tags:
+- casepointer
 - epitrax
 - emsa
 - clients

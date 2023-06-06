@@ -8,6 +8,7 @@ tags:
 - open-source
 - reporting
 - pentaho
+- casepointer
 date: 2011-10-02
 ---
 

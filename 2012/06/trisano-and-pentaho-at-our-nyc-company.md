@@ -9,7 +9,7 @@ tags:
 - java
 - open-source
 - rails
-- epitrax
+- casepointer
 - ruby
 - development
 date: 2012-06-13

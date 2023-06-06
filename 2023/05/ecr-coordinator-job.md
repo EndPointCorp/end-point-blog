@@ -5,6 +5,7 @@ github_issue_number: 1968
 tags:
 - jobs
 - remote-work
+- casepointer
 - epitrax
 date: 2023-05-23
 ---

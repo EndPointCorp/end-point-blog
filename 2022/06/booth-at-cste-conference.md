@@ -8,6 +8,7 @@ featured:
   image_url: /blog/2022/06/booth-at-cste-conference/david-barajas-RIQyCVb5IQY-unsplash.webp
 tags:
 - conference
+- casepointer
 - epitrax
 - emsa
 ---

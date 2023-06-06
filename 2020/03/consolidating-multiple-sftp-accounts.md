@@ -9,8 +9,7 @@ tags:
 - ssh
 - shell
 - security
-- epitrax
-- emsa
+- casepointer
 date: 2020-03-16
 ---
 
