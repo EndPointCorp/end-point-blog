@@ -3,7 +3,7 @@ author: Jon Jensen
 title: TriSano and Pentaho at our NYC company meeting
 github_issue_number: 626
 featured:
-  epitrax: true
+  casepointer: true
   image_url: /blog/2012/06/trisano-and-pentaho-at-our-nyc-company/image-0.jpeg
 tags:
 - java

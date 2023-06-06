@@ -4,7 +4,7 @@ title: End Point booth at CSTE 2022 conference
 date: 2022-06-09
 github_issue_number: 1870
 featured:
-  epitrax: true
+  casepointer: true
   image_url: /blog/2022/06/booth-at-cste-conference/david-barajas-RIQyCVb5IQY-unsplash.webp
 tags:
 - conference
