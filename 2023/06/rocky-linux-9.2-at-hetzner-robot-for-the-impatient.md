@@ -108,12 +108,17 @@ hostnamectl set-hostname mynewhostname
 ### Accessing the Rocky Linux 9.2 System:
 1. After a few minutes, SSH into the server again using `root@[server ip4 or server ipv6]`
 
-2. Execute the following update the RPM database
+2. Remove dnf modules from Rocky Linux 8
+```bash
+dnf module disable python36 virt
+```
+
+3. Execute the following update the RPM database
 ```bash
 rpm --rebuilddb
 ```
 
-3. Execute the following to verify the OS is Rocky Linux 9.2
+4. Execute the following to verify the OS is Rocky Linux 9.2
 ```bash
 cat /etc/os-release
 ```
