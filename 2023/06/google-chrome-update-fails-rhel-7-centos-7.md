@@ -65,7 +65,7 @@ Cleaning up / removing...
    2:google-chrome-stable-113.0.5672.6################################# [100%]
 ```
 
-The we ran `yum upgrade` again to get the rest of that server's pending package updates. Yum didn't care about Chrome anymore since we had updated it already.
+Then we ran `yum upgrade` again to get the rest of that server's pending package updates. Yum didn't care about Chrome anymore since we had updated it already.
 
 ### References
 
