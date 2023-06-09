@@ -6,6 +6,7 @@ tags:
 - database
 - pentaho
 - reporting
+- casepointer
 date: 2013-05-08
 ---
 

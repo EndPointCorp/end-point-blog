@@ -5,7 +5,7 @@ date: 2023-05-27
 github_issue_number: 1963
 featured:
   endpoint: true
-  image_url: /blog/2023/05/i-wrote-the-same-app-twice-with-hotwire-and-blazor-server/have-a-good-day.webp
+  image_url: /blog/2023/05/i-wrote-the-same-app-twice-with-hotwire-and-blazor-server/2022-09-14_193717.webp
 description: An in-depth comparison of Hotwire and Blazor Server, two new little-to-no-JavaScript frontend frameworks.
 tags:
 - frameworks

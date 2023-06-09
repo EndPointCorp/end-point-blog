@@ -3,7 +3,7 @@ author: Josh Tolley
 title: Cooking with CAS
 github_issue_number: 1600
 featured:
-  epitrax: true
+  casepointer: true
   image_url: /blog/2020/03/cooking-with-cas/4696900602_77582d1d5d_c.jpg
 tags:
 - java
@@ -12,8 +12,7 @@ tags:
 - programming
 - php
 - spring
-- epitrax
-- emsa
+- casepointer
 date: 2020-03-10
 ---
 
