@@ -39,7 +39,7 @@ To double-check, we tried to manually verify the signature on the downloaded RPM
 
 That showed it is not just a Yum problem, but affects RPM too.
 
-### Sweatin' to the oldies
+### Sweatin’ to the oldies
 
 Long ago (see reference below), people reported that RPM wasn't working with GnuPG subkeys for signatures, and Red Hat confirmed this is the case for RHEL 7 and earlier. They added support, but that first appeared in RHEL 8.
 
