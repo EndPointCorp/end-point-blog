@@ -2,6 +2,9 @@
 title: "VisionPort: The Future of Tourism Marketing"
 author: Jonathan Perlin
 github_issue_number: 1980
+featured:
+  visionport: true
+  image_url: /blog/2023/06/visionport-the-future-of-tourism-marketing/image-1.webp
 tags:
 - visionport
 - marketing

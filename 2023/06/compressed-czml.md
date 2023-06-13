@@ -5,6 +5,9 @@ tags:
 - visionport
 - gis
 - cesium
+featured:
+  visionport: true
+  image_url: /blog/2023/06/compressed-czml/crowded-city.webp
 github_issue_number: 1981
 date: 2023-06-13
 ---
