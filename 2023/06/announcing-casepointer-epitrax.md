@@ -27,7 +27,7 @@ Starting in 2008, End Point helped develop and maintain the TriSano open source 
 
 This timeline shows those and other key points on our journey:
 
-<object type="image/svg+xml" data="/blog/2023/06/announcing-casepointer-epitrax/casepointer-timeline-20230620.svg"></object>
+<object style="max-width:100%" type="image/svg+xml" data="/blog/2023/06/announcing-casepointer-epitrax/casepointer-timeline-20230620.svg"></object>
 
 Due to the need for major additional features and capabilities, especially since the onset of the COVID-19 pandemic, End Point is now integrally involved with public health agencies in four states. For each of them we configured, deployed, maintain, and enhance the cloud hosting, relevant software, and databases to run those components they need, including:
 
