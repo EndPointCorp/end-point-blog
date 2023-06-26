@@ -97,7 +97,7 @@ module.exports = {
   output: {
     // Make sure to use the path of the rails asset pipeline
     path: path.join(__dirname, '/app/assets/builds'),
-    ...
+    // ...
   }
   module: {
     rules: [
@@ -119,15 +119,13 @@ module.exports = {
       }
     ],
   },
-  ...
+  // ...
 };
 ```
 
 Add a .babelrc file for Babel configuration:
 
 ```json
-// .babelrc
-
 {
   "presets": ["@babel/preset-env", "@babel/preset-react"]
 }
@@ -136,8 +134,6 @@ Add a .babelrc file for Babel configuration:
 Update the scripts section in your package.json:
 
 ```json
-// package.json
-
 {
   "scripts": {
     "build": "webpack",
