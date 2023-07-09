@@ -37,13 +37,13 @@ Any errors encountered when called in scalar context are written to the catalog 
 
 ### Configuring Your Catalog to Use Vend::Util::Compress
 
-To begin using session compression, add the new catalog configuration parameter, SessionDBCompression, set to one of the aforementioned compression algorithms. Note the values for specifying compression type to use are case-sensitive. To enable Zstd, e.g.,
+To begin using session compression, add the new catalog configuration parameter, `SessionDBCompression`, set to one of the aforementioned compression algorithms. Note the values for specifying compression type to use are case-sensitive. To enable Zstd, e.g.,
 
 ```plain
 SessionDBCompression Zstd
 ```
 
-An empty value for the parameter bypasses compression. An invalid value logs an error and passes through the data unmodified. If the catalog is not configured to use database sessions, the setting has no impact.
+An empty value for the parameter bypasses compression. An invalid value logs an error and passes through the data unmodified. If the catalog is configured for file-based sessions, the setting has no impact.
 
 The same compression applies to both sessions and more lists when MoreDB is also set.
 
