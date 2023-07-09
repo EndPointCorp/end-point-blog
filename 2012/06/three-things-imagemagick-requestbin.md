@@ -34,7 +34,7 @@ class ElavonGateway < ViaklixGateway
 
 I ran through a single checkout, then visited the RequestBin inspect URL to examine the variables passed to the payment gateway, to see the following data (the text overwrites itself in Chrome):
 
-<img border="0" height="400" src="/blog/2012/06/three-things-imagemagick-requestbin/image-0.png" width="372"/>
+<img border="0" height="400" src="/blog/2012/06/three-things-imagemagick-requestbin/image-0.png" width="372"/><br>
 [RequestBin](https://github.com/Runscope/requestbin) example output.
 
 ### A Responsiveness Tool

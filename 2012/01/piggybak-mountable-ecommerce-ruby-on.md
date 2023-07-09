@@ -74,6 +74,7 @@ Admin dashboard: Note that distinction between the primary application and the P
 Any item in the application can become sellable. This nested form displays in the admin for the sellable items.
 
 <a href="/blog/2012/01/piggybak-mountable-ecommerce-ruby-on/image-4-big.png" imageanchor="1" style="margin-left:1em; margin-right:1em"><img border="0" src="/blog/2012/01/piggybak-mountable-ecommerce-ruby-on/image-4.png" /></a>
+
 The cart form added to the image page is driven by the Piggybak gem, but the rest of the page content is driven by the primary application. The gem doesn’t make any decisions about what will be displayed on a standard product page. It only helps with generating the form to add something to the shopping cart.
 
 <a href="/blog/2012/01/piggybak-mountable-ecommerce-ruby-on/image-5.png" imageanchor="1" style="margin-left:1em; margin-right:1em"><img border="0" src="/blog/2012/01/piggybak-mountable-ecommerce-ruby-on/image-5.png" /></a>

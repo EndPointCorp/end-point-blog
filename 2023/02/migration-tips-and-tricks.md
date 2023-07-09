@@ -4,6 +4,7 @@ title: "Data Migration Tips"
 date: 2023-02-04
 github_issue_number: 1936
 featured:
+  epitrax: true
   image_url: /blog/2023/02/migration-tips-and-tricks/leaves.webp
 description: "We've collected a few tips for migrating data that may help you learn from our successes, as well as our mistakes — particularly educational experiences."
 tags:

@@ -54,32 +54,32 @@ For example a finished product may consist of a book, a CD, and a DVD. A custome
 
 1. Vervante Vendor (fulfillment warehouse) Requirement—​Additionally, the *fulfillment warehouse* that receives, stores, builds and ships end user products, needed access to this system. They had several needs including:
 
-        - Retrieving pending orders for shipment
-        - Creating packing / pick slips for the orders
-        - Create shipping labels for orders
-        - Manage returns
-        - Input customer supplied inventory
-        - Input fulfillment created inventory
+    - Retrieving pending orders for shipment
+    - Creating packing / pick slips for the orders
+    - Create shipping labels for orders
+    - Manage returns
+    - Input customer supplied inventory
+    - Input fulfillment created inventory
 
 In our administrative user interface for the fulfillment house, we developed a series of customer specific processes to address the above needs. Here is a high level example of how a few of the items on the list above are achieved: 
 
-        - The fulfillment house logs into the user admin first thing in the morning, and prints the outstanding orders.
-        - The “orders” are formatted similar to a packing slip, and each slip has all line items of the order, and a bar code imprinted on the slip.
-        - This document is used as a “pick” slip, and is placed in a “pick” basket. The user then goes through the warehouse, gathers the appropriate items, and when complete the order is placed on a feed belt to the shipper location.
-        - When the basket lands in front of the shipper, that person checks the contents of the basket against the slip, and then uses a bar code scanner to scan the order. That scan triggers a query into our system that returns all applicable shipping data into an Endicia or UPS system. 
-        - A shipping label is created, and the shipping cost and tracking information is returned to the our system.
-        - Additionally the inventory is decremented accordingly when the order receives a shipping label and tracking number.
+    - The fulfillment house logs into the user admin first thing in the morning, and prints the outstanding orders.
+    - The “orders” are formatted similar to a packing slip, and each slip has all line items of the order, and a bar code imprinted on the slip.
+    - This document is used as a “pick” slip, and is placed in a “pick” basket. The user then goes through the warehouse, gathers the appropriate items, and when complete the order is placed on a feed belt to the shipper location.
+    - When the basket lands in front of the shipper, that person checks the contents of the basket against the slip, and then uses a bar code scanner to scan the order. That scan triggers a query into our system that returns all applicable shipping data into an Endicia or UPS system. 
+    - A shipping label is created, and the shipping cost and tracking information is returned to the our system.
+    - Additionally the inventory is decremented accordingly when the order receives a shipping label and tracking number.
 
 1. Requirements: administrative / accounting—​Vervante also needed an administrative / accounting arm, designed to control all of the accounting functions such as:
 
-        - Recording customers’ fulfillment charges
-        - Recording customers’ sales (Vervante sells product for the customers as well as fulfilling outside orders)
-        - Determining fulfillment vendor fees and payments
-        - Tracking shipping costs
-        - Monthly billing of all customers
-        - Monthly payments for all customers.
-        - Interface with in-house accounting systems and keeping systems in sync
-        - Tracking and posting outside order transactions
+    - Recording customers’ fulfillment charges
+    - Recording customers’ sales (Vervante sells product for the customers as well as fulfilling outside orders)
+    - Determining fulfillment vendor fees and payments
+    - Tracking shipping costs
+    - Monthly billing of all customers
+    - Monthly payments for all customers.
+    - Interface with in-house accounting systems and keeping systems in sync
+    - Tracking and posting outside order transactions
 
 The above described processes are just a few of the processes that we developed from scratch, and matched to Vervante’s needs. It is also a tiny portion of their system. 
 

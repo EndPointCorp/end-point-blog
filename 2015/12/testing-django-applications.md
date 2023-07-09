@@ -108,12 +108,12 @@ This file represents the actual core of the test experiments for this blog / dem
 
 Much like the unittest documentation, the [pytest-django](https://pytest-django.readthedocs.org/en/latest/) recommends avoiding database interaction in unittest and concentrate only on the logic which should be designed in such a fashion that it can be tested without database.
 
-- test database name prefixed “test_” (just like at the unittest example), the base value is taken from the database section of
+- test database name prefixed `test_` (just like at the unittest example), the base value is taken from the database section of
 the **settings.py**. As a matter of fact, it’s possible to run the test suite after previously dropping the main database,
-the test suite interacts only with “test_” + DATABASE_NAME
+the test suite interacts only with `test_` + DATABASE_NAME
 - migration execution before any database interaction is carried out (similarly to unittest example)
-- database interaction marked by a Python decorator **@pytest.mark.django_db** on the method or class level (or stand-alone function level). It’s in fact the **first** occurrence of this marker which triggers the database set up (its creation and migrations handling). Again analogously to unittest (django.test.TestCase), the test case is wrapped in a database transaction which puts the database back into the state prior to the test case. The database “test_” + DATABASE_NAME itself is dropped once the test suite run is over. The database is not dropped if **--db-reuse** option is used. The production DATABASE_NAME remains untouched during the test suite run (more about this below)
-- **pytest_djangodb_only.py — setup_method** — run this module separately and the data created in setup_method end up **NOT** in the “test_” + DATABASE_NAME database but in the standard one (as configured in the **settings.py** which would be the production database likely)! Also this data won’t be rolled back. When run separately, this test module will pass (but still the production database would be tainted). It may or may not fail on the second and subsequent run depending whether it creates any unique data. When run within the test suite, the database call from the setup_method will fail despite the presence of the class django_db marker. This has been very important to realize.
+- database interaction marked by a Python decorator **@pytest.mark.django_db** on the method or class level (or stand-alone function level). It’s in fact the **first** occurrence of this marker which triggers the database set up (its creation and migrations handling). Again analogously to unittest (django.test.TestCase), the test case is wrapped in a database transaction which puts the database back into the state prior to the test case. The database `test_` + DATABASE_NAME itself is dropped once the test suite run is over. The database is not dropped if `--db-reuse` option is used. The production DATABASE_NAME remains untouched during the test suite run (more about this below)
+- **pytest_djangodb_only.py — setup_method** — run this module separately and the data created in setup_method end up **NOT** in the `test_` + DATABASE_NAME database but in the standard one (as configured in the **settings.py** which would be the production database likely)! Also this data won’t be rolled back. When run separately, this test module will pass (but still the production database would be tainted). It may or may not fail on the second and subsequent run depending whether it creates any unique data. When run within the test suite, the database call from the setup_method will fail despite the presence of the class django_db marker. This has been very important to realize.
 Recommendation: do not include database interaction in the pytest special methods
 (such assetup_method or teardown_method, etc), **only include database interaction in the test case methods**
 - The error message `Failed: Database access not allowed, use the "django_db" mark to enable` was seen on a database error on a method which actually had the marker. This output is not to be 100% trusted
@@ -129,7 +129,7 @@ specific differences of the two. There is different database-related behaviour o
 The bottom line is: do not include database interaction in setup_method. This setUp, setup_method behaviour was already shown in the basic examples. And more description and demonstration of this behaviour is in the file: **pytest_djangodb_only.py**. This actually revealed the fact that using django_db database fixture is not supported in special pytest methods and the aforementioned error message is misleading (more references [here](https://github.com/pytest-dev/pytest-django/issues/297) and
 [here](http://stackoverflow.com/questions/34089425/django-pytest-setup-method-database-issue)).
 
-When running the whole test suite, this file won’t be collected (its name lacks “test_” string).
+When running the whole test suite, this file won’t be collected (its name lacks `test_` string).
 It needs to be renamed to be included in the test suite run.
 
 ### JSON data fixtures versus factories (pytest advanced example)

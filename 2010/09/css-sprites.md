@@ -8,8 +8,6 @@ tags:
 date: 2010-09-06
 ---
 
-
-
 I’ve recently recommended CSS sprites to several clients, but the majority don’t understand what CSS sprites are or what their impact is. In this article I’ll present some examples of using CSS sprites and their impact.
 
 First, an intro: CSS sprites is a technique that uses a combination of CSS rules and a single background image that is an aggregate of many smaller images to display the image elements on a webpage. The CSS rules set the boundaries and offset that define the part of the image to show. I like to refer to the technique as analogous to the “Ouija board”; the CSS acts as the little [rectangular] magnifying glass to show only a portion of the image.
@@ -56,7 +54,7 @@ I updated the HTML to remove individual image requests. Below are some examples:
 
 Before:
 
-```
+```plain
 <a href="https://www.alta.com/contact">
 <img src="./alta_files/banner_contact.gif" name="ContactUs" width="100" height="20" border="0">
 </a>
@@ -64,7 +62,7 @@ Before:
 
 After:
 
-```
+```plain
 <a href="/" class="sprite" id="banner_contact">
 </a>
 ```
@@ -72,7 +70,7 @@ After:
 
 Before:
 
-```
+```plain
 <a href="https://web.archive.org/web/20101128010936/http://shop.alta.com/CS/Browse.aspx?Catalog=AltaRetail&Category=Retail+Items" target="_self">
 <img src="./alta_files/altaskishoplogo.jpg" alt="March Madness Logo" width="180" height="123" border="0">
 </a>
@@ -80,14 +78,14 @@ Before:
 
 After:
 
-```
+```plain
 <a href="https://web.archive.org/web/20101128010936/http://shop.alta.com/CS/Browse.aspx?Catalog=AltaRetail&Category=Retail+Items" target="_self" id="skishoplogo" class="sprite">
 </a>
 ```
 
 Before:
 
-```
+```plain
 <div class="icon">
 <img src="./snowbird_files/icon_less_rain.gif" border="0" alt="Sunny" title="Sunny">
 </div>
@@ -95,14 +93,14 @@ Before:
 
 After:
 
-```
+```plain
 <div class="icon sprite less_rain">
 </div>
 ```
 
 Before:
 
-```
+```plain
 <div>
 <input type="image" src="./snowbird_files/btn_check_rates.gif" border="0" alt="Check Rates">
 </div>
@@ -110,7 +108,7 @@ Before:
 
 After:
 
-```
+```plain
 <div class="sprite" id="check_rates">
 </div>
 ```

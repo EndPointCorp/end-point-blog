@@ -23,66 +23,71 @@ While I’ve worked with a few Rails 3 apps, I haven’t been involved in the ac
 
 The rails_upgrade provides a few new rake tasks for checking compatibility, upgrading the routes, creating a Gemfile, and upgrading configuration. For me, the most valuable task was the **rake rails:upgrade:check** task. Here’s what the output looked like for this app:
 
-```plain
-<b>Deprecated session secret setting</b>
-Previously, session secret was set directly on ActionController::Base; it's now config.secret_token.
-More information: http://lindsaar.net/2010/4/7/rails_3_session_secret_and_session_store
+### Deprecated session secret setting
+
+Previously, session secret was set directly on ActionController::Base; it's now config.secret_token. More information: http://lindsaar.net/2010/4/7/rails_3_session_secret_and_session_store
 
 The culprits:
- - config/initializers/session_store.rb
 
-<b>Old router API</b>
-The router API has totally changed.
-More information: http://yehudakatz.com/2009/12/26/the-rails-3-router-rack-it-up/
+- config/initializers/session_store.rb
 
-The culprits:
- - config/routes.rb
+### Old router API
 
-<b>New file needed: config/application.rb</b>
-You need to add a config/application.rb.
-More information: http://omgbloglol.com/post/353978923/the-path-to-rails-3-approaching-the-upgrade
+The router API has totally changed. More information: http://yehudakatz.com/2009/12/26/the-rails-3-router-rack-it-up/
 
 The culprits:
- - config/application.rb
 
-<b>Deprecated constant(s)</b>
-Constants like RAILS_ENV, RAILS_ROOT, and RAILS_DEFAULT_LOGGER are now deprecated.
-More information: http://litanyagainstfear.com/blog/2010/02/03/the-rails-module/
+- config/routes.rb
 
-The culprits:
- - app/views/layouts/application.rhtml
- - ...
+### New file needed: config/application.rb
 
-<b>Soon-to-be-deprecated ActiveRecord calls</b>
-Methods such as find(:all), find(:first), finds with conditions, and the :joins option will soon be deprecated.
-More information: http://m.onkey.org/2010/1/22/active-record-query-interface
+You need to add a config/application.rb. More information: http://omgbloglol.com/post/353978923/the-path-to-rails-3-approaching-the-upgrade
 
 The culprits:
- - app/views/blog_archive/_ruby_on_rails.html.erb
-        - ...
 
-<b>Deprecated AJAX helper calls</b>
-AJAX javascript helpers have been switched to be unobtrusive and use :remote => true instead of having a seperate function to handle remote requests.
-More information: http://www.themodestrubyist.com/2010/02/24/rails-3-ujs-and-csrf-meta-tags/
+- config/application.rb
 
-The culprits:
- - app/views/blog_archive/_company.html.erb
-        - ...
+### Deprecated constant(s)
 
-<b>Deprecated ActionMailer API</b>
-You're using the old ActionMailer API to send e-mails in a controller, model, or observer.
-More information: http://lindsaar.net/2010/1/26/new-actionmailer-api-in-rails-3
+Constants like RAILS_ENV, RAILS_ROOT, and RAILS_DEFAULT_LOGGER are now deprecated. More information: http://litanyagainstfear.com/blog/2010/02/03/the-rails-module/
 
 The culprits:
- - app/controllers/contact_controller.rb
 
-<b>Old ActionMailer class API</b>
-You're using the old API in a mailer class.
-More information: http://lindsaar.net/2010/1/26/new-actionmailer-api-in-rails-3
+- app/views/layouts/application.rhtml
+- ...
+
+### Soon-to-be-deprecated ActiveRecord calls
+
+Methods such as find(:all), find(:first), finds with conditions, and the :joins option will soon be deprecated. More information: http://m.onkey.org/2010/1/22/active-record-query-interface
 
 The culprits:
- - app/models/contact_form.rb
-```
+
+- app/views/blog_archive/_ruby_on_rails.html.erb
+- ...
+
+### Deprecated AJAX helper calls
+
+AJAX javascript helpers have been switched to be unobtrusive and use :remote => true instead of having a seperate function to handle remote requests. More information: http://www.themodestrubyist.com/2010/02/24/rails-3-ujs-and-csrf-meta-tags/
+
+The culprits:
+
+- app/views/blog_archive/_company.html.erb
+- ...
+
+### Deprecated ActionMailer API
+
+You're using the old ActionMailer API to send e-mails in a controller, model, or observer. More information: http://lindsaar.net/2010/1/26/new-actionmailer-api-in-rails-3
+
+The culprits:
+
+- app/controllers/contact_controller.rb
+
+### Old ActionMailer class API
+
+You're using the old API in a mailer class. More information: http://lindsaar.net/2010/1/26/new-actionmailer-api-in-rails-3
+
+The culprits:
+- app/models/contact_form.rb
 
 As you can see, the upgrade check spits out a list of necessary and recommended upgrades and the corresponding *culprits*. It’s also nice that the task provides documentation in the form of a link for each message. Studying the source of the plugin, I found additional examples of upgrade messages: named_scope updates, validate_on_* syntax, test_help path updates, gem bundling configuration, Rails generator API syntax updates, messaging on known broken plugins (e.g. searchlogic, cucumber, nifty-generators), and depracation on ERb helper and AJAX calls.
 

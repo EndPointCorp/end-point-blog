@@ -9,7 +9,7 @@ tags:
 date: 2011-05-19
 ---
 
-<img alt="Taken by Josh 6 years to the day before the release of 9.1 beta 1" border="0" src="https://joshwilliams.name/PLPython/run_server.jpg"/>
+<img alt="Taken by Josh 6 years to the day before the release of 9.1 beta 1" border="0" src="https://joshwilliams.name/PLPython/run_server.jpg"/><br>
 Taken by Josh 6 years to the day before the release of 9.1 beta 1
 
 For the record, 9.1 is gearing up to be an awesome release. I was tinkering and testing [PostgreSQL 9.1 Beta 1](https://www.postgresql.org/about/news/1313/) (... You are beta testing, too, right?) ... and some of the new [PL/Python](https://www.postgresql.org/docs/devel/static/plpython.html) features caught my eye. These are minor among all the really cool high profile features, to be sure. But it made me think back to a little bit of experimental code written some time ago, and how these couple language additions could make a big difference.
