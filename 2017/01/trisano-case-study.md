@@ -3,14 +3,14 @@ author: Elizabeth Garrett Christensen
 title: TriSano Case Study
 github_issue_number: 1284
 featured:
-  epitrax: true
+  casepointer: true
   image_url: /blog/2017/01/trisano-case-study/image-0.jpeg
 tags:
 - case-study
 - clients
 - hosting
 - rails
-- epitrax
+- casepointer
 - pentaho
 date: 2017-01-24
 ---

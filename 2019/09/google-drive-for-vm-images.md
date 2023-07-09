@@ -57,7 +57,7 @@ Conveniently for us, Google Drive has a [web service API](https://developers.goo
 
 The easiest thing to do after we have gdrive authenticate with our Google account is:
 
-```
+```plain
 gdrive upload /path/to/file
 ```
 
@@ -71,7 +71,7 @@ To give an idea of the speed, I had several files to upload from a Linux server,
 
 Did the huge files make it without error? Google Drive doesn’t show them until they’re complete, which is good, so we will not see any partial files. To confirm, let’s check file size and MD5 hash value, which isn’t visible in the Drive web interface, but is via the API, along with the view & download URLs:
 
-```
+```plain
 # gdrive info 1YMEoEWWOvuBGSk0GJBv7c0E4cSEOoc6n
 Id: 1YMEoEWWOvuBGSk0GJBv7c0E4cSEOoc6n
 Name: prod-db-20190731

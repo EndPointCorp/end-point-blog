@@ -7,6 +7,7 @@ tags:
 - java
 - pentaho
 - reporting
+- casepointer
 date: 2009-10-28
 ---
 
