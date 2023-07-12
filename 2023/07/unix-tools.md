@@ -1,41 +1,45 @@
 ---
-title: Miscellaneous Unix tools & tips
+title: Unix tools & tips
 author: Muhammad Najmi bin Ahmad Zabidi
 github_issue_number: 1988
 date: 2023-07-05
 tags:
+- linux
 - tools
 ---
 
-The command line interface (CLI) commands/tools found on UNIX-like (\*NIX) systems are among the most useful tools available to system administrators. CLI tools allow a system administrator (sysadmin short form) to handle the \*NIX systems either remotely or locally without having the need to install the Graphical User Interface (GUI) packages.
+![The view from a mountain ridge. the sky is light blue and partially covered in clouds. Green ridges covered in pine trees lead down to a flat valley populated by a small town.](/blog/2023/07/unix-tools/idaho-mountains.webp)
 
-Almost twenty years ago, I bought two O'Reilly books: "sed & awk - second edition," written by Dale Dougherty & Arnold Robbins, and "Mastering Regular Expressions," written by Jeffrey E.F. Friedl. These two books were printed in late '90s, and I bought them in 2004. I remembered these books recently when my co-workers and I held a few study sessions to learn regular expressions. When a page and chapter are mentioned in this post, I'm referring to the editions of these books printed in that particular year.
+<!-- Photo by Seth Jensen, 2023. -->
 
-In this blogpost, I'll detail some of the common cases that I encounter in day to day tasks, as well as some related tools that help me handle them.
+The command line interface (CLI) programs/​tools found on UNIX-like (\*NIX) systems are among the most useful tools available to system administrators. CLI tools allow a system administrator to handle the \*NIX systems either remotely or locally without needing to install Graphical User Interface (GUI) packages.
+
+Almost twenty years ago, I bought two O'Reilly books: "sed & awk, second edition," written by Dale Dougherty & Arnold Robbins, and "Mastering Regular Expressions," written by Jeffrey E.F. Friedl. These two books were printed in the late '90s, and I bought them in 2004. I remembered them recently when my co-workers and I held a few study sessions to learn regular expressions. When a page and chapter are mentioned in this post, I'm referring to the editions of these books printed in that particular year.
+
+In this blog post, I'll detail some common use cases I encounter day to day, as well as some related tools that help me handle them.
 
 ### sed
 
-During my regular work as a system administrator, I usually use **sed** ("Stream EDitor") to do string replacement across files and **awk** for log files or file analysis with arbitrary strings as the field separator. (My favorite is the -F flag).
+During my regular work as a system administrator, I usually use **sed** ("**s**tream **ed**itor") to do string replacement across files and **awk** for log files or file analysis with arbitrary strings as the input field separator using the -F flag.
 
-One common use case for sed I've found is updating config files for Icinga's monitoring system. Let's say that we have a file named server101.cfg and we want to use the same config for server 102. One way to solve this on the command line is doing a simple search and replace with sed:
+One common use case for sed I've found is updating config files for the Icinga monitoring system. Let's say that we have a file named server101.cfg and we want to use the same config for server 102. One way to solve this on the command line is doing a simple search and replace with sed:
 
 ```console
 $ cp server101.cfg server102.cfg
 $ sed 's/server101/server102/g' server102.cfg
-$ icinga -v /etc/icinga/icinga.cfg (This will check that Icinga is able to understand the newly copied file)
+$ icinga -v /etc/icinga/icinga.cfg # This will check that Icinga is able to understand the newly copied file
 ```
 
 Make sure you use diff or another similar tool to make sure this doesn't accidentally modify anything it's not supposed to. You can get more detailed with your regular expressions to avoid such issues, but that's beyond the scope of this post.
 
 ### awk
 
-Sometimes there are cases where I need to use awk for scripting, but most of the time, I use awk for parsing things like IP addresses in log files, or any other string in logs. For example, you can check for plaintext passwords or and credit card details in places they're not supposed to be.
+Sometimes I need to use awk for scripting, but most of the time, I use it for parsing things like IP addresses in log files, or any other string in logs. For example, you can check for plaintext passwords or credit card details in places they're not supposed to be.
 
-The "sed & awk" book started with the introduction of ed, a line editor. Then it touched on the field separator, which is represented by the `-F` flag.
+The sed & awk book started with the introduction of ed, a line editor. Then it touched on the field separator, which is represented by the `-F` flag.
 
-In the following example, I ran the blkid command in order to check the UUID of the SCSI devices that connected to my computer.
+In the following example, I ran the `blkid` command in order to check the UUID of the SCSI devices that connected to my computer, then used awk to only show the output I needed.
 
-Example:
 ```console
 $ sudo blkid /dev/sd{d,e,g}
 /dev/sdd: UUID="7eb6302f-e727-4433-8c49-8a7842d18e1e" TYPE="crypto_LUKS"
@@ -50,14 +54,14 @@ $ sudo blkid /dev/sd{d,e,g}|awk -F "\"" {'print $2'}
 7237cc7d-0483-4c2a-a503-a11ea88b3690
 ```
 
-During my day-to-day work I seldom use both `sed` and `awk` together, but there are many situations where it can be useful to do so. See page 23 of the "sed & awk book" for one such example where both of these tools can be used together.
+During my day-to-day work I seldom use both `sed` and `awk` together, but there are many situations where it can be useful to do so. See page 23 of the sed & awk book for one such example where both of these tools can be used together.
 
 
 ### Using regular expressions in \*NIX tools
 
-The sed & awk book touches on "Understanding Regular Expression Syntax". This means in some way, system administrator might have to use regular expressions in certain cases where large/repetitive tasks are involved. I do not remember who suggested buying this pair of books which I bought almost twenty years ago, but I am really grateful for the person's suggestion.
+The sed & awk book touches on regular expression syntax, since system administrators might have to use regular expressions in cases where large/​repetitive tasks are involved. I do not remember who suggested buying this pair of books, but I am really grateful for the person's suggestion.
 
-Previously I just used the `grep` command with `-rw` (for recursive parsing) as well as the `color=always` flag in order to colorize the terminal output. I guess the recent `grep` command already has the "color" option by default and I don't have to explicitly call it anymore. We can also use `--color=never` if we want to remove the color matching.
+To search a file using regular expressions, I use the program "grep." I often use the `-r` flag for recursive parsing, the `-w` flag to match whole words only, and the `color=always` flag to colorize the terminal output. I guess recent versions of grep already use the "color=always" option by default and I don't have to explicitly call it anymore. We can also use `--color=never` if we want to remove the color matching.
 
 ```console
 $ grep 1 -w  --color=never tmp/file.txt
@@ -71,11 +75,11 @@ Wed Feb  1 11:30:01 AM +08 2023
 Wed Mar  1 11:30:01 AM +08 2023
 ```
 
-To extend the capability of grep for regular expression's usage, I use `-E`, but then I learned about the `-P` flag, which lets you use Perl-compatible regular expressions (PCRE).
+To extend the capability of grep for regular expression's usage, I used `-E`, but then I learned about the `-P` flag, which lets you use Perl-compatible regular expressions (PCREs), which I prefer.
 
-Say I have a file named `file.txt` with the following contents:
+Say I have a file named `fruit.txt` with the following contents:
 
-```
+```plain
 apple banana orange
 apple orange papaya
 durian rambutan
@@ -85,21 +89,21 @@ starfruit
 To find lines starting with "durian":
 
 ```console
-$ grep -P '^durian' file.txt
+$ grep -P '^durian' fruit.txt
 durian rambutan
 ```
 
 To find lines ending with "papaya":
 
 ```console
-$ grep -P "papaya$" file.txt
+$ grep -P "papaya$" fruit.txt
 apple orange papaya
 ```
 
-To find lines that separated by two spaces:
+To find lines with three words separated by two spaces:
 
 ```console
-$ grep -P '\w+ \w+ \w+' file.txt
+$ grep -P '\w+ \w+ \w+' fruit.txt
 apple banana orange
 apple orange papaya
 ```
@@ -107,46 +111,72 @@ apple orange papaya
 To find all lines containing a word starting with "a" or "d":
 
 ```console
-$ grep -P '\b(a|d)\w+' file.txt
+$ grep -P '\b(a|d)\w+' fruit.txt
 apple banana orange
 apple orange papaya
 durian rambutan
 ```
 
-These are just a few examples of what `grep` can do; it's very capable especially when you use the Perl regular expressions.
+These are just a few examples of what `grep` can do; it's very capable especially when you use PCREs.
 
-Apart from the `sed`, `awk` and `grep`, there are other tools as well; some that I commonly use are the `sort` and `uniq` commands.
+Apart from sed, awk and grep, there are many other useful tools for text processing. Some that I commonly use are the sort and uniq programs.
 
-### The `sort` command
+### sort
 
-`sort` and `uniq` are frequently used together. `sort`, as its name implies, is used to sort the parsed text per whatever options are provided.
+sort and uniq are frequently used together. sort, as its name implies, is used to sort the parsed text per whatever options are provided.
 
-Assume that we have the following text:
+Assume that we have the following file, "prices.csv":
 
 ```console
-$ cat pattern.txt
+$ cat prices.csv
 chicken,$1.50
 duck,$1.20
 beef,$6.10
+chicken,$1.50
 lamb,$3.20
 fish,$4.09
 ```
 
-By using the `sort` command we could sort the items according a specified text seperator (`-t`) and the column that we want to prioritize (`-k`). Here, I want to sort the item based on data exist on the second column.
+Using the `sort` command, we could sort the items according a specified text separator (`-t`) and the column that we want to prioritize (`-k`). Here, I want to sort the item based on data exist on the second column.
 
 ```console
-$ sort -t"," -k2  pattern.txt
+$ sort -t "," -k 2  prices.csv
 duck,$1.20
+chicken,$1.50
 chicken,$1.50
 lamb,$3.20
 fish,$4.09
 beef,$6.10
 ```
 
-Without the other parameters, `sort` will just use the first column to sort the data - in this case, alphabetically.
+Without the other parameters, sort will just sort the lines alphabetically.
 
 ```console
-$ sort pattern.txt
+$ sort prices.csv
+beef,$6.10
+chicken,$1.50
+chicken,$1.50
+duck,$1.20
+fish,$4.09
+lamb,$3.20
+```
+
+We can use uniq to eliminate repeated lines. Running `uniq` without sorting will have no effect, since the duplicate lines `chicken,$1.50` do not appear sequentially:
+
+```console
+$ uniq prices.csv
+chicken,$1.50
+duck,$1.20
+beef,$6.10
+chicken,$1.50
+lamb,$3.20
+fish,$4.09
+```
+
+To merge them and clean up the data, we can sort first:
+
+```console
+$ sort prices.csv | uniq
 beef,$6.10
 chicken,$1.50
 duck,$1.20
@@ -154,11 +184,9 @@ fish,$4.09
 lamb,$3.20
 ```
 
-### The `find` command.
+### find
 
-Say I searched from a full hard disk and found several files, which I check for whether they are still needed or not.
-In this case I search in the the current directory with the dot `.` notation, and the `-maxdepth 1` option means the search task must not be done beyond the current directory. `-mtime +3000` means only select directories that have not been modified within the last 3000 days.
-`-type d` means directory and not files (files use `-type f` flag). The `-exec` flag means it will run the `ls -ld` command which will display the value that's being passed to the `{}` placeholder.
+Say I want to search a full hard disk to check for files that are not needed anymore. I would use the following command, with each option detailed below the output:
 
 ```console
 $ find . -maxdepth 1  -mtime +3000 -type d -exec ls {} -ld \;
@@ -192,10 +220,16 @@ drwxrwxrwx 3 najmi najmi 4096 Nov  25  2012 ./caja
 drwxrwxrwx 2 najmi najmi 4096 Dis  18  2012 ./Empathy
 ```
 
-Note: In Linux it is possible to use `ls {} -ld` or `ls -ld {}` flag assignation, but I realized in some other \*NIX variants, you always need to put the flag before the variable/parameter; that is, `ls -ld {}`.
+* In this case I search in the current directory with the dot `.` notation.
+* The `-maxdepth 1` option means the search task must not be done beyond the current directory.
+* `-mtime +3000` means only show directories that have not been modified within the last 3000 days.
+* `-type d` means match directories, but not files (to only match files, use the `-type f` flag).
+* The `-exec ls {} -ld \;` flag means it will run the `ls -ld` command for each match. This will show the modification time of the directory passed by the `{}` placeholder, which is replaced by the file name of the current search result.
+
+> Note: In Linux it is possible to order the flags like either `ls {} -ld` or `ls -ld {}`, but I realized that in some other \*NIX variants, you always need to put the flag before the variable/parameter; that is, `ls -ld {}`.
 
 ### Conclusion
 
-There are newer tools which may be provided by more recent Linux distros or BSD variants, but I wanted to stick to the basics in this short write-up. However, for anyone using \*NIX, your time will be more than worth learning these tools in detail.
+There are newer tools which may be provided by more recent Linux distros or BSD variants, but in this short write-up I wanted to stick to the basics which are useful to anyone using \*NIX. It is more than worth your time to learn these tools in detail.
 
-I would also recommend for further reading "UNIX and Linux System Administration Handbook" (Nemeth, E., Snyder, G., Hein, T., Whaley, B., & Mackin, D. (2020).
+> For further reading, I would also recommend "UNIX and Linux System Administration Handbook" (Nemeth, E., Snyder, G., Hein, T., Whaley, B., & Mackin, D. (2020).
