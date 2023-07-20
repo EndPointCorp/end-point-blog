@@ -20,7 +20,7 @@ In this blog post, I'll detail some common use cases I encounter day to day, as 
 
 ### sed
 
-During my regular work as a system administrator, I usually use **sed** ("**s**tream **ed**itor") to do string replacement across files and **awk** for log files or file analysis with arbitrary strings as the input field separator using the -F flag.
+During my regular work as a system administrator, I usually use **sed** (“**s**tream **ed**itor”) to do string replacement across files and **awk** for log files or file analysis with arbitrary strings as the input field separator using the -F flag.
 
 One common use case for sed I've found is updating config files for the Icinga monitoring system. Let's say that we have a file named server101.cfg and we want to use the same config for server 102. One way to solve this on the command line is doing a simple search and replace with sed:
 
@@ -36,7 +36,7 @@ Make sure you use diff or another similar tool to make sure this doesn't acciden
 
 Sometimes I need to use awk for scripting, but most of the time, I use it for parsing things like IP addresses in log files, or any other string in logs. For example, you can check for plaintext passwords or credit card details in places they're not supposed to be.
 
-The sed & awk book started with the introduction of ed, a line editor. Then it touched on the field separator, which is represented by the `-F` flag.
+The sed & awk book started with the introduction of ed, an ancient line editor. Then it touched on the field separator, which is represented by the `-F` flag.
 
 In the following example, I ran the `blkid` command in order to check the UUID of the SCSI devices that connected to my computer, then used awk to only show the output I needed.
 
@@ -48,7 +48,7 @@ $ sudo blkid /dev/sd{d,e,g}
 ```
 
 ```console
-$ sudo blkid /dev/sd{d,e,g}|awk -F "\"" {'print $2'}
+$ sudo blkid /dev/sd{d,e,g} | awk -F "\"" {'print $2'}
 7eb6302f-e727-4433-8c49-8a7842d18e1e
 68b2382e-13b8-4bdb-a6cb-15f6844d464b
 7237cc7d-0483-4c2a-a503-a11ea88b3690
@@ -61,7 +61,7 @@ During my day-to-day work I seldom use both `sed` and `awk` together, but there 
 
 The sed & awk book touches on regular expression syntax, since system administrators might have to use regular expressions in cases where large/​repetitive tasks are involved. I do not remember who suggested buying this pair of books, but I am really grateful for the person's suggestion.
 
-To search a file using regular expressions, I use the program "grep." I often use the `-r` flag for recursive parsing, the `-w` flag to match whole words only, and the `color=always` flag to colorize the terminal output. I guess recent versions of grep already use the "color=always" option by default and I don't have to explicitly call it anymore. We can also use `--color=never` if we want to remove the color matching.
+To search a file using regular expressions, I use the program "grep." I often use the `-r` flag for recursive parsing, the `-w` flag to match whole words only, and the `--color=always` flag to colorize the terminal output. Recent versions of GNU grep use the `--color=auto` option by default so I don't have to explicitly specify it when sending output straight to a terminal. We can also use `--color=never` if we want to remove the color matching.
 
 ```console
 $ grep 1 -w  --color=never tmp/file.txt
@@ -137,10 +137,10 @@ lamb,$3.20
 fish,$4.09
 ```
 
-Using the `sort` command, we could sort the items according a specified text separator (`-t`) and the column that we want to prioritize (`-k`). Here, I want to sort the item based on data exist on the second column.
+Using the `sort` command, we could sort the items according a specified text separator (`-t`) and the column (key) that we want to prioritize (`-k`). Here, I want to sort the item based on data in the second column:
 
 ```console
-$ sort -t "," -k 2  prices.csv
+$ sort -t "," -k 2 prices.csv
 duck,$1.20
 chicken,$1.50
 chicken,$1.50
@@ -189,47 +189,47 @@ lamb,$3.20
 Say I want to search a full hard disk to check for files that are not needed anymore. I would use the following command, with each option detailed below the output:
 
 ```console
-$ find . -maxdepth 1  -mtime +3000 -type d -exec ls {} -ld \;
-drwxrwxrwx 2 najmi najmi 4096 Nov  25  2012 ./Terminal
-drwxrwxrwx 3 najmi najmi 4096 Dis  27  2012 ./gnome-disk-utility
-drwxrwxrwx 8 najmi najmi 4096 Nov  27  2012 ./xfce4
-drwxrwxrwx 2 najmi najmi 4096 Nov  25  2012 ./libaccounts-glib
-drwxrwxrwx 2 najmi najmi 4096 Dis   1  2012 ./sakura
-drwxrwxrwx 2 najmi najmi 4096 Nov  25  2012 ./software-center
-drwxrwxrwx 4 najmi najmi 4096 Nov  25  2012 ./evolution
-drwxrwxrwx 2 najmi najmi 4096 Nov  25  2012 ./update-notifier
-drwxrwxrwx 2 najmi najmi 4096 Dis  22  2012 ./Thunar
-drwxrwxrwx 3 najmi najmi 4096 Nov  25  2012 ./compiz-1
-drwxrwxrwx 2 najmi najmi 4096 Dis  28  2012 ./tracker
-drwxrwxrwx 3 najmi najmi 4096 Dis   9  2012 ./menus
-drwxrwxrwx 3 najmi najmi 4096 Dis  27  2012 ./gnome-control-center
-drwxrwxrwx 2 najmi najmi 4096 Nov  25  2012 ./goa-1.0
-drwxrwxrwx 2 najmi najmi 4096 Nov  28  2012 ./enchant
-drwxrwxrwx 2 najmi najmi 4096 Dis   8  2012 ./Pinta
-drwxrwxrwx 2 najmi najmi 4096 Nov  25  2012 ./gmusicbrowser
-drwxrwxrwx 3 najmi najmi 4096 Dis  14  2012 ./audacious
-drwxrwxrwx 3 najmi najmi 4096 Dis  27  2012 ./gnome-session
-drwxrwxrwx 5 najmi najmi 4096 Nov  28  2012 ./mate
-drwxrwxrwx 2 najmi najmi 4096 Nov  25  2012 ./ristretto
+$ find . -maxdepth 1 -mtime +3000 -type d -exec ls {} -ld \;
+drwxrwxrwx  2 najmi najmi 4096 Nov  25  2012 ./Terminal
+drwxrwxrwx  3 najmi najmi 4096 Dis  27  2012 ./gnome-disk-utility
+drwxrwxrwx  8 najmi najmi 4096 Nov  27  2012 ./xfce4
+drwxrwxrwx  2 najmi najmi 4096 Nov  25  2012 ./libaccounts-glib
+drwxrwxrwx  2 najmi najmi 4096 Dis   1  2012 ./sakura
+drwxrwxrwx  2 najmi najmi 4096 Nov  25  2012 ./software-center
+drwxrwxrwx  4 najmi najmi 4096 Nov  25  2012 ./evolution
+drwxrwxrwx  2 najmi najmi 4096 Nov  25  2012 ./update-notifier
+drwxrwxrwx  2 najmi najmi 4096 Dis  22  2012 ./Thunar
+drwxrwxrwx  3 najmi najmi 4096 Nov  25  2012 ./compiz-1
+drwxrwxrwx  2 najmi najmi 4096 Dis  28  2012 ./tracker
+drwxrwxrwx  3 najmi najmi 4096 Dis   9  2012 ./menus
+drwxrwxrwx  3 najmi najmi 4096 Dis  27  2012 ./gnome-control-center
+drwxrwxrwx  2 najmi najmi 4096 Nov  25  2012 ./goa-1.0
+drwxrwxrwx  2 najmi najmi 4096 Nov  28  2012 ./enchant
+drwxrwxrwx  2 najmi najmi 4096 Dis   8  2012 ./Pinta
+drwxrwxrwx  2 najmi najmi 4096 Nov  25  2012 ./gmusicbrowser
+drwxrwxrwx  3 najmi najmi 4096 Dis  14  2012 ./audacious
+drwxrwxrwx  3 najmi najmi 4096 Dis  27  2012 ./gnome-session
+drwxrwxrwx  5 najmi najmi 4096 Nov  28  2012 ./mate
+drwxrwxrwx  2 najmi najmi 4096 Nov  25  2012 ./ristretto
 drwxrwxrwx 31 najmi najmi 4096 Dis  24  2012 ./chromium
-drwxrwxrwx 5 najmi najmi 4096 Dis   8  2012 ./mono.addins
-drwxrwxrwx 3 najmi najmi 4096 Nov  25  2012 ./mate-session
-drwxrwxrwx 3 najmi najmi 4096 Nov  25  2012 ./ibus
-drwxrwxrwx 4 najmi najmi 4096 Nov  25  2012 ./libreoffice
-drwxrwxrwx 3 najmi najmi 4096 Nov  25  2012 ./caja
-drwxrwxrwx 2 najmi najmi 4096 Dis  18  2012 ./Empathy
+drwxrwxrwx  5 najmi najmi 4096 Dis   8  2012 ./mono.addins
+drwxrwxrwx  3 najmi najmi 4096 Nov  25  2012 ./mate-session
+drwxrwxrwx  3 najmi najmi 4096 Nov  25  2012 ./ibus
+drwxrwxrwx  4 najmi najmi 4096 Nov  25  2012 ./libreoffice
+drwxrwxrwx  3 najmi najmi 4096 Nov  25  2012 ./caja
+drwxrwxrwx  2 najmi najmi 4096 Dis  18  2012 ./Empathy
 ```
 
 * In this case I search in the current directory with the dot `.` notation.
 * The `-maxdepth 1` option means the search task must not be done beyond the current directory.
 * `-mtime +3000` means only show directories that have not been modified within the last 3000 days.
 * `-type d` means match directories, but not files (to only match files, use the `-type f` flag).
-* The `-exec ls {} -ld \;` flag means it will run the `ls -ld` command for each match. This will show the modification time of the directory passed by the `{}` placeholder, which is replaced by the file name of the current search result.
+* The `-exec ls {} -ld \;` arguments mean it will run the `ls -ld` command for each match. This will show the modification time of the directory passed by the `{}` placeholder, which is replaced by the file name of the current search result.
 
-> Note: In Linux it is possible to order the flags like either `ls {} -ld` or `ls -ld {}`, but I realized that in some other \*NIX variants, you always need to put the flag before the variable/parameter; that is, `ls -ld {}`.
+> Note: In Linux with GNU tools it is possible to order the flags like either `ls {} -ld` or `ls -ld {}`, but I realized that in some other \*NIX variants, you always need to put the flag before the variable/parameter; that is, `ls -ld {}`.
 
 ### Conclusion
 
 There are newer tools which may be provided by more recent Linux distros or BSD variants, but in this short write-up I wanted to stick to the basics which are useful to anyone using \*NIX. It is more than worth your time to learn these tools in detail.
 
-> For further reading, I would also recommend "UNIX and Linux System Administration Handbook" (Nemeth, E., Snyder, G., Hein, T., Whaley, B., & Mackin, D. (2020).
+> For further reading, I would also recommend "UNIX and Linux System Administration Handbook" by Nemeth, E., Snyder, G., Hein, T., Whaley, B., & Mackin, D. (2020).
