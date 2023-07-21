@@ -14,6 +14,12 @@ tags:
 ![Arrizq Jeffry on a go-kart](/blog/2023/06/rocky-linux-9-at-hetzner-robot-for-the-impatient/arrizqjeffry.webp)<br>
 Image: https://www.pexels.com/photo/go-kart-17122631/
 
+### Update: A Better Way to Install Rocky Linux 9 at Hetzner Cloud
+
+Hey everyone,
+
+I wanted to share an update regarding the installation process of Rocky Linux 9 at Hetzner Cloud. After some further exploration and testing, I've come across a more efficient and straightforward method to get Rocky Linux up and running on their platform. You can check out the new method in [my second blog post here](https://www.endpointdev.com/blog/2023/07/rocky-linux-9-at-hetzner-robot-made-quick-and-easy/).
+
 ### About Rocky Linux
 
 Rocky Linux is a free and open-source community-driven operating system designed to be a drop-in replacement for Red Hat Enterprise Linux (RHEL).
