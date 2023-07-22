@@ -16,9 +16,9 @@ Image: https://www.pexels.com/photo/go-kart-17122631/
 
 ### Update: A Better Way to Install Rocky Linux 9 at Hetzner Cloud
 
-Hey everyone,
+Hey everyone, I wanted to share an update regarding the installation process of Rocky Linux 9 at Hetzner Cloud.
 
-I wanted to share an update regarding the installation process of Rocky Linux 9 at Hetzner Cloud. After some further exploration and testing, I've come across a more efficient and straightforward method to get Rocky Linux up and running on their platform. You can check out the new method in [my second blog post here](https://www.endpointdev.com/blog/2023/07/rocky-linux-9-at-hetzner-robot-made-quick-and-easy/).
+After input from Brian Clemens of the Rocky Linux project and some further exploration and testing, I have a more efficient and straightforward method to get Rocky Linux up and running on the Hetzner platform. You can check out the new method in [my second blog post here](/blog/2023/07/rocky-linux-9-at-hetzner-robot-made-quick-and-easy/).
 
 ### About Rocky Linux
 
