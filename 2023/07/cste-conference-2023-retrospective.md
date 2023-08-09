@@ -12,7 +12,7 @@ tags:
 - conference
 ---
 
-![Seven members of the End Point CasePointer team stand in front of the CSTE 2023 press wall.](/blog/2023/07/cste-conference-2023-retrospective/end-point-cste-team.webp)
+![Seven members of the End Point CasePointer team standing in front of the CSTE 2023 press wall](/blog/2023/07/cste-conference-2023-retrospective/end-point-cste-team.webp)
 
 End Point is proud to have been an exhibitor at the 2023 Council of State and Territorial Epidemiologists (CSTE) conference in Salt Lake City, Utah. 
 
