@@ -16,6 +16,8 @@ featured:
 
 <!-- Image: Johan Barthold Jongkind, A Stream Running between Houses and a Road, 19th century. Public domain under CC0. -->
 
+(Co-authored by [Jon Jensen](/team/jon-jensen/).)
+
 ### Background
 
 For many years, healthcare providers, public health experts, and software developers have been hard at work on standards and methods for interconnecting systems to share vast and ever-expanding patient and lab data.
