@@ -24,7 +24,7 @@ To demonstrate, we’ll extract code values from a JavaScript object so that we 
 WHERE code IN ('code1', 'code2', 'code3')
 ```
 
-Or we can add the values to an regex alternation group separated by pipes (vertical bars) that we can use as a string match:
+Or we can add the values to a regex alternation group separated by pipes (vertical bars) that we can use as a string match:
 
 ```sql
 WHERE code ~ '^(?:code1|code2|code3)$'

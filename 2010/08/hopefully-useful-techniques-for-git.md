@@ -20,13 +20,13 @@ No doubt there are a variety of strategies to apply here. This worked for me and
 
 Beyond the obvious concern of having sufficient knowledge of the application itself, so that you can make intelligent choices with respect to the code, there are a number of key operational concerns specific to rebase itself. This list is not exhaustive, but it is not an unreasonable set of key considerations to keep in mind.
 
-1. **Rebase is destructive**
+#### **Rebase is destructive**
 
 Remember what you’re doing! While a merge literally combines two or more revision histories, a rebase takes a chunk of revision history and applies it on top of another related history. It’s like a cherry-pick on steroids (really nice, friendly steroids that provoke neither rage nor senate hearings): each commit gets logically applied on top of the specified head, and as such gets rewritten. The commits are not the same afterwards. The history of your working tree’s branch is rewritten.
 
 So, before you rebase, protect yourself: *Make sure you have more than one reference (either a branch or a tag) pointing to your current work.*
 
-1. **Conflict resolution can bring about bugs**
+#### **Conflict resolution can bring about bugs**
 
 When resolving merge conflicts along the way, you’ll need to manually inspect things to try to figure out the right path forward. If it’s been a while since you merged/rebased, you may find that merge conflict resolution is not so simple: rather than picking one version or the other, you’re literally merging them in some logical manner. You may end up writing new code, in other words.
 
@@ -34,7 +34,7 @@ Because you are involved and you are a mammal, there is a decent possibility tha
 
 So, again, protect yourself: *Look at what’s coming before you rebase and take note of likely conflict resolution points.*
 
-1. **Things go wrong and an abort can be necessary**
+#### **Things go wrong and an abort can be necessary**
 
 Some times it becomes quite clear that a mistake has been made along the way, and you need to bail out and regroup. If you’re doing a gigantic rebase in one big shot, this can happen after you’re 15, 45, 90, or 120+ minutes into the task. Do you really want to have to go all the way back to the beginning of your rebase excursion and start fresh?
 
@@ -42,7 +42,7 @@ Don’t let this happen. When approaching the rebase, show humility, expect thin
 
 *Break the rebase into smaller chunks and proceed through them incrementally*
 
-1. **You may not immediately know that something went wrong**
+#### **You may not immediately know that something went wrong**
 
 Unless the code base is pretty trivial or you are 100% committed to that code base all the time, it is unlikely that you’ll be completely on top of everything that’s happened in both revision histories. You can test the stuff you know, you can run test suites, etc., but it’s critical to work defensively.
 
