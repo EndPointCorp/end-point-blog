@@ -5,7 +5,7 @@ github_issue_number: 1997
 tags:
 - regex
 - vscode
-date: 2023-07-26
+date: 2023-07-31
 ---
 
 ![A blank white wall and ceiling, with regular rays of light casting striped shadows at an acute angle. As the light hits the ceiling, the angle changes and the strips of light appear vertical.](/blog/2023/07/regex-replace-in-vs-code/light-patterns.webp)
@@ -14,17 +14,17 @@ date: 2023-07-26
 
 Regular expressions are incredibly powerful tools that can make life easier for any developer. Being able to quickly and precisely parse text with the syntax you specify has kept regexes relevant from the '80s through to today.
 
-Visual Studio Code is an excellent modern editor. According to the Stack Overflow Developer Survey of 2022, it was by far and away the most popular IDE for both professional developers and those learning to code — more than twice as popular as the second-place choice.
+Visual Studio Code is an excellent modern editor and development environment. According to the Stack Overflow Developer Survey of 2022, it was far and away the most popular IDE for both professional developers and those learning to code—more than twice as popular as the second-place choice.
 
 Like any great editor, VS Code supports using regexes to find and replace text. In this article, we’ll go over how to use this powerful regex mode.
 
-To demonstrate, we’ll extract code values from a JavaScript object so that we can query a SQL database for content that contains one of the code values. We could use standard SQL multiple matching:
+To demonstrate, we’ll extract code values from a JavaScript object so that we can query a SQL database for content that contains one of the code values. We can use standard SQL query WHERE clause multiple matching:
 
 ```sql
 WHERE code IN ('code1', 'code2', 'code3')
 ```
 
-Or we could add the values to a pipe-separated regex group that we can use in the WHERE clause of a SQL query:
+Or we can add the values to an regex alternation group separated by pipes (vertical bars) that we can use as a string match:
 
 ```sql
 WHERE code ~ '^(?:code1|code2|code3)$'
@@ -32,7 +32,7 @@ WHERE code ~ '^(?:code1|code2|code3)$'
 
 Each has different query plans and performance impacts in SQL, but for this example we’ll choose the second for its extra regex goodness. Doing the first would just require a few changes to our replacement regexes; feel free to practice your regex skills by figuring out how to fit our data to the standard SQL format!
 
-We’ve copied and pasted all 287 lines of the object into VS Code. For the sake of this article, we’ll just show a handful of lines to demonstrate the point. Here are some lines from the object:
+We have copied and pasted all 287 lines of the object into VS Code. For the sake of this article, we’ll just show a handful of lines to demonstrate the point. Here are some lines from the object:
 
 ```plain
 { 'code' : '33866-5','description' : 'HIV 1 Ab [Presence] in Capillary blood by Immunoassay'},
@@ -59,9 +59,9 @@ First, use the shortcut Control+f (Command+f on macOS) to bring up the Search ba
 
 ![The find bar of VS Code. A text field reads "Find", with three buttons on the right side of the field reading "Aa", "ab" underlined, and ".\*". To the left of the text field is a right-facing arrow. To the right text reads "No results".](/blog/2023/07/regex-replace-in-vs-code/find.webp)
 
-The more advanced options for Find are the icons on the right hand side of the Find input field. We’ll be using the Use Regular Expression option, indicated by the `.*`
+The more advanced options for Find are the icons on the right hand side of the Find input field. Choose the Use Regular Expression option, indicated by `.*`
 
-With regex mode enabled, the "Find" field allows you to use a regex when searching. Ultimately, we want to replace any matches we get with text or nothing at all (i.e. in order to delete our matches). To reveal the "Replace" field, hit the right-facing arrow on the left side of the Find bar.
+With regex mode enabled, the "Find" field allows you to use a regex when searching. Ultimately, we want to replace any matches we get with text, or with nothing at all in order to delete our matches. To reveal the "Replace" field, hit the right-facing arrow on the left side of the Find bar.
 
 ![The same find bar, now with a second text field below reading "Replace".](/blog/2023/07/regex-replace-in-vs-code/find-and-replace.webp)
 
@@ -105,7 +105,7 @@ It should now look like this:
 
 So we’ve isolated each individual segment on each line. Our final step is to get all of these segments onto the same line and separate with a pipe.
 
-Let’s match the newline character - in this case, `\n`.
+Let’s match the newline character, represented by `\n`.
 
 ![The codes, the same as the previous image. The space partially overlapping the end of each line is highlighted.](/blog/2023/07/regex-replace-in-vs-code/newline-highlighted.webp)
 
@@ -116,4 +116,3 @@ Let’s replace these newlines with a pipe character. We enter the pipe characte
 Once we have this, we can place parentheses around the whole thing and put it into the WHERE clause of our SQL statement.
 
 There you have it! You can imagine the possibilities with this. With decent knowledge of regex, you can use this as a power tool to manipulate text, isolate values that you want, and so on.
-
