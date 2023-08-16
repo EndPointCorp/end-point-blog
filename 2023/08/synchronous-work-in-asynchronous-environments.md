@@ -1,14 +1,17 @@
 ---
-author: "Trevor Slocum and Vincent Martin"
+author: "Vincent Martin"
 title: "Synchronous work in asynchronous work environments"
 github_issue_number: 0
 date: 2023-08-15
 tags:
 - remote-work
 - tips
+- vscode
 ---
 
 <!-- TODO photo -->
+
+(Co-authored by [Trevor Slocum](/team/trevor-slocum/).)
 
 As a team that spans the globe, asynchronous communication is a necessity for
 us. While we do use email, of course, we use internal text chat rooms for
@@ -59,6 +62,9 @@ other's cursor and also see what each person has highlighted, or work
 independently in different files. This approach also has the advantage of not
 relying on video compression to share code.
 
+![A screenshot demonstrating the initial step of sharing with others using VSCode.](/blog/2023/08/synchronous-work-in-asynchronous-environments/vscode.png)<br>
+Using the VSCode Live Share plugin
+
 VSCode offers a plugin called "Live Share" which can be installed to allow the
 users to collaborate in real time on a project. The project itself lives on
 one of the users' computer, for example if you wanted to pair a program with a
@@ -67,6 +73,9 @@ the provided web link, which they would use to attach to your session. This
 feature not only allows you to share your code, but also allows you to share
 useful tools like the in-editor debugger. [This page](https://code.visualstudio.com/learn/collaboration/live-share)
 provides information to help you get started with VSCode's Live Share plugin.
+
+![A screenshot demonstrating the initial step of sharing with others using IntelliJ IDEA.](/blog/2023/08/synchronous-work-in-asynchronous-environments/intellij.png)<br>
+Using the IntelliJ Code With Me plugin
 
 The IntelliJ family of editors (e.g. IDEA) offer a similar plugin called "Code
 With Me." This plugin provides additional features such as allowing more than
@@ -110,7 +119,7 @@ This is not officially supported by git, but many third-party git tools recogniz
 this line, such as GitHub and GitLab, and this practice is followed by many programmers.
 
 ```
-Co-authored-by: Chuck Person <chuck@eccojams.com>
+Co-authored-by: Chuck Person <chuck@eccojams.opn>
 ```
 
 Even when a git tool does not recognize this line, other tools such as `grep`
@@ -123,8 +132,8 @@ Add fizz, fix buzz
 
 We need to include fizz in order for buzz to function properly.
 
-Co-authored-by: Chuck Person <chuck@eccojams.com>
-Co-authored-by: Ramona Langley <ramona@floralshoppe.com>
+Co-authored-by: Chuck Person <chuck@eccojams.opn>
+Co-authored-by: Ramona Langley <ramona@floralshoppe.mpl>
 ```
 
 Happy coding!
