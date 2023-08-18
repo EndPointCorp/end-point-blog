@@ -33,12 +33,12 @@ With all the mental aspects of pair programming addressed, you can now get to pr
 
 These shared environments allow you to follow each other's cursor and also see what each person has highlighted, or work independently in different files. This approach also has the advantage of not relying on video compression to share code.
 
-![A screenshot demonstrating the initial step of sharing with others using VS Code.](/blog/2023/08/synchronous-work-in-asynchronous-environments/vscode.png)<br>
+![A screenshot demonstrating the initial step of sharing with others using VS Code. VS Code's command pallette is open, with "live share" typed into the search box. Selected is "Live Share: Start Collaboration Session (Share). Other options are Join Collaboration Session, Focus on Session Details View, Help, Sign out, and Start Read-Only Collaboration Session. Each is prefixed by "Live Share:"](/blog/2023/08/synchronous-work-in-asynchronous-environments/vscode.webp)<br>
 Using the VS Code Live Share plugin
 
 Visual Studio Code offers a plugin called "[Live Share](https://code.visualstudio.com/learn/collaboration/live-share)" which can be installed to allow the users to collaborate synchronously on a project. The project itself lives on one of the users' computers, for example if you wanted to pair a program with a friend, you would initiate the session on your computer and send your friend the provided web link, which they would use to attach to your session. This feature not only allows you to share your code, but also allows you to share useful tools like the in-editor debugger.
 
-![A screenshot demonstrating the initial step of sharing with others using IntelliJ IDEA.](/blog/2023/08/synchronous-work-in-asynchronous-environments/intellij.png)<br>
+![A screenshot demonstrating the initial step of sharing with others using IntelliJ IDEA. A popup titled "Code With Me: Start Session" reads "Set permissions for new guests, under which are radio buttons reading Read-Only (which is selected), Edit files, Full access, and Custom. There is also an unchecked checkbox giving the option to "start call."](/blog/2023/08/synchronous-work-in-asynchronous-environments/intellij.webp)<br>
 Using the IntelliJ Code With Me plugin
 
 The IntelliJ family of editors (e.g. IDEA) offer a similar plugin called "[Code With Me](https://www.jetbrains.com/help/idea/code-with-me.html)." This plugin provides additional features such as allowing more than two users to connect at the same time. Actual live editing of code is limited to five users at the moment, but you can have more if you operate in a teacher-student scenario where you can present code real time with a large number of your teammates by enabling "force others to follow you" mode.
