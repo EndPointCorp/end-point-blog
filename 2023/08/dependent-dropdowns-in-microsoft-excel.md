@@ -6,6 +6,8 @@ date: 2023-08-02
 tags:
 - tips
 - ruby
+featured:
+  image_url: /blog/2023/08/dependent-dropdowns-in-microsoft-excel/summer-tree.webp
 ---
 
 ![Red leaves extend on thin branches towards the center of the image. Each is a different distance from the camera, so one, with white blossoms, is in focus, while some are blurred a little, and others so much that they are almost unrecognizable red splotches. There is a vaguely spherical distortion from the lens which gives a convex look to the image.](/blog/2023/08/dependent-dropdowns-in-microsoft-excel/summer-tree.webp)<br>

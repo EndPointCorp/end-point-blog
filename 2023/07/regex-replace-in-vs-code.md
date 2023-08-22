@@ -1,11 +1,13 @@
 ---
 title: "Text manipulation using regex replace in VS Code"
-author: Kevin Quaranta Jr.
+author: "Kevin Quaranta Jr."
 github_issue_number: 1997
 tags:
 - regex
 - vscode
 date: 2023-07-31
+featured:
+  image_url: /blog/2023/07/regex-replace-in-vs-code/light-patterns.webp
 ---
 
 ![A blank white wall and ceiling, with regular rays of light casting striped shadows at an acute angle. As the light hits the ceiling, the angle changes and the strips of light appear vertical.](/blog/2023/07/regex-replace-in-vs-code/light-patterns.webp)

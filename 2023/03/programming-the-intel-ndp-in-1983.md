@@ -7,6 +7,8 @@ tags:
 - hardware
 - programming
 github_issue_number: 1941
+featured:
+  image_url: /blog/2023/03/programming-the-intel-ndp-in-1983/20230205-163937-sm.webp
 ---
 
 ![Photograph of brick building fronted by a metal staircase leading to the roof, gated by a full-size metal door that would be trivially easy to climb around](/blog/2023/03/programming-the-intel-ndp-in-1983/20230205-163937-sm.webp)

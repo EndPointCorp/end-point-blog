@@ -9,6 +9,8 @@ tags:
 - linux
 - sysadmin
 - redhat
+featured:
+  image_url: /blog/2023/06/rocky-linux-9-at-hetzner-robot-for-the-impatient/arrizqjeffry.webp
 ---
 
 ![Arrizq Jeffry on a go-kart](/blog/2023/06/rocky-linux-9-at-hetzner-robot-for-the-impatient/arrizqjeffry.webp)<br>

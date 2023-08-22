@@ -6,6 +6,8 @@ date: 2023-07-05
 tags:
 - linux
 - tools
+featured:
+  image_url: /blog/2023/07/unix-tools/idaho-mountains.webp
 ---
 
 ![The view from a mountain ridge. the sky is light blue and partially covered in clouds. Green ridges covered in pine trees lead down to a flat valley populated by a small town.](/blog/2023/07/unix-tools/idaho-mountains.webp)

@@ -7,6 +7,8 @@ tags:
 - remote-work
 - tips
 - vscode
+featured:
+  image_url: /blog/2023/08/synchronous-work-in-asynchronous-environments/windy-tree.webp
 ---
 
 ![A light green tree blows in strong winds, against a grey stormy sky.](/blog/2023/08/synchronous-work-in-asynchronous-environments/windy-tree.webp)
