@@ -293,7 +293,18 @@ try:
     if not author_name in all_authors:
         warnings.add(Warning(author_line, "Unrecognized author; please double check spelling if this isn't their first post"))
 except Exception as err:
-    print('There was an error getting the list of blog post authors' + err)
+    print('There was an error getting the list of blog post authors: ', err)
+
+try:
+    image_line = None
+    for line in frontmatter.lines:
+        if line.line.startswith('  image_url: '):
+            image_line = line
+
+    if image_line is None:
+        errors.add(Warning(frontmatter.lines[0], 'No featured image specified'))
+except Exception as err:
+    print('There was an error checking for a featured image: ', err)
 
 
 ###############
