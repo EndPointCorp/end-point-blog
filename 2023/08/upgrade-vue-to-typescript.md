@@ -1,18 +1,18 @@
 ---
 title: Upgrade Vue to TypeScript
 author: Nicholas Piano
-github_issue_number: 2001
-date: 2023-08-02
+github_issue_number: 2006
+featured:
+  image_url: /blog/2023/08/upgrade-vue-to-typescript/sunset-field.webp
+date: 2023-08-28
 tags:
 - vue
 - typescript
 ---
 
-![The view from a mountain ridge. the sky is light blue and partially covered in clouds. Green ridges covered in pine trees lead down to a flat valley populated by a small town.](/blog/2023/07/unix-tools/idaho-mountains.webp)
+![An expansive sky filled with faintly red clouds extends above a field turned red from the sunset. A layer of trees separates the field from the sky](/blog/2023/08/upgrade-vue-to-typescript/sunset-field.webp)
 
 <!-- Photo by Seth Jensen, 2023. -->
-
-### Introduction
 
 It's important to keep your code up to date so that time can be dedicated to improving an application instead of version-related mishaps. This is especially true for web development as the landscape changes so quickly. I recently upgraded a Vue project to exclusively use Vuex. This was a great opportunity to also upgrade the project from JavaScript to TypeScript. This article will cover the steps I took.
 
@@ -24,13 +24,13 @@ Several features of Vue, originally written in JavaScript without types, are har
 
 Before you begin, make sure the necessary dependencies are installed:
 
-```
+```plain
 ~$ vue add typescript
 ```
 
-Also make sure that VueX is installed:
+Also make sure that Vuex is installed:
 
-```
+```plain
 ~$ yarn add vuex@next
 ```
 
@@ -87,9 +87,9 @@ First, replace the default export with a class component:
 
 Note that the `name` property is no longer necessary. The name of the component is now the name of the class.
 
-Also, to illustrate the capability of the `@Component` decorator, the `props` property is passed as an argument. This allows the component to be used as before with no other changes. Shortly, we will replace `props` with class properties marked with the `@Prop` decorator.
+Also, to illustrate the capability of the `@Component` decorator, the `props` property is passed as an argument. This allows the component to be used as before with no other changes. Next, we will replace `props` with class properties marked by the `@Prop` decorator.
 
-#### Replace `props` with class properties marked with the `@Prop` decorator
+#### Replace `props` with class properties marked by the `@Prop` decorator
 
 The `@Prop` decorator is used to mark class properties as props. It accepts an optional argument to specify the type of the prop. If no argument is provided, the type is inferred from the default value.
 
@@ -284,19 +284,19 @@ This would be called from the parent component in the same way:
 </template>
 ```
 
-Now that your components have been converted, lets look at the store.
+Now that your components have been converted, let's look at the store.
 
 ### Convert your store
 
-State in VueX is managed using the `VueX.Store` object. Below is a basic example:
+State in Vuex is managed using the `Vuex.Store` object. Below is a basic example:
 
 ```typescript
 import Vue from 'vue'
-import VueX from 'vuex'
+import Vuex from 'vuex'
 
-Vue.use(VueX)
+Vue.use(Vuex)
 
-export default new VueX.Store({
+export default new Vuex.Store({
   state: {
     count: 0,
     msg: 'Hello World',
@@ -351,22 +351,22 @@ export default class MyComponent extends Vue {
 }
 ```
 
-Parts of the store can also be namespaced using the `modules` key in the store object.
+Parts of the store can also be namespaced using the `modules` key in the store object:
 
 ```typescript
 import Vue from 'vue'
-import VueX from 'vuex'
+import Vuex from 'vuex'
 
-Vue.use(VueX)
+Vue.use(Vuex)
 
 export default new Vuex.Store({
   modules: { ExampleModule },
 });
 ```
 
-Where a module is an object with the same structure as the store object. See the [VueX module documentation](https://vuex.vuejs.org/guide/modules.html) for more information.
+Where a module is an object with the same structure as the store object. See the [Vuex module documentation](https://vuex.vuejs.org/guide/modules.html) for more information.
 
-The namespaced state can then be typed and access from components:
+The namespaced state can then be typed and accessed from components:
 
 ```typescript
 import { Component } from 'vue-property-decorator';
