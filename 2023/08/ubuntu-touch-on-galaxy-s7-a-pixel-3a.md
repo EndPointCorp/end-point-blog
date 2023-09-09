@@ -8,15 +8,16 @@ tags:
 - mobile
 - ubuntu
 date: 2023-08-29
+github_issue_number: 2008
 ---
 
 ![A dark print on very old paper shows an armored knight on a horse, surrounded completely by swirling floral patterns. In a few places the pattern evolves into a flower or what appears to be a curved, long bird head.](/blog/2023/08/ubuntu-touch-on-galaxy-s7-a-pixel-3a/arabesque_with_knight-crop.webp)
 
 <!-- Image: Arabesque with Knight, Italian, niello print, unknown date. Retrieved from https://www.nga.gov/collection/art-object-page.4541.html -->
 
-I have a shoebox in my closet I call my "phone graveyard." At times I've had five or more old phones in there, in various states of decay — some have fully shattered screens, some broken USB ports, etc. But some still have quite usable hardware, their main drawback being how slow they run on modern versions of Android or iOS, and the lack of support for modern features.
+I have a shoebox in my closet I call my "phone graveyard." At times I've had five or more old phones in there, in various states of decay—some have fully shattered screens, some broken USB ports, etc. But some still have quite usable hardware, their main drawback being how slowly they run modern versions of Android or iOS, and the lack of support for modern features.
 
-It's always troubled me to have such incredible devices, with way more computing power than, say, a Raspberry Pi, gather dust because of software limitations. Even if I don't use an old phone for daily use any more, what if I could use it as a DNS server (like a Pi-Hole), or as a camera or media player?
+It has always troubled me to have such incredible devices, with way more computing power than, say, a Raspberry Pi, gather dust because of software limitations. Even if I don't use an old phone for daily use any more, what if I could use it as a DNS server (like a Pi-hole), or as a camera or media player?
 
 When I heard about Ubuntu Touch, it seemed like the perfect OS to bring back some long-term functionality to these old devices. Originally created by Canonical, it was soon abandoned but revived by UBports, who started community development in 2015. They actively maintain the OS for around 80 devices, including two I have in my phone graveyard: a Samsung Galaxy S7 and a Google Pixel 3a.
 
@@ -42,7 +43,7 @@ Audio playback had fairly frequent interruptions, at least on my Pixel 3a, makin
 
 However, most of the base functionality for web browsing, photos, and media playback seemed to work well.
 
-The inclusion of a fully-featured terminal emulator expands the possibilities greatly, allowing your old phone to act in place of a Raspberry pi for projects like a [Pi-Hole](/blog/2020/12/pihole-great-holiday-gift/).
+The inclusion of a fully-featured terminal emulator expands the possibilities greatly, allowing your old phone to act in place of a Raspberry Pi for projects like a [Pi-hole](/blog/2020/12/pihole-great-holiday-gift/).
 
 > The system is, by default, in read-only mode, requiring containers (the intent is to run the custom container system, [Libertine](https://docs.ubports.com/en/latest/userguide/dailyuse/libertine.html)) to run most apps. However, you can change it to read-write for a more traditional Linux system.
 > For more info on terminal capability, see [the UBports blog](https://ubports.com/en/blog/ubports-news-1/post/terminal-chapter-1-3082).
