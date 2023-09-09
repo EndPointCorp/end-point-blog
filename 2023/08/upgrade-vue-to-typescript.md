@@ -14,11 +14,13 @@ tags:
 
 <!-- Photo by Seth Jensen, 2023. -->
 
-It's important to keep your code up to date so that time can be dedicated to improving an application instead of version-related mishaps. This is especially true for web development as the landscape changes so quickly. I recently upgraded a Vue project to exclusively use Vuex. This was a great opportunity to also upgrade the project from JavaScript to TypeScript. This article will cover the steps I took.
+It's important to keep your code up to date so that time can be dedicated to improving an application instead of version-related mishaps. This is especially true for web development as the landscape changes so quickly.
+
+I recently upgraded a Vue project to exclusively use Vuex. This was a great opportunity to also upgrade the project from JavaScript to TypeScript. This article will cover the steps I took.
 
 Some of the changes can be difficult to understand if you are not familiar with TypeScript. I recommend reading the [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/intro.html) to become more familiar.
 
-Several features of Vue, originally written in JavaScript without types, are hard to convert to Typescript. These include `this.$parent`, `this.$refs`, and `this.$emit`. These allow you to access the parent component, child components, and emit events respectively. We will make changes to these features along with adding types to the global state handler provided by `Vuex.Store`.
+Several features of Vue, originally written in JavaScript without types, are hard to convert to TypeScript. These include `this.$parent`, `this.$refs`, and `this.$emit`. These allow you to access the parent component, child components, and emit events respectively. We will make changes to these features along with adding types to the global state handler provided by `Vuex.Store`.
 
 ### Installation
 
@@ -66,23 +68,23 @@ This change can be complicated to visualise, but the `@Component` decorator prov
 First, replace the default export with a class component:
 
 ```diff
-- export default {
--   name: 'App',
--   components: {
--     HelloWorld
--   },
--   props: ['msg'],
-- }
-+ import Component from 'vue-class-component'
-+ import { Vue } from 'vue-property-decorator'
+-export default {
+-  name: 'App',
+-  components: {
+-    HelloWorld
+-  },
+-  props: ['msg'],
+-}
++import Component from 'vue-class-component'
++import { Vue } from 'vue-property-decorator'
 +
-+ @Component({
-+   components: {
-+     HelloWorld
-+   },
-+   props: ['msg'],
-+ })
-+ export default class App extends Vue {}
++@Component({
++  components: {
++    HelloWorld
++  },
++  props: ['msg'],
++})
++export default class App extends Vue {}
 ```
 
 Note that the `name` property is no longer necessary. The name of the component is now the name of the class.
