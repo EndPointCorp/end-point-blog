@@ -92,7 +92,7 @@ SELECT functions_are( :functions );
 ```
 Example:
 ```postgresql
-SELECT functions_are('your_schema', ['add_numbers', <All other functions need to be listed as well>]);   -- default description used
+SELECT functions_are('your_schema', ARRAY['add_numbers', <All other functions need to be listed as well>]);   -- default description used
 ```
 Parameters
 ```
@@ -140,7 +140,7 @@ column values from this queried table. These variables are then used as the cond
 When testing this sort of scenario, it became apparent that I needed a set of test data, an ability to track that test data, run the function with the data, and test to see if the 
 changes are correctly, or incorrectly, performed. 
 
-The nice thing about pgTAP is that unit tests are meant to be rollbacked leaving the database as you found it. When faced with a more complex function that nests other functions which
+The nice thing about pgTAP is that unit tests are meant to be rolled back leaving the database as you found it. When faced with a more complex function that nests other functions which
 loop through multiple tables, it may make more sense to fill those tables temporarily with the data required for the tests. 
 
 Let's take a nostalgia trip and imagine we’re operating a DVD rental store. The Pagila sample database, which you can download on GitHub, represents our scenario. It comes populated
@@ -205,7 +205,7 @@ Relatively basic but handy Postgres tools let us create test cases which we can 
 `extension_check` and `christmas_extension` properly worked.
 
 For test cases in our new file, `extension_unit_tests.sql`, we’ll need a way to create and track them. For this, we’ll use a `temporary table` to track the test ids and a `PROCEDURE`
-which can be called at any point to create the test cases. After that, we’ll simply call the procedure and run the user-defined function `extension_check`. Finally test it’s existence,
+which can be called at any point to create the test cases. After that, we’ll simply call the procedure and run the user-defined function `extension_check`. Finally test its existence,
 test it’s result, and rollback our changes.
 
 ```postgresql
