@@ -15,7 +15,7 @@ Playwright is an open-source automation framework developed by Microsoft that al
 
 To begin web automation using C# and Playwright, follow these steps:
 
-1. **Prerequisites:** You should have .NET Core or .NET 5+ installed on our machine.
+1. **Prerequisites:** You should have .NET Core or .NET 5+ installed on your machine.
 
 2. **Create a New C# Project:** Lets start by creating a new C# console application.
    ```pwsh
@@ -86,7 +86,7 @@ To begin web automation using C# and Playwright, follow these steps:
 
 3. **Cross-Platform Support:** Test on Windows, Linux, and macOS, locally or on CI, headless or headed.
 
-2. **C# Language Familiarity:** Playwright API can be used with C#. Having familiarity with C# and usign it for web automation can reduce the learnig curve.
+2. **C# Language Familiarity:** Playwright API can be used with C#. Having familiarity with C# and using it for web automation can reduce the learning curve.
 
 3. **Robust Documentation:** Playwright's documentation and community support are robust, making it easier to troubleshoot issues and find solutions.
 
@@ -98,7 +98,7 @@ To begin web automation using C# and Playwright, follow these steps:
 
 7. **Emulation:** You can test your app on any browser or emulate a real device such as mobile phone or tablet. It can emulate behavior such as ``userAgent``, ``geolocation``, ``viewport`` and many  more. You can read more about it in the [emulation](https://playwright.dev/dotnet/docs/emulation) documentation
 
-There are many other features in playwright which are surely useful for any use cases.
+There are many other features in playwright which are surely useful for many use cases.
 
 **Conclusion**
 
