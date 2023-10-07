@@ -29,14 +29,14 @@ Feel free to work alongside this article to hopefully leave with a comfortable i
 
 For this first example, remember to have the pgTAP extension in your schema and to perform it in a transaction (I’ve omitted `BEGIN` and `ROLLBACK` for brevity). Also use `SELECT plan(<number of tests you’ll run>)` when running the pgTAP functions.
 
-Starting off, let's create a basic addition function that returns an INTEGER value:
+Starting off, let's create a basic addition function that returns an integer value:
 
 ```postgresql
 CREATE OR REPLACE FUNCTION add_numbers(
-    num1 INTEGER,
-    num2 INTEGER
+    num1 integer,
+    num2 integer
 )
-RETURNS INTEGER
+RETURNS integer
 LANGUAGE plpgsql AS $$
 BEGIN
     RETURN num1 + num2;
@@ -77,13 +77,13 @@ Parameters:
 Example:
 
 ```postgresql
-SELECT has_function('your_schema', 'add_numbers', ARRAY['INTEGER','INTEGER']); -- default description used
+SELECT has_function('your_schema', 'add_numbers', ARRAY['integer','integer']); -- default description used
 ```
 
 Results:
 
 ```plain
-ok 1 - Function add_numbers(INTEGER, INTEGER) should exist
+ok 1 - Function add_numbers(integer, integer) should exist
 ```
 
 `has_function()` is useful in checking the existence of a specific function. If you want to parse an entire schema, `functions_are()` is your command.
@@ -155,7 +155,7 @@ You can find functions that cover pretty much anything in PostgreSQL here in [pg
 
 ### Testing more complex user-defined stored functions:
 
-A client product we created utilizes a function that calls several other functions depending on its given argument. This function is called by the application and is passed an `INTEGER` as an argument from which the function bases an initial `SELECT` query’s `WHERE` condition on, in this case `WHERE id = [argument]`. Variables are then assigned column values from this queried table. These variables are then used as the conditions to `PERFORM` functions that change parts of the database.
+A client product we created utilizes a function that calls several other functions depending on its given argument. This function is called by the application and is passed an `integer` as an argument from which the function bases an initial `SELECT` query’s `WHERE` condition on, in this case `WHERE id = [argument]`. Variables are then assigned column values from this queried table. These variables are then used as the conditions to `PERFORM` functions that change parts of the database.
 
 When testing this sort of scenario, it became apparent that we needed a set of test data, as well as the ability to track that test data, run the function with the data, and test to see if the changes are performed correctly.
 
@@ -166,14 +166,14 @@ Let's take a nostalgia trip and imagine we’re operating a DVD rental store. Th
 Say the DVD rental shop gives extensions of rentals for special occasions, one being that a DVD was rented on Christmas week. Suppose we have an initial function that checks if a new DVD is rented on one of these special occasions. It then calls another function that will extend the return date, based on the specific occasion:
 
 ```postgresql
-CREATE OR REPLACE FUNCTION extension_check(_rental_id INTEGER)
+CREATE OR REPLACE FUNCTION extension_check(_rental_id integer)
     RETURNS void
     LANGUAGE plpgsql
 AS $function$
 DECLARE
     _rental_date date;
-    _inventory_id INT;
-    _customer_id INT;
+    _inventory_id integer;
+    _customer_id integer;
     _return_date date;
     christmas_week date;
 BEGIN
@@ -190,7 +190,7 @@ BEGIN
 END;
 $function$;
 
-CREATE OR REPLACE FUNCTION christmas_extension(_rental_id INTEGER)
+CREATE OR REPLACE FUNCTION christmas_extension(_rental_id integer)
     RETURNS void
     LANGUAGE plpgsql
 AS $function$
@@ -211,7 +211,7 @@ $function$;
 
 The initial function, `extension_check`, simply checks if the rental was checked out on the week prior to and on Christmas (It’s a really dedicated DVD shop). We can also assume a function like this has other scenarios where it would extend rental dates but we’ll just show one for this exercise; `christmas_extension` is our one extension function that extends the return date by ten days.
 
-To hold our unit test, we’ll create a file fittingly named `extenstion_unit_tests.sql`. A problem with the current sample database is that we can’t really test out the function
+To hold our unit test, we’ll create a file fittingly named extension_unit_tests.sql. A problem with the current sample database is that we can’t really test out the function
 directly since the dates don’t extend to the current year. Rather even if they did, we don’t want to directly affect the existing data especially if the dates were updated and the
 database was in production use.
 
@@ -223,23 +223,23 @@ For test cases in our new file, extension_unit_tests.sql, we’ll need a way to 
 BEGIN;
 
 CREATE TEMPORARY TABLE test_instance_references (
-    test_rental_id INT PRIMARY KEY,
-    test_number INT
+    test_rental_id integer PRIMARY KEY,
+    test_number integer
 );
 
 CREATE OR REPLACE PROCEDURE fill_test_data (
-    _rental_date DATE,
-    _test_number INT
+    _rental_date date,
+    _test_number integer
 )
 LANGUAGE PLPGSQL
 AS $procedure$
 DECLARE
-    _address_id INT;
-    _store_id INT;
-    _staff_id INT;
-    _inventory_id INT;
-    _customer_id INT;
-    _rental_id INT;
+    _address_id integer;
+    _store_id integer;
+    _staff_id integer;
+    _inventory_id integer;
+    _customer_id integer;
+    _rental_id integer;
 BEGIN
 
     SELECT nextval('customer_customer_id_seq1'::regclass) INTO _customer_id;
@@ -260,7 +260,7 @@ BEGIN
     INSERT INTO inventory (inventory_id, film_id, store_id)
     VALUES (
         _inventory_id,
-        (SELECT film_id FROM film LIMIT 1), -- random film
+        (SELECT film_id FROM film LIMIT 1), -- arbitrary film
         _store_id
     );
 
@@ -270,7 +270,7 @@ BEGIN
         _rental_date,
         _inventory_id,
         _customer_id,
-        (SELECT staff_id FROM staff WHERE store_id = _store_id LIMIT 1) -- select random staff member from store
+        (SELECT staff_id FROM staff WHERE store_id = _store_id LIMIT 1) -- select arbitrary staff member from store
     );
 
     INSERT INTO test_instance_references (test_rental_id, test_number)
@@ -282,7 +282,7 @@ BEGIN
 END;
 $procedure$;
 
-CALL fill_test_data('2023/12/25'::date, 1); -- Fill the db with our test data
+CALL fill_test_data('2023-12-25'::date, 1); -- Fill the db with our test data
 
 SELECT extension_check((SELECT test_rental_id FROM test_instance_references WHERE test_number = 1)); -- Call our user-defined function
 
@@ -295,7 +295,7 @@ SELECT has_function(
 
 SELECT is(
     (SELECT return_date FROM rental WHERE rental_id in (SELECT test_rental_id FROM test_instance_references WHERE test_number = 1))::date,
-    ('2023/12/25'::date + INTERVAL '10 DAYS')::date,
+    ('2023-12-25'::date + INTERVAL '10 DAYS')::date,
     'Checking test data 1, week of Christmas'
 );
 
@@ -322,13 +322,13 @@ The `ROLLBACK` is meant to clean the database of all test data.
 Let's run this unit test on the command line, with pg_prove:
 
 ```plain
-pg_prove -d <your_database> <path_to_your_unit_test>/extenstion_unit_tests.sql
+pg_prove -d <your_database> <path_to_your_unit_test>/extension_unit_tests.sql
 ```
 
 We should see these results:
 
 ```plain
-extenstion_unit_tests.sql .. ok
+extension_unit_tests.sql .. ok
 All tests successful.
 Files=1, Tests=2,  0 wallclock secs ( 0.01 usr +  0.00 sys =  0.01 CPU)
 Result: PASS
@@ -350,25 +350,25 @@ Finally, our `is()` will also iterate through our temporary table and perform a 
 BEGIN;
 
 CREATE TEMPORARY TABLE test_instance_references (
-    test_rental_id INT PRIMARY KEY,
-    test_number INT,
-    start_date DATE
+    test_rental_id integer PRIMARY KEY,
+    test_number integer,
+    start_date date
 );
 
 
 CREATE OR REPLACE PROCEDURE fill_test_data (
-        _start_date DATE,
-        _end_date DATE
+        _start_date date,
+        _end_date date
     )
     LANGUAGE PLPGSQL
     AS $procedure$
     DECLARE
         _address_id smallint;
         _store_id smallint;
-        _inventory_id INTEGER;
-        _customer_id INTEGER;
-        _rental_id INTEGER;
-        _test_number INT;
+        _inventory_id integer;
+        _customer_id integer;
+        _rental_id integer;
+        _test_number integer;
     BEGIN
         _test_number := 1;
 
@@ -386,14 +386,14 @@ CREATE OR REPLACE PROCEDURE fill_test_data (
                 'Test First Name',
                 'Test Last Name',
                 _address_id
-            ); --
+            );
 
             INSERT INTO inventory (inventory_id, film_id, store_id)
             VALUES (
                 _inventory_id,
-                (SELECT film_id FROM film LIMIT 1), -- random film
+                (SELECT film_id FROM film LIMIT 1), -- arbitrary film
                 _store_id
-            ); --
+            );
 
             INSERT INTO rental (rental_id, rental_date, inventory_id, customer_id, staff_id)
             VALUES (
@@ -401,7 +401,7 @@ CREATE OR REPLACE PROCEDURE fill_test_data (
                 _start_date,
                 _inventory_id,
                 _customer_id::smallint,
-                (SELECT staff_id FROM staff WHERE store_id = _store_id LIMIT 1) -- select random staff member from store
+                (SELECT staff_id FROM staff WHERE store_id = _store_id LIMIT 1) -- select arbitrary staff member from store
             );
 
             INSERT INTO test_instance_references (test_rental_id, test_number, start_date)
@@ -422,7 +422,7 @@ $procedure$;
 
 CALL fill_test_data(('2023-12-25'::date - INTERVAL '6 days')::date, '2023-12-25'::date);
 
-SELECT plan(count(*)::INTEGER + 1) from test_instance_references;
+SELECT plan(count(*)::integer + 1) from test_instance_references;
 
 SELECT * from test_instance_references;
 
@@ -445,8 +445,8 @@ ROLLBACK;
 Our results should be:
 
 ```plain
-$ pg_prove -d <your_database> <path_to_your_unit_test>/extenstion_unit_tests.sql
-extenstion_unit_tests.sql .. ok
+$ pg_prove -d <your_database> <path_to_your_unit_test>/extension_unit_tests.sql
+extension_unit_tests.sql .. ok
 All tests successful.
 Files=1, Tests=8,  0 wallclock secs ( 0.02 usr +  0.00 sys =  0.02 CPU)
 Result: PASS
