@@ -3,7 +3,7 @@ author: "Bimal Gharti Magar"
 title: "Introduction to Playwright using C#"
 date: 2023-10-12
 featured:
-  image_url: 
+  image_url: /blog/2023/10/introduction-to-playwright-in-csharp/sun-on-green-leaves.webp
 description: This blog post shows basic usage of Playwright while explaining the advantages of the Playwright, which you can use for any kind of web automation tasks.
 github_issue_number: 2012
 tags:
