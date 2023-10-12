@@ -5,8 +5,11 @@ date: 2023-10-12
 featured:
   image_url: 
 description: This blog post shows basic usage of Playwright while explaining the advantages of the Playwright, which you can use for any kind of web automation tasks.
+github_issue_number: 2012
 tags:
 - csharp
+- testing
+- automation
 ---
 
 ![In the foreground, the foliage of a light green tree edged with sunlight creates a line across the image. In the background, a mountain hillside with light dirt, intermittent exposed rock, and foliage just starting to turn the yellow, orange, and red colors of fall](/blog/2023/10/introduction-to-playwright-in-csharp/sun-on-green-leaves.webp)
