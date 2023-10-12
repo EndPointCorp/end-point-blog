@@ -25,17 +25,17 @@ Some examples of horizontal scalability:
 
 - Running your appserver (Rails, Django, etc.) on multiple servers, with a load balancer distributing traffic more-or-less evenly across those servers
 
-        - The entire application tier is scaled horizontally and can expand/contract as needed.
+    - The entire application tier is scaled horizontally and can expand/contract as needed.
 
-        - Session management becomes an issue; sessions either get moved to a shared component like the database, or server affinity techniques are used with the load balancer such that a single client/user always hits the same application server, so sessions can be file-based on each app server.
+    - Session management becomes an issue; sessions either get moved to a shared component like the database, or server affinity techniques are used with the load balancer such that a single client/user always hits the same application server, so sessions can be file-based on each app server.
 
-        - The database likely becomes the bottleneck for system capacity and performance.
+    - The database likely becomes the bottleneck for system capacity and performance.
 
 - Master/slave database replication, with multiple slave databases fronted by a load balancer distributing database reads across the slaves.
 
-        - Database reads, which in typical webapps account for the bulk of database queries, can be spread across multiple servers and are thus scaled horizontally.
+    - Database reads, which in typical webapps account for the bulk of database queries, can be spread across multiple servers and are thus scaled horizontally.
 
-        - The total number of slave databases is likely limited by the capacity of the master; each additional slave adds some overhead to the master, so diminishing returns eventually kick in.
+    - The total number of slave databases is likely limited by the capacity of the master; each additional slave adds some overhead to the master, so diminishing returns eventually kick in.
 
 The ease with which a given component can be scaled horizontally largely comes down to how it manages state, or, in other words: how it manages the data that it works with.
 

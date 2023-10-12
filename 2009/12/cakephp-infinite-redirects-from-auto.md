@@ -65,8 +65,9 @@ With the debug statement shown above, I was able to compare the normal and infin
 2009-12-09 11:43:31 Debug: 3f23b7f7bead5d23fd006b6d91b1d195:/sale:  User does not exist!
 2009-12-09 11:43:31 Debug: 3f23b7f7bead5d23fd006b6d91b1d195:/sale:  redirecting to /login
 ...
-<a href="https://1.bp.blogspot.com/_wWmWqyCEKEs/SyEsCNS5J6I/AAAAAAAACyc/B3qvQAD_XhA/s1600-h/whammy.jpg" onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5413656643516311458" src="/blog/2009/12/cakephp-infinite-redirects-from-auto/image-0.jpeg" style="display:block; margin:0px auto 10px; text-align:center;cursor:pointer; cursor:hand;width: 263px; height: 258px;"/></a>
 ```
+
+<a href="https://1.bp.blogspot.com/_wWmWqyCEKEs/SyEsCNS5J6I/AAAAAAAACyc/B3qvQAD_XhA/s1600-h/whammy.jpg" onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5413656643516311458" src="/blog/2009/12/cakephp-infinite-redirects-from-auto/image-1.jpeg" style="display:block; margin:0px auto 10px; text-align:center;cursor:pointer; cursor:hand;width: 263px; height: 258px;"/></a>
 
 What I immediately noticed was that sessions were dropped at every redirect on the infinite redirect path. So I researched a bit and found the following resources:
 

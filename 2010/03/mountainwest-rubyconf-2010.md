@@ -19,17 +19,17 @@ Last Thursday and Friday, I attended [MountainWest RubyConf](http://mtnwestrubyc
 - **NoSQL:** While Jon and I attended this conference, Ethan Rowe attended the [NoSQL Live](http://nosqlboston.eventbrite.com/) conference in Boston that he blogged about [here](/blog/2010/03/nosql-live-dynamo-derivatives-cassandra/) and [here](/blog/2010/03/quick-thoughts-on-nosql-live-boston/). There was a decent talk at MWRC on MongoDB with some examples on data interactions. The speaker discussed how NoSQL data “would be great” for CMS systems because of the diversity and amount of unknown attributes. I’m not quite sure I agree with that statement, but I’m interested in learning more about the business cases for NoSQL.
 - **A couple of random book recommendations:**
 
-        - [Programming from the Ground Up](https://www.amazon.com/Programming-Ground-Up-Jonathan-Bartlett/dp/0975283847) — recommended as a decent book for high-level programmers interested in learning about low-level programming
-        - [Design Patterns](https://www.amazon.com/Design-Patterns-Elements-Reusable-Object-Oriented/dp/0201633612) — includes **no** examples of Java, with examples of C++ and Smalltalk
-        - [Refactoring](https://www.amazon.com/Refactoring-Improving-Design-Existing-Code/dp/0201485672) — another recommended read
+    - [Programming from the Ground Up](https://www.amazon.com/Programming-Ground-Up-Jonathan-Bartlett/dp/0975283847) — recommended as a decent book for high-level programmers interested in learning about low-level programming
+    - [Design Patterns](https://www.amazon.com/Design-Patterns-Elements-Reusable-Object-Oriented/dp/0201633612) — includes **no** examples of Java, with examples of C++ and Smalltalk
+    - [Refactoring](https://www.amazon.com/Refactoring-Improving-Design-Existing-Code/dp/0201485672) — another recommended read
 
 - **Random tools:**
 
-        - git hooks with gitty
-        - git instaweb to browse git file structure and commit history without an internet connection
-        - memprof — profiler to watch for object allocations in Rails
-        - yardoc — documentation tool for ruby
-        - ruby-processing — a data visualization tool
+    - git hooks with gitty
+    - git instaweb to browse git file structure and commit history without an internet connection
+    - memprof — profiler to watch for object allocations in Rails
+    - yardoc — documentation tool for ruby
+    - ruby-processing — a data visualization tool
 
 - **Productivity and Happiness:** A common principle that comes up in Ruby/Rails conferences: A happy developer yields good productivity which leads to a happy developer. And Ruby/Rails makes developers happy, right? Well, I can’t speak for anyone else, but I like Ruby.
 

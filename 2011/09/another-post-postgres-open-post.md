@@ -5,10 +5,9 @@ github_issue_number: 500
 tags:
 - conference
 - postgres
+- bucardo
 date: 2011-09-22
 ---
-
-
 
 Well, that was fun! I’ve always found attending conferences to be an invigorating experience. The talks are generally very informative, it’s always nice to put a face to names seen online in the community, and between the “hall track”, lunches, and after-session social activities it’s difficult to not find engaging discussions.
 
@@ -22,5 +21,3 @@ My favorite presentations:
 But what of my talks? [Monitoring](http://joshwilliams.name/talks/monitoring/) went well—​it seemed to get the message out. There was a lot of “gee, I have Postgres, and Nagios, but they’re not talkin’. Now they can!” So hopefully, with a little more visibility into how the database is standing, the tools can boost confidence within business environments that aren’t as sure about Postgres and help keep existing installations in place. I think the [Bucardo presentation](https://bucardo.org/slides/b5_multi_master/) had me a bit more animated for some reason. That one also led to some interesting questions from the audience, and a couple challenges for the Bucardo project.
 
 All in all, great work everyone!
-
-

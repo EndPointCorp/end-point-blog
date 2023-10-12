@@ -1,5 +1,0 @@
----
-type: tags
-outputs:
-- json
----

@@ -5,7 +5,7 @@ date: 2022-01-05
 tags:
 - git
 - terminal
-- visual-studio-code
+- vscode
 - intellij-idea
 - tips
 github_issue_number: 1816

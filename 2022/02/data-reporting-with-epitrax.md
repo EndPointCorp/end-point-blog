@@ -4,12 +4,14 @@ author: Shannon Sandall
 date: 2022-02-16
 github_issue_number: 1833
 tags:
+- casepointer
 - epitrax
 - clients
 - case-study
 - emsa
 featured:
   endpoint: true
+  casepointer: true
   image_url: /blog/2022/02/data-reporting-with-epitrax/20220107_002143-sm.webp
 description: Rapid response to the pandemic by customizing open-source public health software
 ---

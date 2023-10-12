@@ -12,7 +12,7 @@ I typed “Unicode” into an online translator, and it responded saying it had 
 
 Recently a client sent over a problem getting some of their Postgres data through an ASCII-only ETL process.  They only needed to worry about some occasional accent marks, and not any of the more uncommon or odd Unicode characters, thankfully. ☺ Or so we thought.  The [unaccent extension](http://www.postgresql.org/docs/current/interactive/unaccent.html) was a great starting point, but the problem they sent over boiled down to this:
 
-```
+```plain
 postgres=# SELECT unaccent('e é ѐ');
  unaccent 
 ----------
@@ -32,28 +32,28 @@ But if you can’t or just don’t want to go down that path, the unaccent exten
 
 1. Make a copy of the file before you edit it.  Updated packages or new deployments if you’re compiling from source will wipe out any changes to the unaccent.rules file.
 
-    ```
+    ```plain
     root:~# cp /usr/share/postgresql/9.3/tsearch_data/{unaccent,extended}.rules
     ```
 
 2. Add a line including the character to translate.  To handle our example above, add:
 
-    ```
+    ```plain
     ѐ e
     ```
 
 3. In Postgres, create a new dictionary to load in those rules.
 
-    ```
+    ```plain
     db=# CREATE TEXT SEARCH DICTIONARY extended (TEMPLATE=unaccent, RULES='extended');
     CREATE TEXT SEARCH DICTIONARY
     ```
 
-Note that 'extended' above will point to the extended.rules file.
+    Note that 'extended' above will point to the extended.rules file.
 
 4. Call unaccent() specifying the newly added dictionary:
 
-    ```
+    ```plain
     db=# SELECT unaccent('extended', 'e é ѐ');
      unaccent 
     ----------
@@ -61,9 +61,9 @@ Note that 'extended' above will point to the extended.rules file.
     (1 row)
     ```
 
-5+. Note that subsequent changes won’t automatically appear.  To update the in-database version, after you make any changes to the rules file run:
+5. Note that subsequent changes won’t automatically appear.  To update the in-database version, after you make any changes to the rules file run:
 
-    ```
+    ```plain
     db=# ALTER TEXT SEARCH DICTIONARY extended (RULES='extended');
     ALTER TEXT SEARCH DICTIONARY
     ```

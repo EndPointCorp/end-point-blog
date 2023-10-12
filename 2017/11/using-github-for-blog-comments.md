@@ -6,6 +6,7 @@ tags:
 - javascript
 - community
 - api
+- static-site-generator
 date: 2017-11-14
 ---
 

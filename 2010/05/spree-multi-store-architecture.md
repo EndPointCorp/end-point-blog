@@ -12,12 +12,12 @@ date: 2010-05-24
 
 Running multiple stores from a single ecommerce platform instance seems to be quite popular these days. End Point has worked with several clients in developing a multi-store architecture running from one Interchange installation. In the case of our work with Backcountry.com, the data structure requires that a site_id column be included in product and navigation tables to specify which stores products and categories belong to. Frontend views are generated and “partial views” or “view components” are organized into a per-site directory structure and database calls request products against the current site_id. Below is a simplified view of the data structure used for Backcountry.com’s multi-site architecture.
 
-<img alt="" border="0" id="BLOGGER_PHOTO_ID_5474988768862554114" src="/blog/2010/05/spree-multi-store-architecture/image-0.png" style="display:block; margin:0px auto 10px; text-align:center;cursor:pointer; cursor:hand;width: 600px;"/>
+<img src="/blog/2010/05/spree-multi-store-architecture/image-0.png" /><br />
 Basic multi-store data architecture
 
 A similar data model was implemented and enhanced for another client, College District. A site_id column exists in multiple tables including the products and navigation tables, and sites can only access data in the current site schema. College District takes one step further in development for appearance management by storing CSS values in the database and enabling CSS stylesheet generation on the fly with the stored CSS settings. This architecture works well for College District because it allows the owners to quickly publish new sites. Below is a simplified view of the data structure used for College District, where the table site_variables contains CSS values (text, background colors, etc.).
 
-<a href="/blog/2010/05/spree-multi-store-architecture/image-1-big.png" onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5474988776225922114" src="/blog/2010/05/spree-multi-store-architecture/image-1.png" style="display:block; margin:0px auto 10px; text-align:center;cursor:pointer; cursor:hand;width: 321px; height: 400px;"/></a>
+<a href="/blog/2010/05/spree-multi-store-architecture/image-1-big.png"><img src="/blog/2010/05/spree-multi-store-architecture/image-1.png" /></a>
 
 Extended multi-store data architecture where site_variables table contains CSS settings. The store frontend can access data in the current store schema only.
 
@@ -27,7 +27,7 @@ In the past year, running a multi-site setup has been a popular topic in the use
 
 First, the [Spree multi-domain extension](https://github.com/railsdog/spree-multi-domain) developed by the Spree core team serves as a strong starting point. The extension migrations produce the data structure shown below, by creating a new table stores and products_stores, and adding a store_id column to the tracker (Google Analytics data) and orders table.
 
-<a href="/blog/2010/05/spree-multi-store-architecture/image-2-big.png" onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5474988780275467810" src="/blog/2010/05/spree-multi-store-architecture/image-2.png" style="display:block; margin:0px auto 10px; text-align:center;cursor:pointer; cursor:hand;width: 364px; height: 365px;"/></a>
+<a href="/blog/2010/05/spree-multi-store-architecture/image-2-big.png"><img src="/blog/2010/05/spree-multi-store-architecture/image-2.png" /></a>
 
 Code changes in addition to data model changes are:
 
@@ -45,8 +45,8 @@ In my project, there were additional changes required. I used the [Spree static 
 
 <table cellpadding="10" cellspacing="10" width="100%">
 <tbody><tr>
-<td><a href="/blog/2010/05/spree-multi-store-architecture/image-3-big.png" onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5474988785405267394" src="/blog/2010/05/spree-multi-store-architecture/image-3.png" style="display:block; margin:0px auto 10px; text-align:center;cursor:pointer; cursor:hand;width: 143px; height: 150px;"/></a></td>
-<td><a href="/blog/2010/05/spree-multi-store-architecture/image-4-big.png" onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5474988788307900834" src="/blog/2010/05/spree-multi-store-architecture/image-4.png" style="display:block; margin:0px auto 10px; text-align:center;cursor:pointer; cursor:hand;width: 400px; height: 142px;"/></a></td>
+<td><a href="/blog/2010/05/spree-multi-store-architecture/image-3-big.png"><img src="/blog/2010/05/spree-multi-store-architecture/image-3.png" /></a></td>
+<td><a href="/blog/2010/05/spree-multi-store-architecture/image-4-big.png"><img src="/blog/2010/05/spree-multi-store-architecture/image-4.png" /></a></td>
 </tr>
 <tr><td>
 Basic Spree static pages data model.

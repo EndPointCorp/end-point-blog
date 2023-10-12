@@ -31,11 +31,13 @@ end
 
 As you can see, when an admin uploads an image, four image sizes are created: large, product, small, and mini.
 
+<p>
 <img alt="" border="0" id="BLOGGER_PHOTO_ID_5615185163090719650" src="/blog/2011/06/paperclip-spree-overriding-product/image-0.jpeg" style="width: 160px;"/>
 <img alt="" border="0" id="BLOGGER_PHOTO_ID_5615185163090719650" src="/blog/2011/06/paperclip-spree-overriding-product/image-0.jpeg" style="width: 120px;"/>
 <img alt="" border="0" id="BLOGGER_PHOTO_ID_5615185163090719650" src="/blog/2011/06/paperclip-spree-overriding-product/image-0.jpeg" style="width: 100px;"/>
-<img alt="" border="0" id="BLOGGER_PHOTO_ID_5615185163090719650" src="/blog/2011/06/paperclip-spree-overriding-product/image-0.jpeg" style="width: 48px;"/>
+<img alt="" border="0" id="BLOGGER_PHOTO_ID_5615185163090719650" src="/blog/2011/06/paperclip-spree-overriding-product/image-0.jpeg" style="width: 48px;"/><br>
 Four images are created per product image uploaded in Spree (Note: not to scale).
+</p>
 
 Last week, I wanted to add several additional sizes to be created upon upload to improve performance. This involved several steps, described below.
 

@@ -6,7 +6,7 @@ tags:
 - tips
 - tools
 - vim
-- visual-studio-code
+- vscode
 - intellij-idea
 github_issue_number: 1868
 ---

@@ -8,13 +8,14 @@ tags:
 - database
 - open-source
 - postgres
+- bucardo
+- replication
 date: 2010-05-24
 ---
 
-<a href="/blog/2010/05/postgres-conference-pgcon2010-day-two/image-0-big.png" onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5473789666231795170" src="/blog/2010/05/postgres-conference-pgcon2010-day-two/image-0.png" style="margin: 0pt 10px 10px 0pt; float: left; cursor: pointer; width: 128px; height: 128px;"/>
-</a>
+<img src="/blog/2010/05/postgres-conference-pgcon2010-day-two/image-0.png" />
 
-[Day two of](postgres-conference-pgcon2010-day-two/image-0-big.png) [the PostgreSQL Conference](http://www.pgcon.org/2010/) started a little later than the previous day in obvious recognition of the fact that many people were up very, very late the night before. (Technically, this is day four, as the first two days consisted of tutorials; this was the second day of “talks”).
+Day two of [the PostgreSQL Conference](http://www.pgcon.org/2010/) started a little later than the previous day in obvious recognition of the fact that many people were up very, very late the night before. (Technically, this is day four, as the first two days consisted of tutorials; this was the second day of “talks”.)
 
 The first talk I went to was [PgMQ: Embedding messaging in PostgreSQL](http://www.pgcon.org/2010/schedule/events/251.en.html) by Chris Bohn. It was well attended, although there were definitely a lot of late-comers and bleary eyes. A tough slot to fill! Chris is from Etsy.com and I’ve worked with him there, although I had no interaction with the PgMQ project, which looks pretty cool. From the talk description:
 
@@ -22,21 +23,16 @@ The first talk I went to was [PgMQ: Embedding messaging in PostgreSQL](http://ww
 
 As near as I can tell, “eventually consistent” is the same as “asynchronous replication”: the slave won’t be the same as the master right away, but will be eventually. As with Bucardo and Slony, the actual lag is very small in practice: a handful of seconds at the most. I like the fact that it supports all those common messaging protocols. Chris mentioned in the talk that it should be possible for other systems like Bucardo to support something similar. I’ll have to play around with PgMQ a bit and see about doing just that. :)
 
-<img alt="The typical post-talk gatherings" border="0" id="BLOGGER_PHOTO_ID_5474936538302599138" src="/blog/2010/05/postgres-conference-pgcon2010-day-two/image-1.jpeg" style="cursor: pointer; width: 320px; height: 240px;"/>
+<img src="/blog/2010/05/postgres-conference-pgcon2010-day-two/image-1.jpeg" /><br />
 *The typical post-talk gatherings*
 
 The next “talk” was the enigmatically labeled [Replication Panel](http://www.pgcon.org/2010/schedule/events/268.en.html). Enigmatic in this case as it had no description whatsoever. It’s a good thing I had decided to check it out anyway (I’m a sucker for any talk related to replication, in case it wasn’t obvious yet). I was apparently nominated to be on the panel, representing Bucardo! So much for getting all my speaking done and over with the first day. The panel represented a pretty wide swatch of Postgres replication technologies, and by the people who are very deep in the development of each one. From left to right on a cluster of stools at the front of the room was:
 
 - [Londiste](https://web.archive.org/web/20100529094424/http://skytools.projects.postgresql.org/doc/londiste.cmdline.html) (Marko Kreen)
-
 - [Slony](http://slony.info/) (Jan Wieck)
-
 - [pgpool-II](https://wiki.postgresql.org/wiki/Pgpool-II) ([Tatsuo Ishii](http://www.pgcon.org/2008/schedule/speakers/95.en.html))
-
 - [Hot standby](https://wiki.postgresql.org/wiki/Hot_Standby) and [Streaming replication](https://wiki.postgresql.org/wiki/Streaming_Replication) (Heikki Linnakangas)
-
 - [Bucardo](https://bucardo.org/) (Greg Sabino Mullane)
-
 - [Golconde](https://code.google.com/archive/p/golconde/) (Gavin M. Roy)
 
 After a quick one-minute each intro describing who we were and what our replication system was, we took questions from the audience. Rather, Dan Langille played the part of the moderator and gathered written questions from the audience which he read to us, and we each took turns answering. We managed to get through 16 questions. All were interesting, even if some did not apply to all the solutions. Some of the more relevant ones I remember:
@@ -65,10 +61,11 @@ The final talk I went to was [Deploying and testing triggers and functions in mu
 
 I had to catch an early flight, and was not able to catch the final talk slot of the day, nor the closing session or the BOFs that night. Hopefully someone who did catch those will blog about it and let me know how it went. I hear the t-shirt we signed at the developer’s meeting went for a sweet ransom.
 
-If you went to PgCon, I have two requests for you.
+<img src="/blog/2010/05/postgres-conference-pgcon2010-day-two/image-2.jpeg" />
 
-<a href="/blog/2010/05/postgres-conference-pgcon2010-day-two/image-2-big.jpeg" onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5474935485723884514" src="/blog/2010/05/postgres-conference-pgcon2010-day-two/image-2.jpeg" style="margin: 0pt 10px 10px 0pt; float: left; cursor: pointer; width: 228px; height: 266px;"/></a>
+If you went to PgCon, I have two requests for you:
 
- First, please fill out the feedback for each talk you went to. It takes less than a minute per talk, and is invaluable for both the speakers and the conference organizers. Second, please blog about PgCon. It’s helpful for people who did not get to go to see the conference through other people’s eyes. And do it now, while things are still fresh.
+* First, please fill out the feedback for each talk you went to. It takes less than a minute per talk, and is invaluable for both the speakers and the conference organizers.
+* Second, please blog about PgCon. It’s helpful for people who did not get to go to see the conference through other people’s eyes. And do it now, while things are still fresh.
 
 If you did not go to PgCon, I have one request for you: go next year! Perhaps next year at PgCon 2011 we’ll break the 200 person mark. Thanks to Dan Langille as always for creating PgCon and keeping it running smooth year after year.

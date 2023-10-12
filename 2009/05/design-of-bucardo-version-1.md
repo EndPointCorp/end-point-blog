@@ -5,10 +5,9 @@ github_issue_number: 146
 tags:
 - database
 - postgres
+- bucardo
 date: 2009-05-15
 ---
-
-
 
 Since [PGCon 2009](http://www.pgcon.org/2009/) begins next week, I thought it would be a good time to start publishing some history of the [Bucardo replication system](https://bucardo.org/) for [PostgreSQL](https://www.postgresql.org/). Here I will cover only Bucardo version 1 and leave Bucardo versions 2 and 3 for a later post.
 
@@ -236,5 +235,3 @@ Greg Sabino Mullane then created Bucardo 2, which is a rearchitected system buil
 ### The Name
 
 I originally gave Bucardo 1 the fairly descriptive but uninspiring name “sync-tables”. Greg Sabino Mullane came up with the name Bucardo, a reference to the logo of this program’s patron, Backcountry.com. You can read about attempts to clone the extinct bucardo in the Wikipedia articles [Bucardo](https://en.wikipedia.org/wiki/Bucardo) and [Cloning](https://en.wikipedia.org/wiki/Cloning).
-
-

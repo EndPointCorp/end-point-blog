@@ -2,7 +2,11 @@
 author: Elizabeth Garrett Christensen
 title: 'EMSA: Electronic Messaging Staging Area'
 github_issue_number: 1680
+featured:
+  casepointer: true
+  image_url: /blog/2020/10/electronic-messaging-staging-area/emsa-banner.jpg
 tags:
+- casepointer
 - epitrax
 - open-source
 - emsa
