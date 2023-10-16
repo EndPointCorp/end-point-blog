@@ -101,7 +101,7 @@ Some of the useful features of Playwright with C# include:
 4. **Robust Documentation:** Playwright's documentation and community support make it easier to troubleshoot issues and find solutions.
 5. **Headless and Headful Browsing:** Playwright allows you to choose between headless and headed mode. Debugging issues in headed mode can be much easier, since we can see what's going on in every line of code.
 6. **Powerful APIs:** With Playwright's APIs, you can perform complex web automation tasks with ease.
-7. **Powerful Tooling:** PLaywright has tooling like [Codegen](https://playwright.dev/dotnet/docs/codegen), [Playwright inspector](https://playwright.dev/dotnet/docs/debug#playwright-inspector), and [Trace Viewer](https://playwright.dev/dotnet/docs/trace-viewer-intro). They can help make using Playwright easier.
+7. **Powerful Tooling:** Playwright has tooling like [Codegen](https://playwright.dev/dotnet/docs/codegen), [Playwright inspector](https://playwright.dev/dotnet/docs/debug#playwright-inspector), and [Trace Viewer](https://playwright.dev/dotnet/docs/trace-viewer-intro). They can help make using Playwright easier.
 8. **Emulation:** You can test your app on any browser or emulate a real device such as mobile phone or tablet. It can emulate behavior such as `userAgent`, `geolocation`, `viewport`, and many more. You can read more about it in the [emulation](https://playwright.dev/dotnet/docs/emulation) documentation.
 
 The powerful combination of C# and Playwright makes it a preferred tool for automating web tasks. When there are repetitive tasks or browser testing involved, Playwright can help you with getting the tasks done.
