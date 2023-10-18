@@ -27,7 +27,7 @@ We will look at how to load Algolia with data, configure search options, and con
 
 ### Loading the Index with Data
 
-To start using Algolia’s search, you need to load up an Index with data. You have the option of manually uploading a JSON file, or using Algolia’s API to programmatically load records. For our backend, we chose to use Algolia's [Javascript API Client]() in some lightweight Typescript scripts that are triggered by cron. These scripts allowed us to sync inventory data between Salesforce and the index in Algolia.
+To start using Algolia’s search, you need to load up an Index with data. You have the option of manually uploading a JSON file, or using Algolia’s API to programmatically load records. For our backend, we chose to use Algolia's [Javascript API Client](https://www.npmjs.com/package/algoliasearch) in some lightweight Typescript scripts that are triggered by cron. These scripts allowed us to sync inventory data between Salesforce and the index in Algolia.
 
 Using the Algolia Javascript Client is quite simple. Regardless of where your data comes from–-be it in a database, a platform like Salesforce, etc.–-once it is in JSON format, you can load it into Algolia with a few lines of code:
 
@@ -141,7 +141,7 @@ categoryAttrs: ['categories.lvl0', 'categories.lvl1', 'categories.lvl2'],
 
 These represent the three level of categories in our data (zero-based), and are used to build the hierarchical menu. 
 
-Finally, the `sort-by` attribute points to a simple function that uses the Javascript `toLocalCompare` method to provide alphanumeric sorting:
+Finally, the `sort-by` attribute points to a simple function that uses the Javascript `localeCompare` method to provide alphanumeric sorting:
 
 ```javascript
 hierarchicalMenuSort(a, b) {
