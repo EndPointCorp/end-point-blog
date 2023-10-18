@@ -14,7 +14,7 @@ Because my specific involvement in SEO has focused on technical SEO, I was surpr
 
 With good organization and humor, Carolyn first presented the “ABCs of Organic Keyword Research and Selection”: A is for analytics and knowing your audience. B is for brainstorm and bonus. and C is for **Cookie!**, crunch the numbers, cull the lists, and create a final list of keywords.
 
-On the analytics side, Carolyn mentioned good sources of analytics include web server logs ([read my article on the value of log or bot parsing](/blog/2009/03/end-point-search-engine-bot-parsing)), Google Analytics “traffic generating” keyword list, and logs from internal site search.
+On the analytics side, Carolyn mentioned good sources of analytics include web server logs ([read my article on the value of log or bot parsing](/blog/2009/03/end-point-search-engine-bot-parsing/)), Google Analytics “traffic generating” keyword list, and logs from internal site search.
 
 In regards to knowing your audience, Carolyn shared her personal experience of focus group research: For a project that targeted teenage girls, she invited her daughter and several of her daughter’s friends to join her around the table with laptops. She showed them a picture and ask them to search for that image. She recorded the search terms used and used this information to help understand her target audience behavior.
 

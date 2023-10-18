@@ -17,7 +17,7 @@ I was born in Yekaterinburg. It’s a middle-sized town in Russia.
 
 Most likely you don’t know where it is. So let me show you:
 
-```js
+```html
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -176,7 +176,7 @@ $scope.updateLayers = function() {
 };
 ```
 
-#### Back to the history:
+#### Back to the history
 
 Yekaterinburg was founded on November 7, 1723. This is the date of the first test-run of the forging hammers in the new factory. The original factory design by Tatishew had 40 forging hammers and 4 blast furnaces. That may well have made it the best equipped and most productive factory of its time.
 
@@ -231,7 +231,7 @@ APP.zoomToEntity = function(name) {
 
 I’ve added object timespans via extended data. If you want to use the Cesium/GE default timeline, you should do it via a *TimeSpan* section in the KML’s entries:
 
-```html
+```xml
 <timespan>
   <begin>2000-01-00T00:00:00Z</begin>
     <end>2000-02-00T00:00:00Z</end>
@@ -244,4 +244,4 @@ Using *APP.filterEtityByY* and *APP.zoomToEntity* it’s relatively easy to conn
 
 <div class="separator" style="clear: both; text-align: left;"><a href="/blog/2016/03/story-telling-with-cesium/image-3-big.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="/blog/2016/03/story-telling-with-cesium/image-3.png"/></a></div>
 
-You can see how all these elements work together at [https://dmitry.endpoint.com/cesium/ekb](https://dmitry.endpoint.com/cesium/ekb),  the sources are on Github at [https://github.com/kiselev-dv/EkbHistory/tree/master](https://github.com/kiselev-dv/EkbHistory/tree/master).
+You can see how all these elements work together at https://dmitry.endpointdev.com/cesium/ekb/ and the sources are on GitHub: https://github.com/kiselev-dv/EkbHistory/tree/master

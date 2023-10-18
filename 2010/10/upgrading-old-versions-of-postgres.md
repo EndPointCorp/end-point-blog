@@ -6,6 +6,8 @@ tags:
 - database
 - open-source
 - postgres
+- bucardo
+- replication
 date: 2010-10-11
 ---
 
@@ -46,5 +48,3 @@ Even if you don’t go to 9.0, you may want to upgrade to a newer version. Why n
 ### 3. Stay on your release
 
 This is obviously the least-desirable option, but may be necessary due to real-world constraints involving time, testing, compatibility with other programs, etc. At the bare minimum, make sure you are at least running the latest revision, e.g. 7.4.30 if running 7.4. Moving forward, you will need to keep an eye on the Postgres commits list and/or the detailed release notes for new versions, and examine if any of the fixed bugs apply to your version or your situation. If they do, you’ll need to figure out how to apply the patch to your older version, and then release this new version into your environment. Sound risky? It gets worse, because your patch is only being used and tested by an extremely small pool of people, has no build farm support, and is not available to the Postgres developers. If you want to go this route, there are companies familiar with the Postgres code base (including End Point) that will help you do so. But know in advance that we are also going to push you very hard to upgrade to a modern, supported version instead (which we can help you with as well, of course :).
-
-

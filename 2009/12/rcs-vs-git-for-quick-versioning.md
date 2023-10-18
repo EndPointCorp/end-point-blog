@@ -7,7 +7,7 @@ tags:
 date: 2009-12-02
 ---
 
-As a consultant, I’m often called to make changes on production systems—​sometimes in a hurry. One of my rules is to document all changes I make, no matter how small or unimportant they may seem. In addition to local notes, I always check in any files I change, or might change in the future, into version control. In the past, I would always use RCS. However, [Jon Jensen](/team/jon-jensen) challenged me to rethink my automatic use of RCS and give Git a try for this.
+As a consultant, I’m often called to make changes on production systems—​sometimes in a hurry. One of my rules is to document all changes I make, no matter how small or unimportant they may seem. In addition to local notes, I always check in any files I change, or might change in the future, into version control. In the past, I would always use RCS. However, [Jon Jensen](/team/jon-jensen/) challenged me to rethink my automatic use of RCS and give Git a try for this.
 
 This makes sense on some levels. We use Git for most everything here at End Point, and it is our preferred version control system. I still use other systems: there are some clients and projects that require the use of Subversion, Mercurial, and even CVS. The advantage of Git for quick one off checkins is that, similar to RCS, there is no central repository, and setup is extremely easy.
 

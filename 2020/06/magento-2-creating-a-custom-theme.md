@@ -12,7 +12,7 @@ date: 2020-06-24
 ![blue and yellow paint from a tube on a canvas](/blog/2020/06/magento-2-creating-a-custom-theme/paint-orange-blue.jpg)
 [Photo](https://flic.kr/p/Se3vkA) by [Maria Eklind](https://www.flickr.com/photos/mariaeklind/), [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/)
 
-In my previous post, we went through the steps needed to [create a custom module in Magento 2](/blog/2020/04/magento-2-creating-a-custom-module). While modules consist of a set of classes to add new features to Magento, a theme controls how these features, and the entire website in general, will be displayed to the user. As stated in the [Magento guide](https://devdocs.magento.com/guides/v2.3/frontend-dev-guide/themes/theme-overview.html), a theme uses a combination of custom templates, layouts, styles, and images to provide a consistent look and feel across a Magento store.
+In my previous post, we went through the steps needed to [create a custom module in Magento 2](/blog/2020/04/magento-2-creating-a-custom-module/). While modules consist of a set of classes to add new features to Magento, a theme controls how these features, and the entire website in general, will be displayed to the user. As stated in the [Magento guide](https://devdocs.magento.com/guides/v2.3/frontend-dev-guide/themes/theme-overview.html), a theme uses a combination of custom templates, layouts, styles, and images to provide a consistent look and feel across a Magento store.
 
 ### Creating a new Magento 2 theme
 

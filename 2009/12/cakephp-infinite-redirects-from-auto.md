@@ -7,7 +7,7 @@ tags:
 date: 2009-12-10
 ---
 
-Lately, [Ron](/team/ron-phipps), Ethan, and I have been blogging about several of our CakePHP learning experiences, such as [incrementally migrating to CakePHP](/blog/2009/12/iterative-migration-of-legacy), [using the CakePHP Security component](/blog/2009/12/using-security-component-and), and [creating CakePHP fixtures for HABTM relationships](/blog/2009/11/test-fixtures-for-cakephp-has-and). This week, I came across another blog-worthy topic while troubleshooting for [JackThreads](https://www.jackthreads.com) that involved auto login, requests that were forced to be secure, and infinite redirects.
+Lately, [Ron](/team/ron-phipps/), Ethan, and I have been blogging about several of our CakePHP learning experiences, such as [incrementally migrating to CakePHP](/blog/2009/12/iterative-migration-of-legacy/), [using the CakePHP Security component](/blog/2009/12/using-security-component-and/), and [creating CakePHP fixtures for HABTM relationships](/blog/2009/11/test-fixtures-for-cakephp-has-and/). This week, I came across another blog-worthy topic while troubleshooting for [JackThreads](https://www.jackthreads.com) that involved auto login, requests that were forced to be secure, and infinite redirects.
 
 <a href="https://2.bp.blogspot.com/_wWmWqyCEKEs/SyErTpCsuAI/AAAAAAAACyU/mLM1yidKsK0/s1600-h/infinite_redirect.png" onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5413655843510728706" src="/blog/2009/12/cakephp-infinite-redirects-from-auto/image-0.png" style="display:block; margin:0px auto 10px; text-align:center;cursor:pointer; cursor:hand;width: 400px; height: 201px;"/></a>
 
@@ -65,8 +65,9 @@ With the debug statement shown above, I was able to compare the normal and infin
 2009-12-09 11:43:31 Debug: 3f23b7f7bead5d23fd006b6d91b1d195:/sale:  User does not exist!
 2009-12-09 11:43:31 Debug: 3f23b7f7bead5d23fd006b6d91b1d195:/sale:  redirecting to /login
 ...
-<a href="https://1.bp.blogspot.com/_wWmWqyCEKEs/SyEsCNS5J6I/AAAAAAAACyc/B3qvQAD_XhA/s1600-h/whammy.jpg" onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5413656643516311458" src="/blog/2009/12/cakephp-infinite-redirects-from-auto/image-0.jpeg" style="display:block; margin:0px auto 10px; text-align:center;cursor:pointer; cursor:hand;width: 263px; height: 258px;"/></a>
 ```
+
+<a href="https://1.bp.blogspot.com/_wWmWqyCEKEs/SyEsCNS5J6I/AAAAAAAACyc/B3qvQAD_XhA/s1600-h/whammy.jpg" onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5413656643516311458" src="/blog/2009/12/cakephp-infinite-redirects-from-auto/image-1.jpeg" style="display:block; margin:0px auto 10px; text-align:center;cursor:pointer; cursor:hand;width: 263px; height: 258px;"/></a>
 
 What I immediately noticed was that sessions were dropped at every redirect on the infinite redirect path. So I researched a bit and found the following resources:
 

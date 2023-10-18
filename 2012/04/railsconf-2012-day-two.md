@@ -10,7 +10,7 @@ tags:
 date: 2012-04-24
 ---
 
-I’m here in Austin for Day 2 of RailsConf 2012. Here’s a quick run-down of a few talks I attended today. Read about a couple of sessions I attended on Day 1 [here](/blog/2012/04/railsconf-2012-day-one).
+I’m here in Austin for Day 2 of RailsConf 2012. Here’s a quick run-down of a few talks I attended today. Read about a couple of sessions I attended on Day 1 [here](/blog/2012/04/railsconf-2012-day-one/).
 
 ### Let’s Make the Web Faster
 
@@ -18,12 +18,16 @@ One of the talks I attended on Day 2 was *Let’s Make the Web Faster — tips f
 
 - [Navigation Timing Spec](https://web.archive.org/web/20120504042036/http://test.w3.org/webperf/specs/NavigationTiming/): The navigation timing spec defining an interface for web applications to access timing information related to navigation and elements. You can look at this timing information by checking out the performance object in a console:
 
-<img border="0" src="/blog/2012/04/railsconf-2012-day-two/image-0.jpeg" width="600"/>
-Example output of navigation timing spec data.
+    <img border="0" src="/blog/2012/04/railsconf-2012-day-two/image-0.jpeg" width="600"/>
+
+    Example output of navigation timing spec data.
 
 - Site Speed Tools in Google Analytics: Google Analytics now has elements of the page speed broken down that allows you to compare page load times and examine what the bottlenecks in the system are. To get there, you go to Content => Site Speed => Page Timings in Google Analytics. You can also measure and examine this data using Segments and Advanced segments.
-<img border="0" src="/blog/2012/04/railsconf-2012-day-two/image-1.png" width="600"/>
-Example metrics shown on Google Site Speed breakdown.
+
+    <img border="0" src="/blog/2012/04/railsconf-2012-day-two/image-1.png" width="600"/>
+
+    Example metrics shown on Google Site Speed breakdown.
+
 - [WebPageTest.org](https://www.webpagetest.org/) is a tool that we’ve blogged about before a few times. Now it also provides a video of how the page loads to examine how the page load is perceived.
 - [Speed Index](https://sites.google.com/a/webpagetest.org/docs/using-webpagetest/metrics/speed-index): Speed index is a new metric for measuring “visual completeness” of a page loading. This is an interesting/valuable metric to look at when you want to try to understand and improve user perceived latency. For example, can you force loading some images before peripheral scripts to improve the user perceived latency?
 - A few Google tools that Ilya reviewed were [PageSpeed Online](https://developers.google.com/speed/pagespeed/insights/) and its API, [PageSpeed SDK](https://code.google.com/archive/p/page-speed/wikis/DownloadPageSpeed.wiki), and [PageSpeed Service](https://developers.google.com/speed/pagespeed/service), which is in beta mode.
@@ -58,7 +62,7 @@ via migration shorthand.
 - You can override association methods to “hook” in custom behavior.
 - You can use limitless strings in PostgreSQL. This requires a bit of code shared in the presentation. I know, my fellow PostgreSQL expert coworkers are going to balk that this is on the list, but unfortunately Rails doesn’t allow this without some code.
 - You can utilize PostgreSQL’s full text search with a bit of code.
-- You can use a different database for each user. This one could be great for multi-domain ecommerce, which I [recently blogged about](/blog/2012/02/multi-store-architecture-ecommerce).
+- You can use a different database for each user. This one could be great for multi-domain ecommerce, which I [recently blogged about](/blog/2012/02/multi-store-architecture-ecommerce/).
 - You can merge nested hashes via the [deep_merge](https://apidock.com/rails/Hash/deep_merge) method.
 - You can remove a specific key from a hash via the [except](https://apidock.com/rails/Hash/except) method.
 - You can add defaults to a hash without overriding via the [reverse_merge](https://apidock.com/rails/Hash/reverse_merge) method.
@@ -68,4 +72,4 @@ via migration shorthand.
 
 ### Ta Da
 
-Hopefully this article was more Rails-ey than yesterday’s [RailsConf 2012: Day One](/blog/2012/04/railsconf-2012-day-one) post which focused on Backbone.js and CoffeeScript. I’m looking forward to a couple of tomorrow’s sessions—​and hopefully they will be blogworthy. Stay tuned!
+Hopefully this article was more Rails-ey than yesterday’s [RailsConf 2012: Day One](/blog/2012/04/railsconf-2012-day-one/) post which focused on Backbone.js and CoffeeScript. I’m looking forward to a couple of tomorrow’s sessions—​and hopefully they will be blogworthy. Stay tuned!

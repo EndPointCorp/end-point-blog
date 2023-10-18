@@ -55,7 +55,7 @@ All this functionality and capability sometimes intimidates some businesses. It 
 
 ### We can help!
 
-If you are already a Microsoft Office 365 subscriber, odds are you already have access to this incredible tool without any additional cost. How can you leverage this for your business? Visit the following content, or [contact us](/contact) at End Point for additional information.
+If you are already a Microsoft Office 365 subscriber, odds are you already have access to this incredible tool without any additional cost. How can you leverage this for your business? Visit the following content, or [contact us](/contact/) at End Point for additional information.
 
 - [The SharePoint Community](https://techcommunity.microsoft.com/t5/sharepoint/ct-p/SharePoint)
 - [SharePoint Developer Network](https://developer.microsoft.com/en-us/sharepoint)

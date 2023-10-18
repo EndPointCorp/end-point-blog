@@ -185,4 +185,4 @@ $ rostopic pub -1 /example/topicname std_msgs/String "$MY_MSG"
 
 To factor input, arbitration or logic out of the browser, you could write a roscpp or rospy node acting as a server. Also worth a look are ROS services, which can abstract asynchronous data requests through the same messaging system.
 
-A [gist of this example JavaScript](https://gist.github.com/minshallj/50e6b2e85985ca56e8e0) is available, much thanks to [Jacob Minshall](/team/jacob-minshall).
+A [gist of this example JavaScript](https://gist.github.com/minshallj/50e6b2e85985ca56e8e0) is available, much thanks to [Jacob Minshall](/team/jacob-minshall/).

@@ -7,11 +7,12 @@ tags:
 - company
 - design
 - html
+- static-site-generator
 ---
 
 ![A view of Manhattan from the Empire State Building](/blog/2021/08/converting-to-hugo/manhattan-view.jpg)
 
-<!--Photo by Seth Jensen-->
+<!-- Photo by Seth Jensen -->
 
 We recently converted the End Point website from [Middleman](https://middlemanapp.com/) to [Hugo](https://gohugo.io). I’ll go into more detail shortly, but the general result has been *much* better build times with less configuration and better support for local development.
 
@@ -33,7 +34,7 @@ Before we (🚨 spoiler alert 🚨) settled on Hugo, we tried using [Zola](https
 
 - Initial build times were very promising, but slowed down more than expected after adding our now more than 1500 blog posts. We still ended up with very respectable build times of less than 15 seconds.
 - As far as I could tell, Zola would have required an `_index.md` file in every section and subsection, to hold section settings or to make it a transparent section, passing its files to the parent section. I didn't like the sound of having a couple hundred extra Markdown files, one for every blog year and month.
-- At the time of writing, Zola doesn't support custom taxonomy paths. That means we would have our blog tags at `www.endpoint.com/tags/`, instead of our existing (and preferred) `www.endpoint.com/blog/tags/`. This has been [discussed](https://zola.discourse.group/t/custom-path-for-taxonomy-pages/82) on Zola forums, but seems to have stalled. This wasn't a complete dealbreaker, but it was disappointing.
+- At the time of writing, Zola doesn't support custom taxonomy paths. That means we would have our blog tags at `www.endpointdev.com/tags/`, instead of our existing (and preferred) `www.endpointdev.com/blog/tags/`. This has been [discussed](https://zola.discourse.group/t/custom-path-for-taxonomy-pages/82) on Zola forums, but seems to have stalled. This wasn't a complete dealbreaker, but it was disappointing.
 
 ### Making the switch to Hugo
 

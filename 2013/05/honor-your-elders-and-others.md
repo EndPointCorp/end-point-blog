@@ -10,7 +10,7 @@ date: 2013-05-24
 
 
 
-What an odd topic, you might be thinking. [Some time ago,](/blog/2011/06/seniornet) I began teaching my elders (who are rapidly becoming my contemporaries, curse you, Father Time) how to navigate the Internet. After almost two years of this, I’ve become more sensitized to seeing the ’Net from their POV.
+What an odd topic, you might be thinking. [Some time ago,](/blog/2011/06/seniornet/) I began teaching my elders (who are rapidly becoming my contemporaries, curse you, Father Time) how to navigate the Internet. After almost two years of this, I’ve become more sensitized to seeing the ’Net from their POV.
 
 Here’s a small fragment of a page I saw today (actual size):
 

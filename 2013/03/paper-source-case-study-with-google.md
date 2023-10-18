@@ -14,7 +14,7 @@ date: 2013-03-29
 
 <img alt="Basic Google map with location markers" border="0" src="/blog/2013/03/paper-source-case-study-with-google/image-0.png"/>
 
-Recently, I’ve been working with the [Google Maps API](https://developers.google.com/maps/) for Paper Source, one of our large [Interchange](/technology/perl-interchange) clients with over 40 physical stores throughout the US.
+Recently, I’ve been working with the [Google Maps API](https://developers.google.com/maps/) for Paper Source, one of our large [Interchange](/expertise/perl-interchange/) clients with over 40 physical stores throughout the US.
 
 On their website, they had previously been managing static HTML pages for these 40 physical stores to share store information, location, and hours. They wanted to move in the direction of something more dynamic with interactive maps. After doing a bit of research on search options out there, I decided to go with the Google Maps API. This article discusses basic implementation of map rendering, search functionality, as well as interesting edge case behavior.
 

@@ -21,7 +21,7 @@ The reason this matters is that Safari uses its normal browsing engine to fetch 
 
 Thus every preview request looks just like a regular user visit, and this skews analytics which see a much higher than average number of views from Safari 4 users, with lower time-on-site averages and higher bounce rates since no subsequent visits are registered (at least as part of the preview function).
 
-The solution is to simply not output any analytics code when the X-Purpose header is set to “preview”. In [Interchange](/technology/perl-interchange) this is easily done if you have an include file for your analytics code, by wrapping the file with an [if] block such as this:
+The solution is to simply not output any analytics code when the X-Purpose header is set to “preview”. In [Interchange](/expertise/perl-interchange/) this is easily done if you have an include file for your analytics code, by wrapping the file with an [if] block such as this:
 
 ```plain
 [tmp x_purpose][env HTTP_X_PURPOSE][/tmp]
@@ -33,11 +33,11 @@ The solution is to simply not output any analytics code when the X-Purpose heade
 [/if]
 ```
 
-In [Ruby on Rails](/technology/ruby-on-rails) you’d check request.env["HTTP_X_PURPOSE"].
+In [Ruby on Rails](/expertise/ruby-on-rails/) you’d check request.env["HTTP_X_PURPOSE"].
 
 In PHP you’d check $_SERVER["HTTP_X_PURPOSE"].
 
-In [Django](/technology/django-python) you’d check request.META["HTTP_X_PURPOSE"] or the equivalent request.META.get("HTTP_X_PURPOSE") (from the [HttpRequest](https://docs.djangoproject.com/en/dev/ref/request-response/) class).
+In [Django](/expertise/django-python/) you’d check request.META["HTTP_X_PURPOSE"] or the equivalent request.META.get("HTTP_X_PURPOSE") (from the [HttpRequest](https://docs.djangoproject.com/en/dev/ref/request-response/) class).
 
 And so on.
 

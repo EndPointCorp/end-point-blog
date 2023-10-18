@@ -2,6 +2,9 @@
 author: Josh Tolley
 title: Cooking with CAS
 github_issue_number: 1600
+featured:
+  casepointer: true
+  image_url: /blog/2020/03/cooking-with-cas/4696900602_77582d1d5d_c.jpg
 tags:
 - java
 - architecture
@@ -9,11 +12,12 @@ tags:
 - programming
 - php
 - spring
-- epitrax
+- casepointer
 date: 2020-03-10
 ---
 
-<img src="/blog/2020/03/cooking-with-cas/4696900602_77582d1d5d_c.jpg" alt="passwords" />
+<img src="/blog/2020/03/cooking-with-cas/4696900602_77582d1d5d_c.jpg" alt="Laptop on a desk showing a web browser open to a login form, with a Post-It note saying 'ADMIN / ADMIN' attached to the screen" />
+
 Photo by Flickr user [reidrac](http://web.archive.org/web/20190305093832/https://www.flickr.com/photos/reidrac/), licensed
 under [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/)
 

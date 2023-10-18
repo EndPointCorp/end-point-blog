@@ -10,7 +10,7 @@ date: 2019-07-01
 
 <img src="/blog/2019/07/an-introduction-to-neural-networks/image-0.jpg" alt="Weird Tree Art (Neural Network)" /> [Photo](https://flic.kr/p/5eL8Ag) by [Sudhamshu Hebbar](https://www.flickr.com/photos/sudhamshu/), used under [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/)
 
-Earlier this year I wrote a [post](/blog/2019/05/facial-recognition-amazon-deeplens) about my work with a machine-learning camera, the [AWS DeepLens](https://aws.amazon.com/deeplens/), which has onboard processing power to enable AI capabilities without sending data to the cloud. Neural networks are a type of ML model which achieves very impressive results on certain problems (including computer vision), so in this post I give a more thorough introduction to neural networks, and share some useful resources for those who want to dig deeper.
+Earlier this year I wrote a [post](/blog/2019/05/facial-recognition-amazon-deeplens/) about my work with a machine-learning camera, the [AWS DeepLens](https://aws.amazon.com/deeplens/), which has onboard processing power to enable AI capabilities without sending data to the cloud. Neural networks are a type of ML model which achieves very impressive results on certain problems (including computer vision), so in this post I give a more thorough introduction to neural networks, and share some useful resources for those who want to dig deeper.
 
 ### Neurons and Nodes
 
@@ -21,9 +21,8 @@ As with the function of biological neural networks, the emergence of information
 ### Neural Network Architecture
 
 <img src="/blog/2019/07/an-introduction-to-neural-networks/image-1.png" style="float: right; max-width: 200px" /> 
-<p>
+
 Nodes are grouped in layers: the input layer, the output layer, and all the layers between them, known as hidden layers. Nodes can be networked in a variety of ways within and between layers, and sophisticated neural network models can include dozens of layers configured in various ways. These include layers which summarize, combine, eliminate, direct, or transform information. Each receives its input from the previous layer, and passes its output to the next layer. The last layer is designed such that its output answers the relevant question (for example, it would offer 9 options if the goal were to identify the hand-written numbers 1–9).
-</p>
 
 For all this information processing to achieve a given task, the parameters of each node need appropriate values. The process of choosing those values is called training. In order to train a neural network, one needs to provide examples of what the network should do. (For example, to train it to write requires examples of writing. To train it to identify objects in images requires images and their appropriately labeled counterparts.) The more data a model can learn from, the better it can work. Gathering enough data is typically a major undertaking.
 
@@ -36,7 +35,7 @@ One of the most interesting details of the entire process has to do with how the
 ### Further reading
 
 - It turns out that a relatively simple neural network can approximate any function. This remarkable [demonstration](https://towardsdatascience.com/can-neural-networks-really-learn-any-function-65e106617fc6) is quite accessible.
-- There are countless useful implementations of neural network models. End Pointer [Kamil Ciemniewski](/blog/authors/kamil-ciemniewski) wrote two in-depth and fascinating blogs about neural network projects which he completed in the past year: [Speech Recognition From Scratch](/blog/2019/01/speech-recognition-with-tensorflow), and [Self-Driving Toy Car](/blog/2018/08/self-driving-toy-car-using-the-a3c-algorithm).
+- There are countless useful implementations of neural network models. End Pointer [Kamil Ciemniewski](/blog/authors/kamil-ciemniewski/) wrote two in-depth and fascinating blogs about neural network projects which he completed in the past year: [Speech Recognition From Scratch](/blog/2019/01/speech-recognition-with-tensorflow/), and [Self-Driving Toy Car](/blog/2018/08/self-driving-toy-car-using-the-a3c-algorithm/).
 - If you’re interested in getting a sense for the general state of the art, [here](https://www.topbots.com/most-important-ai-research-papers-2018/) are summaries of some of the most influential papers in machine learning since 2018.
 - For those curious about the inner workings of the training process, here’s one about [back-propagation](http://neuralnetworksanddeeplearning.com/chap2.html).
 - This blog post describes “densely connected” network layers; here’s an article about [convolutional layers](https://towardsdatascience.com/a-comprehensive-guide-to-convolutional-neural-networks-the-eli5-way-3bd2b1164a53).

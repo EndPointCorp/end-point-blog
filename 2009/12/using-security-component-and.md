@@ -7,7 +7,7 @@ tags:
 date: 2009-12-02
 ---
 
-Recently, [Ron](/team/ron-phipps), Ethan, and I worked on a [JackThreads](https://www.jackthreads.com/) project. We are in the process of moving JackThreads’ legacy PHP application to the CakePHP framework in addition to introducing new functionality for this project.
+Recently, [Ron](/team/ron-phipps/), Ethan, and I worked on a [JackThreads](https://www.jackthreads.com/) project. We are in the process of moving JackThreads’ legacy PHP application to the CakePHP framework in addition to introducing new functionality for this project.
 
 Several of the pages require secure requests:
 

@@ -15,7 +15,7 @@ A while back, we started using the [Nestable jQuery Plugin](https://dbushell.com
 
 Diagram from Nestable jQuery Plugin representing interactive hierarchical sort and list functionality.
 
-I touched on H2O’s data model [in this post](/blog/2014/06/rails-performance-with-skylight), but it essentially mimics the diagram above; A user can build sortable and nestable lists. Nesting is visible at up to 4 levels. Each list is accessible and editable as its own resource, owned by a single user. The plugin is ideal for working with the data model, however, I needed a bit of customization that I’ll describe in this post.
+I touched on H2O’s data model [in this post](/blog/2014/06/rails-performance-with-skylight/), but it essentially mimics the diagram above; A user can build sortable and nestable lists. Nesting is visible at up to 4 levels. Each list is accessible and editable as its own resource, owned by a single user. The plugin is ideal for working with the data model, however, I needed a bit of customization that I’ll describe in this post.
 
 ### Limiting Nestability to Specific List Items
 

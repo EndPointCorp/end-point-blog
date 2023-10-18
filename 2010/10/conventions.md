@@ -23,7 +23,7 @@ For easier human reading, try “2 January 2010”, “2 Jan. 2010”, or “Jan
 
 ### Time zones
 
-When dealing with anyone who isn’t at the some location you are, specify a time zone with every time. It’s easy. So many of us travel or interact with people in remote locations that we shouldn’t assume a single time zone.
+When dealing with anyone who isn’t at the same location you are, specify a time zone with every time. It’s easy. So many of us travel or interact with people in remote locations that we shouldn’t assume a single time zone.
 
 You can save others some mental strain by translating times into the time zone of the majority of other participants, especially if there’s an overwhelming majority in one particular time zone. It’s polite.
 

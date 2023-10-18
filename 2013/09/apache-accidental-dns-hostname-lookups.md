@@ -18,7 +18,7 @@ Allow me to tell a little story that illustrates a few limited areas around thes
 
 System administrators may want to make more sense of visitor IP addresses they see in the logs, and one way to do that is with a reverse DNS lookup on the IP address. The network administrators for the netblock that the IP address is part of have the ability to set up a PTR (pointer) record, or not. You can find out what it is, if anything.
 
-For example, let’s look at DNS for End Point’s main website at www.endpoint.com using the standard Unix tool “host”:
+For example, let’s look at DNS for End Point’s main website at www&#x2e;endpoint.com using the standard Unix tool “host”:
 
 ```plain
 % host www.endpoint.com
@@ -30,7 +30,7 @@ www.endpoint.com has IPv6 address 2607:f0d0:2001:103::31
 1.3.0.0.0.0.0.0.0.0.0.0.0.0.0.0.3.0.1.0.1.0.0.2.0.d.0.f.7.0.6.2.ip6.arpa domain name pointer 2607.f0d0.2001.0103.0000.0000.0000.0031-static.v6reverse.softlayer.com.
 ```
 
-The www.endpoint.com name points to both an IPv4 and an IPv6 address, so there are two answers. When each of those IP addresses is looked up, each shows a PTR record pointing to a subdomain of softlayer.com, which gives a clue about where our site is hosted.
+The www&#x2e;endpoint.com name points to both an IPv4 and an IPv6 address, so there are two answers. When each of those IP addresses is looked up, each shows a PTR record pointing to a subdomain of softlayer.com, which gives a clue about where our site is hosted.
 
 (As an aside: Why don’t we use a prettier or more specific PTR record? We could set it to almost whatever we want. Well, there are dozens of websites hosted on those IP addresses, so which one should be in the PTR record? There’s no obvious choice, and it doesn’t matter for normal network functioning, so we just left it the way it was.)
 
@@ -76,7 +76,7 @@ Host 190.213.86.187.in-addr.arpa. not found: 3(NXDOMAIN)
 152.160.0.107.in-addr.arpa domain name pointer 107-0-160-152-ip-static.hfc.comcastbusiness.net.
 ```
 
-Did you notice that one IP address returned two different PTR records? That is allowed, though uncommon, as I mentioned in my blog post [Multiple reverse DNS pointers per IP address](/blog/2008/11/multiple-reverse-dns-pointers-per-ip) a few years back. Many reverse DNS control panels provided by commodity hosting providers won’t allow you to assign multiple PTR records, but if you get your reverse DNS delegated to a real nameserver you control, you can do it.
+Did you notice that one IP address returned two different PTR records? That is allowed, though uncommon, as I mentioned in my blog post [Multiple reverse DNS pointers per IP address](/blog/2008/11/multiple-reverse-dns-pointers-per-ip/) a few years back. Many reverse DNS control panels provided by commodity hosting providers won’t allow you to assign multiple PTR records, but if you get your reverse DNS delegated to a real nameserver you control, you can do it.
 
 ### Finding the IP address owner: whois
 

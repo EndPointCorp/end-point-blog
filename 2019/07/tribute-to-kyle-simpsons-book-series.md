@@ -11,7 +11,7 @@ date: 2019-07-24
 
 <img src="/blog/2019/07/tribute-to-kyle-simpsons-book-series/you-dont-know-js.jpg" alt="You Don’t Know JS" /> [Photo](https://flic.kr/p/rdi2Qg) by [othree](https://www.flickr.com/photos/othree/), used under [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/)
 
-Inspired by [the Ruby Fight Club](/blog/2016/08/ruby-fight-club), a group of us have been reading Kyle Simpson’s [You Don’t Know JS](https://github.com/getify/You-Dont-Know-JS) series (1st edition; in 2020 Kyle started publishing drafts of the 2nd edition of the books). These books are a great source of inspiration and available for free. I meet weekly with our small group to discuss chapters from these books. Each time we have a presenter who walks us through the chapter that we all read beforehand.
+Inspired by [the Ruby Fight Club](/blog/2016/08/ruby-fight-club/), a group of us have been reading Kyle Simpson’s [You Don’t Know JS](https://github.com/getify/You-Dont-Know-JS) series (1st edition; in 2020 Kyle started publishing drafts of the 2nd edition of the books). These books are a great source of inspiration and available for free. I meet weekly with our small group to discuss chapters from these books. Each time we have a presenter who walks us through the chapter that we all read beforehand.
 
 During these sessions we have learned a lot about JavaScript, but also about preparing presentations. The increasing quality level of the meetings was noticable each week. I think we all owe a large **thanks** to Kyle Simpson. In this article I will focus on the book “You Don’t Know JS: ES6 and Beyond”.
 

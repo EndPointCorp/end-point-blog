@@ -41,6 +41,6 @@ We serve over 200 clients ranging from small family businesses to large corporat
 
 We are an equal opportunity employer and value diversity at our company. We do not discriminate on the basis of gender, race, religion, color, national origin, sexual orientation, age, marital status, veteran status, or disability status.
 
-~~Please email us an introduction to jobs&#x40;endpoint.com to apply.~~
+~~Please email us an introduction to jobs&#x40;endpointdev.com to apply.~~
 **(This job has been filled.)**
 Include a resume, your GitHub or LinkedIn URLs, or whatever else that would help us get to know you. We look forward to hearing from you! Full-time employment seekers only, please—​this role is not for agencies or subcontractors.

@@ -9,7 +9,7 @@ tags:
 date: 2011-09-09
 ---
 
-In a recent [Rails](/technology/ruby-on-rails) project, I had to implement a simple but nifty CSS trick. A request came in to give a DOM element fixed positioning, meaning as the user navigates throughout the page, the DOM element stays in one place while the rest of the page updates. This is pretty common behavior for menu bars that show up along one of the borders of a window while a user navigates throughout the site. However, this situation was a bit trickier because the menu bar that needed fixed positioning was already a few hundred pixels down the page below header and navigation content:
+In a recent [Rails](/expertise/ruby-on-rails/) project, I had to implement a simple but nifty CSS trick. A request came in to give a DOM element fixed positioning, meaning as the user navigates throughout the page, the DOM element stays in one place while the rest of the page updates. This is pretty common behavior for menu bars that show up along one of the borders of a window while a user navigates throughout the site. However, this situation was a bit trickier because the menu bar that needed fixed positioning was already a few hundred pixels down the page below header and navigation content:
 
 <img alt="" border="0" id="BLOGGER_PHOTO_ID_5650381299067538866" src="/blog/2011/09/css-fixed-static-position-toggle/image-0.png" style="display:block; margin:0px auto 10px; text-align:center;cursor:pointer; cursor:hand;width: 745px;"/>
 

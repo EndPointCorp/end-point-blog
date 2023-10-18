@@ -11,7 +11,7 @@ date: 2010-08-26
 
 In climbing the learning curve with Spree development here are some observations I’ve made along the way:
 
-1. **Hooks make view changes easier** — I was surprised at how fast I could implement certain kinds of changes because Spree’s hook system allowed me to inject code without requiring overriding a template or making a more complicated change. Check out Steph’s blog entries on hooks [here](/blog/2010/01/rails-ecommerce-spree-hooks-tutorial) and [here](/blog/2010/01/rails-ecommerce-spree-hooks-comments), and the [Spree documentation on hooks and themes](https://web.archive.org/web/20091231114016/http://spreecommerce.com/documentation/theming.html).
+1. **Hooks make view changes easier** — I was surprised at how fast I could implement certain kinds of changes because Spree’s hook system allowed me to inject code without requiring overriding a template or making a more complicated change. Check out Steph’s blog entries on hooks [here](/blog/2010/01/rails-ecommerce-spree-hooks-tutorial/) and [here](/blog/2010/01/rails-ecommerce-spree-hooks-comments/), and the [Spree documentation on hooks and themes](https://web.archive.org/web/20091231114016/http://spreecommerce.com/documentation/theming.html).
 
 1. **Core extensions aren’t always updated** — One of the biggest surprises I found while working with Spree is that some Spree core extensions aren’t maintained with each release. My application used the Beanstream payment gateway. Beanstream authorizations (without capture) and voids didn’t work out of the box with Spree 0.11.0.
 

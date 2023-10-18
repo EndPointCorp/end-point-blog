@@ -4,6 +4,8 @@ author: Kürşat Kutlu Aydemir
 github_issue_number: 1573
 tags:
 - development
+- java
+- culture
 date: 2019-11-26
 ---
 
@@ -11,7 +13,9 @@ date: 2019-11-26
 
 <!-- Photo from https://pixabay.com/illustrations/magnifying-glass-search-to-find-1019982/ -->
 
-Code review is analysis of source code of a software project by reading the code itself or sometimes using automated tools to analyze it, and it is part of the Software Quality Assurance (SQA) activities which define the quality assurance of the whole software development lifecycle. As we go through the flow of a code-review, we’ll understand what to assure by doing code review. Code review lifecycle covers the guidelines and the code review process itself.
+Code review is analysis of source code of a software project by reading the code itself or sometimes using automated tools to analyze it, and it is part of the Software Quality Assurance (SQA) activities which define the quality assurance of the whole software development lifecycle.
+
+As we go through the flow of a code-review, we’ll understand what to assure by doing code review. Code review lifecycle covers the guidelines and the code review process itself.
 
 ### Code review guidelines
 
@@ -35,7 +39,6 @@ Code review is analysis of source code of a software project by reading the code
 
 - Measure inspection rate and defect rate.
 - Use checklists.
-
 
 ### Code review flow
 
@@ -96,13 +99,13 @@ I’d like to share a checklist below that I used for a project recently. I didn
 
 - For naming checklist items, the below code piece complies with the conventions as it uses the solution domains as packaging name.
 
-```
+```java
 package com.google.search.common;
 ```
 
 - On the other hand, the following line would violate the Java package naming conventions since its letter capitalizations and domain usage are inconsistent.
 
-```
+```java
 package COM.google_search.common;
 ```
 
@@ -112,12 +115,22 @@ package COM.google_search.common;
 
 ### Static Code Analysis
 
-Reviewing is viewing the software by reviewer and the reviewers’ own comments and best practice notes will be used as the final output. There are also static code analysis tools like PMD for Java which generally checks the code for bugs and clean code. This static code analysis, usually attached to the final code review report of the reviewer, usually is only helpful for a detailed overview for the clean code. Sometimes software development IDEs also provide best practices while writing the code. I like the PyCharm IDE’s smart clean code suggestions for Python, for example.
+Reviewing is viewing the software by reviewer and the reviewers’ own comments and best practice notes will be used as the final output.
+
+There are also static code analysis tools like PMD for Java which generally checks the code for bugs and clean code. This static code analysis, usually attached to the final code review report of the reviewer, is most helpful for an overview of the code.
+
+Sometimes software development IDEs also provide best practices while writing the code. I like the PyCharm IDE’s smart clean code suggestions for Python, for example.
 
 ### Automated Code Review
 
-Automated testing is subject to measurable reports and static code analysis. Static code analysis tools can be scheduled for code checking and reporting. Testing the code as a preparation for code review is another process that can be automated and already part of the SDLC processes. Some overlooked issues, like releasing resources and concurrency issues, can be also checked by automated tests and can be reported as automated code review results.
+Automated testing is subject to measurable reports and static code analysis. Static code analysis tools can be scheduled for code checking and reporting.
+
+Testing the code as a preparation for code review is another process that can be automated and already part of the SDLC processes. Some overlooked issues, like releasing resources and concurrency issues, can be also checked by automated tests and can be reported as automated code review results.
 
 ### Conclusion
 
-I have tried to outline the general code review cycle of a project. Depending on the programming language and the architecture of the software to be developed there can be additional best practices like functional, non-functional, OOP design principles, etc. Reviewers may extend or lessen their checklist items according to future plans, architecture or review request coverage.
+I have outlined the general code review cycle of a project.
+
+Depending on the programming language and the architecture of the software to be developed there can be additional best practices like functional, non-functional, OOP design principles, etc.
+
+Reviewers may extend or lessen their checklist items according to future plans, architecture or review request coverage.

@@ -5,7 +5,8 @@ github_issue_number: 1533
 tags:
 - ruby
 - vim
-- visual-studio-code
+- vscode
+- emacs
 - tools
 date: 2019-06-27
 ---

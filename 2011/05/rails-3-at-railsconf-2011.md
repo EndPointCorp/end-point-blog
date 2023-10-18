@@ -19,7 +19,7 @@ With Rails 3.1, the asset pipeline addresses the junk drawer. Assets directories
 
 ### New Defaults
 
-Rails 3.1 now assumes the default of CoffeeScript and scss (Sass). [Jason discussed](/blog/2011/05/railsconf-2011-day-one) a Sass talk he attended yesterday at [BohConf](http://bohconf.com/) which includes things like nesting to reduce duplicate code and variables to improve maintainability. I haven’t worked with CoffeeScript much, so I’ll just link to the [CoffeeScript documentation](https://coffeescript.org/) and possibly attend a CoffeeScript talk tomorrow. The argument between setting defaults and setting no defaults was revisited, and defaults won. The new defaults use Bundler to include Sass and coffee-script in the Gemfile:
+Rails 3.1 now assumes the default of CoffeeScript and scss (Sass). [Jason discussed](/blog/2011/05/railsconf-2011-day-one/) a Sass talk he attended yesterday at [BohConf](http://bohconf.com/) which includes things like nesting to reduce duplicate code and variables to improve maintainability. I haven’t worked with CoffeeScript much, so I’ll just link to the [CoffeeScript documentation](https://coffeescript.org/) and possibly attend a CoffeeScript talk tomorrow. The argument between setting defaults and setting no defaults was revisited, and defaults won. The new defaults use Bundler to include Sass and coffee-script in the Gemfile:
 
 ```ruby
 gem 'sass'

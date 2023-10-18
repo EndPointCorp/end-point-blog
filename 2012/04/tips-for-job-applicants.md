@@ -3,7 +3,7 @@ author: Jon Jensen
 title: Tips for job applicants
 github_issue_number: 588
 tags:
-- jobs
+- tips
 date: 2012-04-12
 ---
 

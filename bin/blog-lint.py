@@ -16,6 +16,13 @@ import json
 import os
 import re
 
+import yaml
+
+####################
+# Global variables #
+####################
+
+tried_links = {}
 
 ####################
 # Script arguments #
@@ -25,6 +32,7 @@ import re
 parser = argparse.ArgumentParser(description='Lint blog posts.')
 parser.add_argument('input_file', help='blog post file to read')
 parser.add_argument('-k', dest='forKeepers', action='store_true', help='show verbose output for keepers of the blog')
+parser.add_argument('-o', dest='offline', action='store_true', help='offline: don\'t check links')
 
 args = parser.parse_args()
 
@@ -140,7 +148,7 @@ class Block:
                 i += 1
                 if i == no:
                     return index
-        raise Error('No matching line found')
+        raise Exception('No matching line found')
 
 
 ##############################################
@@ -152,11 +160,11 @@ def extract_code_blocks(block):
     matching_indices = []
 
     for index, line in enumerate(block.lines):
-        if re.match(r'```', line.line):
+        if re.match(r' *```', line.line):
             matching_indices.append(index)
 
     if len(matching_indices) % 2 != 0:
-        raise Error('Found an odd number of matches!')
+        raise Exception('Found an odd number of matches!')
 
     # Start from end so we don't have to worry about indices changing
     matching_indices = sorted(matching_indices, reverse=True)
@@ -199,9 +207,9 @@ try:
             if not entry.name.startswith('.') and entry.is_file():
                 file_size = os.path.getsize(entry.path)
                 if file_size > (1024 * 300):
-                    errors.add(Warning(entry.path, 'File is too big (> 300 kB): ' + entry.name), True)
+                    errors.add(Warning(entry.path, 'File is too big (> 300 kB): ' + entry.name, True))
                 elif file_size > (1024 * 200):
-                    warnings.add(Warning(entry.path, 'File is pretty big (> 200 kB): ' + entry.name), True)
+                    warnings.add(Warning(entry.path, 'File is pretty big (> 200 kB): ' + entry.name, True))
 except:
     pass
 
@@ -218,13 +226,22 @@ post = Block(data)
 
 body_index = post.find_line_index(r'^---$', 2) + 1
 
-header = Block(post.lines[:body_index])
+frontmatter = Block(post.lines[:body_index])
 body = Block(post.lines[body_index:])
 
+frontmatter_string = ''
 
-################
-# Check header #
-################
+for line in frontmatter.lines:
+    if line.line != '---':
+        frontmatter_string += line.line
+        frontmatter_string += '\n'
+
+frontmatter_yaml = yaml.safe_load(frontmatter_string)
+
+
+#####################
+# Check frontmatter #
+#####################
 
 
 try:
@@ -232,37 +249,42 @@ try:
     all_tags = []
     result = None
     with cd(bin_dir):
-        result = subprocess.run('./show-blog-tags -s', shell=True, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
+        result = subprocess.run('./show-blog-tags -s | grep -v \'^ *1 \' | sed \'s/ *[[:digit:]]* //\'', shell=True, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
     all_tags = result.stdout.decode('utf-8').split('\n')
 
-    tag_line = None
-    for line in header.lines:
-        if line.line.startswith('tags: '):
-            tag_line = line
+    tags = frontmatter_yaml.get('tags', [])
 
-    if tag_line is None:
-        errors.add(Warning(header.lines[0], 'No tags specified'))
+    if tags is None or len(tags) < 1:
+        errors.add(Warning(frontmatter.lines[0], 'No tags specified'))
     else:
-        tags = tag_line.line[5:].strip().split(',')
-        tags = list(map(lambda t: t.strip(), tags))
-        tags = list(filter(lambda t: t != '', tags))
+        tag_line = frontmatter.lines[0]
+
+        for line in frontmatter.lines:
+            if line.line.startswith('tags:'):
+                tag_line = line
 
         if len(tags) == 0:
             errors.add(Warning(tag_line, 'No tags specified'))
         for tag in tags:
             if tag not in all_tags:
-                warnings.add(Warning(tag_line, 'No other occurences of tag "' + tag + '" in blog'), True)
+                warnings.add(Warning(tag_line, 'No other occurences of tag "' + tag + '" in blog'))
 except:
     print('There was an error checking tags')
 
 try:
-    bin_dir = os.path.dirname(os.path.realpath(__file__))
-    authors_path = os.path.join(bin_dir, '../../../../build-complete/blog/authors.json')
-    result = None
-    all_authors = json.load(open(authors_path, 'r'))
+    response = None
+
+    try:
+        response = requests.get('https://www.endpointdev.com/blog/authors/index.json', headers={
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36'
+            })
+    except Exception as error:
+        print(error)
+
+    all_authors = json.loads(response.text)
 
     author_line = None
-    for line in header.lines:
+    for line in frontmatter.lines:
         if line.line.startswith('author: '):
             author_line = line
 
@@ -270,8 +292,19 @@ try:
 
     if not author_name in all_authors:
         warnings.add(Warning(author_line, "Unrecognized author; please double check spelling if this isn't their first post"))
-except Error as err:
-    print('There was an error getting the list of blog post authors' + err)
+except Exception as err:
+    print('There was an error getting the list of blog post authors: ', err)
+
+try:
+    image_line = None
+    for line in frontmatter.lines:
+        if line.line.startswith('  image_url: '):
+            image_line = line
+
+    if image_line is None:
+        errors.add(Warning(frontmatter.lines[0], 'No featured image specified'))
+except Exception as err:
+    print('There was an error checking for a featured image: ', err)
 
 
 ###############
@@ -283,25 +316,28 @@ code_blocks = extract_code_blocks(body)
 
 for b in code_blocks:
     # Check that code blocks are only being used on their own
-    if re.match(r'^[^`]+```', b.lines[0].line):
+    if re.match(r'^[^` ]+```', b.lines[0].line):
         errors.add(Warning(b.lines[0], 'Code blocks should be used only as their own paragraphs'))
         continue
 
     # Check that a language is specified
-    lang = re.sub(r'^```', '', b.lines[0].line).rstrip()
+    lang = re.sub(r'^ *```', '', b.lines[0].line).rstrip()
     if lang not in highlight_languages:
-        errors.add(Warning(b.lines[0], "Code blocks should specify a valid language or 'plaintext'. Example: ```python"))
+        errors.add(Warning(b.lines[0], "Code blocks should specify a valid language or 'plain'. Example: ```python"))
 
     has_tabs = False
     smallest_indent = None
+    left_margin = len(b.lines[0].line) - len(b.lines[0].line.lstrip(' '))
 
     # Check indentation level and whether tabs are used
     for l in b.lines:
         has_tabs = has_tabs or bool(l.line.find('\t') >= 0)
-        indent = len(l.line) - len(l.line.lstrip(' '))
-        if (smallest_indent is None or indent < smallest_indent) and not l.line.startswith('```'):
+
+        indent = len(l.line) - len(l.line.lstrip(' ')) - left_margin
+
+        if (smallest_indent is None or indent < smallest_indent) and not l.line.lstrip(' ').startswith('```'):
             smallest_indent = indent
-    if smallest_indent and smallest_indent > 0:
+    if smallest_indent and smallest_indent != 0:
         errors.add(Warning(b.lines[0], 'Code blocks should be flush with left margin'))
     if has_tabs:
         warnings.add(Warning(b.lines[0], 'Code blocks should not contain tabs; use spaces instead'))
@@ -334,18 +370,6 @@ def check_spellings(line):
             'ideal': 'Node.js',
             'flags': re.IGNORECASE,
             'message': 'Node.js spelled wrong',
-        },
-        {
-            'regex': r"'",
-            'ideal': '’',
-            'message': "Use typographers’ apostrophe",
-            'forKeepers': True,
-        },
-        {
-            'regex': r'\"',
-            'ideal': '”',
-            'message': "Use typographers’ quotes",
-            'forKeepers': True,
         },
         {
             'regex': r'[^\s]/[^\u200b]',
@@ -422,6 +446,7 @@ def check_spellings(line):
 ###############
 
 
+
 def check_links(line):
     link_checks = [
         {
@@ -434,15 +459,16 @@ def check_links(line):
         {
             'regex': r'^https://[^.]*\.endpointdev\.com',
             'ideal': ['https://www.endpointdev.com'],
-            'message': 'No subdomains for endpoint.com should be used',
+            'message': 'No subdomains for endpointdev.com should be used',
         }
     ]
 
     without_code = re.sub(r'`[^`]+`', '', line.line)
-    links = re.findall(r'\[[^\]]*\]\(([^\)]*)\)', without_code)
+    links = re.findall(r'\[[^\]]*\]\((.*?(?<!\\))\)', without_code)
     links += (re.findall(r'href="([^"]*)"', without_code))
 
     for link in links:
+
         url_base = 'https://www.endpointdev.com'
         check_certs = True
         match = re.search(r'\/camp([0-9]{1,2})\/', os.getcwd())
@@ -450,25 +476,42 @@ def check_links(line):
             url_base = f'https://www.{match.group(1)}.camp.endpoint.com:91{int(match.group(1)):02d}'
             check_certs = False
 
-        # Check response codes
-        to_try = link
+        # Remove '\' markdown escape characters
+        to_try = link.replace('\\', '')
+
         if link.startswith('#') or link.startswith('mailto:'):
             continue
         if link.startswith('/'):
             to_try = url_base + link
+        if to_try in tried_links:
+            warnings.add(Warning(line, f'Duplicate link {to_try}'))
+            continue
+
+        print('Trying ', to_try, '...', end=' ', flush=True)
+
         try:
             if not check_certs:
                 requests.packages.urllib3.disable_warnings(category=InsecureRequestWarning)
+
             response = requests.get(to_try, allow_redirects=False, verify=check_certs, headers={
                 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36'
                 })
+
             if not check_certs:
                 warnings_module.resetwarnings()
+
+            tried_links[to_try] = response.status_code
+
+            end_sequence = '\n' if args.forKeepers else '\x1b[1K\r'
+
             if response.status_code == 200:
+                print('200 OK', end=end_sequence)
                 pass
             elif response.status_code >= 300 and response.status_code < 400:
+                print(response.status_code, end=end_sequence)
                 warnings.add(Warning(line, f'Link {to_try} resulted in HTTP {response.status_code}, location {response.headers["Location"]}', True))
             else:
+                print(response.status_code, end=end_sequence)
                 errors.add(Warning(line, f'Link {to_try} resulted in HTTP {response.status_code}', True))
         except Exception as error:
             errors.add(Warning(line, f"Link {to_try} couldn't be reached: {str(error)}", True))
@@ -491,7 +534,8 @@ def check_links(line):
 
 
 for line in body.lines:
-    check_links(line)
+    if not args.offline:
+      check_links(line)
     check_spellings(line)
 
 if len(errors) > 0:

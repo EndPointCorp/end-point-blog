@@ -10,7 +10,7 @@ tags:
 date: 2016-12-23
 ---
 
-[Carjojo](https://www.carjojo.com/)’s site makes use of some of the best tools on the market today for accessing and displaying data. Carjojo is a car buying application that takes data about car pricing, dealer incentives, and rebate programs and aggregates that into a location-specific vehicle pricing search tool. The Carjojo work presented a great opportunity for End Point to utilize our technical skills to build a state-of-the-art application everyone is very proud of. End Point worked on the Carjojo development project from October of 2014 through early 2016, and the final Carjojo application launched in the summer of 2016. This case study shows that End Point can be a technology partner for a startup, enabling the client to maintain their own business once our part of the project is over.
+[Carjojo](https://web.archive.org/web/20161221010712/https://www.carjojo.com/)’s site makes use of some of the best tools on the market today for accessing and displaying data. Carjojo is a car buying application that takes data about car pricing, dealer incentives, and rebate programs and aggregates that into a location-specific vehicle pricing search tool. The Carjojo work presented a great opportunity for End Point to utilize our technical skills to build a state-of-the-art application everyone is very proud of. End Point worked on the Carjojo development project from October of 2014 through early 2016, and the final Carjojo application launched in the summer of 2016. This case study shows that End Point can be a technology partner for a startup, enabling the client to maintain their own business once our part of the project is over.
 
 ### Why End Point?
 
@@ -78,7 +78,7 @@ To use the location information in the database, some GIS location smarts were t
 
 <div class="separator" style="clear: both; text-align: center;"><span id="docs-internal-guid-adf4efb0-192c-c5d7-47f8-c173ae3b292c" style='background-color: transparent; color: black; font-family: "arial"; font-size: 14.6667px; font-style: normal; font-variant: normal; font-weight: 400; margin-left: 1em; margin-right: 1em; text-decoration: none; vertical-align: baseline;'><img height="120" src="/blog/2016/12/client-case-study-carjojo/image-6.png" style="border: medium none; transform: rotate(0rad);" width="356"/></span></div>
 
-The approach worked well for most cases. However, sometimes Carjojo wanted something slightly different than what DimpleJS does out of the box. One example of DimpleJS customization work can be found [here on our blog](/blog/2015/10/intro-to-dimplejs-graphing-in-6-easy).
+The approach worked well for most cases. However, sometimes Carjojo wanted something slightly different than what DimpleJS does out of the box. One example of DimpleJS customization work can be found [here on our blog](/blog/2015/10/intro-to-dimplejs-graphing-in-6-easy/).
 
 Another thing to note about the data visualizations was that sometimes when the data was plotted and graphed, it brought to light some discrepancies in the back-end calculations and analytics, requiring some back-and-forth between the Carjojo DBA and End Point.
 

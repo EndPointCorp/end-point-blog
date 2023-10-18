@@ -13,7 +13,7 @@ tags:
 date: 2015-04-13
 ---
 
-Today we are pleased to announce the results of a new NoSQL benchmark we did to compare scale-out performance of Apache Cassandra, MongoDB, Apache HBase, and Couchbase. This represents work done over 8 months by [Josh Williams](/team/josh-williams), and was commissioned by [DataStax](http://www.datastax.com/) as an update to a similar [3-way NoSQL benchmark we did two years ago](/blog/2013/03/nosql-benchmark-of-cassandra-hbase).
+Today we are pleased to announce the results of a new NoSQL benchmark we did to compare scale-out performance of Apache Cassandra, MongoDB, Apache HBase, and Couchbase. This represents work done over 8 months by [Josh Williams](/team/josh-williams/), and was commissioned by [DataStax](http://www.datastax.com/) as an update to a similar [3-way NoSQL benchmark we did two years ago](/blog/2013/03/nosql-benchmark-of-cassandra-hbase/).
 
 The database versions we used were Cassandra 2.1.0, Couchbase 3.0, MongoDB 3.0 (with the Wired Tiger storage engine), and HBase 0.98. We used YCSB (the [Yahoo! Cloud Serving Benchmark](https://github.com/brianfrankcooper/YCSB)) to generate the client traffic and measure throughput and latency as we scaled each database server cluster from 1 to 32 nodes. We ran a variety of benchmark tests that included load, insert heavy, read intensive, analytic, and other typical transactional workloads.
 
@@ -27,4 +27,4 @@ Our full report, [Benchmarking Top NoSQL Databases](http://www.datastax.com/wp-c
 
 Earlier this morning we also sent out a [press release to announce our results](http://www.prnewswire.com/news-releases/apache-cassandra-leads-all-others-in-latest-nosql-benchmark-300064570.html) and the availability of the report.
 
-**Update:** See our [note about updated test runs and revised report](/blog/2015/06/updated-nosql-benchmark-cassandra) as of June 4, 2015.
+**Update:** See our [note about updated test runs and revised report](/blog/2015/06/updated-nosql-benchmark-cassandra/) as of June 4, 2015.

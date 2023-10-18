@@ -18,7 +18,7 @@ date: 2010-11-12
 
 It’s been about a little over a month since the 2010 Utah Open Source Conference, and I decided to take a few minutes to review talks I enjoyed and link to my own talk slides.
 
-**[Magento](https://www.magento.com/):** Mac Newbold of Code Greene spoke on the Magento ecommerce framework for PHP. I’ve somewhat familiar with Magento, but a few things stood out:
+**Magento:** Mac Newbold of Code Greene spoke on the Magento ecommerce framework for PHP. I’ve somewhat familiar with Magento, but a few things stood out:
 
 - He finds the Magento Enterprise edition kind of problematic because Varien won’t support you if you have any unsupported extensions. Some of his customers had problems with Varien support and went back to the community edition.
 

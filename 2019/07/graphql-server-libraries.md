@@ -8,12 +8,14 @@ tags:
 - mongodb
 - nodejs
 - django
+- docker
+- containers
 date: 2019-07-12
 ---
 
 <img src="/blog/2019/07/graphql-server-libraries/image-0.jpg" alt="Eroded Icelandic mountain" /><br>Photo by <a href="https://unsplash.com/photos/t07FAEn9wAA">Jon Flobrant</a> on Unsplash
 
-This post is a followup to my previous post, [GraphQL — An Alternative to REST](/blog/2019/05/graphql-an-alternative-to-rest). Please check that out for an introduction to GraphQL and what makes it different from other API solutions. I’ve collected a list of some of the currently-maintained GraphQL libraries for a few different languages, along with some examples (most of which aren’t fully functional on their own, they’d need more configuration) so you can see what it might be like to use GraphQL in your project. I’ll be focusing on the ways each of these libraries implement GraphQL and what you’d need to do to start a project with each of them, so if you have questions about GraphQL itself, please check out my other blog post.
+This post is a followup to my previous post, [GraphQL — An Alternative to REST](/blog/2019/05/graphql-an-alternative-to-rest/). Please check that out for an introduction to GraphQL and what makes it different from other API solutions. I’ve collected a list of some of the currently-maintained GraphQL libraries for a few different languages, along with some examples (most of which aren’t fully functional on their own, they’d need more configuration) so you can see what it might be like to use GraphQL in your project. I’ll be focusing on the ways each of these libraries implement GraphQL and what you’d need to do to start a project with each of them, so if you have questions about GraphQL itself, please check out my other blog post.
 
 ### Apollo Server (JavaScript/TypeScript)
 

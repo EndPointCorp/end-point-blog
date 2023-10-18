@@ -59,7 +59,7 @@ Although Endless OS is unlike other Linux distros, you can fortunately still do 
 
 ### Browsing management
 
-I tried to search for similar control for my network, but couldn’t find a good option. My colleague previously [wrote](/blog/2020/12/pihole-great-holiday-gift) about Pi-hole, so I decided to give a try. I found a [tutorial](https://codeopolis.com/posts/running-pi-hole-in-docker-is-remarkably-easy/) on using Pi-hole in a container, and made minor changes from that. As Endless OS ships with podman included, we can use the docker command or adapt it to podman. So I changed the --restart flag to --restart=always and used podman. The rest is similar to the original post.
+I tried to search for similar control for my network, but couldn’t find a good option. My colleague previously [wrote](/blog/2020/12/pihole-great-holiday-gift/) about Pi-hole, so I decided to give a try. I found a [tutorial](https://codeopolis.com/posts/running-pi-hole-in-docker-is-remarkably-easy/) on using Pi-hole in a container, and made minor changes from that. As Endless OS ships with podman included, we can use the docker command or adapt it to podman. So I changed the --restart flag to --restart=always and used podman. The rest is similar to the original post.
 
 ```bash
 podman run \

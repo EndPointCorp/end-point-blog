@@ -1,5 +1,5 @@
 ---
-author: Phin Jensen
+author: Phineas Jensen
 title: 'Book review: “Two Scoops of Django: Best Practices for Django 1.8”'
 github_issue_number: 1242
 tags:

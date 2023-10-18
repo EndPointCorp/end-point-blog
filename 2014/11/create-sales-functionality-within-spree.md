@@ -11,7 +11,7 @@ date: 2014-11-14
 
 ### Introduction
 
-I recently started working with Spree and wanted to learn how to implement some basic features. I focused on one of the most common needs of any e-commerce business—​adding a sale functionality to products. To get a basic understanding of what was involved, I headed straight to the [Spree Developer Guides](https://guides.spreecommerce.org/developer/getting_started_tutorial.html). As I was going through the directions, I realized it was intended for the older Spree version 2.1. This led to me running into a few issues as I went through it using Spree’s latest version 2.3.4. I wanted to share with you what I learned, and some tips to avoid the same mistakes I made.
+I recently started working with Spree and wanted to learn how to implement some basic features. I focused on one of the most common needs of any e-commerce business—​adding a sale functionality to products. To get a basic understanding of what was involved, I headed straight to the [Spree Developer Guides](https://web.archive.org/web/20170827173154/http://guides.spreecommerce.org/developer/getting_started_tutorial.html). As I was going through the directions, I realized it was intended for the older Spree version 2.1. This led to me running into a few issues as I went through it using Spree’s latest version 2.3.4. I wanted to share with you what I learned, and some tips to avoid the same mistakes I made.
 
 ### Set-up
 
@@ -63,7 +63,7 @@ Once you begin to use Spree, you’ll soon find that the most heavily used areas
 
 ### Extensions in 3.5 steps
 
-The [next part](https://guides.spreecommerce.org/developer/extensions_tutorial.html) of the Spree documentation suggests adding the spree_fancy extension to our store to update the look and feel of the website, so let’s go ahead and follow the next few steps:
+The [next part](https://web.archive.org/web/20170912021339/http://guides.spreecommerce.org/developer/extensions_tutorial.html) of the Spree documentation suggests adding the spree_fancy extension to our store to update the look and feel of the website, so let’s go ahead and follow the next few steps:
 
 ### **Step 1: Update the Gemfile**
 

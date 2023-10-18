@@ -11,7 +11,7 @@ Git is a tool that all of us End Pointers use frequently. I was recently reviewi
 
 **git commit -m "****"**
 
-This is a no-brainer as it commits a set of changes to the repository. I always use the -m to set the git commit message instead of using an editor to do so. **Edit:** [Jon](/team/jon-jensen) recommends that new users not use *-m*, and that more advanced users use this sparingly, for good reasons described in the comments!
+This is a no-brainer as it commits a set of changes to the repository. I always use the -m to set the git commit message instead of using an editor to do so. **Edit:** [Jon](/team/jon-jensen/) recommends that new users not use *-m*, and that more advanced users use this sparingly, for good reasons described in the comments!
 
 **git checkout -b branchname**
 
@@ -23,7 +23,7 @@ After I’ve done a bit of work on my branch, I push it to the origin to a) back
 
 **git rebase origin/master**
 
-This one is very important to me, and our blog has featured a couple of articles about it ([#1](/blog/2010/10/git-branches-and-rebasing) and [#2](/blog/2009/05/git-rebase-just-workingness-baked-right)). A rebase rewinds your current changes (on your local branch), applies the changes from origin/master (or whatever branch you are rebasing against), and then reapplies your changes one by one. If there are any conflicts along the way, you are asked to resolve the conflicts, skip the commit, or abort the rebase. Using a rebase allows you to avoid those pesky merge commits which are not explicit in what changes they include and helps you keep a cleaner git history.
+This one is very important to me, and our blog has featured a couple of articles about it ([#1](/blog/2010/10/git-branches-and-rebasing/) and [#2](/blog/2009/05/git-rebase-just-workingness-baked-right/)). A rebase rewinds your current changes (on your local branch), applies the changes from origin/master (or whatever branch you are rebasing against), and then reapplies your changes one by one. If there are any conflicts along the way, you are asked to resolve the conflicts, skip the commit, or abort the rebase. Using a rebase allows you to avoid those pesky merge commits which are not explicit in what changes they include and helps you keep a cleaner git history.
 
 **git push -f origin branchname**
 
@@ -43,7 +43,7 @@ Want to delete branchname from the origin? Run this command. You can leave branc
 
 **git checkout -t origin/someone_elses_branch**
 
-Use this command to set up a local branch to track another developers branch. As the acting technical project manager for one of my clients, I use this command to track [Kamil’s](/blog/authors/kamil-ciemniewski) branch, in combination with the next command (cherry-pick), to get his work cleanly merged into master.
+Use this command to set up a local branch to track another developers branch. As the acting technical project manager for one of my clients, I use this command to track [Kamil’s](/blog/authors/kamil-ciemniewski/) branch, in combination with the next command (cherry-pick), to get his work cleanly merged into master.
 
 **git cherry-pick hashhashhash**
 

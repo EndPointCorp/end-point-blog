@@ -10,7 +10,7 @@ date: 2014-05-16
 
 Last week I was able to not only attend the [OpenWest](https://www.openwest.org/) conference, held in Orem, UT at the [UVU](https://www.uvu.edu/) campus, but I was also able to be a presenter. This year’s conference had their largest attendance to date and also their most diverse list of tracks and presentations. Many of the presentations are posted on [YouTube](https://www.youtube.com/channel/UC0wbcfzV-bHhABbWGXKHwdg).
 
-My own presentation was on **Git Workflows That Work** ([previous blog post](/blog/2014/05/git-workflows-that-work), [talk slides](https://speakerdeck.com/localfilmmaker/git-workflows-that-work)). It was part of the “Tools” track and went pretty well. Rather than recap my own presentation, I’d like to briefly touch on a few others I enjoyed.
+My own presentation was on **Git Workflows That Work** ([previous blog post](/blog/2014/05/git-workflows-that-work/), [talk slides](https://speakerdeck.com/localfilmmaker/git-workflows-that-work)). It was part of the “Tools” track and went pretty well. Rather than recap my own presentation, I’d like to briefly touch on a few others I enjoyed.
 
 ### Building a Scalable Codebase using Domain Driven Design
 

@@ -19,7 +19,7 @@ log_min_duration_statement = 10
 
 ### Log Everything
 
-A little while back, Greg wrote about configuring Postgres to [log everything, and the really good reasons to do so](/blog/2012/06/logstatement-postgres-all-full-logging). That isn’t what they intended to to here, but is effectively what happened. The integer in log_min_duration_statement represents milliseconds, not seconds. With a 10ms threshold it wasn’t logging everything the database server was doing, but enough that this performance graph happened:
+A little while back, Greg wrote about configuring Postgres to [log everything, and the really good reasons to do so](/blog/2012/06/logstatement-postgres-all-full-logging/). That isn’t what they intended to to here, but is effectively what happened. The integer in log_min_duration_statement represents milliseconds, not seconds. With a 10ms threshold it wasn’t logging everything the database server was doing, but enough that this performance graph happened:
 
 <div class="separator" style="clear: both; float: left; text-align: center; width: 305px"><img alt="Reconstructed I/O Utilization" height="183" src="/blog/2013/08/log-jam-be-careful-with-local-syslog/image-1.png" title="Reconstructed I/O Utilization" width="295"/><p class="wp-caption-text">Reconstructed I/O Utilization</p></div>
 

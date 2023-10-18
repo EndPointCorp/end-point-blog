@@ -5,10 +5,13 @@ title: "Building REST APIs with .NET 5, ASP.NET Core, and PostgreSQL"
 github_issue_number: 1761
 tags:
 - dotnet
+- aspdotnet
 - csharp
 - rest
 - api
 - postgres
+- docker
+- containers
 featured:
   endpoint: true
   image_url: /blog/2021/07/dotnet-5-web-api/market-cropped.jpg

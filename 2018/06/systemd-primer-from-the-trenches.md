@@ -52,7 +52,7 @@ Before you begin playing with the commands, you should install `bash-completion`
 
 As an example when you tab for completion you will see many of the systemctl options:
 
-```
+```plain
 # systemctl
 add-requires           enable                 is-system-running      preset                 show
 add-wants              exit                   kexec                  preset-all             show-environment
@@ -311,14 +311,14 @@ Not a bad way to collect a baseline on a newly-built server. Add it to your Ansi
 
 How do you see what is taking its sweet time during boot or what is borking your beautiful server following an update/​upgrade? Wonder no more!
 
-```
+```plain
 # systemd-analyze blame
 # systemd-analyze time
 ```
 
 For example on my system, I can see that my top 10 culprits for a potentially slow boot are:
 
-```
+```plain
 # systemd-analyze blame
           7.346s dracut-initqueue.service
           6.787s systemd-cryptsetup@luks.service
@@ -336,7 +336,7 @@ I might disable the Docker service by `systemctl disable docker` and start it wh
 
 What else can `systemd-analyze` show me?
 
-```
+```plain
 # systemd-analyze critical-chain
 The time after the unit is active or started is printed after the "@" character.
 The time the unit takes to start is printed after the "+" character.
@@ -364,7 +364,7 @@ graphical.target @5.209s
 
 Let’s look at how long our network targets take to start:
 
-```
+```plain
 # systemd-analyze critical-chain network.target
 The time after the unit is active or started is printed after the "@" character.
 The time the unit takes to start is printed after the "+" character.

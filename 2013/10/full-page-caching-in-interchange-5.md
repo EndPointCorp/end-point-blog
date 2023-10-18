@@ -11,7 +11,7 @@ tags:
 date: 2013-10-28
 ---
 
-I recently attended the [eCommerce Innovation Conference 2013](http://www.ecommerce-innovation.com/) with fellow End Pointer [Richard Templet](/team/richard-templet) and presented on the work End Point has done to develop full-page caching in Interchange 5. The work is in final review currently for inclusion into core Interchange and should provide a roadmap for cache management in Nitesi/Interchange 6.
+I recently attended the [eCommerce Innovation Conference 2013](http://www.ecommerce-innovation.com/) with fellow End Pointer [Richard Templet](/team/richard-templet/) and presented on the work End Point has done to develop full-page caching in Interchange 5. The work is in final review currently for inclusion into core Interchange and should provide a roadmap for cache management in Nitesi/Interchange 6.
 
 ### Parameters of a Caching Solution
 
@@ -67,7 +67,7 @@ The ternary nature of Volatile allows a developer to explicitly control the cach
 
 #### [if-not-volatile]
 
-New container tag whose body will only interpolate if the value of $::Instance->{Volatile} at the time of interpolation is false. Tag is particularly useful for placing settings for cache headers on shared resources (includes files, components, etc.) where the final document may or may not be cacheable.
+New container tag whose body will only interpolate if the value of `$::Instance->{Volatile}` at the time of interpolation is false. Tag is particularly useful for placing settings for cache headers on shared resources (includes files, components, etc.) where the final document may or may not be cacheable.
 
 #### OutputCookieHook
 
@@ -97,16 +97,16 @@ Take advantage of writing custom actionmaps, which allow the developer extreme f
 
 By default, search objects which Interchange uses for more lists, are restricted to access from the generating user’s session. This is a safeguard as often search results include personal data for access only to the requestor. However, for features such as category lists, this creates a difficult burden for the developer who wishes to cache the popular resources and whose results are identical across all users.
 
-We can overcome this difficulty by making the search definitions for category lists, or other canned searches, include the [permanent more](/blog/2012/01/interchange-search-caching-with) indicator. Permanent more causes all identical searches to share a common search object accessible by the same URLs, and freeing the usual coupling with the session of the search originator.
+We can overcome this difficulty by making the search definitions for category lists, or other canned searches, include the [permanent more](/blog/2012/01/interchange-search-caching-with/) indicator. Permanent more causes all identical searches to share a common search object accessible by the same URLs, and freeing the usual coupling with the session of the search originator.
 
 #### Address Common Session Variables
 
 There are certain session variables that are often found in page code and can cause a number of difficulties when trying to make a resource cacheable. Start by tracking through the use of each of the following and come up with a strategy to remove the dependencies so that the interpolated code is free of them:
 
-- [value]
-- [data session ___]
-- [set]/[seti]
-- Any [if] conditionals that use those respective bases (e.g., [if value], [if session], and [if scratch])
+- `[value]`
+- `[data session ___]`
+- `[set]/[seti]`
+- Any `[if]` conditionals that use those respective bases (e.g., `[if value]`, `[if session]`, and `[if scratch]`)
 
 #### Cacheable Redirects
 
@@ -116,7 +116,7 @@ Any code that issues a redirect must do so consistently with respect to its URL.
 
 It is common practice to define profile and click code in scratch variables. This is particularly true for click code defined with the [button] tag, which while convenient causes the click action to be defined under the hood in scratch space. In order for these event-driven features to work, the resource must compile that code and seed it in the session in anticipation of the user’s next actions. If those resources are cached, those important features are never added to the session as the result of a page load and, so, none of the actions will work.
 
-All use of [button] or [set] to produce click or profile code should be moved into the profile files (typically found in etc/profile.*). There they are added to the Interchange global configuration at compile time and are thus available to all users without regard to the state of their sessions. This is good practice generally since it is often easy (particularly with [button]) to have multiple actions map to the same scratch key. When that happens, a user going through the browser back button can get invalid results on actions taken because the click or profile definitions have changed with respect to the anticipated such actions on the current page.
+All use of `[button]` or `[set]` to produce click or profile code should be moved into the profile files (typically found in `etc/profile.*`). There they are added to the Interchange global configuration at compile time and are thus available to all users without regard to the state of their sessions. This is good practice generally since it is often easy (particularly with `[button]`) to have multiple actions map to the same scratch key. When that happens, a user going through the browser back button can get invalid results on actions taken because the click or profile definitions have changed with respect to the anticipated such actions on the current page.
 
 #### Set SuppressCachedCookies to Yes
 
@@ -126,7 +126,7 @@ As described earlier, this will tell the Interchange core not to write any cooki
 
 At any point in the development of the response body, Interchange can be issued a pragma that tells it to treat the response as cacheable. This will interact with the core features described above to ensure that there is no impact on the user session as a result of this request, and put the correct headers in the output stream (as well as keep the cookie headers out).
 
-Invocation looks something like [tag pragma cache_control]max-age=NNN[/tag], where NNN is the number of seconds the cache should persist.
+Invocation looks something like `[tag pragma cache_control]max-age=NNN[/tag]`, where NNN is the number of seconds the cache should persist.
 
 ### Impact on Session Management
 
@@ -153,23 +153,24 @@ If caching is desirable on resources that cannot be decoupled from session influ
 
 Management of such a process is relatively easy with modern Javascript frameworks such as jQuery. As a typical example, one might need to replace the following session-dependent code
 
-```
-  [if session logged_in]
-    Hi, [value fname]!
-  [/if]
+```plain
+[if session logged_in]
+  Hi, [value fname]!
+[/if]
 ```
 
 with client-side management:
 
+```html
+<span id="fname_display"></span>
 ```
-  <span id="fname_display"></span>
-```
+
 and in the ready() event elsewhere with our session cookie data stored in valuesData:
 
-```
-  if (valuesData.fname) {
-    $('#fname_display').replaceWith('Hi, ' + valuesData.fname + '!');
-  }
+```js
+if (valuesData.fname) {
+  $('#fname_display').replaceWith('Hi, ' + valuesData.fname + '!');
+}
 ```
 
 The OutputCookieHook was developed as a convenient mechanism for constructing the proposed valuesData cookie above, allowing for a subroutine to build the cookie just prior to the core code that constructs the document headers but after any standard actions that would alter the session and would need to be captured in the cookie data.

@@ -63,7 +63,7 @@ These updates proved extremely valuable in terms of minimizing database hits by 
 
 ### Cache Management
 
-One of the problem areas that Skylight highlighted was that many of our writes were taking quite a while. In the Rails 2.3 app, [Rails Sweepers](https://apidock.com/rails/ActionController/Caching/Sweeping) were used extensively to perform manual cache expiration after specific actions (e.g. create or update). With the update to Rails 4.1, the code can take advantage of better Rails cache key management as well as [Russian Doll caching](http://blog.remarkablelabs.com/2012/12/russian-doll-caching-cache-digests-rails-4-countdown-to-2013), eliminating the need for manual cache management. The application still uses full page caching in some instances, so some cache management is required to clear the fully cached pages, but the fragment cache management has improved dramatically.
+One of the problem areas that Skylight highlighted was that many of our writes were taking quite a while. In the Rails 2.3 app, [Rails Sweepers](https://apidock.com/rails/ActionController/Caching/Sweeping) were used extensively to perform manual cache expiration after specific actions (e.g. create or update). With the update to Rails 4.1, the code can take advantage of better Rails cache key management as well as [Russian Doll caching](https://web.archive.org/web/20170828011821/http://blog.remarkablelabs.com/2012/12/russian-doll-caching-cache-digests-rails-4-countdown-to-2013), eliminating the need for manual cache management. The application still uses full page caching in some instances, so some cache management is required to clear the fully cached pages, but the fragment cache management has improved dramatically.
 
 ```ruby
 # Example of cache key based on item only

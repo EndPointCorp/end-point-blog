@@ -16,7 +16,7 @@ At End Point we recommend [PostgreSQL](https://www.postgresql.org/) for most of 
 
 - More powerful in-database functions with mutable function parameters and improved PL/Perl language support (return_next and spi_fetchrow; use strict; return arrays).
 
-- Convenient interactive error retry in psql client (coded by End Point's own [Greg Sabino Mullane](/blog/authors/greg-sabino-mullane)).
+- Convenient interactive error retry in psql client (coded by End Point's own [Greg Sabino Mullane](/blog/authors/greg-sabino-mullane/)).
 
 - Integrated encryption (pgcrypto module for PGP, SHA, AES, and DES encryption functions).
 

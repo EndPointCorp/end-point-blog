@@ -14,7 +14,7 @@ date: 2021-05-20
 ![](/blog/2021/05/database-design-using-composite-keys/shipping-containers.jpg)
 [Photo](https://unsplash.com/photos/kyCNGGKCvyw) by [Chuttersnap](https://unsplash.com/@chuttersnap)
 
-Whether to use single-column or composite keys is another long-debated subject of database design. I previously wrote to support [using natural keys](/blog/2021/03/database-design-using-natural-keys) and here I want to make good arguments for using composite keys.
+Whether to use single-column or composite keys is another long-debated subject of database design. I previously wrote to support [using natural keys](/blog/2021/03/database-design-using-natural-keys/) and here I want to make good arguments for using composite keys.
 
 ### Single-column vs. Composite
 

@@ -12,7 +12,7 @@ date: 2012-04-26
 
 I tend to walk away from every RailsConf feeling that there was a trend for each conference. In 2009, I thought the trend was Passenger, in 2010, NoSQL and Rails 3 was all the rage, and in 2011, many of the talks were related to CoffeeScript and SASS. While there was some of these technical specifics at this conference, I felt that the overarching trend this year is that several folks that are extremely involved in Rails ([DHH](https://en.wikipedia.org/wiki/David_Heinemeier_Hansson), [Yehuda Katz](https://yehudakatz.com/), [Aaron Patterson](http://tenderlovemaking.com/), etc.) are very passionately involved in the course correction needed to keep Rails relevent.
 
-As I mentioned in my [blog article on Day 1](/blog/2012/04/railsconf-2012-day-one), DHH talked about progress. DHH focused on the limitations of progress ([loss aversion](https://en.wikipedia.org/wiki/Loss_aversion)) and how and why people move from curious to suspicious when working with technology. He didn’t delve into any of the Rails 4 details, but simply ended by sharing that Rails 4 will break and challenge things.
+As I mentioned in my [blog article on Day 1](/blog/2012/04/railsconf-2012-day-one/), DHH talked about progress. DHH focused on the limitations of progress ([loss aversion](https://en.wikipedia.org/wiki/Loss_aversion)) and how and why people move from curious to suspicious when working with technology. He didn’t delve into any of the Rails 4 details, but simply ended by sharing that Rails 4 will break and challenge things.
 
 On Day 2, Aaron Patterson covered a discussion about what it means to incur technical debt, and how developers have different thresholds of how much technical debt is tolerated.
 
@@ -45,6 +45,7 @@ covered here, so check out [the slides](https://speakerdeck.com/wycats/rails-the
 - API between JS framework and Rails, as the popularity of JS frameworks grows
 
 <img border="0" src="/blog/2012/04/railsconf-2012-whats-next-in-rails/image-1.jpeg" width="750"/>
+
 Coding with convention (middle) allows developers* to avoid making diverging trivial decisions (left). Conventions provide the ability to share resources and domain expertise and add new features quickly, even if course correction (right) is needed on those conventions.
 
 * not to be confused with sperm :)

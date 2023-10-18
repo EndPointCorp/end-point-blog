@@ -15,7 +15,7 @@ I find it hard to remember a period in my whole life in which I issued, reissued
 
 And while that’s usually fun and interesting, there’s one thing I often needed and never figured out, till a few days ago, which is how to generate CSRs (Certificate Signing Requests) with AlternativeNames (eg: including www and non-www domain in the same cert) with a one-liner command.
 
-This need is due to the fact that some certificate providers (like GeoTrust) don’t cover the parent domain when requesting a new certificate (eg: CSR for www.endpoint.com won’t cover endpoint.com), unless you specifically request so.
+This need is due to the fact that some certificate providers (like GeoTrust) don’t cover the parent domain when requesting a new certificate (eg: CSR for www&#x2e;endpoint.com won’t cover endpoint.com), unless you specifically request so.
 
 Luckily that’s not the case with other Certificate products (like RapidSSL) which already offer this feature built-in.
 

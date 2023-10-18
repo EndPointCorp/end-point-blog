@@ -100,7 +100,7 @@ This command will guide you through creating your composer.json config.
 
 Package name (<vendor>/<name>) [kevin/my-console-app]:
 Description []:
-Author [Kevin Campusano <kcampusano@endpoint.com>, n to skip]:
+Author [Kevin Campusano <kcampusano@endpointdev.com>, n to skip]:
 Minimum Stability []:
 Package Type (e.g. library, project, metapackage, composer-plugin) []:
 License []:
@@ -115,7 +115,7 @@ Would you like to define your dev dependencies (require-dev) interactively [yes]
     "authors": [
         {
             "name": "Kevin Campusano",
-            "email": "kcampusano@endpoint.com"
+            "email": "kcampusano@endpointdev.com"
         }
     ],
     "require": {}
@@ -247,7 +247,7 @@ use Zend\Validator\CreditCard;
 
 // Imagine these come from a file, database or http request or something
 $emailsToValidate = [
-    "kcampusano@endpoint.com",
+    "kcampusano@endpointdev.com",
     "what is this?",
     312321,
     null

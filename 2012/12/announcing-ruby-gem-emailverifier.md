@@ -8,15 +8,13 @@ tags:
 date: 2012-12-21
 ---
 
-
-
-How many times have you tried to provide a really nice validation solution for our fields containing user emails? Most of the time - the best we can come up with is some long and incomprehensible Regex we find on [StackOverflow](http://stackoverflow.com/questions/201323/using-a-regular-expression-to-validate-an-email-address) or somewhere else on the Internet.
+How many times have you tried to provide a really nice validation solution for our fields containing user emails? Most of the time, the best we can come up with is some long and incomprehensible regex we find on [StackOverflow](http://stackoverflow.com/questions/201323/using-a-regular-expression-to-validate-an-email-address) or somewhere else on the Internet.
 
 But that's really only a partial solution. As much as email format correctness is a tricky thing to get right using regular expressions, it doesn't provide us with any assurance that user entered email address in reality **exists**.
 
-**But it does a great job at finding out some typos and misspellings.. right?**
+**But it does a great job at finding out some typos and misspellings… right?**
 
-Yes - but I'd argue that it doesn't cover full range of that kind of data entry errors. The user could fill in 'whatever' and traditional validation through regexes would do a great job at finding out that it's not really an email address. But what I'm concerned with here are all those situations when I fat finger kaml@endpoint.com instead of kamil@endpoint.com.
+Yes - but I'd argue that it doesn't cover full range of that kind of data entry errors. The user could fill in 'whatever' and traditional validation through regexes would do a great job at finding out that it's not really an email address. But what I'm concerned with here are all those situations when I fat finger kaml&#x40;endpoint.com instead of kamil&#x40;endpoint.com.
 
 Some would argue at this point that it's still recoverable since I can find out about the error on the next page in a submission workflow, but I don't want to spend another something-minutes on going through the whole process again (possibly filling out tens of form fields along the way).
 
@@ -24,7 +22,7 @@ And look at this issue from the point of view of a web application owner: You'd 
 
 ### The Solution
 
-Recently, I faced this email validation question for [mobixa.com](http://mobixa.com). (By the way. if you own a smart phone that you'd like to sell - there is no better place than [mobixa.com](http://mobixa.com) to do it!)
+Recently, I faced this email validation question for Mobixa.com. (By the way, if you own a smart phone that you'd like to sell - there is no better place than there to do it!)
 
 The results of my work, I'd like to announce here and now. Please give a warm welcome to a newborn citizen of RubyGems society: [email_verifier](https://github.com/kamilc/email_verifier)
 
@@ -72,8 +70,6 @@ Or - if you'd like to use it outside of your models:
 EmailValidator.check(youremail)
 ```
 
-This method will return true or false, or - will throw exception with nicely detailed info about what's wrong.
+This method will return true or false, or will throw exception with nicely detailed info about what's wrong.
 
-Read More about the extension at [Email verifier RDoc](http://rubydoc.info/gems/email_verifier/0.0.4/frames) or try to sell your smartphone back here at [Mobixa.com](http://mobixa.com).
-
-
+Read more about the extension at [Email verifier RDoc](http://rubydoc.info/gems/email_verifier/0.0.4/frames) or try to sell your smartphone at Mobixa.com.

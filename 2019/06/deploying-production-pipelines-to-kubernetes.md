@@ -7,6 +7,8 @@ tags:
 - kubernetes
 - natural-language-processing
 - python
+- docker
+- containers
 date: 2019-06-28
 ---
 
@@ -31,14 +33,14 @@ Many solutions of course exist. With this article, I’d like to go over this pr
 
 ### Project description
 
-End Point Corporation was founded in 1995. That’s 24 years! About 9 years later, [the oldest article](/blog/2004/10/red-hat-enterprise-linux-3-update-3) on the company’s blog was published. Since that time, a staggering number of 1435 unique articles have been published. That’s a lot of words! This is something we can definitely use in a smart way.
+End Point Corporation was founded in 1995. That’s 24 years! About 9 years later, [the oldest article](/blog/2004/10/red-hat-enterprise-linux-3-update-3/) on the company’s blog was published. Since that time, a staggering number of 1435 unique articles have been published. That’s a lot of words! This is something we can definitely use in a smart way.
 
 For the purpose of having fun with building a production-grade data pipeline, let’s imagine the following project:
 
 - A [doc2vec](https://cs.stanford.edu/~quocle/paragraph_vector.pdf) model trained on the corpus of End Point’s blog articles
 - Use of the paragraph vectors for each article to find the 10 other, most similar articles
 
-I blogged about using the [matrix factorization](/blog/2018/07/recommender-mxnet) as a simple [collaborative filtering](https://en.wikipedia.org/wiki/Recommender_system#Collaborative_filtering) style of the recommender system. We can think about today’s doc2vec-based model as an example of the [content based filtering](https://en.wikipedia.org/wiki/Recommender_system#Content-based_filtering). The business value would be the potentially increased blog traffic from users staying longer on the website.
+I blogged about using the [matrix factorization](/blog/2018/07/recommender-mxnet/) as a simple [collaborative filtering](https://en.wikipedia.org/wiki/Recommender_system#Collaborative_filtering) style of the recommender system. We can think about today’s doc2vec-based model as an example of the [content based filtering](https://en.wikipedia.org/wiki/Recommender_system#Content-based_filtering). The business value would be the potentially increased blog traffic from users staying longer on the website.
 
 ### Scalable pipelines
 

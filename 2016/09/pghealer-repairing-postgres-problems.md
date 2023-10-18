@@ -26,7 +26,7 @@ For the initial setup, we will create a new Postgres cluster and install the pgb
 The all-important checksum feature needs to be enabled when we initdb, and we will use 
 a non-standard port for testing:
 
-```
+```plain
 $ initdb --data-checksums dojo
 The files belonging to this database system will be owned by user "greg".
 ...
@@ -54,7 +54,7 @@ done.
 Next, we install the pg_healer extension. As it needs to access some low-level hooks, we 
 need to load it on startup, by adding a line to the postgresql.conf file:
 
-```
+```plain
 $ git clone git://github.com/turnstep/pg_healer.git
 Cloning into 'pg_healer'...
 $ cd pg_healer
@@ -67,8 +67,12 @@ $ pg_ctl restart -D dojo -l log.dojo.txt
 waiting for server to shut down.... done
 server stopped
 server starting
-## Make sure the extension has loaded cleanly.
-## If it did not, the log file would complain
+```
+
+Make sure the extension has loaded cleanly.
+it did not, the log file would complain
+
+```plain
 $ tail -2 log.dojo.txt
 LOG:  database system is ready to accept connections
 LOG:  autovacuum launcher started
@@ -80,7 +84,7 @@ serious problem. The type of problem that normally causes the DBA to get paged i
 middle of the night. Before we do that, we want to take a peek at the contents of 
 that table, and then find out which actual disk files contain the table:
 
-```
+```plain
 $ psql -p 9999 -c "select * from pgbench_branches"
  bid | bbalance | filler 
 -----+----------+--------
@@ -91,16 +95,19 @@ $ psql -p 9999 -Atc "select format('%s/%s',
   current_setting('data_directory'),
   pg_relation_filepath('pgbench_branches'))"
 /home/greg/pg_healer/dojo/base/16384/198461
+```
 
-## That file is too cumbersome to keep typing out, so:
+That file is too cumbersome to keep typing out, so:
+
+```plain
 $ ln -s /home/greg/pg_healer/dojo/base/16384/198461 myrelfile
 ```
 
 Let’s throw a deadly shuriken right into the middle of it!
 
-```
-## Here is what the file looks like in its original uncorrupted form
-## (checksum is in red):
+Here is what the file looks like in its original uncorrupted form (checksum is bytes 9 & 10, 74 66):
+
+```plain
 $ xxd -a -g1 -u myrelfile
 00000000: 00 00 00 00 30 69 BC 37 74 66 04 00 1C 00 E0 1F  ....0i.7tf......
 00000010: 00 20 04 20 00 00 00 00 E0 9F 40 00 00 00 00 00  . . ......@.....
@@ -108,14 +115,20 @@ $ xxd -a -g1 -u myrelfile
 *
 00001fe0: F7 0B 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
 00001ff0: 01 00 03 00 01 09 18 03 01 00 00 00 00 00 00 00  ................
+```
 
-## Good ol' dd is the right tool for the job here:
+Good ol' dd is the right tool for the job here:
+
+```plain
 $ echo -n "Shuriken!" | dd conv=notrunc oflag=seek_bytes seek=4000 bs=9 count=1 of=myrelfile
 1+0 records in
 1+0 records out
 9 bytes (9 B) copied, 0.000156565 s, 57.5 kB/s
+```
 
-## Take a peek inside the file to make sure the shuriken got embedded deeply:
+Take a peek inside the file to make sure the shuriken got embedded deeply:
+
+```plain
 $ xxd -a -g1 -u myrelfile
 00000000: 00 00 00 00 30 69 BC 37 74 66 04 00 1C 00 E0 1F  ....0i.7tf......
 00000010: 00 20 04 20 00 00 00 00 E0 9F 40 00 00 00 00 00  . . ......@.....
@@ -128,8 +141,7 @@ $ xxd -a -g1 -u myrelfile
 00001ff0: 01 00 03 00 01 09 18 03 01 00 00 00 00 00 00 00  ................
 ```
 
-<div class="separator" style="margin: 0 1em 1em 3em; clear: both; float:right; text-align: center;"><a href="/blog/2016/09/pghealer-repairing-postgres-problems/image-1.jpeg" imageanchor="1" style="clear: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" src="/blog/2016/09/pghealer-repairing-postgres-problems/image-1.jpeg"/></a><br/><small><a href="https://flic.kr/p/uoCuk">These shurikens</a> are not so deadly, but quite yummy!<br/>(photograph by <a href="https://www.flickr.com/photos/karviainen/">kahvikisu</a>)</small></div>
-<br>
+<div class="separator" style="margin: 1em 1em 1em 3em; clear: both; float:right; text-align: center;"><a href="/blog/2016/09/pghealer-repairing-postgres-problems/image-1.jpeg" imageanchor="1" style="clear: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" src="/blog/2016/09/pghealer-repairing-postgres-problems/image-1.jpeg"/></a><br/><small><a href="https://flic.kr/p/uoCuk">These shurikens</a> are not so deadly, but quite yummy!<br/>(photograph by <a href="https://www.flickr.com/photos/karviainen/">kahvikisu</a>)</small></div>
 
 Now that we’ve messed up the file, watch closely at what happens when we try to 
 read from it. We are going to do this three times. The first time, the table will 
@@ -138,23 +150,29 @@ the table will be read from the disk and throw an error. At this point, pg_heale
 will see the error and repair it. The final read will pull from the completely 
 healed table:
 
-```
+```plain
 $ psql -p 9999 -c "select * from pgbench_branches"
  bid | bbalance | filler 
 -----+----------+--------
    1 |        0 | 
 (1 row)
+```
 
-## This will force the table out of shared_buffers, so that the next
-## time it is accessed, Postgres must read from the disk:
+This will force the table out of shared_buffers, so that the next
+time it is accessed, Postgres must read from the disk:
+
+```plain
 $ psql -p 9999 -qtc "select pg_healer_remove_from_buffer('pgbench_branches')"
 
 $ psql -p 9999 -c "select * from pgbench_branches"
 WARNING:  page verification failed, calculated checksum 9478 but expected 26228
 INFO:  File has been healed: base/16384/198461 (intrinsic healing)
 ERROR:  invalid page in block 0 of relation base/16384/198461
+```
 
-## Mutant healing power was activated. Observe:
+Mutant healing power was activated. Observe:
+
+```plain
 $ psql -p 9999 -c "select * from pgbench_accounts"
  bid | bbalance | filler 
 -----+----------+--------
@@ -176,7 +194,7 @@ files to a new directory. Details on how this is kept refreshed will be covered 
 for now, let’s see it in action and observe how it can help Postgres heal itself from 
 more serious corruption problems:
 
-```
+```plain
 $ psql -p 9999 -c 'create extension pg_healer'
 CREATE EXTENSION
 $ psql -p 9999 -qc 'checkpoint'
@@ -187,7 +205,7 @@ Rather than free space, let’s corrupt something a little more important: the l
 which indicate where, inside the page, that each tuple (aka table row) is located. Extremely critical information, 
 that is about to get blown away with another deadly shuriken!
 
-```
+```plain
 $ echo -n "Shuriken!" | dd conv=notrunc oflag=seek_bytes seek=20 bs=9 count=1 of=myrelfile
 1+0 records in
 1+0 records out
@@ -212,8 +230,11 @@ $ psql -p 9999 -c "select * from pgbench_branches"
 -----+----------+--------
    1 |        0 | 
 (1 row)
+```
 
-## Has the shuriken really been removed?
+Has the shuriken really been removed?
+
+```plain
 $ xxd -a -g1 -u myrelfile
 00000000: 00 00 00 00 30 69 BC 37 74 66 04 00 1C 00 E0 1F  ....0i.7tf......
 00000010: 00 20 04 20 00 00 00 00 E0 9F 40 00 00 00 00 00  . . ......@.....
@@ -237,17 +258,23 @@ ensures that the checksums against the copy will no longer match. After that, we
 are going to add some corruption to one of the table rows (aka tuples), and see if 
 pg_healer is able to repair the table:
 
-```
+```plain
 $ psql -p 9999 -qtc 'insert into pgbench_branches values (2,12345)'
 $ psql -p 9999 -qc 'checkpoint'
+```
 
-## Throw a shuriken right into an active row!
+Throw a shuriken right into an active row!
+
+```plain
 $ echo -n "Shuriken!" | dd conv=notrunc oflag=seek_bytes seek=8180 bs=9 count=1 of=myrelfile
 1+0 records in
 1+0 records out
 9 bytes (9 B) copied, 0.000110317 s, 81.6 kB/s
+```
 
-## If you look close, you will notice the checksum (in red) has also changed:
+If you look close, you will notice the checksum (now A4 8E) has also changed:
+
+```plain
 $ xxd -a -g1 -u myrelfile
 00000000: 00 00 00 00 70 B0 8E 38 A4 8E 00 00 20 00 C0 1F  ....p..8.... ...
 00000010: 00 20 04 20 00 00 00 00 E0 9F 40 00 C0 9F 40 00  . . ......@...@.
@@ -282,6 +309,6 @@ Please jump in and lend a hand—​the project is on github as [pg_healer](http
 
 Data corruption is a fact of life DBAs must confront, be it from failing hard drives, cosmic rays, 
 or other reason. While the detection of such errors was greatly improved in Postgres 9.3 with the 
---data-checksums argument to initdb (which ought to default on!), it’s time to not just detect, but heal!
+`--data-checksums` argument to initdb (which ought to default on!), it’s time to not just detect, but heal!
 
 

@@ -7,12 +7,13 @@ tags:
 - open-source
 - perl
 - postgres
+- bucardo
 date: 2007-10-10
 ---
 
 ### Overview
 
-Bucardo, an asynchronous multi-master replication system for [PostgreSQL](/technology/postgresql), was recently released by [Greg Sabino Mullane](/blog/authors/greg-sabino-mullane). First previewed at this year's PostgreSQL Conference in Ottawa, this program was developed for Backcountry.com to help with their complex database needs.
+Bucardo, an asynchronous multi-master replication system for [PostgreSQL](/expertise/postgresql/), was recently released by [Greg Sabino Mullane](/blog/authors/greg-sabino-mullane/). First previewed at this year's PostgreSQL Conference in Ottawa, this program was developed for Backcountry.com to help with their complex database needs.
 
 Bucardo allows a Postgres database to be replicated to another Postgres database, by grouping together tables in transaction-safe manner. Each group of tables can be set up in one of three modes:
 

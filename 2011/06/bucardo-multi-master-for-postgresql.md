@@ -20,8 +20,6 @@ The original Bucardo
 
 The next version of [Bucardo](https://bucardo.org/Bucardo/), a replication system for [Postgres](https://www.postgresql.org/), is almost complete. The scope of the changes required a major version bump, so this Bucardo will start at version 5.0.0. Much of the innards was rewritten, with the following goals:
 
- 
-
 ### Multi-master support
 
 Where “multi” means “as many as you want”! There are no more pushdelta (master to slaves) or swap (master to master) syncs: there is simply one sync where you tell it which databases to use, and what role they play. See examples below.
@@ -40,7 +38,7 @@ Not only are more details provided, there is now the ability to control how verb
 
 ### Different targets
 
-Who says your slave (target) databases need to be Postgres? In addition to the ability to write text SQL files (for say, shipping to a different system), you can have Bucardo push to other systems as well. Stay tuned for more details on this. (Update: there is a [blog post about using MongoDB as a target](/blog/2011/06/mongodb-replication-from-postgres-using))
+Who says your slave (target) databases need to be Postgres? In addition to the ability to write text SQL files (for say, shipping to a different system), you can have Bucardo push to other systems as well. Stay tuned for more details on this. (Update: there is a [blog post about using MongoDB as a target](/blog/2011/06/mongodb-replication-from-postgres-using/))
 
 -----------
 
@@ -196,5 +194,3 @@ Last error:                     :
 ```
 
 This gives us a little more information about the sync itself, as well as another important metric, how long the sync itself took to run, in this case, 42 seconds. That particular metric might make its way back to the overall “status” view above. Try things out and [help us find bugs](https://github.com/bucardo/bucardo/issues) and improve Bucardo!
-
-

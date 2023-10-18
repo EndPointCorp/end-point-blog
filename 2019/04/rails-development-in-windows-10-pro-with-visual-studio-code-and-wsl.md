@@ -7,7 +7,7 @@ tags:
 - ruby
 - rails
 - windows
-- visual-studio-code
+- vscode
 date: 2019-04-04
 ---
 

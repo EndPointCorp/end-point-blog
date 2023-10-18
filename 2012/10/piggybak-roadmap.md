@@ -18,7 +18,7 @@ Until now, the advantage of Piggybak is that it's a fairly lightweight approach.
 
 ### Cons of Piggybak Approach
 
-Because Piggybak has a lightweight approach, the major disadvantage is that it cannot compete with existing ecommerce frameworks as an out of the box solution with a full ecommerce feature set. When compared with more feature-rich ecommerce platforms like [Spree](http://spreecommerce.com/) and [Magento](http://www.magentocommerce.com/) these other ecommerce platforms may have more features out of the box. This is a disadvantage because the abstraction, code cleanliness and maintainability provided by Piggybak is not necessarily as strong of a selling point to the feature list to a potential website owner.
+Because Piggybak has a lightweight approach, the major disadvantage is that it cannot compete with existing ecommerce frameworks as an out of the box solution with a full ecommerce feature set. When compared with more feature-rich ecommerce platforms like [Spree](https://spreecommerce.org/) and Magento these other ecommerce platforms may have more features out of the box. This is a disadvantage because the abstraction, code cleanliness and maintainability provided by Piggybak is not necessarily as strong of a selling point to the feature list to a potential website owner.
 
 ### The Roadmap
 

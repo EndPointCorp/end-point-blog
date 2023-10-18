@@ -40,7 +40,7 @@ I’m not trying to be a Rails fangirl here (I use WordPress for my personal web
 
 ### My Story
 
-Several weeks ago, I started putting together a prototype for a client for a Ruby on Rails ecommerce site. Their site has fairly custom needs with a complex data relationships (data model), complex search requirements, but relatively simple cart and checkout needs. I was certain that existing open source Ruby on Rails ecommerce platforms would require a significant amount of customization and would be a hassle to maintain. I also recently spent a good deal of time working with RailsAdmin on a non-ecommerce Rails project ([blogged here](/blog/2011/08/railsadmin-gem-ecommerce)).
+Several weeks ago, I started putting together a prototype for a client for a Ruby on Rails ecommerce site. Their site has fairly custom needs with a complex data relationships (data model), complex search requirements, but relatively simple cart and checkout needs. I was certain that existing open source Ruby on Rails ecommerce platforms would require a significant amount of customization and would be a hassle to maintain. I also recently spent a good deal of time working with RailsAdmin on a non-ecommerce Rails project ([blogged here](/blog/2011/08/railsadmin-gem-ecommerce/)).
 
 Rather than try to fight against an existing framework, I developed a prototype website using RailsAdmin. My prototype quickly developed into an ecommerce Ruby on Rails Engine, which offers basic shopping cart functionality, but it doesn’t try to solve every problem for everyone. Below are some details about this gem as a Rails Engine, called [Piggybak](https://github.com/piggybak/piggybak):
 
@@ -74,6 +74,7 @@ Admin dashboard: Note that distinction between the primary application and the P
 Any item in the application can become sellable. This nested form displays in the admin for the sellable items.
 
 <a href="/blog/2012/01/piggybak-mountable-ecommerce-ruby-on/image-4-big.png" imageanchor="1" style="margin-left:1em; margin-right:1em"><img border="0" src="/blog/2012/01/piggybak-mountable-ecommerce-ruby-on/image-4.png" /></a>
+
 The cart form added to the image page is driven by the Piggybak gem, but the rest of the page content is driven by the primary application. The gem doesn’t make any decisions about what will be displayed on a standard product page. It only helps with generating the form to add something to the shopping cart.
 
 <a href="/blog/2012/01/piggybak-mountable-ecommerce-ruby-on/image-5.png" imageanchor="1" style="margin-left:1em; margin-right:1em"><img border="0" src="/blog/2012/01/piggybak-mountable-ecommerce-ruby-on/image-5.png" /></a>

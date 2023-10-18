@@ -14,7 +14,7 @@ Lately, I’ve upgraded a few Spree projects with the recent Spree releases. Spr
 
 <a href="https://spreecommerce.org/"><img alt="Spree" src="https://spreecommerce.org/wp-content/themes/spree-theme/assets/img/spree-logo@2x.png"/></a>
 
-First, I made sure my application was running and committed all recent changes to have a clean branch. I follow the development principles outlined [here](/blog/2010/03/spree-software-development) that describe methodology for developing custom functionality on top of the Spree framework core. All of my custom functionality lives in the RAILS_ROOT/vendor/extensions/site/ directory, so that directory probably won’t be touched during the upgrade.
+First, I made sure my application was running and committed all recent changes to have a clean branch. I follow the development principles outlined [here](/blog/2010/03/spree-software-development/) that describe methodology for developing custom functionality on top of the Spree framework core. All of my custom functionality lives in the RAILS_ROOT/vendor/extensions/site/ directory, so that directory probably won’t be touched during the upgrade.
 
 ```plain
 steph@The-Laptop:/var/www/ep/myproject$ git status

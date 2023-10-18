@@ -16,7 +16,7 @@ Hello again all. I was working on another [Spree Commerce Site](https://guides.s
 
 The promotions feature can be used to offer discounts like free shipping, buy one get one free etc.. The client on this particular project had asked for the ability to provide a coupon for free shipping. Presumably this would be a quick and easy addition since these types of promotions are included in Spree.
 
-The site in question makes use of [Spree’s Active Shipping Gem](https://github.com/spree/spree_active_shipping), and plugs in the [UPS Shipping API](https://www.ups.com/content/us/en/bussol/browse/online_tools_shipping.html) to return accurate and timely shipping prices with the UPS carrier.
+The site in question makes use of [Spree’s Active Shipping Gem](https://github.com/spree/spree_active_shipping), and plugs in the [UPS Shipping API](https://web.archive.org/web/20170709150700/https://www.ups.com/us/en/services/technology-integration/online-tools-shipping.page) to return accurate and timely shipping prices with the UPS carrier.
 
 The client offers a variety of shipping methods including Flat Rate Ground, Second Day Air, 3 Day Select, and Next Day Air. Often, Next Day Air shipping costs several times more than Ground. E.g.: If something costs $20 to ship Ground, it could easily cost around $130 to ship Next Day Air.
 
@@ -52,7 +52,7 @@ module Spree
   end
 ```
 
-Note that you have to create a partial for the rule, as per the [documentation](http://guides.spreecommerce.com/developer/promotions.html#rules).
+Note that you have to create a partial for the rule, as per the [documentation](https://dev-docs.spreecommerce.org/internals/promotions#rules).
 
 Then, in config/locales/en.yml I added a name and description for the rule.
 

@@ -73,4 +73,4 @@ WordPress is a great CMS with an elegant backend and a big list of themes and pl
 
 The techniques we saw in this post are meant for websites that only need some small custom changes or improvements. If we need to include a complete layer of logic into a website, it’s always recommended to write a custom plugin from scratch, if there is nothing out there that serves the purpose. But that’s material for another blog post!
 
-At End Point, we build web solutions in WordPress and many other technologies, keeping security and high standards in mind. [Contact us](/contact) if you want to find out more.
+At End Point, we build web solutions in WordPress and many other technologies, keeping security and high standards in mind. [Contact us](/contact/) if you want to find out more.

@@ -2,13 +2,18 @@
 author: Elizabeth Garrett Christensen
 title: 'EMSA: Electronic Messaging Staging Area'
 github_issue_number: 1680
+featured:
+  casepointer: true
+  image_url: /blog/2020/10/electronic-messaging-staging-area/emsa-banner.jpg
 tags:
+- casepointer
 - epitrax
 - open-source
+- emsa
 date: 2020-10-30
 ---
 
-![Sunset](/blog/posts/2020/10/30/electronic-messaging-staging-area/emsa-banner.jpg)
+![Sunset](/blog/2020/10/electronic-messaging-staging-area/emsa-banner.jpg)
 [Photo](https://flic.kr/p/pnRYaf) by [Lee Roberts](https://flic.kr/ps/2bXFPr), [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/)
 
 End Point has been involved with developing disease surveillance software for over a decade. One component of that work is EMSA, short for “Electronic Messaging Staging Area”.
@@ -35,12 +40,12 @@ EMSA can be deployed along with EpiTrax, the open source tracking system, or as 
 Aside from all the features mentioned above, EMSA as an open-source solution brings other benefits:
 
 - Reduced cost: Other than development and consulting to help set it up, there are no ongoing licensing costs.
-- Designed to work as part of the open-source [EpiTrax disease surveillance system](/expertise/epitrax).
+- Designed to work as part of the open-source [EpiTrax disease surveillance system](/expertise/epitrax/).
 - Participating in the open source community that is growing in the healthcare industry.
 
 ### Help is available!
 
-Interested in talking to us more about EMSA for your disease tracking? [Reach out today.](/contact)
+Interested in talking to us more about EMSA for your disease tracking? [Reach out today.](/contact/)
 
 ### References
 

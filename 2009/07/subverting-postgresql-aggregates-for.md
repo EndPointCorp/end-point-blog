@@ -5,11 +5,12 @@ github_issue_number: 171
 tags:
 - postgres
 - pentaho
+- casepointer
 - reporting
 date: 2009-07-14
 ---
 
-In a [recent post](/blog/2009/07/mdx) I described MDX and a project I’m working on with the Mondrian MDX engine. In this post I’ll describe a system I implemented to overcome one of Mondrian’s limitations.
+In a [recent post](/blog/2009/07/mdx/) I described MDX and a project I’m working on with the Mondrian MDX engine. In this post I’ll describe a system I implemented to overcome one of Mondrian’s limitations.
 
 Each Mondrian measure has an associated aggregate function defined. For instance, here’s a measure from the sample data that ships with Pentaho:
 

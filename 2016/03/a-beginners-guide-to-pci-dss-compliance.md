@@ -18,7 +18,7 @@ I recently did some research for one of End Point’s ecommerce clients on their
 
 ### TLS
 
-TLS (Transport Layer Security) is a standard for secure communications between applications. TLS is the current version of what used to be called SSL, the secure sockets layer. In the case of a financial transaction, this is the communication between the website selling a product and the end user. TLS works by encrypting data between two endpoints to ensure any sensitive data (such as financial details and private customer information) is exchanged securely. As security measures increase, new versions of TLS are released. To date, TLS 1.2 is the most up-to-date, with TLS 1.1 being considered safe, and TLS 1.0 being phased out. For details about OS versions supporting the latest TLS standards, please see [Jon Jensen’s write-up here](/blog/2015/07/e-commerce-website-encryption-changes).
+TLS (Transport Layer Security) is a standard for secure communications between applications. TLS is the current version of what used to be called SSL, the secure sockets layer. In the case of a financial transaction, this is the communication between the website selling a product and the end user. TLS works by encrypting data between two endpoints to ensure any sensitive data (such as financial details and private customer information) is exchanged securely. As security measures increase, new versions of TLS are released. To date, TLS 1.2 is the most up-to-date, with TLS 1.1 being considered safe, and TLS 1.0 being phased out. For details about OS versions supporting the latest TLS standards, please see [Jon Jensen’s write-up here](/blog/2015/07/e-commerce-website-encryption-changes/).
 
 ### Compliance with PCI DSS
 

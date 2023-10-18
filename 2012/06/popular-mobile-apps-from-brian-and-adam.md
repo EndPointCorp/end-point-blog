@@ -8,7 +8,7 @@ tags:
 date: 2012-06-15
 ---
 
-In our last lightning talk of the conference, Brian Dillon and [Adam Vollrath](/blog/authors/adam-vollrath) shared some of their favorite mobile apps. Brian queried the room to see the phone type divide in the room. Here was our split: 33%—​iPhones, 33%—​Androids, 33%—​unsmart phones.
+In our last lightning talk of the conference, Brian Dillon and [Adam Vollrath](/blog/authors/adam-vollrath/) shared some of their favorite mobile apps. Brian queried the room to see the phone type divide in the room. Here was our split: 33%—​iPhones, 33%—​Androids, 33%—​unsmart phones.
 
 <a href="https://www.flickr.com/photos/80083124@N08/7375164694/"><img alt="IMG_0881.JPG" height="240" src="/blog/2012/06/popular-mobile-apps-from-brian-and-adam/image-0.jpeg" width="320"/></a>
 

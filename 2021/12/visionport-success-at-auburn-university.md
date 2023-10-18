@@ -6,6 +6,7 @@ github_issue_number: 1810
 tags:
 - visionport
 - clients
+- education
 featured:
   visionport: true
   image_url: /blog/2021/12/visionport-success-at-auburn-university/auburn-1.jpg

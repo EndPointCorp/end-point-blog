@@ -18,7 +18,7 @@ I have found that there wasn’t a lot of instruction for setting up the Active 
 
 First, you’re going to go the [Spree Active Shipping Gem](https://github.com/spree/spree_active_shipping) GitHub repo and follow the instructions for installing the Active Shipping Gem. It is very straightforward, but do proceed in the order mentioned in the Spree Active Shipping Gem documentation as some steps depend on the successful completion of others.
 
-Second, you’re going to go to the shipper of your choice, in this case UPS, and follow their directions for using their [API](http://www.ups.com/content/us/en/bussol/browse/cat/developer_kit.html). I do recommend actually reading, or at least skimming, the pages and pages of documentation. Why? Because there are some important agreements explaining how the API is to be used (basically legal requirements for the UPS logo).
+Second, you’re going to go to the shipper of your choice, in this case UPS, and follow their directions for using their [API](https://web.archive.org/web/20160101071458/http://www.ups.com/content/us/en/bussol/browse/cat/developer_kit.html). I do recommend actually reading, or at least skimming, the pages and pages of documentation. Why? Because there are some important agreements explaining how the API is to be used (basically legal requirements for the UPS logo).
 
 The Active Shipping Gem makes a call to the API, the API returns a hash of various shipping methods and prices based on the parameters you’ve sent it (such as shipment origin and destination), and then it automatically displays in the UI as an adjustment. How great is that?!
 

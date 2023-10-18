@@ -19,13 +19,13 @@ One of our customers needed a new database, created as a copy of an existing one
 
 Another fairly new customer has a database under a heavy and very consistent write load. We’ve had to make autovacuum very aggressive to keep up with bloat in several tables. When the vacuum process happens to clean all the tuples from the end of a table file, it tries to shrink the file and reclaim disk space, but it has to obtain a brief exclusive lock to do it. If it can’t get one, it gives up, and emits a log message you’ll see if you are vacuuming in verbose mode:
 
-```
+```plain
 INFO:  "some_big_table": stopping truncate due to conflicting lock request
 ```
 
-Note that though the log message calls this process “”truncating“”, it should not be confused with the “TRUNCATE TABLE” command, which (locks permitting) would reclaim quite a bit more disk space than we want it to. Anyway, when the shrinking operation succeeds, there is no log message, so if VACUUM VERBOSE doesn’t say anything about “stopping truncate”, it’s because it was able to get its lock and shrink the table, or the table didn’t need it in the first place. Because of this database’s tendency to bloat, we’d like vacuum to be able to shrink tables regularly, but the query load is such that for some tables, it never gets the chance. We’re working on mitigating that, but in the meantime, one stop-gap solution is to run VACUUM VERBOSE in a tight loop until you don’t see one of those “stopping truncate” messages. In our case we do it like this:
+Note that though the log message calls this process “truncating”, it should not be confused with the “TRUNCATE TABLE” command, which (locks permitting) would reclaim quite a bit more disk space than we want it to. Anyway, when the shrinking operation succeeds, there is no log message, so if VACUUM VERBOSE doesn’t say anything about “stopping truncate”, it’s because it was able to get its lock and shrink the table, or the table didn’t need it in the first place. Because of this database’s tendency to bloat, we’d like vacuum to be able to shrink tables regularly, but the query load is such that for some tables, it never gets the chance. We’re working on mitigating that, but in the meantime, one stop-gap solution is to run VACUUM VERBOSE in a tight loop until you don’t see one of those “stopping truncate” messages. In our case we do it like this:
 
-```
+```bash
 #!/bin/bash
  
 timeout="8m"

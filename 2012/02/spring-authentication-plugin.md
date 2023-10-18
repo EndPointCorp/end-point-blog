@@ -5,6 +5,7 @@ github_issue_number: 558
 tags:
 - java
 - pentaho
+- casepointer
 date: 2012-02-24
 ---
 

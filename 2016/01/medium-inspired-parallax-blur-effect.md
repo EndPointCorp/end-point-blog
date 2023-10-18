@@ -10,9 +10,9 @@ tags:
 date: 2016-01-22
 ---
 
-Are you are running a WordPress blog, but secretly dying to have that [](http://pencilscoop.com/2015/02/recreating-mediums-parallax-blur-effect)[Medium](https://medium.com/) parallax blur effect? I recently implemented this, and would like to share it with you. By the way, while I was working on the article, the effect was removed from Medium, which only makes having one on the website more precious.
+Are you are running a WordPress blog, but secretly dying to have that [Medium](https://medium.com/) parallax blur effect? I recently implemented this, and would like to share it with you. By the way, while I was working on the article, the effect was removed from Medium, which only makes having one on the website more precious.
 
-Let’s assume that we have our custom theme class MyTheme. In functions.php:
+Let’s assume that we have our custom theme class `MyTheme`. In functions.php:
 
 ```php
 class MyThemeBaseFunctions {
@@ -23,7 +23,7 @@ class MyThemeBaseFunctions {
 }
 ```
 
-We added a custom image size blurred, and a callback wp_blur_attachment_filter to wp_generate_attachment_metadata. Here’s where the magic happens.
+We added a custom image size blurred, and a callback `wp_blur_attachment_filter` to `wp_generate_attachment_metadata`. Here’s where the magic happens.
 
 Before that let’s talk a little about ImageMagick, a powerful library for image processing that we will use to create the blurred effect. After some experimenting I figured that the image needed to be darkened, and then a regular blur should be applied with sigma=20. You can read more about these settings at [ImageMagick Blur Usage](http://www.imagemagick.org/Usage/blur/#blur). I used Gaussian Blur at first, but found the processing was extremely slow, and there wasn’t much difference in the end result compared to other blur methods.
 
@@ -146,6 +146,6 @@ public function wp_blur_attachment_filter($post_ID) {
 }
 ```
 
-Or better yet, use cloud image processing—​I wrote about that [here](/blog/2015/12/image-processing-in-cloud-with-blitline).
+Or better yet, use cloud image processing—​I wrote about that [here](/blog/2015/12/image-processing-in-cloud-with-blitline/).
 
 I hope you found this writeup useful!

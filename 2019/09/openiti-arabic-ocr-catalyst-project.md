@@ -23,7 +23,7 @@ A sophisticated mechanism of applying updates to those documents minimizes (with
 
 The project also hosts a great-looking UI interface allowing non-technical editors to work within the workflow of this versioned data.
 
-CorpusBuilder works with both [Tesseract](https://github.com/tesseract-ocr/tesseract) and [Kraken](http://kraken.re/) as its OCR backends and is capable of exporting datasets in their respective formats for further model training / retraining. Training of Tesseract models was covered last year in a [blog post](/blog/2018/07/training-tesseract-models-from-scratch) by Kamil.
+CorpusBuilder works with both [Tesseract](https://github.com/tesseract-ocr/tesseract) and [Kraken](http://kraken.re/) as its OCR backends and is capable of exporting datasets in their respective formats for further model training / retraining. Training of Tesseract models was covered last year in a [blog post](/blog/2018/07/training-tesseract-models-from-scratch/) by Kamil.
 
 AOCP will rapidly expand prior work and will help establish a digital pipeline for digitizing texts and creating a set of tools for students and scholars of historic texts. 
 

@@ -7,7 +7,7 @@ tags:
 date: 2016-03-03
 ---
 
-In the [previous](/2016/02/storing-statistics-json-data-in.html) [posts](/2016/02/converting-json-to-postgresql-values.html) I have described a simple database table for storing JSON values, and a way to unpack nested JSON attributes into simple database views. This time I will show how to write a very simple query (thanks to PostgreSQL 9.5) to load the JSON files
+In the [previous](/blog/2016/02/storing-statistics-json-data-in/) [posts](/blog/2016/02/converting-json-to-postgresql-values/) I have described a simple database table for storing JSON values, and a way to unpack nested JSON attributes into simple database views. This time I will show how to write a very simple query (thanks to PostgreSQL 9.5) to load the JSON files
 
 Here’s a simple Python script to load the database.
 

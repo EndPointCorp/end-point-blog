@@ -11,7 +11,7 @@ date: 2018-04-17
 
 <img src="/blog/2018/04/railsconf-2018-day-one/railsconf-2018.jpg" width="770" height="272" alt="RailsConf banner" />
 
-It’s day one of [RailsConf 2018](https://railsconf.com/), and I’m in Pittsburgh with baby Ingrid (daycare FTW!). This is my 8th time at RailsConf and third time with a kid (SELECT DISTINCT kid FROM skardals). In my first few years of attendance, [starting in 2009](/blog/2009/05/cinco-de-rails), I absorbed much more on the technical side, but the talks that have struck a chord in recent years of attendance have been more on the side of the human element of software and software engineering.
+It’s day one of [RailsConf 2018](https://railsconf.com/), and I’m in Pittsburgh with baby Ingrid (daycare FTW!). This is my 8th time at RailsConf and third time with a kid (SELECT DISTINCT kid FROM skardals). In my first few years of attendance, [starting in 2009](/blog/2009/05/cinco-de-rails/), I absorbed much more on the technical side, but the talks that have struck a chord in recent years of attendance have been more on the side of the human element of software and software engineering.
 
 ### Concept Compression
 
@@ -34,7 +34,7 @@ She drew many parallels to these historical artisanal practices to software engi
 * How can we help teammates level up?
 * How can we code ethically? This is specifically timely because of all the data leaks reported in the news.
 
-What really spoke to me during this talk was how it related to a recent blog post I wrote about [working as a consulting vs. in-house](/blog/2018/03/in-house-to-consulting), where I ultimately think the best senior devs are ones that are both technically skilled and also excel at non-technical skills such as communication, prioritization, and showing empathy. Coraline did a great job connecting the dots between the software industry and artisanal occupations in the past and it was a compelling talk.
+What really spoke to me during this talk was how it related to a recent blog post I wrote about [working as a consulting vs. in-house](/blog/2018/03/in-house-to-consulting/), where I ultimately think the best senior devs are ones that are both technically skilled and also excel at non-technical skills such as communication, prioritization, and showing empathy. Coraline did a great job connecting the dots between the software industry and artisanal occupations in the past and it was a compelling talk.
 
 ### An Atypical Performance Talk
 

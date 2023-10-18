@@ -9,7 +9,7 @@ date: 2011-12-03
 
 
 
-This is the second article in the series on how to perform a bulk edit in Rails. Let’s recap our user’s story from [Part 1](/blog/2011/11/performing-bulk-edits-in-rails-part-1). 
+This is the second article in the series on how to perform a bulk edit in Rails. Let’s recap our user’s story from [Part 1](/blog/2011/11/performing-bulk-edits-in-rails-part-1/). 
 
 - User makes a selection of records and clicks “Bulk Edit” button
 - User works with the same form they would use for a regular edit, plus

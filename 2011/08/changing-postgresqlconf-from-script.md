@@ -62,7 +62,7 @@ diff -r1.1 postgresql.conf
 > random_page_cost = 2 ## changed by modify_postgres_conf.pl on Wed Aug 10 13:31:34 2011
 ```
 
-The addition of the comment can be stopped by added a --no-comment argument. If the script runs successfully, it also returns two items of information: the size and name of the current Postgres log file. This is useful so you can know exactly where in the log this change took place. Note that this only works for items that are already explicitly set in your configuration file. However, [as discussed before](/blog/2010/09/postgres-configuration-best-practices), you should already have all the items that you may possibly change explicitly listed out at the bottom of the file already. Whitespace is preserved as well, for those (like me) who like to keep things lined up neatly inside the file (see examples in the link above).
+The addition of the comment can be stopped by added a --no-comment argument. If the script runs successfully, it also returns two items of information: the size and name of the current Postgres log file. This is useful so you can know exactly where in the log this change took place. Note that this only works for items that are already explicitly set in your configuration file. However, [as discussed before](/blog/2010/09/postgres-configuration-best-practices/), you should already have all the items that you may possibly change explicitly listed out at the bottom of the file already. Whitespace is preserved as well, for those (like me) who like to keep things lined up neatly inside the file (see examples in the link above).
 
 Here are some more examples of the script in action:
 

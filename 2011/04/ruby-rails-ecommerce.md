@@ -11,7 +11,7 @@ date: 2011-04-01
 
 
 
-I’m a big fan of Ruby. And I like Rails too. Lately, I’ve been investigating several Ruby, Rails, and Rails ecommerce framework options (follow-up to [discussing general ecommerce options](/blog/2011/02/ecommerce-solutions-options)). I’ve also recently written about developing ecommerce on Sinatra ([one](/blog/2011/01/sinatra-ecommerce-tutorial), [two](/blog/2011/01/ruby-ecommerce-sinatra-products-admin), and [three](/blog/2011/03/ecommerce-sinatra-shopping-cart)). Most of End Point’s clients are ecommerce clients, so we’ve seen it all in terms of feature requests (third party integration like QuickBooks, search, PayPal, product features like best sellers, recommended items, related items, checkout features like one-page checkout, guest checkout, backend features like advanced reporting, sales management, inventory management). Our services also include hosting and database consulting for many of our ecommerce clients, so we have a great understanding of what it takes to run an ecommerce solution.
+I’m a big fan of Ruby. And I like Rails too. Lately, I’ve been investigating several Ruby, Rails, and Rails ecommerce framework options (follow-up to [discussing general ecommerce options](/blog/2011/02/ecommerce-solutions-options/)). I’ve also recently written about developing ecommerce on Sinatra ([one](/blog/2011/01/sinatra-ecommerce-tutorial/), [two](/blog/2011/01/ruby-ecommerce-sinatra-products-admin/), and [three](/blog/2011/03/ecommerce-sinatra-shopping-cart/)). Most of End Point’s clients are ecommerce clients, so we’ve seen it all in terms of feature requests (third party integration like QuickBooks, search, PayPal, product features like best sellers, recommended items, related items, checkout features like one-page checkout, guest checkout, backend features like advanced reporting, sales management, inventory management). Our services also include hosting and database consulting for many of our ecommerce clients, so we have a great understanding of what it takes to run an ecommerce solution.
 
 When it comes to ecommerce development, someone who likes coding in Ruby (like me) has a few options:
 
@@ -87,7 +87,7 @@ Here’s a run down of some pros and cons of each option:
 
 Or, here’s another way to look at things:
 
-<img src="https://chart.apis.google.com/chart?chxl=0:|Open+Source+Ecommerce|Rails|Ruby+DSL+(Sinatra)|1:|Less|More&chxp=0,1,2,3|1,1,3&chxr=0,0,3|1,0,3.2&chxt=y,x&chbh=a,4,14&chs=750x300&cht=bhg&chco=4D89F9,97D2F0,ECBA24,376F19,80C65A&chds=0,3.2,0,3.2,0,3.2,0,3.2,0,3.2&chd=t:1,2,3|3,2,1|2,2,3|1,2,3|3,2,2&chdl=Assumptions+Made|Flexibility|Technology+Changes+Over+Time|Conventions|Initial+Coding+Required"/>
+<img src="https://chart.apis.google.com/chart?chxl=0:|Open+Source+Ecommerce|Rails|Ruby+DSL+(Sinatra)|1:|Less|More&chxp=0,1,2,3|1,1,3&chxr=0,0,3|1,0,3.2&chxt=y,x&chbh=a,4,14&chs=750x300&cht=bhg&chco=4D89F9,97D2F0,ECBA24,376F19,80C65A&chds=0,3.2,0,3.2,0,3.2,0,3.2,0,3.2&chd=t:1,2,3|3,2,1|2,2,3|1,2,3|3,2,2&chdl=Assumptions+Made|Flexibility|Technology+Changes+Over+Time|Conventions|Initial+Coding+Required"/><br />
 Generalizations I’ve made after developing in each of the scenarios.
 
 Another thing to consider is what might happen when application changes are required a year after the project was initially implemented. Here’s what might happen in each of the scenarios:

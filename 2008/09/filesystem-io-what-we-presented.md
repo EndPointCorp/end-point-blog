@@ -10,7 +10,7 @@ date: 2008-09-19
 
 
 
-As [mentioned](/blog/2008/09/fun-with-72gb-of-disk-filesystem) last week, Gabrielle Roth and I presented results from tests run in the new Postgres Performance Lab. [Our slides](https://www.slideshare.net/selenamarie/filesystem-io-from-a-database-perspective-presentation/) are available on Slideshare.
+As [mentioned](/blog/2008/09/fun-with-72gb-of-disk-filesystem/) last week, Gabrielle Roth and I presented results from tests run in the new Postgres Performance Lab. [Our slides](https://www.slideshare.net/selenamarie/filesystem-io-from-a-database-perspective-presentation/) are available on Slideshare.
 
 We tested eight core assumptions about filesystem I/O performance and presented the results to a room of filesystem hackers and a few database specialists. Some important things to remember about our tests: we were testing I/O only—​no tuning had been done on the hardware, filesystem defaults or for Postgres—​and we did not take reliability into account at all.  Tuning the database and filesystem defaults will be done for our next round of tests.
 

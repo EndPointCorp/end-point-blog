@@ -36,16 +36,18 @@ One of our website’s background patterns has transparency, making the PNG form
 
 <table cellspacing="15">
 <tbody><tr>
-<td align="right">337,186 bytes</td><td><a href="http://jon.endpoint.com/blog/container-pattern.png">container-pattern.png</a></td>
+<td align="right">337,186 bytes</td><td><a href="https://jon.endpointdev.com/blog/container-pattern.png">container-pattern.png</a></td>
 </tr>
 <tr>
-<td align="right">43,270 bytes</td><td><a href="http://jon.endpoint.com/blog/container-pattern.webp">container-pattern.webp</a></td>
+<td align="right">43,270 bytes</td><td><a href="https://jon.endpointdev.com/blog/container-pattern.webp">container-pattern.webp</a></td>
 </tr>
 </tbody></table>
 
 ### Browser support
 
 So, what is the downside? WebP is currently natively supported only in Chrome and Opera among the major browsers, though amazingly, support for other browsers can be added via WebPJS, a JavaScript WebP renderer.
+
+**Update! As of 2021, all current major browsers support WebP image rendering.**
 
 Why don’t the other browsers add support given the liberal license? Especially Firefox you’d expect to support it. In fact a patch has been pending for years, and a debate about adding support still smolders. Why?
 
@@ -55,7 +57,7 @@ Many batch image-processing tools now support WebP, and there is a free Photosho
 
 For our first experiment serving WebP images from the End Point website, I decided to serve WebP images only to browsers that claim to be able to support it. They advertise that support in this HTTP request header:
 
-```
+```plain
 Accept: image/webp,*/*;q=0.8
 ```
 
@@ -68,21 +70,21 @@ Let’s plan to have both common format (JPEG or PNG) and WebP files side by sid
 It’s possible to set up the web server to transparently serve WebP instead of JPEG or PNG if a matching file exists. Based on some examples other people posted, we used this nginx configuration:
 
 ```plain
-    set $webp "";
-    set $img "";
-    if ($http_accept ~* "image/webp") { set $webp "can"; }
-    if ($request_filename ~* "(.*)\.(jpe?g|png)$") { set $img $1.webp; }
-    if (-f $img) { set $webp "$webp-have"; }
-    if ($webp = "can-have") {
-        add_header Vary Accept;
-        rewrite "(.*)\.\w+$" $1.webp break;
-        break;
-    }
+set $webp "";
+set $img "";
+if ($http_accept ~* "image/webp") { set $webp "can"; }
+if ($request_filename ~* "(.*)\.(jpe?g|png)$") { set $img $1.webp; }
+if (-f $img) { set $webp "$webp-have"; }
+if ($webp = "can-have") {
+    add_header Vary Accept;
+    rewrite "(.*)\.\w+$" $1.webp break;
+    break;
+}
 ```
 
 It’s also good to add to /etc/nginx/mime.types:
 
-```
+```plain
 image/webp .webp
 ```
 
@@ -90,7 +92,7 @@ so that .webp files are served with the correct MIME type instead of the default
 
 Then we just make sure identically-named .webp files match .png or .jpg files, such as those for our examples above:
 
-```
+```plain
 -rw-rw-r-- 337186 Nov  6 14:10 container-pattern.png
 -rw-rw-r--  43270 Jan 28 08:14 container-pattern.webp
 -rw-rw-r--  14734 Nov  6 14:10 josh_williams.jpg
@@ -108,7 +110,7 @@ The image is still being requested with a name ending in .jpg or .png, but that�
 One remedy for that is to serve the WebP file via a 301 or 302 redirect instead of transparently in the response, so that the browser knows it’s dealing with a different file named $something.webp. To do that we changed the nginx configuration like this:
 
 ```plain
-    rewrite "(.*)\.\w+$" $1.webp permanent;
+rewrite "(.*)\.\w+$" $1.webp permanent;
 ```
 
 That adds a little bit of overhead, around 100-200 bytes unless large cookies are sent in the request headers, and another network round-trip or two, though it’s still a win with the reduced file sizes we saw. However, I found that it isn’t even necessary right now due to an interesting behavior in Chrome that may even be intentional to cope with this very situation. (Or it may be a happy accident.)
@@ -130,42 +132,36 @@ Here are performance tests run by WebPageTest.org using Chrome 32 on Windows 7 o
 <table id="pagespeeds">
 <tbody><tr>
 <th align="center" rowspan="2">Page URL</th>
-<th align="center" colspan="3">With WebP</th>
-<th align="center" colspan="3">Without WebP</th>
+<th align="center" colspan="2">With WebP</th>
+<th align="center" colspan="2">Without WebP</th>
 </tr>
 
 <tr>
 <th align="center">Bytes</th>
 <th align="center">Time</th>
-<th align="center">Details</th>
 
 <th align="center">Bytes</th>
 <th align="center">Time</th>
-<th align="center">Details</th>
 </tr>
 
 <tr>
-<td><a href="http://www.endpoint.com/">http://www.endpoint.com/</a></td>
+<td>https://www.endpointdev.com/</td>
 
 <td align="right">374 KB</td>
 <td align="right">2.9s</td>
-<td><a href="http://www.webpagetest.org/result/140128_2D_XJY/">report</a></td>
 
 <td align="right">850 KB</td>
 <td align="right">3.4s</td>
-<td><a href="http://www.webpagetest.org/result/140128_RC_10M6/">report</a></td>
 </tr>
 
 <tr>
-<td><a href="http://www.endpoint.com/team">http://www.endpoint.com/team</a></td>
+<td>https://www.endpointdev.com/team/</td>
 
 <td align="right">613 KB</td>
 <td align="right">3.6s</td>
-<td><a href="http://www.webpagetest.org/result/140128_YD_ZRK/">report</a></td>
 
 <td align="right">1308 KB</td>
 <td align="right">4.1s</td>
-<td><a href="http://www.webpagetest.org/result/140128_F8_10MA/">report</a></td>
 </tr>
 </tbody></table>
 
@@ -175,7 +171,7 @@ This article is not even close to a comprehensive shootout between WebP and othe
 
 My purpose here was to convert a real website in bulk to WebP without hand-tuning individual images or spending too much time on the project overall, and to see if the overall infrastructure is easy enough to set up, and the download size and speed improved enough to make it worth the trouble, and get real-world experience with it to see if we can recommend it for our clients, and in which situations.
 
-So far it seems worth it, and we plan to continue using WebP on our website. With empty browser caches, visit [www.endpoint.com](/) using Chrome and then one of the browsers that doesn’t support WebP, and see if you notice a speed difference on first load, or any visual difference.
+So far it seems worth it, and we plan to continue using WebP on our website. With empty browser caches, visit [www.endpointdev.com](/) using Chrome and then one of the browsers that doesn’t support WebP, and see if you notice a speed difference on first load, or any visual difference.
 
 I hope to see WebP further developed and more widely supported.
 

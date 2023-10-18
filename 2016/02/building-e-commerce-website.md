@@ -83,4 +83,4 @@ It **pays** to pay for a really great development team.
 
 ### There’s much more
 
-There’s much, much more to the subject that an article like this can fit. I invite to you [contact us](/contact) if you’re considering starting out an e-commerce business and would like to learn more. We’re also available to help you in case you already have an established business.
+There’s much, much more to the subject that an article like this can fit. I invite to you [contact us](/contact/) if you’re considering starting out an e-commerce business and would like to learn more. We’re also available to help you in case you already have an established business.

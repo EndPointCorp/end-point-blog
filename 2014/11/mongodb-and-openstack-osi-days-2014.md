@@ -180,6 +180,6 @@ Along with the overview of OpenStack architecture, there were couple of in-depth
 
 - Neependra Khare from RedHat gave a presentation on using [Docker in OpenStack Nova](https://github.com/nkhare/presetations/blob/master/osidays/osi_openstack_nova_docker.md). 
 - Pushpesh Sharma presented a [comparison between storage component OpenStack Swift and Ceph](http://pushpeshsharma.blogspot.in/2014/11/openstack-swift-vs-ceph-rgw-read.html)
-- Sridhar Rao presented about OpenStack and its role in Network Function Virtualisation (NFV) — [Slides](https://dl.dropboxusercontent.com/u/1527696/OpenStack-NfV.pptx)
+- Sridhar Rao presented about OpenStack and its role in Network Function Virtualisation (NFV) — [Slides](https://web.archive.org/web/20160527104510/https://dl.dropboxusercontent.com/u/1527696/OpenStack-NfV.pptx)
 
 That was a wonderful Day One of OSI 2014 which helped me to get better understanding of MongoDB and OpenStack.

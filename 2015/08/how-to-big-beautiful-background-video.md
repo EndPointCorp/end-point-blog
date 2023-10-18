@@ -11,7 +11,7 @@ date: 2015-08-04
 
 One pretty common request for every web developer is to “please, make our Stone age website look sleek and modern”. Well, no more head scratching about the meaning of “sleek” or “modern” (or “the Stone age” for some?). In times of the crisp and stunning visuals there’s no better way to make an impression than to use a big beautiful background video on the home page.
 
-Paired with some impressive infinite scroll which I already [covered here](/blog/2013/11/pagination-days-are-over-infinite) and a nice full-screen image gallery (which I will cover later), it will definitely help to bring your website up to date.
+Paired with some impressive infinite scroll which I already [covered here](/blog/2013/11/pagination-days-are-over-infinite/) and a nice full-screen image gallery (which I will cover later), it will definitely help to bring your website up to date.
 
 Lucky for us, there is a very popular library called [BigVideo.js](http://dfcb.github.io/BigVideo.js/) which is based on another well known library [videojs](http://www.videojs.com/), which is a wrapper around HTML5 \<video\> tag.
 

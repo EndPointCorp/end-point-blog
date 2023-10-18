@@ -36,7 +36,7 @@ Turns out, in 2016, there is a better way. It’s called...
 
 ### Let’s Encrypt!
 
-Through [good partners](https://letsencrypt.org/sponsors/), the [Internet Security Research Group](https://letsencrypt.org/isrg/) was created and built a software pipeline to issue valid, signed SSL certificates in a programmatic way, for free, to anyone in the world.
+Through [good partners](https://letsencrypt.org/sponsors/), the [Internet Security Research Group](https://www.abetterinternet.org/) was created and built a software pipeline to issue valid, signed SSL certificates in a programmatic way, for free, to anyone in the world.
 
 They’ve got sick [APIs](https://letsencrypt.readthedocs.io/en/latest/)!
 

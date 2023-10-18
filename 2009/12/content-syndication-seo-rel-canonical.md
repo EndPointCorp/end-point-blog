@@ -9,7 +9,7 @@ date: 2009-12-17
 
 ### End Point Blog Content Syndication
 
-The past couple weeks, I’ve been discussing if content syndication of our blog negatively affects our search traffic with [Jon](/team/jon-jensen). Since the blog’s inception, full articles have been syndicated by [OSNews](http://www.osnews.com/). The last couple weeks, I’ve been keeping an eye on the effects of content syndication on search to determine what (if any) negative effects we experience.
+The past couple weeks, I’ve been discussing if content syndication of our blog negatively affects our search traffic with [Jon](/team/jon-jensen/). Since the blog’s inception, full articles have been syndicated by [OSNews](http://www.osnews.com/). The last couple weeks, I’ve been keeping an eye on the effects of content syndication on search to determine what (if any) negative effects we experience.
 
 By my observations, immediately after we publish an article, the article is indexed by Google and is near the top search results for a search with keywords similar to the article’s title. The next day, OSNews syndication of the article shows up in the same keyword search, and our article disappears from the search results. Then, several days later, our article is ahead of OSNews as if Google’s algorithm has determined the original source of the content. I’ve provided visual representation of this behavior:
 
@@ -34,7 +34,7 @@ End Point’s content syndication has only been an issue with blog articles, sin
 
 ### Cross-Domain rel=canonical Tag
 
-I’ve been planning to write this article and with impeccable timing, [Google announced support for the rel=canonical tag across different domains](https://webmasters.googleblog.com/2009/12/handling-legitimate-cross-domain.html) this week. I’ve referenced the use of the rel=canonical tag in two articles ([PubCon 2009 Takeaways](/blog/2009/11/pubcon-vegas-7-takeaway-nuggets), [Search Engine Thoughts](/blog/2009/02/search-engine-optimization-thoughts)), but I haven’t gone too much into depth about its use. Support of the rel=canonical tag was introduced early this year as a method to help decrease duplicate content across a single domain. A non-canonical URL that includes this tag suggests its canonical URL to search engines. Search engines then use this suggestion in their algorithms and results to reduce the effects of duplicate content.
+I’ve been planning to write this article and with impeccable timing, [Google announced support for the rel=canonical tag across different domains](https://webmasters.googleblog.com/2009/12/handling-legitimate-cross-domain.html) this week. I’ve referenced the use of the rel=canonical tag in two articles ([PubCon 2009 Takeaways](/blog/2009/11/pubcon-vegas-7-takeaway-nuggets/), [Search Engine Thoughts](/blog/2009/02/search-engine-optimization-thoughts/)), but I haven’t gone too much into depth about its use. Support of the rel=canonical tag was introduced early this year as a method to help decrease duplicate content across a single domain. A non-canonical URL that includes this tag suggests its canonical URL to search engines. Search engines then use this suggestion in their algorithms and results to reduce the effects of duplicate content.
 
 ```plain
 <link rel="canonical" href="http://www.example.com/product.php?item=swedish-fish" />

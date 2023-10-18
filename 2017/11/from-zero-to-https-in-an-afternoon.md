@@ -79,6 +79,6 @@ server {
 
 Now I can update my server by running `docker-compose build --pull` and then `docker-compose up -d`. This may cause a momentary outage while the containers are being swapped, but for a personal site this is nothing to sweat over. I dropped these commands in a cron script since I like updates but would rather not have to think about updates.
 
-With my new HTTPS site now exposed to the world, I found some free HTTPS validation tools to check my work and optimize the configuration a few notches beyond the “pretty good” nginx defaults. If you’ve deployed an HTTPS site for work or pleasure, check out the [collection of web security tools](/blog/2017/09/web-security-services-roundup) rounded up by Phin in September.
+With my new HTTPS site now exposed to the world, I found some free HTTPS validation tools to check my work and optimize the configuration a few notches beyond the “pretty good” nginx defaults. If you’ve deployed an HTTPS site for work or pleasure, check out the [collection of web security tools](/blog/2017/09/web-security-services-roundup/) rounded up by Phin in September.
 
 I was really happy with the Let’s Encrypt tools and user experience. If you’re still hosting HTTP with no HTTPS option, consider using the free tools to get your free certificate and help your users protect their privacy. If you’re interested in using HTTPS wherever available, consider using the [HTTPS Everywhere](https://www.eff.org/https-everywhere) extension offered by the EFF.

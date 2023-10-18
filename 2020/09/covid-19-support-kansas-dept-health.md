@@ -2,12 +2,17 @@
 author: Steve Yoman
 title: COVID-19 Support for the Kansas Department of Health and Environment
 github_issue_number: 1663
+featured:
+  casepointer: true
+  image_url: /blog/2020/09/covid-19-support-kansas-dept-health/dashboard.jpg
 tags:
+- casepointer
 - epitrax
 - clients
 - case-study
 - rails
 - vue
+- emsa
 date: 2020-09-14
 ---
 
@@ -59,4 +64,4 @@ Late this Spring, after learning of Kansas’s use of the EpiTrax platform and t
 
 ### Contact us!
 
-To discuss an EpiTrax project, [contact](/contact) us. Our expert team is ready to help you meet your requirements.
+To discuss an EpiTrax project, [contact](/contact/) us. Our expert team is ready to help you meet your requirements.

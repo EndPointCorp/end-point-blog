@@ -50,7 +50,7 @@ what you are doing. Finally, they enable you to easily view and control multiple
     - Inside /etc/screenrc or ~/.screenrc: defscrollback 50000
     - Inside /etc/tmux.conf or ~/.tmux.conf: set-option -g history-limit 50000
 - Develop a good configuration file. Nothing too fancy is needed, but being able to see all the window names at once on the bottom of the screen makes things much easier.
-- Consider [logging all your screen output](/blog/2013/07/gnu-screen-logtstamp-string).
+- Consider [logging all your screen output](/blog/2013/07/gnu-screen-logtstamp-string/).
 
 ### Discovery and Setup
 
@@ -127,7 +127,7 @@ product_elements@topeka=>
 
 ### Connection Service File
 
-Using a [connection service file](/blog/2016/10/postgres-connection-service-file) to access Postgres can help keep things sane and organized. Connection files allow you to associate 
+Using a [connection service file](/blog/2016/10/postgres-connection-service-file/) to access Postgres can help keep things sane and organized. Connection files allow you to associate 
 a simple name with multiple connection parameters, allowing abstraction of those details in a manner much safer and cleaner than using shell aliases. 
 Here are some suggestions on using connection files:
 

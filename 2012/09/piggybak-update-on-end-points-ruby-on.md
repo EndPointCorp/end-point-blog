@@ -9,7 +9,7 @@ tags:
 date: 2012-09-24
 ---
 
-With the recent release of one of our client sites running on [Piggybak](https://github.com/piggybak/piggybak), Piggybak saw quite a few iterations, both for bug fixes and new feature development. Here are a few updates to Piggybak since its announcement [earlier this year](/blog/2012/01/piggybak-mountable-ecommerce-ruby-on).
+With the recent release of one of our client sites running on [Piggybak](https://github.com/piggybak/piggybak), Piggybak saw quite a few iterations, both for bug fixes and new feature development. Here are a few updates to Piggybak since its announcement [earlier this year](/blog/2012/01/piggybak-mountable-ecommerce-ruby-on/).
 
 ### Admin: Continues to Leverage RailsAdmin
 
@@ -27,7 +27,7 @@ At the moment, the creation of an adjustment is **not** tied to a payment gatewa
 
 ### AJAX Queueing for Shipping Requests on One-Page Checkout
 
-Discussed [in this article](/blog/2012/09/ajax-queuing-in-piggybak), AJAX queuing was added for shipping method generation on the one-page AJAX-driven checkout.
+Discussed [in this article](/blog/2012/09/ajax-queuing-in-piggybak/), AJAX queuing was added for shipping method generation on the one-page AJAX-driven checkout.
 
 ### Order Notes
 
@@ -65,6 +65,6 @@ The [Piggybak demo](https://github.com/piggybak/demo) has recently been updated 
 
 ### Conclusion
 
-It's exciting to see the progress of Piggybak over the last several months, as well as to see Piggybak launch for a site with complex custom needs. I believe it accomplishes the vision I had in mind for it ([summarized in this presentation](/blog/2012/09/company-presentation-ecommerce-as-engine)), without requiring fighting against assumptions that traditional monolithic ecommerce platforms make. Granted, Piggybak still makes specific ecommerce assumptions, but they are limited to cart, checkout, and order functionality rather than systematic application-level behavior.
+It's exciting to see the progress of Piggybak over the last several months, as well as to see Piggybak launch for a site with complex custom needs. I believe it accomplishes the vision I had in mind for it ([summarized in this presentation](/blog/2012/09/company-presentation-ecommerce-as-engine/)), without requiring fighting against assumptions that traditional monolithic ecommerce platforms make. Granted, Piggybak still makes specific ecommerce assumptions, but they are limited to cart, checkout, and order functionality rather than systematic application-level behavior.
 
 The future likely holds incremental improvements to Piggybak, but there are no plans to change Engine-like structure or principles of Piggybak.
