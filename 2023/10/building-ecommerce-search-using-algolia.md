@@ -21,7 +21,7 @@ description: This post shows readers how to add intelligent search to their webs
 
 A common request that developers receive when embarking on a new website project is for the website to have "Google-like search." For many years, this meant developers writing custom code to replicate the intelligent and user-friendly aspects of Google search, which was no easy feat. However, now we have many Search-as-a-Service offerings that do the hard work for us and make this process much easier. 
 
-In this blog post, we’ll dive into one of these SaaS platforms, Algolia. We recently worked on an e-commerce website and used Algolia in an interesting way, both as a search engine, and as a lightweight backend database to hold product data managed in Salesforce. Algolia worked beautifully, offering users fast and accurate search results, and also allowing us to launch the site within a relatively short time frame.
+In this blog post, we’ll dive into one of these SaaS platforms, [Algolia](https://www.algolia.com/). We recently worked on an e-commerce website and used Algolia in an interesting way, both as a search engine, and as a lightweight backend database to hold product data managed in Salesforce. Algolia worked beautifully, offering users fast and accurate search results, and also allowing us to launch the site within a relatively short time frame.
 
 We will look at how to load Algolia with data, configure search options, and connect the search to the front-end using Algolia’s Vue library.
 
