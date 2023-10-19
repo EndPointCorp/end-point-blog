@@ -16,7 +16,7 @@ For a deeper dive into setup and uses of JSforce checkout [this post by Dylan Wo
 
 #### No Salesforce learning curve
 
-Apex is a platform-specific language created so that developers can interact with Salesforce classes / objects and write custom code. Apex allow you to do some cool things such as directly triggering custom Apex code based on an action in Salesforce.
+Apex is a platform-specific language created so that developers can interact with Salesforce classes / objects and write custom code. Apex allows you to do some cool things such as directly triggering custom Apex code based on an action in Salesforce.
 
 The problem with Apex is that it is its own world, with its own IDEs, deployment processes, etc. There's a steep learning curve to getting up to speed with the Apex ecosphere.
 
