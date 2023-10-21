@@ -58,13 +58,13 @@ Note the `objectID` property, which is used by Algolia as a primary key. If the 
 
 Once you have your index loaded, you’ll want to configure it. Algolia does a good job of walking you through this process using a built-in tutorial when you first load your index. Basically, you will be selecting the [searchable properties/​attributes](https://www.algolia.com/doc/guides/sending-and-managing-data/prepare-your-data/how-to/setting-searchable-attributes/) from your JSON data, setting how results are ranked and sorted, and adjusting more advanced aspects of search like typo tolerance, stop words, etc.
 
-An important feature we utilized on our recent project is [faceting](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/). Faceting allows users to easily drill-down and refine search by categories, and is also easy to develop using the handy frontend libraries that Algolia provides (more on that in the next section). This feature is powerful and can be used to both refine search and drive homepage category/​subcategory links. When you configure your index, you can select which attributes of your data should be used for faceting.
+An important feature we utilized on our recent project is [faceting](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/). Faceting allows users to easily drill down and refine search by categories, and is also easy to develop using the handy frontend libraries that Algolia provides (more on that in the next section). This feature is powerful and can be used to both refine search and drive homepage category/​subcategory links. When you configure your index, you can select which attributes of your data should be used for faceting.
 
 ### Setting up search on the frontend
 
 We used [Nuxt](https://nuxt.com/) to build the frontend of the website, and we leveraged Algolia’s [Vue InstantSearch](https://www.algolia.com/doc/guides/building-search-ui/what-is-instantsearch/vue/) library for the UI. This library really speeds along development, as it wraps all of the search-related functionality in simple widgets, providing the search bar, results, refinements, filtering, and more.
 
-The [`ais-instant-search`](https://www.algolia.com/doc/api-reference/widgets/instantsearch/vue/) widget is the parent widget. It serves the search state to its children, which allows you to show the search bar, search hits, hierarchical menus, etc. Here is a simple example of the `ais-instant-search` widget with a search bar and hits (pulled directly from the [Algolia’s Vue docs](https://www.algolia.com/doc/guides/building-search-ui/getting-started/vue/)):
+The [`ais-instant-search`](https://www.algolia.com/doc/api-reference/widgets/instantsearch/vue/) widget is the parent widget. It serves the search state to its children, which allows you to show the search bar, search hits, hierarchical menus, etc. Here is a simple example of the `ais-instant-search` widget with a search bar and hits (pulled directly from [Algolia’s Vue docs](https://www.algolia.com/doc/guides/building-search-ui/getting-started/vue/)):
 
 ```html
 <template>
@@ -130,13 +130,13 @@ Here is a bit of sample code from the website we built, which offers expandable 
 </div>
 ```
 
-Above, we are using the `limit` property to set the max number of items to 100. The `attributes` property, which targets the JSON attributes in your index data that represent your categories, is set to the following:
+Above, we are using the `limit` property to set the maximum number of items to 100. The `attributes` property, which targets the JSON attributes in your index data that represent your categories, is set to the following:
 
 ```javascript
 categoryAttrs: ['categories.lvl0', 'categories.lvl1', 'categories.lvl2'],
 ```
 
-These represent the three level of categories in our data (zero-based), and are used to build the hierarchical menu.
+These represent the three levels of categories in our data (zero-based), and are used to build the hierarchical menu.
 
 Finally, the `sort-by` attribute points to a simple function that uses the JavaScript `localeCompare` method to provide alphanumeric sorting:
 
