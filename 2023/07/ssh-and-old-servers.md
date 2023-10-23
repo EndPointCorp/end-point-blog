@@ -7,6 +7,8 @@ tags:
 - linux
 - ssh
 - sysadmin
+featured:
+  image_url: /blog/2023/07/ssh-and-old-servers/seashell-beach.webp
 ---
 
 ![A photo of a whole bivalve seashell lying open and flat on the sandy ground.](/blog/2023/07/ssh-and-old-servers/seashell-beach.webp)

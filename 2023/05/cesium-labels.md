@@ -8,6 +8,8 @@ tags:
 - gis
 - open-source
 github_issue_number: 1969
+featured:
+  image_url: /blog/2023/05/cesium-labels/rome-map.webp
 ---
 
 ![A 16th-century topographical map of ancient Rome. Buildings are drawn in simple, clear, engraved lines. Streets and important structures like the Pantheon are labeled in Latin.](/blog/2023/05/cesium-labels/rome-map.webp)

@@ -5,6 +5,8 @@ github_issue_number: 1975
 date: 2023-06-01
 tags:
 - analytics
+featured:
+  image_url: /blog/2023/06/migrating-universal-analytics-ga4/birds-migration.jpg
 ---
 
 ![Birds migration](/blog/2023/06/migrating-universal-analytics-ga4/birds-migration.jpg)

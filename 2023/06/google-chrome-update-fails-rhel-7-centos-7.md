@@ -8,6 +8,8 @@ tags:
 - sysadmin
 - security
 - linux
+featured:
+  image_url: /blog/2023/06/google-chrome-update-fails-rhel-7-centos-7/willgard-krause-painted-ship-wreck-jungle.webp
 ---
 
 ![Fantasy painting of a shipwreck in a jungle backlit by sunlight](/blog/2023/06/google-chrome-update-fails-rhel-7-centos-7/willgard-krause-painted-ship-wreck-jungle.webp)

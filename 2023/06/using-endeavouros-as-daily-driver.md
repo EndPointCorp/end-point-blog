@@ -5,6 +5,8 @@ github_issue_number: 1983
 date: 2023-06-16
 tags:
 - linux
+featured:
+  image_url: /blog/2023/06/using-endeavouros-as-daily-driver/freeway-signs.webp
 ---
 
 ![A nearby mountain skyline lies against an overcast sky. The lower hills are obscured on the edges by close green trees in the foreground, which lead toward US freeway signs in storage.](/blog/2023/06/using-endeavouros-as-daily-driver/freeway-signs.webp)

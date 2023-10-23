@@ -6,6 +6,8 @@ date: 2023-05-25
 tags:
 - ssh
 - tips
+featured:
+  image_url: /blog/2023/05/mount-remote-filesystem-sshfs/estuary_at_days_end_crop.webp
 ---
 
 ![A painting of a Dutch port at the end of the day. On the left, sunlight peeks out from clouds low on the horizon, casting rays of light into the light blue sky of the fading day. Trading ships sail the waters, with some disappearing into the horizon. In the foreground, a smaller boat of people and barrels is rowed to an outcropping of land, on which is a boat being tarred by two sailors. A small fire heats a pot next to wooden dock equipment which protrudes into the air.](/blog/2023/05/mount-remote-filesystem-sshfs/estuary_at_days_end_crop.webp)

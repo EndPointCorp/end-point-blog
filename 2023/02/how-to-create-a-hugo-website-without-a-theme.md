@@ -7,6 +7,8 @@ tags:
 - development
 - static-site-generator
 date: 2023-02-14
+featured:
+  image_url: /blog/2023/02/how-to-create-a-hugo-website-without-a-theme/light-through-tree.webp
 ---
 
 ![A light shines through the branches of a tree, creating rays through the thick fog, and softly illuminating the building behind the tree. The smallest holes in the branches create lines of light showing the movement of the camera.](/blog/2023/02/how-to-create-a-hugo-website-without-a-theme/light-through-tree.webp)

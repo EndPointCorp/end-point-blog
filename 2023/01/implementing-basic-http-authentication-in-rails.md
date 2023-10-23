@@ -7,6 +7,8 @@ tags:
 - ruby
 - rails
 - authentication
+featured:
+  image_url: /blog/2023/01/implementing-basic-http-authentication-in-rails/deer-on-hill.webp
 ---
 
 ![Two deer stand on a steep mountain slope. The mountain is reddened by the sunset, and cuts the image in half diagonally, with the other half being dominated by a pale blue sky. In the bottom, behind the front slope, lies a tall, snow-covered peak.](/blog/2023/01/implementing-basic-http-authentication-in-rails/deer-on-hill.webp)

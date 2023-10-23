@@ -9,6 +9,8 @@ tags:
 - linux
 - sysadmin
 - redhat
+featured:
+  image_url: /blog/2023/07/rocky-linux-9-at-hetzner-robot-made-quick-and-easy/mangopickles.webp
 ---
 
 ![Malaysian Mango Pickles](/blog/2023/07/rocky-linux-9-at-hetzner-robot-made-quick-and-easy/mangopickles.webp)<br>

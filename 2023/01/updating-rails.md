@@ -7,6 +7,8 @@ tags:
 - rails
 - ruby
 - update
+featured:
+  image_url: /blog/2023/01/updating-rails/blue-sky.webp
 ---
 
 ![A blue sky with sparse clouds, framed by the tops of two buildings viewed from below.](/blog/2023/01/updating-rails/blue-sky.webp)
