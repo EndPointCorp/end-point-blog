@@ -33,7 +33,7 @@ Saved requests can be grouped in Collections. These can be imported and exported
 
 Full API testing can be done with the click of a button. Investing time now into building up the Postman infastructure will save development time down the line.
 
-Custom Test Suites can be written in JavaScript and run manually or by a script. Periodically running these will ensure your application's API experiences limited regression. Below are a few simple tests that can be run using Postman's Javascript `pm` object.
+Custom Test Suites can be written in JavaScript and run manually or by a script. Periodically running these will ensure your application's API experiences limited regression. Below are a few simple tests that can be run using Postman's JavaScript `pm` object.
 
 ```javascript
 // Post request

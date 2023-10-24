@@ -9,7 +9,7 @@ tags:
 - vue
 ---
 
-![](/blog/2021/10/vue-graphql-integration-apollo-client/banner.jpg)
+![](/blog/2021/10/vue-graphql-integration-apollo-client/banner.jpg)<br>
 [Photo](https://unsplash.com/photos/kd5dc1yzieE) by [Mathew Benoit](https://unsplash.com/@benoitphoto) on Unsplash
 
 ### Introduction
@@ -85,7 +85,7 @@ module.exports = {
 };
 ```
 
-Once this configuration is in place, you can create a `.gql` or `.graphql` file, and import it directly into your javascript files:
+Once this configuration is in place, you can create a `.gql` or `.graphql` file, and import it directly into your JavaScript files:
 
 ```js
 import MY_QUERY from "./my-query.gql";

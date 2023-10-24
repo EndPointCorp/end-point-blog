@@ -151,7 +151,7 @@ A catalog can gain considerable benefit simply from evaluating those resources w
 
 If caching is desirable on resources that cannot be decoupled from session influence, we can expose the necessary parts of the session to the client in the form of cookies and can refactor our document to contain client-side code to manage the session use. Typical examples of this would be personalization for logged in users, or the display of a small cart on all pages. The session data stored in the cookie is controlled exclusively by Interchange and is read-only on the client. Each time the session is accessed and updated, the cookie is re-written to the client.
 
-Management of such a process is relatively easy with modern Javascript frameworks such as jQuery. As a typical example, one might need to replace the following session-dependent code
+Management of such a process is relatively easy with modern JavaScript frameworks such as jQuery. As a typical example, one might need to replace the following session-dependent code
 
 ```plain
 [if session logged_in]
