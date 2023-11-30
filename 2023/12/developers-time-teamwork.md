@@ -1,4 +1,4 @@
-#Developers - Time and Teamwork
+# Developers - Time and Teamwork
 
 Time and Teamwork. How do those 2 concepts fit together? The focus of this post is really how recognizing the opportunities provided by blending those two can improve not only your programming skills, but also your effective output timeline of projects.
 
