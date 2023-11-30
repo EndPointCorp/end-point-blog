@@ -1,0 +1,31 @@
+---
+author: Ethan Rowe
+title: 'NoSQL Live: The Dynamo Derivatives (Cassandra, Voldemort, Riak)'
+github_issue_number: 278
+tags:
+- database
+- nosql
+date: 2010-03-12
+---
+
+
+
+For me, one of the big parts of attending the [NoSQL Live](http://nosqlboston.eventbrite.com/) conference was to hear more about the differences between the various Dynamo-inspired open software projects. The [Cassandra](https://cassandra.apache.org/), [Voldemort](http://www.project-voldemort.com/voldemort/), and [Riak](http://basho.com/products/) projects were all represented, and while they differ in various ways at the logical layer (how one models data) and various features, they all share a similar conceptual foundation as outlined in Amazon’s seminal [Dynamo paper](https://s3.amazonaws.com/AllThingsDistributed/sosp/amazon-dynamo-sosp2007.pdf). So what differentiates these projects? What production deployments exist and what kind of stories do people have from running these systems in production?
+
+Some of these questions can be at least partially answered by combing the interwebs, looking over the respective project sites, etc. Yet that’s not quite the same thing as having community players in the same room, talking about stuff.
+
+Of the three projects mentioned, Cassandra clearly has the “momentum” ([a highly accurate indicator of future dominance](http://www.cnn.com/2004/ALLPOLITICS/01/25/elec04.prez.lieberman/index.html)). To me, this felt like the case even before Twitter started getting involved with it, but the Twitter effect was pretty evident based on the number of people sticking around for the Cassandra break-out session with Jonathan Ellis, compared to the break-out session given by Alex Feinberg for Voldemort (both of whom were very kind and thoughtful in answering my stream of irritating questions over lunch).
+
+Regrettably, the break-out sessions were scheduled such that one had to choose between the Riak session and the Voldemort session; having already gone through the effort of setting up a small Riak cluster, manipulating data therein, etc., I felt there was more to be gained by attending the Voldemort session. Consequently, it’s possible some of my take-aways from the conference are not entirely fair. Additionally, it seems strange to me that in the big room, Riak’s representation was purely on the panel to discuss schema design in document-oriented databases; Riak had no representation on the panels related to scaling, operations, etc., despite that being a major focus of the project.
+
+Most of what I learned had to do with nit-picky technical details, changes in upcoming versions, etc. Probably all of it was already documented. But, anyway, here are my takeaways on this topic, which may have been learned at the conference, or simply confirmed or reinforced by the conference. Random thoughts mixed in. Schema-less design.
+
+- The simplicity of the pure key/value store (Voldemort and Riak are more like this) brings flexibility in what you represent; having a somewhat more structured data model with which to work (as in Cassandra) can add some complexity to how you design your data, but brings improved flexibility in how you can navigate that data.
+- By digging around the web, one might get the impression that Cassandra has the broadest range of interesting deployments, Voldemort has fewer but is still interesting (Linkedin is certainly no slouch), and Riak has nothing to point to outside Basho Technologies’ non-free Enterprise variant. By attending a conference in which each project was represented, one might get exactly the same impression. Brian Fink (for Riak) spoke of usage scenarios and was obviously informed by production experience with Riak, yet no actual use case, company, site, etc. was ever mentioned (again, the break-out session may contradict this).
+- The Voldemort and Cassandra project teams are clearly paying attention to each other’s work, at least to some degree. There was even some informal discussion of the merkle tree design in Cassandra potentially making its way into Voldemort. Both Alex and Jonathan had intelligent things to say about Riak, as well, when I pestered them about it.
+- Having Ryan King from Twitter present on the “scaling with NoSQL” panel representing Cassandra was cool, and it offered confirmation that Cassandra in particular, but probably the Dynamo model as a whole, achieves its basic purpose: machines can fail but service is maintained and state is preserved; your structured storage system can scale horizontally, can scale writes, etc. Now, all that said, I wish there had been more detail available. Furthermore, Ryan King (understandably) did not seem particularly well-versed in other production deployments (like Digg’s, for instance), so the “scaling with NoSQL” Cassandra representation disproportionately focused on exactly one use case.
+- A lot of good stuff is coming in Cassandra in particular. Eliminating the need for a particular row to fit in memory will make the data model more flexible, particularly in how one designs secondary indexes (in which one needs millions or potentially billions of columns, which are auto-sorted at write time by Cassandra, to effectively form an index using the column names as the indexed value and the related key as the value). The (relatively recent) support added for Hadoop map/reduce expands the use case scenarios for the database. Jonathan Ellis spoke of potentially adding native secondary index support, which would certainly be helpful.
+- We’re only at the beginning, here. The share-nothing design of the Dynamo model is a great foundation on which to work. The production experience of early adopters brings valuable knowledge that is rapidly improving the various solutions (as one would expect). As patterns like the secondary index emerge, those patterns can be integrated into the main projects over time.
+- With that in mind, as higher-level abstractions build up over time, it wouldn’t surprise me if the space comes to a place in which people write fairly flexible queries that describe the sets they want. In which case, the risk and uncertainty one may feel in contemplating the use of these solutions will probably go down. Additionally, the “NoSQL” name will seem even sillier than it already does.
+
+
