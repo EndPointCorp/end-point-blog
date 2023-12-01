@@ -1,14 +1,20 @@
 ---
 title: "Domain Move Considerations"
+author: Josh Ausborne
 date: 2023-11-30
+github_issue_number: 2018
+featured:
+  image_url: /blog/2023/11/domain-move-considerations/mormon-row-and-tetons.webp
+description: "In 2021 we moved to a new Internet domain. A domain move is not an extremely common experience for a company to go through, but it’s not unheard of, either, due to acquisitions, mergers, or rebranding like ours. So we want to share our notes from our move to endpointdev.com in case they are helpful to others considering their own move."
+tags:
+- tips
 ---
 
-![Photo taken of and from the Mormon Row Homestead at Grand Teton National Park. Photo is taken facing WNW, and has an old home and barn in the foreground with the Teton Mountain Range in the background. ](/blog/2023/11/domain-move-considerations/mormon-row-and-tetons.webp)
+![Photo taken of and from the Mormon Row Homestead at Grand Teton National Park. Photo is taken facing WNW, and has an old home and barn in the foreground with the jagged, rocky peaks of the Teton mountain range in the background.](/blog/2023/11/domain-move-considerations/mormon-row-and-tetons.webp)
 
 <!-- Photo by Josh Ausborne, 2019 -->
 
-
-In 2021 [we moved to a new Internet domain](/blog/2021/10/moving-to-endpointdev-dot-com/). We had been on endpoint.com for 26 years, so a lot of things were tied to that domain!
+In 2021 [we moved](/blog/2021/10/moving-to-endpointdev-dot-com/) to a new internet domain. We had been on endpoint.com for 26 years, so a lot of things were tied to that domain!
 
 As we expected, there were a lot of little details to deal with. We found the switch to be a bit overwhelming until we started listing things out, at which time we realized that a divide-and-conquer approach would make it achievable.
 
@@ -71,9 +77,7 @@ Examples of some services that companies use:
 - Payroll service
 - Retirement savings such as 401(k)
 - Office rental invoicing and payments
-- Office services such as water/food delivery
-
-
+- Office services such as water/​food delivery
 
 ### Staff self-service
 
@@ -83,7 +87,7 @@ Some sites will allow you to add a secondary address, promote it to primary, the
 
 ### Infrastructure
 
-Make a list of every hostname in your DNS zone, whether it’s public-facing or internal, where it is hosted (SaaS, which cloud service, on-premises), and how its hostname can be changed.
+Make a list of every hostname in your DNS zone, whether it’s public-facing or internal, where it is hosted (SaaS, a cloud service, on-premises), and how its hostname can be changed.
 
 You should create new DNS entries in the new domain for all of your hosts well in advance of the cutover date. When reviewing your DNS entries, it is as good a time as any to review your existing entries and to do a bit of spring cleaning. We found numerous entries that were no longer needed, and we were able to purge them rather than migrate them into the new domain.
 
@@ -93,17 +97,17 @@ Update reverse DNS entries for all hosts.
 
 Email is the lifeblood of business nowadays. It is how businesses interact with each other: invoicing, payments, sales requests, notifications, reminders, business partner requests, account login resets, etc. For most businesses everything would grind to a halt if email stops working.
 
-Monitor outbound mail relay to see if any internal systems are sending notifications to old domain
-Notify outsiders (customers, clients, business partners) of new domain
-Notify them well in advance of the shutdown date
-Some infrequently contacted clients might continue to use the old email address for months, and if the new owner of the domain doesn’t have email set up there, or if it doesn’t send “bounce” messages back when delivery fails, senders may have no idea you’re not receiving their mail.
+* Monitor outbound mail relay to see if any internal systems are sending notifications to old domain
+* Notify outsiders (customers, clients, business partners) of new domain
+* Notify them well in advance of the shutdown date
+* Some infrequently contacted clients might continue to use the old email address for months, and if the new owner of the domain doesn’t have email set up there, or if it doesn’t send “bounce” messages back when delivery fails, senders may have no idea you’re not receiving their mail.
 
 ### Websites
 
-Change website URLs, email address, redirects
-Main website
-Blog (posts and comments)
-Google Analytics: use domain move function. SEO is crucial for many businesses.
+* Change website URLs, email address, redirects
+* Main website
+* Blog (posts and comments)
+* Google Analytics: use domain move function. SEO is crucial for many businesses.
 
 ### Social media
 
@@ -117,11 +121,11 @@ Consider typing convenience for infrastructure names! epinfra.net is way easier 
 
 Everything you can move earlier, which doesn’t affect the public, do so. The less you have to do up against a deadline, the better.
 
-One lesson that we learned during our domain change is related to the fact that we use [Google Workspace](https://workspace.google.com/) for our mail services, etc., and our domain change involved having to login using the new domain. We had some staff who used Google’s Single Sign On (SSO) for services such as Trello. When the users logged into the account using the new domain name, Trello/Atlassian automatically created a new account for them at the new domain name, and users completely lost access to their old Trello accounts that were using the old domain. This caused us some issues later on because we had to go back through all Trello boards and cards, add all the new users, then remove all of those accounts, now dead and never to be used again, from everywhere. That was very tedious.
+Pay attention to Single Sign On (SSO) accounts. Since we use Google Workspace with our company domain, we had some staff who used Google’s SSO for services such as Trello. When the users logged into the account using the new domain name, Trello/​Atlassian automatically created a new account for them at the new domain name, and users completely lost access to their old Trello accounts that were using the old domain. This caused some issues later on because we had to go back through all Trello boards and cards, add all the new users, then remove all of the old accounts, now dead and never to be used again, from everywhere. This was very tedious.
 
-Another thing that we’ve found two years after The Great Migration is that the old domain still seems to live on in configuration files in various places. We found recently that we still had a virtual host configured on one of our web servers that was listening for requests for a host in the endpoint.com domain. We also found that many of our custom scripts and configurations reference endpoint.com in their comments. I’m never surprised when I stumble across the old domain in some obscure place. In fact, I kind of laugh about it now, as if I just found an Easter egg.
+Something that we’ve found two years after The Great Migration is that the old domain still seems to live on in configuration files in various places. We recently found that we still had a virtual host configured on one of our web servers that was listening for requests for a host in the endpoint.com domain. We also found that many of our custom scripts and configurations reference endpoint.com in their comments. I’m never surprised when I stumble across the old domain in some obscure place. In fact, I kind of laugh about it now, as if I just found an Easter egg.
 
 ### Conclusion
 
-When you finally decide to make your transition to a new domain, be sure to make lists and plan things out. Then be methodical in your work. Migrating can be a challenging task, but can be necessary for a full marketing rebrand and is doable.
+When you finally decide to make your transition to a new domain, be sure to make lists and plan things out. Migrating can be a challenging task, but it’s doable if you are careful and methodical in your work.
 
