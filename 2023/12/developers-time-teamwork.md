@@ -8,7 +8,7 @@ Initially, it seemed like a pretty easy request to fill, we had a dev who had wo
 
 So we got started with the first two or three initiation meetings, getting the basics of the project laid out, tasks assigned, and timeline established.
  
-Then Mr. Murphy showed up as he often does, and the dev we had planned to use got pulled out of the project for an urgent need elsewhere. Ok Project Manager, what do we do now?
+Then [Mr. Murphy] (https://en.wikipedia.org/wiki/Murphy%27s_law) showed up as he often does, and the dev we had planned to use got pulled out of the project for an urgent need elsewhere. Ok Project Manager, what do we do now?
 
 *Time*
 
