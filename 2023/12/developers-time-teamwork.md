@@ -1,37 +1,56 @@
-# Developers - Time and Teamwork
+---
+title: "Developers: Time and Teamwork"
+date: 2023-12-04
+author: Greg Hanson
+github_issue_number: 2020
+description: How does blending time and teamwork improve not only your programming skills, but also your effective output timeline of projects?
+featured:
+  image_url: /blog/2023/12/developers-time-teamwork/utah-exposed-rock-mountain.webp
+tags:
+- tips
+- development
+---
 
-Time and Teamwork. How do those 2 concepts fit together? The focus of this post is really how recognizing the opportunities provided by blending those two can improve not only your programming skills, but also your effective output timeline of projects.
+![A steep golden hillside interspersed with green shrubs, behind power lines. Above the hill is a half moon on a deep blue sky.](/blog/2023/12/developers-time-teamwork/utah-exposed-rock-mountain.webp)
 
-The idea for this post, and the further recognition of the benefits of how these two can fit together, came to me in a recent project. I am the project manager, and we had an urgent request from a client for a developer who could be available in the next 2 weeks to work on a project that had about a 6 week timeline. 
+<!-- Photo by Seth Jensen, 2023. -->
 
-Initially, it seemed like a pretty easy request to fill, we had a dev who had worked previously for this client, and even in the very same environment .. albeit on a different project. So the roadmap was there, get him in, get the requirements, and do the work.  This client, like many, had some very specific *barriers to entry*, like needing a company email address, access through a VPN, specific DUO 2FA, familiarity with Monday.com tracking, 365, MSTeams for meetings, and so forth. But, as mentioned, the dev we would be using had worked previously in this environment, and so we had most all the above in place. 
+Time and teamwork. How do these two concepts fit together? The focus of this post is how blending them can improve not only your programming skills, but also your timeline of projects.
 
-So we got started with the first two or three initiation meetings, getting the basics of the project laid out, tasks assigned, and timeline established.
- 
-Then [Mr. Murphy] (https://en.wikipedia.org/wiki/Murphy%27s_law) showed up as he often does, and the dev we had planned to use got pulled out of the project for an urgent need elsewhere. Ok Project Manager, what do we do now?
+For a recent project I am the project manager of, we had an urgent request from a client for a developer who could be available in the next 2 weeks to work on a project that had about a 6 week timeline.
 
-*Time*
+### The project
 
-Well, we dig into the pool of developers we have, and see what we can do. Here is the first recognition of *time*. We are already about a week into this thing, and now we are starting over. Not only that, but the only dev we had that had any familiarity with this environment just got pulled off the project!  So *time* is not currently our friend. 
+Initially, it seemed like a pretty easy request to fill. We had a developer who had worked previously for this client, in the very same environment, albeit on a different project. So the roadmap was there: Get the developer into the systems, get the requirements, and do the work.
 
-*Teamwork*
+This client, like many, had some specific barriers to entry, like needing a company email address, access through a VPN, Duo 2FA, familiarity with Monday.com tracking, Office 365, Microsoft Teams for meetings, and so forth. But, as mentioned, the dev we would be using had worked previously in this environment, and so we already had most of the above in place.
 
-I did however have two developers that had worked together on many other projects. Additionally and luckily, these two developers had also worked with Dev 1 who was now leaving the project. So we immediately had a few *transfer of information* meetings. 
+So we got started with the first few initiation meetings, getting the basics of the project laid out, tasks assigned, and timeline established.
 
-*Time & Teamwork* 
+Then [Mr. Murphy](https://en.wikipedia.org/wiki/Murphy%27s_law) showed up as he often does, and the dev we had planned to use got pulled out of the project for an urgent need elsewhere. Okay, project manager, what do we do now?
 
-I recognized and want to point out that these meetings were much more effective than they would have been had these developers not known or worked with each other.  So we had a lot of specific questions on what had been requested, and where it all lived.  Because of the familiarity with each other, the time it took to get the two new developers up to speed was greatly reduced. So we started to recover some of the lost time here.
+### Time
 
-As we progressed, and had meetings both internally and with the client, it was so clear to me that because these 2 developers had worked together on so many projects previously, their rapport and efficiency was greatly enhanced. As I thought about that more, I realized that this was a direct effect of *time* and *teamwork*. Because these 2 had worked together for so long, they were aware of each other's strengths and weaknesses.  Also, because of the *time* spent together, they trusted each other. Egos were replaced with respect, and exchanges were filled with value, not hyperbole. 
+Well, we dig into the pool of developers we have, and see what we can do. Here is the first recognition of *time*. We are already about a week into this thing, and now we are starting over. So time is not currently our friend.
 
-As most of you who are reading this know, programming can be performed in a number of different ways. You can be a lone wolf, you can be a tag team, or you can be a cog in a very large wheel. There are places where each of those approaches are the most efficient. 
+### Teamwork
 
-But for this post, I want to just focus on the things that can make a pair, or a small team so efficient. And so back to the *time* and *teamwork* theme.  It also occurred to me during this particular experience that you can have a couple of devs working together on a project, and in most cases *two minds are better than one* will apply.
- 
-However, if you add *time* in as the multiplier so to speak, you end up with another dimension to that. These two developers have worked together for quite some *time*, and that is what enabled them to move so quickly over an unfamiliar environment. As the project progressed, these two sounded off to each other, and as a result many questions that may have ended up on the clients board, ended up being solved internally. *Time* spent waiting for client responses was minimized.
+I did, however, have two developers who had worked together on many other projects. Luckily, these two developers had also worked with the first developer who was now leaving the project. So we immediately had a few *transfer of information* meetings.
 
-That doesn’t seem like a big deal, and the client may not have noticed that there were less clarification issues than on other projects. However, this DID make a difference, and we were able to recover all of the time lost due to the unexpected loss of the original developer, and even shaved off a little time on the overall project. 
+### Time and teamwork
 
-So the result was a very happy client. Remember, this client found out a week into their project that the developer we had assigned to the project was now unable to continue. So there was quite a swing from that to finishing the project slightly ahead of schedule. A client will remember that. 
+We had a lot of specific questions about what had been requested, and where it all lived. Because these two had worked together for so long, the time it took to get the two new developers up to speed was greatly reduced.
 
-So I guess the moral of the story is something we probably all know inherently, that time contributes to the effectiveness of teamwork. The longer the relationship lasts, the higher the respect and trust level is between the team members. Knowing this, we can try to keep compatible developers together as much as is practically possible.  Mix and match, and try to grow this trust over time.  Build *teams* and come back to them, *time* after *time*. 
+They were aware of each other's strengths and weaknesses. As I thought about how much these developers’ rapport sped things up, I realized that this was a direct effect of *time* and *teamwork*. Also, because of the *time* spent together, they trusted each other. Respect was present instead of uncertainty, and exchanges were filled with value.
+
+As most of you who are reading this know, programming can be performed in a number of different ways. You can be a lone wolf, you can be a tag team, or you can be a cog in a very large machine. There are places where each of those approaches is the most efficient.
+
+In most cases when you have a pair or a small group, *two minds are better than one*. If you add *time* in as the multiplier so to speak, you end up with another dimension to that. These two developers have worked together for quite some *time*, and that is what enabled them to move so quickly in an unfamiliar environment. As the project progressed, these two sounded off to each other, and as a result many issues were solved internally, rather than ending up on the client's board. *Time* spent waiting for client responses was minimized.
+
+### Client satisfaction
+
+That doesn’t seem like a big deal, and the client may not have noticed that there were fewer clarification issues than on other projects. However, this *did* make a difference, and we were able to recover all of the time lost due to the unexpected loss of the original developer, even shaving off a little time on the overall project.
+
+The result was a very happy client. Remember, this client found out a week into their project that the developer we had assigned to the project was now unable to continue. So there was quite a swing from losing a developer to finishing the project slightly ahead of schedule. Our client will remember that.
+
+So I guess the moral of the story is something we probably all know inherently: Time contributes to the effectiveness of teamwork. The longer the relationship lasts, the higher the respect and trust level is between the team members. Knowing this, we can try to keep compatible developers together as much as is practically possible. Mix and match, and try to grow this trust over time. Build *teams* and come back to them, *time* after *time*.
