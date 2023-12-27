@@ -6,6 +6,7 @@ tags:
 - analytics
 - pentaho
 - postgres
+- casepointer
 date: 2013-11-07
 ---
 

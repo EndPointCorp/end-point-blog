@@ -3,11 +3,12 @@ title: "CSTE Conference EpiTrax retrospective"
 author: Steve Yoman
 github_issue_number: 1879
 featured:
-  epitrax: true
+  casepointer: true
   image_url: /blog/2022/06/cste-conference-epitrax-retrospective/end-pointers-booth-cste.webp
 date: 2022-06-29
 tags:
 - conference
+- casepointer
 - epitrax
 - emsa
 ---

@@ -8,6 +8,7 @@ tags:
 - database
 - sql
 - sql-server
+- casepointer
 date: 2019-01-23
 ---
 

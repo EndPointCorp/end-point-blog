@@ -7,6 +7,8 @@ tags:
 - ecommerce
 - payments
 - interchange
+featured:
+  image_url: /blog/2023/03/interchange-vend-tax/cloudy-lake.webp
 ---
 
 ![Looking across a lake, a mountain rises to the left, splitting the dark storm clouds from their reflection with a long, thin triangle of the mountain and its reflection. On the lower side of the hill is a small town, with its light green fields standing out against the otherwise unbroken dark green pine trees. The lake's wind-blown ripply texture is broken up on the far right by a rock and grass outcropping, along with a railing on the right side.](/blog/2023/03/interchange-vend-tax/cloudy-lake.webp)

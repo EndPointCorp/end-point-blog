@@ -7,6 +7,7 @@ tags:
 - pentaho
 - postgres
 - reporting
+- casepointer
 date: 2014-09-12
 ---
 

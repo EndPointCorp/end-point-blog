@@ -8,7 +8,10 @@ tags:
 - sql
 - database
 - testing
+- casepointer
 - epitrax
+featured:
+  image_url: /blog/2023/04/pgtap-for-database-unit-tests/georgian-mountains.webp
 ---
 
 ![A steep, green mountain slope divides the image with a steep diagonal downwards and to the right, reaching the bottom of the frame two thirds of the way to the right edge of the image. A small, red-roofed Georgian church sits on it. Another hill sinks down and to the left, creating an apex at the bottom. In the background, framed by these asymmetrical diagonals, is a tall, rocky ridgeline lined with snow anywhere the rocks aren't too steep to hold it.](/blog/2023/04/pgtap-for-database-unit-tests/georgian-mountains.webp)

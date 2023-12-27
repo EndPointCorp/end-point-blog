@@ -8,6 +8,8 @@ tags:
 - java
 - vscode
 github_issue_number: 1946
+featured:
+  image_url: /blog/2023/03/getting-started-with-java-using-vscode/farm-sunset.webp
 ---
 
 ![A fall sunset above an open plain: The yellow sun sets behind snowy mountains, casting orange glow on the left side of the sky, while the right side of the sky is dominated by dark storm clouds rising up and to the right in a dramatic diagonal. From the edge of the mountain towards the viewer spans a large brown plain. On it is a small shack and in the center of the image is a small, run-down tractor.](/blog/2023/03/getting-started-with-java-using-vscode/farm-sunset.webp)<br>

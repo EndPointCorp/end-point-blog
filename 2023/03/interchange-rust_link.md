@@ -6,6 +6,8 @@ tags:
 - interchange
 - rust
 github_issue_number: 1940
+featured:
+  image_url: /blog/2023/03/interchange-rust_link/20220122_212608-sm.webp
 ---
 
 ![Photograph of several layers of blacktop road with cracks and shadows](/blog/2023/03/interchange-rust_link/20220122_212608-sm.webp)

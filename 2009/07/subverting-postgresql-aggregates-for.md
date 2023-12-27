@@ -5,6 +5,7 @@ github_issue_number: 171
 tags:
 - postgres
 - pentaho
+- casepointer
 - reporting
 date: 2009-07-14
 ---

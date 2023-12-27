@@ -8,6 +8,8 @@ tags:
 - gis
 - open-source
 github_issue_number: 1969
+featured:
+  image_url: /blog/2023/05/cesium-labels/rome-map.webp
 ---
 
 ![A 16th-century topographical map of ancient Rome. Buildings are drawn in simple, clear, engraved lines. Streets and important structures like the Pantheon are labeled in Latin.](/blog/2023/05/cesium-labels/rome-map.webp)
@@ -22,7 +24,7 @@ Cesium has vector labels which allow you to anchor some text to a point on a map
 
 To improve performance when displaying labels in Cesium it would make sense to load labels as a tile tree and only show some of the top of the tree at different zoom levels in a manner similar to how [KML Regions with NetworkLinks](https://developers.google.com/kml/documentation/regions?hl=en#smart-loading-of-region-based-network-links) work. Unfortunately, although Cesium supports KML, it doesn’t support KML Regions and NetworkLinks updates on Region change.
 
-Another off-the-shelf solution that might conceivable work would be to use Cesium 3D tiles, but unfortunately, tiles do not support 2D Billboards.
+Another off-the-shelf solution that might conceivably work would be to use Cesium 3D tiles, but unfortunately, tiles do not support 2D Billboards.
 
 Calculating regions and their level of detail is complicated, but Cesium already does most of that work for us. Cesium already calculates visible tiles and their corresponding levels of detail for ImageryProviders. An ImageryProvider is supposed to load imagery for a given tile’s coordinates and zoom level, which is almost what we want, except that we want to render some 3D primitives for labels, not 2D images for the earth surface.
 
@@ -36,7 +38,7 @@ Then, we get the [TMS](https://wiki.openstreetmap.org/wiki/TMS) coordinates out 
 
 ### Backend and data source
 
-To source the labels we use [GeoNames](https://www.geonames.org/). They have a nice dataset for cities with their population included in the data. We take the city labels they provide and store them into a quadtree. Each node in the quad tree has 10 labels associated with it, starting with the largest population at the top of the data structure going down. Based on the altitude we traverse a certain distance down the quadtree returning all cities from each node that corresponds to the tile requested.
+To source the labels we use [GeoNames](https://www.geonames.org/). They have a nice dataset for cities with their population included in the data. We take the city labels they provide and store them into a quadtree. Each node in the quadtree has 10 labels associated with it, starting with the largest population at the top of the data structure and going down. Based on the altitude we traverse a certain distance down the quadtree returning all cities from each node that corresponds to the tile requested.
 
 Here is a video demonstrating how labels display with this new feature we’ve developed:
 

@@ -5,6 +5,8 @@ github_issue_number: 1955
 date: 2023-04-17
 tags:
 - tips
+featured:
+  image_url: /blog/2023/04/use-caps-lock-as-escape/sunset-lake-mountains.webp
 ---
 
 ![At sunset, the sky is a dark, fading orange above mountains which seen through layers of haze, making them appear blue. In the foreground, a lake with a large outcropping of land reflects the sky and mountains. At the bottom of the image much darker land is broken by a path of water travelling into the lake, reflecting orange, positioned directly into the center of the frame.](/blog/2023/04/use-caps-lock-as-escape/sunset-lake-mountains.webp)

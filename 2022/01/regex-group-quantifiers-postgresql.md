@@ -7,6 +7,7 @@ tags:
 - sql
 - regex
 - hl7
+- casepointer
 github_issue_number: 1828
 ---
 
