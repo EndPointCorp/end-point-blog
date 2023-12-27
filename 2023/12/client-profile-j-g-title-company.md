@@ -59,6 +59,6 @@ The application is being used widely by dealerships and the J.G. Title team. The
 
 ![The J.G. Title Suite application, featured on the company's website](/2023/12/client-profile-j-g-title-company/j-g-title-suite-featured.png)
 
-We are still working on several tasks related to the Phase III of the project. As the application keeps growing, and the user base sends feedback, new phases of work wil surely be added to the project in the future.
+We are continuing work on several tasks related to the Phase III of the project. As the application keeps growing, and the user base sends feedback, new phases of work will surely be added to the project in the future.
 
 This partnership is a testament to our shared vision for efficiency and innovation, and we're excited to continue reshaping the industry with J.G. Title Company!
