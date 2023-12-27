@@ -2,7 +2,7 @@
 title: "Client Profile: J.G. Title Company"
 date: 2023-12-27
 author: Juan Pablo Ventoso
-description: Summary of our work with J.G. Title, a prominent service company specializing in dealership titling and registration processes across the country
+description: Summary of our work with J.G. Title, a prominent service company specializing in automotive dealership titling and registration processes across the country
 featured:
   image_url: /blog/2023/12/client-profile-j-g-title-company/j-g-title-company.png
 tags:
@@ -12,7 +12,7 @@ tags:
 
 ![J.G. Title Company](/2023/12/client-profile-j-g-title-company/j-g-title-company.png)
 
-[J.G. Title](https://jgtitleco.com/) is a prominent service company specializing in dealership titling and registration processes across the country. They simplify operations for their dealers, businesses, and individuals by giving tax/fee quotes, document validation, and checklists for all jurisdictions.
+[J.G. Title](https://jgtitleco.com/) is a prominent service company specializing in automotive dealership titling and registration processes across the country. They simplify operations for their dealers, businesses, and individuals by giving tax/fee quotes, document validation, and checklists for all jurisdictions.
 
 Jordan Kivett, the owner of J.G. Title, envisioned an innovative web application to simplify dealership operations. He [contacted us](https://www.endpointdev.com/contact/) to request a quote for developing this solution and making his vision a reality. This project became a great opportunity for our [.NET team](https://www.endpointdev.com/team/) to build a robust system with state-of-the-art technologies, tied together and functioning seamlessly.
 
