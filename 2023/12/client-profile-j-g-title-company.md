@@ -10,7 +10,7 @@ tags:
 - development
 ---
 
-![J.G. Title Company](/blog/2023/12/client-profile-j-g-title-company/j-g-title-company.png)
+![J.G. Title Company](/2023/12/client-profile-j-g-title-company/j-g-title-company.png)
 
 [J.G. Title](https://jgtitleco.com/) is a prominent service company specializing in dealership titling and registration processes across the country. They simplify operations for their dealers, businesses, and individuals by giving tax/fee quotes, document validation, and checklists for all jurisdictions.
 
@@ -55,7 +55,7 @@ We began working on the project on October 25, 2022, and launched the Phase I se
 
 The application is being used widely by dealerships and the J.G. Title team. They have over 200 users registered in the system, with more than 8,000 deals quoted, and new deals being added at an increasing rate.
 
-![The J.G. Title Suite application, featured on the company's website](/blog/2023/12/client-profile-j-g-title-company/j-g-title-suite-featured.png)
+![The J.G. Title Suite application, featured on the company's website](/2023/12/client-profile-j-g-title-company/j-g-title-suite-featured.png)
 
 We are still working on several tasks related to the Phase III of the project. As the application keeps growing, and the user base sends feedback, new phases of work wil surely be added to the project in the future.
 
