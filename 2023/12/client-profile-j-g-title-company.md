@@ -40,7 +40,7 @@ We also used [Trello](https://trello.com/) for tracking the project's progress a
 
 ### The team
 
-Most of our .NET team was involved on this project. We also received valuable help from our hosting team and our Postgres developers.
+Most of our .NET team is involved on this project. We also receive valuable help from our hosting team and our Postgres developers.
 
 - [Bimal Gharti Magar](https://www.endpointdev.com/team/bimal-gharti-magar/)
 - [Dan Briones](https://www.endpointdev.com/team/dan-briones/)
@@ -57,7 +57,7 @@ We began working on the project on October 25, 2022, and launched the Phase I wi
 
 The application is being used widely by dealerships and the J.G. Title team. They have over 200 users registered in the system, with more than 8,000 deals quoted, and new deals being added at an increasing rate.
 
-[The J.G. Title Suite application, featured on the company's website](/2023/12/client-profile-j-g-title-company/j-g-title-suite-featured.png)
+![The J.G. Title Suite application, featured on the company's website](/2023/12/client-profile-j-g-title-company/j-g-title-suite-featured.png)
 
 We are still working on several tasks related to the Phase III of the project. As the application keeps growing, and the user base sends feedback, new phases of work wil surely be added to the project in the future.
 
