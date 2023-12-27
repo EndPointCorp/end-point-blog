@@ -18,7 +18,7 @@ Jordan Kivett, the owner of J.G. Title, envisioned an innovative web application
 
 ### The solution
 
-J.G. Title submitted a detailed document, containing a description of the requirements along with workflow diagrams explaining their current business processes. After analyzing all the requirements and having some initial meetings, we decided to divide the project into different stages, and estimate each phase of work separately.
+J.G. Title submitted a detailed document, containing a description of the requirements for the J.G. Title Suite app, along with workflow diagrams explaining their current business processes. After analyzing all the documents and having some initial meetings, we decided to divide the project into different stages, and estimate each phase of work separately.
 
 ### Tech stack
 
@@ -34,28 +34,30 @@ We also used [Trello](https://trello.com/) for tracking the project's progress a
 
 - Phase I: The ultimate product of this iteration is a product that will allow users to enter deals into the system and retrieve the quote estimation, including taxes, fees, and charges for services across 50 states.
 
-- Phase II: Its main purpose was to include several UI improvements such as a detailed dealership dashboard, financial management and integration with Quickbooks.
+- Phase II: Its main purpose was to include several UI improvements such as a detailed dealership dashboard, financial management and integration with [Quickbooks](https://quickbooks.intuit.com/).
 
 - Phase III: This phase includes an ambitious PDF document management section, by introducing document recognition, analysis and manipulation, to perform automatic validations on the document's contents, and automatically generate PDF outputs from the deal's details.
 
 ### The team
 
-Most of our dotnet team was involved on this project. We also received assistance from our hosting team and our valuable Postgres developers.
+Most of our .NET team was involved on this project. We also received valuable help from our hosting team and our Postgres developers.
 
+- [Bimal Gharti Magar](https://www.endpointdev.com/team/bimal-gharti-magar/)
 - [Dan Briones](https://www.endpointdev.com/team/dan-briones/)
 - [Dylan Wooters](https://www.endpointdev.com/team/dylan-wooters/)
-- [Mike DeLange](https://www.endpointdev.com/team/mike-delange/)
-- [Bimal Gharti Magar](https://www.endpointdev.com/team/bimal-gharti-magar/)
 - [Juan Pablo Ventoso](https://www.endpointdev.com/team/juan-pablo-ventoso/)
 - [Kevin Campusano](https://www.endpointdev.com/team/kevin-campusano/)
+- [Mike DeLange](https://www.endpointdev.com/team/mike-delange/)
+
+The client is also highly involved in all aspects of the development process, from requirements gathering to documenting, testing and provinding feedback. We have bi-weekly standup calls, and the entire team (End Point + J.G. Title) interacts actively through Trello, working together and updating each task as the work progresses.
 
 ### Results
 
-We began working on the project on October 25, 2022, and launched the Phase I section of the app within the expected timeline, on June 7, 2023. The next stages were launched iteratively, with new deployments usually scheduled twice a week.
+We began working on the project on October 25, 2022, and launched the Phase I within the expected timeline, on June 7, 2023. The next stages were launched iteratively, with new deployments usually scheduled twice a week.
 
 The application is being used widely by dealerships and the J.G. Title team. They have over 200 users registered in the system, with more than 8,000 deals quoted, and new deals being added at an increasing rate.
 
-![The J.G. Title Suite application, featured on the company's website](/2023/12/client-profile-j-g-title-company/j-g-title-suite-featured.png)
+[The J.G. Title Suite application, featured on the company's website](/2023/12/client-profile-j-g-title-company/j-g-title-suite-featured.png)
 
 We are still working on several tasks related to the Phase III of the project. As the application keeps growing, and the user base sends feedback, new phases of work wil surely be added to the project in the future.
 
