@@ -376,7 +376,6 @@ def check_spellings(line):
             'ideal': '',
             'message': "Add zero-width breaking space after / between words",
             'forKeepers': True,
-            'skip': r''
         },
         {
             'regex': r'\d-\d',
@@ -542,7 +541,12 @@ if len(errors) > 0:
     errors = sorted(errors)
     print('Errors:') 
     for error in errors:
-        print(error)
+        if not error.forKeepers:
+            print(error)
+            continue
+
+        if args.forKeepers:
+            print(error)
     print('')
 
 if len(warnings) > 0:
