@@ -2,14 +2,17 @@
 title: "Client Profile: J.G. Title Company"
 date: 2023-12-27
 author: Juan Pablo Ventoso
-description: Summary of our work with J.G. Title, a prominent service company specializing in automotive dealership titling and registration processes across the country.
+description: Read about our work with J.G. Title, a prominent service company specializing in automotive dealership titling and registration processes across the United States.
 featured:
+  endpoint: true
   image_url: /blog/2023/12/client-profile-j-g-title-company/j-g-title-company.webp
 github_issue_number: 2022
 tags:
 - dotnet
 - development
 - clients
+- case-study
+- saas
 ---
 
 ![The J.G. Title Company logo sits in the center of an image on a blue background with futuristic designs reminiscent of circuit boards. Text on either side of the logo reads "Nationwide titling", with text under reading "info@jgtitleco.com" and "https://jgtitleco.com"](/blog/2023/12/client-profile-j-g-title-company/j-g-title-company.webp)
@@ -55,7 +58,7 @@ We began working on the project on October 25, 2022, and completed Phase I withi
 
 The application is now widely used by dealerships and the J.G. Title team. They have over 200 users registered in the system, with more than 8,000 deals quoted, and new deals being added at an increasing rate.
 
-![. On the right side is an image of a laptop and phone, each running the J.G. Title Suite application. Text on the left reads "From chaos to clarity. Simplify, streamline, succeed: Embrace clarity in your dealership's tax and title operations. Our dedicated team of specialists conducted extensive research and established partnerships with local DMVs and state Treasurers to become the trusted partner for automotive dealerships and businesses nationwide, offering efficient and reliable title and registration services. We continue transforming automotive title management on a national scale and welcome you to experience the future of automotive titling."](/blog/2023/12/client-profile-j-g-title-company/j-g-title-suite-featured.png)<br>
+![On the right side is an image of a laptop and phone, each running the J.G. Title Suite application. Text on the left reads "From chaos to clarity. Simplify, streamline, succeed: Embrace clarity in your dealership's tax and title operations. Our dedicated team of specialists conducted extensive research and established partnerships with local DMVs and state Treasurers to become the trusted partner for automotive dealerships and businesses nationwide, offering efficient and reliable title and registration services. We continue transforming automotive title management on a national scale and welcome you to experience the future of automotive titling."](/blog/2023/12/client-profile-j-g-title-company/j-g-title-suite-featured.webp)<br>
 The J.G. Title Suite application, featured on the company's website.
 
 We are continuing work on several tasks related to Phase III of the project. As the application keeps growing and users send feedback, new phases of work will surely be added to the project in the future.
