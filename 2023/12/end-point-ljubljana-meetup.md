@@ -27,7 +27,7 @@ Most of the time that is wonderful because we have no commute if we work at home
 
 Perhaps best of all, working remote-first has allowed us to work together with colleagues around the world: currently in 13 countries and as many time zones. That is pretty good international representation for a company of 70 people.
 
-A downside of mostly remote work is that we generally have to make an effort to ever meet each other in person. And while remote meetings are convenient, they lack something that in-person meetings do! There is especially a big difference between meeting remotely with someone you have never met, and someone you've met in person at least once.
+A downside of mostly remote work is that we generally have to make an effort to ever meet each other in person. And while remote meetings are convenient, they lack some impact that in-person meetings have. There is especially a big difference between meeting remotely with someone you have never met, and someone you've met in person at least once!
 
 So we try to meet up with our co-workers when we are at all "in the neighborhood" of each other. That can happen when more than one of us attends a conference or work on a VisionPort installation, when we meet with a client, when we have meetings at one of our offices, or when one or more of us happens to be traveling and proposes meeting with others in the area.
 
@@ -38,11 +38,12 @@ In 2023 alone I am aware of such meetings among our staff that happened in:
 * Belgium
 * Slovenia
 * New York
-* Indiana
-* Washington (state)
-* Utah
-* California
 * Tennessee
+* Missouri
+* Indiana
+* Utah
+* Washington (state)
+* California
 
 And there are probably a few others I didn't hear about or forgot!
 
