@@ -5,6 +5,8 @@ github_issue_number: 1170
 tags:
 - company
 - conference
+- remote-work
+- travel
 date: 2015-11-02
 ---
 

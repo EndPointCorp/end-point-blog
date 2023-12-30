@@ -6,6 +6,7 @@ tags:
 - company
 - conference
 - remote-work
+- travel
 date: 2013-05-07
 ---
 
