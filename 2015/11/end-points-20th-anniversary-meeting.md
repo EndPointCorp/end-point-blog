@@ -12,7 +12,7 @@ date: 2015-11-02
 
 Friday, October 2nd, was the second and final day of our company meeting. (See the earlier [report on day 1 of our meeting](/blog/2015/10/end-points-20th-anniversary-meeting/) if you missed it.) Another busy day of talks, this day was kicked off by Ben Goldstein, who gave us a more detailed rundown of End Point’s roots.
 
-<div class="separator" style="clear: both; text-align: center;"><a href="/blog/2015/11/end-points-20th-anniversary-meeting/image-0.jpeg" imageanchor="1" style="clear: right; float: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" src="/blog/2015/11/end-points-20th-anniversary-meeting/image-0.jpeg"/></a></div>
+<div class="separator" style="clear: both; float: right; text-align: center;"><img border="0" src="/blog/2015/11/end-points-20th-anniversary-meeting/image-0.jpeg"/></div>
 
 ### The History of End Point
 
@@ -34,7 +34,7 @@ The story continues with End Point moving into PostgreSQL support, Ruby on Rails
 
 A lot happens in a business in 20 years!
 
-<a data-flickr-embed="true" href="https://www.flickr.com/photos/end-point/22374541691/" title="20151002_185637"><img src="/blog/2015/11/end-points-20th-anniversary-meeting/image-1.jpeg" style="max-width: 100%;"/></a>
+<img src="/blog/2015/11/end-points-20th-anniversary-meeting/image-1.jpeg" style="max-width: 100%;"/>
 
 ### Using Trello
 
@@ -56,7 +56,7 @@ What does End Point use automation for? We use it in our web hosting environment
 
 For those who are looking to get started, Lele and Richard recommended starting with automation on new servers. It’s very simple and safe to experiment there, as there isn’t anything yet to lose. Later once you’re confident in what you’re doing you can start to carefully spread your automation to existing servers.
 
-<a data-flickr-embed="true" href="https://www.flickr.com/photos/end-point/22145874720/" title="DSC_4216"><img height="424" src="/blog/2015/11/end-points-20th-anniversary-meeting/image-1.jpeg" style="max-width: 100%;" width="640"/></a>
+<img height="424" src="/blog/2015/11/end-points-20th-anniversary-meeting/image-2.jpeg" style="max-width: 100%;" width="640"/>
 
 ### Command Line Tools
 
@@ -92,7 +92,7 @@ ls -d */ will list all directories in the current directory.
 
 These are just a few of the neat things they showed us. See their [blog post about these and other Unix commands](/blog/2015/11/favourite-unix-command-line-tools/).
 
-<a data-flickr-embed="true" href="https://www.flickr.com/photos/end-point/21741059554/" title="20151002_200437"><img height="360" src="/blog/2015/11/end-points-20th-anniversary-meeting/image-1.jpeg" style="max-width: 100%" width="640"/></a>
+<img height="360" src="/blog/2015/11/end-points-20th-anniversary-meeting/image-3.jpeg" style="max-width: 100%" width="640"/>
 
 ### ROS in the Liquid Galaxy
 
@@ -105,7 +105,7 @@ Next, Rick gave a talk on the current state of the company, which he summarized 
 
 A larger End Point presents us with both opportunities and challenges. However, the core values of our company have remained the same and are part of what make us what we are.
 
-<a data-flickr-embed="true" href="https://www.flickr.com/photos/end-point/22176971989/in/photolist-zMGM92" title="20151002_200115"><img src="/blog/2015/11/end-points-20th-anniversary-meeting/image-1.jpeg" style="max-width: 100%;"/></a>
+<img src="/blog/2015/11/end-points-20th-anniversary-meeting/image-4.jpeg" style="max-width: 100%;"/>
 
 ### Personal Tech Security
 
@@ -123,7 +123,7 @@ Backup your data to a safe place, and remember to share your passwords with some
 
 Make sure your private SSH keys are password-protected, and ensure you’re asked for confirmation when using them. Avoid common and unsafe passwords, like “12345” and “password”, although “pizza1” is perfectly fine :). Use PGP to encrypt private messages and confidential data at rest.
 
-<div class="separator" style="clear: both; text-align: center;"><a href="/blog/2015/11/end-points-20th-anniversary-meeting/image-1.jpeg" imageanchor="1" style="clear: right; float: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" src="/blog/2015/11/end-points-20th-anniversary-meeting/image-1.jpeg"/></a></div>
+<div class="separator" style="float:right; text-align: center;"><img border="0" src="/blog/2015/11/end-points-20th-anniversary-meeting/image-5.jpeg"/></div>
 
 ### “Brain bowl” challenge
 
@@ -148,4 +148,4 @@ We ended the day with a party nearby at Spin where we played ping-pong and had d
 
 It was great to get everyone together in person!
 
-<a data-flickr-embed="true" href="https://www.flickr.com/photos/end-point/22145792200/" title="DSC_4301"><img src="/blog/2015/11/end-points-20th-anniversary-meeting/image-2.jpeg" style="max-width: 100%;"/></a><script async src="//embedr.flickr.com/assets/client-code.js" charset="utf-8"></script>
+<img src="/blog/2015/11/end-points-20th-anniversary-meeting/image-6.jpeg" style="max-width: 100%;"/>
