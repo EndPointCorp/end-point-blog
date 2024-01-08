@@ -18,7 +18,7 @@ C# code can be used to write SignalR hubs, which easly integrates with other ASP
 We will learn how to use SignalR for real-time communication to send camera position of a cube, built using [three.js](https://threejs.org/), to all users in the page.
 - User can load the webpage and request to control a cube for 2  minutes.
 - Control can be released manually or it will be released after 2 minutes.
-- User can control the camera position of cube, which will be seen my all the users vieweing the page.
+- User can control the camera position of cube, which will be seen my all the users viewing the page.
 - When one user is controlling the cube, other users requesting the control will be added to queue. Queued users will be granted control automatically when controlling user's time is over.
 
 First we will create a web application and create a SignalR communication between client and server. After that, we will add more items to the codebase to achieve the above mentioned features.
@@ -31,7 +31,7 @@ Create web application
 > code .\EPSignalRControl\
 ```
 
-The SignalR server library is included in the ASP.NET Core shared framework. The JavaScript client library isn't automatically included in the project. For this tutorial, use Library Manager (LibMan) to get the client library from unpkg. unpkgis a fast, global content delivery network for everything on npm.
+The SignalR server library is included in the ASP.NET Core shared framework. The JavaScript client library isn't automatically included in the project. For this tutorial, use Library Manager (LibMan) to get the client library from unpkg. unpkg is a fast, global content delivery network for everything on npm.
 
 ```bash
 > dotnet tool install -g Microsoft.Web.LibraryManager.Cli
@@ -39,7 +39,7 @@ The SignalR server library is included in the ASP.NET Core shared framework. The
 ```
 
 #### Creating a SignalR hub
-We'll create a **ControlHub** which inheritates Hub class. We'll also create `CameraData` model class for passing data between SignalR server and client.
+We'll create a **ControlHub** which inherits Hub class. We'll also create `CameraData` model class for passing data between SignalR server and client.
 
 ```csharp
 public class CameraData
@@ -70,7 +70,7 @@ The [Hub](https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.sign
 
 - **[Groups](https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.signalr.hub.groups?view=aspnetcore-8.0)**: the group manager to manage connections in groups.
 
-`Clients.All` calls a method on all connected clients. So, control hub sends back the data received from one client, back to all connected clients. Similary, we can use `Clients.Caller` to send back data to client that invoked the hub method.
+`Clients.All` calls a method on all connected clients. So, control hub sends back the data received from one client, back to all connected clients. Similarly, we can use `Clients.Caller` to send back data to client that invoked the hub method.
 
 Then, we need to register the services using `AddSignalR()` and configure the endpoints using `MapHub()` required by SignalR in `Program.cs`
 ```csharp
@@ -145,7 +145,7 @@ position.x = 100
 position.y = 100
 position.z = 100
 ```
-If we open another tab and browse the web application. In previous tab's dev tools console, we will see position values are appended. This is because new tab invoked `SendData` and server recieved and sent back data to all connected clients.
+If we open another tab and browse the web application. In previous tab's dev tools console, we will see position values are appended. This is because new tab invoked `SendData` and server received and sent back data to all connected clients.
 ```console
 Connected to ControlHub
 Invoking SendData
@@ -157,7 +157,7 @@ position.y = 100
 position.z = 100
 ```
 
-This is the basic way of implmenting SignlaR in the project to achieve real-time functionality. Now, we'll dive deep into creating a but more practical usage that can be extended for other use.
+This is the basic way of implementing SignlaR in the project to achieve real-time functionality. Now, we'll dive deep into creating a but more practical usage that can be extended for other use.
 
 ### Adding more features
 >One thing to note is Hubs are transient, so we cannot store state in the property of hub class. Each hub method call is executed on a new hub instance.
@@ -445,13 +445,13 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
 - Add `createRenderer`, `createScene`, `createCamera` and `createCube` helper methods that are required for creating cube and attaching it to the receiver as well as controller section to show a cube
 ```javascript
-function createRenderer(canvsDOMId) {
+function createRenderer(canvasDOMId) {
     // Load a Renderer
     let renderer = new THREE.WebGLRenderer({ alpha: false, antialias: true });
     renderer.setClearColor(0xC5C5C3);
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(250, 250);
-    document.getElementById(canvsDOMId).appendChild(renderer.domElement);
+    document.getElementById(canvasDOMId).appendChild(renderer.domElement);
 
     return renderer;
 }
@@ -473,11 +473,10 @@ function createScene() {
 
 function createCamera(cameraZPosition = 10) {
 
-    // Load Camera Perspektive
+    // Load Camera Perspective
     let camera = new THREE.PerspectiveCamera(50, 250 / 250, 1, 200);
     camera.position.z = 5;
 
-    // Load the Orbitcontroller
     return camera;
 }
 
