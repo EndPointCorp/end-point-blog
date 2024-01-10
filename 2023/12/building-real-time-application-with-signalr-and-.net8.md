@@ -159,7 +159,7 @@ position.y = 100
 position.z = 100
 ```
 
-This is the basic way of implementing SignlaR in the project to achieve real-time functionality. Now, we'll dive deep into creating a more practical usage that can be extended for other purposes.
+This is the basic way of implementing SignalR in the project to achieve real-time functionality. Now, we'll dive deep into creating a more practical usage that can be extended for other purposes.
 
 ### Adding more features
 >One thing to note is Hubs are transient, so we cannot store state in the property of hub class. Each hub method call is executed on a new hub instance.
@@ -333,7 +333,7 @@ public async Task ReleaseControl()
     }
 }
 ```
-- Add `SendData` method, which receives the data from the controlling user and then sends the recieved data to all the clients.
+- Add `SendData` method, which receives the data from the controlling user and then sends the received data to all the clients.
 ```csharp
 public async Task SendData(CameraData cameraData)
 {
