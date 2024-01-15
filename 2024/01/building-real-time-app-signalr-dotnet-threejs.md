@@ -1,45 +1,69 @@
 ---
-title: "Building real-time application with SignalR, .NET8 and three.js"
-date: 2023-12-31
+title: "Building a real-time application with SignalR, .NET, and three.js"
+author: Bimal Gharti Magar
+date: 2024-01-13
+github_issue_number: 2026
+description: How to use SignalR for real-time communication to send the camera position of a cube, built using three.js, to all users of the .NET app.
+featured:
+  image_url: /blog/2024/01/building-real-time-app-signalr-dotnet-threejs/clock-banner.webp
+tags:
+- dotnet
+- javascript
 ---
 
-![clock](https://images.pexels.com/photos/219677/pexels-photo-219677.jpeg)
+![A white watchface, without any other parts, sits on a surface with a dotted texture](/blog/2024/01/building-real-time-app-signalr-dotnet-threejs/clock-banner.webp)<br>
+Image by Pixabay on Pexels
 
-Users want to see real-time data in applications where the latest data is reflected without refreshing the application. Adding real-time functionality to a .NET application is easy with the [SignalR](https://dotnet.microsoft.com/en-us/apps/aspnet/signalr) library.
+When data in a web application is changing in real time, users want to see those updates reflected in real time without refreshing the application. Adding real-time functionality to a .NET application is easy with the [SignalR](https://dotnet.microsoft.com/en-us/apps/aspnet/signalr) library.
 
-SignalR uses WebSockets, Server-Sent Events, or Long Polling, depending on the capabilities of the client and server, to establish a persistent connection between the client and the server. SignalR, from the server-side, pushes code to connected clients. SignalR is good for applications that require high-frequency updates from the server, such as real-time gaming.
+Depending on the capabilities of the client and server, SignalR can use WebSockets, server-sent events, or long polling to establish a persistent connection between the client and the server. From the server side, SignalR pushes code to connected clients. SignalR is good for applications that require high-frequency updates from the server, such as real-time gaming.
 
 C# code can be used to write SignalR hubs, which easily integrate with other ASP.NET features like dependency injection, authentication, authorization, and scalability.
 
 ### What we'll build
 
-![signalr app](/blog/2023/12/building-real-time-application-with-signalr-and-.net8/signal-real-time-cube.gif)
-
 We will learn how to use SignalR for real-time communication to send the camera position of a cube, built using [three.js](https://threejs.org/), to all users on the page.
-- User can load the webpage and request to control a cube for 2 minutes.
-- Control can be released manually, or it will be released after 2 minutes.
-- User can control the camera position of cube, which will be seen my all the users viewing the page.
-- When one user is controlling the cube, other users requesting the control will be added to queue. Queued users will be granted control automatically when the controlling user's time is over.
 
-First we will create a web application and create a SignalR communication between the client and server. After that, we will add more items to the codebase to achieve the above mentioned features.
+![Two browser windows are open side by side, to the same web app. On both, under a "Receiver" title is a window showing a 3D cube, after which a "Controller" title is followed by a "Request Control" button. In the left browser window, the mouse clicks the blue "Request Control" button, which turns green and displays a message underneath saying "Control granted: 120 seconds remaining", with the number counting down every second. Another identical 3D cube window opens beneath. The clicks and drags in this bottom window, which rotates the cube. After a short delay, the other two cubes in the "Receiver" section follow and move to the position where the controller moved the cube.](/blog/2024/01/building-real-time-app-signalr-dotnet-threejs/signal-real-time-cube.gif)
 
-### Creating web application, installing and configuring SignalR
+You can see the [demo here](https://nifty.azurewebsites.net/).
 
-Create web application
-```bash
+Here is the description of our testing app:
+
+- A user can request control of a cube for 2 minutes
+- Control can be released manually, or it will be automatically released after 2 minutes
+- A user can control the camera position of cube, which will be seen by all users viewing the page
+- When one user is controlling the cube, other users requesting control will be added to a queue
+- Queued users will be granted control automatically when the controlling user's time is over
+
+First we will create a web application and create a SignalR communication between the client and server. After that, we can implement the above features.
+
+### Creating the web application
+
+Create a new .NET application.
+
+```plain
 > dotnet new webapp -o EPSignalRControl
+```
+
+I edited the app using VS Code:
+
+```plain
 > code .\EPSignalRControl\
 ```
 
-The SignalR server library is included in the ASP.NET Core shared framework. The JavaScript client library isn't automatically included in the project. For this tutorial, use Library Manager (LibMan) to get the client library from unpkg. unpkg is a fast, global content delivery network for everything on npm.
+#### Installing and configuring SignalR
 
-```bash
+The SignalR server library is included in the ASP.NET Core shared framework. However, the JavaScript client library isn't automatically included in the project. You can use Library Manager (LibMan) to get the client library from unpkg. unpkg is a fast global content delivery network for everything on npm.
+
+```plain
 > dotnet tool install -g Microsoft.Web.LibraryManager.Cli
 > libman install @microsoft/signalr@latest -p unpkg -d wwwroot/js/signalr --files dist/browser/signalr.js
 ```
 
 #### Creating a SignalR hub
-We'll create a **ControlHub** which inherits the `Hub` class. We'll also create `CameraData` model class for passing data between SignalR server and client.
+
+We'll create a `CameraData` model class for passing data between the SignalR server and client.
 
 ```csharp
 public class CameraData
@@ -49,6 +73,9 @@ public class CameraData
     public double z { get; set; } = 5;
 }
 ```
+
+We'll also create a `ControlHub` class which inherits from `Hub`.
+
 ```csharp
 using Microsoft.AspNetCore.SignalR;
 
@@ -63,23 +90,25 @@ public class ControlHub : Hub
     }
 }
 ```
-The [Hub](https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.signalr.hub?view=aspnetcore-8.0) class has Clients, Context and Groups properties:
-- **[Clients](https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.signalr.hub.clients?view=aspnetcore-8.0)**: can be used to invoke methods on the clients connected to this hub.
 
-- **[Context](https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.signalr.hub.context?view=aspnetcore-8.0)**: the hub caller context for accessing information about the hub caller connection.
+The [Hub](https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.signalr.hub?view=aspnetcore-8.0) class has Clients, Context, and Groups properties:
 
-- **[Groups](https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.signalr.hub.groups?view=aspnetcore-8.0)**: the group manager to manage connections in groups.
+- **[Clients](https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.signalr.hub.clients?view=aspnetcore-8.0)** can be used to invoke methods on the clients connected to this hub.
+- **[Context](https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.signalr.hub.context?view=aspnetcore-8.0)** is the hub caller context for accessing information about the hub caller connection.
+- **[Groups](https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.signalr.hub.groups?view=aspnetcore-8.0)** is the group manager to manage connections in groups.
+
+> One thing to note is that hubs are transient, so we cannot store state in a property of the Hub class. Each hub method call is executed on a new Hub instance.
 
 `Clients.All` calls a method on all connected clients. As a result, the control hub sends the data received from one client back to all connected clients. Similarly, we can use `Clients.Caller` to send back data to the client that invoked the hub method.
 
 Then, we need to register the services using `AddSignalR()` and configure the endpoints using `MapHub()` required by SignalR in `Program.cs`
+
 ```csharp
 using EPSignalRControl.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
-// Add services to the container.
-builder.Services.AddRazorPages();
 
+builder.Services.AddRazorPages(); // Add services to the container
 builder.Services.AddSignalR(); // Register SignalR service
 
 var app = builder.Build();
@@ -94,22 +123,26 @@ app.UseRouting();
 app.UseAuthorization();
 app.MapRazorPages();
 
-app.MapHub<ControlHub>("/controlHub"); // Map ControlHub to endpoint
+app.MapHub<ControlHub>("/controlHub"); // Map ControlHub to the '/controlHub' endpoint
 
 app.Run();
 ```
-#### Connecting to SignalR Hub using Javascript library
-We'll reference the SignalR Javascript library as well as create `site.js` file and reference it in `Index.cshtml`
+
+#### Connecting to SignalR Hub using the SignalR JavaScript client library
+
+We'll reference the SignalR JavaScript library as well as create a `site.js` file and reference it in `Index.cshtml`.
 
 ```html
 <script src="~/js/signalr/dist/browser/signalr.js"></script>
 <script type="module" src="~/js/site.js" asp-append-version="true"></script>
 ```
-In `site.js` file, we will:
-- connect to Control Hub using the endpoint `/connecthub`
-- start the connection with Control Hub
-- send data to the server by invoking `SendData` method of ControlHub
-- add listener for `ReceiveData` to receive the data sent from SignalR Hub
+
+In the `site.js` file, we will:
+
+- Connect to the control hub using the endpoint `/connecthub`
+- Start the connection with our control hub
+- Send data to the server by invoking the `SendData` method of ControlHub
+- Add a listener for `ReceiveData` to receive the data sent from SignalR Hub
 
 ```javascript
 const controlHubConnection = new signalR.HubConnectionBuilder()
@@ -135,20 +168,23 @@ controlHubConnection.start()
         return console.error(err.toString());
     });
 }).catch(function (err) {
-    console.error("Error connecting to ControlHub: " + err);
+    console.error("Error connecting to ControlHub: ", err);
 });
 ```
 
-At this point if we run the web application and open the browser and see the dev tools console, we will see:
-```console
+At this point if we run the web application, open the browser, and look at the developer tools console, we will see:
+
+```plain
 Connected to ControlHub
 Invoking SendData
 position.x = 100
 position.y = 100
 position.z = 100
 ```
-If we open another tab and browse the web application, in the previous tab's dev tools console, we will see the position values are appended. This is because the new tab invoked `SendData` and the server received and sent back data to all connected clients.
-```console
+
+If we open the web application in a different tab, then in the first tab's dev tools console we will see the position values are appended. This is because the new tab invoked `SendData` and the server received and sent back data to all connected clients.
+
+```plain
 Connected to ControlHub
 Invoking SendData
 position.x = 100
@@ -159,14 +195,14 @@ position.y = 100
 position.z = 100
 ```
 
-This is the basic way of implementing SignalR in the project to achieve real-time functionality. Now, we'll dive deep into creating a more practical usage that can be extended for other purposes.
+This is the basic way of implementing SignalR in the project to achieve real-time functionality. Now, we'll dive deep into creating more features to extend the app to more practical usage.
 
-### Adding more features
->One thing to note is Hubs are transient, so we cannot store state in the property of hub class. Each hub method call is executed on a new hub instance.
+### Adding features
 
+#### Backend
 
-#### We will add following things on the backend:
-- Add `ControlRequest.cs` model to hold SignalR connection id and requested date time.
+Add a `ControlRequest.cs` model to hold the SignalR connection ID and the time of the request.
+
 ```csharp
 public class ControlRequest
 {
@@ -174,12 +210,16 @@ public class ControlRequest
     public DateTime RequestTime { get; set; }
 }
 ```
-- Add two variables in ControlHub.cs: `currentControl` variable to hold the details of the current active request, and `controlQueue` to hold the requests in queue.
+
+Add two variables in `ControlHub.cs`: `currentControl` to hold the details of the current active request, and `controlQueue` to hold the requests in queue.
+
 ```csharp
-private static Queue<ControlRequest> controlQueue = new Queue<ControlRequest>();
 private static ControlRequest? currentControl;
+private static Queue<ControlRequest> controlQueue = new Queue<ControlRequest>();
 ```
-- Add `ControlTimer.cs`class (that has properties for Concurrent Dictionary mapping of the connection id and ControlTimer object), Control Hub context, and Control Hub clients.
+
+Add a `ControlTimer.cs` class with properties for a ConcurrentDictionary mapping of the connection ID, the ControlHub clients, the ControlHub context, and the ControlTimer object.
+
 ```csharp
 using System.Collections.Concurrent;
 using Microsoft.AspNetCore.SignalR;
@@ -192,14 +232,19 @@ public class ControlTimer : System.Timers.Timer
     public ControlTimer(double interval) : base(interval) { }
 }
 ```
-- Add two more variables in ControlHub.cs, 
-    - `controlTimer` for storing accessing control timer dictionary, control hub context and control hub clients that can be access during the interval of the timer that runs for the active request.
-    - `CONTROL_TIME` holds the time in seconds for which the active request has control.
+
+Add two more variables in `ControlHub.cs`:
+
+- `controlTimer` to store control timer dictionary, control hub context, and control hub clients that can be accessed during the interval of the timer that runs for the active request.
+- `CONTROL_TIME` holds the time in seconds for which the active request has control.
+
 ```csharp
 private ControlTimer? controlTimer;
-private const int CONTROL_TIME = 60; //seconds
+private const int CONTROL_TIME = 120; //seconds
 ```
-- Add `RequestControl` method to `ControlHub` that is invoked by the client to request the control. The method adds the connection id of the invoked request to queue, and creates and adds the control timer for the currently invoked request. If the queue has only one request, it gives control to the current request, starts the timer and sends a message to the requesting client notifying that access is granted. If the queue has more than one request, the requesting client is notified that their request is queued.
+
+Add a `RequestControl` method to `ControlHub` that is invoked by the client to request the control. The method adds the connection ID of the invoked request to the queue, and creates and adds the control timer for the currently invoked request. If the queue has only one request, it gives control to the current request, starts the timer and sends a message to the requesting client notifying that access is granted. If the queue has more than one request, the requesting client is notified that their request is queued.
+
 ```csharp
 public async Task RequestControl()
 {
@@ -235,7 +280,9 @@ public async Task RequestControl()
     }
 }
 ```
-- Add `SetupTimerForRelease` method to add a call to the `ReleaseControlMiddleware` method on a regular interval from the running timer.
+
+Add a `SetupTimerForRelease` method to add calls to the `ReleaseControlMiddleware` method on a regular interval from the running timer.
+
 ```csharp
 public void SetupTimerForRelease(ControlRequest controlRequest)
 {
@@ -246,14 +293,16 @@ public void SetupTimerForRelease(ControlRequest controlRequest)
     controlTimer.Elapsed += new ElapsedEventHandler(ReleaseControlMiddleware);
     controlTimer.Enabled = true;
 }
-```
-- Add `ReleaseControlMiddleware` and `AutoReleaseControl` method, which is called by running timer, which checks if the time for the current control has elapsed. The method sends the time remaining message to the user with control. If the time has elapsed, it calls `ClearTimerAndControl` to clear the timer and release control.
-```csharp
+
 public void ReleaseControlMiddleware(object source, ElapsedEventArgs e)
 {
     _ = AutoReleaseControl(source, e);
 }
+```
 
+Add an `AutoReleaseControl` method, to be called by a running timer, which checks if the time for the current control has elapsed. The method sends the time remaining message to the user with control. If the time has elapsed, it calls `ClearTimerAndControl` to clear the timer and release control.
+
+```csharp
 public async Task AutoReleaseControl(object source, ElapsedEventArgs e)
 {
     var controlTimer = (ControlTimer)source;
@@ -271,13 +320,16 @@ public async Task AutoReleaseControl(object source, ElapsedEventArgs e)
     }
 }
 ```
-- Add `ClearTimerAndControl` method which:
-    - clears the timer for given connection id.
-    - sends a message to controlling client informing that their control time is released.
-    - sends default camera position data to all the clients to reset the cube camera position.
-    - dequeues the current control from queue, which is the first item.
-    - gives control to the next request in the queue.
-    - sends a message to the client who is granted the control.
+
+Add `ClearTimerAndControl` method which:
+
+- Clears the timer for a given connection ID
+- Sends a message to the controlling client informing that their control time is released
+- Sends default camera position data to all the clients to reset the cube camera position
+- Dequeues the current control from the queue, which is the first item
+- Gives control to the next request in the queue
+- Sends a message to the client who is granted the control
+
 ```csharp
 private async Task ClearTimerAndControl(IHubCallerClients hubClients, HubCallerContext context)
 {
@@ -310,7 +362,9 @@ private async Task ClearTimerAndControl(IHubCallerClients hubClients, HubCallerC
     }
 }
 ```
-- Add `ClearControlTimer` method which gets the control timer of the given connection id. Removes the `ReleaseControlMiddleware` from the control timer and disables the control timer.
+
+Add a `ClearControlTimer` method which gets the control timer of the given connection ID. Removes the `ReleaseControlMiddleware` from the control timer and disables the control timer.
+
 ```csharp
 private void ClearControlTimer(string connectionId)
 {
@@ -323,7 +377,9 @@ private void ClearControlTimer(string connectionId)
     }
 }
 ```
-- Add `ReleaseControl` method to `ControlHub`, that is invoked manually by the controlling client to release the control. It checks if the requesting client has the current control access and calls the method to clear timer. 
+
+Add a `ReleaseControl` method to `ControlHub`, that is invoked manually by the controlling client to release the control. It checks if the requesting client has the current control access and calls the method to clear timer.
+
 ```csharp
 public async Task ReleaseControl()
 {
@@ -333,7 +389,9 @@ public async Task ReleaseControl()
     }
 }
 ```
-- Add `SendData` method, which receives the data from the controlling user and then sends the received data to all the clients.
+
+Add a `SendData` method, which receives the data from the controlling user and then sends the received data to all the clients.
+
 ```csharp
 public async Task SendData(CameraData cameraData)
 {
@@ -346,11 +404,17 @@ public async Task SendData(CameraData cameraData)
 }
 ```
 
-#### We will add following things on the frontend:
-That's all the code required for the backend part. Now lets look at adding the frontend part in `Index.cshtml`.
-- Add a receiver section to show the three js cube and update the camera position using the received data from SignalR connection.
-- Add a controller section with button to request the control using SignalR connection and show the three js cube. The cube can be rotated with the mouse which sends the data to the backend using the SignalR connection. The backend then sends the data back to all the clients to update the cube camera position in receiver section.
-- Add a section to show the message from backend.
+That's all the code required for the backend. Now let's add to the frontend.
+
+#### Frontend
+
+
+In `Index.cshtml`, we'll include:
+
+- A receiver section to show the three.js cube and update the camera position using the received data from SignalR connection.
+- A section to show the message from backend.
+- A controller section with button to request the control using SignalR connection and show the three.js cube. The cube can be rotated with the mouse which sends the data to the backend using the SignalR connection. The backend then sends the data back to all the clients to update the cube camera position in receiver section.
+
 ```html
 @page
 @model IndexModel
@@ -374,9 +438,12 @@ That's all the code required for the backend part. Now lets look at adding the f
 <script src="~/js/signalr/dist/browser/signalr.js"></script>
 <script type="module" src="~/js/site.js" asp-append-version="true"></script>
 ```
-The javascript code that adds all the functionality to above code: 
-- First we'll add click handler to invoke `RequestControl` method using the SignalR connection.
-- Add listeners for `ControlGranted`, `ControlQueued`, `ControlReleased` and `ControlRemaining` events to use the message received along with those events to update the UI accordingly.
+
+Then we can add JavaScript code to implement the app functionality in the template. We'll add:
+
+- A click handler to invoke the `RequestControl` method using the SignalR connection.
+- Listeners for the `ControlGranted`, `ControlQueued`, `ControlReleased`, and `ControlRemaining` events to update the UI based on the message included in the corresponding event.
+
 ```js
 let controlRequested = false;
 let controlGranted = false;
@@ -439,13 +506,15 @@ controlHubConnection.on("ControlRemaining", function (seconds) {
 });
 ```
 
-- Import `three.js` library along with `OrbitalControl` addons to control the cube camera position at the top of the file.
+At the top of the file, import the `three.js` library along with the `OrbitalControl` add-on to control the cube camera position.
+
 ```javascript
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 ```
 
-- Add `createRenderer`, `createScene`, `createCamera` and `createCube` helper methods that are required for creating cube and attaching it to the receiver as well as the controller section to show a cube.
+Add `createRenderer`, `createScene`, `createCamera`, and `createCube` helper methods that are required for creating cube and attaching it to the receiver as well as the controller section to show a cube.
+
 ```javascript
 function createRenderer(canvasDOMId) {
     // Load a Renderer
@@ -519,7 +588,9 @@ function createCube() {
     return cube;
 }
 ```
-- User the helper methods to create the cube on receiver section and render to display the cube.
+
+Use the helper methods in the receiver section to create the cube and display it.
+
 ```javascript
 // Define variables
 const receiverRenderer = createRenderer('receiver-wrapper');
@@ -537,7 +608,9 @@ function animate() {
 }
 animate();
 ```
-- Listen to `ReceiveData` event to update the receiver section cube with updated camera position data.
+
+Listen to the `ReceiveData` event to update the receiver section cube with updated camera position data.
+
 ```javascript
 controlHubConnection.on("ReceiveData", function (cameraData) {
     receiverCamera.position.x = cameraData.x;
@@ -545,8 +618,11 @@ controlHubConnection.on("ReceiveData", function (cameraData) {
     receiverCamera.position.z = cameraData.z;
 });
 ```
-- Add `createController` method which is called when the request is granted to user to control the cube. It creates a cube and renders on the controller section and listens to the camera position change. When the cube is rotated, it calls sever method `SendData` using the SignalR connection. 
-- It also returns a method that cancels the cube renderer and removes listener from the controller cube. This returned method is called when the `ControlReleased` event is called from server.
+
+Add a `createController` method which is called when a user is granted control of the cube. It creates a cube and renders on the controller section and listens to the camera position change.
+
+When the cube is rotated, it calls the server method `SendData` using the SignalR connection. It also returns a method that cancels the cube renderer and removes the listener from the controller cube. This returned method is called when the `ControlReleased` event is called from server.
+
 ```javascript
 function createController() {
     const controllerRenderer = createRenderer('controller-wrapper');
@@ -582,8 +658,6 @@ function createController() {
 
 ### Wrapping Up
 
-We learned the basics of SignalR and how to build a simple application to communicate between the backend and frontend using a SignalR connection. We also looked into a practical implementation on how can we use SignalR to control the graphical object built in [three.js](https://threejs.org/). We can extend the application to build a multi-player game as well as use it to send the message to frontend from long running backend background jobs.
+We learned the basics of SignalR and how to build a simple application to communicate between the backend and frontend using a SignalR connection. We also looked into a practical implementation on how can we use SignalR to control a graphical object built with three.js. We can extend the application to build apps like a multi-player game, or to send messages to the frontend from long-running backend background jobs.
 
-You can get the code at: [Github](https://github.com/bimalghartimagar/EPSignalRControl)
-
-Look at the [Demo](https://nifty.azurewebsites.net/)
+You can get the code at [Github](https://github.com/bimalghartimagar/EPSignalRControl).
