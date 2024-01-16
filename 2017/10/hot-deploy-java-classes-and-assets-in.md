@@ -16,7 +16,7 @@ Java development can be really frustrating when you need to re-build your projec
 
 Fortunately, there is an open-source project called HotSwapAgent and it does the same thing as JRebel, for free (thank you, guys!).
 
-I will explain how to combine it with Widlfly in order to hot-deploy Java classes as well as how to hot-deploy other resources (Javascript, CSS, images).
+I will explain how to combine it with Widlfly in order to hot-deploy Java classes as well as how to hot-deploy other resources (JavaScript, CSS, images).
 
 ### Wildfly configuration
 

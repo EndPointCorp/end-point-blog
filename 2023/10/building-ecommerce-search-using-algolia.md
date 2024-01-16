@@ -24,7 +24,7 @@ We will look at how to load Algolia with data, configure search options, and con
 
 ### Loading the index with data
 
-To start using Algolia’s search, you need to load up an index with data. You have the option of manually uploading a JSON file, or using Algolia’s API to programmatically load records. For our backend, we chose to use Algolia's [JavaScript API client](https://www.npmjs.com/package/algoliasearch) in some lightweight Typescript scripts that are triggered by cron. These scripts allowed us to sync inventory data between Salesforce and the index in Algolia.
+To start using Algolia’s search, you need to load up an index with data. You have the option of manually uploading a JSON file, or using Algolia’s API to programmatically load records. For our backend, we chose to use Algolia's [JavaScript API client](https://www.npmjs.com/package/algoliasearch) in some lightweight TypeScript scripts that are triggered by cron. These scripts allowed us to sync inventory data between Salesforce and the index in Algolia.
 
 Using the Algolia JavaScript client is quite simple. Regardless of where your data comes from—be it in a database, a platform like Salesforce, or elsewhere—once it is in JSON format, you can load it into Algolia with a few lines of code:
 
