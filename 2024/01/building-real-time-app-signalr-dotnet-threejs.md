@@ -660,4 +660,4 @@ function createController() {
 
 We learned the basics of SignalR and how to build a simple application to communicate between the backend and frontend using a SignalR connection. We also looked into a practical implementation on how can we use SignalR to control a graphical object built with three.js. We can extend the application to build apps like a multi-player game, or to send messages to the frontend from long-running backend background jobs.
 
-You can get the code at [Github](https://github.com/bimalghartimagar/EPSignalRControl).
+You can get the code at [GitHub](https://github.com/bimalghartimagar/EPSignalRControl).
