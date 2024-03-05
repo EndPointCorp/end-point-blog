@@ -4,6 +4,8 @@ date: 2024-02-27
 author: Matt Vollrath
 featured:
   image_url: /blog/2024/02/making-a-loading-spinner-with-tkinter/spinner.webp
+description: How to make a loading spinnner with tkinter on Ubuntu 22.04
+github_issue_number: 2034
 tags:
 - linux
 - graphics
@@ -13,25 +15,33 @@ tags:
 - visionport
 ---
 
-When you need a loading spinner, you really need a loading spinner.  Interested in putting something on the screen without installing a pile of dependencies, I reached deep into the toolbox of the Python standard library, dug around a bit, and pulled out the [tkinter](https://docs.python.org/3/library/tkinter.html) module.
+![An overhead shot of a carpeted spiral staircase, with spiraling railings on either side. The staircase is cut off at the bottom by a wall, so that only half of the circle of stairs is visible. The stairs are enclosed by a semicircular wall, and lit by sunlight streaming through a window on the left. On the right is a window whose view is filled with green leaves.](/blog/2024/02/making-a-loading-spinner-with-tkinter/spiral-stairs.webp)
 
-The tkinter module is an interface to the venerable Tcl/Tk GUI toolkit, a cross-platform suite for creating user interfaces in the style of whatever operating system you run it on.  It's the only built-in GUI toolkit in Python, but there are many worthy alternatives available.
+<!-- Photo by Seth Jensen, 2023. -->
 
-Here I'll demonstrate how to make a loading spinnner with tkinter on Ubuntu 22.04.  It should work on any platform that runs Python, with some variations when setting up the system for it.
+When you need a loading spinner, you really need a loading spinner. Interested in putting something on the screen without installing a pile of dependencies, I reached deep into the toolbox of the Python standard library, dug around a bit, and pulled out the [tkinter](https://docs.python.org/3/library/tkinter.html) module.
+
+The tkinter module is an interface to the venerable Tcl/Tk GUI toolkit, a cross-platform suite for creating user interfaces in the style of whatever operating system you run it on. It's the only built-in GUI toolkit in Python, but there are many worthy alternatives available (see the end of the post for a list).
+
+Here I'll demonstrate how to make a loading spinnner with tkinter on Ubuntu 22.04. It should work on any platform that runs Python, with some variations when setting up the system for it.
 
 ### Prerequisites
 
-My vision for the loading spinner is some spinning dots and a logo, since this is such a convenient branding opportunity.  To accomplish this we'll be extending tkinter with Pillow's ImageTk capability, which can load a PNG with transparency.
+My vision for the loading spinner is some spinning dots and a logo, since this is such a convenient branding opportunity. To accomplish this we'll be extending tkinter with Pillow's ImageTk capability, which can load a PNG with transparency.
 
-To produce that PNG with transparency, first we may need to rasterize an SVG file, because wise designers work in vectors.  This is made trivial by [inkscape](https://inkscape.org/), a free and complete vector graphics tool:
+To produce that PNG with transparency, first we may need to rasterize an SVG file, because wise designers work in vectors. This is made trivial by [Inkscape](https://inkscape.org/), a free and complete vector graphics tool:
 
-`$ inkscape logo.svg -o logo.png`
+```plain
+$ inkscape logo.svg -o logo.png
+```
 
-With the logo in hand, we can move on to setting up our dependencies.  Ubuntu's python3 distribution doesn't include tkinter by default, so we'll need to install it explicitly, along with Pillow's separate ImageTk support:
+With the logo in hand, we can move on to setting up our dependencies. Ubuntu's python3 distribution doesn't include tkinter by default, so we'll need to install it explicitly, along with Pillow's separate ImageTk support:
 
-`$ sudo apt install python3-tk python3-pil.imagetk`
+```plain
+$ sudo apt install python3-tk python3-pil.imagetk
+```
 
-This may occupy up to 75MB, if Python was already installed.  This was still the smallest apt footprint of all of the Python GUI libraries in consideration.  Pygame was also a strong contender.
+This may occupy up to 75MB, if Python was already installed. This was still the smallest apt footprint of all of the Python GUI libraries in consideration. Pygame was also a strong contender.
 
 ### Code
 
@@ -70,7 +80,7 @@ if __name__ == "__main__":
     root.mainloop()
 ```
 
-This puts the logo in the center of a window, but the logo may be too large or small.  Let's scale it according to the window dimensions, let's say to about ⅔ of the width so we have some room for spinning dots:
+This puts the logo in the center of a window, but the logo may be too large or small. Let's scale it according to the window dimensions, let's say to about ⅔ of the width so we have some room for spinning dots:
 
 ```python
 #!/usr/bin/env python3
@@ -95,7 +105,7 @@ if __name__ == "__main__":
     # Resize the logo to about 2/3 the window width.
     scaled_w = round(WIDTH * 0.6)
     scaled_h = round(scaled_w / (logo_img.width / logo_img.height))
-    logo_img = logo_img.resize((scaled_w, scaled_h), Image.ANTIALIAS)
+    logo_img = logo_img.resize((scaled_w, scaled_h), Image.LANCZOS)
     # Convert the logo to an ImageTk PhotoImage.
     logo_pi = ImageTk.PhotoImage(logo_img)
     # Add our logo image to the canvas.
@@ -109,7 +119,7 @@ if __name__ == "__main__":
     root.mainloop()
 ```
 
-That's better.  Now let's add the promised spinning dots.  We'll draw some ovals on the canvas and modify our main loop to animate them:
+That's better. Now let's add the promised spinning dots. We'll draw some ovals on the canvas and modify our main loop to animate them:
 
 ```python
 #!/usr/bin/env python3
@@ -141,7 +151,7 @@ if __name__ == "__main__":
     # Resize the logo to about 2/3 the window width.                     
     scaled_w = round(WIDTH * 0.6)
     scaled_h = round(scaled_w / (logo_img.width / logo_img.height))
-    logo_img = logo_img.resize((scaled_w, scaled_h), Image.ANTIALIAS)
+    logo_img = logo_img.resize((scaled_w, scaled_h), Image.LANCZOS)
     # Convert the logo to an ImageTk PhotoImage.
     logo_pi = ImageTk.PhotoImage(logo_img)
     # Add our logo image to the canvas.
@@ -195,7 +205,7 @@ if __name__ == "__main__":
         time.sleep(t0 - t)
 ```
 
-You may notice that the dots don't look all that great.  There's no anti-aliasing when drawing shape primitives in tkinter, so the edges look jagged compared to our well-scaled logo image.  One hack is to layer slightly larger and dimmer shapes under each object, which you might do like so:
+You may notice that the dots don't look all that great. There's no anti-aliasing when drawing shape primitives in tkinter, so the edges look jagged compared to our well-scaled logo image. One hack is to layer slightly larger and dimmer shapes under each object, which you might do like so:
 
 ```python
 #!/usr/bin/env python3                                                                         
@@ -230,7 +240,7 @@ if __name__ == "__main__":
     # Resize the logo to about 2/3 the window width.                
     scaled_w = round(WIDTH * 0.6)
     scaled_h = round(scaled_w / (logo_img.width / logo_img.height))
-    logo_img = logo_img.resize((scaled_w, scaled_h), Image.ANTIALIAS)
+    logo_img = logo_img.resize((scaled_w, scaled_h), Image.LANCZOS)
     # Convert the logo to an ImageTk PhotoImage.
     logo_pi = ImageTk.PhotoImage(logo_img)                                                     
     # Add our logo image to the canvas.
@@ -248,7 +258,6 @@ if __name__ == "__main__":
     # Helper function to calculate dot position on each update.
     def get_dot_coords(n: int, t: float, c: int):
         """Get the x0, y0, x1, y1 coords of dot at index 'n' at time 't'.
-
         Inflate the radius by color index 'c'."""
         angle = (n / NUM_DOTS) * math.pi * 2 + t
         x = math.cos(angle) * dots_radius + CENTER_X
