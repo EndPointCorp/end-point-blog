@@ -1,6 +1,6 @@
 ---
 title: Making a Loading Spinner with tkinter
-date: 2024-02-27
+date: 2024-03-05
 author: Matt Vollrath
 featured:
   image_url: /blog/2024/02/making-a-loading-spinner-with-tkinter/spinner.webp
