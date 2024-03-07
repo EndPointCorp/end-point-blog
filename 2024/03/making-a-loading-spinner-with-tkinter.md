@@ -3,7 +3,7 @@ title: Making a Loading Spinner with tkinter
 date: 2024-03-05
 author: Matt Vollrath
 featured:
-  image_url: /blog/2024/02/making-a-loading-spinner-with-tkinter/spinner.webp
+  image_url: /blog/2024/03/making-a-loading-spinner-with-tkinter/spinner.webp
 description: How to make a loading spinnner with tkinter on Ubuntu 22.04
 github_issue_number: 2034
 tags:
@@ -15,7 +15,7 @@ tags:
 - visionport
 ---
 
-![An overhead shot of a carpeted spiral staircase, with spiraling railings on either side. The staircase is cut off at the bottom by a wall, so that only half of the circle of stairs is visible. The stairs are enclosed by a semicircular wall, and lit by sunlight streaming through a window on the left. On the right is a window whose view is filled with green leaves.](/blog/2024/02/making-a-loading-spinner-with-tkinter/spiral-stairs.webp)
+![An overhead shot of a carpeted spiral staircase, with spiraling railings on either side. The staircase is cut off at the bottom by a wall, so that only half of the circle of stairs is visible. The stairs are enclosed by a semicircular wall, and lit by sunlight streaming through a window on the left. On the right is a window whose view is filled with green leaves.](/blog/2024/03/making-a-loading-spinner-with-tkinter/spiral-stairs.webp)
 
 <!-- Photo by Seth Jensen, 2023. -->
 
@@ -302,7 +302,7 @@ if __name__ == "__main__":
 
 The fake anti-aliasing was a fun exercise, but for this use case you'll probably get better-looking results out of scaling a PNG asset like we did the logo.
 
-![A screenshot of the loading spinner.](/blog/2024/02/making-a-loading-spinner-with-tkinter/spinner.webp)
+![A screenshot of the loading spinner. In the center is a logo reading "VisionPort", with the O replaced by a globe with a locator icon in it. Surrounding the logo are animated dots rotating in a circle.](/blog/2024/03/making-a-loading-spinner-with-tkinter/spinner.webp)
 
 ### Resources
 
