@@ -11,6 +11,7 @@ tags:
 - ruby
 - csharp
 - books
+- programming
 ---
 
 ![View upward at a bright sky, with lines drawn down at an angle toward the left center by a tree trimmed into a rectangular prism and one trimmed into a vague cone. The lens is imperfect, leaving the corner of the square tree in focus while the rest of the green foliage and blue and bright white sky is somewhat distorted by the lens.](/blog/2024/02/key-takeaways-from-poodr/well-trimmed-trees.webp)
@@ -29,7 +30,7 @@ I personally really like this book, and here at End Point it does have quite a f
 
 #### About design
 
-1. Following the principles and patterns of object-oriented design produces code that is both cost-effective and a joy to work with. "Cost effective" means that it doesn't take more effort than necessary to evolve. To change.
+1. Following the principles and patterns of object-oriented design produces code that is both cost-effective and a joy to work with. "Cost effective" means that it doesn't take more effort than necessary to evolve, to change.
 2. The reason design is important is because software changes. A good design is one that makes software easy to change.
 3. Object-oriented design sees the world as a collection of parts that interact with each other. The parts we call "objects", and the interactions we call "messages".
 4. In order to send messages to each other, objects need to have some knowledge about one another. This knowledge produces "dependencies" between them.
@@ -38,18 +39,18 @@ I personally really like this book, and here at End Point it does have quite a f
 7. Design is the way in which code is arranged. Good design is an arrangement of code that makes change easy.
 8. Our job as developers is to take our application's requirements and our knowledge of design principles and use them to produce code that is cost effective today and tomorrow: code that is easy to change.
 9. The idea is not to predict future changes. Instead, we have to accept that change will come and prepare for it. We prepare for it by writing code that leaves our options open for the future.
-10. "The purpose of design is to allow you to design later, and its primary goal is to reduce the cost of change".
+10. "The purpose of design is to allow you to design later, and its primary goal is to reduce the cost of change."
 
 #### Failures of design
 
-11. **Design fails when you don't do it**. Code bases that lack in design will eventually evolve into unmaintainable messes, where change becomes increasingly hard even for the most minor new requirements. "Throwing everything away and beginning from scratch" becomes a viable alternative.
-12. **Design fails when you overdesign**. Armed with basic design skills, it's easy to fall into the trap of developing wrong abstractions, applying principles incorrectly, seeing the wrong pattern in the wrong context. Applications that suffer from overdesign become gigantic castles of code full of indirection that become hard to change.
-13. **Design fails when you separate it from programming**. Design is best executed as an iterative and incremental process with a quick feedback loop. The design needs to be adjusted frequently, as understanding of the domain changes. Design that is dictated to programmers from on high as part of a "[Big Up Front Design](https://en.wikipedia.org/wiki/Big_design_up_front)" is doomed to failure. Such arrangements are not agile enough to be resilient to requirement changes.
+11. **Design fails when you don't do it.** Code bases that lack in design will eventually evolve into unmaintainable messes, where change becomes increasingly hard even for the most minor new requirements. "Throwing everything away and beginning from scratch" becomes a viable alternative.
+12. **Design fails when you overdesign.** Armed with basic design skills, it's easy to fall into the trap of developing wrong abstractions, applying principles incorrectly, seeing the wrong pattern in the wrong context. Applications that suffer from overdesign become gigantic castles of code full of indirection that become hard to change.
+13. **Design fails when you separate it from programming.** Design is best executed as an iterative and incremental process with a quick feedback loop. The design needs to be adjusted frequently, as understanding of the domain changes. Design that is dictated to programmers from on high as part of a "[Big Up Front Design](https://en.wikipedia.org/wiki/Big_design_up_front)" is doomed to failure. Such arrangements are not agile enough to be resilient to requirement changes.
 
 #### Agile and design
 
-14. Agile development says: "Avoid Big Up Front Design because you can't know what the application will end up being because requirements always change and they do so often".
-15. Agile also says: "Good design is essential. Because change comes often, your code needs to be ready to accommodate those changes in an efficient and cost effective way".
+14. Agile development says: "Avoid Big Up Front Design because you can't know what the application will end up being because requirements always change and they do so often."
+15. Agile also says: "Good design is essential. Because change comes often, your code needs to be ready to accommodate those changes in an efficient and cost effective way."
 16. Design is not a "one time at the beginning of the project" type of task. It is an ongoing, iterative and incremental task that happens as requirements change, and as our domain knowledge and skills increase.
 
 #### Metrics
@@ -62,7 +63,7 @@ I personally really like this book, and here at End Point it does have quite a f
 
 20. **Technical debt** is borrowing time from the future. That is, putting out a bad design today in order to release a feature quickly. Tomorrow, when change comes, the bad design will prevent cost effective change. So time will have to be spent refactoring, turning the bad design into a good one. If refactoring doesn't happen, the debt increases, making future changes more and more expensive.
 21. How much design you do depends on your skill and your time frame. You can't do so much design that it prevents you from delivering on time. Design is an investment, and for an investment to be good, it needs to return some profit. Good design's returns are quick and plentiful.
-22. "The trick to getting the most bang for your design buck is to acquire an understanding of the theories of design and to apply them appropriately, at the right time, and in the right amounts".
+22. "The trick to getting the most bang for your design buck is to acquire an understanding of the theories of design and to apply them appropriately, at the right time, and in the right amounts."
 
 ### Chapter 2: Designing Classes with a Single Responsibility
 
@@ -70,15 +71,15 @@ I personally really like this book, and here at End Point it does have quite a f
 
 1. **Classes** are the most basic organizational structure of object-oriented systems written with class-based object-oriented languages. As such, that's the first thing that we focus on when designing such systems.
 2. Your first instinct should be to keep things simple. Use classes to model only the features that your application needs today and make sure that they are easy to change tomorrow.
-3. "Design is more the art of preserving changeability than it is the act of achieving perfection".
+3. "Design is more the art of preserving changeability than it is the act of achieving perfection."
 
 #### Write code that is TRUE
 
-4. In order to be easy to change, code should be **TRUE**.
-5. **Code should be "Transparent"**. It should be easy to tell what will be the consequences of changing the code.
-6. **Code should be "Reasonable"**. The cost of a change should be proportional to the size of the requirement that provoked the change.
-7. **Code should be "Usable"**. The code should be easy to reuse in situations other than the one it's currently being used on.
-8. **Code should be "Exemplary"**. The code should exhibit qualities that guide and/or encourage those who change it to keep and replicate those qualities.
+4. In order to be easy to change, code should be **TRUE**:
+5. **Code should be "Transparent".** It should be easy to tell what will be the consequences of changing the code.
+6. **Code should be "Reasonable".** The cost of a change should be proportional to the size of the requirement that provoked the change.
+7. **Code should be "Usable".** The code should be easy to reuse in situations other than the one it's currently being used in.
+8. **Code should be "Exemplary".** The code should exhibit qualities that guide and/or encourage those who change it to keep and replicate those qualities.
 9. The [Single Responsibility Principle](https://en.wikipedia.org/wiki/Single_responsibility_principle) is a prerequisite to creating code that is TRUE.
 
 #### Single Responsibility
@@ -91,8 +92,8 @@ I personally really like this book, and here at End Point it does have quite a f
 15. In order to reuse the behavior defined within a class with multiple tangled responsibilities, you either need to duplicate code or use the entire class, even the parts that you don't need.
 16. If you use a class that has many reasons to change, when something unrelated to your use case changes, you will still have to change your code. This is unexpected and surprising. This is not "Transparent".
 17. Depending on classes that have many responsibilities increases the chances of your application breaking.
-18. A good way to determine whether a class has a single responsibility is to try an enunciate what it does in a single sentence. That sentence should be simple, because classes should be simple. Look out for the words "and" and "or" in this sentence, as they point to it having more than one responsibility.
-19. Another good way to determine whether a class has a single responsibility is thinking about every one of its methods as a question that the class would be able to respond to if it were a sentient being. For example "Array, what is your length?". If the question doesn't make sense, then maybe the method does not belong in the class.
+18. A good way to determine whether a class has a single responsibility is to try to enunciate what it does in a single sentence. That sentence should be simple, because classes should be simple. Look out for the words "and" and "or" in this sentence, as they point to it having more than one responsibility.
+19. Another good way to determine whether a class has a single responsibility is thinking about every one of its methods as a question that the class would be able to respond to if it were a sentient being. For example: "Array, what is your length?" If the question doesn't make sense, then maybe the method does not belong in the class.
 20. **Cohesion** is the measure of how related to their core purpose the elements of a component are. Classes that have a single responsibility are highly cohesive because all of their parts work towards a single goal.
 
 #### When to make design decisions
@@ -105,9 +106,9 @@ I personally really like this book, and here at End Point it does have quite a f
 
 #### Techniques for writing code that's easy to change
 
-26. **Depend on behavior, not data: hide instance variables**. Instead of accessing instance variables directly, use accessor methods. Even from within the class that owns them. "Always send messages to access data".
+26. **Depend on behavior, not data: hide instance variables.** Instead of accessing instance variables directly, use accessor methods. Even from within the class that owns them. "Always send messages to access data."
 27. That way you consolidate the knowledge of what the data represents in a single place. That's the Single Responsibility Principle in action. Changing it becomes easy as a result because instead of changing references to a variable in potentially multiple places; you only need to change the definition of a method, in a single location.
-28. **Depend on behavior, not data: hide data structures**. When code depends on or receives as input a complex data structure like a big array or hash, encapsulate the data structure in a class with a clear interface, instead of accessing and manipulating the structure directly.
+28. **Depend on behavior, not data: hide data structures.** When code depends on or receives as input a complex data structure like a big array or hash, encapsulate the data structure in a class with a clear interface, instead of accessing and manipulating the structure directly.
 29. Directly manipulating complex data structures is a style of coding that tends to propagate. If the incoming data structure changes, even slightly, then a lot of your code also needs to change because it depends on its very particular structure.
 30. Handling complex raw data structures through classes and messages with clear, intention-revealing names demystifies the structure and gives it meaning within the context of the application domain.
 
@@ -158,7 +159,7 @@ I personally really like this book, and here at End Point it does have quite a f
 > }
 > ```
 
-31. **Enforce single responsibility everywhere: extract extra responsibilities from methods**. Methods should also have a single responsibility. Just like classes, that makes them easy to reuse, change, and understand.
+31. **Enforce single responsibility everywhere: extract extra responsibilities from methods.** Methods should also have a single responsibility. Just like classes, that makes them easy to reuse, change, and understand.
 32. To determine if a method has a single responsibility, the same techniques that work for classes apply. Try to enunciate their purpose in a single sentence, and ask them what they do.
 33. Methods that iterate on items and act upon them too are a common case of multiple responsibilities. Separating iteration and action into two methods is a common refactoring to correct it.
 34. Complex calculations embedded within methods are also good candidates to be separated into other methods. It gives them a name and makes them reusable.
@@ -190,7 +191,7 @@ I personally really like this book, and here at End Point it does have quite a f
 
 35. These refactorings are useful and necessary even when you don't know what the final design will look like. In fact, these refactorings (and good practices like these) will often reveal the final design.
 36. Small methods with a single responsibility have many benefits. They make a class's details, features, and components more obvious, they are self-documenting, encourage reuse, establish a style of programming that is self-perpetuating, become easy to move to another class when and if that time comes.
-37. **Enforce single responsibility everywhere: isolate extra responsibilities in classes**. Move the responsibilities that are extraneous to a class into another class. If you can afford it, create a separate class to hold them. If not, at least encapsulate them in an embedded class so that they are contained and don't leak.
+37. **Enforce single responsibility everywhere: isolate extra responsibilities in classes.** Move the responsibilities that are extraneous to a class into another class. If you can afford it, create a separate class to hold them. If not, at least encapsulate them in an embedded class so that they are contained and don't leak.
 38. Embedded classes say: This class only has meaning and value when thought about within the context of this other class.
 39. Embedded classes can be easily promoted to independent classes later if the need arises.
 40. Once all methods inside a class have a single responsibility and are each doing the smallest useful thing, it becomes easier to identify the features that may belong to another class.
