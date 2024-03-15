@@ -44,7 +44,7 @@ To begin web automation using C# and Playwright, follow these steps:
 
     ```plain
     pwsh bin/Debug/netX/playwright.ps1 install
- 
+
     # If the pwsh command does not work (throws TypeNotFound), make sure to use an up-to-date version of PowerShell.
     dotnet tool update --global PowerShell
     ```
@@ -53,7 +53,7 @@ To begin web automation using C# and Playwright, follow these steps:
 
     ```csharp
     using Microsoft.Playwright;
- 
+
     using var playwright = await Playwright.CreateAsync();
     await using var browser = await playwright.Chromium.LaunchAsync();
     var page = await browser.NewPageAsync();

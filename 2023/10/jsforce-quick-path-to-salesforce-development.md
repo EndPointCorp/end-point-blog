@@ -72,7 +72,7 @@ conn.sobject("Account").create({ Name : 'My Account #1' }, function(err, ret) {
 #### PUT
 
 ```js
-conn.sobject("Account").update({ 
+conn.sobject("Account").update({
   Id : '0017000000hOMChAAO',
   Name : 'Updated Account #1'
 }, function(err, ret) {

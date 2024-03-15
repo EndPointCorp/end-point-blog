@@ -123,32 +123,32 @@ That's better. Now let's add the promised spinning dots. We'll draw some ovals o
 
 ```python
 #!/usr/bin/env python3
-                                               
-import math              
-import time                  
-                                               
+
+import math
+import time
+
 from PIL import Image, ImageTk
 from tkinter import BOTH, Canvas, Tk
-                                               
-                                               
+
+
 # Desired dimensions of our window.
 WIDTH, HEIGHT = 500, 500
 # Coordinates of the center.
-CENTER_X, CENTER_Y = WIDTH / 2, HEIGHT / 2                                                     
+CENTER_X, CENTER_Y = WIDTH / 2, HEIGHT / 2
 # How many spinning dots we want.
-NUM_DOTS = 8                            
-                                               
-if __name__ == "__main__":       
-    # Create the root window object.                                                           
-    root = Tk()                          
-    # Create a canvas for drawing our graphics.                 
+NUM_DOTS = 8
+
+if __name__ == "__main__":
+    # Create the root window object.
+    root = Tk()
+    # Create a canvas for drawing our graphics.
     canvas = Canvas(root, width=WIDTH, height=HEIGHT, background="black")
     # Fill the entire window with the canvas.
     canvas.pack(fill=BOTH, expand=1)
-                                               
-    # Load the logo PNG with regular PIL.                                                      
+
+    # Load the logo PNG with regular PIL.
     logo_img = Image.open("logo.png")
-    # Resize the logo to about 2/3 the window width.                     
+    # Resize the logo to about 2/3 the window width.
     scaled_w = round(WIDTH * 0.6)
     scaled_h = round(scaled_w / (logo_img.width / logo_img.height))
     logo_img = logo_img.resize((scaled_w, scaled_h), Image.LANCZOS)
@@ -208,7 +208,7 @@ if __name__ == "__main__":
 You may notice that the dots don't look all that great. There's no anti-aliasing when drawing shape primitives in tkinter, so the edges look jagged compared to our well-scaled logo image. One hack is to layer slightly larger and dimmer shapes under each object, which you might do like so:
 
 ```python
-#!/usr/bin/env python3                                                                         
+#!/usr/bin/env python3
 
 import math
 import time
@@ -219,9 +219,9 @@ from tkinter import BOTH, Canvas, Tk
 
 # Desired dimensions of our window.
 WIDTH, HEIGHT = 500, 500
-# Coordinates of the center.          
+# Coordinates of the center.
 CENTER_X, CENTER_Y = WIDTH / 2, HEIGHT / 2
-# How many spinning dots we want.            
+# How many spinning dots we want.
 NUM_DOTS = 8
 # Colors for each layer of fake anti-aliasing around each dot.
 # Must be in order from back to front.
@@ -229,25 +229,25 @@ COLORS = ["#888888", "#BBBBBB", "#FFFFFF"]
 
 if __name__ == "__main__":
     # Create the root window object.
-    root = Tk()                                                                                
-    # Create a canvas for drawing our graphics. 
+    root = Tk()
+    # Create a canvas for drawing our graphics.
     canvas = Canvas(root, width=WIDTH, height=HEIGHT, background="black")
     # Fill the entire window with the canvas.
-    canvas.pack(fill=BOTH, expand=1)      
+    canvas.pack(fill=BOTH, expand=1)
 
-    # Load the logo PNG with regular PIL.                                                      
-    logo_img = Image.open("logo.png")                                                          
-    # Resize the logo to about 2/3 the window width.                
+    # Load the logo PNG with regular PIL.
+    logo_img = Image.open("logo.png")
+    # Resize the logo to about 2/3 the window width.
     scaled_w = round(WIDTH * 0.6)
     scaled_h = round(scaled_w / (logo_img.width / logo_img.height))
     logo_img = logo_img.resize((scaled_w, scaled_h), Image.LANCZOS)
     # Convert the logo to an ImageTk PhotoImage.
-    logo_pi = ImageTk.PhotoImage(logo_img)                                                     
+    logo_pi = ImageTk.PhotoImage(logo_img)
     # Add our logo image to the canvas.
-    canvas.create_image(                                                                       
-        CENTER_X,    
-        CENTER_Y,       
-        image=logo_pi,    
+    canvas.create_image(
+        CENTER_X,
+        CENTER_Y,
+        image=logo_pi,
     )
 
     # Radius in pixels of a single dot.

@@ -42,7 +42,7 @@ The syntactic category of challenge is called a grammar, and covers the kinds of
 
 An article published in December 2022 by Dr. Naheed Ali identifies “inconsistent data and lack of standardized data structure” as the number one issue to be overcome regarding the [Electronic Health Record (EHR)](https://www.healthit.gov/faq/what-electronic-health-record-ehr) interoperability challenges facing healthcare professions today:
 
-> One of the biggest EHR interoperability challenges in healthcare interoperability is managing inconsistent data from multiple sources. Information stored in different databases can have a variety of formats and data types that are not easily compatible with one another. A single record may contain different information about a patient's medical history or treatment plan, making it more difficult for different systems to interpret correctly.  
+> One of the biggest EHR interoperability challenges in healthcare interoperability is managing inconsistent data from multiple sources. Information stored in different databases can have a variety of formats and data types that are not easily compatible with one another. A single record may contain different information about a patient's medical history or treatment plan, making it more difficult for different systems to interpret correctly.
 > —Dr. Naheed Ali, [EHR Interoperability Challenges and Solutions](https://www.ehrinpractice.com/ehr-interoperability-challenges-solutions.html)
 
 ### Cooperating for a healthier future

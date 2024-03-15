@@ -15,7 +15,7 @@ featured:
 
 <!-- Photo by Jon Jensen -->
 
-### The Beginning 
+### The Beginning
 
 I graduated from St. John’s College in Annapolis in 1980. It was an intensive four-year education in math, science, language, poetry, and philosophy. Two years later, I took four computer classes at a community college, and got my first IT job in 1983 at the beginning of the personal computer revolution.
 
