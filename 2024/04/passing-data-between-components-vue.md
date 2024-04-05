@@ -9,12 +9,13 @@ featured:
 tags:
 - vue
 - javascript
+- programming
 ---
 
 ![A still life painting. One the left side of the image, a parrot stays perched on a table; to the right the table is covered in artichokes, cherries, and light blue, red, and white flowers. The scene is lit from the top left with a gentle diagonal of light, contrasted with deep shadow.](/blog/2024/04/passing-data-between-components-vue/still_life_with_artichokes_and_a_parrot_1998.23.2.webp)<br>
 [Artwork](https://www.nga.gov/collection/art-object-page.102987.html): Still Life with Artichokes and a Parrot, 17th century, Italian. CC0.
 
-Vue.js, with its simplicity and flexibility, is one of the most popular JavaScript frameworks on the web. One of the key aspects of building dynamic and interactive web applications with Vue is efficiently passing data between components. In this blog post, we will explore methods and good practices for data communication between Vue components. 
+Vue.js, with its simplicity and flexibility, is one of the most popular JavaScript frameworks on the web. One of the key aspects of building dynamic and interactive web applications with Vue is efficiently passing data between components. In this blog post, we will explore methods and good practices for data communication between Vue components.
 
 ### Props
 
@@ -30,38 +31,37 @@ Simplicity: Props provide a simple and straightforward mechanism for passing dat
 
 One-Way Binding: It's a one-way data binding mechanism, meaning that data flows from parent to child only, not from child to parent.
 
-```javascript
-// ParentComponent.vue 
-<template> 
-  <ChildComponent :data-prop="parentData" /> 
-</template> 
- 
-<script> 
-export default { 
-  data() { 
-    return { 
-      parentData: "Hello from parent!", 
-    }; 
-  }, 
-}; 
-</script> 
-```
- 
-```javascript
-// ChildComponent.vue 
-<template> 
-  <div>{{ dataProp }}</div> 
-</template> 
- 
-<script> 
-export default { 
-  props: ['dataProp'], 
-}; 
-</script> 
+```html
+// ParentComponent.vue
+<template>
+  <ChildComponent :data-prop="parentData" />
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      parentData: "Hello from parent!",
+    };
+  },
+};
+</script>
 ```
 
+```html
+// ChildComponent.vue
+<template>
+  <div>{{ dataProp }}</div>
+</template>
 
-### Custom Events: Emitting Changes from Child to Parent 
+<script>
+export default {
+  props: ['dataProp'],
+};
+</script>
+```
+
+### Custom Events: Emitting Changes from Child to Parent
 
 #### Usage:
 
@@ -76,41 +76,41 @@ Child to Parent Communication: Custom events are useful when a child component n
 
 Limited Scope: Best suited for parent-child relationships; might become cumbersome in complex component hierarchies.
 
-```javascript
-// ChildComponent.vue 
-<template> 
-  <button @click="emitData">Send Data to Parent</button> 
-</template> 
- 
-<script> 
-export default { 
-  methods: { 
-    emitData() { 
-      this.$emit('child-event', 'Data from child!'); 
-    }, 
-  }, 
-}; 
-</script> 
+```html
+// ChildComponent.vue
+<template>
+  <button @click="emitData">Send Data to Parent</button>
+</template>
+
+<script>
+export default {
+  methods: {
+    emitData() {
+      this.$emit('child-event', 'Data from child!');
+    },
+  },
+};
+</script>
 ```
- 
-```javascript
-// ParentComponent.vue 
-<template> 
-  <ChildComponent @child-event="handleChildEvent" /> 
-</template> 
- 
-<script> 
-export default { 
-  methods: { 
-    handleChildEvent(data) { 
-      console.log('Received data from child:', data); 
-    }, 
-  }, 
-}; 
-</script> 
+
+```html
+// ParentComponent.vue
+<template>
+  <ChildComponent @child-event="handleChildEvent" />
+</template>
+
+<script>
+export default {
+  methods: {
+    handleChildEvent(data) {
+      console.log('Received data from child:', data);
+    },
+  },
+};
+</script>
 ```
- 
-### EventBus: A Centralized Event Hub 
+
+### EventBus: A Centralized Event Hub
 
 #### Usage:
 
@@ -126,92 +126,92 @@ Non-Parent-Child Communication: EventBus provides a centralized event hub that a
 Global Scope: Might lead to unintended side effects if events are not managed carefully.
 
 ```javascript
-// EventBus.js 
-import Vue from 'vue'; 
-export const bus = new Vue(); 
+// EventBus.js
+import Vue from 'vue';
+export const bus = new Vue();
 ```
 
-```javascript
-// ChildComponent.vue 
-<template> 
-  <button @click="emitData">Send Data to Anywhere!</button> 
-</template> 
- 
-<script> 
-import { bus } from '../EventBus'; 
- 
-export default { 
-  methods: { 
-    emitData() { 
-      bus.$emit('customEvent', 'Data from child!'); 
-    }, 
-  }, 
-}; 
-</script> 
+```html
+// ChildComponent.vue
+<template>
+  <button @click="emitData">Send Data to Anywhere!</button>
+</template>
+
+<script>
+import { bus } from '../EventBus';
+
+export default {
+  methods: {
+    emitData() {
+      bus.$emit('customEvent', 'Data from child!');
+    },
+  },
+};
+</script>
 ```
 
-```javascript
-// AnyComponent.vue 
-<template> 
-  <div>{{ receivedData }}</div> 
-</template> 
- 
-<script> 
-import { bus } from '../EventBus'; 
- 
-export default { 
-  data() { 
-    return { 
-      receivedData: '', 
-    }; 
-  }, 
-  created() { 
-    bus.$on('customEvent', (data) => { 
-      this.receivedData = data; 
-    }); 
-  }, 
-}; 
-</script> 
+```html
+// AnyComponent.vue
+<template>
+  <div>{{ receivedData }}</div>
+</template>
+
+<script>
+import { bus } from '../EventBus';
+
+export default {
+  data() {
+    return {
+      receivedData: '',
+    };
+  },
+  created() {
+    bus.$on('customEvent', (data) => {
+      this.receivedData = data;
+    });
+  },
+};
+</script>
 ```
 
-### Vuex: State Management for Larger Applications 
+### Vuex: State Management for Larger Applications
 
-For more complex applications, especially those with multiple components sharing state, Vuex is the recommended solution. Vuex is Vue's official state management library, providing a centralized store for managing application-level state. 
+For more complex applications, especially those with multiple components sharing state, Vuex is the recommended solution. Vuex is Vue's official state management library, providing a centralized store for managing application-level state.
 
 ```javascript
-// store.js 
-import Vue from 'vue'; 
-import Vuex from 'vuex'; 
- 
-Vue.use(Vuex); 
- 
-export default new Vuex.Store({ 
-  state: { 
-    sharedData: 'Shared state data!', 
-  }, 
-  mutations: { 
-    updateData(state, newData) { 
-      state.sharedData = newData; 
-    }, 
-  }, 
-}); 
+// store.js
+import Vue from 'vue';
+import Vuex from 'vuex';
+
+Vue.use(Vuex);
+
+export default new Vuex.Store({
+  state: {
+    sharedData: 'Shared state data!',
+  },
+  mutations: {
+    updateData(state, newData) {
+      state.sharedData = newData;
+    },
+  },
+});
 ```
 
-```javascript
-// AnyComponent.vue 
-<template> 
-  <div>{{ sharedData }}</div> 
-</template> 
+```html
+// AnyComponent.vue
+<template>
+  <div>{{ sharedData }}</div>
+</template>
 
-<script> 
-import { mapState } from 'vuex'; 
- 
-export default { 
-  computed: { 
-    ...mapState(['sharedData']), 
-  }, 
-}; 
-</script> 
+<script>
+import { mapState } from 'vuex';
+
+export default {
+  computed: {
+    ...mapState(['sharedData']),
+  },
+};
+</script>
 ```
 
 While Vuex is a powerful state management solution, it's not always necessary for every Vue.js application. Here are some scenarios where you should consider using Vuex:
