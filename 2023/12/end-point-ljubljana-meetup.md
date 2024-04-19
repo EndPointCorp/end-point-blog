@@ -51,7 +51,7 @@ And there are probably a few others I didn't hear about or forgot!
 
 ![A sunny view overlooking a European city with classic and modern architecture, with mountains in the background](/blog/2023/12/end-point-ljubljana-meetup/20230419-143046.webp)
 
-Here I want to share some photos of a brief meet-up four of us had in Ljubljana, the capital of Slovenia, back in April. I was traveling there while on vacation with my daughter Mira, so I asked around among my co-workers who lived nearby, where "nearby" meant within a few hours' travel.
+Here I want to share some photos of a brief meet-up four of us had in Ljubljana, the capital of Slovenia, back in April. I was traveling there while on vacation with my daughter Mira, so I asked around among my co-workers who lived nearby, where "nearby" meant within a few hours’ travel.
 
 Our crew was Couragyn Chretien from Canada and Nicholas Piano from England, both living in Spain; Marco Pessotto from Italy, living in Croatia; and I was on vacation from my current base in Utah.
 
