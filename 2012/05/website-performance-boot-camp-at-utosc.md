@@ -26,6 +26,6 @@ Here is the video recording of the first time I presented the talk. (The technic
 
 Use this [Website Performance Boot Camp](https://www.youtube.com/watch?v=ItkF8V7DzyQ) direct YouTube video link if the embedded video doesn’t work for you.
 
-The slides for this [Website Performance Boot Camp](https://jon.endpointdev.com/utosc-2012/website-performance-boot-camp.html) presentation are available.
+The slides for this [Website Performance Boot Camp](https://jon.swelter.net/talks/utosc-2012/website-performance-boot-camp.html) presentation are available.
 
 Thanks again to the conference organizers and the other speakers and sponsors, and the nice venue [Utah Valley University](https://www.uvu.edu/), for making it a great conference!
