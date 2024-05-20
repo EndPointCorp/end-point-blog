@@ -21,12 +21,12 @@ While considering WebP for an experiment on our own website, we were very impres
 
 <table cellspacing="10">
 <tbody><tr>
-<td><img alt="" height="133" src="/blog/2014/01/webp-images-experiment-on-end-point/image-0.jpeg" width="133"/><br/>12,956 bytes JPEG</td>
-<td><img alt="" height="133" src="/blog/2014/01/webp-images-experiment-on-end-point/image-1.webp" width="133"/><br/>2186 bytes WebP</td>
+<td><img alt="" height="133" src="/blog/2014/01/webp-images-experiment-on-end-point/marina_lohova.jpg" width="133"/><br/>13,420 bytes JPEG</td>
+<td><img alt="" height="133" src="/blog/2014/01/webp-images-experiment-on-end-point/marina_lohova.webp" width="133"/><br/>2776 bytes WebP</td>
 </tr>
 <tr>
-<td><img alt="" height="133" src="/blog/2014/01/webp-images-experiment-on-end-point/image-2.jpeg" width="133"/><br/>11,149 bytes JPEG</td>
-<td><img alt="" height="133" src="/blog/2014/01/webp-images-experiment-on-end-point/image-3.webp" width="133"/><br/>2530 bytes WebP</td>
+<td><img alt="" height="133" src="/blog/2014/01/webp-images-experiment-on-end-point/josh_williams.jpg" width="133"/><br/>14,734 bytes JPEG</td>
+<td><img alt="" height="133" src="/blog/2014/01/webp-images-experiment-on-end-point/josh_williams.webp" width="133"/><br/>3386 bytes WebP</td>
 </tr>
 </tbody></table>
 
@@ -36,10 +36,10 @@ One of our website’s background patterns has transparency, making the PNG form
 
 <table cellspacing="15">
 <tbody><tr>
-<td align="right">337,186 bytes</td><td><a href="https://jon.endpointdev.com/blog/container-pattern.png">container-pattern.png</a></td>
+<td align="right">337,186 bytes</td><td><a href="/blog/2014/01/webp-images-experiment-on-end-point/container-pattern.png">container-pattern.png</a></td>
 </tr>
 <tr>
-<td align="right">43,270 bytes</td><td><a href="https://jon.endpointdev.com/blog/container-pattern.webp">container-pattern.webp</a></td>
+<td align="right">43,270 bytes</td><td><a href="/blog/2014/01/webp-images-experiment-on-end-point/container-pattern.webp">container-pattern.webp</a></td>
 </tr>
 </tbody></table>
 
