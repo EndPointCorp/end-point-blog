@@ -1,20 +1,22 @@
 ---
 author: "Kevin Campusano"
 title: "How to validate record uniqueness in ASP.NET"
-date: 2024-05-10
+date: 2024-05-28
+github_issue_number: 2047
 featured:
-  image_url:
-description:
+  image_url: /blog/2024/05/how-to-validate-record-uniqueness-in-asp.net/moon-through-trees.webp
+description: "How to implement uniqueness validations in ASP.NET two ways: using a database index and using a custom validation attribute."
 tags:
 - dotnet
 - aspdotnet
 - csharp
-- efcore
 ---
 
-In ASP.NET, the [`System.ComponentModel.DataAnnotations` namespace](https://learn.microsoft.com/en-us/dotnet/api/system.componentmodel.dataannotations?view=net-8.0) includes many [attributes](https://learn.microsoft.com/en-us/dotnet/csharp/advanced-topics/reflection-and-attributes/) that can be used to instruct the framework to perform [basic validation tasks](https://learn.microsoft.com/en-us/aspnet/core/mvc/models/validation?view=aspnetcore-8.0) for us. There are built-in validators [for ensuring that certain fields are present](https://learn.microsoft.com/en-us/dotnet/api/system.componentmodel.dataannotations.requiredattribute), [that they meet character length limits](https://learn.microsoft.com/en-us/dotnet/api/system.componentmodel.dataannotations.stringlengthattribute), [that they don't exceed or fall short of certain amounts](https://learn.microsoft.com/en-us/dotnet/api/system.componentmodel.dataannotations.rangeattribute), [that they match certain formats](https://learn.microsoft.com/en-us/dotnet/api/system.componentmodel.dataannotations.regularexpressionattribute?view=net-8.0), and more.
+![The edges of the image show dark green (almost black) leaves out of focus, creating a frame around the center, where there is a bright full moon sitting in the evening blue sky. The detailed moon takes up a third of the image vertically.](/blog/2024/05/how-to-validate-record-uniqueness-in-asp.net/moon-through-trees.webp)
 
-One omission however, is checking for record uniqueness. That is, checking that no other record in the entity's underlying persistent data storage has the same "name", or the same "code", or the same "any other field".
+In ASP.NET, the [`System.ComponentModel.DataAnnotations` namespace](https://learn.microsoft.com/en-us/dotnet/api/system.componentmodel.dataannotations?view=net-8.0) includes many [attributes](https://learn.microsoft.com/en-us/dotnet/csharp/advanced-topics/reflection-and-attributes/) that can be used to instruct the framework to perform [basic validation tasks](https://learn.microsoft.com/en-us/aspnet/core/mvc/models/validation?view=aspnetcore-8.0) for us. There are built-in validators for ensuring that certain fields [are present](https://learn.microsoft.com/en-us/dotnet/api/system.componentmodel.dataannotations.requiredattribute), that they [meet character length limits](https://learn.microsoft.com/en-us/dotnet/api/system.componentmodel.dataannotations.stringlengthattribute), that they [don't exceed or fall short of certain amounts](https://learn.microsoft.com/en-us/dotnet/api/system.componentmodel.dataannotations.rangeattribute), that they [match certain formats](https://learn.microsoft.com/en-us/dotnet/api/system.componentmodel.dataannotations.regularexpressionattribute?view=net-8.0), and more.
+
+One omission however, is checking for record uniqueness: making sure that no other record in the entity's underlying persistent data storage has the same "name", or the same "code", or the same "any other field".
 
 In this article, we're going to try to address this shortcoming by implementing this type of uniqueness validation ourselves. We will see two approaches: a simpler solution using a database index, and a more flexible one using a custom validation attribute. Let's get started.
 
@@ -22,7 +24,7 @@ In this article, we're going to try to address this shortcoming by implementing 
 > 
 > The API is about calculating quotes for used vehicles based on their condition. It runs on .NET 8 and uses a [PostgreSQL](https://www.postgresql.org/) database, to which it connects using [Entity Framework Core](https://learn.microsoft.com/en-us/ef/core/). As such it has various [endpoints](https://github.com/megakevin/end-point-blog-dotnet-8-demo/tree/main/VehicleQuotes.WebApi/Controllers), [entities](https://github.com/megakevin/end-point-blog-dotnet-8-demo/tree/main/VehicleQuotes.WebApi/Models) and [tables](https://github.com/megakevin/end-point-blog-dotnet-8-demo/tree/main/VehicleQuotes.WebApi/Migrations) related to vehicle information like makes, models, etc.
 
-## Using a database unique index to enforce uniqueness
+### Using a database unique index to enforce uniqueness
 
 If your application uses a [relational database](https://en.wikipedia.org/wiki/Relational_database) to store its data, then the easiest solution to enforce record uniqueness is implementing a [unique index](https://www.w3schools.com/sql/sql_ref_create_unique_index.asp). This way, we let the database itself enforce the rule.
 
@@ -56,7 +58,7 @@ The [`Index`](https://learn.microsoft.com/en-us/dotnet/api/microsoft.entityframe
 
 Now, if we were to [create a migration](https://github.com/megakevin/end-point-blog-dotnet-8-demo/blob/main/VehicleQuotes.WebApi/Migrations/20210625224443_AddUniqueIndexesToLookupTables.cs) with a command like this:
 
-```sh
+```plain
 dotnet ef migrations add AddUniqueIndexToMakes
 ```
 
@@ -108,7 +110,7 @@ $ curl -X 'POST' 'http://localhost:5000/api/Makes' \
 
 ...here's what we get back:
 
-```sh
+```plain
 Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
  ---> Npgsql.PostgresException (0x80004005): 23505: duplicate key value violates unique constraint "ix_makes_name"
 ```
@@ -136,7 +138,7 @@ public async Task<ActionResult<Make>> PostMake(Make make)
 }
 ```
 
-Simple enough, we use a `try-catch` to handle the `Microsoft.EntityFrameworkCore.DbUpdateException` and return a response of our choosing. Trying the same request again, now results in a `400 Bad Request` response with this body:
+Simple enough: we use a try-catch to handle the `Microsoft.EntityFrameworkCore.DbUpdateException` and return a response of our choosing. Trying the same request again results in a `400 Bad Request` response with this body:
 
 ```json
 {
@@ -147,11 +149,11 @@ Simple enough, we use a `try-catch` to handle the `Microsoft.EntityFrameworkCore
 }
 ```
 
-## Writing a custom validation attribute to enforce uniqueness
+### Writing a custom validation attribute to enforce uniqueness
 
-The database index solution will work in a lot of cases. There are some scenarios however, where it won't. For example, the validation may need to be applied to input data that is not directly tied to a database table; or maybe the app does not use a relational database at all. In cases where we can't rely on unique indexes, a [custom validation attribute](https://learn.microsoft.com/en-us/aspnet/core/mvc/models/validation?view=aspnetcore-8.0#custom-attributes) is the best option.
+The database index solution will work in a lot of cases. However, there are some scenarios where it won't. For example, the validation may need to be applied to input data that is not directly tied to a database table; or, maybe the app does not use a relational database at all. In cases where we can't rely on unique indexes, a [custom validation attribute](https://learn.microsoft.com/en-us/aspnet/core/mvc/models/validation?view=aspnetcore-8.0#custom-attributes) is the best option.
 
-The validation logic that the attribute would have to implement is simple. All it would have to do is query the underlying data store to see if a record with the given field value already exists. And if it does, trigger a validation error.
+The validation logic that the attribute would have to implement is simple. All it would have to do is query the underlying data store to see if a record with the given field value already exists, and if it does, trigger a validation error.
 
 We'll start by implementing a first iteration that works specifically for `Make` names. Then, we'll extract the generic parts and create a reusable base attribute that can be used in many situations, with any class and field.
 
@@ -270,9 +272,9 @@ Now, if we make a request to create a new `Make` and use an existing name, we ge
 }
 ```
 
-OK that's maybe the best response we've had so far. It includes not only a proper HTTP status code but also a human readable message that a frontend app can display to its users. Also, with this approach, we don't have to use a `try-catch` in the endpoint's action method like we did before. This is because our attribute plugs right into ASP.NET's [model validation functionality](https://learn.microsoft.com/en-us/aspnet/core/mvc/models/validation?view=aspnetcore-8.0), which triggers automatically at the beginning of every API request.
+OK, that's maybe the best response we've had so far. It includes not only a proper HTTP status code but also a human readable message that a frontend app can display to its users. Also, with this approach, we don't have to use a `try-catch` in the endpoint's action method like we did before. This is because our attribute plugs right into ASP.NET's [model validation functionality](https://learn.microsoft.com/en-us/aspnet/core/mvc/models/validation?view=aspnetcore-8.0), which triggers automatically at the beginning of every API request.
 
-## A generic custom validation attribute to enforce uniqueness
+### A generic custom validation attribute to enforce uniqueness
 
 The only disadvantage of our validation attribute is that it only works for one particular class and one particular property. I'm thinking we can make something a little bit more generic which we can reuse in many scenarios.
 
@@ -403,11 +405,11 @@ Very compact, huh? With this base class, new concrete validation attributes just
 
 You can test the endpoint again now and should see the same behavior as before. That means the refactoring was successful!
 
-## Writing a unit test for the custom validation attribute
+### Writing a unit test for the custom validation attribute
 
-Talking about tests, let's write a unit test for this. Testing custom validation attributes involves calling their `GetValidationResult` method and checking that it returns as expected. This is a public method defined in the `ValidationAttribute` base class. This method is defined by the framework, but it eventually calls our own custom logic that we wrote in the `IsValid` override.
+Speaking of tests, let's write a unit test for this. Testing custom validation attributes involves calling their `GetValidationResult` method and checking that it returns as expected. This is a public method defined in the `ValidationAttribute` base class. This method is defined by the framework, but it eventually calls our own custom logic that we wrote in the `IsValid` override.
 
-For our validator, since it depends on an `IMakeRepository`, we're going to have to provide it as a [mock object](https://en.wikipedia.org/wiki/Mock_object). The validator also needs a `ValidationContext` instance that it can use to fetch services from the Dependency Injection container. Our test will also have to provide that in some way.
+Since our validator depends on an `IMakeRepository`, we're going to have to provide it as a [mock object](https://en.wikipedia.org/wiki/Mock_object). The validator also needs a `ValidationContext` instance that it can use to fetch services from the Dependency Injection container. Our test will also have to provide that in some way.
 
 Here's what such a test could look like:
 
@@ -463,4 +465,4 @@ public void GetValidationResult_ReturnsFailure_WhenAnotherMakeExistsWithTheSameN
 
 And that's how you can test a custom validation attribute like the one we've built. This is very conventional as unit tests go. The only unusual things to keep in mind is the method we need to call in order to exercise the validation logic: `GetValidationResult`. And also how to construct and configure the `ValidationContext` object that the method needs as a parameter.
 
-And that's all for now. We've seen two ways of implementing uniqueness validation in ASP.NET. One approach was leveraging an underlying relational database to create unique indexes. Another, more complicated but also more flexible approach, leverages framework features to create custom validation attributes. And we even saw how we can test them!
+And that's all for now. We've seen two ways of implementing uniqueness validation in ASP.NET. One approach was leveraging an underlying relational database to create unique indexes. A more complicated — but also more flexible — approach leverages framework features to create custom validation attributes. And we even saw how we can test them!
