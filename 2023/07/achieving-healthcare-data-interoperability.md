@@ -8,7 +8,6 @@ tags:
 - emsa
 date: 2023-07-28
 featured:
-  casepointer: true
   image_url: /blog/2023/07/achieving-healthcare-data-interoperability/a_stream_running_between_houses_and_a_road.webp
 ---
 
@@ -81,13 +80,13 @@ Something like an HIE that is capable of semantic (vocabulary) inspection, trans
 
 ### The CasePointer software suite
 
-We at End Point are solving the interoperability problem for our client jurisdictions’ public health disease surveillance with [CasePointer](https://www.casepointer.com), a new suite of proven open source software. It interoperates with many other systems, including HIEs, and is configurable to map varying local data conventions into a single system that routes messages and reporting as needed.
+We at End Point are solving the interoperability problem for our client jurisdictions’ public health disease surveillance with CasePointer, a new suite of proven open source software. It interoperates with many other systems, including HIEs, and is configurable to map varying local data conventions into a single system that routes messages and reporting as needed.
 
 #### EpiTrax disease surveillance system
 
 We began in 2008 to work with software for public health using the open-source TriSano disease surveillance system.
 
-In 2017, the Utah Department of Health and Human Services (DHHS) released a new open source disease surveillance application called [EpiTrax](/expertise/epitrax/) to replace their use of TriSano. EpiTrax is a more capable, comprehensive, and supportable application that supports [all 170+ reportable health conditions](https://ndc.services.cdc.gov/) identified by the [National Notifiable Disease Surveillance System (NNDSS)](https://health.gov/healthypeople/objectives-and-data/data-sources-and-methods/data-sources/national-notifiable-diseases-surveillance-system-nndss).
+In 2017, the Utah Department of Health and Human Services (DHHS) released a new open source disease surveillance application called EpiTrax to replace their use of TriSano. EpiTrax is a more capable, comprehensive, and supportable application that supports [all 170+ reportable health conditions](https://ndc.services.cdc.gov/) identified by the [National Notifiable Disease Surveillance System (NNDSS)](https://health.gov/healthypeople/objectives-and-data/data-sources-and-methods/data-sources/national-notifiable-diseases-surveillance-system-nndss).
 
 As open source software, we and others can use it, extend its capabilities, and contribute back to a shared source code repository.
 
@@ -95,7 +94,7 @@ Today EpiTrax serves as the central application within the CasePointer suite.
 
 #### EMSA preprocessing powerhouse
 
-The separate application [Electronic Message Staging Area (EMSA)](/expertise/emsa/) was also designed by the team at Utah DHHS to work in tandem with EpiTrax. EMSA ingests electronic case and lab reports (eCRs & ELRs) from various reporters and allows public health organizations to create extremely powerful custom configurations capable of message inspection, semantic (vocabulary) mapping and transformation, and routing, tailored to each jurisdiction's needs and preferences.
+The separate application Electronic Message Staging Area (EMSA) was also designed by the team at Utah DHHS to work in tandem with EpiTrax. EMSA ingests electronic case and lab reports (eCRs & ELRs) from various reporters and allows public health organizations to create extremely powerful custom configurations capable of message inspection, semantic (vocabulary) mapping and transformation, and routing, tailored to each jurisdiction's needs and preferences.
 
 Once these EMSA rules are set up, the healthcare data can flow continuously while automatically being pre-processed by EMSA according to its matching jurisdiction with minimal manual intervention by the area's public health agency. PHA staff can focus on their primary objective: investigating and tracking disease to protect the health of their community.
 
@@ -130,6 +129,6 @@ Such highly configurable, unified, robust tools can be a game changer for public
 
 Within the United States, four states have already partnered with us to implement EpiTrax. We are helping them reduce unnecessary manual data processing costs, more effectively manage caseloads, and further automate their data workflows.
 
-If this piqued your curiosity, visit [our CasePointer website](https://www.casepointer.com/) and [contact us](https://www.casepointer.com/contact/) to learn more about CasePointer and how our team is evolving public health support with customized data solutions.
+If this piqued your curiosity, [contact us](/contact/) to learn more about CasePointer and how our team is evolving public health support with customized data solutions.
 
 We would love to support your efforts to protect the well-being of people and communities you care about!

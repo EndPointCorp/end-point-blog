@@ -238,7 +238,7 @@ Using pg_prove to automate your tests can save you a lot of time and effort, esp
 
 ### pgTAP in EpiTrax
 
-[EpiTrax](/expertise/epitrax/) relies on Postgres and its functions, making pgTAP an ideal tool for testing the platform's database functions, ensuring data integrity, and maintaining the robustness of the system. By utilizing pgTAP, EpiTrax efficiently validates various aspects of its database structure and behavior.
+EpiTrax relies on Postgres and its functions, making pgTAP an ideal tool for testing the platform's database functions, ensuring data integrity, and maintaining the robustness of the system. By utilizing pgTAP, EpiTrax efficiently validates various aspects of its database structure and behavior.
 
 ### Conclusion
 

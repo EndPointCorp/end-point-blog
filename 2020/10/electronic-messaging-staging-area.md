@@ -3,7 +3,6 @@ author: Elizabeth Garrett Christensen
 title: 'EMSA: Electronic Messaging Staging Area'
 github_issue_number: 1680
 featured:
-  casepointer: true
   image_url: /blog/2020/10/electronic-messaging-staging-area/emsa-banner.jpg
 tags:
 - casepointer
@@ -40,7 +39,7 @@ EMSA can be deployed along with EpiTrax, the open source tracking system, or as 
 Aside from all the features mentioned above, EMSA as an open-source solution brings other benefits:
 
 - Reduced cost: Other than development and consulting to help set it up, there are no ongoing licensing costs.
-- Designed to work as part of the open-source [EpiTrax disease surveillance system](/expertise/epitrax/).
+- Designed to work as part of the open-source EpiTrax disease surveillance system.
 - Participating in the open source community that is growing in the healthcare industry.
 
 ### Help is available!

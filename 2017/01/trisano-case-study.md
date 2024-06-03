@@ -3,7 +3,6 @@ author: Elizabeth Garrett Christensen
 title: TriSano Case Study
 github_issue_number: 1284
 featured:
-  casepointer: true
   image_url: /blog/2017/01/trisano-case-study/image-0.jpeg
 tags:
 - case-study

@@ -4,7 +4,6 @@ title: "Data Migration Tips"
 date: 2023-02-04
 github_issue_number: 1936
 featured:
-  casepointer: true
   image_url: /blog/2023/02/migration-tips-and-tricks/leaves.webp
 description: "We've collected a few tips for migrating data that may help you learn from our successes, as well as our mistakes — particularly educational experiences."
 tags:
@@ -20,7 +19,7 @@ tags:
 
 <!-- Photo by Seth Jensen, 2022 -->
 
-When you're in the business of selling software to people, you tend to get a few chances to migrate data from their legacy software to your shiny new system. Most recently for me that has involved public health data exported from legacy disease surveillance systems into [PostgreSQL databases](/expertise/postgresql/) for use by the open source [EpiTrax system](/expertise/epitrax/) and its companion [EMSA](/expertise/emsa/).
+When you're in the business of selling software to people, you tend to get a few chances to migrate data from their legacy software to your shiny new system. Most recently for me that has involved public health data exported from legacy disease surveillance systems into [PostgreSQL databases](/expertise/postgresql/) for use by the open source EpiTrax system and its companion EMSA.
 
 We have collected a few tips that may help you learn from our successes,
 as well as our ~~mistakes~~particularly educational experiences.

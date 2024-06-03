@@ -3,7 +3,6 @@ title: "CSTE Conference 2023 Retrospective"
 author: Samuel Stern
 github_issue_number: 1990
 featured:
-  casepointer: true
   image_url: /blog/2023/07/cste-conference-2023-retrospective/end-point-cste-team.webp
 date: 2023-07-14
 tags:
