@@ -71,9 +71,14 @@ docker compose up -d
 ```
 ![A browser showing Let's Encrypt cert](/blog/2024/06/docker-nginx-acme/browser.webp)
 
-That's all folks. Have a nice day. 
+### 6. Certificate Renewal Mechanism
+The certificate will be automatically renewed by the cron job installed by acme.sh. You can verify the cron job by running the following command `crontab -l` 
+```plain
+[jeffry@docker ~]$ crontab -l
+13 7 * * * "/home/jeffry/.acme.sh"/acme.sh --cron --home "/home/jeffry/.acme.sh" > /dev/null
+```
+This ensures that the renewal process runs regularly and without manual intervention.
 
-
-
+Thank you for following this tutorial. Have a great day!
 
 
