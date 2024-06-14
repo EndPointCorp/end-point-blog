@@ -15,6 +15,7 @@ tags:
 ---
 
 ![A rusted lock at at an old wooden door](/blog/2024/06/docker-nginx-acme/lock.webp)
+Photo by [Animesh Srivastava](https://www.pexels.com/@animesh-srivastava-3019173/) from [Pexels](https://www.pexels.com/photo/close-up-of-an-old-and-rusty-padlock-8497499/).
 
 This tutorial will demonstrate how to secure Nginx on Docker using HTTPS, leveraging free certificates from Let’s Encrypt. Let’s Encrypt certificates provide trusted and secure encryption at no cost, although they require renewal every 90 days. Fortunately, this renewal process can be automated with various tools. Among these options, this tutorial will employ **acme.sh**, a versatile Bash script compatible with major platforms. The tutorial will guide you through obtaining Let’s Encrypt certificates on the host system and mounting them as a volume in the Nginx container. Please ensure the following prerequisites are met before proceeding:
 
