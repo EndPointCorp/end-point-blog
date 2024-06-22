@@ -1,44 +1,50 @@
 ---
 author: Edgar Mlowe
-title:  "Practical Linux Command Line Tips: Boosting Productivity and Efficiency in Everyday Work"
-github_issue_number: 
-date: 2024-06-07
+title:  "Practical Linux Command Line Tips for Productivity and Efficiency"
+github_issue_number: 2054
+featured:
+  image_url: /blog/2024/06/practical-linux-comandline-tips/three-shadows.webp
+description: In this post, you'll learn to combine commands with pipes, master shell techniques, efficiently recall and edit past commands, and navigate the filesystem with speed.
+date: 2024-06-22
 tags:
-- Linux
-- Command Line
-- Bash
-- Tech Tips
-- Productivity
+- linux
+- shell
+- tips
 ---
 
+![A shadow draws sharp lines on brightly lit concrete. On the left side is a thick line descending across the full height diagonally, connected at the top to a subtly curved line which spans the full width of the image. It is connected by a thinner parallel diagonal line, which has two more horizontal lines equally spaced across the image.](/blog/2024/06/practical-linux-comandline-tips/three-shadows.webp)
 
-Feeling stuck with basic Linux commands? You're not alone! Many know some commands but don't feel efficient. The good news? With some know-how and common commands, you can transform your skills. In this post, you'll learn to combine commands with pipes, master shell techniques, efficiently recall and edit past commands, and navigate the filesystem with speed. Let's dive in!
+<!-- Photo by Seth Jensen, 2024. -->
 
-## 1. Combining Commands with Pipes
+Feeling stuck with basic Linux commands? You're not alone! Many people know some commands but don't feel efficient. The good news is that with some know-how and common commands, you can transform your skills.
 
-### Understanding How Pipes Work
+In this post, you'll learn to combine commands with pipes, master shell techniques, efficiently recall and edit past commands, and navigate the filesystem with speed. Let's dive in!
+
+### 1. Combining Commands with Pipes
+
+#### Understanding How Pipes Work
 
 Ever wish your commands could work together? Pipes make it happen! They let one command pass its output to another, creating a smooth workflow.
 
-Commands take input (`stdin`) and give output (`stdout`). The `|` symbol links them, making life easier.
+Commands take input (`stdin`) and give output (`stdout`). The pipe symbol (`|`) links them, making life easier.
 
-For example, `ls -l /bin` lists files, but it's overwhelming. Try `ls -l /bin | less` to view one screen at a time—like having a personal organizer!
+For example, `ls -l /bin` lists files in the `/bin` directory, but the amount of output is overwhelming. Try `ls -l /bin | less` to view one screen at a time—like having a personal organizer! This command pipes the output of the `ls` command into the pager `less`, which is very useful for reading large amounts of data.
 
-Let’s dive into pipes and practice them with commands like `wc`, `head`, `cut`, `grep`, `sort`, and `uniq` to handle data like a pro! If any of these commands are new to you, use `man` followed by the command name to learn more. For example:
+Let’s dive into pipes and practice them with commands like `wc`, `head`, `cut`, `grep`, `sort`, and `uniq` to handle data like a pro. If any of these commands are new to you, use `man` (short for "manual") followed by the command name to learn more. For example:
 
-```sh
+```plain
 man grep
 ```
 
-### Practical Examples: Real-World Use Cases for Combining Commands
+#### Practical Examples: Real-World Use Cases for Combining Commands
 
-#### Example 1: Extracting Information from Log Files
+##### Example 1: Extracting Information from Log Files
 
 **Task**: Find all error messages in a log file and count them.
 
 **Sample Data (`application.log`)**:
 
-```
+```plain
 INFO 2024-06-07 User login successful
 ERROR 2024-06-07 Failed to connect to database
 INFO 2024-06-07 User logout
@@ -49,22 +55,22 @@ ERROR 2024-06-07 Null pointer exception
 
 **Command**:
 
-```sh
-grep "ERROR" application.log | wc -l
+```plain
+grep 'ERROR' application.log | wc -l
 ```
 
 **Explanation**:
 
-- `grep "ERROR" application.log` searches for lines containing "ERROR" in `application.log`.
-- The output is then passed to `wc -l`, which counts the number of lines, giving you the total number of error messages.
+- `grep 'ERROR' application.log` searches for lines containing "ERROR" in `application.log`.
+- The output is then passed to `wc -l`, which counts the number of lines, giving you the total number of error messages. `wc` is short for "word count", while `-l` stands for lines.
 
 **Expected Output**:
 
-```
+```plain
 3
 ```
 
-#### Example 2: Processing XML Files for Public Health Data
+##### Example 2: Processing XML Files for Public Health Data
 
 **Task**: Extract all patient IDs from multiple XML files and sort them uniquely.
 
@@ -102,13 +108,13 @@ grep "ERROR" application.log | wc -l
 
 **Command**:
 
-```sh
-grep "<patientId>" *.xml | cut -d'>' -f2 | cut -d'<' -f1 | sort | uniq
+```plain
+grep '<patientId>' *.xml | cut -d '>' -f 2 | cut -d '<' -f 1 | sort | uniq
 ```
 
 **Explanation**:
 
-- `grep "<patientId>" *.xml` searches for lines containing `<patientId>` in all XML files.
+- `grep '<patientId>' *.xml` searches for lines containing `<patientId>` in all XML files.
 - The output is then piped to `cut -d'>' -f2` to extract the content after the `>` character.
 - `cut -d'<' -f1` further extracts the content before the `<` character.
 - `sort` sorts the IDs alphabetically.
@@ -116,19 +122,19 @@ grep "<patientId>" *.xml | cut -d'>' -f2 | cut -d'<' -f1 | sort | uniq
 
 **Expected Output**:
 
-```
+```plain
 123
 124
 125
 ```
 
-#### Example 3: Organizing Text Data into a CSV File
+##### Example 3: Organizing Text Data into a CSV File
 
 **Task**: Convert a space-separated file to a CSV file.
 
 **Sample Data (`data.txt`)**:
 
-```
+```plain
 Name Age Location
 Alice 30 New_York
 Bob 25 Los_Angeles
@@ -137,7 +143,7 @@ Charlie 35 Chicago
 
 **Command**:
 
-```sh
+```plain
 cat data.txt | tr ' ' ',' > data.csv
 ```
 
@@ -145,48 +151,48 @@ cat data.txt | tr ' ' ',' > data.csv
 
 - `cat data.txt` reads the content of `data.txt`.
 - The output is then piped to `tr ' ' ','`, which translates spaces to commas.
-- `> data.csv` redirects the final output to `data.csv`.
+- `> data.csv` redirects the final output to `data.csv`. We'll cover redirection in more detail later.
 
 **Expected Output (`data.csv`)**:
 
-```
+```plain
 Name,Age,Location
 Alice,30,New_York
 Bob,25,Los_Angeles
 Charlie,35,Chicago
 ```
 
-These examples demonstrate how simple commands can be combined to achieve powerful and useful results. Feel free to experiment with these commands and modify them to fit your specific needs!
+These examples demonstrate how simple commands can be combined to achieve powerful and useful results. Experiment with these commands and modify them to fit your specific needs!
 
-## 2. Mastering Shell Techniques
+### 2. Mastering Shell Techniques
 
 The shell is the heart of your command line, acting as the bridge between you and the operating system. It does more than just run commands; it helps you manage and streamline your tasks efficiently. Let's dive into some essential shell techniques.
 
-#### Understanding the Shell with `ls`
+##### Understanding the Shell with `ls`
 
 To get a clear picture of what the shell does versus what a command does, let's look at the `ls` command. When you run `ls`, the shell and the command work together to get things done:
 
 - **Shell's Job**: The shell processes wildcards (like `*.py`), sets up input and output redirections, and manages environment variables.
-- **Command's Job**: `ls` lists directory contents.
+- **Command's Job**: The `ls` command lists directory contents.
 
 **Example**: List all Python files in a directory.
 
-```sh
+```plain
 ls *.py
 ```
 
 In this example:
 
-- **Shell**: Expands `*.py` to match all Python files (e.g., `data.py`, `main.py`).
-- **`ls` Command**: Receives the list of Python files and displays them.
+- The **shell** expands `*.py` to match all Python files (e.g., `data.py`, `main.py`).
+- The **`ls` Command** receives the list of Python files and displays them.
 
-#### 1. Pattern Matching for Filenames
+##### 1. Pattern Matching for Filenames
 
-Pattern matching allows you to select multiple files with a single command using wildcards.
+Pattern matching allows you to select multiple files with a single command using [wildcards](https://tldp.org/LDP/GNU-Linux-Tools-Summary/html/x11655.htm).
 
 **Example 1**: List all text files.
 
-```sh
+```plain
 ls *.txt
 ```
 
@@ -194,7 +200,7 @@ This command lists all files ending with `.txt`, like `report.txt`, `notes.txt`,
 
 **Example 2**: List all files that start with "data".
 
-```sh
+```plain
 ls data*
 ```
 
@@ -202,13 +208,13 @@ This command lists all files starting with "data", like `data1.csv`, `data2.csv`
 
 **Example 3**: List all files that have numbers in their names.
 
-```sh
+```plain
 ls *[0-9]*
 ```
 
 This command lists files that contain any digit, like `file1.txt`, `report2.doc`, and `data2023.csv`.
 
-#### 2. Variables to Store Values
+##### 2. Variables to Store Values
 
 Variables let you store data that can be reused in your commands.
 
@@ -228,49 +234,49 @@ DATE=$(date +%Y-%m-%d)
 echo "Today's date is $DATE"
 ```
 
-This command sets the `DATE` variable to the current date and then prints it.
+This command sets the `DATE` variable to the current date using [command substitution](https://www.gnu.org/software/bash/manual/html_node/Command-Substitution.html) and then prints the contents of the `DATE` variable.
 
-#### 3. Redirection of Input and Output
+##### 3. Redirection of Input and Output
 
 Redirection allows you to control where your command's input and output go.
 
 **Example 1**: Save the output of a command to a file.
 
-```sh
+```plain
 ls -l > filelist.txt
 ```
 
-This command lists all files in long format and saves the output to `filelist.txt`.
+This command lists all files in long format and saves the output to `filelist.txt`. Redirection with the single right bracket will replace the contents of the target file.
 
 **Example 2**: Append the output of a command to a file.
 
-```sh
+```plain
 echo "New entry" >> filelist.txt
 ```
 
-This command adds "New entry" to the end of `filelist.txt`.
+This command adds "New entry" to the end of `filelist.txt`. Redirection with two right brackets will append to the contents of the target file.
 
 **Example 3**: Use a file as input for a command.
 
-```sh
+```plain
 sort < unsorted.txt
 ```
 
-This command sorts the contents of `unsorted.txt` and displays the result.
+This command sorts the contents of `unsorted.txt` and displays the result. The single left bracket reads the contents of the file on the right (`unsorted.txt` in this case) and uses them as input to the command on the left (`sort` in this case).
 
-#### 4. Quoting and Escaping to Disable Shell Features
+##### 4. Quoting and Escaping to Disable Shell Features
 
-Quoting and escaping are used to handle special characters in your commands.
+Quoting and escaping are used to handle special characters in your commands. Double quotes won't expand wildcards or break the string on spaces, but will still expand variables and substitute commands with `$()`. Content in single quotes isn't processed by the shell at all; all characters are retained literally.
 
 **Example 1**: Search for a phrase with spaces in a file.
 
-```sh
+```plain
 grep "my search phrase" file.txt
 ```
 
 This command searches for the exact phrase "my search phrase" in `file.txt`.
 
-**Example 2**: Use a variable inside a quoted string.
+**Example 2**: Use a variable inside a double-quoted string.
 
 ```sh
 NAME="Alice"
@@ -279,15 +285,7 @@ echo "Hello, $NAME"
 
 This command prints "Hello, Alice" using the `NAME` variable.
 
-**Example 3**: Escape special characters in a command.
-
-```sh
-echo "This is a \$5 deal"
-```
-
-This command prints "This is a $5 deal" by escaping the dollar sign.
-
-**Example 4**: Use single quotes to prevent variable expansion.
+**Example 3**: Use single quotes to prevent variable expansion.
 
 ```sh
 echo 'Hello, $NAME'
@@ -295,41 +293,49 @@ echo 'Hello, $NAME'
 
 This command prints `Hello, $NAME` without expanding the variable.
 
-**Example 5**: Use backslashes to escape special characters.
+**Example 4**: Use backslashes to escape special characters in a double-quoted string.
 
 ```sh
-echo "Path: C:\\Windows\\System32"
+echo "This path costs \$139: C:\\Windows\\System32"
 ```
 
-This command prints `Path: C:\Windows\System32` by escaping the backslashes.
+This command prints `This path costs $139: C:\Windows\System32`. The dollar sign and backlashes must be escaped with a `\` so that they aren't treated as special characters.
 
-**Example 6**: Include a literal quote in a string.
+**Example 5**: Include a literal double quote in a string.
 
 ```sh
 echo "He said, \"Hello, World!\""
 ```
 
-This command prints `He said, "Hello, World!"` by escaping the quotes.
+This command prints `He said, "Hello, World!"` by escaping the double quotes.
 
-#### 5. The Search Path for Locating Programs to Run
+**Example 6:**: Include a literal single quote in a single-quoted string.
+
+```sh
+echo 'What'\''s up?'
+```
+
+This command prints "What's up?" using a more complex escape sequence—first, you close the single-quote string, then without a space you add a literal single-quote character with `\'`, then you start a single-quoted string again. In bash, when there are no spaces between two strings, the strings will be joined together.
+
+##### 5. The Search Path for Locating Programs to Run
 
 The shell uses the PATH variable to find programs to execute.
 
-**Example 1**: Add a directory to your PATH temporarily.
-
-```sh
-export PATH=$PATH:/home/user/bin
-```
-
-This command adds `/home/user/bin` to your PATH for the current session.
-
-**Example 2**: View your current PATH.
+**Example 1**: View your current PATH.
 
 ```sh
 echo $PATH
 ```
 
 This command displays the directories in your current PATH.
+
+**Example 2**: Add a directory to your PATH temporarily.
+
+```sh
+export PATH=$PATH:/home/user/bin
+```
+
+This command adds `/home/user/bin` to your PATH for the current session. It reads the PATH variable, then concatenates the string ":/home/user/bin" to the end, similarly to how we escaped a single quote.
 
 **Example 3**: Add a directory to your PATH permanently.
 
@@ -338,9 +344,9 @@ echo 'export PATH=$PATH:/home/user/bin' >> ~/.bashrc
 source ~/.bashrc
 ```
 
-This command appends the new PATH to your `.bashrc` file and reloads it.
+This command appends the new PATH to your `.bashrc` file (using redirection!). `.bashrc` is run every time a new shell is started. `source` reloads `.bashrc` for the current shell, using the new PATH for the current session.
 
-#### 6. Saving Changes to Your Shell Environment
+##### 6. Saving Changes to Your Shell Environment
 
 Save environment changes by adding them to your shell configuration file.
 
@@ -359,7 +365,7 @@ echo 'export EDITOR=nano' >> ~/.bashrc
 source ~/.bashrc
 ```
 
-This command sets the default text editor to `nano` permanently by adding it to your `.bashrc` file.
+This command sets the default text editor to `nano` by adding it to your `.bashrc` file.
 
 **Example 3**: Create an alias for a command.
 
@@ -374,33 +380,33 @@ This command creates an alias `ll` for `ls -l` and makes it permanent by adding 
 
 Mastering these shell techniques will boost your productivity and make your command line experience more enjoyable. Dive in and start practicing these essential commands!
 
-## 3. Efficient Command Recall and Editing
+### 3. Efficient Command Recall and Editing
 
 Tired of retyping long commands or fixing typos from scratch? The shell's got you covered with command history and command-line editing, designed to save you time and effort.
 
 Imagine you just ran a complex command:
 
 ```sh
-md5sum *.jpg | cut -c1-32 | sort | uniq -c | sort -nr
+md5sum *.jpg | cut -c 1-32 | sort | uniq -c | sort -nr
 ```
 
-Need to run it again? No need to retype it. The shell keeps a history of every command you run, so you can quickly recall and rerun them. This feature, known as **command history**, is a favorite among power users for speeding up their workflow and cutting down on repetitive typing.
+Need to run it again? No need to retype it. The shell keeps a history of every command you run, so you can quickly recall and rerun them. This feature, known as *command history*, is a favorite among power users for speeding up their workflow and cutting down on repetitive typing.
 
 Accidentally typed `*.jg` instead of `*.jpg`?
 
 ```sh
-md5sum *.jg | cut -c1-32 | sort | uniq -c | sort -nr
+md5sum *.jg | cut -c 1-32 | sort | uniq -c | sort -nr
 ```
 
-No problem! Instead of starting over, just edit the command directly. The shell’s **command-line editing** lets you fix typos on the fly, similar to using a text editor.
+No problem! Instead of starting over, just edit the command directly. The shell’s *command-line editing* lets you fix typos on the fly, similar to using a text editor.
 
 In this section, you'll discover how to leverage command history and command-line editing to enhance your efficiency and minimize errors.
 
-### Command History
+#### Command History
 
-Using the command history is a game-changer for efficiency. It saves you from retyping commands and lets you quickly fix typos. The shell keeps a record of every command you execute, allowing you to recall and reuse them with ease.
+The shell keeps a record of every command you execute, allowing you to recall and reuse them with ease.
 
-#### Viewing the Command History
+##### Viewing the Command History
 
 The `history` command lists all previously executed commands in your shell session. Each command is assigned an ID number for easy reference.
 
@@ -412,7 +418,7 @@ history
 
 **Output**:
 
-```
+```plain
 1000  cd $HOME/Music
 1001  ls
 1002  mv jazz.mp3 jazzy-song.mp3
@@ -433,13 +439,13 @@ history 3
 
 **Output**:
 
-```
+```plain
 1482  firefox https://google.com
 1483  history
 1484  history 3
 ```
 
-You can also filter the history to find specific commands using `grep`.
+You can also filter the history to find specific commands by piping to `grep`.
 
 **Example**:
 
@@ -449,7 +455,7 @@ history | grep "cd"
 
 **Output**:
 
-```
+```plain
 1000  cd $HOME/Music
 1092  cd ..
 1123  cd Finances
@@ -457,7 +463,7 @@ history | grep "cd"
 1481  cd
 ```
 
-#### Environment Variables for History
+##### Environment Variables for History
 
 Environment variables control how your shell handles command history. Key variables include `HISTSIZE`, `HISTFILESIZE`, and `HISTCONTROL`.
 
@@ -471,7 +477,7 @@ echo $HISTSIZE
 
 **Output**:
 
-```
+```plain
 500
 ```
 
@@ -491,7 +497,7 @@ echo $HISTFILESIZE
 
 **Output**:
 
-```
+```plain
 1000
 ```
 
@@ -525,11 +531,13 @@ export HISTIGNORE="ls:cd:pwd"
 
 This setting prevents `ls`, `cd`, and `pwd` commands from being saved in the history.
 
-### History Expansion
+Note that you should add these `export` commands to your `.bashrc` for them to take effect outside the current shell.
+
+#### History Expansion
 
 History expansion is a powerful shell feature that lets you reuse and modify previous commands quickly. It uses special expressions, typically starting with an exclamation mark (`!`), to reference commands from your history.
 
-#### Basic History Expansion
+##### Basic History Expansion
 
 You can repeat the last command with `!!`.
 
@@ -542,7 +550,7 @@ echo "Hello, World!"
 
 This reruns `echo "Hello, World!"`.
 
-#### Referencing Specific Commands
+##### Referencing Specific Commands
 
 To repeat a specific command from your history, use its ID number.
 
@@ -552,9 +560,9 @@ To repeat a specific command from your history, use its ID number.
 !1002
 ```
 
-This reruns the command with ID 1002 (`mv jazz.mp3 jazzy-song.mp3`).
+This reruns the command with ID 1002 (`mv jazz.mp3 jazzy-song.mp3` in our example).
 
-#### Using Substring Matches
+##### Using Substring Matches
 
 You can recall the most recent command that starts with a specific string.
 
@@ -576,7 +584,7 @@ To recall a command containing a specific substring anywhere, use `!?string?`.
 
 This reruns the most recent command containing `cd`.
 
-#### Modifying Previous Commands
+##### Modifying Previous Commands
 
 You can also modify the previous command before running it. For instance, use `^old^new` to replace the first occurrence of `old` with `new` in the last command.
 
@@ -589,7 +597,7 @@ echo "Hello, Alice"
 
 This changes `Alice` to `Bob`, rerunning the command as `echo "Hello, Bob"`.
 
-#### Using `!$` and `!*`
+##### Using `!$` and `!*`
 
 `!$` refers to the last argument of the previous command.
 
@@ -613,7 +621,7 @@ rm !*
 
 This removes both `file1.txt` and `file2.txt` from `/backup/`.
 
-#### Safety with `:p`
+##### Safety with `:p`
 
 To avoid mistakes, use `:p` to print the command without executing it.
 
@@ -625,11 +633,11 @@ To avoid mistakes, use `:p` to print the command without executing it.
 
 This prints the command with ID 1002 without running it. You can then confirm it before rerunning it.
 
-### Command-Line Editing
+#### Command-Line Editing
 
 Command-line editing is essential for fixing mistakes, modifying commands, and creating new commands efficiently. Here are some key techniques to help you edit commands quickly and effectively.
 
-#### Cursoring Within a Command
+##### Cursoring Within a Command
 
 Use the left and right arrow keys to move the cursor back and forth within a command line. This allows you to make changes without retyping the entire command.
 
@@ -640,12 +648,12 @@ To correct a typo, press the left arrow key to move the cursor to the mistake, f
 
 - `Left arrow`: Move left by one character
 - `Right arrow`: Move right by one character
-- `Ctrl + left arrow`: Move left by one word (for mac users try `Option + left arrow`)
-- `Ctrl + right arrow`: Move right by one word (for mac users try `Option + right arrow`)
+- `Ctrl + left arrow`: Move left by one word (on macOS, try `Option + left arrow`)
+- `Ctrl + right arrow`: Move right by one word (on macOS, try `Option + right arrow`)
 - `Ctrl + a`: Move to the beginning of the command line
 - `Ctrl + e`: Move to the end of the command line
 
-#### Incremental Search
+##### Incremental Search
 
 Press `Ctrl + r` to initiate an incremental search through your command history. This lets you search for a previously run command without scrolling through the entire history.
 
@@ -660,17 +668,17 @@ Press `Ctrl + r` and start typing part of a previous command. The shell will dis
 
 By mastering these command-line editing techniques, you can save time, reduce errors, and improve your efficiency when working in the shell.
 
-## 4. Navigating the Filesystem with Speed
+### 4. Navigating the Filesystem with Speed
 
-### Efficient Directory Navigation
+#### Efficient Directory Navigation
 
 Navigating the filesystem efficiently can significantly boost productivity. Here are some techniques:
 
-#### Using `cd`
+##### Using `cd`
 
 The `cd` (change directory) command is fundamental for navigation. Here are some practical tips:
 
-- **Jump to the Home Directory**:
+- Jump to the Home Directory:
 
   ```sh
   cd
@@ -678,7 +686,7 @@ The `cd` (change directory) command is fundamental for navigation. Here are some
 
   This command takes you directly to your home directory, regardless of your current location in the filesystem.
 
-- **Navigate Using Variables**:
+- Navigate Using Variables:
 
   ```sh
   cd $HOME/Work
@@ -687,57 +695,57 @@ The `cd` (change directory) command is fundamental for navigation. Here are some
 
   Both `$HOME` and `~` are shortcuts to your home directory, making it easy to navigate to subdirectories within it.
 
-- **Navigate to Another User's Home Directory**:
+- Navigate to Another User's Home Directory:
 
   ```sh
   cd ~username
   ```
 
-#### CDPATH
+##### CDPATH
 
 Set the CDPATH variable to define base directories for quick navigation.
 
-- **Setting CDPATH**:
+- Setting CDPATH:
 
   ```sh
   export CDPATH=$HOME:$HOME/Work
   ```
 
-- **Using CDPATH**:
+- Using CDPATH:
 
   ```sh
   cd Work
   ```
 
-### Organizing Your Home Directory
+#### Organizing Your Home Directory
 
 A well-organized home directory structure can streamline your workflow.
 
-#### Strategies for Fast Navigation
+##### Strategies for Fast Navigation
 
-- **Use Descriptive Names**:
+- Use Descriptive Names:
 
   ```sh
   mkdir -p $HOME/Projects/{Work,Personal,OpenSource}
   ```
 
-- **Create Aliases**:
+- Create Aliases:
 
   ```sh
   alias work="cd $HOME/Projects/Work"
   alias personal="cd $HOME/Projects/Personal"
   ```
 
-### Using pushd and popd for Directory Management
+#### Using pushd and popd for Directory Management
 
 The `pushd` and `popd` commands are used to manage a stack of directories, allowing for efficient navigation between them. Here's how they work:
 
-- **pushd**: Adds a directory to the stack and changes to that directory.
-- **popd**: Removes the top directory from the stack and changes to the new top directory.
+- `pushd`: Adds a directory to the stack and changes to that directory.
+- `popd`: Removes the top directory from the stack and changes to the new top directory.
 
-#### Basic Usage
+##### Basic Usage
 
-1. **Pushing a Directory**:
+1. Pushing a Directory:
 
    ```sh
    pushd /path/to/directory
@@ -745,7 +753,7 @@ The `pushd` and `popd` commands are used to manage a stack of directories, allow
 
    This command adds `/path/to/directory` to the stack and changes the current directory to it.
 
-2. **Popping a Directory**:
+2. Popping a Directory:
 
    ```sh
    popd
@@ -753,11 +761,11 @@ The `pushd` and `popd` commands are used to manage a stack of directories, allow
 
    This command removes the top directory from the stack and changes the current directory to the new top directory.
 
-#### Example Workflow
+##### Example Workflow
 
 Let's say you start in your home directory (`~/`) and execute the following commands:
 
-1. **Pushing Directories**:
+1. Pushing Directories:
 
    ```sh
    pushd /var/www/html
@@ -766,13 +774,13 @@ Let's say you start in your home directory (`~/`) and execute the following comm
 
    The stack now looks like this:
 
-   ```
+   ```plain
    ~/           (top)
    /etc/apache2
    /var/www/html
    ```
 
-2. **Popping Directories**:
+2. Popping Directories:
 
    ```sh
    popd
@@ -780,12 +788,12 @@ Let's say you start in your home directory (`~/`) and execute the following comm
 
    After this command, the stack looks like this:
 
-   ```
+   ```plain
    ~/           (top)
    /var/www/html
    ```
 
-3. **Navigating with Aliases**:
+3. Navigating with Aliases:
 
    You can create aliases for `pushd` and `popd` to make navigation easier:
 
@@ -798,8 +806,8 @@ Let's say you start in your home directory (`~/`) and execute the following comm
 
 These techniques will help you navigate your filesystem efficiently, allowing you to focus more on your tasks and less on typing long paths.
 
-## Conclusion
+### Conclusion
 
 Mastering the command line can transform your productivity and efficiency. We've covered combining commands with pipes, mastering shell techniques, recalling and editing commands efficiently, and navigating the filesystem with speed. Dive in, experiment, and watch your skills grow!
 
-For further reading, I highly recommend the book ["Efficient Linux at the Command Line"](https://www.oreilly.com/library/view/efficient-linux-at/9781098113391/) recommended by my colleague, Kevin Quaranta. It took my command-line skills to the next level and inspired many of the tips and tricks shared in this blog.
+For further reading, I highly recommend the book ["Efficient Linux at the Command Line"](https://www.oreilly.com/library/view/efficient-linux-at/9781098113391/). It took my command-line skills to the next level and inspired many of the tips and tricks shared in this blog.
