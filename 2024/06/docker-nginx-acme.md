@@ -42,7 +42,13 @@ curl https://get.acme.sh | sh -s email=jeffry@email.com
 ```
 Logout and login again to enable the acme.sh alias for the user. If acme.sh is not working, it's probably because you missed this step. If the alias is not enabled, the acme.sh script is not defined.
 
-### 3. Issue the certificate
+### 3. Set the CA
+Set Let's Encrypt as the default Certificate Authority
+```plain
+acme.sh --set-default-ca --server letsencrypt
+```
+
+### 4. Issue the certificate
 Now we'll proceed with issuing the certificate, a step that involves domain validation. Upon successful validation, the certificate will be issued. The "-d" flag specifies the domain, while "-w" designates the web root directory. This directory will be mounted as Nginx's web root in Docker, where acme.sh will write the validation file. Replace `jeffry.temphost.net` with your domain and `/home/jeffry/nginx-docker-acme/nginx/html` with your web root directory. Note that `/home/jeffry` is the directory where the code was downloaded, making it the working directory. Be sure to update it to reflect your own working directory.
 ```plain
 acme.sh --issue -d jeffry.temphost.net -w /home/jeffry/nginx-docker-acme/nginx/html  --keylength 4096
@@ -55,16 +61,47 @@ CONTAINER ID   IMAGE     COMMAND                  CREATED          STATUS       
 754c055d5b5e   nginx     "/docker-entrypoint...."   16 minutes ago   Up 16 minutes   0.0.0.0:80->80/tcp, :::80->80/tcp   nginx-docker-acme-web-1
 ```
 
-### 4. Install the certificate
+### 5. Install the certificate
 Uncomment the port 443 and SSL lines in nginx.conf and docker-compose.yaml. This will enable port 443 for Nginx and will make Docker exposing it to the host after we restart it through Docker Compose later. 
 
+**docker-compose.yaml**
+```plain
+services:
+  web:
+    image: nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./nginx/html:/usr/share/nginx/html
+      - ./nginx/ssl:/etc/nginx/ssl
+```
+
+**nginx/nginx.conf**
+```plain
+server {
+    listen 80;
+    listen 443 ssl;
+
+    server_name localhost;
+
+    ssl_certificate /etc/nginx/ssl/cert.pem;
+    ssl_certificate_key /etc/nginx/ssl/key.pem;
+
+    location / {
+        root /usr/share/nginx/html;
+        index index.html;
+    }
+}
+```
 Create the ssl directory for Nginx and install the certificates there. This directory will be mounted on Nginx in Docker. Use the container name obtained from the previous steps as the value for  --reloadcmd switch. This is crucial because it will be used to restart Nginx for  future certificates update.
 ```plain
 mkdir /home/jeffry/nginx-docker-acme/nginx/ssl
 acme.sh --install-cert -d jeffry.temphost.net  --key-file       /home/jeffry/nginx-docker-acme/nginx/ssl/key.pem   --fullchain-file /home/jeffry/nginx-docker-acme/nginx/ssl/cert.pem --reloadcmd "docker exec nginx-docker-acme-web-1 nginx -s reload"
 ```
 
-### 5. Restart the Nginx container
+### 6. Restart the Nginx container
 Refresh the Nginx container by stopping and starting it from Docker Compose. You should be able to access the nginx through HTTPS with the Let’s Encrypt certificates.
 ```plain
 docker compose down
@@ -72,14 +109,13 @@ docker compose up -d
 ```
 ![A browser showing Let's Encrypt cert](/blog/2024/06/docker-nginx-acme/browser.webp)
 
-### 6. Certificate Renewal Mechanism
-The certificate will be automatically renewed by the cron job installed by acme.sh. You can verify the cron job by running the following command `crontab -l` 
+### 7. Certificate Renewal Mechanism
+The certificate will be automatically renewed by the cron job installed by acme.sh. This ensures that the renewal process runs regularly and without manual intervention. You can verify the cron job by running the following command `crontab -l` 
 ```plain
 [jeffry@docker ~]$ crontab -l
 13 7 * * * "/home/jeffry/.acme.sh"/acme.sh --cron --home "/home/jeffry/.acme.sh" > /dev/null
 ```
-This ensures that the renewal process runs regularly and without manual intervention.
 
-Thank you for following this tutorial. Have a great day!
+Setting up Let's Encrypt SSL certificates for Nginx in a Docker environment using acme.sh is an easy process that enhances the security of your web applications. By leveraging acme.sh, you automate the certificate issuance and renewal process, ensuring your sites remain secure without manual intervention. Following the steps outlined in this tutorial, you now have a robust setup where Nginx serves your applications over HTTPS, backed by trusted SSL certificates from Let's Encrypt. Thank you for following this tutorial. Have a great day!
 
 
