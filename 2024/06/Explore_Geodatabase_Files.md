@@ -1,5 +1,5 @@
 ﻿# Extracting and Manipulating Geospatial Data with OGR2OGR, KML and python GDAL
-[pin_label_polygon.png]
+[pin_label_polygon.png][Google Earth own screenshot]
   
 
 
@@ -31,7 +31,7 @@ This will list all layers that are available in the dataset. Add one as a parame
 ogrinfo example.gdb.zip a_layer_name
 ```
 Example output using `-so` flag:
-[layer_info.png]
+[layer_info.png][edited terminal output own screenshot]
   
 
 
@@ -54,7 +54,7 @@ ogr2ogr -f "KML" example_output.kml example.gdb.zip layer_name
 This command will export into a KML file:
 - All the geometries in the layer, be it placemarks or polygons in our case.
 - All the other fields of information as extended data, which will show up for each feature as a balloon table when visualized in Google Earth.
-[full_label.png]
+[full_label.png][Google Earth own screenshot]
   
 
 
@@ -82,7 +82,7 @@ The layers had either points or polygons for geometries, and the polygons were i
 ```bash
 ogr2ogr -f "KML" output_polygons.kml example.gdb.zip -sql "SELECT OGR_GEOMETRY FROM Layer_Polygons"
 ```
-[polygons_only.png]
+[polygons_only.png][Google Earth own screenshot]
   
 
 
@@ -165,7 +165,7 @@ pip install gdal
 ```
 
 
-Then use the following Python script with any changes to the parameters gdb_file and layer_name to meet your data:
+Then use or modify the following Python script with any changes needed to meet your data to the parameters gdb_file, layer_name and the unique field chosen to structure the data, the code is explained in the comments:
 
 
 ```python
