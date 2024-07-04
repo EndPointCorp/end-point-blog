@@ -1,35 +1,43 @@
 ---
 author: "Kevin Campusano"
 title: "Uploading multiple files in a single request in an ASP.NET Core application"
-date: 2024-06-19
+github_issue_number: 2058
+featured:
+  image_url: /blog/2024/07/uploading-multiple-files-asp.net-core-application/wispy-clouds.webp
+description: How to add the capability of uploading several image files at once within a single HTML form submission to an ASP.NET Core app with server-rendered Razor Pages views.
+date: 2024-07-04
 tags:
 - dotnet
 - aspdotnet
 - csharp
 ---
 
-We recently worked on a project where we had to develop a web application for maintaining an e-commerce site's product catalog. Unsurprisingly, one of the features involved the management of product images. Specifically, we wanted to create a page where all the images of a given product were displayed and new ones could be uploaded.
+![Lines of wispy clouds move upward and to the left against a backdrop of light blue sky](/blog/2024/07/uploading-multiple-files-asp.net-core-application/wispy-clouds.webp)
 
-In addition to that, this wasn't a SPA. We weren't using a [JavaScript framework](https://developer.mozilla.org/en-US/docs/Learn/Tools_and_testing/Client-side_JavaScript_frameworks) and instead were relying on regular server-rendered views with [ASP.NET Razor Pages](https://learn.microsoft.com/en-us/aspnet/core/razor-pages/?view=aspnetcore-8.0&tabs=visual-studio). Even so, we wanted to create a user experience with a good balance of usability and development complexity. So, we decided to create the capability of uploading several image files at once within a single request. That is, within a single HTML form submission.
+<!-- Photo by Seth Jensen, 2024. -->
+
+We recently developed a web application for maintaining an ecommerce site's product catalog. Unsurprisingly, one of the features involved the management of product images. Specifically, we wanted to create a page where all the images of a given product were displayed and new ones could be uploaded.
+
+In addition to that, this wasn't a single-page application. We weren't using a JavaScript framework and instead were relying on regular server-rendered views with [ASP.NET Razor Pages](https://learn.microsoft.com/en-us/aspnet/core/razor-pages/?view=aspnetcore-8.0&tabs=visual-studio). Even so, we wanted to create a user experience with a good balance of usability and development complexity. So, we decided to create the capability of uploading several image files at once within a single request — that is, within a single HTML form submission.
 
 In this article, I'm going to describe the solution that we came up with in order to make this happen.
 
-To demonstrate the approach, I'm going to use a [sample ASP.NET Core solution](https://github.com/megakevin/end-point-blog-dotnet-8-demo) that I've been building out throughout several blog posts. Its main feature is calculating the value of used cars and offering quotes for them. The system stores all generated quotes as database records. Given this context, we're going to be adding the functionality to upload image files for a given quote.
+To demonstrate the approach, I'll use a [sample ASP.NET Core solution](https://github.com/megakevin/end-point-blog-dotnet-8-demo) that I've been building out throughout several blog posts. Its main feature is calculating the value of used cars and offering quotes for them. The system stores all generated quotes as database records. Given this context, we'll add the functionality to upload image files for a given quote.
 
 Let's get started.
 
-> Each section is accompanied by a given commit that includes all the changes discussed within them. So feel free to check those as well to see how the finished product takes shape step by step.
+> Each section is accompanied by a given commit that includes all the changes discussed within them. Feel free to check those as well to see how the finished product takes shape step by step.
 
-# Where to store the images
+### Where to store the images
 
 > Commit: [d65fd8](https://github.com/megakevin/end-point-blog-dotnet-8-demo/commit/d65fd8fa7f1b836c1245fb657aad5d11e667164e).
 
 
-The first decision that we have to make is where to store the image files. There are various options afforded to us by ASP.NET and our underlying [PostgreSQL](https://www.postgresql.org/) database, but here's how we're going to do it: We're going to store records in the database that represent the images associated with each quote. These records won't actually contain image binary data however, only references to them, in the form of their file names. The files themselves will be stored in the project's [`wwwroot`](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/static-files?view=aspnetcore-8.0) directory. That way they can be easily served to browsers, as everything inside that directory is accessible to clients.
+The first decision that we have to make is where to store the image files. There are various options afforded to us by ASP.NET and our underlying PostgreSQL database, but here's how we're going to do it: we'll store records in the database that represent the images associated with each quote. These records won't actually contain image binary data, however, only references to them in the form of their file names. The files themselves will be stored in the project's [`wwwroot`](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/static-files?view=aspnetcore-8.0) directory. That way they can be easily served to browsers, as everything inside that directory is accessible to clients.
 
-Starting off with a fresh new ASP.NET Core Web App (with Razor Pages) project, here's how that's done.
+Starting off with a fresh ASP.NET Core Web App (with Razor Pages) project, here's how that's done.
 
-First we have to make sure that the app has static file serving enabled. This is done with this call in the `Program.cs` file:
+First we have to make sure that the app has static file serving enabled. This is done with this function call in the `Program.cs` file:
 
 ```csharp
 // VehicleQuotes.AdminPortal/Program.cs
@@ -37,7 +45,7 @@ First we have to make sure that the app has static file serving enabled. This is
 app.UseStaticFiles();
 ```
 
-Next, we need to create the new database structure that will store the image records. In our app, we already have a [`Quote`](https://github.com/megakevin/end-point-blog-dotnet-8-demo/blob/main/VehicleQuotes.WebApi/Models/Quote.cs) entity, backed by a corresponding `quotes` table in the database. The plan is to create a new [`QuoteImage`](https://github.com/megakevin/end-point-blog-dotnet-8-demo/blob/main/VehicleQuotes.WebApi/Models/QuoteImage.cs) entity and update `Quote` to "have many" of them.
+Next, we need to create the new database structure that will store the image records. In our app, we already have a [`Quote`](https://github.com/megakevin/end-point-blog-dotnet-8-demo/blob/multiple-file-upload/VehicleQuotes.WebApi/Models/Quote.cs) entity, backed by a corresponding `quotes` table in the database. The plan is to create a new [`QuoteImage`](https://github.com/megakevin/end-point-blog-dotnet-8-demo/blob/multiple-file-upload/VehicleQuotes.WebApi/Models/QuoteImage.cs) entity and update `Quote` to "have many" of them.
 
 Here's what the new class looks like:
 
@@ -83,14 +91,14 @@ public class VehicleQuotesContext : IdentityUserContext<IdentityUser>
 
 Now all that's left is to create and run the migration with these commands:
 
-```sh
+```plain
 dotnet ef migrations add AddQuoteImages
 dotnet ef database update
 ```
 
 With that, our model and database are ready to store references to image files for the quotes on record.
 
-```
+```plain
 vehicle_quotes=# \d quote_images;
                           Table "public.quote_images"
   Column   |  Type   | Collation | Nullable |             Default
@@ -107,7 +115,7 @@ Foreign-key constraints:
 
 > Check out [this commit](https://github.com/megakevin/end-point-blog-dotnet-8-demo/commit/79bc161d0e58ae9afb4a07ce1ac8f9ad1779518d) to see the migration.
 
-# A Razor Page for uploading many files
+### A Razor Page for uploading many files
 
 > Commit: [feaa57](https://github.com/megakevin/end-point-blog-dotnet-8-demo/commit/feaa57ea3becd058a40ae85a2f8ead1ecbf54161).
 
@@ -216,15 +224,15 @@ public class EditModel : PageModel
 }
 ```
 
-Next we need to create the View. The job of this View is to define an HTML form that supports uploading many files. We have two options for this. The first option involves creating a form with a single file input element that uses the [`multiple` attribute](https://www.w3schools.com/tags/att_input_multiple.asp). That will allow the user to pick many files at the same time using their operating system's file picker dialog box. Something like this:
+Next we need to create the View. The job of this View is to define an HTML form that supports uploading many files. We have two options for this. The first option involves creating a form with a single file input element that uses the [`multiple` attribute](https://www.w3schools.com/tags/att_input_multiple.asp). That will allow the user to pick many files at the same time using their operating system's file picker dialog box, looking something like this:
 
-![The Windows file picker](uploading-multiple-files-in-a-single-request-in-an-asp.net-core-application/windows-file-picker.png)
+![The Windows system file picker dialog, with three out of four images selected in the open folder. To the right of the "file name" box, which displays the names of the three selected files, there is a dropdown menu reading "Image files (\*.jpe;\*.jpg,\*.jpeg,...)".](/blog/2024/07/uploading-multiple-files-asp.net-core-application/windows-file-picker.png)
 
-Option number two on the other hand, involves defining a form with multiple file input elements with each accepting one file. The number of `<input>` elements cannot be static however. We want to allow users to upload as many images as they want. So, we'd also need some JavaScript to dynamically add new `<input>` elements as the user picks more and more files.
+Option number two involves defining a form with multiple file input elements with each accepting one file. The number of `<input>` elements cannot be static however. We want to allow users to upload as many images as they want. So, we'd also need some JavaScript to dynamically add new `<input>` elements as the user picks more and more files.
 
 Both options are valid, and deciding on one over the other will depend on the user experience you're interested in creating and the amount of effort you can devote to it. For us, we went with option #2: A dynamic set of individual file input elements.
 
-Before making it fully dynamic though, let's go through the exercise of building it with a static number of `<input>` elements as a first step. I think that'll help understand the process better.
+Before making it fully dynamic, though, let's go through the exercise of building it with a static number of `<input>` elements as a first step. I think that'll help clarify the process better.
 
 So here's the `cshtml` file with three `<input type="file">` elements:
 
@@ -296,11 +304,11 @@ So here's the `cshtml` file with three `<input type="file">` elements:
 </div>
 ```
 
-This is how we design our form so that when submitted, ASP.NET knows that it has to populate `ImageFiles` (the collection of `IFormFile`s that we have defined in the `PageModel`) with the uploaded files. All we have to do is make sure that all the input elements share the same `name` attribute, and that said name is the same as the target property. `ImageFiles` in this case. The elements' `id` attribute is actually superfluous.
+This is how we design our form so that when submitted, ASP.NET knows that it has to populate `ImageFiles` (the collection of `IFormFile`s that we have defined in the `PageModel`) with the uploaded files. All we have to do is make sure that all the input elements share the same `name` attribute, and that said `name` is the same as the target property. `ImageFiles` in this case. The elements' `id` attribute is actually superfluous.
 
 > If you're following along and want to run this next part on your environment, you'll need a quote record to be able to bring it up in the page we've been building and add images to it. You could do so by running the `VehicleQuotes.WebApi` project with `dotnet run` and POST to it using `curl`:
 >
->```sh
+>```plain
 >curl --location 'http://localhost:8001/api/Quotes' \
 >--header 'Content-Type: application/json' \
 >--data '{
@@ -320,6 +328,7 @@ This is how we design our form so that when submitted, ASP.NET knows that it has
 >  "hasTransmission": true,
 >  "hasCompleteInterior": true
 >}'
+>```
 >
 > Then connect to the database however you like to and run the following query to learn its `id`:
 >
@@ -331,18 +340,18 @@ This is how we design our form so that when submitted, ASP.NET knows that it has
 
 At this point, the feature should work. If you run the app with `dotnet run`, and navigate to the page we've been building at `http://localhost:{YOUR_PORT}/Quotes/Edit/{QUOTE_ID}`, you should see something like this:
 
-![Quote edit page with three file input elements](uploading-multiple-files-in-a-single-request-in-an-asp.net-core-application/file-uploads-v1.png)
+![The VehicleQuotes.AdminPortal add images webpage. At the top is a navigation bar with that title, and buttons reading "Home", "Quotes", and "Privacy". Below, in the main page, the title reads "Edit", with a subtitle reading "Add Images". Below a thin line are three file input elements reading "Browse..." and having a box reading "No file selected." to the right of each browse button. Below them is a blue "save" button. Below is a link reading "Back to List".](/blog/2024/07/uploading-multiple-files-asp.net-core-application/file-uploads-v1.png)
 
 Pick three image files, hit the blue "Save" button and the files should be uploaded into the `wwwroot/uploads` diretory...
 
-```sh
+```plain
 $ ls wwwroot/uploads
 sqyjb1ui.qnv.png  x1c4s4fj.rqb.png  zjaym20f.wcx.png
 ```
 
 ...and three new records should be created on the `quote_images` table:
 
-```
+```plain
 vehicle_quotes=# select * from quote_images;
  id |    file_name     | quote_id
 ----+------------------+----------
@@ -352,7 +361,7 @@ vehicle_quotes=# select * from quote_images;
 (3 rows)
 ```
 
-# Uploading any number of files
+### Uploading any number of files
 
 > Commit: [5aaff6](https://github.com/megakevin/end-point-blog-dotnet-8-demo/commit/5aaff60c0a44173f97220ac0f287338ad6783bb6).
 
@@ -463,15 +472,15 @@ So the overall strategy is something like this: At page load, we start with an e
 
 So the page starts looking like this:
 
-![The empty file selection form](uploading-multiple-files-in-a-single-request-in-an-asp.net-core-application/file-uploads-v2-0.png)
+![The VehicleQuotes.AdminPortal webpage. There is now only one empty file selection form.](/blog/2024/07/uploading-multiple-files-asp.net-core-application/file-uploads-v2-0.png)
 
 If we pick a file, the page turns into this:
 
-![The file selection form with one file selected](uploading-multiple-files-in-a-single-request-in-an-asp.net-core-application/file-uploads-v2-1.png)
+![The VehicleQuotes.AdminPortal webpage. One file selection form has "diamond.png" selected, and there is now one other form with no file selected.](/blog/2024/07/uploading-multiple-files-asp.net-core-application/file-uploads-v2-1.png)
 
 Pick another, and now it looks like this:
 
-![The file selection form with two files selected](uploading-multiple-files-in-a-single-request-in-an-asp.net-core-application/file-uploads-v2-3.png)
+![The VehicleQuotes.AdminPortal webpage. One file selection form has "diamond.png" selected, the second has "rectange.png" selected, and there is now one third form with no file selected.](/blog/2024/07/uploading-multiple-files-asp.net-core-application/file-uploads-v2-3.png)
 
 And so on.
 
@@ -479,7 +488,7 @@ Now users can pick as many files as they want, hit the "Save" button, and everyt
 
 And with that, the initial promise of this blog post is fulfilled. However, there are a few more improvements and features that we can add.
 
-# Validating the uploaded images
+### Validating the uploaded images
 
 > Commit: [06b547](https://github.com/megakevin/end-point-blog-dotnet-8-demo/commit/06b547478cb2d45ffd9ad2e4aee8b102a8911ac8).
 
@@ -674,11 +683,11 @@ We probably also want to add a validation summary in the View so that an error m
 
 Attempting to upload invalid files produces something like this:
 
-![A validation error](uploading-multiple-files-in-a-single-request-in-an-asp.net-core-application/validation-error.png)
+![The VehicleQuotes.AdminPortal webpage. Above the file selection input is a red bulleted message reading "Only the following file extensions are allowed: .png, .jpg, .jpeg, .gif, .bmp."](/blog/2024/07/uploading-multiple-files-asp.net-core-application/validation-error.png)
 
 There are more complex validations that can be done. Check out [ASP.NET's official docs](https://learn.microsoft.com/en-us/aspnet/core/mvc/models/file-uploads?view=aspnetcore-8.0#validation) to learn more.
 
-# Displaying the images
+### Displaying the images
 
 > Commit: [d15d35](https://github.com/megakevin/end-point-blog-dotnet-8-demo/commit/d15d35f24baee75fd65f28b20733089d6671822e)
 
@@ -774,9 +783,9 @@ Finally, in the View, we update the HTML template to iterate over the loaded quo
 
 The page should now look something like this:
 
-![The existing images being displayed on screen](uploading-multiple-files-in-a-single-request-in-an-asp.net-core-application/image-display.png)
+![The VehicleQuotes.AdminPortal webpage. There is now a section reading "Existing images". Below, three images are displayed (a diamond, triangle, and rectangle). Below is the Add images section.](/blog/2024/07/uploading-multiple-files-asp.net-core-application/image-display.png)
 
-# Deleting the images
+### Deleting the images
 
 > Commit: [2526f2](https://github.com/megakevin/end-point-blog-dotnet-8-demo/commit/2526f25608ea54a831e6290736d4cd05f6e11fba).
 
@@ -851,6 +860,6 @@ private void DeleteImageFile(string fileName)
 
 With that, each image rendered in the page should now have a working "Delete" button that looks like this:
 
-![The image delete button](uploading-multiple-files-in-a-single-request-in-an-asp.net-core-application/image-delete.png)
+![The diamond image, with a red button reading "delete" below.](/blog/2024/07/uploading-multiple-files-asp.net-core-application/image-delete.png)
 
 Alright! Now we have a fully functional image handling page where we can view, add and remove images associated with a particular entity in our system. The neat part is that users can select as many files as they want and upload them all at the same time within a single form submission. We did all this with Razor Pages, using framework features, and a little bit of JavaScript.
