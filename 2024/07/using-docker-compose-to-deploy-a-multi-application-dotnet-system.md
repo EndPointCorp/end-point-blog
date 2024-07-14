@@ -5,7 +5,7 @@ github_issue_number: 2064
 description: A comprehensive guide to deploying a multi-application .NET system which is easily replicable for multiple environments.
 featured:
   image_url: /blog/2024/07/using-docker-compose-to-deploy-a-multi-application-dotnet-system/fenced-garden.webp
-date: 2024-07-01
+date: 2024-07-13
 tags:
 - dotnet
 - aspdotnet
@@ -36,7 +36,7 @@ In .NET terms, our demo code base is organized as [a solution with multiple proj
 2. The admin portal.
 3. The web API.
 
-In the world of [Docker](https://www.docker.com/), that would translate into three separate [containers](https://www.docker.com/resources/what-container/). Considering [Docker Compose](https://docs.docker.com/compose/), that means three separate [services](https://docs.docker.com/compose/compose-file/05-services/).
+In the world of [Docker](https://www.docker.com/), that would translate into three separate [containers](https://www.docker.com/resources/what-container/). Considering Docker Compose, that means three separate [services](https://docs.docker.com/compose/compose-file/05-services/).
 
 Throughout this post, we will, step by step, build a [`compose.yaml`](https://docs.docker.com/compose/compose-application-model/), a set of [`Dockerfiles`](https://docs.docker.com/reference/dockerfile/), and other configuration files which can be used with Docker Compose to deploy our system.
 
@@ -68,8 +68,8 @@ Pretty straightforward. The command is calling `git submodule add` and passing i
 
 ```toml
 [submodule "source"]
-	path = source
-	url = git@github.com:megakevin/end-point-blog-dotnet-8-demo.git
+  path = source
+  url = git@github.com:megakevin/end-point-blog-dotnet-8-demo.git
 ```
 
 As you can see, this file contains the information Git needs to know that this repo has a submodule, where it is, and where it comes from.
