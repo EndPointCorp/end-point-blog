@@ -1,6 +1,10 @@
 ---
-author: "Kevin Campusano & Juan Pablo Ventoso"
+author: "Kevin Campusano"
 title: "Using Docker Compose to Deploy a Multi-Application .NET System"
+github_issue_number: 2064
+description: A comprehensive guide to deploying a multi-application .NET system which is easily replicable for multiple environments.
+featured:
+  image_url: /blog/2024/07/using-docker-compose-to-deploy-a-multi-application-dotnet-system/fenced-garden.webp
 date: 2024-07-01
 tags:
 - dotnet
@@ -10,17 +14,23 @@ tags:
 - nginx
 ---
 
-We recently developed a system that involved several runtime components. It was an eCommerce site that included a database, a web API, an admin control panel web app, and a frontend [SPA](https://developer.mozilla.org/en-US/docs/Glossary/SPA).
+![The bottom of the image is spanned by a white fence, behind which a lush green garden and house sit. Above is a moody, cloudy sky. There are prominent pink flowers in the center, while there are white and dark purple flowers sprinkled through the rest of the garden.](/blog/2024/07/using-docker-compose-to-deploy-a-multi-application-dotnet-system/fenced-garden.webp)
 
-There are many ways to deploy such a system. For us, we wanted the infrastructure to be easily replicable for multiple, slightly differently configured environments. To be able to have, for example, a production and a staging version that could be deployed easily, with minimal configuration changes. We also wanted the infrastructure to be captured in files and version controlled, to further help replicability and maintainability.
+<!-- Photo by Seth Jensen, 2024. -->
 
-With all that in mind, [Docker Compose](https://docs.docker.com/compose/) seemed like an ideal option. We could author a series of configuration files, parameterize environment specific changes and, with a single command, we could spin up a whole environment to run the various applications within the system.
+*This post was co-authored by [Juan Pablo Ventoso](/team/juan-pablo-ventoso/)*
+
+We recently developed a system that involved several runtime components. It was an ecommerce site that included a database, a web API, an admin control panel web app, and a frontend [SPA](https://developer.mozilla.org/en-US/docs/Glossary/SPA).
+
+There are many ways to deploy such a system. For us, we wanted the infrastructure to be easily replicable for multiple environments with slightly different configurations. We wanted to be able to have, for example, a production and a staging version that could be deployed easily, with minimal configuration changes. We also wanted the infrastructure to be captured in files and version controlled, to further help replicability and maintainability.
+
+With all that in mind, [Docker Compose](https://docs.docker.com/compose/) seemed like an ideal option. We could author a series of configuration files, parameterize environment-specific changes and, with a single command, we could spin up a whole environment to run the various applications within the system.
 
 In this blog post, I'll explain how we did that using a demo [.NET](https://dotnet.microsoft.com/en-us/) code base that has a similar set of components. Let's get started.
 
-# Getting familiar with the demo project
+### Getting familiar with the demo project
 
-In .NET terms, our demo code base is organized as [a solution with multiple projects](https://learn.microsoft.com/en-us/visualstudio/ide/solutions-and-projects-in-visual-studio?view=vs-2022). Two of those projects are [ASP.NET web applications](https://dotnet.microsoft.com/en-us/apps/aspnet/web-apps): a [Razor Pages](https://learn.microsoft.com/en-us/aspnet/core/razor-pages/?view=aspnetcore-8.0&tabs=visual-studio) web app (the admin portal) and an [MVC Web API](https://learn.microsoft.com/en-us/aspnet/core/tutorials/first-web-api?view=aspnetcore-8.0&tabs=visual-studio). The rest are [class libraries](https://learn.microsoft.com/en-us/dotnet/standard/class-libraries) that define the core domain logic, tests, and other utilities. For deployment purposes, the web application projects are the interesting ones, as those are the ones that produce executables that actually need to run as processes in the server. So, including the database, our demo system has three runtime components:
+In .NET terms, our demo code base is organized as [a solution with multiple projects](https://learn.microsoft.com/en-us/visualstudio/ide/solutions-and-projects-in-visual-studio?view=vs-2022). Two of those projects are [ASP.NET web applications](https://dotnet.microsoft.com/en-us/apps/aspnet/web-apps): a [Razor Pages](https://learn.microsoft.com/en-us/aspnet/core/razor-pages/?view=aspnetcore-8.0&tabs=visual-studio) web app (the admin portal), and an [MVC Web API](https://learn.microsoft.com/en-us/aspnet/core/tutorials/first-web-api?view=aspnetcore-8.0&tabs=visual-studio). The rest are [class libraries](https://learn.microsoft.com/en-us/dotnet/standard/class-libraries) that define the core domain logic, tests, and other utilities. For deployment purposes, the web application projects are the interesting ones, as they produce executables that actually need to run as processes in the server. So, including the database, our demo system has three runtime components:
 
 1. The database.
 2. The admin portal.
@@ -32,13 +42,13 @@ Throughout this post, we will, step by step, build a [`compose.yaml`](https://do
 
 > You can find the system's source code [on GitHub](https://github.com/megakevin/end-point-blog-dotnet-8-demo). The final version of the deployment files we'll build in this article are also [on GitHub](https://github.com/megakevin/end-point-blog-dotnet-docker-deploy).
 
-# Including the code base repository as a git submodule
+### Including the code base repository as a Git submodule
 
-With that, an intention for the organization of our deployment configuration files and our code base starts to become apparent. The deployment files will live in their own repository. They do need access to the system's source code though, in order to build and run the apps. And that source code lives in its own repo. So, the deployment repository will include a `source` subdirectory, which will be a [git](https://git-scm.com/) [submodule](https://git-scm.com/book/en/v2/Git-Tools-Submodules) that points to the repository where the system's source code is stored.
+Considering the separation of our components, the reasons for the organization of our deployment configuration files and our code base starts to become apparent. The deployment files will live in their own repository. They do need access to the system's source code, though, in order to build and run the apps. And that source code lives in its own repo. So, the deployment repository will include a `source` subdirectory, which will be a Git [submodule](https://git-scm.com/book/en/v2/Git-Tools-Submodules) that points to the repository where the system's source code is stored.
 
 Here's the file structure that we're aiming for:
 
-```
+```plain
 .
 ├── compose.yaml
 ├── the various dockerfiles...
@@ -48,25 +58,25 @@ Here's the file structure that we're aiming for:
 └── any other files and directories...
 ```
 
-Including a git repository inside another git repository as a submodule is easy. In our case, we already have the parent git repo, which is the one where the deployment config files live. To add the source code repo to it, we run a command like this:
+Including a Git repository inside another Git repository as a submodule is easy. In our case, we already have the parent Git repo, which is the one where the deployment config files live. To add the source code repo to it, we run a command like this:
 
-```sh
+```plain
 git submodule add git@github.com:megakevin/end-point-blog-dotnet-8-demo.git source
 ```
 
-Pretty straightforward. The command is calling `git submodule add` and passing it the location of the repo on github and the directory in which to [clone](https://git-scm.com/docs/git-clone) it. That's it. As a result of that command, git will have created a new `source` directory with the contents of the `end-point-blog-dotnet-8-demo` repository, and a `.gitmodules` file with contents like these:
+Pretty straightforward. The command is calling `git submodule add` and passing it the location of the repo on GitHub and the directory in which to [clone](https://git-scm.com/docs/git-clone) it. That's it. As a result of that command, Git will have created a new `source` directory with the contents of the `end-point-blog-dotnet-8-demo` repository, and a `.gitmodules` file with contents like these:
 
-```sh
+```toml
 [submodule "source"]
 	path = source
 	url = git@github.com:megakevin/end-point-blog-dotnet-8-demo.git
 ```
 
-As you can see, this file contains the information git needs to know that this repo has a submodule, where it is, and where it comes from.
+As you can see, this file contains the information Git needs to know that this repo has a submodule, where it is, and where it comes from.
 
-# Deploying the database
+### Deploying the database
 
-Let's begin actually building out our system components with the database. Our apps use a [PostgreSQL](https://www.postgresql.org/) database to store information. Luckily for us, getting a PostgreSQL database up and running with Docker Compose is easy. All it takes is a `compose.yaml` file like this:
+Let's begin actually building out our system components with the database. Our apps use a PostgreSQL database to store information. Luckily for us, getting a PostgreSQL database up and running with Docker Compose is easy. All it takes is a `compose.yaml` file like this:
 
 ```yaml
 # ./compose.yaml
@@ -76,7 +86,7 @@ services:
   # hostname when they need to interact with it.
   db:
     # The container will be based in the "16.3-bookworm" release of the public
-    # PostgreSQL image that's available in dockerhub.
+    # PostgreSQL image that's available in Docker Hub
     image: postgres:16.3-bookworm
     # Always restart the container automatically if it ever closes for whatever
     # reason.
@@ -100,11 +110,11 @@ volumes:
   db-postgres-data:
 ```
 
-This is a very standard definition of a Docker Compose service. We called it `db`, made it available via the standard PostgreSQL port (`5432`), and set some basic configurations for it. Check out the [PostgreSQL image's page in dockerhub](https://hub.docker.com/_/postgres) to see more complicated use cases.
+This is a very standard definition of a Docker Compose service. We called it `db`, made it available via the standard PostgreSQL port (`5432`), and set some basic configurations for it. Check out the [PostgreSQL image's page in Docker Hub](https://hub.docker.com/_/postgres) to see more complicated use cases.
 
-To bring it to life, we can run `docker compose up -d`, in the directory where we've located the `compose.yaml` file. Running that command will prompt Docker to download the PostgreSQL image, build a container with it and run it. It'll also create the `db-postgres-data` [volume](https://docs.docker.com/storage/volumes/) we configured and a "network" that all the services we put in the `compose.yaml` file will be part of. Thanks to the `-d` option, it will run in daemon mode. That is, as a background process. So as soon as it's done, it gives us control of our terminal back:
+To bring it to life, we can run `docker compose up -d` in the directory where we've located the `compose.yaml` file. Running that command will prompt Docker to download the PostgreSQL image, build a container with it, and run it. It'll also create the `db-postgres-data` [volume](https://docs.docker.com/storage/volumes/) we configured and a "network" that all the services we put in the `compose.yaml` file will be part of. Thanks to the `-d` option, it will run in daemon mode; that is, as a background process. So as soon as it's done, it gives us control of our terminal back:
 
-```sh
+```plain
 $ docker compose up -d
 
 ...
@@ -117,7 +127,7 @@ $ docker compose up -d
 
 Now that we have a database up and running, we have a couple of options for connecting to it. If we have the `psql` command line client installed in our machine, we can connect to it directly:
 
-```sh
+```plain
 $ psql -h localhost -d vehicle_quotes -U vehicle_quotes -W
 Password:
 psql (16.3 (Ubuntu 16.3-0ubuntu0.24.04.1))
@@ -126,9 +136,9 @@ Type "help" for help.
 vehicle_quotes=#
 ```
 
-If not, we could first connect to the container, and then open `psql` form there:
+If not, we could first connect to the container, and then open `psql` from there:
 
-```sh
+```plain
 $ docker compose exec db bash
 root@edc038da3aa4:/# psql -h localhost -d vehicle_quotes -U vehicle_quotes -W
 Password:
@@ -142,11 +152,11 @@ Notice how we pass `db` and `bash` as parameters to the `docker compose exec` co
 
 Nice. That's all it takes to set up the database. Now on to the applications.
 
-# Deploying the admin portal web app
+### Deploying the admin portal web app
 
 Like I mentioned before, our code base contains an admin portal web application. In order to deploy it, we need first to define an [image](https://docs.docker.com/guides/docker-concepts/the-basics/what-is-an-image/), which we'll do with a Dockerfile, and then add the configuration to run a [container](https://docs.docker.com/guides/docker-concepts/the-basics/what-is-a-container/) based on that image using Docker Compose.
 
-The image is a self-contained package that includes all the software that the application needs to run. It's like an executable program. One that can be run by Docker, instead of directly by the operating system. In order to build images, we use Dockerfiles. For this ASP.NET app, the Dockerfile will perform two main tasks: Specify how to build the app, and how to run it. Here's what a Dockerfile for the admin portal project could look like:
+The image is a self-contained package that includes all the software that the application needs to run. It's like an executable program. One that can be run by Docker, instead of directly by the operating system. In order to build images, we use Dockerfiles. For this ASP.NET app, the Dockerfile will perform two main tasks: Specify how to build the app and how to run it. Here's what a Dockerfile for the admin portal project could look like:
 
 ```dockerfile
 # ./Dockerfile.AdminPortal
@@ -253,7 +263,7 @@ services:
 
 With this, we're ready to see the application running. Run `docker compose up -d` again to update the infrastructure and include the new service:
 
-```sh
+```plain
 $ docker compose up -d
 
 ...
@@ -263,17 +273,17 @@ $ docker compose up -d
  ✔ Container end-point-blog-dotnet-docker-deploy-admin-portal-1  Started   0.3s
 ```
 
-After a while downloading and building, navigating to `http://localhost:8001` should show this:
+After a while of downloading and building, navigating to `http://localhost:8001` should show this:
 
-![The Admin Portal homepage.](using-docker-compose-to-deploy-a-multi-application-.net-system/admin-portal-homepage.png)
+![The Admin Portal homepage, shown in a browser at http://localhost:8001. An app bar reads "VehicleQuotes.AdminPortal", with links reading "Quotes" and "Privacy". A generic "Welcome" message is displayed.](/blog/2024/07/using-docker-compose-to-deploy-a-multi-application-dotnet-system/admin-portal-homepage.webp)
 
-# Adding a maintenance container
+### Adding a maintenance container
 
 At this point, we have a problem though. If we try clicking on the "Quotes" link in the top navigation bar, we see this:
 
-![An error due to migrations not being applied.](using-docker-compose-to-deploy-a-multi-application-.net-system/migrations-error.png)
+![The admin portal quotes page displaying an error: "A database operation failed while processing the request."](/blog/2024/07/using-docker-compose-to-deploy-a-multi-application-dotnet-system/migrations-error.webp)
 
-We need to run the [database migrations](https://learn.microsoft.com/en-us/ef/core/managing-schemas/migrations/?tabs=dotnet-core-cli). In order to do that, we need an environment that has all of our source code and the full .NET SDK with the [Entity Framework Core](https://learn.microsoft.com/en-us/ef/core/) [command line tool](https://learn.microsoft.com/en-us/ef/core/cli/dotnet). That is, an environment that can build the app and run the dotnet CLI. While we could install all that in the host machine and run our migrations that way; we could also encapsulate all that in a container. That way we get the benefits of portability, etc.
+We need to run the [database migrations](https://learn.microsoft.com/en-us/ef/core/managing-schemas/migrations/?tabs=dotnet-core-cli). In order to do that, we need an environment that has all of our source code and the full .NET SDK with the [Entity Framework Core](https://learn.microsoft.com/en-us/ef/core/) [command line tool](https://learn.microsoft.com/en-us/ef/core/cli/dotnet). That is, an environment that can build the app and run the .NET CLI. While we could install that in the host machine and run our migrations that way; we could also encapsulate it in a container. That way we get the benefits of portability, etc.
 
 Of course, that maintenance container needs an image. And images are defined in Dockerfiles. Here's a Dockerfile that would serve our purpose:
 
@@ -349,7 +359,7 @@ services:
 
 With these additions, running `docker compose up -d` again will result in the new maintenance container being created:
 
-```sh
+```plain
 $ docker compose up -d
 
 ...
@@ -362,14 +372,14 @@ $ docker compose up -d
 
 Now we can finally connect to the brand new maintenance container:
 
-```sh
+```plain
 $ docker compose exec maintenance bash
 root@14613bcf1756:/source#
 ```
 
 Then inspect the status of the migrations:
 
-```sh
+```plain
 root@14613bcf1756:/source# dotnet ef migrations list -s ./VehicleQuotes.AdminPortal -p ./VehicleQuotes.Core
 Build started...
 Build succeeded.
@@ -393,7 +403,7 @@ root@14613bcf1756:/source#
 
 And run them:
 
-```sh
+```plain
 root@14613bcf1756:/source# dotnet ef database update -s ./VehicleQuotes.AdminPortal -p ./VehicleQuotes.Core
 Build started...
 Build succeeded.
@@ -406,11 +416,11 @@ root@14613bcf1756:/source#
 
 With that done, we can now go to the browser again and bring up the `http://localhost:8001/Quotes` page. Which now looks like this:
 
-![The quotes page is now working.](using-docker-compose-to-deploy-a-multi-application-.net-system/quotes-page.png)
+![The admin portal quotes page is now working. It has an "Index" title, then an empty table with columns: "Year, Make, Model, ItMoves, HasKey, HasTitle, RequiresPickup, OfferedQuote, CreatedAt".](/blog/2024/07/using-docker-compose-to-deploy-a-multi-application-dotnet-system/quotes-page.webp)
 
-An empty, but working, page for listing database records!
+An empty—but working—page for listing database records!
 
-# Deploying the web API
+### Deploying the web API
 
 Now let's look at how to deploy another of our system's runtime components: the web API. The process of setting this up is nearly identical to the admin portal's. After all, both are ASP.NET Core web applications. Really, the only difference is that one serves HTML and the other serves JSON. To the runtime, they are the same type of thing. And sure enough, here's the web API's Dockerfile:
 
@@ -489,9 +499,9 @@ services:
 #...
 ```
 
-The same overall setup as the admin portal. This time we've chosen a different port, configured a different set of [environment variables](https://en.wikipedia.org/wiki/Environment_variable), and run the web API's DLL. Other than that, it's the same. Now `docker compose up -d` can be run again, and after a while:
+It has the same overall setup as the admin portal. This time we've chosen a different port, configured a different set of [environment variables](https://en.wikipedia.org/wiki/Environment_variable), and run the web API's DLL. Other than that, it's the same. Now `docker compose up -d` can be run again, and after a while you should see:
 
-```sh
+```plain
 $ docker compose up -d
 
 ...
@@ -505,27 +515,27 @@ $ docker compose up -d
 
 The web API has a [Swagger UI](https://swagger.io/tools/swagger-ui/) that should now be accessible at `http://localhost:8002/swagger`:
 
-![The web API.](using-docker-compose-to-deploy-a-multi-application-.net-system/web-api.png)
+![The web API. In the Swagger app bar is a dropdown labeled "select a definition". In the main page are dropdowns for "BodyTypes" and "Makes". Under the first is an expandable list item reading "GET /api/BodyTypes". Under Makes are three expandable items reading "GET /api/Makes," "POST /api/Makes", and "GET /api/Makes/{id}".](/blog/2024/07/using-docker-compose-to-deploy-a-multi-application-dotnet-system/web-api.webp)
 
-Excellent. We now have a very basic implementation of our deployment strategy. We have managed to build and run all the apps we need. And we also have a special container with a full development environment that we can use to perform a number of maintenance tasks. However, there are various issues that we still need to address. Let's do that next.
+Excellent. We now have a very basic implementation of our deployment strategy. We have managed to build and run all the apps we need. We also have a special container with a full development environment that we can use to perform a number of maintenance tasks. However, there are various issues that we still need to address. Let's do that next.
 
-# Looking at the logs
+### Looking at the logs
 
-Before that though, let's look at the logs being produced by the applications that have been deployed. You can see the logs for the entire system with:
+Before that, though, let's look at the logs being produced by the applications that have been deployed. You can see the logs for the entire system with:
 
-```sh
+```plain
 docker compose logs -f
 ```
 
-That command produces a single log stream with messages from all the services. For looking at the logs of a particular service, all we need to do is specify the service name. For example `docker compose logs db -f` or `docker compose logs web-api -f`.
+That command produces a single log stream with messages from all the services. To look at the logs of a particular service, all we need to do is specify the service name. For example `docker compose logs db -f` or `docker compose logs web-api -f`.
 
 That's all there is to it as far as logs go. However, if we look at the logs for our current deployment, they reveal the first issue that we need to attend to...
 
-# Persisting data protection keys
+### Persisting data protection keys
 
 If we look at the logs of the admin portal or web API containers, we see messages like this:
 
-```sh
+```plain
 web-api-1       | warn: Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository[60]
 web-api-1       |       Storing keys in a directory '/root/.aspnet/DataProtection-Keys' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed. For more information go to https://aka.ms/aspnet/dataprotectionwarning
 ```
@@ -534,7 +544,7 @@ As it turns out, the [data protection subsystem](https://learn.microsoft.com/en-
 
 First we create a `data-protection-keys` directory in our host machine. And inside it, we create one directory for each of the ASP.NET Core apps. It ends up looking like this:
 
-```sh
+```plain
 data-protection-keys/
 ├── admin-portal
 └── web-api
@@ -606,15 +616,15 @@ builder.Services.AddDataProtection().PersistKeysToFileSystem(
 );
 ```
 
-There isn't much to comment about the code really. Just some .NET boilerplate to configure that specific detail of the data protection services. It also makes sure that the values are always present. Errors are raised if not.
+There isn't much to comment about the code really. It's just some .NET boilerplate to configure that specific detail of the data protection services. It also makes sure that the values are always present. Errors are raised if not.
 
 Now that everything is wired up like that, we can hit `docker compose up -d --build` and the warning message should be gone if we look at the logs.
 
-Noticed how we used the `--build` option this time. That tells docker that it needs to rebuild the images from scratch. Image rebuild means running through the Dockerfiles again. And that means running `dotnet build` again. In short, we have to do this to make sure that the code changes that we did are included in the new builds.
+Notice how we used the `--build` option this time. That tells Docker that it needs to rebuild the images from scratch. Image rebuild means running through the Dockerfiles again. And that means running `dotnet build` again. In short, we have to do this to make sure that the code changes that we made are included in the new builds.
 
-# Storing sensitive information with secrets
+### Storing sensitive information with secrets
 
-Another issue that we need to address is how to handle sensitive information like passwords in our config files. So far we've been putting them in plain text in `compose.yaml`. The problem with this is that this file is meant to be pushed to version control and we don't want passwords in there. The spread of sensitive information like that should more controlled. Ideally, we'd store them in files that never leave the server where the system is deployed.
+Another issue that we need to address is how to handle sensitive information like passwords in our config files. So far we've been putting them in plain text in `compose.yaml`. The problem with this is that this file is meant to be pushed to version control and we don't want passwords in there. The spread of sensitive information like that should be more controlled. Ideally, we'd store them in files that never leave the server where the system is deployed.
 
 Docker Compose has a feature that works just like that. Through [Docker Compose secrets](https://docs.docker.com/compose/use-secrets/), we can create text files outside of the `compose.yaml` and put the database password and connection string in them. These files will live only in the server, never uploaded to version control.
 
@@ -622,19 +632,19 @@ Let's create a new `secrets` directory and create these two files within it:
 
 * `./secrets/vehicle-quotes-db-connection-string.txt`:
 
-```
-Host=db;Database=vehicle_quotes;Username=vehicle_quotes;Password=password
-```
+    ```plain
+    Host=db;Database=vehicle_quotes;Username=vehicle_quotes;Password=password
+    ```
 
 * `./secrets/vehicle-quotes-db-password.txt`:
 
-```
-password
-```
+    ```plain
+    password
+    ```
 
 Ending up looking like this:
 
-```sh
+```plain
 secrets/
 ├── vehicle-quotes-db-connection-string.txt
 └── vehicle-quotes-db-password.txt
@@ -686,7 +696,7 @@ services:
 #...
 ```
 
-With this, Docker Compose will add files in the resulting containers under the `/run/secrets/` directory with the contents of their referenced secrets. So, for example, in the case of the `admin-portal` container, a `/run/secrets/vehicle-quotes-db-connection-string` will be created in the container's internal file system, with the same contents as the `./secrets/vehicle-quotes-db-connection-string.txt` file. Similar thing for the others.
+With this, Docker Compose will add files in the resulting containers under the `/run/secrets/` directory with the contents of their referenced secrets. So, for example, in the case of the `admin-portal` container, a `/run/secrets/vehicle-quotes-db-connection-string` file will be created in the container's internal file system, with the same contents as the `./secrets/vehicle-quotes-db-connection-string.txt` file. Similar thing for the others.
 
 Now that the secrets are materialized as files within the containers, let's see how we put them to use.
 
@@ -731,9 +741,9 @@ services:
 
 Try `docker compose up -d` again and test the apps. Everything should still work well.
 
-In the maintenance container, we also have to remove the `ConnectionStrings__VehicleQuotesContext` environment variable. That unfortunately means that the connection string will no longer be automatically available for us to run database related tasks. Just like other containers, it will be in a `/run/secrets/vehicle-quotes-db-connection-string` file. So, whenever we want to interact with the database, like when running migrations, we need to manually `export` the variable. Something like is:
+In the maintenance container, we also have to remove the `ConnectionStrings__VehicleQuotesContext` environment variable. That unfortunately means that the connection string will no longer be automatically available for us to run database related tasks. Just like other containers, it will be in a `/run/secrets/vehicle-quotes-db-connection-string` file. So, whenever we want to interact with the database, like when running migrations, we need to manually `export` the variable. Something like this:
 
-```sh
+```plain
 $ docker compose exec maintenance bash
 root@2732a06871c0:/source# export ConnectionStrings__VehicleQuotesContext=$(cat /run/secrets/vehicle-quotes-db-connection-string)
 root@2732a06871c0:/source# dotnet ef migrations list -s ./VehicleQuotes.AdminPortal -p ./VehicleQuotes.Core
@@ -743,11 +753,11 @@ Build succeeded.
 ...
 ```
 
-# Parameterizing the compose.yaml to support multiple deployment environments
+### Parameterizing `compose.yaml` to support multiple deployment environments
 
 A common requirement when deploying applications is to be able to do so in multiple environments. There's generally a "live" or "production" environment where the system runs and end users access it. There can also be others: staging, test, development, etc. Ideally, we'd use the same set of Docker and Compose files, with slight changes, in order to deploy variants of the system depending on the environment.
 
-Some settings like ports, passwords or SMTP credentials are the types of things that usually vary per environment. Luckily for us, Docker Compose [supports `.env` files](https://docs.docker.com/compose/environment-variables/variable-interpolation/) that can be used to parameterize certain aspects of the `compose.yaml` file.
+Some settings like ports, passwords, or SMTP credentials are the types of things that usually vary per environment. Luckily for us, Docker Compose [supports `.env` files](https://docs.docker.com/compose/environment-variables/variable-interpolation/) that can be used to parameterize certain aspects of the `compose.yaml` file.
 
 We can extract the values that vary from our `compose.yaml` file, and put them in a separate `.env` file that looks like this:
 
@@ -810,7 +820,7 @@ services:
 
 Once again, we can run `docker compose up -d` and everything should be fine.
 
-# Waiting for the database to be ready
+### Waiting for the database to be ready
 
 Sometimes some services need to wait for others to come online before they can start up. A common scenario is to wait for the database to be ready before running apps that depend on it. We can do that in Docker Compose thanks to the [`depends_on` and `healthcheck` settings](https://docs.docker.com/compose/startup-order/). We can update our `compose.yaml` so that the admin portal and web API services only start after the database is up and running and ready to receive requests. Here's how:
 
@@ -850,15 +860,15 @@ services:
 #...
 ```
 
-The most interesting part is the `healthcheck` setting in the `db` service which leverages a [PostgreSQL specific tool](https://www.postgresql.org/docs/current/app-pg-isready.html) to check whether the database is ready. Other software will have other methods to do checks like this, but PostgreSQL's is thankfully pretty straightforward.
+The most interesting part is the `healthcheck` setting in the `db` service which leverages a [PostgreSQL-specific tool](https://www.postgresql.org/docs/current/app-pg-isready.html) to check whether the database is ready. Other software will have other methods to do checks like this, but PostgreSQL's is thankfully pretty straightforward.
 
-# Serving the apps with NGINX
+### Serving the apps with NGINX
 
 Another common pattern for serving web applications is to use [NGINX](https://nginx.org/en/) as a [reverse proxy](https://docs.nginx.com/nginx/admin-guide/web-server/reverse-proxy/) that funnels HTTP traffic coming from the internet into the application. As you may have noticed, we haven't talked about HTTPS so far. This aspect is something that can be elegantly handled by NGINX as well. In this last section we see how we can set up NGINX to expose our apps to the world.
 
 First, we need to create some custom items in the default NGINX configuration file. Its default location will depend on the OS version and flavor you installed NGINX on, but for [Rocky Linux](https://rockylinux.org/) 9, it usually lives in `/etc/nginx/nginx.conf`. First, we need to declare our upstream servers that will point to the ports where the web API and admin portals are listening:
 
-```
+```nginx
 upstream admin_portal {
     server localhost:8001;
 }
@@ -868,9 +878,9 @@ upstream web_api {
 }
 ```
 
-Then, we will add a server that listens in the standard port 80 and proxies the `/admin` and `/api` URLs to the `admin_portal` and `web_api` upstream servers respectively:
+Then, we will add a server that listens in the standard port 80 and proxies the `/admin` and `/﻿api` URLs to the `admin_portal` and `web_api` upstream servers respectively:
 
-```
+```nginx
 server {
     listen 80;
     server_name vehiclequotes.com;
@@ -901,7 +911,7 @@ If we also have an SSL certificate that we want to use to securely serve our app
 
 * First, let’s make our server listen on port 443 (HTTPS), and point to our `.cer` and `.key` files in the updated entry:
 
-```
+```nginx
 server {
     listen 443 ssl;
     server_name vehiclequotes.com;
@@ -930,7 +940,7 @@ server {
 
 * Second, let’s add a new server for port 80 (non-HTTPS) that will redirect permanently to our new secure location:
 
-```
+```nginx
 server {
     listen 80;
     server_name vehiclequotes.com;
@@ -938,14 +948,14 @@ server {
 }
 ```
 
-* Finally, let's restart the NGINX service to apply our changes. The command that restarts the service will vary depending on the OS we're running on the server. For [Rocky Linux](https://rockylinux.org/) 9, we can do that by running the command `sudo systemctl restart nginx`.
+* Finally, let's restart the NGINX service to apply our changes. The command that restarts the service will vary depending on the OS we're running on the server. For Rocky Linux 9, we can do that by running the command `sudo systemctl restart nginx`.
 
 You can find the resulting [`nginx.conf`](https://github.com/megakevin/end-point-blog-dotnet-docker-deploy/blob/main/nginx.conf) file in the [project's repo](https://github.com/megakevin/end-point-blog-dotnet-docker-deploy/) in GitHub.
 
-# That's all for now
+### That's all for now
 
 And that's it! In this article, we've seen how we can approach deploying a .NET system into production using Docker Compose.
 
-We saw how to organize the code and configuration files using git sub-modules. We addressed a few important edge cases and gotchas like properly configuring Data Protection keys, having a container for performing maintenance tasks, ensuring certain files persist across restarts, and bringing up services in a certain order via `depends_on` settings.
+We saw how to organize the code and configuration files using Git submodules. We addressed a few important edge cases and gotchas like properly configuring Data Protection keys, having a container for performing maintenance tasks, ensuring certain files persist across restarts, and bringing up services in a certain order via `depends_on` settings.
 
 We even saw how to allow our web applications to be accessible to the outside world with NGINX through a set of reverse proxying rules, and as a bonus, to be securely served with SSL.
