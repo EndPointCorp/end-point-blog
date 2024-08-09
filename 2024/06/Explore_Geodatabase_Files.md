@@ -7,12 +7,10 @@ features:
   image_url: 
 date: 2024-08-07
 tags:
+- bash
 - python
-- kml
+- KML
 ---
-
-[explore-geodatabase-files.webp](Banner Image)
-<!-- Image by: Jaxson Baerg -->
 
 # Extracting and Manipulating Geospatial Data with OGR2OGR, KML and python GDAL
 [pin_label_polygon.png][Google Earth own screenshot]
