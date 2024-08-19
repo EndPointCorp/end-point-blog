@@ -1,20 +1,21 @@
 ---
 author: Constante “Tino” Gonzalez
-title: "Explore Geodatabase Files"
+title: "Exploring Geodatabase Files"
 github_issue_number: 2068
 description: A how-to on extracting data from a geodatabase file and converting it into separate KML files.
-features:
-  image_url: /blog/2024/08/explore-geodatabase-files/pin_label_polygon.webp
+featured:
+  image_url: /blog/2024/08/exploring-geodatabase-files/pin_label_polygon.webp
+  visionport: true
 date: 2024-08-14
 tags:
-- python
 - gis
+- python
 - google-earth
 - open-source
 - visionport
 ---
 
-![The sun shines brightly behind a cloud, casting a half halo of rays to the left of the image, and leaving the right of the image quite dim.](/blog/2024/08/explore-geodatabase-files/banner.webp)
+![The sun shines brightly behind a cloud, casting a half halo of rays to the left of the image, and leaving the right of the image quite dim.](/blog/2024/08/exploring-geodatabase-files/banner.webp)
 
 <!-- Image by Jaxson Baerg -->
 
@@ -30,7 +31,7 @@ We will walk through the process of extracting polygons, placemarks, and other i
 
 ### A first look into the contents of the GDB file
 
-![Google earth showing a campus of several buildings, surrounded by a yellow rectangle overlay, and with a blue pin labeled "label" on one side.](/blog/2024/08/explore-geodatabase-files/pin_label_polygon.webp)
+![Google earth showing a campus of several buildings, surrounded by a yellow rectangle overlay, and with a blue pin labeled "label" on one side.](/blog/2024/08/exploring-geodatabase-files/pin_label_polygon.webp)
 
 ```plain
 ogrinfo example.gdb.zip
@@ -123,7 +124,7 @@ This command will export into a KML file:
 - All the geometries in the layer, be it placemarks or polygons in our case
 - All the other fields of information as extended data, which will show up for each feature as a balloon table when visualized in Google Earth
 
-![Google earth, with a pin selected. A popup dialog displays a table with Land_Points:asset_type, Land_Points:asset_id, and other Land_Points data.](/blog/2024/08/explore-geodatabase-files/full_label.webp)
+![Google earth, with a pin selected. A popup dialog displays a table with Land_Points:asset_type, Land_Points:asset_id, and other Land_Points data.](/blog/2024/08/exploring-geodatabase-files/full_label.webp)
 
 ### The `ogr2ogr` `-sql` option
 
@@ -145,7 +146,7 @@ The polygon geometries are stored in `Layer_Polygons`. They can be selected usin
 ogr2ogr -f "KML" output_polygons.kml example.gdb.zip -sql "SELECT OGR_GEOMETRY FROM Layer_Polygons"
 ```
 
-![Google Earth, with two irregularly shaped red outlines. One has a popup dialog with a table reading "Land_Polygons:OGR_GEOMETRY", and a value of "MULTIPOLYGON"](/blog/2024/08/explore-geodatabase-files/polygons_only.webp)
+![Google Earth, with two irregularly shaped red outlines. One has a popup dialog with a table reading "Land_Polygons:OGR_GEOMETRY", and a value of "MULTIPOLYGON"](/blog/2024/08/exploring-geodatabase-files/polygons_only.webp)
 
 #### 3. Create KML with pins and names
 
