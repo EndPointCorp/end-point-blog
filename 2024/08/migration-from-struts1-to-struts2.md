@@ -15,7 +15,7 @@ tags:
 
 <!-- Photo by Alfredinix: https://www.pexels.com/photo/flock-of-birds-flying-under-blue-sky-6894704/ -->
 
-[Apache Struts](https://struts.apache.org/) is an open source web framework. Struts 1 started in 2000 and had its latest version 1.3.10. Apache [announced EOL of Struts 1](https://struts.apache.org/struts1eol-announcement.html) as December 2008. So Struts 1 is a dead ancient version which needs to be got rid of already by organizations still using it. Apache adapted WebWork framework as Struts 2 and its architectures significantly differs from Struts 1. So a migration from Struts 1 to Struts 2 wouldn't be straight forward. Tthere are key points and obvious differences [provided by Apache](https://struts.staged.apache.org/migration/) to cover a migration plan from Struts 1 to Struts 2.
+[Apache Struts](https://struts.apache.org/) is an open source web framework. Struts 1 started in 2000 and had its latest version 1.3.10. Apache [announced EOL of Struts 1](https://struts.apache.org/struts1eol-announcement.html) as December 2008. So Struts 1 is a dead ancient version which needs to be got rid of already by organizations still using it. Apache adapted WebWork framework as Struts 2 and its architectures significantly differs from Struts 1. So a migration from Struts 1 to Struts 2 wouldn't be straight forward. There are key points and obvious differences [provided by Apache](https://struts.staged.apache.org/migration/) to cover a migration plan from Struts 1 to Struts 2.
 The market share of Apache Struts is around [0.01%](https://enlyft.com/tech/products/apache-struts) today. However, there are still companies out there which have legacy Struts 1 applications in active use, and this is probably harder to capture in market share statistics analysis.
 
 ### A Comparison of Struts 1 and Struts 2
@@ -47,7 +47,7 @@ Image 1: [Request processing in Struts 2](https://www.infoq.com/articles/convert
 
 #### Dependencies
 
-Add the Struts 2.0 Jars to the existing Struts 1.3 application.  The latest Jar files can be downloaded from the [Apache Struts download page](https://struts.apache.org/download.cgi). Alternatively, you can download the Jar files for any of the previous versions from the [archives](https://archive.apache.org/dist/struts/) for the prior versions.
+Add the Struts 2.0 Jars to the existing Struts 1.3 application.  The latest Jar files can be downloaded from the [Apache Struts download page](https://struts.apache.org/download.cgi). Alternatively, you can download the Jar files for any of the previous versions from the [archive](https://archive.apache.org/dist/struts/).
 
 #### Request handling
 
@@ -107,9 +107,9 @@ public class CustomAction extends Action {
 }
 ```
 
-Struts 1 actions are singletons and extend base `Action` class. Alternatively `DispatchAction` can be used instead of the base class. In either case, the `execute` method is the entry point in the action implementation. Actions have to be thread-safe and hence all the needed variables should be handled in method scope. Finally, execute method returns an `ActionForward` response.
+Struts 1 actions are singletons and extend the base `Action` class. Alternatively `DispatchAction` can be used instead of the base class. In either case, the `execute` method is the entry point in the action implementation. Actions have to be thread-safe and hence all the needed variables should be handled in method scope. Finally, the execute method returns an `ActionForward` response.
 
-On the other hand, in Struts 2 a basic action class structure would be like this:
+On the other hand, in Struts 2 a basic action class structure would look like this:
 
 ```java
 public class MyAction extends ActionSupport {
@@ -171,4 +171,4 @@ However, in Struts 2, actions can be defined in a more general way using Struts 
 </struts>
 ```
 
-In this article we covered migrating the most basic components from Struts 1 to Struts 2 and a comparison of several features between each version. Complete configuration and code migration from Struts 1 to Struts 2 can be done gradually, which would involve actions, interceptors, tags and many other details. Not that straight-forward the patterns and convention changes adopted in Struts 2 becomes clearer as you dive in.
+In this article we covered migrating the most basic components from Struts 1 to Struts 2 and a comparison of several features between each version. Complete configuration and code migration from Struts 1 to Struts 2 can be done gradually, which would involve actions, interceptors, tags and many other details. Not completely straight-forward, but the patterns and convention changes adopted in Struts 2 becomes clearer as you dive in.
