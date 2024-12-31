@@ -18,7 +18,7 @@ tags:
 
 When designing the architecture for a new website, it's important to keep caching in mind. Caching allows to store a copy of the pages or resources used by your web application in your local browser. Content distribution networks such as [Cloudflare](https://www.cloudflare.com/) also leverage cache directives to distribute content to users more efficiently.
 
-This means that, when we define the page content that will be returned on the response, we should not include any content that depends on the identity context: We should return the same content to every user that hits the same URL. If we include any identity-specific content in the response, the CDN will reuse it for other requests, with the subsequent security risk.
+An important aspect of this is that, if we are going to use response caching on our web application, we should not include any content that depends on the identity context for the user on the page content that will be returned on the response: We should render the same content to every user that hits the same URL. If we include any identity-specific content, the CDN will reuse it for other requests, with the subsequent security risk.
 
 A simple example is an e-commerce site where the customer logs in to make a purchase: If the homepage shows the user name and icon at the top bar, that content should be rendered from a non-cached request. Otherwise, CDN caching will show the same user and icon to other visitors. And worse: Depending on the validations applied to the website, the profile page could even display personal information to other users!
 
