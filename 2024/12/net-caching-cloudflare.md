@@ -16,7 +16,7 @@ tags:
 
 <!-- Photo by Juan Pablo Ventoso, 2023. -->
 
-When designing the architecture for a new website, it's important to keep caching in mind. Caching allows to store a copy of the pages or resources used by your web application in your local browser. Content distribution networks such as [Cloudflare](https://www.cloudflare.com/) also leverage cache directives to distribute content to the users more efficiently.
+When designing the architecture for a new website, it's important to keep caching in mind. Caching allows to store a copy of the pages or resources used by your web application in your local browser. Content distribution networks such as [Cloudflare](https://www.cloudflare.com/) also leverage cache directives to distribute content to users more efficiently.
 
 This means that, when we define the page content that will be returned on the response, we should not include any content that depends on the identity context: We should return the same content to every user that hits the same URL. If we include any identity-specific content in the response, the CDN will reuse it for other requests, with the subsequent security risk.
 
