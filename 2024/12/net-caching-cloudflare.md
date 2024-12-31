@@ -16,13 +16,13 @@ tags:
 
 <!-- Photo by Juan Pablo Ventoso, 2023. -->
 
-When designing the architecture for a new website, it's important to keep caching in mind. Caching allows to store a copy of the pages or resources used by your web application in your local browser. Content distribution networks such as [Cloudflare](https://www.cloudflare.com/) also leverage on cache directives to distribute content to the users more efficiently.
+When designing the architecture for a new website, it's important to keep caching in mind. Caching allows to store a copy of the pages or resources used by your web application in your local browser. Content distribution networks such as [Cloudflare](https://www.cloudflare.com/) also leverage cache directives to distribute content to the users more efficiently.
 
-This means that, when we define the page content that will be returned on the response, we should not include any content that depends on the identity context: We should return the same exact content to every user that hits the same URL. If we include any identity-specific content in the response, the CDN will reuse it for other requests, with the subsequent security risk.
+This means that, when we define the page content that will be returned on the response, we should not include any content that depends on the identity context: We should return the same content to every user that hits the same URL. If we include any identity-specific content in the response, the CDN will reuse it for other requests, with the subsequent security risk.
 
-A simple example is an e-commerce site where the customer logs in to make a purchase: If the homepage shows the user name and icon at the top bar, that content should be rendered from a non-cached request. Otherwise, CDN caching will show the same user and icon to other visitors. And worse: Depending on the validations appied to the website, the profile page could even display personal information to other users!
+A simple example is an e-commerce site where the customer logs in to make a purchase: If the homepage shows the user name and icon at the top bar, that content should be rendered from a non-cached request. Otherwise, CDN caching will show the same user and icon to other visitors. And worse: Depending on the validations applied to the website, the profile page could even display personal information to other users!
 
-> When dealing with these situations, I often choose to rely on asynchronous requests to a set of non-cached API endpoints to retrieve the identity information, and process it on the frontend to render the user-dependent content.
+> When dealing with these situations, I often rely on asynchronous requests to a set of non-cached API endpoints to retrieve the identity information, and process it on the frontend to render the user-dependent content.
 
 ## Adding response caching
 
@@ -36,7 +36,7 @@ var app = builder.Build();
 + app.UseResponseCaching();
 ```
 
-Second, on our action methods, we need to include the `[ResponseCache]` attribute to specify the caching options for that request. In the example below, we are adding a response cache directive of 30 seconds that will vary depending on the User-Agent header sent on the request:
+Second, we need to include the `[ResponseCache]` attribute on our action methods to specify the caching options for that request. In the example below, we are adding a response cache directive of 30 seconds that will vary depending on the User-Agent header sent on the request:
 
 ```diff
 + [ResponseCache(VaryByHeader = "User-Agent", Duration = 30)]
@@ -70,7 +70,7 @@ To enforce caching, we need to add some additional rules: On Cloudflare's dashbo
 
 ![Adding a rule to enforce a cache bypass on the user-dependent API endpoints.](https://raw.githubusercontent.com/juanpabloventoso/end-point-blog/refs/heads/master/2024/12/net-caching-cloudflare/cloudflare-cache-bypass.jpg)
 
-> Note: It's important to set this rule to the first position in the list, so it's not overriden by previous rules that were deployed. 
+> Note: It's important to set this rule to the first position in the list, so it's not overridden by previous rules that were deployed. 
 
 ### Testing
 
@@ -82,6 +82,6 @@ And finally, we should test the response headers on our identity-related API end
 
 ![The "BYPASS" value Cloudflare will bypass cache on this URL.](https://raw.githubusercontent.com/juanpabloventoso/end-point-blog/refs/heads/master/2024/12/net-caching-cloudflare/response-headers-cf-bypass.jpg)
 
-Alright! This is as far as it goes for this post: Now, we have our ASP.NET pages cached, and Cloudflare is distributing the cached version through the CDN, reducing the number of requests to our servers and decreasing the response times for the user. Of course, this is just the tip of the iceberg: We can also add caching for assets and external resources, specify different strategies and durations for different resource types, and more. All that will be material for upcoming blog posts.
+Alright! This is as far as it goes for this post: Now, we have our ASP.NET pages cached, and Cloudflare is distributing the cached version through the CDN, reducing the number of requests to our servers and decreasing the response times for the user. Of course, this is just the tip of the iceberg: We can also add caching for assets and external resources, specify different strategies and durations for each resource type, and more. All that will be material for upcoming blog posts.
 
 
