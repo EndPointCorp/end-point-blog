@@ -76,11 +76,11 @@ To enforce caching, we need to add some additional rules: On Cloudflare's dashbo
 
 After saving and deploying both rules, it's time to test the results. When we navigate to our website's homepage with Chrome, we will see the updated response headers:
 
-![The "HIT" value means the request hit a cached version of the resource in the CDN.](https://raw.githubusercontent.com/juanpabloventoso/end-point-blog/refs/heads/master/2024/12/net-caching-cloudflare/cloudflare-cache-cf-hit.jpg)
+![The "HIT" value means the request hit a cached version of the resource in the CDN.](https://raw.githubusercontent.com/juanpabloventoso/end-point-blog/refs/heads/master/2024/12/net-caching-cloudflare/response-headers-cf-hit.jpg)
 
 And finally, we should test the response headers on our identity-related API endpoints. Yes! We're getting a BYPASS value for the `cf-cache-status` header, meaning Cloudflare is not caching any content from that URL:
 
-![The "BYPASS" value Cloudflare will bypass cache on this URL.](https://raw.githubusercontent.com/juanpabloventoso/end-point-blog/refs/heads/master/2024/12/net-caching-cloudflare/cloudflare-cache-cf-bypass.jpg)
+![The "BYPASS" value Cloudflare will bypass cache on this URL.](https://raw.githubusercontent.com/juanpabloventoso/end-point-blog/refs/heads/master/2024/12/net-caching-cloudflare/response-headers-cf-bypass.jpg)
 
 Alright! This is as far as it goes for this post: Now, we have our ASP.NET pages cached, and Cloudflare is distributing the cached version through the CDN, reducing the number of requests to our servers and decreasing the response times for the user. Of course, this is just the tip of the iceberg: We can also add caching for assets and external resources, specify different strategies and durations for different resource types, and more. All that will be material for upcoming blog posts.
 
