@@ -11,13 +11,13 @@ tags:
 
 
 ### Introduction
- Vue 3, which is latest major version of Vue, has new features that are not present in Vue 2, such as Teleport, Suspense and multiple root elements per template. Vue 3 provides smaller bundle sizes, better performance, better scalability and better TS/IDE support.
+ Vue 3, which is the latest major version of Vue, has new features that are not present in Vue 2, such as Teleport, Suspense and multiple root elements per template. Vue 3 provides smaller bundle sizes, better performance, better scalability and better TS/IDE support.
 
 
 ### What is Vue 3 composables?
 Writing repetitive code can be a real pain in the frontend development realm. We can use Vue 3 [composables](https://vuejs.org/guide/reusability/composables) to encapsulate and reuse stateful logic to our components. In this post, we will look at how we can use composables to reuse business by building invoice generator.
 
-An invoice generator, in simple words, is an application that helps creating invoices and manging invoices. In this blog post, we will focus on creating Vue 3 composables and how to use it properly for separting the business logic and re using it across different features.
+An invoice generator, simply said, is an application that creates and manages invoices. In this blog post, we will focus on creating Vue 3 composables to properly separte business logic while reusing it across different features.
 
 ### Core functionalites for Invoice Generator
 - Adding, editing, and removing invoices and items
@@ -74,7 +74,7 @@ The composable is named `useInvoice.ts` and it will have following purposes:
 
 - Handle invoice and invoice items data
 - Add methods for adding, editing and removing invoice items
-- Calculate totals automatically using items rate and amount as well as discount, tax and shipping
+- Calculate totals automatically using item's rate and amount as well as discount, tax and shipping
 - Reset invoice
 
 #### Define interface for Invoice and Invoice Items
@@ -121,9 +121,9 @@ export interface Invoice {
 ```
 
 
-First we create invoice object for creating or editing invoice. The code `state.storage.value.currentInvoiceNumber` gets the current invoice number to use for the new invoice, we will learn more about it later. 
+First we make an invoice object to create and edit an invoice. The code `state.storage.value.currentInvoiceNumber` gets the current invoice number to use for the new invoice, we will learn more about it later. 
 
-We return the object containing the required data and methods that can be used by any SFC components. We will see implementation of computed properties and methods in next section.
+We return the object containing the required data and methods that can be used by any SFC components. We will see the implementation of computed properties and methods in the next section.
 
 
 ```typescript
@@ -199,8 +199,8 @@ export function useInvoice(invoiceId?: number) {
 ```
 
 ### Adding Business Logic
-Now we implement the business logic for various methods like adding invoice item, updating invoice item etc. as well as calculate the various dynamic amounts.
-Following methods add invoice item to the invoice, which can be rendered on the UI as line item. User then can update the line item's rate and quantity, which calls `updateLinetItem` to udpate the invoice item data.
+Now we implement the business logic for various methods, like adding an invoice item, updating an invoice item, etc. as well as calculating the various dynamic amounts.
+The following methods add an invoice item as a line item to the invoice, which can be rendered on the UI as a line item. Then, the user can update the line item's rate and quantity, which calls `updateLinetItem` to update the invoice item data.
 ```typescript
     /**
      * Add a line item to the invoice line items array
@@ -231,13 +231,13 @@ Following methods add invoice item to the invoice, which can be rendered on the 
 
 ```
 
-Based on the invoice item data we then calculate
+Based on the invoice item data, we then calculate
 - subtotal
 - subtotal after discount if available
 - subtotal after tax if available
 - subtotal after shipping if available
 
-Moreover, discount and tax can be put as amount or percentage value, so we update the logic to evaluate discount and tax based on the entered values and type; and calculate subtotal. We can also include previously over paid amount and calculate the balance at the end of the calculations.
+Moreover, discount and tax can be put as an amount or percentage value, so we update the logic to evaluate discount and tax based on the entered values and type; and calculate the subtotal. We can also include a previously overpaid amount and calculate the balance at the end of the calculations.
 
 ```typescript
 // useInvoice.ts
@@ -299,7 +299,7 @@ Moreover, discount and tax can be put as amount or percentage value, so we updat
 
 ### Rendering the Invoice with Composable Functions
 
-We create `InvoiceGenerator.vue` SFC component to use the `useInvoice` composable we created. We use `<script setup>` for importing and using the composable.  `<script setup>` helps in using [Composition API](https://vuejs.org/guide/extras/composition-api-faq.html) inside SFCs instead of Options API, using `<script setup>` syntax helps in removing boilerplate code, ability to declare porps and emitted events and [many more advantages](https://vuejs.org/api/sfc-script-setup#script-setup). 
+We create the `InvoiceGenerator.vue` SFC component to use the `useInvoice` composable we created. We use `<script setup>` for importing and using the composable.  `<script setup>` helps in using the [Composition API](https://vuejs.org/guide/extras/composition-api-faq.html) inside SFCs instead of the Options API. Using `<script setup>` syntax helps in removing boilerplate code while providing the ability to declare props, emitted events and [many more advantages](https://vuejs.org/api/sfc-script-setup#script-setup). 
 
 ```html
 <!-- InvoiceGenerator.vue-->
@@ -324,10 +324,10 @@ const {
 </script>
 ```
 
-I have already defined `LineItems.vue` component where we render the line items which have textbox to enter description, rate and amount. The total for each items are calculated using computed property. Lets see an example how we can use it with invoice items. 
-- `LineItems` uses `items` props to render the invoice items
-- Emits `update-item` event when any value for an invoice line item changes
-- Emits `add-item` when user adds a new line item
+I have already defined the `LineItems.vue` component where we render the line items which has textboxes to enter description, rate and amount. The totals for each item are calculated using the computed property. Let's see an example showing how we can use it with invoice items. 
+- `LineItems` uses `items` props to render the invoice items.
+- Emits `update-item` event when any value for an invoice line item changes.
+- Emits `add-item` when user adds a new line item.
 - Emits `close` when user removes a line item.
 
 ```html
@@ -339,7 +339,7 @@ I have already defined `LineItems.vue` component where we render the line items 
     />
 ```
 
-Similarly, we use `invoice.discount`, `invoice.tax` and `invoice.shipping` properties from composable in a textbox where user can enter the value and type of the value. All of them have helper properties `isUsed` and `isPercentage`, which we use to make the input box user friendly. The `CustomInput`, `CustomToggleSwitch` and `WithLabel` are three custom components which are already created and they can be used as follows:
+Similarly, we use `invoice.discount`, `invoice.tax` and `invoice.shipping` properties from composable in a textbox where the user can enter the value and type of the value. All of them have helper properties named `isUsed` and `isPercentage`, which we use to make the input box user-friendly. The `CustomInput`, `CustomToggleSwitch` and `WithLabel` are three custom components that are already created and they can be used as follows:
 
 ```html
 <WithLabel label="Discount">
@@ -386,7 +386,7 @@ Similarly, we use `invoice.discount`, `invoice.tax` and `invoice.shipping` prope
 </WithLabel>
 ```
 
-All other properties also can be rendered however we like, some input fields like PO Number, Invoice Date and Amount Paid can be rendered as below. Using custom components like `CustomInput` and `CustomToggleSwitch` can help us get more control on the visual and functional aspect of the UI component.
+All other properties can also be rendered however, we would like some input fields, like PO Number, Invoice Date and Amount Paid to be rendered differently, as you can see below. Using custom components like `CustomInput` and `CustomToggleSwitch` can help us get more control on the visual and functional aspects of the UI component.
 ```html
 <WithLabel label="PO Number">
     <CustomInput
@@ -413,11 +413,11 @@ All other properties also can be rendered however we like, some input fields lik
 </WithLabel>
 ```
 
-### Create second composable for using localstorage to save and retrieve invoice data
+### Create a second composable for using localstorage to save and retrieve invoice data
 
-`useInvoice` composable only gives us the invoice data along with computed properties, but now we have to save it somewhere so we can use it later. We can use `localStorage` to save the invoices. [VueUse](https://vueuse.org/) is very good library that has [collection](https://vueuse.org/functions.html) of vue composition utilities that can be used with Vue2 as well as Vue3. 
+`useInvoice` composable only gives us the invoice data along with computed properties, but now we have to save it somewhere so we can use it later. We can use `localStorage` to save the invoices. [VueUse](https://vueuse.org/) is a very good library that has a [collection](https://vueuse.org/functions.html) of vue composition utilities that can be used with Vue2 as well as Vue3. 
 
-For accessing localStorage reactively, we will use composable called `useStorage` from [VueUse](https://vueuse.org/). `useStorage` uses `localStorage` by default. We will define `saveInvoice`, `updateInvoice`, `deleteInvoice` and `findInvoices` methods that uses the reactive variable from `useStorage` to perform the required operations.
+For accessing localStorage reactively, we will use a composable called `useStorage` from [VueUse](https://vueuse.org/). `useStorage` uses `localStorage` by default. We will define `saveInvoice`, `updateInvoice`, `deleteInvoice` and `findInvoices` methods that use the reactive variable from `useStorage` to perform the required operations.
 
 We will create another composable called `useInvoiceStorage.ts`, where we initialize our storage using `useStorage`, which also stores the current invoice number.
 
@@ -431,7 +431,7 @@ const storage = useStorage<InvoiceStore>('invoice-store', {
 
 ```
 
-Then we define and implement the earlier discussed methods for saving, updating, deleting and finding invoices. The update of current invoice number happens in the `saveInvoice` method.
+Then we define and implement the earlier discussed methods for saving, updating, deleting and finding invoices. The update of the current invoice number happens in the `saveInvoice` method.
 ```typescript
 // useInvoiceStorage.ts
 
@@ -484,9 +484,9 @@ export default function useState() {
 
 ```
 
-Now, we can use data and methods from `useInvoiceStorage` composable to show the latest invoice number as well as save, update, delete and find invoices. The composable `useInvoice` also uses `useInvoiceStorage` to set the current invoice number for the new invoice. Whenever a user creates a new invoice, the current invoice number is automatically assigned to the invoice obtained from  `useInvoiceStorage` composable. 
+Now, we can use data and methods from the `useInvoiceStorage` composable to show the latest invoice number as well as save, update, delete and find invoices. The composable `useInvoice` also uses `useInvoiceStorage` to set the current invoice number for the new invoice. Whenever a user creates a new invoice, the current invoice number is automatically assigned to the invoice obtained from the  `useInvoiceStorage` composable. 
 
-Moreover, `useInvoice` composable is updated to support the new invoice as well as edit invoice feature. The support of editing invoice is achieved by passing `invoiceId` to `useInvoice` composable, the `invoiceId` is then checked in the storage retuend by `useInvoiceStorage`, if the invoice exist, the `useInvoice` composable returns the correct invoice data from storage.
+Moreover, the `useInvoice` composable is updated to support the new invoice as well as edit invoice feature. The support of editing an invoice is achieved by passing `invoiceId` to the `useInvoice` composable, the `invoiceId` is then checked in the storage returned by `useInvoiceStorage`, if the invoice exists, the `useInvoice` composable returns the correct invoice data from storage.
 
 The following code checks for the invoice in the storage.
 ```typescript
@@ -499,14 +499,14 @@ if(invoiceId){
 
 
 ### Printing Invoice
-For printing invoice, we can simply use Print styles from tailwindcss to style the elements that we want to print for the invoice. A simple example is `CustomButton` component on the source code. We don't want to show any buttons on the pdf so, we use tailwindcss style `print:hidden` to hide the buttons on the print view. We then need to call the below method on the invoice page to print the current page.
+For printing invoices, we can simply use [print styles](https://tailwindcss.com/docs/hover-focus-and-other-states#print-styles) from tailwindcss to style the elements that we want to print for the invoice. A simple example is the `CustomButton` component in the source code. We don't want to show any buttons on the PDF so, we use tailwindcss style `print:hidden` to hide the buttons on the print view. We then need to call the below method on the invoice page to print the current page.
 
 ```typescript
 const print = () => window.print();
 ```
 
-### Bonus: Create third composable for showing dashboard data
-Okay, dashboard are important to look at the high level data and crucial to any applications. So, we add a new composable called `useDashboardData.ts` that will give as total invoice amount, total paid amount, total due amount and total drafted amount but it can be further expanded to include any other business logic as well. We will again use `useInvoiceStorage` composable to get the list of invoices and 
+### Bonus: Create a third composable for showing dashboard data
+The dashboard is important to look at the high-level data and is crucial to any application. So, we add a new composable called `useDashboardData.ts` that will give us the total invoice amount, total paid amount, total due amount and total drafted amount but it can be further expanded to include any other business logic as well. We will again use the `useInvoiceStorage` composable to get the list of invoices and 
 
 ```typescript
 // useDashboardData.ts
@@ -565,7 +565,7 @@ export function useDashboardData() {
 }
 ```
 
-After that we create `Dashboard.vue` component to use data from `useDashboardData.ts` and display the data on the dashboard. We can keep adding the business logic on `useDashboardData.ts` and display them on the dashboard or use it somewhere else to support some other business logic.
+After that we create the `Dashboard.vue` component to use data from `useDashboardData.ts` and display the data on the dashboard. We can keep adding business logic on `useDashboardData.ts` to display it on the dashboard or use it somewhere else to support some other business logic.
 
 ```html
 <!-- Dashboard.vue -->
@@ -611,9 +611,9 @@ The source code is available at [Github](https://github.com/bimalghartimagar/inv
 Application [demo](https://invoice-generator-iota.vercel.app/) is also available.
 
 ### Next Steps
-- Use an REST API for saving the invoices to database.
+- Use a REST API for saving the invoices to the database.
 - Use Pinia to store the retrieved invoices so we can easily use the invoices.
-- Add a composable to switch between different type of templates for printing PDFs.
+- Add a composable to switch between different types of templates for printing PDFs.
 
 ### Conclusion:
-We learned about Vue 3 composables and how to use composition API to create composables. We saw how composable functions are game changer which helps in building the complex, maintainable and scalable application by encapsulating the business logic, organizing the code and making it reusable. It helps to simplify the process and boost productivity.
+We learned about Vue 3 composables and how to use the composition API to create composables. We saw how composable functions are a game changer that helps in building the complex, maintainable and scalable application by encapsulating the business logic, organizing the code and making it reusable. It helps to simplify the process and boost productivity.
