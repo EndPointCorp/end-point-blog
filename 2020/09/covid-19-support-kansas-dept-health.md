@@ -3,7 +3,6 @@ author: Steve Yoman
 title: COVID-19 Support for the Kansas Department of Health and Environment
 github_issue_number: 1663
 featured:
-  casepointer: true
   image_url: /blog/2020/09/covid-19-support-kansas-dept-health/dashboard.jpg
 tags:
 - casepointer

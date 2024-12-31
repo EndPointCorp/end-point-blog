@@ -34,9 +34,9 @@ So we are dealing with something like:
         * texture2.png
         * …
 
-If you want to keep the glTF model as a single asset, you can convert the glTF files into binary (GLB) files, and then embed them as base64 data links into CZML. 
+If you want to keep the glTF model as a single asset, you can convert the glTF files into binary (GLB) files, and then embed them as base64 data links into CZML.
 
-Another example would be a set of points with billboards, let’s say a couple hundred points with plenty of different images. Keeping track of what images you have to ship along with a CZML document is very inconvenient, so you might want to embed the images. 
+Another example would be a set of points with billboards, let’s say a couple hundred points with plenty of different images. Keeping track of what images you have to ship along with a CZML document is very inconvenient, so you might want to embed the images.
 
 As with 3D models you could use base64 data links, but you will lose readability. You won’t be able to easily edit an image itself; you will have to decode it back into an image file, edit it, re-encode it, and write it back into the CZML file.
 

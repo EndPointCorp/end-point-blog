@@ -95,7 +95,7 @@ All of our lines now begin with the value we want to keep. Now, we’ll enter a 
 '.*
 ```
 
-Once we enter that regex, we’ll see that all characters following our values are highlighted 
+Once we enter that regex, we’ll see that all characters following our values are highlighted
 
 ![The altered object with our new regex in the Find field. Everything after the codes is highlighted.](/blog/2023/07/regex-replace-in-vs-code/after-code-highlighted.webp)
 
