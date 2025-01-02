@@ -15,7 +15,7 @@ tags:
 
 
 ### What is Vue 3 composables?
-Writing repetitive code can be a real pain in the frontend development realm. We can use Vue 3 [composables](https://vuejs.org/guide/reusability/composables) to encapsulate and reuse stateful logic to our components. In this post, we will look at how we can use composables to reuse business by building invoice generator.
+Writing repetitive code can be a real pain in the frontend development realm. We can use Vue 3 [composables](https://vuejs.org/guide/reusability/composables) to encapsulate and reuse stateful logic in our components. In this post, we will look at how we can use composables to reuse business logic by building an invoice generator.
 
 An invoice generator, simply said, is an application that creates and manages invoices. In this blog post, we will focus on creating Vue 3 composables to properly separte business logic while reusing it across different features.
 
@@ -70,7 +70,7 @@ Done. Now run:
     - `src/views/` - For adding pages to render based on vue-router routes
 
 ### Create first composable for Invoice `useInvoice`
-The composable is named `useInvoice.ts` and it will have following purposes:
+The composable is named `useInvoice.ts` and it will serve the following purposes:
 
 - Handle invoice and invoice items data
 - Add methods for adding, editing and removing invoice items
@@ -123,7 +123,7 @@ export interface Invoice {
 
 First we make an invoice object to create and edit an invoice. The code `state.storage.value.currentInvoiceNumber` gets the current invoice number to use for the new invoice, we will learn more about it later. 
 
-We return the object containing the required data and methods that can be used by any SFC components. We will see the implementation of computed properties and methods in the next section.
+We return the object containing the required data and methods that can be used by any SFC component. We will see the implementation of computed properties and methods in the next section.
 
 
 ```typescript
@@ -324,7 +324,7 @@ const {
 </script>
 ```
 
-I have already defined the `LineItems.vue` component where we render the line items which has textboxes to enter description, rate and amount. The totals for each item are calculated using the computed property. Let's see an example showing how we can use it with invoice items. 
+I have already defined the `LineItems.vue` component where we render the line items which have textboxes to enter description, rate and amount. The totals for each item are calculated using the computed property. Let's see an example showing how we can use it with invoice items. 
 - `LineItems` uses `items` props to render the invoice items.
 - Emits `update-item` event when any value for an invoice line item changes.
 - Emits `add-item` when user adds a new line item.
