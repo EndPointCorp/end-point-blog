@@ -4,7 +4,7 @@ title: "Learning Vue 3 composables by creating invoice generator"
 featured:
   image_url:
 description: 
-date: 2024-12-22
+date: 2025-01-06
 tags:
 - vue
 ---
