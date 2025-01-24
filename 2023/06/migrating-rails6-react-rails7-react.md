@@ -16,7 +16,7 @@ tags:
 
 <!-- Photo by Indra Pranesh Palanisamy, 2022 -->
 
-CasePointer’s [disease reporting portal](https://www.casepointer.com/our-suite/disease-reporting-portal/) is built on React and Rails 6, and it's time for an upgrade to Rails 7. This blog post will cover the steps, benefits, and challenges of migrating from Rails 6 to Rails 7, and offer valuable insights into the world of Ruby on Rails.
+CasePointer’s disease reporting portal is built on React and Rails 6, and it's time for an upgrade to Rails 7. This blog post will cover the steps, benefits, and challenges of migrating from Rails 6 to Rails 7, and offer valuable insights into the world of Ruby on Rails.
 
 With the recent release of Rails 7, there are many new features and improvements to explore.
 One of the biggest changes in Rails 7 is the retirement of Webpacker in favor of using the native webpack for bundling JavaScript.

@@ -19,7 +19,7 @@ For those who don’t care about why, just how...
 1. [Setup your mobile](https://www.google.com/gmail/about/)
 1. From your mobile go to [m.google.com/sync](https://m.google.com/sync) and Enable “Send Mail As” for this device (tested only on iOS)
 1. Verify you send and receive as your corporate address by default using your mobile client
-1. Setup [Google Authorship](https://plus.google.com/authorship) with your domain’s email address
+1. Setup Google Authorship with your domain’s email address
 
 ### The Long Story
 

@@ -7,13 +7,15 @@ tags:
 - hardware
 - programming
 github_issue_number: 1941
+featured:
+  image_url: /blog/2023/03/programming-the-intel-ndp-in-1983/20230205-163937-sm.webp
 ---
 
 ![Photograph of brick building fronted by a metal staircase leading to the roof, gated by a full-size metal door that would be trivially easy to climb around](/blog/2023/03/programming-the-intel-ndp-in-1983/20230205-163937-sm.webp)
 
 <!-- Photo by Jon Jensen -->
 
-### The Beginning 
+### The Beginning
 
 I graduated from St. John’s College in Annapolis in 1980. It was an intensive four-year education in math, science, language, poetry, and philosophy. Two years later, I took four computer classes at a community college, and got my first IT job in 1983 at the beginning of the personal computer revolution.
 

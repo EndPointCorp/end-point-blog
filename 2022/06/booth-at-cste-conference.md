@@ -4,7 +4,6 @@ title: End Point booth at CSTE 2022 conference
 date: 2022-06-09
 github_issue_number: 1870
 featured:
-  casepointer: true
   image_url: /blog/2022/06/booth-at-cste-conference/david-barajas-RIQyCVb5IQY-unsplash.webp
 tags:
 - conference
@@ -22,7 +21,7 @@ We are excited to announce that End Point will be attending the [CSTE (Council o
 
 We will be running a booth during the 3-day conference in Louisville, Kentucky from Monday, June 20 through Wednesday, June 22, 2022. Our crew is scheduled to include Steve Yoman, Linda King, Ben Goldstein, and me.
 
-Please come visit us in booth #35 to learn more about the [EpiTrax Disease Surveillance System](/expertise/epitrax/) and [EMSA (Electronic Message Staging Area)](/expertise/emsa/). Now is the time for public health entities to turn to modern systems to perform disease surveillance, automate the ingestion of electronic laboratory records (ELRs) and electronic case reports (eCRs), report to the CDC through NMI reporting methods, track outbreaks, perform contact management, and do it all with a highly configurable system. 
+Please come visit us in booth #35 to learn more about the EpiTrax Disease Surveillance System and EMSA (Electronic Message Staging Area). Now is the time for public health entities to turn to modern systems to perform disease surveillance, automate the ingestion of electronic laboratory records (ELRs) and electronic case reports (eCRs), report to the CDC through NMI reporting methods, track outbreaks, perform contact management, and do it all with a highly configurable system. 
 
 Our booth will feature a VisionPort Mini to showcase EpiTrax and EMSA! [VisionPort](https://www.visionport.com/) is our product combining hardware and software to give organizations the ability to create dynamic, shared immersive multimedia experiences. We are delighted when we have opportunities like this to use VisionPort to inform conference attendees about our own offerings such as EpiTrax and EMSA.
 

@@ -26,4 +26,4 @@ If you use immutable objects for cache keys you can solve many issues around cac
 
 There are some downsides to using immutable objects the key one being performance. Immutable objects tend to be copied a lot using a lot of memory and processing to recreate them.
 
-More information can be found on this topic by visiting [Michael’s site](http://goo.gl/Esa7r).
+More information can be found on this topic by visiting [Michael’s site](https://gist.github.com/michaelfairley/5000989).

@@ -6,6 +6,8 @@ date: 2023-05-25
 tags:
 - ssh
 - tips
+featured:
+  image_url: /blog/2023/05/mount-remote-filesystem-sshfs/estuary_at_days_end_crop.webp
 ---
 
 ![A painting of a Dutch port at the end of the day. On the left, sunlight peeks out from clouds low on the horizon, casting rays of light into the light blue sky of the fading day. Trading ships sail the waters, with some disappearing into the horizon. In the foreground, a smaller boat of people and barrels is rowed to an outcropping of land, on which is a boat being tarred by two sailors. A small fire heats a pot next to wooden dock equipment which protrudes into the air.](/blog/2023/05/mount-remote-filesystem-sshfs/estuary_at_days_end_crop.webp)
@@ -87,14 +89,14 @@ sshfs -o compression=no,cache=yes,cache_timeout=20,auto_cache,idmap=user wildfly
 
 The following mount options are given using the `-o` argument:
 
-- `compression=no` - Disable compression. The performance impact of enabling 
+- `compression=no` - Disable compression. The performance impact of enabling
 compression is not worth the minimal bandwidth savings.
 - `cache=yes` - Enable caching. Files that are repeatedly accessed within a
 certain period of time will only be retrieved once.
 - `cache_timeout=20` - Set cache timeout, in seconds.
 - `auto_cache` - Enable caching based on file modification times.
 - `idmap=user` - Translate between UID of connecting user and remote user. This
-causes remote files to appear to be owned by you, even though they are actually 
+causes remote files to appear to be owned by you, even though they are actually
 owned by the remote user on the remote system.
 
 To unmount on linux, run `fusermount -u /tmp/remote`. On macOS, run `umount /tmp/remote`.

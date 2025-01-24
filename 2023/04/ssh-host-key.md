@@ -7,6 +7,8 @@ tags:
 - ssh
 - authentication
 - sysadmin
+featured:
+  image_url: /blog/2023/04/ssh-host-key/key.webp
 ---
 
 ![A close shot of a large golden key sitting on top of a wooden fence. There is green grass visible behind the fence, on the left and right upper sides of the image.](/blog/2023/04/ssh-host-key/key.webp)

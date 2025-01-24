@@ -10,11 +10,11 @@ date: 2013-10-07
 
 I’ve been dabbling in Dancer ([Version One](http://search.cpan.org/~yanick/Dancer-1.3118/lib/Dancer.pm), not so much [Version Two](https://web.archive.org/web/20131119231012/http://search.cpan.org/~sukria/Dancer2-0.10/lib/Dancer2.pm)). Our first opportunity to create a production-worthy Dancer application just rolled out with encouraging results, so I thought I would outline some things we tried, and things we learned.  Don’t worry if you don’t know a thing about Dancer; I’ll educate you a little as we go along.
 
-First, some background. This application was a re-host and rewrite of an existing application written in Javascript and plain old CGI Perl scripts, returning either HTML or fairly simple JSON objects. Even the database it connected to was ancient DBM files. Those files were created by extracting data from the main website’s database, so that part was easy to replace—​we just had to use the extraction queries (mostly) to connect directly.
+First, some background. This application was a re-host and rewrite of an existing application written in JavaScript and plain old CGI Perl scripts, returning either HTML or fairly simple JSON objects. Even the database it connected to was ancient DBM files. Those files were created by extracting data from the main website’s database, so that part was easy to replace—​we just had to use the extraction queries (mostly) to connect directly.
 
 We chose Dancer as the platform for this effort because of its purely Perl footprint, and its relatively easy deployment.
 
-Since I didn’t really want to rewrite the front-end Javascript code, I left that mostly as-is and concentrated on replacing the CGI scripts. The first step was to move all their code into a non-Dancer Perl module, which communicated with the outside world entirely in the form of hashrefs:
+Since I didn’t really want to rewrite the front-end JavaScript code, I left that mostly as-is and concentrated on replacing the CGI scripts. The first step was to move all their code into a non-Dancer Perl module, which communicated with the outside world entirely in the form of hashrefs:
 
 ```perl
 sub do_something_great {
@@ -71,7 +71,7 @@ This example is one of the routes that produces HTML. The “template” built-i
 
 (At the risk of grossly oversimplifying: your “template” can be thought of as all of your output HTML document within the <body> tag, while the “layout” is everything else, with a spot in the middle for your template’s output.)
 
-By contrast, one simple route that is designed to return JSON to the Javascript side:
+By contrast, one simple route that is designed to return JSON to the JavaScript side:
 
 ```perl
 get '/orders.html' => sub {
@@ -89,7 +89,7 @@ We had to make some adjustments to our Apache configuration to make this all wor
 RewriteRule    ^/D/myapp/(.*) http://$SOME_ADDR:5001/$1 [P]
 ```
 
-As you can see here, we decided to set up the Dancer app as a service on a particular port, and we settled on a particular prefix for our webservice requests to distinguish them from other traffic. All the requests in the Javascript were adjusted to this new style.
+As you can see here, we decided to set up the Dancer app as a service on a particular port, and we settled on a particular prefix for our webservice requests to distinguish them from other traffic. All the requests in the JavaScript were adjusted to this new style.
 
 Our main Dancer application has the usual one-liner construction*:
 

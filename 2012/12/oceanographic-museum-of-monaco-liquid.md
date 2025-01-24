@@ -10,15 +10,11 @@ tags:
 date: 2012-12-31
 ---
 
-
-
 In December End Point installed a Liquid Galaxy at the spectacular and renowned [Musée Océanographique de Monaco](http://www.oceano.mc/), which is breathtakingly situated on a cliff overlooking the Mediterranean. The system, donated by Google, will be officially presented on January 21st to H.S.H. Prince Albert II of Monaco, who is the Honorary President of the Oceanographic Institute of which the museum is a major part.
 
 <a href="/blog/2012/12/oceanographic-museum-of-monaco-liquid/image-0-big.jpeg" imageanchor="1" style="clear: left; float: left; margin-bottom: 1em; margin-right: 1em;"><img border="0" height="240" src="/blog/2012/12/oceanographic-museum-of-monaco-liquid/image-0.jpeg" style="cursor: move;" width="320"/></a>
 
 <a href="/blog/2012/12/oceanographic-museum-of-monaco-liquid/image-1-big.jpeg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="235" src="/blog/2012/12/oceanographic-museum-of-monaco-liquid/image-1.jpeg" style="cursor: move;" width="320"/></a>
-
-[https://plus.google.com/photos/116748432819762979484/albums/5824395228310553057/5824395228004170738](https://plus.google.com/photos/116748432819762979484/albums/5824395228310553057/5824395228004170738)
 
 End Point set up and configured the system. Our expertise was also called on by Google to create and adapt Google Earth Tours focused on the world's oceans, including a tour about Ocean Acidification. In addition, End Point engineers developed a customized panoramic photo viewer for the remarkable [Catlin Seaview Survey panoramas](http://www.catlinseaviewsurvey.com/), which display and provide a baseline dataset for the earth's coral reefs.
 

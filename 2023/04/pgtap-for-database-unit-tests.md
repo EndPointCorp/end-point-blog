@@ -10,6 +10,8 @@ tags:
 - testing
 - casepointer
 - epitrax
+featured:
+  image_url: /blog/2023/04/pgtap-for-database-unit-tests/georgian-mountains.webp
 ---
 
 ![A steep, green mountain slope divides the image with a steep diagonal downwards and to the right, reaching the bottom of the frame two thirds of the way to the right edge of the image. A small, red-roofed Georgian church sits on it. Another hill sinks down and to the left, creating an apex at the bottom. In the background, framed by these asymmetrical diagonals, is a tall, rocky ridgeline lined with snow anywhere the rocks aren't too steep to hold it.](/blog/2023/04/pgtap-for-database-unit-tests/georgian-mountains.webp)
@@ -126,7 +128,7 @@ INSERT INTO employees (name) VALUES ('John Doe');
 
 
 -- Check if the desired outcome of the trigger has occurred
-SELECT is( 
+SELECT is(
   (SELECT name FROM employees WHERE id = (SELECT employee_id FROM audit_log ORDER BY id DESC LIMIT 1)),
   'John Doe',
   'The insert_employee_trigger should have been fired and produced the expected outcome'
@@ -234,9 +236,9 @@ If any of the tests fail, pg_prove will print a detailed report of the failures,
 
 Using pg_prove to automate your tests can save you a lot of time and effort, especially if you have a large number of tests to run. It also makes it easy to integrate your tests into your build process or continuous integration pipeline.
 
-### pgTAP in EpiTrax 
+### pgTAP in EpiTrax
 
-[EpiTrax](/expertise/epitrax/) relies on Postgres and its functions, making pgTAP an ideal tool for testing the platform's database functions, ensuring data integrity, and maintaining the robustness of the system. By utilizing pgTAP, EpiTrax efficiently validates various aspects of its database structure and behavior.
+EpiTrax relies on Postgres and its functions, making pgTAP an ideal tool for testing the platform's database functions, ensuring data integrity, and maintaining the robustness of the system. By utilizing pgTAP, EpiTrax efficiently validates various aspects of its database structure and behavior.
 
 ### Conclusion
 
