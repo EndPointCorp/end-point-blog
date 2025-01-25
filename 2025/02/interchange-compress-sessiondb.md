@@ -1,7 +1,7 @@
 ---
 author: "Mark Johnson"
 title: "Interchange Compression for SessionDB"
-date: 2023-07-09
+date: 2025-02-15
 tags:
 - ecommerce
 - interchange
@@ -34,6 +34,12 @@ List `uncompress()` returns an array of:
 * $alert
 
 Any errors encountered when called in scalar context are written to the catalog error log. Errors encountered when called in list context are returned in $alert.
+
+### Compression Performance Comparison
+
+The following chart summarizes the results of running the same Interchange instance through several steps of session growth to measure performance and impact of the 3 supported compression algorithms. Tests ranged from a minimum session size of 68 kilobytes up to a maximum of 110 megabytes. Fields marked in green indicate the best performance of the particular parameter, across all algorithms, for the test of the given session size. Any fields marked in yellow indicate performance measurements reaching a level of concern. Any fields marked in red indicate measurements reaching a level of unacceptable performance in any typical situation.
+
+![Results chart for tests of compression algorithms](/blog/2025/02/interchange-compress-sessiondb/compression_reduction_chart.png)
 
 ### Configuring Your Catalog to Use Vend::Util::Compress
 
