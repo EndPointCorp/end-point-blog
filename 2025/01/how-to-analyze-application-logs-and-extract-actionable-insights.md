@@ -157,7 +157,7 @@ awk -F'\[client ' '{print $2}' error.log | awk -F':' '{print $1}' | sort | uniq 
 
 **Explanation:**
 
-- `awk -F'\[client ' '{print $2}' error.log`: Extracts the IP address and port after `[client `.
+- `awk -F'\\[client ' '{print $2}' error.log`: Extracts the IP address and port after `[client `.
 - `awk -F':' '{print $1}'`: Removes the port, isolating the IP address.
 - `sort | uniq -c | sort -nr`: Counts and sorts the IP addresses by frequency.
 - `> ip_frequency.txt`: Redirects the output to `ip_frequency.txt`.
@@ -213,7 +213,7 @@ grep "referer:" error.log | awk -F'\[client ' '{print $2}' | awk -F':| referer: 
 **Explanation:**
 
 - `grep "referer:" error.log`: Filters lines containing the `referer` field.
-- `awk -F'\[client ' '{print $2}'`: Extracts the IP and referer section.
+- `awk -F'\\[client ' '{print $2}'`: Extracts the IP and referer section.
 - `awk -F':| referer: ' '{print $1, $3}'`: Separates the IP address from the referer URL.
 - `sort | uniq -c | sort -nr`: Counts and sorts the IP-referer pairs by frequency.
 - `> ip_referer_combinations.txt`: Redirects the output to `ip_referer_combinations.txt`.
