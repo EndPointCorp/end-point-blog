@@ -9,7 +9,7 @@ tags:
 - artificial-intelligence
 - automation
 - ai-for-business
-  custom-ai-models
+- custom-ai-models
 
 ---
 
