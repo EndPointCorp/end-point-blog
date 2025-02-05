@@ -8,8 +8,8 @@ date: 2025-02-04
 tags:
 - artificial-intelligence
 - automation
-- AIForBusiness
-- CustomAIModels
+- ai-for-business
+  custom-ai-models
 
 ---
 
