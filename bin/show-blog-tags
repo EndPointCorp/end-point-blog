@@ -29,7 +29,7 @@ cd $( cd "$( dirname "${BASH_SOURCE[0]}" )" > /dev/null && pwd )/..
 
 
 {
-    git grep -l ^tags: |
+    git grep --no-index -l ^tags: |
         xargs perl -n0E '
             /\A---\n.*?tags:\s*\n
                 (
