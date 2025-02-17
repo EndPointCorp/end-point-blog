@@ -51,7 +51,7 @@ yum update --allowerasing
 yum remove iptables-legacy-libs
 ```
 **4. Install the New iptables-nft Services**
-<br>Install the updated iptables utilities and its SystemD service script. 
+<br>Install the updated iptables utilities and its systemd service script. 
 ```bash
 yum install iptables-utils iptables-nft-services
 ```
