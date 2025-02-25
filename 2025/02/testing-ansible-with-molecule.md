@@ -19,6 +19,7 @@ tags:
 ![photo of optical disc drive.](/blog/2025/02/testing-ansible-with-molecule/photo-of-optical-disc-drive.jpg)<br>
 [Photo](https://unsplash.com/photos/photo-of-optical-disc-drive-1iVKwElWrPA) by [Patrick Lindenberg](https://unsplash.com/@heapdump)
 
+
 # Testing Ansible Automation with Molecule
 
 ## 1. Introduction: Why Test with Molecule?
@@ -34,18 +35,18 @@ tags:
 ## 2. Install Prerequisites
   - Make sure you have Python >= 3.6 and pip installed.
   - Install Ansible and Molecule using pip:
-  ```
+  ```bash
     pip install ansible
     pip install molecule
   ```
   - Molecule uses the  `delegated` driver by default. Other drivers can be installed separately from PyPI, most of them being included in molecule-plugins package. We are going to use the docker driver, so let's install that via:
-    ```
+    ```bash
     pip install "molecule[docker]"
     ```
 
 ## 3. Ansible Monorepo Structure
   -  We use the Ansible Monorepo structure, this means our playbooks, variables, scripts, roles, plugins, inventory scripts and configuration all resides together and is version controlled in the same repository.
-  - Here is the high level layput:
+  - Here is the high level layout:
 
     ```
     ~/ansible-endpoint
@@ -60,12 +61,12 @@ tags:
         └── ...
     ```
 
-We'll focus on `roles/nginx_server`, showing how to add and configure the molecule scenrarios for testing it and also verify it. 
+We'll focus on `roles/nginx_server`, showing how to add and configure the molecule scenarios for testing it and also verify it. 
 
 ## 4. Creating Your First Molecule Scenario
 - **Molecule Init**  
   - Inside the `roles/nginx_server` directory, let's initialize the molecule scenario:
-  ```
+  ```bash
     cd roles/nginx_server
     molecule init scenario --driver-name docker --scenario-name default
   ```
@@ -88,66 +89,66 @@ Here are some details about the files created by molecule:
 
 - `molecule.yml` - Molecule configuration file.
 
-    ```
+    ```yaml
     ---
     driver:
-    name: docker
+      name: docker
     platforms:
-    - name: "molecule-rocky9-${CI_JOB_ID}"
+      - name: "molecule-rocky9-${CI_JOB_ID}"
         image: geerlingguy/docker-rockylinux9-ansible:latest
         privileged: true
         pre_build_image: true
         volumes:
-        - /sys/fs/cgroup:/sys/fs/cgroup:rw
+          - /sys/fs/cgroup:/sys/fs/cgroup:rw
         cgroupns_mode: host
         command: /usr/sbin/init
     provisioner:
-    name: ansible
+      name: ansible
     ```
 
 Some details:
-    - Provisioner is the tool that will be used to provision the scenario and we are using ansible to run the scenario itself. 
-    - Docker - As we discussed before, we are using docker as the driver.
-    - Platforms - Here we define the target platform for the scenario. We are usng Rocky 9 docker image as the target platform. Thanks to [Jeff Geerling](https://github.com/geerlingguy/docker-rockylinux9-ansible) who created the Rocky 9 docker image for Ansible testing with systemd in it. 
+- Provisioner is the tool that will be used to provision the scenario and we are using ansible to run the scenario itself. 
+- Docker - As we discussed before, we are using docker as the driver.
+- Platforms - Here we define the target platform for the scenario. We are using Rocky 9 docker image as the target platform. Thanks to [Jeff Geerling](https://github.com/geerlingguy/docker-rockylinux9-ansible) who created the Rocky 9 docker image for Ansible testing with systemd in it. 
 
 
-- `converge.yml` - Playbook to converge the scenario. This tells Molecule to apply the nginx_server role to our test container (the “instance” defined in molecule.yml).
-    ```
+- `converge.yml` - Playbook to converge the scenario. This tells Molecule to apply the nginx_server role to our test container (the "instance" defined in molecule.yml).
+    ```yaml
     ---
     - name: Converge
-    hosts: all
-    gather_facts: false
-    tasks:
+      hosts: all
+      gather_facts: false
+      tasks:
         - name: Run the nginx_server role
-        hosts: all
-        roles:
+          hosts: all
+          roles:
             - nginx_server
     ```
 - `verify.yml` - Playbook to verify whether the converge was successful. This tells Molecule to verify that our role has been correctly installed stuff on the docker instance. Here we are going to check if nginx is installed, running and also responding to requests.
-    ```
+    ```yaml
     ---
     - name: Verify
-    hosts: all
-    tasks:
+      hosts: all
+      tasks:
         - name: Check if NGINX is installed
-        ansible.builtin.package:
+          ansible.builtin.package:
             name: nginx
             state: present
-        check_mode: true
-        register: install
-        failed_when: (install is changed) or (install is failed)
+          check_mode: true
+          register: install
+          failed_when: (install is changed) or (install is failed)
 
         - name: Check if NGINX service is running
-        ansible.builtin.service:
+          ansible.builtin.service:
             name: nginx
             state: started
             enabled: true
-        check_mode: true
-        register: service
-        failed_when: (service is changed) or (service is failed)
+          check_mode: true
+          register: service
+          failed_when: (service is changed) or (service is failed)
 
         - name: Verify NGINX is up and running
-        ansible.builtin.uri:
+          ansible.builtin.uri:
             url: http://localhost
             status_code: 200
     ```
@@ -169,7 +170,7 @@ Some details:
 
 These are some of the important events in the molecule lifecycle run.
 To run the full lifecycle molecule run, we can use the following command:
-```
+```bash
 cd roles/nginx_server
 molecule test
 ```
@@ -196,7 +197,7 @@ To automatically run the molecule tests, we can use the Gitlab CI/CD.
 Here is an example of a `.gitlab-ci.yml` file that runs the molecule tests in the Docker based environment for our nginx_server role. 
 
 
-```
+```yaml
 stages:
   - test
 
@@ -223,3 +224,6 @@ To learn more about molecule, here are some of the useful links:
 - [Molecule Documentation](https://ansible.readthedocs.io/projects/molecule/)
 - [Molecule GitHub Repository](https://github.com/ansible/molecule)
 - [Molecule Driver Plugins](https://github.com/ansible-community/molecule-plugins)
+
+
+
