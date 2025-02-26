@@ -110,7 +110,6 @@ Here are some details about the files created by molecule:
   - Driver - As we discussed before, we are using docker as the driver.
   - Platforms - Here we define the target platform for the scenario. We are using Rocky 9 docker image as the target platform. Thanks to [Jeff Geerling](https://github.com/geerlingguy/docker-rockylinux9-ansible) who created the Rocky 9 docker image for Ansible testing with systemd in it. 
 
-
 - `converge.yml` - Playbook to converge the scenario. This tells Molecule to apply the nginx_server role to our test container (the "instance" defined in molecule.yml).
     ```yaml
     ---
