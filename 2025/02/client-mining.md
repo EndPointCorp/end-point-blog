@@ -1,16 +1,31 @@
-# Client Mining: Growing Your Business Through Acquisition and Relationships
+---
+author: "Greg Hanson"
+date: 2025-02-27
+title: "Client Mining: Growing Your Business Through Acquisition and Relationships"
+description: A discussion of various methods to aquire clients and maintain relationships.
+tags:
+- client acquisition
+- client relationships
+- mining consulting work
+- client management
+- representing clients
+- understanding clients
+- managing clients
+---
+# Client Mining: Growing Your Consulting Business Through Client Acquisition and Relationships
 
 ## Introduction
 
 ### What is Client Mining?
-Client mining refers to acquiring new work from existing clients while also seeking new clients. It involves three key components:
+Client mining refers to acquiring new work from existing clients, but also refers to seeking and landing new clients. It involves three key components:
 
 - **Client Acquisition** – Bringing in new clients.
 - **Relationship Maintenance** – Keeping clients engaged and satisfied.
 - **Mining New Work** – Expanding business opportunities with existing clients.
 
 ### Why It Matters
-Without clients, there is no business. Strong client relationships foster long-term success and financial stability. 
+In simplest terms, without clients, there is no business. Strong client relationships foster long-term success and financial stability. Even with strong relationships, 
+attrition will occur and new clients are needed. 
 
 ---
 
@@ -23,7 +38,8 @@ Before acquiring clients, you must understand:
 - Your **capacity** – Do you have bandwidth for new clients?
 - Your **ideal client** – What industries, sizes, and technology stacks align with your expertise?
 
-Landing clients that match your skills leads to faster onboarding and immediate productivity.
+Many consultancies do not properly understand their own services, and simply attempt to "land" any clients .. and then "adapt" to that clients needs. This leads to misunderstandings, 
+appearance of incompetance, and wasted communication efforts. You do need to "adapt" to your clients needs, but landing clients that match your skills leads to faster onboarding and immediate productivity.
 
 ### Channels to Acquire New Clients
 Once you define your ideal client, identify the best channels for acquisition:
@@ -34,6 +50,8 @@ Once you define your ideal client, identify the best channels for acquisition:
   - Social Media (LinkedIn, X, Meta, etc.)
 - **Strategic Partnerships** – Collaborations with complementary businesses.
 - **Acquisitions & Mergers** – Buying companies that align with your strengths.
+
+Again, focus on your company's area of expertise, and sychronize to it. The world today is very segmented, and potential clients expect you to already understand at least the basics of their needs. 
 
 ### Proactive Strategies
 - **Cold Outreach** – Email marketing and cold calling (effective in some cases).
@@ -47,11 +65,17 @@ Once you define your ideal client, identify the best channels for acquisition:
 
 ### Keeping Clients Engaged
 After acquiring a client, build a strong relationship by understanding their business needs. Proactively suggest solutions that benefit them.
+Monitor trade news and publications that align with the clients business. You should already be tracking relevant updates based on the industry, because
+you aquired this client by knowing their needs..right?
+Remember, the reason clients need consultants is to help them in areas they may not be familiar with, or even recognize. 
+Don't always wait for the client to request development work. Conversely, try to only recommend development that you know will prove fruitful. The reason for this is that
+if you start a project based on a targeted idea, that part of the project will be successful and very likely the client will request addtional features. Where as if you propose
+a far ranging project, it can be much harder to exhibit success.  
 
 ### Regular Communication
 - Stay in touch without being repetitive.
-- Time outreach based on their business cycle.
-- Ask about their challenges and offer insights.
+- Time outreach based on their business cycle. (Don't propose disruptive development in the middle of their busy season)
+- Ask about their challenges, listen to their answers, and offer insights.
 
 ### Delivering Quality Work
 - Always deliver on time and exceed expectations.
