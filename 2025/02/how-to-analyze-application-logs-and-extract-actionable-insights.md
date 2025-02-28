@@ -51,7 +51,7 @@ These commands are not just for log analysis—they’re powerful for any data m
 sed -E 's/^\[.*\] //' error.log | sort | uniq -c | sort -nr
 ```
 
-- **Purpose**: Remove timestamps/client's IP, then sort and count duplicates
+- **Purpose**: Remove timestamps/​client's IP, then sort and count duplicates
 - **Outcome**: A quick snapshot of which errors appear most often
 
 ```plaintext
