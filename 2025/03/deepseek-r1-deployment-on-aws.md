@@ -4,7 +4,7 @@ date: 2025-03-03
 title: "How to run DeepSeek R1 on AWS: Optimizing Performance and Cost with Instance Store Diskse"
 github_issue_number: 2098
 featured:
-  image_url: /blog/2025/02/case-of-the-mistimed-script/clock-tower.webp
+  image_url: /blog/2025/03/deepseek-r1-deployment-on-aws/deepseek-r1-deployment-on-aws.jpg
 description: "How to - Ansible role testing with Molecule and Docker, including setup, scenario creation, and GitLab CI/CD integration for automated, reliable automation testing"
 tags:
 - sysadmin
@@ -13,11 +13,8 @@ tags:
 - deepseek
 ---
 
-![A low-angle view of an old European church clock tower. The square tower with rounded corners is ornamented with gothic styling, and topped with a golden eagle.](/blog/2025/02/case-of-the-mistimed-script/clock-tower.webp)
-
 ![the letters A and I are made up of different shapes](/blog/2025/03/deepseek-r1-deployment-on-aws/deepseek-r1-deployment-on-aws.jpg)<br>
 [Photo](https://unsplash.com/photos/the-letters-are-made-up-of-different-shapes-qbId5TLFG2s) by [Neeqolah Creative Works](https://unsplash.com/@neeqolah)
-
 
 # How to run DeepSeek R1 on AWS: Optimizing Performance and Cost with Instance Store Disks
 
@@ -162,7 +159,7 @@ echo "Starting llama server.."
 echo "✅ Startup script completed!"
 ```
 
-### 2. Instance Configuration Notes
+## 2. Instance Configuration Notes
 
 We're deploying on an AWS `g6e.4xlarge` instance for this setup. If you're using an instance with higher vRAM capacity, you may need to adjust the llama.cpp parameters in the startup script to take full advantage of the additional resources. Remember to create an IAM Role with S3 read-only permissions and assign it to the EC2 instances to ensure secure access to the model files in the S3 bucket.
 
@@ -179,7 +176,7 @@ The deployment process remains the same regardless of instance type, with automa
 
 
 
-### 3. Llama Server API is ready. 
+## 3. Llama Server API is ready. 
 
 Once the systemd service is up, the llama server hosts a local OpenAI-compatible API endpoint at:
 
@@ -189,7 +186,7 @@ http://127.0.0.1:10000
 
 
 
-### 4. Connect it to the Frontend. 
+## 4. Connect it to the Frontend. 
 
 Once the llama server API is running, you can connect various open-source frontend interfaces to provide a user-friendly experience:
 
