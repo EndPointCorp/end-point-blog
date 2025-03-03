@@ -101,7 +101,7 @@ public class MyStaticClass {
 }
 ```
 
-In your JSP using OGNL expression you can access to the data like below:
+In your JSP using OGNL expression you can access the data like this:
 
 ```XML
 <s:property value="myData" />
