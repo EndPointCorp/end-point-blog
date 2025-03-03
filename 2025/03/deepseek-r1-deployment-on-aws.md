@@ -2,7 +2,7 @@
 author: "Kannan Ponnusamy"
 date: 2025-03-03
 title: "How to run DeepSeek R1 on AWS: Optimizing Performance and Cost with Instance Store Diskse"
-github_issue_number: 2095
+github_issue_number: 2098
 featured:
   image_url: /blog/2025/02/case-of-the-mistimed-script/clock-tower.webp
 description: "How to - Ansible role testing with Molecule and Docker, including setup, scenario creation, and GitLab CI/CD integration for automated, reliable automation testing"
@@ -15,7 +15,7 @@ tags:
 
 ![A low-angle view of an old European church clock tower. The square tower with rounded corners is ornamented with gothic styling, and topped with a golden eagle.](/blog/2025/02/case-of-the-mistimed-script/clock-tower.webp)
 
-![the letters A and I are made up of different shapes](/blog/2025/02/testing-ansible-with-molecule/photo-of-optical-disc-drive.jpg)<br>
+![the letters A and I are made up of different shapes](/blog/2025/03/deepseek-r1-deployment-on-aws/deepseek-r1-deployment-on-aws.jpg)<br>
 [Photo](https://unsplash.com/photos/the-letters-are-made-up-of-different-shapes-qbId5TLFG2s) by [Neeqolah Creative Works](https://unsplash.com/@neeqolah)
 
 
