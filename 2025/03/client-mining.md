@@ -51,7 +51,7 @@ Once you define your ideal client, identify the best channels for acquisition:
 - **Strategic Partnerships** – Collaborations with complementary businesses.
 - **Acquisitions & Mergers** – Buying companies that align with your strengths.
 
-Again, focus on your company's area of expertise, and sychronize to it. The world today is very segmented, and potential clients expect you to already understand at least the basics of their needs. 
+Again, focus on your company's area of expertise, and sychronize to it. The world today is very segmented, and potential clients expect you to already understand at least the basics of their needs. In many cases you will be competing with specialized consultants, that are very adept at the industry your potential client operates in. So you need to know your own company's areas of strength, and how that will set you apart from competitors. Broad, grand statements about how you can increase returns or optimize operations alone will not cut it. You will need specific examples of how you have done this in the past, and how that applies to your current situation. Come prepared!!
 
 ### Proactive Strategies
 - **Cold Outreach** – Email marketing and cold calling (effective in some cases).
@@ -66,11 +66,11 @@ Again, focus on your company's area of expertise, and sychronize to it. The worl
 ### Keeping Clients Engaged
 After acquiring a client, build a strong relationship by understanding their business needs. Proactively suggest solutions that benefit them.
 Monitor trade news and publications that align with the clients business. You should already be tracking relevant updates based on the industry, because
-you aquired this client by knowing their needs..right?
-Remember, the reason clients need consultants is to help them in areas they may not be familiar with, or even recognize. 
+you aquired this client by knowing their needs.. right?
+Remember, one reason clients need consultants is to help them in areas they may not be familiar with, or even recognize. 
 Don't always wait for the client to request development work. Conversely, try to only recommend development that you know will prove fruitful. The reason for this is that
 if you start a project based on a targeted idea, that part of the project will be successful and very likely the client will request addtional features. Where as if you propose
-a far ranging project, it can be much harder to exhibit success.  
+a far ranging project, it can be much harder to clearly demonstrate success. So don't always try to sell "everything" at once. Deliver something solid, and it will provide its own growth potential  
 
 ### Regular Communication
 - Stay in touch without being repetitive.
