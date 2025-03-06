@@ -30,6 +30,7 @@ Here's a quick comparison, including examples:
 
 ```java
 Java:
+
 for (int i = 1; i <= 5; i++) {
     System.out.println("Number: " + i);
 }
@@ -37,6 +38,7 @@ for (int i = 1; i <= 5; i++) {
 
 ```apex
 Apex:
+
 for (Integer i = 1; i <= 5; i++) {
     System.debug('Number: ' + i);
 }
@@ -50,11 +52,13 @@ for (Integer i = 1; i <= 5; i++) {
 
 ```plain
 Java:
+
 PreparedStatement stmt = conn.prepareStatement("SELECT name, revenue FROM accounts WHERE revenue > 1000000");
 ```
 
 ```plain
 Apex:
+
 List<Account> accounts = [SELECT Name, AnnualRevenue FROM Account WHERE AnnualRevenue > 1000000];
 ```
 
