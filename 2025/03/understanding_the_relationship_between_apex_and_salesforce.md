@@ -29,14 +29,14 @@ Here's a quick comparison, including examples:
 **Syntax**: Although quite similar, there are distinct differences in syntax. Here's an example of a simple for loop written in both:
 
 ```java
-Java
+Java:
 for (int i = 1; i <= 5; i++) {
     System.out.println("Number: " + i);
 }
 ```
 
 ```apex
-Apex
+Apex:
 for (Integer i = 1; i <= 5; i++) {
     System.debug('Number: ' + i);
 }
@@ -49,12 +49,12 @@ for (Integer i = 1; i <= 5; i++) {
 - **Database Interaction**: In Java, you'd use libraries like JDBC to connect to databases. Apex has built-in access to Salesforce objects (e.g., Account, Contact) via SOQL (Salesforce Object Query Language), making data manipulation more declarative and less boilerplate heavy than Java's approach. Here's an example of a DB call to fetch accounts with revenue over $1M:
 
 ```plain
-Java
+Java:
 PreparedStatement stmt = conn.prepareStatement("SELECT name, revenue FROM accounts WHERE revenue > 1000000");
 ```
 
 ```plain
-Apex
+Apex:
 List<Account> accounts = [SELECT Name, AnnualRevenue FROM Account WHERE AnnualRevenue > 1000000];
 ```
 
