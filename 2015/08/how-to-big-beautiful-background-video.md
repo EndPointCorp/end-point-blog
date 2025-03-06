@@ -49,7 +49,7 @@ We will need to include the libraries:
 <script src="http://dfcb.github.io/BigVideo.js/bower_components/BigVideo/lib/bigvideo.js"></script>
 ```
 
-And the following javascript:
+And the following JavaScript:
 
 ```javascript
 var BV = new $.BigVideo({

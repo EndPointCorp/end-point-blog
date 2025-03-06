@@ -36,7 +36,7 @@ The exhibition will also feature work done by [Co-Op Peace Map](https://coop.arc
 
 The educational work that the University of Tokyo is doing with the VisionPort platform is inspiring and we look forward to being there to see it in memoriam of that fateful day.  
 
-[Register here](https://convergence_peace_activities.eventbrite.com/) and join us for this viewing on August 6th and 7th at the University of Tokyo’s New York office located at [145 W. 57th St., 21st Floor, New York, NY 10019](https://goo.gl/maps/Kgd9rFf3eBU1oR2t7).
+[Register here](https://convergence_peace_activities.eventbrite.com/) and join us for this viewing on August 6th and 7th at the University of Tokyo’s New York office located at [145 W. 57th St., 21st Floor, New York, NY 10019](https://maps.app.goo.gl/Qoexb1VnrbcEcMmn8).
 
 For more information about VisionPort, email [sales@visionport.com](mailto:sales@visionport.com) or visit [visionport.com](https://www.visionport.com/).
 

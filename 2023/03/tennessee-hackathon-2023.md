@@ -9,6 +9,9 @@ github_issue_number: 1950
 tags:
 - visionport
 - company
+- conference
+- remote-work
+- travel
 ---
 
 ![EPTN main room. Several development VisionPort systems are mounted on the back wall. Four End Pointers are seen sitting at a variety of desks and workstations.](/blog/2023/03/tennessee-hackathon-2023/eptn-1.jpg)

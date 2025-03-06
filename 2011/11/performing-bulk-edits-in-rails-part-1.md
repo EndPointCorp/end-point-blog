@@ -55,7 +55,7 @@ def new
 end
 ```
 
-### Refining the UI with Javascript and CSS
+### Refining the UI with JavaScript and CSS
 
 It’s not just enough to have these check boxes. We need our “Bulk Edit” button only to appear when the user has made an appropriate selection. Let’s update our view code to give our tags some class.
 
@@ -79,7 +79,7 @@ It’s not just enough to have these check boxes. We need our “Bulk Edit” bu
 }
 ```
 
-We’ve added the downloadable class tag to our check boxes, while adding a simple form to send data to the new_bulk_edit_path. This path corresponds to the new action, which typically, you don’t post forms to (which is why we needed to be explicit about setting the GET method). However, in this case we need this information before we can proceed with a new bulk edit. We’ve also hidden the submit button by default. We’ll need some Javascript to show and hide it.
+We’ve added the downloadable class tag to our check boxes, while adding a simple form to send data to the new_bulk_edit_path. This path corresponds to the new action, which typically, you don’t post forms to (which is why we needed to be explicit about setting the GET method). However, in this case we need this information before we can proceed with a new bulk edit. We’ve also hidden the submit button by default. We’ll need some JavaScript to show and hide it.
 
 ```ruby
 # app/assets/javascripts/search.js
@@ -94,7 +94,7 @@ $('.downloadable').click(function() {     //when an element of class downloadabl
 });
 ```
 
-At this point, you might have noticed that we’re submitting a form with no fields in it! While we could simply wrap our form_tag around our search results, but we may not always want this. For example, what if we need multiple forms to be able to send our selection to different controllers in our application? Right now we’re working on a bulk edit, but you know the client is expecting a bulk download as well. We can’t wrap the same search results partial in multiple forms. Let’s see how we would populate the our form using more Javascript.
+At this point, you might have noticed that we’re submitting a form with no fields in it! While we could simply wrap our form_tag around our search results, but we may not always want this. For example, what if we need multiple forms to be able to send our selection to different controllers in our application? Right now we’re working on a bulk edit, but you know the client is expecting a bulk download as well. We can’t wrap the same search results partial in multiple forms. Let’s see how we would populate the our form using more JavaScript.
 
 ```ruby
 # app/assets/javascripts/search.js
@@ -109,7 +109,7 @@ $('#bulk-edit').submit(function() {  //When the bulk-edit form is submitted
 
 This is a simple, unobtrusive way to give your forms a little more flexibility. It’s also a good example of how to use [:checked](https://api.jquery.com/checked-selector/) as a modifier on our jQuery selector.
 
-### Namespacing and Refactoring our Javascript
+### Namespacing and Refactoring our JavaScript
 
 Knowing you’ll need to implement a bulk-download form later in this same style, so let’s refactor out this cloning functionality.
 
@@ -132,7 +132,7 @@ MyAppName.clone_downloadable_checkboxes_to = function(destination) {
 };
 ```
 
-One of the big highlights here is namespacing our Javascript function. While the chances are low that someone out there is going to have clone_downloadable_checkboxes_to in the global namespace too, it’s always best to use proper namespaces.
+One of the big highlights here is namespacing our JavaScript function. While the chances are low that someone out there is going to have clone_downloadable_checkboxes_to in the global namespace too, it’s always best to use proper namespaces.
 
 Well, we’ve made it through the first part of our user story. The user can now check their boxes, and submit a form to the appropriate Rails resource. Stay tuned to see how we implement the second half of our user’s story.
 

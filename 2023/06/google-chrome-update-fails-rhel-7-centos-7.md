@@ -52,14 +52,14 @@ Our client is planning to move this system that runs tests with Chrome to Rocky 
 So to cope, we used `scp` to copy that RPM file to a RHEL 8 or 9 server, imported the Google signing public key, and used the newer version of `rpm` there to verify the signature:
 
 ```plain
-# rpm -K google-chrome-stable-114.0.5735.106-1.x86_64.rpm 
+# rpm -K google-chrome-stable-114.0.5735.106-1.x86_64.rpm
 google-chrome-stable-114.0.5735.106-1.x86_64.rpm: digests signatures OK
 ```
 
 Then back on the RHEL 7 server we had no qualms skipping the signature check during upgrade because we had just manually checked it elsewhere:
 
 ```plain
-# rpm -Uvh --nosignature /var/cache/yum/x86_64/7/google-chrome/packages/google-chrome-stable-114.0.5735.106-1.x86_64.rpm 
+# rpm -Uvh --nosignature /var/cache/yum/x86_64/7/google-chrome/packages/google-chrome-stable-114.0.5735.106-1.x86_64.rpm
 Preparing...                          ################################# [100%]
 Updating / installing...
    1:google-chrome-stable-114.0.5735.1################################# [ 50%]

@@ -6,8 +6,6 @@ tags:
 - epitrax
 - conference
 featured:
-  casepointer: true
-  endpoint: true
   image_url: /blog/2023/06/announcing-casepointer-epitrax/pexels-diva-plavalaguna-6147381.webp
 description: CasePointer is the name for our suite of public health systems and services built around EpiTrax.
 github_issue_number: 1984
@@ -21,7 +19,7 @@ End Point is pleased to announce CasePointer, the expanded branding of our line 
 
 The name CasePointer more appropriately reflects the broad scope of services we provide within the disease reporting and surveillance sector.
 
-This change coincides with the launching of the dedicated CasePointer website at [www.casepointer.com](https://www.casepointer.com/) and our participation next week in this year’s conference of CSTE (Council of State and Territorial Epidemiologists) in Salt Lake City, Utah. We will be staffing a booth there on the exhibition floor. Come visit us!
+This change coincides with the launching of the dedicated CasePointer website at www.casepointer\.com and our participation next week in this year’s conference of CSTE (Council of State and Territorial Epidemiologists) in Salt Lake City, Utah. We will be staffing a booth there on the exhibition floor. Come visit us!
 
 Starting in 2008, End Point helped develop and maintain the TriSano open source disease surveillance system. In 2019 we migrated our customer, the Kansas Department of Health and Environment, from TriSano to a new disease surveillance system called EpiTrax, which was developed by the state of Utah, and is also open source.
 

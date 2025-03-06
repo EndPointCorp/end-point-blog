@@ -34,7 +34,7 @@ He also provided an overview of each component involved in MEAN Stack.
 
 [AngularJS](https://angularjs.org/) — seamless bi-directional model with extensive features like services and directives.
 
-[Node.js](https://nodejs.org/) — A server side javascript framework with event based programming and single threaded (non blocking I/O with help of request queue).
+[Node.js](https://nodejs.org/) — A server side JavaScript framework with event based programming and single threaded (non blocking I/O with help of request queue).
 
 [Sails.js](https://sailsjs.org/) — MEAN Stack provisioner to develop applications quickly.
 

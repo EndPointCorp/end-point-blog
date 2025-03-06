@@ -9,6 +9,9 @@ github_issue_number: 1778
 tags:
 - visionport
 - company
+- conference
+- remote-work
+- travel
 ---
 
 ![Our NYC hackathon group](/blog/2021/10/liquid-galaxy-hackathon-2021/image-0.jpg)

@@ -89,14 +89,14 @@ sshfs -o compression=no,cache=yes,cache_timeout=20,auto_cache,idmap=user wildfly
 
 The following mount options are given using the `-o` argument:
 
-- `compression=no` - Disable compression. The performance impact of enabling 
+- `compression=no` - Disable compression. The performance impact of enabling
 compression is not worth the minimal bandwidth savings.
 - `cache=yes` - Enable caching. Files that are repeatedly accessed within a
 certain period of time will only be retrieved once.
 - `cache_timeout=20` - Set cache timeout, in seconds.
 - `auto_cache` - Enable caching based on file modification times.
 - `idmap=user` - Translate between UID of connecting user and remote user. This
-causes remote files to appear to be owned by you, even though they are actually 
+causes remote files to appear to be owned by you, even though they are actually
 owned by the remote user on the remote system.
 
 To unmount on linux, run `fusermount -u /tmp/remote`. On macOS, run `umount /tmp/remote`.

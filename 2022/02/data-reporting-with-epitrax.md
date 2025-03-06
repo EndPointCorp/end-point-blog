@@ -11,7 +11,6 @@ tags:
 - emsa
 featured:
   endpoint: true
-  casepointer: true
   image_url: /blog/2022/02/data-reporting-with-epitrax/20220107_002143-sm.webp
 description: Rapid response to the pandemic by customizing open-source public health software
 ---

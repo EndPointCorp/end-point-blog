@@ -18,7 +18,7 @@ We are seeking a full-time **Electronic Case Reporting (eCR) Coordinator** to pr
 
 This position is responsible for establishing complete, up-to-date, timely, and automated reporting of individual-level data, and automation of incoming EHR data. **Position is remote, in the United States only.**
 
-The person in this role will be responsible for coordinating and overseeing the eCR onboarding process for our clients. Additionally, the person will become our subject matter expert for the NNDSS Modernization Initiative (NMI) and how systems in place within EpiTrax can be configured to report through the NMI module. 
+The person in this role will be responsible for coordinating and overseeing the eCR onboarding process for our clients. Additionally, the person will become our subject matter expert for the NNDSS Modernization Initiative (NMI) and how systems in place within EpiTrax can be configured to report through the NMI module.
 
 ### Job responsibilities
 
