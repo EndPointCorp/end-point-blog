@@ -1,13 +1,13 @@
 ---
 author: "Mark Johnson"
 title: "Interchange Compression for SessionDB"
-date: 2025-02-15
+date: 2025-04-01
 tags:
 - ecommerce
 - interchange
 ---
 
-New support for compression of sessions and more lists stored in a RDBMS has been added to core Interchange<sup>1</sup>.
+New support for compression of sessions and more lists stored in a RDBMS<sup>1</sup> has been added to core Interchange<sup>2</sup>.
 
 A new module, `Vend::Util::Compress`, operates as a general interface for compressing and uncompressing scalar data in Interchange. The module currently offers hooks for the following compression algorithms:
 
@@ -19,9 +19,9 @@ Additional algorithms can be easily added as needed.
 
 Each algorithm depends on the developer to have installed the necessary CPAN modules for the given compression type:
 
-* `IO::Compress::Zstd`/`IO::Uncompress::UnZstd`<sup>2</sup>
-* `IO::Compress::Gzip`/`IO::Uncompress::Gunzip`<sup>3</sup>
-* `IO::Compress::Brotli`/`IO::Uncompress::Brotli`<sup>4</sup>
+* `IO::Compress::Zstd`/`IO::Uncompress::UnZstd`<sup>3</sup>
+* `IO::Compress::Gzip`/`IO::Uncompress::Gunzip`<sup>4</sup>
+* `IO::Compress::Brotli`/`IO::Uncompress::Brotli`<sup>5</sup>
 
 `Vend::Util::Compress` exports `compress()` and `uncompress()` on demand. In scalar context, they return the reference to the scalar holding the transformed data. In list context, they return additional measurements from the process.
 
@@ -63,7 +63,8 @@ The same compression applies to both sessions and more lists when MoreDB is also
 
 ### References
 
-1. [https://www.interchangecommerce.org/](https://www.interchangecommerce.org/)
-2. [https://metacpan.org/pod/IO::Compress::Zstd](https://metacpan.org/pod/IO::Compress::Zstd), [https://metacpan.org/pod/IO::Uncompress::UnZstd](https://metacpan.org/pod/IO::Uncompress::UnZstd)
-3.  [https://metacpan.org/pod/IO::Compress::Gzip](https://metacpan.org/pod/IO::Compress::Gzip), [https://metacpan.org/pod/IO::Uncompress::Gunzip](https://metacpan.org/pod/IO::Uncompress::Gunzip)
-4.   [https://metacpan.org/pod/IO::Compress::Brotli](https://metacpan.org/pod/IO::Compress::Brotli), [https://metacpan.org/pod/IO::Uncompress::Brotli](https://metacpan.org/pod/IO::Uncompress::Brotli)
+1. [https://github.com/interchange/interchange/commit/35c3452bdfa1a192238196c98d12519cf153af1b](https://github.com/interchange/interchange/commit/35c3452bdfa1a192238196c98d12519cf153af1b)
+2. [https://www.interchangecommerce.org/](https://www.interchangecommerce.org/)
+3. [https://metacpan.org/pod/IO::Compress::Zstd](https://metacpan.org/pod/IO::Compress::Zstd), [https://metacpan.org/pod/IO::Uncompress::UnZstd](https://metacpan.org/pod/IO::Uncompress::UnZstd)
+4.  [https://metacpan.org/pod/IO::Compress::Gzip](https://metacpan.org/pod/IO::Compress::Gzip), [https://metacpan.org/pod/IO::Uncompress::Gunzip](https://metacpan.org/pod/IO::Uncompress::Gunzip)
+5.   [https://metacpan.org/pod/IO::Compress::Brotli](https://metacpan.org/pod/IO::Compress::Brotli), [https://metacpan.org/pod/IO::Uncompress::Brotli](https://metacpan.org/pod/IO::Uncompress::Brotli)
