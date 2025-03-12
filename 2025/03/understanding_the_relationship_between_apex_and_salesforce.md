@@ -10,7 +10,7 @@ tags:
 - salesforce
 ---
 
-Salesforce has become a cornerstone for businesses looking to streamline their customer relationship management and beyond. At the heart of its customization capabilities lies Apex, a powerful programming language designed specifically for the Salesforce platform. In this post, we'll explore the relationship between Apex and Salesforce and touch on how Apex differs from the general-purpose language Java.
+Salesforce has become a cornerstone for businesses looking to streamline their customer relationship management and more. At the heart of its customization capabilities lies Apex, a powerful programming language designed specifically for the Salesforce platform. In this post, we'll explore the relationship between Apex and Salesforce and touch on how Apex differs from the general-purpose language Java.
 
 ### Apex and Salesforce
 
@@ -48,7 +48,7 @@ for (Integer i = 1; i <= 5; i++) {
 
 - **Execution Context**: Java runs on the Java Virtual Machine (JVM), which you can deploy anywhere with a compatible runtime. Apex runs exclusively on Salesforce's servers, removing the need for infrastructure management by tying it to the platform.
 
-- **Database Interaction**: In Java, you'd use libraries like JDBC to connect to databases. Apex has built-in access to Salesforce objects (e.g., Account, Contact) via SOQL (Salesforce Object Query Language), making data manipulation more declarative and less boilerplate heavy than Java's approach. Here's an example of a DB call to fetch accounts with revenue over $1M:
+- **Database Interaction**: In Java, you'd use libraries like JDBC to connect to databases. Apex has built-in access to Salesforce objects (e.g., Account, Contact) via SOQL (Salesforce Object Query Language), making data manipulation more declarative and less boilerplate-heavy than Java's approach. Here's an example of a DB call to fetch accounts with revenue over $1M:
 
 ```java
 Java:
@@ -64,7 +64,7 @@ List<Account> accounts = [SELECT Name, AnnualRevenue FROM Account WHERE AnnualRe
 
 - **Governor Limits**: Apex operates under strict governor limits such as caps on CPU time or query rows to maintain performance in a shared environment. Java has no such restrictions, giving developers more freedom but also more responsibility.
 
-- **Learning Curve**: If you know Java, Apex feels familiar. Classes, methods, and loops are quite similar. However, Apex's Salesforce specific features like triggers and Visualforce require specifci platform knowledge. On the other hand Java's versatility demands broader programming expertise.
+- **Learning Curve**: If you know Java, Apex feels familiar. Classes, methods, and loops are quite similar. However, Apex's Salesforce specific features like triggers and Visualforce require specific platform knowledge. On the other hand Java's versatility demands broader programming expertise.
 
 ### Why It Matters
 
