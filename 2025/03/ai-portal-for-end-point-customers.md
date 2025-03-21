@@ -64,7 +64,7 @@ AI use cases include:
 
 We’re also using AI to refine our own processes, improve our code, and enhance the value we deliver to our customers. This initiative is part of our commitment to ensure that our clients continue to benefit from the best technology solutions available.
 
-### How to get an Account
+### How to Get an Account
 
 Reach out to your End Point client rep or use [our contact form](/contact/) to get in touch.
 
