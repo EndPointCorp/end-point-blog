@@ -46,6 +46,7 @@ Any errors encountered when called in scalar context are written to the catalog 
 The following chart summarizes the results of running the same Interchange instance through several steps of session growth to measure performance and impact of the 3 supported compression algorithms. Tests ranged from a minimum session size of 68 kilobytes up to a maximum of 110 megabytes. Fields marked in green indicate the best performance of the particular parameter, across all algorithms, for each given session size. Any fields marked in yellow indicate performance measurements reaching a level of concern. Any fields marked in red indicate measurements reaching a level of unacceptable performance in any typical situation.
 
 ![Results chart for tests of compression algorithms](interchange-compress-sessiondb/compression_reduction_chart.png)
+<!-- screenshot from spreadsheet calculating results -->
 
 For size reduction, all 3 algorihms produced a substantial decrease across the board, generally exceeding 90% and increasing the reduction factor as the session grew. All 3 algorithms also uncompressed the session on retrieval at comparable rates, well within tolerance. Where we see significant separation is in the time to compress. Zstd is the fastest across the board, but really stands out when working with larger sessions, when the impact of compression is most needed for reducing transfer latency between the Interchange and database servers.
 
