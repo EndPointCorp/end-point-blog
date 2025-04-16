@@ -2,7 +2,7 @@
 author: "Greg Hanson"
 date: 2025-02-27
 title: "Client Mining: Growing Your Business Through Acquisition and Relationships"
-description: A discussion of various methods to aquire clients and maintain relationships.
+description: A discussion of various methods to acquire clients and maintain relationships.
 tags:
 - client acquisition
 - client relationships
@@ -39,7 +39,7 @@ Before acquiring clients, you must understand:
 - Your **ideal client** – What industries, sizes, and technology stacks align with your expertise?
 
 Many consultancies do not properly understand their own services, and simply attempt to "land" any clients .. and then "adapt" to that clients needs. This leads to misunderstandings, 
-appearance of incompetance, and wasted communication efforts. You do need to "adapt" to your clients needs, but landing clients that match your skills leads to faster onboarding and immediate productivity.
+appearance of incompetence, and wasted communication efforts. You do need to "adapt" to your clients needs, but landing clients that match your skills leads to faster onboarding and immediate productivity.
 
 ### Channels to Acquire New Clients
 Once you define your ideal client, identify the best channels for acquisition:
@@ -51,7 +51,7 @@ Once you define your ideal client, identify the best channels for acquisition:
 - **Strategic Partnerships** – Collaborations with complementary businesses.
 - **Acquisitions & Mergers** – Buying companies that align with your strengths.
 
-Again, focus on your company's area of expertise, and sychronize to it. The world today is very segmented, and potential clients expect you to already understand at least the basics of their needs. In many cases you will be competing with specialized consultants, that are very adept at the industry your potential client operates in. So you need to know your own company's areas of strength, and how that will set you apart from competitors. Broad, grand statements about how you can increase returns or optimize operations alone will not cut it. You will need specific examples of how you have done this in the past, and how that applies to your current situation. Come prepared!!
+Again, focus on your company's area of expertise, and synchronize to it. The world today is very segmented, and potential clients expect you to already understand at least the basics of their needs. In many cases you will be competing with specialized consultants, that are very adept at the industry your potential client operates in. So you need to know your own company's areas of strength, and how that will set you apart from competitors. Broad, grand statements about how you can increase returns or optimize operations alone will not cut it. You will need specific examples of how you have done this in the past, and how that applies to your current situation. Come prepared!!
 
 ### Proactive Strategies
 - **Cold Outreach** – Email marketing and cold calling (effective in some cases).
@@ -66,11 +66,11 @@ Again, focus on your company's area of expertise, and sychronize to it. The worl
 ### Keeping Clients Engaged
 After acquiring a client, build a strong relationship by understanding their business needs. Proactively suggest solutions that benefit them.
 Monitor trade news and publications that align with the clients business. You should already be tracking relevant updates based on the industry, because
-you aquired this client by knowing their needs.. right?
+you acquired this client by knowing their needs.. right?
 Remember, one reason clients need consultants is to help them in areas they may not be familiar with, or even recognize. 
 Don't always wait for the client to request development work. Conversely, try to only recommend development that you know will prove fruitful. The reason for this is that
-if you start a project based on a targeted idea, that part of the project will be successful and very likely the client will request addtional features. Where as if you propose
-a far ranging project, it can be much harder to clearly demonstrate success. So don't always try to sell "everything" at once. Deliver something solid, and it will provide its own growth potential  
+if you start a project based on a targeted idea, that part of the project will be successful and very likely the client will request additional features. Where as if you propose
+a far ranging project, it can be much harder to clearly demonstrate success. So don't always try to sell "everything" at once. Deliver something solid, and it will provide its own growth potential.
 
 ### Regular Communication
 - Stay in touch without being repetitive.
