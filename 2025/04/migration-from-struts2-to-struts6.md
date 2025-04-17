@@ -1,6 +1,6 @@
 ---
 author: "Kürşat Kutlu Aydemir"
-title: "Migration from Struts 2 to Struts 6"
+title: "How to Migrate from Struts 2 to Struts 6"
 date: 2025-04-17
 github_issue_number: 2105
 featured:
