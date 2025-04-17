@@ -24,8 +24,9 @@ Client mining refers to acquiring new work from existing clients, but also refer
 - **Mining New Work** – Expanding business opportunities with existing clients.
 
 ### Why It Matters
-In simplest terms, without clients, there is no business. Strong client relationships foster long-term success and financial stability. Even with strong relationships, 
-attrition will occur and new clients are needed. 
+In simplest terms, without clients, there is no business. Strong client relationships foster long-term success and financial stability. But even the best relationships don’t last forever—there can be budget cuts, in-house hires, or changes in business structure. A healthy client acquisition pipeline helps your company maintain momentum and staffing levels.
+
+Consulting income is typically project-based and can be intermittent. More clients help offset these pauses in work. Diversification is important: relying on a few large clients can lead to problems if one of them leaves. Additionally, new clients lead to new development opportunities and possibly new offerings or services. Like exercise, client acquisition helps keep your consulting company in shape!
 
 ---
 
