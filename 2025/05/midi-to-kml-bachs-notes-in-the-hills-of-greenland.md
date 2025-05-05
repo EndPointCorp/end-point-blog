@@ -5,11 +5,13 @@ author: Darius Clynes
 github_issue_number: 2110
 featured:
   image_url: /blog/2025/05/midi-to-kml-bachs-notes-in-the-hills-of-greenland/bach-in-kml.webp
+  visionport: true
 description: The features and issues in an AI-written JavaScript program to visualize MIDI files using KML.
 tags:
 - kml
 - gis
 - artificial-intelligence
+- visionport
 ---
 
 ![](/blog/2025/05/midi-to-kml-bachs-notes-in-the-hills-of-greenland/bach-in-kml.webp)

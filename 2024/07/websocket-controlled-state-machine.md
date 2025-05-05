@@ -5,6 +5,7 @@ github_issue_number: 2065
 description: How to write a state machine in TypeScript which can accept outside inputs via WebSockets
 featured:
   image_url: /blog/2024/07/websocket-controlled-state-machine/archway-and-sky.webp
+  endpoint: true
 date: 2024-07-20
 tags:
 - javascript
