@@ -6,6 +6,7 @@ tags:
 - visionport
 - python
 - ros
+- kml
 date: 2015-12-18
 ---
 

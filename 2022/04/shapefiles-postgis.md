@@ -9,6 +9,7 @@ tags:
 - gis
 - maps
 - postgres
+- kml
 github_issue_number: 1851
 ---
 

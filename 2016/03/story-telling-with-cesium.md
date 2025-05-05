@@ -8,6 +8,7 @@ tags:
 - javascript
 - kamelopard
 - maps
+- kml
 date: 2016-03-07
 ---
 

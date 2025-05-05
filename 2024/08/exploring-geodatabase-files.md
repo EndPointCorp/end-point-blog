@@ -13,6 +13,7 @@ tags:
 - google-earth
 - open-source
 - visionport
+- kml
 ---
 
 ![The sun shines brightly behind a cloud, casting a half halo of rays to the left of the image, and leaving the right of the image quite dim.](/blog/2024/08/exploring-geodatabase-files/banner.webp)
