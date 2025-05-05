@@ -14,7 +14,7 @@ tags:
 - visionport
 ---
 
-![](/blog/2025/05/midi-to-kml-bachs-notes-in-the-hills-of-greenland/bach-in-kml.webp)
+![A 3D globe visualization at an oblique angle, with hills, lakes, and mountains, with several pins in the foreground reading "acoustic grand piano". There are extruded triangles which are green and red extending away from the viewpoint, regularly spaced in multiple straight lines, and varying in size.](/blog/2025/05/midi-to-kml-bachs-notes-in-the-hills-of-greenland/bach-in-kml.webp)
 
 I have always been interested in ways of representing music visually. Aside from conventional music notation, I imagined other cross-modal generation methods that could take a sound and generate an image. In the same vein, I have frequently envisioned a 3D landscape in which you could discover musical “objects”.
 
@@ -28,7 +28,7 @@ please make a javascript application that can take a MIDI file and covert it to 
 
 Here is a part of its response:
 
-![](/blog/2025/05/midi-to-kml-bachs-notes-in-the-hills-of-greenland/make-a-javascript-application.webp)
+![The response to the above ChatGPT query. Chat breaks the process down into 3 steps, "Parse the MIDI File", "Generate Data for Polygons", and "Create a KML File".](/blog/2025/05/midi-to-kml-bachs-notes-in-the-hills-of-greenland/make-a-javascript-application.webp)
 
 I was amazed. It included code to select the MIDI file, convert it to KML, and generate an output file. Plus, ChatGPT correctly interpreted my request despite my “covert” typo. :-)
 
@@ -40,7 +40,7 @@ please change the color of the extruded polygon dependent on the pitch
 
 Here is what it said:
 
-![](/blog/2025/05/midi-to-kml-bachs-notes-in-the-hills-of-greenland/change-the-color.webp)
+![Chat's response to the above query: "To change the color of the extruded polygons based on the pitch, we can modify the KML content to include a `Style` element for each `Placemark`. We'll map MIDI note pitches to different colors.](/blog/2025/05/midi-to-kml-bachs-notes-in-the-hills-of-greenland/change-the-color.webp)
 
 It was implemented using npm and Node.js, which seemed excessive for this small application. To make an easier-to-run version in a single html file, I entered:
 
@@ -48,9 +48,9 @@ It was implemented using npm and Node.js, which seemed excessive for this small 
 please rewrite it so it is in an html page without node.js
 ```
 
-![](/blog/2025/05/midi-to-kml-bachs-notes-in-the-hills-of-greenland/rewrite-it.webp)
+![Chat's response to the above query: "To create a web-based application that converts a MIDI file to extruded polygons in a KML file, we can use JavaScript and the Web MIDI API along with a client-side library for parsing MIDI files, such as `@tonejs/midi`.](/blog/2025/05/midi-to-kml-bachs-notes-in-the-hills-of-greenland/rewrite-it.webp)
 
-![](/blog/2025/05/midi-to-kml-bachs-notes-in-the-hills-of-greenland/plain-html-app.webp)
+![An unstyled HTML app reading "MIDI to KML Converter". There is a "choose file" button, with adjacent text reading "bach_846.mid". To the right is a "Convert to KML" button. Below is a "Download KML" link. Below that, a "play" button, then three text inputs reading "Longitude", "Latitude", and "Direction", respectively.](/blog/2025/05/midi-to-kml-bachs-notes-in-the-hills-of-greenland/plain-html-app.webp)
 
 I thought it would be nice to be able to place the polygons, easily, wherever you wanted to, in the world.
 
@@ -58,23 +58,23 @@ I asked it to take a Google Street View position from Google Maps and decode the
 
 Next, I asked it to make a nicer user interface. It “understood” the purpose of the application very well and came up with a very nice interface explaining what it does.
 
-![](/blog/2025/05/midi-to-kml-bachs-notes-in-the-hills-of-greenland/styled-app.webp)
+![The same app as above, but now styled using simple web design, including making the "Convert to KML" button Green, and including an explanation paragraph: "Upload your MIDI file below, and the application will convert it into a KML file with 3D polygons. Each note in the MIDI file will be represented by an extruded polygon, and different musical instruments will be visually distinct with images on each polygon. Download the KML file and view it in Google Earth.](/blog/2025/05/midi-to-kml-bachs-notes-in-the-hills-of-greenland/styled-app.webp)
 
 ### How to try out the application
 
 You can try out a version of the application at https://darius.endpointdev.com/midi2kml/midi2kml_improved.html.
 
-![](/blog/2025/05/midi-to-kml-bachs-notes-in-the-hills-of-greenland/test-coordinates.webp)
+![The same app as above, now with a "Play MIDI" button visible, the "choose file" box filled, and values entered for coordinates.](/blog/2025/05/midi-to-kml-bachs-notes-in-the-hills-of-greenland/test-coordinates.webp)
 
 1. Find a nice place to have the MIDI data displayed. Copy the URL and paste it into the Street View URL field.
 
   For example, here is [a place](https://www.google.com/maps/@60.8287681,-45.7810281,2a,66.4y,280.22h,98.22t/data=!3m7!1e1!3m5!1sPgzLk0iAbXx_eGh1Z7pS0g!2e0!6shttps:%2F%2Fstreetviewpixels-pa.googleapis.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D-8.219999999999999%26panoid%3DPgzLk0iAbXx_eGh1Z7pS0g%26yaw%3D280.22!7i13312!8i6656?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D) in Greenland:
 
-  ![](/blog/2025/05/midi-to-kml-bachs-notes-in-the-hills-of-greenland/greenland-sphere.webp)
+  ![A Google Street View spherical image of hills in Greenland, with a Google Maps label reading "Hvalsey Church", with a brick building and the ocean visible](/blog/2025/05/midi-to-kml-bachs-notes-in-the-hills-of-greenland/greenland-sphere.webp)
 
   And here's one [on the beach](https://www.google.com/maps/@53.1000141,4.7522293,3a,75y,270.07h,90t/data=!3m8!1e1!3m6!1sAF1QipO8lOwNwAosMdcm3YTQT2CQleKuRXNRc59MsmA-!2e10!3e11!6shttps:%2F%2Flh3.googleusercontent.com%2Fp%2FAF1QipO8lOwNwAosMdcm3YTQT2CQleKuRXNRc59MsmA-%3Dw900-h600-k-no-pi0-ya271.06580195437505-ro0-fo100!7i8704!8i4352?entry=ttu&g_ep=EgoyMDI1MDMxMi4wIKXMDSoASAFQAw%3D%3D) in Texel in the Netherlands:
 
-  ![](/blog/2025/05/midi-to-kml-bachs-notes-in-the-hills-of-greenland/beach-netherlands.webp)
+  ![A Google Street View spherical image of a beach, with a sunset, with a Google Maps label reading "Beachclub Texel"](/blog/2025/05/midi-to-kml-bachs-notes-in-the-hills-of-greenland/beach-netherlands.webp)
 
 2. Find a nice MIDI file like [Bach’s prelude and fugue in C major](https://darius.endpointdev.com/midi2kml/bach_846.mid). Download it and put it in the "choose MIDI file" field
 
@@ -84,7 +84,7 @@ You can try out a version of the application at https://darius.endpointdev.com/m
 
 4. Open the KML file in a KML viewer or by manually by loading it into a program like Google Earth or Cesium.
 
-![](/blog/2025/05/midi-to-kml-bachs-notes-in-the-hills-of-greenland/midi-visualization-triangles.webp)
+![A closer view of the triangles extruded from Google Earth imagery, both labeled "acoustic grand piano", and with some triangles smaller on the right, while the ones on the left have some duplicate triangles superimposed on others.](/blog/2025/05/midi-to-kml-bachs-notes-in-the-hills-of-greenland/midi-visualization-triangles.webp)
 
 ### Issues
 
