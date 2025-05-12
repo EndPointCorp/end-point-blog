@@ -112,7 +112,7 @@ MoE bridges the gap between **vast LLM capacity** and **practical deployment lim
 ---
 
 **Further Reading:**
-- [Mixture of Experts (Google Research Blog)](https://research.google/blog/mixture-of-experts-with-expert-choice-routing/)
+- [Mixture of Experts Explained](https://huggingface.co/blog/moe)
 - [Ollama Documentation](https://ollama.com/docs)
 - [Mixtral Model Card](https://huggingface.co/mistralai/Mixtral-8x7B-Instruct-v0.1)
 
