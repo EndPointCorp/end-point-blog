@@ -10,7 +10,7 @@ tags:
 - JavaScript
 ---
 
-In the realm of web development, the allure of JavaScript frameworks like React and Vue is undeniable. However, I recently embarked on a journey to rebuild a modern web application using Rails 7, Hotwire, and Turbo, deliberately avoiding any JavaScript frameworks. The outcome was a streamlined stack, improved performance, and a more maintainable codebase.
+In the realm of web development, the allure of JavaScript frameworks like React and Vue is undeniable. However, I recently embarked on a mission to rebuild a modern web application using Rails 7, Hotwire, and Turbo, deliberately avoiding any JavaScript frameworks. The outcome was a streamlined stack, improved performance, and a more maintainable codebase.
 
 ### Why Consider a Framework-Free Approach in 2025?
 
@@ -18,7 +18,7 @@ The complexity introduced by modern JavaScript frameworks can sometimes overshad
 
 ### The Application: A Simplified Project Management Tool
 
-I had previously built an app that was esentially a dumbed down version of Trello. The app is a lightweight project management tool featuring:
+I had previously built an app that was esentially a simplified version of Trello. The app is a lightweight project management tool featuring:
 
 - Boards and cards
 
@@ -71,4 +71,4 @@ Despite the challenges, several aspects of the rebuild were notably successful:
 ### Final Thoughts
 Rebuilding the application using Rails 7 with Hotwire and Turbo proved to be a rewarding experience. The simplified stack, improved performance, and enhanced maintainability made it a compelling approach for developing modern web applications. While certain complex functionalities required additional effort, the overall benefits outweighed the challenges.
 
-For developers seeking to build responsive and dynamic applications without the overhead of JavaScript frameworks, exploring the capabilities of Rails 7 with Hotwire and Turbo is highly recommended.
+For developers seeking to build responsive and dynamic applications without the overhead of JavaScript frameworks, exploring the capabilities of Rails 7 with Hotwire and Turbo is a great option.
