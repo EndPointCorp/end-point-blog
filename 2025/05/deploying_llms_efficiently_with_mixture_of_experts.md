@@ -2,7 +2,7 @@
 author: "Edgar Mlowe"
 title: "Deploying LLMs Efficiently with Mixture of Experts"
 featured:
-  image_url: /blog/2025/02/deploying_llms_efficiently_with_mixture_of_experts/moe_illusraction.webp
+  image_url: /blog/2025/05/deploying_llms_efficiently_with_mixture_of_experts/moe_illusraction.webp
 description: A practical, beginner-friendly guide to Mixture-of-Experts (MoE) architectures for efficient LLM deployment.
 date: 2025-05-12
 tags:
@@ -12,7 +12,7 @@ tags:
 - Mixture of Experts
 ---
 
-![Illustration of a neural network with highlighted experts and a router](/blog/2025/02/deploying_llms_efficiently_with_mixture_of_experts/moe_illusraction.webp)
+![Illustration of a neural network with highlighted experts and a router](/blog/2025/05/deploying_llms_efficiently_with_mixture_of_experts/moe_illusraction.webp)
 
 <!-- Illustration by Edgar Mlowe, 2025. -->
 
