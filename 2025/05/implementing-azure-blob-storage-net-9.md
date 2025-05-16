@@ -25,7 +25,7 @@ Install the [NuGet](https://www.nuget.org/) package required to connect to Azure
 dotnet add package Azure.Storage.Blobs
 ```
 
-Then, we need to configure our connection in our appsettings.json file. We will use the connection string Azure provides us when we create the new storage account.
+Then, we need to configure our connection in our appsettings.json file. We will use the connection string that Azure provides us when we create the new storage account.
 
 ```json
 {
@@ -36,7 +36,7 @@ Then, we need to configure our connection in our appsettings.json file. We will 
 }
 ```
 
-In Azure Blob Storage, containers are like folders that group blobs (or files) together within a storage account. In this setting, the ContainerName value tells our application which container inside that account will be used for storing and retrieving blobs.
+In Azure Blob Storage, containers are like folders that group blobs (or files) together within a storage account. In this setting, the `ContainerName` value tells our application which container inside that account will be used for storing and retrieving blobs.
 
 Create a `BlobService` class to read and write to the container.
 
