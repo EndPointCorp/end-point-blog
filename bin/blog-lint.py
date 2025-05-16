@@ -31,7 +31,8 @@ tried_links = {}
 
 parser = argparse.ArgumentParser(description='Lint blog posts.')
 parser.add_argument('input_file', help='blog post file to read')
-parser.add_argument('-k', dest='forKeepers', action='store_true', help='show verbose output for keepers of the blog')
+parser.add_argument('-k', dest='forKeepers', action='store_true', help='show errors and warnings for keepers of the blog')
+parser.add_argument('-v', dest='verbose', action='store_true', help='enable verbose output')
 parser.add_argument('-o', dest='offline', action='store_true', help='offline: don\'t check links')
 
 args = parser.parse_args()
@@ -501,7 +502,7 @@ def check_links(line):
 
             tried_links[to_try] = response.status_code
 
-            end_sequence = '\n' if args.forKeepers else '\x1b[1K\r'
+            end_sequence = '\n' if args.verbose else '\x1b[1K\r'
 
             if response.status_code == 200:
                 print('200 OK', end=end_sequence)
@@ -541,11 +542,7 @@ if len(errors) > 0:
     errors = sorted(errors)
     print('Errors:') 
     for error in errors:
-        if not error.forKeepers:
-            print(error)
-            continue
-
-        if args.forKeepers:
+        if args.forKeepers or not error.forKeepers:
             print(error)
     print('')
 
@@ -553,11 +550,7 @@ if len(warnings) > 0:
     warnings = sorted(warnings)
     print('Warnings:') 
     for warning in warnings:
-        if not warning.forKeepers:
-            print(warning)
-            continue
-
-        if args.forKeepers:
+        if args.forKeepers or not error.forKeepers:
             print(warning)
 
 infile.close()

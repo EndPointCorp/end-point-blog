@@ -8,6 +8,7 @@ tags:
 - gis
 - open-source
 - visionport
+- kml
 featured:
   visionport: true
   image_url: /blog/2021/04/czml-kml-editor-geometry-editing/czml-kml-geometry-editing.jpg

@@ -1,6 +1,6 @@
 ---
 author: TJ Christofferson
-title: 'Studying "The Mythical Man-Month" in Collaboration with a Client'
+title: 'Studying “The Mythical Man-Month” in Collaboration with a Client'
 date: 2024-12-23
 featured:
   image_url: /blog/2024/12/studying-the-mythical-man-month/study-group-video-call.webp
@@ -14,6 +14,8 @@ tags:
 ---
 
 ![Fourteen End Pointers and Cybergenetics team members in a videoconference meeting](/blog/2024/12/studying-the-mythical-man-month/study-group-video-call.webp)
+
+<!-- Image used with permission from Cybergenetics -->
 
 Here at End Point we did an enlightening and fun eleven-week study group in collaboration with one of our clients. We worked through Frederick Brooks Jr.’s book The Mythical Man-Month: Essays on Software Engineering, which was originally published in 1975, with an expanded edition published in 1995. In certain ways this book is still applicable to our time, and it was a delight to discuss it in a structured study group with coworkers and peers. This particular study group even piqued the curiosity of the owners of both our companies who participated throughout the course!
 
