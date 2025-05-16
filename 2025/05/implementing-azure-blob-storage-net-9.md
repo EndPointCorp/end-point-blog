@@ -10,7 +10,7 @@ tags:
 - azure
 ---
 
-![Shallow water and an old wood dock in southern Patagonia, Argentina](/blog/2025/05/implementing-azure-blob-storage-net-9/water-and-wood-dock.png)
+![Shallow water and an old wood dock in southern Patagonia, Argentina](https://raw.githubusercontent.com/juanpabloventoso/end-point-blog/refs/heads/master/2025/05/implementing-azure-blob-storage-net-9/water-and-wood-dock.jpg)
 <!-- Photo by Juan Pablo Ventoso, 2022. -->
 
 Businesses keep moving toward scalable and cloud-based architectures. With this in mind, a client that was dealing with random errors in a [.NET](https://dotnet.microsoft.com/) app when saving files locally on the web server, decided to get rid of that process and replace it with an [Azure Blob Storage](https://azure.microsoft.com/en-us/products/storage/blobs) implementation.
@@ -86,7 +86,9 @@ public class BlobService
 }
 ```
 
-Quite simple, isn't it? Now, we can easily expose file upload/download endpoints via ASP.NET Core [minimal APIs](https://learn.microsoft.com/en-us/aspnet/core/tutorials/min-web-api). These endpoints will use our BlobService class to communicate with Azure Blob Storage to save and retrieve files. In our `Program.cs` file, let's add:
+Quite simple, isn't it? Now, let's see a way to easily expose file upload/download endpoints via ASP.NET Core [minimal APIs](https://learn.microsoft.com/en-us/aspnet/core/tutorials/min-web-api). Introduced in .NET 6 and evolving further in .NET 9, minimal APIs provide a lightweight way to build HTTP APIs with a few lines of code. Instead of requiring full controller classes and attributes, minimal APIs let you define routes directly in your main `Program.cs` file, using simple [lambda expressions](https://learn.microsoft.com/dotnet/csharp/language-reference/operators/lambda-expressions). This makes them ideal for microservices, lightweight APIs, and internal tools where fast development and low overhead are essential.
+
+For this example, we will create two routes: These endpoints will use our BlobService class to communicate with Azure Blob Storage to save and retrieve files. In our `Program.cs` file, let's add:
 
 ```csharp
 app.MapPost("/upload", async (IFormFile file, BlobService blobService) =>
