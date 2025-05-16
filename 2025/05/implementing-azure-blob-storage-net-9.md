@@ -91,6 +91,12 @@ Quite simple, isn't it? Now, let's see a way to easily expose file upload/downlo
 For this example, we will create two routes: These endpoints will use our BlobService class to communicate with Azure Blob Storage to save and retrieve files. In our `Program.cs` file, let's add:
 
 ```csharp
+/// <summary>
+/// Endpoint to upload a file to Azure Blob Storage.
+/// </summary>
+/// <param name="file">The uploaded file sent from the client (via multipart/form-data).</param>
+/// <param name="blobService">Injected service used to handle blob storage operations.</param>
+/// <returns>An HTTP 200 OK response when the upload succeeds.</returns>
 app.MapPost("/upload", async (IFormFile file, BlobService blobService) =>
 {
     using var stream = file.OpenReadStream();
@@ -98,6 +104,12 @@ app.MapPost("/upload", async (IFormFile file, BlobService blobService) =>
     return Results.Ok("File uploaded successfully");
 });
 
+/// <summary>
+/// Endpoint to download a file from Azure Blob Storage.
+/// </summary>
+/// <param name="fileName">The name of the file to download (provided in the URL path).</param>
+/// <param name="blobService">Injected service used to access blob storage.</param>
+/// <returns>The file stream as a binary response with a download filename.</returns>
 app.MapGet("/download/{fileName}", async (string fileName, BlobService blobService) =>
 {
     var stream = await blobService.DownloadFileAsync(fileName);
