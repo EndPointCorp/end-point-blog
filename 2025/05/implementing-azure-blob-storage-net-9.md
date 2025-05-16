@@ -88,7 +88,7 @@ public class BlobService
 
 Quite simple, isn't it? Now, let's see a way to easily expose file upload/download endpoints via ASP.NET Core [minimal APIs](https://learn.microsoft.com/en-us/aspnet/core/tutorials/min-web-api). Introduced in .NET 6 and evolving further in .NET 9, minimal APIs provide a lightweight way to build HTTP APIs with a few lines of code. Instead of requiring full controller classes and attributes, minimal APIs let you define routes directly in your main `Program.cs` file, using simple [lambda expressions](https://learn.microsoft.com/dotnet/csharp/language-reference/operators/lambda-expressions). This makes them ideal for microservices, lightweight APIs, and internal tools where fast development and low overhead are essential.
 
-For this example, we will create two routes: These endpoints will use our BlobService class to communicate with Azure Blob Storage to save and retrieve files. In our `Program.cs` file, let's add:
+For this example, we will create two endpoints that will use our BlobService class to communicate with Azure Blob Storage to save and retrieve files. In our `Program.cs` file, let's add:
 
 ```csharp
 /// <summary>
@@ -121,7 +121,7 @@ Of course, we would want to configure authentication, add validations, and other
 
 Also, there are recommended practices for any Azure integrations to consider, as we increase the robustness of our application:
 
-- Monitor and log all storage operations using [Azure Application Insights](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview). Integrate Application Insights into our .NET app to get detailed logging on the HTTP calls to the different Azure services.
+- Monitor and log all storage operations using [Azure Application Insights](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview). Integrate Application Insights into our .NET app to get detailed logging of the different HTTP calls to the Azure services.
 
 - Use [Managed Identities](https://learn.microsoft.com/en-us/entra/identity/managed-identities-azure-resources/overview): Instead of storing secrets in appsettings.json, we can assign a Managed Identity to our application service, and grant it the Storage Blob Data Contributor role at the storage account. That will allow the application to gain access to the container automatically, without storing credentials in our settings files.
 
