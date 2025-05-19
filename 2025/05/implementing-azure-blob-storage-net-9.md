@@ -10,7 +10,7 @@ tags:
 - azure
 ---
 
-![Shallow water and an old wood dock in southern Patagonia, Argentina](https://raw.githubusercontent.com/juanpabloventoso/end-point-blog/refs/heads/master/2025/05/implementing-azure-blob-storage-net-9/water-and-wood-dock.jpg)
+![Shallow water and an old wood dock in southern Patagonia, Argentina](/blog/2025/05/implementing-azure-blob-storage-net-9/water-and-wood-dock.jpg)
 <!-- Photo by Juan Pablo Ventoso, 2022. -->
 
 Businesses keep moving toward scalable and cloud-based architectures. With this in mind, a client that was dealing with random errors in a [.NET](https://dotnet.microsoft.com/) app when saving files locally on the web server, decided to get rid of that process and replace it with an [Azure Blob Storage](https://azure.microsoft.com/en-us/products/storage/blobs) implementation.
