@@ -11,7 +11,7 @@ tags:
 - machine learning
 ---
 
-![Pink Jigsaw Puzzle Piece](/blog/2025/04/vector-search/pexels-ann-h-45017-3482441.jpg)
+![Pink Jigsaw Puzzle Piece](/blog/2025/05/vector-search/pexels-ann-h-45017-3482441.jpg)
 Photo by [Ann H](https://www.pexels.com/photo/pink-jigsaw-puzzle-piece-3482441/) on Pexels.
 
 
@@ -28,7 +28,7 @@ Imagine you’re searching for `a cozy cabin in the woods`. A traditional search
 
 ### How Does It Work?
 
-![vector-search-arch.png](./vector-search-arch.png)
+![vector-search-arch.png](/blog/2025/05/vector-search/vector-search-arch.png)
 
 The magic of vector search happens in three key steps:
 
