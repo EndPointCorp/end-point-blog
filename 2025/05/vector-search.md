@@ -36,7 +36,7 @@ The magic of vector search happens in three key steps:
 
 Once you have access to the data sources that you want to apply vector search, you will need to prepare and ingest the data into your system. This phase will handle data clean-up and extraction from different data sources and formats. For multi-modality support you may need to include multiple data formats like text, image, audio and video.
 
-In embedding generation phase, as depicted above, raw data (like text, images, or audio) is transformed into vectors using suitable embedding ML models. These models (e.g. [all-MiniLM-L6-v2](https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2), [all-mpnet-base-v2](https://huggingface.co/sentence-transformers/all-mpnet-base-v2) for text or [ResNet](https://huggingface.co/docs/transformers/en/model_doc/resnet) for images) analyze the data and spit out a numerical representation, a vector, that captures its essence. For example, the sentence `I love sunny hikes` might become something like `[-0.07571851 -0.02147608 0.07130147 0.1087752 0.02052169, ...]`, where each number reflects a feature of its meaning.
+In embedding generation phase, as depicted above, raw data (like text, images, or audio) is transformed into vectors using suitable embedding ML models. These models (e.g. [all-MiniLM-L6-v2](https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2), [all-mpnet-base-v2](https://huggingface.co/sentence-transformers/all-mpnet-base-v2) for text or [ResNet](https://huggingface.co/docs/transformers/en/model_doc/resnet) for images) analyze the data and spit out a numerical representation, a vector, that captures its essence. For example, the sentence `I love sunny hikes` might become something like `[-0.07571851, -0.02147608, 0.07130147, 0.1087752, 0.02052169, ...]`, where each number reflects a feature of its meaning.
 
 
 #### Storing Vectors
@@ -103,7 +103,7 @@ class SimpleVectorStore:
         ]
         
         # sort and return
-        similarities.sort(key=lambda x: x[1], reverse=True)
+        similarities.sort(key=lambda x: x[2], reverse=True)
         return similarities[:k]
 ```
 
@@ -167,15 +167,15 @@ Regardless of the industry that a RAG application is used for, vector search is 
 
 3. E-Commerce:
 
-Recommending products based on user queries or visual similarity (e.g., “find shoes like these” using an image). Example: Searching for “red sneakers” might return visually similar items even if the product description doesn’t mention “red sneakers.”
+Recommending products based on user queries or visual similarity (e.g. "find shoes like these" using an image). Example: Searching for "red sneakers" might return visually similar items even if the product description doesn’t mention "red sneakers".
 
 4. Content Discovery:
 
-Powering recommendation engines for streaming platforms (e.g., Netflix, Spotify) by finding movies, songs, or articles similar to a user’s interests. Example: Suggesting a sci-fi movie based on a user’s love for “Star Wars.”
+Powering recommendation engines for streaming platforms (e.g. Netflix, Spotify) by finding movies, songs, or articles similar to a user’s interests. Example: Suggesting a sci-fi movie based on a user’s love for "Star Wars".
 
 5. Customer Support:
 
-Enabling chatbots to retrieve relevant knowledge base articles or FAQs by understanding the intent behind a user’s question. Example: A query like “how to reset my device” could pull up guides even if phrased differently.
+Enabling chatbots to retrieve relevant knowledge base articles or FAQs by understanding the intent behind a user’s question. Example: A query like "how to reset my device" could pull up guides even if phrased differently.
 
 6. Image and Video Search:
 
@@ -183,7 +183,7 @@ Allowing users to search for visually similar images or videos, such as finding 
 
 7. Enterprise Search:
 
-Helping employees find documents, emails, or internal resources by understanding the context of their queries. Example: Searching “project timeline” could retrieve relevant spreadsheets or emails.
+Helping employees find documents, emails, or internal resources by understanding the context of their queries. Example: Searching "project timeline" could retrieve relevant spreadsheets or emails.
 
 8. Healthcare:
 
@@ -198,6 +198,3 @@ Although computational cost is one of the challenges of performing similarity se
 ### Wrapping Up
 
 Vector search isn’t just a tech buzzword—it’s a fundamental shift in how we interact with data. By moving beyond rigid keywords to a world of meaning and similarity, it’s unlocking possibilities we’re only beginning to explore. Whether you’re a developer building the next big app or just a curious soul, vector search is worth keeping an eye on. It’s not about finding exactly what you typed—it’s about finding exactly what you meant.
-
-
-
