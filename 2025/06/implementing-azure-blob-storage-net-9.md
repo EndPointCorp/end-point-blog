@@ -2,18 +2,21 @@
 author: "Juan Pablo Ventoso"
 title: "Implementing Azure Blob Storage in .NET 9"
 featured:
-  image_url: /blog/2025/05/implementing-azure-blob-storage-net-9/water-and-wood-dock.png
-description: Tips for implementing Azure Blob Storage in a .NET 9 application.
-date: 2025-05-16
+  image_url: /blog/2025/06/implementing-azure-blob-storage-net-9/water-and-wood-dock.png
+description: "Tips for implementing Azure Blob Storage in a .NET 9 application."
+github_issue_number: 2119
+date: 2025-06-02
 tags:
 - dotnet
-- azure
+- cloud
+- storage
 ---
 
-![Shallow water and an old wood dock in southern Patagonia, Argentina](/blog/2025/05/implementing-azure-blob-storage-net-9/water-and-wood-dock.jpg)
+![Shallow water and an old wood dock in southern Patagonia, Argentina](/blog/2025/06/implementing-azure-blob-storage-net-9/water-and-wood-dock.webp)
+
 <!-- Photo by Juan Pablo Ventoso, 2022. -->
 
-Businesses keep moving toward scalable and cloud-based architectures. With this in mind, a client that was dealing with random errors in a [.NET](https://dotnet.microsoft.com/) app when saving files locally on the web server, decided to get rid of that process and replace it with an [Azure Blob Storage](https://azure.microsoft.com/en-us/products/storage/blobs) implementation.
+Businesses keep moving toward scalable and cloud-based architectures. With this in mind, a client that was dealing with random errors in a [.NET](https://dotnet.microsoft.com/) app when saving files locally on the web server decided to get rid of that process and replace it with an [Azure Blob Storage](https://azure.microsoft.com/en-us/products/storage/blobs) implementation.
 
 Why use Azure Blob Storage? It's an efficient cloud object storage solution from Microsoft, designed to store unstructured data, optimized for storing and serving documents, media, logs, or binary data, especially in applications that expose this data through an API. The key features are high performance, redundancy, reliability, and scalability. There's an SDK that we can use for easy integration and development, be it in .NET or other languages.
 
@@ -21,7 +24,7 @@ Let's take a look at what that change involves. For this example, we will set up
 
 Install the [NuGet](https://www.nuget.org/) package required to connect to Azure Blob Storage. We can do it with the [dotnet CLI](https://learn.microsoft.com/en-us/dotnet/core/tools/), or through the NuGet package manager.
 
-```cmd
+```plain
 dotnet add package Azure.Storage.Blobs
 ```
 
@@ -86,7 +89,7 @@ public class BlobService
 }
 ```
 
-Quite simple, isn't it? Now, let's see a way to easily expose file upload/download endpoints via ASP.NET Core [minimal APIs](https://learn.microsoft.com/en-us/aspnet/core/tutorials/min-web-api). Introduced in .NET 6 and evolving further in .NET 9, minimal APIs provide a lightweight way to build HTTP APIs with a few lines of code. Instead of requiring full controller classes and attributes, minimal APIs let you define routes directly in your main `Program.cs` file, using simple [lambda expressions](https://learn.microsoft.com/dotnet/csharp/language-reference/operators/lambda-expressions). This makes them ideal for microservices, lightweight APIs, and internal tools where fast development and low overhead are essential.
+Quite simple, isn't it? Now, let's see a way to easily expose file upload/​download endpoints via ASP.NET Core [minimal APIs](https://learn.microsoft.com/en-us/aspnet/core/tutorials/min-web-api). Introduced in .NET 6 and evolving further in .NET 9, minimal APIs provide a lightweight way to build HTTP APIs with a few lines of code. Instead of requiring full controller classes and attributes, minimal APIs let you define routes directly in your main `Program.cs` file, using simple [lambda expressions](https://learn.microsoft.com/dotnet/csharp/language-reference/operators/lambda-expressions). This makes them ideal for microservices, lightweight APIs, and internal tools where fast development and low overhead are essential.
 
 For this example, we will create two endpoints that will use our BlobService class to communicate with Azure Blob Storage to save and retrieve files. In our `Program.cs` file, let's add:
 
@@ -117,7 +120,7 @@ app.MapGet("/download/{fileName}", async (string fileName, BlobService blobServi
 });
 ```
 
-Of course, we would want to configure authentication, add validations, and other security measures on these endpoints to prevent SPAMmers from filling out our storage capacity 🙂. But the basics are there.
+Of course, we would want to configure authentication, add validations, and other security measures on these endpoints to prevent spammers from filling out our storage capacity 🙂. But the basics are there.
 
 Also, there are recommended practices for any Azure integrations to consider, as we increase the robustness of our application:
 
