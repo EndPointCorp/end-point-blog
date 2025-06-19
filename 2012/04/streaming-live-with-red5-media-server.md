@@ -10,7 +10,7 @@ date: 2012-04-27
 
 <img border="0" width="200" height="112" src="/blog/2012/04/streaming-live-with-red5-media-server/google-hangout-collage.jpg"/>
 
-Are you excited about [Google Hangouts](https://tools.google.com/dlpage/hangoutplugin)? Would you be even more excited to implement live streaming yourself?
+Are you excited about [Google Hangouts](https://web.archive.org/web/20121117123926/https://tools.google.com/dlpage/hangoutplugin)? Would you be even more excited to implement live streaming yourself?
 
 Today we will take a look under the hood of broadcasting and even start implementing our own mini hangout.
 
@@ -18,17 +18,17 @@ Today we will take a look under the hood of broadcasting and even start implemen
 
 Live streaming is based on [RTMP](https://en.wikipedia.org/wiki/Real-Time_Messaging_Protocol) protocol. It is able to transfer video, audio and generally any data in real-time over Internet between server and client.
 
-The most popular combination for video/audio streaming is Adobe Flash Player as a client software and a proprietary [Adobe Flash Media Server](https://www.adobe.com/products/adobe-media-server-family.html) as a server software. Another option is Wowza Streaming solutions.
+The most popular combination for video/audio streaming is Adobe Flash Player as a client software and a proprietary [Adobe Flash Media Server](https://web.archive.org/web/20121108111840/https://www.adobe.com/products/adobe-media-server-family.html) as a server software. Another option is Wowza Streaming solutions.
 
 <a href="/blog/2012/04/streaming-live-with-red5-media-server/image-1.png" imageanchor="1" style="clear: right; float: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" height="79" src="/blog/2012/04/streaming-live-with-red5-media-server/image-1.png" width="200"/></a>
 
-Luckily for us there is an open-source [Red5 Media Server](http://red5.org/)—​the most popular if not the only one stable of all open-source media streaming servers. We will be leveraging Red5 to dive into RTMP world and the cutting edge streaming technologies.
+Luckily for us there is an open-source [Red5 Media Server](https://www.red5.net/open-source-live-streaming/)—​the most popular if not the only one stable of all open-source media streaming servers. We will be leveraging Red5 to dive into RTMP world and the cutting edge streaming technologies.
 
 ### Exploring Red5 Media Server
 
 Download and install Red5 Media Server for your environment from [here](https://web.archive.org/web/20120809211757/http://red5.org/downloads/red5/1_0/). Now it is time to implement a sweeping live stream between our two laptops.
 
-Red5 comes with the set of [demo applications](http://localhost:5080/demos/) that are very handy to base the development on. Demo applications can be installed via the [Installer](http://localhost:5080/installer/). For the purpose of this article we need to install the “oflaDemo” application.
+Red5 comes with the set of demo applications (http://localhost:5080/demos/) that are very handy to base the development on. Demo applications can be installed via the Installer (http://localhost:5080/installer/). For the purpose of this article we need to install the “oflaDemo” application.
 
 After installation is complete, we can launch the demo for Simple Broadcaster application. In Simple Broadcaster we click “Connect” button, grant Flash Player permission to use camera and microphone, and—​voila!—​we should now be broadcasting live via Simple Broadcaster application to oflaDemo application.
 
