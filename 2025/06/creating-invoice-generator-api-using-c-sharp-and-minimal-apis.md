@@ -1,19 +1,17 @@
 ---
 author: "Bimal Gharti Magar"
-title: "Creating Invoice Generator API using C# and Minimal APIs"
+title: "Creating API for Invoice Generator using C# and Minimal APIs"
 featured:
-  image_url: /blog/2025/01/learning-vue-3-composables-by-creating-an-invoice-generator/scaffolding.webp
-description: How to create Vue 3 composables to properly separate business logic in an invoice generator application.
-date: 2025-06-17
+  image_url: 
+description: How to create REST API using C# and Minimal APIs.
+date: 2025-07-01
 tags:
-- vue
+- csharp
+- database
 - javascript
 - frameworks
 - programming
 ---
-![Regularly spaced curved steel beams hold up a metal roof with windows. The back of the room is visible, and a wall lined with windows that have faint light peeking through.](/blog/2025/01/learning-vue-3-composables-by-creating-an-invoice-generator/scaffolding.webp)
-
-<!-- Photo by Seth Jensen, 2024. -->
 
 ### Introduction
 
