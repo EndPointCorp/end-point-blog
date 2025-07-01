@@ -17,7 +17,7 @@ tags:
 
 ### Introduction
 
-In this blog post, we will explore how to create a robust Invoice Generator API using .NET 9 and [Minimal APIs](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/minimal-apis/overview?view=aspnetcore-9.0), with a focus on integrating it with an existing Vue frontend implementation that we talked in [previous blog post](/blog/2025/01/learning-vue-3-composables-by-creating-an-invoice-generator/).
+In this blog post, we will explore how to create a robust Invoice Generator API using .NET 9 and [Minimal APIs](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/minimal-apis/overview?view=aspnetcore-9.0), with a focus on integrating it with an existing Vue frontend implementation that we covered in [previous blog post](/blog/2025/01/learning-vue-3-composables-by-creating-an-invoice-generator/).
 
 We will use Minimal APIs framework to create a RESTful API that can be easily used by our Vue application. Minimal APIs requires less boilerplate code and configuration compared to traditional controller based approach. It is suited for smaller APIs, microservices or serverless functions. We can learn more about choosing between controller based APIs and minimal APIs [here](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/apis?view=aspnetcore-9.0).
 
@@ -27,11 +27,11 @@ Before going further into the code, we should make sure we have the following to
 
 * .NET 9 (the latest version of the .NET runtime)
 
-Additionally, we already have an existing Vue frontend implementation that lacks API connectivity from our previous post. We will guide you through the process of integrating the Invoice Generator API with .
+Additionally, we already have an existing Vue frontend implementation that lacks API connectivity from our previous post. We will guide you through the process of integrating the Invoice Generator API with vue application.
 
 ### Setting up the Project
 
-We will use `dotnet` command to create a new .NET 9 project and set up the Minimal APIs framework using below steps:
+We will use the `dotnet` command to create a new .NET 9 project and set up the Minimal APIs framework using below steps:
 - Create a new .NET Core Web API project using the following command:
 ```
 dotnet new webapi -n invoice-generator-api
@@ -88,7 +88,7 @@ record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
 
 ```
 -
-- We will also add following packages for swagger UI, Entity Framework and EF Core provider for PostgreSQL.
+- We will also add the following packages for swagger UI, Entity Framework and EF Core provider for PostgreSQL.
 ```bash 
 dotnet add package Microsoft.Extensions.ApiDescription.Server
 dotnet add package Swashbuckle.AspNetCore.SwaggerUi
@@ -111,7 +111,7 @@ Update `Program.cs` to include Swagger UI configuration to point to open API jso
 
  app.UseHttpsRedirection();
 ```
-Once the application is run using `dotnet run`, you can access Swagger UI at http://localhost:<PORT>/swagger on your browser, which should look like below.
+Once the application is running using `dotnet run`, you can access Swagger UI at http://localhost:<PORT>/swagger on your browser, which should look like below.
 ![Swagger base page.](/blog/2025/06/creating-invoice-generator-api-using-c-sharp-and-minimal-apis/swagger.png)
 
  
@@ -222,7 +222,7 @@ public class UsageAmount : Base
 }
 ```
 
-We will now use these classes to create tables in database, for which, we will define the DBSet for each classes in our `InvoiceDbContext.cs`.
+Will will now use these classes to create tables in the database and then define a `DBSet` for each class in our `InvoiceDbContext.cs`.
 
 ```diff
 public InvoiceDbContext(DbContextOptions<InvoiceDbContext> options)
@@ -236,7 +236,7 @@ public InvoiceDbContext(DbContextOptions<InvoiceDbContext> options)
  }
 ```
 
-Since, we will be using soft delete feature in our API, we will use [Global Query Filters](https://learn.microsoft.com/en-us/ef/core/querying/filtering) to filter out the deleted records from our table. So, we configure the query filters in `OnModelCreating` using the `HasQueryFilter` API in `InvoiceDbContext.cs`. After which, the file should look like below
+Since we will be using soft delete feature in our API, we will use [Global Query Filters](https://learn.microsoft.com/en-us/ef/core/querying/filtering) to filter out the deleted records from our table. So, we configure the query filters in `OnModelCreating` using the `HasQueryFilter` API in `InvoiceDbContext.cs`. After which, the file should look like below.
 
 ```diff
 public InvoiceDbContext(DbContextOptions<InvoiceDbContext> options)
@@ -398,7 +398,7 @@ public static class InvoiceEndpoints
 }
 ```
 
-Then we will also implement `InvoiceDetailEndpoint.cs`. We will only define delete endpoint for soft deleting the line items. We created this also to demonstrate how to use multiple files in the `Program.cs` to map the endpoints to certain url.
+Then we will also implement `InvoiceDetailEndpoint.cs`. We will only define a delete endpoint for soft deleting the line items. We created this also to demonstrate how to use multiple files in the `Program.cs` to map the endpoints to a certain url.
 ```csharp
 // InvoiceDetailEndpoint.cs
 
@@ -423,7 +423,7 @@ public static class InvoiceDetailEndpoints
 }
 ```
 
-Similar to how traditional controller APIs are separated in their own files, we now have the implementation for the endpoints in two files. We will now register and map the endpoints to preferred URL using `MapGroup` in `Program.cs` file.
+Similar to how traditional controller APIs are separated in their own files, we now have the implementation for the endpoints in two files. We will now register and map the endpoints to a preferred URL using `MapGroup` in `Program.cs` file.
 ```diff
 // Program.cs
 
@@ -433,7 +433,7 @@ Similar to how traditional controller APIs are separated in their own files, we 
 +
  app.Run();
 ```
-We also need to add a config to expose `Uploads` folder so the images can be loaded from the running API server. Also, make sure to create `Uploads` folder before running the application, otherwise the application wouldn't run.
+We also need to add a config to expose the `Uploads` folder so the images can be loaded from the running API server. Also, make sure to create the `Uploads` folder before running the application, otherwise the application wouldn't run.
 ```diff
 // Program.cs
 
