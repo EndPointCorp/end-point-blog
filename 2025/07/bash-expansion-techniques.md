@@ -55,9 +55,9 @@ You can use the `#` character to remove a *word* from the beginning of the strin
 >
 > I looked this up so I would know the distinction between *words* and [*parameters*](https://www.gnu.org/software///bash/manual/bash.html#Shell-Parameters). Parameters are more specific: mainly just variables, positional parameters, and a few special parameters.
 
-#### Alternate method with search and replace
+#### Alternate method with parameter expansion search and replace
 
-As a bonus, my co-worker Josh showed me how he uses search and replace (which I cover two examples down) to solve the same problem:
+As a bonus, my co-worker Josh showed me how he uses search and replace to solve the same problem. Note that this is parameter expansion search and replace, which has different syntax from history expansion search and replace (shown two examples down). Also, they both search for a *pattern*, not a regular expression, so `.` will match the literal `.` character, etc.
 
 ```bash
 for f in *.png; do
