@@ -5,6 +5,7 @@ title: "The Case of the Mistimed Python Script"
 github_issue_number: 2094
 featured:
   image_url: /blog/2025/02/case-of-the-mistimed-script/clock-tower.webp
+  endpoint: true
 description: "Solving a mysterious timing issue where a cron job ran 5 hours early, despite everything seeming to be in order…"
 tags:
 - sysadmin

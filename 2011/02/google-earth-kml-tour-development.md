@@ -5,6 +5,7 @@ github_issue_number: 416
 tags:
 - google-earth
 - visionport
+- kml
 date: 2011-02-24
 ---
 

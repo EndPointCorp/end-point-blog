@@ -10,6 +10,7 @@ tags:
 - java
 - frameworks
 - migration
+- apache-struts
 ---
 
 ![A flock of flamingos fly against a pink and blue sunset](/blog/2024/10/migration-from-struts1-to-struts2/pexels-alfredinix-29415588-6894704.webp)

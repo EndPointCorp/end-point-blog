@@ -6,6 +6,7 @@ tags:
 - google-earth
 - visionport
 - kamelopard
+- kml
 date: 2011-08-25
 ---
 

@@ -14,6 +14,8 @@ tags:
 
 ![The edges of the image show dark green (almost black) leaves out of focus, creating a frame around the center, where there is a bright full moon sitting in the evening blue sky. The detailed moon takes up a third of the image vertically.](/blog/2024/05/how-to-validate-record-uniqueness-in-asp.net/moon-through-trees.webp)
 
+<!-- Photo by Seth Jensen, 2023. -->
+
 In ASP.NET, the [`System.ComponentModel.DataAnnotations` namespace](https://learn.microsoft.com/en-us/dotnet/api/system.componentmodel.dataannotations?view=net-8.0) includes many [attributes](https://learn.microsoft.com/en-us/dotnet/csharp/advanced-topics/reflection-and-attributes/) that can be used to instruct the framework to perform [basic validation tasks](https://learn.microsoft.com/en-us/aspnet/core/mvc/models/validation?view=aspnetcore-8.0) for us. There are built-in validators for ensuring that certain fields [are present](https://learn.microsoft.com/en-us/dotnet/api/system.componentmodel.dataannotations.requiredattribute), that they [meet character length limits](https://learn.microsoft.com/en-us/dotnet/api/system.componentmodel.dataannotations.stringlengthattribute), that they [don't exceed or fall short of certain amounts](https://learn.microsoft.com/en-us/dotnet/api/system.componentmodel.dataannotations.rangeattribute), that they [match certain formats](https://learn.microsoft.com/en-us/dotnet/api/system.componentmodel.dataannotations.regularexpressionattribute?view=net-8.0), and more.
 
 One omission however, is checking for record uniqueness: making sure that no other record in the entity's underlying persistent data storage has the same "name", or the same "code", or the same "any other field".

@@ -56,15 +56,26 @@ For blog authors, we were using a fork of an abandoned Middleman plugin. With Hu
 
 #### Some drawbacks
 
+> July 2025 Update: Hugo has seen a lot of development since this post was written in 2021. I've added Wayback Machine links so the references are historical, but these examples are out of date now. From my usage in the past few years, the documentation has improved quite a bit.
+
 We're loving the wonderfully fast build times and easy local development. I like the templating fairly well, and the simple configuration is wonderful. But Hugo does have several issues and missing features I'd like to see.
 
 One place Zola wins over Hugo is the ability to easily print the [entire context](https://www.getzola.org/documentation/templates/overview/) in a big JSON object. It's a bit hard to navigate, but in my experience much easier and clearer than Hugo, where I have to either try using `printf` to display the context's variables, or search through the documentation. This was one of my favorite ways to quickly debug and learn about the inner workings of Zola, and would be very welcome in Hugo as well, without needing to know [Go formatting width](https://pkg.go.dev/fmt) and the full shape of Hugo's context object beforehand.
 
+> Joe Mooring, a Hugo developer, mentioned that you can print some things with [`debug.Dump`](https://gohugo.io/functions/debug/dump/). I tried passing the context with `{{ debug.Dump . }}`, which worked well for seeing what context variables are available/​set.
+
 Documentation is another area where Hugo struggles sometimes. Pages often don't feel interconnected and examples are often lacking. Here are a few examples I encountered:
 
-* The Hugo Pipes page [SASS/​SCSS](https://gohugo.io/hugo-pipes/scss-sass/) shows how to transform Sass files to CSS, but did not link to the very useful [Page Resources](https://gohugo.io/hugo-pipes/scss-sass/) page. It turned out I just needed to link to `{{ $style.RelPermalink }}`, but as a new user it wasn't clear that the CSS file was considered a `Resource`. Having more links to related pages or more examples could save a lot of headaches for newbies.
-* [Lookup Order](https://gohugo.io/templates/lookup-order/#hugo-layouts-lookup-rules) says under the `Layout` section that it "can be set in page front matter," but I had to look under [Front Matter](https://gohugo.io/content-management/front-matter/) to see that `layout` is the key name. A small change, and didn't take long to experiment and find out, but especially since YAML is case sensitive, having a link to the actual front matter key would be better.
+* The Hugo Pipes page [SASS/​SCSS](https://web.archive.org/web/20210728193528/https://gohugo.io/hugo-pipes/scss-sass/) shows how to transform Sass files to CSS, but did not link to the very useful [Page Resources](https://web.archive.org/web/20210617171030/https://gohugo.io/content-management/page-resources/) page. It turned out I just needed to link to `{{ $style.RelPermalink }}`, but as a new user it wasn't clear that the CSS file was considered a `Resource`. Having more links to related pages or more examples could save a lot of headaches for newbies.
+* [Lookup Order](https://web.archive.org/web/20210322083411/https://gohugo.io/templates/lookup-order/#hugo-layouts-lookup-rules) says under the `Layout` section that it "can be set in page front matter," but I had to look under [Front Matter](https://web.archive.org/web/20210620065133/https://gohugo.io/content-management/front-matter) to see that `layout` is the key name. A small change, and didn't take long to experiment and find out, but especially since YAML is case sensitive, having a link to the actual front matter key would be better.
 * Enabling custom outputs on a per-taxonomy basis does not seem to be possible. We want to generate Atom feeds for our blog tags, but not for our blog authors, both of which are taxonomies. As far as I can tell, we have to enable them both and live with the cruft of unnecessary blog author feeds being generated.
+
+  > Joe also provided a solution to this problem: cascade the `outputs` front matter field down from the taxonomy page (e.g., content/tags/\_index.md) or from your site configuration.
+  >
+  > * https://gohugo.io/configuration/cascade/
+  > * https://gohugo.io/content-management/front-matter/#cascade-1
+  >
+  > I tested this and it works like a charm.
 
 ### Onward and upward!
 

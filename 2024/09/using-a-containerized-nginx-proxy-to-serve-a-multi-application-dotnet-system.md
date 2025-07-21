@@ -5,6 +5,7 @@ date: 2024-09-24
 github_issue_number: 2079
 featured:
   image_url: /blog/2024/09/using-a-containerized-nginx-proxy-to-serve-a-multi-application-dotnet-system/estate-house.webp
+  endpoint: true
 description: How to create a fully containerized system running Nginx alongside multiple .NET apps in a Docker container.
 tags:
 - dotnet

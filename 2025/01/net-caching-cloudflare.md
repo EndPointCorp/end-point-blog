@@ -3,6 +3,7 @@ author: "Juan Pablo Ventoso"
 title: "Reducing page load times: Cloudflare and caching with ASP.NET"
 featured:
   image_url: /blog/2025/01/net-caching-cloudflare/metal-flower-buenos-aires.webp
+  endpoint: true
 description: How to reduce page load times by caching dynamic content with ASP.NET, and serving the cached content through Cloudflare CDN.
 github_issue_number: 2085
 date: 2025-01-14
