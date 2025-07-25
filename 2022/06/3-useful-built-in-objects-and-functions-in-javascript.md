@@ -23,7 +23,7 @@ With that spirit, here's a little list of cool objects and functions in JavaScri
 
 The [`Set` object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set) has a lot of use cases, but one I find myself using a lot is a set of selected items in a list like this:
 
-![A table of items which can be selected with check boxes](/blog/2022/06/3-useful-built-in-objects-and-functions-in-javascript/selection.png)
+![A table of items which can be selected with check boxes](/blog/2022/06/3-useful-built-in-objects-and-functions-in-javascript/selection.webp)
 
 Why is `Set` a good fit for this? Because a `Set` is a list of unique items (we shouldn't have one item in the `selected` list twice), we can add and remove items from it easily, and we can check membership with a single, obvious method that returns a boolean. Let's look at an example using an array first, which mimics code I've seen quite a bit.
 
