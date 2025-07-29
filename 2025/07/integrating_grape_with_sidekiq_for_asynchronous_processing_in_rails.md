@@ -12,7 +12,7 @@ tags:
 
 # Integrating Grape with Sidekiq for Asynchronous Processing in Rails
 
-When building an API in a Rails application using Grape, there is a natural tendency to handle all logic synchronously. For small applications or internal tools, that can be fine. But for a growing SaaS platform or public-facing API, doing too much work in the request cycle leads to slower response times and can make your endpoints fragile.
+When building an API in a Rails application using Grape, there is a natural tendency to handle all logic synchronously. For small applications or internal tools, that can work well. But for a growing SaaS platform or public-facing API, doing too much work in the request cycle leads to slower response times and can make your endpoints fragile.
 
 This post walks through the process of integrating Grape with Sidekiq so that heavy tasks can be moved to background workers. The goal is to keep endpoints fast and resilient while offloading expensive processing.
 
@@ -20,7 +20,7 @@ This post walks through the process of integrating Grape with Sidekiq so that he
 
 Many common tasks in an API do not need to be done immediately. Examples include sending confirmation emails, syncing to a third-party service, exporting data, or generating reports. By sending these jobs to a background processor like Sidekiq, the API can respond quickly and let the user continue without waiting.
 
-Seperating out these tasks also gives better observability and error handling. Sidekiq offers retries, job tracking, and simple ways to inspect queues out of the box. 
+Separating these tasks also gives better observability and error handling. Sidekiq offers retries, job tracking, and simple ways to inspect queues out of the box. 
 
 ## Setting up Grape and Sidekiq
 
