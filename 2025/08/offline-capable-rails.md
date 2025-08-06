@@ -59,7 +59,7 @@ registerRoute(
 )
 ```
 
-This configuration tells the browser to try the network first for page navigation, but fall back to cache if offline. Static assets such as stylesheets, scripts, and images are cached after the first visit.
+This configuration tells the browser to try the network first for page navigation, but to fall back to cache if offline. Static assets such as stylesheets, scripts, and images are cached after the first visit.
 
 ## Registering the Service Worker in Your Rails App
 
