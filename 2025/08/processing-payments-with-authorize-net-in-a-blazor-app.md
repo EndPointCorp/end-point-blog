@@ -13,7 +13,7 @@ tags:
 - payments
 ---
 
-![European roofteps curve at the bottom of the image upwards. The rest of the image is a partially overcast gray sky with some sun peeking from behind the clouds](/blog/2025/08/processing-payments-with-authorize-net-in-a-blazor-app/curved-buildings.webp)
+![European rooftops curve at the bottom of the image upwards. The rest of the image is a partially overcast gray sky with some sun peeking from behind the clouds](/blog/2025/08/processing-payments-with-authorize-net-in-a-blazor-app/curved-buildings.webp)
 
 <!-- Photo by Seth Jensen, 2024 -->
 
@@ -684,9 +684,9 @@ public async void SubmitOrder(string paymentMethodNonceValue, string paymentMeth
 }
 ```
 
-The first thing to note about the `SubmitOrder` method is that it is annotated with the `[JSInvokable]` attribute. This attribute allows the JavaScipt code to call this method, through the `DotNetObjectReference` instance that it is given. Other than that, the method is straightforward. It calls the `POST Payments` endpoint, passing it the values returned by Authorize.Net (i.e. `paymentMethodNonceValue` and `paymentMethodNonceDescriptor`), which are given to our Blazor component by our JavaScrpt module.
+The first thing to note about the `SubmitOrder` method is that it is annotated with the `[JSInvokable]` attribute. This attribute allows the JavaScript code to call this method, through the `DotNetObjectReference` instance that it is given. Other than that, the method is straightforward. It calls the `POST Payments` endpoint, passing it the values returned by Authorize.Net (i.e. `paymentMethodNonceValue` and `paymentMethodNonceDescriptor`), which are given to our Blazor component by our JavaScript module.
 
-And, of course, we need to update our JavaScrpt module to do the rest of the logic of calling Authorize.Net and this new `SubmitOrder` method. Here's how we implement the `setUpSubmit` function in `Payment.razor.js`:
+And, of course, we need to update our JavaScript module to do the rest of the logic of calling Authorize.Net and this new `SubmitOrder` method. Here's how we implement the `setUpSubmit` function in `Payment.razor.js`:
 
 ```javascript
 // BlazorAuthorizeNet.Frontend/Pages/Payment.razor.js
