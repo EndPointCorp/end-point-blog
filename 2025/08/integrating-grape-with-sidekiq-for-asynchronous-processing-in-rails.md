@@ -23,7 +23,7 @@ This post walks through the process of integrating Grape with Sidekiq so that he
 
 Many common tasks in an API do not need to be done immediately. Examples include sending confirmation emails, syncing to a third-party service, exporting data, or generating reports. By sending these jobs to a background processor like Sidekiq, the API can respond quickly and let the user continue without waiting.
 
-Separating these tasks also gives better observability and error handling. Sidekiq offers retries, job tracking, and simple ways to inspect queues out of the box. 
+Separating these tasks also gives better observability and error handling. Sidekiq offers retries, job tracking, and simple ways to inspect queues out of the box.
 
 ### Setting up Grape and Sidekiq
 

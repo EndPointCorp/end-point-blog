@@ -1,7 +1,11 @@
 ---
 author: "Kevin Campusano"
-title: "Processing payments with Authorize.NET in a Blazor app"
-date: 2025-08-08
+title: "Processing payments with Authorize.Net in a Blazor app"
+description: "How to create a Blazor WebAssembly app to capture credit card information using Authorize.Net's Accept.js, returning a payment token for backend processing via an ASP.NET Core Web API."
+featured:
+  image_url: /blog/2025/08/processing-payments-with-authorize-net-in-a-blazor-app/curved-buildings.webp
+github_issue_number: 2136
+date: 2025-08-11
 tags:
 - csharp
 - aspdotnet
@@ -9,34 +13,38 @@ tags:
 - payments
 ---
 
-Blazor, the SPA framework from ASP.NET Core is excellent technology. It is however, very particular when it comes to interacting with JavaScript. The reason being that Blazor apps are written in C#, with Razor templates. So, if a Blazor app needs to interact with a JavaScript library, for example, to process credit card payments through Authorize.NET, special care is needed. In this article, we'll see an approach on how to make that happen.
+![European roofteps curve at the bottom of the image upwards. The rest of the image is a partially overcast gray sky with some sun peeking from behind the clouds](/blog/2025/08/processing-payments-with-authorize-net-in-a-blazor-app/curved-buildings.webp)
 
-We'll develop a Blazor WebAssembly Standalone app which will include a form to capture credit card information and send it to Authorize.NET using their Accept.js frontend integration library. Then, Authorize.NET will return back a payment token that represents the captured credit card. Our frontend will then submit the resulting token to a backend API to actually effectuate the payment.
+<!-- Photo by Seth Jensen, 2024 -->
 
-This backend API, which we'll also develop, will be a simple ASP.NET Core Web API. It'll include an endpoint for submitting payment transactions to Authorize.NET, given the token obtained via Accept.js.
+Blazor, the SPA framework from ASP.NET Core, is excellent technology. However, it is very particular when it comes to interacting with JavaScript. This is because Blazor apps are written in C# with Razor templates. So, if a Blazor app needs to interact with a JavaScript library (for example, to process credit card payments through Authorize.Net), special care is needed. In this article, we'll see an approach on how to make that happen.
+
+We'll develop a Blazor WebAssembly standalone app which will include a form to capture credit card information and send it to Authorize.Net using their Accept.js frontend integration library. Then, Authorize.Net will return a payment token that represents the captured credit card. Our frontend will then submit the resulting token to a backend API to actually effectuate the payment.
+
+This backend API, which we'll also develop, will be a simple ASP.NET Core Web API. It'll include an endpoint for submitting payment transactions to Authorize.Net, given the token obtained via Accept.js.
 
 > You can find the all the source code discussed here [on GitHub](https://github.com/megakevin/end-point-blog-blazor-authorize-net).
 
-# The backend
+### The backend
 
 Let's begin by creating a new ASP.NET Core Web API project with this:
 
-```sh
+```
 dotnet new webapi --use-controllers -o BlazorAuthorizeNet.WebApi
 ```
 
-We also need to install Authorize.NET's NuGet package:
+We also need to install Authorize.Net's NuGet package:
 
-```sh
+```
 cd BlazorAuthorizeNet.WebApi
 dotnet add package AuthorizeNet.Core --version 8.0.1
 ```
 
-## Interacting with Authorize.NET
+#### Interacting with Authorize.Net
 
-Now we have to create a class to submit payment transactions to Authorize.NET. You can arrive at something like this by reading the Authorize.NET documentation. But here's what we will go with:
+Now we have to create a class to submit payment transactions to Authorize.Net. You can arrive at something like this by reading the Authorize.Net documentation, but here's what we will go with:
 
-First a class to set up the connection and serve as entry point:
+First, a class to set up the connection and serve as entry point.
 
 ```csharp
 // BlazorAuthorizeNet.WebApi/Payments/AuthorizeNetPaymentGateway.cs
@@ -47,7 +55,7 @@ using BlazorAuthorizeNet.WebApi.Models;
 
 namespace BlazorAuthorizeNet.WebApi.Payments;
 
-// Provives an interface for interacting with the Authorize.NET payment processor.
+// Provives an interface for interacting with the Authorize.Net payment processor.
 public class AuthorizeNetPaymentGateway : IPaymentGateway
 {
     private readonly IConfiguration _configuration;
@@ -57,14 +65,14 @@ public class AuthorizeNetPaymentGateway : IPaymentGateway
         _configuration = configuration;
     }
 
-    // Submits a payment transaction to Authorize.NET
+    // Submits a payment transaction to Authorize.Net
     public PaymentTransactionResult CreatePaymentTransaction(Order order)
     {
         PrepareConnection();
         return AuthorizeNetCreateTransaction.Run(order);
     }
 
-    // This method sets up the AuthorizeNet.Core client library's connection to Authorize.NET's Web API.
+    // This method sets up the AuthorizeNet.Core client library's connection to Authorize.Net's Web API.
     // The values for RunEnvironment and MerchantAuthentication are constructed based on app settings.
     private void PrepareConnection()
     {
@@ -83,7 +91,7 @@ public class AuthorizeNetPaymentGateway : IPaymentGateway
 
 ```
 
-Then a class that implements the actual call to Authorize.NET's endpoint and the parsing of the response:
+Then a class that implements the actual call to Authorize.Net's endpoint and the parsing of the response.
 
 ```csharp
 // BlazorAuthorizeNet.WebApi/Payments/AuthorizeNetCreateTransaction.cs
@@ -94,17 +102,17 @@ using BlazorAuthorizeNet.WebApi.Models;
 
 namespace BlazorAuthorizeNet.WebApi.Payments;
 
-// Calls the Authorize.NET "Create an Accept Payment Transaction" API endpoint.
+// Calls the Authorize.Net "Create an Accept Payment Transaction" API endpoint.
 // https://developer.authorize.net/api/reference/index.html#accept-suite-create-an-accept-payment-transaction
 internal static class AuthorizeNetCreateTransaction
 {
     // This method accepts an Order object, which is nothing more than a DTO that contains all the information needed
-    // to piece together a request payload for Authorize.NET's "Create an Accept Payment Transaction" API endpoint.
+    // to piece together a request payload for Authorize.Net's "Create an Accept Payment Transaction" API endpoint.
     // It constructs a new object that represents such payload (i.e. the createTransactionRequest), submits the request,
     // and handles the respose.
     //
     // It returns a PaymentTransactionResult which is, again, a DTO that captures important information from the
-    // response from Authorize.NET so that the code and issued the request can act according to the response.
+    // response from Authorize.Net so that the code and issued the request can act according to the response.
     internal static PaymentTransactionResult Run(Order order)
     {
         // 1. Construct the request payload.
@@ -131,9 +139,9 @@ internal static class AuthorizeNetCreateTransaction
         return BuildResult(response);
     }
 
-    // As we've mentioned before, the way we're going to process payments is using Authorize.NET's Accept.js client side
+    // As we've mentioned before, the way we're going to process payments is using Authorize.Net's Accept.js client side
     // library to tokenize a credit card. This is the method that constructs the part of the request that instructs
-    // Authorize.NET to process the payment in that fashion. It uses an "opaqueDataType" which contains the "Nonce
+    // Authorize.Net to process the payment in that fashion. It uses an "opaqueDataType" which contains the "Nonce
     // descriptor" and "Nonce value" fields. These fields represent the tokenized credit card sent to the backend by the
     // frontend.
     private static paymentType BuildPayment(Order order) =>
@@ -167,7 +175,7 @@ internal static class AuthorizeNetCreateTransaction
             unitPrice = item.UnitPrice
         }).ToArray();
 
-    // This method constructs a PaymentTransactionResult based on the response from Authorize.NET.
+    // This method constructs a PaymentTransactionResult based on the response from Authorize.Net.
     // It inspects the response in various ways to determine whether it was successful or erroneus and extracts useful
     // information from it.
     private static PaymentTransactionResult BuildResult(createTransactionResponse? response)
@@ -225,9 +233,9 @@ internal static class AuthorizeNetCreateTransaction
 }
 ```
 
-Those classes have the core logic for interacting with Authorize.NET to submit payment transactions using credit cards tokenized with Accept.js. There are additional supporting DTOs used here like `PaymentTransactionResult` and `Order`. You can see them [on GitHub](https://github.com/megakevin/end-point-blog-blazor-authorize-net/tree/main/BlazorAuthorizeNet.WebApi/Models).
+Those classes have the core logic for interacting with Authorize.Net to submit payment transactions using credit cards tokenized with Accept.js. There are additional supporting DTOs used here like `PaymentTransactionResult` and `Order`. You can see them [on GitHub](https://github.com/megakevin/end-point-blog-blazor-authorize-net/tree/main/BlazorAuthorizeNet.WebApi/Models).
 
-The `AuthorizeNetPaymentGateway` class also employs various configuration settings necessary for interacting with Authorize.NET: `AuthNetEnvironment`, `AuthNetLoginId` and `AuthNetTransactionKey`. So we need to make sure to define them in the WebApi project's `appsettings.json` file:
+The `AuthorizeNetPaymentGateway` class also employs various configuration settings necessary for interacting with Authorize.Net: `AuthNetEnvironment`, `AuthNetLoginId`, and `AuthNetTransactionKey`. So we need to make sure to define them in the WebApi project's `appsettings.json` file:
 
 ```json
 {
@@ -238,9 +246,9 @@ The `AuthorizeNetPaymentGateway` class also employs various configuration settin
 }
 ```
 
-These values are unique to the particular Authorize.NET account being used.
+These values are unique to the particular Authorize.Net account being used.
 
-## Defining the API endpoint
+#### Defining the API endpoint
 
 We also need to define the endpoint for the frontend to submit the payment. This controller does this:
 
@@ -268,7 +276,7 @@ public class PaymentsController : ControllerBase
     [HttpPost]
     public ActionResult PostPayment([FromBody] PaymentPayload payload)
     {
-        // To keep things simple, this endpoint expects the values obtained from Authorize.NET's Accept.js that
+        // To keep things simple, this endpoint expects the values obtained from Authorize.Net's Accept.js that
         // represent the tokenized credit card, encapsulated in PaymentPayload.
         //
         // For the details of the actual "product" that was "purchased", we simulate an order by creating a hardcoded
@@ -297,7 +305,7 @@ public class PaymentsController : ControllerBase
         );
 
         // Then we simply submit the payment via our payment gateway object and return a response based on the result
-        // we get from Authorize.NET.
+        // we get from Authorize.Net.
         var result = _paymentGateway.CreatePaymentTransaction(order);
 
         if (result.IsSuccess) return Ok(result);
@@ -306,7 +314,7 @@ public class PaymentsController : ControllerBase
 }
 ```
 
-This endpoint expects a request payload that includes the values obtained from Authorize.NET's Accept.js after tokenizing the credit card. `PaymentPayload` represents the data structure and it looks like this:
+This endpoint expects a request payload that includes the values obtained from Authorize.Net's Accept.js after tokenizing the credit card. `PaymentPayload` represents the data structure and it looks like this:
 
 ```csharp
 // BlazorAuthorizeNet.WebApi/Models/PaymentPayload.cs
@@ -389,23 +397,23 @@ Here we've included usage of a new configuration setting: `AllowedOrigins`. This
 }
 ```
 
-# The frontend
+### The frontend
 
-Now for the frontend, we need to create a project for a Blazor WebAssembly Standalone app. This command does it:
+Now for the frontend, we need to create a project for a Blazor WebAssembly standalone app. This command does it:
 
 ```sh
 dotnet new blazorwasm -o BlazorAuthorizeNet.Frontend
 ```
 
-Next we create a new "Payment" page. This is the page where the interaction between Blazor and JavaScript will happen. This page will also submit the credit card information to Authorize.NET, and pass the resulting token to our backend API, to effectuate the payment. Here's an overview of how it will all work:
+Next we create a new "Payment" page. This is the page where the interaction between Blazor and JavaScript will happen. This page will also submit the credit card information to Authorize.Net, and pass the resulting token to our backend API, to effectuate the payment. Here's an overview of how it will all work:
 
-We will define a new `Payment.razor` component which will include the form to capture the credit card information. It will also include logic to load the JavaScript module that will handle interactions with Authorize.NET. This JavaScript module will be defined in a new `Payment.razor.js` file and will take care of loading Authorize.NET's Accept.js library. It will also wire up the logic to initiate the call to Authorize.NET when the user submits the form.
+We will define a new `Payment.razor` component which will include the form to capture the credit card information. It will also include logic to load the JavaScript module that will handle interactions with Authorize.Net. This JavaScript module will be defined in a new `Payment.razor.js` file and will take care of loading Authorize.Net's Accept.js library. It will also wire up the logic to initiate the call to Authorize.Net when the user submits the form.
 
-Once everything is initialized and rendered. The user will fill out the form and hit the submit button. Then the logic in `Payment.razor.js` will kick in and use the Accept.js library to send the credit card information to Authorize.NET, and obtain a single-use payment token. Then, it will invoke a method in the `Payment.razor` Blazor component, giving it the token, so that it can be sent to our backend API and submit the payment to Authorize.NET.
+Once everything is initialized and rendered, the user will fill out the form and hit the submit button. Then the logic in `Payment.razor.js` will kick in and use the Accept.js library to send the credit card information to Authorize.Net, and obtain a single-use payment token. Then, it will invoke a method in the `Payment.razor` Blazor component, giving it the token so that it can be sent to our backend API. Finally, it will submit the payment to Authorize.Net.
 
-## Payment page initialization
+#### Payment page initialization
 
-![Payment page initialization](processing-payments-with-authorize-net-in-a-blazor-app/payment-page-initialization.png)
+![Sequence diagram showing payment page initialization flow. Three components are shown at the top: Payment.razor (with a purple @ symbol), Browser (with a blue globe icon), and Payment.razor.js (with a yellow JS icon). The diagram illustrates the initialization process with arrows showing data flow: Payment.razor imports Payment.razor.js into the Browser, which then loads the JS file. The diagram shows IJSObjectReference module being returned to Payment.razor, followed by module initialization with authentication parameters, and finally the loading of Accept.js and event listener setup in the browser.](/blog/2025/08/processing-payments-with-authorize-net-in-a-blazor-app/payment-page-initialization.webp)
 
 Let's start implementing the initialization side of things by defining our `Payment.razor` component. Here's the template part:
 
@@ -507,7 +515,7 @@ Let's start implementing the initialization side of things by defining our `Paym
 </section>
 ```
 
-The HTML template itself is very unremarkable. It's just a form for capturing credit card number, expiration date, and CVV; along with a button to submit the form. What's interesting about this code are the `@inject` statements at the top. Especially the `@inject IJSRuntime JS` one. `IJSRuntime` is the object that allows Blazor components to invoke JavaScript logic in the browser. We will see how the component uses it next.
+The HTML template itself is very unremarkable. It's just a form for capturing credit card number, expiration date, and CVV, along with a button to submit the form. What's interesting about this code are the `@inject` statements at the top. Especially the `@inject IJSRuntime JS` one. `IJSRuntime` is the object that allows Blazor components to invoke JavaScript logic in the browser. We will see how the component uses it next.
 
 Here's the logic of the component:
 
@@ -577,7 +585,7 @@ Here's where things start to get interesting. The `OnAfterRenderAsync` method de
 
 We also have a `DisposeAsync` method that's necessary for disposing resources like the `DotNetObjectReference` and `IJSObjectReference` instances.
 
-Notice also how we're using a few configuration settings here: `AuthNetEnvironment`, `AuthNetLoginId`, `AuthNetClientKey` and `WebApiUrl`. These are defined in `BlazorAuthorizeNet.Frontend/wwwroot/appsettings.json`. Something like this:
+Notice also how we're using a few configuration settings here: `AuthNetEnvironment`, `AuthNetLoginId`, `AuthNetClientKey`, and `WebApiUrl`. These are defined in `BlazorAuthorizeNet.Frontend/wwwroot/appsettings.json`. Something like this:
 
 ```json
 // BlazorAuthorizeNet.Frontend/wwwroot/appsettings.json
@@ -622,15 +630,15 @@ function setUpSubmit(authNetLoginId, authNetClientKey, dotNet) {
 }
 ```
 
-As we've mentioned before, this is a JavaScript module. This module exposes one single function: `initializeAuthNetAcceptJs`. We `export` this function because that's the one that the Blazor component needs to call. What this function does is set up the page for interacting with Authorize.NET via its Accept.js library.
+As we've mentioned before, this is a JavaScript module. This module exposes one single function: `initializeAuthNetAcceptJs`. We `export` this function because that's the one that the Blazor component needs to call. What this function does is set up the page for interacting with Authorize.Net via its Accept.js library.
 
-For now, all it does is load the `Accept.js` library directly from Authorize.NET. Depending on the `AuthNetEnvironment` config setting, either the production version or the sandbox version of the library is loaded.
+For now, all it does is load the `Accept.js` library directly from Authorize.Net. Depending on the `AuthNetEnvironment` config setting, either the production version or the sandbox version of the library is loaded.
 
 We also have a `setUpSubmit` function here and we'll talk about it next.
 
-## Payment submission
+#### Payment submission
 
-![Payment submission](processing-payments-with-authorize-net-in-a-blazor-app/payment-submission.png)
+![A sequence diagram illustrating the complete payment submission flow across seven components: User, Browser, Payment.razor.js, Accept.js, Authorize.Net, Payment.razor, and WebAPI. The process begins with a user filling out a payment form and clicking the submit button in their browser. This triggers an onclick event that passes to Payment.razor.js, which then calls Accept.dispatchData to send information to Accept.js. Accept.js forwards the credit card information to Authorize.Net for processing. Authorize.Net returns a security token to Accept.js, which passes this token back to Payment.razor.js. Using DotNetObjectReference.invokeMethodAsync("SubmitOrder", token), Payment.razor.js communicates with Payment.razor (marked with a purple @ symbol), which then makes a POST request to the WebAPI (labeled with ASP.NET Core) containing the payment token. The diagram uses dashed lines for returns and solid lines with arrows for method calls, clearly showing the secure flow of payment information where sensitive card details are tokenized before reaching the application's backend.](/blog/2025/08/processing-payments-with-authorize-net-in-a-blazor-app/payment-submission.webp)
 
 Now the stage is set to allow users to enter their credit card information and submit it for payment processing. Let's add this method to the `Payment.razor` component:
 
@@ -676,14 +684,14 @@ public async void SubmitOrder(string paymentMethodNonceValue, string paymentMeth
 }
 ```
 
-The first thing to note about the `SubmitOrder` method is that it is annotated with the `[JSInvokable]` attribute. This attribute allows the JavaScipt code to call this method, through the `DotNetObjectReference` instance that it is given. Other than that, the method is straightforward. It calls the `POST Payments` endpoint, passing it the values returned by Authorize.NET (i.e. `paymentMethodNonceValue` and `paymentMethodNonceDescriptor`), which are given to our Blazor component by our JavaScrpt module.
+The first thing to note about the `SubmitOrder` method is that it is annotated with the `[JSInvokable]` attribute. This attribute allows the JavaScipt code to call this method, through the `DotNetObjectReference` instance that it is given. Other than that, the method is straightforward. It calls the `POST Payments` endpoint, passing it the values returned by Authorize.Net (i.e. `paymentMethodNonceValue` and `paymentMethodNonceDescriptor`), which are given to our Blazor component by our JavaScrpt module.
 
-And of course, we need to update our JavaScrpt module to do the rest of the logic of calling Authorize.NET and this new `SubmitOrder` method. Here's how we implement the `setUpSubmit` function in `Payment.razor.js`:
+And, of course, we need to update our JavaScrpt module to do the rest of the logic of calling Authorize.Net and this new `SubmitOrder` method. Here's how we implement the `setUpSubmit` function in `Payment.razor.js`:
 
 ```javascript
 // BlazorAuthorizeNet.Frontend/Pages/Payment.razor.js
 
-// Wires up the onclick event handler that submits the credit card information to Authorize.NET via Accept.js, captures
+// Wires up the onclick event handler that submits the credit card information to Authorize.Net via Accept.js, captures
 // the returned tokenized card, and sends it to the Blazor component.
 function setUpSubmit(authNetLoginId, authNetClientKey, dotNet) {
     const submitButton = getSubmitButton();
@@ -694,7 +702,7 @@ function doSubmit(authNetLoginId, authNetClientKey, dotNet) {
     disableSubmitButton();
     clearErrors();
 
-    // Send the credit card details to Authorize.NET, and...
+    // Send the credit card details to Authorize.Net, and...
     sendPaymentDataToAuthNet(
         authNetLoginId,
         authNetClientKey,
@@ -769,7 +777,7 @@ function displayErrors(errors) {
     });
 }
 
-// These are some of the most common errors that we should expect from Authorize.NET.
+// These are some of the most common errors that we should expect from Authorize.Net.
 // Learn more at https://developer.authorize.net/api/reference/features/acceptjs.html#Appendix_Error_Codes
 function getErrorMessage(errorCode) {
     const map = {
@@ -805,6 +813,6 @@ function clearErrors() {
 }
 ```
 
-This code wires up logic so that when the form submit button is clicked: the captured credit card information is sent to Authorize.NET; any errors from Authorize.NET are handled and displayed to the user; and, when successful, the returned payment token is sent back to the Blazor component, so that it can send it to the backend API. Most of this logic is very similar to what you would find in the official documentation from Authorize.NET, except for the part that interacts with our Blazor component.
+This code wires up logic so that when the form submit button is clicked: the captured credit card information is sent to Authorize.Net; any errors from Authorize.Net are handled and displayed to the user; and, when successful, the returned payment token is sent back to the Blazor component, so that it can send it to the backend API. Most of this logic is very similar to what you would find in the official documentation from Authorize.Net, except for the part that interacts with our Blazor component.
 
-And that's all for now! In this article we've seen how to build a Blazor WebAssembly Standalone application, which interfaces with Authorize.NET through their Accept.js frontend library, to tokenize a credit card and submit payment transactions by calling a backend API.
+And that's all for now! In this article we've seen how to build a Blazor WebAssembly standalone application, which interfaces with Authorize.Net through their Accept.js frontend library, to tokenize a credit card and submit payment transactions by calling a backend API.
