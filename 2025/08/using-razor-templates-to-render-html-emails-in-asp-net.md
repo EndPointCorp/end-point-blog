@@ -1,28 +1,35 @@
 ---
 author: "Kevin Campusano"
 title: "Using Razor templates to render HTML emails in ASP.NET Core"
-date: 2025-08-12
+date: 2025-08-15
+description: "How to use MailKit and Razor components in .NET 8 to render emails from Razor templates"
+featured:
+  image_url: /blog/2025/08/using-razor-templates-to-render-html-emails-in-asp-net/gothic-church-low-angle.webp
+github_issue_number: 2140
 tags:
 - csharp
 - aspdotnet
-- razor
-- emails
+- email
 ---
 
-A while ago [I blogged](https://www.endpointdev.com/blog/2024/04/using-razor-templates-to-render-emails-dotnet/) about using Razor templates to render HTML emails in [.NET](https://dotnet.microsoft.com/en-us/). The method that I discussed there worked, but it was very verbose. Since then, [.NET 8 has released](https://learn.microsoft.com/en-us/dotnet/core/whats-new/dotnet-8/overview), and with it came [a simpler way of doing this](https://andrewlock.net/exploring-the-dotnet-8-preview-rendering-blazor-components-to-a-string/). In this post we'll explore how to use these new features to render HTML emails.
+![The side of a gothic church from a very low angle. The ornate spires and gargoyles loom over the viewer, with dark stained glass beneath, sectioned by square stone pillars.](/blog/2025/08/using-razor-templates-to-render-html-emails-in-asp-net/gothic-church-low-angle.webp)
+
+<!-- Photo by Seth Jensen, 2024. -->
+
+A while ago [I blogged](/blog/2024/04/using-razor-templates-to-render-emails-dotnet/) about using Razor templates to render HTML emails in [.NET](https://dotnet.microsoft.com/en-us/). The method that I discussed there worked, but it was very verbose. Since then, [.NET 8 has released](https://learn.microsoft.com/en-us/dotnet/core/whats-new/dotnet-8/overview), and with it came a simpler way of doing this. In this post we'll explore how to use these new features to render HTML emails.
 
 > You can find all the code in this post on [GitHub](https://github.com/megakevin/end-point-blog-razor-emails).
 
-## The plan
+### The plan
 
-Similar to the original article, the objective is simple: Sending emails from an ASP.NET Core app, and having the contents of those emails be rendered based on Razor templates. To that end, we need four pieces:
+Similar to the original article, the objective is simple: Sending emails from an ASP.NET Core app, and having the contents of those emails be rendered fromfrom  Razor templates. To that end, we need four pieces:
 
 1. A class for sending emails.
 2. A class for rendering Razor templates into strings.
 3. A Razor template.
 4. A class that puts it all together. That is, takes in parameters, renders the email, and sends it.
 
-## Step 1: Sending emails with the MailKit NuGet package
+### Step 1: Sending emails with the MailKit NuGet package
 
 With the help of the MailKit NuGet package, sending emails in .NET is easy. Let's install it with:
 
@@ -30,7 +37,7 @@ With the help of the MailKit NuGet package, sending emails in .NET is easy. Let'
 dotnet add package MailKit --version 4.13.0
 ```
 
-We also need some configuration on the `appsettings.json` file, to define the settings needed to establish a connection with an SMTP server:
+We also need some configuration in the `appsettings.json` file, to define the settings needed to establish a connection with an SMTP server:
 
 ```json
 // ./appsettings.json
@@ -129,7 +136,7 @@ public class Mailer
 }
 ```
 
-## Step 2: Rendering Razor templates into strings
+### Step 2: Rendering Razor templates into strings
 
 Of course, we also need a way of rendering Razor templates. As mentioned in the beginning, .NET 8 made this easy. There's [a page in the official documentation](https://learn.microsoft.com/en-us/aspnet/core/blazor/components/render-components-outside-of-aspnetcore?view=aspnetcore-9.0) and [community blog posts](https://andrewlock.net/exploring-the-dotnet-8-preview-rendering-blazor-components-to-a-string/) talking about it. For our purposes, here's a class that does it:
 
@@ -174,13 +181,13 @@ public class RazorViewRenderer
 
 The `Render` method is where the magic happens. We'll see how to use it soon, but for now, it's interesting to look at the generic type parameters.
 
-`TView` represents the strongly-typed Razor template that will be rendered. Technically, the "template" is actually a "[Razor component](https://learn.microsoft.com/en-us/aspnet/core/blazor/components/?view=aspnetcore-9.0)", as we'll see later. That's why we use `where TView : IComponent` as a [generic type constraint](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/where-generic-type-constraint). With it, we're specifying that the given `TView` must inherit from `Microsoft.AspNetCore.Components.IComponent`, which is the base class of Razor components.
+`TView` represents the strongly-typed Razor template that will be rendered. Technically, the "template" is actually a [Razor component](https://learn.microsoft.com/en-us/aspnet/core/blazor/components/?view=aspnetcore-9.0), as we'll see later. That's why we use `where TView : IComponent` as a [generic type constraint](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/where-generic-type-constraint). With it, we're specifying that the given `TView` must inherit from `Microsoft.AspNetCore.Components.IComponent`, which is the base class of Razor components.
 
-`TViewModel` on the other hand, represents the type of the data structure that will be passed to the template as a parameter. It will contain data that the template will use to render itself.
+`TViewModel`, on the other hand, represents the type of the data structure that will be passed to the template as a parameter. It will contain data that the template will use to render itself.
 
-## Step 3: Defining the email templates
+### Step 3: Defining the email templates
 
-OK now we need to define our templates, along with the vehicles to pass data to them. These will be simple [DTOs](https://en.wikipedia.org/wiki/Data_transfer_object).
+Okay, now we need to define our templates, along with the vehicles to pass data to them. These will be simple [DTOs](https://en.wikipedia.org/wiki/Data_transfer_object).
 
 When sending emails from web applications, it is often useful to define a layout that all emails use to keep their styling consistent. Using Razor components, such a layout could look like this:
 
@@ -235,7 +242,7 @@ Now to define the template for a basic email that uses this layout:
 }
 ```
 
-This is a very straightforward Razor component that takes in a `MessageEmailViewModel` as a parameter and renders a few lines of text using the data coming in the parameter. By virtue of its file name, this component can be referenced in code by the `MessageEmail` class name. It uses tried and true Razor syntax, so little of this should be surprising if you've already worked with Razor before.
+This is a very straightforward Razor component that takes in a `MessageEmailViewModel` as a parameter and renders a few lines of text using the data coming in the parameter. By virtue of its file name, this component can be referenced in code by the `MessageEmail` class name. It uses tried and true Razor syntax, so little of this should be surprising if you've worked with Razor before.
 
 One thing to notice is how we're explicitly declaring the `LayoutView` element, pointing to the `MainLayout` that we wrote. This is how we tell the renderer to use our layout when rendering this component. `MainLayout` exists because that's what we named the file that contains the layout.
 
@@ -253,7 +260,7 @@ public class MessageEmailViewModel
 }
 ```
 
-## Step 4: Putting it all together: the class that sends the email
+### Step 4: Putting it all together: the class that sends the email
 
 And finally, here we have a class that puts these separate elements to work to send an email:
 
@@ -313,4 +320,4 @@ await _messageMailer.SendAsync(
 
 Simple and clean.
 
-Alright! That's it for now. In this article we saw how to leverage new .NET 8 features for rendering Razor components into strings. We implemented an email sending capability based on that and the MailKit NuGet package. It was a nice way of revisiting an old topic, now made easier thanks to the latest updates from .NET.
+All right! That's it for now. In this article we saw how to leverage new .NET 8 features for rendering Razor components into strings. We implemented an email sending capability based on that and the MailKit NuGet package. It was a nice way of revisiting an old topic, now made easier thanks to the latest updates from .NET.
