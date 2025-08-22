@@ -18,7 +18,7 @@ tags:
 
 Today we're pleased to announce a new open source project: End Point Ecommerce.
 
-End Point Commerce is a minimalist ecommerce system that's quick to set up and easy to understand. It is meant for developers to own, adapt, customize, and extend.
+End Point Ecommerce is a minimalist ecommerce system that's quick to set up and easy to understand. It is meant for developers to own, adapt, customize, and extend.
 
 You can learn more about it on [our landing page](https://ecommerce.endpointdev.com/). You can also fork it today on [GitHub](https://github.com/EndPointCorp/end-point-ecommerce). There are running demos here:
 
