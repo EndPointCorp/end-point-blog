@@ -16,7 +16,7 @@ tags:
 
 End Point recently installed a Liquid Galaxy system in Kansas State University’s Sunderland Foundation Innovation Lab! The seven-screen Liquid Galaxy will provide students with engaging, immersive, and user-friendly educational experiences. It will be a great asset to the Innovation Lab, enhancing a collaboration space used for meetings, webinars, presentations, and seminars. The Liquid Galaxy enables data visualization, map viewing via Google Earth, GIS, and more. 
 
-During the installation, End Pointer [Josh Harless](/team/joshua-harless/) had the opportunity to work very closely with K-State’s team to ensure the system met their expectations and vision, such as by adjusting the screen angles multiple times to perfect viewing positions. 
+During the installation, End Pointer Josh Harless had the opportunity to work very closely with K-State’s team to ensure the system met their expectations and vision, such as by adjusting the screen angles multiple times to perfect viewing positions. 
 
 K-State experienced a terrible fire at Hale Library in 2018. Liquid Galaxy fit into their plans as they rebuilt in the aftermath. In an interview with Dr. Sheila Yeh about her role in reinventing K-State’s library, Dr. Yeh commented that “Information technology has been the catalyst for much of the transformation we find in today’s academic libraries.” She added that digital and information technologies such as the Liquid Galaxy are “enablers” that offer “new opportunities for interdisciplinary studies, serendipitous discoveries, and knowledge creation.”
 
