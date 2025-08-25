@@ -1,30 +1,36 @@
 ---
 author: "Kevin Campusano"
-title: "Using esbuild and pnpm to set up frontend asset bundling in an ASP.NET Core web app"
-date: 2025-08-21
+title: "Using esbuild and pnpm to Set Up Frontend Asset Bundling in an ASP.NET Core Web App"
+github_issue_number: 2145
+featured:
+  image_url: /blog/2025/08/using-esbuild-to-set-up-frontend-asset-bundling-in-an-asp-net-core-web-app/mountains.webp
+description: A nice approach for handling frontend asset bundling with support for JavaScript and Sass.
+date: 2025-08-25
 tags:
 - aspdotnet
-- esbuild
-- frontend
 - javascript
-- scss
+- css
 ---
 
-Recently we had to build an admin dashboard on ASP.NET Core. We decided to hit the ground running by looking for a template online. Luckily, we found a very cool one from [StartBootrap](https://startbootstrap.com/) [that met our requirements](https://startbootstrap.com/template/sb-admin). It was built using [Bootstrap](https://getbootstrap.com/), had a nice styling, and included examples of graphs, tables and basic common pages like login and registration.
+![Layers of mountains are exposed by light with a red tint](/blog/2025/08/using-esbuild-to-set-up-frontend-asset-bundling-in-an-asp-net-core-web-app/mountains.webp)
 
-However, integrating the template into an ASP.NET Core web app was a bit involved. The template uses tools like [Pug](https://pugjs.org/api/getting-started.html) and [SCSS](https://sass-lang.com/documentation/syntax/), which are not supported out of the box by ASP.NET. So some work had to be done to properly integrate it.
+<!-- Photo by Seth Jensen, 2025. -->
 
-What we ended up with was a nice approach for handling frontend asset bundling using [pnpm](https://pnpm.io/) and [esbuild](https://esbuild.github.io/), with support for JavaScript and SCSS. An approach which I'm going to share in this post.
+Recently we had to build an admin dashboard on ASP.NET Core. We decided to hit the ground running by looking for a template online. Luckily, we found a very cool one from Start Bootstrap that [met our requirements](https://startbootstrap.com/template/sb-admin). It was built using [Bootstrap](https://getbootstrap.com/), had nice styling, and included examples of graphs, tables, and basic common pages like login and registration.
 
-> You can find a code base that uses the setup we'll be discussing here on [Github](https://github.com/megakevin/razor-start-bootstrap-admin). It's an empty ASP.NET Core Razor Pages project that implements StartBootrap's admin template. Feel free to review it alongside this article and/or use it for your own projects.
+However, integrating the template into an ASP.NET Core web app was a bit involved. The template uses tools like [Pug](https://pugjs.org/api/getting-started.html) and [Sass/SCSS](https://sass-lang.com/documentation/syntax/), which are not supported out of the box by ASP.NET. So some work had to be done to properly integrate it.
 
-> We've also [uploaded to NuGet](https://www.nuget.org/packages/EndPointDev.RazorEsbuildProjectTemplate) a template for an empty ASP.NET Core Razor Pages web app that has implemented the `esbuild`-based frontend asset bundling.
+We ended up with a nice approach for handling frontend asset bundling using [pnpm](https://pnpm.io/) and [esbuild](https://esbuild.github.io/), with support for JavaScript and Sass.
 
-## Installing pnpm and the necessary packages
+> You can find a codebase that uses the setup we'll be discussing here on [Github](https://github.com/megakevin/razor-start-bootstrap-admin). It's an empty ASP.NET Core Razor Pages project that implements Start Bootrap's admin template. Feel free to review it alongside this article and/or use it for your own projects.
+
+> We've also [uploaded to NuGet](https://www.nuget.org/packages/EndPointDev.RazorEsbuildProjectTemplate) a template for an empty ASP.NET Core Razor Pages web app that has implemented the esbuild-based frontend asset bundling.
+
+### Installing pnpm and the necessary packages
 
 First of all we need to have the [.NET framework installed](https://dotnet.microsoft.com/en-us/download). We also need to [install Node.js](https://nodejs.org/en/download) and [the pnpm package manager](https://pnpm.io/installation).
 
-```sh
+```
 $ dotnet --version
 9.0.302
 $ node --version
@@ -33,7 +39,7 @@ $ pnpm --version
 10.14.0
 ```
 
-Once we have those, we need a Razor Pages project to apply the changes to. For our purposes here, I'm going to assume we're starting off with a fresh project, created using something like `dotnet new webapp`.
+Once we have those, we need a Razor Pages project to apply the changes to. For our purposes, I'm going to assume we're starting off with a fresh project, created using something like `dotnet new webapp`.
 
 With that out of the way, we can create a `package.json` file in the root of our project:
 
@@ -83,7 +89,7 @@ Done in 2.5s using pnpm v10.14.0
 
 > I've pinned the version of the `sass` package to `1.78.0` in order to work around some compatibility warnings with Bootstrap's stylesheets. You may or may not need to do this in your own projects.
 
-We have to address the warning message and allow `esbuild` to run scripts. Running `pnpm approve-builds` and selecting `esbuild` (by pressing either the "space" or "A" keys) takes care of that:
+We have to address the warning message and allow `esbuild` to run scripts. Running `pnpm approve-builds` and selecting `esbuild` (by pressing either the "Space" or "a" keys) takes care of that:
 
 ```sh
 $ pnpm approve-builds
@@ -124,7 +130,7 @@ onlyBuiltDependencies:
   - esbuild
 ```
 
-In this particular example, we're adapting StartBootrap's admin template, so we're going to install the packages that it needs:
+In this particular example, we're adapting Start Bootrap's admin template, so we're going to install the packages that it needs:
 
 ```sh
 $ pnpm add @fortawesome/fontawesome-free bootstrap chart.js jquery simple-datatables
@@ -144,11 +150,11 @@ Done in 2.9s using pnpm v10.14.0
 
 These are the ones we need for this project but of course, in your own projects you can install whatever you want.
 
-## Authoring JavaScript and SCSS source files
+### Authoring JavaScript and SCSS source files
 
 Now that we have the Node.js part of the project set up, we need a place where we can put our JavaScript and SCSS files. For that, we created two new directories: `JavaScript` and `Stylesheets`.
 
-Since we're adapting StartBootrap's admin template, we copied all its SCSS files into the `Stylesheets` directory; and put its JavaScript into the `JavaScript` directory. It all ended up looking like this:
+Since we're adapting Start Bootrap's admin template, we copied all its SCSS files into the `Stylesheets` directory and put its JavaScript into the `JavaScript` directory. It all ended up looking like this:
 
 ```diff
  .
@@ -179,7 +185,7 @@ Since we're adapting StartBootrap's admin template, we copied all its SCSS files
 
 Of course, the specific file contents will be different in your own projects, but the take home message is that these two new directories are meant for the source files of your frontend assets.
 
-## Bundling frontend assets with esbuild
+### Bundling frontend assets with esbuild
 
 With that, we have the NodeJS package management ready, the tools we need, and a project directory structure that supports writing JavaScript and SCSS.
 
@@ -241,9 +247,9 @@ jsFiles.forEach(async file => {
 });
 ```
 
-> One important thing to note here is that with `esbuild`, we can safely use JavaScript modules, and `import` statements for both JavaScript and SCSS. This means that our frontend logic and styling rules can be broken up into any number of files, forming a tree of dependencies through `import` statements. We need only to specify the root files, or entry points, and `esbuild` takes care of building a complete and self-contained bundle. Not really a revolutionary idea in the grand scheme of things, but not always a given when working with JavaScript on the browser.
+> One important thing to note here is that with `esbuild`, we can safely use JavaScript modules and `import` statements for both JavaScript and SCSS. This means that our frontend logic and styling rules can be broken up into any number of files, forming a tree of dependencies through `import` statements. We need only to specify the root files, or entry points, and `esbuild` takes care of building a complete and self-contained bundle. Not really a revolutionary idea in the grand scheme of things, but not always a given when working with JavaScript on the browser.
 
-With this, we can trigger the bundling process this command: `node esbuild.config.mjs`. However, it'd be nice to have it better integrated with a typical .NET development flow. For that, we can add the following under `scripts` in `package.json`:
+With this, we can trigger the bundling process: `node esbuild.config.mjs`. However, it'd be nice to have it better integrated with a typical .NET development flow. For that, we can add the following under `scripts` in `package.json`:
 
 ```json
 // ./package.json
@@ -289,7 +295,7 @@ All this will result in our build process producing `./wwwroot/css/site.css`, an
 <!-- ... -->
 ```
 
-## Importing libraries as modules
+### Importing libraries as modules
 
 One interesting aspect to note is that, with `esbuild`, we are using [JavaScript modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules) with [`import` statements](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules#importing_features_into_your_script). This is particularly important for libraries, since some of them won't necessarily support being included as JavaScript modules by default or in an obvious manner.
 
@@ -329,7 +335,7 @@ A similar scenario happens with the stylesheets. For SCSS, we have to use the `@
 
 In your projects, you'll encounter libraries with varying levels of support for JavaScript modules, and you will have to adapt accordingly, depending on the library itself and how you want to use it.
 
-## Importing libraries via HTML tags
+### Importing libraries via HTML tags
 
 There are also some libraries that only work via traditional `<script>` tags. For these, you might want to have `esbuild` copy files directly from the `node_modules` directory into `wwwroot`, without any preprocessing. You could use something like this in your `esbuild.config.mjs` file for that:
 
@@ -355,18 +361,20 @@ rawFiles.forEach(async file => {
 
 Then you can include the files from `wwwroot` using the appropriate `<script>` or `<link rel="stylesheet">` tags.
 
-## Summary
+### Summary
 
 So, in the end, using `esbuild` and `pnpm` to set up frontend asset bundling in an ASP.NET Core web app is perfectly doable and can be summarized like this:
 
-1. Install NodeJS and `pnpm`.
-2. Create a `package.json` file with `pnpm init`.
-3. Install `esbuild` as a dev dependency with `pnpm add esbuild --save-dev`.
-    - Also make sure to run `pnpm approve-builds` to allow `esbuild` to run scripts.
+1. Install NodeJS and `pnpm`
+2. Create a `package.json` file with `pnpm init`
+3. Install `esbuild` as a dev dependency with `pnpm add esbuild --save-dev`
+
+    Also make sure to run `pnpm approve-builds` to allow `esbuild` to run scripts
+
 4. Install any additional preprocessor that you might need like `sass` with `esbuild-sass-plugin`, etc.
-5. Create `JavaScript` and `Stylesheets` directories and put your source files in them.
-6. Add an `esbuild.config.mjs` file that can bundle your assets.
-7. Include the asset bundling step as part of the `dotnet build` command.
+5. Create `JavaScript` and `Stylesheets` directories and put your source files in them
+6. Add an `esbuild.config.mjs` file that can bundle your assets
+7. Include the asset bundling step as part of the `dotnet build` command
 
 Your package.json should end up looking something like this:
 
@@ -482,6 +490,6 @@ and...
 
 As you create more entrypoint JavaScript and SCSS files, you have to remember to add them to their respective arrays in `esbuild.config.mjs`.
 
-You can add more packages using `pnpm add <package_name>`. Just remember that they have to be imported by your JavaScript files as modules. If you need to add raw files, especially from libraries that don't support being imported as JavaScript modules, the `esbuild.config.mjs` also supports that thanks to the "Raw files" section. These raw files can be loaded normally via `<link>` and `<script>` HTML tags.
+You can add more packages using `pnpm add <package_name>`. Just remember that they have to be imported by your JavaScript files as modules. If you need to add raw files, especially from libraries that don't support being imported as JavaScript modules, the `esbuild.config.mjs` file also supports that thanks to the "raw files" section. These raw files can be loaded normally via `<link>` and `<script>` HTML tags.
 
-Alright, that's it for now. We've seen how to integrate `esbuild` with ASP.NET Core in order to setup a basic frontend asset bundling process. We did that through adapting SmartBootstrap's free admin template into an ASP.NET Core Razor Pages web app project. A project that's up on [GitHub](https://github.com/megakevin/razor-start-bootstrap-admin). We saw how to organize source files in our repo, a basic `esbuild` config script that handles the most common scenarios, and how to handle a few different cases when it comes to including NodeJS packages into our apps.
+All right, that's it for now. We've seen how to integrate `esbuild` with ASP.NET Core in order to setup a basic frontend asset bundling process. We did that through adapting Smart Bootstrap's free admin template into an ASP.NET Core Razor Pages web app project — a project that's up on [GitHub](https://github.com/megakevin/razor-start-bootstrap-admin). We saw how to organize source files in our repo, a basic `esbuild` config script that handles the most common scenarios, and how to handle a few different cases when it comes to including NodeJS packages into our apps.
