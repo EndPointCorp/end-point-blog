@@ -5,7 +5,7 @@ github_issue_number: 2147
 featured:
   image_url: /blog/2025/08/how-to-download-youtube-channel/peak-in-clouds.webp
 description: "Avoid data loss by using yt-dlp for high-quality archiving"
-date: 2025-09-04
+date: 2025-09-11
 tags:
 - tips
 ---
