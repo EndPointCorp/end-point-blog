@@ -6,8 +6,14 @@ featured:
   image_url: 
 description: "Behind the Scenes: LLM‑Expanded Vector Search with Open WebUI"
 date: 2025-09-19
-tags: search,api,open-source,artificial-intelligence,performance,tools,python
-- tips
+tags: 
+ - search
+ - api
+ - open-source
+ - artificial-intelligence
+ - performance
+ - tools
+ - python
 ---
 
 
