@@ -1,10 +1,10 @@
 ---
 author: Edgar Mlowe
-title: "Behind the Scenes: LLM‑Expanded Vector Search with Open WebUI"
+title: "Making Blog Search Smarter with LLMs and Open WebUI"
 github_issue_number: 
 featured:
   image_url: 
-description: "Behind the Scenes: LLM‑Expanded Vector Search with Open WebUI"
+description: "Using Open WebUI and LLMs to automatically expand search queries before vector similarity matching"
 date: 2025-09-19
 tags: 
  - search
@@ -19,7 +19,7 @@ tags:
 
 
 
-## Behind the Scenes: LLM‑Expanded Vector Search with Open WebUI
+## Making Blog Search Smarter with LLMs and Open WebUI
 
 We recently released  "LLM Expanded Search" for our blog's vector search. It builds on what we covered in our earlier posts about AI-powered search and vector search basics. Here's how we built it with our internal AI setup (Open WebUI running an OpenAI-compatible API), why it makes search better, and what's coming next.
 
