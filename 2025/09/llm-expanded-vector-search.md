@@ -38,7 +38,7 @@ This really helps with short or vague searches like "S3" where regular vector se
 
 ## How it works
 
-The frontend is pretty straightforward—our search bar has two options: regular Search (just hit Enter) or LLM Expanded Search (Shift/Ctrl/Command+Enter).
+The frontend is pretty straightforward, our search bar has two options: regular Search (just hit Enter) or LLM Expanded Search (Shift/Ctrl/Command+Enter).
 
 When you use expanded search, here's what happens:
 - We call our Open WebUI endpoint with a prompt that asks for 8-15 related terms
@@ -105,13 +105,13 @@ This would give us tighter integration, fewer network calls, simpler deployment,
 
 ## What you'll notice when using it
 
-- Short searches work way better—you get more relevant results and fewer dead ends
+- Short searches work way better, you get more relevant results and fewer dead ends
 - It's still experimental, so sometimes results might drift into related topics. Stick with regular "Search" if you want exact matches
 - Most searches are pretty fast, and we cache common terms to keep things smooth
 
-## Give it a try
+## Give it a try at our website [https://www.endpointdev.com/blog/](https://www.endpointdev.com/blog/)
 
-Just use the search bar in our header: Enter for regular search, or Shift/Ctrl/Command+Enter for LLM Expanded Search. 
+Just use the search bar in our [header](https://www.endpointdev.com/blog/): Enter for regular search, or Shift/Ctrl/Command+Enter for LLM Expanded Search. 
 
 Want to know more about why we built this? Check out the announcement and vector search posts linked above.
 
