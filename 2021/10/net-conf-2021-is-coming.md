@@ -4,6 +4,7 @@ title: .NET Conf 2021 is coming!
 tags:
 - dotnet
 - windows
+- blazor
 - conference
 date: 2021-10-27
 github_issue_number: 1786

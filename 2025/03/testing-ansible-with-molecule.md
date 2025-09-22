@@ -32,7 +32,7 @@ pip install ansible
 pip install molecule
 ```
 
-Molecule uses the `delegated` driver by default. Other drivers can be installed separately from PyPI, most of them being included in the molecule-plugins package. We are going to use the Docker driver, so let's install that by running:
+Molecule uses the `delegated` driver by default. Other drivers can be installed separately from PyPI, most of them being included in the `molecule-plugins` package. We are going to use the Docker driver, so let's install that by running:
 
 ```plain
 pip install "molecule[docker]"
@@ -86,7 +86,7 @@ roles/
 
 Here are some details about the files created by Molecule:
 
-- `molecule.yml` - The Molecule configuration file.
+- `molecule.yml` — The Molecule configuration file.
 
   ```yaml
   ---
@@ -125,7 +125,7 @@ Here are some details about the files created by Molecule:
           - nginx_server
   ```
 
-- `verify.yml` - The playbook to verify whether the converge was successful. This tells Molecule to verify that our role has been correctly installed on the Docker instance. Here we are going to check if NGINX is installed, running and also responding to requests.
+- `verify.yml` — The playbook to verify whether the converge was successful. This tells Molecule to verify that our role has been correctly installed on the Docker instance. Here we are going to check if NGINX is installed, running and also responding to requests.
 
   ```yaml
   ---
@@ -156,7 +156,7 @@ Here are some details about the files created by Molecule:
   ```
 
 
-- `destroy.yml` - Destroys the instance defined in the `molecule.yml` file. There won't be any file, but the default Docker driver will automatically destroy the instance after the test is finished. If you want to override this behavior, you can add a `destroy.yml` file to the scenario directory.
+- `destroy.yml` — Destroys the instance defined in the `molecule.yml` file. There won't be any file, but the default Docker driver will automatically destroy the instance after the test is finished. If you want to override this behavior, you can add a `destroy.yml` file to the scenario directory.
 
 
 ### 5. Running Molecule tests

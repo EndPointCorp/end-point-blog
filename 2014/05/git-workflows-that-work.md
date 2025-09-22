@@ -92,7 +92,7 @@ There are many other examples we could go over and discuss, but these should be 
 - Branches should be used to represent a single deliverable request from the business- like a single user story or bug fix.  Something that can be approved by the business that contains everything needed for that single request to be released- and nothing more!
 - The longer a feature branch lives without getting merged in for a release, the greater risk for merge conflicts and challenges for deployment.  Short lived branches merge and deploy cleaner.
 - Business owner involvement in your workflow is essential.  Don’t merge, don’t deploy, don’t work without their input.  Otherwise pain and tears will ensue (or worse).
-- Avoid reverts.  Test, test, test your branch before a merge.  When merging use **git merge --no-ff**, which will ease merge reverts if really needed.
+- Avoid reverts.  Test, test, test your branch before a merge.  When merging use `git merge --no-ff`, which will ease merge reverts if really needed.
 - Your workflow should fit how you release.  Do you release continually, multiple times a day?  Do you have 2 week sprints with completed work to release on a regular schedule?  Do you have a business Change Control Board where all released items must get reviewed and approved first?  Does someone else run your releases, like the Operations team or a Release manager?  Your branching and merging strategy needs to make releasing easier.
 - Complicated workflows drive people crazy.  Make it simple.  Review your workflow and ask how you can simplify it.  In actively making things more simple, you will also make them easier to understand and work with as well as easier for others to adopt and maintain.
 

@@ -16,6 +16,8 @@ tags:
 
 <!-- Photo by Seth Jensen, 2024. -->
 
+> Update August 2025: .NET 8 has simplified the process of rendering HTML emails. You can read an [updated post on this blog!](/blog/2025/08/using-razor-templates-to-render-html-emails-in-asp-net/)
+
 When it comes to sending emails, Ruby on Rails has an excellent solution in the form of [Action Mailer](https://guides.rubyonrails.org/action_mailer_basics.html).
 
 The basic idea is that you can define email templates using [ERB](https://github.com/ruby/erb) files. This is the same templating engine/​language used for normal web application views. Then, [application-level SMTP settings are configured](https://guides.rubyonrails.org/action_mailer_basics.html#action-mailer-configuration) for email delivery. Finally, a "[Mailer](https://guides.rubyonrails.org/action_mailer_basics.html#sending-emails)" class can be developed that leverages the templates and the underlying email sending mechanism to send emails.

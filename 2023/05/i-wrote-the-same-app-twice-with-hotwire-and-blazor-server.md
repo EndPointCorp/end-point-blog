@@ -13,6 +13,7 @@ tags:
 - rails
 - csharp
 - dotnet
+- blazor
 - aspdotnet
 ---
 

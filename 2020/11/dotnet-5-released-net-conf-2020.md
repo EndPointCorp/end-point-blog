@@ -5,6 +5,7 @@ github_issue_number: 1684
 tags:
 - dotnet
 - windows
+- blazor
 date: 2020-11-04
 ---
 

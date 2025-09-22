@@ -1,6 +1,6 @@
 ---
 author: Dmitry Kiselev
-title: Cesium KML-CZML Editor
+title: Announcing the Cesium KML-CZML Editor
 featured:
   endpoint: true
   visionport: true

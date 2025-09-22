@@ -5,7 +5,7 @@ author: Benjamin Goldstein
 featured:
   image_url: /blog/2025/03/ai-portal-for-end-point-customers/glass-dome-top.webp
   endpoint: true
-description: Announcing an powerful new AI Portal, available at no cost to End Point's clients today.
+description: Announcing a powerful new AI Portal, available at no cost to End Point's clients today.
 github_issue_number: 2101
 tags:
 - artificial-intelligence
