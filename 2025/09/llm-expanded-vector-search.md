@@ -78,12 +78,26 @@ def expand_query(raw_query: str) -> list[str]:
     return [t.strip() for t in text.split(",") if t.strip()]
 ```
 
-After that, we:
 
-- Turn the original query and all expansions into embeddings
-- Search the vector index for each term
-- Combine results by relevance score, remove duplicates, and grab the top matches
-- Format everything into nice snippets
+After that, we embed the original query and the expanded terms, search the vector index, then sort by score and drop duplicates so each post appears once. Finally, we render concise snippets.
+
+For example, after a similarity search you can rank and de‑dupe like this:
+
+```python
+# given: results = [(doc, score), ...]
+valid = [(d, float(s)) for d, s in results if float(s) > 0.05]
+valid.sort(key=lambda x: x[1], reverse=True)  # highest score first
+
+seen = set()
+unique = []
+for doc, score in valid:
+    src = doc.metadata.get("source", "")
+    if src not in seen:
+        unique.append((doc, score))
+        seen.add(src)
+
+# unique now holds top ranked, de‑duplicated posts
+```
 
 ## Why we chose Open WebUI
 
