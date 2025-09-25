@@ -9,8 +9,8 @@ tags:
 - agentic applications
 ---
 
-![# Man and Woman Back to Back and Holding Guns](/blog/2025/09/creating-agentic-ai-apps/pexels-cottonbro-8717526.jpg)
-Photo by [cottonbro studio](https://www.pexels.com/photo/man-and-woman-back-to-back-and-holding-guns-8717526/) on Pexels
+![Futuristic Abstract Maze with Colorful Lights](/blog/2025/09/creating-agentic-ai-apps/pexels-steve-28494630.jpg)
+Photo by [Steve Johnson](https://www.pexels.com/photo/futuristic-abstract-maze-with-colorful-lights-28494630/) on Pexels
 
 
 # Creating Agentic AI Applications
