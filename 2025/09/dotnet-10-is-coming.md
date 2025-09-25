@@ -20,7 +20,7 @@ Microsoft has everything almost ready for the upcoming release of [.NET 10](http
 
 One of the core aspects of .NET 10 will be the improved efficiency in different areas. To mention a few of them:
 
-* Optimized compression streams such as `GZipStream` or async implementations for `ZipArchive` methods.
+* Optimized compression streams such as `GZipStream` and async implementations for `ZipArchive` methods.
 * Devirtualization improvements for interface methods, especially when arrays are involved, resulting in faster code execution.
 * Faster stack allocation for objects through the expanded use of scape analysis.
 
@@ -47,10 +47,12 @@ For Web APIs, services, and Blazor apps, .NET 10 has several useful features aim
 AI developers will also benefit from the new .NET, as well as applications residing in the cloud and serverless environments.
 
 * The [ML.NET Framework](https://dotnet.microsoft.com/en-us/apps/ai/ml-dotnet) will keep evolving with expanded capabilities.
-* Cloud Native Development: .NET 10 is designed to be fundamental to cloud native deployments, thanks to smaller base images and trims unused bits automatically.
+* Cloud Native Development: .NET 10 is designed to be fundamental to cloud native deployments, thanks to smaller base images and the automatic trimming of unused bits.
 * The [HybridCache library](https://learn.microsoft.com/en-us/aspnet/core/performance/caching/hybrid?view=aspnetcore-9.0) unifies in-memory and distributed caching, with tagging for smarter invalidation.
 
-With .NET 10, Microsoft is also rolling out [C# 14](https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-14), including several language improvements that will result in cleaner syntax and better performance. Let's mention some key features:
+## C# 14
+
+With .NET 10, Microsoft is also rolling out [a new version of the C# language](https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-14), including several improvements that will result in cleaner syntax and better performance. Let's mention some key features:
 
 * User-defined compound assignment operators: We will be able to define our own operators for types like `+=`, `-=`, etc.
 * Using `nameof(List<>)` without specifying type arguments if we only need the name, avoiding boilerplate in generic programming and logging.
