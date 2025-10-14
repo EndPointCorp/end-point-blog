@@ -1,49 +1,45 @@
 ---
 author: "Kürşat Kutlu Aydemir"
 title: "Creating Agentic AI Applications"
-description: An in-depth guide to understanding AI agents, building agentic applications with orchestration, and implementing them using open-source frameworks.
-date: 2025-09-10
+description: "An in-depth guide to understanding AI agents, building agentic applications with orchestration, and implementing them using open-source frameworks."
+date: 2025-10-14
+github_issue_number: 2153
+featured:
+  image_url: /blog/2025/10/creating-agentic-ai-apps/futuristic-maze.webp
 tags:
 - artificial-intelligence
-- agent
-- agentic applications
 ---
 
-![Futuristic Abstract Maze with Colorful Lights](/blog/2025/09/creating-agentic-ai-apps/pexels-steve-28494630.jpg)
+![Futuristic Abstract Maze with Colorful Lights](/blog/2025/10/creating-agentic-ai-apps/futuristic-maze.webp)<br>
 Photo by [Steve Johnson](https://www.pexels.com/photo/futuristic-abstract-maze-with-colorful-lights-28494630/) on Pexels
 
+In the rapidly evolving world of AI, agentic AI is emerging as a game-changer. These systems go beyond simple chatbots or predictive models: they're designed to act autonomously, make decisions, and interact with the real world to accomplish goals. In this blog post, we'll dive into what agents are, explore agentic applications and orchestration, and walk through how to build your own agentic applications with open-source examples.
 
-# Creating Agentic AI Applications
-
-In rapidly evolving world of AI, agentic AI is emerging as a game-changer. These systems go beyond simple chatbots or predictive models, they're designed to act autonomously, make decisions, and interact with the real world to accomplish goals. In this blog post, we'll dive into what agents are, explore agentic applications and orchestration, and walk through how to build your own agentic applications with open-source examples.
-
-## What Are Agents?
+### What Are Agents?
 
 AI agents are autonomous entities that can perceive their environment, reason about it, and take actions to achieve specific objectives. Think of an AI agent as more than just a chatbot, it’s like a digital teammate that can look around, make decisions, and take action on its own. Unlike traditional AI models that respond passively to inputs, agents are proactive: they can break down goals into sub-tasks, use tools (like APIs or databases), maintain memory across interactions, and adapt based on feedback. This makes AI agents ideal for applications requiring independence, such as automation, research, or problem-solving.
 
 At their core, agents typically integrate large language models (LLMs) like GPT-4 or Llama for reasoning, combined with mechanisms for tool invocation and state management. They can operate in loops, iteratively refining their approach until the goal is met.
 
+#### Open-Source Examples of AI Agents
 
-### Open-Source Examples of AI Agents
+If you want to get hands-on with agents, there are already plenty of open-source projects you can experiment with and build on. Here are a couple of the most notable:
 
-If you want to get hands-on with agents, there are already plenty of open-source projects you can experiment with and build on. Here are a few of the most notable:
-
-* **[AutoGPT](https://github.com/Significant-Gravitas/AutoGPT)**: One of the earliest and well-known autonomous agents. AutoGPT takes a high-level goal, breaks it down into steps, and tries to complete them—whether that means researching a topic, generating code, or managing a workflow. It comes with a simple frontend for building agents, plus a library of ready-made ones (including some quirky ones, like creating viral videos from Reddit trends).
+* **[AutoGPT](https://github.com/Significant-Gravitas/AutoGPT)**: One of the earliest and best-known autonomous agents. AutoGPT takes a high-level goal, breaks it down into steps, and tries to complete them—whether that means researching a topic, generating code, or managing a workflow. It comes with a simple frontend for building agents, plus a library of ready-made ones (including some quirky ones, like creating viral videos from Reddit trends).
 * **[AgentGPT](https://github.com/reworkd/AgentGPT)**: A browser-based platform that lets you spin up and deploy agents without extra setup. Just type in a goal and watch the agent go—browsing the web, running code, or connecting with external services to move toward the objective.
 
 For a longer list of projects, check out this [open-source AI agents directory on Hugging Face](https://huggingface.co/blog/tegridydev/open-source-ai-agents-directory).
 
+### What Are Agentic Applications and Agent Orchestration?
 
-## What Are Agentic Applications and Agent Orchestration?
+An agentic application is simply an app that uses one or more AI agents to take on complex tasks by itself. Instead of coding every step by hand, you can plug agents together like modules to tackle real-world problems, whether that’s analyzing data, generating content, or building software. The word "agentic" really just highlights one thing: these systems can act on their own with little human input, following the prompts they are given.
 
-An agentic application is simply an app that uses one or more AI agents to take on complex tasks by itself. Instead of coding every step by hand, you can plug agents together like modules to tackle real-world problems, whether that’s analyzing data, generating content, or even building software. The word `agentic` really just highlights one thing: these systems can act on their own while still working toward your goals.
-
-When you bring more than one agent into the mix, you need a way to coordinate them. This is where orchestration comes in—the art of getting multiple agents to work together smoothly. That might mean giving them specific roles (say, a researcher and a writer), setting up how they communicate, keeping track of what they’ve learned, and making sure they stay on task.
+When you bring more than one agent into the mix, you need a way to coordinate them. This is where orchestration comes in—getting multiple agents to work together smoothly. That might mean giving them specific roles (say, a researcher and a writer), setting up how they communicate, keeping track of what they’ve learned, and making sure they stay on task.
 
 To make this manageable, orchestration frameworks provide ready-made structures, like graphs, crews, or conversation flows, that organize the collaboration. With these in place, it becomes much easier to grow from a single helpful agent to an entire team working together.
 
 
-### Open-Source Examples of Agentic Applications and Orchestration
+#### Open-Source Examples of Agentic Applications and Orchestration
 
 If you want to start building agentic applications yourself, there are already a number of open-source frameworks that can help. Here are some of the most popular:
 
@@ -53,12 +49,11 @@ If you want to start building agentic applications yourself, there are already a
 
 Other frameworks worth exploring include OpenAI’s Agents SDK (built and evolved upon Swarm) for multi-agent workflows, and MetaGPT, which simulates role-based teams of agents.
 
-
-## Writing Agentic Applications
+### Writing Agentic Applications
 
 To build an agentic application, the first step is choosing the right framework for your needs, for instance, CrewAI if you want simplicity and lightweight orchestration, or AutoGen if you need extensibility and layered APIs.
 
-Once you’ve selected a framework, you’ll need to
+Once you’ve selected a framework, you’ll need to:
 
 - Define agent roles, e.g., researcher, writer, reviewer. Each agent is an actor to complete one or more tasks.
 - Equip agents with tools, like search APIs, code interpreters, or custom functions. As you can see, theoretically there is no limit on what you can do with agents.
@@ -67,21 +62,22 @@ Once you’ve selected a framework, you’ll need to
 
 With those elements in place, you can start assembling workflows. Below, we’ll look at how to get started with one of the most widely used frameworks (CrewAI).
 
-#### Building with CrewAI
+##### Building with CrewAI
 
 First, install CrewAI and ddgs (duckduckgo-search) which is a free search tool that I used for this example.
 
-```bash
-pip install crewai 'crewai[tools]'
-pip install ddgs
+```
+pip install crewai 'crewai[tools]' ddgs
 ```
 
-CrewAI uses decorators for agents and tasks. Below is a simple example of a crew for researching and reporting on a given topic. It defines two agents: a `researcher` and a `reporting analyst`, and one task for each agent (`research task` and `reporting task`). This code creates a sequential workflow; 
+CrewAI uses decorators for agents and tasks. Below is a simple example of a crew for researching and reporting on a given topic. It defines two agents (a `researcher` and a `reporting analyst`) and one task for each agent (`research task` and `reporting task`). This code creates a sequential workflow:
 
-- the researcher gathers data,
-- then the analyst compiles a report.
+- The researcher gathers data
+- Then, the analyst compiles a report
 
 You can extend it with more agents with more tasks or parallel processes.
+
+> To run this script, you need to set your LLM API key. See how to do that [in the crewAI docs](https://docs.crewai.com/en/concepts/llms#setting-up-your-llm).
 
 ```python
 from typing import Type, Optional
@@ -177,7 +173,7 @@ class ResearchCrew():
             verbose=True
         )
 
-# run the crew of agents
+## run the crew of agents
 if __name__ == '__main__':
     topic = input('Topic: ')
     crew = ResearchCrew(topic).crew()
@@ -185,9 +181,9 @@ if __name__ == '__main__':
     print(result)
 ```
 
-### Building A Dynamic Agent
+#### Building A Dynamic Agent
 
-We can follow a dynamic approach to create an agentic AI application as well. In this approach, without other 3rd party agent orchestration frameworks we can dynamically create task and agentic processes. Here I present a simple dynamic agent which can work on any given goal until the goal is met. I used OpenAI as LLM in this example. The dynamic approach extracts sub-goals from the given main goal. Then works on tasks and decides if the goals are met.
+We can follow a dynamic approach to create an agentic AI application as well. In this approach, without other 3rd party agent orchestration frameworks we can dynamically create task and agentic processes. Here I present a simple dynamic agent which can work on any given goal until the goal is met. I used OpenAI as the LLM in this example. Using the dynamic approach, the agent crew extracts sub-goals from the given main goal. Then it works on tasks and decides if the goals are met.
 
 ```python
 import os
@@ -267,9 +263,9 @@ if __name__ == "__main__":
     agent.run()
 ```
 
-## Real-World Examples and Use Cases of Agentic AI Applications
+### Use Cases of Agentic AI Applications
 
-Agentic AI applications are already finding their way into practical, high-value scenarios. By combining autonomy with orchestration, these systems go beyond demos and research projects to deliver measurable impact.
+Agentic AI applications are already finding their way into practical scenarios. By combining autonomy with orchestration, these systems go beyond demos and research projects to deliver measurable impact.
 
 * **Customer Support Automation**: Instead of static chatbots, agentic systems can act as full-service assistants—resolving customer queries, escalating complex cases, and even initiating refunds or ticket creation. They maintain context across long interactions, providing a more human-like experience.
 * **Research and Analysis**: Enterprises and individuals use research agents to autonomously scan news sources, academic databases, or financial reports. For example, a financial analyst could deploy agents to track company earnings, summarize investor calls, and produce actionable insights daily.
@@ -277,35 +273,19 @@ Agentic AI applications are already finding their way into practical, high-value
 * **Software Development Assistants**: Multi-agent workflows can handle bug triaging, code generation, testing, and documentation. For instance, one agent detects issues, another suggests fixes, while another runs automated tests and updates docs.
 * **Healthcare and Biomedicine**: Specialized agents can search the latest medical literature, cross-reference patient data, and generate preliminary diagnostic reports, supporting clinicians in decision-making while reducing information overload.
 
-These examples demonstrate how agentic AI is moving from experimentation to production, delivering tangible value across industries.
+At End Point, we use agents to speed up development, using human review to keep our company's long-standing commitment to high-quality products. We also build agentic AI solutions for clients, speeding up and modernizing legacy workflows.
 
-
-## Challenges Ahead
+### Challenges Ahead
 
 While agentic AI holds promise, several challenges remain before widespread adoption becomes seamless:
 
-* **Reliability and Hallucination**: LLM-based agents can still generate incorrect or fabricated outputs. Ensuring trustworthiness through validation, feedback loops, and human-in-the-loop oversight is crucial. But, personally I am not against hallucination. We humans do hallucination too, and I call it more like authenticity.
+* **Reliability and Hallucination**: LLM-based agents can still generate incorrect or fabricated outputs. Ensuring trustworthiness through validation, feedback loops, and human-in-the-loop oversight is crucial. But, personally I am not against hallucination — We humans hallucinate too.
 * **Security and Safety**: Autonomous agents that can browse the web, execute code, or control external systems pose risks if misconfigured or exploited. Sandboxing, permissions, and guardrails are essential to prevent harmful actions.
 * **Evaluation and Benchmarking**: Unlike traditional ML models, measuring the success of agentic systems is difficult. Metrics must capture not only accuracy but also task completion, collaboration quality, and user satisfaction.
 * **Ethics and Alignment**: As agents gain autonomy, aligning them with human values, legal frameworks, and ethical principles becomes critical. Misaligned objectives could cause unintended consequences.
 * **Integration with Legacy Systems**: Many organizations still rely on older infrastructure. Seamlessly embedding agentic AI into these environments can be a non-trivial engineering challenge.
 
-
-## Wrapping up
+### Wrapping up
 
 Agentic AI applications represent the future of intelligent software, blending autonomy with collaboration. By leveraging open-source tools like CrewAI and LangGraph or specialized custom agents, you can create powerful solutions tailored to your needs. As AI evolves, we might expect even more sophisticated orchestration capabilities.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
