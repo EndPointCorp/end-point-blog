@@ -2,7 +2,6 @@
 author: "Seth Jensen"
 title: "Bash expansion techniques for a more efficient workflow"
 date: 2025-07-10
-description: Pratical examples of Bash expansion, with a summary of the different types
 featured:
   image_url: /blog/2025/07/bash-expansion-techniques/mirrored-buildings.webp
 description: Bash and Zsh are powerful tools to help modify files. Expansion is an essential and powerful technique for doing this.
