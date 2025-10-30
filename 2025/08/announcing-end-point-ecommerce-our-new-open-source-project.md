@@ -7,6 +7,7 @@ description: "A minimalist ecommerce system that's quick to set up and easy to u
 featured:
   image_url: "/blog/2025/08/announcing-end-point-ecommerce-our-new-open-source-project/railing-blue-sky.webp"
 tags:
+- end-point-ecommerce
 - dotnet
 - ecommerce
 - open-source
