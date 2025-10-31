@@ -4,14 +4,15 @@ description: "The bad and good of letting a highly autonomous agent code for you
 author: Seth Jensen
 date: 2025-10-29
 featured:
-  image_url: /blog/2025/10/adventures-in-vibe-coding-with-replit
+  image_url: /blog/2025/10/adventures-in-vibe-coding-with-replit/nyc-streets-from-above.webp
+github_issue_number: 2156
 tags:
 - artificial-intelligence
 - end-point-ecommerce
 - ecommerce
 ---
 
-![A New York City intersection viewed from above, at a 40 degree angle](/blog/2025/10/adventures-in-vibe-coding-with-replit)
+![A New York City intersection viewed from above, at a 40 degree angle](/blog/2025/10/adventures-in-vibe-coding-with-replit/nyc-streets-from-above.webp)
 
 <!-- Photo by Seth Jensen, 2025, shot on Kodak 200 with a Nikon FE -->
 
@@ -48,7 +49,7 @@ issues?
 
 In response, Replit's agent created a full React frontend for the API! Neat, but far from what I asked — the app still doesn't return substantial code reviews.
 
-![](/blog/2025/10/adventures-in-vibe-coding-with-replit/code-review-unwanted-frontend.webp)
+![Code Review AI Multi-LLM Assistant interface showing dark-themed navigation sidebar with options for Submit Code, Dashboard, Analytics, and Settings. Main content area displays 'Multi-LLM Code Review Assistant' title with description and two buttons: GitHub Repository and Upload ZIP File.](/blog/2025/10/adventures-in-vibe-coding-with-replit/code-review-unwanted-frontend.webp)
 
 So after ~$100 of agent credits, I found that Replit was not the tool for this app — I'm now trying to build a [CrewAI](/blog/2025/10/creating-agentic-ai-apps/) app to accomplish the same thing (stay tuned for a post about that).
 
@@ -85,7 +86,7 @@ https://demo.ecommerce.endpointdev.com/swagger/index.html
 
 #### The results (version 1)
 
-![](/blog/2025/10/adventures-in-vibe-coding-with-replit/site-v1.png)
+![Spooky Store Halloween ecommerce website showing three product cards featuring jack-o'-lantern pumpkin carving designs. Products listed are: Pumpkin Spice Treats with pumpkin emoji ($3.99), Spider Web Candy with spider emoji ($2.49), and Ghost Marshmallows with skull emoji ($4.99). Dark background with orange Halloween-themed branding.](/blog/2025/10/adventures-in-vibe-coding-with-replit/site-v1.png)
 
 It generated a nice, simple ecommerce storefront, using Hugo and End Point Ecommerce. Impressive! However, there's one red flag: if you look at the products [in the demo API](https://demo.ecommerce.endpointdev.com/) we're using, they are simple groceries — Apple, Banana, etc. So where did "Pumpkin spice treats," "Spider Web Candy," and "Ghost Marshmallows" come from?
 
@@ -99,7 +100,7 @@ Please remove the fallback products
 
 #### The results (version 2)
 
-![](/blog/2025/10/adventures-in-vibe-coding-with-replit/site-v2.png)
+![Spooky Store Halloween ecommerce website with jack-o'-lantern decorations. Features welcome banner with spider icons and orange border. Error message displayed stating 'Something spooky happened! Could not load products' with skull icons, indicating products failed to load in the Haunting Collection section.](/blog/2025/10/adventures-in-vibe-coding-with-replit/site-v2.png)
 
 This looks more promising! We get an error message written by the frontend. In production we might want to display more specific messages based on the response, but for this demo, I'm happy with this way of displaying errors.
 
@@ -139,7 +140,7 @@ Now, please fetch the images from the API as well
 
 ...we have a decent working Hugo site connected with the End Point Ecommerce demo API!
 
-![](/blog/2025/10/adventures-in-vibe-coding-with-replit/site-v3.png)
+![Spooky Store Halloween ecommerce website displaying three product cards in a row: red apple for $1.99, banana bunch on yellow background for $0.25, and raw beef for $7.99. Shopping cart button visible in top right corner. Dark background with orange Halloween-themed header.](/blog/2025/10/adventures-in-vibe-coding-with-replit/site-v3.png)
 
 #### Feature addition: cart
 
