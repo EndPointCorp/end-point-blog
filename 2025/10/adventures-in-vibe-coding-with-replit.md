@@ -50,13 +50,13 @@ In response, Replit's agent created a full React frontend for the API! Neat, but
 
 ![](/blog/2025/10/adventures-in-vibe-coding-with-replit/code-review-unwanted-frontend.webp)
 
-So after ~$100 of agent credits, I found that Replit was not the tool for this app — I'm now trying to build a [CrewAI](/blog/2025/10/creating-agentic-ai-apps/) app to accomplish the same thing.
+So after ~$100 of agent credits, I found that Replit was not the tool for this app — I'm now trying to build a [CrewAI](/blog/2025/10/creating-agentic-ai-apps/) app to accomplish the same thing (stay tuned for a post about that).
 
 ### Project 2: End Point Ecommerce + Hugo site
 
-A common theme in Replit apps we've experimented with is that it prefers to make everything a web app with a React frontend. I was curious how it'd do with a different web stack: Hugo and our recently launched [End Point Ecommerce](/expertise/end-point-ecommerce/).
+A common theme in Replit apps we've experimented with is that it prefers to make everything a web app with a React frontend. I was curious how it'd do with a different web stack: The [Hugo](https://gohugo.io/) static site generator for the frontend and our recently launched [End Point Ecommerce](/expertise/end-point-ecommerce/) for the backend.
 
-This is an interesting problem for an LLM, since Hugo is widely used, but still small compared to React, Vue, and similar frameworks, and since End Point Ecommerce is well-documented but too new for any online discussion. However, it's a modern .NET ecommerce framework and the code is readable and straightforward.
+This is an interesting problem for an LLM, since Hugo is widely used (including on [this site](/blog/2021/08/converting-to-hugo/)), but still small compared to React, Vue, and similar frameworks, and since End Point Ecommerce is well-documented but too new for any online discussion. However, it's a modern .NET ecommerce framework and the code is readable and straightforward.
 
 #### The prompt
 
@@ -128,7 +128,7 @@ end point and getting an API key
 
 However, after reviewing the project for this post, I found that I misunderstood the issue in this prompt — no authentication is needed to GET `/api/products` on the demo API of End Point Ecommerce, the site was just disallowing this cross-origin request. Replit's agent went ahead and implemented the CORS change anyway, though it didn't correct my prompt.
 
-After a few more folloup prompts...
+After a few more followup prompts...
 
 ```
 Please use the "basePrice", "discountAmount", and "discountedPrice" keys that
@@ -153,7 +153,7 @@ address. For now, instead of payment information, just have a button which adds
 a commonly used dummy credit card number.
 ```
 
-There's an issue here: I specified using localStorage, which is a fine way to set up a frontend cart system, but it ignores the existing system End Point Ecommerce already supplies. I hadn't checked the documentation before making this prompt, and neither did Replit; it happily obliged and created a cart management system on the frontend. It's nice that the agent did what I asked, but if I were trying to work with the agent, without cross-referencing documentation myself, I would be disappointed.
+There's an issue here: I specified using `localStorage`, which is a fine way to set up a frontend cart system, but it ignores the existing system End Point Ecommerce already supplies. I hadn't checked the documentation before making this prompt, and neither did Replit; it happily obliged and created a cart management system on the frontend. It's nice that the agent did what I asked, but if I were trying to work with the agent, without cross-referencing documentation myself, I would be disappointed.
 
 That's the interesting part about using a non-deterministic system like AI agents: responding to one prompt, it might ignore my specific (and misguided) requests, but in another it might blindly execute the tasks it's given. By the nature of LLMs, you can't predict what you'll get.
 
