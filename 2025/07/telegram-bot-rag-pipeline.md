@@ -16,18 +16,52 @@ tags:
 
 <!-- Photo by Seth Jensen, 2025. -->
 
-Today, we'll build a Telegram bot that can answer FAQs using your own data, not the open internet. It reads a local faqs.json, finds the best matches, and asks an LLM to write a friendly answer.
+In this post, we will show you how to build an intelligent FAQ bot using Python and the **Telegram Bot API**. We'll go beyond simple commands by integrating a **Retrieval-Augmented Generation** (RAG) pipeline with LangChain.
+
+This RAG pipeline lets our bot pull information from a custom knowledge base (in our case, a simple `faqs.json` file) and use a **local** Large Language Model (LLM) through **Ollama** to generate accurate answers. The best part? This approach, which works great with interfaces like **Open Web UI**, gives you full control over your models and data with zero API costs.
+
+### What is Telegram?
+
+You've probably heard of [Telegram](https://telegram.org/)—it's a popular, cloud-based instant messaging app. It’s fast, works everywhere (mobile, web, and desktop), and has powerful features like huge group chats and easy file sharing.
+
+One of its most powerful features for developers is the **Telegram Bot API**, an open platform that allows anyone to build and integrate automated applications (like ours!) directly into the chat interface.
+
+### A Warning on Privacy and Encryption
+
+Before we build our bot, it is critical to understand how Telegram handles encryption, as it directly impacts user privacy.
+
+- **Cloud Chats (The Default)**: All standard chats, group chats, and **all bot interactions** are "Cloud Chats." These use server-client encryption. This means your messages are encrypted between your device and Telegram's servers, and then stored (encrypted) on their servers. This is what allows you to access your chat history from any device. However, **Telegram itself holds the encryption keys** and can access this data.
+
+- **Secret Chats (Manual)**: Telegram also offers "Secret Chats," which are end-to-end encrypted (E2EE). In this mode, only you and the recipient can read the messages. Telegram has no access. However, **bots cannot operate in Secret Chats**.
+
+**What this means for our bot**: Any message a user sends to our bot is a "Cloud Chat" and is **not end-to-end encrypted**. The data is accessible to Telegram and will be processed in plain text by our bot.py script on our server.
+ 
+For this reason, you should never build a bot that asks for, or encourage users to send, highly sensitive private data such as passwords, financial information, or social security numbers. Always treat bot conversations as non-private.
+
+### What is Retrieval-Augmented Generation (RAG)?
+
+At its core, Retrieval-Augmented Generation (RAG) is a technique that makes Large Language Models (LLMs) smarter by connecting them to external, private knowledge.
+
+- The Problem: An LLM like llama3 only knows the information it was trained on. It has no access to your company's internal FAQs, new documents, or any private data.
+ 
+- The Solution (RAG): RAG solves this in two steps:
+ 
+    - 1. Retrieve: When you ask a question, the system first retrieves relevant information from your own knowledge base (for us, our faqs.json file).
+ 
+    - 2. Augment: It then augments the LLM's prompt by pasting that retrieved information in as context, along with your original question.
+ 
+In short, instead of just asking the bot "What's the shipping policy?", we're effectively asking, "Based on this specific text: '...We offer standard shipping...' — what is the shipping policy?" This forces the LLM to base its answer on our facts, not its own general knowledge, making the response accurate and reliable.
 
 ### What you’ll build
 - Telegram bot
 - faqs.json knowledge base
 - RAG pipeline with local embeddings (FAISS) + LLM (OpenWebUI)
-
+ 
 ### Prerequisites
 You’ll need: Python 3.12+, a Telegram bot token (from BotFather), and access to an LLM via a locally hosted OpenWebUI instance (OpenAI-compatible API).
 ### Setting up the Project for Telegram Bot
-
-We will use uv, a high-performance Python package manager, to install libraries and set up our project. If you don't have uv installed, you can get it with:
+ 
+`uv` is a high-performance Python package manager, so we'll use it to set up our project. If you don't have it installed, you can get it with or visit the [site](https://docs.astral.sh/uv/getting-started/installation/) for installation steps
 ```bash
 pip install uv
 ```
@@ -58,7 +92,7 @@ source .venv/bin/activate
 
 Install the necessary Python packages using uv:
 ```bash
-uv pip install python-telegram-bot python-dotenv langchain langchain-openai langchain-community faiss-cpu sentence-transformers
+uv add python-telegram-bot python-dotenv langchain langchain-openai langchain-community faiss-cpu jq sentence-transformers
 ```
 
 The key libraries are:
