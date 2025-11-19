@@ -19,7 +19,7 @@ tags:
 - DevOps
 ---
 
-![own image.](/blog/2025/11/legacy-networking-to-systemd-networkd/banner.webp)
+![Leh city, India .](/blog/2025/11/legacy-networking-to-systemd-networkd/banner.webp)
 
 <!-- photo by Bharathi Ponnusamy -->
 
