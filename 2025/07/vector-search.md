@@ -24,6 +24,8 @@ At its core, vector search is a method of finding similar items in a dataset by 
 
 Imagine you’re searching for `a cozy cabin in the woods`. A traditional search might get stuck on the exact words in this query, missing a listing for something similar like `a snug retreat nestled in a forest`. Vector search, however, can connect the dots because it understands that `cozy` and `snug` or `woods` and `forest` are conceptually close.
 
+> You can try vector search on this blog! There's a search bar in the header at the top of the page, and you can see our announcement post [here](/blog/2025/08/vector-search-for-the-end-point-blog/).
+
 ### How Does It Work?
 
 ![A block flow diagram. At the start is a block labeled "Raw Data". A red arrow labeled "Embedding Model" points to stacked blocks labeled "Embedding". Then a red arrow points to a cylinder reading "Vector Store". Then a green arrow points to stacked blocks reading "Found Vectors". Also pointing to the "Vector Store" cylinder, with a blue arrow labeled "Similarity Search", is a block labeled "Query Vector", which has another blue arrow pointing to it from a block labeled "Query".](/blog/2025/07/vector-search/vector-search-arch.webp)

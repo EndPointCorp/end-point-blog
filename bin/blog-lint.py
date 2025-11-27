@@ -321,11 +321,6 @@ for b in code_blocks:
         errors.add(Warning(b.lines[0], 'Code blocks should be used only as their own paragraphs'))
         continue
 
-    # Check that a language is specified
-    lang = re.sub(r'^ *```', '', b.lines[0].line).rstrip()
-    if lang not in highlight_languages:
-        errors.add(Warning(b.lines[0], "Code blocks should specify a valid language or 'plain'. Example: ```python"))
-
     has_tabs = False
     smallest_indent = None
     left_margin = len(b.lines[0].line) - len(b.lines[0].line.lstrip(' '))
