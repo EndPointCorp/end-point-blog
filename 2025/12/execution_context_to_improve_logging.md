@@ -12,16 +12,16 @@ tags:
 
 ## Using ActiveSupport::ExecutionContext to improve Rails logging
 
-If you’ve ever tried to debug a complex user workflow in a modern Rails application, you know how difficult it can be. A single web request can spawn multiple background jobs, Turbo Stream updates, and a flurry of database queries. Answering the  question "What was this User doing?" should be simple, but tracing the flow of events through a web of a log file can be difficult and time consuming.
+If you’ve ever tried to debug a complex user workflow in a modern Rails application, you know how difficult it can be. A single web request can spawn multiple background jobs, Turbo Stream updates, and a flurry of database queries. Answering the  question "What was this User doing?" should be simple, but tracing the flow of events through a web of log files can be difficult and time consuming.
 
-You can add custom log tags but that gets tedious and messy fast. Fortunately, Rails has a powerful, under-documented feature designed specifically for this problem: ActiveSupport::ExecutionContext.
+You can add custom log tags but that gets tedious and messy fast. Fortunately, Rails has a powerful, under-documented feature designed specifically to address this problem: ActiveSupport::ExecutionContext.
 
 In this post, we'll walk through what ExecutionContext is and how you can use it to add meaningful structure to your logs, making debugging a much more straightforward task.
 
 ### The Problem: A Tangled Web of Logs
 Imagine a user places an order on your site. The OrdersController#create action fires, which then enqueues a ReceiptJob and a InventoryUpdateJob. The controller also renders a Turbo Stream to update the UI. You have at least four separate units of work: the HTTP request and three background tasks.
 
-Now, if the InventoryUpdateJob fails, your log might show an exception, but it won't immediately tell you which user's order triggered it. You're left grepping for job IDs or tracing timestamps. ExecutionContext solves this by providing a shared context that is automatically shared across these different units of work.
+Now, if the InventoryUpdateJob fails, your log might show an exception, but it won't immediately tell you which user's order triggered it. You're left grepping for job IDs or tracing timestamps. ExecutionContext solves this problem by providing a shared context that is automatically shared across these different units of work.
 
 ### How ExecutionContext Works
 Think of ActiveSupport::ExecutionContext as a container for data that automatically gets passed along. When you store something in it during a web request, that data is bundled up and made available in any background jobs you start from that request without you having to manually send it.
@@ -90,7 +90,7 @@ end
 ```
 
 ### Making the Context Visible in Logs
-Setting the context is only half the battle; we need to see it in our logs. We can do this by customizing Rails' log formatter.
+Setting the context is only half the battle; we also need to see it in our logs. We can do this by customizing Rails' log formatter.
 
 Here’s a simple formatter that appends the execution context to every log line:
 
