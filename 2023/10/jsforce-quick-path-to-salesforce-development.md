@@ -91,4 +91,4 @@ conn.sobject("Account").destroy('0017000000hOMChAAO', function(err, ret) {
 });
 ```
 
-For a deeper dive into setup and uses of JSforce check out [this post](/blog/2020/03/salesforce-integration-with-node/) by my coworker Dylan Wooters.
+For a deeper dive into setup and uses of JSforce check out [this post](/blog/2020/03/salesforce-integration-with-node/) by my coworker Dylan Wooters. 
