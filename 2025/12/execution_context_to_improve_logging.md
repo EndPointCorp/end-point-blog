@@ -26,6 +26,8 @@ Now, if the InventoryUpdateJob fails, your log might show an exception, but it w
 ### How ExecutionContext Works
 Think of ActiveSupport::ExecutionContext as a container for data that automatically gets passed along. When you store something in it during a web request, that data is bundled up and made available in any background jobs you start from that request without you having to manually send it.
 
+It's important to note that while ActiveSupport::ExecutionContext values are available within the same process (e.g., during the web request), they don't automatically serialize and propagate to background jobs. For the context to be available in jobs, you'll need to explicitly pass relevant values as job arguments. In our example, since we're already passing the order object to both jobs, we can access order.user_id and order.id directly in the job. For contexts without such natural carriers consider extracting the relevant values and passing them explicitly as additional job arguments.
+
 This is the magic that allows you to trace a chain of events.
 
 ### A Practical Example: Tracing an Order
@@ -139,6 +141,8 @@ Here is what that log line would look like:
 ```text
 DEBUG -- : SQL: /* user_id:1001, order_id:998842 */ SELECT "orders".* FROM "orders" WHERE "orders"."user_id" = $1 LIMIT $2  [["user_id", 1001], ["LIMIT", 1]]
 ```
+
+The SQL notification subscriber will fire on every database query which in production could introduce noticeable overhead. Consider wrapping this functionality in a `Rails.env.development?` check or using feature flags to control its activation. Be mindful of this trade-off when adding context to high-volume SQL logging.
 
 ### A Stitch in Time Saves Nine
 ActiveSupport::ExecutionContext is a robust solution to a common problem in modern, event-driven Rails applications. It provides a clean, built-in mechanism for propagating context, which leads to more debuggable and observable systems.
