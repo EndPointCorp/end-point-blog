@@ -5,6 +5,7 @@ description: End Point Corporation was recognized by Techreviewer.co among the t
 date: 2025-12-08
 featured:
   image_url: /blog/2025/12/techreviewer-co-recognition/clouds-with-badge.webp
+github_issue_number: 2165
 tags:
 - cloud
 - consulting
