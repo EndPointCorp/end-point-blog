@@ -21,4 +21,4 @@ Jon Jensen, End Point’s former chief technical officer, has joined Deloitte wi
 
 Deloitte is only acquiring assets, clients, and personnel related to End Point’s CasePointer business. All other business lines remain with End Point, including systems administration, database engineering, e-commerce programming, application development, and our immersive GIS platform, VisionPort.
 
-See <a href="https://www2.deloitte.com/us/en/pages/about-deloitte/articles/press-releases/deloitte-bolsters-its-public-health-transformation-capabilities-with-acquisition-of-end-points-industry-leading-disease-surveillance-business.html?nc=42" target="_blank">Deloitte's website about CasePointer</a> for further information.
+See [Deloitte’s Public Health Transformation](https://www.deloitte.com/us/en/Industries/government-public/about/public-health-transformation.html) website for further information.
