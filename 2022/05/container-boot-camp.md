@@ -3,8 +3,8 @@ title: Docker and containers boot camp
 author: Phineas Jensen
 date: 2022-05-16
 tags:
-  - docker
-  - containers
+- docker
+- containers
 github_issue_number: 1864
 ---
 

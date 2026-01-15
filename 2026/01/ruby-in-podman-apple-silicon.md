@@ -10,6 +10,8 @@ tags:
 - ruby
 - rails
 - macos
+- containers
+- podman
 ---
 
 ![Amidst dry, leafless brush, a tall structure of dilapidated bricks stands, with a small archway at the bottom in the center of the image](/blog/2026/01/ruby-in-podman-apple-silicon/newish-ruins.webp)
