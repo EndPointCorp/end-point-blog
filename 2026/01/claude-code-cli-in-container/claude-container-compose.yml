@@ -1,0 +1,20 @@
+services:
+  # Service with auth and workspace mounts
+  claude-auth-workspace:
+    build:
+      context: .
+      dockerfile: Dockerfile.claude
+      args:
+        WORKING_FOLDER: ${WORKING_FOLDER}
+    stdin_open: true
+    tty: true
+    userns_mode: keep-id
+      #profiles:
+      # Check this
+      #- auth-workspace
+    volumes:
+      - ${CLAUDE_CONFIG_DIR:-~}/.claude.json:/home/node/.claude.json
+      - ${CLAUDE_CONFIG_DIR:-~}/.claude:/home/node/.claude
+      - ./${WORKING_FOLDER:-.}:/workspace/${WORKING_FOLDER}
+    working_dir: /workspace/${WORKING_FOLDER}
+      #
