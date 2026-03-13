@@ -2,7 +2,9 @@
 author: Edgar Mlowe
 title: "Why Your AI Extractor Fails on .msg Emails (and How to Fix Decoding)"
 description: "A practical guide to fixing .msg HTML decoding issues that silently corrupt text before AI extraction."
-date: 2026-02-27
+featured:
+  image_url: /blog/2026/02/why-ai-extractor-fails-on-msg-emails-and-how-to-fix-decoding/antenna-and-sky.webp
+date: 2026-03-13
 tags:
 - artificial-intelligence
 - email
@@ -11,13 +13,15 @@ tags:
 - troubleshooting
 ---
 
-I want to share one debugging lesson that saved me from tuning the wrong layer in an AI extraction pipeline.
+![Against a blue sky with wispy white clouds, an old directional antenna points to the left of the camera atop a brick fireplace](/blog/2026/02/why-ai-extractor-fails-on-msg-emails-and-how-to-fix-decoding/antenna-and-sky.webp)
 
-I started with a familiar symptom: extraction output looked inconsistent. Some rows were fine, some had weird characters, especially accents. My first instinct was the same one most of us have: maybe the model needs prompt tuning.
+<!-- Photo by Seth Jensen, 2025. -->
 
-It turned out not to be a model problem.
+I want to share a debugging lesson that saved me from tuning the wrong layer in an AI extraction pipeline.
 
-The root cause was upstream data integrity: decoding `.msg` email HTML with the wrong charset.
+It started with a familiar symptom: extraction output looked inconsistent. Some rows were fine, but some had extra characters, especially accents. My first instinct was the same one most of us have: maybe the model needs prompt tuning.
+
+It turned out not to be a model problem. The root cause was upstream data integrity: decoding `.msg` email HTML with the wrong charset.
 
 ### The pattern that gives it away
 
@@ -32,7 +36,7 @@ A classic sign looks like this:
 - expected: `Müller`
 - corrupted: `MÃ¼ller`
 
-By the time your extractor sees that text, meaning is already damaged.
+By the time your extractor sees that text, the meaning is already damaged.
 
 ### Why `.msg` bites harder than `.eml`
 
@@ -45,22 +49,9 @@ That difference matters.
 
 If your code assumes UTF-8 for `.msg` HTML bytes, non-UTF messages can decode into garbage. Then downstream steps (HTML-to-PDF, OCR, LLM extraction, post-processing) just preserve and propagate bad text.
 
-### The hidden failure point in the pipeline
-
-The break is usually here:
-
-1. Read `.msg` HTML body bytes.
-2. Decode with wrong charset or permissive replacement.
-3. Pass corrupted text to extraction.
-4. Blame extraction quality.
-
-If step two is wrong, steps three and four never had a chance.
-
 ### The fix: strict, explicit, controlled
 
-You do not need a big rewrite. A small decode policy change can remove a whole class of silent failures.
-
-For `.msg` HTML bytes:
+You do not need a big rewrite. A small decode policy change can remove a whole class of silent failures. For `.msg` HTML bytes:
 
 1. Read the encoding hint from message metadata.
 2. Map that hint to a decoder codec.
@@ -68,7 +59,7 @@ For `.msg` HTML bytes:
 4. If needed, use one controlled strict fallback.
 5. If decode still fails, fail loud.
 
-Minimal example:
+Minimal example in Python:
 
 ```python
 from extract_msg.encoding import lookupCodePage
@@ -118,25 +109,11 @@ This gives reliability without destabilizing the rest of the ingestion stack.
 
 Log these fields per message:
 
-- source file
-- content source used (HTML or plain text)
-- encoding hint found
-- codec selected
-- fallback used or not
-- decode result (success, fallback, manual review, fail)
+- Source file
+- Content source used (HTML or plain text)
+- Whether encoding hint was found
+- Selected codec
+- Whether fallback was used
+- Result of decoding (success, fallback, manual review, fail)
 
 With this, “random extraction quality” turns into a clear ingestion signal.
-
-### Final takeaway
-
-If your `.msg` extraction quality looks inconsistent, check input integrity before touching prompts or model settings.
-
-Upstream data integrity is often the hidden cause of downstream AI errors.
-
-In my case, the highest-leverage fix was simple:
-
-- decode with the right charset hint
-- decode strictly
-- avoid silent replacement on critical paths
-
-Small change, big reliability gain.
