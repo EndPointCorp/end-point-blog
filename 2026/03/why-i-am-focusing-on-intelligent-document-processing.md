@@ -11,7 +11,7 @@ tags:
 - opinion
 ---
 
-[AI moves fast. A new model drops, a new framework launches, a new thing comes out, and suddenly what you learned last month feels old. LLMs, agents, fine-tuning, RAG, computer vision, multimodal models, prompt engineering, AI coding tools. The list keeps growing and it is hard to know where to focus.
+AI moves fast. A new model drops, a new framework launches, a new thing comes out, and suddenly what you learned last month feels old. LLMs, agents, fine-tuning, RAG, computer vision, multimodal models, prompt engineering, AI coding tools. The list keeps growing and it is hard to know where to focus.
 
 Recently I decided to stop trying to follow all of it and focus on one area. In this post, I will explain what that area is, how I found it, and why I think it is worth paying attention to.
 
@@ -42,8 +42,7 @@ IDP is about using AI (OCR, NLP, LLMs, computer vision) to automatically extract
 This is not something small. Major research firms track it:
 
 - [Gartner](https://www.gartner.com/reviews/market/intelligent-document-processing-solutions) publishes a Market Guide for Intelligent Document Processing Solutions
-- [Everest Group](https://www.everestgrp.com/intelligent-document-processing-idp) releases annual IDP State of the Market reports
-- [IDC](https://www.processexcellencenetwork.com/tools-technologies/news/idc-rates-22-intelligent-document-processing-idp-vendors) rated 22 IDP vendors in their some of their MarketScape assessment
+- [IDC](https://www.processexcellencenetwork.com/tools-technologies/news/idc-rates-22-intelligent-document-processing-idp-vendors) rated 22 IDP vendors in one of their MarketScape assessments
 
 The vendor landscape includes names you already know: Google ([Document AI](https://cloud.google.com/document-ai)), Microsoft ([Azure Document Intelligence](https://azure.microsoft.com/en-us/products/ai-services/ai-document-intelligence)), Amazon ([Textract](https://aws.amazon.com/textract/)), ABBYY, UiPath, Automation Anywhere, and many more.
 
@@ -55,9 +54,8 @@ The numbers vary by research firm because they define the market scope different
 |---|---|---|---|
 | [Precedence Research](https://www.precedenceresearch.com/intelligent-document-processing-market) | $4.3B (2026) | $43.9B | ~34% per year |
 | [Fortune Business Insights](https://www.fortunebusinessinsights.com/intelligent-document-processing-market-108590) | $14.2B (2026) | $91.0B | ~26% per year |
-| [Research Nester](https://www.researchnester.com/reports/intelligent-document-processing-market/4826) | $3.8B (2025) | $39.5B | ~26% per year |
 
-Growing at 26-34% per year makes IDP one of the fastest-growing areas in enterprise AI. A [McKinsey global survey](https://www.mckinsey.com/capabilities/operations/our-insights/the-next-horizon-for-industrial-operations-six-cross-industry-trends) found that 70% of organizations are already testing automation of document workflows, and close to 90% plan to scale these efforts across their whole company.
+Growing at 26-34% per year makes IDP one of the fastest-growing areas in enterprise AI.
 
 This matters because market growth creates demand for people who can actually build these systems. Not just people who buy vendor platforms, but people who can design extraction schemas, debug LLM outputs, build validation pipelines, and connect everything to real business systems.
 
@@ -71,7 +69,6 @@ Knowing the field has a name also made it clear what skills matter most. IDP wor
 - **Pipeline architecture**: from document intake to extraction, normalization, validation, and output
 - **Business system integration**: understanding ERP and CRM import formats, APIs, and data models
 
-
 ### Why this matters
 
 When a client has purchase orders stuck in email inboxes that nobody can process fast enough, what they need is a reliable pipeline that extracts the right fields, handles the edge cases (like [character encoding issues in .msg files](/blog/2026/03/why-ai-extractor-fails-on-msg-emails-and-how-to-fix-decoding/)), validates the output, and delivers a clean import file.
@@ -82,4 +79,5 @@ That is what IDP is about: turning data that businesses already have but cannot 
 
 AI is broad enough that no one person can master all of it. But looking at the projects I was actually working on, instead of trying to follow every new trend, made it much easier to find direction.
 
-In my case, that field turned out to be Intelligent Document Processing.](https://github.com/Mloweedgar/end-point-blog/edit/main/2026/03/why-i-am-focusing-on-intelligent-document-processing.md)
+In my case, that field turned out to be Intelligent Document Processing.
+
