@@ -11,7 +11,7 @@ tags:
 - opinion
 ---
 
-AI moves fast. A new model drops, a new framework launches, a new thing comes out, and suddenly what you learned last month feels old. LLMs, agents, fine-tuning, RAG, computer vision, multimodal models, prompt engineering, AI coding tools. The list keeps growing and it is hard to know where to focus.
+[AI moves fast. A new model drops, a new framework launches, a new thing comes out, and suddenly what you learned last month feels old. LLMs, agents, fine-tuning, RAG, computer vision, multimodal models, prompt engineering, AI coding tools. The list keeps growing and it is hard to know where to focus.
 
 Recently I decided to stop trying to follow all of it and focus on one area. In this post, I will explain what that area is, how I found it, and why I think it is worth paying attention to.
 
@@ -82,4 +82,4 @@ That is what IDP is about: turning data that businesses already have but cannot 
 
 AI is broad enough that no one person can master all of it. But looking at the projects I was actually working on, instead of trying to follow every new trend, made it much easier to find direction.
 
-In my case, that field turned out to be Intelligent Document Processing.
+In my case, that field turned out to be Intelligent Document Processing.](https://github.com/Mloweedgar/end-point-blog/edit/main/2026/03/why-i-am-focusing-on-intelligent-document-processing.md)
