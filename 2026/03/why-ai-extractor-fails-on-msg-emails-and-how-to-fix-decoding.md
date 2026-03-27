@@ -3,7 +3,7 @@ author: Edgar Mlowe
 title: "Why Your AI Extractor Fails on .msg Emails (and How to Fix Decoding)"
 description: "A practical guide to fixing .msg HTML decoding issues that silently corrupt text before AI extraction."
 featured:
-  image_url: /blog/2026/02/why-ai-extractor-fails-on-msg-emails-and-how-to-fix-decoding/antenna-and-sky.webp
+  image_url: /blog/2026/03/why-ai-extractor-fails-on-msg-emails-and-how-to-fix-decoding/antenna-and-sky.webp
 date: 2026-03-13
 tags:
 - artificial-intelligence
@@ -13,7 +13,7 @@ tags:
 - troubleshooting
 ---
 
-![Against a blue sky with wispy white clouds, an old directional antenna points to the left of the camera atop a brick fireplace](/blog/2026/02/why-ai-extractor-fails-on-msg-emails-and-how-to-fix-decoding/antenna-and-sky.webp)
+![Against a blue sky with wispy white clouds, an old directional antenna points to the left of the camera atop a brick fireplace](/blog/2026/03/why-ai-extractor-fails-on-msg-emails-and-how-to-fix-decoding/antenna-and-sky.webp)
 
 <!-- Photo by Seth Jensen, 2025. -->
 
