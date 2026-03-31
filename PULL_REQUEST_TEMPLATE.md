@@ -8,6 +8,6 @@ Before submitting a pull request, make sure to complete the following checklist:
 - Incorporate changes based on your reviewers' input.
     - [ ] Complete technical review
     - [ ] Complete style review
-- [ ] When you are done incorporating feedback and making any other changes, contact a keeper of the blog for final review and publishing. You can message on company chat or in a comment on your pull request (make sure to tag Seth @sethjensen1).
+- [ ] When you are done incorporating feedback and making any other changes, contact a keeper of the blog for final review and publishing. You can message on company chat or in a comment on your pull request (make sure to tag the Keepers of the Blog @EndPointCorp/keepers-of-the-blog).
 
 Once your blog post has been published to the world, proofread it again. You often see mistakes after publishing that you didn't notice before, and it's not too late to fix them!
