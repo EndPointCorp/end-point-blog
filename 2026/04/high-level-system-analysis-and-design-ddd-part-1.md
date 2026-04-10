@@ -79,6 +79,7 @@ It's also worth noting that, just as organizations' business strategies are dyna
 The knowledge of subdomain types can also help the analysis when dividing the business and discovering subdomains. If you find yourself recursively finding more and more fine-grained subdomains from already identified ones, a good time to stop recursing is when you find that a generic or supporting subdomain, when broken down, reveals only new finer-grained generic or supporting subdomains. The reasoning for this is simple: this analysis activity is most valuable when trying to identify core subdomains. When there are no more core subdomains to be found within a particular area of the business, then it's probably not worth it to keep digging deeper.
 
 ![Decomposing a generic subdomain](/blog/2026/04/high-level-system-analysis-and-design-ddd-part-1/decomposing-a-generic-subdomain.png)
+
 *Here we have an example of a hypothetical help desk system subdomain, part of a customer service subdomain, being decomposed and revealing that it only contains generic subdomains.*
 
 In summary, these are the main characteristics of the three types of subdomains:
@@ -88,6 +89,7 @@ In summary, these are the main characteristics of the three types of subdomains:
 3. **Support subdomains** have low complexity, do not provide competitive advantage and are the slowest to change.
 
 ![Subdomain types complexity vs differentiation](/blog/2026/04/high-level-system-analysis-and-design-ddd-part-1/subdomain-types-complexity-vs-differentiation.png)
+
 *This is where each type of subdomain fall when considering their business logic complexity and business differentiation.*
 
 #### Using subdomains to make strategic decisions
@@ -130,6 +132,7 @@ A classic example of this is when domain experts focus too much on the "happy pa
 This deepening of knowledge feeds back into the ubiquitous language and improves it. Making it more insightful and more precise. This means that, throughout the life cycle of a project, the ubiquitous language should keep evolving, expanding and refining. This allows it to continuously improve as an effective model of the business domain, for the problem that it's trying to solve. Indeed, just like code is a model of the business domain, so too is the ubiquitous language.
 
 ![Traditional knowledge sharing flow](/blog/2026/04/high-level-system-analysis-and-design-ddd-part-1/traditional-knowledge-sharing-flow.png)
+
 *A classic pitfall in software projects is a manner of communication and knowledge sharing where developers are various steps removed from the domain experts. Consistent use of the ubiquitous language addresses this.*
 
 #### The ubiquitous language as a model of the domain
@@ -189,6 +192,7 @@ Bounded contexts and subdomains are closely related concepts, but there's one ke
 Depending on the situation, it is certainly possible to end up with a set of bounded contexts that align one-to-one with the business subdomains. However, this is not mandatory. We can develop a solution with a single bounded context that spans multiple subdomains; the same way that we can decompose the problem into many bounded contexts, some of which operate within the same particular subdomain.
 
 ![Subdomains and bounded contexts](/blog/2026/04/high-level-system-analysis-and-design-ddd-part-1/subdomains-and-bounded-contexts.png)
+
 *Bounded contexts are closely related to subdomains, but aren't tied to them. They are flexible and can be organized in many ways.*
 
 Each bounded context becomes a separate major architectural component. That is, a (micro) service, a project, an application. When we have a component that spans multiple subdomains, programming language organizational structures like namespaces or modules can be used to logically separate the subdomains within.
@@ -202,6 +206,7 @@ These contracts are necessary because each bounded context contains its own vers
 Domain-Driven Design offers various patterns that are useful for defining contracts between bounded contexts. The decision to use one pattern vs the other depends greatly on the nature of the teams tackling the project. Depending on the teams' relationship, we can put the patterns in one of three categories: cooperation, customer-supplier, and separate ways.
 
 ![Collaboration spectrum](/blog/2026/04/high-level-system-analysis-and-design-ddd-part-1/collaboration-spectrum.png)
+
 *Integration patterns are determined mainly by the level of cooperation between the teams that own the interacting bounded contexts.*
 
 #### Cooperation patterns
@@ -213,6 +218,7 @@ If the teams meet these criteria, a **partnership** model can be implemented. Th
 Sometimes, when different bounded contexts need to implement the same functionality, it makes more sense to develop this functionality once and package it as a reusable library, or a sub-module within a shared repository. This is what DDD calls a **shared kernel**. A shared kernel is effectively a bounded context of its own, one that is statically linked to other components and implements the logic that others depend on.
 
 ![Shared kernel](/blog/2026/04/high-level-system-analysis-and-design-ddd-part-1/shared-kernel.png)
+
 *A shared kernel is its own bounded context, but also "belongs" to multiple other bounded contexts.*
 
 The shared kernel integration pattern needs to be used carefully though, as it creates tight coupling between the components that use it. If the involved bounded contexts are owned by different teams, then this shared kernel that emerges violates the DDD principle of bounded contexts having single-team ownership. This is something to watch out for, as bad team synergy can produce problems during development and maintenance.
@@ -242,6 +248,7 @@ Anticorruption layers can be good solutions for the following scenarios:
 A third pattern represents an anticorruption layer of sorts, only built on the supplier's side. DDD calls this the **open-host service** pattern. Here, the upstream service comes up with a new language, separate from its own, tailored to its consumers' convenience, and exposes that as its contract. This public protocol is called a "published language".
 
 ![Open-host service](/blog/2026/04/high-level-system-analysis-and-design-ddd-part-1/open-host-service.png)
+
 *An open-host service provides a protocol for consumers to interact with. It can also support multiple versions of this protocol simultaneously.*
 
 An open-host service applies to similar scenarios as an anticorruption layer. Decoupling a service's internal model from its integration model frees it up for continuous evolution without fear of breaking its consumers. Another advantage of this is that multiple versions of the published language can be exposed, affording clients options on what to support and gradually migrate if they so choose.
@@ -263,6 +270,7 @@ Going separate ways can be dangerous when we're talking about core subdomains th
 The **context map** can be a useful tool for high level design as it plots all the major bounded contexts (i.e. modules, components, subsystems) that we've designed and their interaction patterns.
 
 ![Context map](/blog/2026/04/high-level-system-analysis-and-design-ddd-part-1/context-map.png)
+
 *Here's a context map which captures the various bounded contexts that compose a big system and their interactions. The arrows point to the upstream component in the relationship. "ACL" denotes an anticorruption layer and "OHS" represents an open-host service.*
 
 Of course, they can also offer valuable insight into organizational dynamics, as team composition and relationships with others are intrinsic parts of the discussion when talking about bounded contexts. For example, it can show teams that prefer to collaborate closely or at a healthy distance. I can also show problematic components, which are surrounded by anticorruption layers or have had their ties completely cut via a separate ways approach.
@@ -272,4 +280,5 @@ As with any document, they run the risk of becoming stale as the system evolves.
 ### The DDD high level design concept map
 
 ![The DDD high level design concept map](/blog/2026/04/high-level-system-analysis-and-design-ddd-part-1/concept-map.png)
+
 *These are the main concepts that we've explored so far, and how they relate to each other.*
