@@ -25,7 +25,7 @@ Think of the context window as a whiteboard. Everything Claude needs to know mus
 
 Most people assume they are only paying for the text they type. In reality, Claude loads a stack of context before it even reads your message.
 
-![What loads with every Prompt](/blog/2026/04/getting-the-most-from-claude-subscription/what-loads-with-every-prompt.webp)
+![What loads with every Prompt](/blog/2026/04/getting-the-most-from-claude-subscription/loads-with-every-prompt.webp)
 
 **Breakdown of what gets loaded:**
 
@@ -238,7 +238,7 @@ This is worth enabling even if you rarely hit limits. It acts as a safety net fo
 
 ### Putting It All Together
 
-![Putting It All Together](/blog/2026/04/getting-the-most-from-claude-subscription/putting-all-together.webp)
+![Putting It All Together](/blog/2026/04/getting-the-most-from-claude-subscription/putting-it-all-together.webp)
 
 **The short version:**
 
