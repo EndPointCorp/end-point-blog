@@ -70,7 +70,7 @@ Your subscription plan and settings determine the default model. You can overrid
 
 - **During a session:** `/model sonnet` or `/model opus`
 - **At startup:** `claude --model haiku`
-- *Permanently:* Add `"model": "sonnet"` to your settings file
+- **Permanently:** Add `"model": "sonnet"` to your settings file
 
 The key insight is that **you should match the model to the task**. Do not use Opus to rename a variable. Do not use Haiku to design a database schema. The difference in token consumption between Opus and Haiku for the same task can be several times over.
 
