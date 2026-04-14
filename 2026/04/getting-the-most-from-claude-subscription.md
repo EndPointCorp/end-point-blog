@@ -5,9 +5,10 @@ date: 2026-04-14
 description: "Practical techniques for managing token usage, model selection, and compaction habits to get the most out of your Claude Code subscription."
 featured:
   image_url: /blog/2026/04/high-level-system-analysis-and-design-ddd-part-1/pines-waterfall.webp
-github_issue_number: 2176
+github_issue_number: 2177
 tags:
 - artificial-intelligence
+- tools
 ---
 
 ![Tall dry grasses and thistles sway in the foreground, with a calm blue river inlet and green hills stretching out under a partly cloudy sky.](/blog/2026/04/getting-the-most-from-claude-subscription/thistles-river.webp)<br>
