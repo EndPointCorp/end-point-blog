@@ -4,6 +4,7 @@ title: "Getting the Most from your Claude Subscription"
 date: 2026-04-14
 description: "Practical techniques for managing token usage, model selection, and compaction habits to get the most out of your Claude Code subscription."
 featured:
+  endpoint: true
   image_url: /blog/2026/04/high-level-system-analysis-and-design-ddd-part-1/pines-waterfall.webp
 github_issue_number: 2177
 tags:

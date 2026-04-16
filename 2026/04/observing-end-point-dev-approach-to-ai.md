@@ -1,14 +1,14 @@
 ---
 author: "Jesse Gardner"
 title: "Observing End Point Dev's Approach to AI"
-date: 2026-04-13
+date: 2026-04-16
 description: "A non-technical perspective on the use of AI in the workplace, expectations of improving efficiency, and a clear eyed view of the hype"
 featured:
   image_url: /blog/2026/04/observing-end-point-dev-approach-to-ai/cover.webp
 github_issue_number: 2178  
 tags:
-- ai
-- vibe_coding
+- artificial-intelligence
+- vibe-coding
 ---
 
 ![A sweeping desert canyon stretches, framed by towering red sandstone formations and sparse desert scrub under a cloudless blue sky.](/blog/2026/04/observing-end-point-dev-approach-to-ai/cover.webp)<br>
