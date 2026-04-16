@@ -14,15 +14,15 @@ tags:
 ![A sweeping desert canyon stretches, framed by towering red sandstone formations and sparse desert scrub under a cloudless blue sky.](/blog/2026/04/observing-end-point-dev-approach-to-ai/cover.webp)<br>
 Photo by Garrett Skinner, 2022.
 
-When I joined End Point Dev in October 2025, there was one clear directive among a wide-ranging set of responsibilities: AI is causing drastic changes in our industry, and we need to be prepared.
+When I joined End Point Dev in October of 2025, there was one clear directive among a wide-ranging set of responsibilities: AI is causing drastic changes in our industry, and we need to tackle it head-on.
 
-As a non-technical person working in a software development consultancy, focusing my work on AI is a double-edged sword. The downside, of course, is my lack of expertise in anything involving code. I’ve sold software for most of my career, but I haven’t been the one building it. A reasonable person might wonder: How would I have a useful perspective on developments around AI?
+As a non-engineer working in a software development consultancy, there is a double edged sword in focusing my work on AI. The downside, of course, is my lack of expertise in anything involving code. I’ve sold software for a majority of my career, but I haven’t been the one building it. A reasonable person could wonder: how would I have a useful perspective on the developments around AI?
 
-To that, there are a few answers. For starters, I don’t get bogged down in the "how" of AI as much as I am interested in the results of its work. I’ve certainly learned about context windows, token usage, rate limits, and other *immediately useful* information for utilizing AI.
+To that there are a few answers. For starters, I don’t get bogged down in the “how” AI is working as much as I am interested in the results of its work. I’ve certainly learned context windows, token usage, rate limits, and other immediately useful information around utilizing AI.
 
-I also get to be a guinea pig for End Point’s suite of AI services. Our team might be primarily technical users, but that does not mean our clients necessarily have that same background. I get to approach AI tools as an interested user, not a development wizard.
+I also get to be a guinea pig for End Point’s suite of AI services. Our team might be primarily technical users, but that does not mean our clients necessarily have that same background. I get to approach AI tools as an interested user, not a development wizard. 
 
-With that said, these past six months have been an incredible learning experience. I’ve seen how AI can help with projects that would otherwise take ten times the amount of work, observed how development times can be improved with properly utilized generative AI, and witnessed healthy debate internally about where AI ought to be deployed.
+With that said, these past six months have been an incredible learning experience within the space. I’ve experienced how AI can help with projects that would otherwise take ten times the amount of work, seen how development times can be improved with properly utilized generative AI, and observed healthy debate internally about where AI ought to be deployed.
 
 ### Time Sheet Analysis and AI Analysis
 
