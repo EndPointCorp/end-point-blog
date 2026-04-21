@@ -16,6 +16,11 @@ tags:
 ![A wide waterfall cascades through a rocky, forested canyon surrounded by pine-covered hills under a cloudy sky.](/blog/2026/04/high-level-system-analysis-and-design-ddd-part-1/pines-waterfall.webp)<br>
 Photo by Zed Jensen, 2022.
 
+> This is part 1 of a series of blog posts on Domain-Driven Design:
+>
+> 1. [High level system analysis and design with Domain-Driven Design](/blog/2026/04/high-level-system-analysis-and-design-ddd-part-1/)
+> 2. [Implementing business logic with Domain-Driven Design](/blog/2026/04/implementing-business-logic-ddd-part-2/)
+
 **Domain-Driven Design** is an approach to software development that focuses on, [as Eric Evans puts it](https://www.oreilly.com/library/view/domain-driven-design-tackling/0321125215/), "tackling the complexity in the heart of software". And what is in the heart of software? The business domain in which it operates. Or more specifically: a **model** of it, made of code. That is, the code that implements the business logic that comes into play when solving problems within the realm of a particular business activity.
 
 DDD is not just about writing code though. It's a whole methodology that touches on business needs, requirements gathering, organizational dynamics, high level architectural design, and lower level patterns for implementing software intensive systems.
@@ -140,6 +145,7 @@ This deepening of knowledge feeds back into the ubiquitous language and improves
 Through consistent use of the ubiquitous language, developers are able to obtain a deeper understanding of the domain, the problems we're trying to solve, the reasoning behind the requirements and the mental model of the domain experts. This allows the construction of effective software solutions, with deep business insight, that go beyond simply translating requirements into code. If the implementation models the business domain effectively, there is potential for it to evolve with the business and better adapt as requirements change; and we reduce the risk of missing edge cases that may not be obvious to domain experts.
 
 ![Knowledge sharing under DDD](/blog/2026/04/high-level-system-analysis-and-design-ddd-part-1/knowledge-sharing-in-ddd.png)
+
 *Under DDD, developers and domain experts develop the ubiquitous language, which then informs the implementation.*
 
 Effectively, when we build a ubiquitous language, we're building a model of the domain. A model that reflects the relevant business entities, their behavior, and relationships. A model that will be eventually implemented into code, but also a model that needs to be understood by all stakeholders, regardless of their technical level. So it needs to be precise and rigorous, but also understandable. As such, in order to be useful, the ubiquitous language needs to respect certain restrictions:
@@ -150,6 +156,7 @@ Effectively, when we build a ubiquitous language, we're building a model of the 
 4. It should avoid including extraneous details. Just like code needs to include only what's needed to solve the problem at hand and nothing else (in order to avoid accidental complexity); the ubiquitous language must not be polluted with details from outside of the area of business activity that it represents. That can create confusion and unnecessary cognitive load.
 
 ![Classic model translations](/blog/2026/04/high-level-system-analysis-and-design-ddd-part-1/model-translations.png)
+
 *The ubiquitous language represents a unified model of the domain. This is in contrast to a more traditional process where domain knowledge gets "translated" multiple times before turning into code.*
 
 #### Tools for capturing the ubiquitous language
@@ -161,6 +168,7 @@ A glossary of terms is a great asset for keeping a ubiquitous language. A wiki i
 An automated acceptance tests suite, written using [Behavior Driven Development](https://en.wikipedia.org/wiki/Behavior-driven_development) frameworks, like [Cucumber](https://cucumber.io/), is also a great way of capturing the ubiquitous language. The advantage of these tests is that they are written in plain human-readable language, not code. And while it may be far fetched to think that non technical domain experts would be capable of writing and maintaining such tests, they certainly can read and understand them, which is a great boon. These tests speak the language they understand: the language of the business.
 
 ![Cucumber tests](/blog/2026/04/high-level-system-analysis-and-design-ddd-part-1/cucumber.png)
+
 *This is what Cucumber tests look like.*
 
 By nature of being executable and tied closely to the implementation code, there is less chance that they become out of date. This can happen more easily with static documentation written in a wiki. The disadvantage is that they require much more effort. But for the right kind of project, one where business logic is very complex or the scope is very wide, they can be very well worth the cost.
