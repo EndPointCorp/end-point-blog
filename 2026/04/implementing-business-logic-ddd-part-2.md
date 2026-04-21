@@ -61,7 +61,7 @@ Now that we've explored DDD's higher level system design concepts, it's time to 
 
 For most programmers that have experience with procedural languages, the transaction script is easy to grasp. This pattern is about conceptualizing a system as a collection of transactions. And organizing these transactions as independent, transactional procedural scripts. Think one transaction script per use case, exposed for the users to invoke when they need to.
 
-![Transaction script example](/blog/implementing-business-logic-ddd-part-2/transaction-script.png)
+![Transaction script example](/blog/2026/04/implementing-business-logic-ddd-part-2/transaction-script.png)
 
 *The core idea of transaction script is about putting business transactions front and center. Closely related scripts can be implemented as methods in a service class. Or you could also have a separate "service object" class for each script.*
 
@@ -180,7 +180,7 @@ class IncrementQuoteItemQuantity
 
 Even though that's a single database operation, there is inter-system communication between the user's browser and the application server; and between the application server and the database. A network outage, for example, that happens in the middle of this operation can leave the system in an inconsistent state. If it fails after it's already submitted the `UPDATE` command to the database, and responds with a failure message to the client, the client might attempt to try and increase the quantity again. This would result in the increment being done two times, when actually it should have been only one.
 
-![Implicit distributed transaction](/blog/implementing-business-logic-ddd-part-2/implicit-distributed-transaction.png)
+![Implicit distributed transaction](/blog/2026/04/implementing-business-logic-ddd-part-2/implicit-distributed-transaction.png)
 
 *In the context of client-server applications, some transactions are distributed even though at first glance they might not seem that way. In this simple operation, there are three systems interacting over the network: The client, the application server and the database.*
 
@@ -475,7 +475,7 @@ public class Quote
 
 These commands, which are the public interface of an aggregate, should all be defined in a single entity within the aggregate. We call this entity the **aggregate root**. If the aggregate is a hierarchy of objects, and we can picture it as a tree, then the root is the object that exists at the root of the tree, where all branches come from.
 
-![The aggregate root](/blog/implementing-business-logic-ddd-part-2/aggregate-root.png)
+![The aggregate root](/blog/2026/04/implementing-business-logic-ddd-part-2/aggregate-root.png)
 
 *The aggregate is a hierarchy of objects. The aggregate root is the sole object in this hierarchy with which other components interact.*
 
@@ -629,7 +629,7 @@ The **event sourced domain model** is a further evolution of the domain model wh
 
 The main characteristic that differentiates event sourcing from a traditional domain modeling is how the data that represents the aggregates is persisted. Instead of persisting the aggregate's current state, event sourced domain models persist the domain events produced by the aggregates. These domain events are generated as a result of any operation that changes the state of the aggregate. Then, to obtain the current state of the aggregates, all the events are retrieved from storage and used to reconstruct the full object in memory.
 
-![The event sourcing data flow](/blog/implementing-business-logic-ddd-part-2/event-sourced-aggregate.png)
+![The event sourcing data flow](/blog/2026/04/implementing-business-logic-ddd-part-2/event-sourced-aggregate.png)
 
 *In an event sourced domain model, aggregates produce events and commit them to the event store. To instantiate aggregates then, the same events are fetched from the event store and used to rehydrate the in-memory objects.*
 
@@ -986,6 +986,6 @@ class Order
 
 ### DDD tools for implementing business logic
 
-![Concept map of the DDD patterns for implementing domain logic](/blog/implementing-business-logic-ddd-part-2/concept-map.png)
+![Concept map of the DDD patterns for implementing domain logic](/blog/2026/04/implementing-business-logic-ddd-part-2/concept-map.png)
 
 *These are the main concepts that we've explored, and how they relate to each other.*
