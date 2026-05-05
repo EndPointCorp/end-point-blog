@@ -20,6 +20,7 @@ Photo by Bimal Gharti Magar, 2026.
 >
 > 1. [High level system analysis and design with Domain-Driven Design](/blog/2026/04/high-level-system-analysis-and-design-ddd-part-1/)
 > 2. [Implementing business logic with Domain-Driven Design](/blog/2026/04/implementing-business-logic-ddd-part-2/)
+> 3. [Designing software architecture with Domain-Driven Design](/blog/2026/05/designing-software-architecture-ddd-part-3/)
 
 **Domain-Driven Design** is an approach to software development that focuses on, [as Eric Evans puts it](https://www.oreilly.com/library/view/domain-driven-design-tackling/0321125215/), "tackling the complexity in the heart of software". And what is in the heart of software? The business domain in which it operates. Or more specifically: a **model** of it, made of code. That is, the code that implements the business logic that comes into play when solving problems within the realm of a particular business activity.
 
