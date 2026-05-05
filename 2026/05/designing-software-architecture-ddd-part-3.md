@@ -5,7 +5,7 @@ date: 2026-05-05
 description: "Third part of a series of blog posts on Domain-Driven Design"
 featured:
   image_url: /blog/2026/05/designing-software-architecture-ddd-part-3/cover.webp
-github_issue_number: 2180
+github_issue_number: 2181
 tags:
 - software
 - architecture
