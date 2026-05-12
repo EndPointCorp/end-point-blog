@@ -327,14 +327,16 @@ Both of these are easy to miss during development because the happy path works f
 
 Once the pipeline works, the next question is whether the output is consistently good.
 
-The project answers that with `Microsoft.Extensions.AI.Evaluation.Quality`, using evaluators for:
+The project answers that with `Microsoft.Extensions.AI.Evaluation.Quality`, which uses an LLM as a judge to score the output across several axes:
 
-- Coherence
-- Fluency
-- Relevance
-- Truth
-- Completeness
-- Groundedness
+- **Coherence** — does the response hang together logically? Are ideas connected, or does it jump around or contradict itself?
+- **Fluency** — is the language natural, grammatically correct, and readable? This is about style and surface quality, not factual content.
+- **Relevance** — does the response actually address what the user asked? A fluent answer to the wrong question scores low here.
+- **Truth** — are the factual claims correct given the available evidence? The judge flags statements that are unsupported or contradicted by the source data.
+- **Completeness** — does the response cover all the parts of the request? A travel plan missing a budget breakdown would lose points.
+- **Groundedness** — are the claims traceable to the input or research data, rather than invented? This is the main hallucination signal.
+
+Each evaluator returns a score and a short explanation. Running them on real pipeline output gives you a numeric quality baseline that you can track over time as you change prompts, models, or tools.
 
 The evaluation tests run the real pipeline, then score the resulting output:
 
