@@ -1,10 +1,11 @@
 ---
 author: "Bimal Gharti Magar"
 title: "Building a Multi-Agent Travel Planner with Microsoft Agent Framework and .NET"
-featured:
-  image_url: /blog/2026/03/building-multi-agent-travel-planner-dotnet/pipeline.webp
+date: 2026-05-15
 description: How to build a multi-agent travel planning system using Microsoft Agent Framework, with provider-swappable LLMs, an auditor agent for validation, and real-time SSE streaming.
-date: 2026-03-04
+featured:
+  image_url: /blog/2026/05/building-multi-agent-travel-planner-dotnet/cover.webp
+github_issue_number: 2182
 tags:
 - dotnet
 - csharp
@@ -12,11 +13,14 @@ tags:
 - programming
 ---
 
+![Traditional Dutch canal houses with ornate gabled facades photographed from below against a stormy sky.](/blog/2026/05/building-multi-agent-travel-planner-dotnet/cover.webp)<br>
+Photo by Seth Jensen, 2022.
+
 Large language models can answer travel questions well enough, but a single prompt is rarely enough to produce a plan you can trust end to end. Budget math can drift, travel times can be unrealistic, and a confident recommendation may not be grounded in the data the model actually saw.
 
 One way to improve that is to split the work across specialized agents. In this project, one agent researches the destination, another builds the itinerary, another checks the budget, another audits the result, and the last one turns everything into a polished response.
 
-In this post, we will build that workflow in .NET 10 using the [Microsoft Agent Framework (MAF)](https://github.com/microsoft/agents). The project supports both local Ollama models and Anthropic through a shared `IChatClient` abstraction, exposes a Web API with a streaming endpoint, and includes evaluation tests using [Microsoft.Extensions.AI.Evaluation](https://learn.microsoft.com/en-us/dotnet/ai/conceptual/evaluation-overview).
+In this post, we will build that workflow in .NET 10 using the [Microsoft Agent Framework (MAF)](https://github.com/microsoft/agents). The project supports both local Ollama models and Anthropic through a shared `IChatClient` abstraction, exposes a Web API with a streaming endpoint, and includes evaluation tests using [Microsoft.Extensions.AI.Evaluation](https://learn.microsoft.com/en-us/dotnet/ai/evaluation/libraries).
 
 The source code is available on [GitHub](https://github.com/bimalghartimagar/LocalAgentTravelPlanner).
 
@@ -57,7 +61,7 @@ The core project uses these packages:
 
 The workflow is sequential, and each agent receives the accumulated conversation history from the earlier agents.
 
-![Sequential pipeline diagram showing User Request flowing through Researcher, Planner, Accountant, Auditor, and Aggregator agents back to the User](/blog/2026/03/building-multi-agent-travel-planner-dotnet/pipeline.svg)
+![Sequential pipeline diagram showing User Request flowing through Researcher, Planner, Accountant, Auditor, and Aggregator agents back to the User](/blog/2026/05/building-multi-agent-travel-planner-dotnet/pipeline.svg)
 
 That composition is built with `AgentWorkflowBuilder.BuildSequential`:
 
