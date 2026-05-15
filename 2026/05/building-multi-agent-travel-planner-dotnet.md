@@ -5,7 +5,7 @@ date: 2026-05-15
 description: How to build a multi-agent travel planning system using Microsoft Agent Framework, with provider-swappable LLMs, an auditor agent for validation, and real-time SSE streaming.
 featured:
   image_url: /blog/2026/05/building-multi-agent-travel-planner-dotnet/cover.webp
-github_issue_number: 2182
+github_issue_number: 2183
 tags:
 - dotnet
 - csharp
