@@ -13,8 +13,8 @@ tags:
 - ubuntu
 ---
 
-![Traditional Dutch canal houses with ornate gabled facades photographed from below against a stormy sky.](/blog/2026/05/solving-hi-res-video-stutter-gstreamer-hardware/cover.webp)<br>
-Photo by Seth Jensen, 2022.
+![VisionPort One is the classic VisionPort experience that has proven itself in 70+ installations around the world.](/blog/2026/05/solving-hi-res-video-stutter-gstreamer-hardware/cover.webp)<br>
+Photo from the [VisionPort website](https://www.visionport.com/visionport-platform/).
 
 In April, a client at Auburn University reached out to VisionPort Support to ask us to look into an issue with video playback for an upcoming presentation. They were running into performance issues attempting to play a video matching the full resolution of the seven-screen video wall, across all screens.
 
