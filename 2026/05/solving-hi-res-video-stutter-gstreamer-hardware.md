@@ -4,6 +4,7 @@ title: "Solving High-Resolution Video Stutter with GStreamer Hardware Accelerati
 date: 2026-05-18
 description: How we diagnosed and fixed high-resolution video stutter in a GStreamer-based VisionPort player by moving decoding and rendering work onto the GPU.
 featured:
+  visionport: true
   image_url: /blog/2026/05/solving-hi-res-video-stutter-gstreamer-hardware/cover.webp
 github_issue_number: 2184
 tags:
