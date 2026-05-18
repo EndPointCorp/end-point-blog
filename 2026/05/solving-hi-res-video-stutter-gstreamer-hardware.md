@@ -1,5 +1,5 @@
 ---
-author: "Neil Elliot"
+author: "Neil Elliott"
 title: "Solving High-Resolution Video Stutter with GStreamer Hardware Acceleration"
 date: 2026-05-18
 description: How we diagnosed and fixed high-resolution video stutter in a GStreamer-based VisionPort player by moving decoding and rendering work onto the GPU.
