@@ -108,6 +108,9 @@ I ran CodeView on CodeView itself. The score initally came out at **75/100**, wi
 
 This is a useful proof point in both directions. It found real issues, they were real, and I fixed them. But it can miss things a human reviewer would catch, and it assigned severities I might have argued with. That's the whole "starting point, not verdict" frame in practice; the report is a list of leads, and the value is in the leads it surfaces, not in the score it prints.
 
+I also ran CodeView on a separate project that had been built heavily with AI assistance. It surfaced real issues across the full severity range from low-priority hygiene up to a critical missing-authentication gap, with dead code and other maintainability findings in between. The report makes those findings actionable; alongside the detected tech stack and the overall issue distribution, each issue carries a description, the exact file and line, a code snippet, and a suggested fix. Seeing why a finding is a finding, not just that one exists, is what turns the report into something worth reading rather than something to glance at.
+
+
 ## Limitations
 
 As I mentioned previously CodeView is an LLM-driven analyzer. That means:
@@ -117,6 +120,8 @@ As I mentioned previously CodeView is an LLM-driven analyzer. That means:
 - Two runs can disagree. Severity calls in particular are inconsistent.
 - Token cost scales with codebase size. Large monorepos cost real money to scan. Incremental scans help; pointing the scan at a subdirectory helps more.
 - It is not a CI gate. Do not block PRs on the score. Do not make red status a hard fail. Treat the dashboard as a starting point for a human review, not a substitute for one.
+
+It's worth being equally honest about the alternative. Static analysis tools, linters, type checkers, security scanners, produce consistent, explicit, repeatable output. That's their biggest advantage, and it's a real one. But deterministic isn't the same as correct. Most non-trivial findings still involve approximating intent; what a function is supposed to do, whether an input is really user-controlled, whether this branch was meant to be unreachable. The tool guesses too, with hand-coded rules instead of learned ones, and the output is still a list of candidates a human has to triage, usually by dismissing the false positives. The distinctive thing static analysis gives you isn't truth but consistency.
 
 ## Why Skill?
 
