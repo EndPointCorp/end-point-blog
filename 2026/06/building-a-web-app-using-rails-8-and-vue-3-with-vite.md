@@ -1,13 +1,21 @@
 ---
 author: "Kevin Campusano"
 title: "Building a web app using Rails 8 and Vue 3 with Vite"
-date: 2026-05-19
+description: "Step-by-step guide to integrating Vue 3 into a Rails 8 app using Vite and the vite_rails gem."
+featured:
+  endpoint: true
+  image_url: /blog/2026/06/building-a-web-app-using-rails-8-and-vue-3-with-vite/cover.webp
+date: 2026-06-08
+github_issue_number: 2190
 tags:
 - ruby
 - rails
 - vue
 - javascript
 ---
+
+![New York City skyline at dusk, with warm orange and pink hues across the sky and a foreground building topped with a glass pyramid structure.](/blog/2026/06/building-a-web-app-using-rails-8-and-vue-3-with-vite/cover.webp)<br>
+Photo by Jonathan Perlin, 2022.
 
 When it comes to frontend development, [Rails 8](https://rubyonrails.org/) offers many great options.
 
@@ -25,7 +33,7 @@ This used to be the case for [Vue](https://vuejs.org/) as well. However, the sto
 
 In this article, we will see a recipe for how to set up a Rails 8 app with Vue via Vite.
 
-## The development environment
+### The development environment
 
 In order to build a Rails app, you of course need [Ruby](https://www.ruby-lang.org/en/) and the Rails gem. For the frontend part, you need Node.js and the package manager of your choice. We'll just use [npm](https://www.npmjs.com/) here, but Yarn and [pnpm](https://pnpm.io/) work just as well.
 
@@ -49,7 +57,7 @@ $ npm -v
 
 The code is also [on GitHub](https://github.com/megakevin/end-point-blog-rails8-vue3-vite), including [the configuration of the devcontainer](https://github.com/megakevin/end-point-blog-rails8-vue3-vite/tree/main/.devcontainer).
 
-## Creating a new Rails 8 project
+### Creating a new Rails 8 project
 
 To create the Rails project, we use a conventional CLI command:
 
@@ -84,9 +92,9 @@ Puma starting in single mode...
 Use Ctrl-C to stop
 ```
 
-![The home page](building-a-web-app-using-rails-8-and-vue-3-with-vite/home-page.png)
+![The home page](/blog/2026/06/building-a-web-app-using-rails-8-and-vue-3-with-vite/home-page.png)
 
-## Setting up Vite
+### Setting up Vite
 
 As I mentioned before, the `vite_rails` gem comes in really handy for integrating Vite with Rails. We install it with:
 
@@ -184,7 +192,7 @@ $ bin/rails server
 
 You can now navigate to `http://127.0.0.1:3000/home/index` and see this:
 
-![Home page with Vite](building-a-web-app-using-rails-8-and-vue-3-with-vite/home-page-with-vite.png)
+![Home page with Vite](/blog/2026/06/building-a-web-app-using-rails-8-and-vue-3-with-vite/home-page-with-vite.png)
 
 > If you're using devcontainers, you may have to specify `127.0.0.1` as the `host` in the Vite dev server configuration in order to allow your browser to connect to it:
 >
@@ -210,7 +218,7 @@ You can now navigate to `http://127.0.0.1:3000/home/index` and see this:
 > }
 > ```
 
-## Installing Vue
+### Installing Vue
 
 Finally, we can install Vue and the plugin that allows Vite to process `*.vue` files:
 
@@ -296,6 +304,6 @@ And of course, we also have to add the mounting point in `app/views/home/index.h
 
 The app now looks like this:
 
-![Home page with Vue](building-a-web-app-using-rails-8-and-vue-3-with-vite/home-page-with-vue.png)
+![Home page with Vue](/blog/2026/06/building-a-web-app-using-rails-8-and-vue-3-with-vite/home-page-with-vue.png)
 
 And that's it! With Rails, Vue, Vite and a little elbow grease we can put together a beautiful monolithic app, powered by great frameworks that offer a stellar developer experience.
