@@ -32,7 +32,7 @@ The app was three major Rails versions behind, with many release series in betwe
 
 We ran a throwaway spike first: fresh Rails 8 app, move the code in, see what breaks, then throw it away. That gave us a risk map before any real work started. The risk we cared about was silent behavior change in the areas that matter for a timesheet: hours, billing, reports, permissions, dates, and raw SQL.
 
-A rough rule for choosing. A transplant is worth considering when the app is far behind, the intermediate versions hold no value to you, and you can afford to verify behavior end to end. Incremental is the right default when you are one or two versions behind, need to keep shipping, or cannot fully re-verify the app afterward.
+A transplant is worth considering when the app is far behind, the intermediate versions hold no value to you, and you can afford to verify behavior end to end. Incremental should be the default when you are one or two versions behind, need to keep shipping, or cannot fully re-verify the app afterward.
 
 ### What actually broke
 
@@ -76,9 +76,11 @@ And the array-cast failure was six characters, in a query comparing a bound arra
 
 That one bit twice, in two different reports, which is why it is worth a grep for any other `array[?]` used against an integer-array column.
 
+Part of that table is an old lesson: good test coverage is the first line of defense in a Rails upgrade. Specs for the calendar helper, the totals, and the report queries would have caught three of these failures before a browser was ever opened, and adding guard specs for them was part of finishing the upgrade. The other rows are why coverage alone was not enough. No test environment executes development config, and a spec that only asserts a status code cannot see a garbage response body. Those needed the layers below.
+
 ### What each verification layer proved
 
-The checks were not one thing. Each layer ran in a different environment and proved something different. None of them is universally better. They have different blind spots.
+The checks were not one thing. Each layer ran in a different environment and proved something different. No single layer is better than the others. They have different blind spots.
 
 | Layer | Environment or stack | What it exercised | What it did not prove |
 | --- | --- | --- | --- |
@@ -118,7 +120,7 @@ The operator can be a person or an AI driving the browser. The checklist, the ex
 
 ### Regression, or already broken?
 
-During manual testing I found failures that would have been easy to just fix on the branch. Before fixing, I checked the same path on the tagged Rails 5 version. In four cases it failed there too. Those were real bugs, but they were not upgrade regressions. I kept them off the upgrade branch and filed them on their own, so the diff stayed about the upgrade and nothing else.
+During manual testing I found failures that would have been easy to just fix on the branch. Before fixing, I checked the same path on the tagged Rails 5 version. In four cases, it failed there, too. Those were real bugs, but they were not upgrade regressions. I kept them off the upgrade branch and filed them on their own, so the diff stayed about the upgrade and nothing else.
 
 That distinction, upgrade regression versus pre-existing bug versus unsupported assumption versus missing coverage, is what kept the branch reviewable. A reviewer can read the 29 commits and see only upgrade work.
 
@@ -149,7 +151,7 @@ ActiveRecord::ConnectionAdapters::PostgreSQLAdapter.prepend(CronSpecTypeRegistra
 
 I also kept a few plain files in the repo: the working rules, how we were collaborating, and the current resume point. A fresh session could start with "read the notes and continue," which kept the work easy to pick back up.
 
-The one time I trusted an assumption instead of testing it, it cost me. Early on I kept an old JSON library, `yajl-ruby`, because I assumed the API endpoints needed it. They did not. It was quietly patching `JSON.dump` so several admin endpoints serialized their query results as real arrays, and the suite stayed green the whole time. Weeks later I removed the gem, and three React admin pages started rendering a raw object string instead of a list. The fix was to stop leaning on the patched `JSON.dump` and let Rails encode the response with `render json: relation`. The lesson matched everything else here. An untested assumption is not a safe one, however green the suite looks.
+The one time I trusted an assumption instead of testing it, it cost me. Early on I kept an old JSON library, `yajl-ruby`, because I assumed the API endpoints needed it. They did not. It was quietly patching `JSON.dump` so several admin endpoints serialized their query results as real arrays, and the suite stayed green the whole time. Weeks later I removed the gem, and three React admin pages started rendering a raw object string instead of a list. The fix was to stop leaning on the patched `JSON.dump` and let Rails encode the response with `render json: relation`. This lesson proved everything else here: an untested assumption is not a safe one, however green the suite looks.
 
 ### A method for risky Rails migrations
 
