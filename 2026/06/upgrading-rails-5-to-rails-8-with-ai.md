@@ -40,10 +40,10 @@ Here are the migration regressions, and why the automated suite did not catch th
 
 | Symptom | Root cause | Why the tests missed it | How it was found |
 | --- | --- | --- | --- |
-| Every logged-in request returned 500 | Dev config used a plain `Logger`. `activerecord-session_store` calls `#silence` on the Active Record logger on every session lookup, and a plain `Logger` does not provide it. `ActiveSupport::Logger` does. | The fault was in development-environment config. Specs run in the test env with a different logger. | Logging in to the running app |
-| Calendar pages 500'd | Rails 7 moved date formatting from `to_s(:db)` to `to_fs(:db)`. On Rails 8 the old call raises an ArgumentError. | The calendar date helper had no spec of its own | Browser workflow check |
+| Every logged-in request returned 500 | Dev config used a plain `Logger`. `activerecord-session_store` calls `#silence` on the Active Record logger on every session lookup, and a plain `Logger` does not provide it. The gem's old 1.x version had patched plain `Logger` to add it. The 2.x version in the new app does not. | The fault was in development-environment config. Specs run in the test env with a different logger. | Logging in to the running app |
+| Calendar pages 500'd | Rails 7.0 renamed date formatting from `to_s(:db)` to `to_fs(:db)` and deprecated the old call. Rails 7.1 removed it, so on Rails 8 it raises an ArgumentError. | The calendar date helper had no spec of its own | Browser workflow check |
 | Monthly and billing totals crashed | On Rails 5, Active Support's `sum` folded these interval objects together starting from the first element. The upgraded stack uses Ruby's built-in `sum`, which starts from integer `0`, so the first addition was `0 + Interval` and raised a TypeError. Fixed with an explicit identity: `sum(Interval.new)`. | The code that calculates the totals had no request spec | Browser check of report totals |
-| Two reports 500'd | In the upgraded stack, these queries' array parameters were typed as `text[]` while the stored columns were `integer[]`, and PostgreSQL has no overlap operator for that pair. Fixed by casting the parameters explicitly with `::int[]`. | One query had a spec and failed there. The second was in a report path with none. | Existing suite for the first, browser check for the second |
+| Two reports 500'd | Rails 5 inlined these queries' `?` values as integer literals. Rails 8 sends them as untyped bind parameters, which PostgreSQL defaults to `text`, so the array came out `text[]` against `integer[]` columns, a pair with no overlap operator. Fixed by casting with `::int[]`. | One query had a spec and failed there. The second was in a report path with none. | Existing suite for the first, browser check for the second |
 | The project search 500'd | Rails blocks raw SQL fragments in `order`. The results were ranked with a raw `ts_rank(...)` expression, now wrapped in `Arel.sql`. | No spec exercised that ordering | Browser search check |
 | Three React admin pages rendered a raw object string, weeks later | `yajl-ruby` had quietly patched `JSON.dump`. Removing the gem broke `render json: JSON.dump(relation)`. Fixed with `render json: relation`. | The one spec that hit these endpoints checked the status code, not the body. A 200 with a garbage string still passed. | The pages broke after the gem was removed |
 
@@ -58,7 +58,7 @@ The login failure was one word:
 + config.active_record.logger = ActiveSupport::Logger.new(File.join(Rails.root, 'log', 'activerecord.log'))
 ```
 
-Older Rails patched the standard library's `Logger` so that every logger responded to `#silence`. Rails 7.1 stopped doing that, and `activerecord-session_store` calls `#silence` on the Active Record logger when it looks up a session. The plain `Logger` configured in this app's development environment did not have the method, so every logged-in request 500'd until that one word changed. The specs were not careless. They run in the test environment by design, and this line lives in a file they never load. Running the app surfaced it in seconds.
+The old app's session store gem, `activerecord-session_store` 1.0, quietly patched the standard library's `Logger` so that every logger responded to `#silence`. The fresh app resolved that gem to 2.x, which had dropped the patch, and the gem calls `#silence` on the Active Record logger when it looks up a session. The plain `Logger` configured in this app's development environment did not have the method, so every logged-in request 500'd until that one word changed. The break came from a gem's major version bump, not from Rails itself. A transplant moves every dependency at once, and this is what that looks like. The specs were not careless. They run in the test environment by design, and this line lives in a file they never load. Running the app surfaced it in seconds.
 
 The crashing totals were one argument, the explicit identity that `sum` used to supply implicitly:
 
@@ -76,7 +76,7 @@ And the array-cast failure was six characters, in a query comparing a bound arra
 
 That one bit twice, in two different reports, which is why it is worth a grep for any other `array[?]` used against an integer-array column.
 
-Most of that table is an old lesson: good test coverage is the first line of defense in a Rails upgrade. Specs for the calendar helper, the totals, and the report queries would have caught three of these failures before a browser was ever opened, and adding guard specs for them was part of finishing the upgrade.
+Most of that table is an old lesson: good test coverage is the first line of defense in a Rails upgrade. Specs for the calendar helper, the totals, the report queries, and the search ordering would have caught four of these failures before a browser was ever opened, and a fifth passed only because its one spec asserted the status code and not the body. Adding guard specs for the paths that broke was part of finishing the upgrade.
 
 ### What each verification layer proved
 
@@ -91,7 +91,7 @@ The checks were not one thing. Each layer ran in a different environment and pro
 
 **`zeitwerk:check`** surfaces naming and load-time problems at startup instead of on the first request that reaches them. Ours passed while the app was still broken behind login. Loading is the floor, not the finish line.
 
-**Backend specs.** The suite stood at 142 green examples when the runtime failures appeared, and at 145 by the end, after three regression guards were added for failures the browser work found. Green meant the covered behavior still worked. The runtime 500s all lived in paths that had no specs: the development logger, the calendar, the PDF builder, and billing.
+**Backend specs.** The suite stood at 142 green examples when the runtime failures appeared, and at 145 by the end, after three regression guards were added for failures the browser work found. Green meant the covered behavior still worked. The runtime 500s all lived in paths that had no specs: the development logger, the calendar, the totals, and the project search.
 
 **End-to-end tests.** The 18 Playwright tests drive a real browser through the development stack and log in for real. That is why they hit the login 500 too, and went green only after the fixes landed. Their green run was strong evidence for the flows they script and no evidence for the screens they skip.
 
@@ -126,7 +126,7 @@ That distinction, upgrade regression versus pre-existing bug versus unsupported 
 
 ### Where AI helped, and where it stopped
 
-I used AI heavily, but the useful part was not that it wrote code. It was that it made exploring unfamiliar, obsolete code cheap. The pattern was always the same. It proposed, I verified, and nothing merged without evidence.
+I used AI heavily, but the useful part was not that it wrote code. It was that it made exploring unfamiliar, obsolete code cheap. The pattern was always the same. It proposed, I verified, and none of its proposals merged without evidence.
 
 - **Removed idioms.** One initializer extended Rails' PostgreSQL type map for the application's custom scheduling type using `alias_method_chain`, an old Rails extension pattern that no longer exists. AI explained the old idiom and drafted the replacement, a module hooked in with `prepend` and `super`. I kept the change only after confirming the scheduling fields still loaded, saved, and returned correctly.
 
@@ -160,7 +160,7 @@ If I did another AI-assisted Rails upgrade like this, I would keep the same shor
 - Before touching the upgrade, check spec coverage on the highest-risk paths and fill the gaps. Most of what bit us was plain missing coverage.
 - Reproduce a failure on the old version before calling it a regression.
 - Treat load checks, unit tests, end-to-end tests, and browser checks as four separate kinds of evidence, not one.
-- Turn every manually found regression into an automated test.
+- Turn manually found regressions into automated tests, highest-risk paths first.
 - Require visible evidence for browser checks: an expected result and a screenshot, not "looks fine."
 - Keep the commit history small and readable, so a reviewer can follow the upgrade one change at a time.
 
