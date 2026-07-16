@@ -116,7 +116,7 @@ A representative sample:
 - **Search.** Search for a project by name. Expect: the list filters to matching results. Evidence: screenshot.
 - **Error roundup.** Across the whole run, watch for any 5xx response or red console error. Expect: none, and list every one seen.
 
-The operator can be a person or an AI driving the browser. The checklist, the expected results, and the evidence rule stay the same either way, so both kinds of run are judged against the same artifact. Several of the new backend guard tests exist only because a checklist run found the failure first.
+The operator can be a person or an AI driving the browser. On this project it was both. I drafted the checks with AI and reviewed every one, and AI ran full passes by driving a real browser through the checklist. The expected results and the evidence rule stay the same either way, so a run is judged against the same artifact no matter who drove. This is also where AI paid for itself. Manual regression passes usually stop happening because they cost hours, and these checks were cheap to write and cheap to rerun. Several of the new backend guard tests exist only because a checklist run found the failure first. Discover with a cheap check, verify with evidence, lock it in with a spec.
 
 ### Regression, or already broken?
 
@@ -126,7 +126,7 @@ That distinction, upgrade regression versus pre-existing bug versus unsupported 
 
 ### Where AI helped, and where it stopped
 
-I used AI heavily, but the useful part was not that it wrote code. It was that it made exploring unfamiliar, obsolete code cheap. The pattern was always the same. It proposed, I verified, and none of its proposals merged without evidence.
+I used AI heavily, but the useful part was not that it wrote code. It was that it made exploring unfamiliar, obsolete code cheap. I am sure the upgrade went faster for it, and I cannot say by how much, because nobody ran the version without it. What I can show is where the hours did not go. The pattern was always the same. It proposed, I verified, and none of its proposals merged without evidence.
 
 - **Removed idioms.** One initializer extended Rails' PostgreSQL type map for the application's custom scheduling type using `alias_method_chain`, an old Rails extension pattern that no longer exists. AI explained the old idiom and drafted the replacement, a module hooked in with `prepend` and `super`. I kept the change only after confirming the scheduling fields still loaded, saved, and returned correctly.
 
@@ -147,6 +147,7 @@ ActiveRecord::ConnectionAdapters::PostgreSQLAdapter.prepend(CronSpecTypeRegistra
 ```
 
 - **Old behavior.** It explained why `to_s(:db)`, `sum` without a starting value, and untyped array binds behaved differently on the upgraded stack. I confirmed each against the running app, not against the explanation.
+- **Checking.** It drafted the browser checklist with me and ran passes by driving a real browser through it. Its runs were judged by the same evidence rules as mine.
 - **Strategy.** I used it to compare transplant versus incremental and to run a pre-mortem before committing. I made the decision.
 
 I also kept a few plain files in the repo: the working rules, how we were collaborating, and the current resume point. A fresh session could start with "read the notes and continue," which kept the work easy to pick back up.
@@ -164,4 +165,4 @@ If I did another AI-assisted Rails upgrade like this, I would keep the same shor
 - Require visible evidence for browser checks: an expected result and a screenshot, not "looks fine."
 - Keep the commit history small and readable, so a reviewer can follow the upgrade one change at a time.
 
-AI made the exploration cheap. The evidence is what made the result trustworthy.
+AI made the exploration and the checking cheap. The evidence is what made the result trustworthy.
