@@ -76,7 +76,7 @@ And the array-cast failure was six characters, in a query comparing a bound arra
 
 That one bit twice, in two different reports, which is why it is worth a grep for any other `array[?]` used against an integer-array column.
 
-Part of that table is an old lesson: good test coverage is the first line of defense in a Rails upgrade. Specs for the calendar helper, the totals, and the report queries would have caught three of these failures before a browser was ever opened, and adding guard specs for them was part of finishing the upgrade. The other rows are why coverage alone was not enough. No test environment executes development config, and a spec that only asserts a status code cannot see a garbage response body. Those needed the layers below.
+Most of that table is an old lesson: good test coverage is the first line of defense in a Rails upgrade. Specs for the calendar helper, the totals, and the report queries would have caught three of these failures before a browser was ever opened, and adding guard specs for them was part of finishing the upgrade.
 
 ### What each verification layer proved
 
