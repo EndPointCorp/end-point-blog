@@ -80,7 +80,7 @@ Most of that table is an old lesson: good test coverage is the first line of def
 
 ### What each verification layer proved
 
-The checks were not one thing. Each layer ran in a different environment and proved something different. No single layer is better than the others. They have different blind spots.
+The checks were not one thing. Each layer ran in a different environment and proved something different. They have different blind spots.
 
 | Layer | Environment or stack | What it exercised | What it did not prove |
 | --- | --- | --- | --- |
@@ -157,6 +157,7 @@ The one time I trusted an assumption instead of testing it, it cost me. Early on
 
 If I did another AI-assisted Rails upgrade like this, I would keep the same short method:
 
+- Before touching the upgrade, check spec coverage on the highest-risk paths and fill the gaps. Most of what bit us was plain missing coverage.
 - Reproduce a failure on the old version before calling it a regression.
 - Treat load checks, unit tests, end-to-end tests, and browser checks as four separate kinds of evidence, not one.
 - Turn every manually found regression into an automated test.
