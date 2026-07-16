@@ -1,7 +1,7 @@
 ---
 author: Edgar Mlowe
-title: "Upgrading Rails 5 to Rails 8 with AI: What Broke After 145 Specs Went Green"
-description: "A first-hand AI-assisted Rails 5.0 to Rails 8.1 fresh-app transplant: what broke after 145 specs passed, why the tests missed it, and how we verified the application's highest-risk workflows."
+title: "Upgrading Rails 5 to Rails 8 with AI: What Broke After the Specs Went Green"
+description: "A first-hand AI-assisted Rails 5.0 to Rails 8.1 fresh-app transplant: what broke after the specs went green, why the tests missed it, and how we verified the application's highest-risk workflows."
 featured:
   endpoint: true
   image_url: /blog/2026/06/upgrading-rails-5-to-rails-8-with-ai/cover.webp
@@ -66,6 +66,8 @@ The crashing totals were one argument, the explicit identity that `sum` used to 
 - subitems.sum { |item| Interval.new(item[:total]) }
 + subitems.sum(Interval.new) { |item| Interval.new(item[:total]) }
 ```
+
+The identity also decides what an empty list sums to: a zero `Interval` now, where the old stack returned integer `0`. Any caller that can see an empty list is worth a check.
 
 And the array-cast failure was six characters, in a query comparing a bound array against an `integer[]` column:
 
