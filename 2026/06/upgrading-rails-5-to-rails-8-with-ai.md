@@ -67,8 +67,6 @@ The crashing totals were one argument, the explicit identity that `sum` used to 
 + subitems.sum(Interval.new) { |item| Interval.new(item[:total]) }
 ```
 
-The identity also decides what an empty list sums to: a zero `Interval` now, where the old stack returned integer `0`. Any caller that can see an empty list is worth a check.
-
 And the array-cast failure was six characters, in a query comparing a bound array against an `integer[]` column:
 
 ```ruby
