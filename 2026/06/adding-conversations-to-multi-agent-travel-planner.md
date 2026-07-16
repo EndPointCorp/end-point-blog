@@ -16,6 +16,8 @@ This post is the follow-up. We will turn that one-shot pipeline into a real mult
 
 The source code is on [GitHub](https://github.com/bimalghartimagar/LocalAgentTravelPlanner).
 
+![Three-pane browser UI showing the conversation sidebar on the left, chat with a follow-up assistant bubble in the middle (route chip visible, mini pipeline animating), and the current travel plan rendered on the right](/blog/2026/06/adding-conversations-to-multi-agent-travel-planner/chat-layout.webp)
+
 ### What we will build
 
 - A multi-turn conversation surface where each follow-up message refines the plan in place
