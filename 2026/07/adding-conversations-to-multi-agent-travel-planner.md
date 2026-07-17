@@ -1,8 +1,11 @@
 ---
 author: "Bimal Gharti Magar"
-title: "Adding Multi-Turn Conversations to a Multi-Agent Travel Planner"
+title: "Adding Conversations to a Multi-Agent Travel Planner"
 description: How to evolve a single-shot multi-agent .NET workflow into a conversational system with routed turns, SQLite persistence, and per-conversation locking.
-date: 2026-06-01
+featured:
+  image_url: /blog/2026/07/adding-conversations-to-multi-agent-travel-planner/cover.webp
+date: 2026-07-17
+github_issue_number: 2194
 tags:
 - dotnet
 - csharp
@@ -16,7 +19,7 @@ This post is the follow-up. We will turn that one-shot pipeline into a real mult
 
 The source code is on [GitHub](https://github.com/bimalghartimagar/LocalAgentTravelPlanner).
 
-![Three-pane browser UI showing the conversation sidebar on the left, chat with a follow-up assistant bubble in the middle (route chip visible, mini pipeline animating), and the current travel plan rendered on the right](/blog/2026/06/adding-conversations-to-multi-agent-travel-planner/chat-layout.webp)
+![Three-pane browser UI showing the conversation sidebar on the left, chat with a follow-up assistant bubble in the middle (route chip visible, mini pipeline animating), and the current travel plan rendered on the right](/blog/2026/07/adding-conversations-to-multi-agent-travel-planner/chat-layout.webp)
 
 ### What we will build
 
@@ -30,11 +33,11 @@ The source code is on [GitHub](https://github.com/bimalghartimagar/LocalAgentTra
 
 The simplest design for a follow-up turn is: append the new user message to the conversation, run all five agents again, get a fresh plan. That works, but the cost is steep — every follow-up burns a full Researcher pass that probably does not need to repeat, plus the Planner, Accountant, Auditor, and Aggregator.
 
-A better division: classify the turn first, then run only the agents whose work actually needs to change. A budget tweak does not need new research. A safety question does not need a new plan. A clarification ("what does FLAGGED mean here?") does not need to re-run anything except the Aggregator in chat-answer mode.
+A better division: classify the turn first, then run only the agents whose work actually needs to change. A budget tweak doesn't need new research, and a clarification like 'what does FLAGGED mean here?' doesn't need anything but the Aggregator in chat answer mode.
 
-That classification is what the rest of this post calls "the router," and it is the single design decision that drives everything else.
+That classification is what the rest of this post calls "the router" and it is the single design decision that drives everything else.
 
-![Router decision flow: a user message enters the router, which dispatches to one of six routes — full runs all five agents, replan runs four, rebudget three, reaudit two, clarify only the Aggregator, and offtopic short-circuits with a refusal](/blog/2026/06/adding-conversations-to-multi-agent-travel-planner/router-flow.svg)
+![Router decision flow: a user message enters the router, which dispatches to one of six routes — full runs all five agents, replan runs four, rebudget three, reaudit two, clarify only the Aggregator, and offtopic short-circuits with a refusal](/blog/2026/07/adding-conversations-to-multi-agent-travel-planner/router-flow.svg)
 
 ### Chat history storage in MAF
 
@@ -60,7 +63,7 @@ That works because the unit of state is unambiguous: one agent, one thread, one 
 
 #### Why a sequenced workflow doesn't fit the same mold
 
-The travel planner is not one agent. It is five agents in sequence, built with `AgentWorkflowBuilder.BuildSequential` and executed via `InProcessExecution.StreamAsync`. The API is "execute the workflow with this input," not "continue this conversation with this agent." There is no single agent to call `CreateSessionAsync()` on.
+The travel planner consists of five agents in sequence, built with `AgentWorkflowBuilder.BuildSequential` and executed via `InProcessExecution.StreamAsync`. The API is "execute the workflow with this input," not "continue this conversation with this agent." There is no single agent to call `CreateSessionAsync()` on.
 
 The natural unit of state is also different. A user thinks of the conversation as a dialogue with *the planner* — they do not care that the Researcher's chat history and the Aggregator's chat history are technically separate threads. The user-visible conversation cuts across all five agents.
 
@@ -114,7 +117,7 @@ public interface IConversationStore
 
 ### The router
 
-The router is not a MAF agent. It is a single short LLM call at the start of each turn — same pattern as the intent classifier from the previous post — that returns one of six route tokens:
+The router isn't a MAF agent, but just a short LLM call at the start of each turn. Same pattern as the intent classifier from the previous post — that returns one of six route tokens:
 
 ```csharp
 private const string RouterPrompt = """
@@ -149,7 +152,7 @@ return token switch
 };
 ```
 
-The fallback is intentional. Running too many agents costs latency and tokens; running too few risks shipping a stale plan. The safer mistake is to over-run, so any router failure resolves to the full pipeline.
+The fallback is intentional: Running too many agents just costs latency and tokens. Running too few can ship a stale plan, which is worse, so any router failure resolves to the full pipeline.
 
 To keep the router cheap, we compact the conversation history before sending it: take the last eight turns, truncate each to 400 characters, and concatenate them with `Role: text` formatting. That is enough context for the model to tell "tweak" from "new trip," and it bounds the prompt size predictably regardless of how long the conversation gets.
 
@@ -261,7 +264,7 @@ The rest of the SSE flow — agent transitions, content tokens, errors — is id
 
 End to end, one turn looks like this:
 
-![One conversation turn as a sequence diagram: the client opens the SSE stream, the controller acquires the per-conversation lock (or returns 409 Conflict if busy), loads the Conversation from the store, calls the router, then streams SSE events for each agent in the chosen subset before committing history and releasing the lock](/blog/2026/06/adding-conversations-to-multi-agent-travel-planner/turn-sequence.svg)
+![One conversation turn as a sequence diagram: the client opens the SSE stream, the controller acquires the per-conversation lock (or returns 409 Conflict if busy), loads the Conversation from the store, calls the router, then streams SSE events for each agent in the chosen subset before committing history and releasing the lock](/blog/2026/07/adding-conversations-to-multi-agent-travel-planner/turn-sequence.svg)
 
 ### The frontend: chat on the left, plan on the right
 
@@ -276,7 +279,7 @@ The old UI was a single column: input, pipeline, output. For a conversation it n
 
 The sidebar (`240px`) lists conversations. The chat (`1fr`) holds the messages and composer. The plan pane (`1.4fr`) holds the latest Aggregator output, kept in view while the user types.
 
-Each assistant turn gets a chat bubble with its own mini pipeline — five small dots, one per agent. When the `route` event arrives, the dots for skipped agents go dim. When `agent-start` fires, the active dot pulses. When `agent-complete` fires, it turns green. The full per-agent output is preserved as a collapsible "Agent details" disclosure inside the bubble, so users can still inspect what each agent contributed on any given turn.
+Each assistant turn gets a chat bubble with its own mini pipeline — five small dots, one per agent. When the `route` event arrives, the dots for skipped agents go dim. The active dot pulses on `agent-start`, and turns green on `agent-complete`. The full per-agent output is preserved as a collapsible "Agent details" disclosure inside the bubble, so users can still inspect what each agent contributed on any given turn.
 
 The Aggregator's streamed content is piped into the right pane directly, throttled to a 100 ms render cadence so the browser does not thrash:
 
@@ -329,7 +332,7 @@ CREATE INDEX IF NOT EXISTS IX_Messages_Conv_Position
 
 `WITHOUT ROWID` on the parent table is appropriate because the primary key is a 32-char hex GUID — a real string key, not an alias for an integer rowid. The `Position` column on `Messages` preserves the conversation order independent of insertion id.
 
-![SQLite entity-relationship diagram showing the Conversations parent table with Id primary key, Title, LatestPlan, CreatedAt, LastActivity, and a one-to-many relationship to the Messages child table which holds Id, ConversationId foreign key, Role, Content, Position, and CreatedAt](/blog/2026/06/adding-conversations-to-multi-agent-travel-planner/sqlite-schema.svg)
+![SQLite entity-relationship diagram showing the Conversations parent table with Id primary key, Title, LatestPlan, CreatedAt, LastActivity, and a one-to-many relationship to the Messages child table which holds Id, ConversationId foreign key, Role, Content, Position, and CreatedAt](/blog/2026/07/adding-conversations-to-multi-agent-travel-planner/sqlite-schema.svg)
 
 Two pragmas worth setting once: `journal_mode=WAL` for reader-during-writer concurrency, and `foreign_keys=ON` per connection (it is off by default in SQLite for backwards compatibility).
 
@@ -402,7 +405,7 @@ public async Task<IAsyncDisposable> AcquireAsync(string conversationId, Cancella
 }
 ```
 
-`WaitAsync(0)` is the important choice. It returns immediately with `false` if the semaphore is held, instead of queuing. That gives us fail-fast semantics: when the second request loses the race, the controller catches `ConversationBusyException` and returns HTTP 409 Conflict. The first turn keeps streaming undisturbed; the second client sees a clear error and can retry once the first one is done.
+`WaitAsync(0)` is the important choice. It returns immediately with `false` if the semaphore is held, instead of queuing. That gives us fail-fast semantics: when the second request loses the race, the controller catches `ConversationBusyException` and returns HTTP 409 Conflict. The first turn keeps streaming undisturbed, but the second client sees a clear error and can retry once the first one is done.
 
 The controller integration is short:
 
@@ -480,16 +483,16 @@ That is the test that backs the whole "users can come back tomorrow" claim. If i
 
 ### Key takeaways
 
-The pieces here are not exotic individually. A short LLM classifier, a `List<ChatMessage>` workflow input, an idempotent SQLite schema, a `SemaphoreSlim` keyed by an ID — none of it is novel. The interesting part is how they compose to turn a one-shot pipeline into something that feels like a real assistant.
+None of this is complicated on its own: a short LLM classifier, a `List<ChatMessage>` workflow input, an idempotent SQLite schema, a `SemaphoreSlim` in a dictionary keyed by conversation ID. What's interesting to me is how they add up to turn a straight, one-shot pipeline into something that feels like a real assistant.
 
 - A router-driven subset workflow is a much better cost story than re-running everything on every follow-up
 - Manage conversation history at the service layer when your unit of state is the conversation, not any single agent's thread
 - Commit conversation mutations only after the workflow reaches `WorkflowOutputEvent`, so cancellations and errors leave state intact
 - One Aggregator that detects its own mode is simpler than two separate agents for "plan" and "chat answer"
 - SQLite with WAL mode is the right default for single-instance persistence; the abstraction over `IConversationStore` keeps the migration path open
-- Fail fast on concurrent turns with HTTP 409 — queuing invisibly is worse for users than rejecting cleanly
+- Fail fast on concurrent turns with HTTP 409: queuing invisibly is worse for users than just rejecting
 - `SqliteConnection.ClearAllPools()` before deleting test database files on Windows, or you will leak temp files
 
-What did not change matters too: the five agents, their tools, the provider abstraction, the SSE event names. Adding conversation did not require redesigning the pipeline — it required wrapping it in the right state machine and giving the right layer ownership of the history.
+What didn't change also matters: the five agents, their tools, the provider abstraction, the SSE event names. Adding conversation did not require redesigning the pipeline — it required wrapping it in the right state machine and giving the right layer ownership of the history.
 
 The source code is on [GitHub](https://github.com/bimalghartimagar/LocalAgentTravelPlanner).
