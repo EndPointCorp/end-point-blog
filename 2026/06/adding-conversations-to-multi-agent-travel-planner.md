@@ -54,7 +54,7 @@ await agent.RunAsync("My name is Alice.", session);
 await agent.RunAsync("What's my name?", session);  // remembers
 ```
 
-`AgentSession` carries the conversation state across calls. The framework picks where to persist history — service-side when the provider supports it, or via an `InMemoryChatHistoryProvider` locally. To take ownership of storage, you pass a custom `ChatHistoryProvider` in `ChatClientAgentOptions` and you're done. Two lines of code for a fully working multi-turn agent with persistent memory.
+`AgentSession` carries the conversation state across calls. The framework picks where to persist history — service-side when the provider supports it, or via an `InMemoryChatHistoryProvider` locally. To take ownership of storage, you pass a custom `ChatHistoryProvider` in `ChatClientAgentOptions` and you're done. Two lines of code for a fully working multi-turn agent with conversation memory.
 
 That works because the unit of state is unambiguous: one agent, one thread, one session.
 
@@ -75,7 +75,7 @@ So we build the equivalent at the service layer:
 
 Same pattern, applied one layer higher. The `AgentWorkflowBuilder.BuildSequential` workflow accepts a `List<ChatMessage>` as input. On the first turn we pass `[user_message]`. On follow-up turns we pass the full conversation history plus the new user message. Each agent in the workflow sees the same accumulated history when it runs.
 
-If MAF eventually ships a `WorkflowSession` (or any session abstraction at the workflow boundary), the code below becomes a candidate for replacement. Until then, this service-layer pattern is the canonical approach for multi-agent workflows.
+If MAF eventually ships a `WorkflowSession` (or any session abstraction at the workflow boundary), the code below becomes a candidate for replacement. Until then, this service-layer pattern is a clean approach for multi-agent workflows.
 
 ### The conversation domain
 
@@ -199,7 +199,7 @@ conv.History.Add(new ChatMessage(ChatRole.Assistant, finalText));
 if (route != TurnRoute.Clarify) conv.LatestPlan = finalText;
 ```
 
-If a user cancels mid-stream, or any agent fails, the conversation state stays exactly as it was before the turn started. The user can retry the same message cleanly. This is the part of the code where it pays to be paranoid — any mutation before the workflow finishes risks corrupting the conversation if something goes wrong half-way through.
+If a user cancels mid-stream, or any agent fails, the conversation state stays exactly as it was before the turn started. The user can retry the same message cleanly. This is the part of the code where it pays to be paranoid — any mutation before the workflow finishes risks corrupting the conversation if something goes wrong halfway through.
 
 ### Teaching the Aggregator about its modes
 
@@ -480,7 +480,7 @@ That is the test that backs the whole "users can come back tomorrow" claim. If i
 
 ### Key takeaways
 
-The pieces here are not exotic individually. A short LLM classifier, a `List<ChatMessage>` workflow input, an idempotent SQLite schema, a `SemaphoreSlim` keyed by an id — none of it is novel. The interesting part is how they compose to turn a one-shot pipeline into something that feels like a real assistant.
+The pieces here are not exotic individually. A short LLM classifier, a `List<ChatMessage>` workflow input, an idempotent SQLite schema, a `SemaphoreSlim` keyed by an ID — none of it is novel. The interesting part is how they compose to turn a one-shot pipeline into something that feels like a real assistant.
 
 - A router-driven subset workflow is a much better cost story than re-running everything on every follow-up
 - Manage conversation history at the service layer when your unit of state is the conversation, not any single agent's thread
