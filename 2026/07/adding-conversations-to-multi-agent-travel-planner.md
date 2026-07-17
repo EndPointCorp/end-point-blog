@@ -13,6 +13,9 @@ tags:
 - programming
 ---
 
+![Rhododendron branches with bright pink blossoms against a pale sky, with a blue corrugated metal roof and a stone wall behind them.](/blog/2026/07/adding-conversations-to-multi-agent-travel-planner/cover.webp)<br>
+Photo by Bimal Gharti Magar, 2026.
+
 In a [previous post](/blog/2026/03/building-multi-agent-travel-planner-dotnet/), I walked through a multi-agent travel planner built on the [Microsoft Agent Framework (MAF)](https://github.com/microsoft/agents). It worked, but it was single-shot: one prompt produced one plan, and the conversation ended there. If you wanted to swap a city, trim a day, or ask a clarifying question, the only option was to write a new prompt from scratch.
 
 This post is the follow-up. We will turn that one-shot pipeline into a real multi-turn conversation, while keeping the same five agents under the hood. Along the way we will look at how to feed chat history through a MAF workflow, how to avoid re-running the full pipeline on every follow-up, how to persist conversations to SQLite, and how to keep a single conversation from running two turns in parallel.
