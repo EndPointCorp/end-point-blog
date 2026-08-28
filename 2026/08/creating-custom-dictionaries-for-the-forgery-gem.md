@@ -2,11 +2,19 @@
 author: "Kevin Campusano"
 title: "Creating custom dictionaries with the Forgery gem"
 description: "How to create custom dictionaries with the Forgery gem to generate limited random data."
-date: 2026-08-26
+featured:
+  endpoint: true
+  image_url: /blog/2026/08/creating-custom-dictionaries-for-the-forgery-gem/cover.webp
+date: 2026-08-28
+github_issue_number: 2197
 tags:
 - ruby
 - rails
 ---
+
+![A striped, multicolored mountainside rising above a small adobe village under a deep blue sky](/blog/2026/08/creating-custom-dictionaries-for-the-forgery-gem/cover.webp)
+
+<!-- Photo by Juan Pablo Ventoso, 2026. -->
 
 When it comes to generating fake data for testing (or any other purpose), most Rails projects nowadays use the [Faker](https://github.com/faker-ruby/faker) gem. With a simple function call, you can generate a random name, email, telephone number, etc.
 
@@ -86,6 +94,6 @@ Forgery('address').caribbean_country
 Forgery::Address.caribbean_country
 ```
 
-![Using our custom forgery](creating-custom-dictionaries-for-the-forgery-gem/using-custom-forgery.png)
+![Using our custom forgery](/blog/2026/08/creating-custom-dictionaries-for-the-forgery-gem/using-custom-forgery.png)
 
 And that's all for now! We recently used this technique in a legacy project to help implement a feature where random, human-friendly Wi-Fi passwords had to be auto-generated for newly onboarded users. Pretty neat!
