@@ -135,7 +135,7 @@ The first run found the failing pages immediately. More importantly, this turned
 
 ### Conclusion
 
-All in all, the process was much faster than expected, mainly because I was able to automate several parts of the verification process and use Claude Code to speed up a lot of the repetitive work. While the code review process took more time because I wanted to do a detailed review and understanding of every small change Claude suggested or made, the amount of repetitive work were reduced significantly.
+All in all, the process was much faster than expected, mainly because I was able to automate several parts of the verification process and use Claude Code to speed up a lot of the repetitive work. While the code review process took more time because I wanted to do a detailed review and understanding of every small change Claude suggested or made, the amount of repetitive work was reduced significantly.
 
 This migration also reinforced the value of having a baseline and a repeatable way to exercise the application: A successful build and a passing unit test suite are useful milestones.
 
