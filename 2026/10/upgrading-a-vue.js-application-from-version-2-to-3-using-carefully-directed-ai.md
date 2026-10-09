@@ -172,7 +172,7 @@ const app = createApp(App);
 app.mount('#app');
 ```
 
-```vue
+```html
 <!-- app/frontend/App.vue -->
 <!-- A basic starter Vue component. -->
 
@@ -318,13 +318,9 @@ That's quite a lot of text, but I'm not asking you to read all of it. I only inc
 
 Now, when it comes to the actual work of porting the code, all we have to do is execute the plan, while respecting the guidelines. We don't just big-bang-prompt the AI agent and let it loose on the code base, though. Instead we instruct it to execute the plan step by step, always following the guidelines, and to always pause after it's done with a step so that we can manually review, test and give it the go ahead to continue to the next step. Because the plan's steps are discrete and manageable, every increment is reasonably sized, so we can review and test without being overwhelmed, maintaining control and ownership.
 
-```quote
-Ok good. It's time to get started executing the plan. I've already completed steps 1.1 through 1.4. Please review.
-```
+> Ok good. It's time to get started executing the plan. I've already completed steps 1.1 through 1.4. Please review.
 
-```quote
-Ok yes, please mark the completed steps. Continue executing the plan. Do it in small enough steps so that I can review every step of the way.
-```
+> Ok yes, please mark the completed steps. Continue executing the plan. Do it in small enough steps so that I can review every step of the way.
 
 With this approach, we leverage the tried and true practices of iterative and incremental software engineering, augment them with AI, and execute a process that accelerates our work, removes a considerable part of the tedium, and ensures a quality product at the end of it all.
 
