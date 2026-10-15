@@ -1,13 +1,22 @@
 ---
 author: "Kevin Campusano"
 title: "Upgrading a Vue.js application from version 2 to 3 using carefully directed AI"
-date: 2026-10-08
+date: 2026-10-15
+description: "How we migrated a Rails app's frontend from Vue 2 to Vue 3 by owning the design decisions and using an AI agent to work through a step-by-step plan."
+featured:
+  endpoint: true
+  image_url: /blog/2026/10/upgrading-vuejs-application-from-2-to-3-using-ai/cover.webp
+github_issue_number: 2202
 tags:
 - vue
 - javascript
-- ai
+- artificial-intelligence
 - rails
 ---
+
+![A branch of white blossoms in the foreground, with a softly lit path, dark evergreen trees, and a pink and blue sunset sky in the background.](/blog/2026/10/upgrading-vuejs-application-from-2-to-3-using-ai/cover.webp)
+
+<!-- Photo by Josh Ausborne, 2006. -->
 
 I wouldn't go as far as saying that AI coding agents have made all programming problems shallow. But one area where they do excel is in well-specified but tedious tasks like upgrading a codebase to work with newer versions of their underlying frameworks and libraries.
 
@@ -17,13 +26,13 @@ Recently, with the advent of AI coding agents, the level of effort required for 
 
 Instead, we took a deliberate, carefully planned approach where we owned the design decisions and relied on the agent for most of the grunt work and subsequent troubleshooting. In this blog post I'll explain how we did it.
 
-## An overview of the project
+### An overview of the project
 
 First, let's describe the system. This application is a web-based B2B e-commerce site. The site allows customers to authenticate, browse a catalog of products, create a shopping cart, and place orders. In the catalog, they can filter products by category, price, and available inventory quantity. They can also filter them by name via a free-text search function. The system offers no capabilities for new user registration, as those come from an external system. It also does not have payment processing features. All captured orders are sent to an external system, where payment and fulfillment happen.
 
 The frontend is a Vue 2 app hosted within a Ruby on Rails codebase. The code is managed, bundled, and served by the Rails framework itself and its supporting libraries. We will have to touch on that part a little bit, but for this article, we won't dive into too much detail where Rails is concerned. Our main topic here is the Vue 2 to 3 migration. Suffice it to say, this Vue migration was part of a bigger project of upgrading a Rails application from 5 to 8, and we would maintain this aspect of a Rails-managed frontend.
 
-## The upgrade plan
+### The upgrade plan
 
 Here are the general steps that we took to perform this migration:
 
@@ -37,7 +46,7 @@ Here are the general steps that we took to perform this migration:
 
 We will describe each one in the following sections.
 
-## 1. Review and understand the code and the dependencies
+### 1. Review and understand the code and the dependencies
 
 The first step for us is to review the codebase and gain a good understanding of it. Specifically, we need to know how the main features are implemented, the big building blocks, and which framework features and libraries are being used.
 
@@ -51,7 +60,7 @@ Also, the frontend and backend lived together in the same codebase. This is usua
 
 For visual styling, the app also used [Foundation for Sites](https://get.foundation/sites.html), [Font Awesome icons](https://fontawesome.com/icons) (via the [`Vue-Awesome` package](https://justineo.github.io/vue-awesome/demo/)), and several other smaller libraries for implementing GUI elements like carousels, site navigation breadcrumbs, notifications etc. Most of these had to be upgraded or replaced to work with Vue 3.
 
-## 2. Develop a comprehensive test suite
+### 2. Develop a comprehensive test suite
 
 Before moving forward, we had to create a safety net. Unfortunately, when we inherited the project, it was severely lacking in the automated tests department. For a migration such as this, having a good test suite was essential. For this frontend, we expected a lot of the inner workings of components to change, so we focused on higher-level end-to-end [Capybara](https://teamcapybara.github.io/capybara/) tests. Thankfully, in Rails, even back then, the framework came out of the box with support for such tests, so we didn't have to invest in setting them up; we only had to write them.
 
@@ -70,7 +79,7 @@ spec/features/
 └── shopping_cart_spec.rb
 ```
 
-## 3. Design the new architecture and conventions
+### 3. Design the new architecture and conventions
 
 Within the code base, the frontend code was stored in a conventional Rails location: under `app/javascript`. Within it, we had the following structure:
 
@@ -128,7 +137,7 @@ Also, on the Rails side, we wanted to modernize how the frontend code is managed
 
 Once we had learned all this, a set of design decisions, guidelines and steps for a migration plan began to emerge. In order to make effective use of AI agents, like we had planned to do, we had to put all that in writing. That would come a bit later though...
 
-## 4. Set up the new project
+### 4. Set up the new project
 
 Now we're ready to start building the new codebase. At this point we need to do a few things:
 
@@ -137,7 +146,7 @@ Now we're ready to start building the new codebase. At this point we need to do 
 - Set up frontend asset bundling with Vite.
 - Install and configure Vue.js.
 
-I won't go into too much detail on this here because I already wrote [another blog post about it](https://www.endpointdev.com/blog/2026/06/building-a-web-app-using-rails-8-and-vue-3-with-vite/).
+I won't go into too much detail on this here because I already wrote [another blog post about it](/blog/2026/06/building-a-web-app-using-rails-8-and-vue-3-with-vite/).
 
 But once we're done with that, we end up with a containerized development environment that has the latest versions of Ruby, Rails and Node.js, as well as the following files, among others:
 
@@ -303,7 +312,7 @@ And that `HomeView.vue` component is precisely the first one that we ported manu
 
 At this point we had a running application with exemplary code implementing the foundation. As far as the code was concerned, the stage was set for bringing in more heavy usage of AI agents. Now we needed to write some documentation to guide them.
 
-## 5. Build the AI agent support files
+### 5. Build the AI agent support files
 
 Like humans, agents can really benefit from clear, well articulated and concise documentation. To that end, we created these two documents:
 
@@ -314,7 +323,7 @@ AI agents were very helpful for creating these files, but we carefully reviewed 
 
 That's quite a lot of text, but I'm not asking you to read all of it. I only include them to illustrate the depth and breadth of these files, and what kinds of things got included. The key here was to put in as much detail as possible to clearly explain our intent, in both the prompts and the documents, in order to eliminate any guesswork on the part of the AI agent that would eventually be helping execute this plan and follow these guidelines. The objective was for the resulting code to look and feel just as if we had written everything ourselves by hand. We had to maintain control, intimate understanding and ownership.
 
-## 6. Transplant the frontend code files
+### 6. Transplant the frontend code files
 
 Now, when it comes to the actual work of porting the code, all we have to do is execute the plan, while respecting the guidelines. We don't just big-bang-prompt the AI agent and let it loose on the code base, though. Instead we instruct it to execute the plan step by step, always following the guidelines, and to always pause after it's done with a step so that we can manually review, test and give it the go ahead to continue to the next step. Because the plan's steps are discrete and manageable, every increment is reasonably sized, so we can review and test without being overwhelmed, maintaining control and ownership.
 
@@ -332,7 +341,7 @@ Something that was also useful was to give permissions to the agent to run the t
 
 Something that we also learned is that there are no free lunches. Even with the meticulous guide, plan, and process we had devised, the agent still made mistakes, or came up with solutions that we didn't like, or drifted from the established design and conventions, or ran into issues that took deeper troubleshooting. We also had to go back and refine the guide and the plan a couple of times. Still, the help was immense. This just shows that indeed, we do need to keep a close eye on the work as it progresses, and review and test diligently.
 
-## 7. Final testing and troubleshooting
+### 7. Final testing and troubleshooting
 
 As we neared the end of the project, we moved our Capybara tests from the old codebase into the new one. We had to tweak the configuration to account for the differences between Rails versions. But all in all, they translated pretty cleanly and passed without too many complications.
 
