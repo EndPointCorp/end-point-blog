@@ -1,0 +1,41 @@
+sequenceDiagram
+    participant Client
+    participant Controller
+    participant Store
+    participant Phase1 as Phase 1 (Researcher..Auditor)
+    participant Phase2 as Phase 2 (Aggregator)
+
+    Client->>Controller: GET /messages/stream
+    Controller->>Phase1: StreamAsync(upstream agents)
+    loop per upstream agent
+        Phase1-->>Controller: AgentRunUpdate
+        Controller-->>Client: SSE content
+    end
+    Phase1-->>Controller: WorkflowOutputEvent
+    Controller->>Store: persist PendingDecision (agent outputs, verdict, tokens)
+    Controller-->>Client: SSE approval-required
+    Controller-->>Client: stream closes
+
+    Note over Client,Store: turn is durable. Refresh, close tab, walk away all safe. Conflict on new turn attempts.
+
+    alt Approve
+        Client->>Controller: GET /decision/stream approve=true
+        Controller->>Store: load PendingDecision
+        Controller->>Phase2: StreamAsync Aggregator only, input = history + user msg + upstream outputs
+        Phase2-->>Controller: AgentRunUpdate
+        Controller-->>Client: SSE content
+        Phase2-->>Controller: WorkflowOutputEvent
+        Controller->>Store: commit turn, clear PendingDecision, update LatestPlan
+        Controller-->>Client: SSE plan-final, complete
+    else Reject + feedback + replan
+        Client->>Controller: GET /decision/stream approve=false, replan=true, feedback=...
+        Controller->>Store: clear PendingDecision
+        Controller->>Controller: synthesize Previous draft rejected. Feedback... Please revise.
+
+        Note over Controller: chain into ContinueConversationStreamingAsync. Router picks Replan, full subset runs.
+    
+    else Reject or cancel
+        Client->>Controller: GET /decision/stream approve=false, or DELETE /pending
+        Controller->>Store: clear PendingDecision, commit chat-style reply. LatestPlan unchanged.
+        Controller-->>Client: SSE clarified, complete
+    end
