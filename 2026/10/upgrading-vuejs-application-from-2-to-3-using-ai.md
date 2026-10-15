@@ -133,7 +133,7 @@ In addition to defining a new file structure, we also studied and took notes fro
 
 We also identified the key third party libraries that were being used, investigated them and came up with strategies on how to replace them. Luckily, while most of them had been deprecated, they did have Vue 3 alternatives.
 
-Also, on the Rails side, we wanted to modernize how the frontend code is managed and bundled. The original codebase used [Webpacker](https://github.com/rails/webpacker), and we decided to migrate that to [Vite](https://vite.dev/). In fact, we didn't have much of a choice, as Vite is the recommended toolchain for modern Vue projects, and Webpacker had long been deprecated.
+Also, on the Rails side, we wanted to modernize how the frontend code was managed and bundled. The original codebase used [Webpacker](https://github.com/rails/webpacker), and we decided to migrate that to [Vite](https://vite.dev/). In fact, we didn't have much of a choice, as Vite is the recommended toolchain for modern Vue projects, and Webpacker had long been deprecated.
 
 Once we had learned all this, a set of design decisions, guidelines and steps for a migration plan began to emerge. In order to make effective use of AI agents, like we had planned to do, we had to put all that in writing. That would come a bit later though...
 
@@ -240,7 +240,7 @@ bin/vite dev
 
 At this point we again employ the "first create an example for the agent to follow" strategy that we used for the tests. We begin installing and configuring some of the core libraries, and porting over some of the core components from the old codebase into the new one. We leveraged the official docs, and agents, for this, but we took a more hands-on approach, in order to establish solid patterns and styling for the rest of the work.
 
-We installed and configured the following: Vue and Rails supporting libraries:
+We installed and configured the following Vue and Rails supporting libraries:
 
 - [Pinia](https://pinia.vuejs.org/), the replacement of Vuex, which the frontend uses for managing global application state. Pinia is the recommended state management library for Vue 3.
 - [Vue Router](https://router.vuejs.org/), which Vue uses for frontend routing.
