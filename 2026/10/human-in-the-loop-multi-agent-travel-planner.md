@@ -2,13 +2,19 @@
 author: "Bimal Gharti Magar"
 title: "Human-in-the-Loop in a Multi-Agent Travel Planner"
 description: Adding an approval gate to a five-agent .NET workflow — pausing between Auditor and Aggregator, persisting the paused state across refresh, and the weak-model hardening that made cheaper providers usable in the first place.
-date: 2026-10-07
+featured:
+  endpoint: true
+  image_url: /blog/2026/10/human-in-the-loop-multi-agent-travel-planner/cover.webp
+date: 2026-10-22
+github_issue_number: 2205
 tags:
 - dotnet
 - csharp
 - artificial-intelligence
 - programming
 ---
+
+![Youth Town Hall's homepage](/blog/2026/10/human-in-the-loop-multi-agent-travel-planner/cover.webp)
 
 In the [previous post](/blog/2026/07/adding-conversations-to-multi-agent-travel-planner/) I turned the multi-agent travel planner into a real multi-turn conversation with SQLite persistence and per-conversation locking. Every follow-up ran through a router that picked which agents to re-invoke, and the plan lived in a right-pane view that refreshed with each turn.
 
