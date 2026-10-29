@@ -1,14 +1,21 @@
 ---
 author: "Kevin Campusano"
 title: "Modernizing a Rails app from the last decade"
-date: 2026-10-18
+description: "Why we modernized a 2018 Rails app by porting it into a new project with help from AI agents instead of upgrading in place."
+featured:
+  endpoint: true
+  image_url: /blog/2026/10/modernizing-rails-app-from-last-decade/cover.webp
+date: 2026-10-29
+github_issue_number: 2208
 tags:
 - ruby
 - rails
-- update
-- testing
-- ai
+- artificial-intelligence
 ---
+
+![A desert valley lined with tall red and cream sandstone cliffs under a clear blue sky, with a red rock overhang in the foreground.](/blog/2026/10/modernizing-rails-app-from-last-decade/cover.webp)
+
+<!-- Photo by Garrett Skinner, 2022. -->
 
 [Rails](https://rubyonrails.org/) upgrades can be hard, especially when jumping through multiple major versions. Conventions change, APIs get deprecated, core gems get updated, and third-party gems get abandoned. Things can get out of hand rather quickly if the work isn't done carefully. [Rails' own guide for upgrading](https://guides.rubyonrails.org/upgrading_ruby_on_rails.html) recommends a conservative, step-by-step approach: make sure you have good test coverage, keep in mind the Ruby versions that each version of Rails requires, and upgrade Rails little by little. Upgrade to the latest patch release of your current version, fix the issues that come up, then upgrade to the latest patch release of the next minor version. Keep doing that until you reach the target version. This is hard work.
 
@@ -16,15 +23,15 @@ But there's another option. We can create a brand new Rails project using the la
 
 We recently went through this exercise for a Rails project that we inherited. It was written in 2018, ran Rails 5, and we were tasked with bringing it into the modern era. A lot had changed in Rails, so a lot had to change in this app. In this article, I'll share my experience doing that work.
 
-## An overview of the project
+### An overview of the project
 
-![System diagram](modernizing-a-rails-app-from-a-decade-ago/system-diagram.png)
+![System diagram](/blog/2026/10/modernizing-rails-app-from-last-decade/system-diagram.png)
 
 First, let's describe the system. This application is a web-based B2B e-commerce site. The site allows customers to browse a catalog of products, construct a shopping cart, and place orders. For the catalog, the source of data is an external inventory system. Through a separate data import process, the inventory data gets copied into our site's internal database. There is also an external order processing system. When orders are placed on our site, a backend job kicks in to submit them to this external order processing system via its web API.
 
 The site itself has four main runtime components: a backend, built with Rails 5, which exposes a web API using the [JSON:API protocol](https://jsonapi.org/); a frontend written with [Vue.js version 2](https://v2.vuejs.org/); an admin portal built with the [ActiveAdmin](https://activeadmin.info/docs/v3/) gem; and a [PostgreSQL](https://www.postgresql.org/) database.
 
-## Porting into a fresh codebase instead of doing an in-place upgrade
+### Porting into a fresh codebase instead of doing an in-place upgrade
 
 Both approaches involve a considerable amount of work. However, Rails' official documentation recommends small, incremental upgrades supported by a solid foundation of automated tests, and that method is undeniably safer. For this project, though, it made sense to go with the more daring approach for various reasons.
 
@@ -36,7 +43,7 @@ There was also the issue that the project was using Rails 5, and we wanted to up
 
 Upgrading from a Rails 5 base meant carrying a lot of baggage, fighting against the framework at every step, looking for backports and alternatives of features and gems. We would pay a great price in order to properly get rid of the Rails 5 way of doing things; or risk ending up with a Rails 8 app only in name, if the Rails 5 conventions were allowed to persist.
 
-## The upgrade plan
+### The upgrade plan
 
 With all this in mind, a plan began to form for how to approach this upgrade. Here's a bird's-eye view of that plan:
 
@@ -48,7 +55,7 @@ With all this in mind, a plan began to form for how to approach this upgrade. He
 6. Set up the Admin Portal and transplant its code files.
 7. Port the frontend.
 
-## 1. Review and understand the code and the dependencies
+### 1. Review and understand the code and the dependencies
 
 As I mentioned before, when we started this project, we did not have a thorough understanding of how it was built. So the first step was to review it and gain that understanding. Specifically, we needed to know the main building blocks, which framework features and libraries were being used, and where it deviated from the usual Rails conventions.
 
@@ -119,7 +126,7 @@ Another major gem used in this codebase was [Devise](https://github.com/heartcom
 
 The final major piece of the backend to consider was the Admin Portal. As mentioned before, it used the [ActiveAdmin](https://activeadmin.info/docs/v3/) gem. Thankfully, this was not an issue because the gem is still well maintained and can be upgraded fairly cleanly to a more recent version. The issue was its frontend logic. The Admin Portal did have a traditional server-rendered GUI, however, it was augmented with a fair bit of JavaScript using [jQuery](https://jquery.com/) and various other libraries, including [jQuery UI](https://jqueryui.com/), [Select2](https://select2.org/), and [CKEditor](https://ckeditor.com/). Moreover, all the frontend code was written in [CoffeeScript](https://coffeescript.org/), which Rails 5 supported out of the box. This is no longer the case in newer versions of Rails, so we'd have to rewrite that code in plain old JavaScript. CoffeeScript's out-of-the-box support also meant that it was transpiled via Rails' asset pipeline, not Webpacker, as the user-facing frontend was. We would also need to address that. Preferably, we'd use the same bundling and transpilation mechanism for all frontend code instead of this hybrid approach.
 
-## 2. Develop a comprehensive test suite
+### 2. Develop a comprehensive test suite
 
 That initial analysis gives us a pretty clear picture of what we're dealing with. Before we start migrating any code, though, we need a safety net. Automated tests will provide that safety net. As I mentioned before, this codebase had barely any test coverage, which was a non-starter. Traditionally, developing a comprehensive test suite in preparation for an upgrade such as this can be very expensive. Luckily for us, this is an area where AI-assisted development can be a great help. The AI coding agent needs to be carefully directed to produce meaningful tests and to help us develop the strong sense of ownership and understanding of the codebase that we've been missing. Here's how we went about it.
 
@@ -131,13 +138,13 @@ Now, we don't just ask our AI agent, "Please write tests for this project's mode
 
 We repeat this for every class and every layer, including a mix of unit, integration, and system tests, and always review the output. Eventually, we end up with a comprehensive test suite. With this simple recipe, we were able to get good, consistent results without too much manual intervention. We ended up with a comprehensive test suite as if we had written it ourselves, which was exactly the point. We also gained a deeper understanding of the codebase.
 
-![Test results](modernizing-a-rails-app-from-a-decade-ago/test-results.png)
+![Test results](/blog/2026/10/modernizing-rails-app-from-last-decade/test-results.png)
 
-## 3. Set up the new project
+### 3. Set up the new project
 
 Now that we have a solid test suite, we can turn to the new project, starting with setting up a development environment. Thanks to [Visual Studio Code](https://code.visualstudio.com/) and [Development Containers](https://containers.dev/), it's now very easy to get a fully featured, containerized development environment with Ruby, Rails, and PostgreSQL. Of course, we pick the latest versions of all of them.
 
-![Development Containers configuration](modernizing-a-rails-app-from-a-decade-ago/dev-containers.png)
+![Development Containers configuration](/blog/2026/10/modernizing-rails-app-from-last-decade/dev-containers.png)
 
 The defaults we get via `New Dev Container...` and the `Ruby on Rails & Postgres` template are a great foundation. The only tweak we have to make is to ensure the Development Container has the software the app needs. So we include this in the Dockerfile:
 
@@ -171,7 +178,7 @@ Three interesting things about this:
 2. We use `--skip-hotwire` because this app will have a Rails API backend with a Vue.js frontend, and Hotwire is designed to work with classic server-side rendering using Rails `.erb` views.
 3. We use `--skip-js` because we will not use any of Rails' built-in options for JavaScript bundling. We will use [Vite](https://vite.dev/). More on that later.
 
-## 4. Transplant the backend code files
+### 4. Transplant the backend code files
 
 This is the big one. Now that we have an empty, running Rails web app, we need to port all the old code. "Porting" is not simply copying and pasting, of course. We will also change the code as needed to adopt the newer Rails 6 conventions. This is a modernization project, after all.
 
@@ -459,15 +466,15 @@ After that, when we added the request tests that exercised the API, they all pas
 
 At this point we've hit a pretty major milestone in this project. All of the backend API code is running and working under the new Rails 8 codebase.
 
-## 5. Set up frontend asset bundling
+### 5. Set up frontend asset bundling
 
 The next logical step would be to address the other major backend-adjacent feature: the Admin Portal. However, the Admin Portal has a frontend component. Remember the CoffeeScript we talked about, which we had to rewrite? There's that, but most importantly, the whole approach to frontend asset bundling will change in this codebase, and the Admin Portal is no exception. So let's take a slight detour and address that first.
 
-For this project, we decided to go with Vite. The main reason was that we had decided to upgrade the user-facing frontend from Vue.js 2 to version 3, which requires Vite. Luckily, Vite integrates beautifully with Rails thanks to the [Vite Ruby project](https://vite-ruby.netlify.app/). [I've already written a blog post](https://www.endpointdev.com/blog/2026/06/building-a-web-app-using-rails-8-and-vue-3-with-vite/) detailing the process of integrating Vite with Rails and installing Vue.js, so I won't go into detail here.
+For this project, we decided to go with Vite. The main reason was that we had decided to upgrade the user-facing frontend from Vue.js 2 to version 3, which requires Vite. Luckily, Vite integrates beautifully with Rails thanks to the [Vite Ruby project](https://vite-ruby.netlify.app/). [I've already written a blog post](/blog/2026/06/building-a-web-app-using-rails-8-and-vue-3-with-vite/) detailing the process of integrating Vite with Rails and installing Vue.js, so I won't go into detail here.
 
 Anyway, we followed Vite Ruby's official documentation for installing and configuring Vite, and were up and running with a frontend asset-bundling and development toolchain in no time.
 
-## 6. Set up the Admin Portal and transplant its code files
+### 6. Set up the Admin Portal and transplant its code files
 
 All right, now we can migrate the Admin Portal. We begin by installing the ActiveAdmin gem and performing its basic configuration, following the official guide. Then we copy over all the old backend code into the `app/admin` directory. By default, ActiveAdmin creates the files `app/assets/javascripts/active_admin.js` and `app/assets/stylesheets/active_admin.scss`. We can put custom logic and styling in these files. The original CoffeeScript, translated into JavaScript, goes in `active_admin.js`. Our AI agent makes short work of this. We also copy all the custom styling into `active_admin.scss`.
 
@@ -643,9 +650,9 @@ end
 
 After all that is done, the Admin Portal works fully. We copy over the related tests from the old code and fix a few additional minor issues until they all pass.
 
-## 7. Port the frontend
+### 7. Port the frontend
 
-This is another big one, and the final piece of the puzzle. [Migrating](https://v3-migration.vuejs.org/) a complex Vue.js application from version 2 to version 3 of the library can be a big project in and of itself. So much so, that [I've written a separate blog post](https://www.endpointdev.com/blog/2026/10/upgrading-vuejs-application-from-2-to-3-using-ai/) describing the process that we went through. I won't spend too much time on that here, so feel free to check it out.
+This is another big one, and the final piece of the puzzle. [Migrating](https://v3-migration.vuejs.org/) a complex Vue.js application from version 2 to version 3 of the library can be a big project in and of itself. So much so, that [I've written a separate blog post](/blog/2026/10/upgrading-vuejs-application-from-2-to-3-using-ai/) describing the process that we went through. I won't spend too much time on that here, so feel free to check it out.
 
 Once we're done with that, we port over the Capybara system tests that we had written in the old codebase and make a few fixes until they pass.
 
