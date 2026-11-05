@@ -2,13 +2,19 @@
 author: Ben Ironside Goldstein
 title: "Announcing End Point Timesheet, our open source time-tracking tool"
 description: "End Point is open-sourcing Timesheet, the time-tracking and reporting application we have built and used internally for years."
-date: 2026-10-26
+featured:
+  endpoint: true
+  image_url: /blog/2026/11/announcing-end-point-timesheet/cover.webp
+date: 2026-11-05
+github_issue_number: 2209
 tags:
 - company
 - open-source
 - ruby
 - rails
 ---
+
+![Timesheet App](/blog/2026/11/announcing-end-point-timesheet/cover.webp)
 
 Today we’re open-sourcing [End Point Timesheet](https://github.com/EndPointCorp/Timesheet-App), the flexible time-tracking and reporting application we built and have used internally for years.
 
@@ -25,11 +31,11 @@ Its features include:
 
 The application has a React frontend, a Rails JSON API, and PostgreSQL. The complete development stack can be started with one Docker Compose command and includes demo data, making it straightforward to explore locally.
 
-## Preparing the application for release
+### Preparing the application for release
 
 Getting an established internal application ready for the public took more than moving its code to GitHub.
 
-The backend was still running Ruby 2.4 and Rails 5.0, both of which had stopped receiving security updates years ago. Edgar Mlowe led an upgrade to Ruby 3.3.6 and Rails 8.1.3, preserving the familiar user experience while updating the framework, dependencies, APIs, configuration, and database behavior underneath it.
+The backend was still running Ruby 2.4 and Rails 5.0, both of which had stopped receiving security updates years ago. Our Senior Developer [Edgar Mlowe](/team/edgar-mlowe/) led an upgrade to Ruby 3.3.6 and Rails 8.1.3, preserving the familiar user experience while updating the framework, dependencies, APIs, configuration, and database behavior underneath it.
 
 The existing automated test coverage was useful but incomplete, so a green test suite alone could not prove that the application still worked correctly. Edgar supplemented the backend specs and Playwright end-to-end tests with a 74-check browser testing process covering the workflows where errors would matter most: time calculations, billing, reports, permissions, dates, and project management.
 
@@ -37,7 +43,7 @@ AI served as a development teammate throughout this work. Because the applicatio
 
 Preparing the repository also included adding an MIT license, creating a reproducible Docker-based development environment, adding demo seed data, improving setup documentation, cleaning out obsolete and internal-only code, supporting CI preview environments, and tightening authorization around sensitive timesheet data.
 
-## Why open source?
+### Why open source?
 
 Open source software has long been central to how we work at End Point. We use it every day, contribute to it, and believe that useful work should be shared when it can benefit others.
 
