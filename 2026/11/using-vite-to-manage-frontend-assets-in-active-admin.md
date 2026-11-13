@@ -2,6 +2,9 @@
 author: "Kevin Campusano"
 title: "Using Vite to manage frontend assets in ActiveAdmin"
 description: "How to make ActiveAdmin work in a Rails app that bundles its frontend assets with Vite."
+featured:
+  endpoint: true
+  image_url: /blog/2026/11/using-vite-to-manage-frontend-assets-in-active-admin/cover.webp
 date: 2026-11-13
 github_issue_number: 2210
 tags:
