@@ -1,12 +1,18 @@
 ---
 author: "Kevin Campusano"
 title: "Using Vite to manage frontend assets in ActiveAdmin"
-date: 2026-10-20
+description: "How to make ActiveAdmin work in a Rails app that bundles its frontend assets with Vite."
+date: 2026-11-13
+github_issue_number: 2210
 tags:
 - ruby
 - rails
 - javascript
 ---
+
+![A steep, layered gray rock cliff with a frozen waterfall down its face, under a blue sky, with bare winter trees.](/blog/2026/11/using-vite-to-manage-frontend-assets-in-active-admin/cover.webp)
+
+<!-- Photo by Zed Jensen, 2022. -->
 
 When it comes to frontend development, [Vite](https://vite.dev/) is a great tool. For [Rails](https://rubyonrails.org/) developers, it is a great option thanks to the [Vite Ruby](https://vite-ruby.netlify.app/) project, which makes integrating Vite into Rails codebases a pretty seamless endeavor. What is not completely seamless, however, is using Vite to manage frontend assets for [ActiveAdmin](https://activeadmin.info/).
 
@@ -14,7 +20,7 @@ ActiveAdmin is a legendary framework in the Rails world that makes developing ad
 
 In this article, I'll show you how to do it.
 
-## Set up the new project
+### Set up the new project
 
 To demonstrate this, we'll create a simple "to-do list" management app backed by a [PostgreSQL](https://www.postgresql.org/) database.
 
@@ -119,7 +125,7 @@ npm install sass-embedded --save-dev
 
 With this, we're well on our way to having a running to-do list management app. Let's keep going.
 
-## Configure ActiveAdmin's asset bundling with Vite
+### Configure ActiveAdmin's asset bundling with Vite
 
 Now that we have a solid foundation, let's see what we need to do to have Vite manage ActiveAdmin's frontend assets.
 
@@ -178,15 +184,15 @@ end
 
 This code tricks ActiveAdmin into thinking that it is working with Webpacker, which makes it call the `stylesheet_pack_tag` and `javascript_pack_tag` helpers in its templates. Webpacker provides these methods to include bundled frontend assets in pages. This code intercepts those calls and uses the Vite helpers instead: `vite_stylesheet_tag` and `vite_javascript_tag`. This is a [pretty clever way](https://activeadmin.info/docs/v3/0-installation.html#vite-rails) to make ActiveAdmin and Vite play nicely together.
 
-## Including other JavaScript libraries
+### Including other JavaScript libraries
 
 If you run `bin/vite dev` and `bin/rails server` now and navigate to `http://127.0.0.1:3000/admin` in your browser, you'll see what appears to be a working instance of ActiveAdmin:
 
-![A working ActiveAdmin](using-vite-to-manage-frontend-assets-in-active-admin/active-admin-working.png)
+![A working ActiveAdmin](/blog/2026/11/using-vite-to-manage-frontend-assets-in-active-admin/active-admin-working.png)
 
 However, if you look at the browser console, you'll find an error:
 
-![jQuery Error](using-vite-to-manage-frontend-assets-in-active-admin/jquery-error.png)
+![jQuery Error](/blog/2026/11/using-vite-to-manage-frontend-assets-in-active-admin/jquery-error.png)
 
 ActiveAdmin needs [jQuery](https://jquery.com/), and we haven't installed it. It also needs [jQuery UI](https://jqueryui.com/), but that's no big issue. With Vite, npm, and some clever scripting, we can easily install the libraries explicitly and tell ActiveAdmin to include them on its pages.
 
@@ -245,7 +251,7 @@ Now we can copy the assets by running `node script/copy_admin_assets.mjs`. It wo
 
 Which results in this:
 
-![Copying ActiveAdmin lib files with Vite](using-vite-to-manage-frontend-assets-in-active-admin/copy-files-with-vite.png)
+![Copying ActiveAdmin lib files with Vite](/blog/2026/11/using-vite-to-manage-frontend-assets-in-active-admin/copy-files-with-vite.png)
 
 Alternatively, we could also hook into `npm install` with something like this:
 
@@ -266,7 +272,7 @@ Alternatively, we could also hook into `npm install` with something like this:
 
 This looks like this:
 
-![Copying ActiveAdmin lib files with NPM](using-vite-to-manage-frontend-assets-in-active-admin/copy-files-with-npm.png)
+![Copying ActiveAdmin lib files with NPM](/blog/2026/11/using-vite-to-manage-frontend-assets-in-active-admin/copy-files-with-npm.png)
 
 Either, or both, can work depending on your workflow. The main idea is to copy the files automatically as part of the build process, so we don't have to run the script manually.
 
@@ -307,7 +313,7 @@ Now we can finally modify `app/javascript/entrypoints/active_admin.js` and `app/
 
 After running `bin/vite dev` and `bin/rails server`, we get this:
 
-![ActiveAdmin loaded with Vite](using-vite-to-manage-frontend-assets-in-active-admin/active-admin-loaded-with-vite.png)
+![ActiveAdmin loaded with Vite](/blog/2026/11/using-vite-to-manage-frontend-assets-in-active-admin/active-admin-loaded-with-vite.png)
 
 > If you’re using [devcontainers](https://containers.dev/), you may have to specify `127.0.0.1` as the `host` in the Vite dev server configuration (in `config/vite.json`) to allow your browser to connect to it:
 >
@@ -333,7 +339,7 @@ After running `bin/vite dev` and `bin/rails server`, we get this:
 >  }
 > ```
 
-## CRUDing the To-Do List
+### CRUDing the To-Do List
 
 That's all I wanted to share today! We have a fully functional admin portal built with Rails, ActiveAdmin, and Vite: a match made in heaven for developer experience and productivity. Before we finish, though, let's savor the fruit of our labor and create a simple CRUD interface for those to-do items.
 
@@ -375,4 +381,4 @@ end
 
 Now we can navigate to `http://127.0.0.1:3000/admin/to_do_items` and see the CRUD screen:
 
-![Finally, the CRUD](using-vite-to-manage-frontend-assets-in-active-admin/finally-the-crud.png)
+![Finally, the CRUD](/blog/2026/11/using-vite-to-manage-frontend-assets-in-active-admin/finally-the-crud.png)
