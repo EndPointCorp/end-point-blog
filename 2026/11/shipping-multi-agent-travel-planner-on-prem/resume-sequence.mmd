@@ -1,0 +1,43 @@
+sequenceDiagram
+    participant Client
+    participant Controller
+    participant Broker as TurnBroker
+    participant Runner as Pipeline runner<br/>(background Task)
+    participant Store
+
+    Client->>Controller: GET /messages/stream?message=...
+    Controller->>Broker: Start(convId, turnId, lockHandle, runner)
+    Broker-)Runner: fire-and-forget Task
+    Controller->>Broker: SubscribeAsync(afterEventId=0)
+    Broker-->>Controller: SseEnvelope stream
+
+    Runner->>Broker: AppendAsync("init", {turnId, provider, model})
+    Broker-->>Controller: id:1 event:init data:{turnId:X}
+    Controller-->>Client: id:1 ...init...
+
+    loop per agent event
+        Runner->>Broker: AppendAsync("content", {...})
+        Broker-->>Controller: id:N event:content
+        Controller-->>Client: id:N ...content...
+        Note over Client: sessionStorage.activeStream = {convId, turnId:X, lastId:N}
+    end
+
+    Note over Client: User reloads tab.<br/>Fetch aborts.<br/>Pipeline keeps running (lock held by Broker).
+
+    Client->>Controller: GET /messages/stream?turnId=X&lastEventId=N
+    Controller->>Broker: Find(convId, turnId=X)
+    Broker-->>Controller: TurnBuffer (active or retained)
+    Controller->>Broker: SubscribeAsync(afterEventId=N)
+    Broker-->>Controller: replay events with id > N, then live
+    Controller-->>Client: id:N+1 ... id:final event:complete
+
+    Runner->>Store: UpdateAsync(conversation)
+    Runner->>Broker: AppendAsync("complete", {...})
+    Note over Broker: CompleteAsync(outcome). Lock disposed in finally. Buffer moved to 90s retention.
+
+    alt Explicit cancel
+        Client->>Controller: DELETE /active-turn
+        Controller->>Broker: Cancel(convId)
+        Broker-)Runner: Cancellation.Cancel()
+        Runner->>Broker: AppendAsync("error", ...) then rethrow
+    end

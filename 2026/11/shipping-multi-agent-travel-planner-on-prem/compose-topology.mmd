@@ -1,0 +1,29 @@
+flowchart LR
+    Client([Browser / Client])
+
+    subgraph Host[Docker host]
+        direction LR
+        subgraph DefaultProfile[Default profile]
+            Nginx[nginx:alpine<br/>:80 → upstream app:8080<br/>SSE no-buffer locations]
+            App[app<br/>ASP.NET Core :8080<br/>non-root, /app/data writable]
+        end
+
+        subgraph BackupProfile[Backup profile - opt-in]
+            Litestream[litestream sidecar<br/>replicates /data/conversations.db<br/>→ LITESTREAM_REPLICA_URL]
+        end
+
+        LogsVol[(app-logs<br/>named volume)]
+        DataVol[(app-data<br/>named volume)]
+    end
+
+    Client -->|HTTP :80| Nginx
+    Nginx -->|proxied| App
+    App -. writes .-> LogsVol
+    App -. writes .-> DataVol
+    Litestream -. reads .-> DataVol
+    Litestream -->|S3 / GCS / SFTP / file| ExternalBackup[(Object store<br/>or filesystem)]
+
+    App -. optional OTLP .-> Otel[(OpenTelemetry collector<br/>Tempo / Jaeger)]
+
+    classDef optional stroke-dasharray: 4 3,fill:#fff8e1
+    class Litestream,BackupProfile,ExternalBackup,Otel optional
